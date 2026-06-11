@@ -8,6 +8,7 @@ import React, {
 import { motion, AnimatePresence } from "framer-motion";
 
 import ProblemScaffold from "./components/panels/ProblemScaffold";
+import ProblemInfoPanel from "./components/ProblemInfoPanel";
 import "./App.css";
 import { TRACKS } from "./data/implementedProblems";
 
@@ -193,6 +194,7 @@ function ProblemPage({
   layoutWidth,
   onLayoutChange,
   enableTransitions,
+  problemDescriptions,
 }) {
   const Component = problem.component;
   const Shell = enableTransitions ? motion.div : "div";
@@ -236,6 +238,7 @@ function ProblemPage({
           compact
         />
       </header>
+      <ProblemInfoPanel slug={problem.slug} descriptions={problemDescriptions} />
       <div className="problem-content">
         <ErrorBoundary key={problem.id}>
           {Component ? (
@@ -569,6 +572,14 @@ export default function App() {
   const [layoutWidth, setLayoutWidth] = useState("full");
   const [navigationTransitionsEnabled, setNavigationTransitionsEnabled] =
     useState(true);
+  const [problemDescriptions, setProblemDescriptions] = useState({});
+
+  useEffect(() => {
+    fetch("/data/problemDescriptions.json")
+      .then((res) => res.json())
+      .then((data) => setProblemDescriptions(data))
+      .catch(() => setProblemDescriptions({}));
+  }, []);
 
   useEffect(() => {
     try {
@@ -621,6 +632,7 @@ export default function App() {
       layoutWidth={layoutWidth}
       onLayoutChange={setLayoutWidth}
       enableTransitions={navigationTransitionsEnabled}
+      problemDescriptions={problemDescriptions}
     />
   ) : (
     <HomePage
