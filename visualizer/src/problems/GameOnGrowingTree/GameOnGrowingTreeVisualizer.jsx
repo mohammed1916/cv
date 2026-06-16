@@ -1168,7 +1168,7 @@ export default function GameOnGrowingTreeVisualizer() {
           maxTreeNodesToRender={MAX_TREE_NODES_TO_RENDER}
           step={step}
           parentZeroBased={parentZeroBased}
-          showTraversalTrail={showTraversalTrail}
+          showTraversalTrail={enabledVizIds.includes('traversalTrail')}
           selectedNode={selectedNode}
           onNodeSelect={setSelectedNode}
         />
