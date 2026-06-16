@@ -5,6 +5,8 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { useParsedInput } from '../../hooks/useParsedInput'
 import { useApplyExample } from '../../hooks/useApplyExample'
+import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
+import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput, TreeSVG } from '../../components/treeUtils'
 import './MaxDepthBinaryTreeVisualizer.css'
 
@@ -137,6 +139,10 @@ export default function MaxDepthBinaryTreeVisualizer() {
         onStepJump: setStepIndex,
     })
 
+    // Use modular visualization features system
+    const vizFeatureDefs = getVisualizationFeatures('max-depth-binary-tree')
+    const { items: vizFeatures, toggle: toggleVizFeature } = useVisualizationFeatures(vizFeatureDefs)
+
     return (
         <div className="mdbt-shell">
             <div className="mdbt-top">
@@ -230,6 +236,8 @@ export default function MaxDepthBinaryTreeVisualizer() {
                     onLineSelect: connectivity.handleLineSelect,
                     onSnippetSelect: connectivity.handleSnippetSelect,
                 }}
+                visualizationFeatures={vizFeatures}
+                onVisualizationToggle={toggleVizFeature}
             />
         </div>
     )

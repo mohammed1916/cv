@@ -4,6 +4,8 @@ import VisualizerPlaybackSection from '../../components/VisualizerPlaybackSectio
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { useApplyExample } from '../../hooks/useApplyExample'
+import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
+import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import './CourseScheduleVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -257,6 +259,10 @@ export default function CourseScheduleVisualizer() {
     snippetOptions: SNIPPETS,
     onStepJump: setStepIndex,
   })
+
+  // Use modular visualization features system
+  const vizFeatureDefs = getVisualizationFeatures('course-schedule')
+  const { items: vizFeatures, toggle: toggleVizFeature } = useVisualizationFeatures(vizFeatureDefs)
 
   const nodePositions = useMemo(() => calculateNodePositions(numCourses), [numCourses])
 
@@ -541,6 +547,8 @@ export default function CourseScheduleVisualizer() {
           onLineSelect: connectivity.handleLineSelect,
           onSnippetSelect: connectivity.handleSnippetSelect,
         }}
+        visualizationFeatures={vizFeatures}
+        onVisualizationToggle={toggleVizFeature}
       />
     </div>
   )

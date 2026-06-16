@@ -118,6 +118,54 @@ export const VISUALIZATION_REGISTRY = {
     },
   },
 
+  'course-schedule': {
+    graphVisualization: {
+      icon: '🔗',
+      label: 'Graph Structure',
+      description: 'Show course prerequisites graph',
+      category: 'flow',
+      enabledByDefault: false,
+    },
+    visitationFlow: {
+      icon: '🔄',
+      label: 'Visitation Flow',
+      description: 'Highlight visited nodes in topological sort',
+      category: 'flow',
+      enabledByDefault: false,
+    },
+    cycleDetection: {
+      icon: '⚠️',
+      label: 'Cycle Detection',
+      description: 'Show detected cycles in the graph',
+      category: 'detail',
+      enabledByDefault: false,
+    },
+  },
+
+  'max-depth-binary-tree': {
+    treeStructure: {
+      icon: '🌳',
+      label: 'Tree Structure',
+      description: 'Show tree layout and node relationships',
+      category: 'dp',
+      enabledByDefault: false,
+    },
+    depthTracking: {
+      icon: '📏',
+      label: 'Depth Tracking',
+      description: 'Highlight current depth level',
+      category: 'flow',
+      enabledByDefault: false,
+    },
+    recursionBreakdown: {
+      icon: '🔀',
+      label: 'Recursion Calls',
+      description: 'Show recursive function calls',
+      category: 'detail',
+      enabledByDefault: false,
+    },
+  },
+
   // Add more problems here...
   // 'longest-increasing-subsequence': { ... },
   // 'edit-distance': { ... },
