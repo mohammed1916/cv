@@ -886,7 +886,82 @@ export default function GameOnGrowingTreeVisualizer() {
   const stepKey = step
     ? `${stepIndex}-${step.activeLine}-${step.subproblemSize ?? "root"}-${step.midpoint ?? "none"}`
     : "idle";
-  const dpSnapshot = step?.dpSnapshot ?? null;
+
+  // Calculate source tracking for DP values
+  const calculateDPSources = useCallback(() => {
+    if (!step?.dpSnapshot || !currentTree) return null;
+
+    const rawSnapshot = step.dpSnapshot;
+    const sources = { firstSources: null, secondSources: null, thirdSources: null };
+
+    // For each node, track which child (or self) contributed each value
+    try {
+      if (rawSnapshot.first && Array.isArray(rawSnapshot.first)) {
+        sources.firstSources = rawSnapshot.first.map((val, nodeIdx) => {
+          // Find the child that contributed this value
+          const childrenValues = currentTree.edges
+            ?.filter(e => e.from === nodeIdx)
+            .map(e => rawSnapshot.first?.[e.to] || 0) || [];
+
+          const maxChild = childrenValues.length > 0
+            ? currentTree.edges
+                .filter(e => e.from === nodeIdx)
+                .find(e => rawSnapshot.first?.[e.to] === Math.max(...childrenValues))?.to
+            : undefined;
+
+          return maxChild !== undefined ? maxChild : nodeIdx;
+        });
+      }
+
+      if (rawSnapshot.second && Array.isArray(rawSnapshot.second)) {
+        sources.secondSources = rawSnapshot.second.map((val, nodeIdx) => {
+          const childrenValues = currentTree.edges
+            ?.filter(e => e.from === nodeIdx)
+            .map(e => rawSnapshot.second?.[e.to] || 0) || [];
+
+          const maxChild = childrenValues.length > 0
+            ? currentTree.edges
+                .filter(e => e.from === nodeIdx)
+                .find(e => rawSnapshot.second?.[e.to] === Math.max(...childrenValues))?.to
+            : undefined;
+
+          return maxChild !== undefined ? maxChild : nodeIdx;
+        });
+      }
+
+      if (rawSnapshot.third && Array.isArray(rawSnapshot.third)) {
+        sources.thirdSources = rawSnapshot.third.map((val, nodeIdx) => {
+          const childrenValues = currentTree.edges
+            ?.filter(e => e.from === nodeIdx)
+            .map(e => rawSnapshot.third?.[e.to] || 0) || [];
+
+          const maxChild = childrenValues.length > 0
+            ? currentTree.edges
+                .filter(e => e.from === nodeIdx)
+                .find(e => rawSnapshot.third?.[e.to] === Math.max(...childrenValues))?.to
+            : undefined;
+
+          return maxChild !== undefined ? maxChild : nodeIdx;
+        });
+      }
+    } catch (e) {
+      // Silently handle if sources can't be calculated
+      return null;
+    }
+
+    return sources;
+  }, [step?.dpSnapshot, currentTree]);
+
+  const dpSources = useMemo(() => calculateDPSources(), [calculateDPSources]);
+  const dpSnapshot = step?.dpSnapshot
+    ? {
+        ...step.dpSnapshot,
+        firstSources: dpSources?.firstSources,
+        secondSources: dpSources?.secondSources,
+        thirdSources: dpSources?.thirdSources,
+      }
+    : null;
+
   const currentPhase = step?.phase
     ? step.phase
     : step?.subproblemSize != null

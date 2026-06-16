@@ -491,9 +491,6 @@
 .gogt-edge.active {
     stroke: rgba(76, 110, 245, 0.9);
     stroke-width: 2.5;
-    stroke-dasharray: 8 8;
-    stroke-dashoffset: 0;
-    animation: edgeFlow 1.2s linear infinite;
     filter: drop-shadow(0 0 6px rgba(76, 110, 245, 0.6));
 }
 

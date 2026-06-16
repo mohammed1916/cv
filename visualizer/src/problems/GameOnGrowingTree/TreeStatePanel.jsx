@@ -207,13 +207,18 @@ export default function TreeStatePanel({
                                                 x2={to.x}
                                                 y2={to.y}
                                                 className={`gogt-edge ${isBlocked ? "blocked" : inPath ? "path" : ""} ${isActiveEdge ? "active" : ""}`}
+                                                strokeDasharray={isActiveEdge ? "8 8" : "none"}
                                                 initial={false}
                                                 animate={{
                                                     opacity: isBlocked || inPath || isActiveEdge ? 1 : 0.78,
                                                     strokeWidth: isBlocked || inPath ? 3 : isActiveEdge ? 2.5 : 2,
-                                                    filter: isActiveEdge ? 'drop-shadow(0 0 6px rgba(76, 110, 245, 0.6))' : 'none',
+                                                    strokeDashoffset: isActiveEdge ? [16, 0] : 0,
                                                 }}
-                                                transition={{ duration: 0.2, ease: "easeOut" }}
+                                                transition={{
+                                                    opacity: { duration: 0.2, ease: "easeOut" },
+                                                    strokeWidth: { duration: 0.2, ease: "easeOut" },
+                                                    strokeDashoffset: { duration: 1.2, repeat: Infinity, ease: "linear" },
+                                                }}
                                             />
                                         );
                                     })}
