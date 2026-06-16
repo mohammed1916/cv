@@ -55,6 +55,30 @@ export default function DockableWorkspace({
 
   const activeMaximizedPanel = maximizedId ? panelMap.get(maximizedId) : null;
 
+  // Auto-add newly available panels to the layout
+  useEffect(() => {
+    const layoutPanelIds = new Set();
+    for (const row of getGridLayout(layout)) {
+      row.forEach((id) => layoutPanelIds.add(id));
+    }
+    layout.minimized?.forEach((id) => layoutPanelIds.add(id));
+
+    const newPanelIds = panels
+      .map((p) => p.id)
+      .filter((id) => !layoutPanelIds.has(id));
+
+    if (newPanelIds.length > 0) {
+      setLayout((current) => {
+        const rows = getGridLayout(current);
+        if (!rows.length) {
+          rows.push([]);
+        }
+        rows[rows.length - 1].push(...newPanelIds);
+        return { rows, minimized: current.minimized };
+      });
+    }
+  }, [panels.map((p) => p.id).join(",")]);
+
   const getZoneAtMouse = (mouseX, mouseY) => {
     const preview = document.querySelector(".dock-layout-preview");
     if (!preview) return null;
