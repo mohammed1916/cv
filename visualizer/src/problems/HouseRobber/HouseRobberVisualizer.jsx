@@ -7,6 +7,8 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { useProblemCode } from '../../hooks/useProblemCode'
 import { useParsedInput } from '../../hooks/useParsedInput'
 import { useApplyExample } from '../../hooks/useApplyExample'
+import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
+import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import './HouseRobberVisualizer.css'
 
 function parseNums(input) {
@@ -133,6 +135,10 @@ export default function HouseRobberVisualizer({ problem }) {
     snippetOptions: SNIPPETS,
     onStepJump: setStepIndex,
   })
+
+  // Use modular visualization features system
+  const vizFeatureDefs = getVisualizationFeatures('house-robber')
+  const { items: vizFeatures, toggle: toggleVizFeature } = useVisualizationFeatures(vizFeatureDefs)
 
   return (
     <div className="hr-shell">
@@ -267,6 +273,8 @@ export default function HouseRobberVisualizer({ problem }) {
           onLineSelect: connectivity.handleLineSelect,
           onSnippetSelect: connectivity.handleSnippetSelect,
         }}
+        visualizationFeatures={vizFeatures}
+        onVisualizationToggle={toggleVizFeature}
       />
     </div>
   )

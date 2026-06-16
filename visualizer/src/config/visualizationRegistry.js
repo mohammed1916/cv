@@ -94,6 +94,30 @@ export const VISUALIZATION_REGISTRY = {
     },
   },
 
+  'house-robber': {
+    dpArray: {
+      icon: '📊',
+      label: 'DP Array State',
+      description: 'Show dp[i] values as you solve each house',
+      category: 'dp',
+      enabledByDefault: false,
+    },
+    houseHighlight: {
+      icon: '🏠',
+      label: 'House Highlight',
+      description: 'Highlight current house being evaluated',
+      category: 'flow',
+      enabledByDefault: false,
+    },
+    decisionFlow: {
+      icon: '🔀',
+      label: 'Decision Flow',
+      description: 'Show rob vs skip decision at each step',
+      category: 'detail',
+      enabledByDefault: false,
+    },
+  },
+
   // Add more problems here...
   // 'longest-increasing-subsequence': { ... },
   // 'edit-distance': { ... },
