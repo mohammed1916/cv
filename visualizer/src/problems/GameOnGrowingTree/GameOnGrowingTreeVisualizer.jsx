@@ -4,6 +4,7 @@ import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import PatternOverlay from "../../components/PatternOverlay";
+import VisualizationControls from "../../components/VisualizationControls";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { createPositionStep, createTreeDPStep, createDACStep, createContextualStepBuilder } from "../../utils/stepBuilder";
@@ -1343,38 +1344,87 @@ export default function GameOnGrowingTreeVisualizer() {
           onShowPatternOverlayChange={setShowPatternOverlay}
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
-          showDpDetails={showDpDetails}
-          onShowDpDetailsChange={setShowDpDetails}
-          dpDetailsLabel="🔢 Show DP details"
-          showDpDetailsToggle
-          showEdgeFlow={showEdgeFlow}
-          onShowEdgeFlowChange={setShowEdgeFlow}
-          edgeFlowLabel="🔗 Show edge flow"
-          showEdgeFlowToggle
-          showComparisons={showComparisons}
-          onShowComparisonsChange={setShowComparisons}
-          comparisonsLabel="⚖️ Show comparisons"
-          showComparisonsToggle
-          showRankHighlight={showRankHighlight}
-          onShowRankHighlightChange={setShowRankHighlight}
-          rankHighlightLabel="📊 Highlight ranks"
-          showRankHighlightToggle
-          showInsertBreakdown={showInsertBreakdown}
-          onShowInsertBreakdownChange={setShowInsertBreakdown}
-          insertBreakdownLabel="🔀 InsertTop3 logic"
-          showInsertBreakdownToggle
-          showBottomUp={showBottomUp}
-          onShowBottomUpChange={setShowBottomUp}
-          bottomUpLabel="⬆️ Bottom-up details"
-          showBottomUpToggle
-          showTraversalTrail={showTraversalTrail}
-          onShowTraversalTrailChange={setShowTraversalTrail}
-          traversalTrailLabel="🔗 Traversal trail"
-          showTraversalTrailToggle
-          showValueSource={showValueSource}
-          onShowValueSourceChange={setShowValueSource}
-          valueSourceLabel="🔍 Value source"
-          showValueSourceToggle
+        />
+        <VisualizationControls
+          features={[
+            {
+              id: 'dp-details',
+              icon: '🔢',
+              label: 'DP Details',
+              description: 'Show first/second/third values for each node',
+              category: 'dp',
+              enabled: showDpDetails,
+            },
+            {
+              id: 'rank-highlight',
+              icon: '📊',
+              label: 'Rank Highlights',
+              description: 'Color-code ranking of DP values',
+              category: 'dp',
+              enabled: showRankHighlight,
+            },
+            {
+              id: 'insert-breakdown',
+              icon: '🔀',
+              label: 'InsertTop3 Logic',
+              description: 'Step-by-step comparison and insertion logic',
+              category: 'dp',
+              enabled: showInsertBreakdown,
+            },
+            {
+              id: 'edge-flow',
+              icon: '🔗',
+              label: 'Edge Flow',
+              description: 'Direction and depth value flowing through edges',
+              category: 'flow',
+              enabled: showEdgeFlow,
+            },
+            {
+              id: 'traversal-trail',
+              icon: '🔗',
+              label: 'Traversal Trail',
+              description: 'Breadcrumb of visited nodes in current pass',
+              category: 'flow',
+              enabled: showTraversalTrail,
+            },
+            {
+              id: 'comparisons',
+              icon: '⚖️',
+              label: 'Critical Decisions',
+              description: 'When and why different depths are chosen',
+              category: 'detail',
+              enabled: showComparisons,
+            },
+            {
+              id: 'bottom-up',
+              icon: '⬆️',
+              label: 'Bottom-Up Details',
+              description: 'Which children feed each node\'s triplet',
+              category: 'detail',
+              enabled: showBottomUp,
+            },
+            {
+              id: 'value-source',
+              icon: '🔍',
+              label: 'Value Source',
+              description: 'Where each depth value comes from',
+              category: 'detail',
+              enabled: showValueSource,
+            },
+          ]}
+          onToggle={(featureId, enabled) => {
+            const handlers = {
+              'dp-details': setShowDpDetails,
+              'rank-highlight': setShowRankHighlight,
+              'insert-breakdown': setShowInsertBreakdown,
+              'edge-flow': setShowEdgeFlow,
+              'traversal-trail': setShowTraversalTrail,
+              'comparisons': setShowComparisons,
+              'bottom-up': setShowBottomUp,
+              'value-source': setShowValueSource,
+            }
+            handlers[featureId]?.(enabled)
+          }}
         />
       </FloatingPanel>
 

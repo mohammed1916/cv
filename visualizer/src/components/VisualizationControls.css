@@ -1,0 +1,130 @@
+.viz-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 0;
+  border-top: 1px solid rgba(148, 163, 184, 0.2);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.viz-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 6px;
+  color: #e2e8f0;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  transition: all 200ms ease;
+}
+
+.viz-toggle:hover {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15));
+  border-color: rgba(99, 102, 241, 0.5);
+}
+
+.viz-toggle.expanded {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
+  border-color: rgba(99, 102, 241, 0.6);
+}
+
+.viz-toggle-icon {
+  font-size: 14px;
+}
+
+.viz-toggle-text {
+  flex: 1;
+}
+
+.viz-toggle-arrow {
+  font-size: 11px;
+  color: rgba(148, 163, 184, 0.7);
+  transition: transform 200ms ease;
+}
+
+.viz-toggle.expanded .viz-toggle-arrow {
+  transform: rotate(0deg);
+}
+
+.viz-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 6px;
+  animation: slideDown 200ms ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.viz-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.viz-group-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(148, 163, 184, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 4px 0;
+}
+
+.viz-group-items {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.viz-feature {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 150ms ease;
+  user-select: none;
+}
+
+.viz-feature:hover {
+  background-color: rgba(99, 102, 241, 0.1);
+}
+
+.viz-feature input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+  accent-color: #6366f1;
+}
+
+.viz-feature-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #cbd5e1;
+  white-space: nowrap;
+}
+
+.viz-feature input:checked ~ .viz-feature-label {
+  color: #e2e8f0;
+  font-weight: 500;
+}
