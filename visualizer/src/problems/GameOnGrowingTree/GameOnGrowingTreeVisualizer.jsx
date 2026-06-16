@@ -925,7 +925,7 @@ export default function GameOnGrowingTreeVisualizer() {
     { label: "Final scores", value: answers.length || "—" },
   ];
 
-  const dockPanels = [
+  const dockPanels = useMemo(() => [
     ...(enabledVizIds.includes('dpDetails') ? [{
       id: "dp-details",
       title: "DP Details",
@@ -1174,7 +1174,7 @@ export default function GameOnGrowingTreeVisualizer() {
         />
       ),
     },
-  ];
+  ], [enabledVizIds, step, dpSnapshot, currentTree, parentZeroBased, qInput, parentsInput, parsedParentSnapshot, inputError, answers, steps, stepIndex, currentPhase, treeFocus, stepKey, selectedNode]);
 
   return (
     <div className="gogt-shell">
