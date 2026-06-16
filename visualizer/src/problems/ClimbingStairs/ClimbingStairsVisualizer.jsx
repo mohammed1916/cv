@@ -5,10 +5,13 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
+import VisualizationControls from '../../components/VisualizationControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
+import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
+import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import './ClimbingStairsVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -112,6 +115,10 @@ export default function ClimbingStairsVisualizer() {
 
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
+
+  // Use modular visualization features system
+  const vizFeatureDefs = getVisualizationFeatures('climbing-stairs')
+  const { items: vizFeatures, toggle: toggleVizFeature, enabledIds: enabledVizIds } = useVisualizationFeatures(vizFeatureDefs)
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
@@ -363,6 +370,9 @@ export default function ClimbingStairsVisualizer() {
           onAutoScrollChange={setAutoScrollCode}
           showAutoScroll
         />
+        {vizFeatures.length > 0 && (
+          <VisualizationControls features={vizFeatures} onToggle={toggleVizFeature} />
+        )}
       </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>

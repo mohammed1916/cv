@@ -7,6 +7,8 @@ import PatternOverlay from "../../components/PatternOverlay";
 import VisualizationControls from "../../components/VisualizationControls";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
+import { useVisualizationFeatures } from "../../hooks/useVisualizationFeatures";
+import { getVisualizationFeatures } from "../../config/visualizationRegistry";
 import { createPositionStep, createTreeDPStep, createDACStep, createContextualStepBuilder } from "../../utils/stepBuilder";
 import "./GameOnGrowingTreeVisualizer.css";
 import { Stack3D } from "../../components/viz3d";
@@ -784,15 +786,11 @@ export default function GameOnGrowingTreeVisualizer() {
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
   const [showPatternOverlay, setShowPatternOverlay] = useState(true);
   const [activeLineDom, setActiveLineDom] = useState(null);
-  const [showDpDetails, setShowDpDetails] = useState(false);
-  const [showEdgeFlow, setShowEdgeFlow] = useState(false);
-  const [showComparisons, setShowComparisons] = useState(false);
-  const [showRankHighlight, setShowRankHighlight] = useState(false);
-  const [showInsertBreakdown, setShowInsertBreakdown] = useState(false);
-  const [showBottomUp, setShowBottomUp] = useState(false);
-  const [showTraversalTrail, setShowTraversalTrail] = useState(false);
-  const [showValueSource, setShowValueSource] = useState(false);
   const [selectedNode, setSelectedNode] = useState(null);
+
+  // Use modular visualization features system
+  const vizFeatureDefs = getVisualizationFeatures('game-on-growing-tree');
+  const { items: vizFeatures, toggle: toggleVizFeature, enabledIds: enabledVizIds } = useVisualizationFeatures(vizFeatureDefs);
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
 
@@ -984,56 +982,56 @@ export default function GameOnGrowingTreeVisualizer() {
   ];
 
   const dockPanels = [
-    ...(showDpDetails ? [{
+    ...(enabledVizIds.includes('dpDetails') ? [{
       id: "dp-details",
       title: "DP Details",
       subtitle: "Triplet values for each node (first, second, third)",
       defaultZone: "right",
       content: <DPDetailPanel step={step} dpSnapshot={dpSnapshot} />,
     }] : []),
-    ...(showEdgeFlow ? [{
+    ...(enabledVizIds.includes('edgeFlow') ? [{
       id: "edge-flow",
       title: "Edge Flow",
       subtitle: "Direction and depth value flowing through edges",
       defaultZone: "right",
       content: <EdgeFlowOverlay step={step} currentTree={currentTree} />,
     }] : []),
-    ...(showComparisons ? [{
+    ...(enabledVizIds.includes('comparisons') ? [{
       id: "comparisons",
       title: "Critical Decision",
       subtitle: "When and why different depths are chosen",
       defaultZone: "right",
       content: <ComparisonBox step={step} dpSnapshot={dpSnapshot} />,
     }] : []),
-    ...(showRankHighlight ? [{
+    ...(enabledVizIds.includes('rankHighlight') ? [{
       id: "rank-highlight",
       title: "Rank Highlights",
       subtitle: "Color-coded ranking of DP values",
       defaultZone: "right",
       content: <RankHighlightOverlay dpSnapshot={dpSnapshot} limit={15} />,
     }] : []),
-    ...(showInsertBreakdown ? [{
+    ...(enabledVizIds.includes('insertBreakdown') ? [{
       id: "insert-breakdown",
       title: "InsertTop3 Breakdown",
       subtitle: "Step-by-step comparison and insertion logic",
       defaultZone: "right",
       content: <InsertTop3Breakdown step={step} dpSnapshot={dpSnapshot} />,
     }] : []),
-    ...(showBottomUp ? [{
+    ...(enabledVizIds.includes('bottomUp') ? [{
       id: "bottom-up",
       title: "Bottom-Up Details",
       subtitle: "Which children feed each node's triplet",
       defaultZone: "right",
       content: <BottomUpDetailsPanel step={step} currentTree={currentTree} dpSnapshot={dpSnapshot} parentZeroBased={parentZeroBased} />,
     }] : []),
-    ...(showTraversalTrail ? [{
+    ...(enabledVizIds.includes('traversalTrail') ? [{
       id: "traversal",
       title: "Traversal Trail",
       subtitle: "Breadcrumb of visited nodes in current pass",
       defaultZone: "right",
       content: <TraversalTrail step={step} currentTree={currentTree} parentZeroBased={parentZeroBased} />,
     }] : []),
-    ...(showValueSource ? [{
+    ...(enabledVizIds.includes('valueSource') ? [{
       id: "value-source",
       title: "Value Source Tracking",
       subtitle: "Where each depth value comes from",
@@ -1346,85 +1344,8 @@ export default function GameOnGrowingTreeVisualizer() {
           showPatternOverlayToggle
         />
         <VisualizationControls
-          features={[
-            {
-              id: 'dp-details',
-              icon: '🔢',
-              label: 'DP Details',
-              description: 'Show first/second/third values for each node',
-              category: 'dp',
-              enabled: showDpDetails,
-            },
-            {
-              id: 'rank-highlight',
-              icon: '📊',
-              label: 'Rank Highlights',
-              description: 'Color-code ranking of DP values',
-              category: 'dp',
-              enabled: showRankHighlight,
-            },
-            {
-              id: 'insert-breakdown',
-              icon: '🔀',
-              label: 'InsertTop3 Logic',
-              description: 'Step-by-step comparison and insertion logic',
-              category: 'dp',
-              enabled: showInsertBreakdown,
-            },
-            {
-              id: 'edge-flow',
-              icon: '🔗',
-              label: 'Edge Flow',
-              description: 'Direction and depth value flowing through edges',
-              category: 'flow',
-              enabled: showEdgeFlow,
-            },
-            {
-              id: 'traversal-trail',
-              icon: '🔗',
-              label: 'Traversal Trail',
-              description: 'Breadcrumb of visited nodes in current pass',
-              category: 'flow',
-              enabled: showTraversalTrail,
-            },
-            {
-              id: 'comparisons',
-              icon: '⚖️',
-              label: 'Critical Decisions',
-              description: 'When and why different depths are chosen',
-              category: 'detail',
-              enabled: showComparisons,
-            },
-            {
-              id: 'bottom-up',
-              icon: '⬆️',
-              label: 'Bottom-Up Details',
-              description: 'Which children feed each node\'s triplet',
-              category: 'detail',
-              enabled: showBottomUp,
-            },
-            {
-              id: 'value-source',
-              icon: '🔍',
-              label: 'Value Source',
-              description: 'Where each depth value comes from',
-              category: 'detail',
-              enabled: showValueSource,
-            },
-          ]}
-          onToggle={(featureId, enabled) => {
-            const handlers = {
-              'dp-details': setShowDpDetails,
-              'rank-highlight': setShowRankHighlight,
-              'insert-breakdown': setShowInsertBreakdown,
-              'edge-flow': setShowEdgeFlow,
-              'traversal-trail': setShowTraversalTrail,
-              'comparisons': setShowComparisons,
-              'bottom-up': setShowBottomUp,
-              'value-source': setShowValueSource,
-            }
-            handlers[featureId]?.(enabled)
-          }}
+          features={vizFeatures}
+          onToggle={toggleVizFeature}
         />
       </FloatingPanel>
 
