@@ -11,7 +11,9 @@ export default function PartialAnswersPanel({
   unchangedClass = "unchanged",
   selectedNode = null,
   onNodeSelect = null,
+  cellSources = null,
 }) {
+  const [hoveredCell, setHoveredCell] = React.useState(null);
   return (
     <div className="partial-answers-wrap">
       <div className="partial-answers-label">{label}</div>
@@ -25,12 +27,18 @@ export default function PartialAnswersPanel({
                 ? prevAnswers[idx]
                 : undefined;
             const changed = prevVal !== val;
+            const source = cellSources?.[idx];
+            const tooltipText = source ? `Value: ${val} | From: Node ${source + 1}` : `Value: ${val}`;
+
             return (
               <div
                 key={idx}
-                className={`partial-answer-cell ${changed ? changedClass : unchangedClass} ${selectedNode === idx ? 'selected' : ''}`}
+                className={`partial-answer-cell ${changed ? changedClass : unchangedClass} ${selectedNode === idx ? 'selected' : ''} ${hoveredCell === idx ? 'hovered' : ''}`}
                 data-node-id={idx}
                 onClick={() => onNodeSelect?.(idx)}
+                onMouseEnter={() => setHoveredCell(idx)}
+                onMouseLeave={() => setHoveredCell(null)}
+                title={tooltipText}
                 style={{ cursor: onNodeSelect ? 'pointer' : 'default' }}
               >
                 <div className="partial-answer-chip">

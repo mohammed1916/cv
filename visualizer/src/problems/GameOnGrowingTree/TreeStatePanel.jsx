@@ -247,8 +247,8 @@ export default function TreeStatePanel({
                                                     className={`tree-node-group ${selectedNode === node ? 'selected' : ''}`}
                                                     onClick={() => onNodeSelect?.(node)}
                                                     style={{ cursor: 'pointer' }}
-                                                    data-tooltip={tooltipText}
                                                 >
+                                                    <title>{tooltipText}</title>
                                                     <motion.g
                                                         initial={false}
                                                         animate={{ scale: nodeScale }}
@@ -333,6 +333,7 @@ export default function TreeStatePanel({
                                     labelPrefix="f"
                                     selectedNode={selectedNode}
                                     onNodeSelect={onNodeSelect}
+                                    cellSources={dpSnapshot.firstSources}
                                 />
                             </div>
                             <div className="gogt-dp-panel">
@@ -343,6 +344,7 @@ export default function TreeStatePanel({
                                     labelPrefix="s"
                                     selectedNode={selectedNode}
                                     onNodeSelect={onNodeSelect}
+                                    cellSources={dpSnapshot.secondSources}
                                 />
                             </div>
                             <div className="gogt-dp-panel">
@@ -353,6 +355,7 @@ export default function TreeStatePanel({
                                     labelPrefix="t"
                                     selectedNode={selectedNode}
                                     onNodeSelect={onNodeSelect}
+                                    cellSources={dpSnapshot.thirdSources}
                                 />
                             </div>
                         </div>
