@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import PartialAnswersPanel from "../../components/PartialAnswersPanel";
+import { TreeHighlightOverlay } from "./TreeDPLinking";
 
 const TREE_VIEWBOX_WIDTH = 1000;
 const TREE_VIEWBOX_HEIGHT = 300;
@@ -13,6 +14,7 @@ export default function TreeStatePanel({
     stepKey,
     dpSnapshot,
     maxTreeNodesToRender,
+    step,
 }) {
     const [treeViewport, setTreeViewport] = useState({ x: 0, y: 0, scale: 1 });
     const [isDraggingTree, setIsDraggingTree] = useState(false);
@@ -294,6 +296,7 @@ export default function TreeStatePanel({
                                     )}
                                 </g>
                             </g>
+                            {step && <TreeHighlightOverlay step={step} treeNodePositions={currentTree?.positions} dpSnapshot={dpSnapshot} />}
                         </motion.svg>
                     ) : (
                         <div className="gogt-tree-empty">

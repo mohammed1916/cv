@@ -1,0 +1,101 @@
+.tree-dp-linking {
+  position: relative;
+}
+
+.tree-node-highlight {
+  fill: rgba(76, 110, 245, 0.1);
+  stroke: #4c6ef5;
+  stroke-width: 1;
+}
+
+.tree-tooltip {
+  background: white;
+  border: 2px solid #4c6ef5;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 11px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+}
+
+.tooltip-title {
+  font-weight: 700;
+  color: #4c6ef5;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #e0e3e8;
+  padding-bottom: 4px;
+}
+
+.tooltip-values {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tooltip-value {
+  font-family: 'Monaco', 'Menlo', monospace;
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+/* Tree highlight overlay */
+.tree-highlight-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.node-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 3px;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  background-size: 200% 200%;
+  background-position: center;
+}
+
+.node-label.source {
+  background: linear-gradient(135deg, #4c6ef5 0%, #3d5fd9 100%);
+}
+
+.node-label.target {
+  background: linear-gradient(135deg, #15aabf 0%, #0f7a8a 100%);
+}
+
+/* Animation for pulsing effect */
+@keyframes node-pulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 3px rgba(76, 110, 245, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgba(76, 110, 245, 0.8));
+  }
+}
+
+@keyframes node-pulse-target {
+  0%, 100% {
+    filter: drop-shadow(0 0 3px rgba(21, 170, 191, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgba(21, 170, 191, 0.8));
+  }
+}
+
+.tree-highlight-overlay circle[stroke="#4c6ef5"] {
+  animation: node-pulse 0.8s ease-in-out infinite;
+}
+
+.tree-highlight-overlay circle[stroke="#15aabf"] {
+  animation: node-pulse-target 0.8s ease-in-out infinite;
+}

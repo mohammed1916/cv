@@ -16,6 +16,8 @@ import DPDetailPanel from "./DPDetailPanel";
 import ComparisonBox from "./ComparisonBox";
 import RankHighlightOverlay from "./RankHighlightOverlay";
 import EdgeFlowOverlay from "./EdgeFlowOverlay";
+import InsertTop3Breakdown from "./InsertTop3Breakdown";
+import { TreeHighlightOverlay } from "./TreeDPLinking";
 
 const MAX_TREE_NODES_TO_RENDER = 120;
 
@@ -781,6 +783,7 @@ export default function GameOnGrowingTreeVisualizer() {
   const [showEdgeFlow, setShowEdgeFlow] = useState(false);
   const [showComparisons, setShowComparisons] = useState(false);
   const [showRankHighlight, setShowRankHighlight] = useState(false);
+  const [showInsertBreakdown, setShowInsertBreakdown] = useState(false);
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
 
@@ -905,6 +908,13 @@ export default function GameOnGrowingTreeVisualizer() {
       subtitle: "Color-coded ranking of DP values",
       defaultZone: "right",
       content: <RankHighlightOverlay dpSnapshot={dpSnapshot} limit={15} />,
+    }] : []),
+    ...(showInsertBreakdown ? [{
+      id: "insert-breakdown",
+      title: "InsertTop3 Breakdown",
+      subtitle: "Step-by-step comparison and insertion logic",
+      defaultZone: "right",
+      content: <InsertTop3Breakdown step={step} dpSnapshot={dpSnapshot} />,
     }] : []),
     {
       id: "input",
@@ -1090,6 +1100,7 @@ export default function GameOnGrowingTreeVisualizer() {
           stepKey={stepKey}
           dpSnapshot={dpSnapshot}
           maxTreeNodesToRender={MAX_TREE_NODES_TO_RENDER}
+          step={step}
         />
       ),
     },
@@ -1167,6 +1178,10 @@ export default function GameOnGrowingTreeVisualizer() {
           onShowRankHighlightChange={setShowRankHighlight}
           rankHighlightLabel="📊 Highlight ranks"
           showRankHighlightToggle
+          showInsertBreakdown={showInsertBreakdown}
+          onShowInsertBreakdownChange={setShowInsertBreakdown}
+          insertBreakdownLabel="🔀 InsertTop3 logic"
+          showInsertBreakdownToggle
         />
       </FloatingPanel>
 

@@ -66,6 +66,10 @@ export default function PlaybackControls({
   onShowRankHighlightChange,
   rankHighlightLabel = 'Highlight ranks',
   showRankHighlightToggle = false,
+  showInsertBreakdown = false,
+  onShowInsertBreakdownChange,
+  insertBreakdownLabel = 'InsertTop3 logic',
+  showInsertBreakdownToggle = false,
 }) {
 
   const resolvedRootClass = className || 'pc'
@@ -201,6 +205,21 @@ export default function PlaybackControls({
               aria-label={rankHighlightLabel}
             />
             <span className="pc-rank-text">{rankHighlightLabel}</span>
+          </label>
+        </div>
+      )}
+
+      {showInsertBreakdownToggle && onShowInsertBreakdownChange && (
+        <div className="pc-insert-group">
+          <label className="pc-insert-label">
+            <input
+              type="checkbox"
+              className="pc-insert-input"
+              checked={showInsertBreakdown}
+              onChange={(e) => onShowInsertBreakdownChange(e.target.checked)}
+              aria-label={insertBreakdownLabel}
+            />
+            <span className="pc-insert-text">{insertBreakdownLabel}</span>
           </label>
         </div>
       )}

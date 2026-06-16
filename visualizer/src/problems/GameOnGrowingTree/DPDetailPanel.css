@@ -98,3 +98,42 @@
   background: rgba(205, 127, 50, 0.1);
   border-left: 3px solid #cd7f32;
 }
+
+/* Flashing animation for updated cards */
+@keyframes card-flash {
+  0% {
+    box-shadow: 0 0 0 0px rgba(255, 107, 53, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 107, 53, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 0 0px rgba(255, 107, 53, 0);
+  }
+}
+
+.dp-triplet-card.flashing {
+  animation: card-flash 0.6s ease-out;
+  position: relative;
+}
+
+.dp-triplet-card.flashing::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255, 107, 53, 0.2) 0%, transparent 70%);
+  border-radius: 6px;
+  animation: pulse-out 0.6s ease-out;
+  pointer-events: none;
+}
+
+@keyframes pulse-out {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+}
