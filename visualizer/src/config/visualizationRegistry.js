@@ -166,6 +166,30 @@ export const VISUALIZATION_REGISTRY = {
     },
   },
 
+  'minimum-window-substring': {
+    windowState: {
+      icon: '📏',
+      label: 'Window State',
+      description: 'Show sliding window boundaries and size',
+      category: 'flow',
+      enabledByDefault: false,
+    },
+    characterCount: {
+      icon: '🔤',
+      label: 'Character Count',
+      description: 'Track character frequencies in window',
+      category: 'dp',
+      enabledByDefault: false,
+    },
+    validationCheck: {
+      icon: '✅',
+      label: 'Validation Check',
+      description: 'Show when window contains all required chars',
+      category: 'detail',
+      enabledByDefault: false,
+    },
+  },
+
   // Add more problems here...
   // 'longest-increasing-subsequence': { ... },
   // 'edit-distance': { ... },
