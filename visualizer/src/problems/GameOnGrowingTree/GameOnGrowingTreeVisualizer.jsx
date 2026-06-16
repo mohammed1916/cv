@@ -895,6 +895,11 @@ export default function GameOnGrowingTreeVisualizer() {
         ? "divide-and-conquer"
         : "idle";
 
+  // Determine active pass
+  const isBottomUpPass = step?.activeLine >= 9 && step?.activeLine <= 14;
+  const isTopDownPass = step?.activeLine >= 15 && step?.activeLine <= 23;
+  const activePass = isBottomUpPass ? "⬆️ Bottom-Up" : isTopDownPass ? "⬇️ Top-Down" : null;
+
   const summaryCards = [
     { label: "Queries", value: qInput.trim() || "0" },
     { label: "Rendered prefix", value: currentTree?.size ?? "—" },
@@ -1193,6 +1198,53 @@ export default function GameOnGrowingTreeVisualizer() {
           }}
         />
       </div>
+
+      {activePass && (
+        <div style={{
+          position: 'fixed',
+          top: '20px',
+          right: '20px',
+          background: 'linear-gradient(135deg, rgba(76, 110, 245, 0.9), rgba(61, 95, 217, 0.9))',
+          color: 'white',
+          padding: '12px 20px',
+          borderRadius: '8px',
+          fontWeight: 700,
+          fontSize: '14px',
+          boxShadow: '0 4px 12px rgba(76, 110, 245, 0.3)',
+          zIndex: 999,
+          animation: 'pulse 2s ease-in-out infinite'
+        }}>
+          {activePass}
+        </div>
+      )}
+
+      {selectedNode !== null && (
+        <FloatingPanel title={`Selected: Node ${selectedNode}`} style={{ position: 'fixed', bottom: '20px', right: '420px', zIndex: 1000, maxWidth: '300px' }}>
+          <div style={{ padding: '12px', display: 'grid', gap: '8px' }}>
+            <div style={{ fontSize: '12px', color: '#666' }}>
+              <div style={{ fontWeight: 600, marginBottom: '8px' }}>Node {selectedNode}</div>
+              <div>1st: {dpSnapshot?.first[selectedNode] || 0}</div>
+              <div>2nd: {dpSnapshot?.second[selectedNode] || 0}</div>
+              <div>3rd: {dpSnapshot?.third[selectedNode] || 0}</div>
+            </div>
+            <button
+              onClick={() => setSelectedNode(null)}
+              style={{
+                padding: '6px 12px',
+                background: '#ff6b35',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                fontWeight: 600,
+                fontSize: '12px'
+              }}
+            >
+              Clear Selection
+            </button>
+          </div>
+        </FloatingPanel>
+      )}
 
       <FloatingPanel title="Playback Controls">
         <PlaybackControls

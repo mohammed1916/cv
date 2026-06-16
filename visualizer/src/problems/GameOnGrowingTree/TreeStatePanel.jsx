@@ -197,6 +197,7 @@ export default function TreeStatePanel({
                                                 Math.max(a, b) === Math.max(edge.from, edge.to)
                                             );
                                         });
+                                        const isActiveEdge = parentZeroBased !== null && edge.from === parentZeroBased;
 
                                         return (
                                             <motion.line
@@ -205,11 +206,12 @@ export default function TreeStatePanel({
                                                 y1={from.y}
                                                 x2={to.x}
                                                 y2={to.y}
-                                                className={`gogt-edge ${isBlocked ? "blocked" : inPath ? "path" : ""}`}
+                                                className={`gogt-edge ${isBlocked ? "blocked" : inPath ? "path" : ""} ${isActiveEdge ? "active" : ""}`}
                                                 initial={false}
                                                 animate={{
-                                                    opacity: isBlocked || inPath ? 1 : 0.78,
-                                                    strokeWidth: isBlocked || inPath ? 3 : 2,
+                                                    opacity: isBlocked || inPath || isActiveEdge ? 1 : 0.78,
+                                                    strokeWidth: isBlocked || inPath ? 3 : isActiveEdge ? 2.5 : 2,
+                                                    filter: isActiveEdge ? 'drop-shadow(0 0 6px rgba(76, 110, 245, 0.6))' : 'none',
                                                 }}
                                                 transition={{ duration: 0.2, ease: "easeOut" }}
                                             />
@@ -234,6 +236,10 @@ export default function TreeStatePanel({
                                                     ? 1.06
                                                     : 1;
 
+                                            const parentId = currentTree.edges.find(e => e.to === node)?.from;
+                                            const degree = currentTree.edges.filter(e => e.from === node).length;
+                                            const tooltipText = `Node ${node + 1}${parentId !== undefined ? ` | Parent: ${parentId + 1}` : ' (root)'} | Degree: ${degree}`;
+
                                             return (
                                                 <g
                                                     key={node}
@@ -241,6 +247,7 @@ export default function TreeStatePanel({
                                                     className={`tree-node-group ${selectedNode === node ? 'selected' : ''}`}
                                                     onClick={() => onNodeSelect?.(node)}
                                                     style={{ cursor: 'pointer' }}
+                                                    data-tooltip={tooltipText}
                                                 >
                                                     <motion.g
                                                         initial={false}
