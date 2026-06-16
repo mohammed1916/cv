@@ -324,6 +324,8 @@ export default function TreeStatePanel({
                                     answers={dpSnapshot.first}
                                     prevAnswers={prevDpSnapshotRef.current?.first}
                                     labelPrefix="f"
+                                    selectedNode={selectedNode}
+                                    onNodeSelect={onNodeSelect}
                                 />
                             </div>
                             <div className="gogt-dp-panel">
@@ -332,6 +334,8 @@ export default function TreeStatePanel({
                                     answers={dpSnapshot.second}
                                     prevAnswers={prevDpSnapshotRef.current?.second}
                                     labelPrefix="s"
+                                    selectedNode={selectedNode}
+                                    onNodeSelect={onNodeSelect}
                                 />
                             </div>
                             <div className="gogt-dp-panel">
@@ -340,6 +344,8 @@ export default function TreeStatePanel({
                                     answers={dpSnapshot.third}
                                     prevAnswers={prevDpSnapshotRef.current?.third}
                                     labelPrefix="t"
+                                    selectedNode={selectedNode}
+                                    onNodeSelect={onNodeSelect}
                                 />
                             </div>
                         </div>

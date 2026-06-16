@@ -9,6 +9,8 @@ export default function PartialAnswersPanel({
   labelPrefix = "a",
   changedClass = "changed",
   unchangedClass = "unchanged",
+  selectedNode = null,
+  onNodeSelect = null,
 }) {
   return (
     <div className="partial-answers-wrap">
@@ -26,8 +28,10 @@ export default function PartialAnswersPanel({
             return (
               <div
                 key={idx}
-                className={`partial-answer-cell ${changed ? changedClass : unchangedClass}`}
+                className={`partial-answer-cell ${changed ? changedClass : unchangedClass} ${selectedNode === idx ? 'selected' : ''}`}
                 data-node-id={idx}
+                onClick={() => onNodeSelect?.(idx)}
+                style={{ cursor: onNodeSelect ? 'pointer' : 'default' }}
               >
                 <div className="partial-answer-chip">
                   {labelPrefix}

@@ -21,6 +21,7 @@ import { TreeHighlightOverlay } from "./TreeDPLinking";
 import BottomUpDetailsPanel from "./BottomUpDetailsPanel";
 import TraversalTrail, { TreeTraversalHighlight } from "./TraversalTrail";
 import ValueSourceTracking from "./ValueSourceTracking";
+import TreeDPConnector from "./TreeDPConnector";
 
 const MAX_TREE_NODES_TO_RENDER = 120;
 
@@ -1174,17 +1175,24 @@ export default function GameOnGrowingTreeVisualizer() {
           ))}
         </div>
       </section>
-      <DockableWorkspace
-        title="Game On Growing Tree Workspace"
-        panels={dockPanels}
-        initialLayout={{
-          rows: [
-            ["input", "storyboard"],
-            ["tree", "code"],
-          ],
-          minimized: [],
-        }}
-      />
+      <div style={{ position: 'relative' }}>
+        <TreeDPConnector
+          treeNodePositions={currentTree?.positions}
+          highlightNode={selectedNode}
+          dpCellPositions={{}}
+        />
+        <DockableWorkspace
+          title="Game On Growing Tree Workspace"
+          panels={dockPanels}
+          initialLayout={{
+            rows: [
+              ["input", "storyboard"],
+              ["tree", "code"],
+            ],
+            minimized: [],
+          }}
+        />
+      </div>
 
       <FloatingPanel title="Playback Controls">
         <PlaybackControls
