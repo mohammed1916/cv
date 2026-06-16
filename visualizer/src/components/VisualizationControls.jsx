@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import ToggleSwitch from './ToggleSwitch'
 import './VisualizationControls.css'
 
 export default function VisualizationControls({
@@ -21,14 +22,15 @@ export default function VisualizationControls({
         <div className="viz-group-title">{title}</div>
         <div className="viz-group-items">
           {items.map((feature) => (
-            <label key={feature.id} className="viz-feature" title={feature.description}>
-              <input
-                type="checkbox"
-                checked={feature.enabled}
-                onChange={(e) => onToggle(feature.id, e.target.checked)}
-              />
-              <span className="viz-feature-label">{feature.icon} {feature.label}</span>
-            </label>
+            <ToggleSwitch
+              key={feature.id}
+              id={`toggle-${feature.id}`}
+              icon={feature.icon}
+              label={feature.label}
+              description={feature.description}
+              checked={feature.enabled}
+              onChange={(checked) => onToggle(feature.id, checked)}
+            />
           ))}
         </div>
       </div>
