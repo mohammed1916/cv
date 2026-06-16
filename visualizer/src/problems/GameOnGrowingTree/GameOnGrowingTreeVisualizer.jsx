@@ -12,6 +12,10 @@ import { Stack3D } from "../../components/viz3d";
 import PartialAnswersPanel from "../../components/PartialAnswersPanel";
 import TreeStatePanel from "./TreeStatePanel";
 import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import DPDetailPanel from "./DPDetailPanel";
+import ComparisonBox from "./ComparisonBox";
+import RankHighlightOverlay from "./RankHighlightOverlay";
+import EdgeFlowOverlay from "./EdgeFlowOverlay";
 
 const MAX_TREE_NODES_TO_RENDER = 120;
 
@@ -773,6 +777,10 @@ export default function GameOnGrowingTreeVisualizer() {
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
   const [showPatternOverlay, setShowPatternOverlay] = useState(true);
   const [activeLineDom, setActiveLineDom] = useState(null);
+  const [showDpDetails, setShowDpDetails] = useState(false);
+  const [showEdgeFlow, setShowEdgeFlow] = useState(false);
+  const [showComparisons, setShowComparisons] = useState(false);
+  const [showRankHighlight, setShowRankHighlight] = useState(false);
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
 
@@ -870,6 +878,34 @@ export default function GameOnGrowingTreeVisualizer() {
   ];
 
   const dockPanels = [
+    ...(showDpDetails ? [{
+      id: "dp-details",
+      title: "DP Details",
+      subtitle: "Triplet values for each node (first, second, third)",
+      defaultZone: "right",
+      content: <DPDetailPanel step={step} dpSnapshot={dpSnapshot} />,
+    }] : []),
+    ...(showEdgeFlow ? [{
+      id: "edge-flow",
+      title: "Edge Flow",
+      subtitle: "Direction and depth value flowing through edges",
+      defaultZone: "right",
+      content: <EdgeFlowOverlay step={step} currentTree={currentTree} />,
+    }] : []),
+    ...(showComparisons ? [{
+      id: "comparisons",
+      title: "Critical Decision",
+      subtitle: "When and why different depths are chosen",
+      defaultZone: "right",
+      content: <ComparisonBox step={step} dpSnapshot={dpSnapshot} />,
+    }] : []),
+    ...(showRankHighlight ? [{
+      id: "rank-highlight",
+      title: "Rank Highlights",
+      subtitle: "Color-coded ranking of DP values",
+      defaultZone: "right",
+      content: <RankHighlightOverlay dpSnapshot={dpSnapshot} limit={15} />,
+    }] : []),
     {
       id: "input",
       title: "Input Playground",
@@ -1115,6 +1151,22 @@ export default function GameOnGrowingTreeVisualizer() {
           onShowPatternOverlayChange={setShowPatternOverlay}
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
+          showDpDetails={showDpDetails}
+          onShowDpDetailsChange={setShowDpDetails}
+          dpDetailsLabel="🔢 Show DP details"
+          showDpDetailsToggle
+          showEdgeFlow={showEdgeFlow}
+          onShowEdgeFlowChange={setShowEdgeFlow}
+          edgeFlowLabel="🔗 Show edge flow"
+          showEdgeFlowToggle
+          showComparisons={showComparisons}
+          onShowComparisonsChange={setShowComparisons}
+          comparisonsLabel="⚖️ Show comparisons"
+          showComparisonsToggle
+          showRankHighlight={showRankHighlight}
+          onShowRankHighlightChange={setShowRankHighlight}
+          rankHighlightLabel="📊 Highlight ranks"
+          showRankHighlightToggle
         />
       </FloatingPanel>
 

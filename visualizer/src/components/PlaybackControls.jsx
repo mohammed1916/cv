@@ -50,6 +50,22 @@ export default function PlaybackControls({
   onShowPatternOverlayChange,
   patternOverlayLabel = 'Show pattern overlay',
   showPatternOverlayToggle = false,
+  showDpDetails = false,
+  onShowDpDetailsChange,
+  dpDetailsLabel = 'Show DP details',
+  showDpDetailsToggle = false,
+  showEdgeFlow = false,
+  onShowEdgeFlowChange,
+  edgeFlowLabel = 'Show edge flow',
+  showEdgeFlowToggle = false,
+  showComparisons = false,
+  onShowComparisonsChange,
+  comparisonsLabel = 'Show comparisons',
+  showComparisonsToggle = false,
+  showRankHighlight = false,
+  onShowRankHighlightChange,
+  rankHighlightLabel = 'Highlight ranks',
+  showRankHighlightToggle = false,
 }) {
 
   const resolvedRootClass = className || 'pc'
@@ -125,6 +141,66 @@ export default function PlaybackControls({
               aria-label={patternOverlayLabel}
             />
             <span className="pc-pattern-text">{patternOverlayLabel}</span>
+          </label>
+        </div>
+      )}
+
+      {showDpDetailsToggle && onShowDpDetailsChange && (
+        <div className="pc-dp-group">
+          <label className="pc-dp-label">
+            <input
+              type="checkbox"
+              className="pc-dp-input"
+              checked={showDpDetails}
+              onChange={(e) => onShowDpDetailsChange(e.target.checked)}
+              aria-label={dpDetailsLabel}
+            />
+            <span className="pc-dp-text">{dpDetailsLabel}</span>
+          </label>
+        </div>
+      )}
+
+      {showEdgeFlowToggle && onShowEdgeFlowChange && (
+        <div className="pc-edge-group">
+          <label className="pc-edge-label">
+            <input
+              type="checkbox"
+              className="pc-edge-input"
+              checked={showEdgeFlow}
+              onChange={(e) => onShowEdgeFlowChange(e.target.checked)}
+              aria-label={edgeFlowLabel}
+            />
+            <span className="pc-edge-text">{edgeFlowLabel}</span>
+          </label>
+        </div>
+      )}
+
+      {showComparisonsToggle && onShowComparisonsChange && (
+        <div className="pc-comparison-group">
+          <label className="pc-comparison-label">
+            <input
+              type="checkbox"
+              className="pc-comparison-input"
+              checked={showComparisons}
+              onChange={(e) => onShowComparisonsChange(e.target.checked)}
+              aria-label={comparisonsLabel}
+            />
+            <span className="pc-comparison-text">{comparisonsLabel}</span>
+          </label>
+        </div>
+      )}
+
+      {showRankHighlightToggle && onShowRankHighlightChange && (
+        <div className="pc-rank-group">
+          <label className="pc-rank-label">
+            <input
+              type="checkbox"
+              className="pc-rank-input"
+              checked={showRankHighlight}
+              onChange={(e) => onShowRankHighlightChange(e.target.checked)}
+              aria-label={rankHighlightLabel}
+            />
+            <span className="pc-rank-text">{rankHighlightLabel}</span>
           </label>
         </div>
       )}
