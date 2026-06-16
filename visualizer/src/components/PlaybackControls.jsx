@@ -70,6 +70,18 @@ export default function PlaybackControls({
   onShowInsertBreakdownChange,
   insertBreakdownLabel = 'InsertTop3 logic',
   showInsertBreakdownToggle = false,
+  showBottomUp = false,
+  onShowBottomUpChange,
+  bottomUpLabel = 'Bottom-up details',
+  showBottomUpToggle = false,
+  showTraversalTrail = false,
+  onShowTraversalTrailChange,
+  traversalTrailLabel = 'Traversal trail',
+  showTraversalTrailToggle = false,
+  showValueSource = false,
+  onShowValueSourceChange,
+  valueSourceLabel = 'Value source',
+  showValueSourceToggle = false,
 }) {
 
   const resolvedRootClass = className || 'pc'
@@ -220,6 +232,51 @@ export default function PlaybackControls({
               aria-label={insertBreakdownLabel}
             />
             <span className="pc-insert-text">{insertBreakdownLabel}</span>
+          </label>
+        </div>
+      )}
+
+      {showBottomUpToggle && onShowBottomUpChange && (
+        <div className="pc-bottomup-group">
+          <label className="pc-bottomup-label">
+            <input
+              type="checkbox"
+              className="pc-bottomup-input"
+              checked={showBottomUp}
+              onChange={(e) => onShowBottomUpChange(e.target.checked)}
+              aria-label={bottomUpLabel}
+            />
+            <span className="pc-bottomup-text">{bottomUpLabel}</span>
+          </label>
+        </div>
+      )}
+
+      {showTraversalTrailToggle && onShowTraversalTrailChange && (
+        <div className="pc-trail-group">
+          <label className="pc-trail-label">
+            <input
+              type="checkbox"
+              className="pc-trail-input"
+              checked={showTraversalTrail}
+              onChange={(e) => onShowTraversalTrailChange(e.target.checked)}
+              aria-label={traversalTrailLabel}
+            />
+            <span className="pc-trail-text">{traversalTrailLabel}</span>
+          </label>
+        </div>
+      )}
+
+      {showValueSourceToggle && onShowValueSourceChange && (
+        <div className="pc-source-group">
+          <label className="pc-source-label">
+            <input
+              type="checkbox"
+              className="pc-source-input"
+              checked={showValueSource}
+              onChange={(e) => onShowValueSourceChange(e.target.checked)}
+              aria-label={valueSourceLabel}
+            />
+            <span className="pc-source-text">{valueSourceLabel}</span>
           </label>
         </div>
       )}

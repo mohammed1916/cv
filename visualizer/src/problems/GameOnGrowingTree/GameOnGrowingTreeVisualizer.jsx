@@ -18,6 +18,9 @@ import RankHighlightOverlay from "./RankHighlightOverlay";
 import EdgeFlowOverlay from "./EdgeFlowOverlay";
 import InsertTop3Breakdown from "./InsertTop3Breakdown";
 import { TreeHighlightOverlay } from "./TreeDPLinking";
+import BottomUpDetailsPanel from "./BottomUpDetailsPanel";
+import TraversalTrail, { TreeTraversalHighlight } from "./TraversalTrail";
+import ValueSourceTracking from "./ValueSourceTracking";
 
 const MAX_TREE_NODES_TO_RENDER = 120;
 
@@ -784,6 +787,10 @@ export default function GameOnGrowingTreeVisualizer() {
   const [showComparisons, setShowComparisons] = useState(false);
   const [showRankHighlight, setShowRankHighlight] = useState(false);
   const [showInsertBreakdown, setShowInsertBreakdown] = useState(false);
+  const [showBottomUp, setShowBottomUp] = useState(false);
+  const [showTraversalTrail, setShowTraversalTrail] = useState(false);
+  const [showValueSource, setShowValueSource] = useState(false);
+  const [selectedNode, setSelectedNode] = useState(null);
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
 
@@ -841,6 +848,20 @@ export default function GameOnGrowingTreeVisualizer() {
     const game = simulateTreeGameWithTrace(treeData);
     return { ...treeData, ...game, size };
   }, [answers.length, parentsInput, previewSize]);
+
+  const parentZeroBased = useMemo(() => {
+    const raw = parentsInput
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean)
+      .map((x) => Number(x));
+
+    const result = [0];
+    for (let i = 0; i < raw.length; i++) {
+      result.push(raw[i] - 1);
+    }
+    return result;
+  }, [parentsInput]);
 
   const treeFocus = useMemo(() => {
     if (!currentTree?.positions || !step?.focus) return null;
@@ -915,6 +936,27 @@ export default function GameOnGrowingTreeVisualizer() {
       subtitle: "Step-by-step comparison and insertion logic",
       defaultZone: "right",
       content: <InsertTop3Breakdown step={step} dpSnapshot={dpSnapshot} />,
+    }] : []),
+    ...(showBottomUp ? [{
+      id: "bottom-up",
+      title: "Bottom-Up Details",
+      subtitle: "Which children feed each node's triplet",
+      defaultZone: "right",
+      content: <BottomUpDetailsPanel step={step} currentTree={currentTree} dpSnapshot={dpSnapshot} parentZeroBased={parentZeroBased} />,
+    }] : []),
+    ...(showTraversalTrail ? [{
+      id: "traversal",
+      title: "Traversal Trail",
+      subtitle: "Breadcrumb of visited nodes in current pass",
+      defaultZone: "right",
+      content: <TraversalTrail step={step} currentTree={currentTree} parentZeroBased={parentZeroBased} />,
+    }] : []),
+    ...(showValueSource ? [{
+      id: "value-source",
+      title: "Value Source Tracking",
+      subtitle: "Where each depth value comes from",
+      defaultZone: "right",
+      content: <ValueSourceTracking step={step} dpSnapshot={dpSnapshot} parentZeroBased={parentZeroBased} />,
     }] : []),
     {
       id: "input",
@@ -1182,6 +1224,18 @@ export default function GameOnGrowingTreeVisualizer() {
           onShowInsertBreakdownChange={setShowInsertBreakdown}
           insertBreakdownLabel="🔀 InsertTop3 logic"
           showInsertBreakdownToggle
+          showBottomUp={showBottomUp}
+          onShowBottomUpChange={setShowBottomUp}
+          bottomUpLabel="⬆️ Bottom-up details"
+          showBottomUpToggle
+          showTraversalTrail={showTraversalTrail}
+          onShowTraversalTrailChange={setShowTraversalTrail}
+          traversalTrailLabel="🔗 Traversal trail"
+          showTraversalTrailToggle
+          showValueSource={showValueSource}
+          onShowValueSourceChange={setShowValueSource}
+          valueSourceLabel="🔍 Value source"
+          showValueSourceToggle
         />
       </FloatingPanel>
 
