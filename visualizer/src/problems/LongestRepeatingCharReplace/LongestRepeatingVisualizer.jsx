@@ -136,7 +136,7 @@ export default function LongestRepeatingVisualizer() {
         </div>
     );
 
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: "input",
             title: "Input Playground",
@@ -200,7 +200,7 @@ export default function LongestRepeatingVisualizer() {
                 />
             ),
         },
-    ];
+    ], [str, k, step, stepIndex, steps.length, setActiveLineDom, autoScrollCode]);
 
     return (
         <div className="lr-shell">

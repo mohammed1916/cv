@@ -175,7 +175,7 @@ export default function FindDuplicateVisualizer() {
     )
 
     // Dock panels configuration
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'input',
             title: 'Input Setup',
@@ -231,7 +231,7 @@ export default function FindDuplicateVisualizer() {
                 />
             ),
         },
-    ]
+    ], [inputError, applyExample, numsInput, handleReset, nums.length, step, setActiveLineDom, autoScrollCode])
 
     return (
         <div className="fd-shell">

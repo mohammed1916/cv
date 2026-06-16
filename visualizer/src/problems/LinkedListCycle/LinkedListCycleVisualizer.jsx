@@ -272,7 +272,7 @@ export default function LinkedListCycleVisualizer() {
     )
 
     // Define dock panels
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'config',
             title: 'Configuration',
@@ -301,7 +301,7 @@ export default function LinkedListCycleVisualizer() {
                 />
             ),
         },
-    ]
+    ], [nodeCount, tailTo, hasCycle, configContent, vizContent, step, setActiveLineDom, autoScrollCode])
 
     return (
         <div className="llc-shell">

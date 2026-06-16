@@ -137,7 +137,7 @@ export default function SubarraySumKVisualizer() {
         </div>
     );
 
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'code',
             title: 'Code',
@@ -148,7 +148,7 @@ export default function SubarraySumKVisualizer() {
             title: 'Visualization',
             content: <VizPanel />,
         },
-    ];
+    ], [step, autoScrollCode]);
 
     return (
         <div className="problem-shell">

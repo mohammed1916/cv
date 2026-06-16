@@ -148,7 +148,7 @@ export default function CoinChangeVisualizer() {
     const displayCount = Math.min(dp.length, 31)
     const displayDp = dp.slice(0, displayCount)
 
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'input',
             title: 'Input Playground',
@@ -299,7 +299,7 @@ export default function CoinChangeVisualizer() {
                 </div>
             ),
         },
-    ]
+    ], [inputError, applyExample, coinsInput, amountInput, handleReset, step, coins, activeA, activeC, dp, activeA, amount, displayCount, displayDp])
 
     return (
         <div className="cc-shell">

@@ -130,7 +130,7 @@ export default function BTMaxPathVisualizer() {
         </div>
     ), [step, layout, edges, nodes, W, totalH])
 
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'input',
             title: 'Input & Settings',
@@ -162,7 +162,7 @@ export default function BTMaxPathVisualizer() {
             title: 'Code Trace',
             content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
         },
-    ]
+    ], [treeInput, handleReset, applyExample, step, TreeVisualizationComponent, setActiveLineDom, autoScrollCode])
 
     return (
         <div className="btmps-shell">

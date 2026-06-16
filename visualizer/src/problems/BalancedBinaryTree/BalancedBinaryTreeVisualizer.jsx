@@ -224,7 +224,7 @@ export default function BalancedBinaryTreeVisualizer() {
     const allNodes = step?.allNodes ?? []
 
     // Build dock panels for the workspace
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'input',
             title: 'Input',
@@ -250,7 +250,7 @@ export default function BalancedBinaryTreeVisualizer() {
                 autoScroll={autoScrollCode}
             />,
         },
-    ]
+    ], [arrInput, setArrInput, applyExample, inputError, step, positions, edges, allNodes, setActiveLineDom, autoScrollCode])
 
     return (
         <div className="problem-shell">

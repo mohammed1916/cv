@@ -79,7 +79,7 @@ export default function PartitionEqualSubsetVisualizer() {
   const maxSum = target != null ? target + 2 : Math.max(...ex.nums) + 1;
 
   // Create dockable panels
-  const dockPanels = [
+  const dockPanels = useMemo(() => [
     {
       id: "input",
       title: "Input",
@@ -165,7 +165,7 @@ export default function PartitionEqualSubsetVisualizer() {
         />
       ),
     },
-  ];
+  ], [ex, applyEx, target, step, maxSum, setActiveLineDom, autoScrollCode]);
 
   return (
     <div className="pes-shell">

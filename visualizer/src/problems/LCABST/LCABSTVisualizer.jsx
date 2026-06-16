@@ -199,7 +199,7 @@ export default function LCABSTVisualizer() {
         </div>
     )
 
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'input',
             title: 'Input Setup',
@@ -231,7 +231,7 @@ export default function LCABSTVisualizer() {
             title: 'Code Trace',
             content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} autoScroll={autoScrollCode} onActiveLineDomChange={setActiveLineDom} />,
         },
-    ]
+    ], [arrInput, pInput, qInput, inputError, step, autoScrollCode, setActiveLineDom])
 
     return (
         <div className="lca-shell">

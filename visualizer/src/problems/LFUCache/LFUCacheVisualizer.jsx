@@ -141,7 +141,7 @@ export default function LFUCacheVisualizer() {
     const evicted = step?.evicted ?? null;
     const opStr = step?.op ?? "—";
 
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: "viz",
             title: "Cache Visualization",
@@ -218,7 +218,7 @@ export default function LFUCacheVisualizer() {
                 <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />
             ),
         },
-    ];
+    ], [ex.capacity, ex.label, opStr, result, minFreq, phase, cache, activeKey, evicted, steps, stepIndex, step, setActiveLineDom, autoScrollCode]);
 
     return (
         <div className="lfu-shell">

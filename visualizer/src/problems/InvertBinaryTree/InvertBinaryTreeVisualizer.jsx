@@ -223,7 +223,7 @@ export default function InvertBinaryTreeVisualizer() {
         </div>
     )
 
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'input',
             title: 'Input',
@@ -266,7 +266,7 @@ export default function InvertBinaryTreeVisualizer() {
                 />
             )
         }
-    ]
+    ], [inputError, applyExample, arrInput, handleReset, stepIndex, steps, TreeVisualization, step, ProgressPanel, autoScrollCode, setActiveLineDom, InputPanel])
 
     return (
         <div className="ibt-shell">

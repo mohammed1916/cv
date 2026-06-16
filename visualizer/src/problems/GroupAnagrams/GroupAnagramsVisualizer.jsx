@@ -212,7 +212,7 @@ export default function GroupAnagramsVisualizer() {
         </div>
     )
 
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'input',
             title: 'Input Playground',
@@ -258,7 +258,7 @@ export default function GroupAnagramsVisualizer() {
                 />
             ),
         },
-    ]
+    ], [input, inputError, applyExample, step, stepIndex, steps, VisualizationPanel, setActiveLineDom, autoScrollCode])
 
     return (
         <div className="ga-shell">

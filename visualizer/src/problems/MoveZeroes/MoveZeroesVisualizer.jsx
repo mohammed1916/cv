@@ -64,7 +64,7 @@ export default function MoveZeroesVisualizer({ problem }) {
     const k = step?.k ?? 0;
     const i = step?.i ?? -1;
 
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: "input",
             title: "Input Examples",
@@ -154,7 +154,7 @@ export default function MoveZeroesVisualizer({ problem }) {
                 />
             ),
         },
-    ];
+    ], [ex, applyEx, step, stepIndex, steps.length, arr, k, i, codeLines, connectivity.highlightedLines, connectivity.handleLineSelect, setActiveLineDom, autoScrollCode]);
 
     return (
         <div className="mz-shell">

@@ -81,7 +81,7 @@ export default function PalindromePartitioningVisualizer() {
 
     const i = step?.i ?? 0, j = step?.j ?? -1;
 
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: "input",
             title: "Input & Visualization",
@@ -174,7 +174,7 @@ export default function PalindromePartitioningVisualizer() {
                 />
             ),
         },
-    ];
+    ], [sInput, handleReset, applyExample, s, i, j, step, setActiveLineDom, autoScrollCode]);
 
     return (
         <div className="pp-shell">

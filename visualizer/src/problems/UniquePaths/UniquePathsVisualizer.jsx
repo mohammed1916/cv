@@ -190,7 +190,7 @@ export default function UniquePathsVisualizer() {
         setMInput(ex.m); setNInput(ex.n); handleReset()
     }, [handleReset])
 
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'code',
             title: 'Code',
@@ -201,7 +201,7 @@ export default function UniquePathsVisualizer() {
             title: 'Visualization',
             content: <UniquePathsVisualization m={m} n={n} step={step} onApplyExample={applyExample} mInput={mInput} nInput={nInput} setMInput={setMInput} setNInput={setNInput} handleReset={handleReset} />,
         },
-    ]
+    ], [step, autoScrollCode, m, n, applyExample, mInput, nInput, handleReset])
 
     return (
         <div className="problem-shell">

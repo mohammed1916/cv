@@ -236,7 +236,7 @@ export default function WordBreakVisualizer() {
         </div>
     )
 
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'code',
             title: 'Code',
@@ -247,7 +247,7 @@ export default function WordBreakVisualizer() {
             title: 'Visualization',
             content: <VisualizationContent />,
         },
-    ]
+    ], [step, autoScrollCode])
 
     return (
         <div className="problem-shell">

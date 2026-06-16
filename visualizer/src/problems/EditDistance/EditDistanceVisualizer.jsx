@@ -129,7 +129,7 @@ export default function EditDistanceVisualizer() {
   );
 
   // Create dock panels
-  const dockPanels = [
+  const dockPanels = useMemo(() => [
     {
       id: 'input',
       title: 'Input',
@@ -155,7 +155,7 @@ export default function EditDistanceVisualizer() {
         />
       ),
     },
-  ];
+  ], [ex, step, stepIndex, steps.length, setActiveLineDom, autoScrollCode]);
 
   return (
     <div className="ed-shell">

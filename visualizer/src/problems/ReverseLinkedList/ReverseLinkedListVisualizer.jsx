@@ -264,7 +264,7 @@ export default function ReverseLinkedListVisualizer() {
     const nodes = step?.nodes ?? values
     const arrows = step?.arrows ?? []
 
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'code',
             title: 'Code',
@@ -290,7 +290,7 @@ export default function ReverseLinkedListVisualizer() {
                 </div>
             ),
         },
-    ]
+    ], [step, nodes, arrows, values, valInput, autoScrollCode, handleReset, inputError])
 
     return (
         <div className="problem-shell">

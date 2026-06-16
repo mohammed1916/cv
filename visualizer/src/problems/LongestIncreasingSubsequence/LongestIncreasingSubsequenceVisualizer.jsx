@@ -223,7 +223,7 @@ export default function LongestIncreasingSubsequenceVisualizer() {
         </div>
     )
 
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'viz',
             title: 'Array Visualization',
@@ -238,7 +238,7 @@ export default function LongestIncreasingSubsequenceVisualizer() {
             defaultZone: 'right',
             content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
         },
-    ]
+    ], [inputError, step, setActiveLineDom, autoScrollCode])
 
     return (
         <div className="lis-shell">

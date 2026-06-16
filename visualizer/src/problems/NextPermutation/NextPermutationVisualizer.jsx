@@ -136,7 +136,7 @@ export default function NextPermutationVisualizer() {
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
 
   // Build dock panels for the workspace
-  const dockPanels = [
+  const dockPanels = useMemo(() => [
     {
       id: "examples",
       title: "Examples",
@@ -157,7 +157,7 @@ export default function NextPermutationVisualizer() {
       title: "Status",
       content: <StatusPanel step={step} />,
     },
-  ];
+  ], [ex, applyEx, step, setActiveLineDom, autoScrollCode]);
 
   return (
     <div className="problem-shell">

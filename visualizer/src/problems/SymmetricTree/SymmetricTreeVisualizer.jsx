@@ -397,7 +397,7 @@ export default function SymmetricTreeVisualizer() {
         )
     }
 
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'code',
             title: 'Code',
@@ -408,7 +408,7 @@ export default function SymmetricTreeVisualizer() {
             title: 'Visualization',
             content: <VisualizationPanel />,
         },
-    ]
+    ], [step, autoScrollCode])
 
     return (
         <div className="problem-shell">

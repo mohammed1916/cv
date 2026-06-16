@@ -154,7 +154,7 @@ export default function InterleavingStringVisualizer() {
         </div>
     );
 
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'input',
             title: 'Input Examples',
@@ -190,7 +190,7 @@ export default function InterleavingStringVisualizer() {
             defaultZone: 'full',
             content: <ResultPanelContent />,
         },
-    ];
+    ], [ex, applyEx, InputPanelContent, step, stepIndex, steps, DPTablePanelContent, setActiveLineDom, autoScrollCode, ResultPanelContent]);
 
     return (
         <div className="is-shell">

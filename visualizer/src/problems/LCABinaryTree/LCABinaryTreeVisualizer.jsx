@@ -141,7 +141,7 @@ export default function LCABinaryTreeVisualizer() {
     const allNodes = step?.allNodes ?? []
 
     // Create dockable panels
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'input',
             title: 'Input & Tree',
@@ -230,7 +230,7 @@ export default function LCABinaryTreeVisualizer() {
                 />
             ),
         },
-    ]
+    ], [applyExample, arrInput, handleReset, pInput, qInput, edges, positions, allNodes, step, pVal, qVal, setActiveLineDom, autoScrollCode])
 
     return (
         <div className="lcabt-shell">

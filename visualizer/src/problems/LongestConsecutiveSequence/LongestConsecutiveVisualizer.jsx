@@ -230,7 +230,7 @@ export default function LongestConsecutiveVisualizer() {
     )
 
     // Define dock panels for DockableWorkspace
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'code',
             title: 'Code Trace',
@@ -248,7 +248,7 @@ export default function LongestConsecutiveVisualizer() {
             title: 'Visualization',
             content: <VisualizationContent />,
         },
-    ]
+    ], [step, setActiveLineDom, autoScrollCode])
 
     return (
         <div className="problem-shell">

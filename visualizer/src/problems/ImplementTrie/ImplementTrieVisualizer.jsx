@@ -97,7 +97,7 @@ export default function ImplementTrieVisualizer() {
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
 
-  const dockPanels = [
+  const dockPanels = useMemo(() => [
     {
       id: 'input',
       title: 'Operations',
@@ -186,7 +186,7 @@ export default function ImplementTrieVisualizer() {
         />
       ),
     },
-  ]
+  ], [inputError, applyExample, opsInput, handleReset, step, nodes, setActiveLineDom, autoScrollCode])
 
   return (
     <div className="trie-shell">

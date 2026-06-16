@@ -78,7 +78,7 @@ export default function KthLargestElementVisualizer() {
     handleReset()
   }, [handleReset])
 
-  const dockPanels = [
+  const dockPanels = useMemo(() => [
     {
       id: 'input',
       title: 'Input & Heap Evolution',
@@ -125,7 +125,7 @@ export default function KthLargestElementVisualizer() {
         />
       ),
     },
-  ]
+  ], [inputError, applyExample, numsInput, handleReset, kInput, nums, step, stepIndex, steps, setActiveLineDom, autoScrollCode])
 
   return (
     <div className="kl-shell">

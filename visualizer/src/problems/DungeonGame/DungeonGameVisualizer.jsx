@@ -162,7 +162,7 @@ export default function DungeonGameVisualizer() {
         </div>
     );
 
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'code',
             title: 'Code',
@@ -173,7 +173,7 @@ export default function DungeonGameVisualizer() {
             title: 'Visualization',
             content: <VizPanel />,
         },
-    ];
+    ], [step, setActiveLineDom, ex]);
 
     return (
         <div className="problem-shell">

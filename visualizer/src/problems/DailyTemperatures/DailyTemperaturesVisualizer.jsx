@@ -136,7 +136,7 @@ export default function DailyTemperaturesVisualizer() {
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  const dockPanels = [
+  const dockPanels = useMemo(() => [
     {
       id: 'input',
       title: 'Input & Visualization',
@@ -172,7 +172,7 @@ export default function DailyTemperaturesVisualizer() {
         />
       ),
     },
-  ]
+  ], [temps, step, stepIndex, steps.length, inputError, applyExample, setActiveLineDom, autoScrollCode])
 
   const summaryCards = [
     { label: 'Algorithm', value: 'Monotonic Stack' },

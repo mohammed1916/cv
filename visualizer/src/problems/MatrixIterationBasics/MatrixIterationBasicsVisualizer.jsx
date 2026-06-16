@@ -215,7 +215,7 @@ export default function MatrixIterationBasicsVisualizer({ problem }) {
   }
 
   // Build dockable panels for workspace
-  const dockPanels = [
+  const dockPanels = useMemo(() => [
     {
       id: 'controls',
       title: 'Pattern Controls',
@@ -354,7 +354,7 @@ export default function MatrixIterationBasicsVisualizer({ problem }) {
         </div>
       ),
     },
-  ]
+  ], [mode, exprEnabled, size, error, scannedCount, visitedCount, step, matrix, codeLines, setActiveLineDom, autoScrollCode])
 
   return (
     <div className="mib-shell">

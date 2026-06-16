@@ -192,7 +192,7 @@ export default function BinaryTreeLevelOrderVisualizer() {
     )
 
     // Create dock panels
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'viz',
             title: 'Tree Visualization',
@@ -214,7 +214,7 @@ export default function BinaryTreeLevelOrderVisualizer() {
             defaultZone: 'full',
             content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
         },
-    ]
+    ], [inputError, step, setActiveLineDom, autoScrollCode])
 
     return (
         <div className="btlo-shell">

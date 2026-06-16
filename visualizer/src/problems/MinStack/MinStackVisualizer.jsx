@@ -246,7 +246,7 @@ export default function MinStackVisualizer() {
   const currOp = step?.op;
   const phase = step?.phase;
 
-  const dockPanels = [
+  const dockPanels = useMemo(() => [
     {
       id: "input",
       title: "Operation Builder",
@@ -372,7 +372,7 @@ export default function MinStackVisualizer() {
         />
       ),
     },
-  ];
+  ], [ops.length, selectedExample, applyExample, step, stepIndex, steps.length, stack, minStack, result, phase, autoScrollCode, setActiveLineDom]);
 
   return (
     <div className="ms-shell">

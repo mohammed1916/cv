@@ -180,7 +180,7 @@ export default function LCSVisualizer() {
         </div>
     )
 
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'table',
             title: '2-D DP Table',
@@ -209,7 +209,7 @@ export default function LCSVisualizer() {
                 />
             ),
         },
-    ]
+    ], [t1, t2, step, stepIndex, steps.length, setActiveLineDom, autoScrollCode])
 
     return (
         <div className="problem-shell">

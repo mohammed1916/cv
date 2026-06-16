@@ -173,7 +173,7 @@ export default function PalindromeLinkedListVisualizer() {
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
 
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'code',
             title: 'Code',
@@ -184,7 +184,7 @@ export default function PalindromeLinkedListVisualizer() {
             title: 'Visualization',
             content: <VisualizationPanel step={step} ex={ex} onExampleChange={applyEx} />,
         },
-    ];
+    ], [step, setActiveLineDom, autoScrollCode, ex, applyEx]);
 
     return (
         <div className="problem-shell">

@@ -373,7 +373,7 @@ export default function LRUCacheVisualizer() {
     </div>
   )
 
-  const dockPanels = [
+  const dockPanels = useMemo(() => [
     {
       id: 'input',
       title: 'Sequence Commands',
@@ -399,7 +399,7 @@ export default function LRUCacheVisualizer() {
         />
       ),
     },
-  ]
+  ], [inputError, step, setActiveLineDom, autoScrollCode])
 
   return (
     <div className="lru-shell">

@@ -172,7 +172,7 @@ export default function PermutationsVisualizer() {
         </div>
     )
 
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'viz',
             title: 'Visualization',
@@ -183,7 +183,7 @@ export default function PermutationsVisualizer() {
             title: 'Code',
             content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
         },
-    ]
+    ], [step, autoScrollCode])
 
     return (
         <div className="problem-shell">

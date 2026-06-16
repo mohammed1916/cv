@@ -202,7 +202,7 @@ export default function MaxPointsOnALineVisualizer() {
         </div>
     );
 
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'code',
             title: 'Code',
@@ -213,7 +213,7 @@ export default function MaxPointsOnALineVisualizer() {
             title: 'Visualization',
             content: <VizPanel />,
         },
-    ];
+    ], [step, autoScrollCode, setActiveLineDom]);
 
     return (
         <div className="problem-shell">

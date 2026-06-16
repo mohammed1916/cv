@@ -155,7 +155,7 @@ export default function InsertIntervalVisualizer() {
     const allIntervals = [...intervals];
     const maxVal = Math.max(...allIntervals.flat(), ...newInterval) + 1;
 
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'code',
             title: 'Code',
@@ -166,7 +166,7 @@ export default function InsertIntervalVisualizer() {
             title: 'Visualization',
             content: <IntervalVisualization intervals={intervals} newInterval={newInterval} step={step} maxVal={maxVal} />,
         },
-    ];
+    ], [step, setActiveLineDom, autoScrollCode, intervals, newInterval, maxVal]);
 
     return (
         <div className="problem-shell">

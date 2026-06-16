@@ -121,7 +121,7 @@ export default function JumpGameIIVisualizer() {
 
   const maxVal = Math.max(...ex.nums, 1);
 
-  const dockPanels = [
+  const dockPanels = useMemo(() => [
     {
       id: "input",
       title: "Input Playground",
@@ -171,7 +171,7 @@ export default function JumpGameIIVisualizer() {
         />
       ),
     },
-  ];
+  ], [applyEx, ex, step, stepIndex, steps, maxVal, setActiveLineDom, autoScrollCode]);
 
   return (
     <div className="jg2-shell">

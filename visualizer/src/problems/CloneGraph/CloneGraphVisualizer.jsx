@@ -157,7 +157,7 @@ export default function CloneGraphVisualizer() {
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'code',
             title: 'Code Trace',
@@ -185,7 +185,7 @@ export default function CloneGraphVisualizer() {
                 />
             ),
         },
-    ];
+    ], [step, stepIndex, steps.length, setActiveLineDom, autoScrollCode, ex]);
 
     return (
         <div className="cg-shell">

@@ -207,7 +207,7 @@ export default function LongestIncreasingPathVisualizer() {
         </div>
     );
 
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'viz',
             title: 'Visualization',
@@ -218,7 +218,7 @@ export default function LongestIncreasingPathVisualizer() {
             title: 'Code Trace',
             content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} autoScroll={autoScrollCode} onActiveLineDomChange={setActiveLineDom} />,
         },
-    ];
+    ], [step, autoScrollCode, setActiveLineDom]);
 
     return (
         <div className="problem-shell">

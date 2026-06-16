@@ -194,7 +194,7 @@ export default function NQueensVisualizer() {
   );
 
   // Dock panels configuration
-  const dockPanels = [
+  const dockPanels = useMemo(() => [
     {
       id: "board",
       title: "Board Visualization",
@@ -205,7 +205,7 @@ export default function NQueensVisualizer() {
       title: "Code Trace",
       content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
     },
-  ];
+  ], [step, setActiveLineDom, autoScrollCode, ex.label, n, board, activeRow, activeCol, phase, attacked]);
 
   return (
     <div className="nq-shell">

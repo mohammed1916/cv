@@ -203,7 +203,7 @@ export default function NumberOfIslandsVisualizer() {
   const rows = grid.length
   const cols = grid[0]?.length || 0
 
-  const dockPanels = [
+  const dockPanels = useMemo(() => [
     {
       id: 'grid',
       title: 'Grid View & Input',
@@ -364,7 +364,7 @@ export default function NumberOfIslandsVisualizer() {
         />
       ),
     },
-  ]
+  ], [step, applyExample, gridInput, handleReset, inputError, grid, rows, cols, setActiveLineDom, autoScrollCode])
 
   return (
     <div className="problem-shell">

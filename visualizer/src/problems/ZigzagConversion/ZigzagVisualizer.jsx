@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -322,7 +322,7 @@ export default function ZigzagVisualizer() {
   }, [setIsPlaying, setStepIndex])
 
   // Dock panels configuration
-  const dockPanels = [
+  const dockPanels = useMemo(() => [
     {
       id: 'viz',
       title: 'Visualization',
@@ -343,7 +343,7 @@ export default function ZigzagVisualizer() {
       title: 'Code',
       content: <CodeTracePanel step={currentStep} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />,
     },
-  ]
+  ], [numRows, source, currentStep, previousStep, stepIndex, steps, isDone])
 
   return (
     <div className="zv">

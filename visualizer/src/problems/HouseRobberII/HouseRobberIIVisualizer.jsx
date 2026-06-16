@@ -150,7 +150,7 @@ export default function HouseRobberIIVisualizer() {
         </div>
     )
 
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'input',
             title: 'Input Playground',
@@ -249,7 +249,7 @@ export default function HouseRobberIIVisualizer() {
                 />
             ),
         },
-    ]
+    ], [inputError, applyExample, numsInput, handleReset, nums, step, stepIndex, steps, renderRow, setActiveLineDom, autoScrollCode])
 
     return (
         <div className="problem-shell">

@@ -86,7 +86,7 @@ export default function GenerateParenthesesVisualizer() {
 
     const s = step?.s ?? "";
 
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: "input",
             title: "Input Controls",
@@ -158,7 +158,7 @@ export default function GenerateParenthesesVisualizer() {
                 <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />
             ),
         },
-    ];
+    ], [n, stepIndex, steps, step, applyExample, s, autoScrollCode, setActiveLineDom]);
 
     return (
         <div className="gp-shell">

@@ -145,7 +145,7 @@ export default function ConstructBTVisualizer() {
     const builtSet = new Set((step?.builtNodes ?? []).map((n) => n.id))
     const activeId = step?.phase === 'create' ? step?.id : null
 
-    const dockPanels = [
+    const dockPanels = useMemo(() => [
         {
             id: 'input',
             title: 'Input Playground',
@@ -256,7 +256,7 @@ export default function ConstructBTVisualizer() {
                 />
             ),
         },
-    ]
+    ], [preErr, inoErr, preInput, inoInput, applyExample, handleReset, step, steps, finalTree, treeLayout, allEdges, builtSet, activeId, setActiveLineDom, autoScrollCode])
 
     return (
         <div className="ctpi-shell">

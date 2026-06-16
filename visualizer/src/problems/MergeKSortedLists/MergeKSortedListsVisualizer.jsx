@@ -145,7 +145,7 @@ export default function MergeKSortedListsVisualizer() {
     handleReset()
   }
 
-  const dockPanels = [
+  const dockPanels = useMemo(() => [
     {
       id: 'viz',
       title: 'Heap Visualization',
@@ -176,7 +176,7 @@ export default function MergeKSortedListsVisualizer() {
         />
       ),
     },
-  ]
+  ], [step, stepIndex, steps.length, lists, inputError, input, handleInputChange, applyExample, setActiveLineDom, autoScrollCode])
 
   return (
     <div className="mk-shell">

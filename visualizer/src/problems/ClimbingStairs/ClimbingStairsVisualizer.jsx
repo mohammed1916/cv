@@ -307,7 +307,7 @@ export default function ClimbingStairsVisualizer() {
     </div>
   )
 
-  const dockPanels = [
+  const dockPanels = useMemo(() => [
     {
       id: 'code',
       title: 'Code',
@@ -332,7 +332,7 @@ export default function ClimbingStairsVisualizer() {
       title: 'Variables',
       content: <VariablesPanel />,
     },
-  ]
+  ], [step, SOLUTION_CODE, connectivity.highlightedLines, connectivity.handleLineSelect, autoScrollCode, VisualizationPanel, VariablesPanel, setActiveLineDom])
 
   return (
     <div className="problem-shell">
