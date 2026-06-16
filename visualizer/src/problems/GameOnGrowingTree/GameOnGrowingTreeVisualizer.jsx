@@ -8,6 +8,7 @@ import VisualizationControls from "../../components/VisualizationControls";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { useVisualizationFeatures } from "../../hooks/useVisualizationFeatures";
+import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getVisualizationFeatures } from "../../config/visualizationRegistry";
 import { createPositionStep, createTreeDPStep, createDACStep, createContextualStepBuilder } from "../../utils/stepBuilder";
 import "./GameOnGrowingTreeVisualizer.css";
@@ -27,66 +28,6 @@ import ValueSourceTracking from "./ValueSourceTracking";
 import TreeDPConnector from "./TreeDPConnector";
 
 const MAX_TREE_NODES_TO_RENDER = 120;
-
-const SOLUTION_CODE = [
-  { line: 1, text: "n = int(input())" },
-  {
-    line: 2,
-    text: "parent = [0] + [x - 1 for x in map(int, input().split())]",
-  },
-  { line: 3, text: "if n == 1: print(1); exit()" },
-  { line: 4, text: "" },
-  { line: 5, text: "def solve(size):" },
-  { line: 6, text: "    first = [0] * size" },
-  { line: 7, text: "    second = [0] * size" },
-  { line: 8, text: "    third = [0] * size" },
-  { line: 9, text: "    for node in range(size - 1, 0, -1):" },
-  { line: 10, text: "        p = parent[node]" },
-  { line: 11, text: "        depth = second[node] + 1" },
-  {
-    line: 12,
-    text: "        if depth > first[p]: first[p], second[p], third[p] = depth, first[p], second[p]",
-  },
-  {
-    line: 13,
-    text: "        elif depth > second[p]: second[p], third[p] = depth, second[p]",
-  },
-  { line: 14, text: "        elif depth > third[p]: third[p] = depth" },
-  { line: 15, text: "    for node in range(1, size):" },
-  { line: 16, text: "        p = parent[node]" },
-  { line: 17, text: "        if second[p] <= second[node] + 1:" },
-  { line: 18, text: "            depth = third[p] + 1" },
-  { line: 19, text: "        else:" },
-  { line: 20, text: "            depth = second[p] + 1" },
-  {
-    line: 21,
-    text: "        if depth > first[node]: first[node], second[node], third[node] = depth, first[node], second[node]",
-  },
-  {
-    line: 22,
-    text: "        elif depth > second[node]: second[node], third[node] = depth, second[node]",
-  },
-  { line: 23, text: "        elif depth > third[node]: third[node] = depth" },
-  { line: 24, text: "    return max(second) + 1" },
-  { line: 25, text: "" },
-  { line: 26, text: "ans = [0, 1, 1, 2] + [0] * n" },
-  { line: 27, text: "ans[n + 2] = 17" },
-  { line: 28, text: "stack = [(3, n + 2)]" },
-  { line: 29, text: "while stack:" },
-  { line: 30, text: "    left, right = stack.pop()" },
-  { line: 31, text: "    mid = (left + right) >> 1" },
-  { line: 32, text: "    value = solve(mid)" },
-  { line: 33, text: "    ans[mid] = value" },
-  { line: 34, text: "    if ans[left] == ans[mid]:" },
-  { line: 35, text: "        for i in range(left + 1, mid): ans[i] = value" },
-  { line: 36, text: "    elif left + 1 < mid:" },
-  { line: 37, text: "        stack.append((left, mid))" },
-  { line: 38, text: "    if ans[mid] == ans[right]:" },
-  { line: 39, text: "        for i in range(mid + 1, right): ans[i] = value" },
-  { line: 40, text: "    elif mid + 1 < right:" },
-  { line: 41, text: "        stack.append((mid, right))" },
-  { line: 42, text: "print(*ans[2:n + 2])" },
-];
 
 const EXAMPLES = [
   {
@@ -791,6 +732,9 @@ export default function GameOnGrowingTreeVisualizer() {
   // Use modular visualization features system
   const vizFeatureDefs = getVisualizationFeatures('game-on-growing-tree');
   const { items: vizFeatures, toggle: toggleVizFeature, enabledIds: enabledVizIds } = useVisualizationFeatures(vizFeatureDefs);
+
+  // Load solution code from registry
+  const SOLUTION_CODE = useSolutionCode('game-on-growing-tree');
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
 

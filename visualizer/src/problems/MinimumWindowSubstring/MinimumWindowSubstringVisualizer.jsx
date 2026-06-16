@@ -5,31 +5,9 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { useApplyExample } from '../../hooks/useApplyExample'
 import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
+import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import './MinimumWindowSubstringVisualizer.css'
-
-const SOLUTION_CODE = [
-  { line: 1, text: 'class Solution:' },
-  { line: 2, text: '    def minWindow(self, s: str, t: str) -> str:' },
-  { line: 3, text: '        if not t or not s: return ""' },
-  { line: 4, text: '        need = Counter(t)' },
-  { line: 5, text: '        have = defaultdict(int)' },
-  { line: 6, text: '        required = len(need)' },
-  { line: 7, text: '        formed = 0' },
-  { line: 8, text: '        left = 0' },
-  { line: 9, text: '        best = (inf, 0, 0)' },
-  { line: 10, text: '        for right, ch in enumerate(s):' },
-  { line: 11, text: '            have[ch] += 1' },
-  { line: 12, text: '            if ch in need and have[ch] == need[ch]:' },
-  { line: 13, text: '                formed += 1' },
-  { line: 14, text: '            while left <= right and formed == required:' },
-  { line: 15, text: '                if right-left+1 < best[0]: best = (...)' },
-  { line: 16, text: '                drop = s[left]' },
-  { line: 17, text: '                have[drop] -= 1' },
-  { line: 18, text: '                if drop in need and have[drop] < need[drop]: formed -= 1' },
-  { line: 19, text: '                left += 1' },
-  { line: 20, text: '        return s[l:r+1] if best found else ""' },
-]
 
 function buildNeed(t) {
   const out = {}
@@ -98,6 +76,9 @@ function snippetIdForPhase(phase) {
 }
 
 export default function MinimumWindowSubstringVisualizer() {
+  // Load solution code from registry
+  const SOLUTION_CODE = useSolutionCode('minimum-window-substring')
+
   const [sInput, setSInput] = useState('ADOBECODEBANC')
   const [tInput, setTInput] = useState('ABC')
   const s = sInput ?? ''

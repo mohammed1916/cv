@@ -5,32 +5,9 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { useApplyExample } from '../../hooks/useApplyExample'
 import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
+import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import './CourseScheduleVisualizer.css'
-
-const SOLUTION_CODE = [
-  { line: 1, text: 'class Solution:' },
-  { line: 2, text: '    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:' },
-  { line: 3, text: '        adj = {i: [] for i in range(numCourses)}' },
-  { line: 4, text: '        indegree = [0] * numCourses' },
-  { line: 5, text: '        ' },
-  { line: 6, text: '        for crs, pre in prerequisites:' },
-  { line: 7, text: '            adj[pre].append(crs)' },
-  { line: 8, text: '            indegree[crs] += 1' },
-  { line: 9, text: '            ' },
-  { line: 10, text: '        queue = [i for i in range(numCourses) if indegree[i] == 0]' },
-  { line: 11, text: '        visited = 0' },
-  { line: 12, text: '        ' },
-  { line: 13, text: '        while queue:' },
-  { line: 14, text: '            node = queue.pop(0)' },
-  { line: 15, text: '            visited += 1' },
-  { line: 16, text: '            for neighbor in adj[node]:' },
-  { line: 17, text: '                indegree[neighbor] -= 1' },
-  { line: 18, text: '                if indegree[neighbor] == 0:' },
-  { line: 19, text: '                    queue.append(neighbor)' },
-  { line: 20, text: '                    ' },
-  { line: 21, text: '        return visited == numCourses' },
-]
 
 function generateSteps(numCourses, prerequisites) {
   const steps = []
@@ -217,6 +194,9 @@ function calculateNodePositions(numCourses, width = 400, height = 300) {
 }
 
 export default function CourseScheduleVisualizer() {
+  // Load solution code from registry
+  const SOLUTION_CODE = useSolutionCode('course-schedule')
+
   const [numCoursesInput, setNumCoursesInput] = useState('6')
   const [prereqInput, setPrereqInput] = useState('[[1, 0], [2, 0], [3, 1], [3, 2], [5, 3], [4, 3]]')
 

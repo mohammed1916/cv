@@ -6,6 +6,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { useParsedInput } from '../../hooks/useParsedInput'
 import { useApplyExample } from '../../hooks/useApplyExample'
 import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
+import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput, TreeSVG } from '../../components/treeUtils'
 import './MaxDepthBinaryTreeVisualizer.css'
@@ -13,15 +14,6 @@ import './MaxDepthBinaryTreeVisualizer.css'
 const CANVAS_W = 500
 const CANVAS_H = 320
 const NODE_R = 22
-
-const SOLUTION_CODE = [
-    { line: 1, text: 'class Solution:' },
-    { line: 2, text: '    def maxDepth(self, root):' },
-    { line: 3, text: '        if not root: return 0' },
-    { line: 4, text: '        leftDepth  = self.maxDepth(root.left)' },
-    { line: 5, text: '        rightDepth = self.maxDepth(root.right)' },
-    { line: 6, text: '        return 1 + max(leftDepth, rightDepth)' },
-]
 
 function generateSteps(arr) {
     const steps = []
@@ -106,6 +98,9 @@ function snippetIdForPhase(phase) {
 }
 
 export default function MaxDepthBinaryTreeVisualizer() {
+    // Load solution code from registry
+    const SOLUTION_CODE = useSolutionCode('max-depth-binary-tree')
+
     const [arrInput, setArrInput] = useState('[3,9,20,null,null,15,7]')
 
     const { value: arr, error: inputError } = useParsedInput(

@@ -11,21 +11,9 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
+import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import './ClimbingStairsVisualizer.css'
-
-const SOLUTION_CODE = [
-  { line: 1, text: 'class Solution:' },
-  { line: 2, text: '    def climbStairs(self, n: int) -> int:' },
-  { line: 3, text: '        one, two = 1, 1' },
-  { line: 4, text: '        ' },
-  { line: 5, text: '        for i in range(n - 1):' },
-  { line: 6, text: '            temp = one' },
-  { line: 7, text: '            one = one + two' },
-  { line: 8, text: '            two = temp' },
-  { line: 9, text: '            ' },
-  { line: 10, text: '        return one' },
-]
 
 function generateSteps(n) {
   const steps = []
@@ -89,6 +77,9 @@ const EXAMPLES = [
 
 export default function ClimbingStairsVisualizer() {
   const [nInput, setNInput] = useState('5')
+
+  // Load solution code from registry
+  const SOLUTION_CODE = useSolutionCode('climbing-stairs')
 
   const { n, inputError } = useMemo(() => {
     try {
