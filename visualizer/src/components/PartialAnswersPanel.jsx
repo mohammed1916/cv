@@ -27,6 +27,7 @@ export default function PartialAnswersPanel({
               <div
                 key={idx}
                 className={`partial-answer-cell ${changed ? changedClass : unchangedClass}`}
+                data-node-id={idx}
               >
                 <div className="partial-answer-chip">
                   {labelPrefix}

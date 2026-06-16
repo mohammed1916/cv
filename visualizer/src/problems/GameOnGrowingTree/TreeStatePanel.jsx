@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import PartialAnswersPanel from "../../components/PartialAnswersPanel";
 import { TreeHighlightOverlay } from "./TreeDPLinking";
+import { TreeTraversalHighlight } from "./TraversalTrail";
 
 const TREE_VIEWBOX_WIDTH = 1000;
 const TREE_VIEWBOX_HEIGHT = 300;
@@ -15,6 +16,10 @@ export default function TreeStatePanel({
     dpSnapshot,
     maxTreeNodesToRender,
     step,
+    parentZeroBased,
+    showTraversalTrail,
+    selectedNode,
+    onNodeSelect,
 }) {
     const [treeViewport, setTreeViewport] = useState({ x: 0, y: 0, scale: 1 });
     const [isDraggingTree, setIsDraggingTree] = useState(false);
@@ -233,6 +238,9 @@ export default function TreeStatePanel({
                                                 <g
                                                     key={node}
                                                     transform={`translate(${pos.x}, ${pos.y})`}
+                                                    className={`tree-node-group ${selectedNode === node ? 'selected' : ''}`}
+                                                    onClick={() => onNodeSelect?.(node)}
+                                                    style={{ cursor: 'pointer' }}
                                                 >
                                                     <motion.g
                                                         initial={false}
@@ -297,6 +305,7 @@ export default function TreeStatePanel({
                                 </g>
                             </g>
                             {step && <TreeHighlightOverlay step={step} treeNodePositions={currentTree?.positions} dpSnapshot={dpSnapshot} />}
+                            {showTraversalTrail && step && <TreeTraversalHighlight currentTree={currentTree} parentZeroBased={parentZeroBased} isBottomUp={step.activeLine >= 9 && step.activeLine <= 14} />}
                         </motion.svg>
                     ) : (
                         <div className="gogt-tree-empty">

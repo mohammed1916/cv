@@ -871,6 +871,26 @@
     line-height: 1.4;
 }
 
+/* Interactive tree node selection */
+.tree-node-group {
+    cursor: pointer;
+    transition: filter 0.2s ease;
+}
+
+.tree-node-group.selected .gogt-node {
+    filter: drop-shadow(0 0 12px rgba(76, 110, 245, 0.8));
+    stroke-width: 3;
+}
+
+.tree-node-group.selected .gogt-focus-box {
+  stroke: rgba(76, 110, 245, 1);
+  filter: drop-shadow(0 0 12px rgba(76, 110, 245, 0.8));
+}
+
+.tree-node-group:hover .gogt-node {
+    filter: drop-shadow(0 0 6px rgba(76, 110, 245, 0.5));
+}
+
 @media (max-width: 640px) {
     .gogt-summary-grid,
     .gogt-metrics {

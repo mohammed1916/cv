@@ -1143,6 +1143,10 @@ export default function GameOnGrowingTreeVisualizer() {
           dpSnapshot={dpSnapshot}
           maxTreeNodesToRender={MAX_TREE_NODES_TO_RENDER}
           step={step}
+          parentZeroBased={parentZeroBased}
+          showTraversalTrail={showTraversalTrail}
+          selectedNode={selectedNode}
+          onNodeSelect={setSelectedNode}
         />
       ),
     },
