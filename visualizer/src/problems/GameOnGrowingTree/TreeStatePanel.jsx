@@ -3,6 +3,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import PartialAnswersPanel from "../../components/PartialAnswersPanel";
 import { TreeHighlightOverlay } from "./TreeDPLinking";
 import { TreeTraversalHighlight } from "./TraversalTrail";
+import { PruningLegend, PruningStats } from "./EnhancedTreeVisualization";
+import "./EnhancedTreeVisualization.css";
 
 const TREE_VIEWBOX_WIDTH = 1000;
 const TREE_VIEWBOX_HEIGHT = 300;
@@ -146,6 +148,7 @@ export default function TreeStatePanel({
 
                 <div className="gogt-tree-canvas">
                     {currentTree ? (
+                        <>
                         <motion.svg
                             key={`${currentTree.size}-${stepKey}`}
                             viewBox={`0 0 ${TREE_VIEWBOX_WIDTH} ${TREE_VIEWBOX_HEIGHT}`}
@@ -309,6 +312,77 @@ export default function TreeStatePanel({
                                                         >
                                                             d{nodeDepth}
                                                         </text>
+
+                                                        {/* Top-3 depth badges for pruning visualization */}
+                                                        {dpSnapshot && (
+                                                            <>
+                                                                {/* 1st rank badge - top */}
+                                                                {dpSnapshot.first?.[node] > 0 && (
+                                                                    <g className="tree-depth-badge rank-1">
+                                                                        <circle
+                                                                            cx="0"
+                                                                            cy="-28"
+                                                                            r="6"
+                                                                            className="badge-circle rank-1"
+                                                                        />
+                                                                        <text
+                                                                            x="0"
+                                                                            y="-24"
+                                                                            textAnchor="middle"
+                                                                            fontSize="7"
+                                                                            fontWeight="bold"
+                                                                            className="badge-text"
+                                                                        >
+                                                                            {dpSnapshot.first[node]}
+                                                                        </text>
+                                                                    </g>
+                                                                )}
+
+                                                                {/* 2nd rank badge - left */}
+                                                                {dpSnapshot.second?.[node] > 0 && (
+                                                                    <g className="tree-depth-badge rank-2">
+                                                                        <circle
+                                                                            cx="-24"
+                                                                            cy="0"
+                                                                            r="5"
+                                                                            className="badge-circle rank-2"
+                                                                        />
+                                                                        <text
+                                                                            x="-24"
+                                                                            y="2"
+                                                                            textAnchor="middle"
+                                                                            fontSize="6"
+                                                                            fontWeight="bold"
+                                                                            className="badge-text"
+                                                                        >
+                                                                            {dpSnapshot.second[node]}
+                                                                        </text>
+                                                                    </g>
+                                                                )}
+
+                                                                {/* 3rd rank badge - right */}
+                                                                {dpSnapshot.third?.[node] > 0 && (
+                                                                    <g className="tree-depth-badge rank-3">
+                                                                        <circle
+                                                                            cx="24"
+                                                                            cy="0"
+                                                                            r="4"
+                                                                            className="badge-circle rank-3"
+                                                                        />
+                                                                        <text
+                                                                            x="24"
+                                                                            y="2"
+                                                                            textAnchor="middle"
+                                                                            fontSize="5"
+                                                                            fontWeight="bold"
+                                                                            className="badge-text"
+                                                                        >
+                                                                            {dpSnapshot.third[node]}
+                                                                        </text>
+                                                                    </g>
+                                                                )}
+                                                            </>
+                                                        )}
                                                     </motion.g>
                                                 </g>
                                             );
@@ -319,6 +393,15 @@ export default function TreeStatePanel({
                             {step && <TreeHighlightOverlay step={step} treeNodePositions={currentTree?.positions} dpSnapshot={dpSnapshot} />}
                             {showTraversalTrail && step && <TreeTraversalHighlight currentTree={currentTree} parentZeroBased={parentZeroBased} isBottomUp={step.activeLine >= 9 && step.activeLine <= 14} />}
                         </motion.svg>
+
+                        {/* Pruning Legend and Statistics */}
+                        {dpSnapshot && currentTree && (
+                            <>
+                                <PruningLegend />
+                                <PruningStats dpSnapshot={dpSnapshot} totalNodes={currentTree.size || 0} />
+                            </>
+                        )}
+                        </>
                     ) : (
                         <div className="gogt-tree-empty">
                             Press Play or Next to render the tree for current midpoint.
