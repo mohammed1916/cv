@@ -25,7 +25,7 @@ function generateSteps(originalIntervals) {
   const steps = []
 
   // Clone and sort
-  const intervals = [...originalIntervals].map(a => [...a])
+  const intervals = originalIntervals.map(a => [...a])
 
   steps.push({
     phase: 'init',
