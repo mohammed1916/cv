@@ -1200,46 +1200,46 @@ export default function GameOnGrowingTreeVisualizer() {
             </div>
           ))}
         </div>
-
-        {/* View Mode Toggle */}
-        <div style={{
-          position: 'absolute',
-          top: '16px',
-          right: '16px',
-          display: 'flex',
-          gap: '8px',
-          alignItems: 'center',
-          zIndex: 100,
-        }}>
-          <span style={{
-            fontSize: '11px',
-            fontWeight: 600,
-            textTransform: 'uppercase',
-            letterSpacing: '0.05em',
-            color: '#94a3b8',
-          }}>
-            {viewMode === 'panels' ? 'Panel View' : 'Computation View'}
-          </span>
-          <button
-            onClick={() => setViewMode(viewMode === 'panels' ? 'dual-rep' : 'panels')}
-            style={{
-              padding: '6px 12px',
-              background: viewMode === 'dual-rep' ? 'rgba(59, 130, 246, 0.9)' : 'rgba(100, 116, 139, 0.5)',
-              border: '1px solid rgba(148, 163, 184, 0.3)',
-              borderRadius: '6px',
-              color: '#e2e8f0',
-              fontWeight: 600,
-              fontSize: '12px',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease',
-            }}
-            onMouseEnter={(e) => e.target.style.background = viewMode === 'dual-rep' ? 'rgba(59, 130, 246, 1)' : 'rgba(100, 116, 139, 0.7)'}
-            onMouseLeave={(e) => e.target.style.background = viewMode === 'dual-rep' ? 'rgba(59, 130, 246, 0.9)' : 'rgba(100, 116, 139, 0.5)'}
-          >
-            {viewMode === 'panels' ? '⟨→⟩ Structure' : '⊞ Panels'}
-          </button>
-        </div>
       </section>
+
+      {/* View Mode Toggle */}
+      <div style={{
+        display: 'flex',
+        gap: '8px',
+        alignItems: 'center',
+        padding: '12px 18px',
+        background: 'rgba(30, 41, 59, 0.5)',
+        borderBottom: '1px solid rgba(148, 163, 184, 0.1)',
+        zIndex: 100,
+      }}>
+        <span style={{
+          fontSize: '11px',
+          fontWeight: 600,
+          textTransform: 'uppercase',
+          letterSpacing: '0.05em',
+          color: '#94a3b8',
+        }}>
+          {viewMode === 'panels' ? 'Panel View' : 'Structure View'}
+        </span>
+        <button
+          onClick={() => setViewMode(viewMode === 'panels' ? 'dual-rep' : 'panels')}
+          style={{
+            padding: '6px 12px',
+            background: viewMode === 'dual-rep' ? 'rgba(59, 130, 246, 0.9)' : 'rgba(100, 116, 139, 0.5)',
+            border: '1px solid rgba(148, 163, 184, 0.3)',
+            borderRadius: '6px',
+            color: '#e2e8f0',
+            fontWeight: 600,
+            fontSize: '12px',
+            cursor: 'pointer',
+            transition: 'all 0.2s ease',
+          }}
+          onMouseEnter={(e) => e.target.style.background = viewMode === 'dual-rep' ? 'rgba(59, 130, 246, 1)' : 'rgba(100, 116, 139, 0.7)'}
+          onMouseLeave={(e) => e.target.style.background = viewMode === 'dual-rep' ? 'rgba(59, 130, 246, 0.9)' : 'rgba(100, 116, 139, 0.5)'}
+        >
+          {viewMode === 'panels' ? '⟨→⟩ Structure' : '⊞ Panels'}
+        </button>
+      </div>
       <div style={{ position: 'relative', minHeight: viewMode === 'dual-rep' ? '600px' : 'auto' }}>
         {viewMode === 'panels' ? (
           <>
