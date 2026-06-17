@@ -147,7 +147,9 @@ export default function TrappingRainWaterVisualizer() {
     handleReset()
   }, [handleReset])
 
-  const maxHeightValue = Math.max(...height, 5)
+  const maxHeightValue = useMemo(() => {
+    return Math.max(...height, 5)
+  }, [height])
 
   return (
     <div className="trapping-water-shell">

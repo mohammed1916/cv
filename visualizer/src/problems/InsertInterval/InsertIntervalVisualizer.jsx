@@ -152,8 +152,10 @@ export default function InsertIntervalVisualizer() {
 
     const applyExample = useCallback((i) => { setSel(i); handleReset(); }, [handleReset]);
 
-    const allIntervals = [...intervals];
-    const maxVal = Math.max(...allIntervals.flat(), ...newInterval) + 1;
+    const maxVal = useMemo(() => {
+      const allIntervals = [...intervals];
+      return Math.max(...allIntervals.flat(), ...newInterval) + 1;
+    }, [intervals, newInterval]);
 
     const dockPanels = useMemo(() => [
         {

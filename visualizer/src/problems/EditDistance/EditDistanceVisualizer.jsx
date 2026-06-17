@@ -127,7 +127,9 @@ export default function EditDistanceVisualizer() {
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
   const dpTable = step ? step.dpRef : Array.from({ length: ex.w1.length + 1 }, () => Array.from({ length: ex.w2.length + 1 }, () => 0));
-  const maxVal = step ? Math.max(...dpTable.flat()) : 1;
+  const maxVal = useMemo(() => {
+    return step ? Math.max(...dpTable.flat()) : 1;
+  }, [step?.dp, dpTable]);
 
   // Create dock panels
   const dockPanels = useMemo(() => [

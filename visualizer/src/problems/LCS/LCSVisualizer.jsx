@@ -182,7 +182,9 @@ export default function LCSVisualizer() {
 
     const dp = step?.dpRef ?? Array.from({ length: t1.length + 1 }, () => Array(t2.length + 1).fill(0))
 
-    const CELL = Math.min(44, Math.floor(380 / (t2.length + 2)))
+    const CELL = useMemo(() => {
+      return Math.min(44, Math.floor(380 / (t2.length + 2)))
+    }, [t2.length])
 
     const dockPanels = useMemo(() => [
         {

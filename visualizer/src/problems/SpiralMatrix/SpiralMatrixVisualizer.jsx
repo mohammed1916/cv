@@ -195,6 +195,10 @@ export default function SpiralMatrixVisualizer() {
 
   const colsCount = matrix[0]?.length || 1
 
+  const visitedSet = useMemo(() => {
+    return new Set(step?.res || [])
+  }, [step?.res])
+
   return (
     <div className="spiral-matrix-shell">
       <div className="sm-top">
@@ -239,7 +243,7 @@ export default function SpiralMatrixVisualizer() {
                     )}
 
                     {matrix.map((row, i) => row.map((val, j) => {
-                        const isVisited = step && step.res.includes(val)
+                        const isVisited = step && visitedSet.has(val)
                         const isCurrent = step && step.currI === i && step.currJ === j
                         const isOut = step && (i < step.top || i > step.bottom || j < step.left || j > step.right)
                         

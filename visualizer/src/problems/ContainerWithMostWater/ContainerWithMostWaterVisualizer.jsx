@@ -163,7 +163,9 @@ export default function ContainerWithMostWaterVisualizer() {
     onStepJump: setStepIndex,
   })
 
-  const maxHeightValue = Math.max(...height, 1)
+  const maxHeightValue = useMemo(() => {
+    return Math.max(...height, 1)
+  }, [height])
 
   return (
     <div className="container-water-shell">

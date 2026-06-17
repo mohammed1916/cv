@@ -28,7 +28,7 @@ function generateSteps(originalIntervals) {
 
   steps.push({
     phase: 'init',
-    intervals: JSON.parse(JSON.stringify(originalIntervals)),
+    intervals: originalIntervals,
     merged: [],
     currIdx: null,
     activeLine: 3,
@@ -40,7 +40,7 @@ function generateSteps(originalIntervals) {
 
   steps.push({
     phase: 'sorted',
-    intervals: JSON.parse(JSON.stringify(intervals)),
+    intervals,
     merged: [],
     currIdx: null,
     activeLine: 4,
@@ -55,8 +55,8 @@ function generateSteps(originalIntervals) {
 
     steps.push({
       phase: 'eval',
-      intervals: JSON.parse(JSON.stringify(intervals)),
-      merged: JSON.parse(JSON.stringify(merged)),
+      intervals,
+      merged,
       currIdx: i,
       activeLine: 5,
       message: `Evaluating interval [${interval[0]}, ${interval[1]}].`,
@@ -65,8 +65,8 @@ function generateSteps(originalIntervals) {
 
     steps.push({
       phase: 'check',
-      intervals: JSON.parse(JSON.stringify(intervals)),
-      merged: JSON.parse(JSON.stringify(merged)),
+      intervals,
+      merged,
       currIdx: i,
       activeLine: 6,
       message: merged.length === 0
@@ -79,8 +79,8 @@ function generateSteps(originalIntervals) {
       merged.push([...interval])
       steps.push({
         phase: 'append',
-        intervals: JSON.parse(JSON.stringify(intervals)),
-        merged: JSON.parse(JSON.stringify(merged)),
+        intervals,
+        merged,
         currIdx: i,
         activeLine: 7,
         message: `No overlap. Append [${interval[0]}, ${interval[1]}] to merged list.`,
@@ -93,8 +93,8 @@ function generateSteps(originalIntervals) {
 
       steps.push({
         phase: 'merge',
-        intervals: JSON.parse(JSON.stringify(intervals)),
-        merged: JSON.parse(JSON.stringify(merged)),
+        intervals,
+        merged,
         currIdx: i,
         activeLine: 9,
         message: `Overlap detected! Update end of last merged interval to max(${prevEnd}, ${interval[1]}) = ${newEnd}.`,
@@ -105,8 +105,8 @@ function generateSteps(originalIntervals) {
 
   steps.push({
     phase: 'done',
-    intervals: JSON.parse(JSON.stringify(intervals)),
-    merged: JSON.parse(JSON.stringify(merged)),
+    intervals,
+    merged,
     currIdx: null,
     activeLine: 10,
     message: 'All intervals processed. Return merged list.',
@@ -161,9 +161,12 @@ export default function MergeIntervalsVisualizer() {
   const displayIntervals = step ? step.intervals : originalIntervals
   const displayMerged = step ? step.merged : []
 
-  const minVal = Math.min(0, ...displayIntervals.map(i => i[0]))
-  const maxVal = Math.max(10, ...displayIntervals.map(i => i[1]))
-  const range = Math.max(maxVal - minVal, 1)
+  const { minVal, maxVal, range } = useMemo(() => {
+    const minVal = Math.min(0, ...displayIntervals.map(i => i[0]))
+    const maxVal = Math.max(10, ...displayIntervals.map(i => i[1]))
+    const range = Math.max(maxVal - minVal, 1)
+    return { minVal, maxVal, range }
+  }, [displayIntervals])
 
   return (
     <div className="merge-intervals-shell">

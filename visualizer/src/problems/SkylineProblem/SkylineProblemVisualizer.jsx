@@ -96,25 +96,30 @@ export default function SkylineProblemVisualizer() {
 
   // Derive skyline drawing params
   const buildings = ex.buildings;
-  const maxX = Math.max(...buildings.map(b => b[1]), 0) + 2;
-  const maxH = Math.max(...buildings.map(b => b[2]), 1);
   const SVG_W = 320, SVG_H = 100;
-  const xScale = (SVG_W - 20) / maxX;
-  const hScale = (SVG_H - 10) / maxH;
 
-  // Build skyline polyline from result points
-  const pts = result;
-  let skylinePoints = [];
-  for (let i = 0; i < pts.length; i++) {
-    const [x, h] = pts[i];
-    const px = 10 + x * xScale;
-    const py = SVG_H - h * hScale;
-    if (i === 0) skylinePoints.push(`${px},${SVG_H}`);
-    skylinePoints.push(`${px},${py}`);
-    const nextX = i + 1 < pts.length ? pts[i + 1][0] : maxX;
-    skylinePoints.push(`${10 + nextX * xScale},${py}`);
-  }
-  if (skylinePoints.length > 0) skylinePoints.push(`${10 + maxX * xScale},${SVG_H}`);
+  const { maxX, maxH, xScale, hScale, skylinePoints } = useMemo(() => {
+    const maxX = Math.max(...buildings.map(b => b[1]), 0) + 2;
+    const maxH = Math.max(...buildings.map(b => b[2]), 1);
+    const xScale = (SVG_W - 20) / maxX;
+    const hScale = (SVG_H - 10) / maxH;
+
+    // Build skyline polyline from result points
+    const pts = result;
+    let skylinePoints = [];
+    for (let i = 0; i < pts.length; i++) {
+      const [x, h] = pts[i];
+      const px = 10 + x * xScale;
+      const py = SVG_H - h * hScale;
+      if (i === 0) skylinePoints.push(`${px},${SVG_H}`);
+      skylinePoints.push(`${px},${py}`);
+      const nextX = i + 1 < pts.length ? pts[i + 1][0] : maxX;
+      skylinePoints.push(`${10 + nextX * xScale},${py}`);
+    }
+    if (skylinePoints.length > 0) skylinePoints.push(`${10 + maxX * xScale},${SVG_H}`);
+
+    return { maxX, maxH, xScale, hScale, skylinePoints };
+  }, [buildings, result]);
 
   return (
     <div className="sk-shell">
