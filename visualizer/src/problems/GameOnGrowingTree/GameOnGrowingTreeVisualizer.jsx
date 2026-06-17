@@ -29,6 +29,7 @@ import TreeDPConnector from "./TreeDPConnector";
 import { getExamples } from '../../config/examplesRegistry'
 import SituationOverlay from "./SituationOverlay";
 import { useSituationAnalysis } from "./useSituationAnalysis";
+import { usePruningAnalysis } from "./usePruningAnalysis";
 import DualRepresentationView from "./DualRepresentationView";
 
 const MAX_TREE_NODES_TO_RENDER = 120;
@@ -743,6 +744,9 @@ export default function GameOnGrowingTreeVisualizer() {
 
   // Analyze current situation for visualization
   const situation = useSituationAnalysis(step, prevStep);
+
+  // Analyze pruning for visualization
+  const pruningAnalysis = usePruningAnalysis(step, steps, stepIndex);
 
   // track previous answers to detect per-index changes
   const prevAnswersRef = useRef(null);
