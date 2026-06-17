@@ -75,6 +75,57 @@ const EXAMPLES = [
   { label: 'n = 8', n: 8 },
 ]
 
+function VariablesPanel({ step }) {
+  return (
+    <div className="cs-dp-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+      <div className="cs-dp-panel-head">Variables</div>
+      <div className="cs-dp-panel-body" style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+
+        <div className="cs-dp-var-card one">
+          <span className="cs-dp-var-name">one</span>
+          <span className="cs-dp-var-val">{step?.one ?? 1}</span>
+          <span className="cs-dp-var-desc">Ways to reach current step</span>
+        </div>
+
+        <div className="cs-dp-var-card two">
+          <span className="cs-dp-var-name">two</span>
+          <span className="cs-dp-var-val">{step?.two ?? 1}</span>
+          <span className="cs-dp-var-desc">Ways to reach previous step</span>
+        </div>
+
+        <div className="cs-dp-var-card temp">
+          <span className="cs-dp-var-name">temp</span>
+          <span className="cs-dp-var-val">{step?.temp === null ? 'null' : step?.temp ?? 'null'}</span>
+          <span className="cs-dp-var-desc">Temporary holder</span>
+        </div>
+
+        {step && step.phase !== 'init' && step.i !== null && (
+          <div className="cs-dp-equation">
+            <div className="cs-dp-eq-title">DP Transition:</div>
+            <div className="cs-dp-eq-body">
+              <span className="cs-dp-eq-var one">one</span>
+              <span className="cs-dp-eq-op">=</span>
+              <span className="cs-dp-eq-var temp">temp</span>
+              <span className="cs-dp-eq-op">+</span>
+              <span className="cs-dp-eq-var two">two</span>
+            </div>
+            {step.phase === 'add' && (
+              <div className="cs-dp-eq-body vals">
+                <span className="cs-dp-eq-var one">{step.one}</span>
+                <span className="cs-dp-eq-op">=</span>
+                <span className="cs-dp-eq-var temp">{step.temp}</span>
+                <span className="cs-dp-eq-op">+</span>
+                <span className="cs-dp-eq-var two">{step.two}</span>
+              </div>
+            )}
+          </div>
+        )}
+
+      </div>
+    </div>
+  );
+}
+
 function VisualizationPanel({
   nInput,
   setNInput,
@@ -268,58 +319,6 @@ export default function ClimbingStairsVisualizer() {
 
   const currentStairIndex = step ? (step.i !== null ? step.i + 2 : (step.phase === 'init' ? 1 : n)) : 1
 
-  // Variables Panel Component
-  function VariablesPanel() {
-    return (
-    <div className="cs-dp-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <div className="cs-dp-panel-head">Variables</div>
-      <div className="cs-dp-panel-body" style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-
-        <div className="cs-dp-var-card one">
-          <span className="cs-dp-var-name">one</span>
-          <span className="cs-dp-var-val">{step?.one ?? 1}</span>
-          <span className="cs-dp-var-desc">Ways to reach current step</span>
-        </div>
-
-        <div className="cs-dp-var-card two">
-          <span className="cs-dp-var-name">two</span>
-          <span className="cs-dp-var-val">{step?.two ?? 1}</span>
-          <span className="cs-dp-var-desc">Ways to reach previous step</span>
-        </div>
-
-        <div className="cs-dp-var-card temp">
-          <span className="cs-dp-var-name">temp</span>
-          <span className="cs-dp-var-val">{step?.temp === null ? 'null' : step?.temp ?? 'null'}</span>
-          <span className="cs-dp-var-desc">Temporary holder</span>
-        </div>
-
-        {step && step.phase !== 'init' && step.i !== null && (
-          <div className="cs-dp-equation">
-            <div className="cs-dp-eq-title">DP Transition:</div>
-            <div className="cs-dp-eq-body">
-              <span className="cs-dp-eq-var one">one</span>
-              <span className="cs-dp-eq-op">=</span>
-              <span className="cs-dp-eq-var temp">temp</span>
-              <span className="cs-dp-eq-op">+</span>
-              <span className="cs-dp-eq-var two">two</span>
-            </div>
-            {step.phase === 'add' && (
-              <div className="cs-dp-eq-body vals">
-                <span className="cs-dp-eq-var one">{step.one}</span>
-                <span className="cs-dp-eq-op">=</span>
-                <span className="cs-dp-eq-var temp">{step.temp}</span>
-                <span className="cs-dp-eq-op">+</span>
-                <span className="cs-dp-eq-var two">{step.two}</span>
-              </div>
-            )}
-          </div>
-        )}
-
-      </div>
-    </div>
-    );
-  }
-
   const dockPanels = useMemo(() => [
     {
       id: 'code',
@@ -355,9 +354,9 @@ export default function ClimbingStairsVisualizer() {
     {
       id: 'vars',
       title: 'Variables',
-      content: <VariablesPanel />,
+      content: <VariablesPanel step={step} />,
     },
-  ], [step, SOLUTION_CODE, connectivity.highlightedLines, connectivity.handleLineSelect, autoScrollCode, nInput, setNInput, n, inputError, handleReset, dpTable, currentStairIndex, applyExample, VariablesPanel, setActiveLineDom])
+  ], [step, SOLUTION_CODE, connectivity.highlightedLines, connectivity.handleLineSelect, autoScrollCode, nInput, setNInput, n, inputError, handleReset, dpTable, currentStairIndex, applyExample, setActiveLineDom])
 
   return (
     <div className="problem-shell">

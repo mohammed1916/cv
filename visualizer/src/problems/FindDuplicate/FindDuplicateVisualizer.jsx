@@ -93,32 +93,9 @@ const EXAMPLES = [
     { label: 'Longer', nums: [2, 5, 9, 6, 9, 3, 8, 9, 7, 1] },
 ]
 
-export default function FindDuplicateVisualizer() {
-    const [numsInput, setNumsInput] = useState('[1,3,4,2,2]')
-    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
-    const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
-
-    const { nums, inputError } = useMemo(() => {
-        try {
-            const parsed = JSON.parse(numsInput)
-            if (!Array.isArray(parsed)) throw new Error('Must be an array')
-            return { nums: parsed.map(Number), inputError: '' }
-        } catch (e) {
-            return { nums: [1, 3, 4, 2, 2], inputError: e.message }
-        }
-    }, [numsInput])
-
-    const steps = useMemo(() => generateSteps(nums), [nums])
-    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
-    const step = stepIndex >= 0 ? steps[stepIndex] : null
-
-    const applyExample = useCallback((ex) => {
-        setNumsInput(JSON.stringify(ex.nums))
-        handleReset()
-    }, [handleReset])
-
-    // Visualization component for array and pointers
-    const ArrayVisualizationPanel = () => (
+// Visualization component for array and pointers
+function ArrayVisualizationPanel({ nums, step }) {
+    return (
         <div className="fd-array-container">
             <div className="fd-array-wrap">
                 <div className="fd-indices">
@@ -161,9 +138,11 @@ export default function FindDuplicateVisualizer() {
             </div>
         </div>
     )
+}
 
-    // Metrics panel component
-    const MetricsPanel = () => (
+// Metrics panel component
+function MetricsPanel({ step }) {
+    return (
         <div className="fd-metrics-container">
             <div className="fd-metric"><span className="fd-label">slow</span><strong className="fd-val slow-color">{step?.slow ?? '—'}</strong></div>
             <div className="fd-metric"><span className="fd-label">fast</span><strong className="fd-val fast-color">{step?.fast ?? '—'}</strong></div>
@@ -173,6 +152,31 @@ export default function FindDuplicateVisualizer() {
             <div className="fd-status">{step?.message || 'Press Play to begin.'}</div>
         </div>
     )
+}
+
+export default function FindDuplicateVisualizer() {
+    const [numsInput, setNumsInput] = useState('[1,3,4,2,2]')
+    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+    const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
+
+    const { nums, inputError } = useMemo(() => {
+        try {
+            const parsed = JSON.parse(numsInput)
+            if (!Array.isArray(parsed)) throw new Error('Must be an array')
+            return { nums: parsed.map(Number), inputError: '' }
+        } catch (e) {
+            return { nums: [1, 3, 4, 2, 2], inputError: e.message }
+        }
+    }, [numsInput])
+
+    const steps = useMemo(() => generateSteps(nums), [nums])
+    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
+    const step = stepIndex >= 0 ? steps[stepIndex] : null
+
+    const applyExample = useCallback((ex) => {
+        setNumsInput(JSON.stringify(ex.nums))
+        handleReset()
+    }, [handleReset])
 
     // Dock panels configuration
     const dockPanels = useMemo(() => [
@@ -208,14 +212,14 @@ export default function FindDuplicateVisualizer() {
             title: 'Array Visualization',
             subtitle: `Array length: ${nums.length}`,
             defaultZone: 'right',
-            content: <ArrayVisualizationPanel />,
+            content: <ArrayVisualizationPanel nums={nums} step={step} />,
         },
         {
             id: 'metrics',
             title: 'Pointer State',
             subtitle: step ? `Phase: ${!step.phase1Done ? 'Find cycle' : 'Find entrance'}` : 'Waiting...',
             defaultZone: 'right',
-            content: <MetricsPanel />,
+            content: <MetricsPanel step={step} />,
         },
         {
             id: 'code',
@@ -231,7 +235,7 @@ export default function FindDuplicateVisualizer() {
                 />
             ),
         },
-    ], [inputError, applyExample, numsInput, handleReset, nums.length, step, setActiveLineDom, autoScrollCode])
+    ], [inputError, applyExample, numsInput, handleReset, nums.length, nums, step, setActiveLineDom, autoScrollCode])
 
     return (
         <div className="fd-shell">

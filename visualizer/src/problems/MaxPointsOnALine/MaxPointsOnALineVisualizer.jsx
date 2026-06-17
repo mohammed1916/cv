@@ -97,37 +97,21 @@ function toSvg(points, W, H, PAD) {
     ]);
 }
 
-export default function MaxPointsOnALineVisualizer() {
-    const [ex, setEx] = useState(EXAMPLES[0]);
-    const steps = useMemo(() => generateSteps(ex.points), [ex]);
-    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
-        usePlaybackState(steps.length);
-    const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
-    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
-    const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
-
-    const svgPts = useMemo(() => toSvg(ex.points, W, H, PAD), [ex]);
-    const origin = step?.origin ?? -1;
-    const partner = step?.partner ?? -1;
-    const res = step?.res ?? 1;
-    const slopes = step?.slopes ?? {};
-
-    // Find all points on same slope line from origin
-    const slopePts = (step?.slope && origin >= 0)
-        ? ex.points.reduce((acc, _, idx) => {
-            if (idx === origin) return acc;
-            const [x1, y1] = ex.points[origin];
-            const [x2, y2] = ex.points[idx];
-            const s = normalizeSlope(x2 - x1, y2 - y1);
-            if (s === step.slope) acc.push(idx);
-            return acc;
-        }, [])
-        : [];
-
-    // Visualization component
-    function VizPanel() {
-        return (
+function VizPanel({
+    EXAMPLES,
+    ex,
+    svgPts,
+    W,
+    H,
+    origin,
+    partner,
+    slopePts,
+    step,
+    slopes,
+    res,
+    applyEx,
+}) {
+    return (
         <div className="mpl-viz-container">
             <div className="mpl-examples">
                 {EXAMPLES.map(e => (
@@ -201,8 +185,36 @@ export default function MaxPointsOnALineVisualizer() {
             {step?.done && <div className="mpl-result">✓ Max points on a line = {res}</div>}
             <div className="mpl-status">{step?.message ?? "Press Play to begin."}</div>
         </div>
-        );
-    }
+    );
+}
+
+export default function MaxPointsOnALineVisualizer() {
+    const [ex, setEx] = useState(EXAMPLES[0]);
+    const steps = useMemo(() => generateSteps(ex.points), [ex]);
+    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
+        usePlaybackState(steps.length);
+    const step = stepIndex >= 0 ? steps[stepIndex] : null;
+    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
+    const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
+
+    const svgPts = useMemo(() => toSvg(ex.points, W, H, PAD), [ex]);
+    const origin = step?.origin ?? -1;
+    const partner = step?.partner ?? -1;
+    const res = step?.res ?? 1;
+    const slopes = step?.slopes ?? {};
+
+    // Find all points on same slope line from origin
+    const slopePts = (step?.slope && origin >= 0)
+        ? ex.points.reduce((acc, _, idx) => {
+            if (idx === origin) return acc;
+            const [x1, y1] = ex.points[origin];
+            const [x2, y2] = ex.points[idx];
+            const s = normalizeSlope(x2 - x1, y2 - y1);
+            if (s === step.slope) acc.push(idx);
+            return acc;
+        }, [])
+        : [];
 
     const dockPanels = useMemo(() => [
         {
@@ -213,9 +225,24 @@ export default function MaxPointsOnALineVisualizer() {
         {
             id: 'viz',
             title: 'Visualization',
-            content: <VizPanel />,
+            content: (
+                <VizPanel
+                    EXAMPLES={EXAMPLES}
+                    ex={ex}
+                    svgPts={svgPts}
+                    W={W}
+                    H={H}
+                    origin={origin}
+                    partner={partner}
+                    slopePts={slopePts}
+                    step={step}
+                    slopes={slopes}
+                    res={res}
+                    applyEx={applyEx}
+                />
+            ),
         },
-    ], [step, autoScrollCode, setActiveLineDom]);
+    ], [EXAMPLES, ex, svgPts, W, H, origin, partner, slopePts, step, slopes, res, applyEx, setActiveLineDom, autoScrollCode]);
 
     return (
         <div className="problem-shell">

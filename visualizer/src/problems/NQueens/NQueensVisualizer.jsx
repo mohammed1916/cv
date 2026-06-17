@@ -113,25 +113,9 @@ function getAttacked(board, n) {
   return attacked;
 }
 
-export default function NQueensVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => generateSteps(ex.n), [ex]);
-  const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
-    usePlaybackState(steps.length);
-  const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
-  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
-  const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
-
-  const n = ex.n;
-  const board = step?.boardRef ?? Array.from({ length: n }, () => Array(n).fill("."));
-  const activeRow = step?.row ?? -1;
-  const activeCol = step?.col ?? -1;
-  const phase = step?.phase ?? "init";
-  const attacked = useMemo(() => getAttacked(board, n), [board, n]);
-
-  // Board visualization panel component
-  const BoardPanel = () => (
+// Board visualization panel component
+function BoardPanel({ EXAMPLES, ex, n, board, activeRow, activeCol, phase, attacked, step, applyEx }) {
+  return (
     <div className="nq-panel-content">
       <div className="nq-examples">
         {EXAMPLES.map(e => (
@@ -192,20 +176,38 @@ export default function NQueensVisualizer() {
       <div className="nq-status">{step?.message ?? "Press Play to begin."}</div>
     </div>
   );
+}
+
+export default function NQueensVisualizer() {
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const steps = useMemo(() => generateSteps(ex.n), [ex]);
+  const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
+    usePlaybackState(steps.length);
+  const step = stepIndex >= 0 ? steps[stepIndex] : null;
+  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
+  const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
+
+  const n = ex.n;
+  const board = step?.boardRef ?? Array.from({ length: n }, () => Array(n).fill("."));
+  const activeRow = step?.row ?? -1;
+  const activeCol = step?.col ?? -1;
+  const phase = step?.phase ?? "init";
+  const attacked = useMemo(() => getAttacked(board, n), [board, n]);
 
   // Dock panels configuration
   const dockPanels = useMemo(() => [
     {
       id: "board",
       title: "Board Visualization",
-      content: <BoardPanel />,
+      content: <BoardPanel EXAMPLES={EXAMPLES} ex={ex} n={n} board={board} activeRow={activeRow} activeCol={activeCol} phase={phase} attacked={attacked} step={step} applyEx={applyEx} />,
     },
     {
       id: "code",
       title: "Code Trace",
       content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
     },
-  ], [step, setActiveLineDom, autoScrollCode, ex.label, n, board, activeRow, activeCol, phase, attacked]);
+  ], [EXAMPLES, ex, n, board, activeRow, activeCol, phase, attacked, step, applyEx, setActiveLineDom, autoScrollCode]);
 
   return (
     <div className="nq-shell">

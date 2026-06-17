@@ -109,27 +109,8 @@ function generateSteps(matrix) {
     return steps;
 }
 
-export default function LongestIncreasingPathVisualizer() {
-    const [ex, setEx] = useState(EXAMPLES[0]);
-    const steps = useMemo(() => generateSteps(ex.matrix), [ex]);
-    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
-        usePlaybackState(steps.length);
-    const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
-    const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
-    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
-
-    const matrix = ex.matrix;
-    const dpGrid = step?.dpGrid ?? matrix.map(r => r.map(() => 0));
-    const activeCell = step?.activeCell ?? null;
-    const neighbor = step?.neighbor ?? null;
-    const visiting = step?.visiting ?? [];
-    const globalBest = step?.globalBest ?? 0;
-    const visitSet = new Set(visiting.map(([r, c]) => `${r},${c}`));
-
-    const maxDP = Math.max(...dpGrid.flat(), 1);
-
-    const VisualizationPanel = () => (
+function VisualizationPanel({ EXAMPLES, ex, matrix, dpGrid, activeCell, neighbor, visiting, visitSet, globalBest, step, maxDP, applyEx }) {
+    return (
         <div className="lip-viz-container">
             <div className="lip-examples">
                 {EXAMPLES.map(e => (
@@ -206,19 +187,40 @@ export default function LongestIncreasingPathVisualizer() {
             <div className="lip-status">{step?.message ?? "Press Play to begin."}</div>
         </div>
     );
+}
+
+export default function LongestIncreasingPathVisualizer() {
+    const [ex, setEx] = useState(EXAMPLES[0]);
+    const steps = useMemo(() => generateSteps(ex.matrix), [ex]);
+    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
+        usePlaybackState(steps.length);
+    const step = stepIndex >= 0 ? steps[stepIndex] : null;
+    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+    const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
+    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
+
+    const matrix = ex.matrix;
+    const dpGrid = step?.dpGrid ?? matrix.map(r => r.map(() => 0));
+    const activeCell = step?.activeCell ?? null;
+    const neighbor = step?.neighbor ?? null;
+    const visiting = step?.visiting ?? [];
+    const globalBest = step?.globalBest ?? 0;
+    const visitSet = new Set(visiting.map(([r, c]) => `${r},${c}`));
+
+    const maxDP = Math.max(...dpGrid.flat(), 1);
 
     const dockPanels = useMemo(() => [
         {
             id: 'viz',
             title: 'Visualization',
-            content: <VisualizationPanel />,
+            content: <VisualizationPanel EXAMPLES={EXAMPLES} ex={ex} matrix={matrix} dpGrid={dpGrid} activeCell={activeCell} neighbor={neighbor} visiting={visiting} visitSet={visitSet} globalBest={globalBest} step={step} maxDP={maxDP} applyEx={applyEx} />,
         },
         {
             id: 'code',
             title: 'Code Trace',
             content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} autoScroll={autoScrollCode} onActiveLineDomChange={setActiveLineDom} />,
         },
-    ], [step, autoScrollCode, setActiveLineDom]);
+    ], [step, autoScrollCode, setActiveLineDom, matrix, dpGrid, activeCell, neighbor, visiting, visitSet, globalBest, maxDP, applyEx]);
 
     return (
         <div className="problem-shell">

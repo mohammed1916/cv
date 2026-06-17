@@ -103,40 +103,26 @@ const EXAMPLES = [
     { label: 'Deep', arrInput: '[4,2,6,1,3,5,7]', p: 1, q: 7 },
 ]
 
-export default function LCABSTVisualizer() {
-    const [arrInput, setArrInput] = useState('[6,2,8,0,4,7,9,null,null,3,5]')
-    const [pInput, setPInput] = useState('2')
-    const [qInput, setQInput] = useState('8')
-    const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
-    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
-
-    const { arr, p, q, inputError } = useMemo(() => {
-        try {
-            const { arr, p, q } = parseInputs(arrInput, pInput, qInput)
-            return { arr, p, q, inputError: '' }
-        } catch (e) {
-            return { arr: [6, 2, 8, 0, 4, 7, 9, null, null, 3, 5], p: 2, q: 8, inputError: e.message || 'Invalid input' }
-        }
-    }, [arrInput, pInput, qInput])
-
-    const steps = useMemo(() => generateSteps(arr, p, q), [arr, p, q])
-    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
-    const step = stepIndex >= 0 ? steps[stepIndex] : null
-
-    const applyExample = useCallback((ex) => {
-        setArrInput(ex.arrInput)
-        setPInput(String(ex.p))
-        setQInput(String(ex.q))
-        handleReset()
-    }, [handleReset])
-
-    const positions = step?.positions ?? new Map()
-    const edges = step?.edges ?? []
-    const allNodes = step?.allNodes ?? []
-
-    // Create visualization panel for the tree/search state
-    function TreeVisualizationPanel() {
-        return (
+function TreeVisualizationPanel({
+    positions,
+    edges,
+    allNodes,
+    step,
+    NODE_R,
+    p,
+    q,
+    applyExample,
+    EXAMPLES,
+    arrInput,
+    setArrInput,
+    pInput,
+    setPInput,
+    qInput,
+    setQInput,
+    inputError,
+    handleReset,
+}) {
+    return (
         <div className="lca-viz-container">
             <div className="lca-viz-main">
                 <div className="lca-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
@@ -198,8 +184,39 @@ export default function LCABSTVisualizer() {
                 <div className={`lca-status ${step?.phase === 'done' ? 'ok' : ''}`}>{step?.message || 'Press Play to begin.'}</div>
             </div>
         </div>
-        );
-    }
+    );
+}
+
+export default function LCABSTVisualizer() {
+    const [arrInput, setArrInput] = useState('[6,2,8,0,4,7,9,null,null,3,5]')
+    const [pInput, setPInput] = useState('2')
+    const [qInput, setQInput] = useState('8')
+    const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
+    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+
+    const { arr, p, q, inputError } = useMemo(() => {
+        try {
+            const { arr, p, q } = parseInputs(arrInput, pInput, qInput)
+            return { arr, p, q, inputError: '' }
+        } catch (e) {
+            return { arr: [6, 2, 8, 0, 4, 7, 9, null, null, 3, 5], p: 2, q: 8, inputError: e.message || 'Invalid input' }
+        }
+    }, [arrInput, pInput, qInput])
+
+    const steps = useMemo(() => generateSteps(arr, p, q), [arr, p, q])
+    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
+    const step = stepIndex >= 0 ? steps[stepIndex] : null
+
+    const applyExample = useCallback((ex) => {
+        setArrInput(ex.arrInput)
+        setPInput(String(ex.p))
+        setQInput(String(ex.q))
+        handleReset()
+    }, [handleReset])
+
+    const positions = step?.positions ?? new Map()
+    const edges = step?.edges ?? []
+    const allNodes = step?.allNodes ?? []
 
     const dockPanels = useMemo(() => [
         {
@@ -226,14 +243,34 @@ export default function LCABSTVisualizer() {
         {
             id: 'viz',
             title: 'Tree Visualization',
-            content: <TreeVisualizationPanel />,
+            content: (
+                <TreeVisualizationPanel
+                    positions={positions}
+                    edges={edges}
+                    allNodes={allNodes}
+                    step={step}
+                    NODE_R={NODE_R}
+                    p={p}
+                    q={q}
+                    applyExample={applyExample}
+                    EXAMPLES={EXAMPLES}
+                    arrInput={arrInput}
+                    setArrInput={setArrInput}
+                    pInput={pInput}
+                    setPInput={setPInput}
+                    qInput={qInput}
+                    setQInput={setQInput}
+                    inputError={inputError}
+                    handleReset={handleReset}
+                />
+            ),
         },
         {
             id: 'code',
             title: 'Code Trace',
             content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} autoScroll={autoScrollCode} onActiveLineDomChange={setActiveLineDom} />,
         },
-    ], [arrInput, pInput, qInput, inputError, step, autoScrollCode, setActiveLineDom])
+    ], [positions, edges, allNodes, step, p, q, applyExample, arrInput, setArrInput, pInput, setPInput, qInput, setQInput, inputError, handleReset, autoScrollCode, setActiveLineDom])
 
     return (
         <div className="lca-shell">

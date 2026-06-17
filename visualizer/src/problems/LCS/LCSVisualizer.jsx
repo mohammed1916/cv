@@ -78,31 +78,9 @@ const EXAMPLES = [
 
 const MAX_LEN = 10
 
-export default function LCSVisualizer() {
-    const [text1, setText1] = useState('abcde')
-    const [text2, setText2] = useState('ace')
-
-    const t1 = text1.slice(0, MAX_LEN)
-    const t2 = text2.slice(0, MAX_LEN)
-
-    const steps = useMemo(() => generateSteps(t1, t2), [t1, t2])
-    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
-    const step = stepIndex >= 0 ? steps[stepIndex] : null
-    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
-    const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
-
-    const applyExample = useCallback((ex) => {
-        setText1(ex.t1)
-        setText2(ex.t2)
-        handleReset()
-    }, [handleReset])
-
-    const dp = step?.dpRef ?? Array.from({ length: t1.length + 1 }, () => Array(t2.length + 1).fill(0))
-
-    const CELL = Math.min(44, Math.floor(380 / (t2.length + 2)))
-
-    // 2-D DP Table Panel Component
-    const DPTablePanel = () => (
+// 2-D DP Table Panel Component
+function DPTablePanel({ EXAMPLES, t1, t2, dp, step, stepIndex, steps, CELL, applyExample, handleReset, setText1, setText2, MAX_LEN, text1, text2 }) {
+    return (
         <div className="lcs-body">
             <div className="lcs-examples">
                 {EXAMPLES.map((ex) => (
@@ -152,9 +130,11 @@ export default function LCSVisualizer() {
             </div>
         </div>
     )
+}
 
-    // Current Cell Info Panel Component
-    const CurrentCellPanel = () => (
+// Current Cell Info Panel Component
+function CurrentCellPanel({ step, t1, t2, dp }) {
+    return (
         <div className="lcs-body">
             <div className="lcs-info-row"><span className="lcs-label">i</span><strong className="lcs-val">{step?.activeI ?? '—'}</strong></div>
             <div className="lcs-info-row"><span className="lcs-label">j</span><strong className="lcs-val">{step?.activeJ ?? '—'}</strong></div>
@@ -179,6 +159,30 @@ export default function LCSVisualizer() {
             </div>
         </div>
     )
+}
+
+export default function LCSVisualizer() {
+    const [text1, setText1] = useState('abcde')
+    const [text2, setText2] = useState('ace')
+
+    const t1 = text1.slice(0, MAX_LEN)
+    const t2 = text2.slice(0, MAX_LEN)
+
+    const steps = useMemo(() => generateSteps(t1, t2), [t1, t2])
+    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
+    const step = stepIndex >= 0 ? steps[stepIndex] : null
+    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+    const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
+
+    const applyExample = useCallback((ex) => {
+        setText1(ex.t1)
+        setText2(ex.t2)
+        handleReset()
+    }, [handleReset])
+
+    const dp = step?.dpRef ?? Array.from({ length: t1.length + 1 }, () => Array(t2.length + 1).fill(0))
+
+    const CELL = Math.min(44, Math.floor(380 / (t2.length + 2)))
 
     const dockPanels = useMemo(() => [
         {
@@ -186,14 +190,14 @@ export default function LCSVisualizer() {
             title: '2-D DP Table',
             subtitle: `text1="${t1}", text2="${t2}"`,
             defaultZone: 'left',
-            content: <DPTablePanel />,
+            content: <DPTablePanel EXAMPLES={EXAMPLES} t1={t1} t2={t2} dp={dp} step={step} stepIndex={stepIndex} steps={steps} CELL={CELL} applyExample={applyExample} handleReset={handleReset} setText1={setText1} setText2={setText2} MAX_LEN={MAX_LEN} text1={text1} text2={text2} />,
         },
         {
             id: 'cell-info',
             title: 'Current Cell',
             subtitle: step ? `Step ${stepIndex + 1} of ${steps.length}` : 'Ready',
             defaultZone: 'right',
-            content: <CurrentCellPanel />,
+            content: <CurrentCellPanel step={step} t1={t1} t2={t2} dp={dp} />,
         },
         {
             id: 'code',
@@ -209,7 +213,7 @@ export default function LCSVisualizer() {
                 />
             ),
         },
-    ], [t1, t2, step, stepIndex, steps.length, setActiveLineDom, autoScrollCode])
+    ], [EXAMPLES, t1, t2, dp, step, stepIndex, steps, CELL, applyExample, handleReset, setText1, setText2, text1, text2, setActiveLineDom, autoScrollCode])
 
     return (
         <div className="problem-shell">

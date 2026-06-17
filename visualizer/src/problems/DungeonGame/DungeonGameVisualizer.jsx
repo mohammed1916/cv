@@ -75,22 +75,8 @@ function generateSteps(dungeon) {
 
 const CELL_W = 46, CELL_H = 38;
 
-export default function DungeonGameVisualizer() {
-    const [ex, setEx] = useState(EXAMPLES[0]);
-    const steps = useMemo(() => generateSteps(ex.dungeon), [ex]);
-    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
-        usePlaybackState(steps.length);
-    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
-    const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
-
-    const dp = step?.dp ?? [];
-    const activeR = step?.r ?? -1;
-    const activeC = step?.c ?? -1;
-    const dungeon = ex.dungeon;
-    const R = dungeon.length, C = dungeon[0].length;
-
-    const VizPanel = () => (
+function VizPanel({ EXAMPLES, ex, dungeon, R, C, CELL_W, CELL_H, dp, activeR, activeC, step, applyEx, setActiveLineDom }) {
+    return (
         <div className="dg-viz-panel">
             <div className="dg-examples">
                 {EXAMPLES.map(e => (
@@ -161,6 +147,22 @@ export default function DungeonGameVisualizer() {
             <div className="dg-status">{step?.message ?? "Press Play to begin."}</div>
         </div>
     );
+}
+
+export default function DungeonGameVisualizer() {
+    const [ex, setEx] = useState(EXAMPLES[0]);
+    const steps = useMemo(() => generateSteps(ex.dungeon), [ex]);
+    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
+        usePlaybackState(steps.length);
+    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
+    const step = stepIndex >= 0 ? steps[stepIndex] : null;
+    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+
+    const dp = step?.dp ?? [];
+    const activeR = step?.r ?? -1;
+    const activeC = step?.c ?? -1;
+    const dungeon = ex.dungeon;
+    const R = dungeon.length, C = dungeon[0].length;
 
     const dockPanels = useMemo(() => [
         {
@@ -171,9 +173,9 @@ export default function DungeonGameVisualizer() {
         {
             id: 'viz',
             title: 'Visualization',
-            content: <VizPanel />,
+            content: <VizPanel EXAMPLES={EXAMPLES} ex={ex} dungeon={dungeon} R={R} C={C} CELL_W={CELL_W} CELL_H={CELL_H} dp={dp} activeR={activeR} activeC={activeC} step={step} applyEx={applyEx} setActiveLineDom={setActiveLineDom} />,
         },
-    ], [step, setActiveLineDom, ex]);
+    ], [step, setActiveLineDom, ex, dungeon, R, C, dp, activeR, activeC, applyEx]);
 
     return (
         <div className="problem-shell">

@@ -67,33 +67,8 @@ const EXAMPLES = [
     { label: "[3,4,7,2,-3,1,4,2] k=7", nums: [3, 4, 7, 2, -3, 1, 4, 2], k: 7 },
 ];
 
-function parseNums(str) {
-    try { const p = JSON.parse(str); if (!Array.isArray(p)) throw new Error(); return { nums: p.map(Number), err: "" }; }
-    catch { return { nums: [], err: "Invalid" }; }
-}
-
-export default function SubarraySumKVisualizer() {
-    const [numsInput, setNumsInput] = useState("[1,1,1]");
-    const [kInput, setKInput] = useState("2");
-
-    const { nums, err } = useMemo(() => parseNums(numsInput), [numsInput]);
-    const k = useMemo(() => parseInt(kInput, 10) || 0, [kInput]);
-
-    const steps = useMemo(() => (nums.length ? generateSteps(nums, k) : []), [nums, k]);
-    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
-        usePlaybackState(steps.length);
-    const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
-    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
-
-    const applyExample = useCallback(
-        (ex) => { setNumsInput(JSON.stringify(ex.nums)); setKInput(String(ex.k)); handleReset(); },
-        [handleReset]
-    );
-
-    // Visualization panel component
-    function VizPanel() {
-        return (
+function VizPanel({ nums, step, k }) {
+    return (
         <div>
             {/* Array + prefix display */}
             <div className="ssk-panel">
@@ -136,8 +111,32 @@ export default function SubarraySumKVisualizer() {
 
             <div className="ssk-status">{step?.message ?? "Press Play to begin."}</div>
         </div>
-        );
-    }
+    );
+}
+
+function parseNums(str) {
+    try { const p = JSON.parse(str); if (!Array.isArray(p)) throw new Error(); return { nums: p.map(Number), err: "" }; }
+    catch { return { nums: [], err: "Invalid" }; }
+}
+
+export default function SubarraySumKVisualizer() {
+    const [numsInput, setNumsInput] = useState("[1,1,1]");
+    const [kInput, setKInput] = useState("2");
+
+    const { nums, err } = useMemo(() => parseNums(numsInput), [numsInput]);
+    const k = useMemo(() => parseInt(kInput, 10) || 0, [kInput]);
+
+    const steps = useMemo(() => (nums.length ? generateSteps(nums, k) : []), [nums, k]);
+    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
+        usePlaybackState(steps.length);
+    const step = stepIndex >= 0 ? steps[stepIndex] : null;
+    const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
+    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
+
+    const applyExample = useCallback(
+        (ex) => { setNumsInput(JSON.stringify(ex.nums)); setKInput(String(ex.k)); handleReset(); },
+        [handleReset]
+    );
 
     const dockPanels = useMemo(() => [
         {
@@ -148,9 +147,9 @@ export default function SubarraySumKVisualizer() {
         {
             id: 'viz',
             title: 'Visualization',
-            content: <VizPanel />,
+            content: <VizPanel nums={nums} step={step} k={k} />,
         },
-    ], [step, autoScrollCode]);
+    ], [step, autoScrollCode, nums, k]);
 
     return (
         <div className="problem-shell">

@@ -127,34 +127,9 @@ const EXAMPLES = [
     { label: 'Left Heavy', arr: [1, 2, null, 3, 4] },
 ]
 
-export default function InvertBinaryTreeVisualizer() {
-    const [arrInput, setArrInput] = useState('[4,2,7,1,3,6,9]')
-    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
-    const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
-
-    const { arr, inputError } = useMemo(() => {
-        try {
-            return { arr: parseTreeInput(arrInput), inputError: '' }
-        } catch (e) {
-            return { arr: [4, 2, 7, 1, 3, 6, 9], inputError: e.message || 'Invalid input' }
-        }
-    }, [arrInput])
-
-    const steps = useMemo(() => generateSteps(arr), [arr])
-    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
-    const step = stepIndex >= 0 ? steps[stepIndex] : null
-
-    const applyExample = useCallback((ex) => {
-        setArrInput(JSON.stringify(ex.arr))
-        handleReset()
-    }, [handleReset])
-
-    const positions = step?.positions ?? new Map()
-    const edges = step?.edges ?? []
-    const nodes = step?.nodes ?? []
-
-    // Visualization component
-    const TreeVisualization = () => (
+// Visualization component
+function TreeVisualization({ positions, edges, nodes, step, NODE_R }) {
+    return (
         <div className="ibt-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
             <svg style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }} width={CANVAS_W} height={CANVAS_H}>
                 {edges.map(({ fromId, toId }) => {
@@ -187,9 +162,11 @@ export default function InvertBinaryTreeVisualizer() {
             })}
         </div>
     )
+}
 
-    // Progress panel component
-    const ProgressPanel = () => (
+// Progress panel component
+function ProgressPanel({ step }) {
+    return (
         <div className="ibt-body">
             <div className="ibt-legend">
                 <div className="ibt-legend-item"><div className="ibt-dot active" />Active node</div>
@@ -209,9 +186,11 @@ export default function InvertBinaryTreeVisualizer() {
             </div>
         </div>
     )
+}
 
-    // Input panel component
-    const InputPanel = () => (
+// Input panel component
+function InputPanel({ EXAMPLES, arrInput, setArrInput, inputError, handleReset, applyExample }) {
+    return (
         <div className="ibt-body">
             <div className="ibt-examples">
                 {EXAMPLES.map((ex) => (
@@ -222,6 +201,33 @@ export default function InvertBinaryTreeVisualizer() {
             {inputError && <span className="ibt-error">{inputError}</span>}
         </div>
     )
+}
+
+export default function InvertBinaryTreeVisualizer() {
+    const [arrInput, setArrInput] = useState('[4,2,7,1,3,6,9]')
+    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+    const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
+
+    const { arr, inputError } = useMemo(() => {
+        try {
+            return { arr: parseTreeInput(arrInput), inputError: '' }
+        } catch (e) {
+            return { arr: [4, 2, 7, 1, 3, 6, 9], inputError: e.message || 'Invalid input' }
+        }
+    }, [arrInput])
+
+    const steps = useMemo(() => generateSteps(arr), [arr])
+    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
+    const step = stepIndex >= 0 ? steps[stepIndex] : null
+
+    const applyExample = useCallback((ex) => {
+        setArrInput(JSON.stringify(ex.arr))
+        handleReset()
+    }, [handleReset])
+
+    const positions = step?.positions ?? new Map()
+    const edges = step?.edges ?? []
+    const nodes = step?.nodes ?? []
 
     const dockPanels = useMemo(() => [
         {
@@ -229,7 +235,7 @@ export default function InvertBinaryTreeVisualizer() {
             title: 'Input',
             subtitle: inputError ? 'Fix the input to resume playback.' : 'Edit the tree array and replay.',
             defaultZone: 'left',
-            content: <InputPanel />
+            content: <InputPanel EXAMPLES={EXAMPLES} arrInput={arrInput} setArrInput={setArrInput} inputError={inputError} handleReset={handleReset} applyExample={applyExample} />
         },
         {
             id: 'viz',
@@ -238,7 +244,7 @@ export default function InvertBinaryTreeVisualizer() {
             defaultZone: 'left',
             content: (
                 <div style={{ padding: '14px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                    <TreeVisualization />
+                    <TreeVisualization positions={positions} edges={edges} nodes={nodes} step={step} NODE_R={NODE_R} />
                     <div style={{ fontSize: '13px', color: '#a6adc8', padding: '8px 12px', background: '#1e1e2e', borderRadius: '8px' }}>
                         {step?.message || 'Press Play to begin.'}
                     </div>
@@ -250,7 +256,7 @@ export default function InvertBinaryTreeVisualizer() {
             title: 'Progress',
             subtitle: step?.phase ? `Phase: ${step.phase}` : 'Waiting to start...',
             defaultZone: 'right',
-            content: <ProgressPanel />
+            content: <ProgressPanel step={step} />
         },
         {
             id: 'code',
@@ -266,7 +272,7 @@ export default function InvertBinaryTreeVisualizer() {
                 />
             )
         }
-    ], [inputError, applyExample, arrInput, handleReset, stepIndex, steps, TreeVisualization, step, ProgressPanel, autoScrollCode, setActiveLineDom, InputPanel])
+    ], [EXAMPLES, arrInput, setArrInput, inputError, handleReset, applyExample, positions, edges, nodes, step, NODE_R, stepIndex, steps.length, autoScrollCode, setActiveLineDom])
 
     return (
         <div className="ibt-shell">

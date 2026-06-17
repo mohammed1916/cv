@@ -114,40 +114,8 @@ const EXAMPLES = [
     { label: 'Same key', strs: ['abc', 'acb', 'bac', 'bca', 'cab', 'cba'] },
 ]
 
-export default function GroupAnagramsVisualizer() {
-    const [input, setInput] = useState('["eat","tea","tan","ate","nat","bat"]')
-    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
-    const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
-
-    const { strs, inputError } = useMemo(() => {
-        try {
-            const parsed = JSON.parse(input)
-            if (!Array.isArray(parsed) || !parsed.every(s => typeof s === 'string'))
-                throw new Error('Must be a JSON array of strings')
-            if (parsed.length > 12) throw new Error('Max 12 words for clarity')
-            return { strs: parsed, inputError: '' }
-        } catch (e) {
-            return { strs: ['eat', 'tea', 'tan', 'ate', 'nat', 'bat'], inputError: e.message }
-        }
-    }, [input])
-
-    const steps = useMemo(() => generateSteps(strs), [strs])
-    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
-
-    const step = stepIndex >= 0 ? steps[stepIndex] : null
-    const applyExample = useCallback((ex) => {
-        setInput(JSON.stringify(ex.strs))
-        handleReset()
-    }, [handleReset])
-
-    const anagramMap = step?.anagramMap ?? {}
-    const keyToColor = step?.keyToColor ?? {}
-    const currentKey = step?.currentKey ?? null
-    const currentWordIdx = step?.currentWordIdx ?? -1
-
-    // Visualization component (words, keys, groups)
-    function VisualizationPanel() {
-        return (
+function VisualizationPanel({ strs, step, currentWordIdx, currentKey, anagramMap, keyToColor }) {
+    return (
         <div className="ga-body">
             {/* Words row */}
             <div className="ga-section-title">Input Words</div>
@@ -211,8 +179,39 @@ export default function GroupAnagramsVisualizer() {
                 {step?.message ?? 'Press Play or Step to begin.'}
             </div>
         </div>
-        );
-    }
+    );
+}
+
+export default function GroupAnagramsVisualizer() {
+    const [input, setInput] = useState('["eat","tea","tan","ate","nat","bat"]')
+    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+    const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
+
+    const { strs, inputError } = useMemo(() => {
+        try {
+            const parsed = JSON.parse(input)
+            if (!Array.isArray(parsed) || !parsed.every(s => typeof s === 'string'))
+                throw new Error('Must be a JSON array of strings')
+            if (parsed.length > 12) throw new Error('Max 12 words for clarity')
+            return { strs: parsed, inputError: '' }
+        } catch (e) {
+            return { strs: ['eat', 'tea', 'tan', 'ate', 'nat', 'bat'], inputError: e.message }
+        }
+    }, [input])
+
+    const steps = useMemo(() => generateSteps(strs), [strs])
+    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
+
+    const step = stepIndex >= 0 ? steps[stepIndex] : null
+    const applyExample = useCallback((ex) => {
+        setInput(JSON.stringify(ex.strs))
+        handleReset()
+    }, [handleReset])
+
+    const anagramMap = step?.anagramMap ?? {}
+    const keyToColor = step?.keyToColor ?? {}
+    const currentKey = step?.currentKey ?? null
+    const currentWordIdx = step?.currentWordIdx ?? -1
 
     const dockPanels = useMemo(() => [
         {
@@ -244,7 +243,7 @@ export default function GroupAnagramsVisualizer() {
             title: 'Hash Map Visualization',
             subtitle: step ? `Step ${stepIndex + 1} of ${steps.length}` : 'Press play to start.',
             defaultZone: 'right',
-            content: <VisualizationPanel />,
+            content: <VisualizationPanel strs={strs} step={step} currentWordIdx={currentWordIdx} currentKey={currentKey} anagramMap={anagramMap} keyToColor={keyToColor} />,
         },
         {
             id: 'code',
@@ -260,7 +259,7 @@ export default function GroupAnagramsVisualizer() {
                 />
             ),
         },
-    ], [input, inputError, applyExample, step, stepIndex, steps, VisualizationPanel, setActiveLineDom, autoScrollCode])
+    ], [input, inputError, applyExample, step, stepIndex, steps, strs, currentWordIdx, currentKey, anagramMap, keyToColor, setActiveLineDom, autoScrollCode])
 
     return (
         <div className="ga-shell">

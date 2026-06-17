@@ -117,6 +117,70 @@ const EXAMPLES = [
     { label: 'Single', arr: [1] },
 ]
 
+function VisualizationPanel({
+    EXAMPLES,
+    arrInput,
+    setArrInput,
+    positions,
+    edges,
+    allNodes,
+    step,
+    applyExample,
+    handleReset,
+    CANVAS_W,
+    CANVAS_H,
+    NODE_R,
+}) {
+    return (
+        <div className="btlo-viz-panel">
+            <div className="btlo-examples">
+                {EXAMPLES.map((ex) => (
+                    <button key={ex.label} className="btlo-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
+                ))}
+            </div>
+            <input className="btlo-input" value={arrInput} onChange={(e) => { setArrInput(e.target.value); handleReset() }} />
+            <div className="btlo-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
+                <TreeCanvas3D
+                    positions={positions}
+                    edges={edges}
+                    allNodes={allNodes}
+                    activeIds={step?.activeIds ?? new Set()}
+                    visitedIds={step?.visitedIds ?? new Set()}
+                    queueIds={step?.queueIds ?? new Set()}
+                    canvasWidth={CANVAS_W}
+                    canvasHeight={CANVAS_H}
+                    nodeRadius={NODE_R}
+                />
+            </div>
+        </div>
+    );
+}
+
+function ResultPanel({
+    step,
+    inputError,
+    LEVEL_COLORS,
+}) {
+    return (
+        <div className="btlo-result-panel">
+            <div className="btlo-queue-label">Queue: [{[...(step?.queueIds ?? [])].join(', ')}]</div>
+            <div className="btlo-levels">
+                {(step?.levels ?? []).map((level, i) => (
+                    <div key={i} className="btlo-level-row" style={{ borderLeftColor: LEVEL_COLORS[i % LEVEL_COLORS.length] }}>
+                        <span className="btlo-level-idx">L{i}</span>
+                        <span className="btlo-level-vals">[{level.join(', ')}]</span>
+                    </div>
+                ))}
+                {(step?.levels?.length === 0) && <div className="btlo-empty">No levels yet</div>}
+            </div>
+            <div className={`btlo-result ${step?.phase === 'done' ? 'ok' : ''}`}>
+                {step?.phase === 'done' ? `${step.levels.length} levels` : 'Running BFS…'}
+            </div>
+            {inputError && <div className="btlo-error-box">{inputError}</div>}
+        </div>
+    );
+}
+
 export default function BinaryTreeLevelOrderVisualizer() {
     const [arrInput, setArrInput] = useState('[3,9,20,null,null,15,7]')
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
@@ -146,55 +210,6 @@ export default function BinaryTreeLevelOrderVisualizer() {
     // Color level bands
     const LEVEL_COLORS = ['#89b4fa', '#a6e3a1', '#f9e2af', '#cba6f7', '#f38ba8', '#89dceb']
 
-    // Visualization Panel Component
-    function VisualizationPanel() {
-        return (
-        <div className="btlo-viz-panel">
-            <div className="btlo-examples">
-                {EXAMPLES.map((ex) => (
-                    <button key={ex.label} className="btlo-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                ))}
-            </div>
-            <input className="btlo-input" value={arrInput} onChange={(e) => { setArrInput(e.target.value); handleReset() }} />
-            <div className="btlo-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
-                <TreeCanvas3D
-                    positions={positions}
-                    edges={edges}
-                    allNodes={allNodes}
-                    activeIds={step?.activeIds ?? new Set()}
-                    visitedIds={step?.visitedIds ?? new Set()}
-                    queueIds={step?.queueIds ?? new Set()}
-                    canvasWidth={CANVAS_W}
-                    canvasHeight={CANVAS_H}
-                    nodeRadius={NODE_R}
-                />
-            </div>
-        </div>
-        );
-    }
-
-    // Result Panel Component
-    function ResultPanel() {
-        return (
-        <div className="btlo-result-panel">
-            <div className="btlo-queue-label">Queue: [{[...(step?.queueIds ?? [])].join(', ')}]</div>
-            <div className="btlo-levels">
-                {(step?.levels ?? []).map((level, i) => (
-                    <div key={i} className="btlo-level-row" style={{ borderLeftColor: LEVEL_COLORS[i % LEVEL_COLORS.length] }}>
-                        <span className="btlo-level-idx">L{i}</span>
-                        <span className="btlo-level-vals">[{level.join(', ')}]</span>
-                    </div>
-                ))}
-                {(step?.levels?.length === 0) && <div className="btlo-empty">No levels yet</div>}
-            </div>
-            <div className={`btlo-result ${step?.phase === 'done' ? 'ok' : ''}`}>
-                {step?.phase === 'done' ? `${step.levels.length} levels` : 'Running BFS…'}
-            </div>
-            {inputError && <div className="btlo-error-box">{inputError}</div>}
-        </div>
-        );
-    }
-
     // Create dock panels
     const dockPanels = useMemo(() => [
         {
@@ -202,14 +217,35 @@ export default function BinaryTreeLevelOrderVisualizer() {
             title: 'Tree Visualization',
             subtitle: inputError ? 'Fix the input to resume playback.' : 'Visualize the BFS traversal.',
             defaultZone: 'left',
-            content: <VisualizationPanel />,
+            content: (
+                <VisualizationPanel
+                    EXAMPLES={EXAMPLES}
+                    arrInput={arrInput}
+                    setArrInput={setArrInput}
+                    positions={positions}
+                    edges={edges}
+                    allNodes={allNodes}
+                    step={step}
+                    applyExample={applyExample}
+                    handleReset={handleReset}
+                    CANVAS_W={CANVAS_W}
+                    CANVAS_H={CANVAS_H}
+                    NODE_R={NODE_R}
+                />
+            ),
         },
         {
             id: 'result',
             title: 'Level Results',
             subtitle: step ? `Phase: ${step.phase}` : 'Levels discovered by BFS.',
             defaultZone: 'left',
-            content: <ResultPanel />,
+            content: (
+                <ResultPanel
+                    step={step}
+                    inputError={inputError}
+                    LEVEL_COLORS={LEVEL_COLORS}
+                />
+            ),
         },
         {
             id: 'code',
@@ -218,7 +254,7 @@ export default function BinaryTreeLevelOrderVisualizer() {
             defaultZone: 'full',
             content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
         },
-    ], [inputError, step, setActiveLineDom, autoScrollCode])
+    ], [arrInput, setArrInput, positions, edges, allNodes, step, applyExample, handleReset, inputError, setActiveLineDom, autoScrollCode])
 
     return (
         <div className="btlo-shell">
