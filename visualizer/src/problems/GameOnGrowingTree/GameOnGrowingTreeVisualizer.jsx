@@ -1272,7 +1272,7 @@ export default function GameOnGrowingTreeVisualizer() {
             dpSnapshot={dpSnapshot}
             totalNodes={currentTree?.size ?? 0}
             pruningAnalysis={pruningAnalysis}
-            situationAnalysis={situationAnalysis}
+            situationAnalysis={situation}
           />
         )}
       </div>
