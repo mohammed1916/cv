@@ -126,7 +126,8 @@ export default function MaxPointsOnALineVisualizer() {
         : [];
 
     // Visualization component
-    const VizPanel = () => (
+    function VizPanel() {
+        return (
         <div className="mpl-viz-container">
             <div className="mpl-examples">
                 {EXAMPLES.map(e => (
@@ -200,7 +201,8 @@ export default function MaxPointsOnALineVisualizer() {
             {step?.done && <div className="mpl-result">✓ Max points on a line = {res}</div>}
             <div className="mpl-status">{step?.message ?? "Press Play to begin."}</div>
         </div>
-    );
+        );
+    }
 
     const dockPanels = useMemo(() => [
         {

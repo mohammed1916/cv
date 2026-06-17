@@ -146,7 +146,8 @@ export default function GroupAnagramsVisualizer() {
     const currentWordIdx = step?.currentWordIdx ?? -1
 
     // Visualization component (words, keys, groups)
-    const VisualizationPanel = () => (
+    function VisualizationPanel() {
+        return (
         <div className="ga-body">
             {/* Words row */}
             <div className="ga-section-title">Input Words</div>
@@ -210,7 +211,8 @@ export default function GroupAnagramsVisualizer() {
                 {step?.message ?? 'Press Play or Step to begin.'}
             </div>
         </div>
-    )
+        );
+    }
 
     const dockPanels = useMemo(() => [
         {

@@ -30,7 +30,7 @@ function generateSteps(text1, text2) {
     const steps = []
 
     steps.push({
-        phase: 'init', activeLine: 3, dp: dp.map((r) => [...r]),
+        phase: 'init', activeLine: 3, dpRef: dp,
         activeI: -1, activeJ: -1, match: null, message: 'DP table initialised (all zeros)',
     })
 
@@ -38,21 +38,21 @@ function generateSteps(text1, text2) {
         for (let j = 1; j <= n; j++) {
             const isMatch = text1[i - 1] === text2[j - 1]
             steps.push({
-                phase: 'compare', activeLine: 6, dp: dp.map((r) => [...r]),
+                phase: 'compare', activeLine: 6, dpRef: dp,
                 activeI: i, activeJ: j, match: isMatch,
                 message: `Compare text1[${i - 1}]='${text1[i - 1]}' vs text2[${j - 1}]='${text2[j - 1]}' → ${isMatch ? 'MATCH' : 'no match'}`,
             })
             if (isMatch) {
                 dp[i][j] = dp[i - 1][j - 1] + 1
                 steps.push({
-                    phase: 'match', activeLine: 7, dp: dp.map((r) => [...r]),
+                    phase: 'match', activeLine: 7, dpRef: dp,
                     activeI: i, activeJ: j, match: true,
                     message: `Match! dp[${i}][${j}] = dp[${i - 1}][${j - 1}] + 1 = ${dp[i][j]}`,
                 })
             } else {
                 dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1])
                 steps.push({
-                    phase: 'no-match', activeLine: 9, dp: dp.map((r) => [...r]),
+                    phase: 'no-match', activeLine: 9, dpRef: dp,
                     activeI: i, activeJ: j, match: false,
                     message: `No match. dp[${i}][${j}] = max(dp[${i - 1}][${j}], dp[${i}][${j - 1}]) = ${dp[i][j]}`,
                 })
@@ -61,7 +61,7 @@ function generateSteps(text1, text2) {
     }
 
     steps.push({
-        phase: 'done', activeLine: 10, dp: dp.map((r) => [...r]),
+        phase: 'done', activeLine: 10, dpRef: dp,
         activeI: m, activeJ: n, match: null,
         message: `LCS length = dp[${m}][${n}] = ${dp[m][n]}`,
     })
@@ -97,7 +97,7 @@ export default function LCSVisualizer() {
         handleReset()
     }, [handleReset])
 
-    const dp = step?.dp ?? Array.from({ length: t1.length + 1 }, () => Array(t2.length + 1).fill(0))
+    const dp = step?.dpRef ?? Array.from({ length: t1.length + 1 }, () => Array(t2.length + 1).fill(0))
 
     const CELL = Math.min(44, Math.floor(380 / (t2.length + 2)))
 

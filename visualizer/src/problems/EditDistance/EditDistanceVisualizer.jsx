@@ -34,84 +34,48 @@ const EXAMPLES = [
   { label: '"abc"→""', w1: "abc", w2: "" },
 ];
 
-function generateSteps(w1, w2) {
-  const m = w1.length, n = w2.length;
-  const dp = Array.from({ length: m + 1 }, (_, i) => Array.from({ length: n + 1 }, (_, j) => (i === 0 ? j : j === 0 ? i : 0)));
-  const steps = [];
-
-  steps.push({ activeLine: 4, dp: dp.map(r => [...r]), curI: 0, curJ: 0, message: `Init base cases: dp[i][0]=i (delete all), dp[0][j]=j (insert all)` });
-
-  for (let i = 1; i <= m; i++) {
-    for (let j = 1; j <= n; j++) {
-      const match = w1[i - 1] === w2[j - 1];
-      if (match) {
-        dp[i][j] = dp[i - 1][j - 1];
-        steps.push({ activeLine: 9, dp: dp.map(r => [...r]), curI: i, curJ: j, message: `w1[${i-1}]="${w1[i-1]}"==w2[${j-1}]="${w2[j-1]}": dp[${i}][${j}]=dp[${i-1}][${j-1}]=${dp[i][j]}` });
-      } else {
-        dp[i][j] = 1 + Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]);
-        steps.push({ activeLine: 11, dp: dp.map(r => [...r]), curI: i, curJ: j, message: `w1[${i-1}]="${w1[i-1]}"≠w2[${j-1}]="${w2[j-1]}": dp[${i}][${j}]=1+min(${dp[i-1][j]},${dp[i][j-1]},${dp[i-1][j-1]})=${dp[i][j]}` });
-      }
-    }
-  }
-  steps.push({ activeLine: 14, dp: dp.map(r => [...r]), curI: m, curJ: n, message: `Result: dp[${m}][${n}] = ${dp[m][n]}` });
-  return steps;
+function DPTablePanel({ step, ex, dpTable, maxVal }) {
+  return step && (
+    <div className="ed-panel">
+      <div className="ed-panel-label">DP Table</div>
+      <div className="ed-table-wrap">
+        <table className="ed-table">
+          <thead>
+            <tr>
+              <th className="ed-th corner"></th>
+              <th className="ed-th">ε</th>
+              {ex.w2.split("").map((c, j) => <th key={j} className="ed-th w2ch">{c}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {dpTable.map((row, i) => (
+              <tr key={i}>
+                <th className="ed-th w1ch">{i === 0 ? "ε" : ex.w1[i - 1]}</th>
+                {row.map((val, j) => {
+                  const isCur = step.curI === i && step.curJ === j;
+                  const intensity = maxVal > 0 ? val / maxVal : 0;
+                  return (
+                    <motion.td key={j}
+                      className={`ed-td ${isCur ? "cur" : val === 0 ? "zero" : ""}`}
+                      animate={{ scale: isCur ? 1.25 : 1 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 22 }}
+                      style={{ background: isCur ? undefined : `rgba(137,180,250,${intensity * 0.35})` }}
+                    >
+                      {val}
+                    </motion.td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 }
 
-export default function EditDistanceVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => generateSteps(ex.w1, ex.w2), [ex]);
-  const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
-    usePlaybackState(steps.length);
-  const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
-  const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
-  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
-
-  const maxVal = step ? Math.max(...step.dp.flat()) : 1;
-
-  // DP Table visualization panel component
-  const DPTablePanel = () => (
-    step && (
-      <div className="ed-panel">
-        <div className="ed-panel-label">DP Table</div>
-        <div className="ed-table-wrap">
-          <table className="ed-table">
-            <thead>
-              <tr>
-                <th className="ed-th corner"></th>
-                <th className="ed-th">ε</th>
-                {ex.w2.split("").map((c, j) => <th key={j} className="ed-th w2ch">{c}</th>)}
-              </tr>
-            </thead>
-            <tbody>
-              {step.dp.map((row, i) => (
-                <tr key={i}>
-                  <th className="ed-th w1ch">{i === 0 ? "ε" : ex.w1[i - 1]}</th>
-                  {row.map((val, j) => {
-                    const isCur = step.curI === i && step.curJ === j;
-                    const intensity = maxVal > 0 ? val / maxVal : 0;
-                    return (
-                      <motion.td key={j}
-                        className={`ed-td ${isCur ? "cur" : val === 0 ? "zero" : ""}`}
-                        animate={{ scale: isCur ? 1.25 : 1 }}
-                        transition={{ type: "spring", stiffness: 400, damping: 22 }}
-                        style={{ background: isCur ? undefined : `rgba(137,180,250,${intensity * 0.35})` }}
-                      >
-                        {val}
-                      </motion.td>
-                    );
-                  })}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    )
-  );
-
-  // Input/Config panel component
-  const InputPanel = () => (
+function InputPanel({ EXAMPLES, ex, applyEx, step }) {
+  return (
     <div className="ed-input-panel">
       <div className="ed-examples">
         {EXAMPLES.map((e) => (
@@ -127,6 +91,43 @@ export default function EditDistanceVisualizer() {
       <div className="ed-status">{step?.message ?? "Press Play to begin."}</div>
     </div>
   );
+}
+
+function generateSteps(w1, w2) {
+  const m = w1.length, n = w2.length;
+  const dp = Array.from({ length: m + 1 }, (_, i) => Array.from({ length: n + 1 }, (_, j) => (i === 0 ? j : j === 0 ? i : 0)));
+  const steps = [];
+
+  steps.push({ activeLine: 4, dpRef: dp, curI: 0, curJ: 0, message: `Init base cases: dp[i][0]=i (delete all), dp[0][j]=j (insert all)` });
+
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      const match = w1[i - 1] === w2[j - 1];
+      if (match) {
+        dp[i][j] = dp[i - 1][j - 1];
+        steps.push({ activeLine: 9, dpRef: dp, curI: i, curJ: j, message: `w1[${i-1}]="${w1[i-1]}"==w2[${j-1}]="${w2[j-1]}": dp[${i}][${j}]=dp[${i-1}][${j-1}]=${dp[i][j]}` });
+      } else {
+        dp[i][j] = 1 + Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]);
+        steps.push({ activeLine: 11, dpRef: dp, curI: i, curJ: j, message: `w1[${i-1}]="${w1[i-1]}"≠w2[${j-1}]="${w2[j-1]}": dp[${i}][${j}]=1+min(${dp[i-1][j]},${dp[i][j-1]},${dp[i-1][j-1]})=${dp[i][j]}` });
+      }
+    }
+  }
+  steps.push({ activeLine: 14, dpRef: dp, curI: m, curJ: n, message: `Result: dp[${m}][${n}] = ${dp[m][n]}` });
+  return steps;
+}
+
+export default function EditDistanceVisualizer() {
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const steps = useMemo(() => generateSteps(ex.w1, ex.w2), [ex]);
+  const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
+    usePlaybackState(steps.length);
+  const step = stepIndex >= 0 ? steps[stepIndex] : null;
+  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
+  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
+
+  const dpTable = step ? step.dpRef : Array.from({ length: ex.w1.length + 1 }, () => Array.from({ length: ex.w2.length + 1 }, () => 0));
+  const maxVal = step ? Math.max(...dpTable.flat()) : 1;
 
   // Create dock panels
   const dockPanels = useMemo(() => [
@@ -134,13 +135,13 @@ export default function EditDistanceVisualizer() {
       id: 'input',
       title: 'Input',
       subtitle: `word1: "${ex.w1}" → word2: "${ex.w2}"`,
-      content: <InputPanel />,
+      content: <InputPanel EXAMPLES={EXAMPLES} ex={ex} applyEx={applyEx} step={step} />,
     },
     {
       id: 'table',
       title: 'DP Table',
       subtitle: step ? `Step ${stepIndex + 1}/${steps.length}` : 'Edit Distance Table',
-      content: <DPTablePanel />,
+      content: <DPTablePanel step={step} ex={ex} dpTable={dpTable} maxVal={maxVal} />,
     },
     {
       id: 'code',
@@ -155,7 +156,7 @@ export default function EditDistanceVisualizer() {
         />
       ),
     },
-  ], [ex, step, stepIndex, steps.length, setActiveLineDom, autoScrollCode]);
+  ], [ex, step, stepIndex, steps.length, setActiveLineDom, autoScrollCode, applyEx, dpTable, maxVal]);
 
   return (
     <div className="ed-shell">

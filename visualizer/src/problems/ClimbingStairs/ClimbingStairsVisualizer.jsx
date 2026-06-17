@@ -269,7 +269,8 @@ export default function ClimbingStairsVisualizer() {
   const currentStairIndex = step ? (step.i !== null ? step.i + 2 : (step.phase === 'init' ? 1 : n)) : 1
 
   // Variables Panel Component
-  const VariablesPanel = () => (
+  function VariablesPanel() {
+    return (
     <div className="cs-dp-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <div className="cs-dp-panel-head">Variables</div>
       <div className="cs-dp-panel-body" style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
@@ -316,7 +317,8 @@ export default function ClimbingStairsVisualizer() {
 
       </div>
     </div>
-  )
+    );
+  }
 
   const dockPanels = useMemo(() => [
     {

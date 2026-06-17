@@ -92,7 +92,8 @@ export default function SubarraySumKVisualizer() {
     );
 
     // Visualization panel component
-    const VizPanel = () => (
+    function VizPanel() {
+        return (
         <div>
             {/* Array + prefix display */}
             <div className="ssk-panel">
@@ -135,7 +136,8 @@ export default function SubarraySumKVisualizer() {
 
             <div className="ssk-status">{step?.message ?? "Press Play to begin."}</div>
         </div>
-    );
+        );
+    }
 
     const dockPanels = useMemo(() => [
         {

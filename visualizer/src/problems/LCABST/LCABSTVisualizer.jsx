@@ -135,7 +135,8 @@ export default function LCABSTVisualizer() {
     const allNodes = step?.allNodes ?? []
 
     // Create visualization panel for the tree/search state
-    const TreeVisualizationPanel = () => (
+    function TreeVisualizationPanel() {
+        return (
         <div className="lca-viz-container">
             <div className="lca-viz-main">
                 <div className="lca-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
@@ -197,7 +198,8 @@ export default function LCABSTVisualizer() {
                 <div className={`lca-status ${step?.phase === 'done' ? 'ok' : ''}`}>{step?.message || 'Press Play to begin.'}</div>
             </div>
         </div>
-    )
+        );
+    }
 
     const dockPanels = useMemo(() => [
         {

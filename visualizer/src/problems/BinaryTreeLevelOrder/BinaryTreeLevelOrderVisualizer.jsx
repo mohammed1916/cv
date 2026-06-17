@@ -147,7 +147,8 @@ export default function BinaryTreeLevelOrderVisualizer() {
     const LEVEL_COLORS = ['#89b4fa', '#a6e3a1', '#f9e2af', '#cba6f7', '#f38ba8', '#89dceb']
 
     // Visualization Panel Component
-    const VisualizationPanel = () => (
+    function VisualizationPanel() {
+        return (
         <div className="btlo-viz-panel">
             <div className="btlo-examples">
                 {EXAMPLES.map((ex) => (
@@ -169,10 +170,12 @@ export default function BinaryTreeLevelOrderVisualizer() {
                 />
             </div>
         </div>
-    )
+        );
+    }
 
     // Result Panel Component
-    const ResultPanel = () => (
+    function ResultPanel() {
+        return (
         <div className="btlo-result-panel">
             <div className="btlo-queue-label">Queue: [{[...(step?.queueIds ?? [])].join(', ')}]</div>
             <div className="btlo-levels">
@@ -189,7 +192,8 @@ export default function BinaryTreeLevelOrderVisualizer() {
             </div>
             {inputError && <div className="btlo-error-box">{inputError}</div>}
         </div>
-    )
+        );
+    }
 
     // Create dock panels
     const dockPanels = useMemo(() => [
