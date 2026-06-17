@@ -12,6 +12,7 @@ import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getVisualizationFeatures } from "../../config/visualizationRegistry";
 import { createPositionStep, createTreeDPStep, createDACStep, createContextualStepBuilder } from "../../utils/stepBuilder";
 import "./GameOnGrowingTreeVisualizer.css";
+import "./DualRepresentationView.css";
 import { Stack3D } from "../../components/viz3d";
 import PartialAnswersPanel from "../../components/PartialAnswersPanel";
 import TreeStatePanel from "./TreeStatePanel";
