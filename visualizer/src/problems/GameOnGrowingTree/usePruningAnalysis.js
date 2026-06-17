@@ -122,13 +122,3 @@ export function getEdgeOpacity(fromNode, toNode, prunedEdges, activeNodes) {
   return 0.5 // Normal edge
 }
 
-/**
- * Get stroke style for pruned edges (strikethrough pattern)
- */
-export function getPrunedEdgeStrokeDasharray(fromNode, toNode, prunedEdges) {
-  const edgeKey = `${fromNode}-${toNode}`
-  if (prunedEdges.has(edgeKey)) {
-    return '6 4 2 4' // Dash, gap, cross, gap pattern
-  }
-  return 'none'
-}

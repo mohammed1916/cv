@@ -494,6 +494,12 @@
     filter: drop-shadow(0 0 6px rgba(76, 110, 245, 0.6));
 }
 
+.gogt-edge.pruned {
+    stroke: rgba(156, 163, 175, 0.9);
+    stroke-width: 1.5;
+    stroke-dasharray: 6 4 2 4;
+}
+
 .gogt-node {
     stroke-width: 2;
     transition: 0.18s ease;
