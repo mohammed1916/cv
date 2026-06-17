@@ -135,11 +135,12 @@ export function getEdgeOpacity(fromNode, toNode, prunedEdges, activeNodes) {
 }
 
 /**
- * Get grayscale filter for pruned nodes
+ * Get stroke style for pruned edges (strikethrough pattern)
  */
-export function getPrunedNodeFilter(nodeId, prunedNodeIds) {
-  if (isNodePruned(nodeId, prunedNodeIds)) {
-    return 'grayscale(85%) brightness(0.85)'
+export function getPrunedEdgeStrokeDasharray(fromNode, toNode, prunedEdges) {
+  const edgeKey = `${fromNode}-${toNode}`
+  if (prunedEdges.has(edgeKey)) {
+    return '6 4 2 4' // Dash, gap, cross, gap pattern
   }
-  return 'grayscale(0%)'
+  return 'none'
 }

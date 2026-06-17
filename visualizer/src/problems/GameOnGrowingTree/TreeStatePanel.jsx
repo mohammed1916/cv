@@ -4,7 +4,7 @@ import PartialAnswersPanel from "../../components/PartialAnswersPanel";
 import { TreeHighlightOverlay } from "./TreeDPLinking";
 import { TreeTraversalHighlight } from "./TraversalTrail";
 import { PruningLegend, PruningStats } from "./EnhancedTreeVisualization";
-import { usePruningAnalysis, getNodeOpacity, getEdgeOpacity, getPrunedNodeFilter } from "./usePruningAnalysis";
+import { usePruningAnalysis, getNodeOpacity, getEdgeOpacity, getPrunedEdgeStrokeDasharray } from "./usePruningAnalysis";
 import "./EnhancedTreeVisualization.css";
 
 const TREE_VIEWBOX_WIDTH = 1000;
@@ -213,8 +213,16 @@ export default function TreeStatePanel({
                                                 y1={from.y}
                                                 x2={to.x}
                                                 y2={to.y}
-                                                className={`gogt-edge ${isBlocked ? "blocked" : inPath ? "path" : ""} ${isActiveEdge ? "active" : ""}`}
-                                                strokeDasharray={isActiveEdge ? "8 8" : "none"}
+                                                className={`gogt-edge ${isBlocked ? "blocked" : inPath ? "path" : ""} ${isActiveEdge ? "active" : ""} ${pruningAnalysis.prunedEdges.has(`${edge.from}-${edge.to}`) ? "pruned" : ""}`}
+                                                strokeDasharray={
+                                                    isActiveEdge
+                                                        ? "8 8"
+                                                        : getPrunedEdgeStrokeDasharray(
+                                                            edge.from,
+                                                            edge.to,
+                                                            pruningAnalysis.prunedEdges,
+                                                          )
+                                                }
                                                 initial={false}
                                                 animate={{
                                                     opacity: isBlocked || inPath || isActiveEdge
@@ -225,7 +233,7 @@ export default function TreeStatePanel({
                                                             pruningAnalysis.prunedEdges,
                                                             new Set(pruningAnalysis.activePath),
                                                           ),
-                                                    strokeWidth: isBlocked || inPath ? 3 : isActiveEdge ? 2.5 : 2,
+                                                    strokeWidth: isBlocked || inPath ? 3 : isActiveEdge ? 2.5 : pruningAnalysis.prunedEdges.has(`${edge.from}-${edge.to}`) ? 1.5 : 2,
                                                     strokeDashoffset: isActiveEdge ? [16, 0] : 0,
                                                 }}
                                                 transition={{
@@ -306,12 +314,6 @@ export default function TreeStatePanel({
                                                                     : isFocusSource || isFocusTarget
                                                                         ? 16.8
                                                                         : 16,
-                                                            }}
-                                                            style={{
-                                                                filter: getPrunedNodeFilter(
-                                                                    node,
-                                                                    pruningAnalysis.prunedNodeIds,
-                                                                ),
                                                             }}
                                                             transition={{
                                                                 type: "spring",
