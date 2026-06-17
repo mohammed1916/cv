@@ -27,6 +27,8 @@ import TraversalTrail, { TreeTraversalHighlight } from "./TraversalTrail";
 import ValueSourceTracking from "./ValueSourceTracking";
 import TreeDPConnector from "./TreeDPConnector";
 import { getExamples } from '../../config/examplesRegistry'
+import SituationOverlay from "./SituationOverlay";
+import { useSituationAnalysis } from "./useSituationAnalysis";
 
 const MAX_TREE_NODES_TO_RENDER = 120;
 
@@ -727,6 +729,10 @@ export default function GameOnGrowingTreeVisualizer() {
   const SOLUTION_CODE = useSolutionCode('game-on-growing-tree');
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
+  const prevStep = stepIndex > 0 ? steps[stepIndex - 1] : null;
+
+  // Analyze current situation for visualization
+  const situation = useSituationAnalysis(step, prevStep);
 
   // track previous answers to detect per-index changes
   const prevAnswersRef = useRef(null);
@@ -1204,7 +1210,16 @@ export default function GameOnGrowingTreeVisualizer() {
         />
       </div>
 
-      {activePass && (
+      {situation && (
+        <SituationOverlay
+          situation={situation}
+          step={step}
+          stepIndex={stepIndex}
+          totalSteps={steps.length}
+        />
+      )}
+
+      {activePass && !situation && (
         <div style={{
           position: 'fixed',
           top: '20px',
