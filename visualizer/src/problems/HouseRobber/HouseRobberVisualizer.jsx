@@ -85,8 +85,6 @@ function generateSteps(nums) {
 
 const EXAMPLES = getExamples('house-robber')
 
-const SNIPPETS = getSnippets('house-robber')
-
 export default function HouseRobberVisualizer({ problem }) {
   const [numsInput, setNumsInput] = useState('[2,7,9,3,1]')
   const codeLines = useProblemCode(problem, 'house-robber')

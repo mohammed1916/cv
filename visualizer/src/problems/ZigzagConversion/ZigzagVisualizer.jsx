@@ -7,6 +7,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './ZigzagVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -35,13 +36,7 @@ const SOLUTION_CODE = [
 const DEFAULT_INPUT = 'PAYPALISHIRING'
 const DEFAULT_ROWS = 4
 
-const EXAMPLES = [
-  { label: 'Classic 3 rows', value: 'PAYPALISHIRING', rows: 3, note: 'Matches the first LeetCode example.' },
-  { label: 'Classic 4 rows', value: 'PAYPALISHIRING', rows: 4, note: 'Shows the diagonal bounce more clearly.' },
-  { label: 'Short bounce', value: 'ZIGZAG', rows: 3, note: 'Compact input for quick stepping.' },
-  { label: 'Edge case', value: 'A', rows: 1, note: 'Early return when numRows is 1.' },
-  { label: 'Tall rows', value: 'HELLO', rows: 8, note: 'Early return when rows exceed string length.' },
-]
+const EXAMPLES = getExamples('zigzag-conversion')
 
 function getCodeHighlight(step) {
   if (!step) return { activeLine: 3, relatedLines: [3, 4] }
