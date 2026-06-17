@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import VisualizerPlaybackSection from '../../components/VisualizerPlaybackSection'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
@@ -229,6 +229,16 @@ export default function CourseScheduleVisualizer() {
     setPrereqInput(JSON.stringify(ex.prerequisites))
   }, handleReset)
 
+  const handleNumCoursesChange = useCallback((e) => {
+    setNumCoursesInput(e.target.value)
+    handleReset()
+  }, [handleReset])
+
+  const handlePrereqChange = useCallback((e) => {
+    setPrereqInput(e.target.value)
+    handleReset()
+  }, [handleReset])
+
   const connectivity = useCodeVisualConnectivity({
     steps,
     stepIndex,
@@ -280,7 +290,7 @@ export default function CourseScheduleVisualizer() {
                 <span style={{ fontSize: 11, color: '#94a3b8' }}>numCourses</span>
                 <input
                   value={numCoursesInput}
-                  onChange={(e) => { setNumCoursesInput(e.target.value); handleReset() }}
+                  onChange={handleNumCoursesChange}
                   className="cs-input"
                 />
               </div>
@@ -288,7 +298,7 @@ export default function CourseScheduleVisualizer() {
                 <span style={{ fontSize: 11, color: '#94a3b8' }}>prerequisites</span>
                 <input
                   value={prereqInput}
-                  onChange={(e) => { setPrereqInput(e.target.value); handleReset() }}
+                  onChange={handlePrereqChange}
                   className="cs-input"
                 />
               </div>

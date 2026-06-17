@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import VisualizerPlaybackSection from '../../components/VisualizerPlaybackSection'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
@@ -107,6 +107,16 @@ export default function MinimumWindowSubstringVisualizer() {
   const vizFeatureDefs = getVisualizationFeatures('minimum-window-substring')
   const { items: vizFeatures, toggle: toggleVizFeature } = useVisualizationFeatures(vizFeatureDefs)
 
+  const handleSInputChange = useCallback((e) => {
+    setSInput(e.target.value)
+    handleReset()
+  }, [handleReset])
+
+  const handleTInputChange = useCallback((e) => {
+    setTInput(e.target.value)
+    handleReset()
+  }, [handleReset])
+
   return (
     <div className="mws-shell">
       <div className="mws-top">
@@ -117,8 +127,8 @@ export default function MinimumWindowSubstringVisualizer() {
               {EXAMPLES.map((ex) => <button key={ex.label} className="mws-chip" onClick={() => applyExample(ex)}>{ex.label}</button>)}
             </div>
             <div className="mws-inputs">
-              <input className="mws-input" value={sInput} onChange={(e) => { setSInput(e.target.value); handleReset() }} placeholder="s" />
-              <input className="mws-input small" value={tInput} onChange={(e) => { setTInput(e.target.value); handleReset() }} placeholder="t" />
+              <input className="mws-input" value={sInput} onChange={handleSInputChange} placeholder="s" />
+              <input className="mws-input small" value={tInput} onChange={handleTInputChange} placeholder="t" />
             </div>
             <div className="mws-string">
               {s.split('').map((ch, i) => {

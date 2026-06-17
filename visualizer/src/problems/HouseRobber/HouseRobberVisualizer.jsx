@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import VisualizerPlaybackSection from '../../components/VisualizerPlaybackSection'
 import AnimatedIterationList from '../../components/shared/AnimatedIterationList'
 import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
@@ -121,6 +121,11 @@ export default function HouseRobberVisualizer({ problem }) {
   const vizFeatureDefs = getVisualizationFeatures('house-robber')
   const { items: vizFeatures, toggle: toggleVizFeature } = useVisualizationFeatures(vizFeatureDefs)
 
+  const handleNumsInputChange = useCallback((e) => {
+    setNumsInput(e.target.value)
+    handleReset()
+  }, [handleReset])
+
   return (
     <div className="hr-shell">
       <ResizableSplitPanels
@@ -139,7 +144,7 @@ export default function HouseRobberVisualizer({ problem }) {
             <div className="hr-examples">
               {EXAMPLES.map((ex) => <button key={ex.label} className="hr-chip" onClick={() => applyExample(ex)}>{ex.label}</button>)}
             </div>
-            <input className="hr-input" value={numsInput} onChange={(e) => { setNumsInput(e.target.value); handleReset() }} />
+            <input className="hr-input" value={numsInput} onChange={handleNumsInputChange} />
             <AnimatedIterationList
               items={nums}
               styleName="dp-house"

@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -121,6 +121,15 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
     setStrInput(ex.s)
   }, handleReset)
 
+  const handleStrInputChange = useCallback((e) => {
+    setStrInput(e.target.value)
+    handleReset()
+  }, [handleReset])
+
+  const handleSpeedChange = useCallback((e) => {
+    setSpeed(Number(e.target.value))
+  }, [setSpeed])
+
   return (
     <div className="lswrc-shell">
       <div className="lswrc-top">
@@ -144,7 +153,7 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
 
             <input
               value={strInput}
-              onChange={(e) => { setStrInput(e.target.value); handleReset() }}
+              onChange={handleStrInputChange}
               placeholder="abcabcbb"
               className="lswrc-input"
               maxLength={24}

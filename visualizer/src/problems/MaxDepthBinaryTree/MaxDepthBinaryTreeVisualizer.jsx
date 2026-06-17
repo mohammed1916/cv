@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import VisualizerPlaybackSection from '../../components/VisualizerPlaybackSection'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
@@ -134,6 +134,11 @@ export default function MaxDepthBinaryTreeVisualizer() {
     const vizFeatureDefs = getVisualizationFeatures('max-depth-binary-tree')
     const { items: vizFeatures, toggle: toggleVizFeature } = useVisualizationFeatures(vizFeatureDefs)
 
+    const handleArrInputChange = useCallback((e) => {
+        setArrInput(e.target.value)
+        handleReset()
+    }, [handleReset])
+
     return (
         <div className="mdbt-shell">
             <div className="mdbt-top">
@@ -148,7 +153,7 @@ export default function MaxDepthBinaryTreeVisualizer() {
                                 <button key={ex.label} className="mdbt-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
                             ))}
                         </div>
-                        <input className="mdbt-input" value={arrInput} onChange={(e) => { setArrInput(e.target.value); handleReset() }} />
+                        <input className="mdbt-input" value={arrInput} onChange={handleArrInputChange} />
                         <div className="mdbt-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
                             <TreeSVG edges={edges} positions={positions} canvasWidth={CANVAS_W} canvasHeight={CANVAS_H} />
                             {nodes.map((node) => {
