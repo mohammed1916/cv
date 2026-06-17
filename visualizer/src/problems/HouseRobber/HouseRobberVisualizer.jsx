@@ -89,20 +89,7 @@ const EXAMPLES = [
   { label: 'Large Peaks', nums: [2, 1, 1, 9, 1, 1, 8] },
 ]
 
-const SNIPPETS = [
-  { id: 'init', label: 'Initialize', lines: [3, 4, 5] },
-  { id: 'iterate', label: 'Evaluate House', lines: [6, 7, 8, 9] },
-  { id: 'shift', label: 'Shift State', lines: [10, 11] },
-  { id: 'return', label: 'Return', lines: [12] },
-]
-
-function snippetIdForPhase(phase) {
-  if (phase === 'init') return 'init'
-  if (phase === 'calc') return 'iterate'
-  if (phase === 'advance') return 'shift'
-  if (phase === 'done') return 'return'
-  return 'iterate'
-}
+const SNIPPETS = getSnippets('house-robber')
 
 export default function HouseRobberVisualizer({ problem }) {
   const [numsInput, setNumsInput] = useState('[2,7,9,3,1]')

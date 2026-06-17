@@ -75,72 +75,18 @@ const EXAMPLES = [
   { label: 'n = 8', n: 8 },
 ]
 
-export default function ClimbingStairsVisualizer() {
-  const [nInput, setNInput] = useState('5')
-
-  // Load solution code from registry
-  const SOLUTION_CODE = useSolutionCode('climbing-stairs')
-
-  const { n, inputError } = useMemo(() => {
-    try {
-      const num = parseInt(nInput, 10)
-      if (isNaN(num) || num < 1 || num > 45) throw new Error('n must be between 1 and 45')
-      return { n: num, inputError: '' }
-    } catch (e) {
-      return { n: 5, inputError: e.message || 'Invalid input' }
-    }
-  }, [nInput])
-
-  const steps = useMemo(
-    () => generateSteps(n).map((current) => ({
-      ...current,
-      relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
-    })),
-    [n],
-  )
-
-  const {
-    stepIndex, setStepIndex, stepForward, stepBack, togglePlay,
-    handleReset, isPlaying, speed, setSpeed, isDone,
-  } = usePlaybackState(steps.length)
-
-  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
-  const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
-
-  // Use modular visualization features system
-  const vizFeatureDefs = getVisualizationFeatures('climbing-stairs')
-  const { items: vizFeatures, toggle: toggleVizFeature, enabledIds: enabledVizIds } = useVisualizationFeatures(vizFeatureDefs)
-
-  const step = stepIndex >= 0 ? steps[stepIndex] : null
-
-  const applyExample = useCallback((ex) => {
-    setNInput(String(ex.n))
-    handleReset()
-  }, [handleReset])
-
-  const connectivity = useCodeVisualConnectivity({
-    steps,
-    stepIndex,
-    onStepJump: setStepIndex,
-  })
-
-  // To visualize stairs, we can draw actual stairs!
-  // DP array mapping: step.one represents answer for (step.i + 2) during the loop, 
-  // 'two' is answer for (step.i + 1).
-
-  // Generate the full sequence of answers to draw the DP table up to n
-  const dpTable = useMemo(() => {
-    const table = [1, 1] // dp[0]=1, dp[1]=1
-    for (let i = 2; i <= n; i++) {
-      table.push(table[i - 1] + table[i - 2])
-    }
-    return table
-  }, [n])
-
-  const currentStairIndex = step ? (step.i !== null ? step.i + 2 : (step.phase === 'init' ? 1 : n)) : 1
-
-  // Visualization Panel Component
-  const VisualizationPanel = () => (
+function VisualizationPanel({
+  nInput,
+  setNInput,
+  n,
+  inputError,
+  handleReset,
+  dpTable,
+  currentStairIndex,
+  step,
+  applyExample,
+}) {
+  return (
     <div className="cs-dp-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <div className="cs-dp-panel-head">
         Stairs & DP Array
@@ -176,7 +122,7 @@ export default function ClimbingStairsVisualizer() {
         <div className="cs-dp-visual-area">
           <div className="cs-dp-stairs-container">
             {/* Draw actual stairs SVG */}
-            <svg width="100%" height="200px" viewBox={`0 0 \${Math.max(300, (n+1) * 40)} 200`}>
+            <svg width="100%" height="200px" viewBox={`0 0 ${Math.max(300, (n+1) * 40)} 200`}>
               <g transform="translate(20, 180)">
                 {Array.from({ length: n + 1 }).map((_, idx) => {
                   const stepWidth = 40
@@ -256,6 +202,71 @@ export default function ClimbingStairsVisualizer() {
       </div>
     </div>
   )
+}
+
+export default function ClimbingStairsVisualizer() {
+  const [nInput, setNInput] = useState('5')
+
+  // Load solution code from registry
+  const SOLUTION_CODE = useSolutionCode('climbing-stairs')
+
+  const { n, inputError } = useMemo(() => {
+    try {
+      const num = parseInt(nInput, 10)
+      if (isNaN(num) || num < 1 || num > 45) throw new Error('n must be between 1 and 45')
+      return { n: num, inputError: '' }
+    } catch (e) {
+      return { n: 5, inputError: e.message || 'Invalid input' }
+    }
+  }, [nInput])
+
+  const steps = useMemo(
+    () => generateSteps(n).map((current) => ({
+      ...current,
+      relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
+    })),
+    [n],
+  )
+
+  const {
+    stepIndex, setStepIndex, stepForward, stepBack, togglePlay,
+    handleReset, isPlaying, speed, setSpeed, isDone,
+  } = usePlaybackState(steps.length)
+
+  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+  const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
+
+  // Use modular visualization features system
+  const vizFeatureDefs = getVisualizationFeatures('climbing-stairs')
+  const { items: vizFeatures, toggle: toggleVizFeature, enabledIds: enabledVizIds } = useVisualizationFeatures(vizFeatureDefs)
+
+  const step = stepIndex >= 0 ? steps[stepIndex] : null
+
+  const applyExample = useCallback((ex) => {
+    setNInput(String(ex.n))
+    handleReset()
+  }, [handleReset])
+
+  const connectivity = useCodeVisualConnectivity({
+    steps,
+    stepIndex,
+    onStepJump: setStepIndex,
+  })
+
+  // To visualize stairs, we can draw actual stairs!
+  // DP array mapping: step.one represents answer for (step.i + 2) during the loop, 
+  // 'two' is answer for (step.i + 1).
+
+  // Generate the full sequence of answers to draw the DP table up to n
+  const dpTable = useMemo(() => {
+    const table = [1, 1] // dp[0]=1, dp[1]=1
+    for (let i = 2; i <= n; i++) {
+      table.push(table[i - 1] + table[i - 2])
+    }
+    return table
+  }, [n])
+
+  const currentStairIndex = step ? (step.i !== null ? step.i + 2 : (step.phase === 'init' ? 1 : n)) : 1
 
   // Variables Panel Component
   const VariablesPanel = () => (
@@ -325,14 +336,26 @@ export default function ClimbingStairsVisualizer() {
     {
       id: 'viz',
       title: 'Visualization',
-      content: <VisualizationPanel />,
+      content: (
+        <VisualizationPanel
+          nInput={nInput}
+          setNInput={setNInput}
+          n={n}
+          inputError={inputError}
+          handleReset={handleReset}
+          dpTable={dpTable}
+          currentStairIndex={currentStairIndex}
+          step={step}
+          applyExample={applyExample}
+        />
+      ),
     },
     {
       id: 'vars',
       title: 'Variables',
       content: <VariablesPanel />,
     },
-  ], [step, SOLUTION_CODE, connectivity.highlightedLines, connectivity.handleLineSelect, autoScrollCode, VisualizationPanel, VariablesPanel, setActiveLineDom])
+  ], [step, SOLUTION_CODE, connectivity.highlightedLines, connectivity.handleLineSelect, autoScrollCode, nInput, setNInput, n, inputError, handleReset, dpTable, currentStairIndex, applyExample, VariablesPanel, setActiveLineDom])
 
   return (
     <div className="problem-shell">

@@ -87,28 +87,8 @@ const EXAMPLES = [
     { label: '[1,2,3,4]', nums: [1, 2, 3, 4] },
 ]
 
-export default function PermutationsVisualizer() {
-    const [numsInput, setNumsInput] = useState('[1,2,3]')
-
-    const { nums, inputError } = useMemo(() => {
-        try {
-            const parsed = JSON.parse(numsInput)
-            if (!Array.isArray(parsed)) throw new Error('Must be array')
-            return { nums: parsed.map(Number).slice(0, 5), inputError: '' }
-        } catch (e) {
-            return { nums: [1, 2, 3], inputError: e.message }
-        }
-    }, [numsInput])
-
-    const steps = useMemo(() => generateSteps(nums), [nums])
-    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
-    const step = stepIndex >= 0 ? steps[stepIndex] : null
-    const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
-    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
-
-    const applyExample = useCallback((ex) => { setNumsInput(JSON.stringify(ex.nums)); handleReset() }, [handleReset])
-
-    const VisualizationPanel = () => (
+function VisualizationPanel({ EXAMPLES, applyExample, numsInput, setNumsInput, nums, inputError, handleReset, step }) {
+    return (
         <div className="perm-viz-panel">
             <div className="perm-top">
                 <section className="perm-panel main">
@@ -171,12 +151,34 @@ export default function PermutationsVisualizer() {
             <div className="perm-status">{step?.message || 'Press Play to begin.'}</div>
         </div>
     )
+}
+
+export default function PermutationsVisualizer() {
+    const [numsInput, setNumsInput] = useState('[1,2,3]')
+
+    const { nums, inputError } = useMemo(() => {
+        try {
+            const parsed = JSON.parse(numsInput)
+            if (!Array.isArray(parsed)) throw new Error('Must be array')
+            return { nums: parsed.map(Number).slice(0, 5), inputError: '' }
+        } catch (e) {
+            return { nums: [1, 2, 3], inputError: e.message }
+        }
+    }, [numsInput])
+
+    const steps = useMemo(() => generateSteps(nums), [nums])
+    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
+    const step = stepIndex >= 0 ? steps[stepIndex] : null
+    const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
+    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+
+    const applyExample = useCallback((ex) => { setNumsInput(JSON.stringify(ex.nums)); handleReset() }, [handleReset])
 
     const dockPanels = useMemo(() => [
         {
             id: 'viz',
             title: 'Visualization',
-            content: <VisualizationPanel />,
+            content: <VisualizationPanel EXAMPLES={EXAMPLES} applyExample={applyExample} numsInput={numsInput} setNumsInput={setNumsInput} nums={nums} inputError={inputError} handleReset={handleReset} step={step} />,
         },
         {
             id: 'code',
