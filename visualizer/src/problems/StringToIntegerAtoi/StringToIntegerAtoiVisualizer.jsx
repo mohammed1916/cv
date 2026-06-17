@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './StringToIntegerAtoiVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -179,12 +180,7 @@ function generateSteps(originalStr) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Standard', s: '42' },
-  { label: 'Spaces & Sign', s: '   -42' },
-  { label: 'With Words', s: '4193 with words' },
-  { label: 'Out of Bounds', s: '-91283472332' },
-]
+const EXAMPLES = getExamples('string-to-integer-atoi')
 
 export default function StringToIntegerAtoiVisualizer() {
   const [sInput, setSInput] = useState('   -42')
