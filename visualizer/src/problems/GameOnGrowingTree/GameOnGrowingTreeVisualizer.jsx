@@ -29,6 +29,7 @@ import TreeDPConnector from "./TreeDPConnector";
 import { getExamples } from '../../config/examplesRegistry'
 import SituationOverlay from "./SituationOverlay";
 import { useSituationAnalysis } from "./useSituationAnalysis";
+import DualRepresentationView from "./DualRepresentationView";
 
 const MAX_TREE_NODES_TO_RENDER = 120;
 
@@ -693,6 +694,7 @@ export default function GameOnGrowingTreeVisualizer() {
   const [parentsInput, setParentsInput] = useState("1 1 3 3 1 2 1 2 8");
   const [previewSize, setPreviewSize] = useState(null);
   const [parsedParentSnapshot, setParsedParentSnapshot] = useState([]);
+  const [viewMode, setViewMode] = useState('panels'); // 'panels' or 'dual-rep'
 
   const handleExampleClick = useCallback((example) => {
     setQInput(example.q);
@@ -1198,24 +1200,77 @@ export default function GameOnGrowingTreeVisualizer() {
             </div>
           ))}
         </div>
+
+        {/* View Mode Toggle */}
+        <div style={{
+          position: 'absolute',
+          top: '16px',
+          right: '16px',
+          display: 'flex',
+          gap: '8px',
+          alignItems: 'center',
+          zIndex: 100,
+        }}>
+          <span style={{
+            fontSize: '11px',
+            fontWeight: 600,
+            textTransform: 'uppercase',
+            letterSpacing: '0.05em',
+            color: '#94a3b8',
+          }}>
+            {viewMode === 'panels' ? 'Panel View' : 'Computation View'}
+          </span>
+          <button
+            onClick={() => setViewMode(viewMode === 'panels' ? 'dual-rep' : 'panels')}
+            style={{
+              padding: '6px 12px',
+              background: viewMode === 'dual-rep' ? 'rgba(59, 130, 246, 0.9)' : 'rgba(100, 116, 139, 0.5)',
+              border: '1px solid rgba(148, 163, 184, 0.3)',
+              borderRadius: '6px',
+              color: '#e2e8f0',
+              fontWeight: 600,
+              fontSize: '12px',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease',
+            }}
+            onMouseEnter={(e) => e.target.style.background = viewMode === 'dual-rep' ? 'rgba(59, 130, 246, 1)' : 'rgba(100, 116, 139, 0.7)'}
+            onMouseLeave={(e) => e.target.style.background = viewMode === 'dual-rep' ? 'rgba(59, 130, 246, 0.9)' : 'rgba(100, 116, 139, 0.5)'}
+          >
+            {viewMode === 'panels' ? '⟨→⟩ Structure' : '⊞ Panels'}
+          </button>
+        </div>
       </section>
-      <div style={{ position: 'relative' }}>
-        <TreeDPConnector
-          treeNodePositions={currentTree?.positions}
-          highlightNode={selectedNode}
-          dpCellPositions={{}}
-        />
-        <DockableWorkspace
-          title="Game On Growing Tree Workspace"
-          panels={dockPanels}
-          initialLayout={{
-            rows: [
-              ["input", "storyboard"],
-              ["tree", "code"],
-            ],
-            minimized: [],
-          }}
-        />
+      <div style={{ position: 'relative', minHeight: viewMode === 'dual-rep' ? '600px' : 'auto' }}>
+        {viewMode === 'panels' ? (
+          <>
+            <TreeDPConnector
+              treeNodePositions={currentTree?.positions}
+              highlightNode={selectedNode}
+              dpCellPositions={{}}
+            />
+            <DockableWorkspace
+              title="Game On Growing Tree Workspace"
+              panels={dockPanels}
+              initialLayout={{
+                rows: [
+                  ["input", "storyboard"],
+                  ["tree", "code"],
+                ],
+                minimized: [],
+              }}
+            />
+          </>
+        ) : (
+          <DualRepresentationView
+            step={step}
+            steps={steps}
+            stepIndex={stepIndex}
+            dpSnapshot={dpSnapshot}
+            totalNodes={currentTree?.size ?? 0}
+            pruningAnalysis={pruningAnalysis}
+            situationAnalysis={situationAnalysis}
+          />
+        )}
       </div>
 
       {situation && (
