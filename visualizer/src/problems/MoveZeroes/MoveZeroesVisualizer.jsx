@@ -11,13 +11,10 @@ import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity
 import { useProblemCode } from "../../hooks/useProblemCode";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
+import { getExamples } from '../../config/examplesRegistry'
 import "./MoveZeroesVisualizer.css";
 
-const EXAMPLES = [
-    { label: "Ex 1", nums: [0, 1, 0, 3, 12] },
-    { label: "Ex 2", nums: [0, 0, 1] },
-    { label: "Ex 3", nums: [1, 0, 2, 0, 0, 4, 5] },
-];
+const EXAMPLES = getExamples('move-zeroes');
 
 function generateSteps(numsIn) {
     const steps = [];

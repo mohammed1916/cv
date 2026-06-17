@@ -9,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { parseTreeInput } from '../../components/treeUtils'
+import { getExamples } from '../../config/examplesRegistry'
 import './InvertBinaryTreeVisualizer.css'
 
 const CANVAS_W = 500
@@ -120,12 +121,7 @@ function generateSteps(arr) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'LeetCode', arr: [4, 2, 7, 1, 3, 6, 9] },
-    { label: 'Simple', arr: [2, 1, 3] },
-    { label: 'Single', arr: [1] },
-    { label: 'Left Heavy', arr: [1, 2, null, 3, 4] },
-]
+const EXAMPLES = getExamples('invert-binary-tree')
 
 // Visualization component
 function TreeVisualization({ positions, edges, nodes, step, NODE_R }) {

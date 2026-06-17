@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './TwoSumIIVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -83,12 +84,7 @@ function generateSteps(numbers, target) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'Basic', numbers: [2, 7, 11, 15], target: 9 },
-    { label: 'Middle', numbers: [2, 3, 4], target: 6 },
-    { label: 'Large', numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9], target: 11 },
-    { label: 'Negatives', numbers: [-3, -1, 0, 2, 4, 6], target: 1 },
-]
+const EXAMPLES = getExamples('two-sum-ii')
 
 export default function TwoSumIIVisualizer() {
     const [numsInput, setNumsInput] = useState('[2,7,11,15]')

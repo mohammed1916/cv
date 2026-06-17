@@ -6,6 +6,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './ContainerWithMostWaterVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -115,12 +116,7 @@ function generateSteps(height) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Classic', height: [1, 8, 6, 2, 5, 4, 8, 3, 7] },
-  { label: 'Simple', height: [1, 1] },
-  { label: 'Mountain', height: [2, 3, 4, 5, 18, 17, 6] },
-  { label: 'Valley', height: [10, 2, 1, 3, 9] },
-]
+const EXAMPLES = getExamples('container-with-most-water')
 
 export default function ContainerWithMostWaterVisualizer() {
   const [heightInput, setHeightInput] = useState('[1, 8, 6, 2, 5, 4, 8, 3, 7]')

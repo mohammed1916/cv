@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./WildcardMatchingVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -23,12 +24,7 @@ const SOLUTION_CODE = [
   { line: 13, text: "    return dp[m][n]" },
 ];
 
-const EXAMPLES = [
-  { label: "aa / a*", s: "aa", p: "a*" },
-  { label: "cb / ?a", s: "cb", p: "?a" },
-  { label: "abc / a*c", s: "abc", p: "a*c" },
-  { label: "aab / c*a*b", s: "aab", p: "c*a*b" },
-];
+const EXAMPLES = getExamples('wildcard-matching');
 
 function generateSteps(s, p) {
   const m = s.length, n = p.length;
@@ -36,12 +32,12 @@ function generateSteps(s, p) {
   const steps = [];
 
   dp[0][0] = true;
-  steps.push({ activeLine: 4, dp: dp.map(r => [...r]), i: 0, j: 0, phase: "init", message: "dp[0][0] = true (empty matches empty)" });
+  steps.push({ activeLine: 4, dp, i: 0, j: 0, phase: "init", message: "dp[0][0] = true (empty matches empty)" });
 
   for (let j = 1; j <= n; j++) {
     if (p[j - 1] === "*") {
       dp[0][j] = dp[0][j - 1];
-      steps.push({ activeLine: 6, dp: dp.map(r => [...r]), i: 0, j, phase: "base", message: `p[${j-1}]='*': dp[0][${j}]=${dp[0][j]}` });
+      steps.push({ activeLine: 6, dp, i: 0, j, phase: "base", message: `p[${j-1}]='*': dp[0][${j}]=${dp[0][j]}` });
     }
   }
 
@@ -49,17 +45,17 @@ function generateSteps(s, p) {
     for (let j = 1; j <= n; j++) {
       if (p[j - 1] === "*") {
         dp[i][j] = dp[i - 1][j] || dp[i][j - 1];
-        steps.push({ activeLine: 10, dp: dp.map(r => [...r]), i, j, phase: "star", message: `'*': dp[${i}][${j}] = dp[${i-1}][${j}]||dp[${i}][${j-1}] = ${dp[i][j]}` });
+        steps.push({ activeLine: 10, dp, i, j, phase: "star", message: `'*': dp[${i}][${j}] = dp[${i-1}][${j}]||dp[${i}][${j-1}] = ${dp[i][j]}` });
       } else if (p[j - 1] === "?" || p[j - 1] === s[i - 1]) {
         dp[i][j] = dp[i - 1][j - 1];
-        steps.push({ activeLine: 12, dp: dp.map(r => [...r]), i, j, phase: "match", message: `'${p[j-1]}'=='${s[i-1]}': dp[${i}][${j}]=${dp[i][j]}` });
+        steps.push({ activeLine: 12, dp, i, j, phase: "match", message: `'${p[j-1]}'=='${s[i-1]}': dp[${i}][${j}]=${dp[i][j]}` });
       } else {
-        steps.push({ activeLine: 11, dp: dp.map(r => [...r]), i, j, phase: "no-match", message: `'${p[j-1]}'!='${s[i-1]}': dp[${i}][${j}]=false` });
+        steps.push({ activeLine: 11, dp, i, j, phase: "no-match", message: `'${p[j-1]}'!='${s[i-1]}': dp[${i}][${j}]=false` });
       }
     }
   }
 
-  steps.push({ activeLine: 13, dp: dp.map(r => [...r]), i: m, j: n, phase: "done", done: true, message: `Result: dp[${m}][${n}] = ${dp[m][n]}` });
+  steps.push({ activeLine: 13, dp, i: m, j: n, phase: "done", done: true, message: `Result: dp[${m}][${n}] = ${dp[m][n]}` });
   return steps;
 }
 

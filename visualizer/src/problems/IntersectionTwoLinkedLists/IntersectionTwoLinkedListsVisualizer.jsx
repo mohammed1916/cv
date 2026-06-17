@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./IntersectionTwoLinkedListsVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -16,29 +17,7 @@ const SOLUTION_CODE = [
   { line: 6, text: "    return a  # intersection or None" },
 ];
 
-const EXAMPLES = [
-  {
-    label: "Ex 1",
-    listA: [4, 1],
-    listB: [5, 6, 1],
-    shared: [8, 4, 5],
-    intersectVal: 8,
-  },
-  {
-    label: "Ex 2",
-    listA: [1, 9, 1],
-    listB: [3],
-    shared: [2, 4],
-    intersectVal: 2,
-  },
-  {
-    label: "No Intersect",
-    listA: [2, 6, 4],
-    listB: [1, 5],
-    shared: [],
-    intersectVal: null,
-  },
-];
+const EXAMPLES = getExamples('intersection-two-linked-lists');
 
 // Build flat node list for each pointer traversal
 // Total nodes: listA + shared, listB + shared (shared pointer is same index >= listA.length)

@@ -8,6 +8,7 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
+import { getExamples } from '../../config/examplesRegistry'
 import "./InsertIntervalVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -59,12 +60,7 @@ function generateSteps(intervals, newInterval) {
     return steps;
 }
 
-const EXAMPLES = [
-    { label: "Ex1", intervals: [[1, 3], [6, 9]], newInterval: [2, 5] },
-    { label: "Ex2", intervals: [[1, 2], [3, 5], [6, 7], [8, 10], [12, 16]], newInterval: [4, 8] },
-    { label: "Ex3", intervals: [[1, 5]], newInterval: [2, 3] },
-    { label: "Ex4", intervals: [[1, 5]], newInterval: [6, 8] },
-];
+const EXAMPLES = getExamples('insert-interval');
 
 const BAR_SCALE = 14; // px per unit
 

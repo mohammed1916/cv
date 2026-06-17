@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./SkylineProblemVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -25,11 +26,7 @@ const SOLUTION_CODE = [
   { line: 15, text: "            prev = cur" },
 ];
 
-const EXAMPLES = [
-  { label: "Ex 1", buildings: [[2,9,10],[3,7,15],[5,12,12],[15,20,10],[19,24,8]] },
-  { label: "Ex 2", buildings: [[0,2,3],[2,5,3]] },
-  { label: "Ex 3", buildings: [[1,2,1],[1,2,2],[1,2,3]] },
-];
+const EXAMPLES = getExamples('skyline-problem');
 
 function generateSteps(buildings) {
   const steps = [];

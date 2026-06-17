@@ -10,6 +10,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
 import { TreeCanvas3D } from '../../components/viz3d'
+import { getExamples } from '../../config/examplesRegistry'
 import './BinaryTreeLevelOrderVisualizer.css'
 
 const CANVAS_W = 520
@@ -110,12 +111,7 @@ function generateSteps(arr) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'LeetCode', arr: [3, 9, 20, null, null, 15, 7] },
-    { label: 'Full', arr: [1, 2, 3, 4, 5, 6, 7] },
-    { label: 'Skewed', arr: [1, 2, null, 3, null, 4] },
-    { label: 'Single', arr: [1] },
-]
+const EXAMPLES = getExamples('binary-tree-level-order')
 
 function VisualizationPanel({
     EXAMPLES,

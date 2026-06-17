@@ -9,6 +9,7 @@ import { useParsedInput } from '../../hooks/useParsedInput'
 import { useApplyExample } from '../../hooks/useApplyExample'
 import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
+import { getExamples } from '../../config/examplesRegistry'
 import './HouseRobberVisualizer.css'
 
 function parseNums(input) {
@@ -82,12 +83,7 @@ function generateSteps(nums) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Basic', nums: [1, 2, 3, 1] },
-  { label: 'LeetCode', nums: [2, 7, 9, 3, 1] },
-  { label: 'Alternating', nums: [6, 1, 6, 1, 6] },
-  { label: 'Large Peaks', nums: [2, 1, 1, 9, 1, 1, 8] },
-]
+const EXAMPLES = getExamples('house-robber')
 
 const SNIPPETS = getSnippets('house-robber')
 

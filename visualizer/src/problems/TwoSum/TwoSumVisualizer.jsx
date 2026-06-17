@@ -7,6 +7,7 @@ import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './TwoSumVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -83,12 +84,7 @@ function generateSteps(nums, target) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Example 1', nums: [2, 7, 11, 15], target: 9 },
-  { label: 'Example 2', nums: [3, 2, 4], target: 6 },
-  { label: 'Same Values', nums: [3, 3], target: 6 },
-  { label: 'Negatives', nums: [-3, 4, 3, 90], target: 0 },
-]
+const EXAMPLES = getExamples('two-sum')
 
 export default function TwoSumVisualizer() {
   const [numsInput, setNumsInput] = useState('[2, 7, 11, 15]')

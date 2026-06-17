@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./ReverseKGroupVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -27,11 +28,7 @@ const SOLUTION_CODE = [
     { line: 17, text: "    return dummy.next" },
 ];
 
-const EXAMPLES = [
-    { label: "Ex 1", list: [1, 2, 3, 4, 5], k: 2 },
-    { label: "Ex 2", list: [1, 2, 3, 4, 5], k: 3 },
-    { label: "Ex 3", list: [1, 2, 3, 4, 5, 6], k: 2 },
-];
+const EXAMPLES = getExamples('reverse-kgroup');
 
 function generateSteps(listIn, k) {
     const steps = [];

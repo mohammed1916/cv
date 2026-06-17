@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './CombinationSumVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -161,12 +162,7 @@ function generateSteps(candidates, target) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Classic', candidates: [2, 3, 6, 7], target: 7 },
-  { label: 'Multiple', candidates: [2, 3, 5], target: 8 },
-  { label: 'No Answer', candidates: [4, 5], target: 3 },
-  { label: 'Single', candidates: [2], target: 4 },
-]
+const EXAMPLES = getExamples('combination-sum')
 
 function RecursionTreeNode({ nodeKey, treeNodes, activeKey, currentStepIndex, linePrefix = "", childBasePrefix = "" }) {
   const node = treeNodes.get(nodeKey)

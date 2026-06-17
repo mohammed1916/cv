@@ -6,6 +6,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './ReverseIntegerVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -104,12 +105,7 @@ function generateSteps(initialX) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Positive', x: 123 },
-  { label: 'Negative', x: -123 },
-  { label: 'Zero Ending', x: 120 },
-  { label: 'Overflow', x: 1534236469 },
-]
+const EXAMPLES = getExamples('reverse-integer')
 
 export default function ReverseIntegerVisualizer() {
   const [xInput, setXInput] = useState('123')

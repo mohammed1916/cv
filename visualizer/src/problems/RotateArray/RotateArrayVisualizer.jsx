@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./RotateArrayVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -19,11 +20,7 @@ const SOLUTION_CODE = [
   { line: 9, text: "    rev(k, len(nums)-1)   # reverse rest" },
 ];
 
-const EXAMPLES = [
-  { label: "[1,2,3,4,5,6,7], k=3", nums: [1, 2, 3, 4, 5, 6, 7], k: 3 },
-  { label: "[-1,-100,3,99], k=2", nums: [-1, -100, 3, 99], k: 2 },
-  { label: "[1,2,3,4,5], k=1", nums: [1, 2, 3, 4, 5], k: 1 },
-];
+const EXAMPLES = getExamples('rotate-array');
 
 function generateSteps(inputNums, inputK) {
   const steps = [];

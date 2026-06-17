@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './RemoveNthNodeVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -78,12 +79,7 @@ function generateSteps(arr, n) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'LeetCode', input: '[1,2,3,4,5]; 2' },
-    { label: 'Remove Head', input: '[1,2,3]; 3' },
-    { label: 'Remove Tail', input: '[1,2,3]; 1' },
-    { label: 'Single', input: '[1]; 1' },
-]
+const EXAMPLES = getExamples('remove-nth-node')
 
 export default function RemoveNthNodeVisualizer() {
     const [inputVal, setInputVal] = useState('[1,2,3,4,5]; 2')

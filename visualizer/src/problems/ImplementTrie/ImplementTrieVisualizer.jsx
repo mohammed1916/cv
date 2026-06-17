@@ -8,6 +8,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
+import { getExamples } from '../../config/examplesRegistry'
 import './ImplementTrieVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -33,7 +34,7 @@ function parseOps(input) {
 function generateSteps(ops) {
   const root = { end: false, children: {} }
   const steps = []
-  const clone = (obj) => JSON.parse(JSON.stringify(obj))
+  const clone = (obj) => obj
 
   const walk = (word) => {
     let node = root
@@ -66,10 +67,7 @@ function generateSteps(ops) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Core', ops: [['insert', 'apple'], ['search', 'apple'], ['search', 'app'], ['startsWith', 'app'], ['insert', 'app'], ['search', 'app']] },
-  { label: 'Simple', ops: [['insert', 'cat'], ['insert', 'car'], ['startsWith', 'ca'], ['search', 'cab']] },
-]
+const EXAMPLES = getExamples('implement-trie')
 
 function renderTrie(node, prefix = '', depth = 0) {
   const keys = Object.keys(node.children).sort()

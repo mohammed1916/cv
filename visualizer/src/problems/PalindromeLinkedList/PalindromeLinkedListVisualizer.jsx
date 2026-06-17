@@ -8,6 +8,7 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
+import { getExamples } from '../../config/examplesRegistry'
 import "./PalindromeLinkedListVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -29,12 +30,7 @@ const SOLUTION_CODE = [
     { line: 16, text: "    return True" },
 ];
 
-const EXAMPLES = [
-    { label: "1→2→2→1", nums: [1, 2, 2, 1] },
-    { label: "1→2→1", nums: [1, 2, 1] },
-    { label: "1→2", nums: [1, 2] },
-    { label: "1→2→3→2→1", nums: [1, 2, 3, 2, 1] },
-];
+const EXAMPLES = getExamples('palindrome-linked-list');
 
 function generateSteps(nums) {
     const steps = [];

@@ -8,6 +8,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import { getExamples } from '../../config/examplesRegistry'
 import "./PartitionEqualSubsetVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -22,12 +23,7 @@ const SOLUTION_CODE = [
   { line: 9, text: "    return target in dp" },
 ];
 
-const EXAMPLES = [
-  { label: "[1,5,11,5]", nums: [1, 5, 11, 5] },
-  { label: "[1,2,3,5]", nums: [1, 2, 3, 5] },
-  { label: "[3,3,3,4,5]", nums: [3, 3, 3, 4, 5] },
-  { label: "[1,1]", nums: [1, 1] },
-];
+const EXAMPLES = getExamples('partition-equal-subset');
 
 function generateSteps(nums) {
   const steps = [];

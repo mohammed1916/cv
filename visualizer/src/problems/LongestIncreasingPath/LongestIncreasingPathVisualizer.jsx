@@ -8,6 +8,7 @@ import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./LongestIncreasingPathVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -24,11 +25,7 @@ const SOLUTION_CODE = [
     { line: 11, text: "    return max(dfs(r,c) for r,c in all_cells)" },
 ];
 
-const EXAMPLES = [
-    { label: "Ex 1", matrix: [[9, 9, 4], [6, 6, 8], [2, 1, 1]] },
-    { label: "Ex 2", matrix: [[3, 4, 5], [3, 2, 6], [2, 2, 1]] },
-    { label: "Ex 3", matrix: [[1, 2], [4, 3]] },
-];
+const EXAMPLES = getExamples('longest-increasing-path');
 
 function generateSteps(matrix) {
     const steps = [];
@@ -39,7 +36,7 @@ function generateSteps(matrix) {
     let globalBest = 0;
     let bestCell = [0, 0];
 
-    steps.push({ activeLine: 2, dpGrid: dpGrid.map(r => [...r]), activeCell: null, visiting: null, globalBest, message: "Init memo. Will DFS from every cell." });
+    steps.push({ activeLine: 2, dpGrid, activeCell: null, visiting: null, globalBest, message: "Init memo. Will DFS from every cell." });
 
     const dirs = [[-1, 0], [1, 0], [0, -1], [0, 1]];
     const callStack = []; // track visit order for display
@@ -50,8 +47,8 @@ function generateSteps(matrix) {
 
         callStack.push([r, c]);
         steps.push({
-            activeLine: 5, dpGrid: dpGrid.map(row => [...row]),
-            activeCell: [r, c], visiting: [...callStack.map(x => [...x])], globalBest,
+            activeLine: 5, dpGrid,
+            activeCell: [r, c], visiting: callStack, globalBest,
             message: `dfs(${r},${c}): val=${matrix[r][c]}, best=1`,
         });
 
@@ -61,16 +58,16 @@ function generateSteps(matrix) {
             if (nr < 0 || nr >= rows || nc < 0 || nc >= cols) continue;
             if (matrix[nr][nc] > matrix[r][c]) {
                 steps.push({
-                    activeLine: 8, dpGrid: dpGrid.map(row => [...row]),
-                    activeCell: [r, c], neighbor: [nr, nc], visiting: [...callStack.map(x => [...x])], globalBest,
+                    activeLine: 8, dpGrid,
+                    activeCell: [r, c], neighbor: [nr, nc], visiting: callStack, globalBest,
                     message: `  (${r},${c})→(${nr},${nc}): ${matrix[nr][nc]} > ${matrix[r][c]}, recurse`,
                 });
                 const sub = dfs(nr, nc);
                 if (1 + sub > best) {
                     best = 1 + sub;
                     steps.push({
-                        activeLine: 9, dpGrid: dpGrid.map(row => [...row]),
-                        activeCell: [r, c], visiting: [...callStack.map(x => [...x])], globalBest,
+                        activeLine: 9, dpGrid,
+                        activeCell: [r, c], visiting: callStack, globalBest,
                         message: `  best updated to ${best} via (${nr},${nc})`,
                     });
                 }
@@ -86,8 +83,8 @@ function generateSteps(matrix) {
         callStack.pop();
 
         steps.push({
-            activeLine: 10, dpGrid: dpGrid.map(row => [...row]),
-            activeCell: [r, c], visiting: [...callStack.map(x => [...x])], globalBest,
+            activeLine: 10, dpGrid,
+            activeCell: [r, c], visiting: callStack, globalBest,
             message: `memo[(${r},${c})] = ${best}. Global best = ${globalBest}`,
         });
 
@@ -101,7 +98,7 @@ function generateSteps(matrix) {
     }
 
     steps.push({
-        activeLine: 11, dpGrid: dpGrid.map(row => [...row]),
+        activeLine: 11, dpGrid,
         activeCell: bestCell, visiting: [], globalBest, done: true,
         message: `Longest Increasing Path = ${globalBest}`,
     });

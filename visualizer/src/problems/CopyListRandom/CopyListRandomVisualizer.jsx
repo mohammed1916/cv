@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./CopyListRandomVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -58,11 +59,7 @@ function generateSteps(nodes) {
     return steps;
 }
 
-const EXAMPLES = [
-    { label: "Ex1", nodes: [{ val: 7, random: null }, { val: 13, random: 0 }, { val: 11, random: 4 }, { val: 10, random: 2 }, { val: 1, random: 0 }] },
-    { label: "Ex2", nodes: [{ val: 1, random: 1 }, { val: 2, random: 1 }] },
-    { label: "Ex3", nodes: [{ val: 3, random: null }, { val: 3, random: 0 }, { val: 3, random: null }] },
-];
+const EXAMPLES = getExamples('copy-list-random');
 
 export default function CopyListRandomVisualizer() {
     const [sel, setSel] = useState(0);

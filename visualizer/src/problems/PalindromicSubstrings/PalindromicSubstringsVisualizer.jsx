@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './PalindromicSubstringsVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -86,12 +87,7 @@ function generateSteps(s) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'LeetCode', s: 'abc' },
-    { label: 'aaa', s: 'aaa' },
-    { label: 'abcba', s: 'abcba' },
-    { label: 'racecar', s: 'racecar' },
-]
+const EXAMPLES = getExamples('palindromic-substrings')
 
 export default function PalindromicSubstringsVisualizer() {
     const [sInput, setSInput] = useState('abc')

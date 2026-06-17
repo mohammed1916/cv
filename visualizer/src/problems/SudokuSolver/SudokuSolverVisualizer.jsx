@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./SudokuSolverVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -28,28 +29,11 @@ const SOLUTION_CODE = [
   { line: 18, text: "        return True  # all filled" },
 ];
 
-const EXAMPLES = [
-  {
-    label: "Ex 1",
-    board: [
-      ["5","3",".",".","7",".",".",".","."],
-      ["6",".",".","1","9","5",".",".","."],
-      [".","9","8",".",".",".",".","6","."],
-      ["8",".",".",".","6",".",".",".","3"],
-      ["4",".",".","8",".","3",".",".","1"],
-      ["7",".",".",".","2",".",".",".","6"],
-      [".","6",".",".",".",".","2","8","."],
-      [".",".",".","4","1","9",".",".","5"],
-      [".",".",".",".","8",".",".","7","9"],
-    ],
-  },
-];
-
-function cloneBoard(b) { return b.map(r => [...r]); }
+const EXAMPLES = getExamples('sudoku-solver');
 
 function generateSteps(initBoard) {
   const steps = [];
-  const board = cloneBoard(initBoard);
+  const board = initBoard.map(r => [...r]); // Init copy only
   const initialDots = new Set();
   for (let r = 0; r < 9; r++)
     for (let c = 0; c < 9; c++)
@@ -71,7 +55,7 @@ function generateSteps(initBoard) {
           const valid = isValid(r, c, ch);
           steps.push({
             activeLine: valid ? 14 : 13,
-            board: cloneBoard(board), activeR: r, activeC: c, tryDigit: ch,
+            board, activeR: r, activeC: c, tryDigit: ch,
             phase: valid ? "place" : "skip",
             message: valid ? `Place '${ch}' at [${r},${c}]` : `'${ch}' invalid at [${r},${c}]`,
           });
@@ -79,7 +63,7 @@ function generateSteps(initBoard) {
             board[r][c] = ch;
             steps.push({
               activeLine: 15,
-              board: cloneBoard(board), activeR: r, activeC: c, tryDigit: ch,
+              board, activeR: r, activeC: c, tryDigit: ch,
               phase: "recurse",
               message: `Placed '${ch}' at [${r},${c}], recurse…`,
             });
@@ -87,7 +71,7 @@ function generateSteps(initBoard) {
             board[r][c] = ".";
             steps.push({
               activeLine: 16,
-              board: cloneBoard(board), activeR: r, activeC: c, tryDigit: ch,
+              board, activeR: r, activeC: c, tryDigit: ch,
               phase: "backtrack",
               message: `Backtrack: remove '${ch}' from [${r},${c}]`,
             });
@@ -99,9 +83,9 @@ function generateSteps(initBoard) {
     return true;
   }
 
-  steps.push({ activeLine: 1, board: cloneBoard(board), activeR: -1, activeC: -1, phase: "init", message: "Starting backtracking solver…" });
+  steps.push({ activeLine: 1, board, activeR: -1, activeC: -1, phase: "init", message: "Starting backtracking solver…" });
   backtrack();
-  steps.push({ activeLine: 18, board: cloneBoard(board), activeR: -1, activeC: -1, phase: "done", done: true, message: "Sudoku solved!" });
+  steps.push({ activeLine: 18, board, activeR: -1, activeC: -1, phase: "done", done: true, message: "Sudoku solved!" });
   return steps;
 }
 

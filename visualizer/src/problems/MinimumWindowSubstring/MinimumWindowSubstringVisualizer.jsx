@@ -7,6 +7,7 @@ import { useApplyExample } from '../../hooks/useApplyExample'
 import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
 import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
+import { getExamples } from '../../config/examplesRegistry'
 import './MinimumWindowSubstringVisualizer.css'
 
 function buildNeed(t) {
@@ -53,12 +54,7 @@ function generateSteps(s, t) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Classic', s: 'ADOBECODEBANC', t: 'ABC' },
-  { label: 'Tiny', s: 'a', t: 'a' },
-  { label: 'No Answer', s: 'a', t: 'aa' },
-  { label: 'Repeats', s: 'AAABBC', t: 'ABC' },
-]
+const EXAMPLES = getExamples('minimum-window-substring')
 
 const SNIPPETS = [
   { id: 'init', label: 'Init', lines: [4, 5, 6, 7, 8, 9] },

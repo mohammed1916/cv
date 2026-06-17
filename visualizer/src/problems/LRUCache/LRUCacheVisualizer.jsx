@@ -8,6 +8,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './LRUCacheVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -68,7 +69,7 @@ function generateSteps(commands, argsList) {
   let outputs = [null]
 
   steps.push({
-    phase: 'init', cache: JSON.parse(JSON.stringify(cache)), list: [...list], capacity, outputs: [...outputs],
+    phase: 'init', cache, list: [...list], capacity, outputs: [...outputs],
     activeLine: 7, message: `Initialize LRUCache with capacity \${capacity}. Create dummy left and right nodes.`
   })
 
@@ -77,14 +78,14 @@ function generateSteps(commands, argsList) {
     const args = argsList[i]
 
     steps.push({
-      phase: `cmd_\${i}_start`, cache: JSON.parse(JSON.stringify(cache)), list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
+      phase: `cmd_\${i}_start`, cache, list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
       activeLine: cmd === 'get' ? 22 : 29, message: `Execute \${cmd}(\${args.join(', ')}).`
     })
 
     if (cmd === 'get') {
       const key = args[0]
       steps.push({
-        phase: `cmd_\${i}_check`, cache: JSON.parse(JSON.stringify(cache)), list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
+        phase: `cmd_\${i}_check`, cache, list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
         activeLine: 23, message: `Check if key \${key} is in cache.`
       })
 
@@ -92,26 +93,26 @@ function generateSteps(commands, argsList) {
         // remove from list
         list = list.filter(k => k !== key)
         steps.push({
-          phase: `cmd_\${i}_remove`, cache: JSON.parse(JSON.stringify(cache)), list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
+          phase: `cmd_\${i}_remove`, cache, list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
           activeLine: 24, message: `Key \${key} exists. Remove node from its current position in the linked list.`
         })
 
         // insert at right
         list.push(key)
         steps.push({
-          phase: `cmd_\${i}_insert`, cache: JSON.parse(JSON.stringify(cache)), list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
+          phase: `cmd_\${i}_insert`, cache, list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
           activeLine: 25, message: `Insert node \${key} at the right end (most recently used).`
         })
 
         outputs.push(cache[key].val)
         steps.push({
-          phase: `cmd_\${i}_return`, cache: JSON.parse(JSON.stringify(cache)), list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
+          phase: `cmd_\${i}_return`, cache, list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
           activeLine: 26, message: `Return value \${cache[key].val}.`
         })
       } else {
         outputs.push(-1)
         steps.push({
-          phase: `cmd_\${i}_notfound`, cache: JSON.parse(JSON.stringify(cache)), list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
+          phase: `cmd_\${i}_notfound`, cache, list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
           activeLine: 27, message: `Key \${key} not found. Return -1.`
         })
       }
@@ -120,51 +121,51 @@ function generateSteps(commands, argsList) {
       const val = args[1]
 
       steps.push({
-        phase: `cmd_\${i}_check`, cache: JSON.parse(JSON.stringify(cache)), list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
+        phase: `cmd_\${i}_check`, cache, list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
         activeLine: 30, message: `Check if key \${key} is already in cache.`
       })
 
       if (key in cache) {
         list = list.filter(k => k !== key)
         steps.push({
-          phase: `cmd_\${i}_remove_exist`, cache: JSON.parse(JSON.stringify(cache)), list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
+          phase: `cmd_\${i}_remove_exist`, cache, list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
           activeLine: 31, message: `Key \${key} exists. Remove existing node from the list.`
         })
       }
 
       cache[key] = { key, val }
       steps.push({
-        phase: `cmd_\${i}_create`, cache: JSON.parse(JSON.stringify(cache)), list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
+        phase: `cmd_\${i}_create`, cache, list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
         activeLine: 32, message: `Create new Node(\${key}, \${val}) and store in cache dictionary.`
       })
 
       list.push(key)
       steps.push({
-        phase: `cmd_\${i}_insert`, cache: JSON.parse(JSON.stringify(cache)), list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
+        phase: `cmd_\${i}_insert`, cache, list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
         activeLine: 33, message: `Insert new node at the right end (most recently used).`
       })
 
       steps.push({
-        phase: `cmd_\${i}_check_cap`, cache: JSON.parse(JSON.stringify(cache)), list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
+        phase: `cmd_\${i}_check_cap`, cache, list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
         activeLine: 35, message: `Check if cache size (\${Object.keys(cache).length}) > capacity (\${capacity}).`
       })
 
       if (Object.keys(cache).length > capacity) {
         const lruKey = list[0]
         steps.push({
-          phase: `cmd_\${i}_lru`, cache: JSON.parse(JSON.stringify(cache)), list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
+          phase: `cmd_\${i}_lru`, cache, list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
           activeLine: 36, message: `Cache is full. Identify the least recently used node (leftmost node: key \${lruKey}).`
         })
 
         list.shift()
         steps.push({
-          phase: `cmd_\${i}_remove_lru`, cache: JSON.parse(JSON.stringify(cache)), list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
+          phase: `cmd_\${i}_remove_lru`, cache, list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
           activeLine: 37, message: `Remove LRU node from the linked list.`
         })
 
         delete cache[lruKey]
         steps.push({
-          phase: `cmd_\${i}_del_lru`, cache: JSON.parse(JSON.stringify(cache)), list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
+          phase: `cmd_\${i}_del_lru`, cache, list: [...list], capacity, outputs: [...outputs], currCmd: cmd, currArgs: args, cmdIndex: i,
           activeLine: 38, message: `Delete key \${lruKey} from the cache dictionary.`
         })
       }
@@ -175,30 +176,14 @@ function generateSteps(commands, argsList) {
   }
 
   steps.push({
-    phase: 'done', cache: JSON.parse(JSON.stringify(cache)), list: [...list], capacity, outputs: [...outputs],
+    phase: 'done', cache, list: [...list], capacity, outputs: [...outputs],
     activeLine: 6, message: 'All commands executed successfully.'
   })
 
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Classic 146',
-    commands: ["LRUCache", "put", "put", "get", "put", "get", "put", "get", "get", "get"],
-    argsList: [[2], [1, 1], [2, 2], [1], [3, 3], [2], [4, 4], [1], [3], [4]]
-  },
-  {
-    label: 'Overwrite',
-    commands: ["LRUCache", "put", "put", "put", "get"],
-    argsList: [[2], [2, 1], [2, 2], [2, 3], [2]]
-  },
-  {
-    label: 'Capacity 1',
-    commands: ["LRUCache", "put", "get", "put", "get", "get"],
-    argsList: [[1], [2, 1], [2], [3, 2], [2], [3]]
-  },
-]
+const EXAMPLES = getExamples('lrucache')
 
 export default function LRUCacheVisualizer() {
   const [commandsInput, setCommandsInput] = useState('["LRUCache", "put", "put", "get", "put", "get", "put", "get", "get", "get"]')

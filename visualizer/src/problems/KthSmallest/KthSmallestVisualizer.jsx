@@ -6,6 +6,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
+import { getExamples } from '../../config/examplesRegistry'
 import './KthSmallestVisualizer.css'
 
 const CANVAS_W = 520
@@ -94,12 +95,7 @@ function generateSteps(arr, k) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'LeetCode', arr: [3, 1, 4, null, 2], k: 1 },
-    { label: 'Example 2', arr: [5, 3, 6, 2, 4, null, null, 1], k: 3 },
-    { label: 'k=4', arr: [5, 3, 7, 1, 4, 6, 8], k: 4 },
-    { label: 'Root', arr: [2, 1, 3], k: 2 },
-]
+const EXAMPLES = getExamples('kth-smallest')
 
 export default function KthSmallestVisualizer() {
     const [arrInput, setArrInput] = useState('[3,1,4,null,2]')

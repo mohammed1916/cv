@@ -7,13 +7,10 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { useProblemCode } from "../../hooks/useProblemCode";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./RemoveDuplicatesVisualizer.css";
 
-const EXAMPLES = [
-  { label: "Ex 1", nums: [1, 1, 2] },
-  { label: "Ex 2", nums: [0, 0, 1, 1, 1, 2, 2, 3, 3, 4] },
-  { label: "Ex 3", nums: [1, 2, 2, 3, 4, 4, 5] },
-];
+const EXAMPLES = getExamples('remove-duplicates');
 
 function generateSteps(numsIn) {
   const steps = [];

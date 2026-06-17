@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./CandyVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -22,12 +23,7 @@ const SOLUTION_CODE = [
   { line: 12, text: "    return sum(candies)" },
 ];
 
-const EXAMPLES = [
-  { label: "Ex 1", ratings: [1, 0, 2] },
-  { label: "Ex 2", ratings: [1, 2, 2] },
-  { label: "Ex 3", ratings: [1, 3, 2, 2, 1] },
-  { label: "Ex 4", ratings: [1, 2, 3, 4, 5] },
-];
+const EXAMPLES = getExamples('candy');
 
 function generateSteps(ratingsIn) {
   const steps = [];

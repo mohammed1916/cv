@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './ThreeSumVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -124,12 +125,7 @@ function generateSteps(nums) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'Classic', nums: [-1, 0, 1, 2, -1, -4] },
-    { label: 'All Zeros', nums: [0, 0, 0, 0] },
-    { label: 'No Match', nums: [1, 2, 3, 4] },
-    { label: 'Duplicates', nums: [-2, 0, 0, 2, 2] },
-]
+const EXAMPLES = getExamples('three-sum')
 
 export default function ThreeSumVisualizer() {
     const [numsInput, setNumsInput] = useState('[-1,0,1,2,-1,-4]')

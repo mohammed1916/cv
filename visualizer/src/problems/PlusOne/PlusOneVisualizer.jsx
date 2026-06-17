@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./PlusOneVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -17,12 +18,7 @@ const SOLUTION_CODE = [
     { line: 7, text: "    return [1] + digits  # all 9s" },
 ];
 
-const EXAMPLES = [
-    { label: "Ex 1", digits: [1, 2, 3], desc: "123" },
-    { label: "Ex 2", digits: [4, 3, 2, 1], desc: "4321" },
-    { label: "Ex 3", digits: [9], desc: "9" },
-    { label: "Ex 4", digits: [9, 9, 9], desc: "999" },
-];
+const EXAMPLES = getExamples('plus-one');
 
 function generateSteps(digIn) {
     const steps = [];

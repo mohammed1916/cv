@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './SpiralMatrixVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -154,13 +155,7 @@ function generateSteps(matrix) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: '3x3', matrix: [[1, 2, 3], [4, 5, 6], [7, 8, 9]] },
-  { label: '3x4', matrix: [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]] },
-  { label: '4x3', matrix: [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]] },
-  { label: '1 Row', matrix: [[1, 2, 3, 4]] },
-  { label: '1 Col', matrix: [[1], [2], [3], [4]] },
-]
+const EXAMPLES = getExamples('spiral-matrix')
 
 export default function SpiralMatrixVisualizer() {
   const [matrixInput, setMatrixInput] = useState('[[1,2,3],[4,5,6],[7,8,9]]')

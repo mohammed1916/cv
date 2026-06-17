@@ -8,6 +8,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { useProblemCode } from '../../hooks/useProblemCode'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './AddTwoNumbersVisualizer.css'
 
 function generateSteps(list1, list2) {
@@ -84,12 +85,7 @@ function generateSteps(list1, list2) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Equal Length', l1: [2, 4, 3], l2: [5, 6, 4] },
-  { label: 'Carry', l1: [2, 4, 9], l2: [5, 6, 4] },
-  { label: 'Zeroes', l1: [0], l2: [0] },
-  { label: 'Different Length', l1: [9, 9, 9, 9, 9, 9, 9], l2: [9, 9, 9, 9] },
-]
+const EXAMPLES = getExamples('add-two-numbers')
 
 export default function AddTwoNumbersVisualizer({ problem }) {
   const [l1Input, setL1Input] = useState('[2, 4, 3]')

@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./GasStationVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -20,11 +21,7 @@ const SOLUTION_CODE = [
   { line: 10, text: "    return start if total >= 0 else -1" },
 ];
 
-const EXAMPLES = [
-  { label: "Ex 1", gas: [1, 2, 3, 4, 5], cost: [3, 4, 5, 1, 2] },
-  { label: "Ex 2", gas: [2, 3, 4], cost: [3, 4, 3] },
-  { label: "Ex 3", gas: [5, 1, 2, 3, 4], cost: [4, 4, 1, 5, 1] },
-];
+const EXAMPLES = getExamples('gas-station');
 
 function generateSteps(gas, cost) {
   const steps = [];

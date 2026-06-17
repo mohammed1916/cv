@@ -8,6 +8,7 @@ import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
+import { getExamples } from '../../config/examplesRegistry'
 import "./NQueensVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -24,11 +25,7 @@ const SOLUTION_CODE = [
   { line: 11, text: "            remove queen; remove from cols/diag1/diag2" },
 ];
 
-const EXAMPLES = [
-  { label: "n=4", n: 4 },
-  { label: "n=5", n: 5 },
-  { label: "n=6", n: 6 },
-];
+const EXAMPLES = getExamples('nqueens');
 
 function generateSteps(n) {
   const steps = [];
@@ -44,7 +41,7 @@ function generateSteps(n) {
 
   function backtrack(row) {
     if (row === n) {
-      solutions.push(board.map(r => [...r]));
+      solutions.push(board.map(r => [...r])); // Keep this copy for solutions storage (algo correctness)
       steps.push({
         activeLine: 5, boardRef: board,
         row, col: -1, phase: "solution", solutions: solutions.length,

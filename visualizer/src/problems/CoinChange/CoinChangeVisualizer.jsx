@@ -8,6 +8,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './CoinChangeVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -96,13 +97,7 @@ function generateSteps(coins, amount) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'Classic', coins: [1, 5, 10, 25], amount: 30 },
-    { label: 'LeetCode 1', coins: [1, 5, 6, 9], amount: 11 },
-    { label: 'Impossible', coins: [2], amount: 3 },
-    { label: 'Amount 0', coins: [1, 2, 5], amount: 0 },
-    { label: 'Big coins', coins: [186, 419, 83, 408], amount: 6249 },
-]
+const EXAMPLES = getExamples('coin-change')
 
 export default function CoinChangeVisualizer() {
     const [coinsInput, setCoinsInput] = useState('[1,5,6,9]')

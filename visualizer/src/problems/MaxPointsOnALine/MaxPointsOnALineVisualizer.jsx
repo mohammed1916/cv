@@ -8,6 +8,7 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
+import { getExamples } from '../../config/examplesRegistry'
 import "./MaxPointsOnALineVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -25,20 +26,7 @@ const SOLUTION_CODE = [
     { line: 12, text: "    return res" },
 ];
 
-const EXAMPLES = [
-    {
-        label: "Ex 1",
-        points: [[1, 1], [2, 2], [3, 3]],
-    },
-    {
-        label: "Ex 2",
-        points: [[1, 1], [3, 2], [5, 3], [4, 1], [2, 3], [1, 4]],
-    },
-    {
-        label: "Ex 3",
-        points: [[0, 0], [1, 1], [1, -1]],
-    },
-];
+const EXAMPLES = getExamples('max-points-on-aline');
 
 function gcd(a, b) { return b === 0 ? a : gcd(b, a % b); }
 

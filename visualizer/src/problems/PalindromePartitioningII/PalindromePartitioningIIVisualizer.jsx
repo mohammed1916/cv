@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./PalindromePartitioningIIVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -22,11 +23,7 @@ const SOLUTION_CODE = [
   { line: 12, text: "    return dp[n-1]" },
 ];
 
-const EXAMPLES = [
-  { label: "aab", s: "aab" },
-  { label: "aabb", s: "aabb" },
-  { label: "aaabbc", s: "aaabbc" },
-];
+const EXAMPLES = getExamples('palindrome-partitioning-ii');
 
 function generateSteps(s) {
   const n = s.length;
@@ -44,12 +41,12 @@ function generateSteps(s) {
   }
 
   const dp = Array.from({ length: n }, (_, i) => i);
-  steps.push({ activeLine: 6, dp: [...dp], pal: pal.map(r => [...r]), i: -1, j: -1, phase: "init", message: `Init dp=[${dp.join(",")}] (worst: cut every char)` });
+  steps.push({ activeLine: 6, dp, pal, i: -1, j: -1, phase: "init", message: `Init dp=[${dp.join(",")}] (worst: cut every char)` });
 
   for (let i = 0; i < n; i++) {
     if (pal[0][i]) {
       dp[i] = 0;
-      steps.push({ activeLine: 8, dp: [...dp], pal: pal.map(r => [...r]), i, j: -1, phase: "whole-pal", message: `s[0..${i}]="${s.slice(0,i+1)}" is palindrome → dp[${i}]=0` });
+      steps.push({ activeLine: 8, dp, pal, i, j: -1, phase: "whole-pal", message: `s[0..${i}]="${s.slice(0,i+1)}" is palindrome → dp[${i}]=0` });
       continue;
     }
     for (let j = 1; j <= i; j++) {
@@ -59,14 +56,14 @@ function generateSteps(s) {
         if (improved) dp[i] = newVal;
         steps.push({
           activeLine: improved ? 11 : 10,
-          dp: [...dp], pal: pal.map(r => [...r]), i, j, phase: improved ? "update" : "check",
+          dp, pal, i, j, phase: improved ? "update" : "check",
           message: `s[${j}..${i}]="${s.slice(j,i+1)}" pal → dp[${i}]=min(dp[${i}], dp[${j-1}]+1)=${dp[i]}`,
         });
       }
     }
   }
 
-  steps.push({ activeLine: 12, dp: [...dp], pal: pal.map(r => [...r]), i: n - 1, j: -1, phase: "done", done: true, message: `Min cuts = dp[${n-1}] = ${dp[n-1]}` });
+  steps.push({ activeLine: 12, dp, pal, i: n - 1, j: -1, phase: "done", done: true, message: `Min cuts = dp[${n-1}] = ${dp[n-1]}` });
   return steps;
 }
 

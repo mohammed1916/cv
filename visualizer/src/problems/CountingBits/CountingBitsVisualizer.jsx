@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './CountingBitsVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -37,7 +38,7 @@ function generateSteps(n) {
     return steps
 }
 
-const EXAMPLES = [{ label: 'n=5', n: 5 }, { label: 'n=8', n: 8 }, { label: 'n=12', n: 12 }, { label: 'n=2', n: 2 }]
+const EXAMPLES = getExamples('counting-bits')
 
 export default function CountingBitsVisualizer() {
     const [nInput, setNInput] = useState('5')

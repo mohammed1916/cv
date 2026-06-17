@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from "../../config/examplesRegistry";
 import "./BestTimeBuySellStockIVVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -23,35 +24,31 @@ const SOLUTION_CODE = [
   { line: 13, text: "    return dp[k][n-1]" },
 ];
 
-const EXAMPLES = [
-  { label: "k=2 [3,2,6,5,0,3]", k: 2, prices: [3,2,6,5,0,3] },
-  { label: "k=2 [3,3,5,0,0,3,1,4]", k: 2, prices: [3,3,5,0,0,3,1,4] },
-  { label: "k=1 [1,2,3,4,5]", k: 1, prices: [1,2,3,4,5] },
-];
+const EXAMPLES = getExamples('best-time-buy-sell-stock-iv');
 
 function generateSteps(k, prices) {
   const n = prices.length;
   const steps = [];
   const dp = Array.from({ length: k + 1 }, () => Array(n).fill(0));
 
-  steps.push({ activeLine: 5, dp: dp.map(r => [...r]), t: -1, i: -1, msf: null, phase: "init", message: `k=${k}, n=${n}. Init dp all zeros.` });
+  steps.push({ activeLine: 5, dp, t: -1, i: -1, msf: null, phase: "init", message: `k=${k}, n=${n}. Init dp all zeros.` });
 
   for (let t = 1; t <= k; t++) {
     let maxSoFar = -prices[0];
-    steps.push({ activeLine: 7, dp: dp.map(r => [...r]), t, i: 0, msf: maxSoFar, phase: "t-init", message: `t=${t}: max_so_far = -prices[0] = ${maxSoFar}` });
+    steps.push({ activeLine: 7, dp, t, i: 0, msf: maxSoFar, phase: "t-init", message: `t=${t}: max_so_far = -prices[0] = ${maxSoFar}` });
     for (let i = 1; i < n; i++) {
       const candidate = dp[t - 1][i - 1] - prices[i - 1];
       if (candidate > maxSoFar) maxSoFar = candidate;
       const newVal = Math.max(dp[t][i - 1], prices[i] + maxSoFar);
       dp[t][i] = newVal;
       steps.push({
-        activeLine: 12, dp: dp.map(r => [...r]), t, i, msf: maxSoFar, phase: "fill",
+        activeLine: 12, dp, t, i, msf: maxSoFar, phase: "fill",
         message: `t=${t}, i=${i}: msf=max(${maxSoFar}, dp[${t-1}][${i-1}]-p[${i-1}])=${maxSoFar}; dp[${t}][${i}]=max(dp[${t}][${i-1}], p[${i}]+msf)=${newVal}`,
       });
     }
   }
 
-  steps.push({ activeLine: 13, dp: dp.map(r => [...r]), t: k, i: n - 1, msf: null, phase: "done", done: true, message: `Max profit with ≤${k} transactions = ${dp[k][n - 1]}` });
+  steps.push({ activeLine: 13, dp, t: k, i: n - 1, msf: null, phase: "done", done: true, message: `Max profit with ≤${k} transactions = ${dp[k][n - 1]}` });
   return steps;
 }
 

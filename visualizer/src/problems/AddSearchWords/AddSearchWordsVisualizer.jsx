@@ -262,6 +262,12 @@ function AddSearchWordsVisualizer() {
 
     const examples = ['pad', 'bad', '.ad', 'b..', '...']
 
+    const handleExampleClick = useCallback((example) => {
+        setSearchWord(example)
+        setMode('search')
+        setCurrentStep(0)
+    }, [setSearchWord, setMode, setCurrentStep])
+
     return (
         <div className="asw-shell">
             <div className="asw-panel">
@@ -336,7 +342,7 @@ function AddSearchWordsVisualizer() {
                         {examples.map((ex) => (
                             <button
                                 key={ex}
-                                onClick={() => handleExampleSearch(ex)}
+                                onClick={() => handleExampleClick(ex)}
                                 className="asw-example-btn"
                             >
                                 {ex}

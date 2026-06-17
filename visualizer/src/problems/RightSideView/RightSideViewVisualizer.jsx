@@ -6,6 +6,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
+import { getExamples } from '../../config/examplesRegistry'
 import './RightSideViewVisualizer.css'
 
 const CANVAS_W = 520
@@ -114,12 +115,7 @@ function generateSteps(arr) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'Example', arr: [1, 2, 3, null, 5, null, 4] },
-    { label: 'Skewed', arr: [1, 2, null, 3] },
-    { label: 'Single', arr: [1] },
-    { label: 'Full', arr: [1, 2, 3, 4, 5, 6, 7] },
-]
+const EXAMPLES = getExamples('right-side-view')
 
 export default function RightSideViewVisualizer() {
     const [arrInput, setArrInput] = useState('[1,2,3,null,5,null,4]')

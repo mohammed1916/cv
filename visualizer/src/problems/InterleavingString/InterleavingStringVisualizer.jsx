@@ -8,6 +8,7 @@ import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
+import { getExamples } from '../../config/examplesRegistry'
 import "./InterleavingStringVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -27,11 +28,7 @@ const SOLUTION_CODE = [
     { line: 14, text: "    return dp[m][n]" },
 ];
 
-const EXAMPLES = [
-    { label: "s1=aab s2=axy s3=aaxaby", s1: "aab", s2: "axy", s3: "aaxaby" },
-    { label: "s1=aab s2=axy s3=aayxab", s1: "aab", s2: "axy", s3: "aayxab" },
-    { label: "s1=ab s2=bc s3=bbac", s1: "ab", s2: "bc", s3: "bbac" },
-];
+const EXAMPLES = getExamples('interleaving-string');
 
 function generateSteps(s1, s2, s3) {
     const m = s1.length, n = s2.length;
@@ -43,15 +40,15 @@ function generateSteps(s1, s2, s3) {
     // Build dp
     const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(false));
     dp[0][0] = true;
-    steps.push({ activeLine: 5, dp: dp.map(r => [...r]), curI: 0, curJ: 0, result: null, message: "Base: dp[0][0] = true (empty strings interleave)" });
+    steps.push({ activeLine: 5, dp, curI: 0, curJ: 0, result: null, message: "Base: dp[0][0] = true (empty strings interleave)" });
 
     for (let i = 1; i <= m; i++) {
         dp[i][0] = dp[i - 1][0] && s1[i - 1] === s3[i - 1];
-        steps.push({ activeLine: 7, dp: dp.map(r => [...r]), curI: i, curJ: 0, result: null, message: `dp[${i}][0] = dp[${i - 1}][0](${dp[i - 1][0]}) && s1[${i - 1}]="${s1[i - 1]}"==s3[${i - 1}]="${s3[i - 1]}" → ${dp[i][0]}` });
+        steps.push({ activeLine: 7, dp, curI: i, curJ: 0, result: null, message: `dp[${i}][0] = dp[${i - 1}][0](${dp[i - 1][0]}) && s1[${i - 1}]="${s1[i - 1]}"==s3[${i - 1}]="${s3[i - 1]}" → ${dp[i][0]}` });
     }
     for (let j = 1; j <= n; j++) {
         dp[0][j] = dp[0][j - 1] && s2[j - 1] === s3[j - 1];
-        steps.push({ activeLine: 9, dp: dp.map(r => [...r]), curI: 0, curJ: j, result: null, message: `dp[0][${j}] = dp[0][${j - 1}](${dp[0][j - 1]}) && s2[${j - 1}]="${s2[j - 1]}"==s3[${j - 1}]="${s3[j - 1]}" → ${dp[0][j]}` });
+        steps.push({ activeLine: 9, dp, curI: 0, curJ: j, result: null, message: `dp[0][${j}] = dp[0][${j - 1}](${dp[0][j - 1]}) && s2[${j - 1}]="${s2[j - 1]}"==s3[${j - 1}]="${s3[j - 1]}" → ${dp[0][j]}` });
     }
     for (let i = 1; i <= m; i++) {
         for (let j = 1; j <= n; j++) {
@@ -60,14 +57,14 @@ function generateSteps(s1, s2, s3) {
             dp[i][j] = fromTop || fromLeft;
             steps.push({
                 activeLine: 12,
-                dp: dp.map(r => [...r]),
+                dp,
                 curI: i, curJ: j,
                 result: null,
                 message: `dp[${i}][${j}]: top=${fromTop} | left=${fromLeft} → ${dp[i][j]} (s3[${i + j - 1}]="${s3[i + j - 1]}")`,
             });
         }
     }
-    steps.push({ activeLine: 14, dp: dp.map(r => [...r]), curI: m, curJ: n, result: dp[m][n], message: `Result: dp[${m}][${n}] = ${dp[m][n]}` });
+    steps.push({ activeLine: 14, dp, curI: m, curJ: n, result: dp[m][n], message: `Result: dp[${m}][${n}] = ${dp[m][n]}` });
     return steps;
 }
 

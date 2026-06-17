@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./EncodeDecodeVisualizer.css";
 
 const ENCODE_CODE = [
@@ -98,12 +99,7 @@ function generateSteps(strs) {
     return steps;
 }
 
-const EXAMPLES = [
-    { label: '["lint","code","love","you"]', strs: ["lint", "code", "love", "you"] },
-    { label: '["we","say",":","yes"]', strs: ["we", "say", ":", "yes"] },
-    { label: '[""]', strs: [""] },
-    { label: '["a","b"]', strs: ["a", "b"] },
-];
+const EXAMPLES = getExamples('encode-decode-strings');
 
 export default function EncodeDecodeVisualizer() {
     const [strsInput, setStrsInput] = useState('["lint","code","love","you"]');

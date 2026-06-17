@@ -7,6 +7,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './MatrixIterationBasicsVisualizer.css'
 
 const MODE_META = {
@@ -47,7 +48,7 @@ const MODE_META = {
   },
 }
 
-const EXAMPLES = [3, 4, 5, 6]
+const EXAMPLES = getExamples('matrix-iteration-basics')
 
 function makeCodeLines(mode) {
   return [

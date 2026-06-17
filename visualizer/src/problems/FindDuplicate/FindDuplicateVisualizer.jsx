@@ -8,6 +8,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
+import { getExamples } from '../../config/examplesRegistry'
 import './FindDuplicateVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -86,12 +87,7 @@ function generateSteps(nums) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'LeetCode', nums: [1, 3, 4, 2, 2] },
-    { label: 'Example 2', nums: [3, 1, 3, 4, 2] },
-    { label: 'Simple', nums: [1, 1] },
-    { label: 'Longer', nums: [2, 5, 9, 6, 9, 3, 8, 9, 7, 1] },
-]
+const EXAMPLES = getExamples('find-duplicate')
 
 // Visualization component for array and pointers
 function ArrayVisualizationPanel({ nums, step }) {

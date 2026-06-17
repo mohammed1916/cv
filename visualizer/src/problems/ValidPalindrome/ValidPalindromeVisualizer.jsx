@@ -6,6 +6,7 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./ValidPalindromeVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -80,12 +81,7 @@ function generateSteps(raw) {
     return steps;
 }
 
-const EXAMPLES = [
-    { label: "A man a plan", s: "A man, a plan, a canal: Panama" },
-    { label: "race a car", s: "race a car" },
-    { label: `" "`, s: " " },
-    { label: "Was it a car", s: "Was it a car or a cat I saw?" },
-];
+const EXAMPLES = getExamples('valid-palindrome');
 
 export default function ValidPalindromeVisualizer() {
     const [input, setInput] = useState("A man, a plan, a canal: Panama");

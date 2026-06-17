@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./ReverseBitsVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -16,11 +17,7 @@ const SOLUTION_CODE = [
     { line: 6, text: "    return result" },
 ];
 
-const EXAMPLES = [
-    { label: "Ex 1", n: 0b00000010100101000001111010011100, desc: "43261596" },
-    { label: "Ex 2", n: 0b11111111111111111111111111111101, desc: "4294967293" },
-    { label: "Ex 3", n: 0b00000000000000000000000000000001, desc: "1" },
-];
+const EXAMPLES = getExamples('reverse-bits');
 
 function toBin32(n) { return (n >>> 0).toString(2).padStart(32, "0"); }
 

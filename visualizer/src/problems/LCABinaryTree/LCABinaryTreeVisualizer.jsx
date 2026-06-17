@@ -9,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
+import { getExamples } from '../../config/examplesRegistry'
 import './LCABinaryTreeVisualizer.css'
 
 const CANVAS_W = 520
@@ -102,12 +103,7 @@ function generateSteps(arr, pVal, qVal) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'LeetCode', arr: [3, 5, 1, 6, 2, 0, 8, null, null, 7, 4], p: 5, q: 1 },
-    { label: 'p=5,q=4', arr: [3, 5, 1, 6, 2, 0, 8, null, null, 7, 4], p: 5, q: 4 },
-    { label: 'Small', arr: [1, 2, 3], p: 2, q: 3 },
-    { label: 'Deep', arr: [6, 2, 8, 0, 4, 7, 9, null, null, 3, 5], p: 0, q: 5 },
-]
+const EXAMPLES = getExamples('lcabinary-tree')
 
 export default function LCABinaryTreeVisualizer() {
     const [arrInput, setArrInput] = useState('[3,5,1,6,2,0,8,null,null,7,4]')

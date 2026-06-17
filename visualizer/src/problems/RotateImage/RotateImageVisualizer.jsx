@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./RotateImageVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -20,43 +21,38 @@ const SOLUTION_CODE = [
     { line: 10, text: "        row.reverse()" },
 ];
 
-function deepCopy(m) { return m.map((r) => [...r]); }
-
 function generateSteps(initial) {
     const steps = [];
     const n = initial.length;
-    const matrix = deepCopy(initial);
+    const matrix = initial.map((r) => [...r]); // Init copy needed only here
 
-    steps.push({ activeLine: 3, matrix: deepCopy(matrix), hi: null, hj: null, phase: "start", message: "Step 1: Transpose the matrix." });
+    steps.push({ activeLine: 3, matrix, hi: null, hj: null, phase: "start", message: "Step 1: Transpose the matrix." });
 
     // Transpose
     for (let i = 0; i < n; i++) {
         for (let j = i + 1; j < n; j++) {
-            steps.push({ activeLine: 5, matrix: deepCopy(matrix), hi: i, hj: j, phase: "swap-pre", message: `Swap [${i}][${j}]=${matrix[i][j]} ↔ [${j}][${i}]=${matrix[j][i]}` });
+            steps.push({ activeLine: 5, matrix, hi: i, hj: j, phase: "swap-pre", message: `Swap [${i}][${j}]=${matrix[i][j]} ↔ [${j}][${i}]=${matrix[j][i]}` });
             const tmp = matrix[i][j];
             matrix[i][j] = matrix[j][i];
             matrix[j][i] = tmp;
-            steps.push({ activeLine: 6, matrix: deepCopy(matrix), hi: i, hj: j, phase: "swap-post", message: `Swapped: [${i}][${j}]=${matrix[i][j]}, [${j}][${i}]=${matrix[j][i]}` });
+            steps.push({ activeLine: 6, matrix, hi: i, hj: j, phase: "swap-post", message: `Swapped: [${i}][${j}]=${matrix[i][j]}, [${j}][${i}]=${matrix[j][i]}` });
         }
     }
 
-    steps.push({ activeLine: 8, matrix: deepCopy(matrix), hi: null, hj: null, phase: "reverse-start", message: "Transpose done. Step 2: Reverse each row." });
+    steps.push({ activeLine: 8, matrix, hi: null, hj: null, phase: "reverse-start", message: "Transpose done. Step 2: Reverse each row." });
 
     // Reverse rows
     for (let i = 0; i < n; i++) {
-        steps.push({ activeLine: 9, matrix: deepCopy(matrix), hi: i, hj: null, phase: "reverse-row-pre", message: `Reverse row ${i}: [${matrix[i].join(",")}]` });
+        steps.push({ activeLine: 9, matrix, hi: i, hj: null, phase: "reverse-row-pre", message: `Reverse row ${i}: [${matrix[i].join(",")}]` });
         matrix[i].reverse();
-        steps.push({ activeLine: 10, matrix: deepCopy(matrix), hi: i, hj: null, phase: "reverse-row-post", message: `Row ${i} reversed → [${matrix[i].join(",")}]` });
+        steps.push({ activeLine: 10, matrix, hi: i, hj: null, phase: "reverse-row-post", message: `Row ${i} reversed → [${matrix[i].join(",")}]` });
     }
 
-    steps.push({ activeLine: 10, matrix: deepCopy(matrix), hi: null, hj: null, phase: "done", message: "Done! Matrix rotated 90° clockwise." });
+    steps.push({ activeLine: 10, matrix, hi: null, hj: null, phase: "done", message: "Done! Matrix rotated 90° clockwise." });
     return steps;
 }
 
-const EXAMPLES = [
-    { label: "3×3", matrix: [[1, 2, 3], [4, 5, 6], [7, 8, 9]] },
-    { label: "4×4", matrix: [[5, 1, 9, 11], [2, 4, 8, 10], [13, 3, 6, 7], [15, 14, 12, 16]] },
-];
+const EXAMPLES = getExamples('rotate-image');
 
 const ACCENT = "#f9e2af";
 

@@ -9,6 +9,7 @@ import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
 import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput, TreeSVG } from '../../components/treeUtils'
+import { getExamples } from '../../config/examplesRegistry'
 import './MaxDepthBinaryTreeVisualizer.css'
 
 const CANVAS_W = 500
@@ -76,12 +77,7 @@ function generateSteps(arr) {
     return { steps, positions, edges, nodes: collectNodes(root) }
 }
 
-const EXAMPLES = [
-    { label: 'LeetCode', arr: [3, 9, 20, null, null, 15, 7] },
-    { label: 'Skewed', arr: [1, 2, null, 3, null, 4] },
-    { label: 'Single', arr: [1] },
-    { label: 'Full', arr: [1, 2, 3, 4, 5, 6, 7] },
-]
+const EXAMPLES = getExamples('max-depth-binary-tree')
 
 const SNIPPETS = [
     { id: 'init', label: 'Init', lines: [3] },

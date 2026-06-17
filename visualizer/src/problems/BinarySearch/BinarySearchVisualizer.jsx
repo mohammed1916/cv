@@ -6,6 +6,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './BinarySearchVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -103,12 +104,7 @@ function generateSteps(nums, target) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Standard', nums: [-1, 0, 3, 5, 9, 12], target: 9 },
-  { label: 'First Element', nums: [-1, 0, 3, 5, 9, 12], target: -1 },
-  { label: 'Not Found', nums: [-1, 0, 3, 5, 9, 12], target: 2 },
-  { label: 'Single Element', nums: [5], target: 5 },
-]
+const EXAMPLES = getExamples('binary-search')
 
 export default function BinarySearchVisualizer() {
   const [numsInput, setNumsInput] = useState('[-1, 0, 3, 5, 9, 12]')

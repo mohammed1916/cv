@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./Search2DMatrixVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -50,11 +51,7 @@ function generateSteps(matrix, target) {
     return steps;
 }
 
-const EXAMPLES = [
-    { label: "target=3", matrix: [[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]], target: 3 },
-    { label: "target=13", matrix: [[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]], target: 13 },
-    { label: "target=16", matrix: [[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]], target: 16 },
-];
+const EXAMPLES = getExamples('search2-dmatrix');
 
 export default function Search2DMatrixVisualizer() {
     const [sel, setSel] = useState(0);

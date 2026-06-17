@@ -8,6 +8,7 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './HouseRobberIIVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -95,12 +96,7 @@ function generateSteps(nums) {
     return allSteps
 }
 
-const EXAMPLES = [
-    { label: 'LeetCode', nums: [2, 3, 2] },
-    { label: 'Example 2', nums: [1, 2, 3, 1] },
-    { label: 'All Same', nums: [5, 5, 5, 5, 5] },
-    { label: 'Long', nums: [1, 2, 3, 4, 5, 6, 7] },
-]
+const EXAMPLES = getExamples('house-robber-ii')
 
 export default function HouseRobberIIVisualizer() {
     const [numsInput, setNumsInput] = useState('[2,3,2]')

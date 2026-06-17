@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./SlidingWindowMaxVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -70,11 +71,7 @@ function generateSteps(nums, k) {
     return steps;
 }
 
-const EXAMPLES = [
-    { label: "[1,3,-1,-3,5,3,6,7] k=3", nums: [1, 3, -1, -3, 5, 3, 6, 7], k: 3 },
-    { label: "[1] k=1", nums: [1], k: 1 },
-    { label: "[2,1,5,3,6,4,8,9,2] k=3", nums: [2, 1, 5, 3, 6, 4, 8, 9, 2], k: 3 },
-];
+const EXAMPLES = getExamples('sliding-window-maximum');
 
 function parseNums(str) {
     try { const p = JSON.parse(str); if (!Array.isArray(p)) throw new Error(); return { nums: p.map(Number), err: "" }; }

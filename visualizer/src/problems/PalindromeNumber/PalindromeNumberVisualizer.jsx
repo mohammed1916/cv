@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./PalindromeNumberVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -21,15 +22,7 @@ const SOLUTION_CODE = [
   { line: 11, text: "        return x == rev or x == rev // 10" },
 ];
 
-const EXAMPLES = [
-  { label: "121", value: "121" },
-  { label: "-121", value: "-121" },
-  { label: "10", value: "10" },
-  { label: "0", value: "0" },
-  { label: "1221", value: "1221" },
-  { label: "12321", value: "12321" },
-  { label: "1234321", value: "1234321" },
-];
+const EXAMPLES = getExamples('palindrome-number');
 
 const EDGE_CASES = [
   {

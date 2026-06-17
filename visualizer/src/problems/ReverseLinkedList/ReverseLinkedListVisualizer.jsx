@@ -8,6 +8,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
+import { getExamples } from '../../config/examplesRegistry'
 import './ReverseLinkedListVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -107,14 +108,14 @@ function generateSteps(values) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: '1→2→3→4→5', values: [1, 2, 3, 4, 5] },
-    { label: '1→2', values: [1, 2] },
-    { label: 'Single', values: [42] },
-    { label: 'Short', values: [3, 1, 4, 1, 5] },
-]
+const EXAMPLES = getExamples('reverse-linked-list')
 
 function ReverseLinkedListViz({ step, values, nodes, arrows, EXAMPLES, valInput, setValInput, handleReset, inputError }) {
+    const handleExampleClick = useCallback((ex) => {
+        setValInput(JSON.stringify(ex.values))
+        handleReset()
+    }, [setValInput, handleReset])
+
     return (
         <section className="rll-panel main">
             <header className="rll-head">
@@ -124,10 +125,7 @@ function ReverseLinkedListViz({ step, values, nodes, arrows, EXAMPLES, valInput,
             <div className="rll-body">
                 <div className="rll-examples">
                     {EXAMPLES.map((ex) => (
-                        <button key={ex.label} className="rll-chip" onClick={() => {
-                            setValInput(JSON.stringify(ex.values))
-                            handleReset()
-                        }}>
+                        <button key={ex.label} className="rll-chip" onClick={() => handleExampleClick(ex)}>
                             {ex.label}
                         </button>
                     ))}

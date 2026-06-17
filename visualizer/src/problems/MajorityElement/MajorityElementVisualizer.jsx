@@ -6,6 +6,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './MajorityElementVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -58,12 +59,7 @@ function generateSteps(nums) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'Basic', nums: [3, 2, 3] },
-    { label: 'LeetCode', nums: [2, 2, 1, 1, 1, 2, 2] },
-    { label: 'All Same', nums: [5, 5, 5, 5] },
-    { label: 'Longer', nums: [1, 3, 1, 3, 1, 3, 1] },
-]
+const EXAMPLES = getExamples('majority-element')
 
 export default function MajorityElementVisualizer() {
     const [numsInput, setNumsInput] = useState('[2,2,1,1,1,2,2]')

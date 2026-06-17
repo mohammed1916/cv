@@ -9,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
+import { getExamples } from '../../config/examplesRegistry'
 import './LCABSTVisualizer.css'
 
 const CANVAS_W = 520
@@ -96,12 +97,7 @@ function parseInputs(arrInput, pInput, qInput) {
     return { arr, p, q }
 }
 
-const EXAMPLES = [
-    { label: 'LeetCode 1', arrInput: '[6,2,8,0,4,7,9,null,null,3,5]', p: 2, q: 8 },
-    { label: 'LeetCode 2', arrInput: '[6,2,8,0,4,7,9,null,null,3,5]', p: 2, q: 4 },
-    { label: 'Simple', arrInput: '[4,2,6,1,3,5,7]', p: 1, q: 3 },
-    { label: 'Deep', arrInput: '[4,2,6,1,3,5,7]', p: 1, q: 7 },
-]
+const EXAMPLES = getExamples('lcabst')
 
 function TreeVisualizationPanel({
     positions,

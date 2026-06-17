@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from "../../config/examplesRegistry";
 import "./BasicCalculatorVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -26,11 +27,7 @@ const SOLUTION_CODE = [
   { line: 16, text: "    return result + sign * num" },
 ];
 
-const EXAMPLES = [
-  { label: "1+1", s: "1 + 1" },
-  { label: "2-1+2", s: " 2-1 + 2 " },
-  { label: "Nested", s: "(1+(4+5+2)-3)+(6+8)" },
-];
+const EXAMPLES = getExamples('basic-calculator');
 
 function generateSteps(s) {
   const steps = [];

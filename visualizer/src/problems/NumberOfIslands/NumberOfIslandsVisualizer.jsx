@@ -8,6 +8,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './NumberOfIslandsVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -144,20 +145,7 @@ function generateSteps(grid) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Standard',
-    gridStr: '[\n  ["1","1","1","1","0"],\n  ["1","1","0","1","0"],\n  ["1","1","0","0","0"],\n  ["0","0","0","0","0"]\n]'
-  },
-  {
-    label: 'Multiple',
-    gridStr: '[\n  ["1","1","0","0","0"],\n  ["1","1","0","0","0"],\n  ["0","0","1","0","0"],\n  ["0","0","0","1","1"]\n]'
-  },
-  {
-    label: 'Checkerboard',
-    gridStr: '[\n  ["1","0","1"],\n  ["0","1","0"],\n  ["1","0","1"]\n]'
-  },
-]
+const EXAMPLES = getExamples('number-of-islands')
 
 const ISLAND_COLORS = [
   '#3b82f6', // blue

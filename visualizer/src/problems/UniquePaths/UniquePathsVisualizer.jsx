@@ -8,6 +8,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
+import { getExamples } from '../../config/examplesRegistry'
 import './UniquePathsVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -30,7 +31,7 @@ function generateSteps(m, n) {
 
     steps.push({
         phase: 'init', activeLine: 3,
-        dp: dp.map(r => [...r]), r: -1, c: -1, result: null,
+        dp, r: -1, c: -1, result: null,
         message: `Initialize ${m}×${n} grid. First row and column = 1 (only one path each).`,
     })
 
@@ -42,7 +43,7 @@ function generateSteps(m, n) {
 
             steps.push({
                 phase: 'fill', activeLine: 7,
-                dp: dp.map(row => [...row]), r, c, result: null,
+                dp, r, c, result: null,
                 from_above: above, from_left: left,
                 message: `dp[${r}][${c}] = dp[${r - 1}][${c}](${above}) + dp[${r}][${c - 1}](${left}) = ${dp[r][c]}.`,
             })
@@ -51,20 +52,14 @@ function generateSteps(m, n) {
 
     steps.push({
         phase: 'done', activeLine: 9,
-        dp: dp.map(row => [...row]), r: m - 1, c: n - 1, result: dp[m - 1][n - 1],
+        dp, r: m - 1, c: n - 1, result: dp[m - 1][n - 1],
         message: `dp[${m - 1}][${n - 1}] = ${dp[m - 1][n - 1]}. There are ${dp[m - 1][n - 1]} unique paths.`,
     })
 
     return steps
 }
 
-const EXAMPLES = [
-    { label: '3×7', m: 3, n: 7 },
-    { label: '3×2', m: 3, n: 2 },
-    { label: '2×2', m: 2, n: 2 },
-    { label: '4×4', m: 4, n: 4 },
-    { label: '5×5', m: 5, n: 5 },
-]
+const EXAMPLES = getExamples('unique-paths')
 
 function UniquePathsVisualization({ m, n, step, onApplyExample, mInput, nInput, setMInput, setNInput, handleReset }) {
     const dp = step?.dp ?? generateSteps(m, n)[0].dp

@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from "../../config/examplesRegistry";
 import "./BestTimeBuySellStockIIIVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -19,11 +20,7 @@ const SOLUTION_CODE = [
     { line: 9, text: "    return s2" },
 ];
 
-const EXAMPLES = [
-    { label: "[3,3,5,0,0,3,1,4]", prices: [3, 3, 5, 0, 0, 3, 1, 4] },
-    { label: "[1,2,3,4,5]", prices: [1, 2, 3, 4, 5] },
-    { label: "[7,6,4,3,1]", prices: [7, 6, 4, 3, 1] },
-];
+const EXAMPLES = getExamples('best-time-buy-sell-stock-iii');
 
 function generateSteps(prices) {
     const steps = [];

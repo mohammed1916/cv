@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './GuessNumberVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -22,12 +23,7 @@ const SOLUTION_CODE = [
     { line: 12, text: '                lo = mid + 1' },
 ]
 
-const EXAMPLES = [
-    { label: 'n=10, pick=6',  n: 10,  pick: 6  },
-    { label: 'n=16, pick=1',  n: 16,  pick: 1  },
-    { label: 'n=20, pick=20', n: 20,  pick: 20 },
-    { label: 'n=100, pick=73', n: 100, pick: 73 },
-]
+const EXAMPLES = getExamples('guess-number')
 
 function guessResult(mid, pick) {
     if (mid === pick) return 0

@@ -8,6 +8,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
+import { getExamples } from '../../config/examplesRegistry'
 import './SubsetsVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -31,7 +32,7 @@ function generateSteps(nums) {
         res.push([...path])
         steps.push({
             phase: 'record', activeLine: 4,
-            path: [...path], start, res: res.map((r) => [...r]),
+            path: [...path], start, res,
             message: `Record subset [${path.join(', ')}]`,
         })
 
@@ -39,13 +40,13 @@ function generateSteps(nums) {
             path.push(nums[i])
             steps.push({
                 phase: 'choose', activeLine: 6,
-                path: [...path], start: i, res: res.map((r) => [...r]),
+                path: [...path], start: i, res,
                 message: `Choose nums[${i}]=${nums[i]}, path=[${path.join(', ')}]`,
             })
 
             steps.push({
                 phase: 'recurse', activeLine: 7,
-                path: [...path], start: i + 1, res: res.map((r) => [...r]),
+                path: [...path], start: i + 1, res,
                 message: `Recurse with start=${i + 1}`,
             })
 
@@ -54,7 +55,7 @@ function generateSteps(nums) {
             path.pop()
             steps.push({
                 phase: 'unchoose', activeLine: 8,
-                path: [...path], start: i, res: res.map((r) => [...r]),
+                path: [...path], start: i, res,
                 message: `Unchoose nums[${i}]=${nums[i]}, path=[${path.join(', ')}]`,
             })
         }
@@ -70,19 +71,14 @@ function generateSteps(nums) {
 
     steps.push({
         phase: 'done', activeLine: 10,
-        path: [], start: nums.length, res: res.map((r) => [...r]),
+        path: [], start: nums.length, res,
         message: `Done. ${res.length} subsets found.`,
     })
 
     return steps
 }
 
-const EXAMPLES = [
-    { label: '[1,2,3]', nums: [1, 2, 3] },
-    { label: '[0]', nums: [0] },
-    { label: '[1,2]', nums: [1, 2] },
-    { label: '[1,2,3,4]', nums: [1, 2, 3, 4] },
-]
+const EXAMPLES = getExamples('subsets')
 
 export default function SubsetsVisualizer() {
     const [numsInput, setNumsInput] = useState('[1,2,3]')

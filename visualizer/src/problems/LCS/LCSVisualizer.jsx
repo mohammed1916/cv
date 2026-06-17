@@ -8,6 +8,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
+import { getExamples } from '../../config/examplesRegistry'
 import './LCSVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -69,12 +70,7 @@ function generateSteps(text1, text2) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'LeetCode', t1: 'abcde', t2: 'ace' },
-    { label: 'Identical', t1: 'abc', t2: 'abc' },
-    { label: 'No LCS', t1: 'abc', t2: 'def' },
-    { label: 'Long', t1: 'abcba', t2: 'abcbcba' },
-]
+const EXAMPLES = getExamples('lcs')
 
 const MAX_LEN = 10
 

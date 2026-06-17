@@ -7,6 +7,7 @@ import { useApplyExample } from '../../hooks/useApplyExample'
 import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
 import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
+import { getExamples } from '../../config/examplesRegistry'
 import './CourseScheduleVisualizer.css'
 
 function generateSteps(numCourses, prerequisites) {
@@ -28,14 +29,14 @@ function generateSteps(numCourses, prerequisites) {
   }
 
   steps.push({
-    phase: 'init', adj: JSON.parse(JSON.stringify(adj)), indegree: [...indegree], queue: [], visited: 0,
+    phase: 'init', adj, indegree: [...indegree], queue: [], visited: 0,
     activeLine: 4, message: `Initialize adjacency list and indegree array for \${numCourses} courses.`
   })
 
   // Build graph
   for (const [crs, pre] of prerequisites) {
     steps.push({
-      phase: 'build_graph_read', adj: JSON.parse(JSON.stringify(adj)), indegree: [...indegree], queue: [], visited: 0,
+      phase: 'build_graph_read', adj, indegree: [...indegree], queue: [], visited: 0,
       currEdge: [crs, pre],
       activeLine: 6, message: `Read prerequisite: must take \${pre} before \${crs}.`
     })
@@ -44,7 +45,7 @@ function generateSteps(numCourses, prerequisites) {
     adj[pre].push(crs)
 
     steps.push({
-      phase: 'build_graph_adj', adj: JSON.parse(JSON.stringify(adj)), indegree: [...indegree], queue: [], visited: 0,
+      phase: 'build_graph_adj', adj, indegree: [...indegree], queue: [], visited: 0,
       currEdge: [crs, pre],
       activeLine: 7, message: `Add directed edge \${pre} -> \${crs} to adjacency list.`
     })
@@ -52,7 +53,7 @@ function generateSteps(numCourses, prerequisites) {
     if (crs < numCourses && crs >= 0) indegree[crs]++
 
     steps.push({
-      phase: 'build_graph_indegree', adj: JSON.parse(JSON.stringify(adj)), indegree: [...indegree], queue: [], visited: 0,
+      phase: 'build_graph_indegree', adj, indegree: [...indegree], queue: [], visited: 0,
       currEdge: [crs, pre],
       activeLine: 8, message: `Increment indegree for course \${crs} (now \${indegree[crs]}).`
     })
@@ -65,13 +66,13 @@ function generateSteps(numCourses, prerequisites) {
   }
 
   steps.push({
-    phase: 'init_queue', adj: JSON.parse(JSON.stringify(adj)), indegree: [...indegree], queue: [...queue], visited: 0,
+    phase: 'init_queue', adj, indegree: [...indegree], queue: [...queue], visited: 0,
     activeLine: 10, message: `Find all courses with 0 prerequisites and add to queue: [\${queue.join(', ')}].`
   })
 
   let visited = 0
   steps.push({
-    phase: 'init_visited', adj: JSON.parse(JSON.stringify(adj)), indegree: [...indegree], queue: [...queue], visited,
+    phase: 'init_visited', adj, indegree: [...indegree], queue: [...queue], visited,
     activeLine: 11, message: `Initialize visited count to \${visited}.`
   })
 
@@ -80,7 +81,7 @@ function generateSteps(numCourses, prerequisites) {
   // Process Queue
   while (queue.length > 0) {
     steps.push({
-      phase: 'while_check', adj: JSON.parse(JSON.stringify(adj)), indegree: [...indegree], queue: [...queue], visited, processedNodes: [...processedNodes],
+      phase: 'while_check', adj, indegree: [...indegree], queue: [...queue], visited, processedNodes: [...processedNodes],
       activeLine: 13, message: `Queue is not empty (length \${queue.length}). Continue topological sort.`
     })
 
@@ -88,14 +89,14 @@ function generateSteps(numCourses, prerequisites) {
     processedNodes.push(node)
 
     steps.push({
-      phase: 'pop_node', adj: JSON.parse(JSON.stringify(adj)), indegree: [...indegree], queue: [...queue], visited, processedNodes: [...processedNodes],
+      phase: 'pop_node', adj, indegree: [...indegree], queue: [...queue], visited, processedNodes: [...processedNodes],
       currNode: node,
       activeLine: 14, message: `Pop course \${node} from queue. You can take this course now!`
     })
 
     visited++
     steps.push({
-      phase: 'inc_visited', adj: JSON.parse(JSON.stringify(adj)), indegree: [...indegree], queue: [...queue], visited, processedNodes: [...processedNodes],
+      phase: 'inc_visited', adj, indegree: [...indegree], queue: [...queue], visited, processedNodes: [...processedNodes],
       currNode: node,
       activeLine: 15, message: `Increment visited count to \${visited}.`
     })
@@ -104,7 +105,7 @@ function generateSteps(numCourses, prerequisites) {
 
     if (neighbors.length === 0) {
       steps.push({
-        phase: 'no_neighbors', adj: JSON.parse(JSON.stringify(adj)), indegree: [...indegree], queue: [...queue], visited, processedNodes: [...processedNodes],
+        phase: 'no_neighbors', adj, indegree: [...indegree], queue: [...queue], visited, processedNodes: [...processedNodes],
         currNode: node,
         activeLine: 16, message: `Course \${node} has no dependent courses.`
       })
@@ -112,20 +113,20 @@ function generateSteps(numCourses, prerequisites) {
 
     for (const neighbor of neighbors) {
       steps.push({
-        phase: 'visit_neighbor', adj: JSON.parse(JSON.stringify(adj)), indegree: [...indegree], queue: [...queue], visited, processedNodes: [...processedNodes],
+        phase: 'visit_neighbor', adj, indegree: [...indegree], queue: [...queue], visited, processedNodes: [...processedNodes],
         currNode: node, currNeighbor: neighbor,
         activeLine: 16, message: `Examine dependent course \${neighbor} (requires \${node}).`
       })
 
       indegree[neighbor]--
       steps.push({
-        phase: 'dec_indegree', adj: JSON.parse(JSON.stringify(adj)), indegree: [...indegree], queue: [...queue], visited, processedNodes: [...processedNodes],
+        phase: 'dec_indegree', adj, indegree: [...indegree], queue: [...queue], visited, processedNodes: [...processedNodes],
         currNode: node, currNeighbor: neighbor,
         activeLine: 17, message: `Decrement indegree for \${neighbor} (now \${indegree[neighbor]}).`
       })
 
       steps.push({
-        phase: 'check_neighbor_indegree', adj: JSON.parse(JSON.stringify(adj)), indegree: [...indegree], queue: [...queue], visited, processedNodes: [...processedNodes],
+        phase: 'check_neighbor_indegree', adj, indegree: [...indegree], queue: [...queue], visited, processedNodes: [...processedNodes],
         currNode: node, currNeighbor: neighbor,
         activeLine: 18, message: `Check if \${neighbor} has any remaining prerequisites (indegree == 0?).`
       })
@@ -133,7 +134,7 @@ function generateSteps(numCourses, prerequisites) {
       if (indegree[neighbor] === 0) {
         queue.push(neighbor)
         steps.push({
-          phase: 'enqueue_neighbor', adj: JSON.parse(JSON.stringify(adj)), indegree: [...indegree], queue: [...queue], visited, processedNodes: [...processedNodes],
+          phase: 'enqueue_neighbor', adj, indegree: [...indegree], queue: [...queue], visited, processedNodes: [...processedNodes],
           currNode: node, currNeighbor: neighbor,
           activeLine: 19, message: `Course \${neighbor} has 0 remaining prerequisites! Add to queue.`
         })
@@ -143,7 +144,7 @@ function generateSteps(numCourses, prerequisites) {
 
   const success = visited === numCourses
   steps.push({
-    phase: 'done', adj: JSON.parse(JSON.stringify(adj)), indegree: [...indegree], queue: [...queue], visited, processedNodes: [...processedNodes],
+    phase: 'done', adj, indegree: [...indegree], queue: [...queue], visited, processedNodes: [...processedNodes],
     success,
     activeLine: 21, message: success
       ? `Visited (\${visited}) == numCourses (\${numCourses}). All courses can be finished!`
@@ -153,12 +154,7 @@ function generateSteps(numCourses, prerequisites) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Simple Path', numCourses: 2, prerequisites: [[1, 0]] },
-  { label: 'Cycle (Fail)', numCourses: 2, prerequisites: [[1, 0], [0, 1]] },
-  { label: 'Complex DAG', numCourses: 6, prerequisites: [[1, 0], [2, 0], [3, 1], [3, 2], [5, 3], [4, 3]] },
-  { label: 'Disconnected', numCourses: 4, prerequisites: [[1, 0], [3, 2]] },
-]
+const EXAMPLES = getExamples('course-schedule')
 
 const SNIPPETS = [
   { id: 'init', label: 'Init Graph', lines: [3, 4, 6, 7, 8, 10, 11] },

@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./FindAllAnagramsVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -22,11 +23,7 @@ const SOLUTION_CODE = [
     { line: 12, text: "    return result" },
 ];
 
-const EXAMPLES = [
-    { label: 's="cbaebabacd" p="abc"', s: "cbaebabacd", p: "abc" },
-    { label: 's="abab" p="ab"', s: "abab", p: "ab" },
-    { label: 's="aaaaaaa" p="aa"', s: "aaaaaaa", p: "aa" },
-];
+const EXAMPLES = getExamples('find-all-anagrams');
 
 function countEq(a, b) {
     if (Object.keys(a).length !== Object.keys(b).length) return false;

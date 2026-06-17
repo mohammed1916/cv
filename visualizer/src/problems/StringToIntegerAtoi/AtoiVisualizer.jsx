@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './AtoiVisualizer.css'
 
 const INT_MIN = -(2 ** 31)
@@ -36,15 +37,7 @@ const SOLUTION_CODE = [
   { line: 23, text: '        return result' },
 ]
 
-const EXAMPLES = [
-  { label: 'Simple', value: '42', note: 'No whitespace, no sign, just digits.' },
-  { label: 'Leading space', value: '   -042', note: 'Skips spaces, reads sign, ignores leading zeros in the value.' },
-  { label: 'Stops on letter', value: '1337c0d3', note: 'Parsing stops at the first non-digit.' },
-  { label: 'Stops on symbol', value: '0-1', note: 'Reads 0, then stops at the dash.' },
-  { label: 'Invalid start', value: 'words and 987', note: 'No digits can be read, so the result is 0.' },
-  { label: 'Overflow', value: '91283472332', note: 'Shows positive clamping to INT_MAX.' },
-  { label: 'Negative clamp', value: '   -91283472332', note: 'Shows negative clamping to INT_MIN.' },
-]
+const EXAMPLES = getExamples('string-to-integer-atoi')
 
 const DEFAULT_INPUT = '   -042'
 

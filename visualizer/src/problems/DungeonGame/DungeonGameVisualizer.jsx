@@ -7,6 +7,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./DungeonGameVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -21,20 +22,7 @@ const SOLUTION_CODE = [
     { line: 9, text: "    return dp[0][0]" },
 ];
 
-const EXAMPLES = [
-    {
-        label: "Ex 1",
-        dungeon: [[-2, -3, 3], [-5, -10, 1], [10, 30, -5]],
-    },
-    {
-        label: "Ex 2",
-        dungeon: [[0]],
-    },
-    {
-        label: "Ex 3",
-        dungeon: [[1, -3, 3, -2], [0, -2, 0, -2], [-3, -1, 2, -1]],
-    },
-];
+const EXAMPLES = getExamples('dungeon-game');
 
 function generateSteps(dungeon) {
     const R = dungeon.length, C = dungeon[0].length;
@@ -51,7 +39,7 @@ function generateSteps(dungeon) {
     dp[R - 1][C] = 1;
 
     const steps = [];
-    steps.push({ activeLine: 4, dp: dp.map(r => [...r]), r: -1, c: -1, phase: "init", message: `DP table ${R}×${C}. Sentinels dp[R][C-1]=1, dp[R-1][C]=1` });
+    steps.push({ activeLine: 4, dp, r: -1, c: -1, phase: "init", message: `DP table ${R}×${C}. Sentinels dp[R][C-1]=1, dp[R-1][C]=1` });
 
     for (let r = R - 1; r >= 0; r--) {
         for (let c = C - 1; c >= 0; c--) {
@@ -60,7 +48,7 @@ function generateSteps(dungeon) {
             const need = Math.min(below, right) - dungeon[r][c];
             dp[r][c] = Math.max(need, 1);
             steps.push({
-                activeLine: 8, dp: dp.map(r => [...r]), r, c, phase: "fill",
+                activeLine: 8, dp, r, c, phase: "fill",
                 below: isFinite(below) ? below : "∞",
                 right: isFinite(right) ? right : "∞",
                 need, val: dp[r][c],
@@ -69,7 +57,7 @@ function generateSteps(dungeon) {
         }
     }
 
-    steps.push({ activeLine: 9, dp: dp.map(r => [...r]), r: 0, c: 0, phase: "done", done: true, message: `Minimum initial health = dp[0][0] = ${dp[0][0]}` });
+    steps.push({ activeLine: 9, dp, r: 0, c: 0, phase: "done", done: true, message: `Minimum initial health = dp[0][0] = ${dp[0][0]}` });
     return steps;
 }
 

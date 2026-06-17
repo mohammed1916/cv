@@ -8,6 +8,7 @@ import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
+import { getExamples } from '../../config/examplesRegistry'
 import "./NextPermutationVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -24,12 +25,7 @@ const SOLUTION_CODE = [
   { line: 11, text: "    return nums" },
 ];
 
-const EXAMPLES = [
-  { label: "[1,2,3]", nums: [1, 2, 3] },
-  { label: "[3,2,1]", nums: [3, 2, 1] },
-  { label: "[1,1,5]", nums: [1, 1, 5] },
-  { label: "[1,3,2,4,3]", nums: [1, 3, 2, 4, 3] },
-];
+const EXAMPLES = getExamples('next-permutation');
 
 function generateSteps(input) {
   const nums = [...input];

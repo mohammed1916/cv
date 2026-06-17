@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./NumberOf1BitsVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -16,11 +17,7 @@ const SOLUTION_CODE = [
   { line: 6, text: "    return count" },
 ];
 
-const EXAMPLES = [
-  { label: "Ex 1", n: 0b00000000000000000000000000001011, desc: "11 (0b1011)" },
-  { label: "Ex 2", n: 0b00000000000000000000000010000000, desc: "128 (0b10000000)" },
-  { label: "Ex 3", n: 0b11111111111111111111111111111101, desc: "4294967293 (0b1111…1101)" },
-];
+const EXAMPLES = getExamples('number-of1-bits');
 
 function toBin32(n) {
   return (n >>> 0).toString(2).padStart(32, "0");

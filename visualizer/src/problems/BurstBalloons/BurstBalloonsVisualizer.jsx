@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./BurstBalloonsVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -22,11 +23,7 @@ const SOLUTION_CODE = [
     { line: 12, text: "    return dp[0][n-1]" },
 ];
 
-const EXAMPLES = [
-    { label: "Ex 1", nums: [3, 1, 5, 8] },
-    { label: "Ex 2", nums: [1, 5] },
-    { label: "Ex 3", nums: [2, 4, 3] },
-];
+const EXAMPLES = getExamples('burst-balloons');
 
 function generateSteps(numsOrig) {
     const nums = [1, ...numsOrig, 1];
@@ -34,7 +31,7 @@ function generateSteps(numsOrig) {
     const dp = Array.from({ length: n }, () => Array(n).fill(0));
     const steps = [];
 
-    steps.push({ activeLine: 4, dp: dp.map(r => [...r]), left: -1, right: -1, k: -1, phase: "init", message: `Padded nums = [${nums.join(", ")}], dp is ${n}×${n}` });
+    steps.push({ activeLine: 4, dp, left: -1, right: -1, k: -1, phase: "init", message: `Padded nums = [${nums.join(", ")}], dp is ${n}×${n}` });
 
     for (let length = 2; length < n; length++) {
         for (let left = 0; left < n - length; left++) {
@@ -46,14 +43,14 @@ function generateSteps(numsOrig) {
                 if (improved) dp[left][right] = val;
                 steps.push({
                     activeLine: improved ? 11 : 10,
-                    dp: dp.map(r => [...r]), left, right, k, coins, val, phase: "fill",
+                    dp, left, right, k, coins, val, phase: "fill",
                     message: `dp[${left}][${right}]: k=${k}, ${nums[left]}×${nums[k]}×${nums[right]}=${coins}, total=${val}${improved ? ` → dp[${left}][${right}]=${dp[left][right]}` : ""}`,
                 });
             }
         }
     }
 
-    steps.push({ activeLine: 12, dp: dp.map(r => [...r]), left: 0, right: n - 1, k: -1, phase: "done", done: true, message: `Max coins = dp[0][${n - 1}] = ${dp[0][n - 1]}` });
+    steps.push({ activeLine: 12, dp, left: 0, right: n - 1, k: -1, phase: "done", done: true, message: `Max coins = dp[0][${n - 1}] = ${dp[0][n - 1]}` });
     return steps;
 }
 

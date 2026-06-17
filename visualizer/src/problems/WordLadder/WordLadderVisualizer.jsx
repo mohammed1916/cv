@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./WordLadderVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -25,18 +26,7 @@ const SOLUTION_CODE = [
   { line: 15, text: "    return 0" },
 ];
 
-const EXAMPLES = [
-  {
-    label: "hit→cog",
-    beginWord: "hit", endWord: "cog",
-    wordList: ["hot", "dot", "dog", "lot", "log", "cog"],
-  },
-  {
-    label: "hit→dog",
-    beginWord: "hit", endWord: "dog",
-    wordList: ["hot", "dot", "dog", "lot"],
-  },
-];
+const EXAMPLES = getExamples('word-ladder');
 
 function oneAway(a, b) {
   let diff = 0;

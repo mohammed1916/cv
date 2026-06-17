@@ -6,6 +6,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
+import { getExamples } from '../../config/examplesRegistry'
 import './DiameterBinaryTreeVisualizer.css'
 
 const CANVAS_W = 520
@@ -98,12 +99,7 @@ function generateSteps(arr) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'LeetCode', arr: [1, 2, 3, 4, 5] },
-    { label: 'Full', arr: [1, 2, 3, 4, 5, 6, 7] },
-    { label: 'Linear', arr: [1, 2, null, 3, null, 4] },
-    { label: 'Single', arr: [1] },
-]
+const EXAMPLES = getExamples('diameter-binary-tree')
 
 export default function DiameterBinaryTreeVisualizer() {
     const [arrInput, setArrInput] = useState('[1,2,3,4,5]')

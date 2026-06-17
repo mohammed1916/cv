@@ -6,6 +6,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useApplyExample } from '../../hooks/useApplyExample'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './LongestSubstringWithoutRepeatingVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -96,13 +97,7 @@ function generateSteps(s) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Classic', s: 'abcabcbb' },
-  { label: 'All Same', s: 'bbbbb' },
-  { label: 'Pwwkew', s: 'pwwkew' },
-  { label: 'No Repeats', s: 'abcdef' },
-  { label: 'Empty', s: '' },
-]
+const EXAMPLES = getExamples('longest-substring-without-repeating')
 
 export default function LongestSubstringWithoutRepeatingVisualizer() {
   const [strInput, setStrInput] = useState('abcabcbb')

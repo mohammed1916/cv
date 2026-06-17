@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./MissingNumberVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -14,11 +15,7 @@ const SOLUTION_CODE = [
     { line: 4, text: "    return expected - sum(nums)" },
 ];
 
-const EXAMPLES = [
-    { label: "Ex 1", nums: [3, 0, 1] },
-    { label: "Ex 2", nums: [0, 1] },
-    { label: "Ex 3", nums: [9, 6, 4, 2, 3, 5, 7, 0, 1] },
-];
+const EXAMPLES = getExamples('missing-number');
 
 function generateSteps(nums) {
     const steps = [];

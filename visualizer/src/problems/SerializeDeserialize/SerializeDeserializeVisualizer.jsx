@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./SerializeDeserializeVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -28,11 +29,7 @@ const SOLUTION_CODE = [
   { line: 18, text: "    return dfs()" },
 ];
 
-const EXAMPLES = [
-  { label: "Ex 1", tree: [1, 2, 3, null, null, 4, 5] },
-  { label: "Ex 2", tree: [1, 2, null, 3, null, null, null, 4] },
-  { label: "Ex 3", tree: [1, null, 2, null, null, null, 3] },
-];
+const EXAMPLES = getExamples('serialize-deserialize');
 
 // Build preorder (serialize) steps
 function serializeSteps(treeArr) {

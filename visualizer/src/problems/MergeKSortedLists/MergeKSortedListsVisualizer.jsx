@@ -8,6 +8,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
+import { getExamples } from '../../config/examplesRegistry'
 import './MergeKSortedListsVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -81,10 +82,7 @@ function generateSteps(lists) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Classic', lists: [[1, 4, 5], [1, 3, 4], [2, 6]] },
-  { label: 'Uneven', lists: [[1, 10], [2, 3, 4], [5], [6, 7, 8, 9]] },
-]
+const EXAMPLES = getExamples('merge-ksorted-lists')
 
 // Visualization component for the k lists and heap state
 function HeapVisualizationPanel({ step, lists, inputError, input, onInputChange, onApplyExample }) {

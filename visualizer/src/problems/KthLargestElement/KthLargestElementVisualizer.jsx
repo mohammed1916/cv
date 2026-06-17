@@ -8,6 +8,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
+import { getExamples } from '../../config/examplesRegistry'
 import './KthLargestElementVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -45,11 +46,7 @@ function generateSteps(nums, k) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Example 1', nums: [3, 2, 1, 5, 6, 4], k: 2 },
-  { label: 'Example 2', nums: [3, 2, 3, 1, 2, 4, 5, 5, 6], k: 4 },
-  { label: 'Small', nums: [7, 10, 4, 3, 20, 15], k: 3 },
-]
+const EXAMPLES = getExamples('kth-largest-element')
 
 export default function KthLargestElementVisualizer() {
   const [numsInput, setNumsInput] = useState('[3,2,1,5,6,4]')

@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./LetterCombinationsVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -70,12 +71,7 @@ function generateSteps(digits) {
     return steps;
 }
 
-const EXAMPLES = [
-    { label: '"23"', digits: "23" },
-    { label: '""', digits: "" },
-    { label: '"2"', digits: "2" },
-    { label: '"234"', digits: "234" },
-];
+const EXAMPLES = getExamples('letter-combinations');
 
 export default function LetterCombinationsVisualizer() {
     const [digits, setDigits] = useState("23");

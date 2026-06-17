@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./PermutationInStringVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -22,11 +23,7 @@ const SOLUTION_CODE = [
     { line: 12, text: "    return False" },
 ];
 
-const EXAMPLES = [
-    { label: 's1="ab" s2="eidbaooo"', s1: "ab", s2: "eidbaooo" },
-    { label: 's1="ab" s2="eidboaoo"', s1: "ab", s2: "eidboaoo" },
-    { label: 's1="adc" s2="dcda"', s1: "adc", s2: "dcda" },
-];
+const EXAMPLES = getExamples('permutation-in-string');
 
 function countEq(a, b) {
     const ka = Object.keys(a), kb = Object.keys(b);

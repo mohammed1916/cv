@@ -53,11 +53,11 @@ const NumberOfProvinces = () => {
     for (let i = 0; i < n; i++) {
       for (let j = i + 1; j < n; j++) {
         if (isConnected[i][j] === 1) {
-          const prevParent = JSON.parse(JSON.stringify(newParent));
+          const prevParent = newParent;
           union(i, j, newParent, newRank, ops);
 
           allSteps.push({
-            parent: JSON.parse(JSON.stringify(newParent)),
+            parent: newParent,
             highlighted: [i, j],
             operation: ops[ops.length - 1],
           });

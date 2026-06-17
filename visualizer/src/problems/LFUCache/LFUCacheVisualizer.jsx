@@ -8,6 +8,7 @@ import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./LFUCacheVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -31,38 +32,7 @@ const SOLUTION_CODE = [
     { line: 18, text: "            self.min_freq = 1" },
 ];
 
-const EXAMPLES = [
-    {
-        label: "LFU(2)",
-        capacity: 2,
-        ops: [
-            { type: "put", key: 1, val: 1 },
-            { type: "put", key: 2, val: 2 },
-            { type: "get", key: 1 },
-            { type: "put", key: 3, val: 3 },
-            { type: "get", key: 2 },
-            { type: "get", key: 3 },
-            { type: "put", key: 4, val: 4 },
-            { type: "get", key: 1 },
-            { type: "get", key: 3 },
-            { type: "get", key: 4 },
-        ],
-    },
-    {
-        label: "LFU(3)",
-        capacity: 3,
-        ops: [
-            { type: "put", key: 1, val: 1 },
-            { type: "put", key: 2, val: 2 },
-            { type: "put", key: 3, val: 3 },
-            { type: "get", key: 1 },
-            { type: "get", key: 2 },
-            { type: "put", key: 4, val: 4 },
-            { type: "get", key: 3 },
-            { type: "get", key: 4 },
-        ],
-    },
-];
+const EXAMPLES = getExamples('lfucache');
 
 function generateSteps(capacity, ops) {
     const steps = [];

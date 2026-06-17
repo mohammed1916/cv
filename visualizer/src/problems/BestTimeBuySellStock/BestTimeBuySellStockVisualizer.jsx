@@ -6,6 +6,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './BestTimeBuySellStockVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -102,12 +103,7 @@ function generateSteps(prices) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'Classic', prices: [7, 1, 5, 3, 6, 4] },
-    { label: 'No profit', prices: [7, 6, 4, 3, 1] },
-    { label: 'Best last', prices: [1, 2, 3, 4, 5] },
-    { label: 'Two dips', prices: [3, 1, 4, 1, 5, 9, 2, 6] },
-]
+const EXAMPLES = getExamples('best-time-buy-sell-stock')
 
 export default function BestTimeBuySellStockVisualizer() {
     const [pricesInput, setPricesInput] = useState('[7,1,5,3,6,4]')

@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./FindPeakElementVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -19,11 +20,7 @@ const SOLUTION_CODE = [
   { line: 9, text: "    return lo" },
 ];
 
-const EXAMPLES = [
-  { label: "Ex 1", nums: [1, 2, 3, 1] },
-  { label: "Ex 2", nums: [1, 2, 1, 3, 5, 6, 4] },
-  { label: "Ex 3", nums: [3, 1, 2] },
-];
+const EXAMPLES = getExamples('find-peak-element');
 
 function generateSteps(nums) {
   const steps = [];

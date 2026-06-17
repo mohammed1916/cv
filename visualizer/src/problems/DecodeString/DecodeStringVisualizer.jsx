@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./DecodeStringVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -56,11 +57,7 @@ function generateSteps(s) {
     return steps;
 }
 
-const EXAMPLES = [
-    { label: '"3[a]2[bc]"', s: "3[a]2[bc]" },
-    { label: '"3[a2[c]]"', s: "3[a2[c]]" },
-    { label: '"2[abc]3[cd]ef"', s: "2[abc]3[cd]ef" },
-];
+const EXAMPLES = getExamples('decode-string');
 
 export default function DecodeStringVisualizer() {
     const [sInput, setSInput] = useState("3[a]2[bc]");

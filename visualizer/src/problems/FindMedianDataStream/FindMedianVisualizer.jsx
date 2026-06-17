@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./FindMedianVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -114,11 +115,7 @@ function generateSteps(nums) {
     return steps;
 }
 
-const EXAMPLES = [
-    { label: "[1,2,3]", nums: [1, 2, 3] },
-    { label: "[6,5,4,3,2,1]", nums: [6, 5, 4, 3, 2, 1] },
-    { label: "[2,3,4,7,8]", nums: [2, 3, 4, 7, 8] },
-];
+const EXAMPLES = getExamples('find-median-data-stream');
 
 function HeapDisplay({ label, values, isMax, accent }) {
     const display = isMax ? values.map((v) => -v) : values;

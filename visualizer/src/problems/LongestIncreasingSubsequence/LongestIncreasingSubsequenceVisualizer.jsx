@@ -8,6 +8,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './LongestIncreasingSubsequenceVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -80,13 +81,7 @@ function generateSteps(nums) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'Classic', nums: [10, 9, 2, 5, 3, 7, 101, 18] },
-    { label: 'All same', nums: [1, 1, 1, 1] },
-    { label: 'Sorted', nums: [1, 2, 3, 4, 5] },
-    { label: 'Reversed', nums: [5, 4, 3, 2, 1] },
-    { label: 'LeetCode', nums: [0, 1, 0, 3, 2, 3] },
-]
+const EXAMPLES = getExamples('longest-increasing-subsequence')
 
 export default function LongestIncreasingSubsequenceVisualizer() {
     const [numsInput, setNumsInput] = useState('[10,9,2,5,3,7,101,18]')

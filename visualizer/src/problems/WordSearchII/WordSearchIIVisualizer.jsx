@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./WordSearchIIVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -24,18 +25,7 @@ const SOLUTION_CODE = [
     { line: 14, text: "    for r,c in all_cells: dfs(root, r, c, '')" },
 ];
 
-const EXAMPLES = [
-    {
-        label: "Ex 1",
-        board: [["o", "a", "a", "n"], ["e", "t", "a", "e"], ["i", "h", "k", "r"], ["i", "f", "l", "v"]],
-        words: ["oath", "pea", "eat", "rain"],
-    },
-    {
-        label: "Ex 2",
-        board: [["a", "b"], ["c", "d"]],
-        words: ["abdc", "abcd", "ab"],
-    },
-];
+const EXAMPLES = getExamples('word-search-ii');
 
 function buildTrie(words) {
     const root = {};
@@ -55,7 +45,7 @@ function generateSteps(board, words) {
     const trie = buildTrie(words);
     const DIRS = [[-1, 0], [1, 0], [0, -1], [0, 1]];
 
-    steps.push({ activeLine: 2, grid: grid.map(r => [...r]), path: "", r: -1, c: -1, found: [...result], phase: "init", message: `Built trie for [${words.join(", ")}]` });
+    steps.push({ activeLine: 2, grid, path: "", r: -1, c: -1, found: [...result], phase: "init", message: `Built trie for [${words.join(", ")}]` });
 
     function dfs(node, r, c, path) {
         const ch = grid[r][c];
@@ -65,7 +55,7 @@ function generateSteps(board, words) {
         const isWord = "$" in node;
         steps.push({
             activeLine: isWord ? 8 : 7,
-            grid: grid.map(r => [...r]), path: newPath, r, c, found: [...result],
+            grid, path: newPath, r, c, found: [...result],
             phase: isWord ? "found-word" : "visit",
             message: isWord ? `Found word "${newPath}"!` : `Visit [${r},${c}]='${ch}', path="${newPath}"`,
         });
@@ -80,7 +70,7 @@ function generateSteps(board, words) {
         grid[r][c] = ch;
         steps.push({
             activeLine: 13,
-            grid: grid.map(r => [...r]), path: newPath, r, c, found: [...result],
+            grid, path: newPath, r, c, found: [...result],
             phase: "restore",
             message: `Restore [${r},${c}]='${ch}', backtrack from "${newPath}"`,
         });
@@ -88,12 +78,12 @@ function generateSteps(board, words) {
 
     for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
-            steps.push({ activeLine: 14, grid: grid.map(r => [...r]), path: "", r, c, found: [...result], phase: "start-cell", message: `Start DFS from [${r},${c}]='${board[r][c]}'` });
+            steps.push({ activeLine: 14, grid, path: "", r, c, found: [...result], phase: "start-cell", message: `Start DFS from [${r},${c}]='${board[r][c]}'` });
             dfs(trie, r, c, "");
         }
     }
 
-    steps.push({ activeLine: 3, grid: grid.map(r => [...r]), path: "", r: -1, c: -1, found: [...result], phase: "done", done: true, message: `Found: [${[...result].join(", ")}]` });
+    steps.push({ activeLine: 3, grid, path: "", r: -1, c: -1, found: [...result], phase: "done", done: true, message: `Found: [${[...result].join(", ")}]` });
     return steps;
 }
 

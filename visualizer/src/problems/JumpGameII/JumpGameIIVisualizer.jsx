@@ -8,6 +8,7 @@ import DockableWorkspace from "../../components/shared/DockableWorkspace";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
+import { getExamples } from '../../config/examplesRegistry'
 import "./JumpGameIIVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -22,12 +23,7 @@ const SOLUTION_CODE = [
   { line: 9, text: "    return jumps" },
 ];
 
-const EXAMPLES = [
-  { label: "[2,3,1,1,4]", nums: [2, 3, 1, 1, 4] },
-  { label: "[2,3,0,1,4]", nums: [2, 3, 0, 1, 4] },
-  { label: "[1,1,1,1]", nums: [1, 1, 1, 1] },
-  { label: "[3,2,1,0,4]", nums: [3, 2, 1, 0, 4] },
-];
+const EXAMPLES = getExamples('jump-game-ii');
 
 function generateSteps(nums) {
   const steps = [];

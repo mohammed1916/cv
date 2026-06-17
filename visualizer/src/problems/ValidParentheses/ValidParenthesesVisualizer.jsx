@@ -6,6 +6,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './ValidParenthesesVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -99,13 +100,7 @@ function generateSteps(s) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Valid', s: '()[]{}' },
-  { label: 'Nested', s: '({[]})' },
-  { label: 'Mismatch', s: '(]' },
-  { label: 'Unmatched Open', s: '((()' },
-  { label: 'Unmatched Close', s: '())' },
-]
+const EXAMPLES = getExamples('valid-parentheses')
 
 export default function ValidParenthesesVisualizer() {
   const [sInput, setSInput] = useState('({[]})')

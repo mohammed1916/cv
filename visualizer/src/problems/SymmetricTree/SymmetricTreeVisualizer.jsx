@@ -8,6 +8,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
+import { getExamples } from '../../config/examplesRegistry'
 import './SymmetricTreeVisualizer.css'
 
 const CANVAS_W = 340
@@ -30,12 +31,7 @@ const SOLUTION_CODE = [
 ]
 
 // ─── Preset examples ──────────────────────────────────────────────────────────
-const EXAMPLES = [
-    { label: 'Symmetric',      tree: [1,2,2,3,4,4,3]           },
-    { label: 'Symmetric null', tree: [1,2,2,null,3,null,3]     },
-    { label: 'Not symmetric',  tree: [1,2,2,null,3,3,null]     },
-    { label: 'Single node',    tree: [1]                       },
-]
+const EXAMPLES = getExamples('symmetric-tree')
 
 // ─── Tree utilities ───────────────────────────────────────────────────────────
 function buildLinkedTree(arr) {

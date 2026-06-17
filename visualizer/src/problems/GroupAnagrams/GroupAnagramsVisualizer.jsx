@@ -8,6 +8,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
+import { getExamples } from '../../config/examplesRegistry'
 import './GroupAnagramsVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -47,8 +48,8 @@ function generateSteps(strs) {
         steps.push({
             phase: 'pick', activeLine: 5,
             currentWordIdx: i, currentKey: null,
-            anagramMap: JSON.parse(JSON.stringify(anagramMap)),
-            keyToColor: JSON.parse(JSON.stringify(keyToColor)),
+            anagramMap,
+            keyToColor,
             message: `Processing word "${word}" (index ${i}).`,
         })
 
@@ -57,8 +58,8 @@ function generateSteps(strs) {
         steps.push({
             phase: 'sort', activeLine: 6,
             currentWordIdx: i, currentKey: key,
-            anagramMap: JSON.parse(JSON.stringify(anagramMap)),
-            keyToColor: JSON.parse(JSON.stringify(keyToColor)),
+            anagramMap,
+            keyToColor,
             message: `Sorted "${word}" → key = "${key}".`,
         })
 
@@ -71,16 +72,16 @@ function generateSteps(strs) {
             steps.push({
                 phase: 'new_group', activeLine: 9,
                 currentWordIdx: i, currentKey: key,
-                anagramMap: JSON.parse(JSON.stringify(anagramMap)),
-                keyToColor: JSON.parse(JSON.stringify(keyToColor)),
+                anagramMap,
+                keyToColor,
                 message: `Key "${key}" is new → create new group.`,
             })
         } else {
             steps.push({
                 phase: 'existing', activeLine: 8,
                 currentWordIdx: i, currentKey: key,
-                anagramMap: JSON.parse(JSON.stringify(anagramMap)),
-                keyToColor: JSON.parse(JSON.stringify(keyToColor)),
+                anagramMap,
+                keyToColor,
                 message: `Key "${key}" already exists → join its group.`,
             })
         }
@@ -90,8 +91,8 @@ function generateSteps(strs) {
         steps.push({
             phase: 'append', activeLine: 11,
             currentWordIdx: i, currentKey: key,
-            anagramMap: JSON.parse(JSON.stringify(anagramMap)),
-            keyToColor: JSON.parse(JSON.stringify(keyToColor)),
+            anagramMap,
+            keyToColor,
             message: `Appended "${word}" to group [${anagramMap[key].join(', ')}].`,
         })
     }
@@ -99,20 +100,15 @@ function generateSteps(strs) {
     steps.push({
         phase: 'done', activeLine: 13,
         currentWordIdx: -1, currentKey: null,
-        anagramMap: JSON.parse(JSON.stringify(anagramMap)),
-        keyToColor: JSON.parse(JSON.stringify(keyToColor)),
+        anagramMap,
+        keyToColor,
         message: `Done. ${Object.keys(anagramMap).length} group(s) found.`,
     })
 
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'Classic', strs: ['eat', 'tea', 'tan', 'ate', 'nat', 'bat'] },
-    { label: 'Single', strs: ['a'] },
-    { label: 'Mixed', strs: ['abc', 'bca', 'xyz', 'zyx', 'foo', 'oof', 'bar'] },
-    { label: 'Same key', strs: ['abc', 'acb', 'bac', 'bca', 'cab', 'cba'] },
-]
+const EXAMPLES = getExamples('group-anagrams')
 
 function VisualizationPanel({ strs, step, currentWordIdx, currentKey, anagramMap, keyToColor }) {
     return (

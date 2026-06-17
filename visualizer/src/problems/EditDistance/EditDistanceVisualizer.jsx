@@ -8,6 +8,7 @@ import DockableWorkspace from "../../components/shared/DockableWorkspace";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
+import { getExamples } from '../../config/examplesRegistry'
 import "./EditDistanceVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -27,12 +28,7 @@ const SOLUTION_CODE = [
   { line: 14, text: "    return dp[m][n]" },
 ];
 
-const EXAMPLES = [
-  { label: '"horse"→"ros"', w1: "horse", w2: "ros" },
-  { label: '"intention"→"execution"', w1: "intention", w2: "execution" },
-  { label: '"abc"→"abc"', w1: "abc", w2: "abc" },
-  { label: '"abc"→""', w1: "abc", w2: "" },
-];
+const EXAMPLES = getExamples('edit-distance');
 
 function DPTablePanel({ step, ex, dpTable, maxVal }) {
   return step && (

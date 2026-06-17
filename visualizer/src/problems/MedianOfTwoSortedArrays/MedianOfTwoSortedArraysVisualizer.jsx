@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./MedianOfTwoSortedArraysVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -34,19 +35,7 @@ const SOLUTION_CODE = [
   { line: 21, text: "                low = cut1 + 1" },
 ];
 
-const EXAMPLES = [
-  { label: "Classic", nums1: [1, 3], nums2: [2] },
-  { label: "Even Total", nums1: [1, 2], nums2: [3, 4] },
-  { label: "Different Sizes", nums1: [1, 2, 5, 9], nums2: [3, 4, 6, 7, 8] },
-  { label: "One Empty", nums1: [], nums2: [1] },
-  { label: "Duplicates", nums1: [0, 0], nums2: [0, 0] },
-  { label: "Swap Needed", nums1: [8, 9, 10, 11], nums2: [1, 2, 3] },
-  {
-    label: "Large Input",
-    nums1: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19],
-    nums2: [1, 1, 1, 1, 1, 1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
-  },
-];
+const EXAMPLES = getExamples('median-of-two-sorted-arrays');
 
 function parseArrayInput(text) {
   const parsed = JSON.parse(text);

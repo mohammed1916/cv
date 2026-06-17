@@ -8,6 +8,7 @@ import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
+import { getExamples } from '../../config/examplesRegistry'
 import "./PalindromePartitioningVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -36,35 +37,30 @@ function generateSteps(s) {
     function backtrack(i) {
         if (i === s.length) {
             res.push([...part]);
-            steps.push({ activeLine: 5, i, j: -1, part: [...part], res: res.map((r) => [...r]), sub: null, valid: null, message: `Complete partition: [${part.join(" | ")}]` });
+            steps.push({ activeLine: 5, i, j: -1, part: [...part], res, sub: null, valid: null, message: `Complete partition: [${part.join(" | ")}]` });
             return;
         }
         for (let j = i; j < s.length; j++) {
             const sub = s.slice(i, j + 1);
             const valid = isPalin(sub);
-            steps.push({ activeLine: 8, i, j, part: [...part], res: res.map((r) => [...r]), sub, valid, message: valid ? `"${sub}" is palindrome ✓` : `"${sub}" not palindrome ✗` });
+            steps.push({ activeLine: 8, i, j, part: [...part], res, sub, valid, message: valid ? `"${sub}" is palindrome ✓` : `"${sub}" not palindrome ✗` });
             if (valid) {
                 part.push(sub);
-                steps.push({ activeLine: 9, i, j, part: [...part], res: res.map((r) => [...r]), sub, valid, message: `Append "${sub}". path=[${part.join(",")}]` });
+                steps.push({ activeLine: 9, i, j, part: [...part], res, sub, valid, message: `Append "${sub}". path=[${part.join(",")}]` });
                 backtrack(j + 1);
                 part.pop();
-                steps.push({ activeLine: 11, i, j, part: [...part], res: res.map((r) => [...r]), sub, valid, message: `Backtrack: pop "${sub}". path=[${part.join(",")}]` });
+                steps.push({ activeLine: 11, i, j, part: [...part], res, sub, valid, message: `Backtrack: pop "${sub}". path=[${part.join(",")}]` });
             }
         }
     }
 
     steps.push({ activeLine: 12, i: 0, j: -1, part: [], res: [], sub: null, valid: null, message: `Start. s="${s}"` });
     backtrack(0);
-    steps.push({ activeLine: 13, i: s.length, j: -1, part: [], res: res.map((r) => [...r]), sub: null, valid: null, message: `Done. ${res.length} partitions.` });
+    steps.push({ activeLine: 13, i: s.length, j: -1, part: [], res, sub: null, valid: null, message: `Done. ${res.length} partitions.` });
     return steps;
 }
 
-const EXAMPLES = [
-    { label: '"aab"', s: "aab" },
-    { label: '"a"', s: "a" },
-    { label: '"racecar"', s: "racecar" },
-    { label: '"aabb"', s: "aabb" },
-];
+const EXAMPLES = getExamples('palindrome-partitioning');
 
 export default function PalindromePartitioningVisualizer() {
     const [sInput, setSInput] = useState("aab");

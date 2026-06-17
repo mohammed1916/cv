@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./SubstringConcatenationVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -24,11 +25,7 @@ const SOLUTION_CODE = [
     { line: 14, text: "    return result" },
 ];
 
-const EXAMPLES = [
-    { label: "Ex 1", s: "barfoothefoobarman", words: ["foo", "bar"] },
-    { label: "Ex 2", s: "wordgoodgoodgoodbestword", words: ["word", "good", "best", "word"] },
-    { label: "Ex 3", s: "barfoofoobarthefoobarman", words: ["bar", "foo", "the"] },
-];
+const EXAMPLES = getExamples('substring-concatenation');
 
 function generateSteps(s, words) {
     const wlen = words[0].length;

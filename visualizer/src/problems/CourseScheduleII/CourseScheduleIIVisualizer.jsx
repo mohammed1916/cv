@@ -6,6 +6,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { GraphCanvas3D } from '../../components/viz3d'
+import { getExamples } from '../../config/examplesRegistry'
 import './CourseScheduleIIVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -49,7 +50,7 @@ function generateSteps(numCourses, prerequisites) {
   const adj = Object.fromEntries(Array.from({ length: numCourses }, (_, i) => [i, []]))
   const indegree = Array(numCourses).fill(0)
 
-  steps.push({ phase: 'init', activeLine: 4, queue: [], indegree: [...indegree], order: [], adj: JSON.parse(JSON.stringify(adj)), message: 'Initialize graph and indegree.' })
+  steps.push({ phase: 'init', activeLine: 4, queue: [], indegree: [...indegree], order: [], adj, message: 'Initialize graph and indegree.' })
   for (const [course, pre] of prerequisites) {
     if (course < 0 || pre < 0 || course >= numCourses || pre >= numCourses) continue
     adj[pre].push(course)
@@ -61,7 +62,7 @@ function generateSteps(numCourses, prerequisites) {
       queue: [],
       indegree: [...indegree],
       order: [],
-      adj: JSON.parse(JSON.stringify(adj)),
+      adj,
       message: `Add edge ${pre} -> ${course}, indegree[${course}] = ${indegree[course]}.`,
     })
   }
@@ -69,20 +70,20 @@ function generateSteps(numCourses, prerequisites) {
   const queue = []
   for (let i = 0; i < numCourses; i++) if (indegree[i] === 0) queue.push(i)
   const order = []
-  steps.push({ phase: 'queue_init', activeLine: 8, queue: [...queue], indegree: [...indegree], order: [...order], adj: JSON.parse(JSON.stringify(adj)), message: `Seed queue with indegree 0 nodes: [${queue.join(', ')}].` })
+  steps.push({ phase: 'queue_init', activeLine: 8, queue: [...queue], indegree: [...indegree], order: [...order], adj, message: `Seed queue with indegree 0 nodes: [${queue.join(', ')}].` })
 
   while (queue.length) {
     const node = queue.shift()
-    steps.push({ phase: 'pop', activeLine: 11, node, queue: [...queue], indegree: [...indegree], order: [...order], adj: JSON.parse(JSON.stringify(adj)), message: `Pop ${node} from queue.` })
+    steps.push({ phase: 'pop', activeLine: 11, node, queue: [...queue], indegree: [...indegree], order: [...order], adj, message: `Pop ${node} from queue.` })
     order.push(node)
-    steps.push({ phase: 'append', activeLine: 12, node, queue: [...queue], indegree: [...indegree], order: [...order], adj: JSON.parse(JSON.stringify(adj)), message: `Append ${node} to topological order.` })
+    steps.push({ phase: 'append', activeLine: 12, node, queue: [...queue], indegree: [...indegree], order: [...order], adj, message: `Append ${node} to topological order.` })
 
     for (const nxt of adj[node]) {
       indegree[nxt] -= 1
-      steps.push({ phase: 'relax', activeLine: 14, node, nxt, queue: [...queue], indegree: [...indegree], order: [...order], adj: JSON.parse(JSON.stringify(adj)), message: `Decrement indegree[${nxt}] to ${indegree[nxt]}.` })
+      steps.push({ phase: 'relax', activeLine: 14, node, nxt, queue: [...queue], indegree: [...indegree], order: [...order], adj, message: `Decrement indegree[${nxt}] to ${indegree[nxt]}.` })
       if (indegree[nxt] === 0) {
         queue.push(nxt)
-        steps.push({ phase: 'enqueue', activeLine: 16, node, nxt, queue: [...queue], indegree: [...indegree], order: [...order], adj: JSON.parse(JSON.stringify(adj)), message: `${nxt} is unlocked, enqueue.` })
+        steps.push({ phase: 'enqueue', activeLine: 16, node, nxt, queue: [...queue], indegree: [...indegree], order: [...order], adj, message: `${nxt} is unlocked, enqueue.` })
       }
     }
   }
@@ -94,7 +95,7 @@ function generateSteps(numCourses, prerequisites) {
     queue: [...queue],
     indegree: [...indegree],
     order: [...order],
-    adj: JSON.parse(JSON.stringify(adj)),
+    adj,
     ok,
     message: ok ? `Topological order found: [${order.join(', ')}].` : 'Cycle detected. Return [].',
   })
@@ -102,12 +103,7 @@ function generateSteps(numCourses, prerequisites) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'DAG', n: 4, p: [[1, 0], [2, 0], [3, 1], [3, 2]] },
-  { label: 'Linear', n: 4, p: [[1, 0], [2, 1], [3, 2]] },
-  { label: 'Cycle', n: 2, p: [[1, 0], [0, 1]] },
-  { label: 'Disconnected', n: 5, p: [[1, 0], [3, 2]] },
-]
+const EXAMPLES = getExamples('course-schedule-ii')
 
 export default function CourseScheduleIIVisualizer() {
   const [numInput, setNumInput] = useState('4')

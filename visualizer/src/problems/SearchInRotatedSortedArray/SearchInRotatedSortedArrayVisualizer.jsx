@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './SearchInRotatedSortedArrayVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -122,13 +123,7 @@ function generateSteps(nums, target) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'Find 0', nums: [4, 5, 6, 7, 0, 1, 2], target: 0 },
-    { label: 'Not found', nums: [4, 5, 6, 7, 0, 1, 2], target: 3 },
-    { label: 'Find 3', nums: [1, 3], target: 3 },
-    { label: 'No rotate', nums: [1, 2, 3, 4, 5, 6], target: 4 },
-    { label: 'Single', nums: [1], target: 1 },
-]
+const EXAMPLES = getExamples('search-in-rotated-sorted-array')
 
 export default function SearchInRotatedSortedArrayVisualizer() {
     const [numsInput, setNumsInput] = useState('[4,5,6,7,0,1,2]')

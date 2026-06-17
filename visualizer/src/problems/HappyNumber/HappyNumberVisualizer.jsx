@@ -6,6 +6,7 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./HappyNumberVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -18,12 +19,7 @@ const SOLUTION_CODE = [
   { line: 7, text: "    return True" },
 ];
 
-const EXAMPLES = [
-  { label: "19 (Happy)", n: 19 },
-  { label: "7 (Happy)", n: 7 },
-  { label: "2 (Sad)", n: 2 },
-  { label: "4 (Sad)", n: 4 },
-];
+const EXAMPLES = getExamples('happy-number');
 
 function sumOfSquaredDigits(n) {
   return String(n).split("").reduce((acc, d) => acc + Number(d) ** 2, 0);

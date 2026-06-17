@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./DistinctSubsequencesVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -20,11 +21,7 @@ const SOLUTION_CODE = [
   { line: 10, text: "    return dp[m][n]" },
 ];
 
-const EXAMPLES = [
-  { label: "rabbbit/rabbit", s: "rabbbit", t: "rabbit" },
-  { label: "babgbag/bag", s: "babgbag", t: "bag" },
-  { label: "abc/ac", s: "abc", t: "ac" },
-];
+const EXAMPLES = getExamples('distinct-subsequences');
 
 function generateSteps(s, t) {
   const m = s.length, n = t.length;
@@ -32,7 +29,7 @@ function generateSteps(s, t) {
   const steps = [];
 
   for (let i = 0; i <= m; i++) dp[i][0] = 1;
-  steps.push({ activeLine: 4, dp: dp.map(r => [...r]), i: -1, j: -1, phase: "base", message: "dp[i][0]=1 for all i (empty t always matches)" });
+  steps.push({ activeLine: 4, dp, i: -1, j: -1, phase: "base", message: "dp[i][0]=1 for all i (empty t always matches)" });
 
   for (let i = 1; i <= m; i++) {
     for (let j = 1; j <= n; j++) {
@@ -41,7 +38,7 @@ function generateSteps(s, t) {
       if (matched) dp[i][j] += dp[i - 1][j - 1];
       steps.push({
         activeLine: matched ? 9 : 7,
-        dp: dp.map(r => [...r]), i, j, phase: matched ? "match" : "skip",
+        dp, i, j, phase: matched ? "match" : "skip",
         message: matched
           ? `s[${i-1}]='${s[i-1]}'==t[${j-1}]='${t[j-1]}': dp[${i}][${j}]=${dp[i][j]}`
           : `s[${i-1}]='${s[i-1]}'≠t[${j-1}]='${t[j-1]}': dp[${i}][${j}]=dp[${i-1}][${j}]=${dp[i][j]}`,
@@ -49,7 +46,7 @@ function generateSteps(s, t) {
     }
   }
 
-  steps.push({ activeLine: 10, dp: dp.map(r => [...r]), i: m, j: n, phase: "done", done: true, message: `Distinct subsequences = ${dp[m][n]}` });
+  steps.push({ activeLine: 10, dp, i: m, j: n, phase: "done", done: true, message: `Distinct subsequences = ${dp[m][n]}` });
   return steps;
 }
 

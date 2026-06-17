@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./MinSizeSubarraySumVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -19,11 +20,7 @@ const SOLUTION_CODE = [
   { line: 9, text: "    return 0 if res == inf else res" },
 ];
 
-const EXAMPLES = [
-  { label: "Ex 1", target: 7, nums: [2, 3, 1, 2, 4, 3] },
-  { label: "Ex 2", target: 4, nums: [1, 4, 4] },
-  { label: "Ex 3", target: 11, nums: [1, 1, 1, 1, 1, 1, 1, 1] },
-];
+const EXAMPLES = getExamples('min-size-subarray-sum');
 
 function generateSteps(target, nums) {
   const steps = [];

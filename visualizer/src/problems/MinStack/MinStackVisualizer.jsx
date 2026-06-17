@@ -10,6 +10,7 @@ import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import "./MinStackVisualizer.css";
 import { Stack3D } from "../../components/viz3d";
+import { getExamples } from '../../config/examplesRegistry'
 
 const SOLUTION_CODE = [
   { line: 1, text: "class MinStack:" },
@@ -152,43 +153,7 @@ function generateSteps(operations) {
   return steps;
 }
 
-const EXAMPLES = [
-  {
-    label: "LC Example",
-    ops: [
-      { type: "push", val: -2 },
-      { type: "push", val: 0 },
-      { type: "push", val: -3 },
-      { type: "getMin" },
-      { type: "pop" },
-      { type: "top" },
-      { type: "getMin" },
-    ],
-  },
-  {
-    label: "Simple",
-    ops: [
-      { type: "push", val: 5 },
-      { type: "push", val: 3 },
-      { type: "push", val: 7 },
-      { type: "getMin" },
-      { type: "pop" },
-      { type: "getMin" },
-    ],
-  },
-  {
-    label: "Decreasing",
-    ops: [
-      { type: "push", val: 10 },
-      { type: "push", val: 6 },
-      { type: "push", val: 3 },
-      { type: "push", val: 1 },
-      { type: "getMin" },
-      { type: "pop" },
-      { type: "getMin" },
-    ],
-  },
-];
+const EXAMPLES = getExamples('min-stack');
 
 export default function MinStackVisualizer() {
   const [selectedExample, setSelectedExample] = useState(0);

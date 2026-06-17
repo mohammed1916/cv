@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './ValidAnagramVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -90,12 +91,7 @@ function generateSteps(s, t) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'Anagram', s: 'anagram', t: 'nagaram' },
-    { label: 'Not anagram', s: 'rat', t: 'car' },
-    { label: 'Same', s: 'listen', t: 'silent' },
-    { label: 'Diff length', s: 'hello', t: 'world!' },
-]
+const EXAMPLES = getExamples('valid-anagram')
 
 export default function ValidAnagramVisualizer() {
     const [sInput, setSInput] = useState('anagram')

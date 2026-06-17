@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./MergeTwoSortedListsVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -189,17 +190,7 @@ function generateSteps(arr1, arr2) {
   return steps;
 }
 
-const EXAMPLES = [
-  { label: "Standard", list1: [1, 2, 4], list2: [1, 3, 4] },
-  { label: "Different Sizes", list1: [1, 2, 4, 8, 9], list2: [3, 5] },
-  { label: "Empty List1", list1: [], list2: [0] },
-  { label: "Both Empty", list1: [], list2: [] },
-  {
-    label: "Large Lists",
-    list1: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19],
-    list2: [1, 1, 1, 1, 1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
-  },
-];
+const EXAMPLES = getExamples('merge-two-sorted-lists');
 
 export default function MergeTwoSortedListsVisualizer() {
   const [l1Input, setL1Input] = useState("[1, 2, 4]");

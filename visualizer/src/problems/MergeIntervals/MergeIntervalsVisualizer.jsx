@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './MergeIntervalsVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -116,13 +117,7 @@ function generateSteps(originalIntervals) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Classic', intervals: [[1, 3], [2, 6], [8, 10], [15, 18]] },
-  { label: 'Enclosed', intervals: [[1, 4], [2, 3]] },
-  { label: 'Contiguous', intervals: [[1, 4], [4, 5]] },
-  { label: 'All Overlap', intervals: [[1, 10], [2, 9], [3, 8], [4, 7]] },
-  { label: 'Unsorted', intervals: [[15, 18], [1, 3], [8, 10], [2, 6]] },
-]
+const EXAMPLES = getExamples('merge-intervals')
 
 export default function MergeIntervalsVisualizer() {
   const [intervalsInput, setIntervalsInput] = useState('[[1,3],[2,6],[8,10],[15,18]]')

@@ -8,6 +8,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './LongestConsecutiveVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -112,12 +113,7 @@ function generateSteps(nums) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'Classic', nums: [100, 4, 200, 1, 3, 2] },
-    { label: 'Long run', nums: [0, 3, 7, 2, 5, 8, 4, 6, 0, 1] },
-    { label: 'Negatives', nums: [-4, -1, -2, 0, 1, 2] },
-    { label: 'Singles', nums: [5, 1, 9, 3] },
-]
+const EXAMPLES = getExamples('longest-consecutive-sequence')
 
 export default function LongestConsecutiveVisualizer() {
     const [input, setInput] = useState('[100,4,200,1,3,2]')

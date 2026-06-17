@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './TrappingRainWaterVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -110,13 +111,7 @@ function generateSteps(height) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Classic', height: [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1] },
-  { label: 'Mountain', height: [4, 2, 0, 3, 2, 5] },
-  { label: 'Pyramid', height: [1, 2, 3, 4, 3, 2, 1] },
-  { label: 'Bowl', height: [5, 1, 1, 1, 5] },
-  { label: 'Steps', height: [5, 4, 3, 2, 1, 2, 3] },
-]
+const EXAMPLES = getExamples('trapping-rain-water')
 
 export default function TrappingRainWaterVisualizer() {
   const [heightInput, setHeightInput] = useState('[0,1,0,2,1,0,1,3,2,1,2,1]')

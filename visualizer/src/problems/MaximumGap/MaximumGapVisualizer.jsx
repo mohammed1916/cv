@@ -7,6 +7,7 @@ import Selectable from "../../components/Selectable";
 import { useVisualizationContext } from "../../context/VisualizationContext";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./MaximumGapVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -28,12 +29,7 @@ const SOLUTION_CODE = [
     { line: 16, text: "    return res" },
 ];
 
-const EXAMPLES = [
-    { label: "Ex 1", nums: [3, 6, 9, 1] },
-    { label: "Ex 2", nums: [10] },
-    { label: "Ex 3", nums: [1, 10000000] },
-    { label: "Ex 4", nums: [1, 3, 6, 2, 8, 12] },
-];
+const EXAMPLES = getExamples('maximum-gap');
 
 function generateSteps(nums) {
     const steps = [];

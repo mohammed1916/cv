@@ -8,6 +8,7 @@ import DockableWorkspace from "../../components/shared/DockableWorkspace";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
+import { getExamples } from '../../config/examplesRegistry'
 import "./LongestRepeatingVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -63,11 +64,7 @@ function generateSteps(s, k) {
     return steps;
 }
 
-const EXAMPLES = [
-    { label: "ABAB k=2", s: "ABAB", k: 2 },
-    { label: "AABABBA k=1", s: "AABABBA", k: 1 },
-    { label: "AAAA k=0", s: "AAAA", k: 0 },
-];
+const EXAMPLES = getExamples('longest-repeating-char-replace');
 
 export default function LongestRepeatingVisualizer() {
     const [sInput, setSInput] = useState("AABABBA");

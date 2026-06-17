@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './SameTreeVisualizer.css'
 
 const CANVAS_W = 340
@@ -27,12 +28,7 @@ const SOLUTION_CODE = [
 ]
 
 // ─── Preset examples ──────────────────────────────────────────────────────────
-const EXAMPLES = [
-    { label: 'Same (LC ex1)',  p: [1,2,3],         q: [1,2,3]         },
-    { label: 'Different vals', p: [1,2],            q: [1,null,2]      },
-    { label: 'Val mismatch',   p: [1,2,1],          q: [1,1,2]         },
-    { label: 'Larger same',    p: [4,2,7,1,3,6,9], q: [4,2,7,1,3,6,9] },
-]
+const EXAMPLES = getExamples('same-tree')
 
 // ─── Tree utilities ───────────────────────────────────────────────────────────
 function buildLinkedTree(arr, prefix = 'p') {

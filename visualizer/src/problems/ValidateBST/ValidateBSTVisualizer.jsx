@@ -6,6 +6,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
+import { getExamples } from '../../config/examplesRegistry'
 import './ValidateBSTVisualizer.css'
 
 const CANVAS_W = 520
@@ -110,12 +111,7 @@ function generateSteps(arr) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'Valid', arr: [5, 3, 7, 1, 4, 6, 8] },
-    { label: 'Invalid', arr: [5, 1, 4, null, null, 3, 6] },
-    { label: 'LeetCode', arr: [2, 1, 3] },
-    { label: 'Tricky', arr: [10, 5, 15, null, null, 6, 20] },
-]
+const EXAMPLES = getExamples('validate-bst')
 
 export default function ValidateBSTVisualizer() {
     const [arrInput, setArrInput] = useState('[5,3,7,1,4,6,8]')

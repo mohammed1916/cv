@@ -6,6 +6,7 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./ReverseStringVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -17,11 +18,7 @@ const SOLUTION_CODE = [
     { line: 6, text: "        r -= 1" },
 ];
 
-const EXAMPLES = [
-    { label: "Ex 1", s: ["h", "e", "l", "l", "o"] },
-    { label: "Ex 2", s: ["H", "a", "n", "n", "a", "h"] },
-    { label: "Ex 3", s: ["a", "b", "c", "d", "e", "f"] },
-];
+const EXAMPLES = getExamples('reverse-string');
 
 function generateSteps(sIn) {
     const steps = [];

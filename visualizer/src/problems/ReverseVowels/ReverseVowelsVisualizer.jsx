@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './ReverseVowelsVisualizer.css'
 
 const CANVAS_W = 500
@@ -130,11 +131,7 @@ function generateSteps(input) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: '"hello"', input: 'hello' },
-    { label: '"leetcode"', input: 'leetcode' },
-    { label: '"aA"', input: 'aA' },
-]
+const EXAMPLES = getExamples('reverse-vowels')
 
 export default function ReverseVowelsVisualizer() {
     const [input, setInput] = useState('hello')

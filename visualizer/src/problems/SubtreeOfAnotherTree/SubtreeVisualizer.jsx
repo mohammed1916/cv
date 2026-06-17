@@ -6,6 +6,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { buildTree, computeLayout, collectNodes, buildEdges } from '../../components/treeUtils'
+import { getExamples } from '../../config/examplesRegistry'
 import './SubtreeVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -71,11 +72,7 @@ function generateSteps(rootArr, subArr) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'Example 1', root: [3, 4, 5, 1, 2], sub: [4, 1, 2] },
-    { label: 'Example 2', root: [3, 4, 5, 1, 2, null, null, null, null, 0], sub: [4, 1, 2] },
-    { label: 'Same root', root: [1, 2, 3], sub: [1, 2, 3] },
-]
+const EXAMPLES = getExamples('subtree-of-another-tree')
 
 function parseArr(str) {
     try {

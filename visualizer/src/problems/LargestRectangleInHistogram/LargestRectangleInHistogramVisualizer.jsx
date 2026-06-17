@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './LargestRectangleInHistogramVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -80,11 +81,7 @@ function generateSteps(heights) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Classic', heights: [2, 1, 5, 6, 2, 3] },
-  { label: 'Simple', heights: [2, 4] },
-  { label: 'Plateau', heights: [2, 2, 2, 2] },
-]
+const EXAMPLES = getExamples('largest-rectangle-in-histogram')
 
 export default function LargestRectangleInHistogramVisualizer() {
   const [input, setInput] = useState('[2,1,5,6,2,3]')

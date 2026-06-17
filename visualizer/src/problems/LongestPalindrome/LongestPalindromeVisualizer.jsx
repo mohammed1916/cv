@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './LongestPalindromeVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -157,12 +158,7 @@ function generateSteps(s) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Example 1', s: 'babad' },
-  { label: 'Example 2', s: 'cbbd' },
-  { label: 'All Same', s: 'aaaa' },
-  { label: 'Single', s: 'a' },
-]
+const EXAMPLES = getExamples('longest-palindrome')
 
 export default function LongestPalindromeVisualizer() {
   const [sInput, setSInput] = useState('babad')

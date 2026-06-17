@@ -37,7 +37,7 @@ const AccountsMerge = () => {
     steps.push({
       type: 'init',
       parent: { ...parent },
-      groups: JSON.parse(JSON.stringify(groups)),
+      groups,
       currentEmail: null,
       highlightedEdge: null,
       mergedAccounts: [],
@@ -60,7 +60,7 @@ const AccountsMerge = () => {
           steps.push({
             type: 'union',
             parent: { ...parent },
-            groups: JSON.parse(JSON.stringify(groups)),
+            groups,
             currentEmail: email2,
             highlightedEdge: [email1, email2],
             mergedAccounts: [],

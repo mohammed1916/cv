@@ -10,6 +10,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
 import { TreeCanvas3D } from '../../components/viz3d'
+import { getExamples } from '../../config/examplesRegistry'
 import './BTMaxPathVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -63,11 +64,7 @@ function generateSteps(root) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: '[1,2,3]', input: '1,2,3' },
-    { label: '[-10,9,20,null,null,15,7]', input: '-10,9,20,null,null,15,7' },
-    { label: '[2,-1]', input: '2,-1' },
-]
+const EXAMPLES = getExamples('binary-tree-max-path')
 
 export default function BTMaxPathVisualizer() {
     const [treeInput, setTreeInput] = useState('-10,9,20,null,null,15,7')

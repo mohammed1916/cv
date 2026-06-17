@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './FindMinRotatedVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -77,13 +78,7 @@ function generateSteps(nums) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'Classic', nums: [3, 4, 5, 1, 2] },
-    { label: 'More', nums: [4, 5, 6, 7, 0, 1, 2] },
-    { label: 'Not rotated', nums: [1, 2, 3, 4, 5] },
-    { label: 'Two elems', nums: [2, 1] },
-    { label: 'Large', nums: [7, 8, 9, 10, 11, 1, 2, 3, 4, 5, 6] },
-]
+const EXAMPLES = getExamples('find-min-rotated-sorted-array')
 
 export default function FindMinRotatedVisualizer() {
     const [input, setInput] = useState('[3,4,5,1,2]')

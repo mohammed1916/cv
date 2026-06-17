@@ -8,6 +8,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './ConstructBTVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -106,11 +107,7 @@ function collectEdges(root) {
     return edges
 }
 
-const EXAMPLES = [
-    { label: 'Ex1', pre: [3, 9, 20, 15, 7], ino: [9, 3, 15, 20, 7] },
-    { label: 'Ex2', pre: [-1], ino: [-1] },
-    { label: 'Ex3', pre: [1, 2, 4, 5, 3, 6], ino: [4, 2, 5, 1, 6, 3] },
-]
+const EXAMPLES = getExamples('construct-binary-tree')
 
 function parseArr(str) {
     try { const p = JSON.parse(str); if (!Array.isArray(p)) throw new Error(); return { arr: p.map(Number), err: '' } }

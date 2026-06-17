@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './RedundantConnectionVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -91,10 +92,7 @@ function generateSteps(edges) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Triangle', edges: [[1, 2], [1, 3], [2, 3]] },
-  { label: 'Late Cycle', edges: [[1, 2], [2, 3], [3, 4], [1, 4], [1, 5]] },
-]
+const EXAMPLES = getExamples('redundant-connection')
 
 export default function RedundantConnectionVisualizer() {
   const [edgesInput, setEdgesInput] = useState('[[1,2],[1,3],[2,3]]')

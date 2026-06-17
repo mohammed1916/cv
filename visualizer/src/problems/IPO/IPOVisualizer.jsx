@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./IPOVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -21,26 +22,7 @@ const SOLUTION_CODE = [
     { line: 11, text: "    return w" },
 ];
 
-const EXAMPLES = [
-    {
-        label: "Ex 1",
-        k: 2, w: 0,
-        profits: [1, 2, 3],
-        capital: [0, 1, 1],
-    },
-    {
-        label: "Ex 2",
-        k: 3, w: 0,
-        profits: [1, 2, 3],
-        capital: [0, 1, 2],
-    },
-    {
-        label: "Ex 3",
-        k: 2, w: 1,
-        profits: [5, 3, 4, 2],
-        capital: [0, 2, 1, 3],
-    },
-];
+const EXAMPLES = getExamples('ipo');
 
 function generateSteps(k, initW, profits, capital) {
     const steps = [];

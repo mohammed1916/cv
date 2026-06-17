@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./TextJustificationVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -22,11 +23,7 @@ const SOLUTION_CODE = [
   { line: 12, text: "            result.append(full_justify(line, maxWidth))" },
 ];
 
-const EXAMPLES = [
-  { label: "Ex 1", words: ["This","is","an","example","of","text","justification"], maxWidth: 16 },
-  { label: "Ex 2", words: ["What","must","be","acknowledgment","shall","be"], maxWidth: 16 },
-  { label: "Ex 3", words: ["the","quick","brown","fox","jumps","over","the","lazy","dog"], maxWidth: 12 },
-];
+const EXAMPLES = getExamples('text-justification');
 
 function fullJustify(words, maxWidth) {
   // Pack words into lines

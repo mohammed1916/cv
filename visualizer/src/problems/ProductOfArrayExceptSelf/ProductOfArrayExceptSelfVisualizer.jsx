@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './ProductOfArrayExceptSelfVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -110,12 +111,7 @@ function generateSteps(nums) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'Classic', nums: [1, 2, 3, 4] },
-    { label: 'With Zero', nums: [1, 0, 3, 4] },
-    { label: 'Two Zeros', nums: [0, 0, 1, 2] },
-    { label: 'Negatives', nums: [-1, 2, -3, 4] },
-]
+const EXAMPLES = getExamples('product-of-array-except-self')
 
 export default function ProductOfArrayExceptSelfVisualizer() {
     const [numsInput, setNumsInput] = useState('[1,2,3,4]')

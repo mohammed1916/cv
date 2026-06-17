@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './RottingOrangesVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -177,12 +178,7 @@ function generateSteps(gridInput) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Classic', grid: [[2, 1, 1], [1, 1, 0], [0, 1, 1]] },
-  { label: 'Unreachable', grid: [[2, 1, 1], [0, 1, 1], [1, 0, 1]] },
-  { label: 'Already Done', grid: [[0, 2]] },
-  { label: 'Multi Source', grid: [[2, 1, 1], [1, 1, 1], [1, 1, 2]] },
-]
+const EXAMPLES = getExamples('rotting-oranges')
 
 export default function RottingOrangesVisualizer() {
   const [gridInput, setGridInput] = useState('[[2,1,1],[1,1,0],[0,1,1]]')

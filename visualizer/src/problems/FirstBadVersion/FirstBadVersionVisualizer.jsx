@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./FirstBadVersionVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -19,12 +20,7 @@ const SOLUTION_CODE = [
   { line: 9, text: "    return lo" },
 ];
 
-const EXAMPLES = [
-  { label: "n=5, bad=4", n: 5, bad: 4 },
-  { label: "n=10, bad=7", n: 10, bad: 7 },
-  { label: "n=1, bad=1", n: 1, bad: 1 },
-  { label: "n=8, bad=2", n: 8, bad: 2 },
-];
+const EXAMPLES = getExamples('first-bad-version');
 
 function generateSteps(n, bad) {
   const steps = [];

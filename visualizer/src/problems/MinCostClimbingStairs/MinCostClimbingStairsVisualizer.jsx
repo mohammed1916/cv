@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './MinCostClimbingStairsVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -16,10 +17,7 @@ const SOLUTION_CODE = [
     { line: 6, text: '    return min(dp[n-1], dp[n])' },
 ]
 
-const EXAMPLES = [
-    { label: '[10,15,20]', input: [10, 15, 20] },
-    { label: '[1,100,1,1,1,100,1,1,100,1]', input: [1, 100, 1, 1, 1, 100, 1, 1, 100, 1] },
-]
+const EXAMPLES = getExamples('min-cost-climbing-stairs')
 
 function generateSteps(cost) {
     const steps = []

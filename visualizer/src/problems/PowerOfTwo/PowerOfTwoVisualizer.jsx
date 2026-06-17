@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./PowerOfTwoVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -16,12 +17,7 @@ const SOLUTION_CODE = [
   { line: 6, text: "    return (n & (n - 1)) == 0" },
 ];
 
-const EXAMPLES = [
-  { label: "n=1",   n: 1,   desc: "2⁰ = 1" },
-  { label: "n=16",  n: 16,  desc: "2⁴ = 16" },
-  { label: "n=3",   n: 3,   desc: "Not power" },
-  { label: "n=100", n: 100, desc: "Not power" },
-];
+const EXAMPLES = getExamples('power-of-two');
 
 function toBin(n, bits = 8) {
   if (n < 0) return "N/A";

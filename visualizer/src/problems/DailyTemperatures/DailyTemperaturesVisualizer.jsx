@@ -8,6 +8,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
+import { getExamples } from '../../config/examplesRegistry'
 import './DailyTemperaturesVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -57,11 +58,7 @@ function generateSteps(temps) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Classic', temps: [73, 74, 75, 71, 69, 72, 76, 73] },
-  { label: 'Increasing', temps: [30, 40, 50, 60] },
-  { label: 'Decreasing', temps: [90, 80, 70, 60] },
-]
+const EXAMPLES = getExamples('daily-temperatures')
 
 function VisualizationPanel({ step, temps, inputError, applyExample }) {
   return (

@@ -8,6 +8,7 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './LinkedListCycleVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -108,13 +109,7 @@ function generateSteps(nodeCount, tailConnectsTo) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'Cycle 0', nodeCount: 5, tail: 0, desc: '[3,2,0,-4] tail→pos 0' },
-    { label: 'Cycle 1', nodeCount: 3, tail: 1, desc: '[1,2] tail→pos 1' },
-    { label: 'No cycle', nodeCount: 4, tail: -1, desc: '[1,2,3,4] no cycle' },
-    { label: 'Single', nodeCount: 1, tail: -1, desc: '[1] single node, no cycle' },
-    { label: 'Self loop', nodeCount: 1, tail: 0, desc: '[1] self loop' },
-]
+const EXAMPLES = getExamples('linked-list-cycle')
 
 const EXAMPLE_LABELS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 

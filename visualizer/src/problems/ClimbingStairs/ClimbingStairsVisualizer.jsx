@@ -13,6 +13,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
 import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
+import { getExamples } from '../../config/examplesRegistry'
 import './ClimbingStairsVisualizer.css'
 
 function generateSteps(n) {
@@ -68,12 +69,7 @@ function generateSteps(n) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'n = 2', n: 2 },
-  { label: 'n = 3', n: 3 },
-  { label: 'n = 5', n: 5 },
-  { label: 'n = 8', n: 8 },
-]
+const EXAMPLES = getExamples('climbing-stairs')
 
 function VariablesPanel({ step }) {
   return (

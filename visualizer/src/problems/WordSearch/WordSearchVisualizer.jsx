@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './WordSearchVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -187,11 +188,7 @@ function generateSteps(board, word) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Exists', board: [['A', 'B', 'C', 'E'], ['S', 'F', 'C', 'S'], ['A', 'D', 'E', 'E']], word: 'ABCCED' },
-  { label: 'Exists 2', board: [['A', 'B', 'C', 'E'], ['S', 'F', 'C', 'S'], ['A', 'D', 'E', 'E']], word: 'SEE' },
-  { label: 'Not Exists', board: [['A', 'B', 'C', 'E'], ['S', 'F', 'C', 'S'], ['A', 'D', 'E', 'E']], word: 'ABCB' },
-]
+const EXAMPLES = getExamples('word-search')
 
 export default function WordSearchVisualizer() {
   const [boardInput, setBoardInput] = useState('[["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]')

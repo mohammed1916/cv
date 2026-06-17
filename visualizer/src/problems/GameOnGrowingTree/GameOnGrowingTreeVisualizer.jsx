@@ -26,26 +26,11 @@ import BottomUpDetailsPanel from "./BottomUpDetailsPanel";
 import TraversalTrail, { TreeTraversalHighlight } from "./TraversalTrail";
 import ValueSourceTracking from "./ValueSourceTracking";
 import TreeDPConnector from "./TreeDPConnector";
+import { getExamples } from '../../config/examplesRegistry'
 
 const MAX_TREE_NODES_TO_RENDER = 120;
 
-const EXAMPLES = [
-  {
-    label: "Sample",
-    q: "9",
-    parents: "1 1 3 3 1 2 1 2 8",
-  },
-  {
-    label: "Chain",
-    q: "8",
-    parents: "1 2 3 4 5 6 7 8",
-  },
-  {
-    label: "Star",
-    q: "8",
-    parents: "1 1 1 1 1 1 1 1",
-  },
-];
+const EXAMPLES = getExamples('game-on-growing-tree');
 
 function insertTop3(first, second, third, idx, value) {
   if (value > first[idx]) {
@@ -699,6 +684,11 @@ export default function GameOnGrowingTreeVisualizer() {
   const [previewSize, setPreviewSize] = useState(null);
   const [parsedParentSnapshot, setParsedParentSnapshot] = useState([]);
 
+  const handleExampleClick = useCallback((example) => {
+    setQInput(example.q);
+    setParentsInput(example.parents);
+  }, []);
+
   const { answers, steps, inputError } = useMemo(() => {
     try {
       const q = Number(qInput.trim());
@@ -995,10 +985,7 @@ export default function GameOnGrowingTreeVisualizer() {
                 key={example.label}
                 type="button"
                 className="gogt-example-btn"
-                onClick={() => {
-                  setQInput(example.q);
-                  setParentsInput(example.parents);
-                }}
+                onClick={() => handleExampleClick(example)}
               >
                 {example.label}
               </button>

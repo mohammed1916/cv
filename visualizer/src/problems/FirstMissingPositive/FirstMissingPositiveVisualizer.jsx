@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./FirstMissingPositiveVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -22,12 +23,7 @@ const SOLUTION_CODE = [
     { line: 12, text: "    return n + 1" },
 ];
 
-const EXAMPLES = [
-    { label: "Ex 1", nums: [1, 2, 0] },
-    { label: "Ex 2", nums: [3, 4, -1, 1] },
-    { label: "Ex 3", nums: [7, 8, 9, 11, 12] },
-    { label: "Ex 4", nums: [2, 1] },
-];
+const EXAMPLES = getExamples('first-missing-positive');
 
 function generateSteps(numsIn) {
     const steps = [];

@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./TopKFrequentVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -75,11 +76,7 @@ function generateSteps(nums, k) {
     return steps;
 }
 
-const EXAMPLES = [
-    { label: "[1,1,1,2,2,3] k=2", nums: [1, 1, 1, 2, 2, 3], k: 2 },
-    { label: "[1] k=1", nums: [1], k: 1 },
-    { label: "[4,1,1,2,2,3,3,3] k=2", nums: [4, 1, 1, 2, 2, 3, 3, 3], k: 2 },
-];
+const EXAMPLES = getExamples('top-kfrequent');
 
 function parseNums(str) {
     try { const p = JSON.parse(str); if (!Array.isArray(p)) throw new Error(); return { nums: p.map(Number), err: "" }; }

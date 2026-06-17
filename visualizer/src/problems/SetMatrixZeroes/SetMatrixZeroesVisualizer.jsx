@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./SetMatrixZeroesVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -20,47 +21,41 @@ const SOLUTION_CODE = [
     { line: 10, text: "                matrix[i][j] = 0" },
 ];
 
-function deepCopy(m) { return m.map((r) => [...r]); }
-
 function generateSteps(initial) {
     const steps = [];
-    const matrix = deepCopy(initial);
+    const matrix = initial.map((r) => [...r]); // Init copy only
     const rows = new Set(), cols = new Set();
 
-    steps.push({ activeLine: 2, matrix: deepCopy(matrix), hi: -1, hj: -1, rows: new Set(), cols: new Set(), phase: "scan", message: "Scan for zeros — record their rows & cols." });
+    steps.push({ activeLine: 2, matrix, hi: -1, hj: -1, rows: new Set(), cols: new Set(), phase: "scan", message: "Scan for zeros — record their rows & cols." });
 
     // Scan
     for (let i = 0; i < matrix.length; i++) {
         for (let j = 0; j < matrix[0].length; j++) {
-            steps.push({ activeLine: 5, matrix: deepCopy(matrix), hi: i, hj: j, rows: new Set(rows), cols: new Set(cols), phase: "scan", message: `Check [${i}][${j}] = ${matrix[i][j]}` });
+            steps.push({ activeLine: 5, matrix, hi: i, hj: j, rows: new Set(rows), cols: new Set(cols), phase: "scan", message: `Check [${i}][${j}] = ${matrix[i][j]}` });
             if (matrix[i][j] === 0) {
                 rows.add(i); cols.add(j);
-                steps.push({ activeLine: 6, matrix: deepCopy(matrix), hi: i, hj: j, rows: new Set(rows), cols: new Set(cols), phase: "mark", message: `Zero found! Mark row ${i}, col ${j}` });
+                steps.push({ activeLine: 6, matrix, hi: i, hj: j, rows: new Set(rows), cols: new Set(cols), phase: "mark", message: `Zero found! Mark row ${i}, col ${j}` });
             }
         }
     }
 
-    steps.push({ activeLine: 7, matrix: deepCopy(matrix), hi: -1, hj: -1, rows: new Set(rows), cols: new Set(cols), phase: "zero", message: `Fill zeros for rows=[${[...rows]}], cols=[${[...cols]}]` });
+    steps.push({ activeLine: 7, matrix, hi: -1, hj: -1, rows: new Set(rows), cols: new Set(cols), phase: "zero", message: `Fill zeros for rows=[${[...rows]}], cols=[${[...cols]}]` });
 
     // Fill
     for (let i = 0; i < matrix.length; i++) {
         for (let j = 0; j < matrix[0].length; j++) {
             if (rows.has(i) || cols.has(j)) {
                 matrix[i][j] = 0;
-                steps.push({ activeLine: 10, matrix: deepCopy(matrix), hi: i, hj: j, rows: new Set(rows), cols: new Set(cols), phase: "fill", message: `Set [${i}][${j}] = 0 (row ${i} or col ${j} flagged)` });
+                steps.push({ activeLine: 10, matrix, hi: i, hj: j, rows: new Set(rows), cols: new Set(cols), phase: "fill", message: `Set [${i}][${j}] = 0 (row ${i} or col ${j} flagged)` });
             }
         }
     }
 
-    steps.push({ activeLine: 10, matrix: deepCopy(matrix), hi: -1, hj: -1, rows: new Set(rows), cols: new Set(cols), phase: "done", message: "Done!" });
+    steps.push({ activeLine: 10, matrix, hi: -1, hj: -1, rows: new Set(rows), cols: new Set(cols), phase: "done", message: "Done!" });
     return steps;
 }
 
-const EXAMPLES = [
-    { label: "Ex1", matrix: [[1, 1, 1], [1, 0, 1], [1, 1, 1]] },
-    { label: "Ex2", matrix: [[0, 1, 2, 0], [3, 4, 5, 2], [1, 3, 1, 5]] },
-    { label: "Ex3", matrix: [[1, 2, 3], [4, 0, 6], [7, 8, 9], [0, 2, 3]] },
-];
+const EXAMPLES = getExamples('set-matrix-zeroes');
 
 export default function SetMatrixZeroesVisualizer() {
     const [selected, setSelected] = useState(0);

@@ -8,6 +8,7 @@ import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
+import { getExamples } from '../../config/examplesRegistry'
 import "./GenerateParenthesesVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -65,9 +66,7 @@ function generateSteps(n) {
     return steps;
 }
 
-const EXAMPLES = [
-    { label: "n=1", n: 1 }, { label: "n=2", n: 2 }, { label: "n=3", n: 3 }, { label: "n=4", n: 4 },
-];
+const EXAMPLES = getExamples('generate-parentheses');
 
 export default function GenerateParenthesesVisualizer() {
     const [n, setN] = useState(3);

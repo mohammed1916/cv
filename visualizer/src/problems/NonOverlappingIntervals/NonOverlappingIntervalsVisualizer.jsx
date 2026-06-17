@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './NonOverlappingIntervalsVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -96,12 +97,7 @@ function toX(val, min, max) {
     return TIMELINE_PAD + ((val - min) / (max - min)) * (TIMELINE_W - 2 * TIMELINE_PAD)
 }
 
-const EXAMPLES = [
-    { label: 'LeetCode', val: '[[1,2],[2,3],[3,4],[1,3]]' },
-    { label: 'Example 2', val: '[[1,2],[1,2],[1,2]]' },
-    { label: 'Example 3', val: '[[1,2],[2,3]]' },
-    { label: 'Complex', val: '[[1,100],[11,22],[1,11],[2,12]]' },
-]
+const EXAMPLES = getExamples('non-overlapping-intervals')
 
 export default function NonOverlappingIntervalsVisualizer() {
     const [input, setInput] = useState('[[1,2],[2,3],[3,4],[1,3]]')

@@ -8,13 +8,10 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { useProblemCode } from "../../hooks/useProblemCode";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./ContainsDuplicateVisualizer.css";
 
-const EXAMPLES = [
-  { label: "Has Dup", nums: [1, 2, 3, 1] },
-  { label: "No Dup",  nums: [1, 2, 3, 4] },
-  { label: "Multi",   nums: [1, 1, 1, 3, 3, 4, 3, 2, 4, 2] },
-];
+const EXAMPLES = getExamples('contains-duplicate');
 
 function generateSteps(nums) {
   const steps = [];

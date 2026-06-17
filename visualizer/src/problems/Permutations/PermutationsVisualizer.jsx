@@ -8,6 +8,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './PermutationsVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -38,7 +39,7 @@ function generateSteps(nums) {
             res.push([...path])
             steps.push({
                 phase: 'record', activeLine: 5,
-                path: [...path], used: [...used], res: res.map((r) => [...r]),
+                path: [...path], used: [...used], res,
                 message: `Complete permutation: [${path.join(', ')}]`,
             })
             return
@@ -51,7 +52,7 @@ function generateSteps(nums) {
             path.push(nums[i])
             steps.push({
                 phase: 'choose', activeLine: 10,
-                path: [...path], used: [...used], res: res.map((r) => [...r]),
+                path: [...path], used: [...used], res,
                 message: `Choose nums[${i}]=${nums[i]}, path=[${path.join(', ')}]`,
             })
 
@@ -61,7 +62,7 @@ function generateSteps(nums) {
             used[i] = false
             steps.push({
                 phase: 'unchoose', activeLine: 13,
-                path: [...path], used: [...used], res: res.map((r) => [...r]),
+                path: [...path], used: [...used], res,
                 message: `Unchoose nums[${i}]=${nums[i]}, path=[${path.join(', ')}]`,
             })
         }
@@ -75,17 +76,13 @@ function generateSteps(nums) {
     backtrack([])
     steps.push({
         phase: 'done', activeLine: 15,
-        path: [], used: [...used], res: res.map((r) => [...r]),
+        path: [], used: [...used], res,
         message: `Done. ${res.length} permutations found.`,
     })
     return steps
 }
 
-const EXAMPLES = [
-    { label: '[1,2,3]', nums: [1, 2, 3] },
-    { label: '[0,1]', nums: [0, 1] },
-    { label: '[1,2,3,4]', nums: [1, 2, 3, 4] },
-]
+const EXAMPLES = getExamples('permutations')
 
 function VisualizationPanel({ EXAMPLES, applyExample, numsInput, setNumsInput, nums, inputError, handleReset, step }) {
     return (

@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./EvalRPNVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -50,11 +51,7 @@ function generateSteps(tokens) {
     return steps;
 }
 
-const EXAMPLES = [
-    { label: '["2","1","+","3","*"]', tokens: ["2", "1", "+", "3", "*"] },
-    { label: '["4","13","5","/","+"]', tokens: ["4", "13", "5", "/", "+"] },
-    { label: '["10","6","9","3","+","-11","*","/","*","17","+","5","+"]', tokens: ["10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"] },
-];
+const EXAMPLES = getExamples('eval-rpn');
 
 function parseTokens(str) {
     try { const p = JSON.parse(str); if (!Array.isArray(p)) throw new Error(); return { tokens: p.map(String), err: "" }; }

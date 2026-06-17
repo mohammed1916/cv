@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./SortColorsVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -54,11 +55,7 @@ function generateSteps(initial) {
     return steps;
 }
 
-const EXAMPLES = [
-    { label: "[2,0,2,1,1,0]", nums: [2, 0, 2, 1, 1, 0] },
-    { label: "[2,0,1]", nums: [2, 0, 1] },
-    { label: "[1,2,0,1,2,0,1]", nums: [1, 2, 0, 1, 2, 0, 1] },
-];
+const EXAMPLES = getExamples('sort-colors');
 
 export default function SortColorsVisualizer() {
     const [sel, setSel] = useState(0);

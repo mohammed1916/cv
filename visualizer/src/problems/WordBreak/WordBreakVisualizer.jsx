@@ -8,6 +8,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
+import { getExamples } from '../../config/examplesRegistry'
 import './WordBreakVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -90,12 +91,7 @@ function generateSteps(s, wordDict) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'Classic', s: 'leetcode', dict: ['leet', 'code'] },
-    { label: 'Applepenapple', s: 'applepenapple', dict: ['apple', 'pen'] },
-    { label: 'Cannot', s: 'catsandog', dict: ['cats', 'dog', 'sand', 'and', 'cat'] },
-    { label: 'Short', s: 'cars', dict: ['car', 'ca', 'rs'] },
-]
+const EXAMPLES = getExamples('word-break')
 
 export default function WordBreakVisualizer() {
     const [sInput, setSInput] = useState('leetcode')

@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./MergeSortedArrayVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -20,11 +21,7 @@ const SOLUTION_CODE = [
   { line: 10, text: "        nums1[k] = nums2[j]; j -= 1; k -= 1" },
 ];
 
-const EXAMPLES = [
-  { label: "Ex 1", nums1: [1, 2, 3, 0, 0, 0], m: 3, nums2: [2, 5, 6], n: 3 },
-  { label: "Ex 2", nums1: [1, 0],              m: 1, nums2: [2],       n: 1 },
-  { label: "Ex 3", nums1: [4, 5, 6, 0, 0, 0], m: 3, nums2: [1, 2, 3], n: 3 },
-];
+const EXAMPLES = getExamples('merge-sorted-array');
 
 function generateSteps(nums1Init, m, nums2, n) {
   const steps = [];

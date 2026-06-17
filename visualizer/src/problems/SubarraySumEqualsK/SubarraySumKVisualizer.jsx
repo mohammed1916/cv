@@ -8,6 +8,7 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
+import { getExamples } from '../../config/examplesRegistry'
 import "./SubarraySumKVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -61,11 +62,7 @@ function generateSteps(nums, k) {
     return steps;
 }
 
-const EXAMPLES = [
-    { label: "[1,1,1] k=2", nums: [1, 1, 1], k: 2 },
-    { label: "[1,2,3] k=3", nums: [1, 2, 3], k: 3 },
-    { label: "[3,4,7,2,-3,1,4,2] k=7", nums: [3, 4, 7, 2, -3, 1, 4, 2], k: 7 },
-];
+const EXAMPLES = getExamples('subarray-sum-equals-k');
 
 function VizPanel({ nums, step, k }) {
     return (

@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './MaxProductSubarrayVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -61,12 +62,7 @@ function generateSteps(nums) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'Basic', nums: [2, 3, -2, 4] },
-    { label: 'Negatives', nums: [-2, 0, -1] },
-    { label: 'LeetCode', nums: [2, -5, -2, -4, 3] },
-    { label: 'All Neg', nums: [-3, -1, -1] },
-]
+const EXAMPLES = getExamples('max-product-subarray')
 
 export default function MaxProductSubarrayVisualizer() {
     const [numsInput, setNumsInput] = useState('[2,3,-2,4]')

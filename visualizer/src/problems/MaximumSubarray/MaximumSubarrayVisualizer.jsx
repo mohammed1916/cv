@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './MaximumSubarrayVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -94,12 +95,7 @@ function generateSteps(nums) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Standard', nums: [-2, 1, -3, 4, -1, 2, 1, -5, 4] },
-  { label: 'All Negative', nums: [-5, -2, -9, -1] },
-  { label: 'All Positive', nums: [1, 2, 3, 4, 5] },
-  { label: 'Single Element', nums: [1] },
-]
+const EXAMPLES = getExamples('maximum-subarray')
 
 export default function MaximumSubarrayVisualizer() {
   const [numsInput, setNumsInput] = useState('[-2, 1, -3, 4, -1, 2, 1, -5, 4]')

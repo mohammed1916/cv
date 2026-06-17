@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './FindDisappearedNumbersVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -19,10 +20,7 @@ const SOLUTION_CODE = [
     { line: 9, text: '    return result' },
 ]
 
-const EXAMPLES = [
-    { label: '[4,3,2,7,8,2,3,1]', input: [4, 3, 2, 7, 8, 2, 3, 1] },
-    { label: '[1,1]', input: [1, 1] },
-]
+const EXAMPLES = getExamples('find-disappeared-numbers')
 
 function generateSteps(input) {
     const steps = []

@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
 import './DecodeWaysVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -100,13 +101,7 @@ function generateSteps(s) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: '"12"', s: '12' },
-    { label: '"226"', s: '226' },
-    { label: '"06"', s: '06' },
-    { label: '"11106"', s: '11106' },
-    { label: '"1234"', s: '1234' },
-]
+const EXAMPLES = getExamples('decode-ways')
 
 export default function DecodeWaysVisualizer() {
     const [sInput, setSInput] = useState('226')

@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./ReorderListVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -78,11 +79,7 @@ function generateSteps(arr) {
     return steps;
 }
 
-const EXAMPLES = [
-    { label: "[1,2,3,4]", arr: [1, 2, 3, 4] },
-    { label: "[1,2,3,4,5]", arr: [1, 2, 3, 4, 5] },
-    { label: "[1,2,3,4,5,6]", arr: [1, 2, 3, 4, 5, 6] },
-];
+const EXAMPLES = getExamples('reorder-list');
 
 export default function ReorderListVisualizer() {
     const [sel, setSel] = useState(0);

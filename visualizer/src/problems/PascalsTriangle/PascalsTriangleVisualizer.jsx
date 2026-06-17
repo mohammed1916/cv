@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./PascalsTriangleVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -20,11 +21,7 @@ const SOLUTION_CODE = [
   { line: 10, text: "    return triangle" },
 ];
 
-const EXAMPLES = [
-  { label: "5 rows", numRows: 5 },
-  { label: "6 rows", numRows: 6 },
-  { label: "7 rows", numRows: 7 },
-];
+const EXAMPLES = getExamples('pascals-triangle');
 
 function generateSteps(numRows) {
   const steps = [];
@@ -33,24 +30,24 @@ function generateSteps(numRows) {
 
   for (let i = 1; i < numRows; i++) {
     const prev = triangle[i - 1];
-    steps.push({ activeLine: 4, triangle: triangle.map(r => [...r]), curRow: i, curJ: -1, message: `Row ${i}: prev = [${prev.join(", ")}]` });
+    steps.push({ activeLine: 4, triangle, curRow: i, curJ: -1, message: `Row ${i}: prev = [${prev.join(", ")}]` });
     const row = [1];
-    steps.push({ activeLine: 5, triangle: triangle.map(r => [...r]), curRow: i, curJ: -1, building: [...row], message: `Start row ${i} with [1]` });
+    steps.push({ activeLine: 5, triangle, curRow: i, curJ: -1, building: [...row], message: `Start row ${i} with [1]` });
     for (let j = 1; j < i; j++) {
       const sum = prev[j - 1] + prev[j];
       row.push(sum);
       steps.push({
-        activeLine: 7, triangle: triangle.map(r => [...r]), curRow: i, curJ: j,
+        activeLine: 7, triangle, curRow: i, curJ: j,
         building: [...row], prevJ: [j - 1, j], sum,
         message: `prev[${j - 1}](${prev[j - 1]}) + prev[${j}](${prev[j]}) = ${sum}`,
       });
     }
     row.push(1);
-    steps.push({ activeLine: 8, triangle: triangle.map(r => [...r]), curRow: i, curJ: -1, building: [...row], message: `Append 1 → row = [${row.join(", ")}]` });
+    steps.push({ activeLine: 8, triangle, curRow: i, curJ: -1, building: [...row], message: `Append 1 → row = [${row.join(", ")}]` });
     triangle.push(row);
-    steps.push({ activeLine: 9, triangle: triangle.map(r => [...r]), curRow: i, curJ: -1, message: `triangle[${i}] = [${row.join(", ")}]` });
+    steps.push({ activeLine: 9, triangle, curRow: i, curJ: -1, message: `triangle[${i}] = [${row.join(", ")}]` });
   }
-  steps.push({ activeLine: 10, triangle: triangle.map(r => [...r]), curRow: -1, curJ: -1, done: true, message: `Return ${numRows}-row Pascal's Triangle` });
+  steps.push({ activeLine: 10, triangle, curRow: -1, curJ: -1, done: true, message: `Return ${numRows}-row Pascal's Triangle` });
   return steps;
 }
 

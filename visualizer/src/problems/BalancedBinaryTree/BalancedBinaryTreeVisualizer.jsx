@@ -9,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
+import { getExamples } from '../../config/examplesRegistry'
 import './BalancedBinaryTreeVisualizer.css'
 
 const CANVAS_W = 520
@@ -101,12 +102,7 @@ function generateSteps(arr) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'Balanced', arr: [3, 9, 20, null, null, 15, 7] },
-    { label: 'Unbalanced', arr: [1, 2, 2, 3, 3, null, null, 4, 4] },
-    { label: 'Single', arr: [1] },
-    { label: 'Full', arr: [1, 2, 3, 4, 5, 6, 7] },
-]
+const EXAMPLES = getExamples('balanced-binary-tree')
 
 // TreeVisualizationPanel: renders the tree canvas with states
 function TreeVisualizationPanel({ step, positions, edges, allNodes }) {

@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./RandomizedCollectionVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -26,34 +27,7 @@ const SOLUTION_CODE = [
     { line: 16, text: "        return random.choice(self.nums)" },
 ];
 
-const EXAMPLES = [
-    {
-        label: "Ex 1",
-        ops: [
-            { type: "insert", val: 1 },
-            { type: "insert", val: 1 },
-            { type: "insert", val: 2 },
-            { type: "getRandom" },
-            { type: "remove", val: 1 },
-            { type: "getRandom" },
-            { type: "insert", val: 2 },
-            { type: "getRandom" },
-            { type: "remove", val: 2 },
-            { type: "getRandom" },
-        ],
-    },
-    {
-        label: "Ex 2",
-        ops: [
-            { type: "insert", val: 0 },
-            { type: "insert", val: 1 },
-            { type: "remove", val: 0 },
-            { type: "insert", val: 2 },
-            { type: "remove", val: 1 },
-            { type: "getRandom" },
-        ],
-    },
-];
+const EXAMPLES = getExamples('randomized-collection');
 
 function generateSteps(ops) {
     const steps = [];
@@ -70,17 +44,17 @@ function generateSteps(ops) {
     }
     function removeIdxVal(val, i) { idx[val] = getIdx(val).filter(x => x !== i); }
 
-    steps.push({ activeLine: 3, nums: [...nums], idx: JSON.parse(JSON.stringify(idx)), op: "init", result: null, phase: "init", message: "RandomizedCollection initialized." });
+    steps.push({ activeLine: 3, nums: [...nums], idx, op: "init", result: null, phase: "init", message: "RandomizedCollection initialized." });
 
     for (const op of ops) {
         if (op.type === "insert") {
             const isFirst = getIdx(op.val).length === 0;
             addIdx(op.val, nums.length);
             nums.push(op.val);
-            steps.push({ activeLine: 8, nums: [...nums], idx: JSON.parse(JSON.stringify(idx)), op: `insert(${op.val})`, result: isFirst, phase: "insert", message: `insert(${op.val}) → nums=[${nums.join(",")}], return ${isFirst}` });
+            steps.push({ activeLine: 8, nums: [...nums], idx, op: `insert(${op.val})`, result: isFirst, phase: "insert", message: `insert(${op.val}) → nums=[${nums.join(",")}], return ${isFirst}` });
         } else if (op.type === "remove") {
             if (getIdx(op.val).length === 0) {
-                steps.push({ activeLine: 10, nums: [...nums], idx: JSON.parse(JSON.stringify(idx)), op: `remove(${op.val})`, result: false, phase: "miss", message: `remove(${op.val}) → not found` });
+                steps.push({ activeLine: 10, nums: [...nums], idx, op: `remove(${op.val})`, result: false, phase: "miss", message: `remove(${op.val}) → not found` });
                 continue;
             }
             const i = popIdx(op.val);
@@ -91,14 +65,14 @@ function generateSteps(ops) {
                 addIdx(last, i);
             }
             nums.pop();
-            steps.push({ activeLine: 14, nums: [...nums], idx: JSON.parse(JSON.stringify(idx)), op: `remove(${op.val})`, result: null, phase: "remove", swapI: i, swapLast: last, message: `remove(${op.val}): swap pos ${i} with last(${last}), pop → nums=[${nums.join(",")}]` });
+            steps.push({ activeLine: 14, nums: [...nums], idx, op: `remove(${op.val})`, result: null, phase: "remove", swapI: i, swapLast: last, message: `remove(${op.val}): swap pos ${i} with last(${last}), pop → nums=[${nums.join(",")}]` });
         } else {
             const pick = nums[Math.floor(Math.random() * nums.length)];
-            steps.push({ activeLine: 16, nums: [...nums], idx: JSON.parse(JSON.stringify(idx)), op: "getRandom()", result: pick, phase: "random", message: `getRandom() → ${pick}  (from [${nums.join(",")}])` });
+            steps.push({ activeLine: 16, nums: [...nums], idx, op: "getRandom()", result: pick, phase: "random", message: `getRandom() → ${pick}  (from [${nums.join(",")}])` });
         }
     }
 
-    steps.push({ activeLine: 3, nums: [...nums], idx: JSON.parse(JSON.stringify(idx)), op: "—", result: null, phase: "done", done: true, message: "All operations complete." });
+    steps.push({ activeLine: 3, nums: [...nums], idx, op: "—", result: null, phase: "done", done: true, message: "All operations complete." });
     return steps;
 }
 

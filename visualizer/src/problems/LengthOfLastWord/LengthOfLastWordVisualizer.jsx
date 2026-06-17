@@ -5,6 +5,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from '../../config/examplesRegistry'
 import "./LengthOfLastWordVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -19,11 +20,7 @@ const SOLUTION_CODE = [
   { line: 9, text: "    return length" },
 ];
 
-const EXAMPLES = [
-  { label: "Ex 1", s: "Hello World" },
-  { label: "Ex 2", s: "   fly me   to   the moon  " },
-  { label: "Ex 3", s: "luffy is still joyboy" },
-];
+const EXAMPLES = getExamples('length-of-last-word');
 
 function generateSteps(sIn) {
   const steps = [];

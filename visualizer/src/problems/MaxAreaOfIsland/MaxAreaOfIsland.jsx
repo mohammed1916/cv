@@ -31,7 +31,7 @@ const MaxAreaOfIsland = () => {
       newColors[r][c] = 'exploring';
       islandArea += 1;
 
-      speeds.push({ visited: JSON.parse(JSON.stringify(newVisited)), colors: JSON.parse(JSON.stringify(newColors)), area: islandArea });
+      speeds.push({ visited: newVisited, colors: newColors, area: islandArea });
 
       // DFS in 4 directions
       islandArea = await dfs(r + 1, c, newVisited, newColors, islandArea, speeds);
