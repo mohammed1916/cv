@@ -4,6 +4,7 @@ import PartialAnswersPanel from "../../components/PartialAnswersPanel";
 import { TreeHighlightOverlay } from "./TreeDPLinking";
 import { TreeTraversalHighlight } from "./TraversalTrail";
 import { PruningLegend, PruningStats } from "./EnhancedTreeVisualization";
+import { usePruningAnalysis, getNodeOpacity, getEdgeOpacity, getPrunedNodeFilter } from "./usePruningAnalysis";
 import "./EnhancedTreeVisualization.css";
 
 const TREE_VIEWBOX_WIDTH = 1000;
@@ -28,6 +29,9 @@ export default function TreeStatePanel({
     const [gameHierarchyLevel, setGameHierarchyLevel] = useState("overview");
     const treeDragRef = useRef(null);
     const prevDpSnapshotRef = useRef(null);
+
+    // Analyze pruning for visual indication
+    const pruningAnalysis = usePruningAnalysis(step, undefined, 0);
 
     useEffect(() => {
         prevDpSnapshotRef.current = dpSnapshot;
@@ -213,7 +217,14 @@ export default function TreeStatePanel({
                                                 strokeDasharray={isActiveEdge ? "8 8" : "none"}
                                                 initial={false}
                                                 animate={{
-                                                    opacity: isBlocked || inPath || isActiveEdge ? 1 : 0.78,
+                                                    opacity: isBlocked || inPath || isActiveEdge
+                                                        ? 1
+                                                        : getEdgeOpacity(
+                                                            edge.from,
+                                                            edge.to,
+                                                            pruningAnalysis.prunedEdges,
+                                                            new Set(pruningAnalysis.activePath),
+                                                          ),
                                                     strokeWidth: isBlocked || inPath ? 3 : isActiveEdge ? 2.5 : 2,
                                                     strokeDashoffset: isActiveEdge ? [16, 0] : 0,
                                                 }}
@@ -285,12 +296,22 @@ export default function TreeStatePanel({
                                                             r="16"
                                                             initial={false}
                                                             animate={{
-                                                                opacity: state === "white" ? 0.9 : 1,
+                                                                opacity: getNodeOpacity(
+                                                                    node,
+                                                                    pruningAnalysis.prunedNodeIds,
+                                                                    new Set(pruningAnalysis.activePath),
+                                                                ),
                                                                 r: isChip
                                                                     ? 17.2
                                                                     : isFocusSource || isFocusTarget
                                                                         ? 16.8
                                                                         : 16,
+                                                            }}
+                                                            style={{
+                                                                filter: getPrunedNodeFilter(
+                                                                    node,
+                                                                    pruningAnalysis.prunedNodeIds,
+                                                                ),
                                                             }}
                                                             transition={{
                                                                 type: "spring",
