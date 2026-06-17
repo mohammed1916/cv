@@ -174,9 +174,13 @@ function solveWithTrace(parentZeroBased, size, answersSnapshot) {
       lineNo = 13;
       msg = `depth ${depth} becomes second[${parent}] and shifts third.`;
       relLines = [13, 14];
-    } else {
+    } else if (which === 3) {
       lineNo = 14;
       msg = `depth ${depth} becomes third[${parent}].`;
+      relLines = [14];
+    } else {
+      lineNo = 14;
+      msg = `depth ${depth} is pruned - worse than all current top-3 values.`;
       relLines = [14];
     }
 
@@ -188,7 +192,7 @@ function solveWithTrace(parentZeroBased, size, answersSnapshot) {
         parent,
         msg,
         getDPSnapshot(),
-        { sourceNode: node, targetNode: parent },
+        { sourceNode: node, targetNode: parent, pruned: which === 0 },
         relLines,
       )
     );
@@ -225,9 +229,13 @@ function solveWithTrace(parentZeroBased, size, answersSnapshot) {
       lineNo = 22;
       msg = `depth ${depth} becomes second[${node}] and shifts third.`;
       relLines = [22, 23];
-    } else {
+    } else if (which === 3) {
       lineNo = 23;
       msg = `depth ${depth} becomes third[${node}].`;
+      relLines = [23];
+    } else {
+      lineNo = 23;
+      msg = `depth ${depth} is pruned - worse than all current top-3 values.`;
       relLines = [23];
     }
 
@@ -239,7 +247,7 @@ function solveWithTrace(parentZeroBased, size, answersSnapshot) {
         node,
         msg,
         getDPSnapshot(),
-        { sourceNode: parent, targetNode: node },
+        { sourceNode: parent, targetNode: node, pruned: which === 0 },
         relLines,
       )
     );

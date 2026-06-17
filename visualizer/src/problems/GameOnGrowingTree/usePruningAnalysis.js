@@ -20,32 +20,20 @@ export function usePruningAnalysis(step, steps, stepIndex) {
     const prunedEdges = new Set()
     const activePath = []
 
-    // Simulate the algorithm up to current step to determine pruning
-    // During bottom-up phase: depths from children don't make top-3 → prune that child
-    if (step.activeLine >= 9 && step.activeLine <= 14) {
-      // Bottom-up phase - child contributions being evaluated
-      // A child is pruned if its depth didn't make the parent's top-3
-      // We track this by looking at which insertTop3 calls would return 0
+    // Detect pruned edges from step data
+    // A pruned edge is marked when insertTop3 returns 0 (depth worse than all top-3)
+    for (let i = 0; i <= stepIndex; i++) {
+      const s = steps[i]
+      if (!s || !s.focus) continue
 
-      // Get all steps up to current
-      for (let i = 0; i <= stepIndex; i++) {
-        const s = steps[i]
-        if (!s) continue
-
-        // When inserting depth and it returns 0 (return value not stored, but we can infer)
-        // The source node's contribution was pruned
-        if (s.phase === 'up' && s.activeLine >= 12 && s.activeLine <= 14) {
-          // This is an insertion step - if the depth wasn't good enough,
-          // it means this child's branch contributes less value
-          // Mark nodes that made poor contributions
+      // Check if this step marked an edge as pruned
+      if (s.focus.pruned === true) {
+        const from = s.focus.sourceNode
+        const to = s.focus.targetNode
+        if (from !== undefined && to !== undefined) {
+          prunedEdges.add(`${from}-${to}`)
         }
       }
-    }
-
-    // During top-down phase: some nodes don't receive optimal depths → prune their children
-    if (step.activeLine >= 15 && step.activeLine <= 23) {
-      // Top-down phase - children receiving depths from parents
-      // Children of nodes with worse depths might be pruned
     }
 
     // Active path is nodes being currently processed
