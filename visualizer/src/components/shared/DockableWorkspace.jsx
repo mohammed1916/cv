@@ -55,29 +55,42 @@ export default function DockableWorkspace({
 
   const activeMaximizedPanel = maximizedId ? panelMap.get(maximizedId) : null;
 
-  // Auto-add newly available panels to the layout
+  // Auto-add newly available panels and remove unavailable ones from layout
   useEffect(() => {
+    const availablePanelIds = new Set(panels.map((p) => p.id));
     const layoutPanelIds = new Set();
     for (const row of getGridLayout(layout)) {
       row.forEach((id) => layoutPanelIds.add(id));
     }
     layout.minimized?.forEach((id) => layoutPanelIds.add(id));
 
-    const newPanelIds = panels
-      .map((p) => p.id)
-      .filter((id) => !layoutPanelIds.has(id));
+    const newPanelIds = Array.from(availablePanelIds).filter((id) => !layoutPanelIds.has(id));
+    const removedPanelIds = Array.from(layoutPanelIds).filter((id) => !availablePanelIds.has(id));
 
-    if (newPanelIds.length > 0) {
+    if (newPanelIds.length > 0 || removedPanelIds.length > 0) {
       setLayout((current) => {
-        const rows = getGridLayout(current);
-        if (!rows.length) {
-          rows.push([]);
+        let rows = getGridLayout(current);
+
+        // Remove panels that are no longer available
+        const removedSet = new Set(removedPanelIds);
+        rows = rows.map((row) => row.filter((id) => !removedSet.has(id)));
+        rows = rows.filter((row) => row.length > 0);
+
+        // Add new panels
+        if (newPanelIds.length > 0) {
+          if (!rows.length) {
+            rows.push([]);
+          }
+          rows[rows.length - 1].push(...newPanelIds);
         }
-        rows[rows.length - 1].push(...newPanelIds);
-        return { rows, minimized: current.minimized };
+
+        // Remove from minimized if needed
+        const minimized = current.minimized.filter((id) => !removedSet.has(id));
+
+        return { rows, minimized };
       });
     }
-  }, [panels.map((p) => p.id).join(",")]);
+  }, [panels.length, panels.map((p) => p.id).sort().join(",")]);
 
   const getZoneAtMouse = (mouseX, mouseY) => {
     const preview = document.querySelector(".dock-layout-preview");
