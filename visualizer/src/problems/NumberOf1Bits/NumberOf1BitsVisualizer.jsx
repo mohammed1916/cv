@@ -1,10 +1,14 @@
 import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
+import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from '../../config/examplesRegistry'
 import "./NumberOf1BitsVisualizer.css";
 
@@ -42,89 +46,137 @@ function generateSteps(nIn) {
 
 export default function NumberOf1BitsVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
+  const SOLUTION_CODE = useSolutionCode('number-of-1-bits');
   const steps = useMemo(() => generateSteps(ex.n), [ex]);
-  const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
+  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
   const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
 
   const displayN = step?.n ?? (ex.n >>> 0);
   const count = step?.count ?? 0;
   const lsb = step?.lsb;
   const bin = toBin32(displayN);
 
-  return (
-    <div className="nb-shell">
-      <div className="nb-examples">
-        {EXAMPLES.map(e => (
-          <button key={e.label} className={`nb-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>
-            {e.label}: {e.desc}
-          </button>
-        ))}
-      </div>
+  const dockPanels = useMemo(() => [
+    {
+      id: 'code',
+      title: 'Code',
+      content: (
+        <CodeTracePanel
+          step={step}
+          codeLines={SOLUTION_CODE}
+          highlightedLines={connectivity.highlightedLines}
+          onLineSelect={connectivity.handleLineSelect}
+          onActiveLineDomChange={setActiveLineDom}
+        />
+      ),
+    },
+    {
+      id: 'viz',
+      title: '📈 Bit Counter',
+      content: (
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16 }}>
+          <div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+              {EXAMPLES.map(e => (
+                <button
+                  key={e.label}
+                  onClick={() => applyEx(e)}
+                  style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: '#f1f5f9' }}
+                >
+                  {e.label}
+                </button>
+              ))}
+            </div>
+          </div>
 
-      <div className="nb-panel">
-        <div className="nb-panel-label">32-bit Binary Representation</div>
-        <div className="nb-bits">
-          {bin.split("").map((bit, idx) => {
-            const isLSB = idx === 31;
-            const isOne = bit === "1";
-            return (
-              <motion.div
-                key={idx}
-                className={`nb-bit ${isOne ? "one" : "zero"} ${isLSB && lsb !== null ? "lsb" : ""}`}
-                animate={{ scale: isLSB && lsb !== null ? 1.2 : 1, y: isLSB && lsb !== null ? -4 : 0 }}
-                transition={{ type: "spring", stiffness: 400, damping: 20 }}
-              >
-                {bit}
+          <div style={{ padding: 12, backgroundColor: '#f8fafc', borderRadius: 6, border: '1px solid #cbd5e1', fontFamily: 'monospace', fontSize: 13 }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
+              {bin.split("").map((bit, idx) => (
+                <motion.div
+                  key={idx}
+                  animate={{ scale: idx === 31 && lsb !== null ? 1.3 : 1 }}
+                  style={{
+                    width: 24,
+                    height: 24,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: bit === '1' ? '#dbeafe' : '#f3f4f6',
+                    border: idx === 31 && lsb !== null ? '2px solid #0ea5e9' : '1px solid #cbd5e1',
+                    borderRadius: 4,
+                    fontWeight: 'bold',
+                    color: bit === '1' ? '#1e3a8a' : '#9ca3af'
+                  }}
+                >
+                  {bit}
+                </motion.div>
+              ))}
+            </div>
+            <div style={{ fontSize: 11, color: '#64748b', marginTop: 8 }}>32-bit representation (LSB rightmost)</div>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+            <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #86efac' }}>
+              <div style={{ fontSize: 11, color: '#65a30d', marginBottom: 4 }}>Count</div>
+              <motion.div key={count} initial={{ scale: 1.4 }} animate={{ scale: 1 }} style={{ fontSize: 24, fontWeight: 'bold', color: '#15803d' }}>
+                {count}
               </motion.div>
-            );
-          })}
-        </div>
-        <div className="nb-bit-labels">
-          <span>31</span>
-          <span>0</span>
-        </div>
-      </div>
+            </div>
+            <div style={{ padding: 12, backgroundColor: lsb === 1 ? '#dbeafe' : '#f3f4f6', borderRadius: 6, border: lsb === 1 ? '2px solid #0ea5e9' : '1px solid #cbd5e1' }}>
+              <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>LSB (n & 1)</div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={lsb === null ? 'none' : lsb}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  style={{ fontSize: 24, fontWeight: 'bold', color: lsb === 1 ? '#0ea5e9' : '#94a3b8' }}
+                >
+                  {lsb === null ? '—' : lsb}
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
 
-      <div className="nb-trackers">
-        <div className="nb-tracker">
-          <span className="nb-tracker-label">count</span>
-          <motion.span key={count} className="nb-tracker-val" initial={{ scale: 1.4, color: "#a6e3a1" }} animate={{ scale: 1, color: "#cdd6f4" }} transition={{ duration: 0.3 }}>
-            {count}
-          </motion.span>
+          {step?.done && (
+            <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #86efac', textAlign: 'center', fontWeight: 600, color: '#15803d' }}>
+              ✓ Hamming weight = {count}
+            </div>
+          )}
         </div>
-        <div className="nb-tracker">
-          <span className="nb-tracker-label">LSB (n &amp; 1)</span>
-          <AnimatePresence mode="wait">
-            <motion.span
-              key={lsb === null ? "none" : lsb}
-              className={`nb-tracker-val ${lsb === 1 ? "lsb-one" : ""}`}
-              initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-            >
-              {lsb === null ? "—" : lsb}
-            </motion.span>
-          </AnimatePresence>
-        </div>
-      </div>
+      ),
+    },
+  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, bin, count, lsb, applyEx]);
 
-      {step?.done && (
-        <div className="nb-result">✓ Hamming weight = {count}</div>
-      )}
-
-      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-      <div className="nb-status">{step?.message ?? "Press Play to begin."}</div>
-      <PlaybackControls
-        isPlaying={isPlaying} isDone={isDone} speed={speed}
-        onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-        prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
-        onSpeedChange={e => setSpeed(Number(e.target.value))}
-        showPatternOverlay={showPatternOverlay}
-        onShowPatternOverlayChange={setShowPatternOverlay}
-        patternOverlayLabel="Show pattern overlay"
-        showPatternOverlayToggle
+  return (
+    <div className="problem-shell">
+      <DockableWorkspace
+        panels={dockPanels}
+        initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
       />
+      <FloatingPanel title="Playback Controls">
+        <PlaybackControls
+          isPlaying={isPlaying}
+          isDone={isDone}
+          speed={speed}
+          onPlayToggle={togglePlay}
+          onPrev={stepBack}
+          onNext={stepForward}
+          onReset={handleReset}
+          prevDisabled={stepIndex < 0}
+          nextDisabled={isDone}
+          resetDisabled={stepIndex < 0}
+          onSpeedChange={e => setSpeed(Number(e.target.value))}
+          showPatternOverlay={showPatternOverlay}
+          onShowPatternOverlayChange={setShowPatternOverlay}
+          patternOverlayLabel="Show pattern overlay"
+          showPatternOverlayToggle
+        />
+      </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   );

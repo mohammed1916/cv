@@ -212,6 +212,97 @@ export const SOLUTION_CODE_REGISTRY = {
     { line: 6, text: '        r -= 1' },
   ],
 
+  'plus-one': [
+    { line: 1, text: 'def plusOne(digits):' },
+    { line: 2, text: '    for i in range(len(digits)-1, -1, -1):' },
+    { line: 3, text: '        if digits[i] < 9:' },
+    { line: 4, text: '            digits[i] += 1' },
+    { line: 5, text: '            return digits' },
+    { line: 6, text: '        digits[i] = 0  # carry' },
+    { line: 7, text: '    return [1] + digits  # all 9s' },
+  ],
+
+  'reverse-bits': [
+    { line: 1, text: 'def reverseBits(n):' },
+    { line: 2, text: '    result = 0' },
+    { line: 3, text: '    for i in range(32):' },
+    { line: 4, text: '        result = (result << 1) | (n & 1)' },
+    { line: 5, text: '        n >>= 1' },
+    { line: 6, text: '    return result' },
+  ],
+
+  'min-size-subarray-sum': [
+    { line: 1, text: 'def minSubArrayLen(target, nums):' },
+    { line: 2, text: '    n = len(nums)' },
+    { line: 3, text: '    left = 0' },
+    { line: 4, text: '    current_sum = 0' },
+    { line: 5, text: '    min_len = float("inf")' },
+    { line: 6, text: '    for right in range(n):' },
+    { line: 7, text: '        current_sum += nums[right]' },
+    { line: 8, text: '        while current_sum >= target:' },
+    { line: 9, text: '            min_len = min(min_len, right - left + 1)' },
+    { line: 10, text: '            current_sum -= nums[left]' },
+    { line: 11, text: '            left += 1' },
+    { line: 12, text: '    return min_len if min_len != float("inf") else 0' },
+  ],
+
+  'number-of-1-bits': [
+    { line: 1, text: 'def hammingWeight(n):' },
+    { line: 2, text: '    count = 0' },
+    { line: 3, text: '    while n:' },
+    { line: 4, text: '        count += n & 1' },
+    { line: 5, text: '        n >>= 1' },
+    { line: 6, text: '    return count' },
+  ],
+
+  'find-peak-element': [
+    { line: 1, text: 'def findPeakElement(nums):' },
+    { line: 2, text: '    left, right = 0, len(nums) - 1' },
+    { line: 3, text: '    while left < right:' },
+    { line: 4, text: '        mid = (left + right) // 2' },
+    { line: 5, text: '        if nums[mid] < nums[mid + 1]:' },
+    { line: 6, text: '            left = mid + 1' },
+    { line: 7, text: '        else:' },
+    { line: 8, text: '            right = mid' },
+    { line: 9, text: '    return left' },
+  ],
+
+  'missing-number': [
+    { line: 1, text: 'def missingNumber(nums):' },
+    { line: 2, text: '    n = len(nums)' },
+    { line: 3, text: '    expected_sum = n * (n + 1) // 2' },
+    { line: 4, text: '    actual_sum = sum(nums)' },
+    { line: 5, text: '    return expected_sum - actual_sum' },
+  ],
+
+  'rotate-image': [
+    { line: 1, text: 'def rotate(matrix):' },
+    { line: 2, text: '    n = len(matrix)' },
+    { line: 3, text: '    for i in range(n // 2):' },
+    { line: 4, text: '        for j in range((n + 1) // 2):' },
+    { line: 5, text: '            top, right = i, n - 1 - i' },
+    { line: 6, text: '            bottom, left = n - 1 - i, j' },
+    { line: 7, text: '            temp = matrix[top][j]' },
+    { line: 8, text: '            matrix[top][j] = matrix[bottom][left]' },
+    { line: 9, text: '            matrix[bottom][left] = matrix[right][n - 1 - j]' },
+    { line: 10, text: '            matrix[right][n - 1 - j] = matrix[i][n - 1 - j]' },
+    { line: 11, text: '            matrix[i][n - 1 - j] = temp' },
+  ],
+
+  'set-matrix-zeroes': [
+    { line: 1, text: 'def setZeroes(matrix):' },
+    { line: 2, text: '    rows, cols = set(), set()' },
+    { line: 3, text: '    for i in range(len(matrix)):' },
+    { line: 4, text: '        for j in range(len(matrix[0])):' },
+    { line: 5, text: '            if matrix[i][j] == 0:' },
+    { line: 6, text: '                rows.add(i)' },
+    { line: 7, text: '                cols.add(j)' },
+    { line: 8, text: '    for i in range(len(matrix)):' },
+    { line: 9, text: '        for j in range(len(matrix[0])):' },
+    { line: 10, text: '            if i in rows or j in cols:' },
+    { line: 11, text: '                matrix[i][j] = 0' },
+  ],
+
   // Add more problems here...
 };
 
