@@ -1,3 +1,7 @@
+import DockableWorkspace from "../../components/shared/DockableWorkspace"
+import FloatingPanel from "../../components/shared/FloatingPanel"
+import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
+import { useSolutionCode } from "../../hooks/useSolutionCode"
 import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -52,10 +56,12 @@ function generateSteps(s, t) {
 
 export default function DistinctSubsequencesVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
+  const SOLUTION_CODE_HOOK = useSolutionCode('distinct-subsequences');
   const steps = useMemo(() => generateSteps(ex.s, ex.t), [ex]);
-  const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
+  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
   const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
 
@@ -66,101 +72,59 @@ export default function DistinctSubsequencesVisualizer() {
   const s = ex.s, t = ex.t;
   const answer = dp[s.length]?.[t.length] ?? 0;
 
-  return (
-    <div className="ds-shell">
-      <div className="ds-examples">
-        {EXAMPLES.map(e => (
-          <button key={e.label} className={`ds-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>
-            {e.label}
-          </button>
-        ))}
-      </div>
-
-      <div className="ds-strings">
-        <div className="ds-string-row">
-          <span className="ds-string-label">s</span>
-          {s.split("").map((ch, i) => (
-            <span key={i} className={`ds-char ${activeI - 1 === i ? "active-s" : ""}`}>{ch}</span>
-          ))}
-        </div>
-        <div className="ds-string-row">
-          <span className="ds-string-label">t</span>
-          {t.split("").map((ch, j) => (
-            <span key={j} className={`ds-char ${activeJ - 1 === j ? "active-t" : ""}`}>{ch}</span>
-          ))}
-        </div>
-      </div>
-
-      <div className="ds-panel">
-        <div className="ds-panel-label">DP Table — dp[i][j]: # ways s[0..i) contains t[0..j) as subsequence</div>
-        <div className="ds-table-wrap">
-          <table className="ds-table">
-            <thead>
-              <tr>
-                <th className="ds-th"></th>
-                <th className="ds-th ds-idx">ε</th>
-                {t.split("").map((ch, j) => (
-                  <th key={j} className={`ds-th ds-idx ${activeJ - 1 === j ? "active-col" : ""}`}>{ch}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {dp.map((row, i) => (
-                <tr key={i}>
-                  <td className={`ds-th ds-idx ${activeI - 1 === i - 1 ? "active-row" : ""}`}>{i === 0 ? "ε" : s[i - 1]}</td>
-                  {row.map((val, j) => {
-                    const isActive = i === activeI && j === activeJ;
-                    return (
-                      <motion.td
-                        key={j}
-                        className={`ds-cell ${val > 0 ? "nonzero" : "zero"} ${isActive ? "active-cell" : ""}`}
-                        animate={{ scale: isActive ? 1.2 : 1 }}
-                        transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                      >
-                        {val}
-                      </motion.td>
-                    );
-                  })}
+  const answer = step?.dp?.[step.i]?.[step.j] ?? 0;
+  const dockPanels = useMemo(() => [
+    {
+      id: 'code',
+      title: 'Code',
+      content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />
+    },
+    {
+      id: 'viz',
+      title: '📝 Distinct Subsequences',
+      content: (
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+            {EXAMPLES.map(e => <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : '#f1f5f9' }}>{e.label}</button>)}
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 8, fontSize: 11 }}>
+            <div><span style={{ fontWeight: 600 }}>s:</span> {s}</div>
+            <div><span style={{ fontWeight: 600 }}>t:</span> {t}</div>
+          </div>
+          <div style={{ overflowX: 'auto', flex: 1 }}>
+            <table style={{ borderCollapse: 'collapse', fontSize: 10 }}>
+              <thead>
+                <tr>
+                  <th style={{ padding: '4px 6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc' }}></th>
+                  <th style={{ padding: '4px 6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc', fontWeight: 600 }}>ε</th>
+                  {t.split("").map((ch, j) => <th key={j} style={{ padding: '4px 6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc', fontWeight: 600, minWidth: 32 }}>{ch}</th>)}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {dp.slice(0, Math.min(dp.length, 8)).map((row, i) => (
+                  <tr key={i}>
+                    <td style={{ padding: '4px 6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc', fontWeight: 600 }}>{i === 0 ? 'ε' : s[i - 1]}</td>
+                    {row.slice(0, Math.min(row.length, 8)).map((val, j) => {
+                      const isActive = i === activeI && j === activeJ;
+                      return <motion.td key={j} animate={{ scale: isActive ? 1.2 : 1 }} style={{ padding: '4px 6px', border: '1px solid #e2e8f0', backgroundColor: isActive ? '#dbeafe' : val > 0 ? '#f0fdf4' : 'white', fontWeight: isActive ? 'bold' : 'normal', color: isActive ? '#1e40af' : '#1e293b', minWidth: 32, textAlign: 'center' }}>{val}</motion.td>;
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {step?.done && <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #86efac', textAlign: 'center', fontWeight: 600, color: '#15803d' }}>✓ {answer}</div>}
         </div>
-      </div>
+      )
+    }
+  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx, s, t, dp, activeI, activeJ, answer]);
 
-      <div className="ds-trackers">
-        <div className="ds-tracker">
-          <span className="ds-tracker-label">i (s)</span>
-          <span className="ds-tracker-val">{activeI < 0 ? "—" : activeI}</span>
-        </div>
-        <div className="ds-tracker">
-          <span className="ds-tracker-label">j (t)</span>
-          <span className="ds-tracker-val">{activeJ < 0 ? "—" : activeJ}</span>
-        </div>
-        <div className="ds-tracker">
-          <span className="ds-tracker-label">Phase</span>
-          <span className={`ds-tracker-val ds-phase ${phase}`}>{phase}</span>
-        </div>
-        <div className="ds-tracker">
-          <span className="ds-tracker-label">Answer</span>
-          <span className="ds-tracker-val ds-answer">{step?.done ? answer : "…"}</span>
-        </div>
-      </div>
-
-      {step?.done && <div className="ds-result">✓ Distinct subsequences = {answer}</div>}
-
-      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-      <div className="ds-status">{step?.message ?? "Press Play to begin."}</div>
-      <PlaybackControls
-        isPlaying={isPlaying} isDone={isDone} speed={speed}
-        onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-        prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
-        onSpeedChange={e => setSpeed(Number(e.target.value))}
-        showPatternOverlay={showPatternOverlay}
-        onShowPatternOverlayChange={setShowPatternOverlay}
-        patternOverlayLabel="Show pattern overlay"
-        showPatternOverlayToggle
-      />
+  return (
+    <div className="problem-shell">
+      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
+      <FloatingPanel title="Playback Controls">
+        <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
+      </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   );

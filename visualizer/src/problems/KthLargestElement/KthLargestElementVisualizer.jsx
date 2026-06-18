@@ -7,6 +7,8 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
+import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { getExamples } from '../../config/examplesRegistry'
 import './KthLargestElementVisualizer.css'
@@ -51,6 +53,7 @@ const EXAMPLES = getExamples('kth-largest-element')
 export default function KthLargestElementVisualizer() {
   const [numsInput, setNumsInput] = useState('[3,2,1,5,6,4]')
   const [kInput, setKInput] = useState('2')
+  const SOLUTION_CODE_HOOK = useSolutionCode('kth-largest-element-in-an-array')
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -66,8 +69,9 @@ export default function KthLargestElementVisualizer() {
   }, [numsInput, kInput])
 
   const steps = useMemo(() => generateSteps(nums, k), [nums, k])
-  const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
+  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
   const applyExample = useCallback((ex) => {
     setNumsInput(JSON.stringify(ex.nums))
@@ -117,12 +121,14 @@ export default function KthLargestElementVisualizer() {
         <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
+          highlightedLines={connectivity.highlightedLines}
+          onLineSelect={connectivity.handleLineSelect}
           onActiveLineDomChange={setActiveLineDom}
           autoScroll={autoScrollCode}
         />
       ),
     },
-  ], [inputError, applyExample, numsInput, handleReset, kInput, nums, step, stepIndex, steps, setActiveLineDom, autoScrollCode])
+  ], [inputError, applyExample, numsInput, handleReset, kInput, nums, step, stepIndex, steps, setActiveLineDom, autoScrollCode, connectivity])
 
   return (
     <div className="kl-shell">

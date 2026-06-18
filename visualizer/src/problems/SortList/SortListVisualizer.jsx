@@ -1,3 +1,7 @@
+import DockableWorkspace from "../../components/shared/DockableWorkspace"
+import FloatingPanel from "../../components/shared/FloatingPanel"
+import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
+import { useSolutionCode } from "../../hooks/useSolutionCode"
 import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -84,66 +88,41 @@ export default function SortListVisualizer() {
 
     const initial = EXAMPLES[sel].arr;
     const steps = useMemo(() => generateSteps(initial), [initial]);
-    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
+    const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : steps[0];
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
+    const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
 
     const applyExample = useCallback((i) => { setSel(i); handleReset(); }, [handleReset]);
 
+    const dockPanels = useMemo(() => [
+        { id: 'code', title: 'Code', content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} /> },
+        { id: 'viz', title: '🔀 Merge Sort', content: (
+            <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                    {EXAMPLES.map((ex, i) => <button key={ex.label} onClick={() => applyExample(i)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: sel === i ? '#dbeafe' : '#f1f5f9' }}>{ex.label}</button>)}
+                </div>
+                <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
+                    <div style={{ fontWeight: 600, marginBottom: 4 }}>Array</div>
+                    <LinkedListRow vals={step?.arr ?? initial} color="main" />
+                </div>
+                {step?.left && <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
+                    <div style={{ fontWeight: 600, marginBottom: 4 }}>Merge</div>
+                    <LinkedListRow vals={step.left} color="left" /> ↔ <LinkedListRow vals={step.right} color="right" />
+                    {step?.merged && <div style={{ marginTop: 8 }}><LinkedListRow vals={step.merged} color="merged" /></div>}
+                </div>}
+            </div>
+        )}
+    ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, sel, applyExample, initial]);
+
     return (
-        <div className="sl-shell">
-            <div className="sl-controls-row">
-                <div className="sl-examples">
-                    {EXAMPLES.map((ex, i) => (
-                        <button key={ex.label} className={`sl-chip ${sel === i ? "active" : ""}`} onClick={() => applyExample(i)}>{ex.label}</button>
-                    ))}
-                </div>
-            </div>
-
-            {/* Main array */}
-            <div className="sl-panel">
-                <div className="sl-panel-label">Current array</div>
-                <LinkedListRow vals={step?.arr ?? initial} color="main" />
-            </div>
-
-            {/* Halves and merge */}
-            {step?.left !== null && step?.left !== undefined && (
-                <div className="sl-panel">
-                    <div className="sl-panel-label">Halves being merged</div>
-                    <div className="sl-halves-row">
-                        <div>
-                            <div className="sl-half-label left">Left</div>
-                            <LinkedListRow vals={step.left} color="left" />
-                        </div>
-                        <div className="sl-halves-sep">↔</div>
-                        <div>
-                            <div className="sl-half-label right">Right</div>
-                            <LinkedListRow vals={step.right} color="right" />
-                        </div>
-                    </div>
-                    {step?.merged !== null && step?.merged !== undefined && (
-                        <div style={{ marginTop: 10 }}>
-                            <div className="sl-half-label merged">Merged</div>
-                            <LinkedListRow vals={step.merged} color="merged" />
-                        </div>
-                    )}
-                </div>
-            )}
-
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-            <div className="sl-status">{step?.message ?? "Press Play to begin."}</div>
+        <div className="problem-shell">
+            <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
+            <FloatingPanel title="Playback Controls">
+                <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex <= 0} nextDisabled={isDone} resetDisabled={stepIndex <= 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
+            </FloatingPanel>
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
-            <PlaybackControls
-                isPlaying={isPlaying} isDone={isDone} speed={speed}
-                onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-                prevDisabled={stepIndex <= 0} nextDisabled={isDone} resetDisabled={stepIndex <= 0}
-                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                showPatternOverlay={showPatternOverlay}
-                onShowPatternOverlayChange={setShowPatternOverlay}
-                patternOverlayLabel="Show pattern overlay"
-                showPatternOverlayToggle
-            />
         </div>
     );
 }

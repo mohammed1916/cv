@@ -1,10 +1,14 @@
 import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
+import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from '../../config/examplesRegistry'
 import "./MergeSortedArrayVisualizer.css";
 
@@ -74,10 +78,12 @@ function generateSteps(nums1Init, m, nums2, n) {
 
 export default function MergeSortedArrayVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
+  const SOLUTION_CODE = useSolutionCode('merge-sorted-array');
   const steps = useMemo(() => generateSteps(ex.nums1, ex.m, ex.nums2, ex.n), [ex]);
-  const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
+  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
   const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
 
@@ -112,36 +118,34 @@ export default function MergeSortedArrayVisualizer() {
   ].filter(p => p.pos >= 0) : [];
   const nums2Ptrs = step ? [{ name: "j", pos: step.j }].filter(p => p.pos >= 0) : [];
 
+  const dockPanels = useMemo(() => [
+    {
+      id: 'code',
+      title: 'Code',
+      content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />
+    },
+    {
+      id: 'viz',
+      title: '🔀 Merge Arrays',
+      content: (
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+            {EXAMPLES.map(e => <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : '#f1f5f9' }}>{e.label}</button>)}
+          </div>
+          <div>{renderArray(step?.a ?? ex.nums1, "nums1", nums1Ptrs)}</div>
+          <div>{renderArray(step?.b ?? ex.nums2, "nums2", nums2Ptrs)}</div>
+          {step?.done && <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #86efac', textAlign: 'center', fontWeight: 600, color: '#15803d' }}>✓ [{(step?.a ?? []).join(", ")}]</div>}
+        </div>
+      )
+    }
+  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx, renderArray, nums1Ptrs, nums2Ptrs]);
+
   return (
-    <div className="msa-shell">
-      <div className="msa-examples">
-        {EXAMPLES.map(e => (
-          <button key={e.label} className={`msa-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>{e.label}</button>
-        ))}
-      </div>
-
-      <div className="msa-panel">
-        <div className="msa-panel-label">Arrays</div>
-        {renderArray(step?.a ?? ex.nums1, "nums1", nums1Ptrs)}
-        {renderArray(step?.b ?? ex.nums2, "nums2", nums2Ptrs)}
-      </div>
-
-      {step?.done && (
-        <div className="msa-result">✓ Merged in-place: [{(step?.a ?? []).join(", ")}]</div>
-      )}
-
-      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-      <div className="msa-status">{step?.message ?? "Press Play to begin."}</div>
-      <PlaybackControls
-        isPlaying={isPlaying} isDone={isDone} speed={speed}
-        onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-        prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
-        onSpeedChange={e => setSpeed(Number(e.target.value))}
-        showPatternOverlay={showPatternOverlay}
-        onShowPatternOverlayChange={setShowPatternOverlay}
-        patternOverlayLabel="Show pattern overlay"
-        showPatternOverlayToggle
-      />
+    <div className="problem-shell">
+      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
+      <FloatingPanel title="Playback Controls">
+        <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
+      </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   );

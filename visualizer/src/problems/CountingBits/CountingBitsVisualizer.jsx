@@ -46,6 +46,7 @@ const EXAMPLES = getExamples('counting-bits')
 
 export default function CountingBitsVisualizer() {
     const [nInput, setNInput] = useState('5')
+    const SOLUTION_CODE = useSolutionCode('counting-bits')
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
     const { n, inputError } = useMemo(() => {
@@ -55,95 +56,70 @@ export default function CountingBitsVisualizer() {
     }, [nInput])
 
     const steps = useMemo(() => generateSteps(n), [n])
-    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
+    const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
     const step = stepIndex >= 0 ? steps[stepIndex] : null
+    const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
     const applyExample = useCallback((ex) => {
         setNInput(String(ex.n))
         handleReset()
     }, [handleReset])
 
+    const dockPanels = useMemo(() => [
+        {
+            id: 'code',
+            title: 'Code',
+            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />
+        },
+        {
+            id: 'viz',
+            title: '📊 Counting Bits',
+            content: (
+                <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+                    <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
+                        {EXAMPLES.map(ex => <button key={ex.label} onClick={() => applyExample(ex)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: '#f1f5f9' }}>
+                            {ex.label}
+                        </button>)}
+                        <label style={{ marginLeft: 'auto', display: 'flex', gap: 6, alignItems: 'center', fontSize: 12 }}>n = <input type="number" min="0" max="20" value={nInput} onChange={e => { setNInput(e.target.value); handleReset() }} style={{ width: 50, padding: '4px 8px', borderRadius: 4, border: '1px solid #cbd5e1' }} /></label>
+                    </div>
+                    {inputError && <div style={{ color: '#991b1b', fontSize: 11 }}>{inputError}</div>}
+                    <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>DP Array</div>
+                    <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap', flex: 1, overflow: 'auto' }}>
+                        {(step?.dp ?? []).map((val, i) => {
+                            const isActive = step?.i === i
+                            const isHalf = step?.half === i && step?.i !== -1
+                            return (
+                                <motion.div key={i} animate={isActive ? { y: -8, scale: 1.15 } : { y: 0, scale: 1 }} style={{
+                                    minWidth: 50, padding: '8px 4px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                                    backgroundColor: isActive ? '#fbbf24' : isHalf ? '#dbeafe' : step?.phase === 'done' ? '#f0fdf4' : '#f3f4f6',
+                                    border: isActive ? '2px solid #f59e0b' : '1px solid #cbd5e1', borderRadius: 4, fontSize: 11, fontWeight: 'bold'
+                                }}>
+                                    <span>{val}</span>
+                                    <span style={{ fontSize: 9, color: '#64748b' }}>{i.toString(2)}</span>
+                                </motion.div>
+                            )
+                        })}
+                    </div>
+                    {step?.i > 0 && (
+                        <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, border: '1px solid #e2e8f0', fontSize: 11 }}>
+                            <div>i = {step.i} ({step.binary}₂)</div>
+                            <div>i{'>>'}1 = {step.half}</div>
+                            <div>i & 1 = {step.lsb} ({step.lsb ? 'odd' : 'even'})</div>
+                            <div style={{ fontWeight: 'bold', color: '#0ea5e9' }}>dp[{step.i}] = {step.dp?.[step.i]}</div>
+                        </div>
+                    )}
+                    {step?.phase === 'done' && <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #86efac', fontSize: 11, fontWeight: 'bold', color: '#15803d' }}>✓ {`[${step.dp.join(', ')}]`}</div>}
+                </div>
+            )
+        }
+    ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, nInput, inputError, applyExample])
+
     return (
-        <div className="cb-shell">
-            <div className="cb-top">
-                <section className="cb-panel main">
-                    <header className="cb-head">
-                        <span>DP: dp[i] = dp[i/2] + (i&1)</span>
-                        {inputError && <span className="cb-error">{inputError}</span>}
-                    </header>
-                    <div className="cb-body">
-                        <div className="cb-examples">
-                            {EXAMPLES.map((ex) => (
-                                <button key={ex.label} className="cb-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                            ))}
-                        </div>
-                        <div className="cb-input-row">
-                            <label className="cb-label">n =</label>
-                            <input className="cb-input" type="number" min="0" max="20" value={nInput} onChange={(e) => { setNInput(e.target.value); handleReset() }} />
-                        </div>
-                        <div className="cb-array">
-                            {(step?.dp ?? []).map((val, i) => {
-                                const isActive = step?.i === i
-                                const isHalf = step?.half === i && step?.i !== -1
-                                return (
-                                    <motion.div
-                                        key={i}
-                                        className={`cb-cell ${isActive ? 'active' : ''} ${isHalf ? 'half' : ''} ${step?.phase === 'done' ? 'done' : ''}`}
-                                        animate={isActive ? { y: -8, scale: 1.15 } : { y: 0, scale: 1 }}
-                                        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                                    >
-                                        <span className="cb-idx">{i}</span>
-                                        <span className="cb-val">{val}</span>
-                                        <span className="cb-bin">{i.toString(2)}</span>
-                                    </motion.div>
-                                )
-                            })}
-                        </div>
-                    </div>
-                </section>
-
-                <section className="cb-panel side">
-                    <header className="cb-head"><span>Current Step</span></header>
-                    <div className="cb-body">
-                        {step?.i > 0 && (
-                            <div className="cb-breakdown">
-                                <div className="cb-brow">
-                                    <span className="cb-label">i</span>
-                                    <span className="cb-bval">{step.i} ({step.binary}₂)</span>
-                                </div>
-                                <div className="cb-brow">
-                                    <span className="cb-label">i {'>'}{'>'}  1</span>
-                                    <span className="cb-bval">{step.half}</span>
-                                </div>
-                                <div className="cb-brow">
-                                    <span className="cb-label">i & 1 (LSB)</span>
-                                    <span className={`cb-bval ${step.lsb ? 'odd' : 'even'}`}>{step.lsb} ({step.lsb ? 'odd' : 'even'})</span>
-                                </div>
-                                <div className="cb-brow highlight">
-                                    <span className="cb-label">dp[{step.i}]</span>
-                                    <span className="cb-bval">{step.dp?.[step.i]}</span>
-                                </div>
-                            </div>
-                        )}
-                        <div className={`cb-result ${step?.phase === 'done' ? 'ok' : ''}`}>
-                            {step?.phase === 'done' ? `[${step.dp.join(', ')}]` : 'Building…'}
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-            <div className={`cb-status ${step?.phase === 'done' ? 'ok' : ''}`}>{step?.message || 'Press Play to begin.'}</div>
-            <PlaybackControls
-                isPlaying={isPlaying} isDone={isDone} speed={speed}
-                onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-                prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
-                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                showPatternOverlay={showPatternOverlay}
-                onShowPatternOverlayChange={setShowPatternOverlay}
-                patternOverlayLabel="Show pattern overlay"
-                showPatternOverlayToggle
-            />
+        <div className="problem-shell">
+            <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
+            <FloatingPanel title="Playback Controls">
+                <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
+            </FloatingPanel>
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     )

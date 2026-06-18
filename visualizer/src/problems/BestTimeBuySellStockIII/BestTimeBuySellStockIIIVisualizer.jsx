@@ -1,3 +1,7 @@
+import DockableWorkspace from "../../components/shared/DockableWorkspace"
+import FloatingPanel from "../../components/shared/FloatingPanel"
+import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
+import { useSolutionCode } from "../../hooks/useSolutionCode"
 import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -46,12 +50,14 @@ function generateSteps(prices) {
 
 export default function BestTimeBuySellStockIIIVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
+    const SOLUTION_CODE_HOOK = useSolutionCode('best-time-to-buy-and-sell-stock-iii');
     const steps = useMemo(() => generateSteps(ex.prices), [ex]);
-    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
+    const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
     const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
+    const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
 
     const prices = ex.prices;
     const idx = step?.idx ?? -1;
@@ -69,87 +75,45 @@ export default function BestTimeBuySellStockIIIVisualizer() {
 
     const fmt = v => v === -Infinity || v === Number.NEGATIVE_INFINITY ? "−∞" : v;
 
-    return (
-        <div className="bt3-shell">
-            <div className="bt3-examples">
-                {EXAMPLES.map(e => (
-                    <button key={e.label} className={`bt3-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>
-                        {e.label}
-                    </button>
-                ))}
-            </div>
-
-            <div className="bt3-panel">
-                <div className="bt3-panel-label">Prices</div>
-                <svg width={SVG_W} height={SVG_H + 4} className="bt3-svg">
-                    <polyline points={polyline} className="bt3-line" />
-                    {prices.map((p, i) => (
-                        <circle key={i} cx={10 + i * xStep} cy={SVG_H - p * yScale} r={i === idx ? 5 : 3}
-                            className={`bt3-dot ${i === idx ? "active-dot" : ""}`} />
-                    ))}
-                    {idx >= 0 && (
-                        <line x1={10 + idx * xStep} y1={0} x2={10 + idx * xStep} y2={SVG_H}
-                            stroke="#f9e2af44" strokeWidth="1" strokeDasharray="3,3" />
-                    )}
-                </svg>
-                <div className="bt3-price-row">
-                    {prices.map((p, i) => (
-                        <span key={i} className={`bt3-price ${i === idx ? "active-price" : ""}`}>{p}</span>
-                    ))}
-                </div>
-            </div>
-
-            <div className="bt3-states">
-                {[
-                    { label: "b1", val: fmt(b1), desc: "max profit after buy 1", cls: "b1" },
-                    { label: "s1", val: fmt(s1), desc: "max profit after sell 1", cls: "s1" },
-                    { label: "b2", val: fmt(b2), desc: "max profit after buy 2", cls: "b2" },
-                    { label: "s2", val: fmt(s2), desc: "max profit after sell 2", cls: "s2" },
-                ].map(({ label, val, desc, cls }) => (
-                    <div key={label} className="bt3-state-card">
-                        <span className="bt3-state-label">{label}</span>
-                        <motion.span key={String(val)} className={`bt3-state-val ${cls}`}
-                            initial={{ scale: 1.2 }} animate={{ scale: 1 }}>
-                            {val}
-                        </motion.span>
-                        <span className="bt3-state-desc">{desc}</span>
+    const dockPanels = useMemo(() => [
+        {
+            id: 'code',
+            title: 'Code',
+            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />
+        },
+        {
+            id: 'viz',
+            title: '📈 2 Transactions',
+            content: (
+                <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+                    <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                        {EXAMPLES.map(e => <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : '#f1f5f9' }}>{e.label}</button>)}
                     </div>
-                ))}
-            </div>
+                    <svg width={SVG_W} height={SVG_H + 4} style={{ border: '1px solid #e2e8f0', borderRadius: 4 }}>
+                        <polyline points={polyline} fill="none" stroke="#0ea5e9" strokeWidth="2" />
+                        {prices.map((p, i) => <circle key={i} cx={10 + i * xStep} cy={SVG_H - p * yScale} r={i === idx ? 5 : 3} fill={i === idx ? '#fbbf24' : '#0ea5e9'} />)}
+                        {idx >= 0 && <line x1={10 + idx * xStep} y1={0} x2={10 + idx * xStep} y2={SVG_H} stroke="#f9e2af44" strokeWidth="1" strokeDasharray="3,3" />}
+                    </svg>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8 }}>
+                        {[{ label: 'b1', val: fmt(b1), cls: '#fee2e2' }, { label: 's1', val: fmt(s1), cls: '#dcfce7' }, { label: 'b2', val: fmt(b2), cls: '#fee2e2' }, { label: 's2', val: fmt(s2), cls: '#dbeafe' }].map(({ label, val, cls }) => (
+                            <div key={label} style={{ padding: 8, backgroundColor: cls, borderRadius: 6, textAlign: 'center' }}>
+                                <div style={{ fontSize: 11, fontWeight: '600', color: '#1e293b', marginBottom: 4 }}>{label}</div>
+                                <motion.div key={String(val)} initial={{ scale: 1.2 }} animate={{ scale: 1 }} style={{ fontSize: 13, fontWeight: 'bold', color: '#1e293b' }}>{val}</motion.div>
+                            </div>
+                        ))}
+                    </div>
+                    {step?.done && <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #86efac', textAlign: 'center', fontWeight: 600, color: '#15803d' }}>✓ Max profit = {s2}</div>}
+                </div>
+            )
+        }
+    ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx, prices, idx, b1, b2, s1, s2, fmt]);
 
-            <div className="bt3-trackers">
-                <div className="bt3-tracker">
-                    <span className="bt3-tracker-label">Day</span>
-                    <span className="bt3-tracker-val">{idx < 0 ? "—" : idx}</span>
-                </div>
-                <div className="bt3-tracker">
-                    <span className="bt3-tracker-label">Price</span>
-                    <span className="bt3-tracker-val bt3-price-val">{idx < 0 ? "—" : prices[idx]}</span>
-                </div>
-                <div className="bt3-tracker">
-                    <span className="bt3-tracker-label">Phase</span>
-                    <span className={`bt3-tracker-val bt3-phase ${phase}`}>{phase}</span>
-                </div>
-                <div className="bt3-tracker">
-                    <span className="bt3-tracker-label">Answer</span>
-                    <span className="bt3-tracker-val bt3-answer">{step?.done ? s2 : "…"}</span>
-                </div>
-            </div>
-
-            {step?.done && <div className="bt3-result">✓ Max profit (≤2 transactions) = {s2}</div>}
-
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-            <div className="bt3-status">{step?.message ?? "Press Play to begin."}</div>
-            <PlaybackControls
-                isPlaying={isPlaying} isDone={isDone} speed={speed}
-                onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-                prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
-                onSpeedChange={e => setSpeed(Number(e.target.value))}
-                showPatternOverlay={showPatternOverlay}
-                onShowPatternOverlayChange={setShowPatternOverlay}
-                patternOverlayLabel="Show pattern overlay"
-                showPatternOverlayToggle
-            />
+    return (
+        <div className="problem-shell">
+            <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
+            <FloatingPanel title="Playback Controls">
+                <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
+            </FloatingPanel>
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     );

@@ -1,10 +1,14 @@
 import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
+import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
+import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from '../../config/examplesRegistry'
 import "./ReorderListVisualizer.css";
 
@@ -83,78 +87,62 @@ const EXAMPLES = getExamples('reorder-list');
 
 export default function ReorderListVisualizer() {
     const [sel, setSel] = useState(0);
+    const SOLUTION_CODE_HOOK = useSolutionCode('reorder-list');
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
     const { arr } = EXAMPLES[sel];
     const steps = useMemo(() => generateSteps(arr), [arr]);
-    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
+    const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : steps[0];
+    const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
 
     const applyExample = useCallback((i) => { setSel(i); handleReset(); }, [handleReset]);
 
     const displayList = step?.list ?? arr;
     const slow = step?.slow ?? -1, fast = step?.fast ?? -1;
 
-    return (
-        <div className="rl-shell">
-            <div className="rl-controls-row">
-                <div className="rl-examples">
-                    {EXAMPLES.map((ex, i) => (
-                        <button key={ex.label} className={`rl-chip ${sel === i ? "active" : ""}`} onClick={() => applyExample(i)}>{ex.label}</button>
-                    ))}
+    const dockPanels = useMemo(() => [
+        { id: 'code', title: 'Code', content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} /> },
+        { id: 'viz', title: '🔗 Reorder', content: (
+            <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                    {EXAMPLES.map((ex, i) => <button key={ex.label} onClick={() => applyExample(i)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: sel === i ? '#dbeafe' : '#f1f5f9' }}>{ex.label}</button>)}
                 </div>
-            </div>
-
-            {/* Linked list */}
-            <div className="rl-panel">
-                <div className="rl-panel-label">Linked list</div>
-                <div className="rl-list-row">
+                <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, display: 'flex', gap: 2, flexWrap: 'wrap' }}>
                     {displayList.map((v, i) => (
-                        <div key={i} className="rl-node-wrap">
-                            <motion.div className={`rl-node ${i === slow ? "slow" : ""} ${i === fast ? "fast" : ""}`}
-                                animate={{ scale: i === slow || i === fast ? 1.15 : 1 }}
-                                transition={{ type: "spring", stiffness: 380, damping: 20 }}>
-                                {v}
-                            </motion.div>
-                            {i < displayList.length - 1 && <span className="rl-arrow">→</span>}
-                            {i === slow && step?.phase === "find_mid" && <span className="rl-ptr-label slow">S</span>}
-                            {i === fast && step?.phase === "find_mid" && <span className="rl-ptr-label fast">F</span>}
+                        <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                            <motion.div animate={{ scale: i === slow || i === fast ? 1.15 : 1 }} style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#dbeafe', border: '1px solid #0ea5e9', borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: '#1e293b' }}>{v}</motion.div>
+                            {i < displayList.length - 1 && <span style={{ color: '#cbd5e1' }}>→</span>}
                         </div>
                     ))}
                 </div>
+                {step?.firstHalf && (
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+                        <div style={{ padding: 8, backgroundColor: '#dbeafe', borderRadius: 6 }}>
+                            <div style={{ fontSize: 11, fontWeight: 600, color: '#1e40af', marginBottom: 4 }}>First</div>
+                            <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+                                {step.firstHalf.map((v, i) => <div key={i} style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f0f9ff', border: '1px solid #0ea5e9', borderRadius: 3, fontSize: 11, fontWeight: 'bold', color: '#1e40af' }}>{v}</div>)}
+                            </div>
+                        </div>
+                        <div style={{ padding: 8, backgroundColor: '#fee2e2', borderRadius: 6 }}>
+                            <div style={{ fontSize: 11, fontWeight: 600, color: '#991b1b', marginBottom: 4 }}>Second {step.phase?.includes("revers") ? "(reversed)" : ""}</div>
+                            <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+                                {step.secondHalf.map((v, i) => <div key={i} style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#fecaca', border: '1px solid #fca5a5', borderRadius: 3, fontSize: 11, fontWeight: 'bold', color: '#991b1b' }}>{v}</div>)}
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
+        )}
+    ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, sel, applyExample, displayList, slow, fast]);
 
-            {/* Halves */}
-            {step?.firstHalf && (
-                <div className="rl-halves-row">
-                    <div className="rl-half-box">
-                        <div className="rl-half-label">First half</div>
-                        <div className="rl-half-nodes">
-                            {step.firstHalf.map((v, i) => <div key={i} className="rl-half-node first">{v}</div>)}
-                        </div>
-                    </div>
-                    <div className="rl-half-box">
-                        <div className="rl-half-label">Second half {step.phase?.includes("revers") ? "(reversed)" : ""}</div>
-                        <div className="rl-half-nodes">
-                            {step.secondHalf.map((v, i) => <div key={i} className="rl-half-node second">{v}</div>)}
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-            <div className="rl-status">{step?.message ?? "Press Play to begin."}</div>
-            <PlaybackControls
-                isPlaying={isPlaying} isDone={isDone} speed={speed}
-                onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-                prevDisabled={stepIndex <= 0} nextDisabled={isDone} resetDisabled={stepIndex <= 0}
-                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                showPatternOverlay={showPatternOverlay}
-                onShowPatternOverlayChange={setShowPatternOverlay}
-                patternOverlayLabel="Show pattern overlay"
-                showPatternOverlayToggle
-            />
+    return (
+        <div className="problem-shell">
+            <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
+            <FloatingPanel title="Playback Controls">
+                <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex <= 0} nextDisabled={isDone} resetDisabled={stepIndex <= 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
+            </FloatingPanel>
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     );
