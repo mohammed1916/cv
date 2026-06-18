@@ -1,10 +1,14 @@
 import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
+import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from '../../config/examplesRegistry'
 import "./DecodeStringVisualizer.css";
 
@@ -61,87 +65,122 @@ const EXAMPLES = getExamples('decode-string');
 
 export default function DecodeStringVisualizer() {
     const [sInput, setSInput] = useState("3[a]2[bc]");
+    const SOLUTION_CODE = useSolutionCode('decode-string');
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
     const steps = useMemo(() => { try { return generateSteps(sInput); } catch { return []; } }, [sInput]);
-    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
+    const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
+    const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
 
     const applyExample = useCallback((ex) => { setSInput(ex.s); handleReset(); }, [handleReset]);
 
+    const dockPanels = useMemo(() => [
+        {
+            id: 'code',
+            title: 'Code',
+            content: (
+                <CodeTracePanel
+                    step={step}
+                    codeLines={SOLUTION_CODE}
+                    highlightedLines={connectivity.highlightedLines}
+                    onLineSelect={connectivity.handleLineSelect}
+                    onActiveLineDomChange={setActiveLineDom}
+                />
+            ),
+        },
+        {
+            id: 'viz',
+            title: '📦 Stack Unboxing',
+            content: (
+                <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
+                    <div>
+                        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+                        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                            {EXAMPLES.map(e => (
+                                <button key={e.label} onClick={() => applyExample(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: '#f1f5f9' }}>
+                                    {e.label}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    <input style={{ padding: '8px', borderRadius: 4, border: '1px solid #cbd5e1', fontSize: 12, fontFamily: 'monospace' }} value={sInput}
+                        onChange={(e) => { setSInput(e.target.value); handleReset(); }} placeholder="encoded string" />
+
+                    <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 4 }}>Input</div>
+                    <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', minHeight: 40 }}>
+                        {sInput.split("").map((ch, i) => {
+                            const isCur = step?.ci === i;
+                            const type = /\d/.test(ch) ? 'digit' : ch === '[' ? 'open' : ch === ']' ? 'close' : 'letter';
+                            const colors = { digit: '#dbeafe', open: '#fecaca', close: '#fecaca', letter: '#dcfce7' };
+                            return (
+                                <motion.div key={i} animate={{ scale: isCur ? 1.3 : 1 }} style={{
+                                    width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                    backgroundColor: colors[type], border: isCur ? '3px solid #0ea5e9' : '1px solid #cbd5e1',
+                                    borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: '#1e293b'
+                                }}>{ch}</motion.div>
+                            );
+                        })}
+                    </div>
+
+                    <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 4 }}>Stack</div>
+                    <div style={{ display: 'flex', gap: 6, alignItems: 'flex-start', minHeight: 50, paddingBottom: 8, borderBottom: '1px solid #e2e8f0' }}>
+                        <AnimatePresence mode="popLayout">
+                            {(step?.stack ?? []).map((item, i) => (
+                                <motion.div key={`${i}-${item.k}`} initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} style={{
+                                    padding: '8px', backgroundColor: '#f8fafc', border: i === (step?.stack?.length - 1) ? '2px solid #3b82f6' : '1px solid #cbd5e1',
+                                    borderRadius: 4, fontSize: 11, fontFamily: 'monospace'
+                                }}>
+                                    <div>k={item.k}</div>
+                                    <div>"{item.prev}"</div>
+                                </motion.div>
+                            ))}
+                        </AnimatePresence>
+                        {(step?.stack?.length ?? 0) === 0 && <span style={{ color: '#64748b', fontSize: 12 }}>empty</span>}
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                        <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '1px solid #86efac' }}>
+                            <div style={{ fontSize: 11, color: '#65a30d' }}>Current String</div>
+                            <div style={{ fontSize: 14, fontFamily: 'monospace', fontWeight: 'bold', color: '#15803d', marginTop: 4 }}>"{step?.cur ?? ''}"</div>
+                        </div>
+                        <div style={{ padding: 12, backgroundColor: '#dbeafe', borderRadius: 6, border: '1px solid #0ea5e9' }}>
+                            <div style={{ fontSize: 11, color: '#1e40af' }}>Multiplier</div>
+                            <div style={{ fontSize: 24, fontWeight: 'bold', color: '#0ea5e9', marginTop: 4 }}>{step?.k ?? 0}</div>
+                        </div>
+                    </div>
+                </div>
+            ),
+        },
+    ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, sInput, applyExample]);
+
     return (
-        <div className="ds-shell">
-            <div className="ds-controls-row">
-                <div className="ds-examples">
-                    {EXAMPLES.map((ex) => (
-                        <button key={ex.label} className="ds-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                    ))}
-                </div>
-                <input className="ds-input" value={sInput}
-                    onChange={(e) => { setSInput(e.target.value); handleReset(); }} placeholder="encoded string" />
-            </div>
-
-            {/* Character-by-character display */}
-            <div className="ds-panel">
-                <div className="ds-panel-label">Input string</div>
-                <div className="ds-chars-row">
-                    {sInput.split("").map((ch, i) => {
-                        const isCur = step?.ci === i;
-                        const type = /\d/.test(ch) ? "digit" : ch === "[" ? "open" : ch === "]" ? "close" : "letter";
-                        return (
-                            <motion.div key={i} className={`ds-ch ${type} ${isCur ? "current" : ""}`}
-                                animate={{ scale: isCur ? 1.25 : 1 }}
-                                transition={{ type: "spring", stiffness: 400, damping: 20 }}>
-                                {ch}
-                            </motion.div>
-                        );
-                    })}
-                </div>
-            </div>
-
-            {/* Stack */}
-            <div className="ds-panel">
-                <div className="ds-panel-label">Stack (top on right)</div>
-                <div className="ds-stack-row">
-                    <AnimatePresence mode="popLayout">
-                        {(step?.stack ?? []).map((item, i) => (
-                            <motion.div key={`${i}-${item.k}-${item.prev}`} className={`ds-stack-item ${i === (step.stack.length - 1) ? "top" : ""}`}
-                                initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 12 }}
-                                transition={{ type: "spring", stiffness: 350, damping: 22 }}>
-                                <span className="ds-stack-k">k={item.k}</span>
-                                <span className="ds-stack-prev">"{item.prev}"</span>
-                            </motion.div>
-                        ))}
-                    </AnimatePresence>
-                    {(step?.stack?.length ?? 0) === 0 && <span className="ds-empty">empty</span>}
-                </div>
-            </div>
-
-            {/* cur and k */}
-            <div className="ds-state-row">
-                <div className="ds-state-box">
-                    <span className="ds-state-label">cur</span>
-                    <span className="ds-state-val">"{step?.cur ?? ""}"</span>
-                </div>
-                <div className="ds-state-box">
-                    <span className="ds-state-label">k</span>
-                    <span className="ds-state-val">{step?.k ?? 0}</span>
-                </div>
-            </div>
-
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-            <div className="ds-status">{step?.message ?? "Press Play to begin."}</div>
-            <PlaybackControls
-                isPlaying={isPlaying} isDone={isDone} speed={speed}
-                onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-                prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
-                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                showPatternOverlay={showPatternOverlay}
-                onShowPatternOverlayChange={setShowPatternOverlay}
-                patternOverlayLabel="Show pattern overlay"
-                showPatternOverlayToggle
+        <div className="problem-shell">
+            <DockableWorkspace
+                panels={dockPanels}
+                initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
             />
+            <FloatingPanel title="Playback Controls">
+                <PlaybackControls
+                    isPlaying={isPlaying}
+                    isDone={isDone}
+                    speed={speed}
+                    onPlayToggle={togglePlay}
+                    onPrev={stepBack}
+                    onNext={stepForward}
+                    onReset={handleReset}
+                    prevDisabled={stepIndex < 0}
+                    nextDisabled={isDone}
+                    resetDisabled={stepIndex < 0}
+                    onSpeedChange={e => setSpeed(Number(e.target.value))}
+                    showPatternOverlay={showPatternOverlay}
+                    onShowPatternOverlayChange={setShowPatternOverlay}
+                    patternOverlayLabel="Show pattern overlay"
+                    showPatternOverlayToggle
+                />
+            </FloatingPanel>
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     );
