@@ -1,0 +1,16 @@
+/* GrayCode Visualizer Styles */
+
+.problem-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Ensure flex containers work properly */
+.problem-shell > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}

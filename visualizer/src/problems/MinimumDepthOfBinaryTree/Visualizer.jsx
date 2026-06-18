@@ -1,0 +1,384 @@
+import { useState, useMemo, useCallback } from 'react'
+import { motion } from 'framer-motion'
+import CodeTracePanel from '../../components/CodeTracePanel'
+import PlaybackControls from '../../components/PlaybackControls'
+import PatternOverlay from '../../components/PatternOverlay'
+import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import { usePlaybackState } from '../../hooks/usePlaybackState'
+import { useAutoScroll } from '../../hooks/useAutoScroll'
+import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
+import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
+import { TreeCanvas3D } from '../../components/viz3d'
+import { getExamples } from '../../config/examplesRegistry'
+import { useSolutionCode } from '../../hooks/useSolutionCode'
+import './Visualizer.css'
+
+const CANVAS_W = 520
+const CANVAS_H = 320
+const NODE_R = 22
+
+function generateSteps(arr) {
+  const root = buildTree(arr)
+  const positions = computeLayout(root, CANVAS_W, 80)
+  const edges = buildEdges(root)
+  const allNodes = collectNodes(root)
+  const steps = []
+
+  if (!root) {
+    return [{
+      phase: 'done',
+      activeLine: 3,
+      activeIds: new Set(),
+      visitedIds: new Set(),
+      currentDepth: 0,
+      minDepth: 0,
+      positions,
+      edges,
+      allNodes,
+      message: 'Empty tree → return 0'
+    }]
+  }
+
+  const visitedIds = new Set()
+  let minDepth = Infinity
+
+  steps.push({
+    phase: 'init',
+    activeLine: 4,
+    activeIds: new Set([root.id]),
+    visitedIds: new Set(),
+    currentDepth: 0,
+    minDepth: Infinity,
+    positions,
+    edges,
+    allNodes,
+    message: 'Initialize DFS starting at root with depth 0.'
+  })
+
+  // DFS traversal
+  function dfs(node, depth) {
+    if (!node) return
+
+    visitedIds.add(node.id)
+
+    steps.push({
+      phase: 'visit',
+      activeLine: 6,
+      activeIds: new Set([node.id]),
+      visitedIds: new Set(visitedIds),
+      currentDepth: depth,
+      minDepth,
+      positions,
+      edges,
+      allNodes,
+      message: `Visit node ${node.val} at depth ${depth}.`
+    })
+
+    // Check if leaf node (no left and no right)
+    const isLeaf = !node.left && !node.right
+
+    if (isLeaf) {
+      steps.push({
+        phase: 'leaf-found',
+        activeLine: 9,
+        activeIds: new Set([node.id]),
+        visitedIds: new Set(visitedIds),
+        currentDepth: depth,
+        minDepth: Math.min(minDepth, depth),
+        positions,
+        edges,
+        allNodes,
+        message: `Leaf node found at depth ${depth}. Update minDepth = ${Math.min(minDepth, depth)}.`
+      })
+
+      minDepth = Math.min(minDepth, depth)
+      return
+    }
+
+    // Traverse left subtree
+    if (node.left) {
+      steps.push({
+        phase: 'go-left',
+        activeLine: 11,
+        activeIds: new Set([node.id, node.left.id]),
+        visitedIds: new Set(visitedIds),
+        currentDepth: depth,
+        minDepth,
+        positions,
+        edges,
+        allNodes,
+        message: `Traverse left child of node ${node.val}.`
+      })
+
+      dfs(node.left, depth + 1)
+    }
+
+    // Traverse right subtree
+    if (node.right) {
+      steps.push({
+        phase: 'go-right',
+        activeLine: 12,
+        activeIds: new Set([node.id, node.right.id]),
+        visitedIds: new Set(visitedIds),
+        currentDepth: depth,
+        minDepth,
+        positions,
+        edges,
+        allNodes,
+        message: `Traverse right child of node ${node.val}.`
+      })
+
+      dfs(node.right, depth + 1)
+    }
+  }
+
+  dfs(root, 1)
+
+  steps.push({
+    phase: 'done',
+    activeLine: 14,
+    activeIds: new Set(),
+    visitedIds: new Set(visitedIds),
+    currentDepth: 0,
+    minDepth,
+    positions,
+    edges,
+    allNodes,
+    message: `DFS complete. Minimum depth = ${minDepth}`
+  })
+
+  return steps
+}
+
+const EXAMPLES = getExamples('minimum-depth-of-binary-tree')
+
+function VisualizationPanel({
+  EXAMPLES,
+  arrInput,
+  setArrInput,
+  positions,
+  edges,
+  allNodes,
+  step,
+  applyExample,
+  handleReset,
+  CANVAS_W,
+  CANVAS_H,
+  NODE_R,
+}) {
+  return (
+    <div className="mdbt-viz-panel">
+      <div className="mdbt-examples">
+        {EXAMPLES.map((ex) => (
+          <button
+            key={ex.label}
+            className="mdbt-chip"
+            onClick={() => applyExample(ex)}
+          >
+            {ex.label}
+          </button>
+        ))}
+      </div>
+      <input
+        className="mdbt-input"
+        value={arrInput}
+        onChange={(e) => {
+          setArrInput(e.target.value)
+          handleReset()
+        }}
+        placeholder="[3,9,20,null,null,15,7]"
+      />
+      <div className="mdbt-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
+        <TreeCanvas3D
+          positions={positions}
+          edges={edges}
+          allNodes={allNodes}
+          activeIds={step?.activeIds ?? new Set()}
+          visitedIds={step?.visitedIds ?? new Set()}
+          queueIds={new Set()}
+          canvasWidth={CANVAS_W}
+          canvasHeight={CANVAS_H}
+          nodeRadius={NODE_R}
+        />
+      </div>
+    </div>
+  )
+}
+
+function ResultPanel({
+  step,
+  inputError,
+}) {
+  return (
+    <div className="mdbt-result-panel">
+      <div className="mdbt-section">
+        <div className="mdbt-section-title">Current Traversal</div>
+        <div className="mdbt-info-box">
+          <span className="mdbt-label">Current Depth:</span>
+          <span className="mdbt-value">{step?.currentDepth ?? 0}</span>
+        </div>
+        <div className="mdbt-info-box">
+          <span className="mdbt-label">Phase:</span>
+          <span className="mdbt-value">{step?.phase ?? 'init'}</span>
+        </div>
+      </div>
+
+      <div className="mdbt-section">
+        <div className="mdbt-section-title">Result</div>
+        <div className="mdbt-info-box">
+          <span className="mdbt-label">Minimum Depth:</span>
+          <span className={`mdbt-value ${step?.minDepth === Infinity ? 'infinite' : 'finite'}`}>
+            {step?.minDepth === Infinity ? '∞' : step?.minDepth}
+          </span>
+        </div>
+        <div className={`mdbt-result ${step?.phase === 'done' ? 'ok' : ''}`}>
+          {step?.phase === 'done'
+            ? `Result: Minimum depth = ${step.minDepth}`
+            : 'Running DFS…'
+          }
+        </div>
+      </div>
+
+      {inputError && <div className="mdbt-error-box">{inputError}</div>}
+    </div>
+  )
+}
+
+export default function MinimumDepthOfBinaryTreeVisualizer() {
+  const [arrInput, setArrInput] = useState('[3,9,20,null,null,15,7]')
+  const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
+  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+
+  // Load solution code from registry
+  const SOLUTION_CODE = useSolutionCode('minimum-depth-of-binary-tree')
+
+  const { arr, inputError } = useMemo(() => {
+    try {
+      return { arr: parseTreeInput(arrInput), inputError: '' }
+    } catch (e) {
+      return { arr: [3, 9, 20, null, null, 15, 7], inputError: e.message || 'Invalid input' }
+    }
+  }, [arrInput])
+
+  const steps = useMemo(() => generateSteps(arr), [arr])
+  const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
+  const step = stepIndex >= 0 ? steps[stepIndex] : null
+
+  const applyExample = useCallback((ex) => {
+    setArrInput(JSON.stringify(ex.arr))
+    handleReset()
+  }, [handleReset])
+
+  const positions = step?.positions ?? new Map()
+  const edges = step?.edges ?? []
+  const allNodes = step?.allNodes ?? []
+
+  const connectivity = useCodeVisualConnectivity({
+    steps,
+    stepIndex,
+    onStepJump: setStepIndex,
+  })
+
+  // Create dock panels
+  const dockPanels = useMemo(() => [
+    {
+      id: 'viz',
+      title: 'Tree Visualization',
+      subtitle: inputError ? 'Fix the input to resume playback.' : 'Visualize the DFS traversal.',
+      defaultZone: 'left',
+      content: (
+        <VisualizationPanel
+          EXAMPLES={EXAMPLES}
+          arrInput={arrInput}
+          setArrInput={setArrInput}
+          positions={positions}
+          edges={edges}
+          allNodes={allNodes}
+          step={step}
+          applyExample={applyExample}
+          handleReset={handleReset}
+          CANVAS_W={CANVAS_W}
+          CANVAS_H={CANVAS_H}
+          NODE_R={NODE_R}
+        />
+      ),
+    },
+    {
+      id: 'result',
+      title: 'Traversal Info',
+      subtitle: step ? `Phase: ${step.phase}` : 'Minimum depth tracking.',
+      defaultZone: 'left',
+      content: (
+        <ResultPanel
+          step={step}
+          inputError={inputError}
+        />
+      ),
+    },
+    {
+      id: 'code',
+      title: 'Code Trace',
+      subtitle: step ? `Active line ${step.activeLine}` : 'Step-by-step code execution.',
+      defaultZone: 'full',
+      content: (
+        <CodeTracePanel
+          step={step}
+          codeLines={SOLUTION_CODE}
+          highlightedLines={connectivity.highlightedLines}
+          onLineSelect={connectivity.handleLineSelect}
+          onActiveLineDomChange={setActiveLineDom}
+          autoScroll={autoScrollCode}
+        />
+      ),
+    },
+  ], [arrInput, setArrInput, positions, edges, allNodes, step, applyExample, handleReset, inputError, setActiveLineDom, autoScrollCode, SOLUTION_CODE, connectivity.highlightedLines, connectivity.handleLineSelect])
+
+  return (
+    <div className="mdbt-shell">
+      <div className="mdbt-header">
+        <h2>Minimum Depth of Binary Tree</h2>
+        <p className={`mdbt-message ${step?.phase === 'done' ? 'ok' : ''}`}>
+          {step?.message || 'Press Play to begin.'}
+        </p>
+      </div>
+
+      <DockableWorkspace
+        title="Minimum Depth Workspace"
+        panels={dockPanels}
+        initialLayout={{
+          rows: [['viz', 'result'], ['code']],
+          minimized: [],
+        }}
+      />
+
+      <FloatingPanel title="Playback Controls">
+        <PlaybackControls
+          onReset={handleReset}
+          onPrev={stepBack}
+          onPlayToggle={togglePlay}
+          onNext={stepForward}
+          resetDisabled={steps.length === 0}
+          prevDisabled={stepIndex <= 0}
+          nextDisabled={steps.length === 0 || isDone}
+          isPlaying={isPlaying}
+          isDone={isDone}
+          speed={speed}
+          onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+          speedIndicator={`${speed}ms`}
+          autoScroll={autoScrollCode}
+          onAutoScrollChange={setAutoScrollCode}
+          autoScrollLabel="Auto-scroll code"
+          showAutoScroll
+          showPatternOverlay={showPatternOverlay}
+          onShowPatternOverlayChange={setShowPatternOverlay}
+          patternOverlayLabel="Show pattern overlay"
+          showPatternOverlayToggle
+        />
+      </FloatingPanel>
+
+      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+    </div>
+  )
+}

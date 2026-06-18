@@ -1,0 +1,7 @@
+/* SearchA2DMatrix Visualizer Styles */
+.problem-shell {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+}

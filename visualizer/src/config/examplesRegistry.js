@@ -62,6 +62,33 @@ export const EXAMPLES_REGISTRY = {
       ]
     }
   ],
+  "add-binary": [
+    {
+      "label": "11 + 1",
+      "a": "11",
+      "b": "1"
+    },
+    {
+      "label": "1010 + 1011",
+      "a": "1010",
+      "b": "1011"
+    },
+    {
+      "label": "0 + 0",
+      "a": "0",
+      "b": "0"
+    },
+    {
+      "label": "1111 + 1111",
+      "a": "1111",
+      "b": "1111"
+    },
+    {
+      "label": "1 + 111",
+      "a": "1",
+      "b": "111"
+    }
+  ],
   "balanced-binary-tree": [
     {
       "label": "Balanced",
@@ -1454,6 +1481,24 @@ export const EXAMPLES_REGISTRY = {
     }
   ],
   "generate-parentheses": [
+    {
+      "label": "n=1",
+      "n": 1
+    },
+    {
+      "label": "n=2",
+      "n": 2
+    },
+    {
+      "label": "n=3",
+      "n": 3
+    },
+    {
+      "label": "n=4",
+      "n": 4
+    }
+  ],
+  "gray-code": [
     {
       "label": "n=1",
       "n": 1
@@ -3947,6 +3992,39 @@ export const EXAMPLES_REGISTRY = {
       ]
     }
   ],
+  "permutations-ii": [
+    {
+      "label": "[1,1,2]",
+      "nums": [
+        1,
+        1,
+        2
+      ]
+    },
+    {
+      "label": "[0,1]",
+      "nums": [
+        0,
+        1
+      ]
+    },
+    {
+      "label": "[1,2,2]",
+      "nums": [
+        1,
+        2,
+        2
+      ]
+    },
+    {
+      "label": "[1,1,1]",
+      "nums": [
+        1,
+        1,
+        1
+      ]
+    }
+  ],
   "plus-one": [
     {
       "label": "Ex 1",
@@ -4683,6 +4761,80 @@ export const EXAMPLES_REGISTRY = {
     }
   ],
   "search2-dmatrix": [
+    {
+      "label": "target=3",
+      "matrix": [
+        [
+          1,
+          3,
+          5,
+          7
+        ],
+        [
+          10,
+          11,
+          16,
+          20
+        ],
+        [
+          23,
+          30,
+          34,
+          60
+        ]
+      ],
+      "target": 3
+    },
+    {
+      "label": "target=13",
+      "matrix": [
+        [
+          1,
+          3,
+          5,
+          7
+        ],
+        [
+          10,
+          11,
+          16,
+          20
+        ],
+        [
+          23,
+          30,
+          34,
+          60
+        ]
+      ],
+      "target": 13
+    },
+    {
+      "label": "target=16",
+      "matrix": [
+        [
+          1,
+          3,
+          5,
+          7
+        ],
+        [
+          10,
+          11,
+          16,
+          20
+        ],
+        [
+          23,
+          30,
+          34,
+          60
+        ]
+      ],
+      "target": 16
+    }
+  ],
+  "search-a-2d-matrix": [
     {
       "label": "target=3",
       "matrix": [

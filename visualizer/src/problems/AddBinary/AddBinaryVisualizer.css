@@ -1,0 +1,218 @@
+.ab-shell {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    font-family: inherit;
+}
+
+.ab-examples {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.ab-chip {
+    background: #313244;
+    color: #cdd6f4;
+    border: 2px solid #45475a;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.ab-chip.active,
+.ab-chip:hover {
+    border-color: #a6e3a1;
+    color: #a6e3a1;
+}
+
+.ab-panel {
+    background: #1e1e2e;
+    border: 1px solid #313244;
+    border-radius: 10px;
+    padding: 12px 14px;
+}
+
+.ab-panel-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #6c7086;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+
+.ab-bits {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+    min-height: 60px;
+}
+
+.ab-bit-box {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 6px;
+    border: 2px solid #45475a;
+    background: #252535;
+    color: #cdd6f4;
+}
+
+.ab-bit-box.active-a {
+    border-color: #89b4fa;
+    background: #001a30;
+    color: #89b4fa;
+}
+
+.ab-bit-box.active-b {
+    border-color: #f38ba8;
+    background: #1a0010;
+    color: #f38ba8;
+}
+
+.ab-bit-box.processed {
+    border-color: #a6e3a1;
+    background: #001a08;
+    color: #a6e3a1;
+}
+
+.ab-calc-box {
+    padding: 12px;
+    background: #1e1e2e;
+    border: 2px solid #8b5cf6;
+    border-radius: 8px;
+    margin: 12px 0;
+}
+
+.ab-calc-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #cdd6f4;
+    margin-bottom: 8px;
+}
+
+.ab-calc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.ab-calc-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+    border-radius: 4px;
+    background: #252535;
+    border: 1px solid #45475a;
+}
+
+.ab-calc-cell.a-bit {
+    border-color: #89b4fa;
+    background: #001a30;
+}
+
+.ab-calc-cell.b-bit {
+    border-color: #f38ba8;
+    background: #1a0010;
+}
+
+.ab-calc-cell.carry-bit {
+    border-color: #f5c2e7;
+    background: #1a0015;
+}
+
+.ab-calc-cell.sum-bit {
+    border-color: #a6e3a1;
+    background: #001a08;
+}
+
+.ab-calc-label {
+    font-size: 10px;
+    color: #a6adc8;
+    margin-bottom: 4px;
+}
+
+.ab-calc-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: #cdd6f4;
+}
+
+.ab-result {
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    background: #001a08;
+    border: 2px solid #a6e3a1;
+    color: #a6e3a1;
+    letter-spacing: 2px;
+    text-align: center;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}
+
+.ab-status {
+    padding: 8px 12px;
+    background: #1e1e2e;
+    border: 1px solid #313244;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #a6adc8;
+    min-height: 36px;
+}
+
+.ab-pointers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.ab-pointer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: #1e1e2e;
+    border: 1px solid #313244;
+    border-radius: 8px;
+    padding: 10px 0;
+}
+
+.ab-pointer-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: #6c7086;
+    text-transform: uppercase;
+}
+
+.ab-pointer-val {
+    font-size: 18px;
+    font-weight: 700;
+    color: #cdd6f4;
+}
+
+.ab-pointer.i {
+    border-color: #89b4fa;
+}
+
+.ab-pointer.i .ab-pointer-val {
+    color: #89b4fa;
+}
+
+.ab-pointer.j {
+    border-color: #f38ba8;
+}
+
+.ab-pointer.j .ab-pointer-val {
+    color: #f38ba8;
+}
