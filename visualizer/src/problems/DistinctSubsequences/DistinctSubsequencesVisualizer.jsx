@@ -70,8 +70,6 @@ export default function DistinctSubsequencesVisualizer() {
   const activeJ = step?.j ?? -1;
   const phase = step?.phase ?? "init";
   const s = ex.s, t = ex.t;
-  const answer = dp[s.length]?.[t.length] ?? 0;
-
   const answer = step?.dp?.[step.i]?.[step.j] ?? 0;
   const dockPanels = useMemo(() => [
     {

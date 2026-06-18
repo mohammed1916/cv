@@ -544,6 +544,16 @@ export const SOLUTION_CODE_REGISTRY = {
     { line: 17, text: '        return True' },
   ],
 
+  'palindrome-number': [
+    { line: 1, text: 'def isPalindrome(x: int) -> bool:' },
+    { line: 2, text: '    if x < 0 or (x % 10 == 0 and x != 0):' },
+    { line: 3, text: '        return False' },
+    { line: 4, text: '    rev = 0' },
+    { line: 5, text: '    while x > rev:' },
+    { line: 6, text: '        rev = rev * 10 + x % 10' },
+    { line: 7, text: '        x //= 10' },
+    { line: 8, text: '    return x == rev or x == rev // 10' },
+  ],
   // Add more problems here...
 };
 
