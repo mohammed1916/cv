@@ -1,10 +1,14 @@
 import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
+import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from '../../config/examplesRegistry'
 import "./RandomizedCollectionVisualizer.css";
 
@@ -78,12 +82,14 @@ function generateSteps(ops) {
 
 export default function RandomizedCollectionVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
+    const SOLUTION_CODE = useSolutionCode('insert-delete-getrandom-o1-duplicates-allowed');
     const steps = useMemo(() => generateSteps(ex.ops), [ex]);
-    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
+    const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
     const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
+    const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
 
     const nums = step?.nums ?? [];
     const idx = step?.idx ?? {};
@@ -91,87 +97,123 @@ export default function RandomizedCollectionVisualizer() {
     const result = step?.result;
     const opStr = step?.op ?? "—";
 
-    return (
-        <div className="rc-shell">
-            <div className="rc-examples">
-                {EXAMPLES.map(e => (
-                    <button key={e.label} className={`rc-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>
-                        {e.label}
-                    </button>
-                ))}
-            </div>
+    const dockPanels = useMemo(() => [
+        {
+            id: 'code',
+            title: 'Code',
+            content: (
+                <CodeTracePanel
+                    step={step}
+                    codeLines={SOLUTION_CODE}
+                    highlightedLines={connectivity.highlightedLines}
+                    onLineSelect={connectivity.handleLineSelect}
+                    onActiveLineDomChange={setActiveLineDom}
+                />
+            ),
+        },
+        {
+            id: 'viz',
+            title: '🎲 Collections',
+            content: (
+                <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+                    <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                        {EXAMPLES.map(e => (
+                            <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : '#f1f5f9' }}>
+                                {e.label}
+                            </button>
+                        ))}
+                    </div>
 
-            <div className="rc-row">
-                <div className="rc-panel rc-info">
-                    <div className="rc-panel-label">Operation</div>
-                    <div className="rc-op">{opStr}</div>
-                </div>
-                <div className="rc-panel rc-info">
-                    <div className="rc-panel-label">Return</div>
-                    <div className={`rc-ret ${phase === "random" ? "rnd" : result === true ? "ok" : result === false ? "no" : ""}`}>
-                        {result === null || result === undefined ? "—" : String(result)}
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
+                        <div style={{ padding: 8, backgroundColor: '#dbeafe', borderRadius: 6, border: '1px solid #0ea5e9' }}>
+                            <div style={{ fontSize: 11, color: '#1e40af', marginBottom: 4 }}>Operation</div>
+                            <div style={{ fontSize: 13, fontWeight: 'bold', color: '#1e40af' }}>{opStr}</div>
+                        </div>
+                        <div style={{ padding: 8, backgroundColor: phase === "random" ? '#fef3c7' : result === true ? '#dcfce7' : result === false ? '#fee2e2' : '#f8fafc', borderRadius: 6, border: phase === "random" ? '1px solid #fcd34d' : result === true ? '1px solid #86efac' : result === false ? '1px solid #fecaca' : '1px solid #e2e8f0' }}>
+                            <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>Return</div>
+                            <div style={{ fontSize: 13, fontWeight: 'bold', color: phase === "random" ? '#92400e' : result === true ? '#15803d' : result === false ? '#991b1b' : '#1e293b' }}>
+                                {result === null || result === undefined ? '—' : String(result)}
+                            </div>
+                        </div>
+                        <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, border: '1px solid #e2e8f0' }}>
+                            <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>Phase</div>
+                            <div style={{ fontSize: 13, fontWeight: 'bold', color: '#1e293b' }}>{phase}</div>
+                        </div>
+                    </div>
+
+                    <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>nums array</div>
+                    <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', minHeight: 50, alignItems: 'center' }}>
+                        <AnimatePresence>
+                            {nums.map((v, i) => (
+                                <motion.div key={`${i}-${v}`} layout initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 12 }} style={{
+                                    width: 50, height: 50, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                                    backgroundColor: i === step?.swapI ? '#fbbf24' : '#dbeafe', border: i === step?.swapI ? '2px solid #f59e0b' : '1px solid #0ea5e9',
+                                    borderRadius: 4, fontSize: 11
+                                }}>
+                                    <span style={{ color: '#64748b' }}>{i}</span>
+                                    <span style={{ fontSize: 13, fontWeight: 'bold', color: '#1e293b' }}>{v}</span>
+                                </motion.div>
+                            ))}
+                        </AnimatePresence>
+                        {nums.length === 0 && <span style={{ color: '#64748b', fontSize: 12 }}>empty</span>}
+                    </div>
+
+                    <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>idx map</div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 4, minHeight: 40 }}>
+                        {Object.entries(idx).filter(([, v]) => v.length > 0).map(([k, arr]) => (
+                            <div key={k} style={{ display: 'flex', gap: 6, alignItems: 'center', fontSize: 11 }}>
+                                <span style={{ fontWeight: 'bold', color: '#1e293b', minWidth: 20 }}>{k}</span>
+                                <span style={{ color: '#64748b' }}>→</span>
+                                <span style={{ padding: '2px 6px', backgroundColor: '#f0fdf4', borderRadius: 3, color: '#15803d', fontFamily: 'monospace', fontWeight: 'bold' }}>
+                                    {`{${arr.join(", ")}}`}
+                                </span>
+                            </div>
+                        ))}
+                        {Object.values(idx).every(v => v.length === 0) && <span style={{ color: '#64748b', fontSize: 12 }}>empty</span>}
+                    </div>
+
+                    <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginTop: 4 }}>Operations log</div>
+                    <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap', flex: 1, overflow: 'auto', paddingBottom: 4 }}>
+                        {steps.slice(0, stepIndex + 1).filter(s => s.phase !== "init" && s.phase !== "done").map((s, i) => (
+                            <span key={i} style={{
+                                padding: '4px 8px', borderRadius: 3, fontSize: 11, fontWeight: '600',
+                                backgroundColor: s.phase === "insert" ? '#dcfce7' : s.phase === "remove" ? '#fee2e2' : '#fef3c7',
+                                color: s.phase === "insert" ? '#15803d' : s.phase === "remove" ? '#991b1b' : '#92400e'
+                            }}>
+                                {s.op}{s.result !== null && s.result !== undefined ? ` → ${s.result}` : ""}
+                            </span>
+                        ))}
                     </div>
                 </div>
-                <div className="rc-panel rc-info">
-                    <div className="rc-panel-label">Phase</div>
-                    <div className={`rc-phase ${phase}`}>{phase}</div>
-                </div>
-            </div>
+            ),
+        },
+    ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx, nums, idx, phase, result, opStr, steps, stepIndex]);
 
-            <div className="rc-panel">
-                <div className="rc-panel-label">nums array</div>
-                <div className="rc-nums">
-                    <AnimatePresence>
-                        {nums.map((v, i) => (
-                            <motion.div key={`${i}-${v}`}
-                                className={`rc-num-cell ${i === step?.swapI ? "swap" : ""}`}
-                                layout
-                                initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 12 }}
-                                transition={{ type: "spring", stiffness: 300, damping: 22 }}>
-                                <span className="rc-ci">{i}</span>
-                                <span className="rc-cv">{v}</span>
-                            </motion.div>
-                        ))}
-                        {nums.length === 0 && <span className="rc-empty">empty</span>}
-                    </AnimatePresence>
-                </div>
-            </div>
-
-            <div className="rc-panel">
-                <div className="rc-panel-label">idx map (val → indices)</div>
-                <div className="rc-idx-map">
-                    {Object.entries(idx).filter(([, v]) => v.length > 0).map(([k, arr]) => (
-                        <div key={k} className="rc-idx-row">
-                            <span className="rc-idx-key">{k}</span>
-                            <span className="rc-arrow">→</span>
-                            <span className="rc-idx-vals">{`{${arr.join(", ")}}`}</span>
-                        </div>
-                    ))}
-                    {Object.values(idx).every(v => v.length === 0) && <span className="rc-empty">empty</span>}
-                </div>
-            </div>
-
-            <div className="rc-panel">
-                <div className="rc-panel-label">Operations log</div>
-                <div className="rc-log">
-                    {steps.slice(0, stepIndex + 1).filter(s => s.phase !== "init" && s.phase !== "done").map((s, i) => (
-                        <span key={i} className={`rc-log-entry ${s.phase}`}>{s.op}{s.result !== null && s.result !== undefined ? ` → ${s.result}` : ""}</span>
-                    ))}
-                </div>
-            </div>
-
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-            <div className="rc-status">{step?.message ?? "Press Play to begin."}</div>
-            <PlaybackControls
-                isPlaying={isPlaying} isDone={isDone} speed={speed}
-                onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-                prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
-                onSpeedChange={e => setSpeed(Number(e.target.value))}
-                showPatternOverlay={showPatternOverlay}
-                onShowPatternOverlayChange={setShowPatternOverlay}
-                patternOverlayLabel="Show pattern overlay"
-                showPatternOverlayToggle
+    return (
+        <div className="problem-shell">
+            <DockableWorkspace
+                panels={dockPanels}
+                initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
             />
+            <FloatingPanel title="Playback Controls">
+                <PlaybackControls
+                    isPlaying={isPlaying}
+                    isDone={isDone}
+                    speed={speed}
+                    onPlayToggle={togglePlay}
+                    onPrev={stepBack}
+                    onNext={stepForward}
+                    onReset={handleReset}
+                    prevDisabled={stepIndex < 0}
+                    nextDisabled={isDone}
+                    resetDisabled={stepIndex < 0}
+                    onSpeedChange={e => setSpeed(Number(e.target.value))}
+                    showPatternOverlay={showPatternOverlay}
+                    onShowPatternOverlayChange={setShowPatternOverlay}
+                    patternOverlayLabel="Show pattern overlay"
+                    showPatternOverlayToggle
+                />
+            </FloatingPanel>
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     );

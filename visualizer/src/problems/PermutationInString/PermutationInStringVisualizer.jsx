@@ -1,10 +1,14 @@
 import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
+import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from '../../config/examplesRegistry'
 import "./PermutationInStringVisualizer.css";
 
@@ -67,93 +71,120 @@ function generateSteps(s1, s2) {
 
 export default function PermutationInStringVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
+    const SOLUTION_CODE = useSolutionCode('permutation-in-string');
     const steps = useMemo(() => { try { return generateSteps(ex.s1, ex.s2); } catch { return []; } }, [ex]);
-    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
+    const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
     const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
     const relevantChars = step ? [...new Set([...Object.keys(step.need), ...Object.keys(step.have)])] : [];
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
+    const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
 
-    return (
-        <div className="pis-shell">
-            <div className="pis-examples">
-                {EXAMPLES.map((e) => (
-                    <button key={e.label} className={`pis-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>{e.label}</button>
-                ))}
-            </div>
-
-            <div className="pis-strings">
-                <span className="pis-lbl s1">s1:</span><span className="pis-val">{ex.s1}</span>
-                <span className="pis-lbl s2">s2:</span><span className="pis-val">{ex.s2}</span>
-            </div>
-
-            <div className="pis-panel">
-                <div className="pis-panel-label">Sliding window over s2</div>
-                <div className="pis-chars-row">
-                    {ex.s2.split("").map((ch, i) => {
-                        const inWin = step && i >= step.winStart && i <= step.winEnd;
-                        const isMatch = inWin && step.matchWin;
-                        return (
-                            <motion.div key={i} className={`pis-ch ${inWin ? (isMatch ? "match" : "window") : ""}`}
-                                animate={{ scale: inWin ? 1.12 : 1 }}
-                                transition={{ type: "spring", stiffness: 400, damping: 22 }}>
-                                {ch}
-                            </motion.div>
-                        );
-                    })}
-                </div>
-            </div>
-
-            <div className="pis-freq-row">
-                <div className="pis-panel pis-freq-panel">
-                    <div className="pis-panel-label">need (s1 freq)</div>
-                    <div className="pis-freq-items">
-                        {relevantChars.map((c) => (
-                            <div key={c} className="pis-freq-item">
-                                <div className="pis-freq-char">{c}</div>
-                                <div className="pis-freq-val need">{step?.need?.[c] ?? 0}</div>
-                            </div>
+    const dockPanels = useMemo(() => [
+        {
+            id: 'code',
+            title: 'Code',
+            content: (
+                <CodeTracePanel
+                    step={step}
+                    codeLines={SOLUTION_CODE}
+                    highlightedLines={connectivity.highlightedLines}
+                    onLineSelect={connectivity.handleLineSelect}
+                    onActiveLineDomChange={setActiveLineDom}
+                />
+            ),
+        },
+        {
+            id: 'viz',
+            title: '🔍 Sliding Window',
+            content: (
+                <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
+                    <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>s1: <strong>{ex.s1}</strong> | s2: <strong>{ex.s2}</strong></div>
+                    <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                        {EXAMPLES.map(e => (
+                            <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: '#f1f5f9' }}>
+                                {e.label}
+                            </button>
                         ))}
                     </div>
-                </div>
-                <div className="pis-panel pis-freq-panel">
-                    <div className="pis-panel-label">have (window)</div>
-                    <div className="pis-freq-items">
-                        {relevantChars.map((c) => {
-                            const ok = (step?.need?.[c] ?? 0) === (step?.have?.[c] ?? 0);
+                    <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginTop: 8 }}>Window</div>
+                    <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+                        {ex.s2.split("").map((ch, i) => {
+                            const inWin = step && i >= step.winStart && i <= step.winEnd;
+                            const isMatch = inWin && step.matchWin;
                             return (
-                                <div key={c} className="pis-freq-item">
-                                    <div className="pis-freq-char">{c}</div>
-                                    <div className={`pis-freq-val have ${ok ? "ok" : "diff"}`}>{step?.have?.[c] ?? 0}</div>
-                                </div>
+                                <motion.div key={i} animate={{ scale: inWin ? 1.2 : 1 }} style={{
+                                    width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                    backgroundColor: isMatch ? '#86efac' : inWin ? '#fbbf24' : '#f3f4f6',
+                                    border: inWin ? '2px solid #0ea5e9' : '1px solid #cbd5e1',
+                                    borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: '#1e293b'
+                                }}>
+                                    {ch}
+                                </motion.div>
                             );
                         })}
                     </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 8 }}>
+                        <div style={{ padding: 12, backgroundColor: '#dbeafe', borderRadius: 6 }}>
+                            <div style={{ fontSize: 11, fontWeight: 600, color: '#1e40af', marginBottom: 6 }}>Need (s1)</div>
+                            <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+                                {relevantChars.map(c => (
+                                    <div key={c} style={{ padding: '4px 8px', backgroundColor: '#f0f9ff', border: '1px solid #0ea5e9', borderRadius: 3, fontSize: 11, fontWeight: 'bold', color: '#1e40af' }}>
+                                        {c}:{step?.need?.[c] ?? 0}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6 }}>
+                            <div style={{ fontSize: 11, fontWeight: 600, color: '#15803d', marginBottom: 6 }}>Have (window)</div>
+                            <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+                                {relevantChars.map(c => {
+                                    const ok = (step?.need?.[c] ?? 0) === (step?.have?.[c] ?? 0);
+                                    return (
+                                        <div key={c} style={{ padding: '4px 8px', backgroundColor: ok ? '#dcfce7' : '#fee2e2', border: ok ? '1px solid #86efac' : '1px solid #fecaca', borderRadius: 3, fontSize: 11, fontWeight: 'bold', color: ok ? '#15803d' : '#991b1b' }}>
+                                            {c}:{step?.have?.[c] ?? 0}
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    </div>
+                    {step?.result != null && (
+                        <div style={{ padding: 12, backgroundColor: step.result ? '#f0fdf4' : '#fee2e2', borderRadius: 6, border: step.result ? '2px solid #86efac' : '2px solid #fecaca', textAlign: 'center', fontWeight: 600, color: step.result ? '#15803d' : '#991b1b' }}>
+                            {step.result ? '✓ Permutation found!' : '✗ No permutation found'}
+                        </div>
+                    )}
                 </div>
-            </div>
+            ),
+        },
+    ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx, relevantChars]);
 
-            {step?.result != null && (
-                <AnimatePresence>
-                    <motion.div className={`pis-result ${step.result ? "true" : "false"}`}
-                        initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }}>
-                        {step.result ? "✓ Permutation found!" : "✗ No permutation found."}
-                    </motion.div>
-                </AnimatePresence>
-            )}
-
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-            <div className="pis-status">{step?.message ?? "Press Play to begin."}</div>
-            <PlaybackControls
-                isPlaying={isPlaying} isDone={isDone} speed={speed}
-                onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-                prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
-                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                showPatternOverlay={showPatternOverlay}
-                onShowPatternOverlayChange={setShowPatternOverlay}
-                patternOverlayLabel="Show pattern overlay"
-                showPatternOverlayToggle
+    return (
+        <div className="problem-shell">
+            <DockableWorkspace
+                panels={dockPanels}
+                initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
             />
+            <FloatingPanel title="Playback Controls">
+                <PlaybackControls
+                    isPlaying={isPlaying}
+                    isDone={isDone}
+                    speed={speed}
+                    onPlayToggle={togglePlay}
+                    onPrev={stepBack}
+                    onNext={stepForward}
+                    onReset={handleReset}
+                    prevDisabled={stepIndex < 0}
+                    nextDisabled={isDone}
+                    resetDisabled={stepIndex < 0}
+                    onSpeedChange={e => setSpeed(Number(e.target.value))}
+                    showPatternOverlay={showPatternOverlay}
+                    onShowPatternOverlayChange={setShowPatternOverlay}
+                    patternOverlayLabel="Show pattern overlay"
+                    showPatternOverlayToggle
+                />
+            </FloatingPanel>
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     );

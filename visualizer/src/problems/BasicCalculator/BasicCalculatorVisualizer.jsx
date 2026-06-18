@@ -1,10 +1,14 @@
 import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
+import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from "../../config/examplesRegistry";
 import "./BasicCalculatorVisualizer.css";
 
@@ -70,12 +74,14 @@ function generateSteps(s) {
 
 export default function BasicCalculatorVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
+  const SOLUTION_CODE = useSolutionCode('basic-calculator');
   const steps = useMemo(() => generateSteps(ex.s), [ex]);
-  const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
+  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
   const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
 
   const stack = step?.stack ?? [];
   const result = step?.result ?? 0;
@@ -85,72 +91,121 @@ export default function BasicCalculatorVisualizer() {
   const phase = step?.phase ?? "init";
   const chars = ex.s.split("");
 
-  return (
-    <div className="bc-shell">
-      <div className="bc-examples">
-        {EXAMPLES.map(e => (
-          <button key={e.label} className={`bc-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>
-            {e.label}
-          </button>
-        ))}
-      </div>
-
-      <div className="bc-panel">
-        <div className="bc-panel-label">Expression</div>
-        <div className="bc-expr">
-          {chars.map((ch, i) => (
-            <motion.span
-              key={i}
-              className={`bc-char ${i === charIdx ? "active-char" : ""} ${ch === "(" || ch === ")" ? "paren" : ""} ${ch === "+" || ch === "-" ? "op" : ""} ${/\d/.test(ch) ? "digit" : ""}`}
-              animate={{ scale: i === charIdx ? 1.3 : 1 }}
-              transition={{ type: "spring", stiffness: 400, damping: 20 }}
-            >
-              {ch}
-            </motion.span>
-          ))}
-        </div>
-      </div>
-
-      <div className="bc-row">
-        <div className="bc-panel bc-half">
-          <div className="bc-panel-label">Stack</div>
-          <div className="bc-stack">
-            <AnimatePresence>
-              {[...stack].reverse().map((v, i) => (
-                <motion.div key={stack.length - 1 - i} className="bc-stack-item"
-                  initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
-                  {v}
-                </motion.div>
+  const dockPanels = useMemo(() => [
+    {
+      id: 'code',
+      title: 'Code',
+      content: (
+        <CodeTracePanel
+          step={step}
+          codeLines={SOLUTION_CODE}
+          highlightedLines={connectivity.highlightedLines}
+          onLineSelect={connectivity.handleLineSelect}
+          onActiveLineDomChange={setActiveLineDom}
+        />
+      ),
+    },
+    {
+      id: 'viz',
+      title: '🧮 Math Evaluator',
+      content: (
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
+          <div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+              {EXAMPLES.map(e => (
+                <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: '#f1f5f9' }}>
+                  {e.label}
+                </button>
               ))}
-            </AnimatePresence>
-            {stack.length === 0 && <span className="bc-empty">empty</span>}
+            </div>
           </div>
-        </div>
-        <div className="bc-panel bc-half">
-          <div className="bc-panel-label">State</div>
-          <div className="bc-state">
-            <div className="bc-state-row"><span className="bc-state-label">result</span><motion.span key={result} className="bc-state-val bc-result" initial={{ scale: 1.2 }} animate={{ scale: 1 }}>{result}</motion.span></div>
-            <div className="bc-state-row"><span className="bc-state-label">num</span><span className="bc-state-val">{num}</span></div>
-            <div className="bc-state-row"><span className="bc-state-label">sign</span><span className={`bc-state-val bc-sign ${sign > 0 ? "pos" : "neg"}`}>{sign > 0 ? "+1" : "−1"}</span></div>
-            <div className="bc-state-row"><span className="bc-state-label">phase</span><span className={`bc-state-val bc-phase ${phase}`}>{phase}</span></div>
+
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 4 }}>Expression</div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, minHeight: 40, padding: 8, backgroundColor: '#f8fafc', borderRadius: 4 }}>
+            {chars.map((ch, i) => (
+              <motion.span key={i} animate={{ scale: i === charIdx ? 1.4 : 1 }} style={{
+                fontSize: 14, fontWeight: 'bold', padding: '4px 8px',
+                backgroundColor: i === charIdx ? '#fbbf24' : /\d/.test(ch) ? '#dbeafe' : ch === '(' || ch === ')' ? '#fee2e2' : '#f3f4f6',
+                borderRadius: 4, color: '#1e293b'
+              }}>
+                {ch}
+              </motion.span>
+            ))}
           </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+            <div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 6 }}>Stack (top→bottom)</div>
+              <div style={{ display: 'flex', flexDirection: 'column-reverse', gap: 4, minHeight: 60, padding: 8, backgroundColor: '#f8fafc', borderRadius: 4 }}>
+                <AnimatePresence>
+                  {stack.map((v, i) => (
+                    <motion.div key={`${i}-${v}`} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }} style={{
+                      padding: '6px 10px', backgroundColor: '#dbeafe', border: '1px solid #0ea5e9', borderRadius: 4,
+                      fontSize: 12, fontWeight: 'bold', color: '#1e3a8a'
+                    }}>
+                      {v}
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+                {stack.length === 0 && <span style={{ color: '#64748b', fontSize: 12 }}>empty</span>}
+              </div>
+            </div>
+
+            <div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 6 }}>State</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 6, padding: 8, backgroundColor: '#f8fafc', borderRadius: 4 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12 }}>
+                  <span style={{ color: '#64748b' }}>result</span>
+                  <motion.span key={result} initial={{ scale: 1.3 }} animate={{ scale: 1 }} style={{ fontWeight: 'bold', color: '#0ea5e9' }}>{result}</motion.span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12 }}>
+                  <span style={{ color: '#64748b' }}>num</span>
+                  <span style={{ fontWeight: 'bold', color: '#1e293b' }}>{num}</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12 }}>
+                  <span style={{ color: '#64748b' }}>sign</span>
+                  <span style={{ fontWeight: 'bold', color: sign > 0 ? '#10b981' : '#ef4444' }}>{sign > 0 ? '+1' : '−1'}</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12 }}>
+                  <span style={{ color: '#64748b' }}>phase</span>
+                  <span style={{ fontWeight: 'bold', color: '#8b5cf6' }}>{phase}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {step?.done && <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #86efac', textAlign: 'center', fontWeight: 600, color: '#15803d' }}>✓ Result = {result}</div>}
         </div>
-      </div>
+      ),
+    },
+  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, stack, result, num, sign, charIdx, phase, chars, applyEx]);
 
-      {step?.done && <div className="bc-result-box">✓ Result = {result}</div>}
-
-      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-      <div className="bc-status">{step?.message ?? "Press Play to begin."}</div>
-      <PlaybackControls
-        isPlaying={isPlaying} isDone={isDone} speed={speed}
-        onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-        prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
-        onSpeedChange={e => setSpeed(Number(e.target.value))}
-        showPatternOverlay={showPatternOverlay}
-        onShowPatternOverlayChange={setShowPatternOverlay}
-        patternOverlayLabel="Show pattern overlay"
-        showPatternOverlayToggle
+  return (
+    <div className="problem-shell">
+      <DockableWorkspace
+        panels={dockPanels}
+        initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
       />
+      <FloatingPanel title="Playback Controls">
+        <PlaybackControls
+          isPlaying={isPlaying}
+          isDone={isDone}
+          speed={speed}
+          onPlayToggle={togglePlay}
+          onPrev={stepBack}
+          onNext={stepForward}
+          onReset={handleReset}
+          prevDisabled={stepIndex < 0}
+          nextDisabled={isDone}
+          resetDisabled={stepIndex < 0}
+          onSpeedChange={e => setSpeed(Number(e.target.value))}
+          showPatternOverlay={showPatternOverlay}
+          onShowPatternOverlayChange={setShowPatternOverlay}
+          patternOverlayLabel="Show pattern overlay"
+          showPatternOverlayToggle
+        />
+      </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   );
