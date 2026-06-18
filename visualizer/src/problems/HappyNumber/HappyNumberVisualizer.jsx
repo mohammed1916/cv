@@ -1,23 +1,16 @@
 import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from '../../config/examplesRegistry'
 import "./HappyNumberVisualizer.css";
-
-const SOLUTION_CODE = [
-  { line: 1, text: "def isHappy(n):" },
-  { line: 2, text: "    seen = set()" },
-  { line: 3, text: "    while n != 1:" },
-  { line: 4, text: "        if n in seen: return False" },
-  { line: 5, text: "        seen.add(n)" },
-  { line: 6, text: "        n = sum(d**2 for d in digits(n))" },
-  { line: 7, text: "    return True" },
-];
 
 const EXAMPLES = getExamples('happy-number');
 
@@ -52,8 +45,158 @@ function generateSteps(n) {
   return steps;
 }
 
+function JourneyPathVisualization({ chain, step, ex }) {
+  const maxChain = Math.max(...chain, 1);
+  const scale = 300 / maxChain;
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
+      {/* Path visualization */}
+      <svg width="100%" height="280" viewBox="0 0 400 280" style={{ border: '1px solid #e2e8f0', borderRadius: 8 }}>
+        {/* Grid background */}
+        {chain.map((v, i) => {
+          const x = 40 + (i * 350) / (chain.length - 1 || 1);
+          const y = 240 - v * scale;
+          const isCur = i === chain.length - 1;
+          const isHappy = v === 1;
+          const isCycle = step?.seen?.has(v) && !isHappy && isCur;
+
+          return (
+            <g key={i}>
+              {/* Connector line */}
+              {i < chain.length - 1 && (
+                <line
+                  x1={x}
+                  y1={y}
+                  x2={40 + ((i + 1) * 350) / (chain.length - 1)}
+                  y2={240 - chain[i + 1] * scale}
+                  stroke={isCycle ? '#ef4444' : '#cbd5e1'}
+                  strokeWidth="2"
+                />
+              )}
+
+              {/* Node */}
+              <motion.circle
+                cx={x}
+                cy={y}
+                r={isCur ? 18 : 14}
+                fill={isHappy ? '#10b981' : isCycle ? '#ef4444' : '#dbeafe'}
+                stroke={isHappy ? '#059669' : isCycle ? '#dc2626' : '#0ea5e9'}
+                strokeWidth={isCur ? 3 : 2}
+                animate={{ scale: isCur ? 1.2 : 1 }}
+                transition={{ duration: 0.2 }}
+              />
+              <text
+                x={x}
+                y={y}
+                textAnchor="middle"
+                dy="0.3em"
+                fontSize="13"
+                fontWeight="bold"
+                fill={isHappy || isCycle ? 'white' : '#1e3a8a'}
+              >
+                {v}
+              </text>
+
+              {/* Label */}
+              {i % 2 === 0 && (
+                <text x={x} y={y + 40} textAnchor="middle" fontSize="11" fill="#64748b">
+                  Step {i}
+                </text>
+              )}
+            </g>
+          );
+        })}
+
+        {/* Y-axis label */}
+        <text x="10" y="240" fontSize="11" fill="#64748b">
+          0
+        </text>
+        <text x="10" y="20" fontSize="11" fill="#64748b">
+          {Math.max(...chain)}
+        </text>
+      </svg>
+
+      {/* Stats */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+        <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '1px solid #86efac' }}>
+          <div style={{ fontSize: 11, color: '#65a30d' }}>Steps Taken</div>
+          <div style={{ fontSize: 18, fontWeight: 'bold', color: '#15803d' }}>{chain.length}</div>
+        </div>
+        <div style={{ padding: 12, backgroundColor: step?.result ? '#f0fdf4' : '#fef2f2', borderRadius: 6, border: step?.result ? '1px solid #86efac' : '1px solid #fecaca' }}>
+          <div style={{ fontSize: 11, color: step?.result ? '#65a30d' : '#b91c1c' }}>
+            {step?.result ? '✓ Happy!' : step?.result === false ? '✗ Cycle' : 'In Progress'}
+          </div>
+          <div style={{ fontSize: 14, fontWeight: 'bold', color: step?.result ? '#15803d' : '#991b1b' }}>
+            {step?.cur ?? ex.n}
+          </div>
+        </div>
+      </div>
+
+      {/* Transformation */}
+      {step?.squaredExpr && (
+        <div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, border: '1px solid #fcd34d', fontFamily: 'monospace', fontSize: 12 }}>
+          {step.cur} → {step.squaredExpr} = <strong>{step.next}</strong>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function VisualizationPanel({ chain, step, ex, applyEx }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
+      <div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+          {EXAMPLES.map(e => (
+            <button
+              key={e.label}
+              onClick={() => applyEx(e)}
+              style={{
+                padding: '6px 12px',
+                borderRadius: 4,
+                border: '1px solid #cbd5e1',
+                cursor: 'pointer',
+                fontSize: 12,
+                backgroundColor: '#f1f5f9'
+              }}
+            >
+              {e.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <JourneyPathVisualization chain={chain} step={step} ex={ex} />
+
+      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Visited Numbers</div>
+      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+        {[...(step?.seen ?? [])].map(v => (
+          <div
+            key={v}
+            style={{
+              padding: '4px 8px',
+              borderRadius: 4,
+              backgroundColor: step?.cur === v && step?.result === false ? '#fee2e2' : '#e2e8f0',
+              border: step?.cur === v && step?.result === false ? '1px solid #ef4444' : '1px solid #cbd5e1',
+              fontSize: 12,
+              fontWeight: 'bold',
+              color: step?.cur === v && step?.result === false ? '#991b1b' : '#1e293b'
+            }}
+          >
+            {v}
+          </div>
+        ))}
+        {(step?.seen?.size ?? 0) === 0 && <span style={{ color: '#64748b', fontSize: 12 }}>—</span>}
+      </div>
+    </div>
+  );
+}
+
 export default function HappyNumberVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
+  const SOLUTION_CODE = useSolutionCode('happy-number');
   const steps = useMemo(
     () =>
       generateSteps(ex.n).map((current) => ({
@@ -75,86 +218,59 @@ export default function HappyNumberVisualizer() {
 
   const chain = step?.chain ?? [ex.n];
 
+  const dockPanels = useMemo(() => [
+    {
+      id: 'code',
+      title: 'Code',
+      content: (
+        <CodeTracePanel
+          step={step}
+          codeLines={SOLUTION_CODE}
+          highlightedLines={connectivity.highlightedLines}
+          onLineSelect={connectivity.handleLineSelect}
+          onActiveLineDomChange={setActiveLineDom}
+        />
+      ),
+    },
+    {
+      id: 'viz',
+      title: '🎯 Journey',
+      content: (
+        <VisualizationPanel
+          chain={chain}
+          step={step}
+          ex={ex}
+          applyEx={applyEx}
+        />
+      ),
+    },
+  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, chain, ex, applyEx]);
+
   return (
-    <div className="hn-shell">
-      <div className="hn-examples">
-        {EXAMPLES.map(e => (
-          <button key={e.label} className={`hn-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>{e.label}</button>
-        ))}
-      </div>
-
-      {/* Chain */}
-      <div className="hn-panel">
-        <div className="hn-panel-label">Transformation chain</div>
-        <div className="hn-chain">
-          <AnimatePresence mode="popLayout">
-            {chain.map((v, i) => {
-              const isCur = i === chain.length - 1;
-              const isSeen = step?.seen?.has(v) && !isCur;
-              const isOne = v === 1;
-              return (
-                <motion.div key={`${i}-${v}`} className="hn-chain-item"
-                  initial={{ opacity: 0, scale: 0.5, x: -10 }}
-                  animate={{ opacity: 1, scale: 1, x: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 22 }}>
-                  <div className={`hn-node ${isCur ? "cur" : ""} ${isOne ? "one" : ""} ${isSeen && isCur ? "cycle" : ""}`}>
-                    {v}
-                  </div>
-                  {i < chain.length - 1 && <span className="hn-arrow">→</span>}
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
-        </div>
-      </div>
-
-      {/* Seen set */}
-      <div className="hn-panel">
-        <div className="hn-panel-label">Seen set</div>
-        <div className="hn-seen">
-          <AnimatePresence mode="popLayout">
-            {[...(step?.seen ?? [])].map(v => (
-              <motion.div key={v} className={`hn-seen-item ${step?.cur === v && step?.result === false ? "cycle" : ""}`}
-                initial={{ opacity: 0, scale: 0.6 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}>
-                {v}
-              </motion.div>
-            ))}
-          </AnimatePresence>
-          {(step?.seen?.size ?? 0) === 0 && <span className="hn-empty">empty</span>}
-        </div>
-      </div>
-
-      {step?.squaredExpr && (
-        <div className="hn-expr">{step.cur} → {step.squaredExpr} = {step.next}</div>
-      )}
-
-      {step?.result != null && (
-        <div className={`hn-result ${step.result ? "happy" : "sad"}`}>
-          {step.result ? `✓ ${ex.n} is a Happy Number` : `✗ ${ex.n} is NOT a Happy Number (cycle detected)`}
-        </div>
-      )}
-
-      <CodeTracePanel
-        step={step}
-        codeLines={SOLUTION_CODE}
-        highlightedLines={connectivity.highlightedLines}
-        onLineSelect={connectivity.handleLineSelect}
-        onActiveLineDomChange={setActiveLineDom}
+    <div className="problem-shell">
+      <DockableWorkspace
+        panels={dockPanels}
+        initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
       />
-      <div className="hn-status">{step?.message ?? "Press Play to begin."}</div>
-      <PlaybackControls
-        isPlaying={isPlaying} isDone={isDone} speed={speed}
-        onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-        prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
-        onSpeedChange={e => setSpeed(Number(e.target.value))}
-        showPatternOverlay={showPatternOverlay}
-        onShowPatternOverlayChange={setShowPatternOverlay}
-        patternOverlayLabel="Show pattern overlay"
-        showPatternOverlayToggle
-      />
+      <FloatingPanel title="Playback Controls">
+        <PlaybackControls
+          isPlaying={isPlaying}
+          isDone={isDone}
+          speed={speed}
+          onPlayToggle={togglePlay}
+          onPrev={stepBack}
+          onNext={stepForward}
+          onReset={handleReset}
+          prevDisabled={stepIndex < 0}
+          nextDisabled={isDone}
+          resetDisabled={stepIndex < 0}
+          onSpeedChange={e => setSpeed(Number(e.target.value))}
+          showPatternOverlay={showPatternOverlay}
+          onShowPatternOverlayChange={setShowPatternOverlay}
+          patternOverlayLabel="Show pattern overlay"
+          showPatternOverlayToggle
+        />
+      </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   );

@@ -133,6 +133,85 @@ export const SOLUTION_CODE_REGISTRY = {
     { line: 20, text: '        return s[l:r+1] if best found else ""' },
   ],
 
+  'rotate-array': [
+    { line: 1, text: 'def rotate(nums, k):' },
+    { line: 2, text: '    k %= len(nums)' },
+    { line: 3, text: '    def rev(l, r):' },
+    { line: 4, text: '        while l < r:' },
+    { line: 5, text: '            nums[l], nums[r] = nums[r], nums[l]' },
+    { line: 6, text: '            l += 1; r -= 1' },
+    { line: 7, text: '    rev(0, len(nums)-1)   # reverse all' },
+    { line: 8, text: '    rev(0, k-1)           # reverse first k' },
+    { line: 9, text: '    rev(k, len(nums)-1)   # reverse rest' },
+  ],
+
+  'gas-station': [
+    { line: 1, text: 'def canCompleteCircuit(gas, cost):' },
+    { line: 2, text: '    total, tank, start = 0, 0, 0' },
+    { line: 3, text: '    for i in range(len(gas)):' },
+    { line: 4, text: '        diff = gas[i] - cost[i]' },
+    { line: 5, text: '        total += diff' },
+    { line: 6, text: '        tank += diff' },
+    { line: 7, text: '        if tank < 0:' },
+    { line: 8, text: '            start = i + 1' },
+    { line: 9, text: '            tank = 0' },
+    { line: 10, text: '    return start if total >= 0 else -1' },
+  ],
+
+  'happy-number': [
+    { line: 1, text: 'def isHappy(n):' },
+    { line: 2, text: '    seen = set()' },
+    { line: 3, text: '    while n != 1:' },
+    { line: 4, text: '        if n in seen: return False' },
+    { line: 5, text: '        seen.add(n)' },
+    { line: 6, text: '        n = sum(d**2 for d in digits(n))' },
+    { line: 7, text: '    return True' },
+  ],
+
+  'single-number': [
+    { line: 1, text: 'def singleNumber(nums):' },
+    { line: 2, text: '    result = 0' },
+    { line: 3, text: '    for n in nums:' },
+    { line: 4, text: '        result ^= n' },
+    { line: 5, text: '    return result' },
+  ],
+
+  'sort-colors': [
+    { line: 1, text: 'def sortColors(nums):' },
+    { line: 2, text: '    lo, mid, hi = 0, 0, len(nums)-1' },
+    { line: 3, text: '    while mid <= hi:' },
+    { line: 4, text: '        if nums[mid] == 0:' },
+    { line: 5, text: '            nums[lo], nums[mid] = nums[mid], nums[lo]' },
+    { line: 6, text: '            lo += 1; mid += 1' },
+    { line: 7, text: '        elif nums[mid] == 1:' },
+    { line: 8, text: '            mid += 1' },
+    { line: 9, text: '        else:  # nums[mid] == 2' },
+    { line: 10, text: '            nums[mid], nums[hi] = nums[hi], nums[mid]' },
+    { line: 11, text: '            hi -= 1' },
+  ],
+
+  'pascals-triangle': [
+    { line: 1, text: 'def generate(numRows):' },
+    { line: 2, text: '    triangle = [[1]]' },
+    { line: 3, text: '    for i in range(1, numRows):' },
+    { line: 4, text: '        prev = triangle[i - 1]' },
+    { line: 5, text: '        row = [1]' },
+    { line: 6, text: '        for j in range(1, i):' },
+    { line: 7, text: '            row.append(prev[j-1] + prev[j])' },
+    { line: 8, text: '        row.append(1)' },
+    { line: 9, text: '        triangle.append(row)' },
+    { line: 10, text: '    return triangle' },
+  ],
+
+  'reverse-string': [
+    { line: 1, text: 'def reverseString(s):' },
+    { line: 2, text: '    l, r = 0, len(s) - 1' },
+    { line: 3, text: '    while l < r:' },
+    { line: 4, text: '        s[l], s[r] = s[r], s[l]' },
+    { line: 5, text: '        l += 1' },
+    { line: 6, text: '        r -= 1' },
+  ],
+
   // Add more problems here...
 };
 

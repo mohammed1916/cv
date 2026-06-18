@@ -1,25 +1,16 @@
 import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
+import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from '../../config/examplesRegistry'
 import "./GasStationVisualizer.css";
-
-const SOLUTION_CODE = [
-  { line: 1, text: "def canCompleteCircuit(gas, cost):" },
-  { line: 2, text: "    total, tank, start = 0, 0, 0" },
-  { line: 3, text: "    for i in range(len(gas)):" },
-  { line: 4, text: "        diff = gas[i] - cost[i]" },
-  { line: 5, text: "        total += diff" },
-  { line: 6, text: "        tank += diff" },
-  { line: 7, text: "        if tank < 0:" },
-  { line: 8, text: "            start = i + 1" },
-  { line: 9, text: "            tank = 0" },
-  { line: 10, text: "    return start if total >= 0 else -1" },
-];
 
 const EXAMPLES = getExamples('gas-station');
 
@@ -45,78 +36,207 @@ function generateSteps(gas, cost) {
   return steps;
 }
 
+function RoadJourneyVisualization({ gas, cost, step }) {
+  const currentI = step?.i ?? -1;
+  const startPos = step?.start ?? 0;
+  const tankLevel = Math.max(0, step?.tank ?? 0);
+  const maxTank = Math.max(...gas) + 10;
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
+      {/* Road visualization */}
+      <div style={{ position: 'relative', height: 140 }}>
+        <div style={{
+          position: 'absolute',
+          top: '50%',
+          left: 0,
+          right: 0,
+          height: 4,
+          backgroundColor: '#d4af37',
+          transform: 'translateY(-50%)',
+          borderRadius: 2
+        }} />
+
+        {/* Stations */}
+        {gas.map((g, i) => {
+          const isStart = i === startPos;
+          const isCurrent = i === currentI;
+          const x = (i / (gas.length - 1 || 1)) * 100;
+
+          return (
+            <div key={i} style={{ position: 'absolute', left: `${x}%`, top: '50%', transform: 'translate(-50%, -50%)' }}>
+              <motion.div
+                animate={{ scale: isCurrent ? 1.3 : isStart ? 1.15 : 1, y: isCurrent ? -20 : 0 }}
+                transition={{ duration: 0.3 }}
+                style={{
+                  width: 32,
+                  height: 32,
+                  borderRadius: '50%',
+                  backgroundColor: isStart ? '#10b981' : '#3b82f6',
+                  border: isCurrent ? '3px solid #fbbf24' : '2px solid white',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: 16,
+                  boxShadow: isCurrent ? '0 0 12px #fbbf24' : 'none',
+                  color: 'white'
+                }}
+              >
+                {isStart && !isCurrent ? '🚗' : isCurrent ? '⛽' : i}
+              </motion.div>
+              <div style={{ marginTop: 8, fontSize: 11, textAlign: 'center', color: '#64748b' }}>
+                <div>gas:{g}</div>
+                <div>cost:{cost[i]}</div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Fuel tank gauge */}
+      <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+        <div style={{ fontSize: 12, fontWeight: 600, width: 50 }}>Tank:</div>
+        <div style={{
+          flex: 1,
+          height: 28,
+          backgroundColor: '#e2e8f0',
+          borderRadius: 4,
+          overflow: 'hidden',
+          position: 'relative'
+        }}>
+          <motion.div
+            animate={{ width: `${(tankLevel / maxTank) * 100}%` }}
+            transition={{ duration: 0.3 }}
+            style={{
+              height: '100%',
+              backgroundColor: tankLevel < 0 ? '#ef4444' : '#3b82f6',
+              borderRadius: 4
+            }}
+          />
+          <div style={{
+            position: 'absolute',
+            left: '50%',
+            top: '50%',
+            transform: 'translate(-50%, -50%)',
+            fontSize: 12,
+            fontWeight: 600,
+            color: '#1e293b',
+            pointerEvents: 'none'
+          }}>
+            {tankLevel.toFixed(0)}
+          </div>
+        </div>
+      </div>
+
+      {/* Stats */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+        <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '1px solid #86efac' }}>
+          <div style={{ fontSize: 11, color: '#65a30d' }}>Total Balance</div>
+          <div style={{ fontSize: 18, fontWeight: 'bold', color: '#15803d' }}>{step?.total ?? 0}</div>
+        </div>
+        <div style={{ padding: 12, backgroundColor: '#eff6ff', borderRadius: 6, border: '1px solid #93c5fd' }}>
+          <div style={{ fontSize: 11, color: '#1e40af' }}>Current Tank</div>
+          <div style={{ fontSize: 18, fontWeight: 'bold', color: '#1e3a8a' }}>{tankLevel.toFixed(0)}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function VisualizationPanel({ gas, cost, step, applyEx }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
+      <div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+          {EXAMPLES.map(e => (
+            <button
+              key={e.label}
+              onClick={() => applyEx(e)}
+              style={{
+                padding: '6px 12px',
+                borderRadius: 4,
+                border: '1px solid #cbd5e1',
+                cursor: 'pointer',
+                fontSize: 12,
+                backgroundColor: '#f1f5f9'
+              }}
+            >
+              {e.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <RoadJourneyVisualization gas={gas} cost={cost} step={step} />
+    </div>
+  );
+}
+
 export default function GasStationVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
+  const SOLUTION_CODE = useSolutionCode('gas-station');
   const steps = useMemo(() => generateSteps(ex.gas, ex.cost), [ex]);
-  const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
+  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
   const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
-  const n = ex.gas.length;
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
+
+  const dockPanels = useMemo(() => [
+    {
+      id: 'code',
+      title: 'Code',
+      content: (
+        <CodeTracePanel
+          step={step}
+          codeLines={SOLUTION_CODE}
+          highlightedLines={connectivity.highlightedLines}
+          onLineSelect={connectivity.handleLineSelect}
+          onActiveLineDomChange={setActiveLineDom}
+        />
+      ),
+    },
+    {
+      id: 'viz',
+      title: '🚗 Road Trip',
+      content: (
+        <VisualizationPanel
+          gas={ex.gas}
+          cost={ex.cost}
+          step={step}
+          applyEx={applyEx}
+        />
+      ),
+    },
+  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx]);
 
   return (
-    <div className="gs-shell">
-      <div className="gs-examples">
-        {EXAMPLES.map((e) => (
-          <button key={e.label} className={`gs-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>{e.label}</button>
-        ))}
-      </div>
-
-      {/* Circular stations */}
-      <div className="gs-panel">
-        <div className="gs-panel-label">Stations (gas / cost)</div>
-        <div className="gs-stations">
-          {ex.gas.map((g, i) => {
-            const isCur = step?.i === i;
-            const isStart = step?.start === i;
-            return (
-              <motion.div key={i} className={`gs-station ${isCur ? "cur" : ""} ${isStart ? "start" : ""}`}
-                animate={{ scale: isCur ? 1.15 : 1, y: isCur ? -4 : 0 }}
-                transition={{ type: "spring", stiffness: 400, damping: 22 }}>
-                <div className="gs-idx">#{i}</div>
-                <div className="gs-gas">⛽{g}</div>
-                <div className="gs-cost">🏎️{ex.cost[i]}</div>
-                <div className={`gs-diff ${g - ex.cost[i] >= 0 ? "pos" : "neg"}`}>{g - ex.cost[i] >= 0 ? "+" : ""}{g - ex.cost[i]}</div>
-                {isStart && <div className="gs-start-flag">start</div>}
-              </motion.div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Trackers */}
-      <div className="gs-trackers">
-        {[
-          { label: "total", val: step?.total ?? 0 },
-          { label: "tank", val: step?.tank ?? 0 },
-          { label: "start", val: step?.start ?? 0 },
-        ].map(({ label, val }) => (
-          <div key={label} className="gs-tracker">
-            <span className="gs-tracker-label">{label}</span>
-            <motion.span key={val} className="gs-tracker-val" initial={{ scale: 1.3, color: "#fab387" }} animate={{ scale: 1, color: "#cdd6f4" }} transition={{ duration: 0.3 }}>{val}</motion.span>
-          </div>
-        ))}
-      </div>
-
-      {step?.result != null && (
-        <div className={`gs-result ${step.result >= 0 ? "ok" : "fail"}`}>
-          {step.result >= 0 ? `✓ Start at station ${step.result}` : "✗ Cannot complete circuit (return -1)"}
-        </div>
-      )}
-
-      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-      <div className="gs-status">{step?.message ?? "Press Play to begin."}</div>
-      <PlaybackControls
-        isPlaying={isPlaying} isDone={isDone} speed={speed}
-        onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-        prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
-        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-        showPatternOverlay={showPatternOverlay}
-        onShowPatternOverlayChange={setShowPatternOverlay}
-        patternOverlayLabel="Show pattern overlay"
-        showPatternOverlayToggle
+    <div className="problem-shell">
+      <DockableWorkspace
+        panels={dockPanels}
+        initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
       />
+      <FloatingPanel title="Playback Controls">
+        <PlaybackControls
+          isPlaying={isPlaying}
+          isDone={isDone}
+          speed={speed}
+          onPlayToggle={togglePlay}
+          onPrev={stepBack}
+          onNext={stepForward}
+          onReset={handleReset}
+          prevDisabled={stepIndex < 0}
+          nextDisabled={isDone}
+          resetDisabled={stepIndex < 0}
+          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+          showPatternOverlay={showPatternOverlay}
+          onShowPatternOverlayChange={setShowPatternOverlay}
+          patternOverlayLabel="Show pattern overlay"
+          showPatternOverlayToggle
+        />
+      </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   );

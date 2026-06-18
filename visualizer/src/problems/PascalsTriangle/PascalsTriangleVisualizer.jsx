@@ -1,25 +1,16 @@
 import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
+import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from '../../config/examplesRegistry'
 import "./PascalsTriangleVisualizer.css";
-
-const SOLUTION_CODE = [
-  { line: 1, text: "def generate(numRows):" },
-  { line: 2, text: "    triangle = [[1]]" },
-  { line: 3, text: "    for i in range(1, numRows):" },
-  { line: 4, text: "        prev = triangle[i - 1]" },
-  { line: 5, text: "        row = [1]" },
-  { line: 6, text: "        for j in range(1, i):" },
-  { line: 7, text: "            row.append(prev[j-1] + prev[j])" },
-  { line: 8, text: "        row.append(1)" },
-  { line: 9, text: "        triangle.append(row)" },
-  { line: 10, text: "    return triangle" },
-];
 
 const EXAMPLES = getExamples('pascals-triangle');
 
@@ -51,79 +42,226 @@ function generateSteps(numRows) {
   return steps;
 }
 
-export default function PascalsTriangleVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => generateSteps(ex.numRows), [ex]);
-  const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
-    usePlaybackState(steps.length);
-  const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
-  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
-
-  const triangle = step?.triangle ?? [[1]];
+function PyramidVisualization({ triangle, step, ex }) {
   const curRow = step?.curRow ?? -1;
   const building = step?.building ?? null;
 
   return (
-    <div className="pt-shell">
-      <div className="pt-examples">
-        {EXAMPLES.map(e => (
-          <button key={e.label} className={`pt-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>{e.label}</button>
-        ))}
-      </div>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20, padding: 16 }}>
+      <svg width="100%" height="400" viewBox="0 0 400 400" style={{ border: '1px solid #e2e8f0', borderRadius: 8 }}>
+        {triangle.map((row, ri) => {
+          const totalWidth = ex.numRows * 30;
+          const startX = (400 - (row.length * 30)) / 2;
+          const y = 50 + ri * 35;
 
-      <div className="pt-panel">
-        <div className="pt-panel-label">Pascal's Triangle</div>
-        <div className="pt-triangle">
-          {triangle.map((row, ri) => (
-            <div key={ri} className="pt-row">
+          return (
+            <g key={ri}>
               {row.map((v, ci) => {
+                const x = startX + ci * 30;
                 const isPrev = ri === curRow - 1 && step?.prevJ && (ci === step.prevJ[0] || ci === step.prevJ[1]);
+                const isCur = ri === curRow && ci < (building?.length ?? 0);
+
                 return (
-                  <motion.div key={`${ri}-${ci}`}
-                    className={`pt-cell ${ri === curRow ? "cur-row" : ""} ${isPrev ? "prev" : ""}`}
-                    initial={{ scale: 0.5, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 22, delay: ci * 0.03 }}>
-                    {v}
-                  </motion.div>
+                  <motion.g
+                    key={`${ri}-${ci}`}
+                    initial={{ scale: 0.4, opacity: 0, y: -20 }}
+                    animate={{ scale: 1, opacity: 1, y: 0 }}
+                    transition={{ delay: ci * 0.05, duration: 0.3 }}
+                  >
+                    <rect
+                      x={x - 12}
+                      y={y - 12}
+                      width={24}
+                      height={24}
+                      rx={4}
+                      fill={isPrev ? '#fbbf24' : isCur ? '#3b82f6' : '#dbeafe'}
+                      stroke={isPrev ? '#f59e0b' : isCur ? '#0ea5e9' : '#cbd5e1'}
+                      strokeWidth={isPrev || isCur ? '2' : '1'}
+                    />
+                    <text
+                      x={x}
+                      y={y}
+                      textAnchor="middle"
+                      dy="0.3em"
+                      fontSize="12"
+                      fontWeight="bold"
+                      fill={isPrev || isCur ? 'white' : '#1e3a8a'}
+                    >
+                      {v}
+                    </text>
+                  </motion.g>
                 );
               })}
-            </div>
-          ))}
-          {/* Building row preview */}
-          {building && curRow === triangle.length && (
-            <div className="pt-row building">
-              {building.map((v, ci) => (
-                <motion.div key={`b-${ci}`} className="pt-cell building"
-                  initial={{ scale: 0.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 22 }}>
-                  {v}
-                </motion.div>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
+            </g>
+          );
+        })}
+
+        {/* Building row */}
+        {building && curRow === triangle.length && (
+          <g>
+            {building.map((v, ci) => {
+              const row = building;
+              const startX = (400 - (row.length * 30)) / 2;
+              const y = 50 + curRow * 35;
+              const x = startX + ci * 30;
+
+              return (
+                <motion.g
+                  key={`building-${ci}`}
+                  initial={{ scale: 0.3, opacity: 0, y: -30 }}
+                  animate={{ scale: 1, opacity: 1, y: 0 }}
+                  transition={{ delay: ci * 0.08, duration: 0.4 }}
+                >
+                  <rect
+                    x={x - 12}
+                    y={y - 12}
+                    width={24}
+                    height={24}
+                    rx={4}
+                    fill="#10b981"
+                    stroke="#059669"
+                    strokeWidth="2"
+                  />
+                  <text
+                    x={x}
+                    y={y}
+                    textAnchor="middle"
+                    dy="0.3em"
+                    fontSize="12"
+                    fontWeight="bold"
+                    fill="white"
+                  >
+                    {v}
+                  </text>
+                </motion.g>
+              );
+            })}
+          </g>
+        )}
+
+        {/* Row labels */}
+        {triangle.map((row, ri) => (
+          <text key={`label-${ri}`} x="10" y={50 + ri * 35 + 4} fontSize="11" fill="#94a3b8">
+            R{ri}
+          </text>
+        ))}
+      </svg>
 
       {step?.sum != null && (
-        <div className="pt-sum-expr">
-          {step.prevJ[0] !== undefined && `prev[${step.prevJ[0]}] + prev[${step.prevJ[1]}] = ${step.sum}`}
+        <div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, border: '1px solid #fcd34d' }}>
+          <div style={{ fontSize: 12, fontFamily: 'monospace', color: '#92400e' }}>
+            {step.prevJ?.[0] !== undefined && (
+              <>
+                prev[{step.prevJ[0]}] + prev[{step.prevJ[1]}] = <strong>{step.sum}</strong>
+              </>
+            )}
+          </div>
         </div>
       )}
 
-      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-      <div className="pt-status">{step?.message ?? "Press Play to begin."}</div>
-      <PlaybackControls
-        isPlaying={isPlaying} isDone={isDone} speed={speed}
-        onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-        prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
-        onSpeedChange={e => setSpeed(Number(e.target.value))}
-        showPatternOverlay={showPatternOverlay}
-        onShowPatternOverlayChange={setShowPatternOverlay}
-        patternOverlayLabel="Show pattern overlay"
-        showPatternOverlayToggle
+      <div style={{ fontSize: 12, color: '#64748b', textAlign: 'center' }}>
+        Building row {curRow} • {curRow + 1} element{curRow !== 0 ? 's' : ''}
+      </div>
+    </div>
+  );
+}
+
+function VisualizationPanel({ triangle, step, ex, applyEx }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
+      <div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+          {EXAMPLES.map(e => (
+            <button
+              key={e.label}
+              onClick={() => applyEx(e)}
+              style={{
+                padding: '6px 12px',
+                borderRadius: 4,
+                border: '1px solid #cbd5e1',
+                cursor: 'pointer',
+                fontSize: 12,
+                backgroundColor: '#f1f5f9'
+              }}
+            >
+              {e.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <PyramidVisualization triangle={triangle} step={step} ex={ex} />
+    </div>
+  );
+}
+
+export default function PascalsTriangleVisualizer() {
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const SOLUTION_CODE = useSolutionCode('pascals-triangle');
+  const steps = useMemo(() => generateSteps(ex.numRows), [ex]);
+  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
+    usePlaybackState(steps.length);
+  const step = stepIndex >= 0 ? steps[stepIndex] : null;
+  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
+
+  const triangle = step?.triangle ?? [[1]];
+
+  const dockPanels = useMemo(() => [
+    {
+      id: 'code',
+      title: 'Code',
+      content: (
+        <CodeTracePanel
+          step={step}
+          codeLines={SOLUTION_CODE}
+          highlightedLines={connectivity.highlightedLines}
+          onLineSelect={connectivity.handleLineSelect}
+          onActiveLineDomChange={setActiveLineDom}
+        />
+      ),
+    },
+    {
+      id: 'viz',
+      title: '🏗️ Pyramid',
+      content: (
+        <VisualizationPanel
+          triangle={triangle}
+          step={step}
+          ex={ex}
+          applyEx={applyEx}
+        />
+      ),
+    },
+  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, triangle, ex, applyEx]);
+
+  return (
+    <div className="problem-shell">
+      <DockableWorkspace
+        panels={dockPanels}
+        initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
       />
+      <FloatingPanel title="Playback Controls">
+        <PlaybackControls
+          isPlaying={isPlaying}
+          isDone={isDone}
+          speed={speed}
+          onPlayToggle={togglePlay}
+          onPrev={stepBack}
+          onNext={stepForward}
+          onReset={handleReset}
+          prevDisabled={stepIndex < 0}
+          nextDisabled={isDone}
+          resetDisabled={stepIndex < 0}
+          onSpeedChange={e => setSpeed(Number(e.target.value))}
+          showPatternOverlay={showPatternOverlay}
+          onShowPatternOverlayChange={setShowPatternOverlay}
+          patternOverlayLabel="Show pattern overlay"
+          showPatternOverlayToggle
+        />
+      </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   );
