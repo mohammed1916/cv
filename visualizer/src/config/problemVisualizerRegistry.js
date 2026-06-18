@@ -84,6 +84,21 @@ const SOLVED_SLUGS = new Set([
   'remove-nth-node-from-end-of-list',
   'valid-parentheses',
   'swap-nodes-in-pairs',
+  'regular-expression-matching',
+  'merge-two-sorted-lists',
+  'remove-element',
+  'find-the-index-of-the-first-occurrence-in-a-string',
+  'divide-two-integers',
+  'next-permutation',
+  'longest-valid-parentheses',
+  'find-first-and-last-position-of-element-in-sorted-array',
+  'search-insert-position',
+  'valid-sudoku',
+  'sudoku-solver',
+  'count-and-say',
+  'combination-sum-ii',
+  'trapping-rain-water',
+  'jump-game-ii',
   // Add all other 200+ solved problems...
 ])
 
