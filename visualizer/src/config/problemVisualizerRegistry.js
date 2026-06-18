@@ -65,20 +65,19 @@ const SOLVED_SLUGS = new Set([
   'accounts-merge',
   'binary-search-tree-iterator',
   'koko-eating-bananas',
+  'binary-tree-paths',
+  'evaluate-division',
+  'max-area-of-island',
+  'network-delay-time',
+  'number-of-provinces',
+  'perfect-squares',
+  'sum-of-two-integers',
+  'task-scheduler',
   // Add all other 200+ solved problems...
 ])
 
-// ✗ NOT_SOLVED - Problems still needing visualizers
-const NOT_SOLVED = [
-  { number: '257', title: 'Binary Tree Paths', slug: 'binary-tree-paths', difficulty: 'Easy', tags: ['Tree', 'DFS'] },
-  { number: '399', title: 'Evaluate Division', slug: 'evaluate-division', difficulty: 'Medium', tags: ['Graph', 'DFS'] },
-  { number: '695', title: 'Max Area of Island', slug: 'max-area-of-island', difficulty: 'Medium', tags: ['Graph', 'BFS'] },
-  { number: '743', title: 'Network Delay Time', slug: 'network-delay-time', difficulty: 'Medium', tags: ['Graph', 'Dijkstra'] },
-  { number: '547', title: 'Number of Provinces', slug: 'number-of-provinces', difficulty: 'Medium', tags: ['Union-Find', 'Graph'] },
-  { number: '279', title: 'Perfect Squares', slug: 'perfect-squares', difficulty: 'Medium', tags: ['DP', 'Math'] },
-  { number: '371', title: 'Sum of Two Integers', slug: 'sum-of-two-integers', difficulty: 'Medium', tags: ['Bit Manipulation'] },
-  { number: '621', title: 'Task Scheduler', slug: 'task-scheduler', difficulty: 'Medium', tags: ['Greedy', 'Array'] },
-]
+// ✗ NOT_SOLVED - All problems now solved!
+const NOT_SOLVED = []
 
 /**
  * Check if a problem has a visualizer (SOLVED)

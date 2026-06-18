@@ -4,8 +4,12 @@ import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
-import { useAutoScroll } from '../../hooks/useAutoScroll'
+import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
+import { useSolutionCode } from '../../hooks/useSolutionCode'
+import { getExamples } from '../../config/examplesRegistry'
 import './TaskSchedulerVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -15,9 +19,14 @@ const SOLUTION_CODE = [
     { line: 4, text: '        freq[task] = freq.get(task, 0) + 1' },
     { line: 5, text: '    max_freq = max(freq.values())' },
     { line: 6, text: '    max_count = sum(1 for f in freq.values() if f == max_freq)' },
-    { line: 7, text: '    # (maxFreq - 1) * (n + 1) + maxCount' },
-    { line: 8, text: '    formula_result = (max_freq - 1) * (n + 1) + max_count' },
-    { line: 9, text: '    return max(len(tasks), formula_result)' },
+    { line: 7, text: '    formula_result = (max_freq - 1) * (n + 1) + max_count' },
+    { line: 8, text: '    return max(len(tasks), formula_result)' },
+]
+
+const EXAMPLES = getExamples('task-scheduler') || [
+    { label: 'Example 1', tasks: ['A', 'A', 'A', 'B', 'B', 'B'], n: 2 },
+    { label: 'Example 2', tasks: ['A', 'A', 'A', 'B', 'B', 'B', 'C', 'C', 'C'], n: 3 },
+    { label: 'Example 3', tasks: ['A', 'B', 'C', 'D', 'E'], n: 2 },
 ]
 
 function generateSteps(tasks, n) {
@@ -59,13 +68,13 @@ function generateSteps(tasks, n) {
     const result = Math.max(tasks.length, formulaResult)
 
     steps.push({
-        activeLine: 8,
+        activeLine: 7,
         state: { freq: { ...freq }, maxFreq, maxCount, n, formulaResult, phase: 'formula' },
         message: `Formula: (${maxFreq} - 1) × (${n} + 1) + ${maxCount} = ${formulaResult}`,
     })
 
     steps.push({
-        activeLine: 9,
+        activeLine: 8,
         state: { freq: { ...freq }, maxFreq, maxCount, n, formulaResult, result, phase: 'done' },
         message: `Result: max(${tasks.length}, ${formulaResult}) = ${result}`,
     })
@@ -104,6 +113,41 @@ function TaskFrequencyViz({ step }) {
                     ))
                 )}
             </div>
+        </div>
+    )
+}
+
+function TimelineViz({ tasks, n, step }) {
+    if (!step || !step.state) return <div className="tsv-empty">Press Play to begin</div>
+
+    const { maxFreq = 0 } = step.state
+    const scheduleLength = Math.max(tasks.length, (maxFreq - 1) * (n + 1) + 1)
+    const timeline = Array.from({ length: Math.min(scheduleLength, 30) }, (_, i) => {
+        const taskAtIndex = i < tasks.length ? tasks[i] : null
+        return { index: i, task: taskAtIndex }
+    })
+
+    return (
+        <div className="tsv-timeline-container">
+            <div className="tsv-timeline-header">
+                <span className="tsv-timeline-label">Scheduling Timeline</span>
+                <span className="tsv-timeline-info">Cooldown = {n} units</span>
+            </div>
+            <div className="tsv-timeline">
+                {timeline.map((slot, idx) => (
+                    <motion.div
+                        key={idx}
+                        className={`tsv-timeline-slot ${slot.task ? 'filled' : 'empty'}`}
+                        animate={{ opacity: 1, scale: 1 }}
+                        initial={{ opacity: 0.6, scale: 0.9 }}
+                        transition={{ delay: idx * 0.02 }}
+                    >
+                        <div className="tsv-slot-content">{slot.task || '·'}</div>
+                        <div className="tsv-slot-index">{slot.index}</div>
+                    </motion.div>
+                ))}
+            </div>
+            <div className="tsv-timeline-note">Greedy scheduling minimizes idle slots</div>
         </div>
     )
 }
@@ -203,22 +247,15 @@ function InputPanel({ tasks, n, setTasks, setN, applyExample }) {
         }
     }
 
-    const examples = [
-        { label: 'Example 1', tasks: ['A', 'A', 'A', 'B', 'B', 'B'] },
-        { label: 'Example 2', tasks: ['A', 'A', 'A', 'B', 'B', 'B', 'C', 'C', 'C'] },
-        { label: 'Example 3', tasks: ['A', 'B', 'C', 'D', 'E'] },
-    ]
-
     return (
         <div className="tsv-input-panel">
             <div className="tsv-examples">
-                {examples.map((ex) => (
+                {EXAMPLES.map((ex, idx) => (
                     <motion.button
-                        key={ex.label}
+                        key={`${ex.label}-${idx}`}
                         className="tsv-chip"
                         onClick={() => {
-                            setTasks(ex.tasks)
-                            setN(2)
+                            applyExample(ex)
                         }}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
@@ -266,15 +303,42 @@ export default function TaskSchedulerVisualizer() {
     const [n, setN] = useState(2)
 
     const steps = useMemo(() => generateSteps(tasks, n), [tasks, n])
-    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
+    const {
+        stepIndex,
+        stepForward,
+        stepBack,
+        togglePlay,
+        handleReset,
+        isPlaying,
+        speed,
+        setSpeed,
+        isDone,
+    } = usePlaybackState(steps.length, 500)
+
     const step = stepIndex >= 0 ? steps[stepIndex] : null
-    const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
+
+    // Pattern overlay hook
+    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+
+    // Code visual connectivity hook
+    const { highlightedElements, setHighlightedElements } = useCodeVisualConnectivity()
+
+    const applyExample = useCallback((example) => {
+        setTasks(example.tasks)
+        setN(example.n || 2)
+        handleReset()
+    }, [handleReset])
 
     const dockPanels = useMemo(() => [
         {
             id: 'input',
             title: 'Input',
-            content: <InputPanel tasks={tasks} n={n} setTasks={setTasks} setN={setN} />,
+            content: <InputPanel tasks={tasks} n={n} setTasks={setTasks} setN={setN} applyExample={applyExample} />,
+        },
+        {
+            id: 'timeline',
+            title: 'Timeline',
+            content: <TimelineViz tasks={tasks} n={n} step={step} />,
         },
         {
             id: 'freq-viz',
@@ -292,22 +356,20 @@ export default function TaskSchedulerVisualizer() {
             content: <CodeTracePanel
                 step={step}
                 codeLines={SOLUTION_CODE}
-                autoScroll={autoScrollCode}
-                title="Solution Code"
-                subtitle="Task Scheduler (LeetCode 621)"
+                onActiveLineDomChange={setActiveLineDom}
             />,
         },
-    ], [tasks, n, step, autoScrollCode])
+    ], [tasks, n, step, applyExample])
 
     return (
         <div className="problem-shell">
             <DockableWorkspace
-                title="Task Scheduler Visualizer"
                 panels={dockPanels}
                 initialLayout={{
                     rows: [
-                        ['input', 'freq-viz'],
-                        ['state-viz', 'code'],
+                        ['input', 'timeline'],
+                        ['freq-viz', 'state-viz'],
+                        ['code'],
                     ],
                     minimized: [],
                 }}
@@ -327,12 +389,14 @@ export default function TaskSchedulerVisualizer() {
                     speed={speed}
                     onSpeedChange={(e) => setSpeed(Number(e.target.value))}
                     speedIndicator={`${speed}ms`}
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    autoScrollLabel="Auto-scroll code"
-                    showAutoScroll
+                    showPatternOverlay={showPatternOverlay}
+                    onShowPatternOverlayChange={setShowPatternOverlay}
+                    patternOverlayLabel="Show pattern overlay"
+                    showPatternOverlayToggle
                 />
             </FloatingPanel>
+
+            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     )
 }

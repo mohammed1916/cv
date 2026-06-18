@@ -8,8 +8,6 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './MaxAreaOfIsland.css'
 
@@ -190,17 +188,17 @@ function generateSteps(grid) {
   return steps
 }
 
-const EXAMPLES = [
+const EXAMPLES = getExamples('max-area-of-island') || [
   {
-    label: 'Example 1',
+    label: 'Basic',
     gridStr: '[[1,1,0,0,0],[1,1,0,0,0],[0,0,1,0,0],[0,0,0,1,1]]',
   },
   {
-    label: 'Example 2',
+    label: 'Dense',
     gridStr: '[[1,1,1],[0,1,0],[1,1,1]]',
   },
   {
-    label: 'Example 3',
+    label: 'Sparse',
     gridStr: '[[0,0,0],[0,1,0],[0,0,0]]',
   },
 ]
@@ -218,7 +216,6 @@ const ISLAND_COLORS = [
 
 export default function MaxAreaOfIslandVisualizer() {
   const [gridInput, setGridInput] = useState(EXAMPLES[0].gridStr)
-  const SOLUTION_CODE_HOOK = useSolutionCode('max-area-of-island')
 
   const { grid, inputError } = useMemo(() => {
     try {
@@ -248,7 +245,6 @@ export default function MaxAreaOfIslandVisualizer() {
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: stepIndex })
 
   const applyExample = useCallback((ex) => {
     setGridInput(ex.gridStr)
@@ -263,7 +259,8 @@ export default function MaxAreaOfIslandVisualizer() {
       {
         id: 'grid',
         title: 'Grid View & Input',
-        subtitle: inputError ? 'Fix the input to resume.' : 'Edit grid input.',
+        subtitle: inputError ? 'Fix the input to resume playback.' : 'Edit the grid input and see visualization.',
+        defaultZone: 'left',
         content: (
           <div className="maoi-panel-body">
             <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
@@ -271,14 +268,7 @@ export default function MaxAreaOfIslandVisualizer() {
                 <button
                   key={ex.label}
                   onClick={() => applyExample(ex)}
-                  style={{
-                    padding: '6px 12px',
-                    borderRadius: 4,
-                    border: '1px solid #cbd5e1',
-                    cursor: 'pointer',
-                    fontSize: 12,
-                    backgroundColor: gridInput === ex.gridStr ? '#dbeafe' : '#f1f5f9',
-                  }}
+                  className="maoi-example-btn"
                 >
                   {ex.label}
                 </button>
@@ -288,147 +278,122 @@ export default function MaxAreaOfIslandVisualizer() {
             {inputError && <div style={{ color: '#f87171', marginBottom: 12, fontSize: 13 }}>{inputError}</div>}
 
             <textarea
-              style={{
-                width: '100%',
-                padding: 8,
-                borderRadius: 4,
-                border: '1px solid #cbd5e1',
-                fontFamily: 'monospace',
-                fontSize: 12,
-                marginBottom: 16,
-              }}
+              className="maoi-input-textarea"
               value={gridInput}
-              onChange={(e) => {
-                setGridInput(e.target.value)
-                handleReset()
-              }}
-              rows={4}
+              onChange={(e) => { setGridInput(e.target.value); handleReset() }}
+              rows={5}
               spellCheck={false}
             />
 
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: `repeat(${cols}, minmax(40px, 1fr))`,
-                gap: 4,
-                maxWidth: `${cols * 50}px`,
-              }}
-            >
-              {grid.map((row, r) =>
-                row.map((cell, c) => {
-                  const isWater = cell === 0
-                  const isVisited = step?.visited?.includes(`${r},${c}`)
-                  const isScan = step?.currScan?.[0] === r && step?.currScan?.[1] === c
-                  const isDfs = step?.currDfs?.[0] === r && step?.currDfs?.[1] === c
+            <div className="maoi-grid-container">
+              <div
+                className="maoi-grid"
+                style={{
+                  gridTemplateColumns: `repeat(${cols}, minmax(30px, 1fr))`,
+                  maxWidth: `${cols * 50}px`
+                }}
+              >
+                {grid.map((row, r) =>
+                  row.map((cell, c) => {
+                    const isWater = cell === 0
+                    const isVisited = step?.visited?.includes(`${r},${c}`)
+                    const isScan = step?.currScan?.[0] === r && step?.currScan?.[1] === c
+                    const isDfs = step?.currDfs?.[0] === r && step?.currDfs?.[1] === c
 
-                  const islandId = step?.islandMap?.[`${r},${c}`]
-                  const islandColor = islandId !== undefined ? ISLAND_COLORS[islandId % ISLAND_COLORS.length] : undefined
+                    const islandId = step?.islandMap?.[`${r},${c}`]
+                    const islandColor = islandId !== undefined ? ISLAND_COLORS[islandId % ISLAND_COLORS.length] : undefined
 
-                  return (
-                    <motion.div
-                      key={`${r}-${c}`}
-                      animate={{
-                        scale: isDfs ? 1.1 : 1,
-                        boxShadow: isDfs ? '0 0 12px rgba(59, 130, 246, 0.8)' : 'none',
-                      }}
-                      transition={{ duration: 0.2 }}
-                      style={{
-                        padding: 12,
-                        borderRadius: 4,
-                        border: isDfs ? '2px solid #3b82f6' : '1px solid #cbd5e1',
-                        backgroundColor:
-                          isDfs ? '#dbeafe' : isVisited && islandColor ? islandColor : isWater ? '#e2e8f0' : '#f0fdf4',
-                        color: '#1e293b',
-                        fontWeight: 600,
-                        fontSize: 14,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        cursor: 'default',
-                        transition: 'all 0.2s ease-out',
-                      }}
-                    >
-                      {cell}
-                      {isScan && !isDfs && <div style={{ position: 'absolute', width: 6, height: 6, backgroundColor: '#ef4444', borderRadius: '50%' }} />}
-                    </motion.div>
-                  )
-                })
-              )}
+                    let cellClass = "maoi-cell "
+                    if (isWater) cellClass += "water "
+                    else cellClass += "land "
+
+                    if (isVisited) cellClass += "visited "
+
+                    return (
+                      <motion.div
+                        key={`${r}-${c}`}
+                        animate={{
+                          scale: isDfs ? 1.1 : 1,
+                          boxShadow: isDfs ? '0 0 12px rgba(59, 130, 246, 0.8)' : 'none',
+                        }}
+                        transition={{ duration: 0.2 }}
+                        className={cellClass}
+                        style={{
+                          ...(isVisited && !isWater && islandColor ? { backgroundColor: islandColor, borderColor: islandColor } : {})
+                        }}
+                      >
+                        {cell}
+                        {isScan && !isDfs && <div className="maoi-cell-indicator scan" />}
+                        {isDfs && <div className="maoi-cell-indicator dfs" />}
+                      </motion.div>
+                    )
+                  })
+                )}
+              </div>
             </div>
           </div>
         ),
       },
       {
         id: 'state',
-        title: 'State Info',
-        subtitle: step ? `Max: ${step.maxArea ?? 0}, Current: ${step.currentArea ?? 0}` : 'Algorithm state',
+        title: 'State & Info',
+        subtitle: step ? `Max: ${step.maxArea ?? 0}, Current: ${step.currentArea ?? 0}` : 'Algorithm state.',
+        defaultZone: 'right',
         content: (
           <div className="maoi-panel-body">
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 16 }}>
-              <div
-                style={{
-                  padding: 12,
-                  backgroundColor: '#fef3c7',
-                  borderRadius: 6,
-                  border: '1px solid #fcd34d',
-                }}
-              >
-                <div style={{ fontSize: 11, color: '#78350f', fontWeight: 600, marginBottom: 4 }}>Current Area</div>
-                <div style={{ fontSize: 20, fontWeight: 700, color: '#b45309' }}>{step?.currentArea ?? 0}</div>
+            <div className="maoi-stats-container">
+              <div className="maoi-stat-box">
+                <span className="maoi-stat-label">Current Area</span>
+                <span className="maoi-stat-val">{step?.currentArea ?? 0}</span>
               </div>
-
-              <div
-                style={{
-                  padding: 12,
-                  backgroundColor: '#dbeafe',
-                  borderRadius: 6,
-                  border: '1px solid #0ea5e9',
-                }}
-              >
-                <div style={{ fontSize: 11, color: '#0c4a6e', fontWeight: 600, marginBottom: 4 }}>Max Area</div>
-                <div style={{ fontSize: 20, fontWeight: 700, color: '#0369a1' }}>{step?.maxArea ?? 0}</div>
+              <div className="maoi-stat-box">
+                <span className="maoi-stat-label">Max Area</span>
+                <span className="maoi-stat-val">{step?.maxArea ?? 0}</span>
               </div>
             </div>
 
             {step && (
-              <div
-                style={{
-                  padding: 10,
-                  backgroundColor: '#f8fafc',
-                  borderRadius: 6,
-                  border: '1px solid #cbd5e1',
-                  fontSize: 12,
-                  lineHeight: 1.5,
-                  color: '#475569',
-                }}
-              >
-                <strong style={{ color: '#1e293b' }}>Message:</strong>
-                <div style={{ marginTop: 6 }}>{step.message}</div>
+              <div className="maoi-section">
+                <span className="maoi-section-title">Message</span>
+                <div
+                  style={{
+                    padding: 10,
+                    backgroundColor: '#0f172a',
+                    borderRadius: 6,
+                    border: '1px solid #334155',
+                    fontSize: 12,
+                    lineHeight: 1.5,
+                    color: '#cbd5e1',
+                  }}
+                >
+                  {step.message}
+                </div>
               </div>
             )}
 
-            <div style={{ marginTop: 16 }}>
-              <div style={{ fontSize: 11, fontWeight: 600, marginBottom: 8, color: '#64748b' }}>Legend</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                {[
-                  { color: '#f0fdf4', label: 'Unvisited Land (1)' },
-                  { color: '#e2e8f0', label: 'Water (0)' },
-                  { color: '#dbeafe', label: 'DFS Current' },
-                  { color: '#3b82f6', label: 'Island (colored)' },
-                ].map((item) => (
-                  <div key={item.label} style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                    <div
-                      style={{
-                        width: 20,
-                        height: 20,
-                        backgroundColor: item.color,
-                        border: '1px solid #cbd5e1',
-                        borderRadius: 3,
-                      }}
-                    />
-                    <span style={{ fontSize: 11 }}>{item.label}</span>
+            <div className="maoi-section" style={{ flex: 1 }}>
+              <span className="maoi-section-title">Legend</span>
+              <div className="maoi-legend">
+                <div className="maoi-legend-item">
+                  <div className="maoi-legend-box land" /> Unvisited Land (1)
+                </div>
+                <div className="maoi-legend-item">
+                  <div className="maoi-legend-box water" /> Water (0)
+                </div>
+                <div className="maoi-legend-item">
+                  <div className="maoi-legend-box scan" /> Scanning pointer
+                </div>
+                <div className="maoi-legend-item">
+                  <div className="maoi-legend-box dfs" /> DFS Current Node
+                </div>
+                <div className="maoi-legend-item" style={{ marginTop: 8 }}>
+                  <div style={{ display: 'flex', gap: 4 }}>
+                    {ISLAND_COLORS.slice(0, 4).map((c, i) => (
+                      <div key={i} style={{ width: 12, height: 12, borderRadius: 2, backgroundColor: c }} />
+                    ))}
                   </div>
-                ))}
+                  <span style={{ fontSize: 12, marginLeft: 4 }}>Colored by Island ID</span>
+                </div>
               </div>
             </div>
           </div>
@@ -438,19 +403,18 @@ export default function MaxAreaOfIslandVisualizer() {
         id: 'code',
         title: 'Code Trace',
         subtitle: step ? `Line ${step.activeLine}` : 'Solution code',
+        defaultZone: 'full',
         content: (
           <CodeTracePanel
             step={step}
             codeLines={SOLUTION_CODE}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
             onActiveLineDomChange={setActiveLineDom}
             autoScroll={autoScrollCode}
           />
         ),
       },
     ],
-    [step, applyExample, gridInput, handleReset, inputError, grid, rows, cols, setActiveLineDom, autoScrollCode, connectivity]
+    [step, applyExample, gridInput, handleReset, inputError, grid, rows, cols, setActiveLineDom, autoScrollCode]
   )
 
   return (

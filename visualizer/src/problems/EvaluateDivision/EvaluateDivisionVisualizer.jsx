@@ -4,7 +4,9 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
+import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
+import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { useSolutionCode } from '../../hooks/useSolutionCode'
 import './EvaluateDivision.css'
@@ -203,6 +205,7 @@ function getNodePosition(node) {
 export default function EvaluateDivisionVisualizer() {
   const [exIdx, setExIdx] = useState(0)
   const SOLUTION_CODE_HOOK = useSolutionCode('evaluate-division')
+  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]
   const steps = useMemo(() => generateSteps(ex.equations, ex.values, ex.queries), [ex])
@@ -226,6 +229,7 @@ export default function EvaluateDivisionVisualizer() {
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
           onLineSelect={connectivity.handleLineSelect}
+          onActiveLineDomChange={setActiveLineDom}
         />
       ),
     },
@@ -418,8 +422,13 @@ export default function EvaluateDivisionVisualizer() {
           nextDisabled={isDone}
           resetDisabled={stepIndex < 0}
           onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+          showPatternOverlay={showPatternOverlay}
+          onShowPatternOverlayChange={setShowPatternOverlay}
+          patternOverlayLabel="Show pattern overlay"
+          showPatternOverlayToggle
         />
       </FloatingPanel>
+      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }

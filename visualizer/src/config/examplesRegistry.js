@@ -6105,6 +6105,60 @@ export const EXAMPLES_REGISTRY = {
         "ab"
       ]
     }
+  ],
+  "binary-tree-paths": [
+    {
+      "label": "LeetCode",
+      "arr": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "label": "With Nulls",
+      "arr": [
+        1,
+        2,
+        3,
+        null,
+        5
+      ]
+    },
+    {
+      "label": "Single",
+      "arr": [
+        1
+      ]
+    },
+    {
+      "label": "Left Heavy",
+      "arr": [
+        1,
+        2,
+        null,
+        3,
+        4
+      ]
+    }
+  ],
+  "perfect-squares": [
+    {
+      "label": "n = 7",
+      "n": 7
+    },
+    {
+      "label": "n = 12",
+      "n": 12
+    },
+    {
+      "label": "n = 13",
+      "n": 13
+    },
+    {
+      "label": "n = 15",
+      "n": 15
+    }
   ]
 }
 
