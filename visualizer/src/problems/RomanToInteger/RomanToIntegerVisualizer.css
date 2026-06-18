@@ -1,0 +1,17 @@
+.rti-input {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #1e293b;
+  font-family: monospace;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.rti-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}

@@ -2675,6 +2675,46 @@ export const EXAMPLES_REGISTRY = {
       ]
     }
   ],
+  "longest-common-prefix": [
+    {
+      "label": "flower/flow/flight",
+      "strs": [
+        "flower",
+        "flow",
+        "flight"
+      ]
+    },
+    {
+      "label": "Single char",
+      "strs": [
+        "a"
+      ]
+    },
+    {
+      "label": "No prefix",
+      "strs": [
+        "dog",
+        "racecar",
+        "car"
+      ]
+    },
+    {
+      "label": "Same strings",
+      "strs": [
+        "abc",
+        "abc",
+        "abc"
+      ]
+    },
+    {
+      "label": "Common 'in'",
+      "strs": [
+        "interact",
+        "international",
+        "intent"
+      ]
+    }
+  ],
   "longest-palindrome": [
     {
       "label": "Example 1",
@@ -4401,6 +4441,28 @@ export const EXAMPLES_REGISTRY = {
       ]
     }
   ],
+  "roman-to-integer": [
+    {
+      "label": "Standard",
+      "s": "III"
+    },
+    {
+      "label": "Subtractive IV",
+      "s": "IV"
+    },
+    {
+      "label": "Subtractive IX",
+      "s": "IX"
+    },
+    {
+      "label": "Complex",
+      "s": "MCMXCIV"
+    },
+    {
+      "label": "Large",
+      "s": "MMMCMXCIX"
+    }
+  ],
   "rotate-array": [
     {
       "label": "[1,2,3,4,5,6,7], k=3",
@@ -5192,6 +5254,28 @@ export const EXAMPLES_REGISTRY = {
       "note": "Shows negative clamping to INT_MIN."
     }
   ],
+  "integer-to-roman": [
+    {
+      "label": "Simple",
+      "num": 3,
+      "note": "III - just repeated I symbols."
+    },
+    {
+      "label": "With V",
+      "num": 58,
+      "note": "LVIII - 50 + 5 + 3."
+    },
+    {
+      "label": "Complex",
+      "num": 1994,
+      "note": "MCMXCIV - 1000 + 900 + 90 + 4."
+    },
+    {
+      "label": "Max value",
+      "num": 3999,
+      "note": "MMMCMXCIX - highest single case."
+    }
+  ],
   "subarray-sum-equals-k": [
     {
       "label": "[1,1,1] k=2",
@@ -5529,6 +5613,51 @@ export const EXAMPLES_REGISTRY = {
       "maxWidth": 12
     }
   ],
+  "three-sum-closest": [
+    {
+      "label": "Classic",
+      "nums": [
+        -1,
+        2,
+        1,
+        -4
+      ],
+      "target": 1
+    },
+    {
+      "label": "Exact Match",
+      "nums": [
+        0,
+        0,
+        0
+      ],
+      "target": 1
+    },
+    {
+      "label": "Negative Target",
+      "nums": [
+        -4,
+        -1,
+        -1,
+        0,
+        1,
+        2
+      ],
+      "target": -5
+    },
+    {
+      "label": "Large Gap",
+      "nums": [
+        -1000,
+        0,
+        1,
+        2,
+        -1,
+        -4
+      ],
+      "target": 0
+    }
+  ],
   "three-sum": [
     {
       "label": "Classic",
@@ -5568,6 +5697,28 @@ export const EXAMPLES_REGISTRY = {
         2,
         2
       ]
+    }
+  ],
+  "four-sum": [
+    {
+      "label": "Classic",
+      "nums": [1000000000, 1000000000, 1000000000, 1000000000],
+      "target": -294967296
+    },
+    {
+      "label": "Example 2",
+      "nums": [1, 0, -1, 0, -2, 2],
+      "target": 0
+    },
+    {
+      "label": "All Zeros",
+      "nums": [0, 0, 0, 0],
+      "target": 0
+    },
+    {
+      "label": "Duplicates",
+      "nums": [-3, -2, -1, 0, 1, 2, 3],
+      "target": 0
     }
   ],
   "top-kfrequent": [
@@ -6158,6 +6309,24 @@ export const EXAMPLES_REGISTRY = {
     {
       "label": "n = 15",
       "n": 15
+    }
+  ],
+  "swap-nodes-in-pairs": [
+    {
+      "label": "Basic",
+      "values": [1, 2, 3, 4]
+    },
+    {
+      "label": "Single",
+      "values": [1]
+    },
+    {
+      "label": "Pairs",
+      "values": [1, 2, 3, 4, 5, 6]
+    },
+    {
+      "label": "Odd Count",
+      "values": [1, 2, 3, 4, 5]
     }
   ]
 }

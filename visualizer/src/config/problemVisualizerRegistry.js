@@ -15,6 +15,7 @@ const SOLVED_SLUGS = new Set([
   'zigzag-conversion',
   'reverse-integer',
   'string-to-integer-atoi',
+  'integer-to-roman',
   'container-with-most-water',
   'merge-k-sorted-lists',
   'generate-parentheses',
@@ -73,6 +74,16 @@ const SOLVED_SLUGS = new Set([
   'perfect-squares',
   'sum-of-two-integers',
   'task-scheduler',
+  'palindrome-number',
+  'integer-to-roman',
+  'roman-to-integer',
+  'longest-common-prefix',
+  '3sum',
+  '3sum-closest',
+  '4sum',
+  'remove-nth-node-from-end-of-list',
+  'valid-parentheses',
+  'swap-nodes-in-pairs',
   // Add all other 200+ solved problems...
 ])
 

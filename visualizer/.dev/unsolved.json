@@ -1,114 +1,10 @@
 [
   {
-    "id": "lc-9",
-    "number": "9",
-    "title": "Palindrome Number",
-    "slug": "palindrome-number",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "Dynamic Programming",
-      "String",
-      "Math"
-    ]
-  },
-  {
     "id": "lc-10",
     "number": "10",
     "title": "Regular Expression Matching",
     "slug": "regular-expression-matching",
     "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-12",
-    "number": "12",
-    "title": "Integer to Roman",
-    "slug": "integer-to-roman",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "String",
-      "Math"
-    ]
-  },
-  {
-    "id": "lc-13",
-    "number": "13",
-    "title": "Roman to Integer",
-    "slug": "roman-to-integer",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "String",
-      "Math"
-    ]
-  },
-  {
-    "id": "lc-14",
-    "number": "14",
-    "title": "Longest Common Prefix",
-    "slug": "longest-common-prefix",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "Dynamic Programming",
-      "Array"
-    ]
-  },
-  {
-    "id": "lc-15",
-    "number": "15",
-    "title": "3Sum",
-    "slug": "3sum",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Array"
-    ]
-  },
-  {
-    "id": "lc-16",
-    "number": "16",
-    "title": "3Sum Closest",
-    "slug": "3sum-closest",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Array"
-    ]
-  },
-  {
-    "id": "lc-18",
-    "number": "18",
-    "title": "4Sum",
-    "slug": "4sum",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Array"
-    ]
-  },
-  {
-    "id": "lc-19",
-    "number": "19",
-    "title": "Remove Nth Node From End of List",
-    "slug": "remove-nth-node-from-end-of-list",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-20",
-    "number": "20",
-    "title": "Valid Parentheses",
-    "slug": "valid-parentheses",
-    "difficulty": "Easy",
     "paidOnly": false,
     "tags": [
       "General"
@@ -125,17 +21,6 @@
       "Array",
       "Binary Search",
       "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-24",
-    "number": "24",
-    "title": "Swap Nodes in Pairs",
-    "slug": "swap-nodes-in-pairs",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
     ]
   },
   {
