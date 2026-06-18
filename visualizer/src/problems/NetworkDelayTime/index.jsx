@@ -1,1 +1,1 @@
-export { default } from './NetworkDelayTime';
+export { default } from './NetworkDelayTimeVisualizer';

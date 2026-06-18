@@ -8,4 +8,4 @@ export const meta = {
     "Sort by position descending; compute arrival time; use stack to merge. Count remaining fleets.",
   accent: "#f97316",
 };
-export { default } from "./CarFleet";
+export { default } from "./CarFleetVisualizer";

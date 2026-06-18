@@ -1,1 +1,1 @@
-export { default } from './EvaluateDivision';
+export { default } from './EvaluateDivisionVisualizer';

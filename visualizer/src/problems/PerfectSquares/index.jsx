@@ -1,1 +1,1 @@
-export { default } from './PerfectSquares';
+export { default } from './PerfectSquaresVisualizer';

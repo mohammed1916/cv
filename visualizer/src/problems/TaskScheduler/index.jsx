@@ -1,1 +1,1 @@
-export { default } from './TaskScheduler';
+export { default } from './TaskSchedulerVisualizer';
