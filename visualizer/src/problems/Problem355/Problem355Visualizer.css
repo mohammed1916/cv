@@ -1,0 +1,104 @@
+/* Problem 355 - Design Twitter Visualizer Styles */
+
+.problem-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(135deg, #f0f9ff 0%, #f5f3ff 100%);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+/* Ensure proper spacing for dockable panels */
+.problem-shell > div:first-child {
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Code panel styling */
+.code-trace-panel {
+  background: #f8fafc;
+  border-radius: 6px;
+  overflow: auto;
+}
+
+/* Animation for network updates */
+@keyframes pulse-node {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes flow-edge {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+}
+
+@keyframes tweet-pop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes feed-slide {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.user-node {
+  animation: pulse-node 0.8s ease-in-out;
+}
+
+.user-node.active {
+  animation: pulse-node 0.4s ease-in-out infinite;
+}
+
+.tweet-badge {
+  animation: tweet-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.feed-item {
+  animation: feed-slide 0.4s ease-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .problem-shell {
+    font-size: 12px;
+  }
+}
+
+/* Print styles */
+@media print {
+  .problem-shell {
+    height: auto;
+    background: white;
+  }
+}

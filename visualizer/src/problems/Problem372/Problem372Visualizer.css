@@ -1,0 +1,228 @@
+.sp-shell {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    font-family: inherit;
+}
+
+.sp-examples {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.sp-chip {
+    background: #313244;
+    color: #cdd6f4;
+    border: 2px solid #45475a;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.sp-chip:hover {
+    border-color: #a6e3a1;
+    color: #a6e3a1;
+    transform: translateY(-2px);
+}
+
+.sp-panel {
+    background: #1e1e2e;
+    border: 1px solid #313244;
+    border-radius: 10px;
+    padding: 12px 14px;
+}
+
+.sp-panel-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #6c7086;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+
+.sp-exponent-digits {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+    min-height: 60px;
+}
+
+.sp-digit-box {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 700;
+    border-radius: 6px;
+    border: 2px solid #45475a;
+    background: #252535;
+    color: #cdd6f4;
+    transition: all 0.3s ease;
+}
+
+.sp-digit-box.active {
+    border-color: #89b4fa;
+    background: #001a30;
+    color: #89b4fa;
+    transform: scale(1.15);
+    box-shadow: 0 0 12px rgba(137, 180, 250, 0.3);
+}
+
+.sp-digit-box.processed {
+    border-color: #a6e3a1;
+    background: #001a08;
+    color: #a6e3a1;
+}
+
+.sp-power-box {
+    padding: 12px;
+    background: #1e1e2e;
+    border: 2px solid #3b82f6;
+    border-radius: 8px;
+    margin: 12px 0;
+}
+
+.sp-power-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 8px;
+}
+
+.sp-power-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.sp-power-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+    border-radius: 4px;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+}
+
+.sp-power-cell.base {
+    border-color: #3b82f6;
+    background: #dbeafe;
+}
+
+.sp-power-cell.digit {
+    border-color: #ec4899;
+    background: #fce7f3;
+}
+
+.sp-power-cell.result {
+    border-color: #10b981;
+    background: #d1fae5;
+}
+
+.sp-power-label {
+    font-size: 10px;
+    color: #475569;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.sp-power-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.sp-modulo-box {
+    padding: 12px;
+    background: #fef3c7;
+    border: 2px solid #f59e0b;
+    border-radius: 8px;
+    margin: 12px 0;
+}
+
+.sp-modulo-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #92400e;
+    margin-bottom: 8px;
+}
+
+.sp-modulo-text {
+    font-size: 12px;
+    color: #78350f;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-weight: 500;
+}
+
+.sp-accumulation-box {
+    padding: 12px;
+    background: #f0fdf4;
+    border: 2px solid #10b981;
+    border-radius: 8px;
+    margin: 12px 0;
+}
+
+.sp-accumulation-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #15803d;
+    margin-bottom: 8px;
+}
+
+.sp-accumulation-text {
+    font-size: 12px;
+    color: #166534;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    margin-bottom: 6px;
+    line-height: 1.5;
+}
+
+.sp-result {
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: 700;
+    background: #ecfdf5;
+    border: 2px solid #10b981;
+    color: #047857;
+    letter-spacing: 3px;
+    text-align: center;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    transition: transform 0.3s ease;
+}
+
+.sp-result.highlighted {
+    transform: scale(1.05);
+    box-shadow: 0 0 16px rgba(16, 185, 129, 0.3);
+}
+
+.sp-status {
+    padding: 12px;
+    background: #e0e7ff;
+    border: 1px solid #818cf8;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #3730a3;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    line-height: 1.6;
+}
+
+.sp-description {
+    padding: 12px;
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 13px;
+    color: '#334155';
+    line-height: 1.6;
+}

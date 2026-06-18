@@ -1580,6 +1580,23 @@ export const EXAMPLES_REGISTRY = {
       "pick": 73
     }
   ],
+  "guess-number-higher-or-lower": [
+    {
+      "label": "n=10, pick=6",
+      "n": 10,
+      "pick": 6
+    },
+    {
+      "label": "n=1, pick=1",
+      "n": 1,
+      "pick": 1
+    },
+    {
+      "label": "n=2, pick=1",
+      "n": 2,
+      "pick": 1
+    }
+  ],
   "happy-number": [
     {
       "label": "19 (Happy)",
@@ -4324,6 +4341,37 @@ export const EXAMPLES_REGISTRY = {
       ]
     }
   ],
+  "russian-doll-envelopes": [
+    {
+      "label": "Simple nesting",
+      "envelopes": [
+        [2, 3],
+        [5, 4],
+        [6, 4],
+        [6, 7]
+      ]
+    },
+    {
+      "label": "No nesting",
+      "envelopes": [
+        [1, 1],
+        [1, 1],
+        [1, 1]
+      ]
+    },
+    {
+      "label": "Complex chain",
+      "envelopes": [
+        [2, 100],
+        [3, 200],
+        [4, 300],
+        [5, 500],
+        [5, 400],
+        [5, 600],
+        [6, 700]
+      ]
+    }
+  ],
   "reverse-bits": [
     {
       "label": "Ex 1",
@@ -4906,6 +4954,41 @@ export const EXAMPLES_REGISTRY = {
         ]
       ],
       "target": 16
+    }
+  ],
+  "search-a-2d-matrix-ii": [
+    {
+      "label": "Found (5)",
+      "matrix": [
+        [1, 4, 7, 11, 15],
+        [2, 5, 8, 12, 19],
+        [3, 6, 9, 16, 22],
+        [10, 13, 14, 17, 24],
+        [18, 21, 23, 26, 30]
+      ],
+      "target": 5
+    },
+    {
+      "label": "Not Found (20)",
+      "matrix": [
+        [1, 4, 7, 11, 15],
+        [2, 5, 8, 12, 19],
+        [3, 6, 9, 16, 22],
+        [10, 13, 14, 17, 24],
+        [18, 21, 23, 26, 30]
+      ],
+      "target": 20
+    },
+    {
+      "label": "Edge (1)",
+      "matrix": [
+        [1, 4, 7, 11, 15],
+        [2, 5, 8, 12, 19],
+        [3, 6, 9, 16, 22],
+        [10, 13, 14, 17, 24],
+        [18, 21, 23, 26, 30]
+      ],
+      "target": 1
     }
   ],
   "search-in-rotated-sorted-array": [
@@ -5492,6 +5575,28 @@ export const EXAMPLES_REGISTRY = {
         3,
         4
       ]
+    }
+  ],
+  "sum-of-two-integers": [
+    {
+      "label": "1 + 1",
+      "a": 1,
+      "b": 1
+    },
+    {
+      "label": "5 + 3",
+      "a": 5,
+      "b": 3
+    },
+    {
+      "label": "2 + 2",
+      "a": 2,
+      "b": 2
+    },
+    {
+      "label": "15 + 7",
+      "a": 15,
+      "b": 7
     }
   ],
   "substring-concatenation": [
@@ -6479,6 +6584,45 @@ export const EXAMPLES_REGISTRY = {
     {
       "label": "Odd Count",
       "values": [1, 2, 3, 4, 5]
+    }
+  ],
+  "super-power": [
+    {
+      "label": "2^3",
+      "base": 2,
+      "exponents": [3]
+    },
+    {
+      "label": "2^10",
+      "base": 2,
+      "exponents": [1, 0]
+    },
+    {
+      "label": "1^2147483647",
+      "base": 1,
+      "exponents": [2, 1, 4, 7, 4, 8, 3, 6, 4, 7]
+    }
+  ],
+  "wiggle-sort-ii": [
+    {
+      "label": "Basic",
+      "nums": [5, 7, 4, 3, 1]
+    },
+    {
+      "label": "Duplicates",
+      "nums": [1, 1, 2, 2, 3, 3]
+    },
+    {
+      "label": "All Same",
+      "nums": [5, 5, 5, 5, 5]
+    },
+    {
+      "label": "Two Elements",
+      "nums": [3, 1]
+    },
+    {
+      "label": "Random",
+      "nums": [9, 2, 7, 4, 5, 1, 8, 6]
     }
   ]
 }
