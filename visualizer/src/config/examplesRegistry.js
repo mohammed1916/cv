@@ -3799,6 +3799,26 @@ export const EXAMPLES_REGISTRY = {
       "gridStr": "[\n  [\"1\",\"0\",\"1\"],\n  [\"0\",\"1\",\"0\"],\n  [\"1\",\"0\",\"1\"]\n]"
     }
   ],
+  "number-of-islands-ii": [
+    {
+      "label": "Islands Form",
+      "m": 3,
+      "n": 3,
+      "positions": [[0, 0], [0, 2], [2, 1]]
+    },
+    {
+      "label": "Islands Merge",
+      "m": 4,
+      "n": 4,
+      "positions": [[0, 0], [0, 1], [1, 0], [1, 1]]
+    },
+    {
+      "label": "Single Island",
+      "m": 2,
+      "n": 2,
+      "positions": [[0, 0], [0, 1], [1, 0], [1, 1]]
+    }
+  ],
   "palindrome-linked-list": [
     {
       "label": "1→2→2→1",

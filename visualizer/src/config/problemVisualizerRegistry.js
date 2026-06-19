@@ -548,6 +548,19 @@ const SOLVED_SLUGS = new Set([
   'encode-n-ary-tree-to-binary-tree',
   'all-o-1-data-structure',
   'minimum-genetic-mutation',
+  // Problem 434 visualizer
+  'number-of-islands-ii',
+  // Problems 435-444 visualizers
+  'non-overlapping-intervals',
+  'find-right-interval',
+  'path-sum-iii',
+  'find-all-anagrams-in-string',
+  'ternary-expression-parser',
+  'k-th-smallest-in-lexicographical-order',
+  'arranging-coins',
+  'find-all-duplicates-in-array',
+  'string-compression',
+  'sequence-reconstruction',
 ])
 
 // ✗ NOT_SOLVED - All problems now solved!
