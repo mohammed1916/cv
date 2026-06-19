@@ -1,0 +1,2 @@
+export const meta = { number: "493", title: "Reverse Pairs", slug: "reverse-pairs", difficulty: "Hard", tags: ["Merge Sort", "BIT"], description: "Count pairs where i < j and nums[i] > 2*nums[j] using merge sort.", accent: "#8b5cf6" };
+export { default } from "./Problem493Visualizer";

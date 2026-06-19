@@ -1,0 +1,27 @@
+/* Problem 532: K-diff Pairs */
+.problem-shell {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
+
+.p532-frequency {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.p532-freq-item {
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid #cbd5e1;
+  transition: all 0.2s ease;
+}
+
+.p532-freq-item.current {
+  background-color: #dbeafe;
+  border-color: #0ea5e9;
+  transform: scale(1.1);
+}

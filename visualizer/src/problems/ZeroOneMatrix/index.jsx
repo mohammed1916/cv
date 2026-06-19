@@ -1,0 +1,1 @@
+export const meta={number:"542",title:"01 Matrix",slug:"01-matrix",difficulty:"Medium",tags:["BFS","Multi-source"],description:"Find distance of nearest 0 for every cell in binary matrix.",accent:"#0284c7"};export{default}from"./ZeroOneMatrixVisualizer";

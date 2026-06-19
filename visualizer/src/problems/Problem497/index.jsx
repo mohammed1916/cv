@@ -1,0 +1,2 @@
+export const meta = { number: "497", title: "Random Point in Rectangles", slug: "random-point-in-non-overlapping-rectangles", difficulty: "Medium", tags: ["Random", "Binary Search"], description: "Generate random point in non-overlapping rectangles.", accent: "#8b5cf6" };
+export { default } from "./Problem497Visualizer";

@@ -1,0 +1,1 @@
+export const meta={number:"537",title:"Complex Number Multiplication",slug:"complex-number-multiplication",difficulty:"Medium",tags:["Math","String"],description:"Multiply two complex numbers given as strings.",accent:"#0284c7"};export{default}from"./ComplexNumberMultiplicationVisualizer";

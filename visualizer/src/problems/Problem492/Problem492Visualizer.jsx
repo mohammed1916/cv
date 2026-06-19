@@ -1,0 +1,88 @@
+import { useState, useMemo, useCallback } from 'react'
+import { motion } from 'framer-motion'
+import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodeTracePanel from '../../components/CodeTracePanel'
+import PlaybackControls from '../../components/PlaybackControls'
+import PatternOverlay from '../../components/PatternOverlay'
+import { usePlaybackState } from '../../hooks/usePlaybackState'
+import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
+import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { useSolutionCode } from '../../hooks/useSolutionCode'
+import { getExamples } from '../../config/examplesRegistry'
+import './Problem492Visualizer.css'
+
+const EXAMPLES = getExamples('construct-the-rectangle') || [
+  { label: 'Example 1', area: 8 },
+  { label: 'Example 2', area: 37 },
+  { label: 'Example 3', area: 122122 },
+]
+
+function generateSteps(area) {
+  const steps = []
+  let w = Math.sqrt(area)
+  steps.push({ activeLine: 1, w: Math.floor(w), area, width: 0, height: 0, message: 'Start from sqrt(area)' })
+
+  for (let width = Math.floor(Math.sqrt(area)); width >= 1; width--) {
+    if (area % width === 0) {
+      const height = area / width
+      steps.push({ activeLine: 2, w: width, area, width: Math.max(width, height), height: Math.min(width, height), done: true, message: `Found: ${Math.max(width, height)} x ${Math.min(width, height)}` })
+      break
+    }
+    steps.push({ activeLine: 1, w: width - 1, area, width: 0, height: 0, message: `Check divisor ${width}: ${area % width !== 0 ? 'no' : 'yes'}` })
+  }
+  return steps
+}
+
+function VisualizationPanel({ area, step, applyEx }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
+      <div style={{ padding: 12, backgroundColor: '#cffafe', borderRadius: 6, borderLeft: '4px solid #06b6d4' }}>
+        <div style={{ fontSize: 12, color: '#164e63', fontStyle: 'italic' }}>
+          Find rectangle dimensions with given area, maximizing the length to width ratio (length >= width).
+        </div>
+      </div>
+      <div><div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Given Area: {area}</div></div>
+      {step && step.width > 0 && (
+        <motion.div style={{ padding: 16, backgroundColor: '#cffafe', borderRadius: 6, border: '2px solid #06b6d4' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 13, fontWeight: 600, color: '#164e63', marginBottom: 12 }}>Result Rectangle</div>
+          <div style={{
+            width: step.width * 2,
+            height: step.height * 2,
+            border: '3px solid #06b6d4',
+            backgroundColor: '#cffafe',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontWeight: 700,
+            color: '#06b6d4',
+            fontSize: 14
+          }}>
+            {step.width} × {step.height}
+          </div>
+        </motion.div>
+      )}
+      <motion.div style={{ padding: 16, backgroundColor: '#cffafe', borderRadius: 6, border: '2px solid #06b6d4', textAlign: 'center' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: '#164e63' }}>Dimensions</div>
+        <div style={{ fontSize: 24, fontWeight: 'bold', color: '#06b6d4' }}>{step?.width || 0} × {step?.height || 0}</div>
+        <div style={{ fontSize: 12, color: '#06b6d4', marginTop: 8 }}>{step?.message || ''}</div>
+      </motion.div>
+    </div>
+  )
+}
+
+export default function Problem492Visualizer() {
+  const [ex, setEx] = useState(EXAMPLES[0])
+  const SOLUTION_CODE = useSolutionCode('construct-the-rectangle')
+  const steps = useMemo(() => generateSteps(ex.area).map((current) => ({ ...current, relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []) })), [ex])
+  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
+  const step = stepIndex >= 0 ? steps[stepIndex] : null
+  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
+  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+  const dockPanels = useMemo(() => [
+    { id: 'code', title: 'Code', content: (<CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />) },
+    { id: 'viz', title: '📐 Rectangle', content: (<VisualizationPanel area={ex.area} step={step} applyEx={applyEx} />) },
+  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex])
+  return (<div className="problem-shell"><DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} /><FloatingPanel title="Playback Controls"><PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle /></FloatingPanel>{showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}</div>)
+}

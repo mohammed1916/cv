@@ -6659,6 +6659,247 @@ export const EXAMPLES_REGISTRY = {
       "label": "All Digits",
       "tokens": "zeroonetwothreefourfivesixseveneightnine"
     }
+  ],
+  "contiguous-array": [
+    {
+      "label": "Equal 0 and 1",
+      "nums": [0, 1]
+    },
+    {
+      "label": "Two Pairs",
+      "nums": [0, 1, 0]
+    },
+    {
+      "label": "Longer",
+      "nums": [0, 0, 1, 0, 0, 0, 1, 1]
+    }
+  ],
+  "beautiful-arrangement": [
+    {
+      "label": "n=2",
+      "n": 2
+    },
+    {
+      "label": "n=3",
+      "n": 3
+    },
+    {
+      "label": "n=4",
+      "n": 4
+    }
+  ],
+  "word-abbreviation": [
+    {
+      "label": "Simple",
+      "dict": ["like", "god", "internal"]
+    },
+    {
+      "label": "Mixed",
+      "dict": ["cat", "cats", "dog"]
+    },
+    {
+      "label": "Single",
+      "dict": ["internationalization"]
+    }
+  ],
+  "random-pick-with-weight": [
+    {
+      "label": "Simple",
+      "w": [1]
+    },
+    {
+      "label": "Two Options",
+      "w": [1, 3]
+    },
+    {
+      "label": "Multiple",
+      "w": [1, 3, 4]
+    }
+  ],
+  "minesweeper": [
+    {
+      "label": "Simple",
+      "board": [["E","E","E","E","E"],["E","E","M","E","E"],["E","E","E","E","E"],["E","E","E","E","E"]],
+      "click": [0, 0]
+    },
+    {
+      "label": "Mine Hit",
+      "board": [["B","1","E","1","B"],["B","1","E","1","B"],["B","B","E","B","B"],["M","1","1","1","B"],["B","1","1","1","B"]],
+      "click": [4, 2]
+    }
+  ],
+  "minimum-absolute-difference-in-bst": [
+    {
+      "label": "Simple",
+      "root": [4, 2, 6, 1, 3]
+    },
+    {
+      "label": "Larger",
+      "root": [1, 0, 48, null, null, 12, 49]
+    }
+  ],
+  "lonely-pixel-i": [
+    {
+      "label": "Simple",
+      "picture": [["W","W","B"],["W","B","W"],["B","W","W"]]
+    },
+    {
+      "label": "All Black",
+      "picture": [["B","B","B"],["B","B","B"],["B","B","B"]]
+    }
+  ],
+  "k-diff-pairs-in-array": [
+    {
+      "label": "k=1",
+      "nums": [3, 1, 4, 1, 5],
+      "k": 1
+    },
+    {
+      "label": "k=2",
+      "nums": [1, 2, 3, 1, 1, 3],
+      "k": 2
+    },
+    {
+      "label": "k=0",
+      "nums": [1, 1, 1, 2, 2],
+      "k": 0
+    }
+  ],
+  "lonely-pixel-ii": [
+    {
+      "label": "n=2",
+      "picture": [["W","B","W"],["W","B","W"],["W","B","W"]],
+      "N": 2
+    },
+    {
+      "label": "n=1",
+      "picture": [["B","W","W"],["B","B","W"],["W","B","W"]],
+      "N": 1
+    }
+  ],
+  "design-log-storage-system": [
+    {
+      "label": "Sample 1",
+      "operations": ["LogSystem", "put", "put", "retrieve"],
+      "values": [[], [1, "2017:01:01:23:59:59"], [2, "2017:01:02:23:59:59"], [1, "2017:01:01:23:59:59", "2017:01:02:23:59:59", "Second"]]
+    }
+  ],
+  "encode-and-decode-tinyurl": [
+    {
+      "label": "Simple",
+      "url": "https://leetcode.com/problems/design-tinyurl"
+    },
+    {
+      "label": "Long URL",
+      "url": "https://www.google.com/search?q=leetcode"
+    }
+  ],
+  "construct-binary-tree-from-string": [
+    {
+      "label": "Simple",
+      "s": "4(2(3)(1))(6(5))"
+    },
+    {
+      "label": "Negative",
+      "s": "-4(2)(6)"
+    },
+    {
+      "label": "Single",
+      "s": "4"
+    }
+  ],
+  "complex-number-multiplication": [
+    {
+      "label": "Simple",
+      "num1": "1+1i",
+      "num2": "1+1i"
+    },
+    {
+      "label": "Negative",
+      "num1": "1+-1i",
+      "num2": "-1+-1i"
+    }
+  ],
+  "convert-bst-to-greater-tree": [
+    {
+      "label": "Simple",
+      "root": [5, 2, 13]
+    },
+    {
+      "label": "Larger",
+      "root": [3, 2, 4, 1]
+    }
+  ],
+  "minimum-time-difference": [
+    {
+      "label": "Two Times",
+      "timePoints": ["23:59", "00:00"]
+    },
+    {
+      "label": "Three Times",
+      "timePoints": ["00:00", "04:58", "23:59"]
+    }
+  ],
+  "single-element-in-sorted-array": [
+    {
+      "label": "Simple",
+      "nums": [1, 1, 2, 3, 3, 4, 4, 8, 8]
+    },
+    {
+      "label": "Larger",
+      "nums": [3, 3, 7, 7, 10, 11, 11]
+    }
+  ],
+  "reverse-string-ii": [
+    {
+      "label": "k=2",
+      "s": "abcdefg",
+      "k": 2
+    },
+    {
+      "label": "k=3",
+      "s": "abcdefg",
+      "k": 3
+    },
+    {
+      "label": "k=4",
+      "s": "abcdefg",
+      "k": 4
+    }
+  ],
+  "01-matrix": [
+    {
+      "label": "Simple",
+      "mat": [[0, 0, 0], [0, 1, 0], [1, 1, 1]]
+    },
+    {
+      "label": "Multiple Zeros",
+      "mat": [[0, 0], [0, 1]]
+    }
+  ],
+  "diameter-of-binary-tree": [
+    {
+      "label": "Simple",
+      "root": [1, 2, 3, 4, 5]
+    },
+    {
+      "label": "Single Node",
+      "root": [1, 2]
+    }
+  ],
+  "output-contest-matches": [
+    {
+      "label": "n=2",
+      "n": 2
+    },
+    {
+      "label": "n=4",
+      "n": 4
+    },
+    {
+      "label": "n=8",
+      "n": 8
+    }
   ]
 }
 

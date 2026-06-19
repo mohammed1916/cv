@@ -1,0 +1,34 @@
+/* Problem 531: Lonely Pixel I */
+.problem-shell {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
+
+.p531-grid {
+  display: grid;
+  gap: 4px;
+  justify-content: center;
+}
+
+.p531-cell {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-weight: 700;
+  border: 1px solid #cbd5e1;
+  transition: all 0.2s ease;
+}
+
+.p531-cell.current {
+  border-color: #0ea5e9;
+  transform: scale(1.15);
+}
+
+.p531-cell.lonely {
+  background-color: #dcfce7;
+  border-color: #10b981;
+}

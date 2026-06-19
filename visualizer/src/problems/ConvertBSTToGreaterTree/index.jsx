@@ -1,0 +1,1 @@
+export const meta={number:"538",title:"Convert BST to Greater Tree",slug:"convert-bst-to-greater-tree",difficulty:"Medium",tags:["Tree","DFS"],description:"Convert BST to greater tree via reverse inorder traversal.",accent:"#0284c7"};export{default}from"./ConvertBSTToGreaterTreeVisualizer";

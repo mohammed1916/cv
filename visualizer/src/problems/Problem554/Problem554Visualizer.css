@@ -1,0 +1,6 @@
+/* Problem 554: Brick Wall */
+.problem-shell {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}

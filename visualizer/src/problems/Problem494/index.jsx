@@ -1,0 +1,2 @@
+export const meta = { number: "494", title: "Target Sum", slug: "target-sum", difficulty: "Medium", tags: ["DP", "Backtracking"], description: "Find ways to assign +/- to numbers to reach target sum.", accent: "#ec4899" };
+export { default } from "./Problem494Visualizer";

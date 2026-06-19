@@ -1,0 +1,6 @@
+/* Problem 542: 01 Matrix */
+.problem-shell {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}

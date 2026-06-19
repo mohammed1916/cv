@@ -1,0 +1,1 @@
+export const meta={number:"543",title:"Diameter of Binary Tree",slug:"diameter-of-binary-tree",difficulty:"Easy",tags:["Tree","DFS"],description:"Find the longest path between any two nodes in a binary tree.",accent:"#0284c7"};export{default}from"./DiameterOfBinaryTreeVisualizer";
