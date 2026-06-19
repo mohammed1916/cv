@@ -561,6 +561,17 @@ const SOLVED_SLUGS = new Set([
   'find-all-duplicates-in-array',
   'string-compression',
   'sequence-reconstruction',
+  // Problems 445-454 visualizers
+  'add-two-numbers-ii',
+  'arithmetic-slices-ii',
+  'number-of-boomerangs',
+  'find-all-numbers-disappeared-in-array',
+  'serialize-and-deserialize-bst',
+  'delete-node-in-a-bst',
+  'sort-characters-by-frequency',
+  'minimum-number-of-arrows-to-burst-balloons',
+  'minimum-moves-to-equal-array-elements',
+  '4sum-ii',
 ])
 
 // ✗ NOT_SOLVED - All problems now solved!
