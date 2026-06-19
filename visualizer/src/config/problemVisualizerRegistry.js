@@ -505,6 +505,36 @@ const SOLVED_SLUGS = new Set([
   'utf-8-validation',
   'decode-string',
   'longest-substring-with-at-least-k-repeating-characters',
+  // Problems 396-402 visualizers
+  'rotate-function',
+  'integer-replacement',
+  'random-pick-index',
+  'evaluate-division',
+  'nth-digit',
+  'binary-watch',
+  'remove-k-digits',
+  // Problems 403-412 visualizers
+  'frog-jump',
+  'sum-of-left-leaves',
+  'convert-number-to-hex',
+  'queue-reconstruction-by-height',
+  'trapping-rain-water-ii',
+  'valid-word-abbreviation',
+  'longest-palindrome',
+  'split-array-largest-sum',
+  'minimum-unique-word-abbreviation',
+  'fizz-buzz',
+  // Problems 413-422 visualizers
+  'arithmetic-slices',
+  'third-maximum-number',
+  'add-strings',
+  'partition-equal-subset-sum',
+  'pacific-atlantic-water-flow',
+  'sentence-screen-fitting',
+  'battleships-in-a-board',
+  'strong-password-checker',
+  'maximum-xor-of-two-numbers-in-array',
+  'valid-word-square',
 ])
 
 // ✗ NOT_SOLVED - All problems now solved!
