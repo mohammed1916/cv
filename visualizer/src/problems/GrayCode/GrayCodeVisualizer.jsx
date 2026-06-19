@@ -122,18 +122,30 @@ export default function GrayCodeVisualizer() {
                     {inputError && <div style={{ color: '#991b1b', fontSize: 11 }}>{inputError}</div>}
 
                     {step?.phase === 'compute' && (
-                        <div style={{ padding: 12, backgroundColor: '#f8fafc', borderRadius: 6, border: '1px solid #e2e8f0', fontSize: 11, fontFamily: 'monospace' }}>
+                        <div
+                            style={{
+                                padding: 12,
+                                backgroundColor: '#f8fafc',
+                                borderRadius: 6,
+                                border: '1px solid #e2e8f0',
+                                fontSize: 11,
+                                fontFamily: 'monospace',
+                            }}
+                        >
                             <div style={{ marginBottom: 8 }}>
-                                <span style={{ fontWeight: 'bold', color: '#0c4a6e' }}>i = {step.i}</span>
-                                <span style={{ marginLeft: 8 }}>({step.binary}₂)</span>
+                                <b>i</b> = {step.i} ({step.binary}₂)
                             </div>
+
                             <div style={{ marginBottom: 8 }}>
-                                <span style={{ fontWeight: 'bold', color: '#0c4a6e' }}>i >> 1 = {step.shifted}</span>
-                                <span style={{ marginLeft: 8 }}>({step.shiftedBinary}₂)</span>
+                                <b>{step.i} &gt;&gt; 1</b> = {step.shifted} ({step.shiftedBinary}₂)
                             </div>
-                            <div style={{ marginBottom: 8 }}>
-                                <span style={{ fontWeight: 'bold', color: '#0c4a6e' }}>XOR = {step.grayValue}</span>
-                                <span style={{ marginLeft: 8 }}>({step.grayBinary}₂)</span>
+
+                            <div>
+                                <b>{step.binary}</b> XOR <b>{step.shiftedBinary}</b>
+                                {' = '}
+                                <span style={{ color: '#0c4a6e' }}>
+                                    {step.grayBinary}₂ ({step.grayValue})
+                                </span>
                             </div>
                         </div>
                     )}

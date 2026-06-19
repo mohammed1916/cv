@@ -10,7 +10,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
-import './DesignSnakeGameVisualizer.css'
+import './Problem352Visualizer.css'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'from collections import deque' },

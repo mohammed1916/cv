@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useMemo } from 'react'
-import DockableWorkspace from '../../components/DockableWorkspace'
-import FloatingPanel from '../../components/FloatingPanel'
+import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 import './Problem369Visualizer.css'
 
 const SOLUTION_CODE = `class ListNode {

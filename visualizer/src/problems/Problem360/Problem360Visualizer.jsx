@@ -9,7 +9,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { useSolutionCode } from "../../hooks/useSolutionCode";
-import "./Visualizer.css";
+import "./Problem360Visualizer.css";
 
 const EXAMPLES = [
   {

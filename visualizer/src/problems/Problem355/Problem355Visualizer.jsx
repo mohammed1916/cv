@@ -9,7 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { useSolutionCode } from '../../hooks/useSolutionCode'
-import './Problem355.css'
+import './Problem355Visualizer.css'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Twitter:' },
