@@ -624,6 +624,34 @@ export const SOLUTION_CODE_REGISTRY = {
     { line: 16, text: '        else: nums[i] = small[j] if j < len(small) else large[k]' },
   ],
 
+  'reconstruct-original-digits': [
+    { line: 1, text: 'class Solution:' },
+    { line: 2, text: '    def originalDigits(self, s: str) -> str:' },
+    { line: 3, text: '        count = [0] * 10' },
+    { line: 4, text: '        char_count = {}' },
+    { line: 5, text: '        for c in s:' },
+    { line: 6, text: '            char_count[c] = char_count.get(c, 0) + 1' },
+    { line: 7, text: '        ' },
+    { line: 8, text: '        # Extract digits with unique characters' },
+    { line: 9, text: '        count[0] = char_count.get("z", 0)  # zero' },
+    { line: 10, text: '        count[2] = char_count.get("w", 0)  # two' },
+    { line: 11, text: '        count[4] = char_count.get("u", 0)  # four' },
+    { line: 12, text: '        count[6] = char_count.get("x", 0)  # six' },
+    { line: 13, text: '        count[8] = char_count.get("g", 0)  # eight' },
+    { line: 14, text: '        ' },
+    { line: 15, text: '        # Extract remaining digits' },
+    { line: 16, text: '        count[3] = char_count.get("h", 0) - count[8]' },
+    { line: 17, text: '        count[5] = char_count.get("f", 0) - count[4]' },
+    { line: 18, text: '        count[7] = char_count.get("s", 0) - count[6] - count[2]' },
+    { line: 19, text: '        count[9] = char_count.get("i", 0) - count[5] - count[6] - count[8]' },
+    { line: 20, text: '        count[1] = char_count.get("o", 0) - count[0] - count[2] - count[4]' },
+    { line: 21, text: '        ' },
+    { line: 22, text: '        result = ""' },
+    { line: 23, text: '        for i in range(10):' },
+    { line: 24, text: '            result += str(i) * count[i]' },
+    { line: 25, text: '        return result' },
+  ],
+
   // Add more problems here...
 };
 

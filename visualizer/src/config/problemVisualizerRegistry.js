@@ -535,6 +535,19 @@ const SOLVED_SLUGS = new Set([
   'strong-password-checker',
   'maximum-xor-of-two-numbers-in-array',
   'valid-word-square',
+  // Problem 423 visualizer
+  'reconstruct-original-digits',
+  // Problems 424-433 visualizers
+  'verbal-arithmetic-puzzle',
+  'word-squares',
+  'convert-bst-to-sorted-doubly-linked-list',
+  'build-expression-tree-from-tokens',
+  'serialize-deserialize-n-ary-tree',
+  'n-ary-tree-level-order-traversal',
+  'flatten-multilevel-doubly-linked-list',
+  'encode-n-ary-tree-to-binary-tree',
+  'all-o-1-data-structure',
+  'minimum-genetic-mutation',
 ])
 
 // ✗ NOT_SOLVED - All problems now solved!

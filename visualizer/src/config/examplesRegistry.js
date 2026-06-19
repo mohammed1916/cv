@@ -6624,6 +6624,21 @@ export const EXAMPLES_REGISTRY = {
       "label": "Random",
       "nums": [9, 2, 7, 4, 5, 1, 8, 6]
     }
+  ],
+
+  "reconstruct-original-digits": [
+    {
+      "label": "Simple",
+      "tokens": "zerozerozerozerotwotwotwotwo"
+    },
+    {
+      "label": "Mixed",
+      "tokens": "owoztneoer"
+    },
+    {
+      "label": "All Digits",
+      "tokens": "zeroonetwothreefourfivesixseveneightnine"
+    }
   ]
 }
 
