@@ -1,0 +1,148 @@
+.sucs-root {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-bottom: 3rem;
+}
+
+.sucs-card {
+  background: #313244;
+  border: 1px solid #45475a;
+  border-radius: 12px;
+  padding: 1.35rem 1.45rem;
+}
+
+.sucs-input-card {
+  border-color: rgba(0,0,0, 0.16);
+}
+
+.sucs-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.sucs-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.42rem;
+  flex: 1;
+  min-width: 150px;
+}
+
+.sucs-input-label,
+.sucs-section-label,
+.sucs-info-key,
+.sucs-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #a6adc8;
+}
+
+.sucs-input {
+  background: #1e1e2e;
+  border: 1px solid #45475a;
+  border-radius: 8px;
+  padding: 0.65rem 0.85rem;
+  color: #cdd6f4;
+}
+
+.sucs-input:focus {
+  outline: none;
+  border-color: #f97316;
+  box-shadow: 0 0 8px rgba(0,0,0, 0.15);
+}
+
+.sucs-btn {
+  padding: 0.65rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.sucs-btn-primary {
+  background: #f97316;
+  color: #1e1e2e;
+}
+
+.sucs-btn-primary:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+.sucs-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.sucs-subtitle {
+  font-size: 0.9rem;
+  color: #a6adc8;
+  margin-top: 0.3rem;
+}
+
+.sucs-visualization,
+.sucs-table-container {
+  margin: 1.5rem 0;
+}
+
+.sucs-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #1e1e2e;
+  border: 1px solid #45475a;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 0.9rem;
+}
+
+.sucs-table th,
+.sucs-table td {
+  padding: 0.75rem;
+  text-align: center;
+  border: 1px solid #45475a;
+  color: #cdd6f4;
+}
+
+.sucs-table th {
+  background: #45475a;
+  font-weight: 600;
+  color: #a6adc8;
+}
+
+.sucs-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #45475a;
+}
+
+.sucs-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.sucs-info-item.wide {
+  grid-column: 1 / -1;
+}
+
+.sucs-info-value {
+  font-size: 1rem;
+  color: #cdd6f4;
+  font-weight: 500;
+}
+
+.sucs-main-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

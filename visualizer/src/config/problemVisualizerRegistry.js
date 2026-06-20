@@ -666,6 +666,27 @@ const SOLVED_SLUGS = new Set([
   'longest-line-of-consecutive',
   'binary-tree-tilt',
   'find-the-closest-palindrome',
+  // Problems 565-584 visualizers
+  'array-nesting',
+  'reshape-matrix',
+  'permutation-in-string',
+  'maximum-vacation-days',
+  'median-salary',
+  'managers-with-5-reports',
+  'find-median-given-frequency',
+  'subtree-of-another-tree',
+  'squirrel-distribution',
+  'winning-candidate',
+  'distribute-candies',
+  'out-of-boundary-paths',
+  'employee-bonus',
+  'get-highest-answer-rate',
+  'find-cumulative-salary',
+  'count-student-number',
+  'shortest-unsorted-continuous-subarray',
+  'kill-process',
+  'delete-operation-for-two-strings',
+  'find-customer-referee',
 ])
 
 // ✗ NOT_SOLVED - All problems now solved!

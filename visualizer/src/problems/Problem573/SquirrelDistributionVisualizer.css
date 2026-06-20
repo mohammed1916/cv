@@ -1,0 +1,72 @@
+.squirrelDistribution-root {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-bottom: 3rem;
+}
+
+.squirrelDistribution-card {
+  background: #313244;
+  border: 1px solid #45475a;
+  border-radius: 12px;
+  padding: 1.35rem 1.45rem;
+}
+
+.squirrelDistribution-input-card {
+  border-color: rgba(0,0,0, 0.16);
+}
+
+.squirrelDistribution-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.squirrelDistribution-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.42rem;
+  flex: 1;
+  min-width: 200px;
+}
+
+.squirrelDistribution-input-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #a6adc8;
+}
+
+.squirrelDistribution-input {
+  background: #1e1e2e;
+  border: 1px solid #45475a;
+  border-radius: 8px;
+  padding: 0.65rem 0.85rem;
+  color: #cdd6f4;
+}
+
+.squirrelDistribution-input:focus {
+  outline: none;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 8px rgba(0,0,0, 0.15);
+}
+
+.squirrelDistribution-btn {
+  padding: 0.65rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.squirrelDistribution-btn-primary {
+  background: #8b5cf6;
+  color: #1e1e2e;
+  font-weight: 500;
+}
+
+.squirrelDistribution-btn-primary:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}

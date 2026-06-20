@@ -1,0 +1,247 @@
+.ps-root {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-bottom: 3rem;
+}
+
+.ps-card {
+  background: #313244;
+  border: 1px solid #45475a;
+  border-radius: 12px;
+  padding: 1.35rem 1.45rem;
+}
+
+.ps-input-card {
+  border-color: rgba(139, 92, 246, 0.16);
+}
+
+.ps-input-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.ps-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.42rem;
+  flex: 1;
+  min-width: 120px;
+}
+
+.ps-input-label,
+.ps-section-label,
+.ps-info-key,
+.ps-label,
+.ps-count-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #a6adc8;
+}
+
+.ps-input {
+  background: #1e1e2e;
+  border: 1px solid #45475a;
+  border-radius: 8px;
+  padding: 0.65rem 0.85rem;
+  color: #cdd6f4;
+  font-size: 0.95rem;
+}
+
+.ps-input:focus {
+  outline: none;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 8px rgba(139, 92, 246, 0.15);
+}
+
+.ps-btn {
+  padding: 0.65rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.ps-btn-primary {
+  background: #8b5cf6;
+  color: #fff;
+}
+
+.ps-btn-primary:hover {
+  background: #7c3aed;
+  transform: translateY(-1px);
+}
+
+.ps-visualization {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.ps-string-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ps-label {
+  margin-bottom: 0.25rem;
+}
+
+.ps-string-display {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.ps-char {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #45475a;
+  border: 2px solid #45475a;
+  border-radius: 6px;
+  color: #89b4fa;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.ps-char.in-window {
+  border-color: #8b5cf6;
+}
+
+.ps-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.ps-found-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(166, 227, 161, 0.15);
+  border: 1px solid rgba(166, 227, 161, 0.5);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  color: #a6e3a1;
+  font-weight: 600;
+}
+
+.ps-subtitle {
+  font-size: 0.9rem;
+  color: #a6adc8;
+  margin-top: 0.3rem;
+}
+
+.ps-counts-row {
+  display: flex;
+  gap: 2rem;
+  margin: 1.5rem 0;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.ps-count-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 150px;
+}
+
+.ps-count-label {
+  margin-bottom: 0.25rem;
+}
+
+.ps-count-display {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  background: #1e1e2e;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #45475a;
+}
+
+.ps-count-item {
+  font-family: 'Courier New', monospace;
+  color: #cdd6f4;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.ps-count-item.match {
+  color: #a6e3a1;
+  font-weight: 700;
+}
+
+.ps-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #45475a;
+}
+
+.ps-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.ps-info-item.wide {
+  grid-column: 1 / -1;
+}
+
+.ps-info-value {
+  font-size: 1rem;
+  color: #cdd6f4;
+  font-weight: 500;
+}
+
+.ps-example-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.ps-example-card {
+  background: #1e1e2e;
+  border: 1px solid #45475a;
+  border-radius: 8px;
+  padding: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.ps-example-card:hover {
+  border-color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.08);
+}
+
+.ps-example-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #cdd6f4;
+}
+
+.ps-main-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
