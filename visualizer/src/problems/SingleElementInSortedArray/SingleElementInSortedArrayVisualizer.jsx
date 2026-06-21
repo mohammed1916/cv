@@ -15,7 +15,7 @@ const EXAMPLES=getExamples('single-element-in-sorted-array')
 function generateSteps(nums){const steps=[]
 steps.push({activeLine:1,nums,left:0,right:nums.length-1,phase:'init',message:'Binary search for single element',relatedLines:[1]})
 let left=0,right=nums.length-1
-while(left<right){const mid=Math.floor((left+right)/2);steps.push({activeLine:4,nums,left,right,mid,phase:'search',message:`mid=${mid}`,relatedLines:[4]})
+while(left<right){let mid=Math.floor((left+right)/2);steps.push({activeLine:4,nums,left,right,mid,phase:'search',message:`mid=${mid}`,relatedLines:[4]})
 if(mid%2===1){steps.push({activeLine:5,nums,left,right,mid,phase:'adjust',message:`mid=${mid} is odd, adjust to ${mid-1}`,relatedLines:[5]});mid=mid-1}
 if(nums[mid]===nums[mid+1]){steps.push({activeLine:7,nums,left,right,mid,phase:'go_right',message:`nums[${mid}]===nums[${mid+1}], single is on right`,relatedLines:[7]});left=mid+2}else{steps.push({activeLine:9,nums,left,right,mid,phase:'go_left',message:`nums[${mid}]!==nums[${mid+1}], single is on left`,relatedLines:[9]});right=mid}}
 steps.push({activeLine:10,nums,left,result:nums[left],phase:'done',message:`Found single element: ${nums[left]}`,relatedLines:[10],done:true,result:nums[left]})

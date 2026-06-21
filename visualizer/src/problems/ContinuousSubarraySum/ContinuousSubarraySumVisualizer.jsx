@@ -123,7 +123,7 @@ function VisualizationPanel({ nums, k, step, applyEx }) {
       {/* Story */}
       <div style={{ padding: 12, backgroundColor: '#f0f9ff', borderRadius: 6, borderLeft: '4px solid #0284c7' }}>
         <div style={{ fontSize: 12, color: '#075985', fontStyle: 'italic' }}>
-          "Find a contiguous subarray of length >= 2 whose sum is divisible by k using prefix sums."
+          "Find a contiguous subarray of length &gt;= 2 whose sum is divisible by k using prefix sums."
         </div>
       </div>
 

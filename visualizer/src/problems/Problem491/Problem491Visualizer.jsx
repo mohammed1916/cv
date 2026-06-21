@@ -75,7 +75,7 @@ function VisualizationPanel({ nums, step, applyEx }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
       <div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, borderLeft: '4px solid #f97316' }}>
         <div style={{ fontSize: 12, color: '#92400e', fontStyle: 'italic' }}>
-          Find all increasing subsequences (length >= 2) without duplicates using backtracking.
+          Find all increasing subsequences (length &gt;= 2) without duplicates using backtracking.
         </div>
       </div>
 

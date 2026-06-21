@@ -338,7 +338,7 @@ function VisualizationPanel({ step, EXAMPLES, handleExampleClick, bucketsInput, 
           Pig Logic
         </div>
         <div style={{ fontSize: 12, color: '#22c55e', lineHeight: 1.4 }}>
-          Each pig can distinguish multiple states. Find minimum pigs where states^pigs >= buckets.
+          Each pig can distinguish multiple states. Find minimum pigs where states^pigs &gt;= buckets.
         </div>
       </div>
     </section>

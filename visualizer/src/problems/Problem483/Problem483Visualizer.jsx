@@ -43,7 +43,7 @@ function VisualizationPanel({ n, step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
       <div style={{ padding: 12, backgroundColor: '#f0f9ff', borderRadius: 6, borderLeft: '4px solid #0284c7' }}>
-        <div style={{ fontSize: 12, color: '#075985', fontStyle: 'italic' }}>Find the smallest base k such that n can be expressed as x^m (at least m >= 2).</div>
+        <div style={{ fontSize: 12, color: '#075985', fontStyle: 'italic' }}>Find the smallest base k such that n can be expressed as x^m (at least m &gt;= 2).</div>
       </div>
 
       <div>

@@ -40,7 +40,7 @@ function VisualizationPanel({ nums, step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
       <div style={{ padding: 12, backgroundColor: '#ede9fe', borderRadius: 6, borderLeft: '4px solid #8b5cf6' }}>
-        <div style={{ fontSize: 12, color: '#4c1d95', fontStyle: 'italic' }}>Find pairs (i,j) where i < j and nums[i] > 2*nums[j] using divide & conquer.</div>
+        <div style={{ fontSize: 12, color: '#4c1d95', fontStyle: 'italic' }}>Find pairs (i,j) where i &lt; j and nums[i] &gt; 2*nums[j] using divide &amp; conquer.</div>
       </div>
       <div><div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Array: [{nums.join(', ')}]</div></div>
       {step?.pairs && step.pairs.length > 0 && (

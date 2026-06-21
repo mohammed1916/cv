@@ -39,7 +39,7 @@ function VisualizationPanel({ area, step, applyEx }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
       <div style={{ padding: 12, backgroundColor: '#cffafe', borderRadius: 6, borderLeft: '4px solid #06b6d4' }}>
         <div style={{ fontSize: 12, color: '#164e63', fontStyle: 'italic' }}>
-          Find rectangle dimensions with given area, maximizing the length to width ratio (length >= width).
+          Find rectangle dimensions with given area, maximizing the length to width ratio (length &gt;= width).
         </div>
       </div>
       <div><div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Given Area: {area}</div></div>
