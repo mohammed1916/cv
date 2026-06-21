@@ -141,86 +141,86 @@ export default function TwoSumVisualizer() {
         minRightPx={280}
         left={(
           <div className="twosum-panel">
-          <div className="twosum-panel-head">
-            Array & Target
-            {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
-          </div>
-          <div className="twosum-panel-body">
-            <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
-              {EXAMPLES.map((ex) => (
-                <button
-                  key={ex.label}
-                  onClick={() => applyExample(ex)}
-                  className="twosum-example-btn"
-                >
-                  {ex.label}
-                </button>
-              ))}
+            <div className="twosum-panel-head">
+              Array & Target
+              {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
             </div>
-
-            <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center' }}>
-              <input
-                value={numsInput}
-                onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-                placeholder="[2, 7, 11, 15]"
-                className="twosum-input"
-                style={{ flex: 1, margin: 0 }}
-              />
-              <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace' }}>target=</span>
-              <input
-                value={targetInput}
-                onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
-                placeholder="9"
-                className="twosum-input"
-                style={{ width: '60px', margin: 0, textAlign: 'center' }}
-              />
-            </div>
-
-            <div className="twosum-array-container">
-              {nums.map((num, idx) => {
-                const isActive = step?.i === idx
-                const isMatch = step?.phase === 'found' && (step.matchIdx === idx || step.i === idx)
-                const isStored = step?.prevMap && num in step.prevMap && step.prevMap[num] === idx
-
-                return (
-                  <div key={idx} className="twosum-cell-wrapper">
-                    <span className="twosum-index">{idx}</span>
-                    <motion.div
-                      className={`twosum-cell ${isActive ? 'active' : ''} ${isMatch ? 'match' : ''} ${isStored && !isActive && !isMatch ? 'stored' : ''}`}
-                      animate={isActive ? { y: -5 } : { y: 0 }}
-                    >
-                      {num}
-                    </motion.div>
-                    <div className="twosum-ptr-container">
-                      {isActive && <div className="twosum-ptr">i</div>}
-                      {isMatch && step.matchIdx === idx && <div className="twosum-ptr match">match</div>}
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-
-            {step && step.phase !== 'init' && step.i !== null && (
-              <div className="twosum-formula-box">
-                <div className="twosum-formula">
-                  <span className="var">target</span>
-                  <span className="op">-</span>
-                  <span className="var">nums[i]</span>
-                  <span className="op">=</span>
-                  <span className="var diff">diff</span>
-                </div>
-                <div className="twosum-formula vals">
-                  <span className="val">{target}</span>
-                  <span className="op">-</span>
-                  <span className="val">{step.n}</span>
-                  <span className="op">=</span>
-                  <span className={`val diff ${step.diff !== null ? 'visible' : ''} ${step.phase === 'found' ? 'match' : ''}`}>
-                    {step.diff}
-                  </span>
-                </div>
+            <div className="twosum-panel-body">
+              <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
+                {EXAMPLES.map((ex) => (
+                  <button
+                    key={ex.label}
+                    onClick={() => applyExample(ex)}
+                    className="twosum-example-btn"
+                  >
+                    {ex.label}
+                  </button>
+                ))}
               </div>
-            )}
-          </div>
+
+              <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center' }}>
+                <input
+                  value={numsInput}
+                  onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
+                  placeholder="[2, 7, 11, 15]"
+                  className="twosum-input"
+                  style={{ flex: 1, margin: 0 }}
+                />
+                <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace' }}>target=</span>
+                <input
+                  value={targetInput}
+                  onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
+                  placeholder="9"
+                  className="twosum-input"
+                  style={{ width: '60px', margin: 0, textAlign: 'center' }}
+                />
+              </div>
+
+              <div className="twosum-array-container">
+                {nums.map((num, idx) => {
+                  const isActive = step?.i === idx
+                  const isMatch = step?.phase === 'found' && (step.matchIdx === idx || step.i === idx)
+                  const isStored = step?.prevMap && num in step.prevMap && step.prevMap[num] === idx
+
+                  return (
+                    <div key={idx} className="twosum-cell-wrapper">
+                      <span className="twosum-index">{idx}</span>
+                      <motion.div
+                        className={`twosum-cell ${isActive ? 'active' : ''} ${isMatch ? 'match' : ''} ${isStored && !isActive && !isMatch ? 'stored' : ''}`}
+                        animate={isActive ? { y: -5 } : { y: 0 }}
+                      >
+                        {num}
+                      </motion.div>
+                      <div className="twosum-ptr-container">
+                        {isActive && <div className="twosum-ptr">i</div>}
+                        {isMatch && step.matchIdx === idx && <div className="twosum-ptr match">match</div>}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+
+              {step && step.phase !== 'init' && step.i !== null && (
+                <div className="twosum-formula-box">
+                  <div className="twosum-formula">
+                    <span className="var">target</span>
+                    <span className="op">-</span>
+                    <span className="var">nums[i]</span>
+                    <span className="op">=</span>
+                    <span className="var diff">diff</span>
+                  </div>
+                  <div className="twosum-formula vals">
+                    <span className="val">{target}</span>
+                    <span className="op">-</span>
+                    <span className="val">{step.n}</span>
+                    <span className="op">=</span>
+                    <span className={`val diff ${step.diff !== null ? 'visible' : ''} ${step.phase === 'found' ? 'match' : ''}`}>
+                      {step.diff}
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         )}
         right={(
@@ -261,15 +261,13 @@ export default function TwoSumVisualizer() {
         )}
       />
 
-      <div className="twosum-middle">
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-        />
-      </div>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+      />
 
       <div className={`twosum-status ${step?.phase === 'found' ? 'success' : step?.phase === 'done' ? 'fail' : ''}`}>
         {step?.message ?? 'Press Play or Step to begin.'}

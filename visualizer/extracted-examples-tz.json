@@ -1,0 +1,349 @@
+{
+  "text-justification": [
+    {
+      "label": "Ex 1",
+      "words": ["This", "is", "an", "example", "of", "text", "justification"],
+      "maxWidth": 16
+    },
+    {
+      "label": "Ex 2",
+      "words": ["What", "must", "be", "acknowledgment", "shall", "be"],
+      "maxWidth": 16
+    },
+    {
+      "label": "Ex 3",
+      "words": ["the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"],
+      "maxWidth": 12
+    }
+  ],
+  "three-sum": [
+    {
+      "label": "Classic",
+      "nums": [-1, 0, 1, 2, -1, -4]
+    },
+    {
+      "label": "All Zeros",
+      "nums": [0, 0, 0, 0]
+    },
+    {
+      "label": "No Match",
+      "nums": [1, 2, 3, 4]
+    },
+    {
+      "label": "Duplicates",
+      "nums": [-2, 0, 0, 2, 2]
+    }
+  ],
+  "three-sum-closest": [
+    {
+      "label": "Classic",
+      "nums": [-1, 2, 1, -4],
+      "target": 1
+    },
+    {
+      "label": "Exact Match",
+      "nums": [0, 0, 0],
+      "target": 1
+    },
+    {
+      "label": "Negative Target",
+      "nums": [-4, -1, -1, 0, 1, 2],
+      "target": -5
+    },
+    {
+      "label": "Large Gap",
+      "nums": [-1000, 0, 1, 2, -1, -4],
+      "target": 0
+    }
+  ],
+  "top-kfrequent": [
+    {
+      "label": "[1,1,1,2,2,3] k=2",
+      "nums": [1, 1, 1, 2, 2, 3],
+      "k": 2
+    },
+    {
+      "label": "[1] k=1",
+      "nums": [1],
+      "k": 1
+    },
+    {
+      "label": "[4,1,1,2,2,3,3,3] k=2",
+      "nums": [4, 1, 1, 2, 2, 3, 3, 3],
+      "k": 2
+    }
+  ],
+  "trapping-rain-water": [
+    {
+      "label": "Classic",
+      "height": [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
+    },
+    {
+      "label": "Mountain",
+      "height": [4, 2, 0, 3, 2, 5]
+    },
+    {
+      "label": "Pyramid",
+      "height": [1, 2, 3, 4, 3, 2, 1]
+    },
+    {
+      "label": "Bowl",
+      "height": [5, 1, 1, 1, 5]
+    }
+  ],
+  "two-sum": [
+    {
+      "label": "Example 1",
+      "nums": [2, 7, 11, 15],
+      "target": 9
+    },
+    {
+      "label": "Example 2",
+      "nums": [3, 2, 4],
+      "target": 6
+    },
+    {
+      "label": "Same Values",
+      "nums": [3, 3],
+      "target": 6
+    },
+    {
+      "label": "Negatives",
+      "nums": [-3, 4, 3, 90],
+      "target": 0
+    }
+  ],
+  "ugly-number-ii": [
+    {
+      "label": "n=10",
+      "n": 10
+    },
+    {
+      "label": "n=15",
+      "n": 15
+    },
+    {
+      "label": "n=8",
+      "n": 8
+    },
+    {
+      "label": "n=1",
+      "n": 1
+    }
+  ],
+  "unique-binary-search-trees": [
+    {
+      "label": "n=3",
+      "n": 3
+    },
+    {
+      "label": "n=1",
+      "n": 1
+    },
+    {
+      "label": "n=2",
+      "n": 2
+    },
+    {
+      "label": "n=4",
+      "n": 4
+    }
+  ],
+  "unique-paths": [
+    {
+      "label": "3×7",
+      "m": 3,
+      "n": 7
+    },
+    {
+      "label": "3×2",
+      "m": 3,
+      "n": 2
+    },
+    {
+      "label": "2×2",
+      "m": 2,
+      "n": 2
+    },
+    {
+      "label": "4×4",
+      "m": 4,
+      "n": 4
+    },
+    {
+      "label": "5×5",
+      "m": 5,
+      "n": 5
+    }
+  ],
+  "valid-anagram": [
+    {
+      "label": "Anagram",
+      "s": "anagram",
+      "t": "nagaram"
+    },
+    {
+      "label": "Not anagram",
+      "s": "rat",
+      "t": "car"
+    },
+    {
+      "label": "Same",
+      "s": "listen",
+      "t": "silent"
+    },
+    {
+      "label": "Diff length",
+      "s": "hello",
+      "t": "world!"
+    }
+  ],
+  "validate-bst": [
+    {
+      "label": "Valid",
+      "arr": [5, 3, 7, 1, 4, 6, 8]
+    },
+    {
+      "label": "Invalid",
+      "arr": [5, 1, 4, null, null, 3, 6]
+    },
+    {
+      "label": "LeetCode",
+      "arr": [2, 1, 3]
+    },
+    {
+      "label": "Tricky",
+      "arr": [10, 5, 15, null, null, 6, 20]
+    }
+  ],
+  "valid-palindrome": [
+    {
+      "label": "A man a plan",
+      "s": "A man, a plan, a canal: Panama"
+    },
+    {
+      "label": "race a car",
+      "s": "race a car"
+    },
+    {
+      "label": "\" \"",
+      "s": " "
+    },
+    {
+      "label": "Was it a car",
+      "s": "Was it a car or a cat I saw?"
+    }
+  ],
+  "valid-parentheses": [
+    {
+      "label": "Valid",
+      "s": "()[]{}"
+    },
+    {
+      "label": "Nested",
+      "s": "({[]})"
+    },
+    {
+      "label": "Mismatch",
+      "s": "(]"
+    },
+    {
+      "label": "Unmatched Open",
+      "s": "((())"
+    },
+    {
+      "label": "Unmatched Close",
+      "s": "())"
+    }
+  ],
+  "wildcard-matching": [
+    {
+      "label": "aa / a*",
+      "s": "aa",
+      "p": "a*"
+    },
+    {
+      "label": "cb / ?a",
+      "s": "cb",
+      "p": "?a"
+    },
+    {
+      "label": "abc / a*c",
+      "s": "abc",
+      "p": "a*c"
+    },
+    {
+      "label": "aab / c*a*b",
+      "s": "aab",
+      "p": "c*a*b"
+    }
+  ],
+  "word-break": [
+    {
+      "label": "Classic",
+      "s": "leetcode",
+      "dict": ["leet", "code"]
+    },
+    {
+      "label": "Applepenapple",
+      "s": "applepenapple",
+      "dict": ["apple", "pen"]
+    },
+    {
+      "label": "Cannot",
+      "s": "catsandog",
+      "dict": ["cats", "dog", "sand", "and", "cat"]
+    },
+    {
+      "label": "Short",
+      "s": "cars",
+      "dict": ["car", "ca", "rs"]
+    }
+  ],
+  "word-ladder": [
+    {
+      "label": "hit→cog",
+      "beginWord": "hit",
+      "endWord": "cog",
+      "wordList": ["hot", "dot", "dog", "lot", "log", "cog"]
+    },
+    {
+      "label": "hit→dog",
+      "beginWord": "hit",
+      "endWord": "dog",
+      "wordList": ["hot", "dot", "dog", "lot"]
+    }
+  ],
+  "zigzag-conversion": [
+    {
+      "label": "Classic",
+      "value": "PAYPALISHIRING",
+      "rows": 3,
+      "note": "3 rows produces palindromic pattern"
+    },
+    {
+      "label": "4 rows",
+      "value": "PAYPALISHIRING",
+      "rows": 4,
+      "note": "4 rows with extended string"
+    },
+    {
+      "label": "Short 1",
+      "value": "AB",
+      "rows": 1,
+      "note": "Single row (no zigzag)"
+    },
+    {
+      "label": "Short 2",
+      "value": "ABC",
+      "rows": 2,
+      "note": "2 rows basic"
+    },
+    {
+      "label": "Long",
+      "value": "ABCDEFGHIJ",
+      "rows": 3,
+      "note": "Longer string with 3 rows"
+    }
+  ]
+}

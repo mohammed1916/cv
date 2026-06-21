@@ -1,0 +1,61 @@
+{
+  "_comment": "These entries are missing from examplesRegistry.js and need to be added",
+  "ugly-number-ii": [
+    {
+      "label": "n=10",
+      "n": 10
+    },
+    {
+      "label": "n=15",
+      "n": 15
+    },
+    {
+      "label": "n=8",
+      "n": 8
+    },
+    {
+      "label": "n=1",
+      "n": 1
+    }
+  ],
+  "zigzag-conversion": [
+    {
+      "label": "Classic",
+      "value": "PAYPALISHIRING",
+      "rows": 3,
+      "note": "3 rows produces palindromic pattern"
+    },
+    {
+      "label": "4 rows",
+      "value": "PAYPALISHIRING",
+      "rows": 4,
+      "note": "4 rows with extended string"
+    },
+    {
+      "label": "Short 1",
+      "value": "AB",
+      "rows": 1,
+      "note": "Single row (no zigzag)"
+    },
+    {
+      "label": "Short 2",
+      "value": "ABC",
+      "rows": 2,
+      "note": "2 rows basic"
+    },
+    {
+      "label": "Long",
+      "value": "ABCDEFGHIJ",
+      "rows": 3,
+      "note": "Longer string with 3 rows"
+    }
+  ],
+  "_instructions": [
+    "1. Open src/config/examplesRegistry.js",
+    "2. Locate the EXAMPLES_REGISTRY object",
+    "3. Add these entries in alphabetical order by slug",
+    "4. Ensure proper comma placement between entries",
+    "5. Verify the getExamples() function works with new slugs",
+    "6. Test visualizers to confirm examples load correctly"
+  ]
+}

@@ -6909,7 +6909,7 @@ export const EXAMPLES_REGISTRY = {
  * @returns {Array} Array of example objects, or empty array if problem not found
  */
 export function getExamples(problemSlug) {
-  return EXAMPLES_REGISTRY[problemSlug] || []
+  return EXAMPLES_REGISTRY[problemSlug]
 }
 
 /**
