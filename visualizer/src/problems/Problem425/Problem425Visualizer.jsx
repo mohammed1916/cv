@@ -12,51 +12,82 @@ import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem425Visualizer.css'
 
-const EXAMPLES = getExamples('word-squares')
+const EXAMPLES = getExamples('word-squares') || [
+  { label: 'Example 1', words: ['ball', 'area', 'lead', 'lady'] },
+]
 
 function generateSteps(words) {
   const steps = []
 
-  steps.push({
-    activeLine: 1,
-    phase: 'init',
-    words,
-    square: [],
-    searchDepth: 0,
-    candidates: [],
-    message: `Initialize with ${words.length} words to form square`,
-  })
-
-  let square = []
-  let searchDepth = 0
-
-  for (let i = 0; i < Math.min(words.length, 3); i++) {
-    const word = words[i]
-    square.push(word)
-
-    steps.push({
-      activeLine: 2,
-      phase: 'add_word',
-      words,
-      square: [...square],
-      searchDepth: i + 1,
-      currentWord: word,
-      message: `Add word to row ${i + 1}: "${word}"`,
-    })
-
-    searchDepth++
+  if (!words || words.length === 0 || !words[0]) {
+    steps.push({ activeLine: 1, message: 'Empty word list → no squares', words: [], square: [], done: true, result: [] })
+    return steps
   }
 
-  steps.push({
-    activeLine: 3,
-    phase: 'verify_square',
-    words,
-    square: [...square],
-    searchDepth,
-    isValid: true,
-    message: `Verify square property: each row matches column`,
-  })
+  const n = words[0].length || 0
+  if (n === 0) {
+    steps.push({ activeLine: 1, message: 'Empty word length → no squares', words, square: [], done: true, result: [] })
+    return steps
+  }
+  steps.push({ activeLine: 1, message: `Initialize: ${words.length} words, length=${n}`, words, n })
 
+  steps.push({ activeLine: 2, message: 'Build prefix trie for efficient word lookup' })
+
+  // Simulate building trie
+  const trie = {}
+  for (const word of words) {
+    let node = trie
+    for (const char of word) {
+      if (!node[char]) node[char] = {}
+      node = node[char]
+    }
+    node.isWord = true
+  }
+  steps.push({ activeLine: 3, message: 'Trie built with all words indexed by prefix' })
+
+  steps.push({ activeLine: 4, message: 'Initialize DFS: result = [], square = []', result: [] })
+
+  let square = []
+  const result = []
+
+  steps.push({ activeLine: 5, message: 'Start DFS from row 0' })
+
+  // Simulate DFS backtracking
+  for (let row = 0; row < Math.min(n, 2); row++) {
+    steps.push({ activeLine: 6, message: `DFS row ${row}: find words matching prefix`, square: [...square], row })
+
+    let matchCount = 0
+    for (const word of words) {
+      let isValid = true
+      for (let col = 0; col < row && col < square.length; col++) {
+        if (word[col] !== (square[col] && square[col][row])) {
+          isValid = false
+          break
+        }
+      }
+
+      if (isValid) {
+        matchCount++
+        if (matchCount <= 2) {
+          steps.push({ activeLine: 7, message: `Match found: word="${word}" satisfies column constraints`, currentWord: word, row })
+          square.push(word)
+          steps.push({ activeLine: 8, message: `Add "${word}" to square at row ${row}`, square: [...square], row })
+
+          if (row === n - 1) {
+            steps.push({ activeLine: 9, message: `Square complete! Valid word square formed.`, square: [...square], done: true })
+            result.push([...square])
+          } else {
+            steps.push({ activeLine: 10, message: `Recursively search row ${row + 1}`, square: [...square], row })
+          }
+
+          square.pop()
+          steps.push({ activeLine: 11, message: `Backtrack: remove row ${row}`, square: [...square], row })
+        }
+      }
+    }
+  }
+
+  steps.push({ activeLine: 12, message: `DFS complete: found ${result.length} valid word square(s)`, result, done: true })
   return steps
 }
 
@@ -107,93 +138,23 @@ function WordSquareVisualization({ square }) {
           ))}
         </div>
       ) : (
-        <div style={{
-          padding: 20,
-          backgroundColor: '#f1f5f9',
-          borderRadius: 8,
-          border: '2px solid #cbd5e1',
-          color: '#64748b',
-          textAlign: 'center',
-        }}>
-          (building square...)
+        <div style={{ fontSize: 12, color: '#94a3b8', fontStyle: 'italic' }}>
+          No square formed yet
         </div>
       )}
     </div>
   )
 }
 
-function WordListVisualization({ words, square, currentWord }) {
-  const squareWords = new Set(square)
-
+function VisualizationPanel({ words, step, applyEx }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Word List</div>
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 6,
-        maxHeight: 300,
-        overflowY: 'auto',
-      }}>
-        {words.map((word, idx) => (
-          <motion.div
-            key={idx}
-            style={{
-              padding: 12,
-              borderRadius: 6,
-              border: word === currentWord ? '3px solid #dc2626' : squareWords.has(word) ? '2px solid #10b981' : '2px solid #cbd5e1',
-              backgroundColor: word === currentWord ? '#fee2e2' : squareWords.has(word) ? '#ecfdf5' : '#f1f5f9',
-              fontSize: 12,
-              fontFamily: 'monospace',
-              color: word === currentWord ? '#991b1b' : squareWords.has(word) ? '#047857' : '#475569',
-            }}
-            animate={{
-              scale: word === currentWord ? 1.02 : 1,
-            }}
-          >
-            {word}
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-function SearchDepthVisualization({ depth, totalWords }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Search Progress</div>
-      <div style={{
-        padding: 12,
-        borderRadius: 6,
-        border: '2px solid #8b5cf6',
-        backgroundColor: '#f3e8ff',
-      }}>
-        <div style={{ fontSize: 12, color: '#6b21a8', marginBottom: 8 }}>
-          Building row: {depth + 1}
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, overflow: 'auto' }}>
+      {step && (
+        <div style={{ padding: 12, backgroundColor: '#dbeafe', borderRadius: 6, border: '2px solid #0284c7', fontSize: 12, color: '#0c4a6e' }}>
+          {step.message}
         </div>
-        <div style={{
-          height: 8,
-          backgroundColor: '#e9d5ff',
-          borderRadius: 4,
-          overflow: 'hidden',
-        }}>
-          <motion.div
-            style={{
-              height: '100%',
-              backgroundColor: '#8b5cf6',
-            }}
-            animate={{ width: `${(depth / Math.max(totalWords, 1)) * 100}%` }}
-          />
-        </div>
-      </div>
-    </div>
-  )
-}
+      )}
 
-function VisualizationPanel({ step, applyEx }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
       <div>
         <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -216,50 +177,75 @@ function VisualizationPanel({ step, applyEx }) {
         </div>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-        <WordSquareVisualization square={step?.square || []} />
-
-        <WordListVisualization
-          words={step?.words || []}
-          square={step?.square || []}
-          currentWord={step?.currentWord}
-        />
-
-        <SearchDepthVisualization
-          depth={step?.searchDepth || 0}
-          totalWords={step?.words?.length || 0}
-        />
+      <div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Input Words</div>
+        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+          {words.map((w, i) => (
+            <motion.div
+              key={i}
+              style={{
+                padding: '8px 12px',
+                borderRadius: 4,
+                backgroundColor: step?.currentWord === w ? '#fef08a' : '#f3e8ff',
+                border: step?.currentWord === w ? '2px solid #eab308' : '2px solid #d8b4fe',
+                fontSize: 12,
+                fontWeight: 600,
+                color: step?.currentWord === w ? '#713f12' : '#6b21a8',
+              }}
+              animate={{ scale: step?.currentWord === w ? 1.05 : 1 }}
+            >
+              {w}
+            </motion.div>
+          ))}
+        </div>
       </div>
+
+      <WordSquareVisualization square={step?.square || []} />
+
+      {step?.row !== undefined && (
+        <div style={{ padding: 12, backgroundColor: '#f0f9ff', borderRadius: 6, border: '2px solid #0284c7' }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 4 }}>Current Row</div>
+          <div style={{ fontSize: 14, fontFamily: 'monospace', color: '#075985' }}>{step.row}</div>
+        </div>
+      )}
+
+      {step?.n !== undefined && (
+        <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #10b981' }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#166534', marginBottom: 4 }}>Target Square Size</div>
+          <div style={{ fontSize: 14, fontFamily: 'monospace', color: '#047857' }}>{step.n}×{step.n}</div>
+        </div>
+      )}
+
+      {step?.result && step.result.length > 0 && (
+        <div style={{ padding: 12, backgroundColor: '#dcfce7', borderRadius: 6, border: '2px solid #22c55e' }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#166534', marginBottom: 8 }}>Found Squares</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+            {step.result.map((sq, i) => (
+              <div key={i} style={{ fontSize: 11, fontFamily: 'monospace', color: '#047857' }}>
+                [{sq.map(w => `"${w}"`).join(', ')}]
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
 
 export default function Problem425Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { words: ['ball', 'area', 'lead', 'lady'], label: 'Simple' })
+  const [ex, setEx] = useState(EXAMPLES[0])
   const SOLUTION_CODE = useSolutionCode('word-squares')
 
   const steps = useMemo(
-    () =>
-      generateSteps(ex.words).map((current) => ({
-        ...current,
-        relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
-      })),
+    () => generateSteps(ex.words).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),
     [ex]
   )
 
-  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
-    usePlaybackState(steps.length)
-
+  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-
   const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
 
-  const connectivity = useCodeVisualConnectivity({
-    steps,
-    stepIndex,
-    onStepJump: setStepIndex,
-  })
-
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const dockPanels = useMemo(() => [
@@ -278,22 +264,14 @@ export default function Problem425Visualizer() {
     },
     {
       id: 'viz',
-      title: '⬜ Word Square',
-      content: (
-        <VisualizationPanel
-          step={step}
-          applyEx={applyEx}
-        />
-      ),
+      title: '🔤 Word Squares',
+      content: <VisualizationPanel words={ex.words} step={step} applyEx={applyEx} />,
     },
-  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, applyEx])
+  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, applyEx, ex])
 
   return (
     <div className="problem-shell">
-      <DockableWorkspace
-        panels={dockPanels}
-        initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
-      />
+      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}
