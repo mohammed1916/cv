@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -12,263 +12,155 @@ import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem427Visualizer.css'
 
-const EXAMPLES = getExamples('expression-tree-from-tokens')
+const EXAMPLES = getExamples('expression-tree-from-tokens') || [
+  { label: 'Example 1', tokens: ['2', '1', '+', '3', '*'] },
+]
+
+const isOp = (t) => t === '+' || t === '-' || t === '*' || t === '/'
 
 function generateSteps(tokens) {
   const steps = []
+  let id = 0
+  const stack = [] // each entry: { val, _left, _right, id }
+  const snap = () => stack.map(n => ({ ...n }))
 
   steps.push({
-    activeLine: 1,
-    phase: 'init',
-    tokens,
-    stack: [],
-    parseIndex: 0,
-    treeNodes: [],
-    message: `Parse tokens to build expression tree: ${tokens.join(' ')}`,
+    activeLine: 2,
+    tokens, idx: -1, stack: [],
+    message: 'Initialize an empty stack of subtree nodes',
   })
 
-  let stack = []
-  let treeNodes = []
-  let parseIndex = 0
-
-  for (let i = 0; i < Math.min(tokens.length, 5); i++) {
+  for (let i = 0; i < tokens.length; i++) {
     const token = tokens[i]
-    stack.push(token)
-
     steps.push({
-      activeLine: 2,
-      phase: 'parse_token',
-      tokens,
-      stack: [...stack],
-      parseIndex: i + 1,
-      currentToken: token,
-      treeNodes: [...treeNodes],
-      message: `Process token: "${token}"`,
+      activeLine: 3,
+      tokens, idx: i, stack: snap(),
+      message: `Read token "${token}"`,
     })
 
-    if (!/\d/.test(token) && token !== '-') {
-      treeNodes.push(`Node(${token})`)
-    } else if (/\d/.test(token)) {
-      treeNodes.push(`Leaf(${token})`)
+    const node = { val: token, _left: null, _right: null, id: id++ }
+    steps.push({
+      activeLine: 4,
+      tokens, idx: i, stack: snap(),
+      message: `Create node for "${token}"`,
+    })
+
+    if (isOp(token)) {
+      const right = stack.pop()
+      node._right = right
+      steps.push({
+        activeLine: 6,
+        tokens, idx: i, stack: snap(), highlightId: right?.id,
+        message: `Operator "${token}": pop right operand (${right?.val})`,
+      })
+      const left = stack.pop()
+      node._left = left
+      steps.push({
+        activeLine: 7,
+        tokens, idx: i, stack: snap(), highlightId: left?.id,
+        message: `Pop left operand (${left?.val}) — both become children of "${token}"`,
+      })
     }
+
+    stack.push(node)
+    steps.push({
+      activeLine: 8,
+      tokens, idx: i, stack: snap(), highlightId: node.id,
+      message: `Push subtree rooted at "${token}" onto the stack`,
+    })
   }
 
   steps.push({
-    activeLine: 3,
-    phase: 'build_tree',
-    tokens,
-    stack: [...stack],
-    parseIndex: tokens.length,
-    treeNodes: [...treeNodes],
-    treeComplete: true,
-    message: `Expression tree constructed`,
+    activeLine: 9,
+    tokens, idx: tokens.length, stack: snap(),
+    done: true,
+    message: 'Return the single remaining node — the expression tree root',
   })
 
   return steps
 }
 
-function TokenListVisualization({ tokens, parseIndex, currentToken }) {
+function TreeNodeView({ node }) {
+  if (!node) return null
+  const hasChildren = node._left || node._right
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Token Stream</div>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
       <div style={{
-        display: 'flex',
-        gap: 8,
-        flexWrap: 'wrap',
-        padding: 12,
-        backgroundColor: '#f1f5f9',
-        borderRadius: 8,
-        border: '2px solid #cbd5e1',
-      }}>
-        {tokens.map((token, idx) => {
-          const isParsed = idx < parseIndex
-          const isCurrent = token === currentToken && idx < parseIndex + 1
-
-          return (
-            <motion.div
-              key={idx}
-              style={{
-                padding: '8px 12px',
-                borderRadius: 4,
-                border: isCurrent ? '3px solid #0284c7' : isParsed ? '2px solid #10b981' : '2px solid #cbd5e1',
-                backgroundColor: isCurrent ? '#dbeafe' : isParsed ? '#ecfdf5' : '#f1f5f9',
-                fontSize: 12,
-                fontWeight: 600,
-                color: isCurrent ? '#0c4a6e' : isParsed ? '#047857' : '#64748b',
-                fontFamily: 'monospace',
-              }}
-              animate={{
-                scale: isCurrent ? 1.08 : 1,
-              }}
-            >
-              {token}
-            </motion.div>
-          )
-        })}
-      </div>
+        width: 30, height: 30, borderRadius: '50%', backgroundColor: isOp(node.val) ? '#fed7aa' : '#fde68a',
+        border: '2px solid #ea580c', display: 'flex', alignItems: 'center', justifyContent: 'center',
+        fontSize: 13, fontWeight: 700, color: '#7c2d12',
+      }}>{node.val}</div>
+      {hasChildren && (
+        <div style={{ display: 'flex', gap: 16 }}>
+          <TreeNodeView node={node._left} />
+          <TreeNodeView node={node._right} />
+        </div>
+      )}
     </div>
   )
 }
 
-function StackVisualization({ stack }) {
+function VisualizationPanel({ step }) {
+  if (!step) return <div style={{ padding: 16, color: '#7c2d12', fontSize: 13 }}>Press play to build the expression tree.</div>
+  const { tokens, idx, stack = [] } = step
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Parse Stack</div>
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column-reverse',
-        gap: 6,
-        padding: 12,
-        backgroundColor: '#f1f5f9',
-        borderRadius: 8,
-        border: '2px solid #cbd5e1',
-        minHeight: 100,
-      }}>
-        {stack.length > 0 ? (
-          stack.map((item, idx) => (
-            <motion.div
-              key={idx}
-              style={{
-                padding: '8px 12px',
-                borderRadius: 4,
-                backgroundColor: '#8b5cf6',
-                color: '#f3e8ff',
-                fontSize: 12,
-                fontWeight: 600,
-                fontFamily: 'monospace',
-              }}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
-              {item}
-            </motion.div>
-          ))
-        ) : (
-          <div style={{ color: '#94a3b8', fontSize: 12 }}>empty stack</div>
-        )}
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
+      <div style={{ padding: 12, backgroundColor: '#ffedd5', borderRadius: 6, borderLeft: '4px solid #ea580c' }}>
+        <div style={{ fontSize: 12, color: '#7c2d12', fontStyle: 'italic' }}>
+          Scan postfix tokens: operands push leaf nodes; an operator pops two subtrees as its children, then pushes itself.
+        </div>
       </div>
-    </div>
-  )
-}
 
-function ExpressionTreeVisualization({ treeNodes, treeComplete }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>
-        Expression Tree {treeComplete && '✓'}
+      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+        {tokens.map((t, i) => (
+          <div key={i} style={{
+            padding: '6px 10px', borderRadius: 4, fontSize: 13, fontWeight: 700,
+            backgroundColor: i === idx ? '#ea580c' : '#ffedd5',
+            color: i === idx ? '#fff' : '#7c2d12',
+            border: '1px solid #fdba74',
+          }}>{t}</div>
+        ))}
       </div>
-      <div style={{
-        padding: 12,
-        backgroundColor: '#f1f5f9',
-        borderRadius: 8,
-        border: '2px solid #cbd5e1',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 8,
-        minHeight: 100,
-      }}>
-        {treeNodes.length > 0 ? (
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-            {treeNodes.map((node, idx) => (
-              <motion.div
-                key={idx}
-                style={{
-                  padding: '8px 12px',
-                  borderRadius: 4,
-                  border: node.startsWith('Leaf') ? '2px solid #10b981' : '2px solid #0284c7',
-                  backgroundColor: node.startsWith('Leaf') ? '#ecfdf5' : '#dbeafe',
-                  fontSize: 11,
-                  fontWeight: 600,
-                  color: node.startsWith('Leaf') ? '#047857' : '#0c4a6e',
-                  fontFamily: 'monospace',
-                }}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: idx * 0.05 }}
-              >
-                {node}
-              </motion.div>
-            ))}
-          </div>
-        ) : (
-          <div style={{ color: '#94a3b8', fontSize: 12 }}>building tree...</div>
-        )}
-      </div>
-    </div>
-  )
-}
 
-function VisualizationPanel({ step, applyEx }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {EXAMPLES.map(e => (
-            <button
-              key={e.label}
-              onClick={() => applyEx(e)}
-              style={{
-                padding: '6px 12px',
-                borderRadius: 4,
-                border: '1px solid #cbd5e1',
-                cursor: 'pointer',
-                fontSize: 12,
-                backgroundColor: '#f1f5f9',
-              }}
-            >
-              {e.label}
-            </button>
+        <div style={{ fontSize: 12, fontWeight: 600, color: '#7c2d12', marginBottom: 6 }}>Stack (bottom → top)</div>
+        <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start', minHeight: 60, padding: 8, backgroundColor: '#fff7ed', borderRadius: 6, border: '1px solid #fdba74' }}>
+          {stack.length === 0 && <span style={{ fontSize: 12, color: '#9ca3af' }}>empty</span>}
+          {stack.map((n) => (
+            <motion.div key={n.id} initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
+              style={{ border: step.highlightId === n.id ? '2px dashed #ea580c' : 'none', borderRadius: 6, padding: 4 }}>
+              <TreeNodeView node={n} />
+            </motion.div>
           ))}
         </div>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-        <TokenListVisualization
-          tokens={step?.tokens || []}
-          parseIndex={step?.parseIndex || 0}
-          currentToken={step?.currentToken}
-        />
-
-        <StackVisualization stack={step?.stack || []} />
-
-        <ExpressionTreeVisualization
-          treeNodes={step?.treeNodes || []}
-          treeComplete={step?.treeComplete || false}
-        />
-      </div>
+      <motion.div
+        style={{ padding: 12, backgroundColor: '#ffedd5', borderRadius: 6, border: '2px solid #ea580c', textAlign: 'center' }}
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+      >
+        <div style={{ fontSize: 12, color: '#ea580c' }}>{step.message}</div>
+      </motion.div>
     </div>
   )
 }
 
 export default function Problem427Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { tokens: ['3', '+', '4'], label: 'Simple' })
+  const [ex, setEx] = useState(EXAMPLES[0])
   const SOLUTION_CODE = useSolutionCode('expression-tree-from-tokens')
-
   const steps = useMemo(
-    () =>
-      generateSteps(ex.tokens).map((current) => ({
-        ...current,
-        relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
-      })),
+    () => generateSteps(ex.tokens).map((c) => ({
+      ...c,
+      relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []),
+    })),
     [ex]
   )
-
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
-
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-
   const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
-
-  const connectivity = useCodeVisualConnectivity({
-    steps,
-    stepIndex,
-    onStepJump: setStepIndex,
-  })
-
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
-
   const dockPanels = useMemo(() => [
     {
       id: 'code',
@@ -283,24 +175,11 @@ export default function Problem427Visualizer() {
         />
       ),
     },
-    {
-      id: 'viz',
-      title: '🌳 Expression Tree',
-      content: (
-        <VisualizationPanel
-          step={step}
-          applyEx={applyEx}
-        />
-      ),
-    },
-  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, applyEx])
-
+    { id: 'viz', title: '🌲 Expression Tree', content: (<VisualizationPanel step={step} />) },
+  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom])
   return (
     <div className="problem-shell">
-      <DockableWorkspace
-        panels={dockPanels}
-        initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
-      />
+      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}

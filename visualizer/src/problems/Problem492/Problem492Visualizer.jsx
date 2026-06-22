@@ -20,16 +20,18 @@ const EXAMPLES = getExamples('construct-the-rectangle') || [
 
 function generateSteps(area) {
   const steps = []
-  let w = Math.sqrt(area)
-  steps.push({ activeLine: 1, w: Math.floor(w), area, width: 0, height: 0, message: 'Start from sqrt(area)' })
+  const start = Math.floor(Math.sqrt(area))
+  steps.push({ activeLine: 2, w: start, area, width: 0, height: 0, message: `Start width at floor(√${area}) = ${start}` })
 
-  for (let width = Math.floor(Math.sqrt(area)); width >= 1; width--) {
+  for (let width = start; width >= 1; width--) {
     if (area % width === 0) {
-      const height = area / width
-      steps.push({ activeLine: 2, w: width, area, width: Math.max(width, height), height: Math.min(width, height), done: true, message: `Found: ${Math.max(width, height)} x ${Math.min(width, height)}` })
+      const L = Math.max(width, area / width)
+      const W = Math.min(width, area / width)
+      steps.push({ activeLine: 3, w: width, area, width: 0, height: 0, message: `Check w=${width}: ${area} % ${width} == 0 ✓ divides evenly` })
+      steps.push({ activeLine: 4, w: width, area, width: L, height: W, done: true, message: `Return [${L}, ${W}]` })
       break
     }
-    steps.push({ activeLine: 1, w: width - 1, area, width: 0, height: 0, message: `Check divisor ${width}: ${area % width !== 0 ? 'no' : 'yes'}` })
+    steps.push({ activeLine: 3, w: width, area, width: 0, height: 0, message: `Check w=${width}: ${area} % ${width} = ${area % width} ≠ 0, shrink` })
   }
   return steps
 }

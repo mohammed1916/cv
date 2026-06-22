@@ -6346,7 +6346,7 @@ export const SOLUTION_CODE_REGISTRY = {
     },
     {
       "line": 9,
-      "text": "    def delete(self, val):"
+      "text": "    def remove(self, val):"
     },
     {
       "line": 10,
@@ -6354,15 +6354,23 @@ export const SOLUTION_CODE_REGISTRY = {
     },
     {
       "line": 11,
-      "text": "        lastVal = self.array[-1]"
+      "text": "        idx, last = self.map[val], self.array[-1]"
     },
     {
       "line": 12,
-      "text": "        self.map[lastVal] = self.map[val]"
+      "text": "        self.array[idx] = last; self.map[last] = idx"
     },
     {
       "line": 13,
-      "text": "        self.array[self.map[val]] = lastVal; return True"
+      "text": "        self.array.pop(); del self.map[val]; return True"
+    },
+    {
+      "line": 14,
+      "text": "    def getRandom(self):"
+    },
+    {
+      "line": 15,
+      "text": "        return random.choice(self.array)"
     }
   ],
   "insert-interval": [
@@ -14570,71 +14578,63 @@ export const SOLUTION_CODE_REGISTRY = {
     },
     {
       "line": 2,
-      "text": "    res = []"
+      "text": "    if not root: return ''"
     },
     {
       "line": 3,
-      "text": "    def dfs(node):"
+      "text": "    res = [str(root.val), str(len(root.children))]"
     },
     {
       "line": 4,
-      "text": "        if not node:"
+      "text": "    for child in root.children:"
     },
     {
       "line": 5,
-      "text": "            res.append('N'); return"
+      "text": "        res.append(serialize(child))"
     },
     {
       "line": 6,
-      "text": "        res.append(str(node.val))"
+      "text": "    return ' '.join(res)"
     },
     {
       "line": 7,
-      "text": "        dfs(node.left); dfs(node.right)"
-    },
-    {
-      "line": 8,
-      "text": "    dfs(root); return ','.join(res)"
-    },
-    {
-      "line": 9,
       "text": "def deserialize(data):"
     },
     {
-      "line": 10,
-      "text": "    vals = data.split(',')"
+      "line": 8,
+      "text": "    tokens = iter(data.split(' '))"
     },
     {
-      "line": 11,
-      "text": "    i = 0"
-    },
-    {
-      "line": 12,
+      "line": 9,
       "text": "    def dfs():"
     },
     {
+      "line": 10,
+      "text": "        val = int(next(tokens))"
+    },
+    {
+      "line": 11,
+      "text": "        count = int(next(tokens))"
+    },
+    {
+      "line": 12,
+      "text": "        node = Node(val, [])"
+    },
+    {
       "line": 13,
-      "text": "        nonlocal i"
+      "text": "        for _ in range(count):"
     },
     {
       "line": 14,
-      "text": "        if vals[i] == 'N': i += 1; return None"
+      "text": "            node.children.append(dfs())"
     },
     {
       "line": 15,
-      "text": "        node = TreeNode(int(vals[i])); i += 1"
-    },
-    {
-      "line": 16,
-      "text": "        node.left = dfs(); node.right = dfs()"
-    },
-    {
-      "line": 17,
       "text": "        return node"
     },
     {
-      "line": 18,
-      "text": "    return dfs()"
+      "line": 16,
+      "text": "    return dfs() if data else None"
     }
   ],
   "_extraction_metadata": {
@@ -14784,7 +14784,7 @@ export const SOLUTION_CODE_REGISTRY = {
     },
     {
       "line": 2,
-      "text": "    stack=[]"
+      "text": "    stack = []"
     },
     {
       "line": 3,
@@ -14792,15 +14792,27 @@ export const SOLUTION_CODE_REGISTRY = {
     },
     {
       "line": 4,
-      "text": "        if c==':': falseVal=stack.pop()"
+      "text": "        if c == '?':"
     },
     {
       "line": 5,
-      "text": "        elif c=='?': trueVal=stack.pop(); cond=stack.pop()"
+      "text": "            cond = stack.pop(); a = stack.pop(); b = stack.pop()"
     },
     {
       "line": 6,
+      "text": "            stack.append(a if cond == 'T' else b)"
+    },
+    {
+      "line": 7,
+      "text": "        elif c == ':': continue"
+    },
+    {
+      "line": 8,
       "text": "        else: stack.append(c)"
+    },
+    {
+      "line": 9,
+      "text": "    return stack[-1]"
     }
   ],
   "inorder-successor-bst": [
@@ -15052,19 +15064,43 @@ export const SOLUTION_CODE_REGISTRY = {
     },
     {
       "line": 3,
-      "text": "    result=0"
+      "text": "    total = 0"
     },
     {
       "line": 4,
-      "text": "    if root.left and not root.left.left and not root.left.right:"
+      "text": "    def dfs(node, is_left):"
     },
     {
       "line": 5,
-      "text": "        result=root.left.val"
+      "text": "        nonlocal total"
     },
     {
       "line": 6,
-      "text": "    return result+sumOfLeftLeaves(root.left)+sumOfLeftLeaves(root.right)"
+      "text": "        if not node.left and not node.right:"
+    },
+    {
+      "line": 7,
+      "text": "            if is_left: total += node.val"
+    },
+    {
+      "line": 8,
+      "text": "            return"
+    },
+    {
+      "line": 9,
+      "text": "        if node.left: dfs(node.left, True)"
+    },
+    {
+      "line": 10,
+      "text": "        if node.right: dfs(node.right, False)"
+    },
+    {
+      "line": 11,
+      "text": "    dfs(root, False)"
+    },
+    {
+      "line": 12,
+      "text": "    return total"
     }
   ],
   "convert-number-to-hex": [
@@ -15246,27 +15282,31 @@ export const SOLUTION_CODE_REGISTRY = {
     },
     {
       "line": 2,
-      "text": "    result=[]"
+      "text": "    result = []"
     },
     {
       "line": 3,
-      "text": "    for i in range(1,n+1):"
+      "text": "    for i in range(1, n + 1):"
     },
     {
       "line": 4,
-      "text": "        s=''"
+      "text": "        if i % 3 == 0 and i % 5 == 0: result.append('FizzBuzz')"
     },
     {
       "line": 5,
-      "text": "        if i%3==0: s+='Fizz'"
+      "text": "        elif i % 3 == 0: result.append('Fizz')"
     },
     {
       "line": 6,
-      "text": "        if i%5==0: s+='Buzz'"
+      "text": "        elif i % 5 == 0: result.append('Buzz')"
     },
     {
       "line": 7,
-      "text": "        result.append(s if s else str(i))"
+      "text": "        else: result.append(str(i))"
+    },
+    {
+      "line": 8,
+      "text": "    return result"
     }
   ],
   "arithmetic-slices": [
@@ -15590,7 +15630,7 @@ export const SOLUTION_CODE_REGISTRY = {
     },
     {
       "line": 3,
-      "text": "    first,last=[None],[None]"
+      "text": "    first = last = None"
     },
     {
       "line": 4,
@@ -15598,23 +15638,43 @@ export const SOLUTION_CODE_REGISTRY = {
     },
     {
       "line": 5,
-      "text": "        if not node: return"
+      "text": "        nonlocal first, last"
     },
     {
       "line": 6,
-      "text": "        dfs(node.left)"
+      "text": "        if not node: return"
     },
     {
       "line": 7,
-      "text": "        if not first[0]: first[0]=node"
+      "text": "        dfs(node.left)"
     },
     {
       "line": 8,
-      "text": "        if last[0]:"
+      "text": "        if last: last.right = node; node.left = last"
     },
     {
       "line": 9,
-      "text": "            last[0].right,node.left=node,last[0]"
+      "text": "        else: first = node"
+    },
+    {
+      "line": 10,
+      "text": "        last = node"
+    },
+    {
+      "line": 11,
+      "text": "        dfs(node.right)"
+    },
+    {
+      "line": 12,
+      "text": "    dfs(root)"
+    },
+    {
+      "line": 13,
+      "text": "    first.left = last; last.right = first"
+    },
+    {
+      "line": 14,
+      "text": "    return first"
     }
   ],
   "nary-tree-level-order": [
@@ -16060,15 +16120,23 @@ export const SOLUTION_CODE_REGISTRY = {
     },
     {
       "line": 3,
-      "text": "        row,col=rand7(),rand7()"
+      "text": "        row, col = rand7(), rand7()"
     },
     {
       "line": 4,
-      "text": "        idx=(row-1)*7+col"
+      "text": "        idx = (row - 1) * 7 + col"
     },
     {
       "line": 5,
-      "text": "        if idx<=40: return 1+(idx-1)%10"
+      "text": "        if idx <= 40: return 1 + (idx - 1) % 10"
+    },
+    {
+      "line": 6,
+      "text": "        # idx > 40: reject and retry"
+    },
+    {
+      "line": 7,
+      "text": "    # rejection sampling guarantees uniform 1..10"
     }
   ],
   "encode-string-with-shortest-length": [
@@ -16398,19 +16466,27 @@ export const SOLUTION_CODE_REGISTRY = {
     },
     {
       "line": 2,
-      "text": "    memo={}"
+      "text": "    def best(left, right):"
     },
     {
       "line": 3,
-      "text": "    def dp(i,j):"
+      "text": "        if left == right: return nums[left]"
     },
     {
       "line": 4,
-      "text": "        if i>j: return 0"
+      "text": "        take_left = nums[left] - best(left + 1, right)"
     },
     {
       "line": 5,
-      "text": "        if (i,j) in memo: return memo[(i,j)]"
+      "text": "        take_right = nums[right] - best(left, right - 1)"
+    },
+    {
+      "line": 6,
+      "text": "        return max(take_left, take_right)"
+    },
+    {
+      "line": 7,
+      "text": "    return best(0, len(nums) - 1) >= 0"
     }
   ],
   "max-consecutive-ones-iii": [
@@ -16632,23 +16708,67 @@ export const SOLUTION_CODE_REGISTRY = {
   "random-point-in-non-overlapping-rectangles": [
     {
       "line": 1,
-      "text": "import random,bisect"
-    },
-    {
-      "line": 2,
       "text": "class Solution:"
     },
     {
+      "line": 2,
+      "text": "    def __init__(self, rects):"
+    },
+    {
       "line": 3,
-      "text": "    def __init__(self,rects):"
+      "text": "        self.rects = rects"
     },
     {
       "line": 4,
-      "text": "        self.rects=rects"
+      "text": "        self.prefix = []"
     },
     {
       "line": 5,
-      "text": "        self.areas=[]"
+      "text": "        total = 0"
+    },
+    {
+      "line": 6,
+      "text": "        for x1, y1, x2, y2 in rects:"
+    },
+    {
+      "line": 7,
+      "text": "            total += (x2 - x1 + 1) * (y2 - y1 + 1)"
+    },
+    {
+      "line": 8,
+      "text": "            self.prefix.append(total)"
+    },
+    {
+      "line": 9,
+      "text": "        self.total = total"
+    },
+    {
+      "line": 10,
+      "text": "    def pick(self):"
+    },
+    {
+      "line": 11,
+      "text": "        target = random.randint(1, self.total)"
+    },
+    {
+      "line": 12,
+      "text": "        i = bisect.bisect_left(self.prefix, target)"
+    },
+    {
+      "line": 13,
+      "text": "        x1, y1, x2, y2 = self.rects[i]"
+    },
+    {
+      "line": 14,
+      "text": "        x = random.randint(x1, x2)"
+    },
+    {
+      "line": 15,
+      "text": "        y = random.randint(y1, y2)"
+    },
+    {
+      "line": 16,
+      "text": "        return [x, y]"
     }
   ],
   "diagonal-traverse": [
@@ -16676,23 +16796,67 @@ export const SOLUTION_CODE_REGISTRY = {
   "the-maze-iii": [
     {
       "line": 1,
-      "text": "def findShortestWay(maze,ball,hole):"
+      "text": "def findShortestWay(maze, ball, hole):"
     },
     {
       "line": 2,
-      "text": "    from heapq import heappush,heappop"
+      "text": "    m, n = len(maze), len(maze[0])"
     },
     {
       "line": 3,
-      "text": "    m,n=len(maze),len(maze[0])"
+      "text": "    dirs = [(-1,0,'u'),(0,-1,'l'),(0,1,'r'),(1,0,'d')]"
     },
     {
       "line": 4,
-      "text": "    visited={}"
+      "text": "    heap = [(0, '', ball[0], ball[1])]"
     },
     {
       "line": 5,
-      "text": "    pq=[(0,'',ball[0],ball[1])]"
+      "text": "    seen = {}"
+    },
+    {
+      "line": 6,
+      "text": "    while heap:"
+    },
+    {
+      "line": 7,
+      "text": "        dist, path, r, c = heappop(heap)"
+    },
+    {
+      "line": 8,
+      "text": "        if (r, c) in seen: continue"
+    },
+    {
+      "line": 9,
+      "text": "        seen[(r, c)] = (dist, path)"
+    },
+    {
+      "line": 10,
+      "text": "        for dr, dc, ch in dirs:"
+    },
+    {
+      "line": 11,
+      "text": "            nr, nc, d = r, c, 0"
+    },
+    {
+      "line": 12,
+      "text": "            while 0 <= nr+dr < m and 0 <= nc+dc < n and maze[nr+dr][nc+dc] == 0:"
+    },
+    {
+      "line": 13,
+      "text": "                nr += dr; nc += dc; d += 1"
+    },
+    {
+      "line": 14,
+      "text": "                if [nr, nc] == hole: break"
+    },
+    {
+      "line": 15,
+      "text": "            heappush(heap, (dist+d, path+ch, nr, nc))"
+    },
+    {
+      "line": 16,
+      "text": "    return seen.get(tuple(hole), (0, 'impossible'))[1]"
     }
   ],
   "random-flip-matrix": [
@@ -17174,55 +17338,39 @@ export const SOLUTION_CODE_REGISTRY = {
   "expression-tree-from-tokens": [
     {
       "line": 1,
-      "text": "def build(tokens: list[str]):"
+      "text": "def build(postfix):"
     },
     {
       "line": 2,
-      "text": "    class Node:"
-    },
-    {
-      "line": 3,
-      "text": "        def __init__(self, val): self.val = val; self.left = self.right = None"
-    },
-    {
-      "line": 4,
       "text": "    stack = []"
     },
     {
+      "line": 3,
+      "text": "    for token in postfix:"
+    },
+    {
+      "line": 4,
+      "text": "        node = Node(token)"
+    },
+    {
       "line": 5,
-      "text": "    for token in tokens:"
+      "text": "        if token in '+-*/':"
     },
     {
       "line": 6,
-      "text": "        if token in '+-*/:"
-    },
-    {
-      "line": 7,
-      "text": "            node = Node(token)"
-    },
-    {
-      "line": 8,
       "text": "            node.right = stack.pop()"
     },
     {
-      "line": 9,
+      "line": 7,
       "text": "            node.left = stack.pop()"
     },
     {
-      "line": 10,
-      "text": "            stack.append(node)"
+      "line": 8,
+      "text": "        stack.append(node)"
     },
     {
-      "line": 11,
-      "text": "        else:"
-    },
-    {
-      "line": 12,
-      "text": "            stack.append(Node(int(token)))"
-    },
-    {
-      "line": 13,
-      "text": "    return stack[0]"
+      "line": 9,
+      "text": "    return stack[-1]"
     }
   ],
   "find-all-anagrams-in-string": [

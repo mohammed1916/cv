@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -12,264 +12,169 @@ import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem428Visualizer.css'
 
-const EXAMPLES = getExamples('serialize-deserialize-nary-tree')
+const EXAMPLES = getExamples('serialize-deserialize-nary-tree') || [
+  { label: 'Example 1', tree: { val: 1, children: [{ val: 3, children: [{ val: 5 }, { val: 6 }] }, { val: 2 }, { val: 4 }] } },
+]
 
-function generateSteps(treeStr) {
+// Assign ids and normalize children arrays.
+function normalize(node, ctx = { id: 0 }) {
+  if (!node) return null
+  const n = { val: node.val, id: ctx.id++, children: [] }
+  for (const c of (node.children || [])) n.children.push(normalize(c, ctx))
+  return n
+}
+
+function generateSteps(root) {
   const steps = []
-
-  steps.push({
-    activeLine: 1,
-    phase: 'init',
-    treeStr,
-    serialized: '',
-    deserialized: [],
-    traversalStack: [],
-    message: `Start serialization and deserialization of N-ary tree`,
-  })
-
-  let serialized = ''
-  let traversalStack = []
-
-  for (let i = 0; i < Math.min(treeStr.length, 8); i++) {
-    const char = treeStr[i]
-    serialized += char
-    traversalStack.push(char)
-
-    steps.push({
-      activeLine: 2,
-      phase: 'serialize',
-      treeStr,
-      serialized,
-      deserialized: [],
-      traversalStack: [...traversalStack],
-      currentChar: char,
-      message: `Serialize: read character '${char}'`,
-    })
-  }
+  const out = []
 
   steps.push({
     activeLine: 3,
-    phase: 'deserialize',
-    treeStr,
-    serialized,
-    deserialized: serialized.split(''),
-    traversalStack: [...traversalStack],
-    isComplete: true,
-    message: `Deserialization complete: reconstructed tree`,
+    out: [], current: null,
+    message: 'serialize(root): emit value, then child count, then each child',
+  })
+
+  const dfs = (node) => {
+    out.push(String(node.val))
+    out.push(String(node.children.length))
+    steps.push({
+      activeLine: 3,
+      out: [...out], current: node.id,
+      message: `Emit "${node.val}" and child-count ${node.children.length}`,
+    })
+    for (const c of node.children) {
+      steps.push({
+        activeLine: 4,
+        out: [...out], current: node.id, childOf: node.id,
+        message: `Descend into child ${c.val} of ${node.val}`,
+      })
+      dfs(c)
+    }
+  }
+
+  dfs(root)
+
+  steps.push({
+    activeLine: 6,
+    out: [...out], current: null, done: true,
+    message: `Serialized string: "${out.join(' ')}"`,
   })
 
   return steps
 }
 
-function SerializationVisualization({ serialized, treeStr, currentChar }) {
+function layout(root) {
+  const positions = {}
+  const rows = []
+  let order = 0
+  const walk = (node, depth) => {
+    if (!node) return
+    if (!rows[depth]) rows[depth] = []
+    rows[depth].push(node)
+    const startOrder = order
+    if (node.children.length === 0) { positions[node.id] = { x: order++, depth } }
+    else {
+      node.children.forEach(c => walk(c, depth + 1))
+      // center over children
+      const xs = node.children.map(c => positions[c.id].x)
+      positions[node.id] = { x: (Math.min(...xs) + Math.max(...xs)) / 2, depth }
+    }
+  }
+  walk(root, 0)
+  return { positions, maxDepth: rows.length }
+}
+
+function VisualizationPanel({ root, step }) {
+  const { positions, maxDepth } = useMemo(() => layout(root), [root])
+  const idToNode = useMemo(() => {
+    const m = {}
+    ;(function c(n){ if(!n) return; m[n.id]=n; n.children.forEach(c) })(root)
+    return m
+  }, [root])
+  if (!step) return <div style={{ padding: 16, color: '#5b21b6', fontSize: 13 }}>Press play to serialize the tree.</div>
+
+  const ids = Object.keys(positions).map(Number)
+  const maxX = Math.max(0, ...ids.map(id => positions[id].x))
+  const colW = 60, rowH = 64
+  const width = (maxX + 1) * colW
+  const height = (maxDepth + 1) * rowH
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Serialization Progress</div>
-      <div style={{
-        padding: 12,
-        backgroundColor: '#f1f5f9',
-        borderRadius: 8,
-        border: '2px solid #cbd5e1',
-        fontFamily: 'monospace',
-        fontSize: 12,
-      }}>
-        <div style={{ marginBottom: 8, color: '#475569' }}>Input tree:</div>
-        <div style={{
-          display: 'flex',
-          gap: 2,
-          flexWrap: 'wrap',
-          marginBottom: 12,
-        }}>
-          {treeStr.split('').map((char, idx) => (
-            <span
-              key={idx}
-              style={{
-                padding: '4px 8px',
-                borderRadius: 3,
-                backgroundColor: char === currentChar ? '#fee2e2' : '#f1f5f9',
-                border: char === currentChar ? '2px solid #dc2626' : '1px solid #cbd5e1',
-                color: char === currentChar ? '#991b1b' : '#475569',
-                fontWeight: 600,
-              }}
-            >
-              {char}
-            </span>
-          ))}
-        </div>
-        <div style={{ color: '#475569', marginBottom: 8 }}>Output:</div>
-        <div style={{
-          padding: 8,
-          backgroundColor: '#dbeafe',
-          borderRadius: 4,
-          border: '1px solid #0284c7',
-          color: '#0c4a6e',
-        }}>
-          {serialized || '(serializing...)'}
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
+      <div style={{ padding: 12, backgroundColor: '#ede9fe', borderRadius: 6, borderLeft: '4px solid #7c3aed' }}>
+        <div style={{ fontSize: 12, color: '#5b21b6', fontStyle: 'italic' }}>
+          Encode each node as <code>value, childCount</code>, then recurse into its children — enough to rebuild the N-ary tree.
         </div>
       </div>
-    </div>
-  )
-}
 
-function DeserializationVisualization({ deserialized, isComplete }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>
-        Deserialization {isComplete && '✓'}
-      </div>
-      <div style={{
-        padding: 12,
-        backgroundColor: '#f1f5f9',
-        borderRadius: 8,
-        border: '2px solid #cbd5e1',
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: 8,
-        minHeight: 60,
-      }}>
-        {deserialized.length > 0 ? (
-          deserialized.map((char, idx) => (
-            <motion.span
-              key={idx}
-              style={{
-                padding: '6px 10px',
-                borderRadius: 4,
-                backgroundColor: '#ecfdf5',
-                border: '1px solid #10b981',
-                color: '#047857',
-                fontSize: 11,
-                fontWeight: 600,
-                fontFamily: 'monospace',
-              }}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: idx * 0.05 }}
-            >
-              {char}
-            </motion.span>
-          ))
-        ) : (
-          <div style={{ color: '#94a3b8', fontSize: 12 }}>reconstructing tree...</div>
-        )}
-      </div>
-    </div>
-  )
-}
+      <svg width={width} height={height} style={{ backgroundColor: '#f5f3ff', borderRadius: 6, border: '1px solid #c4b5fd' }}>
+        {ids.map(id => {
+          const node = idToNode[id]
+          const p = positions[id]
+          const cx = p.x * colW + colW / 2
+          const cy = p.depth * rowH + rowH / 2
+          return node.children.map(c => {
+            const cp = positions[c.id]
+            return <line key={`${id}-${c.id}`} x1={cx} y1={cy} x2={cp.x * colW + colW / 2} y2={cp.depth * rowH + rowH / 2}
+              stroke="#c4b5fd" strokeWidth={1.5} />
+          })
+        })}
+        {ids.map(id => {
+          const node = idToNode[id]
+          const p = positions[id]
+          const cx = p.x * colW + colW / 2
+          const cy = p.depth * rowH + rowH / 2
+          const isCur = step.current === id
+          return (
+            <g key={id}>
+              <circle cx={cx} cy={cy} r={17}
+                fill={isCur ? '#7c3aed' : '#ede9fe'} stroke={isCur ? '#5b21b6' : '#a78bfa'} strokeWidth={isCur ? 3 : 1} />
+              <text x={cx} y={cy + 4} textAnchor="middle" fontSize={13} fontWeight={700}
+                fill={isCur ? '#fff' : '#5b21b6'}>{node.val}</text>
+            </g>
+          )
+        })}
+      </svg>
 
-function TraversalStackVisualization({ stack }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Processing Stack</div>
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column-reverse',
-        gap: 4,
-        padding: 12,
-        backgroundColor: '#f1f5f9',
-        borderRadius: 8,
-        border: '2px solid #cbd5e1',
-        minHeight: 80,
-      }}>
-        {stack.length > 0 ? (
-          stack.map((item, idx) => (
-            <motion.div
-              key={idx}
-              style={{
-                padding: '6px 10px',
-                borderRadius: 4,
-                backgroundColor: '#f3e8ff',
-                border: '1px solid #8b5cf6',
-                color: '#6b21a8',
-                fontSize: 11,
-                fontWeight: 600,
-              }}
-              initial={{ opacity: 0, y: -5 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
-              {item}
-            </motion.div>
-          ))
-        ) : (
-          <div style={{ color: '#94a3b8', fontSize: 12 }}>empty stack</div>
-        )}
-      </div>
-    </div>
-  )
-}
-
-function VisualizationPanel({ step, applyEx }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {EXAMPLES.map(e => (
-            <button
-              key={e.label}
-              onClick={() => applyEx(e)}
-              style={{
-                padding: '6px 12px',
-                borderRadius: 4,
-                border: '1px solid #cbd5e1',
-                cursor: 'pointer',
-                fontSize: 12,
-                backgroundColor: '#f1f5f9',
-              }}
-            >
-              {e.label}
-            </button>
+        <div style={{ fontSize: 12, fontWeight: 600, color: '#5b21b6', marginBottom: 6 }}>Serialized output</div>
+        <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+          {(step.out || []).length === 0 && <span style={{ fontSize: 12, color: '#9ca3af' }}>—</span>}
+          {(step.out || []).map((tok, i) => (
+            <motion.div key={i} initial={{ scale: 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
+              style={{ padding: '4px 8px', borderRadius: 4, fontSize: 12, fontWeight: 700, fontFamily: 'monospace',
+                backgroundColor: i % 2 ? '#ddd6fe' : '#ede9fe', color: '#5b21b6' }}>{tok}</motion.div>
           ))}
         </div>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-        <SerializationVisualization
-          serialized={step?.serialized || ''}
-          treeStr={step?.treeStr || ''}
-          currentChar={step?.currentChar}
-        />
-
-        <DeserializationVisualization
-          deserialized={step?.deserialized || []}
-          isComplete={step?.isComplete || false}
-        />
-
-        <TraversalStackVisualization
-          stack={step?.traversalStack || []}
-        />
-      </div>
+      <motion.div
+        style={{ padding: 12, backgroundColor: '#ede9fe', borderRadius: 6, border: '2px solid #7c3aed', textAlign: 'center' }}
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+      >
+        <div style={{ fontSize: 12, color: '#7c3aed' }}>{step.message}</div>
+      </motion.div>
     </div>
   )
 }
 
 export default function Problem428Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { treeStr: '1[3[5[6]4[3[8[4[5[4[8[1[1[6]8]1]2[8]5[2]7[1]7[4[4[2]2]1[1[6]8]1]3[5[1[1[4]3[2]2[4[8]2[1[9]1]1[8]1[1[6]8]1]3[5[1[1[4]3[2]2[4[8]2[1[9]1]1[8]1', label: 'NaryTree' })
+  const [ex, setEx] = useState(EXAMPLES[0])
   const SOLUTION_CODE = useSolutionCode('serialize-deserialize-nary-tree')
-
+  const root = useMemo(() => normalize(ex.tree), [ex])
   const steps = useMemo(
-    () =>
-      generateSteps(ex.treeStr).map((current) => ({
-        ...current,
-        relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
-      })),
-    [ex]
+    () => generateSteps(root).map((c) => ({
+      ...c,
+      relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []),
+    })),
+    [root]
   )
-
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
-
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-
   const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
-
-  const connectivity = useCodeVisualConnectivity({
-    steps,
-    stepIndex,
-    onStepJump: setStepIndex,
-  })
-
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
-
   const dockPanels = useMemo(() => [
     {
       id: 'code',
@@ -284,24 +189,11 @@ export default function Problem428Visualizer() {
         />
       ),
     },
-    {
-      id: 'viz',
-      title: '🌳 Serialize/Deserialize',
-      content: (
-        <VisualizationPanel
-          step={step}
-          applyEx={applyEx}
-        />
-      ),
-    },
-  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, applyEx])
-
+    { id: 'viz', title: '🌐 Serialize N-ary', content: (<VisualizationPanel root={root} step={step} />) },
+  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, root])
   return (
     <div className="problem-shell">
-      <DockableWorkspace
-        panels={dockPanels}
-        initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
-      />
+      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}
