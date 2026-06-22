@@ -12,202 +12,74 @@ import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem432Visualizer.css'
 
-const EXAMPLES = getExamples('all-o1-data-structure')
+const EXAMPLES = getExamples('all-o1-data-structure') || [
+  { label: 'Example 1', operations: ['add-2', 'add-3', 'add-5', 'getRandom', 'remove-3'] },
+]
 
 function generateSteps(operations) {
   const steps = []
 
-  steps.push({
-    activeLine: 1,
-    phase: 'init',
-    operations,
-    valToIdx: new Map(),
-    vals: [],
-    currentOp: null,
-    message: `Initialize O(1) data structure with map and array`,
-  })
+  steps.push({ activeLine: 1, message: `Initialize O(1) RandomSet: map for val→idx, array for values`, map: new Map(), array: [] })
 
-  let valToIdx = new Map()
-  let vals = []
+  const map = new Map()
+  const array = []
 
   for (let i = 0; i < Math.min(operations.length, 6); i++) {
     const op = operations[i]
 
-    if (op === 'add') {
-      vals.push(Math.floor(Math.random() * 100))
-      valToIdx.set(vals[vals.length - 1], vals.length - 1)
-    }
+    steps.push({ activeLine: 2, message: `Process operation: ${op}`, currentOp: op })
 
-    steps.push({
-      activeLine: 2,
-      phase: 'execute_op',
-      operations,
-      valToIdx: new Map(valToIdx),
-      vals: [...vals],
-      currentOp: op,
-      message: `Execute operation: ${op}`,
-    })
+    if (op.startsWith('add')) {
+      const val = parseInt(op.split('-')[1])
+      steps.push({ activeLine: 3, message: `add(${val}): check if exists in map`, val, inMap: map.has(val) })
+
+      if (!map.has(val)) {
+        map.set(val, array.length)
+        array.push(val)
+        steps.push({ activeLine: 4, message: `Not in map → append to array at idx ${array.length - 1}`, val, array: [...array], map: new Map(map) })
+        steps.push({ activeLine: 5, message: `Map[${val}] = ${array.length - 1}`, val, array: [...array], map: new Map(map) })
+      } else {
+        steps.push({ activeLine: 6, message: `Already exists → skip (return false)`, val })
+      }
+    } else if (op === 'getRandom') {
+      steps.push({ activeLine: 7, message: `getRandom(): generate random index [0, ${array.length - 1}]`, array: [...array] })
+      const randomIdx = Math.floor(Math.random() * array.length)
+      steps.push({ activeLine: 8, message: `Random idx=${randomIdx} → return array[${randomIdx}] = ${array[randomIdx]}`, randomVal: array[randomIdx], array: [...array] })
+    } else if (op.startsWith('remove')) {
+      const val = parseInt(op.split('-')[1])
+      steps.push({ activeLine: 9, message: `remove(${val}): check if in map`, val, inMap: map.has(val) })
+
+      if (map.has(val)) {
+        const idx = map.get(val)
+        steps.push({ activeLine: 10, message: `Found at idx ${idx} → swap with last element`, val, idx, lastVal: array[array.length - 1] })
+
+        const last = array[array.length - 1]
+        array[idx] = last
+        map.set(last, idx)
+        steps.push({ activeLine: 11, message: `After swap: array[${idx}] = ${last}, update map[${last}] = ${idx}`, array: [...array], map: new Map(map) })
+
+        array.pop()
+        map.delete(val)
+        steps.push({ activeLine: 12, message: `Remove last and delete from map`, array: [...array], map: new Map(map) })
+      } else {
+        steps.push({ activeLine: 13, message: `Not in map → skip (return false)`, val })
+      }
+    }
   }
 
-  steps.push({
-    activeLine: 3,
-    phase: 'complete',
-    operations,
-    valToIdx: new Map(valToIdx),
-    vals: [...vals],
-    currentOp: null,
-    isComplete: true,
-    message: `All operations completed`,
-  })
-
+  steps.push({ activeLine: 14, message: `Final state: array=${JSON.stringify(array)}, map=${JSON.stringify(Array.from(map.entries()))}`, done: true, array: [...array], map: new Map(map) })
   return steps
-}
-
-function MapVisualization({ valToIdx, vals }) {
-  const entries = Array.from(valToIdx.entries()).slice(0, 5)
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Map (val → index)</div>
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 6,
-        padding: 12,
-        backgroundColor: '#f1f5f9',
-        borderRadius: 8,
-        border: '2px solid #cbd5e1',
-      }}>
-        {entries.length > 0 ? (
-          entries.map(([val, idx]) => (
-            <motion.div
-              key={val}
-              style={{
-                padding: '8px 12px',
-                borderRadius: 4,
-                border: '1px solid #0284c7',
-                backgroundColor: '#dbeafe',
-                fontSize: 11,
-                fontFamily: 'monospace',
-                color: '#0c4a6e',
-                display: 'flex',
-                justifyContent: 'space-between',
-              }}
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-            >
-              <span>{val}</span>
-              <span>→</span>
-              <span>{idx}</span>
-            </motion.div>
-          ))
-        ) : (
-          <div style={{ color: '#94a3b8', fontSize: 12 }}>map empty</div>
-        )}
-      </div>
-    </div>
-  )
-}
-
-function ArrayVisualization({ vals }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Array (values)</div>
-      <div style={{
-        display: 'flex',
-        gap: 6,
-        flexWrap: 'wrap',
-        padding: 12,
-        backgroundColor: '#f1f5f9',
-        borderRadius: 8,
-        border: '2px solid #cbd5e1',
-      }}>
-        {vals.length > 0 ? (
-          vals.map((val, idx) => (
-            <motion.div
-              key={idx}
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: 4,
-              }}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: idx * 0.05 }}
-            >
-              <div style={{
-                width: 40,
-                height: 40,
-                borderRadius: 4,
-                backgroundColor: '#ecfdf5',
-                border: '2px solid #10b981',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: 12,
-                fontWeight: 600,
-                color: '#047857',
-              }}>
-                {val}
-              </div>
-              <div style={{
-                fontSize: 10,
-                color: '#64748b',
-                fontWeight: 600,
-              }}>
-                [{idx}]
-              </div>
-            </motion.div>
-          ))
-        ) : (
-          <div style={{ color: '#94a3b8', fontSize: 12 }}>array empty</div>
-        )}
-      </div>
-    </div>
-  )
-}
-
-function OperationVisualization({ operations, currentOp }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Operations</div>
-      <div style={{
-        display: 'flex',
-        gap: 6,
-        flexWrap: 'wrap',
-        padding: 12,
-        backgroundColor: '#f1f5f9',
-        borderRadius: 8,
-        border: '2px solid #cbd5e1',
-      }}>
-        {operations.map((op, idx) => (
-          <motion.div
-            key={idx}
-            style={{
-              padding: '6px 12px',
-              borderRadius: 4,
-              border: op === currentOp ? '3px solid #dc2626' : '2px solid #cbd5e1',
-              backgroundColor: op === currentOp ? '#fee2e2' : '#f1f5f9',
-              fontSize: 12,
-              fontWeight: 600,
-              color: op === currentOp ? '#991b1b' : '#64748b',
-            }}
-            animate={{
-              scale: op === currentOp ? 1.08 : 1,
-            }}
-          >
-            {op}
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  )
 }
 
 function VisualizationPanel({ step, applyEx }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, overflow: 'auto' }}>
+      {step && (
+        <div style={{ padding: 12, backgroundColor: '#dbeafe', borderRadius: 6, border: '2px solid #0284c7', fontSize: 12, color: '#0c4a6e' }}>
+          {step.message}
+        </div>
+      )}
+
       <div>
         <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -230,51 +102,106 @@ function VisualizationPanel({ step, applyEx }) {
         </div>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-        <OperationVisualization
-          operations={step?.operations || []}
-          currentOp={step?.currentOp}
-        />
-
-        <MapVisualization
-          valToIdx={step?.valToIdx || new Map()}
-          vals={step?.vals || []}
-        />
-
-        <ArrayVisualization
-          vals={step?.vals || []}
-        />
+      <div style={{ padding: 12, backgroundColor: '#f0f9ff', borderRadius: 6, border: '1px solid #bfdbfe' }}>
+        <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 6 }}>Key Insight</div>
+        <div style={{ fontSize: 11, color: '#075985', lineHeight: 1.5 }}>
+          Use a map (val→index) and array. On remove, swap target with last element, update map, then pop array.
+        </div>
       </div>
+
+      {step?.array && step.array.length > 0 && (
+        <div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Array (Values)</div>
+          <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+            {step.array.map((val, i) => (
+              <motion.div
+                key={i}
+                style={{
+                  width: 45,
+                  height: 45,
+                  borderRadius: 6,
+                  backgroundColor: step.val === val ? '#dbeafe' : step.randomVal === val ? '#fef08a' : '#f1f5f9',
+                  border: step.val === val ? '3px solid #0284c7' : step.randomVal === val ? '3px solid #eab308' : '1px solid #cbd5e1',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: 13,
+                  fontWeight: 700,
+                  color: step.val === val ? '#0c4a6e' : step.randomVal === val ? '#713f12' : '#475569',
+                  flexDirection: 'column',
+                  gap: 2,
+                }}
+                animate={{ scale: step.val === val || step.randomVal === val ? 1.15 : 1 }}
+              >
+                <div>{val}</div>
+                <div style={{ fontSize: 9, opacity: 0.7 }}>idx:{i}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {step?.map && step.map.size > 0 && (
+        <div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Map (val → idx)</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+            {Array.from(step.map.entries()).slice(0, 5).map(([val, idx], i) => (
+              <div
+                key={i}
+                style={{
+                  padding: '8px 12px',
+                  backgroundColor: step.val === val ? '#fef3c7' : '#f3e8ff',
+                  borderRadius: 4,
+                  border: step.val === val ? '2px solid #f59e0b' : '1px solid #d8b4fe',
+                  fontFamily: 'monospace',
+                  fontSize: 11,
+                  color: step.val === val ? '#92400e' : '#6b21a8',
+                }}
+              >
+                {val} → {idx}
+              </div>
+            ))}
+            {step.map.size > 5 && (
+              <div style={{ fontSize: 11, color: '#94a3b8' }}>... and {step.map.size - 5} more</div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {step?.currentOp && (
+        <div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, border: '2px solid #f59e0b' }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#92400e' }}>Current Operation</div>
+          <div style={{ fontSize: 13, fontFamily: 'monospace', fontWeight: 700, color: '#f59e0b', marginTop: 4 }}>
+            {step.currentOp}
+          </div>
+        </div>
+      )}
+
+      {step?.inMap !== undefined && (
+        <div style={{ padding: 12, backgroundColor: step.inMap ? '#dcfce7' : '#fee2e2', borderRadius: 6, border: `2px solid ${step.inMap ? '#22c55e' : '#ef4444'}` }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: step.inMap ? '#166534' : '#991b1b' }}>
+            In Map: {step.inMap ? '✓ Yes' : '✗ No'}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
 
 export default function Problem432Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { operations: ['add', 'insert', 'getRandom', 'remove'], label: 'DataStructure' })
+  const [ex, setEx] = useState(EXAMPLES[0])
   const SOLUTION_CODE = useSolutionCode('all-o1-data-structure')
 
   const steps = useMemo(
-    () =>
-      generateSteps(ex.operations).map((current) => ({
-        ...current,
-        relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
-      })),
+    () => generateSteps(ex.operations).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),
     [ex]
   )
 
-  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
-    usePlaybackState(steps.length)
-
+  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-
   const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
 
-  const connectivity = useCodeVisualConnectivity({
-    steps,
-    stepIndex,
-    onStepJump: setStepIndex,
-  })
-
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const dockPanels = useMemo(() => [
@@ -293,22 +220,14 @@ export default function Problem432Visualizer() {
     },
     {
       id: 'viz',
-      title: '⚡ O(1) Structure',
-      content: (
-        <VisualizationPanel
-          step={step}
-          applyEx={applyEx}
-        />
-      ),
+      title: '💾 O(1) RandomSet',
+      content: <VisualizationPanel step={step} applyEx={applyEx} />,
     },
   ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, applyEx])
 
   return (
     <div className="problem-shell">
-      <DockableWorkspace
-        panels={dockPanels}
-        initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
-      />
+      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}

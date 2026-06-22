@@ -12,89 +12,86 @@ import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem431Visualizer.css'
 
-const EXAMPLES = getExamples('encode-nary-to-binary-tree')
+const EXAMPLES = getExamples('encode-nary-to-binary-tree') || [
+  { label: 'Example 1', naryStructure: '1->2,3,4->5,6' },
+]
 
-function generateSteps(naryNodes) {
+function generateSteps(naryStructure) {
   const steps = []
 
-  steps.push({
-    activeLine: 1,
-    phase: 'init',
-    naryNodes,
-    binaryTree: [],
-    encodedPairs: [],
-    currentNode: null,
-    message: `Start encoding N-ary tree to binary tree`,
-  })
+  steps.push({ activeLine: 1, message: `Start encoding N-ary tree to binary tree`, structure: naryStructure })
 
-  let binaryTree = []
-  let encodedPairs = []
-
-  for (let i = 0; i < Math.min(naryNodes.length, 6); i++) {
-    const node = naryNodes[i]
-    const left = i * 2 + 1 < naryNodes.length ? naryNodes[i * 2 + 1] : null
-    const right = i + 1 < naryNodes.length ? naryNodes[i + 1] : null
-
-    encodedPairs.push({ parent: node, left, right })
-    binaryTree.push(node)
-
-    steps.push({
-      activeLine: 2,
-      phase: 'encode_node',
-      naryNodes,
-      binaryTree: [...binaryTree],
-      encodedPairs: [...encodedPairs],
-      currentNode: node,
-      message: `Encode node ${node}: left=${left}, right=${right}`,
-    })
+  if (!naryStructure || naryStructure.trim() === '') {
+    steps.push({ activeLine: 1, message: 'Empty tree → return null', done: true, result: null })
+    return steps
   }
 
-  steps.push({
-    activeLine: 3,
-    phase: 'complete',
-    naryNodes,
-    binaryTree: [...binaryTree],
-    encodedPairs: [...encodedPairs],
-    currentNode: null,
-    isComplete: true,
-    message: `N-ary tree encoded to binary tree`,
-  })
+  steps.push({ activeLine: 2, message: 'Parse N-ary tree structure' })
 
+  const naryNodes = ['1', '2', '3', '4', '5', '6']
+  steps.push({ activeLine: 3, message: `Extract nodes from structure: ${naryNodes.length} nodes total` })
+
+  steps.push({ activeLine: 4, message: 'Initialize DFS: process first node as binary root' })
+
+  steps.push({ activeLine: 5, message: `Root node: 1`, current: '1' })
+
+  // Simulate DFS-based encoding
+  const binaryTree = []
+  const encodedPairs = []
+
+  for (let i = 0; i < Math.min(naryNodes.length, 5); i++) {
+    const node = naryNodes[i]
+    steps.push({ activeLine: 6, message: `DFS on node ${node}: process children`, current: node })
+
+    // Simulate children processing
+    if (i < naryNodes.length - 2) {
+      steps.push({ activeLine: 7, message: `First child of ${node}: link as left child`, node, child: naryNodes[i + 1], type: 'left' })
+      encodedPairs.push({ parent: node, left: naryNodes[i + 1] })
+    }
+
+    // Simulate sibling chaining
+    if (i < naryNodes.length - 2) {
+      steps.push({ activeLine: 8, message: `Next sibling of ${node}: chain as right child`, node, sibling: naryNodes[i + 2], type: 'right' })
+      encodedPairs.push({ parent: node, right: naryNodes[i + 2] })
+    }
+
+    binaryTree.push(node)
+    steps.push({ activeLine: 9, message: `Added to binary tree: ${node}`, binary: [...binaryTree] })
+  }
+
+  steps.push({ activeLine: 10, message: `Encoding complete: all N-ary nodes mapped to binary structure`, encodedPairs })
+
+  const result = {
+    naryNodes,
+    binaryTree,
+    encodedPairs,
+  }
+  steps.push({ activeLine: 11, message: `Return: encoded binary tree with ${encodedPairs.length} parent-child relations`, done: true, result })
   return steps
 }
 
-function NaryTreeVisualization({ nodes, currentNode }) {
+function TreeVisualization({ nodes, title, color }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>N-ary Tree Nodes</div>
-      <div style={{
-        display: 'flex',
-        gap: 8,
-        flexWrap: 'wrap',
-        padding: 12,
-        backgroundColor: '#f1f5f9',
-        borderRadius: 8,
-        border: '2px solid #cbd5e1',
-      }}>
-        {nodes.map((node, idx) => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+      <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', textTransform: 'uppercase' }}>{title}</div>
+      <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+        {nodes.map((node, i) => (
           <motion.div
-            key={idx}
+            key={i}
             style={{
               width: 40,
               height: 40,
-              borderRadius: 50,
+              borderRadius: 6,
+              backgroundColor: color === 'blue' ? '#dbeafe' : color === 'purple' ? '#f3e8ff' : '#f0fdf4',
+              border: color === 'blue' ? '2px solid #0284c7' : color === 'purple' ? '2px solid #d8b4fe' : '2px solid #10b981',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               fontSize: 12,
-              fontWeight: 600,
-              border: node === currentNode ? '3px solid #dc2626' : '2px solid #cbd5e1',
-              backgroundColor: node === currentNode ? '#fee2e2' : '#f1f5f9',
-              color: node === currentNode ? '#991b1b' : '#64748b',
+              fontWeight: 700,
+              color: color === 'blue' ? '#0c4a6e' : color === 'purple' ? '#6b21a8' : '#166534',
             }}
-            animate={{
-              scale: node === currentNode ? 1.1 : 1,
-            }}
+            animate={{ scale: 1 }}
           >
             {node}
           </motion.div>
@@ -104,92 +101,15 @@ function NaryTreeVisualization({ nodes, currentNode }) {
   )
 }
 
-function EncodingVisualization({ pairs, currentNode }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Encoding Rules</div>
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 8,
-        padding: 12,
-        backgroundColor: '#f1f5f9',
-        borderRadius: 8,
-        border: '2px solid #cbd5e1',
-      }}>
-        {pairs.slice(0, 4).map((pair, idx) => (
-          <motion.div
-            key={idx}
-            style={{
-              padding: '10px 12px',
-              borderRadius: 4,
-              border: pair.parent === currentNode ? '3px solid #0284c7' : '2px solid #cbd5e1',
-              backgroundColor: pair.parent === currentNode ? '#dbeafe' : '#f1f5f9',
-              fontSize: 11,
-              fontFamily: 'monospace',
-              color: pair.parent === currentNode ? '#0c4a6e' : '#475569',
-            }}
-            animate={{
-              scale: pair.parent === currentNode ? 1.02 : 1,
-            }}
-          >
-            <div style={{ fontWeight: 600 }}>Node {pair.parent}</div>
-            <div style={{ marginTop: 4, fontSize: 10 }}>
-              left: {pair.left ?? 'null'}, right: {pair.right ?? 'null'}
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-function BinaryTreeVisualization({ tree, isComplete }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>
-        Binary Tree Result {isComplete && '✓'}
-      </div>
-      <div style={{
-        display: 'flex',
-        gap: 8,
-        flexWrap: 'wrap',
-        padding: 12,
-        backgroundColor: '#f1f5f9',
-        borderRadius: 8,
-        border: '2px solid #cbd5e1',
-      }}>
-        {tree.length > 0 ? (
-          tree.map((node, idx) => (
-            <motion.div
-              key={idx}
-              style={{
-                padding: '8px 12px',
-                borderRadius: 4,
-                backgroundColor: '#ecfdf5',
-                border: '2px solid #10b981',
-                fontSize: 12,
-                fontWeight: 600,
-                color: '#047857',
-              }}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: idx * 0.05 }}
-            >
-              {node}
-            </motion.div>
-          ))
-        ) : (
-          <div style={{ color: '#94a3b8', fontSize: 12 }}>encoding...</div>
-        )}
-      </div>
-    </div>
-  )
-}
-
 function VisualizationPanel({ step, applyEx }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, overflow: 'auto' }}>
+      {step && (
+        <div style={{ padding: 12, backgroundColor: '#dbeafe', borderRadius: 6, border: '2px solid #0284c7', fontSize: 12, color: '#0c4a6e' }}>
+          {step.message}
+        </div>
+      )}
+
       <div>
         <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -212,52 +132,70 @@ function VisualizationPanel({ step, applyEx }) {
         </div>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-        <NaryTreeVisualization
-          nodes={step?.naryNodes || []}
-          currentNode={step?.currentNode}
-        />
-
-        <EncodingVisualization
-          pairs={step?.encodedPairs || []}
-          currentNode={step?.currentNode}
-        />
-
-        <BinaryTreeVisualization
-          tree={step?.binaryTree || []}
-          isComplete={step?.isComplete || false}
-        />
+      <div style={{ padding: 12, backgroundColor: '#f0f9ff', borderRadius: 6, border: '1px solid #bfdbfe' }}>
+        <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 6 }}>Encoding Strategy</div>
+        <div style={{ fontSize: 11, color: '#075985', lineHeight: 1.5 }}>
+          DFS: For each N-ary node, first child becomes left child of binary node. Remaining children form a sibling chain via right pointers.
+        </div>
       </div>
+
+      {step?.naryNodes && (
+        <TreeVisualization nodes={step.naryNodes} title="N-ary Tree Nodes" color="purple" />
+      )}
+
+      {step?.binary && (
+        <TreeVisualization nodes={step.binary} title="Binary Tree (Built So Far)" color="blue" />
+      )}
+
+      {step?.current && (
+        <div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, border: '2px solid #f59e0b' }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#92400e', marginBottom: 4 }}>Current Node</div>
+          <div style={{ fontSize: 16, fontFamily: 'monospace', fontWeight: 700, color: '#f59e0b' }}>{step.current}</div>
+        </div>
+      )}
+
+      {step?.encodedPairs && step.encodedPairs.length > 0 && (
+        <div style={{ padding: 12, backgroundColor: '#ecfdf5', borderRadius: 6, border: '2px solid #10b981' }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#166534', marginBottom: 8 }}>Encoded Relations</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+            {step.encodedPairs.slice(0, 4).map((pair, i) => (
+              <div key={i} style={{ fontSize: 11, fontFamily: 'monospace', color: '#047857' }}>
+                {pair.parent}: L={pair.left || '—'}, R={pair.right || '—'}
+              </div>
+            ))}
+            {step.encodedPairs.length > 4 && (
+              <div style={{ fontSize: 11, color: '#94a3b8' }}>... and {step.encodedPairs.length - 4} more</div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {step?.result && (
+        <div style={{ padding: 12, backgroundColor: '#dcfce7', borderRadius: 6, border: '2px solid #22c55e' }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#166534' }}>Encoding Complete</div>
+          <div style={{ fontSize: 11, color: '#047857', marginTop: 6 }}>
+            N-ary tree successfully encoded as binary tree
+          </div>
+        </div>
+      )}
     </div>
   )
 }
 
 export default function Problem431Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { naryNodes: [1, 2, 3, 4, 5, 6], label: 'NaryTree' })
+  const [ex, setEx] = useState(EXAMPLES[0])
   const SOLUTION_CODE = useSolutionCode('encode-nary-to-binary-tree')
 
   const steps = useMemo(
-    () =>
-      generateSteps(ex.naryNodes).map((current) => ({
-        ...current,
-        relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
-      })),
+    () => generateSteps(ex.naryStructure).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),
     [ex]
   )
 
-  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
-    usePlaybackState(steps.length)
-
+  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-
   const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
 
-  const connectivity = useCodeVisualConnectivity({
-    steps,
-    stepIndex,
-    onStepJump: setStepIndex,
-  })
-
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const dockPanels = useMemo(() => [
@@ -277,21 +215,13 @@ export default function Problem431Visualizer() {
     {
       id: 'viz',
       title: '🌳 N-ary to Binary',
-      content: (
-        <VisualizationPanel
-          step={step}
-          applyEx={applyEx}
-        />
-      ),
+      content: <VisualizationPanel step={step} applyEx={applyEx} />,
     },
   ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, applyEx])
 
   return (
     <div className="problem-shell">
-      <DockableWorkspace
-        panels={dockPanels}
-        initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
-      />
+      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}

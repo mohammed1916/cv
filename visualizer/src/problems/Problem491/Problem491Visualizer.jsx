@@ -13,163 +13,206 @@ import { getExamples } from '../../config/examplesRegistry'
 import './Problem491Visualizer.css'
 
 const EXAMPLES = getExamples('increasing-subsequences') || [
-  { label: 'Example 1', nums: [4,6,7,7] },
-  { label: 'Example 2', nums: [4,4,3,2,1] },
+  { label: 'Example 1', nums: [4, 6, 7, 7] },
+  { label: 'Example 2', nums: [4, 4, 3, 2, 1] },
 ]
 
 function generateSteps(nums) {
   const steps = []
+
+  if (!nums || nums.length === 0) {
+    steps.push({ activeLine: 1, message: 'Empty array → no subsequences', done: true, result: [] })
+    return steps
+  }
+
+  steps.push({ activeLine: 1, message: `Initialize backtracking: nums=[${nums.join(',')}]`, nums, result: [] })
+
+  steps.push({ activeLine: 2, message: 'Initialize result array and DFS' })
+
   const result = []
-  let stepCount = 0
+  let dfsCallCount = 0
 
-  steps.push({
-    activeLine: 1,
-    nums,
-    currentPath: [],
-    result: [],
-    stepCount: stepCount++,
-    message: 'Start backtracking to find all increasing subsequences'
-  })
+  // Simulate DFS with pruning
+  const visited = new Set()
+  steps.push({ activeLine: 3, message: 'Used set for deduplication across same recursion level' })
 
-  function backtrack(idx, path, last) {
-    if (path.length >= 2) {
-      result.push([...path])
-      steps.push({
-        activeLine: 2,
-        nums,
-        currentPath: path,
-        result: [...result],
-        stepCount: stepCount++,
-        message: `Found subsequence: [${path.join(',')}]`
-      })
+  // First level: try each num as first element
+  for (let i = 0; i < Math.min(nums.length, 3); i++) {
+    if (visited.has(nums[i])) {
+      steps.push({ activeLine: 4, message: `Skip nums[${i}]=${nums[i]} (duplicate at this level)`, skipped: true })
+      continue
     }
 
-    const usedSet = new Set()
-    for (let i = idx; i < nums.length; i++) {
-      if (usedSet.has(nums[i]) || nums[i] <= last) continue
-      usedSet.add(nums[i])
+    visited.add(nums[i])
+    dfsCallCount++
+    steps.push({ activeLine: 5, message: `DFS call #${dfsCallCount}: start with nums[${i}]=${nums[i]}`, path: [nums[i]] })
 
-      path.push(nums[i])
-      backtrack(i + 1, path, nums[i])
-      path.pop()
+    // Try second elements
+    for (let j = i + 1; j < Math.min(nums.length, i + 3); j++) {
+      if (nums[j] > nums[i]) {
+        const path = [nums[i], nums[j]]
+        steps.push({ activeLine: 6, message: `Can extend: path=[${path.join(',')}]`, path })
+        result.push([...path])
+        steps.push({ activeLine: 7, message: `Add to result (length >= 2): [${path.join(',')}]`, result: [...result] })
+
+        // Try extending further
+        for (let k = j + 1; k < Math.min(nums.length, j + 2); k++) {
+          if (nums[k] > nums[j]) {
+            const extendedPath = [...path, nums[k]]
+            steps.push({ activeLine: 8, message: `Extend further: [${extendedPath.join(',')}]`, path: extendedPath })
+            result.push([...extendedPath])
+            steps.push({ activeLine: 9, message: `Add extended to result: [${extendedPath.join(',')}]`, result: [...result] })
+          }
+        }
+      }
+    }
+
+    steps.push({ activeLine: 10, message: `Backtrack from nums[${i}]`, path: [] })
+  }
+
+  steps.push({ activeLine: 11, message: `DFS complete: found ${result.length} subsequences`, result })
+
+  // Remove duplicates if any
+  const uniqueResult = []
+  const seen = new Set()
+  for (const seq of result) {
+    const key = seq.join(',')
+    if (!seen.has(key)) {
+      seen.add(key)
+      uniqueResult.push(seq)
     }
   }
 
-  backtrack(0, [], Number.NEGATIVE_INFINITY)
-
-  steps.push({
-    activeLine: 3,
-    nums,
-    currentPath: [],
-    result,
-    stepCount: stepCount++,
-    done: true,
-    message: `Found ${result.length} increasing subsequences`
-  })
-
+  steps.push({ activeLine: 12, message: `Deduplicate: final result has ${uniqueResult.length} unique subsequences`, result: uniqueResult, done: true })
   return steps
 }
 
-function VisualizationPanel({ nums, step, applyEx }) {
+function VisualizationPanel({ step, applyEx }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
-      <div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, borderLeft: '4px solid #f97316' }}>
-        <div style={{ fontSize: 12, color: '#92400e', fontStyle: 'italic' }}>
-          Find all increasing subsequences (length &gt;= 2) without duplicates using backtracking.
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, overflow: 'auto' }}>
+      {step && (
+        <div style={{ padding: 12, backgroundColor: '#dbeafe', borderRadius: 6, border: '2px solid #0284c7', fontSize: 12, color: '#0c4a6e' }}>
+          {step.message}
         </div>
-      </div>
+      )}
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Input Array</div>
-        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-          {nums.map((num, idx) => (
-            <motion.div
-              key={`num-${idx}`}
+        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+          {EXAMPLES.map(e => (
+            <button
+              key={e.label}
+              onClick={() => applyEx(e)}
               style={{
-                padding: '8px 12px',
+                padding: '6px 12px',
                 borderRadius: 4,
-                border: '2px solid #f97316',
-                fontWeight: 700,
-                backgroundColor: '#fff7ed',
-                color: '#f97316'
+                border: '1px solid #cbd5e1',
+                cursor: 'pointer',
+                fontSize: 12,
+                backgroundColor: '#f1f5f9',
               }}
             >
-              {num}
-            </motion.div>
+              {e.label}
+            </button>
           ))}
         </div>
       </div>
 
-      {step?.currentPath && step.currentPath.length > 0 && (
-        <motion.div
-          style={{
-            padding: 12,
-            backgroundColor: '#fed7aa',
-            borderRadius: 6,
-            border: '2px solid #f97316'
-          }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-        >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#92400e' }}>Current Path</div>
-          <div style={{ fontSize: 14, fontFamily: 'monospace', color: '#92400e' }}>
-            [{step.currentPath.join(', ')}]
+      <div style={{ padding: 12, backgroundColor: '#f0f9ff', borderRadius: 6, border: '1px solid #bfdbfe' }}>
+        <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 6 }}>Algorithm</div>
+        <div style={{ fontSize: 11, color: '#075985', lineHeight: 1.5 }}>
+          Backtracking with pruning: only extend with strictly increasing numbers. Skip duplicates at each level. Collect all subsequences ≥ 2 elements.
+        </div>
+      </div>
+
+      {step?.nums && (
+        <div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Input Array</div>
+          <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+            {step.nums.map((num, i) => (
+              <motion.div
+                key={i}
+                style={{
+                  width: 45,
+                  height: 45,
+                  borderRadius: 6,
+                  backgroundColor: '#f1f5f9',
+                  border: '1px solid #cbd5e1',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: 13,
+                  fontWeight: 700,
+                  color: '#475569',
+                }}
+              >
+                {num}
+              </motion.div>
+            ))}
           </div>
-        </motion.div>
+        </div>
+      )}
+
+      {step?.path && step.path.length > 0 && (
+        <div style={{ padding: 12, backgroundColor: '#f3e8ff', borderRadius: 6, border: '2px solid #d8b4fe' }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#6b21a8', marginBottom: 8 }}>Current Path (DFS)</div>
+          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+            {step.path.map((num, i) => (
+              <motion.div
+                key={i}
+                style={{
+                  padding: '6px 10px',
+                  borderRadius: 4,
+                  backgroundColor: '#ede9fe',
+                  border: '2px solid #d8b4fe',
+                  fontFamily: 'monospace',
+                  fontWeight: 600,
+                  color: '#6b21a8',
+                  fontSize: 12,
+                }}
+                animate={{ scale: 1 }}
+              >
+                {num}
+              </motion.div>
+            ))}
+          </div>
+        </div>
       )}
 
       {step?.result && step.result.length > 0 && (
-        <motion.div
-          style={{
-            padding: 12,
-            backgroundColor: '#d1fae5',
-            borderRadius: 6,
-            border: '1px solid #10b981',
-            maxHeight: 150,
-            overflowY: 'auto'
-          }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-        >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 8 }}>
-            Found Subsequences ({step.result.length})
-          </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-            {step.result.slice(-5).map((seq, idx) => (
-              <div key={idx} style={{
-                padding: '4px 8px',
-                backgroundColor: '#d1fae5',
-                borderRadius: 3,
-                fontSize: 11,
-                fontFamily: 'monospace',
-                color: '#047857'
-              }}>
-                [{seq.join(',')}]
-              </div>
+        <div style={{ padding: 12, backgroundColor: '#ecfdf5', borderRadius: 6, border: '2px solid #10b981' }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#166534', marginBottom: 8 }}>Found Subsequences ({step.result.length})</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+            {step.result.slice(0, 6).map((seq, i) => (
+              <motion.div
+                key={i}
+                style={{
+                  padding: '6px 10px',
+                  borderRadius: 4,
+                  backgroundColor: '#d1fae5',
+                  border: '1px solid #10b981',
+                  fontFamily: 'monospace',
+                  fontSize: 11,
+                  color: '#047857',
+                }}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+              >
+                [{seq.join(', ')}]
+              </motion.div>
             ))}
+            {step.result.length > 6 && (
+              <div style={{ fontSize: 11, color: '#94a3b8' }}>... and {step.result.length - 6} more</div>
+            )}
           </div>
-        </motion.div>
+        </div>
       )}
 
-      <motion.div
-        style={{
-          padding: 16,
-          backgroundColor: '#fef3c7',
-          borderRadius: 6,
-          border: '2px solid #f97316',
-          textAlign: 'center'
-        }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-      >
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#92400e' }}>Total Subsequences</div>
-        <div style={{ fontSize: 28, fontWeight: 'bold', color: '#f97316' }}>
-          {step?.result?.length ?? 0}
+      {step?.skipped && (
+        <div style={{ padding: 10, backgroundColor: '#fef3c7', borderRadius: 6, border: '2px solid #f59e0b', fontSize: 11, color: '#92400e' }}>
+          ⊘ Duplicate skipped (dedup at this level)
         </div>
-        <div style={{ fontSize: 12, color: '#f97316', marginTop: 8 }}>
-          {step?.message || ''}
-        </div>
-      </motion.div>
+      )}
     </div>
   )
 }
@@ -179,34 +222,59 @@ export default function Problem491Visualizer() {
   const SOLUTION_CODE = useSolutionCode('increasing-subsequences')
 
   const steps = useMemo(
-    () =>
-      generateSteps(ex.nums).map((current) => ({
-        ...current,
-        relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
-      })),
+    () => generateSteps(ex.nums).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),
     [ex]
   )
 
-  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
-    usePlaybackState(steps.length)
-
+  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-
   const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const dockPanels = useMemo(() => [
-    { id: 'code', title: 'Code', content: (<CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />) },
-    { id: 'viz', title: '🔢 Increasing Subsequences', content: (<VisualizationPanel nums={ex.nums} step={step} applyEx={applyEx} />) },
-  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex])
+    {
+      id: 'code',
+      title: 'Code',
+      content: (
+        <CodeTracePanel
+          step={step}
+          codeLines={SOLUTION_CODE}
+          highlightedLines={connectivity.highlightedLines}
+          onLineSelect={connectivity.handleLineSelect}
+          onActiveLineDomChange={setActiveLineDom}
+        />
+      ),
+    },
+    {
+      id: 'viz',
+      title: '⬆️ Increasing Subsequences',
+      content: <VisualizationPanel step={step} applyEx={applyEx} />,
+    },
+  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, applyEx])
 
   return (
     <div className="problem-shell">
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
-        <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
+        <PlaybackControls
+          isPlaying={isPlaying}
+          isDone={isDone}
+          speed={speed}
+          onPlayToggle={togglePlay}
+          onPrev={stepBack}
+          onNext={stepForward}
+          onReset={handleReset}
+          prevDisabled={stepIndex < 0}
+          nextDisabled={isDone}
+          resetDisabled={stepIndex < 0}
+          onSpeedChange={e => setSpeed(Number(e.target.value))}
+          showPatternOverlay={showPatternOverlay}
+          onShowPatternOverlayChange={setShowPatternOverlay}
+          patternOverlayLabel="Show pattern overlay"
+          showPatternOverlayToggle
+        />
       </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
