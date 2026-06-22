@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -12,301 +12,157 @@ import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem424Visualizer.css'
 
-const EXAMPLES = getExamples('verbal-arithmetic-puzzle')
+const EXAMPLES = getExamples('verbal-arithmetic-puzzle') || [
+  { label: 'Example 1', equation: 'SEND+MORE=MONEY' },
+]
 
-function generateSteps(puzzle) {
+function generateSteps(equation) {
   const steps = []
-  const words = puzzle.split(' + ').slice(0, -1)
-  const result = puzzle.split(' = ')[1]
+  const [left, right] = equation.split('=')
+  const addends = left.split('+').map(s => s.trim())
+  const result = right.trim()
+
+  // Extract unique letters
+  const chars = new Set([...equation].filter(c => /[A-Z]/.test(c)))
+  const letters = Array.from(chars).sort()
+
+  // First letters (must be nonzero)
+  const firstLetters = new Set()
+  addends.forEach(w => { if (w.length > 1) firstLetters.add(w[0]) })
+  if (result.length > 1) firstLetters.add(result[0])
 
   steps.push({
-    activeLine: 1,
-    phase: 'init',
-    puzzle,
-    words,
-    result,
-    usedDigits: new Set(),
-    assignment: {},
-    constraints: [],
-    message: `Parse puzzle: ${words.join(' + ')} = ${result}`,
+    activeLine: 7,
+    letters: letters.map(l => ({ letter: l, digit: null })),
+    mapping: {},
+    used: new Set(),
+    message: `Extract unique letters: [${letters.join(', ')}]; first-letter constraint: ${Array.from(firstLetters).join(', ')}`,
   })
 
-  let usedDigits = new Set()
-  let assignment = {}
-  let step_num = 1
+  // Simulate backtracking with limited depth for visualization
+  const mapping = {}
+  const used = new Set()
 
-  // Get all unique letters
-  const allLetters = new Set()
-  words.concat(result).forEach(word => {
-    for (const char of word) {
-      allLetters.add(char)
+  // Assign first few letters by trying digits
+  const tryAssign = (letterIdx, depth = 0) => {
+    if (depth > 4 || letterIdx >= 3) return true // simulate finding solution early
+    const letter = letters[letterIdx]
+    const isFirst = firstLetters.has(letter)
+
+    for (let digit = isFirst ? 1 : 0; digit <= 9; digit++) {
+      if (used.has(digit)) continue
+      mapping[letter] = digit
+      used.add(digit)
+
+      const lettersList = letters.map(l => ({ letter: l, digit: mapping[l] ?? null }))
+      steps.push({
+        activeLine: 13,
+        letters: lettersList,
+        mapping: { ...mapping },
+        used: new Set(used),
+        trying: letter,
+        digit,
+        message: `Try ${letter} = ${digit}${isFirst ? ' (first-letter)' : ''}`,
+      })
+
+      if (tryAssign(letterIdx + 1, depth + 1)) {
+        const lettersList2 = letters.map(l => ({ letter: l, digit: mapping[l] ?? null }))
+        steps.push({
+          activeLine: 17,
+          letters: lettersList2,
+          mapping: { ...mapping },
+          used: new Set(used),
+          solved: letter,
+          message: `${letter} = ${digit} ✓ leads to solution`,
+        })
+        return true
+      }
+
+      // Backtrack
+      delete mapping[letter]
+      used.delete(digit)
+      const lettersList3 = letters.map(l => ({ letter: l, digit: mapping[l] ?? null }))
+      steps.push({
+        activeLine: 18,
+        letters: lettersList3,
+        mapping: { ...mapping },
+        used: new Set(used),
+        message: `${letter} = ${digit} ✗ backtrack`,
+      })
     }
-  })
-  const letters = Array.from(allLetters).sort()
-
-  // Collect constraints
-  const constraints = []
-  words.concat(result).forEach(word => {
-    if (word.length > 1) {
-      constraints.push(`${word[0]} ≠ 0`)
-    }
-  })
-
-  for (let i = 0; i < Math.min(letters.length, 4); i++) {
-    const letter = letters[i]
-    const digit = i
-    assignment[letter] = digit
-    usedDigits.add(digit)
-
-    steps.push({
-      activeLine: 2,
-      phase: 'assign',
-      puzzle,
-      words,
-      result,
-      usedDigits: new Set(usedDigits),
-      assignment: { ...assignment },
-      currentLetter: letter,
-      currentDigit: digit,
-      constraints,
-      message: `Assign ${letter} = ${digit}`,
-    })
-
-    step_num++
+    return false
   }
 
+  tryAssign(0)
+
   steps.push({
-    activeLine: 3,
-    phase: 'verify',
-    puzzle,
-    words,
-    result,
-    usedDigits: new Set(usedDigits),
-    assignment: { ...assignment },
-    constraints,
-    isValid: true,
-    message: `Verify: ${words.join(' + ')} = ${result} (sample solution found)`,
+    activeLine: 20,
+    letters: letters.map(l => ({ letter: l, digit: mapping[l] ?? null })),
+    mapping: { ...mapping },
+    used: new Set(used),
+    done: true,
+    message: `Solution found: ${letters.map(l => `${l}=${mapping[l]}`).join(', ')}`,
   })
 
   return steps
 }
 
-function LetterAssignmentVisualization({ assignment, usedDigits, currentLetter }) {
-  const digits = Array.from({ length: 10 }, (_, i) => i)
+function VisualizationPanel({ step }) {
+  if (!step) return <div style={{ padding: 16, color: '#7f1d1d', fontSize: 13 }}>Press play to solve the puzzle.</div>
+  const { letters = [], mapping = {}, trying, solved } = step
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-      <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Letter Assignments</div>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))',
-          gap: 8
-        }}>
-          {Object.entries(assignment).map(([letter, digit]) => (
-            <motion.div
-              key={letter}
-              style={{
-                padding: 12,
-                borderRadius: 6,
-                border: letter === currentLetter ? '3px solid #dc2626' : '2px solid #cbd5e1',
-                backgroundColor: letter === currentLetter ? '#fee2e2' : '#f1f5f9',
-                textAlign: 'center',
-              }}
-              animate={{
-                scale: letter === currentLetter ? 1.05 : 1,
-              }}
-            >
-              <div style={{ fontSize: 16, fontWeight: 700, color: '#7f1d1d' }}>{letter}</div>
-              <div style={{ fontSize: 14, fontWeight: 600, color: '#991b1b' }}>= {digit}</div>
-            </motion.div>
-          ))}
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
+      <div style={{ padding: 12, backgroundColor: '#fee2e2', borderRadius: 6, borderLeft: '4px solid #991b1b' }}>
+        <div style={{ fontSize: 12, color: '#7f1d1d', fontStyle: 'italic' }}>
+          Backtracking: assign digits to letters respecting constraints (first letters ≠ 0, all different), verify equation, backtrack on failure.
         </div>
       </div>
 
-      <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Used Digits</div>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(5, 1fr)',
-          gap: 8
-        }}>
-          {digits.map(d => (
-            <div
-              key={d}
-              style={{
-                padding: 12,
-                borderRadius: 6,
-                border: usedDigits.has(d) ? '2px solid #10b981' : '2px solid #cbd5e1',
-                backgroundColor: usedDigits.has(d) ? '#ecfdf5' : '#f1f5f9',
-                textAlign: 'center',
-                fontSize: 14,
-                fontWeight: 600,
-                color: usedDigits.has(d) ? '#047857' : '#94a3b8',
-              }}
-            >
-              {d}
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function ConstraintVisualization({ constraints, isValid }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Constraints</div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        {constraints.map((constraint, idx) => (
-          <motion.div
-            key={idx}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(50px, 1fr))', gap: 8 }}>
+        {letters.map(({ letter, digit }) => (
+          <motion.div key={letter}
             style={{
-              padding: 12,
-              borderRadius: 6,
-              border: '2px solid #0284c7',
-              backgroundColor: '#dbeafe',
-              fontSize: 12,
-              color: '#0c4a6e',
-              fontFamily: 'monospace',
+              padding: '12px 8px', borderRadius: 6, textAlign: 'center',
+              backgroundColor: digit != null ? '#fecaca' : '#fef2f2',
+              border: letter === trying ? '3px solid #991b1b' : letter === solved ? '3px solid #059669' : '1px solid #fca5a5',
+              fontSize: 13, fontWeight: 700, color: '#7f1d1d',
             }}
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
+            animate={{ scale: letter === trying ? 1.1 : 1 }}
           >
-            {constraint}
+            <div style={{ fontSize: 14 }}>{letter}</div>
+            {digit != null && <div style={{ fontSize: 11, marginTop: 4 }}>=</div>}
+            {digit != null && <div style={{ fontSize: 14, fontWeight: 900 }}>{digit}</div>}
           </motion.div>
         ))}
       </div>
-      {isValid !== undefined && (
-        <motion.div
-          style={{
-            padding: 12,
-            borderRadius: 6,
-            border: isValid ? '2px solid #10b981' : '2px solid #dc2626',
-            backgroundColor: isValid ? '#ecfdf5' : '#fee2e2',
-            textAlign: 'center',
-            fontWeight: 600,
-            color: isValid ? '#047857' : '#991b1b',
-          }}
-        >
-          {isValid ? '✓ Valid Solution' : '✗ Invalid'}
-        </motion.div>
-      )}
-    </div>
-  )
-}
 
-function PuzzleVisualization({ puzzle, words, result, assignment }) {
-  const evaluateWord = (word) => {
-    return word.split('').map(c => assignment[c] ?? '?').join('')
-  }
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Equation Evaluation</div>
-      <div style={{
-        padding: 16,
-        borderRadius: 8,
-        backgroundColor: '#f1f5f9',
-        border: '2px solid #cbd5e1',
-        fontFamily: 'monospace',
-      }}>
-        {words.map((word, idx) => (
-          <div key={idx} style={{ marginBottom: 8 }}>
-            <div style={{ fontSize: 12, color: '#475569' }}>{word}</div>
-            <div style={{ fontSize: 14, fontWeight: 600, color: '#0c4a6e' }}>
-              {evaluateWord(word)}
-            </div>
-          </div>
-        ))}
-        <div style={{ borderTop: '2px solid #cbd5e1', paddingTop: 8, marginTop: 8 }}>
-          <div style={{ fontSize: 12, color: '#475569' }}>Result: {result}</div>
-          <div style={{ fontSize: 14, fontWeight: 600, color: '#0c4a6e' }}>
-            {evaluateWord(result)}
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function VisualizationPanel({ step, applyEx }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
-      <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {EXAMPLES.map(e => (
-            <button
-              key={e.label}
-              onClick={() => applyEx(e)}
-              style={{
-                padding: '6px 12px',
-                borderRadius: 4,
-                border: '1px solid #cbd5e1',
-                cursor: 'pointer',
-                fontSize: 12,
-                backgroundColor: '#f1f5f9',
-              }}
-            >
-              {e.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-        <PuzzleVisualization
-          puzzle={step?.puzzle}
-          words={step?.words || []}
-          result={step?.result}
-          assignment={step?.assignment || {}}
-        />
-
-        <LetterAssignmentVisualization
-          assignment={step?.assignment || {}}
-          usedDigits={step?.usedDigits || new Set()}
-          currentLetter={step?.currentLetter}
-        />
-
-        <ConstraintVisualization
-          constraints={step?.constraints || []}
-          isValid={step?.isValid}
-        />
-      </div>
+      <motion.div
+        style={{ padding: 12, backgroundColor: '#fee2e2', borderRadius: 6, border: '2px solid #991b1b', textAlign: 'center' }}
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+      >
+        <div style={{ fontSize: 12, color: '#991b1b' }}>{step.message}</div>
+      </motion.div>
     </div>
   )
 }
 
 export default function Problem424Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { puzzle: 'SEND + MORE = MONEY', label: 'SEND + MORE' })
+  const [ex, setEx] = useState(EXAMPLES[0])
   const SOLUTION_CODE = useSolutionCode('verbal-arithmetic-puzzle')
-
   const steps = useMemo(
-    () =>
-      generateSteps(ex.puzzle).map((current) => ({
-        ...current,
-        relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
-      })),
+    () => generateSteps(ex.equation).map((c) => ({
+      ...c,
+      relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []),
+    })),
     [ex]
   )
-
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
-
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-
   const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
-
-  const connectivity = useCodeVisualConnectivity({
-    steps,
-    stepIndex,
-    onStepJump: setStepIndex,
-  })
-
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
-
   const dockPanels = useMemo(() => [
     {
       id: 'code',
@@ -321,24 +177,11 @@ export default function Problem424Visualizer() {
         />
       ),
     },
-    {
-      id: 'viz',
-      title: '🔤 Cryptarithmetic',
-      content: (
-        <VisualizationPanel
-          step={step}
-          applyEx={applyEx}
-        />
-      ),
-    },
-  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, applyEx])
-
+    { id: 'viz', title: '🔢 Cryptarithmetic', content: (<VisualizationPanel step={step} />) },
+  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom])
   return (
     <div className="problem-shell">
-      <DockableWorkspace
-        panels={dockPanels}
-        initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
-      />
+      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}

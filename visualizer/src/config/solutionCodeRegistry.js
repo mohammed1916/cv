@@ -17434,6 +17434,44 @@ export const SOLUTION_CODE_REGISTRY = {
       "line": 15,
       "text": "    return result"
     }
+  ],
+  "plus-one-linked-list": [
+    {
+      "line": 1,
+      "text": "def plusOne(head):"
+    },
+    {
+      "line": 2,
+      "text": "    dummy = ListNode(0)"
+    },
+    {
+      "line": 3,
+      "text": "    dummy.next = head"
+    },
+    {
+      "line": 4,
+      "text": "    notNine = dummy"
+    },
+    {
+      "line": 5,
+      "text": "    node = head"
+    },
+    {
+      "line": 6,
+      "text": "    while node and node.val == 9: node = node.next"
+    },
+    {
+      "line": 7,
+      "text": "    if node: node.val += 1; node = node.next"
+    },
+    {
+      "line": 8,
+      "text": "    while node: node.val = 0; node = node.next"
+    },
+    {
+      "line": 9,
+      "text": "    return dummy if dummy.val else dummy.next"
+    }
   ]
 };
 
