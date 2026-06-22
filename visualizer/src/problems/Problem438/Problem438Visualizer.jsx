@@ -12,86 +12,55 @@ import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem438Visualizer.css'
 
-const EXAMPLES = getExamples('find-all-anagrams-in-string')
+const EXAMPLES = getExamples('find-all-anagrams-in-string') || [
+  { label: 'Example 1', s: 'cbaebabacd', p: 'abc' },
+]
 
 function generateSteps(s, p) {
   const steps = []
 
+  steps.push({ activeLine: 1, message: `Input validation: s="${s}", p="${p}"` })
+
   if (!s || !p || p.length > s.length) {
-    steps.push({
-      activeLine: 1,
-      phase: 'init',
-      s,
-      p,
-      windowStart: 0,
-      windowEnd: 0,
-      result: [],
-      message: 'Invalid input',
-    })
+    steps.push({ activeLine: 1, message: 'Invalid input → return []', done: true, result: [] })
     return steps
   }
 
-  steps.push({
-    activeLine: 1,
-    phase: 'init',
-    s,
-    p,
-    windowStart: 0,
-    windowEnd: 0,
-    result: [],
-    message: `Find anagrams of "${p}" in "${s}"`,
-  })
+  steps.push({ activeLine: 2, message: 'Initialize result array' })
 
   const pLen = p.length
+  steps.push({ activeLine: 3, message: `Get pattern length: pLen = ${pLen}` })
+
   const result = []
+  steps.push({ activeLine: 4, message: `Start loop: i from 0 to ${s.length - pLen}` })
+
+  // Prepare pattern character frequency
+  const pChars = {}
+  for (const c of p) pChars[c] = (pChars[c] ?? 0) + 1
+  steps.push({ activeLine: 5, message: `Count pattern chars: ${JSON.stringify(pChars)}` })
 
   for (let i = 0; i <= s.length - pLen; i++) {
     const window = s.substring(i, i + pLen)
+    steps.push({ activeLine: 6, message: `Loop i=${i}: extract window "${window}"` })
 
-    steps.push({
-      activeLine: 2,
-      phase: 'window',
-      s,
-      p,
-      windowStart: i,
-      windowEnd: i + pLen,
-      result: [...result],
-      window,
-      message: `Check window [${i}, ${i + pLen - 1}]: "${window}"`,
-    })
+    // Count window characters
+    const windowChars = {}
+    for (const c of window) windowChars[c] = (windowChars[c] ?? 0) + 1
+    steps.push({ activeLine: 7, message: `Count window chars: ${JSON.stringify(windowChars)}` })
 
-    const pChars = p.split('').sort().join('')
-    const windowChars = window.split('').sort().join('')
+    // Check if anagram
+    const isAnagram = JSON.stringify(pChars) === JSON.stringify(windowChars)
+    steps.push({ activeLine: 8, message: `Compare frequencies: ${isAnagram ? 'match!' : 'no match'}` })
 
-    if (pChars === windowChars) {
+    if (isAnagram) {
       result.push(i)
-
-      steps.push({
-        activeLine: 3,
-        phase: 'found',
-        s,
-        p,
-        windowStart: i,
-        windowEnd: i + pLen,
-        result: [...result],
-        window,
-        message: `Found anagram at index ${i}: "${window}"`,
-      })
+      steps.push({ activeLine: 9, message: `Found anagram at index ${i}` })
+      steps.push({ activeLine: 10, message: `Record result: ${JSON.stringify(result)}` })
     }
   }
 
-  steps.push({
-    activeLine: 4,
-    phase: 'complete',
-    s,
-    p,
-    windowStart: 0,
-    windowEnd: 0,
-    result: [...result],
-    isComplete: true,
-    message: `Found ${result.length} anagram(s)`,
-  })
-
+  steps.push({ activeLine: 11, message: `Done looping. Final result length: ${result.length}` })
+  steps.push({ activeLine: 12, message: `Return result: [${result.join(', ')}]`, done: true, result })
   return steps
 }
 
@@ -227,9 +196,15 @@ function ResultsVisualization({ s, result }) {
   )
 }
 
-function VisualizationPanel({ step, applyEx }) {
+function VisualizationPanel({ step, applyEx, s, p, windowStart, windowEnd, result }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
+      {step && (
+        <div style={{ padding: 10, backgroundColor: '#e0e7ff', borderRadius: 6, border: '1px solid #6366f1', fontSize: 12, color: '#3730a3' }}>
+          {step.message}
+        </div>
+      )}
+
       <div>
         <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -252,17 +227,17 @@ function VisualizationPanel({ step, applyEx }) {
         </div>
       </div>
 
-      <PatternVisualization p={step?.p} />
+      <PatternVisualization p={p} />
 
       <StringVisualization
-        s={step?.s}
-        windowStart={step?.windowStart || 0}
-        windowEnd={step?.windowEnd || 0}
+        s={s}
+        windowStart={windowStart || 0}
+        windowEnd={windowEnd || 0}
       />
 
       <ResultsVisualization
-        s={step?.s}
-        result={step?.result || []}
+        s={s}
+        result={result || []}
       />
     </div>
   )
@@ -277,6 +252,9 @@ export default function Problem438Visualizer() {
       generateSteps(ex.s, ex.p).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
+        s: ex.s,
+        p: ex.p,
+        result: current.result || [],
       })),
     [ex]
   )
@@ -317,10 +295,15 @@ export default function Problem438Visualizer() {
         <VisualizationPanel
           step={step}
           applyEx={applyEx}
+          s={ex.s}
+          p={ex.p}
+          windowStart={step?.windowStart || 0}
+          windowEnd={step?.windowEnd || 0}
+          result={step?.result || []}
         />
       ),
     },
-  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, applyEx])
+  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, applyEx, ex])
 
   return (
     <div className="problem-shell">
