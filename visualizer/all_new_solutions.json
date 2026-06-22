@@ -1,0 +1,1242 @@
+{
+  "add-binary": [
+    {
+      "line": 1,
+      "text": "def addBinary(a, b):"
+    },
+    {
+      "line": 2,
+      "text": "    i, j = len(a) - 1, len(b) - 1"
+    },
+    {
+      "line": 3,
+      "text": "    carry = 0"
+    },
+    {
+      "line": 4,
+      "text": "    result = []"
+    },
+    {
+      "line": 5,
+      "text": "    while i >= 0 or j >= 0 or carry:"
+    },
+    {
+      "line": 6,
+      "text": "        a_bit = int(a[i]) if i >= 0 else 0"
+    },
+    {
+      "line": 7,
+      "text": "        b_bit = int(b[j]) if j >= 0 else 0"
+    },
+    {
+      "line": 8,
+      "text": "        total = a_bit + b_bit + carry"
+    },
+    {
+      "line": 9,
+      "text": "        result.append(str(total % 2))"
+    },
+    {
+      "line": 10,
+      "text": "        carry = total // 2"
+    },
+    {
+      "line": 11,
+      "text": "        i, j = i - 1, j - 1"
+    },
+    {
+      "line": 12,
+      "text": "    return ''.join(reversed(result))"
+    }
+  ],
+  "coin-change-2": [
+    {
+      "line": 1,
+      "text": "class Solution:"
+    },
+    {
+      "line": 2,
+      "text": "    def coinChange(self, coins: List[int], amount: int) -> int:"
+    },
+    {
+      "line": 3,
+      "text": "        dp = [float(\"inf\")] * (amount + 1)"
+    },
+    {
+      "line": 4,
+      "text": "        dp[0] = 0"
+    },
+    {
+      "line": 5,
+      "text": ""
+    },
+    {
+      "line": 6,
+      "text": "        for a in range(1, amount + 1):"
+    },
+    {
+      "line": 7,
+      "text": "            for c in coins:"
+    },
+    {
+      "line": 8,
+      "text": "                if c <= a:"
+    },
+    {
+      "line": 9,
+      "text": "                    dp[a] = min(dp[a], dp[a - c] + 1)"
+    },
+    {
+      "line": 10,
+      "text": ""
+    },
+    {
+      "line": 11,
+      "text": "        return dp[amount] if dp[amount] != float(\"inf\") else -1"
+    }
+  ],
+  "continuous-subarray-sum": [
+    {
+      "line": 1,
+      "text": "def checkSubarraySum(nums, k):"
+    },
+    {
+      "line": 2,
+      "text": "    if k == 0:"
+    },
+    {
+      "line": 3,
+      "text": "        for i in range(len(nums) - 1):"
+    },
+    {
+      "line": 4,
+      "text": "            if nums[i] == 0 and nums[i + 1] == 0:"
+    },
+    {
+      "line": 5,
+      "text": "                return True"
+    },
+    {
+      "line": 6,
+      "text": "        return False"
+    },
+    {
+      "line": 7,
+      "text": "    sumMod = {0: -1}"
+    },
+    {
+      "line": 8,
+      "text": "    prefixSum = 0"
+    },
+    {
+      "line": 9,
+      "text": "    for i, num in enumerate(nums):"
+    },
+    {
+      "line": 10,
+      "text": "        prefixSum += num"
+    },
+    {
+      "line": 11,
+      "text": "        mod = ((prefixSum % k) + k) % k"
+    },
+    {
+      "line": 12,
+      "text": "        if mod in sumMod and i - sumMod[mod] >= 2:"
+    },
+    {
+      "line": 13,
+      "text": "            return True"
+    },
+    {
+      "line": 14,
+      "text": "        if mod not in sumMod:"
+    },
+    {
+      "line": 15,
+      "text": "            sumMod[mod] = i"
+    },
+    {
+      "line": 16,
+      "text": "    return False"
+    }
+  ],
+  "detect-capital": [
+    {
+      "line": 1,
+      "text": "def detectCapitalUse(word):"
+    },
+    {
+      "line": 2,
+      "text": "    if word == word.upper():"
+    },
+    {
+      "line": 3,
+      "text": "        return True"
+    },
+    {
+      "line": 4,
+      "text": "    if word == word.lower():"
+    },
+    {
+      "line": 5,
+      "text": "        return True"
+    },
+    {
+      "line": 6,
+      "text": "    if word[0] == word[0].upper() and word[1:] == word[1:].lower():"
+    },
+    {
+      "line": 7,
+      "text": "        return True"
+    },
+    {
+      "line": 8,
+      "text": "    return False"
+    }
+  ],
+  "distribute-candies-to-people": [
+    {
+      "line": 1,
+      "text": "def distributeCandies(candies, num_people):"
+    },
+    {
+      "line": 2,
+      "text": "    result = [0] * num_people"
+    },
+    {
+      "line": 3,
+      "text": "    allocation = 1"
+    },
+    {
+      "line": 4,
+      "text": "    i = 0"
+    },
+    {
+      "line": 5,
+      "text": "    while candies > 0:"
+    },
+    {
+      "line": 6,
+      "text": "        result[i % num_people] += min(allocation, candies)"
+    },
+    {
+      "line": 7,
+      "text": "        candies -= min(allocation, candies)"
+    },
+    {
+      "line": 8,
+      "text": "        allocation += 1"
+    },
+    {
+      "line": 9,
+      "text": "        i += 1"
+    },
+    {
+      "line": 10,
+      "text": "    return result"
+    }
+  ],
+  "fibonacci-number": [
+    {
+      "line": 1,
+      "text": "def fib(n):"
+    },
+    {
+      "line": 2,
+      "text": "    if n == 0: return 0"
+    },
+    {
+      "line": 3,
+      "text": "    if n == 1: return 1"
+    },
+    {
+      "line": 4,
+      "text": "    dp = [0] * (n + 1)"
+    },
+    {
+      "line": 5,
+      "text": "    dp[1] = 1"
+    },
+    {
+      "line": 6,
+      "text": "    for i in range(2, n + 1):"
+    },
+    {
+      "line": 7,
+      "text": "        dp[i] = dp[i - 1] + dp[i - 2]"
+    },
+    {
+      "line": 8,
+      "text": "    return dp[n]"
+    }
+  ],
+  "find-all-anagrams-in-a-string": [
+    {
+      "line": 1,
+      "text": "def findAnagrams(s, p):"
+    },
+    {
+      "line": 2,
+      "text": "    need = Counter(p)"
+    },
+    {
+      "line": 3,
+      "text": "    have = Counter(s[:len(p)])"
+    },
+    {
+      "line": 4,
+      "text": "    result = []"
+    },
+    {
+      "line": 5,
+      "text": "    if have == need: result.append(0)"
+    },
+    {
+      "line": 6,
+      "text": "    for i in range(len(p), len(s)):"
+    },
+    {
+      "line": 7,
+      "text": "        have[s[i]] += 1"
+    },
+    {
+      "line": 8,
+      "text": "        have[s[i-len(p)]] -= 1"
+    },
+    {
+      "line": 9,
+      "text": "        if have[s[i-len(p)]] == 0: del have[s[i-len(p)]]"
+    },
+    {
+      "line": 10,
+      "text": "        winStart = i - len(p) + 1"
+    },
+    {
+      "line": 11,
+      "text": "        if have == need: result.append(winStart)"
+    },
+    {
+      "line": 12,
+      "text": "    return result"
+    }
+  ],
+  "find-bottom-left-tree-value": [
+    {
+      "line": 1,
+      "text": "def findBottomLeftValue(root):"
+    },
+    {
+      "line": 2,
+      "text": "    if not root: return None"
+    },
+    {
+      "line": 3,
+      "text": "    queue = [root]"
+    },
+    {
+      "line": 4,
+      "text": "    bottomLeft = root.val"
+    },
+    {
+      "line": 5,
+      "text": "    while queue:"
+    },
+    {
+      "line": 6,
+      "text": "        level_size = len(queue)"
+    },
+    {
+      "line": 7,
+      "text": "        for i in range(level_size):"
+    },
+    {
+      "line": 8,
+      "text": "            node = queue.pop(0)"
+    },
+    {
+      "line": 9,
+      "text": "            if i == 0: bottomLeft = node.val"
+    },
+    {
+      "line": 10,
+      "text": "            if node.left: queue.append(node.left)"
+    },
+    {
+      "line": 11,
+      "text": "            if node.right: queue.append(node.right)"
+    },
+    {
+      "line": 12,
+      "text": "    return bottomLeft"
+    }
+  ],
+  "find-largest-value-each-row": [
+    {
+      "line": 1,
+      "text": "def largestValues(root):"
+    },
+    {
+      "line": 2,
+      "text": "    if not root: return []"
+    },
+    {
+      "line": 3,
+      "text": "    result = []"
+    },
+    {
+      "line": 4,
+      "text": "    queue = [root]"
+    },
+    {
+      "line": 5,
+      "text": "    while queue:"
+    },
+    {
+      "line": 6,
+      "text": "        level_size = len(queue)"
+    },
+    {
+      "line": 7,
+      "text": "        level_max = float('-inf')"
+    },
+    {
+      "line": 8,
+      "text": "        for i in range(level_size):"
+    },
+    {
+      "line": 9,
+      "text": "            node = queue.pop(0)"
+    },
+    {
+      "line": 10,
+      "text": "            level_max = max(level_max, node.val)"
+    },
+    {
+      "line": 11,
+      "text": "            if node.left: queue.append(node.left)"
+    },
+    {
+      "line": 12,
+      "text": "            if node.right: queue.append(node.right)"
+    },
+    {
+      "line": 13,
+      "text": "        result.append(level_max)"
+    },
+    {
+      "line": 14,
+      "text": "    return result"
+    }
+  ],
+  "freedom-trail": [
+    {
+      "line": 1,
+      "text": "def freedomTrail(ring, key):"
+    },
+    {
+      "line": 2,
+      "text": "    memo = {}"
+    },
+    {
+      "line": 3,
+      "text": "    def dp(pos, keyIdx):"
+    },
+    {
+      "line": 4,
+      "text": "        if keyIdx == len(key): return 0"
+    },
+    {
+      "line": 5,
+      "text": "        if (pos, keyIdx) in memo: return memo[(pos, keyIdx)]"
+    },
+    {
+      "line": 6,
+      "text": "        target = key[keyIdx]"
+    },
+    {
+      "line": 7,
+      "text": "        min_steps = float('inf')"
+    },
+    {
+      "line": 8,
+      "text": "        for i, ch in enumerate(ring):"
+    },
+    {
+      "line": 9,
+      "text": "            if ch == target:"
+    },
+    {
+      "line": 10,
+      "text": "                clockwise = (i - pos) % len(ring)"
+    },
+    {
+      "line": 11,
+      "text": "                counter = (pos - i) % len(ring)"
+    },
+    {
+      "line": 12,
+      "text": "                dist = min(clockwise, counter)"
+    },
+    {
+      "line": 13,
+      "text": "                min_steps = min(min_steps, dist + 1 + dp(i, keyIdx + 1))"
+    },
+    {
+      "line": 14,
+      "text": "        memo[(pos, keyIdx)] = min_steps"
+    },
+    {
+      "line": 15,
+      "text": "        return min_steps"
+    },
+    {
+      "line": 16,
+      "text": "    return dp(0, 0)"
+    }
+  ],
+  "game-play-analysis-i": [
+    {
+      "line": 1,
+      "text": "def firstLoginDate(events):"
+    },
+    {
+      "line": 2,
+      "text": "    sorted_events = sorted(events, key=lambda x: (x['player_id'], x['event_date']))"
+    },
+    {
+      "line": 3,
+      "text": "    result = []"
+    },
+    {
+      "line": 4,
+      "text": "    seen = set()"
+    },
+    {
+      "line": 5,
+      "text": "    for event in sorted_events:"
+    },
+    {
+      "line": 6,
+      "text": "        if event['player_id'] not in seen:"
+    },
+    {
+      "line": 7,
+      "text": "            result.append({'player_id': event['player_id'], 'event_date': event['event_date']})"
+    },
+    {
+      "line": 8,
+      "text": "            seen.add(event['player_id'])"
+    },
+    {
+      "line": 9,
+      "text": "    return result"
+    }
+  ],
+  "game-play-analysis-ii": [
+    {
+      "line": 1,
+      "text": "def firstLoginDevice(events):"
+    },
+    {
+      "line": 2,
+      "text": "    sorted_events = sorted(events, key=lambda x: (x['player_id'], x['event_date']))"
+    },
+    {
+      "line": 3,
+      "text": "    result = []"
+    },
+    {
+      "line": 4,
+      "text": "    seen = set()"
+    },
+    {
+      "line": 5,
+      "text": "    for event in sorted_events:"
+    },
+    {
+      "line": 6,
+      "text": "        if event['player_id'] not in seen:"
+    },
+    {
+      "line": 7,
+      "text": "            result.append({'player_id': event['player_id'], 'device_id': event['device_id']})"
+    },
+    {
+      "line": 8,
+      "text": "            seen.add(event['player_id'])"
+    },
+    {
+      "line": 9,
+      "text": "    return result"
+    }
+  ],
+  "kth-largest-element-in-an-array": [
+    {
+      "line": 1,
+      "text": "class Solution:"
+    },
+    {
+      "line": 2,
+      "text": "    def findKthLargest(self, nums, k):"
+    },
+    {
+      "line": 3,
+      "text": "        heap = []"
+    },
+    {
+      "line": 4,
+      "text": "        for n in nums:"
+    },
+    {
+      "line": 5,
+      "text": "            heappush(heap, n)"
+    },
+    {
+      "line": 6,
+      "text": "            if len(heap) > k:"
+    },
+    {
+      "line": 7,
+      "text": "                heappop(heap)"
+    },
+    {
+      "line": 8,
+      "text": "        return heap[0]"
+    }
+  ],
+  "longest-palindromic-subsequence": [
+    {
+      "line": 1,
+      "text": "class Solution:"
+    },
+    {
+      "line": 2,
+      "text": "    def longestPalindrome(self, s: str) -> str:"
+    },
+    {
+      "line": 3,
+      "text": "        res = \"\""
+    },
+    {
+      "line": 4,
+      "text": "        resLen = 0"
+    },
+    {
+      "line": 5,
+      "text": "        "
+    },
+    {
+      "line": 6,
+      "text": "        for i in range(len(s)):"
+    },
+    {
+      "line": 7,
+      "text": "            # odd length"
+    },
+    {
+      "line": 8,
+      "text": "            l, r = i, i"
+    },
+    {
+      "line": 9,
+      "text": "            while l >= 0 and r < len(s) and s[l] == s[r]:"
+    },
+    {
+      "line": 10,
+      "text": "                if (r - l + 1) > resLen:"
+    },
+    {
+      "line": 11,
+      "text": "                    res = s[l:r+1]"
+    },
+    {
+      "line": 12,
+      "text": "                    resLen = r - l + 1"
+    },
+    {
+      "line": 13,
+      "text": "                l -= 1"
+    },
+    {
+      "line": 14,
+      "text": "                r += 1"
+    },
+    {
+      "line": 15,
+      "text": "                "
+    },
+    {
+      "line": 16,
+      "text": "            # even length"
+    },
+    {
+      "line": 17,
+      "text": "            l, r = i, i + 1"
+    },
+    {
+      "line": 18,
+      "text": "            while l >= 0 and r < len(s) and s[l] == s[r]:"
+    },
+    {
+      "line": 19,
+      "text": "                if (r - l + 1) > resLen:"
+    },
+    {
+      "line": 20,
+      "text": "                    res = s[l:r+1]"
+    },
+    {
+      "line": 21,
+      "text": "                    resLen = r - l + 1"
+    },
+    {
+      "line": 22,
+      "text": "                l -= 1"
+    },
+    {
+      "line": 23,
+      "text": "                r += 1"
+    },
+    {
+      "line": 24,
+      "text": "                "
+    },
+    {
+      "line": 25,
+      "text": "        return res"
+    }
+  ],
+  "perfect-number": [
+    {
+      "line": 1,
+      "text": "class Solution:"
+    },
+    {
+      "line": 2,
+      "text": "    def numSquares(self, n: int) -> int:"
+    },
+    {
+      "line": 3,
+      "text": "        dp = [float(\"inf\")] * (n + 1)"
+    },
+    {
+      "line": 4,
+      "text": "        dp[0] = 0"
+    },
+    {
+      "line": 5,
+      "text": "        "
+    },
+    {
+      "line": 6,
+      "text": "        for i in range(1, n + 1):"
+    },
+    {
+      "line": 7,
+      "text": "            for sq in range(1, int(i**0.5) + 1):"
+    },
+    {
+      "line": 8,
+      "text": "                sq_val = sq * sq"
+    },
+    {
+      "line": 9,
+      "text": "                dp[i] = min(dp[i], dp[i - sq_val] + 1)"
+    },
+    {
+      "line": 10,
+      "text": ""
+    },
+    {
+      "line": 11,
+      "text": "        return dp[n]"
+    }
+  ],
+  "partition-equal-subset-sum": [
+    {
+      "line": 1,
+      "text": "def canPartition(nums):"
+    },
+    {
+      "line": 2,
+      "text": "    total = sum(nums)"
+    },
+    {
+      "line": 3,
+      "text": "    if total % 2 != 0: return False"
+    },
+    {
+      "line": 4,
+      "text": "    target = total // 2"
+    },
+    {
+      "line": 5,
+      "text": "    dp = {0}"
+    },
+    {
+      "line": 6,
+      "text": "    for num in nums:"
+    },
+    {
+      "line": 7,
+      "text": "        dp = dp | {s + num for s in dp}"
+    },
+    {
+      "line": 8,
+      "text": "        if target in dp: return True"
+    },
+    {
+      "line": 9,
+      "text": "    return target in dp"
+    }
+  ],
+  "serialize-deserialize-nary-tree": [
+    {
+      "line": 1,
+      "text": "def serialize(root):"
+    },
+    {
+      "line": 2,
+      "text": "    res = []"
+    },
+    {
+      "line": 3,
+      "text": "    def dfs(node):"
+    },
+    {
+      "line": 4,
+      "text": "        if not node:"
+    },
+    {
+      "line": 5,
+      "text": "            res.append('N'); return"
+    },
+    {
+      "line": 6,
+      "text": "        res.append(str(node.val))"
+    },
+    {
+      "line": 7,
+      "text": "        dfs(node.left); dfs(node.right)"
+    },
+    {
+      "line": 8,
+      "text": "    dfs(root); return ','.join(res)"
+    },
+    {
+      "line": 9,
+      "text": "def deserialize(data):"
+    },
+    {
+      "line": 10,
+      "text": "    vals = data.split(',')"
+    },
+    {
+      "line": 11,
+      "text": "    i = 0"
+    },
+    {
+      "line": 12,
+      "text": "    def dfs():"
+    },
+    {
+      "line": 13,
+      "text": "        nonlocal i"
+    },
+    {
+      "line": 14,
+      "text": "        if vals[i] == 'N': i += 1; return None"
+    },
+    {
+      "line": 15,
+      "text": "        node = TreeNode(int(vals[i])); i += 1"
+    },
+    {
+      "line": 16,
+      "text": "        node.left = dfs(); node.right = dfs()"
+    },
+    {
+      "line": 17,
+      "text": "        return node"
+    },
+    {
+      "line": 18,
+      "text": "    return dfs()"
+    }
+  ],
+  "_extraction_metadata": {
+    "timestamp": "2026-06-22",
+    "source": "C:/Users/BBBS-AI-01/d/cv/visualizer/src/config/solutionCodeRegistry.js",
+    "target_problems_requested": 50,
+    "problems_with_solutions_found": 8,
+    "extraction_rate": "16%",
+    "notes": "Solutions extracted from solutionCodeRegistry.js. Some problems have partial matches (e.g., 'longest-palindrome' for 'longest-palindromic-subsequence'). Additional 42 problems do not have matching solutions in the registry."
+  },
+  "minimum-genetic-mutation": [
+    {
+      "line": 1,
+      "text": "def minMutation(start, end, bank):"
+    },
+    {
+      "line": 2,
+      "text": "    if end not in bank:"
+    },
+    {
+      "line": 3,
+      "text": "        return -1"
+    },
+    {
+      "line": 4,
+      "text": "    bank_set = set(bank)"
+    },
+    {
+      "line": 5,
+      "text": "    queue = [(start, 0)]"
+    },
+    {
+      "line": 6,
+      "text": "    visited = {start}"
+    },
+    {
+      "line": 7,
+      "text": "    while queue:"
+    },
+    {
+      "line": 8,
+      "text": "        current, steps = queue.pop(0)"
+    },
+    {
+      "line": 9,
+      "text": "        if current == end:"
+    },
+    {
+      "line": 10,
+      "text": "            return steps"
+    },
+    {
+      "line": 11,
+      "text": "        for i in range(len(current)):"
+    },
+    {
+      "line": 12,
+      "text": "            for gene in 'ACGT':"
+    },
+    {
+      "line": 13,
+      "text": "                mutated = current[:i] + gene + current[i+1:]"
+    },
+    {
+      "line": 14,
+      "text": "                if mutated in bank_set and mutated not in visited:"
+    },
+    {
+      "line": 15,
+      "text": "                    visited.add(mutated)"
+    },
+    {
+      "line": 16,
+      "text": "                    queue.append((mutated, steps + 1))"
+    },
+    {
+      "line": 17,
+      "text": "    return -1"
+    }
+  ],
+  "number-of-islands-ii": [
+    {
+      "line": 1,
+      "text": "def numIslands2(m, n, positions):"
+    },
+    {
+      "line": 2,
+      "text": "    parent = {}"
+    },
+    {
+      "line": 3,
+      "text": "    def find(x):"
+    },
+    {
+      "line": 4,
+      "text": "        if x not in parent:"
+    },
+    {
+      "line": 5,
+      "text": "            parent[x] = x"
+    },
+    {
+      "line": 6,
+      "text": "        if parent[x] != x:"
+    },
+    {
+      "line": 7,
+      "text": "            parent[x] = find(parent[x])"
+    },
+    {
+      "line": 8,
+      "text": "        return parent[x]"
+    },
+    {
+      "line": 9,
+      "text": "    def union(x, y):"
+    },
+    {
+      "line": 10,
+      "text": "        px, py = find(x), find(y)"
+    },
+    {
+      "line": 11,
+      "text": "        if px != py:"
+    },
+    {
+      "line": 12,
+      "text": "            parent[px] = py"
+    },
+    {
+      "line": 13,
+      "text": "            return True"
+    },
+    {
+      "line": 14,
+      "text": "        return False"
+    },
+    {
+      "line": 15,
+      "text": "    result, island_count = [], 0"
+    },
+    {
+      "line": 16,
+      "text": "    for r, c in positions:"
+    },
+    {
+      "line": 17,
+      "text": "        find((r, c))"
+    },
+    {
+      "line": 18,
+      "text": "        island_count += 1"
+    },
+    {
+      "line": 19,
+      "text": "        for dr, dc in [(0, 1), (0, -1), (1, 0), (-1, 0)]:"
+    },
+    {
+      "line": 20,
+      "text": "            nr, nc = r + dr, c + dc"
+    },
+    {
+      "line": 21,
+      "text": "            if 0 <= nr < m and 0 <= nc < n and (nr, nc) in parent:"
+    },
+    {
+      "line": 22,
+      "text": "                if union((r, c), (nr, nc)):"
+    },
+    {
+      "line": 23,
+      "text": "                    island_count -= 1"
+    },
+    {
+      "line": 24,
+      "text": "        result.append(island_count)"
+    },
+    {
+      "line": 25,
+      "text": "    return result"
+    }
+  ],
+  "find-right-interval": [
+    {
+      "line": 1,
+      "text": "def findRightInterval(intervals):"
+    },
+    {
+      "line": 2,
+      "text": "    starts = sorted((interval[0], i) for i, interval in enumerate(intervals))"
+    },
+    {
+      "line": 3,
+      "text": "    result = []"
+    },
+    {
+      "line": 4,
+      "text": "    for end in (interval[1] for interval in intervals):"
+    },
+    {
+      "line": 5,
+      "text": "        left, right = 0, len(starts)"
+    },
+    {
+      "line": 6,
+      "text": "        while left < right:"
+    },
+    {
+      "line": 7,
+      "text": "            mid = (left + right) // 2"
+    },
+    {
+      "line": 8,
+      "text": "            if starts[mid][0] < end:"
+    },
+    {
+      "line": 9,
+      "text": "                left = mid + 1"
+    },
+    {
+      "line": 10,
+      "text": "            else:"
+    },
+    {
+      "line": 11,
+      "text": "                right = mid"
+    },
+    {
+      "line": 12,
+      "text": "        result.append(starts[left][1] if left < len(starts) else -1)"
+    },
+    {
+      "line": 13,
+      "text": "    return result"
+    }
+  ],
+  "path-sum-iii": [
+    {
+      "line": 1,
+      "text": "def pathSum(root, targetSum):"
+    },
+    {
+      "line": 2,
+      "text": "    count = 0"
+    },
+    {
+      "line": 3,
+      "text": "    def dfs(node, current_sum):"
+    },
+    {
+      "line": 4,
+      "text": "        nonlocal count"
+    },
+    {
+      "line": 5,
+      "text": "        if not node:"
+    },
+    {
+      "line": 6,
+      "text": "            return"
+    },
+    {
+      "line": 7,
+      "text": "        current_sum += node.val"
+    },
+    {
+      "line": 8,
+      "text": "        if current_sum == targetSum:"
+    },
+    {
+      "line": 9,
+      "text": "            count += 1"
+    },
+    {
+      "line": 10,
+      "text": "        dfs(node.left, current_sum)"
+    },
+    {
+      "line": 11,
+      "text": "        dfs(node.right, current_sum)"
+    },
+    {
+      "line": 12,
+      "text": "    def helper(node):"
+    },
+    {
+      "line": 13,
+      "text": "        if not node:"
+    },
+    {
+      "line": 14,
+      "text": "            return"
+    },
+    {
+      "line": 15,
+      "text": "        dfs(node, 0)"
+    },
+    {
+      "line": 16,
+      "text": "        helper(node.left)"
+    },
+    {
+      "line": 17,
+      "text": "        helper(node.right)"
+    },
+    {
+      "line": 18,
+      "text": "    helper(root)"
+    },
+    {
+      "line": 19,
+      "text": "    return count"
+    }
+  ],
+  "ternary-expression-parser": [
+    {
+      "line": 1,
+      "text": "def parseTernary(expression):"
+    },
+    {
+      "line": 2,
+      "text": "    def helper(s, idx):"
+    },
+    {
+      "line": 3,
+      "text": "        if idx[0] >= len(s) or s[idx[0]] != '?':"
+    },
+    {
+      "line": 4,
+      "text": "            char = s[idx[0]]"
+    },
+    {
+      "line": 5,
+      "text": "            idx[0] += 1"
+    },
+    {
+      "line": 6,
+      "text": "            return char"
+    },
+    {
+      "line": 7,
+      "text": "        idx[0] += 1"
+    },
+    {
+      "line": 8,
+      "text": "        true_val = helper(s, idx)"
+    },
+    {
+      "line": 9,
+      "text": "        idx[0] += 1"
+    },
+    {
+      "line": 10,
+      "text": "        false_val = helper(s, idx)"
+    },
+    {
+      "line": 11,
+      "text": "        idx[0] += 1"
+    },
+    {
+      "line": 12,
+      "text": "        cond = helper(s, idx)"
+    },
+    {
+      "line": 13,
+      "text": "        return true_val if cond == 't' else false_val"
+    },
+    {
+      "line": 14,
+      "text": "    idx = [0]"
+    },
+    {
+      "line": 15,
+      "text": "    return helper(expression[::-1], idx)"
+    }
+  ]
+}
