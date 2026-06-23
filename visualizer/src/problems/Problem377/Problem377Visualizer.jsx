@@ -11,7 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem377.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def combinationSum4(nums, target):' },
   { line: 2, text: '    dp = [0] * (target + 1)' },
   { line: 3, text: '    dp[0] = 1' },
@@ -21,6 +21,7 @@ const SOLUTION_CODE = [
   { line: 7, text: '                dp[i] += dp[i - num]' },
   { line: 8, text: '    return dp[target]' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(nums, target) {
   const steps = []

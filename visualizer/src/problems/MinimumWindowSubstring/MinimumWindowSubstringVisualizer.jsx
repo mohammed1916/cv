@@ -5,7 +5,6 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { useApplyExample } from '../../hooks/useApplyExample'
 import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { getExamples } from '../../config/examplesRegistry'
 import './MinimumWindowSubstringVisualizer.css'
@@ -73,7 +72,6 @@ function snippetIdForPhase(phase) {
 
 export default function MinimumWindowSubstringVisualizer() {
   // Load solution code from registry
-  const SOLUTION_CODE = useSolutionCode('minimum-window-substring')
 
   const [sInput, setSInput] = useState('ADOBECODEBANC')
   const [tInput, setTInput] = useState('ABC')

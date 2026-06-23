@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './LongestUncommonSubsequenceIIVisualizer.css'
 
@@ -230,7 +229,6 @@ function VisualizationPanel({ strs, step, applyEx }) {
 
 export default function LongestUncommonSubsequenceIIVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { strs: ['abcdefg', 'abc', 'abcd'] })
-  const SOLUTION_CODE = useSolutionCode('longest-uncommon-subsequence-ii')
 
   const steps = useMemo(
     () =>

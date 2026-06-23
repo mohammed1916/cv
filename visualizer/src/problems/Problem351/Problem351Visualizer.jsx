@@ -10,7 +10,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './Problem351.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'class SummaryRanges:' },
   { line: 2, text: '    def __init__(self):' },
   { line: 3, text: '        self.intervals = []' },
@@ -28,6 +28,7 @@ const SOLUTION_CODE = [
   { line: 15, text: '        self.intervals.insert(idx, [new_left, new_right])' },
   { line: 16, text: '    def getSummaryRanges(self):' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(nums) {
   const steps = []

@@ -8,7 +8,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'class Solution:' },
   { line: 2, text: '    def isSubsequence(self, s: str, t: str) -> bool:' },
   { line: 3, text: '        if not s:' },
@@ -25,6 +25,7 @@ const SOLUTION_CODE = [
   { line: 14, text: '        ' },
   { line: 15, text: '        return False' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(s, t) {
   const steps = []

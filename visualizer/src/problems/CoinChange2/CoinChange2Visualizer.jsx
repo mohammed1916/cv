@@ -8,11 +8,22 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './CoinChange2Visualizer.css'
 
 const EXAMPLES = getExamples('coin-change-2')
+
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def change(amount, coins):' },
+  { line: 2, text: '    dp = [0] * (amount + 1)' },
+  { line: 3, text: '    dp[0] = 1' },
+  { line: 4, text: '    for coin in coins:' },
+  { line: 5, text: '        for amt in range(coin, amount + 1):' },
+  { line: 6, text: '            dp[amt] += dp[amt - coin]' },
+  { line: 7, text: '    return dp[amount]' },
+]
+
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(amount, coins) {
   const steps = []
@@ -207,7 +218,6 @@ function VisualizationPanel({ amount, coins, step, applyEx }) {
 
 export default function CoinChange2Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { amount: 5, coins: [1, 2, 5] })
-  const SOLUTION_CODE = useSolutionCode('coin-change-2')
 
   const steps = useMemo(
     () =>

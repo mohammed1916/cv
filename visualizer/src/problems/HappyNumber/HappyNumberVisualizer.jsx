@@ -8,11 +8,21 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from '../../config/examplesRegistry'
 import "./HappyNumberVisualizer.css";
 
 const EXAMPLES = getExamples('happy-number');
+
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def isHappy(n):' },
+  { line: 2, text: '    seen = set()' },
+  { line: 3, text: '    while n != 1 and n not in seen:' },
+  { line: 4, text: '        seen.add(n)' },
+  { line: 5, text: '        n = sum(int(d)**2 for d in str(n))' },
+  { line: 6, text: '    return n == 1' },
+]
+
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function sumOfSquaredDigits(n) {
   return String(n).split("").reduce((acc, d) => acc + Number(d) ** 2, 0);
@@ -196,7 +206,6 @@ function VisualizationPanel({ chain, step, ex, applyEx }) {
 
 export default function HappyNumberVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const SOLUTION_CODE = useSolutionCode('happy-number');
   const steps = useMemo(
     () =>
       generateSteps(ex.n).map((current) => ({

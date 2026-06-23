@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './MinesweeperVisualizer.css'
 
@@ -256,7 +255,6 @@ function VisualizationPanel({ board, click, step, applyEx }) {
 
 export default function MinesweeperVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { board: [['E','E','E','E','E'],['E','E','M','E','E'],['E','E','E','E','E'],['E','E','E','E','E']], click: [0, 0] })
-  const SOLUTION_CODE = useSolutionCode('minesweeper')
 
   const steps = useMemo(
     () =>

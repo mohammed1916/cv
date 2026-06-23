@@ -11,7 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def minMoves(nums: list) -> int:' },
   { line: 2, text: '    # Each move: increment all except one' },
   { line: 3, text: '    # Equivalent to: decrement one' },
@@ -21,6 +21,7 @@ const SOLUTION_CODE = [
   { line: 7, text: '        moves += num - min_val' },
   { line: 8, text: '    return moves' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('minimum-moves-to-equal-array-elements') || [
   { label: 'Example 1', nums: [1, 0, 0, 8, 6], expected: 14 },

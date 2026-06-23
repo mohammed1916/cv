@@ -11,7 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem352Visualizer.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'from collections import deque' },
   { line: 2, text: 'class SnakeGame:' },
   { line: 3, text: '    def __init__(self, h, w, food):' },
@@ -28,6 +28,7 @@ const SOLUTION_CODE = [
   { line: 14, text: '        else: self.body.pop()' },
   { line: 15, text: '        return len(self.body)' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const GRID_SIZE = 10
 const CELL_SIZE = 40

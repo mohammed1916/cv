@@ -11,7 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def minMoves2(nums):' },
   { line: 2, text: '    nums.sort()' },
   { line: 3, text: '    median = nums[len(nums) // 2]' },
@@ -20,6 +20,7 @@ const SOLUTION_CODE = [
   { line: 6, text: '        moves += abs(num - median)' },
   { line: 7, text: '    return moves' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('minimum-moves-to-equal-array-elements-ii') || [
   { label: 'Example 1', nums: [1, 0, 0, 8, 6], expected: 14 },

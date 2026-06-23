@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './IslandPerimeterVisualizer.css'
 
@@ -328,7 +327,6 @@ function VisualizationPanel({ grid, step, applyEx }) {
 
 export default function IslandPerimeterVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { grid: [[0, 1, 0, 0], [1, 1, 1, 0], [0, 1, 0, 1], [1, 1, 0, 0]] })
-  const SOLUTION_CODE = useSolutionCode('island-perimeter')
 
   const steps = useMemo(
     () =>

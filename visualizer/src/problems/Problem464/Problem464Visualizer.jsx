@@ -11,7 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def canIWin(maxChoosableInteger, desiredTotal):' },
   { line: 2, text: '    if desiredTotal <= 0: return True' },
   { line: 3, text: '    if (1 + maxChoosableInteger) * maxChoosableInteger / 2 < desiredTotal:' },
@@ -30,6 +30,7 @@ const SOLUTION_CODE = [
   { line: 16, text: '    all_available = (1 << maxChoosableInteger) - 1' },
   { line: 17, text: '    return dfs(all_available, 0)' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('can-i-win') || [
   { label: 'Example 1', maxChoosable: 10, desiredTotal: 40, expected: true },

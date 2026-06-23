@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './RepeatedSubstringPatternVisualizer.css'
 
@@ -274,7 +273,6 @@ function VisualizationPanel({ s, step, applyEx }) {
 
 export default function RepeatedSubstringPatternVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { s: 'abab' })
-  const SOLUTION_CODE = useSolutionCode('repeated-substring-pattern')
 
   const steps = useMemo(
     () =>

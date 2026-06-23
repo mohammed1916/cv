@@ -8,7 +8,6 @@ import PatternOverlay from'../../components/PatternOverlay'
 import{usePlaybackState}from'../../hooks/usePlaybackState'
 import{useCodeVisualConnectivity}from'../../hooks/useCodeVisualConnectivity'
 import{usePatternOverlay}from'../../hooks/usePatternOverlay'
-import{useSolutionCode}from'../../hooks/useSolutionCode'
 import{getExamples}from'../../config/examplesRegistry'
 import'./ZeroOneMatrixVisualizer.css'
 const EXAMPLES=getExamples('01-matrix')
@@ -32,7 +31,6 @@ return steps}
 function VisualizationPanel({mat,step,applyEx}){return(<div style={{display:'flex',flexDirection:'column',gap:20,padding:16}}><div style={{padding:12,backgroundColor:'#f0f9ff',borderRadius:6,borderLeft:'4px solid #0284c7'}}><div style={{fontSize:12,color:'#075985',fontStyle:'italic'}}>Find nearest 0 distance for every cell using multi-source BFS.</div></div><div><div style={{fontSize:13,fontWeight:600,color:'#1e293b',marginBottom:8}}>Examples</div><div style={{display:'flex',gap:6,flexWrap:'wrap'}}>{EXAMPLES.map(e=>(<button key={e.label}onClick={()=>applyEx(e)}style={{padding:'6px 12px',borderRadius:4,border:'1px solid #cbd5e1',cursor:'pointer',fontSize:12,backgroundColor:'#f1f5f9'}}>{e.label}</button>))}</div></div><div><div style={{fontSize:13,fontWeight:600,color:'#1e293b',marginBottom:8}}>Matrix</div><div style={{display:'grid',gridTemplateColumns:`repeat(${step?.mat[0]?.length||3},1fr)`,gap:3}}>{step?.mat?.map((row,r)=>row.map((cell,c)=>(<motion.div key={`cell-${r}-${c}`}style={{width:50,height:50,display:'flex',alignItems:'center',justifyContent:'center',borderRadius:4,border:'2px solid',fontFamily:'monospace',fontSize:13,fontWeight:600,backgroundColor:cell===0?'#f87171':'#dbeafe',borderColor:step?.r===r&&step?.c===c?'#10b981':'#0284c7',color:'#0c4a6e'}}animate={{scale:step?.r===r&&step?.c===c?1.15:1}}>{cell===Infinity?'∞':cell}</motion.div>)))}
 </div></div><motion.div style={{padding:16,backgroundColor:'#f0f9ff',borderRadius:6,border:'2px solid #0284c7',textAlign:'center'}}initial={{opacity:0}}animate={{opacity:1}}><div style={{fontSize:13,fontWeight:600,color:'#0c4a6e',marginBottom:8}}>BFS Status</div><div style={{fontSize:12,color:'#0284c7'}}>{step?.message||''}</div></motion.div></div>)}
 export default function ZeroOneMatrixVisualizer(){const[ex,setEx]=useState(EXAMPLES[0]||{mat:[[0,0,0],[0,1,0],[1,1,1]]})
-const SOLUTION_CODE=useSolutionCode('01-matrix')
 const steps=useMemo(()=>generateSteps(ex.mat).map(c=>({...c,relatedLines:c.relatedLines??(c.activeLine!=null?[c.activeLine]:[])})),[ex])
 const{stepIndex,setStepIndex,stepForward,stepBack,togglePlay,handleReset,isPlaying,speed,setSpeed,isDone}=usePlaybackState(steps.length)
 const step=stepIndex>=0?steps[stepIndex]:null

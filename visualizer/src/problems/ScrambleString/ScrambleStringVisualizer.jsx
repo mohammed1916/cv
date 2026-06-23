@@ -8,7 +8,6 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './ScrambleStringVisualizer.css'
 
@@ -508,7 +507,6 @@ function VisualizationPanel({ s1, s2, step, applyEx }) {
 
 export default function ScrambleStringVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { s1: 'great', s2: 'rgeat', label: 'Example 1' })
-  const SOLUTION_CODE = useSolutionCode('scramble-string')
 
   const steps = useMemo(
     () =>

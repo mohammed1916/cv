@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './ContinuousSubarraySumVisualizer.css'
 
@@ -284,7 +283,6 @@ function VisualizationPanel({ nums, k, step, applyEx }) {
 
 export default function ContinuousSubarraySumVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { nums: [23, 2, 4, 6, 7], k: 6 })
-  const SOLUTION_CODE = useSolutionCode('continuous-subarray-sum')
 
   const steps = useMemo(
     () =>

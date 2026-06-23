@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './LongestWordDictionaryVisualizer.css'
 
@@ -232,7 +231,6 @@ function VisualizationPanel({ s, dictionary, step, applyEx }) {
 
 export default function LongestWordDictionaryVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { s: 'abpcplea', dictionary: ['ale', 'apple', 'monkey', 'plea'] })
-  const SOLUTION_CODE = useSolutionCode('longest-word-dictionary')
 
   const steps = useMemo(
     () =>

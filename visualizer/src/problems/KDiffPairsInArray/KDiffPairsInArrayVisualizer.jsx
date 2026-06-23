@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './KDiffPairsInArrayVisualizer.css'
 
@@ -258,7 +257,6 @@ function VisualizationPanel({ nums, k, step, applyEx }) {
 
 export default function KDiffPairsInArrayVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { nums: [3, 1, 4, 1, 5], k: 1 })
-  const SOLUTION_CODE = useSolutionCode('k-diff-pairs-in-array')
 
   const steps = useMemo(
     () =>

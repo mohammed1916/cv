@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './RomanToIntegerVisualizer.css'
 
@@ -172,7 +171,6 @@ const EXAMPLES = getExamples('roman-to-integer')
 
 export default function RomanToIntegerVisualizer() {
   const [romanInput, setRomanInput] = useState('MCMXCIV')
-  const SOLUTION_CODE_HOOK = useSolutionCode('roman-to-integer')
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const { inputError } = useMemo(() => {

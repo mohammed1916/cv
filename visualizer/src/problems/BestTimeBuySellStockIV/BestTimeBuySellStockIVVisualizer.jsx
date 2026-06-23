@@ -8,11 +8,10 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from "../../config/examplesRegistry";
 import "./BestTimeBuySellStockIVVisualizer.css";
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1,  text: "def maxProfit(k, prices):" },
   { line: 2,  text: "    n = len(prices)" },
   { line: 3,  text: "    if k >= n//2: return greedy(prices)" },
@@ -27,6 +26,8 @@ const SOLUTION_CODE = [
   { line: 12, text: "                        prices[i] + max_so_far)" },
   { line: 13, text: "    return dp[k][n-1]" },
 ];
+
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('best-time-buy-sell-stock-iv');
 
@@ -58,7 +59,6 @@ function generateSteps(k, prices) {
 
 export default function BestTimeBuySellStockIVVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const SOLUTION_CODE = useSolutionCode('best-time-to-buy-and-sell-stock-iv');
   const steps = useMemo(() => generateSteps(ex.k, ex.prices), [ex]);
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);

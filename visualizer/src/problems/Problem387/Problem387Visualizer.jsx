@@ -8,10 +8,9 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import './Problem387Visualizer.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def firstUniqChar(s):' },
   { line: 2, text: '    # Count character frequencies' },
   { line: 3, text: '    char_count = {}' },
@@ -23,6 +22,7 @@ const SOLUTION_CODE = [
   { line: 9, text: '            return i' },
   { line: 10, text: '    return -1' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(s) {
   const steps = []

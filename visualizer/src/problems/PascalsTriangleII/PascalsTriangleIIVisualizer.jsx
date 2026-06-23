@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './PascalsTriangleII.css'
 
@@ -67,7 +66,6 @@ const EXAMPLES = [
 
 export default function PascalsTriangleIIVisualizer() {
   const [exIdx, setExIdx] = useState(0)
-  const SOLUTION_CODE_HOOK = useSolutionCode('pascals-triangle-ii')
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]

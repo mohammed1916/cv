@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './FindLargestValueEachRowVisualizer.css'
 
@@ -304,7 +303,6 @@ function VisualizationPanel({ arr, step, applyEx }) {
 
 export default function FindLargestValueEachRowVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { arr: [1, 3, 2, 5, 3, null, 9] })
-  const SOLUTION_CODE = useSolutionCode('find-largest-value-each-row')
 
   const steps = useMemo(
     () =>

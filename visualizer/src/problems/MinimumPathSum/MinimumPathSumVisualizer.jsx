@@ -10,7 +10,6 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import './MinimumPathSumVisualizer.css'
 
 const EXAMPLES = getExamples('minimum-path-sum')
@@ -217,7 +216,6 @@ function MinimumPathSumVisualization({
 export default function MinimumPathSumVisualizer() {
   const [gridInput, setGridInput] = useState('[[1,3,1],[1,5,1],[4,2,1]]')
 
-  const SOLUTION_CODE = useSolutionCode('minimum-path-sum')
 
   const { grid, m, n, inputError } = useMemo(() => {
     try {

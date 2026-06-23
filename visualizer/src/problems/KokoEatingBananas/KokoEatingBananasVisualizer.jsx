@@ -8,9 +8,8 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def minEatingSpeed(piles, h):' },
   { line: 2, text: '    def canFinish(speed):' },
   { line: 3, text: '        hours = sum((p + speed - 1) // speed for p in piles)' },
@@ -24,6 +23,7 @@ const SOLUTION_CODE = [
   { line: 11, text: '            left = mid + 1' },
   { line: 12, text: '    return left' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(piles, h) {
   const steps = []
@@ -102,7 +102,6 @@ const EXAMPLES = [
 
 export default function KokoEatingBananasVisualizer() {
   const [exIdx, setExIdx] = useState(0)
-  const SOLUTION_CODE_HOOK = useSolutionCode('koko-eating-bananas')
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]

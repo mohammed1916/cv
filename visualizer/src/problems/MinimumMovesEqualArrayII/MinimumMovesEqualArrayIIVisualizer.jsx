@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './MinimumMovesEqualArrayIIVisualizer.css'
 
@@ -261,7 +260,6 @@ function VisualizationPanel({ nums, step, applyEx }) {
 
 export default function MinimumMovesEqualArrayIIVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { nums: [1, 0, 0, 8, 6] })
-  const SOLUTION_CODE = useSolutionCode('minimum-moves-to-equal-array-elements-ii')
 
   const steps = useMemo(
     () =>

@@ -11,7 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def findContentChildren(g, s):' },
   { line: 2, text: '    g.sort()' },
   { line: 3, text: '    s.sort()' },
@@ -22,6 +22,7 @@ const SOLUTION_CODE = [
   { line: 8, text: '        j += 1' },
   { line: 9, text: '    return i' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('assign-cookies') || [
   { label: 'Example 1', greed: [1, 2, 3], size: [1, 1], expected: 1 },

@@ -8,11 +8,23 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './AssignCookiesVisualizer.css'
 
 const EXAMPLES = getExamples('assign-cookies')
+
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def findContentChildren(g, s):' },
+  { line: 2, text: '    g.sort()' },
+  { line: 3, text: '    s.sort()' },
+  { line: 4, text: '    child = 0' },
+  { line: 5, text: '    for cookie in s:' },
+  { line: 6, text: '        if child < len(g) and cookie >= g[child]:' },
+  { line: 7, text: '            child += 1' },
+  { line: 8, text: '    return child' },
+]
+
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(g, s) {
   const steps = []
@@ -243,7 +255,6 @@ function VisualizationPanel({ g, s, step, applyEx }) {
 
 export default function AssignCookiesVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { g: [1, 2, 3], s: [1, 1] })
-  const SOLUTION_CODE = useSolutionCode('assign-cookies')
 
   const steps = useMemo(
     () =>

@@ -10,7 +10,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './Problem363.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def maxSumSubmatrix(matrix, K):' },
   { line: 2, text: '    m, n = len(matrix), len(matrix[0])' },
   { line: 3, text: '    result = float("-inf")' },
@@ -28,6 +28,7 @@ const SOLUTION_CODE = [
   { line: 15, text: '                bst.insert(sum)' },
   { line: 16, text: '    return result' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(matrix, K) {
   const steps = []

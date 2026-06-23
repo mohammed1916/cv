@@ -11,7 +11,7 @@ import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./JumpGameIIVisualizer.css";
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: "def jump(nums):" },
   { line: 2, text: "    jumps = 0; curEnd = 0; farthest = 0" },
   { line: 3, text: "    for i in range(len(nums) - 1):" },
@@ -22,6 +22,7 @@ const SOLUTION_CODE = [
   { line: 8, text: "            if curEnd >= len(nums)-1: break" },
   { line: 9, text: "    return jumps" },
 ];
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('jump-game-ii');
 

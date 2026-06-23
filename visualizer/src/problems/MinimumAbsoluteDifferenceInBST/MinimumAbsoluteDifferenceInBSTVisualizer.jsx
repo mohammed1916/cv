@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './MinimumAbsoluteDifferenceInBSTVisualizer.css'
 
@@ -236,7 +235,6 @@ function VisualizationPanel({ root, step, applyEx }) {
 
 export default function MinimumAbsoluteDifferenceInBSTVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { root: [4, 2, 6, 1, 3] })
-  const SOLUTION_CODE = useSolutionCode('minimum-absolute-difference-in-bst')
 
   const steps = useMemo(
     () =>

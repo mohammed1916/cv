@@ -8,7 +8,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'class Solution:' },
   { line: 2, text: '    def decodeString(self, s: str) -> str:' },
   { line: 3, text: '        stack = []' },
@@ -30,6 +30,7 @@ const SOLUTION_CODE = [
   { line: 19, text: '        ' },
   { line: 20, text: '        return current_str' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(s) {
   const steps = []

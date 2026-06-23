@@ -9,7 +9,6 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './MinimumWindowSubstring.css'
 
@@ -359,7 +358,6 @@ export default function MinimumWindowSubstringVisualizer() {
     onStepJump: setStepIndex,
   })
 
-  const SOLUTION_CODE_WITH_CONNECTIVITY = useSolutionCode('minimum-window-substring') || SOLUTION_CODE
 
   const dockPanels = useMemo(() => [
     {

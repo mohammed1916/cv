@@ -8,11 +8,10 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './AccountsMerge.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def accountsMerge(accounts):' },
   { line: 2, text: '    uf = UnionFind()' },
   { line: 3, text: '    emailToName = {}' },
@@ -27,6 +26,8 @@ const SOLUTION_CODE = [
   { line: 12, text: '        groups[root].append(email)' },
   { line: 13, text: '    return [[emailToName[root], *sorted(emails)] for root, emails in groups.items()]' },
 ]
+
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(accounts) {
   const steps = []
@@ -127,7 +128,6 @@ const EXAMPLES = [
 
 export default function AccountsMergeVisualizer() {
   const [exIdx, setExIdx] = useState(0)
-  const SOLUTION_CODE_HOOK = useSolutionCode('accounts-merge')
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]

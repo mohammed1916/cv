@@ -10,7 +10,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './Problem355Visualizer.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'class Twitter:' },
   { line: 2, text: '    def __init__(self):' },
   { line: 3, text: '        self.tweets = {}  # userId -> [tweets]' },
@@ -28,6 +28,7 @@ const SOLUTION_CODE = [
   { line: 15, text: '        tweets = [t for f in following[userId] for t in tweets[f]]' },
   { line: 16, text: '        return sorted(tweets, key=lambda x: -x[0])[:10]' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(scenario) {
   const steps = []

@@ -8,11 +8,22 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './HammingDistanceVisualizer.css'
 
 const EXAMPLES = getExamples('hamming-distance')
+
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def hammingDistance(x, y):' },
+  { line: 2, text: '    xor = x ^ y' },
+  { line: 3, text: '    distance = 0' },
+  { line: 4, text: '    while xor:' },
+  { line: 5, text: '        distance += xor & 1' },
+  { line: 6, text: '        xor >>= 1' },
+  { line: 7, text: '    return distance' },
+]
+
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(x, y) {
   const steps = []
@@ -295,7 +306,6 @@ function VisualizationPanel({ x, y, step, applyEx }) {
 
 export default function HammingDistanceVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { x: 1, y: 4 })
-  const SOLUTION_CODE = useSolutionCode('hamming-distance')
 
   const steps = useMemo(
     () =>

@@ -8,11 +8,10 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from '../../config/examplesRegistry'
 import "./BurstBalloonsVisualizer.css";
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
     { line: 1, text: "def maxCoins(nums):" },
     { line: 2, text: "    nums = [1] + nums + [1]" },
     { line: 3, text: "    n = len(nums)" },
@@ -26,6 +25,7 @@ const SOLUTION_CODE = [
     { line: 11, text: "                dp[left][right] = max(dp[left][right], val)" },
     { line: 12, text: "    return dp[0][n-1]" },
 ];
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('burst-balloons');
 
@@ -60,7 +60,6 @@ function generateSteps(numsOrig) {
 
 export default function BurstBalloonsVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-    const SOLUTION_CODE = useSolutionCode('burst-balloons');
     const steps = useMemo(() => generateSteps(ex.nums), [ex]);
     const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);

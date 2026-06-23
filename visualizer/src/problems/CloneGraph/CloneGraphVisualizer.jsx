@@ -11,7 +11,7 @@ import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { GraphCanvas3D } from "../../components/viz3d";
 import "./CloneGraphVisualizer.css";
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
     { line: 1, text: "def cloneGraph(node):" },
     { line: 2, text: "    if not node: return None" },
     { line: 3, text: "    visited = {}  # original -> clone" },
@@ -26,6 +26,7 @@ const SOLUTION_CODE = [
     { line: 12, text: "            visited[cur.val].neighbors.append(visited[nbr.val])" },
     { line: 13, text: "    return visited[node.val]" },
 ];
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 // Fixed graph examples as adjacency lists (1-indexed nodes)
 const EXAMPLES = {

@@ -11,7 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def addTwoNumbers(l1: ListNode, l2: ListNode) -> ListNode:' },
   { line: 2, text: '    stack1, stack2 = [], []' },
   { line: 3, text: '    while l1:' },
@@ -32,6 +32,7 @@ const SOLUTION_CODE = [
   { line: 18, text: '        result = node' },
   { line: 19, text: '    return result' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('add-two-numbers-ii') || [
   { label: 'Example 1', list1: [7, 2, 4, 3], list2: [5, 6, 4], expected: [7, 8, 0, 7] },

@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './FibonacciNumberVisualizer.css'
 
@@ -219,7 +218,6 @@ function VisualizationPanel({ n, step, applyEx }) {
 
 export default function FibonacciNumberVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { n: 4 })
-  const SOLUTION_CODE = useSolutionCode('fibonacci-number')
 
   const steps = useMemo(
     () =>

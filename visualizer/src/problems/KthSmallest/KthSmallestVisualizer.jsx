@@ -13,7 +13,7 @@ const CANVAS_W = 520
 const CANVAS_H = 320
 const NODE_R = 22
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
     { line: 1, text: 'def kthSmallest(root, k):' },
     { line: 2, text: '    count, result = 0, None' },
     { line: 3, text: '    def inorder(node):' },
@@ -26,6 +26,7 @@ const SOLUTION_CODE = [
     { line: 10, text: '        inorder(node.right)' },
     { line: 11, text: '    inorder(root); return result' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(arr, k) {
     const root = buildTree(arr)

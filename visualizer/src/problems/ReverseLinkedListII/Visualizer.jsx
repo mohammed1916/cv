@@ -9,7 +9,6 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Visualizer.css'
 
@@ -322,7 +321,6 @@ export default function ReverseLinkedListIIVisualizer() {
   const [leftInput, setLeftInput] = useState('2')
   const [rightInput, setRightInput] = useState('4')
 
-  const SOLUTION_CODE = useSolutionCode('reverse-linked-list-ii')
 
   const { values, left, right, inputError } = useMemo(() => {
     try {

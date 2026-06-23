@@ -11,7 +11,7 @@ import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./EditDistanceVisualizer.css";
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: "def minDistance(word1, word2):" },
   { line: 2, text: "    m, n = len(word1), len(word2)" },
   { line: 3, text: "    dp = [[0]*(n+1) for _ in range(m+1)]" },
@@ -27,6 +27,7 @@ const SOLUTION_CODE = [
   { line: 13, text: "                               dp[i-1][j-1]) # replace" },
   { line: 14, text: "    return dp[m][n]" },
 ];
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('edit-distance');
 

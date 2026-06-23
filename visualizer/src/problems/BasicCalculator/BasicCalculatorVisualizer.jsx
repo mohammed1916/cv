@@ -8,7 +8,6 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from "../../config/examplesRegistry";
 import "./BasicCalculatorVisualizer.css";
 
@@ -74,7 +73,6 @@ function generateSteps(s) {
 
 export default function BasicCalculatorVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const SOLUTION_CODE = useSolutionCode('basic-calculator');
   const steps = useMemo(() => generateSteps(ex.s), [ex]);
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);

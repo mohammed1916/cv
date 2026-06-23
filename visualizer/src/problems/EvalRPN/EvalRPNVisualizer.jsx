@@ -8,7 +8,6 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from '../../config/examplesRegistry'
 import "./EvalRPNVisualizer.css";
 
@@ -64,7 +63,6 @@ function parseTokens(str) {
 
 export default function EvalRPNVisualizer() {
     const [input, setInput] = useState('["2","1","+","3","*"]');
-    const SOLUTION_CODE = useSolutionCode('eval-rpn');
 
     const { tokens, err } = useMemo(() => parseTokens(input), [input]);
     const steps = useMemo(() => (tokens.length ? generateSteps(tokens) : []), [tokens]);

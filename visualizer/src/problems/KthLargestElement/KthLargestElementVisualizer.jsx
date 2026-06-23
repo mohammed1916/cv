@@ -8,12 +8,11 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { getExamples } from '../../config/examplesRegistry'
 import './KthLargestElementVisualizer.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'class Solution:' },
   { line: 2, text: '    def findKthLargest(self, nums, k):' },
   { line: 3, text: '        heap = []' },
@@ -23,6 +22,7 @@ const SOLUTION_CODE = [
   { line: 7, text: '                heappop(heap)' },
   { line: 8, text: '        return heap[0]' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function parseArray(input) {
   const parsed = JSON.parse(input)
@@ -53,7 +53,6 @@ const EXAMPLES = getExamples('kth-largest-element')
 export default function KthLargestElementVisualizer() {
   const [numsInput, setNumsInput] = useState('[3,2,1,5,6,4]')
   const [kInput, setKInput] = useState('2')
-  const SOLUTION_CODE_HOOK = useSolutionCode('kth-largest-element-in-an-array')
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 

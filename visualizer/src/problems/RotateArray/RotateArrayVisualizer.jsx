@@ -8,7 +8,6 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from '../../config/examplesRegistry'
 import "./RotateArrayVisualizer.css";
 
@@ -164,7 +163,6 @@ function VisualizationPanel({ nums, step, n, k, applyEx }) {
 
 export default function RotateArrayVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const SOLUTION_CODE = useSolutionCode('rotate-array');
   const steps = useMemo(() => generateSteps(ex.nums, ex.k), [ex]);
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);

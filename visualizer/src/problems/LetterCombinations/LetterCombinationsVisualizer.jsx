@@ -8,11 +8,10 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from '../../config/examplesRegistry'
 import "./LetterCombinationsVisualizer.css";
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
     { line: 1, text: "def letterCombinations(digits):" },
     { line: 2, text: "    if not digits: return []" },
     { line: 3, text: "    phone = {'2':'abc','3':'def','4':'ghi'," },
@@ -30,6 +29,7 @@ const SOLUTION_CODE = [
     { line: 15, text: "    backtrack(0, [])" },
     { line: 16, text: "    return res" },
 ];
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const PHONE_MAP = {
     "2": "abc", "3": "def", "4": "ghi", "5": "jkl",
@@ -79,7 +79,6 @@ const EXAMPLES = getExamples('letter-combinations');
 
 export default function LetterCombinationsVisualizer() {
     const [digits, setDigits] = useState("23");
-    const SOLUTION_CODE = useSolutionCode('letter-combinations-of-a-phone-number');
 
     const validDigits = useMemo(() => digits.replace(/[^2-9]/g, "").slice(0, 4), [digits]);
     const steps = useMemo(() => (validDigits.length ? generateSteps(validDigits) : []), [validDigits]);

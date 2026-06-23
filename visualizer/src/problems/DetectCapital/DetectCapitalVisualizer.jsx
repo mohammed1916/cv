@@ -8,11 +8,23 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './DetectCapitalVisualizer.css'
 
 const EXAMPLES = getExamples('detect-capital')
+
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def detectCapitalUse(word):' },
+  { line: 2, text: '    # Check if all uppercase' },
+  { line: 3, text: '    if word.isupper(): return True' },
+  { line: 4, text: '    # Check if all lowercase' },
+  { line: 5, text: '    if word.islower(): return True' },
+  { line: 6, text: '    # Check if title case (first letter upper, rest lower)' },
+  { line: 7, text: '    if word[0].isupper() and word[1:].islower(): return True' },
+  { line: 8, text: '    return False' },
+]
+
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(word) {
   const steps = []
@@ -223,7 +235,6 @@ function VisualizationPanel({ word, step, applyEx }) {
 
 export default function DetectCapitalVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { word: 'FiCc' })
-  const SOLUTION_CODE = useSolutionCode('detect-capital')
 
   const steps = useMemo(
     () =>

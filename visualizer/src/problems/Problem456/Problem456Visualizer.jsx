@@ -11,7 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def nthUglyNumber(n):' },
   { line: 2, text: '    dp = [0] * n' },
   { line: 3, text: '    dp[0] = 1' },
@@ -31,6 +31,7 @@ const SOLUTION_CODE = [
   { line: 17, text: '            next5 = dp[i5] * 5' },
   { line: 18, text: '    return dp[n-1]' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('ugly-number-ii') || [
   { label: 'Example 1', n: 10, expected: 12 },

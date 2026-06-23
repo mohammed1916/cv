@@ -11,7 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { getExamples } from '../../config/examplesRegistry'
 import './DailyTemperaturesVisualizer.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'class Solution:' },
   { line: 2, text: '    def dailyTemperatures(self, temps):' },
   { line: 3, text: '        res = [0] * len(temps)' },
@@ -23,6 +23,7 @@ const SOLUTION_CODE = [
   { line: 9, text: '            stack.append(i)' },
   { line: 10, text: '        return res' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function parseTemps(input) {
   const arr = JSON.parse(input)

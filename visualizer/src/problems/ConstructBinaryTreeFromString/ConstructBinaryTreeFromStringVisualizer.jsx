@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './ConstructBinaryTreeFromStringVisualizer.css'
 
@@ -178,7 +177,6 @@ function VisualizationPanel({ s, step, applyEx }) {
 
 export default function ConstructBinaryTreeFromStringVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { s: '4(2(3)(1))(6(5))' })
-  const SOLUTION_CODE = useSolutionCode('construct-binary-tree-from-string')
 
   const steps = useMemo(
     () =>

@@ -11,7 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def repeatedSubstringPattern(s):' },
   { line: 2, text: '    n = len(s)' },
   { line: 3, text: '    for i in range(1, n // 2 + 1):' },
@@ -21,6 +21,7 @@ const SOLUTION_CODE = [
   { line: 7, text: '                return True' },
   { line: 8, text: '    return False' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('repeated-substring-pattern') || [
   { label: 'Example 1', s: 'abab', expected: true },

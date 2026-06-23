@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './ThreeSumVisualizer.css'
 
@@ -193,7 +192,6 @@ const EXAMPLES = getExamples('three-sum')
 
 export default function ThreeSumVisualizer() {
   const [numsInput, setNumsInput] = useState('[-1,0,1,2,-1,-4]')
-  const SOLUTION_CODE_HOOK = useSolutionCode('three-sum')
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const { nums, inputError } = useMemo(() => {

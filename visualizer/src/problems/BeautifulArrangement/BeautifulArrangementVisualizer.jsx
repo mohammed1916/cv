@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './BeautifulArrangementVisualizer.css'
 
@@ -305,7 +304,6 @@ function VisualizationPanel({ n, step, applyEx }) {
 
 export default function BeautifulArrangementVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { n: 2 })
-  const SOLUTION_CODE = useSolutionCode('beautiful-arrangement')
 
   const steps = useMemo(
     () =>

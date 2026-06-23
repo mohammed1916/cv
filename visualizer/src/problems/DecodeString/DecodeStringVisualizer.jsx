@@ -8,7 +8,6 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from '../../config/examplesRegistry'
 import "./DecodeStringVisualizer.css";
 
@@ -65,7 +64,6 @@ const EXAMPLES = getExamples('decode-string');
 
 export default function DecodeStringVisualizer() {
     const [sInput, setSInput] = useState("3[a]2[bc]");
-    const SOLUTION_CODE = useSolutionCode('decode-string');
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
     const steps = useMemo(() => { try { return generateSteps(sInput); } catch { return []; } }, [sInput]);

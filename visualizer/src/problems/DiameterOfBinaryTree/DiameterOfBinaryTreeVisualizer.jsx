@@ -8,7 +8,6 @@ import PatternOverlay from'../../components/PatternOverlay'
 import{usePlaybackState}from'../../hooks/usePlaybackState'
 import{useCodeVisualConnectivity}from'../../hooks/useCodeVisualConnectivity'
 import{usePatternOverlay}from'../../hooks/usePatternOverlay'
-import{useSolutionCode}from'../../hooks/useSolutionCode'
 import{getExamples}from'../../config/examplesRegistry'
 import'./DiameterOfBinaryTreeVisualizer.css'
 const EXAMPLES=getExamples('diameter-of-binary-tree')
@@ -31,7 +30,6 @@ steps.push({activeLine:10,root,diameter:maxDiameter,phase:'done',message:`Tree d
 return steps}
 function VisualizationPanel({root,step,applyEx}){return(<div style={{display:'flex',flexDirection:'column',gap:20,padding:16}}><div style={{padding:12,backgroundColor:'#f0f9ff',borderRadius:6,borderLeft:'4px solid #0284c7'}}><div style={{fontSize:12,color:'#075985',fontStyle:'italic'}}>Find the diameter (longest path) in a binary tree using DFS.</div></div><div><div style={{fontSize:13,fontWeight:600,color:'#1e293b',marginBottom:8}}>Examples</div><div style={{display:'flex',gap:6,flexWrap:'wrap'}}>{EXAMPLES.map(e=>(<button key={e.label}onClick={()=>applyEx(e)}style={{padding:'6px 12px',borderRadius:4,border:'1px solid #cbd5e1',cursor:'pointer',fontSize:12,backgroundColor:'#f1f5f9'}}>{e.label}</button>))}</div></div><div><div style={{fontSize:13,fontWeight:600,color:'#1e293b',marginBottom:8}}>Tree Array</div><div style={{display:'flex',gap:4,flexWrap:'wrap'}}>{root.map((n,i)=>(<div key={`node-${i}`}style={{padding:'8px 10px',borderRadius:4,border:'2px solid',fontFamily:'monospace',fontSize:12,fontWeight:600,backgroundColor:'#f1f5f9',borderColor:'#cbd5e1',color:'#334155'}}>{n}</div>))}</div></div><motion.div style={{padding:16,backgroundColor:'#f0f9ff',borderRadius:6,border:'2px solid #0284c7',textAlign:'center'}}initial={{opacity:0}}animate={{opacity:1}}><div style={{fontSize:13,fontWeight:600,color:'#0c4a6e',marginBottom:8}}>Tree Diameter</div><div style={{fontSize:28,fontWeight:'bold',color:'#0284c7'}}>{step?.diameter||0}</div><div style={{fontSize:12,color:'#0284c7',marginTop:8}}>{step?.message||''}</div></motion.div></div>)}
 export default function DiameterOfBinaryTreeVisualizer(){const[ex,setEx]=useState(EXAMPLES[0]||{root:[1,2,3,4,5]})
-const SOLUTION_CODE=useSolutionCode('diameter-of-binary-tree')
 const steps=useMemo(()=>generateSteps(ex.root).map(c=>({...c,relatedLines:c.relatedLines??(c.activeLine!=null?[c.activeLine]:[])})),[ex])
 const{stepIndex,setStepIndex,stepForward,stepBack,togglePlay,handleReset,isPlaying,speed,setSpeed,isDone}=usePlaybackState(steps.length)
 const step=stepIndex>=0?steps[stepIndex]:null

@@ -8,7 +8,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def calcEquation(equations, values, queries):' },
   { line: 2, text: '    from collections import defaultdict' },
   { line: 3, text: '    graph = defaultdict(list)' },
@@ -36,6 +36,7 @@ const SOLUTION_CODE = [
   { line: 25, text: '            results.append(dfs(num, den, set()))' },
   { line: 26, text: '    return results' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(equationsStr, valuesStr, queryStr) {
   const steps = []

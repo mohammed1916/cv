@@ -8,11 +8,10 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './CountingBitsVisualizer.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
     { line: 1, text: 'class Solution:' },
     { line: 2, text: '    def countBits(self, n):' },
     { line: 3, text: '        dp = [0] * (n + 1)' },
@@ -20,6 +19,7 @@ const SOLUTION_CODE = [
     { line: 5, text: '            dp[i] = dp[i >> 1] + (i & 1)' },
     { line: 6, text: '        return dp' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(n) {
     const steps = []
@@ -46,7 +46,6 @@ const EXAMPLES = getExamples('counting-bits')
 
 export default function CountingBitsVisualizer() {
     const [nInput, setNInput] = useState('5')
-    const SOLUTION_CODE = useSolutionCode('counting-bits')
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
     const { n, inputError } = useMemo(() => {

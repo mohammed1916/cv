@@ -11,7 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { getExamples } from '../../config/examplesRegistry'
 import './LCSVisualizer.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
     { line: 1, text: 'def longestCommonSubsequence(text1, text2):' },
     { line: 2, text: '    m, n = len(text1), len(text2)' },
     { line: 3, text: '    dp = [[0]*(n+1) for _ in range(m+1)]' },
@@ -23,6 +23,7 @@ const SOLUTION_CODE = [
     { line: 9, text: '                dp[i][j] = max(dp[i-1][j], dp[i][j-1])' },
     { line: 10, text: '    return dp[m][n]' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(text1, text2) {
     const m = text1.length

@@ -11,7 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { getExamples } from '../../config/examplesRegistry'
 import './MergeKSortedListsVisualizer.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'class Solution:' },
   { line: 2, text: '    def mergeKLists(self, lists):' },
   { line: 3, text: '        heap = []' },
@@ -25,6 +25,7 @@ const SOLUTION_CODE = [
   { line: 11, text: '            if node.next: heappush(heap, (node.next.val, i, node.next))' },
   { line: 12, text: '        return dummy.next' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function parseLists(input) {
   const parsed = JSON.parse(input)

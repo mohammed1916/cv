@@ -9,7 +9,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './MajorityElementVisualizer.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
     { line: 1, text: 'class Solution:' },
     { line: 2, text: '    def majorityElement(self, nums):' },
     { line: 3, text: '        candidate, count = None, 0' },
@@ -22,6 +22,7 @@ const SOLUTION_CODE = [
     { line: 10, text: '                count -= 1' },
     { line: 11, text: '        return candidate' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function parseNums(input) {
     const parsed = JSON.parse(input)

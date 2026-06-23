@@ -8,10 +8,9 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import './Problem388Visualizer.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def lengthLongestPath(input):' },
   { line: 2, text: '    lines = input.split("\\n")' },
   { line: 3, text: '    path_lengths = {0: 0}' },
@@ -26,6 +25,7 @@ const SOLUTION_CODE = [
   { line: 12, text: '            path_lengths[depth + 1] = path_lengths[depth] + len(name) + 1' },
   { line: 13, text: '    return max_length' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(input) {
   const steps = []

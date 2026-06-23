@@ -13,7 +13,7 @@ import './Problem373Visualizer.css'
 
 const EXAMPLES = getExamples('search-a-2d-matrix-ii')
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def searchMatrix(matrix, target):' },
   { line: 2, text: '    if not matrix or not matrix[0]:' },
   { line: 3, text: '        return False' },
@@ -28,6 +28,7 @@ const SOLUTION_CODE = [
   { line: 12, text: '            row += 1' },
   { line: 13, text: '    return False' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(matrix, target) {
   const steps = []

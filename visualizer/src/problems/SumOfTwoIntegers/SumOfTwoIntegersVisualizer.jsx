@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import './SumOfTwoIntegers.css'
 
 const SOLUTION_CODE = [
@@ -134,7 +133,6 @@ const EXAMPLES = [
 
 export default function SumOfTwoIntegersVisualizer() {
   const [exIdx, setExIdx] = useState(0)
-  const SOLUTION_CODE_HOOK = useSolutionCode('sum-of-two-integers')
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]

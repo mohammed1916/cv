@@ -8,7 +8,6 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from '../../config/examplesRegistry'
 import "./Visualizer.css";
 
@@ -270,7 +269,6 @@ const EXAMPLES = getExamples('sort-colors');
 
 export default function SortColorsVisualizer() {
     const [sel, setSel] = useState(0);
-    const SOLUTION_CODE = useSolutionCode('sort-colors');
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
     const initial = EXAMPLES[sel].nums;

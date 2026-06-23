@@ -11,7 +11,6 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { getExamples } from '../../config/examplesRegistry'
 import './Visualizer.css'
@@ -255,7 +254,6 @@ export default function ClimbingStairsVisualizer() {
   const [nInput, setNInput] = useState('5')
 
   // Load solution code from registry
-  const SOLUTION_CODE = useSolutionCode('climbing-stairs')
 
   const { n, inputError } = useMemo(() => {
     try {

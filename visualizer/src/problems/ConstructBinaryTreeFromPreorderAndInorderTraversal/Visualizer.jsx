@@ -8,7 +8,6 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import { buildTree, computeLayout, collectNodes, buildEdges } from '../../components/treeUtils'
 import './Visualizer.css'
@@ -427,7 +426,6 @@ export default function Visualizer() {
   const [inorderInput, setInorderInput] = useState('9,3,15,20,7')
   const [inputError, setInputError] = useState('')
 
-  const SOLUTION_CODE = useSolutionCode('construct-binary-tree-from-preorder-and-inorder-traversal')
 
   // Parse inputs
   const { preorder, inorder, isValid } = useMemo(() => {

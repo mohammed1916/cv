@@ -10,7 +10,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './Problem397Visualizer.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def integerReplacement(n: int) -> int:' },
   { line: 2, text: '    steps = 0' },
   { line: 3, text: '    while n != 1:' },
@@ -23,6 +23,7 @@ const SOLUTION_CODE = [
   { line: 10, text: '        steps += 1' },
   { line: 11, text: '    return steps' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(n) {
   const steps = []

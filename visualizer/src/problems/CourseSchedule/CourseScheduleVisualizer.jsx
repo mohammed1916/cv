@@ -5,7 +5,6 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { useApplyExample } from '../../hooks/useApplyExample'
 import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { getExamples } from '../../config/examplesRegistry'
 import './CourseScheduleVisualizer.css'
@@ -191,7 +190,6 @@ function calculateNodePositions(numCourses, width = 400, height = 300) {
 
 export default function CourseScheduleVisualizer() {
   // Load solution code from registry
-  const SOLUTION_CODE = useSolutionCode('course-schedule')
 
   const [numCoursesInput, setNumCoursesInput] = useState('6')
   const [prereqInput, setPrereqInput] = useState('[[1, 0], [2, 0], [3, 1], [3, 2], [5, 3], [4, 3]]')

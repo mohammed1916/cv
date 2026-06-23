@@ -11,7 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem376.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def wiggleMaxLength(nums):' },
   { line: 2, text: '    if len(nums) <= 1: return len(nums)' },
   { line: 3, text: '    up = 1' },
@@ -23,6 +23,7 @@ const SOLUTION_CODE = [
   { line: 9, text: '            down = up + 1' },
   { line: 10, text: '    return max(up, down)' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(nums) {
   const steps = []

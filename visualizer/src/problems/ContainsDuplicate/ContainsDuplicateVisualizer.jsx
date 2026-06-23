@@ -13,6 +13,17 @@ import "./ContainsDuplicateVisualizer.css";
 
 const EXAMPLES = getExamples('contains-duplicate');
 
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def containsDuplicate(nums):' },
+  { line: 2, text: '    seen = set()' },
+  { line: 3, text: '    for num in nums:' },
+  { line: 4, text: '        if num in seen: return True' },
+  { line: 5, text: '        seen.add(num)' },
+  { line: 6, text: '    return False' },
+]
+
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
+
 function generateSteps(nums) {
   const steps = [];
   const seen = new Set();

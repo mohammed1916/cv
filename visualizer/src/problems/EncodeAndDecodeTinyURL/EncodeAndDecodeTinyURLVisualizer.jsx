@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './EncodeAndDecodeTinyURLVisualizer.css'
 
@@ -246,7 +245,6 @@ function VisualizationPanel({ url, step, applyEx }) {
 
 export default function EncodeAndDecodeTinyURLVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { url: 'https://leetcode.com/problems/design-tinyurl' })
-  const SOLUTION_CODE = useSolutionCode('encode-and-decode-tinyurl')
 
   const steps = useMemo(
     () =>

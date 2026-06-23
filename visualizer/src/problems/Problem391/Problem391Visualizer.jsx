@@ -8,7 +8,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'class Solution:' },
   { line: 2, text: '    def isRectangleCover(self, rectangles: List[List[int]]) -> bool:' },
   { line: 3, text: '        if not rectangles:' },
@@ -49,6 +49,7 @@ const SOLUTION_CODE = [
   { line: 38, text: '        ' },
   { line: 39, text: '        return True' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(rectangles) {
   const steps = []

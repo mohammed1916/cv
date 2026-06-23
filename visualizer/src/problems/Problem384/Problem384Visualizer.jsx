@@ -8,10 +8,9 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import './Problem384Visualizer.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'class Solution:' },
   { line: 2, text: '    def __init__(self, nums):' },
   { line: 3, text: '        self.original = nums' },
@@ -27,6 +26,7 @@ const SOLUTION_CODE = [
   { line: 13, text: '        self.array = self.original[:]' },
   { line: 14, text: '        return self.array' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(nums) {
   const steps = []

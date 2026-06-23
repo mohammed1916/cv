@@ -8,7 +8,6 @@ import VisualizationControls from "../../components/VisualizationControls";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { useVisualizationFeatures } from "../../hooks/useVisualizationFeatures";
-import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getVisualizationFeatures } from "../../config/visualizationRegistry";
 import { createPositionStep, createTreeDPStep, createDACStep, createContextualStepBuilder } from "../../utils/stepBuilder";
 import "./GameOnGrowingTreeVisualizer.css";
@@ -36,6 +35,22 @@ import DualRepresentationView from "./DualRepresentationView";
 const MAX_TREE_NODES_TO_RENDER = 120;
 
 const EXAMPLES = getExamples('game-on-growing-tree');
+
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def scoreForPrefix(parent, size):' },
+  { line: 2, text: '    first = [0] * size  # top 1 depth' },
+  { line: 3, text: '    second = [0] * size # top 2 depth' },
+  { line: 4, text: '    third = [0] * size  # top 3 depth' },
+  { line: 5, text: '    for node in range(size-1, 0, -1):' },
+  { line: 6, text: '        p = parent[node]' },
+  { line: 7, text: '        depth = second[node] + 1' },
+  { line: 8, text: '        insertTop3(first, second, third, p, depth)' },
+  { line: 9, text: '    for node in range(1, size):' },
+  { line: 10, text: '        p = parent[node]' },
+  { line: 11, text: '        depth = (third[p]+1 if second[p]<=second[node]+1 else second[p]+1)' },
+  { line: 12, text: '        insertTop3(first, second, third, node, depth)' },
+  { line: 13, text: '    return max(second) + 1' },
+]
 
 function insertTop3(first, second, third, idx, value) {
   if (value > first[idx]) {
@@ -738,7 +753,7 @@ export default function GameOnGrowingTreeVisualizer() {
   const { items: vizFeatures, toggle: toggleVizFeature, enabledIds: enabledVizIds } = useVisualizationFeatures(vizFeatureDefs);
 
   // Load solution code from registry
-  const SOLUTION_CODE = useSolutionCode('game-on-growing-tree');
+  const SOLUTION_CODE = SOLUTION_CODE_INLINE;
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
   const prevStep = stepIndex > 0 ? steps[stepIndex - 1] : null;

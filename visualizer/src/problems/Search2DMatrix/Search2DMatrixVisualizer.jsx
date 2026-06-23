@@ -8,7 +8,6 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from '../../config/examplesRegistry'
 import "./Search2DMatrixVisualizer.css";
 
@@ -59,7 +58,6 @@ const EXAMPLES = getExamples('search2-dmatrix');
 
 export default function Search2DMatrixVisualizer() {
     const [sel, setSel] = useState(0);
-    const SOLUTION_CODE = useSolutionCode('search-a-2d-matrix');
 
     const { matrix, target } = EXAMPLES[sel];
     const steps = useMemo(() => generateSteps(matrix, target), [matrix, target]);

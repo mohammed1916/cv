@@ -11,7 +11,7 @@ import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./MaxPointsOnALineVisualizer.css";
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
     { line: 1, text: "def maxPoints(points):" },
     { line: 2, text: "    res = 1" },
     { line: 3, text: "    for i, (x1,y1) in enumerate(points):" },
@@ -25,6 +25,7 @@ const SOLUTION_CODE = [
     { line: 11, text: "            res = max(res, slopes[slope]+1)" },
     { line: 12, text: "    return res" },
 ];
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('max-points-on-aline');
 

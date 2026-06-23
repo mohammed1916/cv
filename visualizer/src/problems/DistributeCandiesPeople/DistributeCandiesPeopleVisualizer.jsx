@@ -8,11 +8,25 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './DistributeCandiesPeopleVisualizer.css'
 
 const EXAMPLES = getExamples('distribute-candies-to-people')
+
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def distributeCandies(n, k):' },
+  { line: 2, text: '    result = [0] * k' },
+  { line: 3, text: '    candies_left = n' },
+  { line: 4, text: '    give = 1' },
+  { line: 5, text: '    person = 0' },
+  { line: 6, text: '    while candies_left > 0:' },
+  { line: 7, text: '        amount = min(give, candies_left)' },
+  { line: 8, text: '        result[person % k] += amount' },
+  { line: 9, text: '        candies_left -= amount' },
+  { line: 10, text: '        person += 1' },
+  { line: 11, text: '        give += 1' },
+  { line: 12, text: '    return result' },
+]
 
 function generateSteps(n, k) {
   const steps = []
@@ -181,7 +195,7 @@ function VisualizationPanel({ n, k, step, applyEx }) {
 
 export default function DistributeCandiesPeopleVisualizer() {
   const [input, setInput] = useState(EXAMPLES[0] || { n: 10, k: 3 })
-  const SOLUTION_CODE = useSolutionCode('distribute-candies-to-people')
+  const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(
     () =>

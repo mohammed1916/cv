@@ -9,7 +9,6 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 
 const SOLUTION_CODE = [
@@ -535,7 +534,6 @@ export default function PartitionListVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
-  const SOLUTION_CODE_WITH_CONNECTIVITY = useSolutionCode('partition-list') || SOLUTION_CODE
 
   const dockPanels = useMemo(() => [
     {

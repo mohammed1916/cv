@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import './AllPathsSourceTarget.css'
 
 const SOLUTION_CODE = [
@@ -125,7 +124,6 @@ const EXAMPLES = [
 
 export default function AllPathsSourceTargetVisualizer() {
   const [exIdx, setExIdx] = useState(0)
-  const SOLUTION_CODE_HOOK = useSolutionCode('all-paths-source-target')
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]

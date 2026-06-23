@@ -10,7 +10,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import './Problem367Visualizer.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
     { line: 1, text: 'def isPerfectSquare(num):' },
     { line: 2, text: '    if num == 1:' },
     { line: 3, text: '        return True' },
@@ -26,6 +26,7 @@ const SOLUTION_CODE = [
     { line: 13, text: '            right = mid - 1' },
     { line: 14, text: '    return False' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(num) {
     const steps = []

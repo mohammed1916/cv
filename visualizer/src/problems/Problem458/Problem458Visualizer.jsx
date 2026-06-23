@@ -11,7 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def poorPigs(buckets, minutesToDie, minutesToTest):' },
   { line: 2, text: '    states = minutesToTest // minutesToDie + 1' },
   { line: 3, text: '    pigs = 0' },
@@ -19,6 +19,7 @@ const SOLUTION_CODE = [
   { line: 5, text: '        pigs += 1' },
   { line: 6, text: '    return pigs' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('poor-pigs') || [
   { label: 'Example 1', buckets: 1000, minutesToDie: 15, minutesToTest: 60, expected: 5 },

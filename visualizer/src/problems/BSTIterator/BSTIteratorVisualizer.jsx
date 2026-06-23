@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class BSTIterator:' },
@@ -111,7 +110,6 @@ function generateSteps() {
 }
 
 export default function BSTIteratorVisualizer() {
-  const SOLUTION_CODE_HOOK = useSolutionCode('binary-search-tree-iterator')
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const steps = useMemo(() => generateSteps(), [])

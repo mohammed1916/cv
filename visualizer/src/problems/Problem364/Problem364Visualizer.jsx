@@ -10,7 +10,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './Problem364Visualizer.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def depthSumInverse(nestedList):' },
   { line: 2, text: '    max_depth = 0' },
   { line: 3, text: '    def getMaxDepth(lst, depth):' },
@@ -28,6 +28,7 @@ const SOLUTION_CODE = [
   { line: 15, text: '                weight = max_depth - depth + 1' },
   { line: 16, text: '                total += item * weight' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(nestedList) {
   const steps = []

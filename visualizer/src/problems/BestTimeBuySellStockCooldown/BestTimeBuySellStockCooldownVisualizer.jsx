@@ -8,9 +8,8 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def maxProfit(prices):' },
   { line: 2, text: '    n = len(prices)' },
   { line: 3, text: '    if n <= 1: return 0' },
@@ -24,6 +23,8 @@ const SOLUTION_CODE = [
   { line: 11, text: '        sold[i] = max(sold[i-1], hold[i-1] + prices[i])' },
   { line: 12, text: '    return sold[-1]' },
 ]
+
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(prices) {
   const steps = []
@@ -78,7 +79,6 @@ const EXAMPLES = [
 
 export default function BestTimeBuySellStockCooldownVisualizer() {
   const [exIdx, setExIdx] = useState(1)
-  const SOLUTION_CODE_HOOK = useSolutionCode('best-time-to-buy-and-sell-stock-with-cooldown')
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]

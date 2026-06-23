@@ -11,7 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def fourSumCount(nums1, nums2, nums3, nums4) -> int:' },
   { line: 2, text: '    sum_map = {}' },
   { line: 3, text: '    for n1 in nums1:' },
@@ -26,6 +26,7 @@ const SOLUTION_CODE = [
   { line: 12, text: '                count += sum_map[target]' },
   { line: 13, text: '    return count' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('4sum-ii') || [
   { label: 'Example 1', nums1: [1, 2], nums2: [-2, -1], nums3: [-1, 2], nums4: [0, 2], expected: 2 },

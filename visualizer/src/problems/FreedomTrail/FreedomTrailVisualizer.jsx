@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './FreedomTrailVisualizer.css'
 
@@ -261,7 +260,6 @@ function VisualizationPanel({ ring, key, step, applyEx }) {
 
 export default function FreedomTrailVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { ring: 'godding', key: 'gd' })
-  const SOLUTION_CODE = useSolutionCode('freedom-trail')
 
   const steps = useMemo(
     () =>

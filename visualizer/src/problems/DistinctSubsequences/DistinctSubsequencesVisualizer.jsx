@@ -1,7 +1,6 @@
 import DockableWorkspace from "../../components/shared/DockableWorkspace"
 import FloatingPanel from "../../components/shared/FloatingPanel"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
-import { useSolutionCode } from "../../hooks/useSolutionCode"
 import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -12,7 +11,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./DistinctSubsequencesVisualizer.css";
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1,  text: "def numDistinct(s, t):" },
   { line: 2,  text: "    m, n = len(s), len(t)" },
   { line: 3,  text: "    dp = [[0]*(n+1) for _ in range(m+1)]" },
@@ -24,6 +23,7 @@ const SOLUTION_CODE = [
   { line: 9,  text: "                dp[i][j] += dp[i-1][j-1]  # use s[i]" },
   { line: 10, text: "    return dp[m][n]" },
 ];
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('distinct-subsequences');
 
@@ -56,7 +56,6 @@ function generateSteps(s, t) {
 
 export default function DistinctSubsequencesVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const SOLUTION_CODE_HOOK = useSolutionCode('distinct-subsequences');
   const steps = useMemo(() => generateSteps(ex.s, ex.t), [ex]);
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);

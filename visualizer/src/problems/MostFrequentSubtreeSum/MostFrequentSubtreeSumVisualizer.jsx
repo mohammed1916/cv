@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './MostFrequentSubtreeSumVisualizer.css'
 
@@ -265,7 +264,6 @@ function VisualizationPanel({ arr, step, applyEx }) {
 
 export default function MostFrequentSubtreeSumVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { arr: [5, 2, -3] })
-  const SOLUTION_CODE = useSolutionCode('most-frequent-subtree-sum')
 
   const steps = useMemo(
     () =>

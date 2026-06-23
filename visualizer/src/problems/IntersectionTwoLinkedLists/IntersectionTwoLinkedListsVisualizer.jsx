@@ -8,7 +8,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./IntersectionTwoLinkedListsVisualizer.css";
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: "def getIntersectionNode(headA, headB):" },
   { line: 2, text: "    a, b = headA, headB" },
   { line: 3, text: "    while a != b:" },
@@ -16,6 +16,7 @@ const SOLUTION_CODE = [
   { line: 5, text: "        b = b.next if b else headA" },
   { line: 6, text: "    return a  # intersection or None" },
 ];
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('intersection-two-linked-lists');
 

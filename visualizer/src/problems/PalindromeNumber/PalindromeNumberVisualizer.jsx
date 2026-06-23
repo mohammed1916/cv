@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './PalindromeNumberVisualizer.css'
 
@@ -397,7 +396,6 @@ const EDGE_CASES = [
 
 export default function PalindromeNumberVisualizer() {
   const [input, setInput] = useState('121')
-  const solutionCode = useSolutionCode('palindrome-number')
 
   const { num, inputError } = useMemo(() => {
     const trimmed = input.trim()

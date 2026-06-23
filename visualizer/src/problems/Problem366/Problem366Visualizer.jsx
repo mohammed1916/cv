@@ -16,7 +16,7 @@ const CANVAS_W = 520
 const CANVAS_H = 320
 const NODE_R = 22
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
     { line: 1, text: 'def findLeaves(root):' },
     { line: 2, text: '    result = []' },
     { line: 3, text: '    def dfs(node):' },
@@ -31,6 +31,7 @@ const SOLUTION_CODE = [
     { line: 12, text: '    dfs(root)' },
     { line: 13, text: '    return result' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(arr) {
     const root = buildTree(arr)

@@ -11,7 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def numberOfArithmeticSlices(nums: list) -> int:' },
   { line: 2, text: '    if len(nums) < 3: return 0' },
   { line: 3, text: '    n = len(nums)' },
@@ -23,6 +23,7 @@ const SOLUTION_CODE = [
   { line: 9, text: '            count += dp[i]' },
   { line: 10, text: '    return count' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('arithmetic-slices-ii') || [
   { label: 'Example 1', nums: [1, 2, 3, 4], expected: 6 },

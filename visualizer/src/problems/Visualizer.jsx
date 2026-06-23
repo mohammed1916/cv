@@ -11,7 +11,6 @@ import { useCodeVisualConnectivity } from '../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../hooks/usePatternOverlay'
 import { useAutoScroll } from '../hooks/useAutoScroll'
 import { useVisualizationFeatures } from '../hooks/useVisualizationFeatures'
-import { useSolutionCode } from '../hooks/useSolutionCode'
 import { getVisualizationFeatures } from '../config/visualizationRegistry'
 import { getExamples } from '../config/examplesRegistry'
 import './Visualizer.css'
@@ -238,7 +237,6 @@ export default function YourProblemVisualizer() {
   })
 
   // Load solution code from registry
-  const SOLUTION_CODE_FROM_REGISTRY = useSolutionCode('your-problem-slug')
   const codeLines = SOLUTION_CODE_FROM_REGISTRY || SOLUTION_CODE
 
   // Validate inputs

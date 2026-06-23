@@ -8,10 +8,9 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import './Problem368.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def largestDivisibleSubset(nums):' },
   { line: 2, text: '    if not nums: return []' },
   { line: 3, text: '    nums.sort()' },
@@ -29,6 +28,7 @@ const SOLUTION_CODE = [
   { line: 15, text: '    while maxIdx != -1:' },
   { line: 16, text: '        result.append(nums[maxIdx]); maxIdx = parent[maxIdx]' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(nums) {
   const steps = []

@@ -11,7 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def numberOfBoomerangs(points: list) -> int:' },
   { line: 2, text: '    count = 0' },
   { line: 3, text: '    for i in range(len(points)):' },
@@ -26,6 +26,7 @@ const SOLUTION_CODE = [
   { line: 12, text: '            dist_map[dist_sq] = dist_map.get(dist_sq, 0) + 1' },
   { line: 13, text: '    return count' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('number-of-boomerangs') || [
   { label: 'Example 1', points: [[0, 0], [1, 0], [2, 0]], expected: 2 },

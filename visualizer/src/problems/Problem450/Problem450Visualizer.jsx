@@ -11,7 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def deleteNode(root: TreeNode, key: int) -> TreeNode:' },
   { line: 2, text: '    if not root: return None' },
   { line: 3, text: '    if key < root.val:' },
@@ -30,6 +30,7 @@ const SOLUTION_CODE = [
   { line: 16, text: '        root.right = deleteNode(root.right, min_right.val)' },
   { line: 17, text: '    return root' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('delete-node-in-a-bst') || [
   { label: 'Example 1', tree: [5, 3, 6, 2, 4, null, 7], key: 3, expected: [5, 4, 6, 2, null, null, 7] },

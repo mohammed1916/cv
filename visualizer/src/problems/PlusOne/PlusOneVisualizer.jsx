@@ -8,7 +8,6 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from '../../config/examplesRegistry'
 import "./PlusOneVisualizer.css";
 
@@ -173,7 +172,6 @@ function VisualizationPanel({ arr, step, ex, applyEx }) {
 
 export default function PlusOneVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-    const SOLUTION_CODE = useSolutionCode('plus-one');
     const steps = useMemo(() => generateSteps(ex.digits), [ex]);
     const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);

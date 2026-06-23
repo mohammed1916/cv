@@ -8,7 +8,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def findNthDigit(n):' },
   { line: 2, text: '    # Length of numbers: 1-9 (len 1), 10-99 (len 2), etc.' },
   { line: 3, text: '    length = 1' },
@@ -25,6 +25,7 @@ const SOLUTION_CODE = [
   { line: 14, text: '    digit_index = (n - 1) % length' },
   { line: 15, text: '    return int(str(num)[digit_index])' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(nStr) {
   const steps = []

@@ -8,7 +8,6 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from '../../config/examplesRegistry'
 import "./RandomizedCollectionVisualizer.css";
 
@@ -82,7 +81,6 @@ function generateSteps(ops) {
 
 export default function RandomizedCollectionVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-    const SOLUTION_CODE = useSolutionCode('insert-delete-getrandom-o1-duplicates-allowed');
     const steps = useMemo(() => generateSteps(ex.ops), [ex]);
     const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);

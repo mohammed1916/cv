@@ -8,7 +8,6 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from '../../config/examplesRegistry'
 import "./PermutationInStringVisualizer.css";
 
@@ -71,7 +70,6 @@ function generateSteps(s1, s2) {
 
 export default function PermutationInStringVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-    const SOLUTION_CODE = useSolutionCode('permutation-in-string');
     const steps = useMemo(() => { try { return generateSteps(ex.s1, ex.s2); } catch { return []; } }, [ex]);
     const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);

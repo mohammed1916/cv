@@ -8,10 +8,9 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import './Problem389Visualizer.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def findTheDifference(s, t):' },
   { line: 2, text: '    # Use XOR: a ^ a = 0, a ^ 0 = a' },
   { line: 3, text: '    result = 0' },
@@ -24,6 +23,7 @@ const SOLUTION_CODE = [
   { line: 10, text: '    # Remaining bit pattern is the difference' },
   { line: 11, text: '    return chr(result)' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(s, t) {
   const steps = []

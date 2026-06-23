@@ -12,7 +12,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem359.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'class Logger:' },
   { line: 2, text: '    def __init__(self, threshold=10):' },
   { line: 3, text: '        self.threshold = threshold' },
@@ -26,6 +26,7 @@ const SOLUTION_CODE = [
   { line: 11, text: '            return True' },
   { line: 12, text: '        return False' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('logger-rate-limiter') || [
   {

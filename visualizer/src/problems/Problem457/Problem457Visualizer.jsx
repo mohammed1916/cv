@@ -11,7 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def circularArrayLoop(nums):' },
   { line: 2, text: '    n = len(nums)' },
   { line: 3, text: '    for i in range(n):' },
@@ -28,6 +28,7 @@ const SOLUTION_CODE = [
   { line: 14, text: '                break' },
   { line: 15, text: '    return False' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('circular-array-loop') || [
   { label: 'Example 1', nums: [2, -1, 1, 2, 2], expected: true },

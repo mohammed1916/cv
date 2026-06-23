@@ -11,7 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { getExamples } from '../../config/examplesRegistry'
 import './ImplementTrieVisualizer.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'class TrieNode:' },
   { line: 2, text: '    def __init__(self): self.children = {}; self.end = False' },
   { line: 3, text: 'class Trie:' },
@@ -24,6 +24,7 @@ const SOLUTION_CODE = [
   { line: 10, text: '    def search(self, word): return walk(word) and node.end' },
   { line: 11, text: '    def startsWith(self, prefix): return walk(prefix)' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function parseOps(input) {
   const parsed = JSON.parse(input)

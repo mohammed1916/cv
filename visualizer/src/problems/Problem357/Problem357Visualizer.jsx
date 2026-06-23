@@ -8,10 +8,9 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import './Problem357.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def countNumbersWithUniqueDigits(n):' },
   { line: 2, text: '    if n == 0: return 1' },
   { line: 3, text: '    count = 10  # 0-9' },
@@ -23,6 +22,7 @@ const SOLUTION_CODE = [
   { line: 9, text: '        availableNumbers -= 1' },
   { line: 10, text: '    return count' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(n) {
   const steps = []

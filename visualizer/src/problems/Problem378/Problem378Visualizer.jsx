@@ -11,7 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem378.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def kthSmallest(matrix, k):' },
   { line: 2, text: '    import heapq' },
   { line: 3, text: '    heap = [(matrix[0][j], 0, j) for j in range(len(matrix[0]))]' },
@@ -22,6 +22,7 @@ const SOLUTION_CODE = [
   { line: 8, text: '            heapq.heappush(heap, (matrix[i+1][j], i+1, j))' },
   { line: 9, text: '    return heap[0][0]' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(matrix, k) {
   const steps = []

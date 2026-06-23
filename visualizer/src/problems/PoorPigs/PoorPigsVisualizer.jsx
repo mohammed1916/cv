@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './PoorPigsVisualizer.css'
 
@@ -258,7 +257,6 @@ function VisualizationPanel({ numBuckets, minutesToDie, minutesToTest, step, app
 
 export default function PoorPigsVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { buckets: 1000, minutesToDie: 15, minutesToTest: 60 })
-  const SOLUTION_CODE = useSolutionCode('poor-pigs')
 
   const steps = useMemo(
     () =>

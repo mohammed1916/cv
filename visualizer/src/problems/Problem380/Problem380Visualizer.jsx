@@ -11,7 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem380.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'class RandomizedSet:' },
   { line: 2, text: '    def __init__(self):' },
   { line: 3, text: '        self.array = []' },
@@ -26,6 +26,7 @@ const SOLUTION_CODE = [
   { line: 12, text: '        self.map[lastVal] = self.map[val]' },
   { line: 13, text: '        self.array[self.map[val]] = lastVal; return True' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(operations) {
   const steps = []

@@ -8,11 +8,32 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './CanIWinVisualizer.css'
 
 const EXAMPLES = getExamples('can-i-win')
+
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def canIWin(maxChoosableInteger, desiredTotal):' },
+  { line: 2, text: '    if desiredTotal <= 0: return True' },
+  { line: 3, text: '    if sum(1..maxChoosableInteger) < desiredTotal: return False' },
+  { line: 4, text: '    memo = {}' },
+  { line: 5, text: '    def dfs(available, currentSum):' },
+  { line: 6, text: '        if currentSum >= desiredTotal: return True' },
+  { line: 7, text: '        if available == 0: return False' },
+  { line: 8, text: '        if available in memo: return memo[available]' },
+  { line: 9, text: '        for i in range(1, maxChoosableInteger+1):' },
+  { line: 10, text: '            if (available >> (i-1)) & 1:' },
+  { line: 11, text: '                new_available = available ^ (1 << (i-1))' },
+  { line: 12, text: '                if not dfs(new_available, currentSum+i):' },
+  { line: 13, text: '                    memo[available] = True' },
+  { line: 14, text: '                    return True' },
+  { line: 15, text: '        memo[available] = False' },
+  { line: 16, text: '        return False' },
+  { line: 17, text: '    return dfs((1<<maxChoosableInteger)-1, 0)' },
+]
+
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(maxChoosableInteger, desiredTotal) {
   const steps = []
@@ -344,7 +365,6 @@ function VisualizationPanel({ maxChoosableInteger, desiredTotal, step, applyEx }
 
 export default function CanIWinVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { maxChoosableInteger: 10, desiredTotal: 40 })
-  const SOLUTION_CODE = useSolutionCode('can-i-win')
 
   const steps = useMemo(
     () =>

@@ -11,7 +11,6 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { getExamples } from '../../config/examplesRegistry'
 import './Visualizer.css'
@@ -318,7 +317,6 @@ export default function UniqueBinarySearchTreesVisualizer() {
   const [nInput, setNInput] = useState('3')
 
   // Load solution code from registry
-  const SOLUTION_CODE = useSolutionCode('unique-binary-search-trees') || [
     { line: 1, text: 'def numTrees(n: int) -> int:' },
     { line: 2, text: '    # dp[i] = number of unique BSTs with i nodes' },
     { line: 3, text: '    dp = [0] * (n + 1)' },

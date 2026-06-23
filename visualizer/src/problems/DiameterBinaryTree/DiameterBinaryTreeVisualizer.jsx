@@ -13,7 +13,7 @@ const CANVAS_W = 520
 const CANVAS_H = 320
 const NODE_R = 22
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
     { line: 1, text: 'class Solution:' },
     { line: 2, text: '    def diameterOfBinaryTree(self, root):' },
     { line: 3, text: '        self.diameter = 0' },
@@ -26,6 +26,7 @@ const SOLUTION_CODE = [
     { line: 10, text: '        depth(root)' },
     { line: 11, text: '        return self.diameter' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(arr) {
     const root = buildTree(arr)

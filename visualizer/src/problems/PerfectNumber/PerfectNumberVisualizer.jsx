@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import './PerfectNumberVisualizer.css'
 
 function generateSteps(n) {
@@ -183,7 +182,6 @@ function VisualizationPanel({ n, step, applyEx }) {
 
 export default function PerfectNumberVisualizer() {
   const [n, setN] = useState(6)
-  const SOLUTION_CODE = useSolutionCode('perfect-number')
 
   const steps = useMemo(
     () =>

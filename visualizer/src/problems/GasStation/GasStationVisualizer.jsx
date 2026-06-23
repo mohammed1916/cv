@@ -8,11 +8,22 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from '../../config/examplesRegistry'
 import "./GasStationVisualizer.css";
 
 const EXAMPLES = getExamples('gas-station');
+
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def canCompleteCircuit(gas, cost):' },
+  { line: 2, text: '    total = tank = start = 0' },
+  { line: 3, text: '    for i in range(len(gas)):' },
+  { line: 4, text: '        total += gas[i] - cost[i]' },
+  { line: 5, text: '        tank += gas[i] - cost[i]' },
+  { line: 6, text: '        if tank < 0: start, tank = i+1, 0' },
+  { line: 7, text: '    return start if total >= 0 else -1' },
+]
+
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(gas, cost) {
   const steps = [];
@@ -175,7 +186,6 @@ function VisualizationPanel({ gas, cost, step, applyEx }) {
 
 export default function GasStationVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const SOLUTION_CODE = useSolutionCode('gas-station');
   const steps = useMemo(() => generateSteps(ex.gas, ex.cost), [ex]);
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);

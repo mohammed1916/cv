@@ -10,7 +10,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./DungeonGameVisualizer.css";
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
     { line: 1, text: "def calculateMinimumHP(dungeon):" },
     { line: 2, text: "    R, C = len(dungeon), len(dungeon[0])" },
     { line: 3, text: "    dp = [[0]*(C+1) for _ in range(R+1)]" },
@@ -21,6 +21,7 @@ const SOLUTION_CODE = [
     { line: 8, text: "            dp[r][c] = max(need, 1)" },
     { line: 9, text: "    return dp[0][0]" },
 ];
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('dungeon-game');
 

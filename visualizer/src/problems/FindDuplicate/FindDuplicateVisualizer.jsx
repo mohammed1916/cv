@@ -11,7 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { getExamples } from '../../config/examplesRegistry'
 import './FindDuplicateVisualizer.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
     { line: 1, text: 'def findDuplicate(nums):' },
     { line: 2, text: '    slow = fast = nums[0]' },
     { line: 3, text: '    while True:' },
@@ -24,6 +24,7 @@ const SOLUTION_CODE = [
     { line: 10, text: '        fast = nums[fast]' },
     { line: 11, text: '    return slow  # duplicate' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(nums) {
     const steps = []

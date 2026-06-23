@@ -11,7 +11,6 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { getExamples } from '../../config/examplesRegistry'
 import './Visualizer.css'
@@ -424,7 +423,6 @@ function VariablesPanel({ step, n }) {
 export default function UniqueBinarySearchTreesIIVisualizer() {
   const [nInput, setNInput] = useState('3')
 
-  const SOLUTION_CODE = useSolutionCode('unique-binary-search-trees-ii') || [
     { line: 1, text: 'def generateTrees(n):' },
     { line: 2, text: '    def generate(start, end):' },
     { line: 3, text: '        if start > end: return [None]' },

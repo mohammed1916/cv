@@ -8,11 +8,10 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from '../../config/examplesRegistry'
 import "./FindAllAnagramsVisualizer.css";
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
     { line: 1, text: "def findAnagrams(s, p):" },
     { line: 2, text: "    need = Counter(p)" },
     { line: 3, text: "    have = Counter(s[:len(p)])" },
@@ -26,6 +25,7 @@ const SOLUTION_CODE = [
     { line: 11, text: "        if have == need: result.append(winStart)" },
     { line: 12, text: "    return result" },
 ];
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('find-all-anagrams');
 
@@ -83,7 +83,6 @@ const ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 
 export default function FindAllAnagramsVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-    const SOLUTION_CODE_HOOK = useSolutionCode('find-all-anagrams-in-a-string');
     const steps = useMemo(() => { try { return generateSteps(ex.s, ex.p); } catch { return []; } }, [ex]);
     const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);

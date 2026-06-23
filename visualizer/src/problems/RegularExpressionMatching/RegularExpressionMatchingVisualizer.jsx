@@ -11,7 +11,6 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { getExamples } from '../../config/examplesRegistry'
 import './RegularExpressionMatchingVisualizer.css'
@@ -397,7 +396,6 @@ export default function RegularExpressionMatchingVisualizer() {
   const [pInput, setPInput] = useState('"a"')
 
   // Load solution code from registry
-  const SOLUTION_CODE = useSolutionCode('regular-expression-matching')
 
   const { s, p, inputError } = useMemo(() => {
     try {

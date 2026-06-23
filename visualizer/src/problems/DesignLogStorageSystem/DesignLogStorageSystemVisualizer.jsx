@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './DesignLogStorageSystemVisualizer.css'
 
@@ -249,7 +248,6 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function DesignLogStorageSystemVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || {})
-  const SOLUTION_CODE = useSolutionCode('design-log-storage-system')
 
   const steps = useMemo(
     () =>

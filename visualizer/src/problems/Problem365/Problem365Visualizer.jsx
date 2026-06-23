@@ -10,7 +10,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './Problem365Visualizer.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def canMeasureWater(a, b, z):' },
   { line: 2, text: '    if z > a + b:' },
   { line: 3, text: '        return False' },
@@ -26,6 +26,7 @@ const SOLUTION_CODE = [
   { line: 13, text: '    # We can measure z if z % gcd(a,b) == 0' },
   { line: 14, text: '    return z % g == 0' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function gcd(a, b) {
   while (b) {

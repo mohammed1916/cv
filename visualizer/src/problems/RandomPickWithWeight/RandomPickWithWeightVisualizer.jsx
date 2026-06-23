@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './RandomPickWithWeightVisualizer.css'
 
@@ -278,7 +277,6 @@ function VisualizationPanel({ w, step, applyEx }) {
 
 export default function RandomPickWithWeightVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { w: [1] })
-  const SOLUTION_CODE = useSolutionCode('random-pick-with-weight')
 
   const steps = useMemo(
     () =>

@@ -10,7 +10,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./MaximumGapVisualizer.css";
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
     { line: 1, text: "def maximumGap(nums):" },
     { line: 2, text: "    if len(nums) < 2: return 0" },
     { line: 3, text: "    lo, hi = min(nums), max(nums)" },
@@ -28,6 +28,7 @@ const SOLUTION_CODE = [
     { line: 15, text: "        prev_max = bmax" },
     { line: 16, text: "    return res" },
 ];
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('maximum-gap');
 

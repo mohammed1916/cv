@@ -12,7 +12,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem350.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def intersect(nums1: list, nums2: list) -> list:' },
   { line: 2, text: '    freq = {}' },
   { line: 3, text: '    for num in nums1:' },
@@ -24,6 +24,7 @@ const SOLUTION_CODE = [
   { line: 9, text: '            freq[num] -= 1' },
   { line: 10, text: '    return result' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('intersection-of-two-arrays-ii') || [
   { label: 'Example 1: Overlap', nums1: [1, 2, 2, 1], nums2: [2, 2] },

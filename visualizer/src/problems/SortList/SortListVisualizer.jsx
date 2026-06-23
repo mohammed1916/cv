@@ -1,7 +1,6 @@
 import DockableWorkspace from "../../components/shared/DockableWorkspace"
 import FloatingPanel from "../../components/shared/FloatingPanel"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
-import { useSolutionCode } from "../../hooks/useSolutionCode"
 import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";

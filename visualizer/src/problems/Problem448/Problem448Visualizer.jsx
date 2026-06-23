@@ -11,7 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def findDisappearedNumbers(nums: list) -> list:' },
   { line: 2, text: '    seen = set(nums)' },
   { line: 3, text: '    result = []' },
@@ -20,6 +20,7 @@ const SOLUTION_CODE = [
   { line: 6, text: '            result.append(i)' },
   { line: 7, text: '    return result' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('find-all-numbers-disappeared-in-array') || [
   { label: 'Example 1', nums: [4, 3, 2, 7, 8, 2, 3, 1], expected: [5, 6] },

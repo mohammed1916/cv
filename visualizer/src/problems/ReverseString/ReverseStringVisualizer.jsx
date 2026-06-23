@@ -8,7 +8,6 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from '../../config/examplesRegistry'
 import "./ReverseStringVisualizer.css";
 
@@ -143,7 +142,6 @@ function VisualizationPanel({ arr, step, ex, applyEx }) {
 
 export default function ReverseStringVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-    const SOLUTION_CODE = useSolutionCode('reverse-string');
     const steps = useMemo(
         () =>
             generateSteps(ex.s).map((current) => ({

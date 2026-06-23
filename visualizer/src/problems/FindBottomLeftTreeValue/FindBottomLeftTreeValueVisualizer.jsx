@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './FindBottomLeftTreeValueVisualizer.css'
 
@@ -301,7 +300,6 @@ function VisualizationPanel({ arr, step, applyEx }) {
 
 export default function FindBottomLeftTreeValueVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { arr: [2, 1, 3] })
-  const SOLUTION_CODE = useSolutionCode('find-bottom-left-tree-value')
 
   const steps = useMemo(
     () =>

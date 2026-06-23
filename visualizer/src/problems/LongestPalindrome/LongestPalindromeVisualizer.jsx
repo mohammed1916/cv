@@ -8,7 +8,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './LongestPalindromeVisualizer.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'class Solution:' },
   { line: 2, text: '    def longestPalindrome(self, s: str) -> str:' },
   { line: 3, text: '        res = ""' },
@@ -35,6 +35,7 @@ const SOLUTION_CODE = [
   { line: 24, text: '                ' },
   { line: 25, text: '        return res' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(s) {
   const steps = []

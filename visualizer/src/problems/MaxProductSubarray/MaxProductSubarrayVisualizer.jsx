@@ -8,11 +8,10 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './MaxProductSubarrayVisualizer.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
     { line: 1, text: 'class Solution:' },
     { line: 2, text: '    def maxProduct(self, nums):' },
     { line: 3, text: '        curMax = curMin = res = nums[0]' },
@@ -23,6 +22,7 @@ const SOLUTION_CODE = [
     { line: 8, text: '            res = max(res, curMax)' },
     { line: 9, text: '        return res' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function parseNums(input) {
     const parsed = JSON.parse(input)
@@ -70,7 +70,6 @@ const EXAMPLES = getExamples('max-product-subarray')
 
 export default function MaxProductSubarrayVisualizer() {
     const [numsInput, setNumsInput] = useState('[2,3,-2,4]')
-    const SOLUTION_CODE = useSolutionCode('maximum-product-subarray')
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
     const { nums, inputError } = useMemo(() => {

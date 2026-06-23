@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './RedundantConnectionVisualizer.css'
 
@@ -100,7 +99,6 @@ const EXAMPLES = getExamples('redundant-connection')
 
 export default function RedundantConnectionVisualizer() {
   const [edgesInput, setEdgesInput] = useState('[[1,2],[1,3],[2,3]]')
-  const SOLUTION_CODE = useSolutionCode('redundant-connection')
   const { edges, inputError } = useMemo(() => {
     try {
       return { edges: parseEdges(edgesInput), inputError: '' }

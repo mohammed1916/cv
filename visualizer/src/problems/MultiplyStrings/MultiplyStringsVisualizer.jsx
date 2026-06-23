@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import './MultiplyStrings.css'
 
 const SOLUTION_CODE = [
@@ -135,7 +134,6 @@ const EXAMPLES = [
 export default function MultiplyStringsVisualizer() {
   const [num1Input, setNum1Input] = useState('123')
   const [num2Input, setNum2Input] = useState('456')
-  const SOLUTION_CODE_HOOK = useSolutionCode('multiply-strings')
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const { num1, num2, inputError } = useMemo(() => {

@@ -8,10 +8,9 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import './Problem381Visualizer.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'class Solution:' },
   { line: 2, text: '    def __init__(self, n, blacklist):' },
   { line: 3, text: '        self.n = n' },
@@ -29,6 +28,7 @@ const SOLUTION_CODE = [
   { line: 15, text: '        rand = random.randint(0, self.whitelist_size - 1)' },
   { line: 16, text: '        return self.blacklist_map.get(rand, rand)' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(n, blacklist) {
   const steps = []

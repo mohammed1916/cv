@@ -11,7 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def hammingDistance(x, y):' },
   { line: 2, text: '    xor = x ^ y' },
   { line: 3, text: '    count = 0' },
@@ -20,6 +20,7 @@ const SOLUTION_CODE = [
   { line: 6, text: '        xor >>= 1' },
   { line: 7, text: '    return count' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('hamming-distance') || [
   { label: 'Example 1', x: 1, y: 4, expected: 2 },

@@ -1,7 +1,6 @@
 import DockableWorkspace from "../../components/shared/DockableWorkspace"
 import FloatingPanel from "../../components/shared/FloatingPanel"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
-import { useSolutionCode } from "../../hooks/useSolutionCode"
 import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -12,7 +11,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from "../../config/examplesRegistry";
 import "./BestTimeBuySellStockIIIVisualizer.css";
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
     { line: 1, text: "def maxProfit(prices):" },
     { line: 2, text: "    b1 = b2 = -inf  # best profit after 1st/2nd buy" },
     { line: 3, text: "    s1 = s2 = 0     # best profit after 1st/2nd sell" },
@@ -23,6 +22,8 @@ const SOLUTION_CODE = [
     { line: 8, text: "        s2 = max(s2, b2 + p)     # sell at p (tx2)" },
     { line: 9, text: "    return s2" },
 ];
+
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('best-time-buy-sell-stock-iii');
 
@@ -50,7 +51,6 @@ function generateSteps(prices) {
 
 export default function BestTimeBuySellStockIIIVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-    const SOLUTION_CODE_HOOK = useSolutionCode('best-time-to-buy-and-sell-stock-iii');
     const steps = useMemo(() => generateSteps(ex.prices), [ex]);
     const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);

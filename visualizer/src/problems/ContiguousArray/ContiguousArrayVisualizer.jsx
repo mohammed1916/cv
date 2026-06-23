@@ -8,11 +8,25 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './ContiguousArrayVisualizer.css'
 
 const EXAMPLES = getExamples('contiguous-array')
+
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def findMaxLength(nums):' },
+  { line: 2, text: '    count_map = {0: -1}' },
+  { line: 3, text: '    max_length = 0' },
+  { line: 4, text: '    count = 0' },
+  { line: 5, text: '    for i, num in enumerate(nums):' },
+  { line: 6, text: '        count += 1 if num == 1 else -1' },
+  { line: 7, text: '        if count in count_map:' },
+  { line: 8, text: '            max_length = max(max_length, i - count_map[count])' },
+  { line: 9, text: '        else: count_map[count] = i' },
+  { line: 10, text: '    return max_length' },
+]
+
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(arr) {
   const steps = []
@@ -232,7 +246,6 @@ function VisualizationPanel({ arr, step, applyEx }) {
 
 export default function ContiguousArrayVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { nums: [0, 1] })
-  const SOLUTION_CODE = useSolutionCode('contiguous-array')
 
   const steps = useMemo(
     () =>

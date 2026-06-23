@@ -8,7 +8,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def rotateFunction(nums: list) -> int:' },
   { line: 2, text: '    n = len(nums)' },
   { line: 3, text: '    total_sum = sum(nums)' },
@@ -21,6 +21,7 @@ const SOLUTION_CODE = [
   { line: 10, text: '    ' },
   { line: 11, text: '    return max_f' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(numsStr) {
   const steps = []

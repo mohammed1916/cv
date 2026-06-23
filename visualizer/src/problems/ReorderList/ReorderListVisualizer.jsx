@@ -8,7 +8,6 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from '../../config/examplesRegistry'
 import "./ReorderListVisualizer.css";
 
@@ -87,7 +86,6 @@ const EXAMPLES = getExamples('reorder-list');
 
 export default function ReorderListVisualizer() {
     const [sel, setSel] = useState(0);
-    const SOLUTION_CODE_HOOK = useSolutionCode('reorder-list');
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
     const { arr } = EXAMPLES[sel];

@@ -8,7 +8,6 @@ import PatternOverlay from'../../components/PatternOverlay'
 import{usePlaybackState}from'../../hooks/usePlaybackState'
 import{useCodeVisualConnectivity}from'../../hooks/useCodeVisualConnectivity'
 import{usePatternOverlay}from'../../hooks/usePatternOverlay'
-import{useSolutionCode}from'../../hooks/useSolutionCode'
 import{getExamples}from'../../config/examplesRegistry'
 import'./ReverseStringIIVisualizer.css'
 const EXAMPLES=getExamples('reverse-string-ii')
@@ -25,7 +24,6 @@ steps.push({activeLine:5,s,k,result,phase:'done',message:`Result: ${result}`,rel
 return steps}
 function VisualizationPanel({s,k,step,applyEx}){return(<div style={{display:'flex',flexDirection:'column',gap:20,padding:16}}><div style={{padding:12,backgroundColor:'#f0f9ff',borderRadius:6,borderLeft:'4px solid #0284c7'}}><div style={{fontSize:12,color:'#075985',fontStyle:'italic'}}>Reverse every first k characters in the string, skipping k characters.</div></div><div><div style={{fontSize:13,fontWeight:600,color:'#1e293b',marginBottom:8}}>Examples</div><div style={{display:'flex',gap:6,flexWrap:'wrap'}}>{EXAMPLES.map(e=>(<button key={e.label}onClick={()=>applyEx(e)}style={{padding:'6px 12px',borderRadius:4,border:'1px solid #cbd5e1',cursor:'pointer',fontSize:12,backgroundColor:'#f1f5f9'}}>{e.label}</button>))}</div></div><div style={{display:'flex',gap:12}}><div style={{padding:10,backgroundColor:'#f1f5f9',borderRadius:6,flex:1}}><div style={{fontSize:10,color:'#64748b',marginBottom:4}}>String</div><div style={{fontSize:14,fontFamily:'monospace',fontWeight:600}}>{s}</div></div><div style={{padding:10,backgroundColor:'#f1f5f9',borderRadius:6,flex:1}}><div style={{fontSize:10,color:'#64748b',marginBottom:4}}>k Value</div><div style={{fontSize:20,fontWeight:600,color:'#0284c7'}}>{k}</div></div></div><div><div style={{fontSize:13,fontWeight:600,color:'#1e293b',marginBottom:8}}>Current State</div><div style={{display:'flex',gap:2,flexWrap:'wrap'}}>{step?.arr?.map((char,idx)=>(<motion.div key={`char-${idx}`}style={{padding:'6px 8px',borderRadius:3,border:'1px solid',fontFamily:'monospace',fontSize:12,fontWeight:600,minWidth:28,textAlign:'center',backgroundColor:'#dbeafe',borderColor:'#0284c7',color:'#0c4a6e'}}animate={{scale:1}}>{char}</motion.div>))}</div></div><motion.div style={{padding:16,backgroundColor:'#f0f9ff',borderRadius:6,border:'2px solid #0284c7',textAlign:'center'}}initial={{opacity:0}}animate={{opacity:1}}><div style={{fontSize:13,fontWeight:600,color:'#0c4a6e',marginBottom:8}}>Result</div><div style={{fontSize:16,fontFamily:'monospace',fontWeight:'bold',color:'#0284c7',wordBreak:'break-all'}}>{step?.result||''}</div></motion.div></div>)}
 export default function ReverseStringIIVisualizer(){const[ex,setEx]=useState(EXAMPLES[0]||{s:'abcdefg',k:2})
-const SOLUTION_CODE=useSolutionCode('reverse-string-ii')
 const steps=useMemo(()=>generateSteps(ex.s,ex.k).map(c=>({...c,relatedLines:c.relatedLines??(c.activeLine!=null?[c.activeLine]:[])})),[ex])
 const{stepIndex,setStepIndex,stepForward,stepBack,togglePlay,handleReset,isPlaying,speed,setSpeed,isDone}=usePlaybackState(steps.length)
 const step=stepIndex>=0?steps[stepIndex]:null

@@ -8,7 +8,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./IPOVisualizer.css";
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
     { line: 1, text: "def findMaximizedCapital(k, w, profits, capital):" },
     { line: 2, text: "    projects = sorted(zip(capital, profits))" },
     { line: 3, text: "    available = []  # max-heap of profits" },
@@ -21,6 +21,7 @@ const SOLUTION_CODE = [
     { line: 10, text: "        w -= heappop(available)  # add best profit" },
     { line: 11, text: "    return w" },
 ];
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('ipo');
 

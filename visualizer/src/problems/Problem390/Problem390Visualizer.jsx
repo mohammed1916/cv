@@ -8,10 +8,9 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import './Problem390Visualizer.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def lastRemaining(n):' },
   { line: 2, text: '    # Recursive elimination' },
   { line: 3, text: '    def eliminate(n, k, left_to_right):' },
@@ -24,6 +23,7 @@ const SOLUTION_CODE = [
   { line: 10, text: '        return next_pos' },
   { line: 11, text: '    return eliminate(n, 2, True)' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(n) {
   const steps = []

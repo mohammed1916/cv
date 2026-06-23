@@ -11,7 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def islandPerimeter(grid):' },
   { line: 2, text: '    if not grid: return 0' },
   { line: 3, text: '    perimeter = 0' },
@@ -23,6 +23,7 @@ const SOLUTION_CODE = [
   { line: 9, text: '                if j > 0 and grid[i][j-1]: perimeter -= 2' },
   { line: 10, text: '    return perimeter' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('island-perimeter') || [
   { label: 'Example 1', grid: [[0, 1, 0, 0], [1, 1, 1, 0], [0, 1, 0, 1], [1, 1, 0, 0]], expected: 16 },

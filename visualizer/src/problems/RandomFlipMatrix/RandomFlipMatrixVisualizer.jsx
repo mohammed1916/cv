@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './RandomFlipMatrixVisualizer.css'
 
@@ -214,7 +213,6 @@ function VisualizationPanel({ m, n, flips, step, applyEx }) {
 
 export default function RandomFlipMatrixVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { m: 3, n: 3, flips: [[1, 0], [1, 1]] })
-  const SOLUTION_CODE = useSolutionCode('random-flip-matrix')
 
   const steps = useMemo(
     () =>

@@ -8,11 +8,25 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './GamePlayAnalysisIVisualizer.css'
 
 const EXAMPLES = getExamples('game-play-analysis-i')
+
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def gamePlayAnalysisI(events):' },
+  { line: 2, text: '    result = []' },
+  { line: 3, text: '    for event in events:' },
+  { line: 4, text: '        player_id = event["player_id"]' },
+  { line: 5, text: '        device = event["device"]' },
+  { line: 6, text: '        event_date = event["event_date"]' },
+  { line: 7, text: '        # Group by player, find first login' },
+  { line: 8, text: '        if not any(e["player_id"]==player_id for e in result):' },
+  { line: 9, text: '            result.append({"player_id": player_id, "device": device, "date": event_date})' },
+  { line: 10, text: '    return sorted(result, key=lambda x: x["date"])' },
+]
+
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(events) {
   const steps = []
@@ -215,7 +229,6 @@ function VisualizationPanel({ events, step, applyEx }) {
 
 export default function GamePlayAnalysisIVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { events: [{ player_id: 1, event_date: '2016-03-01' }] })
-  const SOLUTION_CODE = useSolutionCode('game-play-analysis-i')
 
   const steps = useMemo(
     () =>

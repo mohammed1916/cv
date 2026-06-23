@@ -12,7 +12,6 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
 import { TreeCanvas3D } from '../../components/viz3d'
 import { getExamples } from '../../config/examplesRegistry'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import './Visualizer.css'
 
 const CANVAS_W = 520
@@ -252,7 +251,6 @@ export default function MinimumDepthOfBinaryTreeVisualizer() {
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   // Load solution code from registry
-  const SOLUTION_CODE = useSolutionCode('minimum-depth-of-binary-tree')
 
   const { arr, inputError } = useMemo(() => {
     try {

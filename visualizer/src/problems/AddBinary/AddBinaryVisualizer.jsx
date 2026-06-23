@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './AddBinaryVisualizer.css'
 
@@ -321,7 +320,6 @@ function VisualizationPanel({ a, b, step, applyEx }) {
 
 export default function AddBinaryVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { a: '11', b: '1' })
-  const SOLUTION_CODE = useSolutionCode('add-binary')
 
   const steps = useMemo(
     () =>

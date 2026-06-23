@@ -10,7 +10,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './Problem362.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'class HitCounter:' },
   { line: 2, text: '    def __init__(self):' },
   { line: 3, text: '        self.hits = deque()' },
@@ -22,6 +22,7 @@ const SOLUTION_CODE = [
   { line: 9, text: '            self.hits.popleft()' },
   { line: 10, text: '        return len(self.hits)' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps() {
   const steps = []

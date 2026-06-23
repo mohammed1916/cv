@@ -11,7 +11,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem354Visualizer.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def maxEnvelopes(envelopes):' },
   { line: 2, text: '    if not envelopes: return 0' },
   { line: 3, text: '    envelopes.sort(key=lambda x: (x[0], -x[1]))' },
@@ -32,6 +32,7 @@ const SOLUTION_CODE = [
   { line: 18, text: '            dp[left] = h' },
   { line: 19, text: '    return len(dp)' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(envelopes) {
   const steps = []

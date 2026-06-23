@@ -11,7 +11,7 @@ import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./GenerateParenthesesVisualizer.css";
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
     { line: 1, text: "def generateParenthesis(n):" },
     { line: 2, text: "    res = []" },
     { line: 3, text: "    def backtrack(s, open, close):" },
@@ -25,6 +25,7 @@ const SOLUTION_CODE = [
     { line: 11, text: "    backtrack('', 0, 0)" },
     { line: 12, text: "    return res" },
 ];
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(n) {
     const steps = [];

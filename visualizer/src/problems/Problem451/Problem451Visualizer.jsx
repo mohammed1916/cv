@@ -11,7 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def frequencySort(s: str) -> str:' },
   { line: 2, text: '    freq = {}' },
   { line: 3, text: '    for char in s:' },
@@ -22,6 +22,7 @@ const SOLUTION_CODE = [
   { line: 8, text: '        result += char * count' },
   { line: 9, text: '    return result' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('sort-characters-by-frequency') || [
   { label: 'Example 1', s: 'tree', expected: 'eert' },

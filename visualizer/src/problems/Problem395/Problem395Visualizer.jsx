@@ -8,7 +8,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'class Solution:' },
   { line: 2, text: '    def longestSubstring(self, s: str, k: int) -> int:' },
   { line: 3, text: '        if len(s) < k:' },
@@ -28,6 +28,7 @@ const SOLUTION_CODE = [
   { line: 17, text: '        ' },
   { line: 18, text: '        return len(s)  # All chars meet requirement' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(s, k) {
   const steps = []

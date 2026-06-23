@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './LonelyPixelIVisualizer.css'
 
@@ -269,7 +268,6 @@ function VisualizationPanel({ picture, step, applyEx }) {
 
 export default function LonelyPixelIVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { picture: [['W','W','B'],['W','B','W'],['B','W','W']] })
-  const SOLUTION_CODE = useSolutionCode('lonely-pixel-i')
 
   const steps = useMemo(
     () =>

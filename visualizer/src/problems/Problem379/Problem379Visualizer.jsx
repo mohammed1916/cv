@@ -11,7 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem379.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'class PhoneDirectory:' },
   { line: 2, text: '    def __init__(self, maxNumbers):' },
   { line: 3, text: '        self.available = set(range(maxNumbers))' },
@@ -23,6 +23,7 @@ const SOLUTION_CODE = [
   { line: 9, text: '    def release(self, number):' },
   { line: 10, text: '        if number not in available: self.released.append(number)' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(maxNumbers, operations) {
   const steps = []

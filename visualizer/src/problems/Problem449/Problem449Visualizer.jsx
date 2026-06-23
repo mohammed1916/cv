@@ -11,7 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def serialize(root: TreeNode) -> str:' },
   { line: 2, text: '    result = []' },
   { line: 3, text: '    def dfs(node):' },
@@ -38,6 +38,7 @@ const SOLUTION_CODE = [
   { line: 24, text: '        return node' },
   { line: 25, text: '    return build()' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('serialize-and-deserialize-bst') || [
   { label: 'Example 1', tree: [2, 1, 3], expected: '2,1,3,#,#,#,#' },

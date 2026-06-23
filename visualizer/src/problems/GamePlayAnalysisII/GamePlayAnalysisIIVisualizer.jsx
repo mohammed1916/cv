@@ -8,11 +8,28 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './GamePlayAnalysisIIVisualizer.css'
 
 const EXAMPLES = getExamples('game-play-analysis-ii')
+
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def gamePlayAnalysisII(events):' },
+  { line: 2, text: '    game_sessions = {}' },
+  { line: 3, text: '    for event in events:' },
+  { line: 4, text: '        player_id = event["player_id"]' },
+  { line: 5, text: '        event_date = event["event_date"]' },
+  { line: 6, text: '        device = event["device"]' },
+  { line: 7, text: '        if player_id not in game_sessions:' },
+  { line: 8, text: '            game_sessions[player_id] = []' },
+  { line: 9, text: '        game_sessions[player_id].append(event)' },
+  { line: 10, text: '    result = []' },
+  { line: 11, text: '    for player_id, events_list in game_sessions.items():' },
+  { line: 12, text: '        sorted_events = sorted(events_list, key=lambda e: e["event_date"])' },
+  { line: 13, text: '        if len(sorted_events) > 1:' },
+  { line: 14, text: '            for i in range(1, len(sorted_events)):' },
+  { line: 15, text: '                result.append([player_id, sorted_events[i-1]["event_date"], sorted_events[i]["event_date"]])' },
+]
 
 function generateSteps(events) {
   const steps = []
@@ -206,7 +223,7 @@ function VisualizationPanel({ events, step, applyEx }) {
 
 export default function GamePlayAnalysisIIVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { events: [{ player_id: 1, device: 'phone', event_date: '2016-03-01' }] })
-  const SOLUTION_CODE = useSolutionCode('game-play-analysis-ii')
+  const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(
     () =>

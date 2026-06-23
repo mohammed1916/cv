@@ -11,7 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem353.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'class UndergroundSystem:' },
   { line: 2, text: '    def __init__(self):' },
   { line: 3, text: '        self.checkins = {}  # pid -> (station, t)' },
@@ -29,6 +29,7 @@ const SOLUTION_CODE = [
   { line: 15, text: '        times = self.routes[(s1, s2)]' },
   { line: 16, text: '        return sum(times) / len(times)' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(events) {
   const steps = []

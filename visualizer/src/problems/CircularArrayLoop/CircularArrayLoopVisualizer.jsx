@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './CircularArrayLoopVisualizer.css'
 
@@ -239,7 +238,6 @@ function VisualizationPanel({ nums, step, applyEx }) {
 
 export default function CircularArrayLoopVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { nums: [2, -1, 1, 2, 2] })
-  const SOLUTION_CODE = useSolutionCode('circular-array-loop')
 
   const steps = useMemo(
     () =>

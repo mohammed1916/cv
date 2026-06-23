@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './InorderSuccessorBSTVisualizer.css'
 
@@ -285,7 +284,6 @@ function VisualizationPanel({ values, target, step, applyEx }) {
 
 export default function InorderSuccessorBSTVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { values: [2, 1, 3], target: 1 })
-  const SOLUTION_CODE = useSolutionCode('inorder-successor-bst')
 
   const steps = useMemo(
     () =>

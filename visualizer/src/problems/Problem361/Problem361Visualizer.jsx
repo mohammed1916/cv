@@ -10,7 +10,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './Problem361.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def maxKilledEnemies(grid):' },
   { line: 2, text: '    if not grid: return 0' },
   { line: 3, text: '    m, n = len(grid), len(grid[0])' },
@@ -28,6 +28,7 @@ const SOLUTION_CODE = [
   { line: 15, text: '            if grid[i][j] == "W": row_kills = 0' },
   { line: 16, text: '            elif grid[i][j] == "E": row_kills += 1' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(grid) {
   const steps = []

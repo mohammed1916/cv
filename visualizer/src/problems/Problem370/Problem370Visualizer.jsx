@@ -8,10 +8,9 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import './Problem370Visualizer.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def getModifiedArray(length, updates):' },
   { line: 2, text: '    diff = [0] * (length + 1)' },
   { line: 3, text: '    # Process each update' },
@@ -26,6 +25,7 @@ const SOLUTION_CODE = [
   { line: 12, text: '        result.append(sum_val)' },
   { line: 13, text: '    return result' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(length, updates) {
   const steps = []

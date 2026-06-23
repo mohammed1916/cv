@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './SuperWashingMachinesVisualizer.css'
 
@@ -213,7 +212,6 @@ function VisualizationPanel({ machines, step, applyEx }) {
 
 export default function SuperWashingMachinesVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { machines: [1, 0, 5] })
-  const SOLUTION_CODE = useSolutionCode('super-washing-machines')
 
   const steps = useMemo(
     () =>

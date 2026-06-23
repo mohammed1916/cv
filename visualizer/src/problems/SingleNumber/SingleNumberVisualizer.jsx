@@ -8,7 +8,6 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { useSolutionCode } from "../../hooks/useSolutionCode";
 import { getExamples } from '../../config/examplesRegistry'
 import "./SingleNumberVisualizer.css";
 
@@ -161,7 +160,6 @@ function VisualizationPanel({ nums, step, applyEx }) {
 
 export default function SingleNumberVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const SOLUTION_CODE = useSolutionCode('single-number');
   const steps = useMemo(
     () =>
       generateSteps(ex.nums).map((current) => ({

@@ -6,7 +6,6 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { useParsedInput } from '../../hooks/useParsedInput'
 import { useApplyExample } from '../../hooks/useApplyExample'
 import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput, TreeSVG } from '../../components/treeUtils'
 import { getExamples } from '../../config/examplesRegistry'
@@ -95,7 +94,6 @@ function snippetIdForPhase(phase) {
 
 export default function MaxDepthBinaryTreeVisualizer() {
     // Load solution code from registry
-    const SOLUTION_CODE = useSolutionCode('max-depth-binary-tree')
 
     const [arrInput, setArrInput] = useState('[3,9,20,null,null,15,7]')
 

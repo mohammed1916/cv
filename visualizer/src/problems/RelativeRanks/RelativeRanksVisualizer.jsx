@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import './RelativeRanksVisualizer.css'
 
 function generateSteps(nums) {
@@ -178,7 +177,6 @@ function VisualizationPanel({ nums, step, applyEx }) {
 
 export default function RelativeRanksVisualizer() {
   const [nums, setNums] = useState([10, 3, 8, 9, 4])
-  const SOLUTION_CODE = useSolutionCode('relative-ranks')
 
   const steps = useMemo(
     () =>

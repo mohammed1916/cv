@@ -11,7 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def findMinArrowShots(points: list) -> int:' },
   { line: 2, text: '    if not points: return 0' },
   { line: 3, text: '    points.sort(key=lambda x: x[1])' },
@@ -23,6 +23,7 @@ const SOLUTION_CODE = [
   { line: 9, text: '            last_pos = points[i][1]' },
   { line: 10, text: '    return arrows' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('minimum-number-of-arrows-to-burst-balloons') || [
   { label: 'Example 1', points: [[10, 16], [2, 8], [1, 6], [7, 12], [4, 9]], expected: 2 },

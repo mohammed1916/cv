@@ -8,17 +8,18 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './GrayCodeVisualizer.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
     { line: 1, text: 'def grayCode(n):' },
     { line: 2, text: '    result = []' },
     { line: 3, text: '    for i in range(1 << n):' },
     { line: 4, text: '        result.append(i ^ (i >> 1))' },
     { line: 5, text: '    return result' },
 ]
+
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function toBinary(num, bits) {
     return (num >>> 0).toString(2).padStart(bits, '0')
@@ -83,7 +84,6 @@ const EXAMPLES = getExamples('gray-code')
 
 export default function GrayCodeVisualizer() {
     const [nInput, setNInput] = useState('3')
-    const SOLUTION_CODE = useSolutionCode('gray-code')
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
     const { n, inputError } = useMemo(() => {

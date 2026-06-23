@@ -12,7 +12,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem358.css'
 
-const SOLUTION_CODE = [
+const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def rearrangeString(s: str, k: int) -> str:' },
   { line: 2, text: '    from collections import Counter' },
   { line: 3, text: '    if k == 0: return s' },
@@ -29,6 +29,7 @@ const SOLUTION_CODE = [
   { line: 14, text: '            heapq.heappush(queue, (freq, ch))' },
   { line: 15, text: '        if not queue: return ""' },
 ]
+const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('rearrange-string-k-distance-apart') || [
   { label: 'Example 1', s: 'ABABAB', k: 2 },
