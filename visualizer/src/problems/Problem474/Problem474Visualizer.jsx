@@ -12,61 +12,102 @@ import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem474Visualizer.css'
 
-const EXAMPLES = getExamples('ones-and-zeroes')
+const EXAMPLES = getExamples('ones-and-zeroes') || [
+  { label: 'Example 1', strs: ['10', '0001', '111001', '1', '0'], m: 5, n: 3 },
+]
 
 function generateSteps(strs, m, n) {
   const steps = []
 
-  steps.push({
-    activeLine: 1,
-    strs,
-    m,
-    n,
-    index: 0,
-    dp: new Array(m + 1).fill(0).map(() => new Array(n + 1).fill(0)),
-    message: `Initialize DP table: ${m}x${n}`
-  })
-
-  for (let i = 0; i < Math.min(strs.length, 3); i++) {
-    const str = strs[i]
-    const ones = str.split('1').length - 1
-    const zeros = str.split('0').length - 1
-
-    steps.push({
-      activeLine: 2,
-      strs,
-      m,
-      n,
-      index: i,
-      currentStr: str,
-      ones,
-      zeros,
-      message: `Process str[${i}]: "${str}" has ${zeros} zeros and ${ones} ones`
-    })
+  if (!strs || strs.length === 0) {
+    steps.push({ activeLine: 1, message: 'Empty strings → max count = 0', done: true, result: 0 })
+    return steps
   }
 
-  steps.push({
-    activeLine: 3,
-    strs,
-    m,
-    n,
-    index: strs.length,
-    dp: new Array(m + 1).fill(0).map(() => new Array(n + 1).fill(0)),
-    done: true,
-    message: `Maximum strings using ${m} zeros and ${n} ones found`
-  })
+  steps.push({ activeLine: 1, message: `Initialize: strs=${strs.length} strings, m=${m} zeros max, n=${n} ones max` })
 
+  steps.push({ activeLine: 2, message: `Create 2D DP table: [${m + 1}][${n + 1}]`, dpSize: `${m + 1}×${n + 1}` })
+
+  const dp = Array(m + 1).fill(0).map(() => Array(n + 1).fill(0))
+  steps.push({ activeLine: 3, message: 'DP[i][j] = max strings using ≤i zeros and ≤j ones', dp: dp.map(row => [...row]) })
+
+  for (let idx = 0; idx < Math.min(strs.length, 4); idx++) {
+    const str = strs[idx]
+    let zeros = 0, ones = 0
+    for (const c of str) {
+      if (c === '0') zeros++
+      else ones++
+    }
+
+    steps.push({ activeLine: 4, message: `Process str[${idx}]="${str}": zeros=${zeros}, ones=${ones}`, currentStr: str, zeros, ones })
+
+    // Simulate DP update (reverse iteration)
+    for (let i = m; i >= zeros; i--) {
+      for (let j = n; j >= ones; j--) {
+        const newVal = dp[i - zeros][j - ones] + 1
+        if (newVal > dp[i][j]) {
+          steps.push({ activeLine: 5, message: `DP[${i}][${j}] = max(${dp[i][j]}, ${dp[i - zeros][j - ones]} + 1) = ${newVal}`, updateRow: i, updateCol: j })
+          dp[i][j] = newVal
+        }
+      }
+    }
+
+    steps.push({ activeLine: 6, message: `After str[${idx}]: DP[${m}][${n}] = ${dp[m][n]}`, dp: dp.map(row => [...row]) })
+  }
+
+  steps.push({ activeLine: 7, message: `Final DP state computed`, dp: dp.map(row => [...row]) })
+  steps.push({ activeLine: 8, message: `Result: max strings = DP[${m}][${n}] = ${dp[m][n]}`, done: true, result: dp[m][n], dp: dp.map(row => [...row]) })
   return steps
+}
+
+function DPTableView({ dp, m, n, updateRow, updateCol }) {
+  if (!dp || dp.length === 0) return null
+
+  const maxCols = Math.min(n + 1, 6)
+  const maxRows = Math.min(m + 1, 6)
+
+  return (
+    <div style={{ overflowX: 'auto', padding: 12, backgroundColor: '#f0f9ff', borderRadius: 6, border: '1px solid #bfdbfe' }}>
+      <table style={{ borderCollapse: 'collapse', fontSize: 10, minWidth: '100%' }}>
+        <tbody>
+          {dp.slice(0, maxRows).map((row, i) => (
+            <tr key={i}>
+              {row.slice(0, maxCols).map((val, j) => {
+                const isUpdated = updateRow === i && updateCol === j
+                return (
+                  <td
+                    key={`${i}-${j}`}
+                    style={{
+                      padding: '8px',
+                      border: '1px solid #cbd5e1',
+                      textAlign: 'center',
+                      fontWeight: 600,
+                      backgroundColor: isUpdated ? '#fef08a' : i === 0 || j === 0 ? '#e0f2fe' : '#f8fafc',
+                      color: isUpdated ? '#92400e' : '#1e293b',
+                      minWidth: 35,
+                    }}
+                  >
+                    {val}
+                  </td>
+                )
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {maxRows < m + 1 && <div style={{ fontSize: 10, color: '#94a3b8', marginTop: 4 }}>... (showing first {maxRows} rows)</div>}
+    </div>
+  )
 }
 
 function VisualizationPanel({ strs, m, n, step, applyEx }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
-      <div style={{ padding: 12, backgroundColor: '#f0f9ff', borderRadius: 6, borderLeft: '4px solid #0284c7' }}>
-        <div style={{ fontSize: 12, color: '#075985', fontStyle: 'italic' }}>
-          "Find maximum number of strings that can be formed using at most m zeros and n ones. Use DP with 2D state."
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, overflow: 'auto' }}>
+      {step && (
+        <div style={{ padding: 12, backgroundColor: '#dbeafe', borderRadius: 6, border: '2px solid #0284c7', fontSize: 12, color: '#0c4a6e' }}>
+          {step.message}
         </div>
-      </div>
+      )}
 
       <div>
         <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
@@ -81,7 +122,7 @@ function VisualizationPanel({ strs, m, n, step, applyEx }) {
                 border: '1px solid #cbd5e1',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9'
+                backgroundColor: '#f1f5f9',
               }}
             >
               {e.label}
@@ -90,119 +131,77 @@ function VisualizationPanel({ strs, m, n, step, applyEx }) {
         </div>
       </div>
 
-      <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>
-          Strings: {JSON.stringify(strs)}
-        </div>
-        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-          {strs.map((str, idx) => (
-            <motion.div
-              key={`str-${idx}`}
-              style={{
-                padding: '8px 12px',
-                borderRadius: 4,
-                border: '2px solid',
-                fontFamily: 'monospace',
-                fontSize: 13,
-                fontWeight: 600,
-                backgroundColor: step && idx === step.index ? '#fef08a' : '#f1f5f9',
-                borderColor: step && idx === step.index ? '#eab308' : '#cbd5e1',
-                color: step && idx === step.index ? '#854d0e' : '#334155'
-              }}
-              animate={{ scale: step && idx === step.index ? 1.15 : 1 }}
-            >
-              {str}
-            </motion.div>
-          ))}
+      <div style={{ padding: 12, backgroundColor: '#f0f9ff', borderRadius: 6, border: '1px solid #bfdbfe' }}>
+        <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 6 }}>Problem</div>
+        <div style={{ fontSize: 11, color: '#075985', lineHeight: 1.5 }}>
+          Max strings that can be formed using ≤m zeros and ≤n ones. Use 2D DP with backward iteration to avoid reusing strings.
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12 }}>
-        <motion.div
-          style={{
-            padding: 12,
-            backgroundColor: '#f0fdf4',
-            border: '2px solid #10b981',
-            borderRadius: 6,
-            textAlign: 'center'
-          }}
-        >
-          <div style={{ fontSize: 11, color: '#065f46', fontWeight: 600 }}>Max Zeros</div>
-          <div style={{ fontSize: 18, fontWeight: 'bold', color: '#10b981', marginTop: 4 }}>{m}</div>
-        </motion.div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(80px, 1fr))', gap: 8 }}>
+        <div style={{ padding: 10, backgroundColor: '#f3e8ff', borderRadius: 6, border: '1px solid #d8b4fe' }}>
+          <div style={{ fontSize: 10, fontWeight: 600, color: '#6b21a8', marginBottom: 4 }}>Strings</div>
+          <div style={{ fontSize: 13, fontWeight: 700, color: '#6b21a8' }}>{strs.length}</div>
+        </div>
+        <div style={{ padding: 10, backgroundColor: '#f0fdf4', borderRadius: 6, border: '1px solid #10b981' }}>
+          <div style={{ fontSize: 10, fontWeight: 600, color: '#166534', marginBottom: 4 }}>Max Zeros</div>
+          <div style={{ fontSize: 13, fontWeight: 700, color: '#166534' }}>{m}</div>
+        </div>
+        <div style={{ padding: 10, backgroundColor: '#fef3c7', borderRadius: 6, border: '1px solid #f59e0b' }}>
+          <div style={{ fontSize: 10, fontWeight: 600, color: '#92400e', marginBottom: 4 }}>Max Ones</div>
+          <div style={{ fontSize: 13, fontWeight: 700, color: '#92400e' }}>{n}</div>
+        </div>
+      </div>
 
-        <motion.div
-          style={{
-            padding: 12,
-            backgroundColor: '#fee2e2',
-            border: '2px solid #dc2626',
-            borderRadius: 6,
-            textAlign: 'center'
-          }}
-        >
-          <div style={{ fontSize: 11, color: '#991b1b', fontWeight: 600 }}>Max Ones</div>
-          <div style={{ fontSize: 18, fontWeight: 'bold', color: '#dc2626', marginTop: 4 }}>{n}</div>
-        </motion.div>
-
-        <motion.div
-          style={{
-            padding: 12,
-            backgroundColor: '#fef3c7',
-            border: '2px solid #f59e0b',
-            borderRadius: 6,
-            textAlign: 'center'
-          }}
-        >
-          <div style={{ fontSize: 11, color: '#92400e', fontWeight: 600 }}>Current</div>
-          <div style={{ fontSize: 18, fontWeight: 'bold', color: '#f59e0b', marginTop: 4 }}>
-            {step?.ones ?? 0}/{step?.zeros ?? 0}
+      {step?.currentStr && (
+        <div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, border: '2px solid #f59e0b' }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#92400e', marginBottom: 6 }}>Current String</div>
+          <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
+            <div style={{ fontSize: 14, fontFamily: 'monospace', fontWeight: 700, color: '#f59e0b' }}>"{step.currentStr}"</div>
+            <div style={{ fontSize: 11, color: '#92400e' }}>
+              {step.zeros} zeros, {step.ones} ones
+            </div>
           </div>
-        </motion.div>
-      </div>
-
-      <motion.div
-        style={{
-          padding: 16,
-          backgroundColor: '#f8f4ff',
-          borderRadius: 6,
-          border: '2px solid #8b5cf6'
-        }}
-      >
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#5b21b6', marginBottom: 8 }}>Status</div>
-        <div style={{ fontSize: 12, color: '#7c3aed' }}>
-          {step?.message || ''}
         </div>
-      </motion.div>
+      )}
+
+      {step?.dp && (
+        <div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>DP Table (2D)</div>
+          <DPTableView dp={step.dp} m={m} n={n} updateRow={step.updateRow} updateCol={step.updateCol} />
+        </div>
+      )}
+
+      {step?.dpSize && (
+        <div style={{ padding: 10, backgroundColor: '#ecfdf5', borderRadius: 6, border: '1px solid #10b981', fontSize: 11, color: '#047857' }}>
+          Table size: {step.dpSize}
+        </div>
+      )}
+
+      {step?.result !== undefined && (
+        <div style={{ padding: 12, backgroundColor: '#dcfce7', borderRadius: 6, border: '2px solid #22c55e' }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#166534', marginBottom: 4 }}>Maximum Strings</div>
+          <div style={{ fontSize: 20, fontWeight: 700, color: '#16a34a', fontFamily: 'monospace' }}>{step.result}</div>
+        </div>
+      )}
     </div>
   )
 }
 
 export default function Problem474Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { strs: ['10','0001','111001','1','0'], m: 5, n: 3 })
+  const [ex, setEx] = useState(EXAMPLES[0])
   const SOLUTION_CODE = useSolutionCode('ones-and-zeroes')
 
   const steps = useMemo(
-    () =>
-      generateSteps(ex.strs, ex.m, ex.n).map((current) => ({
-        ...current,
-        relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
-      })),
+    () => generateSteps(ex.strs, ex.m, ex.n).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),
     [ex]
   )
 
-  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
-    usePlaybackState(steps.length)
-
+  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-
   const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
 
-  const connectivity = useCodeVisualConnectivity({
-    steps,
-    stepIndex,
-    onStepJump: setStepIndex,
-  })
-
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const dockPanels = useMemo(() => [
@@ -221,25 +220,14 @@ export default function Problem474Visualizer() {
     },
     {
       id: 'viz',
-      title: '0️⃣1️⃣ Ones and Zeroes',
-      content: (
-        <VisualizationPanel
-          strs={ex.strs}
-          m={ex.m}
-          n={ex.n}
-          step={step}
-          applyEx={applyEx}
-        />
-      ),
+      title: '📦 Ones and Zeroes',
+      content: <VisualizationPanel strs={ex.strs} m={ex.m} n={ex.n} step={step} applyEx={applyEx} />,
     },
-  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
+  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, applyEx, ex])
 
   return (
     <div className="problem-shell">
-      <DockableWorkspace
-        panels={dockPanels}
-        initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
-      />
+      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}
