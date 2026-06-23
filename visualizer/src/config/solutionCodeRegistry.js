@@ -16346,7 +16346,35 @@ export const SOLUTION_CODE_REGISTRY = {
     },
     {
       "line": 5,
-      "text": "        s=str(i*i)"
+      "text": "        for j in range(maxNum,i-1,-1):"
+    },
+    {
+      "line": 6,
+      "text": "            product=i*j"
+    },
+    {
+      "line": 7,
+      "text": "            s=str(product)"
+    },
+    {
+      "line": 8,
+      "text": "            if s==s[::-1]: return product"
+    },
+    {
+      "line": 9,
+      "text": "            if i*i<product: break"
+    },
+    {
+      "line": 10,
+      "text": "    return -1"
+    },
+    {
+      "line": 11,
+      "text": ""
+    },
+    {
+      "line": 12,
+      "text": ""
     }
   ],
   "sliding-window-median": [
@@ -16391,6 +16419,34 @@ export const SOLUTION_CODE_REGISTRY = {
     {
       "line": 5,
       "text": "        s+=[3-s[-1]]*s[i]"
+    },
+    {
+      "line": 6,
+      "text": "        i+=1"
+    },
+    {
+      "line": 7,
+      "text": "    return sum(1 for x in s[:n] if x==1)"
+    },
+    {
+      "line": 8,
+      "text": ""
+    },
+    {
+      "line": 9,
+      "text": ""
+    },
+    {
+      "line": 10,
+      "text": ""
+    },
+    {
+      "line": 11,
+      "text": ""
+    },
+    {
+      "line": 12,
+      "text": ""
     }
   ],
   "license-key-formatting": [
@@ -16413,6 +16469,26 @@ export const SOLUTION_CODE_REGISTRY = {
     {
       "line": 5,
       "text": "    for i,c in enumerate(s[::-1]):"
+    },
+    {
+      "line": 6,
+      "text": "        if i>0 and i%K==0: result.append('-')"
+    },
+    {
+      "line": 7,
+      "text": "        result.append(c)"
+    },
+    {
+      "line": 8,
+      "text": "    return ''.join(result[::-1])"
+    },
+    {
+      "line": 9,
+      "text": ""
+    },
+    {
+      "line": 10,
+      "text": ""
     }
   ],
   "smallest-good-base": [
@@ -16703,6 +16779,30 @@ export const SOLUTION_CODE_REGISTRY = {
     {
       "line": 5,
       "text": "        while stack and stack[-1]<num:"
+    },
+    {
+      "line": 6,
+      "text": "            mapping[stack.pop()]=num"
+    },
+    {
+      "line": 7,
+      "text": "        stack.append(num)"
+    },
+    {
+      "line": 8,
+      "text": "    result=[]"
+    },
+    {
+      "line": 9,
+      "text": "    for num in nums1:"
+    },
+    {
+      "line": 10,
+      "text": "        result.append(mapping.get(num,-1))"
+    },
+    {
+      "line": 11,
+      "text": "    return result"
     }
   ],
   "random-point-in-non-overlapping-rectangles": [

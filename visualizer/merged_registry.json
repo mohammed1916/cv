@@ -16235,6 +16235,34 @@
     {
       "line": 5,
       "text": "        ones=sum(1 for num in nums if num&(1<<i))"
+    },
+    {
+      "line": 6,
+      "text": "        zeros=n-ones"
+    },
+    {
+      "line": 7,
+      "text": "        contribution=ones*zeros"
+    },
+    {
+      "line": 8,
+      "text": "        distance+=contribution"
+    },
+    {
+      "line": 9,
+      "text": "        if ones==0:break"
+    },
+    {
+      "line": 10,
+      "text": "    return distance"
+    },
+    {
+      "line": 11,
+      "text": ""
+    },
+    {
+      "line": 12,
+      "text": ""
     }
   ],
   "generate-random-point-in-a-circle": [

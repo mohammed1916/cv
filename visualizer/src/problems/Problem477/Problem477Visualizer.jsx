@@ -12,121 +12,250 @@ import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem477Visualizer.css'
 
-const EXAMPLES = getExamples('total-hamming-distance')
+const EXAMPLES = getExamples('total-hamming-distance') || [
+  { label: 'Example 1', nums: [4, 14, 2] },
+  { label: 'Example 2', nums: [1, 3, 5] },
+]
 
 function generateSteps(nums) {
   const steps = []
 
-  steps.push({
-    activeLine: 1,
-    nums,
-    totalDistance: 0,
-    bitPosition: 0,
-    message: 'Calculate total Hamming distance: count differing bits at each position'
-  })
-
-  let totalDistance = 0
-  for (let bitPos = 0; bitPos < 32 && bitPos < Math.max(...nums).toString(2).length; bitPos++) {
-    let ones = 0
-    for (let num of nums) {
-      if ((num >> bitPos) & 1) ones++
-    }
-    const zeros = nums.length - ones
-    const contribution = ones * zeros
-
-    steps.push({
-      activeLine: 2,
-      nums,
-      totalDistance,
-      bitPosition: bitPos,
-      ones,
-      zeros,
-      contribution,
-      message: `Bit ${bitPos}: ${ones} ones, ${zeros} zeros → ${contribution} pairs differ`
-    })
-
-    totalDistance += contribution
+  if (!nums || nums.length === 0) {
+    steps.push({ activeLine: 1, message: 'Empty array → 0 distance', done: true, result: 0 })
+    return steps
   }
 
-  steps.push({
-    activeLine: 3,
-    nums,
-    totalDistance,
-    bitPosition: 0,
-    done: true,
-    message: `Total Hamming distance: ${totalDistance}`
-  })
+  steps.push({ activeLine: 1, message: `Calculate total Hamming distance for [${nums.join(', ')}]`, nums })
+
+  steps.push({ activeLine: 2, message: `Convert numbers to binary for bit-level analysis` })
+
+  const binaries = nums.map(n => n.toString(2).padStart(8, '0'))
+  steps.push({ activeLine: 3, message: `Binary representations: ${binaries.map((b, i) => `${nums[i]}=${b}`).join(', ')}`, binaries })
+
+  steps.push({ activeLine: 4, message: 'Insight: For each bit position, count 0s and 1s. Pairs that differ = ones × zeros' })
+
+  const maxBits = Math.max(...nums).toString(2).length
+  steps.push({ activeLine: 5, message: `Max bits needed: ${maxBits}` })
+
+  let totalDistance = 0
+
+  for (let bitPos = 0; bitPos < Math.min(maxBits, 5); bitPos++) {
+    steps.push({ activeLine: 6, message: `Process bit position ${bitPos}:` })
+
+    let ones = 0
+    const bitValues = []
+
+    for (let i = 0; i < nums.length; i++) {
+      const bit = (nums[i] >> bitPos) & 1
+      bitValues.push(bit)
+      if (bit) ones++
+    }
+
+    steps.push({ activeLine: 7, message: `Count bits at position ${bitPos}: [${bitValues.join(', ')}]`, bitPos, bitValues })
+
+    const zeros = nums.length - ones
+    steps.push({ activeLine: 8, message: `Ones: ${ones}, Zeros: ${zeros}`, ones, zeros })
+
+    const contribution = ones * zeros
+    steps.push({ activeLine: 9, message: `Pairs where bits differ: ${ones} × ${zeros} = ${contribution}`, contribution })
+
+    totalDistance += contribution
+    steps.push({ activeLine: 10, message: `Running total: ${totalDistance}`, totalDistance })
+  }
+
+  steps.push({ activeLine: 11, message: `Complete bit analysis`, totalDistance })
+
+  steps.push({ activeLine: 12, message: `Final total Hamming distance: ${totalDistance}`, done: true, result: totalDistance, totalDistance })
 
   return steps
 }
 
+function BinaryVisualization({ nums, binaries, bitPos }) {
+  if (!binaries) return null
+
+  return (
+    <div style={{ padding: 12, backgroundColor: '#f9fafb', borderRadius: 6, border: '1px solid #cbd5e1' }}>
+      <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Binary View</div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+        {binaries.map((bin, i) => (
+          <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 10 }}>
+            <div style={{ fontWeight: 600, color: '#1e293b', minWidth: 40 }}>{nums[i]}</div>
+            <div style={{ fontFamily: 'monospace', display: 'flex', gap: 1 }}>
+              {bin.split('').map((bit, j) => (
+                <div
+                  key={j}
+                  style={{
+                    width: 20,
+                    height: 20,
+                    borderRadius: 3,
+                    backgroundColor: j === bitPos ? (bit === '1' ? '#dcfce7' : '#fee2e2') : '#f1f5f9',
+                    border: j === bitPos ? `2px solid ${bit === '1' ? '#10b981' : '#dc2626'}` : '1px solid #cbd5e1',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontWeight: 700,
+                    color: j === bitPos ? (bit === '1' ? '#166534' : '#991b1b') : '#475569',
+                  }}
+                >
+                  {bit}
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function VisualizationPanel({ nums, step, applyEx }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
-      <div style={{ padding: 12, backgroundColor: '#f0f9ff', borderRadius: 6, borderLeft: '4px solid #0284c7' }}>
-        <div style={{ fontSize: 12, color: '#075985', fontStyle: 'italic' }}>
-          "Calculate total Hamming distance between all pairs. For each bit position, count 1s and 0s: contribution = ones × zeros."
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, overflow: 'auto' }}>
+      {step && (
+        <div style={{ padding: 12, backgroundColor: '#dbeafe', borderRadius: 6, border: '2px solid #0284c7', fontSize: 12, color: '#0c4a6e' }}>
+          {step.message}
         </div>
-      </div>
+      )}
 
       <div>
         <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
-            <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: '#f1f5f9' }}>
+            <button
+              key={e.label}
+              onClick={() => applyEx(e)}
+              style={{
+                padding: '6px 12px',
+                borderRadius: 4,
+                border: '1px solid #cbd5e1',
+                cursor: 'pointer',
+                fontSize: 12,
+                backgroundColor: '#f1f5f9',
+              }}
+            >
               {e.label}
             </button>
           ))}
         </div>
       </div>
 
+      <div style={{ padding: 12, backgroundColor: '#f0f9ff', borderRadius: 6, border: '1px solid #bfdbfe' }}>
+        <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 6 }}>Algorithm</div>
+        <div style={{ fontSize: 11, color: '#075985', lineHeight: 1.5 }}>
+          For each bit position: count 1s and 0s. Each bit position contributes (ones × zeros) differing pairs. Sum all positions.
+        </div>
+      </div>
+
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Numbers: {JSON.stringify(nums)}</div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+        <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Input Numbers</div>
+        <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', padding: 10, backgroundColor: '#f9fafb', borderRadius: 6, border: '1px solid #cbd5e1' }}>
           {nums.map((num, i) => (
-            <motion.div key={`num-${i}`} style={{ padding: '8px 12px', borderRadius: 4, border: '2px solid #cbd5e1', fontFamily: 'monospace', backgroundColor: '#f1f5f9' }} animate={{ scale: 1 }}>
+            <motion.div
+              key={i}
+              style={{
+                width: 45,
+                height: 45,
+                borderRadius: 6,
+                backgroundColor: '#dbeafe',
+                border: '1px solid #0284c7',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: 12,
+                fontWeight: 700,
+                color: '#0c4a6e',
+              }}
+            >
               {num}
             </motion.div>
           ))}
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12 }}>
-        <motion.div style={{ padding: 12, backgroundColor: '#f0fdf4', border: '2px solid #10b981', borderRadius: 6, textAlign: 'center' }}>
-          <div style={{ fontSize: 11, color: '#065f46', fontWeight: 600 }}>Ones</div>
-          <div style={{ fontSize: 16, fontWeight: 'bold', color: '#10b981', marginTop: 4 }}>{step?.ones ?? 0}</div>
-        </motion.div>
+      {step?.binaries && (
+        <BinaryVisualization nums={nums} binaries={step.binaries} bitPos={step.bitPos} />
+      )}
 
-        <motion.div style={{ padding: 12, backgroundColor: '#fee2e2', border: '2px solid #dc2626', borderRadius: 6, textAlign: 'center' }}>
-          <div style={{ fontSize: 11, color: '#991b1b', fontWeight: 600 }}>Zeros</div>
-          <div style={{ fontSize: 16, fontWeight: 'bold', color: '#dc2626', marginTop: 4 }}>{step?.zeros ?? 0}</div>
-        </motion.div>
+      {step?.bitValues && (
+        <div style={{ padding: 12, backgroundColor: '#f3e8ff', borderRadius: 6, border: '2px solid #d8b4fe' }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#6b21a8', marginBottom: 8 }}>
+            Bit Position {step.bitPos}
+          </div>
+          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+            {step.bitValues.map((bit, i) => (
+              <div
+                key={i}
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: 4,
+                  backgroundColor: bit === 1 ? '#dcfce7' : '#fee2e2',
+                  border: `2px solid ${bit === 1 ? '#10b981' : '#dc2626'}`,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: 13,
+                  fontWeight: 700,
+                  color: bit === 1 ? '#166534' : '#991b1b',
+                }}
+              >
+                {bit}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
-        <motion.div style={{ padding: 12, backgroundColor: '#fef3c7', border: '2px solid #f59e0b', borderRadius: 6, textAlign: 'center' }}>
-          <div style={{ fontSize: 11, color: '#92400e', fontWeight: 600 }}>Contribution</div>
-          <div style={{ fontSize: 16, fontWeight: 'bold', color: '#f59e0b', marginTop: 4 }}>{step?.contribution ?? 0}</div>
-        </motion.div>
-      </div>
+      {step?.ones !== undefined && step?.zeros !== undefined && (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: 8 }}>
+          <div style={{ padding: 10, backgroundColor: '#dcfce7', borderRadius: 6, border: '1px solid #10b981' }}>
+            <div style={{ fontSize: 10, fontWeight: 600, color: '#166534' }}>Ones</div>
+            <div style={{ fontSize: 16, fontWeight: 700, color: '#16a34a', marginTop: 4 }}>
+              {step.ones}
+            </div>
+          </div>
+          <div style={{ padding: 10, backgroundColor: '#fee2e2', borderRadius: 6, border: '1px solid #dc2626' }}>
+            <div style={{ fontSize: 10, fontWeight: 600, color: '#991b1b' }}>Zeros</div>
+            <div style={{ fontSize: 16, fontWeight: 700, color: '#dc2626', marginTop: 4 }}>
+              {step.zeros}
+            </div>
+          </div>
+          <div style={{ padding: 10, backgroundColor: '#fef3c7', borderRadius: 6, border: '1px solid #f59e0b' }}>
+            <div style={{ fontSize: 10, fontWeight: 600, color: '#92400e' }}>Pairs Differ</div>
+            <div style={{ fontSize: 16, fontWeight: 700, color: '#f59e0b', marginTop: 4 }}>
+              {step.contribution}
+            </div>
+          </div>
+        </div>
+      )}
 
-      <motion.div style={{ padding: 16, backgroundColor: '#f0fdf4', border: '2px solid #10b981', borderRadius: 6 }}>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#065f46', marginBottom: 8 }}>Total Distance</div>
-        <div style={{ fontSize: 28, fontWeight: 'bold', color: '#10b981' }}>{step?.totalDistance ?? 0}</div>
-      </motion.div>
+      {step?.totalDistance !== undefined && (
+        <div style={{ padding: 12, backgroundColor: '#ede9fe', borderRadius: 6, border: '2px solid #8b5cf6' }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#4c1d95' }}>Running Total</div>
+          <div style={{ fontSize: 18, fontFamily: 'monospace', fontWeight: 700, color: '#7c3aed', marginTop: 4 }}>
+            {step.totalDistance}
+          </div>
+        </div>
+      )}
 
-      <motion.div style={{ padding: 16, backgroundColor: '#f8f4ff', borderRadius: 6, border: '2px solid #8b5cf6' }}>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#5b21b6', marginBottom: 8 }}>Status</div>
-        <div style={{ fontSize: 12, color: '#7c3aed' }}>{step?.message || ''}</div>
-      </motion.div>
+      {step?.result !== undefined && (
+        <div style={{ padding: 12, backgroundColor: '#dcfce7', borderRadius: 6, border: '2px solid #22c55e' }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#166534' }}>Total Hamming Distance</div>
+          <div style={{ fontSize: 20, fontFamily: 'monospace', fontWeight: 700, color: '#16a34a', marginTop: 4 }}>
+            {step.result}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
 
 export default function Problem477Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { nums: [4, 14, 2] })
+  const [ex, setEx] = useState(EXAMPLES[0])
   const SOLUTION_CODE = useSolutionCode('total-hamming-distance')
 
   const steps = useMemo(
-    () => generateSteps(ex.nums).map((c) => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),
+    () => generateSteps(ex.nums).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),
     [ex]
   )
 
@@ -138,15 +267,47 @@ export default function Problem477Visualizer() {
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const dockPanels = useMemo(() => [
-    { id: 'code', title: 'Code', content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} /> },
-    { id: 'viz', title: '📊 Total Hamming Distance', content: <VisualizationPanel nums={ex.nums} step={step} applyEx={applyEx} /> },
-  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
+    {
+      id: 'code',
+      title: 'Code',
+      content: (
+        <CodeTracePanel
+          step={step}
+          codeLines={SOLUTION_CODE}
+          highlightedLines={connectivity.highlightedLines}
+          onLineSelect={connectivity.handleLineSelect}
+          onActiveLineDomChange={setActiveLineDom}
+        />
+      ),
+    },
+    {
+      id: 'viz',
+      title: '🔢 Total Hamming Distance',
+      content: <VisualizationPanel nums={ex.nums} step={step} applyEx={applyEx} />,
+    },
+  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, applyEx, ex])
 
   return (
     <div className="problem-shell">
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
-        <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
+        <PlaybackControls
+          isPlaying={isPlaying}
+          isDone={isDone}
+          speed={speed}
+          onPlayToggle={togglePlay}
+          onPrev={stepBack}
+          onNext={stepForward}
+          onReset={handleReset}
+          prevDisabled={stepIndex < 0}
+          nextDisabled={isDone}
+          resetDisabled={stepIndex < 0}
+          onSpeedChange={e => setSpeed(Number(e.target.value))}
+          showPatternOverlay={showPatternOverlay}
+          onShowPatternOverlayChange={setShowPatternOverlay}
+          patternOverlayLabel="Show pattern overlay"
+          showPatternOverlayToggle
+        />
       </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
