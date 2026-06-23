@@ -272,7 +272,7 @@ function HomePage({
   const [catalogError, setCatalogError] = useState("");
   const [search, setSearch] = useState("");
   const [difficulty, setDifficulty] = useState("All");
-  const [status, setStatus] = useState("All");
+  const [status, setStatus] = useState("Implemented");
   const [activeTag, setActiveTag] = useState("All");
   const [visibleCount, setVisibleCount] = useState(60);
 
