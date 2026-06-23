@@ -8,12 +8,22 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem474Visualizer.css'
 
 const EXAMPLES = getExamples('ones-and-zeroes') || [
   { label: 'Example 1', strs: ['10', '0001', '111001', '1', '0'], m: 5, n: 3 },
+]
+
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def findMaxForm(strs, m, n):' },
+  { line: 2, text: '    dp = [[0]*(n+1) for _ in range(m+1)]' },
+  { line: 3, text: '    for s in strs:' },
+  { line: 4, text: '        ones = s.count("1")' },
+  { line: 5, text: '        zeros = len(s) - ones' },
+  { line: 6, text: '        for i in range(m, zeros-1, -1):' },
+  { line: 7, text: '            for j in range(n, ones-1, -1):' },
+  { line: 8, text: '                dp[i][j] = max(dp[i][j], 1+dp[i-zeros][j-ones])' },
 ]
 
 function generateSteps(strs, m, n) {
@@ -190,7 +200,7 @@ function VisualizationPanel({ strs, m, n, step, applyEx }) {
 
 export default function Problem474Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0])
-  const SOLUTION_CODE = useSolutionCode('ones-and-zeroes')
+  const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(
     () => generateSteps(ex.strs, ex.m, ex.n).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),

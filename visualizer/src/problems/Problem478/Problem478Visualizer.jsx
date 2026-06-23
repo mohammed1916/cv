@@ -8,13 +8,25 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem478Visualizer.css'
 
 const EXAMPLES = getExamples('generate-random-point-in-a-circle') || [
   { label: 'Example 1', radius: 1 },
   { label: 'Example 2', radius: 2.5 },
+]
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def __init__(self, radius, x_center, y_center):' },
+  { line: 2, text: '    self.radius = radius' },
+  { line: 3, text: '    self.x = x_center' },
+  { line: 4, text: '    self.y = y_center' },
+  { line: 5, text: 'def randPoint(self):' },
+  { line: 6, text: '    angle = random() * 2 * pi' },
+  { line: 7, text: '    r = sqrt(random()) * self.radius' },
+  { line: 8, text: '    x = self.x + r * cos(angle)' },
+  { line: 9, text: '    y = self.y + r * sin(angle)' },
+  { line: 10, text: '    return [x, y]' },
+  { line: 11, text: '    ' },
 ]
 
 function generateSteps(radius) {
@@ -205,7 +217,7 @@ function VisualizationPanel({ radius, step, applyEx }) {
 
 export default function Problem478Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0])
-  const SOLUTION_CODE = useSolutionCode('generate-random-point-in-a-circle')
+  const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(
     () => generateSteps(ex.radius).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),

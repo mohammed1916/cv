@@ -176,9 +176,24 @@ function VisualizationPanel({ n, step, applyEx }) {
   )
 }
 
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def magicalString(n):' },
+  { line: 2, text: '    s=[1,2,2]' },
+  { line: 3, text: '    i=2' },
+  { line: 4, text: '    while len(s)<n:' },
+  { line: 5, text: '        s+=[3-s[-1]]*s[i]' },
+  { line: 6, text: '        i+=1' },
+  { line: 7, text: '    return sum(1 for x in s[:n] if x==1)' },
+  { line: 8, text: '' },
+  { line: 9, text: '' },
+  { line: 10, text: '' },
+  { line: 11, text: '' },
+  { line: 12, text: '' },
+]
+
 export default function Problem481Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0])
-  const SOLUTION_CODE = useSolutionCode('magical-string')
+  const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(
     () => generateSteps(ex.n).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),

@@ -8,12 +8,26 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem430Visualizer.css'
 
 const EXAMPLES = getExamples('flatten-multilevel-dll') || [
   { label: 'Example 1', structure: '1->2->3->null with child [7->null] at 3' },
+]
+
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def flatten(head):' },
+  { line: 2, text: '    if not head: return head' },
+  { line: 3, text: '    current = head' },
+  { line: 4, text: '    while current:' },
+  { line: 5, text: '        if current.child:' },
+  { line: 6, text: '            next_node = current.next' },
+  { line: 7, text: '            flat_child = flatten(current.child)' },
+  { line: 8, text: '            current.next = flat_child' },
+  { line: 9, text: '            flat_child.prev = current' },
+  { line: 10, text: '            current.child = None' },
+  { line: 11, text: '        current = current.next' },
+  { line: 12, text: '    return head' },
 ]
 
 function generateSteps(structure) {
@@ -161,7 +175,7 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem430Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0])
-  const SOLUTION_CODE = useSolutionCode('flatten-multilevel-dll')
+  const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(
     () => generateSteps(ex.structure).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),

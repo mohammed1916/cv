@@ -8,12 +8,39 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem423Visualizer.css'
 
 const EXAMPLES = getExamples('reconstruct-original-digits') || [
   { label: 'Example 1', s: 'owoztneoer' },
+]
+
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def originalDigits(s):' },
+  { line: 2, text: '    count = [0] * 10' },
+  { line: 3, text: '    char_count = {}' },
+  { line: 4, text: '    for c in s: char_count[c] = char_count.get(c, 0) + 1' },
+  { line: 5, text: '    ' },
+  { line: 6, text: '    count[0] = char_count.get("z", 0)' },
+  { line: 7, text: '    count[2] = char_count.get("w", 0)' },
+  { line: 8, text: '    count[4] = char_count.get("u", 0)' },
+  { line: 9, text: '    count[6] = char_count.get("x", 0)' },
+  { line: 10, text: '    count[8] = char_count.get("g", 0)' },
+  { line: 11, text: '    ' },
+  { line: 12, text: '    count[3] = char_count.get("h", 0) - count[8]' },
+  { line: 13, text: '    count[5] = char_count.get("f", 0) - count[4]' },
+  { line: 14, text: '    count[7] = char_count.get("s", 0) - count[6] - count[2]' },
+  { line: 15, text: '    count[9] = char_count.get("i", 0) - count[5] - count[6] - count[8]' },
+  { line: 16, text: '    count[1] = char_count.get("o", 0) - count[0] - count[2] - count[4]' },
+  { line: 17, text: '    ' },
+  { line: 18, text: '    result = ""' },
+  { line: 19, text: '    for digit in range(10):' },
+  { line: 20, text: '        result += str(digit) * count[digit]' },
+  { line: 21, text: '    return result' },
+  { line: 22, text: '' },
+  { line: 23, text: '' },
+  { line: 24, text: '' },
+  { line: 25, text: '' },
 ]
 
 function generateSteps(s) {
@@ -96,7 +123,7 @@ function VisualizationPanel({ step }) {
 
 export default function Problem423Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0])
-  const SOLUTION_CODE = useSolutionCode('reconstruct-original-digits')
+  const SOLUTION_CODE = SOLUTION_CODE_INLINE
   const steps = useMemo(
     () => generateSteps(ex.s).map((c) => ({
       ...c,

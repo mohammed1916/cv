@@ -8,13 +8,27 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem477Visualizer.css'
 
 const EXAMPLES = getExamples('total-hamming-distance') || [
   { label: 'Example 1', nums: [4, 14, 2] },
   { label: 'Example 2', nums: [1, 3, 5] },
+]
+
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def totalHammingDistance(nums):' },
+  { line: 2, text: '    distance=0' },
+  { line: 3, text: '    n=len(nums)' },
+  { line: 4, text: '    for i in range(32):' },
+  { line: 5, text: '        ones=sum(1 for num in nums if num&(1<<i))' },
+  { line: 6, text: '        zeros=n-ones' },
+  { line: 7, text: '        contribution=ones*zeros' },
+  { line: 8, text: '        distance+=contribution' },
+  { line: 9, text: '        if ones==0:break' },
+  { line: 10, text: '    return distance' },
+  { line: 11, text: '' },
+  { line: 12, text: '' },
 ]
 
 function generateSteps(nums) {
@@ -26,12 +40,10 @@ function generateSteps(nums) {
   }
 
   steps.push({ activeLine: 1, message: `Calculate total Hamming distance for [${nums.join(', ')}]`, nums })
-
   steps.push({ activeLine: 2, message: `Convert numbers to binary for bit-level analysis` })
 
   const binaries = nums.map(n => n.toString(2).padStart(8, '0'))
   steps.push({ activeLine: 3, message: `Binary representations: ${binaries.map((b, i) => `${nums[i]}=${b}`).join(', ')}`, binaries })
-
   steps.push({ activeLine: 4, message: 'Insight: For each bit position, count 0s and 1s. Pairs that differ = ones × zeros' })
 
   const maxBits = Math.max(...nums).toString(2).length
@@ -64,7 +76,6 @@ function generateSteps(nums) {
   }
 
   steps.push({ activeLine: 11, message: `Complete bit analysis`, totalDistance })
-
   steps.push({ activeLine: 12, message: `Final total Hamming distance: ${totalDistance}`, done: true, result: totalDistance, totalDistance })
 
   return steps
@@ -252,7 +263,7 @@ function VisualizationPanel({ nums, step, applyEx }) {
 
 export default function Problem477Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0])
-  const SOLUTION_CODE = useSolutionCode('total-hamming-distance')
+  const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(
     () => generateSteps(ex.nums).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),

@@ -186,9 +186,22 @@ function VisualizationPanel({ s, k, step, applyEx }) {
   )
 }
 
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def licenseKeyFormatting(S,K):' },
+  { line: 2, text: '    s=S.replace("-","").upper()' },
+  { line: 3, text: '    if not s: return ""' },
+  { line: 4, text: '    result=[]' },
+  { line: 5, text: '    for i,c in enumerate(s[::-1]):' },
+  { line: 6, text: '        if i>0 and i%K==0: result.append("-")' },
+  { line: 7, text: '        result.append(c)' },
+  { line: 8, text: '    return "".join(result[::-1])' },
+  { line: 9, text: '' },
+  { line: 10, text: '' },
+]
+
 export default function Problem482Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0])
-  const SOLUTION_CODE = useSolutionCode('license-key-formatting')
+  const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(
     () => generateSteps(ex.s, ex.k).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),

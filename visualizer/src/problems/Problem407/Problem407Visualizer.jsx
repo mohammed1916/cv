@@ -8,12 +8,38 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem407Visualizer.css'
 
 const EXAMPLES = getExamples('trapping-rain-water-ii') || [
   { label: 'Example', heightMap: [[1,4,3,1,3,2],[3,2,1,3,2,4],[2,3,3,2,3,1]] },
+]
+
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def trapRainWater(heightMap):' },
+  { line: 2, text: '    if not heightMap: return 0' },
+  { line: 3, text: '    m, n = len(heightMap), len(heightMap[0])' },
+  { line: 4, text: '    visited = set()' },
+  { line: 5, text: '    heap = []' },
+  { line: 6, text: '    for i in range(m):' },
+  { line: 7, text: '        heap.append((heightMap[i][0], i, 0))' },
+  { line: 8, text: '        heap.append((heightMap[i][n-1], i, n-1))' },
+  { line: 9, text: '        visited.add((i, 0))' },
+  { line: 10, text: '        visited.add((i, n-1))' },
+  { line: 11, text: '    for j in range(n):' },
+  { line: 12, text: '        if (0, j) not in visited:' },
+  { line: 13, text: '            heap.append((heightMap[0][j], 0, j))' },
+  { line: 14, text: '            visited.add((0, j))' },
+  { line: 15, text: '        if (m-1, j) not in visited:' },
+  { line: 16, text: '            heap.append((heightMap[m-1][j], m-1, j))' },
+  { line: 17, text: '            visited.add((m-1, j))' },
+  { line: 18, text: '    heapify(heap)' },
+  { line: 19, text: '    water = 0' },
+  { line: 20, text: '    while heap:' },
+  { line: 21, text: '        h, x, y = heappop(heap)' },
+  { line: 22, text: '        for dx, dy in [(0,1),(0,-1),(1,0),(-1,0)]:' },
+  { line: 23, text: '            nx, ny = x+dx, y+dy' },
+  { line: 24, text: '            if 0<=nx<m and 0<=ny<n and (nx,ny) not in visited:' },
 ]
 
 function generateSteps(heightMap) {
@@ -114,7 +140,7 @@ function VisualizationPanel({ step }) {
 
 export default function Problem407Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0])
-  const SOLUTION_CODE = useSolutionCode('trapping-rain-water-ii')
+  const SOLUTION_CODE = SOLUTION_CODE_INLINE
   const steps = useMemo(
     () => generateSteps(ex.heightMap).map((c) => ({
       ...c,

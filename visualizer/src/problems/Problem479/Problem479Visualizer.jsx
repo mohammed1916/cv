@@ -184,9 +184,24 @@ function VisualizationPanel({ n, step, applyEx }) {
   )
 }
 
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def largestPalindrome(n):' },
+  { line: 2, text: '    if n==1: return 9' },
+  { line: 3, text: '    maxNum=10**n-1' },
+  { line: 4, text: '    for i in range(maxNum,0,-1):' },
+  { line: 5, text: '        for j in range(maxNum,i-1,-1):' },
+  { line: 6, text: '            product=i*j' },
+  { line: 7, text: '            s=str(product)' },
+  { line: 8, text: '            if s==s[::-1]: return product' },
+  { line: 9, text: '            if i*i<product: break' },
+  { line: 10, text: '    return -1' },
+  { line: 11, text: '' },
+  { line: 12, text: '' },
+]
+
 export default function Problem479Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0])
-  const SOLUTION_CODE = useSolutionCode('largest-palindrome-product')
+  const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(
     () => generateSteps(ex.n).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),

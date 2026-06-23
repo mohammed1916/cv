@@ -8,12 +8,26 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem431Visualizer.css'
 
 const EXAMPLES = getExamples('encode-nary-to-binary-tree') || [
   { label: 'Example 1', naryStructure: '1->2,3,4->5,6' },
+]
+
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def encode(root):' },
+  { line: 2, text: '    if not root: return None' },
+  { line: 3, text: '    binary_root = TreeNode(root.val)' },
+  { line: 4, text: '    if root.children:' },
+  { line: 5, text: '        binary_root.left = encode(root.children[0])' },
+  { line: 6, text: '    sibling = binary_root.left' },
+  { line: 7, text: '    for child in root.children[1:]:' },
+  { line: 8, text: '        sibling.right = encode(child)' },
+  { line: 9, text: '        sibling = sibling.right' },
+  { line: 10, text: '    return binary_root' },
+  { line: 11, text: '    ' },
+  { line: 12, text: '    ' },
 ]
 
 function generateSteps(naryStructure) {
@@ -184,7 +198,7 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem431Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0])
-  const SOLUTION_CODE = useSolutionCode('encode-nary-to-binary-tree')
+  const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(
     () => generateSteps(ex.naryStructure).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),

@@ -8,12 +8,26 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem425Visualizer.css'
 
 const EXAMPLES = getExamples('word-squares') || [
   { label: 'Example 1', words: ['ball', 'area', 'lead', 'lady'] },
+]
+
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def wordSquares(words):' },
+  { line: 2, text: '    trie = {}' },
+  { line: 3, text: '    for w in words: insert_trie(trie, w)' },
+  { line: 4, text: '    result = []' },
+  { line: 5, text: '    square = []' },
+  { line: 6, text: '    dfs(trie, 0, square, words[0].__len__(), result)' },
+  { line: 7, text: '    return result' },
+  { line: 8, text: '    ' },
+  { line: 9, text: 'def dfs(trie, row, square, n, result):' },
+  { line: 10, text: '    if row == n:' },
+  { line: 11, text: '        result.append(square[:])' },
+  { line: 12, text: '        return' },
 ]
 
 function generateSteps(words) {
@@ -234,7 +248,7 @@ function VisualizationPanel({ words, step, applyEx }) {
 
 export default function Problem425Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0])
-  const SOLUTION_CODE = useSolutionCode('word-squares')
+  const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(
     () => generateSteps(ex.words).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),

@@ -8,13 +8,27 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem491Visualizer.css'
 
 const EXAMPLES = getExamples('increasing-subsequences') || [
   { label: 'Example 1', nums: [4, 6, 7, 7] },
   { label: 'Example 2', nums: [4, 4, 3, 2, 1] },
+]
+
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def findIncreasingSubsequences(nums):' },
+  { line: 2, text: '    result = []' },
+  { line: 3, text: '    def dfs(idx, path, last):' },
+  { line: 4, text: '        if len(path) >= 2: result.append(path[:])' },
+  { line: 5, text: '        used = set()' },
+  { line: 6, text: '        for i in range(idx, len(nums)):' },
+  { line: 7, text: '            if nums[i] in used: continue' },
+  { line: 8, text: '            if nums[i] < last: continue' },
+  { line: 9, text: '            used.add(nums[i])' },
+  { line: 10, text: '            path.append(nums[i])' },
+  { line: 11, text: '            dfs(i+1, path, nums[i])' },
+  { line: 12, text: '            path.pop()' },
 ]
 
 function generateSteps(nums) {
@@ -219,7 +233,7 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem491Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0])
-  const SOLUTION_CODE = useSolutionCode('increasing-subsequences')
+  const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(
     () => generateSteps(ex.nums).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),

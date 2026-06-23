@@ -224,9 +224,23 @@ function VisualizationPanel({ nums1, nums2, step, applyEx }) {
   )
 }
 
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def nextGreaterElement(nums1,nums2):' },
+  { line: 2, text: '    stack=[]' },
+  { line: 3, text: '    mapping={}' },
+  { line: 4, text: '    for num in nums2:' },
+  { line: 5, text: '        while stack and stack[-1]<num:' },
+  { line: 6, text: '            mapping[stack.pop()]=num' },
+  { line: 7, text: '        stack.append(num)' },
+  { line: 8, text: '    result=[]' },
+  { line: 9, text: '    for num in nums1:' },
+  { line: 10, text: '        result.append(mapping.get(num,-1))' },
+  { line: 11, text: '    return result' },
+]
+
 export default function Problem496Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0])
-  const SOLUTION_CODE = useSolutionCode('next-greater-element-i')
+  const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(
     () => generateSteps(ex.nums1, ex.nums2).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),

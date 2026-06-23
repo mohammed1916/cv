@@ -8,12 +8,26 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem438Visualizer.css'
 
 const EXAMPLES = getExamples('find-all-anagrams-in-string') || [
   { label: 'Example 1', s: 'cbaebabacd', p: 'abc' },
+]
+
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def findAnagrams(s,p):' },
+  { line: 2, text: '    if not s or not p or len(p)>len(s):' },
+  { line: 3, text: '        return []' },
+  { line: 4, text: '    result=[]' },
+  { line: 5, text: '    pChars={}' },
+  { line: 6, text: '    for c in p: pChars[c]=pChars.get(c,0)+1' },
+  { line: 7, text: '    for i in range(len(s)-len(p)+1):' },
+  { line: 8, text: '        window=s[i:i+len(p)]' },
+  { line: 9, text: '        wChars={}' },
+  { line: 10, text: '        for c in window: wChars[c]=wChars.get(c,0)+1' },
+  { line: 11, text: '        if pChars==wChars: result.append(i)' },
+  { line: 12, text: '    return result' },
 ]
 
 function generateSteps(s, p) {
@@ -245,7 +259,7 @@ function VisualizationPanel({ step, applyEx, s, p, windowStart, windowEnd, resul
 
 export default function Problem438Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { s: 'cbaebabacd', p: 'abc', label: 'Example 1' })
-  const SOLUTION_CODE = useSolutionCode('find-all-anagrams-in-string')
+  const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(
     () =>

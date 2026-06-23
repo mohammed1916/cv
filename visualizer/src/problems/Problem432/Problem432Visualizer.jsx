@@ -8,12 +8,28 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem432Visualizer.css'
 
 const EXAMPLES = getExamples('all-o1-data-structure') || [
   { label: 'Example 1', operations: ['add-2', 'add-3', 'add-5', 'getRandom', 'remove-3'] },
+]
+
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'class RandomizedSet:' },
+  { line: 2, text: '    def __init__(self):' },
+  { line: 3, text: '        self.map = {}' },
+  { line: 4, text: '        self.list = []' },
+  { line: 5, text: '    def add(self, val):' },
+  { line: 6, text: '        if val in self.map: return False' },
+  { line: 7, text: '        self.map[val] = len(self.list)' },
+  { line: 8, text: '        self.list.append(val)' },
+  { line: 9, text: '        return True' },
+  { line: 10, text: '    def remove(self, val):' },
+  { line: 11, text: '        if val not in self.map: return False' },
+  { line: 12, text: '        last = self.list[-1]' },
+  { line: 13, text: '        self.list[self.map[val]] = last' },
+  { line: 14, text: '        del self.map[val]' },
 ]
 
 function generateSteps(operations) {
@@ -190,7 +206,7 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem432Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0])
-  const SOLUTION_CODE = useSolutionCode('all-o1-data-structure')
+  const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(
     () => generateSteps(ex.operations).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),

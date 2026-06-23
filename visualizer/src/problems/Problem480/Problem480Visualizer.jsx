@@ -8,12 +8,26 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem480Visualizer.css'
 
 const EXAMPLES = getExamples('sliding-window-median') || [
   { label: 'Example 1', nums: [1, 3, -1, -3, 5, 3, 6, 7], k: 3 },
+]
+
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def medianSlidingWindow(nums, k):' },
+  { line: 2, text: '    result = []' },
+  { line: 3, text: '    window = []' },
+  { line: 4, text: '    for i in range(len(nums)):' },
+  { line: 5, text: '        if window and i >= k: window.remove(nums[i-k])' },
+  { line: 6, text: '        bisect.insort(window, nums[i])' },
+  { line: 7, text: '        if i >= k - 1:' },
+  { line: 8, text: '            if k % 2 == 1:' },
+  { line: 9, text: '                result.append(window[k//2])' },
+  { line: 10, text: '            else:' },
+  { line: 11, text: '                result.append((window[k//2-1] + window[k//2]) / 2)' },
+  { line: 12, text: '    return result' },
 ]
 
 function generateSteps(nums, k) {
@@ -158,7 +172,7 @@ function VisualizationPanel({ nums, k, step, applyEx }) {
 
 export default function Problem480Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { nums: [1, 3, -1, -3, 5, 3, 6, 7], k: 3 })
-  const SOLUTION_CODE = useSolutionCode('sliding-window-median')
+  const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(() => generateSteps(ex.nums, ex.k).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })), [ex])
 

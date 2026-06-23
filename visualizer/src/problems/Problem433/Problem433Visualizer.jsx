@@ -8,12 +8,28 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem433Visualizer.css'
 
 const EXAMPLES = getExamples('minimum-genetic-mutation') || [
   { label: 'Example 1', start: 'AACCCCCC', end: 'AACCCCTA', bank: ['AACCCCTA'] },
+]
+
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def minMutation(start, end, bank):' },
+  { line: 2, text: '    if not bank: return -1' },
+  { line: 3, text: '    if start == end: return 0' },
+  { line: 4, text: '    bank_set = set(bank)' },
+  { line: 5, text: '    queue = deque([(start, 0)])' },
+  { line: 6, text: '    visited = {start}' },
+  { line: 7, text: '    while queue:' },
+  { line: 8, text: '        gene, steps = queue.popleft()' },
+  { line: 9, text: '        for next_gene in get_neighbors(gene, bank_set):' },
+  { line: 10, text: '            if next_gene == end: return steps + 1' },
+  { line: 11, text: '            if next_gene not in visited:' },
+  { line: 12, text: '                visited.add(next_gene)' },
+  { line: 13, text: '                queue.append((next_gene, steps + 1))' },
+  { line: 14, text: '    return -1' },
 ]
 
 function generateSteps(start, end, bank) {
@@ -209,7 +225,7 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem433Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0])
-  const SOLUTION_CODE = useSolutionCode('minimum-genetic-mutation')
+  const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(
     () => generateSteps(ex.start, ex.end, ex.bank).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),
