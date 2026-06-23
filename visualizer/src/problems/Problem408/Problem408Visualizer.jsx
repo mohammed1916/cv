@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import './Problem408Visualizer.css'
 
 const EXAMPLES = [
@@ -320,7 +319,6 @@ function AbbreviationVisualization({ word, abbr, step }) {
 export default function Problem408Visualizer() {
   const [exIdx, setExIdx] = useState(0)
   const example = EXAMPLES[exIdx]
-  const SOLUTION_CODE = useSolutionCode('valid-word-abbreviation')
 
   const steps = useMemo(
     () =>

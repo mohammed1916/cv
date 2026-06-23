@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem439Visualizer.css'
 
@@ -294,7 +293,6 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem439Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { expression: 't?1:0', label: 'Simple' })
-  const SOLUTION_CODE = useSolutionCode('ternary-expression-parser')
 
   const steps = useMemo(
     () =>

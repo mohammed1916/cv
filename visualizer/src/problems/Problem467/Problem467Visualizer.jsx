@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem467Visualizer.css'
 
@@ -224,7 +223,6 @@ function VisualizationPanel({ s, step, applyEx }) {
 
 export default function Problem467Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { s: 'zaab' })
-  const SOLUTION_CODE = useSolutionCode('unique-substrings-in-wraparound-string')
 
   const steps = useMemo(
     () =>

@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem372Visualizer.css'
 
@@ -341,7 +340,6 @@ function VisualizationPanel({ base, exponents, step, applyEx }) {
 
 export default function Problem372Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { base: 2, exponents: [3] })
-  const SOLUTION_CODE = useSolutionCode('super-power')
 
   const steps = useMemo(
     () =>

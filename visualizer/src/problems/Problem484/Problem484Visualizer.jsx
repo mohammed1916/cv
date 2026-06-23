@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem484Visualizer.css'
 
@@ -86,7 +85,6 @@ function VisualizationPanel({ s, step, applyEx }) {
 
 export default function Problem484Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { s: 'DID' })
-  const SOLUTION_CODE = useSolutionCode('find-permutation')
 
   const steps = useMemo(() => generateSteps(ex.s).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })), [ex])
 

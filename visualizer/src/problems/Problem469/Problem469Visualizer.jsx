@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem469Visualizer.css'
 
@@ -214,7 +213,6 @@ function VisualizationPanel({ points, step, applyEx }) {
 
 export default function Problem469Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { points: [[0,0],[0,1],[1,1],[1,0]] })
-  const SOLUTION_CODE = useSolutionCode('convex-polygon')
 
   const steps = useMemo(
     () =>

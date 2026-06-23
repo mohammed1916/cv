@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import './Problem404Visualizer.css'
 
 const EXAMPLES = [
@@ -236,7 +235,6 @@ function TreeVisualization({ tree, step }) {
 export default function Problem404Visualizer() {
   const [exIdx, setExIdx] = useState(0)
   const example = EXAMPLES[exIdx]
-  const SOLUTION_CODE = useSolutionCode('sum-of-left-leaves')
 
   const steps = useMemo(
     () =>

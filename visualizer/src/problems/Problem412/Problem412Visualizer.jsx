@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import './Problem412Visualizer.css'
 
 const EXAMPLES = [
@@ -294,7 +293,6 @@ function FizzBuzzVisualization({ n, step }) {
 export default function Problem412Visualizer() {
   const [exIdx, setExIdx] = useState(0)
   const example = EXAMPLES[exIdx]
-  const SOLUTION_CODE = useSolutionCode('fizz-buzz')
 
   const steps = useMemo(
     () =>

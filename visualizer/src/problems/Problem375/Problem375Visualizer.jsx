@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem375Visualizer.css'
 
@@ -424,7 +423,6 @@ function VisualizationPanel({ nums, step, applyEx }) {
 
 export default function Problem375Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { nums: [5, 7, 4, 3, 1] })
-  const SOLUTION_CODE = useSolutionCode('wiggle-sort-ii')
 
   const steps = useMemo(
     () =>

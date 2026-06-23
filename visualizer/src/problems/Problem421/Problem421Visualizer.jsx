@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import './Problem421Visualizer.css'
 
 const EXAMPLES = [
@@ -244,7 +243,6 @@ function MaxXORVisualization({ nums, step }) {
 export default function Problem421Visualizer() {
   const [exIdx, setExIdx] = useState(0)
   const example = EXAMPLES[exIdx]
-  const SOLUTION_CODE = useSolutionCode('maximum-xor-of-two-numbers')
 
   const steps = useMemo(
     () =>

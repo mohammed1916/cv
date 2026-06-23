@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem440Visualizer.css'
 
@@ -330,7 +329,6 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem440Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { n: 13, k: 2, label: 'n=13, k=2' })
-  const SOLUTION_CODE = useSolutionCode('kth-smallest-lexicographical-order')
 
   const steps = useMemo(
     () =>

@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem443Visualizer.css'
 
@@ -318,7 +317,6 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem443Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { chars: ['a', 'a', 'b', 'b', 'c', 'c', 'c'], label: 'Example 1' })
-  const SOLUTION_CODE = useSolutionCode('string-compression')
 
   const steps = useMemo(
     () =>

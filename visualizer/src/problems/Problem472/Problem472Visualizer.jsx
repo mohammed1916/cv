@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem472Visualizer.css'
 
@@ -177,7 +176,6 @@ function VisualizationPanel({ words, step, applyEx }) {
 
 export default function Problem472Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { words: ['cat','cats','catsdogcats','dog','catscat','rat','catsdog'] })
-  const SOLUTION_CODE = useSolutionCode('concatenated-words')
 
   const steps = useMemo(
     () =>

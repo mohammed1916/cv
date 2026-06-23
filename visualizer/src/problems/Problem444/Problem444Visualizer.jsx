@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem444Visualizer.css'
 
@@ -389,7 +388,6 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem444Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { org: [1, 2, 3], seqs: [[1, 2], [1, 3]], label: 'Example 1' })
-  const SOLUTION_CODE = useSolutionCode('sequence-reconstruction')
 
   const steps = useMemo(
     () =>

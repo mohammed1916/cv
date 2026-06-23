@@ -8,12 +8,34 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem424Visualizer.css'
 
 const EXAMPLES = getExamples('verbal-arithmetic-puzzle') || [
   { label: 'Example 1', equation: 'SEND+MORE=MONEY' },
+]
+
+const SOLUTION_CODE_INLINE = [
+  { line: 1, text: 'def isValidWordSquare(equation):' },
+  { line: 2, text: '    [left, right] = equation.split("=")' },
+  { line: 3, text: '    addends = left.split("+")' },
+  { line: 4, text: '    result = right' },
+  { line: 5, text: '    chars = set(c for c in equation if c.isalpha())' },
+  { line: 6, text: '    letters = sorted(chars)' },
+  { line: 7, text: '    first_letters = {w[0] for w in addends if len(w)>1}' },
+  { line: 8, text: '    if len(result) > 1: first_letters.add(result[0])' },
+  { line: 9, text: '    mapping = {}' },
+  { line: 10, text: '    used = set()' },
+  { line: 11, text: '    def backtrack(idx):' },
+  { line: 12, text: '        if idx == len(letters): return is_valid(mapping, addends, result)' },
+  { line: 13, text: '        letter = letters[idx]' },
+  { line: 14, text: '        start = 1 if letter in first_letters else 0' },
+  { line: 15, text: '        for digit in range(start, 10):' },
+  { line: 16, text: '            if digit in used: continue' },
+  { line: 17, text: '            mapping[letter] = digit' },
+  { line: 18, text: '            used.add(digit)' },
+  { line: 19, text: '            if backtrack(idx + 1): return True' },
+  { line: 20, text: '            del mapping[letter]; used.remove(digit)' },
 ]
 
 function generateSteps(equation) {
@@ -149,7 +171,7 @@ function VisualizationPanel({ step }) {
 
 export default function Problem424Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0])
-  const SOLUTION_CODE = useSolutionCode('verbal-arithmetic-puzzle')
+  const SOLUTION_CODE = SOLUTION_CODE_INLINE
   const steps = useMemo(
     () => generateSteps(ex.equation).map((c) => ({
       ...c,

@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem429Visualizer.css'
 
@@ -186,7 +185,6 @@ function VisualizationPanel({ root, step }) {
 
 export default function Problem429Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0])
-  const SOLUTION_CODE = useSolutionCode('nary-tree-level-order')
   const root = useMemo(() => buildTree(ex.root), [ex])
   const steps = useMemo(
     () => generateSteps(root).map((c) => ({

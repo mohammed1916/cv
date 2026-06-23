@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem483Visualizer.css'
 
@@ -78,7 +77,6 @@ function VisualizationPanel({ n, step, applyEx }) {
 
 export default function Problem483Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { n: '13' })
-  const SOLUTION_CODE = useSolutionCode('smallest-good-base')
 
   const steps = useMemo(() => generateSteps(parseInt(ex.n)).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })), [ex])
 

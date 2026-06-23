@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import './Problem434Visualizer.css'
 
 const EXAMPLES = [
@@ -397,7 +396,6 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem434Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0])
-  const SOLUTION_CODE = useSolutionCode('number-of-islands-ii')
 
   const steps = useMemo(
     () =>

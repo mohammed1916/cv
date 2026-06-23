@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem466Visualizer.css'
 
@@ -239,7 +238,6 @@ function VisualizationPanel({ s1, s2, step, applyEx }) {
 
 export default function Problem466Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { s1: 'acb', s2: 'cab' })
-  const SOLUTION_CODE = useSolutionCode('count-the-repetitions')
 
   const steps = useMemo(
     () =>

@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem369Visualizer.css'
 
@@ -162,7 +161,6 @@ function VisualizationPanel({ step }) {
 
 export default function Problem369Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0])
-  const SOLUTION_CODE = useSolutionCode('plus-one-linked-list')
   const head = useMemo(() => buildList(ex.values), [ex])
   const steps = useMemo(
     () => generateSteps(head).map((c) => ({

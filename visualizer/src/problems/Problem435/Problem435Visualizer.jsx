@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem435Visualizer.css'
 
@@ -261,7 +260,6 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem435Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { intervals: [[1, 2], [2, 3], [3, 4]], label: 'Simple' })
-  const SOLUTION_CODE = useSolutionCode('non-overlapping-intervals')
 
   const steps = useMemo(
     () =>

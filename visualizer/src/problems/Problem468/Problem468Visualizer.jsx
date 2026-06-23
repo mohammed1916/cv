@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem468Visualizer.css'
 
@@ -227,7 +226,6 @@ function VisualizationPanel({ ip, step, applyEx }) {
 
 export default function Problem468Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { ip: '172.16.254.1' })
-  const SOLUTION_CODE = useSolutionCode('validate-ip-address')
 
   const steps = useMemo(
     () =>

@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem373Visualizer.css'
 
@@ -327,7 +326,6 @@ function VisualizationPanel({ matrix, target, step, applyEx, examples }) {
 
 export default function Problem373Visualizer() {
   const [exIndex, setExIndex] = useState(0)
-  const SOLUTION_CODE_HOOK = useSolutionCode('search-a-2d-matrix-ii')
   const codeLines = SOLUTION_CODE_HOOK && SOLUTION_CODE_HOOK.length > 0 ? SOLUTION_CODE_HOOK : SOLUTION_CODE
 
   const examples = EXAMPLES && EXAMPLES.length > 0 ? EXAMPLES : [

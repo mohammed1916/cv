@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem499Visualizer.css'
 
@@ -221,7 +220,6 @@ function VisualizationPanel({ step }) {
 
 export default function Problem499Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0])
-  const SOLUTION_CODE = useSolutionCode('the-maze-iii')
   const steps = useMemo(
     () => generateSteps(ex.maze, ex.ball, ex.hole).map((c) => ({
       ...c,

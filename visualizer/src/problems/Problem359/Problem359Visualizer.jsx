@@ -9,7 +9,6 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem359.css'
 
@@ -663,7 +662,6 @@ export default function Problem359Visualizer() {
     onStepJump: setStepIndex,
   })
 
-  const SOLUTION_CODE_WITH_CONNECTIVITY = useSolutionCode('logger-rate-limiter') || SOLUTION_CODE
 
   const dockPanels = useMemo(() => [
     {

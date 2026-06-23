@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import './Problem418Visualizer.css'
 
 const EXAMPLES = [
@@ -269,7 +268,6 @@ function ScreenFittingVisualization({ sentence, rows, cols, step }) {
 export default function Problem418Visualizer() {
   const [exIdx, setExIdx] = useState(0)
   const example = EXAMPLES[exIdx]
-  const SOLUTION_CODE = useSolutionCode('sentence-screen-fitting')
 
   const steps = useMemo(
     () =>

@@ -9,7 +9,6 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem358.css'
 
@@ -600,7 +599,6 @@ export default function Problem358Visualizer() {
     onStepJump: setStepIndex,
   })
 
-  const SOLUTION_CODE_WITH_CONNECTIVITY = useSolutionCode('rearrange-string-k-distance-apart') || SOLUTION_CODE
 
   const handleExampleClick = useCallback((ex) => {
     setSInput(ex.s)

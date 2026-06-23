@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import './Problem363.css'
 
 const SOLUTION_CODE = [
@@ -200,7 +199,6 @@ const EXAMPLES = [
 
 export default function Problem363Visualizer() {
   const [exIdx, setExIdx] = useState(0)
-  const SOLUTION_CODE_HOOK = useSolutionCode('max-sum-of-rectangle-no-larger-than-k')
 
   const ex = EXAMPLES[exIdx]
   const steps = useMemo(() => generateSteps(ex.matrix, ex.K), [ex])

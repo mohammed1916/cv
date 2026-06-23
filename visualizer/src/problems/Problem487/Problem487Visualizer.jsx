@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem487Visualizer.css'
 
@@ -190,7 +189,6 @@ function VisualizationPanel({ nums, step, applyEx, k }) {
 export default function Problem487Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0])
   const k = ex.k || 1
-  const SOLUTION_CODE = useSolutionCode('max-consecutive-ones-iii')
 
   const steps = useMemo(
     () =>

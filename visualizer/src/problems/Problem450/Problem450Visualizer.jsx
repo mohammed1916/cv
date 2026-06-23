@@ -9,7 +9,6 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 
 const SOLUTION_CODE = [
@@ -407,7 +406,6 @@ export default function Problem450Visualizer() {
     onStepJump: setStepIndex,
   })
 
-  const SOLUTION_CODE_WITH_CONNECTIVITY = useSolutionCode('delete-node-in-a-bst') || SOLUTION_CODE
 
   const handleExampleClick = useCallback((ex) => {
     setTreeInput(ex.tree.join(','))

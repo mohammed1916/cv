@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import './Problem417Visualizer.css'
 
 const EXAMPLES = [
@@ -233,7 +232,6 @@ function PacificAtlanticVisualization({ heights, step }) {
 export default function Problem417Visualizer() {
   const [exIdx, setExIdx] = useState(0)
   const example = EXAMPLES[exIdx]
-  const SOLUTION_CODE = useSolutionCode('pacific-atlantic-water-flow')
 
   const steps = useMemo(
     () =>

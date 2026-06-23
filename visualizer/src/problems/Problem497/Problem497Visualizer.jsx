@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem497Visualizer.css'
 
@@ -198,7 +197,6 @@ function VisualizationPanel({ step }) {
 
 export default function Problem497Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0])
-  const SOLUTION_CODE = useSolutionCode('random-point-in-non-overlapping-rectangles')
   const steps = useMemo(
     () => generateSteps(ex.rects).map((c) => ({
       ...c,

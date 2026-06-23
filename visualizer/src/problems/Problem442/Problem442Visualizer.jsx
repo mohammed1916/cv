@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem442Visualizer.css'
 
@@ -281,7 +280,6 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem442Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { nums: [4, 3, 2, 7, 8, 2, 3, 1], label: 'Example 1' })
-  const SOLUTION_CODE = useSolutionCode('find-all-duplicates-in-array')
 
   const steps = useMemo(
     () =>

@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem352Visualizer.css'
 
@@ -331,7 +330,6 @@ const EXAMPLES = getExamples('design-snake-game') || [
 
 export default function DesignSnakeGameVisualizer() {
   const [movementsInput, setMovementsInput] = useState('RRDDR')
-  const solutionCode = useSolutionCode('design-snake-game')
 
   const { movements, inputError } = useMemo(() => {
     const trimmed = movementsInput.trim().toUpperCase()

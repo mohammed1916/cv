@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem437Visualizer.css'
 
@@ -300,7 +299,6 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem437Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { tree: [10, 5, -3, 3, 2, null, 11, 3, -2, null, 1], target: 8, label: 'Example 1' })
-  const SOLUTION_CODE = useSolutionCode('path-sum-iii')
 
   const steps = useMemo(
     () =>

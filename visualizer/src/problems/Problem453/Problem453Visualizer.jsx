@@ -9,7 +9,6 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 
 const SOLUTION_CODE = [
@@ -342,7 +341,6 @@ export default function Problem453Visualizer() {
     onStepJump: setStepIndex,
   })
 
-  const SOLUTION_CODE_WITH_CONNECTIVITY = useSolutionCode('minimum-moves-to-equal-array-elements') || SOLUTION_CODE
 
   const handleExampleClick = useCallback((ex) => {
     setNumsInput(ex.nums.join(','))

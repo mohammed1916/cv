@@ -8,7 +8,6 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useSolutionCode } from '../../hooks/useSolutionCode'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem441Visualizer.css'
 
@@ -295,7 +294,6 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem441Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0] || { n: 5, label: 'n=5' })
-  const SOLUTION_CODE = useSolutionCode('arranging-coins')
 
   const steps = useMemo(
     () =>
