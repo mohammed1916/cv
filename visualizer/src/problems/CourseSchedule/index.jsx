@@ -1,10 +1,10 @@
 export const meta = {
-  number: "207",
-  title: "Course Schedule",
-  slug: "course-schedule",
-  difficulty: "Medium",
-  tags: ["DFS", "BFS", "Graph", "Topological Sort"],
-  description: "Build indegrees, process the zero-indegree queue, and detect cycles with topological sort.",
-  accent: "#f97316",
+  number: '207',
+  title: 'Course Schedule',
+  slug: 'course-schedule',
+  difficulty: 'Medium',
+  tags: ['Graph', 'Topological Sort', 'DFS'],
+  description: 'Detect cycle in a directed graph (course prerequisites).',
+  accent: '#8b5cf6',
 };
-export { default } from "./CourseScheduleVisualizer";
+export { default } from './CourseScheduleVisualizer';
