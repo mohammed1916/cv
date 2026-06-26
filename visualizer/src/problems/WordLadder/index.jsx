@@ -1,10 +1,10 @@
 export const meta = {
-  number: "127",
-  title: "Word Ladder",
-  slug: "word-ladder",
-  difficulty: "Hard",
-  tags: ["Hash Table", "String", "BFS"],
-  description: "BFS where each word transforms one letter at a time; level count is the shortest path length.",
-  accent: "#ef4444",
+  number: '210',
+  title: 'Word Ladder II',
+  slug: 'word-ladder-ii',
+  difficulty: 'Hard',
+  tags: ['Graph', 'BFS', 'Backtracking'],
+  description: 'Find all shortest transformation paths from beginWord to endWord.',
+  accent: '#8b5cf6',
 };
-export { default } from "./WordLadderVisualizer";
+export { default } from './WordLadderIIVisualizer';
