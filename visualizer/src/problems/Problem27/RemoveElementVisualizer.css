@@ -1,0 +1,28 @@
+.removeel-shell { display: flex; flex-direction: column; height: 100%; background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%); position: relative; }
+.removeel-top-split { flex: 1; min-height: 0; padding: 12px; gap: 12px; display: flex; }
+.removeel-panel { display: flex; flex-direction: column; background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(249, 115, 22, 0.1); overflow: hidden; }
+.removeel-panel-head { padding: 12px 16px; background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); color: white; font-weight: 600; font-size: 14px; border-bottom: 2px solid #c2410c; }
+.removeel-panel-body { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 16px; }
+.removeel-example-btn { padding: 6px 12px; background: #f97316; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 500; transition: all 0.2s; }
+.removeel-example-btn:hover { background: #ea580c; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3); }
+.removeel-input { padding: 8px 12px; border: 2px solid #fed7aa; border-radius: 6px; font-family: monospace; font-size: 14px; transition: all 0.2s; }
+.removeel-input:focus { outline: none; border-color: #f97316; box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1); }
+.removeel-array-container { display: flex; gap: 8px; flex-wrap: wrap; padding: 12px; background: #fafaf9; border-radius: 8px; border-left: 4px solid #f97316; min-height: 80px; }
+.removeel-cell-wrapper { position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.removeel-index { font-size: 11px; color: #94a3b8; font-weight: 600; }
+.removeel-cell { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; background: white; border: 2px solid #fed7aa; border-radius: 8px; font-family: monospace; font-weight: 600; font-size: 16px; color: #1e293b; cursor: default; transition: all 0.2s; }
+.removeel-cell.active { background: #f97316; color: white; border-color: #f97316; box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4); }
+.removeel-cell.target { border-color: #fbbf24; }
+.removeel-cell.moving { transform: scale(1.1); box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3); }
+.removeel-cell.removed { opacity: 0.3; text-decoration: line-through; }
+.removeel-markers { display: flex; gap: 12px; padding: 12px; background: #fef3c7; border-radius: 8px; }
+.removeel-marker { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+.marker-label { font-size: 12px; color: #92400e; font-weight: 600; }
+.marker-value { font-size: 18px; font-weight: 700; color: #f97316; font-family: monospace; }
+.removeel-narrative { padding: 12px; background: #fff7ed; border-left: 4px solid #f97316; border-radius: 6px; font-size: 14px; color: #7c2d12; line-height: 1.5; font-weight: 500; }
+.removeel-stats { display: flex; flex-direction: column; gap: 12px; }
+.removeel-stat { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: #f9fafb; border-left: 4px solid #f97316; border-radius: 6px; }
+.stat-label { font-size: 13px; font-weight: 600; color: #475569; }
+.stat-value { font-family: monospace; font-size: 16px; font-weight: 700; color: #1e293b; }
+.removeel-status { padding: 12px 16px; background: #f1f5f9; border-top: 2px solid #fed7aa; font-size: 13px; color: #475569; font-weight: 500; }
+.removeel-dock { padding: 12px 16px; background: white; border-top: 2px solid #fed7aa; display: flex; justify-content: center; }
