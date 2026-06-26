@@ -1,0 +1,146 @@
+.patching-array-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 16px;
+  overflow: hidden;
+}
+
+.patching-array-top {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  gap: 16px;
+}
+
+.patching-array-middle {
+  display: flex;
+  height: 240px;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.patching-array-bottom {
+  height: 80px;
+  flex-shrink: 0;
+}
+
+.patching-array-panel {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  flex: 1;
+}
+
+.patching-array-panel-head {
+  padding: 12px 16px;
+  background: var(--surface-3);
+  border-bottom: 1px solid var(--border);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.patching-array-panel-body {
+  padding: 16px;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.patching-array-textarea {
+  font-family: monospace;
+  font-size: 12px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-1);
+  color: var(--text-main);
+  resize: none;
+  flex: 1;
+}
+
+.patching-array-viz {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.patching-array-step-info {
+  padding: 16px;
+  background: linear-gradient(135deg, #14b8a620, #14b8a610);
+  border-left: 4px solid #14b8a6;
+  border-radius: 8px;
+  color: var(--text-main);
+}
+
+.patching-array-step-info h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.patching-array-example-btn {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface-1);
+  color: var(--text-main);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.patching-array-example-btn:hover {
+  background: #14b8a620;
+  border-color: #14b8a6;
+  color: #14b8a6;
+}
+
+.patching-array-example-btn.active {
+  background: #14b8a6;
+  border-color: #14b8a6;
+  color: white;
+}
+
+.patching-array-examples {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.patching-array-error {
+  padding: 16px;
+  background: #ef444420;
+  border: 1px solid #ef4444;
+  border-radius: 8px;
+  color: #ef4444;
+  font-size: 12px;
+  font-family: monospace;
+}
+
+.patching-array-panel-input {
+  flex: 0.35;
+}
+
+.patching-array-panel-viz {
+  flex: 0.65;
+}
+
+@media (max-width: 1024px) {
+  .patching-array-middle {
+    height: 200px;
+  }
+}
