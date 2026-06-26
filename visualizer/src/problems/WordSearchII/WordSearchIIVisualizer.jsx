@@ -1,194 +1,311 @@
-import { useState, useMemo, useCallback } from "react";
-import { motion } from "framer-motion";
-import CodeTracePanel from "../../components/CodeTracePanel";
-import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
-import { usePlaybackState } from "../../hooks/usePlaybackState";
-import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
-import "./WordSearchIIVisualizer.css";
+﻿import { useState, useMemo } from "react"
+import { motion } from "framer-motion"
+import DockableWorkspace from "../../components/shared/DockableWorkspace"
+import FloatingPanel from "../../components/shared/FloatingPanel"
+import CodeTracePanel from "../../components/CodeTracePanel"
+import PlaybackControls from "../../components/PlaybackControls"
+import PatternOverlay from "../../components/PatternOverlay"
+import { usePlaybackState } from "../../hooks/usePlaybackState"
+import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
+import { usePatternOverlay } from "../../hooks/usePatternOverlay"
+import "./WordSearchIIVisualizer.css"
 
 const SOLUTION_CODE = [
-    { line: 1, text: "def findWords(board, words):" },
-    { line: 2, text: "    trie = build_trie(words)" },
-    { line: 3, text: "    result = set()" },
-    { line: 4, text: "    def dfs(node, r, c, path):" },
-    { line: 5, text: "        ch = board[r][c]" },
-    { line: 6, text: "        if ch not in node: return" },
-    { line: 7, text: "        node = node[ch]" },
-    { line: 8, text: "        if '$' in node: result.add(path+ch)" },
-    { line: 9, text: "        board[r][c] = '#'  # visited" },
-    { line: 10, text: "        for dr,dc in DIRS:" },
-    { line: 11, text: "            if in_bounds(r+dr,c+dc) and board[r+dr][c+dc]!='#':" },
-    { line: 12, text: "                dfs(node, r+dr, c+dc, path+ch)" },
-    { line: 13, text: "        board[r][c] = ch  # restore" },
-    { line: 14, text: "    for r,c in all_cells: dfs(root, r, c, '')" },
-];
-
-const EXAMPLES = getExamples('word-search-ii');
+  { line: 1, text: "def findWords(board, words):" },
+  { line: 2, text: "    trie = build_trie(words)" },
+  { line: 3, text: "    result = []" },
+  { line: 4, text: "    for i in range(len(board)):" },
+  { line: 5, text: "        for j in range(len(board[0])):" },
+  { line: 6, text: "            dfs(board, i, j, trie, result)" },
+  { line: 7, text: "    return result" },
+  { line: 8, text: "def dfs(board, i, j, node, result):" },
+  { line: 9, text: "    char = board[i][j]" },
+  { line: 10, text: "    if char not in node.children: return" },
+  { line: 11, text: "    child = node.children[char]" },
+  { line: 12, text: "    if child.word:" },
+  { line: 13, text: "        result.append(child.word)" },
+  { line: 14, text: "        child.word = None" },
+  { line: 15, text: "    board[i][j] = '#'" },
+  { line: 16, text: "    for di, dj in [(0,1),(1,0),(0,-1),(-1,0)]:" },
+  { line: 17, text: "        ni, nj = i + di, j + dj" },
+  { line: 18, text: "        if 0 <= ni < len(board) and 0 <= nj < len(board[0]):" },
+  { line: 19, text: "            if board[ni][nj] != '#':" },
+  { line: 20, text: "                dfs(board, ni, nj, child, result)" },
+  { line: 21, text: "    board[i][j] = char" },
+]
 
 function buildTrie(words) {
-    const root = {};
-    for (const w of words) {
-        let node = root;
-        for (const ch of w) { node[ch] = node[ch] || {}; node = node[ch]; }
-        node["$"] = true;
+  const root = { children: {}, word: null }
+  for (const word of words) {
+    let node = root
+    for (const char of word) {
+      if (!node.children[char]) node.children[char] = { children: {}, word: null }
+      node = node.children[char]
     }
-    return root;
+    node.word = word
+  }
+  return root
 }
 
 function generateSteps(board, words) {
-    const rows = board.length, cols = board[0].length;
-    const steps = [];
-    const result = new Set();
-    const grid = board.map(r => [...r]);
-    const trie = buildTrie(words);
-    const DIRS = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+  const steps = []
+  const boardStr = board.map((r) => r.join("")).join("\n")
+  steps.push({
+    activeLine: 1,
+    board,
+    words,
+    message: `Search for words in ${board.length}x${board[0].length} grid`,
+    relatedLines: [1],
+  })
 
-    steps.push({ activeLine: 2, grid, path: "", r: -1, c: -1, found: [...result], phase: "init", message: `Built trie for [${words.join(", ")}]` });
+  const trie = buildTrie(words)
+  steps.push({
+    activeLine: 2,
+    board,
+    message: `Built trie from ${words.length} words`,
+    relatedLines: [2],
+  })
 
-    function dfs(node, r, c, path) {
-        const ch = grid[r][c];
-        if (!node[ch]) return;
-        node = node[ch];
-        const newPath = path + ch;
-        const isWord = "$" in node;
-        steps.push({
-            activeLine: isWord ? 8 : 7,
-            grid, path: newPath, r, c, found: [...result],
-            phase: isWord ? "found-word" : "visit",
-            message: isWord ? `Found word "${newPath}"!` : `Visit [${r},${c}]='${ch}', path="${newPath}"`,
-        });
-        if (isWord) result.add(newPath);
-        grid[r][c] = "#";
-        for (const [dr, dc] of DIRS) {
-            const nr = r + dr, nc = c + dc;
-            if (nr >= 0 && nr < rows && nc >= 0 && nc < cols && grid[nr][nc] !== "#") {
-                dfs(node, nr, nc, newPath);
+  steps.push({
+    activeLine: 4,
+    board,
+    message: "Start DFS from each cell",
+    relatedLines: [4, 5, 6],
+  })
+
+  const result = []
+  const visited = new Set()
+
+  for (let i = 0; i < board.length && result.length < 3; i++) {
+    for (let j = 0; j < board[0].length && result.length < 3; j++) {
+      const char = board[i][j]
+      steps.push({
+        activeLine: 6,
+        i,
+        j,
+        char,
+        board,
+        currentPos: [i, j],
+        message: `Start DFS at (${i},${j}): "${char}"`,
+        relatedLines: [6],
+      })
+
+      function dfs(ii, jj, node, path = "") {
+        if (Object.keys(node.children || {}).length === 0) return
+        const c = board[ii][jj]
+        if (c === "#") return
+
+        if (c in node.children) {
+          const child = node.children[c]
+          const newPath = path + c
+          steps.push({
+            activeLine: 11,
+            i: ii,
+            j: jj,
+            char: c,
+            path: newPath,
+            currentPos: [ii, jj],
+            message: `Found char "${c}": path = "${newPath}"`,
+            relatedLines: [11],
+          })
+
+          if (child.word) {
+            result.push(child.word)
+            steps.push({
+              activeLine: 13,
+              word: child.word,
+              message: `Word found: "${child.word}"`,
+              relatedLines: [13],
+            })
+          }
+
+          board[ii][jj] = "#"
+          const dirs = [
+            [0, 1],
+            [1, 0],
+            [0, -1],
+            [-1, 0],
+          ]
+          for (const [di, dj] of dirs) {
+            const ni = ii + di
+            const nj = jj + dj
+            if (ni >= 0 && ni < board.length && nj >= 0 && nj < board[0].length && board[ni][nj] !== "#") {
+              dfs(ni, nj, child, newPath)
             }
+          }
+          board[ii][jj] = c
         }
-        grid[r][c] = ch;
-        steps.push({
-            activeLine: 13,
-            grid, path: newPath, r, c, found: [...result],
-            phase: "restore",
-            message: `Restore [${r},${c}]='${ch}', backtrack from "${newPath}"`,
-        });
-    }
+      }
 
-    for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-            steps.push({ activeLine: 14, grid, path: "", r, c, found: [...result], phase: "start-cell", message: `Start DFS from [${r},${c}]='${board[r][c]}'` });
-            dfs(trie, r, c, "");
-        }
+      dfs(i, j, trie)
     }
+  }
 
-    steps.push({ activeLine: 3, grid, path: "", r: -1, c: -1, found: [...result], phase: "done", done: true, message: `Found: [${[...result].join(", ")}]` });
-    return steps;
+  steps.push({
+    activeLine: 7,
+    result,
+    done: true,
+    message: `Found ${result.length} words: [${result.slice(0, 3).join(", ")}]`,
+    relatedLines: [7],
+  })
+
+  return steps
 }
 
-const CELL_SIZE = 38;
+function GridDisplay({ board, highlightedCell, currentPath = [] }) {
+  return (
+    <div style={{ display: "inline-block", gap: 2, backgroundColor: "#1e293b", padding: 8, borderRadius: 4 }}>
+      {board.map((row, i) => (
+        <div key={i} style={{ display: "flex", gap: 2, marginBottom: 2 }}>
+          {row.map((cell, j) => (
+            <motion.div
+              key={`${i}-${j}`}
+              style={{
+                width: 32,
+                height: 32,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor:
+                  cell === "#"
+                    ? "#64748b"
+                    : highlightedCell && highlightedCell[0] === i && highlightedCell[1] === j
+                      ? "#fbbf24"
+                      : currentPath.some((p) => p[0] === i && p[1] === j)
+                        ? "#93c5fd"
+                        : "#334155",
+                borderRadius: 4,
+                fontFamily: "monospace",
+                fontWeight: 700,
+                color: cell === "#" ? "#94a3b8" : "#fff",
+                fontSize: 14,
+              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+            >
+              {cell}
+            </motion.div>
+          ))}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function VisualizationPanel({ step }) {
+  if (!step) return <div style={{ padding: 16 }}>Press play</div>
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 16, padding: 16 }}>
+      <div style={{ padding: 12, backgroundColor: "#dbeafe", borderRadius: 6, borderLeft: "4px solid #3b82f6" }}>
+        <div style={{ fontSize: 12, color: "#0c4a6e", fontStyle: "italic" }}>
+          Trie-based backtracking: DFS with adjacent cell exploration.
+        </div>
+      </div>
+
+      {step.board && (
+        <motion.div style={{ padding: 12, backgroundColor: "#f0fdf4", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: "#065f46", marginBottom: 8 }}>
+            Grid
+          </div>
+          <GridDisplay board={step.board} highlightedCell={step.currentPos} />
+        </motion.div>
+      )}
+
+      {step.words && step.words.length > 0 && (
+        <motion.div style={{ padding: 12, backgroundColor: "#f3e8ff", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: "#5b21b6", marginBottom: 6 }}>
+            Words to find
+          </div>
+          <div style={{ fontSize: 11, color: "#5b21b6", fontFamily: "monospace" }}>
+            {step.words.slice(0, 4).join(", ")}
+            {step.words.length > 4 && "..."}
+          </div>
+        </motion.div>
+      )}
+
+      {step.path && (
+        <motion.div style={{ padding: 12, backgroundColor: "#fed7aa", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, color: "#92400e", fontFamily: "monospace" }}>
+            Current path: {step.path}
+          </div>
+        </motion.div>
+      )}
+
+      {step.word && (
+        <motion.div style={{ padding: 12, backgroundColor: "#dcfce7", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: "#065f46" }}>
+            ✓ Found: "{step.word}"
+          </div>
+        </motion.div>
+      )}
+
+      {step.result && (
+        <motion.div style={{ padding: 12, backgroundColor: "#d1fae5", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: "#065f46", marginBottom: 4 }}>
+            Results ({step.result.length})
+          </div>
+          <div style={{ fontSize: 11, color: "#065f46" }}>{step.result.join(", ")}</div>
+        </motion.div>
+      )}
+
+      {step.message && (
+        <motion.div style={{ padding: 12, backgroundColor: "#fef3c7", borderRadius: 6, fontSize: 12, color: "#92400e" }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          {step.message}
+        </motion.div>
+      )}
+    </div>
+  )
+}
 
 export default function WordSearchIIVisualizer() {
-    const [ex, setEx] = useState(EXAMPLES[0]);
-    const steps = useMemo(() => generateSteps(ex.board, ex.words), [ex]);
-    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
-        usePlaybackState(steps.length);
-    const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
-    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
+  const board = useMemo(() => [["o", "a", "a", "n"], ["e", "t", "a", "e"], ["i", "h", "k", "r"], ["i", "f", "l", "v"]], [])
+  const words = useMemo(() => ["oath", "pea", "eat", "rain"], [])
+  const steps = useMemo(() => generateSteps(board, words).map((s) => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [board, words])
+  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
+  const step = stepIndex >= 0 ? steps[stepIndex] : null
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
+  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-    const grid = step?.grid ?? ex.board;
-    const activeR = step?.r ?? -1;
-    const activeC = step?.c ?? -1;
-    const path = step?.path ?? "";
-    const found = step?.found ?? [];
-    const phase = step?.phase ?? "init";
-    const rows = grid.length, cols = grid[0].length;
+  const dockPanels = useMemo(
+    () => [
+      {
+        id: "code",
+        title: "Code",
+        content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />,
+      },
+      {
+        id: "viz",
+        title: "🔤 Grid Search",
+        content: <VisualizationPanel step={step} />,
+      },
+    ],
+    [step, connectivity, setActiveLineDom]
+  )
 
-    return (
-        <div className="ws2-shell">
-            <div className="ws2-examples">
-                {EXAMPLES.map(e => (
-                    <button key={e.label} className={`ws2-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>
-                        {e.label}
-                    </button>
-                ))}
-            </div>
-
-            <div className="ws2-panel">
-                <div className="ws2-panel-label">Words to find</div>
-                <div className="ws2-words">
-                    {ex.words.map((w, i) => (
-                        <span key={i} className={`ws2-word ${found.includes(w) ? "found-word" : ""}`}>{w}</span>
-                    ))}
-                </div>
-            </div>
-
-            <div className="ws2-panel">
-                <div className="ws2-panel-label">Board</div>
-                <div className="ws2-grid" style={{ gridTemplateColumns: `repeat(${cols}, ${CELL_SIZE}px)` }}>
-                    {grid.map((row, r) =>
-                        row.map((ch, c) => {
-                            const isActive = r === activeR && c === activeC;
-                            const isVisited = ch === "#";
-                            return (
-                                <motion.div key={`${r}-${c}`}
-                                    className={`ws2-cell ${isActive ? `active-${phase.split("-")[0]}` : ""} ${isVisited ? "visited" : ""}`}
-                                    animate={{ scale: isActive ? 1.18 : 1 }}
-                                    transition={{ type: "spring", stiffness: 400, damping: 20 }}>
-                                    {isVisited ? "·" : ch}
-                                </motion.div>
-                            );
-                        })
-                    )}
-                </div>
-            </div>
-
-            <div className="ws2-row">
-                <div className="ws2-panel ws2-half">
-                    <div className="ws2-panel-label">Current path</div>
-                    <div className="ws2-path">{path || "—"}</div>
-                </div>
-                <div className="ws2-panel ws2-half">
-                    <div className="ws2-panel-label">Found words</div>
-                    <div className="ws2-found-list">
-                        {found.map((w, i) => <span key={i} className="ws2-found">{w}</span>)}
-                        {found.length === 0 && <span className="ws2-empty">none yet</span>}
-                    </div>
-                </div>
-            </div>
-
-            <div className="ws2-trackers">
-                <div className="ws2-tracker">
-                    <span className="ws2-tracker-label">Cell</span>
-                    <span className="ws2-tracker-val">{activeR < 0 ? "—" : `[${activeR},${activeC}]`}</span>
-                </div>
-                <div className="ws2-tracker">
-                    <span className="ws2-tracker-label">Phase</span>
-                    <span className={`ws2-tracker-val ws2-phase ${phase.split("-")[0]}`}>{phase.replace("-", " ")}</span>
-                </div>
-                <div className="ws2-tracker">
-                    <span className="ws2-tracker-label">Found</span>
-                    <span className="ws2-tracker-val ws2-cnt">{found.length}/{ex.words.length}</span>
-                </div>
-            </div>
-
-            {step?.done && <div className="ws2-result">✓ Found: [{found.join(", ")}]</div>}
-
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-            <div className="ws2-status">{step?.message ?? "Press Play to begin."}</div>
-            <PlaybackControls
-                isPlaying={isPlaying} isDone={isDone} speed={speed}
-                onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-                prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
-                onSpeedChange={e => setSpeed(Number(e.target.value))}
-                showPatternOverlay={showPatternOverlay}
-                onShowPatternOverlayChange={setShowPatternOverlay}
-                patternOverlayLabel="Show pattern overlay"
-                showPatternOverlayToggle
-            />
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
-        </div>
-    );
+  return (
+    <div className="problem-shell">
+      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [["code", "viz"]], minimized: [] }} />
+      <FloatingPanel title="Controls">
+        <PlaybackControls
+          isPlaying={isPlaying}
+          isDone={isDone}
+          speed={speed}
+          onPlayToggle={togglePlay}
+          onPrev={stepBack}
+          onNext={stepForward}
+          onReset={handleReset}
+          prevDisabled={stepIndex < 0}
+          nextDisabled={isDone}
+          resetDisabled={stepIndex < 0}
+          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+          showPatternOverlay={showPatternOverlay}
+          onShowPatternOverlayChange={setShowPatternOverlay}
+          patternOverlayLabel="Pattern"
+          showPatternOverlayToggle
+        />
+      </FloatingPanel>
+      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+    </div>
+  )
 }
