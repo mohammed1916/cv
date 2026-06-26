@@ -1,460 +1,330 @@
-import { useState, useMemo, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import CodeTracePanel from '../../components/CodeTracePanel'
-import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
-import FloatingPanel from '../../components/shared/FloatingPanel'
-import { usePlaybackState } from '../../hooks/usePlaybackState'
-import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useAutoScroll } from '../../hooks/useAutoScroll'
-import { getExamples } from '../../config/examplesRegistry'
-import './ValidParenthesesVisualizer.css'
+﻿import { useState, useMemo } from "react"
+import { motion } from "framer-motion"
+import DockableWorkspace from "../../components/shared/DockableWorkspace"
+import FloatingPanel from "../../components/shared/FloatingPanel"
+import CodeTracePanel from "../../components/CodeTracePanel"
+import PlaybackControls from "../../components/PlaybackControls"
+import PatternOverlay from "../../components/PatternOverlay"
+import { usePlaybackState } from "../../hooks/usePlaybackState"
+import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
+import { usePatternOverlay } from "../../hooks/usePatternOverlay"
+import "./ValidParenthesesVisualizer.css"
 
 const SOLUTION_CODE = [
-  { line: 1, text: 'class Solution:' },
-  { line: 2, text: '    def isValid(self, s: str) -> bool:' },
-  { line: 3, text: '        stack = []' },
-  { line: 4, text: '        closeToOpen = {")": "(", "]": "[", "}": "{"}' },
-  { line: 5, text: '' },
-  { line: 6, text: '        for c in s:' },
-  { line: 7, text: '            if c in closeToOpen:' },
-  { line: 8, text: '                if stack and stack[-1] == closeToOpen[c]:' },
-  { line: 9, text: '                    stack.pop()' },
-  { line: 10, text: '                else:' },
-  { line: 11, text: '                    return False' },
-  { line: 12, text: '            else:' },
-  { line: 13, text: '                stack.append(c)' },
-  { line: 14, text: '' },
-  { line: 15, text: '        return True if not stack else False' },
+  { line: 1, text: "def isValid(s):" },
+  { line: 2, text: "    stack = []" },
+  { line: 3, text: "    mapping = {')': '(', '}': '{', ']': '['}" },
+  { line: 4, text: "    for char in s:" },
+  { line: 5, text: "        if char in mapping:" },
+  { line: 6, text: "            if not stack or stack[-1] != mapping[char]:" },
+  { line: 7, text: "                return False" },
+  { line: 8, text: "            stack.pop()" },
+  { line: 9, text: "        else:" },
+  { line: 10, text: "            stack.append(char)" },
+  { line: 11, text: "    return len(stack) == 0" },
 ]
 
 function generateSteps(s) {
   const steps = []
-
-  if (typeof s !== 'string') {
-    steps.push({
-      phase: 'done',
-      i: null,
-      stack: [],
-      c: null,
-      success: false,
-      activeLine: 15,
-      message: 'Invalid input. Return False.',
-    })
-    return steps
-  }
-
-  const stack = []
-  const closeToOpen = { ')': '(', ']': '[', '}': '{' }
+  const mapping = { ")": "(", "}": "{", "]": "[" }
 
   steps.push({
-    phase: 'init',
-    i: null,
-    stack: [...stack],
-    c: null,
+    activeLine: 1,
+    s,
+    message: "Check if parentheses are valid and balanced",
+    relatedLines: [1],
+  })
+
+  steps.push({
+    activeLine: 2,
+    message: "Initialize empty stack",
+    relatedLines: [2],
+  })
+
+  steps.push({
     activeLine: 3,
-    message: 'Initialize empty stack and closeToOpen mapping.',
+    message: "Define closing-to-opening bracket mapping",
+    relatedLines: [3],
+  })
+
+  const stack = []
+  steps.push({
+    activeLine: 4,
+    message: "Iterate through each character",
+    relatedLines: [4],
   })
 
   for (let i = 0; i < s.length; i++) {
-    const c = s[i]
-
+    const char = s[i]
     steps.push({
-      phase: 'loop',
+      activeLine: 4,
       i,
+      char,
+      s,
       stack: [...stack],
-      c,
-      activeLine: 6,
-      message: `Read character c = '${c}' at index ${i}.`,
+      message: `Index ${i}: char = "${char}"`,
+      relatedLines: [4],
     })
 
-    steps.push({
-      phase: 'check_close',
-      i,
-      stack: [...stack],
-      c,
-      activeLine: 7,
-      message: `Is '${c}' a closing bracket? (in closeToOpen?)`,
-    })
-
-    if (c in closeToOpen) {
-      const match = closeToOpen[c]
-
+    if (char in mapping) {
       steps.push({
-        phase: 'check_stack',
-        i,
-        stack: [...stack],
-        c,
-        activeLine: 8,
-        message: `Yes. Check if stack is non-empty and top of stack == '${match}'.`,
+        activeLine: 5,
+        char,
+        isClosing: true,
+        message: `"${char}" is closing bracket`,
+        relatedLines: [5],
       })
 
-      if (stack.length > 0 && stack[stack.length - 1] === match) {
-        const popped = stack.pop()
+      if (stack.length === 0 || stack[stack.length - 1] !== mapping[char]) {
         steps.push({
-          phase: 'pop',
-          i,
+          activeLine: 6,
+          char,
           stack: [...stack],
-          c,
-          popped,
-          activeLine: 9,
-          message: `Match found! Pop '${popped}' from stack.`,
-        })
-      } else {
-        steps.push({
-          phase: 'fail_mismatch',
-          i,
-          stack: [...stack],
-          c,
-          activeLine: 11,
-          message: `Mismatch or empty stack. Expected '${match}' but got ${stack.length ? "'" + stack[stack.length - 1] + "'" : 'empty stack'}. Return False.`,
+          expected: mapping[char],
+          result: false,
+          done: true,
+          message: `Mismatch or empty: expected "${mapping[char]}"`,
+          relatedLines: [6],
         })
         return steps
       }
-    } else {
-      stack.push(c)
+
+      stack.pop()
       steps.push({
-        phase: 'push',
-        i,
+        activeLine: 8,
+        char,
         stack: [...stack],
-        c,
-        activeLine: 13,
-        message: `No, '${c}' is an opening bracket. Push it onto the stack.`,
+        message: `Pop "${stack[stack.length] || ""}"; matched pair`,
+        relatedLines: [8],
+      })
+    } else {
+      steps.push({
+        activeLine: 9,
+        message: `"${char}" is opening bracket`,
+        relatedLines: [9],
+      })
+
+      stack.push(char)
+      steps.push({
+        activeLine: 10,
+        char,
+        stack: [...stack],
+        message: `Push "${char}" onto stack`,
+        relatedLines: [10],
       })
     }
   }
 
-  const success = stack.length === 0
+  const isValid = stack.length === 0
   steps.push({
-    phase: 'done',
-    i: null,
+    activeLine: 11,
     stack: [...stack],
-    c: null,
-    success,
-    activeLine: 15,
-    message: success
-      ? 'Loop finished and stack is empty. Return True!'
-      : 'Loop finished but stack is NOT empty (unmatched open brackets). Return False.',
+    result: isValid,
+    done: true,
+    message: isValid
+      ? "Stack empty: all brackets matched ✓"
+      : `Stack not empty: ${stack.length} unmatched brackets`,
+    relatedLines: [11],
   })
 
   return steps
 }
 
-const EXAMPLES = getExamples('valid-parentheses')
-
-function InputPanel({ sInput, setSInput, handleReset, applyExample, inputError }) {
+function StackDisplay({ stack }) {
   return (
-    <div className="vp-panel-body">
-      <div className="vp-examples">
-        {EXAMPLES.map((ex) => (
-          <button
-            key={ex.label}
-            className="vp-example-btn"
-            onClick={() => applyExample(ex)}
-          >
-            {ex.label}
-          </button>
-        ))}
-      </div>
-
-      <div className="vp-input-section">
-        <label htmlFor="s-input" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ fontFamily: 'monospace', fontSize: 13, color: '#64748b', minWidth: 40 }}>s =</span>
-          <input
-            id="s-input"
-            value={sInput}
-            onChange={(e) => {
-              setSInput(e.target.value)
-              handleReset()
-            }}
-            placeholder="()[]{}"
-            className="vp-input"
-          />
-        </label>
-        {inputError && (
-          <div style={{ color: '#f87171', fontSize: 12, marginTop: 8 }}>
-            {inputError}
-          </div>
-        )}
-      </div>
-
-      <div className="vp-map-legend">
-        <div className="vp-legend-title">Closing Bracket Mapping</div>
-        <div className="vp-map-pairs">
-          <span className="vp-map-pair">) → (</span>
-          <span className="vp-map-pair">] → [</span>
-          <span className="vp-map-pair">{"} → {"}</span>
+    <div style={{ display: "flex", flexDirection: "column-reverse", gap: 4 }}>
+      {stack.map((char, idx) => (
+        <motion.div
+          key={idx}
+          style={{
+            padding: "8px 12px",
+            borderRadius: 4,
+            backgroundColor: "#dbeafe",
+            border: "2px solid #0c4a6e",
+            fontFamily: "monospace",
+            fontWeight: 700,
+            color: "#0c4a6e",
+            fontSize: 14,
+          }}
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+        >
+          {char}
+        </motion.div>
+      ))}
+      {stack.length === 0 && (
+        <div
+          style={{
+            padding: "8px 12px",
+            borderRadius: 4,
+            backgroundColor: "#e2e8f0",
+            color: "#94a3b8",
+            fontFamily: "monospace",
+            fontWeight: 600,
+            fontSize: 12,
+          }}
+        >
+          empty
         </div>
-      </div>
+      )}
     </div>
   )
 }
 
-function StringVisualizationPanel({ step, s }) {
-  return (
-    <div className="vp-panel-body">
-      <div className="vp-viz-section">
-        <h3 className="vp-section-title">String Characters</h3>
-        <div className="vp-string-container">
-          {s.split('').map((char, idx) => {
-            const isActive = step?.i === idx
-            const isProcessed = (step?.i > idx) || step?.phase === 'done' || step?.phase === 'fail_mismatch'
-            const isMatched = isActive && step?.phase === 'pop'
-            const isMismatch = isActive && step?.phase === 'fail_mismatch'
+function VisualizationPanel({ step }) {
+  if (!step) return <div style={{ padding: 16 }}>Press play</div>
 
-            return (
-              <div key={idx} className="vp-char-wrapper">
-                <div className="vp-char-index">{idx}</div>
-                <motion.div
-                  className={`vp-char-cell ${isActive ? 'active' : ''} ${isProcessed && !isActive ? 'processed' : ''} ${isMatched ? 'matched' : ''} ${isMismatch ? 'mismatch' : ''}`}
-                  animate={isActive ? { y: -6, scale: 1.08 } : { y: 0, scale: 1 }}
-                  transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-                >
-                  {char}
-                </motion.div>
-                <div className="vp-ptr-container">
-                  {isActive && (
-                    <motion.div
-                      className="vp-ptr"
-                      animate={{ y: [0, -4, 0] }}
-                      transition={{ repeat: Infinity, duration: 1 }}
-                    >
-                      ▲
-                    </motion.div>
-                  )}
-                </div>
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 16, padding: 16 }}>
+      <div style={{ padding: 12, backgroundColor: "#dbeafe", borderRadius: 6, borderLeft: "4px solid #3b82f6" }}>
+        <div style={{ fontSize: 12, color: "#0c4a6e", fontStyle: "italic" }}>
+          Stack: push opening, pop on closing, match required.
+        </div>
+      </div>
+
+      {step.s && (
+        <motion.div style={{ padding: 12, backgroundColor: "#f0fdf4", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: "#065f46", marginBottom: 8 }}>
+            String
+          </div>
+          <div style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
+            {step.s.split("").map((c, idx) => (
+              <div
+                key={idx}
+                style={{
+                  padding: "4px 8px",
+                  borderRadius: 3,
+                  backgroundColor: idx === step.i ? "#fbbf24" : "#e2e8f0",
+                  fontFamily: "monospace",
+                  fontWeight: 600,
+                  color: idx === step.i ? "#000" : "#334155",
+                  fontSize: 12,
+                }}
+              >
+                {c}
               </div>
-            )
-          })}
-          {s.length === 0 && (
-            <div className="vp-empty-string">Empty string</div>
-          )}
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function StackVisualizationPanel({ step }) {
-  return (
-    <div className="vp-panel-body">
-      <div className="vp-viz-section">
-        <h3 className="vp-section-title">Stack State</h3>
-        <div className="vp-stack-wrapper">
-          <div className="vp-stack-container">
-            <AnimatePresence mode="popLayout">
-              {step?.stack && step.stack.map((char, idx) => {
-                const isTop = idx === step.stack.length - 1
-                const closeToOpen = { ')': '(', ']': '[', '}': '{' }
-                const isMatching = isTop && step.phase === 'check_stack' && char === closeToOpen[step.c]
-                const isFailing = isTop && step.phase === 'fail_mismatch'
-
-                return (
-                  <motion.div
-                    key={`${idx}-${char}`}
-                    layout
-                    initial={{ opacity: 0, y: -20, scale: 0.8 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.6, x: 30 }}
-                    transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-                    className={`vp-stack-item ${isTop ? 'top' : ''} ${isMatching ? 'matching' : ''} ${isFailing ? 'failing' : ''}`}
-                  >
-                    <span className="vp-stack-value">{char}</span>
-                    {isTop && <span className="vp-stack-top-label">TOP</span>}
-                  </motion.div>
-                )
-              })}
-            </AnimatePresence>
+            ))}
           </div>
-          {(!step?.stack || step.stack.length === 0) && (
-            <div className="vp-empty-stack">Stack is empty</div>
-          )}
-          <div className="vp-stack-base" />
-        </div>
-      </div>
-    </div>
-  )
-}
+        </motion.div>
+      )}
 
-function StatusPanel({ step }) {
-  return (
-    <div className="vp-panel-body">
-      <div className="vp-status-content">
-        <div className="vp-step-info">
-          {step?.message ?? 'Press Play to begin.'}
-        </div>
-        {step?.phase === 'done' && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className={`vp-result-badge ${step?.success ? 'valid' : 'invalid'}`}
+      {step.char !== undefined && (
+        <motion.div
+          style={{
+            padding: 12,
+            backgroundColor: step.isClosing ? "#fecdd3" : "#fed7aa",
+            borderRadius: 6,
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          <div
+            style={{
+              fontSize: 12,
+              color: step.isClosing ? "#7f1d1d" : "#92400e",
+              fontWeight: 600,
+            }}
           >
-            {step?.success ? '✓ VALID' : '✗ INVALID'}
-          </motion.div>
-        )}
-      </div>
+            Current: "{step.char}" {step.isClosing ? "(closing)" : "(opening)"}
+          </div>
+        </motion.div>
+      )}
+
+      {step.stack && (
+        <motion.div style={{ padding: 12, backgroundColor: "#dbeafe", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: "#0c4a6e", marginBottom: 8 }}>
+            Stack (top → bottom)
+          </div>
+          <StackDisplay stack={step.stack} />
+        </motion.div>
+      )}
+
+      {step.expected !== undefined && (
+        <motion.div style={{ padding: 12, backgroundColor: "#fee2e2", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, color: "#7f1d1d" }}>
+            Expected match: "{step.expected}" but got: "{step.stack[step.stack.length - 1] || "empty"}"
+          </div>
+        </motion.div>
+      )}
+
+      {step.result !== undefined && (
+        <motion.div
+          style={{
+            padding: 12,
+            backgroundColor: step.result ? "#dcfce7" : "#fee2e2",
+            borderRadius: 6,
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          <div
+            style={{
+              fontSize: 16,
+              fontWeight: 700,
+              color: step.result ? "#10b981" : "#ef4444",
+            }}
+          >
+            {step.result ? "Valid ✓" : "Invalid ✗"}
+          </div>
+        </motion.div>
+      )}
+
+      {step.message && (
+        <motion.div style={{ padding: 12, backgroundColor: "#fef3c7", borderRadius: 6, fontSize: 12, color: "#92400e" }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          {step.message}
+        </motion.div>
+      )}
     </div>
   )
 }
 
 export default function ValidParenthesesVisualizer() {
-  const [sInput, setSInput] = useState('({[]})')
-  const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
+  const [s] = useState("({[]})")
+  const steps = useMemo(() => generateSteps(s).map((st) => ({ ...st, relatedLines: st.relatedLines ?? [st.activeLine] })), [s])
+  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
+  const step = stepIndex >= 0 ? steps[stepIndex] : null
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  const { s, inputError } = useMemo(() => {
-    return { s: sInput, inputError: '' }
-  }, [sInput])
-
-  const steps = useMemo(() => generateSteps(s), [s])
-
-  const {
-    stepIndex,
-    stepForward,
-    stepBack,
-    togglePlay,
-    handleReset,
-    isPlaying,
-    speed,
-    setSpeed,
-    isDone,
-  } = usePlaybackState(steps.length)
-
-  const step = stepIndex >= 0 ? steps[stepIndex] : null
-
-  const applyExample = useCallback(
-    (ex) => {
-      setSInput(ex.s)
-      handleReset()
-    },
-    [handleReset],
+  const dockPanels = useMemo(
+    () => [
+      {
+        id: "code",
+        title: "Code",
+        content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />,
+      },
+      {
+        id: "viz",
+        title: "🔗 Stack Matching",
+        content: <VisualizationPanel step={step} />,
+      },
+    ],
+    [step, connectivity, setActiveLineDom]
   )
 
-  const dockPanels = useMemo(() => [
-    {
-      id: 'input',
-      title: 'Input & Mapping',
-      subtitle: sInput ? `${sInput.length} character(s)` : 'Enter a string',
-      defaultZone: 'left',
-      content: (
-        <InputPanel
-          sInput={sInput}
-          setSInput={setSInput}
-          handleReset={handleReset}
-          applyExample={applyExample}
-          inputError={inputError}
-        />
-      ),
-    },
-    {
-      id: 'string-viz',
-      title: 'String Visualization',
-      subtitle: step ? `Step ${stepIndex + 1} of ${steps.length}` : 'Press play to start',
-      defaultZone: 'left',
-      content: <StringVisualizationPanel step={step} s={s} />,
-    },
-    {
-      id: 'stack-viz',
-      title: 'Stack State',
-      subtitle: step ? `${step.stack?.length ?? 0} element(s)` : 'Stack visualization',
-      defaultZone: 'right',
-      content: <StackVisualizationPanel step={step} />,
-    },
-    {
-      id: 'code',
-      title: 'Code Trace',
-      subtitle: step ? `Active line ${step.activeLine}` : 'Line-by-line solution view',
-      defaultZone: 'full',
-      content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          autoScroll={autoScrollCode}
-          onActiveLineDomChange={setActiveLineDom}
-        />
-      ),
-    },
-    {
-      id: 'status',
-      title: 'Status',
-      subtitle: step?.phase === 'done' ? (step.success ? 'Valid' : 'Invalid') : 'Current step message',
-      defaultZone: 'right',
-      content: <StatusPanel step={step} />,
-    },
-  ], [sInput, step, stepIndex, steps.length, s, applyExample, inputError, autoScrollCode, setActiveLineDom, handleReset])
-
-  const summaryCards = [
-    { label: 'Algorithm', value: 'Stack-based Matching' },
-    { label: 'Time Complexity', value: 'O(n)' },
-    { label: 'Space Complexity', value: 'O(n)' },
-    { label: 'Input Length', value: s.length || '—' },
-  ]
-
   return (
-    <div className="vp-shell">
-      <section className="vp-hero">
-        <div className="vp-hero-copy">
-          <span className="vp-kicker">Valid Parentheses • LeetCode #20</span>
-          <h2>Determine if Parentheses String is Valid</h2>
-          <p>
-            This visualization shows how a stack-based algorithm efficiently validates whether
-            parentheses, brackets, and braces are properly matched and ordered in a string. Each
-            opening bracket must have a corresponding closing bracket in the correct order.
-          </p>
-        </div>
-
-        <div className="vp-summary-grid">
-          {summaryCards.map((card) => (
-            <div key={card.label} className="vp-summary-card">
-              <span>{card.label}</span>
-              <strong>{card.value}</strong>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <DockableWorkspace
-        title="Valid Parentheses Workspace"
-        panels={dockPanels}
-        initialLayout={{
-          rows: [
-            ['input', 'string-viz', 'stack-viz'],
-            ['code'],
-            ['status'],
-          ],
-          minimized: [],
-        }}
-      />
-
-      <FloatingPanel title="Playback Controls">
+    <div className="problem-shell">
+      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [["code", "viz"]], minimized: [] }} />
+      <FloatingPanel title="Controls">
         <PlaybackControls
-          onReset={handleReset}
-          onPrev={stepBack}
-          onPlayToggle={togglePlay}
-          onNext={stepForward}
-          resetDisabled={steps.length === 0}
-          prevDisabled={stepIndex <= 0}
-          nextDisabled={steps.length === 0 || isDone}
           isPlaying={isPlaying}
           isDone={isDone}
           speed={speed}
+          onPlayToggle={togglePlay}
+          onPrev={stepBack}
+          onNext={stepForward}
+          onReset={handleReset}
+          prevDisabled={stepIndex < 0}
+          nextDisabled={isDone}
+          resetDisabled={stepIndex < 0}
           onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          speedIndicator={`${speed}ms`}
-          autoScroll={autoScrollCode}
-          onAutoScrollChange={setAutoScrollCode}
-          autoScrollLabel="Auto-scroll code"
-          showAutoScroll
           showPatternOverlay={showPatternOverlay}
           onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
+          patternOverlayLabel="Pattern"
           showPatternOverlayToggle
         />
       </FloatingPanel>
-
-      {showPatternOverlay && step && (
-        <PatternOverlay step={step} activeLineDom={activeLineDom} />
-      )}
+      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }
