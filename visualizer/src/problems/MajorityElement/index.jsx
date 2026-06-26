@@ -1,10 +1,10 @@
 export const meta = {
-  number: "169",
-  title: "Majority Element",
-  slug: "majority-element",
-  difficulty: "Easy",
-  tags: ["Array", "Hash Table", "Divide and Conquer", "Sorting", "Counting"],
-  description: "Boyer-Moore voting tracks a candidate and count to find the majority in linear time and O(1) space.",
-  accent: "#a855f7",
+  number: '223',
+  title: 'Majority Element',
+  slug: 'majority-element',
+  difficulty: 'Easy',
+  tags: ['Array', 'Boyer-Moore Voting'],
+  description: 'Find element appearing more than n/2 times.',
+  accent: '#f97316',
 };
-export { default } from "./MajorityElementVisualizer";
+export { default } from './MajorityElementVisualizer';

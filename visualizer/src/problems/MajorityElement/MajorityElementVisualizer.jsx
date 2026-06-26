@@ -1,195 +1,232 @@
-import { useState, useMemo, useCallback } from 'react'
-import { motion } from 'framer-motion'
-import CodeTracePanel from '../../components/CodeTracePanel'
-import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
-import { usePlaybackState } from '../../hooks/usePlaybackState'
-import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
-import './MajorityElementVisualizer.css'
+﻿import { useState, useMemo } from "react"
+import { motion } from "framer-motion"
+import DockableWorkspace from "../../components/shared/DockableWorkspace"
+import FloatingPanel from "../../components/shared/FloatingPanel"
+import CodeTracePanel from "../../components/CodeTracePanel"
+import PlaybackControls from "../../components/PlaybackControls"
+import PatternOverlay from "../../components/PatternOverlay"
+import { usePlaybackState } from "../../hooks/usePlaybackState"
+import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
+import { usePatternOverlay } from "../../hooks/usePatternOverlay"
+import "./MajorityElementVisualizer.css"
 
-const SOLUTION_CODE_INLINE = [
-    { line: 1, text: 'class Solution:' },
-    { line: 2, text: '    def majorityElement(self, nums):' },
-    { line: 3, text: '        candidate, count = None, 0' },
-    { line: 4, text: '        for num in nums:' },
-    { line: 5, text: '            if count == 0:' },
-    { line: 6, text: '                candidate = num' },
-    { line: 7, text: '            if num == candidate:' },
-    { line: 8, text: '                count += 1' },
-    { line: 9, text: '            else:' },
-    { line: 10, text: '                count -= 1' },
-    { line: 11, text: '        return candidate' },
+const SOLUTION_CODE = [
+  { line: 1, text: "def majorityElement(nums):" },
+  { line: 2, text: "    count = 0" },
+  { line: 3, text: "    candidate = None" },
+  { line: 4, text: "    for num in nums:" },
+  { line: 5, text: "        if count == 0:" },
+  { line: 6, text: "            candidate = num" },
+  { line: 7, text: "        count += 1 if num == candidate else -1" },
+  { line: 8, text: "    return candidate" },
 ]
-const SOLUTION_CODE = SOLUTION_CODE_INLINE
-
-function parseNums(input) {
-    const parsed = JSON.parse(input)
-    if (!Array.isArray(parsed)) throw new Error('Input must be an array')
-    return parsed.map((n) => {
-        const v = Number(n)
-        if (Number.isNaN(v)) throw new Error('Values must be numbers')
-        return v
-    })
-}
 
 function generateSteps(nums) {
-    const steps = []
-    let candidate = null
-    let count = 0
+  const steps = []
+  steps.push({
+    activeLine: 1,
+    nums,
+    message: "Find element appearing more than n/2 times",
+    relatedLines: [1],
+  })
 
-    steps.push({ phase: 'init', activeLine: 3, i: -1, candidate, count, action: '', message: 'Initialize candidate=None, count=0.' })
+  steps.push({
+    activeLine: 2,
+    message: "Initialize count and candidate",
+    relatedLines: [2, 3],
+  })
 
-    for (let i = 0; i < nums.length; i++) {
-        const num = nums[i]
-        if (count === 0) {
-            candidate = num
-            steps.push({ phase: 'set', activeLine: 6, i, candidate, count, action: 'set', message: `count is 0 → set candidate = ${num}` })
-        }
-        if (num === candidate) {
-            count += 1
-            steps.push({ phase: 'vote', activeLine: 8, i, candidate, count, action: 'inc', message: `nums[${i}]=${num} matches candidate → count = ${count}` })
-        } else {
-            count -= 1
-            steps.push({ phase: 'vote', activeLine: 10, i, candidate, count, action: 'dec', message: `nums[${i}]=${num} ≠ candidate → count = ${count}` })
-        }
-    }
+  let count = 0
+  let candidate = null
 
-    steps.push({ phase: 'done', activeLine: 11, i: -1, candidate, count, action: 'done', message: `Majority element = ${candidate}` })
-    return steps
-}
+  steps.push({
+    activeLine: 4,
+    message: "Iterate through array",
+    relatedLines: [4],
+  })
 
-const EXAMPLES = getExamples('majority-element')
+  for (let i = 0; i < nums.length; i++) {
+    const num = nums[i]
 
-export default function MajorityElementVisualizer() {
-    const [numsInput, setNumsInput] = useState('[2,2,1,1,1,2,2]')
-
-    const { nums, inputError } = useMemo(() => {
-        try {
-            return { nums: parseNums(numsInput), inputError: '' }
-        } catch (e) {
-            return { nums: [2, 2, 1, 1, 1, 2, 2], inputError: e.message || 'Invalid input' }
-        }
-    }, [numsInput])
-
-    const steps = useMemo(
-        () => generateSteps(nums).map((current) => ({
-            ...current,
-            relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
-        })),
-        [nums],
-    )
-    const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
-    const step = stepIndex >= 0 ? steps[stepIndex] : null
-
-    const applyExample = useCallback((ex) => {
-        setNumsInput(JSON.stringify(ex.nums))
-        handleReset()
-    }, [handleReset])
-
-    const connectivity = useCodeVisualConnectivity({
-        steps,
-        stepIndex,
-        onStepJump: setStepIndex,
+    steps.push({
+      activeLine: 4,
+      i,
+      num,
+      nums,
+      count,
+      candidate,
+      message: `Index ${i}: num = ${num}, count = ${count}`,
+      relatedLines: [4],
     })
 
-    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+    if (count === 0) {
+      candidate = num
+      steps.push({
+        activeLine: 6,
+        candidate,
+        message: `Count is 0, set candidate = ${candidate}`,
+        relatedLines: [6],
+      })
+    }
 
-    return (
-        <div className="me-shell">
-            <div className="me-top">
-                <section className="me-panel main">
-                    <header className="me-head">
-                        <span>Boyer-Moore Voting</span>
-                        {inputError && <span className="me-error">{inputError}</span>}
-                    </header>
-                    <div className="me-body">
-                        <div className="me-examples">
-                            {EXAMPLES.map((ex) => (
-                                <button key={ex.label} className="me-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                            ))}
-                        </div>
-                        <input className="me-input" value={numsInput} onChange={(e) => { setNumsInput(e.target.value); handleReset() }} />
-                        <div className="me-array">
-                            {nums.map((val, i) => {
-                                const isActive = step?.i === i
-                                const isCandidate = step?.candidate === val && step?.i !== -1
-                                return (
-                                    <motion.div
-                                        key={i}
-                                        className={`me-cell ${isActive ? 'active' : ''} ${step?.phase === 'done' && val === step.candidate ? 'winner' : ''}`}
-                                        animate={isActive ? { y: -8, scale: 1.15 } : { y: 0, scale: 1 }}
-                                        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                                    >
-                                        <span className="me-idx">{i}</span>
-                                        <span className="me-val">{val}</span>
-                                        {isCandidate && step?.i === i && <span className="me-arrow">▲</span>}
-                                    </motion.div>
-                                )
-                            })}
-                        </div>
-                    </div>
-                </section>
+    if (num === candidate) {
+      count++
+      steps.push({
+        activeLine: 7,
+        count,
+        candidate,
+        message: `${num} == ${candidate}, count++`,
+        relatedLines: [7],
+      })
+    } else {
+      count--
+      steps.push({
+        activeLine: 7,
+        count,
+        candidate,
+        message: `${num} != ${candidate}, count--`,
+        relatedLines: [7],
+      })
+    }
+  }
 
-                <section className="me-panel side">
-                    <header className="me-head"><span>Vote State</span></header>
-                    <div className="me-body">
-                        <div className="me-candidate">
-                            <span className="me-label">Candidate</span>
-                            <motion.div
-                                className="me-badge"
-                                key={String(step?.candidate)}
-                                initial={{ scale: 0.7, opacity: 0 }}
-                                animate={{ scale: 1, opacity: 1 }}
-                            >
-                                {step?.candidate ?? '—'}
-                            </motion.div>
-                        </div>
-                        <div className="me-count-wrap">
-                            <span className="me-label">Count</span>
-                            <motion.div
-                                className={`me-count ${step?.action === 'inc' ? 'up' : step?.action === 'dec' ? 'down' : ''}`}
-                                key={step?.count}
-                                initial={{ scale: 0.8 }}
-                                animate={{ scale: 1 }}
-                            >
-                                {step?.count ?? 0}
-                            </motion.div>
-                        </div>
-                        <div className={`me-result ${step?.phase === 'done' ? 'ok' : ''}`}>
-                            {step?.phase === 'done' ? `Answer: ${step.candidate}` : 'Running…'}
-                        </div>
-                    </div>
-                </section>
-            </div>
+  steps.push({
+    activeLine: 8,
+    candidate,
+    result: candidate,
+    done: true,
+    message: `Majority element: ${candidate}`,
+    relatedLines: [8],
+  })
 
-            <CodeTracePanel
-                step={step}
-                codeLines={SOLUTION_CODE}
-                highlightedLines={connectivity.highlightedLines}
-                onLineSelect={connectivity.handleLineSelect}
-                onActiveLineDomChange={setActiveLineDom}
-            />
-            <div className={`me-status ${step?.phase === 'done' ? 'ok' : ''}`}>{step?.message || 'Press Play to begin.'}</div>
-            <PlaybackControls
-                isPlaying={isPlaying}
-                isDone={isDone}
-                speed={speed}
-                onPlayToggle={togglePlay}
-                onPrev={stepBack}
-                onNext={stepForward}
-                onReset={handleReset}
-                prevDisabled={stepIndex < 0}
-                nextDisabled={isDone}
-                resetDisabled={stepIndex < 0}
-                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                showPatternOverlay={showPatternOverlay}
-                onShowPatternOverlayChange={setShowPatternOverlay}
-                patternOverlayLabel="Show pattern overlay"
-                showPatternOverlayToggle
-            />
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+  return steps
+}
+
+function VisualizationPanel({ step }) {
+  if (!step) return <div style={{ padding: 16 }}>Press play</div>
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 16, padding: 16 }}>
+      <div style={{ padding: 12, backgroundColor: "#dbeafe", borderRadius: 6, borderLeft: "4px solid #3b82f6" }}>
+        <div style={{ fontSize: 12, color: "#0c4a6e", fontStyle: "italic" }}>
+          Boyer-Moore: candidate tracking with counter increment/decrement.
         </div>
-    )
+      </div>
+
+      {step.nums && (
+        <motion.div style={{ padding: 12, backgroundColor: "#f0fdf4", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: "#065f46", marginBottom: 8 }}>
+            Array
+          </div>
+          <div style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
+            {step.nums.map((n, idx) => (
+              <div
+                key={idx}
+                style={{
+                  padding: "6px 10px",
+                  borderRadius: 4,
+                  backgroundColor: idx === step.i ? "#fbbf24" : "#e2e8f0",
+                  fontFamily: "monospace",
+                  fontWeight: 600,
+                  color: idx === step.i ? "#000" : "#334155",
+                  fontSize: 12,
+                }}
+              >
+                {n}
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      )}
+
+      {step.num !== undefined && (
+        <motion.div style={{ padding: 12, backgroundColor: "#fecdd3", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, color: "#7f1d1d", fontWeight: 600 }}>
+            Current: {step.num}
+          </div>
+        </motion.div>
+      )}
+
+      {step.candidate !== undefined && (
+        <motion.div style={{ padding: 12, backgroundColor: "#fed7aa", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, color: "#92400e", fontWeight: 600 }}>
+            Candidate: {step.candidate === null ? "None" : step.candidate}
+          </div>
+        </motion.div>
+      )}
+
+      {step.count !== undefined && (
+        <motion.div style={{ padding: 12, backgroundColor: "#dbeafe", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, color: "#0c4a6e", fontWeight: 600 }}>
+            Count: {step.count}
+          </div>
+        </motion.div>
+      )}
+
+      {step.result !== undefined && (
+        <motion.div style={{ padding: 12, backgroundColor: "#dcfce7", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 16, fontWeight: 700, color: "#10b981" }}>
+            Majority Element: {step.result}
+          </div>
+        </motion.div>
+      )}
+
+      {step.message && (
+        <motion.div style={{ padding: 12, backgroundColor: "#fef3c7", borderRadius: 6, fontSize: 12, color: "#92400e" }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          {step.message}
+        </motion.div>
+      )}
+    </div>
+  )
+}
+
+export default function MajorityElementVisualizer() {
+  const [nums] = useState([3, 2, 3, 2, 2])
+  const steps = useMemo(() => generateSteps(nums).map((s) => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [nums])
+  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
+  const step = stepIndex >= 0 ? steps[stepIndex] : null
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
+  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+
+  const dockPanels = useMemo(
+    () => [
+      {
+        id: "code",
+        title: "Code",
+        content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />,
+      },
+      {
+        id: "viz",
+        title: "👑 Majority Vote",
+        content: <VisualizationPanel step={step} />,
+      },
+    ],
+    [step, connectivity, setActiveLineDom]
+  )
+
+  return (
+    <div className="problem-shell">
+      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [["code", "viz"]], minimized: [] }} />
+      <FloatingPanel title="Controls">
+        <PlaybackControls
+          isPlaying={isPlaying}
+          isDone={isDone}
+          speed={speed}
+          onPlayToggle={togglePlay}
+          onPrev={stepBack}
+          onNext={stepForward}
+          onReset={handleReset}
+          prevDisabled={stepIndex < 0}
+          nextDisabled={isDone}
+          resetDisabled={stepIndex < 0}
+          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+          showPatternOverlay={showPatternOverlay}
+          onShowPatternOverlayChange={setShowPatternOverlay}
+          patternOverlayLabel="Pattern"
+          showPatternOverlayToggle
+        />
+      </FloatingPanel>
+      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+    </div>
+  )
 }
