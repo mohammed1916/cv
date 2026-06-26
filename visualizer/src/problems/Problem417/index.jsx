@@ -3,8 +3,8 @@ export const meta = {
   title: "Pacific Atlantic Water Flow",
   slug: "pacific-atlantic-water-flow",
   difficulty: "Medium",
-  tags: ["DFS", "Matrix"],
-  description: "Find grid cells where water flows to both Pacific and Atlantic oceans.",
-  accent: "#06b6d4",
+  tags: ["Array", "DFS", "BFS", "Matrix"],
+  description: "Multi-source BFS from both borders; cells reachable from both are result.",
+  accent: "#0ea5e9",
 };
-export { default } from "./Problem417Visualizer";
+export { default } from "./PacificAtlanticVisualizer";
