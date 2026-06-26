@@ -1,12 +1,12 @@
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
-import CodeTracePanel from "../../../components/CodeTracePanel";
-import PlaybackControls from "../../../components/PlaybackControls";
-import { usePlaybackState } from "../../../hooks/usePlaybackState";
-import Selectable from "../../../components/Selectable";
-import { useVisualizationContext } from "../../../context/VisualizationContext";
-import PatternOverlay from "../../../components/PatternOverlay";
-import { usePatternOverlay } from "../../../hooks/usePatternOverlay";
+import CodeTracePanel from "../../components/CodeTracePanel";
+import PlaybackControls from "../../components/PlaybackControls";
+import { usePlaybackState } from "../../hooks/usePlaybackState";
+import Selectable from "../../components/Selectable";
+import { useVisualizationContext } from "../../context/VisualizationContext";
+import PatternOverlay from "../../components/PatternOverlay";
+import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./MaximumGapVisualizer.css";
 

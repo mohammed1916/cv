@@ -1,12 +1,12 @@
 import { useState, useMemo, useCallback } from "react";
-import CodeTracePanel from "../../../components/CodeTracePanel";
-import PlaybackControls from "../../../components/PlaybackControls";
-import PatternOverlay from "../../../components/PatternOverlay";
-import AnimatedIterationList from "../../../components/shared/AnimatedIterationList";
-import { usePlaybackState } from "../../../hooks/usePlaybackState";
-import { useCodeVisualConnectivity } from "../../../hooks/useCodeVisualConnectivity";
-import { useProblemCode } from "../../../hooks/useProblemCode";
-import { usePatternOverlay } from "../../../hooks/usePatternOverlay";
+import CodeTracePanel from "../../components/CodeTracePanel";
+import PlaybackControls from "../../components/PlaybackControls";
+import PatternOverlay from "../../components/PatternOverlay";
+import AnimatedIterationList from "../../components/shared/AnimatedIterationList";
+import { usePlaybackState } from "../../hooks/usePlaybackState";
+import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
+import { useProblemCode } from "../../hooks/useProblemCode";
+import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./RemoveDuplicatesVisualizer.css";
 

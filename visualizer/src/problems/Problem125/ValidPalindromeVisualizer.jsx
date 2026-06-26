@@ -1,11 +1,11 @@
 import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
-import CodeTracePanel from "../../../components/CodeTracePanel";
-import PlaybackControls from "../../../components/PlaybackControls";
-import PatternOverlay from "../../../components/PatternOverlay";
-import { usePlaybackState } from "../../../hooks/usePlaybackState";
-import { useCodeVisualConnectivity } from "../../../hooks/useCodeVisualConnectivity";
-import { usePatternOverlay } from "../../../hooks/usePatternOverlay";
+import CodeTracePanel from "../../components/CodeTracePanel";
+import PlaybackControls from "../../components/PlaybackControls";
+import PatternOverlay from "../../components/PatternOverlay";
+import { usePlaybackState } from "../../hooks/usePlaybackState";
+import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
+import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./ValidPalindromeVisualizer.css";
 

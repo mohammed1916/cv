@@ -1,13 +1,13 @@
 import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
-import CodeTracePanel from "../../../components/CodeTracePanel";
-import PlaybackControls from "../../../components/PlaybackControls";
-import FloatingPanel from "../../../components/shared/FloatingPanel";
-import PatternOverlay from "../../../components/PatternOverlay";
-import DockableWorkspace from "../../../components/shared/DockableWorkspace";
-import { usePlaybackState } from "../../../hooks/usePlaybackState";
-import { usePatternOverlay } from "../../../hooks/usePatternOverlay";
-import { useAutoScroll } from "../../../hooks/useAutoScroll";
+import CodeTracePanel from "../../components/CodeTracePanel";
+import PlaybackControls from "../../components/PlaybackControls";
+import FloatingPanel from "../../components/shared/FloatingPanel";
+import PatternOverlay from "../../components/PatternOverlay";
+import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import { usePlaybackState } from "../../hooks/usePlaybackState";
+import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./JumpGameIIVisualizer.css";
 
