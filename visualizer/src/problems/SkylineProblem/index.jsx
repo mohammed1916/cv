@@ -1,10 +1,10 @@
 export const meta = {
-  number: "218",
-  title: "The Skyline Problem",
-  slug: "the-skyline-problem",
-  difficulty: "Hard",
-  tags: ["Array", "Divide and Conquer", "BFS", "Sorting", "Heap", "Ordered Set"],
-  description: "Max-heap of active building heights; push on left edge, pop on right edge, emit when max height changes.",
-  accent: "#ef4444",
+  number: '218',
+  title: 'The Skyline Problem',
+  slug: 'skyline-problem',
+  difficulty: 'Hard',
+  tags: ['Sweep Line', 'Heap', 'Events'],
+  description: 'Return key points in a skyline formed by buildings.',
+  accent: '#ec4899',
 };
-export { default } from "./SkylineProblemVisualizer";
+export { default } from './SkylineProblemVisualizer';

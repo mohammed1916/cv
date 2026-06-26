@@ -1,217 +1,320 @@
-import { useState, useMemo, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import CodeTracePanel from "../../components/CodeTracePanel";
-import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
-import { usePlaybackState } from "../../hooks/usePlaybackState";
-import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
-import "./SkylineProblemVisualizer.css";
+﻿import { useState, useMemo } from "react"
+import { motion } from "framer-motion"
+import DockableWorkspace from "../../components/shared/DockableWorkspace"
+import FloatingPanel from "../../components/shared/FloatingPanel"
+import CodeTracePanel from "../../components/CodeTracePanel"
+import PlaybackControls from "../../components/PlaybackControls"
+import PatternOverlay from "../../components/PatternOverlay"
+import { usePlaybackState } from "../../hooks/usePlaybackState"
+import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
+import { usePatternOverlay } from "../../hooks/usePatternOverlay"
+import "./SkylineProblemVisualizer.css"
 
 const SOLUTION_CODE = [
-  { line: 1,  text: "def getSkyline(buildings):" },
-  { line: 2,  text: "    events = []" },
-  { line: 3,  text: "    for l, r, h in buildings:" },
-  { line: 4,  text: "        events.append((l, -h))  # start" },
-  { line: 5,  text: "        events.append((r,  h))  # end" },
-  { line: 6,  text: "    events.sort()" },
-  { line: 7,  text: "    heap = [0]; result = []" },
-  { line: 8,  text: "    prev = 0" },
-  { line: 9,  text: "    for x, h in events:" },
-  { line: 10, text: "        if h < 0: heappush(heap, h)   # start" },
-  { line: 11, text: "        else:     heap.remove(h)       # end" },
-  { line: 12, text: "        cur = -heap[0]" },
-  { line: 13, text: "        if cur != prev:" },
-  { line: 14, text: "            result.append([x, cur])" },
-  { line: 15, text: "            prev = cur" },
-];
-
-const EXAMPLES = getExamples('skyline-problem');
+  { line: 1, text: "def getSkyline(buildings):" },
+  { line: 2, text: "    events = []" },
+  { line: 3, text: "    for l, r, h in buildings:" },
+  { line: 4, text: "        events.append((l, 0, h))" },
+  { line: 5, text: "        events.append((r, 1, h))" },
+  { line: 6, text: "    events.sort()" },
+  { line: 7, text: "    result = []" },
+  { line: 8, text: "    active = {h: 0 for _, _, h in buildings}" },
+  { line: 9, text: "    for x, typ, h in events:" },
+  { line: 10, text: "        if typ == 0: active[h] += 1" },
+  { line: 11, text: "        else: active[h] -= 1" },
+  { line: 12, text: "        max_h = max(active)" },
+  { line: 13, text: "        if not result or result[-1][1] != max_h:" },
+  { line: 14, text: "            result.append((x, max_h))" },
+  { line: 15, text: "    return result" },
+]
 
 function generateSteps(buildings) {
-  const steps = [];
+  const steps = []
+  steps.push({
+    activeLine: 1,
+    buildings,
+    message: "Extract key points from overlapping buildings",
+    relatedLines: [1],
+  })
 
-  // Build events
-  const events = [];
+  steps.push({
+    activeLine: 2,
+    message: "Create start (type=0) and end (type=1) events",
+    relatedLines: [2, 3, 4, 5],
+  })
+
+  const events = []
   for (const [l, r, h] of buildings) {
-    events.push([l, -h]);
-    events.push([r, h]);
+    events.push([l, 0, h])
+    events.push([r, 1, h])
   }
-  events.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+  events.sort((a, b) => a[0] - b[0] || a[1] - b[1])
 
-  steps.push({ activeLine: 6, events: [...events], heap: [0], result: [], prev: 0, evtIdx: -1, phase: "sort", message: `${events.length} events sorted.` });
+  steps.push({
+    activeLine: 6,
+    events: events.slice(0, 8),
+    message: "Sort events by x-coordinate",
+    relatedLines: [6],
+  })
 
-  const heap = [0];
-  const result = [];
-  let prev = 0;
+  steps.push({
+    activeLine: 8,
+    message: "Initialize active heights map",
+    relatedLines: [8],
+  })
 
-  // Helper: max-heap via sorted array simulation
-  function heapPush(h) { heap.push(-h); heap.sort((a, b) => b - a); }
-  function heapRemove(h) { const idx = heap.indexOf(-h); if (idx >= 0) heap.splice(idx, 1); }
-  function heapMax() { return heap.length > 0 ? -heap[0] : 0; }
+  const result = []
+  const active = {}
+  for (const [, , h] of buildings) {
+    active[h] = 0
+  }
 
-  for (let i = 0; i < events.length; i++) {
-    const [x, h] = events[i];
-    const isStart = h < 0;
+  steps.push({
+    activeLine: 9,
+    message: "Process events left to right",
+    relatedLines: [9],
+  })
+
+  let prevMaxH = 0
+  for (let i = 0; i < events.length && i < 10; i++) {
+    const [x, typ, h] = events[i]
+
     steps.push({
-      activeLine: 9, events, heap: [...heap], result: [...result], prev, evtIdx: i, phase: "process",
-      message: `Event (x=${x}, h=${isStart ? "start -" + (-h) : "end " + h})`,
-    });
-    if (isStart) {
-      heapPush(-h);
-      steps.push({ activeLine: 10, events, heap: [...heap], result: [...result], prev, evtIdx: i, phase: "push", message: `Push height ${-h} to heap. Max=${heapMax()}` });
+      activeLine: 9,
+      x,
+      typ,
+      h,
+      eventType: typ === 0 ? "START" : "END",
+      message: `Event at x=${x}: ${typ === 0 ? "start" : "end"} of height ${h}`,
+      relatedLines: [9],
+    })
+
+    if (typ === 0) {
+      active[h]++
+      steps.push({
+        activeLine: 10,
+        h,
+        count: active[h],
+        message: `Building starts: active[${h}]++`,
+        relatedLines: [10],
+      })
     } else {
-      heapRemove(h);
-      steps.push({ activeLine: 11, events, heap: [...heap], result: [...result], prev, evtIdx: i, phase: "remove", message: `Remove height ${h} from heap. Max=${heapMax()}` });
+      active[h]--
+      steps.push({
+        activeLine: 11,
+        h,
+        count: active[h],
+        message: `Building ends: active[${h}]--`,
+        relatedLines: [11],
+      })
     }
-    const cur = heapMax();
-    if (cur !== prev) {
-      result.push([x, cur]);
-      prev = cur;
-      steps.push({ activeLine: 14, events, heap: [...heap], result: [...result], prev, evtIdx: i, phase: "emit", message: `Height changed → emit [${x}, ${cur}]` });
+
+    const maxH = Math.max(...Object.keys(active).map(Number).filter((k) => active[k] > 0), 0)
+    steps.push({
+      activeLine: 12,
+      active: { ...active },
+      maxH,
+      message: `Max height: ${maxH}`,
+      relatedLines: [12],
+    })
+
+    if (!result.length || result[result.length - 1][1] !== maxH) {
+      result.push([x, maxH])
+      steps.push({
+        activeLine: 14,
+        x,
+        maxH,
+        message: `Key point: (${x}, ${maxH})`,
+        relatedLines: [14],
+      })
     }
+
+    prevMaxH = maxH
   }
 
-  steps.push({ activeLine: 14, events, heap: [...heap], result: [...result], prev, evtIdx: -1, phase: "done", done: true, message: `Skyline: ${result.map(p => "[" + p + "]").join(", ")}` });
-  return steps;
+  steps.push({
+    activeLine: 15,
+    result,
+    done: true,
+    message: `Skyline points: ${result.map((p) => `(${p[0]},${p[1]})`).join(" ")}`,
+    relatedLines: [15],
+  })
+
+  return steps
+}
+
+function SkylineVisualization({ buildings, keyPoints }) {
+  const maxHeight = Math.max(...buildings.map((b) => b[2]), 10)
+  const width = 400
+  const height = 200
+
+  return (
+    <svg width={width} height={height} style={{ border: "1px solid #64748b", borderRadius: 4 }}>
+      {/* Buildings */}
+      {buildings.map((b, idx) => (
+        <g key={`building-${idx}`}>
+          <rect x={b[0] * 20} y={height - b[2] * 15} width={(b[1] - b[0]) * 20} height={b[2] * 15} fill="#cbd5e1" opacity="0.6" stroke="#64748b" strokeWidth="1" />
+        </g>
+      ))}
+      {/* Skyline */}
+      {keyPoints.length > 0 && (
+        <polyline
+          points={keyPoints.map((p) => `${p[0] * 20},${height - p[1] * 15}`).join(" ")}
+          fill="none"
+          stroke="#ef4444"
+          strokeWidth="2"
+        />
+      )}
+      {/* Key points */}
+      {keyPoints.map((p, idx) => (
+        <circle key={`point-${idx}`} cx={p[0] * 20} cy={height - p[1] * 15} r="3" fill="#ef4444" />
+      ))}
+    </svg>
+  )
+}
+
+function VisualizationPanel({ step, buildings, keyPoints }) {
+  if (!step) return <div style={{ padding: 16 }}>Press play</div>
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 16, padding: 16 }}>
+      <div style={{ padding: 12, backgroundColor: "#dbeafe", borderRadius: 6, borderLeft: "4px solid #3b82f6" }}>
+        <div style={{ fontSize: 12, color: "#0c4a6e", fontStyle: "italic" }}>
+          Sweep line: process events, track max height, output height changes.
+        </div>
+      </div>
+
+      {buildings && (
+        <motion.div style={{ padding: 12, backgroundColor: "#f0fdf4", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: "#065f46", marginBottom: 8 }}>
+            Skyline Visualization
+          </div>
+          <SkylineVisualization buildings={buildings} keyPoints={keyPoints} />
+        </motion.div>
+      )}
+
+      {step.eventType && (
+        <motion.div style={{ padding: 12, backgroundColor: "#fef3c7", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, color: "#92400e", fontWeight: 600 }}>
+            {step.eventType} at x={step.x}: h={step.h}
+          </div>
+        </motion.div>
+      )}
+
+      {step.active && (
+        <motion.div style={{ padding: 12, backgroundColor: "#e0e7ff", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: "#3730a3", marginBottom: 4 }}>
+            Active heights
+          </div>
+          <div style={{ fontSize: 11, color: "#3730a3", fontFamily: "monospace" }}>
+            {Object.entries(step.active)
+              .filter(([, count]) => count > 0)
+              .map(([h, count]) => `h${h}:${count}`)
+              .join(", ")}
+          </div>
+        </motion.div>
+      )}
+
+      {step.maxH !== undefined && (
+        <motion.div style={{ padding: 12, backgroundColor: "#fed7aa", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 12, color: "#92400e", fontWeight: 600 }}>
+            Max Height: {step.maxH}
+          </div>
+        </motion.div>
+      )}
+
+      {step.result && step.result.length > 0 && (
+        <motion.div style={{ padding: 12, backgroundColor: "#dcfce7", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: "#065f46", marginBottom: 4 }}>
+            Key Points ({step.result.length})
+          </div>
+          <div style={{ fontSize: 11, color: "#065f46", fontFamily: "monospace" }}>
+            {step.result.map((p) => `(${p[0]},${p[1]})`).join(" ")}
+          </div>
+        </motion.div>
+      )}
+
+      {step.message && (
+        <motion.div style={{ padding: 12, backgroundColor: "#fef3c7", borderRadius: 6, fontSize: 12, color: "#92400e" }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          {step.message}
+        </motion.div>
+      )}
+    </div>
+  )
 }
 
 export default function SkylineProblemVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => generateSteps(ex.buildings), [ex]);
-  const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
-    usePlaybackState(steps.length);
-  const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
-  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
-
-  const events = step?.events ?? [];
-  const heap = step?.heap ?? [0];
-  const result = step?.result ?? [];
-  const evtIdx = step?.evtIdx ?? -1;
-  const phase = step?.phase ?? "init";
-
-  // Derive skyline drawing params
-  const buildings = ex.buildings;
-  const SVG_W = 320, SVG_H = 100;
-
-  const { maxX, maxH, xScale, hScale, skylinePoints } = useMemo(() => {
-    const maxX = Math.max(...buildings.map(b => b[1]), 0) + 2;
-    const maxH = Math.max(...buildings.map(b => b[2]), 1);
-    const xScale = (SVG_W - 20) / maxX;
-    const hScale = (SVG_H - 10) / maxH;
-
-    // Build skyline polyline from result points
-    const pts = result;
-    let skylinePoints = [];
-    for (let i = 0; i < pts.length; i++) {
-      const [x, h] = pts[i];
-      const px = 10 + x * xScale;
-      const py = SVG_H - h * hScale;
-      if (i === 0) skylinePoints.push(`${px},${SVG_H}`);
-      skylinePoints.push(`${px},${py}`);
-      const nextX = i + 1 < pts.length ? pts[i + 1][0] : maxX;
-      skylinePoints.push(`${10 + nextX * xScale},${py}`);
+  const [buildings] = useState([
+    [0, 2, 3],
+    [2, 5, 3],
+    [1, 3, 5],
+  ])
+  const keyPoints = useMemo(() => {
+    const events = []
+    for (const [l, r, h] of buildings) {
+      events.push([l, 0, h])
+      events.push([r, 1, h])
     }
-    if (skylinePoints.length > 0) skylinePoints.push(`${10 + maxX * xScale},${SVG_H}`);
+    events.sort((a, b) => a[0] - b[0] || a[1] - b[1])
+    const result = []
+    const active = {}
+    for (const [, , h] of buildings) {
+      active[h] = 0
+    }
+    for (const [x, typ, h] of events) {
+      if (typ === 0) active[h]++
+      else active[h]--
+      const maxH = Math.max(...Object.keys(active).map(Number).filter((k) => active[k] > 0), 0)
+      if (!result.length || result[result.length - 1][1] !== maxH) result.push([x, maxH])
+    }
+    return result
+  }, [buildings])
 
-    return { maxX, maxH, xScale, hScale, skylinePoints };
-  }, [buildings, result]);
+  const steps = useMemo(() => generateSteps(buildings).map((s) => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [buildings])
+  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
+  const step = stepIndex >= 0 ? steps[stepIndex] : null
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
+  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+
+  const dockPanels = useMemo(
+    () => [
+      {
+        id: "code",
+        title: "Code",
+        content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />,
+      },
+      {
+        id: "viz",
+        title: "🏢 Skyline Events",
+        content: <VisualizationPanel step={step} buildings={buildings} keyPoints={keyPoints} />,
+      },
+    ],
+    [step, connectivity, setActiveLineDom, buildings, keyPoints]
+  )
 
   return (
-    <div className="sk-shell">
-      <div className="sk-examples">
-        {EXAMPLES.map(e => (
-          <button key={e.label} className={`sk-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>
-            {e.label} ({e.buildings.length}b)
-          </button>
-        ))}
-      </div>
-
-      <div className="sk-panel">
-        <div className="sk-panel-label">Skyline Visualization</div>
-        <svg width={SVG_W} height={SVG_H + 4} className="sk-svg">
-          {/* Buildings */}
-          {buildings.map(([l, r, h], i) => (
-            <rect key={i} x={10 + l * xScale} y={SVG_H - h * hScale}
-              width={(r - l) * xScale} height={h * hScale}
-              className="sk-building" />
-          ))}
-          {/* Skyline */}
-          {skylinePoints.length > 0 && (
-            <polyline points={skylinePoints.join(" ")} className="sk-skyline" />
-          )}
-          {/* X axis */}
-          <line x1={10} y1={SVG_H} x2={10 + maxX * xScale} y2={SVG_H} className="sk-axis" />
-        </svg>
-      </div>
-
-      <div className="sk-panel">
-        <div className="sk-panel-label">Events (sorted by x)</div>
-        <div className="sk-events">
-          {events.map(([x, h], i) => (
-            <motion.div key={i} className={`sk-event ${i === evtIdx ? "active-evt" : ""} ${h < 0 ? "start-evt" : "end-evt"}`}
-              animate={{ scale: i === evtIdx ? 1.1 : 1 }}
-              transition={{ type: "spring", stiffness: 400, damping: 20 }}>
-              ({x},{h < 0 ? "−" + (-h) : "+" + h})
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-      <div className="sk-row">
-        <div className="sk-panel sk-half">
-          <div className="sk-panel-label">Max Heap (negated)</div>
-          <div className="sk-heap">
-            {heap.map((v, i) => (
-              <div key={i} className={`sk-heap-val ${i === 0 ? "top" : ""}`}>{-v}</div>
-            ))}
-          </div>
-        </div>
-        <div className="sk-panel sk-half">
-          <div className="sk-panel-label">Result Points</div>
-          <div className="sk-result">
-            <AnimatePresence>
-              {result.map(([x, h], i) => (
-                <motion.div key={i} className="sk-pt" initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }}>
-                  [{x},{h}]
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </div>
-        </div>
-      </div>
-
-      <div className="sk-trackers">
-        <div className="sk-tracker">
-          <span className="sk-tracker-label">Phase</span>
-          <span className={`sk-tracker-val sk-phase ${phase}`}>{phase}</span>
-        </div>
-        <div className="sk-tracker">
-          <span className="sk-tracker-label">Heap Max</span>
-          <span className="sk-tracker-val">{heap.length > 0 ? -heap[0] : 0}</span>
-        </div>
-        <div className="sk-tracker">
-          <span className="sk-tracker-label">Result pts</span>
-          <span className="sk-tracker-val">{result.length}</span>
-        </div>
-      </div>
-
-      {step?.done && <div className="sk-result-box">✓ {result.length} skyline points emitted</div>}
-
-      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-      <div className="sk-status">{step?.message ?? "Press Play to begin."}</div>
-      <PlaybackControls
-        isPlaying={isPlaying} isDone={isDone} speed={speed}
-        onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-        prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
-        onSpeedChange={e => setSpeed(Number(e.target.value))}
-        showPatternOverlay={showPatternOverlay}
-        onShowPatternOverlayChange={setShowPatternOverlay}
-        patternOverlayLabel="Show pattern overlay"
-        showPatternOverlayToggle
-      />
+    <div className="problem-shell">
+      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [["code", "viz"]], minimized: [] }} />
+      <FloatingPanel title="Controls">
+        <PlaybackControls
+          isPlaying={isPlaying}
+          isDone={isDone}
+          speed={speed}
+          onPlayToggle={togglePlay}
+          onPrev={stepBack}
+          onNext={stepForward}
+          onReset={handleReset}
+          prevDisabled={stepIndex < 0}
+          nextDisabled={isDone}
+          resetDisabled={stepIndex < 0}
+          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+          showPatternOverlay={showPatternOverlay}
+          onShowPatternOverlayChange={setShowPatternOverlay}
+          patternOverlayLabel="Pattern"
+          showPatternOverlayToggle
+        />
+      </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
-  );
+  )
 }
