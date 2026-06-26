@@ -1,15 +1,15 @@
 import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import CodeTracePanel from "../../components/CodeTracePanel";
-import PlaybackControls from "../../components/PlaybackControls";
-import FloatingPanel from "../../components/shared/FloatingPanel";
-import PatternOverlay from "../../components/PatternOverlay";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
-import { usePlaybackState } from "../../hooks/usePlaybackState";
-import { useAutoScroll } from "../../hooks/useAutoScroll";
-import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import CodeTracePanel from "../../../components/CodeTracePanel";
+import PlaybackControls from "../../../components/PlaybackControls";
+import FloatingPanel from "../../../components/shared/FloatingPanel";
+import PatternOverlay from "../../../components/PatternOverlay";
+import DockableWorkspace from "../../../components/shared/DockableWorkspace";
+import { usePlaybackState } from "../../../hooks/usePlaybackState";
+import { useAutoScroll } from "../../../hooks/useAutoScroll";
+import { usePatternOverlay } from "../../../hooks/usePatternOverlay";
 import "./MinStackVisualizer.css";
-import { Stack3D } from "../../components/viz3d";
+import { Stack3D } from "../../../components/viz3d";
 import { getExamples } from '../../config/examplesRegistry'
 
 const SOLUTION_CODE = [

@@ -1,14 +1,14 @@
-import DockableWorkspace from "../../components/shared/DockableWorkspace"
-import FloatingPanel from "../../components/shared/FloatingPanel"
-import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
+import DockableWorkspace from "../../../components/shared/DockableWorkspace"
+import FloatingPanel from "../../../components/shared/FloatingPanel"
+import { useCodeVisualConnectivity } from "../../../hooks/useCodeVisualConnectivity"
 import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
-import CodeTracePanel from "../../components/CodeTracePanel";
-import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
-import { usePlaybackState } from "../../hooks/usePlaybackState";
-import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from "../../config/examplesRegistry";
+import CodeTracePanel from "../../../components/CodeTracePanel";
+import PlaybackControls from "../../../components/PlaybackControls";
+import PatternOverlay from "../../../components/PatternOverlay";
+import { usePlaybackState } from "../../../hooks/usePlaybackState";
+import { usePatternOverlay } from "../../../hooks/usePatternOverlay";
+import { getExamples } from "../../../config/examplesRegistry";
 import "./BestTimeBuySellStockIIIVisualizer.css";
 
 const SOLUTION_CODE_INLINE = [
