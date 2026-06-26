@@ -6,7 +6,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import './PacificAtlanticVisualizer.css'
+import './Problem417Visualizer.css'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -205,7 +205,7 @@ function generateSteps(heights) {
   return steps
 }
 
-function PacificAtlanticVisualizer() {
+function Problem417Visualizer() {
   const defaultHeights = [
     [4, 2, 7, 3, 4],
     [7, 4, 6, 5, 9],
@@ -384,4 +384,4 @@ function PacificAtlanticVisualizer() {
   )
 }
 
-export default PacificAtlanticVisualizer
+export default Problem417Visualizer

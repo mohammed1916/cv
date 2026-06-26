@@ -7,4 +7,4 @@ export const meta = {
   description: "Multi-source BFS from both borders; cells reachable from both are result.",
   accent: "#0ea5e9",
 };
-export { default } from "./PacificAtlanticVisualizer";
+export { default } from "./Problem417Visualizer";
