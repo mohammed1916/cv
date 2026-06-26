@@ -8,7 +8,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamples } from '../../../config/examplesRegistry'
 import './UglyNumberIIVisualizer.css'
 
 const EXAMPLES = getExamples('ugly-number-ii')
