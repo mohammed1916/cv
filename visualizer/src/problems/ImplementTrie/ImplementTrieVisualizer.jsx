@@ -1,243 +1,127 @@
-import { useState, useMemo, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import CodeTracePanel from '../../components/CodeTracePanel'
-import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
-import FloatingPanel from '../../components/shared/FloatingPanel'
-import { usePlaybackState } from '../../hooks/usePlaybackState'
-import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useAutoScroll } from '../../hooks/useAutoScroll'
-import { getExamples } from '../../config/examplesRegistry'
-import './ImplementTrieVisualizer.css'
+﻿import { useState, useMemo } from "react"
+import { motion } from "framer-motion"
+import DockableWorkspace from "../../components/shared/DockableWorkspace"
+import FloatingPanel from "../../components/shared/FloatingPanel"
+import CodeTracePanel from "../../components/CodeTracePanel"
+import PlaybackControls from "../../components/PlaybackControls"
+import PatternOverlay from "../../components/PatternOverlay"
+import { usePlaybackState } from "../../hooks/usePlaybackState"
+import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
+import { usePatternOverlay } from "../../hooks/usePatternOverlay"
+import "./ImplementTrieVisualizer.css"
 
-const SOLUTION_CODE_INLINE = [
-  { line: 1, text: 'class TrieNode:' },
-  { line: 2, text: '    def __init__(self): self.children = {}; self.end = False' },
-  { line: 3, text: 'class Trie:' },
-  { line: 4, text: '    def insert(self, word):' },
-  { line: 5, text: '        node = self.root' },
-  { line: 6, text: '        for ch in word:' },
-  { line: 7, text: '            if ch not in node.children: node.children[ch] = TrieNode()' },
-  { line: 8, text: '            node = node.children[ch]' },
-  { line: 9, text: '        node.end = True' },
-  { line: 10, text: '    def search(self, word): return walk(word) and node.end' },
-  { line: 11, text: '    def startsWith(self, prefix): return walk(prefix)' },
+const SOLUTION_CODE = [
+  { line: 1, text: "class TrieNode:" },
+  { line: 2, text: "    def __init__(self):" },
+  { line: 3, text: "        self.children = {}" },
+  { line: 4, text: "        self.is_end = False" },
+  { line: 5, text: "class Trie:" },
+  { line: 6, text: "    def insert(self, word):" },
+  { line: 7, text: "        node = self.root" },
+  { line: 8, text: "        for char in word:" },
+  { line: 9, text: "            if char not in node.children:" },
+  { line: 10, text: "                node.children[char] = TrieNode()" },
+  { line: 11, text: "            node = node.children[char]" },
+  { line: 12, text: "        node.is_end = True" },
+  { line: 13, text: "    def search(self, word):" },
+  { line: 14, text: "        node = self.root" },
+  { line: 15, text: "        for char in word:" },
+  { line: 16, text: "            if char not in node.children: return False" },
+  { line: 17, text: "            node = node.children[char]" },
+  { line: 18, text: "        return node.is_end" },
 ]
-const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-function parseOps(input) {
-  const parsed = JSON.parse(input)
-  if (!Array.isArray(parsed)) throw new Error('ops must be array')
-  return parsed
+function buildTrie(words) {
+  const root = { children: {}, isEnd: false, val: "ROOT" }
+  for (const word of words) {
+    let node = root
+    for (const char of word) {
+      if (!node.children[char]) node.children[char] = { children: {}, isEnd: false, val: char }
+      node = node.children[char]
+    }
+    node.isEnd = true
+  }
+  return root
 }
 
-function generateSteps(ops) {
-  const root = { end: false, children: {} }
+function generateSteps(word, operation) {
   const steps = []
-  const clone = (obj) => obj
-
-  const walk = (word) => {
-    let node = root
-    for (const ch of word) {
-      if (!node.children[ch]) return null
-      node = node.children[ch]
+  steps.push({ activeLine: operation === "insert" ? 6 : 13, word, operation, message: `${operation === "insert" ? "Insert" : "Search"} word: "${word}"`, relatedLines: [operation === "insert" ? 6 : 13] })
+  steps.push({ activeLine: operation === "insert" ? 7 : 14, word, message: "Start at root node", relatedLines: [operation === "insert" ? 7 : 14] })
+  steps.push({ activeLine: operation === "insert" ? 8 : 15, word, message: `Process each character: [${word.split("").join(", ")}]`, relatedLines: [operation === "insert" ? 8 : 15] })
+  let pathChars = []
+  for (let i = 0; i < word.length; i++) {
+    const char = word[i]
+    pathChars.push(char)
+    steps.push({ activeLine: operation === "insert" ? 9 : 16, i, char, word, pathChars: [...pathChars], message: `Character ${i + 1}/${word.length}: "${char}"`, relatedLines: [operation === "insert" ? 9 : 16] })
+    if (operation === "insert") {
+      steps.push({ activeLine: 10, i, char, word, pathChars: [...pathChars], message: `Create node if needed`, relatedLines: [10] })
     }
-    return node
+    steps.push({ activeLine: operation === "insert" ? 11 : 17, i, char, word, pathChars: [...pathChars], message: `Move to child node "${char}"`, relatedLines: [operation === "insert" ? 11 : 17] })
   }
-
-  for (const [type, arg] of ops) {
-    if (type === 'insert') {
-      let node = root
-      for (const ch of arg) {
-        steps.push({ phase: 'insert_step', activeLine: 7, op: [type, arg], char: ch, trie: clone(root), result: null, message: `Insert '${ch}' for "${arg}".` })
-        if (!node.children[ch]) node.children[ch] = { end: false, children: {} }
-        node = node.children[ch]
-      }
-      node.end = true
-      steps.push({ phase: 'insert_done', activeLine: 9, op: [type, arg], char: null, trie: clone(root), result: true, message: `Word "${arg}" inserted.` })
-    } else if (type === 'search') {
-      const node = walk(arg)
-      const ok = !!node && node.end
-      steps.push({ phase: 'search', activeLine: 10, op: [type, arg], char: null, trie: clone(root), result: ok, message: `search("${arg}") => ${ok}` })
-    } else if (type === 'startsWith') {
-      const ok = !!walk(arg)
-      steps.push({ phase: 'prefix', activeLine: 11, op: [type, arg], char: null, trie: clone(root), result: ok, message: `startsWith("${arg}") => ${ok}` })
-    }
+  if (operation === "insert") {
+    steps.push({ activeLine: 12, word, pathChars, message: `Mark as end of word`, relatedLines: [12] })
+    steps.push({ activeLine: 12, word, result: true, done: true, message: `Inserted "${word}"`, relatedLines: [12] })
+  } else {
+    steps.push({ activeLine: 18, word, pathChars, message: `Check if end-of-word marked`, relatedLines: [18] })
+    steps.push({ activeLine: 18, word, result: true, done: true, message: `Found "${word}"`, relatedLines: [18] })
   }
   return steps
 }
 
-const EXAMPLES = getExamples('implement-trie')
+function TrieDisplay({ trie, highlightedPath = [] }) {
+  const renderNode = (node, depth = 0, key = "root") => {
+    if (!node || Object.keys(node.children).length === 0) return null
+    const children = Object.entries(node.children).sort(([a], [b]) => a.localeCompare(b))
+    return (
+      <div key={key} style={{ marginLeft: depth > 0 ? 20 : 0, marginTop: 8 }}>
+        {children.map(([char, child]) => (
+          <motion.div key={char} style={{ padding: 6, backgroundColor: highlightedPath.includes(char) ? "#fbbf24" : "#e2e8f0", borderRadius: 3, marginBottom: 4, fontSize: 12, fontFamily: "monospace", fontWeight: 600, color: highlightedPath.includes(char) ? "#000" : "#334155", border: child.isEnd ? "2px solid #10b981" : "1px solid #94a3b8" }} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}>
+            {char}{child.isEnd && " ✓"}
+          </motion.div>
+        ))}{children.map(([char, child]) => renderNode(child, depth + 1, char))}
+      </div>
+    )
+  }
+  return <div>{renderNode(trie)}</div>
+}
 
-function renderTrie(node, prefix = '', depth = 0) {
-  const keys = Object.keys(node.children).sort()
-  return keys.flatMap((k) => {
-    const n = node.children[k]
-    const word = `${prefix}${k}`
-    return [{ word, end: n.end, depth }, ...renderTrie(n, word, depth + 1)]
-  })
+function VisualizationPanel({ step, trie }) {
+  if (!step) return <div style={{ padding: 16 }}>Press play</div>
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 16, padding: 16 }}>
+      <div style={{ padding: 12, backgroundColor: "#dbeafe", borderRadius: 6, borderLeft: "4px solid #3b82f6" }}>
+        <div style={{ fontSize: 12, color: "#0c4a6e", fontStyle: "italic" }}>Trie: each node is a character, leaf marks end-of-word.</div>
+      </div>
+      {step.word && <motion.div style={{ padding: 12, backgroundColor: "#f0fdf4", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}><div style={{ fontSize: 12, fontWeight: 600, color: "#065f46" }}>Word: "{step.word}"</div></motion.div>}
+      {step.operation && <motion.div style={{ padding: 12, backgroundColor: "#f3e8ff", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}><div style={{ fontSize: 12, color: "#5b21b6" }}>Operation: {step.operation}</div></motion.div>}
+      {step.pathChars && step.pathChars.length > 0 && <motion.div style={{ padding: 12, backgroundColor: "#fed7aa", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}><div style={{ fontSize: 11, fontWeight: 600, color: "#92400e", marginBottom: 6 }}>Path: {step.pathChars.join(" → ")}</div></motion.div>}
+      {trie && <motion.div style={{ padding: 12, backgroundColor: "#f5f3ff", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}><div style={{ fontSize: 11, fontWeight: 600, color: "#5b21b6", marginBottom: 8 }}>Trie Structure</div><TrieDisplay trie={trie} highlightedPath={step.pathChars || []} /></motion.div>}
+      {step.result !== undefined && <motion.div style={{ padding: 12, backgroundColor: "#dcfce7", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}><div style={{ fontSize: 16, fontWeight: 700, color: "#10b981" }}>{step.operation === "insert" ? "Inserted" : "Found"}</div></motion.div>}
+      {step.message && <motion.div style={{ padding: 12, backgroundColor: "#fef3c7", borderRadius: 6, fontSize: 12, color: "#92400e" }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>{step.message}</motion.div>}
+    </div>
+  )
 }
 
 export default function ImplementTrieVisualizer() {
-  const [opsInput, setOpsInput] = useState('[["insert","apple"],["search","apple"],["search","app"],["startsWith","app"],["insert","app"],["search","app"]]')
-  const { ops, inputError } = useMemo(() => {
-    try {
-      return { ops: parseOps(opsInput), inputError: '' }
-    } catch (e) {
-      return { ops: EXAMPLES[0].ops, inputError: e.message || 'Invalid input' }
-    }
-  }, [opsInput])
-  const steps = useMemo(() => generateSteps(ops), [ops])
-  const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
+  const [word, setWord] = useState("apple")
+  const [operation, setOperation] = useState("insert")
+  const [insertedWords, setInsertedWords] = useState(["app", "apple", "apply"])
+  const trie = useMemo(() => buildTrie(insertedWords), [insertedWords])
+  const steps = useMemo(() => generateSteps(word, operation).map(s => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [word, operation])
+  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const nodes = useMemo(() => renderTrie(step?.trie || { end: false, children: {} }), [step])
-  const applyExample = useCallback((ex) => { setOpsInput(JSON.stringify(ex.ops)); handleReset() }, [handleReset])
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
-  const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
-
   const dockPanels = useMemo(() => [
-    {
-      id: 'input',
-      title: 'Operations',
-      subtitle: inputError ? 'Fix the input to resume playback.' : 'Enter JSON array of operations.',
-      defaultZone: 'left',
-      content: (
-        <div className="trie-panel-body">
-          <div className="trie-examples">
-            {EXAMPLES.map((ex) => (
-              <button
-                key={ex.label}
-                className="trie-chip"
-                onClick={() => applyExample(ex)}
-              >
-                {ex.label}
-              </button>
-            ))}
-          </div>
-          <input
-            className="trie-input"
-            value={opsInput}
-            onChange={(e) => {
-              setOpsInput(e.target.value)
-              handleReset()
-            }}
-            placeholder='[["insert","word"],["search","word"]]'
-          />
-          {inputError && <div className="trie-error">{inputError}</div>}
-          <div className="trie-op">{step?.op ? `${step.op[0]}("${step.op[1]}")` : 'Press Play'}</div>
-        </div>
-      ),
-    },
-    {
-      id: 'viz',
-      title: 'Trie Visualization',
-      subtitle: step ? `Result: ${step.result === null ? 'Pending' : String(step.result)}` : 'Waiting for playback.',
-      defaultZone: 'right',
-      content: (
-        <div className="trie-panel-body">
-          <div className="trie-nodes">
-            <AnimatePresence>
-              {nodes.map((n) => (
-                <motion.div
-                  key={`${n.word}-${n.depth}`}
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className={`trie-node ${n.end ? 'end' : ''}`}
-                  style={{ marginLeft: `${n.depth * 16}px` }}
-                >
-                  <span>{n.word}</span>
-                  {n.end && <strong>end</strong>}
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </div>
-          <div
-            className={`trie-result ${
-              step?.result === false ? 'bad' : step?.result === true ? 'ok' : ''
-            }`}
-          >
-            {step?.result === null || step?.result === undefined
-              ? 'Pending'
-              : `Result: ${String(step.result)}`}
-          </div>
-          <div
-            className={`trie-status ${
-              step?.result === false ? 'bad' : step?.result === true ? 'ok' : ''
-            }`}
-          >
-            {step?.message || 'Press Play.'}
-          </div>
-        </div>
-      ),
-    },
-    {
-      id: 'code',
-      title: 'Code Trace',
-      subtitle: step ? `Line ${step.activeLine}` : 'Line-by-line code view.',
-      defaultZone: 'full',
-      content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          onActiveLineDomChange={setActiveLineDom}
-          autoScroll={autoScrollCode}
-        />
-      ),
-    },
-  ], [inputError, applyExample, opsInput, handleReset, step, nodes, setActiveLineDom, autoScrollCode])
-
+    { id: "code", title: "Code", content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} /> },
+    { id: "viz", title: "Trie Tree", content: <VisualizationPanel step={step} trie={trie} /> },
+  ], [step, connectivity, trie, setActiveLineDom])
   return (
-    <div className="trie-shell">
-      <section className="trie-hero">
-        <div className="trie-hero-copy">
-          <span className="trie-kicker">Data Structures • Binary Search Tree</span>
-          <h2>Implement a Trie (Prefix Tree)</h2>
-          <p>
-            Visualize step-by-step insertion and search operations on a Trie data
-            structure. Watch each character get added to the tree and trace how
-            search and prefix matching work.
-          </p>
-        </div>
-      </section>
-
-      <DockableWorkspace
-        title="Trie Workspace"
-        panels={dockPanels}
-        initialLayout={{
-          rows: [['input', 'viz'], ['code']],
-          minimized: [],
-        }}
-      />
-
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          onReset={handleReset}
-          onPrev={stepBack}
-          onPlayToggle={togglePlay}
-          onNext={stepForward}
-          resetDisabled={steps.length === 0}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          speedIndicator={`${speed}ms`}
-          autoScroll={autoScrollCode}
-          onAutoScrollChange={setAutoScrollCode}
-          autoScrollLabel="Auto-scroll code"
-          showAutoScroll
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
-
-      {showPatternOverlay && step && (
-        <PatternOverlay step={step} activeLineDom={activeLineDom} />
-      )}
+    <div className="problem-shell">
+      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [["code", "viz"]], minimized: [] }} />
+      <FloatingPanel title="Controls"><PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={(e) => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Pattern" showPatternOverlayToggle /></FloatingPanel>
+      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }
