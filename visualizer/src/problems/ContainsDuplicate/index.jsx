@@ -1,10 +1,10 @@
 export const meta = {
-  number: "217",
-  title: "Contains Duplicate",
-  slug: "contains-duplicate",
-  difficulty: "Easy",
-  tags: ["Array", "Hash Table", "Sorting"],
-  description: "Scan once with a hash set and return true as soon as a repeated value appears.",
-  accent: "#f38ba8",
+  number: '220',
+  title: 'Contains Duplicate',
+  slug: 'contains-duplicate',
+  difficulty: 'Easy',
+  tags: ['Hash Table', 'Array'],
+  description: 'Check if array contains any duplicate element.',
+  accent: '#f59e0b',
 };
-export { default } from "./ContainsDuplicateVisualizer";
+export { default } from './ContainsDuplicateVisualizer';
