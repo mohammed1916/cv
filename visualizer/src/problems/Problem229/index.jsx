@@ -7,4 +7,4 @@ export const meta = {
   description: "Find all elements appearing more than n/3 times using Boyer-Moore voting.",
   accent: "#ef4444",
 };
-export { default } from "./MajorityElement2";
+export { default } from "./MajorityElementIi";

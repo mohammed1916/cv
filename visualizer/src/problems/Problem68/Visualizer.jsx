@@ -4,9 +4,9 @@ import FloatingPanel from '../../components/shared/FloatingPanel';
 import CodeTracePanel from '../../components/CodeTracePanel';
 import PlaybackControls from '../../components/PlaybackControls';
 import PatternOverlay from '../../components/PatternOverlay';
-import { usePlaybackState } from '../../usePlaybackState';
-import { usePatternOverlay } from '../../usePatternOverlay';
-import { useCodeVisualConnectivity } from '../../useCodeVisualConnectivity';
+import { usePlaybackState } from '../../hooks/usePlaybackState';
+import { usePatternOverlay } from '../../hooks/usePatternOverlay';
+import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity';
 import "./Visualizer.css";
 
 function generateSteps(input) {

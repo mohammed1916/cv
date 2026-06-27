@@ -7,4 +7,4 @@ export const meta = {
   description: "Divide two integers using bit shifting for O(log n) complexity.",
   accent: "#ec4899",
 };
-export { default } from "./DivideTwoIntegersVisualizer";
+export { default } from "./DivideTwoIntegers";

@@ -7,4 +7,4 @@ export const meta = {
   description: "Find a target efficiently in sorted rows and columns by starting at a corner.",
   accent: "#06b6d4",
 };
-export { default } from "./SearchA2DMatrix2";
+export { default } from "./SearchA2dMatrixIi";

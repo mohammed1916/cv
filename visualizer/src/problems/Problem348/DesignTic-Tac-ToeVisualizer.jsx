@@ -44,7 +44,7 @@ function generateSteps(input) {
 
 const EXAMPLES = getExamples('design-tic-tac-toe') || []
 
-export default function DesignTic-Tac-ToeVisualizer() {
+export default function DesignTicTacToeVisualizer() {
   const [inputValue, setInputValue] = useState(EXAMPLES.length > 0 ? JSON.stringify(EXAMPLES[0]) : '{}')
 
   const { input, inputError } = useMemo(() => {

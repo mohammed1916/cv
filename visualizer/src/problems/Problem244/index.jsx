@@ -7,4 +7,4 @@ export const meta = {
   description: "Design a class that can find shortest distance between two words efficiently.",
   accent: "#10b981",
 };
-export { default } from "./ShortestWordDistance2";
+export { default } from "./ShortestWordDistanceIi";

@@ -7,4 +7,4 @@ export const meta = {
   description: "Generate the next sequence by counting consecutive digits.",
   accent: "#8b5cf6",
 };
-export { default } from "./CountAndSayVisualizer";
+export { default } from "./CountAndSay";

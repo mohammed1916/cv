@@ -7,4 +7,4 @@ export const meta = {
   description: "Generate all n-digit strobogrammatic numbers recursively.",
   accent: "#f59e0b",
 };
-export { default } from "./StrobogrammaticNumber2";
+export { default } from "./StrobogrammaticNumberIi";

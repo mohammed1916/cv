@@ -44,7 +44,7 @@ function generateSteps(input) {
 
 const EXAMPLES = getExamples('range-sum-query-2d-mutable') || []
 
-export default function RangeSumQuery2D-MutableVisualizer() {
+export default function RangeSumQuery2DMutableVisualizer() {
   const [inputValue, setInputValue] = useState(EXAMPLES.length > 0 ? JSON.stringify(EXAMPLES[0]) : '{}')
 
   const { input, inputError } = useMemo(() => {

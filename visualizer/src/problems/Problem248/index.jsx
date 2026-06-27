@@ -7,4 +7,4 @@ export const meta = {
   description: "Count strobogrammatic numbers within a range efficiently.",
   accent: "#f59e0b",
 };
-export { default } from "./StrobogrammaticNumber2i";
+export { default } from "./StrobogrammaticNumberIii";

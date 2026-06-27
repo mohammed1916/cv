@@ -8,7 +8,7 @@ import PatternOverlay from "../../../components/PatternOverlay";
 import { usePlaybackState } from "../../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../../hooks/useCodeVisualConnectivity";
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamples } from '../../../config/examplesRegistry'
 import "./Visualizer.css";
 
 const SOLUTION_CODE = [

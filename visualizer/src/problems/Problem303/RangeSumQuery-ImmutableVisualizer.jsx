@@ -44,7 +44,7 @@ function generateSteps(input) {
 
 const EXAMPLES = getExamples('range-sum-query-immutable') || []
 
-export default function RangeSumQuery-ImmutableVisualizer() {
+export default function RangeSumQueryImmutableVisualizer() {
   const [inputValue, setInputValue] = useState(EXAMPLES.length > 0 ? JSON.stringify(EXAMPLES[0]) : '{}')
 
   const { input, inputError } = useMemo(() => {

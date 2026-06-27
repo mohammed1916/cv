@@ -8,7 +8,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
-import { getExamples } from '../../hooks/examplesRegistry'
+import { getExamples } from '../../config/examplesRegistry'
 import './Problem259Visualizer.css'
 
 const SOLUTION_CODE = [

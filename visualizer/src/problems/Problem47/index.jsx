@@ -7,4 +7,4 @@ export const meta = {
   description: "Generate all unique permutations using backtracking.",
   accent: "#06b6d4",
 };
-export { default } from "./PermutationsIIVisualizer";
+export { default } from "./PermutationsIi";

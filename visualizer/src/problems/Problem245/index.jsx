@@ -7,4 +7,4 @@ export const meta = {
   description: "Find shortest distance between any two distinct words (even if they're the same).",
   accent: "#10b981",
 };
-export { default } from "./ShortestWordDistance2i";
+export { default } from "./ShortestWordDistanceIii";
