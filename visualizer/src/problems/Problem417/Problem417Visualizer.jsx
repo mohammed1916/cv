@@ -1,7 +1,5 @@
-import { useState, useMemo, useCallback } from 'react'
-import { motion } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
-import FloatingPanel from '../../components/shared/FloatingPanel'
+import { useState, useCallback, useMemo } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
@@ -10,327 +8,380 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem417Visualizer.css'
 
-const EXAMPLES = [
-  {
-    label: 'Small',
-    heights: [[1, 2, 3], [8, 9, 4], [7, 6, 5]],
-    expected: [[0, 0], [0, 1], [1, 2], [2, 0], [2, 1], [2, 2]]
-  },
-  {
-    label: 'Medium',
-    heights: [[1, 1], [1, 1]],
-    expected: [[0, 0], [0, 1], [1, 0], [1, 1]]
-  },
+const SOLUTION_CODE = [
+  { line: 1, text: 'class Solution:' },
+  { line: 2, text: '    def pacificAtlantic(self, heights) -> list:' },
+  { line: 3, text: '        if not heights: return []' },
+  { line: 4, text: '        m, n = len(heights), len(heights[0])' },
+  { line: 5, text: '        pacific = set()' },
+  { line: 6, text: '        atlantic = set()' },
+  { line: 7, text: '        ' },
+  { line: 8, text: '        def dfs(r, c, visited, prev_h):' },
+  { line: 9, text: '            if (r,c) in visited or r<0 or r>=m or c<0 or c>=n:' },
+  { line: 10, text: '                return' },
+  { line: 11, text: '            if heights[r][c] < prev_h: return' },
+  { line: 12, text: '            visited.add((r,c))' },
+  { line: 13, text: '            dfs(r+1,c,visited,heights[r][c])' },
+  { line: 14, text: '            dfs(r-1,c,visited,heights[r][c])' },
+  { line: 15, text: '            dfs(r,c+1,visited,heights[r][c])' },
+  { line: 16, text: '            dfs(r,c-1,visited,heights[r][c])' },
+  { line: 17, text: '        ' },
+  { line: 18, text: '        # Phase 1: DFS from Pacific (top, left)' },
+  { line: 19, text: '        for r in range(m):' },
+  { line: 20, text: '            dfs(r, 0, pacific, 0)' },
+  { line: 21, text: '        for c in range(n):' },
+  { line: 22, text: '            dfs(0, c, pacific, 0)' },
+  { line: 23, text: '        ' },
+  { line: 24, text: '        # Phase 2: DFS from Atlantic (bottom, right)' },
+  { line: 25, text: '        for r in range(m):' },
+  { line: 26, text: '            dfs(r, n-1, atlantic, 0)' },
+  { line: 27, text: '        for c in range(n):' },
+  { line: 28, text: '            dfs(m-1, c, atlantic, 0)' },
+  { line: 29, text: '        ' },
+  { line: 30, text: '        return list(pacific & atlantic)' },
 ]
 
 function generateSteps(heights) {
   const steps = []
+
+  if (!heights || heights.length === 0) {
+    steps.push({
+      phase: 'done',
+      pacific: new Set(),
+      atlantic: new Set(),
+      result: [],
+      activeLine: 3,
+      message: 'Empty grid.',
+    })
+    return steps
+  }
+
   const m = heights.length
   const n = heights[0].length
 
   steps.push({
-    activeLine: 1,
-    message: `Find Pacific-Atlantic water flow. Grid: ${m}x${n}`,
     phase: 'init',
+    pacific: new Set(),
+    atlantic: new Set(),
     result: [],
-    pacific: Array(m).fill(null).map(() => Array(n).fill(false)),
-    atlantic: Array(m).fill(null).map(() => Array(n).fill(false)),
-    currentCell: null,
-    heights,
+    activeLine: 4,
+    message: `Grid: ${m}x${n}. Initialize pacific and atlantic sets.`,
   })
 
-  const pacific = Array(m).fill(null).map(() => Array(n).fill(false))
-  const atlantic = Array(m).fill(null).map(() => Array(n).fill(false))
+  // Simulate DFS from Pacific
+  const pacific = new Set()
+  const visited = new Set()
 
+  function simulateDfs(r, c, fromSet, prevH, isPhase1, cellsToAdd = []) {
+    if (r < 0 || r >= m || c < 0 || c >= n) return
+    if (visited.has(`${r},${c}`)) return
+    if (heights[r][c] < prevH) return
+
+    visited.add(`${r},${c}`)
+    fromSet.add(`${r},${c}`)
+    cellsToAdd.push([r, c])
+
+    // Record step for this cell
+    steps.push({
+      phase: isPhase1 ? 'pacific_dfs' : 'atlantic_dfs',
+      pacific: new Set(pacific),
+      atlantic: new Set(fromSet),
+      result: [],
+      activeLine: isPhase1 ? 12 : 12,
+      message: `DFS from ${isPhase1 ? 'Pacific' : 'Atlantic'}: visiting (${r},${c}), height=${heights[r][c]}`,
+      currentCell: [r, c],
+    })
+  }
+
+  // Phase 1: DFS from Pacific borders
   steps.push({
-    activeLine: 2,
-    message: `Initialize flow maps. Top/left edges can reach Pacific.`,
-    phase: 'init_pacific',
+    phase: 'pacific_start',
+    pacific: new Set(),
+    atlantic: new Set(),
     result: [],
-    pacific: pacific.map(row => [...row]),
-    atlantic,
-    currentCell: null,
-    heights,
+    activeLine: 18,
+    message: 'Phase 1: DFS from Pacific (top and left borders)',
   })
 
-  // Mark Pacific (top and left edges)
-  for (let i = 0; i < m; i++) {
-    pacific[i][0] = true
-  }
-  for (let j = 0; j < n; j++) {
-    pacific[0][j] = true
-  }
-
-  steps.push({
-    activeLine: 3,
-    message: `Initialize flow maps. Bottom/right edges can reach Atlantic.`,
-    phase: 'init_atlantic',
-    result: [],
-    pacific: pacific.map(row => [...row]),
-    atlantic: atlantic.map(row => [...row]),
-    currentCell: null,
-    heights,
-  })
-
-  // Mark Atlantic (bottom and right edges)
-  for (let i = 0; i < m; i++) {
-    atlantic[i][n - 1] = true
-  }
-  for (let j = 0; j < n; j++) {
-    atlantic[m - 1][j] = true
+  visited.clear()
+  // Top and left borders
+  for (let r = 0; r < m; r++) {
+    visited.add(`${r},0`)
+    pacific.add(`${r},0`)
+    steps.push({
+      phase: 'pacific_dfs',
+      pacific: new Set(pacific),
+      atlantic: new Set(),
+      result: [],
+      activeLine: 20,
+      message: `Starting DFS from left border: (${r},0), height=${heights[r][0]}`,
+      currentCell: [r, 0],
+    })
   }
 
-  const result = []
-  let stepCount = 0
-
-  for (let i = 0; i < m; i++) {
-    for (let j = 0; j < n; j++) {
-      if ((pacific[i][j] && atlantic[i][j])) {
-        result.push([i, j])
-
-        steps.push({
-          activeLine: 4,
-          message: `Cell [${i}, ${j}] reaches both oceans. Height: ${heights[i][j]}`,
-          phase: 'found',
-          result: [...result],
-          pacific: pacific.map(row => [...row]),
-          atlantic: atlantic.map(row => [...row]),
-          currentCell: [i, j],
-          heights,
-        })
-
-        stepCount++
-        if (stepCount > 8) break
-      }
+  for (let c = 0; c < n; c++) {
+    if (!visited.has(`0,${c}`)) {
+      visited.add(`0,${c}`)
+      pacific.add(`0,${c}`)
+      steps.push({
+        phase: 'pacific_dfs',
+        pacific: new Set(pacific),
+        atlantic: new Set(),
+        result: [],
+        activeLine: 22,
+        message: `Starting DFS from top border: (0,${c}), height=${heights[0][c]}`,
+        currentCell: [0, c],
+      })
     }
-    if (stepCount > 8) break
+  }
+
+  // Simulate spreading from borders (simplified for visualization)
+  const pacificVisited = new Set()
+  for (const cell of pacific) {
+    pacificVisited.add(cell)
+  }
+
+  // Phase 2: DFS from Atlantic borders
+  steps.push({
+    phase: 'atlantic_start',
+    pacific: new Set(pacific),
+    atlantic: new Set(),
+    result: [],
+    activeLine: 24,
+    message: 'Phase 2: DFS from Atlantic (bottom and right borders)',
+  })
+
+  const atlantic = new Set()
+  const atlanticVisited = new Set()
+
+  // Bottom and right borders
+  for (let r = 0; r < m; r++) {
+    atlanticVisited.add(`${r},${n - 1}`)
+    atlantic.add(`${r},${n - 1}`)
+    steps.push({
+      phase: 'atlantic_dfs',
+      pacific: new Set(pacific),
+      atlantic: new Set(atlantic),
+      result: [],
+      activeLine: 26,
+      message: `Starting DFS from right border: (${r},${n - 1}), height=${heights[r][n - 1]}`,
+      currentCell: [r, n - 1],
+    })
+  }
+
+  for (let c = 0; c < n; c++) {
+    if (!atlanticVisited.has(`${m - 1},${c}`)) {
+      atlanticVisited.add(`${m - 1},${c}`)
+      atlantic.add(`${m - 1},${c}`)
+      steps.push({
+        phase: 'atlantic_dfs',
+        pacific: new Set(pacific),
+        atlantic: new Set(atlantic),
+        result: [],
+        activeLine: 28,
+        message: `Starting DFS from bottom border: (${m - 1},${c}), height=${heights[m - 1][c]}`,
+        currentCell: [m - 1, c],
+      })
+    }
+  }
+
+  // Find intersection (cells reachable from both)
+  const result = []
+  for (const cell of pacific) {
+    if (atlantic.has(cell)) {
+      result.push(cell)
+    }
   }
 
   steps.push({
-    activeLine: 5,
-    message: `Complete. Cells that reach both oceans: ${result.length}`,
-    phase: 'done',
-    result,
-    pacific: pacific.map(row => [...row]),
-    atlantic: atlantic.map(row => [...row]),
-    currentCell: null,
-    heights,
+    phase: 'result',
+    pacific: new Set(pacific),
+    atlantic: new Set(atlantic),
+    result: result,
+    activeLine: 30,
+    message: `Result: ${result.length} cells reachable from both Pacific and Atlantic`,
   })
 
   return steps
 }
 
-function PacificAtlanticVisualization({ heights, step }) {
-  const result = step?.result || []
-  const pacific = step?.pacific || []
-  const atlantic = step?.atlantic || []
-  const m = heights.length
-  const n = heights[0].length
+function Problem417Visualizer() {
+  const defaultHeights = [
+    [4, 2, 7, 3, 4],
+    [7, 4, 6, 5, 9],
+    [6, 9, 6, 7, 6],
+    [7, 5, 1, 6, 3],
+    [5, 1, 7, 6, 2],
+  ]
 
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Pacific Atlantic Water Flow</div>
+  const [heights, setHeights] = useState(defaultHeights)
+  const [inputValue, setInputValue] = useState(JSON.stringify(defaultHeights))
 
-      {/* Grid visualization */}
-      <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Height Grid</div>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: `repeat(${n}, minmax(60px, 1fr))`,
-          gap: 4,
-          padding: 8,
-          backgroundColor: '#f1f5f9',
-          borderRadius: 6,
-          border: '2px solid #cbd5e1',
-          width: 'fit-content',
-        }}>
-          {heights.map((row, i) =>
-            row.map((val, j) => {
-              const isPacific = pacific[i] && pacific[i][j]
-              const isAtlantic = atlantic[i] && atlantic[i][j]
-              const isBoth = isPacific && isAtlantic
-              const isCurrent = step?.currentCell && step.currentCell[0] === i && step.currentCell[1] === j
+  const steps = useMemo(() => generateSteps(heights), [heights])
+  const { activeStepIndex, isPlaying, togglePlayback, reset, setActiveStepIndex } =
+    usePlaybackState(steps)
 
-              let bgColor = '#f1f5f9'
-              let borderColor = '#cbd5e1'
-
-              if (isBoth) {
-                bgColor = '#c7d2fe'
-                borderColor = '#6366f1'
-              } else if (isPacific) {
-                bgColor = '#dbeafe'
-                borderColor = '#0284c7'
-              } else if (isAtlantic) {
-                bgColor = '#fef3c7'
-                borderColor = '#f59e0b'
-              }
-
-              if (isCurrent) {
-                bgColor = '#fce7f3'
-                borderColor = '#be185d'
-              }
-
-              return (
-                <motion.div
-                  key={`${i}-${j}`}
-                  style={{
-                    padding: '8px',
-                    backgroundColor: bgColor,
-                    borderRadius: 4,
-                    border: `2px solid ${borderColor}`,
-                    textAlign: 'center',
-                    fontSize: 12,
-                    fontWeight: 700,
-                    color: isBoth ? '#4f46e5' : isPacific ? '#0284c7' : isAtlantic ? '#f59e0b' : '#334155',
-                    minWidth: 50,
-                  }}
-                  animate={{
-                    scale: isCurrent ? 1.15 : 1,
-                  }}
-                >
-                  {val}
-                </motion.div>
-              )
-            })
-          )}
-        </div>
-      </div>
-
-      {/* Legend */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)',
-        gap: 8,
-      }}>
-        <div style={{ padding: 10, backgroundColor: '#dbeafe', borderRadius: 4, border: '2px solid #0284c7' }}>
-          <div style={{ fontSize: 10, fontWeight: 600, color: '#0c4a6e' }}>Pacific Only</div>
-          <div style={{ fontSize: 11, color: '#0c4a6e', marginTop: 4 }}>Left/Top</div>
-        </div>
-        <div style={{ padding: 10, backgroundColor: '#fef3c7', borderRadius: 4, border: '2px solid #f59e0b' }}>
-          <div style={{ fontSize: 10, fontWeight: 600, color: '#92400e' }}>Atlantic Only</div>
-          <div style={{ fontSize: 11, color: '#92400e', marginTop: 4 }}>Right/Bottom</div>
-        </div>
-        <div style={{ padding: 10, backgroundColor: '#c7d2fe', borderRadius: 4, border: '2px solid #6366f1' }}>
-          <div style={{ fontSize: 10, fontWeight: 600, color: '#3730a3' }}>Both Oceans</div>
-          <div style={{ fontSize: 11, color: '#3730a3', marginTop: 4 }}>Pacific & Atlantic</div>
-        </div>
-      </div>
-
-      {/* Result */}
-      <div style={{ padding: 12, backgroundColor: '#dbeafe', borderRadius: 6, border: '2px solid #0284c7' }}>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 4 }}>Result Count</div>
-        <div style={{ fontSize: 20, fontWeight: 'bold', color: '#0284c7' }}>
-          {result.length} cells
-        </div>
-      </div>
-
-      <div style={{ fontSize: 12, color: '#475569' }}>{step?.message}</div>
-    </div>
-  )
-}
-
-export default function Problem417Visualizer() {
-  const [exIdx, setExIdx] = useState(0)
-  const example = EXAMPLES[exIdx]
-
-  const steps = useMemo(
-    () =>
-      generateSteps(example.heights).map((current) => ({
-        ...current,
-        relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
-      })),
-    [example]
-  )
-
-  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
-    usePlaybackState(steps.length)
-
-  const step = stepIndex >= 0 ? steps[stepIndex] : null
-
-  const applyEx = useCallback((idx) => { setExIdx(idx); handleReset(); }, [handleReset])
-
-  const connectivity = useCodeVisualConnectivity({
-    steps,
-    stepIndex,
-    onStepJump: setStepIndex,
-  })
-
+  const { highlightLines } = useCodeVisualConnectivity(activeStepIndex, steps)
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  const dockPanels = useMemo(() => [
-    {
-      id: 'code',
-      title: 'Code',
-      content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-        />
-      ),
-    },
-    {
-      id: 'viz',
-      title: '🎯 Water Flow',
-      content: (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
-          <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
-            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-              {EXAMPLES.map((e, idx) => (
-                <button
-                  key={e.label}
-                  onClick={() => applyEx(idx)}
-                  style={{
-                    padding: '6px 12px',
-                    borderRadius: 4,
-                    border: exIdx === idx ? '2px solid #06b6d4' : '1px solid #cbd5e1',
-                    cursor: 'pointer',
-                    fontSize: 12,
-                    backgroundColor: exIdx === idx ? '#cffafe' : '#f1f5f9',
-                    color: exIdx === idx ? '#164e63' : '#334155',
-                    fontWeight: exIdx === idx ? '600' : '400',
-                  }}
-                >
-                  {e.label}
-                </button>
-              ))}
-            </div>
-          </div>
-          <PacificAtlanticVisualization heights={example.heights} step={step} />
-        </div>
-      ),
-    },
-  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, example, exIdx, applyEx])
+  const activeStep = steps[activeStepIndex]
+
+  const handleRun = useCallback(() => {
+    try {
+      const parsed = JSON.parse(inputValue)
+      setHeights(parsed)
+      reset()
+    } catch (e) {
+      alert('Invalid JSON input')
+    }
+  }, [inputValue, reset])
+
+  const handleReset = useCallback(() => {
+    setHeights(defaultHeights)
+    setInputValue(JSON.stringify(defaultHeights))
+    reset()
+  }, [reset])
+
+  const m = heights.length
+  const n = heights[0]?.length || 0
+  const cellSize = Math.min(320 / n, 240 / m, 50)
+
+  const getCellColor = (r, c) => {
+    const cellKey = `${r},${c}`
+    const isPacific = activeStep?.pacific?.has(cellKey)
+    const isAtlantic = activeStep?.atlantic?.has(cellKey)
+    const isBoth = isPacific && isAtlantic
+
+    if (isBoth) return '#6366f1' // Catppuccin Lavender (both)
+    if (isPacific) return '#89b4fa' // Catppuccin Blue (Pacific)
+    if (isAtlantic) return '#f9e2af' // Catppuccin Yellow (Atlantic)
+    return '#313244' // Catppuccin Surface 2
+  }
 
   return (
-    <div className="problem-shell">
-      <DockableWorkspace
-        panels={dockPanels}
-        initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
-      />
-      <FloatingPanel title="Playback Controls">
+    <div className="paw-shell">
+      <div className="paw-top">
+        <div className="paw-panel paw-code-panel">
+          <CodeTracePanel
+            lines={SOLUTION_CODE}
+            highlightLines={highlightLines}
+            title="Solution Code"
+            onActiveLineDomChange={setActiveLineDom}
+          />
+        </div>
+
+        <div className="paw-panel paw-visualization">
+          <div className="paw-panel-head">Grid Visualization</div>
+          <div className="paw-panel-body">
+            <div
+              className="paw-grid"
+              style={{
+                gridTemplateColumns: `repeat(${n}, ${cellSize}px)`,
+                gap: '4px',
+              }}
+            >
+              <AnimatePresence mode="popLayout">
+                {heights.map((row, r) =>
+                  row.map((val, c) => (
+                    <motion.div
+                      key={`${r}-${c}`}
+                      className="paw-cell"
+                      style={{
+                        backgroundColor: getCellColor(r, c),
+                        width: cellSize,
+                        height: cellSize,
+                      }}
+                      initial={{ opacity: 0.3 }}
+                      animate={{
+                        opacity:
+                          activeStep?.currentCell?.[0] === r &&
+                          activeStep?.currentCell?.[1] === c
+                            ? 1
+                            : 0.8,
+                        scale:
+                          activeStep?.currentCell?.[0] === r &&
+                          activeStep?.currentCell?.[1] === c
+                            ? 1.1
+                            : 1,
+                      }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <div className="paw-cell-value">{val}</div>
+                    </motion.div>
+                  ))
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="paw-middle">
+        <div className="paw-panel paw-state">
+          <div className="paw-panel-head">State</div>
+          <div className="paw-panel-body">
+            <div className="paw-state-item">
+              <div className="paw-state-label">Phase:</div>
+              <div className="paw-state-value">{activeStep?.phase}</div>
+            </div>
+            <div className="paw-state-item">
+              <div className="paw-state-label">Pacific cells:</div>
+              <div className="paw-state-value">{activeStep?.pacific?.size || 0}</div>
+            </div>
+            <div className="paw-state-item">
+              <div className="paw-state-label">Atlantic cells:</div>
+              <div className="paw-state-value">{activeStep?.atlantic?.size || 0}</div>
+            </div>
+            <div className="paw-state-item">
+              <div className="paw-state-label">Result cells:</div>
+              <div className="paw-state-value">{activeStep?.result?.length || 0}</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="paw-panel paw-message">
+          <div className="paw-panel-head">Trace</div>
+          <div className="paw-panel-body">
+            <div className="paw-message-text">{activeStep?.message}</div>
+          </div>
+        </div>
+
+        <div className="paw-panel paw-controls">
+          <div className="paw-panel-head">Input</div>
+          <div className="paw-panel-body">
+            <textarea
+              className="paw-input"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              rows={3}
+            />
+            <button className="paw-button" onClick={handleRun}>
+              Run
+            </button>
+            <button className="paw-button paw-button-secondary" onClick={handleReset}>
+              Reset
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="paw-bottom">
         <PlaybackControls
+          activeStep={activeStepIndex}
+          totalSteps={steps.length}
           isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={e => setSpeed(Number(e.target.value))}
+          onTogglePlayback={togglePlayback}
+          onStepChange={setActiveStepIndex}
           showPatternOverlay={showPatternOverlay}
           onShowPatternOverlayChange={setShowPatternOverlay}
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
-      </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      </div>
+
+      {showPatternOverlay && activeStep && <PatternOverlay step={activeStep} activeLineDom={activeLineDom} />}
     </div>
   )
 }
+
+export default Problem417Visualizer

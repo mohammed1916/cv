@@ -3,8 +3,8 @@ export const meta = {
   title: "Partition Equal Subset Sum",
   slug: "partition-equal-subset-sum",
   difficulty: "Medium",
-  tags: ["DP", "Backtracking"],
-  description: "Can array be partitioned into two subsets with equal sum?",
+  tags: ["Array", "DP"],
+  description: "0/1 knapsack DP targeting sum/2: dp[j] |= dp[j - num].",
   accent: "#8b5cf6",
 };
-export { default } from "./Problem416Visualizer";
+export { default } from "./PartitionEqualSubsetVisualizer";

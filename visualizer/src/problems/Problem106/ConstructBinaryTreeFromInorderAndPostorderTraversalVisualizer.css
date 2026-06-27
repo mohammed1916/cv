@@ -1,0 +1,7 @@
+/* Construct Binary Tree from Inorder and Postorder Traversal */
+.problem-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #0f172a;
+}

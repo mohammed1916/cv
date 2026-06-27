@@ -1,0 +1,146 @@
+.minimum-height-trees-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 16px;
+  overflow: hidden;
+}
+
+.minimum-height-trees-top {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  gap: 16px;
+}
+
+.minimum-height-trees-middle {
+  display: flex;
+  height: 240px;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.minimum-height-trees-bottom {
+  height: 80px;
+  flex-shrink: 0;
+}
+
+.minimum-height-trees-panel {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  flex: 1;
+}
+
+.minimum-height-trees-panel-head {
+  padding: 12px 16px;
+  background: var(--surface-3);
+  border-bottom: 1px solid var(--border);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.minimum-height-trees-panel-body {
+  padding: 16px;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.minimum-height-trees-textarea {
+  font-family: monospace;
+  font-size: 12px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-1);
+  color: var(--text-main);
+  resize: none;
+  flex: 1;
+}
+
+.minimum-height-trees-viz {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.minimum-height-trees-step-info {
+  padding: 16px;
+  background: linear-gradient(135deg, #8b5cf620, #8b5cf610);
+  border-left: 4px solid #8b5cf6;
+  border-radius: 8px;
+  color: var(--text-main);
+}
+
+.minimum-height-trees-step-info h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.minimum-height-trees-example-btn {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface-1);
+  color: var(--text-main);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.minimum-height-trees-example-btn:hover {
+  background: #8b5cf620;
+  border-color: #8b5cf6;
+  color: #8b5cf6;
+}
+
+.minimum-height-trees-example-btn.active {
+  background: #8b5cf6;
+  border-color: #8b5cf6;
+  color: white;
+}
+
+.minimum-height-trees-examples {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.minimum-height-trees-error {
+  padding: 16px;
+  background: #ef444420;
+  border: 1px solid #ef4444;
+  border-radius: 8px;
+  color: #ef4444;
+  font-size: 12px;
+  font-family: monospace;
+}
+
+.minimum-height-trees-panel-input {
+  flex: 0.35;
+}
+
+.minimum-height-trees-panel-viz {
+  flex: 0.65;
+}
+
+@media (max-width: 1024px) {
+  .minimum-height-trees-middle {
+    height: 200px;
+  }
+}

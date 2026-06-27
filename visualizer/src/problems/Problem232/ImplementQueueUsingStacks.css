@@ -1,0 +1,160 @@
+.implement-queue-using-stacks-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 16px;
+  overflow: hidden;
+}
+
+.implement-queue-using-stacks-top-split {
+  flex: 1;
+  min-height: 0;
+}
+
+.implement-queue-using-stacks-panel {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.implement-queue-using-stacks-panel-head {
+  padding: 12px 16px;
+  background: var(--surface-3);
+  border-bottom: 1px solid var(--border);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.implement-queue-using-stacks-panel-body {
+  padding: 16px;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.implement-queue-using-stacks-example-btn {
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-size: 12px;
+  cursor: pointer;
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: #94a3b8;
+  transition: all 0.2s ease;
+}
+
+.implement-queue-using-stacks-example-btn:hover {
+  background: #334155;
+  color: #f8fafc;
+}
+
+.implement-queue-using-stacks-input {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  background: #0f172a;
+  color: #f8fafc;
+  font-family: monospace;
+  font-size: 14px;
+}
+
+.implement-queue-using-stacks-input:focus {
+  outline: none;
+  border-color: #f59e0b;
+}
+
+.implement-queue-using-stacks-visualization {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 16px;
+  background: var(--surface-3);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.implement-queue-using-stacks-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: #f59e0b;
+  font-style: italic;
+}
+
+.implement-queue-using-stacks-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.implement-queue-using-stacks-story {
+  font-size: 12px;
+  color: #94a3b8;
+  font-style: italic;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.implement-queue-using-stacks-phase {
+  font-size: 11px;
+  color: #64748b;
+  margin: 4px 0;
+  font-family: monospace;
+}
+
+.implement-queue-using-stacks-index {
+  font-size: 11px;
+  color: #f59e0b;
+  margin: 4px 0;
+}
+
+.implement-queue-using-stacks-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.implement-queue-using-stacks-info h3 {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-main);
+}
+
+.implement-queue-using-stacks-info p {
+  margin: 0;
+  font-size: 12px;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+.implement-queue-using-stacks-info strong {
+  color: var(--text-main);
+}
+
+.implement-queue-using-stacks-status {
+  padding: 12px 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  color: #94a3b8;
+  text-align: center;
+  min-height: 20px;
+}
+
+.implement-queue-using-stacks-dock {
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+}
