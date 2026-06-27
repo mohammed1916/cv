@@ -1,14 +1,14 @@
-import { useState, useMemo } from "react";
+﻿import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import DockableWorkspace from '../../components/shared/DockableWorkspace';
 import FloatingPanel from '../../components/shared/FloatingPanel';
 import CodeTracePanel from '../../components/CodeTracePanel';
 import PlaybackControls from '../../components/PlaybackControls';
 import PatternOverlay from '../../components/PatternOverlay';
-import { usePlaybackState } from '../../from '../../$1//usePlaybackState';
-import { usePatternOverlay } from '../../from '../../$1//usePatternOverlay';
-import { useCodeVisualConnectivity } from '../../from '../../$1//useCodeVisualConnectivity';
-import { getExamples } from '../../from '../../$1//examplesRegistry'
+import { usePlaybackState } from '../../usePlaybackState';
+import { usePatternOverlay } from '../../usePatternOverlay';
+import { useCodeVisualConnectivity } from '../../useCodeVisualConnectivity';
+import { getExamples } from '../../examplesRegistry'
 import "./Visualizer.css";
 
 function generateSteps(input) {
@@ -28,12 +28,12 @@ export default function Problem94Visualizer() {
 
   return (
     <DockableWorkspace title="Problem 94" accentColor="#06b6d4" defaultLayout="equal">
-      <FloatingPanel title="Visualization" icon="🎬" dockId="viz" defaultWidth="50%">
+      <FloatingPanel title="Visualization" icon="ðŸŽ¬" dockId="viz" defaultWidth="50%">
         <div style={{padding: 20, textAlign: 'center', minHeight: 200, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#64748b'}}>
           {steps[currentStep]?.message}
         </div>
       </FloatingPanel>
-      <FloatingPanel title="Code" icon="📝" dockId="code" defaultWidth="50%">
+      <FloatingPanel title="Code" icon="ðŸ“" dockId="code" defaultWidth="50%">
         <div style={{padding: 12, fontSize: 12, fontFamily: 'monospace', color: '#64748b'}}>Algorithm code here</div>
       </FloatingPanel>
       <div style={{marginTop: 16, padding: 12}}>
@@ -44,3 +44,4 @@ export default function Problem94Visualizer() {
     </DockableWorkspace>
   );
 }
+

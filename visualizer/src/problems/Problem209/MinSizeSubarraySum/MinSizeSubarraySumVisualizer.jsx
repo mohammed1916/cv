@@ -1,15 +1,27 @@
 import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
-import DockableWorkspace from "../../../../../components/shared/DockableWorkspace";
-import FloatingPanel from "../../../../../components/shared/FloatingPanel";
-import CodeTracePanel from "../../../../../components/CodeTracePanel";
-import PlaybackControls from "../../../../../components/PlaybackControls";
-import PatternOverlay from "../../../../../components/PatternOverlay";
-import { usePlaybackState } from "../../../../../hooks/usePlaybackState";
-import { usePatternOverlay } from "../../../../../hooks/usePatternOverlay";
-import { useCodeVisualConnectivity } from "../../../../../hooks/useCodeVisualConnectivity";
-import { getExamples } from '../../../../config/examplesRegistry'
+import DockableWorkspace from "../../../components/shared/DockableWorkspace";
+import FloatingPanel from "../../../components/shared/FloatingPanel";
+import CodeTracePanel from "../../../components/CodeTracePanel";
+import PlaybackControls from "../../../components/PlaybackControls";
+import PatternOverlay from "../../../components/PatternOverlay";
+import { usePlaybackState } from "../../../hooks/usePlaybackState";
+import { usePatternOverlay } from "../../../hooks/usePatternOverlay";
+import { useCodeVisualConnectivity } from "../../../hooks/useCodeVisualConnectivity";
+import { getExamples } from '../../../config/examplesRegistry'
 import "./MinSizeSubarraySumVisualizer.css";
+
+const SOLUTION_CODE = [
+  { line: 1, text: 'def minSubArrayLen(target, nums):' },
+  { line: 2, text: '    l = 0; total = 0; res = inf' },
+  { line: 3, text: '    for r in range(len(nums)):' },
+  { line: 4, text: '        total += nums[r]' },
+  { line: 5, text: '        while total >= target:' },
+  { line: 6, text: '            res = min(res, r - l + 1)' },
+  { line: 7, text: '            total -= nums[l]' },
+  { line: 8, text: '            l += 1' },
+  { line: 9, text: '    return 0 if res == inf else res' },
+];
 
 const EXAMPLES = getExamples('min-size-subarray-sum');
 

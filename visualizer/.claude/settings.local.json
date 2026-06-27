@@ -17,7 +17,11 @@
       "Bash(node -e \"const fs = require\\('fs'\\); const code = fs.readFileSync\\('src/problems/InsertInterval/InsertIntervalVisualizer.jsx', 'utf8'\\); console.log\\('File size:', code.length, 'bytes'\\); console.log\\('Contains DockableWorkspace:', code.includes\\('DockableWorkspace'\\)\\); console.log\\('Contains FloatingPanel:', code.includes\\('FloatingPanel'\\)\\); console.log\\('Contains useAutoScroll:', code.includes\\('useAutoScroll'\\)\\); console.log\\('Contains IntervalVisualization:', code.includes\\('IntervalVisualization'\\)\\);\")",
       "PowerShell(npx vite build --logLevel error; $exitCode = $LASTEXITCODE; Write-Host \"Exit code: $exitCode\"; if \\($exitCode -eq 0\\) { Write-Host \"Build successful\" } else { Write-Host \"Build failed\" })",
       "Bash(grep -E \"\\\\.\\(js|jsx\\)$\")",
-      "Bash(xargs grep -l \"LC#117\")"
+      "Bash(xargs grep -l \"LC#117\")",
+      "Bash(python \"C:\\\\Users\\\\BBBS-AI-01\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-BBBS-AI-01-d-cv-visualizer\\\\cf3e37fe-6ed2-4751-82b8-8b3e8a9d9165\\\\scratchpad\\\\generate_problems_201_250.py\")"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\BBBS-AI-01\\AppData\\Local\\Temp\\claude\\c--Users-BBBS-AI-01-d-cv-visualizer\\cf3e37fe-6ed2-4751-82b8-8b3e8a9d9165\\scratchpad"
     ]
   }
 }

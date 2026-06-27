@@ -5,10 +5,10 @@ import FloatingPanel from '../../components/shared/FloatingPanel';
 import CodeTracePanel from '../../components/CodeTracePanel';
 import PlaybackControls from '../../components/PlaybackControls';
 import PatternOverlay from '../../components/PatternOverlay';
-import { usePlaybackState } from '../../from '../../$1//usePlaybackState';
-import { usePatternOverlay } from '../../from '../../$1//usePatternOverlay';
-import { useCodeVisualConnectivity } from '../../from '../../$1//useCodeVisualConnectivity';
-import { getExamples } from '../../from '../../$1//examplesRegistry'
+import { usePlaybackState } from '../../usePlaybackState';
+import { usePatternOverlay } from '../../usePatternOverlay';
+import { useCodeVisualConnectivity } from '../../useCodeVisualConnectivity';
+import { getExamples } from '../../examplesRegistry'
 import "./Visualizer.css";
 
 function generateSteps(input) {
@@ -72,3 +72,4 @@ export default function Problem65Visualizer() {
     </DockableWorkspace>
   );
 }
+

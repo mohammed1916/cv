@@ -1,14 +1,14 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
-import CodeTracePanel from '../../../components/CodeTracePanel'
-import PlaybackControls from '../../../components/PlaybackControls'
-import PatternOverlay from '../../../components/PatternOverlay'
-import DockableWorkspace from '../../../components/shared/DockableWorkspace'
-import FloatingPanel from '../../../components/shared/FloatingPanel'
-import { usePlaybackState } from '../../../from '../../$1//usePlaybackState'
-import { usePatternOverlay } from '../../../from '../../$1//usePatternOverlay'
-import { useAutoScroll } from '../../../from '../../$1//useAutoScroll'
-import { getExamples } from '../../../from '../../$1//examplesRegistry'
+import CodeTracePanel from '../../components/CodeTracePanel'
+import PlaybackControls from '../../components/PlaybackControls'
+import PatternOverlay from '../../components/PatternOverlay'
+import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import { usePlaybackState } from '../../usePlaybackState'
+import { usePatternOverlay } from '../../usePatternOverlay'
+import { useAutoScroll } from '../../useAutoScroll'
+import { getExamples } from '../../examplesRegistry'
 import './Problem299Visualizer.css'
 
 const SOLUTION_CODE = [
@@ -106,3 +106,4 @@ export default function Problem299Visualizer() {
         </DockableWorkspace>
     )
 }
+
