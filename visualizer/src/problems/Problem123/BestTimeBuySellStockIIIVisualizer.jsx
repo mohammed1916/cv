@@ -1,4 +1,4 @@
-import DockableWorkspace from "../../components/shared/DockableWorkspace"
+﻿import DockableWorkspace from "../../components/shared/DockableWorkspace"
 import FloatingPanel from "../../components/shared/FloatingPanel"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { useState, useMemo, useCallback } from "react";
@@ -10,6 +10,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from "../../config/examplesRegistry";
 import "./BestTimeBuySellStockIIIVisualizer.css";
+import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const SOLUTION_CODE_INLINE = [
     { line: 1, text: "def maxProfit(prices):" },

@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+﻿import { useCallback, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -7,6 +7,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './AtoiVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const INT_MIN = -(2 ** 31)
 const INT_MAX = 2 ** 31 - 1
@@ -386,7 +387,8 @@ export default function AtoiVisualizer() {
         </AnimatePresence>
       </div>
 
-      <PlaybackControls
+      <FloatingPanel title="Playback Controls">
+        <PlaybackControls
         className="atoi-controls"
         buttonClassName="atoi-btn"
         ghostButtonClassName="atoi-btn-ghost"
@@ -410,6 +412,7 @@ export default function AtoiVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      </FloatingPanel>
 
       {showPatternOverlay && currentStep && <PatternOverlay step={currentStep} activeLineDom={activeLineDom} />}
     </div>

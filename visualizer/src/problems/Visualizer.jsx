@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react'
+﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import DockableWorkspace from '../components/shared/DockableWorkspace'
 import FloatingPanel from '../components/shared/FloatingPanel'
@@ -14,6 +14,7 @@ import { useVisualizationFeatures } from '../hooks/useVisualizationFeatures'
 import { getVisualizationFeatures } from '../config/visualizationRegistry'
 import { getExamples } from '../config/examplesRegistry'
 import './Visualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 
 /**
  * Generic Visualizer template for algorithm visualization problems.

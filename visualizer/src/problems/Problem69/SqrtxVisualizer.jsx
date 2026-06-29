@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react';
+﻿import { useState, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CodeTracePanel from '../../components/CodeTracePanel';
 import PlaybackControls from '../../components/PlaybackControls';
@@ -8,6 +8,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay';
 import { getExamples } from '../../config/examplesRegistry';
 import './SqrtxVisualizer.css';
+import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -474,7 +475,8 @@ export default function SqrtxVisualizer() {
       </div>
 
       {/* Playback controls */}
-      <PlaybackControls
+      <FloatingPanel title="Playback Controls">
+        <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
         speed={speed}
@@ -491,6 +493,7 @@ export default function SqrtxVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      </FloatingPanel>
 
       {/* Pattern overlay */}
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}

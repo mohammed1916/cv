@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from "react";
+﻿import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -7,6 +7,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./IntersectionTwoLinkedListsVisualizer.css";
+import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: "def getIntersectionNode(headA, headB):" },
@@ -174,7 +175,8 @@ export default function IntersectionTwoLinkedListsVisualizer() {
 
       <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
       <div className="itll-status">{step?.message ?? "Press Play to begin."}</div>
-      <PlaybackControls
+      <FloatingPanel title="Playback Controls">
+        <PlaybackControls
         isPlaying={isPlaying} isDone={isDone} speed={speed}
         onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
         prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
@@ -184,6 +186,7 @@ export default function IntersectionTwoLinkedListsVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      </FloatingPanel>
 
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>

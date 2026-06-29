@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState, useRef } from "react";
+﻿import { useCallback, useEffect, useMemo, useState, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -31,6 +31,7 @@ import SituationOverlay from "./SituationOverlay";
 import { useSituationAnalysis } from "./useSituationAnalysis";
 import { usePruningAnalysis } from "./usePruningAnalysis";
 import DualRepresentationView from "./DualRepresentationView";
+import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const MAX_TREE_NODES_TO_RENDER = 120;
 

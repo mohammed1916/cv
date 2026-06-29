@@ -1,4 +1,4 @@
-import { Fragment, useState, useCallback, useEffect, useRef } from 'react'
+﻿import { Fragment, useState, useCallback, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import ResizablePanel from '../../components/ResizablePanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -7,6 +7,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './PalindromeVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const MIN_PANEL_PERCENT = 16
 const SPLITTER_WIDTH_PX = 18
@@ -984,6 +985,7 @@ export default function PalindromeVisualizer() {
 
       {/* ── CONTROLS ──────────────────────────────────────── */}
       {n > 0 && (
+        <FloatingPanel title="Playback Controls">
         <PlaybackControls
           className="controls"
           buttonClassName="btn"
@@ -1016,6 +1018,7 @@ export default function PalindromeVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+      </FloatingPanel>
       )}
 
       {/* ── FINAL RESULT ──────────────────────────────────── */}

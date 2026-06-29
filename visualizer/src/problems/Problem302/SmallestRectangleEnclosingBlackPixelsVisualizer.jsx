@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react'
+﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -9,6 +9,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './SmallestRectangleEnclosingBlackPixelsVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: '# Solution for Smallest Rectangle Enclosing Black Pixels' },
@@ -152,6 +153,7 @@ export default function SmallestRectangleEnclosingBlackPixelsVisualizer() {
       </div>
 
       <div className="smallest-rectangle-enclosing-black-pixels-bottom">
+        <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}
           onPlayPause={() => setIsPlaying(!isPlaying)}
@@ -163,6 +165,7 @@ export default function SmallestRectangleEnclosingBlackPixelsVisualizer() {
           speed={speed}
           onSpeedChange={setSpeed}
         />
+      </FloatingPanel>
       </div>
     </div>
   )

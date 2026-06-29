@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../../components/CodeTracePanel'
 import PlaybackControls from '../../../components/PlaybackControls'
@@ -7,6 +7,7 @@ import { usePlaybackState } from '../../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../../hooks/usePatternOverlay'
 import './KthSmallestMatrixVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const SOLUTION_CODE = [
     { line: 1, text: 'def kthSmallest(matrix: List[List[int]], k: int) -> int:' },
@@ -391,7 +392,8 @@ function KthSmallestMatrixVisualizer() {
 
             <CodeTracePanel code={SOLUTION_CODE} lineConnections={lineConnections} onActiveLineDomChange={setActiveLineDom} />
 
-            <PlaybackControls
+            <FloatingPanel title="Playback Controls">
+        <PlaybackControls
                 currentStep={currentStep}
                 totalSteps={steps.length}
                 isPlaying={isPlaying}
@@ -405,6 +407,7 @@ function KthSmallestMatrixVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+      </FloatingPanel>
 
             {showPatternOverlay && currentStepData && <PatternOverlay step={currentStepData} activeLineDom={activeLineDom} />}
         </div>

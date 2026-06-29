@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import VisualizerPlaybackSection from '../../components/VisualizerPlaybackSection'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
@@ -10,6 +10,7 @@ import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput, TreeSVG } from '../../components/treeUtils'
 import { getExamples } from '../../config/examplesRegistry'
 import './MaxDepthBinaryTreeVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const CANVAS_W = 500
 const CANVAS_H = 320

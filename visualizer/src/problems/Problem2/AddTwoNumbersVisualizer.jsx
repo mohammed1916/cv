@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react'
+﻿import { useState, useCallback, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -10,6 +10,7 @@ import { useProblemCode } from '../../hooks/useProblemCode'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './AddTwoNumbersVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 
 function generateSteps(list1, list2) {
   const steps = []
@@ -300,7 +301,7 @@ export default function AddTwoNumbersVisualizer({ problem }) {
         {step?.message ?? 'Press Play or Step to begin.'}
       </div>
 
-      <div className="atn-dock">
+      <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -318,7 +319,7 @@ export default function AddTwoNumbersVisualizer({ problem }) {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
-      </div>
+      </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )

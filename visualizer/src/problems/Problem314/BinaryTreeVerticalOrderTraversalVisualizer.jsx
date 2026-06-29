@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react'
+﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -9,6 +9,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './BinaryTreeVerticalOrderTraversalVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: '# Solution for Binary Tree Vertical Order Traversal' },
@@ -152,6 +153,7 @@ export default function BinaryTreeVerticalOrderTraversalVisualizer() {
       </div>
 
       <div className="binary-tree-vertical-order-traversal-bottom">
+        <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}
           onPlayPause={() => setIsPlaying(!isPlaying)}
@@ -163,6 +165,7 @@ export default function BinaryTreeVerticalOrderTraversalVisualizer() {
           speed={speed}
           onSpeedChange={setSpeed}
         />
+      </FloatingPanel>
       </div>
     </div>
   )

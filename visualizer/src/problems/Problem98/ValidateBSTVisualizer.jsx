@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -8,6 +8,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
 import { getExamples } from '../../config/examplesRegistry'
 import './ValidateBSTVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const CANVAS_W = 520
 const CANVAS_H = 320
@@ -223,7 +224,8 @@ export default function ValidateBSTVisualizer() {
             <div className={`vbst-status ${step?.phase === 'done' ? (step?.result ? 'ok' : 'fail') : ''}`}>
                 {step?.message || 'Press Play to begin.'}
             </div>
-            <PlaybackControls
+            <FloatingPanel title="Playback Controls">
+        <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
                 prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
@@ -233,6 +235,7 @@ export default function ValidateBSTVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+      </FloatingPanel>
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     )

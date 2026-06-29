@@ -10,6 +10,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import { useAutoScroll } from "../../hooks/useAutoScroll"
 import { getExamples } from "../../config/examplesRegistry"
 import "./RemoveNthNodeVisualizer.css"
+import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: "class Solution:" },

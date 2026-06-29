@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -7,6 +7,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './ReverseVowelsVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const CANVAS_W = 500
 const CANVAS_H = 280
@@ -323,7 +324,9 @@ export default function ReverseVowelsVisualizer() {
                 <div className="rv-status">{step.message}</div>
             </div>
 
-            <PlaybackControls currentStep={currentStep} totalSteps={steps.length} onStepChange={setCurrentStep} isPlaying={isPlaying} onPlayingChange={setIsPlaying} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
+            <FloatingPanel title="Playback Controls">
+        <PlaybackControls currentStep={currentStep} totalSteps={steps.length} onStepChange={setCurrentStep} isPlaying={isPlaying} onPlayingChange={setIsPlaying} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
+      </FloatingPanel>
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     )

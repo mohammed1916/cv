@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -7,6 +7,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './SameTreeVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const CANVAS_W = 340
 const CANVAS_H = 280
@@ -429,7 +430,8 @@ export default function SameTreeVisualizer() {
                 {step?.message || 'Press Play or Step to begin.'}
             </div>
 
-            <PlaybackControls
+            <FloatingPanel title="Playback Controls">
+        <PlaybackControls
                 isPlaying={isPlaying}
                 isDone={isDone}
                 speed={speed}
@@ -446,6 +448,7 @@ export default function SameTreeVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+      </FloatingPanel>
 
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>

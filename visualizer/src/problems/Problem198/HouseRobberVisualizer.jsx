@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
 import VisualizerPlaybackSection from '../../components/VisualizerPlaybackSection'
 import AnimatedIterationList from '../../components/shared/AnimatedIterationList'
 import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
@@ -11,6 +11,7 @@ import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { getExamples } from '../../config/examplesRegistry'
 import './HouseRobberVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 
 function parseNums(input) {
   const parsed = JSON.parse(input)
