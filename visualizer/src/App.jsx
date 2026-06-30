@@ -658,7 +658,7 @@ export default function App() {
             onToggleNavigationTransitions={setNavigationTransitionsEnabled}
           />
         </div>
-        <div id="zoom-content-wrapper" style={{ flex: 1, transformOrigin: 'top left' }}>
+        <div id="zoom-content-wrapper" style={{ flex: 1, transformOrigin: 'top left', marginTop: '60px' }}>
           {navigationTransitionsEnabled ? (
             <AnimatePresence mode="wait">{pageContent}</AnimatePresence>
           ) : (
