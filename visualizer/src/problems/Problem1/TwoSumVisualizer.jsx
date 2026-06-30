@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
+import PatternLegend from '../../components/PatternLegend'
 import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
@@ -10,6 +11,8 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './TwoSumVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+
+const TWOSUM_PATTERNS = ['init', 'loop', 'calc_diff', 'check_map', 'found', 'add_map']
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -292,6 +295,9 @@ export default function TwoSumVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={TWOSUM_PATTERNS} />
+        )}
       </FloatingPanel>
 
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}

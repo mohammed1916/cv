@@ -24,6 +24,12 @@ const PatternLabels = {
   'range-search': { icon: '🔍', label: 'Search', color: '#3b82f6' },
   'range-divide': { icon: '÷', label: 'Divide', color: '#f59e0b' },
   'range-merge': { icon: '⇄', label: 'Merge', color: '#c084fc' },
+  'init': { icon: '◯', label: 'Initialize', color: '#06b6d4' },
+  'loop': { icon: '⟳', label: 'Iterate', color: '#3b82f6' },
+  'calc_diff': { icon: '−', label: 'Calculate', color: '#f59e0b' },
+  'check_map': { icon: '🔍', label: 'Search', color: '#8b5cf6' },
+  'found': { icon: '✓', label: 'Match Found', color: '#10b981' },
+  'add_map': { icon: '➕', label: 'Store', color: '#ec4899' },
 };
 
 export default function PatternOverlay({ step, activeLineDom }) {
