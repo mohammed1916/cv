@@ -184,3 +184,46 @@
   font-size: 12px;
   font-weight: 600;
 }
+
+.pc-zoom-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  background: #0b1220;
+}
+
+.pc-zoom-label {
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.pc-zoom-buttons {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pc-btn-zoom {
+  padding: 4px 8px;
+  font-size: 14px;
+  font-weight: 700;
+  border-color: #475569;
+  min-width: 28px;
+}
+
+.pc-btn-zoom:hover:not(:disabled) {
+  border-color: #64748b;
+  background: #1e293b;
+}
+
+.pc-zoom-value {
+  color: #cbd5e1;
+  font-size: 12px;
+  min-width: 40px;
+  text-align: center;
+  font-weight: 600;
+}
