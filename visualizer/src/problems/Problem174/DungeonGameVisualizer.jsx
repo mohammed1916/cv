@@ -9,8 +9,6 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./DungeonGameVisualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE_INLINE = [
     { line: 1, text: "def calculateMinimumHP(dungeon):" },
     { line: 2, text: "    R, C = len(dungeon), len(dungeon[0])" },
@@ -186,3 +184,4 @@ export default function DungeonGameVisualizer() {
         </div>
     );
 }
+

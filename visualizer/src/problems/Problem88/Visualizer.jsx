@@ -10,8 +10,6 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./Visualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 function generateSteps(nums1Init, m, nums2, n) {
   const steps = [];
   const a = [...nums1Init];
@@ -237,3 +235,4 @@ export default function MergeSortedArrayVisualizer() {
     </div>
   );
 }
+

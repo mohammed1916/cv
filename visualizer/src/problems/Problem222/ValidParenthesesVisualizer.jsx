@@ -9,8 +9,6 @@ import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import "./ValidParenthesesVisualizer.css"
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
   { line: 1, text: "def isValid(s):" },
   { line: 2, text: "    stack = []" },
@@ -329,3 +327,4 @@ export default function ValidParenthesesVisualizer() {
     </div>
   )
 }
+

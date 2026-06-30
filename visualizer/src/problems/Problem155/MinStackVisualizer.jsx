@@ -11,8 +11,6 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import "./MinStackVisualizer.css";
 import { Stack3D } from "../../components/viz3d";
 import { getExamples } from '../../config/examplesRegistry'
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
   { line: 1, text: "class MinStack:" },
   { line: 2, text: "    def __init__(self):" },
@@ -396,3 +394,4 @@ export default function MinStackVisualizer() {
     </div>
   );
 }
+

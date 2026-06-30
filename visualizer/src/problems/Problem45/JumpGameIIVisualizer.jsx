@@ -10,8 +10,6 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./JumpGameIIVisualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: "def jump(nums):" },
   { line: 2, text: "    jumps = 0; curEnd = 0; farthest = 0" },
@@ -213,3 +211,4 @@ export default function JumpGameIIVisualizer() {
     </div>
   );
 }
+

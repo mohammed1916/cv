@@ -10,8 +10,6 @@ import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./LFUCacheVisualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
     { line: 1, text: "class LFUCache:" },
     { line: 2, text: "    def __init__(self, capacity):" },
@@ -231,3 +229,4 @@ export default function LFUCacheVisualizer() {
         </div>
     );
 }
+

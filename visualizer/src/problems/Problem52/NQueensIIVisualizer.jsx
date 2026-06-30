@@ -10,8 +10,6 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./NQueensIIVisualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
   { line: 1,  text: "def solveNQueens(n):" },
   { line: 2,  text: "    cols, diag1, diag2 = set(), set(), set()" },
@@ -253,3 +251,4 @@ export default function NQueensIIVisualizer() {
     </div>
   );
 }
+

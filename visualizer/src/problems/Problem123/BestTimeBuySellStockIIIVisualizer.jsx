@@ -10,8 +10,6 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from "../../config/examplesRegistry";
 import "./BestTimeBuySellStockIIIVisualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE_INLINE = [
     { line: 1, text: "def maxProfit(prices):" },
     { line: 2, text: "    b1 = b2 = -inf  # best profit after 1st/2nd buy" },
@@ -119,3 +117,4 @@ export default function BestTimeBuySellStockIIIVisualizer() {
         </div>
     );
 }
+

@@ -9,8 +9,6 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import "./Problem360Visualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const EXAMPLES = [
   {
     label: "U-shaped (a=1, b=-4, c=3)",
@@ -503,3 +501,4 @@ export default function Problem360Visualizer() {
     </div>
   );
 }
+

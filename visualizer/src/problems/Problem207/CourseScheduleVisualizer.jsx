@@ -9,8 +9,6 @@ import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import "./CourseScheduleVisualizer.css"
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
   { line: 1, text: "def canFinish(numCourses, prereqs):" },
   { line: 2, text: "    graph = [[] for _ in range(numCourses)]" },
@@ -103,3 +101,4 @@ export default function CourseScheduleVisualizer() {
     </div>
   )
 }
+

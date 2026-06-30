@@ -9,8 +9,6 @@ import { usePlaybackState } from '../../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../../hooks/useCodeVisualConnectivity'
 import './EvaluateDivision.css'
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
   { line: 1, text: 'def calcEquation(equations, values, queries):' },
   { line: 2, text: '    graph = build_graph(equations, values)' },
@@ -431,3 +429,4 @@ export default function EvaluateDivisionVisualizer() {
     </div>
   )
 }
+

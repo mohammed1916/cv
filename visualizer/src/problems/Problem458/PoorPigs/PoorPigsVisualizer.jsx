@@ -10,8 +10,6 @@ import { useCodeVisualConnectivity } from '../../../hooks/useCodeVisualConnectiv
 import { usePatternOverlay } from '../../../hooks/usePatternOverlay'
 import { getExamples } from '../../../config/examplesRegistry'
 import './PoorPigsVisualizer.css'
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const EXAMPLES = getExamples('poor-pigs')
 
 function generateSteps(numBuckets, minutesToDie, minutesToTest) {
@@ -341,3 +339,4 @@ export default function PoorPigsVisualizer() {
     </div>
   )
 }
+

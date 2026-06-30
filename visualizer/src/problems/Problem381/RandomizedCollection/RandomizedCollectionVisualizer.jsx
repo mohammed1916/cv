@@ -10,8 +10,6 @@ import { usePatternOverlay } from "../../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../../config/examplesRegistry'
 import "./RandomizedCollectionVisualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
     { line: 1, text: "class RandomizedCollection:" },
     { line: 2, text: "    def __init__(self):" },
@@ -217,3 +215,4 @@ export default function RandomizedCollectionVisualizer() {
         </div>
     );
 }
+

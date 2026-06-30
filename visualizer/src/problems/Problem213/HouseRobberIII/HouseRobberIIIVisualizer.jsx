@@ -9,8 +9,6 @@ import { usePlaybackState } from "../../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../../hooks/usePatternOverlay"
 import "./HouseRobberIIIVisualizer.css"
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
   { line: 1, text: "def rob(root):" },
   { line: 2, text: "    def dfs(node):" },
@@ -271,3 +269,4 @@ export default function HouseRobberIIIVisualizer() {
     </div>
   )
 }
+

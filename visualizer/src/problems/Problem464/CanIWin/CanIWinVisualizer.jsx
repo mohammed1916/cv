@@ -10,8 +10,6 @@ import { useCodeVisualConnectivity } from '../../../hooks/useCodeVisualConnectiv
 import { usePatternOverlay } from '../../../hooks/usePatternOverlay'
 import { getExamples } from '../../../config/examplesRegistry'
 import './CanIWinVisualizer.css'
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const EXAMPLES = getExamples('can-i-win')
 
 const SOLUTION_CODE_INLINE = [
@@ -448,3 +446,4 @@ export default function CanIWinVisualizer() {
     </div>
   )
 }
+

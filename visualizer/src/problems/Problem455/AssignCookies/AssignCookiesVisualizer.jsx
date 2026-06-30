@@ -10,8 +10,6 @@ import { useCodeVisualConnectivity } from '../../../hooks/useCodeVisualConnectiv
 import { usePatternOverlay } from '../../../hooks/usePatternOverlay'
 import { getExamples } from '../../../config/examplesRegistry'
 import './AssignCookiesVisualizer.css'
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const EXAMPLES = getExamples('assign-cookies')
 
 const SOLUTION_CODE_INLINE = [
@@ -338,3 +336,4 @@ export default function AssignCookiesVisualizer() {
     </div>
   )
 }
+

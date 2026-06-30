@@ -10,8 +10,6 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./DistinctSubsequencesVisualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE_INLINE = [
   { line: 1,  text: "def numDistinct(s, t):" },
   { line: 2,  text: "    m, n = len(s), len(t)" },
@@ -127,3 +125,4 @@ export default function DistinctSubsequencesVisualizer() {
     </div>
   );
 }
+

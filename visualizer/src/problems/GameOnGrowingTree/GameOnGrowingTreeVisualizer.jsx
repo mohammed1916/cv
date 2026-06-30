@@ -31,8 +31,6 @@ import SituationOverlay from "./SituationOverlay";
 import { useSituationAnalysis } from "./useSituationAnalysis";
 import { usePruningAnalysis } from "./usePruningAnalysis";
 import DualRepresentationView from "./DualRepresentationView";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const MAX_TREE_NODES_TO_RENDER = 120;
 
 const EXAMPLES = getExamples('game-on-growing-tree');
@@ -1385,3 +1383,4 @@ export default function GameOnGrowingTreeVisualizer() {
     </div>
   );
 }
+

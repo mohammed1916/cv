@@ -10,8 +10,6 @@ import { useCodeVisualConnectivity } from '../../../hooks/useCodeVisualConnectiv
 import { usePatternOverlay } from '../../../hooks/usePatternOverlay'
 import { getExamples } from '../../../config/examplesRegistry'
 import './RepeatedSubstringPatternVisualizer.css'
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const EXAMPLES = getExamples('repeated-substring-pattern')
 
 function generateSteps(s) {
@@ -355,3 +353,4 @@ export default function RepeatedSubstringPatternVisualizer() {
     </div>
   )
 }
+

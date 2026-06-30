@@ -10,8 +10,6 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./InsertIntervalVisualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
     { line: 1, text: "def insert(intervals, newInterval):" },
     { line: 2, text: "    res = []" },
@@ -200,3 +198,4 @@ export default function InsertIntervalVisualizer() {
         </div>
     );
 }
+

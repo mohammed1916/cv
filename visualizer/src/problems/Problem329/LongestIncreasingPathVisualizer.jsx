@@ -10,8 +10,6 @@ import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./LongestIncreasingPathVisualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
     { line: 1, text: "def longestIncreasingPath(matrix):" },
     { line: 2, text: "    memo = {}" },
@@ -260,3 +258,4 @@ export default function LongestIncreasingPathVisualizer() {
         </div>
     );
 }
+

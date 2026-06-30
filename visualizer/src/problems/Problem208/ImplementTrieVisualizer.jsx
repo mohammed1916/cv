@@ -9,8 +9,6 @@ import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import "./ImplementTrieVisualizer.css"
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
   { line: 1, text: "class TrieNode:" },
   { line: 2, text: "    def __init__(self):" },
@@ -127,3 +125,4 @@ export default function ImplementTrieVisualizer() {
     </div>
   )
 }
+

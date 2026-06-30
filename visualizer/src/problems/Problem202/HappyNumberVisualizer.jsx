@@ -9,8 +9,6 @@ import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import "./HappyNumberVisualizer.css"
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const EXAMPLES = [{ label: "Example 1", n: 19 }]
 const SOLUTION_CODE = [
   { line: 1, text: "def isHappy(n):" },
@@ -77,3 +75,4 @@ export default function HappyNumberVisualizer() {
     </div>
   )
 }
+

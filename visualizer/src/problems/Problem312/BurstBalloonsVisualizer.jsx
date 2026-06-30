@@ -10,8 +10,6 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./BurstBalloonsVisualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE_INLINE = [
     { line: 1, text: "def maxCoins(nums):" },
     { line: 2, text: "    nums = [1] + nums + [1]" },
@@ -207,3 +205,4 @@ export default function BurstBalloonsVisualizer() {
         </div>
     );
 }
+

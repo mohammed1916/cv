@@ -10,8 +10,6 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./GenerateParenthesesVisualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE_INLINE = [
     { line: 1, text: "def generateParenthesis(n):" },
     { line: 2, text: "    res = []" },
@@ -207,3 +205,4 @@ export default function GenerateParenthesesVisualizer() {
         </div>
     );
 }
+

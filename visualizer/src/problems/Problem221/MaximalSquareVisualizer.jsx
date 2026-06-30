@@ -9,8 +9,6 @@ import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import "./MaximalSquareVisualizer.css"
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
   { line: 1, text: "def maximalSquare(matrix):" },
   { line: 2, text: "    if not matrix: return 0" },
@@ -307,3 +305,4 @@ export default function MaximalSquareVisualizer() {
     </div>
   )
 }
+

@@ -10,8 +10,6 @@ import { useCodeVisualConnectivity } from '../../../hooks/useCodeVisualConnectiv
 import { usePatternOverlay } from '../../../hooks/usePatternOverlay'
 import { getExamples } from '../../../config/examplesRegistry'
 import './UglyNumberIIVisualizer.css'
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const EXAMPLES = getExamples('ugly-number-ii')
 
 function generateSteps(n) {
@@ -392,3 +390,4 @@ export default function UglyNumberIIVisualizer() {
     </div>
   )
 }
+

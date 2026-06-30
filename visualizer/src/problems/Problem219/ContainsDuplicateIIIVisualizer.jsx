@@ -9,8 +9,6 @@ import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import "./ContainsDuplicateIIIVisualizer.css"
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
   { line: 1, text: "def containsNearbyAlmostDuplicate(nums, k, t):" },
   { line: 2, text: "    if t < 0: return False" },
@@ -302,3 +300,4 @@ export default function ContainsDuplicateIIIVisualizer() {
     </div>
   )
 }
+

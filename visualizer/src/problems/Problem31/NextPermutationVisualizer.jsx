@@ -10,8 +10,6 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./NextPermutationVisualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
   { line: 1, text: "def nextPermutation(nums):" },
   { line: 2, text: "    i = len(nums) - 2" },
@@ -197,3 +195,4 @@ export default function NextPermutationVisualizer() {
     </div>
   );
 }
+

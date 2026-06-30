@@ -13,8 +13,6 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./MoveZeroesVisualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const EXAMPLES = getExamples('move-zeroes');
 
 function generateSteps(numsIn) {
@@ -196,3 +194,4 @@ export default function MoveZeroesVisualizer({ problem }) {
         </div>
     );
 }
+

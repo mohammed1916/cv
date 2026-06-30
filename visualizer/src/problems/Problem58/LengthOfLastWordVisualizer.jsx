@@ -10,8 +10,6 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./LengthOfLastWordVisualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
   { line: 1, text: "def lengthOfLastWord(s):" },
   { line: 2, text: "    i = len(s) - 1" },
@@ -176,3 +174,4 @@ export default function LengthOfLastWordVisualizer() {
     </div>
   );
 }
+

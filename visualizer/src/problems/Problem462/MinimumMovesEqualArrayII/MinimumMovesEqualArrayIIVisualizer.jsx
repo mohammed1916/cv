@@ -10,8 +10,6 @@ import { useCodeVisualConnectivity } from '../../../hooks/useCodeVisualConnectiv
 import { usePatternOverlay } from '../../../hooks/usePatternOverlay'
 import { getExamples } from '../../../config/examplesRegistry'
 import './MinimumMovesEqualArrayIIVisualizer.css'
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const EXAMPLES = getExamples('minimum-moves-to-equal-array-elements-ii')
 
 function generateSteps(nums) {
@@ -342,3 +340,4 @@ export default function MinimumMovesEqualArrayIIVisualizer() {
     </div>
   )
 }
+

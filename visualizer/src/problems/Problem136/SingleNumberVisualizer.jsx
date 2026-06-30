@@ -10,8 +10,6 @@ import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./SingleNumberVisualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const EXAMPLES = getExamples('single-number');
 
 function toBin(n, bits = 4) {
@@ -236,3 +234,4 @@ export default function SingleNumberVisualizer() {
     </div>
   );
 }
+

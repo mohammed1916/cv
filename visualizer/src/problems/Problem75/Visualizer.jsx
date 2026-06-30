@@ -10,8 +10,6 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./Visualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const COLOR_LABEL = ["🔴", "⚪", "🔵"];
 const COLOR_NAME = ["Red", "White", "Blue"];
 const COLOR_HEX = ["#ef4444", "#f3f4f6", "#3b82f6"];
@@ -342,3 +340,4 @@ export default function SortColorsVisualizer() {
       </div>
     );
 }
+

@@ -7,7 +7,7 @@ import { usePlaybackState } from '../../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../../hooks/usePatternOverlay'
 import { getExamples } from '../../../config/examplesRegistry'
 import './FindDisappearedNumbersVisualizer.css'
-import FloatingPanel from '../../components/shared/FloatingPanel'
+import FloatingPanel from '../../../components/shared/FloatingPanel'
 
 const SOLUTION_CODE = [
     { line: 1, text: 'def findDisappearedNumbers(nums):' },

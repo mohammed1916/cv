@@ -10,8 +10,6 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./Problem394Visualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
     { line: 1, text: "def decodeString(s):" },
     { line: 2, text: "    stack = []  # (count, current_str)" },
@@ -184,3 +182,4 @@ export default function Problem394Visualizer() {
         </div>
     );
 }
+

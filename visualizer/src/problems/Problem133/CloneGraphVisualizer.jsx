@@ -10,8 +10,6 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { GraphCanvas3D } from "../../components/viz3d";
 import "./CloneGraphVisualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE_INLINE = [
     { line: 1, text: "def cloneGraph(node):" },
     { line: 2, text: "    if not node: return None" },
@@ -254,3 +252,4 @@ export default function CloneGraphVisualizer() {
         </div>
     );
 }
+

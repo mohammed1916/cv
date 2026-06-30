@@ -10,8 +10,6 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./InterleavingStringVisualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
     { line: 1, text: "def isInterleave(s1, s2, s3):" },
     { line: 2, text: "    m, n = len(s1), len(s2)" },
@@ -233,3 +231,4 @@ export default function InterleavingStringVisualizer() {
         </div>
     );
 }
+

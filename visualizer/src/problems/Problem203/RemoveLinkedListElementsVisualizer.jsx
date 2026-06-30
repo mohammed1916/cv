@@ -9,8 +9,6 @@ import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import "./RemoveLinkedListElementsVisualizer.css"
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const EXAMPLES = [{ label: "Example", head: [1, 2, 6, 3, 4, 5, 6], val: 6 }]
 const SOLUTION_CODE = [
   { line: 1, text: "def removeElements(head, val):" },
@@ -93,3 +91,4 @@ export default function RemoveLinkedListElementsVisualizer() {
     </div>
   )
 }
+

@@ -10,8 +10,6 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./EditDistanceVisualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: "def minDistance(word1, word2):" },
   { line: 2, text: "    m, n = len(word1), len(word2)" },
@@ -200,3 +198,4 @@ export default function EditDistanceVisualizer() {
     </div>
   );
 }
+

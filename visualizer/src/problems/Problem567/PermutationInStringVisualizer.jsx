@@ -10,8 +10,6 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./PermutationInStringVisualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
     { line: 1, text: "def checkInclusion(s1, s2):" },
     { line: 2, text: "    if len(s1) > len(s2): return False" },
@@ -188,3 +186,4 @@ export default function PermutationInStringVisualizer() {
         </div>
     );
 }
+

@@ -9,8 +9,6 @@ import { usePlaybackState } from '../../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../../hooks/usePatternOverlay'
 import './ReverseLinkedListIIVisualizer.css'
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
   { line: 1, text: 'def reverseBetween(head, m, n):' },
   { line: 2, text: '    if not head: return None' },
@@ -329,3 +327,4 @@ export default function ReverseLinkedListIIVisualizer() {
     </div>
   )
 }
+

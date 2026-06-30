@@ -11,8 +11,6 @@ import { useAutoScroll } from '../../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 import './Visualizer.css'
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 function generateSteps(values, left, right) {
   const steps = []
 
@@ -452,3 +450,4 @@ export default function ReverseLinkedListIIVisualizer() {
     </div>
   )
 }
+

@@ -10,8 +10,6 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import DockableWorkspace from "../../components/shared/DockableWorkspace";
 import { getExamples } from '../../config/examplesRegistry'
 import "./PartitionEqualSubsetVisualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
   { line: 1, text: "def canPartition(nums):" },
   { line: 2, text: "    total = sum(nums)" },
@@ -209,3 +207,4 @@ export default function PartitionEqualSubsetVisualizer() {
     </div>
   );
 }
+

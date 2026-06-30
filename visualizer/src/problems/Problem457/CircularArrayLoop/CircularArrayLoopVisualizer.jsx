@@ -10,8 +10,6 @@ import { useCodeVisualConnectivity } from '../../../hooks/useCodeVisualConnectiv
 import { usePatternOverlay } from '../../../hooks/usePatternOverlay'
 import { getExamples } from '../../../config/examplesRegistry'
 import './CircularArrayLoopVisualizer.css'
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const EXAMPLES = getExamples('circular-array-loop')
 
 function generateSteps(nums) {
@@ -320,3 +318,4 @@ export default function CircularArrayLoopVisualizer() {
     </div>
   )
 }
+

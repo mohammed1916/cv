@@ -10,8 +10,6 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./SortListVisualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
     { line: 1, text: "def sortList(head):" },
     { line: 2, text: "    if not head or not head.next: return head" },
@@ -144,3 +142,4 @@ function LinkedListRow({ vals, color }) {
         </div>
     );
 }
+

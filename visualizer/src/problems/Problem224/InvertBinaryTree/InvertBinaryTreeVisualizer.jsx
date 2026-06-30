@@ -9,8 +9,6 @@ import { usePlaybackState } from "../../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../../hooks/usePatternOverlay"
 import "./InvertBinaryTreeVisualizer.css"
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
   { line: 1, text: "def invertTree(root):" },
   { line: 2, text: "    if not root: return None" },
@@ -262,3 +260,4 @@ export default function InvertBinaryTreeVisualizer() {
     </div>
   )
 }
+

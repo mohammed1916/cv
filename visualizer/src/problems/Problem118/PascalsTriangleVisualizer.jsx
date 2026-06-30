@@ -10,8 +10,6 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./PascalsTriangleVisualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const EXAMPLES = getExamples('pascals-triangle');
 
 function generateSteps(numRows) {
@@ -265,3 +263,4 @@ export default function PascalsTriangleVisualizer() {
     </div>
   );
 }
+

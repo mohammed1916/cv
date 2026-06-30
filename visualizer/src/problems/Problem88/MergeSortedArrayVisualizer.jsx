@@ -10,8 +10,6 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./MergeSortedArrayVisualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
   { line: 1,  text: "def merge(nums1, m, nums2, n):" },
   { line: 2,  text: "    i, j, k = m-1, n-1, m+n-1" },
@@ -149,3 +147,4 @@ export default function MergeSortedArrayVisualizer() {
     </div>
   );
 }
+

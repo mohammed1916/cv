@@ -9,8 +9,6 @@ import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import "./CombinationSumIIIVisualizer.css"
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
   { line: 1, text: "def combinationSum3(k, n):" },
   { line: 2, text: "    result = []" },
@@ -284,3 +282,4 @@ export default function CombinationSumIIIVisualizer() {
     </div>
   )
 }
+

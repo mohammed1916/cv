@@ -14,8 +14,6 @@ import { useVisualizationFeatures } from '../hooks/useVisualizationFeatures'
 import { getVisualizationFeatures } from '../config/visualizationRegistry'
 import { getExamples } from '../config/examplesRegistry'
 import './Visualizer.css'
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 /**
  * Generic Visualizer template for algorithm visualization problems.
  *
@@ -506,3 +504,4 @@ export function createExampleButtons(examples, onExampleClick) {
     </div>
   )
 }
+

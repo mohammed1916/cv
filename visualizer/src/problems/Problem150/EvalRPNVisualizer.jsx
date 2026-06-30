@@ -10,8 +10,6 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./EvalRPNVisualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
     { line: 1, text: "def evalRPN(tokens):" },
     { line: 2, text: "    stack = []" },
@@ -187,3 +185,4 @@ export default function EvalRPNVisualizer() {
         </div>
     );
 }
+

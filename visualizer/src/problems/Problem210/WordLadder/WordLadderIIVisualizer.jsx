@@ -9,8 +9,6 @@ import { usePlaybackState } from "../../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../../hooks/usePatternOverlay"
 import "./WordLadderIIVisualizer.css"
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
   { line: 1, text: "def findLadders(beginWord, endWord, wordList):" },
   { line: 2, text: "    neighbors = {w: [] for w in wordList}" },
@@ -116,3 +114,4 @@ export default function WordLadderIIVisualizer() {
     </div>
   )
 }
+

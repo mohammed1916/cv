@@ -11,8 +11,6 @@ import { useAutoScroll } from "../../hooks/useAutoScroll"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { getExamples } from "../../config/examplesRegistry"
 import "./Visualizer.css"
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
   { line: 1, text: "class Solution:" },
   { line: 2, text: "    def deleteDuplicates(self, head: ListNode) -> ListNode:" },
@@ -503,3 +501,4 @@ export default function RemoveDuplicatesFromListVisualizer() {
     </div>
   )
 }
+

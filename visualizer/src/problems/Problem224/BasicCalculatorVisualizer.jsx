@@ -10,8 +10,6 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from "../../config/examplesRegistry";
 import "./BasicCalculatorVisualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
   { line: 1,  text: "def calculate(s):" },
   { line: 2,  text: "    stack, result, num, sign = [], 0, 0, 1" },
@@ -209,3 +207,4 @@ export default function BasicCalculatorVisualizer() {
     </div>
   );
 }
+

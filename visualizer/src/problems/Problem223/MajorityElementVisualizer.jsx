@@ -9,8 +9,6 @@ import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import "./MajorityElementVisualizer.css"
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
   { line: 1, text: "def majorityElement(nums):" },
   { line: 2, text: "    count = 0" },
@@ -231,3 +229,4 @@ export default function MajorityElementVisualizer() {
     </div>
   )
 }
+

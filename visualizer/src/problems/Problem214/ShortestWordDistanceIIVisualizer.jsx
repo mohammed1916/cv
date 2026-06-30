@@ -9,8 +9,6 @@ import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import "./ShortestWordDistanceIIVisualizer.css"
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE = [
   { line: 1, text: "class WordDistance:" },
   { line: 2, text: "    def __init__(self, words):" },
@@ -308,3 +306,4 @@ export default function ShortestWordDistanceIIVisualizer() {
     </div>
   )
 }
+

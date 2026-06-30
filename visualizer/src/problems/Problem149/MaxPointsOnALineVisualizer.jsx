@@ -10,8 +10,6 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./MaxPointsOnALineVisualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
-
 const SOLUTION_CODE_INLINE = [
     { line: 1, text: "def maxPoints(points):" },
     { line: 2, text: "    res = 1" },
@@ -255,3 +253,4 @@ export default function MaxPointsOnALineVisualizer() {
         </div>
     );
 }
+
