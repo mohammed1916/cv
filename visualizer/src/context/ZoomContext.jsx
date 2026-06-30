@@ -29,7 +29,11 @@ export function ZoomProvider({ children }) {
   }, [])
 
   useEffect(() => {
-    document.documentElement.style.zoom = `${zoom}%`
+    const contentWrapper = document.getElementById('zoom-content-wrapper')
+    if (contentWrapper) {
+      contentWrapper.style.transform = `scale(${zoom / 100})`
+      contentWrapper.style.transformOrigin = 'top left'
+    }
   }, [zoom])
 
   return (

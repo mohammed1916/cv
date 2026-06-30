@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import ProblemScaffold from "./components/panels/ProblemScaffold";
 import ProblemInfoPanel from "./components/ProblemInfoPanel";
+import ZoomControls from "./components/ZoomControls";
 import { ZoomProvider } from "./context/ZoomContext";
 import "./App.css";
 import { TRACKS } from "./data/implementedProblems";
@@ -649,6 +650,7 @@ export default function App() {
 
   return (
     <ZoomProvider>
+      <ZoomControls />
       <div className={`app layout-${layoutWidth}`}>
         <div className="app-toolbar">
           <SettingsMenu
@@ -656,11 +658,13 @@ export default function App() {
             onToggleNavigationTransitions={setNavigationTransitionsEnabled}
           />
         </div>
-        {navigationTransitionsEnabled ? (
-          <AnimatePresence mode="wait">{pageContent}</AnimatePresence>
-        ) : (
-          pageContent
-        )}
+        <div id="zoom-content-wrapper" style={{ flex: 1, transformOrigin: 'top left' }}>
+          {navigationTransitionsEnabled ? (
+            <AnimatePresence mode="wait">{pageContent}</AnimatePresence>
+          ) : (
+            pageContent
+          )}
+        </div>
       </div>
     </ZoomProvider>
   );

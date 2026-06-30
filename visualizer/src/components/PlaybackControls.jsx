@@ -1,5 +1,4 @@
 import { Fragment } from 'react'
-import { useZoomControl } from '../context/ZoomContext'
 import './PlaybackControls.css'
 
 export default function PlaybackControls({
@@ -83,15 +82,7 @@ export default function PlaybackControls({
   onShowValueSourceChange,
   valueSourceLabel = 'Value source',
   showValueSourceToggle = false,
-  showZoom = true,
-  zoomMin = 50,
-  zoomMax = 200,
-  zoomLabel = 'Zoom',
 }) {
-
-  const { zoom, setZoom } = useZoomControl()
-  const handleZoomIn = () => setZoom((prev) => Math.min(prev + 10, zoomMax))
-  const handleZoomOut = () => setZoom((prev) => Math.max(prev - 10, zoomMin))
 
   const resolvedRootClass = className || 'pc'
   const resolvedButtonsGroupClass = buttonsGroupClassName || 'pc-buttons'
@@ -136,35 +127,6 @@ export default function PlaybackControls({
               aria-label={speedAriaLabel}
             />
             {speedIndicator && <span className={resolvedSpeedIndicatorClass}>{speedIndicator}</span>}
-          </div>
-        </div>
-      )}
-
-      {showZoom && (
-        <div className="pc-zoom-group">
-          <span className="pc-zoom-label">{zoomLabel}</span>
-          <div className="pc-zoom-buttons">
-            <button
-              type="button"
-              className="pc-btn pc-btn-zoom"
-              onClick={handleZoomOut}
-              disabled={zoom <= zoomMin}
-              title="Zoom out (Ctrl+-)"
-              aria-label="Zoom out"
-            >
-              −
-            </button>
-            <span className="pc-zoom-value">{zoom}%</span>
-            <button
-              type="button"
-              className="pc-btn pc-btn-zoom"
-              onClick={handleZoomIn}
-              disabled={zoom >= zoomMax}
-              title="Zoom in (Ctrl++)"
-              aria-label="Zoom in"
-            >
-              +
-            </button>
           </div>
         </div>
       )}
