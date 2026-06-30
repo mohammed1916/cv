@@ -2,7 +2,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
@@ -13,6 +13,16 @@ import './TwoSumVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const TWOSUM_PATTERNS = ['init', 'loop', 'calc_diff', 'check_map', 'found', 'add_map']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',    // prevMap = {}
+  5: 'loop',    // for i, n in enumerate(nums):
+  6: 'calc_diff', // diff = target - n
+  7: 'check_map', // if diff in prevMap:
+  8: 'found',   // return [prevMap[diff], i]
+  9: 'add_map', // prevMap[n] = i
+}
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -278,6 +288,9 @@ export default function TwoSumVisualizer() {
       </div>
 
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={TWOSUM_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -295,12 +308,15 @@ export default function TwoSumVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={TWOSUM_PATTERNS} />
-        )}
       </FloatingPanel>
 
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+        />
+      )}
     </div>
   )
 }

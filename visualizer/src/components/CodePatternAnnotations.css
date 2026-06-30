@@ -1,0 +1,61 @@
+.code-pattern-annotations {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.code-annotation {
+  position: absolute;
+  right: 12px;
+  opacity: 0.45;
+  transition: all 0.2s ease;
+  font-size: 11px;
+}
+
+.code-annotation.active {
+  opacity: 1;
+  z-index: 20;
+}
+
+.annotation-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--pattern-color);
+  background: rgba(2, 6, 23, 0.85);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(6px);
+  white-space: nowrap;
+}
+
+.code-annotation.active .annotation-badge {
+  background: rgba(2, 6, 23, 0.95);
+  box-shadow: 0 0 16px var(--pattern-color), inset 0 0 8px rgba(var(--pattern-color-rgb), 0.1);
+  border-color: var(--pattern-color);
+  border-width: 1.5px;
+}
+
+.annotation-icon {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--pattern-color);
+  min-width: 16px;
+  text-align: center;
+}
+
+.annotation-label {
+  font-size: 11px;
+  color: var(--pattern-color);
+  font-weight: 500;
+}
+
+.code-annotation.active .annotation-label {
+  color: #f1f5f9;
+  font-weight: 600;
+}
