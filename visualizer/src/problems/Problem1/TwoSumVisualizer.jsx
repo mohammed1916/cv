@@ -275,13 +275,24 @@ export default function TwoSumVisualizer() {
         )}
       />
 
-      <CodeTracePanel
-        step={step}
-        codeLines={SOLUTION_CODE}
-        highlightedLines={connectivity.highlightedLines}
-        onLineSelect={connectivity.handleLineSelect}
-        onActiveLineDomChange={setActiveLineDom}
-      />
+      <div style={{ position: 'relative' }}>
+        <CodeTracePanel
+          step={step}
+          codeLines={SOLUTION_CODE}
+          highlightedLines={connectivity.highlightedLines}
+          onLineSelect={connectivity.handleLineSelect}
+          onActiveLineDomChange={setActiveLineDom}
+        />
+
+        {showPatternOverlay && (
+          <CodePatternAnnotations
+            linePatterns={LINE_PATTERN_MAP}
+            currentPhase={step?.phase}
+            activeLineDom={activeLineDom}
+            activeLine={step?.activeLine}
+          />
+        )}
+      </div>
 
       <div className={`twosum-status ${step?.phase === 'found' ? 'success' : step?.phase === 'done' ? 'fail' : ''}`}>
         {step?.message ?? 'Press Play or Step to begin.'}
@@ -309,14 +320,6 @@ export default function TwoSumVisualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-
-      {showPatternOverlay && (
-        <CodePatternAnnotations
-          linePatterns={LINE_PATTERN_MAP}
-          currentPhase={step?.phase}
-          activeLineDom={activeLineDom}
-        />
-      )}
     </div>
   )
 }

@@ -10,10 +10,10 @@ const PatternInfo = {
   'add_map': { icon: '➕', label: 'Store', color: '#ec4899' },
 }
 
-// Standard line height in Monaco Editor
+// Standard Monaco Editor line height
 const LINE_HEIGHT = 20
 
-export default function CodePatternAnnotations({ linePatterns, currentPhase, activeLineDom }) {
+export default function CodePatternAnnotations({ linePatterns, currentPhase, activeLineDom, activeLine }) {
   const annotations = useMemo(() => {
     if (!linePatterns) return []
     return Object.entries(linePatterns).map(([line, phase]) => ({
@@ -23,22 +23,22 @@ export default function CodePatternAnnotations({ linePatterns, currentPhase, act
     }))
   }, [linePatterns])
 
-  // Get the position offset from activeLineDom
   const getTopPosition = (targetLine) => {
-    if (!activeLineDom) return null
-
-    const activeLineNum = parseInt(activeLineDom.getAttribute('data-line') || activeLineDom.textContent.match(/^\d+/)?.[0] || '0')
-    if (!activeLineNum) return null
+    if (!activeLineDom || !activeLine) return undefined
 
     const activeRect = activeLineDom.getBoundingClientRect()
-    const codePanel = activeLineDom.closest('[class*="code"]') || activeLineDom.closest('[class*="Code"]')
-    if (!codePanel) return null
+    const codePanel = activeLineDom.closest('.ctp-panel') || activeLineDom.closest('[class*="code"]')
 
-    const containerRect = codePanel.getBoundingClientRect()
-    const lineOffset = (targetLine - activeLineNum) * LINE_HEIGHT
-    const currentLineTop = activeRect.top - containerRect.top
+    if (!codePanel) return undefined
 
-    return currentLineTop + lineOffset
+    const panelRect = codePanel.getBoundingClientRect()
+    const panelScrollTop = codePanel.scrollTop || 0
+
+    // Position relative to code panel, accounting for scroll and line offset
+    const baselineTop = activeRect.top - panelRect.top + panelScrollTop
+    const lineOffset = (targetLine - activeLine) * LINE_HEIGHT
+
+    return baselineTop + lineOffset
   }
 
   return (
@@ -53,7 +53,7 @@ export default function CodePatternAnnotations({ linePatterns, currentPhase, act
             className={`code-annotation ${isActive ? 'active' : ''}`}
             style={{
               '--pattern-color': color,
-              top: top !== null ? `${top}px` : undefined,
+              top: top !== undefined ? `${top}px` : undefined,
             }}
           >
             <div className="annotation-badge">
