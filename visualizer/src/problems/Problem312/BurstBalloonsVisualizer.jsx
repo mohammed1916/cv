@@ -4,12 +4,22 @@ import DockableWorkspace from "../../components/shared/DockableWorkspace";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./BurstBalloonsVisualizer.css";
+
+const PATTERNS = ['done', 'fill', 'init']
+const LINE_PATTERN_MAP = {
+  4: 'init',
+  11: 'fill',
+  12: 'done'
+}
+
+
 const SOLUTION_CODE_INLINE = [
     { line: 1, text: "def maxCoins(nums):" },
     { line: 2, text: "    nums = [1] + nums + [1]" },
@@ -34,7 +44,7 @@ function generateSteps(numsOrig) {
     const dp = Array.from({ length: n }, () => Array(n).fill(0));
     const steps = [];
 
-    steps.push({ activeLine: 4, dp, left: -1, right: -1, k: -1, phase: "init", message: `Padded nums = [${nums.join(", ")}], dp is ${n}×${n}` });
+    steps.push({ activeLine: 4, relatedLines: [4], dp, left: -1, right: -1, k: -1, phase: "init", message: `Padded nums = [${nums.join(", ")}], dp is ${n}×${n}` });
 
     for (let length = 2; length < n; length++) {
         for (let left = 0; left < n - length; left++) {
@@ -46,6 +56,7 @@ function generateSteps(numsOrig) {
                 if (improved) dp[left][right] = val;
                 steps.push({
                     activeLine: improved ? 11 : 10,
+                    relatedLines: [improved ? 11 : 10],
                     dp, left, right, k, coins, val, phase: "fill",
                     message: `dp[${left}][${right}]: k=${k}, ${nums[left]}×${nums[k]}×${nums[right]}=${coins}, total=${val}${improved ? ` → dp[${left}][${right}]=${dp[left][right]}` : ""}`,
                 });
@@ -53,7 +64,7 @@ function generateSteps(numsOrig) {
         }
     }
 
-    steps.push({ activeLine: 12, dp, left: 0, right: n - 1, k: -1, phase: "done", done: true, message: `Max coins = dp[0][${n - 1}] = ${dp[0][n - 1]}` });
+    steps.push({ activeLine: 12, relatedLines: [12], dp, left: 0, right: n - 1, k: -1, phase: "done", done: true, message: `Max coins = dp[0][${n - 1}] = ${dp[0][n - 1]}` });
     return steps;
 }
 
@@ -79,13 +90,23 @@ export default function BurstBalloonsVisualizer() {
             id: 'code',
             title: 'Code',
             content: (
-                <CodeTracePanel
-                    step={step}
-                    codeLines={SOLUTION_CODE}
-                    highlightedLines={connectivity.highlightedLines}
-                    onLineSelect={connectivity.handleLineSelect}
-                    onActiveLineDomChange={setActiveLineDom}
-                />
+                <div style={{ position: 'relative' }}>
+                    <CodeTracePanel
+                        step={step}
+                        codeLines={SOLUTION_CODE}
+                        highlightedLines={connectivity.highlightedLines}
+                        onLineSelect={connectivity.handleLineSelect}
+                        onActiveLineDomChange={setActiveLineDom}
+                    />
+                    {showPatternOverlay && (
+                        <CodePatternAnnotations
+                            linePatterns={LINE_PATTERN_MAP}
+                            currentPhase={step?.phase}
+                            activeLineDom={activeLineDom}
+                            activeLine={step?.activeLine}
+                        />
+                    )}
+                </div>
             ),
         },
         {
@@ -183,6 +204,9 @@ export default function BurstBalloonsVisualizer() {
                 initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
             />
             <FloatingPanel title="Playback Controls">
+                {showPatternOverlay && (
+                    <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+                )}
                 <PlaybackControls
                     isPlaying={isPlaying}
                     isDone={isDone}
@@ -201,7 +225,6 @@ export default function BurstBalloonsVisualizer() {
                     showPatternOverlayToggle
                 />
             </FloatingPanel>
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     );
 }

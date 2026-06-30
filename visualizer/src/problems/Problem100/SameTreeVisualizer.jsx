@@ -2,7 +2,8 @@
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
@@ -27,6 +28,20 @@ const SOLUTION_CODE = [
     { line: 10, text: '        right = isSameTree(p.right, q.right)' },
     { line: 11, text: '        return left and right' },
 ]
+
+const LINE_PATTERN_MAP = {
+    "1": "init",
+    "2": "init",
+    "3": "check_loop",
+    "4": "found",
+    "5": "check_loop",
+    "6": "found",
+    "7": "check_loop",
+    "8": "found",
+    "9": "loop",
+    "10": "loop",
+    "11": "check_loop",
+}
 
 // ─── Preset examples ──────────────────────────────────────────────────────────
 const EXAMPLES = getExamples('same-tree')
@@ -424,7 +439,17 @@ export default function SameTreeVisualizer() {
                 </section>
             </div>
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+            <div style={{position: 'relative'}}>
+                <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+                {showPatternOverlay && (
+                    <CodePatternAnnotations
+                        linePatterns={LINE_PATTERN_MAP}
+                        currentPhase={step?.phase}
+                        activeLineDom={activeLineDom}
+                        activeLine={step?.activeLine}
+                    />
+                )}
+            </div>
 
             <div className={`st-status ${hasFinal ? (finalResult ? 'ok' : 'bad') : ''}`}>
                 {step?.message || 'Press Play or Step to begin.'}
@@ -449,8 +474,6 @@ export default function SameTreeVisualizer() {
                 showPatternOverlayToggle
             />
       </FloatingPanel>
-
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     )
 }

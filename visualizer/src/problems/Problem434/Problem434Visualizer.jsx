@@ -4,11 +4,24 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem434Visualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+
+const PATTERNS = ['add_land', 'check_neighbor', 'complete', 'init', 'step_complete', 'union']
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  2: 'add_land',
+  3: 'check_neighbor',
+  4: 'union',
+  5: 'step_complete',
+  6: 'complete'
+}
+
 
 const EXAMPLES = [
   {
@@ -472,7 +485,7 @@ export default function Problem434Visualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      
     </div>
   )
 }

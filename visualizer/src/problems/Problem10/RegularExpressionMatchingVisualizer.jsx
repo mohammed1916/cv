@@ -4,7 +4,8 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import VisualizationControls from '../../components/VisualizationControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
@@ -14,6 +15,21 @@ import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { getExamples } from '../../config/examplesRegistry'
 import './RegularExpressionMatchingVisualizer.css'
+
+const REGEX_PATTERNS = ['init', 'check', 'char_or_dot', 'char_result', 'star_check', 'star_zero', 'star_multi', 'star_result']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  6: 'init',         // Initialize DP table and base cases
+  8: 'check',        // Check each cell
+  10: 'char_or_dot', // Handle . and character match
+  11: 'char_or_dot', // dp[i][j] = dp[i-1][j-1]
+  12: 'char_result', // Result for character/dot case
+  14: 'star_check',  // Handle * case
+  15: 'star_zero',   // Zero occurrences of *
+  16: 'star_multi',  // Multiple occurrences
+  17: 'star_result', // Result for * case
+}
 
 function generateSteps(s, p) {
   const steps = []
@@ -451,14 +467,25 @@ export default function RegularExpressionMatchingVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-          autoScroll={autoScrollCode}
-        />
+        <div style={{ position: 'relative' }}>
+          <CodeTracePanel
+            step={step}
+            codeLines={SOLUTION_CODE}
+            highlightedLines={connectivity.highlightedLines}
+            onLineSelect={connectivity.handleLineSelect}
+            onActiveLineDomChange={setActiveLineDom}
+            autoScroll={autoScrollCode}
+          />
+
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
       ),
     },
     {
@@ -493,6 +520,9 @@ export default function RegularExpressionMatchingVisualizer() {
         initialLayout={{ rows: [['code', 'viz'], ['vars']], minimized: [] }}
       />
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={REGEX_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -517,7 +547,6 @@ export default function RegularExpressionMatchingVisualizer() {
           <VisualizationControls features={vizFeatures} onToggle={toggleVizFeature} />
         )}
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }

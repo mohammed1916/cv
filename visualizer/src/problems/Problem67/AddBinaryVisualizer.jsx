@@ -4,7 +4,8 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -12,6 +13,18 @@ import { getExamples } from '../../config/examplesRegistry'
 import './AddBinaryVisualizer.css'
 
 const EXAMPLES = getExamples('add-binary')
+
+const ADDBINARY_PATTERNS = ['init', 'check_loop', 'get_vals', 'sum', 'append', 'advance']
+
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  3: 'check_loop',
+  5: 'get_vals',
+  7: 'sum',
+  9: 'append',
+  11: 'advance',
+  14: 'init',
+}
 
 function generateSteps(a, b) {
   const steps = []
@@ -23,6 +36,7 @@ function generateSteps(a, b) {
   let result = []
 
   steps.push({
+    phase: 'init',
     activeLine: 1,
     i,
     j,
@@ -39,6 +53,7 @@ function generateSteps(a, b) {
   // Process digits
   while (i >= 0 || j >= 0 || carry > 0) {
     steps.push({
+      phase: 'check_loop',
       activeLine: 3,
       i,
       j,
@@ -56,6 +71,7 @@ function generateSteps(a, b) {
     const b_bit = j >= 0 ? parseInt(b[j]) : 0
 
     steps.push({
+      phase: 'get_vals',
       activeLine: 5,
       i,
       j,
@@ -72,6 +88,7 @@ function generateSteps(a, b) {
     const sum = a_bit + b_bit + carry
 
     steps.push({
+      phase: 'sum',
       activeLine: 7,
       i,
       j,
@@ -91,6 +108,7 @@ function generateSteps(a, b) {
     result.unshift(digit)
 
     steps.push({
+      phase: 'append',
       activeLine: 9,
       i,
       j,
@@ -110,6 +128,7 @@ function generateSteps(a, b) {
     if (j >= 0) j--
 
     steps.push({
+      phase: 'advance',
       activeLine: 11,
       i,
       j,
@@ -125,6 +144,7 @@ function generateSteps(a, b) {
   }
 
   steps.push({
+    phase: 'init',
     activeLine: 14,
     i,
     j,
@@ -350,13 +370,23 @@ export default function AddBinaryVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-        />
+        <div style={{position: 'relative'}}>
+          <CodeTracePanel
+            step={step}
+            codeLines={SOLUTION_CODE}
+            highlightedLines={connectivity.highlightedLines}
+            onLineSelect={connectivity.handleLineSelect}
+            onActiveLineDomChange={setActiveLineDom}
+          />
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
       ),
     },
     {
@@ -380,6 +410,9 @@ export default function AddBinaryVisualizer() {
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
       />
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={ADDBINARY_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -398,7 +431,6 @@ export default function AddBinaryVisualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }

@@ -5,10 +5,21 @@ import FloatingPanel from'../../components/shared/FloatingPanel'
 import CodeTracePanel from'../../components/CodeTracePanel'
 import PlaybackControls from'../../components/PlaybackControls'
 import PatternOverlay from'../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import{useCodeVisualConnectivity}from'../../hooks/useCodeVisualConnectivity'
 import{usePatternOverlay}from'../../hooks/usePatternOverlay'
 import{getExamples}from'../../config/examplesRegistry'
 import'./ReverseStringIIVisualizer.css'
+const PATTERNS = ['done', 'init', 'process', 'reverse']
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  3: 'init',
+  4: 'process',
+  5: 'reverse'
+}
+
+
 const EXAMPLES=getExamples('reverse-string-ii')
 function generateSteps(s,k){const steps=[]
 steps.push({activeLine:1,s,k,result:s,currentI:0,phase:'init',message:`Reverse every first k characters`,relatedLines:[1]})
@@ -31,6 +42,9 @@ const connectivity=useCodeVisualConnectivity({steps,stepIndex,onStepJump:setStep
 const{showPatternOverlay,setShowPatternOverlay,activeLineDom,setActiveLineDom}=usePatternOverlay()
 const dockPanels=useMemo(()=>[{id:'code',title:'Code',content:(<CodeTracePanel step={step}codeLines={SOLUTION_CODE}highlightedLines={connectivity.highlightedLines}onLineSelect={connectivity.handleLineSelect}onActiveLineDomChange={setActiveLineDom}/>)},{id:'viz',title:'↔ Reverse String II',content:(<VisualizationPanel s={ex.s}k={ex.k}step={step}applyEx={applyEx}/>)}],[step,SOLUTION_CODE,connectivity,setActiveLineDom,ex,applyEx])
 return(<div className="problem-shell"><DockableWorkspace panels={dockPanels}initialLayout={{rows:[['code','viz']],minimized:[]}}/><FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
         <PlaybackControls isPlaying={isPlaying}isDone={isDone}speed={speed}onPlayToggle={togglePlay}onPrev={stepBack}onNext={stepForward}onReset={handleReset}prevDisabled={stepIndex<0}nextDisabled={isDone}resetDisabled={stepIndex<0}onSpeedChange={e=>setSpeed(Number(e.target.value))}showPatternOverlay={showPatternOverlay}onShowPatternOverlayChange={setShowPatternOverlay}patternOverlayLabel="Show pattern overlay"showPatternOverlayToggle/>
       </FloatingPanel>{showPatternOverlay&&step&&<PatternOverlay step={step}activeLineDom={activeLineDom}/>}</div>)}
 

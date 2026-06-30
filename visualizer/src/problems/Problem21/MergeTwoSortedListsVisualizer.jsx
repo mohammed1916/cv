@@ -2,12 +2,32 @@
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./MergeTwoSortedListsVisualizer.css";
 import FloatingPanel from '../../components/shared/FloatingPanel'
+
+const MERGETWOSORTEDLISTS_PATTERNS = ['advance_l1', 'advance_l2', 'advance_tail', 'append_l1', 'append_l2', 'append_rem_l1', 'append_rem_l2', 'check_rem_l1', 'check_rem_l2', 'compare', 'done', 'init', 'while_check', 'while_end']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  4: 'init',
+  6: 'while_check',
+  7: 'compare',
+  8: 'append_l1',
+  9: 'advance_l1',
+  11: 'append_l2',
+  12: 'advance_l2',
+  13: 'advance_tail',
+  15: 'check_rem_l1',
+  16: 'append_rem_l1',
+  17: 'check_rem_l2',
+  18: 'append_rem_l2',
+  20: 'done',
+}
 
 const SOLUTION_CODE = [
   { line: 1, text: "class Solution:" },
@@ -497,7 +517,18 @@ export default function MergeTwoSortedListsVisualizer() {
       </div>
 
       <div className="mtsl-middle">
-        <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+        <div style={{ position: 'relative' }}>
+          <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
       </div>
 
       <div
@@ -507,6 +538,9 @@ export default function MergeTwoSortedListsVisualizer() {
       </div>
 
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={MERGETWOSORTEDLISTS_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -525,7 +559,6 @@ export default function MergeTwoSortedListsVisualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   );
 }

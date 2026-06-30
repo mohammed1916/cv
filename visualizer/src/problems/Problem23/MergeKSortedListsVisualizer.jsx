@@ -2,7 +2,8 @@ import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
@@ -26,6 +27,16 @@ const SOLUTION_CODE_INLINE = [
   { line: 12, text: '        return dummy.next' },
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
+
+const MERGEKSORTEDLISTS_PATTERNS = ['done', 'init', 'pop', 'push_next']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  5: 'init',
+  10: 'pop',
+  11: 'push_next',
+  12: 'done',
+}
 
 function parseLists(input) {
   const parsed = JSON.parse(input)
@@ -135,7 +146,9 @@ export default function MergeKSortedListsVisualizer() {
   const steps = useMemo(() => generateSteps(lists), [lists])
   const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyExample = useCallback((ex) => { setInput(JSON.stringify(ex.lists)); handleReset() }, [handleReset])
+  const applyExample = useCallback((ex) => { setInput(JSON.stringify(ex.lists));
+
+ handleReset() }, [handleReset])
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
 
@@ -167,12 +180,23 @@ export default function MergeKSortedListsVisualizer() {
       subtitle: step ? `Active line ${step.activeLine}` : 'Line-by-line solution view.',
       defaultZone: 'right',
       content: (
-        <CodeTracePanel
+                <div style={{ position: "relative" }}>
+          <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           onActiveLineDomChange={setActiveLineDom}
           autoScroll={autoScrollCode}
         />
+
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
       ),
     },
   ], [step, stepIndex, steps.length, lists, inputError, input, handleInputChange, applyExample, setActiveLineDom, autoScrollCode])
@@ -189,6 +213,9 @@ export default function MergeKSortedListsVisualizer() {
       />
 
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={MERGEKSORTEDLISTS_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -213,7 +240,6 @@ export default function MergeKSortedListsVisualizer() {
         />
       </FloatingPanel>
 
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }

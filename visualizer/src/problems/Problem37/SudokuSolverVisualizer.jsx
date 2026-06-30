@@ -2,12 +2,25 @@
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./SudokuSolverVisualizer.css";
 import FloatingPanel from '../../components/shared/FloatingPanel'
+
+const SUDOKUSOLVER_PATTERNS = ['backtrack', 'done', 'init', 'place', 'recurse', 'skip']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  13: 'skip',
+  14: 'place',
+  15: 'recurse',
+  16: 'backtrack',
+  18: 'done',
+}
 
 const SOLUTION_CODE = [
   { line: 1,  text: "def solveSudoku(board):" },
@@ -165,9 +178,23 @@ export default function SudokuSolverVisualizer() {
 
       {step?.done && <div className="su-result">✓ Sudoku Solved!</div>}
 
-      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+      <div style={{ position: 'relative' }}>
+        <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+
+        {showPatternOverlay && (
+          <CodePatternAnnotations
+            linePatterns={LINE_PATTERN_MAP}
+            currentPhase={step?.phase}
+            activeLineDom={activeLineDom}
+            activeLine={step?.activeLine}
+          />
+        )}
+      </div>
       <div className="su-status">{step?.message ?? "Press Play to begin."}</div>
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={SUDOKUSOLVER_PATTERNS} />
+        )}
         <PlaybackControls
         isPlaying={isPlaying} isDone={isDone} speed={speed}
         onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -179,7 +206,6 @@ export default function SudokuSolverVisualizer() {
         showPatternOverlayToggle
       />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   );
 }

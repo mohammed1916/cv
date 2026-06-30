@@ -5,10 +5,22 @@ import FloatingPanel from'../../components/shared/FloatingPanel'
 import CodeTracePanel from'../../components/CodeTracePanel'
 import PlaybackControls from'../../components/PlaybackControls'
 import PatternOverlay from'../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import{useCodeVisualConnectivity}from'../../hooks/useCodeVisualConnectivity'
 import{usePatternOverlay}from'../../hooks/usePatternOverlay'
 import{getExamples}from'../../config/examplesRegistry'
 import'./ComplexNumberMultiplicationVisualizer.css'
+const PATTERNS = ['calc_imag', 'calc_real', 'done', 'init', 'parse']
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  2: 'init',
+  4: 'init',
+  5: 'parse',
+  6: 'calc_real'
+}
+
+
 const EXAMPLES=getExamples('complex-number-multiplication')
 function generateSteps(num1,num2){const steps=[]
 steps.push({activeLine:1,num1,num2,phase:'init',message:`Multiply ${num1} and ${num2}`,relatedLines:[1]})
@@ -32,6 +44,9 @@ const connectivity=useCodeVisualConnectivity({steps,stepIndex,onStepJump:setStep
 const{showPatternOverlay,setShowPatternOverlay,activeLineDom,setActiveLineDom}=usePatternOverlay()
 const dockPanels=useMemo(()=>[{id:'code',title:'Code',content:(<CodeTracePanel step={step}codeLines={SOLUTION_CODE}highlightedLines={connectivity.highlightedLines}onLineSelect={connectivity.handleLineSelect}onActiveLineDomChange={setActiveLineDom}/>)},{id:'viz',title:'✖ Complex Multiplication',content:(<VisualizationPanel num1={ex.num1}num2={ex.num2}step={step}applyEx={applyEx}/>)}],[step,SOLUTION_CODE,connectivity,setActiveLineDom,ex,applyEx])
 return(<div className="problem-shell"><DockableWorkspace panels={dockPanels}initialLayout={{rows:[['code','viz']],minimized:[]}}/><FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
         <PlaybackControls isPlaying={isPlaying}isDone={isDone}speed={speed}onPlayToggle={togglePlay}onPrev={stepBack}onNext={stepForward}onReset={handleReset}prevDisabled={stepIndex<0}nextDisabled={isDone}resetDisabled={stepIndex<0}onSpeedChange={e=>setSpeed(Number(e.target.value))}showPatternOverlay={showPatternOverlay}onShowPatternOverlayChange={setShowPatternOverlay}patternOverlayLabel="Show pattern overlay"showPatternOverlayToggle/>
       </FloatingPanel>{showPatternOverlay&&step&&<PatternOverlay step={step}activeLineDom={activeLineDom}/>}</div>)}
 

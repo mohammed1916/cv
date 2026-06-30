@@ -2,7 +2,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
 import DockableWorkspace from "../../components/shared/DockableWorkspace";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
@@ -25,6 +26,17 @@ const SOLUTION_CODE_INLINE = [
     { line: 12, text: "    return res" },
 ];
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
+
+const GENERATEPARENTHESES_PATTERNS = ['add_close', 'add_open', 'done', 'init', 'record']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  5: 'record',
+  8: 'add_open',
+  10: 'add_close',
+  11: 'init',
+  12: 'done',
+}
 
 function generateSteps(n) {
     const steps = [];
@@ -67,6 +79,8 @@ function generateSteps(n) {
 }
 
 const EXAMPLES = getExamples('generate-parentheses');
+
+
 
 export default function GenerateParenthesesVisualizer() {
     const [n, setN] = useState(3);
@@ -154,7 +168,18 @@ export default function GenerateParenthesesVisualizer() {
             subtitle: step ? `Line ${step.activeLine}` : "Trace the algorithm",
             defaultZone: "full",
             content: (
-                <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />
+                                <div style={{ position: "relative" }}>
+                  <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />
+
+                  {showPatternOverlay && (
+                    <CodePatternAnnotations
+                      linePatterns={LINE_PATTERN_MAP}
+                      currentPhase={step?.phase}
+                      activeLineDom={activeLineDom}
+                      activeLine={step?.activeLine}
+                    />
+                  )}
+                </div>
             ),
         },
     ], [n, stepIndex, steps, step, applyExample, s, autoScrollCode, setActiveLineDom]);
@@ -185,7 +210,10 @@ export default function GenerateParenthesesVisualizer() {
             />
 
             <FloatingPanel title="Playback Controls">
-                <PlaybackControls
+                {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={GENERATEPARENTHESES_PATTERNS} />
+        )}
+        <PlaybackControls
                     isPlaying={isPlaying} isDone={isDone} speed={speed}
                     onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
                     prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
@@ -201,7 +229,6 @@ export default function GenerateParenthesesVisualizer() {
                 />
             </FloatingPanel>
 
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     );
 }

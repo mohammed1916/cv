@@ -4,15 +4,29 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem352Visualizer.css'
 
+const PATTERNS = ['collision-self', 'collision-wall', 'direction', 'eat-food', 'idle', 'init', 'move-forward', 'state-update']
+const LINE_PATTERN_MAP = {
+  0: 'idle',
+  4: 'init',
+  8: 'direction',
+  10: 'collision-wall',
+  12: 'eat-food',
+  14: 'move-forward',
+  15: 'state-update'
+}
+
+
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'from collections import deque' },
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
   { line: 2, text: 'class SnakeGame:' },
   { line: 3, text: '    def __init__(self, h, w, food):' },
   { line: 4, text: '        self.body = deque([(0,0)])' },

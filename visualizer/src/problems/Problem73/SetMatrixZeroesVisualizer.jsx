@@ -2,7 +2,8 @@
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
@@ -21,6 +22,16 @@ const SOLUTION_CODE = [
     { line: 9, text: "            if i in rows or j in cols:" },
     { line: 10, text: "                matrix[i][j] = 0" },
 ];
+
+const PATTERNS = ['done', 'fill', 'mark', 'scan', 'zero'];
+
+const LINE_PATTERN_MAP = {
+    2: 'scan',
+    5: 'scan',
+    6: 'mark',
+    7: 'zero',
+    10: 'fill',
+};
 
 function generateSteps(initial) {
     const steps = [];
@@ -120,10 +131,23 @@ export default function SetMatrixZeroesVisualizer() {
                 </div>
             </div>
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+            <div style={{ position: 'relative' }}>
+                <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+                {showPatternOverlay && (
+                    <CodePatternAnnotations
+                        linePatterns={LINE_PATTERN_MAP}
+                        currentPhase={step?.phase}
+                        activeLineDom={activeLineDom}
+                        activeLine={step?.activeLine}
+                    />
+                )}
+            </div>
             <div className="smz-status">{step?.message ?? "Press Play to begin."}</div>
             <FloatingPanel title="Playback Controls">
-        <PlaybackControls
+              {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+              )}
+              <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
                 prevDisabled={stepIndex <= 0} nextDisabled={isDone} resetDisabled={stepIndex <= 0}
@@ -132,9 +156,8 @@ export default function SetMatrixZeroesVisualizer() {
                 onShowPatternOverlayChange={setShowPatternOverlay}
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
-            />
-      </FloatingPanel>
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+              />
+            </FloatingPanel>
         </div>
     );
 }

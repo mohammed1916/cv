@@ -9,6 +9,8 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { getExamples } from '../../config/examplesRegistry'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 import './UniquePathsIIVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -29,6 +31,17 @@ const SOLUTION_CODE = [
     { line: 15, text: '' },
     { line: 16, text: '        return dp[m-1][n-1]' },
 ]
+
+const UNIQUEPATHSII_PATTERNS = ['blocked', 'done', 'fill', 'fill_first_col', 'fill_first_row', 'init']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  4: 'blocked',
+  5: 'blocked',
+  7: 'init',
+  14: 'fill_first_row',
+  16: 'done',
+}
 
 function generateSteps(m, n, obstacleGrid) {
     const steps = []
@@ -208,7 +221,9 @@ function UniquePathsIIVisualization({ m, n, obstacleGrid, step, onApplyExample, 
                         <label className="upii-input-label">
                             m (rows):
                             <input className="upii-input-num" type="number" min={1} max={6} value={mInput}
-                                onChange={(e) => { setMInput(Number(e.target.value)); handleReset() }} />
+                                onChange={(e) => { setMInput(Number(e.target.value));
+
+ handleReset() }} />
                         </label>
                         <label className="upii-input-label">
                             n (cols):
@@ -371,7 +386,18 @@ export default function UniquePathsIIVisualizer() {
         {
             id: 'code',
             title: 'Code',
-            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
+            content:             <div style={{ position: "relative" }}>
+              <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />
+
+              {showPatternOverlay && (
+                <CodePatternAnnotations
+                  linePatterns={LINE_PATTERN_MAP}
+                  currentPhase={step?.phase}
+                  activeLineDom={activeLineDom}
+                  activeLine={step?.activeLine}
+                />
+              )}
+            </div>,
         },
         {
             id: 'viz',
@@ -391,7 +417,10 @@ export default function UniquePathsIIVisualizer() {
         <div className="problem-shell">
             <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
             <FloatingPanel title="Playback Controls">
-                <PlaybackControls
+                {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={UNIQUEPATHSII_PATTERNS} />
+        )}
+        <PlaybackControls
                     isPlaying={isPlaying} isDone={isDone} speed={speed}
                     onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward}
                     onReset={handleReset} prevDisabled={stepIndex < 0}

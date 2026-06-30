@@ -8,6 +8,8 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './SpiralMatrixIIVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 
 const SOLUTION_CODE = [
   { line: 1,  text: 'class Solution:' },
@@ -37,6 +39,30 @@ const SOLUTION_CODE = [
   { line: 25, text: '                left += 1' },
   { line: 26, text: '        return matrix' },
 ]
+
+const SPIRALMATRIXII_PATTERNS = ['check_left_right', 'check_top_bottom', 'check_while', 'done', 'fill', 'init', 'start_down', 'start_left', 'start_right', 'start_up', 'update_bottom', 'update_left', 'update_right', 'update_top']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  2: 'done',
+  3: 'init',
+  7: 'check_while',
+  8: 'start_right',
+  9: 'fill',
+  11: 'update_top',
+  12: 'start_down',
+  13: 'fill',
+  15: 'update_right',
+  16: 'check_top_bottom',
+  17: 'start_left',
+  18: 'fill',
+  20: 'update_bottom',
+  21: 'check_left_right',
+  22: 'start_up',
+  23: 'fill',
+  25: 'update_left',
+  26: 'done',
+}
 
 function generateSteps(n) {
   const steps = []
@@ -247,7 +273,9 @@ export default function SpiralMatrixIIVisualizer() {
               </label>
               <input
                 value={nInput}
-                onChange={(e) => { setNInput(e.target.value); handleReset() }}
+                onChange={(e) => { setNInput(e.target.value);
+
+ handleReset() }}
                 placeholder="3"
                 className="smi-input"
                 type="number"
@@ -291,7 +319,18 @@ export default function SpiralMatrixIIVisualizer() {
       </div>
 
       <div className="spiral-matrix-ii-middle">
-        <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+                <div style={{ position: "relative" }}>
+          <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
 
         <div className="smi-panel">
           <div className="smi-panel-head">Variables</div>
@@ -331,6 +370,9 @@ export default function SpiralMatrixIIVisualizer() {
       </div>
 
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={SPIRALMATRIXII_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}

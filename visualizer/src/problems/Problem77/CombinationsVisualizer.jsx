@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -9,6 +9,8 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 import './CombinationsVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -25,6 +27,18 @@ const SOLUTION_CODE = [
     { line: 11, text: '    backtrack(1, [])' },
     { line: 12, text: '    return res' },
 ]
+
+const COMBINATIONS_PATTERNS = ['choose', 'done', 'init', 'record', 'recurse', 'unchoose']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  5: 'record',
+  8: 'choose',
+  9: 'recurse',
+  10: 'unchoose',
+  11: 'init',
+  12: 'done',
+}
 
 function generateSteps(n, k) {
     const steps = []
@@ -104,7 +118,9 @@ function VisualizationPanel({ EXAMPLES, applyExample, nInput, setNInput, kInput,
                                 <input
                                     className="comb-input"
                                     value={nInput}
-                                    onChange={(e) => { setNInput(e.target.value); handleReset() }}
+                                    onChange={(e) => { setNInput(e.target.value);
+
+ handleReset() }}
                                     placeholder="4"
                                     type="number"
                                     min="1"
@@ -207,7 +223,18 @@ export default function CombinationsVisualizer() {
         {
             id: 'code',
             title: 'Code',
-            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
+            content:             <div style={{ position: "relative" }}>
+              <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />
+
+              {showPatternOverlay && (
+                <CodePatternAnnotations
+                  linePatterns={LINE_PATTERN_MAP}
+                  currentPhase={step?.phase}
+                  activeLineDom={activeLineDom}
+                  activeLine={step?.activeLine}
+                />
+              )}
+            </div>,
         },
     ], [step, autoScrollCode, nInput, kInput, n, k, inputError])
 
@@ -215,7 +242,10 @@ export default function CombinationsVisualizer() {
         <div className="problem-shell">
             <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['viz', 'code']], minimized: [] }} />
             <FloatingPanel title="Playback Controls">
-                <PlaybackControls
+                {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={COMBINATIONS_PATTERNS} />
+        )}
+        <PlaybackControls
                     isPlaying={isPlaying} isDone={isDone} speed={speed}
                     onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
                     prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
@@ -228,8 +258,8 @@ export default function CombinationsVisualizer() {
                     patternOverlayLabel="Show pattern overlay"
                     showPatternOverlayToggle
                 />
-            </FloatingPanel>
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+            </FloatingPanel>activeLineDom={activeLineDom} />}
         </div>
     )
 }
+

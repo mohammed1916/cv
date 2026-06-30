@@ -2,7 +2,8 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
@@ -11,6 +12,30 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const INT_MIN = -(2 ** 31)
 const INT_MAX = 2 ** 31 - 1
+
+const ATOI_PATTERNS = ['whitespace', 'sign', 'digit', 'stop', 'clamp_min', 'clamp_max', 'final']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'whitespace', // i = 0
+  4: 'whitespace', // n = len(s)
+  5: 'whitespace', // while i < n and s[i] == " ":
+  6: 'whitespace', // i += 1
+  8: 'sign',       // sign = 1
+  9: 'sign',       // if i < n and s[i] in "+-":
+  10: 'sign',      // sign = -1 if s[i] == "-" else 1
+  11: 'sign',      // i += 1
+  13: 'digit',     // result = 0
+  14: 'digit',     // while i < n and s[i].isdigit():
+  15: 'digit',     // result = result * 10 + int(s[i])
+  16: 'digit',     // i += 1
+  18: 'stop',      // result *= sign
+  19: 'clamp_min', // if result < -2**31:
+  20: 'clamp_min', // return -2**31
+  21: 'clamp_max', // if result > 2**31 - 1:
+  22: 'clamp_max', // return 2**31 - 1
+  23: 'final',     // return result
+}
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution(object):' },
@@ -383,11 +408,27 @@ export default function AtoiVisualizer() {
         </div>
 
         <AnimatePresence>
-          {showCode && <CodeTracePanel step={currentStep} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />}
+          {showCode && (
+            <div style={{ position: 'relative' }}>
+              <CodeTracePanel step={currentStep} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+
+              {showPatternOverlay && (
+                <CodePatternAnnotations
+                  linePatterns={LINE_PATTERN_MAP}
+                  currentPhase={currentStep?.phase}
+                  activeLineDom={activeLineDom}
+                  activeLine={currentStep?.activeLine}
+                />
+              )}
+            </div>
+          )}
         </AnimatePresence>
       </div>
 
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={currentStep?.phase} usedPatterns={ATOI_PATTERNS} />
+        )}
         <PlaybackControls
         className="atoi-controls"
         buttonClassName="atoi-btn"
@@ -413,8 +454,6 @@ export default function AtoiVisualizer() {
         showPatternOverlayToggle
       />
       </FloatingPanel>
-
-      {showPatternOverlay && currentStep && <PatternOverlay step={currentStep} activeLineDom={activeLineDom} />}
     </div>
   )
 }

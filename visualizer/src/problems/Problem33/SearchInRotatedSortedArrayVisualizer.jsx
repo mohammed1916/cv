@@ -8,6 +8,8 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './SearchInRotatedSortedArrayVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 
 const SOLUTION_CODE = [
     { line: 1, text: 'class Solution:' },
@@ -34,6 +36,21 @@ const SOLUTION_CODE = [
     { line: 22, text: '' },
     { line: 23, text: '        return -1' },
 ]
+
+const SEARCHINROTATEDSORTEDARRAY_PATTERNS = ['calc_mid', 'check_loop', 'found', 'init', 'move_hi', 'move_lo', 'not_found']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',
+  5: 'check_loop',
+  6: 'calc_mid',
+  8: 'found',
+  13: 'move_hi',
+  15: 'move_lo',
+  19: 'move_lo',
+  21: 'move_hi',
+  23: 'not_found',
+}
 
 function generateSteps(nums, target) {
     const steps = []
@@ -190,7 +207,9 @@ export default function SearchInRotatedSortedArrayVisualizer() {
                                 <input
                                     className="sirsa-input"
                                     value={numsInput}
-                                    onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
+                                    onChange={(e) => { setNumsInput(e.target.value);
+
+ handleReset() }}
                                 />
                             </div>
                             <div className="sirsa-input-group">
@@ -268,13 +287,27 @@ export default function SearchInRotatedSortedArrayVisualizer() {
                 </div>
             </section>
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+                        <div style={{ position: "relative" }}>
+              <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+
+              {showPatternOverlay && (
+                <CodePatternAnnotations
+                  linePatterns={LINE_PATTERN_MAP}
+                  currentPhase={step?.phase}
+                  activeLineDom={activeLineDom}
+                  activeLine={step?.activeLine}
+                />
+              )}
+            </div>
 
             <div className={`sirsa-status${result !== null && result !== undefined ? (result >= 0 ? ' ok' : ' fail') : ''}`}>
                 {step?.message ?? 'Press Play or Step to begin.'}
             </div>
 
             <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={SEARCHINROTATEDSORTEDARRAY_PATTERNS} />
+        )}
         <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward}

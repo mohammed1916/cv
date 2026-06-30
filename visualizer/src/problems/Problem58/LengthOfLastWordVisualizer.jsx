@@ -4,7 +4,8 @@ import DockableWorkspace from "../../components/shared/DockableWorkspace";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
@@ -21,6 +22,19 @@ const SOLUTION_CODE = [
   { line: 8, text: "        i -= 1" },
   { line: 9, text: "    return length" },
 ];
+
+const LENGTHOFLASTWORD_PATTERNS = ['count', 'done', 'init', 'skip'];
+
+const LINE_PATTERN_MAP = {
+  2: 'init',
+  3: 'skip',
+  4: 'skip',
+  5: 'count',
+  6: 'count',
+  7: 'count',
+  8: 'count',
+  9: 'done',
+};
 
 const EXAMPLES = getExamples('length-of-last-word');
 
@@ -78,13 +92,23 @@ export default function LengthOfLastWordVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-        />
+        <div style={{ position: 'relative' }}>
+          <CodeTracePanel
+            step={step}
+            codeLines={SOLUTION_CODE}
+            highlightedLines={connectivity.highlightedLines}
+            onLineSelect={connectivity.handleLineSelect}
+            onActiveLineDomChange={setActiveLineDom}
+          />
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
       ),
     },
     {
@@ -170,7 +194,11 @@ export default function LengthOfLastWordVisualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      <FloatingPanel title="Pattern Guide">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={LENGTHOFLASTWORD_PATTERNS} />
+        )}
+      </FloatingPanel>
     </div>
   );
 }

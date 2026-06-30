@@ -8,7 +8,9 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
-import { getExamples } from "../../config/examplesRegistry";
+import { getExamples } from "../../config/examplesRegistry"
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend";
 import "./LongestValidParenthesesVisualizer.css";
 const SOLUTION_CODE = [
   { line: 1, text: "def longestValidParentheses(s):" },
@@ -25,6 +27,22 @@ const SOLUTION_CODE = [
   { line: 12, text: "                max_len = max(max_len, i - stack[-1])" },
   { line: 13, text: "    return max_len" },
 ];
+
+
+
+const LONGESTVALIDPARENTHESES_PATTERNS = ['calculate_len', 'check', 'check_close', 'done', 'init', 'pop', 'push_current', 'push_open', 'stack_empty']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  2: 'init',
+  5: 'check',
+  6: 'push_open',
+  7: 'check_close',
+  8: 'pop',
+  10: 'stack_empty',
+  12: 'calculate_len',
+  13: 'done',
+}
 
 function generateSteps(s) {
   const steps = [];
@@ -367,12 +385,23 @@ export default function LongestValidParenthesesVisualizer() {
         subtitle: step ? `Line ${step.activeLine}` : "Trace the algorithm",
         defaultZone: "full",
         content: (
-          <CodeTracePanel
+                    <div style={{ position: "relative" }}>
+            <CodeTracePanel
             step={step}
             codeLines={SOLUTION_CODE}
             onActiveLineDomChange={setActiveLineDom}
             autoScroll={autoScrollCode}
           />
+
+            {showPatternOverlay && (
+              <CodePatternAnnotations
+                linePatterns={LINE_PATTERN_MAP}
+                currentPhase={step?.phase}
+                activeLineDom={activeLineDom}
+                activeLine={step?.activeLine}
+              />
+            )}
+          </div>
         ),
       },
     ],
@@ -411,6 +440,9 @@ export default function LongestValidParenthesesVisualizer() {
       </div>
 
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={LONGESTVALIDPARENTHESES_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}

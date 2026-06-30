@@ -4,12 +4,31 @@ import DockableWorkspace from "../../components/shared/DockableWorkspace";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./LetterCombinationsVisualizer.css";
+
+const LC_PATTERNS = ['init', 'choose', 'record', 'unchoose', 'done']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  1: 'init',    // def letterCombinations(digits):
+  2: 'init',    // if not digits: return []
+  3: 'init',    // phone = {...}
+  6: 'init',    // res = []
+  7: 'choose',  // def backtrack(i, path):
+  8: 'choose',  // if i == len(digits):
+  9: 'record',  // res.append(''.join(path))
+  11: 'choose', // for c in phone[digits[i]]:
+  12: 'choose', // path.append(c)
+  13: 'choose', // backtrack(i+1, path)
+  14: 'unchoose', // path.pop()
+  16: 'done',   // return res
+}
 const SOLUTION_CODE_INLINE = [
     { line: 1, text: "def letterCombinations(digits):" },
     { line: 2, text: "    if not digits: return []" },
@@ -97,13 +116,24 @@ export default function LetterCombinationsVisualizer() {
             id: 'code',
             title: 'Code',
             content: (
-                <CodeTracePanel
-                    step={step}
-                    codeLines={SOLUTION_CODE}
-                    highlightedLines={connectivity.highlightedLines}
-                    onLineSelect={connectivity.handleLineSelect}
-                    onActiveLineDomChange={setActiveLineDom}
-                />
+                <div style={{ position: 'relative' }}>
+                    <CodeTracePanel
+                        step={step}
+                        codeLines={SOLUTION_CODE}
+                        highlightedLines={connectivity.highlightedLines}
+                        onLineSelect={connectivity.handleLineSelect}
+                        onActiveLineDomChange={setActiveLineDom}
+                    />
+
+                    {showPatternOverlay && (
+                        <CodePatternAnnotations
+                            linePatterns={LINE_PATTERN_MAP}
+                            currentPhase={step?.phase}
+                            activeLineDom={activeLineDom}
+                            activeLine={step?.activeLine}
+                        />
+                    )}
+                </div>
             ),
         },
         {
@@ -186,6 +216,9 @@ export default function LetterCombinationsVisualizer() {
                 initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
             />
             <FloatingPanel title="Playback Controls">
+                {showPatternOverlay && (
+                    <PatternLegend currentPhase={step?.phase} usedPatterns={LC_PATTERNS} />
+                )}
                 <PlaybackControls
                     isPlaying={isPlaying}
                     isDone={isDone}

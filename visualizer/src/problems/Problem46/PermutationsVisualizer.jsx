@@ -9,6 +9,8 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 import './PermutationsVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -28,6 +30,17 @@ const SOLUTION_CODE = [
     { line: 14, text: '    backtrack([], [False]*len(nums))' },
     { line: 15, text: '    return res' },
 ]
+
+const PERMUTATIONS_PATTERNS = ['choose', 'done', 'init', 'record', 'unchoose']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  5: 'record',
+  10: 'choose',
+  13: 'unchoose',
+  14: 'init',
+  15: 'done',
+}
 
 function generateSteps(nums) {
     const steps = []
@@ -99,7 +112,9 @@ function VisualizationPanel({ EXAMPLES, applyExample, numsInput, setNumsInput, n
                                 <button key={ex.label} className="perm-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
                             ))}
                         </div>
-                        <input className="perm-input" value={numsInput} onChange={(e) => { setNumsInput(e.target.value); handleReset() }} />
+                        <input className="perm-input" value={numsInput} onChange={(e) => { setNumsInput(e.target.value);
+
+ handleReset() }} />
 
                         <div className="perm-section-label">Current path</div>
                         <div className="perm-path-row">
@@ -180,7 +195,18 @@ export default function PermutationsVisualizer() {
         {
             id: 'code',
             title: 'Code',
-            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
+            content:             <div style={{ position: "relative" }}>
+              <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />
+
+              {showPatternOverlay && (
+                <CodePatternAnnotations
+                  linePatterns={LINE_PATTERN_MAP}
+                  currentPhase={step?.phase}
+                  activeLineDom={activeLineDom}
+                  activeLine={step?.activeLine}
+                />
+              )}
+            </div>,
         },
     ], [step, autoScrollCode])
 
@@ -188,7 +214,10 @@ export default function PermutationsVisualizer() {
         <div className="problem-shell">
             <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['viz', 'code']], minimized: [] }} />
             <FloatingPanel title="Playback Controls">
-                <PlaybackControls
+                {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PERMUTATIONS_PATTERNS} />
+        )}
+        <PlaybackControls
                     isPlaying={isPlaying} isDone={isDone} speed={speed}
                     onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
                     prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}

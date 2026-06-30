@@ -4,7 +4,8 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
@@ -25,6 +26,19 @@ const SOLUTION_CODE = [
     { line: 11, text: '            prev = first' },
     { line: 12, text: '        return dummy.next' },
 ]
+
+const SWAPNODESINPAIRS_PATTERNS = ['advance', 'check_end', 'check_pair', 'done', 'identify', 'init', 'swap_done', 'swap_start']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  4: 'init',
+  5: 'check_pair',
+  6: 'identify',
+  8: 'swap_start',
+  10: 'swap_done',
+  11: 'advance',
+  12: 'done',
+}
 
 function generateSteps(values) {
     const steps = []
@@ -134,7 +148,9 @@ function SwapNodesInPairsViz({ step, values, nodes, valInput, setValInput, handl
                     <input
                         className="snip-input"
                         value={valInput}
-                        onChange={(e) => { setValInput(e.target.value); handleReset() }}
+                        onChange={(e) => { setValInput(e.target.value);
+
+ handleReset() }}
                         placeholder="[1,2,3,4,5]"
                     />
                 </div>
@@ -269,7 +285,18 @@ export default function SwapNodesInPairsVisualizer() {
         {
             id: 'code',
             title: 'Code',
-            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
+            content: <div style={{ position: "relative" }}>
+              <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />
+
+              {showPatternOverlay && (
+                <CodePatternAnnotations
+                  linePatterns={LINE_PATTERN_MAP}
+                  currentPhase={step?.phase}
+                  activeLineDom={activeLineDom}
+                  activeLine={step?.activeLine}
+                />
+              )}
+            </div>,
         },
         {
             id: 'viz',
@@ -297,6 +324,10 @@ export default function SwapNodesInPairsVisualizer() {
             <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
 
             <FloatingPanel title="Playback Controls">
+            {showPatternOverlay && (
+              <PatternLegend currentPhase={step?.phase} usedPatterns={SWAPNODESINPAIRS_PATTERNS} />
+            )}
+            
                 <div className="snip-status" style={{ marginBottom: '12px' }}>
                     {step?.message ?? 'Press Play or Step to begin.'}
                 </div>
@@ -322,7 +353,6 @@ export default function SwapNodesInPairsVisualizer() {
                 />
             </FloatingPanel>
 
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     )
 }

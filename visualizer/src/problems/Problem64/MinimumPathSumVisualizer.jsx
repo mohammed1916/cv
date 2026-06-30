@@ -10,9 +10,22 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 import './MinimumPathSumVisualizer.css'
 
 const EXAMPLES = getExamples('minimum-path-sum')
+
+const MINIMUMPATHSUM_PATTERNS = ['done', 'fill', 'fill-col', 'fill-row', 'init']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',
+  6: 'fill-row',
+  9: 'fill-col',
+  12: 'fill',
+  14: 'done',
+}
 
 function generateSteps(grid) {
   const steps = []
@@ -272,7 +285,8 @@ export default function MinimumPathSumVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
+                <div style={{ position: "relative" }}>
+          <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
@@ -280,6 +294,16 @@ export default function MinimumPathSumVisualizer() {
           onActiveLineDomChange={setActiveLineDom}
           autoScroll={autoScrollCode}
         />
+
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
       ),
     },
     {
@@ -308,6 +332,9 @@ export default function MinimumPathSumVisualizer() {
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
       />
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={MINIMUMPATHSUM_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}

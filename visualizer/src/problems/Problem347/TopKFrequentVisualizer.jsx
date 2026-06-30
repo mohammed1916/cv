@@ -2,12 +2,22 @@
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from "../../hooks/usePlaybackState";
+import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./TopKFrequentVisualizer.css";
 import FloatingPanel from '../../components/shared/FloatingPanel'
+
+const PATTERNS = ['buckets', 'count', 'done']
+const LINE_PATTERN_MAP = {
+  2: 'count',
+  5: 'buckets',
+  10: 'done'
+}
+
 
 const SOLUTION_CODE = [
     { line: 1, text: "def topKFrequent(nums, k):" },
@@ -92,7 +102,12 @@ export default function TopKFrequentVisualizer() {
     const { nums, err } = useMemo(() => parseNums(numsInput), [numsInput]);
     const k = useMemo(() => Math.max(1, parseInt(kInput, 10) || 1), [kInput]);
 
-    const steps = useMemo(() => (nums.length ? generateSteps(nums, k) : []), [nums, k]);
+    const steps = useMemo(() => {
+        return nums.length ? generateSteps(nums, k).map((current) => ({
+            ...current,
+            relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
+        })) : []
+    }, [nums, k]);
     const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
@@ -101,6 +116,12 @@ export default function TopKFrequentVisualizer() {
         (ex) => { setNumsInput(JSON.stringify(ex.nums)); setKInput(String(ex.k)); handleReset(); },
         [handleReset]
     );
+
+    const connectivity = useCodeVisualConnectivity({
+        steps,
+        stepIndex,
+        onStepJump: setStepIndex,
+    });
 
     const buckets = step?.buckets ?? [];
 
@@ -179,21 +200,42 @@ export default function TopKFrequentVisualizer() {
                 </div>
             )}
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+            <div style={{ position: 'relative' }}>
+                <CodeTracePanel
+                    step={step}
+                    codeLines={SOLUTION_CODE}
+                    highlightedLines={connectivity.highlightedLines}
+                    onLineSelect={connectivity.handleLineSelect}
+                    onActiveLineDomChange={setActiveLineDom}
+                />
+
+                {showPatternOverlay && (
+                    <CodePatternAnnotations
+                        linePatterns={LINE_PATTERN_MAP}
+                        currentPhase={step?.phase}
+                        activeLineDom={activeLineDom}
+                        activeLine={step?.activeLine}
+                    />
+                )}
+            </div>
+
             <div className="tkf-status">{step?.message ?? "Press Play to begin."}</div>
+
             <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-                isPlaying={isPlaying} isDone={isDone} speed={speed}
-                onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-                prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
-                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                showPatternOverlay={showPatternOverlay}
-                onShowPatternOverlayChange={setShowPatternOverlay}
-                patternOverlayLabel="Show pattern overlay"
-                showPatternOverlayToggle
-            />
-      </FloatingPanel>
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+                {showPatternOverlay && (
+                    <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+                )}
+                <PlaybackControls
+                    isPlaying={isPlaying} isDone={isDone} speed={speed}
+                    onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
+                    prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
+                    onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+                    showPatternOverlay={showPatternOverlay}
+                    onShowPatternOverlayChange={setShowPatternOverlay}
+                    patternOverlayLabel="Show pattern overlay"
+                    showPatternOverlayToggle
+                />
+            </FloatingPanel>
         </div>
     );
 }

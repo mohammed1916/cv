@@ -4,12 +4,28 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+
+const PATTERNS = ['comparing', 'done', 'initialized', 'selected', 'start', 'updated_2', 'updated_3', 'updated_5']
+const LINE_PATTERN_MAP = {
+  1: 'done',
+  2: 'start',
+  4: 'initialized',
+  7: 'comparing',
+  8: 'selected',
+  9: 'updated_2',
+  12: 'updated_3',
+  15: 'updated_5',
+  18: 'done'
+}
+
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def nthUglyNumber(n):' },

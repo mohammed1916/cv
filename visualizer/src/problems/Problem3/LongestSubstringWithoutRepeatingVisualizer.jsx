@@ -2,13 +2,28 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useApplyExample } from '../../hooks/useApplyExample'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './LongestSubstringWithoutRepeatingVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+
+const LSWRC_PATTERNS = ['init', 'check_right', 'check_collision', 'move_left', 'update_map', 'update_max', 'skip_max']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',         // char_map = {}
+  4: 'init',         // left = 0
+  5: 'init',         // max_len = 0
+  6: 'check_right',  // for right in range(len(s)):
+  7: 'check_collision', // if s[right] in char_map and char_map[s[right]] >= left:
+  8: 'move_left',    // left = char_map[s[right]] + 1
+  9: 'update_map',   // char_map[s[right]] = right
+  10: 'update_max',  // max_len = max(max_len, right - left + 1)
+}
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -246,7 +261,18 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
       </div>
 
       <div className="lswrc-middle">
-        <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+        <div style={{ position: 'relative' }}>
+          <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
 
         <div className="lswrc-panel">
           <div className="lswrc-panel-head">Variables</div>
@@ -278,6 +304,9 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
       </div>
 
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={LSWRC_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -296,8 +325,6 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }

@@ -9,6 +9,8 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { getExamples } from '../../config/examplesRegistry'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 import './GroupAnagramsVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -28,6 +30,19 @@ const SOLUTION_CODE = [
 ]
 
 const COLORS = ['#0ea5e9', '#22c55e', '#f97316', '#a855f7', '#14b8a6', '#eab308', '#ef4444', '#ec4899']
+
+const GROUPANAGRAMS_PATTERNS = ['append', 'done', 'existing', 'init', 'new_group', 'pick', 'sort']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',
+  5: 'pick',
+  6: 'sort',
+  8: 'existing',
+  9: 'new_group',
+  11: 'append',
+  13: 'done',
+}
 
 function generateSteps(strs) {
     const steps = []
@@ -176,6 +191,8 @@ function VisualizationPanel({ strs, step, currentWordIdx, currentKey, anagramMap
             </div>
         </div>
     );
+
+
 }
 
 export default function GroupAnagramsVisualizer() {
@@ -247,12 +264,23 @@ export default function GroupAnagramsVisualizer() {
             subtitle: step ? `Active line ${step.activeLine}` : 'Line-by-line solution view.',
             defaultZone: 'full',
             content: (
-                <CodeTracePanel
+                                <div style={{ position: "relative" }}>
+                  <CodeTracePanel
                     step={step}
                     codeLines={SOLUTION_CODE}
                     onActiveLineDomChange={setActiveLineDom}
                     autoScroll={autoScrollCode}
                 />
+
+                  {showPatternOverlay && (
+                    <CodePatternAnnotations
+                      linePatterns={LINE_PATTERN_MAP}
+                      currentPhase={step?.phase}
+                      activeLineDom={activeLineDom}
+                      activeLine={step?.activeLine}
+                    />
+                  )}
+                </div>
             ),
         },
     ], [input, inputError, applyExample, step, stepIndex, steps, strs, currentWordIdx, currentKey, anagramMap, keyToColor, setActiveLineDom, autoScrollCode])
@@ -283,7 +311,10 @@ export default function GroupAnagramsVisualizer() {
             />
 
             <FloatingPanel title="Playback Controls">
-                <PlaybackControls
+                {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={GROUPANAGRAMS_PATTERNS} />
+        )}
+        <PlaybackControls
                     onReset={handleReset}
                     onPrev={stepBack}
                     onPlayToggle={togglePlay}

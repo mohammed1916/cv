@@ -2,7 +2,8 @@
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
 import DockableWorkspace from "../../components/shared/DockableWorkspace";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
@@ -10,6 +11,19 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./NQueensVisualizer.css";
+
+const NQUEENS_PATTERNS = ['init', 'check', 'place', 'skip', 'remove', 'solution']
+
+const LINE_PATTERN_MAP = {
+  5: 'solution',
+  6: 'check',
+  7: 'check',
+  8: 'skip',
+  9: 'place',
+  10: 'place',
+  11: 'remove',
+}
+
 const SOLUTION_CODE = [
   { line: 1,  text: "def solveNQueens(n):" },
   { line: 2,  text: "    cols, diag1, diag2 = set(), set(), set()" },
@@ -201,7 +215,19 @@ export default function NQueensVisualizer() {
     {
       id: "code",
       title: "Code Trace",
-      content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
+      content: (
+        <div style={{position: 'relative'}}>
+          <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
+      ),
     },
   ], [EXAMPLES, ex, n, board, activeRow, activeCol, phase, attacked, step, applyEx, setActiveLineDom, autoScrollCode]);
 
@@ -217,6 +243,9 @@ export default function NQueensVisualizer() {
       />
 
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={NQUEENS_PATTERNS} />
+        )}
         <PlaybackControls
           onReset={handleReset}
           onPrev={stepBack}
@@ -240,10 +269,6 @@ export default function NQueensVisualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-
-      {showPatternOverlay && step && (
-        <PatternOverlay step={step} activeLineDom={activeLineDom} />
-      )}
     </div>
   );
 }

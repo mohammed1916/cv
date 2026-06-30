@@ -2,7 +2,8 @@
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
@@ -11,6 +12,19 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './AddTwoNumbersVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+
+const ATN_PATTERNS = ['init', 'check_loop', 'get_vals', 'sum', 'carry', 'append', 'advance']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  5: 'init',
+  7: 'check_loop',
+  9: 'get_vals',
+  11: 'sum',
+  13: 'carry',
+  15: 'append',
+  19: 'advance',
+}
 
 function generateSteps(list1, list2) {
   const steps = []
@@ -287,7 +301,7 @@ export default function AddTwoNumbersVisualizer({ problem }) {
         )}
       />
 
-      <div className="atn-middle">
+      <div style={{ position: 'relative' }}>
         <CodeTracePanel
           step={step}
           codeLines={codeLines}
@@ -295,6 +309,15 @@ export default function AddTwoNumbersVisualizer({ problem }) {
           onLineSelect={connectivity.handleLineSelect}
           onActiveLineDomChange={setActiveLineDom}
         />
+
+        {showPatternOverlay && (
+          <CodePatternAnnotations
+            linePatterns={LINE_PATTERN_MAP}
+            currentPhase={step?.phase}
+            activeLineDom={activeLineDom}
+            activeLine={step?.activeLine}
+          />
+        )}
       </div>
 
       <div className="atn-status">
@@ -302,6 +325,9 @@ export default function AddTwoNumbersVisualizer({ problem }) {
       </div>
 
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={ATN_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -320,7 +346,6 @@ export default function AddTwoNumbersVisualizer({ problem }) {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }

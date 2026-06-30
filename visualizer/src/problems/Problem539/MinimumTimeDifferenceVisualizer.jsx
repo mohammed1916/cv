@@ -5,10 +5,22 @@ import FloatingPanel from'../../components/shared/FloatingPanel'
 import CodeTracePanel from'../../components/CodeTracePanel'
 import PlaybackControls from'../../components/PlaybackControls'
 import PatternOverlay from'../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import{useCodeVisualConnectivity}from'../../hooks/useCodeVisualConnectivity'
 import{usePatternOverlay}from'../../hooks/usePatternOverlay'
 import{getExamples}from'../../config/examplesRegistry'
 import'./MinimumTimeDifferenceVisualizer.css'
+const PATTERNS = ['compare', 'done', 'init', 'sort', 'update', 'wrap']
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  2: 'init',
+  5: 'init',
+  6: 'sort',
+  7: 'compare'
+}
+
+
 const EXAMPLES=getExamples('minimum-time-difference')
 function generateSteps(timePoints){const steps=[]
 steps.push({activeLine:1,timePoints,times:[],minDiff:Infinity,phase:'init',message:'Find minimum time difference',relatedLines:[1]})
@@ -32,6 +44,9 @@ const connectivity=useCodeVisualConnectivity({steps,stepIndex,onStepJump:setStep
 const{showPatternOverlay,setShowPatternOverlay,activeLineDom,setActiveLineDom}=usePatternOverlay()
 const dockPanels=useMemo(()=>[{id:'code',title:'Code',content:(<CodeTracePanel step={step}codeLines={SOLUTION_CODE}highlightedLines={connectivity.highlightedLines}onLineSelect={connectivity.handleLineSelect}onActiveLineDomChange={setActiveLineDom}/>)},{id:'viz',title:'⏱ Minimum Time Difference',content:(<VisualizationPanel timePoints={ex.timePoints}step={step}applyEx={applyEx}/>)}],[step,SOLUTION_CODE,connectivity,setActiveLineDom,ex,applyEx])
 return(<div className="problem-shell"><DockableWorkspace panels={dockPanels}initialLayout={{rows:[['code','viz']],minimized:[]}}/><FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
         <PlaybackControls isPlaying={isPlaying}isDone={isDone}speed={speed}onPlayToggle={togglePlay}onPrev={stepBack}onNext={stepForward}onReset={handleReset}prevDisabled={stepIndex<0}nextDisabled={isDone}resetDisabled={stepIndex<0}onSpeedChange={e=>setSpeed(Number(e.target.value))}showPatternOverlay={showPatternOverlay}onShowPatternOverlayChange={setShowPatternOverlay}patternOverlayLabel="Show pattern overlay"showPatternOverlayToggle/>
       </FloatingPanel>{showPatternOverlay&&step&&<PatternOverlay step={step}activeLineDom={activeLineDom}/>}</div>)}
 

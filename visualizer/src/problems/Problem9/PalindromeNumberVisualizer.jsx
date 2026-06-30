@@ -4,12 +4,27 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 import './PalindromeNumberVisualizer.css'
+
+const PN_PATTERNS = ['init', 'negative', 'trailing_zero', 'state', 'check', 'extract', 'build', 'advance', 'compare']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  2: 'init',          // if x < 0 or (x % 10 == 0 and x != 0):
+  3: 'init',          // return False
+  4: 'state',         // rev = 0
+  5: 'check',         // while x > rev:
+  6: 'extract',       // rev = rev * 10 + x % 10
+  6: 'build',         // rev = rev * 10 + x % 10
+  7: 'advance',       // x //= 10
+  8: 'compare',       // return x == rev or x == rev // 10
+}
 
 const SOLUTION_CODE = [
   { line: 1, text: 'def isPalindrome(x: int) -> bool:' },
@@ -447,13 +462,24 @@ export default function PalindromeNumberVisualizer() {
       id: 'code',
       title: 'Code',
       component: (
-        <CodeTracePanel
-          step={step}
-          codeLines={solutionCode || SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-        />
+        <div style={{ position: 'relative' }}>
+          <CodeTracePanel
+            step={step}
+            codeLines={solutionCode || SOLUTION_CODE}
+            highlightedLines={connectivity.highlightedLines}
+            onLineSelect={connectivity.handleLineSelect}
+            onActiveLineDomChange={setActiveLineDom}
+          />
+
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
       ),
     },
     {
@@ -582,6 +608,9 @@ export default function PalindromeNumberVisualizer() {
       </div>
 
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PN_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -600,8 +629,6 @@ export default function PalindromeNumberVisualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }

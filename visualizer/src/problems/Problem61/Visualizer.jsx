@@ -4,12 +4,23 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace';
 import FloatingPanel from '../../components/shared/FloatingPanel';
 import CodeTracePanel from '../../components/CodeTracePanel';
 import PlaybackControls from '../../components/PlaybackControls';
-import PatternOverlay from '../../components/PatternOverlay';
+import CodePatternAnnotations from '../../components/CodePatternAnnotations';
+import PatternLegend from '../../components/PatternLegend';
 import { usePlaybackState } from '../../hooks/usePlaybackState';
 import { usePatternOverlay } from '../../hooks/usePatternOverlay';
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity';
 import { getExamples } from '../../config/examplesRegistry'
 import "./Visualizer.css";
+
+const PATTERNS = ['calc', 'complete', 'init', 'rotate', 'traverse'];
+
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  2: 'calc',
+  3: 'traverse',
+  4: 'rotate',
+  5: 'complete',
+};
 
 function generateSteps(list, k) {
   const steps = [];
@@ -115,8 +126,9 @@ export default function Problem61Visualizer() {
   }, [listInput, kInput]);
 
   const { steps, currentStep } = usePlaybackState(useMemo(() => generateSteps(list, k), [list, k]));
-  const { showPattern } = usePatternOverlay();
+  const { showPatternOverlay, activeLineDom } = usePatternOverlay();
   const { connectivity } = useCodeVisualConnectivity(steps[currentStep]?.activeLine);
+  const step = steps[currentStep];
 
   return (
     <DockableWorkspace title="Rotate List - Carousel" accentColor="#f97316" defaultLayout="equal">
@@ -125,7 +137,17 @@ export default function Problem61Visualizer() {
       </FloatingPanel>
 
       <FloatingPanel title="Code Trace" icon="📝" dockId="code" defaultWidth="50%">
-        <CodeTracePanel code={SOLUTION_CODE} activeLine={steps[currentStep]?.activeLine} connectivity={connectivity} />
+        <div style={{ position: 'relative' }}>
+          <CodeTracePanel code={SOLUTION_CODE} activeLine={steps[currentStep]?.activeLine} connectivity={connectivity} />
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
       </FloatingPanel>
 
       <div style={{ marginTop: 16, padding: 12, background: '#f8fafc', borderRadius: 8, border: '1px solid #cbd5e1' }}>
@@ -142,7 +164,11 @@ export default function Problem61Visualizer() {
         <PlaybackControls currentStep={currentStep} totalSteps={steps.length} />
       </div>
 
-      {showPattern && <PatternOverlay />}
+      {showPatternOverlay && (
+        <FloatingPanel title="Pattern Legend" icon="🎨" dockId="legend" defaultWidth="25%">
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        </FloatingPanel>
+      )}
     </DockableWorkspace>
   );
 }

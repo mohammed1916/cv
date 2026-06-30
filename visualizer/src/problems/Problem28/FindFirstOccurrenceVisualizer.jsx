@@ -2,13 +2,14 @@
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './FindFirstOccurrenceVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -24,6 +25,19 @@ const SOLUTION_CODE = [
   { line: 11, text: '        ' },
   { line: 12, text: '        return -1' },
 ]
+
+const FINDFIRSTOCCURRENCE_PATTERNS = ['compare', 'done', 'empty_needle', 'init', 'loop_check', 'match_found', 'mismatch', 'return_zero']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'empty_needle',
+  4: 'return_zero',
+  6: 'init',
+  8: 'loop_check',
+  9: 'compare',
+  10: 'match_found',
+  12: 'done',
+}
 
 function generateSteps(haystack, needle) {
   const steps = []
@@ -182,7 +196,9 @@ export default function FindFirstOccurrenceVisualizer({ problem }) {
                 <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace', minWidth: 70 }}>haystack:</span>
                 <input
                   value={haystackInput}
-                  onChange={(e) => { setHaystackInput(e.target.value); handleReset() }}
+                  onChange={(e) => { setHaystackInput(e.target.value);
+
+ handleReset() }}
                   placeholder='"sadbutsad"'
                   className="ffo-input"
                   style={{ flex: 1, margin: 0 }}
@@ -278,13 +294,24 @@ export default function FindFirstOccurrenceVisualizer({ problem }) {
       </div>
 
       <div className="ffo-middle">
-        <CodeTracePanel
+                <div style={{ position: "relative" }}>
+          <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
           onLineSelect={connectivity.handleLineSelect}
           onActiveLineDomChange={setActiveLineDom}
         />
+
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
       </div>
 
       <div className={`ffo-status ${step?.phase === 'match_found' ? 'success' : step?.phase === 'done' ? 'fail' : ''}`}>
@@ -292,6 +319,9 @@ export default function FindFirstOccurrenceVisualizer({ problem }) {
       </div>
 
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={FINDFIRSTOCCURRENCE_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -310,8 +340,6 @@ export default function FindFirstOccurrenceVisualizer({ problem }) {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }

@@ -10,6 +10,8 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './RestoreIPAddressesVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -32,6 +34,25 @@ const SOLUTION_CODE = [
   { line: 18, text: '        backtrack(0, 0, "")' },
   { line: 19, text: '        return res' },
 ]
+
+const RESTOREIPADDRESSES_PATTERNS = ['backtrack_return', 'check_dots', 'check_valid', 'done', 'dots_complete', 'enter_backtrack', 'extra_chars', 'init', 'invalid_chars', 'invalid_length', 'no_valid_parts', 'recurse', 'return_complete', 'start_backtrack', 'try_part', 'valid_ip']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  2: 'invalid_chars',
+  3: 'invalid_length',
+  5: 'init',
+  7: 'enter_backtrack',
+  8: 'check_dots',
+  9: 'dots_complete',
+  10: 'valid_ip',
+  11: 'extra_chars',
+  13: 'try_part',
+  15: 'check_valid',
+  16: 'recurse',
+  18: 'start_backtrack',
+  19: 'done',
+}
 
 function generateSteps(s) {
   const steps = []
@@ -355,7 +376,9 @@ export default function RestoreIPAddressesVisualizer() {
               <div style={{ display: 'flex', gap: 12, marginBottom: 24 }}>
                 <input
                   value={input}
-                  onChange={(e) => { setInput(e.target.value); handleReset() }}
+                  onChange={(e) => { setInput(e.target.value);
+
+ handleReset() }}
                   placeholder="25525511135"
                   className="restore-ip-input"
                   style={{ flex: 1, margin: 0 }}
@@ -433,13 +456,24 @@ export default function RestoreIPAddressesVisualizer() {
       />
 
       <div className="restore-ip-middle">
-        <CodeTracePanel
+                <div style={{ position: "relative" }}>
+          <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
           onLineSelect={connectivity.handleLineSelect}
           onActiveLineDomChange={setActiveLineDom}
         />
+
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
       </div>
 
       <div className={`restore-ip-status ${step?.phase === 'valid_ip' ? 'success' : step?.phase === 'done' ? (step.res.length > 0 ? 'success' : 'neutral') : ''}`}>
@@ -447,6 +481,9 @@ export default function RestoreIPAddressesVisualizer() {
       </div>
 
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={RESTOREIPADDRESSES_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -464,9 +501,8 @@ export default function RestoreIPAddressesVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
-      </FloatingPanel>
-
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      </FloatingPanel>activeLineDom={activeLineDom} />}
     </div>
   )
 }
+

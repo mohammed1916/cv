@@ -9,6 +9,8 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './FindFirstLastPositionVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -43,6 +45,34 @@ const SOLUTION_CODE = [
   { line: 30, text: '        ' },
   { line: 31, text: '        return [findFirst(target), findLast(target)]' },
 ]
+
+const FINDFIRSTLASTPOSITION_PATTERNS = ['calc_mid_first', 'calc_mid_last', 'check_greater_first', 'check_greater_last', 'check_less_first', 'check_less_last', 'check_target_first', 'check_target_last', 'done', 'done_first', 'done_last', 'found_target_first', 'found_target_last', 'init_first', 'init_last', 'search_left_first', 'search_right_last', 'update_left_first', 'update_left_last', 'update_right_first', 'update_right_last', 'while_check_first', 'while_check_last']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init_first',
+  6: 'while_check_first',
+  7: 'calc_mid_first',
+  8: 'check_target_first',
+  9: 'found_target_first',
+  10: 'search_left_first',
+  11: 'check_less_first',
+  12: 'update_left_first',
+  13: 'check_greater_first',
+  14: 'update_right_first',
+  15: 'done_first',
+  17: 'init_last',
+  20: 'while_check_last',
+  21: 'calc_mid_last',
+  22: 'check_target_last',
+  23: 'found_target_last',
+  24: 'search_right_last',
+  25: 'check_less_last',
+  26: 'update_left_last',
+  27: 'check_greater_last',
+  28: 'update_right_last',
+  31: 'done',
+}
 
 function generateSteps(nums, target) {
   const steps = []
@@ -297,7 +327,9 @@ export default function FindFirstLastPositionVisualizer() {
             <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center' }}>
               <input
                 value={numsInput}
-                onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
+                onChange={(e) => { setNumsInput(e.target.value);
+
+ handleReset() }}
                 placeholder="[5, 7, 7, 8, 8, 10]"
                 className="ffp-input"
                 style={{ flex: 1, margin: 0 }}
@@ -372,13 +404,24 @@ export default function FindFirstLastPositionVisualizer() {
       </div>
 
       <div className="ffp-middle">
-        <CodeTracePanel
+                <div style={{ position: "relative" }}>
+          <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
           onLineSelect={connectivity.handleLineSelect}
           onActiveLineDomChange={setActiveLineDom}
         />
+
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
       </div>
 
       <div className={`ffp-status \${step?.result ? 'success' : ''}`}>
@@ -386,6 +429,9 @@ export default function FindFirstLastPositionVisualizer() {
       </div>
 
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={FINDFIRSTLASTPOSITION_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}

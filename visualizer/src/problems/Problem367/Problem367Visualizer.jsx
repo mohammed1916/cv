@@ -2,13 +2,29 @@ import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import './Problem367Visualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+
+const PATTERNS = ['compute-mid', 'compute-square', 'done', 'edge-case', 'found', 'init', 'search-left', 'search-right', 'setup']
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  2: 'edge-case',
+  4: 'setup',
+  5: 'compute-mid',
+  7: 'compute-square',
+  9: 'found',
+  11: 'search-right',
+  13: 'search-left',
+  14: 'done'
+}
+
 
 const SOLUTION_CODE_INLINE = [
     { line: 1, text: 'def isPerfectSquare(num):' },

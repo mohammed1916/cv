@@ -2,12 +2,35 @@
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./MedianOfTwoSortedArraysVisualizer.css";
 import FloatingPanel from '../../components/shared/FloatingPanel'
+
+const MEDIAN_PATTERNS = ['init', 'partition', 'evaluate', 'found', 'move_left', 'move_right']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',      // if len(nums1) > len(nums2):
+  4: 'init',      // nums1, nums2 = nums2, nums1
+  6: 'init',      // m, n = len(nums1), len(nums2)
+  7: 'init',      // left = (m + n + 1) // 2
+  8: 'init',      // low, high = 0, m
+  10: 'partition', // while low <= high:
+  11: 'partition', // cut1 = (low + high) // 2
+  12: 'partition', // cut2 = left - cut1
+  14: 'evaluate',  // if left1 <= right2 and left2 <= right1:
+  15: 'evaluate',  // if (m + n) % 2 == 0:
+  16: 'found',     // return (max(left1, left2) + min(right1, right2)) / 2
+  17: 'found',     // return max(left1, left2)
+  18: 'evaluate',  // elif left1 > right2:
+  19: 'move_left', // high = cut1 - 1
+  20: 'evaluate',  // else:
+  21: 'move_right', // low = cut1 + 1
+}
 
 const SOLUTION_CODE = [
   { line: 1, text: "class Solution:" },
@@ -911,7 +934,18 @@ export default function MedianOfTwoSortedArraysVisualizer() {
       </div>
 
       <div className="median-middle">
-        <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+        <div style={{ position: 'relative' }}>
+          <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
       </div>
 
       <div
@@ -921,6 +955,9 @@ export default function MedianOfTwoSortedArraysVisualizer() {
       </div>
 
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={MEDIAN_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -939,8 +976,6 @@ export default function MedianOfTwoSortedArraysVisualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   );
 }

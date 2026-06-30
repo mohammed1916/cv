@@ -4,7 +4,8 @@ import DockableWorkspace from "../../components/shared/DockableWorkspace";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
@@ -14,33 +15,44 @@ const COLOR_LABEL = ["🔴", "⚪", "🔵"];
 const COLOR_NAME = ["Red", "White", "Blue"];
 const COLOR_HEX = ["#ef4444", "#f3f4f6", "#3b82f6"];
 
+const SORTCOLORS_PATTERNS = ['check', 'done', 'init', 'place_lo', 'place_hi', 'skip'];
+
+const LINE_PATTERN_MAP = {
+  2: 'init',
+  3: 'check',
+  4: 'place_lo',
+  6: 'skip',
+  9: 'place_hi',
+  11: 'done',
+};
+
 function generateSteps(initial) {
     const steps = [];
     const nums = [...initial];
     let lo = 0, mid = 0, hi = nums.length - 1;
 
-    steps.push({ activeLine: 2, nums: [...nums], lo, mid, hi, message: `Dutch National Flag. lo=0, mid=0, hi=${hi}` });
+    steps.push({ phase: 'init', activeLine: 2, nums: [...nums], lo, mid, hi, message: `Dutch National Flag. lo=0, mid=0, hi=${hi}` });
 
     while (mid <= hi) {
-        steps.push({ activeLine: 3, nums: [...nums], lo, mid, hi, message: `mid=${mid} ≤ hi=${hi}. nums[mid]=${nums[mid]}` });
+        steps.push({ phase: 'check', activeLine: 3, nums: [...nums], lo, mid, hi, message: `mid=${mid} ≤ hi=${hi}. nums[mid]=${nums[mid]}` });
 
         if (nums[mid] === 0) {
-            steps.push({ activeLine: 4, nums: [...nums], lo, mid, hi, message: `nums[mid]=0 → swap with lo=${lo}` });
+            steps.push({ phase: 'place_lo', activeLine: 4, nums: [...nums], lo, mid, hi, message: `nums[mid]=0 → swap with lo=${lo}` });
             [nums[lo], nums[mid]] = [nums[mid], nums[lo]];
             lo++; mid++;
-            steps.push({ activeLine: 6, nums: [...nums], lo, mid, hi, message: `After swap. lo=${lo}, mid=${mid}` });
+            steps.push({ phase: 'place_lo', activeLine: 6, nums: [...nums], lo, mid, hi, message: `After swap. lo=${lo}, mid=${mid}` });
         } else if (nums[mid] === 1) {
-            steps.push({ activeLine: 7, nums: [...nums], lo, mid, hi, message: `nums[mid]=1 → already white, mid++` });
+            steps.push({ phase: 'skip', activeLine: 7, nums: [...nums], lo, mid, hi, message: `nums[mid]=1 → already white, mid++` });
             mid++;
         } else {
-            steps.push({ activeLine: 9, nums: [...nums], lo, mid, hi, message: `nums[mid]=2 → swap with hi=${hi}` });
+            steps.push({ phase: 'place_hi', activeLine: 9, nums: [...nums], lo, mid, hi, message: `nums[mid]=2 → swap with hi=${hi}` });
             [nums[mid], nums[hi]] = [nums[hi], nums[mid]];
             hi--;
-            steps.push({ activeLine: 11, nums: [...nums], lo, mid, hi, message: `After swap. hi=${hi} (don't move mid yet)` });
+            steps.push({ phase: 'place_hi', activeLine: 11, nums: [...nums], lo, mid, hi, message: `After swap. hi=${hi} (don't move mid yet)` });
         }
     }
 
-    steps.push({ activeLine: 11, nums: [...nums], lo, mid, hi, message: `Done! Sorted: [${nums.join(",")}]` });
+    steps.push({ phase: 'done', activeLine: 11, nums: [...nums], lo, mid, hi, message: `Done! Sorted: [${nums.join(",")}]` });
     return steps;
 }
 
@@ -289,13 +301,23 @@ export default function SortColorsVisualizer() {
         id: 'code',
         title: 'Code',
         content: (
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-            onActiveLineDomChange={setActiveLineDom}
-          />
+          <div style={{position: 'relative'}}>
+            <CodeTracePanel
+              step={step}
+              codeLines={SOLUTION_CODE}
+              highlightedLines={connectivity.highlightedLines}
+              onLineSelect={connectivity.handleLineSelect}
+              onActiveLineDomChange={setActiveLineDom}
+            />
+            {showPatternOverlay && (
+              <CodePatternAnnotations
+                linePatterns={LINE_PATTERN_MAP}
+                currentPhase={step?.phase}
+                activeLineDom={activeLineDom}
+                activeLine={step?.activeLine}
+              />
+            )}
+          </div>
         ),
       },
       {
@@ -318,6 +340,9 @@ export default function SortColorsVisualizer() {
           initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
         />
         <FloatingPanel title="Playback Controls">
+          {showPatternOverlay && (
+            <PatternLegend currentPhase={step?.phase} usedPatterns={SORTCOLORS_PATTERNS} />
+          )}
           <PlaybackControls
             isPlaying={isPlaying}
             isDone={isDone}
@@ -336,7 +361,6 @@ export default function SortColorsVisualizer() {
             showPatternOverlayToggle
           />
         </FloatingPanel>
-        {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
       </div>
     );
 }

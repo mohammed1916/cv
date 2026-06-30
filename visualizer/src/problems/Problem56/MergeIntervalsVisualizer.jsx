@@ -8,6 +8,8 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './MergeIntervalsVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -21,6 +23,19 @@ const SOLUTION_CODE = [
   { line: 9, text: '                merged[-1][1] = max(merged[-1][1], interval[1])' },
   { line: 10, text: '        return merged' },
 ]
+
+const MERGEINTERVALS_PATTERNS = ['append', 'check', 'done', 'eval', 'init', 'merge', 'sorted']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',
+  4: 'sorted',
+  5: 'eval',
+  6: 'check',
+  7: 'append',
+  9: 'merge',
+  10: 'done',
+}
 
 function generateSteps(originalIntervals) {
   const steps = []
@@ -187,7 +202,9 @@ export default function MergeIntervalsVisualizer() {
 
             <input
               value={intervalsInput}
-              onChange={(e) => { setIntervalsInput(e.target.value); handleReset() }}
+              onChange={(e) => { setIntervalsInput(e.target.value);
+
+ handleReset() }}
               placeholder="[[1,3],[2,6],[8,10],[15,18]]"
               className="mi-input"
             />
@@ -266,7 +283,18 @@ export default function MergeIntervalsVisualizer() {
       </div>
 
       <div className="merge-intervals-middle">
-        <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+                <div style={{ position: "relative" }}>
+          <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
       </div>
 
       <div className={`mi-status ${step?.phase === 'merge' ? 'merge' : step?.phase === 'append' ? 'append' : ''}`}>
@@ -274,6 +302,9 @@ export default function MergeIntervalsVisualizer() {
       </div>
 
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={MERGEINTERVALS_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}

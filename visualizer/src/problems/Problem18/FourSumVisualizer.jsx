@@ -3,11 +3,38 @@ import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './FourSumVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+
+const FOURSUM_PATTERNS = ['sort', 'fix_i', 'skip_i', 'fix_j', 'skip_j', 'calc', 'found', 'move_l', 'move_r', 'done']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'sort',    // nums.sort()
+  4: 'fix_i',   // result = []
+  5: 'fix_i',   // for i in range(len(nums) - 3):
+  6: 'skip_i',  // if i > 0 and nums[i] == nums[i - 1]:
+  7: 'skip_i',  // continue  # skip i-duplicates
+  8: 'fix_j',   // for j in range(i + 1, len(nums) - 2):
+  9: 'skip_j',  // if j > i + 1 and nums[j] == nums[j - 1]:
+  10: 'skip_j', // continue  # skip j-duplicates
+  11: 'calc',   // l, r = j + 1, len(nums) - 1
+  12: 'calc',   // while l < r:
+  13: 'calc',   // s = nums[i] + nums[j] + nums[l] + nums[r]
+  14: 'found',  // if s == target:
+  15: 'found',  // result.append([nums[i], nums[j], nums[l], nums[r]])
+  16: 'move_l', // l += 1
+  17: 'move_r', // r -= 1
+  18: 'move_l', // elif s < target:
+  19: 'move_l', // l += 1
+  20: 'move_r', // else:
+  21: 'move_r', // r -= 1
+}
 
 const SOLUTION_CODE = [
     { line: 1, text: 'class Solution:' },
@@ -274,13 +301,25 @@ export default function FourSumVisualizer() {
                 </section>
             </div>
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+            <div style={{ position: 'relative' }}>
+              <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+              {showPatternOverlay && (
+                <CodePatternAnnotations
+                  linePatterns={LINE_PATTERN_MAP}
+                  currentPhase={step?.phase}
+                  activeLineDom={activeLineDom}
+                />
+              )}
+            </div>
 
             <div className={`fs4-status${step?.phase === 'found' ? ' ok' : step?.phase === 'done' ? ' done' : ''}`}>
                 {step?.message ?? 'Press Play or Step to begin.'}
             </div>
 
             <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={FOURSUM_PATTERNS} />
+        )}
         <PlaybackControls
                 isPlaying={isPlaying}
                 isDone={isDone}

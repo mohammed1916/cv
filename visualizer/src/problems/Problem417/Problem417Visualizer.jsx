@@ -2,12 +2,20 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem417Visualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+
+// Pattern annotations
+const LINE_PATTERN_MAP = {}
+const PATTERNS = ['atlantic_dfs', 'atlantic_start', 'done', 'init', 'pacific_dfs', 'pacific_start', 'result']  // Auto-generated: maps line numbers to phase names
+
+
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -218,7 +226,10 @@ function Problem417Visualizer() {
   const [heights, setHeights] = useState(defaultHeights)
   const [inputValue, setInputValue] = useState(JSON.stringify(defaultHeights))
 
-  const steps = useMemo(() => generateSteps(heights), [heights])
+  const steps = useMemo(() => generateSteps(heights).map((current) => ({
+      ...current,
+      relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
+    }), [heights])
   const { activeStepIndex, isPlaying, togglePlayback, reset, setActiveStepIndex } =
     usePlaybackState(steps)
 

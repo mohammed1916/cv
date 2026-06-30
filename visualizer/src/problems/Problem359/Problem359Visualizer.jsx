@@ -4,13 +4,25 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem359.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+
+const PATTERNS = ['check_exists', 'cooldown_active', 'cooldown_expired', 'done', 'init', 'new_message', 'request_arrives']
+const LINE_PATTERN_MAP = {
+  2: 'init',
+  5: 'request_arrives',
+  7: 'new_message',
+  10: 'cooldown_expired',
+  12: 'cooldown_active'
+}
+
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'class Logger:' },

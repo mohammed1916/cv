@@ -9,6 +9,8 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay';
 import { getExamples } from '../../config/examplesRegistry';
 import './SqrtxVisualizer.css';
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -32,6 +34,8 @@ const SOLUTION_CODE = [
   { line: 19, text: '        return right' },
 ];
 
+
+
 const EXAMPLES = [
   { label: 'x = 4', x: 4, desc: 'answer = 2' },
   { label: 'x = 8', x: 8, desc: 'answer = 2' },
@@ -40,6 +44,23 @@ const EXAMPLES = [
   { label: 'x = 100', x: 100, desc: 'answer = 10' },
   { label: 'x = 2', x: 2, desc: 'answer = 1' },
 ];
+
+const SQRTX_PATTERNS = ['calc-mid', 'calc-square', 'check-greater', 'check-less', 'done', 'early-return', 'found', 'init', 'update-left', 'update-right', 'while-check']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'early-return',
+  6: 'init',
+  8: 'while-check',
+  9: 'calc-mid',
+  10: 'calc-square',
+  12: 'found',
+  14: 'check-less',
+  15: 'update-left',
+  16: 'check-greater',
+  17: 'update-right',
+  19: 'done',
+}
 
 function generateSteps(x) {
   const steps = [];
@@ -461,13 +482,24 @@ export default function SqrtxVisualizer() {
       </div>
 
       {/* Code trace panel */}
-      <CodeTracePanel
+            <div style={{ position: "relative" }}>
+        <CodeTracePanel
         step={step}
         codeLines={SOLUTION_CODE}
         highlightedLines={connectivity.highlightedLines}
         onLineSelect={connectivity.handleLineSelect}
         onActiveLineDomChange={setActiveLineDom}
       />
+
+        {showPatternOverlay && (
+          <CodePatternAnnotations
+            linePatterns={LINE_PATTERN_MAP}
+            currentPhase={step?.phase}
+            activeLineDom={activeLineDom}
+            activeLine={step?.activeLine}
+          />
+        )}
+      </div>
 
       {/* Status message */}
       <div className="sqrtx-status">
@@ -476,6 +508,9 @@ export default function SqrtxVisualizer() {
 
       {/* Playback controls */}
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={SQRTX_PATTERNS} />
+        )}
         <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}

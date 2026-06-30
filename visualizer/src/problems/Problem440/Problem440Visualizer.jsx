@@ -4,12 +4,25 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem440Visualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+
+const PATTERNS = ['backtrack', 'check', 'complete', 'go_deeper', 'go_next', 'init']
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  2: 'check',
+  3: 'go_deeper',
+  4: 'go_next',
+  5: 'backtrack',
+  6: 'complete'
+}
+
 
 const EXAMPLES = getExamples('kth-smallest-lexicographical-order')
 
@@ -405,7 +418,7 @@ export default function Problem440Visualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      
     </div>
   )
 }

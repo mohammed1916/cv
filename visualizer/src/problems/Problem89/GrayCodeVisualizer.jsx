@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -9,6 +9,8 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 import './GrayCodeVisualizer.css'
 
 const SOLUTION_CODE_INLINE = [
@@ -20,6 +22,15 @@ const SOLUTION_CODE_INLINE = [
 ]
 
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
+
+const GRAYCODE_PATTERNS = ['add', 'compute', 'done', 'init']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  2: 'init',
+  4: 'compute',
+  5: 'done',
+}
 
 function toBinary(num, bits) {
     return (num >>> 0).toString(2).padStart(bits, '0')
@@ -53,7 +64,7 @@ function generateSteps(n) {
             binary: toBinary(i, n),
             shiftedBinary: toBinary(shifted, n),
             grayBinary: toBinary(grayValue, n),
-            message: `i=${i} (${toBinary(i, n)}₂), i>>1=${shifted} (${toBinary(shifted, n)}₂), gray=${grayValue} (${toBinary(grayValue, n)}₂)`,
+            message: `i=${i} (${toBinary(i, n)}â‚‚), i>>1=${shifted} (${toBinary(shifted, n)}â‚‚), gray=${grayValue} (${toBinary(grayValue, n)}â‚‚)`,
         })
 
         result.push(grayValue)
@@ -88,7 +99,7 @@ export default function GrayCodeVisualizer() {
 
     const { n, inputError } = useMemo(() => {
         const v = parseInt(nInput, 10)
-        if (Number.isNaN(v) || v < 0 || v > 8) return { n: 3, inputError: 'n must be 0–8' }
+        if (Number.isNaN(v) || v < 0 || v > 8) return { n: 3, inputError: 'n must be 0â€“8' }
         return { n: v, inputError: '' }
     }, [nInput])
 
@@ -106,18 +117,31 @@ export default function GrayCodeVisualizer() {
         {
             id: 'code',
             title: 'Code',
-            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />
+            content:             <div style={{ position: "relative" }}>
+              <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />
+
+              {showPatternOverlay && (
+                <CodePatternAnnotations
+                  linePatterns={LINE_PATTERN_MAP}
+                  currentPhase={step?.phase}
+                  activeLineDom={activeLineDom}
+                  activeLine={step?.activeLine}
+                />
+              )}
+            </div>
         },
         {
             id: 'viz',
-            title: '🔢 Gray Code',
+            title: 'ðŸ”¢ Gray Code',
             content: (
                 <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
                     <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
                         {EXAMPLES && EXAMPLES.length > 0 && EXAMPLES.map(ex => <button key={ex.label} onClick={() => applyExample(ex)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: '#f1f5f9' }}>
                             {ex.label}
                         </button>)}
-                        <label style={{ marginLeft: 'auto', display: 'flex', gap: 6, alignItems: 'center', fontSize: 12 }}>n = <input type="number" min="0" max="8" value={nInput} onChange={e => { setNInput(e.target.value); handleReset() }} style={{ width: 50, padding: '4px 8px', borderRadius: 4, border: '1px solid #cbd5e1' }} /></label>
+                        <label style={{ marginLeft: 'auto', display: 'flex', gap: 6, alignItems: 'center', fontSize: 12 }}>n = <input type="number" min="0" max="8" value={nInput} onChange={e => { setNInput(e.target.value);
+
+ handleReset() }} style={{ width: 50, padding: '4px 8px', borderRadius: 4, border: '1px solid #cbd5e1' }} /></label>
                     </div>
                     {inputError && <div style={{ color: '#991b1b', fontSize: 11 }}>{inputError}</div>}
 
@@ -133,18 +157,18 @@ export default function GrayCodeVisualizer() {
                             }}
                         >
                             <div style={{ marginBottom: 8 }}>
-                                <b>i</b> = {step.i} ({step.binary}₂)
+                                <b>i</b> = {step.i} ({step.binary}â‚‚)
                             </div>
 
                             <div style={{ marginBottom: 8 }}>
-                                <b>{step.i} &gt;&gt; 1</b> = {step.shifted} ({step.shiftedBinary}₂)
+                                <b>{step.i} &gt;&gt; 1</b> = {step.shifted} ({step.shiftedBinary}â‚‚)
                             </div>
 
                             <div>
                                 <b>{step.binary}</b> XOR <b>{step.shiftedBinary}</b>
                                 {' = '}
                                 <span style={{ color: '#0c4a6e' }}>
-                                    {step.grayBinary}₂ ({step.grayValue})
+                                    {step.grayBinary}â‚‚ ({step.grayValue})
                                 </span>
                             </div>
                         </div>
@@ -186,7 +210,7 @@ export default function GrayCodeVisualizer() {
 
                     {step?.phase === 'done' && (
                         <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #86efac', fontSize: 11, fontWeight: 'bold', color: '#15803d' }}>
-                            ✓ Generated {step.result.length} Gray codes
+                            âœ“ Generated {step.result.length} Gray codes
                         </div>
                     )}
                 </div>
@@ -198,9 +222,12 @@ export default function GrayCodeVisualizer() {
         <div className="problem-shell">
             <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
             <FloatingPanel title="Playback Controls">
-                <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
-            </FloatingPanel>
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+                {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={GRAYCODE_PATTERNS} />
+        )}
+        <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
+            </FloatingPanel>activeLineDom={activeLineDom} />}
         </div>
     )
 }
+

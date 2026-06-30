@@ -8,6 +8,8 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './TrappingRainWaterVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -27,6 +29,22 @@ const SOLUTION_CODE = [
   { line: 15, text: '                water += right_max - height[right]' },
   { line: 16, text: '        return water' },
 ]
+
+const TRAPPINGRAINWATER_PATTERNS = ['add_water', 'check', 'done', 'init', 'max_left', 'max_right', 'move_left', 'move_right']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'done',
+  5: 'init',
+  8: 'check',
+  9: 'move_left',
+  10: 'max_left',
+  11: 'add_water',
+  13: 'move_right',
+  14: 'max_right',
+  15: 'add_water',
+  16: 'done',
+}
 
 function generateSteps(height) {
   const steps = []
@@ -170,7 +188,9 @@ export default function TrappingRainWaterVisualizer() {
 
             <input
               value={heightInput}
-              onChange={(e) => { setHeightInput(e.target.value); handleReset() }}
+              onChange={(e) => { setHeightInput(e.target.value);
+
+ handleReset() }}
               placeholder="[0,1,0,2,1,0,1,3,2,1,2,1]"
               className="tw-input"
             />
@@ -232,7 +252,18 @@ export default function TrappingRainWaterVisualizer() {
       </div>
 
       <div className="trapping-water-middle">
-        <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+                <div style={{ position: "relative" }}>
+          <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
 
         <div className="tw-panel">
           <div className="tw-panel-head">Variables</div>
@@ -268,6 +299,9 @@ export default function TrappingRainWaterVisualizer() {
       </div>
 
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={TRAPPINGRAINWATER_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}

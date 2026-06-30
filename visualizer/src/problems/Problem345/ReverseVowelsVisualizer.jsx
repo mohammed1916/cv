@@ -2,12 +2,25 @@
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './ReverseVowelsVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+
+const PATTERNS = ['advance-pointers', 'done', 'init', 'move-left', 'move-right', 'swapped', 'vowel-found']
+const LINE_PATTERN_MAP = {
+  3: 'init',
+  5: 'move-left',
+  7: 'move-right',
+  9: 'vowel-found',
+  10: 'advance-pointers',
+  12: 'done'
+}
+
 
 const CANVAS_W = 500
 const CANVAS_H = 280

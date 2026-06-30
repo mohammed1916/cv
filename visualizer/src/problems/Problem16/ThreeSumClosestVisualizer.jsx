@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
@@ -24,6 +26,23 @@ const SOLUTION_CODE = [
     { line: 12, text: '                else: r -= 1' },
     { line: 13, text: '        return closest' },
 ]
+
+const THREESUMCLOSEST_PATTERNS = ['init', 'fix_i', 'calc', 'update', 'move_l', 'move_r', 'done']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',    // nums.sort()
+  4: 'init',    // closest = nums[0] + nums[1] + nums[2]
+  5: 'fix_i',   // for i in range(len(nums) - 2):
+  6: 'fix_i',   // l, r = i + 1, len(nums) - 1
+  7: 'calc',    // while l < r:
+  8: 'calc',    // s = nums[i] + nums[l] + nums[r]
+  9: 'update',  // if abs(s - target) < abs(closest - target):
+  10: 'update', // closest = s
+  11: 'move_l', // if s < target: l += 1
+  12: 'move_r', // else: r -= 1
+  13: 'done',   // return closest
+}
 
 function generateSteps(nums, target) {
     const steps = []
@@ -262,13 +281,25 @@ export default function ThreeSumClosestVisualizer() {
                 </section>
             </div>
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+            <div style={{ position: 'relative' }}>
+              <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+              {showPatternOverlay && (
+                <CodePatternAnnotations
+                  linePatterns={LINE_PATTERN_MAP}
+                  currentPhase={step?.phase}
+                  activeLineDom={activeLineDom}
+                />
+              )}
+            </div>
 
             <div className={`tsc3-status${step?.phase === 'update' ? ' highlight' : step?.phase === 'done' ? ' done' : ''}`}>
                 {step?.message ?? 'Press Play or Step to begin.'}
             </div>
 
             <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={THREESUMCLOSEST_PATTERNS} />
+        )}
         <PlaybackControls
                 isPlaying={isPlaying}
                 isDone={isDone}

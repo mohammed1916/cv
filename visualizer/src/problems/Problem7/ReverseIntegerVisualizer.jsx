@@ -2,13 +2,31 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './ReverseIntegerVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+
+const REVIN_PATTERNS = ['init', 'loop', 'pop', 'check_max', 'check_min', 'push']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',        // MIN, MAX = -2**31, 2**31 - 1
+  4: 'init',        // res = 0
+  6: 'loop',        // while x != 0:
+  8: 'pop',         // digit = x % 10 if x > 0 else x % -10
+  9: 'pop',         // x = int(x / 10)
+  11: 'check_max',  // if res > MAX // 10 or (res == MAX // 10 and digit > 7):
+  12: 'check_max',  // return 0
+  13: 'check_min',  // if res < int(MIN / 10) or (res == int(MIN / 10) and digit < -8):
+  14: 'check_min',  // return 0
+  16: 'push',       // res = (res * 10) + digit
+  18: 'loop',       // return res
+}
 
 const SOLUTION_CODE = [
   { line: 1,  text: 'class Solution:' },
@@ -266,13 +284,24 @@ export default function ReverseIntegerVisualizer() {
       </div>
 
       <div className="revin-middle">
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-        />
+        <div style={{ position: 'relative' }}>
+          <CodeTracePanel
+            step={step}
+            codeLines={SOLUTION_CODE}
+            highlightedLines={connectivity.highlightedLines}
+            onLineSelect={connectivity.handleLineSelect}
+            onActiveLineDomChange={setActiveLineDom}
+          />
+
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
       </div>
 
       <div className={'revin-status ' + (step?.phase === 'done' ? (step?.overflow ? 'overflow' : 'success') : '')}>
@@ -280,6 +309,9 @@ export default function ReverseIntegerVisualizer() {
       </div>
 
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={REVIN_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -298,8 +330,6 @@ export default function ReverseIntegerVisualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }

@@ -2,14 +2,28 @@
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
 import FloatingPanel from "../../components/shared/FloatingPanel";
-import PatternOverlay from "../../components/PatternOverlay";
 import DockableWorkspace from "../../components/shared/DockableWorkspace";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./JumpGameIIVisualizer.css";
+
+const JUMPGAMEII_PATTERNS = ['break', 'check', 'done', 'init', 'jump', 'reach']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  2: 'init',
+  4: 'check',
+  6: 'jump',
+  7: 'reach',
+  8: 'break',
+  9: 'done',
+}
+
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: "def jump(nums):" },
   { line: 2, text: "    jumps = 0; curEnd = 0; farthest = 0" },
@@ -30,25 +44,25 @@ function generateSteps(nums) {
   const n = nums.length;
   let jumps = 0, curEnd = 0, farthest = 0;
 
-  steps.push({ activeLine: 2, i: -1, jumps, curEnd, farthest, message: `Init: jumps=0, curEnd=0, farthest=0` });
+  steps.push({ activeLine: 2, i: -1, jumps, curEnd, farthest, phase: "init", message: `Init: jumps=0, curEnd=0, farthest=0` });
 
   for (let i = 0; i < n - 1; i++) {
     const newFarthest = Math.max(farthest, i + nums[i]);
     farthest = newFarthest;
-    steps.push({ activeLine: 4, i, jumps, curEnd, farthest, message: `i=${i}, nums[${i}]=${nums[i]}: farthest=max(${farthest},${i}+${nums[i]})=${farthest}` });
+    steps.push({ activeLine: 4, i, jumps, curEnd, farthest, phase: "check", message: `i=${i}, nums[${i}]=${nums[i]}: farthest=max(${farthest},${i}+${nums[i]})=${farthest}` });
 
     if (i === curEnd) {
       jumps++;
       curEnd = farthest;
-      steps.push({ activeLine: 6, i, jumps, curEnd, farthest, message: `Reached end of jump range (i=${i}=curEnd). jumps=${jumps}, curEnd=${curEnd}` });
+      steps.push({ activeLine: 6, i, jumps, curEnd, farthest, phase: "jump", message: `Reached end of jump range (i=${i}=curEnd). jumps=${jumps}, curEnd=${curEnd}` });
       if (curEnd >= n - 1) {
-        steps.push({ activeLine: 8, i, jumps, curEnd, farthest, message: `curEnd=${curEnd} >= last index=${n-1}. Break.` });
+        steps.push({ activeLine: 8, i, jumps, curEnd, farthest, phase: "break", message: `curEnd=${curEnd} >= last index=${n-1}. Break.` });
         break;
       }
     }
   }
 
-  steps.push({ activeLine: 9, i: n - 1, jumps, curEnd, farthest, message: `Done! Minimum jumps = ${jumps}` });
+  steps.push({ activeLine: 9, i: n - 1, jumps, curEnd, farthest, phase: "done", message: `Done! Minimum jumps = ${jumps}` });
   return steps;
 }
 
@@ -159,15 +173,25 @@ export default function JumpGameIIVisualizer() {
       subtitle: step ? `Active line ${step.activeLine}` : "Line-by-line solution view",
       defaultZone: "full",
       content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          onActiveLineDomChange={setActiveLineDom}
-          autoScroll={autoScrollCode}
-        />
+        <div style={{ position: 'relative' }}>
+          <CodeTracePanel
+            step={step}
+            codeLines={SOLUTION_CODE}
+            onActiveLineDomChange={setActiveLineDom}
+            autoScroll={autoScrollCode}
+          />
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
       ),
     },
-  ], [applyEx, ex, step, stepIndex, steps, maxVal, setActiveLineDom, autoScrollCode]);
+  ], [applyEx, ex, step, stepIndex, steps, maxVal, setActiveLineDom, autoScrollCode, showPatternOverlay]);
 
   return (
     <div className="jg2-shell">
@@ -184,6 +208,9 @@ export default function JumpGameIIVisualizer() {
       />
 
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={JUMPGAMEII_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -206,8 +233,6 @@ export default function JumpGameIIVisualizer() {
           showAutoScroll
         />
       </FloatingPanel>
-
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   );
 }

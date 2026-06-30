@@ -8,6 +8,8 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './DecodeWaysVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 
 const SOLUTION_CODE = [
     { line: 1, text: 'class Solution:' },
@@ -30,6 +32,20 @@ const SOLUTION_CODE = [
     { line: 18, text: '' },
     { line: 19, text: '        return dp[n]' },
 ]
+
+const DECODEWAYS_PATTERNS = ['add_one', 'add_two', 'check', 'done', 'init', 'read', 'zero']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'check',
+  4: 'done',
+  7: 'init',
+  11: 'read',
+  14: 'zero',
+  15: 'add_one',
+  17: 'add_two',
+  19: 'done',
+}
 
 function generateSteps(s) {
     const steps = []
@@ -150,7 +166,9 @@ export default function DecodeWaysVisualizer() {
                             <input
                                 className="dw-input"
                                 value={sInput}
-                                onChange={(e) => { setSInput(e.target.value); handleReset() }}
+                                onChange={(e) => { setSInput(e.target.value);
+
+ handleReset() }}
                                 placeholder="226"
                             />
                         </div>
@@ -230,13 +248,27 @@ export default function DecodeWaysVisualizer() {
                 </div>
             </section>
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+                        <div style={{ position: "relative" }}>
+              <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+
+              {showPatternOverlay && (
+                <CodePatternAnnotations
+                  linePatterns={LINE_PATTERN_MAP}
+                  currentPhase={step?.phase}
+                  activeLineDom={activeLineDom}
+                  activeLine={step?.activeLine}
+                />
+              )}
+            </div>
 
             <div className={`dw-status${step?.phase === 'done' ? ' done' : ''}`}>
                 {step?.message ?? 'Press Play or Step to begin.'}
             </div>
 
             <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={DECODEWAYS_PATTERNS} />
+        )}
         <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward}
@@ -248,9 +280,8 @@ export default function DecodeWaysVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
-      </FloatingPanel>
-
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      </FloatingPanel>activeLineDom={activeLineDom} />}
         </div>
     )
 }
+

@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
@@ -25,6 +27,22 @@ const SOLUTION_CODE = [
   { line: 11, text: '                stack.append(char)' },
   { line: 12, text: '        return len(stack) == 0' },
 ]
+
+const VALIDPARENTHESES_PATTERNS = ['init', 'check', 'is_closing', 'is_opening', 'match', 'invalid', 'valid']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',        // stack = []
+  4: 'init',        // pairs = {...}
+  5: 'check',       // for char in s:
+  6: 'is_closing',  // if char in pairs:
+  7: 'is_closing',  // if not stack or stack[-1] != pairs[char]:
+  8: 'invalid',     // return False
+  9: 'match',       // stack.pop()
+  10: 'is_opening', // else:
+  11: 'is_opening', // stack.append(char)
+  12: 'valid',      // return len(stack) == 0
+}
 
 function generateSteps(s) {
   const steps = []
@@ -92,9 +110,21 @@ export default function ValidParenthesesVisualizer() {
           </div>
         </div></div>)}
       />
-      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />
+      <div style={{ position: 'relative' }}>
+        <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />
+        {showPatternOverlay && (
+          <CodePatternAnnotations
+            linePatterns={LINE_PATTERN_MAP}
+            currentPhase={step?.phase}
+            activeLineDom={activeLineDom}
+          />
+        )}
+      </div>
       <div className={`validparen-status ${step?.phase === 'valid' ? 'success' : step?.phase === 'invalid' ? 'fail' : ''}`}>{step?.message ?? 'Play!'}</div>
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={VALIDPARENTHESES_PATTERNS} />
+        )}
         <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={(e) => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Pattern" showPatternOverlayToggle />
       </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}

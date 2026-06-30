@@ -8,6 +8,8 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './SearchRotatedArrayIIVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 
 const SOLUTION_CODE = [
     { line: 1, text: 'class Solution:' },
@@ -40,6 +42,22 @@ const SOLUTION_CODE = [
     { line: 28, text: '' },
     { line: 29, text: '        return False' },
 ]
+
+const SEARCHROTATEDARRAYII_PATTERNS = ['calc_mid', 'check_loop', 'found', 'handle_duplicates', 'init', 'move_hi', 'move_lo', 'not_found']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',
+  5: 'check_loop',
+  6: 'calc_mid',
+  8: 'found',
+  12: 'handle_duplicates',
+  19: 'move_hi',
+  21: 'move_lo',
+  25: 'move_lo',
+  27: 'move_hi',
+  29: 'not_found',
+}
 
 function generateSteps(nums, target) {
     const steps = []
@@ -213,7 +231,9 @@ export default function SearchRotatedArrayIIVisualizer() {
                                 <input
                                     className="sra2-input"
                                     value={numsInput}
-                                    onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
+                                    onChange={(e) => { setNumsInput(e.target.value);
+
+ handleReset() }}
                                 />
                             </div>
                             <div className="sra2-input-group">
@@ -299,13 +319,27 @@ export default function SearchRotatedArrayIIVisualizer() {
                 </div>
             </section>
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+                        <div style={{ position: "relative" }}>
+              <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+
+              {showPatternOverlay && (
+                <CodePatternAnnotations
+                  linePatterns={LINE_PATTERN_MAP}
+                  currentPhase={step?.phase}
+                  activeLineDom={activeLineDom}
+                  activeLine={step?.activeLine}
+                />
+              )}
+            </div>
 
             <div className={`sra2-status${result !== null && result !== undefined ? (result === true ? ' ok' : ' fail') : ''}`}>
                 {step?.message ?? 'Press Play or Step to begin.'}
             </div>
 
             <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={SEARCHROTATEDARRAYII_PATTERNS} />
+        )}
         <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward}
@@ -317,9 +351,8 @@ export default function SearchRotatedArrayIIVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
-      </FloatingPanel>
-
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      </FloatingPanel>activeLineDom={activeLineDom} />}
         </div>
     )
 }
+

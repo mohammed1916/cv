@@ -4,12 +4,25 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem371Visualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+
+const PATTERNS = ['and-operation', 'binary-representation', 'complete', 'shift-carry', 'update-variables', 'xor-operation']
+const LINE_PATTERN_MAP = {
+  1: 'binary-representation',
+  3: 'xor-operation',
+  4: 'and-operation',
+  5: 'shift-carry',
+  6: 'update-variables',
+  7: 'complete'
+}
+
 
 const EXAMPLES = getExamples('sum-of-two-integers')
 

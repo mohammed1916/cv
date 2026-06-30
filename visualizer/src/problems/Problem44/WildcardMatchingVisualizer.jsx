@@ -2,12 +2,24 @@
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./WildcardMatchingVisualizer.css";
 import FloatingPanel from '../../components/shared/FloatingPanel'
+
+const WILDCARDMATCHING_PATTERNS = ['base', 'done', 'init', 'match', 'no-match', 'star']
+
+const LINE_PATTERN_MAP = {
+  4: 'init',
+  6: 'base',
+  10: 'star',
+  11: 'no-match',
+  12: 'match',
+  13: 'done',
+}
 
 const SOLUTION_CODE = [
   { line: 1,  text: "def isMatch(s, p):" },
@@ -166,9 +178,22 @@ export default function WildcardMatchingVisualizer() {
         </div>
       )}
 
-      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+      <div style={{position: 'relative'}}>
+        <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+        {showPatternOverlay && (
+          <CodePatternAnnotations
+            linePatterns={LINE_PATTERN_MAP}
+            currentPhase={step?.phase}
+            activeLineDom={activeLineDom}
+            activeLine={step?.activeLine}
+          />
+        )}
+      </div>
       <div className="wm-status">{step?.message ?? "Press Play to begin."}</div>
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={WILDCARDMATCHING_PATTERNS} />
+        )}
         <PlaybackControls
         isPlaying={isPlaying} isDone={isDone} speed={speed}
         onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -180,7 +205,6 @@ export default function WildcardMatchingVisualizer() {
         showPatternOverlayToggle
       />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   );
 }

@@ -2,7 +2,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import "./ValidSudokuVisualizer.css";
@@ -55,6 +56,16 @@ const EXAMPLES = {
     },
 };
 
+const VALIDSUDOKU_PATTERNS = ['check', 'continue', 'duplicate', 'done', 'init', 'mark'];
+
+const LINE_PATTERN_MAP = {
+    7: 'check',
+    8: 'continue',
+    10: 'duplicate',
+    12: 'mark',
+    13: 'done',
+};
+
 function generateSteps(board) {
     const steps = [];
     const rows = Array.from({ length: 9 }, () => new Set());
@@ -66,6 +77,7 @@ function generateSteps(board) {
         for (let c = 0; c < 9; c++) {
             const v = board[r][c];
             steps.push({
+                phase: 'check',
                 activeLine: 7,
                 curR: r, curC: c,
                 conflictCells: new Set(conflictCells),
@@ -74,6 +86,7 @@ function generateSteps(board) {
             });
             if (v === ".") {
                 steps.push({
+                    phase: 'continue',
                     activeLine: 8,
                     curR: r, curC: c,
                     conflictCells: new Set(conflictCells),
@@ -86,6 +99,7 @@ function generateSteps(board) {
             if (rows[r].has(v) || cols[c].has(v) || boxes[b].has(v)) {
                 conflictCells.add(`${r},${c}`);
                 steps.push({
+                    phase: 'duplicate',
                     activeLine: 11,
                     curR: r, curC: c,
                     conflictCells: new Set(conflictCells),
@@ -98,6 +112,7 @@ function generateSteps(board) {
             cols[c].add(v);
             boxes[b].add(v);
             steps.push({
+                phase: 'mark',
                 activeLine: 12,
                 curR: r, curC: c,
                 conflictCells: new Set(conflictCells),
@@ -107,6 +122,7 @@ function generateSteps(board) {
         }
     }
     steps.push({
+        phase: 'done',
         activeLine: 13,
         curR: -1, curC: -1,
         conflictCells: new Set(),
@@ -181,9 +197,22 @@ export default function ValidSudokuVisualizer() {
                 </AnimatePresence>
             )}
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+            <div style={{position: 'relative'}}>
+                <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+                {showPatternOverlay && (
+                    <CodePatternAnnotations
+                        linePatterns={LINE_PATTERN_MAP}
+                        currentPhase={step?.phase}
+                        activeLineDom={activeLineDom}
+                        activeLine={step?.activeLine}
+                    />
+                )}
+            </div>
             <div className="vs-status">{step?.message ?? "Press Play to begin."}</div>
             <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+            <PatternLegend currentPhase={step?.phase} usedPatterns={VALIDSUDOKU_PATTERNS} />
+        )}
         <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -195,8 +224,6 @@ export default function ValidSudokuVisualizer() {
                 showPatternOverlayToggle
             />
       </FloatingPanel>
-
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     );
 }

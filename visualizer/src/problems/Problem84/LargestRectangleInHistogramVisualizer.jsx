@@ -8,6 +8,8 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './LargestRectangleInHistogramVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -25,6 +27,18 @@ const SOLUTION_CODE = [
   { line: 13, text: '            best = max(best, h * (len(heights) - i))' },
   { line: 14, text: '        return best' },
 ]
+
+const LARGESTRECTANGLEINHISTOGRAM_PATTERNS = ['done', 'finalize', 'init', 'iterate', 'pop', 'push']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  4: 'init',
+  6: 'iterate',
+  9: 'pop',
+  11: 'push',
+  13: 'finalize',
+  14: 'done',
+}
 
 function parseHeights(input) {
   const parsed = JSON.parse(input)
@@ -96,7 +110,9 @@ export default function LargestRectangleInHistogramVisualizer() {
   const steps = useMemo(() => generateSteps(heights), [heights])
   const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyExample = useCallback((ex) => { setInput(JSON.stringify(ex.heights)); handleReset() }, [handleReset])
+  const applyExample = useCallback((ex) => { setInput(JSON.stringify(ex.heights));
+
+ handleReset() }, [handleReset])
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   return (
@@ -132,8 +148,22 @@ export default function LargestRectangleInHistogramVisualizer() {
           </div>
         </section>
       </div>
-      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+            <div style={{ position: "relative" }}>
+        <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+
+        {showPatternOverlay && (
+          <CodePatternAnnotations
+            linePatterns={LINE_PATTERN_MAP}
+            currentPhase={step?.phase}
+            activeLineDom={activeLineDom}
+            activeLine={step?.activeLine}
+          />
+        )}
+      </div>
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={LARGESTRECTANGLEINHISTOGRAM_PATTERNS} />
+        )}
         <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -151,8 +181,8 @@ export default function LargestRectangleInHistogramVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
-      </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      </FloatingPanel>activeLineDom={activeLineDom} />}
     </div>
   )
 }
+

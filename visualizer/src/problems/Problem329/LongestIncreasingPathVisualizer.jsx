@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+;
 import DockableWorkspace from "../../components/shared/DockableWorkspace";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
@@ -10,6 +10,10 @@ import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./LongestIncreasingPathVisualizer.css";
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+const PATTERNS = []
+
 const SOLUTION_CODE = [
     { line: 1, text: "def longestIncreasingPath(matrix):" },
     { line: 2, text: "    memo = {}" },
@@ -187,7 +191,10 @@ function VisualizationPanel({ EXAMPLES, ex, matrix, dpGrid, activeCell, neighbor
 
 export default function LongestIncreasingPathVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-    const steps = useMemo(() => generateSteps(ex.matrix), [ex]);
+    const steps = useMemo(() => generateSteps(ex.matrix).map((current) => ({
+        ...current,
+        relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
+    })), [ex]);
     const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
@@ -254,7 +261,6 @@ export default function LongestIncreasingPathVisualizer() {
                 />
             </FloatingPanel>
 
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     );
 }

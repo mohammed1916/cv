@@ -2,13 +2,30 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './ContainerWithMostWaterVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+
+const CMW_PATTERNS = ['init', 'compute', 'update', 'skip', 'move']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',     // left, right = 0, len(height) - 1
+  4: 'init',     // max_area = 0
+  5: 'compute',  // while left < right:
+  6: 'compute',  // area = min(height[left], height[right]) * (right - left)
+  7: 'update',   // max_area = max(max_area, area)
+  8: 'skip',     // if height[left] < height[right]:
+  9: 'move',     // left += 1
+  10: 'skip',    // else:
+  11: 'move',    // right -= 1
+  12: 'compute', // return max_area
+}
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -228,13 +245,24 @@ export default function ContainerWithMostWaterVisualizer() {
       </div>
 
       <div className="container-water-middle">
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-        />
+        <div style={{ position: 'relative' }}>
+          <CodeTracePanel
+            step={step}
+            codeLines={SOLUTION_CODE}
+            highlightedLines={connectivity.highlightedLines}
+            onLineSelect={connectivity.handleLineSelect}
+            onActiveLineDomChange={setActiveLineDom}
+          />
+
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
 
         <div className="cw-panel">
           <div className="cw-panel-head">Variables</div>
@@ -274,6 +302,9 @@ export default function ContainerWithMostWaterVisualizer() {
       </div>
 
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={CMW_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -292,8 +323,6 @@ export default function ContainerWithMostWaterVisualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }

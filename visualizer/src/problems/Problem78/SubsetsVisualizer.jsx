@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -9,6 +9,8 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { getExamples } from '../../config/examplesRegistry'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 import './SubsetsVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -23,6 +25,18 @@ const SOLUTION_CODE = [
     { line: 9, text: '    backtrack(0, [])' },
     { line: 10, text: '    return res' },
 ]
+
+const SUBSETS_PATTERNS = ['choose', 'done', 'init', 'record', 'recurse', 'unchoose']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  4: 'record',
+  6: 'choose',
+  7: 'recurse',
+  8: 'unchoose',
+  9: 'init',
+  10: 'done',
+}
 
 function generateSteps(nums) {
     const steps = []
@@ -117,7 +131,9 @@ export default function SubsetsVisualizer() {
                         <button key={ex.label} className="sub-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
                     ))}
                 </div>
-                <input className="sub-input" value={numsInput} onChange={(e) => { setNumsInput(e.target.value); handleReset() }} />
+                <input className="sub-input" value={numsInput} onChange={(e) => { setNumsInput(e.target.value);
+
+ handleReset() }} />
 
                 {/* Current path */}
                 <div className="sub-section-label">Current path</div>
@@ -187,7 +203,18 @@ export default function SubsetsVisualizer() {
         {
             id: 'code',
             title: 'Code',
-            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
+            content:             <div style={{ position: "relative" }}>
+              <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />
+
+              {showPatternOverlay && (
+                <CodePatternAnnotations
+                  linePatterns={LINE_PATTERN_MAP}
+                  currentPhase={step?.phase}
+                  activeLineDom={activeLineDom}
+                  activeLine={step?.activeLine}
+                />
+              )}
+            </div>,
         },
     ], [step, autoScrollCode])
 
@@ -198,6 +225,10 @@ export default function SubsetsVisualizer() {
                 initialLayout={{ rows: [['viz', 'results'], ['code']], minimized: [] }}
             />
             <FloatingPanel title="Playback Controls">
+            {showPatternOverlay && (
+              <PatternLegend currentPhase={step?.phase} usedPatterns={SUBSETS_PATTERNS} />
+            )}
+            
                 <div className="sub-status">{step?.message || 'Press Play to begin.'}</div>
                 <PlaybackControls
                     isPlaying={isPlaying} isDone={isDone} speed={speed}
@@ -212,8 +243,8 @@ export default function SubsetsVisualizer() {
                     patternOverlayLabel="Show pattern overlay"
                     showPatternOverlayToggle
                 />
-            </FloatingPanel>
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+            </FloatingPanel>activeLineDom={activeLineDom} />}
         </div>
     )
 }
+

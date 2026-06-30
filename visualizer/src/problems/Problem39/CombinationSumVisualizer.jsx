@@ -8,6 +8,8 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './CombinationSumVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -31,6 +33,25 @@ const SOLUTION_CODE = [
   { line: 19, text: '        dfs(0, [], 0)' },
   { line: 20, text: '        return res' },
 ]
+
+const COMBINATIONSUM_PATTERNS = ['call_dfs', 'call_include', 'call_skip', 'check_bound', 'check_target', 'done', 'enter_dfs', 'found', 'include', 'init', 'pop', 'return_bound', 'return_target']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',
+  4: 'enter_dfs',
+  5: 'check_target',
+  6: 'found',
+  7: 'return_target',
+  8: 'check_bound',
+  9: 'return_bound',
+  12: 'include',
+  13: 'call_include',
+  16: 'pop',
+  17: 'call_skip',
+  19: 'call_dfs',
+  20: 'done',
+}
 
 function generateSteps(candidates, target) {
   const steps = []
@@ -255,7 +276,9 @@ export default function CombinationSumVisualizer() {
             <div style={{ display: 'flex', gap: 12, marginBottom: 16, alignItems: 'center' }}>
               <input
                 value={candidatesInput}
-                onChange={(e) => { setCandidatesInput(e.target.value); handleReset() }}
+                onChange={(e) => { setCandidatesInput(e.target.value);
+
+ handleReset() }}
                 placeholder="[2, 3, 6, 7]"
                 className="cs-input"
                 style={{ flex: 1, margin: 0 }}
@@ -338,7 +361,18 @@ export default function CombinationSumVisualizer() {
       </div>
 
       <div className="combination-sum-middle">
-        <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+                <div style={{ position: "relative" }}>
+          <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
       </div>
 
       <div className={`cs-status ${step?.phase === 'found' ? 'found' : step?.phase === 'return_bound' ? 'bound' : ''}`}>
@@ -346,6 +380,9 @@ export default function CombinationSumVisualizer() {
       </div>
 
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={COMBINATIONSUM_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}

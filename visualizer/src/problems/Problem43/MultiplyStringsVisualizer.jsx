@@ -4,11 +4,24 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './MultiplyStrings.css'
+
+const MULTIPLYSTRINGS_PATTERNS = ['add_to_result', 'create_result_array', 'done', 'init', 'multiply', 'trim_zeros', 'update_cells']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',
+  4: 'create_result_array',
+  7: 'multiply',
+  9: 'add_to_result',
+  10: 'update_cells',
+  12: 'trim_zeros',
+}
 
 const SOLUTION_CODE = [
   { line: 1, text: 'def multiply(num1: str, num2: str) -> str:' },
@@ -169,13 +182,23 @@ export default function MultiplyStringsVisualizer() {
         id: 'code',
         title: 'Code',
         content: (
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-            onActiveLineDomChange={setActiveLineDom}
-          />
+          <div style={{ position: 'relative' }}>
+            <CodeTracePanel
+              step={step}
+              codeLines={SOLUTION_CODE}
+              highlightedLines={connectivity.highlightedLines}
+              onLineSelect={connectivity.handleLineSelect}
+              onActiveLineDomChange={setActiveLineDom}
+            />
+            {showPatternOverlay && (
+              <CodePatternAnnotations
+                linePatterns={LINE_PATTERN_MAP}
+                currentPhase={step?.state?.phase}
+                activeLineDom={activeLineDom}
+                activeLine={step?.activeLine}
+              />
+            )}
+          </div>
         ),
       },
       {
@@ -347,6 +370,9 @@ export default function MultiplyStringsVisualizer() {
         title="43. Multiply Strings"
       />
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.state?.phase} usedPatterns={MULTIPLYSTRINGS_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -365,7 +391,6 @@ export default function MultiplyStringsVisualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }

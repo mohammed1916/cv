@@ -4,7 +4,7 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
@@ -12,9 +12,25 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem358.css'
 
+const PATTERNS = ['cooldown_ready', 'cooldown_set', 'done', 'fill_gap', 'impossible', 'init', 'placement', 'ready']
+const LINE_PATTERN_MAP = {
+  1: 'done',
+  3: 'done',
+  4: 'init',
+  5: 'init',
+  7: 'impossible',
+  9: 'ready',
+  13: 'cooldown_set',
+  14: 'cooldown_ready',
+  15: 'fill_gap'
+}
+
+
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def rearrangeString(s: str, k: int) -> str:' },
   { line: 2, text: '    from collections import Counter' },
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
   { line: 3, text: '    if k == 0: return s' },
   { line: 4, text: '    freq = Counter(s)' },
   { line: 5, text: '    max_freq = max(freq.values())' },

@@ -13,7 +13,21 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { getExamples } from '../../config/examplesRegistry'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 import './ClimbingStairsVisualizer.css'
+
+const CLIMBINGSTAIRS_PATTERNS = ['add', 'done', 'init', 'loop', 'shift', 'temp']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',
+  5: 'loop',
+  6: 'temp',
+  7: 'add',
+  8: 'shift',
+  10: 'done',
+}
 
 function generateSteps(n) {
   const steps = []
@@ -119,6 +133,8 @@ function VariablesPanel({ step }) {
       </div>
     </div>
   );
+
+
 }
 
 function VisualizationPanel({
@@ -318,7 +334,8 @@ export default function ClimbingStairsVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
+        <div style={{ position: 'relative' }}>
+          <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
@@ -326,6 +343,16 @@ export default function ClimbingStairsVisualizer() {
           onActiveLineDomChange={setActiveLineDom}
           autoScroll={autoScrollCode}
         />
+
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
       ),
     },
     {
@@ -359,6 +386,9 @@ export default function ClimbingStairsVisualizer() {
         initialLayout={{ rows: [['code', 'viz'], ['vars']], minimized: [] }}
       />
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={CLIMBINGSTAIRS_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}

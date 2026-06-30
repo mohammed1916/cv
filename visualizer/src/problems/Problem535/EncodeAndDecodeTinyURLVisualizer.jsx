@@ -4,12 +4,28 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './EncodeAndDecodeTinyURLVisualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+
+const PATTERNS = ['decode_done', 'decode_start', 'encode_done', 'encode_start', 'extract_code', 'generate_code', 'init']
+
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  6: 'encode_start',
+  8: 'process',
+  12: 'check',
+  13: 'check',
+  14: 'check',
+  15: 'check'
+}
+
+const PATTERNS = ['decode_done', 'decode_start', 'encode_done', 'encode_start', 'extract_code', 'generate_code', 'init']
 
 const EXAMPLES = getExamples('encode-and-decode-tinyurl')
 
@@ -275,14 +291,63 @@ export default function EncodeAndDecodeTinyURLVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
+        <div style={{ position: 'relative' }}>
+
+          <div style={{ position: 'relative' }}>
+
+
+            <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
           onLineSelect={connectivity.handleLineSelect}
           onActiveLineDomChange={setActiveLineDom}
         />
-      ),
+
+
+
+            {showPatternOverlay && (
+
+
+              <CodePatternAnnotations
+
+
+                linePatterns={LINE_PATTERN_MAP}
+
+
+                currentPhase={step?.phase}
+
+
+                activeLineDom={activeLineDom}
+
+
+                activeLine={step?.activeLine}
+
+
+              />
+
+
+            )}
+
+
+          </div>
+          {showPatternOverlay && (
+
+            <CodePatternAnnotations
+
+              linePatterns={LINE_PATTERN_MAP}
+
+              currentPhase={step?.phase}
+
+              activeLineDom={activeLineDom}
+
+              activeLine={step?.activeLine}
+
+            />
+
+          )}
+
+        </div>      ),
     },
     {
       id: 'viz',
@@ -304,6 +369,9 @@ export default function EncodeAndDecodeTinyURLVisualizer() {
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
       />
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -322,7 +390,7 @@ export default function EncodeAndDecodeTinyURLVisualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -9,6 +9,8 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 import './WordSearchVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -28,6 +30,19 @@ const SOLUTION_CODE = [
   { line: 14, text: '                if dfs(r, c, 0): return True' },
   { line: 15, text: '        return False' },
 ]
+
+const _PATTERNS = ['backtrack', 'check', 'choose', 'done', 'init', 'start_cell', 'success']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  4: 'init',
+  6: 'success',
+  7: 'check',
+  8: 'choose',
+  10: 'backtrack',
+  14: 'start_cell',
+  15: 'done',
+}
 
 function parseBoard(input) {
   const parsed = JSON.parse(input)
@@ -356,12 +371,23 @@ export default function WordSearchVisualizer() {
         id: 'code',
         title: 'Code',
         content: (
-          <CodeTracePanel
+                    <div style={{ position: "relative" }}>
+            <CodeTracePanel
             step={step}
             codeLines={SOLUTION_CODE}
             onActiveLineDomChange={setActiveLineDom}
             autoScroll={autoScrollCode}
           />
+
+            {showPatternOverlay && (
+              <CodePatternAnnotations
+                linePatterns={LINE_PATTERN_MAP}
+                currentPhase={step?.phase}
+                activeLineDom={activeLineDom}
+                activeLine={step?.activeLine}
+              />
+            )}
+          </div>
         ),
       },
     ],
@@ -372,6 +398,9 @@ export default function WordSearchVisualizer() {
     <div className="problem-shell">
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['viz', 'code']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -392,8 +421,8 @@ export default function WordSearchVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
-      </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      </FloatingPanel>activeLineDom={activeLineDom} />}
     </div>
   )
 }
+

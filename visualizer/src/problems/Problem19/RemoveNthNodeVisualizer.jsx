@@ -5,6 +5,8 @@ import FloatingPanel from "../../components/shared/FloatingPanel"
 import CodeTracePanel from "../../components/CodeTracePanel"
 import PlaybackControls from "../../components/PlaybackControls"
 import PatternOverlay from "../../components/PatternOverlay"
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import { useAutoScroll } from "../../hooks/useAutoScroll"
@@ -22,6 +24,20 @@ const SOLUTION_CODE = [
   { line: 9, text: "            slow.next = slow.next.next" },
   { line: 10, text: "        return dummy.next" },
 ]
+
+const REMOVENTHNODE_PATTERNS = ['init', 'pointers_init', 'fast_advance', 'fast_step', 'gap_ready', 'both_advance', 'found_target', 'removing', 'done']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',         // dummy = ListNode(0, head)
+  4: 'pointers_init', // fast, slow = dummy, dummy
+  5: 'fast_advance', // for _ in range(n + 1):
+  6: 'fast_advance', // fast = fast.next
+  7: 'gap_ready',    // while fast:
+  8: 'both_advance', // fast, slow = fast.next, slow.next
+  9: 'removing',     // slow.next = slow.next.next
+  10: 'done',        // return dummy.next
+}
 
 function generateSteps(list, n) {
   const steps = []
@@ -398,12 +414,21 @@ export default function RemoveNthNodeVisualizer() {
         id: "code",
         title: "Code",
         content: (
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            onActiveLineDomChange={setActiveLineDom}
-            autoScroll={autoScrollCode}
-          />
+          <div style={{ position: 'relative' }}>
+            <CodeTracePanel
+              step={step}
+              codeLines={SOLUTION_CODE}
+              onActiveLineDomChange={setActiveLineDom}
+              autoScroll={autoScrollCode}
+            />
+            {showPatternOverlay && (
+              <CodePatternAnnotations
+                linePatterns={LINE_PATTERN_MAP}
+                currentPhase={step?.phase}
+                activeLineDom={activeLineDom}
+              />
+            )}
+          </div>
         ),
       },
       {
@@ -434,6 +459,9 @@ export default function RemoveNthNodeVisualizer() {
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [["code", "viz"]], minimized: [] }} />
 
       <FloatingPanel title="Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={REMOVENTHNODE_PATTERNS} />
+        )}
         <div className="rnn-status" style={{ marginBottom: "12px" }}>
           {step?.message ?? "Play or Step to begin."}
         </div>

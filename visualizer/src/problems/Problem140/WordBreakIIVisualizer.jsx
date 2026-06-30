@@ -10,7 +10,13 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './WordBreakIIVisualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 
+
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const EXAMPLES = getExamples('word-break-ii') || [
   { label: 'Example 1', s: 'catsandcatsdog', wordDict: ['cat', 'cats', 'and', 'sand', 'dog'] },
   { label: 'Example 2', s: 'pineapplepenapple', wordDict: ['apple', 'pen', 'applepen', 'pine', 'pineapple'] },

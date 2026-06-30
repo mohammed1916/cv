@@ -2,7 +2,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
 import DockableWorkspace from "../../components/shared/DockableWorkspace";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
@@ -23,6 +24,19 @@ const SOLUTION_CODE = [
   { line: 10, text: "    nums[i+1:] = reversed(nums[i+1:])" },
   { line: 11, text: "    return nums" },
 ];
+
+const PATTERNS = ['find-pivot', 'found-pivot', 'found-swap', 'swapped', 'reversed', 'reverse', 'done']
+
+const LINE_PATTERN_MAP = {
+  2: 'find-pivot',
+  3: 'find-pivot',
+  5: 'found-pivot',
+  8: 'found-swap',
+  9: 'swapped',
+  10: 'reversed',
+  10: 'reverse',
+  11: 'done',
+}
 
 const EXAMPLES = getExamples('next-permutation');
 
@@ -145,7 +159,19 @@ export default function NextPermutationVisualizer() {
     {
       id: "code",
       title: "Code Trace",
-      content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
+      content: (
+        <div style={{ position: 'relative' }}>
+          <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
+      ),
     },
     {
       id: "status",
@@ -168,6 +194,9 @@ export default function NextPermutationVisualizer() {
       />
 
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -190,8 +219,6 @@ export default function NextPermutationVisualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   );
 }

@@ -10,6 +10,8 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import { useAutoScroll } from "../../hooks/useAutoScroll"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { getExamples } from "../../config/examplesRegistry"
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 import "./Visualizer.css"
 const SOLUTION_CODE = [
   { line: 1, text: "class Solution:" },
@@ -32,6 +34,23 @@ const SOLUTION_CODE = [
   { line: 18, text: "        prev.next = None" },
   { line: 19, text: "        return dummy.next" },
 ]
+
+const _PATTERNS = ['building', 'counting', 'done', 'init_count', 'init_result']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  4: 'init_count',
+  5: 'init_count',
+  7: 'counting',
+  8: 'counting',
+  10: 'init_result',
+  11: 'init_result',
+  12: 'init_result',
+  14: 'building',
+  15: 'building',
+  17: 'building',
+  19: 'done',
+}
 
 function generateSteps(list) {
   const steps = []
@@ -436,7 +455,8 @@ export default function RemoveDuplicatesFromListVisualizer() {
         id: "code",
         title: "Code",
         content: (
-          <CodeTracePanel
+                    <div style={{ position: "relative" }}>
+            <CodeTracePanel
             step={step}
             codeLines={SOLUTION_CODE_WITH_CONNECTIVITY}
             highlightedLines={connectivity.highlightedLines}
@@ -444,6 +464,16 @@ export default function RemoveDuplicatesFromListVisualizer() {
             onActiveLineDomChange={setActiveLineDom}
             autoScroll={autoScrollCode}
           />
+
+            {showPatternOverlay && (
+              <CodePatternAnnotations
+                linePatterns={LINE_PATTERN_MAP}
+                currentPhase={step?.phase}
+                activeLineDom={activeLineDom}
+                activeLine={step?.activeLine}
+              />
+            )}
+          </div>
         ),
       },
       {
@@ -472,6 +502,10 @@ export default function RemoveDuplicatesFromListVisualizer() {
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [["code", "viz"]], minimized: [] }} />
 
       <FloatingPanel title="Playback Controls">
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={_PATTERNS} />
+      )}
+      
         <div className="rdl-status" style={{ marginBottom: "12px" }}>
           {step?.message ?? "Press Play or Step to begin."}
         </div>
@@ -495,10 +529,9 @@ export default function RemoveDuplicatesFromListVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
-      </FloatingPanel>
-
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      </FloatingPanel>activeLineDom={activeLineDom} />}
     </div>
   )
 }
+
 

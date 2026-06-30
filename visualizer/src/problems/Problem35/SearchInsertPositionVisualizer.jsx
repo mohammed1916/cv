@@ -9,6 +9,8 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './SearchInsertPositionVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -27,6 +29,22 @@ const SOLUTION_CODE = [
   { line: 14, text: '                ' },
   { line: 15, text: '        return left' },
 ]
+
+const SEARCHINSERTPOSITION_PATTERNS = ['calc_mid', 'check_greater', 'check_less', 'check_target', 'done', 'found', 'init', 'update_left', 'update_right', 'while_check']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',
+  5: 'while_check',
+  6: 'calc_mid',
+  8: 'check_target',
+  9: 'found',
+  10: 'check_less',
+  11: 'update_left',
+  12: 'check_greater',
+  13: 'update_right',
+  15: 'done',
+}
 
 function generateSteps(nums, target) {
   const steps = []
@@ -182,7 +200,9 @@ export default function SearchInsertPositionVisualizer() {
             <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center' }}>
               <input
                 value={numsInput}
-                onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
+                onChange={(e) => { setNumsInput(e.target.value);
+
+ handleReset() }}
                 placeholder="[1, 3, 5, 6]"
                 className="sip-input"
                 style={{ flex: 1, margin: 0 }}
@@ -266,13 +286,24 @@ export default function SearchInsertPositionVisualizer() {
       </div>
 
       <div className="sip-middle">
-        <CodeTracePanel
+                <div style={{ position: "relative" }}>
+          <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
           onLineSelect={connectivity.handleLineSelect}
           onActiveLineDomChange={setActiveLineDom}
         />
+
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
       </div>
 
       <div className={`sip-status ${step?.phase === 'found' ? 'found' : step?.phase === 'done' ? 'done' : ''}`}>
@@ -280,6 +311,9 @@ export default function SearchInsertPositionVisualizer() {
       </div>
 
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={SEARCHINSERTPOSITION_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}

@@ -2,7 +2,8 @@
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
 import DockableWorkspace from "../../components/shared/DockableWorkspace";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
@@ -26,6 +27,23 @@ const SOLUTION_CODE = [
     { line: 13, text: "                     or (dp[i][j-1] and s2[j-1]==s3[i+j-1])" },
     { line: 14, text: "    return dp[m][n]" },
 ];
+
+const LINE_PATTERN_MAP = {
+    "1": "init",
+    "2": "init",
+    "3": "check_loop",
+    "4": "init",
+    "5": "init",
+    "6": "loop",
+    "7": "calc_diff",
+    "8": "loop",
+    "9": "calc_diff",
+    "10": "loop",
+    "11": "loop",
+    "12": "calc_diff",
+    "13": "calc_diff",
+    "14": "check_loop",
+};
 
 const EXAMPLES = getExamples('interleaving-string');
 
@@ -171,12 +189,22 @@ export default function InterleavingStringVisualizer() {
             subtitle: step ? `Active line ${step.activeLine}` : 'Line-by-line solution view.',
             defaultZone: 'full',
             content: (
-                <CodeTracePanel
-                    step={step}
-                    codeLines={SOLUTION_CODE}
-                    onActiveLineDomChange={setActiveLineDom}
-                    autoScroll={autoScrollCode}
-                />
+                <div style={{position: 'relative'}}>
+                    <CodeTracePanel
+                        step={step}
+                        codeLines={SOLUTION_CODE}
+                        onActiveLineDomChange={setActiveLineDom}
+                        autoScroll={autoScrollCode}
+                    />
+                    {showPatternOverlay && (
+                        <CodePatternAnnotations
+                            linePatterns={LINE_PATTERN_MAP}
+                            currentPhase={step?.phase}
+                            activeLineDom={activeLineDom}
+                            activeLine={step?.activeLine}
+                        />
+                    )}
+                </div>
             ),
         },
         {
@@ -226,8 +254,6 @@ export default function InterleavingStringVisualizer() {
                     showPatternOverlayToggle
                 />
             </FloatingPanel>
-
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     );
 }

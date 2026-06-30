@@ -8,6 +8,8 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './MaximumSubarrayVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -23,6 +25,19 @@ const SOLUTION_CODE = [
   { line: 11, text: '            ' },
   { line: 12, text: '        return maxSub' },
 ]
+
+const MAXIMUMSUBARRAY_PATTERNS = ['add', 'check_cur', 'done', 'init', 'keep_cur', 'loop', 'reset_cur', 'update_max']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  4: 'init',
+  6: 'loop',
+  7: 'check_cur',
+  8: 'reset_cur',
+  9: 'keep_cur',
+  10: 'update_max',
+  12: 'done',
+}
 
 function generateSteps(nums) {
   const steps = []
@@ -152,7 +167,9 @@ export default function MaximumSubarrayVisualizer() {
               <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace' }}>nums=</span>
               <input
                 value={numsInput}
-                onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
+                onChange={(e) => { setNumsInput(e.target.value);
+
+ handleReset() }}
                 placeholder="[-2, 1, -3, 4, -1, 2, 1, -5, 4]"
                 className="maxsub-input"
                 style={{ flex: 1, margin: 0 }}
@@ -246,7 +263,18 @@ export default function MaximumSubarrayVisualizer() {
       </div>
 
       <div className="maxsub-middle">
-        <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+                <div style={{ position: "relative" }}>
+          <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
       </div>
 
       <div className={`maxsub-status \${step?.phase === 'done' ? 'success' : step?.phase === 'reset_cur' ? 'reset' : step?.updatedMax ? 'newmax' : ''}`}>
@@ -254,6 +282,9 @@ export default function MaximumSubarrayVisualizer() {
       </div>
 
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={MAXIMUMSUBARRAY_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}

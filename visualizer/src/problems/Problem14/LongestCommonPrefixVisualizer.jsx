@@ -5,6 +5,8 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
@@ -23,6 +25,21 @@ const SOLUTION_CODE = [
   { line: 9, text: '        return strs[0]' },
   { line: 10, text: '' },
 ]
+
+const LCP_PATTERNS = ['done', 'init', 'check_col', 'check_row', 'out_of_bounds', 'compare_char', 'mismatch', 'col_complete']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  4: 'done',           // return ""
+  5: 'init',           // for col in range(len(strs[0])):
+  5: 'check_col',      // Compare column
+  6: 'check_row',      // for row in range(1, len(strs)):
+  7: 'out_of_bounds',  // Check out of bounds
+  7: 'compare_char',   // Compare characters
+  8: 'mismatch',       // Mismatch found
+  5: 'col_complete',   // Column complete
+  9: 'done',           // return strs[0]
+}
 
 function generateSteps(strs) {
   const steps = []
@@ -375,12 +392,21 @@ export default function LongestCommonPrefixVisualizer() {
       subtitle: step ? `Active line ${step.activeLine}` : 'Line-by-line solution view',
       defaultZone: 'full',
       content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          autoScroll={autoScrollCode}
-          onActiveLineDomChange={setActiveLineDom}
-        />
+        <div style={{ position: 'relative' }}>
+          <CodeTracePanel
+            step={step}
+            codeLines={SOLUTION_CODE}
+            autoScroll={autoScrollCode}
+            onActiveLineDomChange={setActiveLineDom}
+          />
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+            />
+          )}
+        </div>
       ),
     },
     {
@@ -436,6 +462,9 @@ export default function LongestCommonPrefixVisualizer() {
       />
 
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={LCP_PATTERNS} />
+        )}
         <PlaybackControls
           onReset={handleReset}
           onPrev={stepBack}

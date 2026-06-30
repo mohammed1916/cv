@@ -8,6 +8,8 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './JumpGameVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 
 const SOLUTION_CODE = [
     { line: 1, text: 'class Solution:' },
@@ -19,6 +21,17 @@ const SOLUTION_CODE = [
     { line: 7, text: '            maxReach = max(maxReach, i + nums[i])' },
     { line: 8, text: '        return True' },
 ]
+
+const JUMPGAME_PATTERNS = ['check', 'done', 'init', 'stuck', 'update']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',
+  5: 'check',
+  6: 'stuck',
+  7: 'update',
+  8: 'done',
+}
 
 function generateSteps(nums) {
     const steps = []
@@ -132,7 +145,9 @@ export default function JumpGameVisualizer() {
                         <input
                             className="jg-input"
                             value={numsInput}
-                            onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
+                            onChange={(e) => { setNumsInput(e.target.value);
+
+ handleReset() }}
                             placeholder="[2,3,1,1,4]"
                         />
                     </div>
@@ -187,13 +202,27 @@ export default function JumpGameVisualizer() {
                 </div>
             </section>
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+                        <div style={{ position: "relative" }}>
+              <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+
+              {showPatternOverlay && (
+                <CodePatternAnnotations
+                  linePatterns={LINE_PATTERN_MAP}
+                  currentPhase={step?.phase}
+                  activeLineDom={activeLineDom}
+                  activeLine={step?.activeLine}
+                />
+              )}
+            </div>
 
             <div className={`jg-status${step?.result === true ? ' ok' : step?.result === false ? ' fail' : ''}`}>
                 {step?.message ?? 'Press Play or Step to begin.'}
             </div>
 
             <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={JUMPGAME_PATTERNS} />
+        )}
         <PlaybackControls
                 isPlaying={isPlaying}
                 isDone={isDone}

@@ -4,12 +4,26 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem444Visualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+
+const PATTERNS = ['add_relation', 'check_sequence', 'check_unique', 'complete', 'init', 'invalid_subseq', 'not_unique']
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  2: 'check_sequence',
+  3: 'invalid_subseq',
+  4: 'add_relation',
+  5: 'check_unique',
+  6: 'complete',
+  7: 'not_unique'
+}
+
 
 const EXAMPLES = getExamples('sequence-reconstruction')
 
@@ -464,7 +478,7 @@ export default function Problem444Visualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      
     </div>
   )
 }

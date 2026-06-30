@@ -4,12 +4,24 @@ import DockableWorkspace from "../../components/shared/DockableWorkspace";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./Search2DMatrixVisualizer.css";
+
+const SEARCH2DMATRIX_PATTERNS = ['init', 'calc', 'found', 'lo', 'hi', 'not_found']
+
+const LINE_PATTERN_MAP = {
+  3: 'init',
+  5: 'calc',
+  8: 'found',
+  9: 'lo',
+  10: 'hi',
+  11: 'not_found',
+}
 const SOLUTION_CODE = [
     { line: 1, text: "def searchMatrix(matrix, target):" },
     { line: 2, text: "    rows, cols = len(matrix), len(matrix[0])" },
@@ -29,27 +41,27 @@ function generateSteps(matrix, target) {
     const rows = matrix.length, cols = matrix[0].length;
     let lo = 0, hi = rows * cols - 1;
 
-    steps.push({ activeLine: 3, lo, hi, mid: -1, r: -1, c: -1, found: null, message: `Search for ${target}. Treat ${rows}×${cols} matrix as 1D array, lo=0, hi=${hi}` });
+    steps.push({ phase: 'init', activeLine: 3, lo, hi, mid: -1, r: -1, c: -1, found: null, message: `Search for ${target}. Treat ${rows}×${cols} matrix as 1D array, lo=0, hi=${hi}` });
 
     while (lo <= hi) {
         const mid = Math.floor((lo + hi) / 2);
         const r = Math.floor(mid / cols), c = mid % cols;
         const val = matrix[r][c];
-        steps.push({ activeLine: 5, lo, hi, mid, r, c, val, found: null, message: `lo=${lo}, hi=${hi} → mid=${mid} → [${r}][${c}]=${val}` });
+        steps.push({ phase: 'calc', activeLine: 5, lo, hi, mid, r, c, val, found: null, message: `lo=${lo}, hi=${hi} → mid=${mid} → [${r}][${c}]=${val}` });
 
         if (val === target) {
-            steps.push({ activeLine: 8, lo, hi, mid, r, c, val, found: true, message: `Found ${target} at [${r}][${c}]! Return true.` });
+            steps.push({ phase: 'found', activeLine: 8, lo, hi, mid, r, c, val, found: true, message: `Found ${target} at [${r}][${c}]! Return true.` });
             return steps;
         } else if (val < target) {
             lo = mid + 1;
-            steps.push({ activeLine: 9, lo, hi, mid, r, c, val, found: null, message: `${val} < ${target} → lo = ${lo}` });
+            steps.push({ phase: 'lo', activeLine: 9, lo, hi, mid, r, c, val, found: null, message: `${val} < ${target} → lo = ${lo}` });
         } else {
             hi = mid - 1;
-            steps.push({ activeLine: 10, lo, hi, mid, r, c, val, found: null, message: `${val} > ${target} → hi = ${hi}` });
+            steps.push({ phase: 'hi', activeLine: 10, lo, hi, mid, r, c, val, found: null, message: `${val} > ${target} → hi = ${hi}` });
         }
     }
 
-    steps.push({ activeLine: 11, lo, hi, mid: -1, r: -1, c: -1, found: false, message: `${target} not found. Return false.` });
+    steps.push({ phase: 'not_found', activeLine: 11, lo, hi, mid: -1, r: -1, c: -1, found: false, message: `${target} not found. Return false.` });
     return steps;
 }
 
@@ -77,13 +89,23 @@ export default function Search2DMatrixVisualizer() {
             id: 'code',
             title: 'Code',
             content: (
-                <CodeTracePanel
-                    step={step}
-                    codeLines={SOLUTION_CODE}
-                    highlightedLines={connectivity.highlightedLines}
-                    onLineSelect={connectivity.handleLineSelect}
-                    onActiveLineDomChange={setActiveLineDom}
-                />
+                <div style={{position: 'relative'}}>
+                    <CodeTracePanel
+                        step={step}
+                        codeLines={SOLUTION_CODE}
+                        highlightedLines={connectivity.highlightedLines}
+                        onLineSelect={connectivity.handleLineSelect}
+                        onActiveLineDomChange={setActiveLineDom}
+                    />
+                    {showPatternOverlay && (
+                        <CodePatternAnnotations
+                            linePatterns={LINE_PATTERN_MAP}
+                            currentPhase={step?.phase}
+                            activeLineDom={activeLineDom}
+                            activeLine={step?.activeLine}
+                        />
+                    )}
+                </div>
             ),
         },
         {
@@ -155,6 +177,9 @@ export default function Search2DMatrixVisualizer() {
                 initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
             />
             <FloatingPanel title="Playback Controls">
+                {showPatternOverlay && (
+                    <PatternLegend currentPhase={step?.phase} usedPatterns={SEARCH2DMATRIX_PATTERNS} />
+                )}
                 <PlaybackControls
                     isPlaying={isPlaying}
                     isDone={isDone}
@@ -173,7 +198,6 @@ export default function Search2DMatrixVisualizer() {
                     showPatternOverlayToggle
                 />
             </FloatingPanel>
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     );
 }

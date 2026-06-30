@@ -2,12 +2,27 @@
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./FirstMissingPositiveVisualizer.css";
 import FloatingPanel from '../../components/shared/FloatingPanel'
+
+const FIRSTMISSINGPOSITIVE_PATTERNS = ['found', 'init', 'place', 'scan', 'swap', 'swapped']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  2: 'init',
+  4: 'place',
+  5: 'swap',
+  7: 'swapped',
+  8: 'scan',
+  10: 'scan',
+  11: 'found',
+  12: 'found',
+}
 
 const SOLUTION_CODE = [
     { line: 1, text: "def firstMissingPositive(nums):" },
@@ -133,9 +148,23 @@ export default function FirstMissingPositiveVisualizer() {
                 <div className="fmp-result">✓ First missing positive = {step.missing}</div>
             )}
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+            <div style={{ position: 'relative' }}>
+              <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+
+              {showPatternOverlay && (
+                <CodePatternAnnotations
+                  linePatterns={LINE_PATTERN_MAP}
+                  currentPhase={step?.phase}
+                  activeLineDom={activeLineDom}
+                  activeLine={step?.activeLine}
+                />
+              )}
+            </div>
             <div className="fmp-status">{step?.message ?? "Press Play to begin."}</div>
             <FloatingPanel title="Playback Controls">
+              {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={FIRSTMISSINGPOSITIVE_PATTERNS} />
+              )}
         <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -147,7 +176,6 @@ export default function FirstMissingPositiveVisualizer() {
                 showPatternOverlayToggle
             />
       </FloatingPanel>
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     );
 }

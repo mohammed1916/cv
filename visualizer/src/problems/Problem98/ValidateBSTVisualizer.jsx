@@ -9,6 +9,8 @@ import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } fr
 import { getExamples } from '../../config/examplesRegistry'
 import './ValidateBSTVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 
 const CANVAS_W = 520
 const CANVAS_H = 320
@@ -25,6 +27,18 @@ const SOLUTION_CODE = [
     { line: 8, text: '                and valid(node.right, node.val, hi))' },
     { line: 9, text: '        return valid(root, -inf, inf)' },
 ]
+
+const VALIDATEBST_PATTERNS = ['check', 'done', 'invalid', 'recurse-left', 'recurse-right']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  4: 'done',
+  5: 'check',
+  6: 'invalid',
+  7: 'recurse-left',
+  8: 'recurse-right',
+  9: 'done',
+}
 
 function generateSteps(arr) {
     const root = buildTree(arr)
@@ -153,7 +167,9 @@ export default function ValidateBSTVisualizer() {
                                 <button key={ex.label} className="vbst-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
                             ))}
                         </div>
-                        <input className="vbst-input" value={arrInput} onChange={(e) => { setArrInput(e.target.value); handleReset() }} />
+                        <input className="vbst-input" value={arrInput} onChange={(e) => { setArrInput(e.target.value);
+
+ handleReset() }} />
                         <div className="vbst-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
                             <svg style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }} width={CANVAS_W} height={CANVAS_H}>
                                 {edges.map(({ fromId, toId }) => {
@@ -220,11 +236,25 @@ export default function ValidateBSTVisualizer() {
                 </section>
             </div>
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+                        <div style={{ position: "relative" }}>
+              <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+
+              {showPatternOverlay && (
+                <CodePatternAnnotations
+                  linePatterns={LINE_PATTERN_MAP}
+                  currentPhase={step?.phase}
+                  activeLineDom={activeLineDom}
+                  activeLine={step?.activeLine}
+                />
+              )}
+            </div>
             <div className={`vbst-status ${step?.phase === 'done' ? (step?.result ? 'ok' : 'fail') : ''}`}>
                 {step?.message || 'Press Play to begin.'}
             </div>
             <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={VALIDATEBST_PATTERNS} />
+        )}
         <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -235,8 +265,8 @@ export default function ValidateBSTVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
-      </FloatingPanel>
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      </FloatingPanel>activeLineDom={activeLineDom} />}
         </div>
     )
 }
+

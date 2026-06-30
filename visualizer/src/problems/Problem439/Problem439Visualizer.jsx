@@ -4,12 +4,27 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem439Visualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+
+const PATTERNS = ['complete', 'init', 'process_ternary', 'push_char', 'push_ternary', 'read_char', 'skip_colon', 'start_from_end']
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  2: 'start_from_end',
+  3: 'read_char',
+  4: 'process_ternary',
+  5: 'push_ternary',
+  6: 'skip_colon',
+  7: 'push_char',
+  8: 'complete'
+}
+
 
 const EXAMPLES = getExamples('ternary-expression-parser')
 
@@ -369,7 +384,7 @@ export default function Problem439Visualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      
     </div>
   )
 }

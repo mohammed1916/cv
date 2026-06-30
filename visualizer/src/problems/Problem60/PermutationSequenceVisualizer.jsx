@@ -9,6 +9,8 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 import './PermutationSequenceVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -26,6 +28,21 @@ const SOLUTION_CODE = [
     { line: 12, text: '        k %= factorial[n-1-i]' },
     { line: 13, text: '    return "".join(map(str, result))' },
 ]
+
+const PERMUTATIONSEQUENCE_PATTERNS = ['adjust-k', 'calc-index', 'done', 'init-factorial', 'init-nums', 'init-result', 'remove-num', 'select-num', 'update-k']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  2: 'init-factorial',
+  5: 'adjust-k',
+  6: 'init-nums',
+  7: 'init-result',
+  9: 'calc-index',
+  10: 'select-num',
+  11: 'remove-num',
+  12: 'update-k',
+  13: 'done',
+}
 
 function generateSteps(n, k) {
     const steps = []
@@ -322,12 +339,23 @@ export default function PermutationSequenceVisualizer() {
                 id: 'code',
                 title: 'Code',
                 content: (
-                    <CodeTracePanel
+                                        <div style={{ position: "relative" }}>
+                      <CodeTracePanel
                         step={step}
                         codeLines={SOLUTION_CODE}
                         onActiveLineDomChange={setActiveLineDom}
                         autoScroll={autoScrollCode}
                     />
+
+                      {showPatternOverlay && (
+                        <CodePatternAnnotations
+                          linePatterns={LINE_PATTERN_MAP}
+                          currentPhase={step?.phase}
+                          activeLineDom={activeLineDom}
+                          activeLine={step?.activeLine}
+                        />
+                      )}
+                    </div>
                 ),
             },
         ],
@@ -338,7 +366,10 @@ export default function PermutationSequenceVisualizer() {
         <div className="problem-shell">
             <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['viz', 'code']], minimized: [] }} />
             <FloatingPanel title="Playback Controls">
-                <PlaybackControls
+                {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PERMUTATIONSEQUENCE_PATTERNS} />
+        )}
+        <PlaybackControls
                     isPlaying={isPlaying}
                     isDone={isDone}
                     speed={speed}

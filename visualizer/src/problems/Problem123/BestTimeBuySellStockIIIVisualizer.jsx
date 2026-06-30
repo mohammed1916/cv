@@ -10,6 +10,12 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from "../../config/examplesRegistry";
 import "./BestTimeBuySellStockIIIVisualizer.css";
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE_INLINE = [
     { line: 1, text: "def maxProfit(prices):" },
     { line: 2, text: "    b1 = b2 = -inf  # best profit after 1st/2nd buy" },

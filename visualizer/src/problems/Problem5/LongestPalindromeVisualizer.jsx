@@ -2,12 +2,37 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './LongestPalindromeVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+
+const LPAL_PATTERNS = ['init', 'loop', 'odd_init', 'odd_check', 'odd_match', 'odd_update', 'odd_expand', 'odd_break', 'even_init', 'even_check', 'even_match', 'even_update', 'even_expand', 'even_break']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',        // res = ""
+  4: 'init',        // resLen = 0
+  6: 'loop',        // for i in range(len(s)):
+  8: 'odd_init',    // l, r = i, i
+  9: 'odd_check',   // while l >= 0 and r < len(s) and s[l] == s[r]:
+  10: 'odd_match',  // if (r - l + 1) > resLen:
+  11: 'odd_update', // res = s[l:r+1]
+  12: 'odd_update', // resLen = r - l + 1
+  13: 'odd_expand', // l -= 1
+  14: 'odd_expand', // r += 1
+  17: 'even_init',  // l, r = i, i + 1
+  18: 'even_check', // while l >= 0 and r < len(s) and s[l] == s[r]:
+  19: 'even_match', // if (r - l + 1) > resLen:
+  20: 'even_update', // res = s[l:r+1]
+  21: 'even_update', // resLen = r - l + 1
+  22: 'even_expand', // l -= 1
+  23: 'even_expand', // r += 1
+  25: 'loop',       // return res
+}
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'class Solution:' },
@@ -285,7 +310,18 @@ export default function LongestPalindromeVisualizer() {
       </div>
 
       <div className="lpal-middle">
-        <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+        <div style={{ position: 'relative' }}>
+          <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
       </div>
 
       <div className={`lpal-status \${step?.phase === 'done' ? 'success' : step?.phase === 'odd_update' || step?.phase === 'even_update' ? 'update' : ''}`}>
@@ -293,6 +329,9 @@ export default function LongestPalindromeVisualizer() {
       </div>
 
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={LPAL_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -311,8 +350,6 @@ export default function LongestPalindromeVisualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }

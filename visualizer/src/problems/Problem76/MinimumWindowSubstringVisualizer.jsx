@@ -9,6 +9,20 @@ import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { getExamples } from '../../config/examplesRegistry'
 import './MinimumWindowSubstringVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
+
+const MINIMUMWINDOWSUBSTRING_PATTERNS = ['best', 'done', 'expand', 'init', 'shrink']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'done',
+  7: 'init',
+  13: 'expand',
+  15: 'best',
+  19: 'shrink',
+  20: 'done',
+}
 
 function buildNeed(t) {
   const out = {}

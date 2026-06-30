@@ -4,12 +4,35 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 import './ThreeSumVisualizer.css'
+
+const THREESUM_PATTERNS = ['sort', 'fix_i', 'skip_i', 'calc', 'found', 'move_l', 'skip_l', 'move_r', 'done']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'sort',    // nums.sort()
+  4: 'fix_i',   // result = []
+  5: 'fix_i',   // for i in range(len(nums) - 2):
+  6: 'skip_i',  // if i > 0 and nums[i] == nums[i - 1]:
+  7: 'skip_i',  // continue  # skip i-duplicates
+  8: 'calc',    // l, r = i + 1, len(nums) - 1
+  9: 'calc',    // while l < r:
+  10: 'calc',   // s = nums[i] + nums[l] + nums[r]
+  11: 'found',  // if s == 0:
+  12: 'found',  // result.append([nums[i], nums[l], nums[r]])
+  13: 'move_l', // l += 1
+  14: 'skip_l', // while l < r and nums[l] == nums[l-1]: l += 1
+  15: 'move_l', // elif s < 0:
+  16: 'move_l', // l += 1
+  17: 'move_r', // else:
+  18: 'move_r', // r -= 1
+}
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -244,13 +267,24 @@ export default function ThreeSumVisualizer() {
         id: 'code',
         title: 'Code',
         content: (
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-            onActiveLineDomChange={setActiveLineDom}
-          />
+          <div style={{ position: 'relative' }}>
+            <CodeTracePanel
+              step={step}
+              codeLines={SOLUTION_CODE}
+              highlightedLines={connectivity.highlightedLines}
+              onLineSelect={connectivity.handleLineSelect}
+              onActiveLineDomChange={setActiveLineDom}
+            />
+
+            {showPatternOverlay && (
+              <CodePatternAnnotations
+                linePatterns={LINE_PATTERN_MAP}
+                currentPhase={step?.phase}
+                activeLineDom={activeLineDom}
+                activeLine={step?.activeLine}
+              />
+            )}
+          </div>
         ),
       },
       {
@@ -437,6 +471,9 @@ export default function ThreeSumVisualizer() {
     <div className="problem-shell">
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={THREESUM_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}

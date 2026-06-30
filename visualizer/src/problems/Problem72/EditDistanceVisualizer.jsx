@@ -2,7 +2,8 @@
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import DockableWorkspace from "../../components/shared/DockableWorkspace";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
@@ -10,6 +11,15 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./EditDistanceVisualizer.css";
+
+const EDITDISTANCE_PATTERNS = ['init', 'match', 'mismatch']
+
+const LINE_PATTERN_MAP = {
+  4: 'init',
+  9: 'match',
+  11: 'mismatch',
+  14: 'init',
+}
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: "def minDistance(word1, word2):" },
   { line: 2, text: "    m, n = len(word1), len(word2)" },
@@ -94,21 +104,21 @@ function generateSteps(w1, w2) {
   const dp = Array.from({ length: m + 1 }, (_, i) => Array.from({ length: n + 1 }, (_, j) => (i === 0 ? j : j === 0 ? i : 0)));
   const steps = [];
 
-  steps.push({ activeLine: 4, dpRef: dp, curI: 0, curJ: 0, message: `Init base cases: dp[i][0]=i (delete all), dp[0][j]=j (insert all)` });
+  steps.push({ phase: 'init', activeLine: 4, dpRef: dp, curI: 0, curJ: 0, message: `Init base cases: dp[i][0]=i (delete all), dp[0][j]=j (insert all)` });
 
   for (let i = 1; i <= m; i++) {
     for (let j = 1; j <= n; j++) {
       const match = w1[i - 1] === w2[j - 1];
       if (match) {
         dp[i][j] = dp[i - 1][j - 1];
-        steps.push({ activeLine: 9, dpRef: dp, curI: i, curJ: j, message: `w1[${i-1}]="${w1[i-1]}"==w2[${j-1}]="${w2[j-1]}": dp[${i}][${j}]=dp[${i-1}][${j-1}]=${dp[i][j]}` });
+        steps.push({ phase: 'match', activeLine: 9, dpRef: dp, curI: i, curJ: j, message: `w1[${i-1}]="${w1[i-1]}"==w2[${j-1}]="${w2[j-1]}": dp[${i}][${j}]=dp[${i-1}][${j-1}]=${dp[i][j]}` });
       } else {
         dp[i][j] = 1 + Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]);
-        steps.push({ activeLine: 11, dpRef: dp, curI: i, curJ: j, message: `w1[${i-1}]="${w1[i-1]}"≠w2[${j-1}]="${w2[j-1]}": dp[${i}][${j}]=1+min(${dp[i-1][j]},${dp[i][j-1]},${dp[i-1][j-1]})=${dp[i][j]}` });
+        steps.push({ phase: 'mismatch', activeLine: 11, dpRef: dp, curI: i, curJ: j, message: `w1[${i-1}]="${w1[i-1]}"≠w2[${j-1}]="${w2[j-1]}": dp[${i}][${j}]=1+min(${dp[i-1][j]},${dp[i][j-1]},${dp[i-1][j-1]})=${dp[i][j]}` });
       }
     }
   }
-  steps.push({ activeLine: 14, dpRef: dp, curI: m, curJ: n, message: `Result: dp[${m}][${n}] = ${dp[m][n]}` });
+  steps.push({ phase: 'init', activeLine: 14, dpRef: dp, curI: m, curJ: n, message: `Result: dp[${m}][${n}] = ${dp[m][n]}` });
   return steps;
 }
 
@@ -146,12 +156,22 @@ export default function EditDistanceVisualizer() {
       title: 'Code Trace',
       subtitle: step ? `Line ${step.activeLine}` : 'Solution code',
       content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          onActiveLineDomChange={setActiveLineDom}
-          autoScroll={autoScrollCode}
-        />
+        <div style={{position: 'relative'}}>
+          <CodeTracePanel
+            step={step}
+            codeLines={SOLUTION_CODE}
+            onActiveLineDomChange={setActiveLineDom}
+            autoScroll={autoScrollCode}
+          />
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
       ),
     },
   ], [ex, step, stepIndex, steps.length, setActiveLineDom, autoScrollCode, applyEx, dpTable, maxVal]);
@@ -168,6 +188,9 @@ export default function EditDistanceVisualizer() {
       />
 
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={EDITDISTANCE_PATTERNS} />
+        )}
         <PlaybackControls
           onReset={handleReset}
           onPrev={stepBack}
@@ -191,10 +214,6 @@ export default function EditDistanceVisualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-
-      {showPatternOverlay && step && (
-        <PatternOverlay step={step} activeLineDom={activeLineDom} />
-      )}
     </div>
   );
 }
