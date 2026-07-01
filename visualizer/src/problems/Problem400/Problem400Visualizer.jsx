@@ -209,10 +209,10 @@ export default function Problem400Visualizer() {
   }, [nInput])
 
   const steps = useMemo(
-    ()(() => generateSteps().map((current) => ({
+    () => generateSteps().map((current) => ({
       ...current,
       relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
-    }))),
+    })),
     [nInput],
   )
 

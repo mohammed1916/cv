@@ -258,7 +258,7 @@ export default function CombinationsVisualizer() {
                     patternOverlayLabel="Show pattern overlay"
                     showPatternOverlayToggle
                 />
-            </FloatingPanel>activeLineDom={activeLineDom} />}
+            </FloatingPanel>
         </div>
     )
 }

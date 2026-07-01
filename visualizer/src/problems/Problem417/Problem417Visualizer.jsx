@@ -229,7 +229,7 @@ function Problem417Visualizer() {
   const steps = useMemo(() => generateSteps(heights).map((current) => ({
       ...current,
       relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
-    }), [heights])
+    })), [heights])
   const { activeStepIndex, isPlaying, togglePlayback, reset, setActiveStepIndex } =
     usePlaybackState(steps)
 

@@ -10,6 +10,8 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import './Problem358.css'
 
 const PATTERNS = ['cooldown_ready', 'cooldown_set', 'done', 'fill_gap', 'impossible', 'init', 'placement', 'ready']
@@ -29,8 +31,6 @@ const LINE_PATTERN_MAP = {
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def rearrangeString(s: str, k: int) -> str:' },
   { line: 2, text: '    from collections import Counter' },
-import CodePatternAnnotations from '../../components/CodePatternAnnotations'
-import PatternLegend from '../../components/PatternLegend'
   { line: 3, text: '    if k == 0: return s' },
   { line: 4, text: '    freq = Counter(s)' },
   { line: 5, text: '    max_freq = max(freq.values())' },

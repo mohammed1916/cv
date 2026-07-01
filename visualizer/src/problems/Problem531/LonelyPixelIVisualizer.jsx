@@ -25,8 +25,6 @@ const LINE_PATTERN_MAP = {
   16: 'done'
 }
 
-const PATTERNS = ['check', 'count', 'count_done', 'done', 'init', 'lonely', 'scan']
-
 const EXAMPLES = getExamples('lonely-pixel-i')
 
 function generateSteps(picture) {

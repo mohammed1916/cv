@@ -25,8 +25,6 @@ const LINE_PATTERN_MAP = {
   15: 'check'
 }
 
-const PATTERNS = ['decode_done', 'decode_start', 'encode_done', 'encode_start', 'extract_code', 'generate_code', 'init']
-
 const EXAMPLES = getExamples('encode-and-decode-tinyurl')
 
 function generateSteps(url) {

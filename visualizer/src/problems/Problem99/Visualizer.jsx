@@ -43,7 +43,7 @@ export default function Problem99Visualizer() {
           {step?.message}
         </div>
       </FloatingPanel>
-      <FloatingPanel title="Code" icon="ðŸ"" dockId="code" defaultWidth="50%">
+      <FloatingPanel title="Code" icon="📄" dockId="code" defaultWidth="50%">
         <div style={{ position: 'relative' }}>
           <div style={{padding: 12, fontSize: 12, fontFamily: 'monospace', color: '#64748b'}}>Algorithm code here</div>
           {showPatternOverlay && (

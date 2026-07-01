@@ -24,8 +24,6 @@ const LINE_PATTERN_MAP = {
   9: 'process'
 }
 
-const PATTERNS = ['backtrack', 'check', 'done', 'found', 'init', 'loop', 'recurse']
-
 const EXAMPLES = getExamples('beautiful-arrangement')
 
 function generateSteps(n) {

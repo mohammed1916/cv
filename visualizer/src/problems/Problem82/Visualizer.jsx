@@ -528,7 +528,7 @@ export default function RemoveDuplicatesFromListVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
-      </FloatingPanel>activeLineDom={activeLineDom} />}
+      </FloatingPanel>
     </div>
   )
 }

@@ -420,7 +420,7 @@ export default function WordSearchVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
-      </FloatingPanel>activeLineDom={activeLineDom} />}
+      </FloatingPanel>
     </div>
   )
 }
