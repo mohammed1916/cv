@@ -102,7 +102,7 @@ export default function MaximumSizeSubarraySumEqualskVisualizer() {
     return (
       <motion.div
         className="maximum-size-subarray-sum-equalsk-viz"
-        key={currentStep}
+        key={stepIndex}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}

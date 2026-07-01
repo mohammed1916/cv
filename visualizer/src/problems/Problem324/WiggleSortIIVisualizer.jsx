@@ -102,7 +102,7 @@ export default function WiggleSortIIVisualizer() {
     return (
       <motion.div
         className="wiggle-sort-i-i-viz"
-        key={currentStep}
+        key={stepIndex}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}

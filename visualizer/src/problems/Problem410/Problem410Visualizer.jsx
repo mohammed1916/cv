@@ -11,6 +11,9 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem410Visualizer.css'
 
+const PATTERNS = []
+const LINE_PATTERN_MAP = {}
+
 const EXAMPLES = [
   { label: 'Ex1', nums: [1,2,3,4,5], m: 2, expected: 9 },
   { label: 'Ex2', nums: [1,4,4], m: 3, expected: 4 },

@@ -2,12 +2,23 @@
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './WordSearchVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+
+const WORDSEARCH_PATTERNS = ['init', 'match', 'success', 'backtrack', 'not_found']
+
+const LINE_PATTERN_MAP = {
+  4: 'init',
+  6: 'match',
+  7: 'backtrack',
+  8: 'backtrack',
+  14: 'not_found',
+}
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -265,9 +276,22 @@ export default function WordSearchVisualizer() {
         </section>
       </div>
 
-      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+      <div style={{position: 'relative'}}>
+        <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+        {showPatternOverlay && (
+          <CodePatternAnnotations
+            linePatterns={LINE_PATTERN_MAP}
+            currentPhase={step?.phase}
+            activeLineDom={activeLineDom}
+            activeLine={step?.activeLine}
+          />
+        )}
+      </div>
       <div className={`ws-status ${step?.phase === 'done' ? (step?.found ? 'ok' : 'bad') : ''}`}>{step?.message || 'Press Play to begin.'}</div>
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={WORDSEARCH_PATTERNS} />
+        )}
         <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -286,7 +310,6 @@ export default function WordSearchVisualizer() {
         showPatternOverlayToggle
       />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }

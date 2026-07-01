@@ -4,7 +4,6 @@ import DockableWorkspace from'../../components/shared/DockableWorkspace'
 import FloatingPanel from'../../components/shared/FloatingPanel'
 import CodeTracePanel from'../../components/CodeTracePanel'
 import PlaybackControls from'../../components/PlaybackControls'
-import PatternOverlay from'../../components/PatternOverlay'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import{useCodeVisualConnectivity}from'../../hooks/useCodeVisualConnectivity'
@@ -48,11 +47,11 @@ const step=stepIndex>=0?steps[stepIndex]:null
 const applyEx=useCallback(e=>{setEx(e);handleReset()},[handleReset])
 const connectivity=useCodeVisualConnectivity({steps,stepIndex,onStepJump:setStepIndex})
 const{showPatternOverlay,setShowPatternOverlay,activeLineDom,setActiveLineDom}=usePatternOverlay()
-const dockPanels=useMemo(()=>[{id:'code',title:'Code',content:(<CodeTracePanel step={step}codeLines={SOLUTION_CODE}highlightedLines={connectivity.highlightedLines}onLineSelect={connectivity.handleLineSelect}onActiveLineDomChange={setActiveLineDom}/>)},{id:'viz',title:'📊 0-1 Matrix',content:(<VisualizationPanel mat={ex.mat}step={step}applyEx={applyEx}/>)}],[step,SOLUTION_CODE,connectivity,setActiveLineDom,ex,applyEx])
+const dockPanels=useMemo(()=>[{id:'code',title:'Code',content:(<div style={{ position: 'relative' }}><CodeTracePanel step={step}codeLines={SOLUTION_CODE}highlightedLines={connectivity.highlightedLines}onLineSelect={connectivity.handleLineSelect}onActiveLineDomChange={setActiveLineDom}/>{showPatternOverlay && (<CodePatternAnnotations linePatterns={LINE_PATTERN_MAP} currentPhase={step?.phase} activeLineDom={activeLineDom} activeLine={step?.activeLine} />)}</div>)},{id:'viz',title:'📊 0-1 Matrix',content:(<VisualizationPanel mat={ex.mat}step={step}applyEx={applyEx}/>)}],[step,SOLUTION_CODE,connectivity,setActiveLineDom,ex,applyEx])
 return(<div className="problem-shell"><DockableWorkspace panels={dockPanels}initialLayout={{rows:[['code','viz']],minimized:[]}}/><FloatingPanel title="Playback Controls">
         {showPatternOverlay && (
           <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
         )}
         <PlaybackControls isPlaying={isPlaying}isDone={isDone}speed={speed}onPlayToggle={togglePlay}onPrev={stepBack}onNext={stepForward}onReset={handleReset}prevDisabled={stepIndex<0}nextDisabled={isDone}resetDisabled={stepIndex<0}onSpeedChange={e=>setSpeed(Number(e.target.value))}showPatternOverlay={showPatternOverlay}onShowPatternOverlayChange={setShowPatternOverlay}patternOverlayLabel="Show pattern overlay"showPatternOverlayToggle/>
-      </FloatingPanel>{showPatternOverlay&&step&&<PatternOverlay step={step}activeLineDom={activeLineDom}/>}</div>)}
+      </FloatingPanel>{showPatternOverlay&&step&&}</div>)}
 

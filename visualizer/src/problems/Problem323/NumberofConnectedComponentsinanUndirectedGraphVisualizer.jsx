@@ -103,7 +103,7 @@ export default function NumberofConnectedComponentsinanUndirectedGraphVisualizer
     return (
       <motion.div
         className="numberof-connected-componentsinan-undirected-graph-viz"
-        key={currentStep}
+        key={stepIndex}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}

@@ -5,6 +5,8 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
@@ -25,8 +27,7 @@ const LINE_PATTERN_MAP = {
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'from collections import deque' },
-import CodePatternAnnotations from '../../components/CodePatternAnnotations'
-import PatternLegend from '../../components/PatternLegend'
+
   { line: 2, text: 'class SnakeGame:' },
   { line: 3, text: '    def __init__(self, h, w, food):' },
   { line: 4, text: '        self.body = deque([(0,0)])' },

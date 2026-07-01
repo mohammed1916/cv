@@ -2,15 +2,14 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { getExamples } from '../../config/examplesRegistry'
-import CodePatternAnnotations from "../../components/CodePatternAnnotations"
-import PatternLegend from "../../components/PatternLegend"
 import './SubsetsVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -225,25 +224,24 @@ export default function SubsetsVisualizer() {
                 initialLayout={{ rows: [['viz', 'results'], ['code']], minimized: [] }}
             />
             <FloatingPanel title="Playback Controls">
-            {showPatternOverlay && (
-              <PatternLegend currentPhase={step?.phase} usedPatterns={SUBSETS_PATTERNS} />
-            )}
-            
-                <div className="sub-status">{step?.message || 'Press Play to begin.'}</div>
-                <PlaybackControls
-                    isPlaying={isPlaying} isDone={isDone} speed={speed}
-                    onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-                    prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
-                    onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    showAutoScroll
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
-                />
-            </FloatingPanel>activeLineDom={activeLineDom} />}
+              {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={SUBSETS_PATTERNS} />
+              )}
+              <div className="sub-status">{step?.message || 'Press Play to begin.'}</div>
+              <PlaybackControls
+                isPlaying={isPlaying} isDone={isDone} speed={speed}
+                onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
+                prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
+                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+                autoScroll={autoScrollCode}
+                onAutoScrollChange={setAutoScrollCode}
+                showAutoScroll
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                patternOverlayLabel="Show pattern overlay"
+                showPatternOverlayToggle
+              />
+            </FloatingPanel>
         </div>
     )
 }

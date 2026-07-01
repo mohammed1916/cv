@@ -15,6 +15,7 @@ import PatternLegend from '../../components/PatternLegend'
 
 // Pattern annotations
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []
 
 
 

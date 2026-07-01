@@ -269,13 +269,24 @@ export default function Problem392Visualizer() {
         </div>
 
         <div style={{ flex: 1 }}>
-          <CodeTracePanel
-            step={step}
+                    <div style={{ position: "relative" }}>
+            <CodeTracePanel
+              step={step}
             codeLines={SOLUTION_CODE}
             highlightedLines={connectivity.highlightedLines}
             onLineSelect={connectivity.handleLineSelect}
             onActiveLineDomChange={setActiveLineDom}
-          />
+            />
+          
+            {showPatternOverlay && (
+              <CodePatternAnnotations
+                linePatterns={LINE_PATTERN_MAP}
+                currentPhase={step?.phase}
+                activeLineDom={activeLineDom}
+                activeLine={step?.activeLine}
+              />
+            )}
+          </div>
         </div>
       </div>
 

@@ -11,6 +11,9 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem408Visualizer.css'
 
+const PATTERNS = []
+const LINE_PATTERN_MAP = {}
+
 const EXAMPLES = [
   { label: 'Valid', word: 'internationalization', abbr: 'i18n', expected: true },
   { label: 'Invalid', word: 'apple', abbr: 'apl', expected: false },

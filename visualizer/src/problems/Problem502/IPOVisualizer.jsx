@@ -9,6 +9,34 @@ import { getExamples } from '../../config/examplesRegistry'
 import "./IPOVisualizer.css";
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
+const PATTERNS = {
+  'init': { icon: '◯', label: 'Initialize', color: '#06b6d4' },
+  'loop': { icon: '⟳', label: 'Iterate', color: '#3b82f6' },
+  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#3b82f6' },
+  'found': { icon: '✓', label: 'Match Found', color: '#10b981' },
+  'done': { icon: '✓', label: 'Complete', color: '#10b981' },
+}
+
+const LINE_PATTERN_MAP = {
+
+
+  2: 'init',
+
+
+  7: 'loop',
+
+
+  9: 'loop',
+
+
+  10: 'loop',
+
+
+  11: 'done',
+
+
+}
+
 const SOLUTION_CODE_INLINE = [
     { line: 1, text: "def findMaximizedCapital(k, w, profits, capital):" },
     { line: 2, text: "    projects = sorted(zip(capital, profits))" },
@@ -60,7 +88,8 @@ function generateSteps(k, initW, profits, capital) {
 
 export default function IPOVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-    const steps = useMemo(() => generateSteps(ex.k, ex.w, ex.profits, ex.capital), [ex]);
+    const steps = useMemo(
+    () => generateSteps(ex.k, ex.w, ex.profits, ex.capital).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })), [ex]);
     const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
@@ -136,6 +165,7 @@ export default function IPOVisualizer() {
             <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
             <div className="ipo-status">{step?.message ?? "Press Play to begin."}</div>
             <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
         <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -148,6 +178,8 @@ export default function IPOVisualizer() {
             />
       </FloatingPanel>
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      {showPatternOverlay && (<CodePatternAnnotations linePatterns={LINE_PATTERN_MAP} currentPhase={step?.phase} activeLineDom={activeLineDom} activeLine={step?.activeLine} />)}
         </div>
     );
 }
+

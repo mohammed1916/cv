@@ -102,7 +102,7 @@ export default function PowerofThreeVisualizer() {
     return (
       <motion.div
         className="powerof-three-viz"
-        key={currentStep}
+        key={stepIndex}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}

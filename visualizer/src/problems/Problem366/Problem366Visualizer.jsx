@@ -422,12 +422,22 @@ export default function Problem366Visualizer() {
             subtitle: step ? `Active line ${step.activeLine}` : 'DFS with height tracking.',
             defaultZone: 'full',
             content: (
-                <CodeTracePanel
-                    step={step}
-                    codeLines={SOLUTION_CODE}
-                    onActiveLineDomChange={setActiveLineDom}
-                    autoScroll={autoScrollCode}
-                />
+                <div style={{ position: 'relative' }}>
+                    <CodeTracePanel
+                        step={step}
+                        codeLines={SOLUTION_CODE}
+                        onActiveLineDomChange={setActiveLineDom}
+                        autoScroll={autoScrollCode}
+                    />
+                    {step && (
+                        <CodePatternAnnotations
+                            linePatterns={LINE_PATTERN_MAP}
+                            currentPhase={step.phase}
+                            activeLineDom={activeLineDom}
+                            activeLine={step.activeLine}
+                        />
+                    )}
+                </div>
             ),
         },
     ], [arrInput, setArrInput, positions, edges, allNodes, step, applyExample, handleReset, inputError, setActiveLineDom, autoScrollCode])

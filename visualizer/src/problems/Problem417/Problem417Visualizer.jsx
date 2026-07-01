@@ -12,8 +12,8 @@ import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
 // Pattern annotations
-const LINE_PATTERN_MAP = {}
-const PATTERNS = ['atlantic_dfs', 'atlantic_start', 'done', 'init', 'pacific_dfs', 'pacific_start', 'result']  // Auto-generated: maps line numbers to phase names
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = ['atlantic_dfs', 'atlantic_start', 'done', 'init', 'pacific_dfs', 'pacific_start', 'result']
 
 
 

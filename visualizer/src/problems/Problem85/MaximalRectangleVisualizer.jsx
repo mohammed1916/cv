@@ -2,14 +2,13 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './MaximalRectangleVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
-import CodePatternAnnotations from "../../components/CodePatternAnnotations"
-import PatternLegend from "../../components/PatternLegend"
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -364,7 +363,7 @@ function MaximalRectangleVisualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      </div>activeLineDom={activeLineDom} />}
+      </div>
     </div>
   )
 }

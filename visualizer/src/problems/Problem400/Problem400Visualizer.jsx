@@ -21,31 +21,6 @@ const LINE_PATTERN_MAP = {
   15: 'extract_digit'
 }
 
-
-const PATTERNS = ['calculate', 'check_range', 'done', 'error', 'extract_digit', 'find_number', 'init', 'init_vars', 'range_update']
-
-// Map which code line corresponds to which pattern
-const LINE_PATTERN_MAP = {
-  1: 'init',
-  3: 'init_vars',
-  7: 'check_range',
-  9: 'range_update',
-  13: 'find_number',
-  15: 'extract_digit',
-}
-
-const PATTERNS = ['calculate', 'check_range', 'done', 'error', 'extract_digit', 'find_number', 'init', 'init_vars', 'range_update']
-
-// Map which code line corresponds to which pattern
-const LINE_PATTERN_MAP = {
-  1: 'init',
-  3: 'init_vars',
-  7: 'check_range',
-  9: 'range_update',
-  13: 'find_number',
-  15: 'extract_digit',
-}
-
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def findNthDigit(n):' },
   { line: 2, text: '    # Length of numbers: 1-9 (len 1), 10-99 (len 2), etc.' },
@@ -403,13 +378,24 @@ export default function Problem400Visualizer() {
         </div>
 
         <div style={{ flex: 1 }}>
-          <CodeTracePanel
-            step={step}
+                    <div style={{ position: "relative" }}>
+            <CodeTracePanel
+              step={step}
             codeLines={SOLUTION_CODE}
             highlightedLines={connectivity.highlightedLines}
             onLineSelect={connectivity.handleLineSelect}
             onActiveLineDomChange={setActiveLineDom}
-          />
+            />
+          
+            {showPatternOverlay && (
+              <CodePatternAnnotations
+                linePatterns={LINE_PATTERN_MAP}
+                currentPhase={step?.phase}
+                activeLineDom={activeLineDom}
+                activeLine={step?.activeLine}
+              />
+            )}
+          </div>
         </div>
       </div>
 

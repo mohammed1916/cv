@@ -526,12 +526,22 @@ export default function Problem367Visualizer() {
             subtitle: step ? `Active line ${step.activeLine}` : 'Binary search implementation',
             defaultZone: 'full',
             content: (
-                <CodeTracePanel
-                    step={step}
-                    codeLines={SOLUTION_CODE}
-                    onActiveLineDomChange={setActiveLineDom}
-                    autoScroll={autoScrollCode}
-                />
+                <div style={{ position: 'relative' }}>
+                    <CodeTracePanel
+                        step={step}
+                        codeLines={SOLUTION_CODE}
+                        onActiveLineDomChange={setActiveLineDom}
+                        autoScroll={autoScrollCode}
+                    />
+                    {step && (
+                        <CodePatternAnnotations
+                            linePatterns={LINE_PATTERN_MAP}
+                            currentPhase={step.phase}
+                            activeLineDom={activeLineDom}
+                            activeLine={step.activeLine}
+                        />
+                    )}
+                </div>
             ),
         },
     ], [numInput, setNumInput, step, handleReset, setActiveLineDom, autoScrollCode])

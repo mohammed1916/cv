@@ -103,7 +103,7 @@ export default function CreateMaximumNumberVisualizer() {
     return (
       <motion.div
         className="create-maximum-number-viz"
-        key={currentStep}
+        key={stepIndex}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}

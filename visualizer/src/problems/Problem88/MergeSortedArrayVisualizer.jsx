@@ -4,12 +4,24 @@ import DockableWorkspace from "../../components/shared/DockableWorkspace";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./MergeSortedArrayVisualizer.css";
+
+const MERGEARRAY_PATTERNS = ['init', 'compare', 'copy_nums1', 'copy_nums2', 'done']
+
+const LINE_PATTERN_MAP = {
+  2: 'init',
+  4: 'compare',
+  5: 'copy_nums1',
+  7: 'copy_nums2',
+  10: 'copy_nums2',
+}
+
 const SOLUTION_CODE = [
   { line: 1,  text: "def merge(nums1, m, nums2, n):" },
   { line: 2,  text: "    i, j, k = m-1, n-1, m+n-1" },
@@ -31,18 +43,21 @@ function generateSteps(nums1Init, m, nums2, n) {
   let i = m - 1, j = n - 1, k = m + n - 1;
 
   steps.push({
+    phase: 'init',
     activeLine: 2, a: [...a], b: [...nums2], i, j, k,
     message: `Init i=${i}, j=${j}, k=${k}`,
   });
 
   while (i >= 0 && j >= 0) {
     steps.push({
+      phase: 'compare',
       activeLine: 4, a: [...a], b: [...nums2], i, j, k,
       message: `Compare nums1[${i}]=${a[i]} vs nums2[${j}]=${nums2[j]}`,
     });
     if (a[i] >= nums2[j]) {
       a[k] = a[i];
       steps.push({
+        phase: 'copy_nums1',
         activeLine: 5, a: [...a], b: [...nums2], i, j, k,
         message: `nums1[${i}](${a[i]}) >= nums2[${j}](${nums2[j]}) → place ${a[i]} at pos ${k}`,
       });
@@ -50,6 +65,7 @@ function generateSteps(nums1Init, m, nums2, n) {
     } else {
       a[k] = nums2[j];
       steps.push({
+        phase: 'copy_nums2',
         activeLine: 7, a: [...a], b: [...nums2], i, j, k,
         message: `nums2[${j}](${nums2[j]}) > nums1[${i}](${a[i]}) → place ${nums2[j]} at pos ${k}`,
       });
@@ -61,6 +77,7 @@ function generateSteps(nums1Init, m, nums2, n) {
   while (j >= 0) {
     a[k] = nums2[j];
     steps.push({
+      phase: 'copy_nums2',
       activeLine: 10, a: [...a], b: [...nums2], i, j, k,
       message: `Remaining nums2[${j}]=${nums2[j]} → place at pos ${k}`,
     });
@@ -68,6 +85,7 @@ function generateSteps(nums1Init, m, nums2, n) {
   }
 
   steps.push({
+    phase: 'done',
     activeLine: 1, a: [...a], b: [...nums2], i, j, k, done: true,
     message: `Done! Merged: [${a.join(", ")}]`,
   });
@@ -119,7 +137,19 @@ export default function MergeSortedArrayVisualizer() {
     {
       id: 'code',
       title: 'Code',
-      content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />
+      content: (
+        <div style={{position: 'relative'}}>
+          <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
+      )
     },
     {
       id: 'viz',
@@ -141,9 +171,11 @@ export default function MergeSortedArrayVisualizer() {
     <div className="problem-shell">
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={MERGEARRAY_PATTERNS} />
+        )}
         <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   );
 }

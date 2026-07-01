@@ -2,7 +2,8 @@ import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
@@ -12,6 +13,16 @@ import { getExamples } from '../../config/examplesRegistry'
 import './ScrambleStringVisualizer.css'
 
 const EXAMPLES = getExamples('scramble-string')
+
+const SCRAMBLESTRING_PATTERNS = ['check', 'memo', 'base', 'char_check', 'recurse', 'not_found']
+
+const LINE_PATTERN_MAP = {
+  1: 'check',
+  2: 'memo',
+  3: 'base',
+  5: 'char_check',
+  7: 'recurse',
+}
 
 function isScramble(s1, s2, memo = {}) {
   const steps = []
@@ -537,13 +548,23 @@ export default function ScrambleStringVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-        />
+        <div style={{position: 'relative'}}>
+          <CodeTracePanel
+            step={step}
+            codeLines={SOLUTION_CODE}
+            highlightedLines={connectivity.highlightedLines}
+            onLineSelect={connectivity.handleLineSelect}
+            onActiveLineDomChange={setActiveLineDom}
+          />
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
       ),
     },
     {
@@ -567,6 +588,9 @@ export default function ScrambleStringVisualizer() {
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
       />
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={SCRAMBLESTRING_PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -585,7 +609,6 @@ export default function ScrambleStringVisualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }

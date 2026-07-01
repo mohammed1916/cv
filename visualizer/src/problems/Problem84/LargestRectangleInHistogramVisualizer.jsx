@@ -181,7 +181,7 @@ export default function LargestRectangleInHistogramVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
-      </FloatingPanel>activeLineDom={activeLineDom} />}
+      </FloatingPanel>
     </div>
   )
 }
