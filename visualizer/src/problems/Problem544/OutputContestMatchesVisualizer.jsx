@@ -6,6 +6,7 @@ import CodeTracePanel from'../../components/CodeTracePanel'
 import PlaybackControls from'../../components/PlaybackControls'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import{usePlaybackState}from'../../hooks/usePlaybackState'
 import{useCodeVisualConnectivity}from'../../hooks/useCodeVisualConnectivity'
 import{usePatternOverlay}from'../../hooks/usePatternOverlay'
 import{getExamples}from'../../config/examplesRegistry'
@@ -20,6 +21,19 @@ const LINE_PATTERN_MAP = {
 
 
 const EXAMPLES=getExamples('output-contest-matches')
+const SOLUTION_CODE = [
+  { line: 1, text: 'def findMatches(n):' },
+  { line: 2, text: '    teams = [str(i) for i in range(1, n+1)]' },
+  { line: 3, text: '    while len(teams) > 1:' },
+  { line: 4, text: '        newTeams = []' },
+  { line: 5, text: '        for i in range(len(teams)//2):' },
+  { line: 6, text: '            team1 = teams[i]' },
+  { line: 7, text: '            team2 = teams[-(i+1)]' },
+  { line: 8, text: '            match = f"({team1},{team2})"' },
+  { line: 9, text: '            newTeams.append(match)' },
+  { line: 10, text: '        teams = newTeams' },
+  { line: 11, text: '    return teams[0]' },
+]
 function generateSteps(n){const steps=[]
 steps.push({activeLine:1,n,teams:Array.from({length:n},((_,i)=>String(i+1))),round:0,phase:'init',message:`Output contest matches for n=${n} teams`,relatedLines:[1]})
 let teams=Array.from({length:n},(_,i)=>String(i+1))
