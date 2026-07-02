@@ -1,2 +1,1 @@
-export const meta = { number: "499", title: "The Maze III", slug: "the-maze-iii", difficulty: "Hard", tags: ["BFS", "Backtracking"], description: "Find path in maze with directional rolling ball returning lexicographically smallest path.", accent: "#f59e0b" };
 export { default } from "./Problem499Visualizer";
