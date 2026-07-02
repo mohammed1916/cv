@@ -235,8 +235,8 @@ export default function YourProblemVisualizer() {
     // data: defaultValue,
   })
 
-  // Load solution code from registry
-  const codeLines = SOLUTION_CODE_FROM_REGISTRY || SOLUTION_CODE
+  // Load solution code
+  const codeLines = SOLUTION_CODE
 
   // Validate inputs
   const validatedInputs = useMemo(() => {

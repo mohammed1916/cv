@@ -351,6 +351,8 @@ function VisualizationPanel({ step, points, EXAMPLES, handleExampleClick, points
   )
 }
 
+const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
+
 export default function Problem452Visualizer() {
   const [pointsInput, setPointsInput] = useState('[10,16] [2,8] [1,6] [7,12] [4,9]')
 

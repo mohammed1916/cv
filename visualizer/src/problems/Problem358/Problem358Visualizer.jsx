@@ -583,6 +583,8 @@ function VisualizationPanel({ step, s, k, EXAMPLES, handleExampleClick, sInput, 
   )
 }
 
+const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
+
 export default function Problem358Visualizer() {
   const [sInput, setSInput] = useState('ABABAB')
   const [kInput, setKInput] = useState(2)

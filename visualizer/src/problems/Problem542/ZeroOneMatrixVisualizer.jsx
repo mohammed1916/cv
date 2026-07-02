@@ -7,6 +7,7 @@ import PlaybackControls from'../../components/PlaybackControls'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
+import { usePlaybackState } from '../../hooks/usePlaybackState'
 const SOLUTION_CODE = getSolutionCode('01-matrix')
 import{useCodeVisualConnectivity}from'../../hooks/useCodeVisualConnectivity'
 import{usePatternOverlay}from'../../hooks/usePatternOverlay'

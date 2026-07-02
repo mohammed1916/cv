@@ -388,6 +388,8 @@ function VisualizationPanel({ step, nums1, nums2, nums3, nums4, EXAMPLES, handle
   )
 }
 
+const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
+
 export default function Problem454Visualizer() {
   const [input1, setInput1] = useState('1,2')
   const [input2, setInput2] = useState('-2,-1')

@@ -268,6 +268,8 @@ function VisualizationPanel({ nums, step, applyExample }) {
 
 const EXAMPLES = getExamples('sort-colors');
 
+const LINE_PATTERN_MAP = {}
+
 export default function SortColorsVisualizer() {
     const [sel, setSel] = useState(0);
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();

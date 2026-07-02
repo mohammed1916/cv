@@ -157,6 +157,8 @@ function VisualizationPanel({ ex, setEx, step, applyEx, nums1Ptrs, nums2Ptrs }) 
   );
 }
 
+const LINE_PATTERN_MAP = {}
+
 export default function MergeSortedArrayVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
   const steps = useMemo(() => generateSteps(ex.nums1, ex.m, ex.nums2, ex.n), [ex]);

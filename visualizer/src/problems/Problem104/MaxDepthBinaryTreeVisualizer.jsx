@@ -18,6 +18,14 @@ import PatternLegend from '../../components/PatternLegend'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
+const SOLUTION_CODE = [
+  { line: 1, text: 'def maxDepth(root):' },
+  { line: 2, text: '    if not root:' },
+  { line: 3, text: '        return 0' },
+  { line: 4, text: '    left = maxDepth(root.left)' },
+  { line: 5, text: '    right = maxDepth(root.right)' },
+  { line: 6, text: '    return 1 + max(left, right)' },
+]
 const CANVAS_W = 500
 const CANVAS_H = 320
 const NODE_R = 22

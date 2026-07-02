@@ -108,7 +108,7 @@ export default function TopKFrequentVisualizer() {
             relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
         })) : []
     }, [nums, k]);
-    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
+    const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
 

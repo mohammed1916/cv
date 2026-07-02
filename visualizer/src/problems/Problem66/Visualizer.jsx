@@ -171,6 +171,8 @@ function VisualizationPanel({ arr, step, ex, applyEx }) {
   );
 }
 
+const LINE_PATTERN_MAP = {}
+
 export default function Visualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
     const steps = useMemo(() => generateSteps(ex.digits), [ex]);

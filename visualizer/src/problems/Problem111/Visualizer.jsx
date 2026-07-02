@@ -20,6 +20,22 @@ import PatternLegend from '../../components/PatternLegend'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
+const SOLUTION_CODE = [
+  { line: 1, text: 'def minDepth(root):' },
+  { line: 2, text: '    # base case: empty subtree' },
+  { line: 3, text: '    if not root:' },
+  { line: 4, text: '        return 0' },
+  { line: 5, text: '    # leaf node' },
+  { line: 6, text: '    if not root.left and not root.right:' },
+  { line: 7, text: '        return 1' },
+  { line: 8, text: '    # only one child: recurse into the non-empty side' },
+  { line: 9, text: '    if not root.left:' },
+  { line: 10, text: '        return 1 + minDepth(root.right)' },
+  { line: 11, text: '    if not root.right:' },
+  { line: 12, text: '        return 1 + minDepth(root.left)' },
+  { line: 13, text: '    # two children: take the smaller depth' },
+  { line: 14, text: '    return 1 + min(minDepth(root.left), minDepth(root.right))' },
+]
 const CANVAS_W = 520
 const CANVAS_H = 320
 const NODE_R = 22
@@ -267,7 +283,7 @@ export default function MinimumDepthOfBinaryTreeVisualizer() {
   }, [arrInput])
 
   const steps = useMemo(() => generateSteps(arr), [arr])
-  const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
+  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
   const applyExample = useCallback((ex) => {

@@ -1,182 +1,124 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-
-import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './PowerofFourVisualizer.css'
-import FloatingPanel from '../../components/shared/FloatingPanel'
-import CodePatternAnnotations from '../../components/CodePatternAnnotations'
-import PatternLegend from '../../components/PatternLegend'
-
-const PATTERNS = ['done', 'init', 'process']
-const LINE_PATTERN_MAP = {
-  1: 'init',
-  3: 'process',
-  5: 'done'
-}
-
 
 const SOLUTION_CODE = [
   { line: 1, text: '# Solution for Power of Four' },
-  { line: 2, text: '# Implement step-by-step visualization' },
-  { line: 3, text: 'def solve(input):' },
-  { line: 4, text: '    # Algorithm here' },
+  { line: 2, text: '# Step-by-step visualization' },
+  { line: 3, text: 'def solve(data):' },
+  { line: 4, text: '    # Algorithm implementation' },
   { line: 5, text: '    return result' },
 ]
 
-function generateSteps(input) {
-  const steps = []
-
-  steps.push({
-    phase: 'init',
-    activeLine: 1,
-    message: 'Initialize algorithm'
-  })
-
-  steps.push({
-    phase: 'process',
-    activeLine: 3,
-    message: 'Processing input...'
-  })
-
-  steps.push({
-    phase: 'done',
-    activeLine: 5,
-    message: 'Algorithm complete'
-  })
-
-  return steps
+function generateSteps() {
+  return [
+    { phase: 'init', activeLine: 1, relatedLines: [1], message: 'Initialize algorithm' },
+    { phase: 'process', activeLine: 3, relatedLines: [3], message: 'Process the input' },
+    { phase: 'done', activeLine: 5, relatedLines: [5], message: 'Algorithm complete' },
+  ]
 }
 
 const EXAMPLES = getExamples('power-of-four') || []
 
 export default function PowerofFourVisualizer() {
-  const [inputValue, setInputValue] = useState(EXAMPLES.length > 0 ? JSON.stringify(EXAMPLES[0]) : '{}')
+  const [inputValue, setInputValue] = useState(
+    EXAMPLES.length > 0 ? JSON.stringify(EXAMPLES[0].inputs || EXAMPLES[0]) : '{}',
+  )
 
-  const { input, inputError } = useMemo(() => {
-    try {
-      const data = JSON.parse(inputValue)
-      return { input: data, inputError: '' }
-    } catch (e) {
-      return { input: null, inputError: e.message }
-    }
+  const inputError = useMemo(() => {
+    try { JSON.parse(inputValue); return '' } catch (e) { return e.message }
   }, [inputValue])
 
-  const steps = useMemo(() => {
-    return input ? generateSteps(input) : []
-  }, [input])
-
-  const { currentStep, isPlaying, setIsPlaying, setCurrentStep, speed, setSpeed } = usePlaybackState({
-    totalSteps: steps.length,
-    autoSpeed: 1000,
-  })
-
-  const connectivity = useCodeVisualConnectivity(steps, currentStep)
-  const patternOverlay = usePatternOverlay()
-
-  const handleStepClick = useCallback((index) => {
-    setCurrentStep(index)
-    setIsPlaying(false)
-  }, [setCurrentStep, setIsPlaying])
-
-  const renderVisualization = () => {
-    if (!input) return <div className="powerof-four-error">{inputError}</div>
-
-    const currentStepData = steps[currentStep] || {}
-
-    return (
-      <motion.div
-        className="powerof-four-viz"
-        key={currentStep}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        <div className="powerof-four-step-info">
-          <h3>{currentStepData.message}</h3>
-        </div>
-      </motion.div>
-    )
-  }
+  const steps = useMemo(() => generateSteps(), [])
+  const {
+    stepIndex, setStepIndex, stepForward, stepBack, togglePlay,
+    handleReset, isPlaying, speed, setSpeed, isDone,
+  } = usePlaybackState(steps.length)
+  const step = stepIndex >= 0 ? steps[stepIndex] : null
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
   return (
     <div className="powerof-four-shell">
-      <ResizableSplitPanels
-        left={
-          <div className="powerof-four-panel powerof-four-panel-input">
-            <div className="powerof-four-panel-head">Input</div>
-            <div className="powerof-four-panel-body">
-              <textarea
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                className="powerof-four-textarea"
-                placeholder="Enter input..."
-              />
-            </div>
-          </div>
-        }
-        right={
-          <div className="powerof-four-panel powerof-four-panel-viz">
-            <div className="powerof-four-panel-head">Visualization</div>
-            <div className="powerof-four-panel-body">
-              <AnimatePresence mode="wait">
-                {renderVisualization()}
-              </AnimatePresence>
-            </div>
-          </div>
-        }
-        ratio={0.35}
-      />
-
-      <div className="powerof-four-middle">
-        <div className="powerof-four-panel">
-          <div className="powerof-four-panel-head">Code Trace</div>
-          <div className="powerof-four-panel-body">
-            <CodeTracePanel code={SOLUTION_CODE} connectivity={connectivity} />
-          </div>
-        </div>
-
-        <div className="powerof-four-panel">
-          <div className="powerof-four-panel-head">Examples</div>
-          <div className="powerof-four-panel-body powerof-four-examples">
-            {EXAMPLES.map((example, i) => (
-              <button
-                key={i}
-                className={className + '-example-btn'}
-                onClick={() => {
-                  setInputValue(JSON.stringify(example))
-                  setCurrentStep(0)
-                  setIsPlaying(false)
-                }}
-              >
-                {example.label}
-              </button>
-            ))}
-          </div>
+      <div className="powerof-four-panel">
+        <div className="powerof-four-panel-head">Input</div>
+        <div className="powerof-four-panel-body">
+          <textarea
+            value={inputValue}
+            onChange={(e) => { setInputValue(e.target.value); handleReset() }}
+            className="powerof-four-textarea"
+            placeholder="Enter input..."
+          />
+          {inputError && <div className="powerof-four-error">{inputError}</div>}
         </div>
       </div>
 
-      <div className="powerof-four-bottom">
-        <FloatingPanel title="Playback Controls">
+      <div className="powerof-four-panel">
+        <div className="powerof-four-panel-head">Visualization</div>
+        <div className="powerof-four-panel-body">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={stepIndex}
+              className="powerof-four-viz"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="powerof-four-step-info">
+                <h3>{step?.message || 'Press play to begin'}</h3>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+
+      <div className="powerof-four-panel">
+        <div className="powerof-four-panel-head">Code</div>
+        <div className="powerof-four-panel-body">
+          <CodeTracePanel
+            step={step}
+            codeLines={SOLUTION_CODE}
+            highlightedLines={connectivity.highlightedLines}
+            onLineSelect={connectivity.handleLineSelect}
+          />
+        </div>
+      </div>
+
+      {EXAMPLES.length > 0 && (
+        <div className="powerof-four-examples">
+          {EXAMPLES.map((example, i) => (
+            <button
+              key={i}
+              className="powerof-four-example-btn"
+              onClick={() => { setInputValue(JSON.stringify(example.inputs || example)); handleReset() }}
+            >
+              {example.label || `Example ${i + 1}`}
+            </button>
+          ))}
+        </div>
+      )}
+
+      <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}
-          onPlayPause={() => setIsPlaying(!isPlaying)}
-          onNext={() => setCurrentStep(Math.min(currentStep + 1, steps.length - 1))}
-          onPrev={() => setCurrentStep(Math.max(currentStep - 1, 0))}
-          onReset={() => setCurrentStep(0)}
-          currentStep={currentStep}
-          totalSteps={steps.length}
+          isDone={isDone}
           speed={speed}
-          onSpeedChange={setSpeed}
+          onPlayToggle={togglePlay}
+          onPrev={stepBack}
+          onNext={stepForward}
+          onReset={handleReset}
+          prevDisabled={stepIndex < 0}
+          nextDisabled={isDone}
+          resetDisabled={stepIndex < 0}
+          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
         />
       </FloatingPanel>
-      </div>
     </div>
   )
 }

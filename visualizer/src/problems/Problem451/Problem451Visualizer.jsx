@@ -360,6 +360,8 @@ function VisualizationPanel({ step, s, EXAMPLES, handleExampleClick, input, setI
   )
 }
 
+const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
+
 export default function Problem451Visualizer() {
   const [input, setInput] = useState('tree')
 

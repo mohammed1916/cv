@@ -324,6 +324,9 @@ function FrequencyState({ step }) {
   )
 }
 
+const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
+const LINE_PATTERN_MAP = {}
+
 export default function MinimumWindowSubstringVisualizer() {
   const [sInput, setSInput] = useState('ADOBECODEBANC')
   const [tInput, setTInput] = useState('ABC')

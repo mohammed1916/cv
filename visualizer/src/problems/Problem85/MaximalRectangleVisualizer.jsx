@@ -175,13 +175,16 @@ function MaximalRectangleVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify(defaultMatrix))
 
   const steps = useMemo(() => generateSteps(matrix), [matrix])
-  const { activeStepIndex, isPlaying, togglePlayback, reset, setActiveStepIndex } =
-    usePlaybackState(steps)
-
-  const { highlightLines } = useCodeVisualConnectivity(activeStepIndex, steps)
+  const {
+    stepIndex: activeStepIndex, isPlaying, isDone, speed, setSpeed,
+    stepForward, stepBack, togglePlay, handleReset: reset, setStepIndex: setActiveStepIndex,
+  } = usePlaybackState(steps.length)
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  const activeStep = steps[activeStepIndex]
+  const activeStep = activeStepIndex >= 0 ? steps[activeStepIndex] : null
+  const step = activeStep
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex: activeStepIndex, onStepJump: setActiveStepIndex })
+  const highlightLines = connectivity.highlightedLines
 
   const handleRun = useCallback(() => {
     try {
@@ -220,8 +223,10 @@ function MaximalRectangleVisualizer() {
         <div className="mr-panel mr-code-panel">
                     <div style={{ position: "relative" }}>
             <CodeTracePanel
-            lines={SOLUTION_CODE}
-            highlightLines={highlightLines}
+            step={step}
+            codeLines={SOLUTION_CODE}
+            highlightedLines={highlightLines}
+            onLineSelect={connectivity.handleLineSelect}
             title="Solution Code"
             onActiveLineDomChange={setActiveLineDom}
           />
@@ -352,11 +357,17 @@ function MaximalRectangleVisualizer() {
           <PatternLegend currentPhase={step?.phase} usedPatterns={MAXIMALRECTANGLE_PATTERNS} />
         )}
         <PlaybackControls
-          activeStep={activeStepIndex}
-          totalSteps={steps.length}
           isPlaying={isPlaying}
-          onTogglePlayback={togglePlayback}
-          onStepChange={setActiveStepIndex}
+          isDone={isDone}
+          speed={speed}
+          onPlayToggle={togglePlay}
+          onPrev={stepBack}
+          onNext={stepForward}
+          onReset={reset}
+          prevDisabled={activeStepIndex < 0}
+          nextDisabled={isDone}
+          resetDisabled={activeStepIndex < 0}
+          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
           showPatternOverlay={showPatternOverlay}
           onShowPatternOverlayChange={setShowPatternOverlay}
           patternOverlayLabel="Show pattern overlay"

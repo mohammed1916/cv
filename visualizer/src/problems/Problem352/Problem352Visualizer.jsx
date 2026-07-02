@@ -45,6 +45,7 @@ const SOLUTION_CODE_INLINE = [
   { line: 15, text: '        return len(self.body)' },
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
+const solutionCode = SOLUTION_CODE
 
 const GRID_SIZE = 10
 const CELL_SIZE = 40

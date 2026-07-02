@@ -19,6 +19,8 @@ import PatternLegend from '../../components/PatternLegend'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
+const SNIPPETS = []
+const snippetIdForPhase = () => null
 function parseNums(input) {
   const parsed = JSON.parse(input)
   if (!Array.isArray(parsed)) throw new Error('Input must be an array')

@@ -404,6 +404,8 @@ function VisualizationPanel({ step, x, y, EXAMPLES, handleExampleClick, xInput, 
   )
 }
 
+const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
+
 export default function Problem461Visualizer() {
   const [xInput, setXInput] = useState('1')
   const [yInput, setYInput] = useState('4')

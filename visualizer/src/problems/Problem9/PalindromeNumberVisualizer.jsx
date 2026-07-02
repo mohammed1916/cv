@@ -465,7 +465,7 @@ export default function PalindromeNumberVisualizer() {
         <div style={{ position: 'relative' }}>
           <CodeTracePanel
             step={step}
-            codeLines={solutionCode || SOLUTION_CODE}
+            codeLines={SOLUTION_CODE}
             highlightedLines={connectivity.highlightedLines}
             onLineSelect={connectivity.handleLineSelect}
             onActiveLineDomChange={setActiveLineDom}
@@ -532,7 +532,7 @@ export default function PalindromeNumberVisualizer() {
         </div>
       ),
     },
-  ], [step, num, solutionCode, connectivity, activeIteration])
+  ], [step, num, connectivity, activeIteration])
 
   return (
     <div className="pn-shell">

@@ -375,6 +375,8 @@ function VisualizationPanel({ step, treeValues, EXAMPLES, handleExampleClick, tr
   )
 }
 
+const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
+
 export default function Problem449Visualizer() {
   const [treeInput, setTreeInput] = useState('2,1,3')
 

@@ -368,6 +368,8 @@ function VisualizationPanel({ step, greed, size, EXAMPLES, handleExampleClick, g
   )
 }
 
+const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
+
 export default function Problem455Visualizer() {
   const [greedInput, setGreedInput] = useState('1,2,3')
   const [sizeInput, setSizeInput] = useState('1,1')

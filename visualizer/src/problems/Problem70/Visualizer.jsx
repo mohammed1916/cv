@@ -252,6 +252,8 @@ function VisualizationPanel({
   )
 }
 
+const LINE_PATTERN_MAP = {}
+
 export default function ClimbingStairsVisualizer() {
   const [nInput, setNInput] = useState('5')
 

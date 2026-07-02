@@ -640,6 +640,8 @@ function VisualizationPanel({ step, requests, threshold, EXAMPLES, handleExample
   )
 }
 
+const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
+
 export default function Problem359Visualizer() {
   const [currentExample, setCurrentExample] = useState(0)
 

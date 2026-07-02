@@ -150,6 +150,8 @@ function VisualizationPanel({ EXAMPLES, applyExample, numsInput, setNumsInput, n
     )
 }
 
+const LINE_PATTERN_MAP = {}
+
 export default function SubsetsVisualizer() {
     const [numsInput, setNumsInput] = useState('[1,2,3]')
 

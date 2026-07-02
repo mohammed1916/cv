@@ -358,6 +358,8 @@ function VisualizationPanel({ step, EXAMPLES, handleExampleClick, bucketsInput, 
   )
 }
 
+const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
+
 export default function Problem458Visualizer() {
   const [bucketsInput, setBucketsInput] = useState('1000')
   const [minutesToDieInput, setMinutesToDieInput] = useState('15')

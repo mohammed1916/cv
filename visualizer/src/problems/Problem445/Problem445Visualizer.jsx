@@ -386,6 +386,8 @@ function VisualizationPanel({ step, list1, list2, EXAMPLES, handleExampleClick, 
   )
 }
 
+const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
+
 export default function Problem445Visualizer() {
   const [list1Input, setList1Input] = useState('7,2,4,3')
   const [list2Input, setList2Input] = useState('5,6,4')

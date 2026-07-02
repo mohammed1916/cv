@@ -384,6 +384,8 @@ function VisualizationPanel({ step, s, EXAMPLES, handleExampleClick, sInput, set
   )
 }
 
+const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
+
 export default function Problem459Visualizer() {
   const [sInput, setSInput] = useState('abab')
 

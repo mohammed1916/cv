@@ -284,6 +284,8 @@ function VisualizationPanel({ EXAMPLES, applyExample, selected, handleReset, ste
   )
 }
 
+const LINE_PATTERN_MAP = {}
+
 export default function MaximalRectangleVisualizer() {
   const [selected, setSelected] = useState(0)
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll()

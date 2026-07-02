@@ -334,7 +334,7 @@ function VisualizationPanel({ matrix, target, step, applyEx, examples }) {
 
 export default function Problem373Visualizer() {
   const [exIndex, setExIndex] = useState(0)
-  const codeLines = SOLUTION_CODE_HOOK && SOLUTION_CODE_HOOK.length > 0 ? SOLUTION_CODE_HOOK : SOLUTION_CODE
+  const codeLines = SOLUTION_CODE
 
   const examples = EXAMPLES && EXAMPLES.length > 0 ? EXAMPLES : [
     {

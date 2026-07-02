@@ -301,6 +301,8 @@ function StackState({ step, heights }) {
   )
 }
 
+const LINE_PATTERN_MAP = {}
+
 export default function LargestRectangleInHistogramVisualizer() {
   const [input, setInput] = useState('[2,1,5,6,2,3]')
 

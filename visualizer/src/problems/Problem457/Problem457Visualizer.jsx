@@ -362,6 +362,8 @@ function VisualizationPanel({ step, nums, EXAMPLES, handleExampleClick, numsInpu
   )
 }
 
+const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
+
 export default function Problem457Visualizer() {
   const [numsInput, setNumsInput] = useState('2,-1,1,2,2')
 

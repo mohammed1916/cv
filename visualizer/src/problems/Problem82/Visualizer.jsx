@@ -422,6 +422,8 @@ function RemoveDuplicatesFromListState({ step, list }) {
   )
 }
 
+const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
+
 export default function RemoveDuplicatesFromListVisualizer() {
   const [inputStr, setInputStr] = useState("[1,2,3,3,4,4,5]")
 

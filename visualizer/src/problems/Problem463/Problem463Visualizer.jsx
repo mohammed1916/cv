@@ -340,6 +340,8 @@ function VisualizationPanel({ step, EXAMPLES, handleExampleClick, gridInput, set
   )
 }
 
+const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
+
 export default function Problem463Visualizer() {
   const [gridInput, setGridInput] = useState('0,1,0,0\n1,1,1,0\n0,1,0,1\n1,1,0,0')
 

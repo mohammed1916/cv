@@ -352,6 +352,8 @@ function VisualizationPanel({ step, n, EXAMPLES, handleExampleClick, nInput, set
   )
 }
 
+const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
+
 export default function Problem456Visualizer() {
   const [nInput, setNInput] = useState('10')
 

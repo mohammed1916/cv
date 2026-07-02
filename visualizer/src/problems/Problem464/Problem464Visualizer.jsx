@@ -406,6 +406,8 @@ function VisualizationPanel({ step, maxChoosable, desiredTotal, EXAMPLES, handle
   )
 }
 
+const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
+
 export default function Problem464Visualizer() {
   const [maxChoosableInput, setMaxChoosableInput] = useState('10')
   const [desiredTotalInput, setDesiredTotalInput] = useState('40')
