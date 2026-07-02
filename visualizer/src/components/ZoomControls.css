@@ -1,7 +1,8 @@
 .zoom-controls-panel {
   position: fixed;
   top: 1rem;
-  left: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 1900;
   pointer-events: auto;
 }
