@@ -28,15 +28,18 @@ export default function ProblemPage({ problem, onBack, layoutWidth, onLayoutChan
       <header className="problem-header">
         <button className="back-btn" onClick={onBack}>
           <svg
-            width="14"
-            height="14"
+            className="back-btn-icon"
+            width="18"
+            height="18"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            strokeWidth="2.5"
+            strokeWidth="2"
             strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            <path d="M19 12H5M12 5l-7 7 7 7" />
+            <circle cx="12" cy="12" r="9" />
+            <path d="M13 8l-4 4 4 4" />
           </svg>
           Problems
         </button>
