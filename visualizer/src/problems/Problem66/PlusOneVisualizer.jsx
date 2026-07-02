@@ -11,6 +11,8 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./PlusOneVisualizer.css";
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('plus-one')
 const EXAMPLES = getExamples('plus-one');
 
 const PLUSONE_PATTERNS = ['init', 'loop', 'carry', 'append']

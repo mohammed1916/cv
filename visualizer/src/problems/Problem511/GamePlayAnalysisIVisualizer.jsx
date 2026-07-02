@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './GamePlayAnalysisIVisualizer.css'
+import PatternOverlay from "../../components/PatternOverlay";
 
 const PATTERNS = {
   'init': { icon: '◯', label: 'Initialize', color: '#06b6d4' },

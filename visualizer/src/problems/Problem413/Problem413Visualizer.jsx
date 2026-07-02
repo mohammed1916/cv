@@ -11,6 +11,8 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem413Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('arithmetic-slices')
 
 const PATTERNS = ['arith_found', 'check_i', 'done', 'init', 'init_dp', 'not_arith', 'update_dp']
 const LINE_PATTERN_MAP = {

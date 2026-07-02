@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import './Problem365Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
 
 const PATTERNS = ['bezout-explanation', 'check-divisibility', 'complete', 'edge-case-capacity', 'edge-case-empty', 'gcd-calculate', 'gcd-complete', 'gcd-init', 'invalid-capacity', 'invalid-empty']
 const LINE_PATTERN_MAP = {

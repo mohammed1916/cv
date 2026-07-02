@@ -12,6 +12,8 @@ import { getExamples } from '../../config/examplesRegistry'
 import './MinesweeperVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('minesweeper')
 
 const PATTERNS = ['add_to_queue', 'blank_cell', 'count_mines', 'done', 'init', 'mine_hit', 'number_cell', 'process_cell', 'start_bfs']
 const LINE_PATTERN_MAP = {

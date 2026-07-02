@@ -12,6 +12,9 @@ import { getExamples } from '../../config/examplesRegistry'
 import './Problem375Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('wiggle-sort-ii')
 
 const PATTERNS = ['arrange_start', 'arranging', 'complete', 'find_median', 'median_found', 'partition_complete', 'partition_start', 'verify_start', 'verifying']
 const LINE_PATTERN_MAP = {

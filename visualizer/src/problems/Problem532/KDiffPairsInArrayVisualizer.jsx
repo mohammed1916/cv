@@ -12,6 +12,8 @@ import { getExamples } from '../../config/examplesRegistry'
 import './KDiffPairsInArrayVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('k-diff-pairs-in-array')
 
 const PATTERNS = ['check_num', 'count', 'done', 'found_pair', 'init']
 const LINE_PATTERN_MAP = {

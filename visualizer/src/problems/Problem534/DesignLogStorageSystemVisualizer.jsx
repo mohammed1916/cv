@@ -12,6 +12,8 @@ import { getExamples } from '../../config/examplesRegistry'
 import './DesignLogStorageSystemVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('design-log-storage-system')
 
 const PATTERNS = ['done', 'filter', 'init', 'match', 'put', 'retrieve', 'set_precision', 'truncate']
 const LINE_PATTERN_MAP = {

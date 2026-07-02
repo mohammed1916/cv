@@ -12,6 +12,8 @@ import { getExamples } from '../../config/examplesRegistry'
 import './WordAbbreviationVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('word-abbreviation')
 
 const PATTERNS = ['compute_abbr', 'done', 'finalize', 'init', 'init_result', 'length_done', 'process_group', 'start_length']
 const LINE_PATTERN_MAP = {

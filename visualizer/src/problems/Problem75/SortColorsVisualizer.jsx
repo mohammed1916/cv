@@ -11,6 +11,8 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./SortColorsVisualizer.css";
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('sort-colors')
 const COLOR_LABEL = ["🔴", "⚪", "🔵"];
 const COLOR_NAME = ["Red", "White", "Blue"];
 const COLOR_HEX = ["#ef4444", "#f3f4f6", "#3b82f6"];

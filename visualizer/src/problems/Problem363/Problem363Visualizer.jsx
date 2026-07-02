@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import './Problem363.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
 
 const PATTERNS = ['bst_search', 'done', 'init', 'left_col', 'right_col_start', 'sum_calc', 'update_result']
 const LINE_PATTERN_MAP = {

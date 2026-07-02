@@ -11,6 +11,8 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem434Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('number-of-islands-ii')
 
 const PATTERNS = ['add_land', 'check_neighbor', 'complete', 'init', 'step_complete', 'union']
 const LINE_PATTERN_MAP = {

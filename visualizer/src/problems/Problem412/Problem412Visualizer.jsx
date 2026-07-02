@@ -11,6 +11,8 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem412Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('fizz-buzz')
 
 const PATTERNS = ['buzz', 'check_div', 'check_i', 'done', 'fizz', 'fizzbuzz', 'init', 'number']
 const LINE_PATTERN_MAP = {

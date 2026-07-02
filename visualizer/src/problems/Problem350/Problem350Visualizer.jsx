@@ -13,6 +13,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import './Problem350.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
 
 const PATTERNS = ['checking', 'counting', 'done', 'match_found', 'no_match', 'ready_to_match', 'start']
 const LINE_PATTERN_MAP = {

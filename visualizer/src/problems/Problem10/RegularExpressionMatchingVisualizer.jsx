@@ -15,6 +15,8 @@ import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { getExamples } from '../../config/examplesRegistry'
 import './RegularExpressionMatchingVisualizer.css'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('regular-expression-matching')
 
 const REGEX_PATTERNS = ['init', 'check', 'char_or_dot', 'char_result', 'star_check', 'star_zero', 'star_multi', 'star_result']
 

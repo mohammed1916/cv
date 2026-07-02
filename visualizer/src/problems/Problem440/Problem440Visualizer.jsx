@@ -12,6 +12,8 @@ import { getExamples } from '../../config/examplesRegistry'
 import './Problem440Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('kth-smallest-lexicographical-order')
 
 const PATTERNS = ['backtrack', 'check', 'complete', 'go_deeper', 'go_next', 'init']
 const LINE_PATTERN_MAP = {

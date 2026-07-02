@@ -12,6 +12,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { getExamples } from '../../config/examplesRegistry'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
 
 const PATTERNS = ['boomerang_found', 'checking', 'done', 'outer_loop', 'start']
 const LINE_PATTERN_MAP = {

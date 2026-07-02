@@ -12,6 +12,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import './CountingBitsVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
 
 const PATTERNS = ['done', 'fill', 'init']
 const LINE_PATTERN_MAP = {

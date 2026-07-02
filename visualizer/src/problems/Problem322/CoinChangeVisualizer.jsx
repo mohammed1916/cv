@@ -12,6 +12,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import './CoinChangeVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
 
 const PATTERNS = ['check_coin', 'done', 'init', 'outer', 'update']
 const LINE_PATTERN_MAP = {

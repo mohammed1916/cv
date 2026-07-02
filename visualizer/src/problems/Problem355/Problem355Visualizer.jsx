@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import './Problem355Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
 
 const PATTERNS = []
 

@@ -12,6 +12,8 @@ import { getExamples } from '../../config/examplesRegistry'
 import './Problem444Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('sequence-reconstruction')
 
 const PATTERNS = ['add_relation', 'check_sequence', 'check_unique', 'complete', 'init', 'invalid_subseq', 'not_unique']
 const LINE_PATTERN_MAP = {

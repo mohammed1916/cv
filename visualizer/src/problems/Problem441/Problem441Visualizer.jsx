@@ -12,6 +12,8 @@ import { getExamples } from '../../config/examplesRegistry'
 import './Problem441Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('arranging-coins')
 
 const PATTERNS = ['add_stair', 'complete', 'init', 'use_coins']
 const LINE_PATTERN_MAP = {

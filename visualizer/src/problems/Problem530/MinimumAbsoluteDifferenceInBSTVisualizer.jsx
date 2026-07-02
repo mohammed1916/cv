@@ -12,6 +12,8 @@ import { getExamples } from '../../config/examplesRegistry'
 import './MinimumAbsoluteDifferenceInBSTVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('minimum-absolute-difference-in-bst')
 
 const PATTERNS = ['compute_diff', 'done', 'init', 'update_min', 'visit_node']
 const LINE_PATTERN_MAP = {

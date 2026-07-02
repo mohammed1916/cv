@@ -11,6 +11,8 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem421Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('maximum-xor-of-two-numbers')
 
 const PATTERNS = ['check_pair', 'done', 'init', 'new_max', 'start']
 const LINE_PATTERN_MAP = {

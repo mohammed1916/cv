@@ -11,6 +11,9 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem487Visualizer.css'
+import PatternOverlay from "../../components/PatternOverlay";
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('max-consecutive-ones-iii')
 
 const PATTERNS = {
   'init': { icon: '◯', label: 'Initialize', color: '#06b6d4' },

@@ -13,6 +13,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import './Problem366Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
 
 const PATTERNS = ['collect-leaf', 'compute-height', 'done', 'init', 'null', 'recurse-left', 'recurse-right', 'return-height', 'visit']
 const LINE_PATTERN_MAP = {

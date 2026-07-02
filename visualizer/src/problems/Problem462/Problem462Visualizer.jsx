@@ -12,6 +12,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { getExamples } from '../../config/examplesRegistry'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
 
 const PATTERNS = ['add_move', 'calculating', 'done', 'init_moves', 'median_found', 'sorted', 'start']
 const LINE_PATTERN_MAP = {

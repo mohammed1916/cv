@@ -11,6 +11,8 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem419Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('battleships-in-a-board')
 
 const PATTERNS = ['done', 'found_ship', 'init', 'mark_connected', 'mark_visited', 'scan_start']
 const LINE_PATTERN_MAP = {

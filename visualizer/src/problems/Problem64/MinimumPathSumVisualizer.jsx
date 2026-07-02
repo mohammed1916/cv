@@ -12,6 +12,8 @@ import { getExamples } from '../../config/examplesRegistry'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import './MinimumPathSumVisualizer.css'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('minimum-path-sum')
 
 const EXAMPLES = getExamples('minimum-path-sum')
 

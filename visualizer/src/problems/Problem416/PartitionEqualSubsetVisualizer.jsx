@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import FloatingPanel from "../../components/shared/FloatingPanel";
+import PatternOverlay from "../../components/PatternOverlay";
 ;
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useAutoScroll } from "../../hooks/useAutoScroll";

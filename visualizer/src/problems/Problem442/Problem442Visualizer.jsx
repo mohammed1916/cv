@@ -12,6 +12,8 @@ import { getExamples } from '../../config/examplesRegistry'
 import './Problem442Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('find-all-duplicates-in-array')
 
 const PATTERNS = ['check', 'complete', 'found_duplicate', 'init', 'mark_seen']
 const LINE_PATTERN_MAP = {

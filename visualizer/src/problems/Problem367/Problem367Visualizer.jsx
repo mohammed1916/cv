@@ -11,6 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import './Problem367Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
 
 const PATTERNS = ['compute-mid', 'compute-square', 'done', 'edge-case', 'found', 'init', 'search-left', 'search-right', 'setup']
 const LINE_PATTERN_MAP = {

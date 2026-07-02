@@ -12,6 +12,8 @@ import { getExamples } from '../../config/examplesRegistry'
 import './Problem436Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('find-right-interval')
 
 const PATTERNS = ['binary_search', 'complete', 'extract_starts', 'found', 'init', 'search_start']
 const LINE_PATTERN_MAP = {

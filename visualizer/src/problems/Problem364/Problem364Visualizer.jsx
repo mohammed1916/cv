@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import './Problem364Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
 
 const PATTERNS = ['calculate-weight', 'complete', 'max-depth', 'parse', 'traverse-nested']
 const LINE_PATTERN_MAP = {

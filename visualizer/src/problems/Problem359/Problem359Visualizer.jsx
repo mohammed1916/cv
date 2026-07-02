@@ -13,6 +13,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import './Problem359.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
 
 const PATTERNS = ['check_exists', 'cooldown_active', 'cooldown_expired', 'done', 'init', 'new_message', 'request_arrives']
 const LINE_PATTERN_MAP = {

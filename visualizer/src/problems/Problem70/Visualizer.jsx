@@ -14,6 +14,8 @@ import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { getExamples } from '../../config/examplesRegistry'
 import './Visualizer.css'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('climbing-stairs')
 
 function generateSteps(n) {
   const steps = []

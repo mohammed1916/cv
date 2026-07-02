@@ -12,6 +12,8 @@ import { getExamples } from '../../config/examplesRegistry'
 import './Problem443Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('string-compression')
 
 const PATTERNS = ['complete', 'count_chars', 'init', 'start_group', 'write_char', 'write_count']
 const LINE_PATTERN_MAP = {

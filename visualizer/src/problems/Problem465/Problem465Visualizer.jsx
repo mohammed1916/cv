@@ -12,6 +12,9 @@ import { getExamples } from '../../config/examplesRegistry'
 import './Problem465Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('max-consecutive-ones')
 
 const PATTERNS = []
 

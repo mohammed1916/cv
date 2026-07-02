@@ -12,6 +12,9 @@ import { getExamples } from '../../config/examplesRegistry'
 import './Problem469Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('convex-polygon')
 
 const PATTERNS = []
 

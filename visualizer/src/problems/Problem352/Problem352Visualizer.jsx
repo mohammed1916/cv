@@ -12,6 +12,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem352Visualizer.css'
+import PatternOverlay from "../../components/PatternOverlay";
 
 const PATTERNS = ['collision-self', 'collision-wall', 'direction', 'eat-food', 'idle', 'init', 'move-forward', 'state-update']
 const LINE_PATTERN_MAP = {

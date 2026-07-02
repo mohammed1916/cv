@@ -12,6 +12,8 @@ import { getExamples } from '../../config/examplesRegistry'
 import './SuperWashingMachinesVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('super-washing-machines')
 
 const PATTERNS = ['init', 'loop']
 

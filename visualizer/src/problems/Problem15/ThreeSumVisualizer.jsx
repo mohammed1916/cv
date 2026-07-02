@@ -11,6 +11,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 import './ThreeSumVisualizer.css'
+import PatternOverlay from "../../components/PatternOverlay";
 
 const THREESUM_PATTERNS = ['sort', 'fix_i', 'skip_i', 'calc', 'found', 'move_l', 'skip_l', 'move_r', 'done']
 

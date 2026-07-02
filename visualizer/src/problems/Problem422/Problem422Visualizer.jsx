@@ -11,6 +11,8 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem422Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('valid-word-square')
 
 const PATTERNS = ['check_pos', 'compare', 'done', 'init', 'invalid', 'match', 'start']
 const LINE_PATTERN_MAP = {

@@ -12,6 +12,9 @@ import { getExamples } from '../../config/examplesRegistry'
 import './Problem476Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('number-complement')
 
 const PATTERNS = []
 

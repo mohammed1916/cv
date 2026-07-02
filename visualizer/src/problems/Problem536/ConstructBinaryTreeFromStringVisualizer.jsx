@@ -12,6 +12,8 @@ import { getExamples } from '../../config/examplesRegistry'
 import './ConstructBinaryTreeFromStringVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('construct-binary-tree-from-string')
 
 const PATTERNS = ['done', 'init', 'number', 'open', 'pop']
 const LINE_PATTERN_MAP = {

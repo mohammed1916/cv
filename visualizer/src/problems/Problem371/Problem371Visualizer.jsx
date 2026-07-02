@@ -12,6 +12,9 @@ import { getExamples } from '../../config/examplesRegistry'
 import './Problem371Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('sum-of-two-integers')
 
 const PATTERNS = ['and-operation', 'binary-representation', 'complete', 'shift-carry', 'update-variables', 'xor-operation']
 const LINE_PATTERN_MAP = {

@@ -12,6 +12,8 @@ import { getExamples } from '../../config/examplesRegistry'
 import './LongestUncommonSubsequenceIIVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('longest-uncommon-subsequence-ii')
 
 const PATTERNS = ['init', 'loop', 'process']
 

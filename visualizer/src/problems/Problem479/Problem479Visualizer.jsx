@@ -12,6 +12,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import './Problem479Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
 
 const PATTERNS = []
 

@@ -11,6 +11,8 @@ import './MinimumWindowSubstringVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('minimum-window-substring')
 
 const MINIMUMWINDOWSUBSTRING_PATTERNS = ['best', 'done', 'expand', 'init', 'shrink']
 

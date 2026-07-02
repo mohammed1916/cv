@@ -12,6 +12,8 @@ import { getExamples } from '../../config/examplesRegistry'
 import './Problem435Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('non-overlapping-intervals')
 
 const PATTERNS = ['complete', 'init', 'keep', 'remove', 'sorted']
 const LINE_PATTERN_MAP = {

@@ -10,6 +10,7 @@ import './Problem417Visualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
 
 // Pattern annotations
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names

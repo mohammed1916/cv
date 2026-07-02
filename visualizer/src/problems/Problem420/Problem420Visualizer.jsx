@@ -11,6 +11,8 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem420Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('strong-password-checker')
 
 const PATTERNS = ['check_char', 'check_length', 'check_length_long', 'count_missing', 'done', 'init', 'scan']
 const LINE_PATTERN_MAP = {

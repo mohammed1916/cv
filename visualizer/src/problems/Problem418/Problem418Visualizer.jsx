@@ -11,6 +11,8 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem418Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('sentence-screen-fitting')
 
 const PATTERNS = ['add_word', 'done', 'init', 'init_screen', 'process_row', 'sentence_done']
 const LINE_PATTERN_MAP = {

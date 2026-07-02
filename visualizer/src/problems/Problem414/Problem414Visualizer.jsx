@@ -11,6 +11,8 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem414Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('third-maximum-number')
 
 const PATTERNS = ['done', 'init', 'process', 'update_first', 'update_second', 'update_third']
 const LINE_PATTERN_MAP = {

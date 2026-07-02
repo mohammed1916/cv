@@ -12,6 +12,8 @@ import { getExamples } from '../../config/examplesRegistry'
 import './RandomPickWithWeightVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('random-pick-with-weight')
 
 const PATTERNS = ['binary_search', 'compute_prefix', 'done', 'done_init', 'init', 'pick_result', 'pick_start']
 const LINE_PATTERN_MAP = {

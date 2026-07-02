@@ -12,6 +12,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import './Problem354Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
 
 const PATTERNS = ['binary_search', 'binary_search_init', 'done', 'dp_append', 'dp_update', 'envelope_start', 'sort_done', 'sort_start']
 

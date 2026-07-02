@@ -6,6 +6,8 @@ import CodeTracePanel from'../../components/CodeTracePanel'
 import PlaybackControls from'../../components/PlaybackControls'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('minimum-time-difference')
 import{useCodeVisualConnectivity}from'../../hooks/useCodeVisualConnectivity'
 import{usePatternOverlay}from'../../hooks/usePatternOverlay'
 import{getExamples}from'../../config/examplesRegistry'

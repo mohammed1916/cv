@@ -12,6 +12,8 @@ import { getExamples } from '../../config/examplesRegistry'
 import './LonelyPixelIVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('lonely-pixel-i')
 
 const PATTERNS = ['check', 'count', 'count_done', 'done', 'init', 'lonely', 'scan']
 

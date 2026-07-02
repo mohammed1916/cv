@@ -15,6 +15,8 @@ import { getExamples } from '../../config/examplesRegistry'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import './ClimbingStairsVisualizer.css'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('climbing-stairs')
 
 const CLIMBINGSTAIRS_PATTERNS = ['add', 'done', 'init', 'loop', 'shift', 'temp']
 

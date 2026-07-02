@@ -12,6 +12,8 @@ import { getExamples } from '../../config/examplesRegistry'
 import './Problem439Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('ternary-expression-parser')
 
 const PATTERNS = ['complete', 'init', 'process_ternary', 'push_char', 'push_ternary', 'read_char', 'skip_colon', 'start_from_end']
 const LINE_PATTERN_MAP = {
