@@ -8,7 +8,6 @@ export function createPatternSwitch(patterns = {}) {
     if (!step) return null;
 
     // Try to match phase patterns in priority order
-    const phasePrefix = step.phase?.split('-')[0];
 
     if (step.phase?.startsWith('tree-dp-') && patterns.treeDP) {
       return patterns.treeDP({ direction: step.direction, ...step });

@@ -94,13 +94,10 @@ function generateSteps(inputs) {
  * Update this to match your specific problem's visualization needs.
  */
 function VisualizationPanel({
-  inputs,
   inputErrors,
-  onInputChange,
   applyExample,
   examples,
   step,
-  handleReset,
 }) {
   return (
     <div className="viz-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -266,7 +263,7 @@ export default function YourProblemVisualizer() {
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
 
   // Visualization features (optional)
-  const vizFeatureDefs = useMemo(() => getVisualizationFeatures('your-problem-slug') || [], ['your-problem-slug'])
+  const vizFeatureDefs = useMemo(() => getVisualizationFeatures('your-problem-slug') || [], [])
   const { items: vizFeatures, toggle: toggleVizFeature } = useVisualizationFeatures(vizFeatureDefs)
 
   // Current step

@@ -144,3 +144,154 @@
     height: 200px;
   }
 }
+
+/* ---- Tree visualization ---- */
+.house-robber-i-i-i-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  font-size: 12px;
+  color: #cbd5e1;
+}
+
+.house-robber-i-i-i-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.house-robber-i-i-i-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.house-robber-i-i-i-dot.current {
+  background: #f59e0b;
+}
+
+.house-robber-i-i-i-dot.robbed {
+  background: #22c55e;
+}
+
+.house-robber-i-i-i-badge-chip {
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.house-robber-i-i-i-badge-chip.rob {
+  background: #f59e0b22;
+  color: #fbbf24;
+  border: 1px solid #f59e0b66;
+}
+
+.house-robber-i-i-i-badge-chip.skip {
+  background: #38bdf822;
+  color: #7dd3fc;
+  border: 1px solid #38bdf866;
+}
+
+.house-robber-i-i-i-canvas-wrap {
+  width: 100%;
+  overflow: auto;
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 10px;
+  padding: 8px;
+}
+
+.house-robber-i-i-i-canvas {
+  position: relative;
+  margin: 0 auto;
+}
+
+.house-robber-i-i-i-empty {
+  padding: 24px;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.house-robber-i-i-i-node-wrap {
+  position: absolute;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.house-robber-i-i-i-node {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 15px;
+  background: #1e293b;
+  color: #e2e8f0;
+  border: 2px solid #334155;
+  transition: all 0.2s ease;
+}
+
+.house-robber-i-i-i-node.current {
+  border-color: #f59e0b;
+  background: #f59e0b22;
+  box-shadow: 0 0 0 4px #f59e0b33;
+}
+
+.house-robber-i-i-i-node.robbed {
+  border-color: #22c55e;
+  background: #22c55e22;
+  color: #86efac;
+}
+
+.house-robber-i-i-i-node-badges {
+  display: flex;
+  gap: 4px;
+  opacity: 0.85;
+}
+
+.house-robber-i-i-i-node-badges.active {
+  opacity: 1;
+}
+
+.house-robber-i-i-i-badge {
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.house-robber-i-i-i-badge.rob {
+  background: #f59e0b22;
+  color: #fbbf24;
+  border: 1px solid #f59e0b55;
+}
+
+.house-robber-i-i-i-badge.skip {
+  background: #38bdf822;
+  color: #7dd3fc;
+  border: 1px solid #38bdf855;
+}
+
+.house-robber-i-i-i-answer {
+  padding: 12px 16px;
+  background: #22c55e18;
+  border: 1px solid #22c55e66;
+  border-radius: 8px;
+  color: #e2e8f0;
+  font-size: 14px;
+}
+
+.house-robber-i-i-i-answer strong {
+  color: #22c55e;
+  font-size: 16px;
+}

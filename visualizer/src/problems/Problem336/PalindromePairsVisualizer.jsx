@@ -9,33 +9,284 @@ import { getExamples } from '../../config/examplesRegistry'
 import './PalindromePairsVisualizer.css'
 
 const SOLUTION_CODE = [
-  { line: 1, text: '# Solution for Palindrome Pairs' },
-  { line: 2, text: '# Step-by-step visualization' },
-  { line: 3, text: 'def solve(data):' },
-  { line: 4, text: '    # Algorithm implementation' },
-  { line: 5, text: '    return result' },
+  { line: 1, text: 'def is_pal(s):' },
+  { line: 2, text: '    return s == s[::-1]' },
+  { line: 3, text: 'def palindrome_pairs(words):' },
+  { line: 4, text: '    lookup = {w: i for i, w in enumerate(words)}' },
+  { line: 5, text: '    result = []' },
+  { line: 6, text: '    for i, word in enumerate(words):' },
+  { line: 7, text: '        for k in range(len(word) + 1):' },
+  { line: 8, text: '            prefix, suffix = word[:k], word[k:]' },
+  { line: 9, text: '            if is_pal(prefix):' },
+  { line: 10, text: '                back = suffix[::-1]' },
+  { line: 11, text: '                if back != word and back in lookup:' },
+  { line: 12, text: '                    result.append([lookup[back], i])' },
+  { line: 13, text: '            if k != len(word) and is_pal(suffix):' },
+  { line: 14, text: '                back = prefix[::-1]' },
+  { line: 15, text: '                if back != word and back in lookup:' },
+  { line: 16, text: '                    result.append([i, lookup[back]])' },
+  { line: 17, text: '    return result' },
 ]
 
-function generateSteps() {
-  return [
-    { phase: 'init', activeLine: 1, relatedLines: [1], message: 'Initialize algorithm' },
-    { phase: 'process', activeLine: 3, relatedLines: [3], message: 'Process the input' },
-    { phase: 'done', activeLine: 5, relatedLines: [5], message: 'Algorithm complete' },
-  ]
+const reverseStr = (s) => s.split('').reverse().join('')
+const isPal = (s) => s === reverseStr(s)
+
+function generateSteps(words) {
+  const steps = []
+  const lookup = {}
+  words.forEach((w, i) => { lookup[w] = i })
+
+  const pairs = [] // array of [a, b]
+  const labelOf = (a, b) => `${words[a] === '' ? 'ε' : words[a]}+${words[b] === '' ? 'ε' : words[b]}`
+  const snapshot = () => pairs.map(([a, b]) => ({ a, b, label: labelOf(a, b) }))
+
+  steps.push({
+    phase: 'init', activeLine: 4, relatedLines: [3, 4],
+    message: `Build lookup map word -> index for ${words.length} word(s).`,
+    words, lookup: { ...lookup }, i: -1, pairs: snapshot(),
+  })
+  steps.push({
+    phase: 'init', activeLine: 5, relatedLines: [5],
+    message: 'Start with an empty result list of palindrome pairs.',
+    words, i: -1, pairs: snapshot(),
+  })
+
+  words.forEach((word, i) => {
+    const n = word.length
+    const display = word === '' ? 'ε' : word
+    steps.push({
+      phase: 'word', activeLine: 6, relatedLines: [6],
+      message: `Examine word #${i} = "${display}". Try every split point.`,
+      words, i, word, pairs: snapshot(),
+    })
+
+    for (let k = 0; k <= n; k++) {
+      const prefix = word.slice(0, k)
+      const suffix = word.slice(k)
+      const prefixIsPal = isPal(prefix)
+      const suffixIsPal = isPal(suffix)
+
+      steps.push({
+        phase: 'split', activeLine: 8, relatedLines: [7, 8],
+        message: `Split "${display}" at ${k}: prefix "${prefix === '' ? 'ε' : prefix}" | suffix "${suffix === '' ? 'ε' : suffix}".`,
+        words, i, word, k, prefix, suffix, prefixIsPal, suffixIsPal, pairs: snapshot(),
+      })
+
+      // Case A: prefix is a palindrome -> need a word equal to reverse(suffix)
+      if (prefixIsPal) {
+        const back = reverseStr(suffix)
+        const found = back !== word && Object.prototype.hasOwnProperty.call(lookup, back)
+        let newPair = null
+        if (found) {
+          pairs.push([lookup[back], i])
+          newPair = { a: lookup[back], b: i }
+        }
+        steps.push({
+          phase: 'check-prefix',
+          activeLine: found ? 12 : 9,
+          relatedLines: found ? [9, 10, 11, 12] : [9, 10, 11],
+          message: `prefix "${prefix === '' ? 'ε' : prefix}" is a palindrome -> need word = reverse(suffix) = "${back === '' ? 'ε' : back}". ${found ? `Found at index ${lookup[back]} -> pair (${lookup[back]}, ${i}).` : 'Not present.'}`,
+          words, i, word, k, prefix, suffix, prefixIsPal, suffixIsPal,
+          matchCase: 'prefix', back, found, newPair, pairs: snapshot(),
+        })
+      }
+
+      // Case B: suffix is a palindrome (k != n) -> need a word equal to reverse(prefix)
+      if (k !== n && suffixIsPal) {
+        const back = reverseStr(prefix)
+        const found = back !== word && Object.prototype.hasOwnProperty.call(lookup, back)
+        let newPair = null
+        if (found) {
+          pairs.push([i, lookup[back]])
+          newPair = { a: i, b: lookup[back] }
+        }
+        steps.push({
+          phase: 'check-suffix',
+          activeLine: found ? 16 : 13,
+          relatedLines: found ? [13, 14, 15, 16] : [13, 14, 15],
+          message: `suffix "${suffix === '' ? 'ε' : suffix}" is a palindrome -> need word = reverse(prefix) = "${back === '' ? 'ε' : back}". ${found ? `Found at index ${lookup[back]} -> pair (${i}, ${lookup[back]}).` : 'Not present.'}`,
+          words, i, word, k, prefix, suffix, prefixIsPal, suffixIsPal,
+          matchCase: 'suffix', back, found, newPair, pairs: snapshot(),
+        })
+      }
+    }
+  })
+
+  steps.push({
+    phase: 'done', activeLine: 17, relatedLines: [17],
+    message: `Done. Found ${pairs.length} palindrome pair(s): ${pairs.map(([a, b]) => `(${a},${b})`).join(', ') || 'none'}.`,
+    words, i: -1, pairs: snapshot(), done: true,
+  })
+
+  return steps
 }
 
-const EXAMPLES = getExamples('palindrome-pairs') || []
+const DEFAULT_WORDS = ['abcd', 'dcba', 'lls', 's', 'sssll']
+const REGISTRY_EXAMPLES = getExamples('palindrome-pairs') || []
+const EXAMPLES = REGISTRY_EXAMPLES.length > 0 ? REGISTRY_EXAMPLES : [
+  { label: 'Classic', inputs: DEFAULT_WORDS },
+  { label: 'bat / tab', inputs: ['bat', 'tab', 'cat'] },
+  { label: 'abc / cba', inputs: ['abc', 'cba'] },
+  { label: 'empty + a', inputs: ['a', ''] },
+]
+
+const LABEL = { fontSize: 12, fontWeight: 600, color: '#94a3b8', marginBottom: 8, textTransform: 'uppercase', letterSpacing: 0.5 }
+const GREEN = '#22c55e'
+const RED = '#ef4444'
+
+function Badge({ ok, children }) {
+  return (
+    <span style={{
+      display: 'inline-block', padding: '2px 8px', borderRadius: 6,
+      fontSize: 11, fontWeight: 700, marginLeft: 6,
+      color: ok ? GREEN : RED,
+      background: ok ? `${GREEN}22` : `${RED}22`,
+      border: `1px solid ${ok ? GREEN : RED}`,
+    }}>{children}</span>
+  )
+}
+
+function Segment({ text, color }) {
+  if (text === '') {
+    return <span style={{ color: '#64748b', fontStyle: 'italic', fontFamily: 'monospace' }}>ε</span>
+  }
+  return (
+    <span style={{ fontFamily: 'monospace' }}>
+      {text.split('').map((c, idx) => (
+        <span key={idx} style={{
+          display: 'inline-block', padding: '3px 6px', margin: 1, borderRadius: 4,
+          background: '#0f172a', border: `1px solid ${color}`, color,
+        }}>{c}</span>
+      ))}
+    </span>
+  )
+}
+
+function VizBody({ step, words }) {
+  const pairs = step?.pairs || []
+  const showSplit = step && step.prefix !== undefined
+  const showLookup = step && step.matchCase
+
+  return (
+    <>
+      <div>
+        <div style={LABEL}>Words</div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+          {words.map((w, idx) => {
+            const active = step && step.i === idx
+            return (
+              <div key={idx} style={{
+                padding: '6px 10px', borderRadius: 8, fontFamily: 'monospace', fontSize: 13,
+                border: `2px solid ${active ? GREEN : '#334155'}`,
+                background: active ? `${GREEN}1f` : '#1e293b',
+                color: active ? GREEN : '#e2e8f0',
+              }}>
+                <span style={{ color: '#64748b', fontSize: 10, marginRight: 6 }}>{idx}</span>
+                {w === '' ? 'ε' : w}
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
+      {showSplit && (
+        <div>
+          <div style={LABEL}>Current split at position {step.k}</div>
+          <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
+            <div>
+              <div style={{ fontSize: 11, color: '#94a3b8', marginBottom: 6 }}>
+                prefix
+                <Badge ok={step.prefixIsPal}>{step.prefixIsPal ? 'palindrome' : 'not palindrome'}</Badge>
+              </div>
+              <Segment text={step.prefix} color={step.prefixIsPal ? GREEN : '#64748b'} />
+            </div>
+            <div>
+              <div style={{ fontSize: 11, color: '#94a3b8', marginBottom: 6 }}>
+                suffix
+                <Badge ok={step.suffixIsPal}>{step.suffixIsPal ? 'palindrome' : 'not palindrome'}</Badge>
+              </div>
+              <Segment text={step.suffix} color={step.suffixIsPal ? GREEN : '#64748b'} />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showLookup && (
+        <div>
+          <div style={LABEL}>Reverse lookup</div>
+          <div style={{
+            padding: 12, borderRadius: 8, background: '#0f172a',
+            border: `1px solid ${step.found ? GREEN : '#334155'}`,
+            color: '#e2e8f0', fontSize: 13,
+          }}>
+            <span style={{ color: '#94a3b8' }}>
+              {step.matchCase === 'prefix' ? 'reverse(suffix)' : 'reverse(prefix)'} =
+            </span>{' '}
+            <span style={{ fontFamily: 'monospace', fontWeight: 700 }}>
+              {step.back === '' ? 'ε' : `"${step.back}"`}
+            </span>
+            <Badge ok={step.found}>{step.found ? 'exists as another word' : 'not found'}</Badge>
+          </div>
+        </div>
+      )}
+
+      <div>
+        <div style={LABEL}>Found pairs ({pairs.length})</div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+          {pairs.length === 0 && (
+            <span style={{ color: '#64748b', fontStyle: 'italic', fontSize: 13 }}>none yet</span>
+          )}
+          {pairs.map((p, idx) => {
+            const justAdded = step?.newPair && idx === pairs.length - 1 &&
+              step.newPair.a === p.a && step.newPair.b === p.b
+            return (
+              <motion.div
+                key={`${p.a}-${p.b}-${idx}`}
+                initial={{ scale: justAdded ? 0.6 : 1, opacity: justAdded ? 0 : 1 }}
+                animate={{ scale: 1, opacity: 1 }}
+                style={{
+                  padding: '6px 12px', borderRadius: 8, fontFamily: 'monospace', fontSize: 13,
+                  fontWeight: 700,
+                  border: `2px solid ${justAdded ? GREEN : '#334155'}`,
+                  background: justAdded ? `${GREEN}22` : '#1e293b',
+                  color: justAdded ? GREEN : '#e2e8f0',
+                }}
+              >
+                <span style={{ color: '#64748b', fontSize: 10, marginRight: 6 }}>({p.a},{p.b})</span>
+                {p.label}
+              </motion.div>
+            )
+          })}
+        </div>
+      </div>
+    </>
+  )
+}
 
 export default function PalindromePairsVisualizer() {
   const [inputValue, setInputValue] = useState(
-    EXAMPLES.length > 0 ? JSON.stringify(EXAMPLES[0].inputs || EXAMPLES[0]) : '{}',
+    JSON.stringify(EXAMPLES[0].inputs || EXAMPLES[0]),
   )
 
-  const inputError = useMemo(() => {
-    try { JSON.parse(inputValue); return '' } catch (e) { return e.message }
+  const parsed = useMemo(() => {
+    try {
+      const value = JSON.parse(inputValue)
+      if (!Array.isArray(value) || value.some((w) => typeof w !== 'string')) {
+        return { words: null, error: 'Input must be a JSON array of strings, e.g. ["abcd","dcba"].' }
+      }
+      if (value.length > 12) {
+        return { words: value.slice(0, 12), error: 'Only the first 12 words are visualized.' }
+      }
+      return { words: value, error: '' }
+    } catch (e) {
+      return { words: null, error: e.message }
+    }
   }, [inputValue])
 
-  const steps = useMemo(() => generateSteps(), [])
+  const words = parsed.words
+  const inputError = parsed.error
+
+  const steps = useMemo(() => (words ? generateSteps(words) : []), [words])
   const {
     stepIndex, setStepIndex, stepForward, stepBack, togglePlay,
     handleReset, isPlaying, speed, setSpeed, isDone,
@@ -43,16 +294,18 @@ export default function PalindromePairsVisualizer() {
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
+  const vizWords = step?.words || words || []
+
   return (
     <div className="palindrome-pairs-shell">
       <div className="palindrome-pairs-panel">
-        <div className="palindrome-pairs-panel-head">Input</div>
+        <div className="palindrome-pairs-panel-head">Input (JSON array of words)</div>
         <div className="palindrome-pairs-panel-body">
           <textarea
             value={inputValue}
             onChange={(e) => { setInputValue(e.target.value); handleReset() }}
             className="palindrome-pairs-textarea"
-            placeholder="Enter input..."
+            placeholder='["abcd","dcba","lls","s","sssll"]'
           />
           {inputError && <div className="palindrome-pairs-error">{inputError}</div>}
         </div>
@@ -71,8 +324,9 @@ export default function PalindromePairsVisualizer() {
               transition={{ duration: 0.3 }}
             >
               <div className="palindrome-pairs-step-info">
-                <h3>{step?.message || 'Press play to begin'}</h3>
+                <h3>{step?.message || 'Press play (or Next) to trace the split-and-lookup algorithm.'}</h3>
               </div>
+              <VizBody step={step} words={vizWords} />
             </motion.div>
           </AnimatePresence>
         </div>
@@ -92,15 +346,18 @@ export default function PalindromePairsVisualizer() {
 
       {EXAMPLES.length > 0 && (
         <div className="palindrome-pairs-examples">
-          {EXAMPLES.map((example, i) => (
-            <button
-              key={i}
-              className="palindrome-pairs-example-btn"
-              onClick={() => { setInputValue(JSON.stringify(example.inputs || example)); handleReset() }}
-            >
-              {example.label || `Example ${i + 1}`}
-            </button>
-          ))}
+          {EXAMPLES.map((example, i) => {
+            const value = JSON.stringify(example.inputs || example)
+            return (
+              <button
+                key={i}
+                className={`palindrome-pairs-example-btn${inputValue === value ? ' active' : ''}`}
+                onClick={() => { setInputValue(value); handleReset() }}
+              >
+                {example.label || `Example ${i + 1}`}
+              </button>
+            )
+          })}
         </div>
       )}
 
