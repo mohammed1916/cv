@@ -1,1 +1,1 @@
-export { default } from "./CountAndSay";
+export { default } from "./CountAndSayVisualizer";
