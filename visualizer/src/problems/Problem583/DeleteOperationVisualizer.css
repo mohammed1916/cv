@@ -1,0 +1,147 @@
+/* Delete Operation Visualizer Styles */
+.problem-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* DP Table styles */
+.do-dp-table {
+  display: inline-block;
+  border-collapse: collapse;
+  background-color: #0f172a;
+  border: 1px solid #475569;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.do-dp-cell {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #334155;
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: #cbd5e1;
+  background-color: #1e293b;
+}
+
+.do-dp-cell.header {
+  background-color: #0f172a;
+  color: #94a3b8;
+  font-weight: 700;
+  border-color: #475569;
+}
+
+.do-dp-cell.current {
+  background-color: #f59e0b;
+  color: #1e293b;
+  box-shadow: 0 0 0 2px #f59e0b;
+  animation: pulse 0.5s ease-in-out;
+}
+
+.do-dp-cell.lcs {
+  background-color: #22c55e;
+  color: #1e293b;
+  font-weight: 700;
+}
+
+.do-dp-cell.match {
+  border-color: #22c55e;
+}
+
+.do-dp-cell.nomatch {
+  border-color: #ef4444;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* String comparison */
+.do-string-comparison {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  background-color: #1e293b;
+  border-radius: 6px;
+  border: 1px solid #475569;
+}
+
+.do-string-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.do-string-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #94a3b8;
+  min-width: 30px;
+}
+
+.do-char {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  border: 1px solid #475569;
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: #e2e8f0;
+  background-color: #0f172a;
+}
+
+.do-char.highlight {
+  background-color: #f59e0b;
+  color: #1e293b;
+  border-color: #f59e0b;
+}
+
+.do-char.match {
+  background-color: #22c55e;
+  color: #1e293b;
+  border-color: #22c55e;
+}
+
+/* Result display */
+.do-result {
+  padding: 16px;
+  background-color: #1e293b;
+  border-radius: 6px;
+  border: 2px solid #f59e0b;
+  text-align: center;
+}
+
+.do-result-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #94a3b8;
+  margin-bottom: 8px;
+}
+
+.do-result-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #f59e0b;
+}
+
+.do-result-desc {
+  font-size: 11px;
+  color: #cbd5e1;
+  margin-top: 8px;
+  font-family: monospace;
+}
