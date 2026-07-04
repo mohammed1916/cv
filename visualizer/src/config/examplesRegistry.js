@@ -501,6 +501,103 @@ export const EXAMPLES_REGISTRY = {
       "amount": 6249
     }
   ],
+  "count-students": [
+    {
+      "label": "Multiple Departments",
+      "students": [
+        {
+          "student_id": 1,
+          "student_name": "Alice",
+          "department_id": 1
+        },
+        {
+          "student_id": 2,
+          "student_name": "Bob",
+          "department_id": 1
+        },
+        {
+          "student_id": 3,
+          "student_name": "Charlie",
+          "department_id": 2
+        },
+        {
+          "student_id": 4,
+          "student_name": "Diana",
+          "department_id": 2
+        },
+        {
+          "student_id": 5,
+          "student_name": "Eve",
+          "department_id": 3
+        }
+      ]
+    },
+    {
+      "label": "Single Department",
+      "students": [
+        {
+          "student_id": 1,
+          "student_name": "John",
+          "department_id": 1
+        },
+        {
+          "student_id": 2,
+          "student_name": "Jane",
+          "department_id": 1
+        },
+        {
+          "student_id": 3,
+          "student_name": "Jack",
+          "department_id": 1
+        }
+      ]
+    },
+    {
+      "label": "Uneven Distribution",
+      "students": [
+        {
+          "student_id": 1,
+          "student_name": "Alan",
+          "department_id": 1
+        },
+        {
+          "student_id": 2,
+          "student_name": "Beth",
+          "department_id": 2
+        },
+        {
+          "student_id": 3,
+          "student_name": "Carl",
+          "department_id": 2
+        },
+        {
+          "student_id": 4,
+          "student_name": "Dana",
+          "department_id": 2
+        },
+        {
+          "student_id": 5,
+          "student_name": "Eve",
+          "department_id": 3
+        },
+        {
+          "student_id": 6,
+          "student_name": "Frank",
+          "department_id": 3
+        },
+        {
+          "student_id": 7,
+          "student_name": "Grace",
+          "department_id": 3
+        },
+        {
+          "student_id": 8,
+          "student_name": "Henry",
+          "department_id": 3
+        }
+      ]
+    }
+  ],
   "combination-sum": [
     {
       "label": "Classic",
@@ -6985,6 +7082,7 @@ export const EXAMPLES_REGISTRY = {
   "game-play-analysis-ii": [{"label":"Example 1","activity":[{"player_id":1,"device_id":2,"event_date":"2016-03-01","games_played":5},{"player_id":1,"device_id":2,"event_date":"2016-03-02","games_played":6},{"player_id":2,"device_id":3,"event_date":"2017-06-25","games_played":1}]},{"label":"Example 2","activity":[{"player_id":1,"device_id":2,"event_date":"2016-03-01","games_played":5}]}],
   "hamming-distance": [{"label":"Example 1","x":1,"y":4},{"label":"Example 2","x":3,"y":1}],
   "inorder-successor-bst": [{"label":"Example 1","tree":[2,1,3],"p":1},{"label":"Example 2","tree":[5,3,6,2,4,null,null,1],"p":6}],
+  "investments-2016": [{"label":"Mixed","data":[{"pid":1,"tiv_2015":100,"tiv_2016":200,"lat":0,"lon":0},{"pid":2,"tiv_2015":100,"tiv_2016":150,"lat":1,"lon":1},{"pid":3,"tiv_2015":100,"tiv_2016":300,"lat":0,"lon":0}]},{"label":"Complex","data":[{"pid":1,"tiv_2015":100,"tiv_2016":200,"lat":0,"lon":0},{"pid":2,"tiv_2015":150,"tiv_2016":300,"lat":1,"lon":1},{"pid":3,"tiv_2015":100,"tiv_2016":250,"lat":2,"lon":2},{"pid":4,"tiv_2015":150,"tiv_2016":350,"lat":1,"lon":1},{"pid":5,"tiv_2015":200,"tiv_2016":400,"lat":3,"lon":3}]},{"label":"All Unique","data":[{"pid":1,"tiv_2015":100,"tiv_2016":100,"lat":0,"lon":0},{"pid":2,"tiv_2015":200,"tiv_2016":200,"lat":1,"lon":1},{"pid":3,"tiv_2015":300,"tiv_2016":300,"lat":2,"lon":2}]}],
   "is-subsequence": [{"label":"Example 1","s":"abc","t":"ahbgdc"},{"label":"Example 2","s":"axc","t":"ahbgdc"}],
   "island-perimeter": [{"label":"Example 1","grid":[[1]]},{"label":"Example 2","grid":[[1,1,1,1],[1,0,0,1],[1,0,0,1],[1,1,1,1]]}],
   "logger-rate-limiter": [{"label":"Example 1","logs":[{"timestamp":1,"message":"foo"},{"timestamp":1,"message":"bar"},{"timestamp":3,"message":"foo"},{"timestamp":10,"message":"bar"}]},{"label":"Example 2","logs":[{"timestamp":1,"message":"a"},{"timestamp":2,"message":"b"},{"timestamp":11,"message":"a"},{"timestamp":12,"message":"b"}]}],
@@ -7045,7 +7143,61 @@ export const EXAMPLES_REGISTRY = {
   "validate-ip-address": [{"label":"Example 1","queryIP":"172.16.254.1"},{"label":"Example 2","queryIP":"2001:0db8:85a3:0:0:8A2E:0370:7334"}],
   "verbal-arithmetic-puzzle": [{"label":"Example 1","equation":"SEND+MORE=MONEY"},{"label":"Example 2","equation":"SIX+SEVEN=TWELVE"}],
   "word-squares": [{"label":"Example 1","words":["abat","baba","atan","tata"]},{"label":"Example 2","words":["cat","bat","rat"]}],
-  "zuma-game": [{"label":"Example 1","board":"WWWWW","hand":"WWWWW"},{"label":"Example 2","board":"WWRRWWWWRRWWWWRRWWW","hand":"WRWWWWWW"}]
+  "zuma-game": [{"label":"Example 1","board":"WWWWW","hand":"WWWWW"},{"label":"Example 2","board":"WWRRWWWWRRWWWWRRWWW","hand":"WRWWWWWW"}],
+  "employee-free-time": [{"label":"Example 1","schedules":[[[1,2],[5,6]],[[1,3]],[[4,6]]]},{"label":"Example 2","schedules":[[[1,3],[4,6]],[[2,5]],[[7,9]]]},{"label":"Example 3","schedules":[[[1,2],[3,4],[6,7]],[[2,4]],[[2,5],[9,12]]]},{"label":"Complex","schedules":[[[1,3],[6,7]],[[2,4]],[[2,5],[9,12]],[[4,6],[8,9]],[[5,9]],[[10,15]]]}],
+  "largest-orders": [
+    {
+      "label": "Example 1",
+      "orders": [
+        {"orderId": 1, "customerId": 1, "amount": 150},
+        {"orderId": 2, "customerId": 1, "amount": 200},
+        {"orderId": 3, "customerId": 2, "amount": 100},
+        {"orderId": 4, "customerId": 3, "amount": 300},
+        {"orderId": 5, "customerId": 3, "amount": 150}
+      ],
+      "customers": {
+        "1": "Alice",
+        "2": "Bob",
+        "3": "Charlie"
+      }
+    },
+    {
+      "label": "Example 2",
+      "orders": [
+        {"orderId": 101, "customerId": 10, "amount": 500},
+        {"orderId": 102, "customerId": 10, "amount": 450},
+        {"orderId": 103, "customerId": 20, "amount": 200},
+        {"orderId": 104, "customerId": 30, "amount": 300},
+        {"orderId": 105, "customerId": 30, "amount": 250},
+        {"orderId": 106, "customerId": 40, "amount": 180}
+      ],
+      "customers": {
+        "10": "John",
+        "20": "Jane",
+        "30": "Peter",
+        "40": "Mary"
+      }
+    },
+    {
+      "label": "Multiple Orders",
+      "orders": [
+        {"orderId": 1, "customerId": 1, "amount": 100},
+        {"orderId": 2, "customerId": 1, "amount": 150},
+        {"orderId": 3, "customerId": 1, "amount": 200},
+        {"orderId": 4, "customerId": 2, "amount": 300},
+        {"orderId": 5, "customerId": 2, "amount": 250},
+        {"orderId": 6, "customerId": 3, "amount": 120},
+        {"orderId": 7, "customerId": 4, "amount": 180},
+        {"orderId": 8, "customerId": 4, "amount": 220}
+      ],
+      "customers": {
+        "1": "Smith",
+        "2": "Johnson",
+        "3": "Williams",
+        "4": "Brown"
+      }
+    }
+  ]
 }
 
 /**
