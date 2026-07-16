@@ -1,54 +1,53 @@
 import { useEffect, useRef, useState } from 'react'
-import './ResizableSplitPanels.css'
+import './VerticalResizableSplitPanels.css'
 
 function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value))
 }
 
-export default function ResizableSplitPanels({
-  left,
-  right,
+export default function VerticalResizableSplitPanels({
+  top,
+  bottom,
   storageKey,
-  initialLeftPercent = 60,
-  minLeftPx = 280,
-  minRightPx = 240,
+  initialTopPercent = 60,
+  minTopPx = 200,
+  minBottomPx = 120,
   className = '',
 }) {
   const rootRef = useRef(null)
   const dragRef = useRef(null)
-  const [leftPercent, setLeftPercent] = useState(() => {
-    if (!storageKey) return initialLeftPercent
+  const [topHeight, setTopHeight] = useState(() => {
+    if (!storageKey) return null
     try {
       const stored = Number(window.localStorage.getItem(storageKey))
-      if (Number.isFinite(stored)) return clamp(stored, 25, 75)
+      if (Number.isFinite(stored)) return stored
     } catch {
       // Ignore localStorage read failures.
     }
-    return initialLeftPercent
+    return null
   })
 
   useEffect(() => {
-    if (!storageKey) return
+    if (!storageKey || topHeight === null) return
     try {
-      window.localStorage.setItem(storageKey, String(leftPercent))
+      window.localStorage.setItem(storageKey, String(topHeight))
     } catch {
       // Ignore localStorage write failures.
     }
-  }, [leftPercent, storageKey])
+  }, [topHeight, storageKey])
 
   useEffect(() => {
     const handleMove = (event) => {
       const state = dragRef.current
       if (!state || !rootRef.current) return
       const rect = rootRef.current.getBoundingClientRect()
-      const availableWidth = rect.width - state.dividerWidth
-      if (availableWidth <= 0) return
-      const rawLeft = event.clientX - rect.left - state.dividerWidth / 2
-      const minLeft = minLeftPx
-      const maxLeft = availableWidth - minRightPx
-      const nextLeft = clamp(rawLeft, minLeft, maxLeft)
-      const nextPercent = (nextLeft / availableWidth) * 100
-      setLeftPercent(clamp(nextPercent, 10, 90))
+      const availableHeight = rect.height - state.dividerHeight
+      if (availableHeight <= 0) return
+      const rawTop = event.clientY - rect.top - state.dividerHeight / 2
+      const minTop = minTopPx
+      const maxTop = availableHeight - minBottomPx
+      const nextTop = clamp(rawTop, minTop, maxTop)
+      setTopHeight(nextTop)
     }
 
     const handleUp = () => {
@@ -64,39 +63,40 @@ export default function ResizableSplitPanels({
       window.removeEventListener('pointermove', handleMove)
       window.removeEventListener('pointerup', handleUp)
     }
-  }, [minLeftPx, minRightPx])
+  }, [minTopPx, minBottomPx])
 
   const startResize = (event) => {
     if (!rootRef.current) return
-    const dividerWidth = 12
-    dragRef.current = { dividerWidth }
+    const dividerHeight = 12
+    dragRef.current = { dividerHeight }
     document.body.classList.add('rsp-resizing')
-    document.body.style.cursor = 'col-resize'
+    document.body.style.cursor = 'row-resize'
     event.preventDefault()
   }
 
   return (
-    <div className={`rsp ${className}`.trim()} ref={rootRef}>
+    <div className={`vrsp ${className}`.trim()} ref={rootRef}>
       <section
-        className="rsp-pane rsp-pane-left"
+        className="vrsp-pane vrsp-pane-top"
         style={{
-          flexBasis: `calc(${leftPercent}% - 6px)`,
-          minWidth: `${minLeftPx}px`,
+          height: topHeight ? `${topHeight}px` : 'auto',
+          minHeight: `${minTopPx}px`,
+          flex: topHeight ? '0 0 auto' : '1 1 auto',
         }}
       >
-        {left}
+        {top}
       </section>
       <div
-        className="rsp-divider"
+        className="vrsp-divider"
         role="separator"
-        aria-orientation="vertical"
+        aria-orientation="horizontal"
         aria-label="Resize panels"
         onPointerDown={startResize}
       >
-        <span className="rsp-divider-grip" />
+        <span className="vrsp-divider-grip" />
       </div>
-      <section className="rsp-pane rsp-pane-right" style={{ minWidth: `${minRightPx}px` }}>
-        {right}
+      <section className="vrsp-pane vrsp-pane-bottom" style={{ minHeight: `${minBottomPx}px` }}>
+        {bottom}
       </section>
     </div>
   )

@@ -18,6 +18,7 @@ export default function CodeTracePanel({
   activeLabelSuffix = "is active",
   autoScroll = true,
   onActiveLineDomChange,
+  disableResizer = false,
 }) {
   const codeRef = useRef(null);
   const lastManualScrollTsRef = useRef(0);
