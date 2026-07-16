@@ -1,4 +1,4 @@
-﻿import { useState, useCallback, useMemo, useEffect } from 'react'
+﻿import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -6,6 +6,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -334,13 +335,8 @@ export default function TwoSumVisualizer() {
   )
 
   const handlePanelReady = useCallback((divs) => {
-    console.log('TwoSum received panel divs:', Object.keys(divs))
     setPanelDivs(divs)
   }, [])
-
-  useEffect(() => {
-    if (panelDivs) console.log('Rendering portals with divs:', Object.keys(panelDivs))
-  }, [panelDivs])
 
   return (
     <div className="twosum-shell">
@@ -353,9 +349,10 @@ export default function TwoSumVisualizer() {
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
         </>
       )}
-      <div style={{ position: 'fixed', bottom: 20, right: 20, zIndex: 1000, maxWidth: 400 }}>
-        {playbackPanel}
-      </div>
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

@@ -75,7 +75,6 @@ export default function LuminoDockPanel({ panels, onPanelReady }) {
       const rect = container.getBoundingClientRect()
       const w = Math.max(0, Math.round(rect.width))
       const h = Math.max(0, Math.round(rect.height))
-      console.log('[Lumino] container measured:', w, 'x', h)
       if (w === 0 || h === 0) return
       box.node.style.position = 'absolute'
       box.node.style.top = '0'
