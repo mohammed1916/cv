@@ -1,17 +1,16 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+﻿import { useState, useCallback, useMemo, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
-import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
-import VerticalResizableSplitPanels from '../../components/shared/VerticalResizableSplitPanels'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './TwoSumVisualizer.css'
-import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const TWOSUM_PATTERNS = ['init', 'loop', 'calc_diff', 'check_map', 'found', 'add_map']
 
@@ -322,38 +321,41 @@ export default function TwoSumVisualizer() {
     </div>
   )
 
+  const [panelDivs, setPanelDivs] = useState(null)
+
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'array', title: 'Array & Target', dockMode: 'split-right' },
+      { id: 'hashmap', title: 'Hash Map', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'tab-after' },
+    ],
+    []
+  )
+
+  const handlePanelReady = useCallback((divs) => {
+    console.log('TwoSum received panel divs:', Object.keys(divs))
+    setPanelDivs(divs)
+  }, [])
+
+  useEffect(() => {
+    if (panelDivs) console.log('Rendering portals with divs:', Object.keys(panelDivs))
+  }, [panelDivs])
+
   return (
     <div className="twosum-shell">
-      <VerticalResizableSplitPanels
-        storageKey="cpviz.split.twosum.main"
-        initialTopPercent={50}
-        minTopPx={200}
-        minBottomPx={200}
-        top={
-          <ResizableSplitPanels
-            storageKey="cpviz.split.twosum.top"
-            initialLeftPercent={60}
-            minLeftPx={360}
-            minRightPx={280}
-            left={arrayPanel}
-            right={hashMapPanel}
-          />}
-        bottom={
-
-          <VerticalResizableSplitPanels
-            storageKey="cpviz.split.twosum.code"
-            initialTopPercent={70}
-            minTopPx={200}
-            minBottomPx={80}
-            top={codePanel}
-            bottom={statusPanel}
-          />
-        }
-      />
-
-      <FloatingPanel title="Playback Controls">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.array && createPortal(arrayPanel, panelDivs.array)}
+          {panelDivs.hashmap && createPortal(hashMapPanel, panelDivs.hashmap)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      <div style={{ position: 'fixed', bottom: 20, right: 20, zIndex: 1000, maxWidth: 400 }}>
         {playbackPanel}
-      </FloatingPanel>
+      </div>
     </div>
   )
 }

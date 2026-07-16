@@ -1,24 +1,22 @@
 .vrsp {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex: 1;
+  min-height: 0;
   width: 100%;
 }
 
 .vrsp-pane {
   display: flex;
-  overflow: hidden;
+  flex-direction: column;
   min-width: 0;
 }
 
 .vrsp-pane-top {
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
+  flex-shrink: 0;
 }
 
 .vrsp-pane-bottom {
-  flex-direction: column;
   flex: 1;
   min-height: 0;
 }
@@ -35,9 +33,19 @@
   user-select: none;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
+  transition: background 0.15s ease;
 }
 
 .vrsp-divider:hover .vrsp-divider-grip {
+  opacity: 1;
+}
+
+.vrsp-divider.active {
+  background: linear-gradient(to bottom, #0ea5e9 0%, #0ea5e9 50%, #0ea5e9 100%);
+}
+
+.vrsp-divider.active .vrsp-divider-grip {
+  background: #0ea5e9;
   opacity: 1;
 }
 
@@ -47,14 +55,10 @@
   background: #64748b;
   border-radius: 2px;
   opacity: 0.5;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, background 0.2s ease;
 }
 
-.rsp-resizing .vrsp-divider {
-  background: linear-gradient(to bottom, #0ea5e9 0%, #0ea5e9 50%, #0ea5e9 100%);
-}
-
-.rsp-resizing .vrsp-divider-grip {
-  background: #0ea5e9;
-  opacity: 1;
+body.vrsp-resizing,
+body.vrsp-resizing * {
+  user-select: none !important;
 }

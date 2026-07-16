@@ -269,7 +269,7 @@ function VisualizationPanel({ step, orders, customerOrders, customerNames, apply
 
       {step.filtered && step.filtered.length > 0 && (
         <div className="largest_orders-table-section">
-          <div className="largest_orders-table-label">Filtered Results (Count > 1)</div>
+          <div className="largest_orders-table-label">Filtered Results (Count &gt; 1)</div>
           <div style={{ maxHeight: 200, overflowY: 'auto' }}>
             <table className="largest_orders-table">
               <thead>
@@ -375,7 +375,7 @@ function DetailsPanel({ step }) {
       {step.phase === 'filter' && (
         <div className="largest_orders-detail-item">
           <div className="largest_orders-detail-label">Filter Criteria</div>
-          <div>COUNT(*) > 1</div>
+          <div>COUNT(*) &gt; 1</div>
           <div style={{ fontSize: 11, color: 'var(--text-secondary)', marginTop: 4 }}>
             Removing customers with single orders
           </div>

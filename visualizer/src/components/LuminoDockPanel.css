@@ -1,0 +1,102 @@
+/* Import Lumino's structural widget styles (positioning, layout, resize handles) */
+@import '@lumino/widgets/style/index.css';
+
+.lumino-dock-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+/* Lumino base styles */
+.lumino-DockPanel {
+  background: var(--surface-1);
+  color: var(--text-main);
+}
+
+.lumino-DockPanel-handle {
+  background: var(--border);
+  opacity: 0.5;
+}
+
+.lumino-DockPanel-handle:hover {
+  opacity: 1;
+}
+
+.lumino-TabBar {
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+}
+
+.lumino-TabBar-content {
+  min-height: 36px;
+}
+
+.lumino-TabBar-tab {
+  padding: 8px 16px;
+  color: var(--text-secondary);
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  user-select: none;
+}
+
+.lumino-TabBar-tab:hover {
+  background: var(--surface-3);
+}
+
+.lumino-TabBar-tab.p-mod-current {
+  color: var(--text-main);
+  background: var(--surface-1);
+  border-bottom-color: var(--accent);
+}
+
+.lumino-TabBar-tabCloseIcon {
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.lumino-TabBar-tabCloseIcon:hover {
+  opacity: 0.7;
+}
+
+.react-widget {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-1);
+  color: var(--text-main);
+  overflow: hidden;
+}
+
+.react-widget > div {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Lumino drag overlay */
+.lumino-drop-indicator {
+  border: 2px solid var(--accent);
+  opacity: 0.7;
+}
+
+/* Custom scrollbar for panels */
+.react-widget ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.react-widget ::-webkit-scrollbar-track {
+  background: var(--surface-2);
+}
+
+.react-widget ::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+.react-widget ::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
