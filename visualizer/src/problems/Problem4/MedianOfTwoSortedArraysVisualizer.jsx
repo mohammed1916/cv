@@ -1,4 +1,5 @@
 ﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from 'react-dom';
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -9,6 +10,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./MedianOfTwoSortedArraysVisualizer.css";
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
 const MEDIAN_PATTERNS = ['init', 'partition', 'evaluate', 'found', 'move_left', 'move_right']
 
@@ -672,310 +674,353 @@ export default function MedianOfTwoSortedArraysVisualizer() {
     [handleReset],
   );
 
-  return (
-    <div className="median-shell">
-      <div className="median-top">
-        <div className="median-panel median-input-panel">
-          <div className="median-panel-head">
-            <span>Inputs & Examples</span>
-            {prepared.inputError && (
-              <span className="median-error-pill">{prepared.inputError}</span>
-            )}
-          </div>
-
-          <div className="median-panel-body">
-            <div className="median-example-row">
-              {EXAMPLES.map((example) => (
-                <button
-                  key={example.label}
-                  className="median-example-btn"
-                  onClick={() => applyExample(example)}
-                >
-                  {example.label}
-                </button>
-              ))}
-            </div>
-
-            <div className="median-input-grid">
-              <div className="median-input-group">
-                <span className="median-input-prefix">nums1 =</span>
-                <input
-                  className="median-input"
-                  value={nums1Input}
-                  onChange={(event) => {
-                    setNums1Input(event.target.value);
-                    handleReset();
-                  }}
-                  placeholder="[1, 3]"
-                />
-              </div>
-
-              <div className="median-input-group">
-                <span className="median-input-prefix">nums2 =</span>
-                <input
-                  className="median-input"
-                  value={nums2Input}
-                  onChange={(event) => {
-                    setNums2Input(event.target.value);
-                    handleReset();
-                  }}
-                  placeholder="[2]"
-                />
-              </div>
-            </div>
-
-            <div className="median-note-box">
-              <div className="median-note-title">How the search is set up</div>
-              <div className="median-note-text">
-                We always binary-search the smaller array.{" "}
-                <strong>{sourceLabel}</strong>.
-              </div>
-              <div className="median-note-text">
-                Search space stays small because only cut A moves left or right.
-              </div>
-              {prepared.autoSorted && (
-                <div className="median-note-text">
-                  Input arrays were automatically sorted for visualization.
-                </div>
-              )}
-            </div>
-
-            <div className="median-input-stats">
-              <MetricCard
-                label="len(nums1)"
-                value={prepared.nums1.length}
-                tone="blue"
-              />
-              <MetricCard
-                label="len(nums2)"
-                value={prepared.nums2.length}
-                tone="cyan"
-              />
-              <MetricCard label="Total" value={total} tone="amber" />
-            </div>
-          </div>
-        </div>
-
-        <div className="median-panel median-array-panel">
-          <div className="median-panel-head">
-            <span>Partition Visualization</span>
-            <span className="median-badge neutral">
-              {step?.phase === "found"
-                ? "Valid partition found"
-                : step?.phase === "move_left" || step?.phase === "move_right"
-                  ? "Adjusting cut"
-                  : "Searching"}
-            </span>
-          </div>
-
-          <div className="median-panel-body">
-            <ArrayTape
-              title="A"
-              subtitle={`searched array (${prepared.swapped ? "nums2" : "nums1"})`}
-              values={prepared.searchArray}
-              partition={step?.partitionA ?? 0}
-              low={step?.low ?? 0}
-              high={step?.high ?? prepared.searchArray.length}
-              showRange
-              showBounds
-              colorClass="a-tape"
-            />
-
-            <ArrayTape
-              title="B"
-              subtitle={`other array (${prepared.swapped ? "nums1" : "nums2"})`}
-              values={prepared.otherArray}
-              partition={step?.partitionB ?? leftSize}
-              low={null}
-              high={null}
-              showRange={false}
-              showBounds={false}
-              colorClass="b-tape"
-            />
-          </div>
-        </div>
-
-        <div className="median-panel median-math-panel">
-          <div className="median-panel-head">
-            <span>Partition Math & Verdict</span>
-            <span className="median-badge neutral">LeetCode 4</span>
-          </div>
-
-          <div className="median-panel-body">
-            <div className="median-result-box">
-              <div className="median-result-title">Current median</div>
-              <div
-                className={`median-result-value ${step?.result === true ? "success" : step?.result === false ? "danger" : "neutral"}`}
-              >
-                {step?.phase === "found" || step?.phase === "done"
-                  ? formatMedian(step?.median)
-                  : "In progress"}
-              </div>
-              <div className="median-result-subtext">
-                {step?.phase === "found"
-                  ? evenTotal
-                    ? "Even total length: average the largest value on the left and the smallest value on the right."
-                    : "Odd total length: the median is the largest value on the left half."
-                  : step?.phase === "move_left"
-                    ? "Cut A is too far right, so shift left. The leftA → rightB check failed."
-                    : step?.phase === "move_right"
-                      ? "Cut A is too far left, so shift right. The leftB → rightA check failed."
-                      : "Watch the partitions move until both sides match."}
-              </div>
-            </div>
-
-            <ComparisonBoard step={step} />
-
-            <div className="median-metric-grid">
-              <MetricCard
-                label="m"
-                value={step?.m ?? prepared.searchArray.length}
-                tone="blue"
-              />
-              <MetricCard
-                label="n"
-                value={step?.n ?? prepared.otherArray.length}
-                tone="cyan"
-              />
-              <MetricCard label="half" value={leftSize} tone="amber" />
-              <MetricCard
-                label="cutA"
-                value={step?.partitionA ?? 0}
-                tone="blue"
-              />
-              <MetricCard
-                label="cutB"
-                value={step?.partitionB ?? leftSize}
-                tone="cyan"
-              />
-              <MetricCard
-                label="iteration"
-                value={step?.iteration ?? 0}
-                tone="amber"
-              />
-            </div>
-
-            <div className="median-condition-box">
-              <div className="median-condition-row">
-                <span className="median-condition-label">leftA ≤ rightB</span>
-                <span
-                  className={`median-condition-pill ${step?.conditionA === true ? "ok" : step?.conditionA === false ? "bad" : "neutral"}`}
-                >
-                  {step?.conditionA === undefined
-                    ? "—"
-                    : String(step.conditionA)}
-                </span>
-              </div>
-              <div className="median-condition-row">
-                <span className="median-condition-label">leftB ≤ rightA</span>
-                <span
-                  className={`median-condition-pill ${step?.conditionB === true ? "ok" : step?.conditionB === false ? "bad" : "neutral"}`}
-                >
-                  {step?.conditionB === undefined
-                    ? "—"
-                    : String(step.conditionB)}
-                </span>
-              </div>
-              <div className="median-condition-row summary">
-                <span className="median-condition-label">Decision</span>
-                <span className="median-condition-pill neutral">
-                  {step?.decision || "—"}
-                </span>
-              </div>
-            </div>
-
-            <div className="median-boundary-box">
-              <div className="median-boundary-title">Boundary values</div>
-              <div className="median-boundary-grid">
-                <div>
-                  <span className="key">maxLeftA</span>
-                  <span>{formatValue(step?.maxLeftA)}</span>
-                </div>
-                <div>
-                  <span className="key">minRightA</span>
-                  <span>{formatValue(step?.minRightA)}</span>
-                </div>
-                <div>
-                  <span className="key">maxLeftB</span>
-                  <span>{formatValue(step?.maxLeftB)}</span>
-                </div>
-                <div>
-                  <span className="key">minRightB</span>
-                  <span>{formatValue(step?.minRightB)}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="median-history-box">
-              <div className="median-history-title">Iteration history</div>
-              {history.length === 0 ? (
-                <div className="median-history-empty">
-                  No partition attempts yet.
-                </div>
-              ) : (
-                history.map((entry) => (
-                  <div
-                    key={`${entry.phase}-${entry.iteration}-${entry.partitionA ?? "na"}`}
-                    className="median-history-row"
-                  >
-                    <span className="median-history-step">
-                      #{entry.iteration}
-                    </span>
-                    <span className="median-history-text">
-                      cutA={entry.partitionA} cutB={entry.partitionB} →{" "}
-                      {entry.decision}
-                    </span>
-                  </div>
-                ))
-              )}
-            </div>
-          </div>
-        </div>
+  // Panel extraction for Lumino layout
+  const primaryPanel = (
+    <div className="median-panel median-input-panel">
+      <div className="median-panel-head">
+        <span>Inputs & Examples</span>
+        {prepared.inputError && (
+          <span className="median-error-pill">{prepared.inputError}</span>
+        )}
       </div>
 
-      <div className="median-middle">
-        <div style={{ position: 'relative' }}>
-          <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+      <div className="median-panel-body">
+        <div className="median-example-row">
+          {EXAMPLES.map((example) => (
+            <button
+              key={example.label}
+              className="median-example-btn"
+              onClick={() => applyExample(example)}
+            >
+              {example.label}
+            </button>
+          ))}
+        </div>
 
-          {showPatternOverlay && (
-            <CodePatternAnnotations
-              linePatterns={LINE_PATTERN_MAP}
-              currentPhase={step?.phase}
-              activeLineDom={activeLineDom}
-              activeLine={step?.activeLine}
+        <div className="median-input-grid">
+          <div className="median-input-group">
+            <span className="median-input-prefix">nums1 =</span>
+            <input
+              className="median-input"
+              value={nums1Input}
+              onChange={(event) => {
+                setNums1Input(event.target.value);
+                handleReset();
+              }}
+              placeholder="[1, 3]"
             />
+          </div>
+
+          <div className="median-input-group">
+            <span className="median-input-prefix">nums2 =</span>
+            <input
+              className="median-input"
+              value={nums2Input}
+              onChange={(event) => {
+                setNums2Input(event.target.value);
+                handleReset();
+              }}
+              placeholder="[2]"
+            />
+          </div>
+        </div>
+
+        <div className="median-note-box">
+          <div className="median-note-title">How the search is set up</div>
+          <div className="median-note-text">
+            We always binary-search the smaller array.{" "}
+            <strong>{sourceLabel}</strong>.
+          </div>
+          <div className="median-note-text">
+            Search space stays small because only cut A moves left or right.
+          </div>
+          {prepared.autoSorted && (
+            <div className="median-note-text">
+              Input arrays were automatically sorted for visualization.
+            </div>
+          )}
+        </div>
+
+        <div className="median-input-stats">
+          <MetricCard
+            label="len(nums1)"
+            value={prepared.nums1.length}
+            tone="blue"
+          />
+          <MetricCard
+            label="len(nums2)"
+            value={prepared.nums2.length}
+            tone="cyan"
+          />
+          <MetricCard label="Total" value={total} tone="amber" />
+        </div>
+      </div>
+    </div>
+  );
+
+  const statePanel = (
+    <div className="median-panel median-array-panel">
+      <div className="median-panel-head">
+        <span>Partition Visualization</span>
+        <span className="median-badge neutral">
+          {step?.phase === "found"
+            ? "Valid partition found"
+            : step?.phase === "move_left" || step?.phase === "move_right"
+              ? "Adjusting cut"
+              : "Searching"}
+        </span>
+      </div>
+
+      <div className="median-panel-body">
+        <ArrayTape
+          title="A"
+          subtitle={`searched array (${prepared.swapped ? "nums2" : "nums1"})`}
+          values={prepared.searchArray}
+          partition={step?.partitionA ?? 0}
+          low={step?.low ?? 0}
+          high={step?.high ?? prepared.searchArray.length}
+          showRange
+          showBounds
+          colorClass="a-tape"
+        />
+
+        <ArrayTape
+          title="B"
+          subtitle={`other array (${prepared.swapped ? "nums1" : "nums2"})`}
+          values={prepared.otherArray}
+          partition={step?.partitionB ?? leftSize}
+          low={null}
+          high={null}
+          showRange={false}
+          showBounds={false}
+          colorClass="b-tape"
+        />
+      </div>
+    </div>
+  );
+
+  const secondaryPanel = (
+    <div className="median-panel median-math-panel">
+      <div className="median-panel-head">
+        <span>Partition Math & Verdict</span>
+        <span className="median-badge neutral">LeetCode 4</span>
+      </div>
+
+      <div className="median-panel-body">
+        <div className="median-result-box">
+          <div className="median-result-title">Current median</div>
+          <div
+            className={`median-result-value ${step?.result === true ? "success" : step?.result === false ? "danger" : "neutral"}`}
+          >
+            {step?.phase === "found" || step?.phase === "done"
+              ? formatMedian(step?.median)
+              : "In progress"}
+          </div>
+          <div className="median-result-subtext">
+            {step?.phase === "found"
+              ? evenTotal
+                ? "Even total length: average the largest value on the left and the smallest value on the right."
+                : "Odd total length: the median is the largest value on the left half."
+              : step?.phase === "move_left"
+                ? "Cut A is too far right, so shift left. The leftA → rightB check failed."
+                : step?.phase === "move_right"
+                  ? "Cut A is too far left, so shift right. The leftB → rightA check failed."
+                  : "Watch the partitions move until both sides match."}
+          </div>
+        </div>
+
+        <ComparisonBoard step={step} />
+
+        <div className="median-metric-grid">
+          <MetricCard
+            label="m"
+            value={step?.m ?? prepared.searchArray.length}
+            tone="blue"
+          />
+          <MetricCard
+            label="n"
+            value={step?.n ?? prepared.otherArray.length}
+            tone="cyan"
+          />
+          <MetricCard label="half" value={leftSize} tone="amber" />
+          <MetricCard
+            label="cutA"
+            value={step?.partitionA ?? 0}
+            tone="blue"
+          />
+          <MetricCard
+            label="cutB"
+            value={step?.partitionB ?? leftSize}
+            tone="cyan"
+          />
+          <MetricCard
+            label="iteration"
+            value={step?.iteration ?? 0}
+            tone="amber"
+          />
+        </div>
+
+        <div className="median-condition-box">
+          <div className="median-condition-row">
+            <span className="median-condition-label">leftA ≤ rightB</span>
+            <span
+              className={`median-condition-pill ${step?.conditionA === true ? "ok" : step?.conditionA === false ? "bad" : "neutral"}`}
+            >
+              {step?.conditionA === undefined
+                ? "—"
+                : String(step.conditionA)}
+            </span>
+          </div>
+          <div className="median-condition-row">
+            <span className="median-condition-label">leftB ≤ rightA</span>
+            <span
+              className={`median-condition-pill ${step?.conditionB === true ? "ok" : step?.conditionB === false ? "bad" : "neutral"}`}
+            >
+              {step?.conditionB === undefined
+                ? "—"
+                : String(step.conditionB)}
+            </span>
+          </div>
+          <div className="median-condition-row summary">
+            <span className="median-condition-label">Decision</span>
+            <span className="median-condition-pill neutral">
+              {step?.decision || "—"}
+            </span>
+          </div>
+        </div>
+
+        <div className="median-boundary-box">
+          <div className="median-boundary-title">Boundary values</div>
+          <div className="median-boundary-grid">
+            <div>
+              <span className="key">maxLeftA</span>
+              <span>{formatValue(step?.maxLeftA)}</span>
+            </div>
+            <div>
+              <span className="key">minRightA</span>
+              <span>{formatValue(step?.minRightA)}</span>
+            </div>
+            <div>
+              <span className="key">maxLeftB</span>
+              <span>{formatValue(step?.maxLeftB)}</span>
+            </div>
+            <div>
+              <span className="key">minRightB</span>
+              <span>{formatValue(step?.minRightB)}</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="median-history-box">
+          <div className="median-history-title">Iteration history</div>
+          {history.length === 0 ? (
+            <div className="median-history-empty">
+              No partition attempts yet.
+            </div>
+          ) : (
+            history.map((entry) => (
+              <div
+                key={`${entry.phase}-${entry.iteration}-${entry.partitionA ?? "na"}`}
+                className="median-history-row"
+              >
+                <span className="median-history-step">
+                  #{entry.iteration}
+                </span>
+                <span className="median-history-text">
+                  cutA={entry.partitionA} cutB={entry.partitionB} →{" "}
+                  {entry.decision}
+                </span>
+              </div>
+            ))
           )}
         </div>
       </div>
+    </div>
+  );
 
-      <div
-        className={`median-status ${step?.phase === "found" || step?.phase === "done" ? "success" : step?.phase === "move_left" || step?.phase === "move_right" ? "update" : ""}`}
-      >
-        {step?.message || "Press Play or Step to begin."}
-      </div>
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
 
-      <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={MEDIAN_PATTERNS} />
-        )}
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
         />
-      </FloatingPanel>
+      )}
+    </div>
+  );
+
+  const statusPanel = (
+    <div
+      className={`median-status ${step?.phase === "found" || step?.phase === "done" ? "success" : step?.phase === "move_left" || step?.phase === "move_right" ? "update" : ""}`}
+    >
+      {step?.message || "Press Play or Step to begin."}
+    </div>
+  );
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={MEDIAN_PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  );
+
+  // Lumino layout config & state
+  const [panelDivs, setPanelDivs] = useState(null);
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Inputs & Examples', dockMode: 'split-right' },
+      { id: 'state', title: 'Partition Visualization', dockMode: 'split-right' },
+      { id: 'secondary', title: 'Partition Math & Verdict', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'tab-after' },
+    ],
+    []
+  );
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
+
+  return (
+    <div className="median-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+          {panelDivs.secondary && createPortal(secondaryPanel, panelDivs.secondary)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   );
 }
