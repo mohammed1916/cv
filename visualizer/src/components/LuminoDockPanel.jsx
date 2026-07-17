@@ -14,7 +14,7 @@ export default function LuminoDockPanel({ panels, onPanelReady }) {
     if (!containerRef.current) return
     const container = containerRef.current
 
-    const dock = new DockPanel({ spacing: 4 })
+    const dock = new DockPanel({ spacing: 6 })
     dock.id = 'dock'
     dockRef.current = dock
 

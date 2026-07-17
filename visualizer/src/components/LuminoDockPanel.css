@@ -1,7 +1,12 @@
 /* Import Lumino's structural widget styles (positioning, layout, resize handles) */
 @import '@lumino/widgets/style/index.css';
 
+/* Local tokens so the divider highlight is bright regardless of the faint --border */
 .lumino-dock-container {
+  --lm-divider: rgba(148, 163, 184, 0.35); /* clearly visible slate divider */
+  --lm-divider-hover: var(--info, #38bdf8); /* bright cyan on hover */
+  --lm-panel-border: rgba(148, 163, 184, 0.22);
+
   position: absolute;
   top: 0;
   left: 0;
@@ -10,93 +15,141 @@
   overflow: hidden;
 }
 
-/* Lumino base styles */
-.lumino-DockPanel {
-  background: var(--surface-1);
-  color: var(--text-main);
+/* ── Dock panel background ─────────────────────────── */
+.lm-DockPanel {
+  background: var(--surface, #0f0f24);
+  color: var(--text, #f1f5f9);
 }
 
-.lumino-DockPanel-handle {
-  background: var(--border);
-  opacity: 0.5;
+/* ── Each panel gets a visible border so its bounds are clear ── */
+.lumino-panel-widget {
+  border: 1px solid var(--lm-panel-border);
+  border-radius: 8px;
+  background: var(--surface, #0f0f24);
 }
 
-.lumino-DockPanel-handle:hover {
-  opacity: 1;
+/* ── Resize handles: always visible, high-contrast ── */
+.lm-DockPanel-handle {
+  transition: background 0.15s ease, box-shadow 0.15s ease;
 }
 
-.lumino-TabBar {
-  background: var(--surface-2);
-  border-bottom: 1px solid var(--border);
+/* Bright center line on each handle so the divider always reads */
+.lm-DockPanel-handle[data-orientation='horizontal'] {
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--lm-divider) 30%,
+    var(--lm-divider) 70%,
+    transparent 100%
+  );
 }
 
-.lumino-TabBar-content {
-  min-height: 36px;
+.lm-DockPanel-handle[data-orientation='vertical'] {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--lm-divider) 30%,
+    var(--lm-divider) 70%,
+    transparent 100%
+  );
 }
 
-.lumino-TabBar-tab {
-  padding: 8px 16px;
-  color: var(--text-secondary);
+/* Bright accent + glow on hover so it's obvious the divider is draggable */
+.lm-DockPanel-handle:hover {
+  background: var(--lm-divider-hover) !important;
+  box-shadow: 0 0 8px 1px rgba(56, 189, 248, 0.6);
+}
+
+/* ── Tab bars ──────────────────────────────────────── */
+.lm-DockPanel-tabBar {
+  background: var(--surface2, #17172e);
+}
+
+.lm-TabBar {
+  background: var(--surface2, #17172e);
+  border-bottom: 1px solid var(--lm-panel-border);
+}
+
+.lm-TabBar-content {
+  min-height: 34px;
+}
+
+.lm-TabBar-tab {
+  padding: 7px 16px;
+  color: var(--text-muted, #94a3b8);
+  background: var(--surface2, #17172e);
+  border-right: 1px solid var(--lm-panel-border);
   border-bottom: 2px solid transparent;
   cursor: pointer;
   user-select: none;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
-.lumino-TabBar-tab:hover {
-  background: var(--surface-3);
+.lm-TabBar-tab:hover {
+  background: var(--surface3, #21213a);
+  color: var(--text, #f1f5f9);
 }
 
-.lumino-TabBar-tab.p-mod-current {
-  color: var(--text-main);
-  background: var(--surface-1);
-  border-bottom-color: var(--accent);
+/* Active tab: strong highlight bar + surface change */
+.lm-TabBar-tab.lm-mod-current {
+  color: var(--text, #f1f5f9);
+  background: var(--surface, #0f0f24);
+  border-bottom-color: var(--info, #38bdf8);
 }
 
-.lumino-TabBar-tabCloseIcon {
-  margin-left: 8px;
+.lm-TabBar-tabLabel {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.lm-TabBar-tabCloseIcon {
+  margin-left: 10px;
   cursor: pointer;
-}
-
-.lumino-TabBar-tabCloseIcon:hover {
-  opacity: 0.7;
-}
-
-.react-widget {
+  border-radius: 4px;
+  width: 16px;
+  height: 16px;
   display: flex;
-  flex-direction: column;
-  background: var(--surface-1);
-  color: var(--text-main);
-  overflow: hidden;
+  align-items: center;
+  justify-content: center;
 }
 
-.react-widget > div {
-  flex: 1;
-  overflow: auto;
-  display: flex;
-  flex-direction: column;
+.lm-TabBar-tabCloseIcon:hover {
+  background: rgba(248, 113, 113, 0.2);
 }
 
-/* Lumino drag overlay */
-.lumino-drop-indicator {
-  border: 2px solid var(--accent);
-  opacity: 0.7;
+.lm-TabBar-tabCloseIcon:before {
+  content: '×';
+  font-size: 16px;
+  line-height: 1;
+  color: var(--text-muted, #94a3b8);
 }
 
-/* Custom scrollbar for panels */
-.react-widget ::-webkit-scrollbar {
+.lm-TabBar-tabCloseIcon:hover:before {
+  color: var(--error, #f87171);
+}
+
+/* ── Drag overlay (drop zone indicator) ────────────── */
+.lm-DockPanel-overlay {
+  background: rgba(56, 189, 248, 0.12);
+  border: 2px solid var(--info, #38bdf8);
+  border-radius: 6px;
+}
+
+/* ── Custom scrollbars in panels ───────────────────── */
+.lumino-panel-widget ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 
-.react-widget ::-webkit-scrollbar-track {
-  background: var(--surface-2);
+.lumino-panel-widget ::-webkit-scrollbar-track {
+  background: var(--surface2, #17172e);
 }
 
-.react-widget ::-webkit-scrollbar-thumb {
-  background: var(--border);
+.lumino-panel-widget ::-webkit-scrollbar-thumb {
+  background: var(--lm-divider);
   border-radius: 4px;
 }
 
-.react-widget ::-webkit-scrollbar-thumb:hover {
-  background: var(--text-secondary);
+.lumino-panel-widget ::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted, #94a3b8);
 }
