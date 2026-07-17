@@ -1,10 +1,10 @@
 .btlo-shell {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 16px;
-    font-family: inherit;
-    height: 100vh;
+    height: calc(100vh - 200px);
+    min-height: 480px;
+    gap: 0;
     overflow: hidden;
 }
 
@@ -12,7 +12,9 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    padding: 0 0 8px 0;
+    padding: 16px 16px 0 16px;
+    background: #0f0f1e;
+    border-bottom: 1px solid #313244;
 }
 
 .btlo-header h2 {
@@ -20,22 +22,6 @@
     font-size: 18px;
     font-weight: 600;
     color: #cdd6f4;
-}
-
-.btlo-message {
-    margin: 0;
-    font-size: 13px;
-    color: #a6adc8;
-    padding: 6px 10px;
-    background: #1e1e2e;
-    border: 1px solid #313244;
-    border-radius: 6px;
-}
-
-.btlo-message.ok {
-    color: #a6e3a1;
-    border-color: #a6e3a1;
-    background: #1e3a2e;
 }
 
 .btlo-viz-panel {
@@ -191,4 +177,32 @@
     background: #1e3a2e;
     color: #a6e3a1;
     font-weight: 700;
+}
+
+.btlo-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 14px;
+    overflow-y: auto;
+    font-family: inherit;
+}
+
+.btlo-status {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px 14px;
+    background: #0f0f1e;
+    border-top: 1px solid #313244;
+    font-size: 12px;
+    color: #a6adc8;
+    height: 100%;
+    justify-content: center;
+}
+
+.btlo-status-detail {
+    font-size: 11px;
+    color: #6c7086;
+    font-family: monospace;
 }
