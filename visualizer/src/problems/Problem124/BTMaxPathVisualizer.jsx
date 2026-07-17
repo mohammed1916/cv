@@ -1,10 +1,10 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -90,54 +90,56 @@ export default function BTMaxPathVisualizer() {
     const edges = useMemo(() => root ? buildEdges(root) : [], [root])
     const totalH = nodes.length > 0 ? (Math.max(...nodes.map((n) => n.depth), 0) + 1) * LH + 20 : 80
 
-    // Visualization component for tree and metrics
-    const TreeVisualizationComponent = useMemo(() => () => (
-        <div className="btmps-viz-container">
-            <div className="btmps-max-badge">
-                max_sum = <span className="btmps-val">{isFinite(step?.maxSum ?? -Infinity) ? step?.maxSum ?? '−∞' : '−∞'}</span>
-            </div>
+    // Step 2: Extract panels into consts
+    const primaryPanel = (
+        <div className="btmps-panel">
+            <div className="btmps-panel-head">Tree Visualization</div>
+            <div className="btmps-panel-body">
+                <div className="btmps-viz-container">
+                    <div className="btmps-max-badge">
+                        max_sum = <span className="btmps-val">{isFinite(step?.maxSum ?? -Infinity) ? step?.maxSum ?? '−∞' : '−∞'}</span>
+                    </div>
 
-            <div className="btmps-tree-panel">
-                <div className="btmps-tree-canvas" style={{ position: 'relative', width: W, height: totalH }}>
-                    <TreeCanvas3D
-                        positions={layout}
-                        edges={edges}
-                        allNodes={nodes}
-                        activeIds={step?.nodeId ? new Set([step.nodeId]) : new Set()}
-                        visitedIds={step?.gainMap ? new Set(Array.from(step.gainMap.keys())) : new Set()}
-                        queueIds={new Set()}
-                        canvasWidth={W}
-                        canvasHeight={totalH}
-                        nodeRadius={26}
-                    />
-                    {nodes.map((nd) => {
-                        const pos = layout.get(nd.id)
-                        if (!pos) return null
-                        const gainVal = step?.gainMap?.get(nd.id)
-                        return gainVal != null ? (
-                            <div key={`gain-${nd.id}`} className="btmps-gain-badge" style={{ left: pos.x + 12, top: pos.y - 30, position: 'absolute' }}>
-                                {gainVal}
-                            </div>
-                        ) : null
-                    })}
+                    <div className="btmps-tree-panel">
+                        <div className="btmps-tree-canvas" style={{ position: 'relative', width: W, height: totalH }}>
+                            <TreeCanvas3D
+                                positions={layout}
+                                edges={edges}
+                                allNodes={nodes}
+                                activeIds={step?.nodeId ? new Set([step.nodeId]) : new Set()}
+                                visitedIds={step?.gainMap ? new Set(Array.from(step.gainMap.keys())) : new Set()}
+                                queueIds={new Set()}
+                                canvasWidth={W}
+                                canvasHeight={totalH}
+                                nodeRadius={26}
+                            />
+                            {nodes.map((nd) => {
+                                const pos = layout.get(nd.id)
+                                if (!pos) return null
+                                const gainVal = step?.gainMap?.get(nd.id)
+                                return gainVal != null ? (
+                                    <div key={`gain-${nd.id}`} className="btmps-gain-badge" style={{ left: pos.x + 12, top: pos.y - 30, position: 'absolute' }}>
+                                        {gainVal}
+                                    </div>
+                                ) : null
+                            })}
+                        </div>
+                    </div>
+
+                    {step?.phase === 'update' && (
+                        <div className="btmps-path-info">
+                            Path through node: {step.pathThrough} &nbsp;|&nbsp; left_gain={step.leftGain}, right_gain={step.rightGain}
+                        </div>
+                    )}
                 </div>
             </div>
-
-            {step?.phase === 'update' && (
-                <div className="btmps-path-info">
-                    Path through node: {step.pathThrough} &nbsp;|&nbsp; left_gain={step.leftGain}, right_gain={step.rightGain}
-                </div>
-            )}
-
-            <div className="btmps-status">{step?.message || 'Press Play to begin.'}</div>
         </div>
-    ), [step, layout, edges, nodes, W, totalH])
+    )
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'input',
-            title: 'Input & Settings',
-            content: (
+    const inputPanel = (
+        <div className="btmps-panel">
+            <div className="btmps-panel-head">Input & Settings</div>
+            <div className="btmps-panel-body">
                 <div className="btmps-input-panel">
                     <div className="btmps-controls-row">
                         <div className="btmps-examples">
@@ -153,57 +155,95 @@ export default function BTMaxPathVisualizer() {
                         placeholder="e.g. -10,9,20,null,null,15,7"
                     />
                 </div>
-            ),
-        },
-        {
-            id: 'viz',
-            title: 'Tree Visualization',
-            content: <TreeVisualizationComponent />,
-        },
-        {
-            id: 'code',
-            title: 'Code Trace',
-            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
-        },
-    ], [treeInput, handleReset, applyExample, step, TreeVisualizationComponent, setActiveLineDom, autoScrollCode])
+            </div>
+        </div>
+    )
 
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                autoScroll={autoScrollCode}
+                disableResizer
+            />
+            {showPatternOverlay && (
+                <CodePatternAnnotations
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
+                />
+            )}
+        </div>
+    )
+
+    const statusPanel = (
+        <div className="btmps-status">
+            {step?.message || 'Press Play to begin.'}
+        </div>
+    )
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+            )}
+            <PlaybackControls
+                onReset={handleReset}
+                onPrev={stepBack}
+                onPlayToggle={togglePlay}
+                onNext={stepForward}
+                resetDisabled={steps.length === 0}
+                prevDisabled={stepIndex <= 0}
+                nextDisabled={steps.length === 0 || isDone}
+                isPlaying={isPlaying}
+                isDone={isDone}
+                speed={speed}
+                onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+                speedIndicator={`${speed}ms`}
+                autoScroll={autoScrollCode}
+                onAutoScrollChange={setAutoScrollCode}
+                autoScrollLabel="Auto-scroll code"
+                showAutoScroll
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                patternOverlayLabel="Show pattern overlay"
+                showPatternOverlayToggle
+            />
+        </>
+    )
+
+    // Step 3: Add state + config
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'input', title: 'Input & Settings', dockMode: 'split-right' },
+            { id: 'primary', title: 'Tree Visualization', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+    // Step 4: Replace return with portals
     return (
         <div className="btmps-shell">
-            <DockableWorkspace
-                title="Binary Tree Max Path Sum Visualizer"
-                panels={dockPanels}
-                initialLayout={{
-                    rows: [['input', 'viz'], ['code']],
-                    minimized: [],
-                }}
-            />
-
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls
-                    onReset={handleReset}
-                    onPrev={stepBack}
-                    onPlayToggle={togglePlay}
-                    onNext={stepForward}
-                    resetDisabled={steps.length === 0}
-                    prevDisabled={stepIndex <= 0}
-                    nextDisabled={steps.length === 0 || isDone}
-                    isPlaying={isPlaying}
-                    isDone={isDone}
-                    speed={speed}
-                    onSpeedChange={(event) => setSpeed(Number(event.target.value))}
-                    speedIndicator={`${speed}ms`}
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    autoScrollLabel="Auto-scroll code"
-                    showAutoScroll
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
-                />
-            </FloatingPanel>
-
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     )
 }
