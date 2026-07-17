@@ -1,9 +1,10 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
@@ -204,6 +205,7 @@ export default function BinaryTreeLevelOrderTraversalIIVisualizer() {
     const [arrInput, setArrInput] = useState('[3,9,20,null,null,15,7]')
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+    const [panelDivs, setPanelDivs] = useState(null)
 
     const { arr, inputError } = useMemo(() => {
         try {
@@ -229,96 +231,113 @@ export default function BinaryTreeLevelOrderTraversalIIVisualizer() {
     // Color level bands
     const LEVEL_COLORS = ['#89b4fa', '#a6e3a1', '#f9e2af', '#cba6f7', '#f38ba8', '#89dceb']
 
-    // Create dock panels
-    const dockPanels = useMemo(() => [
-        {
-            id: 'viz',
-            title: 'Tree Visualization',
-            subtitle: inputError ? 'Fix the input to resume playback.' : 'Visualize the BFS traversal.',
-            defaultZone: 'left',
-            content: (
-                <VisualizationPanel
-                    EXAMPLES={EXAMPLES}
-                    arrInput={arrInput}
-                    setArrInput={setArrInput}
-                    positions={positions}
-                    edges={edges}
-                    allNodes={allNodes}
-                    step={step}
-                    applyExample={applyExample}
-                    handleReset={handleReset}
-                    CANVAS_W={CANVAS_W}
-                    CANVAS_H={CANVAS_H}
-                    NODE_R={NODE_R}
-                />
-            ),
-        },
-        {
-            id: 'result',
-            title: 'Level Results (with Reversal)',
-            subtitle: step ? `Phase: ${step.phase}` : 'Levels before and after reverse.',
-            defaultZone: 'left',
-            content: (
-                <ResultPanel
-                    step={step}
-                    inputError={inputError}
-                    LEVEL_COLORS={LEVEL_COLORS}
-                />
-            ),
-        },
-        {
-            id: 'code',
-            title: 'Code Trace',
-            subtitle: step ? `Active line ${step.activeLine}` : 'Step-by-step code execution.',
-            defaultZone: 'full',
-            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
-        },
-    ], [arrInput, setArrInput, positions, edges, allNodes, step, applyExample, handleReset, inputError, setActiveLineDom, autoScrollCode])
+    // Extract panels as consts
+    const primaryPanel = (
+        <div className="btloti-panel">
+            <VisualizationPanel
+                EXAMPLES={EXAMPLES}
+                arrInput={arrInput}
+                setArrInput={setArrInput}
+                positions={positions}
+                edges={edges}
+                allNodes={allNodes}
+                step={step}
+                applyExample={applyExample}
+                handleReset={handleReset}
+                CANVAS_W={CANVAS_W}
+                CANVAS_H={CANVAS_H}
+                NODE_R={NODE_R}
+            />
+        </div>
+    )
+
+    const statePanel = (
+        <div className="btloti-panel">
+            <ResultPanel
+                step={step}
+                inputError={inputError}
+                LEVEL_COLORS={LEVEL_COLORS}
+            />
+        </div>
+    )
+
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                autoScroll={autoScrollCode}
+                disableResizer
+            />
+            {showPatternOverlay && <CodePatternAnnotations step={step} activeLineDom={activeLineDom} />}
+        </div>
+    )
+
+    const statusPanel = (
+        <div className="btloti-status">
+            <div className={`btloti-status-message ${step?.phase === 'done' ? 'ok' : ''}`}>
+                {step?.message || 'Press Play to begin.'}
+            </div>
+        </div>
+    )
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && <PatternLegend />}
+            <PlaybackControls
+                onReset={handleReset}
+                onPrev={stepBack}
+                onPlayToggle={togglePlay}
+                onNext={stepForward}
+                resetDisabled={steps.length === 0}
+                prevDisabled={stepIndex <= 0}
+                nextDisabled={steps.length === 0 || isDone}
+                isPlaying={isPlaying}
+                isDone={isDone}
+                speed={speed}
+                onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+                speedIndicator={`${speed}ms`}
+                autoScroll={autoScrollCode}
+                onAutoScrollChange={setAutoScrollCode}
+                autoScrollLabel="Auto-scroll code"
+                showAutoScroll
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                patternOverlayLabel="Show pattern overlay"
+                showPatternOverlayToggle
+            />
+        </>
+    )
+
+    // Configure Lumino panels
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Tree Visualization', dockMode: 'split-right' },
+            { id: 'state', title: 'Level Results', dockMode: 'split-right' },
+            { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
         <div className="btloti-shell">
-            <div className="btloti-header">
-                <h2>Binary Tree Level Order Traversal II</h2>
-                <p className={`btloti-message ${step?.phase === 'done' ? 'ok' : ''}`}>
-                    {step?.message || 'Press Play to begin.'}
-                </p>
-            </div>
-
-            <DockableWorkspace
-                title="BFS Level Order (Reversed) Workspace"
-                panels={dockPanels}
-                initialLayout={{
-                    rows: [['viz', 'result'], ['code']],
-                    minimized: [],
-                }}
-            />
-
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls
-                    onReset={handleReset}
-                    onPrev={stepBack}
-                    onPlayToggle={togglePlay}
-                    onNext={stepForward}
-                    resetDisabled={steps.length === 0}
-                    prevDisabled={stepIndex <= 0}
-                    nextDisabled={steps.length === 0 || isDone}
-                    isPlaying={isPlaying}
-                    isDone={isDone}
-                    speed={speed}
-                    onSpeedChange={(event) => setSpeed(Number(event.target.value))}
-                    speedIndicator={`${speed}ms`}
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    autoScrollLabel="Auto-scroll code"
-                    showAutoScroll
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
-                />
-            </FloatingPanel>
-
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     )
 }
