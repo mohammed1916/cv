@@ -553,7 +553,7 @@ export default function CodeTracePanel({
 
   return (
     <motion.div
-      className={`ctp-panel ${isInlineEditor ? "editing-below" : ""}`}
+      className={`ctp-panel ${isInlineEditor ? "editing-below" : ""} ${disableResizer ? "ctp-managed" : ""}`}
       initial={{ opacity: 0, x: 12 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.22 }}
@@ -618,7 +618,11 @@ export default function CodeTracePanel({
         ref={codeRef}
         onWheel={markManualScroll}
         onTouchMove={markManualScroll}
-        style={{ height: codeAreaHeight }}
+        style={
+          disableResizer
+            ? { flex: "1 1 auto", minHeight: 0 }
+            : { height: codeAreaHeight }
+        }
       >
         {codeLines.map(({ line, text }) => {
           const isActive = step?.activeLine === line;
@@ -648,18 +652,20 @@ export default function CodeTracePanel({
         })}
       </div>
 
-      <div
-        className={`ctp-resizer ${isResizing ? "active" : ""}`}
-        onMouseDown={startDrag}
-        onTouchStart={startDrag}
-        aria-hidden="true"
-      >
-        <ResizerHandle
-          side="center"
-          className="ctp"
-          onPointerDown={startDrag}
-        />
-      </div>
+      {!disableResizer && (
+        <div
+          className={`ctp-resizer ${isResizing ? "active" : ""}`}
+          onMouseDown={startDrag}
+          onTouchStart={startDrag}
+          aria-hidden="true"
+        >
+          <ResizerHandle
+            side="center"
+            className="ctp"
+            onPointerDown={startDrag}
+          />
+        </div>
+      )}
 
       {isInlineEditor ? (
         <motion.div

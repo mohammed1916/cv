@@ -276,6 +276,7 @@ export default function TwoSumVisualizer() {
         highlightedLines={connectivity.highlightedLines}
         onLineSelect={connectivity.handleLineSelect}
         onActiveLineDomChange={setActiveLineDom}
+        disableResizer
       />
 
       {showPatternOverlay && (
