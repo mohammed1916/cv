@@ -1,9 +1,9 @@
 ﻿import { useState, useCallback, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -12,6 +12,7 @@ import './BinaryTreeUpsideDownVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -84,89 +85,120 @@ export default function BinaryTreeUpsideDownVisualizer() {
 
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  return (
-    <div className="binary_tree_upside_down-shell">
-      <ResizableSplitPanels
-        className="binary_tree_upside_down-top-split"
-        storageKey="cpviz.split.binary-tree-upside-down.top"
-        initialLeftPercent={60}
-        minLeftPx={360}
-        minRightPx={280}
-        left={(
-          <div className="binary_tree_upside_down-panel">
-            <div className="binary_tree_upside_down-panel-head">Input & State</div>
-            <div className="binary_tree_upside_down-panel-body">
-              <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
-                {EXAMPLES?.map((ex) => (
-                  <button
-                    key={ex.label}
-                    onClick={() => applyExample(ex)}
-                    className="binary_tree_upside_down-example-btn"
-                  >
-                    {ex.label}
-                  </button>
-                )) || null}
-              </div>
+  // Extract panel constants
+  const primaryPanel = (
+    <div className="binary_tree_upside_down-panel">
+      <div className="binary_tree_upside_down-panel-head">Input & State</div>
+      <div className="binary_tree_upside_down-panel-body">
+        <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
+          {EXAMPLES?.map((ex) => (
+            <button
+              key={ex.label}
+              onClick={() => applyExample(ex)}
+              className="binary_tree_upside_down-example-btn"
+            >
+              {ex.label}
+            </button>
+          )) || null}
+        </div>
 
-              <div style={{ display: "flex", gap: 12, marginBottom: 24 }}>
-                <input
-                  value={input}
-                  onChange={(e) => { setInput(e.target.value); handleReset() }}
-                  placeholder="Enter input"
-                  className="binary_tree_upside_down-input"
-                  style={{ flex: 1 }}
-                />
-              </div>
+        <div style={{ display: "flex", gap: 12, marginBottom: 24 }}>
+          <input
+            value={input}
+            onChange={(e) => { setInput(e.target.value); handleReset() }}
+            placeholder="Enter input"
+            className="binary_tree_upside_down-input"
+            style={{ flex: 1 }}
+          />
+        </div>
 
-              <div className="binary_tree_upside_down-visualization">
-                {/* Visualization content */}
-              </div>
-            </div>
-          </div>
-        )}
-        right={(
-          <div className="binary_tree_upside_down-panel">
-            <div className="binary_tree_upside_down-panel-head">Step Details</div>
-            <div className="binary_tree_upside_down-panel-body">
-              {step && <div className="binary_tree_upside_down-details">{/* Details */}</div>}
-            </div>
-          </div>
-        )}
-      />
+        <div className="binary_tree_upside_down-visualization">
+          {/* Visualization content */}
+        </div>
+      </div>
+    </div>
+  )
 
+  const statePanel = (
+    <div className="binary_tree_upside_down-panel">
+      <div className="binary_tree_upside_down-panel-head">Step Details</div>
+      <div className="binary_tree_upside_down-panel-body">
+        {step && <div className="binary_tree_upside_down-details">{/* Details */}</div>}
+      </div>
+    </div>
+  )
+
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
       <CodeTracePanel
         step={step}
         codeLines={SOLUTION_CODE}
         highlightedLines={connectivity.highlightedLines}
         onLineSelect={connectivity.handleLineSelect}
         onActiveLineDomChange={setActiveLineDom}
+        disableResizer
       />
+      {showPatternOverlay && <CodePatternAnnotations linePatternMap={LINE_PATTERN_MAP} patterns={PATTERNS} step={step} activeLineDom={activeLineDom} />}
+    </div>
+  )
 
-      <div className={`binary_tree_upside_down-status ${step?.phase === "done" ? "success" : ""}`}>
-        {step?.message ?? "Press Play or Step to begin."}
-      </div>
+  const statusPanel = (
+    <div className={`binary_tree_upside_down-status ${step?.phase === "done" ? "success" : ""}`}>
+      {step?.message ?? "Press Play or Step to begin."}
+    </div>
+  )
 
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
 
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+  // Lumino state + config
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Input & State', dockMode: 'split-right' },
+      { id: 'state',   title: 'Step Details', dockMode: 'split-right' },
+      { id: 'code',    title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status',  title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  return (
+    <div className="binary_tree_upside_down-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.state   && createPortal(statePanel,   panelDivs.state)}
+          {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}
+          {panelDivs.status  && createPortal(statusPanel,  panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

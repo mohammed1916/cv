@@ -1,4 +1,5 @@
-﻿import DockableWorkspace from "../../components/shared/DockableWorkspace"
+﻿import { createPortal } from 'react-dom'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../components/shared/FloatingPanel"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { useState, useMemo, useCallback } from "react";
@@ -80,46 +81,98 @@ export default function BestTimeBuySellStockIIIVisualizer() {
 
     const fmt = v => v === -Infinity || v === Number.NEGATIVE_INFINITY ? "−∞" : v;
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'code',
-            title: 'Code',
-            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />
-        },
-        {
-            id: 'viz',
-            title: '📈 2 Transactions',
-            content: (
-                <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
-                    <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                        {EXAMPLES.map(e => <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : '#f1f5f9' }}>{e.label}</button>)}
+    // Extract panels into consts
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                highlightedLines={connectivity.highlightedLines}
+                onLineSelect={connectivity.handleLineSelect}
+                onActiveLineDomChange={setActiveLineDom}
+                disableResizer
+            />
+            {showPatternOverlay && <CodePatternAnnotations step={step} activeLineDom={activeLineDom} />}
+        </div>
+    )
+
+    const primaryPanel = (
+        <div className="bt3-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                {EXAMPLES.map(e => <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : '#f1f5f9' }}>{e.label}</button>)}
+            </div>
+            <svg width={SVG_W} height={SVG_H + 4} style={{ border: '1px solid #e2e8f0', borderRadius: 4 }}>
+                <polyline points={polyline} fill="none" stroke="#0ea5e9" strokeWidth="2" />
+                {prices.map((p, i) => <circle key={i} cx={10 + i * xStep} cy={SVG_H - p * yScale} r={i === idx ? 5 : 3} fill={i === idx ? '#fbbf24' : '#0ea5e9'} />)}
+                {idx >= 0 && <line x1={10 + idx * xStep} y1={0} x2={10 + idx * xStep} y2={SVG_H} stroke="#f9e2af44" strokeWidth="1" strokeDasharray="3,3" />}
+            </svg>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8 }}>
+                {[{ label: 'b1', val: fmt(b1), cls: '#fee2e2' }, { label: 's1', val: fmt(s1), cls: '#dcfce7' }, { label: 'b2', val: fmt(b2), cls: '#fee2e2' }, { label: 's2', val: fmt(s2), cls: '#dbeafe' }].map(({ label, val, cls }) => (
+                    <div key={label} style={{ padding: 8, backgroundColor: cls, borderRadius: 6, textAlign: 'center' }}>
+                        <div style={{ fontSize: 11, fontWeight: '600', color: '#1e293b', marginBottom: 4 }}>{label}</div>
+                        <motion.div key={String(val)} initial={{ scale: 1.2 }} animate={{ scale: 1 }} style={{ fontSize: 13, fontWeight: 'bold', color: '#1e293b' }}>{val}</motion.div>
                     </div>
-                    <svg width={SVG_W} height={SVG_H + 4} style={{ border: '1px solid #e2e8f0', borderRadius: 4 }}>
-                        <polyline points={polyline} fill="none" stroke="#0ea5e9" strokeWidth="2" />
-                        {prices.map((p, i) => <circle key={i} cx={10 + i * xStep} cy={SVG_H - p * yScale} r={i === idx ? 5 : 3} fill={i === idx ? '#fbbf24' : '#0ea5e9'} />)}
-                        {idx >= 0 && <line x1={10 + idx * xStep} y1={0} x2={10 + idx * xStep} y2={SVG_H} stroke="#f9e2af44" strokeWidth="1" strokeDasharray="3,3" />}
-                    </svg>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8 }}>
-                        {[{ label: 'b1', val: fmt(b1), cls: '#fee2e2' }, { label: 's1', val: fmt(s1), cls: '#dcfce7' }, { label: 'b2', val: fmt(b2), cls: '#fee2e2' }, { label: 's2', val: fmt(s2), cls: '#dbeafe' }].map(({ label, val, cls }) => (
-                            <div key={label} style={{ padding: 8, backgroundColor: cls, borderRadius: 6, textAlign: 'center' }}>
-                                <div style={{ fontSize: 11, fontWeight: '600', color: '#1e293b', marginBottom: 4 }}>{label}</div>
-                                <motion.div key={String(val)} initial={{ scale: 1.2 }} animate={{ scale: 1 }} style={{ fontSize: 13, fontWeight: 'bold', color: '#1e293b' }}>{val}</motion.div>
-                            </div>
-                        ))}
-                    </div>
-                    {step?.done && <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #86efac', textAlign: 'center', fontWeight: 600, color: '#15803d' }}>✓ Max profit = {s2}</div>}
-                </div>
-            )
-        }
-    ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx, prices, idx, b1, b2, s1, s2, fmt]);
+                ))}
+            </div>
+            {step?.done && <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #86efac', textAlign: 'center', fontWeight: 600, color: '#15803d' }}>✓ Max profit = {s2}</div>}
+        </div>
+    )
+
+    const statusPanel = (
+        <div className="bt3-status">
+            {step?.message || "Initializing..."}
+        </div>
+    )
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && <PatternLegend />}
+            <PlaybackControls
+                isPlaying={isPlaying}
+                isDone={isDone}
+                speed={speed}
+                onPlayToggle={togglePlay}
+                onPrev={stepBack}
+                onNext={stepForward}
+                onReset={handleReset}
+                prevDisabled={stepIndex < 0}
+                nextDisabled={isDone}
+                resetDisabled={stepIndex < 0}
+                onSpeedChange={e => setSpeed(Number(e.target.value))}
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                patternOverlayLabel="Show pattern overlay"
+                showPatternOverlayToggle
+            />
+        </>
+    )
+
+    // Lumino panel config
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: '📈 2 Transactions', dockMode: 'split-right' },
+            { id: 'code',    title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status',  title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
-        <div className="problem-shell">
-            <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
-            </FloatingPanel>
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+        <div className="bt3-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     );
 }

@@ -1,4 +1,5 @@
 ﻿import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -9,6 +10,7 @@ import './DecodeWaysVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
 const SOLUTION_CODE = [
     { line: 1, text: 'class Solution:' },
@@ -147,128 +149,136 @@ export default function DecodeWaysVisualizer() {
 
     const dp = step?.dp ?? []
     const currI = step?.i ?? -1
-    const maxDp = dp.length ? Math.max(...dp, 1) : 1
 
-    return (
-        <div className="dw-shell">
-            <section className="dw-panel">
-                <header className="dw-head"><span>Decode Ways · 1D DP</span></header>
-                <div className="dw-body">
-                    <div className="dw-top-row">
-                        <div className="dw-examples">
-                            {EXAMPLES.map((ex) => (
-                                <button key={ex.label} className="dw-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                            ))}
-                        </div>
-                        <div className="dw-input-group">
-                            {inputError && <span className="dw-error">{inputError}</span>}
-                            <input
-                                className="dw-input"
-                                value={sInput}
-                                onChange={(e) => { setSInput(e.target.value);
+    // Extract panels
+    const primaryPanel = (
+        <div className="dw-panel">
+            <header className="dw-head"><span>Decode Ways · 1D DP</span></header>
+            <div className="dw-body">
+                <div className="dw-top-row">
+                    <div className="dw-examples">
+                        {EXAMPLES.map((ex) => (
+                            <button key={ex.label} className="dw-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
+                        ))}
+                    </div>
+                    <div className="dw-input-group">
+                        {inputError && <span className="dw-error">{inputError}</span>}
+                        <input
+                            className="dw-input"
+                            value={sInput}
+                            onChange={(e) => { setSInput(e.target.value);
 
  handleReset() }}
-                                placeholder="226"
-                            />
-                        </div>
+                            placeholder="226"
+                        />
                     </div>
-
-                    {/* String display */}
-                    <div className="dw-str-section">
-                        <div className="dw-row-label">s</div>
-                        <div className="dw-str-row">
-                            {s.split('').map((ch, idx) => {
-                                const charIdx = currI - 1  // s[i-1] for current i
-                                const twoStart = currI - 2 // s[i-2] for two-digit
-                                const isOne = idx === charIdx
-                                const isTwo = idx === twoStart || idx === charIdx
-                                const isActive = isOne || (step?.phase === 'add_two' && isTwo)
-                                return (
-                                    <div key={idx} className={`dw-char${isOne && step?.phase !== 'zero' ? ' one' : ''}${step?.phase === 'add_two' && isTwo ? ' two' : ''}${step?.phase === 'zero' && (idx === charIdx || idx === twoStart) ? ' zero-char' : ''}`}>
-                                        {ch}
-                                        <span className="dw-char-idx">{idx}</span>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    </div>
-
-                    {/* DP table */}
-                    <div className="dw-dp-section">
-                        <div className="dw-row-label">dp</div>
-                        <div className="dw-dp-row">
-                            {dp.map((val, idx) => {
-                                const isCurr = idx === currI
-                                const isDone = step?.phase === 'done'
-                                const isResult = isDone && idx === s.length
-                                const isSrc = isCurr ? false : (idx === currI - 1 && step?.phase === 'add_one') || (idx === currI - 2 && step?.phase === 'add_two')
-                                return (
-                                    <div key={idx} className="dw-dp-col">
-                                        <motion.div
-                                            className={`dw-dp-cell${isCurr ? ' curr' : ''}${isResult ? ' result' : ''}${isSrc ? ' src' : ''}`}
-                                            animate={{ y: isCurr ? -8 : 0, scale: isCurr || isResult ? 1.1 : 1 }}
-                                            transition={{ type: 'spring', stiffness: 380, damping: 24 }}
-                                        >
-                                            {val}
-                                        </motion.div>
-                                        <span className="dw-dp-idx">[{idx}]</span>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    </div>
-
-                    {/* Decode info box */}
-                    {currI >= 2 && step?.one !== null && (
-                        <div className="dw-info-box">
-                            <span className="dw-info-item">
-                                one-digit: <strong>"{s[currI - 1]}"</strong> = {step.one}
-                                {step.one !== 0 ? <span className="ok-badge"> ✓ adds dp[{currI - 1}]</span> : <span className="fail-badge"> ✗ invalid alone</span>}
-                            </span>
-                            <span className="dw-info-item">
-                                two-digit: <strong>"{s.slice(currI - 2, currI)}"</strong> = {step.two}
-                                {step.two >= 10 && step.two <= 26 ? <span className="ok-badge"> ✓ adds dp[{currI - 2}]</span> : <span className="fail-badge"> ✗ out of range</span>}
-                            </span>
-                        </div>
-                    )}
-
-                    <AnimatePresence>
-                        {step?.phase === 'done' && (
-                            <motion.div
-                                className="dw-result"
-                                initial={{ opacity: 0, y: 8 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0 }}
-                            >
-                                {step.result} way{step.result !== 1 ? 's' : ''} to decode "{s}"
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
                 </div>
-            </section>
 
-                        <div style={{ position: "relative" }}>
-              <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+                {/* String display */}
+                <div className="dw-str-section">
+                    <div className="dw-row-label">s</div>
+                    <div className="dw-str-row">
+                        {s.split('').map((ch, idx) => {
+                            const charIdx = currI - 1  // s[i-1] for current i
+                            const twoStart = currI - 2 // s[i-2] for two-digit
+                            const isOne = idx === charIdx
+                            const isTwo = idx === twoStart || idx === charIdx
+                            return (
+                                <div key={idx} className={`dw-char${isOne && step?.phase !== 'zero' ? ' one' : ''}${step?.phase === 'add_two' && isTwo ? ' two' : ''}${step?.phase === 'zero' && (idx === charIdx || idx === twoStart) ? ' zero-char' : ''}`}>
+                                    {ch}
+                                    <span className="dw-char-idx">{idx}</span>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </div>
 
-              {showPatternOverlay && (
+                {/* DP table */}
+                <div className="dw-dp-section">
+                    <div className="dw-row-label">dp</div>
+                    <div className="dw-dp-row">
+                        {dp.map((val, idx) => {
+                            const isCurr = idx === currI
+                            const isDone = step?.phase === 'done'
+                            const isResult = isDone && idx === s.length
+                            const isSrc = isCurr ? false : (idx === currI - 1 && step?.phase === 'add_one') || (idx === currI - 2 && step?.phase === 'add_two')
+                            return (
+                                <div key={idx} className="dw-dp-col">
+                                    <motion.div
+                                        className={`dw-dp-cell${isCurr ? ' curr' : ''}${isResult ? ' result' : ''}${isSrc ? ' src' : ''}`}
+                                        animate={{ y: isCurr ? -8 : 0, scale: isCurr || isResult ? 1.1 : 1 }}
+                                        transition={{ type: 'spring', stiffness: 380, damping: 24 }}
+                                    >
+                                        {val}
+                                    </motion.div>
+                                    <span className="dw-dp-idx">[{idx}]</span>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </div>
+
+                {/* Decode info box */}
+                {currI >= 2 && step?.one !== null && (
+                    <div className="dw-info-box">
+                        <span className="dw-info-item">
+                            one-digit: <strong>"{s[currI - 1]}"</strong> = {step.one}
+                            {step.one !== 0 ? <span className="ok-badge"> ✓ adds dp[{currI - 1}]</span> : <span className="fail-badge"> ✗ invalid alone</span>}
+                        </span>
+                        <span className="dw-info-item">
+                            two-digit: <strong>"{s.slice(currI - 2, currI)}"</strong> = {step.two}
+                            {step.two >= 10 && step.two <= 26 ? <span className="ok-badge"> ✓ adds dp[{currI - 2}]</span> : <span className="fail-badge"> ✗ out of range</span>}
+                        </span>
+                    </div>
+                )}
+
+                <AnimatePresence>
+                    {step?.phase === 'done' && (
+                        <motion.div
+                            className="dw-result"
+                            initial={{ opacity: 0, y: 8 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0 }}
+                        >
+                            {step.result} way{step.result !== 1 ? 's' : ''} to decode "{s}"
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
+        </div>
+    )
+
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                disableResizer
+            />
+            {showPatternOverlay && (
                 <CodePatternAnnotations
-                  linePatterns={LINE_PATTERN_MAP}
-                  currentPhase={step?.phase}
-                  activeLineDom={activeLineDom}
-                  activeLine={step?.activeLine}
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
                 />
-              )}
-            </div>
+            )}
+        </div>
+    )
 
-            <div className={`dw-status${step?.phase === 'done' ? ' done' : ''}`}>
-                {step?.message ?? 'Press Play or Step to begin.'}
-            </div>
+    const statusPanel = (
+        <div className={`dw-status${step?.phase === 'done' ? ' done' : ''}`}>
+            {step?.message ?? 'Press Play or Step to begin.'}
+        </div>
+    )
 
-            <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={DECODEWAYS_PATTERNS} />
-        )}
-        <PlaybackControls
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={DECODEWAYS_PATTERNS} />
+            )}
+            <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward}
                 onReset={handleReset} prevDisabled={stepIndex < 0}
@@ -279,7 +289,35 @@ export default function DecodeWaysVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
-      </FloatingPanel>
+        </>
+    )
+
+    // Panel config
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Decode Ways · 1D DP', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+    return (
+        <div className="dw-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     )
 }

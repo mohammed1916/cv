@@ -999,7 +999,7 @@ export default function MedianOfTwoSortedArraysVisualizer() {
       { id: 'state', title: 'Partition Visualization', dockMode: 'split-right' },
       { id: 'secondary', title: 'Partition Math & Verdict', dockMode: 'split-right' },
       { id: 'code', title: 'Code', dockMode: 'split-bottom' },
-      { id: 'status', title: 'Status', dockMode: 'tab-after' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []
   );

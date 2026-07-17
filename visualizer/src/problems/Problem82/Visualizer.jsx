@@ -1,6 +1,7 @@
 ﻿import { useState, useMemo, useCallback } from "react"
+import { createPortal } from "react-dom"
 import { motion, AnimatePresence } from "framer-motion"
-import DockableWorkspace from "../../components/shared/DockableWorkspace"
+import LuminoDockPanel from "../../components/LuminoDockPanel"
 import FloatingPanel from "../../components/shared/FloatingPanel"
 import CodeTracePanel from "../../components/CodeTracePanel"
 import PlaybackControls from "../../components/PlaybackControls"
@@ -8,7 +9,6 @@ import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import { useAutoScroll } from "../../hooks/useAutoScroll"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
-import { getExamples } from "../../config/examplesRegistry"
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import "./Visualizer.css"
@@ -373,7 +373,7 @@ function RemoveDuplicatesFromListViz({
   )
 }
 
-function RemoveDuplicatesFromListState({ step, list }) {
+function RemoveDuplicatesFromListState({ step }) {
   return (
     <section className="rdl-panel side">
       <header className="rdl-head"><span>Algorithm State</span></header>
@@ -450,87 +450,104 @@ export default function RemoveDuplicatesFromListVisualizer() {
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
-  const dockPanels = useMemo(
-    () => [
-      {
-        id: "code",
-        title: "Code",
-        content: (
-                    <div style={{ position: "relative" }}>
-            <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE_WITH_CONNECTIVITY}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-            onActiveLineDomChange={setActiveLineDom}
-            autoScroll={autoScrollCode}
-          />
-
-            {showPatternOverlay && (
-              <CodePatternAnnotations
-                linePatterns={LINE_PATTERN_MAP}
-                currentPhase={step?.phase}
-                activeLineDom={activeLineDom}
-                activeLine={step?.activeLine}
-              />
-            )}
-          </div>
-        ),
-      },
-      {
-        id: "viz",
-        title: "Visualization",
-        content: (
-          <div className="rdl-top">
-            <RemoveDuplicatesFromListViz
-              step={step}
-              list={list}
-              inputStr={inputStr}
-              setInputStr={setInputStr}
-              handleReset={handleReset}
-              inputError={inputError}
-            />
-            <RemoveDuplicatesFromListState step={step} list={list} />
-          </div>
-        ),
-      },
-    ],
-    [step, list, inputStr, inputError, autoScrollCode, handleReset, connectivity, SOLUTION_CODE_WITH_CONNECTIVITY, setActiveLineDom],
+  // Step 3: Extract panel consts
+  const primaryPanel = (
+    <div className="rdl-panel main">
+      <RemoveDuplicatesFromListViz
+        step={step}
+        list={list}
+        inputStr={inputStr}
+        setInputStr={setInputStr}
+        handleReset={handleReset}
+        inputError={inputError}
+      />
+      <RemoveDuplicatesFromListState step={step} list={list} />
+    </div>
   )
 
-  return (
-    <div className="problem-shell">
-      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [["code", "viz"]], minimized: [] }} />
+  const codePanel = (
+    <div style={{ position: "relative", height: "100%" }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE_WITH_CONNECTIVITY}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        autoScroll={autoScrollCode}
+        disableResizer
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
+        />
+      )}
+    </div>
+  )
 
-      <FloatingPanel title="Playback Controls">
+  const statusPanel = (
+    <div className="rdl-status">
+      {step?.message ?? "Press Play or Step to begin."}
+    </div>
+  )
+
+  const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={_PATTERNS} />
       )}
-      
-        <div className="rdl-status" style={{ marginBottom: "12px" }}>
-          {step?.message ?? "Press Play or Step to begin."}
-        </div>
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showAutoScroll={true}
-          autoScroll={autoScrollCode}
-          onAutoScrollChange={setAutoScrollCode}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showAutoScroll={true}
+        autoScroll={autoScrollCode}
+        onAutoScrollChange={setAutoScrollCode}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
+
+  // Step 4: Add state + config
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: "primary", title: "Visualization", dockMode: "split-right" },
+      { id: "code", title: "Code", dockMode: "split-bottom" },
+      { id: "status", title: "Status", dockMode: "split-bottom", ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  // Step 5: Replace return with portals
+  return (
+    <div className="rdl-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

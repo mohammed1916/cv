@@ -1,19 +1,13 @@
 .tsc3-shell {
+  position: relative;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
   background: #fff;
   font-family: system-ui, -apple-system, sans-serif;
-}
-
-.tsc3-top {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  padding: 12px;
-  flex: 1;
-  overflow: hidden;
-  min-height: 0;
 }
 
 .tsc3-panel {

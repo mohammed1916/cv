@@ -1,4 +1,5 @@
 ﻿import { useState, useCallback, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -9,6 +10,7 @@ import './TrappingRainWaterVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -164,161 +166,196 @@ export default function TrappingRainWaterVisualizer() {
     return Math.max(...height, 5)
   }, [height])
 
-  return (
-    <div className="trapping-water-shell">
-      <div className="tw-top">
-        <div className="tw-panel">
-          <div className="tw-panel-head">
-            Elevation Map
-            {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
-          </div>
-          <div className="tw-panel-body">
-            <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
-              {EXAMPLES.map((ex) => (
-                <button
-                  key={ex.label}
-                  onClick={() => applyExample(ex)}
-                  className="tw-example-btn"
-                >
-                  {ex.label}
-                </button>
-              ))}
-            </div>
+  // Step 3: Extract panel consts
+  const primaryPanel = (
+    <div className="tw-panel">
+      <div className="tw-panel-head">
+        Elevation Map
+        {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
+      </div>
+      <div className="tw-panel-body">
+        <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
+          {EXAMPLES.map((ex) => (
+            <button
+              key={ex.label}
+              onClick={() => applyExample(ex)}
+              className="tw-example-btn"
+            >
+              {ex.label}
+            </button>
+          ))}
+        </div>
 
-            <input
-              value={heightInput}
-              onChange={(e) => { setHeightInput(e.target.value);
+        <input
+          value={heightInput}
+          onChange={(e) => { setHeightInput(e.target.value);
 
  handleReset() }}
-              placeholder="[0,1,0,2,1,0,1,3,2,1,2,1]"
-              className="tw-input"
-            />
+          placeholder="[0,1,0,2,1,0,1,3,2,1,2,1]"
+          className="tw-input"
+        />
 
-            <div className="tw-chart-container">
-              {height.map((h, i) => {
-                const isLeft = step?.left === i
-                const isRight = step?.right === i
-                const isActive = isLeft || isRight
-                const waterAmt = step ? step.waterAmounts[i] : 0
+        <div className="tw-chart-container">
+          {height.map((h, i) => {
+            const isLeft = step?.left === i
+            const isRight = step?.right === i
+            const isActive = isLeft || isRight
+            const waterAmt = step ? step.waterAmounts[i] : 0
 
-                return (
-                  <div key={i} className="tw-column">
-                    <div className="tw-column-value">{h + waterAmt > 0 ? (h + waterAmt === h ? h : `${h}+${waterAmt}`) : ''}</div>
-                    <div className="tw-blocks-wrapper" style={{ height: `${(Math.max(h + waterAmt, 1) / maxHeightValue) * 100}%` }}>
-                      <motion.div
-                        className="tw-water-block"
-                        style={{ height: `${(waterAmt / Math.max(h + waterAmt, 1)) * 100}%` }}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1, height: `${(waterAmt / Math.max(h + waterAmt, 1)) * 100}%` }}
-                      />
-                      <motion.div
-                        className={`tw-ground-block ${isActive ? 'active' : ''}`}
-                        style={{ height: `${(h / Math.max(h + waterAmt, 1)) * 100}%` }}
-                        layout
-                      />
-                    </div>
-                    <div className="tw-pointer-label">
-                      {isLeft ? 'L' : isRight ? 'R' : ''}
-                    </div>
-                  </div>
-                )
-              })}
-
-              {/* Max level indicators */}
-              {step && step.leftMax !== null && step.rightMax !== null && step.phase !== 'done' && (
-                <>
-                  <div
-                    className="tw-max-line left"
-                    style={{
-                      bottom: 24,
-                      height: `${(step.leftMax / maxHeightValue) * 100}%`,
-                      left: `calc(${(step.left / Math.max(height.length - 1, 1)) * 100}%)`
-                    }}
+            return (
+              <div key={i} className="tw-column">
+                <div className="tw-column-value">{h + waterAmt > 0 ? (h + waterAmt === h ? h : `${h}+${waterAmt}`) : ''}</div>
+                <div className="tw-blocks-wrapper" style={{ height: `${(Math.max(h + waterAmt, 1) / maxHeightValue) * 100}%` }}>
+                  <motion.div
+                    className="tw-water-block"
+                    style={{ height: `${(waterAmt / Math.max(h + waterAmt, 1)) * 100}%` }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1, height: `${(waterAmt / Math.max(h + waterAmt, 1)) * 100}%` }}
                   />
-                  <div
-                    className="tw-max-line right"
-                    style={{
-                      bottom: 24,
-                      height: `${(step.rightMax / maxHeightValue) * 100}%`,
-                      right: `calc(${100 - (step.right / Math.max(height.length - 1, 1)) * 100}%)`
-                    }}
+                  <motion.div
+                    className={`tw-ground-block ${isActive ? 'active' : ''}`}
+                    style={{ height: `${(h / Math.max(h + waterAmt, 1)) * 100}%` }}
+                    layout
                   />
-                </>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
+                </div>
+                <div className="tw-pointer-label">
+                  {isLeft ? 'L' : isRight ? 'R' : ''}
+                </div>
+              </div>
+            )
+          })}
 
-      <div className="trapping-water-middle">
-                <div style={{ position: "relative" }}>
-          <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-
-          {showPatternOverlay && (
-            <CodePatternAnnotations
-              linePatterns={LINE_PATTERN_MAP}
-              currentPhase={step?.phase}
-              activeLineDom={activeLineDom}
-              activeLine={step?.activeLine}
-            />
+          {/* Max level indicators */}
+          {step && step.leftMax !== null && step.rightMax !== null && step.phase !== 'done' && (
+            <>
+              <div
+                className="tw-max-line left"
+                style={{
+                  bottom: 24,
+                  height: `${(step.leftMax / maxHeightValue) * 100}%`,
+                  left: `calc(${(step.left / Math.max(height.length - 1, 1)) * 100}%)`
+                }}
+              />
+              <div
+                className="tw-max-line right"
+                style={{
+                  bottom: 24,
+                  height: `${(step.rightMax / maxHeightValue) * 100}%`,
+                  right: `calc(${100 - (step.right / Math.max(height.length - 1, 1)) * 100}%)`
+                }}
+              />
+            </>
           )}
         </div>
+      </div>
+    </div>
+  )
 
-        <div className="tw-panel">
-          <div className="tw-panel-head">Variables</div>
-          <div className="tw-panel-body">
-            <div className="tw-vars">
-              <div className="tw-var-row">
-                <span className="tw-var-name">left</span>
-                <span className="tw-var-val">{step?.left ?? '–'}</span>
-              </div>
-              <div className="tw-var-row">
-                <span className="tw-var-name">right</span>
-                <span className="tw-var-val">{step?.right ?? '–'}</span>
-              </div>
-              <div className="tw-var-row">
-                <span className="tw-var-name">left_max</span>
-                <span className="tw-var-val">{step?.leftMax ?? '–'}</span>
-              </div>
-              <div className="tw-var-row">
-                <span className="tw-var-name">right_max</span>
-                <span className="tw-var-val">{step?.rightMax ?? '–'}</span>
-              </div>
-              <div className="tw-var-row" style={{ borderColor: '#3b82f6' }}>
-                <span className="tw-var-name">water</span>
-                <span className="tw-var-val" style={{ color: '#60a5fa' }}>{step?.water ?? '–'}</span>
-              </div>
-            </div>
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} disableResizer />
+
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
+        />
+      )}
+    </div>
+  )
+
+  const statePanel = (
+    <div className="tw-panel">
+      <div className="tw-panel-head">Variables</div>
+      <div className="tw-panel-body">
+        <div className="tw-vars">
+          <div className="tw-var-row">
+            <span className="tw-var-name">left</span>
+            <span className="tw-var-val">{step?.left ?? '–'}</span>
+          </div>
+          <div className="tw-var-row">
+            <span className="tw-var-name">right</span>
+            <span className="tw-var-val">{step?.right ?? '–'}</span>
+          </div>
+          <div className="tw-var-row">
+            <span className="tw-var-name">left_max</span>
+            <span className="tw-var-val">{step?.leftMax ?? '–'}</span>
+          </div>
+          <div className="tw-var-row">
+            <span className="tw-var-name">right_max</span>
+            <span className="tw-var-val">{step?.rightMax ?? '–'}</span>
+          </div>
+          <div className="tw-var-row" style={{ borderColor: '#3b82f6' }}>
+            <span className="tw-var-name">water</span>
+            <span className="tw-var-val" style={{ color: '#60a5fa' }}>{step?.water ?? '–'}</span>
           </div>
         </div>
       </div>
+    </div>
+  )
 
-      <div className={`tw-status ${step?.phase === 'add_water' ? 'found' : ''}`}>
-        {step?.message ?? 'Press Play or Step to begin.'}
-      </div>
+  const statusPanel = (
+    <div className={`tw-status ${step?.phase === 'add_water' ? 'found' : ''}`}>
+      {step?.message ?? 'Press Play or Step to begin.'}
+    </div>
+  )
 
-      <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={TRAPPINGRAINWATER_PATTERNS} />
-        )}
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={TRAPPINGRAINWATER_PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
+
+  // Step 4: Add state + config
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Elevation Map', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'state', title: 'Variables', dockMode: 'split-right' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  // Step 5: Replace return with portals
+  return (
+    <div className="trapping-water-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

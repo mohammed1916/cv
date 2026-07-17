@@ -1,6 +1,28 @@
-.problem-shell {
+.llc2-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+}
+
+.llc2-panel {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #0f172a;
+  padding: 0;
+  overflow: auto;
+}
+
+.llc2-status {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  background: #1e293b;
+  border-top: 1px solid #334155;
+  padding: 0;
+  overflow: hidden;
 }

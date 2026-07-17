@@ -1,4 +1,5 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -10,6 +11,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './ContainerWithMostWaterVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
 const CMW_PATTERNS = ['init', 'compute', 'update', 'skip', 'move']
 
@@ -181,148 +183,184 @@ export default function ContainerWithMostWaterVisualizer() {
     return Math.max(...height, 1)
   }, [height])
 
-  return (
-    <div className="container-water-shell">
-      <div className="container-water-top">
-        <div className="cw-panel">
-          <div className="cw-panel-head">
-            Input Array (Heights)
-            {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
-          </div>
-          <div className="cw-panel-body">
-            <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
-              {EXAMPLES.map((ex) => (
-                <button
-                  key={ex.label}
-                  onClick={() => applyExample(ex)}
-                  className="cw-example-btn"
-                >
-                  {ex.label}
-                </button>
-              ))}
-            </div>
-
-            <input
-              value={heightInput}
-              onChange={(e) => { setHeightInput(e.target.value); handleReset() }}
-              placeholder="[1,8,6,2,5,4,8,3,7]"
-              className="cw-input"
-            />
-
-            <div className="cw-chart-container">
-              {step && step.left !== null && step.right !== null && step.phase !== 'done' && (
-                <div
-                  className="cw-water-fill"
-                  style={{
-                    left: `calc(${(step.left / Math.max(height.length - 1, 1)) * 100}% + 12px)`,
-                    right: `calc(${100 - (step.right / Math.max(height.length - 1, 1)) * 100}% - 12px)`,
-                    height: `${(Math.min(height[step.left], height[step.right]) / maxHeightValue) * 100}%`,
-                  }}
-                />
-              )}
-              {height.map((h, i) => {
-                const isLeft = step?.left === i
-                const isRight = step?.right === i
-                const isActive = isLeft || isRight
-
-                return (
-                  <div key={i} className="cw-bar-wrapper">
-                    <div className="cw-bar-value">{h}</div>
-                    <motion.div
-                      className={`cw-bar ${isActive ? 'active' : ''}`}
-                      style={{ height: `${(h / maxHeightValue) * 100}%` }}
-                      layout
-                    />
-                    <div className="cw-pointer-label">
-                      {isLeft ? 'L' : isRight ? 'R' : ''}
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        </div>
+  // Extract panels into consts (Step 3)
+  const primaryPanel = (
+    <div className="cw-panel">
+      <div className="cw-panel-head">
+        Input Array (Heights)
+        {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
       </div>
+      <div className="cw-panel-body">
+        <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
+          {EXAMPLES.map((ex) => (
+            <button
+              key={ex.label}
+              onClick={() => applyExample(ex)}
+              className="cw-example-btn"
+            >
+              {ex.label}
+            </button>
+          ))}
+        </div>
 
-      <div className="container-water-middle">
-        <div style={{ position: 'relative' }}>
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-            onActiveLineDomChange={setActiveLineDom}
-          />
+        <input
+          value={heightInput}
+          onChange={(e) => { setHeightInput(e.target.value); handleReset() }}
+          placeholder="[1,8,6,2,5,4,8,3,7]"
+          className="cw-input"
+        />
 
-          {showPatternOverlay && (
-            <CodePatternAnnotations
-              linePatterns={LINE_PATTERN_MAP}
-              currentPhase={step?.phase}
-              activeLineDom={activeLineDom}
-              activeLine={step?.activeLine}
+        <div className="cw-chart-container">
+          {step && step.left !== null && step.right !== null && step.phase !== 'done' && (
+            <div
+              className="cw-water-fill"
+              style={{
+                left: `calc(${(step.left / Math.max(height.length - 1, 1)) * 100}% + 12px)`,
+                right: `calc(${100 - (step.right / Math.max(height.length - 1, 1)) * 100}% - 12px)`,
+                height: `${(Math.min(height[step.left], height[step.right]) / maxHeightValue) * 100}%`,
+              }}
             />
           )}
-        </div>
+          {height.map((h, i) => {
+            const isLeft = step?.left === i
+            const isRight = step?.right === i
+            const isActive = isLeft || isRight
 
-        <div className="cw-panel">
-          <div className="cw-panel-head">Variables</div>
-          <div className="cw-panel-body">
-            <div className="cw-vars">
-              <div className="cw-var-row">
-                <span className="cw-var-name">left</span>
-                <span className="cw-var-val">{step?.left ?? '–'}</span>
+            return (
+              <div key={i} className="cw-bar-wrapper">
+                <div className="cw-bar-value">{h}</div>
+                <motion.div
+                  className={`cw-bar ${isActive ? 'active' : ''}`}
+                  style={{ height: `${(h / maxHeightValue) * 100}%` }}
+                  layout
+                />
+                <div className="cw-pointer-label">
+                  {isLeft ? 'L' : isRight ? 'R' : ''}
+                </div>
               </div>
-              <div className="cw-var-row">
-                <span className="cw-var-name">right</span>
-                <span className="cw-var-val">{step?.right ?? '–'}</span>
-              </div>
-              <div className="cw-var-row">
-                <span className="cw-var-name">height[left]</span>
-                <span className="cw-var-val">{step ? height[step.left] : '–'}</span>
-              </div>
-              <div className="cw-var-row">
-                <span className="cw-var-name">height[right]</span>
-                <span className="cw-var-val">{step ? height[step.right] : '–'}</span>
-              </div>
-              <div className="cw-var-row">
-                <span className="cw-var-name">current_area</span>
-                <span className="cw-var-val">{step?.currentArea ?? '–'}</span>
-              </div>
-              <div className="cw-var-row" style={{ borderColor: '#22c55e' }}>
-                <span className="cw-var-name">max_area</span>
-                <span className="cw-var-val highlight">{step?.maxArea ?? '–'}</span>
-              </div>
-            </div>
+            )
+          })}
+        </div>
+      </div>
+    </div>
+  )
+
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
+        />
+      )}
+    </div>
+  )
+
+  const statePanel = (
+    <div className="cw-panel">
+      <div className="cw-panel-head">Variables</div>
+      <div className="cw-panel-body">
+        <div className="cw-vars">
+          <div className="cw-var-row">
+            <span className="cw-var-name">left</span>
+            <span className="cw-var-val">{step?.left ?? '–'}</span>
+          </div>
+          <div className="cw-var-row">
+            <span className="cw-var-name">right</span>
+            <span className="cw-var-val">{step?.right ?? '–'}</span>
+          </div>
+          <div className="cw-var-row">
+            <span className="cw-var-name">height[left]</span>
+            <span className="cw-var-val">{step ? height[step.left] : '–'}</span>
+          </div>
+          <div className="cw-var-row">
+            <span className="cw-var-name">height[right]</span>
+            <span className="cw-var-val">{step ? height[step.right] : '–'}</span>
+          </div>
+          <div className="cw-var-row">
+            <span className="cw-var-name">current_area</span>
+            <span className="cw-var-val">{step?.currentArea ?? '–'}</span>
+          </div>
+          <div className="cw-var-row" style={{ borderColor: '#22c55e' }}>
+            <span className="cw-var-name">max_area</span>
+            <span className="cw-var-val highlight">{step?.maxArea ?? '–'}</span>
           </div>
         </div>
       </div>
+    </div>
+  )
 
-      <div className={`cw-status ${step?.phase === 'update' ? 'found' : ''}`}>
-        {step?.message ?? 'Press Play or Step to begin.'}
-      </div>
+  const statusPanel = (
+    <div className={`cw-status ${step?.phase === 'update' ? 'found' : ''}`}>
+      {step?.message ?? 'Press Play or Step to begin.'}
+    </div>
+  )
 
-      <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={CMW_PATTERNS} />
-        )}
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={CMW_PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
+
+  // State + config for Lumino (Step 4)
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Input Array (Heights)', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'state', title: 'Variables', dockMode: 'split-right' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  // Replace return with portals (Step 5)
+  return (
+    <div className="container-water-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

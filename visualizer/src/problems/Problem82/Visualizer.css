@@ -1,3 +1,13 @@
+.rdl-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+}
+
 .rdl-panel {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
@@ -6,15 +16,12 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  height: 100%;
+  overflow: auto;
 }
 
 .rdl-panel.main {
   flex: 1;
-}
-
-.rdl-panel.side {
-  width: 280px;
-  border-left: 2px solid #e2e8f0;
 }
 
 .rdl-head {
@@ -308,11 +315,6 @@
   min-height: 36px;
 }
 
-.rdl-top {
-  display: flex;
-  height: 100%;
-  gap: 16px;
-}
 
 .rdl-removed-visual {
   opacity: 0.3;

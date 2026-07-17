@@ -1,11 +1,12 @@
 ﻿import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
-import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
@@ -457,85 +458,100 @@ export default function PalindromeNumberVisualizer() {
     return seen
   }, [steps, stepIndex])
 
-  const dockPanels = useMemo(() => [
-    {
-      id: 'code',
-      title: 'Code',
-      component: (
-        <div style={{ position: 'relative' }}>
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-            onActiveLineDomChange={setActiveLineDom}
-          />
+  const [panelDivs, setPanelDivs] = useState(null)
 
-          {showPatternOverlay && (
-            <CodePatternAnnotations
-              linePatterns={LINE_PATTERN_MAP}
-              currentPhase={step?.phase}
-              activeLineDom={activeLineDom}
-              activeLine={step?.activeLine}
-            />
-          )}
+  const codePanel = (
+    <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0 }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
+        />
+      )}
+    </div>
+  )
+
+  const mainPanel = (
+    <div className="pn-viz-container">
+      <div className="pn-state-grid">
+        <StateCard label="Original" value={step?.orig ?? '—'} accent="primary" />
+        <StateCard label="Current rev" value={step?.rev ?? 0} accent="success" />
+        <StateCard label="Current x" value={step?.x ?? '—'} accent="cyan" />
+        <StateCard label="Iteration" value={step?.phase === 'advance' || step?.phase === 'compare' || step?.phase === 'done' ? activeIteration : 0} accent="amber" />
+      </div>
+      <div className="pn-flow-visual">
+        <DigitTape
+          label="x tape"
+          value={step?.x ?? num ?? 0}
+          digits={step?.xDigits || stepDigits(num || 0)}
+          pointerLabel="x"
+          pointerIndex={step?.xDigits ? step.xDigits.length - 1 : 0}
+          tone="cyan"
+          note={step?.phase === 'negative' ? 'stop' : step?.phase === 'trailing-zero' ? 'early exit' : undefined}
+        />
+        <div className="pn-connector">
+          <div className="pn-connector-line" />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`${step?.phase || 'idle'}-${step?.digit ?? 'none'}`}
+              className="pn-digit-bubble"
+              initial={{ scale: 0.7, opacity: 0, y: 10 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.7, opacity: 0, y: -10 }}
+              transition={{ duration: 0.18 }}
+            >
+              {step?.digit ?? '•'}
+            </motion.div>
+          </AnimatePresence>
+          <div className="pn-connector-label">extract rightmost digit</div>
         </div>
-      ),
-    },
-    {
-      id: 'viz',
-      title: 'Visualization',
-      component: (
-        <div className="pn-viz-container">
-          <div className="pn-state-grid">
-            <StateCard label="Original" value={step?.orig ?? '—'} accent="primary" />
-            <StateCard label="Current rev" value={step?.rev ?? 0} accent="success" />
-            <StateCard label="Current x" value={step?.x ?? '—'} accent="cyan" />
-            <StateCard label="Iteration" value={step?.phase === 'advance' || step?.phase === 'compare' || step?.phase === 'done' ? activeIteration : 0} accent="amber" />
-          </div>
-          <div className="pn-flow-visual">
-            <DigitTape
-              label="x tape"
-              value={step?.x ?? num ?? 0}
-              digits={step?.xDigits || stepDigits(num || 0)}
-              pointerLabel="x"
-              pointerIndex={step?.xDigits ? step.xDigits.length - 1 : 0}
-              tone="cyan"
-              note={step?.phase === 'negative' ? 'stop' : step?.phase === 'trailing-zero' ? 'early exit' : undefined}
-            />
-            <div className="pn-connector">
-              <div className="pn-connector-line" />
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={`${step?.phase || 'idle'}-${step?.digit ?? 'none'}`}
-                  className="pn-digit-bubble"
-                  initial={{ scale: 0.7, opacity: 0, y: 10 }}
-                  animate={{ scale: 1, opacity: 1, y: 0 }}
-                  exit={{ scale: 0.7, opacity: 0, y: -10 }}
-                  transition={{ duration: 0.18 }}
-                >
-                  {step?.digit ?? '•'}
-                </motion.div>
-              </AnimatePresence>
-              <div className="pn-connector-label">extract rightmost digit</div>
-            </div>
-            <DigitTape
-              label="rev tape"
-              value={step?.phase === 'build' ? (step?.nextRev ?? step?.rev ?? 0) : (step?.rev ?? 0)}
-              digits={step?.phase === 'build' && step?.previewRevDigits ? step.previewRevDigits : (step?.revDigits || stepDigits(0))}
-              pointerLabel="rev"
-              pointerIndex={step?.phase === 'build' && step?.previewRevDigits ? step.previewRevDigits.length - 1 : (step?.revDigits ? step.revDigits.length - 1 : 0)}
-              tone="green"
-              note={step?.phase === 'compare' ? 'final compare' : step?.phase === 'done' ? 'answer' : undefined}
-            />
-          </div>
-        </div>
-      ),
-    },
-  ], [step, num, connectivity, activeIteration])
+        <DigitTape
+          label="rev tape"
+          value={step?.phase === 'build' ? (step?.nextRev ?? step?.rev ?? 0) : (step?.rev ?? 0)}
+          digits={step?.phase === 'build' && step?.previewRevDigits ? step.previewRevDigits : (step?.revDigits || stepDigits(0))}
+          pointerLabel="rev"
+          pointerIndex={step?.phase === 'build' && step?.previewRevDigits ? step.previewRevDigits.length - 1 : (step?.revDigits ? step.revDigits.length - 1 : 0)}
+          tone="green"
+          note={step?.phase === 'compare' ? 'final compare' : step?.phase === 'done' ? 'answer' : undefined}
+        />
+      </div>
+    </div>
+  )
+
+  const statusPanel = (
+    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '12px 16px', minHeight: 0 }}>
+      <div className={`pn-status ${step?.result === true ? 'success' : step?.result === false ? 'danger' : ''}`}>
+        {step?.message || 'Press Play or Step to begin.'}
+      </div>
+    </div>
+  )
+
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'main', title: 'Visualizer', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+
+  const handlePanelReady = useCallback((divs) => {
+    setPanelDivs(divs)
+  }, [])
 
   return (
-    <div className="pn-shell">
+    <div className="pn-shell" style={{ height: 'calc(100vh - 200px)', minHeight: '480px', display: 'flex', flexDirection: 'column' }}>
       <FloatingPanel title="Input & Examples" className="pn-input-panel">
         <div className="pn-example-row">
           {EXAMPLES.map((ex) => (
@@ -601,34 +617,40 @@ export default function PalindromeNumberVisualizer() {
         </div>
       </FloatingPanel>
 
-      <DockableWorkspace panels={dockPanels} storageKey="pn-dock" />
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.main && createPortal(mainPanel, panelDivs.main)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
 
-      <div className={`pn-status ${step?.result === true ? 'success' : step?.result === false ? 'danger' : ''}`}>
-        {step?.message || 'Press Play or Step to begin.'}
-      </div>
-
-      <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PN_PATTERNS} />
-        )}
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
+      {createPortal(
+        <FloatingPanel title="Playback Controls">
+          {showPatternOverlay && (
+            <PatternLegend currentPhase={step?.phase} usedPatterns={PN_PATTERNS} />
+          )}
+          <PlaybackControls
+            isPlaying={isPlaying}
+            isDone={isDone}
+            speed={speed}
+            onPlayToggle={togglePlay}
+            onPrev={stepBack}
+            onNext={stepForward}
+            onReset={handleReset}
+            prevDisabled={stepIndex < 0}
+            nextDisabled={isDone}
+            resetDisabled={stepIndex < 0}
+            onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+            showPatternOverlay={showPatternOverlay}
+            onShowPatternOverlayChange={setShowPatternOverlay}
+            patternOverlayLabel="Show pattern overlay"
+            showPatternOverlayToggle
+          />
+        </FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

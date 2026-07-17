@@ -1,9 +1,9 @@
 ﻿import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
@@ -214,51 +214,81 @@ export default function CombinationsVisualizer() {
 
     const applyExample = useCallback((ex) => { setNInput(String(ex.n)); setKInput(String(ex.k)); handleReset() }, [handleReset])
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'viz',
-            title: 'Visualization',
-            content: <VisualizationPanel EXAMPLES={EXAMPLES} applyExample={applyExample} nInput={nInput} setNInput={setNInput} kInput={kInput} setKInput={setKInput} n={n} k={k} inputError={inputError} handleReset={handleReset} step={step} />,
-        },
-        {
-            id: 'code',
-            title: 'Code',
-            content:             <div style={{ position: "relative" }}>
-              <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />
+    // Step 2: Extract panels into consts
+    const primaryPanel = (
+        <div className="comb-panel-wrapper">
+            <VisualizationPanel EXAMPLES={EXAMPLES} applyExample={applyExample} nInput={nInput} setNInput={setNInput} kInput={kInput} setKInput={setKInput} n={n} k={k} inputError={inputError} handleReset={handleReset} step={step} />
+        </div>
+    )
 
-              {showPatternOverlay && (
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} disableResizer />
+            {showPatternOverlay && (
                 <CodePatternAnnotations
-                  linePatterns={LINE_PATTERN_MAP}
-                  currentPhase={step?.phase}
-                  activeLineDom={activeLineDom}
-                  activeLine={step?.activeLine}
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
                 />
-              )}
-            </div>,
-        },
-    ], [step, autoScrollCode, nInput, kInput, n, k, inputError])
+            )}
+        </div>
+    )
 
+    const statusPanel = (
+        <div className="comb-status">
+            {step?.message || 'Press Play to begin.'}
+        </div>
+    )
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={COMBINATIONS_PATTERNS} />
+            )}
+            <PlaybackControls
+                isPlaying={isPlaying} isDone={isDone} speed={speed}
+                onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
+                prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
+                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+                autoScroll={autoScrollCode}
+                onAutoScrollChange={setAutoScrollCode}
+                showAutoScroll
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                patternOverlayLabel="Show pattern overlay"
+                showPatternOverlayToggle
+            />
+        </>
+    )
+
+    // Step 3: Add state + config
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+    // Step 4: Replace return with portals
     return (
-        <div className="problem-shell">
-            <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['viz', 'code']], minimized: [] }} />
-            <FloatingPanel title="Playback Controls">
-                {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={COMBINATIONS_PATTERNS} />
-        )}
-        <PlaybackControls
-                    isPlaying={isPlaying} isDone={isDone} speed={speed}
-                    onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-                    prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
-                    onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    showAutoScroll
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
-                />
-            </FloatingPanel>
+        <div className="comb-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     )
 }

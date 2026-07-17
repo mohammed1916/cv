@@ -1,9 +1,10 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -158,6 +159,7 @@ function generateSteps(strs) {
 const EXAMPLES = getExamples('longest-common-prefix')
 
 function InputPanel({ strsInput, setStrsInput, handleReset, applyExample, inputError }) {
+  // InputPanel component for docking
   return (
     <div className="lcp-panel-body">
       <div className="lcp-examples">
@@ -318,6 +320,7 @@ function StatusPanel({ step }) {
 export default function LongestCommonPrefixVisualizer() {
   const [strsInput, setStrsInput] = useState('["flower", "flow", "flight"]')
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
+  const [panelDivs, setPanelDivs] = useState({})
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const { strs, inputError } = useMemo(() => {
@@ -356,67 +359,90 @@ export default function LongestCommonPrefixVisualizer() {
     [handleReset],
   )
 
-  const dockPanels = useMemo(() => [
-    {
-      id: 'input',
-      title: 'Input & Format',
-      subtitle: strsInput ? `${strs.length} string(s)` : 'Enter array of strings',
-      defaultZone: 'left',
-      content: (
-        <InputPanel
-          strsInput={strsInput}
-          setStrsInput={setStrsInput}
-          handleReset={handleReset}
-          applyExample={applyExample}
-          inputError={inputError}
+  // Extract panels into consts
+  const inputPanel = (
+    <InputPanel
+      strsInput={strsInput}
+      setStrsInput={setStrsInput}
+      handleReset={handleReset}
+      applyExample={applyExample}
+      inputError={inputError}
+    />
+  )
+
+  const stringsVizPanel = (
+    <StringsVisualizationPanel step={step} strs={strs} />
+  )
+
+  const prefixVizPanel = (
+    <PrefixPanel step={step} strs={strs} />
+  )
+
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        codeLines={SOLUTION_CODE}
+        step={step}
+        autoScroll={autoScrollCode}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
         />
-      ),
-    },
-    {
-      id: 'strings-viz',
-      title: 'Strings Grid',
-      subtitle: step ? `Step ${stepIndex + 1} of ${steps.length}` : 'Column-by-column comparison',
-      defaultZone: 'left',
-      content: <StringsVisualizationPanel step={step} strs={strs} />,
-    },
-    {
-      id: 'prefix-viz',
-      title: 'Common Prefix',
-      subtitle: `Length: ${step?.prefix?.length ?? 0}`,
-      defaultZone: 'right',
-      content: <PrefixPanel step={step} strs={strs} />,
-    },
-    {
-      id: 'code',
-      title: 'Code Trace',
-      subtitle: step ? `Active line ${step.activeLine}` : 'Line-by-line solution view',
-      defaultZone: 'full',
-      content: (
-        <div style={{ position: 'relative' }}>
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            autoScroll={autoScrollCode}
-            onActiveLineDomChange={setActiveLineDom}
-          />
-          {showPatternOverlay && (
-            <CodePatternAnnotations
-              linePatterns={LINE_PATTERN_MAP}
-              currentPhase={step?.phase}
-              activeLineDom={activeLineDom}
-            />
-          )}
-        </div>
-      ),
-    },
-    {
-      id: 'status',
-      title: 'Status',
-      subtitle: step?.phase === 'done' ? 'Complete' : 'Current step message',
-      defaultZone: 'right',
-      content: <StatusPanel step={step} />,
-    },
-  ], [strsInput, step, stepIndex, steps.length, strs, applyExample, inputError, autoScrollCode, setActiveLineDom, handleReset])
+      )}
+    </div>
+  )
+
+  const statusPanel = (
+    <StatusPanel step={step} />
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={LCP_PATTERNS} />
+      )}
+      <PlaybackControls
+        onReset={handleReset}
+        onPrev={stepBack}
+        onPlayToggle={togglePlay}
+        onNext={stepForward}
+        resetDisabled={steps.length === 0}
+        prevDisabled={stepIndex <= 0}
+        nextDisabled={steps.length === 0 || isDone}
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        speedIndicator={`${speed}ms`}
+        autoScroll={autoScrollCode}
+        onAutoScrollChange={setAutoScrollCode}
+        autoScrollLabel="Auto-scroll code"
+        showAutoScroll
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
+
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'input', title: 'Input & Format', dockMode: 'split-right' },
+      { id: 'strings-viz', title: 'Strings Grid', dockMode: 'split-right' },
+      { id: 'prefix-viz', title: 'Common Prefix', dockMode: 'split-right' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   const summaryCards = [
     { label: 'Algorithm', value: 'Horizontal Scanning' },
@@ -448,46 +474,20 @@ export default function LongestCommonPrefixVisualizer() {
         </div>
       </section>
 
-      <DockableWorkspace
-        title="Longest Common Prefix Workspace"
-        panels={dockPanels}
-        initialLayout={{
-          rows: [
-            ['input', 'strings-viz', 'prefix-viz'],
-            ['code'],
-            ['status'],
-          ],
-          minimized: [],
-        }}
-      />
-
-      <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={LCP_PATTERNS} />
-        )}
-        <PlaybackControls
-          onReset={handleReset}
-          onPrev={stepBack}
-          onPlayToggle={togglePlay}
-          onNext={stepForward}
-          resetDisabled={steps.length === 0}
-          prevDisabled={stepIndex <= 0}
-          nextDisabled={steps.length === 0 || isDone}
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          speedIndicator={`${speed}ms`}
-          autoScroll={autoScrollCode}
-          onAutoScrollChange={setAutoScrollCode}
-          autoScrollLabel="Auto-scroll code"
-          showAutoScroll
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+          {panelDivs['strings-viz'] && createPortal(stringsVizPanel, panelDivs['strings-viz'])}
+          {panelDivs['prefix-viz'] && createPortal(prefixVizPanel, panelDivs['prefix-viz'])}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
 
       {showPatternOverlay && step && (
         <PatternOverlay step={step} activeLineDom={activeLineDom} />

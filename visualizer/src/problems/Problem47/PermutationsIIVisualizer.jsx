@@ -1,6 +1,7 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -312,93 +313,112 @@ export default function PermutationsIIVisualizer() {
     [handleReset]
   )
 
-  const dockPanels = useMemo(
-    () => [
-      {
-        id: 'code',
-        title: 'Code',
-        content: (
-          <div style={{ position: 'relative' }}>
-            <CodeTracePanel
-              step={step}
-              codeLines={SOLUTION_CODE}
-              highlightedLines={connectivity.highlightedLines}
-              onLineSelect={connectivity.handleLineSelect}
-              onActiveLineDomChange={setActiveLineDom}
-            />
-            {showPatternOverlay && (
-              <CodePatternAnnotations
-                linePatterns={LINE_PATTERN_MAP}
-                currentPhase={step?.phase}
-                activeLineDom={activeLineDom}
-                activeLine={step?.activeLine}
-              />
-            )}
-          </div>
-        ),
-      },
-      {
-        id: 'viz',
-        title: '🔀 Permutations II',
-        content: (
-          <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
-            <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Input Array</div>
-              <textarea
-                value={numsInput}
-                onChange={(e) => {
-                  setNumsInput(e.target.value)
-                  handleReset()
-                }}
-                style={{
-                  width: '100%',
-                  height: 60,
-                  padding: '8px',
-                  borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid #475569',
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
-                  fontFamily: 'monospace',
-                  fontSize: 12,
-                  resize: 'vertical',
-                }}
-                placeholder="[1,1,2]"
-              />
-              {inputError && (
-                <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>
-              )}
-            </div>
-            <VisualizationPanel nums={nums} step={step} applyExample={applyExample} examples={examples} />
-          </div>
-        ),
-      },
-    ],
-    [step, connectivity, setActiveLineDom, numsInput, nums, inputError, examples, applyExample, handleReset, showPatternOverlay, activeLineDom]
+  // Step 2: Extract panels into consts
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
+        />
+      )}
+    </div>
   )
 
-  return (
-    <div className="problem-shell">
-      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
-      <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
+  const vizPanel = (
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 12, overflow: 'auto' }}>
+      <div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Input Array</div>
+        <textarea
+          value={numsInput}
+          onChange={(e) => {
+            setNumsInput(e.target.value)
+            handleReset()
+          }}
+          style={{
+            width: '100%',
+            height: 60,
+            padding: '8px',
+            borderRadius: 4,
+            border: inputError ? '2px solid #f87171' : '1px solid #475569',
+            backgroundColor: '#1e293b',
+            color: '#e2e8f0',
+            fontFamily: 'monospace',
+            fontSize: 12,
+            resize: 'vertical',
+          }}
+          placeholder="[1,1,2]"
         />
-      </FloatingPanel>
+        {inputError && (
+          <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>
+        )}
+      </div>
+      <VisualizationPanel nums={nums} step={step} applyExample={applyExample} examples={examples} />
+    </div>
+  )
+
+  const statusPanel = (
+    <div style={{ fontSize: 13, color: '#64748b', padding: '8px 12px' }}>
+      Step {stepIndex + 1} / {steps.length}
+    </div>
+  )
+
+  // Step 3: Add panelConfigs with Lumino layout
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
+      { id: 'viz', title: '🔀 Permutations II', dockMode: 'split-right' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  // Step 4: Replace return with portals
+  return (
+    <div className="permutii-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">
+          {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
+          <PlaybackControls
+            isPlaying={isPlaying}
+            isDone={isDone}
+            speed={speed}
+            onPlayToggle={togglePlay}
+            onPrev={stepBack}
+            onNext={stepForward}
+            onReset={handleReset}
+            prevDisabled={stepIndex < 0}
+            nextDisabled={isDone}
+            resetDisabled={stepIndex < 0}
+            onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+            showPatternOverlay={showPatternOverlay}
+            onShowPatternOverlayChange={setShowPatternOverlay}
+            patternOverlayLabel="Show pattern overlay"
+            showPatternOverlayToggle
+          />
+        </FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

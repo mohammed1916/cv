@@ -1,11 +1,12 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
-import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -264,6 +265,7 @@ export default function ZigzagConversionVisualizer() {
   const examples = useMemo(() => getExamples('zigzag-conversion') || [], [])
   const [str, setStr] = useState('PAYPALISHIRING')
   const [numRows, setNumRows] = useState(3)
+  const [panelDivs, setPanelDivs] = useState(null)
 
   const steps = useMemo(() => generateSteps(str, numRows), [str, numRows])
 
@@ -293,114 +295,134 @@ export default function ZigzagConversionVisualizer() {
     [handleReset]
   )
 
-  const dockPanels = useMemo(
-    () => [
-      {
-        id: 'code',
-        title: 'Code',
-        content: (
-          <div style={{ position: 'relative' }}>
-            <CodeTracePanel
-              step={step}
-              codeLines={SOLUTION_CODE}
-              highlightedLines={connectivity.highlightedLines}
-              onLineSelect={connectivity.handleLineSelect}
-              onActiveLineDomChange={setActiveLineDom}
-            />
-            {showPatternOverlay && (
-              <CodePatternAnnotations
-                linePatterns={LINE_PATTERN_MAP}
-                currentPhase={step?.phase}
-                activeLineDom={activeLineDom}
-                activeLine={step?.activeLine}
-              />
-            )}
-          </div>
-        ),
-      },
-      {
-        id: 'viz',
-        title: '↔ Zigzag Conversion',
-        content: (
-          <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-              <div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>String</div>
-                <input
-                  type="text"
-                  value={str}
-                  onChange={(e) => {
-                    setStr(e.target.value)
-                    handleReset()
-                  }}
-                  placeholder="PAYPALISHIRING"
-                  style={{
-                    width: '100%',
-                    padding: '8px',
-                    borderRadius: 4,
-                    border: '1px solid #475569',
-                    backgroundColor: '#1e293b',
-                    color: '#e2e8f0',
-                    fontFamily: 'monospace',
-                    fontSize: 12,
-                  }}
-                />
-              </div>
-              <div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Rows</div>
-                <input
-                  type="number"
-                  value={numRows}
-                  onChange={(e) => {
-                    setNumRows(Math.max(1, parseInt(e.target.value, 10) || 1))
-                    handleReset()
-                  }}
-                  min="1"
-                  max="str.length"
-                  style={{
-                    width: '100%',
-                    padding: '8px',
-                    borderRadius: 4,
-                    border: '1px solid #475569',
-                    backgroundColor: '#1e293b',
-                    color: '#e2e8f0',
-                    fontFamily: 'monospace',
-                    fontSize: 12,
-                  }}
-                />
-              </div>
-            </div>
-            <VisualizationPanel str={str} numRows={numRows} step={step} applyExample={applyExample} examples={examples} />
-          </div>
-        ),
-      },
-    ],
-    [step, connectivity, setActiveLineDom, str, numRows, examples, applyExample, handleReset, showPatternOverlay, activeLineDom]
+  const mainPanel = (
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+        <div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>String</div>
+          <input
+            type="text"
+            value={str}
+            onChange={(e) => {
+              setStr(e.target.value)
+              handleReset()
+            }}
+            placeholder="PAYPALISHIRING"
+            style={{
+              width: '100%',
+              padding: '8px',
+              borderRadius: 4,
+              border: '1px solid #475569',
+              backgroundColor: '#1e293b',
+              color: '#e2e8f0',
+              fontFamily: 'monospace',
+              fontSize: 12,
+            }}
+          />
+        </div>
+        <div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Rows</div>
+          <input
+            type="number"
+            value={numRows}
+            onChange={(e) => {
+              setNumRows(Math.max(1, parseInt(e.target.value, 10) || 1))
+              handleReset()
+            }}
+            min="1"
+            max="str.length"
+            style={{
+              width: '100%',
+              padding: '8px',
+              borderRadius: 4,
+              border: '1px solid #475569',
+              backgroundColor: '#1e293b',
+              color: '#e2e8f0',
+              fontFamily: 'monospace',
+              fontSize: 12,
+            }}
+          />
+        </div>
+      </div>
+      <VisualizationPanel str={str} numRows={numRows} step={step} applyExample={applyExample} examples={examples} />
+    </div>
   )
 
-  return (
-    <div className="problem-shell">
-      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
-      <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
+  const codePanel = (
+    <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0 }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
         />
-      </FloatingPanel>
+      )}
+    </div>
+  )
+
+  const statusPanel = (
+    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '12px 16px', minHeight: 0 }}>
+      <div style={{ fontSize: 13, color: '#e2e8f0' }}>
+        {stepIndex < 0 ? 'Not started' : isDone ? `Done! ${steps.length} steps` : `Step ${stepIndex + 1} / ${steps.length}`}
+      </div>
+    </div>
+  )
+
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'main', title: 'Visualizer', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+
+  const handlePanelReady = useCallback((divs) => {
+    setPanelDivs(divs)
+  }, [])
+
+  return (
+    <div className="problem-shell" style={{ height: 'calc(100vh - 200px)', minHeight: '480px', display: 'flex', flexDirection: 'column' }}>
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.main && createPortal(mainPanel, panelDivs.main)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">
+          {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
+          <PlaybackControls
+            isPlaying={isPlaying}
+            isDone={isDone}
+            speed={speed}
+            onPlayToggle={togglePlay}
+            onPrev={stepBack}
+            onNext={stepForward}
+            onReset={handleReset}
+            prevDisabled={stepIndex < 0}
+            nextDisabled={isDone}
+            resetDisabled={stepIndex < 0}
+            onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+            showPatternOverlay={showPatternOverlay}
+            onShowPatternOverlayChange={setShowPatternOverlay}
+            patternOverlayLabel="Show pattern overlay"
+            showPatternOverlayToggle
+          />
+        </FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

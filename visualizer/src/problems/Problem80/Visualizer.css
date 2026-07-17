@@ -1,8 +1,10 @@
 ﻿.problem80-shell {
+  position: relative;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  gap: 16px;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
   overflow: hidden;
 }
 
@@ -61,4 +63,13 @@
   justify-content: center;
   min-height: 200px;
   padding: 20px;
+}
+
+.problem80-status {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0;
+  height: 100%;
+  overflow-x: auto;
 }

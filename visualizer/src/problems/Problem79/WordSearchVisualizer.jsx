@@ -1,4 +1,5 @@
 ﻿import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -9,6 +10,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './WordSearchVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
 const WORDSEARCH_PATTERNS = ['init', 'match', 'success', 'backtrack', 'not_found']
 
@@ -228,71 +230,80 @@ export default function WordSearchVisualizer() {
     handleReset()
   }, [handleReset])
 
-  return (
-    <div className="ws-shell">
-      <div className="ws-top">
-        <section className="ws-panel">
-          <header className="ws-head">
-            <span>DFS Backtracking Grid</span>
-            {inputError && <span className="ws-error">{inputError}</span>}
-          </header>
-          <div className="ws-body">
-            <div className="ws-examples">
-              {EXAMPLES.map((ex) => <button key={ex.label} className="ws-chip" onClick={() => applyExample(ex)}>{ex.label}</button>)}
-            </div>
-            <div className="ws-inputs">
-              <input className="ws-input" value={boardInput} onChange={(e) => { setBoardInput(e.target.value); handleReset() }} />
-              <input className="ws-input small" value={wordInput} onChange={(e) => { setWordInput(e.target.value.toUpperCase()); handleReset() }} />
-            </div>
-            <div className="ws-grid" style={{ gridTemplateColumns: `repeat(${(step?.board || board)[0].length}, minmax(0, 1fr))` }}>
-              {(step?.board || board).flatMap((row, r) => row.map((cell, c) => {
-                const current = step?.current?.[0] === r && step?.current?.[1] === c
-                const inPath = (step?.path || []).some(([pr, pc]) => pr === r && pc === c)
-                return (
-                  <motion.div key={`${r}-${c}`} className={`ws-cell ${current ? 'current' : ''} ${inPath ? 'path' : ''}`} animate={current ? { scale: [1, 1.08, 1] } : { scale: 1 }}>
-                    <span>{cell}</span>
-                    <small>{r},{c}</small>
-                  </motion.div>
-                )
-              }))}
-            </div>
-          </div>
-        </section>
-
-        <section className="ws-panel side">
-          <header className="ws-head"><span>Search State</span></header>
-          <div className="ws-body">
-            <div className="ws-word">
-              {word.split('').map((ch, i) => (
-                <span key={`${ch}-${i}`} className={i === step?.idx ? 'active' : i < (step?.idx || 0) ? 'done' : ''}>{ch}</span>
-              ))}
-            </div>
-            <div className="ws-metrics">
-              <div><span>idx</span><strong>{step?.idx ?? 0}</strong></div>
-              <div><span>path len</span><strong>{step?.path?.length ?? 0}</strong></div>
-              <div><span>result</span><strong>{step?.phase === 'done' ? (step?.found ? 'true' : 'false') : '...'}</strong></div>
-            </div>
-          </div>
-        </section>
+  const primaryPanel = (
+    <div className="ws-panel">
+      <header className="ws-head">
+        <span>DFS Backtracking Grid</span>
+        {inputError && <span className="ws-error">{inputError}</span>}
+      </header>
+      <div className="ws-body">
+        <div className="ws-examples">
+          {EXAMPLES.map((ex) => <button key={ex.label} className="ws-chip" onClick={() => applyExample(ex)}>{ex.label}</button>)}
+        </div>
+        <div className="ws-inputs">
+          <input className="ws-input" value={boardInput} onChange={(e) => { setBoardInput(e.target.value); handleReset() }} />
+          <input className="ws-input small" value={wordInput} onChange={(e) => { setWordInput(e.target.value.toUpperCase()); handleReset() }} />
+        </div>
+        <div className="ws-grid" style={{ gridTemplateColumns: `repeat(${(step?.board || board)[0].length}, minmax(0, 1fr))` }}>
+          {(step?.board || board).flatMap((row, r) => row.map((cell, c) => {
+            const current = step?.current?.[0] === r && step?.current?.[1] === c
+            const inPath = (step?.path || []).some(([pr, pc]) => pr === r && pc === c)
+            return (
+              <motion.div key={`${r}-${c}`} className={`ws-cell ${current ? 'current' : ''} ${inPath ? 'path' : ''}`} animate={current ? { scale: [1, 1.08, 1] } : { scale: 1 }}>
+                <span>{cell}</span>
+                <small>{r},{c}</small>
+              </motion.div>
+            )
+          }))}
+        </div>
       </div>
+    </div>
+  )
 
-      <div style={{position: 'relative'}}>
-        <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-        {showPatternOverlay && (
-          <CodePatternAnnotations
-            linePatterns={LINE_PATTERN_MAP}
-            currentPhase={step?.phase}
-            activeLineDom={activeLineDom}
-            activeLine={step?.activeLine}
-          />
-        )}
+  const statePanel = (
+    <div className="ws-panel side">
+      <header className="ws-head"><span>Search State</span></header>
+      <div className="ws-body">
+        <div className="ws-word">
+          {word.split('').map((ch, i) => (
+            <span key={`${ch}-${i}`} className={i === step?.idx ? 'active' : i < (step?.idx || 0) ? 'done' : ''}>{ch}</span>
+          ))}
+        </div>
+        <div className="ws-metrics">
+          <div><span>idx</span><strong>{step?.idx ?? 0}</strong></div>
+          <div><span>path len</span><strong>{step?.path?.length ?? 0}</strong></div>
+          <div><span>result</span><strong>{step?.phase === 'done' ? (step?.found ? 'true' : 'false') : '...'}</strong></div>
+        </div>
       </div>
-      <div className={`ws-status ${step?.phase === 'done' ? (step?.found ? 'ok' : 'bad') : ''}`}>{step?.message || 'Press Play to begin.'}</div>
-      <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={WORDSEARCH_PATTERNS} />
-        )}
-        <PlaybackControls
+    </div>
+  )
+
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} disableResizer />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
+        />
+      )}
+    </div>
+  )
+
+  const statusPanel = (
+    <div className={`ws-status ${step?.phase === 'done' ? (step?.found ? 'ok' : 'bad') : ''}`}>
+      {step?.message || 'Press Play to begin.'}
+    </div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={WORDSEARCH_PATTERNS} />
+      )}
+      <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
         speed={speed}
@@ -309,7 +320,36 @@ export default function WordSearchVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
-      </FloatingPanel>
+    </>
+  )
+
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'DFS Backtracking Grid', dockMode: 'split-right' },
+      { id: 'state', title: 'Search State', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  return (
+    <div className="ws-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

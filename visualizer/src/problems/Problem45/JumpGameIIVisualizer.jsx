@@ -1,11 +1,12 @@
 ﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 import FloatingPanel from "../../components/shared/FloatingPanel";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
@@ -131,108 +132,113 @@ export default function JumpGameIIVisualizer() {
 
   const maxVal = Math.max(...ex.nums, 1);
 
-  const dockPanels = useMemo(() => [
-    {
-      id: "input",
-      title: "Input Playground",
-      subtitle: "Select or create test cases",
-      defaultZone: "left",
-      content: (
-        <div className="jg2-panel">
-          <div className="jg2-panel-label">Test Cases</div>
-          <div className="jg2-examples">
-            {EXAMPLES.map((e) => (
-              <button
-                key={e.label}
-                className={`jg2-chip ${ex.label === e.label ? "active" : ""}`}
-                onClick={() => applyEx(e)}
-              >
-                {e.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      ),
-    },
-    {
-      id: "viz",
-      title: "Array Visualization",
-      subtitle: step ? `Step ${stepIndex + 1} of ${steps.length}` : "Press play to visualize",
-      defaultZone: "right",
-      content: (
-        <div>
-          <ArrayVisualization nums={ex.nums} step={step} maxVal={maxVal} />
-          <StatsDisplay step={step} />
-          <div className="jg2-status">{step?.message ?? "Press Play to begin."}</div>
-        </div>
-      ),
-    },
-    {
-      id: "code",
-      title: "Code Trace",
-      subtitle: step ? `Active line ${step.activeLine}` : "Line-by-line solution view",
-      defaultZone: "full",
-      content: (
-        <div style={{ position: 'relative' }}>
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            onActiveLineDomChange={setActiveLineDom}
-            autoScroll={autoScrollCode}
-          />
-          {showPatternOverlay && (
-            <CodePatternAnnotations
-              linePatterns={LINE_PATTERN_MAP}
-              currentPhase={step?.phase}
-              activeLineDom={activeLineDom}
-              activeLine={step?.activeLine}
-            />
-          )}
-        </div>
-      ),
-    },
-  ], [applyEx, ex, step, stepIndex, steps, maxVal, setActiveLineDom, autoScrollCode, showPatternOverlay]);
+  // Extract panel content
+  const inputPanel = (
+    <div className="jg2-panel">
+      <div className="jg2-panel-label">Test Cases</div>
+      <div className="jg2-examples">
+        {EXAMPLES.map((e) => (
+          <button
+            key={e.label}
+            className={`jg2-chip ${ex.label === e.label ? "active" : ""}`}
+            onClick={() => applyEx(e)}
+          >
+            {e.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+
+  const vizPanel = (
+    <div className="jg2-panel">
+      <ArrayVisualization nums={ex.nums} step={step} maxVal={maxVal} />
+      <StatsDisplay step={step} />
+    </div>
+  );
+
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        onActiveLineDomChange={setActiveLineDom}
+        autoScroll={autoScrollCode}
+        disableResizer
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
+        />
+      )}
+    </div>
+  );
+
+  const statusPanel = (
+    <div className="jg2-status-bar">
+      {step?.message ?? "Press Play to begin."}
+    </div>
+  );
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={JUMPGAMEII_PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+        autoScroll={autoScrollCode}
+        onAutoScrollChange={setAutoScrollCode}
+        autoScrollLabel="Auto-scroll code"
+        showAutoScroll
+      />
+    </>
+  );
+
+  const [panelDivs, setPanelDivs] = useState(null);
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'input', title: 'Input Playground', dockMode: 'split-right' },
+      { id: 'viz', title: 'Array Visualization', dockMode: 'split-right' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  );
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
 
   return (
     <div className="jg2-shell">
-      <DockableWorkspace
-        title="Jump Game II Workspace"
-        panels={dockPanels}
-        initialLayout={{
-          rows: [
-            ["input", "viz"],
-            ["code"],
-          ],
-          minimized: [],
-        }}
-      />
-
-      <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={JUMPGAMEII_PATTERNS} />
-        )}
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-          autoScroll={autoScrollCode}
-          onAutoScrollChange={setAutoScrollCode}
-          autoScrollLabel="Auto-scroll code"
-          showAutoScroll
-        />
-      </FloatingPanel>
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+          {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   );
 }

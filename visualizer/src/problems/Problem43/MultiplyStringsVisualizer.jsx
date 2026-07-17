@@ -1,6 +1,7 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -176,221 +177,240 @@ export default function MultiplyStringsVisualizer() {
     [handleReset]
   )
 
-  const dockPanels = useMemo(
-    () => [
-      {
-        id: 'code',
-        title: 'Code',
-        content: (
-          <div style={{ position: 'relative' }}>
-            <CodeTracePanel
-              step={step}
-              codeLines={SOLUTION_CODE}
-              highlightedLines={connectivity.highlightedLines}
-              onLineSelect={connectivity.handleLineSelect}
-              onActiveLineDomChange={setActiveLineDom}
-            />
-            {showPatternOverlay && (
-              <CodePatternAnnotations
-                linePatterns={LINE_PATTERN_MAP}
-                currentPhase={step?.state?.phase}
-                activeLineDom={activeLineDom}
-                activeLine={step?.activeLine}
-              />
-            )}
-          </div>
-        ),
-      },
-      {
-        id: 'viz',
-        title: '🔢 Multiplication Grid',
-        content: (
-          <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
-            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-              {EXAMPLES.map((e) => (
-                <button
-                  key={e.label}
-                  onClick={() => applyExample(e.num1, e.num2)}
-                  style={{
-                    padding: '6px 12px',
-                    borderRadius: 4,
-                    border: '1px solid #cbd5e1',
-                    cursor: 'pointer',
-                    fontSize: 12,
-                    backgroundColor:
-                      num1 === e.num1 && num2 === e.num2 ? '#dbeafe' : '#f1f5f9',
-                    fontWeight: num1 === e.num1 && num2 === e.num2 ? 600 : 400,
-                  }}
-                >
-                  {e.label}
-                </button>
-              ))}
-            </div>
-
-            {inputError && (
-              <div style={{ padding: 8, backgroundColor: '#fee2e2', borderRadius: 6, color: '#991b1b', fontSize: 12 }}>
-                {inputError}
-              </div>
-            )}
-
-            {step && num1 && num2 && (
-              <>
-                <div style={{ padding: 12, backgroundColor: '#f0f9ff', borderRadius: 6, fontSize: 11 }}>
-                  <div style={{ fontWeight: 600, marginBottom: 8, color: '#1e40af' }}>Input Numbers:</div>
-                  <div style={{ display: 'flex', gap: 12 }}>
-                    <div>
-                      <div style={{ fontSize: 10, color: '#64748b', marginBottom: 4 }}>num1</div>
-                      <div style={{ display: 'flex', gap: 4 }}>
-                        {num1.split('').map((d, i) => (
-                          <motion.div
-                            key={`n1-${i}`}
-                            animate={{
-                              scale: step.state?.currentI === i ? 1.15 : 1,
-                              backgroundColor: step.state?.currentI === i ? '#0ea5e9' : '#e0f2fe',
-                              color: step.state?.currentI === i ? '#fff' : '#1e40af',
-                            }}
-                            style={{
-                              padding: 6,
-                              minWidth: 28,
-                              height: 28,
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              borderRadius: 4,
-                              border: '1px solid #0ea5e9',
-                              fontWeight: 600,
-                            }}
-                          >
-                            {d}
-                          </motion.div>
-                        ))}
-                      </div>
-                    </div>
-                    <div>
-                      <div style={{ fontSize: 10, color: '#64748b', marginBottom: 4 }}>num2</div>
-                      <div style={{ display: 'flex', gap: 4 }}>
-                        {num2.split('').map((d, i) => (
-                          <motion.div
-                            key={`n2-${i}`}
-                            animate={{
-                              scale: step.state?.currentJ === i ? 1.15 : 1,
-                              backgroundColor: step.state?.currentJ === i ? '#10b981' : '#ecfdf5',
-                              color: step.state?.currentJ === i ? '#fff' : '#065f46',
-                            }}
-                            style={{
-                              padding: 6,
-                              minWidth: 28,
-                              height: 28,
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              borderRadius: 4,
-                              border: '1px solid #10b981',
-                              fontWeight: 600,
-                            }}
-                          >
-                            {d}
-                          </motion.div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, fontSize: 11 }}>
-                  <div style={{ fontWeight: 600, marginBottom: 8, color: '#92400e' }}>Algorithm Trace:</div>
-                  <div style={{ color: '#78350f', lineHeight: 1.5 }}>{step.message}</div>
-                  {step.state?.mul !== undefined && (
-                    <div style={{ marginTop: 6, paddingTop: 6, borderTop: '1px solid #fcd34d', color: '#78350f' }}>
-                      Multiplication: {step.state.mul}
-                    </div>
-                  )}
-                  {step.state?.total !== undefined && (
-                    <div style={{ marginTop: 4, color: '#78350f' }}>Total: {step.state.total}</div>
-                  )}
-                  {step.state?.carry > 0 && (
-                    <div style={{ marginTop: 4, color: '#78350f' }}>Carry: {step.state.carry}</div>
-                  )}
-                  {step.state?.resultStr && (
-                    <div style={{ marginTop: 6, paddingTop: 6, borderTop: '1px solid #fcd34d', fontWeight: 600, color: '#78350f' }}>
-                      Result: {step.state.resultStr}
-                    </div>
-                  )}
-                </div>
-
-                <div style={{ padding: 12, backgroundColor: '#f3e8ff', borderRadius: 6, fontSize: 11 }}>
-                  <div style={{ fontWeight: 600, marginBottom: 8, color: '#6b21a8' }}>Result Array:</div>
-                  <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-                    {step.result.map((val, idx) => (
-                      <motion.div
-                        key={`result-${idx}`}
-                        animate={{
-                          scale: step.state?.p1 === idx || step.state?.p2 === idx ? 1.15 : 1,
-                          backgroundColor:
-                            step.state?.p1 === idx || step.state?.p2 === idx ? '#c084fc' : '#ede9fe',
-                          color: step.state?.p1 === idx || step.state?.p2 === idx ? '#fff' : '#6b21a8',
-                        }}
-                        style={{
-                          padding: 6,
-                          minWidth: 30,
-                          height: 30,
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          borderRadius: 3,
-                          border: '1px solid #c084fc',
-                          fontWeight: 600,
-                          fontSize: 10,
-                        }}
-                      >
-                        {val}
-                      </motion.div>
-                    ))}
-                  </div>
-                  <div style={{ marginTop: 8, fontSize: 10, color: '#6b21a8', display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                    {step.result.map((_, idx) => (
-                      <span key={`idx-${idx}`}>{idx}</span>
-                    ))}
-                  </div>
-                </div>
-              </>
-            )}
-          </div>
-        ),
-      },
-    ],
-    [step, connectivity, setActiveLineDom, num1, num2, inputError, applyExample]
+  // Step 3: Extract panels into consts
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.state?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
+        />
+      )}
+    </div>
   )
 
-  return (
-    <div className="problem-shell">
-      <DockableWorkspace
-        panels={dockPanels}
-        initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
-        title="43. Multiply Strings"
+  const vizPanel = (
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+        {EXAMPLES.map((e) => (
+          <button
+            key={e.label}
+            onClick={() => applyExample(e.num1, e.num2)}
+            style={{
+              padding: '6px 12px',
+              borderRadius: 4,
+              border: '1px solid #cbd5e1',
+              cursor: 'pointer',
+              fontSize: 12,
+              backgroundColor:
+                num1 === e.num1 && num2 === e.num2 ? '#dbeafe' : '#f1f5f9',
+              fontWeight: num1 === e.num1 && num2 === e.num2 ? 600 : 400,
+            }}
+          >
+            {e.label}
+          </button>
+        ))}
+      </div>
+
+      {inputError && (
+        <div style={{ padding: 8, backgroundColor: '#fee2e2', borderRadius: 6, color: '#991b1b', fontSize: 12 }}>
+          {inputError}
+        </div>
+      )}
+
+      {step && num1 && num2 && (
+        <>
+          <div style={{ padding: 12, backgroundColor: '#f0f9ff', borderRadius: 6, fontSize: 11 }}>
+            <div style={{ fontWeight: 600, marginBottom: 8, color: '#1e40af' }}>Input Numbers:</div>
+            <div style={{ display: 'flex', gap: 12 }}>
+              <div>
+                <div style={{ fontSize: 10, color: '#64748b', marginBottom: 4 }}>num1</div>
+                <div style={{ display: 'flex', gap: 4 }}>
+                  {num1.split('').map((d, i) => (
+                    <motion.div
+                      key={`n1-${i}`}
+                      animate={{
+                        scale: step.state?.currentI === i ? 1.15 : 1,
+                        backgroundColor: step.state?.currentI === i ? '#0ea5e9' : '#e0f2fe',
+                        color: step.state?.currentI === i ? '#fff' : '#1e40af',
+                      }}
+                      style={{
+                        padding: 6,
+                        minWidth: 28,
+                        height: 28,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        borderRadius: 4,
+                        border: '1px solid #0ea5e9',
+                        fontWeight: 600,
+                      }}
+                    >
+                      {d}
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <div style={{ fontSize: 10, color: '#64748b', marginBottom: 4 }}>num2</div>
+                <div style={{ display: 'flex', gap: 4 }}>
+                  {num2.split('').map((d, i) => (
+                    <motion.div
+                      key={`n2-${i}`}
+                      animate={{
+                        scale: step.state?.currentJ === i ? 1.15 : 1,
+                        backgroundColor: step.state?.currentJ === i ? '#10b981' : '#ecfdf5',
+                        color: step.state?.currentJ === i ? '#fff' : '#065f46',
+                      }}
+                      style={{
+                        padding: 6,
+                        minWidth: 28,
+                        height: 28,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        borderRadius: 4,
+                        border: '1px solid #10b981',
+                        fontWeight: 600,
+                      }}
+                    >
+                      {d}
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, fontSize: 11 }}>
+            <div style={{ fontWeight: 600, marginBottom: 8, color: '#92400e' }}>Algorithm Trace:</div>
+            <div style={{ color: '#78350f', lineHeight: 1.5 }}>{step.message}</div>
+            {step.state?.mul !== undefined && (
+              <div style={{ marginTop: 6, paddingTop: 6, borderTop: '1px solid #fcd34d', color: '#78350f' }}>
+                Multiplication: {step.state.mul}
+              </div>
+            )}
+            {step.state?.total !== undefined && (
+              <div style={{ marginTop: 4, color: '#78350f' }}>Total: {step.state.total}</div>
+            )}
+            {step.state?.carry > 0 && (
+              <div style={{ marginTop: 4, color: '#78350f' }}>Carry: {step.state.carry}</div>
+            )}
+            {step.state?.resultStr && (
+              <div style={{ marginTop: 6, paddingTop: 6, borderTop: '1px solid #fcd34d', fontWeight: 600, color: '#78350f' }}>
+                Result: {step.state.resultStr}
+              </div>
+            )}
+          </div>
+
+          <div style={{ padding: 12, backgroundColor: '#f3e8ff', borderRadius: 6, fontSize: 11 }}>
+            <div style={{ fontWeight: 600, marginBottom: 8, color: '#6b21a8' }}>Result Array:</div>
+            <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+              {step.result.map((val, idx) => (
+                <motion.div
+                  key={`result-${idx}`}
+                  animate={{
+                    scale: step.state?.p1 === idx || step.state?.p2 === idx ? 1.15 : 1,
+                    backgroundColor:
+                      step.state?.p1 === idx || step.state?.p2 === idx ? '#c084fc' : '#ede9fe',
+                    color: step.state?.p1 === idx || step.state?.p2 === idx ? '#fff' : '#6b21a8',
+                  }}
+                  style={{
+                    padding: 6,
+                    minWidth: 30,
+                    height: 30,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: 3,
+                    border: '1px solid #c084fc',
+                    fontWeight: 600,
+                    fontSize: 10,
+                  }}
+                >
+                  {val}
+                </motion.div>
+              ))}
+            </div>
+            <div style={{ marginTop: 8, fontSize: 10, color: '#6b21a8', display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+              {step.result.map((_, idx) => (
+                <span key={`idx-${idx}`}>{idx}</span>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  )
+
+  const statusPanel = (
+    <div className="ms-status" style={{ padding: 8, fontSize: 12, display: 'flex', gap: 8, alignItems: 'center', overflow: 'auto' }}>
+      {step && <span>Step {stepIndex + 1} of {steps.length}</span>}
+    </div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.state?.phase} usedPatterns={MULTIPLYSTRINGS_PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex <= 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
       />
-      <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.state?.phase} usedPatterns={MULTIPLYSTRINGS_PATTERNS} />
-        )}
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex <= 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
+    </>
+  )
+
+  // Step 4: Add state + config
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
+      { id: 'viz', title: '🔢 Multiplication Grid', dockMode: 'split-right' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  // Step 5: Replace return block
+  return (
+    <div className="ms-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

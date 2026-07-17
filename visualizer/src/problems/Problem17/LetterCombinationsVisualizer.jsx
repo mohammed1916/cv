@@ -1,6 +1,7 @@
 ﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -112,132 +113,153 @@ export default function LetterCombinationsVisualizer() {
         [handleReset]
     );
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'code',
-            title: 'Code',
-            content: (
-                <div style={{ position: 'relative' }}>
-                    <CodeTracePanel
-                        step={step}
-                        codeLines={SOLUTION_CODE}
-                        highlightedLines={connectivity.highlightedLines}
-                        onLineSelect={connectivity.handleLineSelect}
-                        onActiveLineDomChange={setActiveLineDom}
-                    />
+    // Extract panel contents as consts
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                highlightedLines={connectivity.highlightedLines}
+                onLineSelect={connectivity.handleLineSelect}
+                onActiveLineDomChange={setActiveLineDom}
+                disableResizer
+            />
+            {showPatternOverlay && (
+                <CodePatternAnnotations
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
+                />
+            )}
+        </div>
+    );
 
-                    {showPatternOverlay && (
-                        <CodePatternAnnotations
-                            linePatterns={LINE_PATTERN_MAP}
-                            currentPhase={step?.phase}
-                            activeLineDom={activeLineDom}
-                            activeLine={step?.activeLine}
-                        />
-                    )}
+    const primaryPanel = (
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
+                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                    {EXAMPLES.map(ex => (
+                        <button key={ex.label} onClick={() => applyExample(ex)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: '#f1f5f9' }}>
+                            {ex.label}
+                        </button>
+                    ))}
                 </div>
-            ),
-        },
-        {
-            id: 'viz',
-            title: '☎️ Backtracking Paths',
-            content: (
-                <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
-                    <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
-                        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                            {EXAMPLES.map(ex => (
-                                <button key={ex.label} onClick={() => applyExample(ex)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: '#f1f5f9' }}>
-                                    {ex.label}
-                                </button>
+                <input style={{ padding: '6px 10px', borderRadius: 4, border: '1px solid #cbd5e1', fontSize: 12 }} value={digits} onChange={e => { setDigits(e.target.value); handleReset(); }} placeholder="digits (e.g. 23)" maxLength={4} />
+            </div>
+
+            <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>Phone keypad</div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 6 }}>
+                {Object.entries(PHONE_MAP).map(([d, letters]) => (
+                    <div key={d} style={{
+                        padding: 8, borderRadius: 6, border: validDigits.includes(d) ? '2px solid #0ea5e9' : '1px solid #cbd5e1',
+                        backgroundColor: step?.activeDigit === d ? '#dbeafe' : '#f8fafc', textAlign: 'center'
+                    }}>
+                        <div style={{ fontSize: 14, fontWeight: 'bold', color: '#1e293b', marginBottom: 4 }}>{d}</div>
+                        <div style={{ display: 'flex', gap: 2, justifyContent: 'center' }}>
+                            {letters.split("").map(l => (
+                                <span key={l} style={{
+                                    fontSize: 12, fontWeight: 'bold', padding: '2px 4px',
+                                    backgroundColor: step?.activeChar === l && step?.activeDigit === d ? '#fbbf24' : '#f3f4f6',
+                                    borderRadius: 3, color: '#1e293b'
+                                }}>
+                                    {l}
+                                </span>
                             ))}
                         </div>
-                        <input style={{ padding: '6px 10px', borderRadius: 4, border: '1px solid #cbd5e1', fontSize: 12 }} value={digits} onChange={e => { setDigits(e.target.value); handleReset(); }} placeholder="digits (e.g. 23)" maxLength={4} />
                     </div>
+                ))}
+            </div>
 
-                    <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>Phone keypad</div>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 6 }}>
-                        {Object.entries(PHONE_MAP).map(([d, letters]) => (
-                            <div key={d} style={{
-                                padding: 8, borderRadius: 6, border: validDigits.includes(d) ? '2px solid #0ea5e9' : '1px solid #cbd5e1',
-                                backgroundColor: step?.activeDigit === d ? '#dbeafe' : '#f8fafc', textAlign: 'center'
-                            }}>
-                                <div style={{ fontSize: 14, fontWeight: 'bold', color: '#1e293b', marginBottom: 4 }}>{d}</div>
-                                <div style={{ display: 'flex', gap: 2, justifyContent: 'center' }}>
-                                    {letters.split("").map(l => (
-                                        <span key={l} style={{
-                                            fontSize: 12, fontWeight: 'bold', padding: '2px 4px',
-                                            backgroundColor: step?.activeChar === l && step?.activeDigit === d ? '#fbbf24' : '#f3f4f6',
-                                            borderRadius: 3, color: '#1e293b'
-                                        }}>
-                                            {l}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+            <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>Current path</div>
+            <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', minHeight: 40, padding: 8, backgroundColor: '#f8fafc', borderRadius: 4 }}>
+                <AnimatePresence mode="popLayout">
+                    {(step?.path ?? []).map((c, i) => (
+                        <motion.div key={`${i}-${c}`} initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 12 }} style={{
+                            padding: '8px 12px', backgroundColor: '#dbeafe', border: '1px solid #0ea5e9', borderRadius: 4,
+                            fontSize: 13, fontWeight: 'bold', color: '#1e40af'
+                        }}>
+                            {c}
+                        </motion.div>
+                    ))}
+                </AnimatePresence>
+                {(step?.path?.length ?? 0) === 0 && <span style={{ color: '#64748b', fontSize: 12 }}>empty</span>}
+            </div>
 
-                    <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>Current path</div>
-                    <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', minHeight: 40, padding: 8, backgroundColor: '#f8fafc', borderRadius: 4 }}>
-                        <AnimatePresence mode="popLayout">
-                            {(step?.path ?? []).map((c, i) => (
-                                <motion.div key={`${i}-${c}`} initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 12 }} style={{
-                                    padding: '8px 12px', backgroundColor: '#dbeafe', border: '1px solid #0ea5e9', borderRadius: 4,
-                                    fontSize: 13, fontWeight: 'bold', color: '#1e40af'
-                                }}>
-                                    {c}
-                                </motion.div>
-                            ))}
-                        </AnimatePresence>
-                        {(step?.path?.length ?? 0) === 0 && <span style={{ color: '#64748b', fontSize: 12 }}>empty</span>}
-                    </div>
+            <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>Results ({step?.res?.length ?? 0})</div>
+            <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', flex: 1, overflow: 'auto', paddingBottom: 8 }}>
+                <AnimatePresence mode="popLayout">
+                    {(step?.res ?? []).map((s, i) => (
+                        <motion.div key={s} initial={{ opacity: 0, scale: 0.6 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} style={{
+                            padding: '8px 12px', backgroundColor: i === (step?.res?.length ?? 0) - 1 && step?.phase === "record" ? '#86efac' : '#f0fdf4',
+                            border: i === (step?.res?.length ?? 0) - 1 && step?.phase === "record" ? '2px solid #22c55e' : '1px solid #86efac',
+                            borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: '#15803d'
+                        }}>
+                            {s}
+                        </motion.div>
+                    ))}
+                </AnimatePresence>
+            </div>
+        </div>
+    );
 
-                    <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>Results ({step?.res?.length ?? 0})</div>
-                    <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', flex: 1, overflow: 'auto', paddingBottom: 8 }}>
-                        <AnimatePresence mode="popLayout">
-                            {(step?.res ?? []).map((s, i) => (
-                                <motion.div key={s} initial={{ opacity: 0, scale: 0.6 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} style={{
-                                    padding: '8px 12px', backgroundColor: i === (step?.res?.length ?? 0) - 1 && step?.phase === "record" ? '#86efac' : '#f0fdf4',
-                                    border: i === (step?.res?.length ?? 0) - 1 && step?.phase === "record" ? '2px solid #22c55e' : '1px solid #86efac',
-                                    borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: '#15803d'
-                                }}>
-                                    {s}
-                                </motion.div>
-                            ))}
-                        </AnimatePresence>
-                    </div>
-                </div>
-            ),
-        },
-    ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, digits, setDigits, validDigits, applyExample]);
+    const statusPanel = (
+        <div className="lc-status">
+            {step ? `${step.phase.toUpperCase()}: ${step.message}` : 'Ready'}
+        </div>
+    );
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={LC_PATTERNS} />
+            )}
+            <PlaybackControls
+                isPlaying={isPlaying}
+                isDone={isDone}
+                speed={speed}
+                onPlayToggle={togglePlay}
+                onPrev={stepBack}
+                onNext={stepForward}
+                onReset={handleReset}
+                prevDisabled={stepIndex < 0}
+                nextDisabled={isDone}
+                resetDisabled={stepIndex < 0}
+                onSpeedChange={e => setSpeed(Number(e.target.value))}
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                patternOverlayLabel="Show pattern overlay"
+                showPatternOverlayToggle
+            />
+        </>
+    );
+
+    // Panel configuration for Lumino DockPanel
+    const [panelDivs, setPanelDivs] = useState(null);
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
+            { id: 'primary', title: '☎️ Backtracking Paths', dockMode: 'split-right' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    );
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
 
     return (
-        <div className="problem-shell">
-            <DockableWorkspace
-                panels={dockPanels}
-                initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
-            />
-            <FloatingPanel title="Playback Controls">
-                {showPatternOverlay && (
-                    <PatternLegend currentPhase={step?.phase} usedPatterns={LC_PATTERNS} />
-                )}
-                <PlaybackControls
-                    isPlaying={isPlaying}
-                    isDone={isDone}
-                    speed={speed}
-                    onPlayToggle={togglePlay}
-                    onPrev={stepBack}
-                    onNext={stepForward}
-                    onReset={handleReset}
-                    prevDisabled={stepIndex < 0}
-                    nextDisabled={isDone}
-                    resetDisabled={stepIndex < 0}
-                    onSpeedChange={e => setSpeed(Number(e.target.value))}
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
-                />
-            </FloatingPanel>
+        <div className="lc-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     );

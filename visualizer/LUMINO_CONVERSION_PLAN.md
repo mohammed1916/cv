@@ -95,12 +95,13 @@ const panelConfigs = useMemo(
     { id: 'primary', title: '<Primary panel title>', dockMode: 'split-right' },
     { id: 'state',   title: '<State panel title>',   dockMode: 'split-right' }, // omit if no state panel
     { id: 'code',    title: 'Code',                  dockMode: 'split-bottom' },
-    { id: 'status',  title: 'Status',                dockMode: 'tab-after' },
+    { id: 'status',  title: 'Status',                dockMode: 'split-bottom', ratio: 0.08 }, // IMPORTANT: bottom strip, not tab
   ],
   []
 )
 const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 ```
+**CRITICAL:** Status panel MUST use `dockMode: 'split-bottom', ratio: 0.08` so it appears as a fixed-height strip at the bottom, not as a tab.
 Use the panel's real head/title text for `title` (e.g. 'Linked Lists', 'String View').
 
 ### 2d. Replace the entire `return ( ... )` body
@@ -171,6 +172,7 @@ has a definite height (Lumino cannot size against `min-height`-only ancestors):
   height fight Lumino's scroll.
 - Playback MUST be `createPortal(..., document.body)` — a `transform: scale()`
   ancestor (`#zoom-content-wrapper`) breaks `position:fixed` otherwise.
+- **Status panel MUST be `dockMode: 'split-bottom', ratio: 0.08`** — NOT `'tab-after'`. It should be a fixed-height bottom strip, not a tab.
 - Panel `id`s in `panelConfigs` and `panelDivs.<id>` must match exactly.
 - Keep all hooks, `generateSteps`, `usePlaybackState`, connectivity, and pattern
   overlay logic EXACTLY as-is. This is a layout-only refactor.

@@ -1,11 +1,12 @@
 ﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from 'react-dom';
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 import FloatingPanel from "../../components/shared/FloatingPanel";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
@@ -137,83 +138,98 @@ export default function EditDistanceVisualizer() {
     return step ? Math.max(...dpTable.flat()) : 1;
   }, [step?.dp, dpTable]);
 
-  // Create dock panels
-  const dockPanels = useMemo(() => [
-    {
-      id: 'input',
-      title: 'Input',
-      subtitle: `word1: "${ex.w1}" → word2: "${ex.w2}"`,
-      content: <InputPanel EXAMPLES={EXAMPLES} ex={ex} applyEx={applyEx} step={step} />,
-    },
-    {
-      id: 'table',
-      title: 'DP Table',
-      subtitle: step ? `Step ${stepIndex + 1}/${steps.length}` : 'Edit Distance Table',
-      content: <DPTablePanel step={step} ex={ex} dpTable={dpTable} maxVal={maxVal} />,
-    },
-    {
-      id: 'code',
-      title: 'Code Trace',
-      subtitle: step ? `Line ${step.activeLine}` : 'Solution code',
-      content: (
-        <div style={{position: 'relative'}}>
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            onActiveLineDomChange={setActiveLineDom}
-            autoScroll={autoScrollCode}
-          />
-          {showPatternOverlay && (
-            <CodePatternAnnotations
-              linePatterns={LINE_PATTERN_MAP}
-              currentPhase={step?.phase}
-              activeLineDom={activeLineDom}
-              activeLine={step?.activeLine}
-            />
-          )}
-        </div>
-      ),
-    },
-  ], [ex, step, stepIndex, steps.length, setActiveLineDom, autoScrollCode, applyEx, dpTable, maxVal]);
+  // Step 3: Extract panels into consts
+  const inputPanel = (
+    <div className="ed-panel">
+      <InputPanel EXAMPLES={EXAMPLES} ex={ex} applyEx={applyEx} step={step} />
+    </div>
+  );
 
+  const tablePanel = (
+    <div className="ed-panel">
+      <DPTablePanel step={step} ex={ex} dpTable={dpTable} maxVal={maxVal} />
+    </div>
+  );
+
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        onActiveLineDomChange={setActiveLineDom}
+        autoScroll={autoScrollCode}
+        disableResizer
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
+        />
+      )}
+    </div>
+  );
+
+  const statusPanel = (
+    <div className="ed-status-panel">
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={EDITDISTANCE_PATTERNS} />
+      )}
+      <PlaybackControls
+        onReset={handleReset}
+        onPrev={stepBack}
+        onPlayToggle={togglePlay}
+        onNext={stepForward}
+        resetDisabled={steps.length === 0}
+        prevDisabled={stepIndex <= 0}
+        nextDisabled={steps.length === 0 || isDone}
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+        speedIndicator={`${speed}ms`}
+        autoScroll={autoScrollCode}
+        onAutoScrollChange={setAutoScrollCode}
+        autoScrollLabel="Auto-scroll code"
+        showAutoScroll
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </div>
+  );
+
+  // Step 4: Add panelConfigs and panel ready handler
+  const [panelDivs, setPanelDivs] = useState(null);
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'input', title: 'Input', dockMode: 'split-right' },
+      { id: 'table', title: 'DP Table', dockMode: 'split-right' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  );
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
+
+  // Step 5: Replace return with portals
   return (
     <div className="ed-shell">
-      <DockableWorkspace
-        title="Edit Distance Visualizer"
-        panels={dockPanels}
-        initialLayout={{
-          rows: [['input', 'table'], ['code']],
-          minimized: [],
-        }}
-      />
-
-      <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={EDITDISTANCE_PATTERNS} />
-        )}
-        <PlaybackControls
-          onReset={handleReset}
-          onPrev={stepBack}
-          onPlayToggle={togglePlay}
-          onNext={stepForward}
-          resetDisabled={steps.length === 0}
-          prevDisabled={stepIndex <= 0}
-          nextDisabled={steps.length === 0 || isDone}
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onSpeedChange={(event) => setSpeed(Number(event.target.value))}
-          speedIndicator={`${speed}ms`}
-          autoScroll={autoScrollCode}
-          onAutoScrollChange={setAutoScrollCode}
-          autoScrollLabel="Auto-scroll code"
-          showAutoScroll
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+          {panelDivs.table && createPortal(tablePanel, panelDivs.table)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls" />,
+        document.body
+      )}
     </div>
   );
 }

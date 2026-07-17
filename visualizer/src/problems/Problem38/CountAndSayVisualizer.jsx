@@ -1,6 +1,7 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -279,90 +280,113 @@ export default function CountAndSayVisualizer() {
     [handleReset]
   )
 
-  const dockPanels = useMemo(
-    () => [
-      {
-        id: 'code',
-        title: 'Code',
-        content: (
-          <div style={{ position: 'relative' }}>
-            <CodeTracePanel
-              step={step}
-              codeLines={SOLUTION_CODE}
-              highlightedLines={connectivity.highlightedLines}
-              onLineSelect={connectivity.handleLineSelect}
-              onActiveLineDomChange={setActiveLineDom}
-            />
-            {showPatternOverlay && (
-              <CodePatternAnnotations
-                linePatterns={LINE_PATTERN_MAP}
-                currentPhase={step?.phase}
-                activeLineDom={activeLineDom}
-                activeLine={step?.activeLine}
-              />
-            )}
-          </div>
-        ),
-      },
-      {
-        id: 'viz',
-        title: '📖 Count and Say Sequence',
-        content: (
-          <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
-            <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>n Value (1-8)</div>
-              <input
-                type="number"
-                value={nValue}
-                onChange={(e) => {
-                  setNValue(Math.max(1, Math.min(8, parseInt(e.target.value, 10) || 1)))
-                  handleReset()
-                }}
-                min="1"
-                max="8"
-                style={{
-                  width: '100%',
-                  padding: '8px',
-                  borderRadius: 4,
-                  border: '1px solid #475569',
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
-                  fontFamily: 'monospace',
-                  fontSize: 12,
-                }}
-              />
-            </div>
-            <VisualizationPanel n={nValue} step={step} applyExample={applyExample} examples={examples} />
-          </div>
-        ),
-      },
-    ],
-    [step, connectivity, setActiveLineDom, nValue, examples, applyExample, handleReset, showPatternOverlay, activeLineDom]
+  // Step 2: Extract panels into consts
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
+        />
+      )}
+    </div>
   )
 
-  return (
-    <div className="problem-shell">
-      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
-      <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
+  const vizPanel = (
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+      <div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>n Value (1-8)</div>
+        <input
+          type="number"
+          value={nValue}
+          onChange={(e) => {
+            setNValue(Math.max(1, Math.min(8, parseInt(e.target.value, 10) || 1)))
+            handleReset()
+          }}
+          min="1"
+          max="8"
+          style={{
+            width: '100%',
+            padding: '8px',
+            borderRadius: 4,
+            border: '1px solid #475569',
+            backgroundColor: '#1e293b',
+            color: '#e2e8f0',
+            fontFamily: 'monospace',
+            fontSize: 12,
+          }}
         />
-      </FloatingPanel>
+      </div>
+      <VisualizationPanel n={nValue} step={step} applyExample={applyExample} examples={examples} />
+    </div>
+  )
+
+  const statusPanel = (
+    <div className="count-and-say-status">
+      {step?.message || 'Ready'}
+    </div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
+
+  // Step 3: Add state + config
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
+      { id: 'viz', title: '📖 Count and Say Sequence', dockMode: 'split-right' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  // Step 4: Replace return block with portals
+  return (
+    <div className="count-and-say-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

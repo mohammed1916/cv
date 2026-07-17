@@ -1,9 +1,10 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -318,77 +319,98 @@ export default function PermutationSequenceVisualizer() {
         handleReset()
     }, [handleReset])
 
-    const dockPanels = useMemo(
-        () => [
-            {
-                id: 'viz',
-                title: 'Visualization',
-                content: (
-                    <VisualizationPanel
-                        n={n}
-                        k={k}
-                        step={step}
-                        handleReset={handleReset}
-                        example={example}
-                        applyExample={applyExample}
-                    />
-                ),
-            },
-            {
-                id: 'code',
-                title: 'Code',
-                content: (
-                                        <div style={{ position: "relative" }}>
-                      <CodeTracePanel
-                        step={step}
-                        codeLines={SOLUTION_CODE}
-                        onActiveLineDomChange={setActiveLineDom}
-                        autoScroll={autoScrollCode}
-                    />
-
-                      {showPatternOverlay && (
-                        <CodePatternAnnotations
-                          linePatterns={LINE_PATTERN_MAP}
-                          currentPhase={step?.phase}
-                          activeLineDom={activeLineDom}
-                          activeLine={step?.activeLine}
-                        />
-                      )}
-                    </div>
-                ),
-            },
-        ],
-        [n, k, step, example, handleReset, applyExample, autoScrollCode, setActiveLineDom]
+    // Step 1: Extract panels as consts
+    const primaryPanel = (
+        <div className="ps-panel">
+            <VisualizationPanel
+                n={n}
+                k={k}
+                step={step}
+                handleReset={handleReset}
+                example={example}
+                applyExample={applyExample}
+            />
+        </div>
     )
 
-    return (
-        <div className="problem-shell">
-            <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['viz', 'code']], minimized: [] }} />
-            <FloatingPanel title="Playback Controls">
-                {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PERMUTATIONSEQUENCE_PATTERNS} />
-        )}
-        <PlaybackControls
-                    isPlaying={isPlaying}
-                    isDone={isDone}
-                    speed={speed}
-                    onPlayToggle={togglePlay}
-                    onPrev={stepBack}
-                    onNext={stepForward}
-                    onReset={handleReset}
-                    prevDisabled={stepIndex < 0}
-                    nextDisabled={isDone}
-                    resetDisabled={stepIndex < 0}
-                    onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    showAutoScroll
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                autoScroll={autoScrollCode}
+                disableResizer
+            />
+            {showPatternOverlay && (
+                <CodePatternAnnotations
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
                 />
-            </FloatingPanel>
+            )}
+        </div>
+    )
+
+    const statusPanel = (
+        <div className="ps-status">{step?.message || 'Press Play to begin.'}</div>
+    )
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={PERMUTATIONSEQUENCE_PATTERNS} />
+            )}
+            <PlaybackControls
+                isPlaying={isPlaying}
+                isDone={isDone}
+                speed={speed}
+                onPlayToggle={togglePlay}
+                onPrev={stepBack}
+                onNext={stepForward}
+                onReset={handleReset}
+                prevDisabled={stepIndex < 0}
+                nextDisabled={isDone}
+                resetDisabled={stepIndex < 0}
+                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+                autoScroll={autoScrollCode}
+                onAutoScrollChange={setAutoScrollCode}
+                showAutoScroll
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                patternOverlayLabel="Show pattern overlay"
+                showPatternOverlayToggle
+            />
+        </>
+    )
+
+    // Step 2: State and config for Lumino
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+    return (
+        <div className="ps-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     )
 }

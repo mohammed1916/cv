@@ -1,5 +1,12 @@
-.ws-shell { display: grid; gap: 12px; }
-.ws-top { display: grid; grid-template-columns: 1.45fr 1fr; gap: 12px; }
+.ws-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+}
 .ws-panel { border: 1px solid #334155; border-radius: 12px; overflow: hidden; background: rgba(15,23,42,.72); }
 .ws-head { padding: 10px 12px; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; color: #e2e8f0; font-size: 13px; font-weight: 700; }
 .ws-error { color: #fecaca; font-size: 12px; }

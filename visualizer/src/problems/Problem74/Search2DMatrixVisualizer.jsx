@@ -1,11 +1,12 @@
 ﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from 'react-dom'
 import { motion } from "framer-motion";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
@@ -84,120 +85,143 @@ export default function Search2DMatrixVisualizer() {
     const cols = matrix[0].length;
     const lo = step?.lo ?? 0, hi = step?.hi ?? (matrix.length * cols - 1), mid = step?.mid ?? -1;
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'code',
-            title: 'Code',
-            content: (
-                <div style={{position: 'relative'}}>
-                    <CodeTracePanel
-                        step={step}
-                        codeLines={SOLUTION_CODE}
-                        highlightedLines={connectivity.highlightedLines}
-                        onLineSelect={connectivity.handleLineSelect}
-                        onActiveLineDomChange={setActiveLineDom}
-                    />
-                    {showPatternOverlay && (
-                        <CodePatternAnnotations
-                            linePatterns={LINE_PATTERN_MAP}
-                            currentPhase={step?.phase}
-                            activeLineDom={activeLineDom}
-                            activeLine={step?.activeLine}
-                        />
-                    )}
-                </div>
-            ),
-        },
-        {
-            id: 'viz',
-            title: '🔍 Binary Search',
-            content: (
-                <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
-                    <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
-                        {EXAMPLES.map((ex, i) => (
-                            <button key={ex.label} onClick={() => applyExample(i)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: sel === i ? '#dbeafe' : '#f1f5f9' }}>
-                                {ex.label}
-                            </button>
-                        ))}
-                        <span style={{ fontSize: 12, fontWeight: 'bold', color: '#1e293b', marginLeft: 'auto' }}>target = {target}</span>
-                    </div>
+    // Step 2: Extract panels into consts
+    const primaryPanel = (
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
+                {EXAMPLES.map((ex, i) => (
+                    <button key={ex.label} onClick={() => applyExample(i)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: sel === i ? '#dbeafe' : '#f1f5f9' }}>
+                        {ex.label}
+                    </button>
+                ))}
+                <span style={{ fontSize: 12, fontWeight: 'bold', color: '#1e293b', marginLeft: 'auto' }}>target = {target}</span>
+            </div>
 
-                    <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>Matrix</div>
-                    <div style={{ display: 'grid', gridTemplateColumns: `repeat(${cols}, minmax(50px, 1fr))`, gap: 4 }}>
-                        {matrix.map((row, i) =>
-                            row.map((val, j) => {
-                                const flat = i * cols + j;
-                                const isMid = flat === mid;
-                                const inRange = flat >= lo && flat <= hi;
-                                const isFound = isMid && step?.found === true;
-                                return (
-                                    <motion.div key={`${i}-${j}`} animate={{ scale: isMid ? 1.15 : 1 }} style={{
-                                        padding: '8px 4px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                                        backgroundColor: isFound ? '#dcfce7' : isMid ? '#fbbf24' : inRange ? '#dbeafe' : '#f3f4f6',
-                                        border: isMid ? '2px solid #f59e0b' : inRange ? '1px solid #0ea5e9' : '1px solid #cbd5e1',
-                                        borderRadius: 4, fontSize: 11, fontWeight: 'bold', color: '#1e293b'
-                                    }}>
-                                        <span>{val}</span>
-                                        <span style={{ fontSize: 9, color: '#64748b' }}>[{flat}]</span>
-                                    </motion.div>
-                                );
-                            })
-                        )}
-                    </div>
-
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, padding: 8, backgroundColor: '#f8fafc', borderRadius: 6 }}>
-                        <div>
-                            <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>lo</div>
-                            <div style={{ fontSize: 13, fontWeight: 'bold', color: '#1e293b' }}>{lo}</div>
-                        </div>
-                        <div>
-                            <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>mid</div>
-                            <div style={{ fontSize: 13, fontWeight: 'bold', color: '#f59e0b' }}>{mid >= 0 ? mid : '—'}</div>
-                        </div>
-                        <div>
-                            <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>hi</div>
-                            <div style={{ fontSize: 13, fontWeight: 'bold', color: '#1e293b' }}>{hi}</div>
-                        </div>
-                    </div>
-
-                    {step?.found !== null && (
-                        <div style={{ padding: 12, backgroundColor: step?.found ? '#dcfce7' : '#fee2e2', borderRadius: 6, border: step?.found ? '2px solid #86efac' : '2px solid #fecaca', textAlign: 'center', fontWeight: 600, color: step?.found ? '#15803d' : '#991b1b' }}>
-                            {step?.found ? `✓ Found ${target}` : `✗ ${target} not found`}
-                        </div>
-                    )}
-                </div>
-            ),
-        },
-    ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, matrix, cols, lo, hi, mid, target, sel, applyExample]);
-
-    return (
-        <div className="problem-shell">
-            <DockableWorkspace
-                panels={dockPanels}
-                initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
-            />
-            <FloatingPanel title="Playback Controls">
-                {showPatternOverlay && (
-                    <PatternLegend currentPhase={step?.phase} usedPatterns={SEARCH2DMATRIX_PATTERNS} />
+            <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>Matrix</div>
+            <div style={{ display: 'grid', gridTemplateColumns: `repeat(${cols}, minmax(50px, 1fr))`, gap: 4 }}>
+                {matrix.map((row, i) =>
+                    row.map((val, j) => {
+                        const flat = i * cols + j;
+                        const isMid = flat === mid;
+                        const inRange = flat >= lo && flat <= hi;
+                        const isFound = isMid && step?.found === true;
+                        return (
+                            <motion.div key={`${i}-${j}`} animate={{ scale: isMid ? 1.15 : 1 }} style={{
+                                padding: '8px 4px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                                backgroundColor: isFound ? '#dcfce7' : isMid ? '#fbbf24' : inRange ? '#dbeafe' : '#f3f4f6',
+                                border: isMid ? '2px solid #f59e0b' : inRange ? '1px solid #0ea5e9' : '1px solid #cbd5e1',
+                                borderRadius: 4, fontSize: 11, fontWeight: 'bold', color: '#1e293b'
+                            }}>
+                                <span>{val}</span>
+                                <span style={{ fontSize: 9, color: '#64748b' }}>[{flat}]</span>
+                            </motion.div>
+                        );
+                    })
                 )}
-                <PlaybackControls
-                    isPlaying={isPlaying}
-                    isDone={isDone}
-                    speed={speed}
-                    onPlayToggle={togglePlay}
-                    onPrev={stepBack}
-                    onNext={stepForward}
-                    onReset={handleReset}
-                    prevDisabled={stepIndex <= 0}
-                    nextDisabled={isDone}
-                    resetDisabled={stepIndex <= 0}
-                    onSpeedChange={e => setSpeed(Number(e.target.value))}
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, padding: 8, backgroundColor: '#f8fafc', borderRadius: 6 }}>
+                <div>
+                    <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>lo</div>
+                    <div style={{ fontSize: 13, fontWeight: 'bold', color: '#1e293b' }}>{lo}</div>
+                </div>
+                <div>
+                    <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>mid</div>
+                    <div style={{ fontSize: 13, fontWeight: 'bold', color: '#f59e0b' }}>{mid >= 0 ? mid : '—'}</div>
+                </div>
+                <div>
+                    <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>hi</div>
+                    <div style={{ fontSize: 13, fontWeight: 'bold', color: '#1e293b' }}>{hi}</div>
+                </div>
+            </div>
+
+            {step?.found !== null && (
+                <div style={{ padding: 12, backgroundColor: step?.found ? '#dcfce7' : '#fee2e2', borderRadius: 6, border: step?.found ? '2px solid #86efac' : '2px solid #fecaca', textAlign: 'center', fontWeight: 600, color: step?.found ? '#15803d' : '#991b1b' }}>
+                    {step?.found ? `✓ Found ${target}` : `✗ ${target} not found`}
+                </div>
+            )}
+        </div>
+    )
+
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                highlightedLines={connectivity.highlightedLines}
+                onLineSelect={connectivity.handleLineSelect}
+                onActiveLineDomChange={setActiveLineDom}
+                disableResizer
+            />
+            {showPatternOverlay && (
+                <CodePatternAnnotations
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
                 />
-            </FloatingPanel>
+            )}
+        </div>
+    )
+
+    const statusPanel = (
+        <div className="s2m-status">
+            {step?.message ?? 'Press Play or Step to begin.'}
+        </div>
+    )
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={SEARCH2DMATRIX_PATTERNS} />
+            )}
+            <PlaybackControls
+                isPlaying={isPlaying}
+                isDone={isDone}
+                speed={speed}
+                onPlayToggle={togglePlay}
+                onPrev={stepBack}
+                onNext={stepForward}
+                onReset={handleReset}
+                prevDisabled={stepIndex <= 0}
+                nextDisabled={isDone}
+                resetDisabled={stepIndex <= 0}
+                onSpeedChange={e => setSpeed(Number(e.target.value))}
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                patternOverlayLabel="Show pattern overlay"
+                showPatternOverlayToggle
+            />
+        </>
+    )
+
+    // Step 3: Add state + config
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: '🔍 Binary Search', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+    // Step 4: Replace return with portals
+    return (
+        <div className="s2m-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     );
 }

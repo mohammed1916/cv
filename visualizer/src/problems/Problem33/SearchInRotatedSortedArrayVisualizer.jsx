@@ -1,4 +1,5 @@
 ﻿import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -9,6 +10,7 @@ import './SearchInRotatedSortedArrayVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
 const SOLUTION_CODE = [
     { line: 1, text: 'class Solution:' },
@@ -184,130 +186,138 @@ export default function SearchInRotatedSortedArrayVisualizer() {
     const leftSorted = step?.phase === 'left_sorted' || (step?.phase === 'move_hi' && mid >= 0 && nums[lo] <= nums[mid])
     const rightSorted = step?.phase === 'right_sorted' || (step?.phase === 'move_lo' && mid >= 0 && nums[lo] > nums[mid])
 
-    return (
-        <div className="sirsa-shell">
-            <section className="sirsa-panel">
-                <header className="sirsa-head">
-                    <span>Search in Rotated Sorted Array · Binary Search</span>
-                    {inputError && <span className="sirsa-error">{inputError}</span>}
-                </header>
-                <div className="sirsa-body">
-                    <div className="sirsa-top-row">
-                        <div className="sirsa-examples">
-                            {EXAMPLES.map((ex) => (
-                                <button key={ex.label} className="sirsa-chip" onClick={() => applyExample(ex)}>
-                                    {ex.label}
-                                </button>
-                            ))}
+    // Extract panels
+    const primaryPanel = (
+        <section className="sirsa-panel">
+            <header className="sirsa-head">
+                <span>Search in Rotated Sorted Array · Binary Search</span>
+                {inputError && <span className="sirsa-error">{inputError}</span>}
+            </header>
+            <div className="sirsa-body">
+                <div className="sirsa-top-row">
+                    <div className="sirsa-examples">
+                        {EXAMPLES.map((ex) => (
+                            <button key={ex.label} className="sirsa-chip" onClick={() => applyExample(ex)}>
+                                {ex.label}
+                            </button>
+                        ))}
+                    </div>
+                    <div className="sirsa-inputs">
+                        <div className="sirsa-input-group">
+                            <label className="sirsa-label">nums</label>
+                            <input
+                                className="sirsa-input"
+                                value={numsInput}
+                                onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
+                            />
                         </div>
-                        <div className="sirsa-inputs">
-                            <div className="sirsa-input-group">
-                                <label className="sirsa-label">nums</label>
-                                <input
-                                    className="sirsa-input"
-                                    value={numsInput}
-                                    onChange={(e) => { setNumsInput(e.target.value);
-
- handleReset() }}
-                                />
-                            </div>
-                            <div className="sirsa-input-group">
-                                <label className="sirsa-label">target</label>
-                                <input
-                                    className="sirsa-input narrow"
-                                    value={targetInput}
-                                    onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
-                                    type="number"
-                                />
-                            </div>
+                        <div className="sirsa-input-group">
+                            <label className="sirsa-label">target</label>
+                            <input
+                                className="sirsa-input narrow"
+                                value={targetInput}
+                                onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
+                                type="number"
+                            />
                         </div>
                     </div>
-
-                    {/* Array */}
-                    <div className="sirsa-array-wrap">
-                        {nums.map((val, idx) => {
-                            const isLo = idx === lo
-                            const isHi = idx === hi
-                            const isMid = idx === mid
-                            const inLeft = mid >= 0 && idx >= lo && idx <= mid
-                            const inRight = mid >= 0 && idx >= mid && idx <= hi
-                            const active = mid >= 0 && idx >= lo && idx <= hi
-                            const isFound = result !== null && result !== undefined && result >= 0 && idx === result
-                            const isElim = result !== null && result !== undefined && !active && !isFound
-
-                            return (
-                                <div key={idx} className="sirsa-col">
-                                    <motion.div
-                                        className={[
-                                            'sirsa-cell',
-                                            isMid ? 'mid' : '',
-                                            isFound ? 'found' : '',
-                                            result === -1 ? 'eliminated' : '',
-                                            !isMid && inLeft && leftSorted ? 'sorted-left' : '',
-                                            !isMid && inRight && rightSorted ? 'sorted-right' : '',
-                                            !active && !isFound ? 'dim' : '',
-                                        ].filter(Boolean).join(' ')}
-                                        animate={{ y: isMid ? -10 : isFound ? -10 : 0, scale: isMid || isFound ? 1.12 : 1 }}
-                                        transition={{ type: 'spring', stiffness: 400, damping: 26 }}
-                                    >
-                                        {val}
-                                    </motion.div>
-                                    <span className="sirsa-idx">{idx}</span>
-                                    <div className="sirsa-ptrs">
-                                        {isLo && <span className="sirsa-ptr lo-ptr">lo</span>}
-                                        {isMid && <span className="sirsa-ptr mid-ptr">mid</span>}
-                                        {isHi && <span className="sirsa-ptr hi-ptr">hi</span>}
-                                    </div>
-                                </div>
-                            )
-                        })}
-                    </div>
-
-                    {/* Sorted half indicator */}
-                    {(leftSorted || rightSorted) && mid >= 0 && (
-                        <div className={`sirsa-half-badge${leftSorted ? ' left' : ' right'}`}>
-                            {leftSorted ? `← Left half [${lo}..${mid}] is sorted` : `Right half [${mid}..${hi}] is sorted →`}
-                        </div>
-                    )}
-
-                    {/* Result */}
-                    <AnimatePresence>
-                        {result !== null && result !== undefined && (
-                            <motion.div
-                                className={`sirsa-result${result >= 0 ? ' found' : ' not-found'}`}
-                                initial={{ opacity: 0, y: 8 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0 }}
-                            >
-                                {result >= 0 ? `Found at index ${result} ✓` : 'Not found — return -1'}
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
                 </div>
-            </section>
 
-                        <div style={{ position: "relative" }}>
-              <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+                {/* Array */}
+                <div className="sirsa-array-wrap">
+                    {nums.map((val, idx) => {
+                        const isLo = idx === lo
+                        const isHi = idx === hi
+                        const isMid = idx === mid
+                        const inLeft = mid >= 0 && idx >= lo && idx <= mid
+                        const inRight = mid >= 0 && idx >= mid && idx <= hi
+                        const active = mid >= 0 && idx >= lo && idx <= hi
+                        const isFound = result !== null && result !== undefined && result >= 0 && idx === result
+                        const isElim = result !== null && result !== undefined && !active && !isFound
 
-              {showPatternOverlay && (
+                        return (
+                            <div key={idx} className="sirsa-col">
+                                <motion.div
+                                    className={[
+                                        'sirsa-cell',
+                                        isMid ? 'mid' : '',
+                                        isFound ? 'found' : '',
+                                        result === -1 ? 'eliminated' : '',
+                                        !isMid && inLeft && leftSorted ? 'sorted-left' : '',
+                                        !isMid && inRight && rightSorted ? 'sorted-right' : '',
+                                        !active && !isFound ? 'dim' : '',
+                                    ].filter(Boolean).join(' ')}
+                                    animate={{ y: isMid ? -10 : isFound ? -10 : 0, scale: isMid || isFound ? 1.12 : 1 }}
+                                    transition={{ type: 'spring', stiffness: 400, damping: 26 }}
+                                >
+                                    {val}
+                                </motion.div>
+                                <span className="sirsa-idx">{idx}</span>
+                                <div className="sirsa-ptrs">
+                                    {isLo && <span className="sirsa-ptr lo-ptr">lo</span>}
+                                    {isMid && <span className="sirsa-ptr mid-ptr">mid</span>}
+                                    {isHi && <span className="sirsa-ptr hi-ptr">hi</span>}
+                                </div>
+                            </div>
+                        )
+                    })}
+                </div>
+
+                {/* Sorted half indicator */}
+                {(leftSorted || rightSorted) && mid >= 0 && (
+                    <div className={`sirsa-half-badge${leftSorted ? ' left' : ' right'}`}>
+                        {leftSorted ? `← Left half [${lo}..${mid}] is sorted` : `Right half [${mid}..${hi}] is sorted →`}
+                    </div>
+                )}
+
+                {/* Result */}
+                <AnimatePresence>
+                    {result !== null && result !== undefined && (
+                        <motion.div
+                            className={`sirsa-result${result >= 0 ? ' found' : ' not-found'}`}
+                            initial={{ opacity: 0, y: 8 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0 }}
+                        >
+                            {result >= 0 ? `Found at index ${result} ✓` : 'Not found — return -1'}
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
+        </section>
+    )
+
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                disableResizer
+            />
+            {showPatternOverlay && (
                 <CodePatternAnnotations
-                  linePatterns={LINE_PATTERN_MAP}
-                  currentPhase={step?.phase}
-                  activeLineDom={activeLineDom}
-                  activeLine={step?.activeLine}
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
                 />
-              )}
-            </div>
+            )}
+        </div>
+    )
 
-            <div className={`sirsa-status${result !== null && result !== undefined ? (result >= 0 ? ' ok' : ' fail') : ''}`}>
-                {step?.message ?? 'Press Play or Step to begin.'}
-            </div>
+    const statusPanel = (
+        <div className={`sirsa-status${result !== null && result !== undefined ? (result >= 0 ? ' ok' : ' fail') : ''}`}>
+            {step?.message ?? 'Press Play or Step to begin.'}
+        </div>
+    )
 
-            <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={SEARCHINROTATEDSORTEDARRAY_PATTERNS} />
-        )}
-        <PlaybackControls
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={SEARCHINROTATEDSORTEDARRAY_PATTERNS} />
+            )}
+            <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward}
                 onReset={handleReset} prevDisabled={stepIndex < 0}
@@ -318,7 +328,34 @@ export default function SearchInRotatedSortedArrayVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
-      </FloatingPanel>
+        </>
+    )
+
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Search in Rotated Sorted Array', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+    return (
+        <div className="sirsa-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     )
 }

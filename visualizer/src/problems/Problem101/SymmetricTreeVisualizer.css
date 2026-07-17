@@ -1,39 +1,25 @@
 /* ── Shell ──────────────────────────────────────────────────────────────────── */
 .sym-shell {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 16px;
-    font-family: inherit;
-}
-
-/* ── Top row ────────────────────────────────────────────────────────────────── */
-.sym-top {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
+    height: calc(100vh - 200px);
+    min-height: 480px;
+    gap: 0;
+    overflow: hidden;
 }
 
 /* ── Panels ─────────────────────────────────────────────────────────────────── */
 .sym-panel {
     background: #1e1e2e;
-    border: 1px solid #313244;
-    border-radius: 10px;
+    border: none;
     overflow: hidden;
-    flex: 1;
-    min-width: 260px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
-.sym-panel.main {
-    flex: 3;
-}
-
-.sym-panel.side {
-    flex: 1;
-    min-width: 180px;
-}
-
-.sym-head {
+.sym-panel-head {
     padding: 10px 14px;
     background: #181825;
     font-size: 13px;
@@ -42,18 +28,21 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.sym-panel-body {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+    flex: 1;
 }
 
 .sym-error {
     color: #f38ba8;
     font-size: 11px;
-}
-
-.sym-body {
-    padding: 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
 }
 
 /* ── Example chips ──────────────────────────────────────────────────────────── */

@@ -1,15 +1,18 @@
 .fmp-shell {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 16px;
-    font-family: inherit;
+    height: calc(100vh - 200px);
+    min-height: 480px;
+    gap: 0;
+    overflow: hidden;
 }
 
 .fmp-examples {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
+    padding: 16px;
 }
 
 .fmp-chip {
@@ -33,6 +36,7 @@
     border: 1px solid #313244;
     border-radius: 10px;
     padding: 12px 14px;
+    margin: 0 16px 16px 16px;
 }
 
 .fmp-panel-label {
@@ -134,6 +138,7 @@
 .fmp-trackers {
     display: flex;
     gap: 10px;
+    padding: 0 16px 16px 16px;
 }
 
 .fmp-tracker {
@@ -197,13 +202,14 @@
     background: #001030;
     border: 2px solid #89b4fa;
     color: #89b4fa;
+    margin: 0 16px;
 }
 
 .fmp-status {
     padding: 8px 12px;
     background: #1e1e2e;
-    border: 1px solid #313244;
-    border-radius: 8px;
+    border-top: 1px solid #313244;
+    border-radius: 0;
     font-size: 13px;
     color: #a6adc8;
     min-height: 36px;

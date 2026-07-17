@@ -1,4 +1,5 @@
 ﻿import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import VisualizerPlaybackSection from '../../components/VisualizerPlaybackSection'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
@@ -13,6 +14,7 @@ import './MaxDepthBinaryTreeVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -152,73 +154,75 @@ export default function MaxDepthBinaryTreeVisualizer() {
         handleReset()
     }, [handleReset])
 
-    return (
-        <div className="mdbt-shell">
-            <div className="mdbt-top">
-                <section className="mdbt-panel main">
-                    <header className="mdbt-head">
-                        <span>Binary Tree DFS</span>
-                        {inputError && <span className="mdbt-error">{inputError}</span>}
-                    </header>
-                    <div className="mdbt-body">
-                        <div className="mdbt-examples">
-                            {EXAMPLES.map((ex) => (
-                                <button key={ex.label} className="mdbt-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                            ))}
-                        </div>
-                        <input className="mdbt-input" value={arrInput} onChange={handleArrInputChange} />
-                        <div className="mdbt-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
-                            <TreeSVG edges={edges} positions={positions} canvasWidth={CANVAS_W} canvasHeight={CANVAS_H} />
-                            {nodes.map((node) => {
-                                const pos = positions.get(node.id)
-                                if (!pos) return null
-                                const isActive = step?.activeId === node.id
-                                const retVal = step?.returnValues?.get(node.id)
-                                return (
-                                    <motion.div
-                                        key={node.id}
-                                        className={`mdbt-node ${isActive ? 'active' : ''} ${retVal !== undefined ? 'returned' : ''}`}
-                                        style={{ left: pos.x - NODE_R, top: pos.y - NODE_R }}
-                                        animate={isActive ? { scale: 1.2 } : { scale: 1 }}
-                                        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                                        onClick={() =>
-                                            connectivity.setVisualFocus({
-                                                lines: [4, 5, 6],
-                                                reason: `Tree node ${node.val} selected in DFS preview.`,
-                                                targetType: 'node',
-                                                targetId: String(node.id),
-                                            })
-                                        }
-                                        role="button"
-                                        tabIndex={0}
-                                    >
-                                        {node.val}
-                                        {retVal !== undefined && <span className="mdbt-badge">{retVal}</span>}
-                                    </motion.div>
-                                )
-                            })}
-                        </div>
-                    </div>
-                </section>
-
-                <section className="mdbt-panel side">
-                    <header className="mdbt-head"><span>Call Stack</span></header>
-                    <div className="mdbt-body">
-                        <div className="mdbt-stack">
-                            {(step?.callStack ?? []).map((val, i) => (
-                                <div key={i} className={`mdbt-frame ${i === (step.callStack.length - 1) ? 'top' : ''}`}>
-                                    maxDepth({val})
-                                </div>
-                            ))}
-                            {(step?.callStack?.length === 0) && <div className="mdbt-empty">—</div>}
-                        </div>
-                        <div className={`mdbt-result ${step?.phase === 'done' ? 'ok' : ''}`}>
-                            {step?.phase === 'done' ? step.message : 'Traversing…'}
-                        </div>
-                    </div>
-                </section>
+    const primaryPanel = (
+        <div className="mdbt-panel main">
+            <header className="mdbt-head">
+                <span>Binary Tree DFS</span>
+                {inputError && <span className="mdbt-error">{inputError}</span>}
+            </header>
+            <div className="mdbt-body">
+                <div className="mdbt-examples">
+                    {EXAMPLES.map((ex) => (
+                        <button key={ex.label} className="mdbt-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
+                    ))}
+                </div>
+                <input className="mdbt-input" value={arrInput} onChange={handleArrInputChange} />
+                <div className="mdbt-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
+                    <TreeSVG edges={edges} positions={positions} canvasWidth={CANVAS_W} canvasHeight={CANVAS_H} />
+                    {nodes.map((node) => {
+                        const pos = positions.get(node.id)
+                        if (!pos) return null
+                        const isActive = step?.activeId === node.id
+                        const retVal = step?.returnValues?.get(node.id)
+                        return (
+                            <motion.div
+                                key={node.id}
+                                className={`mdbt-node ${isActive ? 'active' : ''} ${retVal !== undefined ? 'returned' : ''}`}
+                                style={{ left: pos.x - NODE_R, top: pos.y - NODE_R }}
+                                animate={isActive ? { scale: 1.2 } : { scale: 1 }}
+                                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                                onClick={() =>
+                                    connectivity.setVisualFocus({
+                                        lines: [4, 5, 6],
+                                        reason: `Tree node ${node.val} selected in DFS preview.`,
+                                        targetType: 'node',
+                                        targetId: String(node.id),
+                                    })
+                                }
+                                role="button"
+                                tabIndex={0}
+                            >
+                                {node.val}
+                                {retVal !== undefined && <span className="mdbt-badge">{retVal}</span>}
+                            </motion.div>
+                        )
+                    })}
+                </div>
             </div>
+        </div>
+    )
 
+    const statePanel = (
+        <div className="mdbt-panel side">
+            <header className="mdbt-head"><span>Call Stack</span></header>
+            <div className="mdbt-body">
+                <div className="mdbt-stack">
+                    {(step?.callStack ?? []).map((val, i) => (
+                        <div key={i} className={`mdbt-frame ${i === (step.callStack.length - 1) ? 'top' : ''}`}>
+                            maxDepth({val})
+                        </div>
+                    ))}
+                    {(step?.callStack?.length === 0) && <div className="mdbt-empty">—</div>}
+                </div>
+                <div className={`mdbt-result ${step?.phase === 'done' ? 'ok' : ''}`}>
+                    {step?.phase === 'done' ? step.message : 'Traversing…'}
+                </div>
+            </div>
+        </div>
+    )
+
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
             <VisualizerPlaybackSection
                 step={step}
                 codeLines={SOLUTION_CODE}
@@ -247,7 +251,40 @@ export default function MaxDepthBinaryTreeVisualizer() {
                 }}
                 visualizationFeatures={vizFeatures}
                 onVisualizationToggle={toggleVizFeature}
+                disableResizer
             />
+        </div>
+    )
+
+    const statusPanel = (
+        <div className="mdbt-status">
+            {step?.message || 'Press Play to begin.'}
+        </div>
+    )
+
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Binary Tree DFS', dockMode: 'split-right' },
+            { id: 'state', title: 'Call Stack', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+    return (
+        <div className="mdbt-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
         </div>
     )
 }

@@ -1,6 +1,7 @@
 ﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -105,48 +106,91 @@ export default function ReorderListVisualizer() {
     const displayList = step?.list ?? arr;
     const slow = step?.slow ?? -1, fast = step?.fast ?? -1;
 
-    const dockPanels = useMemo(() => [
-        { id: 'code', title: 'Code', content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} /> },
-        { id: 'viz', title: '🔗 Reorder', content: (
-            <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
-                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                    {EXAMPLES.map((ex, i) => <button key={ex.label} onClick={() => applyExample(i)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: sel === i ? '#dbeafe' : '#f1f5f9' }}>{ex.label}</button>)}
-                </div>
-                <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-                    {displayList.map((v, i) => (
-                        <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                            <motion.div animate={{ scale: i === slow || i === fast ? 1.15 : 1 }} style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#dbeafe', border: '1px solid #0ea5e9', borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: '#1e293b' }}>{v}</motion.div>
-                            {i < displayList.length - 1 && <span style={{ color: '#cbd5e1' }}>→</span>}
-                        </div>
-                    ))}
-                </div>
-                {step?.firstHalf && (
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-                        <div style={{ padding: 8, backgroundColor: '#dbeafe', borderRadius: 6 }}>
-                            <div style={{ fontSize: 11, fontWeight: 600, color: '#1e40af', marginBottom: 4 }}>First</div>
-                            <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-                                {step.firstHalf.map((v, i) => <div key={i} style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f0f9ff', border: '1px solid #0ea5e9', borderRadius: 3, fontSize: 11, fontWeight: 'bold', color: '#1e40af' }}>{v}</div>)}
-                            </div>
-                        </div>
-                        <div style={{ padding: 8, backgroundColor: '#fee2e2', borderRadius: 6 }}>
-                            <div style={{ fontSize: 11, fontWeight: 600, color: '#991b1b', marginBottom: 4 }}>Second {step.phase?.includes("revers") ? "(reversed)" : ""}</div>
-                            <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-                                {step.secondHalf.map((v, i) => <div key={i} style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#fecaca', border: '1px solid #fca5a5', borderRadius: 3, fontSize: 11, fontWeight: 'bold', color: '#991b1b' }}>{v}</div>)}
-                            </div>
+    // Extract panels
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                highlightedLines={connectivity.highlightedLines}
+                onLineSelect={connectivity.handleLineSelect}
+                onActiveLineDomChange={setActiveLineDom}
+                disableResizer
+            />
+            {showPatternOverlay && <CodePatternAnnotations step={step} linePatternMap={LINE_PATTERN_MAP} patterns={PATTERNS} />}
+        </div>
+    )
+
+    const primaryPanel = (
+        <div className="rl-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, overflow: 'auto' }}>
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                {EXAMPLES.map((ex, i) => <button key={ex.label} onClick={() => applyExample(i)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: sel === i ? '#dbeafe' : '#f1f5f9' }}>{ex.label}</button>)}
+            </div>
+            <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+                {displayList.map((v, i) => (
+                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                        <motion.div animate={{ scale: i === slow || i === fast ? 1.15 : 1 }} style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#dbeafe', border: '1px solid #0ea5e9', borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: '#1e293b' }}>{v}</motion.div>
+                        {i < displayList.length - 1 && <span style={{ color: '#cbd5e1' }}>→</span>}
+                    </div>
+                ))}
+            </div>
+            {step?.firstHalf && (
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+                    <div style={{ padding: 8, backgroundColor: '#dbeafe', borderRadius: 6 }}>
+                        <div style={{ fontSize: 11, fontWeight: 600, color: '#1e40af', marginBottom: 4 }}>First</div>
+                        <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+                            {step.firstHalf.map((v, i) => <div key={i} style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f0f9ff', border: '1px solid #0ea5e9', borderRadius: 3, fontSize: 11, fontWeight: 'bold', color: '#1e40af' }}>{v}</div>)}
                         </div>
                     </div>
-                )}
-            </div>
-        )}
-    ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, sel, applyExample, displayList, slow, fast]);
+                    <div style={{ padding: 8, backgroundColor: '#fee2e2', borderRadius: 6 }}>
+                        <div style={{ fontSize: 11, fontWeight: 600, color: '#991b1b', marginBottom: 4 }}>Second {step.phase?.includes("revers") ? "(reversed)" : ""}</div>
+                        <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+                            {step.secondHalf.map((v, i) => <div key={i} style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#fecaca', border: '1px solid #fca5a5', borderRadius: 3, fontSize: 11, fontWeight: 'bold', color: '#991b1b' }}>{v}</div>)}
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
+    )
+
+    const statusPanel = (
+        <div className="rl-status">
+            Step {stepIndex + 1} / {steps.length}: {step?.message || 'Ready'}
+        </div>
+    )
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
+            <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex <= 0} nextDisabled={isDone} resetDisabled={stepIndex <= 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
+        </>
+    )
+
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'primary', title: '🔗 Reorder', dockMode: 'split-right' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
-        <div className="problem-shell">
-            <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex <= 0} nextDisabled={isDone} resetDisabled={stepIndex <= 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
-            </FloatingPanel>
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+        <div className="rl-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     );
 }

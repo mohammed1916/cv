@@ -4,7 +4,9 @@
     gap: 12px;
     padding: 16px;
     font-family: inherit;
-    height: 100vh;
+    height: calc(100vh - 200px);
+    min-height: 480px;
+    overflow: hidden;
 }
 
 .gp-hero {
@@ -167,4 +169,17 @@
     color: #a6adc8;
     min-height: 36px;
     margin-top: 8px;
+}
+
+.gp-status-panel {
+    padding: 8px 12px;
+    background: #1e1e2e;
+    border: 1px solid #313244;
+    border-radius: 0;
+    font-size: 13px;
+    color: #a6adc8;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
 }

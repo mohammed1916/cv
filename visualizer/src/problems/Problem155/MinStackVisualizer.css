@@ -1,8 +1,11 @@
 .ms-shell {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    height: 100%;
+    height: calc(100vh - 200px);
+    min-height: 480px;
+    gap: 0;
+    overflow: hidden;
 }
 
 .ms-hero {
@@ -330,4 +333,17 @@
     font-size: 13px;
     color: var(--text-muted);
     flex-shrink: 0;
+}
+
+.ms-status-panel {
+    padding: 8px 14px;
+    background: var(--surface2);
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: monospace;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    overflow: hidden;
 }

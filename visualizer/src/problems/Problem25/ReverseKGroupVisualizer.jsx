@@ -1,4 +1,5 @@
 ﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -7,8 +8,9 @@ import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
-import "./ReverseKGroupVisualizer.css";
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import "./ReverseKGroupVisualizer.css";
 
 const REVERSEKGROUP_PATTERNS = ['advance', 'done', 'find', 'found', 'init', 'reverse', 'reversed', 'short']
 
@@ -166,8 +168,8 @@ export default function ReverseKGroupVisualizer() {
         </div>
     );
 
-    return (
-        <div className="rkg-shell">
+    const primaryPanel = (
+        <div className="rkg-panel">
             <div className="rkg-examples">
                 {EXAMPLES.map(e => (
                     <button key={e.label} className={`rkg-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>
@@ -176,7 +178,7 @@ export default function ReverseKGroupVisualizer() {
                 ))}
             </div>
 
-            <div className="rkg-panel">
+            <div>
                 <div className="rkg-panel-label">Working Array</div>
                 {renderList(arr, (idx) => {
                     if (idx >= groupStart && idx <= groupEnd) {
@@ -189,7 +191,7 @@ export default function ReverseKGroupVisualizer() {
 
             <AnimatePresence>
                 {result.length > 0 && (
-                    <motion.div className="rkg-panel" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                         <div className="rkg-panel-label">Result (built so far)</div>
                         {renderList(result, () => "res")}
                     </motion.div>
@@ -212,35 +214,82 @@ export default function ReverseKGroupVisualizer() {
             </div>
 
             {step?.done && <div className="rkg-result">✓ Result: [{result.join(" → ")}]</div>}
+        </div>
+    )
 
-            <div style={{ position: 'relative' }}>
-              <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-
-              {showPatternOverlay && (
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                disableResizer
+            />
+            {showPatternOverlay && (
                 <CodePatternAnnotations
-                  linePatterns={LINE_PATTERN_MAP}
-                  currentPhase={step?.phase}
-                  activeLineDom={activeLineDom}
-                  activeLine={step?.activeLine}
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
                 />
-              )}
-            </div>
-            <div className="rkg-status">{step?.message ?? "Press Play to begin."}</div>
-            <FloatingPanel title="Playback Controls">
-              {showPatternOverlay && (
+            )}
+        </div>
+    )
+
+    const statusPanel = (
+        <div className="rkg-status">{step?.message ?? "Press Play to begin."}</div>
+    )
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={REVERSEKGROUP_PATTERNS} />
-              )}
-        <PlaybackControls
-                isPlaying={isPlaying} isDone={isDone} speed={speed}
-                onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-                prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
+            )}
+            <PlaybackControls
+                isPlaying={isPlaying}
+                isDone={isDone}
+                speed={speed}
+                onPlayToggle={togglePlay}
+                onPrev={stepBack}
+                onNext={stepForward}
+                onReset={handleReset}
+                prevDisabled={stepIndex < 0}
+                nextDisabled={isDone}
+                resetDisabled={stepIndex < 0}
                 onSpeedChange={e => setSpeed(Number(e.target.value))}
                 showPatternOverlay={showPatternOverlay}
                 onShowPatternOverlayChange={setShowPatternOverlay}
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
-      </FloatingPanel>
+        </>
+    )
+
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Array Visualization', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+    return (
+        <div className="rkg-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     );
 }

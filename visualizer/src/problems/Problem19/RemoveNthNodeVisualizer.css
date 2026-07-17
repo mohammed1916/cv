@@ -1,16 +1,11 @@
 ﻿.rnn-shell {
+  position: relative;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  gap: 16px;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
   overflow: hidden;
-}
-
-.rnn-top {
-  display: flex;
-  gap: 16px;
-  flex: 1;
-  min-height: 0;
 }
 
 .rnn-panel {

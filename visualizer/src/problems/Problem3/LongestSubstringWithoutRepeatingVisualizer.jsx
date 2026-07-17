@@ -346,7 +346,7 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
       { id: 'state',   title: 'Hash Map', dockMode: 'split-right' },
       { id: 'code',    title: 'Code', dockMode: 'split-bottom' },
       { id: 'variables', title: 'Variables', dockMode: 'tab-after' },
-      { id: 'status',  title: 'Status', dockMode: 'tab-after' },
+      { id: 'status',  title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []
   )

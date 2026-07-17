@@ -1,8 +1,9 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -198,6 +199,7 @@ export default function GroupAnagramsVisualizer() {
     const [input, setInput] = useState('["eat","tea","tan","ate","nat","bat"]')
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
+    const [panelDivs, setPanelDivs] = useState(null)
 
     const { strs, inputError } = useMemo(() => {
         try {
@@ -225,64 +227,109 @@ export default function GroupAnagramsVisualizer() {
     const currentKey = step?.currentKey ?? null
     const currentWordIdx = step?.currentWordIdx ?? -1
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'input',
-            title: 'Input Playground',
-            subtitle: inputError ? 'Fix the input to resume playback.' : 'Edit the array and replay the grouping.',
-            defaultZone: 'left',
-            content: (
-                <div className="ga-body">
-                    {/* Controls */}
-                    <div className="ga-top-row">
-                        <div className="ga-examples">
-                            {EXAMPLES.map(ex => (
-                                <button key={ex.label} className="ga-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                            ))}
-                        </div>
-                        <div className="ga-input-group">
-                            <label className="ga-label">strs (JSON array of strings)</label>
-                            <input className="ga-input" value={input}
-                                onChange={e => { setInput(e.target.value); handleReset() }} />
-                        </div>
+    // Extract panels as constants
+    const inputPanel = (
+        <div className="ga-panel">
+            <div className="ga-head">
+                <span>Input Playground</span>
+            </div>
+            <div className="ga-body">
+                {/* Controls */}
+                <div className="ga-top-row">
+                    <div className="ga-examples">
+                        {EXAMPLES.map(ex => (
+                            <button key={ex.label} className="ga-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
+                        ))}
                     </div>
-                    {inputError && <div className="ga-error">{inputError}</div>}
+                    <div className="ga-input-group">
+                        <label className="ga-label">strs (JSON array of strings)</label>
+                        <input className="ga-input" value={input}
+                            onChange={e => { setInput(e.target.value); handleReset() }} />
+                    </div>
                 </div>
-            ),
-        },
-        {
-            id: 'viz',
-            title: 'Hash Map Visualization',
-            subtitle: step ? `Step ${stepIndex + 1} of ${steps.length}` : 'Press play to start.',
-            defaultZone: 'right',
-            content: <VisualizationPanel strs={strs} step={step} currentWordIdx={currentWordIdx} currentKey={currentKey} anagramMap={anagramMap} keyToColor={keyToColor} />,
-        },
-        {
-            id: 'code',
-            title: 'Solution Code Trace',
-            subtitle: step ? `Active line ${step.activeLine}` : 'Line-by-line solution view.',
-            defaultZone: 'full',
-            content: (
-                                <div style={{ position: "relative" }}>
-                  <CodeTracePanel
-                    step={step}
-                    codeLines={SOLUTION_CODE}
-                    onActiveLineDomChange={setActiveLineDom}
-                    autoScroll={autoScrollCode}
-                />
+                {inputError && <div className="ga-error">{inputError}</div>}
+            </div>
+        </div>
+    )
 
-                  {showPatternOverlay && (
-                    <CodePatternAnnotations
-                      linePatterns={LINE_PATTERN_MAP}
-                      currentPhase={step?.phase}
-                      activeLineDom={activeLineDom}
-                      activeLine={step?.activeLine}
-                    />
-                  )}
-                </div>
-            ),
-        },
-    ], [input, inputError, applyExample, step, stepIndex, steps, strs, currentWordIdx, currentKey, anagramMap, keyToColor, setActiveLineDom, autoScrollCode])
+    const vizPanel = (
+        <div className="ga-panel">
+            <div className="ga-head">
+                <span>Hash Map Visualization</span>
+            </div>
+            <div className="ga-body">
+                <VisualizationPanel strs={strs} step={step} currentWordIdx={currentWordIdx} currentKey={currentKey} anagramMap={anagramMap} keyToColor={keyToColor} />
+            </div>
+        </div>
+    )
+
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                autoScroll={autoScrollCode}
+                disableResizer
+            />
+            {showPatternOverlay && (
+                <CodePatternAnnotations
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
+                />
+            )}
+        </div>
+    )
+
+    const statusPanel = (
+        <div className="ga-status-strip">
+            {step?.message ?? 'Press Play or Step to begin.'}
+        </div>
+    )
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={GROUPANAGRAMS_PATTERNS} />
+            )}
+            <PlaybackControls
+                onReset={handleReset}
+                onPrev={stepBack}
+                onPlayToggle={togglePlay}
+                onNext={stepForward}
+                resetDisabled={steps.length === 0}
+                prevDisabled={stepIndex <= 0}
+                nextDisabled={steps.length === 0 || isDone}
+                isPlaying={isPlaying}
+                isDone={isDone}
+                speed={speed}
+                onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+                speedIndicator={`${speed}ms`}
+                autoScroll={autoScrollCode}
+                onAutoScrollChange={setAutoScrollCode}
+                autoScrollLabel="Auto-scroll code"
+                showAutoScroll
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                patternOverlayLabel="Show pattern overlay"
+                showPatternOverlayToggle
+            />
+        </>
+    )
+
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'input', title: 'Input Playground', dockMode: 'split-right' },
+            { id: 'viz', title: 'Hash Map Visualization', dockMode: 'split-right' },
+            { id: 'code', title: 'Solution Code Trace', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
         <div className="ga-shell">
@@ -297,45 +344,21 @@ export default function GroupAnagramsVisualizer() {
                 </div>
             </section>
 
-            <DockableWorkspace
-                title="Group Anagrams Workspace"
-                panels={dockPanels}
-                initialLayout={{
-                    rows: [
-                        ["input", "viz"],
-                        ["code"],
-                    ],
-                    minimized: [],
-                }}
-            />
-
-            <FloatingPanel title="Playback Controls">
-                {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={GROUPANAGRAMS_PATTERNS} />
-        )}
-        <PlaybackControls
-                    onReset={handleReset}
-                    onPrev={stepBack}
-                    onPlayToggle={togglePlay}
-                    onNext={stepForward}
-                    resetDisabled={steps.length === 0}
-                    prevDisabled={stepIndex <= 0}
-                    nextDisabled={steps.length === 0 || isDone}
-                    isPlaying={isPlaying}
-                    isDone={isDone}
-                    speed={speed}
-                    onSpeedChange={(event) => setSpeed(Number(event.target.value))}
-                    speedIndicator={`${speed}ms`}
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    autoScrollLabel="Auto-scroll code"
-                    showAutoScroll
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
-                />
-            </FloatingPanel>
+            <div className="ga-workspace">
+                <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+                {panelDivs && (
+                    <>
+                        {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+                        {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+                        {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                        {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                    </>
+                )}
+                {createPortal(
+                    <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                    document.body
+                )}
+            </div>
         </div>
     )
 }

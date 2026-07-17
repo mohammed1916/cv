@@ -1,5 +1,12 @@
-.mws-shell { display: grid; gap: 12px; }
-.mws-top { display: grid; grid-template-columns: 1.45fr 1fr; gap: 12px; }
+.mws-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+}
 .mws-panel { border: 1px solid #334155; border-radius: 12px; overflow: hidden; background: rgba(15,23,42,.72); }
 .mws-head { padding: 10px 12px; border-bottom: 1px solid #334155; color: #e2e8f0; font-size: 13px; font-weight: 700; }
 .mws-body { padding: 12px; display: grid; gap: 10px; }

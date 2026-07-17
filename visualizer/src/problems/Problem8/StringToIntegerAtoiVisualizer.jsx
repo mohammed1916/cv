@@ -1,13 +1,15 @@
 ﻿import { useState, useCallback, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './StringToIntegerAtoiVisualizer.css'
-import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -185,6 +187,7 @@ const EXAMPLES = getExamples('string-to-integer-atoi')
 
 export default function StringToIntegerAtoiVisualizer() {
   const [sInput, setSInput] = useState('   -42')
+  const [panelDivs, setPanelDivs] = useState(null)
 
   const { originalStr, inputError } = useMemo(() => {
     return { originalStr: sInput, inputError: '' }
@@ -208,8 +211,7 @@ export default function StringToIntegerAtoiVisualizer() {
 
   const displayStr = step?.s !== undefined ? step.s : originalStr
 
-  return (
-    <div className="atoi-shell">
+  const mainPanel = (
       <div className="atoi-top">
         <div className="atoi-panel" style={{ flex: 1.5 }}>
           <div className="atoi-panel-head">
@@ -362,35 +364,67 @@ export default function StringToIntegerAtoiVisualizer() {
         </div>
       </div>
 
-      <div className="atoi-middle">
-        <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-      </div>
+  )
 
-      <div className={`atoi-status \${step?.phase === 'done' ? 'success' : step?.clamped ? 'clamp' : ''}`}>
+  const codePanel = (
+    <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0 }}>
+      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} disableResizer />
+    </div>
+  )
+
+  const statusPanel = (
+    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '12px 16px', minHeight: 0 }}>
+      <div className={`atoi-status ${step?.phase === 'done' ? 'success' : step?.clamped ? 'clamp' : ''}`}>
         {step?.message ?? 'Press Play or Step to begin.'}
       </div>
+    </div>
+  )
 
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'main', title: 'Visualizer', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
 
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+  const handlePanelReady = useCallback((divs) => {
+    setPanelDivs(divs)
+  }, [])
+
+  return (
+    <div className="atoi-shell" style={{ height: 'calc(100vh - 200px)', minHeight: '480px', display: 'flex', flexDirection: 'column' }}>
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.main && createPortal(mainPanel, panelDivs.main)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">
+          <PlaybackControls
+            isPlaying={isPlaying}
+            isDone={isDone}
+            speed={speed}
+            onPlayToggle={togglePlay}
+            onPrev={stepBack}
+            onNext={stepForward}
+            onReset={handleReset}
+            prevDisabled={stepIndex < 0}
+            nextDisabled={isDone}
+            resetDisabled={stepIndex < 0}
+            onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+            showPatternOverlay={showPatternOverlay}
+            onShowPatternOverlayChange={setShowPatternOverlay}
+            patternOverlayLabel="Show pattern overlay"
+            showPatternOverlayToggle
+          />
+        </FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

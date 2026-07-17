@@ -1,4 +1,5 @@
-﻿import DockableWorkspace from "../../components/shared/DockableWorkspace"
+﻿import { createPortal } from 'react-dom'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../components/shared/FloatingPanel"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { useState, useMemo, useCallback } from "react";
@@ -89,6 +90,7 @@ const EXAMPLES = getExamples('sort-list');
 
 export default function SortListVisualizer() {
     const [sel, setSel] = useState(0);
+    const [panelDivs, setPanelDivs] = useState(null);
 
     const initial = EXAMPLES[sel].arr;
     const steps = useMemo(() => generateSteps(initial), [initial]);
@@ -100,32 +102,78 @@ export default function SortListVisualizer() {
 
     const applyExample = useCallback((i) => { setSel(i); handleReset(); }, [handleReset]);
 
-    const dockPanels = useMemo(() => [
-        { id: 'code', title: 'Code', content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} /> },
-        { id: 'viz', title: '🔀 Merge Sort', content: (
-            <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
-                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                    {EXAMPLES.map((ex, i) => <button key={ex.label} onClick={() => applyExample(i)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: sel === i ? '#dbeafe' : '#f1f5f9' }}>{ex.label}</button>)}
-                </div>
-                <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
-                    <div style={{ fontWeight: 600, marginBottom: 4 }}>Array</div>
-                    <LinkedListRow vals={step?.arr ?? initial} color="main" />
-                </div>
-                {step?.left && <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
-                    <div style={{ fontWeight: 600, marginBottom: 4 }}>Merge</div>
-                    <LinkedListRow vals={step.left} color="left" /> ↔ <LinkedListRow vals={step.right} color="right" />
-                    {step?.merged && <div style={{ marginTop: 8 }}><LinkedListRow vals={step.merged} color="merged" /></div>}
-                </div>}
-            </div>
-        )}
-    ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, sel, applyExample, initial]);
+    // Extract panels as consts (step 3)
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                highlightedLines={connectivity.highlightedLines}
+                onLineSelect={connectivity.handleLineSelect}
+                onActiveLineDomChange={setActiveLineDom}
+                disableResizer
+            />
+            {showPatternOverlay && <CodePatternAnnotations />}
+        </div>
+    );
 
+    const vizPanel = (
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                {EXAMPLES.map((ex, i) => <button key={ex.label} onClick={() => applyExample(i)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: sel === i ? '#dbeafe' : '#f1f5f9' }}>{ex.label}</button>)}
+            </div>
+            <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
+                <div style={{ fontWeight: 600, marginBottom: 4 }}>Array</div>
+                <LinkedListRow vals={step?.arr ?? initial} color="main" />
+            </div>
+            {step?.left && <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
+                <div style={{ fontWeight: 600, marginBottom: 4 }}>Merge</div>
+                <LinkedListRow vals={step.left} color="left" /> ↔ <LinkedListRow vals={step.right} color="right" />
+                {step?.merged && <div style={{ marginTop: 8 }}><LinkedListRow vals={step.merged} color="merged" /></div>}
+            </div>}
+        </div>
+    );
+
+    const statusPanel = (
+        <div className="sl-status">
+            {step?.message || 'Ready'}
+        </div>
+    );
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && <PatternLegend />}
+            <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex <= 0} nextDisabled={isDone} resetDisabled={stepIndex <= 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
+        </>
+    );
+
+    // Config for Lumino panels (step 4)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
+            { id: 'viz', title: '🔀 Merge Sort', dockMode: 'split-right' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    );
+
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
+
+    // Lumino return (step 5)
     return (
-        <div className="problem-shell">
-            <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex <= 0} nextDisabled={isDone} resetDisabled={stepIndex <= 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
-            </FloatingPanel>
+        <div className="sl-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     );

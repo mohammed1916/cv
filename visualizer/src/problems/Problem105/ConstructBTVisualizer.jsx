@@ -1,9 +1,10 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
@@ -148,158 +149,161 @@ export default function ConstructBTVisualizer() {
     const builtSet = new Set((step?.builtNodes ?? []).map((n) => n.id))
     const activeId = step?.phase === 'create' ? step?.id : null
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'input',
-            title: 'Input Playground',
-            subtitle: preErr || inoErr ? 'Fix the input to resume playback.' : 'Edit arrays and replay the solver.',
-            defaultZone: 'left',
-            content: (
-                <div className="ctpi-panel-body">
-                    <div className="ctpi-examples">
-                        {EXAMPLES.map((ex) => (
-                            <button key={ex.label} className="ctpi-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
+    // Extract panel consts for Lumino DockPanel
+    const inputPanel = (
+        <div className="ctpi-panel-body">
+            <div className="ctpi-examples">
+                {EXAMPLES.map((ex) => (
+                    <button key={ex.label} className="ctpi-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
+                ))}
+            </div>
+            <label className="ctpi-field">
+                <span>Preorder</span>
+                <input
+                    className="ctpi-input"
+                    value={preInput}
+                    onChange={(e) => { setPreInput(e.target.value); handleReset() }}
+                />
+            </label>
+            <label className="ctpi-field">
+                <span>Inorder</span>
+                <input
+                    className="ctpi-input"
+                    value={inoInput}
+                    onChange={(e) => { setInoInput(e.target.value); handleReset() }}
+                />
+            </label>
+            {(preErr || inoErr) && <div className="ctpi-error">{preErr || inoErr}</div>}
+        </div>
+    )
+
+    const arraysPanel = (
+        <div className="ctpi-panel-body">
+            <div className="ctpi-arrays-row">
+                <div className="ctpi-arr-panel">
+                    <div className="ctpi-arr-label">Current preorder slice</div>
+                    <div className="ctpi-arr-cells">
+                        {(step?.preSlice ?? []).map((v, i) => (
+                            <div key={i} className={`ctpi-cell ${i === 0 && step?.phase !== 'init' ? 'root' : ''}`}>{v}</div>
                         ))}
                     </div>
-                    <label className="ctpi-field">
-                        <span>Preorder</span>
-                        <input
-                            className="ctpi-input"
-                            value={preInput}
-                            onChange={(e) => { setPreInput(e.target.value); handleReset() }}
-                        />
-                    </label>
-                    <label className="ctpi-field">
-                        <span>Inorder</span>
-                        <input
-                            className="ctpi-input"
-                            value={inoInput}
-                            onChange={(e) => { setInoInput(e.target.value); handleReset() }}
-                        />
-                    </label>
-                    {(preErr || inoErr) && <div className="ctpi-error">{preErr || inoErr}</div>}
                 </div>
-            ),
-        },
-        {
-            id: 'arrays',
-            title: 'Array Slices',
-            subtitle: step ? `Step ${steps.findIndex(s => s === step) + 1} of ${steps.length}` : 'Current preorder and inorder slices.',
-            defaultZone: 'left',
-            content: (
-                <div className="ctpi-panel-body">
-                    <div className="ctpi-arrays-row">
-                        <div className="ctpi-arr-panel">
-                            <div className="ctpi-arr-label">Current preorder slice</div>
-                            <div className="ctpi-arr-cells">
-                                {(step?.preSlice ?? []).map((v, i) => (
-                                    <div key={i} className={`ctpi-cell ${i === 0 && step?.phase !== 'init' ? 'root' : ''}`}>{v}</div>
-                                ))}
-                            </div>
-                        </div>
-                        <div className="ctpi-arr-panel">
-                            <div className="ctpi-arr-label">Current inorder slice</div>
-                            <div className="ctpi-arr-cells">
-                                {(step?.inoSlice ?? []).map((v, i) => (
-                                    <div key={i} className={`ctpi-cell ${i === step?.mid ? 'mid' : i < (step?.mid ?? -1) ? 'left-part' : 'right-part'}`}>{v}</div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="ctpi-status">{step?.message || 'Press Play to begin.'}</div>
-                </div>
-            ),
-        },
-        {
-            id: 'tree',
-            title: 'Tree Visualization',
-            subtitle: finalTree ? 'Binary tree being constructed.' : 'Tree preview will appear after playback starts.',
-            defaultZone: 'right',
-            content: finalTree ? (
-                <div className="ctpi-tree-panel">
-                    <div className="ctpi-tree-canvas" style={{ position: 'relative', width: 400, height: 320 }}>
-                        <svg style={{ position: 'absolute', inset: 0, overflow: 'visible' }} width={400} height={320}>
-                            {allEdges.map((e) => {
-                                const p = treeLayout.get(e.from), c = treeLayout.get(e.to)
-                                if (!p || !c || !builtSet.has(e.from) || !builtSet.has(e.to)) return null
-                                return <line key={`${e.from}-${e.to}`} x1={p.x} y1={p.y} x2={c.x} y2={c.y} stroke="#45475a" strokeWidth={2} />
-                            })}
-                        </svg>
-                        {(step?.builtNodes ?? []).map((nd) => {
-                            const pos = treeLayout.get(nd.id)
-                            if (!pos) return null
-                            return (
-                                <motion.div key={nd.id} className={`ctpi-node ${nd.id === activeId ? 'active' : ''}`}
-                                    style={{ left: pos.x - 22, top: pos.y - 22 }}
-                                    initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
-                                    transition={{ type: 'spring', stiffness: 400, damping: 22 }}>
-                                    {nd.val}
-                                </motion.div>
-                            )
-                        })}
+                <div className="ctpi-arr-panel">
+                    <div className="ctpi-arr-label">Current inorder slice</div>
+                    <div className="ctpi-arr-cells">
+                        {(step?.inoSlice ?? []).map((v, i) => (
+                            <div key={i} className={`ctpi-cell ${i === step?.mid ? 'mid' : i < (step?.mid ?? -1) ? 'left-part' : 'right-part'}`}>{v}</div>
+                        ))}
                     </div>
                 </div>
-            ) : (
-                <div style={{ padding: '16px', textAlign: 'center', color: '#a6adc8' }}>
-                    Tree visualization will appear when you start playback.
-                </div>
-            ),
-        },
-        {
-            id: 'code',
-            title: 'Code Trace',
-            subtitle: step ? `Active line ${step.activeLine}` : 'Line-by-line solution view.',
-            defaultZone: 'full',
-            content: (
-                <CodeTracePanel
-                    step={step}
-                    codeLines={SOLUTION_CODE}
-                    onActiveLineDomChange={setActiveLineDom}
-                    autoScroll={autoScrollCode}
-                />
-            ),
-        },
-    ], [preErr, inoErr, preInput, inoInput, applyExample, handleReset, step, steps, finalTree, treeLayout, allEdges, builtSet, activeId, setActiveLineDom, autoScrollCode])
+            </div>
+            <div className="ctpi-status">{step?.message || 'Press Play to begin.'}</div>
+        </div>
+    )
+
+    const treePanel = finalTree ? (
+        <div className="ctpi-tree-panel">
+            <div className="ctpi-tree-canvas" style={{ position: 'relative', width: 400, height: 320 }}>
+                <svg style={{ position: 'absolute', inset: 0, overflow: 'visible' }} width={400} height={320}>
+                    {allEdges.map((e) => {
+                        const p = treeLayout.get(e.from), c = treeLayout.get(e.to)
+                        if (!p || !c || !builtSet.has(e.from) || !builtSet.has(e.to)) return null
+                        return <line key={`${e.from}-${e.to}`} x1={p.x} y1={p.y} x2={c.x} y2={c.y} stroke="#45475a" strokeWidth={2} />
+                    })}
+                </svg>
+                {(step?.builtNodes ?? []).map((nd) => {
+                    const pos = treeLayout.get(nd.id)
+                    if (!pos) return null
+                    return (
+                        <motion.div key={nd.id} className={`ctpi-node ${nd.id === activeId ? 'active' : ''}`}
+                            style={{ left: pos.x - 22, top: pos.y - 22 }}
+                            initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
+                            transition={{ type: 'spring', stiffness: 400, damping: 22 }}>
+                            {nd.val}
+                        </motion.div>
+                    )
+                })}
+            </div>
+        </div>
+    ) : (
+        <div style={{ padding: '16px', textAlign: 'center', color: '#a6adc8' }}>
+            Tree visualization will appear when you start playback.
+        </div>
+    )
+
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                autoScroll={autoScrollCode}
+                disableResizer
+            />
+            {showPatternOverlay && <CodePatternAnnotations step={step} linePatternMap={LINE_PATTERN_MAP} patterns={PATTERNS} />}
+        </div>
+    )
+
+    const statusPanel = (
+        <div className="ctpi-status-panel">
+            {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
+            <PlaybackControls
+                onReset={handleReset}
+                onPrev={stepBack}
+                onPlayToggle={togglePlay}
+                onNext={stepForward}
+                resetDisabled={steps.length === 0}
+                prevDisabled={stepIndex <= 0}
+                nextDisabled={steps.length === 0 || isDone}
+                isPlaying={isPlaying}
+                isDone={isDone}
+                speed={speed}
+                onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+                speedIndicator={`${speed}ms`}
+                autoScroll={autoScrollCode}
+                onAutoScrollChange={setAutoScrollCode}
+                autoScrollLabel="Auto-scroll code"
+                showAutoScroll
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                patternOverlayLabel="Show pattern overlay"
+                showPatternOverlayToggle
+            />
+        </div>
+    )
+
+    // Panel config for Lumino DockPanel
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'input', title: 'Input Playground', dockMode: 'split-right' },
+            { id: 'tree', title: 'Tree Visualization', dockMode: 'split-right' },
+            { id: 'arrays', title: 'Array Slices', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
         <div className="ctpi-shell">
-            <DockableWorkspace
-                title="Construct Binary Tree Workspace"
-                panels={dockPanels}
-                initialLayout={{
-                    rows: [
-                        ['input', 'tree'],
-                        ['arrays', 'code'],
-                    ],
-                    minimized: [],
-                }}
-            />
-
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls
-                    onReset={handleReset}
-                    onPrev={stepBack}
-                    onPlayToggle={togglePlay}
-                    onNext={stepForward}
-                    resetDisabled={steps.length === 0}
-                    prevDisabled={stepIndex <= 0}
-                    nextDisabled={steps.length === 0 || isDone}
-                    isPlaying={isPlaying}
-                    isDone={isDone}
-                    speed={speed}
-                    onSpeedChange={(event) => setSpeed(Number(event.target.value))}
-                    speedIndicator={`${speed}ms`}
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    autoScrollLabel="Auto-scroll code"
-                    showAutoScroll
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
-                />
-            </FloatingPanel>
-
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+                    {panelDivs.tree && createPortal(treePanel, panelDivs.tree)}
+                    {panelDivs.arrays && createPortal(arraysPanel, panelDivs.arrays)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">
+                    <div style={{ display: 'none' }}>{/* floating panel content moved to status panel */}</div>
+                </FloatingPanel>,
+                document.body
+            )}
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     )

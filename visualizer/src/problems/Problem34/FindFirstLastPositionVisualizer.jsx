@@ -1,4 +1,5 @@
 ﻿import { useState, useCallback, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -10,6 +11,7 @@ import './FindFirstLastPositionVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -302,153 +304,184 @@ export default function FindFirstLastPositionVisualizer() {
     onStepJump: setStepIndex,
   })
 
+  // Step 2: Extract panels into consts
+  const primaryPanel = (
+    <div className="ffp-panel" style={{ flex: 1 }}>
+      <div className="ffp-panel-head">
+        Sorted Array & Search Range
+        {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
+      </div>
+      <div className="ffp-panel-body">
+        <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
+          {EXAMPLES.map((ex) => (
+            <button
+              key={ex.label}
+              onClick={() => applyExample(ex)}
+              className="ffp-example-btn"
+            >
+              {ex.label}
+            </button>
+          ))}
+        </div>
+
+        <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center' }}>
+          <input
+            value={numsInput}
+            onChange={(e) => { setNumsInput(e.target.value);
+ handleReset() }}
+            placeholder="[5, 7, 7, 8, 8, 10]"
+            className="ffp-input"
+            style={{ flex: 1, margin: 0 }}
+          />
+          <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace' }}>target=</span>
+          <input
+            value={targetInput}
+            onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
+            placeholder="8"
+            className="ffp-input"
+            style={{ width: '60px', margin: 0, textAlign: 'center' }}
+          />
+        </div>
+
+        <div className="ffp-pointers-legend">
+          <div className="ffp-legend-item left"><div className="ffp-legend-swatch" /> Left</div>
+          <div className="ffp-legend-item mid"><div className="ffp-legend-swatch" /> Mid</div>
+          <div className="ffp-legend-item right"><div className="ffp-legend-swatch" /> Right</div>
+          <div className="ffp-legend-item target"><div className="ffp-legend-swatch" /> Target</div>
+        </div>
+
+        <div className="ffp-array-container">
+          {nums.map((num, i) => {
+            const isLeft = step?.left === i
+            const isRight = step?.right === i
+            const isMid = step?.mid === i
+            const isTarget = num === target
+            const isOutOfBounds = step && (i < step.left || i > step.right)
+
+            let cellClass = "ffp-cell "
+            if (isLeft) cellClass += "left "
+            if (isRight) cellClass += "right "
+            if (isMid) cellClass += "mid "
+            if (isOutOfBounds && !isMid) cellClass += "out-of-bounds "
+            if (isTarget && !isMid && !isOutOfBounds) cellClass += "target "
+
+            return (
+              <div key={i} className="ffp-cell-wrapper">
+                <div className="ffp-index">{i}</div>
+                <div className={cellClass}>
+                  {num}
+                </div>
+                <div className="ffp-pointers">
+                  {isLeft && <div className="ffp-ptr left">L</div>}
+                  {isMid && <div className="ffp-ptr mid">M</div>}
+                  {isRight && <div className="ffp-ptr right">R</div>}
+                </div>
+              </div>
+            )
+          })}
+        </div>
+
+        <div className="ffp-stats">
+          <div className="ffp-stat-box">
+            <span className="ffp-stat-label">Search Mode</span>
+            <span className="ffp-stat-val" style={{ color: step?.mode === 'first' ? '#06b6d4' : '#ec4899' }}>
+              {step?.mode === 'first' ? 'Finding First' : step?.mode === 'last' ? 'Finding Last' : 'Ready'}
+            </span>
+          </div>
+          <div className="ffp-stat-box">
+            <span className="ffp-stat-label">First Position</span>
+            <span className="ffp-stat-val" style={{ color: '#06b6d4' }}>{step?.firstPos ?? '-'}</span>
+          </div>
+          <div className="ffp-stat-box">
+            <span className="ffp-stat-label">Last Position</span>
+            <span className="ffp-stat-val" style={{ color: '#ec4899' }}>{step?.lastPos ?? '-'}</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  )
+
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
+        />
+      )}
+    </div>
+  )
+
+  const statusPanel = (
+    <div className="ffp-status" style={{ padding: '8px 12px', display: 'flex', alignItems: 'center' }}>
+      {step?.message ?? 'Press Play or Step to begin.'}
+    </div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={FINDFIRSTLASTPOSITION_PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
+
+  // Step 3: Add state + config
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Sorted Array & Search Range', dockMode: 'split-right' },
+      { id: 'code',    title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status',  title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  // Step 4: Replace return block
   return (
     <div className="ffp-shell">
-      <div className="ffp-top">
-        <div className="ffp-panel" style={{ flex: 1 }}>
-          <div className="ffp-panel-head">
-            Sorted Array & Search Range
-            {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
-          </div>
-          <div className="ffp-panel-body">
-            <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
-              {EXAMPLES.map((ex) => (
-                <button
-                  key={ex.label}
-                  onClick={() => applyExample(ex)}
-                  className="ffp-example-btn"
-                >
-                  {ex.label}
-                </button>
-              ))}
-            </div>
-
-            <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center' }}>
-              <input
-                value={numsInput}
-                onChange={(e) => { setNumsInput(e.target.value);
-
- handleReset() }}
-                placeholder="[5, 7, 7, 8, 8, 10]"
-                className="ffp-input"
-                style={{ flex: 1, margin: 0 }}
-              />
-              <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace' }}>target=</span>
-              <input
-                value={targetInput}
-                onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
-                placeholder="8"
-                className="ffp-input"
-                style={{ width: '60px', margin: 0, textAlign: 'center' }}
-              />
-            </div>
-
-            <div className="ffp-pointers-legend">
-              <div className="ffp-legend-item left"><div className="ffp-legend-swatch" /> Left</div>
-              <div className="ffp-legend-item mid"><div className="ffp-legend-swatch" /> Mid</div>
-              <div className="ffp-legend-item right"><div className="ffp-legend-swatch" /> Right</div>
-              <div className="ffp-legend-item target"><div className="ffp-legend-swatch" /> Target</div>
-            </div>
-
-            <div className="ffp-array-container">
-              {nums.map((num, i) => {
-                const isLeft = step?.left === i
-                const isRight = step?.right === i
-                const isMid = step?.mid === i
-                const isTarget = num === target
-                const isOutOfBounds = step && (i < step.left || i > step.right)
-
-                let cellClass = "ffp-cell "
-                if (isLeft) cellClass += "left "
-                if (isRight) cellClass += "right "
-                if (isMid) cellClass += "mid "
-                if (isOutOfBounds && !isMid) cellClass += "out-of-bounds "
-                if (isTarget && !isMid && !isOutOfBounds) cellClass += "target "
-
-                return (
-                  <div key={i} className="ffp-cell-wrapper">
-                    <div className="ffp-index">{i}</div>
-                    <div className={cellClass}>
-                      {num}
-                    </div>
-                    <div className="ffp-pointers">
-                      {isLeft && <div className="ffp-ptr left">L</div>}
-                      {isMid && <div className="ffp-ptr mid">M</div>}
-                      {isRight && <div className="ffp-ptr right">R</div>}
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-
-            <div className="ffp-stats">
-              <div className="ffp-stat-box">
-                <span className="ffp-stat-label">Search Mode</span>
-                <span className="ffp-stat-val" style={{ color: step?.mode === 'first' ? '#06b6d4' : '#ec4899' }}>
-                  {step?.mode === 'first' ? 'Finding First' : step?.mode === 'last' ? 'Finding Last' : 'Ready'}
-                </span>
-              </div>
-              <div className="ffp-stat-box">
-                <span className="ffp-stat-label">First Position</span>
-                <span className="ffp-stat-val" style={{ color: '#06b6d4' }}>{step?.firstPos ?? '-'}</span>
-              </div>
-              <div className="ffp-stat-box">
-                <span className="ffp-stat-label">Last Position</span>
-                <span className="ffp-stat-val" style={{ color: '#ec4899' }}>{step?.lastPos ?? '-'}</span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <div className="ffp-middle">
-                <div style={{ position: "relative" }}>
-          <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-        />
-
-          {showPatternOverlay && (
-            <CodePatternAnnotations
-              linePatterns={LINE_PATTERN_MAP}
-              currentPhase={step?.phase}
-              activeLineDom={activeLineDom}
-              activeLine={step?.activeLine}
-            />
-          )}
-        </div>
-      </div>
-
-      <div className={`ffp-status \${step?.result ? 'success' : ''}`}>
-        {step?.message ?? 'Press Play or Step to begin.'}
-      </div>
-
-      <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={FINDFIRSTLASTPOSITION_PATTERNS} />
-        )}
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}
+          {panelDivs.status  && createPortal(statusPanel,  panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

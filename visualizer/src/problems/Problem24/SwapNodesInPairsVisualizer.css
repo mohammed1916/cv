@@ -1,3 +1,13 @@
+.snip-shell {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 200px);
+    min-height: 480px;
+    gap: 0;
+    overflow: hidden;
+}
+
 .snip-panel {
     background: var(--surface2);
     border: 1px solid var(--border);
@@ -231,14 +241,6 @@
     color: var(--success);
 }
 
-/* ── Swap state panel ── */
-.snip-top {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 12px;
-    flex: 1;
-    min-height: 0;
-}
 
 .snip-state-row {
     display: flex;

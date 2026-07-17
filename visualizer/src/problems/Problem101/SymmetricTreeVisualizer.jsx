@@ -1,9 +1,9 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -12,6 +12,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import './SymmetricTreeVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -281,163 +282,199 @@ export default function SymmetricTreeVisualizer() {
     const finalResult = step?.finalResult
     const hasFinal    = finalResult !== null && finalResult !== undefined
 
-    // Visualization panel component
-    function VisualizationPanel() {
-        return (
-            <div className="sym-top">
-                <section className="sym-panel main">
-                    <header className="sym-head">
-                        <span>Symmetric Tree Mirror Check</span>
-                        {inputError && <span className="sym-error">{inputError}</span>}
-                    </header>
-                    <div className="sym-body">
-                        {/* Example chips */}
-                        <div className="sym-examples">
-                            {EXAMPLES.map((ex, i) => (
-                                <button
-                                    key={ex.label}
-                                    className={`sym-chip${selected === i ? ' selected' : ''}`}
-                                    onClick={() => applyExample(i)}
-                                >
-                                    {ex.label}
-                                </button>
-                            ))}
-                        </div>
+    // Step 2: Extract panels into consts
+    const primaryPanel = (
+        <div className="sym-panel" style={{ position: 'relative', height: '100%' }}>
+            <div className="sym-panel-head">Symmetric Tree Mirror Check</div>
+            <div className="sym-panel-body">
+                {/* Example chips */}
+                <div className="sym-examples">
+                    {EXAMPLES.map((ex, i) => (
+                        <button
+                            key={ex.label}
+                            className={`sym-chip${selected === i ? ' selected' : ''}`}
+                            onClick={() => applyExample(i)}
+                        >
+                            {ex.label}
+                        </button>
+                    ))}
+                </div>
 
-                        {/* Input row */}
-                        <div className="sym-input-group">
-                            <label className="sym-input-label">Tree (array)</label>
-                            <input
-                                className="sym-input"
-                                value={treeInput}
-                                onChange={(e) => { setTreeInput(e.target.value); handleReset() }}
-                            />
-                        </div>
+                {/* Input row */}
+                <div className="sym-input-group">
+                    <label className="sym-input-label">Tree (array)</label>
+                    <input
+                        className="sym-input"
+                        value={treeInput}
+                        onChange={(e) => { setTreeInput(e.target.value); handleReset() }}
+                    />
+                    {inputError && <span className="sym-error">{inputError}</span>}
+                </div>
 
-                        {/* Canvas */}
-                        <div className="sym-canvas-wrap">
-                            <div className="sym-canvas-label">Tree visualization</div>
-                            <TreeCanvas
-                                positions={step?.positions ?? new Map()}
-                                edges={step?.edges ?? []}
-                                nodes={step?.nodes ?? []}
-                                activeLeftId={step?.activeLeftId}
-                                activeRightId={step?.activeRightId}
-                                nodeStates={step?.nodeStates}
-                            />
-                            {hasFinal && (
-                                <motion.div
-                                    className={`sym-result-badge ${finalResult ? 'symmetric' : 'not-symmetric'}`}
-                                    initial={{ scale: 0.7, opacity: 0 }}
-                                    animate={{ scale: 1, opacity: 1 }}
-                                    transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-                                >
-                                    {finalResult ? 'SYMMETRIC' : 'NOT SYMMETRIC'}
-                                </motion.div>
-                            )}
-                        </div>
-                    </div>
-                </section>
-
-                {/* ── Side panel ─────────────────────────────────────────────── */}
-                <section className="sym-panel side">
-                    <header className="sym-head"><span>State</span></header>
-                    <div className="sym-body">
-
-                        <div className="sym-legend">
-                            <div className="sym-legend-item">
-                                <div className="sym-dot active" />
-                                <span>Current pair</span>
-                            </div>
-                            <div className="sym-legend-item">
-                                <div className="sym-dot mirror-ok" />
-                                <span>Pair matches</span>
-                            </div>
-                            <div className="sym-legend-item">
-                                <div className="sym-dot mirror-fail" />
-                                <span>Pair differs</span>
-                            </div>
-                        </div>
-
-                        <div className="sym-state-row">
-                            <span className="sym-state-label">Left node</span>
-                            <span className="sym-state-val">
-                                {step?.activeLeftId != null
-                                    ? step.nodes?.find(n => n.id === step.activeLeftId)?.val ?? 'null'
-                                    : '—'}
-                            </span>
-                        </div>
-                        <div className="sym-state-row">
-                            <span className="sym-state-label">Right node</span>
-                            <span className="sym-state-val">
-                                {step?.activeRightId != null
-                                    ? step.nodes?.find(n => n.id === step.activeRightId)?.val ?? 'null'
-                                    : '—'}
-                            </span>
-                        </div>
-                        <div className="sym-state-row">
-                            <span className="sym-state-label">Pairs OK</span>
-                            <span className="sym-state-val">
-                                {Object.values(step?.nodeStates ?? {}).filter(s => s === 'mirror-ok').length / 2}
-                            </span>
-                        </div>
-                        <div className="sym-state-row">
-                            <span className="sym-state-label">Pairs failed</span>
-                            <span className="sym-state-val sym-fail-count">
-                                {Object.values(step?.nodeStates ?? {}).filter(s => s === 'mirror-fail').length / 2}
-                            </span>
-                        </div>
-
-                        <div className={`sym-result-box ${hasFinal ? (finalResult ? 'symmetric' : 'not-symmetric') : ''}`}>
-                            {hasFinal
-                                ? `isSymmetric → ${finalResult}`
-                                : (step ? 'Running…' : 'Press Play')}
-                        </div>
-                    </div>
-                </section>
+                {/* Canvas */}
+                <div className="sym-canvas-wrap">
+                    <div className="sym-canvas-label">Tree visualization</div>
+                    <TreeCanvas
+                        positions={step?.positions ?? new Map()}
+                        edges={step?.edges ?? []}
+                        nodes={step?.nodes ?? []}
+                        activeLeftId={step?.activeLeftId}
+                        activeRightId={step?.activeRightId}
+                        nodeStates={step?.nodeStates}
+                    />
+                    {hasFinal && (
+                        <motion.div
+                            className={`sym-result-badge ${finalResult ? 'symmetric' : 'not-symmetric'}`}
+                            initial={{ scale: 0.7, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+                        >
+                            {finalResult ? 'SYMMETRIC' : 'NOT SYMMETRIC'}
+                        </motion.div>
+                    )}
+                </div>
             </div>
-        )
-    }
+        </div>
+    )
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'code',
-            title: 'Code',
-            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
-        },
-        {
-            id: 'viz',
-            title: 'Visualization',
-            content: <VisualizationPanel />,
-        },
-    ], [step, autoScrollCode])
+    const statePanel = (
+        <div className="sym-panel" style={{ position: 'relative', height: '100%' }}>
+            <div className="sym-panel-head">State</div>
+            <div className="sym-panel-body">
+                <div className="sym-legend">
+                    <div className="sym-legend-item">
+                        <div className="sym-dot active" />
+                        <span>Current pair</span>
+                    </div>
+                    <div className="sym-legend-item">
+                        <div className="sym-dot mirror-ok" />
+                        <span>Pair matches</span>
+                    </div>
+                    <div className="sym-legend-item">
+                        <div className="sym-dot mirror-fail" />
+                        <span>Pair differs</span>
+                    </div>
+                </div>
 
-    return (
-        <div className="problem-shell">
-            <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls
-                    isPlaying={isPlaying}
-                    isDone={isDone}
-                    speed={speed}
-                    onPlayToggle={togglePlay}
-                    onPrev={stepBack}
-                    onNext={stepForward}
-                    onReset={handleReset}
-                    prevDisabled={stepIndex < 0}
-                    nextDisabled={isDone}
-                    resetDisabled={stepIndex < 0}
-                    onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    showAutoScroll
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
+                <div className="sym-state-row">
+                    <span className="sym-state-label">Left node</span>
+                    <span className="sym-state-val">
+                        {step?.activeLeftId != null
+                            ? step.nodes?.find(n => n.id === step.activeLeftId)?.val ?? 'null'
+                            : '—'}
+                    </span>
+                </div>
+                <div className="sym-state-row">
+                    <span className="sym-state-label">Right node</span>
+                    <span className="sym-state-val">
+                        {step?.activeRightId != null
+                            ? step.nodes?.find(n => n.id === step.activeRightId)?.val ?? 'null'
+                            : '—'}
+                    </span>
+                </div>
+                <div className="sym-state-row">
+                    <span className="sym-state-label">Pairs OK</span>
+                    <span className="sym-state-val">
+                        {Object.values(step?.nodeStates ?? {}).filter(s => s === 'mirror-ok').length / 2}
+                    </span>
+                </div>
+                <div className="sym-state-row">
+                    <span className="sym-state-label">Pairs failed</span>
+                    <span className="sym-state-val sym-fail-count">
+                        {Object.values(step?.nodeStates ?? {}).filter(s => s === 'mirror-fail').length / 2}
+                    </span>
+                </div>
+
+                <div className={`sym-result-box ${hasFinal ? (finalResult ? 'symmetric' : 'not-symmetric') : ''}`}>
+                    {hasFinal
+                        ? `isSymmetric → ${finalResult}`
+                        : (step ? 'Running…' : 'Press Play')}
+                </div>
+            </div>
+        </div>
+    )
+
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                autoScroll={autoScrollCode}
+                disableResizer
+            />
+            {showPatternOverlay && (
+                <CodePatternAnnotations
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
                 />
-            </FloatingPanel>
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+            )}
+        </div>
+    )
+
+    const statusPanel = (
+        <div className="sym-status">
+            {step?.message ?? 'Press Play or Step to begin.'}
+        </div>
+    )
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && <PatternLegend usedPatterns={PATTERNS} />}
+            <PlaybackControls
+                isPlaying={isPlaying}
+                isDone={isDone}
+                speed={speed}
+                onPlayToggle={togglePlay}
+                onPrev={stepBack}
+                onNext={stepForward}
+                onReset={handleReset}
+                prevDisabled={stepIndex < 0}
+                nextDisabled={isDone}
+                resetDisabled={stepIndex < 0}
+                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+                autoScroll={autoScrollCode}
+                onAutoScrollChange={setAutoScrollCode}
+                showAutoScroll
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                patternOverlayLabel="Show pattern overlay"
+                showPatternOverlayToggle
+            />
+        </>
+    )
+
+    // Step 3: Add state + config
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Symmetric Tree Mirror Check', dockMode: 'split-right' },
+            { id: 'state', title: 'State', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+    // Step 4: Replace return with portals
+    return (
+        <div className="sym-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     )
 }

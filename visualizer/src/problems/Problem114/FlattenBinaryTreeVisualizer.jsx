@@ -1,4 +1,5 @@
 ﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -9,6 +10,7 @@ import "./FlattenBinaryTreeVisualizer.css";
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -132,8 +134,9 @@ export default function FlattenBinaryTreeVisualizer() {
     return result;
   }, [step, arr]);
 
-  return (
-    <div className="fbt-shell">
+  // Step 3: Extract panels into consts
+  const primaryPanel = (
+    <div className="fbt-panel">
       <div className="fbt-examples">
         {Object.entries(EXAMPLES).map(([k, e]) => (
           <button key={k} className={`fbt-chip ${exKey === k ? "active" : ""}`} onClick={() => applyEx(k)}>{e.label}</button>
@@ -192,11 +195,29 @@ export default function FlattenBinaryTreeVisualizer() {
           {listOrder.length === 0 && <span className="fbt-empty">—</span>}
         </div>
       </div>
+    </div>
+  )
 
-      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-      <div className="fbt-status">{step?.message ?? "Press Play to begin."}</div>
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+      {showPatternOverlay && <CodePatternAnnotations step={step} linePatternMap={LINE_PATTERN_MAP} patterns={PATTERNS} activeLineDom={activeLineDom} />}
+    </div>
+  )
+
+  const statusPanel = (
+    <div className="fbt-status">{step?.message ?? "Press Play to begin."}</div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
+      <PlaybackControls
         isPlaying={isPlaying} isDone={isDone} speed={speed}
         onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
         prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
@@ -206,8 +227,36 @@ export default function FlattenBinaryTreeVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
-      </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+    </>
+  )
+
+  // Step 4: Add state + config
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Tree & Linked List', dockMode: 'split-right' },
+      { id: 'code',    title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status',  title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  // Step 5: Replace return block
+  return (
+    <div className="fbt-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}
+          {panelDivs.status  && createPortal(statusPanel,  panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   );
 }

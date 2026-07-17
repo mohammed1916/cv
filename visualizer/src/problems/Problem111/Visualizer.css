@@ -1,1 +1,226 @@
-/* CSS for Visualizer.jsx */
+/* Lumino DockPanel shell */
+.mdbt-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+}
+
+/* Panel styling */
+.mdbt-panel {
+  position: relative;
+  height: 100%;
+  overflow: auto;
+  padding: 12px;
+  background: var(--background-primary, #ffffff);
+}
+
+@media (prefers-color-scheme: dark) {
+  .mdbt-panel {
+    background: var(--background-primary, #1e1e1e);
+  }
+}
+
+/* Header styling */
+.mdbt-header {
+  margin-bottom: 16px;
+}
+
+.mdbt-header h2 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+}
+
+.mdbt-message {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-secondary, #666);
+}
+
+.mdbt-message.ok {
+  color: var(--text-success, #22c55e);
+}
+
+/* Examples chips */
+.mdbt-examples {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.mdbt-chip {
+  padding: 6px 12px;
+  border: 1px solid var(--border-color, #ccc);
+  background: var(--button-bg, #f5f5f5);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+
+.mdbt-chip:hover {
+  background: var(--button-bg-hover, #e5e5e5);
+}
+
+/* Input styling */
+.mdbt-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border-color, #ccc);
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+/* Canvas styling */
+.mdbt-canvas {
+  border: 1px solid var(--border-color, #ccc);
+  border-radius: 4px;
+  background: var(--canvas-bg, #f9f9f9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (prefers-color-scheme: dark) {
+  .mdbt-canvas {
+    background: var(--canvas-bg, #2a2a2a);
+  }
+}
+
+/* Visualization panel */
+.mdbt-viz-panel {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Result panel */
+.mdbt-result-panel {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.mdbt-section {
+  margin-bottom: 16px;
+}
+
+.mdbt-section-title {
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 8px;
+  color: var(--text-primary, #333);
+}
+
+@media (prefers-color-scheme: dark) {
+  .mdbt-section-title {
+    color: var(--text-primary, #e0e0e0);
+  }
+}
+
+.mdbt-info-box {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  background: var(--info-bg, #f0f0f0);
+  border-radius: 4px;
+  margin-bottom: 6px;
+  font-size: 12px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .mdbt-info-box {
+    background: var(--info-bg, #2a2a2a);
+  }
+}
+
+.mdbt-label {
+  font-weight: 500;
+  color: var(--text-secondary, #666);
+}
+
+.mdbt-value {
+  font-family: monospace;
+  color: var(--text-primary, #333);
+}
+
+@media (prefers-color-scheme: dark) {
+  .mdbt-value {
+    color: var(--text-primary, #e0e0e0);
+  }
+}
+
+.mdbt-value.infinite {
+  color: var(--text-muted, #999);
+}
+
+.mdbt-value.finite {
+  color: var(--text-accent, #0066cc);
+}
+
+.mdbt-result {
+  padding: 12px;
+  background: var(--result-bg, #f5f5f5);
+  border-radius: 4px;
+  border-left: 4px solid var(--border-accent, #ccc);
+  font-size: 13px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .mdbt-result {
+    background: var(--result-bg, #2a2a2a);
+    border-left-color: var(--border-accent, #444);
+  }
+}
+
+.mdbt-result.ok {
+  border-left-color: var(--border-success, #22c55e);
+  background: var(--result-bg-ok, #f0fdf4);
+}
+
+@media (prefers-color-scheme: dark) {
+  .mdbt-result.ok {
+    background: var(--result-bg-ok, #1a2e1a);
+  }
+}
+
+.mdbt-error-box {
+  padding: 12px;
+  background: var(--error-bg, #fef2f2);
+  border: 1px solid var(--error-border, #fecaca);
+  border-radius: 4px;
+  color: var(--error-text, #dc2626);
+  font-size: 12px;
+  margin-top: 12px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .mdbt-error-box {
+    background: var(--error-bg, #2a1a1a);
+    border-color: var(--error-border, #7f1d1d);
+    color: var(--error-text, #fca5a5);
+  }
+}
+
+/* Status panel */
+.mdbt-status {
+  padding: 8px 12px;
+  font-size: 12px;
+  background: var(--status-bg, #f5f5f5);
+  border-top: 1px solid var(--border-color, #ccc);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .mdbt-status {
+    background: var(--status-bg, #2a2a2a);
+    border-top-color: var(--border-color, #444);
+  }
+}

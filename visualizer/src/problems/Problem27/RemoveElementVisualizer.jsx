@@ -1,8 +1,9 @@
 ﻿import { useState, useCallback, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -87,46 +88,144 @@ export default function RemoveElementVisualizer() {
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  return (
-    <div className="removeel-shell">
-      <ResizableSplitPanels className="removeel-top-split" storageKey="cpviz.split.removeel.top" initialLeftPercent={60} minLeftPx={360} minRightPx={280}
-        left={(<div className="removeel-panel"><div className="removeel-panel-head">Array Cleanup</div><div className="removeel-panel-body">
-          <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>{EXAMPLES.map((ex) => (<button key={ex.label} onClick={() => applyExample(ex)} className="removeel-example-btn">{ex.label}</button>))}</div>
-          <div style={{ display: 'flex', gap: 12, marginBottom: 24 }}><input value={numsInput} onChange={(e) => { setNumsInput(e.target.value); handleReset() }} className="removeel-input" style={{ flex: 1 }} /><input value={valInput} onChange={(e) => { setValInput(e.target.value); handleReset() }} className="removeel-input" style={{ width: '60px' }} /></div>
-          <div className="removeel-array-container">{nums.map((num, idx) => {
+  // Extract panels into consts
+  const primaryPanel = (
+    <div className="removeel-panel">
+      <div className="removeel-panel-head">Array Cleanup</div>
+      <div className="removeel-panel-body">
+        <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
+          {EXAMPLES.map((ex) => (
+            <button key={ex.label} onClick={() => applyExample(ex)} className="removeel-example-btn">
+              {ex.label}
+            </button>
+          ))}
+        </div>
+        <div style={{ display: 'flex', gap: 12, marginBottom: 24 }}>
+          <input value={numsInput} onChange={(e) => { setNumsInput(e.target.value); handleReset() }} className="removeel-input" style={{ flex: 1 }} />
+          <input value={valInput} onChange={(e) => { setValInput(e.target.value); handleReset() }} className="removeel-input" style={{ width: '60px' }} />
+        </div>
+        <div className="removeel-array-container">
+          {nums.map((num, idx) => {
             const isActive = step?.i === idx
             const isRemoved = idx >= step?.k && step?.phase === 'done'
-            return (<div key={idx} className="removeel-cell-wrapper"><span className="removeel-index">{idx}</span><motion.div className={`removeel-cell ${isActive ? 'active' : ''} ${isRemoved ? 'removed' : ''}`} animate={isActive ? { scale: 1.2 } : { scale: 1 }}>{num}</motion.div></div>)
-          })}</div>
-          {step?.message && <div className="removeel-narrative">{step.message}</div>}
-        </div></div>)}
-        right={(<div className="removeel-panel"><div className="removeel-panel-head">State</div><div className="removeel-panel-body">
-          <div className="removeel-stats">
-            <div className="removeel-stat"><span className="stat-label">Value:</span><span className="stat-value">{val}</span></div>
-            <div className="removeel-stat"><span className="stat-label">Position (k):</span><span className="stat-value">{step?.k ?? 0}</span></div>
-            <div className="removeel-stat"><span className="stat-label">Index (i):</span><span className="stat-value">{step?.i ?? -1}</span></div>
-          </div>
-        </div></div>)}
-      />
-      <div style={{ position: 'relative' }}>
-        <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />
-
-        {showPatternOverlay && (
-          <CodePatternAnnotations
-            linePatterns={LINE_PATTERN_MAP}
-            currentPhase={step?.phase}
-            activeLineDom={activeLineDom}
-            activeLine={step?.activeLine}
-          />
-        )}
+            return (
+              <div key={idx} className="removeel-cell-wrapper">
+                <span className="removeel-index">{idx}</span>
+                <motion.div
+                  className={`removeel-cell ${isActive ? 'active' : ''} ${isRemoved ? 'removed' : ''}`}
+                  animate={isActive ? { scale: 1.2 } : { scale: 1 }}
+                >
+                  {num}
+                </motion.div>
+              </div>
+            )
+          })}
+        </div>
+        {step?.message && <div className="removeel-narrative">{step.message}</div>}
       </div>
-      <div className="removeel-status">{step?.message ?? 'Play!'}</div>
-      <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={REMOVEELEMENT_PATTERNS} />
-        )}
-        <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={(e) => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Pattern" showPatternOverlayToggle />
-      </FloatingPanel>
+    </div>
+  )
+
+  const statePanel = (
+    <div className="removeel-panel">
+      <div className="removeel-panel-head">State</div>
+      <div className="removeel-panel-body">
+        <div className="removeel-stats">
+          <div className="removeel-stat">
+            <span className="stat-label">Value:</span>
+            <span className="stat-value">{val}</span>
+          </div>
+          <div className="removeel-stat">
+            <span className="stat-label">Position (k):</span>
+            <span className="stat-value">{step?.k ?? 0}</span>
+          </div>
+          <div className="removeel-stat">
+            <span className="stat-label">Index (i):</span>
+            <span className="stat-value">{step?.i ?? -1}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
+        />
+      )}
+    </div>
+  )
+
+  const statusPanel = (
+    <div className="removeel-status">{step?.message ?? 'Play!'}</div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={REMOVEELEMENT_PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Pattern"
+        showPatternOverlayToggle
+      />
+    </>
+  )
+
+  // Lumino DockPanel state and config
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Array Cleanup', dockMode: 'split-right' },
+      { id: 'state', title: 'State', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  return (
+    <div className="removeel-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

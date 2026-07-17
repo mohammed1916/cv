@@ -1,4 +1,5 @@
 ﻿import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -9,6 +10,7 @@ import './SearchRotatedArrayIIVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
 const SOLUTION_CODE = [
     { line: 1, text: 'class Solution:' },
@@ -208,138 +210,146 @@ export default function SearchRotatedArrayIIVisualizer() {
     const rightSorted = step?.phase === 'right_sorted' || (step?.phase === 'move_lo' && mid >= 0 && nums[lo] > nums[mid])
     const isDuplicate = step?.phase === 'handle_duplicates'
 
-    return (
-        <div className="sra2-shell">
-            <section className="sra2-panel">
-                <header className="sra2-head">
-                    <span>Search Rotated Array II · Binary Search</span>
-                    {inputError && <span className="sra2-error">{inputError}</span>}
-                </header>
-                <div className="sra2-body">
-                    <div className="sra2-top-row">
-                        <div className="sra2-examples">
-                            {EXAMPLES.map((ex) => (
-                                <button key={ex.label} className="sra2-chip" onClick={() => applyExample(ex)}>
-                                    {ex.label}
-                                </button>
-                            ))}
+    // Extract panels into consts
+    const primaryPanel = (
+        <div className="sra2-panel">
+            <header className="sra2-head">
+                <span>Search Rotated Array II · Binary Search</span>
+                {inputError && <span className="sra2-error">{inputError}</span>}
+            </header>
+            <div className="sra2-body">
+                <div className="sra2-top-row">
+                    <div className="sra2-examples">
+                        {EXAMPLES.map((ex) => (
+                            <button key={ex.label} className="sra2-chip" onClick={() => applyExample(ex)}>
+                                {ex.label}
+                            </button>
+                        ))}
+                    </div>
+                    <div className="sra2-inputs">
+                        <div className="sra2-input-group">
+                            <label className="sra2-label">nums</label>
+                            <input
+                                className="sra2-input"
+                                value={numsInput}
+                                onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
+                            />
                         </div>
-                        <div className="sra2-inputs">
-                            <div className="sra2-input-group">
-                                <label className="sra2-label">nums</label>
-                                <input
-                                    className="sra2-input"
-                                    value={numsInput}
-                                    onChange={(e) => { setNumsInput(e.target.value);
-
- handleReset() }}
-                                />
-                            </div>
-                            <div className="sra2-input-group">
-                                <label className="sra2-label">target</label>
-                                <input
-                                    className="sra2-input narrow"
-                                    value={targetInput}
-                                    onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
-                                    type="number"
-                                />
-                            </div>
+                        <div className="sra2-input-group">
+                            <label className="sra2-label">target</label>
+                            <input
+                                className="sra2-input narrow"
+                                value={targetInput}
+                                onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
+                                type="number"
+                            />
                         </div>
                     </div>
-
-                    {/* Array */}
-                    <div className="sra2-array-wrap">
-                        {nums.map((val, idx) => {
-                            const isLo = idx === lo
-                            const isHi = idx === hi
-                            const isMid = idx === mid
-                            const inLeft = mid >= 0 && idx >= lo && idx <= mid
-                            const inRight = mid >= 0 && idx >= mid && idx <= hi
-                            const active = mid >= 0 && idx >= lo && idx <= hi
-                            const isFound = result !== null && result !== undefined && result === true && idx === mid
-                            const isElim = result !== null && result !== undefined && !active && !isFound
-
-                            return (
-                                <div key={idx} className="sra2-col">
-                                    <motion.div
-                                        className={[
-                                            'sra2-cell',
-                                            isMid ? 'mid' : '',
-                                            isFound ? 'found' : '',
-                                            result === false ? 'eliminated' : '',
-                                            !isMid && inLeft && leftSorted ? 'sorted-left' : '',
-                                            !isMid && inRight && rightSorted ? 'sorted-right' : '',
-                                            isDuplicate && (isLo || isHi) ? 'duplicate-boundary' : '',
-                                            !active && !isFound ? 'dim' : '',
-                                        ].filter(Boolean).join(' ')}
-                                        animate={{ y: isMid ? -10 : isFound ? -10 : 0, scale: isMid || isFound ? 1.12 : 1 }}
-                                        transition={{ type: 'spring', stiffness: 400, damping: 26 }}
-                                    >
-                                        {val}
-                                    </motion.div>
-                                    <span className="sra2-idx">{idx}</span>
-                                    <div className="sra2-ptrs">
-                                        {isLo && <span className="sra2-ptr lo-ptr">lo</span>}
-                                        {isMid && <span className="sra2-ptr mid-ptr">mid</span>}
-                                        {isHi && <span className="sra2-ptr hi-ptr">hi</span>}
-                                    </div>
-                                </div>
-                            )
-                        })}
-                    </div>
-
-                    {/* Sorted half indicator */}
-                    {(leftSorted || rightSorted) && mid >= 0 && !isDuplicate && (
-                        <div className={`sra2-half-badge${leftSorted ? ' left' : ' right'}`}>
-                            {leftSorted ? `← Left half [${lo}..${mid}] is sorted` : `Right half [${mid}..${hi}] is sorted →`}
-                        </div>
-                    )}
-
-                    {/* Duplicate indicator */}
-                    {isDuplicate && (
-                        <div className="sra2-duplicate-badge">
-                            Duplicates detected: shrink boundaries →
-                        </div>
-                    )}
-
-                    {/* Result */}
-                    <AnimatePresence>
-                        {result !== null && result !== undefined && (
-                            <motion.div
-                                className={`sra2-result${result === true ? ' found' : ' not-found'}`}
-                                initial={{ opacity: 0, y: 8 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0 }}
-                            >
-                                {result === true ? `Found ✓` : 'Not found — return False'}
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
                 </div>
-            </section>
 
-                        <div style={{ position: "relative" }}>
-              <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+                {/* Array */}
+                <div className="sra2-array-wrap">
+                    {nums.map((val, idx) => {
+                        const isLo = idx === lo
+                        const isHi = idx === hi
+                        const isMid = idx === mid
+                        const inLeft = mid >= 0 && idx >= lo && idx <= mid
+                        const inRight = mid >= 0 && idx >= mid && idx <= hi
+                        const active = mid >= 0 && idx >= lo && idx <= hi
+                        const isFound = result !== null && result !== undefined && result === true && idx === mid
+                        const isElim = result !== null && result !== undefined && !active && !isFound
 
-              {showPatternOverlay && (
+                        return (
+                            <div key={idx} className="sra2-col">
+                                <motion.div
+                                    className={[
+                                        'sra2-cell',
+                                        isMid ? 'mid' : '',
+                                        isFound ? 'found' : '',
+                                        result === false ? 'eliminated' : '',
+                                        !isMid && inLeft && leftSorted ? 'sorted-left' : '',
+                                        !isMid && inRight && rightSorted ? 'sorted-right' : '',
+                                        isDuplicate && (isLo || isHi) ? 'duplicate-boundary' : '',
+                                        !active && !isFound ? 'dim' : '',
+                                    ].filter(Boolean).join(' ')}
+                                    animate={{ y: isMid ? -10 : isFound ? -10 : 0, scale: isMid || isFound ? 1.12 : 1 }}
+                                    transition={{ type: 'spring', stiffness: 400, damping: 26 }}
+                                >
+                                    {val}
+                                </motion.div>
+                                <span className="sra2-idx">{idx}</span>
+                                <div className="sra2-ptrs">
+                                    {isLo && <span className="sra2-ptr lo-ptr">lo</span>}
+                                    {isMid && <span className="sra2-ptr mid-ptr">mid</span>}
+                                    {isHi && <span className="sra2-ptr hi-ptr">hi</span>}
+                                </div>
+                            </div>
+                        )
+                    })}
+                </div>
+
+                {/* Sorted half indicator */}
+                {(leftSorted || rightSorted) && mid >= 0 && !isDuplicate && (
+                    <div className={`sra2-half-badge${leftSorted ? ' left' : ' right'}`}>
+                        {leftSorted ? `← Left half [${lo}..${mid}] is sorted` : `Right half [${mid}..${hi}] is sorted →`}
+                    </div>
+                )}
+
+                {/* Duplicate indicator */}
+                {isDuplicate && (
+                    <div className="sra2-duplicate-badge">
+                        Duplicates detected: shrink boundaries →
+                    </div>
+                )}
+
+                {/* Result */}
+                <AnimatePresence>
+                    {result !== null && result !== undefined && (
+                        <motion.div
+                            className={`sra2-result${result === true ? ' found' : ' not-found'}`}
+                            initial={{ opacity: 0, y: 8 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0 }}
+                        >
+                            {result === true ? `Found ✓` : 'Not found — return False'}
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
+        </div>
+    )
+
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                disableResizer
+            />
+            {showPatternOverlay && (
                 <CodePatternAnnotations
-                  linePatterns={LINE_PATTERN_MAP}
-                  currentPhase={step?.phase}
-                  activeLineDom={activeLineDom}
-                  activeLine={step?.activeLine}
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
                 />
-              )}
-            </div>
+            )}
+        </div>
+    )
 
-            <div className={`sra2-status${result !== null && result !== undefined ? (result === true ? ' ok' : ' fail') : ''}`}>
-                {step?.message ?? 'Press Play or Step to begin.'}
-            </div>
+    const statusPanel = (
+        <div className={`sra2-status${result !== null && result !== undefined ? (result === true ? ' ok' : ' fail') : ''}`}>
+            {step?.message ?? 'Press Play or Step to begin.'}
+        </div>
+    )
 
-            <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={SEARCHROTATEDARRAYII_PATTERNS} />
-        )}
-        <PlaybackControls
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={SEARCHROTATEDARRAYII_PATTERNS} />
+            )}
+            <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward}
                 onReset={handleReset} prevDisabled={stepIndex < 0}
@@ -350,7 +360,35 @@ export default function SearchRotatedArrayIIVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
-      </FloatingPanel>
+        </>
+    )
+
+    // State + config for Lumino DockPanel
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Search Rotated Array II · Binary Search', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+    return (
+        <div className="sra2-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     )
 }

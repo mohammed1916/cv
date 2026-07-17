@@ -1,15 +1,15 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
+import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
-import { getExamples } from '../../config/examplesRegistry'
 import './PathSumIIVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -54,7 +54,6 @@ function generateSteps(arr, targetSum) {
     }
 
     const completedPaths = []
-    const pathStack = []
     const onPathNode = new Set()
 
     steps.push({
@@ -166,11 +165,8 @@ function generateSteps(arr, targetSum) {
     return steps
 }
 
-const EXAMPLES = getExamples('path-sum-ii') || [
-    { label: '[5,4,8,11,null,13,4,7,2,null,1] target=22', arr: [5,4,8,11,null,13,4,7,2,null,1], targetSum: 22 },
-    { label: '[1,2,3] target=5', arr: [1,2,3], targetSum: 5 },
-    { label: '[1] target=1', arr: [1], targetSum: 1 },
-]
+// Examples registry will be loaded by the visualizer if needed
+// getExamples('path-sum-ii') can be called within a component for example buttons
 
 function TreeVisualizationPanel({ step, positions, edges, allNodes }) {
     return (
@@ -258,153 +254,142 @@ function StatePanel({ step }) {
     )
 }
 
-function InputPanel({ arrInput, setArrInput, targetInput, setTargetInput, applyExample, inputError }) {
-    return (
-        <div className="psi-input-panel">
-            <div className="psi-examples">
-                {EXAMPLES.map((ex) => (
-                    <button
-                        key={ex.label}
-                        className="psi-chip"
-                        onClick={() => applyExample(ex)}
-                        title={ex.label}
-                    >
-                        {ex.label.split(' ')[0]}
-                    </button>
-                ))}
-            </div>
-            <div className="psi-input-row">
-                <label>Tree:</label>
-                <input
-                    className="psi-input"
-                    value={arrInput}
-                    onChange={(e) => setArrInput(e.target.value)}
-                    placeholder="[5,4,8,11,null,13,4,7,2,null,1]"
-                />
-            </div>
-            <div className="psi-input-row">
-                <label>Target:</label>
-                <input
-                    className="psi-input"
-                    type="number"
-                    value={targetInput}
-                    onChange={(e) => setTargetInput(e.target.value)}
-                    placeholder="22"
-                />
-            </div>
-            {inputError && <span className="psi-error">{inputError}</span>}
-        </div>
-    )
-}
-
 export default function PathSumIIVisualizer() {
-    const [arrInput, setArrInput] = useState('[5,4,8,11,null,13,4,7,2,null,1]')
-    const [targetInput, setTargetInput] = useState('22')
+    const [arrInput] = useState('[5,4,8,11,null,13,4,7,2,null,1]')
+    const [targetInput] = useState('22')
 
-    const { arr, targetSum, inputError } = useMemo(() => {
+    const { arr, targetSum } = useMemo(() => {
         try {
             const parsedArr = parseTreeInput(arrInput)
             const parsedTarget = parseInt(targetInput, 10)
             if (isNaN(parsedTarget)) {
-                return { arr: [5,4,8,11,null,13,4,7,2,null,1], targetSum: 22, inputError: 'Invalid target sum' }
+                return { arr: [5,4,8,11,null,13,4,7,2,null,1], targetSum: 22 }
             }
-            return { arr: parsedArr, targetSum: parsedTarget, inputError: '' }
-        } catch (e) {
-            return { arr: [5,4,8,11,null,13,4,7,2,null,1], targetSum: 22, inputError: e.message }
+            return { arr: parsedArr, targetSum: parsedTarget }
+        } catch {
+            return { arr: [5,4,8,11,null,13,4,7,2,null,1], targetSum: 22 }
         }
     }, [arrInput, targetInput])
 
     const steps = useMemo(() => generateSteps(arr, targetSum), [arr, targetSum])
-    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
+    const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
     const step = stepIndex >= 0 ? steps[stepIndex] : null
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
-
-    const applyExample = useCallback((ex) => {
-        setArrInput(JSON.stringify(ex.arr))
-        setTargetInput(ex.targetSum.toString())
-        handleReset()
-    }, [handleReset])
 
     const positions = step?.positions ?? new Map()
     const edges = step?.edges ?? []
     const allNodes = step?.allNodes ?? []
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'input',
-            title: 'Input',
-            content: <InputPanel
-                arrInput={arrInput}
-                setArrInput={setArrInput}
-                targetInput={targetInput}
-                setTargetInput={setTargetInput}
-                applyExample={applyExample}
-                inputError={inputError}
-            />,
-        },
-        {
-            id: 'tree',
-            title: 'Tree Visualization',
-            content: <TreeVisualizationPanel step={step} positions={positions} edges={edges} allNodes={allNodes} />,
-        },
-        {
-            id: 'state',
-            title: 'State',
-            content: <StatePanel step={step} />,
-        },
-        {
-            id: 'code',
-            title: 'Code Trace',
-            content: <CodeTracePanel
+    const connectivity = useCodeVisualConnectivity({
+        steps,
+        stepIndex,
+        onStepJump: setStepIndex,
+    })
+
+    // Step 2: Extract panels into consts
+    const primaryPanel = (
+        <div className="psi-panel" style={{ flex: 1 }}>
+            <div className="psi-panel-head">Tree Visualization</div>
+            <div className="psi-panel-body">
+                <TreeVisualizationPanel step={step} positions={positions} edges={edges} allNodes={allNodes} />
+            </div>
+        </div>
+    )
+
+    const statePanel = (
+        <div className="psi-panel" style={{ flex: 1 }}>
+            <div className="psi-panel-head">State</div>
+            <div className="psi-panel-body">
+                <StatePanel step={step} />
+            </div>
+        </div>
+    )
+
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
                 step={step}
                 codeLines={SOLUTION_CODE}
+                highlightedLines={connectivity.highlightedLines}
+                onLineSelect={connectivity.handleLineSelect}
                 onActiveLineDomChange={setActiveLineDom}
-                autoScroll={autoScrollCode}
-            />,
-        },
-    ], [arrInput, setArrInput, targetInput, setTargetInput, applyExample, inputError, step, positions, edges, allNodes, setActiveLineDom, autoScrollCode])
-
-    return (
-        <div className="problem-shell">
-            <DockableWorkspace
-                title="Path Sum II Visualizer"
-                panels={dockPanels}
-                initialLayout={{
-                    rows: [
-                        ['input', 'state'],
-                        ['tree', 'code'],
-                    ],
-                    minimized: [],
-                }}
+                disableResizer
             />
-
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls
-                    onReset={handleReset}
-                    onPrev={stepBack}
-                    onPlayToggle={togglePlay}
-                    onNext={stepForward}
-                    resetDisabled={steps.length === 0}
-                    prevDisabled={stepIndex < 0}
-                    nextDisabled={isDone}
-                    isPlaying={isPlaying}
-                    isDone={isDone}
-                    speed={speed}
-                    onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                    speedIndicator={`${speed}ms`}
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    autoScrollLabel="Auto-scroll code"
-                    showAutoScroll
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
+            {showPatternOverlay && (
+                <CodePatternAnnotations
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
                 />
-            </FloatingPanel>
+            )}
+        </div>
+    )
 
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+    const statusPanel = (
+        <div className="psi-status">{step?.message || 'Press Play to begin.'}</div>
+    )
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+            )}
+            <PlaybackControls
+                onReset={handleReset}
+                onPrev={stepBack}
+                onPlayToggle={togglePlay}
+                onNext={stepForward}
+                resetDisabled={steps.length === 0}
+                prevDisabled={stepIndex < 0}
+                nextDisabled={isDone}
+                isPlaying={isPlaying}
+                isDone={isDone}
+                speed={speed}
+                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+                speedIndicator={`${speed}ms`}
+                autoScroll={autoScrollCode}
+                onAutoScrollChange={setAutoScrollCode}
+                autoScrollLabel="Auto-scroll code"
+                showAutoScroll
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                patternOverlayLabel="Show pattern overlay"
+                showPatternOverlayToggle
+            />
+        </>
+    )
+
+    // Step 3: Add state + config
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Tree Visualization', dockMode: 'split-right' },
+            { id: 'state', title: 'State', dockMode: 'split-right' },
+            { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+    // Step 4: Replace return with portals
+    return (
+        <div className="psi-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     )
 }

@@ -1,6 +1,7 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -96,128 +97,156 @@ export default function MaxProductSubarrayVisualizer() {
         handleReset()
     }, [handleReset])
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'code',
-            title: 'Code',
-            content: (
-                <CodeTracePanel
-                    step={step}
-                    codeLines={SOLUTION_CODE}
-                    highlightedLines={connectivity.highlightedLines}
-                    onLineSelect={connectivity.handleLineSelect}
-                    onActiveLineDomChange={setActiveLineDom}
-                />
-            ),
-        },
-        {
-            id: 'viz',
-            title: '📊 Max Product',
-            content: (
-                <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
-                    <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                        {EXAMPLES.map(ex => (
-                            <button key={ex.label} onClick={() => applyExample(ex)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: '#f1f5f9' }}>
-                                {ex.label}
-                            </button>
-                        ))}
-                    </div>
+    // Extract panels into consts (Step 3)
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                highlightedLines={connectivity.highlightedLines}
+                onLineSelect={connectivity.handleLineSelect}
+                onActiveLineDomChange={setActiveLineDom}
+                disableResizer
+            />
+            {showPatternOverlay && <CodePatternAnnotations step={step} linePatternMap={LINE_PATTERN_MAP} patterns={PATTERNS} activeLineDom={activeLineDom} />}
+        </div>
+    )
 
-                    <div>
-                        <input style={{ width: '100%', padding: '8px', borderRadius: 4, border: inputError ? '2px solid #ef4444' : '1px solid #cbd5e1', fontSize: 12, fontFamily: 'monospace' }} value={numsInput} onChange={e => { setNumsInput(e.target.value); handleReset() }} />
-                        {inputError && <div style={{ color: '#991b1b', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
-                    </div>
-
-                    <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>Array</div>
-                    <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', alignItems: 'center' }}>
-                        {nums.map((val, i) => {
-                            const isActive = step?.i === i
-                            return (
-                                <motion.div key={i} animate={isActive ? { y: -8, scale: 1.2 } : { y: 0, scale: 1 }} style={{
-                                    width: 50, height: 50, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                                    backgroundColor: isActive ? '#fbbf24' : val < 0 ? '#fee2e2' : val === 0 ? '#f3f4f6' : '#dbeafe',
-                                    border: isActive ? '2px solid #f59e0b' : '1px solid #cbd5e1', borderRadius: 4
-                                }}>
-                                    <span style={{ fontSize: 10, color: '#64748b' }}>{i}</span>
-                                    <span style={{ fontSize: 13, fontWeight: 'bold', color: '#1e293b' }}>{val}</span>
-                                </motion.div>
-                            )
-                        })}
-                    </div>
-
-                    {step?.candidates?.length > 0 && (
-                        <div style={{ padding: 8, backgroundColor: '#fef3c7', borderRadius: 6, border: '1px solid #fcd34d' }}>
-                            <div style={{ fontSize: 11, color: '#92400e', marginBottom: 4 }}>Candidates: [num, curMax×num, curMin×num]</div>
-                            <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-                                {step.candidates.map((c, i) => (
-                                    <span key={i} style={{
-                                        padding: '4px 8px', borderRadius: 3, fontSize: 12, fontWeight: 'bold',
-                                        backgroundColor: c === step.curMax ? '#dcfce7' : c === step.curMin ? '#fee2e2' : '#fef3c7',
-                                        color: c === step.curMax ? '#15803d' : c === step.curMin ? '#991b1b' : '#92400e'
-                                    }}>
-                                        {c}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-                    )}
-
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
-                        <div style={{ padding: 8, backgroundColor: '#dcfce7', borderRadius: 6, border: '1px solid #86efac' }}>
-                            <div style={{ fontSize: 11, color: '#15803d', marginBottom: 4 }}>curMax</div>
-                            <motion.div key={step?.curMax} initial={{ scale: 0.8 }} animate={{ scale: 1 }} style={{ fontSize: 16, fontWeight: 'bold', color: '#15803d' }}>
-                                {step?.curMax ?? '—'}
-                            </motion.div>
-                        </div>
-                        <div style={{ padding: 8, backgroundColor: '#fee2e2', borderRadius: 6, border: '1px solid #fecaca' }}>
-                            <div style={{ fontSize: 11, color: '#991b1b', marginBottom: 4 }}>curMin</div>
-                            <motion.div key={step?.curMin} initial={{ scale: 0.8 }} animate={{ scale: 1 }} style={{ fontSize: 16, fontWeight: 'bold', color: '#991b1b' }}>
-                                {step?.curMin ?? '—'}
-                            </motion.div>
-                        </div>
-                        <div style={{ padding: 8, backgroundColor: '#dbeafe', borderRadius: 6, border: '1px solid #0ea5e9' }}>
-                            <div style={{ fontSize: 11, color: '#1e40af', marginBottom: 4 }}>result</div>
-                            <motion.div key={step?.res} initial={{ scale: 0.8 }} animate={{ scale: 1 }} style={{ fontSize: 16, fontWeight: 'bold', color: '#1e40af' }}>
-                                {step?.res ?? '—'}
-                            </motion.div>
-                        </div>
-                    </div>
-
-                    {step?.phase === 'done' && (
-                        <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #86efac', textAlign: 'center', fontWeight: 600, color: '#15803d' }}>
-                            ✓ Max product = {step.res}
-                        </div>
-                    )}
+    const primaryPanel = (
+        <div className="mps-panel">
+            <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                    {EXAMPLES.map(ex => (
+                        <button key={ex.label} onClick={() => applyExample(ex)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: '#f1f5f9' }}>
+                            {ex.label}
+                        </button>
+                    ))}
                 </div>
-            ),
-        },
-    ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, nums, numsInput, inputError, applyExample])
+
+                <div>
+                    <input style={{ width: '100%', padding: '8px', borderRadius: 4, border: inputError ? '2px solid #ef4444' : '1px solid #cbd5e1', fontSize: 12, fontFamily: 'monospace' }} value={numsInput} onChange={e => { setNumsInput(e.target.value); handleReset() }} />
+                    {inputError && <div style={{ color: '#991b1b', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
+                </div>
+
+                <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>Array</div>
+                <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', alignItems: 'center' }}>
+                    {nums.map((val, i) => {
+                        const isActive = step?.i === i
+                        return (
+                            <motion.div key={i} animate={isActive ? { y: -8, scale: 1.2 } : { y: 0, scale: 1 }} style={{
+                                width: 50, height: 50, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                                backgroundColor: isActive ? '#fbbf24' : val < 0 ? '#fee2e2' : val === 0 ? '#f3f4f6' : '#dbeafe',
+                                border: isActive ? '2px solid #f59e0b' : '1px solid #cbd5e1', borderRadius: 4
+                            }}>
+                                <span style={{ fontSize: 10, color: '#64748b' }}>{i}</span>
+                                <span style={{ fontSize: 13, fontWeight: 'bold', color: '#1e293b' }}>{val}</span>
+                            </motion.div>
+                        )
+                    })}
+                </div>
+
+                {step?.candidates?.length > 0 && (
+                    <div style={{ padding: 8, backgroundColor: '#fef3c7', borderRadius: 6, border: '1px solid #fcd34d' }}>
+                        <div style={{ fontSize: 11, color: '#92400e', marginBottom: 4 }}>Candidates: [num, curMax×num, curMin×num]</div>
+                        <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+                            {step.candidates.map((c, i) => (
+                                <span key={i} style={{
+                                    padding: '4px 8px', borderRadius: 3, fontSize: 12, fontWeight: 'bold',
+                                    backgroundColor: c === step.curMax ? '#dcfce7' : c === step.curMin ? '#fee2e2' : '#fef3c7',
+                                    color: c === step.curMax ? '#15803d' : c === step.curMin ? '#991b1b' : '#92400e'
+                                }}>
+                                    {c}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
+                    <div style={{ padding: 8, backgroundColor: '#dcfce7', borderRadius: 6, border: '1px solid #86efac' }}>
+                        <div style={{ fontSize: 11, color: '#15803d', marginBottom: 4 }}>curMax</div>
+                        <motion.div key={step?.curMax} initial={{ scale: 0.8 }} animate={{ scale: 1 }} style={{ fontSize: 16, fontWeight: 'bold', color: '#15803d' }}>
+                            {step?.curMax ?? '—'}
+                        </motion.div>
+                    </div>
+                    <div style={{ padding: 8, backgroundColor: '#fee2e2', borderRadius: 6, border: '1px solid #fecaca' }}>
+                        <div style={{ fontSize: 11, color: '#991b1b', marginBottom: 4 }}>curMin</div>
+                        <motion.div key={step?.curMin} initial={{ scale: 0.8 }} animate={{ scale: 1 }} style={{ fontSize: 16, fontWeight: 'bold', color: '#991b1b' }}>
+                            {step?.curMin ?? '—'}
+                        </motion.div>
+                    </div>
+                    <div style={{ padding: 8, backgroundColor: '#dbeafe', borderRadius: 6, border: '1px solid #0ea5e9' }}>
+                        <div style={{ fontSize: 11, color: '#1e40af', marginBottom: 4 }}>result</div>
+                        <motion.div key={step?.res} initial={{ scale: 0.8 }} animate={{ scale: 1 }} style={{ fontSize: 16, fontWeight: 'bold', color: '#1e40af' }}>
+                            {step?.res ?? '—'}
+                        </motion.div>
+                    </div>
+                </div>
+
+                {step?.phase === 'done' && (
+                    <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #86efac', textAlign: 'center', fontWeight: 600, color: '#15803d' }}>
+                        ✓ Max product = {step.res}
+                    </div>
+                )}
+            </div>
+        </div>
+    )
+
+    const statusPanel = (
+        <div className="mps-status">
+            {step?.message || 'Waiting...'}
+        </div>
+    )
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
+            <PlaybackControls
+                isPlaying={isPlaying}
+                isDone={isDone}
+                speed={speed}
+                onPlayToggle={togglePlay}
+                onPrev={stepBack}
+                onNext={stepForward}
+                onReset={handleReset}
+                prevDisabled={stepIndex < 0}
+                nextDisabled={isDone}
+                resetDisabled={stepIndex < 0}
+                onSpeedChange={e => setSpeed(Number(e.target.value))}
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                patternOverlayLabel="Show pattern overlay"
+                showPatternOverlayToggle
+            />
+        </>
+    )
+
+    // State and config (Step 4)
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: '📊 Max Product', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
-        <div className="problem-shell">
-            <DockableWorkspace
-                panels={dockPanels}
-                initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
-            />
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls
-                    isPlaying={isPlaying}
-                    isDone={isDone}
-                    speed={speed}
-                    onPlayToggle={togglePlay}
-                    onPrev={stepBack}
-                    onNext={stepForward}
-                    onReset={handleReset}
-                    prevDisabled={stepIndex < 0}
-                    nextDisabled={isDone}
-                    resetDisabled={stepIndex < 0}
-                    onSpeedChange={e => setSpeed(Number(e.target.value))}
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
-                />
-            </FloatingPanel>
+        <div className="mps-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     )

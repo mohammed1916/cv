@@ -1,15 +1,25 @@
 .perm-shell {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 16px;
-    font-family: inherit;
+    height: calc(100vh - 200px);
+    min-height: 480px;
+    gap: 0;
+    overflow: hidden;
 }
 
 .perm-top {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
+}
+
+.perm-viz-panel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: #1e1e2e;
 }
 
 .perm-panel {

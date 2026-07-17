@@ -1,4 +1,5 @@
-﻿import DockableWorkspace from "../../components/shared/DockableWorkspace"
+﻿import { createPortal } from 'react-dom'
+import LuminoDockPanel from "../../components/LuminoDockPanel"
 import FloatingPanel from "../../components/shared/FloatingPanel"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { useState, useMemo, useCallback } from "react";
@@ -75,59 +76,113 @@ export default function DistinctSubsequencesVisualizer() {
   const phase = step?.phase ?? "init";
   const s = ex.s, t = ex.t;
   const answer = step?.dp?.[step.i]?.[step.j] ?? 0;
-  const dockPanels = useMemo(() => [
-    {
-      id: 'code',
-      title: 'Code',
-      content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />
-    },
-    {
-      id: 'viz',
-      title: '📝 Distinct Subsequences',
-      content: (
-        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {EXAMPLES.map(e => <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : '#f1f5f9' }}>{e.label}</button>)}
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 8, fontSize: 11 }}>
-            <div><span style={{ fontWeight: 600 }}>s:</span> {s}</div>
-            <div><span style={{ fontWeight: 600 }}>t:</span> {t}</div>
-          </div>
-          <div style={{ overflowX: 'auto', flex: 1 }}>
-            <table style={{ borderCollapse: 'collapse', fontSize: 10 }}>
-              <thead>
-                <tr>
-                  <th style={{ padding: '4px 6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc' }}></th>
-                  <th style={{ padding: '4px 6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc', fontWeight: 600 }}>ε</th>
-                  {t.split("").map((ch, j) => <th key={j} style={{ padding: '4px 6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc', fontWeight: 600, minWidth: 32 }}>{ch}</th>)}
-                </tr>
-              </thead>
-              <tbody>
-                {dp.slice(0, Math.min(dp.length, 8)).map((row, i) => (
-                  <tr key={i}>
-                    <td style={{ padding: '4px 6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc', fontWeight: 600 }}>{i === 0 ? 'ε' : s[i - 1]}</td>
-                    {row.slice(0, Math.min(row.length, 8)).map((val, j) => {
-                      const isActive = i === activeI && j === activeJ;
-                      return <motion.td key={j} animate={{ scale: isActive ? 1.2 : 1 }} style={{ padding: '4px 6px', border: '1px solid #e2e8f0', backgroundColor: isActive ? '#dbeafe' : val > 0 ? '#f0fdf4' : 'white', fontWeight: isActive ? 'bold' : 'normal', color: isActive ? '#1e40af' : '#1e293b', minWidth: 32, textAlign: 'center' }}>{val}</motion.td>;
-                    })}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          {step?.done && <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #86efac', textAlign: 'center', fontWeight: 600, color: '#15803d' }}>✓ {answer}</div>}
-        </div>
-      )
-    }
-  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx, s, t, dp, activeI, activeJ, answer]);
 
+  // Extract panels as consts (Step 2)
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+      {showPatternOverlay && <CodePatternAnnotations step={step} activeLineDom={activeLineDom} />}
+    </div>
+  );
+
+  const primaryPanel = (
+    <div className="ds-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+        {EXAMPLES.map(e => <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : '#f1f5f9' }}>{e.label}</button>)}
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 8, fontSize: 11 }}>
+        <div><span style={{ fontWeight: 600 }}>s:</span> {s}</div>
+        <div><span style={{ fontWeight: 600 }}>t:</span> {t}</div>
+      </div>
+      <div style={{ overflowX: 'auto', flex: 1 }}>
+        <table style={{ borderCollapse: 'collapse', fontSize: 10 }}>
+          <thead>
+            <tr>
+              <th style={{ padding: '4px 6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc' }}></th>
+              <th style={{ padding: '4px 6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc', fontWeight: 600 }}>ε</th>
+              {t.split("").map((ch, j) => <th key={j} style={{ padding: '4px 6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc', fontWeight: 600, minWidth: 32 }}>{ch}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {dp.slice(0, Math.min(dp.length, 8)).map((row, i) => (
+              <tr key={i}>
+                <td style={{ padding: '4px 6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc', fontWeight: 600 }}>{i === 0 ? 'ε' : s[i - 1]}</td>
+                {row.slice(0, Math.min(row.length, 8)).map((val, j) => {
+                  const isActive = i === activeI && j === activeJ;
+                  return <motion.td key={j} animate={{ scale: isActive ? 1.2 : 1 }} style={{ padding: '4px 6px', border: '1px solid #e2e8f0', backgroundColor: isActive ? '#dbeafe' : val > 0 ? '#f0fdf4' : 'white', fontWeight: isActive ? 'bold' : 'normal', color: isActive ? '#1e40af' : '#1e293b', minWidth: 32, textAlign: 'center' }}>{val}</motion.td>;
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {step?.done && <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #86efac', textAlign: 'center', fontWeight: 600, color: '#15803d' }}>✓ {answer}</div>}
+    </div>
+  );
+
+  const statusPanel = (
+    <div className="ds-status" style={{ padding: '8px 12px', fontSize: '13px', color: '#a6adc8', minHeight: '36px' }}>
+      {step?.message || 'Ready'}
+    </div>
+  );
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && <PatternLegend />}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={e => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  );
+
+  // Add state + config (Step 3)
+  const [panelDivs, setPanelDivs] = useState(null);
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: '📝 Distinct Subsequences', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  );
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
+
+  // Replace return block (Step 4)
   return (
-    <div className="problem-shell">
-      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
-      </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+    <div className="ds-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   );
 }

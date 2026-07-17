@@ -1,4 +1,5 @@
 ﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -9,6 +10,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./WildcardMatchingVisualizer.css";
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from "../../components/LuminoDockPanel"
 
 const WILDCARDMATCHING_PATTERNS = ['base', 'done', 'init', 'match', 'no-match', 'star']
 
@@ -89,8 +91,9 @@ export default function WildcardMatchingVisualizer() {
   const phase = step?.phase ?? "init";
   const s = ex.s, p = ex.p;
 
-  return (
-    <div className="wm-shell">
+  // Step 2: Extract panels
+  const primaryPanel = (
+    <div className="wm-panel">
       <div className="wm-examples">
         {EXAMPLES.map(e => (
           <button key={e.label} className={`wm-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>
@@ -114,7 +117,7 @@ export default function WildcardMatchingVisualizer() {
         </div>
       </div>
 
-      <div className="wm-panel">
+      <div className="wm-panel-viz">
         <div className="wm-panel-label">DP Table — dp[i][j]: s[0..i) matches p[0..j)</div>
         <div className="wm-table-wrap">
           <table className="wm-table">
@@ -177,24 +180,33 @@ export default function WildcardMatchingVisualizer() {
           {dp[ex.s.length][ex.p.length] ? `✓ "${s}" matches pattern "${p}"` : `✗ "${s}" does not match "${p}"`}
         </div>
       )}
+    </div>
+  )
 
-      <div style={{position: 'relative'}}>
-        <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-        {showPatternOverlay && (
-          <CodePatternAnnotations
-            linePatterns={LINE_PATTERN_MAP}
-            currentPhase={step?.phase}
-            activeLineDom={activeLineDom}
-            activeLine={step?.activeLine}
-          />
-        )}
-      </div>
-      <div className="wm-status">{step?.message ?? "Press Play to begin."}</div>
-      <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={WILDCARDMATCHING_PATTERNS} />
-        )}
-        <PlaybackControls
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} disableResizer />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
+        />
+      )}
+    </div>
+  )
+
+  const statusPanel = (
+    <div className="wm-status">{step?.message ?? "Press Play to begin."}</div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={WILDCARDMATCHING_PATTERNS} />
+      )}
+      <PlaybackControls
         isPlaying={isPlaying} isDone={isDone} speed={speed}
         onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
         prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
@@ -204,7 +216,36 @@ export default function WildcardMatchingVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
-      </FloatingPanel>
+    </>
+  )
+
+  // Step 3: Add state + config
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'DP Visualization', dockMode: 'split-right' },
+      { id: 'code',    title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status',  title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  // Step 4: Replace return with portals
+  return (
+    <div className="wm-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}
+          {panelDivs.status  && createPortal(statusPanel,  panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   );
 }

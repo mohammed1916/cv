@@ -1,3 +1,13 @@
+.problem300-visualizer-shell {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 200px);
+    min-height: 480px;
+    gap: 0;
+    overflow: hidden;
+}
+
 .problem300-visualizer-viz-panel {
     display: flex;
     flex-direction: column;
@@ -54,4 +64,13 @@
     background: linear-gradient(135deg, #86efac 0%, #10b981 100%);
     border-color: #10b981;
     box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.problem300-visualizer-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 14px;
+    background: #0f1119;
+    border-top: 1px solid #313244;
 }

@@ -1,8 +1,10 @@
 ﻿.problem99-shell {
+  position: relative;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  gap: 16px;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
   overflow: hidden;
 }
 
@@ -51,6 +53,15 @@
 .problem99-button:hover {
   background: #ec489930;
   border-color: #ec489960;
+}
+
+.problem99-status {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 12px;
+  background: var(--surface-2);
+  border-top: 1px solid var(--border);
+  overflow-y: auto;
 }
 
 .problem99-visualization {

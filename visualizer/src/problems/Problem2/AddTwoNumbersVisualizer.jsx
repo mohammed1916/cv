@@ -353,7 +353,7 @@ export default function AddTwoNumbersVisualizer({ problem }) {
       { id: 'primary', title: 'Linked Lists', dockMode: 'split-right' },
       { id: 'state',   title: 'State Variables', dockMode: 'split-right' },
       { id: 'code',    title: 'Code', dockMode: 'split-bottom' },
-      { id: 'status',  title: 'Status', dockMode: 'tab-after' },
+      { id: 'status',  title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []
   )

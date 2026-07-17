@@ -1,16 +1,18 @@
 ﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from 'react-dom';
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 import AnimatedIterationList from "../../components/shared/AnimatedIterationList";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
+import FloatingPanel from '../../components/shared/FloatingPanel';
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { useProblemCode } from "../../hooks/useProblemCode";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./RemoveDuplicatesVisualizer.css";
-import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const REMOVDUPLICATES_PATTERNS = ['check', 'duplicate', 'init', 'new', 'write']
 
@@ -72,74 +74,75 @@ export default function RemoveDuplicatesVisualizer({ problem }) {
   const k = step?.k ?? 1;
   const i = step?.i ?? -1;
 
-  return (
-    <div className="rd-shell">
-      <div className="rd-examples">
-        {EXAMPLES.map(e => (
-          <button key={e.label} className={`rd-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>{e.label}</button>
-        ))}
+  // Step 3: Extract panels into consts
+  const primaryPanel = (
+    <div className="rd-panel">
+      <div className="rd-panel-label">Array (in-place)</div>
+      <AnimatedIterationList
+        items={arr}
+        styleName="pointer-lane"
+        className="rd-arr"
+        getItemState={(_, index) => {
+          const isI = index === i;
+          const isK = index === k;
+          const inResult = index < k;
+          return {
+            stateClass: `${isI ? 'i-cell' : ''} ${isK && !isI ? 'k-cell' : ''} ${inResult && !isI && !isK ? 'result' : ''}`.trim(),
+            isActive: isI || isK,
+          };
+        }}
+        renderBelow={(_, index) => {
+          const isI = index === i;
+          const isK = index === k;
+          return (
+            <div className="rd-ptrs">
+              {isI && <span className="rd-ptr i">i</span>}
+              {isK && <span className="rd-ptr k">k</span>}
+            </div>
+          );
+        }}
+      />
+      <div className="rd-divider-row">
+        <div className="rd-divider-label">result zone (0..k-1)</div>
+        <div className="rd-divider-bar" style={{ width: `${k * 52}px` }} />
       </div>
-
-      <div className="rd-panel">
-        <div className="rd-panel-label">Array (in-place)</div>
-        <AnimatedIterationList
-          items={arr}
-          styleName="pointer-lane"
-          className="rd-arr"
-          getItemState={(_, index) => {
-            const isI = index === i;
-            const isK = index === k;
-            const inResult = index < k;
-            return {
-              stateClass: `${isI ? 'i-cell' : ''} ${isK && !isI ? 'k-cell' : ''} ${inResult && !isI && !isK ? 'result' : ''}`.trim(),
-              isActive: isI || isK,
-            };
-          }}
-          renderBelow={(_, index) => {
-            const isI = index === i;
-            const isK = index === k;
-            return (
-              <div className="rd-ptrs">
-                {isI && <span className="rd-ptr i">i</span>}
-                {isK && <span className="rd-ptr k">k</span>}
-              </div>
-            );
-          }}
-        />
-        <div className="rd-divider-row">
-          <div className="rd-divider-label">result zone (0..k-1)</div>
-          <div className="rd-divider-bar" style={{ width: `${k * 52}px` }} />
-        </div>
-      </div>
-
       {step?.done && (
         <div className="rd-result">✓ k = {k}  →  unique values: [{arr.slice(0, k).join(", ")}]</div>
       )}
+    </div>
+  );
 
-      <div style={{ position: 'relative' }}>
-        <CodeTracePanel
-          step={step}
-          codeLines={codeLines}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={codeLines}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
         />
+      )}
+    </div>
+  );
 
-        {showPatternOverlay && (
-          <CodePatternAnnotations
-            linePatterns={LINE_PATTERN_MAP}
-            currentPhase={step?.phase}
-            activeLineDom={activeLineDom}
-            activeLine={step?.activeLine}
-          />
-        )}
-      </div>
-      <div className="rd-status">{step?.message ?? "Press Play to begin."}</div>
-      <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={REMOVDUPLICATES_PATTERNS} />
-        )}
-        <PlaybackControls
+  const statusPanel = (
+    <div className="rd-status">{step?.message ?? "Press Play to begin."}</div>
+  );
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={REMOVDUPLICATES_PATTERNS} />
+      )}
+      <PlaybackControls
         isPlaying={isPlaying} isDone={isDone} speed={speed}
         onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
         prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
@@ -149,7 +152,41 @@ export default function RemoveDuplicatesVisualizer({ problem }) {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
-      </FloatingPanel>
+    </>
+  );
+
+  // Step 4: Add panelConfigs
+  const [panelDivs, setPanelDivs] = useState(null);
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Array (in-place)', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  );
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
+
+  return (
+    <div className="rd-shell">
+      <div className="rd-examples">
+        {EXAMPLES.map(e => (
+          <button key={e.label} className={`rd-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>{e.label}</button>
+        ))}
+      </div>
+
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   );
 }

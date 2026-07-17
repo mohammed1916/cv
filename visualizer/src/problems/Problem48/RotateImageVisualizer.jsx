@@ -1,4 +1,5 @@
 ﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -9,6 +10,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./RotateImageVisualizer.css";
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from "../../components/LuminoDockPanel"
 
 const ROTATE_PATTERNS = ['transpose', 'swap', 'reverse', 'done']
 
@@ -84,6 +86,72 @@ export default function RotateImageVisualizer() {
     const matrix = step?.matrix ?? initial;
     const n = matrix.length;
 
+    // Extract panels into consts (step 3)
+    const primaryPanel = (
+        <div className="ri-panel">
+            <div className="ri-panel-label">Original</div>
+            <MatrixGrid matrix={initial} n={n} hi={null} hj={null} accent={ACCENT} />
+        </div>
+    );
+    const statePanel = (
+        <div className="ri-panel">
+            <div className="ri-panel-label">Working matrix</div>
+            <MatrixGrid matrix={matrix} n={n} hi={step?.hi} hj={step?.hj} accent={ACCENT} phase={step?.phase} />
+        </div>
+    );
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                disableResizer
+            />
+            {showPatternOverlay && (
+                <CodePatternAnnotations
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
+                />
+            )}
+        </div>
+    );
+    const statusPanel = (
+        <div className="ri-status">{step?.message ?? "Press Play to begin."}</div>
+    );
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={ROTATE_PATTERNS} />
+            )}
+            <PlaybackControls
+                isPlaying={isPlaying} isDone={isDone} speed={speed}
+                onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
+                prevDisabled={stepIndex <= 0} nextDisabled={isDone} resetDisabled={stepIndex <= 0}
+                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                patternOverlayLabel="Show pattern overlay"
+                showPatternOverlayToggle
+            />
+        </>
+    );
+
+    // Add state + config (step 4)
+    const [panelDivs, setPanelDivs] = useState(null);
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Original', dockMode: 'split-right' },
+            { id: 'state', title: 'Working matrix', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    );
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
+
+    // Replace return block (step 5)
     return (
         <div className="ri-shell">
             <div className="ri-controls-row">
@@ -94,46 +162,19 @@ export default function RotateImageVisualizer() {
                 </div>
             </div>
 
-            <div className="ri-panels">
-                {/* Original */}
-                <div className="ri-panel">
-                    <div className="ri-panel-label">Original</div>
-                    <MatrixGrid matrix={initial} n={n} hi={null} hj={null} accent={ACCENT} />
-                </div>
-                {/* Current state */}
-                <div className="ri-panel">
-                    <div className="ri-panel-label">Working matrix</div>
-                    <MatrixGrid matrix={matrix} n={n} hi={step?.hi} hj={step?.hj} accent={ACCENT} phase={step?.phase} />
-                </div>
-            </div>
-
-            <div style={{position: 'relative'}}>
-              <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-              {showPatternOverlay && (
-                <CodePatternAnnotations
-                  linePatterns={LINE_PATTERN_MAP}
-                  currentPhase={step?.phase}
-                  activeLineDom={activeLineDom}
-                  activeLine={step?.activeLine}
-                />
-              )}
-            </div>
-            <div className="ri-status">{step?.message ?? "Press Play to begin."}</div>
-            <FloatingPanel title="Playback Controls">
-              {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={ROTATE_PATTERNS} />
-              )}
-              <PlaybackControls
-                isPlaying={isPlaying} isDone={isDone} speed={speed}
-                onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-                prevDisabled={stepIndex <= 0} nextDisabled={isDone} resetDisabled={stepIndex <= 0}
-                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                showPatternOverlay={showPatternOverlay}
-                onShowPatternOverlayChange={setShowPatternOverlay}
-                patternOverlayLabel="Show pattern overlay"
-                showPatternOverlayToggle
-              />
-            </FloatingPanel>
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     );
 }

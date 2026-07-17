@@ -1,9 +1,9 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -13,6 +13,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import './BalancedBinaryTreeVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -225,75 +226,110 @@ export default function BalancedBinaryTreeVisualizer() {
     const edges = step?.edges ?? []
     const allNodes = step?.allNodes ?? []
 
-    // Build dock panels for the workspace
-    const dockPanels = useMemo(() => [
-        {
-            id: 'input',
-            title: 'Input',
-            content: <InputPanel arrInput={arrInput} setArrInput={setArrInput} applyExample={applyExample} inputError={inputError} />,
-        },
-        {
-            id: 'tree',
-            title: 'Tree Visualization',
-            content: <TreeVisualizationPanel step={step} positions={positions} edges={edges} allNodes={allNodes} />,
-        },
-        {
-            id: 'state',
-            title: 'State',
-            content: <StatePanel step={step} allNodes={allNodes} />,
-        },
-        {
-            id: 'code',
-            title: 'Code Trace',
-            content: <CodeTracePanel
+    // Step 2: Extract panels into consts
+    const primaryPanel = (
+        <div className="bbt-panel">
+            <TreeVisualizationPanel step={step} positions={positions} edges={edges} allNodes={allNodes} />
+        </div>
+    )
+
+    const statePanel = (
+        <div className="bbt-panel">
+            <StatePanel step={step} allNodes={allNodes} />
+        </div>
+    )
+
+    const inputPanel = (
+        <div className="bbt-panel">
+            <InputPanel arrInput={arrInput} setArrInput={setArrInput} applyExample={applyExample} inputError={inputError} />
+        </div>
+    )
+
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
                 step={step}
                 codeLines={SOLUTION_CODE}
                 onActiveLineDomChange={setActiveLineDom}
                 autoScroll={autoScrollCode}
-            />,
-        },
-    ], [arrInput, setArrInput, applyExample, inputError, step, positions, edges, allNodes, setActiveLineDom, autoScrollCode])
-
-    return (
-        <div className="problem-shell">
-            <DockableWorkspace
-                title="Balanced Binary Tree Visualizer"
-                panels={dockPanels}
-                initialLayout={{
-                    rows: [
-                        ['input', 'state'],
-                        ['tree', 'code'],
-                    ],
-                    minimized: [],
-                }}
+                disableResizer
             />
-
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls
-                    onReset={handleReset}
-                    onPrev={stepBack}
-                    onPlayToggle={togglePlay}
-                    onNext={stepForward}
-                    resetDisabled={steps.length === 0}
-                    prevDisabled={stepIndex < 0}
-                    nextDisabled={isDone}
-                    isPlaying={isPlaying}
-                    isDone={isDone}
-                    speed={speed}
-                    onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                    speedIndicator={`${speed}ms`}
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    autoScrollLabel="Auto-scroll code"
-                    showAutoScroll
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
+            {showPatternOverlay && (
+                <CodePatternAnnotations
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
                 />
-            </FloatingPanel>
+            )}
+        </div>
+    )
 
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+    const statusPanel = (
+        <div className="bbt-status">
+            {step?.message || 'Press Play to begin.'}
+        </div>
+    )
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
+            <PlaybackControls
+                onReset={handleReset}
+                onPrev={stepBack}
+                onPlayToggle={togglePlay}
+                onNext={stepForward}
+                resetDisabled={steps.length === 0}
+                prevDisabled={stepIndex < 0}
+                nextDisabled={isDone}
+                isPlaying={isPlaying}
+                isDone={isDone}
+                speed={speed}
+                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+                speedIndicator={`${speed}ms`}
+                autoScroll={autoScrollCode}
+                onAutoScrollChange={setAutoScrollCode}
+                autoScrollLabel="Auto-scroll code"
+                showAutoScroll
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                patternOverlayLabel="Show pattern overlay"
+                showPatternOverlayToggle
+            />
+        </>
+    )
+
+    // Step 3: Add state + config
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'input', title: 'Input', dockMode: 'split-right' },
+            { id: 'state', title: 'State', dockMode: 'split-right' },
+            { id: 'primary', title: 'Tree Visualization', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+    // Step 5: Replace return with portals
+    return (
+        <div className="bbt-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+                    {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     )
 }

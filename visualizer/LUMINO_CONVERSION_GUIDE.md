@@ -47,7 +47,7 @@
        { id: 'primary', title: '<actual title from panel head>', dockMode: 'split-right' },
        { id: 'state',   title: '<actual title from panel head>', dockMode: 'split-right' }, // omit if no state panel
        { id: 'code',    title: 'Code', dockMode: 'split-bottom' },
-       { id: 'status',  title: 'Status', dockMode: 'tab-after' },
+       { id: 'status',  title: 'Status', dockMode: 'split-bottom', ratio: 0.08 }, // bottom strip with small ratio
      ],
      []
    )
@@ -64,7 +64,7 @@
            {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
            {panelDivs.state   && createPortal(statePanel,   panelDivs.state)}   {/* omit if no state */}
            {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}
-           {panelDivs.status  && createPortal(statusPanel,  panelDivs.status)}
+           {panelDivs.status  && createPortal(statusPanel,  panelDivs.status)}   {/* bottom strip */}
          </>
        )}
        {createPortal(

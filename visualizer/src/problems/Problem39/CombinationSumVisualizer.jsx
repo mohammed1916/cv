@@ -1,4 +1,5 @@
 ﻿import { useState, useCallback, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -9,6 +10,7 @@ import './CombinationSumVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -251,155 +253,191 @@ export default function CombinationSumVisualizer() {
     handleReset()
   }, [handleReset])
 
-  return (
-    <div className="combination-sum-shell">
-      <div className="cs-top">
-        <div className="cs-panel">
-          <div className="cs-panel-head">
-            State & Recursion Tree
-            {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
-          </div>
-          <div className="cs-panel-body">
-            <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
-              {EXAMPLES.map((ex) => (
-                <button
-                  key={ex.label}
-                  onClick={() => applyExample(ex)}
-                  className="cs-example-btn"
-                >
-                  {ex.label}
-                </button>
-              ))}
-            </div>
+  // Step 3: Extract panels into constants
+  const primaryPanel = (
+    <div className="cs-panel">
+      <div className="cs-panel-head">
+        State & Recursion Tree
+        {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
+      </div>
+      <div className="cs-panel-body">
+        <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
+          {EXAMPLES.map((ex) => (
+            <button
+              key={ex.label}
+              onClick={() => applyExample(ex)}
+              className="cs-example-btn"
+            >
+              {ex.label}
+            </button>
+          ))}
+        </div>
 
-            <div style={{ display: 'flex', gap: 12, marginBottom: 16, alignItems: 'center' }}>
-              <input
-                value={candidatesInput}
-                onChange={(e) => { setCandidatesInput(e.target.value);
+        <div style={{ display: 'flex', gap: 12, marginBottom: 16, alignItems: 'center' }}>
+          <input
+            value={candidatesInput}
+            onChange={(e) => { setCandidatesInput(e.target.value);
 
  handleReset() }}
-                placeholder="[2, 3, 6, 7]"
-                className="cs-input"
-                style={{ flex: 1, margin: 0 }}
-              />
-              <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace' }}>target=</span>
-              <input
-                value={targetInput}
-                onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
-                placeholder="7"
-                className="cs-input"
-                style={{ width: '60px', margin: 0, textAlign: 'center' }}
-              />
-            </div>
+            placeholder="[2, 3, 6, 7]"
+            className="cs-input"
+            style={{ flex: 1, margin: 0 }}
+          />
+          <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace' }}>target=</span>
+          <input
+            value={targetInput}
+            onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
+            placeholder="7"
+            className="cs-input"
+            style={{ width: '60px', margin: 0, textAlign: 'center' }}
+          />
+        </div>
 
-            <div className="cs-candidates-row">
-              <span className="cs-label">Candidates (Sorted):</span>
-              <div className="cs-array">
-                {sortedCandidates.map((val, idx) => (
-                  <div key={idx} className={`cs-candidate ${step?.i === idx ? 'active' : ''}`}>
-                    <span className="cs-val">{val}</span>
-                    <span className="cs-idx">i={idx}</span>
-                  </div>
-                ))}
+        <div className="cs-candidates-row">
+          <span className="cs-label">Candidates (Sorted):</span>
+          <div className="cs-array">
+            {sortedCandidates.map((val, idx) => (
+              <div key={idx} className={`cs-candidate ${step?.i === idx ? 'active' : ''}`}>
+                <span className="cs-val">{val}</span>
+                <span className="cs-idx">i={idx}</span>
               </div>
-            </div>
-
-            <div className="cs-state-cards">
-              <div className="cs-card">
-                <div className="cs-card-title">current_path</div>
-                <div className="cs-card-value">
-                  [{step?.path?.join(', ') || ''}]
-                </div>
-              </div>
-              <div className="cs-card">
-                <div className="cs-card-title">total</div>
-                <div className={`cs-card-value ${step?.total === target ? 'match' : step?.total > target ? 'exceed' : ''}`}>
-                  {step?.total ?? 0} <span className="cs-card-sub">/ {target}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="cs-stack-container">
-              <div className="cs-section-title">Recursion Tree (Explored Paths)</div>
-              <div className="cs-tree-container">
-                {steps[0]?.treeNodes && (
-                  <RecursionTreeNode
-                    nodeKey=""
-                    treeNodes={steps[0].treeNodes}
-                    activeKey={step?.activePathKey}
-                    currentStepIndex={stepIndex}
-                  />
-                )}
-                {(!steps[0]?.treeNodes || stepIndex < 0) && (
-                  <div className="cs-empty-stack">Tree is empty</div>
-                )}
-              </div>
-            </div>
-
-            <div className="cs-res-container">
-              <div className="cs-section-title">Results (res)</div>
-              <div className="cs-res-list">
-                <AnimatePresence>
-                  {step?.res?.map((arr, idx) => (
-                    <motion.div
-                      key={idx}
-                      className="cs-res-item"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                    >
-                      [{arr.join(', ')}]
-                    </motion.div>
-                  ))}
-                </AnimatePresence>
-                {(!step || step.res.length === 0) && <span style={{ color: '#475569', fontStyle: 'italic', fontSize: 13 }}>[ ]</span>}
-              </div>
-            </div>
-
+            ))}
           </div>
         </div>
-      </div>
 
-      <div className="combination-sum-middle">
-                <div style={{ position: "relative" }}>
-          <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-
-          {showPatternOverlay && (
-            <CodePatternAnnotations
-              linePatterns={LINE_PATTERN_MAP}
-              currentPhase={step?.phase}
-              activeLineDom={activeLineDom}
-              activeLine={step?.activeLine}
-            />
-          )}
+        <div className="cs-state-cards">
+          <div className="cs-card">
+            <div className="cs-card-title">current_path</div>
+            <div className="cs-card-value">
+              [{step?.path?.join(', ') || ''}]
+            </div>
+          </div>
+          <div className="cs-card">
+            <div className="cs-card-title">total</div>
+            <div className={`cs-card-value ${step?.total === target ? 'match' : step?.total > target ? 'exceed' : ''}`}>
+              {step?.total ?? 0} <span className="cs-card-sub">/ {target}</span>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div className={`cs-status ${step?.phase === 'found' ? 'found' : step?.phase === 'return_bound' ? 'bound' : ''}`}>
-        {step?.message ?? 'Press Play or Step to begin.'}
-      </div>
+        <div className="cs-stack-container">
+          <div className="cs-section-title">Recursion Tree (Explored Paths)</div>
+          <div className="cs-tree-container">
+            {steps[0]?.treeNodes && (
+              <RecursionTreeNode
+                nodeKey=""
+                treeNodes={steps[0].treeNodes}
+                activeKey={step?.activePathKey}
+                currentStepIndex={stepIndex}
+              />
+            )}
+            {(!steps[0]?.treeNodes || stepIndex < 0) && (
+              <div className="cs-empty-stack">Tree is empty</div>
+            )}
+          </div>
+        </div>
 
-      <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={COMBINATIONSUM_PATTERNS} />
-        )}
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
+        <div className="cs-res-container">
+          <div className="cs-section-title">Results (res)</div>
+          <div className="cs-res-list">
+            <AnimatePresence>
+              {step?.res?.map((arr, idx) => (
+                <motion.div
+                  key={idx}
+                  className="cs-res-item"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                >
+                  [{arr.join(', ')}]
+                </motion.div>
+              ))}
+            </AnimatePresence>
+            {(!step || step.res.length === 0) && <span style={{ color: '#475569', fontStyle: 'italic', fontSize: 13 }}>[ ]</span>}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  )
+
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
         />
-      </FloatingPanel>
+      )}
+    </div>
+  )
+
+  const statusPanel = (
+    <div className={`cs-status ${step?.phase === 'found' ? 'found' : step?.phase === 'return_bound' ? 'bound' : ''}`}>
+      {step?.message ?? 'Press Play or Step to begin.'}
+    </div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={COMBINATIONSUM_PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
+
+  // Step 4: Add panelConfigs and state
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'State & Recursion Tree', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  // Step 5: Replace return with portals
+  return (
+    <div className="combination-sum-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

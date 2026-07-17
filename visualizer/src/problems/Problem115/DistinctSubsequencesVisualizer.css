@@ -1,4 +1,13 @@
-.ds-shell { display: flex; flex-direction: column; gap: 12px; padding: 16px; font-family: inherit; }
+.ds-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+  font-family: inherit;
+}
 .ds-examples { display: flex; gap: 8px; flex-wrap: wrap; }
 .ds-chip { background: #313244; color: #cdd6f4; border: 2px solid #45475a; border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer; }
 .ds-chip.active, .ds-chip:hover { border-color: #89dceb; color: #89dceb; }

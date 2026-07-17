@@ -1,6 +1,7 @@
 ﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from 'react-dom';
 import { motion } from "framer-motion";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -210,51 +211,88 @@ export default function MaxPointsOnALineVisualizer() {
         }, [])
         : [];
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'code',
-            title: 'Code',
-            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
-        },
-        {
-            id: 'viz',
-            title: 'Visualization',
-            content: (
-                <VizPanel
-                    EXAMPLES={EXAMPLES}
-                    ex={ex}
-                    svgPts={svgPts}
-                    W={W}
-                    H={H}
-                    origin={origin}
-                    partner={partner}
-                    slopePts={slopePts}
-                    step={step}
-                    slopes={slopes}
-                    res={res}
-                    applyEx={applyEx}
-                />
-            ),
-        },
-    ], [EXAMPLES, ex, svgPts, W, H, origin, partner, slopePts, step, slopes, res, applyEx, setActiveLineDom, autoScrollCode]);
+    // Step 3: Extract panels into consts
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                autoScroll={autoScrollCode}
+                disableResizer
+            />
+            {showPatternOverlay && <CodePatternAnnotations step={step} lineMap={LINE_PATTERN_MAP} patterns={PATTERNS} />}
+        </div>
+    )
+    const vizPanel = (
+        <div className="mpl-panel">
+            <VizPanel
+                EXAMPLES={EXAMPLES}
+                ex={ex}
+                svgPts={svgPts}
+                W={W}
+                H={H}
+                origin={origin}
+                partner={partner}
+                slopePts={slopePts}
+                step={step}
+                slopes={slopes}
+                res={res}
+                applyEx={applyEx}
+            />
+        </div>
+    )
+    const statusPanel = (
+        <div className="mpl-status-panel">
+            {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
+            <span className="mpl-status">{step?.message ?? "Press Play to begin."}</span>
+        </div>
+    )
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
+            <PlaybackControls
+                isPlaying={isPlaying} isDone={isDone} speed={speed}
+                onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
+                prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
+                onSpeedChange={e => setSpeed(Number(e.target.value))}
+                autoScroll={autoScrollCode}
+                onAutoScrollChange={setAutoScrollCode}
+                showAutoScroll
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                showPatternOverlayToggle
+            />
+        </>
+    )
 
+    // Step 4: Add state + config
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'viz', title: 'Visualization', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+    // Step 5: Replace return block with portals
     return (
-        <div className="problem-shell">
-            <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls
-                    isPlaying={isPlaying} isDone={isDone} speed={speed}
-                    onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-                    prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
-                    onSpeedChange={e => setSpeed(Number(e.target.value))}
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    showAutoScroll
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    showPatternOverlayToggle
-                />
-            </FloatingPanel>
+        <div className="mpl-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     );

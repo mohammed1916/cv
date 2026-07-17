@@ -2,11 +2,31 @@
    Palindrome Visualizer Styles
    ───────────────────────────────────────────── */
 
+.pv-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+}
+
 .pv {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
   padding-bottom: 3rem;
+}
+
+.pv-panel-primary,
+.pv-panel-state,
+.pv-panel-status {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  padding: 1rem;
 }
 
 /* ── Shared Card ───────────────────────────── */

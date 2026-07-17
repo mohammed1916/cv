@@ -1,15 +1,16 @@
 ﻿import { useState, useCallback, useMemo } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import CodeTracePanel from '../../components/CodeTracePanel';
 import PlaybackControls from '../../components/PlaybackControls';
 import { usePlaybackState } from '../../hooks/usePlaybackState';
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity';
 import { usePatternOverlay } from '../../hooks/usePatternOverlay';
-import { getExamples } from '../../config/examplesRegistry';
 import './SqrtxVisualizer.css';
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -267,8 +268,9 @@ export default function SqrtxVisualizer() {
     ? Math.max(0, step.right - step.left + 1)
     : example.x;
 
-  return (
-    <div className="sqrtx-shell">
+  // Panel consts
+  const primaryPanel = (
+    <div className="sqrtx-panel">
       {/* Example selector */}
       <div className="sqrtx-examples">
         {EXAMPLES.map((ex, idx) => (
@@ -291,8 +293,8 @@ export default function SqrtxVisualizer() {
         </span>
       </div>
 
-      {/* Main visualization panel */}
-      <div className="sqrtx-panel">
+      {/* Main visualization */}
+      <div className="sqrtx-visualization">
         <div className="sqrtx-panel-label">Binary Search for Square Root</div>
 
         <div className="sqrtx-search-space">
@@ -479,38 +481,42 @@ export default function SqrtxVisualizer() {
           )}
         </AnimatePresence>
       </div>
+    </div>
+  );
 
-      {/* Code trace panel */}
-            <div style={{ position: "relative" }}>
-        <CodeTracePanel
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
         step={step}
         codeLines={SOLUTION_CODE}
         highlightedLines={connectivity.highlightedLines}
         onLineSelect={connectivity.handleLineSelect}
         onActiveLineDomChange={setActiveLineDom}
+        disableResizer
       />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
+        />
+      )}
+    </div>
+  );
 
-        {showPatternOverlay && (
-          <CodePatternAnnotations
-            linePatterns={LINE_PATTERN_MAP}
-            currentPhase={step?.phase}
-            activeLineDom={activeLineDom}
-            activeLine={step?.activeLine}
-          />
-        )}
-      </div>
+  const statusPanel = (
+    <div className="sqrtx-status">
+      {step?.message ?? 'Press Play or Step to begin.'}
+    </div>
+  );
 
-      {/* Status message */}
-      <div className="sqrtx-status">
-        {step?.message ?? 'Press Play or Step to begin.'}
-      </div>
-
-      {/* Playback controls */}
-      <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={SQRTX_PATTERNS} />
-        )}
-        <PlaybackControls
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={SQRTX_PATTERNS} />
+      )}
+      <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
         speed={speed}
@@ -527,8 +533,35 @@ export default function SqrtxVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
-      </FloatingPanel>
+    </>
+  );
 
+  // Panel state + config
+  const [panelDivs, setPanelDivs] = useState(null);
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Binary Search Visualizer', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  );
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
+
+  return (
+    <div className="sqrtx-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { useState, useCallback, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -330,90 +331,110 @@ export default function ClimbingStairsVisualizer() {
 
   const currentStairIndex = step ? (step.i !== null ? step.i + 2 : (step.phase === 'init' ? 1 : n)) : 1
 
-  const dockPanels = useMemo(() => [
-    {
-      id: 'code',
-      title: 'Code',
-      content: (
-        <div style={{ position: 'relative' }}>
-          <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-          autoScroll={autoScrollCode}
+  // Extract panels as constants
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        autoScroll={autoScrollCode}
+        disableResizer
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
         />
+      )}
+    </div>
+  )
 
-          {showPatternOverlay && (
-            <CodePatternAnnotations
-              linePatterns={LINE_PATTERN_MAP}
-              currentPhase={step?.phase}
-              activeLineDom={activeLineDom}
-              activeLine={step?.activeLine}
-            />
-          )}
-        </div>
-      ),
-    },
-    {
-      id: 'viz',
-      title: 'Visualization',
-      content: (
-        <VisualizationPanel
-          nInput={nInput}
-          setNInput={setNInput}
-          n={n}
-          inputError={inputError}
-          handleReset={handleReset}
-          dpTable={dpTable}
-          currentStairIndex={currentStairIndex}
-          step={step}
-          applyExample={applyExample}
-        />
-      ),
-    },
-    {
-      id: 'vars',
-      title: 'Variables',
-      content: <VariablesPanel step={step} />,
-    },
-  ], [step, SOLUTION_CODE, connectivity.highlightedLines, connectivity.handleLineSelect, autoScrollCode, nInput, setNInput, n, inputError, handleReset, dpTable, currentStairIndex, applyExample, setActiveLineDom])
+  const visualizationPanel = (
+    <VisualizationPanel
+      nInput={nInput}
+      setNInput={setNInput}
+      n={n}
+      inputError={inputError}
+      handleReset={handleReset}
+      dpTable={dpTable}
+      currentStairIndex={currentStairIndex}
+      step={step}
+      applyExample={applyExample}
+    />
+  )
+
+  const variablesPanel = <VariablesPanel step={step} />
+
+  const statusPanel = (
+    <div className="cs-dp-status" style={{ height: '100%', display: 'flex', alignItems: 'center' }}>
+      {step?.message || 'Ready'}
+    </div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={CLIMBINGSTAIRS_PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+        autoScroll={autoScrollCode}
+        onAutoScrollChange={setAutoScrollCode}
+        showAutoScroll
+      />
+      {vizFeatures.length > 0 && (
+        <VisualizationControls features={vizFeatures} onToggle={toggleVizFeature} />
+      )}
+    </>
+  )
+
+  // Lumino panel configuration
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'viz', title: 'Stairs & DP Array', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'vars', title: 'Variables', dockMode: 'split-right' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
-    <div className="problem-shell">
-      <DockableWorkspace
-        panels={dockPanels}
-        initialLayout={{ rows: [['code', 'viz'], ['vars']], minimized: [] }}
-      />
-      <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={CLIMBINGSTAIRS_PATTERNS} />
-        )}
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-          autoScroll={autoScrollCode}
-          onAutoScrollChange={setAutoScrollCode}
-          showAutoScroll
-        />
-        {vizFeatures.length > 0 && (
-          <VisualizationControls features={vizFeatures} onToggle={toggleVizFeature} />
-        )}
-      </FloatingPanel>
+    <div className="cs-dp-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.viz && createPortal(visualizationPanel, panelDivs.viz)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.vars && createPortal(variablesPanel, panelDivs.vars)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

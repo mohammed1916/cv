@@ -1,4 +1,5 @@
 ﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from 'react-dom'
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -9,6 +10,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./SetMatrixZeroesVisualizer.css";
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
 const SOLUTION_CODE = [
     { line: 1, text: "def setZeroes(matrix):" },
@@ -86,8 +88,9 @@ export default function SetMatrixZeroesVisualizer() {
     const rows = step?.rows ?? new Set();
     const markedCols = step?.cols ?? new Set();
 
-    return (
-        <div className="smz-shell">
+    // Step 3: Extract panels into consts
+    const primaryPanel = (
+        <div className="smz-panel">
             <div className="smz-controls-row">
                 <div className="smz-examples">
                     {EXAMPLES.map((ex, i) => (
@@ -108,7 +111,7 @@ export default function SetMatrixZeroesVisualizer() {
                 </div>
             </div>
 
-            <div className="smz-panel">
+            <div className="smz-matrix-container">
                 <div className="smz-panel-label">Matrix</div>
                 <div className="smz-grid" style={{ gridTemplateColumns: `repeat(${cols}, 52px)` }}>
                     {matrix.map((row, i) =>
@@ -130,24 +133,40 @@ export default function SetMatrixZeroesVisualizer() {
                     )}
                 </div>
             </div>
+        </div>
+    );
 
-            <div style={{ position: 'relative' }}>
-                <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-                {showPatternOverlay && (
-                    <CodePatternAnnotations
-                        linePatterns={LINE_PATTERN_MAP}
-                        currentPhase={step?.phase}
-                        activeLineDom={activeLineDom}
-                        activeLine={step?.activeLine}
-                    />
-                )}
-            </div>
-            <div className="smz-status">{step?.message ?? "Press Play to begin."}</div>
-            <FloatingPanel title="Playback Controls">
-              {showPatternOverlay && (
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                disableResizer
+            />
+            {showPatternOverlay && (
+                <CodePatternAnnotations
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
+                />
+            )}
+        </div>
+    );
+
+    const statusPanel = (
+        <div className="smz-status">
+            {step?.message ?? "Press Play to begin."}
+        </div>
+    );
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-              )}
-              <PlaybackControls
+            )}
+            <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
                 prevDisabled={stepIndex <= 0} nextDisabled={isDone} resetDisabled={stepIndex <= 0}
@@ -156,8 +175,37 @@ export default function SetMatrixZeroesVisualizer() {
                 onShowPatternOverlayChange={setShowPatternOverlay}
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
-              />
-            </FloatingPanel>
+            />
+        </>
+    );
+
+    // Step 4: Add state + config
+    const [panelDivs, setPanelDivs] = useState(null);
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Matrix Visualization', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    );
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
+
+    // Step 5: Replace return block
+    return (
+        <div className="smz-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     );
 }
