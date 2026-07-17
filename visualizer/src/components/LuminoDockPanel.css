@@ -61,21 +61,29 @@
 }
 
 /* ── Tab bars ──────────────────────────────────────── */
+/* The structural Lumino CSS gives tabs NO height (that normally comes from the
+   default-theme package, which isn't installed). Without an explicit height,
+   DockLayout allocates 0px for the tab bar and the tabs are invisible. So we
+   set concrete heights here — this is what makes the draggable tabs appear. */
 .lm-DockPanel-tabBar {
   background: var(--surface2, #17172e);
+  min-height: 36px;
 }
 
 .lm-TabBar {
   background: var(--surface2, #17172e);
   border-bottom: 1px solid var(--lm-panel-border);
+  min-height: 36px;
 }
 
 .lm-TabBar-content {
-  min-height: 34px;
+  min-height: 36px;
 }
 
 .lm-TabBar-tab {
-  padding: 7px 16px;
+  height: 36px;
+  padding: 0 16px;
+  align-items: center;
   color: var(--text-muted, #94a3b8);
   background: var(--surface2, #17172e);
   border-right: 1px solid var(--lm-panel-border);
@@ -100,6 +108,7 @@
 .lm-TabBar-tabLabel {
   font-size: 13px;
   font-weight: 600;
+  line-height: 36px;
 }
 
 .lm-TabBar-tabCloseIcon {
