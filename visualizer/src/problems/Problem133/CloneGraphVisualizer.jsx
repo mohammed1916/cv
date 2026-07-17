@@ -1,9 +1,10 @@
 ﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
@@ -163,35 +164,73 @@ export default function CloneGraphVisualizer() {
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'code',
-            title: 'Code Trace',
-            subtitle: step ? `Active line ${step.activeLine}` : 'Line-by-line solution view.',
-            defaultZone: 'left',
-            content: (
-                <CodeTracePanel
-                    step={step}
-                    codeLines={SOLUTION_CODE}
-                    onActiveLineDomChange={setActiveLineDom}
-                    autoScroll={autoScrollCode}
-                />
-            ),
-        },
-        {
-            id: 'viz',
-            title: 'Graph Visualization',
-            subtitle: step ? `Step ${stepIndex + 1} of ${steps.length}` : 'Original and clone graphs.',
-            defaultZone: 'right',
-            content: (
-                <VisualizationPanel
-                    adj={ex.adj}
-                    positions={ex.positions}
-                    step={step}
-                />
-            ),
-        },
-    ], [step, stepIndex, steps.length, setActiveLineDom, autoScrollCode, ex]);
+    // ─── Extract panels into constants ───────────────────────────────────────
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                autoScroll={autoScrollCode}
+                disableResizer
+            />
+            {showPatternOverlay && <CodePatternAnnotations step={step} activeLineDom={activeLineDom} />}
+        </div>
+    );
+
+    const vizPanel = (
+        <div className="cg-panel">
+            <VisualizationPanel
+                adj={ex.adj}
+                positions={ex.positions}
+                step={step}
+            />
+        </div>
+    );
+
+    const statusPanel = (
+        <div className="cg-status">{step?.message ?? "Press Play to begin."}</div>
+    );
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && <PatternLegend />}
+            <PlaybackControls
+                onReset={handleReset}
+                onPrev={stepBack}
+                onPlayToggle={togglePlay}
+                onNext={stepForward}
+                resetDisabled={steps.length === 0}
+                prevDisabled={stepIndex < 0}
+                nextDisabled={isDone}
+                isPlaying={isPlaying}
+                isDone={isDone}
+                speed={speed}
+                onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+                speedIndicator={`${speed}ms`}
+                autoScroll={autoScrollCode}
+                onAutoScrollChange={setAutoScrollCode}
+                autoScrollLabel="Auto-scroll code"
+                showAutoScroll
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                patternOverlayLabel="Show pattern overlay"
+                showPatternOverlayToggle
+            />
+        </>
+    );
+
+    // ─── Lumino panel configuration ───────────────────────────────────────────
+    const [panelDivs, setPanelDivs] = useState(null);
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
+            { id: 'viz', title: 'Graph Visualization', dockMode: 'split-right' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    );
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
 
     return (
         <div className="cg-shell">
@@ -218,39 +257,20 @@ export default function CloneGraphVisualizer() {
                 </div>
             </section>
 
-            <DockableWorkspace
-                title="Clone Graph Workspace"
-                panels={dockPanels}
-                initialLayout={{
-                    rows: [['code', 'viz']],
-                    minimized: [],
-                }}
-            />
-
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls
-                    onReset={handleReset}
-                    onPrev={stepBack}
-                    onPlayToggle={togglePlay}
-                    onNext={stepForward}
-                    resetDisabled={steps.length === 0}
-                    prevDisabled={stepIndex < 0}
-                    nextDisabled={isDone}
-                    isPlaying={isPlaying}
-                    isDone={isDone}
-                    speed={speed}
-                    onSpeedChange={(event) => setSpeed(Number(event.target.value))}
-                    speedIndicator={`${speed}ms`}
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    autoScrollLabel="Auto-scroll code"
-                    showAutoScroll
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
-                />
-            </FloatingPanel>
+            <div className="cg-dock-shell">
+                <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+                {panelDivs && (
+                    <>
+                        {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                        {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+                        {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                    </>
+                )}
+                {createPortal(
+                    <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                    document.body
+                )}
+            </div>
 
             {showPatternOverlay && step && (
                 <PatternOverlay step={step} activeLineDom={activeLineDom} />
