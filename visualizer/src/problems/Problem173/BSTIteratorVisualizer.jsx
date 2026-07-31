@@ -1,6 +1,7 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -124,108 +125,137 @@ export default function BSTIteratorVisualizer() {
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
-  const dockPanels = useMemo(() => [
-    {
-      id: 'code',
-      title: 'Code',
-      content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-        />
-      ),
-    },
-    {
-      id: 'viz',
-      title: '🌳 Stack State',
-      content: (
-        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
-          {step && (
-            <>
-              <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
-                <div style={{ fontWeight: 600, marginBottom: 8 }}>{step.message}</div>
-              </div>
+  // Panel definitions for Lumino
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+      {showPatternOverlay && <CodePatternAnnotations step={step} patterns={PATTERNS} activeLineDom={activeLineDom} />}
+    </div>
+  )
 
-              <div style={{ padding: 8, backgroundColor: '#dbeafe', borderRadius: 6 }}>
-                <div style={{ fontSize: 10, fontWeight: 600, marginBottom: 6, color: '#1e40af' }}>Stack:</div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                  {step.stack.length === 0 ? (
-                    <span style={{ fontSize: 11, color: '#64748b' }}>empty</span>
-                  ) : (
-                    step.stack.map((val, i) => (
-                      <motion.div
-                        key={i}
-                        animate={{ x: i === step.stack.length - 1 ? 4 : 0 }}
-                        style={{
-                          padding: '4px 8px',
-                          backgroundColor: i === step.stack.length - 1 ? '#0ea5e9' : '#f0f9ff',
-                          border: '1px solid #0ea5e9',
-                          borderRadius: 3,
-                          fontSize: 11,
-                          fontWeight: 'bold',
-                          color: i === step.stack.length - 1 ? '#fff' : '#1e293b',
-                        }}
-                      >
-                        {val}
-                      </motion.div>
-                    ))
-                  )}
-                </div>
-              </div>
+  const primaryPanel = (
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+      {step && (
+        <>
+          <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
+            <div style={{ fontWeight: 600, marginBottom: 8 }}>{step.message}</div>
+          </div>
 
-              <div style={{ padding: 8, backgroundColor: '#dcfce7', borderRadius: 6 }}>
-                <div style={{ fontSize: 10, fontWeight: 600, marginBottom: 6, color: '#15803d' }}>In-order Sequence:</div>
-                <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-                  {(step.visited || []).map((val, i) => (
-                    <span
-                      key={i}
-                      style={{
-                        padding: '4px 8px',
-                        backgroundColor: '#dcfce7',
-                        border: '1px solid #86efac',
-                        borderRadius: 3,
-                        fontSize: 11,
-                        fontWeight: 'bold',
-                        color: '#15803d',
-                      }}
-                    >
-                      {val}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </>
-          )}
-        </div>
-      ),
-    },
-  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom])
+          <div style={{ padding: 8, backgroundColor: '#dbeafe', borderRadius: 6 }}>
+            <div style={{ fontSize: 10, fontWeight: 600, marginBottom: 6, color: '#1e40af' }}>Stack:</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              {step.stack.length === 0 ? (
+                <span style={{ fontSize: 11, color: '#64748b' }}>empty</span>
+              ) : (
+                step.stack.map((val, i) => (
+                  <motion.div
+                    key={i}
+                    animate={{ x: i === step.stack.length - 1 ? 4 : 0 }}
+                    style={{
+                      padding: '4px 8px',
+                      backgroundColor: i === step.stack.length - 1 ? '#0ea5e9' : '#f0f9ff',
+                      border: '1px solid #0ea5e9',
+                      borderRadius: 3,
+                      fontSize: 11,
+                      fontWeight: 'bold',
+                      color: i === step.stack.length - 1 ? '#fff' : '#1e293b',
+                    }}
+                  >
+                    {val}
+                  </motion.div>
+                ))
+              )}
+            </div>
+          </div>
+
+          <div style={{ padding: 8, backgroundColor: '#dcfce7', borderRadius: 6 }}>
+            <div style={{ fontSize: 10, fontWeight: 600, marginBottom: 6, color: '#15803d' }}>In-order Sequence:</div>
+            <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+              {(step.visited || []).map((val, i) => (
+                <span
+                  key={i}
+                  style={{
+                    padding: '4px 8px',
+                    backgroundColor: '#dcfce7',
+                    border: '1px solid #86efac',
+                    borderRadius: 3,
+                    fontSize: 11,
+                    fontWeight: 'bold',
+                    color: '#15803d',
+                  }}
+                >
+                  {val}
+                </span>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  )
+
+  const statusPanel = (
+    <div style={{ padding: 8, fontSize: 11, color: '#64748b' }}>
+      {step ? `Step ${stepIndex + 1} of ${steps.length}` : 'No step'}
+    </div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex <= 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
+
+  // Lumino panel configuration
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: '🌳 Stack State', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
-    <div className="problem-shell">
-      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex <= 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
+    <div className="bsti-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )

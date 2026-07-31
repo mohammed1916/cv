@@ -1,4 +1,5 @@
 ﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from 'react-dom';
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -10,6 +11,7 @@ import "./IntersectionTwoLinkedListsVisualizer.css";
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -156,33 +158,48 @@ export default function IntersectionTwoLinkedListsVisualizer() {
   const { A, B, intersectIdxA, intersectIdxB } = buildNodeSequences(ex);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
-  return (
-    <div className="itll-shell">
+  // Extract panels
+  const primaryPanel = (
+    <div className="itll-panel">
       <div className="itll-examples">
         {EXAMPLES.map(e => (
           <button key={e.label} className={`itll-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>{e.label}</button>
         ))}
       </div>
-
-      <div className="itll-panel">
-        <div className="itll-panel-label">Linked Lists</div>
-        {renderList(A, "List A", step?.pA?.list === "A" ? step.pA.idx : -1, step?.pA?.list, intersectIdxA, "#89b4fa")}
-        {renderList(B, "List B", step?.pB?.list === "B" ? step.pB.idx : -1, step?.pB?.list, intersectIdxB, "#fab387")}
-        {ex.shared.length > 0 && (
-          <div className="itll-shared-note">Shared (intersection): [{ex.shared.join(" → ")}] starting at {ex.intersectVal}</div>
-        )}
-      </div>
-
+      <div className="itll-panel-label">Linked Lists</div>
+      {renderList(A, "List A", step?.pA?.list === "A" ? step.pA.idx : -1, step?.pA?.list, intersectIdxA, "#89b4fa")}
+      {renderList(B, "List B", step?.pB?.list === "B" ? step.pB.idx : -1, step?.pB?.list, intersectIdxB, "#fab387")}
+      {ex.shared.length > 0 && (
+        <div className="itll-shared-note">Shared (intersection): [{ex.shared.join(" → ")}] starting at {ex.intersectVal}</div>
+      )}
       {step?.found && (
         <div className={`itll-result ${ex.shared.length > 0 ? "ok" : "none"}`}>
           {ex.shared.length > 0 ? `✓ Intersection at node with value ${ex.intersectVal}` : "✗ No intersection (return null)"}
         </div>
       )}
+    </div>
+  )
 
-      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-      <div className="itll-status">{step?.message ?? "Press Play to begin."}</div>
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+      {showPatternOverlay && <CodePatternAnnotations step={step} linePatternMap={LINE_PATTERN_MAP} activeLineDom={activeLineDom} />}
+    </div>
+  )
+
+  const statusPanel = (
+    <div className="itll-status">{step?.message ?? "Press Play to begin."}</div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
+      <PlaybackControls
         isPlaying={isPlaying} isDone={isDone} speed={speed}
         onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
         prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
@@ -192,8 +209,35 @@ export default function IntersectionTwoLinkedListsVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
-      </FloatingPanel>
+    </>
+  )
 
+  // Lumino state
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Linked Lists', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  return (
+    <div className="itll-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   );

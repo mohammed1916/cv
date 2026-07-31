@@ -1,8 +1,27 @@
-.itll-shell { display: flex; flex-direction: column; gap: 12px; padding: 16px; font-family: inherit; }
+.itll-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+  font-family: inherit;
+}
 .itll-examples { display: flex; gap: 8px; flex-wrap: wrap; }
 .itll-chip { background: #313244; color: #cdd6f4; border: 2px solid #45475a; border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer; }
 .itll-chip.active, .itll-chip:hover { border-color: #89b4fa; color: #89b4fa; }
-.itll-panel { background: #1e1e2e; border: 1px solid #313244; border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 14px; }
+.itll-panel {
+  background: #1e1e2e;
+  border: 1px solid #313244;
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  height: 100%;
+  overflow-y: auto;
+}
 .itll-panel-label { font-size: 11px; font-weight: 700; color: #6c7086; text-transform: uppercase; letter-spacing: 0.08em; }
 .itll-list-block { display: flex; flex-direction: column; gap: 4px; }
 .itll-list-label { font-size: 12px; font-weight: 700; }
@@ -18,4 +37,15 @@
 .itll-result { padding: 10px 14px; border-radius: 8px; font-size: 15px; font-weight: 700; }
 .itll-result.ok { background: #001a08; border: 2px solid #a6e3a1; color: #a6e3a1; }
 .itll-result.none { background: #1a0808; border: 2px solid #f38ba8; color: #f38ba8; }
-.itll-status { padding: 8px 12px; background: #1e1e2e; border: 1px solid #313244; border-radius: 8px; font-size: 13px; color: #a6adc8; min-height: 36px; }
+.itll-status {
+  padding: 8px 12px;
+  background: #1e1e2e;
+  border: none;
+  border-radius: 0;
+  font-size: 13px;
+  color: #a6adc8;
+  min-height: 36px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+}

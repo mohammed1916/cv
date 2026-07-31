@@ -31,6 +31,17 @@
   --accent-bright: #89dceb;
 }
 
+/* Lumino Shell */
+.bsti-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+}
+
 /* BST Iterator Styles */
 .bsti-container {
   background: linear-gradient(135deg, var(--ctp-base) 0%, var(--ctp-mantle) 100%);
