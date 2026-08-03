@@ -31,8 +31,16 @@ export function ZoomProvider({ children }) {
   useEffect(() => {
     const contentWrapper = document.getElementById('zoom-content-wrapper')
     if (contentWrapper) {
-      contentWrapper.style.transform = `scale(${zoom / 100})`
+      const scale = zoom / 100
+
+      // CSS transforms only change painting, not layout. Without compensating
+      // for that, zooming out leaves the right and bottom of the viewport
+      // unused because the wrapper still lays out at its unscaled size.
+      contentWrapper.style.transform = `scale(${scale})`
       contentWrapper.style.transformOrigin = 'top left'
+      contentWrapper.style.width = `${100 / scale}%`
+      contentWrapper.style.minHeight = `${100 / scale}vh`
+      contentWrapper.style.marginTop = `${60 / scale}px`
     }
   }, [zoom])
 
