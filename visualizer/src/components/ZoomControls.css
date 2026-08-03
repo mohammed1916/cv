@@ -1,0 +1,67 @@
+.zoom-controls-panel {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1900;
+  pointer-events: auto;
+}
+
+.zoom-controls-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 12px;
+  background: rgba(2, 6, 23, 0.94);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(2, 6, 23, 0.5);
+}
+
+.zoom-btn {
+  appearance: none;
+  border: 1px solid #334155;
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 8px;
+  padding: 6px 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  min-width: 28px;
+  text-align: center;
+}
+
+.zoom-btn:hover:not(:disabled) {
+  background: #1e293b;
+  border-color: #475569;
+}
+
+.zoom-btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.zoom-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.zoom-btn-in,
+.zoom-btn-out {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.zoom-btn-reset {
+  font-size: 12px;
+}
+
+.zoom-value {
+  color: #cbd5e1;
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 38px;
+  text-align: center;
+}

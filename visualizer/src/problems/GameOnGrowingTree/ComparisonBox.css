@@ -1,0 +1,170 @@
+.comparison-container {
+  padding: 12px;
+  background: linear-gradient(135deg, #faf9f7 0%, #f5f3f0 100%);
+  border-radius: 8px;
+  border: 1px solid #e8e3de;
+  max-width: 600px;
+}
+
+.comparison-header {
+  margin-bottom: 16px;
+}
+
+.comparison-header h3 {
+  margin: 0 0 4px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.comparison-subtitle {
+  margin: 0;
+  font-size: 12px;
+  color: #666;
+}
+
+.comparison-empty {
+  padding: 20px;
+  text-align: center;
+  color: #999;
+  font-size: 13px;
+}
+
+.comparison-box {
+  background: white;
+  border: 1px solid #e0e3e8;
+  border-radius: 6px;
+  padding: 16px;
+}
+
+.comparison-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.comparison-inputs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.comparison-input {
+  flex: 1;
+  min-width: 100px;
+  padding: 10px;
+  border: 2px solid #d0d5dd;
+  border-radius: 6px;
+  background: #f9f9f9;
+  text-align: center;
+}
+
+.comparison-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.comparison-value {
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ff6b35;
+}
+
+.comparison-operator {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff6b35;
+  flex: 0 0 auto;
+  text-align: center;
+  width: 40px;
+}
+
+.comparison-result {
+  background: linear-gradient(135deg, #fef5f0 0%, #fff9f6 100%);
+  border: 2px solid #ffe0cc;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.result-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 4px;
+  text-align: center;
+  min-width: 60px;
+}
+
+.result-badge.true-branch {
+  background: #d4f4d4;
+  color: #2d7a2d;
+  border: 1px solid #a8e6a8;
+}
+
+.result-badge.false-branch {
+  background: #ffd9d9;
+  color: #8b3a3a;
+  border: 1px solid #ffb0b0;
+}
+
+.result-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.result-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.result-formula {
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.result-equals {
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ff6b35;
+}
+
+.comparison-explanation {
+  padding: 12px;
+  background: #f9f7f5;
+  border-left: 4px solid #ff6b35;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.comparison-explanation p {
+  margin: 0;
+}
+
+.comparison-explanation strong {
+  color: #ff6b35;
+  font-weight: 600;
+}

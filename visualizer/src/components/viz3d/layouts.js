@@ -130,6 +130,7 @@ export function springLayout(
   const attraction = 0.01;
   const repulsion = 10000;
   const damping = 0.85;
+  const nodeArray = Array.from(nodes.values());
 
   // Simulation
   for (let iter = 0; iter < iterations; iter++) {
@@ -142,7 +143,6 @@ export function springLayout(
     });
 
     // Repulsive forces (all pairs)
-    const nodeArray = Array.from(nodes.values());
     for (let i = 0; i < nodeArray.length; i++) {
       for (let j = i + 1; j < nodeArray.length; j++) {
         const a = nodeArray[i];

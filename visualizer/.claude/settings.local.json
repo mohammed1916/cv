@@ -3,7 +3,43 @@
     "allow": [
       "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\BBBS-AI-01\\\\d\\\\competitive_programming_visualisations\\\\visualizer\" -Recurse -Directory)",
       "Bash(Select-Object -ExpandProperty FullName)",
-      "Bash(Sort-Object)"
+      "Bash(Sort-Object)",
+      "Bash(node -c src/problems/CloneGraph/CloneGraphVisualizer.jsx)",
+      "Bash(git reset *)",
+      "Bash(node -e ' *)",
+      "Bash(node -c src/problems/LCABinaryTree/LCABinaryTreeVisualizer.jsx)",
+      "Bash(git -C \"C:\\\\Users\\\\BBBS-AI-01\\\\d\\\\cv\\\\visualizer\" diff \"src/problems/LongestIncreasingSubsequence/\")",
+      "Bash(npm exec *)",
+      "Bash(node -c src/problems/LongestRepeatingCharReplace/LongestRepeatingVisualizer.jsx)",
+      "Bash(node -c CloneGraphVisualizer.jsx)",
+      "Bash(git commit -m ' *)",
+      "Bash(npx vite *)",
+      "Bash(node -e \"const fs = require\\('fs'\\); const code = fs.readFileSync\\('src/problems/InsertInterval/InsertIntervalVisualizer.jsx', 'utf8'\\); console.log\\('File size:', code.length, 'bytes'\\); console.log\\('Contains DockableWorkspace:', code.includes\\('DockableWorkspace'\\)\\); console.log\\('Contains FloatingPanel:', code.includes\\('FloatingPanel'\\)\\); console.log\\('Contains useAutoScroll:', code.includes\\('useAutoScroll'\\)\\); console.log\\('Contains IntervalVisualization:', code.includes\\('IntervalVisualization'\\)\\);\")",
+      "PowerShell(npx vite build --logLevel error; $exitCode = $LASTEXITCODE; Write-Host \"Exit code: $exitCode\"; if \\($exitCode -eq 0\\) { Write-Host \"Build successful\" } else { Write-Host \"Build failed\" })",
+      "Bash(grep -E \"\\\\.\\(js|jsx\\)$\")",
+      "Bash(xargs grep -l \"LC#117\")",
+      "Bash(python \"C:\\\\Users\\\\BBBS-AI-01\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-BBBS-AI-01-d-cv-visualizer\\\\cf3e37fe-6ed2-4751-82b8-8b3e8a9d9165\\\\scratchpad\\\\generate_problems_201_250.py\")",
+      "Bash(grep -n \"LCP_PATTERNS\\\\|LINE_PATTERN_MAP\" /c/Users/BBBS-AI-01/d/cv/visualizer/src/problems/Problem14/LongestCommonPrefixVisualizer.jsx)",
+      "Read(//c/Users/BBBS-AI-01/d/cv/visualizer/src/problems/Problem14/**)",
+      "Bash(awk '$1 >= 301 && $1 <= 556 {print}')",
+      "Bash(grep -l \"CodePatternAnnotations\" /c/Users/BBBS-AI-01/d/cv/visualizer/src/problems/Problem*/Problem*Visualizer.jsx | head -1)",
+      "Read(//c/c/Users/BBBS-AI-01/d/cv/visualizer/src/problems/**)",
+      "Bash(grep \"phase:\" /c/Users/BBBS-AI-01/d/cv/visualizer/src/problems/Problem19/RemoveNthNodeVisualizer.jsx | sed \"s/.*phase: ['\\\\\"]\\\\\\\\\\([^'\\\\\"]*\\\\\\\\\\)['\\\\\"].*/\\\\\\\\1/\" | sort -u)",
+      "Read(//c/Users/BBBS-AI-01/d/cv/visualizer/src/problems/Problem19/**)",
+      "Bash(find /c/Users/BBBS-AI-01/d/cv/visualizer -maxdepth 2 -type d -name \"Problem*\" | grep -E \"Problem\\(34[6-9]|35[0-9]|360\\)\" | sort)",
+      "Read(//c/c/Users/BBBS-AI-01/d/cv/visualizer/**)",
+      "Bash(git -C /c/Users/BBBS-AI-01/d/cv/visualizer status --short)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\BBBS-AI-01\\\\d\\\\cv\\\\visualizer\\\\src\\\\problems\" -Directory | Where-Object {$_.Name -match 'Problem\\\\d+'} | ForEach-Object {[int]\\($_.Name -replace 'Problem', ''\\)} | Where-Object {$_ -ge 376 -and $_ -le 410} | Sort-Object | ForEach-Object {\"Problem$_\"})",
+      "Bash(find /c/Users/BBBS-AI-01/d/cv/.claude/worktrees/agent-ae54c8cb84455d2cf/visualizer -type d -name \"Problem3[0-2][0-9]\" | sort)",
+      "Read(//c/Users/BBBS-AI-01/d/cv/.claude/worktrees/agent-ae54c8cb84455d2cf/visualizer/**)",
+      "Bash(cd /c && find \"Users/BBBS-AI-01/d/cv/visualizer/src/problems\" -maxdepth 2 -name \"*Visualizer.jsx\" | grep \"Problem31[3-9]\")",
+      "Read(//c/c/**)",
+      "Read(//c/Users/BBBS-AI-01/AppData/Local/Temp/claude/c--Users-BBBS-AI-01-d-cv-visualizer/945063e6-c826-410f-bc7e-c80b66403369/scratchpad/**)",
+      "Bash(python transform_visualizers.py)",
+      "Bash(node batch-update-visualizers.js 331 360)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\BBBS-AI-01\\AppData\\Local\\Temp\\claude\\c--Users-BBBS-AI-01-d-cv-visualizer\\cf3e37fe-6ed2-4751-82b8-8b3e8a9d9165\\scratchpad"
     ]
   }
 }

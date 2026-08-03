@@ -1,0 +1,381 @@
+{
+  "non-overlapping-intervals": [
+    {
+      "label": "LeetCode",
+      "val": "[[1,2],[2,3],[3,4],[1,3]]"
+    },
+    {
+      "label": "Example 2",
+      "val": "[[1,2],[1,2],[1,2]]"
+    },
+    {
+      "label": "Example 3",
+      "val": "[[1,2],[2,3]]"
+    },
+    {
+      "label": "Complex",
+      "val": "[[1,100],[11,22],[1,11],[2,12]]"
+    }
+  ],
+  "nqueens": [
+    {
+      "label": "n=4",
+      "n": 4
+    },
+    {
+      "label": "n=5",
+      "n": 5
+    },
+    {
+      "label": "n=6",
+      "n": 6
+    }
+  ],
+  "number-of-islands": [
+    {
+      "label": "Standard",
+      "gridStr": "[\n  [\"1\",\"1\",\"1\",\"1\",\"0\"],\n  [\"1\",\"1\",\"0\",\"1\",\"0\"],\n  [\"1\",\"1\",\"0\",\"0\",\"0\"],\n  [\"0\",\"0\",\"0\",\"0\",\"0\"]\n]"
+    },
+    {
+      "label": "Multiple",
+      "gridStr": "[\n  [\"1\",\"1\",\"0\",\"0\",\"0\"],\n  [\"1\",\"1\",\"0\",\"0\",\"0\"],\n  [\"0\",\"0\",\"1\",\"0\",\"0\"],\n  [\"0\",\"0\",\"0\",\"1\",\"1\"]\n]"
+    },
+    {
+      "label": "Checkerboard",
+      "gridStr": "[\n  [\"1\",\"0\",\"1\"],\n  [\"0\",\"1\",\"0\"],\n  [\"1\",\"0\",\"1\"]\n]"
+    }
+  ],
+  "number-of1-bits": [
+    {
+      "label": "Ex 1",
+      "n": 11,
+      "desc": "11 (0b1011)"
+    },
+    {
+      "label": "Ex 2",
+      "n": 128,
+      "desc": "128 (0b10000000)"
+    },
+    {
+      "label": "Ex 3",
+      "n": 4294967293,
+      "desc": "4294967293 (0b1111…1101)"
+    }
+  ],
+  "palindrome-number": [
+    {
+      "label": "121",
+      "value": "121"
+    },
+    {
+      "label": "-121",
+      "value": "-121"
+    },
+    {
+      "label": "10",
+      "value": "10"
+    },
+    {
+      "label": "0",
+      "value": "0"
+    },
+    {
+      "label": "1221",
+      "value": "1221"
+    },
+    {
+      "label": "12321",
+      "value": "12321"
+    },
+    {
+      "label": "1234321",
+      "value": "1234321"
+    }
+  ],
+  "palindrome-partitioning": [
+    {
+      "label": "\"aab\"",
+      "s": "aab"
+    },
+    {
+      "label": "\"a\"",
+      "s": "a"
+    },
+    {
+      "label": "\"racecar\"",
+      "s": "racecar"
+    },
+    {
+      "label": "\"aabb\"",
+      "s": "aabb"
+    }
+  ],
+  "plus-one": [
+    {
+      "label": "Ex 1",
+      "digits": [1, 2, 3],
+      "desc": "123"
+    },
+    {
+      "label": "Ex 2",
+      "digits": [4, 3, 2, 1],
+      "desc": "4321"
+    },
+    {
+      "label": "Ex 3",
+      "digits": [9],
+      "desc": "9"
+    },
+    {
+      "label": "Ex 4",
+      "digits": [9, 9, 9],
+      "desc": "999"
+    }
+  ],
+  "power-of-two": [
+    {
+      "label": "n=1",
+      "n": 1,
+      "desc": "2⁰ = 1"
+    },
+    {
+      "label": "n=16",
+      "n": 16,
+      "desc": "2⁴ = 16"
+    },
+    {
+      "label": "n=3",
+      "n": 3,
+      "desc": "Not power"
+    },
+    {
+      "label": "n=100",
+      "n": 100,
+      "desc": "Not power"
+    }
+  ],
+  "reverse-integer": [
+    {
+      "label": "Positive",
+      "x": 123
+    },
+    {
+      "label": "Negative",
+      "x": -123
+    },
+    {
+      "label": "Zero Ending",
+      "x": 120
+    },
+    {
+      "label": "Overflow",
+      "x": 1534236469
+    }
+  ],
+  "reverse-linked-list": [
+    {
+      "label": "1→2→3→4→5",
+      "values": [1, 2, 3, 4, 5]
+    },
+    {
+      "label": "1→2",
+      "values": [1, 2]
+    },
+    {
+      "label": "Single",
+      "values": [42]
+    },
+    {
+      "label": "Short",
+      "values": [3, 1, 4, 1, 5]
+    }
+  ],
+  "reverse-string": [
+    {
+      "label": "Ex 1",
+      "s": ["h", "e", "l", "l", "o"]
+    },
+    {
+      "label": "Ex 2",
+      "s": ["H", "a", "n", "n", "a", "h"]
+    },
+    {
+      "label": "Ex 3",
+      "s": ["a", "b", "c", "d", "e", "f"]
+    }
+  ],
+  "roman-to-integer": [
+    {
+      "label": "Standard",
+      "s": "III"
+    },
+    {
+      "label": "Subtractive IV",
+      "s": "IV"
+    },
+    {
+      "label": "Subtractive IX",
+      "s": "IX"
+    },
+    {
+      "label": "Complex",
+      "s": "MCMXCIV"
+    },
+    {
+      "label": "Large",
+      "s": "MMMCMXCIX"
+    }
+  ],
+  "search2-dmatrix": [
+    {
+      "label": "target=3",
+      "matrix": [[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]],
+      "target": 3
+    },
+    {
+      "label": "target=13",
+      "matrix": [[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]],
+      "target": 13
+    },
+    {
+      "label": "target=16",
+      "matrix": [[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]],
+      "target": 16
+    }
+  ],
+  "search-a-2d-matrix": [
+    {
+      "label": "target=3",
+      "matrix": [[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]],
+      "target": 3
+    },
+    {
+      "label": "target=13",
+      "matrix": [[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]],
+      "target": 13
+    },
+    {
+      "label": "target=16",
+      "matrix": [[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]],
+      "target": 16
+    }
+  ],
+  "single-element-in-sorted-array": [
+    {
+      "label": "Simple",
+      "nums": [1, 1, 2, 3, 3, 4, 4, 8, 8]
+    },
+    {
+      "label": "Larger",
+      "nums": [3, 3, 7, 7, 10, 11, 11]
+    }
+  ],
+  "subarray-sum-equals-k": [
+    {
+      "label": "[1,1,1] k=2",
+      "nums": [1, 1, 1],
+      "k": 2
+    },
+    {
+      "label": "[1,2,3] k=3",
+      "nums": [1, 2, 3],
+      "k": 3
+    },
+    {
+      "label": "[3,4,7,2,-3,1,4,2] k=7",
+      "nums": [3, 4, 7, 2, -3, 1, 4, 2],
+      "k": 7
+    }
+  ],
+  "subsets": [
+    {
+      "label": "[1,2,3]",
+      "nums": [1, 2, 3]
+    },
+    {
+      "label": "[0]",
+      "nums": [0]
+    },
+    {
+      "label": "[1,2]",
+      "nums": [1, 2]
+    },
+    {
+      "label": "[1,2,3,4]",
+      "nums": [1, 2, 3, 4]
+    }
+  ],
+  "swap-nodes-in-pairs": [
+    {
+      "label": "Basic",
+      "values": [1, 2, 3, 4]
+    },
+    {
+      "label": "Single",
+      "values": [1]
+    },
+    {
+      "label": "Pairs",
+      "values": [1, 2, 3, 4, 5, 6]
+    },
+    {
+      "label": "Odd Count",
+      "values": [1, 2, 3, 4, 5]
+    }
+  ],
+  "symmetric-tree": [
+    {
+      "label": "Symmetric",
+      "tree": [1, 2, 2, 3, 4, 4, 3]
+    },
+    {
+      "label": "Symmetric null",
+      "tree": [1, 2, 2, null, 3, null, 3]
+    },
+    {
+      "label": "Not symmetric",
+      "tree": [1, 2, 2, null, 3, 3, null]
+    },
+    {
+      "label": "Single node",
+      "tree": [1]
+    }
+  ],
+  "string-to-integer-atoi": [
+    {
+      "label": "Simple",
+      "value": "42",
+      "note": "No whitespace, no sign, just digits."
+    },
+    {
+      "label": "Leading space",
+      "value": "   -042",
+      "note": "Skips spaces, reads sign, ignores leading zeros in the value."
+    },
+    {
+      "label": "Stops on letter",
+      "value": "1337c0d3",
+      "note": "Parsing stops at the first non-digit."
+    },
+    {
+      "label": "Stops on symbol",
+      "value": "0-1",
+      "note": "Reads 0, then stops at the dash."
+    },
+    {
+      "label": "Invalid start",
+      "value": "words and 987",
+      "note": "No digits can be read, so the result is 0."
+    },
+    {
+      "label": "Overflow",
+      "value": "91283472332",
+      "note": "Shows positive clamping to INT_MAX."
+    },
+    {
+      "label": "Negative clamp",
+      "value": "   -91283472332",
+      "note": "Shows negative clamping to INT_MIN."
+    }
+  ]
+}

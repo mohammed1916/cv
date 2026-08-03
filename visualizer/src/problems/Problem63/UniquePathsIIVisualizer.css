@@ -1,0 +1,305 @@
+.upii-shell {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 200px);
+    min-height: 480px;
+    gap: 0;
+    overflow: hidden;
+}
+
+.upii-panel {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex: 1;
+    min-height: 0;
+}
+
+.upii-head {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    background: var(--surface3);
+    flex-shrink: 0;
+}
+
+.upii-viz-section {
+    padding: 14px;
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.upii-body {
+    padding: 14px;
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.upii-top-row {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.upii-examples {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.upii-chip {
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    background: rgba(30, 41, 59, 0.8);
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+}
+
+.upii-chip:hover {
+    background: #334155;
+    color: var(--text);
+}
+
+.upii-inputs {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.upii-input-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.upii-input-num {
+    width: 60px;
+    padding: 6px 8px;
+    border-radius: 7px;
+    border: 1px solid #334155;
+    background: #0f172a;
+    color: var(--text);
+    font-size: 13px;
+    font-family: monospace;
+}
+
+.upii-input-num:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+/* ── Sections ── */
+.upii-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.upii-section-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ── Grids ── */
+.upii-grid-wrap {
+    overflow: auto;
+}
+
+.upii-input-grid,
+.upii-grid {
+    display: grid;
+    gap: 5px;
+    width: fit-content;
+}
+
+.upii-input-cell {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    font-size: 20px;
+    font-weight: 700;
+    border: 2px solid var(--border);
+    background: #1e293b;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.18s ease;
+    padding: 0;
+}
+
+.upii-input-cell:hover {
+    border-color: var(--primary);
+    background: rgba(139, 92, 246, 0.1);
+}
+
+.upii-input-cell.obstacle {
+    border-color: #ef4444;
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
+.upii-input-cell.empty {
+    border-color: #22c55e;
+    background: rgba(34, 197, 94, 0.1);
+    color: var(--text-muted);
+}
+
+.upii-cell {
+    width: 54px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: monospace;
+    background: #1e293b;
+    border: 2px solid #334155;
+    color: var(--text);
+    transition: background 0.2s, border-color 0.2s;
+    position: relative;
+}
+
+.upii-cell.obstacle-cell {
+    border-color: #ef4444;
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+    font-size: 18px;
+}
+
+.upii-cell.start {
+    border-color: var(--success);
+    background: rgba(34, 197, 94, 0.1);
+}
+
+.upii-cell.end-cell {
+    border-color: #a855f7;
+    background: rgba(168, 85, 247, 0.1);
+}
+
+.upii-cell.curr {
+    border-color: var(--warning);
+    background: rgba(251, 191, 36, 0.12);
+    color: var(--warning);
+}
+
+.upii-cell.above {
+    border-color: var(--info);
+    background: rgba(56, 189, 248, 0.1);
+    color: var(--info);
+}
+
+.upii-cell.left {
+    border-color: var(--info);
+    background: rgba(56, 189, 248, 0.1);
+    color: var(--info);
+}
+
+.upii-cell.result {
+    border-color: var(--success);
+    background: rgba(34, 197, 94, 0.18);
+    color: var(--success);
+    box-shadow: 0 0 14px var(--success-glow);
+}
+
+.upii-corner-label {
+    position: absolute;
+    top: 2px;
+    right: 4px;
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--text-dim);
+}
+
+/* ── Arrows ── */
+.upii-arrows {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 8px 14px;
+    background: var(--surface3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+.upii-arrow {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.above-arrow {
+    color: var(--info);
+}
+
+.left-arrow {
+    color: var(--info);
+}
+
+.curr-arrow {
+    color: var(--warning);
+}
+
+.upii-plus {
+    color: var(--text-dim);
+    font-size: 16px;
+}
+
+/* ── Result ── */
+.upii-result {
+    padding: 10px 14px;
+    background: rgba(34, 197, 94, 0.12);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    border-radius: 8px;
+    color: var(--success);
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.upii-result.blocked {
+    background: rgba(239, 68, 68, 0.12);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+}
+
+/* ── Status ── */
+.upii-status {
+    padding: 8px 14px;
+    background: var(--surface3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.upii-status.done {
+    color: var(--primary-l);
+    border-color: rgba(139, 92, 246, 0.3);
+}

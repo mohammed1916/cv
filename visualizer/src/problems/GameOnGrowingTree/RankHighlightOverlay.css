@@ -1,0 +1,115 @@
+.rank-overlay-container {
+  padding: 12px;
+  background: linear-gradient(135deg, #f9f8f6 0%, #f4f2f0 100%);
+  border-radius: 8px;
+  border: 1px solid #e5e0da;
+}
+
+.rank-overlay-header {
+  margin-bottom: 16px;
+}
+
+.rank-overlay-header h3 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.rank-legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.rank-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #666;
+}
+
+.rank-legend-badge {
+  font-size: 14px;
+}
+
+.rank-overlay-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+}
+
+.rank-cell-group {
+  background: white;
+  border: 1px solid #e0e3e8;
+  border-radius: 6px;
+  padding: 8px;
+}
+
+.rank-cell-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e0e3e8;
+}
+
+.rank-cells {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rank-cell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.rank-cell-label-small {
+  font-weight: 600;
+  color: inherit;
+}
+
+.rank-cell-value {
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.rank-cell.rank-1st {
+  background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%);
+  color: #654d0f;
+  box-shadow: 0 2px 4px rgba(255, 193, 7, 0.2);
+}
+
+.rank-cell.rank-2nd {
+  background: linear-gradient(135deg, #c0c0c0 0%, #b0b0b0 100%);
+  color: #4a4a4a;
+  box-shadow: 0 2px 4px rgba(192, 192, 192, 0.2);
+}
+
+.rank-cell.rank-3rd {
+  background: linear-gradient(135deg, #cd7f32 0%, #b8651b 100%);
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(205, 127, 50, 0.2);
+}
+
+.rank-cell.rank-zero {
+  background: #f5f5f5;
+  color: #999;
+  border: 1px dashed #ddd;
+}
+
+.rank-cell.rank-none {
+  background: #f9f9f9;
+  color: #666;
+  border: 1px solid #e0e3e8;
+}

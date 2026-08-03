@@ -1,0 +1,316 @@
+import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
+import { motion, AnimatePresence } from 'framer-motion'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodeTracePanel from '../../components/CodeTracePanel'
+import PlaybackControls from '../../components/PlaybackControls'
+import PatternOverlay from '../../components/PatternOverlay'
+import { usePlaybackState } from '../../hooks/usePlaybackState'
+import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { useAutoScroll } from '../../hooks/useAutoScroll'
+import { getExamples } from '../../config/examplesRegistry'
+import './WordBreakVisualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+
+
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
+const SOLUTION_CODE = [
+    { line: 1, text: 'class Solution:' },
+    { line: 2, text: '    def wordBreak(self, s: str, wordDict: List[str]) -> bool:' },
+    { line: 3, text: '        word_set = set(wordDict)' },
+    { line: 4, text: '        dp = [False] * (len(s) + 1)' },
+    { line: 5, text: '        dp[0] = True  # empty prefix' },
+    { line: 6, text: '' },
+    { line: 7, text: '        for i in range(1, len(s) + 1):' },
+    { line: 8, text: '            for j in range(i):' },
+    { line: 9, text: '                if dp[j] and s[j:i] in word_set:' },
+    { line: 10, text: '                    dp[i] = True' },
+    { line: 11, text: '                    break' },
+    { line: 12, text: '' },
+    { line: 13, text: '        return dp[len(s)]' },
+]
+
+function generateSteps(s, wordDict) {
+    const steps = []
+    const wordSet = new Set(wordDict)
+    const n = s.length
+    const dp = Array(n + 1).fill(false)
+    dp[0] = true
+
+    steps.push({
+        phase: 'init', activeLine: 5,
+        s, dp: [...dp], i: -1, j: -1, slice: null, result: null,
+        message: `dp[0] = True. Empty prefix can always be segmented.`,
+    })
+
+    for (let i = 1; i <= n; i++) {
+        steps.push({
+            phase: 'outer', activeLine: 7,
+            s, dp: [...dp], i, j: -1, slice: null, result: null,
+            message: `i=${i}: try to form s[0..${i - 1}]="${s.slice(0, i)}".`,
+        })
+
+        let found = false
+        for (let j = 0; j < i; j++) {
+            const slice = s.slice(j, i)
+            const dpJ = dp[j]
+            const inDict = wordSet.has(slice)
+
+            steps.push({
+                phase: dpJ && inDict ? 'match' : 'check', activeLine: 9,
+                s, dp: [...dp], i, j, slice, result: null,
+                message: dpJ && inDict
+                    ? `dp[${j}]=True and "${slice}" ∈ wordDict → dp[${i}] = True!`
+                    : `dp[${j}]=${dpJ}, "${slice}" ${inDict ? '∈' : '∉'} wordDict. ${!dpJ ? 'Prefix not reachable.' : 'Word not in dict.'}`,
+            })
+
+            if (dpJ && inDict) {
+                dp[i] = true
+                found = true
+                steps.push({
+                    phase: 'set_true', activeLine: 10,
+                    s, dp: [...dp], i, j, slice, result: null,
+                    message: `Set dp[${i}] = True. Break inner loop.`,
+                })
+                break
+            }
+        }
+
+        if (!found) {
+            steps.push({
+                phase: 'false', activeLine: 7,
+                s, dp: [...dp], i, j: -1, slice: null, result: null,
+                message: `No valid split found for s[0..${i - 1}]. dp[${i}] = False.`,
+            })
+        }
+    }
+
+    steps.push({
+        phase: 'done', activeLine: 13,
+        s, dp: [...dp], i: n, j: -1, slice: null, result: dp[n],
+        message: `dp[${n}] = ${dp[n]}. "${s}" ${dp[n] ? 'CAN' : 'CANNOT'} be segmented using the word dictionary.`,
+    })
+
+    return steps
+}
+
+const EXAMPLES = getExamples('word-break')
+
+export default function WordBreakVisualizer() {
+    const [sInput, setSInput] = useState('leetcode')
+    const [dictInput, setDictInput] = useState('leet,code')
+
+    const { s, wordDict, inputError } = useMemo(() => {
+        const sv = sInput.trim()
+        const dict = dictInput.split(',').map(w => w.trim()).filter(Boolean)
+        if (!sv) return { s: 'leetcode', wordDict: ['leet', 'code'], inputError: 'String required' }
+        if (sv.length > 16) return { s: sv.slice(0, 16), wordDict: dict, inputError: 'Max 16 chars for clarity' }
+        return { s: sv, wordDict: dict, inputError: '' }
+    }, [sInput, dictInput])
+
+    const steps = useMemo(() => generateSteps(s, wordDict), [s, wordDict])
+
+    const {
+        stepIndex, stepForward, stepBack, togglePlay,
+        handleReset, isPlaying, speed, setSpeed, isDone,
+    } = usePlaybackState(steps.length)
+
+    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+    const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
+
+    const step = stepIndex >= 0 ? steps[stepIndex] : null
+    const applyExample = useCallback((ex) => {
+        setSInput(ex.s); setDictInput(ex.dict.join(',')); handleReset()
+    }, [handleReset])
+
+    const dp = step?.dp ?? Array(s.length + 1).fill(false)
+    const currI = step?.i ?? -1
+    const currJ = step?.j ?? -1
+    const slice = step?.slice ?? null
+
+    const VisualizationContent = () => (
+        <div>
+            <div className="wb-examples">
+                {EXAMPLES.map((ex) => (
+                    <button key={ex.label} className="wb-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
+                ))}
+            </div>
+
+            <div className="wb-inputs">
+                <div className="wb-input-group">
+                    <label className="wb-label">s</label>
+                    <input className="wb-input" value={sInput}
+                        onChange={(e) => { setSInput(e.target.value); handleReset() }} placeholder="leetcode" />
+                </div>
+                <div className="wb-input-group">
+                    <label className="wb-label">wordDict (comma-separated)</label>
+                    <input className="wb-input wide" value={dictInput}
+                        onChange={(e) => { setDictInput(e.target.value); handleReset() }} placeholder="leet,code" />
+                </div>
+            </div>
+
+            {inputError && <span className="wb-error">{inputError}</span>}
+
+            {/* String with highlighted slice */}
+            <div className="wb-str-row">
+                {s.split('').map((ch, idx) => {
+                    const inSlice = slice && idx >= currJ && idx < currI
+                    const isMatch = inSlice && step?.phase === 'match'
+                    const isSet = inSlice && step?.phase === 'set_true'
+                    return (
+                        <div
+                            key={idx}
+                            className={`wb-char${inSlice ? ' in-slice' : ''}${isMatch || isSet ? ' match' : ''}${dp[idx + 1] === true && step?.phase !== 'init' ? ' reachable' : ''}`}
+                        >
+                            {ch}
+                            <span className="wb-char-idx">{idx}</span>
+                        </div>
+                    )
+                })}
+            </div>
+
+            {/* DP array */}
+            <div className="wb-dp-row">
+                {dp.map((val, idx) => {
+                    const isCurrI = idx === currI
+                    const isCurrJ = idx === currJ
+                    const isDone = step?.phase === 'done'
+                    const isResult = isDone && idx === s.length
+                    return (
+                        <div key={idx} className="wb-dp-col">
+                            <motion.div
+                                className={`wb-dp-cell${isCurrI ? ' curr-i' : ''}${isCurrJ ? ' curr-j' : ''}${val ? ' true' : ' false'}${isResult ? ' result' : ''}`}
+                                animate={{ y: isCurrI ? -6 : 0, scale: isCurrI || isResult ? 1.1 : 1 }}
+                                transition={{ type: 'spring', stiffness: 380, damping: 24 }}
+                            >
+                                {val ? 'T' : 'F'}
+                            </motion.div>
+                            <span className="wb-dp-idx">[{idx}]</span>
+                        </div>
+                    )
+                })}
+            </div>
+
+            {/* Slice check */}
+            {slice && (
+                <div className={`wb-slice-box${step?.phase === 'match' || step?.phase === 'set_true' ? ' match' : ''}`}>
+                    s[{currJ}:{currI}] = <strong>"{slice}"</strong>
+                    {step?.phase === 'match' || step?.phase === 'set_true'
+                        ? <span className="wb-in"> ∈ wordDict ✓</span>
+                        : <span className="wb-out"> ∉ wordDict</span>}
+                </div>
+            )}
+
+            <AnimatePresence>
+                {step?.phase === 'done' && (
+                    <motion.div
+                        className={`wb-result${step.result ? ' ok' : ' fail'}`}
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0 }}
+                    >
+                        {step.result ? `"${s}" can be segmented ✓` : `"${s}" cannot be segmented ✗`}
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Word dict panel */}
+            <div style={{ marginTop: '1rem' }}>
+                <h3 style={{ margin: '0.5rem 0' }}>wordDict</h3>
+                <div>
+                    {wordDict.map((w) => (
+                        <div
+                            key={w}
+                            className={`wb-word${slice === w ? ' active' : ''}`}
+                        >
+                            "{w}"
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    )
+
+    // Step 3: Extract panels into consts
+    const primaryPanel = (
+        <div className="wb-panel">
+            <div className="wb-head">Visualization</div>
+            <div className="wb-body" style={{ flex: 1, overflow: 'auto' }}>
+                <VisualizationContent />
+            </div>
+        </div>
+    )
+
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                autoScroll={autoScrollCode}
+                disableResizer
+            />
+            {showPatternOverlay && <CodePatternAnnotations step={step} activeLineDom={activeLineDom} highlightedLines={[]} />}
+        </div>
+    )
+
+    const statusPanel = (
+        <div className={`wb-status${step?.result === true ? ' ok' : step?.result === false ? ' fail' : ''}`}>
+            {step?.message ?? 'Press Play or Step to begin.'}
+        </div>
+    )
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && <PatternLegend />}
+            <PlaybackControls
+                isPlaying={isPlaying} isDone={isDone} speed={speed}
+                onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward}
+                onReset={handleReset} prevDisabled={stepIndex < 0}
+                nextDisabled={isDone} resetDisabled={stepIndex < 0}
+                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+                autoScroll={autoScrollCode}
+                onAutoScrollChange={setAutoScrollCode}
+                showAutoScroll
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                patternOverlayLabel="Show pattern overlay"
+                showPatternOverlayToggle
+            />
+        </>
+    )
+
+    // Step 4: Add panel configs and state
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+    // Step 5: Replace return with portals
+    return (
+        <div className="wb-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
+        </div>
+    )
+}

@@ -1,0 +1,130 @@
+.scramble-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+}
+
+.scramble-primary-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: auto;
+}
+
+.scramble-string-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+.scramble-examples {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.scramble-example-btn {
+  padding: 8px 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  background: #f1f5f9;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+
+.scramble-example-btn:hover {
+  background: #e2e8f0;
+  border-color: #94a3b8;
+}
+
+.scramble-example-btn.active {
+  background: #0284c7;
+  color: white;
+  border-color: #0284c7;
+}
+
+.scramble-strings {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.scramble-string-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.scramble-string-label {
+  font-size: 11px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.scramble-chars {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.scramble-char {
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 2px solid;
+  font-family: monospace;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.scramble-char.s1 {
+  background: #dbeafe;
+  border-color: #0284c7;
+  color: #0c4a6e;
+}
+
+.scramble-char.s2 {
+  background: #fee2e2;
+  border-color: #dc2626;
+  color: #991b1b;
+}
+
+.scramble-result {
+  padding: 16px;
+  border-radius: 6px;
+  border: 2px solid;
+  text-align: center;
+  font-family: monospace;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.scramble-result.true {
+  background: #ecfdf5;
+  border-color: #10b981;
+  color: #047857;
+}
+
+.scramble-result.false {
+  background: #fef2f2;
+  border-color: #ef4444;
+  color: #991b1b;
+}
+
+.scramble-status {
+  padding: 12px;
+  background: #f1f5f9;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #475569;
+  font-family: monospace;
+  min-height: 40px;
+  word-break: break-word;
+}

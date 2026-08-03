@@ -1,0 +1,318 @@
+import { useState, useMemo, useCallback } from 'react'
+import { motion } from 'framer-motion'
+import CodeTracePanel from '../../components/CodeTracePanel'
+import PlaybackControls from '../../components/PlaybackControls'
+import PatternOverlay from '../../components/PatternOverlay'
+import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import { usePlaybackState } from '../../hooks/usePlaybackState'
+import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { useAutoScroll } from '../../hooks/useAutoScroll'
+import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
+import { getExamples } from '../../config/examplesRegistry'
+import './LCABSTVisualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+
+
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
+const CANVAS_W = 520
+const CANVAS_H = 320
+const NODE_R = 22
+
+const SOLUTION_CODE = [
+    { line: 1, text: 'class Solution:' },
+    { line: 2, text: '    def lowestCommonAncestor(self, root, p, q):' },
+    { line: 3, text: '        node = root' },
+    { line: 4, text: '        while node:' },
+    { line: 5, text: '            if p.val < node.val and q.val < node.val:' },
+    { line: 6, text: '                node = node.left' },
+    { line: 7, text: '            elif p.val > node.val and q.val > node.val:' },
+    { line: 8, text: '                node = node.right' },
+    { line: 9, text: '            else:' },
+    { line: 10, text: '                return node' },
+]
+
+function findNode(root, val) {
+    if (!root) return null
+    if (root.val === val) return root
+    return findNode(root.left, val) || findNode(root.right, val)
+}
+
+function generateSteps(arr, pVal, qVal) {
+    const root = buildTree(arr)
+    const positions = computeLayout(root, CANVAS_W, 80)
+    const edges = buildEdges(root)
+    const allNodes = collectNodes(root)
+    const steps = []
+
+    if (!root) {
+        return [{ phase: 'done', activeLine: 4, activeId: -1, visitedIds: new Set(), lcaId: -1, positions, edges, allNodes, pVal, qVal, message: 'Empty tree.' }]
+    }
+
+    const pNode = findNode(root, pVal)
+    const qNode = findNode(root, qVal)
+    if (!pNode || !qNode) {
+        return [{ phase: 'done', activeLine: 4, activeId: -1, visitedIds: new Set(), lcaId: -1, positions, edges, allNodes, pVal, qVal, message: `Node ${!pNode ? pVal : qVal} not found in tree.` }]
+    }
+
+    const visitedIds = new Set()
+    let node = root
+    let lcaId = -1
+
+    steps.push({ phase: 'init', activeLine: 3, activeId: node.id, visitedIds: new Set(visitedIds), lcaId, positions, edges, allNodes, pVal, qVal, message: `Start at root (${root.val}). Looking for LCA of p=${pVal} and q=${qVal}.` })
+
+    while (node) {
+        visitedIds.add(node.id)
+
+        if (pVal < node.val && qVal < node.val) {
+            steps.push({
+                phase: 'go-left', activeLine: 6, activeId: node.id, visitedIds: new Set(visitedIds), lcaId, positions, edges, allNodes, pVal, qVal,
+                message: `Both ${pVal} and ${qVal} < ${node.val} → go left`,
+            })
+            node = node.left
+            if (node) steps.push({ phase: 'move', activeLine: 4, activeId: node.id, visitedIds: new Set(visitedIds), lcaId, positions, edges, allNodes, pVal, qVal, message: `Now at node ${node.val}` })
+        } else if (pVal > node.val && qVal > node.val) {
+            steps.push({
+                phase: 'go-right', activeLine: 8, activeId: node.id, visitedIds: new Set(visitedIds), lcaId, positions, edges, allNodes, pVal, qVal,
+                message: `Both ${pVal} and ${qVal} > ${node.val} → go right`,
+            })
+            node = node.right
+            if (node) steps.push({ phase: 'move', activeLine: 4, activeId: node.id, visitedIds: new Set(visitedIds), lcaId, positions, edges, allNodes, pVal, qVal, message: `Now at node ${node.val}` })
+        } else {
+            lcaId = node.id
+            steps.push({
+                phase: 'found', activeLine: 10, activeId: node.id, visitedIds: new Set(visitedIds), lcaId, positions, edges, allNodes, pVal, qVal,
+                message: `${pVal} and ${qVal} split here → LCA = ${node.val}`,
+            })
+            break
+        }
+    }
+
+    steps.push({ phase: 'done', activeLine: 10, activeId: lcaId, visitedIds: new Set(visitedIds), lcaId, positions, edges, allNodes, pVal, qVal, message: `LCA of ${pVal} and ${qVal} = ${allNodes.find((n) => n.id === lcaId)?.val ?? '?'}` })
+    return steps
+}
+
+function parseInputs(arrInput, pInput, qInput) {
+    const arr = parseTreeInput(arrInput)
+    const p = parseInt(pInput, 10)
+    const q = parseInt(qInput, 10)
+    if (Number.isNaN(p) || Number.isNaN(q)) throw new Error('p and q must be integers')
+    return { arr, p, q }
+}
+
+const EXAMPLES = getExamples('lcabst')
+
+function TreeVisualizationPanel({
+    positions,
+    edges,
+    allNodes,
+    step,
+    NODE_R,
+    p,
+    q,
+    applyExample,
+    EXAMPLES,
+    arrInput,
+    setArrInput,
+    pInput,
+    setPInput,
+    qInput,
+    setQInput,
+    inputError,
+    handleReset,
+}) {
+    return (
+        <div className="lca-viz-container">
+            <div className="lca-viz-main">
+                <div className="lca-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
+                    <svg style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }} width={CANVAS_W} height={CANVAS_H}>
+                        {edges.map(({ fromId, toId }) => {
+                            const from = positions.get(fromId)
+                            const to = positions.get(toId)
+                            if (!from || !to) return null
+                            return <line key={`${fromId}-${toId}`} x1={from.x} y1={from.y} x2={to.x} y2={to.y} stroke="#45475a" strokeWidth={1.5} />
+                        })}
+                    </svg>
+                    {allNodes.map((node) => {
+                        const pos = positions.get(node.id)
+                        if (!pos) return null
+                        const isActive = step?.activeId === node.id
+                        const isVisited = step?.visitedIds?.has(node.id)
+                        const isLCA = step?.lcaId === node.id && step?.lcaId !== -1
+                        const isP = node.val === step?.pVal
+                        const isQ = node.val === step?.qVal
+                        return (
+                            <motion.div
+                                key={node.id}
+                                className={`lca-node ${isActive ? 'active' : ''} ${isVisited && !isActive ? 'visited' : ''} ${isLCA ? 'lca' : ''} ${isP ? 'p-node' : ''} ${isQ ? 'q-node' : ''}`}
+                                style={{ left: pos.x - NODE_R, top: pos.y - NODE_R }}
+                                animate={isActive ? { scale: 1.2 } : { scale: 1 }}
+                                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                            >
+                                {node.val}
+                                {isP && <span className="lca-tag p-tag">p</span>}
+                                {isQ && <span className="lca-tag q-tag">q</span>}
+                                {isLCA && <span className="lca-tag lca-tag-badge">LCA</span>}
+                            </motion.div>
+                        )
+                    })}
+                </div>
+            </div>
+
+            <div className="lca-viz-side">
+                <div className="lca-targets">
+                    <div className="lca-target p">
+                        <span className="lca-label">p</span>
+                        <strong>{step?.pVal ?? p}</strong>
+                    </div>
+                    <div className="lca-target q">
+                        <span className="lca-label">q</span>
+                        <strong>{step?.qVal ?? q}</strong>
+                    </div>
+                </div>
+                <div className="lca-phase">
+                    {step?.phase === 'go-left' && <span className="lca-dir">← going left</span>}
+                    {step?.phase === 'go-right' && <span className="lca-dir">going right →</span>}
+                    {step?.phase === 'found' && <span className="lca-found">Split found!</span>}
+                </div>
+                <div className={`lca-result ${step?.phase === 'done' ? 'ok' : ''}`}>
+                    {step?.phase === 'done' && step?.lcaId !== -1
+                        ? `LCA = ${allNodes.find((n) => n.id === step.lcaId)?.val}`
+                        : 'Searching…'}
+                </div>
+                <div className={`lca-status ${step?.phase === 'done' ? 'ok' : ''}`}>{step?.message || 'Press Play to begin.'}</div>
+            </div>
+        </div>
+    );
+}
+
+export default function LCABSTVisualizer() {
+    const [arrInput, setArrInput] = useState('[6,2,8,0,4,7,9,null,null,3,5]')
+    const [pInput, setPInput] = useState('2')
+    const [qInput, setQInput] = useState('8')
+    const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
+    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+
+    const { arr, p, q, inputError } = useMemo(() => {
+        try {
+            const { arr, p, q } = parseInputs(arrInput, pInput, qInput)
+            return { arr, p, q, inputError: '' }
+        } catch (e) {
+            return { arr: [6, 2, 8, 0, 4, 7, 9, null, null, 3, 5], p: 2, q: 8, inputError: e.message || 'Invalid input' }
+        }
+    }, [arrInput, pInput, qInput])
+
+    const steps = useMemo(() => generateSteps(arr, p, q), [arr, p, q])
+    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
+    const step = stepIndex >= 0 ? steps[stepIndex] : null
+
+    const applyExample = useCallback((ex) => {
+        setArrInput(ex.arrInput)
+        setPInput(String(ex.p))
+        setQInput(String(ex.q))
+        handleReset()
+    }, [handleReset])
+
+    const positions = step?.positions ?? new Map()
+    const edges = step?.edges ?? []
+    const allNodes = step?.allNodes ?? []
+
+    const dockPanels = useMemo(() => [
+        {
+            id: 'input',
+            title: 'Input Setup',
+            content: (
+                <div className="lca-input-panel">
+                    <div className="lca-examples">
+                        {EXAMPLES.map((ex) => (
+                            <button key={ex.label} className="lca-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
+                        ))}
+                    </div>
+                    <div className="lca-inputs">
+                        <input className="lca-input wide" value={arrInput} onChange={(e) => { setArrInput(e.target.value); handleReset() }} placeholder="tree array" />
+                        <div className="lca-pq">
+                            <label>p=<input className="lca-input small" value={pInput} onChange={(e) => { setPInput(e.target.value); handleReset() }} /></label>
+                            <label>q=<input className="lca-input small" value={qInput} onChange={(e) => { setQInput(e.target.value); handleReset() }} /></label>
+                        </div>
+                    </div>
+                    {inputError && <span className="lca-error">{inputError}</span>}
+                </div>
+            ),
+        },
+        {
+            id: 'viz',
+            title: 'Tree Visualization',
+            content: (
+                <TreeVisualizationPanel
+                    positions={positions}
+                    edges={edges}
+                    allNodes={allNodes}
+                    step={step}
+                    NODE_R={NODE_R}
+                    p={p}
+                    q={q}
+                    applyExample={applyExample}
+                    EXAMPLES={EXAMPLES}
+                    arrInput={arrInput}
+                    setArrInput={setArrInput}
+                    pInput={pInput}
+                    setPInput={setPInput}
+                    qInput={qInput}
+                    setQInput={setQInput}
+                    inputError={inputError}
+                    handleReset={handleReset}
+                />
+            ),
+        },
+        {
+            id: 'code',
+            title: 'Code Trace',
+            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} autoScroll={autoScrollCode} onActiveLineDomChange={setActiveLineDom} />,
+        },
+    ], [positions, edges, allNodes, step, p, q, applyExample, arrInput, setArrInput, pInput, setPInput, qInput, setQInput, inputError, handleReset, autoScrollCode, setActiveLineDom])
+
+    return (
+        <div className="lca-shell">
+            <DockableWorkspace
+                title="BST LCA — Walk Toward Split"
+                panels={dockPanels}
+                initialLayout={{
+                    rows: [['input', 'viz'], ['code']],
+                    minimized: [],
+                }}
+            />
+
+            <FloatingPanel title="Playback Controls">
+                <PlaybackControls
+                    onReset={handleReset}
+                    onPrev={stepBack}
+                    onPlayToggle={togglePlay}
+                    onNext={stepForward}
+                    resetDisabled={steps.length === 0}
+                    prevDisabled={stepIndex <= 0}
+                    nextDisabled={steps.length === 0 || isDone}
+                    isPlaying={isPlaying}
+                    isDone={isDone}
+                    speed={speed}
+                    onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+                    speedIndicator={`${speed}ms`}
+                    autoScroll={autoScrollCode}
+                    onAutoScrollChange={setAutoScrollCode}
+                    autoScrollLabel="Auto-scroll code"
+                    showAutoScroll
+                    showPatternOverlay={showPatternOverlay}
+                    onShowPatternOverlayChange={setShowPatternOverlay}
+                    patternOverlayLabel="Show pattern overlay"
+                    showPatternOverlayToggle
+                />
+            </FloatingPanel>
+
+            {showPatternOverlay && step && (
+                <PatternOverlay step={step} activeLineDom={activeLineDom} />
+            )}
+        </div>
+    )
+}

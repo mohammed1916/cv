@@ -16,6 +16,9 @@ export default function CodeTracePanel({
   idleLabel = "Press Play to start",
   activeLabelPrefix = "Line",
   activeLabelSuffix = "is active",
+  autoScroll = true,
+  onActiveLineDomChange,
+  disableResizer = false,
 }) {
   const codeRef = useRef(null);
   const lastManualScrollTsRef = useRef(0);
@@ -35,11 +38,24 @@ export default function CodeTracePanel({
 
   useEffect(() => {
     if (!step?.activeLine || !codeRef.current) return;
-    if (Date.now() - lastManualScrollTsRef.current < 600) return;
+
     const el = codeRef.current.querySelector(
       `[data-line="${step.activeLine}"]`,
     );
-    if (!el) return;
+
+    if (!el) {
+      if (onActiveLineDomChange) onActiveLineDomChange(null);
+      return;
+    }
+
+    // Notify parent of active line DOM element
+    if (onActiveLineDomChange) {
+      onActiveLineDomChange(el);
+    }
+
+    // Auto-scroll if enabled
+    if (!autoScroll || Date.now() - lastManualScrollTsRef.current < 600) return;
+
     const container = codeRef.current;
     const elTop = el.offsetTop;
     const elBottom = elTop + el.offsetHeight;
@@ -48,7 +64,7 @@ export default function CodeTracePanel({
     if (elTop < ctTop || elBottom > ctBottom) {
       el.scrollIntoView({ block: "nearest", behavior: "auto" });
     }
-  }, [step]);
+  }, [step, autoScroll, onActiveLineDomChange]);
 
   useEffect(() => {
     if (!copied) return;
@@ -537,7 +553,7 @@ export default function CodeTracePanel({
 
   return (
     <motion.div
-      className={`ctp-panel ${isInlineEditor ? "editing-below" : ""}`}
+      className={`ctp-panel ${isInlineEditor ? "editing-below" : ""} ${disableResizer ? "ctp-managed" : ""}`}
       initial={{ opacity: 0, x: 12 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.22 }}
@@ -602,7 +618,11 @@ export default function CodeTracePanel({
         ref={codeRef}
         onWheel={markManualScroll}
         onTouchMove={markManualScroll}
-        style={{ height: codeAreaHeight }}
+        style={
+          disableResizer
+            ? { flex: "1 1 auto", minHeight: 0 }
+            : { height: codeAreaHeight }
+        }
       >
         {codeLines.map(({ line, text }) => {
           const isActive = step?.activeLine === line;
@@ -632,18 +652,20 @@ export default function CodeTracePanel({
         })}
       </div>
 
-      <div
-        className={`ctp-resizer ${isResizing ? "active" : ""}`}
-        onMouseDown={startDrag}
-        onTouchStart={startDrag}
-        aria-hidden="true"
-      >
-        <ResizerHandle
-          side="center"
-          className="ctp"
-          onPointerDown={startDrag}
-        />
-      </div>
+      {!disableResizer && (
+        <div
+          className={`ctp-resizer ${isResizing ? "active" : ""}`}
+          onMouseDown={startDrag}
+          onTouchStart={startDrag}
+          aria-hidden="true"
+        >
+          <ResizerHandle
+            side="center"
+            className="ctp"
+            onPointerDown={startDrag}
+          />
+        </div>
+      )}
 
       {isInlineEditor ? (
         <motion.div

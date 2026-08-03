@@ -1,6 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import PartialAnswersPanel from "../../components/PartialAnswersPanel";
+import { TreeHighlightOverlay } from "./TreeDPLinking";
+import { TreeTraversalHighlight } from "./TraversalTrail";
+import { PruningLegend, PruningStats } from "./EnhancedTreeVisualization";
+import { usePruningAnalysis, getNodeOpacity, getEdgeOpacity } from "./usePruningAnalysis";
+import "./EnhancedTreeVisualization.css";
 
 const TREE_VIEWBOX_WIDTH = 1000;
 const TREE_VIEWBOX_HEIGHT = 300;
@@ -13,11 +18,20 @@ export default function TreeStatePanel({
     stepKey,
     dpSnapshot,
     maxTreeNodesToRender,
+    step,
+    parentZeroBased,
+    showTraversalTrail,
+    selectedNode,
+    onNodeSelect,
 }) {
     const [treeViewport, setTreeViewport] = useState({ x: 0, y: 0, scale: 1 });
     const [isDraggingTree, setIsDraggingTree] = useState(false);
+    const [gameHierarchyLevel, setGameHierarchyLevel] = useState("overview");
     const treeDragRef = useRef(null);
     const prevDpSnapshotRef = useRef(null);
+
+    // Analyze pruning for visual indication
+    const pruningAnalysis = usePruningAnalysis(step, undefined, 0);
 
     useEffect(() => {
         prevDpSnapshotRef.current = dpSnapshot;
@@ -138,6 +152,7 @@ export default function TreeStatePanel({
 
                 <div className="gogt-tree-canvas">
                     {currentTree ? (
+                        <>
                         <motion.svg
                             key={`${currentTree.size}-${stepKey}`}
                             viewBox={`0 0 ${TREE_VIEWBOX_WIDTH} ${TREE_VIEWBOX_HEIGHT}`}
@@ -189,6 +204,7 @@ export default function TreeStatePanel({
                                                 Math.max(a, b) === Math.max(edge.from, edge.to)
                                             );
                                         });
+                                        const isActiveEdge = parentZeroBased !== null && edge.from === parentZeroBased;
 
                                         return (
                                             <motion.line
@@ -197,13 +213,26 @@ export default function TreeStatePanel({
                                                 y1={from.y}
                                                 x2={to.x}
                                                 y2={to.y}
-                                                className={`gogt-edge ${isBlocked ? "blocked" : inPath ? "path" : ""}`}
+                                                className={`gogt-edge ${isBlocked ? "blocked" : inPath ? "path" : ""} ${isActiveEdge ? "active" : ""} ${pruningAnalysis.prunedEdges.has(`${edge.from}-${edge.to}`) ? "pruned" : ""}`}
+                                                strokeDasharray={isActiveEdge ? "8 8" : "none"}
                                                 initial={false}
                                                 animate={{
-                                                    opacity: isBlocked || inPath ? 1 : 0.78,
-                                                    strokeWidth: isBlocked || inPath ? 3 : 2,
+                                                    opacity: isBlocked || inPath || isActiveEdge
+                                                        ? 1
+                                                        : getEdgeOpacity(
+                                                            edge.from,
+                                                            edge.to,
+                                                            pruningAnalysis.prunedEdges,
+                                                            new Set(pruningAnalysis.activePath),
+                                                          ),
+                                                    strokeWidth: isBlocked || inPath ? 3 : isActiveEdge ? 2.5 : 2,
+                                                    strokeDashoffset: isActiveEdge ? [16, 0] : 0,
                                                 }}
-                                                transition={{ duration: 0.2, ease: "easeOut" }}
+                                                transition={{
+                                                    opacity: { duration: 0.2, ease: "easeOut" },
+                                                    strokeWidth: { duration: 0.2, ease: "easeOut" },
+                                                    strokeDashoffset: { duration: 1.2, repeat: Infinity, ease: "linear" },
+                                                }}
                                             />
                                         );
                                     })}
@@ -226,11 +255,19 @@ export default function TreeStatePanel({
                                                     ? 1.06
                                                     : 1;
 
+                                            const parentId = currentTree.edges.find(e => e.to === node)?.from;
+                                            const degree = currentTree.edges.filter(e => e.from === node).length;
+                                            const tooltipText = `Node ${node + 1}${parentId !== undefined ? ` | Parent: ${parentId + 1}` : ' (root)'} | Degree: ${degree}`;
+
                                             return (
                                                 <g
                                                     key={node}
                                                     transform={`translate(${pos.x}, ${pos.y})`}
+                                                    className={`tree-node-group ${selectedNode === node ? 'selected' : ''}`}
+                                                    onClick={() => onNodeSelect?.(node)}
+                                                    style={{ cursor: 'pointer' }}
                                                 >
+                                                    <title>{tooltipText}</title>
                                                     <motion.g
                                                         initial={false}
                                                         animate={{ scale: nodeScale }}
@@ -259,7 +296,11 @@ export default function TreeStatePanel({
                                                             r="16"
                                                             initial={false}
                                                             animate={{
-                                                                opacity: state === "white" ? 0.9 : 1,
+                                                                opacity: getNodeOpacity(
+                                                                    node,
+                                                                    pruningAnalysis.prunedNodeIds,
+                                                                    new Set(pruningAnalysis.activePath),
+                                                                ),
                                                                 r: isChip
                                                                     ? 17.2
                                                                     : isFocusSource || isFocusTarget
@@ -286,6 +327,77 @@ export default function TreeStatePanel({
                                                         >
                                                             d{nodeDepth}
                                                         </text>
+
+                                                        {/* Top-3 depth badges for pruning visualization */}
+                                                        {dpSnapshot && (
+                                                            <>
+                                                                {/* 1st rank badge - top */}
+                                                                {dpSnapshot.first?.[node] > 0 && (
+                                                                    <g className="tree-depth-badge rank-1">
+                                                                        <circle
+                                                                            cx="0"
+                                                                            cy="-28"
+                                                                            r="6"
+                                                                            className="badge-circle rank-1"
+                                                                        />
+                                                                        <text
+                                                                            x="0"
+                                                                            y="-24"
+                                                                            textAnchor="middle"
+                                                                            fontSize="7"
+                                                                            fontWeight="bold"
+                                                                            className="badge-text"
+                                                                        >
+                                                                            {dpSnapshot.first[node]}
+                                                                        </text>
+                                                                    </g>
+                                                                )}
+
+                                                                {/* 2nd rank badge - left */}
+                                                                {dpSnapshot.second?.[node] > 0 && (
+                                                                    <g className="tree-depth-badge rank-2">
+                                                                        <circle
+                                                                            cx="-24"
+                                                                            cy="0"
+                                                                            r="5"
+                                                                            className="badge-circle rank-2"
+                                                                        />
+                                                                        <text
+                                                                            x="-24"
+                                                                            y="2"
+                                                                            textAnchor="middle"
+                                                                            fontSize="6"
+                                                                            fontWeight="bold"
+                                                                            className="badge-text"
+                                                                        >
+                                                                            {dpSnapshot.second[node]}
+                                                                        </text>
+                                                                    </g>
+                                                                )}
+
+                                                                {/* 3rd rank badge - right */}
+                                                                {dpSnapshot.third?.[node] > 0 && (
+                                                                    <g className="tree-depth-badge rank-3">
+                                                                        <circle
+                                                                            cx="24"
+                                                                            cy="0"
+                                                                            r="4"
+                                                                            className="badge-circle rank-3"
+                                                                        />
+                                                                        <text
+                                                                            x="24"
+                                                                            y="2"
+                                                                            textAnchor="middle"
+                                                                            fontSize="5"
+                                                                            fontWeight="bold"
+                                                                            className="badge-text"
+                                                                        >
+                                                                            {dpSnapshot.third[node]}
+                                                                        </text>
+                                                                    </g>
+                                                                )}
+                                                            </>
+                                                        )}
                                                     </motion.g>
                                                 </g>
                                             );
@@ -293,7 +405,18 @@ export default function TreeStatePanel({
                                     )}
                                 </g>
                             </g>
+                            {step && <TreeHighlightOverlay step={step} treeNodePositions={currentTree?.positions} dpSnapshot={dpSnapshot} />}
+                            {showTraversalTrail && step && <TreeTraversalHighlight currentTree={currentTree} parentZeroBased={parentZeroBased} isBottomUp={step.activeLine >= 9 && step.activeLine <= 14} />}
                         </motion.svg>
+
+                        {/* Pruning Legend and Statistics */}
+                        {dpSnapshot && currentTree && (
+                            <>
+                                <PruningLegend />
+                                <PruningStats dpSnapshot={dpSnapshot} totalNodes={currentTree.size || 0} />
+                            </>
+                        )}
+                        </>
                     ) : (
                         <div className="gogt-tree-empty">
                             Press Play or Next to render the tree for current midpoint.
@@ -311,6 +434,9 @@ export default function TreeStatePanel({
                                     answers={dpSnapshot.first}
                                     prevAnswers={prevDpSnapshotRef.current?.first}
                                     labelPrefix="f"
+                                    selectedNode={selectedNode}
+                                    onNodeSelect={onNodeSelect}
+                                    cellSources={dpSnapshot.firstSources}
                                 />
                             </div>
                             <div className="gogt-dp-panel">
@@ -319,6 +445,9 @@ export default function TreeStatePanel({
                                     answers={dpSnapshot.second}
                                     prevAnswers={prevDpSnapshotRef.current?.second}
                                     labelPrefix="s"
+                                    selectedNode={selectedNode}
+                                    onNodeSelect={onNodeSelect}
+                                    cellSources={dpSnapshot.secondSources}
                                 />
                             </div>
                             <div className="gogt-dp-panel">
@@ -327,6 +456,9 @@ export default function TreeStatePanel({
                                     answers={dpSnapshot.third}
                                     prevAnswers={prevDpSnapshotRef.current?.third}
                                     labelPrefix="t"
+                                    selectedNode={selectedNode}
+                                    onNodeSelect={onNodeSelect}
+                                    cellSources={dpSnapshot.thirdSources}
                                 />
                             </div>
                         </div>
@@ -336,6 +468,97 @@ export default function TreeStatePanel({
                 {currentTree?.truncated ? (
                     <div className="gogt-tree-truncated">
                         Rendering first {maxTreeNodesToRender} nodes only for clarity.
+                    </div>
+                ) : null}
+
+                {currentTree?.stateHierarchy ? (
+                    <div className="gogt-state-hierarchy">
+                        <div className="gogt-hierarchy-controls">
+                            <button
+                                type="button"
+                                className={`gogt-level-btn ${gameHierarchyLevel === "overview" ? "active" : ""}`}
+                                onClick={() => setGameHierarchyLevel("overview")}
+                            >
+                                🔭 Bird's Eye
+                            </button>
+                            <button
+                                type="button"
+                                className={`gogt-level-btn ${gameHierarchyLevel === "intermediate" ? "active" : ""}`}
+                                onClick={() => setGameHierarchyLevel("intermediate")}
+                            >
+                                🔍 Rounds
+                            </button>
+                            <button
+                                type="button"
+                                className={`gogt-level-btn ${gameHierarchyLevel === "detailed" ? "active" : ""}`}
+                                onClick={() => setGameHierarchyLevel("detailed")}
+                            >
+                                🔎 Moves
+                            </button>
+                        </div>
+
+                        {gameHierarchyLevel === "overview" && (
+                            <div className="gogt-hierarchy-content">
+                                <div className="gogt-overview-state">
+                                    <div className="gogt-overview-label">Algorithm Phase</div>
+                                    <div className="gogt-overview-value">{currentTree.stateHierarchy.overallPhase}</div>
+                                    <div className="gogt-overview-message">{currentTree.stateHierarchy.overallMessage}</div>
+                                    <div className="gogt-overview-stats">
+                                        <div className="stat">
+                                            <span>Rounds</span>
+                                            <strong>{currentTree.stateHierarchy.substates.filter(s => s.level === "round-bob").length}</strong>
+                                        </div>
+                                        <div className="stat">
+                                            <span>Final Path</span>
+                                            <strong>{currentTree.chipPath.length} nodes</strong>
+                                        </div>
+                                        <div className="stat">
+                                            <span>Moves Total</span>
+                                            <strong>{currentTree.moves.length}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {gameHierarchyLevel === "intermediate" && (
+                            <div className="gogt-hierarchy-content">
+                                <div className="gogt-substates-list">
+                                    {currentTree.stateHierarchy.substates.map((state, idx) => (
+                                        <div key={idx} className={`gogt-substate gogt-substate-${state.level}`}>
+                                            <div className="gogt-substate-label">
+                                                {state.level === "initialization" && "🎮"}
+                                                {state.level === "round-bob" && "🔵"}
+                                                {state.level === "round-alice" && "🔴"}
+                                                {state.level === "game-end" && "🏁"}
+                                            </div>
+                                            <div className="gogt-substate-message">{state.message}</div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {gameHierarchyLevel === "detailed" && (
+                            <div className="gogt-hierarchy-content">
+                                <div className="gogt-game-moves-list">
+                                    {currentTree.moves.map((move, idx) => (
+                                        <div
+                                            key={idx}
+                                            className={`gogt-game-move gogt-game-move-${move.type}`}
+                                        >
+                                            <div className="gogt-game-move-label">
+                                                {move.type === "game-start" && "🎮 Start"}
+                                                {move.type === "alice-move" && "🔴 Alice"}
+                                                {move.type === "bob-block" && "🔵 Bob"}
+                                                {move.type === "game-end" && "🏁 End"}
+                                            </div>
+                                            <div className="gogt-game-move-message">{move.message}</div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
                     </div>
                 ) : null}
             </div>

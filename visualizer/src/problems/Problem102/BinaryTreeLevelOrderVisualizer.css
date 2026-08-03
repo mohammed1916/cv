@@ -1,0 +1,208 @@
+.btlo-shell {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 200px);
+    min-height: 480px;
+    gap: 0;
+    overflow: hidden;
+}
+
+.btlo-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 16px 0 16px;
+    background: #0f0f1e;
+    border-bottom: 1px solid #313244;
+}
+
+.btlo-header h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #cdd6f4;
+}
+
+.btlo-viz-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.btlo-result-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.btlo-error-box {
+    padding: 10px 12px;
+    background: #3a1e1e;
+    border: 1px solid #f38ba8;
+    border-radius: 6px;
+    color: #f38ba8;
+    font-size: 12px;
+}
+
+.btlo-examples {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btlo-chip {
+    background: #313244;
+    color: #cdd6f4;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.btlo-chip:hover {
+    background: #45475a;
+}
+
+.btlo-input {
+    background: #11111b;
+    color: #cdd6f4;
+    border: 1px solid #45475a;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 13px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.btlo-canvas {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #313244;
+    border-radius: 8px;
+    background: #11111b;
+    flex-shrink: 0;
+}
+
+.btlo-node {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #313244;
+    border: 2px solid #45475a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 700;
+    color: #cdd6f4;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.btlo-node.active {
+    border-color: #f9e2af;
+    background: #2a2a3e;
+    box-shadow: 0 0 12px #f9e2af55;
+    transform-origin: center;
+}
+
+.btlo-node.visited {
+    border-color: #a6e3a1;
+    background: #1d3a2a;
+}
+
+.btlo-node.queued {
+    border-color: #89b4fa;
+    background: #1d2a3e;
+}
+
+.btlo-queue-label {
+    font-size: 12px;
+    color: #6c7086;
+    font-family: monospace;
+}
+
+.btlo-levels {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.btlo-level-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    background: #11111b;
+    border-radius: 6px;
+    border-left: 3px solid #45475a;
+}
+
+.btlo-level-idx {
+    font-size: 11px;
+    color: #6c7086;
+    min-width: 20px;
+}
+
+.btlo-level-vals {
+    font-size: 13px;
+    font-weight: 600;
+    color: #cdd6f4;
+    font-family: monospace;
+}
+
+.btlo-empty {
+    color: #6c7086;
+    font-size: 13px;
+}
+
+.btlo-result {
+    text-align: center;
+    padding: 8px 12px;
+    background: #313244;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #6c7086;
+}
+
+.btlo-result.ok {
+    background: #1e3a2e;
+    color: #a6e3a1;
+    font-weight: 700;
+}
+
+.btlo-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 14px;
+    overflow-y: auto;
+    font-family: inherit;
+}
+
+.btlo-status {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px 14px;
+    background: #0f0f1e;
+    border-top: 1px solid #313244;
+    font-size: 12px;
+    color: #a6adc8;
+    height: 100%;
+    justify-content: center;
+}
+
+.btlo-status-detail {
+    font-size: 11px;
+    color: #6c7086;
+    font-family: monospace;
+}

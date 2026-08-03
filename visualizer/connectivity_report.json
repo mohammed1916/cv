@@ -1,0 +1,1492 @@
+[
+  {
+    "dir": "Problem350",
+    "slug": "intersection-of-two-arrays-ii",
+    "solLineCount": 10,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 10,
+    "usesActiveLineVar": false,
+    "coverage": "70%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem351",
+    "slug": "data-stream-as-disjoint-intervals",
+    "solLineCount": 16,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 16,
+    "usesActiveLineVar": false,
+    "coverage": "44%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem352",
+    "slug": "design-snake-game",
+    "solLineCount": 15,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 15,
+    "usesActiveLineVar": false,
+    "coverage": "47%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem353",
+    "slug": "design-underground-system",
+    "solLineCount": 16,
+    "distinctActiveLines": 5,
+    "maxActiveLine": 16,
+    "usesActiveLineVar": false,
+    "coverage": "31%",
+    "flag": "LOW_COVERAGE"
+  },
+  {
+    "dir": "Problem354",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 11,
+    "maxActiveLine": 19,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem355",
+    "slug": "design-twitter",
+    "solLineCount": 16,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 16,
+    "usesActiveLineVar": false,
+    "coverage": "44%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem356",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 9,
+    "usesActiveLineVar": true,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem357",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 6,
+    "maxActiveLine": 10,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem358",
+    "slug": "rearrange-string-k-distance-apart",
+    "solLineCount": 15,
+    "distinctActiveLines": 9,
+    "maxActiveLine": 15,
+    "usesActiveLineVar": false,
+    "coverage": "60%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem359",
+    "slug": "logger-rate-limiter",
+    "solLineCount": 12,
+    "distinctActiveLines": 5,
+    "maxActiveLine": 12,
+    "usesActiveLineVar": true,
+    "coverage": "42%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem360",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 7,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem361",
+    "slug": "bomb-enemy",
+    "solLineCount": 16,
+    "distinctActiveLines": 5,
+    "maxActiveLine": 16,
+    "usesActiveLineVar": false,
+    "coverage": "31%",
+    "flag": "LOW_COVERAGE"
+  },
+  {
+    "dir": "Problem362",
+    "slug": "design-hit-counter",
+    "solLineCount": 10,
+    "distinctActiveLines": 6,
+    "maxActiveLine": 10,
+    "usesActiveLineVar": false,
+    "coverage": "60%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem363",
+    "slug": "max-sum-of-rectangle-no-larger-than-k",
+    "solLineCount": 16,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 16,
+    "usesActiveLineVar": false,
+    "coverage": "44%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem364",
+    "slug": "nested-list-weight-sum-ii",
+    "solLineCount": 16,
+    "distinctActiveLines": 4,
+    "maxActiveLine": 16,
+    "usesActiveLineVar": false,
+    "coverage": "25%",
+    "flag": "LOW_COVERAGE"
+  },
+  {
+    "dir": "Problem365",
+    "slug": "water-and-jug-problem",
+    "solLineCount": 14,
+    "distinctActiveLines": 9,
+    "maxActiveLine": 14,
+    "usesActiveLineVar": false,
+    "coverage": "64%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem366",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 9,
+    "maxActiveLine": 13,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem367",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 9,
+    "maxActiveLine": 14,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem368",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 8,
+    "maxActiveLine": 14,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem369",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 0,
+    "maxActiveLine": 0,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem370",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 13,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem371",
+    "slug": "sum-of-two-integers",
+    "solLineCount": 7,
+    "distinctActiveLines": 6,
+    "maxActiveLine": 7,
+    "usesActiveLineVar": false,
+    "coverage": "86%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem372",
+    "slug": "super-power",
+    "solLineCount": 9,
+    "distinctActiveLines": 6,
+    "maxActiveLine": 6,
+    "usesActiveLineVar": false,
+    "coverage": "67%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem373",
+    "slug": "search-a-2d-matrix-ii",
+    "solLineCount": 13,
+    "distinctActiveLines": 8,
+    "maxActiveLine": 13,
+    "usesActiveLineVar": false,
+    "coverage": "62%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem374",
+    "slug": "guess-number-higher-or-lower",
+    "solLineCount": 16,
+    "distinctActiveLines": 10,
+    "maxActiveLine": 14,
+    "usesActiveLineVar": false,
+    "coverage": "63%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem375",
+    "slug": "wiggle-sort-ii",
+    "solLineCount": 16,
+    "distinctActiveLines": 9,
+    "maxActiveLine": 9,
+    "usesActiveLineVar": false,
+    "coverage": "56%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem376",
+    "slug": "wiggle-subsequence",
+    "solLineCount": 10,
+    "distinctActiveLines": 6,
+    "maxActiveLine": 10,
+    "usesActiveLineVar": false,
+    "coverage": "60%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem377",
+    "slug": "combination-sum-iv",
+    "solLineCount": 8,
+    "distinctActiveLines": 4,
+    "maxActiveLine": 8,
+    "usesActiveLineVar": false,
+    "coverage": "50%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem378",
+    "slug": "kth-smallest-element-sorted-matrix",
+    "solLineCount": 9,
+    "distinctActiveLines": 4,
+    "maxActiveLine": 9,
+    "usesActiveLineVar": false,
+    "coverage": "44%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem379",
+    "slug": "design-phone-directory",
+    "solLineCount": 10,
+    "distinctActiveLines": 4,
+    "maxActiveLine": 10,
+    "usesActiveLineVar": false,
+    "coverage": "40%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem380",
+    "slug": "insert-delete-get-random-o1",
+    "solLineCount": 13,
+    "distinctActiveLines": 6,
+    "maxActiveLine": 14,
+    "usesActiveLineVar": false,
+    "coverage": "46%",
+    "flag": "LINE_OVERFLOW"
+  },
+  {
+    "dir": "Problem381",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 9,
+    "maxActiveLine": 16,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem382",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 6,
+    "maxActiveLine": 14,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem383",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 11,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem384",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 5,
+    "maxActiveLine": 11,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem385",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 18,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem386",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 6,
+    "maxActiveLine": 13,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem387",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 10,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem388",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 13,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem389",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 11,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem390",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 4,
+    "maxActiveLine": 11,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem391",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 8,
+    "maxActiveLine": 39,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem392",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 15,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem393",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 10,
+    "maxActiveLine": 20,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem394",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 9,
+    "maxActiveLine": 20,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem395",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 8,
+    "maxActiveLine": 18,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem396",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 8,
+    "maxActiveLine": 11,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem397",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 4,
+    "maxActiveLine": 11,
+    "usesActiveLineVar": true,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem398",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 6,
+    "maxActiveLine": 15,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem399",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 26,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem400",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 6,
+    "maxActiveLine": 15,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem401",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 4,
+    "maxActiveLine": 10,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem402",
+    "slug": null,
+    "solLineCount": 0,
+    "distinctActiveLines": 10,
+    "maxActiveLine": 17,
+    "usesActiveLineVar": false,
+    "coverage": "0%",
+    "flag": "NO_CODE"
+  },
+  {
+    "dir": "Problem403",
+    "slug": "frog-jump",
+    "solLineCount": 10,
+    "distinctActiveLines": 6,
+    "maxActiveLine": 10,
+    "usesActiveLineVar": false,
+    "coverage": "60%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem404",
+    "slug": "sum-of-left-leaves",
+    "solLineCount": 6,
+    "distinctActiveLines": 6,
+    "maxActiveLine": 10,
+    "usesActiveLineVar": false,
+    "coverage": "100%",
+    "flag": "LINE_OVERFLOW"
+  },
+  {
+    "dir": "Problem405",
+    "slug": "convert-number-to-hex",
+    "solLineCount": 9,
+    "distinctActiveLines": 5,
+    "maxActiveLine": 5,
+    "usesActiveLineVar": false,
+    "coverage": "56%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem406",
+    "slug": "queue-reconstruction-by-height",
+    "solLineCount": 6,
+    "distinctActiveLines": 5,
+    "maxActiveLine": 5,
+    "usesActiveLineVar": false,
+    "coverage": "83%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem407",
+    "slug": "trapping-rain-water-ii",
+    "solLineCount": 24,
+    "distinctActiveLines": 5,
+    "maxActiveLine": 5,
+    "usesActiveLineVar": false,
+    "coverage": "21%",
+    "flag": "LOW_COVERAGE"
+  },
+  {
+    "dir": "Problem408",
+    "slug": "valid-word-abbreviation",
+    "solLineCount": 13,
+    "distinctActiveLines": 9,
+    "maxActiveLine": 9,
+    "usesActiveLineVar": false,
+    "coverage": "69%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem409",
+    "slug": "longest-palindrome",
+    "solLineCount": 25,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 7,
+    "usesActiveLineVar": false,
+    "coverage": "28%",
+    "flag": "LOW_COVERAGE"
+  },
+  {
+    "dir": "Problem410",
+    "slug": "split-array-largest-sum",
+    "solLineCount": 13,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 7,
+    "usesActiveLineVar": false,
+    "coverage": "54%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem411",
+    "slug": "minimum-unique-word-abbreviation",
+    "solLineCount": 30,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 7,
+    "usesActiveLineVar": false,
+    "coverage": "23%",
+    "flag": "LOW_COVERAGE"
+  },
+  {
+    "dir": "Problem412",
+    "slug": "fizz-buzz",
+    "solLineCount": 7,
+    "distinctActiveLines": 8,
+    "maxActiveLine": 8,
+    "usesActiveLineVar": false,
+    "coverage": "114%",
+    "flag": "LINE_OVERFLOW"
+  },
+  {
+    "dir": "Problem413",
+    "slug": "arithmetic-slices",
+    "solLineCount": 7,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 7,
+    "usesActiveLineVar": false,
+    "coverage": "100%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem414",
+    "slug": "third-maximum-number",
+    "solLineCount": 7,
+    "distinctActiveLines": 6,
+    "maxActiveLine": 6,
+    "usesActiveLineVar": false,
+    "coverage": "86%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem415",
+    "slug": "add-strings",
+    "solLineCount": 10,
+    "distinctActiveLines": 5,
+    "maxActiveLine": 5,
+    "usesActiveLineVar": false,
+    "coverage": "50%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem416",
+    "slug": "partition-equal-subset-sum",
+    "solLineCount": 9,
+    "distinctActiveLines": 8,
+    "maxActiveLine": 8,
+    "usesActiveLineVar": false,
+    "coverage": "89%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem417",
+    "slug": "pacific-atlantic-water-flow",
+    "solLineCount": 10,
+    "distinctActiveLines": 5,
+    "maxActiveLine": 5,
+    "usesActiveLineVar": false,
+    "coverage": "50%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem418",
+    "slug": "sentence-screen-fitting",
+    "solLineCount": 12,
+    "distinctActiveLines": 6,
+    "maxActiveLine": 6,
+    "usesActiveLineVar": false,
+    "coverage": "50%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem419",
+    "slug": "battleships-in-a-board",
+    "solLineCount": 7,
+    "distinctActiveLines": 6,
+    "maxActiveLine": 6,
+    "usesActiveLineVar": false,
+    "coverage": "86%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem420",
+    "slug": "strong-password-checker",
+    "solLineCount": 9,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 7,
+    "usesActiveLineVar": false,
+    "coverage": "78%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem421",
+    "slug": "maximum-xor-of-two-numbers",
+    "solLineCount": 8,
+    "distinctActiveLines": 5,
+    "maxActiveLine": 5,
+    "usesActiveLineVar": false,
+    "coverage": "63%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem422",
+    "slug": "valid-word-square",
+    "solLineCount": 7,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 7,
+    "usesActiveLineVar": false,
+    "coverage": "100%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem423",
+    "slug": "reconstruct-original-digits",
+    "solLineCount": 25,
+    "distinctActiveLines": 4,
+    "maxActiveLine": 4,
+    "usesActiveLineVar": false,
+    "coverage": "16%",
+    "flag": "LOW_COVERAGE"
+  },
+  {
+    "dir": "Problem424",
+    "slug": "verbal-arithmetic-puzzle",
+    "solLineCount": 20,
+    "distinctActiveLines": 3,
+    "maxActiveLine": 3,
+    "usesActiveLineVar": false,
+    "coverage": "15%",
+    "flag": "LOW_COVERAGE"
+  },
+  {
+    "dir": "Problem425",
+    "slug": "word-squares",
+    "solLineCount": 8,
+    "distinctActiveLines": 3,
+    "maxActiveLine": 3,
+    "usesActiveLineVar": false,
+    "coverage": "38%",
+    "flag": "LOW_COVERAGE"
+  },
+  {
+    "dir": "Problem426",
+    "slug": "bst-to-doubly-linked-list",
+    "solLineCount": 9,
+    "distinctActiveLines": 3,
+    "maxActiveLine": 3,
+    "usesActiveLineVar": false,
+    "coverage": "33%",
+    "flag": "LOW_COVERAGE"
+  },
+  {
+    "dir": "Problem427",
+    "slug": "expression-tree-from-tokens",
+    "solLineCount": 13,
+    "distinctActiveLines": 3,
+    "maxActiveLine": 3,
+    "usesActiveLineVar": false,
+    "coverage": "23%",
+    "flag": "LOW_COVERAGE"
+  },
+  {
+    "dir": "Problem428",
+    "slug": "serialize-deserialize-nary-tree",
+    "solLineCount": 18,
+    "distinctActiveLines": 3,
+    "maxActiveLine": 3,
+    "usesActiveLineVar": false,
+    "coverage": "17%",
+    "flag": "LOW_COVERAGE"
+  },
+  {
+    "dir": "Problem429",
+    "slug": "nary-tree-level-order",
+    "solLineCount": 10,
+    "distinctActiveLines": 3,
+    "maxActiveLine": 3,
+    "usesActiveLineVar": false,
+    "coverage": "30%",
+    "flag": "LOW_COVERAGE"
+  },
+  {
+    "dir": "Problem430",
+    "slug": "flatten-multilevel-dll",
+    "solLineCount": 8,
+    "distinctActiveLines": 3,
+    "maxActiveLine": 3,
+    "usesActiveLineVar": false,
+    "coverage": "38%",
+    "flag": "LOW_COVERAGE"
+  },
+  {
+    "dir": "Problem431",
+    "slug": "encode-nary-to-binary-tree",
+    "solLineCount": 7,
+    "distinctActiveLines": 3,
+    "maxActiveLine": 3,
+    "usesActiveLineVar": false,
+    "coverage": "43%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem432",
+    "slug": "all-o1-data-structure",
+    "solLineCount": 7,
+    "distinctActiveLines": 3,
+    "maxActiveLine": 3,
+    "usesActiveLineVar": false,
+    "coverage": "43%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem433",
+    "slug": "minimum-genetic-mutation",
+    "solLineCount": 8,
+    "distinctActiveLines": 3,
+    "maxActiveLine": 3,
+    "usesActiveLineVar": false,
+    "coverage": "38%",
+    "flag": "LOW_COVERAGE"
+  },
+  {
+    "dir": "Problem434",
+    "slug": "number-of-islands-ii",
+    "solLineCount": 8,
+    "distinctActiveLines": 6,
+    "maxActiveLine": 6,
+    "usesActiveLineVar": false,
+    "coverage": "75%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem435",
+    "slug": "non-overlapping-intervals",
+    "solLineCount": 10,
+    "distinctActiveLines": 5,
+    "maxActiveLine": 5,
+    "usesActiveLineVar": false,
+    "coverage": "50%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem436",
+    "slug": "find-right-interval",
+    "solLineCount": 7,
+    "distinctActiveLines": 6,
+    "maxActiveLine": 6,
+    "usesActiveLineVar": false,
+    "coverage": "86%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem437",
+    "slug": "path-sum-iii",
+    "solLineCount": 8,
+    "distinctActiveLines": 4,
+    "maxActiveLine": 4,
+    "usesActiveLineVar": false,
+    "coverage": "50%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem438",
+    "slug": "find-all-anagrams-in-string",
+    "solLineCount": 15,
+    "distinctActiveLines": 4,
+    "maxActiveLine": 4,
+    "usesActiveLineVar": false,
+    "coverage": "27%",
+    "flag": "LOW_COVERAGE"
+  },
+  {
+    "dir": "Problem439",
+    "slug": "ternary-expression-parser",
+    "solLineCount": 6,
+    "distinctActiveLines": 8,
+    "maxActiveLine": 8,
+    "usesActiveLineVar": false,
+    "coverage": "133%",
+    "flag": "LINE_OVERFLOW"
+  },
+  {
+    "dir": "Problem440",
+    "slug": "kth-smallest-lexicographical-order",
+    "solLineCount": 7,
+    "distinctActiveLines": 6,
+    "maxActiveLine": 6,
+    "usesActiveLineVar": false,
+    "coverage": "86%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem441",
+    "slug": "arranging-coins",
+    "solLineCount": 7,
+    "distinctActiveLines": 4,
+    "maxActiveLine": 4,
+    "usesActiveLineVar": false,
+    "coverage": "57%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem442",
+    "slug": "find-all-duplicates-in-array",
+    "solLineCount": 6,
+    "distinctActiveLines": 5,
+    "maxActiveLine": 5,
+    "usesActiveLineVar": false,
+    "coverage": "83%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem443",
+    "slug": "string-compression",
+    "solLineCount": 7,
+    "distinctActiveLines": 6,
+    "maxActiveLine": 6,
+    "usesActiveLineVar": false,
+    "coverage": "86%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem444",
+    "slug": "sequence-reconstruction",
+    "solLineCount": 7,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 7,
+    "usesActiveLineVar": false,
+    "coverage": "100%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem445",
+    "slug": "add-two-numbers-ii",
+    "solLineCount": 19,
+    "distinctActiveLines": 8,
+    "maxActiveLine": 19,
+    "usesActiveLineVar": false,
+    "coverage": "42%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem446",
+    "slug": "arithmetic-slices-ii",
+    "solLineCount": 10,
+    "distinctActiveLines": 5,
+    "maxActiveLine": 10,
+    "usesActiveLineVar": false,
+    "coverage": "50%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem447",
+    "slug": "number-of-boomerangs",
+    "solLineCount": 13,
+    "distinctActiveLines": 6,
+    "maxActiveLine": 13,
+    "usesActiveLineVar": false,
+    "coverage": "46%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem448",
+    "slug": "find-all-numbers-disappeared-in-array",
+    "solLineCount": 7,
+    "distinctActiveLines": 6,
+    "maxActiveLine": 7,
+    "usesActiveLineVar": false,
+    "coverage": "86%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem449",
+    "slug": "serialize-and-deserialize-bst",
+    "solLineCount": 25,
+    "distinctActiveLines": 9,
+    "maxActiveLine": 25,
+    "usesActiveLineVar": false,
+    "coverage": "36%",
+    "flag": "LOW_COVERAGE"
+  },
+  {
+    "dir": "Problem450",
+    "slug": "delete-node-in-a-bst",
+    "solLineCount": 17,
+    "distinctActiveLines": 8,
+    "maxActiveLine": 17,
+    "usesActiveLineVar": false,
+    "coverage": "47%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem451",
+    "slug": "sort-characters-by-frequency",
+    "solLineCount": 9,
+    "distinctActiveLines": 6,
+    "maxActiveLine": 9,
+    "usesActiveLineVar": false,
+    "coverage": "67%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem452",
+    "slug": "minimum-number-of-arrows-to-burst-balloons",
+    "solLineCount": 10,
+    "distinctActiveLines": 6,
+    "maxActiveLine": 10,
+    "usesActiveLineVar": false,
+    "coverage": "60%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem453",
+    "slug": "minimum-moves-to-equal-array-elements",
+    "solLineCount": 8,
+    "distinctActiveLines": 4,
+    "maxActiveLine": 8,
+    "usesActiveLineVar": false,
+    "coverage": "50%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem454",
+    "slug": "4sum-ii",
+    "solLineCount": 13,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 13,
+    "usesActiveLineVar": false,
+    "coverage": "54%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem455",
+    "slug": "assign-cookies",
+    "solLineCount": 9,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 9,
+    "usesActiveLineVar": false,
+    "coverage": "78%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem456",
+    "slug": "ugly-number-ii",
+    "solLineCount": 18,
+    "distinctActiveLines": 9,
+    "maxActiveLine": 18,
+    "usesActiveLineVar": false,
+    "coverage": "50%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem457",
+    "slug": "circular-array-loop",
+    "solLineCount": 15,
+    "distinctActiveLines": 9,
+    "maxActiveLine": 15,
+    "usesActiveLineVar": false,
+    "coverage": "60%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem458",
+    "slug": "poor-pigs",
+    "solLineCount": 6,
+    "distinctActiveLines": 5,
+    "maxActiveLine": 6,
+    "usesActiveLineVar": false,
+    "coverage": "83%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem459",
+    "slug": "repeated-substring-pattern",
+    "solLineCount": 8,
+    "distinctActiveLines": 8,
+    "maxActiveLine": 8,
+    "usesActiveLineVar": false,
+    "coverage": "100%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem461",
+    "slug": "hamming-distance",
+    "solLineCount": 7,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 7,
+    "usesActiveLineVar": false,
+    "coverage": "100%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem462",
+    "slug": "minimum-moves-to-equal-array-elements-ii",
+    "solLineCount": 7,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 7,
+    "usesActiveLineVar": false,
+    "coverage": "100%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem463",
+    "slug": "island-perimeter",
+    "solLineCount": 10,
+    "distinctActiveLines": 9,
+    "maxActiveLine": 10,
+    "usesActiveLineVar": false,
+    "coverage": "90%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem464",
+    "slug": "can-i-win",
+    "solLineCount": 17,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 17,
+    "usesActiveLineVar": false,
+    "coverage": "41%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem465",
+    "slug": "max-consecutive-ones",
+    "solLineCount": 7,
+    "distinctActiveLines": 5,
+    "maxActiveLine": 7,
+    "usesActiveLineVar": false,
+    "coverage": "71%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem466",
+    "slug": "count-the-repetitions",
+    "solLineCount": 7,
+    "distinctActiveLines": 6,
+    "maxActiveLine": 6,
+    "usesActiveLineVar": false,
+    "coverage": "86%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem467",
+    "slug": "unique-substrings-in-wraparound-string",
+    "solLineCount": 7,
+    "distinctActiveLines": 6,
+    "maxActiveLine": 6,
+    "usesActiveLineVar": false,
+    "coverage": "86%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem468",
+    "slug": "validate-ip-address",
+    "solLineCount": 7,
+    "distinctActiveLines": 6,
+    "maxActiveLine": 7,
+    "usesActiveLineVar": false,
+    "coverage": "86%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem469",
+    "slug": "convex-polygon",
+    "solLineCount": 7,
+    "distinctActiveLines": 4,
+    "maxActiveLine": 4,
+    "usesActiveLineVar": false,
+    "coverage": "57%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem470",
+    "slug": "implement-rand10",
+    "solLineCount": 5,
+    "distinctActiveLines": 7,
+    "maxActiveLine": 7,
+    "usesActiveLineVar": false,
+    "coverage": "140%",
+    "flag": "LINE_OVERFLOW"
+  },
+  {
+    "dir": "Problem471",
+    "slug": "encode-string-with-shortest-length",
+    "solLineCount": 6,
+    "distinctActiveLines": 4,
+    "maxActiveLine": 4,
+    "usesActiveLineVar": false,
+    "coverage": "67%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem472",
+    "slug": "concatenated-words",
+    "solLineCount": 6,
+    "distinctActiveLines": 4,
+    "maxActiveLine": 4,
+    "usesActiveLineVar": false,
+    "coverage": "67%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem473",
+    "slug": "matchsticks-to-square",
+    "solLineCount": 5,
+    "distinctActiveLines": 4,
+    "maxActiveLine": 4,
+    "usesActiveLineVar": false,
+    "coverage": "80%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem474",
+    "slug": "ones-and-zeroes",
+    "solLineCount": 6,
+    "distinctActiveLines": 3,
+    "maxActiveLine": 3,
+    "usesActiveLineVar": false,
+    "coverage": "50%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem475",
+    "slug": "heaters",
+    "solLineCount": 6,
+    "distinctActiveLines": 4,
+    "maxActiveLine": 4,
+    "usesActiveLineVar": false,
+    "coverage": "67%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem476",
+    "slug": "number-complement",
+    "solLineCount": 4,
+    "distinctActiveLines": 4,
+    "maxActiveLine": 4,
+    "usesActiveLineVar": false,
+    "coverage": "100%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem477",
+    "slug": "total-hamming-distance",
+    "solLineCount": 5,
+    "distinctActiveLines": 3,
+    "maxActiveLine": 3,
+    "usesActiveLineVar": false,
+    "coverage": "60%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem478",
+    "slug": "generate-random-point-in-a-circle",
+    "solLineCount": 5,
+    "distinctActiveLines": 3,
+    "maxActiveLine": 3,
+    "usesActiveLineVar": false,
+    "coverage": "60%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem479",
+    "slug": "largest-palindrome-product",
+    "solLineCount": 5,
+    "distinctActiveLines": 3,
+    "maxActiveLine": 3,
+    "usesActiveLineVar": false,
+    "coverage": "60%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem480",
+    "slug": "sliding-window-median",
+    "solLineCount": 5,
+    "distinctActiveLines": 3,
+    "maxActiveLine": 3,
+    "usesActiveLineVar": false,
+    "coverage": "60%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem481",
+    "slug": "magical-string",
+    "solLineCount": 5,
+    "distinctActiveLines": 3,
+    "maxActiveLine": 3,
+    "usesActiveLineVar": false,
+    "coverage": "60%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem482",
+    "slug": "license-key-formatting",
+    "solLineCount": 5,
+    "distinctActiveLines": 3,
+    "maxActiveLine": 3,
+    "usesActiveLineVar": false,
+    "coverage": "60%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem483",
+    "slug": "smallest-good-base",
+    "solLineCount": 5,
+    "distinctActiveLines": 3,
+    "maxActiveLine": 3,
+    "usesActiveLineVar": false,
+    "coverage": "60%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem484",
+    "slug": "find-permutation",
+    "solLineCount": 5,
+    "distinctActiveLines": 4,
+    "maxActiveLine": 4,
+    "usesActiveLineVar": false,
+    "coverage": "80%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem485",
+    "slug": "max-consecutive-ones",
+    "solLineCount": 7,
+    "distinctActiveLines": 5,
+    "maxActiveLine": 5,
+    "usesActiveLineVar": false,
+    "coverage": "71%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem486",
+    "slug": "predict-the-winner",
+    "solLineCount": 5,
+    "distinctActiveLines": 6,
+    "maxActiveLine": 6,
+    "usesActiveLineVar": false,
+    "coverage": "120%",
+    "flag": "LINE_OVERFLOW"
+  },
+  {
+    "dir": "Problem487",
+    "slug": "max-consecutive-ones-iii",
+    "solLineCount": 5,
+    "distinctActiveLines": 5,
+    "maxActiveLine": 5,
+    "usesActiveLineVar": false,
+    "coverage": "100%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem488",
+    "slug": "zuma-game",
+    "solLineCount": 5,
+    "distinctActiveLines": 3,
+    "maxActiveLine": 3,
+    "usesActiveLineVar": false,
+    "coverage": "60%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem489",
+    "slug": "robot-room-cleaner",
+    "solLineCount": 5,
+    "distinctActiveLines": 5,
+    "maxActiveLine": 5,
+    "usesActiveLineVar": false,
+    "coverage": "100%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem490",
+    "slug": "the-maze",
+    "solLineCount": 5,
+    "distinctActiveLines": 5,
+    "maxActiveLine": 5,
+    "usesActiveLineVar": false,
+    "coverage": "100%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem491",
+    "slug": "increasing-subsequences",
+    "solLineCount": 5,
+    "distinctActiveLines": 3,
+    "maxActiveLine": 3,
+    "usesActiveLineVar": false,
+    "coverage": "60%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem492",
+    "slug": "construct-the-rectangle",
+    "solLineCount": 4,
+    "distinctActiveLines": 2,
+    "maxActiveLine": 2,
+    "usesActiveLineVar": false,
+    "coverage": "50%",
+    "flag": "FEW_LINES"
+  },
+  {
+    "dir": "Problem493",
+    "slug": "reverse-pairs",
+    "solLineCount": 5,
+    "distinctActiveLines": 3,
+    "maxActiveLine": 3,
+    "usesActiveLineVar": false,
+    "coverage": "60%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem494",
+    "slug": "target-sum",
+    "solLineCount": 5,
+    "distinctActiveLines": 3,
+    "maxActiveLine": 3,
+    "usesActiveLineVar": false,
+    "coverage": "60%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem495",
+    "slug": "teemo-attacking",
+    "solLineCount": 5,
+    "distinctActiveLines": 3,
+    "maxActiveLine": 3,
+    "usesActiveLineVar": false,
+    "coverage": "60%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem496",
+    "slug": "next-greater-element-i",
+    "solLineCount": 5,
+    "distinctActiveLines": 3,
+    "maxActiveLine": 3,
+    "usesActiveLineVar": false,
+    "coverage": "60%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem497",
+    "slug": "random-point-in-non-overlapping-rectangles",
+    "solLineCount": 5,
+    "distinctActiveLines": 2,
+    "maxActiveLine": 2,
+    "usesActiveLineVar": false,
+    "coverage": "40%",
+    "flag": "FEW_LINES"
+  },
+  {
+    "dir": "Problem498",
+    "slug": "diagonal-traverse",
+    "solLineCount": 5,
+    "distinctActiveLines": 3,
+    "maxActiveLine": 3,
+    "usesActiveLineVar": false,
+    "coverage": "60%",
+    "flag": "OK"
+  },
+  {
+    "dir": "Problem499",
+    "slug": "the-maze-iii",
+    "solLineCount": 5,
+    "distinctActiveLines": 2,
+    "maxActiveLine": 2,
+    "usesActiveLineVar": false,
+    "coverage": "40%",
+    "flag": "FEW_LINES"
+  }
+]

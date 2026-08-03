@@ -1,0 +1,48 @@
+﻿.problem65-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+}
+
+.problem65-panel {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  padding: 16px;
+}
+
+.problem65-status {
+  background: var(--surface-2);
+  border-top: 1px solid var(--border);
+  padding: 8px 16px;
+  font-size: 12px;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.problem65-button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  background: #8b5cf620;
+  border: 1px solid #8b5cf640;
+  color: #8b5cf6;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.problem65-button:hover {
+  background: #8b5cf630;
+  border-color: #8b5cf660;
+}

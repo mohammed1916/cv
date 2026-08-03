@@ -1,0 +1,404 @@
+import { useState, useCallback, useMemo } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import CodeTracePanel from '../../components/CodeTracePanel'
+import PlaybackControls from '../../components/PlaybackControls'
+import PatternOverlay from '../../components/PatternOverlay'
+import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import { usePlaybackState } from '../../hooks/usePlaybackState'
+import { useAutoScroll } from '../../hooks/useAutoScroll'
+import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamples } from '../../config/examplesRegistry'
+import './NumberOfIslandsVisualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+
+
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
+const SOLUTION_CODE = [
+  { line: 1, text: 'class Solution:' },
+  { line: 2, text: '    def numIslands(self, grid: List[List[str]]) -> int:' },
+  { line: 3, text: '        if not grid: return 0' },
+  { line: 4, text: '        ' },
+  { line: 5, text: '        rows, cols = len(grid), len(grid[0])' },
+  { line: 6, text: '        visited = set()' },
+  { line: 7, text: '        islands = 0' },
+  { line: 8, text: '        ' },
+  { line: 9, text: '        def bfs(r, c):' },
+  { line: 10, text: '            q = [(r, c)]' },
+  { line: 11, text: '            visited.add((r, c))' },
+  { line: 12, text: '            ' },
+  { line: 13, text: '            while q:' },
+  { line: 14, text: '                row, col = q.pop(0)' },
+  { line: 15, text: '                directions = [[1, 0], [-1, 0], [0, 1], [0, -1]]' },
+  { line: 16, text: '                ' },
+  { line: 17, text: '                for dr, dc in directions:' },
+  { line: 18, text: '                    nr, nc = row + dr, col + dc' },
+  { line: 19, text: '                    if (0 <= nr < rows and 0 <= nc < cols and' },
+  { line: 20, text: '                        grid[nr][nc] == "1" and' },
+  { line: 21, text: '                        (nr, nc) not in visited):' },
+  { line: 22, text: '                        q.append((nr, nc))' },
+  { line: 23, text: '                        visited.add((nr, nc))' },
+  { line: 24, text: '                        ' },
+  { line: 25, text: '        for r in range(rows):' },
+  { line: 26, text: '            for c in range(cols):' },
+  { line: 27, text: '                if grid[r][c] == "1" and (r, c) not in visited:' },
+  { line: 28, text: '                    bfs(r, c)' },
+  { line: 29, text: '                    islands += 1' },
+  { line: 30, text: '                    ' },
+  { line: 31, text: '        return islands' },
+]
+
+function generateSteps(grid) {
+  const steps = []
+
+  if (!grid || grid.length === 0 || grid[0].length === 0) {
+    steps.push({
+      phase: 'done', visited: [], islands: 0, queue: [],
+      activeLine: 3, message: 'Empty grid, return 0.'
+    })
+    return steps
+  }
+
+  const rows = grid.length
+  const cols = grid[0].length
+  const visited = new Set()
+  let islands = 0
+  const islandMap = {} // map "r,c" to island ID for coloring
+
+  steps.push({
+    phase: 'init', visited: Array.from(visited), islands, queue: [], islandMap: { ...islandMap },
+    activeLine: 7, message: `Initialize grid of size \${rows}x\${cols}, empty visited set, islands = 0.`
+  })
+
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      steps.push({
+        phase: 'scan', visited: Array.from(visited), islands, queue: [], islandMap: { ...islandMap },
+        currScan: [r, c],
+        activeLine: 27, message: `Scanning grid[\${r}][\${c}] ('\${grid[r][c]}'). Is it an unvisited land ('1')?`
+      })
+
+      if (grid[r][c] === '1' && !visited.has(`\${r},\${c}`)) {
+        steps.push({
+          phase: 'found_new', visited: Array.from(visited), islands, queue: [], islandMap: { ...islandMap },
+          currScan: [r, c],
+          activeLine: 28, message: `Found unvisited land at (\${r}, \${c})! Call bfs(\${r}, \${c}).`
+        })
+
+        // BFS
+        const queue = [[r, c]]
+        visited.add(`\${r},\${c}`)
+        islandMap[`\${r},\${c}`] = islands // assign to current island ID
+
+        steps.push({
+          phase: 'bfs_init', visited: Array.from(visited), islands, queue: [...queue], islandMap: { ...islandMap },
+          currScan: [r, c], currBfs: [r, c],
+          activeLine: 11, message: `Initialize queue with [(\${r}, \${c})] and mark as visited.`
+        })
+
+        while (queue.length > 0) {
+          const [row, col] = queue.shift()
+
+          steps.push({
+            phase: 'bfs_pop', visited: Array.from(visited), islands, queue: [...queue], islandMap: { ...islandMap },
+            currScan: [r, c], currBfs: [row, col],
+            activeLine: 14, message: `Pop (\${row}, \${col}) from queue. Check its neighbors.`
+          })
+
+          const directions = [[1, 0], [-1, 0], [0, 1], [0, -1]]
+          for (const [dr, dc] of directions) {
+            const nr = row + dr
+            const nc = col + dc
+
+            steps.push({
+              phase: 'bfs_check_neighbor', visited: Array.from(visited), islands, queue: [...queue], islandMap: { ...islandMap },
+              currScan: [r, c], currBfs: [row, col], currNeighbor: [nr, nc],
+              activeLine: 19, message: `Check neighbor (\${nr}, \${nc}).`
+            })
+
+            if (nr >= 0 && nr < rows && nc >= 0 && nc < cols && grid[nr][nc] === '1' && !visited.has(`\${nr},\${nc}`)) {
+              queue.push([nr, nc])
+              visited.add(`\${nr},\${nc}`)
+              islandMap[`\${nr},\${nc}`] = islands
+
+              steps.push({
+                phase: 'bfs_add_neighbor', visited: Array.from(visited), islands, queue: [...queue], islandMap: { ...islandMap },
+                currScan: [r, c], currBfs: [row, col], currNeighbor: [nr, nc],
+                activeLine: 23, message: `Neighbor (\${nr}, \${nc}) is unvisited land! Add to queue and mark visited.`
+              })
+            }
+          }
+        }
+
+        islands++
+        steps.push({
+          phase: 'inc_islands', visited: Array.from(visited), islands, queue: [], islandMap: { ...islandMap },
+          currScan: [r, c],
+          activeLine: 29, message: `BFS completed. Increment islands count to \${islands}.`
+        })
+      }
+    }
+  }
+
+  steps.push({
+    phase: 'done', visited: Array.from(visited), islands, queue: [], islandMap: { ...islandMap },
+    activeLine: 31, message: `Scan complete. Total islands found: \${islands}.`
+  })
+
+  return steps
+}
+
+const EXAMPLES = getExamples('number-of-islands')
+
+const ISLAND_COLORS = [
+  '#3b82f6', // blue
+  '#10b981', // green
+  '#f59e0b', // amber
+  '#8b5cf6', // purple
+  '#ec4899', // pink
+  '#06b6d4', // cyan
+  '#f43f5e', // rose
+  '#84cc16', // lime
+]
+
+export default function NumberOfIslandsVisualizer() {
+  const [gridInput, setGridInput] = useState(EXAMPLES[1].gridStr)
+
+  const { grid, inputError } = useMemo(() => {
+    try {
+      const g = JSON.parse(gridInput)
+      if (!Array.isArray(g) || !Array.isArray(g[0])) throw new Error('Grid must be a 2D array of strings')
+      return { grid: g, inputError: '' }
+    } catch (e) {
+      return { grid: [["1"]], inputError: e.message || 'Invalid JSON format' }
+    }
+  }, [gridInput])
+
+  const steps = useMemo(() => generateSteps(grid), [grid])
+
+  const {
+    stepIndex, stepForward, stepBack, togglePlay,
+    handleReset, isPlaying, speed, setSpeed, isDone,
+  } = usePlaybackState(steps.length)
+
+  const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
+  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+
+  const step = stepIndex >= 0 ? steps[stepIndex] : null
+
+  const applyExample = useCallback((ex) => {
+    setGridInput(ex.gridStr)
+    handleReset()
+  }, [handleReset])
+
+  const rows = grid.length
+  const cols = grid[0]?.length || 0
+
+  const dockPanels = useMemo(() => [
+    {
+      id: 'grid',
+      title: 'Grid View & Input',
+      subtitle: inputError ? 'Fix the input to resume playback.' : 'Edit the grid input and see visualization.',
+      defaultZone: 'left',
+      content: (
+        <div className="noi-panel-body">
+          <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
+            {EXAMPLES.map((ex) => (
+              <button
+                key={ex.label}
+                onClick={() => applyExample(ex)}
+                className="noi-example-btn"
+              >
+                {ex.label}
+              </button>
+            ))}
+          </div>
+
+          {inputError && <div style={{ color: '#f87171', marginBottom: 12, fontSize: 13 }}>{inputError}</div>}
+
+          <textarea
+            className="noi-input-textarea"
+            value={gridInput}
+            onChange={(e) => { setGridInput(e.target.value); handleReset() }}
+            rows={5}
+            spellCheck={false}
+          />
+
+          <div className="noi-grid-container">
+            <div
+              className="noi-grid"
+              style={{
+                gridTemplateColumns: `repeat(${cols}, minmax(30px, 1fr))`,
+                maxWidth: `${cols * 50}px`
+              }}
+            >
+              {grid.map((row, r) => (
+                row.map((cell, c) => {
+                  const isWater = cell === "0"
+                  const isVisited = step?.visited?.includes(`${r},${c}`)
+                  const isScan = step?.currScan?.[0] === r && step?.currScan?.[1] === c
+                  const isBfs = step?.currBfs?.[0] === r && step?.currBfs?.[1] === c
+                  const isNeighbor = step?.currNeighbor?.[0] === r && step?.currNeighbor?.[1] === c
+
+                  const islandId = step?.islandMap?.[`${r},${c}`]
+                  const islandColor = islandId !== undefined ? ISLAND_COLORS[islandId % ISLAND_COLORS.length] : undefined
+
+                  let cellClass = "noi-cell "
+                  if (isWater) cellClass += "water "
+                  else cellClass += "land "
+
+                  if (isVisited) cellClass += "visited "
+                  if (isScan && !isBfs) cellClass += "scan "
+                  if (isBfs) cellClass += "bfs "
+                  if (isNeighbor) cellClass += "neighbor "
+
+                  return (
+                    <div
+                      key={`${r}-${c}`}
+                      className={cellClass}
+                      style={{
+                        ...(isVisited && !isWater && islandColor ? { backgroundColor: islandColor, borderColor: islandColor } : {})
+                      }}
+                    >
+                      {cell}
+                      {isScan && !isBfs && <div className="noi-cell-indicator scan" />}
+                      {isBfs && <div className="noi-cell-indicator bfs" />}
+                      {isNeighbor && <div className="noi-cell-indicator neighbor" />}
+                    </div>
+                  )
+                })
+              ))}
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: 'state',
+      title: 'State & Queue',
+      subtitle: step ? `Islands: ${step.islands ?? 0}` : 'Queue and algorithm state.',
+      defaultZone: 'right',
+      content: (
+        <div className="noi-panel-body">
+          <div className="noi-stats-container">
+            <div className="noi-stat-box">
+              <span className="noi-stat-label">Islands Found</span>
+              <span className="noi-stat-val">{step?.islands ?? 0}</span>
+            </div>
+          </div>
+
+          <div className="noi-section">
+            <span className="noi-section-title">BFS Queue</span>
+            <div className="noi-queue-box">
+              <AnimatePresence mode="popLayout">
+                {step?.queue?.map((item, idx) => (
+                  <motion.div
+                    key={`q-${item[0]}-${item[1]}-${idx}`}
+                    layout
+                    initial={{ opacity: 0, scale: 0.5, x: 20 }}
+                    animate={{ opacity: 1, scale: 1, x: 0 }}
+                    exit={{ opacity: 0, scale: 0.5, y: -20 }}
+                    className="noi-queue-item"
+                  >
+                    ({item[0]}, {item[1]})
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+              {(!step || !step.queue || step.queue.length === 0) && (
+                <span style={{ color: '#475569', fontStyle: 'italic', fontSize: 13, padding: '4px 0' }}>Queue is empty</span>
+              )}
+            </div>
+          </div>
+
+          <div className="noi-section" style={{ flex: 1 }}>
+            <span className="noi-section-title">Legend</span>
+            <div className="noi-legend">
+              <div className="noi-legend-item">
+                <div className="noi-legend-box land" /> Unvisited Land ("1")
+              </div>
+              <div className="noi-legend-item">
+                <div className="noi-legend-box water" /> Water ("0")
+              </div>
+              <div className="noi-legend-item">
+                <div className="noi-legend-box scan" /> Scanning pointer
+              </div>
+              <div className="noi-legend-item">
+                <div className="noi-legend-box bfs" /> Current BFS Node
+              </div>
+              <div className="noi-legend-item">
+                <div className="noi-legend-box neighbor" /> Neighbor being checked
+              </div>
+              <div className="noi-legend-item" style={{ marginTop: 8 }}>
+                <div className="noi-legend-row">
+                  {ISLAND_COLORS.slice(0, 4).map((c, i) => (
+                    <div key={i} className="noi-legend-color" style={{ backgroundColor: c }} />
+                  ))}
+                </div>
+                <span style={{ fontSize: 12 }}>Colored by Island ID</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: 'code',
+      title: 'Code Trace',
+      subtitle: step ? `Active line ${step.activeLine}` : 'Line-by-line solution view.',
+      defaultZone: 'full',
+      content: (
+        <CodeTracePanel
+          step={step}
+          codeLines={SOLUTION_CODE}
+          onActiveLineDomChange={setActiveLineDom}
+          autoScroll={autoScrollCode}
+        />
+      ),
+    },
+  ], [step, applyExample, gridInput, handleReset, inputError, grid, rows, cols, setActiveLineDom, autoScrollCode])
+
+  return (
+    <div className="problem-shell">
+      <DockableWorkspace
+        title="Number of Islands Visualizer"
+        panels={dockPanels}
+        initialLayout={{
+          rows: [['grid', 'state'], ['code']],
+          minimized: [],
+        }}
+      />
+
+      <FloatingPanel title="Playback Controls">
+        <PlaybackControls
+          onReset={handleReset}
+          onPrev={stepBack}
+          onPlayToggle={togglePlay}
+          onNext={stepForward}
+          resetDisabled={steps.length === 0}
+          prevDisabled={stepIndex < 0}
+          nextDisabled={steps.length === 0 || isDone}
+          isPlaying={isPlaying}
+          isDone={isDone}
+          speed={speed}
+          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+          speedIndicator={`${speed}ms`}
+          autoScroll={autoScrollCode}
+          onAutoScrollChange={setAutoScrollCode}
+          autoScrollLabel="Auto-scroll code"
+          showAutoScroll
+          showPatternOverlay={showPatternOverlay}
+          onShowPatternOverlayChange={setShowPatternOverlay}
+          patternOverlayLabel="Show pattern overlay"
+          showPatternOverlayToggle
+        />
+      </FloatingPanel>
+
+      {showPatternOverlay && step && (
+        <PatternOverlay step={step} activeLineDom={activeLineDom} />
+      )}
+    </div>
+  )
+}

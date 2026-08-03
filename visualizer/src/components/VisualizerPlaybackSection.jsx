@@ -2,6 +2,7 @@ import CodeTracePanel from './CodeTracePanel'
 import PlaybackControls from './PlaybackControls'
 import CodeSnippetChips from './CodeSnippetChips'
 import CodeVisualLinkLegend from './CodeVisualLinkLegend'
+import VisualizationControls from './VisualizationControls'
 
 export default function VisualizerPlaybackSection({
   step,
@@ -15,6 +16,9 @@ export default function VisualizerPlaybackSection({
   controlsContainerClassName,
   playback,
   connectivity = null,
+  // Visualization features (optional)
+  visualizationFeatures = [],
+  onVisualizationToggle = null,
 }) {
   const statusClass = statusDone
     ? `${statusClassName} ${statusDoneClassName}`
@@ -39,19 +43,27 @@ export default function VisualizerPlaybackSection({
     </>
   )
   const controls = (
-    <PlaybackControls
-      isPlaying={playback.isPlaying}
-      isDone={playback.isDone}
-      speed={playback.speed}
-      onPlayToggle={playback.togglePlay}
-      onPrev={playback.stepBack}
-      onNext={playback.stepForward}
-      onReset={playback.handleReset}
-      prevDisabled={playback.stepIndex < 0}
-      nextDisabled={playback.isDone}
-      resetDisabled={playback.stepIndex < 0}
-      onSpeedChange={(event) => playback.setSpeed(Number(event.target.value))}
-    />
+    <>
+      <PlaybackControls
+        isPlaying={playback.isPlaying}
+        isDone={playback.isDone}
+        speed={playback.speed}
+        onPlayToggle={playback.togglePlay}
+        onPrev={playback.stepBack}
+        onNext={playback.stepForward}
+        onReset={playback.handleReset}
+        prevDisabled={playback.stepIndex < 0}
+        nextDisabled={playback.isDone}
+        resetDisabled={playback.stepIndex < 0}
+        onSpeedChange={(event) => playback.setSpeed(Number(event.target.value))}
+      />
+      {visualizationFeatures.length > 0 && onVisualizationToggle && (
+        <VisualizationControls
+          features={visualizationFeatures}
+          onToggle={onVisualizationToggle}
+        />
+      )}
+    </>
   )
 
   return (

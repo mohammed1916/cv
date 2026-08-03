@@ -1,0 +1,24 @@
+.btpt-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+  background: #0f172a;
+}
+
+.btpt-panel {
+  padding: 16px;
+  overflow: auto;
+  height: 100%;
+}
+
+.btpt-status {
+  padding: 8px 12px;
+  background: #1e293b;
+  border-top: 1px solid #334155;
+  overflow: auto;
+  height: 100%;
+}

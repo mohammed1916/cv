@@ -1,0 +1,269 @@
+/* Problem353: Design Underground System */
+
+.problem-shell {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Station node styling */
+.station-node {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e9d5ff 0%, #ddd6fe 100%);
+  border: 2px solid #8b5cf6;
+  font-weight: 600;
+  color: #6b21a8;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.station-node:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.25);
+}
+
+.station-node.active {
+  background: linear-gradient(135deg, #d8b4fe 0%, #c084fc 100%);
+  border-color: #7c3aed;
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.35);
+}
+
+/* Passenger bubble styling */
+.passenger-bubble {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  border: 2px solid #f59e0b;
+  font-weight: 600;
+  color: #92400e;
+  box-shadow: 0 3px 10px rgba(245, 158, 11, 0.3);
+  font-size: 10px;
+}
+
+.passenger-bubble.transit {
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.passenger-bubble.completed {
+  background: linear-gradient(135deg, #a3e635 0%, #84cc16 100%);
+  border-color: #84cc16;
+  color: #365314;
+}
+
+/* Route visualization */
+.route-line {
+  stroke: #cbd5e1;
+  stroke-width: 1;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.route-line.active {
+  stroke: #8b5cf6;
+  stroke-width: 3;
+  opacity: 0.9;
+}
+
+.route-line.highlighted {
+  stroke: #7c3aed;
+  stroke-width: 2;
+  opacity: 0.8;
+}
+
+/* Statistics panel */
+.stats-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  background: linear-gradient(135deg, #ddd6fe 0%, #e9d5ff 100%);
+  border-radius: 8px;
+  border-left: 4px solid #8b5cf6;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #5b21b6;
+  border: 1px solid #c4b5fd;
+}
+
+.stat-label {
+  font-weight: 600;
+}
+
+.stat-value {
+  background: #c4b5fd;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-weight: 600;
+  color: #3f0f5c;
+}
+
+/* Message box */
+.message-box {
+  padding: 12px;
+  background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+  border-radius: 6px;
+  border-left: 4px solid #8b5cf6;
+  font-size: 12px;
+  font-weight: 500;
+  color: #334155;
+  line-height: 1.5;
+}
+
+/* Example buttons */
+.example-button {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  background: #f1f5f9;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  color: #475569;
+  transition: all 0.2s ease;
+}
+
+.example-button:hover {
+  background: #e2e8f0;
+  border-color: #94a3b8;
+}
+
+.example-button.active {
+  background: linear-gradient(135deg, #e9d5ff 0%, #ddd6fe 100%);
+  border-color: #8b5cf6;
+  color: #6b21a8;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.15);
+}
+
+/* Passengers list */
+.passengers-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px;
+  background: linear-gradient(135deg, #fef3c7 0%, #fef08a 100%);
+  border-radius: 6px;
+  border: 1px solid #fcd34d;
+}
+
+.passenger-tag {
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #f59e0b;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #92400e;
+  transition: all 0.2s ease;
+}
+
+.passenger-tag.active {
+  background: #fbbf24;
+  border-color: #f59e0b;
+  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.3);
+}
+
+/* Route statistics card */
+.route-card {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #c4b5fd;
+  background: #ddd6fe;
+  font-weight: 600;
+  color: #5b21b6;
+  font-size: 11px;
+  transition: all 0.3s ease;
+}
+
+.route-card.active {
+  background: #8b5cf6;
+  color: #fff;
+  border-color: #7c3aed;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.route-card-title {
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+
+.route-card-stats {
+  font-size: 10px;
+  margin-top: 4px;
+  opacity: 0.9;
+}
+
+/* Network visualization container */
+.network-container {
+  position: relative;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #f9fafb;
+  padding: 12px;
+  height: 400px;
+  overflow: hidden;
+}
+
+/* SVG styling */
+svg {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.05));
+}
+
+/* Animations */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out;
+}

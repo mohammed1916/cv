@@ -8,21 +8,24 @@ import React, {
 import { motion, AnimatePresence } from "framer-motion";
 
 import ProblemScaffold from "./components/panels/ProblemScaffold";
+import ProblemInfoPanel from "./components/ProblemInfoPanel";
+import ZoomControls from "./components/ZoomControls";
+import { ZoomProvider } from "./context/ZoomContext";
 import "./App.css";
-
-const lazyProblem = (folder) =>
-  folder ? React.lazy(() => import(`./problems/${folder}/index.jsx`)) : null;
+import { TRACKS } from "./data/implementedProblems";
 
 /* ── Auto-discovery ──────────────────────────────────────────────────── */
 
-const metaModules = import.meta.glob("./problems/*/index.jsx", { eager: true });
+// Metadata lives in a lightweight meta.js (eagerly bundled), while the heavy
+// visualizer is dynamically imported via index.jsx so each one code-splits.
+const metaModules = import.meta.glob("./problems/*/meta.js", { eager: true });
 const lazyModules = import.meta.glob("./problems/*/index.jsx");
 
 const ALL_PROBLEMS = Object.entries(metaModules)
   .map(([path, mod]) => {
     const meta = mod?.meta;
     if (!meta?.number || !meta?.title) return null;
-    const loader = lazyModules[path];
+    const loader = lazyModules[path.replace(/\/meta\.js$/, "/index.jsx")];
     return {
       id: `prob-${meta.slug || meta.number}`,
       number: meta.number,
@@ -32,7 +35,7 @@ const ALL_PROBLEMS = Object.entries(metaModules)
       difficulty: meta.difficulty || "Medium",
       tags: meta.tags || [],
       accent: meta.accent || "#64748b",
-      component: loader ? lazy(() => loader()) : null,
+      component: loader ? React.lazy(() => loader()) : null,
       implemented: !!loader,
     };
   })
@@ -192,16 +195,17 @@ function ProblemPage({
   layoutWidth,
   onLayoutChange,
   enableTransitions,
+  problemDescriptions,
 }) {
   const Component = problem.component;
   const Shell = enableTransitions ? motion.div : "div";
   const shellProps = enableTransitions
     ? {
-        initial: { opacity: 0, x: 50 },
-        animate: { opacity: 1, x: 0 },
-        exit: { opacity: 0, x: -50 },
-        transition: { type: "spring", stiffness: 320, damping: 35 },
-      }
+      initial: { opacity: 0, x: 50 },
+      animate: { opacity: 1, x: 0 },
+      exit: { opacity: 0, x: -50 },
+      transition: { type: "spring", stiffness: 320, damping: 35 },
+    }
     : {};
   return (
     <Shell className="problem-page" {...shellProps}>
@@ -235,6 +239,7 @@ function ProblemPage({
           compact
         />
       </header>
+      <ProblemInfoPanel slug={problem.slug} descriptions={problemDescriptions} />
       <div className="problem-content">
         <ErrorBoundary key={problem.id}>
           {Component ? (
@@ -268,7 +273,7 @@ function HomePage({
   const [catalogError, setCatalogError] = useState("");
   const [search, setSearch] = useState("");
   const [difficulty, setDifficulty] = useState("All");
-  const [status, setStatus] = useState("All");
+  const [status, setStatus] = useState("Implemented");
   const [activeTag, setActiveTag] = useState("All");
   const [visibleCount, setVisibleCount] = useState(60);
 
@@ -336,10 +341,10 @@ function HomePage({
   const Shell = enableTransitions ? motion.div : "div";
   const shellProps = enableTransitions
     ? {
-        initial: { opacity: 0 },
-        animate: { opacity: 1 },
-        exit: { opacity: 0 },
-      }
+      initial: { opacity: 0 },
+      animate: { opacity: 1 },
+      exit: { opacity: 0 },
+    }
     : {};
   const Brand = enableTransitions ? motion.div : "div";
 
@@ -351,10 +356,10 @@ function HomePage({
             className="brand"
             {...(enableTransitions
               ? {
-                  initial: { y: -18, opacity: 0 },
-                  animate: { y: 0, opacity: 1 },
-                  transition: { delay: 0.08, type: "spring", stiffness: 280 },
-                }
+                initial: { y: -18, opacity: 0 },
+                animate: { y: 0, opacity: 1 },
+                transition: { delay: 0.08, type: "spring", stiffness: 280 },
+              }
               : {})}
           >
             <div className="brand-icon">⟨/⟩</div>
@@ -568,6 +573,14 @@ export default function App() {
   const [layoutWidth, setLayoutWidth] = useState("full");
   const [navigationTransitionsEnabled, setNavigationTransitionsEnabled] =
     useState(true);
+  const [problemDescriptions, setProblemDescriptions] = useState({});
+
+  useEffect(() => {
+    fetch("/data/problemDescriptions.json")
+      .then((res) => res.json())
+      .then((data) => setProblemDescriptions(data))
+      .catch(() => setProblemDescriptions({}));
+  }, []);
 
   useEffect(() => {
     try {
@@ -620,6 +633,7 @@ export default function App() {
       layoutWidth={layoutWidth}
       onLayoutChange={setLayoutWidth}
       enableTransitions={navigationTransitionsEnabled}
+      problemDescriptions={problemDescriptions}
     />
   ) : (
     <HomePage
@@ -634,18 +648,23 @@ export default function App() {
   );
 
   return (
-    <div className={`app layout-${layoutWidth}`}>
-      <div className="app-toolbar">
-        <SettingsMenu
-          navigationTransitionsEnabled={navigationTransitionsEnabled}
-          onToggleNavigationTransitions={setNavigationTransitionsEnabled}
-        />
+    <ZoomProvider>
+      <ZoomControls />
+      <div className={`app layout-${layoutWidth}`}>
+        <div className="app-toolbar">
+          <SettingsMenu
+            navigationTransitionsEnabled={navigationTransitionsEnabled}
+            onToggleNavigationTransitions={setNavigationTransitionsEnabled}
+          />
+        </div>
+        <div id="zoom-content-wrapper" style={{ flex: 1, transformOrigin: 'top left', marginTop: '60px' }}>
+          {navigationTransitionsEnabled ? (
+            <AnimatePresence mode="wait">{pageContent}</AnimatePresence>
+          ) : (
+            pageContent
+          )}
+        </div>
       </div>
-      {navigationTransitionsEnabled ? (
-        <AnimatePresence mode="wait">{pageContent}</AnimatePresence>
-      ) : (
-        pageContent
-      )}
-    </div>
+    </ZoomProvider>
   );
 }

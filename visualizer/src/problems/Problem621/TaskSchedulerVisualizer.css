@@ -1,0 +1,237 @@
+.tsv-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #888;
+  font-style: italic;
+}
+
+.tsv-freq-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.tsv-bars {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  height: 200px;
+  padding: 12px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  min-height: 200px;
+}
+
+.tsv-bar-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.tsv-bar {
+  width: 100%;
+  background: linear-gradient(180deg, #4f46e5 0%, #6366f1 100%);
+  border-radius: 4px 4px 0 0;
+  transition: background 0.3s ease;
+  min-height: 4px;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.2);
+}
+
+.tsv-bar-item.tsv-active .tsv-bar {
+  background: linear-gradient(180deg, #ec4899 0%, #f43f5e 100%);
+  box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+}
+
+.tsv-bar-item.tsv-max .tsv-bar {
+  background: linear-gradient(180deg, #f59e0b 0%, #fbbf24 100%);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.tsv-bar-label {
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+}
+
+.tsv-bar-count {
+  font-size: 12px;
+  color: #666;
+  font-weight: 500;
+}
+
+.tsv-state-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.tsv-state-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  background: #f0f4f8;
+  border-left: 4px solid #4f46e5;
+  border-radius: 4px;
+}
+
+.tsv-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #666;
+}
+
+.tsv-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1f2937;
+  font-family: 'Courier New', monospace;
+}
+
+.tsv-formula-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  background: linear-gradient(135deg, #f5f3ff 0%, #f0f4f8 100%);
+  border: 2px solid #e9d5ff;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+.tsv-formula-expr {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: #4f46e5;
+  text-align: center;
+}
+
+.tsv-formula-equals {
+  font-size: 18px;
+  font-weight: 700;
+  color: #4f46e5;
+  text-align: center;
+}
+
+.tsv-formula-result {
+  font-size: 24px;
+  font-weight: 700;
+  color: #10b981;
+  text-align: center;
+  font-family: 'Courier New', monospace;
+}
+
+.tsv-final-result {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  background: linear-gradient(135deg, #d1fae5 0%, #ecfdf5 100%);
+  border: 2px solid #6ee7b7;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.tsv-final {
+  color: #059669;
+  font-size: 28px;
+}
+
+.tsv-input-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+.tsv-examples {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tsv-chip {
+  padding: 6px 12px;
+  background: #e5e7eb;
+  border: 1px solid #d1d5db;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tsv-chip:hover {
+  background: #d1d5db;
+  border-color: #9ca3af;
+}
+
+.tsv-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tsv-input-group label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tsv-input-group input {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: 'Courier New', monospace;
+  transition: all 0.2s ease;
+}
+
+.tsv-input-group input:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.tsv-btn {
+  padding: 8px 12px;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tsv-btn:hover {
+  background: #4338ca;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.2);
+}
+
+.tsv-btn:active {
+  transform: scale(0.98);
+}
+
+.problem-shell {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

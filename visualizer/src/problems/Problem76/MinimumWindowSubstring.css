@@ -1,0 +1,5 @@
+.problem-shell {
+  display: grid;
+  gap: 12px;
+  height: 100%;
+}

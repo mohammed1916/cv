@@ -1,0 +1,345 @@
+/* CSS for PermutationSequenceVisualizer.jsx */
+
+.ps-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+}
+
+/* Panel styles */
+.ps-panel {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.ps-viz-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.ps-top {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.ps-section-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #666;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ps-panel.main {
+  flex: 1;
+}
+
+.ps-panel.side {
+  flex: 0 0 200px;
+  min-width: 150px;
+}
+
+.ps-head {
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 1rem;
+  border-bottom: 2px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ps-head span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ps-error {
+  color: #d32f2f;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.ps-body {
+  padding: 1rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.ps-examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.ps-chip {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background: #f5f5f5;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.ps-chip:hover {
+  border-color: #999;
+  background: #efefef;
+}
+
+.ps-chip.active {
+  background: #2196F3;
+  color: white;
+  border-color: #2196F3;
+}
+
+.ps-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 4px;
+}
+
+.ps-input-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ps-input-group label {
+  font-weight: 600;
+  min-width: 40px;
+}
+
+.ps-input-group input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.ps-input-group input:disabled {
+  background: #e8e8e8;
+  color: #666;
+}
+
+.ps-info {
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.ps-nums-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.ps-num-cell {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.ps-num-cell.selected {
+  background: #4CAF50;
+  color: white;
+  border-color: #4CAF50;
+}
+
+.ps-result-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.ps-result-cell {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #2196F3;
+  border-radius: 4px;
+  background: #E3F2FD;
+  font-weight: 600;
+  color: #1976D2;
+}
+
+.ps-final-result {
+  padding: 1rem;
+  background: #C8E6C9;
+  border-left: 4px solid #4CAF50;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.ps-final-result span {
+  color: #2E7D32;
+  font-size: 1.3rem;
+}
+
+.ps-k-display {
+  padding: 0.75rem;
+  background: #FFF3E0;
+  border-left: 4px solid #FF9800;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.ps-k-val {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #E65100;
+}
+
+.ps-factorial-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ps-factorial-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background: #f5f5f5;
+  border-radius: 4px;
+}
+
+.ps-fact-label {
+  font-weight: 600;
+  color: #555;
+}
+
+.ps-fact-val {
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+  color: #2196F3;
+}
+
+.ps-status {
+  padding: 0.75rem;
+  background: #f0f0f0;
+  border-top: 1px solid #ddd;
+  font-size: 0.9rem;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .ps-shell {
+    background: #1e1e1e;
+    color: #e0e0e0;
+  }
+
+  .ps-head {
+    border-bottom-color: #444;
+    color: #e0e0e0;
+  }
+
+  .ps-body {
+    background: #2d2d2d;
+    color: #e0e0e0;
+  }
+
+  .ps-chip {
+    background: #3d3d3d;
+    border-color: #555;
+    color: #e0e0e0;
+  }
+
+  .ps-chip:hover {
+    background: #4d4d4d;
+    border-color: #777;
+  }
+
+  .ps-chip.active {
+    background: #1976D2;
+    border-color: #1976D2;
+  }
+
+  .ps-inputs {
+    background: #3d3d3d;
+  }
+
+  .ps-input-group input {
+    background: #2d2d2d;
+    border-color: #555;
+    color: #e0e0e0;
+  }
+
+  .ps-input-group input:disabled {
+    background: #1e1e1e;
+    color: #888;
+  }
+
+  .ps-num-cell {
+    background: #3d3d3d;
+    border-color: #555;
+    color: #e0e0e0;
+  }
+
+  .ps-result-cell {
+    background: #1e3a5f;
+    border-color: #64B5F6;
+    color: #64B5F6;
+  }
+
+  .ps-status {
+    background: #333;
+    border-top-color: #555;
+    color: #ccc;
+  }
+
+  .ps-factorial-item {
+    background: #3d3d3d;
+  }
+
+  .ps-fact-label {
+    color: #aaa;
+  }
+
+  .ps-fact-val {
+    color: #64B5F6;
+  }
+
+  .ps-section-label {
+    color: #aaa;
+  }
+
+  .ps-info {
+    color: #aaa;
+  }
+}

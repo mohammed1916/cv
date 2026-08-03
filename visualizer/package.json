@@ -12,16 +12,19 @@
     "refresh:descriptions": "node scripts/fetch-problem-descriptions.mjs"
   },
   "dependencies": {
+    "@lumino/commands": "^2.3.4",
+    "@lumino/messaging": "^2.0.5",
+    "@lumino/widgets": "^2.9.0",
     "@monaco-editor/react": "^4.7.0",
     "framer-motion": "^12.38.0",
     "html2canvas": "^1.4.1",
+    "katex": "^0.16.8",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-markdown": "^8.0.5",
-    "remark-gfm": "^3.0.1",
-    "remark-math": "^5.1.1",
     "rehype-katex": "^6.0.0",
-    "katex": "^0.16.8"
+    "remark-gfm": "^3.0.1",
+    "remark-math": "^5.1.1"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

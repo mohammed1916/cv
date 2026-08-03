@@ -1,0 +1,26 @@
+.srln-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+}
+
+.srln-panel {
+  height: 100%;
+  overflow: auto;
+}
+
+.srln-status {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  font-size: 12px;
+  color: #cbd5e1;
+  border-top: 1px solid #334155;
+  gap: 12px;
+  background: #0f172a;
+}

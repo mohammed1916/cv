@@ -1,0 +1,10 @@
+.btbass2-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+  background: #0f172a;
+}

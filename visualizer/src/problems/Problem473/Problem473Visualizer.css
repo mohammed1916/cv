@@ -1,0 +1,92 @@
+.problem-shell {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #1e1e2e;
+  color: #cdd6f4;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.viz-story-box {
+  padding: 12px 16px;
+  background-color: rgba(137, 180, 250, 0.1);
+  border-radius: 8px;
+  border-left: 4px solid #89b4fa;
+}
+
+.viz-story-box p {
+  margin: 0;
+  font-size: 12px;
+  color: #cdd6f4;
+  font-style: italic;
+}
+
+.viz-sticks-array {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.viz-stick {
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 2px solid;
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.viz-stick.active {
+  background-color: rgba(254, 240, 138, 0.2);
+  border-color: #fef08a;
+  color: #fef08a;
+  transform: scale(1.15);
+}
+
+.viz-sides-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.viz-side-box {
+  padding: 16px;
+  background-color: #f0fdf4;
+  border: 2px solid #10b981;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.viz-side-box .label {
+  font-size: 12px;
+  color: #065f46;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.viz-side-box .value {
+  font-size: 20px;
+  font-weight: 700;
+  color: #10b981;
+}
+
+.viz-status-box {
+  padding: 16px;
+  background-color: rgba(203, 166, 247, 0.1);
+  border-radius: 8px;
+  border: 2px solid #cba6f7;
+}
+
+.viz-status-box .message {
+  font-size: 12px;
+  color: #cdd6f4;
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .viz-sides-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

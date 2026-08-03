@@ -1,0 +1,44 @@
+=== VISUALIZER FILES MANIFEST ===
+
+Problem 20:
+  index.jsx (312 bytes)
+  ValidParentheses.css (2735 bytes)
+  ValidParentheses.jsx (6582 bytes)
+  ValidParenthesesVisualizer.css (3645 bytes)
+  ValidParenthesesVisualizer.jsx (6436 bytes)
+
+Problem 27:
+  index.jsx (292 bytes)
+  RemoveElement.css (2672 bytes)
+  RemoveElement.jsx (6549 bytes)
+  RemoveElementVisualizer.css (3505 bytes)
+  RemoveElementVisualizer.jsx (6582 bytes)
+
+Problem 29:
+  DivideTwo1ntegers.jsx (0 bytes)
+  DivideTwoIntegers.css (2777 bytes)
+  DivideTwoIntegers.jsx (6686 bytes)
+  DivideTwoIntegersVisualizer.css (1963 bytes)
+  DivideTwoIntegersVisualizer.jsx (0 bytes)
+  index.jsx (326 bytes)
+
+Problem 38:
+  CountAndSay.css (2651 bytes)
+  CountAndSay.jsx (6528 bytes)
+  CountAndSayVisualizer.css (1541 bytes)
+  CountAndSayVisualizer.jsx (0 bytes)
+  index.jsx (299 bytes)
+
+Problem 47:
+  index.jsx (301 bytes)
+  Permutations2.jsx (0 bytes)
+  PermutationsIi.css (2693 bytes)
+  PermutationsIi.jsx (6576 bytes)
+  PermutationsIIVisualizer.css (1653 bytes)
+  PermutationsIIVisualizer.jsx (0 bytes)
+
+Problem 50:
+  index.jsx (289 bytes)
+  PowXNVisualizer.css (1539 bytes)
+  PowXNVisualizer.jsx (0 bytes)
+

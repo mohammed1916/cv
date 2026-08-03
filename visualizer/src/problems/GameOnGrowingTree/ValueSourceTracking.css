@@ -1,0 +1,207 @@
+.source-container {
+  padding: 12px;
+  background: linear-gradient(135deg, #f9f5f0 0%, #f5f0e8 100%);
+  border-radius: 8px;
+  border: 1px solid #e8ddd0;
+}
+
+.source-header {
+  margin-bottom: 12px;
+}
+
+.source-header h3 {
+  margin: 0 0 4px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.source-subtitle {
+  margin: 0;
+  font-size: 12px;
+  color: #666;
+}
+
+.source-empty {
+  padding: 20px;
+  text-align: center;
+  color: #999;
+  font-size: 13px;
+}
+
+.source-content {
+  background: white;
+  border: 1px solid #e0dbd0;
+  border-radius: 6px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.source-section {
+  padding: 8px;
+  background: #f9f7f5;
+  border-radius: 4px;
+  border-left: 3px solid #d9d3c8;
+}
+
+.section-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #666;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.formula-box {
+  background: white;
+  border: 2px solid #fd7e14;
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.formula-display {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.formula-text {
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a1a;
+  padding: 6px 8px;
+  background: #f9f7f5;
+  border-radius: 3px;
+}
+
+.formula-equals {
+  font-weight: 700;
+  color: #fd7e14;
+  font-size: 14px;
+}
+
+.formula-result {
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fd7e14;
+}
+
+.formula-reason {
+  padding: 8px;
+  background: #fffbf0;
+  border-radius: 3px;
+  font-size: 12px;
+  display: flex;
+  gap: 6px;
+}
+
+.reason-label {
+  font-weight: 600;
+  color: #fd7e14;
+}
+
+.reason-text {
+  color: #333;
+}
+
+.components-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.component-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+  font-size: 12px;
+  flex-wrap: wrap;
+}
+
+.comp-label {
+  font-weight: 600;
+  color: #666;
+}
+
+.comp-bracket {
+  font-family: 'Monaco', 'Menlo', monospace;
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+.comp-equals {
+  color: #adb5bd;
+}
+
+.comp-value {
+  font-family: 'Monaco', 'Menlo', monospace;
+  color: #1a1a1a;
+  font-weight: 700;
+}
+
+.source-info {
+  background: linear-gradient(135deg, #eef3ff 0%, #e7ebff 100%);
+  border-left-color: #4c6ef5;
+}
+
+.node-info-card {
+  background: white;
+  border: 1px solid #4c6ef5;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  font-size: 12px;
+  border-bottom: 1px solid #e0e3e8;
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-weight: 600;
+  color: #666;
+}
+
+.info-value,
+.info-values {
+  font-family: 'Monaco', 'Menlo', monospace;
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+.source-explanation {
+  padding: 12px;
+  background: #fffbf0;
+  border-left: 4px solid #fd7e14;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.source-explanation p {
+  margin: 0;
+}
+
+.source-explanation strong {
+  color: #fd7e14;
+  font-weight: 600;
+}

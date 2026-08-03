@@ -1,0 +1,28 @@
+.rnc2-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+  background: #0f172a;
+}
+
+.rnc2-panel {
+  padding: 16px;
+  overflow: auto;
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+.rnc2-status {
+  padding: 8px 12px;
+  background: #1e293b;
+  border-top: 1px solid #334155;
+  font-size: 12px;
+  color: #94a3b8;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

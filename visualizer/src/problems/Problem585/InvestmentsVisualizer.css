@@ -1,0 +1,237 @@
+.investments_2016-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 16px;
+  overflow: hidden;
+}
+
+.investments_2016-panel {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.investments_2016-panel-head {
+  padding: 12px 16px;
+  background: var(--surface-3);
+  border-bottom: 1px solid var(--border);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.investments_2016-panel-body {
+  padding: 16px;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.investments_2016-status {
+  padding: 12px 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.investments_2016-status.success {
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.3);
+  color: #22c55e;
+}
+
+.investments_2016-status.fail {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+}
+
+.investments_2016-dock {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.investments_2016-example-btn {
+  padding: 6px 12px;
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--text-main);
+}
+
+.investments_2016-example-btn:hover {
+  background: var(--surface-4);
+  border-color: var(--accent);
+}
+
+.investments_2016-input {
+  padding: 8px 12px;
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--text-main);
+  font-family: monospace;
+}
+
+.investments_2016-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.1);
+}
+
+.investments_2016-visualization {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-1);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  min-height: 200px;
+  overflow: hidden;
+}
+
+.investments_2016-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.investments_2016-table thead {
+  background: var(--surface-3);
+  position: sticky;
+  top: 0;
+}
+
+.investments_2016-table th {
+  padding: 8px 12px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-main);
+}
+
+.investments_2016-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-main);
+}
+
+.investments_2016-table tbody tr {
+  transition: background-color 0.2s;
+}
+
+.investments_2016-table tbody tr:hover {
+  background: var(--surface-3);
+}
+
+.investments_2016-table tbody tr.included {
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.investments_2016-table tbody tr.excluded {
+  background: rgba(156, 163, 175, 0.1);
+  opacity: 0.7;
+}
+
+.investments_2016-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.investments_2016-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.investments_2016-stat {
+  padding: 12px;
+  background: var(--surface-3);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.investments_2016-stat-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.investments_2016-stat-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-main);
+  font-family: monospace;
+}
+
+.investments_2016-filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.investments_2016-filter-tag {
+  padding: 4px 10px;
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--text-secondary);
+}
+
+.investments_2016-filter-tag:hover,
+.investments_2016-filter-tag.active {
+  background: var(--surface-4);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.investments_2016-legend {
+  display: flex;
+  gap: 16px;
+  padding: 12px 0;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+}
+
+.investments_2016-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.investments_2016-legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}

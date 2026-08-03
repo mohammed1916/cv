@@ -1,0 +1,146 @@
+.super-ugly-number-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 16px;
+  overflow: hidden;
+}
+
+.super-ugly-number-top {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  gap: 16px;
+}
+
+.super-ugly-number-middle {
+  display: flex;
+  height: 240px;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.super-ugly-number-bottom {
+  height: 80px;
+  flex-shrink: 0;
+}
+
+.super-ugly-number-panel {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  flex: 1;
+}
+
+.super-ugly-number-panel-head {
+  padding: 12px 16px;
+  background: var(--surface-3);
+  border-bottom: 1px solid var(--border);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.super-ugly-number-panel-body {
+  padding: 16px;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.super-ugly-number-textarea {
+  font-family: monospace;
+  font-size: 12px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-1);
+  color: var(--text-main);
+  resize: none;
+  flex: 1;
+}
+
+.super-ugly-number-viz {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.super-ugly-number-step-info {
+  padding: 16px;
+  background: linear-gradient(135deg, #f59e0b20, #f59e0b10);
+  border-left: 4px solid #f59e0b;
+  border-radius: 8px;
+  color: var(--text-main);
+}
+
+.super-ugly-number-step-info h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.super-ugly-number-example-btn {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface-1);
+  color: var(--text-main);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.super-ugly-number-example-btn:hover {
+  background: #f59e0b20;
+  border-color: #f59e0b;
+  color: #f59e0b;
+}
+
+.super-ugly-number-example-btn.active {
+  background: #f59e0b;
+  border-color: #f59e0b;
+  color: white;
+}
+
+.super-ugly-number-examples {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.super-ugly-number-error {
+  padding: 16px;
+  background: #ef444420;
+  border: 1px solid #ef4444;
+  border-radius: 8px;
+  color: #ef4444;
+  font-size: 12px;
+  font-family: monospace;
+}
+
+.super-ugly-number-panel-input {
+  flex: 0.35;
+}
+
+.super-ugly-number-panel-viz {
+  flex: 0.65;
+}
+
+@media (max-width: 1024px) {
+  .super-ugly-number-middle {
+    height: 200px;
+  }
+}

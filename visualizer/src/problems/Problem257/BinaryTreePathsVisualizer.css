@@ -1,0 +1,197 @@
+.btp-viz-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px;
+}
+
+.btp-canvas {
+    position: relative;
+    background: linear-gradient(135deg, #1a1b26 0%, #16172b 100%);
+    border-radius: 8px;
+    border: 1px solid #313244;
+    overflow: hidden;
+}
+
+.btp-node {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #89b4fa 0%, #74c7ec 100%);
+    border: 2px solid #45a3f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: #1e1e2e;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(137, 180, 250, 0.3);
+    transition: all 0.2s ease;
+}
+
+.btp-node.active {
+    background: linear-gradient(135deg, #f38ba8 0%, #eba0ac 100%);
+    border-color: #f38ba8;
+    box-shadow: 0 4px 16px rgba(243, 139, 168, 0.6);
+}
+
+.btp-node.on-path {
+    background: linear-gradient(135deg, #f38ba8 0%, #eba0ac 100%);
+    border-color: #f38ba8;
+    box-shadow: 0 4px 12px rgba(243, 139, 168, 0.4);
+}
+
+.btp-status {
+    font-size: 13px;
+    color: #a6adc8;
+    padding: 8px 12px;
+    background: #1e1e2e;
+    border-radius: 8px;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+}
+
+.btp-state-panel {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.btp-metric {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.btp-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #89b4fa;
+}
+
+.btp-path-display {
+    font-family: 'Monaco', 'Menlo', monospace;
+    font-size: 12px;
+    color: #cdd6f4;
+    background: #1e1e2e;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #313244;
+    word-break: break-word;
+}
+
+.btp-paths-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 120px;
+    overflow-y: auto;
+}
+
+.btp-path-item {
+    font-family: 'Monaco', 'Menlo', monospace;
+    font-size: 11px;
+    color: #a6adc8;
+    background: #1e1e2e;
+    padding: 6px 8px;
+    border-radius: 4px;
+    border-left: 2px solid #f38ba8;
+}
+
+.btp-empty {
+    color: #6c7086;
+    font-size: 12px;
+}
+
+.btp-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.btp-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #a6adc8;
+}
+
+.btp-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.btp-dot.active {
+    background: #f38ba8;
+    box-shadow: 0 0 8px rgba(243, 139, 168, 0.6);
+}
+
+.btp-dot.on-path {
+    background: #f38ba8;
+    opacity: 0.7;
+}
+
+.btp-input-panel {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btp-examples {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.btp-chip {
+    padding: 6px 12px;
+    background: #313244;
+    border: 1px solid #45475a;
+    border-radius: 20px;
+    color: #cdd6f4;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btp-chip:hover {
+    background: #45475a;
+    border-color: #585b70;
+    color: #f38ba8;
+}
+
+.btp-input {
+    width: 100%;
+    padding: 8px 10px;
+    background: #1e1e2e;
+    border: 1px solid #313244;
+    border-radius: 6px;
+    color: #cdd6f4;
+    font-family: 'Monaco', 'Menlo', monospace;
+    font-size: 12px;
+    box-sizing: border-box;
+}
+
+.btp-input:focus {
+    outline: none;
+    border-color: #89b4fa;
+    background: #1a1a29;
+}
+
+.btp-error {
+    color: #f38ba8;
+    font-size: 11px;
+    padding: 6px 8px;
+    background: rgba(243, 139, 168, 0.1);
+    border-radius: 4px;
+    border-left: 2px solid #f38ba8;
+}

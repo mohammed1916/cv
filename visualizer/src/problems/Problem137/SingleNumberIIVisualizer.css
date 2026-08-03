@@ -1,0 +1,23 @@
+.sn2-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+}
+
+.sn2-panel {
+  overflow-y: auto;
+  padding: 12px;
+  background: #0f172a;
+}
+
+.sn2-status {
+  padding: 4px 8px;
+  border-top: 1px solid #475569;
+  background: #1e293b;
+  font-size: 11px;
+  color: #cbd5e1;
+}

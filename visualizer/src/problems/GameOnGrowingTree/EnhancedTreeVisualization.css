@@ -1,0 +1,332 @@
+/* Enhanced Tree Node Styling */
+
+.tree-node {
+  fill: #f0f9ff;
+  stroke: #0ea5e9;
+  stroke-width: 2;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tree-node.active {
+  fill: #bfdbfe;
+  stroke: #0284c7;
+  stroke-width: 3;
+  filter: drop-shadow(0 0 6px rgba(2, 132, 199, 0.5));
+}
+
+.tree-node.empty {
+  fill: #f3f4f6;
+  stroke: #9ca3af;
+  opacity: 0.6;
+}
+
+.tree-node.has-values {
+  fill: #dbeafe;
+  stroke: #0ea5e9;
+}
+
+.tree-node:hover {
+  stroke-width: 3;
+  filter: drop-shadow(0 0 4px rgba(14, 165, 233, 0.4));
+}
+
+/* Node label */
+.tree-node-label {
+  fill: #1f2937;
+  pointer-events: none;
+  user-select: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', monospace;
+}
+
+/* Depth badges - color-coded by rank */
+
+.tree-depth-badge {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.badge-circle {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.badge-circle:hover {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  r: 9 !important;
+}
+
+.badge-text {
+  fill: white;
+  pointer-events: none;
+  font-family: 'Menlo', 'Monaco', monospace;
+}
+
+/* Rank 1 - Gold/Blue (best) */
+.rank-1 .badge-circle {
+  fill: #3b82f6;
+  stroke: #1e40af;
+  stroke-width: 1;
+}
+
+.rank-1 .badge-text {
+  fill: white;
+  font-weight: bold;
+}
+
+/* Rank 2 - Silver (second best) */
+.rank-2 .badge-circle {
+  fill: #a855f7;
+  stroke: #6d28d9;
+  stroke-width: 1;
+  opacity: 0.85;
+}
+
+.rank-2 .badge-text {
+  fill: white;
+  font-weight: 600;
+}
+
+/* Rank 3 - Bronze (third best) */
+.rank-3 .badge-circle {
+  fill: #f97316;
+  stroke: #c2410c;
+  stroke-width: 1;
+  opacity: 0.75;
+}
+
+.rank-3 .badge-text {
+  fill: white;
+  font-weight: 600;
+}
+
+/* Active node pulse animation */
+.tree-node-pulse {
+  stroke: #0ea5e9;
+  stroke-dasharray: 4, 4;
+  opacity: 0.6;
+  animation: nodePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes nodePulse {
+  0% {
+    r: 28px;
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    r: 34px;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    r: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Pruning Legend */
+
+.pruning-legend {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(249, 250, 251, 0.95));
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  max-width: 240px;
+  z-index: 50;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.legend-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: #374151;
+}
+
+.legend-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 9px;
+  color: white;
+}
+
+.legend-badge.rank-1 {
+  background: #3b82f6;
+}
+
+.legend-badge.rank-2 {
+  background: #a855f7;
+  opacity: 0.85;
+}
+
+.legend-badge.rank-3 {
+  background: #f97316;
+  opacity: 0.75;
+}
+
+.legend-badge.pruned {
+  background: #9ca3af;
+  font-size: 10px;
+}
+
+.legend-label {
+  font-size: 11px;
+  color: #4b5563;
+}
+
+.legend-note {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  font-size: 10px;
+  color: #6b7280;
+  line-height: 1.4;
+  font-style: italic;
+}
+
+/* Pruning Statistics */
+
+.pruning-stats {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(249, 250, 251, 0.95));
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', monospace;
+  min-width: 160px;
+  z-index: 50;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  font-size: 11px;
+  color: #374151;
+}
+
+.stat-label {
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.stat-value {
+  font-weight: 700;
+  color: #1f2937;
+  min-width: 30px;
+  text-align: right;
+  padding-left: 12px;
+}
+
+.stat-row.highlight {
+  padding: 8px 0;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  background: rgba(59, 130, 246, 0.05);
+  padding-left: 6px;
+  padding-right: 6px;
+  border-radius: 4px;
+  color: #0284c7;
+}
+
+.stat-row.pruned {
+  color: #9ca3af;
+}
+
+.stat-row.pruned .stat-value {
+  color: #6b7280;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .tree-node {
+    fill: #0f172a;
+    stroke: #0ea5e9;
+  }
+
+  .tree-node.active {
+    fill: #1e3a8a;
+    stroke: #06b6d4;
+  }
+
+  .tree-node.empty {
+    fill: #1f2937;
+    stroke: #6b7280;
+  }
+
+  .tree-node-label {
+    fill: #f9fafb;
+  }
+
+  .pruning-legend,
+  .pruning-stats {
+    background: linear-gradient(135deg, rgba(31, 41, 55, 0.95), rgba(17, 24, 39, 0.95));
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #e5e7eb;
+  }
+
+  .legend-title {
+    color: #f9fafb;
+  }
+
+  .stat-label {
+    color: #d1d5db;
+  }
+
+  .stat-value {
+    color: #e5e7eb;
+  }
+}
+
+/* Animations */
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pruning-legend,
+.pruning-stats {
+  animation: slideIn 0.3s ease-out;
+}

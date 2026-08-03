@@ -1,0 +1,234 @@
+.cumulative-salary-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 16px;
+  overflow: hidden;
+}
+
+.cumulative-salary-panel {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.cumulative-salary-panel-head {
+  padding: 12px 16px;
+  background: var(--surface-3);
+  border-bottom: 1px solid var(--border);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+.cumulative-salary-panel-body {
+  padding: 16px;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cumulative-salary-input-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.cumulative-salary-input-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.cumulative-salary-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  min-width: 80px;
+}
+
+.cumulative-salary-input {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  background: #0f172a;
+  color: #f8fafc;
+  font-family: monospace;
+  font-size: 14px;
+  flex: 1;
+  min-width: 120px;
+}
+
+.cumulative-salary-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.cumulative-salary-example-btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: #94a3b8;
+  transition: all 0.2s ease;
+}
+
+.cumulative-salary-example-btn:hover {
+  background: #334155;
+  color: #f8fafc;
+}
+
+.cumulative-salary-table-container {
+  background: var(--surface-3);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+}
+
+.cumulative-salary-table-header {
+  display: grid;
+  grid-template-columns: 80px 100px 120px 120px 120px;
+  gap: 1px;
+  background: var(--border);
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.cumulative-salary-header-cell {
+  padding: 10px 12px;
+  background: var(--surface-3);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-align: right;
+}
+
+.cumulative-salary-header-cell:first-child {
+  text-align: left;
+}
+
+.cumulative-salary-table-body {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.cumulative-salary-row {
+  display: grid;
+  grid-template-columns: 80px 100px 120px 120px 120px;
+  gap: 1px;
+  background: var(--border);
+  padding: 0;
+  align-items: center;
+}
+
+.cumulative-salary-cell {
+  padding: 10px 12px;
+  background: var(--surface-2);
+  font-size: 13px;
+  color: var(--text-main);
+  text-align: right;
+  border-right: 1px solid var(--border);
+}
+
+.cumulative-salary-cell:first-child {
+  text-align: left;
+  background: var(--surface-2);
+}
+
+.cumulative-salary-cell.active {
+  background: #1e3a8a;
+  color: #93c5fd;
+  font-weight: 600;
+}
+
+.cumulative-salary-cell.cumulative {
+  background: #064e3b;
+  color: #6ee7b7;
+  font-weight: 600;
+}
+
+.cumulative-salary-cell.employee-id {
+  background: #1e293b;
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+.cumulative-salary-empty {
+  padding: 24px 16px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.cumulative-salary-summary {
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.cumulative-salary-summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cumulative-salary-summary-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cumulative-salary-summary-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-main);
+  font-family: monospace;
+}
+
+.cumulative-salary-status {
+  padding: 12px 16px;
+  background: var(--surface-3);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--text-main);
+  min-height: 20px;
+  flex-shrink: 0;
+}
+
+.cumulative-salary-status.processing {
+  color: #3b82f6;
+}
+
+.cumulative-salary-status.complete {
+  color: #10b981;
+}
+
+.cumulative-salary-status.error {
+  color: #ef4444;
+}

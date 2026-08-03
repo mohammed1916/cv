@@ -1,0 +1,308 @@
+/* Problem 368: Largest Divisible Subset - Catppuccin Mocha theme */
+:root {
+  --p368-rosewater: #f5e0dc;
+  --p368-flamingo: #f2cdcd;
+  --p368-pink: #f5c2e7;
+  --p368-mauve: #cba6f7;
+  --p368-red: #f38ba8;
+  --p368-maroon: #eba0ac;
+  --p368-peach: #fab387;
+  --p368-yellow: #f9e2af;
+  --p368-green: #a6e3a1;
+  --p368-teal: #94e2d5;
+  --p368-sky: #89dceb;
+  --p368-sapphire: #74c7ec;
+  --p368-blue: #89b4fa;
+  --p368-lavender: #b4befe;
+  --p368-text: #cdd6f4;
+  --p368-subtext1: #bac2de;
+  --p368-subtext0: #a6adc8;
+  --p368-overlay2: #9399b2;
+  --p368-overlay1: #7f849c;
+  --p368-overlay0: #6c7086;
+  --p368-surface2: #585b70;
+  --p368-surface1: #45475a;
+  --p368-surface0: #313244;
+  --p368-base: #1e1e2e;
+  --p368-mantle: #181825;
+  --p368-crust: #11111b;
+}
+
+.p368-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--p368-mantle) 0%, var(--p368-base) 100%);
+  color: var(--p368-text);
+  padding: 2rem;
+  font-family: 'Fira Code', 'Courier New', monospace;
+}
+
+.p368-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  background: rgba(51, 50, 68, 0.5);
+  padding: 2rem;
+  border-radius: 12px;
+  border-left: 4px solid #8b5cf6;
+}
+
+.p368-header h1 {
+  margin: 0 0 0.5rem 0;
+  font-size: 2rem;
+  color: var(--p368-text);
+}
+
+.p368-subtitle {
+  margin: 0;
+  color: var(--p368-subtext0);
+  font-size: 0.95rem;
+}
+
+.p368-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.p368-visualization {
+  background: rgba(45, 47, 65, 0.3);
+  border: 1px solid var(--p368-surface2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 500px;
+  overflow: auto;
+}
+
+.p368-array-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.p368-element {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.p368-element-box {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1rem;
+  border: 2px solid var(--p368-surface2);
+  background: var(--p368-surface1);
+  color: var(--p368-text);
+  transition: all 0.3s ease;
+}
+
+.p368-element-box--highlight {
+  background: #8b5cf6;
+  border-color: #a78bfa;
+  color: var(--p368-crust);
+  transform: scale(1.1);
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.4);
+}
+
+.p368-element-box--current {
+  background: #fbbf24;
+  border-color: #f59e0b;
+  color: var(--p368-crust);
+  transform: scale(1.15);
+  box-shadow: 0 0 12px rgba(251, 191, 36, 0.4);
+}
+
+.p368-chain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: rgba(34, 197, 94, 0.1);
+  border: 2px solid #22c55e;
+  border-radius: 8px;
+}
+
+.p368-chain-element {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 6px;
+  background: #22c55e;
+  color: var(--p368-crust);
+  font-weight: bold;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  animation: p368-pulse 0.6s ease-in-out;
+}
+
+@keyframes p368-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.p368-arrow {
+  font-size: 1.5rem;
+  color: #22c55e;
+}
+
+.p368-dp-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--p368-surface0);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.p368-dp-table th,
+.p368-dp-table td {
+  padding: 0.75rem;
+  text-align: center;
+  border: 1px solid var(--p368-surface2);
+  font-size: 0.9rem;
+}
+
+.p368-dp-table th {
+  background: var(--p368-surface2);
+  color: var(--p368-yellow);
+  font-weight: bold;
+}
+
+.p368-dp-table td {
+  color: var(--p368-text);
+}
+
+.p368-dp-table td.highlight {
+  background: #8b5cf6;
+  color: var(--p368-crust);
+  font-weight: bold;
+}
+
+.p368-step-info {
+  max-width: 1400px;
+  margin: 0 auto 1.5rem;
+  padding: 1rem 1.5rem;
+  background: rgba(45, 47, 65, 0.3);
+  border: 1px solid var(--p368-surface2);
+  border-radius: 8px;
+  border-left: 3px solid #8b5cf6;
+}
+
+.p368-step-description {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--p368-subtext0);
+  font-style: italic;
+}
+
+.p368-story {
+  padding: 1rem;
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid #8b5cf6;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--p368-lavender);
+  margin-top: 1rem;
+}
+
+.p368-story::before {
+  content: '📖 ';
+  margin-right: 0.5rem;
+}
+
+.p368-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1.5rem;
+  background: rgba(45, 47, 65, 0.3);
+  border: 1px solid var(--p368-surface2);
+  border-radius: 8px;
+}
+
+.p368-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.p368-btn--play,
+.p368-btn--next,
+.p368-btn--prev,
+.p368-btn--reset {
+  background: #8b5cf6;
+  color: var(--p368-crust);
+  border: 2px solid #8b5cf6;
+}
+
+.p368-btn--play:hover,
+.p368-btn--next:hover,
+.p368-btn--prev:hover,
+.p368-btn--reset:hover {
+  background: transparent;
+  color: #8b5cf6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.p368-btn--play:active,
+.p368-btn--next:active,
+.p368-btn--prev:active,
+.p368-btn--reset:active {
+  transform: translateY(0);
+}
+
+.p368-step-indicator {
+  color: var(--p368-subtext0);
+  font-size: 0.9rem;
+  font-weight: bold;
+  padding: 0.75rem 1.5rem;
+  background: var(--p368-surface0);
+  border-radius: 4px;
+}
+
+@media (max-width: 1024px) {
+  .p368-content {
+    grid-template-columns: 1fr;
+  }
+
+  .p368-header {
+    padding: 1.5rem;
+  }
+
+  .p368-header h1 {
+    font-size: 1.5rem;
+  }
+}

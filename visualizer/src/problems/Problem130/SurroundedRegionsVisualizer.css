@@ -1,0 +1,31 @@
+.srr-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+  background: #0f172a;
+}
+
+.srr-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: auto;
+  padding: 0;
+}
+
+.srr-status {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  background: #1e293b;
+  border-top: 1px solid #334155;
+  padding: 0 8px;
+  font-size: 11px;
+  color: #94a3b8;
+  overflow: hidden;
+}

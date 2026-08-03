@@ -1,0 +1,42 @@
+.oed-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+}
+
+.oed-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #0f172a;
+}
+
+.oed-panel-head {
+  padding: 12px 16px;
+  background: #1e293b;
+  border-bottom: 1px solid #334155;
+  font-size: 14px;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.oed-panel-body {
+  flex: 1;
+  overflow: auto;
+  padding: 16px;
+}
+
+.oed-status {
+  padding: 12px 16px;
+  background: #1e293b;
+  border-top: 1px solid #334155;
+  font-size: 12px;
+  color: #cbd5e1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
