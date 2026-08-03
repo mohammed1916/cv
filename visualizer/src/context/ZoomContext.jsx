@@ -41,6 +41,8 @@ export function ZoomProvider({ children }) {
       contentWrapper.style.width = `${100 / scale}%`
       contentWrapper.style.minHeight = `${100 / scale}vh`
       contentWrapper.style.marginTop = `${60 / scale}px`
+      contentWrapper.style.setProperty('--zoom-viewport-height', `${100 / scale}vh`)
+      contentWrapper.style.setProperty('--zoom-page-offset', `${200 / scale}px`)
     }
   }, [zoom])
 
