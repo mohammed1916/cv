@@ -9,6 +9,7 @@ const COLLAPSED_FRACTION = 0.0001
 
 export default function LuminoDockPanel({ panels, onPanelReady }) {
   const containerRef = useRef(null)
+  const onPanelReadyRef = useRef(onPanelReady)
   const dockRef = useRef(null)
   const boxRef = useRef(null)
   const widgetRefsRef = useRef({})
@@ -19,6 +20,13 @@ export default function LuminoDockPanel({ panels, onPanelReady }) {
   // Points at applyCollapse so the per-widget minimize button (created in the
   // PanelWidget constructor) can invoke it once defined below.
   const collapseCallbackRef = useRef(null)
+
+  // Parents often provide an inline callback that stores panel DOM nodes in
+  // state. Keep that callback current without treating its identity change as
+  // a reason to dispose and recreate the entire Lumino workspace.
+  useEffect(() => {
+    onPanelReadyRef.current = onPanelReady
+  }, [onPanelReady])
 
   useEffect(() => {
     if (!containerRef.current) return
@@ -177,9 +185,7 @@ export default function LuminoDockPanel({ panels, onPanelReady }) {
     collapseCallbackRef.current = applyCollapse
 
     // Expose the collapse API + panel divs to the parent
-    if (onPanelReady) {
-      onPanelReady(contentDivsRef.current, { applyCollapse })
-    }
+    onPanelReadyRef.current?.(contentDivsRef.current, { applyCollapse })
 
     return () => {
       cancelAnimationFrame(raf)
@@ -190,7 +196,7 @@ export default function LuminoDockPanel({ panels, onPanelReady }) {
         // Already disposed
       }
     }
-  }, [panels.length, onPanelReady])
+  }, [panels.length])
 
   return <div ref={containerRef} className="lumino-dock-container" />
 }
