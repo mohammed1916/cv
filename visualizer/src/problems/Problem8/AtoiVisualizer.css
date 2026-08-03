@@ -3,18 +3,17 @@
   flex-direction: column;
   gap: 1.25rem;
   padding-bottom: 3rem;
-  /* Fill .problem-content (a definite-height flex child) so .atoi-shell can
-     take the space left by the input card and toolbar. No viewport math here —
-     the page's flex chain already accounts for the header. */
+  /* Fill .problem-content so .atoi-shell's `flex: 1 1 0` has a definite height
+     to divide up. No min-height here: with `height: 100%` it would inflate this
+     column past the available space on short windows and push the shell into
+     overflow. .atoi-shell carries the 480px floor instead. */
   height: 100%;
-  min-height: 0;
 }
 
 .atoi-shell {
-  /* Take the space left over after the input card and toolbar rather than a
-     viewport-derived constant. A fixed `calc(100vh - 200px)` was taller than
-     the room remaining below its siblings, so the input card was pushed out of
-     view. flex-basis 0 + grow lets the dock fill exactly what's available.
+  /* Takes the room left below the input card and toolbar. No viewport math: the
+     page's flex chain now supplies a definite height, so this self-corrects when
+     the example grid wraps to more rows or the window is resized.
      min-height keeps Lumino's absolutely-positioned dock from collapsing. */
   flex: 1 1 0;
   min-height: 480px;

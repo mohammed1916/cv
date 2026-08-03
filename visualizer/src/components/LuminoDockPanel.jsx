@@ -124,6 +124,13 @@ export default function LuminoDockPanel({ panels, onPanelReady }) {
 
     const resizeObserver = new ResizeObserver(fit)
     resizeObserver.observe(container)
+    // The container is `position: absolute; inset: 0`, so it reports height 0
+    // until an ancestor supplies a definite one — and `fit()` bails on 0,
+    // leaving the dock unsized. Observing the offset parent means a height that
+    // resolves later (fonts, flex reflow, layout-width change) still triggers a
+    // fit rather than leaving panels stuck at their first measured size.
+    const sizingParent = container.parentElement
+    if (sizingParent) resizeObserver.observe(sizingParent)
     // Page zoom changes the container's layout size without necessarily
     // notifying the observer, so refit on the resize event too (ZoomContext
     // dispatches one after applying a new zoom level).

@@ -657,7 +657,13 @@ export default function App() {
             onToggleNavigationTransitions={setNavigationTransitionsEnabled}
           />
         </div>
-        <div id="zoom-content-wrapper" style={{ flex: 1, marginTop: '60px' }}>
+        {/* minHeight/overflow let this region absorb the 60px toolbar offset and
+            scroll its own content (e.g. the home page) now that .app is a
+            definite 100vh flex column rather than min-height. */}
+        <div
+          id="zoom-content-wrapper"
+          style={{ flex: '1 1 0', minHeight: 0, marginTop: '60px', overflowY: 'auto' }}
+        >
           {navigationTransitionsEnabled ? (
             <AnimatePresence mode="wait">{pageContent}</AnimatePresence>
           ) : (
