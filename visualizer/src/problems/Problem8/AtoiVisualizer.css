@@ -6,8 +6,7 @@
 }
 
 .atoi-shell {
-  /* Keep the dock layout viewport full-sized when page zoom is applied. */
-  height: calc(var(--zoom-viewport-height, 100vh) - var(--zoom-page-offset, 200px));
+  height: calc(100vh - 200px);
   min-height: 480px;
 }
 

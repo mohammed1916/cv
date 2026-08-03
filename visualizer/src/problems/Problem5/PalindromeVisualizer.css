@@ -6,8 +6,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  /* Keep Lumino's layout viewport full-sized after the page is zoomed. */
-  height: calc(var(--zoom-viewport-height, 100vh) - var(--zoom-page-offset, 200px));
+  height: calc(100vh - 200px);
   min-height: 480px;
   gap: 0;
   overflow: hidden;

@@ -105,9 +105,13 @@ export default function LuminoDockPanel({ panels, onPanelReady }) {
     Widget.attach(box, container)
 
     const fit = () => {
-      const rect = container.getBoundingClientRect()
-      const w = Math.max(0, Math.round(rect.width))
-      const h = Math.max(0, Math.round(rect.height))
+      // Use clientWidth/Height, not getBoundingClientRect(): under the CSS
+      // `zoom` the app applies for page zoom, the rect is in scaled device
+      // pixels while these are in unzoomed layout pixels. Lumino sizes and
+      // positions its widgets in layout pixels, so feeding it scaled values
+      // would shrink or overflow the dock at any zoom level other than 100%.
+      const w = Math.max(0, container.clientWidth)
+      const h = Math.max(0, container.clientHeight)
       if (w === 0 || h === 0) return
       box.node.style.position = 'absolute'
       box.node.style.top = '0'
@@ -120,6 +124,10 @@ export default function LuminoDockPanel({ panels, onPanelReady }) {
 
     const resizeObserver = new ResizeObserver(fit)
     resizeObserver.observe(container)
+    // Page zoom changes the container's layout size without necessarily
+    // notifying the observer, so refit on the resize event too (ZoomContext
+    // dispatches one after applying a new zoom level).
+    window.addEventListener('resize', fit)
     const raf = requestAnimationFrame(fit)
 
     // ── Minimize / restore ────────────────────────────────────────────
@@ -190,6 +198,7 @@ export default function LuminoDockPanel({ panels, onPanelReady }) {
     return () => {
       cancelAnimationFrame(raf)
       resizeObserver.disconnect()
+      window.removeEventListener('resize', fit)
       try {
         box.dispose()
       } catch (e) {

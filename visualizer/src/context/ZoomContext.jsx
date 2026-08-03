@@ -30,19 +30,30 @@ export function ZoomProvider({ children }) {
 
   useEffect(() => {
     const contentWrapper = document.getElementById('zoom-content-wrapper')
-    if (contentWrapper) {
-      const scale = zoom / 100
+    if (!contentWrapper) return
 
-      // CSS transforms only change painting, not layout. Without compensating
-      // for that, zooming out leaves the right and bottom of the viewport
-      // unused because the wrapper still lays out at its unscaled size.
-      contentWrapper.style.transform = `scale(${scale})`
-      contentWrapper.style.transformOrigin = 'top left'
-      contentWrapper.style.width = `${100 / scale}%`
-      contentWrapper.style.minHeight = `${100 / scale}vh`
-      contentWrapper.style.marginTop = `${60 / scale}px`
-      contentWrapper.style.setProperty('--zoom-viewport-height', `${100 / scale}vh`)
-      contentWrapper.style.setProperty('--zoom-page-offset', `${200 / scale}px`)
+    const scale = zoom / 100
+
+    // Use the CSS `zoom` property rather than `transform: scale()`. A transform
+    // is paint-only: it never re-runs layout, and `vh` units keep resolving
+    // against the unscaled viewport — so panels sized `calc(100vh - 200px)`
+    // kept their original height and the page never reflowed. `zoom` performs
+    // real layout and rescales `vh`, so every panel reflows with no
+    // per-problem CSS. Applied to the wrapper (not documentElement) so the
+    // position: fixed panels portaled to document.body stay at native size.
+    contentWrapper.style.zoom = scale
+
+    // Zooming changes the layout size of every panel, but a ResizeObserver on
+    // a zoomed subtree does not reliably report that on its own. Lumino only
+    // re-lays-out its dock when it receives a resize, so poke the observers
+    // once the new zoom has been applied.
+    const raf = requestAnimationFrame(() => {
+      window.dispatchEvent(new Event('resize'))
+    })
+
+    return () => {
+      cancelAnimationFrame(raf)
+      contentWrapper.style.zoom = ''
     }
   }, [zoom])
 
