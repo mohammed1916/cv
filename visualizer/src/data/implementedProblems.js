@@ -73,7 +73,10 @@ export const BASICS_PROBLEMS = [
 
 export function buildCatalogProblems(catalogProblems) {
   return catalogProblems.map((problem) => {
-    const implemented = IMPLEMENTED_BY_NUMBER.get(problem.number);
+    // Catalog data uses numeric IDs while meta.js commonly stores them as
+    // strings. Normalize before lookup so existing visualizers (for example,
+    // #8 String to Integer) are not incorrectly shown as catalog-only.
+    const implemented = IMPLEMENTED_BY_NUMBER.get(String(problem.number));
     if (!implemented) {
       return {
         ...problem,
