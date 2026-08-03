@@ -4,12 +4,21 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem369Visualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('plus-one-linked-list')
+
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []
 
 const EXAMPLES = getExamples('plus-one-linked-list') || [
   { label: 'Example 1: 999→1000', values: [9, 9, 9] },
@@ -180,13 +189,23 @@ export default function Problem369Visualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-        />
+        <div style={{ position: 'relative' }}>
+          <CodeTracePanel
+            step={step}
+            codeLines={SOLUTION_CODE}
+            highlightedLines={connectivity.highlightedLines}
+            onLineSelect={connectivity.handleLineSelect}
+            onActiveLineDomChange={setActiveLineDom}
+          />
+          {step && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step.activeLine}
+            />
+          )}
+        </div>
       ),
     },
     { id: 'viz', title: '🔗 Plus One', content: (<VisualizationPanel step={step} />) },

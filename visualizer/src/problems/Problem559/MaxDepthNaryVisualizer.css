@@ -1,0 +1,6 @@
+/* Maximum Depth N-ary Tree Visualizer Styles */
+.problem-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}

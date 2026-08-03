@@ -9,7 +9,12 @@ import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import "./ContainsDuplicateVisualizer.css"
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
   { line: 1, text: "def containsDuplicate(nums):" },
   { line: 2, text: "    seen = set()" },
@@ -251,3 +256,4 @@ export default function ContainsDuplicateVisualizer() {
     </div>
   )
 }
+

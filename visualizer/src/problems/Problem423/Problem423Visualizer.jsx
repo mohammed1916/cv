@@ -4,12 +4,20 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem423Visualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+
+// Pattern annotations
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []
+
+
 
 const EXAMPLES = getExamples('reconstruct-original-digits') || [
   { label: 'Example 1', s: 'owoztneoer' },
@@ -175,7 +183,7 @@ export default function Problem423Visualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      
     </div>
   )
 }

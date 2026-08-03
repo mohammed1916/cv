@@ -1,4 +1,5 @@
-import { useState, useMemo, useCallback } from "react";
+﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -7,7 +8,15 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./CopyListRandomVisualizer.css";
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
+
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
     { line: 1, text: "def copyRandomList(head):" },
     { line: 2, text: "    oldToNew = {None: None}" },
@@ -76,8 +85,9 @@ export default function CopyListRandomVisualizer() {
     const cur = step?.cur ?? -1;
     const cloned = step?.cloned ?? new Set();
 
-    return (
-        <div className="clr-shell">
+    // ─── Panel constants ───────────────────────────────────────────────────
+    const primaryPanel = (
+        <div className="clr-panel" style={{ position: 'relative', height: '100%', overflowY: 'auto' }}>
             <div className="clr-controls-row">
                 <div className="clr-examples">
                     {EXAMPLES.map((ex, i) => (
@@ -131,9 +141,28 @@ export default function CopyListRandomVisualizer() {
                     </div>
                 </div>
             )}
+        </div>
+    );
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-            <div className="clr-status">{step?.message ?? "Press Play to begin."}</div>
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                disableResizer
+            />
+            {showPatternOverlay && <CodePatternAnnotations step={step} activeLineDom={activeLineDom} />}
+        </div>
+    );
+
+    const statusPanel = (
+        <div className="clr-status">{step?.message ?? "Press Play to begin."}</div>
+    );
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -144,7 +173,35 @@ export default function CopyListRandomVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+        </>
+    );
+
+    // ─── Lumino panel config ───────────────────────────────────────────────
+    const [panelDivs, setPanelDivs] = useState(null);
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Copy List Random', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    );
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
+
+    return (
+        <div className="clr-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     );
 }

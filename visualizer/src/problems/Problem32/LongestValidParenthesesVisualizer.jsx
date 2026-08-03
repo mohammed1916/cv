@@ -1,16 +1,17 @@
-import { useState, useMemo, useCallback } from "react";
+﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
-import { getExamples } from "../../config/examplesRegistry";
+import { getExamples } from "../../config/examplesRegistry"
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend";
 import "./LongestValidParenthesesVisualizer.css";
-
 const SOLUTION_CODE = [
   { line: 1, text: "def longestValidParentheses(s):" },
   { line: 2, text: "    stack = [-1]" },
@@ -26,6 +27,22 @@ const SOLUTION_CODE = [
   { line: 12, text: "                max_len = max(max_len, i - stack[-1])" },
   { line: 13, text: "    return max_len" },
 ];
+
+
+
+const LONGESTVALIDPARENTHESES_PATTERNS = ['calculate_len', 'check', 'check_close', 'done', 'init', 'pop', 'push_current', 'push_open', 'stack_empty']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  2: 'init',
+  5: 'check',
+  6: 'push_open',
+  7: 'check_close',
+  8: 'pop',
+  10: 'stack_empty',
+  12: 'calculate_len',
+  13: 'done',
+}
 
 function generateSteps(s) {
   const steps = [];
@@ -172,221 +189,265 @@ export default function LongestValidParenthesesVisualizer() {
   const maxLen = step?.maxLen ?? 0;
   const charIdx = step?.charIdx ?? -1;
 
-  const dockPanels = useMemo(
-    () => [
-      {
-        id: "input",
-        title: "Input Controls",
-        subtitle: `Length: ${input.length}`,
-        defaultZone: "left",
-        content: (
-          <div style={{ display: "flex", flexDirection: "column", gap: 16, padding: 16 }}>
-            <div>
-              <div style={{ fontSize: 13, fontWeight: 600, color: "#1e293b", marginBottom: 8 }}>
-                Examples
-              </div>
-              <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-                {EXAMPLES.map((ex) => (
-                  <button
-                    key={ex.label}
-                    onClick={() => applyExample(ex)}
-                    style={{
-                      padding: "6px 12px",
-                      borderRadius: 4,
-                      border: input === ex.s ? "2px solid #0ea5e9" : "1px solid #cbd5e1",
-                      cursor: "pointer",
-                      fontSize: 12,
-                      backgroundColor: input === ex.s ? "#e0f2fe" : "#f1f5f9",
-                      fontWeight: input === ex.s ? 600 : 400,
-                      color: "#1e293b",
-                    }}
-                  >
-                    {ex.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <label style={{ fontSize: 13, fontWeight: 600, color: "#1e293b", display: "block", marginBottom: 8 }}>
-                String
-              </label>
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => {
-                  setInput(e.target.value);
-                  handleReset();
-                }}
-                placeholder='e.g., ")()())"'
+  // Step 3: Extract panels into consts
+  const inputPanel = (
+    <div className="lvp-panel">
+      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: "#1e293b", marginBottom: 8 }}>
+            Examples
+          </div>
+          <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+            {EXAMPLES.map((ex) => (
+              <button
+                key={ex.label}
+                onClick={() => applyExample(ex)}
                 style={{
-                  width: "100%",
-                  padding: "8px 12px",
-                  border: "1px solid #cbd5e1",
+                  padding: "6px 12px",
                   borderRadius: 4,
-                  fontSize: 13,
-                  fontFamily: "monospace",
-                  boxSizing: "border-box",
+                  border: input === ex.s ? "2px solid #0ea5e9" : "1px solid #cbd5e1",
+                  cursor: "pointer",
+                  fontSize: 12,
+                  backgroundColor: input === ex.s ? "#e0f2fe" : "#f1f5f9",
+                  fontWeight: input === ex.s ? 600 : 400,
+                  color: "#1e293b",
                 }}
-              />
-            </div>
+              >
+                {ex.label}
+              </button>
+            ))}
           </div>
-        ),
-      },
-      {
-        id: "viz",
-        title: "Stack Visualization",
-        subtitle: step ? `Step ${stepIndex + 1} of ${steps.length}` : "Press play to start",
-        defaultZone: "right",
-        content: (
-          <div style={{ display: "flex", flexDirection: "column", gap: 16, padding: 16 }}>
-            <div>
-              <div style={{ fontSize: 13, fontWeight: 600, color: "#1e293b", marginBottom: 8 }}>
-                String: {step?.charIdx >= 0 ? `Index ${step.charIdx}` : ""}
-              </div>
-              <div style={{ display: "flex", gap: 3, flexWrap: "wrap", minHeight: 40, padding: 8, backgroundColor: "#f8fafc", borderRadius: 4 }}>
-                {chars.map((ch, i) => (
-                  <motion.span
-                    key={i}
-                    animate={{
-                      scale: i === charIdx ? 1.5 : 1,
-                      backgroundColor:
-                        i === charIdx
-                          ? "#fbbf24"
-                          : ch === "("
-                          ? "#dbeafe"
-                          : "#fee2e2",
-                    }}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      width: 32,
-                      height: 32,
-                      fontSize: 14,
-                      fontWeight: "bold",
-                      borderRadius: 4,
-                      color: "#1e293b",
-                      border: i === charIdx ? "2px solid #d97706" : "none",
-                    }}
-                  >
-                    {ch}
-                  </motion.span>
-                ))}
-              </div>
-            </div>
+        </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-              <div>
-                <div style={{ fontSize: 13, fontWeight: 600, color: "#1e293b", marginBottom: 8 }}>
-                  Stack (top→bottom)
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column-reverse",
-                    gap: 6,
-                    minHeight: 100,
-                    padding: 8,
-                    backgroundColor: "#f8fafc",
-                    borderRadius: 4,
-                  }}
-                >
-                  <AnimatePresence>
-                    {stack.map((val, i) => (
-                      <motion.div
-                        key={`${i}-${val}`}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0 }}
-                        style={{
-                          padding: "8px 12px",
-                          backgroundColor: i === stack.length - 1 ? "#dbeafe" : "#e0e7ff",
-                          border: i === stack.length - 1 ? "1px solid #0ea5e9" : "1px solid #c7d2fe",
-                          borderRadius: 4,
-                          fontSize: 13,
-                          fontWeight: "bold",
-                          color: "#1e293b",
-                        }}
-                      >
-                        {val}
-                      </motion.div>
-                    ))}
-                  </AnimatePresence>
-                </div>
-              </div>
-
-              <div>
-                <div style={{ fontSize: 13, fontWeight: 600, color: "#1e293b", marginBottom: 8 }}>
-                  Max Length
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    minHeight: 100,
-                    padding: 16,
-                    backgroundColor: "#f0fdf4",
-                    border: "2px solid #22c55e",
-                    borderRadius: 4,
-                  }}
-                >
-                  <motion.div
-                    animate={{ scale: step?.phase === "calculate_len" ? 1.2 : 1 }}
-                    style={{
-                      fontSize: 48,
-                      fontWeight: "bold",
-                      color: "#16a34a",
-                    }}
-                  >
-                    {maxLen}
-                  </motion.div>
-                </div>
-              </div>
-            </div>
-
-            {step?.currentLen !== undefined && (
-              <div style={{ padding: 12, backgroundColor: "#e0f2fe", borderRadius: 4, borderLeft: "4px solid #0ea5e9" }}>
-                <div style={{ fontSize: 12, color: "#0c4a6e", fontWeight: 600 }}>
-                  Current length: {step.currentLen}
-                </div>
-              </div>
-            )}
-
-            <div style={{ padding: 12, backgroundColor: "#f0fdf4", borderRadius: 4 }}>
-              <div style={{ fontSize: 12, color: "#166534", fontWeight: 500 }}>
-                {step?.message ?? "Press Play to begin."}
-              </div>
-            </div>
-          </div>
-        ),
-      },
-      {
-        id: "code",
-        title: "Code Trace",
-        subtitle: step ? `Line ${step.activeLine}` : "Trace the algorithm",
-        defaultZone: "full",
-        content: (
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            onActiveLineDomChange={setActiveLineDom}
-            autoScroll={autoScrollCode}
+        <div>
+          <label style={{ fontSize: 13, fontWeight: 600, color: "#1e293b", display: "block", marginBottom: 8 }}>
+            String
+          </label>
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => {
+              setInput(e.target.value);
+              handleReset();
+            }}
+            placeholder='e.g., ")()())"'
+            style={{
+              width: "100%",
+              padding: "8px 12px",
+              border: "1px solid #cbd5e1",
+              borderRadius: 4,
+              fontSize: 13,
+              fontFamily: "monospace",
+              boxSizing: "border-box",
+            }}
           />
-        ),
-      },
-    ],
-    [input, stepIndex, steps, step, applyExample, charIdx, stack, maxLen, autoScrollCode, setActiveLineDom]
+        </div>
+      </div>
+    </div>
   );
 
+  const vizPanel = (
+    <div className="lvp-panel">
+      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: "#1e293b", marginBottom: 8 }}>
+            String: {step?.charIdx >= 0 ? `Index ${step.charIdx}` : ""}
+          </div>
+          <div style={{ display: "flex", gap: 3, flexWrap: "wrap", minHeight: 40, padding: 8, backgroundColor: "#f8fafc", borderRadius: 4 }}>
+            {chars.map((ch, i) => (
+              <motion.span
+                key={i}
+                animate={{
+                  scale: i === charIdx ? 1.5 : 1,
+                  backgroundColor:
+                    i === charIdx
+                      ? "#fbbf24"
+                      : ch === "("
+                      ? "#dbeafe"
+                      : "#fee2e2",
+                }}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: 32,
+                  height: 32,
+                  fontSize: 14,
+                  fontWeight: "bold",
+                  borderRadius: 4,
+                  color: "#1e293b",
+                  border: i === charIdx ? "2px solid #d97706" : "none",
+                }}
+              >
+                {ch}
+              </motion.span>
+            ))}
+          </div>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+          <div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: "#1e293b", marginBottom: 8 }}>
+              Stack (top→bottom)
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column-reverse",
+                gap: 6,
+                minHeight: 100,
+                padding: 8,
+                backgroundColor: "#f8fafc",
+                borderRadius: 4,
+              }}
+            >
+              <AnimatePresence>
+                {stack.map((val, i) => (
+                  <motion.div
+                    key={`${i}-${val}`}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0 }}
+                    style={{
+                      padding: "8px 12px",
+                      backgroundColor: i === stack.length - 1 ? "#dbeafe" : "#e0e7ff",
+                      border: i === stack.length - 1 ? "1px solid #0ea5e9" : "1px solid #c7d2fe",
+                      borderRadius: 4,
+                      fontSize: 13,
+                      fontWeight: "bold",
+                      color: "#1e293b",
+                    }}
+                  >
+                    {val}
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </div>
+          </div>
+
+          <div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: "#1e293b", marginBottom: 8 }}>
+              Max Length
+            </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                minHeight: 100,
+                padding: 16,
+                backgroundColor: "#f0fdf4",
+                border: "2px solid #22c55e",
+                borderRadius: 4,
+              }}
+            >
+              <motion.div
+                animate={{ scale: step?.phase === "calculate_len" ? 1.2 : 1 }}
+                style={{
+                  fontSize: 48,
+                  fontWeight: "bold",
+                  color: "#16a34a",
+                }}
+              >
+                {maxLen}
+              </motion.div>
+            </div>
+          </div>
+        </div>
+
+        {step?.currentLen !== undefined && (
+          <div style={{ padding: 12, backgroundColor: "#e0f2fe", borderRadius: 4, borderLeft: "4px solid #0ea5e9" }}>
+            <div style={{ fontSize: 12, color: "#0c4a6e", fontWeight: 600 }}>
+              Current length: {step.currentLen}
+            </div>
+          </div>
+        )}
+
+        <div style={{ padding: 12, backgroundColor: "#f0fdf4", borderRadius: 4 }}>
+          <div style={{ fontSize: 12, color: "#166534", fontWeight: 500 }}>
+            {step?.message ?? "Press Play to begin."}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const codePanel = (
+    <div style={{ position: "relative", height: "100%" }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        onActiveLineDomChange={setActiveLineDom}
+        autoScroll={autoScrollCode}
+        disableResizer
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
+        />
+      )}
+    </div>
+  );
+
+  const statusPanel = (
+    <div className="lvp-status" style={{ padding: 12, backgroundColor: "#f0fdf4", borderRadius: 4 }}>
+      <div style={{ fontSize: 12, color: "#166534", fontWeight: 500 }}>
+        Status: {step?.phase ?? "Ready"} | Step {stepIndex + 1} of {steps.length}
+      </div>
+    </div>
+  );
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={LONGESTVALIDPARENTHESES_PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+        autoScroll={autoScrollCode}
+        onAutoScrollChange={setAutoScrollCode}
+        autoScrollLabel="Auto-scroll code"
+        showAutoScroll
+      />
+    </>
+  );
+
+  // Step 4: Add state + config
+  const [panelDivs, setPanelDivs] = useState(null);
+  const panelConfigs = useMemo(
+    () => [
+      { id: "input", title: "Input Controls", dockMode: "split-right" },
+      { id: "viz", title: "Stack Visualization", dockMode: "split-right" },
+      { id: "code", title: "Code Trace", dockMode: "split-bottom" },
+      { id: "status", title: "Status", dockMode: "split-bottom", ratio: 0.08 },
+    ],
+    []
+  );
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
+
+  // Step 5: Replace return block
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: "100vh", backgroundColor: "#fafafa" }}>
-      <section style={{ padding: "24px 32px", backgroundColor: "white", borderBottom: "1px solid #e2e8f0" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <span style={{ fontSize: 13, fontWeight: 600, color: "#64748b", textTransform: "uppercase" }}>
-            Longest Valid Parentheses
-          </span>
+    <div className="lvp-shell">
+      <section className="lvp-hero">
+        <div className="lvp-hero-copy">
+          <span className="lvp-kicker">Longest Valid Parentheses</span>
           <h2 style={{ marginTop: 8, marginBottom: 12, fontSize: 28, fontWeight: 700, color: "#1e293b" }}>
             Find the longest valid parentheses substring
           </h2>
@@ -398,44 +459,21 @@ export default function LongestValidParenthesesVisualizer() {
       </section>
 
       <div style={{ flex: 1, overflow: "hidden" }}>
-        <DockableWorkspace
-          title="Longest Valid Parentheses Workspace"
-          panels={dockPanels}
-          initialLayout={{
-            rows: [
-              ["input", "viz"],
-              ["code", "code"],
-            ],
-            minimized: [],
-          }}
-        />
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+            {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+            {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+            {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+          </>
+        )}
+        {createPortal(
+          <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+          document.body
+        )}
       </div>
-
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-          autoScroll={autoScrollCode}
-          onAutoScrollChange={setAutoScrollCode}
-          autoScrollLabel="Auto-scroll code"
-          showAutoScroll
-        />
-      </FloatingPanel>
-
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   );
 }
+

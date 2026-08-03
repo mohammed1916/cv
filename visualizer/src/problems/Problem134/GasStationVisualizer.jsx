@@ -1,6 +1,7 @@
-import { useState, useMemo, useCallback } from "react";
+﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from "framer-motion";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -10,7 +11,12 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./GasStationVisualizer.css";
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const EXAMPLES = getExamples('gas-station');
 
 const SOLUTION_CODE_INLINE = [
@@ -194,60 +200,89 @@ export default function GasStationVisualizer() {
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
 
-  const dockPanels = useMemo(() => [
-    {
-      id: 'code',
-      title: 'Code',
-      content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-        />
-      ),
-    },
-    {
-      id: 'viz',
-      title: '🚗 Road Trip',
-      content: (
-        <VisualizationPanel
-          gas={ex.gas}
-          cost={ex.cost}
-          step={step}
-          applyEx={applyEx}
-        />
-      ),
-    },
-  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx]);
+  // Panel contents
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+      {showPatternOverlay && <CodePatternAnnotations step={step} activeLineDom={activeLineDom} />}
+    </div>
+  )
+
+  const vizPanel = (
+    <div className="gs-panel">
+      <VisualizationPanel
+        gas={ex.gas}
+        cost={ex.cost}
+        step={step}
+        applyEx={applyEx}
+      />
+    </div>
+  )
+
+  const statusPanel = (
+    <div className="gs-status">
+      {step?.message || 'Initialize...'}
+    </div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
+
+  // Lumino state and config
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
+      { id: 'viz', title: '🚗 Road Trip', dockMode: 'split-right' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
-    <div className="problem-shell">
-      <DockableWorkspace
-        panels={dockPanels}
-        initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
-      />
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
+    <div className="gs-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   );
 }
+

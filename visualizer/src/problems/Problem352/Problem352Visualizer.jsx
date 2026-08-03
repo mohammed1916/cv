@@ -1,18 +1,34 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem352Visualizer.css'
+import PatternOverlay from "../../components/PatternOverlay";
+
+const PATTERNS = ['collision-self', 'collision-wall', 'direction', 'eat-food', 'idle', 'init', 'move-forward', 'state-update']
+const LINE_PATTERN_MAP = {
+  0: 'idle',
+  4: 'init',
+  8: 'direction',
+  10: 'collision-wall',
+  12: 'eat-food',
+  14: 'move-forward',
+  15: 'state-update'
+}
+
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'from collections import deque' },
+
   { line: 2, text: 'class SnakeGame:' },
   { line: 3, text: '    def __init__(self, h, w, food):' },
   { line: 4, text: '        self.body = deque([(0,0)])' },
@@ -29,6 +45,7 @@ const SOLUTION_CODE_INLINE = [
   { line: 15, text: '        return len(self.body)' },
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
+const solutionCode = SOLUTION_CODE
 
 const GRID_SIZE = 10
 const CELL_SIZE = 40
@@ -472,7 +489,7 @@ export default function DesignSnakeGameVisualizer() {
         {step?.message || 'Press Play or Step to begin.'}
       </div>
 
-      <div className="dsg-dock">
+      <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -490,7 +507,7 @@ export default function DesignSnakeGameVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
-      </div>
+      </FloatingPanel>
 
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>

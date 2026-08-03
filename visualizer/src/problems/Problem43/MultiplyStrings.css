@@ -9,10 +9,12 @@
 }
 
 .ms-shell {
+  position: relative;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  gap: 14px;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
   overflow: hidden;
 }
 
@@ -283,6 +285,18 @@
 .ms-trace-result span {
   color: var(--ms-accent);
   font-weight: 700;
+}
+
+.ms-status {
+  background: var(--ms-surface2);
+  border-top: 1px solid var(--ms-border);
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  color: var(--ms-text-muted);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  white-space: nowrap;
 }
 
 /* Responsive */

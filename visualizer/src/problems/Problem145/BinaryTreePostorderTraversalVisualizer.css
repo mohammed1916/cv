@@ -1,6 +1,25 @@
-.problem-shell {
+.btp-shell {
+  position: relative;
   display: flex;
   flex-direction: column;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+}
+
+.btp-panel {
+  position: relative;
   height: 100%;
+  overflow: auto;
   background: #0f172a;
+}
+
+.btp-status {
+  position: relative;
+  height: 100%;
+  overflow: auto;
+  background: #0f172a;
+  border-top: 1px solid #334155;
+  padding: 0;
 }

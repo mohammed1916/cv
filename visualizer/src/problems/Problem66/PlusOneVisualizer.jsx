@@ -1,35 +1,47 @@
-import { useState, useMemo, useCallback } from "react";
+﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from "framer-motion";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./PlusOneVisualizer.css";
-
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('plus-one')
 const EXAMPLES = getExamples('plus-one');
+
+const PLUSONE_PATTERNS = ['init', 'loop', 'carry', 'append']
+
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  3: 'loop',
+  6: 'carry',
+  7: 'append',
+}
 
 function generateSteps(digIn) {
     const steps = [];
     const arr = [...digIn];
-    steps.push({ activeLine: 1, arr: [...arr], i: -1, carry: false, message: `Start: [${arr.join(", ")}] + 1` });
+    steps.push({ phase: 'init', activeLine: 1, arr: [...arr], i: -1, carry: false, message: `Start: [${arr.join(", ")}] + 1` });
     for (let i = arr.length - 1; i >= 0; i--) {
-        steps.push({ activeLine: 3, arr: [...arr], i, carry: false, message: `i=${i}: digits[${i}] = ${arr[i]}` });
+        steps.push({ phase: 'loop', activeLine: 3, arr: [...arr], i, carry: false, message: `i=${i}: digits[${i}] = ${arr[i]}` });
         if (arr[i] < 9) {
             arr[i] += 1;
-            steps.push({ activeLine: 4, arr: [...arr], i, carry: false, message: `digits[${i}] < 9 → increment to ${arr[i]}` });
-            steps.push({ activeLine: 5, arr: [...arr], i, carry: false, done: true, message: `Return [${arr.join(", ")}]` });
+            steps.push({ phase: 'append', activeLine: 4, arr: [...arr], i, carry: false, message: `digits[${i}] < 9 → increment to ${arr[i]}` });
+            steps.push({ phase: 'append', activeLine: 5, arr: [...arr], i, carry: false, done: true, message: `Return [${arr.join(", ")}]` });
             return steps;
         }
         arr[i] = 0;
-        steps.push({ activeLine: 6, arr: [...arr], i, carry: true, message: `digits[${i}] = 9 → set to 0, carry` });
+        steps.push({ phase: 'carry', activeLine: 6, arr: [...arr], i, carry: true, message: `digits[${i}] = 9 → set to 0, carry` });
     }
     const result = [1, ...arr];
-    steps.push({ activeLine: 7, arr: result, i: -1, carry: false, done: true, message: `All digits were 9 → prepend 1: [${result.join(", ")}]` });
+    steps.push({ phase: 'append', activeLine: 7, arr: result, i: -1, carry: false, done: true, message: `All digits were 9 → prepend 1: [${result.join(", ")}]` });
     return steps;
 }
 
@@ -182,60 +194,93 @@ export default function PlusOneVisualizer() {
 
     const arr = step?.arr ?? ex.digits;
 
-    const dockPanels = useMemo(() => [
-      {
-        id: 'code',
-        title: 'Code',
-        content: (
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-            onActiveLineDomChange={setActiveLineDom}
+    // Extract panels into consts
+    const codePanel = (
+      <div style={{position: 'relative', height: '100%'}}>
+        <CodeTracePanel
+          step={step}
+          codeLines={SOLUTION_CODE}
+          highlightedLines={connectivity.highlightedLines}
+          onLineSelect={connectivity.handleLineSelect}
+          onActiveLineDomChange={setActiveLineDom}
+          disableResizer
+        />
+        {showPatternOverlay && (
+          <CodePatternAnnotations
+            linePatterns={LINE_PATTERN_MAP}
+            currentPhase={step?.phase}
+            activeLineDom={activeLineDom}
+            activeLine={step?.activeLine}
           />
-        ),
-      },
-      {
-        id: 'viz',
-        title: '🧮 Domino Chain',
-        content: (
-          <VisualizationPanel
-            arr={arr}
-            step={step}
-            ex={ex}
-            applyEx={applyEx}
-          />
-        ),
-      },
-    ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, arr, ex, applyEx]);
+        )}
+      </div>
+    )
+    const vizPanel = (
+      <div className="po-panel">
+        <VisualizationPanel
+          arr={arr}
+          step={step}
+          ex={ex}
+          applyEx={applyEx}
+        />
+      </div>
+    )
+    const statusPanel = (
+      <div className="po-status">
+        {step?.message || 'Ready to start'}
+      </div>
+    )
+    const playbackPanel = (
+      <>
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PLUSONE_PATTERNS} />
+        )}
+        <PlaybackControls
+          isPlaying={isPlaying}
+          isDone={isDone}
+          speed={speed}
+          onPlayToggle={togglePlay}
+          onPrev={stepBack}
+          onNext={stepForward}
+          onReset={handleReset}
+          prevDisabled={stepIndex < 0}
+          nextDisabled={isDone}
+          resetDisabled={stepIndex < 0}
+          onSpeedChange={e => setSpeed(Number(e.target.value))}
+          showPatternOverlay={showPatternOverlay}
+          onShowPatternOverlayChange={setShowPatternOverlay}
+          patternOverlayLabel="Show pattern overlay"
+          showPatternOverlayToggle
+        />
+      </>
+    )
+
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+      () => [
+        { id: 'code', title: 'Code', dockMode: 'split-right' },
+        { id: 'viz', title: '🧮 Domino Chain', dockMode: 'split-right' },
+        { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+      ],
+      []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
-      <div className="problem-shell">
-        <DockableWorkspace
-          panels={dockPanels}
-          initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
-        />
-        <FloatingPanel title="Playback Controls">
-          <PlaybackControls
-            isPlaying={isPlaying}
-            isDone={isDone}
-            speed={speed}
-            onPlayToggle={togglePlay}
-            onPrev={stepBack}
-            onNext={stepForward}
-            onReset={handleReset}
-            prevDisabled={stepIndex < 0}
-            nextDisabled={isDone}
-            resetDisabled={stepIndex < 0}
-            onSpeedChange={e => setSpeed(Number(e.target.value))}
-            showPatternOverlay={showPatternOverlay}
-            onShowPatternOverlayChange={setShowPatternOverlay}
-            patternOverlayLabel="Show pattern overlay"
-            showPatternOverlayToggle
-          />
-        </FloatingPanel>
-        {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      <div className="po-shell">
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+            {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+            {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+          </>
+        )}
+        {createPortal(
+          <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+          document.body
+        )}
       </div>
     );
 }
+

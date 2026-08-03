@@ -1,4 +1,5 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -8,7 +9,15 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './BestTimeBuySellStockVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
+
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
     { line: 1, text: 'class Solution:' },
     { line: 2, text: '    def maxProfit(self, prices: List[int]) -> int:' },
@@ -158,102 +167,114 @@ export default function BestTimeBuySellStockVisualizer() {
 
     const barH = (val) => Math.max(4, (val / maxVal) * 160)
 
-    return (
-        <div className="btbs-shell">
-            <section className="btbs-panel">
-                <header className="btbs-head">
-                    <span>Best Time to Buy and Sell Stock · Greedy One Pass</span>
-                    {inputError && <span className="btbs-error">{inputError}</span>}
-                </header>
-                <div className="btbs-body">
-                    <div className="btbs-top-row">
-                        <div className="btbs-examples">
-                            {EXAMPLES.map((ex) => (
-                                <button key={ex.label} className="btbs-chip" onClick={() => applyExample(ex)}>
-                                    {ex.label}
-                                </button>
-                            ))}
-                        </div>
-                        <input
-                            className="btbs-input"
-                            value={pricesInput}
-                            onChange={(e) => { setPricesInput(e.target.value); handleReset() }}
-                            placeholder="[7,1,5,3,6,4]"
-                        />
+    // Step 3: Extract panels into consts
+    const primaryPanel = (
+        <section className="btbs-panel">
+            <header className="btbs-head">
+                <span>Best Time to Buy and Sell Stock · Greedy One Pass</span>
+                {inputError && <span className="btbs-error">{inputError}</span>}
+            </header>
+            <div className="btbs-body">
+                <div className="btbs-top-row">
+                    <div className="btbs-examples">
+                        {EXAMPLES.map((ex) => (
+                            <button key={ex.label} className="btbs-chip" onClick={() => applyExample(ex)}>
+                                {ex.label}
+                            </button>
+                        ))}
                     </div>
+                    <input
+                        className="btbs-input"
+                        value={pricesInput}
+                        onChange={(e) => { setPricesInput(e.target.value); handleReset() }}
+                        placeholder="[7,1,5,3,6,4]"
+                    />
+                </div>
 
-                    {/* Stats bar */}
-                    <div className="btbs-stats">
-                        <div className="btbs-stat">
-                            <span className="btbs-stat-label">minPrice</span>
-                            <span className="btbs-stat-val mono">{minPrice === Infinity ? '∞' : minPrice}</span>
-                        </div>
-                        <div className="btbs-stat">
-                            <span className="btbs-stat-label">maxProfit</span>
-                            <span className={`btbs-stat-val mono${maxProfit > 0 ? ' profit' : ''}`}>{maxProfit}</span>
-                        </div>
-                        {bestBuy >= 0 && (
-                            <div className="btbs-stat best">
-                                <span className="btbs-stat-label">best trade</span>
-                                <span className="btbs-stat-val mono">
-                                    buy [{bestBuy}]={prices[bestBuy]} → sell [{bestSell}]={prices[bestSell]}
-                                </span>
-                            </div>
-                        )}
+                {/* Stats bar */}
+                <div className="btbs-stats">
+                    <div className="btbs-stat">
+                        <span className="btbs-stat-label">minPrice</span>
+                        <span className="btbs-stat-val mono">{minPrice === Infinity ? '∞' : minPrice}</span>
                     </div>
-
-                    {/* Bar chart */}
-                    <div className="btbs-chart">
-                        {displayPrices.map((price, idx) => {
-                            const isCurr = currI === idx
-                            const isMinIdx = minIdx === idx
-                            const isSellIdx = sellIdx === idx
-                            const isBestBuy = step?.phase === 'done' && bestBuy === idx
-                            const isBestSell = step?.phase === 'done' && bestSell === idx
-                            const h = barH(price)
-                            return (
-                                <div key={idx} className="btbs-bar-wrap">
-                                    <span className="btbs-price-label mono">{price}</span>
-                                    <motion.div
-                                        className={`btbs-bar${isCurr ? ' curr' : ''}${isMinIdx && !isCurr ? ' minbar' : ''}${isSellIdx ? ' sellbar' : ''}${isBestBuy ? ' bestbuy' : ''}${isBestSell ? ' bestsell' : ''}`}
-                                        animate={{ height: h, scale: isCurr ? 1.1 : 1 }}
-                                        transition={{ type: 'spring', stiffness: 360, damping: 28 }}
-                                    />
-                                    <span className="btbs-day">{idx}</span>
-                                    <div className="btbs-bar-ptrs">
-                                        {isMinIdx && <span className="btbs-ptr buy-ptr">buy</span>}
-                                        {isSellIdx && <span className="btbs-ptr sell-ptr">sell?</span>}
-                                        {isBestBuy && <span className="btbs-ptr bestbuy-ptr">BUY★</span>}
-                                        {isBestSell && <span className="btbs-ptr bestsell-ptr">SELL★</span>}
-                                    </div>
-                                </div>
-                            )
-                        })}
+                    <div className="btbs-stat">
+                        <span className="btbs-stat-label">maxProfit</span>
+                        <span className={`btbs-stat-val mono${maxProfit > 0 ? ' profit' : ''}`}>{maxProfit}</span>
                     </div>
-
-                    {/* Profit line annotation */}
-                    {step?.profit != null && (
-                        <div className={`btbs-profit-box${step.phase === 'new_max' ? ' improved' : ''}`}>
-                            <span>prices[{currI}] − minPrice = {prices[currI]} − {minPrice} =</span>
-                            <span className={`btbs-profit-num${step.profit > 0 ? ' pos' : ''}`}>{step.profit}</span>
-                            {step.profit > maxProfit && <span className="btbs-new-best">← new best!</span>}
+                    {bestBuy >= 0 && (
+                        <div className="btbs-stat best">
+                            <span className="btbs-stat-label">best trade</span>
+                            <span className="btbs-stat-val mono">
+                                buy [{bestBuy}]={prices[bestBuy]} → sell [{bestSell}]={prices[bestSell]}
+                            </span>
                         </div>
                     )}
                 </div>
-            </section>
 
+                {/* Bar chart */}
+                <div className="btbs-chart">
+                    {displayPrices.map((price, idx) => {
+                        const isCurr = currI === idx
+                        const isMinIdx = minIdx === idx
+                        const isSellIdx = sellIdx === idx
+                        const isBestBuy = step?.phase === 'done' && bestBuy === idx
+                        const isBestSell = step?.phase === 'done' && bestSell === idx
+                        const h = barH(price)
+                        return (
+                            <div key={idx} className="btbs-bar-wrap">
+                                <span className="btbs-price-label mono">{price}</span>
+                                <motion.div
+                                    className={`btbs-bar${isCurr ? ' curr' : ''}${isMinIdx && !isCurr ? ' minbar' : ''}${isSellIdx ? ' sellbar' : ''}${isBestBuy ? ' bestbuy' : ''}${isBestSell ? ' bestsell' : ''}`}
+                                    animate={{ height: h, scale: isCurr ? 1.1 : 1 }}
+                                    transition={{ type: 'spring', stiffness: 360, damping: 28 }}
+                                />
+                                <span className="btbs-day">{idx}</span>
+                                <div className="btbs-bar-ptrs">
+                                    {isMinIdx && <span className="btbs-ptr buy-ptr">buy</span>}
+                                    {isSellIdx && <span className="btbs-ptr sell-ptr">sell?</span>}
+                                    {isBestBuy && <span className="btbs-ptr bestbuy-ptr">BUY★</span>}
+                                    {isBestSell && <span className="btbs-ptr bestsell-ptr">SELL★</span>}
+                                </div>
+                            </div>
+                        )
+                    })}
+                </div>
+
+                {/* Profit line annotation */}
+                {step?.profit != null && (
+                    <div className={`btbs-profit-box${step.phase === 'new_max' ? ' improved' : ''}`}>
+                        <span>prices[{currI}] − minPrice = {prices[currI]} − {minPrice} =</span>
+                        <span className={`btbs-profit-num${step.profit > 0 ? ' pos' : ''}`}>{step.profit}</span>
+                        {step.profit > maxProfit && <span className="btbs-new-best">← new best!</span>}
+                    </div>
+                )}
+            </div>
+        </section>
+    )
+
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
             <CodeTracePanel
                 step={step}
                 codeLines={SOLUTION_CODE}
                 highlightedLines={connectivity.highlightedLines}
                 onLineSelect={connectivity.handleLineSelect}
                 onActiveLineDomChange={setActiveLineDom}
+                disableResizer
             />
+            {showPatternOverlay && <CodePatternAnnotations step={step} activeLineDom={activeLineDom} />}
+        </div>
+    )
 
-            <div className={`btbs-status${step?.phase === 'done' ? (maxProfit > 0 ? ' ok' : ' zero') : ''}`}>
-                {step?.message ?? 'Press Play or Step to begin.'}
-            </div>
+    const statusPanel = (
+        <div className={`btbs-status${step?.phase === 'done' ? (maxProfit > 0 ? ' ok' : ' zero') : ''}`}>
+            {step?.message ?? 'Press Play or Step to begin.'}
+        </div>
+    )
 
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward}
@@ -265,8 +286,36 @@ export default function BestTimeBuySellStockVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+        </>
+    )
 
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+    // Step 4: Add state + config
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Best Time to Buy and Sell Stock', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+    // Step 5: Replace return with portals
+    return (
+        <div className="btbs-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     )
 }

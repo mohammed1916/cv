@@ -1,14 +1,25 @@
-import { useState, useCallback, useMemo } from 'react'
+﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './SuperUglyNumberVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+
+const PATTERNS = ['done', 'init', 'process']
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  3: 'process',
+  5: 'done'
+}
+
 
 const SOLUTION_CODE = [
   { line: 1, text: '# Solution for Super Ugly Number' },
@@ -24,18 +35,21 @@ function generateSteps(input) {
   steps.push({
     phase: 'init',
     activeLine: 1,
+    relatedLines: [1],
     message: 'Initialize algorithm'
   })
 
   steps.push({
     phase: 'process',
     activeLine: 3,
+    relatedLines: [3],
     message: 'Processing input...'
   })
 
   steps.push({
     phase: 'done',
     activeLine: 5,
+    relatedLines: [5],
     message: 'Algorithm complete'
   })
 
@@ -60,35 +74,37 @@ export default function SuperUglyNumberVisualizer() {
     return input ? generateSteps(input) : []
   }, [input])
 
-  const { currentStep, isPlaying, setIsPlaying, setCurrentStep, speed, setSpeed } = usePlaybackState({
-    totalSteps: steps.length,
-    autoSpeed: 1000,
+  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
+
+  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+
+  const step = stepIndex >= 0 ? steps[stepIndex] : null
+
+  const applyExample = useCallback((ex) => {
+    setInputValue(JSON.stringify(ex))
+    handleReset()
+  }, [handleReset])
+
+  const connectivity = useCodeVisualConnectivity({
+    steps,
+    stepIndex,
+    onStepJump: setStepIndex,
   })
-
-  const connectivity = useCodeVisualConnectivity(steps, currentStep)
-  const patternOverlay = usePatternOverlay()
-
-  const handleStepClick = useCallback((index) => {
-    setCurrentStep(index)
-    setIsPlaying(false)
-  }, [setCurrentStep, setIsPlaying])
 
   const renderVisualization = () => {
     if (!input) return <div className="super-ugly-number-error">{inputError}</div>
 
-    const currentStepData = steps[currentStep] || {}
-
     return (
       <motion.div
         className="super-ugly-number-viz"
-        key={currentStep}
+        key={stepIndex}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
       >
         <div className="super-ugly-number-step-info">
-          <h3>{currentStepData.message}</h3>
+          <h3>{step?.message ?? 'Press Play or Step to begin.'}</h3>
         </div>
       </motion.div>
     )
@@ -123,47 +139,47 @@ export default function SuperUglyNumberVisualizer() {
         ratio={0.35}
       />
 
-      <div className="super-ugly-number-middle">
-        <div className="super-ugly-number-panel">
-          <div className="super-ugly-number-panel-head">Code Trace</div>
-          <div className="super-ugly-number-panel-body">
-            <CodeTracePanel code={SOLUTION_CODE} connectivity={connectivity} />
-          </div>
-        </div>
+      <div style={{ position: 'relative' }}>
+        <CodeTracePanel
+          step={step}
+          codeLines={SOLUTION_CODE}
+          highlightedLines={connectivity.highlightedLines}
+          onLineSelect={connectivity.handleLineSelect}
+          onActiveLineDomChange={setActiveLineDom}
+        />
 
-        <div className="super-ugly-number-panel">
-          <div className="super-ugly-number-panel-head">Examples</div>
-          <div className="super-ugly-number-panel-body super-ugly-number-examples">
-            {EXAMPLES.map((example, i) => (
-              <button
-                key={i}
-                className={className + '-example-btn'}
-                onClick={() => {
-                  setInputValue(JSON.stringify(example))
-                  setCurrentStep(0)
-                  setIsPlaying(false)
-                }}
-              >
-                {example.label}
-              </button>
-            ))}
-          </div>
-        </div>
+        {showPatternOverlay && (
+          <CodePatternAnnotations
+            linePatterns={LINE_PATTERN_MAP}
+            currentPhase={step?.phase}
+            activeLineDom={activeLineDom}
+            activeLine={step?.activeLine}
+          />
+        )}
       </div>
 
-      <div className="super-ugly-number-bottom">
+      <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
-          onPlayPause={() => setIsPlaying(!isPlaying)}
-          onNext={() => setCurrentStep(Math.min(currentStep + 1, steps.length - 1))}
-          onPrev={() => setCurrentStep(Math.max(currentStep - 1, 0))}
-          onReset={() => setCurrentStep(0)}
-          currentStep={currentStep}
-          totalSteps={steps.length}
+          isDone={isDone}
           speed={speed}
-          onSpeedChange={setSpeed}
+          onPlayToggle={togglePlay}
+          onPrev={stepBack}
+          onNext={stepForward}
+          onReset={handleReset}
+          prevDisabled={stepIndex < 0}
+          nextDisabled={isDone}
+          resetDisabled={stepIndex < 0}
+          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+          showPatternOverlay={showPatternOverlay}
+          onShowPatternOverlayChange={setShowPatternOverlay}
+          patternOverlayLabel="Show pattern overlay"
+          showPatternOverlayToggle
         />
-      </div>
+      </FloatingPanel>
     </div>
   )
 }

@@ -1,4 +1,12 @@
-.sn-shell { display: flex; flex-direction: column; gap: 12px; padding: 16px; font-family: inherit; }
+.sn-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+}
 .sn-examples { display: flex; gap: 8px; flex-wrap: wrap; }
 .sn-chip { background: #313244; color: #cdd6f4; border: 2px solid #45475a; border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer; }
 .sn-chip.active, .sn-chip:hover { border-color: #cba6f7; color: #cba6f7; }

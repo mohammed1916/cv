@@ -1,12 +1,14 @@
-import { useState, useCallback, useMemo } from 'react'
+﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './MaximalRectangleVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -25,6 +27,16 @@ const SOLUTION_CODE = [
   { line: 14, text: '            ' },
   { line: 15, text: '            max_area = max(max_area, largestRectangleArea(heights))' },
 ]
+
+const MAXIMALRECTANGLE_PATTERNS = ['area_calc', 'area_final', 'done', 'height_update', 'init', 'row_end', 'row_start']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'done',
+  5: 'init',
+  8: 'row_start',
+  15: 'area_calc',
+}
 
 function generateSteps(matrix) {
   const steps = []
@@ -163,13 +175,16 @@ function MaximalRectangleVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify(defaultMatrix))
 
   const steps = useMemo(() => generateSteps(matrix), [matrix])
-  const { activeStepIndex, isPlaying, togglePlayback, reset, setActiveStepIndex } =
-    usePlaybackState(steps)
-
-  const { highlightLines } = useCodeVisualConnectivity(activeStepIndex, steps)
+  const {
+    stepIndex: activeStepIndex, isPlaying, isDone, speed, setSpeed,
+    stepForward, stepBack, togglePlay, handleReset: reset, setStepIndex: setActiveStepIndex,
+  } = usePlaybackState(steps.length)
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  const activeStep = steps[activeStepIndex]
+  const activeStep = activeStepIndex >= 0 ? steps[activeStepIndex] : null
+  const step = activeStep
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex: activeStepIndex, onStepJump: setActiveStepIndex })
+  const highlightLines = connectivity.highlightedLines
 
   const handleRun = useCallback(() => {
     try {
@@ -206,12 +221,25 @@ function MaximalRectangleVisualizer() {
     <div className="mr-shell">
       <div className="mr-top">
         <div className="mr-panel mr-code-panel">
-          <CodeTracePanel
-            lines={SOLUTION_CODE}
-            highlightLines={highlightLines}
+                    <div style={{ position: "relative" }}>
+            <CodeTracePanel
+            step={step}
+            codeLines={SOLUTION_CODE}
+            highlightedLines={highlightLines}
+            onLineSelect={connectivity.handleLineSelect}
             title="Solution Code"
             onActiveLineDomChange={setActiveLineDom}
           />
+
+            {showPatternOverlay && (
+              <CodePatternAnnotations
+                linePatterns={LINE_PATTERN_MAP}
+                currentPhase={step?.phase}
+                activeLineDom={activeLineDom}
+                activeLine={step?.activeLine}
+              />
+            )}
+          </div>
         </div>
 
         <div className="mr-panel mr-visualization">
@@ -324,22 +352,32 @@ function MaximalRectangleVisualizer() {
       </div>
 
       <div className="mr-bottom">
+        <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={MAXIMALRECTANGLE_PATTERNS} />
+        )}
         <PlaybackControls
-          activeStep={activeStepIndex}
-          totalSteps={steps.length}
           isPlaying={isPlaying}
-          onTogglePlayback={togglePlayback}
-          onStepChange={setActiveStepIndex}
+          isDone={isDone}
+          speed={speed}
+          onPlayToggle={togglePlay}
+          onPrev={stepBack}
+          onNext={stepForward}
+          onReset={reset}
+          prevDisabled={activeStepIndex < 0}
+          nextDisabled={isDone}
+          resetDisabled={activeStepIndex < 0}
+          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
           showPatternOverlay={showPatternOverlay}
           onShowPatternOverlayChange={setShowPatternOverlay}
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+      </FloatingPanel>
       </div>
-
-      {showPatternOverlay && activeStep && <PatternOverlay step={activeStep} activeLineDom={activeLineDom} />}
     </div>
   )
 }
 
 export default MaximalRectangleVisualizer
+

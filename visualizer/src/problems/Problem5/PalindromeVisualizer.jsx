@@ -1,15 +1,15 @@
-import { Fragment, useState, useCallback, useEffect, useRef } from 'react'
+import { Fragment, useState, useCallback, useMemo, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import ResizablePanel from '../../components/ResizablePanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './PalindromeVisualizer.css'
-
-const MIN_PANEL_PERCENT = 16
-const SPLITTER_WIDTH_PX = 18
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution(object):' },
@@ -484,16 +484,6 @@ function StepDetail({ step, str }) {
   )
 }
 
-function clamp(value, min, max) {
-  return Math.min(Math.max(value, min), max)
-}
-
-function getDefaultPanelSizes(codeWidth) {
-  if (codeWidth === 'wide') return { left: 22, middle: 33, right: 45 }
-  if (codeWidth === 'full') return { left: 20, middle: 25, right: 55 }
-  return { left: 24, middle: 41, right: 35 }
-}
-
 /* ═══════════════════════════════════════════════════════════════
    MAIN VISUALIZER
    ═══════════════════════════════════════════════════════════════ */
@@ -541,13 +531,8 @@ export default function PalindromeVisualizer() {
   const [inputStr, setInputStr]  = useState(DEFAULT)
   const [str, setStr]            = useState(DEFAULT)
   const [steps, setSteps]        = useState(() => generateSteps(DEFAULT))
-  const [showCode, setShowCode]  = useState(true)
-  const [codeWidth, setCodeWidth] = useState('normal')
-  const [panelSizes, setPanelSizes] = useState(() => getDefaultPanelSizes('normal'))
   const [hasAttemptedInput, setHasAttemptedInput] = useState(false)
-  const [contentHeight, setContentHeight] = useState(420)
-  const contentShellRef = useRef(null)
-  const dragStateRef = useRef(null)
+  const [panelDivs, setPanelDivs] = useState(null)
 
   // Playback state hook
   const {
@@ -596,97 +581,19 @@ export default function PalindromeVisualizer() {
     setIsPlaying(false)
   }, [])
 
-  /* ── Resizable panel event handling ────────────────────────── */
-  useEffect(() => {
-    const handlePointerMove = (event) => {
-      const dragState = dragStateRef.current
-      const container = contentShellRef.current
-      if (!dragState || !container) return
-
-      const rect = container.getBoundingClientRect()
-      const pointerX = event.clientX - rect.left
-      const pointerPercent = (pointerX / rect.width) * 100
-
-      if (dragState.type === 'left') {
-        const nextLeft = clamp(pointerPercent, MIN_PANEL_PERCENT, 100 - dragState.right - MIN_PANEL_PERCENT)
-        const nextMiddle = 100 - nextLeft - dragState.right
-        setPanelSizes({ left: nextLeft, middle: nextMiddle, right: dragState.right })
-        return
-      }
-
-      const leftBoundary = dragState.left
-      const nextMiddle = clamp(pointerPercent - leftBoundary, MIN_PANEL_PERCENT, 100 - leftBoundary - MIN_PANEL_PERCENT)
-      const nextRight = 100 - leftBoundary - nextMiddle
-      setPanelSizes({ left: dragState.left, middle: nextMiddle, right: nextRight })
-    }
-
-    const handlePointerUp = () => {
-      if (!dragStateRef.current) return
-      dragStateRef.current = null
-      document.body.classList.remove('panel-dragging')
-    }
-
-    window.addEventListener('pointermove', handlePointerMove)
-    window.addEventListener('pointerup', handlePointerUp)
-
-    return () => {
-      window.removeEventListener('pointermove', handlePointerMove)
-      window.removeEventListener('pointerup', handlePointerUp)
-      document.body.classList.remove('panel-dragging')
-    }
+  const handlePanelReady = useCallback((divs) => {
+    setPanelDivs(divs)
   }, [])
 
-  const startDrag = useCallback((type) => (event) => {
-    if (window.innerWidth <= 980) return
-    event.preventDefault()
-    dragStateRef.current = {
-      type,
-      left: panelSizes.left,
-      right: panelSizes.right,
-    }
-    document.body.classList.add('panel-dragging')
-  }, [panelSizes.left, panelSizes.right])
-
-  const handleShowCodeChange = useCallback((nextShowCode) => {
-    setShowCode(nextShowCode)
-    if (!nextShowCode) {
-      setPanelSizes((current) => {
-        const left = clamp(current.left, MIN_PANEL_PERCENT, 40)
-        return { left, middle: 100 - left, right: 0 }
-      })
-      return
-    }
-
-    setPanelSizes(getDefaultPanelSizes(codeWidth))
-  }, [codeWidth])
-
-  const handleCodeWidthChange = useCallback((nextCodeWidth) => {
-    setCodeWidth(nextCodeWidth)
-    if (showCode) {
-      setPanelSizes(getDefaultPanelSizes(nextCodeWidth))
-    }
-  }, [showCode])
-
-  const hasVariables = n > 0
-  const showResizableLayout = hasVariables
   const inputError = hasAttemptedInput && !trimmedInput
-  const contentShellStyle = showResizableLayout
-    ? showCode
-      ? {
-          gridTemplateColumns: `minmax(220px, ${panelSizes.left}fr) ${SPLITTER_WIDTH_PX}px minmax(0, ${panelSizes.middle}fr) ${SPLITTER_WIDTH_PX}px minmax(280px, ${panelSizes.right}fr)`,
-        }
-      : {
-          gridTemplateColumns: `minmax(220px, ${panelSizes.left}fr) ${SPLITTER_WIDTH_PX}px minmax(0, ${panelSizes.middle}fr)`,
-        }
-    : undefined
 
   /* ── Render ──────────────────────────────────────────────── */
   const progress = steps.length > 0 ? ((stepIdx + 1) / steps.length) * 100 : 0
 
-  return (
-    <div className="pv">
-
-      {/* ── INPUT ─────────────────────────────────────────── */}
+  // Extract panel components (Step 3: Extract panels into consts)
+  const primaryPanel = (
+    <div className="pv-panel-primary">
+      {/* INPUT SECTION */}
       <div className="pv-card input-card">
         <div className="input-row">
           <label className="input-label">String</label>
@@ -748,102 +655,7 @@ export default function PalindromeVisualizer() {
         </div>
       </div>
 
-      {/* ── PROGRESS BAR ──────────────────────────────────── */}
-      <div className="progress-track">
-        <motion.div
-          className="progress-fill"
-          animate={{ width: `${progress}%` }}
-          transition={{ duration: 0.12 }}
-        />
-      </div>
-      <div className="step-counter">
-        {stepIdx < 0
-          ? 'Not started — press Play or Step →'
-          : isDone
-            ? `Done! All ${steps.length} steps complete`
-            : `Step ${stepIdx + 1} / ${steps.length}`}
-      </div>
-
-      <div className="view-toggle-wrap">
-        <div className="view-toggle-group">
-          <span className="view-toggle-label">View</span>
-          <div className="view-toggle-pill">
-            <button
-              className={`view-toggle-btn ${!showCode ? 'active' : ''}`}
-              onClick={() => handleShowCodeChange(false)}
-            >
-              Visual only
-            </button>
-            <button
-              className={`view-toggle-btn ${showCode ? 'active' : ''}`}
-              onClick={() => handleShowCodeChange(true)}
-            >
-              Visual + code
-            </button>
-          </div>
-        </div>
-
-        {showCode && (
-          <div className="view-toggle-group">
-            <span className="view-toggle-label">Code width</span>
-            <div className="view-toggle-pill">
-              <button
-                className={`view-toggle-btn ${codeWidth === 'normal' ? 'active' : ''}`}
-                onClick={() => handleCodeWidthChange('normal')}
-              >
-                Normal
-              </button>
-              <button
-                className={`view-toggle-btn ${codeWidth === 'wide' ? 'active' : ''}`}
-                onClick={() => handleCodeWidthChange('wide')}
-              >
-                Wide
-              </button>
-              <button
-                className={`view-toggle-btn ${codeWidth === 'full' ? 'active' : ''}`}
-                onClick={() => handleCodeWidthChange('full')}
-              >
-                Full
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
-
-      <div
-        ref={contentShellRef}
-        className={`content-shell ${showCode ? 'split' : 'single'} code-width-${codeWidth} ${hasVariables ? 'has-variables has-splitters' : ''}`}
-        style={contentShellStyle}
-      >
-
-      {hasVariables && (
-        <div className="variable-column">
-          <div className="pv-card variable-shell">
-            <div className="section-label">Variable Tracker</div>
-            <VariablePanel step={currentStep} previousStep={previousStep} str={str} />
-          </div>
-        </div>
-      )}
-
-      {hasVariables && (
-        <button
-          type="button"
-          className="panel-splitter"
-          aria-label="Resize left and middle panels"
-          onPointerDown={startDrag('left')}
-        >
-          <span className="panel-splitter-grip" aria-hidden="true">
-            <span />
-            <span />
-            <span />
-          </span>
-        </button>
-      )}
-
-        <ResizablePanel height={contentHeight} minHeight={260} onResize={(v) => { if (v.height) setContentHeight(v.height); }}>
-          <div className="visual-column">
-
-      {/* ── STRING DISPLAY ────────────────────────────────── */}
+      {/* STRING DISPLAY */}
       {n > 0 && (
         <div className="pv-card">
           <div className="section-label">Input String</div>
@@ -870,10 +682,10 @@ export default function PalindromeVisualizer() {
               }
             </motion.p>
           )}
-            </div>
-          )}
+        </div>
+      )}
 
-      {/* ── DP TABLE ──────────────────────────────────────── */}
+      {/* DP TABLE */}
       {n > 0 && (
         <div className="pv-card">
           <div className="section-label">
@@ -924,7 +736,7 @@ export default function PalindromeVisualizer() {
         </div>
       )}
 
-      {/* ── BEST PALINDROME ───────────────────────────────── */}
+      {/* BEST PALINDROME */}
       {currentStep && (
         <motion.div
           className="best-card"
@@ -948,77 +760,10 @@ export default function PalindromeVisualizer() {
         </motion.div>
       )}
 
-      {/* ── STEP DETAIL ───────────────────────────────────── */}
+      {/* STEP DETAIL */}
       <StepDetail step={currentStep} str={str} />
 
-        </div>
-        </ResizablePanel>
-
-        <AnimatePresence>
-          {showCode && (
-            <>
-              <button
-                type="button"
-                className="panel-splitter"
-                aria-label="Resize middle and right panels"
-                onPointerDown={startDrag('right')}
-              >
-                <span className="panel-splitter-grip" aria-hidden="true">
-                  <span />
-                  <span />
-                  <span />
-                </span>
-              </button>
-              <CodeTracePanel
-                step={currentStep}
-                codeLines={SOLUTION_CODE}
-                activeLabelPrefix="Currently executing line"
-                activeLabelSuffix=""
-                idleLabel="Press Play to start code tracking"
-                onActiveLineDomChange={setActiveLineDom}
-              />
-            </>
-          )}
-        </AnimatePresence>
-      </div>
-
-      {/* ── CONTROLS ──────────────────────────────────────── */}
-      {n > 0 && (
-        <PlaybackControls
-          className="controls"
-          buttonClassName="btn"
-          ghostButtonClassName="btn-ghost"
-          playButtonClassName="btn-play"
-          onReset={handleReset}
-          onPrev={stepBack}
-          onPlayToggle={togglePlay}
-          onNext={stepForward}
-          resetDisabled={stepIdx < 0}
-          prevDisabled={stepIdx < 0}
-          nextDisabled={isDone}
-          isPlaying={isPlaying}
-          isDone={isDone}
-          resetLabel="↺ Reset"
-          prevLabel="‹ Prev"
-          playLabel="▶ Play"
-          pauseLabel="⏸ Pause"
-          replayLabel="↺ Replay"
-          nextLabel="Next ›"
-          speedWrapClassName="speed-wrap"
-          speedLabelClassName="speed-label"
-          speedIndicatorClassName="speed-val"
-          speed={speed}
-          speedRangeValue={1480 - speed}
-          onSpeedChange={(e) => setSpeed(1480 - Number(e.target.value))}
-          speedIndicator={speed < 300 ? '🚀 Fast' : speed < 700 ? '⚡ Med' : '🐢 Slow'}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      )}
-
-      {/* ── FINAL RESULT ──────────────────────────────────── */}
+      {/* FINAL RESULT */}
       <AnimatePresence>
         {isDone && (
           <motion.div
@@ -1028,7 +773,7 @@ export default function PalindromeVisualizer() {
             exit={{ opacity: 0 }}
             transition={{ type: 'spring', stiffness: 340, damping: 28 }}
           >
-            <div className="result-title">🎉 Longest Palindromic Substring</div>
+            <div className="result-title">Longest Palindromic Substring</div>
             <div className="result-value mono">
               "{str.slice(bestStart, bestStart + bestLen)}"
             </div>
@@ -1038,9 +783,117 @@ export default function PalindromeVisualizer() {
           </motion.div>
         )}
       </AnimatePresence>
+    </div>
+  )
 
-      {showPatternOverlay && currentStep && <PatternOverlay step={currentStep} activeLineDom={activeLineDom} />}
+  const statePanel = (
+    <div className="pv-panel-state">
+      <div className="pv-card variable-shell">
+        <div className="section-label">Variable Tracker</div>
+        <VariablePanel step={currentStep} previousStep={previousStep} str={str} />
+      </div>
+    </div>
+  )
 
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={currentStep}
+        codeLines={SOLUTION_CODE}
+        activeLabelPrefix="Currently executing line"
+        activeLabelSuffix=""
+        idleLabel="Press Play to start code tracking"
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+      {showPatternOverlay && <CodePatternAnnotations step={currentStep} activeLineDom={activeLineDom} />}
+    </div>
+  )
+
+  const statusPanel = (
+    <div className="pv-panel-status">
+      <div className="progress-track">
+        <motion.div
+          className="progress-fill"
+          animate={{ width: `${progress}%` }}
+          transition={{ duration: 0.12 }}
+        />
+      </div>
+      <div className="step-counter">
+        {stepIdx < 0
+          ? 'Not started — press Play or Step →'
+          : isDone
+            ? `Done! All ${steps.length} steps complete`
+            : `Step ${stepIdx + 1} / ${steps.length}`}
+      </div>
+    </div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && <PatternOverlay step={currentStep} activeLineDom={activeLineDom} />}
+      <PlaybackControls
+        className="controls"
+        buttonClassName="btn"
+        ghostButtonClassName="btn-ghost"
+        playButtonClassName="btn-play"
+        onReset={handleReset}
+        onPrev={stepBack}
+        onPlayToggle={togglePlay}
+        onNext={stepForward}
+        resetDisabled={stepIdx < 0}
+        prevDisabled={stepIdx < 0}
+        nextDisabled={isDone}
+        isPlaying={isPlaying}
+        isDone={isDone}
+        resetLabel="↺ Reset"
+        prevLabel="‹ Prev"
+        playLabel="▶ Play"
+        pauseLabel="⏸ Pause"
+        replayLabel="↺ Replay"
+        nextLabel="Next ›"
+        speedWrapClassName="speed-wrap"
+        speedLabelClassName="speed-label"
+        speedIndicatorClassName="speed-val"
+        speed={speed}
+        speedRangeValue={1480 - speed}
+        onSpeedChange={(e) => setSpeed(1480 - Number(e.target.value))}
+        speedIndicator={speed < 300 ? '🚀 Fast' : speed < 700 ? '⚡ Med' : '🐢 Slow'}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
+
+  // Panel configuration for Lumino DockPanel (Step 4: Add panelConfigs)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
+      { id: 'state',   title: 'Variables', dockMode: 'split-right' },
+      { id: 'code',    title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status',  title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+
+  // Step 5: Replace return with Lumino DockPanel + portals
+  return (
+    <div className="pv-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.state   && createPortal(statePanel,   panelDivs.state)}
+          {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}
+          {panelDivs.status  && createPortal(statusPanel,  panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

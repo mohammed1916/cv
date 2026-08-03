@@ -1,10 +1,12 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
@@ -23,6 +25,18 @@ const SOLUTION_CODE = [
     { line: 9, text: '    backtrack(0, [])' },
     { line: 10, text: '    return res' },
 ]
+
+const SUBSETS_PATTERNS = ['choose', 'done', 'init', 'record', 'recurse', 'unchoose']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  4: 'record',
+  6: 'choose',
+  7: 'recurse',
+  8: 'unchoose',
+  9: 'init',
+  10: 'done',
+}
 
 function generateSteps(nums) {
     const steps = []
@@ -117,7 +131,9 @@ export default function SubsetsVisualizer() {
                         <button key={ex.label} className="sub-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
                     ))}
                 </div>
-                <input className="sub-input" value={numsInput} onChange={(e) => { setNumsInput(e.target.value); handleReset() }} />
+                <input className="sub-input" value={numsInput} onChange={(e) => { setNumsInput(e.target.value);
+
+ handleReset() }} />
 
                 {/* Current path */}
                 <div className="sub-section-label">Current path</div>
@@ -173,47 +189,81 @@ export default function SubsetsVisualizer() {
         </section>
     )
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'viz',
-            title: 'Visualization',
-            content: <SubsetsVizComponent />,
-        },
-        {
-            id: 'results',
-            title: 'Results',
-            content: <ResultsComponent />,
-        },
-        {
-            id: 'code',
-            title: 'Code',
-            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
-        },
-    ], [step, autoScrollCode])
+    // Extract panels for Lumino DockPanel
+    const primaryPanel = <SubsetsVizComponent />
+    const resultsPanel = <ResultsComponent />
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                autoScroll={autoScrollCode}
+                disableResizer
+            />
+            {showPatternOverlay && (
+                <CodePatternAnnotations
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
+                />
+            )}
+        </div>
+    )
+    const statusPanel = (
+        <div className="sub-status">{step?.message || 'Press Play to begin.'}</div>
+    )
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={SUBSETS_PATTERNS} />
+            )}
+            <PlaybackControls
+                isPlaying={isPlaying} isDone={isDone} speed={speed}
+                onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
+                prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
+                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+                autoScroll={autoScrollCode}
+                onAutoScrollChange={setAutoScrollCode}
+                showAutoScroll
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                patternOverlayLabel="Show pattern overlay"
+                showPatternOverlayToggle
+            />
+        </>
+    )
+
+    // Lumino DockPanel state
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
+            { id: 'results', title: 'Results', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
-        <div className="problem-shell">
-            <DockableWorkspace
-                panels={dockPanels}
-                initialLayout={{ rows: [['viz', 'results'], ['code']], minimized: [] }}
-            />
-            <FloatingPanel title="Playback Controls">
-                <div className="sub-status">{step?.message || 'Press Play to begin.'}</div>
-                <PlaybackControls
-                    isPlaying={isPlaying} isDone={isDone} speed={speed}
-                    onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-                    prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
-                    onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    showAutoScroll
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
-                />
-            </FloatingPanel>
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+        <div className="sub-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.results && createPortal(resultsPanel, panelDivs.results)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     )
 }
+

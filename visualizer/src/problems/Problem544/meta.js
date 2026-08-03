@@ -1,0 +1,1 @@
+export const meta={number:"544",title:"Output Contest Matches",slug:"output-contest-matches",difficulty:"Medium",tags:["Recursion","String"],description:"Output the contest matches in elimination tournament bracket format.",accent:"#0284c7"}

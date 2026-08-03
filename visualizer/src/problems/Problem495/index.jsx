@@ -1,2 +1,1 @@
-export const meta = { number: "495", title: "Teemo Attacking", slug: "teemo-attacking", difficulty: "Easy", tags: ["Array"], description: "Calculate total damage dealt with attack cooldown mechanics.", accent: "#14b8a6" };
 export { default } from "./Problem495Visualizer";

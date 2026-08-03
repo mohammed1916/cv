@@ -1,5 +1,13 @@
-.su-shell { display: flex; flex-direction: column; gap: 12px; padding: 16px; font-family: inherit; }
-.su-panel { background: #1e1e2e; border: 1px solid #313244; border-radius: 10px; padding: 12px 14px; }
+.su-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+}
+.su-panel { background: #1e1e2e; border: 1px solid #313244; border-radius: 10px; padding: 12px 14px; height: 100%; overflow: auto; }
 .su-panel-label { font-size: 11px; font-weight: 700; color: #6c7086; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
 .su-grid { display: grid; grid-template-columns: repeat(9, 36px); grid-template-rows: repeat(9, 36px); gap: 2px; }
 .su-cell { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; border-radius: 3px; border: 1px solid #313244; }
@@ -26,4 +34,4 @@
 .su-tracker-val.su-phase.backtrack { color: #f38ba8; }
 .su-tracker-val.su-phase.done      { color: #a6e3a1; }
 .su-result { padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 700; background: #001a00; border: 2px solid #a6e3a1; color: #a6e3a1; }
-.su-status { padding: 8px 12px; background: #1e1e2e; border: 1px solid #313244; border-radius: 8px; font-size: 13px; color: #a6adc8; min-height: 36px; }
+.su-status { padding: 8px 12px; background: #1e1e2e; border: 1px solid #313244; border-radius: 8px; font-size: 13px; color: #a6adc8; min-height: 36px; height: 100%; display: flex; align-items: center; }

@@ -1,6 +1,7 @@
-import { useState, useMemo, useCallback } from "react";
+﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from "framer-motion";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -10,7 +11,14 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./PascalsTriangleVisualizer.css";
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('pascals-triangle')
 
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const EXAMPLES = getExamples('pascals-triangle');
 
 function generateSteps(numRows) {
@@ -207,60 +215,90 @@ export default function PascalsTriangleVisualizer() {
 
   const triangle = step?.triangle ?? [[1]];
 
-  const dockPanels = useMemo(() => [
-    {
-      id: 'code',
-      title: 'Code',
-      content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-        />
-      ),
-    },
-    {
-      id: 'viz',
-      title: '🏗️ Pyramid',
-      content: (
-        <VisualizationPanel
-          triangle={triangle}
-          step={step}
-          ex={ex}
-          applyEx={applyEx}
-        />
-      ),
-    },
-  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, triangle, ex, applyEx]);
-
-  return (
-    <div className="problem-shell">
-      <DockableWorkspace
-        panels={dockPanels}
-        initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
+  // Step 2: Extract panels into consts
+  const primaryPanel = (
+    <div className="pt-panel">
+      <VisualizationPanel
+        triangle={triangle}
+        step={step}
+        ex={ex}
+        applyEx={applyEx}
       />
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={e => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
+    </div>
+  )
+
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+      {showPatternOverlay && <CodePatternAnnotations activeLineDom={activeLineDom} />}
+    </div>
+  )
+
+  const statusPanel = (
+    <div className="pt-status">
+      {step?.message || 'Ready'}
+    </div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && <PatternLegend />}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={e => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
+
+  // Step 3: Add state + config
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: '🏗️ Pyramid', dockMode: 'split-right' },
+      { id: 'code',    title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status',  title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  // Step 4: Replace return block
+  return (
+    <div className="pt-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}
+          {panelDivs.status  && createPortal(statusPanel,  panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   );
 }
+

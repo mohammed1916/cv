@@ -4,7 +4,7 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
@@ -301,6 +301,8 @@ function StackState({ step, heights }) {
   )
 }
 
+const LINE_PATTERN_MAP = {}
+
 export default function LargestRectangleInHistogramVisualizer() {
   const [input, setInput] = useState('[2,1,5,6,2,3]')
 
@@ -336,12 +338,22 @@ export default function LargestRectangleInHistogramVisualizer() {
         id: 'code',
         title: 'Code',
         content: (
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            onActiveLineDomChange={setActiveLineDom}
-            autoScroll={autoScrollCode}
-          />
+          <div style={{ position: "relative" }}>
+            <CodeTracePanel
+              step={step}
+              codeLines={SOLUTION_CODE}
+              onActiveLineDomChange={setActiveLineDom}
+              autoScroll={autoScrollCode}
+            />
+            {showPatternOverlay && (
+              <CodePatternAnnotations
+                linePatterns={LINE_PATTERN_MAP}
+                currentPhase={step?.phase}
+                activeLineDom={activeLineDom}
+                activeLine={step?.activeLine}
+              />
+            )}
+          </div>
         ),
       },
       {
@@ -396,7 +408,6 @@ export default function LargestRectangleInHistogramVisualizer() {
         />
       </FloatingPanel>
 
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }

@@ -1,1 +1,1 @@
-export const meta = {number:"536",title:"Construct Binary Tree from String",slug:"construct-binary-tree-from-string",difficulty:"Medium",tags:["Tree","String"],description:"Construct a binary tree from parenthesized string representation.",accent:"#0284c7"};export{default}from"./ConstructBinaryTreeFromStringVisualizer";
+export{default}from"./ConstructBinaryTreeFromStringVisualizer";

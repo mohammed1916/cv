@@ -1,16 +1,18 @@
 ﻿import { useState, useMemo, useCallback } from "react"
+import { createPortal } from "react-dom"
 import { motion, AnimatePresence } from "framer-motion"
-import DockableWorkspace from "../../components/shared/DockableWorkspace"
+import LuminoDockPanel from "../../components/LuminoDockPanel"
 import FloatingPanel from "../../components/shared/FloatingPanel"
 import CodeTracePanel from "../../components/CodeTracePanel"
 import PlaybackControls from "../../components/PlaybackControls"
 import PatternOverlay from "../../components/PatternOverlay"
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import { useAutoScroll } from "../../hooks/useAutoScroll"
 import { getExamples } from "../../config/examplesRegistry"
 import "./RemoveNthNodeVisualizer.css"
-
 const SOLUTION_CODE = [
   { line: 1, text: "class Solution:" },
   { line: 2, text: "    def removeNthFromEnd(self, head, n):" },
@@ -23,6 +25,20 @@ const SOLUTION_CODE = [
   { line: 9, text: "            slow.next = slow.next.next" },
   { line: 10, text: "        return dummy.next" },
 ]
+
+const REMOVENTHNODE_PATTERNS = ['init', 'pointers_init', 'fast_advance', 'fast_step', 'gap_ready', 'both_advance', 'found_target', 'removing', 'done']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',         // dummy = ListNode(0, head)
+  4: 'pointers_init', // fast, slow = dummy, dummy
+  5: 'fast_advance', // for _ in range(n + 1):
+  6: 'fast_advance', // fast = fast.next
+  7: 'gap_ready',    // while fast:
+  8: 'both_advance', // fast, slow = fast.next, slow.next
+  9: 'removing',     // slow.next = slow.next.next
+  10: 'done',        // return dummy.next
+}
 
 function generateSteps(list, n) {
   const steps = []
@@ -393,74 +409,111 @@ export default function RemoveNthNodeVisualizer() {
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const resultList = step?.listCopy ?? list
 
-  const dockPanels = useMemo(
-    () => [
-      {
-        id: "code",
-        title: "Code",
-        content: (
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            onActiveLineDomChange={setActiveLineDom}
-            autoScroll={autoScrollCode}
-          />
-        ),
-      },
-      {
-        id: "viz",
-        title: "Visualization",
-        content: (
-          <div className="rnn-top">
-            <RemoveNthNodeViz
-              step={step}
-              list={list}
-              resultList={resultList}
-              EXAMPLES={EXAMPLES}
-              inputStr={inputStr}
-              setInputStr={setInputStr}
-              handleReset={handleReset}
-              inputError={inputError}
-            />
-            <RemoveNthNodeState step={step} />
-          </div>
-        ),
-      },
-    ],
-    [step, list, resultList, inputStr, inputError, autoScrollCode, handleReset],
+  // Extract panels into consts
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        onActiveLineDomChange={setActiveLineDom}
+        autoScroll={autoScrollCode}
+        disableResizer
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+        />
+      )}
+    </div>
   )
 
+  const primaryPanel = (
+    <div className="rnn-panel main">
+      <RemoveNthNodeViz
+        step={step}
+        list={list}
+        resultList={resultList}
+        EXAMPLES={EXAMPLES}
+        inputStr={inputStr}
+        setInputStr={setInputStr}
+        handleReset={handleReset}
+        inputError={inputError}
+      />
+    </div>
+  )
+
+  const statePanel = (
+    <div className="rnn-panel side">
+      <RemoveNthNodeState step={step} />
+    </div>
+  )
+
+  const statusPanel = (
+    <div className="rnn-status">
+      {step?.message ?? "Play or Step to begin."}
+    </div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={REMOVENTHNODE_PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showAutoScroll={true}
+        autoScroll={autoScrollCode}
+        onAutoScrollChange={setAutoScrollCode}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
+
+  // Panel state and config
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
+      { id: 'state', title: 'State', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
   return (
-    <div className="problem-shell">
-      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [["code", "viz"]], minimized: [] }} />
-
-      <FloatingPanel title="Controls">
-        <div className="rnn-status" style={{ marginBottom: "12px" }}>
-          {step?.message ?? "Play or Step to begin."}
-        </div>
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showAutoScroll={true}
-          autoScroll={autoScrollCode}
-          onAutoScrollChange={setAutoScrollCode}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
-
+    <div className="rnn-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }
+

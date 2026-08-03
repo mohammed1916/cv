@@ -4,12 +4,25 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem441Visualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('arranging-coins')
+
+const PATTERNS = ['add_stair', 'complete', 'init', 'use_coins']
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  2: 'add_stair',
+  3: 'use_coins',
+  4: 'complete'
+}
+
 
 const EXAMPLES = getExamples('arranging-coins')
 
@@ -370,7 +383,7 @@ export default function Problem441Visualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      
     </div>
   )
 }

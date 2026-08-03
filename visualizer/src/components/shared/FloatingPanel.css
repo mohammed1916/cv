@@ -63,6 +63,33 @@
   text-overflow: ellipsis;
 }
 
+.floating-panel-pin {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(30, 41, 59, 0.8);
+  color: var(--text-muted);
+  padding: 0.2rem 0.4rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.floating-panel-pin:hover {
+  color: var(--text);
+  border-color: rgba(56, 189, 248, 0.35);
+  background: rgba(30, 41, 59, 1);
+}
+
+.floating-panel.pinned .floating-panel-pin {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: rgba(56, 189, 248, 0.5);
+  color: rgba(56, 189, 248, 0.8);
+}
+
+.floating-panel.pinned .floating-panel-handle {
+  cursor: default;
+}
+
 .floating-panel-collapse {
   border: 1px solid var(--border);
   border-radius: 999px;

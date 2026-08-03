@@ -1,4 +1,5 @@
-import { useState, useMemo, useCallback } from "react";
+﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -8,7 +9,15 @@ import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./ValidPalindromeVisualizer.css";
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
+
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
     { line: 1, text: "def isPalindrome(s):" },
     { line: 2, text: "    s = ''.join(c.lower() for c in s" },
@@ -125,8 +134,9 @@ export default function ValidPalindromeVisualizer() {
 
     const cleaned = step?.cleaned ?? "";
 
-    return (
-        <div className="vp-shell">
+    // ─── Extract panels ────────────────────────────────────────────────────
+    const primaryPanel = (
+        <div className="vp-panel">
             <div className="vp-controls-row">
                 <div className="vp-examples">
                     {EXAMPLES.map((ex) => (
@@ -150,7 +160,7 @@ export default function ValidPalindromeVisualizer() {
             </div>
 
             {/* Cleaned string with two-pointer highlights */}
-            <div className="vp-panel">
+            <div className="vp-chars-panel">
                 <div className="vp-panel-label">Cleaned string (alphanumeric, lowercase)</div>
                 <div className="vp-chars-row">
                     {cleaned.split("").map((c, i) => {
@@ -182,15 +192,30 @@ export default function ValidPalindromeVisualizer() {
                     {step.result ? "✓ isPalindrome = true" : "✗ isPalindrome = false"}
                 </div>
             )}
+        </div>
+    );
 
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
             <CodeTracePanel
                 step={step}
                 codeLines={SOLUTION_CODE}
                 highlightedLines={connectivity.highlightedLines}
                 onLineSelect={connectivity.handleLineSelect}
                 onActiveLineDomChange={setActiveLineDom}
+                disableResizer
             />
-            <div className="vp-status">{step?.message ?? "Press Play to begin."}</div>
+            {showPatternOverlay && <CodePatternAnnotations step={step} activeLineDom={activeLineDom} />}
+        </div>
+    );
+
+    const statusPanel = (
+        <div className="vp-status">{step?.message ?? "Press Play to begin."}</div>
+    );
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 isPlaying={isPlaying}
                 isDone={isDone}
@@ -208,7 +233,35 @@ export default function ValidPalindromeVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+        </>
+    );
+
+    // ─── Panel configuration ────────────────────────────────────────────────
+    const [panelDivs, setPanelDivs] = useState(null);
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'String & Pointers', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    );
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
+
+    return (
+        <div className="vp-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     );
 }

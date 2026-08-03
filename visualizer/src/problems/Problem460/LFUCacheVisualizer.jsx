@@ -1,8 +1,9 @@
-import { useState, useMemo, useCallback } from "react";
+﻿import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
+;
 import DockableWorkspace from "../../components/shared/DockableWorkspace";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
@@ -10,6 +11,16 @@ import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./LFUCacheVisualizer.css";
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+const PATTERNS = ['done', 'hit', 'init', 'miss', 'update']
+const LINE_PATTERN_MAP = {
+  3: 'init',
+  8: 'miss',
+  10: 'hit',
+  14: 'update'
+}
+
 
 const SOLUTION_CODE = [
     { line: 1, text: "class LFUCache:" },
@@ -230,3 +241,4 @@ export default function LFUCacheVisualizer() {
         </div>
     );
 }
+

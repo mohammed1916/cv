@@ -1,16 +1,17 @@
-import { useState, useMemo, useCallback } from "react";
+﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from 'react-dom';
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./InterleavingStringVisualizer.css";
-
 const SOLUTION_CODE = [
     { line: 1, text: "def isInterleave(s1, s2, s3):" },
     { line: 2, text: "    m, n = len(s1), len(s2)" },
@@ -27,6 +28,23 @@ const SOLUTION_CODE = [
     { line: 13, text: "                     or (dp[i][j-1] and s2[j-1]==s3[i+j-1])" },
     { line: 14, text: "    return dp[m][n]" },
 ];
+
+const LINE_PATTERN_MAP = {
+    "1": "init",
+    "2": "init",
+    "3": "check_loop",
+    "4": "init",
+    "5": "init",
+    "6": "loop",
+    "7": "calc_diff",
+    "8": "loop",
+    "9": "calc_diff",
+    "10": "loop",
+    "11": "loop",
+    "12": "calc_diff",
+    "13": "calc_diff",
+    "14": "check_loop",
+};
 
 const EXAMPLES = getExamples('interleaving-string');
 
@@ -151,84 +169,102 @@ export default function InterleavingStringVisualizer() {
         </div>
     );
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'input',
-            title: 'Input Examples',
-            subtitle: `s1="${ex.s1}" s2="${ex.s2}" s3="${ex.s3}"`,
-            defaultZone: 'left',
-            content: <InputPanelContent />,
-        },
-        {
-            id: 'dp',
-            title: 'DP Table Visualization',
-            subtitle: step ? `Step ${stepIndex + 1} of ${steps.length}` : 'Waiting for playback...',
-            defaultZone: 'right',
-            content: <DPTablePanelContent />,
-        },
-        {
-            id: 'code',
-            title: 'Code Trace',
-            subtitle: step ? `Active line ${step.activeLine}` : 'Line-by-line solution view.',
-            defaultZone: 'full',
-            content: (
-                <CodeTracePanel
-                    step={step}
-                    codeLines={SOLUTION_CODE}
-                    onActiveLineDomChange={setActiveLineDom}
-                    autoScroll={autoScrollCode}
+    // Extract panels into consts
+    const inputPanel = (
+        <div className="is-panel">
+            <InputPanelContent />
+        </div>
+    );
+
+    const dpPanel = (
+        <div className="is-panel">
+            <DPTablePanelContent />
+        </div>
+    );
+
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                autoScroll={autoScrollCode}
+                disableResizer
+            />
+            {showPatternOverlay && (
+                <CodePatternAnnotations
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
                 />
-            ),
-        },
-        {
-            id: 'result',
-            title: 'Result',
-            subtitle: step?.result != null ? (step.result ? 'Valid interleaving' : 'Invalid interleaving') : 'Awaiting result...',
-            defaultZone: 'full',
-            content: <ResultPanelContent />,
-        },
-    ], [ex, applyEx, InputPanelContent, step, stepIndex, steps, DPTablePanelContent, setActiveLineDom, autoScrollCode, ResultPanelContent]);
+            )}
+        </div>
+    );
+
+    const statusPanel = (
+        <div className="is-panel">
+            <ResultPanelContent />
+        </div>
+    );
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && <PatternLegend />}
+            <PlaybackControls
+                onReset={handleReset}
+                onPrev={stepBack}
+                onPlayToggle={togglePlay}
+                onNext={stepForward}
+                resetDisabled={steps.length === 0}
+                prevDisabled={stepIndex <= 0}
+                nextDisabled={steps.length === 0 || isDone}
+                isPlaying={isPlaying}
+                isDone={isDone}
+                speed={speed}
+                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+                speedIndicator={`${speed}ms`}
+                autoScroll={autoScrollCode}
+                onAutoScrollChange={setAutoScrollCode}
+                autoScrollLabel="Auto-scroll code"
+                showAutoScroll
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                patternOverlayLabel="Show pattern overlay"
+                showPatternOverlayToggle
+            />
+        </>
+    );
+
+    // Lumino panel state & config
+    const [panelDivs, setPanelDivs] = useState(null);
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'input', title: 'Input Examples', dockMode: 'split-right' },
+            { id: 'dp', title: 'DP Table Visualization', dockMode: 'split-right' },
+            { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Result', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    );
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
 
     return (
         <div className="is-shell">
-            <DockableWorkspace
-                title="Interleaving String Solver"
-                panels={dockPanels}
-                initialLayout={{
-                    rows: [
-                        ['input', 'dp'],
-                        ['code', 'result'],
-                    ],
-                    minimized: [],
-                }}
-            />
-
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls
-                    onReset={handleReset}
-                    onPrev={stepBack}
-                    onPlayToggle={togglePlay}
-                    onNext={stepForward}
-                    resetDisabled={steps.length === 0}
-                    prevDisabled={stepIndex <= 0}
-                    nextDisabled={steps.length === 0 || isDone}
-                    isPlaying={isPlaying}
-                    isDone={isDone}
-                    speed={speed}
-                    onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                    speedIndicator={`${speed}ms`}
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    autoScrollLabel="Auto-scroll code"
-                    showAutoScroll
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
-                />
-            </FloatingPanel>
-
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+                    {panelDivs.dp && createPortal(dpPanel, panelDivs.dp)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     );
 }
+

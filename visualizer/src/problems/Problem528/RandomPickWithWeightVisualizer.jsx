@@ -4,12 +4,26 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './RandomPickWithWeightVisualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('random-pick-with-weight')
+
+const PATTERNS = ['binary_search', 'compute_prefix', 'done', 'done_init', 'init', 'pick_result', 'pick_start']
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  5: 'loop',
+  6: 'done_init',
+  8: 'pick_start',
+  9: 'process'
+}
+
 
 const EXAMPLES = getExamples('random-pick-with-weight')
 
@@ -307,13 +321,34 @@ export default function RandomPickWithWeightVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
+        <div style={{ position: 'relative' }}>
+
+          <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
           onLineSelect={connectivity.handleLineSelect}
           onActiveLineDomChange={setActiveLineDom}
         />
+
+
+          {showPatternOverlay && (
+
+            <CodePatternAnnotations
+
+              linePatterns={LINE_PATTERN_MAP}
+
+              currentPhase={step?.phase}
+
+              activeLineDom={activeLineDom}
+
+              activeLine={step?.activeLine}
+
+            />
+
+          )}
+
+        </div>
       ),
     },
     {
@@ -336,6 +371,9 @@ export default function RandomPickWithWeightVisualizer() {
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
       />
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -354,7 +392,7 @@ export default function RandomPickWithWeightVisualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      
     </div>
   )
 }

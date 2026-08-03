@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react'
+﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -9,7 +9,14 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './DuplicateEmailsVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 
+
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
   { line: 1, text: "// DuplicateEmails" },
   { line: 2, text: "function solve(input) {" },
@@ -139,7 +146,7 @@ export default function DuplicateEmailsVisualizer() {
         {step?.message ?? "Press Play or Step to begin."}
       </div>
 
-      <div className="duplicate_emails-dock">
+      <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -157,7 +164,7 @@ export default function DuplicateEmailsVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
-      </div>
+      </FloatingPanel>
 
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>

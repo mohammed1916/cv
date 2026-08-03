@@ -4,12 +4,25 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './CoinChange2Visualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+
+const PATTERNS = ['init', 'loop']
+
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  2: 'init',
+  3: 'loop',
+  4: 'loop',
+  5: 'loop'
+}
+
 
 const EXAMPLES = getExamples('coin-change-2')
 
@@ -248,13 +261,34 @@ export default function CoinChange2Visualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
+        <div style={{ position: 'relative' }}>
+
+          <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
           onLineSelect={connectivity.handleLineSelect}
           onActiveLineDomChange={setActiveLineDom}
         />
+
+
+          {showPatternOverlay && (
+
+            <CodePatternAnnotations
+
+              linePatterns={LINE_PATTERN_MAP}
+
+              currentPhase={step?.phase}
+
+              activeLineDom={activeLineDom}
+
+              activeLine={step?.activeLine}
+
+            />
+
+          )}
+
+        </div>
       ),
     },
     {
@@ -278,6 +312,9 @@ export default function CoinChange2Visualizer() {
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
       />
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -296,7 +333,7 @@ export default function CoinChange2Visualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from "react";
+﻿import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import DockableWorkspace from "../../components/shared/DockableWorkspace";
 import FloatingPanel from "../../components/shared/FloatingPanel";
@@ -10,7 +10,14 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./RotateArrayVisualizer.css";
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('rotate-array')
 
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const EXAMPLES = getExamples('rotate-array');
 
 function generateSteps(inputNums, inputK) {
@@ -231,3 +238,4 @@ export default function RotateArrayVisualizer() {
     </div>
   );
 }
+

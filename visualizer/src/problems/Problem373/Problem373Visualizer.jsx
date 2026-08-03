@@ -4,12 +4,19 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem373Visualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
+
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []
 
 const EXAMPLES = getExamples('search-a-2d-matrix-ii')
 
@@ -327,7 +334,7 @@ function VisualizationPanel({ matrix, target, step, applyEx, examples }) {
 
 export default function Problem373Visualizer() {
   const [exIndex, setExIndex] = useState(0)
-  const codeLines = SOLUTION_CODE_HOOK && SOLUTION_CODE_HOOK.length > 0 ? SOLUTION_CODE_HOOK : SOLUTION_CODE
+  const codeLines = SOLUTION_CODE
 
   const examples = EXAMPLES && EXAMPLES.length > 0 ? EXAMPLES : [
     {
@@ -392,13 +399,23 @@ export default function Problem373Visualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={codeLines}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-        />
+        <div style={{ position: 'relative' }}>
+          <CodeTracePanel
+            step={step}
+            codeLines={codeLines}
+            highlightedLines={connectivity.highlightedLines}
+            onLineSelect={connectivity.handleLineSelect}
+            onActiveLineDomChange={setActiveLineDom}
+          />
+          {step && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step.activeLine}
+            />
+          )}
+        </div>
       ),
     },
     {

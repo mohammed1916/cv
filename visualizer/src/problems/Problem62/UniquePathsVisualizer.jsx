@@ -1,14 +1,16 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { getExamples } from '../../config/examplesRegistry'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 import './UniquePathsVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -22,6 +24,15 @@ const SOLUTION_CODE = [
     { line: 8, text: '' },
     { line: 9, text: '        return dp[m-1][n-1]' },
 ]
+
+const UNIQUEPATHS_PATTERNS = ['done', 'fill', 'init']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',
+  7: 'fill',
+  9: 'done',
+}
 
 function generateSteps(m, n) {
     const steps = []
@@ -80,7 +91,9 @@ function UniquePathsVisualization({ m, n, step, onApplyExample, mInput, nInput, 
                         <label className="up-input-label">
                             m (rows):
                             <input className="up-input-num" type="number" min={1} max={7} value={mInput}
-                                onChange={(e) => { setMInput(Number(e.target.value)); handleReset() }} />
+                                onChange={(e) => { setMInput(Number(e.target.value));
+
+ handleReset() }} />
                         </label>
                         <label className="up-input-label">
                             n (cols):
@@ -185,37 +198,82 @@ export default function UniquePathsVisualizer() {
         setMInput(ex.m); setNInput(ex.n); handleReset()
     }, [handleReset])
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'code',
-            title: 'Code',
-            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
-        },
-        {
-            id: 'viz',
-            title: 'Visualization',
-            content: <UniquePathsVisualization m={m} n={n} step={step} onApplyExample={applyExample} mInput={mInput} nInput={nInput} setMInput={setMInput} setNInput={setNInput} handleReset={handleReset} />,
-        },
-    ], [step, autoScrollCode, m, n, applyExample, mInput, nInput, handleReset])
+    // Extract panels as consts
+    const primaryPanel = (
+        <UniquePathsVisualization m={m} n={n} step={step} onApplyExample={applyExample} mInput={mInput} nInput={nInput} setMInput={setMInput} setNInput={setNInput} handleReset={handleReset} />
+    )
+
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                autoScroll={autoScrollCode}
+                disableResizer
+            />
+            {showPatternOverlay && (
+                <CodePatternAnnotations
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
+                />
+            )}
+        </div>
+    )
+
+    const statusPanel = (
+        <div className="up-status">
+            {step?.message || 'Ready'}
+        </div>
+    )
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={UNIQUEPATHS_PATTERNS} />
+            )}
+            <PlaybackControls
+                isPlaying={isPlaying} isDone={isDone} speed={speed}
+                onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward}
+                onReset={handleReset} prevDisabled={stepIndex < 0}
+                nextDisabled={isDone} resetDisabled={stepIndex < 0}
+                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+                autoScroll={autoScrollCode} onAutoScrollChange={setAutoScrollCode} showAutoScroll
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                patternOverlayLabel="Show pattern overlay"
+                showPatternOverlayToggle
+            />
+        </>
+    )
+
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Unique Paths · 2D DP', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
-        <div className="problem-shell">
-            <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls
-                    isPlaying={isPlaying} isDone={isDone} speed={speed}
-                    onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward}
-                    onReset={handleReset} prevDisabled={stepIndex < 0}
-                    nextDisabled={isDone} resetDisabled={stepIndex < 0}
-                    onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                    autoScroll={autoScrollCode} onAutoScrollChange={setAutoScrollCode} showAutoScroll
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
-                />
-            </FloatingPanel>
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+        <div className="up-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(<div className="up-panel">{primaryPanel}</div>, panelDivs.primary)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     )
 }

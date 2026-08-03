@@ -1,4 +1,5 @@
-import { useState, useMemo, useCallback } from "react";
+﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from 'react-dom';
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -7,7 +8,15 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./PalindromePartitioningIIVisualizer.css";
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
+
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
   { line: 1,  text: "def minCut(s):" },
   { line: 2,  text: "    n = len(s)" },
@@ -85,8 +94,9 @@ export default function PalindromePartitioningIIVisualizer() {
   const phase = step?.phase ?? "init";
   const answer = dp[n - 1];
 
-  return (
-    <div className="pp-shell">
+  // Extract panels for Lumino DockPanel
+  const primaryPanel = (
+    <div className="pp-panel">
       <div className="pp-examples">
         {EXAMPLES.map(e => (
           <button key={e.label} className={`pp-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>
@@ -179,9 +189,28 @@ export default function PalindromePartitioningIIVisualizer() {
       </div>
 
       {step?.done && <div className="pp-result">✓ Min cuts = {answer}</div>}
+    </div>
+  );
 
-      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-      <div className="pp-status">{step?.message ?? "Press Play to begin."}</div>
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+      {showPatternOverlay && <CodePatternAnnotations step={step} activeLineDom={activeLineDom} />}
+    </div>
+  );
+
+  const statusPanel = (
+    <div className="pp-status">{step?.message ?? "Press Play to begin."}</div>
+  );
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && <PatternLegend />}
       <PlaybackControls
         isPlaying={isPlaying} isDone={isDone} speed={speed}
         onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -192,6 +221,34 @@ export default function PalindromePartitioningIIVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+    </>
+  );
+
+  const [panelDivs, setPanelDivs] = useState(null);
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Palindrome Partitioning II', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  );
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
+
+  return (
+    <div className="pp-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   );

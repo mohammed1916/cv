@@ -1,14 +1,18 @@
-import { useState, useCallback, useMemo } from 'react'
+﻿import { useState, useCallback, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './ValidParenthesesVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -24,6 +28,22 @@ const SOLUTION_CODE = [
   { line: 11, text: '                stack.append(char)' },
   { line: 12, text: '        return len(stack) == 0' },
 ]
+
+const VALIDPARENTHESES_PATTERNS = ['init', 'check', 'is_closing', 'is_opening', 'match', 'invalid', 'valid']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',        // stack = []
+  4: 'init',        // pairs = {...}
+  5: 'check',       // for char in s:
+  6: 'is_closing',  // if char in pairs:
+  7: 'is_closing',  // if not stack or stack[-1] != pairs[char]:
+  8: 'invalid',     // return False
+  9: 'match',       // stack.pop()
+  10: 'is_opening', // else:
+  11: 'is_opening', // stack.append(char)
+  12: 'valid',      // return len(stack) == 0
+}
 
 function generateSteps(s) {
   const steps = []
@@ -76,25 +96,87 @@ export default function ValidParenthesesVisualizer() {
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
+  // Extract panels into consts
+  const primaryPanel = (
+    <div className="validparen-panel">
+      <div className="validparen-panel-head">Bracket Dance</div>
+      <div className="validparen-panel-body">
+        <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>{EXAMPLES.map((ex) => (<button key={ex.label} onClick={() => applyExample(ex)} className="validparen-example-btn">{ex.label}</button>))}</div>
+        <input value={input} onChange={(e) => { setInput(e.target.value); handleReset() }} placeholder="Enter" className="validparen-input" style={{ width: '100%', marginBottom: 24 }} />
+        <div className="validparen-string-display">{input.split('').map((char, idx) => (<motion.div key={idx} className={`validparen-char ${step?.i === idx ? 'active' : ''} ${step?.phase === 'match' && (step.i === idx || step.matchIdx === idx) ? 'matched' : ''}`} animate={step?.i === idx ? { scale: 1.3 } : { scale: 1 }}>{char}</motion.div>))}</div>
+        {step?.message && <div className="validparen-narrative">{step.message}</div>}
+      </div>
+    </div>
+  )
+
+  const statePanel = (
+    <div className="validparen-panel">
+      <div className="validparen-panel-head">Stack</div>
+      <div className="validparen-panel-body">
+        <div className="validparen-stack-container">
+          <AnimatePresence>{step?.stack?.length > 0 ? step.stack.map((bracket, idx) => (<motion.div key={idx} layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="validparen-stack-item"><span className="validparen-stack-bracket">{bracket}</span></motion.div>)) : (<div className="validparen-stack-empty">Empty</div>)}</AnimatePresence>
+        </div>
+      </div>
+    </div>
+  )
+
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} disableResizer />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+        />
+      )}
+    </div>
+  )
+
+  const statusPanel = (
+    <div className={`validparen-status ${step?.phase === 'valid' ? 'success' : step?.phase === 'invalid' ? 'fail' : ''}`}>
+      {step?.message ?? 'Play!'}
+    </div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={VALIDPARENTHESES_PATTERNS} />
+      )}
+      <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={(e) => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Pattern" showPatternOverlayToggle />
+      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+    </>
+  )
+
+  // State + config for DockPanel
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Bracket Dance', dockMode: 'split-right' },
+      { id: 'state', title: 'Stack', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
   return (
     <div className="validparen-shell">
-      <ResizableSplitPanels className="validparen-top-split" storageKey="cpviz.split.validparen.top" initialLeftPercent={60} minLeftPx={360} minRightPx={280}
-        left={(<div className="validparen-panel"><div className="validparen-panel-head">Bracket Dance</div><div className="validparen-panel-body">
-          <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>{EXAMPLES.map((ex) => (<button key={ex.label} onClick={() => applyExample(ex)} className="validparen-example-btn">{ex.label}</button>))}</div>
-          <input value={input} onChange={(e) => { setInput(e.target.value); handleReset() }} placeholder="Enter" className="validparen-input" style={{ width: '100%', marginBottom: 24 }} />
-          <div className="validparen-string-display">{input.split('').map((char, idx) => (<motion.div key={idx} className={`validparen-char ${step?.i === idx ? 'active' : ''} ${step?.phase === 'match' && (step.i === idx || step.matchIdx === idx) ? 'matched' : ''}`} animate={step?.i === idx ? { scale: 1.3 } : { scale: 1 }}>{char}</motion.div>))}</div>
-          {step?.message && <div className="validparen-narrative">{step.message}</div>}
-        </div></div>)}
-        right={(<div className="validparen-panel"><div className="validparen-panel-head">Stack</div><div className="validparen-panel-body">
-          <div className="validparen-stack-container">
-            <AnimatePresence>{step?.stack?.length > 0 ? step.stack.map((bracket, idx) => (<motion.div key={idx} layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="validparen-stack-item"><span className="validparen-stack-bracket">{bracket}</span></motion.div>)) : (<div className="validparen-stack-empty">Empty</div>)}</AnimatePresence>
-          </div>
-        </div></div>)}
-      />
-      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />
-      <div className={`validparen-status ${step?.phase === 'valid' ? 'success' : step?.phase === 'invalid' ? 'fail' : ''}`}>{step?.message ?? 'Play!'}</div>
-      <div className="validparen-dock"><PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={(e) => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Pattern" showPatternOverlayToggle /></div>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

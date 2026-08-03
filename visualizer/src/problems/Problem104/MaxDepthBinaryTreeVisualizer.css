@@ -1,15 +1,11 @@
 .mdbt-shell {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 16px;
-    font-family: inherit;
-}
-
-.mdbt-top {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
+    height: calc(100vh - 200px);
+    min-height: 480px;
+    gap: 0;
+    overflow: hidden;
 }
 
 .mdbt-panel {

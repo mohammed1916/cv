@@ -4,12 +4,21 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem428Visualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('serialize-deserialize-nary-tree')
+
+// Pattern annotations
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+
+
 
 const EXAMPLES = getExamples('serialize-deserialize-nary-tree') || [
   { label: 'Example 1', tree: { val: 1, children: [{ val: 3, children: [{ val: 5 }, { val: 6 }] }, { val: 2 }, { val: 4 }] } },
@@ -211,7 +220,7 @@ export default function Problem428Visualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      
     </div>
   )
 }

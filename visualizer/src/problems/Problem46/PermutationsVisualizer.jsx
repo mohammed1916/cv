@@ -1,14 +1,16 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 import './PermutationsVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -28,6 +30,17 @@ const SOLUTION_CODE = [
     { line: 14, text: '    backtrack([], [False]*len(nums))' },
     { line: 15, text: '    return res' },
 ]
+
+const PERMUTATIONS_PATTERNS = ['choose', 'done', 'init', 'record', 'unchoose']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  5: 'record',
+  10: 'choose',
+  13: 'unchoose',
+  14: 'init',
+  15: 'done',
+}
 
 function generateSteps(nums) {
     const steps = []
@@ -99,7 +112,9 @@ function VisualizationPanel({ EXAMPLES, applyExample, numsInput, setNumsInput, n
                                 <button key={ex.label} className="perm-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
                             ))}
                         </div>
-                        <input className="perm-input" value={numsInput} onChange={(e) => { setNumsInput(e.target.value); handleReset() }} />
+                        <input className="perm-input" value={numsInput} onChange={(e) => { setNumsInput(e.target.value);
+
+ handleReset() }} />
 
                         <div className="perm-section-label">Current path</div>
                         <div className="perm-path-row">
@@ -171,38 +186,101 @@ export default function PermutationsVisualizer() {
 
     const applyExample = useCallback((ex) => { setNumsInput(JSON.stringify(ex.nums)); handleReset() }, [handleReset])
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'viz',
-            title: 'Visualization',
-            content: <VisualizationPanel EXAMPLES={EXAMPLES} applyExample={applyExample} numsInput={numsInput} setNumsInput={setNumsInput} nums={nums} inputError={inputError} handleReset={handleReset} step={step} />,
-        },
-        {
-            id: 'code',
-            title: 'Code',
-            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
-        },
-    ], [step, autoScrollCode])
+    // Panels for Lumino
+    const primaryPanel = (
+        <div className="perm-viz-panel">
+            <VisualizationPanel
+                EXAMPLES={EXAMPLES}
+                applyExample={applyExample}
+                numsInput={numsInput}
+                setNumsInput={setNumsInput}
+                nums={nums}
+                inputError={inputError}
+                handleReset={handleReset}
+                step={step}
+            />
+        </div>
+    )
+
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                autoScroll={autoScrollCode}
+                disableResizer
+            />
+            {showPatternOverlay && (
+                <CodePatternAnnotations
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
+                />
+            )}
+        </div>
+    )
+
+    const statusPanel = (
+        <div className="perm-status">
+            {step?.message || 'Press Play to begin.'}
+        </div>
+    )
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={PERMUTATIONS_PATTERNS} />
+            )}
+            <PlaybackControls
+                isPlaying={isPlaying}
+                isDone={isDone}
+                speed={speed}
+                onPlayToggle={togglePlay}
+                onPrev={stepBack}
+                onNext={stepForward}
+                onReset={handleReset}
+                prevDisabled={stepIndex < 0}
+                nextDisabled={isDone}
+                resetDisabled={stepIndex < 0}
+                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+                autoScroll={autoScrollCode}
+                onAutoScrollChange={setAutoScrollCode}
+                showAutoScroll
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                patternOverlayLabel="Show pattern overlay"
+                showPatternOverlayToggle
+            />
+        </>
+    )
+
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
-        <div className="problem-shell">
-            <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['viz', 'code']], minimized: [] }} />
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls
-                    isPlaying={isPlaying} isDone={isDone} speed={speed}
-                    onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-                    prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
-                    onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    showAutoScroll
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
-                />
-            </FloatingPanel>
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+        <div className="perm-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     )
 }

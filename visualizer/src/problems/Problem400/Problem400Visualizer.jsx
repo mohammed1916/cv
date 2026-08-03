@@ -1,12 +1,25 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+
+const PATTERNS = ['calculate', 'check_range', 'done', 'error', 'extract_digit', 'find_number', 'init', 'init_vars', 'range_update']
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  3: 'init_vars',
+  7: 'check_range',
+  9: 'range_update',
+  13: 'find_number',
+  15: 'extract_digit'
+}
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def findNthDigit(n):' },
@@ -196,7 +209,7 @@ export default function Problem400Visualizer() {
   }, [nInput])
 
   const steps = useMemo(
-    () => generateSteps(nInput).map((current) => ({
+    () => generateSteps().map((current) => ({
       ...current,
       relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
     })),
@@ -215,11 +228,10 @@ export default function Problem400Visualizer() {
   const applyExample = useCallback((ex) => {
     setNInput(ex.n)
     handleReset()
-  }, [handleReset])
+  }, [handleReset],
+  )
 
-  const connectivity = useCodeVisualConnectivity({
-    steps,
-    stepIndex,
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex,
     onStepJump: setStepIndex,
   })
 
@@ -366,13 +378,24 @@ export default function Problem400Visualizer() {
         </div>
 
         <div style={{ flex: 1 }}>
-          <CodeTracePanel
-            step={step}
+                    <div style={{ position: "relative" }}>
+            <CodeTracePanel
+              step={step}
             codeLines={SOLUTION_CODE}
             highlightedLines={connectivity.highlightedLines}
             onLineSelect={connectivity.handleLineSelect}
             onActiveLineDomChange={setActiveLineDom}
-          />
+            />
+          
+            {showPatternOverlay && (
+              <CodePatternAnnotations
+                linePatterns={LINE_PATTERN_MAP}
+                currentPhase={step?.phase}
+                activeLineDom={activeLineDom}
+                activeLine={step?.activeLine}
+              />
+            )}
+          </div>
         </div>
       </div>
 
@@ -385,6 +408,10 @@ export default function Problem400Visualizer() {
       </div>
 
       <div>
+        <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -402,9 +429,8 @@ export default function Problem400Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+      </FloatingPanel>
       </div>
-
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }

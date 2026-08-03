@@ -1,47 +1,61 @@
-import { useState, useMemo, useCallback } from "react";
+﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./SortColorsVisualizer.css";
-
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('sort-colors')
 const COLOR_LABEL = ["🔴", "⚪", "🔵"];
 const COLOR_NAME = ["Red", "White", "Blue"];
 const COLOR_HEX = ["#ef4444", "#f3f4f6", "#3b82f6"];
+
+const SORTCOLORS_PATTERNS = ['check', 'done', 'init', 'place_lo', 'place_hi', 'skip'];
+
+const LINE_PATTERN_MAP = {
+  2: 'init',
+  3: 'check',
+  4: 'place_lo',
+  6: 'skip',
+  9: 'place_hi',
+  11: 'done',
+};
 
 function generateSteps(initial) {
     const steps = [];
     const nums = [...initial];
     let lo = 0, mid = 0, hi = nums.length - 1;
 
-    steps.push({ activeLine: 2, nums: [...nums], lo, mid, hi, message: `Dutch National Flag. lo=0, mid=0, hi=${hi}` });
+    steps.push({ phase: 'init', activeLine: 2, nums: [...nums], lo, mid, hi, message: `Dutch National Flag. lo=0, mid=0, hi=${hi}` });
 
     while (mid <= hi) {
-        steps.push({ activeLine: 3, nums: [...nums], lo, mid, hi, message: `mid=${mid} ≤ hi=${hi}. nums[mid]=${nums[mid]}` });
+        steps.push({ phase: 'check', activeLine: 3, nums: [...nums], lo, mid, hi, message: `mid=${mid} ≤ hi=${hi}. nums[mid]=${nums[mid]}` });
 
         if (nums[mid] === 0) {
-            steps.push({ activeLine: 4, nums: [...nums], lo, mid, hi, message: `nums[mid]=0 → swap with lo=${lo}` });
+            steps.push({ phase: 'place_lo', activeLine: 4, nums: [...nums], lo, mid, hi, message: `nums[mid]=0 → swap with lo=${lo}` });
             [nums[lo], nums[mid]] = [nums[mid], nums[lo]];
             lo++; mid++;
-            steps.push({ activeLine: 6, nums: [...nums], lo, mid, hi, message: `After swap. lo=${lo}, mid=${mid}` });
+            steps.push({ phase: 'place_lo', activeLine: 6, nums: [...nums], lo, mid, hi, message: `After swap. lo=${lo}, mid=${mid}` });
         } else if (nums[mid] === 1) {
-            steps.push({ activeLine: 7, nums: [...nums], lo, mid, hi, message: `nums[mid]=1 → already white, mid++` });
+            steps.push({ phase: 'skip', activeLine: 7, nums: [...nums], lo, mid, hi, message: `nums[mid]=1 → already white, mid++` });
             mid++;
         } else {
-            steps.push({ activeLine: 9, nums: [...nums], lo, mid, hi, message: `nums[mid]=2 → swap with hi=${hi}` });
+            steps.push({ phase: 'place_hi', activeLine: 9, nums: [...nums], lo, mid, hi, message: `nums[mid]=2 → swap with hi=${hi}` });
             [nums[mid], nums[hi]] = [nums[hi], nums[mid]];
             hi--;
-            steps.push({ activeLine: 11, nums: [...nums], lo, mid, hi, message: `After swap. hi=${hi} (don't move mid yet)` });
+            steps.push({ phase: 'place_hi', activeLine: 11, nums: [...nums], lo, mid, hi, message: `After swap. hi=${hi} (don't move mid yet)` });
         }
     }
 
-    steps.push({ activeLine: 11, nums: [...nums], lo, mid, hi, message: `Done! Sorted: [${nums.join(",")}]` });
+    steps.push({ phase: 'done', activeLine: 11, nums: [...nums], lo, mid, hi, message: `Done! Sorted: [${nums.join(",")}]` });
     return steps;
 }
 
@@ -269,6 +283,7 @@ const EXAMPLES = getExamples('sort-colors');
 
 export default function SortColorsVisualizer() {
     const [sel, setSel] = useState(0);
+    const [panelDivs, setPanelDivs] = useState(null);
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
     const initial = EXAMPLES[sel].nums;
@@ -285,59 +300,92 @@ export default function SortColorsVisualizer() {
 
     const nums = step?.nums ?? initial;
 
-    const dockPanels = useMemo(() => [
-      {
-        id: 'code',
-        title: 'Code',
-        content: (
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-            onActiveLineDomChange={setActiveLineDom}
+    const codePanel = (
+      <div style={{ position: 'relative', height: '100%' }}>
+        <CodeTracePanel
+          step={step}
+          codeLines={SOLUTION_CODE}
+          highlightedLines={connectivity.highlightedLines}
+          onLineSelect={connectivity.handleLineSelect}
+          onActiveLineDomChange={setActiveLineDom}
+          disableResizer
+        />
+        {showPatternOverlay && (
+          <CodePatternAnnotations
+            linePatterns={LINE_PATTERN_MAP}
+            currentPhase={step?.phase}
+            activeLineDom={activeLineDom}
+            activeLine={step?.activeLine}
           />
-        ),
-      },
-      {
-        id: 'viz',
-        title: '🌈 Three Lanes',
-        content: (
-          <VisualizationPanel
-            nums={nums}
-            step={step}
-            applyExample={applyExample}
-          />
-        ),
-      },
-    ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, nums, applyExample]);
+        )}
+      </div>
+    );
+
+    const vizPanel = (
+      <VisualizationPanel
+        nums={nums}
+        step={step}
+        applyExample={applyExample}
+      />
+    );
+
+    const statusPanel = (
+      <div className="sc-status" style={{ display: 'flex', alignItems: 'center', padding: '8px 12px' }}>
+        <span>{step?.message || 'Ready to start'}</span>
+      </div>
+    );
+
+    const playbackPanel = (
+      <>
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={SORTCOLORS_PATTERNS} />
+        )}
+        <PlaybackControls
+          isPlaying={isPlaying}
+          isDone={isDone}
+          speed={speed}
+          onPlayToggle={togglePlay}
+          onPrev={stepBack}
+          onNext={stepForward}
+          onReset={handleReset}
+          prevDisabled={stepIndex <= 0}
+          nextDisabled={isDone}
+          resetDisabled={stepIndex <= 0}
+          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+          showPatternOverlay={showPatternOverlay}
+          onShowPatternOverlayChange={setShowPatternOverlay}
+          patternOverlayLabel="Show pattern overlay"
+          showPatternOverlayToggle
+        />
+      </>
+    );
+
+    const panelConfigs = useMemo(
+      () => [
+        { id: 'code', title: 'Code', dockMode: 'split-right' },
+        { id: 'viz', title: '🌈 Three Lanes', dockMode: 'split-right' },
+        { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+      ],
+      []
+    );
+
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
 
     return (
-      <div className="problem-shell">
-        <DockableWorkspace
-          panels={dockPanels}
-          initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
-        />
-        <FloatingPanel title="Playback Controls">
-          <PlaybackControls
-            isPlaying={isPlaying}
-            isDone={isDone}
-            speed={speed}
-            onPlayToggle={togglePlay}
-            onPrev={stepBack}
-            onNext={stepForward}
-            onReset={handleReset}
-            prevDisabled={stepIndex <= 0}
-            nextDisabled={isDone}
-            resetDisabled={stepIndex <= 0}
-            onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-            showPatternOverlay={showPatternOverlay}
-            onShowPatternOverlayChange={setShowPatternOverlay}
-            patternOverlayLabel="Show pattern overlay"
-            showPatternOverlayToggle
-          />
-        </FloatingPanel>
-        {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      <div className="sc-shell">
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+            {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+            {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+          </>
+        )}
+        {createPortal(
+          <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+          document.body
+        )}
       </div>
     );
 }
+

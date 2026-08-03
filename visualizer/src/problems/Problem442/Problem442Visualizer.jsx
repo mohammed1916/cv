@@ -4,12 +4,26 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem442Visualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('find-all-duplicates-in-array')
+
+const PATTERNS = ['check', 'complete', 'found_duplicate', 'init', 'mark_seen']
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  2: 'check',
+  3: 'found_duplicate',
+  4: 'mark_seen',
+  5: 'complete'
+}
+
 
 const EXAMPLES = getExamples('find-all-duplicates-in-array')
 
@@ -356,7 +370,7 @@ export default function Problem442Visualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      
     </div>
   )
 }

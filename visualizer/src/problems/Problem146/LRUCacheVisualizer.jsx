@@ -1,16 +1,23 @@
 import { useState, useCallback, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './LRUCacheVisualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 
+
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
   { line: 1, text: 'class Node:' },
   { line: 2, text: '    def __init__(self, key, val):' },
@@ -223,7 +230,9 @@ export default function LRUCacheVisualizer() {
     handleReset()
   }, [handleReset])
 
-  const CommandsInputPanel = (
+
+  // Extract panels
+  const inputPanel = (
     <div className="lru-panel-body">
       <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
         {EXAMPLES.map((ex) => (
@@ -279,7 +288,7 @@ export default function LRUCacheVisualizer() {
     </div>
   )
 
-  const VisualizationPanel = (
+  const vizPanel = (
     <div className="lru-panel-body lru-visuals">
       {/* Linked List visualization */}
       <div className="lru-list-container">
@@ -358,75 +367,79 @@ export default function LRUCacheVisualizer() {
     </div>
   )
 
-  const dockPanels = useMemo(() => [
-    {
-      id: 'input',
-      title: 'Sequence Commands',
-      subtitle: inputError ? 'Fix the input to resume playback.' : 'Edit commands and arguments.',
-      content: CommandsInputPanel,
-    },
-    {
-      id: 'viz',
-      title: 'Doubly Linked List & Hash Map',
-      subtitle: step ? `Cache: ${Object.keys(step?.cache || {}).length} / ${step?.capacity || 0}` : 'Data structure visualization.',
-      content: VisualizationPanel,
-    },
-    {
-      id: 'code',
-      title: 'Code Trace',
-      subtitle: step ? `Active line ${step.activeLine}` : 'Line-by-line solution view.',
-      content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          onActiveLineDomChange={setActiveLineDom}
-          autoScroll={autoScrollCode}
-        />
-      ),
-    },
-  ], [inputError, step, setActiveLineDom, autoScrollCode])
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        onActiveLineDomChange={setActiveLineDom}
+        autoScroll={autoScrollCode}
+        disableResizer
+      />
+      {showPatternOverlay && <CodePatternAnnotations step={step} />}
+    </div>
+  )
+
+  const statusPanel = (
+    <div className="lru-status">
+      {step?.message || 'Ready to execute commands.'}
+    </div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && <PatternLegend />}
+      <PlaybackControls
+        onReset={handleReset}
+        onPrev={stepBack}
+        onPlayToggle={togglePlay}
+        onNext={stepForward}
+        resetDisabled={steps.length === 0}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={steps.length === 0 || isDone}
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        speedIndicator={`${speed}ms`}
+        autoScroll={autoScrollCode}
+        onAutoScrollChange={setAutoScrollCode}
+        autoScrollLabel="Auto-scroll code"
+        showAutoScroll
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
+
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'input', title: 'Sequence Commands', dockMode: 'split-right' },
+      { id: 'viz', title: 'Doubly Linked List & Hash Map', dockMode: 'split-right' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
     <div className="lru-shell">
-      <DockableWorkspace
-        title="LRU Cache Visualizer"
-        panels={dockPanels}
-        initialLayout={{
-          rows: [
-            ['input', 'viz'],
-            ['code'],
-          ],
-          minimized: [],
-        }}
-      />
-
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          onReset={handleReset}
-          onPrev={stepBack}
-          onPlayToggle={togglePlay}
-          onNext={stepForward}
-          resetDisabled={steps.length === 0}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={steps.length === 0 || isDone}
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          speedIndicator={`${speed}ms`}
-          autoScroll={autoScrollCode}
-          onAutoScrollChange={setAutoScrollCode}
-          autoScrollLabel="Auto-scroll code"
-          showAutoScroll
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
-
-      {showPatternOverlay && step && (
-        <PatternOverlay step={step} activeLineDom={activeLineDom} />
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+          {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
       )}
     </div>
   )

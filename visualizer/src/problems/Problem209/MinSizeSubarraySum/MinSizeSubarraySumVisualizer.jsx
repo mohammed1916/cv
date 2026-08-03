@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from "react";
+﻿import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import DockableWorkspace from "../../../components/shared/DockableWorkspace";
 import FloatingPanel from "../../../components/shared/FloatingPanel";
@@ -10,7 +10,6 @@ import { usePatternOverlay } from "../../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../../config/examplesRegistry'
 import "./MinSizeSubarraySumVisualizer.css";
-
 const SOLUTION_CODE = [
   { line: 1, text: 'def minSubArrayLen(target, nums):' },
   { line: 2, text: '    l = 0; total = 0; res = inf' },
@@ -175,3 +174,4 @@ export default function MinSizeSubarraySumVisualizer() {
     </div>
   );
 }
+

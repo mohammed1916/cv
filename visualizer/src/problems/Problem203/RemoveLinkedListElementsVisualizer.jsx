@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react"
+﻿import { useState, useMemo } from "react"
 import { motion } from "framer-motion"
 import DockableWorkspace from "../../components/shared/DockableWorkspace"
 import FloatingPanel from "../../components/shared/FloatingPanel"
@@ -9,7 +9,12 @@ import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import "./RemoveLinkedListElementsVisualizer.css"
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const EXAMPLES = [{ label: "Example", head: [1, 2, 6, 3, 4, 5, 6], val: 6 }]
 const SOLUTION_CODE = [
   { line: 1, text: "def removeElements(head, val):" },
@@ -86,8 +91,10 @@ export default function RemoveLinkedListElementsVisualizer() {
   return (
     <div className="problem-shell">
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [["code", "viz"]], minimized: [] }} />
-      <FloatingPanel title="Controls"><PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={(e) => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Pattern" showPatternOverlayToggle /></FloatingPanel>
+      <FloatingPanel title="Controls"><PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={(e) => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Pattern" showPatternOverlayToggle />
+      </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }
+

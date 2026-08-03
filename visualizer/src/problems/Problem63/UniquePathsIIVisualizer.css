@@ -1,8 +1,11 @@
 .upii-shell {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    height: 100%;
+    height: calc(100vh - 200px);
+    min-height: 480px;
+    gap: 0;
+    overflow: hidden;
 }
 
 .upii-panel {
@@ -24,6 +27,15 @@
     color: var(--text);
     background: var(--surface3);
     flex-shrink: 0;
+}
+
+.upii-viz-section {
+    padding: 14px;
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
 }
 
 .upii-body {

@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -8,7 +8,14 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
 import { getExamples } from '../../config/examplesRegistry'
 import './RightSideViewVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 
+
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const CANVAS_W = 520
 const CANVAS_H = 320
 const NODE_R = 22
@@ -226,7 +233,8 @@ export default function RightSideViewVisualizer() {
 
             <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
             <div className="rsv-status">{step?.message || 'Press Play to begin.'}</div>
-            <PlaybackControls
+            <FloatingPanel title="Playback Controls">
+        <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
                 prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
@@ -236,6 +244,7 @@ export default function RightSideViewVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+      </FloatingPanel>
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     )

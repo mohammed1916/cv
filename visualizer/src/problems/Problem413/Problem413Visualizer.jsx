@@ -4,11 +4,27 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem413Visualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('arithmetic-slices')
+
+const PATTERNS = ['arith_found', 'check_i', 'done', 'init', 'init_dp', 'not_arith', 'update_dp']
+const LINE_PATTERN_MAP = {
+  1: 'done',
+  2: 'init_dp',
+  3: 'check_i',
+  4: 'arith_found',
+  5: 'update_dp',
+  6: 'not_arith',
+  7: 'done'
+}
+
 
 const EXAMPLES = [
   { label: 'Small', nums: [1, 2, 3], expected: 1 },
@@ -325,7 +341,7 @@ export default function Problem413Visualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      
     </div>
   )
 }

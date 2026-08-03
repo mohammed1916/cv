@@ -1,14 +1,16 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { getExamples } from '../../config/examplesRegistry'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import './UniquePathsIIVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -29,6 +31,17 @@ const SOLUTION_CODE = [
     { line: 15, text: '' },
     { line: 16, text: '        return dp[m-1][n-1]' },
 ]
+
+const UNIQUEPATHSII_PATTERNS = ['blocked', 'done', 'fill', 'fill_first_col', 'fill_first_row', 'init']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  4: 'blocked',
+  5: 'blocked',
+  7: 'init',
+  14: 'fill_first_row',
+  16: 'done',
+}
 
 function generateSteps(m, n, obstacleGrid) {
     const steps = []
@@ -195,9 +208,7 @@ function UniquePathsIIVisualization({ m, n, obstacleGrid, step, onApplyExample, 
     }
 
     return (
-        <section className="upii-panel">
-            <header className="upii-head"><span>Unique Paths II · 2D DP with Obstacles</span></header>
-            <div className="upii-body">
+        <section className="upii-viz-section">
                 <div className="upii-top-row">
                     <div className="upii-examples">
                         {DEFAULT_EXAMPLES.map((ex) => (
@@ -208,7 +219,9 @@ function UniquePathsIIVisualization({ m, n, obstacleGrid, step, onApplyExample, 
                         <label className="upii-input-label">
                             m (rows):
                             <input className="upii-input-num" type="number" min={1} max={6} value={mInput}
-                                onChange={(e) => { setMInput(Number(e.target.value)); handleReset() }} />
+                                onChange={(e) => { setMInput(Number(e.target.value));
+
+ handleReset() }} />
                         </label>
                         <label className="upii-input-label">
                             n (cols):
@@ -321,7 +334,6 @@ function UniquePathsIIVisualization({ m, n, obstacleGrid, step, onApplyExample, 
                         </motion.div>
                     )}
                 </AnimatePresence>
-            </div>
         </section>
     )
 }
@@ -367,44 +379,96 @@ export default function UniquePathsIIVisualizer() {
         handleReset()
     }, [handleReset])
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'code',
-            title: 'Code',
-            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
-        },
-        {
-            id: 'viz',
-            title: 'Visualization',
-            content: <UniquePathsIIVisualization
-                m={m} n={n} obstacleGrid={obstacleGrid} step={step}
-                onApplyExample={applyExample}
-                mInput={mInput} nInput={nInput}
-                setMInput={setMInput} setNInput={setNInput}
-                obstacleGridInput={obstacleGridInput} setObstacleGridInput={setObstacleGridInput}
-                handleReset={handleReset}
-            />,
-        },
-    ], [step, autoScrollCode, m, n, obstacleGrid, applyExample, mInput, nInput, obstacleGridInput, handleReset])
-
-    return (
-        <div className="problem-shell">
-            <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls
-                    isPlaying={isPlaying} isDone={isDone} speed={speed}
-                    onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward}
-                    onReset={handleReset} prevDisabled={stepIndex < 0}
-                    nextDisabled={isDone} resetDisabled={stepIndex < 0}
-                    onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                    autoScroll={autoScrollCode} onAutoScrollChange={setAutoScrollCode} showAutoScroll
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
+    // Step 2: Extract panels into consts
+    const primaryPanel = (
+        <div className="upii-panel">
+            <header className="upii-head"><span>Unique Paths II · 2D DP with Obstacles</span></header>
+            <div className="upii-body">
+                <UniquePathsIIVisualization
+                    m={m} n={n} obstacleGrid={obstacleGrid} step={step}
+                    onApplyExample={applyExample}
+                    mInput={mInput} nInput={nInput}
+                    setMInput={setMInput} setNInput={setNInput}
+                    obstacleGridInput={obstacleGridInput} setObstacleGridInput={setObstacleGridInput}
+                    handleReset={handleReset}
                 />
-            </FloatingPanel>
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+            </div>
+        </div>
+    )
+
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                autoScroll={autoScrollCode}
+                disableResizer
+            />
+            {showPatternOverlay && (
+                <CodePatternAnnotations
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
+                />
+            )}
+        </div>
+    )
+
+    const statusPanel = (
+        <div className="upii-status">
+            {step?.message ?? 'Press Play or Step to begin.'}
+        </div>
+    )
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={UNIQUEPATHSII_PATTERNS} />
+            )}
+            <PlaybackControls
+                isPlaying={isPlaying} isDone={isDone} speed={speed}
+                onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward}
+                onReset={handleReset} prevDisabled={stepIndex < 0}
+                nextDisabled={isDone} resetDisabled={stepIndex < 0}
+                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+                autoScroll={autoScrollCode} onAutoScrollChange={setAutoScrollCode} showAutoScroll
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                patternOverlayLabel="Show pattern overlay"
+                showPatternOverlayToggle
+            />
+        </>
+    )
+
+    // Step 3: Add state + config
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Unique Paths II', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+    // Step 4: Replace return with portals
+    return (
+        <div className="upii-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     )
 }

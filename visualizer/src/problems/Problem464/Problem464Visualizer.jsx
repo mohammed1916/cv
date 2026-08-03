@@ -4,12 +4,27 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
+
+const PATTERNS = ['check_sum', 'dfs_start', 'done', 'exploring', 'impossible', 'init_memo', 'start']
+const LINE_PATTERN_MAP = {
+  2: 'done',
+  3: 'check_sum',
+  4: 'impossible',
+  5: 'init_memo',
+  6: 'dfs_start',
+  9: 'exploring',
+  17: 'done'
+}
+
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def canIWin(maxChoosableInteger, desiredTotal):' },
@@ -390,6 +405,8 @@ function VisualizationPanel({ step, maxChoosable, desiredTotal, EXAMPLES, handle
     </section>
   )
 }
+
+const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
 
 export default function Problem464Visualizer() {
   const [maxChoosableInput, setMaxChoosableInput] = useState('10')

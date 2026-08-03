@@ -10,4 +10,13 @@ export default defineConfig({
   server: {
     port: 3010,
   },
+  build: {
+    rollupOptions: {
+      // Rolldown check: purely informational build-time breakdown. The build is
+      // fast (~3s), so silence this advisory while keeping all correctness checks on.
+      checks: {
+        pluginTimings: false,
+      },
+    },
+  },
 })

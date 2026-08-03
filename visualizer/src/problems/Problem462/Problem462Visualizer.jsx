@@ -4,12 +4,27 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
+
+const PATTERNS = ['add_move', 'calculating', 'done', 'init_moves', 'median_found', 'sorted', 'start']
+const LINE_PATTERN_MAP = {
+  1: 'done',
+  2: 'start',
+  3: 'median_found',
+  4: 'init_moves',
+  5: 'calculating',
+  6: 'add_move',
+  7: 'done'
+}
+
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def minMoves2(nums):' },
@@ -310,6 +325,8 @@ function VisualizationPanel({ step, nums, EXAMPLES, handleExampleClick, numsInpu
     </section>
   )
 }
+
+const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
 
 export default function Problem462Visualizer() {
   const [numsInput, setNumsInput] = useState('1,0,0,8,6')

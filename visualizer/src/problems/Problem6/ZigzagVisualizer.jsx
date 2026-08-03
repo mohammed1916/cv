@@ -4,11 +4,31 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './ZigzagVisualizer.css'
+
+const ZIGZAG_PATTERNS = ['walk', 'early_return']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'early_return',  // if numRows == 1 or numRows >= len(s):
+  4: 'early_return',  // return s
+  6: 'walk',          // rows = [""] * numRows
+  7: 'walk',          // current_row = 0
+  8: 'walk',          // step = 1
+  10: 'walk',         // for char in s:
+  11: 'walk',         // rows[current_row] += char
+  13: 'walk',         // if current_row == 0:
+  14: 'walk',         // step = 1
+  15: 'walk',         // elif current_row == numRows - 1:
+  16: 'walk',         // step = -1
+  18: 'walk',         // current_row += step
+  20: 'walk',         // return "".join(rows)
+}
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution(object):' },
@@ -336,7 +356,20 @@ export default function ZigzagVisualizer() {
     {
       id: 'code',
       title: 'Code',
-      content: <CodeTracePanel step={currentStep} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />,
+      content: (
+        <div style={{ position: 'relative' }}>
+          <CodeTracePanel step={currentStep} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={currentStep?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={currentStep?.activeLine}
+            />
+          )}
+        </div>
+      ),
     },
   ], [numRows, source, currentStep, previousStep, stepIndex, steps, isDone])
 
@@ -421,6 +454,9 @@ export default function ZigzagVisualizer() {
       />
 
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={currentStep?.phase} usedPatterns={ZIGZAG_PATTERNS} />
+        )}
         <PlaybackControls
           buttonClassName="zv-btn"
           ghostButtonClassName="zv-btn-ghost"
@@ -445,8 +481,6 @@ export default function ZigzagVisualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-
-      {showPatternOverlay && currentStep && <PatternOverlay step={currentStep} activeLineDom={activeLineDom} />}
     </div>
   )
 }

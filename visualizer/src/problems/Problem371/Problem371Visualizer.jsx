@@ -4,12 +4,28 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem371Visualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('sum-of-two-integers')
+
+const PATTERNS = ['and-operation', 'binary-representation', 'complete', 'shift-carry', 'update-variables', 'xor-operation']
+const LINE_PATTERN_MAP = {
+  1: 'binary-representation',
+  3: 'xor-operation',
+  4: 'and-operation',
+  5: 'shift-carry',
+  6: 'update-variables',
+  7: 'complete'
+}
+
 
 const EXAMPLES = getExamples('sum-of-two-integers')
 
@@ -469,13 +485,23 @@ export default function Problem371Visualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-        />
+        <div style={{ position: 'relative' }}>
+          <CodeTracePanel
+            step={step}
+            codeLines={SOLUTION_CODE}
+            highlightedLines={connectivity.highlightedLines}
+            onLineSelect={connectivity.handleLineSelect}
+            onActiveLineDomChange={setActiveLineDom}
+          />
+          {step && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step.activeLine}
+            />
+          )}
+        </div>
       ),
     },
     {

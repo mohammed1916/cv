@@ -4,11 +4,25 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './Problem385Visualizer.css'
+
+const PATTERNS = ['complete', 'init', 'list_complete', 'list_start', 'parse', 'parse_number']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  2: 'parse',
+  3: 'list_start',
+  10: 'parse_number',
+  12: 'list_complete',
+  14: 'parse_number',
+  18: 'complete',
+}
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def deserialize(s):' },
@@ -181,7 +195,13 @@ export default function Problem385Visualizer() {
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]
-  const steps = useMemo(() => generateSteps(ex.input), [ex])
+  const steps = useMemo(
+    () => generateSteps(ex.input).map((current) => ({
+      ...current,
+      relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
+    })),
+    [ex],
+  )
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
@@ -197,6 +217,7 @@ export default function Problem385Visualizer() {
       id: 'code',
       title: 'Code',
       content: (
+        <div style={{ position: "relative" }}>
         <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
@@ -204,6 +225,16 @@ export default function Problem385Visualizer() {
           onLineSelect={connectivity.handleLineSelect}
           onActiveLineDomChange={setActiveLineDom}
         />
+
+        {showPatternOverlay && (
+          <CodePatternAnnotations
+            linePatterns={LINE_PATTERN_MAP}
+            currentPhase={step?.phase}
+            activeLineDom={activeLineDom}
+            activeLine={step?.activeLine}
+          />
+        )}
+      </div>
       ),
     },
     {
@@ -373,6 +404,9 @@ export default function Problem385Visualizer() {
     <div className="problem-shell">
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -391,7 +425,6 @@ export default function Problem385Visualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }

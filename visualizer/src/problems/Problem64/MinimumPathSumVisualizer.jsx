@@ -1,18 +1,33 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 import './MinimumPathSumVisualizer.css'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('minimum-path-sum')
 
 const EXAMPLES = getExamples('minimum-path-sum')
+
+const MINIMUMPATHSUM_PATTERNS = ['done', 'fill', 'fill-col', 'fill-row', 'init']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',
+  6: 'fill-row',
+  9: 'fill-col',
+  12: 'fill',
+  14: 'done',
+}
 
 function generateSteps(grid) {
   const steps = []
@@ -267,69 +282,103 @@ export default function MinimumPathSumVisualizer() {
     handleReset()
   }, [handleReset])
 
-  const dockPanels = useMemo(() => [
-    {
-      id: 'code',
-      title: 'Code',
-      content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-          autoScroll={autoScrollCode}
+  // Panel definitions
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        autoScroll={autoScrollCode}
+        disableResizer
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
         />
-      ),
-    },
-    {
-      id: 'viz',
-      title: 'Visualization',
-      content: (
-        <MinimumPathSumVisualization
-          m={m}
-          n={n}
-          grid={grid}
-          step={step}
-          onApplyExample={applyExample}
-          gridInput={gridInput}
-          setGridInput={setGridInput}
-          handleReset={handleReset}
-          inputError={inputError}
-        />
-      ),
-    },
-  ], [step, SOLUTION_CODE, connectivity.highlightedLines, connectivity.handleLineSelect, autoScrollCode, m, n, grid, applyExample, gridInput, handleReset, inputError])
+      )}
+    </div>
+  )
+
+  const primaryPanel = (
+    <MinimumPathSumVisualization
+      m={m}
+      n={n}
+      grid={grid}
+      step={step}
+      onApplyExample={applyExample}
+      gridInput={gridInput}
+      setGridInput={setGridInput}
+      handleReset={handleReset}
+      inputError={inputError}
+    />
+  )
+
+  const statusPanel = (
+    <div className="mps-status">
+      {step ? `Step: ${step.phase} · ${step.message}` : 'Ready'}
+    </div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={MINIMUMPATHSUM_PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+        autoScroll={autoScrollCode}
+        onAutoScrollChange={setAutoScrollCode}
+        showAutoScroll
+      />
+    </>
+  )
+
+  // Lumino panel state and config
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Minimum Path Sum · 2D DP', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
-    <div className="problem-shell">
-      <DockableWorkspace
-        panels={dockPanels}
-        initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
-      />
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-          autoScroll={autoScrollCode}
-          onAutoScrollChange={setAutoScrollCode}
-          showAutoScroll
-        />
-      </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+    <div className="mps-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

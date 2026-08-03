@@ -1,15 +1,28 @@
-import { useState, useMemo, useCallback } from "react";
+﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./NQueensIIVisualizer.css";
+
+const NQUEENSII_PATTERNS = ['check', 'done', 'init', 'place', 'remove', 'skip', 'solution']
+
+const LINE_PATTERN_MAP = {
+  7: 'solution',
+  9: 'check',
+  10: 'skip',
+  11: 'place',
+  12: 'place',
+  13: 'remove',
+}
 
 const SOLUTION_CODE = [
   { line: 1,  text: "def solveNQueens(n):" },
@@ -196,59 +209,104 @@ export default function NQueensIIVisualizer() {
   const phase = step?.phase ?? "init";
   const attacked = useMemo(() => getAttacked(board, n), [board, n]);
 
-  // Dock panels configuration
-  const dockPanels = useMemo(() => [
-    {
-      id: "board",
-      title: "Board Visualization",
-      content: <BoardPanel EXAMPLES={EXAMPLES} ex={ex} n={n} board={board} activeRow={activeRow} activeCol={activeCol} phase={phase} attacked={attacked} step={step} applyEx={applyEx} />,
-    },
-    {
-      id: "code",
-      title: "Code Trace",
-      content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
-    },
-  ], [EXAMPLES, ex, n, board, activeRow, activeCol, phase, attacked, step, applyEx, setActiveLineDom, autoScrollCode]);
+  // Step 3: Extract panel consts
+  const boardPanel = (
+    <BoardPanel
+      EXAMPLES={EXAMPLES}
+      ex={ex}
+      n={n}
+      board={board}
+      activeRow={activeRow}
+      activeCol={activeCol}
+      phase={phase}
+      attacked={attacked}
+      step={step}
+      applyEx={applyEx}
+    />
+  );
 
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        onActiveLineDomChange={setActiveLineDom}
+        autoScroll={autoScrollCode}
+        disableResizer
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
+        />
+      )}
+    </div>
+  );
+
+  const statusPanel = (
+    <div className="nqii-status">{step?.message ?? "Press Play to begin."}</div>
+  );
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={NQUEENSII_PATTERNS} />
+      )}
+      <PlaybackControls
+        onReset={handleReset}
+        onPrev={stepBack}
+        onPlayToggle={togglePlay}
+        onNext={stepForward}
+        resetDisabled={steps.length === 0}
+        prevDisabled={stepIndex <= 0}
+        nextDisabled={steps.length === 0 || isDone}
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+        speedIndicator={`${speed}ms`}
+        autoScroll={autoScrollCode}
+        onAutoScrollChange={setAutoScrollCode}
+        autoScrollLabel="Auto-scroll code"
+        showAutoScroll
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  );
+
+  // Step 4: Add state + config
+  const [panelDivs, setPanelDivs] = useState(null);
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'board', title: 'Board Visualization', dockMode: 'split-right' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  );
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
+
+  // Step 5: Replace return block
   return (
     <div className="nqii-shell">
-      <DockableWorkspace
-        title="N-Queens II (Count Solutions)"
-        panels={dockPanels}
-        initialLayout={{
-          rows: [["board", "code"]],
-          minimized: [],
-        }}
-      />
-
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          onReset={handleReset}
-          onPrev={stepBack}
-          onPlayToggle={togglePlay}
-          onNext={stepForward}
-          resetDisabled={steps.length === 0}
-          prevDisabled={stepIndex <= 0}
-          nextDisabled={steps.length === 0 || isDone}
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onSpeedChange={(event) => setSpeed(Number(event.target.value))}
-          speedIndicator={`${speed}ms`}
-          autoScroll={autoScrollCode}
-          onAutoScrollChange={setAutoScrollCode}
-          autoScrollLabel="Auto-scroll code"
-          showAutoScroll
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
-
-      {showPatternOverlay && step && (
-        <PatternOverlay step={step} activeLineDom={activeLineDom} />
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.board && createPortal(boardPanel, panelDivs.board)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
       )}
     </div>
   );
 }
+

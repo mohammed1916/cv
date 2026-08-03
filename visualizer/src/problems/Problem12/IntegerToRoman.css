@@ -1,8 +1,24 @@
-.problem-shell {
+.i2r-shell {
+  position: relative;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  width: 100%;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
   background: #ffffff;
   color: #1e293b;
+}
+
+.i2r-panel {
+  background: #ffffff;
+  overflow: auto;
+}
+
+.i2r-status {
+  padding: 12px;
+  background-color: #f1f5f9;
+  font-size: 12px;
+  border-top: 1px solid #e2e8f0;
+  overflow: hidden;
 }

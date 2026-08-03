@@ -11,6 +11,16 @@
   overflow: hidden;
 }
 
+/* Managed mode: host (e.g. Lumino) owns sizing & scroll. Fill the parent as a
+   flex column so .ctp-scroll can flex-grow and use the host's scroll area. */
+.ctp-panel.ctp-managed {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
 .ctp-head {
   display: flex;
   align-items: center;

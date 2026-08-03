@@ -4,11 +4,27 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem420Visualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('strong-password-checker')
+
+const PATTERNS = ['check_char', 'check_length', 'check_length_long', 'count_missing', 'done', 'init', 'scan']
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  2: 'scan',
+  3: 'check_char',
+  4: 'count_missing',
+  5: 'check_length',
+  6: 'check_length_long',
+  7: 'done'
+}
+
 
 const EXAMPLES = [
   { label: 'Short', password: 'a', expected: 5 },
@@ -385,7 +401,7 @@ export default function Problem420Visualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      
     </div>
   )
 }

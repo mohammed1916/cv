@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -7,6 +7,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './RottingOrangesVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -276,7 +277,8 @@ export default function RottingOrangesVisualizer() {
       <div className={`rot-status ${step?.phase === 'done' ? (step?.ok ? 'ok' : 'bad') : ''}`}>
         {step?.message || 'Press Play to begin.'}
       </div>
-      <PlaybackControls
+      <FloatingPanel title="Playback Controls">
+        <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
         speed={speed}
@@ -293,6 +295,7 @@ export default function RottingOrangesVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )

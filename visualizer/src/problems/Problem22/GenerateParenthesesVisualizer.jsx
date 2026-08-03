@@ -1,16 +1,17 @@
-import { useState, useMemo, useCallback } from "react";
+﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./GenerateParenthesesVisualizer.css";
-
 const SOLUTION_CODE_INLINE = [
     { line: 1, text: "def generateParenthesis(n):" },
     { line: 2, text: "    res = []" },
@@ -26,6 +27,17 @@ const SOLUTION_CODE_INLINE = [
     { line: 12, text: "    return res" },
 ];
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
+
+const GENERATEPARENTHESES_PATTERNS = ['add_close', 'add_open', 'done', 'init', 'record']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  5: 'record',
+  8: 'add_open',
+  10: 'add_close',
+  11: 'init',
+  12: 'done',
+}
 
 function generateSteps(n) {
     const steps = [];
@@ -69,6 +81,8 @@ function generateSteps(n) {
 
 const EXAMPLES = getExamples('generate-parentheses');
 
+
+
 export default function GenerateParenthesesVisualizer() {
     const [n, setN] = useState(3);
 
@@ -86,79 +100,120 @@ export default function GenerateParenthesesVisualizer() {
 
     const s = step?.s ?? "";
 
-    const dockPanels = useMemo(() => [
-        {
-            id: "input",
-            title: "Input Controls",
-            subtitle: `n = ${n}`,
-            defaultZone: "left",
-            content: (
-                <div className="gp-panel-body">
-                    <div className="gp-examples">
-                        {EXAMPLES.map((ex) => (
-                            <button key={ex.label} className={`gp-chip ${n === ex.n ? "active" : ""}`}
-                                onClick={() => applyExample(ex)}>{ex.label}</button>
+    // Step 3: Extract panel constants
+    const primaryPanel = (
+        <div className="gp-panel-body">
+            <div className="gp-examples">
+                {EXAMPLES.map((ex) => (
+                    <button key={ex.label} className={`gp-chip ${n === ex.n ? "active" : ""}`}
+                        onClick={() => applyExample(ex)}>{ex.label}</button>
+                ))}
+            </div>
+        </div>
+    );
+
+    const vizPanel = (
+        <div className="gp-panel-body">
+            {/* Current string being built */}
+            <div className="gp-panel">
+                <div className="gp-panel-label">
+                    Current string &nbsp;|&nbsp; open={step?.open ?? 0} &nbsp;|&nbsp; close={step?.close ?? 0}
+                </div>
+                <div className="gp-str-row">
+                    {s.split("").map((c, i) => (
+                        <motion.div key={i}
+                            className={`gp-char ${c === "(" ? "open" : "close"} ${i === s.length - 1 && step?.phase !== "record" ? "new" : ""}`}
+                            initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }}
+                            transition={{ type: "spring", stiffness: 400, damping: 22 }}>
+                            {c}
+                        </motion.div>
+                    ))}
+                    {s.length === 0 && <span className="gp-empty-str">""</span>}
+                </div>
+            </div>
+
+            {/* Results */}
+            <div className="gp-panel">
+                <div className="gp-panel-label">Results ({step?.res?.length ?? 0})</div>
+                <div className="gp-res-grid">
+                    <AnimatePresence mode="popLayout">
+                        {(step?.res ?? []).map((combo, i) => (
+                            <motion.div key={combo}
+                                className={`gp-res-item ${i === (step?.res?.length ?? 0) - 1 && step?.phase === "record" ? "latest" : ""}`}
+                                initial={{ opacity: 0, scale: 0.7 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}
+                                transition={{ type: "spring", stiffness: 380, damping: 24 }}>
+                                {combo}
+                            </motion.div>
                         ))}
-                    </div>
+                    </AnimatePresence>
                 </div>
-            ),
-        },
-        {
-            id: "viz",
-            title: "Backtracking Visualization",
-            subtitle: step ? `Step ${stepIndex + 1} of ${steps.length}` : "Press play to start",
-            defaultZone: "right",
-            content: (
-                <div className="gp-panel-body">
-                    {/* Current string being built */}
-                    <div className="gp-panel">
-                        <div className="gp-panel-label">
-                            Current string &nbsp;|&nbsp; open={step?.open ?? 0} &nbsp;|&nbsp; close={step?.close ?? 0}
-                        </div>
-                        <div className="gp-str-row">
-                            {s.split("").map((c, i) => (
-                                <motion.div key={i}
-                                    className={`gp-char ${c === "(" ? "open" : "close"} ${i === s.length - 1 && step?.phase !== "record" ? "new" : ""}`}
-                                    initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ type: "spring", stiffness: 400, damping: 22 }}>
-                                    {c}
-                                </motion.div>
-                            ))}
-                            {s.length === 0 && <span className="gp-empty-str">""</span>}
-                        </div>
-                    </div>
+            </div>
 
-                    {/* Results */}
-                    <div className="gp-panel">
-                        <div className="gp-panel-label">Results ({step?.res?.length ?? 0})</div>
-                        <div className="gp-res-grid">
-                            <AnimatePresence mode="popLayout">
-                                {(step?.res ?? []).map((combo, i) => (
-                                    <motion.div key={combo}
-                                        className={`gp-res-item ${i === (step?.res?.length ?? 0) - 1 && step?.phase === "record" ? "latest" : ""}`}
-                                        initial={{ opacity: 0, scale: 0.7 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}
-                                        transition={{ type: "spring", stiffness: 380, damping: 24 }}>
-                                        {combo}
-                                    </motion.div>
-                                ))}
-                            </AnimatePresence>
-                        </div>
-                    </div>
+            <div className="gp-status">{step?.message ?? "Press Play to begin."}</div>
+        </div>
+    );
 
-                    <div className="gp-status">{step?.message ?? "Press Play to begin."}</div>
-                </div>
-            ),
-        },
-        {
-            id: "code",
-            title: "Code Trace",
-            subtitle: step ? `Line ${step.activeLine}` : "Trace the algorithm",
-            defaultZone: "full",
-            content: (
-                <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />
-            ),
-        },
-    ], [n, stepIndex, steps, step, applyExample, s, autoScrollCode, setActiveLineDom]);
+    const codePanel = (
+        <div style={{ position: "relative", height: "100%" }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                autoScroll={autoScrollCode}
+                disableResizer
+            />
+
+            {showPatternOverlay && (
+                <CodePatternAnnotations
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
+                />
+            )}
+        </div>
+    );
+
+    const statusPanel = (
+        <div className="gp-status-panel">
+            {step?.message ?? "Press Play to begin."}
+        </div>
+    );
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={GENERATEPARENTHESES_PATTERNS} />
+            )}
+            <PlaybackControls
+                isPlaying={isPlaying} isDone={isDone} speed={speed}
+                onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
+                prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
+                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                patternOverlayLabel="Show pattern overlay"
+                showPatternOverlayToggle
+                autoScroll={autoScrollCode}
+                onAutoScrollChange={setAutoScrollCode}
+                autoScrollLabel="Auto-scroll code"
+                showAutoScroll
+            />
+        </>
+    );
+
+    // Step 4: Add state and panelConfigs
+    const [panelDivs, setPanelDivs] = useState(null);
+    const panelConfigs = useMemo(
+        () => [
+            { id: "primary", title: "Input Controls", dockMode: "split-right" },
+            { id: "viz", title: "Backtracking Visualization", dockMode: "split-right" },
+            { id: "code", title: "Code Trace", dockMode: "split-bottom" },
+            { id: "status", title: "Status", dockMode: "split-bottom", ratio: 0.08 },
+        ],
+        []
+    );
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
 
     return (
         <div className="gp-shell">
@@ -173,36 +228,20 @@ export default function GenerateParenthesesVisualizer() {
                 </div>
             </section>
 
-            <DockableWorkspace
-                title="Generate Parentheses Workspace"
-                panels={dockPanels}
-                initialLayout={{
-                    rows: [
-                        ["input", "viz"],
-                        ["code", "code"],
-                    ],
-                    minimized: [],
-                }}
-            />
-
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls
-                    isPlaying={isPlaying} isDone={isDone} speed={speed}
-                    onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-                    prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
-                    onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    autoScrollLabel="Auto-scroll code"
-                    showAutoScroll
-                />
-            </FloatingPanel>
-
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     );
 }
+

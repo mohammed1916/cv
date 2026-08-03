@@ -1,9 +1,11 @@
 .mpl-shell {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 16px;
-    font-family: inherit;
+    height: calc(100vh - 200px);
+    min-height: 480px;
+    gap: 0;
+    overflow: hidden;
 }
 
 .mpl-examples {
@@ -177,6 +179,20 @@
     background: #1a0010;
     border: 2px solid #f38ba8;
     color: #f38ba8;
+}
+
+.mpl-status-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px 12px;
+    background: #1e1e2e;
+    border: 1px solid #313244;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #a6adc8;
+    min-height: 36px;
+    overflow-y: auto;
 }
 
 .mpl-status {

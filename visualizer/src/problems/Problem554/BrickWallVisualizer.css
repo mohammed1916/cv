@@ -1,0 +1,6 @@
+/* Brick Wall Visualizer Styles */
+.problem-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}

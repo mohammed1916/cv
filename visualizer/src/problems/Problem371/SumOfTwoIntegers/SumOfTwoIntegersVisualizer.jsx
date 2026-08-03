@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import DockableWorkspace from '../../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../../components/shared/FloatingPanel'
@@ -9,7 +9,6 @@ import { usePlaybackState } from '../../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../../hooks/useCodeVisualConnectivity'
 import './SumOfTwoIntegers.css'
-
 const SOLUTION_CODE = [
   { line: 1, text: 'def getSum(a: int, b: int) -> int:' },
   { line: 2, text: '    mask = 0xFFFFFFFF' },
@@ -293,3 +292,4 @@ export default function SumOfTwoIntegersVisualizer() {
     </div>
   )
 }
+

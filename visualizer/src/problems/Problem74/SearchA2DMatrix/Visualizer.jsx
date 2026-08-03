@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from "react";
+﻿import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import DockableWorkspace from "../../../components/shared/DockableWorkspace";
 import FloatingPanel from "../../../components/shared/FloatingPanel";
@@ -10,7 +10,6 @@ import { usePatternOverlay } from "../../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../../config/examplesRegistry'
 import "./Visualizer.css";
-
 const SOLUTION_CODE = [
     { line: 1, text: "def searchMatrix(matrix, target):" },
     { line: 2, text: "    rows, cols = len(matrix), len(matrix[0])" },
@@ -183,3 +182,4 @@ export default function SearchA2DMatrixVisualizer() {
         </div>
     );
 }
+

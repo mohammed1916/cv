@@ -4,10 +4,20 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+
+const PATTERNS = ['init', 'process', 'done']
+
+const LINE_PATTERN_MAP = {
+  8: 'init',
+  10: 'process',
+  12: 'done'
+}
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def maxProfit(prices):' },
@@ -36,6 +46,7 @@ function generateSteps(prices) {
   hold[0] = -prices[0]
 
   steps.push({
+    phase: 'init',
     activeLine: 8,
     i: 0,
     prices,
@@ -50,6 +61,7 @@ function generateSteps(prices) {
 
     const action = hold[i] !== hold[i - 1] ? 'BUY' : sold[i] !== sold[i - 1] ? 'SELL' : 'HOLD'
     steps.push({
+      phase: 'process',
       activeLine: 10,
       i,
       prices,
@@ -60,6 +72,7 @@ function generateSteps(prices) {
   }
 
   steps.push({
+    phase: 'done',
     activeLine: 12,
     i: n - 1,
     prices,
@@ -82,7 +95,13 @@ export default function BestTimeBuySellStockCooldownVisualizer() {
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]
-  const steps = useMemo(() => generateSteps(ex.prices), [ex])
+  const steps = useMemo(
+    () => generateSteps(ex.prices).map((current) => ({
+      ...current,
+      relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
+    })),
+    [ex]
+  )
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
@@ -98,13 +117,24 @@ export default function BestTimeBuySellStockCooldownVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-        />
+        <div style={{ position: 'relative' }}>
+          <CodeTracePanel
+            step={step}
+            codeLines={SOLUTION_CODE}
+            highlightedLines={connectivity.highlightedLines}
+            onLineSelect={connectivity.handleLineSelect}
+            onActiveLineDomChange={setActiveLineDom}
+          />
+
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
       ),
     },
     {
@@ -215,6 +245,9 @@ export default function BestTimeBuySellStockCooldownVisualizer() {
     <div className="problem-shell">
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -233,7 +266,6 @@ export default function BestTimeBuySellStockCooldownVisualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }

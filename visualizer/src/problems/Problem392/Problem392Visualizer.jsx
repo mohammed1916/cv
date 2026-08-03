@@ -1,12 +1,27 @@
-import { useState, useCallback, useMemo } from 'react'
+﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+
+const PATTERNS = ['done', 'found', 'increment', 'init', 'loop', 'match', 'no_match']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  4: 'done',
+  6: 'init',
+  8: 'loop',
+  9: 'match',
+  10: 'increment',
+  12: 'found',
+  15: 'done',
+}
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'class Solution:' },
@@ -254,13 +269,24 @@ export default function Problem392Visualizer() {
         </div>
 
         <div style={{ flex: 1 }}>
-          <CodeTracePanel
-            step={step}
+                    <div style={{ position: "relative" }}>
+            <CodeTracePanel
+              step={step}
             codeLines={SOLUTION_CODE}
             highlightedLines={connectivity.highlightedLines}
             onLineSelect={connectivity.handleLineSelect}
             onActiveLineDomChange={setActiveLineDom}
-          />
+            />
+          
+            {showPatternOverlay && (
+              <CodePatternAnnotations
+                linePatterns={LINE_PATTERN_MAP}
+                currentPhase={step?.phase}
+                activeLineDom={activeLineDom}
+                activeLine={step?.activeLine}
+              />
+            )}
+          </div>
         </div>
       </div>
 
@@ -273,6 +299,10 @@ export default function Problem392Visualizer() {
       </div>
 
       <div>
+        <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -290,9 +320,8 @@ export default function Problem392Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+      </FloatingPanel>
       </div>
-
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }

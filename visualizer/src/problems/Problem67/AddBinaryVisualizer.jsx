@@ -1,17 +1,33 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './AddBinaryVisualizer.css'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('add-binary')
 
 const EXAMPLES = getExamples('add-binary')
+
+const ADDBINARY_PATTERNS = ['init', 'check_loop', 'get_vals', 'sum', 'append', 'advance']
+
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  3: 'check_loop',
+  5: 'get_vals',
+  7: 'sum',
+  9: 'append',
+  11: 'advance',
+  14: 'init',
+}
 
 function generateSteps(a, b) {
   const steps = []
@@ -23,6 +39,7 @@ function generateSteps(a, b) {
   let result = []
 
   steps.push({
+    phase: 'init',
     activeLine: 1,
     i,
     j,
@@ -39,6 +56,7 @@ function generateSteps(a, b) {
   // Process digits
   while (i >= 0 || j >= 0 || carry > 0) {
     steps.push({
+      phase: 'check_loop',
       activeLine: 3,
       i,
       j,
@@ -56,6 +74,7 @@ function generateSteps(a, b) {
     const b_bit = j >= 0 ? parseInt(b[j]) : 0
 
     steps.push({
+      phase: 'get_vals',
       activeLine: 5,
       i,
       j,
@@ -72,6 +91,7 @@ function generateSteps(a, b) {
     const sum = a_bit + b_bit + carry
 
     steps.push({
+      phase: 'sum',
       activeLine: 7,
       i,
       j,
@@ -91,6 +111,7 @@ function generateSteps(a, b) {
     result.unshift(digit)
 
     steps.push({
+      phase: 'append',
       activeLine: 9,
       i,
       j,
@@ -110,6 +131,7 @@ function generateSteps(a, b) {
     if (j >= 0) j--
 
     steps.push({
+      phase: 'advance',
       activeLine: 11,
       i,
       j,
@@ -125,6 +147,7 @@ function generateSteps(a, b) {
   }
 
   steps.push({
+    phase: 'init',
     activeLine: 14,
     i,
     j,
@@ -345,60 +368,97 @@ export default function AddBinaryVisualizer() {
 
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  const dockPanels = useMemo(() => [
-    {
-      id: 'code',
-      title: 'Code',
-      content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-        />
-      ),
-    },
-    {
-      id: 'viz',
-      title: '🔢 Binary Addition',
-      content: (
-        <VisualizationPanel
-          a={ex.a}
-          b={ex.b}
-          step={step}
-          applyEx={applyEx}
-        />
-      ),
-    },
-  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
-
-  return (
-    <div className="problem-shell">
-      <DockableWorkspace
-        panels={dockPanels}
-        initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
+  // Step 3: Extract panels into consts
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
       />
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={e => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
         />
-      </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      )}
+    </div>
+  )
+
+  const vizPanel = (
+    <div className="ab-panel">
+      <VisualizationPanel
+        a={ex.a}
+        b={ex.b}
+        step={step}
+        applyEx={applyEx}
+      />
+    </div>
+  )
+
+  const statusPanel = (
+    <div className="ab-status">
+      {step?.message || 'Ready'}
+    </div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={ADDBINARY_PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={e => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
+
+  // Step 4: Add state + config
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
+      { id: 'viz', title: '🔢 Binary Addition', dockMode: 'split-right' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  // Step 5: Replace return block
+  return (
+    <div className="ab-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

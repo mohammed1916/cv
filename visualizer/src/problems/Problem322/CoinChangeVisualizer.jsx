@@ -2,7 +2,7 @@ import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
@@ -10,6 +10,19 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './CoinChangeVisualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
+
+const PATTERNS = ['check_coin', 'done', 'init', 'outer', 'update']
+const LINE_PATTERN_MAP = {
+  4: 'init',
+  6: 'outer',
+  8: 'check_coin',
+  9: 'update',
+  11: 'done'
+}
+
 
 const SOLUTION_CODE = [
     { line: 1, text: 'class Solution:' },
@@ -117,7 +130,13 @@ export default function CoinChangeVisualizer() {
         }
     }, [coinsInput, amountInput])
 
-    const steps = useMemo(() => generateSteps(coins, amount), [coins, amount])
+    const steps = useMemo(
+        () => generateSteps(coins, amount).map((current) => ({
+            ...current,
+            relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
+        })),
+        [coins, amount]
+    )
 
     const {
         stepIndex, stepForward, stepBack, togglePlay,

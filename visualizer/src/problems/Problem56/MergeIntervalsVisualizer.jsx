@@ -1,12 +1,16 @@
-import { useState, useCallback, useMemo } from 'react'
+﻿import { useState, useCallback, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './MergeIntervalsVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -20,6 +24,19 @@ const SOLUTION_CODE = [
   { line: 9, text: '                merged[-1][1] = max(merged[-1][1], interval[1])' },
   { line: 10, text: '        return merged' },
 ]
+
+const MERGEINTERVALS_PATTERNS = ['append', 'check', 'done', 'eval', 'init', 'merge', 'sorted']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',
+  4: 'sorted',
+  5: 'eval',
+  6: 'check',
+  7: 'append',
+  9: 'merge',
+  10: 'done',
+}
 
 function generateSteps(originalIntervals) {
   const steps = []
@@ -163,136 +180,184 @@ export default function MergeIntervalsVisualizer() {
     return { minVal, maxVal, range }
   }, [displayIntervals])
 
-  return (
-    <div className="merge-intervals-shell">
-      <div className="mi-top">
-        <div className="mi-panel">
-          <div className="mi-panel-head">
-            Input Intervals
-            {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
+  // Step 3: Extract panel consts
+  const primaryPanel = (
+    <div className="mi-panel">
+      <div className="mi-panel-head">
+        Input Intervals
+        {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
+      </div>
+      <div className="mi-panel-body">
+        <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
+          {EXAMPLES.map((ex) => (
+            <button
+              key={ex.label}
+              onClick={() => applyExample(ex)}
+              className="mi-example-btn"
+            >
+              {ex.label}
+            </button>
+          ))}
+        </div>
+
+        <input
+          value={intervalsInput}
+          onChange={(e) => { setIntervalsInput(e.target.value);
+handleReset() }}
+          placeholder="[[1,3],[2,6],[8,10],[15,18]]"
+          className="mi-input"
+        />
+
+        <div className="mi-canvas">
+          <div className="mi-axis">
+            {Array.from({ length: 11 }).map((_, i) => {
+              const val = Math.round(minVal + (i / 10) * range)
+              return (
+                <div key={i} className="mi-axis-tick" style={{ left: `${((val - minVal) / range) * 100}%` }}>
+                  <span className="mi-tick-label">{val}</span>
+                </div>
+              )
+            })}
           </div>
-          <div className="mi-panel-body">
-            <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
-              {EXAMPLES.map((ex) => (
-                <button
-                  key={ex.label}
-                  onClick={() => applyExample(ex)}
-                  className="mi-example-btn"
-                >
-                  {ex.label}
-                </button>
-              ))}
-            </div>
 
-            <input
-              value={intervalsInput}
-              onChange={(e) => { setIntervalsInput(e.target.value); handleReset() }}
-              placeholder="[[1,3],[2,6],[8,10],[15,18]]"
-              className="mi-input"
-            />
+          <div className="mi-intervals-list">
+            <div className="mi-section-title">Intervals {step?.isSorted ? '(Sorted)' : '(Unsorted)'}</div>
+            {displayIntervals.map((interval, i) => {
+              const isActive = step?.currIdx === i
+              const leftPct = ((interval[0] - minVal) / range) * 100
+              const widthPct = ((interval[1] - interval[0]) / range) * 100
 
-            <div className="mi-canvas">
-              <div className="mi-axis">
-                {Array.from({ length: 11 }).map((_, i) => {
-                  const val = Math.round(minVal + (i / 10) * range)
-                  return (
-                    <div key={i} className="mi-axis-tick" style={{ left: `${((val - minVal) / range) * 100}%` }}>
-                      <span className="mi-tick-label">{val}</span>
-                    </div>
-                  )
-                })}
-              </div>
+              return (
+                <div key={`input-${i}`} className="mi-row">
+                  <div className="mi-row-idx">[{i}]</div>
+                  <div className="mi-track">
+                    <motion.div
+                      className={`mi-bar ${isActive ? 'active' : ''}`}
+                      style={{ left: `${leftPct}%`, width: `${widthPct}%` }}
+                      layout
+                      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                    >
+                      <span className="mi-bar-text">[{interval[0]}, {interval[1]}]</span>
+                    </motion.div>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
 
-              <div className="mi-intervals-list">
-                <div className="mi-section-title">Intervals {step?.isSorted ? '(Sorted)' : '(Unsorted)'}</div>
-                {displayIntervals.map((interval, i) => {
-                  const isActive = step?.currIdx === i
-                  const leftPct = ((interval[0] - minVal) / range) * 100
-                  const widthPct = ((interval[1] - interval[0]) / range) * 100
+          <div className="mi-intervals-list merged-list">
+            <div className="mi-section-title">Merged</div>
+            {displayMerged.map((interval, i) => {
+              const isLast = i === displayMerged.length - 1
+              const isJustMerged = isLast && step?.phase === 'merge'
+              const isJustAppended = isLast && step?.phase === 'append'
+              const isActive = isLast && (isJustMerged || isJustAppended || step?.phase === 'eval' || step?.phase === 'check')
 
-                  return (
-                    <div key={`input-${i}`} className="mi-row">
-                      <div className="mi-row-idx">[{i}]</div>
-                      <div className="mi-track">
-                        <motion.div
-                          className={`mi-bar ${isActive ? 'active' : ''}`}
-                          style={{ left: `${leftPct}%`, width: `${widthPct}%` }}
-                          layout
-                          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                        >
-                          <span className="mi-bar-text">[{interval[0]}, {interval[1]}]</span>
-                        </motion.div>
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
+              const leftPct = ((interval[0] - minVal) / range) * 100
+              const widthPct = ((interval[1] - interval[0]) / range) * 100
 
-              <div className="mi-intervals-list merged-list">
-                <div className="mi-section-title">Merged</div>
-                {displayMerged.map((interval, i) => {
-                  const isLast = i === displayMerged.length - 1
-                  const isJustMerged = isLast && step?.phase === 'merge'
-                  const isJustAppended = isLast && step?.phase === 'append'
-                  const isActive = isLast && (isJustMerged || isJustAppended || step?.phase === 'eval' || step?.phase === 'check')
-
-                  const leftPct = ((interval[0] - minVal) / range) * 100
-                  const widthPct = ((interval[1] - interval[0]) / range) * 100
-
-                  return (
-                    <div key={`merged-${i}`} className="mi-row">
-                      <div className="mi-row-idx">[{i}]</div>
-                      <div className="mi-track">
-                        <motion.div
-                          className={`mi-bar merged ${isActive ? 'active' : ''} ${isJustMerged ? 'just-merged' : ''}`}
-                          style={{ left: `${leftPct}%`, width: `${widthPct}%` }}
-                          layout
-                          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                        >
-                          <span className="mi-bar-text">[{interval[0]}, {interval[1]}]</span>
-                        </motion.div>
-                      </div>
-                    </div>
-                  )
-                })}
-                {displayMerged.length === 0 && (
-                  <div className="mi-empty-text">[]</div>
-                )}
-              </div>
-            </div>
+              return (
+                <div key={`merged-${i}`} className="mi-row">
+                  <div className="mi-row-idx">[{i}]</div>
+                  <div className="mi-track">
+                    <motion.div
+                      className={`mi-bar merged ${isActive ? 'active' : ''} ${isJustMerged ? 'just-merged' : ''}`}
+                      style={{ left: `${leftPct}%`, width: `${widthPct}%` }}
+                      layout
+                      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                    >
+                      <span className="mi-bar-text">[{interval[0]}, {interval[1]}]</span>
+                    </motion.div>
+                  </div>
+                </div>
+              )
+            })}
+            {displayMerged.length === 0 && (
+              <div className="mi-empty-text">[]</div>
+            )}
           </div>
         </div>
       </div>
+    </div>
+  )
 
-      <div className="merge-intervals-middle">
-        <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-      </div>
-
-      <div className={`mi-status ${step?.phase === 'merge' ? 'merge' : step?.phase === 'append' ? 'append' : ''}`}>
-        {step?.message ?? 'Press Play or Step to begin.'}
-      </div>
-
-      <div className="mi-dock">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
         />
-      </div>
+      )}
+    </div>
+  )
 
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+  const statusPanel = (
+    <div className={`mi-status ${step?.phase === 'merge' ? 'merge' : step?.phase === 'append' ? 'append' : ''}`}>
+      {step?.message ?? 'Press Play or Step to begin.'}
+    </div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={MERGEINTERVALS_PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
+
+  // Step 4: Add state + config
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Input Intervals', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  // Step 5: Replace return block
+  return (
+    <div className="mi-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

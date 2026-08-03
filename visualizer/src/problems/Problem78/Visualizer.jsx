@@ -2,7 +2,7 @@ import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
@@ -150,6 +150,8 @@ function VisualizationPanel({ EXAMPLES, applyExample, numsInput, setNumsInput, n
     )
 }
 
+const LINE_PATTERN_MAP = {}
+
 export default function SubsetsVisualizer() {
     const [numsInput, setNumsInput] = useState('[1,2,3]')
 
@@ -180,7 +182,19 @@ export default function SubsetsVisualizer() {
         {
             id: 'code',
             title: 'Code',
-            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
+            content: (
+                <div style={{ position: "relative" }}>
+                    <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />
+                    {showPatternOverlay && (
+                        <CodePatternAnnotations
+                            linePatterns={LINE_PATTERN_MAP}
+                            currentPhase={step?.phase}
+                            activeLineDom={activeLineDom}
+                            activeLine={step?.activeLine}
+                        />
+                    )}
+                </div>
+            ),
         },
     ], [step, autoScrollCode])
 
@@ -202,7 +216,6 @@ export default function SubsetsVisualizer() {
                     showPatternOverlayToggle
                 />
             </FloatingPanel>
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     )
 }

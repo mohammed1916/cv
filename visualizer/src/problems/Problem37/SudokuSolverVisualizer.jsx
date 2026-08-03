@@ -1,12 +1,28 @@
-import { useState, useMemo, useCallback } from "react";
+﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./SudokuSolverVisualizer.css";
+import FloatingPanel from '../../components/shared/FloatingPanel';
+import LuminoDockPanel from '../../components/LuminoDockPanel';
+
+const SUDOKUSOLVER_PATTERNS = ['backtrack', 'done', 'init', 'place', 'recurse', 'skip']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  13: 'skip',
+  14: 'place',
+  15: 'recurse',
+  16: 'backtrack',
+  18: 'done',
+}
 
 const SOLUTION_CODE = [
   { line: 1,  text: "def solveSudoku(board):" },
@@ -111,38 +127,42 @@ export default function SudokuSolverVisualizer() {
     return s;
   }, [ex]);
 
-  return (
-    <div className="su-shell">
-      <div className="su-panel">
-        <div className="su-panel-label">Sudoku Board</div>
-        <div className="su-grid">
-          {board.map((row, r) =>
-            row.map((cell, c) => {
-              const isActive = r === activeR && c === activeC;
-              const isMutable = originalDots.has(`${r},${c}`);
-              const boxBorderR = (r + 1) % 3 === 0 && r !== 8;
-              const boxBorderC = (c + 1) % 3 === 0 && c !== 8;
-              return (
-                <motion.div
-                  key={`${r}-${c}`}
-                  className={[
-                    "su-cell",
-                    isMutable ? "mutable" : "fixed",
-                    isActive ? `active-${phase}` : "",
-                    boxBorderR ? "box-border-r" : "",
-                    boxBorderC ? "box-border-c" : "",
-                  ].join(" ")}
-                  animate={{ scale: isActive ? 1.15 : 1 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                >
-                  {cell === "." ? "" : cell}
-                </motion.div>
-              );
-            })
-          )}
-        </div>
+  // Step 3: Extract panels into consts
+  const primaryPanel = (
+    <div className="su-panel">
+      <div className="su-panel-label">Sudoku Board</div>
+      <div className="su-grid">
+        {board.map((row, r) =>
+          row.map((cell, c) => {
+            const isActive = r === activeR && c === activeC;
+            const isMutable = originalDots.has(`${r},${c}`);
+            const boxBorderR = (r + 1) % 3 === 0 && r !== 8;
+            const boxBorderC = (c + 1) % 3 === 0 && c !== 8;
+            return (
+              <motion.div
+                key={`${r}-${c}`}
+                className={[
+                  "su-cell",
+                  isMutable ? "mutable" : "fixed",
+                  isActive ? `active-${phase}` : "",
+                  boxBorderR ? "box-border-r" : "",
+                  boxBorderC ? "box-border-c" : "",
+                ].join(" ")}
+                animate={{ scale: isActive ? 1.15 : 1 }}
+                transition={{ type: "spring", stiffness: 400, damping: 20 }}
+              >
+                {cell === "." ? "" : cell}
+              </motion.div>
+            );
+          })
+        )}
       </div>
+    </div>
+  );
 
+  const statePanel = (
+    <div className="su-panel">
+      <div className="su-panel-label">State</div>
       <div className="su-trackers">
         <div className="su-tracker">
           <span className="su-tracker-label">Cell</span>
@@ -161,11 +181,38 @@ export default function SudokuSolverVisualizer() {
           <span className="su-tracker-val su-small">{stepIndex < 0 ? 0 : stepIndex + 1}/{steps.length}</span>
         </div>
       </div>
-
       {step?.done && <div className="su-result">✓ Sudoku Solved!</div>}
+    </div>
+  );
 
-      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-      <div className="su-status">{step?.message ?? "Press Play to begin."}</div>
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
+        />
+      )}
+    </div>
+  );
+
+  const statusPanel = (
+    <div className="su-status">{step?.message ?? "Press Play to begin."}</div>
+  );
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={SUDOKUSOLVER_PATTERNS} />
+      )}
       <PlaybackControls
         isPlaying={isPlaying} isDone={isDone} speed={speed}
         onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -176,7 +223,38 @@ export default function SudokuSolverVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+    </>
+  );
+
+  // Step 4: Add state + config
+  const [panelDivs, setPanelDivs] = useState(null);
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Sudoku Board', dockMode: 'split-right' },
+      { id: 'state', title: 'State', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  );
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
+
+  // Step 5: Replace return block with portals
+  return (
+    <div className="su-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   );
 }

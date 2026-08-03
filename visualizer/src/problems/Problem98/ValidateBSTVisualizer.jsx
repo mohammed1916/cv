@@ -1,13 +1,17 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
 import { getExamples } from '../../config/examplesRegistry'
 import './ValidateBSTVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
 const CANVAS_W = 520
 const CANVAS_H = 320
@@ -24,6 +28,18 @@ const SOLUTION_CODE = [
     { line: 8, text: '                and valid(node.right, node.val, hi))' },
     { line: 9, text: '        return valid(root, -inf, inf)' },
 ]
+
+const VALIDATEBST_PATTERNS = ['check', 'done', 'invalid', 'recurse-left', 'recurse-right']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  4: 'done',
+  5: 'check',
+  6: 'invalid',
+  7: 'recurse-left',
+  8: 'recurse-right',
+  9: 'done',
+}
 
 function generateSteps(arr) {
     const root = buildTree(arr)
@@ -138,91 +154,113 @@ export default function ValidateBSTVisualizer() {
     const edges = step?.edges ?? []
     const allNodes = step?.allNodes ?? []
 
-    return (
-        <div className="vbst-shell">
-            <div className="vbst-top">
-                <section className="vbst-panel main">
-                    <header className="vbst-head">
-                        <span>DFS with (lo, hi) bounds</span>
-                        {inputError && <span className="vbst-error">{inputError}</span>}
-                    </header>
-                    <div className="vbst-body">
-                        <div className="vbst-examples">
-                            {EXAMPLES.map((ex) => (
-                                <button key={ex.label} className="vbst-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                            ))}
-                        </div>
-                        <input className="vbst-input" value={arrInput} onChange={(e) => { setArrInput(e.target.value); handleReset() }} />
-                        <div className="vbst-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
-                            <svg style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }} width={CANVAS_W} height={CANVAS_H}>
-                                {edges.map(({ fromId, toId }) => {
-                                    const from = positions.get(fromId)
-                                    const to = positions.get(toId)
-                                    if (!from || !to) return null
-                                    return <line key={`${fromId}-${toId}`} x1={from.x} y1={from.y} x2={to.x} y2={to.y} stroke="#45475a" strokeWidth={1.5} />
-                                })}
-                            </svg>
-                            {allNodes.map((node) => {
-                                const pos = positions.get(node.id)
-                                if (!pos) return null
-                                const isActive = step?.activeId === node.id
-                                const isValid = step?.validIds?.has(node.id)
-                                const isInvalid = step?.invalidIds?.has(node.id)
-                                return (
-                                    <motion.div
-                                        key={node.id}
-                                        className={`vbst-node ${isActive ? 'active' : ''} ${isValid ? 'valid' : ''} ${isInvalid ? 'invalid' : ''}`}
-                                        style={{ left: pos.x - NODE_R, top: pos.y - NODE_R }}
-                                        animate={isActive ? { scale: 1.2 } : { scale: 1 }}
-                                        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                                    >
-                                        {node.val}
-                                    </motion.div>
-                                )
-                            })}
-                        </div>
-                    </div>
-                </section>
-
-                <section className="vbst-panel side">
-                    <header className="vbst-head"><span>Bounds</span></header>
-                    <div className="vbst-body">
-                        <div className="vbst-bounds">
-                            <div className="vbst-bound-row">
-                                <span className="vbst-label">lo</span>
-                                <strong className="vbst-lo">{step?.lo === -Infinity ? '-∞' : step?.lo ?? '—'}</strong>
-                            </div>
-                            <div className="vbst-bound-row">
-                                <span className="vbst-label">hi</span>
-                                <strong className="vbst-hi">{step?.hi === Infinity ? '+∞' : step?.hi ?? '—'}</strong>
-                            </div>
-                            <div className="vbst-bound-row">
-                                <span className="vbst-label">node</span>
-                                <strong className="vbst-node-val">
-                                    {step?.activeId != null && step.activeId !== -1
-                                        ? allNodes.find((n) => n.id === step.activeId)?.val ?? '—'
-                                        : '—'}
-                                </strong>
-                            </div>
-                        </div>
-                        <div className="vbst-legend">
-                            <div className="vbst-legend-item"><div className="vbst-dot active" />Checking</div>
-                            <div className="vbst-legend-item"><div className="vbst-dot valid" />Valid subtree</div>
-                            <div className="vbst-legend-item"><div className="vbst-dot invalid" />Violation</div>
-                        </div>
-                        <div className={`vbst-result ${step?.phase === 'done' ? (step.result ? 'ok' : 'fail') : ''}`}>
-                            {step?.phase === 'done'
-                                ? (step.result ? '✓ Valid BST' : '✗ Not a Valid BST')
-                                : 'Checking…'}
-                        </div>
-                    </div>
-                </section>
+    // Extract panels for Lumino DockPanel
+    const primaryPanel = (
+        <div className="vbst-panel main">
+            <header className="vbst-head">
+                <span>DFS with (lo, hi) bounds</span>
+                {inputError && <span className="vbst-error">{inputError}</span>}
+            </header>
+            <div className="vbst-body">
+                <div className="vbst-examples">
+                    {EXAMPLES.map((ex) => (
+                        <button key={ex.label} className="vbst-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
+                    ))}
+                </div>
+                <input className="vbst-input" value={arrInput} onChange={(e) => { setArrInput(e.target.value); handleReset() }} />
+                <div className="vbst-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
+                    <svg style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }} width={CANVAS_W} height={CANVAS_H}>
+                        {edges.map(({ fromId, toId }) => {
+                            const from = positions.get(fromId)
+                            const to = positions.get(toId)
+                            if (!from || !to) return null
+                            return <line key={`${fromId}-${toId}`} x1={from.x} y1={from.y} x2={to.x} y2={to.y} stroke="#45475a" strokeWidth={1.5} />
+                        })}
+                    </svg>
+                    {allNodes.map((node) => {
+                        const pos = positions.get(node.id)
+                        if (!pos) return null
+                        const isActive = step?.activeId === node.id
+                        const isValid = step?.validIds?.has(node.id)
+                        const isInvalid = step?.invalidIds?.has(node.id)
+                        return (
+                            <motion.div
+                                key={node.id}
+                                className={`vbst-node ${isActive ? 'active' : ''} ${isValid ? 'valid' : ''} ${isInvalid ? 'invalid' : ''}`}
+                                style={{ left: pos.x - NODE_R, top: pos.y - NODE_R }}
+                                animate={isActive ? { scale: 1.2 } : { scale: 1 }}
+                                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                            >
+                                {node.val}
+                            </motion.div>
+                        )
+                    })}
+                </div>
             </div>
+        </div>
+    )
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-            <div className={`vbst-status ${step?.phase === 'done' ? (step?.result ? 'ok' : 'fail') : ''}`}>
-                {step?.message || 'Press Play to begin.'}
+    const statePanel = (
+        <div className="vbst-panel side">
+            <header className="vbst-head"><span>Bounds</span></header>
+            <div className="vbst-body">
+                <div className="vbst-bounds">
+                    <div className="vbst-bound-row">
+                        <span className="vbst-label">lo</span>
+                        <strong className="vbst-lo">{step?.lo === -Infinity ? '-∞' : step?.lo ?? '—'}</strong>
+                    </div>
+                    <div className="vbst-bound-row">
+                        <span className="vbst-label">hi</span>
+                        <strong className="vbst-hi">{step?.hi === Infinity ? '+∞' : step?.hi ?? '—'}</strong>
+                    </div>
+                    <div className="vbst-bound-row">
+                        <span className="vbst-label">node</span>
+                        <strong className="vbst-node-val">
+                            {step?.activeId != null && step.activeId !== -1
+                                ? allNodes.find((n) => n.id === step.activeId)?.val ?? '—'
+                                : '—'}
+                        </strong>
+                    </div>
+                </div>
+                <div className="vbst-legend">
+                    <div className="vbst-legend-item"><div className="vbst-dot active" />Checking</div>
+                    <div className="vbst-legend-item"><div className="vbst-dot valid" />Valid subtree</div>
+                    <div className="vbst-legend-item"><div className="vbst-dot invalid" />Violation</div>
+                </div>
+                <div className={`vbst-result ${step?.phase === 'done' ? (step.result ? 'ok' : 'fail') : ''}`}>
+                    {step?.phase === 'done'
+                        ? (step.result ? '✓ Valid BST' : '✗ Not a Valid BST')
+                        : 'Checking…'}
+                </div>
             </div>
+        </div>
+    )
+
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} disableResizer />
+            {showPatternOverlay && (
+                <CodePatternAnnotations
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
+                />
+            )}
+        </div>
+    )
+
+    const statusPanel = (
+        <div className={`vbst-status ${step?.phase === 'done' ? (step?.result ? 'ok' : 'fail') : ''}`}>
+            {step?.message || 'Press Play to begin.'}
+        </div>
+    )
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={VALIDATEBST_PATTERNS} />
+            )}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -233,7 +271,37 @@ export default function ValidateBSTVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+        </>
+    )
+
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'DFS with (lo, hi) bounds', dockMode: 'split-right' },
+            { id: 'state', title: 'Bounds', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+    return (
+        <div className="vbst-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     )
 }
+

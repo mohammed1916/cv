@@ -44,8 +44,8 @@ export default function ResizableSplitPanels({
       const availableWidth = rect.width - state.dividerWidth
       if (availableWidth <= 0) return
       const rawLeft = event.clientX - rect.left - state.dividerWidth / 2
-      const minLeft = Math.min(minLeftPx, availableWidth - minRightPx)
-      const maxLeft = Math.max(minLeft, availableWidth - minRightPx)
+      const minLeft = minLeftPx
+      const maxLeft = availableWidth - minRightPx
       const nextLeft = clamp(rawLeft, minLeft, maxLeft)
       const nextPercent = (nextLeft / availableWidth) * 100
       setLeftPercent(clamp(nextPercent, 10, 90))

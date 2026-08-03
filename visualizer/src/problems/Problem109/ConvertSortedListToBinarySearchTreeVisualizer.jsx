@@ -1,6 +1,7 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -10,7 +11,13 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './ConvertSortedListToBinarySearchTreeVisualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 
+
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const EXAMPLES = getExamples('convert-sorted-list-to-binary-search-tree') || [
   { label: 'Example 1', list: [1, 2, 3, 4, 5, 6] },
   { label: 'Example 2', list: [-10, -3, 0, 5, 9] },
@@ -197,7 +204,7 @@ function VisualizationPanel({ step }) {
 }
 
 export default function ConvertSortedListToBinarySearchTreeVisualizer() {
-  const [input, setInput] = useState(EXAMPLES[0]?.list || [1, 2, 3, 4, 5, 6])
+  const [input] = useState(EXAMPLES[0]?.list || [1, 2, 3, 4, 5, 6])
   const steps = useMemo(
     () =>
       generateSteps(input).map((s) => ({
@@ -209,50 +216,82 @@ export default function ConvertSortedListToBinarySearchTreeVisualizer() {
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setInput(e.list); handleReset() }, [handleReset])
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  const dockPanels = useMemo(
-    () => [
-      {
-        id: 'code',
-        title: 'Code',
-        content: (
-          <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />
-        ),
-      },
-      {
-        id: 'viz',
-        title: '🌳 List to BST',
-        content: <VisualizationPanel step={step} />,
-      },
-    ],
-    [step, connectivity, setActiveLineDom]
+  // Extract panel consts
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+      {showPatternOverlay && <CodePatternAnnotations step={step} linePatternMap={LINE_PATTERN_MAP} patterns={PATTERNS} activeLineDom={activeLineDom} />}
+    </div>
   )
 
+  const primaryPanel = <VisualizationPanel step={step} />
+
+  const statusPanel = (
+    <div className="cslbtbst-status">
+      <div style={{ fontSize: 11, color: '#94a3b8', padding: '4px 8px' }}>
+        Step {stepIndex >= 0 ? stepIndex + 1 : 0} / {steps.length}
+      </div>
+    </div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
+
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: '🌳 List to BST', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
   return (
-    <div className="problem-shell">
-      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
+    <div className="cslbtbst-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )

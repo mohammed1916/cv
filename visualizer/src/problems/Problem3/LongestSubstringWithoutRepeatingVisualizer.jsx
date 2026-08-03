@@ -1,13 +1,31 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useApplyExample } from '../../hooks/useApplyExample'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './LongestSubstringWithoutRepeatingVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+
+const LSWRC_PATTERNS = ['init', 'check_right', 'check_collision', 'move_left', 'update_map', 'update_max', 'skip_max']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',         // char_map = {}
+  4: 'init',         // left = 0
+  5: 'init',         // max_len = 0
+  6: 'check_right',  // for right in range(len(s)):
+  7: 'check_collision', // if s[right] in char_map and char_map[s[right]] >= left:
+  8: 'move_left',    // left = char_map[s[right]] + 1
+  9: 'update_map',   // char_map[s[right]] = right
+  10: 'update_max',  // max_len = max(max_len, right - left + 1)
+}
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -130,173 +148,226 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
     setSpeed(Number(e.target.value))
   }, [setSpeed])
 
+  const primaryPanel = (
+    <div className="lswrc-panel" style={{ flex: 2 }}>
+      <div className="lswrc-panel-head">
+        String View
+        {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
+      </div>
+      <div className="lswrc-panel-body">
+        <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
+          {EXAMPLES.map((ex) => (
+            <button
+              key={ex.label}
+              onClick={() => applyExample(ex)}
+              className="lswrc-example-btn"
+            >
+              {ex.label}
+            </button>
+          ))}
+        </div>
+
+        <input
+          value={strInput}
+          onChange={handleStrInputChange}
+          placeholder="abcabcbb"
+          className="lswrc-input"
+          maxLength={24}
+        />
+
+        <div className="lswrc-string-container">
+          {s.split('').map((char, i) => {
+            const isLeft = step?.left === i
+            const isRight = step?.right === i
+            const isInWindow =
+              step &&
+              step.left !== null &&
+              step.right !== null &&
+              i >= step.left &&
+              i <= step.right
+            const isCollision = isRight && step?.collision && step?.phase === 'check_collision'
+
+            return (
+              <div key={i} className="lswrc-char-wrapper">
+                <div className="lswrc-index-label">{i}</div>
+                <motion.div
+                  className={`lswrc-char-box ${isInWindow ? 'in-window' : ''} ${isCollision ? 'collision' : ''} ${isLeft ? 'is-left' : ''} ${isRight ? 'is-right' : ''}`}
+                  layout
+                >
+                  {char}
+                </motion.div>
+                <div className="lswrc-pointers">
+                  {isLeft && <div className="lswrc-pointer left-pointer">L</div>}
+                  {isRight && <div className="lswrc-pointer right-pointer">R</div>}
+                </div>
+              </div>
+            )
+          })}
+          {s.length === 0 && <div style={{ color: '#64748b', fontStyle: 'italic' }}>Empty String</div>}
+        </div>
+
+        <div className="lswrc-window-indicator">
+          {step && step.left !== null && step.right !== null && step.left <= step.right && step.phase !== 'done' && (
+            <div className="lswrc-window-highlight">
+              Current Window Length: <span className="highlight-text">{step.right - step.left + 1}</span>
+              <span className="window-str">("{s.substring(step.left, step.right + 1)}")</span>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+
+  const statePanel = (
+    <div className="lswrc-panel">
+      <div className="lswrc-panel-head">
+        Hash Map <code>char_map = {'{}'}</code>
+      </div>
+      <div className="lswrc-panel-body">
+        <AnimatePresence mode="sync">
+          {(!step || Object.keys(step.charMap ?? {}).length === 0) ? (
+            <p style={{ color: '#475569', fontSize: 12, fontStyle: 'italic' }}>
+              Map is empty.
+            </p>
+          ) : (
+            <table className="lswrc-map-table">
+              <thead>
+                <tr>
+                  <th>Character</th>
+                  <th>Index</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.entries(step.charMap).map(([char, idx]) => {
+                  const isHighlighted = step?.currChar === char && (step?.phase === 'check_collision' || step?.phase === 'update_map' || step?.phase === 'move_left')
+                  return (
+                    <motion.tr
+                      key={char}
+                      className={`lswrc-map-row ${isHighlighted ? 'highlight' : ''}`}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 10 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <td>'{char}'</td>
+                      <td>{idx}</td>
+                    </motion.tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  )
+
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
+        />
+      )}
+    </div>
+  )
+
+  const variablesPanel = (
+    <div className="lswrc-panel">
+      <div className="lswrc-panel-head">Variables</div>
+      <div className="lswrc-panel-body">
+        <div className="lswrc-vars">
+          <div className="lswrc-var-row">
+            <span className="lswrc-var-name">left</span>
+            <span className="lswrc-var-val">{step?.left ?? '–'}</span>
+          </div>
+          <div className="lswrc-var-row">
+            <span className="lswrc-var-name">right</span>
+            <span className="lswrc-var-val">{step?.right ?? '–'}</span>
+          </div>
+          <div className="lswrc-var-row">
+            <span className="lswrc-var-name">s[right]</span>
+            <span className="lswrc-var-val">{step?.currChar ? `'${step.currChar}'` : '–'}</span>
+          </div>
+          <div className="lswrc-var-row" style={{ borderColor: '#8b5cf6' }}>
+            <span className="lswrc-var-name">max_len</span>
+            <span className="lswrc-var-val highlight" style={{ color: '#a78bfa' }}>{step?.maxLen ?? '–'}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+
+  const statusPanel = (
+    <div className={`lswrc-status ${step?.phase === 'update_max' ? 'found' : step?.phase === 'check_collision' && step?.collision ? 'collision' : ''}`}>
+      {step?.message ?? 'Press Play or Step to begin.'}
+    </div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={LSWRC_PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
+
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'String View', dockMode: 'split-right' },
+      { id: 'state',   title: 'Hash Map', dockMode: 'split-right' },
+      { id: 'code',    title: 'Code', dockMode: 'split-bottom' },
+      { id: 'variables', title: 'Variables', dockMode: 'tab-after' },
+      { id: 'status',  title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
   return (
     <div className="lswrc-shell">
-      <div className="lswrc-top">
-        <div className="lswrc-panel" style={{ flex: 2 }}>
-          <div className="lswrc-panel-head">
-            String View
-            {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
-          </div>
-          <div className="lswrc-panel-body">
-            <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
-              {EXAMPLES.map((ex) => (
-                <button
-                  key={ex.label}
-                  onClick={() => applyExample(ex)}
-                  className="lswrc-example-btn"
-                >
-                  {ex.label}
-                </button>
-              ))}
-            </div>
-
-            <input
-              value={strInput}
-              onChange={handleStrInputChange}
-              placeholder="abcabcbb"
-              className="lswrc-input"
-              maxLength={24}
-            />
-
-            <div className="lswrc-string-container">
-              {s.split('').map((char, i) => {
-                const isLeft = step?.left === i
-                const isRight = step?.right === i
-                const isInWindow =
-                  step &&
-                  step.left !== null &&
-                  step.right !== null &&
-                  i >= step.left &&
-                  i <= step.right
-                const isCollision = isRight && step?.collision && step?.phase === 'check_collision'
-
-                return (
-                  <div key={i} className="lswrc-char-wrapper">
-                    <div className="lswrc-index-label">{i}</div>
-                    <motion.div
-                      className={`lswrc-char-box ${isInWindow ? 'in-window' : ''} ${isCollision ? 'collision' : ''} ${isLeft ? 'is-left' : ''} ${isRight ? 'is-right' : ''}`}
-                      layout
-                    >
-                      {char}
-                    </motion.div>
-                    <div className="lswrc-pointers">
-                      {isLeft && <div className="lswrc-pointer left-pointer">L</div>}
-                      {isRight && <div className="lswrc-pointer right-pointer">R</div>}
-                    </div>
-                  </div>
-                )
-              })}
-              {s.length === 0 && <div style={{ color: '#64748b', fontStyle: 'italic' }}>Empty String</div>}
-            </div>
-
-            <div className="lswrc-window-indicator">
-              {step && step.left !== null && step.right !== null && step.left <= step.right && step.phase !== 'done' && (
-                <div className="lswrc-window-highlight">
-                  Current Window Length: <span className="highlight-text">{step.right - step.left + 1}</span>
-                  <span className="window-str">("{s.substring(step.left, step.right + 1)}")</span>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <div className="lswrc-panel" style={{ flex: 1 }}>
-          <div className="lswrc-panel-head">
-            Hash Map <code>char_map = {'{}'}</code>
-          </div>
-          <div className="lswrc-panel-body">
-            <AnimatePresence mode="sync">
-              {(!step || Object.keys(step.charMap ?? {}).length === 0) ? (
-                <p style={{ color: '#475569', fontSize: 12, fontStyle: 'italic' }}>
-                  Map is empty.
-                </p>
-              ) : (
-                <table className="lswrc-map-table">
-                  <thead>
-                    <tr>
-                      <th>Character</th>
-                      <th>Index</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {Object.entries(step.charMap).map(([char, idx]) => {
-                      const isHighlighted = step?.currChar === char && (step?.phase === 'check_collision' || step?.phase === 'update_map' || step?.phase === 'move_left')
-                      return (
-                        <motion.tr
-                          key={char}
-                          className={`lswrc-map-row ${isHighlighted ? 'highlight' : ''}`}
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          exit={{ opacity: 0, x: 10 }}
-                          transition={{ duration: 0.2 }}
-                        >
-                          <td>'{char}'</td>
-                          <td>{idx}</td>
-                        </motion.tr>
-                      )
-                    })}
-                  </tbody>
-                </table>
-              )}
-            </AnimatePresence>
-          </div>
-        </div>
-      </div>
-
-      <div className="lswrc-middle">
-        <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-
-        <div className="lswrc-panel">
-          <div className="lswrc-panel-head">Variables</div>
-          <div className="lswrc-panel-body">
-            <div className="lswrc-vars">
-              <div className="lswrc-var-row">
-                <span className="lswrc-var-name">left</span>
-                <span className="lswrc-var-val">{step?.left ?? '–'}</span>
-              </div>
-              <div className="lswrc-var-row">
-                <span className="lswrc-var-name">right</span>
-                <span className="lswrc-var-val">{step?.right ?? '–'}</span>
-              </div>
-              <div className="lswrc-var-row">
-                <span className="lswrc-var-name">s[right]</span>
-                <span className="lswrc-var-val">{step?.currChar ? `'${step.currChar}'` : '–'}</span>
-              </div>
-              <div className="lswrc-var-row" style={{ borderColor: '#8b5cf6' }}>
-                <span className="lswrc-var-name">max_len</span>
-                <span className="lswrc-var-val highlight" style={{ color: '#a78bfa' }}>{step?.maxLen ?? '–'}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className={`lswrc-status ${step?.phase === 'update_max' ? 'found' : step?.phase === 'check_collision' && step?.collision ? 'collision' : ''}`}>
-        {step?.message ?? 'Press Play or Step to begin.'}
-      </div>
-
-      <div className="lswrc-dock">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </div>
-
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.variables && createPortal(variablesPanel, panelDivs.variables)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

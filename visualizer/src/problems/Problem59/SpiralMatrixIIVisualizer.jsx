@@ -1,12 +1,16 @@
-import { useState, useCallback, useMemo } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+﻿import { useState, useCallback, useMemo } from 'react'
+import { createPortal } from 'react-dom'
+import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './SpiralMatrixIIVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
 const SOLUTION_CODE = [
   { line: 1,  text: 'class Solution:' },
@@ -36,6 +40,30 @@ const SOLUTION_CODE = [
   { line: 25, text: '                left += 1' },
   { line: 26, text: '        return matrix' },
 ]
+
+const SPIRALMATRIXII_PATTERNS = ['check_left_right', 'check_top_bottom', 'check_while', 'done', 'fill', 'init', 'start_down', 'start_left', 'start_right', 'start_up', 'update_bottom', 'update_left', 'update_right', 'update_top']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  2: 'done',
+  3: 'init',
+  7: 'check_while',
+  8: 'start_right',
+  9: 'fill',
+  11: 'update_top',
+  12: 'start_down',
+  13: 'fill',
+  15: 'update_right',
+  16: 'check_top_bottom',
+  17: 'start_left',
+  18: 'fill',
+  20: 'update_bottom',
+  21: 'check_left_right',
+  22: 'start_up',
+  23: 'fill',
+  25: 'update_left',
+  26: 'done',
+}
 
 function generateSteps(n) {
   const steps = []
@@ -200,7 +228,7 @@ export default function SpiralMatrixIIVisualizer() {
         throw new Error('n must be 1-20.')
       }
       return { n: parsed, inputError: '' }
-    } catch (e) {
+    } catch {
       return { n: 3, inputError: 'Invalid input' }
     }
   }, [nInput])
@@ -219,137 +247,186 @@ export default function SpiralMatrixIIVisualizer() {
     handleReset()
   }, [handleReset])
 
-  return (
-    <div className="spiral-matrix-ii-shell">
-      <div className="smi-top">
-        <div className="smi-panel">
-          <div className="smi-panel-head">
-            Matrix Generation
-            {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
-          </div>
-          <div className="smi-panel-body">
-            <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
-              {EXAMPLES.map((ex) => (
-                <button
-                  key={ex.label}
-                  onClick={() => applyExample(ex)}
-                  className="smi-example-btn"
+  // Extract panels as consts
+  const primaryPanel = (
+    <div className="smi-panel">
+      <div className="smi-panel-head">
+        Matrix Generation
+        {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
+      </div>
+      <div className="smi-panel-body">
+        <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
+          {EXAMPLES.map((ex) => (
+            <button
+              key={ex.label}
+              onClick={() => applyExample(ex)}
+              className="smi-example-btn"
+            >
+              {ex.label}
+            </button>
+          ))}
+        </div>
+
+        <div style={{ marginBottom: 12 }}>
+          <label style={{ fontSize: 13, color: '#94a3b8', display: 'block', marginBottom: 6 }}>
+            n (matrix size):
+          </label>
+          <input
+            value={nInput}
+            onChange={(e) => { setNInput(e.target.value); handleReset() }}
+            placeholder="3"
+            className="smi-input"
+            type="number"
+            min="1"
+            max="20"
+          />
+        </div>
+
+        <div className="smi-matrix-container">
+          <div
+            className="smi-grid"
+            style={{
+              gridTemplateColumns: `repeat(${n}, 1fr)`,
+              gridTemplateRows: `repeat(${n}, 1fr)`,
+              width: Math.min(n * 50, 400),
+              height: Math.min(n * 50, 400),
+            }}
+          >
+            {step && step.matrix.map((row, i) => row.map((val, j) => {
+              const isCurrent = step && step.currI === i && step.currJ === j
+              const isFilled = val > 0
+
+              return (
+                <motion.div
+                  key={`${i}-${j}`}
+                  className={`smi-cell ${isFilled ? 'filled' : ''} ${isCurrent ? 'current' : ''}`}
+                  layout
                 >
-                  {ex.label}
-                </button>
-              ))}
-            </div>
+                  {isFilled ? val : ''}
+                </motion.div>
+              )
+            }))}
+          </div>
+        </div>
 
-            <div style={{ marginBottom: 12 }}>
-              <label style={{ fontSize: 13, color: '#94a3b8', display: 'block', marginBottom: 6 }}>
-                n (matrix size):
-              </label>
-              <input
-                value={nInput}
-                onChange={(e) => { setNInput(e.target.value); handleReset() }}
-                placeholder="3"
-                className="smi-input"
-                type="number"
-                min="1"
-                max="20"
-              />
-            </div>
+        <div style={{ marginTop: 12, fontSize: 13, color: '#94a3b8' }}>
+          Current num: <span style={{ color: '#60a5fa', fontWeight: 600 }}>{step?.num ?? '–'}</span>
+        </div>
+      </div>
+    </div>
+  )
 
-            <div className="smi-matrix-container">
-              <div
-                className="smi-grid"
-                style={{
-                  gridTemplateColumns: `repeat(${n}, 1fr)`,
-                  gridTemplateRows: `repeat(${n}, 1fr)`,
-                  width: Math.min(n * 50, 400),
-                  height: Math.min(n * 50, 400),
-                }}
-              >
-                {step && step.matrix.map((row, i) => row.map((val, j) => {
-                  const isCurrent = step && step.currI === i && step.currJ === j
-                  const isFilled = val > 0
-
-                  return (
-                    <motion.div
-                      key={`${i}-${j}`}
-                      className={`smi-cell ${isFilled ? 'filled' : ''} ${isCurrent ? 'current' : ''}`}
-                      layout
-                    >
-                      {isFilled ? val : ''}
-                    </motion.div>
-                  )
-                }))}
-              </div>
-            </div>
-
-            <div style={{ marginTop: 12, fontSize: 13, color: '#94a3b8' }}>
-              Current num: <span style={{ color: '#60a5fa', fontWeight: 600 }}>{step?.num ?? '–'}</span>
-            </div>
+  const statePanel = (
+    <div className="smi-panel">
+      <div className="smi-panel-head">Variables</div>
+      <div className="smi-panel-body">
+        <div className="smi-vars">
+          <div className="smi-var-row">
+            <span className="smi-var-name">top</span>
+            <span className="smi-var-val" style={{ color: '#ef4444' }}>{step?.top ?? '–'}</span>
+          </div>
+          <div className="smi-var-row">
+            <span className="smi-var-name">bottom</span>
+            <span className="smi-var-val" style={{ color: '#f97316' }}>{step?.bottom ?? '–'}</span>
+          </div>
+          <div className="smi-var-row">
+            <span className="smi-var-name">left</span>
+            <span className="smi-var-val" style={{ color: '#3b82f6' }}>{step?.left ?? '–'}</span>
+          </div>
+          <div className="smi-var-row">
+            <span className="smi-var-name">right</span>
+            <span className="smi-var-val" style={{ color: '#8b5cf6' }}>{step?.right ?? '–'}</span>
+          </div>
+          <div className="smi-var-row">
+            <span className="smi-var-name">num</span>
+            <span className="smi-var-val highlight">{step?.num ?? '–'}</span>
+          </div>
+          <div className="smi-var-row">
+            <span className="smi-var-name">n</span>
+            <span className="smi-var-val">{n}</span>
           </div>
         </div>
       </div>
+    </div>
+  )
 
-      <div className="spiral-matrix-ii-middle">
-        <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-
-        <div className="smi-panel">
-          <div className="smi-panel-head">Variables</div>
-          <div className="smi-panel-body">
-            <div className="smi-vars">
-              <div className="smi-var-row">
-                <span className="smi-var-name">top</span>
-                <span className="smi-var-val" style={{ color: '#ef4444' }}>{step?.top ?? '–'}</span>
-              </div>
-              <div className="smi-var-row">
-                <span className="smi-var-name">bottom</span>
-                <span className="smi-var-val" style={{ color: '#f97316' }}>{step?.bottom ?? '–'}</span>
-              </div>
-              <div className="smi-var-row">
-                <span className="smi-var-name">left</span>
-                <span className="smi-var-val" style={{ color: '#3b82f6' }}>{step?.left ?? '–'}</span>
-              </div>
-              <div className="smi-var-row">
-                <span className="smi-var-name">right</span>
-                <span className="smi-var-val" style={{ color: '#8b5cf6' }}>{step?.right ?? '–'}</span>
-              </div>
-              <div className="smi-var-row">
-                <span className="smi-var-name">num</span>
-                <span className="smi-var-val highlight">{step?.num ?? '–'}</span>
-              </div>
-              <div className="smi-var-row">
-                <span className="smi-var-name">n</span>
-                <span className="smi-var-val">{n}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className={`smi-status ${step?.phase === 'fill' ? 'fill' : ''}`}>
-        {step?.message ?? 'Press Play or Step to begin.'}
-      </div>
-
-      <div className="smi-dock">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
         />
-      </div>
+      )}
+    </div>
+  )
 
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+  const statusPanel = (
+    <div className={`smi-status ${step?.phase === 'fill' ? 'fill' : ''}`}>
+      {step?.message ?? 'Press Play or Step to begin.'}
+    </div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={SPIRALMATRIXII_PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
+
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Matrix Generation', dockMode: 'split-right' },
+      { id: 'state',   title: 'Variables', dockMode: 'split-right' },
+      { id: 'code',    title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status',  title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  return (
+    <div className="smi-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.state   && createPortal(statePanel,   panelDivs.state)}
+          {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}
+          {panelDivs.status  && createPortal(statusPanel,  panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

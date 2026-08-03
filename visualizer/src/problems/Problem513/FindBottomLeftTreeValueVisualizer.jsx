@@ -1,15 +1,56 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './FindBottomLeftTreeValueVisualizer.css'
+import PatternOverlay from "../../components/PatternOverlay";
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('find-bottom-left-tree-value')
+
+const PATTERNS = {
+  'init': { icon: '◯', label: 'Initialize', color: '#06b6d4' },
+  'loop': { icon: '⟳', label: 'Iterate', color: '#3b82f6' },
+  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#3b82f6' },
+  'found': { icon: '✓', label: 'Match Found', color: '#10b981' },
+  'done': { icon: '✓', label: 'Complete', color: '#10b981' },
+}
+
+const LINE_PATTERN_MAP = {
+
+
+  1: 'init',
+
+
+  2: 'loop',
+
+
+  3: 'loop',
+
+
+  4: 'loop',
+
+
+  5: 'loop',
+
+
+  6: 'loop',
+
+
+  7: 'loop',
+
+
+  8: 'done',
+
+
+}
 
 const EXAMPLES = getExamples('find-bottom-left-tree-value')
 
@@ -359,6 +400,7 @@ export default function FindBottomLeftTreeValueVisualizer() {
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
       />
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -381,3 +423,4 @@ export default function FindBottomLeftTreeValueVisualizer() {
     </div>
   )
 }
+

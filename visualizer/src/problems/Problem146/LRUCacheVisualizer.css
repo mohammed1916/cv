@@ -1,23 +1,11 @@
 .lru-shell {
+  position: relative;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  gap: 16px;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
   overflow: hidden;
-}
-
-.lru-top {
-  display: flex;
-  flex: 1;
-  min-height: 0;
-  gap: 16px;
-}
-
-.lru-middle {
-  display: flex;
-  height: 240px;
-  gap: 16px;
-  flex-shrink: 0;
 }
 
 .lru-panel {

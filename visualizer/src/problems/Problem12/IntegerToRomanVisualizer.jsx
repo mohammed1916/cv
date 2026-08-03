@@ -1,14 +1,31 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './IntegerToRoman.css'
+
+const I2R_PATTERNS = ['init', 'check', 'loop', 'append', 'subtract', 'done']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  1: 'init',   // def intToRoman(num: int) -> str:
+  2: 'init',   // values = [1000,900,...]
+  3: 'init',   // symbols = ["M","CM",...]
+  4: 'init',   // result = ""
+  5: 'check',  // for i, val in enumerate(values):
+  6: 'loop',   // while num >= val:
+  7: 'append', // result += symbols[i]
+  8: 'subtract', // num -= val
+  9: 'done',   // return result
+}
 
 const SOLUTION_CODE = [
   { line: 1, text: 'def intToRoman(num: int) -> str:' },
@@ -226,154 +243,191 @@ export default function IntegerToRomanVisualizer() {
     handleReset()
   }, [handleReset])
 
-  const dockPanels = useMemo(() => [
-    {
-      id: 'code',
-      title: 'Code',
-      content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
+  // Step 2: Extract panels into consts
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.activeLine ? LINE_PATTERN_MAP[step.activeLine] : undefined}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
         />
-      ),
-    },
-    {
-      id: 'viz',
-      title: '🔢 Roman Numeral Construction',
-      content: (
-        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {EXAMPLES.map((ex) => (
-              <button
-                key={ex.label}
-                onClick={() => applyExample(ex)}
-                style={{
-                  padding: '6px 12px',
-                  borderRadius: 4,
-                  border: '1px solid #cbd5e1',
-                  cursor: 'pointer',
-                  fontSize: 12,
-                  backgroundColor: numInput === ex.num ? '#dbeafe' : '#f1f5f9',
-                  fontWeight: numInput === ex.num ? 600 : 400,
-                }}
-                title={ex.note}
-              >
-                {ex.label}
-              </button>
-            ))}
-          </div>
+      )}
+    </div>
+  )
 
-          <div style={{ display: 'flex', gap: 12, marginBottom: 16, alignItems: 'center' }}>
-            <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace' }}>num=</span>
-            <input
-              type="number"
-              value={numInput}
-              onChange={(e) => { setNumInput(parseInt(e.target.value, 10) || ''); handleReset() }}
-              min="1"
-              max="3999"
-              style={{
-                flex: 1,
-                padding: '8px 12px',
-                borderRadius: 4,
-                border: '1px solid #cbd5e1',
-                fontFamily: 'monospace',
-                fontSize: 13,
-              }}
-            />
-          </div>
+  const vizPanel = (
+    <div className="i2r-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+        {EXAMPLES.map((ex) => (
+          <button
+            key={ex.label}
+            onClick={() => applyExample(ex)}
+            style={{
+              padding: '6px 12px',
+              borderRadius: 4,
+              border: '1px solid #cbd5e1',
+              cursor: 'pointer',
+              fontSize: 12,
+              backgroundColor: numInput === ex.num ? '#dbeafe' : '#f1f5f9',
+              fontWeight: numInput === ex.num ? 600 : 400,
+            }}
+            title={ex.note}
+          >
+            {ex.label}
+          </button>
+        ))}
+      </div>
 
-          {inputError && (
-            <div style={{ padding: 12, backgroundColor: '#fee2e2', color: '#991b1b', borderRadius: 6, fontSize: 12 }}>
-              {inputError}
-            </div>
-          )}
+      <div style={{ display: 'flex', gap: 12, marginBottom: 16, alignItems: 'center' }}>
+        <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace' }}>num=</span>
+        <input
+          type="number"
+          value={numInput}
+          onChange={(e) => { setNumInput(parseInt(e.target.value, 10) || ''); handleReset() }}
+          min="1"
+          max="3999"
+          style={{
+            flex: 1,
+            padding: '8px 12px',
+            borderRadius: 4,
+            border: '1px solid #cbd5e1',
+            fontFamily: 'monospace',
+            fontSize: 13,
+          }}
+        />
+      </div>
 
-          {step && (
-            <>
-              <div style={{ padding: 12, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 12 }}>
-                <div style={{ fontWeight: 600, marginBottom: 8 }}>{step.message}</div>
-              </div>
-
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-                <div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6 }}>
-                  <div style={{ fontSize: 11, color: '#92400e', fontWeight: 600, marginBottom: 4 }}>Remaining</div>
-                  <div style={{ fontSize: 20, fontWeight: 700, color: '#b45309', fontFamily: 'monospace' }}>
-                    {step.remainingNum}
-                  </div>
-                </div>
-                <div style={{ padding: 12, backgroundColor: '#dbeafe', borderRadius: 6 }}>
-                  <div style={{ fontSize: 11, color: '#1e40af', fontWeight: 600, marginBottom: 4 }}>Result</div>
-                  <div style={{ fontSize: 20, fontWeight: 700, color: '#1e40af', fontFamily: 'monospace' }}>
-                    {step.result || '—'}
-                  </div>
-                </div>
-              </div>
-
-              <div style={{ paddingTop: 8 }}>
-                <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Value-Symbol Pairs:</div>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(70px, 1fr))', gap: 6 }}>
-                  {VALUE_SYMBOL_PAIRS.map(({ value, symbol }, idx) => {
-                    const isActive = step.currentIdx === idx
-                    const isProcessed = step.currentIdx > idx
-                    return (
-                      <motion.div
-                        key={`${value}-${symbol}`}
-                        animate={{
-                          scale: isActive ? 1.1 : 1,
-                          backgroundColor: isActive ? '#0ea5e9' : isProcessed ? '#dcfce7' : '#f1f5f9',
-                        }}
-                        style={{
-                          padding: '8px',
-                          borderRadius: 4,
-                          border: isActive ? '2px solid #0ea5e9' : '1px solid #cbd5e1',
-                          textAlign: 'center',
-                          fontSize: 11,
-                          fontFamily: 'monospace',
-                          fontWeight: 600,
-                          color: isActive ? '#fff' : isProcessed ? '#166534' : '#1e293b',
-                          cursor: 'default',
-                        }}
-                      >
-                        <div>{symbol}</div>
-                        <div style={{ fontSize: 9, opacity: 0.8 }}>{value}</div>
-                      </motion.div>
-                    )
-                  })}
-                </div>
-              </div>
-            </>
-          )}
+      {inputError && (
+        <div style={{ padding: 12, backgroundColor: '#fee2e2', color: '#991b1b', borderRadius: 6, fontSize: 12 }}>
+          {inputError}
         </div>
-      ),
-    },
-  ], [step, connectivity, setActiveLineDom, numInput, handleReset, inputError])
+      )}
+
+      {step && (
+        <>
+          <div style={{ padding: 12, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 12 }}>
+            <div style={{ fontWeight: 600, marginBottom: 8 }}>{step.message}</div>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+            <div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6 }}>
+              <div style={{ fontSize: 11, color: '#92400e', fontWeight: 600, marginBottom: 4 }}>Remaining</div>
+              <div style={{ fontSize: 20, fontWeight: 700, color: '#b45309', fontFamily: 'monospace' }}>
+                {step.remainingNum}
+              </div>
+            </div>
+            <div style={{ padding: 12, backgroundColor: '#dbeafe', borderRadius: 6 }}>
+              <div style={{ fontSize: 11, color: '#1e40af', fontWeight: 600, marginBottom: 4 }}>Result</div>
+              <div style={{ fontSize: 20, fontWeight: 700, color: '#1e40af', fontFamily: 'monospace' }}>
+                {step.result || '—'}
+              </div>
+            </div>
+          </div>
+
+          <div style={{ paddingTop: 8 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Value-Symbol Pairs:</div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(70px, 1fr))', gap: 6 }}>
+              {VALUE_SYMBOL_PAIRS.map(({ value, symbol }, idx) => {
+                const isActive = step.currentIdx === idx
+                const isProcessed = step.currentIdx > idx
+                return (
+                  <motion.div
+                    key={`${value}-${symbol}`}
+                    animate={{
+                      scale: isActive ? 1.1 : 1,
+                      backgroundColor: isActive ? '#0ea5e9' : isProcessed ? '#dcfce7' : '#f1f5f9',
+                    }}
+                    style={{
+                      padding: '8px',
+                      borderRadius: 4,
+                      border: isActive ? '2px solid #0ea5e9' : '1px solid #cbd5e1',
+                      textAlign: 'center',
+                      fontSize: 11,
+                      fontFamily: 'monospace',
+                      fontWeight: 600,
+                      color: isActive ? '#fff' : isProcessed ? '#166534' : '#1e293b',
+                      cursor: 'default',
+                    }}
+                  >
+                    <div>{symbol}</div>
+                    <div style={{ fontSize: 9, opacity: 0.8 }}>{value}</div>
+                  </motion.div>
+                )
+              })}
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  )
+
+  const statusPanel = (
+    <div className="i2r-status" style={{ padding: 12, backgroundColor: '#f1f5f9', fontSize: 12, borderTop: '1px solid #e2e8f0' }}>
+      Status: Step {stepIndex + 1} of {steps.length}
+    </div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.activeLine ? LINE_PATTERN_MAP[step.activeLine] : undefined} usedPatterns={I2R_PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex <= 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
+
+  // Step 3: Add state + config
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
+      { id: 'viz', title: '🔢 Roman Numeral Construction', dockMode: 'split-right' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
-    <div className="problem-shell">
-      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex <= 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+    <div className="i2r-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

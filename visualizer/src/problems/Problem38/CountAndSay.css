@@ -1,14 +1,11 @@
 .count-and-say-shell {
+  position: relative;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  gap: 16px;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
   overflow: hidden;
-}
-
-.count-and-say-top-split {
-  flex: 1;
-  min-height: 0;
 }
 
 .count-and-say-panel {

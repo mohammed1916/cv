@@ -1,6 +1,7 @@
+﻿import { createPortal } from 'react-dom';
 import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -9,7 +10,12 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./DungeonGameVisualizer.css";
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE_INLINE = [
     { line: 1, text: "def calculateMinimumHP(dungeon):" },
     { line: 2, text: "    R, C = len(dungeon), len(dungeon[0])" },
@@ -153,35 +159,74 @@ export default function DungeonGameVisualizer() {
     const dungeon = ex.dungeon;
     const R = dungeon.length, C = dungeon[0].length;
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'code',
-            title: 'Code',
-            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />,
-        },
-        {
-            id: 'viz',
-            title: 'Visualization',
-            content: <VizPanel EXAMPLES={EXAMPLES} ex={ex} dungeon={dungeon} R={R} C={C} CELL_W={CELL_W} CELL_H={CELL_H} dp={dp} activeR={activeR} activeC={activeC} step={step} applyEx={applyEx} setActiveLineDom={setActiveLineDom} />,
-        },
-    ], [step, setActiveLineDom, ex, dungeon, R, C, dp, activeR, activeC, applyEx]);
+    // Extract panels
+    const primaryPanel = (
+        <div className="dg-panel">
+            <VizPanel EXAMPLES={EXAMPLES} ex={ex} dungeon={dungeon} R={R} C={C} CELL_W={CELL_W} CELL_H={CELL_H} dp={dp} activeR={activeR} activeC={activeC} step={step} applyEx={applyEx} setActiveLineDom={setActiveLineDom} />
+        </div>
+    );
+
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                disableResizer
+            />
+            {showPatternOverlay && <CodePatternAnnotations step={step} activeLineDom={activeLineDom} />}
+        </div>
+    );
+
+    const statusPanel = (
+        <div className="dg-status">
+            {step?.message ?? "Press Play to begin."}
+        </div>
+    );
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
+            <PlaybackControls
+                isPlaying={isPlaying} isDone={isDone} speed={speed}
+                onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
+                prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
+                onSpeedChange={e => setSpeed(Number(e.target.value))}
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                patternOverlayLabel="Show pattern overlay"
+                showPatternOverlayToggle
+            />
+        </>
+    );
+
+    // Lumino configuration
+    const [panelDivs, setPanelDivs] = useState(null);
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    );
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
 
     return (
-        <div className="problem-shell">
-            <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls
-                    isPlaying={isPlaying} isDone={isDone} speed={speed}
-                    onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-                    prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
-                    onSpeedChange={e => setSpeed(Number(e.target.value))}
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
-                />
-            </FloatingPanel>
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+        <div className="dg-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     );
 }
+

@@ -4,12 +4,29 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './MinesweeperVisualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('minesweeper')
+
+const PATTERNS = ['add_to_queue', 'blank_cell', 'count_mines', 'done', 'init', 'mine_hit', 'number_cell', 'process_cell', 'start_bfs']
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  3: 'mine_hit',
+  4: 'start_bfs',
+  7: 'process_cell',
+  8: 'count_mines',
+  9: 'blank_cell',
+  12: 'add_to_queue',
+  15: 'done'
+}
+
 
 const EXAMPLES = getExamples('minesweeper')
 
@@ -285,13 +302,34 @@ export default function MinesweeperVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
+        <div style={{ position: 'relative' }}>
+
+          <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
           onLineSelect={connectivity.handleLineSelect}
           onActiveLineDomChange={setActiveLineDom}
         />
+
+
+          {showPatternOverlay && (
+
+            <CodePatternAnnotations
+
+              linePatterns={LINE_PATTERN_MAP}
+
+              currentPhase={step?.phase}
+
+              activeLineDom={activeLineDom}
+
+              activeLine={step?.activeLine}
+
+            />
+
+          )}
+
+        </div>
       ),
     },
     {
@@ -315,6 +353,9 @@ export default function MinesweeperVisualizer() {
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
       />
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -333,7 +374,7 @@ export default function MinesweeperVisualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      
     </div>
   )
 }

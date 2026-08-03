@@ -4,12 +4,31 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem375Visualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('wiggle-sort-ii')
+
+const PATTERNS = ['arrange_start', 'arranging', 'complete', 'find_median', 'median_found', 'partition_complete', 'partition_start', 'verify_start', 'verifying']
+const LINE_PATTERN_MAP = {
+  1: 'find_median',
+  2: 'median_found',
+  3: 'partition_start',
+  4: 'partition_complete',
+  5: 'arrange_start',
+  6: 'arranging',
+  7: 'verify_start',
+  8: 'verifying',
+  9: 'complete'
+}
+
 
 const EXAMPLES = getExamples('wiggle-sort-ii')
 
@@ -453,13 +472,23 @@ export default function Problem375Visualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-        />
+        <div style={{ position: 'relative' }}>
+          <CodeTracePanel
+            step={step}
+            codeLines={SOLUTION_CODE}
+            highlightedLines={connectivity.highlightedLines}
+            onLineSelect={connectivity.handleLineSelect}
+            onActiveLineDomChange={setActiveLineDom}
+          />
+          {step && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step.activeLine}
+            />
+          )}
+        </div>
       ),
     },
     {

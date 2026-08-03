@@ -1,8 +1,11 @@
 .ts2-shell {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    height: 100%;
+    height: calc(100vh - 200px);
+    min-height: 480px;
+    gap: 0;
+    overflow: hidden;
 }
 
 .ts2-panel {

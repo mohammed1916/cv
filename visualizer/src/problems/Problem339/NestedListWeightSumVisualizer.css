@@ -139,6 +139,123 @@
   flex: 0.65;
 }
 
+.nested-list-weight-sum-stats {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.nested-list-weight-sum-stat {
+  flex: 1;
+  min-width: 130px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nested-list-weight-sum-stat-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #94a3b8;
+}
+
+.nested-list-weight-sum-stat-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: #e2e8f0;
+  font-family: monospace;
+}
+
+.nested-list-weight-sum-total .nested-list-weight-sum-stat-value {
+  color: #f59e0b;
+}
+
+.nested-list-weight-sum-tree {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: monospace;
+}
+
+.nested-list-weight-sum-node {
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 8px 10px;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.nested-list-weight-sum-int {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #e2e8f0;
+}
+
+.nested-list-weight-sum-int-value {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.nested-list-weight-sum-int-depth {
+  font-size: 11px;
+  color: #94a3b8;
+  background: rgba(148, 163, 184, 0.12);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.nested-list-weight-sum-int-contrib {
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 600;
+  color: #22c55e;
+}
+
+.nested-list-weight-sum-list {
+  border-style: dashed;
+}
+
+.nested-list-weight-sum-list-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.nested-list-weight-sum-list-tag {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 10px;
+}
+
+.nested-list-weight-sum-bracket {
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.nested-list-weight-sum-children {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 8px 0 8px 20px;
+  padding-left: 12px;
+  border-left: 2px solid rgba(148, 163, 184, 0.2);
+}
+
+.nested-list-weight-sum-empty {
+  color: #94a3b8;
+  font-size: 13px;
+  padding: 16px;
+  text-align: center;
+}
+
 @media (max-width: 1024px) {
   .nested-list-weight-sum-middle {
     height: 200px;

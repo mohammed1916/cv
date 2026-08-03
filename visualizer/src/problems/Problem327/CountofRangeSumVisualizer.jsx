@@ -1,14 +1,24 @@
-import { useState, useCallback, useMemo } from 'react'
+﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './CountofRangeSumVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+
+const PATTERNS = ['done', 'init', 'process']
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  3: 'process',
+  5: 'done'
+}
+
 
 const SOLUTION_CODE = [
   { line: 1, text: '# Solution for Count of Range Sum' },
@@ -56,32 +66,43 @@ export default function CountofRangeSumVisualizer() {
     }
   }, [inputValue])
 
-  const steps = useMemo(() => {
-    return input ? generateSteps(input) : []
-  }, [input])
+  const steps = useMemo(
+    () => (input ? generateSteps(input) : []).map((current) => ({
+      ...current,
+      relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
+    })),
+    [input],
+  )
 
-  const { currentStep, isPlaying, setIsPlaying, setCurrentStep, speed, setSpeed } = usePlaybackState({
-    totalSteps: steps.length,
-    autoSpeed: 1000,
+  const {
+    stepIndex, setStepIndex, stepForward, stepBack, togglePlay,
+    handleReset, isPlaying, speed, setSpeed, isDone,
+  } = usePlaybackState(steps.length)
+
+  const connectivity = useCodeVisualConnectivity({
+    steps,
+    stepIndex,
+    onStepJump: setStepIndex,
   })
 
-  const connectivity = useCodeVisualConnectivity(steps, currentStep)
-  const patternOverlay = usePatternOverlay()
+  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  const handleStepClick = useCallback((index) => {
-    setCurrentStep(index)
-    setIsPlaying(false)
-  }, [setCurrentStep, setIsPlaying])
+  const step = stepIndex >= 0 ? steps[stepIndex] : null
+
+  const applyExample = useCallback((ex) => {
+    setInputValue(JSON.stringify(ex))
+    handleReset()
+  }, [handleReset])
 
   const renderVisualization = () => {
     if (!input) return <div className="countof-range-sum-error">{inputError}</div>
 
-    const currentStepData = steps[currentStep] || {}
+    const currentStepData = step || {}
 
     return (
       <motion.div
         className="countof-range-sum-viz"
-        key={currentStep}
+        key={stepIndex}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -123,26 +144,34 @@ export default function CountofRangeSumVisualizer() {
         ratio={0.35}
       />
 
-      <div className="countof-range-sum-middle">
-        <div className="countof-range-sum-panel">
-          <div className="countof-range-sum-panel-head">Code Trace</div>
-          <div className="countof-range-sum-panel-body">
-            <CodeTracePanel code={SOLUTION_CODE} connectivity={connectivity} />
-          </div>
-        </div>
+      <div style={{ position: 'relative' }}>
+        <CodeTracePanel
+          step={step}
+          codeLines={SOLUTION_CODE}
+          highlightedLines={connectivity.highlightedLines}
+          onLineSelect={connectivity.handleLineSelect}
+          onActiveLineDomChange={setActiveLineDom}
+        />
 
+        {showPatternOverlay && (
+          <CodePatternAnnotations
+            linePatterns={LINE_PATTERN_MAP}
+            currentPhase={step?.phase}
+            activeLineDom={activeLineDom}
+            activeLine={step?.activeLine}
+          />
+        )}
+      </div>
+
+      <div className="countof-range-sum-middle">
         <div className="countof-range-sum-panel">
           <div className="countof-range-sum-panel-head">Examples</div>
           <div className="countof-range-sum-panel-body countof-range-sum-examples">
             {EXAMPLES.map((example, i) => (
               <button
                 key={i}
-                className={className + '-example-btn'}
-                onClick={() => {
-                  setInputValue(JSON.stringify(example))
-                  setCurrentStep(0)
-                  setIsPlaying(false)
-                }}
+                className="countof-range-sum-example-btn"
+                onClick={() => applyExample(example)}
               >
                 {example.label}
               </button>
@@ -151,19 +180,28 @@ export default function CountofRangeSumVisualizer() {
         </div>
       </div>
 
-      <div className="countof-range-sum-bottom">
+      <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
-          onPlayPause={() => setIsPlaying(!isPlaying)}
-          onNext={() => setCurrentStep(Math.min(currentStep + 1, steps.length - 1))}
-          onPrev={() => setCurrentStep(Math.max(currentStep - 1, 0))}
-          onReset={() => setCurrentStep(0)}
-          currentStep={currentStep}
-          totalSteps={steps.length}
+          isDone={isDone}
           speed={speed}
-          onSpeedChange={setSpeed}
+          onPlayToggle={togglePlay}
+          onPrev={stepBack}
+          onNext={stepForward}
+          onReset={handleReset}
+          prevDisabled={stepIndex < 0}
+          nextDisabled={isDone}
+          resetDisabled={stepIndex < 0}
+          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+          showPatternOverlay={showPatternOverlay}
+          onShowPatternOverlayChange={setShowPatternOverlay}
+          patternOverlayLabel="Show pattern overlay"
+          showPatternOverlayToggle
         />
-      </div>
+      </FloatingPanel>
     </div>
   )
 }

@@ -1,169 +1,339 @@
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
-import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './NestedListWeightSumVisualizer.css'
 
+const P = 'nested-list-weight-sum'
+
 const SOLUTION_CODE = [
-  { line: 1, text: '# Solution for Nested List Weight Sum' },
-  { line: 2, text: '# Implement step-by-step visualization' },
-  { line: 3, text: 'def solve(input):' },
-  { line: 4, text: '    # Algorithm here' },
-  { line: 5, text: '    return result' },
+  { line: 1, text: 'def depthSum(nestedList):' },
+  { line: 2, text: '    def dfs(items, depth):' },
+  { line: 3, text: '        total = 0' },
+  { line: 4, text: '        for item in items:' },
+  { line: 5, text: '            if item.isInteger():' },
+  { line: 6, text: '                total += item.getInteger() * depth' },
+  { line: 7, text: '            else:' },
+  { line: 8, text: '                total += dfs(item.getList(), depth + 1)' },
+  { line: 9, text: '        return total' },
+  { line: 10, text: '    return dfs(nestedList, 1)' },
 ]
 
-function generateSteps(input) {
+// Build a tree of nodes with stable ids so steps and rendering stay in sync.
+// depth is the level of the elements in `arr` (top-level integers are depth 1).
+function buildTree(arr, prefix = 'n', depth = 1) {
+  return arr.map((el, i) => {
+    const id = `${prefix}-${i}`
+    if (Array.isArray(el)) {
+      return { id, type: 'list', depth, children: buildTree(el, id, depth + 1) }
+    }
+    return { id, type: 'int', depth, value: el }
+  })
+}
+
+function generateSteps(nestedList) {
+  if (!Array.isArray(nestedList)) return []
+
+  const roots = buildTree(nestedList, 'n', 1)
   const steps = []
+  const contributions = {}
+  let total = 0
 
   steps.push({
     phase: 'init',
-    activeLine: 1,
-    message: 'Initialize algorithm'
+    activeLine: 10,
+    relatedLines: [1, 10],
+    message: 'Start: call dfs(nestedList, depth = 1).',
+    currentId: null,
+    depth: 1,
+    contribution: null,
+    value: null,
+    total: 0,
+    contributions: {},
   })
 
-  steps.push({
-    phase: 'process',
-    activeLine: 3,
-    message: 'Processing input...'
-  })
+  const dfs = (nodes, depth) => {
+    for (const node of nodes) {
+      if (node.type === 'int') {
+        steps.push({
+          phase: 'visit',
+          activeLine: 5,
+          relatedLines: [4, 5],
+          message: `Depth ${depth}: element ${node.value} is an integer.`,
+          currentId: node.id,
+          depth,
+          contribution: null,
+          value: node.value,
+          total,
+          contributions: { ...contributions },
+        })
+
+        const contribution = node.value * depth
+        total += contribution
+        contributions[node.id] = { depth, value: node.value, contribution }
+
+        steps.push({
+          phase: 'update',
+          activeLine: 6,
+          relatedLines: [5, 6],
+          message: `Add ${node.value} × ${depth} = ${contribution}. Running total = ${total}.`,
+          currentId: node.id,
+          depth,
+          contribution,
+          value: node.value,
+          total,
+          contributions: { ...contributions },
+        })
+      } else {
+        steps.push({
+          phase: 'visit',
+          activeLine: 5,
+          relatedLines: [4, 5, 7],
+          message: `Depth ${depth}: element is a nested list, not an integer.`,
+          currentId: node.id,
+          depth,
+          contribution: null,
+          value: null,
+          total,
+          contributions: { ...contributions },
+        })
+
+        steps.push({
+          phase: 'recurse',
+          activeLine: 8,
+          relatedLines: [7, 8],
+          message: `Recurse into the list — depth becomes ${depth + 1}.`,
+          currentId: node.id,
+          depth: depth + 1,
+          contribution: null,
+          value: null,
+          total,
+          contributions: { ...contributions },
+        })
+
+        dfs(node.children, depth + 1)
+      }
+    }
+  }
+
+  dfs(roots, 1)
 
   steps.push({
     phase: 'done',
-    activeLine: 5,
-    message: 'Algorithm complete'
+    activeLine: 10,
+    relatedLines: [9, 10],
+    message: `Done. Weighted depth sum = ${total}.`,
+    currentId: null,
+    depth: 1,
+    contribution: null,
+    value: null,
+    total,
+    contributions: { ...contributions },
   })
 
   return steps
 }
 
-const EXAMPLES = getExamples('nested-list-weight-sum') || []
+function renderNode(node, step) {
+  const contrib = step?.contributions?.[node.id]
+  const isCurrent = step?.currentId === node.id
+  const done = !!contrib
 
-export default function NestedListWeightSumVisualizer() {
-  const [inputValue, setInputValue] = useState(EXAMPLES.length > 0 ? JSON.stringify(EXAMPLES[0]) : '{}')
-
-  const { input, inputError } = useMemo(() => {
-    try {
-      const data = JSON.parse(inputValue)
-      return { input: data, inputError: '' }
-    } catch (e) {
-      return { input: null, inputError: e.message }
-    }
-  }, [inputValue])
-
-  const steps = useMemo(() => {
-    return input ? generateSteps(input) : []
-  }, [input])
-
-  const { currentStep, isPlaying, setIsPlaying, setCurrentStep, speed, setSpeed } = usePlaybackState({
-    totalSteps: steps.length,
-    autoSpeed: 1000,
-  })
-
-  const connectivity = useCodeVisualConnectivity(steps, currentStep)
-  const patternOverlay = usePatternOverlay()
-
-  const handleStepClick = useCallback((index) => {
-    setCurrentStep(index)
-    setIsPlaying(false)
-  }, [setCurrentStep, setIsPlaying])
-
-  const renderVisualization = () => {
-    if (!input) return <div className="nested-list-weight-sum-error">{inputError}</div>
-
-    const currentStepData = steps[currentStep] || {}
-
+  if (node.type === 'int') {
+    const bg = isCurrent
+      ? 'rgba(245,158,11,0.18)'
+      : done
+        ? 'rgba(34,197,94,0.15)'
+        : 'rgba(148,163,184,0.08)'
+    const border = isCurrent ? '#f59e0b' : done ? '#22c55e' : 'rgba(148,163,184,0.35)'
     return (
-      <motion.div
-        className="nested-list-weight-sum-viz"
-        key={currentStep}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
+      <div
+        key={node.id}
+        className={`${P}-node ${P}-int`}
+        style={{ background: bg, borderColor: border }}
       >
-        <div className="nested-list-weight-sum-step-info">
-          <h3>{currentStepData.message}</h3>
-        </div>
-      </motion.div>
+        <span className={`${P}-int-value`}>{node.value}</span>
+        <span className={`${P}-int-depth`}>depth {node.depth}</span>
+        {done && (
+          <span className={`${P}-int-contrib`}>
+            {contrib.value} × {contrib.depth} = {contrib.contribution}
+          </span>
+        )}
+      </div>
     )
   }
 
+  const listBorder = isCurrent ? '#f59e0b' : 'rgba(148,163,184,0.3)'
+  const listBg = isCurrent ? 'rgba(245,158,11,0.1)' : 'transparent'
+  return (
+    <div
+      key={node.id}
+      className={`${P}-node ${P}-list`}
+      style={{ borderColor: listBorder, background: listBg }}
+    >
+      <div className={`${P}-list-label`}>
+        <span className={`${P}-bracket`}>[</span>
+        <span className={`${P}-list-tag`}>list</span>
+      </div>
+      <div className={`${P}-children`}>
+        {node.children.map((c) => renderNode(c, step))}
+      </div>
+      <span className={`${P}-bracket`}>]</span>
+    </div>
+  )
+}
+
+const REGISTRY_EXAMPLES = getExamples('nested-list-weight-sum') || []
+const FALLBACK_EXAMPLES = [
+  { label: '[[1,1],2,[1,1]]  → 10', inputs: [[1, 1], 2, [1, 1]] },
+  { label: '[1,[4,[6]]]  → 27', inputs: [1, [4, [6]]] },
+  { label: '[[[3]],2,1]  → 12', inputs: [[[3]], 2, 1] },
+]
+const EXAMPLES = REGISTRY_EXAMPLES.length > 0 ? REGISTRY_EXAMPLES : FALLBACK_EXAMPLES
+
+export default function NestedListWeightSumVisualizer() {
+  const [inputValue, setInputValue] = useState(
+    EXAMPLES.length > 0 ? JSON.stringify(EXAMPLES[0].inputs || EXAMPLES[0]) : '[[1,1],2,[1,1]]',
+  )
+
+  const parsed = useMemo(() => {
+    try {
+      const v = JSON.parse(inputValue)
+      return Array.isArray(v) ? v : null
+    } catch {
+      return null
+    }
+  }, [inputValue])
+
+  const inputError = useMemo(() => {
+    try {
+      const v = JSON.parse(inputValue)
+      if (!Array.isArray(v)) return 'Input must be a nested list array, e.g. [[1,1],2,[1,1]]'
+      return ''
+    } catch (e) {
+      return e.message
+    }
+  }, [inputValue])
+
+  const tree = useMemo(() => (parsed ? buildTree(parsed, 'n', 1) : []), [parsed])
+  const steps = useMemo(() => generateSteps(parsed), [parsed])
+
+  const {
+    stepIndex, setStepIndex, stepForward, stepBack, togglePlay,
+    handleReset, isPlaying, speed, setSpeed, isDone,
+  } = usePlaybackState(steps.length)
+  const step = stepIndex >= 0 ? steps[stepIndex] : null
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
+
   return (
     <div className="nested-list-weight-sum-shell">
-      <ResizableSplitPanels
-        left={
-          <div className="nested-list-weight-sum-panel nested-list-weight-sum-panel-input">
-            <div className="nested-list-weight-sum-panel-head">Input</div>
-            <div className="nested-list-weight-sum-panel-body">
-              <textarea
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                className="nested-list-weight-sum-textarea"
-                placeholder="Enter input..."
-              />
-            </div>
-          </div>
-        }
-        right={
-          <div className="nested-list-weight-sum-panel nested-list-weight-sum-panel-viz">
-            <div className="nested-list-weight-sum-panel-head">Visualization</div>
-            <div className="nested-list-weight-sum-panel-body">
-              <AnimatePresence mode="wait">
-                {renderVisualization()}
-              </AnimatePresence>
-            </div>
-          </div>
-        }
-        ratio={0.35}
-      />
-
-      <div className="nested-list-weight-sum-middle">
-        <div className="nested-list-weight-sum-panel">
-          <div className="nested-list-weight-sum-panel-head">Code Trace</div>
-          <div className="nested-list-weight-sum-panel-body">
-            <CodeTracePanel code={SOLUTION_CODE} connectivity={connectivity} />
-          </div>
-        </div>
-
-        <div className="nested-list-weight-sum-panel">
-          <div className="nested-list-weight-sum-panel-head">Examples</div>
-          <div className="nested-list-weight-sum-panel-body nested-list-weight-sum-examples">
-            {EXAMPLES.map((example, i) => (
-              <button
-                key={i}
-                className={className + '-example-btn'}
-                onClick={() => {
-                  setInputValue(JSON.stringify(example))
-                  setCurrentStep(0)
-                  setIsPlaying(false)
-                }}
-              >
-                {example.label}
-              </button>
-            ))}
-          </div>
+      <div className="nested-list-weight-sum-panel">
+        <div className="nested-list-weight-sum-panel-head">Input (nested list as JSON)</div>
+        <div className="nested-list-weight-sum-panel-body">
+          <textarea
+            value={inputValue}
+            onChange={(e) => { setInputValue(e.target.value); handleReset() }}
+            className="nested-list-weight-sum-textarea"
+            placeholder="e.g. [[1,1],2,[1,1]]"
+          />
+          {inputError && <div className="nested-list-weight-sum-error">{inputError}</div>}
         </div>
       </div>
 
-      <div className="nested-list-weight-sum-bottom">
+      <div className="nested-list-weight-sum-panel">
+        <div className="nested-list-weight-sum-panel-head">Visualization</div>
+        <div className="nested-list-weight-sum-panel-body">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={stepIndex}
+              className="nested-list-weight-sum-viz"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="nested-list-weight-sum-step-info">
+                <h3>{step?.message || 'Press play to begin the DFS traversal.'}</h3>
+              </div>
+
+              <div className="nested-list-weight-sum-stats">
+                <div className="nested-list-weight-sum-stat">
+                  <span className="nested-list-weight-sum-stat-label">Current depth</span>
+                  <span className="nested-list-weight-sum-stat-value">{step?.depth ?? '—'}</span>
+                </div>
+                <div className="nested-list-weight-sum-stat">
+                  <span className="nested-list-weight-sum-stat-label">Contribution</span>
+                  <span className="nested-list-weight-sum-stat-value">
+                    {step?.contribution != null
+                      ? `${step.value} × ${step.depth} = ${step.contribution}`
+                      : '—'}
+                  </span>
+                </div>
+                <div className="nested-list-weight-sum-stat nested-list-weight-sum-total">
+                  <span className="nested-list-weight-sum-stat-label">Running total</span>
+                  <span className="nested-list-weight-sum-stat-value">{step?.total ?? 0}</span>
+                </div>
+              </div>
+
+              <div className="nested-list-weight-sum-tree">
+                {tree.length > 0
+                  ? tree.map((node) => renderNode(node, step))
+                  : (
+                    <div className="nested-list-weight-sum-empty">
+                      Enter a valid nested list, e.g. [[1,1],2,[1,1]]
+                    </div>
+                  )}
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+
+      <div className="nested-list-weight-sum-panel">
+        <div className="nested-list-weight-sum-panel-head">Code</div>
+        <div className="nested-list-weight-sum-panel-body">
+          <CodeTracePanel
+            step={step}
+            codeLines={SOLUTION_CODE}
+            highlightedLines={connectivity.highlightedLines}
+            onLineSelect={connectivity.handleLineSelect}
+          />
+        </div>
+      </div>
+
+      {EXAMPLES.length > 0 && (
+        <div className="nested-list-weight-sum-examples">
+          {EXAMPLES.map((example, i) => (
+            <button
+              key={i}
+              className="nested-list-weight-sum-example-btn"
+              onClick={() => { setInputValue(JSON.stringify(example.inputs || example)); handleReset() }}
+            >
+              {example.label || `Example ${i + 1}`}
+            </button>
+          ))}
+        </div>
+      )}
+
+      <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}
-          onPlayPause={() => setIsPlaying(!isPlaying)}
-          onNext={() => setCurrentStep(Math.min(currentStep + 1, steps.length - 1))}
-          onPrev={() => setCurrentStep(Math.max(currentStep - 1, 0))}
-          onReset={() => setCurrentStep(0)}
-          currentStep={currentStep}
-          totalSteps={steps.length}
+          isDone={isDone}
           speed={speed}
-          onSpeedChange={setSpeed}
+          onPlayToggle={togglePlay}
+          onPrev={stepBack}
+          onNext={stepForward}
+          onReset={handleReset}
+          prevDisabled={stepIndex < 0}
+          nextDisabled={isDone}
+          resetDisabled={stepIndex < 0}
+          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
         />
-      </div>
+      </FloatingPanel>
     </div>
   )
 }

@@ -1,13 +1,17 @@
-import { useState, useCallback, useMemo } from 'react'
+﻿import { useState, useCallback, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './FindFirstOccurrenceVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -23,6 +27,19 @@ const SOLUTION_CODE = [
   { line: 11, text: '        ' },
   { line: 12, text: '        return -1' },
 ]
+
+const FINDFIRSTOCCURRENCE_PATTERNS = ['compare', 'done', 'empty_needle', 'init', 'loop_check', 'match_found', 'mismatch', 'return_zero']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'empty_needle',
+  4: 'return_zero',
+  6: 'init',
+  8: 'loop_check',
+  9: 'compare',
+  10: 'match_found',
+  12: 'done',
+}
 
 function generateSteps(haystack, needle) {
   const steps = []
@@ -155,162 +172,201 @@ export default function FindFirstOccurrenceVisualizer({ problem }) {
     onStepJump: setStepIndex,
   })
 
-  return (
-    <div className="ffo-shell">
-      <div className="ffo-top">
-        <div className="ffo-panel" style={{ flex: 1 }}>
-          <div className="ffo-panel-head">
-            String Matching
-            {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
+  // Step 2: Extract panels into consts
+  const primaryPanel = (
+    <div className="ffo-panel" style={{ flex: 1 }}>
+      <div className="ffo-panel-head">String Matching</div>
+      <div className="ffo-panel-body">
+        <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
+          {EXAMPLES.map((ex) => (
+            <button
+              key={ex.label}
+              onClick={() => applyExample(ex)}
+              className="ffo-example-btn"
+            >
+              {ex.label}
+            </button>
+          ))}
+        </div>
+
+        <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center', flexDirection: 'column', alignItems: 'flex-start' }}>
+          <div style={{ display: 'flex', gap: 12, alignItems: 'center', width: '100%' }}>
+            <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace', minWidth: 70 }}>haystack:</span>
+            <input
+              value={haystackInput}
+              onChange={(e) => { setHaystackInput(e.target.value); handleReset() }}
+              placeholder='"sadbutsad"'
+              className="ffo-input"
+              style={{ flex: 1, margin: 0 }}
+            />
           </div>
-          <div className="ffo-panel-body">
-            <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
-              {EXAMPLES.map((ex) => (
-                <button
-                  key={ex.label}
-                  onClick={() => applyExample(ex)}
-                  className="ffo-example-btn"
+          <div style={{ display: 'flex', gap: 12, alignItems: 'center', width: '100%' }}>
+            <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace', minWidth: 70 }}>needle:</span>
+            <input
+              value={needleInput}
+              onChange={(e) => { setNeedleInput(e.target.value); handleReset() }}
+              placeholder='"sad"'
+              className="ffo-input"
+              style={{ flex: 1, margin: 0 }}
+            />
+          </div>
+        </div>
+
+        <div className="ffo-haystack-container">
+          <div className="ffo-label">Haystack:</div>
+          <div className="ffo-string-display">
+            {haystack.split('').map((char, i) => {
+              const currentPos = step?.i ?? -1
+              const matchedChars = step?.matched ?? 0
+              const isInCurrentWindow = i >= currentPos && i < currentPos + needle.length && currentPos >= 0
+              const isMatchedChar = isInCurrentWindow && i < currentPos + matchedChars
+              const isMismatchChar = isInCurrentWindow && step?.phase === 'mismatch' && i === currentPos + step.matched
+              const isFoundChar = step?.phase === 'match_found' && i >= currentPos && i < currentPos + needle.length
+
+              let charClass = 'ffo-char'
+              if (isFoundChar) charClass += ' found'
+              else if (isMatchedChar) charClass += ' matched'
+              else if (isMismatchChar) charClass += ' mismatch'
+              else if (isInCurrentWindow) charClass += ' current-window'
+
+              return (
+                <motion.div
+                  key={`h-${i}`}
+                  className={charClass}
+                  animate={{
+                    scale: isFoundChar ? 1.1 : isMismatchChar ? 0.95 : 1,
+                  }}
                 >
-                  {ex.label}
-                </button>
-              ))}
-            </div>
+                  {char}
+                </motion.div>
+              )
+            })}
+          </div>
+        </div>
 
-            <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center', flexDirection: 'column', alignItems: 'flex-start' }}>
-              <div style={{ display: 'flex', gap: 12, alignItems: 'center', width: '100%' }}>
-                <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace', minWidth: 70 }}>haystack:</span>
-                <input
-                  value={haystackInput}
-                  onChange={(e) => { setHaystackInput(e.target.value); handleReset() }}
-                  placeholder='"sadbutsad"'
-                  className="ffo-input"
-                  style={{ flex: 1, margin: 0 }}
-                />
-              </div>
-              <div style={{ display: 'flex', gap: 12, alignItems: 'center', width: '100%' }}>
-                <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace', minWidth: 70 }}>needle:</span>
-                <input
-                  value={needleInput}
-                  onChange={(e) => { setNeedleInput(e.target.value); handleReset() }}
-                  placeholder='"sad"'
-                  className="ffo-input"
-                  style={{ flex: 1, margin: 0 }}
-                />
-              </div>
-            </div>
+        <div className="ffo-needle-container">
+          <div className="ffo-label">Needle:</div>
+          <div className="ffo-string-display">
+            {needle.split('').map((char, i) => {
+              const matchedChars = step?.matched ?? 0
+              const isMatched = i < matchedChars
 
-            <div className="ffo-haystack-container">
-              <div className="ffo-label">Haystack:</div>
-              <div className="ffo-string-display">
-                {haystack.split('').map((char, i) => {
-                  const currentPos = step?.i ?? -1
-                  const matchedChars = step?.matched ?? 0
-                  const isInCurrentWindow = i >= currentPos && i < currentPos + needle.length && currentPos >= 0
-                  const isMatchedChar = isInCurrentWindow && i < currentPos + matchedChars
-                  const isMismatchChar = isInCurrentWindow && step?.phase === 'mismatch' && i === currentPos + step.matched
-                  const isFoundChar = step?.phase === 'match_found' && i >= currentPos && i < currentPos + needle.length
+              return (
+                <motion.div
+                  key={`n-${i}`}
+                  className={`ffo-char${isMatched ? ' matched' : ''}`}
+                  animate={{
+                    scale: isMatched ? 1 : 1,
+                  }}
+                >
+                  {char}
+                </motion.div>
+              )
+            })}
+          </div>
+        </div>
 
-                  let charClass = 'ffo-char'
-                  if (isFoundChar) charClass += ' found'
-                  else if (isMatchedChar) charClass += ' matched'
-                  else if (isMismatchChar) charClass += ' mismatch'
-                  else if (isInCurrentWindow) charClass += ' current-window'
-
-                  return (
-                    <motion.div
-                      key={`h-${i}`}
-                      className={charClass}
-                      animate={{
-                        scale: isFoundChar ? 1.1 : isMismatchChar ? 0.95 : 1,
-                      }}
-                    >
-                      {char}
-                    </motion.div>
-                  )
-                })}
-              </div>
-            </div>
-
-            <div className="ffo-needle-container">
-              <div className="ffo-label">Needle:</div>
-              <div className="ffo-string-display">
-                {needle.split('').map((char, i) => {
-                  const matchedChars = step?.matched ?? 0
-                  const isMatched = i < matchedChars
-
-                  return (
-                    <motion.div
-                      key={`n-${i}`}
-                      className={`ffo-char${isMatched ? ' matched' : ''}`}
-                      animate={{
-                        scale: isMatched ? 1 : 1,
-                      }}
-                    >
-                      {char}
-                    </motion.div>
-                  )
-                })}
-              </div>
-            </div>
-
-            <div className="ffo-stats">
-              <div className="ffo-stat-box">
-                <span className="ffo-stat-label">Haystack Length</span>
-                <span className="ffo-stat-val">{haystack.length}</span>
-              </div>
-              <div className="ffo-stat-box">
-                <span className="ffo-stat-label">Needle Length</span>
-                <span className="ffo-stat-val">{needle.length}</span>
-              </div>
-              <div className="ffo-stat-box">
-                <span className="ffo-stat-label">Current Position</span>
-                <span className="ffo-stat-val">{step?.i ?? '-'}</span>
-              </div>
-              <div className="ffo-stat-box">
-                <span className="ffo-stat-label">Matched Characters</span>
-                <span className="ffo-stat-val">{step?.matched ?? 0} / {needle.length}</span>
-              </div>
-            </div>
-
+        <div className="ffo-stats">
+          <div className="ffo-stat-box">
+            <span className="ffo-stat-label">Haystack Length</span>
+            <span className="ffo-stat-val">{haystack.length}</span>
+          </div>
+          <div className="ffo-stat-box">
+            <span className="ffo-stat-label">Needle Length</span>
+            <span className="ffo-stat-val">{needle.length}</span>
+          </div>
+          <div className="ffo-stat-box">
+            <span className="ffo-stat-label">Current Position</span>
+            <span className="ffo-stat-val">{step?.i ?? '-'}</span>
+          </div>
+          <div className="ffo-stat-box">
+            <span className="ffo-stat-label">Matched Characters</span>
+            <span className="ffo-stat-val">{step?.matched ?? 0} / {needle.length}</span>
           </div>
         </div>
       </div>
+    </div>
+  )
 
-      <div className="ffo-middle">
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
         />
-      </div>
+      )}
+    </div>
+  )
 
-      <div className={`ffo-status ${step?.phase === 'match_found' ? 'success' : step?.phase === 'done' ? 'fail' : ''}`}>
-        {step?.message ?? 'Press Play or Step to begin.'}
-      </div>
+  const statusPanel = (
+    <div className={`ffo-status ${step?.phase === 'match_found' ? 'success' : step?.phase === 'done' ? 'fail' : ''}`}>
+      {step?.message ?? 'Press Play or Step to begin.'}
+    </div>
+  )
 
-      <div className="ffo-dock">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </div>
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={FINDFIRSTOCCURRENCE_PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
 
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+  // Step 3: Add state + config
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'String Matching', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  // Step 4: Replace return with portals
+  return (
+    <div className="ffo-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

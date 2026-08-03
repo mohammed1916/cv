@@ -1,12 +1,42 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './FourSumVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
+
+const FOURSUM_PATTERNS = ['sort', 'fix_i', 'skip_i', 'fix_j', 'skip_j', 'calc', 'found', 'move_l', 'move_r', 'done']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'sort',    // nums.sort()
+  4: 'fix_i',   // result = []
+  5: 'fix_i',   // for i in range(len(nums) - 3):
+  6: 'skip_i',  // if i > 0 and nums[i] == nums[i - 1]:
+  7: 'skip_i',  // continue  # skip i-duplicates
+  8: 'fix_j',   // for j in range(i + 1, len(nums) - 2):
+  9: 'skip_j',  // if j > i + 1 and nums[j] == nums[j - 1]:
+  10: 'skip_j', // continue  # skip j-duplicates
+  11: 'calc',   // l, r = j + 1, len(nums) - 1
+  12: 'calc',   // while l < r:
+  13: 'calc',   // s = nums[i] + nums[j] + nums[l] + nums[r]
+  14: 'found',  // if s == target:
+  15: 'found',  // result.append([nums[i], nums[j], nums[l], nums[r]])
+  16: 'move_l', // l += 1
+  17: 'move_r', // r -= 1
+  18: 'move_l', // elif s < target:
+  19: 'move_l', // l += 1
+  20: 'move_r', // else:
+  21: 'move_r', // r -= 1
+}
 
 const SOLUTION_CODE = [
     { line: 1, text: 'class Solution:' },
@@ -176,109 +206,131 @@ export default function FourSumVisualizer() {
 
     const sorted = step?.sorted ?? [...nums].sort((a, b) => a - b)
 
-    return (
-        <div className="fs4-shell">
-            <div className="fs4-top">
-                {/* ── Left: array + pointers ── */}
-                <section className="fs4-panel main">
-                    <header className="fs4-head">
-                        <span>Sorted Array · Two Pointers</span>
-                        {inputError && <span className="fs4-error">{inputError}</span>}
-                    </header>
-                    <div className="fs4-body">
-                        <div className="fs4-examples">
-                            {EXAMPLES.map((ex) => (
-                                <button key={ex.label} className="fs4-chip" onClick={() => applyExample(ex)}>
-                                    {ex.label}
-                                </button>
-                            ))}
-                        </div>
-                        <div className="fs4-input-row">
-                            <input
-                                className="fs4-input"
-                                value={numsInput}
-                                onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-                                placeholder="[1,0,-1,0,-2,2]"
-                            />
-                            <input
-                                className="fs4-input target"
-                                value={targetInput}
-                                onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
-                                placeholder="0"
-                            />
-                        </div>
+    // Step 2: Extract panels into consts
+    const primaryPanel = (
+        <section className="fs4-panel main">
+            <header className="fs4-head">
+                <span>Sorted Array · Two Pointers</span>
+                {inputError && <span className="fs4-error">{inputError}</span>}
+            </header>
+            <div className="fs4-body">
+                <div className="fs4-examples">
+                    {EXAMPLES.map((ex) => (
+                        <button key={ex.label} className="fs4-chip" onClick={() => applyExample(ex)}>
+                            {ex.label}
+                        </button>
+                    ))}
+                </div>
+                <div className="fs4-input-row">
+                    <input
+                        className="fs4-input"
+                        value={numsInput}
+                        onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
+                        placeholder="[1,0,-1,0,-2,2]"
+                    />
+                    <input
+                        className="fs4-input target"
+                        value={targetInput}
+                        onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
+                        placeholder="0"
+                    />
+                </div>
 
-                        <div className="fs4-array">
-                            {sorted.map((val, idx) => {
-                                const isI = step?.i === idx
-                                const isJ = step?.j === idx
-                                const isL = step?.l === idx
-                                const isR = step?.r === idx
-                                const isFound = step?.phase === 'found' && (isI || isJ || isL || isR)
-                                const lifted = isI || isJ || isL || isR
-                                return (
-                                    <div key={idx} className="fs4-cell-wrap">
-                                        <motion.div
-                                            className={`fs4-cell${isI ? ' i' : ''}${isJ ? ' j' : ''}${isL ? ' left' : ''}${isR ? ' right' : ''}${isFound ? ' found' : ''}`}
-                                            animate={{ y: lifted ? -12 : 0, scale: lifted ? 1.15 : 1 }}
-                                            transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-                                        >
-                                            {val}
-                                        </motion.div>
-                                        <span className="fs4-idx">{idx}</span>
-                                        <div className="fs4-ptrs">
-                                            {isI && <span className="fs4-ptr fs4-ptr-i">i</span>}
-                                            {isJ && <span className="fs4-ptr fs4-ptr-j">j</span>}
-                                            {isL && <span className="fs4-ptr fs4-ptr-l">l</span>}
-                                            {isR && <span className="fs4-ptr fs4-ptr-r">r</span>}
-                                        </div>
-                                    </div>
-                                )
-                            })}
-                        </div>
-
-                        {step?.sum != null && (
-                            <div className="fs4-sum-box">
-                                <span className="fs4-sum-label">nums[i] + nums[j] + nums[l] + nums[r] =</span>
-                                <span className="fs4-sum-val mono">{step.sum}</span>
-                                <span className={`fs4-sum-verdict${step.sum === target ? ' match' : step.sum < target ? ' neg' : ' pos'}`}>
-                                    {step.sum === target ? `= ${target} ✓` : step.sum < target ? `< ${target} → l →` : `> ${target} → ← r`}
-                                </span>
-                            </div>
-                        )}
-                    </div>
-                </section>
-
-                {/* ── Right: results ── */}
-                <section className="fs4-panel results">
-                    <header className="fs4-head"><span>Quadruplets Found</span></header>
-                    <div className="fs4-body">
-                        <AnimatePresence>
-                            {(step?.result ?? []).map((quad) => (
+                <div className="fs4-array">
+                    {sorted.map((val, idx) => {
+                        const isI = step?.i === idx
+                        const isJ = step?.j === idx
+                        const isL = step?.l === idx
+                        const isR = step?.r === idx
+                        const isFound = step?.phase === 'found' && (isI || isJ || isL || isR)
+                        const lifted = isI || isJ || isL || isR
+                        return (
+                            <div key={idx} className="fs4-cell-wrap">
                                 <motion.div
-                                    key={quad.join(',')}
-                                    className="fs4-quad"
-                                    initial={{ opacity: 0, x: 24 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0 }}
+                                    className={`fs4-cell${isI ? ' i' : ''}${isJ ? ' j' : ''}${isL ? ' left' : ''}${isR ? ' right' : ''}${isFound ? ' found' : ''}`}
+                                    animate={{ y: lifted ? -12 : 0, scale: lifted ? 1.15 : 1 }}
+                                    transition={{ type: 'spring', stiffness: 420, damping: 26 }}
                                 >
-                                    <span className="mono">[{quad.join(', ')}]</span>
+                                    {val}
                                 </motion.div>
-                            ))}
-                        </AnimatePresence>
-                        {(!step?.result || step.result.length === 0) && (
-                            <div className="fs4-empty">No quadruplets yet</div>
-                        )}
+                                <span className="fs4-idx">{idx}</span>
+                                <div className="fs4-ptrs">
+                                    {isI && <span className="fs4-ptr fs4-ptr-i">i</span>}
+                                    {isJ && <span className="fs4-ptr fs4-ptr-j">j</span>}
+                                    {isL && <span className="fs4-ptr fs4-ptr-l">l</span>}
+                                    {isR && <span className="fs4-ptr fs4-ptr-r">r</span>}
+                                </div>
+                            </div>
+                        )
+                    })}
+                </div>
+
+                {step?.sum != null && (
+                    <div className="fs4-sum-box">
+                        <span className="fs4-sum-label">nums[i] + nums[j] + nums[l] + nums[r] =</span>
+                        <span className="fs4-sum-val mono">{step.sum}</span>
+                        <span className={`fs4-sum-verdict${step.sum === target ? ' match' : step.sum < target ? ' neg' : ' pos'}`}>
+                            {step.sum === target ? `= ${target} ✓` : step.sum < target ? `< ${target} → l →` : `> ${target} → ← r`}
+                        </span>
                     </div>
-                </section>
+                )}
             </div>
+        </section>
+    )
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-
-            <div className={`fs4-status${step?.phase === 'found' ? ' ok' : step?.phase === 'done' ? ' done' : ''}`}>
-                {step?.message ?? 'Press Play or Step to begin.'}
+    const statePanel = (
+        <section className="fs4-panel results">
+            <header className="fs4-head"><span>Quadruplets Found</span></header>
+            <div className="fs4-body">
+                <AnimatePresence>
+                    {(step?.result ?? []).map((quad) => (
+                        <motion.div
+                            key={quad.join(',')}
+                            className="fs4-quad"
+                            initial={{ opacity: 0, x: 24 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0 }}
+                        >
+                            <span className="mono">[{quad.join(', ')}]</span>
+                        </motion.div>
+                    ))}
+                </AnimatePresence>
+                {(!step?.result || step.result.length === 0) && (
+                    <div className="fs4-empty">No quadruplets yet</div>
+                )}
             </div>
+        </section>
+    )
 
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                disableResizer
+            />
+            {showPatternOverlay && (
+                <CodePatternAnnotations
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                />
+            )}
+        </div>
+    )
+
+    const statusPanel = (
+        <div className={`fs4-status${step?.phase === 'found' ? ' ok' : step?.phase === 'done' ? ' done' : ''}`}>
+            {step?.message ?? 'Press Play or Step to begin.'}
+        </div>
+    )
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={FOURSUM_PATTERNS} />
+            )}
             <PlaybackControls
                 isPlaying={isPlaying}
                 isDone={isDone}
@@ -297,6 +349,38 @@ export default function FourSumVisualizer() {
                 showPatternOverlayToggle
             />
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+        </>
+    )
+
+    // Step 3: Add state + config
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Sorted Array · Two Pointers', dockMode: 'split-right' },
+            { id: 'state', title: 'Quadruplets Found', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+    // Step 4: Replace return block with Lumino DockPanel + portals
+    return (
+        <div className="fs4-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     )
 }

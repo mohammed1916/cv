@@ -1,14 +1,17 @@
-import { useState, useCallback, useMemo } from 'react'
+﻿import { useState, useCallback, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
-import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './RestoreIPAddressesVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -31,6 +34,25 @@ const SOLUTION_CODE = [
   { line: 18, text: '        backtrack(0, 0, "")' },
   { line: 19, text: '        return res' },
 ]
+
+const RESTOREIPADDRESSES_PATTERNS = ['backtrack_return', 'check_dots', 'check_valid', 'done', 'dots_complete', 'enter_backtrack', 'extra_chars', 'init', 'invalid_chars', 'invalid_length', 'no_valid_parts', 'recurse', 'return_complete', 'start_backtrack', 'try_part', 'valid_ip']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  2: 'invalid_chars',
+  3: 'invalid_length',
+  5: 'init',
+  7: 'enter_backtrack',
+  8: 'check_dots',
+  9: 'dots_complete',
+  10: 'valid_ip',
+  11: 'extra_chars',
+  13: 'try_part',
+  15: 'check_valid',
+  16: 'recurse',
+  18: 'start_backtrack',
+  19: 'done',
+}
 
 function generateSteps(s) {
   const steps = []
@@ -324,148 +346,189 @@ export default function RestoreIPAddressesVisualizer() {
   const dotsDisplay = step?.dots ?? 0
   const ipDisplay = step?.ip === '' ? '(empty)' : step?.ip || ''
 
+  // Step 3: Extract panels into consts
+  const primaryPanel = (
+    <div className="restore-ip-panel">
+      <div className="restore-ip-panel-head">
+        Input
+        {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
+      </div>
+      <div className="restore-ip-panel-body">
+        <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
+          {EXAMPLES.map((ex) => (
+            <button
+              key={ex.label}
+              onClick={() => applyExample(ex)}
+              className="restore-ip-example-btn"
+            >
+              {ex.label}
+            </button>
+          ))}
+        </div>
+
+        <div style={{ display: 'flex', gap: 12, marginBottom: 24 }}>
+          <input
+            value={input}
+            onChange={(e) => { setInput(e.target.value);
+ handleReset() }}
+            placeholder="25525511135"
+            className="restore-ip-input"
+            style={{ flex: 1, margin: 0 }}
+          />
+        </div>
+
+        <div className="restore-ip-string-display">
+          <div className="restore-ip-string-header">String: {input}</div>
+          <div className="restore-ip-string-chars">
+            {input.split('').map((char, idx) => {
+              const isActive = step?.index === idx
+              const isCurrent = step?.index <= idx && idx < step?.index + 3
+              return (
+                <motion.div
+                  key={idx}
+                  className={`restore-ip-char ${isActive ? 'active' : ''} ${isCurrent ? 'current' : ''}`}
+                  animate={isActive ? { y: -5 } : { y: 0 }}
+                >
+                  <span className="restore-ip-char-val">{char}</span>
+                  <span className="restore-ip-char-idx">{idx}</span>
+                </motion.div>
+              )
+            })}
+          </div>
+        </div>
+
+        <div className="restore-ip-state-box">
+          <div className="restore-ip-state-row">
+            <span className="label">Index:</span>
+            <span className="value">{step?.index ?? '-'}</span>
+          </div>
+          <div className="restore-ip-state-row">
+            <span className="label">Dots:</span>
+            <span className="value">{dotsDisplay}/4</span>
+          </div>
+          <div className="restore-ip-state-row">
+            <span className="label">Current IP:</span>
+            <span className="value">{ipDisplay}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+
+  const statePanel = (
+    <div className="restore-ip-panel">
+      <div className="restore-ip-panel-head">Results</div>
+      <div className="restore-ip-panel-body">
+        <div className="restore-ip-results-container">
+          {step?.res && step.res.length > 0 ? (
+            <>
+              <div className="restore-ip-results-header">
+                Found: {step.res.length}
+              </div>
+              <AnimatePresence>
+                {step.res.map((ip, idx) => (
+                  <motion.div
+                    key={`${ip}-${idx}`}
+                    layout
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    className="restore-ip-result-item"
+                  >
+                    {ip}
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </>
+          ) : (
+            <div className="restore-ip-empty-results">No IPs found yet</div>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
+        />
+      )}
+    </div>
+  )
+
+  const statusPanel = (
+    <div className={`restore-ip-status ${step?.phase === 'valid_ip' ? 'success' : step?.phase === 'done' ? (step.res.length > 0 ? 'success' : 'neutral') : ''}`}>
+      {step?.message ?? 'Press Play or Step to begin.'}
+    </div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={RESTOREIPADDRESSES_PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
+
+  // Step 4: Add state + config
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Input', dockMode: 'split-right' },
+      { id: 'state', title: 'Results', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  // Step 5: Replace return block
   return (
     <div className="restore-ip-shell">
-      <ResizableSplitPanels
-        className="restore-ip-top-split"
-        storageKey="cpviz.split.restoreip.top"
-        initialLeftPercent={60}
-        minLeftPx={360}
-        minRightPx={280}
-        left={(
-          <div className="restore-ip-panel">
-            <div className="restore-ip-panel-head">
-              Input
-              {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
-            </div>
-            <div className="restore-ip-panel-body">
-              <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
-                {EXAMPLES.map((ex) => (
-                  <button
-                    key={ex.label}
-                    onClick={() => applyExample(ex)}
-                    className="restore-ip-example-btn"
-                  >
-                    {ex.label}
-                  </button>
-                ))}
-              </div>
-
-              <div style={{ display: 'flex', gap: 12, marginBottom: 24 }}>
-                <input
-                  value={input}
-                  onChange={(e) => { setInput(e.target.value); handleReset() }}
-                  placeholder="25525511135"
-                  className="restore-ip-input"
-                  style={{ flex: 1, margin: 0 }}
-                />
-              </div>
-
-              <div className="restore-ip-string-display">
-                <div className="restore-ip-string-header">String: {input}</div>
-                <div className="restore-ip-string-chars">
-                  {input.split('').map((char, idx) => {
-                    const isActive = step?.index === idx
-                    const isCurrent = step?.index <= idx && idx < step?.index + 3
-                    return (
-                      <motion.div
-                        key={idx}
-                        className={`restore-ip-char ${isActive ? 'active' : ''} ${isCurrent ? 'current' : ''}`}
-                        animate={isActive ? { y: -5 } : { y: 0 }}
-                      >
-                        <span className="restore-ip-char-val">{char}</span>
-                        <span className="restore-ip-char-idx">{idx}</span>
-                      </motion.div>
-                    )
-                  })}
-                </div>
-              </div>
-
-              <div className="restore-ip-state-box">
-                <div className="restore-ip-state-row">
-                  <span className="label">Index:</span>
-                  <span className="value">{step?.index ?? '-'}</span>
-                </div>
-                <div className="restore-ip-state-row">
-                  <span className="label">Dots:</span>
-                  <span className="value">{dotsDisplay}/4</span>
-                </div>
-                <div className="restore-ip-state-row">
-                  <span className="label">Current IP:</span>
-                  <span className="value">{ipDisplay}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-        right={(
-          <div className="restore-ip-panel">
-            <div className="restore-ip-panel-head">Results</div>
-            <div className="restore-ip-panel-body">
-              <div className="restore-ip-results-container">
-                {step?.res && step.res.length > 0 ? (
-                  <>
-                    <div className="restore-ip-results-header">
-                      Found: {step.res.length}
-                    </div>
-                    <AnimatePresence>
-                      {step.res.map((ip, idx) => (
-                        <motion.div
-                          key={`${ip}-${idx}`}
-                          layout
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          className="restore-ip-result-item"
-                        >
-                          {ip}
-                        </motion.div>
-                      ))}
-                    </AnimatePresence>
-                  </>
-                ) : (
-                  <div className="restore-ip-empty-results">No IPs found yet</div>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
-      />
-
-      <div className="restore-ip-middle">
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-        />
-      </div>
-
-      <div className={`restore-ip-status ${step?.phase === 'valid_ip' ? 'success' : step?.phase === 'done' ? (step.res.length > 0 ? 'success' : 'neutral') : ''}`}>
-        {step?.message ?? 'Press Play or Step to begin.'}
-      </div>
-
-      <div className="restore-ip-dock">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </div>
-
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }
+

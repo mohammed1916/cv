@@ -4,11 +4,26 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './Problem370Visualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
+
+const PATTERNS = ['complete', 'init', 'prefix_sum', 'processing']
+const LINE_PATTERN_MAP = {
+  2: 'init',
+  4: 'processing',
+  5: 'processing',
+  6: 'processing',
+  10: 'prefix_sum',
+  11: 'prefix_sum',
+  13: 'complete'
+}
+
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def getModifiedArray(length, updates):' },
@@ -195,13 +210,23 @@ export default function Problem370Visualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-        />
+        <div style={{ position: 'relative' }}>
+          <CodeTracePanel
+            step={step}
+            codeLines={SOLUTION_CODE}
+            highlightedLines={connectivity.highlightedLines}
+            onLineSelect={connectivity.handleLineSelect}
+            onActiveLineDomChange={setActiveLineDom}
+          />
+          {step && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step.activeLine}
+            />
+          )}
+        </div>
       ),
     },
     {

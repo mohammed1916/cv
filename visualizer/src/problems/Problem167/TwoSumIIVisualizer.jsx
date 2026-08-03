@@ -1,4 +1,5 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -7,7 +8,15 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './TwoSumIIVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
+
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
     { line: 1, text: 'class Solution:' },
     { line: 2, text: '    def twoSum(self, numbers: List[int], target: int) -> List[int]:' },
@@ -120,100 +129,114 @@ export default function TwoSumIIVisualizer() {
     const sum = step?.sum ?? null
     const result = step?.result
 
-    return (
-        <div className="ts2-shell">
-            <section className="ts2-panel">
-                <header className="ts2-head">
-                    <span>Two Sum II · Two Pointers</span>
-                    {inputError && <span className="ts2-error">{inputError}</span>}
-                </header>
-                <div className="ts2-body">
-                    <div className="ts2-top-row">
-                        <div className="ts2-examples">
-                            {EXAMPLES.map(ex => (
-                                <button key={ex.label} className="ts2-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                            ))}
+    // ─── Extract panels into consts ───
+    const primaryPanel = (
+        <div className="ts2-panel">
+            <header className="ts2-head">
+                <span>Two Sum II · Two Pointers</span>
+                {inputError && <span className="ts2-error">{inputError}</span>}
+            </header>
+            <div className="ts2-body">
+                <div className="ts2-top-row">
+                    <div className="ts2-examples">
+                        {EXAMPLES.map(ex => (
+                            <button key={ex.label} className="ts2-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
+                        ))}
+                    </div>
+                    <div className="ts2-inputs">
+                        <div className="ts2-input-group">
+                            <label className="ts2-label">numbers (sorted)</label>
+                            <input className="ts2-input" value={numsInput}
+                                onChange={e => { setNumsInput(e.target.value); handleReset() }} />
                         </div>
-                        <div className="ts2-inputs">
-                            <div className="ts2-input-group">
-                                <label className="ts2-label">numbers (sorted)</label>
-                                <input className="ts2-input" value={numsInput}
-                                    onChange={e => { setNumsInput(e.target.value); handleReset() }} />
-                            </div>
-                            <div className="ts2-input-group">
-                                <label className="ts2-label">target</label>
-                                <input className="ts2-input narrow" type="number" value={targetInput}
-                                    onChange={e => { setTargetInput(e.target.value); handleReset() }} />
-                            </div>
+                        <div className="ts2-input-group">
+                            <label className="ts2-label">target</label>
+                            <input className="ts2-input narrow" type="number" value={targetInput}
+                                onChange={e => { setTargetInput(e.target.value); handleReset() }} />
                         </div>
                     </div>
+                </div>
 
-                    {/* Array */}
-                    <div className="ts2-array">
-                        {numbers.map((val, idx) => {
-                            const isLo = idx === lo
-                            const isHi = idx === hi
-                            const isBoth = isLo && isHi
-                            const isFound = Array.isArray(result) && result.length === 2 && (idx === result[0] - 1 || idx === result[1] - 1)
-                            const isElim = !isLo && !isHi && !isFound
-                            return (
-                                <div key={idx} className="ts2-col">
-                                    <motion.div
-                                        className={['ts2-cell',
-                                            isFound ? 'found' : '',
-                                            isLo && !isBoth && !isFound ? 'lo' : '',
-                                            isHi && !isBoth && !isFound ? 'hi' : '',
-                                            isBoth && !isFound ? 'both' : '',
-                                            isElim && result !== null ? 'dim' : '',
-                                        ].filter(Boolean).join(' ')}
-                                        animate={{ y: isLo || isHi || isFound ? -8 : 0, scale: isFound ? 1.15 : (isLo || isHi ? 1.08 : 1) }}
-                                        transition={{ type: 'spring', stiffness: 400, damping: 26 }}
-                                    >
-                                        {val}
-                                    </motion.div>
-                                    <span className="ts2-idx">{idx + 1}</span>
-                                    <div className="ts2-ptrs">
-                                        {isLo && <span className="ts2-ptr lo-ptr">lo</span>}
-                                        {isHi && !isLo && <span className="ts2-ptr hi-ptr">hi</span>}
-                                    </div>
+                {/* Array */}
+                <div className="ts2-array">
+                    {numbers.map((val, idx) => {
+                        const isLo = idx === lo
+                        const isHi = idx === hi
+                        const isBoth = isLo && isHi
+                        const isFound = Array.isArray(result) && result.length === 2 && (idx === result[0] - 1 || idx === result[1] - 1)
+                        const isElim = !isLo && !isHi && !isFound
+                        return (
+                            <div key={idx} className="ts2-col">
+                                <motion.div
+                                    className={['ts2-cell',
+                                        isFound ? 'found' : '',
+                                        isLo && !isBoth && !isFound ? 'lo' : '',
+                                        isHi && !isBoth && !isFound ? 'hi' : '',
+                                        isBoth && !isFound ? 'both' : '',
+                                        isElim && result !== null ? 'dim' : '',
+                                    ].filter(Boolean).join(' ')}
+                                    animate={{ y: isLo || isHi || isFound ? -8 : 0, scale: isFound ? 1.15 : (isLo || isHi ? 1.08 : 1) }}
+                                    transition={{ type: 'spring', stiffness: 400, damping: 26 }}
+                                >
+                                    {val}
+                                </motion.div>
+                                <span className="ts2-idx">{idx + 1}</span>
+                                <div className="ts2-ptrs">
+                                    {isLo && <span className="ts2-ptr lo-ptr">lo</span>}
+                                    {isHi && !isLo && <span className="ts2-ptr hi-ptr">hi</span>}
                                 </div>
-                            )
-                        })}
-                    </div>
+                            </div>
+                        )
+                    })}
+                </div>
 
-                    {/* Sum verdict */}
-                    {sum !== null && (
-                        <motion.div
-                            className={['ts2-verdict',
-                                sum === target ? 'match' : sum < target ? 'low' : 'high'
-                            ].join(' ')}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                        >
-                            {numbers[lo] !== undefined && numbers[hi] !== undefined
-                                ? `${numbers[step?.phase === 'move_lo' ? lo - 1 : lo]} + ${numbers[step?.phase === 'move_hi' ? hi + 1 : hi]} = ${sum} `
-                                : `sum = ${sum} `}
-                            {sum === target ? '= target ✓' : sum < target ? `< ${target} → move lo right` : `> ${target} → move hi left`}
+                {/* Sum verdict */}
+                {sum !== null && (
+                    <motion.div
+                        className={['ts2-verdict',
+                            sum === target ? 'match' : sum < target ? 'low' : 'high'
+                        ].join(' ')}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                    >
+                        {numbers[lo] !== undefined && numbers[hi] !== undefined
+                            ? `${numbers[step?.phase === 'move_lo' ? lo - 1 : lo]} + ${numbers[step?.phase === 'move_hi' ? hi + 1 : hi]} = ${sum} `
+                            : `sum = ${sum} `}
+                        {sum === target ? '= target ✓' : sum < target ? `< ${target} → move lo right` : `> ${target} → move hi left`}
+                    </motion.div>
+                )}
+
+                <AnimatePresence>
+                    {Array.isArray(result) && result.length === 2 && (
+                        <motion.div className="ts2-result"
+                            initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+                            Answer: [{result[0]}, {result[1]}] (1-indexed)
                         </motion.div>
                     )}
-
-                    <AnimatePresence>
-                        {Array.isArray(result) && result.length === 2 && (
-                            <motion.div className="ts2-result"
-                                initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
-                                Answer: [{result[0]}, {result[1]}] (1-indexed)
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-                </div>
-            </section>
-
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-
-            <div className={`ts2-status${Array.isArray(result) && result.length === 2 ? ' ok' : ''}`}>
-                {step?.message ?? 'Press Play or Step to begin.'}
+                </AnimatePresence>
             </div>
+        </div>
+    )
 
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                disableResizer
+            />
+        </div>
+    )
+
+    const statusPanel = (
+        <div className={`ts2-status${Array.isArray(result) && result.length === 2 ? ' ok' : ''}`}>
+            {step?.message ?? 'Press Play or Step to begin.'}
+        </div>
+    )
+
+    const playbackPanel = (
+        <>
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward}
@@ -225,7 +248,35 @@ export default function TwoSumIIVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+        </>
+    )
 
+    // ─── Lumino setup ───
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Two Sum II · Two Pointers', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+    return (
+        <div className="ts2-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     )

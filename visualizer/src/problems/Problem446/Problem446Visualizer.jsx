@@ -4,12 +4,25 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
+
+const PATTERNS = ['arithmetic', 'checking', 'done', 'start']
+const LINE_PATTERN_MAP = {
+  2: 'done',
+  4: 'start',
+  7: 'checking',
+  9: 'arithmetic',
+  10: 'done'
+}
+
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def numberOfArithmeticSlices(nums: list) -> int:' },
@@ -289,6 +302,8 @@ function VisualizationPanel({ step, nums, EXAMPLES, handleExampleClick, numsInpu
     </section>
   )
 }
+
+const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
 
 export default function Problem446Visualizer() {
   const [numsInput, setNumsInput] = useState('1,2,3,4')

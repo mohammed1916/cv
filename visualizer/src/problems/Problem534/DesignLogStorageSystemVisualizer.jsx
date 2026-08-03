@@ -4,12 +4,27 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './DesignLogStorageSystemVisualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('design-log-storage-system')
+
+const PATTERNS = ['done', 'filter', 'init', 'match', 'put', 'retrieve', 'set_precision', 'truncate']
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  5: 'put',
+  6: 'retrieve',
+  7: 'process',
+  8: 'process',
+  10: 'process'
+}
+
 
 const EXAMPLES = getExamples('design-log-storage-system')
 
@@ -278,13 +293,34 @@ export default function DesignLogStorageSystemVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
+        <div style={{ position: 'relative' }}>
+
+          <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
           onLineSelect={connectivity.handleLineSelect}
           onActiveLineDomChange={setActiveLineDom}
         />
+
+
+          {showPatternOverlay && (
+
+            <CodePatternAnnotations
+
+              linePatterns={LINE_PATTERN_MAP}
+
+              currentPhase={step?.phase}
+
+              activeLineDom={activeLineDom}
+
+              activeLine={step?.activeLine}
+
+            />
+
+          )}
+
+        </div>
       ),
     },
     {
@@ -306,6 +342,9 @@ export default function DesignLogStorageSystemVisualizer() {
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
       />
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -324,7 +363,7 @@ export default function DesignLogStorageSystemVisualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      
     </div>
   )
 }

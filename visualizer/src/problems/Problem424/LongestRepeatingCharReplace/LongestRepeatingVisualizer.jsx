@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from "react";
+﻿import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../../components/CodeTracePanel";
 import PlaybackControls from "../../../components/PlaybackControls";
@@ -10,7 +10,6 @@ import { usePatternOverlay } from "../../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../../hooks/useAutoScroll";
 import { getExamples } from '../../../config/examplesRegistry'
 import "./LongestRepeatingVisualizer.css";
-
 const SOLUTION_CODE = [
     { line: 1, text: "def characterReplacement(s, k):" },
     { line: 2, text: "    count = {}" },
@@ -253,3 +252,4 @@ export default function LongestRepeatingVisualizer() {
         </div>
     );
 }
+

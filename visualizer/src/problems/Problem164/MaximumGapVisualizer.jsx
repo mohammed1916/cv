@@ -1,4 +1,5 @@
-import { useState, useMemo, useCallback, useEffect } from "react";
+﻿import { useState, useMemo, useCallback, useEffect } from "react";
+import { createPortal } from 'react-dom'
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -9,7 +10,15 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./MaximumGapVisualizer.css";
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
+
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE_INLINE = [
     { line: 1, text: "def maximumGap(nums):" },
     { line: 2, text: "    if len(nums) < 2: return 0" },
@@ -135,8 +144,9 @@ export default function MaximumGapVisualizer() {
         return () => cleanups.forEach((fn) => fn && fn());
     }, [visibleBuckets, ex.nums, registerTarget]);
 
-    return (
-        <div className="mg-shell">
+    // Extract panels into consts (Step 2)
+    const primaryPanel = (
+        <div className="mg-panel">
             <div className="mg-examples">
                 {EXAMPLES.map(e => (
                     <button key={e.label} className={`mg-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>
@@ -204,9 +214,27 @@ export default function MaximumGapVisualizer() {
             </div>
 
             {step?.done && <div className="mg-result">✓ Maximum gap = {res}</div>}
+        </div>
+    )
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-            <div className="mg-status">{step?.message ?? "Press Play to begin."}</div>
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                disableResizer
+            />
+            {showPatternOverlay && <CodePatternAnnotations step={step} linePatternMap={LINE_PATTERN_MAP} patterns={PATTERNS} />}
+        </div>
+    )
+
+    const statusPanel = (
+        <div className="mg-status">{step?.message ?? "Press Play to begin."}</div>
+    )
+
+    const playbackPanel = (
+        <>
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -217,7 +245,36 @@ export default function MaximumGapVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+        </>
+    )
+
+    // Add state + config (Step 3-4)
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
+            { id: 'code',    title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status',  title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+    // Replace return block (Step 5)
+    return (
+        <div className="mg-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}
+                    {panelDivs.status  && createPortal(statusPanel,  panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     );
 }

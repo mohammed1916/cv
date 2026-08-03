@@ -144,3 +144,151 @@
     height: 200px;
   }
 }
+
+/* --- Input --- */
+.bulb-switcher-input-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.bulb-switcher-input {
+  font-family: monospace;
+  font-size: 14px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-1);
+  color: #e2e8f0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.bulb-switcher-input:focus {
+  outline: none;
+  border-color: #22c55e;
+}
+
+.bulb-switcher-hint {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #94a3b8;
+}
+
+/* --- State readout --- */
+.bulb-switcher-readout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.bulb-switcher-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 64px;
+  padding: 8px 12px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.bulb-switcher-stat-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #94a3b8;
+}
+
+.bulb-switcher-stat-value {
+  font-family: monospace;
+  font-size: 18px;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+.bulb-switcher-stat-ans {
+  border-color: #22c55e;
+}
+
+.bulb-switcher-stat-ans .bulb-switcher-stat-value {
+  color: #22c55e;
+}
+
+/* --- Bulb row --- */
+.bulb-switcher-bulbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.bulb-switcher-bulb {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 44px;
+  padding: 8px 4px;
+  border-radius: 10px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  color: #475569;
+}
+
+.bulb-switcher-bulb.is-on {
+  background: #22c55e18;
+  border-color: #22c55e;
+  color: #22c55e;
+}
+
+.bulb-switcher-bulb.is-testing {
+  border-color: #fbbf24;
+  box-shadow: 0 0 0 2px #fbbf2455;
+}
+
+.bulb-switcher-bulb-glyph {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.bulb-switcher-bulb-num {
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+/* --- Legend --- */
+.bulb-switcher-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.bulb-switcher-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bulb-switcher-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  background: var(--surface-1);
+  border: 1px solid #475569;
+  display: inline-block;
+}
+
+.bulb-switcher-swatch.is-on {
+  background: #22c55e18;
+  border-color: #22c55e;
+}
+
+.bulb-switcher-swatch.is-testing {
+  background: transparent;
+  border-color: #fbbf24;
+  box-shadow: 0 0 0 2px #fbbf2455;
+}

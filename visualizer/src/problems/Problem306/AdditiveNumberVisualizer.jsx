@@ -1,14 +1,25 @@
-import { useState, useCallback, useMemo } from 'react'
+﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './AdditiveNumberVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+
+const PATTERNS = ['done', 'init', 'process']
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  3: 'process',
+  5: 'done'
+}
+
 
 const SOLUTION_CODE = [
   { line: 1, text: '# Solution for Additive Number' },
@@ -56,32 +67,46 @@ export default function AdditiveNumberVisualizer() {
     }
   }, [inputValue])
 
-  const steps = useMemo(() => {
-    return input ? generateSteps(input) : []
-  }, [input])
+  const steps = useMemo(
+    () => {
+      if (!input) return []
+      return generateSteps(input).map((current) => ({
+        ...current,
+        relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
+      }))
+    },
+    [input],
+  )
 
-  const { currentStep, isPlaying, setIsPlaying, setCurrentStep, speed, setSpeed } = usePlaybackState({
-    totalSteps: steps.length,
-    autoSpeed: 1000,
+  const {
+    stepIndex, setStepIndex, stepForward, stepBack, togglePlay,
+    handleReset, isPlaying, speed, setSpeed, isDone,
+  } = usePlaybackState(steps.length)
+
+  const step = stepIndex >= 0 ? steps[stepIndex] : null
+
+  const connectivity = useCodeVisualConnectivity({
+    steps,
+    stepIndex,
+    onStepJump: setStepIndex,
   })
 
-  const connectivity = useCodeVisualConnectivity(steps, currentStep)
-  const patternOverlay = usePatternOverlay()
+  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  const handleStepClick = useCallback((index) => {
-    setCurrentStep(index)
-    setIsPlaying(false)
-  }, [setCurrentStep, setIsPlaying])
+  const applyExample = useCallback((ex) => {
+    setInputValue(JSON.stringify(ex))
+    handleReset()
+  }, [handleReset])
 
   const renderVisualization = () => {
     if (!input) return <div className="additive-number-error">{inputError}</div>
 
-    const currentStepData = steps[currentStep] || {}
+    const currentStepData = step || {}
 
     return (
       <motion.div
         className="additive-number-viz"
-        key={currentStep}
+        key={stepIndex}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -127,7 +152,24 @@ export default function AdditiveNumberVisualizer() {
         <div className="additive-number-panel">
           <div className="additive-number-panel-head">Code Trace</div>
           <div className="additive-number-panel-body">
-            <CodeTracePanel code={SOLUTION_CODE} connectivity={connectivity} />
+            <div style={{ position: 'relative' }}>
+              <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                highlightedLines={connectivity.highlightedLines}
+                onLineSelect={connectivity.handleLineSelect}
+                onActiveLineDomChange={setActiveLineDom}
+              />
+
+              {showPatternOverlay && (
+                <CodePatternAnnotations
+                  linePatterns={LINE_PATTERN_MAP}
+                  currentPhase={step?.phase}
+                  activeLineDom={activeLineDom}
+                  activeLine={step?.activeLine}
+                />
+              )}
+            </div>
           </div>
         </div>
 
@@ -137,12 +179,8 @@ export default function AdditiveNumberVisualizer() {
             {EXAMPLES.map((example, i) => (
               <button
                 key={i}
-                className={className + '-example-btn'}
-                onClick={() => {
-                  setInputValue(JSON.stringify(example))
-                  setCurrentStep(0)
-                  setIsPlaying(false)
-                }}
+                className="additive-number-example-btn"
+                onClick={() => applyExample(example)}
               >
                 {example.label}
               </button>
@@ -152,17 +190,28 @@ export default function AdditiveNumberVisualizer() {
       </div>
 
       <div className="additive-number-bottom">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          onPlayPause={() => setIsPlaying(!isPlaying)}
-          onNext={() => setCurrentStep(Math.min(currentStep + 1, steps.length - 1))}
-          onPrev={() => setCurrentStep(Math.max(currentStep - 1, 0))}
-          onReset={() => setCurrentStep(0)}
-          currentStep={currentStep}
-          totalSteps={steps.length}
-          speed={speed}
-          onSpeedChange={setSpeed}
-        />
+        <FloatingPanel title="Playback Controls">
+          {showPatternOverlay && (
+            <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+          )}
+          <PlaybackControls
+            isPlaying={isPlaying}
+            isDone={isDone}
+            speed={speed}
+            onPlayToggle={togglePlay}
+            onPrev={stepBack}
+            onNext={stepForward}
+            onReset={handleReset}
+            prevDisabled={stepIndex < 0}
+            nextDisabled={isDone}
+            resetDisabled={stepIndex < 0}
+            onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+            showPatternOverlay={showPatternOverlay}
+            onShowPatternOverlayChange={setShowPatternOverlay}
+            patternOverlayLabel="Show pattern overlay"
+            showPatternOverlayToggle
+          />
+        </FloatingPanel>
       </div>
     </div>
   )

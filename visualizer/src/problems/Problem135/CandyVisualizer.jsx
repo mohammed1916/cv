@@ -1,6 +1,7 @@
-import { useState, useMemo, useCallback } from "react";
+﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from "framer-motion";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -10,7 +11,12 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./CandyVisualizer.css";
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
   { line: 1,  text: "def candy(ratings):" },
   { line: 2,  text: "    n = len(ratings)" },
@@ -80,8 +86,9 @@ export default function CandyVisualizer() {
 
   const maxCandy = Math.max(...candies, 1);
 
-  return (
-    <div className="cy-shell">
+  // Step 3: Extract panels into consts
+  const primaryPanel = (
+    <div className="cy-panel">
       <div className="cy-examples">
         {EXAMPLES.map(e => (
           <button key={e.label} className={`cy-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>
@@ -138,20 +145,77 @@ export default function CandyVisualizer() {
       </div>
 
       {step?.done && <div className="cy-result">✓ Minimum candies = {step.total}</div>}
+    </div>
+  );
 
-      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-      <div className="cy-status">{step?.message ?? "Press Play to begin."}</div>
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+      {showPatternOverlay && <CodePatternAnnotations patterns={PATTERNS} linePatternMap={LINE_PATTERN_MAP} activeLineDom={activeLineDom} />}
+    </div>
+  );
+
+  const statusPanel = (
+    <div className="cy-status">{step?.message ?? "Press Play to begin."}</div>
+  );
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
-        isPlaying={isPlaying} isDone={isDone} speed={speed}
-        onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-        prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
         onSpeedChange={e => setSpeed(Number(e.target.value))}
         showPatternOverlay={showPatternOverlay}
         onShowPatternOverlayChange={setShowPatternOverlay}
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+    </>
+  );
+
+  // Step 4: Add state + config
+  const [panelDivs, setPanelDivs] = useState(null);
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  );
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
+
+  // Step 5: Replace return block
+  return (
+    <div className="cy-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   );
 }
+

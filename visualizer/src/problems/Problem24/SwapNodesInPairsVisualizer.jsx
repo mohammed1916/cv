@@ -1,10 +1,12 @@
 import { useState, useMemo, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import { createPortal } from 'react-dom'
+import { motion } from 'framer-motion'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
@@ -25,6 +27,19 @@ const SOLUTION_CODE = [
     { line: 11, text: '            prev = first' },
     { line: 12, text: '        return dummy.next' },
 ]
+
+const SWAPNODESINPAIRS_PATTERNS = ['advance', 'check_end', 'check_pair', 'done', 'identify', 'init', 'swap_done', 'swap_start']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  4: 'init',
+  5: 'check_pair',
+  6: 'identify',
+  8: 'swap_start',
+  10: 'swap_done',
+  11: 'advance',
+  12: 'done',
+}
 
 function generateSteps(values) {
     const steps = []
@@ -74,7 +89,7 @@ function generateSteps(values) {
         })
 
         // Actually swap the nodes
-        [nodes[firstIdx], nodes[secondIdx]] = [nodes[secondIdx], nodes[firstIdx]]
+        ;[nodes[firstIdx], nodes[secondIdx]] = [nodes[secondIdx], nodes[firstIdx]]
         swaps.push([firstIdx, secondIdx])
 
         steps.push({
@@ -108,24 +123,46 @@ function generateSteps(values) {
     return steps
 }
 
-const EXAMPLES = getExamples('swap-nodes-in-pairs')
 
-function SwapNodesInPairsViz({ step, values, nodes, valInput, setValInput, handleReset, inputError, EXAMPLES }) {
-    const handleExampleClick = useCallback((ex) => {
-        setValInput(JSON.stringify(ex.values))
-        handleReset()
-    }, [setValInput, handleReset])
+export default function SwapNodesInPairsVisualizer() {
+    const [valInput, setValInput] = useState('[1,2,3,4,5]')
 
-    return (
-        <section className="snip-panel main">
+    const { values, inputError } = useMemo(() => {
+        try {
+            const v = JSON.parse(valInput)
+            if (!Array.isArray(v)) throw new Error('Must be an array')
+            if (v.length > 8) throw new Error('Max 8 nodes for clarity')
+            return { values: v, inputError: '' }
+        } catch (e) {
+            return { values: [1, 2, 3, 4, 5], inputError: e.message || 'Invalid input' }
+        }
+    }, [valInput])
+
+    const steps = useMemo(() => generateSteps(values), [values])
+
+    const {
+        stepIndex, stepForward, stepBack, togglePlay,
+        handleReset, isPlaying, speed, setSpeed, isDone,
+    } = usePlaybackState(steps.length)
+
+    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+    const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
+
+    const step = stepIndex >= 0 ? steps[stepIndex] : null
+
+    const nodes = step?.nodes ?? values
+
+    // Extract panels as consts
+    const primaryPanel = (
+        <div className="snip-panel main">
             <header className="snip-head">
                 <span>Linked List · Pair Swaps</span>
                 {inputError && <span className="snip-error">{inputError}</span>}
             </header>
             <div className="snip-body">
                 <div className="snip-examples">
-                    {EXAMPLES.map((ex) => (
-                        <button key={ex.label} className="snip-chip" onClick={() => handleExampleClick(ex)}>
+                    {getExamples('swap-nodes-in-pairs').map((ex) => (
+                        <button key={ex.label} className="snip-chip" onClick={() => { setValInput(JSON.stringify(ex.values)); handleReset(); }}>
                             {ex.label}
                         </button>
                     ))}
@@ -203,13 +240,11 @@ function SwapNodesInPairsViz({ step, values, nodes, valInput, setValInput, handl
                     <span className="snip-legend-item swapped">swapped — completed swap</span>
                 </div>
             </div>
-        </section>
+        </div>
     )
-}
 
-function SwapNodesInPairsPairState({ step, nodes }) {
-    return (
-        <section className="snip-panel side">
+    const statePanel = (
+        <div className="snip-panel side">
             <header className="snip-head"><span>Swap State</span></header>
             <div className="snip-body">
                 {[
@@ -233,96 +268,91 @@ function SwapNodesInPairsPairState({ step, nodes }) {
                     </motion.div>
                 )}
             </div>
-        </section>
+        </div>
     )
-}
 
-export default function SwapNodesInPairsVisualizer() {
-    const [valInput, setValInput] = useState('[1,2,3,4,5]')
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                autoScroll={autoScrollCode}
+                disableResizer
+            />
+            {showPatternOverlay && (
+                <CodePatternAnnotations
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
+                />
+            )}
+        </div>
+    )
 
-    const { values, inputError } = useMemo(() => {
-        try {
-            const v = JSON.parse(valInput)
-            if (!Array.isArray(v)) throw new Error('Must be an array')
-            if (v.length > 8) throw new Error('Max 8 nodes for clarity')
-            return { values: v, inputError: '' }
-        } catch (e) {
-            return { values: [1, 2, 3, 4, 5], inputError: e.message || 'Invalid input' }
-        }
-    }, [valInput])
+    const statusPanel = (
+        <div className="snip-status">
+            {step?.message ?? 'Press Play or Step to begin.'}
+        </div>
+    )
 
-    const steps = useMemo(() => generateSteps(values), [values])
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={SWAPNODESINPAIRS_PATTERNS} />
+            )}
+            <PlaybackControls
+                isPlaying={isPlaying}
+                isDone={isDone}
+                speed={speed}
+                onPlayToggle={togglePlay}
+                onPrev={stepBack}
+                onNext={stepForward}
+                onReset={handleReset}
+                prevDisabled={stepIndex < 0}
+                nextDisabled={isDone}
+                resetDisabled={stepIndex < 0}
+                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+                showAutoScroll={true}
+                autoScroll={autoScrollCode}
+                onAutoScrollChange={setAutoScrollCode}
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                patternOverlayLabel="Show pattern overlay"
+                showPatternOverlayToggle
+            />
+        </>
+    )
 
-    const {
-        stepIndex, stepForward, stepBack, togglePlay,
-        handleReset, isPlaying, speed, setSpeed, isDone,
-    } = usePlaybackState(steps.length)
-
-    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
-    const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
-
-    const step = stepIndex >= 0 ? steps[stepIndex] : null
-
-    const nodes = step?.nodes ?? values
-
-    const dockPanels = useMemo(() => [
-        {
-            id: 'code',
-            title: 'Code',
-            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
-        },
-        {
-            id: 'viz',
-            title: 'Visualization',
-            content: (
-                <div className="snip-top">
-                    <SwapNodesInPairsViz
-                        step={step}
-                        values={values}
-                        nodes={nodes}
-                        valInput={valInput}
-                        setValInput={setValInput}
-                        handleReset={handleReset}
-                        inputError={inputError}
-                        EXAMPLES={getExamples('swap-nodes-in-pairs')}
-                    />
-                    <SwapNodesInPairsPairState step={step} nodes={nodes} />
-                </div>
-            ),
-        },
-    ], [step, nodes, values, valInput, autoScrollCode, handleReset, inputError])
+    // Lumino state + config
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Linked List · Pair Swaps', dockMode: 'split-right' },
+            { id: 'state', title: 'Swap State', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
-        <div className="problem-shell">
-            <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
-
-            <FloatingPanel title="Playback Controls">
-                <div className="snip-status" style={{ marginBottom: '12px' }}>
-                    {step?.message ?? 'Press Play or Step to begin.'}
-                </div>
-                <PlaybackControls
-                    isPlaying={isPlaying}
-                    isDone={isDone}
-                    speed={speed}
-                    onPlayToggle={togglePlay}
-                    onPrev={stepBack}
-                    onNext={stepForward}
-                    onReset={handleReset}
-                    prevDisabled={stepIndex < 0}
-                    nextDisabled={isDone}
-                    resetDisabled={stepIndex < 0}
-                    onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                    showAutoScroll={true}
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
-                />
-            </FloatingPanel>
-
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+        <div className="snip-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     )
 }

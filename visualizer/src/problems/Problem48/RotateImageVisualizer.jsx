@@ -1,12 +1,27 @@
-import { useState, useMemo, useCallback } from "react";
+﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./RotateImageVisualizer.css";
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from "../../components/LuminoDockPanel"
+
+const ROTATE_PATTERNS = ['transpose', 'swap', 'reverse', 'done']
+
+const LINE_PATTERN_MAP = {
+  4: 'transpose',
+  5: 'transpose',
+  6: 'swap',
+  7: 'swap',
+  9: 'reverse',
+  10: 'reverse',
+}
 
 const SOLUTION_CODE = [
     { line: 1, text: "def rotate(matrix):" },
@@ -71,31 +86,45 @@ export default function RotateImageVisualizer() {
     const matrix = step?.matrix ?? initial;
     const n = matrix.length;
 
-    return (
-        <div className="ri-shell">
-            <div className="ri-controls-row">
-                <div className="ri-examples">
-                    {EXAMPLES.map((ex, i) => (
-                        <button key={ex.label} className={`ri-chip ${selected === i ? "active" : ""}`} onClick={() => applyExample(i)}>{ex.label}</button>
-                    ))}
-                </div>
-            </div>
-
-            <div className="ri-panels">
-                {/* Original */}
-                <div className="ri-panel">
-                    <div className="ri-panel-label">Original</div>
-                    <MatrixGrid matrix={initial} n={n} hi={null} hj={null} accent={ACCENT} />
-                </div>
-                {/* Current state */}
-                <div className="ri-panel">
-                    <div className="ri-panel-label">Working matrix</div>
-                    <MatrixGrid matrix={matrix} n={n} hi={step?.hi} hj={step?.hj} accent={ACCENT} phase={step?.phase} />
-                </div>
-            </div>
-
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-            <div className="ri-status">{step?.message ?? "Press Play to begin."}</div>
+    // Extract panels into consts (step 3)
+    const primaryPanel = (
+        <div className="ri-panel">
+            <div className="ri-panel-label">Original</div>
+            <MatrixGrid matrix={initial} n={n} hi={null} hj={null} accent={ACCENT} />
+        </div>
+    );
+    const statePanel = (
+        <div className="ri-panel">
+            <div className="ri-panel-label">Working matrix</div>
+            <MatrixGrid matrix={matrix} n={n} hi={step?.hi} hj={step?.hj} accent={ACCENT} phase={step?.phase} />
+        </div>
+    );
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                disableResizer
+            />
+            {showPatternOverlay && (
+                <CodePatternAnnotations
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
+                />
+            )}
+        </div>
+    );
+    const statusPanel = (
+        <div className="ri-status">{step?.message ?? "Press Play to begin."}</div>
+    );
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={ROTATE_PATTERNS} />
+            )}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -106,7 +135,46 @@ export default function RotateImageVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+        </>
+    );
+
+    // Add state + config (step 4)
+    const [panelDivs, setPanelDivs] = useState(null);
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Original', dockMode: 'split-right' },
+            { id: 'state', title: 'Working matrix', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    );
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
+
+    // Replace return block (step 5)
+    return (
+        <div className="ri-shell">
+            <div className="ri-controls-row">
+                <div className="ri-examples">
+                    {EXAMPLES.map((ex, i) => (
+                        <button key={ex.label} className={`ri-chip ${selected === i ? "active" : ""}`} onClick={() => applyExample(i)}>{ex.label}</button>
+                    ))}
+                </div>
+            </div>
+
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     );
 }

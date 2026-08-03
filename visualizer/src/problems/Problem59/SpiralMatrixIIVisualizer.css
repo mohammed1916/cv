@@ -1,29 +1,14 @@
-.spiral-matrix-ii-shell {
+.smi-shell {
+  position: relative;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
   background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
   color: #e2e8f0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  overflow: hidden;
-}
-
-.smi-top {
-  flex: 1;
-  overflow-y: auto;
-  padding: 16px;
-  border-bottom: 1px solid #334155;
-}
-
-.spiral-matrix-ii-middle {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  flex: 1;
-  overflow: hidden;
-  padding: 16px;
-  border-bottom: 1px solid #334155;
-  min-height: 300px;
 }
 
 .smi-panel {

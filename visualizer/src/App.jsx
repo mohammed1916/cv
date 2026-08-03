@@ -9,22 +9,23 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import ProblemScaffold from "./components/panels/ProblemScaffold";
 import ProblemInfoPanel from "./components/ProblemInfoPanel";
+import ZoomControls from "./components/ZoomControls";
+import { ZoomProvider } from "./context/ZoomContext";
 import "./App.css";
 import { TRACKS } from "./data/implementedProblems";
 
-const lazyProblem = (folder) =>
-  folder ? React.lazy(() => import(`./problems/${folder}/index.jsx`)) : null;
-
 /* ── Auto-discovery ──────────────────────────────────────────────────── */
 
-const metaModules = import.meta.glob("./problems/*/index.jsx", { eager: true });
+// Metadata lives in a lightweight meta.js (eagerly bundled), while the heavy
+// visualizer is dynamically imported via index.jsx so each one code-splits.
+const metaModules = import.meta.glob("./problems/*/meta.js", { eager: true });
 const lazyModules = import.meta.glob("./problems/*/index.jsx");
 
 const ALL_PROBLEMS = Object.entries(metaModules)
   .map(([path, mod]) => {
     const meta = mod?.meta;
     if (!meta?.number || !meta?.title) return null;
-    const loader = lazyModules[path];
+    const loader = lazyModules[path.replace(/\/meta\.js$/, "/index.jsx")];
     return {
       id: `prob-${meta.slug || meta.number}`,
       number: meta.number,
@@ -647,18 +648,23 @@ export default function App() {
   );
 
   return (
-    <div className={`app layout-${layoutWidth}`}>
-      <div className="app-toolbar">
-        <SettingsMenu
-          navigationTransitionsEnabled={navigationTransitionsEnabled}
-          onToggleNavigationTransitions={setNavigationTransitionsEnabled}
-        />
+    <ZoomProvider>
+      <ZoomControls />
+      <div className={`app layout-${layoutWidth}`}>
+        <div className="app-toolbar">
+          <SettingsMenu
+            navigationTransitionsEnabled={navigationTransitionsEnabled}
+            onToggleNavigationTransitions={setNavigationTransitionsEnabled}
+          />
+        </div>
+        <div id="zoom-content-wrapper" style={{ flex: 1, transformOrigin: 'top left', marginTop: '60px' }}>
+          {navigationTransitionsEnabled ? (
+            <AnimatePresence mode="wait">{pageContent}</AnimatePresence>
+          ) : (
+            pageContent
+          )}
+        </div>
       </div>
-      {navigationTransitionsEnabled ? (
-        <AnimatePresence mode="wait">{pageContent}</AnimatePresence>
-      ) : (
-        pageContent
-      )}
-    </div>
+    </ZoomProvider>
   );
 }

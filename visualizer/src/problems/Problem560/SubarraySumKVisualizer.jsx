@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from "react";
+﻿import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import DockableWorkspace from "../../components/shared/DockableWorkspace";
 import FloatingPanel from "../../components/shared/FloatingPanel";
@@ -10,7 +10,6 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./SubarraySumKVisualizer.css";
-
 const SOLUTION_CODE = [
     { line: 1, text: "def subarraySum(nums, k):" },
     { line: 2, text: "    count, prefix = 0, 0" },
@@ -184,3 +183,4 @@ export default function SubarraySumKVisualizer() {
         </div>
     );
 }
+

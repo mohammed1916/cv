@@ -4,12 +4,27 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+
+const PATTERNS = ['digit_created', 'done', 'popped1', 'popped2', 'processing', 'stacks_loaded', 'start']
+const LINE_PATTERN_MAP = {
+  1: 'done',
+  2: 'start',
+  9: 'stacks_loaded',
+  12: 'processing',
+  13: 'popped1',
+  14: 'popped2',
+  16: 'digit_created',
+  19: 'done'
+}
+
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def addTwoNumbers(l1: ListNode, l2: ListNode) -> ListNode:' },
@@ -371,6 +386,8 @@ function VisualizationPanel({ step, list1, list2, EXAMPLES, handleExampleClick, 
   )
 }
 
+const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
+
 export default function Problem445Visualizer() {
   const [list1Input, setList1Input] = useState('7,2,4,3')
   const [list2Input, setList2Input] = useState('5,6,4')
@@ -497,7 +514,7 @@ export default function Problem445Visualizer() {
         />
       </FloatingPanel>
 
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      
     </div>
   )
 }

@@ -4,7 +4,7 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import VisualizationControls from '../../components/VisualizationControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
@@ -14,6 +14,8 @@ import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { getExamples } from '../../config/examplesRegistry'
 import './Visualizer.css'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('climbing-stairs')
 
 function generateSteps(n) {
   const steps = []
@@ -250,6 +252,8 @@ function VisualizationPanel({
   )
 }
 
+const LINE_PATTERN_MAP = {}
+
 export default function ClimbingStairsVisualizer() {
   const [nInput, setNInput] = useState('5')
 
@@ -318,14 +322,24 @@ export default function ClimbingStairsVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-          autoScroll={autoScrollCode}
-        />
+        <div style={{ position: "relative" }}>
+          <CodeTracePanel
+            step={step}
+            codeLines={SOLUTION_CODE}
+            highlightedLines={connectivity.highlightedLines}
+            onLineSelect={connectivity.handleLineSelect}
+            onActiveLineDomChange={setActiveLineDom}
+            autoScroll={autoScrollCode}
+          />
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
       ),
     },
     {
@@ -383,7 +397,6 @@ export default function ClimbingStairsVisualizer() {
           <VisualizationControls features={vizFeatures} onToggle={toggleVizFeature} />
         )}
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }

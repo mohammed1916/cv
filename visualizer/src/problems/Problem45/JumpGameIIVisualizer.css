@@ -1,4 +1,12 @@
-.jg2-shell { display: flex; flex-direction: column; gap: 12px; padding: 16px; font-family: inherit; }
+.jg2-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+}
 .jg2-examples { display: flex; gap: 8px; flex-wrap: wrap; }
 .jg2-chip { background: #313244; color: #cdd6f4; border: 2px solid #45475a; border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer; }
 .jg2-chip.active, .jg2-chip:hover { border-color: #a6e3a1; color: #a6e3a1; }
@@ -27,3 +35,4 @@
 .jg2-stat-v.curend { color: #89b4fa; }
 .jg2-stat-v.farthest { color: #a6e3a1; }
 .jg2-status { padding: 8px 12px; background: #1e1e2e; border: 1px solid #313244; border-radius: 8px; font-size: 13px; color: #a6adc8; min-height: 36px; }
+.jg2-status-bar { padding: 8px 12px; background: #1e1e2e; border-top: 1px solid #313244; font-size: 13px; color: #a6adc8; height: 100%; display: flex; align-items: center; }

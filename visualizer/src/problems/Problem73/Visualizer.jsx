@@ -2,7 +2,7 @@ import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
@@ -193,6 +193,8 @@ function VisualizationPanel({ EXAMPLES, applyExample, selected, handleReset, ste
     )
 }
 
+const LINE_PATTERN_MAP = {}
+
 export default function SetMatrixZeroesVisualizer() {
     const [selected, setSelected] = useState(0)
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
@@ -231,12 +233,22 @@ export default function SetMatrixZeroesVisualizer() {
                 id: 'code',
                 title: 'Code',
                 content: (
-                    <CodeTracePanel
-                        step={step}
-                        codeLines={SOLUTION_CODE}
-                        onActiveLineDomChange={setActiveLineDom}
-                        autoScroll={autoScrollCode}
-                    />
+                    <div style={{ position: "relative" }}>
+                        <CodeTracePanel
+                            step={step}
+                            codeLines={SOLUTION_CODE}
+                            onActiveLineDomChange={setActiveLineDom}
+                            autoScroll={autoScrollCode}
+                        />
+                        {showPatternOverlay && (
+                            <CodePatternAnnotations
+                                linePatterns={LINE_PATTERN_MAP}
+                                currentPhase={step?.phase}
+                                activeLineDom={activeLineDom}
+                                activeLine={step?.activeLine}
+                            />
+                        )}
+                    </div>
                 ),
             },
         ],
@@ -268,7 +280,6 @@ export default function SetMatrixZeroesVisualizer() {
                     showPatternOverlayToggle
                 />
             </FloatingPanel>
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     )
 }

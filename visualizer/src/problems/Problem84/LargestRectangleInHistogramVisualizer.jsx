@@ -1,12 +1,16 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './LargestRectangleInHistogramVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -24,6 +28,18 @@ const SOLUTION_CODE = [
   { line: 13, text: '            best = max(best, h * (len(heights) - i))' },
   { line: 14, text: '        return best' },
 ]
+
+const LARGESTRECTANGLEINHISTOGRAM_PATTERNS = ['done', 'finalize', 'init', 'iterate', 'pop', 'push']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  4: 'init',
+  6: 'iterate',
+  9: 'pop',
+  11: 'push',
+  13: 'finalize',
+  14: 'done',
+}
 
 function parseHeights(input) {
   const parsed = JSON.parse(input)
@@ -95,43 +111,68 @@ export default function LargestRectangleInHistogramVisualizer() {
   const steps = useMemo(() => generateSteps(heights), [heights])
   const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyExample = useCallback((ex) => { setInput(JSON.stringify(ex.heights)); handleReset() }, [handleReset])
+  const applyExample = useCallback((ex) => { setInput(JSON.stringify(ex.heights));
+
+ handleReset() }, [handleReset])
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  return (
-    <div className="lr-shell">
-      <div className="lr-top">
-        <section className="lr-panel">
-          <header className="lr-head"><span>Histogram Stack Sweep</span>{inputError && <span className="lr-error">{inputError}</span>}</header>
-          <div className="lr-body">
-            <div className="lr-examples">{EXAMPLES.map((ex) => <button key={ex.label} className="lr-chip" onClick={() => applyExample(ex)}>{ex.label}</button>)}</div>
-            <input className="lr-input" value={input} onChange={(e) => { setInput(e.target.value); handleReset() }} />
-            <div className="lr-bars">
-              {heights.map((v, i) => {
-                const active = step?.i === i
-                const inRect = step?.rect && i >= step.rect.start && i <= step.rect.end && v >= step.rect.height
-                return (
-                  <div key={`${v}-${i}`} className="lr-col">
-                    <motion.div className={`lr-bar ${active ? 'active' : ''} ${inRect ? 'rect' : ''}`} style={{ height: `${Math.max(20, v * 18)}px` }} animate={active ? { y: -4 } : { y: 0 }}>
-                      <span>{v}</span>
-                    </motion.div>
-                    <small>{i}</small>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        </section>
-        <section className="lr-panel side">
-          <header className="lr-head"><span>Stack / Best</span></header>
-          <div className="lr-body">
-            <div className="lr-stack">{(step?.stack || []).map((s, i) => <span key={`${s.start}-${s.h}-${i}`}>({s.start},{s.h})</span>)}</div>
-            <div className="lr-best">best area: <strong>{step?.best ?? 0}</strong></div>
-            <div className="lr-status">{step?.message || 'Press Play.'}</div>
-          </div>
-        </section>
+  const primaryPanel = (
+    <div className="lr-panel">
+      <header className="lr-head"><span>Histogram Stack Sweep</span>{inputError && <span className="lr-error">{inputError}</span>}</header>
+      <div className="lr-body">
+        <div className="lr-examples">{EXAMPLES.map((ex) => <button key={ex.label} className="lr-chip" onClick={() => applyExample(ex)}>{ex.label}</button>)}</div>
+        <input className="lr-input" value={input} onChange={(e) => { setInput(e.target.value); handleReset() }} />
+        <div className="lr-bars">
+          {heights.map((v, i) => {
+            const active = step?.i === i
+            const inRect = step?.rect && i >= step.rect.start && i <= step.rect.end && v >= step.rect.height
+            return (
+              <div key={`${v}-${i}`} className="lr-col">
+                <motion.div className={`lr-bar ${active ? 'active' : ''} ${inRect ? 'rect' : ''}`} style={{ height: `${Math.max(20, v * 18)}px` }} animate={active ? { y: -4 } : { y: 0 }}>
+                  <span>{v}</span>
+                </motion.div>
+                <small>{i}</small>
+              </div>
+            )
+          })}
+        </div>
       </div>
-      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+    </div>
+  )
+
+  const statePanel = (
+    <div className="lr-panel">
+      <header className="lr-head"><span>Stack / Best</span></header>
+      <div className="lr-body">
+        <div className="lr-stack">{(step?.stack || []).map((s, i) => <span key={`${s.start}-${s.h}-${i}`}>({s.start},{s.h})</span>)}</div>
+        <div className="lr-best">best area: <strong>{step?.best ?? 0}</strong></div>
+      </div>
+    </div>
+  )
+
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} disableResizer />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
+        />
+      )}
+    </div>
+  )
+
+  const statusPanel = (
+    <div className="lr-status">{step?.message || 'Press Play.'}</div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={LARGESTRECTANGLEINHISTOGRAM_PATTERNS} />
+      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -149,7 +190,37 @@ export default function LargestRectangleInHistogramVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+    </>
+  )
+
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Histogram Stack Sweep', dockMode: 'split-right' },
+      { id: 'state', title: 'Stack / Best', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  return (
+    <div className="lr-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }
+

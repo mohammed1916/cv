@@ -1,12 +1,16 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './JumpGameVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
 const SOLUTION_CODE = [
     { line: 1, text: 'class Solution:' },
@@ -18,6 +22,17 @@ const SOLUTION_CODE = [
     { line: 7, text: '            maxReach = max(maxReach, i + nums[i])' },
     { line: 8, text: '        return True' },
 ]
+
+const JUMPGAME_PATTERNS = ['check', 'done', 'init', 'stuck', 'update']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',
+  5: 'check',
+  6: 'stuck',
+  7: 'update',
+  8: 'done',
+}
 
 function generateSteps(nums) {
     const steps = []
@@ -112,86 +127,109 @@ export default function JumpGameVisualizer() {
     const maxReach = step?.maxReach ?? 0
     const currI = step?.i ?? -1
 
-    return (
-        <div className="jg-shell">
-            <section className="jg-panel">
-                <header className="jg-head">
-                    <span>Jump Game · Greedy Reach Tracking</span>
-                    {inputError && <span className="jg-error">{inputError}</span>}
-                </header>
-                <div className="jg-body">
-                    <div className="jg-top-row">
-                        <div className="jg-examples">
-                            {EXAMPLES.map((ex) => (
-                                <button key={ex.label} className="jg-chip" onClick={() => applyExample(ex)}>
-                                    {ex.label}
-                                </button>
-                            ))}
-                        </div>
-                        <input
-                            className="jg-input"
-                            value={numsInput}
-                            onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-                            placeholder="[2,3,1,1,4]"
-                        />
+    // Step 3: Extract panels into consts
+    const primaryPanel = (
+        <section className="jg-panel">
+            <header className="jg-head">
+                <span>Jump Game · Greedy Reach Tracking</span>
+                {inputError && <span className="jg-error">{inputError}</span>}
+            </header>
+            <div className="jg-body">
+                <div className="jg-top-row">
+                    <div className="jg-examples">
+                        {EXAMPLES.map((ex) => (
+                            <button key={ex.label} className="jg-chip" onClick={() => applyExample(ex)}>
+                                {ex.label}
+                            </button>
+                        ))}
                     </div>
+                    <input
+                        className="jg-input"
+                        value={numsInput}
+                        onChange={(e) => { setNumsInput(e.target.value);
 
-                    {/* maxReach indicator */}
-                    <div className="jg-reach-bar">
-                        <span className="jg-reach-label">maxReach</span>
-                        <span className="jg-reach-val mono">{maxReach}</span>
-                        {step?.result === false && <span className="jg-badge stuck">STUCK ✗</span>}
-                        {step?.result === true && <span className="jg-badge success">REACHABLE ✓</span>}
-                    </div>
-
-                    {/* Array */}
-                    <div className="jg-array">
-                        {displayNums.map((val, idx) => {
-                            const isCurr = currI === idx
-                            const isReachable = idx <= maxReach
-                            const isStuck = step?.phase === 'stuck' && idx === currI
-                            const isBeyond = idx > maxReach && idx <= currI
-                            const isDoneAll = step?.result === true
-
-                            return (
-                                <div key={idx} className="jg-cell-wrap">
-                                    {/* Jump arc above the cell */}
-                                    {isCurr && val > 0 && (
-                                        <div className="jg-jump-arc" style={{ width: `${val * 72}px` }} />
-                                    )}
-                                    <motion.div
-                                        className={`jg-cell${isCurr ? ' curr' : ''}${isStuck ? ' stuck-cell' : ''}${isReachable && !isCurr ? ' reachable' : ''}${isDoneAll ? ' success-cell' : ''}`}
-                                        animate={{ y: isCurr ? -8 : 0, scale: isCurr ? 1.12 : 1 }}
-                                        transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-                                    >
-                                        <span className="jg-val">{val}</span>
-                                    </motion.div>
-                                    <span className="jg-idx">{idx}</span>
-                                    {isCurr && <span className="jg-ptr">i</span>}
-                                    {idx === maxReach && maxReach > 0 && !isCurr && (
-                                        <span className="jg-reach-ptr">max</span>
-                                    )}
-                                </div>
-                            )
-                        })}
-                    </div>
-
-                    {/* Reachable zone label */}
-                    <div className="jg-zone-legend">
-                        <span className="jg-zone-dot reachable" />
-                        <span>Reachable (index ≤ maxReach)</span>
-                        <span className="jg-zone-dot curr-dot" />
-                        <span>Current index i</span>
-                    </div>
+ handleReset() }}
+                        placeholder="[2,3,1,1,4]"
+                    />
                 </div>
-            </section>
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+                {/* maxReach indicator */}
+                <div className="jg-reach-bar">
+                    <span className="jg-reach-label">maxReach</span>
+                    <span className="jg-reach-val mono">{maxReach}</span>
+                    {step?.result === false && <span className="jg-badge stuck">STUCK ✗</span>}
+                    {step?.result === true && <span className="jg-badge success">REACHABLE ✓</span>}
+                </div>
 
-            <div className={`jg-status${step?.result === true ? ' ok' : step?.result === false ? ' fail' : ''}`}>
-                {step?.message ?? 'Press Play or Step to begin.'}
+                {/* Array */}
+                <div className="jg-array">
+                    {displayNums.map((val, idx) => {
+                        const isCurr = currI === idx
+                        const isReachable = idx <= maxReach
+                        const isStuck = step?.phase === 'stuck' && idx === currI
+                        const isBeyond = idx > maxReach && idx <= currI
+                        const isDoneAll = step?.result === true
+
+                        return (
+                            <div key={idx} className="jg-cell-wrap">
+                                {/* Jump arc above the cell */}
+                                {isCurr && val > 0 && (
+                                    <div className="jg-jump-arc" style={{ width: `${val * 72}px` }} />
+                                )}
+                                <motion.div
+                                    className={`jg-cell${isCurr ? ' curr' : ''}${isStuck ? ' stuck-cell' : ''}${isReachable && !isCurr ? ' reachable' : ''}${isDoneAll ? ' success-cell' : ''}`}
+                                    animate={{ y: isCurr ? -8 : 0, scale: isCurr ? 1.12 : 1 }}
+                                    transition={{ type: 'spring', stiffness: 420, damping: 26 }}
+                                >
+                                    <span className="jg-val">{val}</span>
+                                </motion.div>
+                                <span className="jg-idx">{idx}</span>
+                                {isCurr && <span className="jg-ptr">i</span>}
+                                {idx === maxReach && maxReach > 0 && !isCurr && (
+                                    <span className="jg-reach-ptr">max</span>
+                                )}
+                            </div>
+                        )
+                    })}
+                </div>
+
+                {/* Reachable zone label */}
+                <div className="jg-zone-legend">
+                    <span className="jg-zone-dot reachable" />
+                    <span>Reachable (index ≤ maxReach)</span>
+                    <span className="jg-zone-dot curr-dot" />
+                    <span>Current index i</span>
+                </div>
             </div>
+        </section>
+    )
 
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} disableResizer />
+
+            {showPatternOverlay && (
+                <CodePatternAnnotations
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
+                />
+            )}
+        </div>
+    )
+
+    const statusPanel = (
+        <div className={`jg-status${step?.result === true ? ' ok' : step?.result === false ? ' fail' : ''}`}>
+            {step?.message ?? 'Press Play or Step to begin.'}
+        </div>
+    )
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={JUMPGAME_PATTERNS} />
+            )}
             <PlaybackControls
                 isPlaying={isPlaying}
                 isDone={isDone}
@@ -209,8 +247,36 @@ export default function JumpGameVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+        </>
+    )
 
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+    // Step 4: Add state + config
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Jump Game · Greedy Reach Tracking', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+    // Step 5: Replace return with portals
+    return (
+        <div className="jg-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     )
 }

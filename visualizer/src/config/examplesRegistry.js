@@ -501,6 +501,103 @@ export const EXAMPLES_REGISTRY = {
       "amount": 6249
     }
   ],
+  "count-students": [
+    {
+      "label": "Multiple Departments",
+      "students": [
+        {
+          "student_id": 1,
+          "student_name": "Alice",
+          "department_id": 1
+        },
+        {
+          "student_id": 2,
+          "student_name": "Bob",
+          "department_id": 1
+        },
+        {
+          "student_id": 3,
+          "student_name": "Charlie",
+          "department_id": 2
+        },
+        {
+          "student_id": 4,
+          "student_name": "Diana",
+          "department_id": 2
+        },
+        {
+          "student_id": 5,
+          "student_name": "Eve",
+          "department_id": 3
+        }
+      ]
+    },
+    {
+      "label": "Single Department",
+      "students": [
+        {
+          "student_id": 1,
+          "student_name": "John",
+          "department_id": 1
+        },
+        {
+          "student_id": 2,
+          "student_name": "Jane",
+          "department_id": 1
+        },
+        {
+          "student_id": 3,
+          "student_name": "Jack",
+          "department_id": 1
+        }
+      ]
+    },
+    {
+      "label": "Uneven Distribution",
+      "students": [
+        {
+          "student_id": 1,
+          "student_name": "Alan",
+          "department_id": 1
+        },
+        {
+          "student_id": 2,
+          "student_name": "Beth",
+          "department_id": 2
+        },
+        {
+          "student_id": 3,
+          "student_name": "Carl",
+          "department_id": 2
+        },
+        {
+          "student_id": 4,
+          "student_name": "Dana",
+          "department_id": 2
+        },
+        {
+          "student_id": 5,
+          "student_name": "Eve",
+          "department_id": 3
+        },
+        {
+          "student_id": 6,
+          "student_name": "Frank",
+          "department_id": 3
+        },
+        {
+          "student_id": 7,
+          "student_name": "Grace",
+          "department_id": 3
+        },
+        {
+          "student_id": 8,
+          "student_name": "Henry",
+          "department_id": 3
+        }
+      ]
+    }
+  ],
   "combination-sum": [
     {
       "label": "Classic",
@@ -6906,6 +7003,7 @@ export const EXAMPLES_REGISTRY = {
   "arithmetic-slices-ii": [{ "label": "Example 1", "nums": [2, 4, 6, 8, 10] }, { "label": "Example 2", "nums": [1, 1, 1, 1] }],
   "arranging-coins": [{ "label": "Example 1", "n": 5 }, { "label": "Example 2", "n": 8 }],
   "binary-tree-level-order-ii": [{ "label": "Example 1", "root": [3, 9, 20, null, null, 15, 7] }, { "label": "Example 2", "root": [1] }],
+  "binary-tree-tilt": [{ "label": "Basic", "arr": [1, 0, 1] }, { "label": "LeetCode Example", "arr": [4, 2, 9, 3, 5, null, 7] }],
   "binary-watch": [{ "label": "Example 1", "n": 0 }, { "label": "Example 2", "n": 1 }],
   "bst-to-doubly-linked-list": [{ "label": "Example 1", "root": [4, 2, 6, 1, 3, 5, 7] }, { "label": "Example 2", "root": [2, 1, 3] }],
   "can-i-win": [{ "label": "Example 1", "maxChoosableInteger": 10, "desiredTotal": 40 }, { "label": "Example 2", "maxChoosableInteger": 4, "desiredTotal": 6 }],
@@ -6984,10 +7082,12 @@ export const EXAMPLES_REGISTRY = {
   "game-play-analysis-ii": [{"label":"Example 1","activity":[{"player_id":1,"device_id":2,"event_date":"2016-03-01","games_played":5},{"player_id":1,"device_id":2,"event_date":"2016-03-02","games_played":6},{"player_id":2,"device_id":3,"event_date":"2017-06-25","games_played":1}]},{"label":"Example 2","activity":[{"player_id":1,"device_id":2,"event_date":"2016-03-01","games_played":5}]}],
   "hamming-distance": [{"label":"Example 1","x":1,"y":4},{"label":"Example 2","x":3,"y":1}],
   "inorder-successor-bst": [{"label":"Example 1","tree":[2,1,3],"p":1},{"label":"Example 2","tree":[5,3,6,2,4,null,null,1],"p":6}],
+  "investments-2016": [{"label":"Mixed","data":[{"pid":1,"tiv_2015":100,"tiv_2016":200,"lat":0,"lon":0},{"pid":2,"tiv_2015":100,"tiv_2016":150,"lat":1,"lon":1},{"pid":3,"tiv_2015":100,"tiv_2016":300,"lat":0,"lon":0}]},{"label":"Complex","data":[{"pid":1,"tiv_2015":100,"tiv_2016":200,"lat":0,"lon":0},{"pid":2,"tiv_2015":150,"tiv_2016":300,"lat":1,"lon":1},{"pid":3,"tiv_2015":100,"tiv_2016":250,"lat":2,"lon":2},{"pid":4,"tiv_2015":150,"tiv_2016":350,"lat":1,"lon":1},{"pid":5,"tiv_2015":200,"tiv_2016":400,"lat":3,"lon":3}]},{"label":"All Unique","data":[{"pid":1,"tiv_2015":100,"tiv_2016":100,"lat":0,"lon":0},{"pid":2,"tiv_2015":200,"tiv_2016":200,"lat":1,"lon":1},{"pid":3,"tiv_2015":300,"tiv_2016":300,"lat":2,"lon":2}]}],
   "is-subsequence": [{"label":"Example 1","s":"abc","t":"ahbgdc"},{"label":"Example 2","s":"axc","t":"ahbgdc"}],
   "island-perimeter": [{"label":"Example 1","grid":[[1]]},{"label":"Example 2","grid":[[1,1,1,1],[1,0,0,1],[1,0,0,1],[1,1,1,1]]}],
   "logger-rate-limiter": [{"label":"Example 1","logs":[{"timestamp":1,"message":"foo"},{"timestamp":1,"message":"bar"},{"timestamp":3,"message":"foo"},{"timestamp":10,"message":"bar"}]},{"label":"Example 2","logs":[{"timestamp":1,"message":"a"},{"timestamp":2,"message":"b"},{"timestamp":11,"message":"a"},{"timestamp":12,"message":"b"}]}],
   "longest-palindromic-subsequence": [{"label":"Example 1","s":"bbbab"},{"label":"Example 2","s":"abcdefedcba"}],
+  "longest-line": [{"label":"Example 1","matrix":[[1,1,0],[0,1,1],[1,0,1]]},{"label":"Example 2","matrix":[[1,1,1,1],[0,0,0,1],[1,1,1,1]]},{"label":"Example 3","matrix":[[1,0],[0,1]]}],
   "longest-word-dictionary": [{"label":"Example 1","words":["a","b","ba","bca","bda","bdca"]},{"label":"Example 2","words":["cat","cats","catsc","catscs","catscsc","catnip","catni","cat","cats"]}],
   "max-area-of-island": [{"label":"Example 1","grid":[[1,1,0,0,0],[1,1,0,0,0],[0,0,1,0,0],[0,0,0,1,1]]},{"label":"Example 2","grid":[[1,1,1],[1,1,1],[1,1,1]]}],
   "minimum-path-sum": [{"label":"Example 1","grid":[[1,3,1],[1,5,1],[4,2,1]]},{"label":"Example 2","grid":[[1,2,3],[4,5,6],[7,8,9]]}],
@@ -7011,6 +7111,7 @@ export const EXAMPLES_REGISTRY = {
   "rearrange-string-k-distance-apart": [{"label":"Example 1","s":"ababab","k":3},{"label":"Example 2","s":"aaadbbcc","k":3}],
   "regular-expression-matching": [{"label":"Example 1","s":"aa","p":"a"},{"label":"Example 2","s":"aa","p":"a*"}],
   "remove-k-digits": [{"label":"Example 1","num":"1432219","k":3},{"label":"Example 2","num":"10200","k":1}],
+  "reshape-matrix": [{"label":"Example 1","mat":[[1,2,3,4]],"r":2,"c":2},{"label":"Example 2","mat":[[1,2],[3,4]],"r":1,"c":4},{"label":"Example 3","mat":[[1,2],[3,4]],"r":2,"c":3}],
   "repeated-substring-pattern": [{"label":"Example 1","s":"abab"},{"label":"Example 2","s":"aba"}],
   "restore-ip-addresses": [{"label":"Example 1","s":"25525511135"},{"label":"Example 2","s":"0000"}],
   "reverse-pairs": [{"label":"Example 1","nums":[1,3,2,3,1]},{"label":"Example 2","nums":[2,4,3,5,1]}],
@@ -7026,6 +7127,7 @@ export const EXAMPLES_REGISTRY = {
   "smallest-good-base": [{"label":"Example 1","n":"13"},{"label":"Example 2","n":"4681"}],
   "sort-characters-by-frequency": [{"label":"Example 1","s":"tree"},{"label":"Example 2","s":"cccaaa"}],
   "spiral-matrix-ii": [{"label":"Example 1","n":3},{"label":"Example 2","n":1}],
+  "split-strings": [{"label":"Basic","strs":["ab1de","xyz"]},{"label":"Single String","strs":["dcba3cba3c5ABC"]},{"label":"Multiple Words","strs":["ab1cd2ef3gh4"]}],
   "string-compression": [{"label":"Example 1","chars":["a","a","b","b","c","c","c"]},{"label":"Example 2","chars":["a","b","b","b","b","b","b","b","b","b","b","b","b"]}],
   "super-washing-machines": [{"label":"Example 1","machines":[1,0,5]},{"label":"Example 2","machines":[0,3,0]}],
   "target-sum": [{"label":"Example 1","nums":[1,1,1,1,1],"target":3},{"label":"Example 2","nums":[1,0],"target":1}],
@@ -7041,7 +7143,61 @@ export const EXAMPLES_REGISTRY = {
   "validate-ip-address": [{"label":"Example 1","queryIP":"172.16.254.1"},{"label":"Example 2","queryIP":"2001:0db8:85a3:0:0:8A2E:0370:7334"}],
   "verbal-arithmetic-puzzle": [{"label":"Example 1","equation":"SEND+MORE=MONEY"},{"label":"Example 2","equation":"SIX+SEVEN=TWELVE"}],
   "word-squares": [{"label":"Example 1","words":["abat","baba","atan","tata"]},{"label":"Example 2","words":["cat","bat","rat"]}],
-  "zuma-game": [{"label":"Example 1","board":"WWWWW","hand":"WWWWW"},{"label":"Example 2","board":"WWRRWWWWRRWWWWRRWWW","hand":"WRWWWWWW"}]
+  "zuma-game": [{"label":"Example 1","board":"WWWWW","hand":"WWWWW"},{"label":"Example 2","board":"WWRRWWWWRRWWWWRRWWW","hand":"WRWWWWWW"}],
+  "employee-free-time": [{"label":"Example 1","schedules":[[[1,2],[5,6]],[[1,3]],[[4,6]]]},{"label":"Example 2","schedules":[[[1,3],[4,6]],[[2,5]],[[7,9]]]},{"label":"Example 3","schedules":[[[1,2],[3,4],[6,7]],[[2,4]],[[2,5],[9,12]]]},{"label":"Complex","schedules":[[[1,3],[6,7]],[[2,4]],[[2,5],[9,12]],[[4,6],[8,9]],[[5,9]],[[10,15]]]}],
+  "largest-orders": [
+    {
+      "label": "Example 1",
+      "orders": [
+        {"orderId": 1, "customerId": 1, "amount": 150},
+        {"orderId": 2, "customerId": 1, "amount": 200},
+        {"orderId": 3, "customerId": 2, "amount": 100},
+        {"orderId": 4, "customerId": 3, "amount": 300},
+        {"orderId": 5, "customerId": 3, "amount": 150}
+      ],
+      "customers": {
+        "1": "Alice",
+        "2": "Bob",
+        "3": "Charlie"
+      }
+    },
+    {
+      "label": "Example 2",
+      "orders": [
+        {"orderId": 101, "customerId": 10, "amount": 500},
+        {"orderId": 102, "customerId": 10, "amount": 450},
+        {"orderId": 103, "customerId": 20, "amount": 200},
+        {"orderId": 104, "customerId": 30, "amount": 300},
+        {"orderId": 105, "customerId": 30, "amount": 250},
+        {"orderId": 106, "customerId": 40, "amount": 180}
+      ],
+      "customers": {
+        "10": "John",
+        "20": "Jane",
+        "30": "Peter",
+        "40": "Mary"
+      }
+    },
+    {
+      "label": "Multiple Orders",
+      "orders": [
+        {"orderId": 1, "customerId": 1, "amount": 100},
+        {"orderId": 2, "customerId": 1, "amount": 150},
+        {"orderId": 3, "customerId": 1, "amount": 200},
+        {"orderId": 4, "customerId": 2, "amount": 300},
+        {"orderId": 5, "customerId": 2, "amount": 250},
+        {"orderId": 6, "customerId": 3, "amount": 120},
+        {"orderId": 7, "customerId": 4, "amount": 180},
+        {"orderId": 8, "customerId": 4, "amount": 220}
+      ],
+      "customers": {
+        "1": "Smith",
+        "2": "Johnson",
+        "3": "Williams",
+        "4": "Brown"
+      }
+    }
+  ]
 }
 
 /**
@@ -7050,7 +7206,7 @@ export const EXAMPLES_REGISTRY = {
  * @returns {Array} Array of example objects, or empty array if problem not found
  */
 export function getExamples(problemSlug) {
-  return EXAMPLES_REGISTRY[problemSlug]
+  return EXAMPLES_REGISTRY[problemSlug] || []
 }
 
 /**

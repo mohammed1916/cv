@@ -2,7 +2,7 @@ import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
@@ -11,6 +11,23 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem366Visualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
+
+const PATTERNS = ['collect-leaf', 'compute-height', 'done', 'init', 'null', 'recurse-left', 'recurse-right', 'return-height', 'visit']
+const LINE_PATTERN_MAP = {
+  2: 'init',
+  3: 'visit',
+  4: 'null',
+  5: 'recurse-left',
+  6: 'recurse-right',
+  7: 'compute-height',
+  10: 'collect-leaf',
+  11: 'return-height',
+  13: 'done'
+}
+
 
 const CANVAS_W = 520
 const CANVAS_H = 320
@@ -406,12 +423,22 @@ export default function Problem366Visualizer() {
             subtitle: step ? `Active line ${step.activeLine}` : 'DFS with height tracking.',
             defaultZone: 'full',
             content: (
-                <CodeTracePanel
-                    step={step}
-                    codeLines={SOLUTION_CODE}
-                    onActiveLineDomChange={setActiveLineDom}
-                    autoScroll={autoScrollCode}
-                />
+                <div style={{ position: 'relative' }}>
+                    <CodeTracePanel
+                        step={step}
+                        codeLines={SOLUTION_CODE}
+                        onActiveLineDomChange={setActiveLineDom}
+                        autoScroll={autoScrollCode}
+                    />
+                    {step && (
+                        <CodePatternAnnotations
+                            linePatterns={LINE_PATTERN_MAP}
+                            currentPhase={step.phase}
+                            activeLineDom={activeLineDom}
+                            activeLine={step.activeLine}
+                        />
+                    )}
+                </div>
             ),
         },
     ], [arrInput, setArrInput, positions, edges, allNodes, step, applyExample, handleReset, inputError, setActiveLineDom, autoScrollCode])

@@ -1,16 +1,11 @@
 .ts3-shell {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    height: 100%;
-}
-
-.ts3-top {
-    display: grid;
-    grid-template-columns: 1.8fr 1fr;
-    gap: 12px;
-    flex: 1;
-    min-height: 0;
+    height: calc(100vh - 200px);
+    min-height: 480px;
+    gap: 0;
+    overflow: hidden;
 }
 
 .ts3-panel {

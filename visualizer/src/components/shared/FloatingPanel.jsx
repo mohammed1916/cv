@@ -10,6 +10,7 @@ export default function FloatingPanel({
   const dragState = useRef(null);
   const [position, setPosition] = useState(null);
   const [collapsed, setCollapsed] = useState(false);
+  const [isPinned, setIsPinned] = useState(false);
 
   useLayoutEffect(() => {
     if (position) return;
@@ -33,7 +34,7 @@ export default function FloatingPanel({
   };
 
   const handlePointerDown = (event) => {
-    if (event.target.closest("button")) return;
+    if (isPinned || event.target.closest("button")) return;
     const rect = panelRef.current.getBoundingClientRect();
     dragState.current = {
       offsetX: event.clientX - rect.left,
@@ -61,7 +62,7 @@ export default function FloatingPanel({
   return (
     <div
       ref={panelRef}
-      className={`floating-panel ${collapsed ? "collapsed" : ""}`}
+      className={`floating-panel ${collapsed ? "collapsed" : ""} ${isPinned ? "pinned" : ""}`}
       style={position ? { top: position.y, left: position.x } : undefined}
     >
       <div
@@ -75,6 +76,15 @@ export default function FloatingPanel({
           :::
         </span>
         <span className="floating-panel-title">{title}</span>
+        <button
+          type="button"
+          className="floating-panel-pin"
+          onClick={() => setIsPinned(!isPinned)}
+          title={isPinned ? "Unpin panel" : "Pin panel"}
+          aria-label={isPinned ? "Unpin panel" : "Pin panel"}
+        >
+          {isPinned ? "📌" : "📍"}
+        </button>
         <button
           type="button"
           className="floating-panel-collapse"

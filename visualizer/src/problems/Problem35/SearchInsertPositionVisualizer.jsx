@@ -1,13 +1,17 @@
-import { useState, useCallback, useMemo } from 'react'
+﻿import { useState, useCallback, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './SearchInsertPositionVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -26,6 +30,22 @@ const SOLUTION_CODE = [
   { line: 14, text: '                ' },
   { line: 15, text: '        return left' },
 ]
+
+const SEARCHINSERTPOSITION_PATTERNS = ['calc_mid', 'check_greater', 'check_less', 'check_target', 'done', 'found', 'init', 'update_left', 'update_right', 'while_check']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',
+  5: 'while_check',
+  6: 'calc_mid',
+  8: 'check_target',
+  9: 'found',
+  10: 'check_less',
+  11: 'update_left',
+  12: 'check_greater',
+  13: 'update_right',
+  15: 'done',
+}
 
 function generateSteps(nums, target) {
   const steps = []
@@ -157,148 +177,187 @@ export default function SearchInsertPositionVisualizer() {
     onStepJump: setStepIndex,
   })
 
-  return (
-    <div className="sip-shell">
-      <div className="sip-top">
-        <div className="sip-panel" style={{ flex: 1 }}>
-          <div className="sip-panel-head">
-            Array State & Search Space
-            {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
-          </div>
-          <div className="sip-panel-body">
-            <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
-              {EXAMPLES.map((ex) => (
-                <button
-                  key={ex.label}
-                  onClick={() => applyExample(ex)}
-                  className="sip-example-btn"
-                >
-                  {ex.label}
-                </button>
-              ))}
-            </div>
+  const primaryPanel = (
+    <div className="sip-panel" style={{ flex: 1 }}>
+      <div className="sip-panel-head">
+        Array State & Search Space
+        {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
+      </div>
+      <div className="sip-panel-body">
+        <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
+          {EXAMPLES.map((ex) => (
+            <button
+              key={ex.label}
+              onClick={() => applyExample(ex)}
+              className="sip-example-btn"
+            >
+              {ex.label}
+            </button>
+          ))}
+        </div>
 
-            <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center' }}>
-              <input
-                value={numsInput}
-                onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-                placeholder="[1, 3, 5, 6]"
-                className="sip-input"
-                style={{ flex: 1, margin: 0 }}
-              />
-              <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace' }}>target=</span>
-              <input
-                value={targetInput}
-                onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
-                placeholder="5"
-                className="sip-input"
-                style={{ width: '60px', margin: 0, textAlign: 'center' }}
-              />
-            </div>
+        <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center' }}>
+          <input
+            value={numsInput}
+            onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
+            placeholder="[1, 3, 5, 6]"
+            className="sip-input"
+            style={{ flex: 1, margin: 0 }}
+          />
+          <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace' }}>target=</span>
+          <input
+            value={targetInput}
+            onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
+            placeholder="5"
+            className="sip-input"
+            style={{ width: '60px', margin: 0, textAlign: 'center' }}
+          />
+        </div>
 
-            <div className="sip-pointers-legend">
-              <div className="sip-legend-item left"><div className="sip-legend-swatch" /> Left</div>
-              <div className="sip-legend-item mid"><div className="sip-legend-swatch" /> Mid</div>
-              <div className="sip-legend-item right"><div className="sip-legend-swatch" /> Right</div>
-            </div>
+        <div className="sip-pointers-legend">
+          <div className="sip-legend-item left"><div className="sip-legend-swatch" /> Left</div>
+          <div className="sip-legend-item mid"><div className="sip-legend-swatch" /> Mid</div>
+          <div className="sip-legend-item right"><div className="sip-legend-swatch" /> Right</div>
+        </div>
 
-            <div className="sip-array-container">
-              {nums.map((num, i) => {
-                const isLeft = step?.left === i
-                const isRight = step?.right === i
-                const isMid = step?.mid === i
-                const isOutOfBounds = step && (i < step.left || i > step.right)
-                const isFound = step?.phase === 'found' && isMid
-                const isInsertPos = step?.phase === 'done' && i === step.insertPos && step.insertPos < nums.length
+        <div className="sip-array-container">
+          {nums.map((num, i) => {
+            const isLeft = step?.left === i
+            const isRight = step?.right === i
+            const isMid = step?.mid === i
+            const isOutOfBounds = step && (i < step.left || i > step.right)
+            const isFound = step?.phase === 'found' && isMid
+            const isInsertPos = step?.phase === 'done' && i === step.insertPos && step.insertPos < nums.length
 
-                let cellClass = "sip-cell "
-                if (isLeft) cellClass += "left "
-                if (isRight) cellClass += "right "
-                if (isMid) cellClass += "mid "
-                if (isFound) cellClass += "found "
-                if (isInsertPos) cellClass += "insert-pos "
-                if (isOutOfBounds && !isFound) cellClass += "out-of-bounds "
+            let cellClass = "sip-cell "
+            if (isLeft) cellClass += "left "
+            if (isRight) cellClass += "right "
+            if (isMid) cellClass += "mid "
+            if (isFound) cellClass += "found "
+            if (isInsertPos) cellClass += "insert-pos "
+            if (isOutOfBounds && !isFound) cellClass += "out-of-bounds "
 
-                return (
-                  <div key={i} className="sip-cell-wrapper">
-                    <div className="sip-index">{i}</div>
-                    <div className={cellClass}>
-                      {num}
-                    </div>
-                    <div className="sip-pointers">
-                      {isLeft && <div className="sip-ptr left">L</div>}
-                      {isMid && <div className="sip-ptr mid">M</div>}
-                      {isRight && <div className="sip-ptr right">R</div>}
-                    </div>
-                  </div>
-                )
-              })}
-              {step?.phase === 'done' && step.insertPos === nums.length && (
-                <div className="sip-cell-wrapper sip-insert-marker">
-                  <div className="sip-index">{nums.length}</div>
-                  <div className="sip-insert-cell">
-                    Insert here
-                  </div>
+            return (
+              <div key={i} className="sip-cell-wrapper">
+                <div className="sip-index">{i}</div>
+                <div className={cellClass}>
+                  {num}
                 </div>
-              )}
-            </div>
-
-            <div className="sip-stats">
-              <div className="sip-stat-box">
-                <span className="sip-stat-label">Search Space Size</span>
-                <span className="sip-stat-val">{step ? Math.max(0, step.right - step.left + 1) : nums.length}</span>
-              </div>
-              <div className="sip-stat-box">
-                <span className="sip-stat-label">Target</span>
-                <span className="sip-stat-val" style={{ color: '#eab308' }}>{target}</span>
-              </div>
-              {step?.insertPos !== undefined && (
-                <div className="sip-stat-box">
-                  <span className="sip-stat-label">Insert Position</span>
-                  <span className="sip-stat-val" style={{ color: '#06b6d4' }}>{step.insertPos}</span>
+                <div className="sip-pointers">
+                  {isLeft && <div className="sip-ptr left">L</div>}
+                  {isMid && <div className="sip-ptr mid">M</div>}
+                  {isRight && <div className="sip-ptr right">R</div>}
                 </div>
-              )}
+              </div>
+            )
+          })}
+          {step?.phase === 'done' && step.insertPos === nums.length && (
+            <div className="sip-cell-wrapper sip-insert-marker">
+              <div className="sip-index">{nums.length}</div>
+              <div className="sip-insert-cell">
+                Insert here
+              </div>
             </div>
+          )}
+        </div>
 
+        <div className="sip-stats">
+          <div className="sip-stat-box">
+            <span className="sip-stat-label">Search Space Size</span>
+            <span className="sip-stat-val">{step ? Math.max(0, step.right - step.left + 1) : nums.length}</span>
           </div>
+          <div className="sip-stat-box">
+            <span className="sip-stat-label">Target</span>
+            <span className="sip-stat-val" style={{ color: '#eab308' }}>{target}</span>
+          </div>
+          {step?.insertPos !== undefined && (
+            <div className="sip-stat-box">
+              <span className="sip-stat-label">Insert Position</span>
+              <span className="sip-stat-val" style={{ color: '#06b6d4' }}>{step.insertPos}</span>
+            </div>
+          )}
         </div>
       </div>
+    </div>
+  )
 
-      <div className="sip-middle">
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
         />
-      </div>
+      )}
+    </div>
+  )
 
-      <div className={`sip-status ${step?.phase === 'found' ? 'found' : step?.phase === 'done' ? 'done' : ''}`}>
-        {step?.message ?? 'Press Play or Step to begin.'}
-      </div>
+  const statusPanel = (
+    <div className={`sip-status ${step?.phase === 'found' ? 'found' : step?.phase === 'done' ? 'done' : ''}`}>
+      {step?.message ?? 'Press Play or Step to begin.'}
+    </div>
+  )
 
-      <div className="sip-dock">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </div>
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={SEARCHINSERTPOSITION_PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
 
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Array State & Search Space', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  return (
+    <div className="sip-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

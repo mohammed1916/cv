@@ -1,6 +1,27 @@
-.problem-shell {
+.tri-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+}
+
+.tri-panel {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #0f172a;
+  padding: 0;
+  overflow-y: auto;
+}
+
+.tri-status {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0;
+  overflow-y: auto;
+  background: #1e293b;
+  border-top: 1px solid #334155;
 }

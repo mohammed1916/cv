@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import DockableWorkspace from '../../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../../components/shared/FloatingPanel'
@@ -10,7 +10,6 @@ import { useCodeVisualConnectivity } from '../../../hooks/useCodeVisualConnectiv
 import { usePatternOverlay } from '../../../hooks/usePatternOverlay'
 import { getExamples } from '../../../config/examplesRegistry'
 import './HammingDistanceVisualizer.css'
-
 const EXAMPLES = getExamples('hamming-distance')
 
 const SOLUTION_CODE_INLINE = [
@@ -388,3 +387,4 @@ export default function HammingDistanceVisualizer() {
     </div>
   )
 }
+

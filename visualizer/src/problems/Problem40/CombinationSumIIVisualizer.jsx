@@ -1,12 +1,16 @@
-import { useState, useCallback, useMemo } from 'react'
+﻿import { useState, useCallback, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './CombinationSumIIVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -33,6 +37,27 @@ const SOLUTION_CODE = [
   { line: 22, text: '        dfs(0, [], 0)' },
   { line: 23, text: '        return res' },
 ]
+
+const COMBINATIONSUMII_PATTERNS = ['call_dfs', 'call_include', 'call_skip', 'check_bound', 'check_target', 'done', 'enter_dfs', 'found', 'include', 'init', 'init_res', 'pop', 'return_bound', 'return_target', 'skip_dup']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'init',
+  4: 'init_res',
+  5: 'enter_dfs',
+  6: 'check_target',
+  7: 'found',
+  8: 'return_target',
+  9: 'check_bound',
+  10: 'return_bound',
+  13: 'include',
+  14: 'call_include',
+  17: 'pop',
+  18: 'skip_dup',
+  20: 'call_skip',
+  22: 'call_dfs',
+  23: 'done',
+}
 
 function generateSteps(candidates, target) {
   const steps = []
@@ -262,141 +287,188 @@ export default function CombinationSumIIVisualizer() {
     handleReset()
   }, [handleReset])
 
-  return (
-    <div className="combination-sum-ii-shell">
-      <div className="csii-top">
-        <div className="csii-panel">
-          <div className="csii-panel-head">
-            State & Recursion Tree
-            {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
-          </div>
-          <div className="csii-panel-body">
-            <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
-              {EXAMPLES.map((ex) => (
-                <button
-                  key={ex.label}
-                  onClick={() => applyExample(ex)}
-                  className="csii-example-btn"
-                >
-                  {ex.label}
-                </button>
-              ))}
-            </div>
+  // Extract panels for Lumino DockPanel
+  const primaryPanel = (
+    <div className="csii-panel">
+      <div className="csii-panel-head">
+        State & Recursion Tree
+        {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
+      </div>
+      <div className="csii-panel-body">
+        <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
+          {EXAMPLES.map((ex) => (
+            <button
+              key={ex.label}
+              onClick={() => applyExample(ex)}
+              className="csii-example-btn"
+            >
+              {ex.label}
+            </button>
+          ))}
+        </div>
 
-            <div style={{ display: 'flex', gap: 12, marginBottom: 16, alignItems: 'center' }}>
-              <input
-                value={candidatesInput}
-                onChange={(e) => { setCandidatesInput(e.target.value); handleReset() }}
-                placeholder="[10, 1, 2, 7, 6, 1, 5]"
-                className="csii-input"
-                style={{ flex: 1, margin: 0 }}
-              />
-              <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace' }}>target=</span>
-              <input
-                value={targetInput}
-                onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
-                placeholder="8"
-                className="csii-input"
-                style={{ width: '60px', margin: 0, textAlign: 'center' }}
-              />
-            </div>
+        <div style={{ display: 'flex', gap: 12, marginBottom: 16, alignItems: 'center' }}>
+          <input
+            value={candidatesInput}
+            onChange={(e) => { setCandidatesInput(e.target.value); handleReset() }}
+            placeholder="[10, 1, 2, 7, 6, 1, 5]"
+            className="csii-input"
+            style={{ flex: 1, margin: 0 }}
+          />
+          <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace' }}>target=</span>
+          <input
+            value={targetInput}
+            onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
+            placeholder="8"
+            className="csii-input"
+            style={{ width: '60px', margin: 0, textAlign: 'center' }}
+          />
+        </div>
 
-            <div className="csii-candidates-row">
-              <span className="csii-label">Candidates (Sorted):</span>
-              <div className="csii-array">
-                {sortedCandidates.map((val, idx) => (
-                  <div key={idx} className={`csii-candidate ${step?.i === idx ? 'active' : ''}`}>
-                    <span className="csii-val">{val}</span>
-                    <span className="csii-idx">i={idx}</span>
-                  </div>
-                ))}
+        <div className="csii-candidates-row">
+          <span className="csii-label">Candidates (Sorted):</span>
+          <div className="csii-array">
+            {sortedCandidates.map((val, idx) => (
+              <div key={idx} className={`csii-candidate ${step?.i === idx ? 'active' : ''}`}>
+                <span className="csii-val">{val}</span>
+                <span className="csii-idx">i={idx}</span>
               </div>
-            </div>
-
-            <div className="csii-state-cards">
-              <div className="csii-card">
-                <div className="csii-card-title">current_path</div>
-                <div className="csii-card-value">
-                  [{step?.path?.join(', ') || ''}]
-                </div>
-              </div>
-              <div className="csii-card">
-                <div className="csii-card-title">total</div>
-                <div className={`csii-card-value ${step?.total === target ? 'match' : step?.total > target ? 'exceed' : ''}`}>
-                  {step?.total ?? 0} <span className="csii-card-sub">/ {target}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="csii-stack-container">
-              <div className="csii-section-title">Recursion Tree (Explored Paths)</div>
-              <div className="csii-tree-container">
-                {steps[0]?.treeNodes && (
-                  <RecursionTreeNode
-                    nodeKey=""
-                    treeNodes={steps[0].treeNodes}
-                    activeKey={step?.activePathKey}
-                    currentStepIndex={stepIndex}
-                  />
-                )}
-                {(!steps[0]?.treeNodes || stepIndex < 0) && (
-                  <div className="csii-empty-stack">Tree is empty</div>
-                )}
-              </div>
-            </div>
-
-            <div className="csii-res-container">
-              <div className="csii-section-title">Results (res)</div>
-              <div className="csii-res-list">
-                <AnimatePresence>
-                  {step?.res?.map((arr, idx) => (
-                    <motion.div
-                      key={idx}
-                      className="csii-res-item"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                    >
-                      [{arr.join(', ')}]
-                    </motion.div>
-                  ))}
-                </AnimatePresence>
-                {(!step || step.res.length === 0) && <span style={{ color: '#475569', fontStyle: 'italic', fontSize: 13 }}>[ ]</span>}
-              </div>
-            </div>
-
+            ))}
           </div>
         </div>
-      </div>
 
-      <div className="combination-sum-ii-middle">
-        <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-      </div>
+        <div className="csii-state-cards">
+          <div className="csii-card">
+            <div className="csii-card-title">current_path</div>
+            <div className="csii-card-value">
+              [{step?.path?.join(', ') || ''}]
+            </div>
+          </div>
+          <div className="csii-card">
+            <div className="csii-card-title">total</div>
+            <div className={`csii-card-value ${step?.total === target ? 'match' : step?.total > target ? 'exceed' : ''}`}>
+              {step?.total ?? 0} <span className="csii-card-sub">/ {target}</span>
+            </div>
+          </div>
+        </div>
 
-      <div className={`csii-status ${step?.phase === 'found' ? 'found' : step?.phase === 'return_bound' ? 'bound' : ''}`}>
-        {step?.message ?? 'Press Play or Step to begin.'}
-      </div>
+        <div className="csii-stack-container">
+          <div className="csii-section-title">Recursion Tree (Explored Paths)</div>
+          <div className="csii-tree-container">
+            {steps[0]?.treeNodes && (
+              <RecursionTreeNode
+                nodeKey=""
+                treeNodes={steps[0].treeNodes}
+                activeKey={step?.activePathKey}
+                currentStepIndex={stepIndex}
+              />
+            )}
+            {(!steps[0]?.treeNodes || stepIndex < 0) && (
+              <div className="csii-empty-stack">Tree is empty</div>
+            )}
+          </div>
+        </div>
 
-      <div className="csii-dock">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
+        <div className="csii-res-container">
+          <div className="csii-section-title">Results (res)</div>
+          <div className="csii-res-list">
+            <AnimatePresence>
+              {step?.res?.map((arr, idx) => (
+                <motion.div
+                  key={idx}
+                  className="csii-res-item"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                >
+                  [{arr.join(', ')}]
+                </motion.div>
+              ))}
+            </AnimatePresence>
+            {(!step || step.res.length === 0) && <span style={{ color: '#475569', fontStyle: 'italic', fontSize: 13 }}>[ ]</span>}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  )
+
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
         />
-      </div>
+      )}
+    </div>
+  )
 
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+  const statusPanel = (
+    <div className={`csii-status ${step?.phase === 'found' ? 'found' : step?.phase === 'return_bound' ? 'bound' : ''}`}>
+      {step?.message ?? 'Press Play or Step to begin.'}
+    </div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={COMBINATIONSUMII_PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
+
+  // Lumino DockPanel state and config
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'State & Recursion Tree', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  return (
+    <div className="csii-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

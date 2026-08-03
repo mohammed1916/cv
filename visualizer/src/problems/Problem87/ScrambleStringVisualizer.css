@@ -1,9 +1,18 @@
-.problem-shell {
+.scramble-shell {
+  position: relative;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+}
+
+.scramble-primary-panel {
+  display: flex;
+  flex-direction: column;
   height: 100%;
-  background: white;
+  overflow: auto;
 }
 
 .scramble-string-container {

@@ -1,10 +1,11 @@
+import { createPortal } from 'react-dom'
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -13,7 +14,29 @@ import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } fr
 import { TreeCanvas3D } from '../../components/viz3d'
 import { getExamples } from '../../config/examplesRegistry'
 import './Visualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 
+
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
+const SOLUTION_CODE = [
+  { line: 1, text: 'def minDepth(root):' },
+  { line: 2, text: '    # base case: empty subtree' },
+  { line: 3, text: '    if not root:' },
+  { line: 4, text: '        return 0' },
+  { line: 5, text: '    # leaf node' },
+  { line: 6, text: '    if not root.left and not root.right:' },
+  { line: 7, text: '        return 1' },
+  { line: 8, text: '    # only one child: recurse into the non-empty side' },
+  { line: 9, text: '    if not root.left:' },
+  { line: 10, text: '        return 1 + minDepth(root.right)' },
+  { line: 11, text: '    if not root.right:' },
+  { line: 12, text: '        return 1 + minDepth(root.left)' },
+  { line: 13, text: '    # two children: take the smaller depth' },
+  { line: 14, text: '    return 1 + min(minDepth(root.left), minDepth(root.right))' },
+]
 const CANVAS_W = 520
 const CANVAS_H = 320
 const NODE_R = 22
@@ -261,7 +284,7 @@ export default function MinimumDepthOfBinaryTreeVisualizer() {
   }, [arrInput])
 
   const steps = useMemo(() => generateSteps(arr), [arr])
-  const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
+  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
   const applyExample = useCallback((ex) => {
@@ -279,104 +302,117 @@ export default function MinimumDepthOfBinaryTreeVisualizer() {
     onStepJump: setStepIndex,
   })
 
-  // Create dock panels
-  const dockPanels = useMemo(() => [
-    {
-      id: 'viz',
-      title: 'Tree Visualization',
-      subtitle: inputError ? 'Fix the input to resume playback.' : 'Visualize the DFS traversal.',
-      defaultZone: 'left',
-      content: (
-        <VisualizationPanel
-          EXAMPLES={EXAMPLES}
-          arrInput={arrInput}
-          setArrInput={setArrInput}
-          positions={positions}
-          edges={edges}
-          allNodes={allNodes}
-          step={step}
-          applyExample={applyExample}
-          handleReset={handleReset}
-          CANVAS_W={CANVAS_W}
-          CANVAS_H={CANVAS_H}
-          NODE_R={NODE_R}
-        />
-      ),
-    },
-    {
-      id: 'result',
-      title: 'Traversal Info',
-      subtitle: step ? `Phase: ${step.phase}` : 'Minimum depth tracking.',
-      defaultZone: 'left',
-      content: (
-        <ResultPanel
-          step={step}
-          inputError={inputError}
-        />
-      ),
-    },
-    {
-      id: 'code',
-      title: 'Code Trace',
-      subtitle: step ? `Active line ${step.activeLine}` : 'Step-by-step code execution.',
-      defaultZone: 'full',
-      content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-          autoScroll={autoScrollCode}
-        />
-      ),
-    },
-  ], [arrInput, setArrInput, positions, edges, allNodes, step, applyExample, handleReset, inputError, setActiveLineDom, autoScrollCode, SOLUTION_CODE, connectivity.highlightedLines, connectivity.handleLineSelect])
-
-  return (
-    <div className="mdbt-shell">
+  // Extract panel JSX into consts
+  const primaryPanel = (
+    <div className="mdbt-panel">
       <div className="mdbt-header">
         <h2>Minimum Depth of Binary Tree</h2>
         <p className={`mdbt-message ${step?.phase === 'done' ? 'ok' : ''}`}>
           {step?.message || 'Press Play to begin.'}
         </p>
       </div>
-
-      <DockableWorkspace
-        title="Minimum Depth Workspace"
-        panels={dockPanels}
-        initialLayout={{
-          rows: [['viz', 'result'], ['code']],
-          minimized: [],
-        }}
+      <VisualizationPanel
+        EXAMPLES={EXAMPLES}
+        arrInput={arrInput}
+        setArrInput={setArrInput}
+        positions={positions}
+        edges={edges}
+        allNodes={allNodes}
+        step={step}
+        applyExample={applyExample}
+        handleReset={handleReset}
+        CANVAS_W={CANVAS_W}
+        CANVAS_H={CANVAS_H}
+        NODE_R={NODE_R}
       />
+    </div>
+  )
 
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          onReset={handleReset}
-          onPrev={stepBack}
-          onPlayToggle={togglePlay}
-          onNext={stepForward}
-          resetDisabled={steps.length === 0}
-          prevDisabled={stepIndex <= 0}
-          nextDisabled={steps.length === 0 || isDone}
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onSpeedChange={(event) => setSpeed(Number(event.target.value))}
-          speedIndicator={`${speed}ms`}
-          autoScroll={autoScrollCode}
-          onAutoScrollChange={setAutoScrollCode}
-          autoScrollLabel="Auto-scroll code"
-          showAutoScroll
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
+  const statePanel = (
+    <div className="mdbt-panel">
+      <ResultPanel
+        step={step}
+        inputError={inputError}
+      />
+    </div>
+  )
 
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+      {showPatternOverlay && <CodePatternAnnotations lines={SOLUTION_CODE} linePatternMap={LINE_PATTERN_MAP} patterns={PATTERNS} activeLineDom={activeLineDom} />}
+    </div>
+  )
+
+  const statusPanel = (
+    <div className="mdbt-status">
+      <span>Step {stepIndex + 1} / {steps.length}</span>
+    </div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
+      <PlaybackControls
+        onReset={handleReset}
+        onPrev={stepBack}
+        onPlayToggle={togglePlay}
+        onNext={stepForward}
+        resetDisabled={steps.length === 0}
+        prevDisabled={stepIndex <= 0}
+        nextDisabled={steps.length === 0 || isDone}
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+        speedIndicator={`${speed}ms`}
+        autoScroll={autoScrollCode}
+        onAutoScrollChange={setAutoScrollCode}
+        autoScrollLabel="Auto-scroll code"
+        showAutoScroll
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
+
+  // Add state + config for Lumino
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Tree Visualization', dockMode: 'split-right' },
+      { id: 'state', title: 'Traversal Info', dockMode: 'split-right' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  return (
+    <div className="mdbt-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

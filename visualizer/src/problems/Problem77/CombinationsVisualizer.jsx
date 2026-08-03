@@ -1,14 +1,16 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
+import CodePatternAnnotations from "../../components/CodePatternAnnotations"
+import PatternLegend from "../../components/PatternLegend"
 import './CombinationsVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -25,6 +27,18 @@ const SOLUTION_CODE = [
     { line: 11, text: '    backtrack(1, [])' },
     { line: 12, text: '    return res' },
 ]
+
+const COMBINATIONS_PATTERNS = ['choose', 'done', 'init', 'record', 'recurse', 'unchoose']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  5: 'record',
+  8: 'choose',
+  9: 'recurse',
+  10: 'unchoose',
+  11: 'init',
+  12: 'done',
+}
 
 function generateSteps(n, k) {
     const steps = []
@@ -104,7 +118,9 @@ function VisualizationPanel({ EXAMPLES, applyExample, nInput, setNInput, kInput,
                                 <input
                                     className="comb-input"
                                     value={nInput}
-                                    onChange={(e) => { setNInput(e.target.value); handleReset() }}
+                                    onChange={(e) => { setNInput(e.target.value);
+
+ handleReset() }}
                                     placeholder="4"
                                     type="number"
                                     min="1"
@@ -198,38 +214,82 @@ export default function CombinationsVisualizer() {
 
     const applyExample = useCallback((ex) => { setNInput(String(ex.n)); setKInput(String(ex.k)); handleReset() }, [handleReset])
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'viz',
-            title: 'Visualization',
-            content: <VisualizationPanel EXAMPLES={EXAMPLES} applyExample={applyExample} nInput={nInput} setNInput={setNInput} kInput={kInput} setKInput={setKInput} n={n} k={k} inputError={inputError} handleReset={handleReset} step={step} />,
-        },
-        {
-            id: 'code',
-            title: 'Code',
-            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
-        },
-    ], [step, autoScrollCode, nInput, kInput, n, k, inputError])
+    // Step 2: Extract panels into consts
+    const primaryPanel = (
+        <div className="comb-panel-wrapper">
+            <VisualizationPanel EXAMPLES={EXAMPLES} applyExample={applyExample} nInput={nInput} setNInput={setNInput} kInput={kInput} setKInput={setKInput} n={n} k={k} inputError={inputError} handleReset={handleReset} step={step} />
+        </div>
+    )
 
-    return (
-        <div className="problem-shell">
-            <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['viz', 'code']], minimized: [] }} />
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls
-                    isPlaying={isPlaying} isDone={isDone} speed={speed}
-                    onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-                    prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
-                    onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    showAutoScroll
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} disableResizer />
+            {showPatternOverlay && (
+                <CodePatternAnnotations
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
                 />
-            </FloatingPanel>
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+            )}
+        </div>
+    )
+
+    const statusPanel = (
+        <div className="comb-status">
+            {step?.message || 'Press Play to begin.'}
+        </div>
+    )
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={COMBINATIONS_PATTERNS} />
+            )}
+            <PlaybackControls
+                isPlaying={isPlaying} isDone={isDone} speed={speed}
+                onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
+                prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
+                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+                autoScroll={autoScrollCode}
+                onAutoScrollChange={setAutoScrollCode}
+                showAutoScroll
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                patternOverlayLabel="Show pattern overlay"
+                showPatternOverlayToggle
+            />
+        </>
+    )
+
+    // Step 3: Add state + config
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+    // Step 4: Replace return with portals
+    return (
+        <div className="comb-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     )
 }
+

@@ -1,11 +1,13 @@
 import { useState, useCallback, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import VisualizationControls from '../../components/VisualizationControls'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -14,6 +16,23 @@ import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { getExamples } from '../../config/examplesRegistry'
 import './RegularExpressionMatchingVisualizer.css'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('regular-expression-matching')
+
+const REGEX_PATTERNS = ['init', 'check', 'char_or_dot', 'char_result', 'star_check', 'star_zero', 'star_multi', 'star_result']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  6: 'init',         // Initialize DP table and base cases
+  8: 'check',        // Check each cell
+  10: 'char_or_dot', // Handle . and character match
+  11: 'char_or_dot', // dp[i][j] = dp[i-1][j-1]
+  12: 'char_result', // Result for character/dot case
+  14: 'star_check',  // Handle * case
+  15: 'star_zero',   // Zero occurrences of *
+  16: 'star_multi',  // Multiple occurrences
+  17: 'star_result', // Result for * case
+}
 
 function generateSteps(s, p) {
   const steps = []
@@ -394,6 +413,7 @@ function VisualizationPanel({
 export default function RegularExpressionMatchingVisualizer() {
   const [sInput, setSInput] = useState('"a"')
   const [pInput, setPInput] = useState('"a"')
+  const [panelDivs, setPanelDivs] = useState(null)
 
   // Load solution code from registry
 
@@ -446,78 +466,107 @@ export default function RegularExpressionMatchingVisualizer() {
     onStepJump: setStepIndex,
   })
 
-  const dockPanels = useMemo(() => [
-    {
-      id: 'code',
-      title: 'Code',
-      content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-          autoScroll={autoScrollCode}
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'main', title: 'Visualization', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+
+  const handlePanelReady = useCallback((divs) => {
+    setPanelDivs(divs)
+  }, [])
+
+  const codePanel = (
+    <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0 }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        autoScroll={autoScrollCode}
+        disableResizer
+      />
+
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
         />
-      ),
-    },
-    {
-      id: 'viz',
-      title: 'Visualization',
-      content: (
-        <VisualizationPanel
-          sInput={sInput}
-          setSInput={setSInput}
-          pInput={pInput}
-          setPInput={setPInput}
-          s={s}
-          p={p}
-          inputError={inputError}
-          handleReset={handleReset}
-          step={step}
-          applyExample={applyExample}
-        />
-      ),
-    },
-    {
-      id: 'vars',
-      title: 'Variables',
-      content: <VariablesPanel step={step} s={s} p={p} />,
-    },
-  ], [step, SOLUTION_CODE, connectivity.highlightedLines, connectivity.handleLineSelect, autoScrollCode, sInput, setSInput, pInput, setPInput, s, p, inputError, handleReset, applyExample, setActiveLineDom])
+      )}
+    </div>
+  )
+
+  const mainPanel = (
+    <VisualizationPanel
+      sInput={sInput}
+      setSInput={setSInput}
+      pInput={pInput}
+      setPInput={setPInput}
+      s={s}
+      p={p}
+      inputError={inputError}
+      handleReset={handleReset}
+      step={step}
+      applyExample={applyExample}
+    />
+  )
+
+  const statusPanel = (
+    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '12px 16px', minHeight: 0 }}>
+      <div style={{ fontSize: 13, color: '#475569' }}>
+        {step ? (step.phase === 'done' ? `Match: ${step.dpTable[s.length][p.length] ? 'Yes' : 'No'}` : step.message) : 'Press Play or Step to begin.'}
+      </div>
+    </div>
+  )
 
   return (
-    <div className="problem-shell">
-      <DockableWorkspace
-        panels={dockPanels}
-        initialLayout={{ rows: [['code', 'viz'], ['vars']], minimized: [] }}
-      />
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-          autoScroll={autoScrollCode}
-          onAutoScrollChange={setAutoScrollCode}
-          showAutoScroll
-        />
-        {vizFeatures.length > 0 && (
-          <VisualizationControls features={vizFeatures} onToggle={toggleVizFeature} />
-        )}
-      </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+    <div className="rem-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.main && createPortal(mainPanel, panelDivs.main)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+
+      {createPortal(
+        <FloatingPanel title="Playback Controls">
+          {showPatternOverlay && (
+            <PatternLegend currentPhase={step?.phase} usedPatterns={REGEX_PATTERNS} />
+          )}
+          <PlaybackControls
+            isPlaying={isPlaying}
+            isDone={isDone}
+            speed={speed}
+            onPlayToggle={togglePlay}
+            onPrev={stepBack}
+            onNext={stepForward}
+            onReset={handleReset}
+            prevDisabled={stepIndex < 0}
+            nextDisabled={isDone}
+            resetDisabled={stepIndex < 0}
+            onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+            showPatternOverlay={showPatternOverlay}
+            onShowPatternOverlayChange={setShowPatternOverlay}
+            patternOverlayLabel="Show pattern overlay"
+            showPatternOverlayToggle
+            autoScroll={autoScrollCode}
+            onAutoScrollChange={setAutoScrollCode}
+            showAutoScroll
+          />
+          {vizFeatures.length > 0 && (
+            <VisualizationControls features={vizFeatures} onToggle={toggleVizFeature} />
+          )}
+        </FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

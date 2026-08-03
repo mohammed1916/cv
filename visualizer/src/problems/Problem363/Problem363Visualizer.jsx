@@ -4,11 +4,26 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './Problem363.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
+
+const PATTERNS = ['bst_search', 'done', 'init', 'left_col', 'right_col_start', 'sum_calc', 'update_result']
+const LINE_PATTERN_MAP = {
+  2: 'done',
+  4: 'left_col',
+  6: 'right_col_start',
+  8: 'sum_calc',
+  11: 'bst_search',
+  14: 'update_result',
+  16: 'done'
+}
+
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def maxSumSubmatrix(matrix, K):' },
@@ -224,13 +239,23 @@ export default function Problem363Visualizer() {
         id: 'code',
         title: 'Code',
         content: (
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-            onActiveLineDomChange={setActiveLineDom}
-          />
+          <div style={{ position: 'relative' }}>
+            <CodeTracePanel
+              step={step}
+              codeLines={SOLUTION_CODE}
+              highlightedLines={connectivity.highlightedLines}
+              onLineSelect={connectivity.handleLineSelect}
+              onActiveLineDomChange={setActiveLineDom}
+            />
+            {step && (
+              <CodePatternAnnotations
+                linePatterns={LINE_PATTERN_MAP}
+                currentPhase={step.phase}
+                activeLineDom={activeLineDom}
+                activeLine={step.activeLine}
+              />
+            )}
+          </div>
         ),
       },
       {

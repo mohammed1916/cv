@@ -1,23 +1,11 @@
 .combination-sum-shell {
+  position: relative;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  gap: 16px;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
   overflow: hidden;
-}
-
-.cs-top {
-  display: flex;
-  flex: 1;
-  min-height: 0;
-  gap: 16px;
-}
-
-.combination-sum-middle {
-  display: flex;
-  height: 280px;
-  gap: 16px;
-  flex-shrink: 0;
 }
 
 .cs-panel {

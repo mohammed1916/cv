@@ -9,7 +9,6 @@ import { usePlaybackState } from "../../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../../hooks/usePatternOverlay"
 import "./KthSmallestElementBSTVisualizer.css"
-
 const SOLUTION_CODE = [
   { line: 1, text: "def kthSmallest(root, k):" },
   { line: 2, text: "    self.count = 0" },
@@ -276,3 +275,4 @@ export default function KthSmallestElementBSTVisualizer() {
     </div>
   )
 }
+

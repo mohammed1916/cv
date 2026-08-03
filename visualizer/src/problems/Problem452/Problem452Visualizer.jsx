@@ -4,12 +4,26 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
+
+const PATTERNS = ['checking', 'done', 'initialized', 'new_arrow', 'overlap', 'sorted', 'start']
+const LINE_PATTERN_MAP = {
+  2: 'done',
+  3: 'start',
+  5: 'initialized',
+  7: 'checking',
+  9: 'new_arrow',
+  10: 'done'
+}
+
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def findMinArrowShots(points: list) -> int:' },
@@ -336,6 +350,8 @@ function VisualizationPanel({ step, points, EXAMPLES, handleExampleClick, points
     </section>
   )
 }
+
+const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
 
 export default function Problem452Visualizer() {
   const [pointsInput, setPointsInput] = useState('[10,16] [2,8] [1,6] [7,12] [4,9]')

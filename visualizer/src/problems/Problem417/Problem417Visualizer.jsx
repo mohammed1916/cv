@@ -1,12 +1,22 @@
-import { useState, useCallback, useMemo } from 'react'
+﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem417Visualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
+
+// Pattern annotations
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = ['atlantic_dfs', 'atlantic_start', 'done', 'init', 'pacific_dfs', 'pacific_start', 'result']
+
+
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -217,7 +227,10 @@ function Problem417Visualizer() {
   const [heights, setHeights] = useState(defaultHeights)
   const [inputValue, setInputValue] = useState(JSON.stringify(defaultHeights))
 
-  const steps = useMemo(() => generateSteps(heights), [heights])
+  const steps = useMemo(() => generateSteps(heights).map((current) => ({
+      ...current,
+      relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
+    })), [heights])
   const { activeStepIndex, isPlaying, togglePlayback, reset, setActiveStepIndex } =
     usePlaybackState(steps)
 
@@ -366,6 +379,7 @@ function Problem417Visualizer() {
       </div>
 
       <div className="paw-bottom">
+        <FloatingPanel title="Playback Controls">
         <PlaybackControls
           activeStep={activeStepIndex}
           totalSteps={steps.length}
@@ -377,6 +391,7 @@ function Problem417Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+      </FloatingPanel>
       </div>
 
       {showPatternOverlay && activeStep && <PatternOverlay step={activeStep} activeLineDom={activeLineDom} />}

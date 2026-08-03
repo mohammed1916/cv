@@ -4,12 +4,29 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './WordAbbreviationVisualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('word-abbreviation')
+
+const PATTERNS = ['compute_abbr', 'done', 'finalize', 'init', 'init_result', 'length_done', 'process_group', 'start_length']
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  4: 'init_result',
+  6: 'start_length',
+  8: 'process_group',
+  9: 'process',
+  11: 'check',
+  15: 'length_done',
+  16: 'done'
+}
+
 
 const EXAMPLES = getExamples('word-abbreviation')
 
@@ -298,13 +315,34 @@ export default function WordAbbreviationVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
+        <div style={{ position: 'relative' }}>
+
+          <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
           onLineSelect={connectivity.handleLineSelect}
           onActiveLineDomChange={setActiveLineDom}
         />
+
+
+          {showPatternOverlay && (
+
+            <CodePatternAnnotations
+
+              linePatterns={LINE_PATTERN_MAP}
+
+              currentPhase={step?.phase}
+
+              activeLineDom={activeLineDom}
+
+              activeLine={step?.activeLine}
+
+            />
+
+          )}
+
+        </div>
       ),
     },
     {
@@ -327,6 +365,9 @@ export default function WordAbbreviationVisualizer() {
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
       />
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -345,7 +386,7 @@ export default function WordAbbreviationVisualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      
     </div>
   )
 }

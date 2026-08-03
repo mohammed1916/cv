@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import DockableWorkspace from '../../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../../components/shared/FloatingPanel'
@@ -9,7 +9,6 @@ import { usePlaybackState } from '../../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../../hooks/useCodeVisualConnectivity'
 import './EvaluateDivision.css'
-
 const SOLUTION_CODE = [
   { line: 1, text: 'def calcEquation(equations, values, queries):' },
   { line: 2, text: '    graph = build_graph(equations, values)' },
@@ -430,3 +429,4 @@ export default function EvaluateDivisionVisualizer() {
     </div>
   )
 }
+

@@ -4,11 +4,22 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './Problem390Visualizer.css'
+
+const PATTERNS = ['complete', 'eliminate', 'init', 'round_complete']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  4: 'round_complete',
+  6: 'eliminate',
+  11: 'complete',
+}
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def lastRemaining(n):' },
@@ -141,7 +152,13 @@ export default function Problem390Visualizer() {
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]
-  const steps = useMemo(() => generateSteps(ex.n), [ex])
+  const steps = useMemo(
+    () => generateSteps(ex.n).map((current) => ({
+      ...current,
+      relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
+    })),
+    [ex],
+  )
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
@@ -157,6 +174,7 @@ export default function Problem390Visualizer() {
       id: 'code',
       title: 'Code',
       content: (
+        <div style={{ position: "relative" }}>
         <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
@@ -164,6 +182,16 @@ export default function Problem390Visualizer() {
           onLineSelect={connectivity.handleLineSelect}
           onActiveLineDomChange={setActiveLineDom}
         />
+
+        {showPatternOverlay && (
+          <CodePatternAnnotations
+            linePatterns={LINE_PATTERN_MAP}
+            currentPhase={step?.phase}
+            activeLineDom={activeLineDom}
+            activeLine={step?.activeLine}
+          />
+        )}
+      </div>
       ),
     },
     {
@@ -341,6 +369,9 @@ export default function Problem390Visualizer() {
     <div className="problem-shell">
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -359,7 +390,6 @@ export default function Problem390Visualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }

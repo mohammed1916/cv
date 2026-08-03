@@ -1,9 +1,11 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -26,6 +28,16 @@ const SOLUTION_CODE_INLINE = [
   { line: 12, text: '        return dummy.next' },
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
+
+const MERGEKSORTEDLISTS_PATTERNS = ['done', 'init', 'pop', 'push_next']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  5: 'init',
+  10: 'pop',
+  11: 'push_next',
+  12: 'done',
+}
 
 function parseLists(input) {
   const parsed = JSON.parse(input)
@@ -135,7 +147,9 @@ export default function MergeKSortedListsVisualizer() {
   const steps = useMemo(() => generateSteps(lists), [lists])
   const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyExample = useCallback((ex) => { setInput(JSON.stringify(ex.lists)); handleReset() }, [handleReset])
+  const applyExample = useCallback((ex) => { setInput(JSON.stringify(ex.lists));
+
+ handleReset() }, [handleReset])
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
 
@@ -144,76 +158,102 @@ export default function MergeKSortedListsVisualizer() {
     handleReset()
   }
 
-  const dockPanels = useMemo(() => [
-    {
-      id: 'viz',
-      title: 'Heap Visualization',
-      subtitle: step ? `Step ${stepIndex + 1} of ${steps.length}` : 'Press play to start.',
-      defaultZone: 'left',
-      content: (
-        <HeapVisualizationPanel
-          step={step}
-          lists={lists}
-          inputError={inputError}
-          input={input}
-          onInputChange={handleInputChange}
-          onApplyExample={applyExample}
+  // Extract panels into consts
+  const primaryPanel = (
+    <div className="mk-panel">
+      <HeapVisualizationPanel
+        step={step}
+        lists={lists}
+        inputError={inputError}
+        input={input}
+        onInputChange={handleInputChange}
+        onApplyExample={applyExample}
+      />
+    </div>
+  )
+
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        onActiveLineDomChange={setActiveLineDom}
+        autoScroll={autoScrollCode}
+        disableResizer
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
         />
-      ),
-    },
-    {
-      id: 'code',
-      title: 'Code Trace',
-      subtitle: step ? `Active line ${step.activeLine}` : 'Line-by-line solution view.',
-      defaultZone: 'right',
-      content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          onActiveLineDomChange={setActiveLineDom}
-          autoScroll={autoScrollCode}
-        />
-      ),
-    },
-  ], [step, stepIndex, steps.length, lists, inputError, input, handleInputChange, applyExample, setActiveLineDom, autoScrollCode])
+      )}
+    </div>
+  )
+
+  const statusPanel = (
+    <div className="mk-status">
+      {step?.message || 'Press Play.'}
+    </div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={MERGEKSORTEDLISTS_PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        speedIndicator={`${speed}ms`}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+        autoScroll={autoScrollCode}
+        onAutoScrollChange={setAutoScrollCode}
+        autoScrollLabel="Auto-scroll code"
+        showAutoScroll
+      />
+    </>
+  )
+
+  // Add state + config for Lumino
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Heap Visualization', dockMode: 'split-right' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
     <div className="mk-shell">
-      <DockableWorkspace
-        title="Merge K Sorted Lists Workspace"
-        panels={dockPanels}
-        initialLayout={{
-          rows: [['viz', 'code']],
-          minimized: [],
-        }}
-      />
-
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          speedIndicator={`${speed}ms`}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-          autoScroll={autoScrollCode}
-          onAutoScrollChange={setAutoScrollCode}
-          autoScrollLabel="Auto-scroll code"
-          showAutoScroll
-        />
-      </FloatingPanel>
-
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

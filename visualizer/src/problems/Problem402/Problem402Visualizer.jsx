@@ -1,12 +1,30 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+
+const PATTERNS = ['done', 'error', 'init', 'init_stack', 'loop_done', 'pop', 'process', 'push', 'trim_end', 'trim_zeros']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  3: 'done',
+  5: 'init_stack',
+  7: 'process',
+  9: 'pop',
+  11: 'push',
+  13: 'loop_done',
+  14: 'trim_end',
+  16: 'trim_zeros',
+  17: 'done',
+}
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def removeKdigits(num_str, k):' },
@@ -379,13 +397,24 @@ export default function Problem402Visualizer() {
         </div>
 
         <div style={{ flex: 1 }}>
-          <CodeTracePanel
-            step={step}
+                    <div style={{ position: "relative" }}>
+            <CodeTracePanel
+              step={step}
             codeLines={SOLUTION_CODE}
             highlightedLines={connectivity.highlightedLines}
             onLineSelect={connectivity.handleLineSelect}
             onActiveLineDomChange={setActiveLineDom}
-          />
+            />
+          
+            {showPatternOverlay && (
+              <CodePatternAnnotations
+                linePatterns={LINE_PATTERN_MAP}
+                currentPhase={step?.phase}
+                activeLineDom={activeLineDom}
+                activeLine={step?.activeLine}
+              />
+            )}
+          </div>
         </div>
       </div>
 
@@ -398,6 +427,10 @@ export default function Problem402Visualizer() {
       </div>
 
       <div>
+        <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -415,9 +448,8 @@ export default function Problem402Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+      </FloatingPanel>
       </div>
-
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }

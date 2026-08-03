@@ -1,16 +1,17 @@
-import { useState, useMemo, useCallback } from "react";
+﻿import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import DockableWorkspace from "../../components/shared/DockableWorkspace";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./Visualizer.css";
-
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('merge-sorted-array')
 function generateSteps(nums1Init, m, nums2, n) {
   const steps = [];
   const a = [...nums1Init];
@@ -156,6 +157,8 @@ function VisualizationPanel({ ex, setEx, step, applyEx, nums1Ptrs, nums2Ptrs }) 
   );
 }
 
+const LINE_PATTERN_MAP = {}
+
 export default function MergeSortedArrayVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
   const steps = useMemo(() => generateSteps(ex.nums1, ex.m, ex.nums2, ex.n), [ex]);
@@ -177,13 +180,23 @@ export default function MergeSortedArrayVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-        />
+        <div style={{ position: "relative" }}>
+          <CodeTracePanel
+            step={step}
+            codeLines={SOLUTION_CODE}
+            highlightedLines={connectivity.highlightedLines}
+            onLineSelect={connectivity.handleLineSelect}
+            onActiveLineDomChange={setActiveLineDom}
+          />
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
+          )}
+        </div>
       ),
     },
     {
@@ -232,7 +245,7 @@ export default function MergeSortedArrayVisualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   );
 }
+

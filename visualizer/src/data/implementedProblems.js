@@ -8,9 +8,11 @@ export const TRACKS = {
   CODEFORCES: "codeforces",
 };
 
-// Build IMPLEMENTED_PROBLEMS from problem modules automatically.
-// Each problem module may export `meta` (preferred). If absent, infer values from folder name.
-const problemModules = import.meta.glob("../problems/**/index.jsx", {
+// Build IMPLEMENTED_PROBLEMS from each problem's lightweight meta.js automatically.
+// Each meta.js exports `meta` (preferred). If absent, infer values from folder name.
+// Globbing meta.js (not index.jsx) keeps the heavy visualizers out of this eager
+// import so they can be code-split via the dynamic import in App.jsx.
+const problemModules = import.meta.glob("../problems/**/meta.js", {
   eager: true,
 });
 

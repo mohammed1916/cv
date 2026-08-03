@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react'
+﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import DockableWorkspace from '../components/shared/DockableWorkspace'
 import FloatingPanel from '../components/shared/FloatingPanel'
@@ -14,7 +14,6 @@ import { useVisualizationFeatures } from '../hooks/useVisualizationFeatures'
 import { getVisualizationFeatures } from '../config/visualizationRegistry'
 import { getExamples } from '../config/examplesRegistry'
 import './Visualizer.css'
-
 /**
  * Generic Visualizer template for algorithm visualization problems.
  *
@@ -95,13 +94,10 @@ function generateSteps(inputs) {
  * Update this to match your specific problem's visualization needs.
  */
 function VisualizationPanel({
-  inputs,
   inputErrors,
-  onInputChange,
   applyExample,
   examples,
   step,
-  handleReset,
 }) {
   return (
     <div className="viz-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -236,8 +232,8 @@ export default function YourProblemVisualizer() {
     // data: defaultValue,
   })
 
-  // Load solution code from registry
-  const codeLines = SOLUTION_CODE_FROM_REGISTRY || SOLUTION_CODE
+  // Load solution code
+  const codeLines = SOLUTION_CODE
 
   // Validate inputs
   const validatedInputs = useMemo(() => {
@@ -267,7 +263,7 @@ export default function YourProblemVisualizer() {
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
 
   // Visualization features (optional)
-  const vizFeatureDefs = useMemo(() => getVisualizationFeatures('your-problem-slug') || [], ['your-problem-slug'])
+  const vizFeatureDefs = useMemo(() => getVisualizationFeatures('your-problem-slug') || [], [])
   const { items: vizFeatures, toggle: toggleVizFeature } = useVisualizationFeatures(vizFeatureDefs)
 
   // Current step
@@ -505,3 +501,4 @@ export function createExampleButtons(examples, onExampleClick) {
     </div>
   )
 }
+

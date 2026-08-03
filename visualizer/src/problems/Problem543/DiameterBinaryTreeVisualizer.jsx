@@ -1,13 +1,26 @@
-import { useState, useMemo, useCallback } from 'react'
+﻿import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
 import { getExamples } from '../../config/examplesRegistry'
 import './DiameterBinaryTreeVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+
+const PATTERNS = ['call', 'done', 'return', 'right']
+const LINE_PATTERN_MAP = {
+  5: 'done',
+  6: 'call',
+  7: 'right',
+  9: 'return',
+  11: 'done'
+}
+
 
 const CANVAS_W = 520
 const CANVAS_H = 320
@@ -204,9 +217,44 @@ export default function DiameterBinaryTreeVisualizer() {
                 </section>
             </div>
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+            <div style={{ position: 'relative' }}>
+
+
+              <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+
+
+
+              {showPatternOverlay && (
+
+
+                <CodePatternAnnotations
+
+
+                  linePatterns={LINE_PATTERN_MAP}
+
+
+                  currentPhase={step?.phase}
+
+
+                  activeLineDom={activeLineDom}
+
+
+                  activeLine={step?.activeLine}
+
+
+                />
+
+
+              )}
+
+
+            </div>
             <div className={`dbt-status ${step?.phase === 'done' ? 'ok' : ''}`}>{step?.message || 'Press Play to begin.'}</div>
-            <PlaybackControls
+            <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
+        <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
                 prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
@@ -216,7 +264,8 @@ export default function DiameterBinaryTreeVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      </FloatingPanel>
+            
         </div>
     )
 }

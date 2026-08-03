@@ -1,15 +1,20 @@
-import { useState, useMemo, useCallback } from "react";
+﻿import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import DockableWorkspace from "../../components/shared/DockableWorkspace";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./Problem394Visualizer.css";
+const PATTERNS = []
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {}
 
 const SOLUTION_CODE = [
     { line: 1, text: "def decodeString(s):" },
@@ -66,7 +71,10 @@ export default function Problem394Visualizer() {
     const [sInput, setSInput] = useState("3[a]2[bc]");
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
-    const steps = useMemo(() => { try { return generateSteps(sInput); } catch { return []; } }, [sInput]);
+    const steps = useMemo(() => { try { return generateSteps(sInput).map((current) => ({
+      ...current,
+      relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
+    })); } catch { return []; } }, [sInput]);
     const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
@@ -79,13 +87,24 @@ export default function Problem394Visualizer() {
             id: 'code',
             title: 'Code',
             content: (
-                <CodeTracePanel
+                <div style={{ position: "relative" }}>
+        <CodeTracePanel
                     step={step}
                     codeLines={SOLUTION_CODE}
                     highlightedLines={connectivity.highlightedLines}
                     onLineSelect={connectivity.handleLineSelect}
                     onActiveLineDomChange={setActiveLineDom}
                 />
+
+        {showPatternOverlay && (
+          <CodePatternAnnotations
+            linePatterns={LINE_PATTERN_MAP}
+            currentPhase={step?.phase}
+            activeLineDom={activeLineDom}
+            activeLine={step?.activeLine}
+          />
+        )}
+      </div>
             ),
         },
         {
@@ -161,7 +180,10 @@ export default function Problem394Visualizer() {
                 initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
             />
             <FloatingPanel title="Playback Controls">
-                <PlaybackControls
+                {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
+        <PlaybackControls
                     isPlaying={isPlaying}
                     isDone={isDone}
                     speed={speed}
@@ -179,7 +201,7 @@ export default function Problem394Visualizer() {
                     showPatternOverlayToggle
                 />
             </FloatingPanel>
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     );
 }
+

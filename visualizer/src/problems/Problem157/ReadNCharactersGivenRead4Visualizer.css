@@ -1,6 +1,14 @@
-.problem-shell {
+.rn4-shell {
+  position: relative;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  background: #0f172a;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+}
+
+.rn4-status {
+  background: #1e293b;
+  border-top: 1px solid #334155;
 }

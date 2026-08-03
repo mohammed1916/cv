@@ -1,12 +1,27 @@
-import { useState, useMemo, useCallback } from "react";
+﻿import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./SubstringConcatenationVisualizer.css";
+import FloatingPanel from '../../components/shared/FloatingPanel'
+
+const SUBSTRINGCONCATENATION_PATTERNS = ['done', 'found', 'init', 'overflow', 'window']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  4: 'init',
+  7: 'window',
+  10: 'found',
+  11: 'found',
+  12: 'overflow',
+  13: 'found',
+  14: 'done',
+}
 
 const SOLUTION_CODE = [
     { line: 1, text: "def findSubstring(s, words):" },
@@ -177,9 +192,24 @@ export default function SubstringConcatenationVisualizer() {
 
             {step?.done && <div className="sc-result">✓ Indices: [{result.join(", ")}]</div>}
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+            <div style={{ position: 'relative' }}>
+              <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+
+              {showPatternOverlay && (
+                <CodePatternAnnotations
+                  linePatterns={LINE_PATTERN_MAP}
+                  currentPhase={step?.phase}
+                  activeLineDom={activeLineDom}
+                  activeLine={step?.activeLine}
+                />
+              )}
+            </div>
             <div className="sc-status">{step?.message ?? "Press Play to begin."}</div>
-            <PlaybackControls
+            <FloatingPanel title="Playback Controls">
+              {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={SUBSTRINGCONCATENATION_PATTERNS} />
+              )}
+        <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
                 prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
@@ -189,7 +219,7 @@ export default function SubstringConcatenationVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      </FloatingPanel>
         </div>
     );
 }

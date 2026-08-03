@@ -1,8 +1,10 @@
 ﻿.problem61-shell {
+  position: relative;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  gap: 16px;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
   overflow: hidden;
 }
 
@@ -51,6 +53,14 @@
 .problem61-button:hover {
   background: #f9731630;
   border-color: #f9731660;
+}
+
+.problem61-status {
+  padding: 0 16px;
+  background: var(--surface-2);
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-secondary);
 }
 
 .problem61-visualization {

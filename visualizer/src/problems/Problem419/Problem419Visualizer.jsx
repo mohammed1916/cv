@@ -4,11 +4,26 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem419Visualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('battleships-in-a-board')
+
+const PATTERNS = ['done', 'found_ship', 'init', 'mark_connected', 'mark_visited', 'scan_start']
+const LINE_PATTERN_MAP = {
+  1: 'init',
+  2: 'scan_start',
+  3: 'found_ship',
+  4: 'mark_visited',
+  5: 'mark_connected',
+  6: 'done'
+}
+
 
 const EXAMPLES = [
   {
@@ -364,7 +379,7 @@ export default function Problem419Visualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      
     </div>
   )
 }

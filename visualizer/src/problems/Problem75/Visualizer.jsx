@@ -4,14 +4,15 @@ import DockableWorkspace from "../../components/shared/DockableWorkspace";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./Visualizer.css";
-
-const COLOR_LABEL = ["🔴", "⚪", "🔵"];
+import { getSolutionCode } from '../../config/solutionCodeRegistry'
+const SOLUTION_CODE = getSolutionCode('sort-colors')
+const COLOR_LABEL = ["??", "?", "??"];
 const COLOR_NAME = ["Red", "White", "Blue"];
 const COLOR_HEX = ["#ef4444", "#f3f4f6", "#3b82f6"];
 
@@ -23,18 +24,18 @@ function generateSteps(initial) {
     steps.push({ activeLine: 2, nums: [...nums], lo, mid, hi, message: `Dutch National Flag. lo=0, mid=0, hi=${hi}` });
 
     while (mid <= hi) {
-        steps.push({ activeLine: 3, nums: [...nums], lo, mid, hi, message: `mid=${mid} ≤ hi=${hi}. nums[mid]=${nums[mid]}` });
+        steps.push({ activeLine: 3, nums: [...nums], lo, mid, hi, message: `mid=${mid} = hi=${hi}. nums[mid]=${nums[mid]}` });
 
         if (nums[mid] === 0) {
-            steps.push({ activeLine: 4, nums: [...nums], lo, mid, hi, message: `nums[mid]=0 → swap with lo=${lo}` });
+            steps.push({ activeLine: 4, nums: [...nums], lo, mid, hi, message: `nums[mid]=0 ? swap with lo=${lo}` });
             [nums[lo], nums[mid]] = [nums[mid], nums[lo]];
             lo++; mid++;
             steps.push({ activeLine: 6, nums: [...nums], lo, mid, hi, message: `After swap. lo=${lo}, mid=${mid}` });
         } else if (nums[mid] === 1) {
-            steps.push({ activeLine: 7, nums: [...nums], lo, mid, hi, message: `nums[mid]=1 → already white, mid++` });
+            steps.push({ activeLine: 7, nums: [...nums], lo, mid, hi, message: `nums[mid]=1 ? already white, mid++` });
             mid++;
         } else {
-            steps.push({ activeLine: 9, nums: [...nums], lo, mid, hi, message: `nums[mid]=2 → swap with hi=${hi}` });
+            steps.push({ activeLine: 9, nums: [...nums], lo, mid, hi, message: `nums[mid]=2 ? swap with hi=${hi}` });
             [nums[mid], nums[hi]] = [nums[hi], nums[mid]];
             hi--;
             steps.push({ activeLine: 11, nums: [...nums], lo, mid, hi, message: `After swap. hi=${hi} (don't move mid yet)` });
@@ -69,7 +70,7 @@ function DutchFlagVisualization({ nums, step }) {
           borderRadius: 8,
           border: '2px solid #ef4444'
         }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#991b1b', marginBottom: 8 }}>🔴 Red Lane</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#991b1b', marginBottom: 8 }}>?? Red Lane</div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, minHeight: 60 }}>
             <AnimatePresence>
               {reds.map((v, i) => (
@@ -98,7 +99,7 @@ function DutchFlagVisualization({ nums, step }) {
             </AnimatePresence>
           </div>
           <div style={{ marginTop: 12, fontSize: 13, color: '#991b1b', fontWeight: 600 }}>
-            ✓ {redCount}
+            ? {redCount}
           </div>
         </div>
 
@@ -109,7 +110,7 @@ function DutchFlagVisualization({ nums, step }) {
           borderRadius: 8,
           border: '2px solid #6b7280'
         }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#374151', marginBottom: 8 }}>⚪ White Lane</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#374151', marginBottom: 8 }}>? White Lane</div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, minHeight: 60 }}>
             <AnimatePresence>
               {whites.map((v, i) => (
@@ -139,7 +140,7 @@ function DutchFlagVisualization({ nums, step }) {
             </AnimatePresence>
           </div>
           <div style={{ marginTop: 12, fontSize: 13, color: '#374151', fontWeight: 600 }}>
-            ✓ {whiteCount}
+            ? {whiteCount}
           </div>
         </div>
 
@@ -150,7 +151,7 @@ function DutchFlagVisualization({ nums, step }) {
           borderRadius: 8,
           border: '2px solid #3b82f6'
         }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#1e40af', marginBottom: 8 }}>🔵 Blue Lane</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#1e40af', marginBottom: 8 }}>?? Blue Lane</div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, minHeight: 60 }}>
             <AnimatePresence>
               {blues.map((v, i) => (
@@ -179,7 +180,7 @@ function DutchFlagVisualization({ nums, step }) {
             </AnimatePresence>
           </div>
           <div style={{ marginTop: 12, fontSize: 13, color: '#1e40af', fontWeight: 600 }}>
-            ✓ {blueCount}
+            ? {blueCount}
           </div>
         </div>
       </div>
@@ -192,7 +193,7 @@ function DutchFlagVisualization({ nums, step }) {
           borderRadius: 8,
           border: '2px dashed #f59e0b'
         }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#92400e', marginBottom: 8 }}>⚙️ Processing {unknownCount} elements</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#92400e', marginBottom: 8 }}>?? Processing {unknownCount} elements</div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
             <AnimatePresence>
               {unknown.map((v, i) => (
@@ -267,6 +268,8 @@ function VisualizationPanel({ nums, step, applyExample }) {
 
 const EXAMPLES = getExamples('sort-colors');
 
+const LINE_PATTERN_MAP = {}
+
 export default function SortColorsVisualizer() {
     const [sel, setSel] = useState(0);
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
@@ -290,18 +293,28 @@ export default function SortColorsVisualizer() {
         id: 'code',
         title: 'Code',
         content: (
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-            onActiveLineDomChange={setActiveLineDom}
-          />
+          <div style={{ position: "relative" }}>
+            <CodeTracePanel
+              step={step}
+              codeLines={SOLUTION_CODE}
+              highlightedLines={connectivity.highlightedLines}
+              onLineSelect={connectivity.handleLineSelect}
+              onActiveLineDomChange={setActiveLineDom}
+            />
+            {showPatternOverlay && (
+              <CodePatternAnnotations
+                linePatterns={LINE_PATTERN_MAP}
+                currentPhase={step?.phase}
+                activeLineDom={activeLineDom}
+                activeLine={step?.activeLine}
+              />
+            )}
+          </div>
         ),
       },
       {
         id: 'viz',
-        title: '🌈 Three Lanes',
+        title: '?? Three Lanes',
         content: (
           <VisualizationPanel
             nums={nums}
@@ -337,7 +350,8 @@ export default function SortColorsVisualizer() {
             showPatternOverlayToggle
           />
         </FloatingPanel>
-        {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+        
       </div>
     );
 }
+

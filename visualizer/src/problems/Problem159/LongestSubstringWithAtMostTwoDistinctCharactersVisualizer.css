@@ -1,6 +1,27 @@
-.problem-shell {
+.lsatdc-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+}
+
+.lsatdc-panel {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #0f172a;
+  overflow: auto;
+  padding: 0;
+}
+
+.lsatdc-status {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  background: #1e293b;
+  border-top: 1px solid #334155;
+  height: 100%;
+  overflow: auto;
 }

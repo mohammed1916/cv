@@ -1,4 +1,5 @@
-import { useState, useMemo, useCallback } from "react";
+﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from 'react-dom'
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -7,7 +8,15 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./FindPeakElementVisualizer.css";
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
+
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
   { line: 1, text: "def findPeakElement(nums):" },
   { line: 2, text: "    lo, hi = 0, len(nums) - 1" },
@@ -55,48 +64,49 @@ export default function FindPeakElementVisualizer() {
   const maxVal = Math.max(...ex.nums);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
-  return (
-    <div className="fp-shell">
+  // Step 2: Extract panels
+  const primaryPanel = (
+    <div className="fp-panel">
+      <div className="fp-panel-label">Array (bars)</div>
+      <div className="fp-bars">
+        {ex.nums.map((v, i) => {
+          const h = Math.round((v / maxVal) * BAR_MAX_H);
+          const isLo = step?.lo === i;
+          const isHi = step?.hi === i;
+          const isMid = step?.mid === i;
+          const isResult = step?.result === i;
+          const inRange = step != null && i >= (step.lo ?? 0) && i <= (step.hi ?? ex.nums.length - 1);
+          let cls = "fp-bar";
+          if (isResult) cls += " result";
+          else if (isMid) cls += " mid";
+          else if (!inRange) cls += " out";
+          return (
+            <div key={i} className="fp-bar-col">
+              <motion.div className={cls} style={{ height: h }}
+                animate={{ opacity: inRange || isResult ? 1 : 0.3 }}
+                transition={{ duration: 0.3 }} />
+              <div className="fp-bar-val">{v}</div>
+              <div className="fp-bar-idx">{i}</div>
+              <div className="fp-bar-ptrs">
+                {isLo && <span className="fp-ptr lo">lo</span>}
+                {isMid && <span className="fp-ptr mid">mid</span>}
+                {isHi && <span className="fp-ptr hi">hi</span>}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  )
+
+  const statePanel = (
+    <div>
       <div className="fp-examples">
         {EXAMPLES.map((e) => (
           <button key={e.label} className={`fp-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>{e.label}</button>
         ))}
       </div>
 
-      {/* Bar chart */}
-      <div className="fp-panel">
-        <div className="fp-panel-label">Array (bars)</div>
-        <div className="fp-bars">
-          {ex.nums.map((v, i) => {
-            const h = Math.round((v / maxVal) * BAR_MAX_H);
-            const isLo = step?.lo === i;
-            const isHi = step?.hi === i;
-            const isMid = step?.mid === i;
-            const isResult = step?.result === i;
-            const inRange = step != null && i >= (step.lo ?? 0) && i <= (step.hi ?? ex.nums.length - 1);
-            let cls = "fp-bar";
-            if (isResult) cls += " result";
-            else if (isMid) cls += " mid";
-            else if (!inRange) cls += " out";
-            return (
-              <div key={i} className="fp-bar-col">
-                <motion.div className={cls} style={{ height: h }}
-                  animate={{ opacity: inRange || isResult ? 1 : 0.3 }}
-                  transition={{ duration: 0.3 }} />
-                <div className="fp-bar-val">{v}</div>
-                <div className="fp-bar-idx">{i}</div>
-                <div className="fp-bar-ptrs">
-                  {isLo && <span className="fp-ptr lo">lo</span>}
-                  {isMid && <span className="fp-ptr mid">mid</span>}
-                  {isHi && <span className="fp-ptr hi">hi</span>}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Pointers */}
       <div className="fp-trackers">
         {[
           { label: "lo", val: step?.lo ?? 0, cls: "lo" },
@@ -113,9 +123,23 @@ export default function FindPeakElementVisualizer() {
       {step?.result != null && (
         <div className="fp-result">✓ Peak at index {step.result} (value {ex.nums[step.result]})</div>
       )}
+    </div>
+  )
 
-      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-      <div className="fp-status">{step?.message ?? "Press Play to begin."}</div>
+  const codePanel = (
+    <div style={{ position: 'relative', height: '100%' }}>
+      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} disableResizer />
+      {showPatternOverlay && <CodePatternAnnotations step={step} patterns={PATTERNS} linePatternMap={LINE_PATTERN_MAP} />}
+    </div>
+  )
+
+  const statusPanel = (
+    <div className="fp-status">{step?.message ?? "Press Play to begin."}</div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying} isDone={isDone} speed={speed}
         onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -126,7 +150,38 @@ export default function FindPeakElementVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+    </>
+  )
+
+  // Step 3: Add state + config
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Array (bars)', dockMode: 'split-right' },
+      { id: 'state',   title: 'Variables', dockMode: 'split-right' },
+      { id: 'code',    title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status',  title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  // Step 4: Replace return block with portals
+  return (
+    <div className="fp-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.state   && createPortal(statePanel,   panelDivs.state)}
+          {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}
+          {panelDivs.status  && createPortal(statusPanel,  panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   );
 }

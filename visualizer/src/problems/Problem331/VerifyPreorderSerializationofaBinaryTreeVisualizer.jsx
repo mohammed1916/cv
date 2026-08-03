@@ -1,169 +1,400 @@
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
-import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './VerifyPreorderSerializationofaBinaryTreeVisualizer.css'
 
 const SOLUTION_CODE = [
-  { line: 1, text: '# Solution for Verify Preorder Serialization of a Binary Tree' },
-  { line: 2, text: '# Implement step-by-step visualization' },
-  { line: 3, text: 'def solve(input):' },
-  { line: 4, text: '    # Algorithm here' },
-  { line: 5, text: '    return result' },
+  { line: 1, text: 'def isValidSerialization(preorder):' },
+  { line: 2, text: '    nodes = preorder.split(",")' },
+  { line: 3, text: '    slots = 1              # one open slot for the root' },
+  { line: 4, text: '    for node in nodes:' },
+  { line: 5, text: '        slots -= 1        # this node consumes a slot' },
+  { line: 6, text: '        if slots < 0:' },
+  { line: 7, text: '            return False  # no slot available -> invalid' },
+  { line: 8, text: '        if node != "#":' },
+  { line: 9, text: '            slots += 2    # a real node opens 2 child slots' },
+  { line: 10, text: '    return slots == 0     # valid iff every slot is filled' },
 ]
 
-function generateSteps(input) {
+// Colors (dark theme)
+const C = {
+  text: '#e2e8f0',
+  muted: '#94a3b8',
+  dim: '#64748b',
+  accent: '#38bdf8',
+  valid: '#22c55e',
+  invalid: '#f87171',
+  amber: '#f59e0b',
+  surface: '#0f172a',
+  box: '#1e293b',
+  border: '#334155',
+}
+
+// Parse a comma-separated preorder string into tokens, guarding bad input.
+function parsePreorder(input) {
+  const raw = String(input ?? '').trim().replace(/^"|"$/g, '').trim()
+  if (!raw) {
+    return { tokens: [], error: 'Enter a comma-separated preorder string, e.g. 9,3,4,#,#,1,#,#,2,#,6,#,#' }
+  }
+  const parts = raw.split(',').map((t) => t.trim())
+  const tokens = []
+  for (const p of parts) {
+    if (p === '') return { tokens: [], error: 'Empty token found — check for stray or trailing commas.' }
+    if (p === '#') { tokens.push('#'); continue }
+    if (!/^-?\d+$/.test(p)) return { tokens: [], error: `Invalid token "${p}" — use integers or "#".` }
+    tokens.push(p)
+  }
+  return { tokens, error: '' }
+}
+
+function exampleToString(example) {
+  if (!example) return ''
+  if (typeof example === 'string') return example
+  if (typeof example.preorder === 'string') return example.preorder
+  const inp = example.inputs ?? example
+  if (typeof inp === 'string') return inp
+  if (inp && typeof inp.preorder === 'string') return inp.preorder
+  if (inp && typeof inp === 'object') {
+    const v = Object.values(inp).find((x) => typeof x === 'string')
+    if (v) return v
+  }
+  return ''
+}
+
+function generateSteps(preorder) {
+  const { tokens, error } = parsePreorder(preorder)
+  if (error || tokens.length === 0) return []
+
   const steps = []
+  let slots = 1
 
   steps.push({
     phase: 'init',
-    activeLine: 1,
-    message: 'Initialize algorithm'
-  })
-
-  steps.push({
-    phase: 'process',
     activeLine: 3,
-    message: 'Processing input...'
+    relatedLines: [1, 2, 3],
+    message: `Split into ${tokens.length} token${tokens.length === 1 ? '' : 's'}. Start with slots = 1 (one open slot for the root).`,
+    tokens,
+    tokenIndex: -1,
+    slots,
+    valid: null,
   })
 
+  let invalid = false
+  let failIndex = tokens.length - 1
+
+  for (let i = 0; i < tokens.length; i++) {
+    const node = tokens[i]
+    slots -= 1
+    steps.push({
+      phase: 'consume',
+      activeLine: 5,
+      relatedLines: [4, 5, 6],
+      message: `Read token "${node}" — it fills one open slot: slots = ${slots}.`,
+      tokens,
+      tokenIndex: i,
+      slots,
+      valid: null,
+    })
+
+    if (slots < 0) {
+      invalid = true
+      failIndex = i
+      steps.push({
+        phase: 'invalid',
+        activeLine: 7,
+        relatedLines: [6, 7],
+        message: `slots < 0 — token "${node}" has no parent slot to fill. Return False.`,
+        tokens,
+        tokenIndex: i,
+        slots,
+        valid: false,
+      })
+      break
+    }
+
+    if (node === '#') {
+      steps.push({
+        phase: 'null',
+        activeLine: 8,
+        relatedLines: [6, 8],
+        message: `"#" is a null child — it opens no new slots. slots stays at ${slots}.`,
+        tokens,
+        tokenIndex: i,
+        slots,
+        valid: null,
+      })
+    } else {
+      slots += 2
+      steps.push({
+        phase: 'node',
+        activeLine: 9,
+        relatedLines: [8, 9],
+        message: `Node "${node}" opens 2 child slots (left + right): slots = ${slots}.`,
+        tokens,
+        tokenIndex: i,
+        slots,
+        valid: null,
+      })
+    }
+  }
+
+  const finalValid = !invalid && slots === 0
   steps.push({
     phase: 'done',
-    activeLine: 5,
-    message: 'Algorithm complete'
+    activeLine: 10,
+    relatedLines: [10],
+    message: invalid
+      ? 'INVALID — the tree ran out of open slots before all tokens were placed.'
+      : finalValid
+        ? 'VALID — every token was processed and slots == 0. This is a well-formed preorder.'
+        : `INVALID — all tokens processed but slots = ${slots} ≠ 0 (unfilled slots remain).`,
+    tokens,
+    tokenIndex: invalid ? failIndex : tokens.length - 1,
+    slots,
+    valid: finalValid,
   })
 
   return steps
 }
 
-const EXAMPLES = getExamples('verify-preorder-serialization-tree') || []
+const REGISTRY_EXAMPLES = getExamples('verify-preorder-serialization-tree') || []
+const FALLBACK_EXAMPLES = [
+  { label: 'Valid tree', preorder: '9,3,4,#,#,1,#,#,2,#,6,#,#' },
+  { label: 'Single node', preorder: '1,#,#' },
+  { label: 'Only null', preorder: '#' },
+  { label: 'Invalid (extra node)', preorder: '9,#,#,1' },
+  { label: 'Invalid (incomplete)', preorder: '1,#' },
+]
+const EXAMPLES = REGISTRY_EXAMPLES.length > 0 ? REGISTRY_EXAMPLES : FALLBACK_EXAMPLES
+
+const MAX_SLOT_BOXES = 16
 
 export default function VerifyPreorderSerializationofaBinaryTreeVisualizer() {
-  const [inputValue, setInputValue] = useState(EXAMPLES.length > 0 ? JSON.stringify(EXAMPLES[0]) : '{}')
+  const [inputValue, setInputValue] = useState(
+    exampleToString(EXAMPLES[0]) || '9,3,4,#,#,1,#,#,2,#,6,#,#',
+  )
 
-  const { input, inputError } = useMemo(() => {
-    try {
-      const data = JSON.parse(inputValue)
-      return { input: data, inputError: '' }
-    } catch (e) {
-      return { input: null, inputError: e.message }
+  const parsed = useMemo(() => parsePreorder(inputValue), [inputValue])
+  const inputError = parsed.error
+
+  const steps = useMemo(() => generateSteps(inputValue), [inputValue])
+  const {
+    stepIndex, setStepIndex, stepForward, stepBack, togglePlay,
+    handleReset, isPlaying, speed, setSpeed, isDone,
+  } = usePlaybackState(steps.length)
+  const step = stepIndex >= 0 ? steps[stepIndex] : null
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
+
+  // Derived view state
+  const vizTokens = step?.tokens ?? parsed.tokens
+  const activeIndex = step?.tokenIndex ?? -1
+  const slotCount = step ? step.slots : 1
+  const phase = step?.phase ?? null
+  const validity = step?.valid ?? null
+
+  const isInvalidActive = phase === 'invalid'
+  const shownSlots = Math.max(0, Math.min(slotCount, MAX_SLOT_BOXES))
+
+  function tokenStyle(i) {
+    const isActive = i === activeIndex
+    const isPast = activeIndex >= 0 && i < activeIndex
+    const isNull = vizTokens[i] === '#'
+    let border = C.border
+    let bg = C.box
+    let color
+    if (isActive) {
+      if (isInvalidActive) { border = C.invalid; bg = 'rgba(248,113,113,0.15)'; color = C.invalid }
+      else { border = C.accent; bg = 'rgba(56,189,248,0.15)'; color = isNull ? C.amber : C.text }
+    } else if (isPast) {
+      color = isNull ? 'rgba(245,158,11,0.6)' : C.dim
+    } else {
+      color = isNull ? 'rgba(245,158,11,0.8)' : C.muted
     }
-  }, [inputValue])
-
-  const steps = useMemo(() => {
-    return input ? generateSteps(input) : []
-  }, [input])
-
-  const { currentStep, isPlaying, setIsPlaying, setCurrentStep, speed, setSpeed } = usePlaybackState({
-    totalSteps: steps.length,
-    autoSpeed: 1000,
-  })
-
-  const connectivity = useCodeVisualConnectivity(steps, currentStep)
-  const patternOverlay = usePatternOverlay()
-
-  const handleStepClick = useCallback((index) => {
-    setCurrentStep(index)
-    setIsPlaying(false)
-  }, [setCurrentStep, setIsPlaying])
-
-  const renderVisualization = () => {
-    if (!input) return <div className="verify-preorder-serializationofa-binary-tree-error">{inputError}</div>
-
-    const currentStepData = steps[currentStep] || {}
-
-    return (
-      <motion.div
-        className="verify-preorder-serializationofa-binary-tree-viz"
-        key={currentStep}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        <div className="verify-preorder-serializationofa-binary-tree-step-info">
-          <h3>{currentStepData.message}</h3>
-        </div>
-      </motion.div>
-    )
+    return {
+      padding: '10px 14px',
+      minWidth: 30,
+      textAlign: 'center',
+      borderRadius: 8,
+      border: `2px solid ${border}`,
+      background: bg,
+      color,
+      fontFamily: 'monospace',
+      fontSize: 16,
+      fontWeight: 700,
+      opacity: isPast && !isActive ? 0.65 : 1,
+    }
   }
 
   return (
     <div className="verify-preorder-serializationofa-binary-tree-shell">
-      <ResizableSplitPanels
-        left={
-          <div className="verify-preorder-serializationofa-binary-tree-panel verify-preorder-serializationofa-binary-tree-panel-input">
-            <div className="verify-preorder-serializationofa-binary-tree-panel-head">Input</div>
-            <div className="verify-preorder-serializationofa-binary-tree-panel-body">
-              <textarea
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                className="verify-preorder-serializationofa-binary-tree-textarea"
-                placeholder="Enter input..."
-              />
-            </div>
-          </div>
-        }
-        right={
-          <div className="verify-preorder-serializationofa-binary-tree-panel verify-preorder-serializationofa-binary-tree-panel-viz">
-            <div className="verify-preorder-serializationofa-binary-tree-panel-head">Visualization</div>
-            <div className="verify-preorder-serializationofa-binary-tree-panel-body">
-              <AnimatePresence mode="wait">
-                {renderVisualization()}
-              </AnimatePresence>
-            </div>
-          </div>
-        }
-        ratio={0.35}
-      />
-
-      <div className="verify-preorder-serializationofa-binary-tree-middle">
-        <div className="verify-preorder-serializationofa-binary-tree-panel">
-          <div className="verify-preorder-serializationofa-binary-tree-panel-head">Code Trace</div>
-          <div className="verify-preorder-serializationofa-binary-tree-panel-body">
-            <CodeTracePanel code={SOLUTION_CODE} connectivity={connectivity} />
-          </div>
-        </div>
-
-        <div className="verify-preorder-serializationofa-binary-tree-panel">
-          <div className="verify-preorder-serializationofa-binary-tree-panel-head">Examples</div>
-          <div className="verify-preorder-serializationofa-binary-tree-panel-body verify-preorder-serializationofa-binary-tree-examples">
-            {EXAMPLES.map((example, i) => (
-              <button
-                key={i}
-                className={className + '-example-btn'}
-                onClick={() => {
-                  setInputValue(JSON.stringify(example))
-                  setCurrentStep(0)
-                  setIsPlaying(false)
-                }}
-              >
-                {example.label}
-              </button>
-            ))}
-          </div>
+      <div className="verify-preorder-serializationofa-binary-tree-panel">
+        <div className="verify-preorder-serializationofa-binary-tree-panel-head">Preorder Input</div>
+        <div className="verify-preorder-serializationofa-binary-tree-panel-body">
+          <textarea
+            value={inputValue}
+            onChange={(e) => { setInputValue(e.target.value); handleReset() }}
+            className="verify-preorder-serializationofa-binary-tree-textarea"
+            placeholder="e.g. 9,3,4,#,#,1,#,#,2,#,6,#,#"
+            spellCheck={false}
+          />
+          {inputError && <div className="verify-preorder-serializationofa-binary-tree-error">{inputError}</div>}
         </div>
       </div>
 
-      <div className="verify-preorder-serializationofa-binary-tree-bottom">
+      <div className="verify-preorder-serializationofa-binary-tree-panel">
+        <div className="verify-preorder-serializationofa-binary-tree-panel-head">Visualization — Slots Method</div>
+        <div className="verify-preorder-serializationofa-binary-tree-panel-body">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={stepIndex}
+              className="verify-preorder-serializationofa-binary-tree-viz"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+            >
+              <div className="verify-preorder-serializationofa-binary-tree-step-info">
+                <h3>{step?.message || 'Press play (or Next) to trace the slots algorithm.'}</h3>
+              </div>
+
+              {vizTokens.length === 0 ? (
+                <div style={{ color: C.muted, fontSize: 13 }}>
+                  Provide a valid preorder string to visualize.
+                </div>
+              ) : (
+                <>
+                  {/* Token sequence */}
+                  <div>
+                    <div style={{ color: C.muted, fontSize: 12, fontWeight: 600, marginBottom: 8, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+                      Token sequence
+                    </div>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                      {vizTokens.map((t, i) => (
+                        <motion.div
+                          key={i}
+                          style={tokenStyle(i)}
+                          animate={{ scale: i === activeIndex ? 1.1 : 1 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          {t}
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Slots counter */}
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 8 }}>
+                      <span style={{ color: C.muted, fontSize: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+                        Open slots
+                      </span>
+                      <span style={{ color: slotCount < 0 ? C.invalid : C.accent, fontSize: 22, fontWeight: 800, fontFamily: 'monospace' }}>
+                        slots = {slotCount}
+                      </span>
+                    </div>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, minHeight: 34, alignItems: 'center' }}>
+                      {shownSlots === 0 ? (
+                        <span style={{ color: slotCount < 0 ? C.invalid : C.dim, fontSize: 13, fontFamily: 'monospace' }}>
+                          {slotCount < 0 ? '(negative — no slot to fill!)' : '(no open slots)'}
+                        </span>
+                      ) : (
+                        Array.from({ length: shownSlots }).map((_, i) => (
+                          <motion.div
+                            key={i}
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ duration: 0.2, delay: i * 0.03 }}
+                            style={{
+                              width: 26,
+                              height: 26,
+                              borderRadius: 6,
+                              border: `2px dashed ${C.accent}`,
+                              background: 'rgba(56,189,248,0.12)',
+                            }}
+                          />
+                        ))
+                      )}
+                      {slotCount > MAX_SLOT_BOXES && (
+                        <span style={{ color: C.muted, fontSize: 13, fontFamily: 'monospace' }}>
+                          +{slotCount - MAX_SLOT_BOXES} more
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Verdict */}
+                  {validity !== null && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.25 }}
+                      style={{
+                        padding: '14px 18px',
+                        borderRadius: 10,
+                        fontSize: 18,
+                        fontWeight: 800,
+                        letterSpacing: 0.5,
+                        color: validity ? C.valid : C.invalid,
+                        background: validity ? 'rgba(34,197,94,0.12)' : 'rgba(248,113,113,0.12)',
+                        border: `2px solid ${validity ? C.valid : C.invalid}`,
+                      }}
+                    >
+                      {validity ? '✓ VALID preorder serialization' : '✗ INVALID preorder serialization'}
+                    </motion.div>
+                  )}
+                </>
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+
+      <div className="verify-preorder-serializationofa-binary-tree-panel">
+        <div className="verify-preorder-serializationofa-binary-tree-panel-head">Code</div>
+        <div className="verify-preorder-serializationofa-binary-tree-panel-body">
+          <CodeTracePanel
+            step={step}
+            codeLines={SOLUTION_CODE}
+            highlightedLines={connectivity.highlightedLines}
+            onLineSelect={connectivity.handleLineSelect}
+          />
+        </div>
+      </div>
+
+      {EXAMPLES.length > 0 && (
+        <div className="verify-preorder-serializationofa-binary-tree-examples">
+          {EXAMPLES.map((example, i) => (
+            <button
+              key={i}
+              className="verify-preorder-serializationofa-binary-tree-example-btn"
+              onClick={() => { setInputValue(exampleToString(example)); handleReset() }}
+            >
+              {example.label || `Example ${i + 1}`}
+            </button>
+          ))}
+        </div>
+      )}
+
+      <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}
-          onPlayPause={() => setIsPlaying(!isPlaying)}
-          onNext={() => setCurrentStep(Math.min(currentStep + 1, steps.length - 1))}
-          onPrev={() => setCurrentStep(Math.max(currentStep - 1, 0))}
-          onReset={() => setCurrentStep(0)}
-          currentStep={currentStep}
-          totalSteps={steps.length}
+          isDone={isDone}
           speed={speed}
-          onSpeedChange={setSpeed}
+          onPlayToggle={togglePlay}
+          onPrev={stepBack}
+          onNext={stepForward}
+          onReset={handleReset}
+          prevDisabled={stepIndex < 0}
+          nextDisabled={isDone}
+          resetDisabled={stepIndex < 0}
+          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
         />
-      </div>
+      </FloatingPanel>
     </div>
   )
 }

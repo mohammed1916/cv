@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react'
+﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -7,6 +7,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './SwimInRisingWaterVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -358,6 +359,7 @@ function SwimInRisingWaterVisualizer() {
       </div>
 
       <div className="srw-bottom">
+        <FloatingPanel title="Playback Controls">
         <PlaybackControls
           activeStep={activeStepIndex}
           totalSteps={steps.length}
@@ -369,6 +371,7 @@ function SwimInRisingWaterVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+      </FloatingPanel>
       </div>
 
       {showPatternOverlay && activeStep && <PatternOverlay step={activeStep} activeLineDom={activeLineDom} />}

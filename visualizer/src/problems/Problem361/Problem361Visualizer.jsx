@@ -4,11 +4,17 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './Problem361.css'
+import PatternOverlay from "../../components/PatternOverlay";
+
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def maxKilledEnemies(grid):' },
@@ -44,6 +50,7 @@ function generateSteps(grid) {
     dpValues: [],
     selectedCell: null,
     message: `Initialize grid (${m}x${n}). Need to count enemies in 4 directions from each cell.`,
+    relatedLines: [3],
   })
 
   // Calculate left (precompute step 1)
@@ -67,6 +74,7 @@ function generateSteps(grid) {
     dpValues: leftCount,
     selectedCell: null,
     message: 'Precompute enemies to the LEFT of each cell.',
+    relatedLines: [6, 7, 8, 9, 10, 11],
   })
 
   // Calculate right
@@ -90,6 +98,7 @@ function generateSteps(grid) {
     dpValues: rightCount,
     selectedCell: null,
     message: 'Precompute enemies to the RIGHT of each cell.',
+    relatedLines: [6, 7, 8, 9, 10, 11],
   })
 
   // Calculate up
@@ -113,6 +122,7 @@ function generateSteps(grid) {
     dpValues: upCount,
     selectedCell: null,
     message: 'Precompute enemies UP from each cell.',
+    relatedLines: [12, 13, 14, 15, 16, 17],
   })
 
   // Calculate down
@@ -136,6 +146,7 @@ function generateSteps(grid) {
     dpValues: downCount,
     selectedCell: null,
     message: 'Precompute enemies DOWN from each cell.',
+    relatedLines: [12, 13, 14, 15, 16, 17],
   })
 
   // Calculate total kills for each empty cell
@@ -173,6 +184,7 @@ function generateSteps(grid) {
             down: downCount[i][j],
           },
           message: `Cell (${i},${j}) kills: L=${leftCount[i][j]} + R=${rightCount[i][j]} + U=${upCount[i][j]} + D=${downCount[i][j]} = ${total}`,
+          relatedLines: [11],
         })
       }
     }
@@ -187,6 +199,7 @@ function generateSteps(grid) {
     selectedCell: bestCell,
     maxKills,
     message: `Maximum kills: ${maxKills} at cell (${bestCell?.i || 0}, ${bestCell?.j || 0})`,
+    relatedLines: [16],
   })
 
   return steps
@@ -248,13 +261,23 @@ export default function Problem361Visualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-        />
+        <div style={{ position: 'relative' }}>
+          <CodeTracePanel
+            step={step}
+            codeLines={SOLUTION_CODE}
+            highlightedLines={connectivity.highlightedLines}
+            onLineSelect={connectivity.handleLineSelect}
+            onActiveLineDomChange={setActiveLineDom}
+          />
+          {step && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step.activeLine}
+            />
+          )}
+        </div>
       ),
     },
     {

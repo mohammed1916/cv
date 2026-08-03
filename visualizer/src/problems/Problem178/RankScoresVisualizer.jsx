@@ -1,15 +1,23 @@
-import { useState, useCallback, useMemo } from 'react'
+﻿import { useState, useCallback, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './RankScoresVisualizer.css'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 
+
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
   { line: 1, text: "// RankScores" },
   { line: 2, text: "function solve(input) {" },
@@ -139,7 +147,7 @@ export default function RankScoresVisualizer() {
         {step?.message ?? "Press Play or Step to begin."}
       </div>
 
-      <div className="rank_scores-dock">
+      <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -157,7 +165,7 @@ export default function RankScoresVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
-      </div>
+      </FloatingPanel>
 
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>

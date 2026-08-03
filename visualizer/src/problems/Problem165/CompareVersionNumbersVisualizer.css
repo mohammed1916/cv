@@ -1,6 +1,43 @@
-.problem-shell {
+.cvn-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+  background: #0f172a;
+}
+
+.cvn-panel {
   display: flex;
   flex-direction: column;
   height: 100%;
+  overflow: hidden;
+}
+
+.cvn-panel-head {
+  padding: 12px 16px;
+  border-bottom: 1px solid #334155;
+  font-size: 13px;
+  font-weight: 600;
+  color: #e2e8f0;
+  background: #1e293b;
+}
+
+.cvn-panel-body {
+  flex: 1;
+  overflow: auto;
+  padding: 16px;
+  color: #e2e8f0;
+}
+
+.cvn-status {
+  padding: 8px 16px;
+  border-top: 1px solid #334155;
+  font-size: 12px;
+  color: #94a3b8;
   background: #0f172a;
+  display: flex;
+  align-items: center;
 }

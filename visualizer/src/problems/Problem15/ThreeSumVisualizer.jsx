@@ -1,15 +1,40 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 import './ThreeSumVisualizer.css'
+import PatternOverlay from "../../components/PatternOverlay";
+
+const THREESUM_PATTERNS = ['sort', 'fix_i', 'skip_i', 'calc', 'found', 'move_l', 'skip_l', 'move_r', 'done']
+
+// Map which code line corresponds to which pattern
+const LINE_PATTERN_MAP = {
+  3: 'sort',    // nums.sort()
+  4: 'fix_i',   // result = []
+  5: 'fix_i',   // for i in range(len(nums) - 2):
+  6: 'skip_i',  // if i > 0 and nums[i] == nums[i - 1]:
+  7: 'skip_i',  // continue  # skip i-duplicates
+  8: 'calc',    // l, r = i + 1, len(nums) - 1
+  9: 'calc',    // while l < r:
+  10: 'calc',   // s = nums[i] + nums[l] + nums[r]
+  11: 'found',  // if s == 0:
+  12: 'found',  // result.append([nums[i], nums[l], nums[r]])
+  13: 'move_l', // l += 1
+  14: 'skip_l', // while l < r and nums[l] == nums[l-1]: l += 1
+  15: 'move_l', // elif s < 0:
+  16: 'move_l', // l += 1
+  17: 'move_r', // else:
+  18: 'move_r', // r -= 1
+}
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -238,79 +263,83 @@ export default function ThreeSumVisualizer() {
 
   const sorted = step?.sorted ?? [...nums].sort((a, b) => a - b)
 
-  const dockPanels = useMemo(
-    () => [
-      {
-        id: 'code',
-        title: 'Code',
-        content: (
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-            onActiveLineDomChange={setActiveLineDom}
+  const codePanel = (
+    <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0 }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
+        />
+      )}
+    </div>
+  )
+
+  const vizPanel = (
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+        {EXAMPLES.map((ex) => (
+          <button
+            key={ex.label}
+            onClick={() => applyExample(ex)}
+            style={{
+              padding: '6px 12px',
+              borderRadius: 4,
+              border: '1px solid #cbd5e1',
+              cursor: 'pointer',
+              fontSize: 12,
+              backgroundColor: '#f1f5f9',
+              fontWeight: 500,
+            }}
+          >
+            {ex.label}
+          </button>
+        ))}
+      </div>
+
+      <div style={{ display: 'flex', gap: 8, flexDirection: 'column' }}>
+        <div>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Input Array</div>
+          <input
+            style={{
+              width: '100%',
+              padding: '8px 12px',
+              borderRadius: 4,
+              border: '1px solid #cbd5e1',
+              fontFamily: 'monospace',
+              fontSize: 12,
+            }}
+            value={numsInput}
+            onChange={(e) => {
+              setNumsInput(e.target.value)
+              handleReset()
+            }}
+            placeholder="[-1,0,1,2,-1,-4]"
           />
-        ),
-      },
-      {
-        id: 'viz',
-        title: '🔍 Array & Triplets',
-        content: (
-          <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
-            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-              {EXAMPLES.map((ex) => (
-                <button
-                  key={ex.label}
-                  onClick={() => applyExample(ex)}
-                  style={{
-                    padding: '6px 12px',
-                    borderRadius: 4,
-                    border: '1px solid #cbd5e1',
-                    cursor: 'pointer',
-                    fontSize: 12,
-                    backgroundColor: '#f1f5f9',
-                    fontWeight: 500,
-                  }}
-                >
-                  {ex.label}
-                </button>
-              ))}
-            </div>
+          {inputError && <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
+        </div>
 
-            <div style={{ display: 'flex', gap: 8, flexDirection: 'column' }}>
-              <div>
-                <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Input Array</div>
-                <input
-                  style={{
-                    width: '100%',
-                    padding: '8px 12px',
-                    borderRadius: 4,
-                    border: '1px solid #cbd5e1',
-                    fontFamily: 'monospace',
-                    fontSize: 12,
-                  }}
-                  value={numsInput}
-                  onChange={(e) => {
-                    setNumsInput(e.target.value)
-                    handleReset()
-                  }}
-                  placeholder="[-1,0,1,2,-1,-4]"
-                />
-                {inputError && <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
-              </div>
-
-              <div>
-                <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Sorted Array · Pointers</div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                  {sorted.map((val, idx) => {
-                    const isI = step?.i === idx
-                    const isL = step?.l === idx
-                    const isR = step?.r === idx
-                    const isFound = step?.phase === 'found' && (isI || isL || isR)
-                    const lifted = isI || isL || isR
-                    return (
-                      <div key={idx} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+        <div>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Sorted Array · Pointers</div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+            {sorted.map((val, idx) => {
+              const isI = step?.i === idx
+              const isL = step?.l === idx
+              const isR = step?.r === idx
+              const isFound = step?.phase === 'found' && (isI || isL || isR)
+              const lifted = isI || isL || isR
+              return (
+                <div key={idx} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
                         <motion.div
                           style={{
                             width: 48,
@@ -427,34 +456,70 @@ export default function ThreeSumVisualizer() {
               )}
             </div>
           </div>
-        ),
-      },
-    ],
-    [step, sorted, inputError, applyExample, SOLUTION_CODE, connectivity, setActiveLineDom],
   )
 
+  const statusPanel = (
+    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '12px 16px', minHeight: 0 }}>
+      <div style={{ fontSize: 12, color: '#64748b' }}>
+        {step?.message ?? 'Press Play or Step to begin.'}
+      </div>
+    </div>
+  )
+
+  const playbackPanel = (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={THREESUM_PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex <= 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </div>
+  )
+
+  const [panelDivs, setPanelDivs] = useState(null)
+
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
+      { id: 'viz', title: '🔍 Array & Triplets', dockMode: 'split-right' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+
+  const handlePanelReady = useCallback((divs) => {
+    setPanelDivs(divs)
+  }, [])
+
   return (
-    <div className="problem-shell">
-      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex <= 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
+    <div className="ts3-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )

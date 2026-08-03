@@ -1,9 +1,9 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -11,7 +11,14 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
 import { getExamples } from '../../config/examplesRegistry'
 import './ConvertSortedArrayToBinarySearchTreeVisualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 
+
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const CANVAS_W = 600
 const CANVAS_H = 400
 const NODE_R = 24
@@ -381,81 +388,118 @@ export default function ConvertSortedArrayToBinarySearchTreeVisualizer() {
     const edges = step?.edges ?? []
     const allNodes = step?.allNodes ?? []
 
-    // Build dock panels for the workspace
-    const dockPanels = useMemo(() => [
-        {
-            id: 'input',
-            title: 'Input',
-            content: <InputPanel arrInput={arrInput} setArrInput={setArrInput} applyExample={applyExample} inputError={inputError} />,
-        },
-        {
-            id: 'array',
-            title: 'Array View',
-            content: <ArrayVisualizationPanel arr={arr} selectedIndices={step?.selectedIndices} />,
-        },
-        {
-            id: 'tree',
-            title: 'Binary Search Tree',
-            content: <TreeVisualizationPanel step={step} positions={positions} edges={edges} allNodes={allNodes} />,
-        },
-        {
-            id: 'state',
-            title: 'State',
-            content: <StatePanel step={step} allNodes={allNodes} />,
-        },
-        {
-            id: 'code',
-            title: 'Code Trace',
-            content: <CodeTracePanel
+    // Step 2: Extract panels into consts
+    const primaryPanel = (
+        <div className="csatbst-panel" style={{ flex: 1 }}>
+            <div className="csatbst-panel-head">Binary Search Tree</div>
+            <div className="csatbst-panel-body">
+                <InputPanel arrInput={arrInput} setArrInput={setArrInput} applyExample={applyExample} inputError={inputError} />
+                <div style={{ display: 'flex', gap: 12, marginTop: 16 }}>
+                    <div style={{ flex: 1 }}>
+                        <ArrayVisualizationPanel arr={arr} selectedIndices={step?.selectedIndices} />
+                    </div>
+                    <div style={{ flex: 1 }}>
+                        <TreeVisualizationPanel step={step} positions={positions} edges={edges} allNodes={allNodes} />
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+
+    const statePanel = (
+        <div className="csatbst-panel" style={{ flex: 1 }}>
+            <div className="csatbst-panel-head">State</div>
+            <div className="csatbst-panel-body">
+                <StatePanel step={step} allNodes={allNodes} />
+            </div>
+        </div>
+    )
+
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
                 step={step}
                 codeLines={SOLUTION_CODE}
                 onActiveLineDomChange={setActiveLineDom}
+                disableResizer
                 autoScroll={autoScrollCode}
-            />,
-        },
-    ], [arrInput, setArrInput, applyExample, inputError, step, positions, edges, allNodes, arr, setActiveLineDom, autoScrollCode])
-
-    return (
-        <div className="problem-shell">
-            <DockableWorkspace
-                title="Convert Sorted Array to Binary Search Tree"
-                panels={dockPanels}
-                initialLayout={{
-                    rows: [
-                        ['input', 'state'],
-                        ['array', 'tree'],
-                        ['code'],
-                    ],
-                    minimized: [],
-                }}
             />
-
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls
-                    onReset={handleReset}
-                    onPrev={stepBack}
-                    onPlayToggle={togglePlay}
-                    onNext={stepForward}
-                    resetDisabled={steps.length === 0}
-                    prevDisabled={stepIndex < 0}
-                    nextDisabled={isDone}
-                    isPlaying={isPlaying}
-                    isDone={isDone}
-                    speed={speed}
-                    onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                    speedIndicator={`${speed}ms`}
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    autoScrollLabel="Auto-scroll code"
-                    showAutoScroll
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
+            {showPatternOverlay && (
+                <CodePatternAnnotations
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
                 />
-            </FloatingPanel>
+            )}
+        </div>
+    )
 
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+    const statusPanel = (
+        <div className="csatbst-status">
+            {step?.message || 'Press Play to begin.'}
+        </div>
+    )
+
+    const playbackPanel = (
+        <>
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+            )}
+            <PlaybackControls
+                onReset={handleReset}
+                onPrev={stepBack}
+                onPlayToggle={togglePlay}
+                onNext={stepForward}
+                resetDisabled={steps.length === 0}
+                prevDisabled={stepIndex < 0}
+                nextDisabled={isDone}
+                isPlaying={isPlaying}
+                isDone={isDone}
+                speed={speed}
+                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+                speedIndicator={`${speed}ms`}
+                autoScroll={autoScrollCode}
+                onAutoScrollChange={setAutoScrollCode}
+                autoScrollLabel="Auto-scroll code"
+                showAutoScroll
+                showPatternOverlay={showPatternOverlay}
+                onShowPatternOverlayChange={setShowPatternOverlay}
+                patternOverlayLabel="Show pattern overlay"
+                showPatternOverlayToggle
+            />
+        </>
+    )
+
+    // Step 3: Add state + config
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'primary', title: 'Binary Search Tree', dockMode: 'split-right' },
+            { id: 'state', title: 'State', dockMode: 'split-right' },
+            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+    // Step 4: Replace return with portals
+    return (
+        <div className="csatbst-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+                    {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
         </div>
     )
 }

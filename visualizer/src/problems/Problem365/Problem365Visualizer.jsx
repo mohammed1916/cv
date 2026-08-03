@@ -4,11 +4,28 @@ import DockableWorkspace from '../../components/shared/DockableWorkspace'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
+
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './Problem365Visualizer.css'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
+import PatternOverlay from "../../components/PatternOverlay";
+
+const PATTERNS = ['bezout-explanation', 'check-divisibility', 'complete', 'edge-case-capacity', 'edge-case-empty', 'gcd-calculate', 'gcd-complete', 'gcd-init', 'invalid-capacity', 'invalid-empty']
+const LINE_PATTERN_MAP = {
+  2: 'edge-case-capacity',
+  3: 'invalid-capacity',
+  4: 'edge-case-empty',
+  5: 'invalid-empty',
+  6: 'gcd-init',
+  7: 'gcd-calculate',
+  10: 'gcd-complete',
+  11: 'bezout-explanation',
+  14: 'check-divisibility'
+}
+
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def canMeasureWater(a, b, z):' },
@@ -442,13 +459,23 @@ export default function Problem365Visualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-        />
+        <div style={{ position: 'relative' }}>
+          <CodeTracePanel
+            step={step}
+            codeLines={SOLUTION_CODE}
+            highlightedLines={connectivity.highlightedLines}
+            onLineSelect={connectivity.handleLineSelect}
+            onActiveLineDomChange={setActiveLineDom}
+          />
+          {step && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step.activeLine}
+            />
+          )}
+        </div>
       ),
     },
     {

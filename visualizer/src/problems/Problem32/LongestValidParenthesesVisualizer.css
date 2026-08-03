@@ -1,9 +1,13 @@
 /* Longest Valid Parentheses Visualizer Styles */
 
 .lvp-shell {
+  position: relative;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: calc(100vh - 200px);
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
   background-color: #fafafa;
 }
 

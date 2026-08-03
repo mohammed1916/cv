@@ -6,6 +6,16 @@
     font-family: inherit;
 }
 
+.cg-dock-shell {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 400px);
+    min-height: 480px;
+    gap: 0;
+    overflow: hidden;
+}
+
 .cg-hero {
     background: linear-gradient(135deg, #1e1e2e 0%, #313244 100%);
     border: 1px solid #45475a;
