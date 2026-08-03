@@ -10,6 +10,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './AtoiVisualizer.css'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const INT_MIN = -(2 ** 31)
 const INT_MAX = 2 ** 31 - 1
@@ -513,6 +514,10 @@ export default function AtoiVisualizer() {
           </>
         )}
       </div>
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body,
+      )}
     </div>
   )
 }
