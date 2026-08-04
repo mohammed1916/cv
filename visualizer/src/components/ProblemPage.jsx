@@ -58,7 +58,11 @@ export default function ProblemPage({ problem, onBack, layoutWidth, onLayoutChan
           compact
         />
       </header>
-      <ProblemInfoPanel slug={problem.slug} descriptions={problemDescriptions} />
+      <ProblemInfoPanel
+        slug={problem.slug}
+        number={problem.number}
+        descriptions={problemDescriptions}
+      />
       <div className="problem-content" data-visualizer-root>
         <ErrorBoundary key={problem.id}>
           {Component ? (

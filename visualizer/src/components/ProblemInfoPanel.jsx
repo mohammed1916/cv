@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { isPremiumProblem } from "../data/premiumProblems";
 import "./ProblemInfoPanel.css";
 
 /** Strips HTML tags to plain text for copy/accessibility purposes */
@@ -29,11 +30,16 @@ function sanitizeHtml(html) {
         .replace(/javascript:/gi, "");
 }
 
-export default function ProblemInfoPanel({ slug, descriptions }) {
+export default function ProblemInfoPanel({ slug, number, descriptions }) {
     const [open, setOpen] = useState(false);
 
     const info = descriptions?.[slug];
     const hasContent = info?.content;
+    const premium = isPremiumProblem(number);
+
+    // Nothing to reveal and nothing to explain: not premium, just absent from
+    // the dataset. Hide the toggle rather than open onto an apology.
+    if (descriptions && !hasContent && !premium) return null;
 
     return (
         <>
@@ -72,7 +78,11 @@ export default function ProblemInfoPanel({ slug, descriptions }) {
                             {!descriptions ? (
                                 <p className="problem-info-loading">Loading problem descriptions…</p>
                             ) : !hasContent ? (
-                                <p className="problem-info-loading">Description not available for this problem.</p>
+                                <p className="problem-info-premium">
+                                    <strong>LeetCode Premium problem.</strong> The description is
+                                    subscriber-only, so it isn’t available here — but the
+                                    visualization below is fully functional.
+                                </p>
                             ) : (
                                 <div
                                     // eslint-disable-next-line react/no-danger

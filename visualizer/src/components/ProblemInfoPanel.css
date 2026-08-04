@@ -113,3 +113,19 @@
     font-style: italic;
     padding: 0.5rem 0;
 }
+
+/* Premium problems: an explicit note reads as an explanation rather than the
+   bug that "Description not available" implied. */
+.problem-info-premium {
+    color: var(--text-muted, #94a3b8);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    padding: 0.7rem 0.85rem;
+    border-radius: 8px;
+    border: 1px solid rgba(251, 191, 36, 0.32);
+    background: rgba(251, 191, 36, 0.1);
+}
+
+.problem-info-premium strong {
+    color: #fbbf24;
+}
