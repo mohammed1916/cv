@@ -201,10 +201,13 @@ function ProblemPage({
   const Shell = enableTransitions ? motion.div : "div";
   const shellProps = enableTransitions
     ? {
-      initial: { opacity: 0, x: 50 },
+      initial: { opacity: 0, x: 14 },
       animate: { opacity: 1, x: 0 },
-      exit: { opacity: 0, x: -50 },
-      transition: { type: "spring", stiffness: 320, damping: 35 },
+      exit: { opacity: 0, x: -14 },
+      // Stiffer spring and a shorter slide: AnimatePresence runs this on every
+      // problem navigation, where the old 50px/320-stiffness travel was slow
+      // enough to feel like the page was still loading.
+      transition: { type: "spring", stiffness: 520, damping: 38 },
     }
     : {};
   return (
@@ -344,6 +347,9 @@ function HomePage({
       initial: { opacity: 0 },
       animate: { opacity: 1 },
       exit: { opacity: 0 },
+      // Explicit short fade — the default (~0.3s) stacked in front of the card
+      // stagger and made the list feel like it was loading slowly.
+      transition: { duration: 0.14 },
     }
     : {};
   const Brand = enableTransitions ? motion.div : "div";
@@ -358,7 +364,9 @@ function HomePage({
               ? {
                 initial: { y: -18, opacity: 0 },
                 animate: { y: 0, opacity: 1 },
-                transition: { delay: 0.08, type: "spring", stiffness: 280 },
+                // No delay: the brand is above the fold, so holding it back just
+                // reads as lag.
+                transition: { type: "spring", stiffness: 460, damping: 30 },
               }
               : {})}
           >
@@ -492,9 +500,14 @@ function HomePage({
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
-                delay: 0.14 + i * 0.07,
+                // Stagger is capped: with 60 visible cards an uncapped
+                // `i * 0.07` delayed the last card by ~4.3s, so the grid looked
+                // broken rather than animated. 25ms steps that stop at 0.3s keep
+                // the cascade visible while finishing quickly.
+                delay: Math.min(0.3, i * 0.025),
                 type: "spring",
-                stiffness: 260,
+                stiffness: 420,
+                damping: 32,
               }}
               whileHover={{ y: -5, scale: 1.02 }}
               whileTap={{ scale: 0.97 }}

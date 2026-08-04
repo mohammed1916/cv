@@ -26,7 +26,10 @@
   position: fixed;
   top: 1rem;
   right: 1rem;
-  z-index: 40;
+  /* Above .problem-header (100) and the portaled FloatingPanel playback
+     controls (1900), both of which would otherwise paint over the open settings
+     dropdown on a problem page. */
+  z-index: 2000;
   pointer-events: none;
 }
 
@@ -73,6 +76,7 @@
   box-shadow: 0 22px 54px rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(20px);
   padding: 0.95rem;
+  z-index: 20;
 }
 
 .settings-panel-title {
