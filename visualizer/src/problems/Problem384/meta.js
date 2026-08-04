@@ -1,7 +1,7 @@
 export const meta = {
   number: '384',
   title: 'Shuffle an Array',
-  slug: 'shuffle-array',
+  slug: 'shuffle-an-array',
   difficulty: 'Medium',
   tags: ['Array', 'Random'],
   description: 'Randomize array in-place using Fisher-Yates shuffle algorithm.',

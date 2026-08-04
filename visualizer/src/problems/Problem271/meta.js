@@ -1,7 +1,7 @@
 export const meta = {
   number: "271",
   title: "Encode and Decode Strings",
-  slug: "encode-decode-strings",
+  slug: "encode-and-decode-strings",
   difficulty: "Medium",
   tags: ["Array", "String", "Design"],
   description: "Prefix each string with its length and a delimiter so decoding is unambiguous.",

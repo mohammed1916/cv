@@ -1,1 +1,1 @@
-export const meta={number:"540",title:"Single Element in Sorted Array",slug:"single-element-in-sorted-array",difficulty:"Medium",tags:["Binary Search"],description:"Find the single element in sorted array where others appear twice.",accent:"#0284c7"}
+export const meta={number:"540",title:"Single Element in Sorted Array",slug:"single-element-in-a-sorted-array",difficulty:"Medium",tags:["Binary Search"],description:"Find the single element in sorted array where others appear twice.",accent:"#0284c7"}

@@ -1,7 +1,7 @@
 export const meta = {
   number: "167",
   title: "Two Sum II - Input Array Is Sorted",
-  slug: "two-sum-ii",
+  slug: "two-sum-ii-input-array-is-sorted",
   difficulty: "Medium",
   tags: ["Array", "Two Pointers", "Binary Search"],
   description: "Two pointers from both ends: move left if sum too small, right if too large.",
