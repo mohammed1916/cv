@@ -113,6 +113,7 @@
 .fs4-cell {
     /* width: 48px; */
     padding: 0 12px;
+    margin: 0 12px;
     height: 48px;
     display: flex;
     align-items: center;
