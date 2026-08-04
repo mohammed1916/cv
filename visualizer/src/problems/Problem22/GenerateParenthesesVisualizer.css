@@ -4,7 +4,7 @@
     gap: 12px;
     padding: 16px;
     font-family: inherit;
-    height: calc(100vh - 200px);
+    height: 100%;
     min-height: 480px;
     overflow: hidden;
 }

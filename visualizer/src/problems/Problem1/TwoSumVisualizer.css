@@ -5,7 +5,7 @@
   /* Definite height so the absolutely-positioned Lumino container can fill it.
      Ancestors (.problem-page) use min-height:100vh, which is not a definite
      height for percentage/flex children — so we anchor to the viewport here. */
-  height: calc(100vh - 200px);
+  height: 100%;
   min-height: 480px;
   gap: 0;
   overflow: hidden;

@@ -4,13 +4,18 @@
     gap: 16px;
     padding: 16px;
     font-family: inherit;
+    /* Fill .problem-content so .cg-dock-shell's `flex` resolves to the space
+       left below the controls section. */
+    height: 100%;
 }
 
 .cg-dock-shell {
     position: relative;
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 400px);
+    /* Nested below a controls <section>, so take the leftover height rather than
+       a viewport constant that ignores that sibling. */
+    flex: 1 1 0;
     min-height: 480px;
     gap: 0;
     overflow: hidden;

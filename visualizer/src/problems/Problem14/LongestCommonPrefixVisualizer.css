@@ -2,7 +2,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 200px);
+  height: 100%;
   min-height: 480px;
   background: #0f172a;
   color: #e2e8f0;

@@ -657,12 +657,20 @@ export default function App() {
             onToggleNavigationTransitions={setNavigationTransitionsEnabled}
           />
         </div>
-        {/* minHeight/overflow let this region absorb the 60px toolbar offset and
-            scroll its own content (e.g. the home page) now that .app is a
-            definite 100vh flex column rather than min-height. */}
+        {/* A flex column (not overflow:auto) so children get a definite height to
+            resolve `height: 100%` against — an auto-overflow box lets children
+            grow and scroll instead of constraining them, which left every
+            visualizer shell unable to fill. Pages that need to scroll (home,
+            .problem-content) own their own overflow. */}
         <div
           id="zoom-content-wrapper"
-          style={{ flex: '1 1 0', minHeight: 0, marginTop: '60px', overflowY: 'auto' }}
+          style={{
+            flex: '1 1 0',
+            minHeight: 0,
+            marginTop: '60px',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
         >
           {navigationTransitionsEnabled ? (
             <AnimatePresence mode="wait">{pageContent}</AnimatePresence>

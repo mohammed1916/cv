@@ -9,11 +9,13 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 200px);
+    /* Nested below a controls <section>: take the leftover height instead of a
+       viewport constant. `flex: 1 1 0` (not `flex: 1`) so the basis is 0 and the
+       dock can shrink below its content height. */
     min-height: 480px;
     gap: 0;
     overflow: hidden;
-    flex: 1;
+    flex: 1 1 0;
 }
 
 .ga-hero-section {
