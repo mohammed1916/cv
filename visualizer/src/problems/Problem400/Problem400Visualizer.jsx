@@ -1,4 +1,5 @@
 ﻿import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -10,6 +11,8 @@ import { getExamples } from '../../config/examplesRegistry'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
+import './Problem400Visualizer.css'
 
 const PATTERNS = ['calculate', 'check_range', 'done', 'error', 'extract_digit', 'find_number', 'init', 'init_vars', 'range_update']
 const LINE_PATTERN_MAP = {
@@ -197,19 +200,23 @@ const EXAMPLES = getExamples('nth-digit') || [
 
 export default function Problem400Visualizer() {
   const [nInput, setNInput] = useState('3')
+  const [panelDivs, setPanelDivs] = useState(null)
 
-  const { n, inputError } = useMemo(() => {
-    try {
-      const val = Number(nInput)
-      if (isNaN(val) || val < 1) throw new Error('n must be a positive integer')
-      return { n: val, inputError: '' }
-    } catch (e) {
-      return { n: 3, inputError: e.message || 'Invalid input' }
+  // Validates the input for the inline hint; generateSteps re-parses nInput
+  // itself, so only the error message is needed here.
+  const { inputError } = useMemo(() => {
+    const val = Number(nInput)
+    if (nInput.trim() === '' || isNaN(val) || val < 1) {
+      return { inputError: 'n must be a positive integer' }
     }
+    return { inputError: '' }
   }, [nInput])
 
   const steps = useMemo(
-    () => generateSteps().map((current) => ({
+    // generateSteps(nStr) was called with no argument, so Number(undefined) was
+    // NaN and it threw on every run — the visualizer only ever rendered the
+    // error step regardless of input.
+    () => generateSteps(nInput).map((current) => ({
       ...current,
       relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
     })),
@@ -235,202 +242,201 @@ export default function Problem400Visualizer() {
     onStepJump: setStepIndex,
   })
 
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: '12px' }}>
-      <div style={{ display: 'flex', gap: 16, flex: 1 }}>
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <div style={{ display: 'flex', gap: 12, backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
-            <div style={{ width: '120px' }}>
-              <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '6px' }}>Position (n)</div>
-              <input
-                value={nInput}
-                onChange={(e) => { setNInput(e.target.value); handleReset() }}
-                placeholder="3"
-                type="number"
-                min="1"
-                style={{
-                  width: '100%', padding: '8px', backgroundColor: '#0f172a', color: '#e2e8f0',
-                  border: '1px solid #334155', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
-                }}
-              />
-            </div>
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  /* ── Panels ───────────────────────────────────────────────── */
+  const primaryPanel = (
+    <div className="p400-panel-primary">
+      <div className="p400-card">
+        <div className="p400-section-label">Input</div>
+        <div className="p400-input-row">
+          <div className="p400-field">
+            <label className="p400-input-label" htmlFor="p400-n">Position (n)</label>
+            <input
+              id="p400-n"
+              className={`p400-input mono ${inputError ? 'has-error' : ''}`}
+              value={nInput}
+              onChange={(e) => { setNInput(e.target.value); handleReset() }}
+              placeholder="3"
+              type="number"
+              min="1"
+            />
           </div>
+        </div>
+        <p className={`p400-hint ${inputError ? 'error' : ''}`}>
+          {inputError || 'Digits are concatenated as 1,2,…,9,10,11,… — find the nth one.'}
+        </p>
+        <div className="p400-example-row" style={{ marginTop: '0.7rem' }}>
+          {EXAMPLES.map((ex) => (
+            <button
+              type="button"
+              key={ex.label}
+              className={`p400-example-btn ${nInput === ex.n ? 'active' : ''}`}
+              onClick={() => applyExample(ex)}
+            >
+              {ex.label} (n={ex.n})
+            </button>
+          ))}
+        </div>
+      </div>
 
-          {inputError && (
-            <div style={{ color: '#f87171', fontSize: '12px' }}>{inputError}</div>
-          )}
+      <div className="p400-card">
+        <div className="p400-section-label">Digit Sequence</div>
+        <div className="p400-seq">
+          {step?.sequence?.split('').map((digit, idx) => (
+            <motion.div
+              key={idx}
+              className={`p400-digit ${idx === step?.targetPos ? 'target' : ''}`}
+              initial={{ scale: 0.8 }}
+              animate={{ scale: idx === step?.targetPos ? 1.18 : 1 }}
+            >
+              {digit}
+            </motion.div>
+          ))}
+        </div>
+      </div>
 
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {EXAMPLES.map((ex) => (
-              <button
-                key={ex.label}
-                onClick={() => applyExample(ex)}
-                style={{
-                  padding: '6px 12px', backgroundColor: '#334155', color: '#e2e8f0',
-                  border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '12px'
-                }}
-              >
-                {ex.label}
-              </button>
+      {step?.numStr && (
+        <div className="p400-card">
+          <div className="p400-section-label">Digits in Target Number</div>
+          <div className="p400-seq">
+            {step.numStr.split('').map((d, idx) => (
+              <div key={idx} className={`p400-digit ${idx === step.digitIdx ? 'target' : ''}`}>
+                {d}
+              </div>
             ))}
           </div>
-
-          <div style={{ backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
-            <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '8px' }}>Digit Sequence</div>
-            <div style={{ display: 'flex', gap: '2px', flexWrap: 'wrap', fontFamily: 'monospace', fontSize: '12px' }}>
-              {step?.sequence?.split('').map((digit, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ scale: 0.8 }}
-                  animate={{ scale: idx === step?.targetPos ? 1.2 : 1 }}
-                  style={{
-                    width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    backgroundColor: idx === step?.targetPos ? '#fbbf24' : '#334155',
-                    color: idx === step?.targetPos ? '#1e293b' : '#e2e8f0',
-                    borderRadius: '3px', fontWeight: 'bold',
-                    border: idx === step?.targetPos ? '2px solid #f59e0b' : 'none',
-                  }}
-                >
-                  {digit}
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          <div style={{ flex: 1, backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: 12, overflow: 'auto' }}>
-            <div>
-              <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '8px' }}>Algorithm State</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                {step?.length !== undefined && (
-                  <div style={{ backgroundColor: '#334155', padding: '6px', borderRadius: '3px', color: '#cbd5e1', fontSize: '11px' }}>
-                    <span style={{ color: '#94a3b8' }}>Length:</span> {step.length}
-                  </div>
-                )}
-                {step?.count !== undefined && (
-                  <div style={{ backgroundColor: '#334155', padding: '6px', borderRadius: '3px', color: '#cbd5e1', fontSize: '11px' }}>
-                    <span style={{ color: '#94a3b8' }}>Count:</span> {step.count}
-                  </div>
-                )}
-                {step?.start !== undefined && (
-                  <div style={{ backgroundColor: '#334155', padding: '6px', borderRadius: '3px', color: '#cbd5e1', fontSize: '11px' }}>
-                    <span style={{ color: '#94a3b8' }}>Start:</span> {step.start}
-                  </div>
-                )}
-                {step?.remaining !== undefined && (
-                  <div style={{ backgroundColor: '#334155', padding: '6px', borderRadius: '3px', color: '#fbbf24', fontSize: '11px' }}>
-                    <span style={{ color: '#94a3b8' }}>Remaining:</span> {step.remaining}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {step?.currentRange && (
-              <div>
-                <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '4px' }}>Current Range</div>
-                <div style={{ backgroundColor: '#334155', padding: '8px', borderRadius: '4px', fontSize: '12px', color: '#cbd5e1' }}>
-                  Numbers: {step.currentRange.start} - {step.currentRange.end}
-                  <div style={{ fontSize: '11px', color: '#94a3b8', marginTop: '4px' }}>
-                    Each has {step.currentRange.digitCount} digit(s)
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {step?.num !== undefined && (
-              <div>
-                <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '4px' }}>Target Number</div>
-                <div style={{ backgroundColor: '#334155', padding: '8px', borderRadius: '4px', fontSize: '14px', color: '#fbbf24', fontWeight: 'bold' }}>
-                  {step.num}
-                </div>
-              </div>
-            )}
-
-            {step?.numStr && (
-              <div>
-                <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '4px' }}>Digits in Number</div>
-                <div style={{ display: 'flex', gap: '4px' }}>
-                  {step.numStr.split('').map((d, idx) => (
-                    <div
-                      key={idx}
-                      style={{
-                        width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        backgroundColor: idx === step.digitIdx ? '#fbbf24' : '#334155',
-                        color: idx === step.digitIdx ? '#1e293b' : '#e2e8f0',
-                        borderRadius: '4px', fontWeight: 'bold', fontSize: '12px'
-                      }}
-                    >
-                      {d}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {step?.result !== undefined && (
-              <div style={{ backgroundColor: '#fbbf2466', padding: '12px', borderRadius: '4px', textAlign: 'center' }}>
-                <div style={{ color: '#94a3b8', fontSize: '12px' }}>Result</div>
-                <div style={{ color: '#fbbf24', fontSize: '24px', fontWeight: 'bold' }}>
-                  {step.result}
-                </div>
-              </div>
-            )}
-          </div>
         </div>
+      )}
 
-        <div style={{ flex: 1 }}>
-                    <div style={{ position: "relative" }}>
-            <CodeTracePanel
-              step={step}
-            codeLines={SOLUTION_CODE}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-            onActiveLineDomChange={setActiveLineDom}
-            />
-          
-            {showPatternOverlay && (
-              <CodePatternAnnotations
-                linePatterns={LINE_PATTERN_MAP}
-                currentPhase={step?.phase}
-                activeLineDom={activeLineDom}
-                activeLine={step?.activeLine}
-              />
-            )}
-          </div>
+      {step?.result !== undefined && (
+        <div className="p400-result">
+          <div className="p400-section-label" style={{ marginBottom: '0.3rem' }}>Result</div>
+          <div className="p400-result-val">{step.result}</div>
+        </div>
+      )}
+    </div>
+  )
+
+  const statePanel = (
+    <div className="p400-panel-state">
+      <div className="p400-card">
+        <div className="p400-section-label">Algorithm State</div>
+        <div className="p400-stat-grid">
+          {step?.length !== undefined && (
+            <div className="p400-stat"><span className="p400-stat-key">length</span><span className="p400-stat-val">{step.length}</span></div>
+          )}
+          {step?.count !== undefined && (
+            <div className="p400-stat"><span className="p400-stat-key">count</span><span className="p400-stat-val">{step.count}</span></div>
+          )}
+          {step?.start !== undefined && (
+            <div className="p400-stat"><span className="p400-stat-key">start</span><span className="p400-stat-val">{step.start}</span></div>
+          )}
+          {step?.remaining !== undefined && (
+            <div className="p400-stat highlight"><span className="p400-stat-key">remaining</span><span className="p400-stat-val">{step.remaining}</span></div>
+          )}
+          {step?.num !== undefined && (
+            <div className="p400-stat highlight"><span className="p400-stat-key">num</span><span className="p400-stat-val">{step.num}</span></div>
+          )}
+          {step?.digitIdx !== undefined && (
+            <div className="p400-stat"><span className="p400-stat-key">digit idx</span><span className="p400-stat-val">{step.digitIdx}</span></div>
+          )}
         </div>
       </div>
 
-      <div style={{
-        backgroundColor: step?.phase === 'done' ? '#10b98166' : step?.error ? '#ef444466' : '#1e293b',
-        padding: '12px', borderRadius: '6px', color: step?.phase === 'done' ? '#86efac' : step?.error ? '#fca5a5' : '#cbd5e1',
-        fontSize: '13px', fontFamily: 'monospace'
-      }}>
+      {step?.currentRange && (
+        <div className="p400-card">
+          <div className="p400-section-label">Current Range</div>
+          <div className="p400-stat">
+            <span className="p400-stat-key">numbers</span>
+            <span className="p400-stat-val">{step.currentRange.start} – {step.currentRange.end}</span>
+          </div>
+          <p className="p400-hint" style={{ marginTop: '0.45rem' }}>
+            Each has {step.currentRange.digitCount} digit(s).
+          </p>
+        </div>
+      )}
+    </div>
+  )
+
+  const codePanel = (
+    <div className="p400-panel-code">
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
+        />
+      )}
+    </div>
+  )
+
+  const statusPanel = (
+    <div className="p400-panel-status">
+      <div className={`p400-status ${step?.phase === 'done' ? 'done' : step?.error ? 'error' : ''}`}>
         {step?.message ?? 'Press Play or Step to begin.'}
       </div>
+    </div>
+  )
 
-      <div>
-        <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
-      </div>
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
+
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
+      { id: 'state',   title: 'State',         dockMode: 'split-right' },
+      { id: 'code',    title: 'Code',          dockMode: 'split-bottom' },
+      { id: 'status',  title: 'Status',        dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+
+  return (
+    <div className="p400-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.state   && createPortal(statePanel,   panelDivs.state)}
+          {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}
+          {panelDivs.status  && createPortal(statusPanel,  panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }
