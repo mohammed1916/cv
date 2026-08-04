@@ -1,4 +1,5 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+﻿import { Fragment, useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -9,6 +10,8 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
+import './Problem399Visualizer.css'
 
 const PATTERNS = ['build_edge', 'dfs_end', 'dfs_start', 'done', 'error', 'init', 'query_invalid', 'query_start']
 
@@ -202,8 +205,11 @@ export default function Problem399Visualizer() {
   const [equationsInput, setEquationsInput] = useState('[["a","b"],["b","c"]]')
   const [valuesInput, setValuesInput] = useState('[2.0,3.0]')
   const [queryInput, setQueryInput] = useState('[["a","c"],["b","a"],["a","e"]]')
+  const [panelDivs, setPanelDivs] = useState(null)
 
-  const { equations, values, query, inputError } = useMemo(() => {
+  // Only the error message is consumed — generateSteps re-parses the raw input
+  // strings itself, so the parsed arrays aren't needed here.
+  const { inputError } = useMemo(() => {
     try {
       const eqs = JSON.parse(equationsInput)
       const vals = JSON.parse(valuesInput)
@@ -211,12 +217,9 @@ export default function Problem399Visualizer() {
       if (!Array.isArray(eqs) || !Array.isArray(vals) || !Array.isArray(q)) {
         throw new Error('All inputs must be arrays')
       }
-      return { equations: eqs, values: vals, query: q, inputError: '' }
+      return { inputError: '' }
     } catch (e) {
       return {
-        equations: [["a","b"],["b","c"]],
-        values: [2.0, 3.0],
-        query: [["a","c"],["b","a"],["a","e"]],
         inputError: e.message || 'Invalid input'
       }
     }
@@ -252,186 +255,329 @@ export default function Problem399Visualizer() {
     onStepJump: setStepIndex,
   })
 
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: '12px' }}>
-      <div style={{ display: 'flex', gap: 16, flex: 1 }}>
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <div style={{ display: 'flex', gap: 12, backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
-            <div style={{ flex: 1 }}>
-              <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '6px' }}>Equations</div>
-              <input
-                value={equationsInput}
-                onChange={(e) => { setEquationsInput(e.target.value); handleReset() }}
-                placeholder='[["a","b"],["b","c"]]'
-                style={{
-                  width: '100%', padding: '8px', backgroundColor: '#0f172a', color: '#e2e8f0',
-                  border: '1px solid #334155', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
-                }}
-              />
-            </div>
-            <div style={{ flex: 1 }}>
-              <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '6px' }}>Values</div>
-              <input
-                value={valuesInput}
-                onChange={(e) => { setValuesInput(e.target.value); handleReset() }}
-                placeholder='[2.0,3.0]'
-                style={{
-                  width: '100%', padding: '8px', backgroundColor: '#0f172a', color: '#e2e8f0',
-                  border: '1px solid #334155', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
-                }}
-              />
-            </div>
-          </div>
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
-          <div>
-            <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '6px' }}>Query</div>
+  /* ── Graph layout ─────────────────────────────────────────────
+     Nodes are placed on a circle so the layout is deterministic and stable
+     across steps (a force simulation would jitter as steps advance). Positions
+     are keyed off the node list, which only changes when the equations do. */
+  const nodes = step?.nodes ?? []
+  // Join into a plain string first: the lint config only accepts simple
+  // expressions in a dependency array, and this keeps the layout stable unless
+  // the node set itself changes.
+  const nodesKey = nodes.join(',')
+  const layout = useMemo(() => {
+    const names = nodesKey ? nodesKey.split(',') : []
+    const pos = {}
+    const cx = 200
+    const cy = 150
+    const r = names.length <= 1 ? 0 : Math.min(110, 42 + names.length * 9)
+    names.forEach((name, i) => {
+      const angle = (i / Math.max(1, names.length)) * Math.PI * 2 - Math.PI / 2
+      pos[name] = { x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) }
+    })
+    return pos
+  }, [nodesKey])
+
+  // Undirected edge list (the graph stores both directions; draw each pair once).
+  const edges = useMemo(() => {
+    const graph = step?.graph
+    if (!graph) return []
+    const seen = new Set()
+    const out = []
+    for (const from of Object.keys(graph)) {
+      for (const e of graph[from] ?? []) {
+        const key = [from, e.neighbor].sort().join('|')
+        if (seen.has(key)) continue
+        seen.add(key)
+        out.push({ from, to: e.neighbor, weight: e.weight })
+      }
+    }
+    return out
+  }, [step?.graph])
+
+  const path = step?.path ?? []
+  const pathKey = path.join(',')
+  const pathPairs = useMemo(() => {
+    const seq = pathKey ? pathKey.split(',') : []
+    const s = new Set()
+    for (let i = 0; i < seq.length - 1; i++) {
+      s.add([seq[i], seq[i + 1]].sort().join('|'))
+    }
+    return s
+  }, [pathKey])
+
+  const visitedSet = useMemo(() => {
+    const v = step?.visited
+    return v instanceof Set ? v : new Set(Array.isArray(v) ? v : [])
+  }, [step?.visited])
+
+  const activeEdgeKey = step?.currentEdge
+    ? [step.currentEdge.a, step.currentEdge.b].sort().join('|')
+    : null
+
+  const nodeClass = (name) => {
+    const cls = ['p399-node']
+    if (step?.currentQuery?.num === name) cls.push('query-num')
+    else if (step?.currentQuery?.den === name) cls.push('query-den')
+    else if (path.includes(name)) cls.push('on-path')
+    else if (visitedSet.has(name)) cls.push('visited')
+    return cls.join(' ')
+  }
+
+  /* ── Panels ───────────────────────────────────────────────── */
+  const primaryPanel = (
+    <div className="p399-panel-primary">
+      <div className="p399-card">
+        <div className="p399-section-label">Equations Graph</div>
+        <div className="p399-graph-wrap">
+          <svg className="p399-graph" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet">
+            {edges.map(({ from, to, weight }) => {
+              const a = layout[from]
+              const b = layout[to]
+              if (!a || !b) return null
+              const key = [from, to].sort().join('|')
+              const cls = [
+                'p399-edge',
+                key === activeEdgeKey ? 'active' : '',
+                pathPairs.has(key) ? 'on-path' : '',
+              ].join(' ')
+              return (
+                <g key={key}>
+                  <line className={cls} x1={a.x} y1={a.y} x2={b.x} y2={b.y} />
+                  <text
+                    className={`p399-edge-label ${key === activeEdgeKey ? 'active' : ''}`}
+                    x={(a.x + b.x) / 2}
+                    y={(a.y + b.y) / 2 - 3}
+                    textAnchor="middle"
+                  >
+                    {Number(weight).toFixed(2)}
+                  </text>
+                </g>
+              )
+            })}
+            {nodes.map((name) => {
+              const p = layout[name]
+              if (!p) return null
+              return (
+                <motion.g
+                  key={name}
+                  className={nodeClass(name)}
+                  initial={{ scale: 0.85 }}
+                  animate={{ scale: 1 }}
+                >
+                  <circle cx={p.x} cy={p.y} r="17" />
+                  <text x={p.x} y={p.y}>{name}</text>
+                </motion.g>
+              )
+            })}
+          </svg>
+        </div>
+        <div className="p399-legend">
+          <span className="p399-legend-item"><span className="p399-swatch num" />numerator</span>
+          <span className="p399-legend-item"><span className="p399-swatch den" />denominator</span>
+          <span className="p399-legend-item"><span className="p399-swatch path" />path</span>
+          <span className="p399-legend-item"><span className="p399-swatch visited" />visited</span>
+        </div>
+      </div>
+
+      <div className="p399-card">
+        <div className="p399-section-label">Input</div>
+        <div className="p399-field-grid">
+          <div className="p399-field">
+            <label className="p399-input-label" htmlFor="p399-eq">equations</label>
             <input
+              id="p399-eq"
+              className={`p399-input ${inputError ? 'has-error' : ''}`}
+              value={equationsInput}
+              onChange={(e) => { setEquationsInput(e.target.value); handleReset() }}
+            />
+          </div>
+          <div className="p399-field">
+            <label className="p399-input-label" htmlFor="p399-vals">values</label>
+            <input
+              id="p399-vals"
+              className={`p399-input ${inputError ? 'has-error' : ''}`}
+              value={valuesInput}
+              onChange={(e) => { setValuesInput(e.target.value); handleReset() }}
+            />
+          </div>
+          <div className="p399-field">
+            <label className="p399-input-label" htmlFor="p399-q">queries</label>
+            <input
+              id="p399-q"
+              className={`p399-input ${inputError ? 'has-error' : ''}`}
               value={queryInput}
               onChange={(e) => { setQueryInput(e.target.value); handleReset() }}
-              placeholder='[["a","c"],["b","a"]]'
-              style={{
-                width: '100%', padding: '8px', backgroundColor: '#0f172a', color: '#e2e8f0',
-                border: '1px solid #334155', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
-              }}
             />
           </div>
+        </div>
+        <p className={`p399-hint ${inputError ? 'error' : ''}`} style={{ marginTop: '0.6rem' }}>
+          {inputError || 'Each equation a/b = value becomes edges a→b (value) and b→a (1/value).'}
+        </p>
+        <div className="p399-example-row">
+          {EXAMPLES.map((ex) => (
+            <button
+              type="button"
+              key={ex.label}
+              className="p399-example-btn"
+              onClick={() => applyExample(ex)}
+            >
+              {ex.label}
+            </button>
+          ))}
+        </div>
+      </div>
 
-          {inputError && (
-            <div style={{ color: '#f87171', fontSize: '12px' }}>{inputError}</div>
-          )}
+      {step?.result !== undefined && (
+        <div className="p399-result">
+          <div className="p399-section-label" style={{ marginBottom: '0.3rem' }}>Query Result</div>
+          <div className="p399-result-val">
+            {typeof step.result === 'number' ? step.result.toFixed(4) : String(step.result)}
+          </div>
+        </div>
+      )}
+    </div>
+  )
 
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {EXAMPLES.map((ex) => (
-              <button
-                key={ex.label}
-                onClick={() => applyExample(ex)}
-                style={{
-                  padding: '6px 12px', backgroundColor: '#334155', color: '#e2e8f0',
-                  border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '12px'
-                }}
-              >
-                {ex.label}
-              </button>
+  const statePanel = (
+    <div className="p399-panel-state">
+      <div className="p399-card">
+        <div className="p399-section-label">Query</div>
+        {step?.currentQuery ? (
+          <>
+            <div className="p399-stat highlight">
+              <span className="p399-stat-key">numerator</span>
+              <span className="p399-stat-val">{step.currentQuery.num}</span>
+            </div>
+            <div className="p399-stat">
+              <span className="p399-stat-key">denominator</span>
+              <span className="p399-stat-val">{step.currentQuery.den}</span>
+            </div>
+          </>
+        ) : (
+          <p className="p399-hint">No active query.</p>
+        )}
+        {step?.currentEdge && (
+          <div className="p399-stat" style={{ marginTop: '0.4rem' }}>
+            <span className="p399-stat-key">adding edge</span>
+            <span className="p399-stat-val">
+              {step.currentEdge.a}/{step.currentEdge.b} = {step.currentEdge.val}
+            </span>
+          </div>
+        )}
+      </div>
+
+      {path.length > 0 && (
+        <div className="p399-card">
+          <div className="p399-section-label">DFS Path</div>
+          <div className="p399-path-chips">
+            {path.map((nodeName, i) => (
+              <Fragment key={`${nodeName}-${i}`}>
+                {i > 0 && <span className="p399-path-arrow">→</span>}
+                <span className="p399-path-chip">{nodeName}</span>
+              </Fragment>
             ))}
           </div>
-
-          <div style={{ backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
-            <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '8px' }}>Graph Structure</div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-              {step?.nodes?.map((node) => (
-                <div key={node} style={{ backgroundColor: '#0f172a', padding: '8px', borderRadius: '4px' }}>
-                  <div style={{ color: '#e2e8f0', fontWeight: 'bold', marginBottom: '4px' }}>{node}</div>
-                  <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-                    {step?.graph?.[node]?.map((edge, idx) => (
-                      <div
-                        key={idx}
-                        style={{
-                          backgroundColor: step?.currentEdge?.a === node && step?.currentEdge?.b === edge.neighbor ? '#f87171' : '#334155',
-                          padding: '4px 8px', borderRadius: '3px', fontSize: '11px', color: '#cbd5e1'
-                        }}
-                      >
-                        → {edge.neighbor} ({edge.weight.toFixed(4)})
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div style={{ flex: 1, backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <div>
-              <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '8px' }}>Current Query</div>
-              {step?.currentQuery && (
-                <div style={{ backgroundColor: '#334155', padding: '8px', borderRadius: '4px', color: '#e2e8f0', fontWeight: 'bold' }}>
-                  {step.currentQuery.num} / {step.currentQuery.den}
-                </div>
-              )}
-            </div>
-
-            {step?.path && step.path.length > 0 && (
-              <div>
-                <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '4px' }}>Path Found</div>
-                <div style={{ color: '#a78bfa', fontSize: '12px', fontFamily: 'monospace' }}>
-                  {step.path.join(' → ')}
-                </div>
-              </div>
-            )}
-
-            {step?.result !== undefined && (
-              <div style={{ backgroundColor: '#334155', padding: '8px', borderRadius: '4px', textAlign: 'center' }}>
-                <div style={{ color: '#64748b', fontSize: '12px' }}>Result</div>
-                <div style={{ color: '#f87171', fontSize: '18px', fontWeight: 'bold' }}>
-                  {step.result === -1 ? '-1' : step.result.toFixed(4)}
-                </div>
-              </div>
-            )}
-
-            {step?.allResults && (
-              <div style={{ backgroundColor: '#334155', padding: '8px', borderRadius: '4px', textAlign: 'center' }}>
-                <div style={{ color: '#64748b', fontSize: '12px' }}>All Results</div>
-                <div style={{ color: '#f87171', fontSize: '12px', fontFamily: 'monospace', marginTop: '4px' }}>
-                  [{step.allResults.map(r => r === -1 ? '-1' : r.toFixed(4)).join(', ')}]
-                </div>
-              </div>
-            )}
-          </div>
         </div>
+      )}
 
-        <div style={{ flex: 1 }}>
-                    <div style={{ position: "relative" }}>
-            <CodeTracePanel
-              step={step}
-            codeLines={SOLUTION_CODE}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-            onActiveLineDomChange={setActiveLineDom}
-            />
-          
-            {showPatternOverlay && (
-              <CodePatternAnnotations
-                linePatterns={LINE_PATTERN_MAP}
-                currentPhase={step?.phase}
-                activeLineDom={activeLineDom}
-                activeLine={step?.activeLine}
-              />
-            )}
-          </div>
+      <div className="p399-card">
+        <div className="p399-section-label">Adjacency List</div>
+        <div className="p399-adj-list">
+          {nodes.length === 0 && <p className="p399-hint">Graph not built yet.</p>}
+          {nodes.map((name) => (
+            <div className="p399-adj-row" key={name}>
+              <span className="p399-adj-node">{name}</span>
+              {' → '}
+              {(step?.graph?.[name] ?? [])
+                .map((e) => `${e.neighbor} (${Number(e.weight).toFixed(2)})`)
+                .join(', ') || '—'}
+            </div>
+          ))}
         </div>
       </div>
+    </div>
+  )
 
-      <div style={{
-        backgroundColor: step?.phase === 'done' ? '#10b98166' : step?.error ? '#ef444466' : '#1e293b',
-        padding: '12px', borderRadius: '6px', color: step?.phase === 'done' ? '#86efac' : step?.error ? '#fca5a5' : '#cbd5e1',
-        fontSize: '13px', fontFamily: 'monospace'
-      }}>
+  const codePanel = (
+    <div className="p399-panel-code">
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
+        />
+      )}
+    </div>
+  )
+
+  const statusPanel = (
+    <div className="p399-panel-status">
+      <div className={`p399-status ${step?.phase === 'done' ? 'done' : step?.error ? 'error' : ''}`}>
         {step?.message ?? 'Press Play or Step to begin.'}
       </div>
+    </div>
+  )
 
-      <div>
-        <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
-      </div>
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
+
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Graph',  dockMode: 'split-right' },
+      { id: 'state',   title: 'State',  dockMode: 'split-right' },
+      { id: 'code',    title: 'Code',   dockMode: 'split-bottom' },
+      { id: 'status',  title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
+
+  return (
+    <div className="p399-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.state   && createPortal(statePanel,   panelDivs.state)}
+          {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}
+          {panelDivs.status  && createPortal(statusPanel,  panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

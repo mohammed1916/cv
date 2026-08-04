@@ -1,0 +1,340 @@
+/* ─────────────────────────────────────────────
+   Evaluate Division (Problem 399) — Lumino dock layout
+   ───────────────────────────────────────────── */
+
+.p399-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* Root element / direct child of .problem-content, which supplies a definite
+     height — Lumino measures this element to size its panels. */
+  height: 100%;
+  min-height: 480px;
+  gap: 0;
+  overflow: hidden;
+}
+
+.p399-panel-primary,
+.p399-panel-state,
+.p399-panel-status {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  padding: 1rem;
+  gap: 0.9rem;
+}
+
+.p399-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl, 14px);
+  padding: 1rem 1.1rem;
+}
+
+.p399-section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-dim);
+  margin-bottom: 0.7rem;
+}
+
+/* ── Inputs ────────────────────────────────── */
+.p399-field-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.7rem;
+}
+
+.p399-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.p399-input-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.p399-input {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius, 10px);
+  padding: 0.5rem 0.65rem;
+  color: var(--text);
+  font-family: 'Fira Code', monospace;
+  font-size: 0.78rem;
+}
+
+.p399-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.p399-input.has-error {
+  border-color: rgba(248, 113, 113, 0.55);
+}
+
+.p399-hint {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.p399-hint.error {
+  color: var(--error, #f87171);
+}
+
+.p399-example-row {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  margin-top: 0.7rem;
+}
+
+.p399-example-btn {
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.p399-example-btn:hover {
+  color: var(--text);
+  border-color: rgba(248, 113, 113, 0.45);
+  background: rgba(248, 113, 113, 0.14);
+}
+
+/* ── Graph view ────────────────────────────── */
+.p399-graph-wrap {
+  position: relative;
+  width: 100%;
+  /* Fixed aspect so the SVG viewBox scales predictably inside a resizable dock
+     panel; the SVG itself is responsive via viewBox + preserveAspectRatio. */
+  aspect-ratio: 4 / 3;
+  min-height: 260px;
+  background: radial-gradient(circle at 50% 40%, rgba(248, 113, 113, 0.06), transparent 60%);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.p399-graph {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.p399-edge {
+  stroke: rgba(148, 163, 184, 0.35);
+  stroke-width: 1.6;
+}
+
+.p399-edge.active {
+  stroke: var(--accent-399, #f87171);
+  stroke-width: 3;
+}
+
+.p399-edge.on-path {
+  stroke: var(--success, #10b981);
+  stroke-width: 3;
+}
+
+.p399-edge-label {
+  fill: var(--text-muted);
+  font-family: 'Fira Code', monospace;
+  font-size: 9px;
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 3px;
+}
+
+.p399-edge-label.active {
+  fill: var(--accent-399, #f87171);
+}
+
+.p399-node circle {
+  fill: var(--surface3, #21213a);
+  stroke: rgba(148, 163, 184, 0.5);
+  stroke-width: 1.5;
+  transition: fill 0.2s ease, stroke 0.2s ease;
+}
+
+.p399-node.visited circle {
+  fill: rgba(56, 189, 248, 0.22);
+  stroke: var(--info, #38bdf8);
+}
+
+.p399-node.on-path circle {
+  fill: rgba(16, 185, 129, 0.25);
+  stroke: var(--success, #10b981);
+}
+
+.p399-node.query-num circle {
+  fill: rgba(248, 113, 113, 0.28);
+  stroke: var(--accent-399, #f87171);
+  stroke-width: 2.5;
+}
+
+.p399-node.query-den circle {
+  fill: rgba(251, 191, 36, 0.28);
+  stroke: #fbbf24;
+  stroke-width: 2.5;
+}
+
+.p399-node text {
+  fill: var(--text);
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+}
+
+.p399-legend {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-top: 0.6rem;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.p399-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.p399-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+}
+
+.p399-swatch.num { color: #f87171; background: rgba(248, 113, 113, 0.3); }
+.p399-swatch.den { color: #fbbf24; background: rgba(251, 191, 36, 0.3); }
+.p399-swatch.path { color: #10b981; background: rgba(16, 185, 129, 0.3); }
+.p399-swatch.visited { color: #38bdf8; background: rgba(56, 189, 248, 0.3); }
+
+/* ── State readouts ───────────────────────── */
+.p399-stat {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  font-size: 0.78rem;
+}
+
+.p399-stat + .p399-stat {
+  margin-top: 0.4rem;
+}
+
+.p399-stat-key { color: var(--text-muted); }
+
+.p399-stat-val {
+  color: var(--text);
+  font-family: 'Fira Code', monospace;
+  font-weight: 700;
+}
+
+.p399-stat.highlight .p399-stat-val { color: var(--accent-399, #f87171); }
+
+.p399-adj-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.p399-adj-row {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  padding: 0.4rem 0.55rem;
+  border-radius: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+}
+
+.p399-adj-node {
+  color: var(--accent-399, #f87171);
+  font-weight: 700;
+}
+
+.p399-path-chips {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.8rem;
+}
+
+.p399-path-chip {
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  background: rgba(16, 185, 129, 0.18);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #86efac;
+  font-weight: 700;
+}
+
+.p399-path-arrow { color: var(--text-dim); }
+
+.p399-result {
+  text-align: center;
+  padding: 0.9rem;
+  border-radius: 10px;
+  background: rgba(248, 113, 113, 0.16);
+  border: 1px solid rgba(248, 113, 113, 0.4);
+}
+
+.p399-result-val {
+  color: var(--accent-399, #f87171);
+  font-size: 1.5rem;
+  font-weight: 800;
+  font-family: 'Fira Code', monospace;
+}
+
+/* ── Code / status ────────────────────────── */
+.p399-panel-code {
+  position: relative;
+  height: 100%;
+  overflow: auto;
+}
+
+.p399-status {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.82rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 8px;
+  background: var(--surface2);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.p399-status.done {
+  background: rgba(16, 185, 129, 0.16);
+  border-color: rgba(16, 185, 129, 0.4);
+  color: #86efac;
+}
+
+.p399-status.error {
+  background: rgba(239, 68, 68, 0.16);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+}
