@@ -8,7 +8,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem423Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -19,9 +19,9 @@ const PATTERNS = []
 
 
 
-const EXAMPLES = getExamples('reconstruct-original-digits') || [
+const EXAMPLES = getExamplesOr('reconstruct-original-digits', [
   { label: 'Example 1', s: 'owoztneoer' },
-]
+])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def originalDigits(s):' },

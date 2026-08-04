@@ -5,7 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './BulbSwitcherVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -107,7 +107,7 @@ function generateSteps(n) {
   return steps
 }
 
-const EXAMPLES = getExamples('bulb-switcher') || []
+const EXAMPLES = getExamplesOr('bulb-switcher', [])
 const DEFAULT_N = 10
 
 export default function BulbSwitcherVisualizer() {

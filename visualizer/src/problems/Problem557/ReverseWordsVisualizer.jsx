@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './ReverseWordsVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -291,7 +291,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 }
 
 export default function ReverseWordsVisualizer() {
-  const examples = useMemo(() => getExamples('reverse-words-iii') || [], [])
+  const examples = useMemo(() => getExamplesOr('reverse-words-iii', []), [])
   const [inputString, setInputString] = useState("the sky is blue")
 
   const steps = useMemo(() => generateSteps(inputString), [inputString])

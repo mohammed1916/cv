@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem490Visualizer.css'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -43,10 +43,10 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamples('the-maze') || [
+const EXAMPLES = getExamplesOr('the-maze', [
   { label: 'Example 1', maze: [[0,0,1,0,0],[0,0,0,0,0],[0,0,0,1,0],[1,1,0,1,1],[0,0,0,0,0]], start: [0,4], destination: [4,4] },
   { label: 'Example 2', maze: [[0,0,1,0,0],[0,0,0,0,0],[0,0,0,1,0],[1,1,0,1,1],[0,0,0,0,0]], start: [0,4], destination: [3,2] },
-]
+])
 
 function generateSteps(maze, start, destination) {
   const steps = []

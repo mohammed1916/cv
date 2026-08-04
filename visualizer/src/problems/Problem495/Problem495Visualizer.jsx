@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem495Visualizer.css'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -37,10 +37,10 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamples('teemo-attacking') || [
+const EXAMPLES = getExamplesOr('teemo-attacking', [
   { label: 'Example 1', timeSeries: [1,4], duration: 2 },
   { label: 'Example 2', timeSeries: [1,2], duration: 2 },
-]
+])
 
 function generateSteps(timeSeries, duration) {
   const steps = []

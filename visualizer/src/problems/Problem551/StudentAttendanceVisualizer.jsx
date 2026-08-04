@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './StudentAttendanceVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -216,7 +216,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 }
 
 export default function StudentAttendanceVisualizer() {
-  const examples = useMemo(() => getExamples('student-attendance') || [], [])
+  const examples = useMemo(() => getExamplesOr('student-attendance', []), [])
   const [record, setRecord] = useState('PPALLP')
 
   const steps = useMemo(() => generateSteps(record), [record])

@@ -8,7 +8,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem427Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -20,9 +20,9 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 
 
 
-const EXAMPLES = getExamples('expression-tree-from-tokens') || [
+const EXAMPLES = getExamplesOr('expression-tree-from-tokens', [
   { label: 'Example 1', tokens: ['2', '1', '+', '3', '*'] },
-]
+])
 
 const isOp = (t) => t === '+' || t === '-' || t === '*' || t === '/'
 

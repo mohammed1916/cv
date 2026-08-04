@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './SplitStringsVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -345,7 +345,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 }
 
 export default function SplitStringsVisualizer() {
-  const examples = useMemo(() => getExamples('split-strings') || [], [])
+  const examples = useMemo(() => getExamplesOr('split-strings', []), [])
   const [strsInput, setStrsInput] = useState('["ab1de","xyz"]')
 
   const { strs, inputError } = useMemo(() => {

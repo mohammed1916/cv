@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Base7Visualizer.css'
 
 const SOLUTION_CODE = [
@@ -236,7 +236,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 }
 
 export default function Base7Visualizer() {
-  const examples = useMemo(() => getExamples('base-7') || [], [])
+  const examples = useMemo(() => getExamplesOr('base-7', []), [])
   const [numInput, setNumInput] = useState('100')
 
   const steps = useMemo(() => generateSteps(numInput), [numInput])

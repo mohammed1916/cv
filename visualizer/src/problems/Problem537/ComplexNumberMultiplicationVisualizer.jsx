@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './ComplexNumberMultiplicationVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -248,7 +248,7 @@ function VisualizationPanel({ num1, num2, step, applyExample, examples }) {
 }
 
 export default function ComplexNumberMultiplicationVisualizer() {
-  const examples = useMemo(() => getExamples('complex-number-multiplication') || [], [])
+  const examples = useMemo(() => getExamplesOr('complex-number-multiplication', []), [])
   const [num1, setNum1] = useState('1+1i')
   const [num2, setNum2] = useState('1+1i')
 

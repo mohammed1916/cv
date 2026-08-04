@@ -9,7 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -47,11 +47,11 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('can-i-win') || [
+const EXAMPLES = getExamplesOr('can-i-win', [
   { label: 'Example 1', maxChoosable: 10, desiredTotal: 40, expected: true },
   { label: 'Example 2', maxChoosable: 10, desiredTotal: 1, expected: true },
   { label: 'Example 3', maxChoosable: 4, desiredTotal: 6, expected: true },
-]
+])
 
 const SNIPPETS = [
   { id: 'check', label: 'Check Cases', lines: [2, 3, 4] },

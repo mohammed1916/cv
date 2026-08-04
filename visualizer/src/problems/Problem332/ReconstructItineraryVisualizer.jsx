@@ -5,7 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './ReconstructItineraryVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -41,7 +41,7 @@ const DEFAULT_EXAMPLES = [
   },
 ]
 
-const REGISTRY_EXAMPLES = getExamples('reconstruct-itinerary') || []
+const REGISTRY_EXAMPLES = getExamplesOr('reconstruct-itinerary', [])
 const EXAMPLES = REGISTRY_EXAMPLES.length > 0 ? REGISTRY_EXAMPLES : DEFAULT_EXAMPLES
 
 const cloneGraph = (g) => {

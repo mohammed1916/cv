@@ -5,7 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './SelfCrossingVisualizer.css'
 
 // LeetCode 335. Self Crossing — classic O(n) three-case comparison.
@@ -264,7 +264,7 @@ function exampleToArray(ex) {
   return []
 }
 
-const REGISTERED = getExamples('self-crossing') || []
+const REGISTERED = getExamplesOr('self-crossing', [])
 const EXAMPLES = REGISTERED.length > 0 ? REGISTERED : DEFAULT_EXAMPLES
 
 const W = 420

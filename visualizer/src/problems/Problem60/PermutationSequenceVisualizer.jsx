@@ -8,7 +8,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import './PermutationSequenceVisualizer.css'
@@ -178,12 +178,12 @@ function generateSteps(n, k) {
     return steps
 }
 
-const EXAMPLES = getExamples('permutation-sequence') || [
+const EXAMPLES = getExamplesOr('permutation-sequence', [
     { label: 'n=3, k=3', n: 3, k: 3 },
     { label: 'n=4, k=9', n: 4, k: 9 },
     { label: 'n=3, k=1', n: 3, k: 1 },
     { label: 'n=3, k=6', n: 3, k: 6 },
-]
+])
 
 function VisualizationPanel({ n, k, step, handleReset, example, applyExample }) {
     const maxPerms = Array.from({ length: n }, (_, i) => i + 1).reduce((a, b) => a * b, 1)

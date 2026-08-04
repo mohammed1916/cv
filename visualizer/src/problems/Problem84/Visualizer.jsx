@@ -8,7 +8,7 @@ import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './LargestRectangleInHistogramVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -126,11 +126,11 @@ function generateSteps(heights) {
   return steps
 }
 
-const EXAMPLES = getExamples('largest-rectangle-in-histogram') || [
+const EXAMPLES = getExamplesOr('largest-rectangle-in-histogram', [
   { label: '[2,1,5,6,2,3]', heights: [2, 1, 5, 6, 2, 3] },
   { label: '[2,4]', heights: [2, 4] },
   { label: '[0,9]', heights: [0, 9] },
-]
+])
 
 function HistogramVisualization({ step, heights, inputError, input, setInput, handleReset, applyExample }) {
   return (

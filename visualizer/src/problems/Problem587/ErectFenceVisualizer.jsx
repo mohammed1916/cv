@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './ErectFenceVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -428,7 +428,7 @@ function VisualizationPanel({ points, hull, step, applyExample, examples }) {
 }
 
 export default function ErectFenceVisualizer() {
-  const examples = useMemo(() => getExamples('erect-fence') || [], [])
+  const examples = useMemo(() => getExamplesOr('erect-fence', []), [])
   const [pointsInput, setPointsInput] = useState('[[1,1],[2,2],[2,0],[2,4],[3,3],[4,2]]')
 
   // Parse points from input

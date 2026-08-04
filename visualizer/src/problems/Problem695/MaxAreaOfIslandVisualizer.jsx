@@ -8,7 +8,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './MaxAreaOfIsland.css'
 
 const SOLUTION_CODE = [
@@ -188,7 +188,7 @@ function generateSteps(grid) {
   return steps
 }
 
-const EXAMPLES = getExamples('max-area-of-island') || [
+const EXAMPLES = getExamplesOr('max-area-of-island', [
   {
     label: 'Basic',
     gridStr: '[[1,1,0,0,0],[1,1,0,0,0],[0,0,1,0,0],[0,0,0,1,1]]',
@@ -201,7 +201,7 @@ const EXAMPLES = getExamples('max-area-of-island') || [
     label: 'Sparse',
     gridStr: '[[0,0,0],[0,1,0],[0,0,0]]',
   },
-]
+])
 
 const ISLAND_COLORS = [
   '#3b82f6',

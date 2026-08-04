@@ -5,7 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './LongestSubstringwithAtMostKDistinctCharactersVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -142,7 +142,7 @@ function generateSteps(s, k) {
   return steps
 }
 
-const REGISTRY_EXAMPLES = getExamples('longest-substring-k-distinct') || []
+const REGISTRY_EXAMPLES = getExamplesOr('longest-substring-k-distinct', [])
 const EXAMPLES =
   REGISTRY_EXAMPLES.length > 0
     ? REGISTRY_EXAMPLES

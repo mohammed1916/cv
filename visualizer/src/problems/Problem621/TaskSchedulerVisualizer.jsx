@@ -8,7 +8,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './TaskSchedulerVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -22,11 +22,11 @@ const SOLUTION_CODE = [
     { line: 8, text: '    return max(len(tasks), formula_result)' },
 ]
 
-const EXAMPLES = getExamples('task-scheduler') || [
+const EXAMPLES = getExamplesOr('task-scheduler', [
     { label: 'Example 1', tasks: ['A', 'A', 'A', 'B', 'B', 'B'], n: 2 },
     { label: 'Example 2', tasks: ['A', 'A', 'A', 'B', 'B', 'B', 'C', 'C', 'C'], n: 3 },
     { label: 'Example 3', tasks: ['A', 'B', 'C', 'D', 'E'], n: 2 },
-]
+])
 
 function generateSteps(tasks, n) {
     const steps = []

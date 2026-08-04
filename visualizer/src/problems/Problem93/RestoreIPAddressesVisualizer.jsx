@@ -6,7 +6,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './RestoreIPAddressesVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
@@ -280,12 +280,12 @@ function generateSteps(s) {
   return steps
 }
 
-const EXAMPLES = getExamples('restore-ip-addresses') || [
+const EXAMPLES = getExamplesOr('restore-ip-addresses', [
   { label: '101023', s: '101023' },
   { label: '0000', s: '0000' },
   { label: '1111', s: '1111' },
   { label: '25525511135', s: '25525511135' },
-]
+])
 
 export default function RestoreIPAddressesVisualizer() {
   const [input, setInput] = useState('25525511135')

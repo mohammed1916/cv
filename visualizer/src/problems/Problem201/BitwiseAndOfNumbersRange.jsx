@@ -7,7 +7,7 @@ import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './BitwiseAndOfNumbersRange.css'
 
 const SOLUTION_CODE = [
@@ -43,7 +43,7 @@ function generateSteps(input) {
   return steps
 }
 
-const EXAMPLES = getExamples('bitwise-and-of-numbers-range') || []
+const EXAMPLES = getExamplesOr('bitwise-and-of-numbers-range', [])
 
 export default function BitwiseAndOfNumbersRange() {
   const [input, setInput] = useState('[1, 2, 3]')

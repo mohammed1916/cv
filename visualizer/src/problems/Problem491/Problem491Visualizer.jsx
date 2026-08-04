@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem491Visualizer.css'
 import PatternOverlay from "../../components/PatternOverlay";
 
@@ -62,10 +62,10 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamples('increasing-subsequences') || [
+const EXAMPLES = getExamplesOr('increasing-subsequences', [
   { label: 'Example 1', nums: [4, 6, 7, 7] },
   { label: 'Example 2', nums: [4, 4, 3, 2, 1] },
-]
+])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def findIncreasingSubsequences(nums):' },

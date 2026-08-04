@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem499Visualizer.css'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -46,9 +46,9 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamples('the-maze-iii') || [
+const EXAMPLES = getExamplesOr('the-maze-iii', [
   { label: 'Example', maze: [[0,0,0,0,0],[1,1,0,0,1],[0,0,0,0,0],[0,1,0,0,1],[0,1,0,0,0]], ball: [4,3], hole: [0,1] },
-]
+])
 
 const DIRS = [[-1, 0, 'u'], [0, -1, 'l'], [0, 1, 'r'], [1, 0, 'd']]
 

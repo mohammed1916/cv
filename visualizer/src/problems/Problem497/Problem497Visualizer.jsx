@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem497Visualizer.css'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -46,9 +46,9 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamples('random-point-in-non-overlapping-rectangles') || [
+const EXAMPLES = getExamplesOr('random-point-in-non-overlapping-rectangles', [
   { label: 'Example', rects: [[-2, -2, -1, -1], [1, 0, 3, 0]] },
-]
+])
 
 // Deterministic PRNG so the traced samples are stable across re-renders.
 function mulberry32(seed) {

@@ -8,7 +8,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem369Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -20,10 +20,10 @@ const SOLUTION_CODE = getSolutionCode('plus-one-linked-list')
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []
 
-const EXAMPLES = getExamples('plus-one-linked-list') || [
+const EXAMPLES = getExamplesOr('plus-one-linked-list', [
   { label: 'Example 1: 999→1000', values: [9, 9, 9] },
   { label: 'Example 2: 123→124', values: [1, 2, 3] },
-]
+])
 
 // Build linked list from array of values
 function buildList(values) {

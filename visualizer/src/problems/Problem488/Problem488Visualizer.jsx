@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem488Visualizer.css'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -37,11 +37,11 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamples('zuma-game') || [
+const EXAMPLES = getExamplesOr('zuma-game', [
   { label: 'Example 1', board: 'WWWWW', hand: 'W' },
   { label: 'Example 2', board: 'WRRBBW', hand: 'RB' },
   { label: 'Example 3', board: 'WBWBW', hand: 'WB' },
-]
+])
 
 function generateSteps(board, hand) {
   const steps = []

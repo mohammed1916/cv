@@ -9,7 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -38,11 +38,11 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('sort-characters-by-frequency') || [
+const EXAMPLES = getExamplesOr('sort-characters-by-frequency', [
   { label: 'Example 1', s: 'tree', expected: 'eert' },
   { label: 'Example 2', s: 'cccaabb', expected: 'cccaabb' },
   { label: 'Example 3', s: 'aabbccdd', expected: 'aabbccdd' },
-]
+])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [1, 2] },

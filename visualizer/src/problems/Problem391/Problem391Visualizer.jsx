@@ -7,7 +7,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const PATTERNS = ['calculate_expected', 'check_area', 'check_overlap', 'done', 'init', 'process_rect']
@@ -144,11 +144,11 @@ function generateSteps(rectangles) {
   return steps
 }
 
-const EXAMPLES = getExamples('perfect-rectangles') || [
+const EXAMPLES = getExamplesOr('perfect-rectangles', [
   { label: 'Example 1', rectangles: [[1,1,3,3],[2,0,3,1]] },
   { label: 'Example 2', rectangles: [[1,1,2,3],[1,3,2,4],[3,1,4,2],[3,2,4,4]] },
   { label: 'Example 3', rectangles: [[1,1,3,3],[2,0,3,2]] },
-]
+])
 
 export default function Problem391Visualizer() {
   const [rectanglesInput, setRectanglesInput] = useState('[[1,1,3,3],[2,0,3,1]]')

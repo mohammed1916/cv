@@ -9,7 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -37,11 +37,11 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('hamming-distance') || [
+const EXAMPLES = getExamplesOr('hamming-distance', [
   { label: 'Example 1', x: 1, y: 4, expected: 2 },
   { label: 'Example 2', x: 3, y: 1, expected: 1 },
   { label: 'Example 3', x: 15, y: 8, expected: 2 },
-]
+])
 
 const SNIPPETS = [
   { id: 'xor', label: 'XOR', lines: [2] },

@@ -5,7 +5,7 @@ import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './CombinationSumIIVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
@@ -198,7 +198,7 @@ function generateSteps(candidates, target) {
   return steps
 }
 
-const EXAMPLES = getExamples('combination-sum-ii') || [
+const EXAMPLES = getExamplesOr('combination-sum-ii', [
   {
     label: 'Classic',
     candidates: [10, 1, 2, 7, 6, 1, 5],
@@ -219,7 +219,7 @@ const EXAMPLES = getExamples('combination-sum-ii') || [
     candidates: [1, 1, 2, 5, 6, 7, 10],
     target: 8
   }
-]
+])
 
 function RecursionTreeNode({ nodeKey, treeNodes, activeKey, currentStepIndex, linePrefix = "", childBasePrefix = "" }) {
   const node = treeNodes.get(nodeKey)

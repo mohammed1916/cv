@@ -8,7 +8,7 @@ import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './CumulativeSalaryVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
@@ -162,7 +162,7 @@ function generateSteps(employees) {
   return steps
 }
 
-const EXAMPLES = getExamples('cumulative-salary') || [
+const EXAMPLES = getExamplesOr('cumulative-salary', [
   {
     label: 'Example 1',
     employees: [
@@ -181,7 +181,7 @@ const EXAMPLES = getExamples('cumulative-salary') || [
       { id: 2, month: 1, salary: 6000 },
     ],
   },
-]
+])
 
 export default function CumulativeSalaryVisualizer() {
   const [employeesInput, setEmployeesInput] = useState(

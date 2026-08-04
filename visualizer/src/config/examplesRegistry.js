@@ -7210,6 +7210,24 @@ export function getExamples(problemSlug) {
 }
 
 /**
+ * Get examples for a problem, falling back to a local list when the registry
+ * has no entry.
+ *
+ * Prefer this over `getExamples(slug) || [...]`: getExamples returns an empty
+ * array for unknown slugs, and `[]` is truthy, so the `||` fallback never fires
+ * and `EXAMPLES[0]` ends up undefined — which crashes any visualizer that reads
+ * `EXAMPLES[0].field` while initialising state.
+ *
+ * @param {string} problemSlug - The problem slug in kebab-case
+ * @param {Array} fallback - Examples to use when the registry has none
+ * @returns {Array} Registry examples if any, otherwise `fallback`
+ */
+export function getExamplesOr(problemSlug, fallback) {
+  const examples = EXAMPLES_REGISTRY[problemSlug]
+  return examples && examples.length ? examples : fallback
+}
+
+/**
  * Get all available problem slugs
  * @returns {Array<string>} Array of all problem slugs
  */

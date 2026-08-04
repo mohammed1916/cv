@@ -5,7 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import {
   buildTree,
   buildEdges,
@@ -155,7 +155,7 @@ function generateSteps(treeArray) {
   return steps
 }
 
-const REGISTRY_EXAMPLES = getExamples('house-robber-iii') || []
+const REGISTRY_EXAMPLES = getExamplesOr('house-robber-iii', [])
 const DEFAULT_EXAMPLES = [
   { label: 'Example 1 (=7)', inputs: [3, 2, 3, null, 3, null, 1] },
   { label: 'Example 2 (=9)', inputs: [3, 4, 5, 1, 3, null, 1] },

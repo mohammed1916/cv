@@ -8,7 +8,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
-import { getExamples } from "../../config/examplesRegistry"
+import { getExamplesOr } from "../../config/examplesRegistry"
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend";
 import "./LongestValidParenthesesVisualizer.css";
@@ -149,13 +149,13 @@ function generateSteps(s) {
   return steps;
 }
 
-const EXAMPLES = getExamples("longest-valid-parentheses") || [
+const EXAMPLES = getExamplesOr("longest-valid-parentheses", [
   { label: "Simple", s: "()" },
   { label: "Complex", s: ")()())" },
   { label: "Nested", s: "(())" },
   { label: "Multiple", s: "()(())" },
   { label: "Invalid Start", s: "()(()" },
-];
+]);
 
 export default function LongestValidParenthesesVisualizer() {
   const [input, setInput] = useState('")()())"');

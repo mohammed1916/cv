@@ -7,7 +7,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './BinaryTreeZigzagLevelOrderTraversalVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -17,11 +17,11 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = getExamples('binary-tree-zigzag-level-order-traversal') || [
+const EXAMPLES = getExamplesOr('binary-tree-zigzag-level-order-traversal', [
   { label: 'Example 1', root: [3, 9, 20, null, null, 15, 7] },
   { label: 'Example 2', root: [1] },
   { label: 'Example 3', root: [] },
-]
+])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def zigzagLevelOrder(root):' },

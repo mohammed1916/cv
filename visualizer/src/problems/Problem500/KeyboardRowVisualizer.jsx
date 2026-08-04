@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './KeyboardRowVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -262,7 +262,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 }
 
 export default function KeyboardRowVisualizer() {
-  const examples = useMemo(() => getExamples('keyboard-row') || [], [])
+  const examples = useMemo(() => getExamplesOr('keyboard-row', []), [])
   const [wordsInput, setWordsInput] = useState('["Hello","Alaska","Dad","Peace"]')
 
   const { words, inputError } = useMemo(() => {

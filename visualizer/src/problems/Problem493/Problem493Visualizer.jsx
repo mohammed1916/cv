@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem493Visualizer.css'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -55,10 +55,10 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamples('reverse-pairs') || [
+const EXAMPLES = getExamplesOr('reverse-pairs', [
   { label: 'Example 1', nums: [1, 2, 3, 4, 5] },
   { label: 'Example 2', nums: [40, 26, 26, 2, 6, 4, 85] },
-]
+])
 
 function generateSteps(nums) {
   const steps = []

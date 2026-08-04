@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem498Visualizer.css'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -37,9 +37,9 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamples('diagonal-traverse') || [
+const EXAMPLES = getExamplesOr('diagonal-traverse', [
   { label: 'Example', mat: [[1,2,3],[4,5,6],[7,8,9]] },
-]
+])
 
 function generateSteps(mat) {
   const steps = []

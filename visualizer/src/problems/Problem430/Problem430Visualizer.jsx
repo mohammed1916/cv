@@ -8,7 +8,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem430Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -18,9 +18,9 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 
 
 
-const EXAMPLES = getExamples('flatten-multilevel-dll') || [
+const EXAMPLES = getExamplesOr('flatten-multilevel-dll', [
   { label: 'Example 1', structure: '1->2->3->null with child [7->null] at 3' },
-]
+])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def flatten(head):' },

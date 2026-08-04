@@ -9,7 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import './Problem358.css'
@@ -48,11 +48,11 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('rearrange-string-k-distance-apart') || [
+const EXAMPLES = getExamplesOr('rearrange-string-k-distance-apart', [
   { label: 'Example 1', s: 'ABABAB', k: 2 },
   { label: 'Example 2', s: 'AAABBBCCD', k: 2 },
   { label: 'Example 3', s: 'A', k: 0 },
-]
+])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [3, 4, 5, 6, 7, 8, 9, 10] },

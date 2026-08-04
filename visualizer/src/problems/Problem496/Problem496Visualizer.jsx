@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem496Visualizer.css'
 import PatternOverlay from "../../components/PatternOverlay";
 
@@ -59,10 +59,10 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamples('next-greater-element-i') || [
+const EXAMPLES = getExamplesOr('next-greater-element-i', [
   { label: 'Example 1', nums1: [4, 1, 2], nums2: [1, 3, 4, 2] },
   { label: 'Example 2', nums1: [2, 4], nums2: [1, 2, 3, 4] },
-]
+])
 
 function generateSteps(nums1, nums2) {
   const steps = []

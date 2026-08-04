@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './ShortestWordDistanceVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -380,7 +380,7 @@ function VisualizationPanel({ step, words, word1, word2, applyExample, examples 
 }
 
 export default function ShortestWordDistanceVisualizer() {
-  const examples = useMemo(() => getExamples('shortest-distance-ii') || [], [])
+  const examples = useMemo(() => getExamplesOr('shortest-distance-ii', []), [])
   const [wordsInput, setWordsInput] = useState('["practice","can","do","coding","now"]')
   const [word1, setWord1] = useState('practice')
   const [word2, setWord2] = useState('now')

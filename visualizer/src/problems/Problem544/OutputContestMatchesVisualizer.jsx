@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './OutputContestMatchesVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -210,7 +210,7 @@ function VisualizationPanel({ n, step, applyExample, examples }) {
 }
 
 export default function OutputContestMatchesVisualizer() {
-  const examples = useMemo(() => getExamples('output-contest-matches') || [], [])
+  const examples = useMemo(() => getExamplesOr('output-contest-matches', []), [])
   const [nValue, setNValue] = useState(2)
 
   const steps = useMemo(() => generateSteps(nValue), [nValue])

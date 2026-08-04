@@ -7,7 +7,7 @@ import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './DeleteNodeInALinkedList.css'
 
 const SOLUTION_CODE = [
@@ -43,7 +43,7 @@ function generateSteps(input) {
   return steps
 }
 
-const EXAMPLES = getExamples('delete-node-in-a-linked-list') || []
+const EXAMPLES = getExamplesOr('delete-node-in-a-linked-list', [])
 
 export default function DeleteNodeInALinkedList() {
   const [input, setInput] = useState('[1, 2, 3]')

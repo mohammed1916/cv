@@ -8,7 +8,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem477Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -16,10 +16,10 @@ import PatternOverlay from "../../components/PatternOverlay";
 
 const PATTERNS = []
 
-const EXAMPLES = getExamples('total-hamming-distance') || [
+const EXAMPLES = getExamplesOr('total-hamming-distance', [
   { label: 'Example 1', nums: [4, 14, 2] },
   { label: 'Example 2', nums: [1, 3, 5] },
-]
+])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def totalHammingDistance(nums):' },

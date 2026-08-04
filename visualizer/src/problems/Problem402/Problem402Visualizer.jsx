@@ -7,7 +7,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const PATTERNS = ['done', 'error', 'init', 'init_stack', 'loop_done', 'pop', 'process', 'push', 'trim_end', 'trim_zeros']
@@ -207,11 +207,11 @@ function generateSteps(numStr, kStr) {
   return steps
 }
 
-const EXAMPLES = getExamples('remove-k-digits') || [
+const EXAMPLES = getExamplesOr('remove-k-digits', [
   { label: 'Example 1', num: '1432219', k: '3' },
   { label: 'Example 2', num: '10200', k: '1' },
   { label: 'Example 3', num: '112', k: '1' },
-]
+])
 
 export default function Problem402Visualizer() {
   const [numInput, setNumInput] = useState('1432219')

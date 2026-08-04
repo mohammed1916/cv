@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './ArrayNestingVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -379,7 +379,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 }
 
 export default function ArrayNestingVisualizer() {
-  const examples = useMemo(() => getExamples('array-nesting') || [], [])
+  const examples = useMemo(() => getExamplesOr('array-nesting', []), [])
   const [arrayInput, setArrayInput] = useState('[5,4,0,3,1,6,2]')
 
   const { array, inputError } = useMemo(() => {

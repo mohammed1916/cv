@@ -9,7 +9,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './ConstructBinaryTreeFromInorderAndPostorderTraversalVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -18,10 +18,10 @@ import PatternLegend from '../../components/PatternLegend'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = getExamples('construct-binary-tree-from-inorder-and-postorder-traversal') || [
+const EXAMPLES = getExamplesOr('construct-binary-tree-from-inorder-and-postorder-traversal', [
   { label: 'Example 1', inorder: [9, 3, 15, 20, 7], postorder: [9, 15, 7, 20, 3] },
   { label: 'Example 2', inorder: [1], postorder: [1] },
-]
+])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def buildTree(inorder, postorder):' },

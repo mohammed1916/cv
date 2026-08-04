@@ -14,7 +14,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './RegularExpressionMatchingVisualizer.css'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('regular-expression-matching')
@@ -213,7 +213,7 @@ function generateSteps(s, p) {
   return steps
 }
 
-const EXAMPLES = getExamples('regular-expression-matching') || [
+const EXAMPLES = getExamplesOr('regular-expression-matching', [
   { label: '"a", "a"', s: 'a', p: 'a' },
   { label: '"aa", "a"', s: 'aa', p: 'a' },
   { label: '"aa", "."', s: 'aa', p: '.' },
@@ -221,7 +221,7 @@ const EXAMPLES = getExamples('regular-expression-matching') || [
   { label: '"ab", ".*"', s: 'ab', p: '.*' },
   { label: '"aab", "c*a*b"', s: 'aab', p: 'c*a*b' },
   { label: '"mississippi", "mis*is*p*."', s: 'mississippi', p: 'mis*is*p*.' },
-]
+])
 
 function VariablesPanel({ step, s, p }) {
   return (

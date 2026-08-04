@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './LongestLineVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -521,7 +521,7 @@ function VisualizationPanel({
 }
 
 export default function LongestLineVisualizer() {
-  const examples = useMemo(() => getExamples('longest-line') || [], [])
+  const examples = useMemo(() => getExamplesOr('longest-line', []), [])
   const [matrixInput, setMatrixInput] = useState('[[1,1,0],[0,1,1],[1,0,1]]')
 
   const { matrix, inputError } = useMemo(() => {

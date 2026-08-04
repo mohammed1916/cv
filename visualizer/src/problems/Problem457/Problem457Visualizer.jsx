@@ -9,7 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -47,11 +47,11 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('circular-array-loop') || [
+const EXAMPLES = getExamplesOr('circular-array-loop', [
   { label: 'Example 1', nums: [2, -1, 1, 2, 2], expected: true },
   { label: 'Example 2', nums: [-2, 1, -1, -2, -2], expected: false },
   { label: 'Example 3', nums: [1, 1, 1, 1, 1], expected: true },
-]
+])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [2, 3] },

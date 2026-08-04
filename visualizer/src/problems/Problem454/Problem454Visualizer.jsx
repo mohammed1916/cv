@@ -9,7 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -43,11 +43,11 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('4sum-ii') || [
+const EXAMPLES = getExamplesOr('4sum-ii', [
   { label: 'Example 1', nums1: [1, 2], nums2: [-2, -1], nums3: [-1, 2], nums4: [0, 2], expected: 2 },
   { label: 'Example 2', nums1: [0], nums2: [0], nums3: [0], nums4: [0], expected: 1 },
   { label: 'Example 3', nums1: [1, 0], nums2: [1, 0], nums3: [-1, 0], nums4: [0, 1], expected: 5 },
-]
+])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [1, 2] },

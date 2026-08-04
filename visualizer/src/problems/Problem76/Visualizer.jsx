@@ -9,7 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './MinimumWindowSubstring.css'
 
 const SOLUTION_CODE = [
@@ -39,11 +39,11 @@ const SOLUTION_CODE = [
   { line: 24, text: '    return s[best[0]:best[1]+1] if best else ""' },
 ]
 
-const EXAMPLES = getExamples('minimum-window-substring') || [
+const EXAMPLES = getExamplesOr('minimum-window-substring', [
   { label: 'Example 1', s: 'ADOBECODEBANC', t: 'ABC' },
   { label: 'Example 2', s: 'a', t: 'a' },
   { label: 'Example 3', s: 'a', t: 'aa' },
-]
+])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [4, 5, 6, 7, 8, 9, 10] },

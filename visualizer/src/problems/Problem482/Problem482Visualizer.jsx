@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem482Visualizer.css'
 import PatternOverlay from "../../components/PatternOverlay";
 
@@ -53,10 +53,10 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamples('license-key-formatting') || [
+const EXAMPLES = getExamplesOr('license-key-formatting', [
   { label: 'Example 1', s: '5F3Z-2e-9-w', k: 4 },
   { label: 'Example 2', s: '2-4A0r-4k', k: 4 },
-]
+])
 
 function generateSteps(s, k) {
   const steps = []

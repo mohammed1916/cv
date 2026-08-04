@@ -9,7 +9,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './DivideTwoIntegers.css'
 
 const SOLUTION_CODE = [
@@ -45,7 +45,7 @@ function generateSteps(input) {
   return steps
 }
 
-const EXAMPLES = getExamples('divide-two-integers') || []
+const EXAMPLES = getExamplesOr('divide-two-integers', [])
 
 export default function DivideTwoIntegers() {
   const [input, setInput] = useState('[1, 2, 3]')

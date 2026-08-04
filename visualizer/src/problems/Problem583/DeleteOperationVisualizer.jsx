@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './DeleteOperationVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -320,7 +320,7 @@ function VisualizationPanel({ step, s1, s2, applyExample, examples, inputError }
 }
 
 export default function DeleteOperationVisualizer() {
-  const examples = useMemo(() => getExamples('delete-operation') || [], [])
+  const examples = useMemo(() => getExamplesOr('delete-operation', []), [])
   const [s1Input, setS1Input] = useState('"sea"')
   const [s2Input, setS2Input] = useState('"eat"')
 

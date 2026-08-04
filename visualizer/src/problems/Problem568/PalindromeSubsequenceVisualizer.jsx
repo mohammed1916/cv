@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './PalindromeSubsequenceVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -403,13 +403,13 @@ function VisualizationPanel({ step, applyExample, examples }) {
 export default function PalindromeSubsequenceVisualizer() {
   const examples = useMemo(
     () =>
-      getExamples('palindrome-subsequence') || [
+      getExamplesOr('palindrome-subsequence', [
         { label: 'bbbab', s: 'bbbab' },
         { label: 'cbbd', s: 'cbbd' },
         { label: 'a', s: 'a' },
         { label: 'ac', s: 'ac' },
         { label: 'racecar', s: 'racecar' },
-      ],
+      ]),
     []
   )
 

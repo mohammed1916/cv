@@ -8,7 +8,7 @@ import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './CreateMaximumNumberVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
@@ -53,7 +53,7 @@ function generateSteps(input) {
   return steps
 }
 
-const EXAMPLES = getExamples('create-maximum-number') || []
+const EXAMPLES = getExamplesOr('create-maximum-number', [])
 
 export default function CreateMaximumNumberVisualizer() {
   const [inputValue, setInputValue] = useState(EXAMPLES.length > 0 ? JSON.stringify(EXAMPLES[0]) : '{}')

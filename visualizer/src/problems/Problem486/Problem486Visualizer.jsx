@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem486Visualizer.css'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -46,10 +46,10 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamples('predict-the-winner') || [
+const EXAMPLES = getExamplesOr('predict-the-winner', [
   { label: 'Example 1', nums: [1, 5, 233, 7] },
   { label: 'Example 2', nums: [12, 3, 1, 5, 6, 4] },
-]
+])
 
 function generateSteps(nums) {
   const steps = []

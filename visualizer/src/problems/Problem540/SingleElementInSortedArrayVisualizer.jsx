@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './SingleElementInSortedArrayVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -266,7 +266,7 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
 }
 
 export default function SingleElementInSortedArrayVisualizer() {
-  const examples = useMemo(() => getExamples('single-element-in-sorted-array') || [], [])
+  const examples = useMemo(() => getExamplesOr('single-element-in-sorted-array', []), [])
   const [numsInput, setNumsInput] = useState('[1,1,2,3,3,4,4,8,8]')
 
   const { nums, inputError } = useMemo(() => {

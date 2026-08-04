@@ -7,7 +7,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const PATTERNS = ['done', 'error', 'hour_bits', 'init', 'match_found']
@@ -121,11 +121,11 @@ function generateSteps(nStr) {
   return steps
 }
 
-const EXAMPLES = getExamples('binary-watch') || [
+const EXAMPLES = getExamplesOr('binary-watch', [
   { label: 'Example 1: n=1', n: '1' },
   { label: 'Example 2: n=0', n: '0' },
   { label: 'Example 3: n=3', n: '3' },
-]
+])
 
 export default function Problem401Visualizer() {
   const [nInput, setNInput] = useState('1')

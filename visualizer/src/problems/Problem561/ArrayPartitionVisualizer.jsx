@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './ArrayPartitionVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -316,7 +316,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 }
 
 export default function ArrayPartitionVisualizer() {
-  const examples = useMemo(() => getExamples('array-partition') || [], [])
+  const examples = useMemo(() => getExamplesOr('array-partition', []), [])
   const [arrayInput, setArrayInput] = useState('[1,4,3,2]')
 
   const { nums, inputError } = useMemo(() => {

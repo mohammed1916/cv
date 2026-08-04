@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem492Visualizer.css'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -37,11 +37,11 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamples('construct-the-rectangle') || [
+const EXAMPLES = getExamplesOr('construct-the-rectangle', [
   { label: 'Example 1', area: 8 },
   { label: 'Example 2', area: 37 },
   { label: 'Example 3', area: 122122 },
-]
+])
 
 function generateSteps(area) {
   const steps = []

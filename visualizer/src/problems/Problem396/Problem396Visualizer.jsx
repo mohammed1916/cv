@@ -7,7 +7,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const PATTERNS = []
@@ -187,11 +187,11 @@ function generateSteps(numsStr) {
   }
 }
 
-const EXAMPLES = getExamples('rotate-function') || [
+const EXAMPLES = getExamplesOr('rotate-function', [
   { label: 'Example 1', nums: '1,2,3,4' },
   { label: 'Example 2', nums: '6,9,28,34,14' },
   { label: 'Example 3', nums: '100,200,300' },
-]
+])
 
 export default function Problem396Visualizer() {
   const [numsInput, setNumsInput] = useState('1,2,3,4')

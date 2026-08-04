@@ -7,7 +7,7 @@ import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './ImplementQueueUsingStacks.css'
 
 const SOLUTION_CODE = [
@@ -43,7 +43,7 @@ function generateSteps(input) {
   return steps
 }
 
-const EXAMPLES = getExamples('implement-queue-using-stacks') || []
+const EXAMPLES = getExamplesOr('implement-queue-using-stacks', [])
 
 export default function ImplementQueueUsingStacks() {
   const [input, setInput] = useState('[1, 2, 3]')

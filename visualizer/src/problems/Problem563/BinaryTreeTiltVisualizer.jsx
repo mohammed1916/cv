@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput, TreeSVG } from '../../components/treeUtils'
 import './BinaryTreeTiltVisualizer.css'
 
@@ -283,7 +283,7 @@ function VisualizationPanel({ step, positions, nodes, applyExample, examples }) 
 }
 
 export default function BinaryTreeTiltVisualizer() {
-  const examples = useMemo(() => getExamples('binary-tree-tilt') || [], [])
+  const examples = useMemo(() => getExamplesOr('binary-tree-tilt', []), [])
   const [arrInput, setArrInput] = useState('[1,0,1]')
 
   const { arr, inputError } = useMemo(() => {

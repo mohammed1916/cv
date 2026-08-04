@@ -5,7 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './NestedListWeightSumVisualizer.css'
 
 const P = 'nested-list-weight-sum'
@@ -187,7 +187,7 @@ function renderNode(node, step) {
   )
 }
 
-const REGISTRY_EXAMPLES = getExamples('nested-list-weight-sum') || []
+const REGISTRY_EXAMPLES = getExamplesOr('nested-list-weight-sum', [])
 const FALLBACK_EXAMPLES = [
   { label: '[[1,1],2,[1,1]]  → 10', inputs: [[1, 1], 2, [1, 1]] },
   { label: '[1,[4,[6]]]  → 27', inputs: [1, [4, [6]]] },

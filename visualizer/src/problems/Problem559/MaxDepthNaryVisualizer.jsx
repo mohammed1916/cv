@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './MaxDepthNaryVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -456,7 +456,7 @@ function TreeVisualization({ root, nodeMap, step, canvasWidth = 400, canvasHeigh
 }
 
 export default function MaxDepthNaryVisualizer() {
-  const examples = useMemo(() => getExamples('max-depth-nary-tree') || [], [])
+  const examples = useMemo(() => getExamplesOr('max-depth-nary-tree', []), [])
   const [treeInput, setTreeInput] = useState('[1,[3,5,6],[2,4]]')
 
   const { tree, nodeMap, inputError } = useMemo(() => {

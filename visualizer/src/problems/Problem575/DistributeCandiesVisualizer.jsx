@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './DistributeCandiesVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -303,7 +303,7 @@ function VisualizationPanel({ step, applyExample, examples, candies }) {
 }
 
 export default function DistributeCandiesVisualizer() {
-  const examples = useMemo(() => getExamples('distribute-candies') || [], [])
+  const examples = useMemo(() => getExamplesOr('distribute-candies', []), [])
   const [candiesInput, setCandiesInput] = useState('[1,1,2,2,3,3]')
 
   const { candies, inputError } = useMemo(() => {

@@ -8,7 +8,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './RotateListVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -469,7 +469,7 @@ function RotateListState({ step, values }) {
 }
 
 export default function RotateListVisualizer() {
-  const examples = useMemo(() => getExamples('rotate-list') || [], [])
+  const examples = useMemo(() => getExamplesOr('rotate-list', []), [])
   const [valInput, setValInput] = useState('[1,2,3,4,5]')
   const [k, setK] = useState(2)
 

@@ -9,7 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem359.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -41,7 +41,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('logger-rate-limiter') || [
+const EXAMPLES = getExamplesOr('logger-rate-limiter', [
   {
     label: 'Example 1',
     requests: [
@@ -75,7 +75,7 @@ const EXAMPLES = getExamples('logger-rate-limiter') || [
     ],
     threshold: 10,
   },
-]
+])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [2, 3, 4] },

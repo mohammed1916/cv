@@ -7,7 +7,7 @@ import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './ValidParentheses.css'
 
 const SOLUTION_CODE = [
@@ -43,7 +43,7 @@ function generateSteps(input) {
   return steps
 }
 
-const EXAMPLES = getExamples('valid-parentheses') || []
+const EXAMPLES = getExamplesOr('valid-parentheses', [])
 
 export default function ValidParentheses() {
   const [input, setInput] = useState('[1, 2, 3]')

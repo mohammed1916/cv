@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './BrickWallVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -403,7 +403,7 @@ function VisualizationPanel({ step, applyExample, examples, wall }) {
 }
 
 export default function BrickWallVisualizer() {
-  const examples = useMemo(() => getExamples('brick-wall') || [], [])
+  const examples = useMemo(() => getExamplesOr('brick-wall', []), [])
   const [wallInput, setWallInput] = useState('[[1,1],[2],[1,1]]')
 
   const { wall, inputError } = useMemo(() => {

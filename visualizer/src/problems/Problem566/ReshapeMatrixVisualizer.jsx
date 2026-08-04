@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './ReshapeMatrixVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -443,7 +443,7 @@ function VisualizationPanel({ step }) {
 }
 
 export default function ReshapeMatrixVisualizer() {
-  const examples = useMemo(() => getExamples('reshape-matrix') || [], [])
+  const examples = useMemo(() => getExamplesOr('reshape-matrix', []), [])
   const [matrixInput, setMatrixInput] = useState('[[1,2,3,4]]')
   const [r, setR] = useState(2)
   const [c, setC] = useState(2)

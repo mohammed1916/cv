@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './ShortestUnsortedVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -345,7 +345,7 @@ function VisualizationPanel({ step, applyExample, examples, nums }) {
 }
 
 export default function ShortestUnsortedVisualizer() {
-  const examples = useMemo(() => getExamples('shortest-unsorted') || [], [])
+  const examples = useMemo(() => getExamplesOr('shortest-unsorted', []), [])
   const [arrayInput, setArrayInput] = useState('[1,2,4,5,3]')
 
   const { nums, inputError } = useMemo(() => {

@@ -9,7 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -36,11 +36,11 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('find-all-numbers-disappeared-in-array') || [
+const EXAMPLES = getExamplesOr('find-all-numbers-disappeared-in-array', [
   { label: 'Example 1', nums: [4, 3, 2, 7, 8, 2, 3, 1], expected: [5, 6] },
   { label: 'Example 2', nums: [1, 1], expected: [2] },
   { label: 'Example 3', nums: [1, 2, 3], expected: [] },
-]
+])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [1, 2, 3] },

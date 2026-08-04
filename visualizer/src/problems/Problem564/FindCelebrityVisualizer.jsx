@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './FindCelebrityVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -381,7 +381,7 @@ function VisualizationPanel({ step, applyExample, examples, n, knowsMatrix }) {
 }
 
 export default function FindCelebrityVisualizer() {
-  const examples = useMemo(() => getExamples('find-the-celebrity-564') || [], [])
+  const examples = useMemo(() => getExamplesOr('find-the-celebrity-564', []), [])
   const [n, setN] = useState(3)
   const [matrixInput, setMatrixInput] = useState('[[1,1,0],[0,1,0],[1,1,1]]')
 

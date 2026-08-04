@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './FindModeInBSTVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -252,7 +252,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 }
 
 export default function FindModeInBSTVisualizer() {
-  const examples = useMemo(() => getExamples('find-mode-bst') || [], [])
+  const examples = useMemo(() => getExamplesOr('find-mode-bst', []), [])
   const [treeInput, setTreeInput] = useState('[1,null,2,2]')
 
   const { tree, inputError } = useMemo(() => {

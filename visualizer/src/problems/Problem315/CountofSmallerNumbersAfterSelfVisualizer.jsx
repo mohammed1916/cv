@@ -7,7 +7,7 @@ import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './CountofSmallerNumbersAfterSelfVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -56,7 +56,7 @@ function generateSteps(input) {
   return steps
 }
 
-const EXAMPLES = getExamples('count-of-smaller-after-self') || []
+const EXAMPLES = getExamplesOr('count-of-smaller-after-self', [])
 
 export default function CountofSmallerNumbersAfterSelfVisualizer() {
   const [inputValue, setInputValue] = useState(EXAMPLES.length > 0 ? JSON.stringify(EXAMPLES[0]) : '{}')

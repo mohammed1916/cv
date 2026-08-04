@@ -9,7 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem366Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -233,11 +233,11 @@ function generateSteps(arr) {
     return steps
 }
 
-const EXAMPLES = getExamples('find-leaves-of-binary-tree') || [
+const EXAMPLES = getExamplesOr('find-leaves-of-binary-tree', [
     { label: 'Simple', arr: [1, 2, 3] },
     { label: 'Unbalanced', arr: [1, 2, null, 3, null, 4] },
     { label: 'Single Node', arr: [1] },
-]
+])
 
 function TreeVisualizationPanel({ step, positions, edges, allNodes, EXAMPLES, arrInput, setArrInput, applyExample, handleReset }) {
     return (

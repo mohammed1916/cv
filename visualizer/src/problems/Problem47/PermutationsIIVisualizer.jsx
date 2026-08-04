@@ -10,7 +10,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './PermutationsIIVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -273,7 +273,7 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
 }
 
 export default function PermutationsIIVisualizer() {
-  const examples = useMemo(() => getExamples('permutations-ii') || [], [])
+  const examples = useMemo(() => getExamplesOr('permutations-ii', []), [])
   const [numsInput, setNumsInput] = useState('[1,1,2]')
 
   const { nums, inputError } = useMemo(() => {

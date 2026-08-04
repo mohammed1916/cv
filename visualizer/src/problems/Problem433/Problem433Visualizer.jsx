@@ -8,7 +8,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem433Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -18,9 +18,9 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 
 
 
-const EXAMPLES = getExamples('minimum-genetic-mutation') || [
+const EXAMPLES = getExamplesOr('minimum-genetic-mutation', [
   { label: 'Example 1', start: 'AACCCCCC', end: 'AACCCCTA', bank: ['AACCCCTA'] },
-]
+])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def minMutation(start, end, bank):' },

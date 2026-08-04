@@ -5,7 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './IntegerBreakVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -109,7 +109,7 @@ function generateSteps(n) {
   return steps
 }
 
-const REGISTRY_EXAMPLES = getExamples('integer-break') || []
+const REGISTRY_EXAMPLES = getExamplesOr('integer-break', [])
 const DEFAULT_EXAMPLES = [
   { label: 'n = 2', n: 2 },
   { label: 'n = 4', n: 4 },

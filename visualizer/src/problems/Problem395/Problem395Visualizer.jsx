@@ -7,7 +7,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const PATTERNS = ['count', 'done', 'init', 'invalid', 'recurse', 'sub_invalid', 'sub_valid', 'valid']
@@ -133,11 +133,11 @@ function generateSteps(s, k) {
   return steps
 }
 
-const EXAMPLES = getExamples('longest-substring-k-repeating') || [
+const EXAMPLES = getExamplesOr('longest-substring-k-repeating', [
   { label: 'Example 1', s: 'aaab', k: 3 },
   { label: 'Example 2', s: 'ababbc', k: 2 },
   { label: 'Example 3', s: 'aaabccccaabbaac', k: 3 },
-]
+])
 
 export default function Problem395Visualizer() {
   const [sInput, setSInput] = useState('aaab')

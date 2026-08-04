@@ -5,7 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './VerifyPreorderSerializationofaBinaryTreeVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -162,7 +162,7 @@ function generateSteps(preorder) {
   return steps
 }
 
-const REGISTRY_EXAMPLES = getExamples('verify-preorder-serialization-tree') || []
+const REGISTRY_EXAMPLES = getExamplesOr('verify-preorder-serialization-tree', [])
 const FALLBACK_EXAMPLES = [
   { label: 'Valid tree', preorder: '9,3,4,#,#,1,#,#,2,#,6,#,#' },
   { label: 'Single node', preorder: '1,#,#' },

@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './OutOfBoundaryVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -442,7 +442,7 @@ function VisualizationPanel({ step, m, n, maxMove, startRow, startCol, applyExam
 }
 
 export default function OutOfBoundaryVisualizer() {
-  const examples = useMemo(() => getExamples('out-of-boundary') || [], [])
+  const examples = useMemo(() => getExamplesOr('out-of-boundary', []), [])
   const [m, setM] = useState(2)
   const [n, setN] = useState(2)
   const [maxMove, setMaxMove] = useState(2)

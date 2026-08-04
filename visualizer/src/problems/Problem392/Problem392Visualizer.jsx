@@ -7,7 +7,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const PATTERNS = ['done', 'found', 'increment', 'init', 'loop', 'match', 'no_match']
@@ -109,11 +109,11 @@ function generateSteps(s, t) {
   return steps
 }
 
-const EXAMPLES = getExamples('is-subsequence') || [
+const EXAMPLES = getExamplesOr('is-subsequence', [
   { label: 'Example 1', s: 'abc', t: 'ahbgdc' },
   { label: 'Example 2', s: 'axc', t: 'ahbgdc' },
   { label: 'Example 3', s: '', t: 'abc' },
-]
+])
 
 export default function Problem392Visualizer() {
   const [sInput, setSInput] = useState('abc')

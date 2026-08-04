@@ -9,7 +9,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './ConvertSortedListToBinarySearchTreeVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -18,11 +18,11 @@ import PatternLegend from '../../components/PatternLegend'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = getExamples('convert-sorted-list-to-binary-search-tree') || [
+const EXAMPLES = getExamplesOr('convert-sorted-list-to-binary-search-tree', [
   { label: 'Example 1', list: [1, 2, 3, 4, 5, 6] },
   { label: 'Example 2', list: [-10, -3, 0, 5, 9] },
   { label: 'Example 3', list: [] },
-]
+])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def sortedListToBST(head):' },

@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './HighestAnswerRateVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -318,7 +318,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 }
 
 export default function HighestAnswerRateVisualizer() {
-  const examples = useMemo(() => getExamples('highest-answer-rate') || [], [])
+  const examples = useMemo(() => getExamplesOr('highest-answer-rate', []), [])
   const [questionsInput, setQuestionsInput] = useState(JSON.stringify(DEFAULT_QUESTIONS))
   const [answersInput, setAnswersInput] = useState(JSON.stringify(DEFAULT_ANSWERS))
 

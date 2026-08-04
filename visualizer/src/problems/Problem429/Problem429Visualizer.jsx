@@ -8,7 +8,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem429Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -20,9 +20,9 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 
 
 
-const EXAMPLES = getExamples('nary-tree-level-order') || [
+const EXAMPLES = getExamplesOr('nary-tree-level-order', [
   { label: 'Example 1', root: [1, null, 3, 2, 4, null, 5, 6] },
-]
+])
 
 // Build an N-ary tree from LeetCode level-order-with-null-separators encoding.
 function buildTree(arr) {

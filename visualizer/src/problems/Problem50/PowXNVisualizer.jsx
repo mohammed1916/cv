@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './PowXNVisualizer.css'
 
 const POW_PATTERNS = ['base-case', 'recursion', 'multiplication']
@@ -29,11 +29,11 @@ const SOLUTION_CODE = [
   { line: 5, text: '    else: return half * half * x' },
 ]
 
-const EXAMPLES = getExamples('powx-n') || [
+const EXAMPLES = getExamplesOr('powx-n', [
   { label: '2^10', x: 2, n: 10 },
   { label: '2.1^3', x: 2.1, n: 3 },
   { label: '2^-2', x: 2, n: -2 },
-]
+])
 
 function generateSteps(x, n) {
   const steps = []

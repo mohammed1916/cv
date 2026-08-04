@@ -8,7 +8,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem426Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -20,9 +20,9 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 
 
 
-const EXAMPLES = getExamples('bst-to-doubly-linked-list') || [
+const EXAMPLES = getExamplesOr('bst-to-doubly-linked-list', [
   { label: 'Example 1', root: [4, 2, 6, 1, 3, 5, 7] },
-]
+])
 
 // Build a BST from level-order array (null = missing).
 function buildTree(arr) {

@@ -9,7 +9,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './BestTimeToBuyAndSellStockIIVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -18,11 +18,11 @@ import PatternLegend from '../../components/PatternLegend'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = getExamples('best-time-to-buy-and-sell-stock-ii') || [
+const EXAMPLES = getExamplesOr('best-time-to-buy-and-sell-stock-ii', [
   { label: 'Example 1', prices: [7, 1, 5, 3, 6, 4] },
   { label: 'Example 2', prices: [1, 2, 3, 4, 5] },
   { label: 'Example 3', prices: [7, 6, 4, 3, 1] },
-]
+])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def maxProfit(prices):' },

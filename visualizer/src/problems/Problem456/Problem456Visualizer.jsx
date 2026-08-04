@@ -9,7 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -50,11 +50,11 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('ugly-number-ii') || [
+const EXAMPLES = getExamplesOr('ugly-number-ii', [
   { label: 'Example 1', n: 10, expected: 12 },
   { label: 'Example 2', n: 1, expected: 1 },
   { label: 'Example 3', n: 15, expected: 24 },
-]
+])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [2, 3, 4, 5] },

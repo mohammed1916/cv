@@ -7,7 +7,7 @@ import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './NumberOfDigitOne.css'
 
 const SOLUTION_CODE = [
@@ -43,7 +43,7 @@ function generateSteps(input) {
   return steps
 }
 
-const EXAMPLES = getExamples('number-of-digit-one') || []
+const EXAMPLES = getExamplesOr('number-of-digit-one', [])
 
 export default function NumberOfDigitOne() {
   const [input, setInput] = useState('[1, 2, 3]')

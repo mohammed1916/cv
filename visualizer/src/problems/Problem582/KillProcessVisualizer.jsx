@@ -7,7 +7,7 @@ import { useParsedInput } from '../../hooks/useParsedInput'
 import { useApplyExample } from '../../hooks/useApplyExample'
 import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './KillProcessVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -185,7 +185,7 @@ function generateSteps(pid, ppid, kill_pid) {
   return steps
 }
 
-const EXAMPLES = getExamples('kill-process') || [
+const EXAMPLES = getExamplesOr('kill-process', [
   {
     label: 'Example 1',
     pid: [1, 3, 3, 3, 5, 6],
@@ -198,7 +198,7 @@ const EXAMPLES = getExamples('kill-process') || [
     ppid: [-1],
     kill: 1,
   },
-]
+])
 
 const SNIPPETS = [
   { id: 'init', label: 'Build Tree', lines: [2, 3, 4, 5] },

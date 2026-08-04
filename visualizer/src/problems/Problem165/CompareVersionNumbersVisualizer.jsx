@@ -7,7 +7,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './CompareVersionNumbersVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -17,10 +17,10 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = getExamples('compare-version-numbers') || [
+const EXAMPLES = getExamplesOr('compare-version-numbers', [
   { label: 'Example 1', version1: '1.0', version2: '1.0.0' },
   { label: 'Example 2', version1: '0.1', version2: '0.1.0' },
-]
+])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def compareVersion(v1, v2):' },

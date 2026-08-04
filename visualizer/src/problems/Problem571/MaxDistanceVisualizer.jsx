@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './MaxDistanceVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -346,7 +346,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 }
 
 export default function MaxDistanceVisualizer() {
-  const examples = useMemo(() => getExamples('max-distance') || [], [])
+  const examples = useMemo(() => getExamplesOr('max-distance', []), [])
   const [arrayInput, setArrayInput] = useState('[[1,2,3,4,5],[3,4,5,8],[1,7,8,9]]')
 
   const { arrays, inputError } = useMemo(() => {

@@ -5,7 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './FlattenNestedListIteratorVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -214,7 +214,7 @@ function renderNode(value, keyStr) {
   )
 }
 
-const REGISTRY_EXAMPLES = getExamples('flatten-nested-list-iterator') || []
+const REGISTRY_EXAMPLES = getExamplesOr('flatten-nested-list-iterator', [])
 const FALLBACK_EXAMPLES = [
   { label: '[[1,1],2,[1,1]]', inputs: [[1, 1], 2, [1, 1]] },
   { label: '[1,[4,[6]]]', inputs: [1, [4, [6]]] },

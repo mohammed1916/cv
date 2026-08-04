@@ -8,7 +8,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem432Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -18,9 +18,9 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 
 
 
-const EXAMPLES = getExamples('all-o1-data-structure') || [
+const EXAMPLES = getExamplesOr('all-o1-data-structure', [
   { label: 'Example 1', operations: ['add-2', 'add-3', 'add-5', 'getRandom', 'remove-3'] },
-]
+])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'class RandomizedSet:' },

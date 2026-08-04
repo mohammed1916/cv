@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './RansomNoteVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -245,7 +245,7 @@ function VisualizationPanel({ ransomNote, magazine, step, applyExample, examples
 }
 
 export default function RansomNoteVisualizer() {
-  const examples = useMemo(() => getExamples('ransom-note') || [], [])
+  const examples = useMemo(() => getExamplesOr('ransom-note', []), [])
   const [ransomNote, setRansomNote] = useState('a')
   const [magazine, setMagazine] = useState('b')
 

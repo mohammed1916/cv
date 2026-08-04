@@ -9,12 +9,12 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem407Visualizer.css'
 
-const EXAMPLES = getExamples('trapping-rain-water-ii') || [
+const EXAMPLES = getExamplesOr('trapping-rain-water-ii', [
   { label: 'Example', heightMap: [[1,4,3,1,3,2],[3,2,1,3,2,4],[2,3,3,2,3,1]] },
-]
+])
 
 const PATTERNS = []
 

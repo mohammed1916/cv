@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './GamePlayAnalysisVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -216,7 +216,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 }
 
 export default function GamePlayAnalysisVisualizer() {
-  const examples = useMemo(() => getExamples('game-play-analysis') || [], [])
+  const examples = useMemo(() => getExamplesOr('game-play-analysis', []), [])
   const [activityInput, setActivityInput] = useState('[{"playerId":1,"eventDate":"2016-03-01"},{"playerId":1,"eventDate":"2016-05-02"},{"playerId":2,"eventDate":"2017-06-25"}]')
 
   const { activity, inputError } = useMemo(() => {

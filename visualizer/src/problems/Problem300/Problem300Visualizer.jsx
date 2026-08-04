@@ -6,7 +6,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem300Visualizer.css'
 
 
@@ -54,7 +54,7 @@ function generateSteps(input) {
 }
 
 export default function Problem300Visualizer() {
-    const examples = useMemo(() => getExamples('300') || [], [])
+    const examples = useMemo(() => getExamplesOr('300', []), [])
     const [currentStep, setCurrentStep] = useState(0)
 
     const example = examples[0] || { input: [], output: [] }

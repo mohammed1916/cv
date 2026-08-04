@@ -7,7 +7,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const PATTERNS = ['done', 'error', 'found', 'init', 'pick', 'skip']
@@ -144,11 +144,11 @@ function generateSteps(numsStr, targetStr) {
   return steps
 }
 
-const EXAMPLES = getExamples('random-pick-index') || [
+const EXAMPLES = getExamplesOr('random-pick-index', [
   { label: 'Example 1', nums: '[1,2,3,3,3]', target: '3' },
   { label: 'Example 2', nums: '[1]', target: '1' },
   { label: 'Example 3', nums: '[1,2,3,1,1,1]', target: '1' },
-]
+])
 
 export default function Problem398Visualizer() {
   const [numsInput, setNumsInput] = useState('[1,2,3,3,3]')

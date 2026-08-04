@@ -5,7 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './IncreasingTripletSubsequenceVisualizer.css'
 
 const COLOR_TEXT = '#e2e8f0'
@@ -147,7 +147,7 @@ function generateSteps(nums) {
   return steps
 }
 
-const REGISTERED_EXAMPLES = getExamples('increasing-triplet-subsequence') || []
+const REGISTERED_EXAMPLES = getExamplesOr('increasing-triplet-subsequence', [])
 const EXAMPLES =
   REGISTERED_EXAMPLES.length > 0
     ? REGISTERED_EXAMPLES

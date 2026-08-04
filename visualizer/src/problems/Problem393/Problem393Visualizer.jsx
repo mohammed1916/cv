@@ -7,7 +7,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const PATTERNS = ['ascii', 'check_start', 'continuation', 'decrement', 'done', 'final_check', 'init', 'invalid', 'loop', 'multibyte']
@@ -150,11 +150,11 @@ function generateSteps(data) {
   return steps
 }
 
-const EXAMPLES = getExamples('utf-8-validation') || [
+const EXAMPLES = getExamplesOr('utf-8-validation', [
   { label: 'Example 1', data: [197, 130, 1] },
   { label: 'Example 2', data: [235, 140, 4] },
   { label: 'Example 3', data: [145] },
-]
+])
 
 export default function Problem393Visualizer() {
   const [dataInput, setDataInput] = useState('[197, 130, 1]')

@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './SplitArrayVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -274,7 +274,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 }
 
 export default function SplitArrayVisualizer() {
-  const examples = useMemo(() => getExamples('split-array') || [], [])
+  const examples = useMemo(() => getExamplesOr('split-array', []), [])
   const [numsInput, setNumsInput] = useState('[7,2,5,10,8]')
   const [m, setM] = useState(2)
 

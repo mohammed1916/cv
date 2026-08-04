@@ -5,7 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './PalindromePairsVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -122,7 +122,7 @@ function generateSteps(words) {
 }
 
 const DEFAULT_WORDS = ['abcd', 'dcba', 'lls', 's', 'sssll']
-const REGISTRY_EXAMPLES = getExamples('palindrome-pairs') || []
+const REGISTRY_EXAMPLES = getExamplesOr('palindrome-pairs', [])
 const EXAMPLES = REGISTRY_EXAMPLES.length > 0 ? REGISTRY_EXAMPLES : [
   { label: 'Classic', inputs: DEFAULT_WORDS },
   { label: 'bat / tab', inputs: ['bat', 'tab', 'cat'] },

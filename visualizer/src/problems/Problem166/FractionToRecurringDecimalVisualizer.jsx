@@ -9,7 +9,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './FractionToRecurringDecimalVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -18,10 +18,10 @@ import PatternLegend from '../../components/PatternLegend'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = getExamples('fraction-to-recurring-decimal') || [
+const EXAMPLES = getExamplesOr('fraction-to-recurring-decimal', [
   { label: 'Example 1', numerator: 1, denominator: 2 },
   { label: 'Example 2', numerator: 1, denominator: 6 },
-]
+])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def fractionToDecimal(num, denom):' },

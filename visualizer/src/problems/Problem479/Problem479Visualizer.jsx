@@ -8,7 +8,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem479Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -16,9 +16,9 @@ import PatternOverlay from "../../components/PatternOverlay";
 
 const PATTERNS = []
 
-const EXAMPLES = getExamples('largest-palindrome-product') || [
+const EXAMPLES = getExamplesOr('largest-palindrome-product', [
   { label: 'Example 1', n: 2 },
-]
+])
 
 function generateSteps(n) {
   const steps = []

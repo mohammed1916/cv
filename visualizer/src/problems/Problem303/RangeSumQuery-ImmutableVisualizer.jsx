@@ -8,7 +8,7 @@ import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './RangeSumQuery-ImmutableVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
@@ -52,7 +52,7 @@ function generateSteps(input) {
   return steps
 }
 
-const EXAMPLES = getExamples('range-sum-query-immutable') || []
+const EXAMPLES = getExamplesOr('range-sum-query-immutable', [])
 
 export default function RangeSumQueryImmutableVisualizer() {
   const [inputValue, setInputValue] = useState(EXAMPLES.length > 0 ? JSON.stringify(EXAMPLES[0]) : '{}')

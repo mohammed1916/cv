@@ -8,7 +8,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem260Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -60,7 +60,7 @@ function generateSteps(input) {
 }
 
 export default function Problem260Visualizer() {
-    const examples = useMemo(() => getExamples('260') || [], [])
+    const examples = useMemo(() => getExamplesOr('260', []), [])
     const [currentExample, setCurrentExample] = useState(0)
     const [currentStep, setCurrentStep] = useState(0)
 

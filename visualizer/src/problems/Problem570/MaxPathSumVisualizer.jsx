@@ -11,7 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
 import { TreeCanvas3D } from '../../components/viz3d'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './MaxPathSumVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -413,7 +413,7 @@ function ResultPanel({ step, inputError }) {
 }
 
 export default function MaxPathSumVisualizer() {
-  const examples = useMemo(() => getExamples('max-path-sum') || [], [])
+  const examples = useMemo(() => getExamplesOr('max-path-sum', []), [])
   const [arrInput, setArrInput] = useState('[1,2,3]')
 
   const { arr, inputError } = useMemo(() => {

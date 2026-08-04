@@ -7,7 +7,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './OneEditDistanceVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -17,10 +17,10 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = getExamples('one-edit-distance') || [
+const EXAMPLES = getExamplesOr('one-edit-distance', [
   { label: 'Example 1', s1: 'ab', s2: 'acb' },
   { label: 'Example 2', s1: 'cab', s2: 'ab' },
-]
+])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def isOneEditDistance(s1, s2):' },

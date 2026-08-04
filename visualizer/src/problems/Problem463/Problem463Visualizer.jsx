@@ -9,7 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -42,11 +42,11 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('island-perimeter') || [
+const EXAMPLES = getExamplesOr('island-perimeter', [
   { label: 'Example 1', grid: [[0, 1, 0, 0], [1, 1, 1, 0], [0, 1, 0, 1], [1, 1, 0, 0]], expected: 16 },
   { label: 'Example 2', grid: [[1]], expected: 4 },
   { label: 'Example 3', grid: [[1, 1], [1, 1]], expected: 8 },
-]
+])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [2, 3] },

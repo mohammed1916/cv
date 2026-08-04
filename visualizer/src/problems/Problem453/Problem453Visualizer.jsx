@@ -9,7 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -35,11 +35,11 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('minimum-moves-to-equal-array-elements') || [
+const EXAMPLES = getExamplesOr('minimum-moves-to-equal-array-elements', [
   { label: 'Example 1', nums: [1, 0, 0, 8, 6], expected: 14 },
   { label: 'Example 2', nums: [1, 2, 3], expected: 3 },
   { label: 'Example 3', nums: [5, 5, 5], expected: 0 },
-]
+])
 
 const SNIPPETS = [
   { id: 'init', label: 'Find Minimum', lines: [1, 2, 3, 4, 5] },

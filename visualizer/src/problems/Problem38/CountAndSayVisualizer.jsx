@@ -10,7 +10,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './CountAndSay.css'
 
 const SOLUTION_CODE = [
@@ -250,7 +250,7 @@ function VisualizationPanel({ n, step, applyExample, examples }) {
 }
 
 export default function CountAndSayVisualizer() {
-  const examples = useMemo(() => getExamples('count-and-say') || [], [])
+  const examples = useMemo(() => getExamplesOr('count-and-say', []), [])
   const [nValue, setNValue] = useState(1)
 
   const steps = useMemo(() => generateSteps(nValue), [nValue])

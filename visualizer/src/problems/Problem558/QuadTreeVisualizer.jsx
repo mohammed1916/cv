@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './QuadTreeVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -446,7 +446,7 @@ function VisualizationPanel({ step, applyExample, examples, gridSize }) {
 }
 
 export default function QuadTreeVisualizer() {
-  const examples = useMemo(() => getExamples('quad-tree') || [], [])
+  const examples = useMemo(() => getExamplesOr('quad-tree', []), [])
   const [gridSize, setGridSize] = useState(4)
   const [gridInput, setGridInput] = useState('[[1,1,0,0],[1,1,0,0],[1,1,1,1],[1,1,1,1]]')
 

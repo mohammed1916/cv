@@ -8,7 +8,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem478Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -16,10 +16,10 @@ import PatternOverlay from "../../components/PatternOverlay";
 
 const PATTERNS = []
 
-const EXAMPLES = getExamples('generate-random-point-in-a-circle') || [
+const EXAMPLES = getExamplesOr('generate-random-point-in-a-circle', [
   { label: 'Example 1', radius: 1 },
   { label: 'Example 2', radius: 2.5 },
-]
+])
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def __init__(self, radius, x_center, y_center):' },
   { line: 2, text: '    self.radius = radius' },

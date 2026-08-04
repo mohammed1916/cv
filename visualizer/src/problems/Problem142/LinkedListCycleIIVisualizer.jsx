@@ -9,7 +9,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './LinkedListCycleIIVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -18,10 +18,10 @@ import PatternLegend from '../../components/PatternLegend'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = getExamples('linked-list-cycle-ii') || [
+const EXAMPLES = getExamplesOr('linked-list-cycle-ii', [
   { label: 'Example 1', nodes: [3, 2, 0, -4], pos: 1 },
   { label: 'Example 2', nodes: [1, 2], pos: 0 },
-]
+])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def detectCycle(head):' },

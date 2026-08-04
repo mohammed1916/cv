@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './ZeroOneMatrixVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -253,7 +253,7 @@ function VisualizationPanel({ matrix, step, applyExample, examples }) {
 
 export default function ZeroOneMatrixVisualizer() {
   const defaultMatrix = [[0, 0, 0], [0, 1, 0], [1, 1, 1]]
-  const examples = useMemo(() => getExamples('01-matrix') || [], [])
+  const examples = useMemo(() => getExamplesOr('01-matrix', []), [])
   const [matrixInput, setMatrixInput] = useState(JSON.stringify(defaultMatrix))
 
   const { matrix, inputError } = useMemo(() => {

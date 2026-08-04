@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './ReverseStringIIVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -210,7 +210,7 @@ function VisualizationPanel({ str, k, step, applyExample, examples }) {
 }
 
 export default function ReverseStringIIVisualizer() {
-  const examples = useMemo(() => getExamples('reverse-string-ii') || [], [])
+  const examples = useMemo(() => getExamplesOr('reverse-string-ii', []), [])
   const [str, setStr] = useState('abcdefg')
   const [kValue, setKValue] = useState(2)
 

@@ -8,7 +8,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem474Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -16,9 +16,9 @@ import PatternOverlay from "../../components/PatternOverlay";
 
 const PATTERNS = []
 
-const EXAMPLES = getExamples('ones-and-zeroes') || [
+const EXAMPLES = getExamplesOr('ones-and-zeroes', [
   { label: 'Example 1', strs: ['10', '0001', '111001', '1', '0'], m: 5, n: 3 },
-]
+])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def findMaxForm(strs, m, n):' },

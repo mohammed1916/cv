@@ -5,7 +5,7 @@ import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './SpiralMatrixIIVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
@@ -209,12 +209,12 @@ function generateSteps(n) {
   return steps
 }
 
-const EXAMPLES = getExamples('spiral-matrix-ii') || [
+const EXAMPLES = getExamplesOr('spiral-matrix-ii', [
   { label: 'n=1', n: 1 },
   { label: 'n=2', n: 2 },
   { label: 'n=3', n: 3 },
   { label: 'n=4', n: 4 },
-]
+])
 
 export default function SpiralMatrixIIVisualizer() {
   const [nInput, setNInput] = useState('3')

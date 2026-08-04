@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './AssignCookiesVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -263,7 +263,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 }
 
 export default function AssignCookiesVisualizer() {
-  const examples = useMemo(() => getExamples('assign-cookies') || [], [])
+  const examples = useMemo(() => getExamplesOr('assign-cookies', []), [])
   const [gInput, setGInput] = useState('[1,2,3]')
   const [sInput, setSInput] = useState('[1,1]')
 

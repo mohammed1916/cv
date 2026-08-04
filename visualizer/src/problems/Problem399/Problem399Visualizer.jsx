@@ -8,7 +8,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import SvgViewport from '../../components/shared/SvgViewport'
@@ -197,10 +197,10 @@ function generateSteps(equationsStr, valuesStr, queryStr) {
   return steps
 }
 
-const EXAMPLES = getExamples('evaluate-division') || [
+const EXAMPLES = getExamplesOr('evaluate-division', [
   { label: 'Example 1', equations: '[["a","b"],["b","c"]]', values: '[2.0,3.0]', query: '[["a","c"],["b","a"],["a","e"]]' },
   { label: 'Example 2', equations: '[["a","b"],["b","c"],["bc","cd"]]', values: '[1.5,2.5,5.0]', query: '[["a","c"],["c","b"],["bc","cd"],["cd","bc"]]' },
-]
+])
 
 export default function Problem399Visualizer() {
   const [equationsInput, setEquationsInput] = useState('[["a","b"],["b","c"]]')

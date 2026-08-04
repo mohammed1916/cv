@@ -5,7 +5,7 @@ import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './SearchRotatedArrayIIVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
@@ -161,11 +161,11 @@ function generateSteps(nums, target) {
     return steps
 }
 
-const EXAMPLES = getExamples('search-in-rotated-sorted-array-ii') || [
+const EXAMPLES = getExamplesOr('search-in-rotated-sorted-array-ii', [
     { label: 'Find True', nums: [1, 0, 1, 1, 1], target: 0 },
     { label: 'Find False', nums: [1, 3], target: 3 },
     { label: 'With Duplicates', nums: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1], target: 2 },
-]
+])
 
 export default function SearchRotatedArrayIIVisualizer() {
     const [numsInput, setNumsInput] = useState('[1,0,1,1,1]')

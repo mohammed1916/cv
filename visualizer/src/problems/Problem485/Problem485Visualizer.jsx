@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem485Visualizer.css'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -43,11 +43,11 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamples('max-consecutive-ones') || [
+const EXAMPLES = getExamplesOr('max-consecutive-ones', [
   { label: 'Example 1', arr: [1, 0, 1, 1, 0] },
   { label: 'Example 2', arr: [1, 1, 1, 0, 1, 1, 1] },
   { label: 'Example 3', arr: [0, 0, 0, 1], flips: 1 },
-]
+])
 
 function generateSteps(arr, flips = 1) {
   const steps = []

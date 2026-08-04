@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './DivideTwoIntegersVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -219,7 +219,7 @@ function VisualizationPanel({ dividend, divisor, step, applyExample, examples })
 }
 
 export default function DivideTwoIntegersVisualizer() {
-  const examples = useMemo(() => getExamples('divide-two-integers') || [], [])
+  const examples = useMemo(() => getExamplesOr('divide-two-integers', []), [])
   const [dividend, setDividend] = useState(10)
   const [divisor, setDivisor] = useState(3)
 

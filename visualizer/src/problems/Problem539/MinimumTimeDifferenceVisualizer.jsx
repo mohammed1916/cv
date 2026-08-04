@@ -9,7 +9,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './MinimumTimeDifferenceVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -253,7 +253,7 @@ function VisualizationPanel({ timePoints, step, applyExample, examples }) {
 }
 
 export default function MinimumTimeDifferenceVisualizer() {
-  const examples = useMemo(() => getExamples('minimum-time-difference') || [], [])
+  const examples = useMemo(() => getExamplesOr('minimum-time-difference', []), [])
   const [timesInput, setTimesInput] = useState('["23:59","00:00"]')
 
   const { times, inputError } = useMemo(() => {

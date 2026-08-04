@@ -9,7 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem350.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -41,11 +41,11 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('intersection-of-two-arrays-ii') || [
+const EXAMPLES = getExamplesOr('intersection-of-two-arrays-ii', [
   { label: 'Example 1: Overlap', nums1: [1, 2, 2, 1], nums2: [2, 2] },
   { label: 'Example 2: No overlap', nums1: [4, 9, 5], nums2: [9, 4, 9, 8, 4] },
   { label: 'Example 3: Duplicates', nums1: [1, 2, 2, 1, 2, 2], nums2: [2] },
-]
+])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [1, 2] },

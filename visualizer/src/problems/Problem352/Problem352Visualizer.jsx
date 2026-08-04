@@ -10,7 +10,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem352Visualizer.css'
 import PatternOverlay from "../../components/PatternOverlay";
 
@@ -340,11 +340,11 @@ function DirectionArrow({ direction }) {
   )
 }
 
-const EXAMPLES = getExamples('design-snake-game') || [
+const EXAMPLES = getExamplesOr('design-snake-game', [
   { label: 'Straight Move', value: 'RRRRU', moves: ['R', 'R', 'R', 'R', 'U'] },
   { label: 'Food Eating', value: 'RRUULL', moves: ['R', 'R', 'U', 'U', 'L', 'L'] },
   { label: 'Self-Collision', value: 'RRRUUULL', moves: ['R', 'R', 'R', 'U', 'U', 'U', 'L', 'L'] },
-]
+])
 
 export default function DesignSnakeGameVisualizer() {
   const [movementsInput, setMovementsInput] = useState('RRDDR')
