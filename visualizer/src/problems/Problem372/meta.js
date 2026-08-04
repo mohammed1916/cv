@@ -1,7 +1,7 @@
 export const meta = {
   number: '372',
   title: 'Super Power',
-  slug: 'super-power',
+  slug: 'super-pow',
   difficulty: 'Medium',
   tags: ['Math', 'Modular Arithmetic'],
 }

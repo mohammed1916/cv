@@ -1,7 +1,7 @@
 export const meta = {
   number: '211',
   title: 'Add and Search Word',
-  slug: 'add-and-search-word',
+  slug: 'design-add-and-search-words-data-structure',
   difficulty: 'Medium',
   tags: ['Trie', 'Design', 'Wildcard'],
   description: 'Design a data structure supporting add word and search with wildcards.',
