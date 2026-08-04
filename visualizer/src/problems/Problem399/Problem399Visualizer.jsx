@@ -11,6 +11,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
+import SvgViewport from '../../components/shared/SvgViewport'
 import './Problem399Visualizer.css'
 
 const PATTERNS = ['build_edge', 'dfs_end', 'dfs_start', 'done', 'error', 'init', 'query_invalid', 'query_start']
@@ -331,7 +332,7 @@ export default function Problem399Visualizer() {
       <div className="p399-card">
         <div className="p399-section-label">Equations Graph</div>
         <div className="p399-graph-wrap">
-          <svg className="p399-graph" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet">
+          <SvgViewport width={400} height={300} className="p399-viewport">
             {edges.map(({ from, to, weight }) => {
               const a = layout[from]
               const b = layout[to]
@@ -371,7 +372,7 @@ export default function Problem399Visualizer() {
                 </motion.g>
               )
             })}
-          </svg>
+          </SvgViewport>
         </div>
         <div className="p399-legend">
           <span className="p399-legend-item"><span className="p399-swatch num" />numerator</span>

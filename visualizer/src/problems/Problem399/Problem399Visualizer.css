@@ -118,20 +118,18 @@
 .p399-graph-wrap {
   position: relative;
   width: 100%;
-  /* Fixed aspect so the SVG viewBox scales predictably inside a resizable dock
-     panel; the SVG itself is responsive via viewBox + preserveAspectRatio. */
+  /* Fixed aspect so the diagram scales predictably inside a resizable dock
+     panel. SvgViewport supplies the canvas chrome, border and background. */
   aspect-ratio: 4 / 3;
-  min-height: 260px;
-  background: radial-gradient(circle at 50% 40%, rgba(248, 113, 113, 0.06), transparent 60%);
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  overflow: hidden;
+  min-height: 300px;
 }
 
-.p399-graph {
-  width: 100%;
+.p399-viewport {
   height: 100%;
-  display: block;
+}
+
+.p399-viewport .svg-viewport-canvas {
+  background: radial-gradient(circle at 50% 40%, rgba(248, 113, 113, 0.06), transparent 60%);
 }
 
 .p399-edge {

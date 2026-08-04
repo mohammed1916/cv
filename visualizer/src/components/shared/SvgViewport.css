@@ -1,0 +1,95 @@
+/* ─────────────────────────────────────────────
+   SvgViewport — pan/zoom shell for SVG diagrams
+   ───────────────────────────────────────────── */
+
+.svg-viewport {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-height: 0;
+}
+
+/* ── Toolbar ───────────────────────────────── */
+.svg-viewport-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.svg-viewport-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+}
+
+.svg-viewport-btn {
+  min-width: 26px;
+  height: 26px;
+  padding: 0 0.4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.svg-viewport-btn:hover {
+  background: var(--surface3, #21213a);
+  color: var(--text);
+}
+
+.svg-viewport-btn.wide {
+  height: 30px;
+  padding: 0 0.7rem;
+  font-size: 0.74rem;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+}
+
+.svg-viewport-scale {
+  padding: 0 0.45rem;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  min-width: 44px;
+  text-align: center;
+}
+
+/* ── Canvas ────────────────────────────────── */
+.svg-viewport-canvas {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: radial-gradient(circle at 50% 40%, rgba(148, 163, 184, 0.06), transparent 60%);
+  overflow: hidden;
+  cursor: grab;
+  /* Stop the browser from claiming drags/pinches as scroll gestures, which
+     would otherwise scroll the surrounding dock panel mid-pan. */
+  touch-action: none;
+}
+
+.svg-viewport-canvas.dragging {
+  cursor: grabbing;
+}
+
+.svg-viewport-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  /* Text inside the diagram shouldn't be selectable while dragging to pan. */
+  user-select: none;
+}
