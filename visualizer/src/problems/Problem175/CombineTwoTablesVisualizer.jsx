@@ -19,12 +19,15 @@ import PatternLegend from '../../components/PatternLegend'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-  { line: 1, text: "// CombineTwoTables" },
-  { line: 2, text: "function solve(input) {" },
-  { line: 3, text: "  // Initialization phase" },
-  { line: 4, text: "  // Processing phase" },
-  { line: 5, text: "  // Return result" },
-  { line: 6, text: "}" },
+  { line: 1, text: "-- Combine Two Tables (MySQL)" },
+  { line: 2, text: "SELECT" },
+  { line: 3, text: "    p.firstName," },
+  { line: 4, text: "    p.lastName," },
+  { line: 5, text: "    a.city," },
+  { line: 6, text: "    a.state" },
+  { line: 7, text: "FROM Person AS p" },
+  { line: 8, text: "LEFT JOIN Address AS a" },
+  { line: 9, text: "    ON p.personId = a.personId;" },
 ]
 
 function generateSteps(input) {

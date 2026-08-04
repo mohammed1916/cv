@@ -19,12 +19,14 @@ import PatternLegend from '../../components/PatternLegend'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-  { line: 1, text: "// MajorityElement" },
-  { line: 2, text: "function solve(input) {" },
-  { line: 3, text: "  // Initialization phase" },
-  { line: 4, text: "  // Processing phase" },
-  { line: 5, text: "  // Return result" },
-  { line: 6, text: "}" },
+  { line: 1, text: "class Solution(object):" },
+  { line: 2, text: "    def majorityElement(self, nums):" },
+  { line: 3, text: "        candidate, count = None, 0" },
+  { line: 4, text: "        for num in nums:" },
+  { line: 5, text: "            if count == 0:" },
+  { line: 6, text: "                candidate = num" },
+  { line: 7, text: "            count += 1 if num == candidate else -1" },
+  { line: 8, text: "        return candidate" },
 ]
 
 function generateSteps(input) {

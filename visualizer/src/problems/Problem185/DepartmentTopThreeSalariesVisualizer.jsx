@@ -18,12 +18,26 @@ import PatternLegend from '../../components/PatternLegend'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-  { line: 1, text: "// DepartmentTopThreeSalaries" },
-  { line: 2, text: "function solve(input) {" },
-  { line: 3, text: "  // Initialization phase" },
-  { line: 4, text: "  // Processing phase" },
-  { line: 5, text: "  // Return result" },
-  { line: 6, text: "}" },
+  { line: 1, text: "-- Department Top Three Salaries (MySQL 8+)" },
+  { line: 2, text: "WITH ranked AS (" },
+  { line: 3, text: "    SELECT" },
+  { line: 4, text: "        e.departmentId," },
+  { line: 5, text: "        e.name," },
+  { line: 6, text: "        e.salary," },
+  { line: 7, text: "        DENSE_RANK() OVER (" },
+  { line: 8, text: "            PARTITION BY e.departmentId" },
+  { line: 9, text: "            ORDER BY e.salary DESC" },
+  { line: 10, text: "        ) AS rnk" },
+  { line: 11, text: "    FROM Employee AS e" },
+  { line: 12, text: ")" },
+  { line: 13, text: "SELECT" },
+  { line: 14, text: "    d.name AS Department," },
+  { line: 15, text: "    r.name AS Employee," },
+  { line: 16, text: "    r.salary AS Salary" },
+  { line: 17, text: "FROM ranked AS r" },
+  { line: 18, text: "JOIN Department AS d" },
+  { line: 19, text: "    ON r.departmentId = d.id" },
+  { line: 20, text: "WHERE r.rnk <= 3;" },
 ]
 
 function generateSteps(input) {

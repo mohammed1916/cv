@@ -18,12 +18,11 @@ import PatternLegend from '../../components/PatternLegend'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-  { line: 1, text: "// DuplicateEmails" },
-  { line: 2, text: "function solve(input) {" },
-  { line: 3, text: "  // Initialization phase" },
-  { line: 4, text: "  // Processing phase" },
-  { line: 5, text: "  // Return result" },
-  { line: 6, text: "}" },
+  { line: 1, text: "-- Duplicate Emails (MySQL)" },
+  { line: 2, text: "SELECT email AS Email" },
+  { line: 3, text: "FROM Person" },
+  { line: 4, text: "GROUP BY email" },
+  { line: 5, text: "HAVING COUNT(*) > 1;" },
 ]
 
 function generateSteps(input) {

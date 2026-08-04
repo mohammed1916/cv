@@ -1,6 +1,6 @@
 export const meta = {
   number: "485",
-  title: "Max Consecutive Ones II",
+  title: "Max Consecutive Ones",
   slug: "max-consecutive-ones",
   difficulty: "Medium",
   tags: ["DP", "Array"],

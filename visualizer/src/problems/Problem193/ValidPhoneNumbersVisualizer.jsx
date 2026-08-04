@@ -18,12 +18,12 @@ import PatternLegend from '../../components/PatternLegend'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-  { line: 1, text: "// ValidPhoneNumbers" },
-  { line: 2, text: "function solve(input) {" },
-  { line: 3, text: "  // Initialization phase" },
-  { line: 4, text: "  // Processing phase" },
-  { line: 5, text: "  // Return result" },
-  { line: 6, text: "}" },
+  { line: 1, text: "#!/bin/bash" },
+  { line: 2, text: "# Print valid phone numbers: (xxx) xxx-xxxx or xxx-xxx-xxxx" },
+  { line: 3, text: "grep -E '^(\\([0-9]{3}\\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$' file.txt" },
+  { line: 4, text: "" },
+  { line: 5, text: "# Equivalent with sed:" },
+  { line: 6, text: "# sed -nE '/^(\\([0-9]{3}\\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$/p' file.txt" },
 ]
 
 function generateSteps(input) {

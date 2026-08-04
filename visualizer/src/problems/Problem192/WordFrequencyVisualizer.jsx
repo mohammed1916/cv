@@ -18,12 +18,14 @@ import PatternLegend from '../../components/PatternLegend'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-  { line: 1, text: "// WordFrequency" },
-  { line: 2, text: "function solve(input) {" },
-  { line: 3, text: "  // Initialization phase" },
-  { line: 4, text: "  // Processing phase" },
-  { line: 5, text: "  // Return result" },
-  { line: 6, text: "}" },
+  { line: 1, text: "#!/bin/bash" },
+  { line: 2, text: "# Read words.txt and print word frequencies, most frequent first" },
+  { line: 3, text: "cat words.txt |" },
+  { line: 4, text: "  tr -s ' ' '\\n' |" },
+  { line: 5, text: "  sort |" },
+  { line: 6, text: "  uniq -c |" },
+  { line: 7, text: "  sort -rn |" },
+  { line: 8, text: "  awk '{ print $2, $1 }'" },
 ]
 
 function generateSteps(input) {

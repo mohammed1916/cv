@@ -19,12 +19,14 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-  { line: 1, text: "// ExcelSheetColumnTitle" },
-  { line: 2, text: "function solve(input) {" },
-  { line: 3, text: "  // Initialization phase" },
-  { line: 4, text: "  // Processing phase" },
-  { line: 5, text: "  // Return result" },
-  { line: 6, text: "}" },
+  { line: 1, text: "class Solution(object):" },
+  { line: 2, text: "    def convertToTitle(self, columnNumber):" },
+  { line: 3, text: "        result = []" },
+  { line: 4, text: "        while columnNumber > 0:" },
+  { line: 5, text: "            columnNumber -= 1" },
+  { line: 6, text: "            result.append(chr(ord('A') + columnNumber % 26))" },
+  { line: 7, text: "            columnNumber //= 26" },
+  { line: 8, text: "        return ''.join(reversed(result))" },
 ]
 
 function generateSteps(input) {

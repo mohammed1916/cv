@@ -18,12 +18,12 @@ import PatternLegend from '../../components/PatternLegend'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-  { line: 1, text: "// RisingTemperature" },
-  { line: 2, text: "function solve(input) {" },
-  { line: 3, text: "  // Initialization phase" },
-  { line: 4, text: "  // Processing phase" },
-  { line: 5, text: "  // Return result" },
-  { line: 6, text: "}" },
+  { line: 1, text: "-- Rising Temperature (MySQL)" },
+  { line: 2, text: "SELECT w2.id AS Id" },
+  { line: 3, text: "FROM Weather AS w1" },
+  { line: 4, text: "JOIN Weather AS w2" },
+  { line: 5, text: "    ON DATEDIFF(w2.recordDate, w1.recordDate) = 1" },
+  { line: 6, text: "WHERE w2.temperature > w1.temperature;" },
 ]
 
 function generateSteps(input) {

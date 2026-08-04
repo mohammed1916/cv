@@ -18,12 +18,20 @@ import PatternLegend from '../../components/PatternLegend'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-  { line: 1, text: "// ReverseWordsInAStringIi" },
-  { line: 2, text: "function solve(input) {" },
-  { line: 3, text: "  // Initialization phase" },
-  { line: 4, text: "  // Processing phase" },
-  { line: 5, text: "  // Return result" },
-  { line: 6, text: "}" },
+  { line: 1, text: "class Solution(object):" },
+  { line: 2, text: "    def reverseWords(self, s):" },
+  { line: 3, text: "        self.reverse(s, 0, len(s) - 1)" },
+  { line: 4, text: "        start = 0" },
+  { line: 5, text: "        for i in range(len(s) + 1):" },
+  { line: 6, text: "            if i == len(s) or s[i] == ' ':" },
+  { line: 7, text: "                self.reverse(s, start, i - 1)" },
+  { line: 8, text: "                start = i + 1" },
+  { line: 9, text: "" },
+  { line: 10, text: "    def reverse(self, s, left, right):" },
+  { line: 11, text: "        while left < right:" },
+  { line: 12, text: "            s[left], s[right] = s[right], s[left]" },
+  { line: 13, text: "            left += 1" },
+  { line: 14, text: "            right -= 1" },
 ]
 
 function generateSteps(input) {

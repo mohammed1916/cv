@@ -19,12 +19,13 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-  { line: 1, text: "// FactorialTrailingZeroes" },
-  { line: 2, text: "function solve(input) {" },
-  { line: 3, text: "  // Initialization phase" },
-  { line: 4, text: "  // Processing phase" },
-  { line: 5, text: "  // Return result" },
-  { line: 6, text: "}" },
+  { line: 1, text: "class Solution(object):" },
+  { line: 2, text: "    def trailingZeroes(self, n):" },
+  { line: 3, text: "        count = 0" },
+  { line: 4, text: "        while n > 0:" },
+  { line: 5, text: "            n //= 5" },
+  { line: 6, text: "            count += n" },
+  { line: 7, text: "        return count" },
 ]
 
 function generateSteps(input) {

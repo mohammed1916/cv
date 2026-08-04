@@ -18,12 +18,19 @@ import PatternLegend from '../../components/PatternLegend'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-  { line: 1, text: "// DepartmentHighestSalary" },
-  { line: 2, text: "function solve(input) {" },
-  { line: 3, text: "  // Initialization phase" },
-  { line: 4, text: "  // Processing phase" },
-  { line: 5, text: "  // Return result" },
-  { line: 6, text: "}" },
+  { line: 1, text: "-- Department Highest Salary (MySQL)" },
+  { line: 2, text: "SELECT" },
+  { line: 3, text: "    d.name AS Department," },
+  { line: 4, text: "    e.name AS Employee," },
+  { line: 5, text: "    e.salary AS Salary" },
+  { line: 6, text: "FROM Employee AS e" },
+  { line: 7, text: "JOIN Department AS d" },
+  { line: 8, text: "    ON e.departmentId = d.id" },
+  { line: 9, text: "WHERE e.salary = (" },
+  { line: 10, text: "    SELECT MAX(e2.salary)" },
+  { line: 11, text: "    FROM Employee AS e2" },
+  { line: 12, text: "    WHERE e2.departmentId = e.departmentId" },
+  { line: 13, text: ");" },
 ]
 
 function generateSteps(input) {

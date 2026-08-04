@@ -19,12 +19,21 @@ import PatternLegend from '../../components/PatternLegend'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-  { line: 1, text: "// TwoSumIii-DataStructureDesign" },
-  { line: 2, text: "function solve(input) {" },
-  { line: 3, text: "  // Initialization phase" },
-  { line: 4, text: "  // Processing phase" },
-  { line: 5, text: "  // Return result" },
-  { line: 6, text: "}" },
+  { line: 1, text: "class TwoSum(object):" },
+  { line: 2, text: "    def __init__(self):" },
+  { line: 3, text: "        self.counts = {}" },
+  { line: 4, text: "    def add(self, number):" },
+  { line: 5, text: "        self.counts[number] = self.counts.get(number, 0) + 1" },
+  { line: 6, text: "" },
+  { line: 7, text: "    def find(self, value):" },
+  { line: 8, text: "        for num in self.counts:" },
+  { line: 9, text: "            complement = value - num" },
+  { line: 10, text: "            if complement != num:" },
+  { line: 11, text: "                if complement in self.counts:" },
+  { line: 12, text: "                    return True" },
+  { line: 13, text: "            elif self.counts[num] > 1:" },
+  { line: 14, text: "                return True" },
+  { line: 15, text: "        return False" },
 ]
 
 function generateSteps(input) {

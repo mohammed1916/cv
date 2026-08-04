@@ -18,12 +18,15 @@ import PatternLegend from '../../components/PatternLegend'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-  { line: 1, text: "// RepeatedDnaSequences" },
-  { line: 2, text: "function solve(input) {" },
-  { line: 3, text: "  // Initialization phase" },
-  { line: 4, text: "  // Processing phase" },
-  { line: 5, text: "  // Return result" },
-  { line: 6, text: "}" },
+  { line: 1, text: "class Solution(object):" },
+  { line: 2, text: "    def findRepeatedDnaSequences(self, s):" },
+  { line: 3, text: "        seen, repeated = set(), set()" },
+  { line: 4, text: "        for i in range(len(s) - 9):" },
+  { line: 5, text: "            window = s[i:i + 10]" },
+  { line: 6, text: "            if window in seen:" },
+  { line: 7, text: "                repeated.add(window)" },
+  { line: 8, text: "            seen.add(window)" },
+  { line: 9, text: "        return list(repeated)" },
 ]
 
 function generateSteps(input) {

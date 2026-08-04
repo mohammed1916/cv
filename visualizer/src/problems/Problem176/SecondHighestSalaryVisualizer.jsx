@@ -19,12 +19,14 @@ import PatternLegend from '../../components/PatternLegend'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-  { line: 1, text: "// SecondHighestSalary" },
-  { line: 2, text: "function solve(input) {" },
-  { line: 3, text: "  // Initialization phase" },
-  { line: 4, text: "  // Processing phase" },
-  { line: 5, text: "  // Return result" },
-  { line: 6, text: "}" },
+  { line: 1, text: "-- Second Highest Salary (MySQL)" },
+  { line: 2, text: "SELECT" },
+  { line: 3, text: "    (" },
+  { line: 4, text: "        SELECT DISTINCT salary" },
+  { line: 5, text: "        FROM Employee" },
+  { line: 6, text: "        ORDER BY salary DESC" },
+  { line: 7, text: "        LIMIT 1 OFFSET 1" },
+  { line: 8, text: "    ) AS SecondHighestSalary;" },
 ]
 
 function generateSteps(input) {

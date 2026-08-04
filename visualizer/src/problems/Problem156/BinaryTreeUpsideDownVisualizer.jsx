@@ -19,12 +19,17 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-  { line: 1, text: "// BinaryTreeUpsideDown" },
-  { line: 2, text: "function solve(input) {" },
-  { line: 3, text: "  // Initialization phase" },
-  { line: 4, text: "  // Processing phase" },
-  { line: 5, text: "  // Return result" },
-  { line: 6, text: "}" },
+  { line: 1, text: "class Solution(object):" },
+  { line: 2, text: "    def upsideDownBinaryTree(self, root):" },
+  { line: 3, text: "        curr, prev, tmp = root, None, None" },
+  { line: 4, text: "        while curr:" },
+  { line: 5, text: "            next_node = curr.left" },
+  { line: 6, text: "            curr.left = tmp" },
+  { line: 7, text: "            tmp = curr.right" },
+  { line: 8, text: "            curr.right = prev" },
+  { line: 9, text: "            prev = curr" },
+  { line: 10, text: "            curr = next_node" },
+  { line: 11, text: "        return prev" },
 ]
 
 function generateSteps(input) {

@@ -18,12 +18,12 @@ import PatternLegend from '../../components/PatternLegend'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-  { line: 1, text: "// EmployeesEarningMoreThanTheirManagers" },
-  { line: 2, text: "function solve(input) {" },
-  { line: 3, text: "  // Initialization phase" },
-  { line: 4, text: "  // Processing phase" },
-  { line: 5, text: "  // Return result" },
-  { line: 6, text: "}" },
+  { line: 1, text: "-- Employees Earning More Than Their Managers (MySQL)" },
+  { line: 2, text: "SELECT e.name AS Employee" },
+  { line: 3, text: "FROM Employee AS e" },
+  { line: 4, text: "JOIN Employee AS m" },
+  { line: 5, text: "    ON e.managerId = m.id" },
+  { line: 6, text: "WHERE e.salary > m.salary;" },
 ]
 
 function generateSteps(input) {

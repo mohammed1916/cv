@@ -18,12 +18,16 @@ import PatternLegend from '../../components/PatternLegend'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-  { line: 1, text: "// TransposeFile" },
-  { line: 2, text: "function solve(input) {" },
-  { line: 3, text: "  // Initialization phase" },
-  { line: 4, text: "  // Processing phase" },
-  { line: 5, text: "  // Return result" },
-  { line: 6, text: "}" },
+  { line: 1, text: "#!/bin/bash" },
+  { line: 2, text: "# Transpose the space-separated table in file.txt" },
+  { line: 3, text: "awk '{" },
+  { line: 4, text: "  for (i = 1; i <= NF; i++) {" },
+  { line: 5, text: "    cells[i] = (NR == 1) ? $i : cells[i] \" \" $i" },
+  { line: 6, text: "  }" },
+  { line: 7, text: "}" },
+  { line: 8, text: "END {" },
+  { line: 9, text: "  for (i = 1; i <= NF; i++) print cells[i]" },
+  { line: 10, text: "}' file.txt" },
 ]
 
 function generateSteps(input) {
