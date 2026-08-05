@@ -173,12 +173,12 @@ function PyramidVisualization({ triangle, step, ex }) {
   );
 }
 
-function VisualizationPanel({ triangle, step, ex, applyEx }) {
+function VisualizationPanel({ triangle, step, ex, applyEx, numRowsInput, setNumRowsInput, inputError, handleReset }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
       <div>
         <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 12 }}>
           {EXAMPLES.map(e => (
             <button
               key={e.label}
@@ -196,6 +196,28 @@ function VisualizationPanel({ triangle, step, ex, applyEx }) {
             </button>
           ))}
         </div>
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+          <label style={{ fontSize: 12, fontWeight: 500, color: '#475569' }}>numRows:</label>
+          <input
+            value={numRowsInput}
+            onChange={(e) => {
+              setNumRowsInput(e.target.value);
+              handleReset();
+            }}
+            placeholder="5"
+            style={{
+              padding: '6px 8px',
+              fontSize: 12,
+              borderRadius: 4,
+              border: '1px solid #cbd5e1',
+              width: '60px',
+            }}
+            type="number"
+            min="1"
+            max="30"
+          />
+          {inputError && <span style={{ fontSize: 11, color: '#dc2626' }}>{inputError}</span>}
+        </div>
       </div>
 
       <PyramidVisualization triangle={triangle} step={step} ex={ex} />
@@ -205,11 +227,28 @@ function VisualizationPanel({ triangle, step, ex, applyEx }) {
 
 export default function PascalsTriangleVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => generateSteps(ex.numRows), [ex]);
+  const [numRowsInput, setNumRowsInput] = useState(String(EXAMPLES[0]?.numRows || 5));
+
+  const { numRows, inputError } = useMemo(() => {
+    try {
+      const val = parseInt(numRowsInput, 10);
+      if (isNaN(val) || val < 1) throw new Error('numRows must be >= 1');
+      if (val > 30) throw new Error('Max 30 rows for clarity');
+      return { numRows: val, inputError: '' };
+    } catch (e) {
+      return { numRows: EXAMPLES[0]?.numRows || 5, inputError: e.message };
+    }
+  }, [numRowsInput]);
+
+  const steps = useMemo(() => generateSteps(numRows), [numRows]);
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => {
+    setEx(e);
+    setNumRowsInput(String(e.numRows));
+    handleReset();
+  }, [handleReset]);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
 
@@ -223,6 +262,10 @@ export default function PascalsTriangleVisualizer() {
         step={step}
         ex={ex}
         applyEx={applyEx}
+        numRowsInput={numRowsInput}
+        setNumRowsInput={setNumRowsInput}
+        inputError={inputError}
+        handleReset={handleReset}
       />
     </div>
   )

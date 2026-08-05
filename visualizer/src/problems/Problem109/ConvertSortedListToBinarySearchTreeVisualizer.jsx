@@ -140,11 +140,48 @@ function generateSteps(list) {
   return steps
 }
 
-function VisualizationPanel({ step }) {
+function VisualizationPanel({ step, listInput, setListInput, inputError, EXAMPLES, applyExample, handleReset }) {
   if (!step) return <div style={{ padding: 16, color: '#94a3b8' }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+          {EXAMPLES.map((ex) => (
+            <button
+              key={ex.label}
+              onClick={() => applyExample(ex)}
+              style={{
+                padding: '6px 12px',
+                fontSize: 12,
+                borderRadius: 4,
+                border: '1px solid #cbd5e1',
+                backgroundColor: '#f1f5f9',
+                cursor: 'pointer',
+                fontWeight: 500,
+              }}
+            >
+              {ex.label}
+            </button>
+          ))}
+        </div>
+        <input
+          value={listInput}
+          onChange={(e) => { setListInput(e.target.value); handleReset() }}
+          placeholder="[1, 2, 3, 4, 5, 6]"
+          style={{
+            padding: '8px 12px',
+            fontSize: 12,
+            borderRadius: 4,
+            border: '1px solid #cbd5e1',
+            fontFamily: 'monospace',
+            width: '100%',
+            boxSizing: 'border-box',
+          }}
+        />
+        {inputError && <div style={{ fontSize: 11, color: '#dc2626' }}>{inputError}</div>}
+      </div>
+
       <div style={{ padding: 12, backgroundColor: '#f3e8ff', borderRadius: 6, borderLeft: '4px solid #8b5cf6' }}>
         <div style={{ fontSize: 12, color: '#5b21b6', fontStyle: 'italic' }}>
           Use middle element as root to balance the tree recursively.
@@ -204,20 +241,39 @@ function VisualizationPanel({ step }) {
 }
 
 export default function ConvertSortedListToBinarySearchTreeVisualizer() {
-  const [input] = useState(EXAMPLES[0]?.list || [1, 2, 3, 4, 5, 6])
+  const [listInput, setListInput] = useState('[1, 2, 3, 4, 5, 6]')
+
+  const { list, inputError } = useMemo(() => {
+    try {
+      const parsed = JSON.parse(listInput)
+      if (!Array.isArray(parsed)) throw new Error('Input must be an array')
+      const nums = parsed.map(v => typeof v === 'number' ? v : Number(v))
+      if (nums.some(isNaN)) throw new Error('All elements must be numbers')
+      if (nums.length > 20) throw new Error('Max 20 elements for clarity')
+      return { list: nums, inputError: '' }
+    } catch (e) {
+      return { list: [1, 2, 3, 4, 5, 6], inputError: e.message }
+    }
+  }, [listInput])
+
   const steps = useMemo(
     () =>
-      generateSteps(input).map((s) => ({
+      generateSteps(list).map((s) => ({
         ...s,
         relatedLines: s.relatedLines ?? (s.activeLine ? [s.activeLine] : []),
       })),
-    [input]
+    [list]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+
+  const applyExample = useCallback((ex) => {
+    setListInput(JSON.stringify(ex.list))
+    handleReset()
+  }, [handleReset])
 
   // Extract panel consts
   const codePanel = (
@@ -234,7 +290,17 @@ export default function ConvertSortedListToBinarySearchTreeVisualizer() {
     </div>
   )
 
-  const primaryPanel = <VisualizationPanel step={step} />
+  const primaryPanel = (
+    <VisualizationPanel
+      step={step}
+      listInput={listInput}
+      setListInput={setListInput}
+      inputError={inputError}
+      EXAMPLES={EXAMPLES}
+      applyExample={applyExample}
+      handleReset={handleReset}
+    />
+  )
 
   const statusPanel = (
     <div className="cslbtbst-status">

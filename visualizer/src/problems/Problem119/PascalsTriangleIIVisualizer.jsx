@@ -73,10 +73,23 @@ const EXAMPLES = [
 
 export default function PascalsTriangleIIVisualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [rowIndexInput, setRowIndexInput] = useState(String(EXAMPLES[0]?.rowIndex || 3))
+
+  const { rowIndex, inputError } = useMemo(() => {
+    try {
+      const val = parseInt(rowIndexInput, 10)
+      if (isNaN(val) || val < 0) throw new Error('rowIndex must be >= 0')
+      if (val > 33) throw new Error('Max 33 for clarity')
+      return { rowIndex: val, inputError: '' }
+    } catch (e) {
+      return { rowIndex: EXAMPLES[0]?.rowIndex || 3, inputError: e.message }
+    }
+  }, [rowIndexInput])
+
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]
-  const steps = useMemo(() => generateSteps(ex.rowIndex), [ex])
+  const steps = useMemo(() => generateSteps(rowIndex), [rowIndex])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
@@ -84,6 +97,7 @@ export default function PascalsTriangleIIVisualizer() {
 
   const applyExample = useCallback((idx) => {
     setExIdx(idx)
+    setRowIndexInput(String(EXAMPLES[idx]?.rowIndex || 3))
     handleReset()
   }, [handleReset])
 
@@ -104,23 +118,47 @@ export default function PascalsTriangleIIVisualizer() {
 
   const vizPanel = (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
-      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-        {EXAMPLES.map((e, i) => (
-          <button
-            key={i}
-            onClick={() => applyExample(i)}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+          {EXAMPLES.map((e, i) => (
+            <button
+              key={i}
+              onClick={() => applyExample(i)}
+              style={{
+                padding: '6px 12px',
+                borderRadius: 4,
+                border: '1px solid #cbd5e1',
+                cursor: 'pointer',
+                fontSize: 12,
+                backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
+              }}
+            >
+              {e.label}
+            </button>
+          ))}
+        </div>
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+          <label style={{ fontSize: 12, fontWeight: 500, color: '#475569' }}>rowIndex:</label>
+          <input
+            value={rowIndexInput}
+            onChange={(e) => {
+              setRowIndexInput(e.target.value)
+              handleReset()
+            }}
+            placeholder="3"
             style={{
-              padding: '6px 12px',
+              padding: '6px 8px',
+              fontSize: 12,
               borderRadius: 4,
               border: '1px solid #cbd5e1',
-              cursor: 'pointer',
-              fontSize: 12,
-              backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
+              width: '60px',
             }}
-          >
-            {e.label}
-          </button>
-        ))}
+            type="number"
+            min="0"
+            max="33"
+          />
+          {inputError && <span style={{ fontSize: 11, color: '#dc2626' }}>{inputError}</span>}
+        </div>
       </div>
 
       {step && (

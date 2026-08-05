@@ -6,6 +6,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamplesOr } from "../../config/examplesRegistry";
 import "./FlattenBinaryTreeVisualizer.css";
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -32,11 +33,12 @@ const SOLUTION_CODE = [
   { line: 13, text: "        cur = cur.right" },
 ];
 
-// Tree represented as flat array (1-indexed), -1 = null
-const EXAMPLES = {
-  ex1: { label: "[1,2,5,3,4,null,6]", tree: [null, 1, 2, 5, 3, 4, null, 6] },
-  ex2: { label: "[1,2,3,4,5,6,7]", tree: [null, 1, 2, 3, 4, 5, 6, 7] },
-};
+// Tree represented as flat array (1-indexed), null = null
+const EXAMPLES = getExamplesOr('flatten-binary-tree-to-linked-list', [
+  { label: "Example 1", arr: [null, 1, 2, 5, 3, 4, null, 6] },
+  { label: "Example 2", arr: [null, 1, 2, 3, 4, 5, 6, 7] },
+  { label: "Single Node", arr: [null, 1] },
+]);
 
 // Build adjacency from 1-indexed array
 function buildTree(arr) {
@@ -112,16 +114,35 @@ const SVG_W = 340, SVG_H = 200;
 const NODE_R = 16;
 
 export default function FlattenBinaryTreeVisualizer() {
-  const [exKey, setExKey] = useState("ex1");
-  const ex = EXAMPLES[exKey];
-  const arr = ex.tree;
-  const origPositions = useMemo(() => layoutTree(arr), [arr]);
-  const steps = useMemo(() => generateSteps(arr), [arr]);
-  const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
-    usePlaybackState(steps.length);
-  const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((k) => { setExKey(k); handleReset(); }, [handleReset]);
-  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
+  const [arrInput, setArrInput] = useState(JSON.stringify([null, 1, 2, 5, 3, 4, null, 6]))
+
+  const { arr, inputError } = useMemo(() => {
+    try {
+      const parsed = JSON.parse(arrInput)
+      if (!Array.isArray(parsed)) throw new Error('Input must be an array')
+      if (parsed.length === 0) throw new Error('Array cannot be empty')
+      if (parsed[0] !== null) throw new Error('Array must start with null (1-indexed tree)')
+      // Validate array elements are numbers or null
+      const validated = parsed.map(v => v === null ? null : (typeof v === 'number' ? v : Number(v)))
+      if (validated.some((v, idx) => idx !== 0 && v !== null && isNaN(v))) throw new Error('All elements must be numbers or null')
+      if (validated.length > 15) throw new Error('Max 15 elements for clarity')
+      return { arr: validated, inputError: '' }
+    } catch (e) {
+      return { arr: [null, 1, 2, 5, 3, 4, null, 6], inputError: e.message }
+    }
+  }, [arrInput])
+
+  const origPositions = useMemo(() => layoutTree(arr), [arr])
+  const steps = useMemo(() => generateSteps(arr), [arr])
+  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
+    usePlaybackState(steps.length)
+  const step = stepIndex >= 0 ? steps[stepIndex] : null
+  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+
+  const applyExample = useCallback((ex) => {
+    setArrInput(JSON.stringify(ex.arr))
+    handleReset()
+  }, [handleReset])
 
   // Compute linked-list order from current right-chain
   const listOrder = useMemo(() => {
@@ -137,10 +158,41 @@ export default function FlattenBinaryTreeVisualizer() {
   // Step 3: Extract panels into consts
   const primaryPanel = (
     <div className="fbt-panel">
-      <div className="fbt-examples">
-        {Object.entries(EXAMPLES).map(([k, e]) => (
-          <button key={k} className={`fbt-chip ${exKey === k ? "active" : ""}`} onClick={() => applyEx(k)}>{e.label}</button>
-        ))}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+          {EXAMPLES.map((ex) => (
+            <button
+              key={ex.label}
+              onClick={() => applyExample(ex)}
+              style={{
+                padding: '6px 12px',
+                fontSize: 12,
+                borderRadius: 4,
+                border: '1px solid #cbd5e1',
+                backgroundColor: '#f1f5f9',
+                cursor: 'pointer',
+                fontWeight: 500,
+              }}
+            >
+              {ex.label}
+            </button>
+          ))}
+        </div>
+        <input
+          value={arrInput}
+          onChange={(e) => { setArrInput(e.target.value); handleReset() }}
+          placeholder="[null, 1, 2, 5, 3, 4, null, 6]"
+          style={{
+            padding: '8px 12px',
+            fontSize: 12,
+            borderRadius: 4,
+            border: '1px solid #cbd5e1',
+            fontFamily: 'monospace',
+            width: '100%',
+            boxSizing: 'border-box',
+          }}
+        />
+        {inputError && <div style={{ fontSize: 11, color: '#dc2626' }}>{inputError}</div>}
       </div>
 
       {/* Tree SVG */}

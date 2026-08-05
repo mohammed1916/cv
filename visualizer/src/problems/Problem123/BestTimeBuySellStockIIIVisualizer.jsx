@@ -57,15 +57,36 @@ function generateSteps(prices) {
 
 export default function BestTimeBuySellStockIIIVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-    const steps = useMemo(() => generateSteps(ex.prices), [ex]);
+    const [pricesInput, setPricesInput] = useState(JSON.stringify(EXAMPLES[0]?.prices || [3, 3, 5, 0, 0, 3, 1, 4]));
+
+    const { prices: inputPrices, inputError } = useMemo(() => {
+        try {
+            const parsed = JSON.parse(pricesInput);
+            if (!Array.isArray(parsed)) throw new Error('Input must be an array');
+            const nums = parsed.map(v => typeof v === 'number' ? v : Number(v));
+            if (nums.some(isNaN)) throw new Error('All elements must be numbers');
+            if (nums.length === 0) throw new Error('Array cannot be empty');
+            if (nums.length > 20) throw new Error('Max 20 elements for clarity');
+            if (nums.some(n => n < 0)) throw new Error('Prices must be non-negative');
+            return { prices: nums, inputError: '' };
+        } catch (e) {
+            return { prices: EXAMPLES[0]?.prices || [3, 3, 5, 0, 0, 3, 1, 4], inputError: e.message };
+        }
+    }, [pricesInput]);
+
+    const steps = useMemo(() => generateSteps(inputPrices), [inputPrices]);
     const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+    const applyEx = useCallback((e) => {
+        setEx(e);
+        setPricesInput(JSON.stringify(e.prices));
+        handleReset();
+    }, [handleReset]);
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
     const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
 
-    const prices = ex.prices;
+    const prices = inputPrices;
     const idx = step?.idx ?? -1;
     const b1 = step?.b1 ?? -Infinity;
     const b2 = step?.b2 ?? -Infinity;
@@ -98,8 +119,28 @@ export default function BestTimeBuySellStockIIIVisualizer() {
 
     const primaryPanel = (
         <div className="bt3-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
-            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                {EXAMPLES.map(e => <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : '#f1f5f9' }}>{e.label}</button>)}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                    {EXAMPLES.map(e => <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : '#f1f5f9' }}>{e.label}</button>)}
+                </div>
+                <input
+                    value={pricesInput}
+                    onChange={(e) => {
+                        setPricesInput(e.target.value);
+                        handleReset();
+                    }}
+                    placeholder="[3, 3, 5, 0, 0, 3, 1, 4]"
+                    style={{
+                        padding: '8px 12px',
+                        fontSize: 12,
+                        borderRadius: 4,
+                        border: '1px solid #cbd5e1',
+                        fontFamily: 'monospace',
+                        width: '100%',
+                        boxSizing: 'border-box',
+                    }}
+                />
+                {inputError && <div style={{ fontSize: 11, color: '#dc2626' }}>{inputError}</div>}
             </div>
             <svg width={SVG_W} height={SVG_H + 4} style={{ border: '1px solid #e2e8f0', borderRadius: 4 }}>
                 <polyline points={polyline} fill="none" stroke="#0ea5e9" strokeWidth="2" />
