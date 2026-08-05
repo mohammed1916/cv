@@ -78,14 +78,29 @@ function generateSteps(s) {
 
 export default function PalindromePartitioningIIVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => generateSteps(ex.s), [ex]);
+  const [sInput, setSInput] = useState(EXAMPLES[0]?.s || 'nitin');
+
+  const { s, inputError } = useMemo(() => {
+    try {
+      if (!sInput || sInput.length === 0) throw new Error('String cannot be empty');
+      if (sInput.length > 15) throw new Error('Max 15 characters for clarity');
+      return { s: sInput, inputError: '' };
+    } catch (e) {
+      return { s: EXAMPLES[0]?.s || 'nitin', inputError: e.message };
+    }
+  }, [sInput]);
+
+  const steps = useMemo(() => generateSteps(s), [s]);
   const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => {
+    setEx(e);
+    setSInput(e.s);
+    handleReset();
+  }, [handleReset]);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
-  const s = ex.s;
   const n = s.length;
   const dp = step?.dp ?? Array.from({ length: n }, (_, i) => i);
   const pal = step?.pal ?? Array.from({ length: n }, () => Array(n).fill(false));
@@ -104,6 +119,25 @@ export default function PalindromePartitioningIIVisualizer() {
           </button>
         ))}
       </div>
+      <input
+        value={sInput}
+        onChange={(e) => {
+          setSInput(e.target.value);
+          handleReset();
+        }}
+        placeholder="nitin"
+        maxLength={15}
+        style={{
+          padding: '8px 12px',
+          fontSize: 12,
+          borderRadius: 4,
+          border: '1px solid #cbd5e1',
+          marginBottom: '8px',
+          width: '100%',
+          boxSizing: 'border-box',
+        }}
+      />
+      {inputError && <div style={{ fontSize: 11, color: '#dc2626', marginBottom: '8px' }}>{inputError}</div>}
 
       <div className="pp-strings">
         <span className="pp-string-label">s</span>
