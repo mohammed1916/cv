@@ -1,7 +1,7 @@
 export const meta = {
   number: "465",
-  title: "Optimal Account Balancing",
-  slug: "optimal-account-balancing",
+  title: "Max Consecutive Ones",
+  slug: "max-consecutive-ones",
   difficulty: "Easy",
   tags: ["Bit", "Array"],
   description: "Find the maximum number of consecutive 1's in a binary array.",

@@ -1,7 +1,7 @@
 export const meta = {
   number: '299',
-  title: 'Bulls and Cows',
-  slug: 'bulls-and-cows',
+  title: 'Bulb Switcher',
+  slug: 'bulb-switcher',
   difficulty: 'Medium',
   tags: ["Math"],
   description: 'Count on bulbs after all switch operations.',

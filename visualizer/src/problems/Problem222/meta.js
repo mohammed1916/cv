@@ -1,7 +1,7 @@
 export const meta = {
   number: '222',
-  title: 'Count Complete Tree Nodes',
-  slug: 'count-complete-tree-nodes',
+  title: 'Valid Parentheses',
+  slug: 'valid-parentheses',
   difficulty: 'Easy',
   tags: ['Stack', 'String'],
   description: 'Check if parentheses/brackets/braces are valid and balanced.',

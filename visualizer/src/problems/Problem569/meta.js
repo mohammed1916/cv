@@ -1,7 +1,7 @@
 export const meta = {
   number: 569,
-  title: 'Median Employee Salary',
-  slug: 'median-employee-salary',
+  title: 'Rotate List',
+  slug: 'rotate-list',
   difficulty: 'Medium',
   tags: ['Linked List', 'Two Pointers'],
   description: 'Rotate a linked list to the right by k steps.',

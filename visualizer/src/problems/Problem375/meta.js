@@ -1,7 +1,7 @@
 export const meta = {
   number: '375',
-  title: 'Guess Number Higher or Lower II',
-  slug: 'guess-number-higher-or-lower-ii',
+  title: 'Wiggle Sort II',
+  slug: 'wiggle-sort-ii',
   difficulty: 'Hard',
   tags: ['Array', 'Sort'],
 }
