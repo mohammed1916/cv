@@ -1,0 +1,257 @@
+/* ─────────────────────────────────────────────
+   Managers with at Least 5 Direct Reports
+   (Problem 570) — SQL walkthrough
+   ───────────────────────────────────────────── */
+
+.p570-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* Direct child of .problem-content, which supplies a definite height —
+     Lumino measures this element to size its panels. */
+  height: 100%;
+  min-height: 480px;
+  overflow: hidden;
+}
+
+.p570-panel-primary,
+.p570-panel-state,
+.p570-panel-status {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  padding: 1rem;
+  gap: 0.9rem;
+}
+
+.p570-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl, 14px);
+  padding: 1rem 1.1rem;
+}
+
+.p570-section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-dim);
+  margin-bottom: 0.7rem;
+}
+
+.p570-hint {
+  margin: 0.5rem 0 0;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.p570-hint.error {
+  color: var(--error, #f87171);
+}
+
+.p570-example-row {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.p570-example-btn {
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.p570-example-btn:hover,
+.p570-example-btn.active {
+  color: var(--text);
+  border-color: rgba(34, 197, 94, 0.45);
+  background: rgba(34, 197, 94, 0.14);
+}
+
+/* ── SQL tables ───────────────────────────── */
+.p570-table-wrap {
+  overflow-x: auto;
+}
+
+.p570-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.76rem;
+}
+
+.p570-table th {
+  text-align: left;
+  white-space: nowrap;
+  padding: 0.4rem 0.55rem;
+  color: var(--text-dim);
+  font-weight: 600;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface2);
+}
+
+.p570-table td {
+  padding: 0.38rem 0.55rem;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.p570-table tr.dim td { color: var(--text-dim); }
+
+.p570-table tr.grouped td {
+  background: rgba(34, 197, 94, 0.14);
+  border-left: 3px solid rgba(34, 197, 94, 0.5);
+}
+
+.p570-table tr.kept td {
+  background: rgba(16, 185, 129, 0.18);
+}
+
+.p570-table tr.dropped td {
+  color: var(--text-dim);
+  text-decoration: line-through;
+}
+
+.p570-badge {
+  display: inline-block;
+  padding: 0.08rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  background: var(--surface3, #21213a);
+  color: var(--text-dim);
+}
+
+.p570-badge.keep {
+  background: rgba(16, 185, 129, 0.22);
+  color: #34d399;
+}
+
+.p570-badge.drop {
+  background: rgba(239, 68, 68, 0.18);
+  color: #fca5a5;
+}
+
+.p570-empty {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+/* ── Count bar for HAVING >= 5 ────────────── */
+.p570-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.p570-bar-row {
+  display: grid;
+  grid-template-columns: 110px 1fr 34px;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.p570-bar-track {
+  position: relative;
+  height: 14px;
+  border-radius: 7px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.p570-bar-fill {
+  height: 100%;
+  background: rgba(239, 68, 68, 0.45);
+  transition: width 0.25s ease;
+}
+
+.p570-bar-fill.pass {
+  background: rgba(34, 197, 94, 0.6);
+}
+
+/* The HAVING threshold marker at 5 reports */
+.p570-bar-threshold {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--text-dim);
+}
+
+.p570-bar-count {
+  text-align: right;
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* ── State readouts ───────────────────────── */
+.p570-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 0.5rem;
+}
+
+.p570-stat {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  font-size: 0.78rem;
+}
+
+.p570-stat-key { color: var(--text-muted); }
+
+.p570-stat-val {
+  color: var(--text);
+  font-family: 'Fira Code', monospace;
+  font-weight: 700;
+}
+
+.p570-stat.highlight .p570-stat-val { color: var(--accent-400, #22c55e); }
+
+/* ── Code panel ───────────────────────────── */
+.p570-panel-code {
+  position: relative;
+  height: 100%;
+  overflow: auto;
+}
+
+/* ── Status panel ─────────────────────────── */
+.p570-status {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.82rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 8px;
+  background: var(--surface2);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.p570-status.done {
+  background: rgba(16, 185, 129, 0.16);
+  border-color: rgba(16, 185, 129, 0.4);
+  color: #86efac;
+}
+
+.p570-status.error {
+  background: rgba(239, 68, 68, 0.16);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+}

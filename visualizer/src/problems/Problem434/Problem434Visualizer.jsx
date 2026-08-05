@@ -1,493 +1,346 @@
 import { useState, useMemo, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
-import FloatingPanel from '../../components/shared/FloatingPanel'
+import { createPortal } from 'react-dom'
+import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import './Problem434Visualizer.css'
+import { getExamplesOr } from '../../config/examplesRegistry'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
-import { getSolutionCode } from '../../config/solutionCodeRegistry'
-const SOLUTION_CODE = getSolutionCode('number-of-islands-ii')
+import LuminoDockPanel from '../../components/LuminoDockPanel'
+import './Problem434Visualizer.css'
 
-const PATTERNS = ['add_land', 'check_neighbor', 'complete', 'init', 'step_complete', 'union']
+const PATTERNS = ['init', 'scan', 'segment_start', 'inside', 'space', 'done', 'error']
 const LINE_PATTERN_MAP = {
-  1: 'init',
-  2: 'add_land',
-  3: 'check_neighbor',
-  4: 'union',
-  5: 'step_complete',
-  6: 'complete'
+  2: 'init',
+  3: 'scan',
+  6: 'space',
+  7: 'segment_start',
+  8: 'done',
 }
 
-
-const EXAMPLES = [
-  {
-    label: 'Islands Form',
-    m: 3,
-    n: 3,
-    positions: [[0, 0], [0, 2], [2, 1]],
-  },
-  {
-    label: 'Islands Merge',
-    m: 4,
-    n: 4,
-    positions: [[0, 0], [0, 1], [1, 0], [1, 1]],
-  },
-  {
-    label: 'Single Island',
-    m: 2,
-    n: 2,
-    positions: [[0, 0], [0, 1], [1, 0], [1, 1]],
-  },
+const SOLUTION_CODE = [
+  { line: 1, text: 'def countSegments(s: str) -> int:' },
+  { line: 2, text: '    count = 0' },
+  { line: 3, text: '    for i, ch in enumerate(s):' },
+  { line: 4, text: '        # a segment starts at a non-space whose' },
+  { line: 5, text: '        # left neighbour is a space (or the string start)' },
+  { line: 6, text: '        if ch != " " and (i == 0 or s[i - 1] == " "):' },
+  { line: 7, text: '            count += 1' },
+  { line: 8, text: '    return count' },
 ]
 
-class UnionFind {
-  constructor(n) {
-    this.parent = Array(n).fill(-1)
-    this.rank = Array(n).fill(0)
-    this.count = 0
-  }
-
-  find(x) {
-    if (this.parent[x] === -1) return -1
-    if (this.parent[x] !== x) {
-      this.parent[x] = this.find(this.parent[x])
-    }
-    return this.parent[x]
-  }
-
-  union(x, y) {
-    const rootX = this.find(x)
-    const rootY = this.find(y)
-    if (rootX === -1 || rootY === -1 || rootX === rootY) return
-
-    if (this.rank[rootX] < this.rank[rootY]) {
-      this.parent[rootX] = rootY
-    } else if (this.rank[rootX] > this.rank[rootY]) {
-      this.parent[rootY] = rootX
-    } else {
-      this.parent[rootY] = rootX
-      this.rank[rootX]++
-    }
-    this.count--
-  }
-
-  addLand(idx) {
-    this.parent[idx] = idx
-    this.count++
-  }
-}
-
-function generateSteps(m, n, positions) {
+function generateSteps(text) {
   const steps = []
-  const uf = new UnionFind(m * n)
+  try {
+    const s = text ?? ''
+    if (s.length > 80) throw new Error('keep the string to 80 characters or fewer')
 
-  const getIdx = (r, c) => r * n + c
-  const getNeighbors = (r, c) => {
-    const neighbors = []
-    for (const [dr, dc] of [[0, 1], [1, 0], [0, -1], [-1, 0]]) {
-      const nr = r + dr, nc = c + dc
-      if (nr >= 0 && nr < m && nc >= 0 && nc < n) {
-        neighbors.push([nr, nc])
-      }
-    }
-    return neighbors
-  }
+    let count = 0
+    const marks = new Array(s.length).fill(null) // 'start' | 'inside' | 'space'
 
-  steps.push({
-    activeLine: 1,
-    phase: 'init',
-    m,
-    n,
-    positions: [],
-    grid: Array(m).fill(null).map(() => Array(n).fill(0)),
-    ufParent: [-1],
-    islandCount: 0,
-    message: `Initialize ${m}x${n} grid and Union-Find with 0 islands`,
-  })
+    const snap = (extra) => ({
+      s,
+      count,
+      marks: [...marks],
+      ...extra,
+    })
 
-  for (const [r, c] of positions) {
-    const idx = getIdx(r, c)
-    uf.addLand(idx)
-
-    const grid = Array(m).fill(null).map(() => Array(n).fill(0))
-    const addedPositions = positions.slice(0, positions.indexOf([r, c]) + 1)
-    for (const [pr, pc] of addedPositions) {
-      grid[pr][pc] = 1
-    }
-
-    steps.push({
+    steps.push(snap({
+      phase: 'init',
       activeLine: 2,
-      phase: 'add_land',
-      m,
-      n,
-      currentPos: [r, c],
-      positions: [...addedPositions],
-      grid,
-      ufParent: [...uf.parent],
-      islandCount: uf.count,
-      message: `Add land at [${r},${c}], count = ${uf.count}`,
-    })
+      message: `s = "${s}" (length ${s.length}). Count = 0. A segment is a maximal run of non-space characters.`,
+    }))
 
-    const neighbors = getNeighbors(r, c)
-    const mergedNeighbors = []
+    for (let i = 0; i < s.length; i++) {
+      const ch = s[i]
+      const isStart = ch !== ' ' && (i === 0 || s[i - 1] === ' ')
 
-    for (const [nr, nc] of neighbors) {
-      const nIdx = getIdx(nr, nc)
-      if (grid[nr][nc] === 1) {
-        const beforeCount = uf.count
-        uf.union(idx, nIdx)
-        mergedNeighbors.push({ pos: [nr, nc], idx: nIdx, merged: beforeCount !== uf.count })
-
-        steps.push({
-          activeLine: 3,
-          phase: 'check_neighbor',
-          m,
-          n,
-          currentPos: [r, c],
-          neighborPos: [nr, nc],
-          positions: [...addedPositions],
-          grid,
-          ufParent: [...uf.parent],
-          islandCount: uf.count,
-          highlightedCells: [[r, c], [nr, nc]],
-          message: `Check neighbor [${nr},${nc}], islands = ${uf.count}`,
-        })
-
-        if (uf.count !== beforeCount) {
-          steps.push({
-            activeLine: 4,
-            phase: 'union',
-            m,
-            n,
-            currentPos: [r, c],
-            neighborPos: [nr, nc],
-            positions: [...addedPositions],
-            grid,
-            ufParent: [...uf.parent],
-            islandCount: uf.count,
-            mergedCells: [[r, c], [nr, nc]],
-            message: `Union: merged islands, count = ${uf.count}`,
-          })
-        }
+      if (ch === ' ') {
+        marks[i] = 'space'
+        steps.push(snap({
+          phase: 'space',
+          activeLine: 6,
+          pointer: i,
+          message: `i=${i}: space — not a segment start.`,
+        }))
+      } else if (isStart) {
+        count++
+        marks[i] = 'start'
+        steps.push(snap({
+          phase: 'segment_start',
+          activeLine: 7,
+          pointer: i,
+          message: `i=${i}: '${ch}' with a space (or string start) to its left → new segment #${count}.`,
+        }))
+      } else {
+        marks[i] = 'inside'
+        steps.push(snap({
+          phase: 'inside',
+          activeLine: 6,
+          pointer: i,
+          message: `i=${i}: '${ch}' continues the current segment.`,
+        }))
       }
     }
 
-    steps.push({
-      activeLine: 5,
-      phase: 'step_complete',
-      m,
-      n,
-      currentPos: [r, c],
-      positions: [...addedPositions],
-      grid,
-      ufParent: [...uf.parent],
-      islandCount: uf.count,
-      message: `Step complete: ${uf.count} island(s) after adding [${r},${c}]`,
-    })
+    const segments = s.split(' ').filter((p) => p.length > 0)
+    steps.push(snap({
+      phase: 'done',
+      activeLine: 8,
+      result: count,
+      segments,
+      message: `Result: ${count} segment(s)${segments.length ? ` — ${segments.map((p) => `"${p}"`).join(', ')}` : ''}.`,
+    }))
+  } catch (e) {
+    steps.push({ phase: 'error', activeLine: 1, error: true, message: `Error: ${e.message}` })
   }
-
-  steps.push({
-    activeLine: 6,
-    phase: 'complete',
-    m,
-    n,
-    positions,
-    grid: (() => {
-      const g = Array(m).fill(null).map(() => Array(n).fill(0))
-      for (const [r, c] of positions) g[r][c] = 1
-      return g
-    })(),
-    ufParent: [...uf.parent],
-    islandCount: uf.count,
-    isComplete: true,
-    message: `Final island count: ${uf.count}`,
-  })
-
   return steps
 }
 
-function GridVisualization({ grid, m, n, currentPos, highlightedCells, mergedCells }) {
-  const cellSize = 40
+const EXAMPLES = getExamplesOr('number-of-segments-in-a-string', [
+  { label: 'Example 1', s: 'Hello, my name is John' },
+  { label: 'Example 2', s: 'Hello' },
+  { label: 'Padded', s: '   love   live!  mu   ' },
+  { label: 'Empty', s: '' },
+])
 
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Grid</div>
-      <div style={{
-        display: 'inline-grid',
-        gridTemplateColumns: `repeat(${n}, ${cellSize}px)`,
-        gap: 2,
-        padding: 12,
-        backgroundColor: '#f1f5f9',
-        borderRadius: 8,
-        border: '2px solid #cbd5e1',
-      }}>
-        {grid.map((row, r) =>
-          row.map((cell, c) => {
-            const isHighlighted = highlightedCells?.some(([hr, hc]) => hr === r && hc === c)
-            const isMerged = mergedCells?.some(([mr, mc]) => mr === r && mc === c)
-            const isCurrent = currentPos && currentPos[0] === r && currentPos[1] === c
+export default function Problem434Visualizer() {
+  const [text, setText] = useState('Hello, my name is John')
+  const [panelDivs, setPanelDivs] = useState(null)
 
-            return (
-              <motion.div
-                key={`${r}-${c}`}
-                style={{
-                  width: cellSize,
-                  height: cellSize,
-                  borderRadius: 4,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: 10,
-                  fontWeight: 600,
-                  backgroundColor: cell === 1 ? '#1e40af' : '#e2e8f0',
-                  border: isMerged ? '3px solid #10b981' : isCurrent ? '3px solid #dc2626' : isHighlighted ? '2px solid #f59e0b' : '1px solid #cbd5e1',
-                  color: cell === 1 ? '#ffffff' : '#64748b',
-                }}
-                animate={{
-                  scale: isCurrent ? 1.1 : isHighlighted || isMerged ? 1.05 : 1,
-                  boxShadow: isCurrent ? '0 0 12px rgba(220,38,38,0.5)' : isMerged ? '0 0 12px rgba(16,185,129,0.5)' : 'none',
-                }}
-                transition={{ duration: 0.3 }}
-              >
-                {cell === 1 ? '🌍' : '~'}
-              </motion.div>
-            )
-          })
-        )}
-      </div>
-    </div>
+  const inputError = useMemo(
+    () => (text.length > 80 ? 'keep the string to 80 characters or fewer' : ''),
+    [text],
   )
-}
 
-function UnionFindVisualization({ ufParent, m, n, islandCount }) {
-  const displayParent = ufParent.slice(0, Math.min(m * n, 9))
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Union-Find Parent Array (sample)</div>
-      <div style={{
-        padding: 12,
-        backgroundColor: '#f1f5f9',
-        borderRadius: 8,
-        border: '2px solid #cbd5e1',
-      }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 12 }}>
-          {displayParent.map((parent, idx) => (
-            <motion.div
-              key={idx}
-              style={{
-                padding: '6px 10px',
-                borderRadius: 4,
-                backgroundColor: parent === -1 ? '#fee2e2' : parent === idx ? '#ecfdf5' : '#dbeafe',
-                border: parent === -1 ? '2px solid #dc2626' : parent === idx ? '2px solid #10b981' : '2px solid #0284c7',
-                fontSize: 11,
-                fontWeight: 600,
-                color: parent === -1 ? '#991b1b' : parent === idx ? '#047857' : '#0c4a6e',
-                minWidth: 28,
-                textAlign: 'center',
-              }}
-              animate={{ scale: parent !== -1 ? 1 : 0.95 }}
-            >
-              {parent === -1 ? '∅' : parent}
-            </motion.div>
-          ))}
-        </div>
-        <div style={{
-          padding: 12,
-          backgroundColor: '#f0fdf4',
-          borderRadius: 4,
-          border: '2px solid #10b981',
-          textAlign: 'center',
-          fontSize: 12,
-          fontWeight: 600,
-          color: '#047857',
-        }}>
-          Island Count: {islandCount}
-        </div>
-      </div>
-    </div>
+  const steps = useMemo(
+    () => generateSteps(text).map((current) => ({
+      ...current,
+      relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
+    })),
+    [text],
   )
-}
 
-function IslandCountVisualization({ islandCount, step }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Island Count Progress</div>
-      <div style={{
-        padding: 16,
-        backgroundColor: '#f3e8ff',
-        borderRadius: 8,
-        border: '2px solid #8b5cf6',
-        textAlign: 'center',
-      }}>
-        <motion.div
-          style={{ fontSize: 32, fontWeight: 700, color: '#6b21a8' }}
-          animate={{ scale: [1, 1.1, 1] }}
-          transition={{ duration: 0.5 }}
-        >
-          {islandCount}
-        </motion.div>
-        <div style={{ fontSize: 11, color: '#6b21a8', marginTop: 8 }}>
-          {islandCount === 1 ? '1 island' : `${islandCount} islands`}
-        </div>
-        {step?.currentPos && (
-          <div style={{ fontSize: 10, color: '#7c3aed', marginTop: 8 }}>
-            Added: [{step.currentPos[0]},{step.currentPos[1]}]
+  const {
+    stepIndex, setStepIndex, stepForward, stepBack, togglePlay,
+    handleReset, isPlaying, speed, setSpeed, isDone,
+  } = usePlaybackState(steps.length)
+
+  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+
+  const step = stepIndex >= 0 ? steps[stepIndex] : null
+
+  const applyExample = useCallback((ex) => {
+    setText(ex.s)
+    handleReset()
+  }, [handleReset])
+
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  const primaryPanel = (
+    <div className="p434-panel-primary">
+      <div className="p434-card">
+        <div className="p434-section-label">Input</div>
+        <div className="p434-input-row">
+          <div className="p434-field grow">
+            <label className="p434-input-label" htmlFor="p434-s">s</label>
+            <input
+              id="p434-s"
+              className={`p434-input mono ${inputError ? 'has-error' : ''}`}
+              value={text}
+              onChange={(e) => { setText(e.target.value); handleReset() }}
+              placeholder="Hello, my name is John"
+            />
           </div>
-        )}
-      </div>
-    </div>
-  )
-}
-
-function VisualizationPanel({ step, applyEx }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
-      <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {EXAMPLES.map(e => (
+        </div>
+        <p className={`p434-hint ${inputError ? 'error' : ''}`}>
+          {inputError || 'Leading, trailing and repeated spaces do not create empty segments.'}
+        </p>
+        <div className="p434-example-row">
+          {EXAMPLES.map((ex) => (
             <button
-              key={e.label}
-              onClick={() => applyEx(e)}
-              style={{
-                padding: '6px 12px',
-                borderRadius: 4,
-                border: '1px solid #cbd5e1',
-                cursor: 'pointer',
-                fontSize: 12,
-                backgroundColor: '#f1f5f9',
-              }}
+              type="button"
+              key={ex.label}
+              className={`p434-example-btn ${text === ex.s ? 'active' : ''}`}
+              onClick={() => applyExample(ex)}
             >
-              {e.label}
+              {ex.label}
             </button>
           ))}
         </div>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-        <GridVisualization
-          grid={step?.grid || Array(3).fill(null).map(() => Array(3).fill(0))}
-          m={step?.m || 3}
-          n={step?.n || 3}
-          currentPos={step?.currentPos}
-          highlightedCells={step?.highlightedCells}
-          mergedCells={step?.mergedCells}
-        />
-
-        <UnionFindVisualization
-          ufParent={step?.ufParent || [-1]}
-          m={step?.m || 3}
-          n={step?.n || 3}
-          islandCount={step?.islandCount || 0}
-        />
-
-        <IslandCountVisualization
-          islandCount={step?.islandCount || 0}
-          step={step}
-        />
-
-        <div style={{
-          padding: 12,
-          backgroundColor: '#fef3c7',
-          borderRadius: 6,
-          border: '1px solid #fbbf24',
-          fontSize: 11,
-          color: '#78350f',
-          fontFamily: 'monospace',
-        }}>
-          {step?.message || 'Initialize grid'}
+      {step && !step.error && (
+        <div className="p434-card">
+          <div className="p434-section-label">Character Scan</div>
+          {step.s.length === 0 ? (
+            <p className="p434-hint">Empty string — 0 segments.</p>
+          ) : (
+            <div className="p434-chars">
+              {step.s.split('').map((ch, idx) => (
+                <motion.div
+                  key={idx}
+                  className={`p434-char ${step.marks[idx] ?? ''} ${idx === step.pointer ? 'pointer' : ''}`}
+                  animate={{ scale: idx === step.pointer ? 1.15 : 1 }}
+                >
+                  <span className="p434-char-glyph">{ch === ' ' ? '␣' : ch}</span>
+                  <span className="p434-char-idx">{idx}</span>
+                </motion.div>
+              ))}
+            </div>
+          )}
+          <div className="p434-legend">
+            <span><i className="p434-sw start" /> segment start</span>
+            <span><i className="p434-sw inside" /> inside segment</span>
+            <span><i className="p434-sw space" /> space</span>
+          </div>
         </div>
+      )}
+
+      {step?.segments && (
+        <div className="p434-card">
+          <div className="p434-section-label">Segments Found</div>
+          <div className="p434-segments">
+            {step.segments.length === 0
+              ? <p className="p434-hint">None.</p>
+              : step.segments.map((seg, idx) => (
+                <div key={idx} className="p434-segment">
+                  <span className="p434-segment-n">{idx + 1}</span>{seg}
+                </div>
+              ))}
+          </div>
+        </div>
+      )}
+
+      {step?.result !== undefined && (
+        <div className="p434-result">
+          <div className="p434-section-label" style={{ marginBottom: '0.3rem' }}>Result</div>
+          <div className="p434-result-val">{step.result}</div>
+        </div>
+      )}
+    </div>
+  )
+
+  const statePanel = (
+    <div className="p434-panel-state">
+      <div className="p434-card">
+        <div className="p434-section-label">Counters</div>
+        <div className="p434-stat-grid">
+          <div className="p434-stat highlight"><span className="p434-stat-key">count</span><span className="p434-stat-val">{step?.count ?? 0}</span></div>
+          {step?.pointer !== undefined && (
+            <div className="p434-stat"><span className="p434-stat-key">i</span><span className="p434-stat-val">{step.pointer}</span></div>
+          )}
+          <div className="p434-stat"><span className="p434-stat-key">len(s)</span><span className="p434-stat-val">{step?.s?.length ?? 0}</span></div>
+        </div>
+      </div>
+
+      {step && !step.error && step.pointer !== undefined && (
+        <div className="p434-card">
+          <div className="p434-section-label">Boundary Test</div>
+          <div className="p434-stat-grid">
+            <div className="p434-stat">
+              <span className="p434-stat-key">s[i]</span>
+              <span className="p434-stat-val">{step.s[step.pointer] === ' ' ? '␣' : step.s[step.pointer]}</span>
+            </div>
+            <div className="p434-stat">
+              <span className="p434-stat-key">s[i-1]</span>
+              <span className="p434-stat-val">
+                {step.pointer === 0 ? '—' : (step.s[step.pointer - 1] === ' ' ? '␣' : step.s[step.pointer - 1])}
+              </span>
+            </div>
+          </div>
+          <p className="p434-hint">
+            Start when s[i] is not a space AND (i == 0 OR s[i-1] is a space).
+          </p>
+        </div>
+      )}
+    </div>
+  )
+
+  const codePanel = (
+    <div className="p434-panel-code">
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
+        />
+      )}
+    </div>
+  )
+
+  const statusPanel = (
+    <div className="p434-panel-status">
+      <div className={`p434-status ${step?.phase === 'done' ? 'done' : step?.error ? 'error' : ''}`}>
+        {step?.message ?? 'Press Play or Step to begin.'}
       </div>
     </div>
   )
-}
 
-export default function Problem434Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
-
-  const steps = useMemo(
-    () =>
-      generateSteps(ex.m, ex.n, ex.positions).map((current) => ({
-        ...current,
-        relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
-      })),
-    [ex]
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
   )
 
-  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
-    usePlaybackState(steps.length)
-
-  const step = stepIndex >= 0 ? steps[stepIndex] : null
-
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
-
-  const connectivity = useCodeVisualConnectivity({
-    steps,
-    stepIndex,
-    onStepJump: setStepIndex,
-  })
-
-  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
-
-  const dockPanels = useMemo(() => [
-    {
-      id: 'code',
-      title: 'Code',
-      content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-        />
-      ),
-    },
-    {
-      id: 'viz',
-      title: '🏝️ Islands II',
-      content: (
-        <VisualizationPanel
-          step={step}
-          applyEx={applyEx}
-        />
-      ),
-    },
-  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, applyEx])
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
+      { id: 'state', title: 'State', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
 
   return (
-    <div className="problem-shell">
-      <DockableWorkspace
-        panels={dockPanels}
-        initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
-      />
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={e => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
-      
+    <div className="p434-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

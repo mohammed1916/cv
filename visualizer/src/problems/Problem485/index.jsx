@@ -1,1 +1,1 @@
-export { default } from "./Problem485Visualizer";
+export { default } from './MaxConsecutiveOnesVisualizer'

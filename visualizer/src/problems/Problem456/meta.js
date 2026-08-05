@@ -1,7 +1,7 @@
 export const meta = {
   number: '456',
-  title: 'Ugly Number II',
-  slug: 'ugly-number-ii',
+  title: '132 Pattern',
+  slug: '132-pattern',
   difficulty: 'Medium',
-  tags: ['DP', 'Heap'],
+  tags: ['Array', 'Stack', 'Monotonic Stack'],
 }

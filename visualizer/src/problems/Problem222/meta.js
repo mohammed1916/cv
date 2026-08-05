@@ -1,9 +1,9 @@
 export const meta = {
   number: '222',
-  title: 'Valid Parentheses',
-  slug: 'valid-parentheses',
+  title: 'Count Complete Tree Nodes',
+  slug: 'count-complete-tree-nodes',
   difficulty: 'Easy',
-  tags: ['Stack', 'String'],
-  description: 'Check if parentheses/brackets/braces are valid and balanced.',
+  tags: ['Binary Search', 'Bit Manipulation', 'Tree', 'Binary Tree'],
+  description: 'Count the nodes of a complete binary tree in O(log^2 n) by comparing spine heights.',
   accent: '#06b6d4',
 }

@@ -1,1 +1,1 @@
-export { default } from './SplitArrayVisualizer'
+export { default } from './SplitArrayEqualSumVisualizer'

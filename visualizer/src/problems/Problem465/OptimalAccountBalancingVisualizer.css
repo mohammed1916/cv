@@ -1,0 +1,239 @@
+/* ─────────────────────────────────────────────
+   Optimal Account Balancing (Problem 465)
+   ───────────────────────────────────────────── */
+
+.p465-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* .problem-content supplies a definite height; Lumino measures this root. */
+  height: 100%;
+  min-height: 480px;
+  overflow: hidden;
+}
+
+.p465-panel-primary,
+.p465-panel-state,
+.p465-panel-status {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  padding: 1rem;
+  gap: 0.9rem;
+}
+
+.p465-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl, 14px);
+  padding: 1rem 1.1rem;
+}
+
+.p465-section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-dim);
+  margin-bottom: 0.7rem;
+}
+
+.p465-input {
+  width: 100%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius, 10px);
+  padding: 0.55rem 0.7rem;
+  color: var(--text);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.p465-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.p465-input.has-error {
+  border-color: rgba(248, 113, 113, 0.55);
+}
+
+.p465-hint {
+  margin: 0.45rem 0 0;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.p465-hint.error {
+  color: var(--error, #f87171);
+}
+
+.p465-example-row {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  margin-top: 0.7rem;
+}
+
+.p465-example-btn {
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.p465-example-btn:hover,
+.p465-example-btn.active {
+  color: var(--text);
+  border-color: rgba(234, 179, 8, 0.45);
+  background: rgba(234, 179, 8, 0.14);
+}
+
+/* ── State readouts ───────────────────────── */
+.p465-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.5rem;
+}
+
+.p465-stat {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  font-size: 0.78rem;
+}
+
+.p465-stat-key {
+  color: var(--text-muted);
+}
+
+.p465-stat-val {
+  color: var(--text);
+  font-family: 'Fira Code', monospace;
+  font-weight: 700;
+}
+
+.p465-stat.credit .p465-stat-val {
+  color: #34d399;
+}
+
+.p465-stat.debit .p465-stat-val {
+  color: #f87171;
+}
+
+/* ── debts[] row ──────────────────────────── */
+.p465-debt-row {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.p465-debt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 48px;
+  padding: 0.4rem 0.45rem;
+  border-radius: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+}
+
+.p465-debt.zero {
+  opacity: 0.5;
+}
+
+.p465-debt.cursor {
+  border-color: var(--accent-400, #fbbf24);
+  background: rgba(251, 191, 36, 0.14);
+}
+
+.p465-debt.partner {
+  border-color: var(--primary, #6366f1);
+}
+
+.p465-debt-person {
+  font-size: 0.66rem;
+  color: var(--text-dim);
+}
+
+.p465-debt-val {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.p465-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.p465-list-item {
+  padding: 0.35rem 0.55rem;
+  border-radius: 6px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.p465-result {
+  text-align: center;
+  padding: 0.9rem;
+  border-radius: 10px;
+  background: rgba(234, 179, 8, 0.16);
+  border: 1px solid rgba(234, 179, 8, 0.4);
+}
+
+.p465-result-val {
+  color: var(--accent-400, #fbbf24);
+  font-size: 1.6rem;
+  font-weight: 800;
+  font-family: 'Fira Code', monospace;
+}
+
+/* ── Code + status ────────────────────────── */
+.p465-panel-code {
+  position: relative;
+  height: 100%;
+  overflow: auto;
+}
+
+.p465-status {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.82rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 8px;
+  background: var(--surface2);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.p465-status.done {
+  background: rgba(16, 185, 129, 0.16);
+  border-color: rgba(16, 185, 129, 0.4);
+  color: #86efac;
+}
+
+.p465-status.error {
+  background: rgba(239, 68, 68, 0.16);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+}

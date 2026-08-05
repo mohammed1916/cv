@@ -1,9 +1,9 @@
 export const meta = {
   number: 552,
-  title: 'Regular Expression Matching',
-  slug: 'regular-expression-matching',
+  title: 'Student Attendance Record II',
+  slug: 'student-attendance-record-ii',
   difficulty: 'Hard',
-  tags: ['Dynamic Programming', 'String', 'Regex'],
-  description: 'Given an input string s and a pattern p, implement regular expression matching with support for \'.\'(any single character) and \'*\' (zero or more of the preceding element).',
+  tags: ['Dynamic Programming'],
+  description: 'Count the number of length-n attendance records over {P, A, L} that are rewardable — containing fewer than 2 absences and never 3 or more consecutive late days — modulo 10^9 + 7.',
   accent: '#a78bfa',
 }

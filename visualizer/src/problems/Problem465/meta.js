@@ -1,9 +1,9 @@
 export const meta = {
   number: "465",
-  title: "Max Consecutive Ones",
-  slug: "max-consecutive-ones",
-  difficulty: "Easy",
-  tags: ["Bit", "Array"],
-  description: "Find the maximum number of consecutive 1's in a binary array.",
+  title: "Optimal Account Balancing",
+  slug: "optimal-account-balancing",
+  difficulty: "Hard",
+  tags: ["Backtracking", "Bit Manipulation", "DP", "Array"],
+  description: "Given a list of transactions between people, compute the net balance of each person and find the minimum number of transfers required to settle all debts.",
   accent: "#eab308",
 }

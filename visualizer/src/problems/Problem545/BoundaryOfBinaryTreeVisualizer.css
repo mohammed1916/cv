@@ -1,0 +1,197 @@
+/* ─────────────────────────────────────────────
+   Boundary of Binary Tree (Problem 545)
+   ───────────────────────────────────────────── */
+
+.p545-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* .problem-content supplies a definite height; Lumino measures this root. */
+  height: 100%;
+  min-height: 480px;
+  overflow: hidden;
+}
+
+.p545-panel-primary,
+.p545-panel-state,
+.p545-panel-status {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  padding: 1rem;
+  gap: 0.9rem;
+}
+
+.p545-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl, 14px);
+  padding: 1rem 1.1rem;
+}
+
+.p545-section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-dim);
+  margin-bottom: 0.7rem;
+}
+
+.p545-input {
+  width: 100%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius, 10px);
+  padding: 0.55rem 0.7rem;
+  color: var(--text);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.p545-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.p545-input.has-error {
+  border-color: rgba(248, 113, 113, 0.55);
+}
+
+.p545-hint {
+  margin: 0.45rem 0 0;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.p545-hint.error {
+  color: var(--error, #f87171);
+}
+
+.p545-example-row {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  margin-top: 0.7rem;
+}
+
+.p545-example-btn {
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.p545-example-btn:hover,
+.p545-example-btn.active {
+  color: var(--text);
+  border-color: rgba(167, 139, 250, 0.45);
+  background: rgba(167, 139, 250, 0.14);
+}
+
+/* ── Legend ───────────────────────────────── */
+.p545-legend {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  margin-top: 0.7rem;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+.p545-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.p545-swatch {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+}
+
+.p545-swatch.root { background: rgba(167, 139, 250, 0.7); }
+.p545-swatch.left { background: rgba(56, 189, 248, 0.7); }
+.p545-swatch.leaf { background: rgba(16, 185, 129, 0.7); }
+.p545-swatch.right { background: rgba(249, 115, 22, 0.7); }
+
+/* ── Lists ────────────────────────────────── */
+.p545-row {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.p545-chip {
+  min-width: 32px;
+  padding: 0.35rem 0.5rem;
+  text-align: center;
+  border-radius: 7px;
+  border: 1px solid rgba(167, 139, 250, 0.4);
+  background: rgba(167, 139, 250, 0.14);
+  color: var(--text);
+  font-family: 'Fira Code', monospace;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.p545-chip.right {
+  border-color: rgba(249, 115, 22, 0.45);
+  background: rgba(249, 115, 22, 0.14);
+}
+
+.p545-result {
+  text-align: center;
+  padding: 0.9rem;
+  border-radius: 10px;
+  background: rgba(167, 139, 250, 0.16);
+  border: 1px solid rgba(167, 139, 250, 0.4);
+}
+
+.p545-result-val {
+  color: #a78bfa;
+  font-size: 1.05rem;
+  font-weight: 800;
+  font-family: 'Fira Code', monospace;
+  word-break: break-all;
+}
+
+/* ── Code + status ────────────────────────── */
+.p545-panel-code {
+  position: relative;
+  height: 100%;
+  overflow: auto;
+}
+
+.p545-status {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.82rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 8px;
+  background: var(--surface2);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.p545-status.done {
+  background: rgba(16, 185, 129, 0.16);
+  border-color: rgba(16, 185, 129, 0.4);
+  color: #86efac;
+}
+
+.p545-status.error {
+  background: rgba(239, 68, 68, 0.16);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+}

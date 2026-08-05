@@ -1,1 +1,1 @@
-export { default } from './AssignCookiesVisualizer'
+export { default } from './RemoveBoxesVisualizer'

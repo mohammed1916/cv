@@ -1,1 +1,1 @@
-export { default } from './RotateListVisualizer'
+export { default } from './MedianEmployeeSalaryVisualizer'

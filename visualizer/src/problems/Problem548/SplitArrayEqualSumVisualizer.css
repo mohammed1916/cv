@@ -1,0 +1,290 @@
+/* ─────────────────────────────────────────────
+   Split Array with Equal Sum (Problem 548)
+   ───────────────────────────────────────────── */
+
+.p548-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* Direct child of .problem-content, which supplies a definite height —
+     Lumino measures this element to size its panels. */
+  height: 100%;
+  min-height: 480px;
+  overflow: hidden;
+}
+
+.p548-panel-primary,
+.p548-panel-state,
+.p548-panel-status {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  padding: 1rem;
+  gap: 0.9rem;
+}
+
+.p548-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl, 14px);
+  padding: 1rem 1.1rem;
+}
+
+.p548-section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-dim);
+  margin-bottom: 0.7rem;
+}
+
+.p548-input {
+  width: 100%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius, 10px);
+  padding: 0.55rem 0.7rem;
+  color: var(--text);
+  font-family: 'Fira Code', monospace;
+  font-size: 0.88rem;
+}
+
+.p548-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.p548-input.has-error {
+  border-color: rgba(248, 113, 113, 0.55);
+}
+
+.p548-hint {
+  margin: 0.5rem 0 0;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.p548-hint.error {
+  color: var(--error, #f87171);
+}
+
+.p548-example-row {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  margin-top: 0.7rem;
+}
+
+.p548-example-btn {
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.p548-example-btn:hover,
+.p548-example-btn.active {
+  color: var(--text);
+  border-color: rgba(56, 189, 248, 0.45);
+  background: rgba(56, 189, 248, 0.14);
+}
+
+/* ── Array strip ───────────────────────────── */
+.p548-array {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.p548-cell {
+  min-width: 40px;
+  padding: 0.4rem 0.35rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  border-radius: 6px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  font-family: 'Fira Code', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.p548-cell-idx {
+  font-size: 0.6rem;
+  font-weight: 500;
+  color: var(--text-dim);
+}
+
+/* Part tinting: the four quarters carved out by (i, j, k) */
+.p548-cell.part0 { background: rgba(56, 189, 248, 0.2); border-color: rgba(56, 189, 248, 0.5); }
+.p548-cell.part1 { background: rgba(34, 197, 94, 0.2);  border-color: rgba(34, 197, 94, 0.5); }
+.p548-cell.part2 { background: rgba(251, 191, 36, 0.2); border-color: rgba(251, 191, 36, 0.5); }
+.p548-cell.part3 { background: rgba(167, 139, 250, 0.2); border-color: rgba(167, 139, 250, 0.5); }
+
+/* Cut markers sit on the excluded elements nums[i], nums[j], nums[k] */
+.p548-cell.cut {
+  background: var(--surface3, #21213a);
+  border-color: var(--text-dim);
+  color: var(--text-dim);
+  text-decoration: line-through;
+}
+
+.p548-cell.pointer-i { box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.9); }
+.p548-cell.pointer-j { box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.9); }
+.p548-cell.pointer-k { box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.9); }
+
+/* ── Part sum tiles ───────────────────────── */
+.p548-parts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 0.5rem;
+}
+
+.p548-part {
+  padding: 0.5rem;
+  border-radius: 8px
+;
+  text-align: center;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+}
+
+.p548-part-name {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-dim);
+}
+
+.p548-part-sum {
+  font-family: 'Fira Code', monospace;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.p548-part.match .p548-part-sum { color: #34d399; }
+.p548-part.mismatch .p548-part-sum { color: #f87171; }
+
+/* ── Candidate set (sums seen left of j) ──── */
+.p548-set {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.p548-chip {
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(56, 189, 248, 0.16);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  font-family: 'Fira Code', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.p548-chip.hit {
+  background: rgba(52, 211, 153, 0.22);
+  border-color: rgba(52, 211, 153, 0.55);
+}
+
+.p548-empty {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+/* ── State readouts ───────────────────────── */
+.p548-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 0.5rem;
+}
+
+.p548-stat {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  font-size: 0.78rem;
+}
+
+.p548-stat-key { color: var(--text-muted); }
+
+.p548-stat-val {
+  color: var(--text);
+  font-family: 'Fira Code', monospace;
+  font-weight: 700;
+}
+
+.p548-stat.highlight .p548-stat-val { color: var(--accent-400, #38bdf8); }
+
+.p548-result {
+  text-align: center;
+  padding: 0.9rem;
+  border-radius: 10px;
+  background: rgba(56, 189, 248, 0.16);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+}
+
+.p548-result.yes {
+  background: rgba(16, 185, 129, 0.16);
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+.p548-result.no {
+  background: rgba(239, 68, 68, 0.16);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.p548-result-val {
+  font-size: 1.5rem;
+  font-weight: 800;
+  font-family: 'Fira Code', monospace;
+  color: var(--text);
+}
+
+/* ── Code panel ───────────────────────────── */
+.p548-panel-code {
+  position: relative;
+  height: 100%;
+  overflow: auto;
+}
+
+/* ── Status panel ─────────────────────────── */
+.p548-status {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.82rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 8px;
+  background: var(--surface2);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.p548-status.done {
+  background: rgba(16, 185, 129, 0.16);
+  border-color: rgba(16, 185, 129, 0.4);
+  color: #86efac;
+}
+
+.p548-status.error {
+  background: rgba(239, 68, 68, 0.16);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+}

@@ -1,1 +1,1 @@
-export { default } from "./Problem465Visualizer";
+export { default } from './OptimalAccountBalancingVisualizer'

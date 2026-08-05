@@ -1,374 +1,159 @@
 import { useState, useMemo, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
-import FloatingPanel from '../../components/shared/FloatingPanel'
+import { createPortal } from 'react-dom'
+import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 
 import { usePlaybackState } from '../../hooks/usePlaybackState'
-import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
+import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
-import PatternOverlay from "../../components/PatternOverlay";
+import LuminoDockPanel from '../../components/LuminoDockPanel'
+import './Problem456Visualizer.css'
 
-const PATTERNS = ['comparing', 'done', 'initialized', 'selected', 'start', 'updated_2', 'updated_3', 'updated_5']
+const PATTERNS = ['init', 'scan', 'found', 'pop', 'push', 'done', 'error']
 const LINE_PATTERN_MAP = {
-  1: 'done',
-  2: 'start',
-  4: 'initialized',
-  7: 'comparing',
-  8: 'selected',
-  9: 'updated_2',
-  12: 'updated_3',
-  15: 'updated_5',
-  18: 'done'
+  2: 'init',
+  4: 'scan',
+  5: 'found',
+  7: 'pop',
+  8: 'pop',
+  9: 'push',
+  10: 'done',
 }
 
-
-const SOLUTION_CODE_INLINE = [
-  { line: 1, text: 'def nthUglyNumber(n):' },
-  { line: 2, text: '    dp = [0] * n' },
-  { line: 3, text: '    dp[0] = 1' },
-  { line: 4, text: '    i2 = i3 = i5 = 0' },
-  { line: 5, text: '    next2, next3, next5 = 2, 3, 5' },
-  { line: 6, text: '    for i in range(1, n):' },
-  { line: 7, text: '        next_ugly = min(next2, next3, next5)' },
-  { line: 8, text: '        dp[i] = next_ugly' },
-  { line: 9, text: '        if next_ugly == next2:' },
-  { line: 10, text: '            i2 += 1' },
-  { line: 11, text: '            next2 = dp[i2] * 2' },
-  { line: 12, text: '        if next_ugly == next3:' },
-  { line: 13, text: '            i3 += 1' },
-  { line: 14, text: '            next3 = dp[i3] * 3' },
-  { line: 15, text: '        if next_ugly == next5:' },
-  { line: 16, text: '            i5 += 1' },
-  { line: 17, text: '            next5 = dp[i5] * 5' },
-  { line: 18, text: '    return dp[n-1]' },
-]
-const SOLUTION_CODE = SOLUTION_CODE_INLINE
-
-const EXAMPLES = getExamplesOr('ugly-number-ii', [
-  { label: 'Example 1', n: 10, expected: 12 },
-  { label: 'Example 2', n: 1, expected: 1 },
-  { label: 'Example 3', n: 15, expected: 24 },
-])
-
-const SNIPPETS = [
-  { id: 'init', label: 'Initialize', lines: [2, 3, 4, 5] },
-  { id: 'loop', label: 'DP Loop', lines: [6, 7, 8] },
-  { id: 'update', label: 'Update Pointers', lines: [9, 10, 11, 12, 13, 14, 15, 16, 17] },
-  { id: 'return', label: 'Return', lines: [18] },
+const SOLUTION_CODE = [
+  { line: 1, text: 'def find132pattern(nums) -> bool:' },
+  { line: 2, text: '    stack = []          # decreasing candidates for "3"' },
+  { line: 3, text: '    third = float("-inf")  # best candidate for "2"' },
+  { line: 4, text: '    for num in reversed(nums):' },
+  { line: 5, text: '        if num < third:' },
+  { line: 6, text: '            return True     # num is the "1"' },
+  { line: 7, text: '        while stack and stack[-1] < num:' },
+  { line: 8, text: '            third = stack.pop()' },
+  { line: 9, text: '        stack.append(num)' },
+  { line: 10, text: '    return False' },
 ]
 
-function generateSteps(n) {
+function parseArr(text) {
+  const cleaned = (text ?? '').replace(/[[\]]/g, '').trim()
+  if (!cleaned) return []
+  return cleaned.split(/[\s,]+/).map((t) => {
+    const v = Number(t)
+    if (Number.isNaN(v)) throw new Error(`"${t}" is not a number`)
+    return v
+  })
+}
+
+function generateSteps(text) {
   const steps = []
+  try {
+    const nums = parseArr(text)
+    if (nums.length === 0) throw new Error('enter at least one number')
+    if (nums.length > 20) throw new Error('keep the array to 20 elements or fewer')
 
-  if (n <= 0) {
-    return [{
-      phase: 'done',
-      activeLine: 1,
-      dp: [],
-      stepNum: 0,
-      message: 'Invalid n.',
-    }]
-  }
+    const stack = [] // indices into nums; nums values are strictly decreasing bottom→top
+    let third = -Infinity
 
-  steps.push({
-    phase: 'start',
-    activeLine: 2,
-    dp: [],
-    stepNum: 0,
-    message: `Finding ${n}th ugly number`,
-  })
-
-  const dp = new Array(n)
-  dp[0] = 1
-  let i2 = 0, i3 = 0, i5 = 0
-  let next2 = 2, next3 = 3, next5 = 5
-  let stepNum = 1
-
-  steps.push({
-    phase: 'initialized',
-    activeLine: 4,
-    dp: [1],
-    i2, i3, i5,
-    next2, next3, next5,
-    stepNum,
-    message: `Three pointers initialized: i2=${i2}, i3=${i3}, i5=${i5}`,
-  })
-  stepNum++
-
-  for (let i = 1; i < n; i++) {
-    steps.push({
-      phase: 'comparing',
-      activeLine: 7,
-      dp: [...dp.slice(0, i)],
-      i2, i3, i5,
-      next2, next3, next5,
-      stepNum,
-      message: `Comparing: next2=${next2}, next3=${next3}, next5=${next5}`,
+    const snap = (extra) => ({
+      nums,
+      stack: stack.map((idx) => nums[idx]),
+      stackIdx: [...stack],
+      third,
+      ...extra,
     })
-    stepNum++
 
-    const nextUgly = Math.min(next2, next3, next5)
+    steps.push(snap({
+      phase: 'init',
+      activeLine: 3,
+      message: `nums=[${nums}]. Scan right-to-left. Stack holds "3" candidates (decreasing); third is the best "2" so far.`,
+    }))
 
-    steps.push({
-      phase: 'selected',
-      activeLine: 8,
-      dp: [...dp.slice(0, i)],
-      i2, i3, i5,
-      next2, next3, next5,
-      nextUgly,
-      stepNum,
-      message: `Selected minimum: ${nextUgly}`,
-    })
-    stepNum++
+    for (let i = nums.length - 1; i >= 0; i--) {
+      const num = nums[i]
 
-    dp[i] = nextUgly
+      steps.push(snap({
+        phase: 'scan',
+        activeLine: 5,
+        pointer: i,
+        message: `i=${i}: num=${num}. Is num < third (${third === -Infinity ? '-inf' : third})?`,
+      }))
 
-    if (nextUgly === next2) {
-      i2++
-      next2 = dp[i2] * 2
+      if (num < third) {
+        steps.push(snap({
+          phase: 'found',
+          activeLine: 6,
+          pointer: i,
+          found: true,
+          result: true,
+          message: `${num} < ${third} → 132 pattern found: nums[${i}]=${num} is the "1", ${third} is the "2", and some larger value to their right is the "3".`,
+        }))
+        return steps
+      }
 
-      steps.push({
-        phase: 'updated_2',
+      while (stack.length && nums[stack[stack.length - 1]] < num) {
+        const popped = nums[stack.pop()]
+        third = popped
+        steps.push(snap({
+          phase: 'pop',
+          activeLine: 8,
+          pointer: i,
+          popped,
+          message: `Stack top ${popped} < ${num} → pop it; third = ${third} (a "2" smaller than the "3" ${num}).`,
+        }))
+      }
+
+      stack.push(i)
+      steps.push(snap({
+        phase: 'push',
         activeLine: 9,
-        dp: [...dp.slice(0, i + 1)],
-        i2, i3, i5,
-        next2, next3, next5,
-        stepNum,
-        message: `Updated i2: dp[${i2}] * 2 = ${next2}`,
-      })
-      stepNum++
+        pointer: i,
+        message: `Push ${num} as a "3" candidate. Stack (top last): [${stack.map((idx) => nums[idx])}]`,
+      }))
     }
 
-    if (nextUgly === next3) {
-      i3++
-      next3 = dp[i3] * 3
-
-      steps.push({
-        phase: 'updated_3',
-        activeLine: 12,
-        dp: [...dp.slice(0, i + 1)],
-        i2, i3, i5,
-        next2, next3, next5,
-        stepNum,
-        message: `Updated i3: dp[${i3}] * 3 = ${next3}`,
-      })
-      stepNum++
-    }
-
-    if (nextUgly === next5) {
-      i5++
-      next5 = dp[i5] * 5
-
-      steps.push({
-        phase: 'updated_5',
-        activeLine: 15,
-        dp: [...dp.slice(0, i + 1)],
-        i2, i3, i5,
-        next2, next3, next5,
-        stepNum,
-        message: `Updated i5: dp[${i5}] * 5 = ${next5}`,
-      })
-      stepNum++
-    }
+    steps.push(snap({
+      phase: 'done',
+      activeLine: 10,
+      result: false,
+      message: 'Scanned the whole array without finding a 132 pattern → false.',
+    }))
+  } catch (e) {
+    steps.push({ phase: 'error', activeLine: 1, error: true, message: `Error: ${e.message}` })
   }
-
-  steps.push({
-    phase: 'done',
-    activeLine: 18,
-    dp: dp,
-    stepNum,
-    message: `Found! ${n}th ugly number is ${dp[n - 1]}`,
-  })
-
   return steps
 }
 
-function snippetIdForPhase(phase) {
-  if (phase === 'start') return 'init'
-  if (phase === 'initialized') return 'init'
-  if (phase === 'comparing' || phase === 'selected') return 'loop'
-  if (phase === 'updated_2' || phase === 'updated_3' || phase === 'updated_5') return 'update'
-  if (phase === 'done') return 'return'
-  return 'init'
-}
-
-function DPVisualization({ step }) {
-  const dp = step?.dp || []
-  const nextUgly = step?.nextUgly
-  const next2 = step?.next2
-  const next3 = step?.next3
-  const next5 = step?.next5
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        <header style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>
-          DP Array (Ugly Numbers)
-        </header>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', minHeight: 60, alignContent: 'flex-start' }}>
-          {dp.map((val, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.6 }}
-              transition={{ duration: 0.2 }}
-              style={{
-                minWidth: 50,
-                height: 50,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: '#dbeafe',
-                border: '2px solid #3b82f6',
-                borderRadius: 6,
-                fontSize: 12,
-                fontWeight: 600,
-                color: '#1e40af',
-              }}
-            >
-              {val}
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
-        <div style={{
-          padding: 12,
-          backgroundColor: nextUgly === next2 ? '#fef08a' : '#f3f4f6',
-          borderRadius: 4,
-          border: `2px solid ${nextUgly === next2 ? '#eab308' : '#d1d5db'}`,
-        }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#713f12', marginBottom: 4 }}>next2</div>
-          <div style={{ fontSize: 14, fontWeight: 700, color: '#713f12' }}>{next2}</div>
-        </div>
-
-        <div style={{
-          padding: 12,
-          backgroundColor: nextUgly === next3 ? '#fef08a' : '#f3f4f6',
-          borderRadius: 4,
-          border: `2px solid ${nextUgly === next3 ? '#eab308' : '#d1d5db'}`,
-        }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#713f12', marginBottom: 4 }}>next3</div>
-          <div style={{ fontSize: 14, fontWeight: 700, color: '#713f12' }}>{next3}</div>
-        </div>
-
-        <div style={{
-          padding: 12,
-          backgroundColor: nextUgly === next5 ? '#fef08a' : '#f3f4f6',
-          borderRadius: 4,
-          border: `2px solid ${nextUgly === next5 ? '#eab308' : '#d1d5db'}`,
-        }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#713f12', marginBottom: 4 }}>next5</div>
-          <div style={{ fontSize: 14, fontWeight: 700, color: '#713f12' }}>{next5}</div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function VisualizationPanel({ step, n, EXAMPLES, handleExampleClick, nInput, setNInput, handleReset }) {
-  return (
-    <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
-      <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>
-          Examples
-        </div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {EXAMPLES.map((ex) => (
-            <button
-              key={ex.label}
-              onClick={() => handleExampleClick(ex)}
-              style={{
-                padding: '6px 12px',
-                borderRadius: 4,
-                border: '1px solid #cbd5e1',
-                backgroundColor: '#f1f5f9',
-                cursor: 'pointer',
-                fontSize: 12,
-                fontWeight: 500,
-              }}
-            >
-              {ex.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div>
-        <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>
-          N (find Nth ugly number)
-        </label>
-        <input
-          value={nInput}
-          onChange={(e) => { setNInput(e.target.value); handleReset() }}
-          placeholder="e.g., 10"
-          style={{
-            width: '100%',
-            padding: '8px 10px',
-            border: '1px solid #cbd5e1',
-            borderRadius: 4,
-            fontSize: 12,
-            fontFamily: 'monospace',
-            boxSizing: 'border-box',
-          }}
-        />
-      </div>
-
-      <button
-        onClick={handleReset}
-        style={{
-          padding: '8px 10px',
-          backgroundColor: '#3b82f6',
-          color: 'white',
-          border: 'none',
-          borderRadius: 4,
-          fontSize: 12,
-          fontWeight: 600,
-          cursor: 'pointer',
-        }}
-      >
-        Reset
-      </button>
-
-      <DPVisualization step={step} />
-
-      <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 4, border: '1px solid #86efac' }}>
-        <div style={{ fontSize: 11, fontWeight: 600, color: '#166534', marginBottom: 2 }}>
-          Ugly Number Strategy
-        </div>
-        <div style={{ fontSize: 12, color: '#22c55e', lineHeight: 1.4 }}>
-          Ugly numbers = products of 2, 3, 5. Use three pointers to generate in order.
-        </div>
-      </div>
-    </section>
-  )
-}
-
-const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
+const EXAMPLES = getExamplesOr('132-pattern', [
+  { label: 'Example 1', nums: '1,2,3,4' },
+  { label: 'Example 2', nums: '3,1,4,2' },
+  { label: 'Example 3', nums: '-1,3,2,0' },
+])
 
 export default function Problem456Visualizer() {
-  const [nInput, setNInput] = useState('10')
+  const [text, setText] = useState('3,1,4,2')
+  const [panelDivs, setPanelDivs] = useState(null)
 
-  const n = useMemo(() => {
-    const val = parseInt(nInput.trim())
-    return isNaN(val) || val < 1 ? 1 : Math.min(val, 30)
-  }, [nInput])
+  const inputError = useMemo(() => {
+    try {
+      const a = parseArr(text)
+      if (a.length === 0) return 'enter at least one number'
+      if (a.length > 20) return 'keep the array to 20 elements or fewer'
+      return ''
+    } catch (e) {
+      return e.message
+    }
+  }, [text])
 
   const steps = useMemo(
-    () => generateSteps(n).map((current) => ({
+    () => generateSteps(text).map((current) => ({
       ...current,
-      snippetId: snippetIdForPhase(current.phase),
       relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
     })),
-    [n],
+    [text],
   )
 
   const {
@@ -376,95 +161,213 @@ export default function Problem456Visualizer() {
     handleReset, isPlaying, speed, setSpeed, isDone,
   } = usePlaybackState(steps.length)
 
-  const step = stepIndex >= 0 ? steps[stepIndex] : null
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
-  const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
 
-  const connectivity = useCodeVisualConnectivity({
-    steps,
-    stepIndex,
-    snippetOptions: SNIPPETS,
-    onStepJump: setStepIndex,
-  })
+  const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-
-  const handleExampleClick = useCallback((ex) => {
-    setNInput(String(ex.n))
+  const applyExample = useCallback((ex) => {
+    setText(ex.nums)
     handleReset()
   }, [handleReset])
 
-  const dockPanels = useMemo(() => [
-    {
-      id: 'code',
-      title: 'Code',
-      content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE_WITH_CONNECTIVITY}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-          autoScroll={autoScrollCode}
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  const barScale = useMemo(() => {
+    const nums = step?.nums ?? []
+    if (!nums.length) return { min: 0, span: 1 }
+    const min = Math.min(...nums, 0)
+    const max = Math.max(...nums, 1)
+    return { min, span: Math.max(max - min, 1) }
+  }, [step])
+
+  const primaryPanel = (
+    <div className="p456-panel-primary">
+      <div className="p456-card">
+        <div className="p456-section-label">Input</div>
+        <div className="p456-input-row">
+          <div className="p456-field grow">
+            <label className="p456-input-label" htmlFor="p456-nums">nums</label>
+            <input
+              id="p456-nums"
+              className={`p456-input mono ${inputError ? 'has-error' : ''}`}
+              value={text}
+              onChange={(e) => { setText(e.target.value); handleReset() }}
+              placeholder="3,1,4,2"
+            />
+          </div>
+        </div>
+        <p className={`p456-hint ${inputError ? 'error' : ''}`}>
+          {inputError || 'Look for i < j < k with nums[i] < nums[k] < nums[j] — a low, a high, then a middle.'}
+        </p>
+        <div className="p456-example-row">
+          {EXAMPLES.map((ex) => (
+            <button
+              type="button"
+              key={ex.label}
+              className={`p456-example-btn ${text === ex.nums ? 'active' : ''}`}
+              onClick={() => applyExample(ex)}
+            >
+              {ex.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {step && !step.error && (
+        <div className="p456-card">
+          <div className="p456-section-label">Array (scanning right → left)</div>
+          <div className="p456-bars">
+            {step.nums.map((v, idx) => {
+              const height = 12 + ((v - barScale.min) / barScale.span) * 96
+              const inStack = step.stackIdx?.includes(idx)
+              return (
+                <div key={idx} className="p456-bar-col">
+                  <motion.div
+                    className={`p456-bar ${idx === step.pointer ? 'cursor' : ''} ${inStack ? 'in-stack' : ''} ${step.found && idx === step.pointer ? 'found' : ''}`}
+                    animate={{ height }}
+                    initial={false}
+                  />
+                  <div className={`p456-bar-val ${idx === step.pointer ? 'cursor' : ''}`}>{v}</div>
+                  <div className="p456-bar-idx">{idx}</div>
+                </div>
+              )
+            })}
+          </div>
+          <div className="p456-legend">
+            <span><i className="p456-sw cursor" /> current</span>
+            <span><i className="p456-sw in-stack" /> on stack (&quot;3&quot; candidate)</span>
+          </div>
+        </div>
+      )}
+
+      {step?.result !== undefined && (
+        <div className={`p456-result ${step.result ? 'yes' : 'no'}`}>
+          <div className="p456-section-label" style={{ marginBottom: '0.3rem' }}>Result</div>
+          <div className="p456-result-val">{String(step.result)}</div>
+        </div>
+      )}
+    </div>
+  )
+
+  const statePanel = (
+    <div className="p456-panel-state">
+      <div className="p456-card">
+        <div className="p456-section-label">Monotonic Stack (top first)</div>
+        {step?.stack?.length ? (
+          <div className="p456-stack">
+            {[...step.stack].reverse().map((v, idx) => (
+              <div key={idx} className={`p456-stack-entry ${idx === 0 ? 'top' : ''}`}>
+                <span className="p456-stack-val">{v}</span>
+                {idx === 0 && <span className="p456-stack-tag">top</span>}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="p456-hint">Stack is empty.</p>
+        )}
+      </div>
+
+      <div className="p456-card">
+        <div className="p456-section-label">Variables</div>
+        <div className="p456-stat-grid">
+          <div className="p456-stat highlight">
+            <span className="p456-stat-key">third (&quot;2&quot;)</span>
+            <span className="p456-stat-val">{step?.third === -Infinity ? '-inf' : step?.third ?? '-inf'}</span>
+          </div>
+          {step?.pointer !== undefined && (
+            <div className="p456-stat"><span className="p456-stat-key">i</span><span className="p456-stat-val">{step.pointer}</span></div>
+          )}
+          {step?.popped !== undefined && (
+            <div className="p456-stat"><span className="p456-stat-key">popped</span><span className="p456-stat-val">{step.popped}</span></div>
+          )}
+          <div className="p456-stat"><span className="p456-stat-key">stack size</span><span className="p456-stat-val">{step?.stack?.length ?? 0}</span></div>
+        </div>
+        <p className="p456-hint">
+          Any value below <code>third</code> completes the pattern as the &quot;1&quot;.
+        </p>
+      </div>
+    </div>
+  )
+
+  const codePanel = (
+    <div className="p456-panel-code">
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
         />
-      ),
-    },
-    {
-      id: 'viz',
-      title: 'Visualization',
-      content: (
-        <VisualizationPanel
-          step={step}
-          n={n}
-          EXAMPLES={EXAMPLES}
-          handleExampleClick={handleExampleClick}
-          nInput={nInput}
-          setNInput={setNInput}
-          handleReset={handleReset}
-        />
-      ),
-    },
-  ], [
-    step,
-    SOLUTION_CODE_WITH_CONNECTIVITY,
-    connectivity,
-    setActiveLineDom,
-    n,
-    nInput,
-    autoScrollCode,
-    handleReset,
-  ])
+      )}
+    </div>
+  )
+
+  const statusPanel = (
+    <div className="p456-panel-status">
+      <div className={`p456-status ${step?.phase === 'found' || step?.phase === 'done' ? 'done' : step?.error ? 'error' : ''}`}>
+        {step?.message ?? 'Press Play or Step to begin.'}
+      </div>
+    </div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
+
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
+      { id: 'state', title: 'State', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
 
   return (
-    <div className="problem-shell">
-      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
-
-      <FloatingPanel title="Playback Controls">
-        <div style={{ marginBottom: '12px', fontSize: 12, color: '#475569' }}>
-          {step?.message ?? 'Press Play or Step to begin.'}
-        </div>
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showAutoScroll={true}
-          autoScroll={autoScrollCode}
-          onAutoScrollChange={setAutoScrollCode}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
-
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+    <div className="p456-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

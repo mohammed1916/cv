@@ -1,461 +1,442 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
-import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 
 import { usePlaybackState } from '../../hooks/usePlaybackState'
-import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
-import './Problem373Visualizer.css'
+import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { getExamplesOr } from '../../config/examplesRegistry'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
-import PatternOverlay from "../../components/PatternOverlay";
+import LuminoDockPanel from '../../components/LuminoDockPanel'
+import './Problem373Visualizer.css'
 
-// ─── Pattern annotations ───────────────────────────────────────────────────
-const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
-const PATTERNS = []
+const PATTERNS = ['init', 'seed', 'pop', 'emit', 'push', 'done', 'error']
+const LINE_PATTERN_MAP = {
+  2: 'init',
+  4: 'seed',
+  5: 'seed',
+  9: 'pop',
+  10: 'emit',
+  12: 'push',
+  13: 'done',
+}
 
-const EXAMPLES = getExamples('search-a-2d-matrix-ii')
-
-const SOLUTION_CODE_INLINE = [
-  { line: 1, text: 'def searchMatrix(matrix, target):' },
-  { line: 2, text: '    if not matrix or not matrix[0]:' },
-  { line: 3, text: '        return False' },
-  { line: 4, text: '    rows, cols = len(matrix), len(matrix[0])' },
-  { line: 5, text: '    row, col = 0, cols - 1' },
-  { line: 6, text: '    while row < rows and col >= 0:' },
-  { line: 7, text: '        if matrix[row][col] == target:' },
-  { line: 8, text: '            return True' },
-  { line: 9, text: '        elif matrix[row][col] > target:' },
-  { line: 10, text: '            col -= 1' },
-  { line: 11, text: '        else:' },
-  { line: 12, text: '            row += 1' },
-  { line: 13, text: '    return False' },
+const SOLUTION_CODE = [
+  { line: 1, text: 'import heapq' },
+  { line: 2, text: 'def kSmallestPairs(nums1, nums2, k):' },
+  { line: 3, text: '    if not nums1 or not nums2: return []' },
+  { line: 4, text: '    heap = [(nums1[i] + nums2[0], i, 0)' },
+  { line: 5, text: '            for i in range(min(k, len(nums1)))]' },
+  { line: 6, text: '    heapq.heapify(heap)' },
+  { line: 7, text: '    result = []' },
+  { line: 8, text: '    while heap and len(result) < k:' },
+  { line: 9, text: '        s, i, j = heapq.heappop(heap)' },
+  { line: 10, text: '        result.append([nums1[i], nums2[j]])' },
+  { line: 11, text: '        if j + 1 < len(nums2):' },
+  { line: 12, text: '            heapq.heappush(heap,' },
+  { line: 13, text: '                (nums1[i] + nums2[j + 1], i, j + 1))' },
+  { line: 14, text: '    return result' },
 ]
-const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-function generateSteps(matrix, target) {
+function parseArr(text) {
+  const cleaned = (text ?? '').replace(/[[\]]/g, '').trim()
+  if (!cleaned) return []
+  return cleaned.split(/[\s,]+/).map((t) => {
+    const v = Number(t)
+    if (Number.isNaN(v)) throw new Error(`"${t}" is not a number`)
+    return v
+  })
+}
+
+// Simple sorted-array min-heap stand-in: keeps entries sorted by sum for display.
+function heapSorted(entries) {
+  return [...entries].sort((a, b) => a.sum - b.sum || a.i - b.i || a.j - b.j)
+}
+
+function generateSteps(t1, t2, kText) {
   const steps = []
-  const rows = matrix.length
-  const cols = matrix[0]?.length || 0
+  try {
+    const nums1 = parseArr(t1)
+    const nums2 = parseArr(t2)
+    const k = Number(kText)
+    if (!nums1.length || !nums2.length) throw new Error('both arrays must be non-empty')
+    if (!Number.isInteger(k) || k < 1) throw new Error('k must be a positive integer')
+    if (nums1.length > 12 || nums2.length > 12) throw new Error('keep arrays to 12 elements or fewer')
 
-  if (!matrix.length || !cols) {
-    steps.push({
-      activeLine: 2,
-      row: -1,
-      col: -1,
-      found: false,
-      message: 'Empty matrix, return False',
+    let heap = []
+    const result = []
+    const emitted = [] // [i, j] index pairs already output
+
+    const snap = (extra) => ({
+      nums1,
+      nums2,
+      k,
+      heap: heapSorted(heap),
+      result: result.map((p) => [...p]),
+      emitted: emitted.map((p) => [...p]),
+      ...extra,
     })
-    return steps
-  }
 
-  // Initialize
-  steps.push({
-    activeLine: 5,
-    row: 0,
-    col: cols - 1,
-    current: null,
-    comparison: null,
-    found: null,
-    message: `Start at top-right: [0][${cols - 1}]`,
-  })
+    steps.push(snap({
+      phase: 'init',
+      activeLine: 2,
+      message: `nums1=[${nums1}], nums2=[${nums2}], k=${k}. Each nums1[i] paired with nums2 in ascending order.`,
+    }))
 
-  let row = 0
-  let col = cols - 1
-  const path = [[0, cols - 1]]
-
-  while (row < rows && col >= 0) {
-    const current = matrix[row][col]
-    let comparison = null
-
-    if (current === target) {
-      steps.push({
-        activeLine: 7,
-        row,
-        col,
-        current,
-        comparison: '==',
-        found: true,
-        path: [...path],
-        message: `matrix[${row}][${col}] = ${current} == ${target} ✓ Found!`,
-      })
-      return steps
-    } else if (current > target) {
-      comparison = '>'
-      steps.push({
-        activeLine: 9,
-        row,
-        col,
-        current,
-        comparison,
-        found: null,
-        path: [...path],
-        message: `matrix[${row}][${col}] = ${current} > ${target}, move left`,
-      })
-      col--
-      path.push([row, col])
-      steps.push({
-        activeLine: 10,
-        row,
-        col,
-        current,
-        comparison: null,
-        found: null,
-        path: [...path],
-        message: `col = ${col}`,
-      })
-    } else {
-      comparison = '<'
-      steps.push({
-        activeLine: 11,
-        row,
-        col,
-        current,
-        comparison,
-        found: null,
-        path: [...path],
-        message: `matrix[${row}][${col}] = ${current} < ${target}, move down`,
-      })
-      row++
-      path.push([row, col])
-      steps.push({
-        activeLine: 12,
-        row,
-        col,
-        current,
-        comparison: null,
-        found: null,
-        path: [...path],
-        message: `row = ${row}`,
-      })
+    const seedCount = Math.min(k, nums1.length)
+    for (let i = 0; i < seedCount; i++) {
+      heap.push({ sum: nums1[i] + nums2[0], i, j: 0 })
+      steps.push(snap({
+        phase: 'seed',
+        activeLine: 4,
+        highlightI: i,
+        highlightJ: 0,
+        message: `Seed heap with (nums1[${i}]=${nums1[i]}) + (nums2[0]=${nums2[0]}) = ${nums1[i] + nums2[0]}`,
+      }))
     }
+
+    while (heap.length && result.length < k) {
+      heap = heapSorted(heap)
+      const top = heap.shift()
+      steps.push(snap({
+        phase: 'pop',
+        activeLine: 9,
+        highlightI: top.i,
+        highlightJ: top.j,
+        popped: top,
+        message: `Pop smallest sum ${top.sum} → pair (${nums1[top.i]}, ${nums2[top.j]})`,
+      }))
+
+      result.push([nums1[top.i], nums2[top.j]])
+      emitted.push([top.i, top.j])
+      steps.push(snap({
+        phase: 'emit',
+        activeLine: 10,
+        highlightI: top.i,
+        highlightJ: top.j,
+        popped: top,
+        message: `Emit pair #${result.length}: [${nums1[top.i]}, ${nums2[top.j]}]`,
+      }))
+
+      if (result.length >= k) break
+
+      if (top.j + 1 < nums2.length) {
+        const nj = top.j + 1
+        heap.push({ sum: nums1[top.i] + nums2[nj], i: top.i, j: nj })
+        steps.push(snap({
+          phase: 'push',
+          activeLine: 12,
+          highlightI: top.i,
+          highlightJ: nj,
+          message: `Advance row ${top.i}: push (nums1[${top.i}]=${nums1[top.i]}) + (nums2[${nj}]=${nums2[nj]}) = ${nums1[top.i] + nums2[nj]}`,
+        }))
+      } else {
+        steps.push(snap({
+          phase: 'push',
+          activeLine: 11,
+          highlightI: top.i,
+          message: `Row ${top.i} exhausted — nothing to push.`,
+        }))
+      }
+    }
+
+    steps.push(snap({
+      phase: 'done',
+      activeLine: 14,
+      finished: true,
+      message: `Done — ${result.length} pair(s): ${result.map((p) => `[${p[0]},${p[1]}]`).join(', ')}`,
+    }))
+  } catch (e) {
+    steps.push({ phase: 'error', activeLine: 2, error: true, message: `Error: ${e.message}` })
   }
-
-  steps.push({
-    activeLine: 13,
-    row,
-    col,
-    current: null,
-    comparison: null,
-    found: false,
-    path: [...path],
-    message: `Exhausted search space, ${target} not found`,
-  })
-
   return steps
 }
 
-function MatrixVisualization({ matrix, target, step }) {
-  const rows = matrix.length
-  const cols = matrix[0]?.length || 0
-  const currentRow = step?.row ?? -1
-  const currentCol = step?.col ?? -1
-  const path = step?.path || []
-  const pathSet = new Set(path.map(p => `${p[0]},${p[1]}`))
+const EXAMPLES = getExamplesOr('find-k-pairs-with-smallest-sums', [
+  { label: 'Example 1', nums1: '1,7,11', nums2: '2,4,6', k: '3' },
+  { label: 'Example 2', nums1: '1,1,2', nums2: '1,2,3', k: '2' },
+  { label: 'Example 3', nums1: '1,2', nums2: '3', k: '3' },
+])
 
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>
-        Matrix ({rows}×{cols}), Target: {target}
-      </div>
+export default function Problem373Visualizer() {
+  const [t1, setT1] = useState('1,7,11')
+  const [t2, setT2] = useState('2,4,6')
+  const [kText, setKText] = useState('3')
+  const [panelDivs, setPanelDivs] = useState(null)
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: `repeat(${cols}, minmax(60px, 1fr))`,
-          gap: 6,
-          padding: 12,
-          backgroundColor: '#f8fafc',
-          borderRadius: 8,
-        }}
-      >
-        {matrix.map((row, r) =>
-          row.map((val, c) => {
-            const isCurrent = r === currentRow && c === currentCol && !step?.found
-            const isOnPath = pathSet.has(`${r},${c}`)
-            const isFound = isCurrent && step?.found === true
+  const inputError = useMemo(() => {
+    try {
+      const a = parseArr(t1)
+      const b = parseArr(t2)
+      if (!a.length || !b.length) return 'both arrays must be non-empty'
+      if (a.length > 12 || b.length > 12) return 'keep arrays to 12 elements or fewer'
+      const k = Number(kText)
+      if (!Number.isInteger(k) || k < 1) return 'k must be a positive integer'
+      return ''
+    } catch (e) {
+      return e.message
+    }
+  }, [t1, t2, kText])
 
-            return (
-              <motion.div
-                key={`cell-${r}-${c}`}
-                animate={{
-                  scale: isCurrent ? 1.2 : 1,
-                  boxShadow: isFound ? '0 0 15px rgba(34, 197, 94, 0.6)' : '0 0 0px',
-                }}
-                transition={{ duration: 0.3 }}
-                style={{
-                  padding: '12px 8px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  backgroundColor: isFound
-                    ? '#dcfce7'
-                    : isCurrent
-                      ? '#fef3c7'
-                      : isOnPath
-                        ? '#dbeafe'
-                        : '#f1f5f9',
-                  border: isCurrent
-                    ? '2px solid #f59e0b'
-                    : isOnPath
-                      ? '1px solid #0284c7'
-                      : '1px solid #cbd5e1',
-                  borderRadius: 6,
-                  fontSize: 14,
-                  fontWeight: 'bold',
-                  color: '#1e293b',
-                  fontFamily: 'monospace',
-                  cursor: 'pointer',
-                  position: 'relative',
-                }}
-              >
-                {val}
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: 2,
-                    right: 2,
-                    fontSize: 9,
-                    color: '#64748b',
-                    fontWeight: 'normal',
-                  }}
-                >
-                  [{r},{c}]
-                </div>
-              </motion.div>
-            )
-          })
-        )}
-      </div>
-
-      {step && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.2 }}
-          style={{
-            padding: 12,
-            backgroundColor: '#f8fafc',
-            borderRadius: 6,
-            border: '2px solid #8b5cf6',
-          }}
-        >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>
-            Current Position
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 8 }}>
-            <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#dbeafe', borderRadius: 4 }}>
-              <div style={{ fontSize: 10, color: '#1e40af' }}>row</div>
-              <div style={{ fontSize: 14, fontWeight: 'bold', color: '#0c4a6e' }}>
-                {currentRow >= 0 ? currentRow : '—'}
-              </div>
-            </div>
-            <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#fee2e2', borderRadius: 4 }}>
-              <div style={{ fontSize: 10, color: '#991b1b' }}>col</div>
-              <div style={{ fontSize: 14, fontWeight: 'bold', color: '#7f1d1d' }}>
-                {currentCol >= 0 ? currentCol : '—'}
-              </div>
-            </div>
-            <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#fce7f3', borderRadius: 4 }}>
-              <div style={{ fontSize: 10, color: '#831843' }}>current</div>
-              <div style={{ fontSize: 14, fontWeight: 'bold', color: '#be185d' }}>
-                {step.current !== null ? step.current : '—'}
-              </div>
-            </div>
-            <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#f0fdf4', borderRadius: 4 }}>
-              <div style={{ fontSize: 10, color: '#15803d' }}>comparison</div>
-              <div style={{ fontSize: 14, fontWeight: 'bold', color: '#166534' }}>
-                {step.comparison || '—'}
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      )}
-
-      {step?.found !== null && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          style={{
-            padding: 12,
-            backgroundColor: step?.found ? '#dcfce7' : '#fee2e2',
-            borderRadius: 6,
-            border: step?.found ? '2px solid #86efac' : '2px solid #fecaca',
-            textAlign: 'center',
-            fontWeight: 600,
-            color: step?.found ? '#15803d' : '#991b1b',
-            fontSize: 14,
-          }}
-        >
-          {step?.found ? `✓ Found ${target} at [${step.row}][${step.col}]` : `✗ ${target} not found`}
-        </motion.div>
-      )}
-
-      <div style={{ fontSize: 12, color: '#64748b', fontStyle: 'italic', marginTop: 8 }}>
-        <strong>Strategy:</strong> Start from top-right corner. If current value is larger than target, move left (decrease column). If smaller, move down (increase row).
-      </div>
-    </div>
+  const steps = useMemo(
+    () => generateSteps(t1, t2, kText).map((current) => ({
+      ...current,
+      relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
+    })),
+    [t1, t2, kText],
   )
-}
 
-function VisualizationPanel({ matrix, target, step, applyEx, examples }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
-      <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {examples.map((e, idx) => (
+  const {
+    stepIndex, setStepIndex, stepForward, stepBack, togglePlay,
+    handleReset, isPlaying, speed, setSpeed, isDone,
+  } = usePlaybackState(steps.length)
+
+  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+
+  const step = stepIndex >= 0 ? steps[stepIndex] : null
+
+  const applyExample = useCallback((ex) => {
+    setT1(ex.nums1)
+    setT2(ex.nums2)
+    setKText(ex.k)
+    handleReset()
+  }, [handleReset])
+
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  const primaryPanel = (
+    <div className="p373-panel-primary">
+      <div className="p373-card">
+        <div className="p373-section-label">Input</div>
+        <div className="p373-input-row">
+          <div className="p373-field">
+            <label className="p373-input-label" htmlFor="p373-n1">nums1 (sorted)</label>
+            <input
+              id="p373-n1"
+              className={`p373-input mono ${inputError ? 'has-error' : ''}`}
+              value={t1}
+              onChange={(e) => { setT1(e.target.value); handleReset() }}
+              placeholder="1,7,11"
+            />
+          </div>
+          <div className="p373-field">
+            <label className="p373-input-label" htmlFor="p373-n2">nums2 (sorted)</label>
+            <input
+              id="p373-n2"
+              className={`p373-input mono ${inputError ? 'has-error' : ''}`}
+              value={t2}
+              onChange={(e) => { setT2(e.target.value); handleReset() }}
+              placeholder="2,4,6"
+            />
+          </div>
+          <div className="p373-field">
+            <label className="p373-input-label" htmlFor="p373-k">k</label>
+            <input
+              id="p373-k"
+              className={`p373-input narrow mono ${inputError ? 'has-error' : ''}`}
+              value={kText}
+              onChange={(e) => { setKText(e.target.value); handleReset() }}
+              type="number"
+              min="1"
+            />
+          </div>
+        </div>
+        <p className={`p373-hint ${inputError ? 'error' : ''}`}>
+          {inputError || 'A min-heap holds one candidate per nums1 row; popping it yields pairs in ascending sum order.'}
+        </p>
+        <div className="p373-example-row">
+          {EXAMPLES.map((ex) => (
             <button
-              key={e.label}
-              onClick={() => applyEx(idx)}
-              style={{
-                padding: '6px 12px',
-                borderRadius: 4,
-                border: '1px solid #cbd5e1',
-                cursor: 'pointer',
-                fontSize: 12,
-                backgroundColor: '#f1f5f9',
-              }}
+              type="button"
+              key={ex.label}
+              className={`p373-example-btn ${t1 === ex.nums1 && t2 === ex.nums2 && kText === ex.k ? 'active' : ''}`}
+              onClick={() => applyExample(ex)}
             >
-              {e.label}
+              {ex.label}
             </button>
           ))}
         </div>
       </div>
 
-      <MatrixVisualization matrix={matrix} target={target} step={step} />
+      {step && !step.error && (
+        <div className="p373-card">
+          <div className="p373-section-label">Pair Sum Grid (nums1 × nums2)</div>
+          <div className="p373-grid-wrap">
+            <table className="p373-grid">
+              <thead>
+                <tr>
+                  <th className="p373-corner" />
+                  {step.nums2.map((v, j) => (
+                    <th key={j} className={j === step.highlightJ ? 'hl' : ''}>{v}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {step.nums1.map((a, i) => (
+                  <tr key={i}>
+                    <th className={i === step.highlightI ? 'hl' : ''}>{a}</th>
+                    {step.nums2.map((b, j) => {
+                      const inHeap = step.heap.some((h) => h.i === i && h.j === j)
+                      const isEmitted = step.emitted?.some(([ei, ej]) => ei === i && ej === j)
+                      const isCursor = i === step.highlightI && j === step.highlightJ
+                      return (
+                        <td
+                          key={j}
+                          className={`${inHeap ? 'in-heap' : ''} ${isEmitted ? 'emitted' : ''} ${isCursor ? 'cursor' : ''}`}
+                        >
+                          {a + b}
+                        </td>
+                      )
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="p373-legend">
+            <span><i className="p373-sw in-heap" /> in heap</span>
+            <span><i className="p373-sw emitted" /> emitted</span>
+            <span><i className="p373-sw cursor" /> current</span>
+          </div>
+        </div>
+      )}
+
+      {step?.result?.length > 0 && (
+        <div className="p373-card">
+          <div className="p373-section-label">Result Pairs ({step.result.length}/{step.k})</div>
+          <div className="p373-pairs">
+            {step.result.map((p, idx) => (
+              <motion.div
+                key={idx}
+                className={`p373-pair ${step.finished ? 'final' : ''}`}
+                initial={{ scale: 0.85, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+              >
+                [{p[0]}, {p[1]}]
+                <span className="p373-pair-sum">= {p[0] + p[1]}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   )
-}
 
-export default function Problem373Visualizer() {
-  const [exIndex, setExIndex] = useState(0)
-  const codeLines = SOLUTION_CODE
+  const statePanel = (
+    <div className="p373-panel-state">
+      <div className="p373-card">
+        <div className="p373-section-label">Min-Heap (sum, i, j)</div>
+        {step?.heap?.length ? (
+          <div className="p373-heap">
+            {step.heap.map((h, idx) => (
+              <div key={`${h.i}-${h.j}`} className={`p373-heap-entry ${idx === 0 ? 'top' : ''}`}>
+                <span className="p373-heap-sum">{h.sum}</span>
+                <span className="p373-heap-idx">i={h.i}, j={h.j}</span>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="p373-hint">Heap is empty.</p>
+        )}
+      </div>
 
-  const examples = EXAMPLES && EXAMPLES.length > 0 ? EXAMPLES : [
-    {
-      label: 'Found (5)',
-      matrix: [
-        [1, 4, 7, 11, 15],
-        [2, 5, 8, 12, 19],
-        [3, 6, 9, 16, 22],
-        [10, 13, 14, 17, 24],
-        [18, 21, 23, 26, 30],
-      ],
-      target: 5,
-    },
-    {
-      label: 'Not Found (20)',
-      matrix: [
-        [1, 4, 7, 11, 15],
-        [2, 5, 8, 12, 19],
-        [3, 6, 9, 16, 22],
-        [10, 13, 14, 17, 24],
-        [18, 21, 23, 26, 30],
-      ],
-      target: 20,
-    },
-    {
-      label: 'Edge (1)',
-      matrix: [
-        [1, 4, 7, 11, 15],
-        [2, 5, 8, 12, 19],
-        [3, 6, 9, 16, 22],
-        [10, 13, 14, 17, 24],
-        [18, 21, 23, 26, 30],
-      ],
-      target: 1,
-    },
-  ]
-
-  const { matrix, target } = examples[exIndex]
-
-  const steps = useMemo(() => generateSteps(matrix, target), [matrix, target])
-
-  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
-    usePlaybackState(steps.length)
-
-  const step = stepIndex >= 0 ? steps[stepIndex] : steps[0]
-
-  const applyEx = useCallback((idx) => {
-    setExIndex(idx)
-    handleReset()
-  }, [handleReset])
-
-  const connectivity = useCodeVisualConnectivity({
-    steps,
-    stepIndex,
-    onStepJump: setStepIndex,
-  })
-
-  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
-
-  const dockPanels = useMemo(() => [
-    {
-      id: 'code',
-      title: 'Code',
-      content: (
-        <div style={{ position: 'relative' }}>
-          <CodeTracePanel
-            step={step}
-            codeLines={codeLines}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-            onActiveLineDomChange={setActiveLineDom}
-          />
-          {step && (
-            <CodePatternAnnotations
-              linePatterns={LINE_PATTERN_MAP}
-              currentPhase={step.phase}
-              activeLineDom={activeLineDom}
-              activeLine={step.activeLine}
-            />
+      <div className="p373-card">
+        <div className="p373-section-label">Counters</div>
+        <div className="p373-stat-grid">
+          <div className="p373-stat highlight"><span className="p373-stat-key">emitted</span><span className="p373-stat-val">{step?.result?.length ?? 0}</span></div>
+          <div className="p373-stat"><span className="p373-stat-key">k</span><span className="p373-stat-val">{step?.k ?? '-'}</span></div>
+          <div className="p373-stat"><span className="p373-stat-key">heap size</span><span className="p373-stat-val">{step?.heap?.length ?? 0}</span></div>
+          {step?.popped && (
+            <div className="p373-stat highlight"><span className="p373-stat-key">popped sum</span><span className="p373-stat-val">{step.popped.sum}</span></div>
           )}
         </div>
-      ),
-    },
-    {
-      id: 'viz',
-      title: '🔍 Staircase Search',
-      content: (
-        <VisualizationPanel
-          matrix={matrix}
-          target={target}
-          step={step}
-          applyEx={applyEx}
-          examples={examples}
+      </div>
+    </div>
+  )
+
+  const codePanel = (
+    <div className="p373-panel-code">
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
         />
-      ),
-    },
-  ], [step, codeLines, connectivity, setActiveLineDom, matrix, target, applyEx, examples])
+      )}
+    </div>
+  )
+
+  const statusPanel = (
+    <div className="p373-panel-status">
+      <div className={`p373-status ${step?.phase === 'done' ? 'done' : step?.error ? 'error' : ''}`}>
+        {step?.message ?? 'Press Play or Step to begin.'}
+      </div>
+    </div>
+  )
+
+  const playbackPanel = (
+    <>
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+      )}
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+    </>
+  )
+
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
+      { id: 'state', title: 'State', dockMode: 'split-right' },
+      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+    ],
+    []
+  )
 
   return (
-    <div className="problem-shell">
-      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={e => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+    <div className="p373-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

@@ -1,1 +1,1 @@
-export { default } from './MaxPathSumVisualizer'
+export { default } from './FiveDirectReportsVisualizer'

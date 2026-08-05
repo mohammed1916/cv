@@ -1,9 +1,9 @@
 export const meta = {
   number: '299',
-  title: 'Bulb Switcher',
-  slug: 'bulb-switcher',
+  title: 'Bulls and Cows',
+  slug: 'bulls-and-cows',
   difficulty: 'Medium',
-  tags: ["Math"],
-  description: 'Count on bulbs after all switch operations.',
+  tags: ['Hash Table', 'String', 'Counting'],
+  description: 'Count bulls (exact digit+position matches) and cows (digit matches out of place); return "xAyB".',
   accent: '#f59e0b',
 }

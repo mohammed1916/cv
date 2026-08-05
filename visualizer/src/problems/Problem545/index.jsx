@@ -1,1 +1,1 @@
-export { default } from './FindCelebrityVisualizer'
+export { default } from './BoundaryOfBinaryTreeVisualizer'

@@ -1,1 +1,1 @@
-export { default } from './ValidParenthesesVisualizer';
+export { default } from './Problem222Visualizer';

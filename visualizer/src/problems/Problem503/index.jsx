@@ -1,1 +1,1 @@
-export { default } from './RansomNoteVisualizer'
+export { default } from './NextGreaterElementIIVisualizer'

@@ -1,9 +1,9 @@
 export const meta = {
   number: '227',
-  title: 'Inorder Successor in BST',
-  slug: 'inorder-successor-in-bst',
+  title: 'Basic Calculator II',
+  slug: 'basic-calculator-ii',
   difficulty: 'Medium',
-  tags: ['Binary Search Tree', 'Tree', 'DFS'],
-  description: 'Find inorder successor of a given node in binary search tree.',
+  tags: ['Math', 'String', 'Stack'],
+  description: 'Evaluate an expression with + - * / respecting operator precedence, without parentheses.',
   accent: '#06b6d4',
 }

@@ -1,0 +1,207 @@
+/* ─────────────────────────────────────────────
+   Median Employee Salary (Problem 569) — SQL
+   ───────────────────────────────────────────── */
+
+.p569-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* Direct child of .problem-content, which supplies a definite height —
+     Lumino measures this element to size its panels. */
+  height: 100%;
+  min-height: 480px;
+  overflow: hidden;
+}
+
+.p569-panel-primary,
+.p569-panel-state,
+.p569-panel-status {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  padding: 1rem;
+  gap: 0.9rem;
+}
+
+.p569-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl, 14px);
+  padding: 1rem 1.1rem;
+}
+
+.p569-section-label {
+  font-size: 0.72rem
+;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-dim);
+  margin-bottom: 0.7rem;
+}
+
+.p569-hint {
+  margin: 0.5rem 0 0;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.p569-example-row {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.p569-example-btn {
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.p569-example-btn:hover,
+.p569-example-btn.active {
+  color: var(--text);
+  border-color: rgba(245, 158, 11, 0.45);
+  background: rgba(245, 158, 11, 0.14);
+}
+
+/* ── SQL result tables ────────────────────── */
+.p569-table-wrap {
+  overflow-x: auto;
+}
+
+.p569-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.76rem;
+}
+
+.p569-table th {
+  text-align: left;
+  white-space: nowrap;
+  padding: 0.4rem 0.55rem;
+  color: var(--text-dim);
+  font-weight: 600;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface2);
+}
+
+.p569-table td {
+  padding: 0.38rem 0.55rem;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+/* Row lifecycle: which rows the current clause is looking at */
+.p569-table tr.dim td { color: var(--text-dim); }
+
+.p569-table tr.active td {
+  background: rgba(245, 158, 11, 0.18);
+}
+
+.p569-table tr.kept td {
+  background: rgba(16, 185, 129, 0.16);
+}
+
+.p569-table tr.dropped td {
+  color: var(--text-dim);
+  text-decoration: line-through;
+}
+
+/* Company group banding so partitions read as blocks */
+.p569-table tr.band td {
+  border-left: 3px solid rgba(245, 158, 11, 0.5);
+}
+
+.p569-badge {
+  display: inline-block;
+  padding: 0.08rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  background: var(--surface3, #21213a);
+  color: var(--text-dim);
+}
+
+.p569-badge.keep {
+  background: rgba(16, 185, 129, 0.22);
+  color: #34d399;
+}
+
+.p569-badge.drop {
+  background: rgba(239, 68, 68, 0.18);
+  color: #fca5a5;
+}
+
+.p569-empty {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+/* ── State readouts ───────────────────────── */
+.p569-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 0.5rem;
+}
+
+.p569-stat {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  font-size: 0.78rem;
+}
+
+.p569-stat-key { color: var(--text-muted); }
+
+.p569-stat-val {
+  color: var(--text);
+  font-family: 'Fira Code', monospace;
+  font-weight: 700;
+}
+
+.p569-stat.highlight .p569-stat-val { color: var(--accent-400, #f59e0b); }
+
+/* ── Code panel ───────────────────────────── */
+.p569-panel-code {
+  position: relative;
+  height: 100%;
+  overflow: auto;
+}
+
+/* ── Status panel ─────────────────────────── */
+.p569-status {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.82rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 8px;
+  background: var(--surface2);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.p569-status.done {
+  background: rgba(16, 185, 129, 0.16);
+  border-color: rgba(16, 185, 129, 0.4);
+  color: #86efac;
+}
+
+.p569-status.error {
+  background: rgba(239, 68, 68, 0.16);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+}

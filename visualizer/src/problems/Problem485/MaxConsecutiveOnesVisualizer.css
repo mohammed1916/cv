@@ -1,0 +1,240 @@
+/* ─────────────────────────────────────────────
+   Max Consecutive Ones (Problem 485)
+   ───────────────────────────────────────────── */
+
+.p485-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* .problem-content supplies a definite height; Lumino measures this root. */
+  height: 100%;
+  min-height: 480px;
+  overflow: hidden;
+}
+
+.p485-panel-primary,
+.p485-panel-state,
+.p485-panel-status {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  padding: 1rem;
+  gap: 0.9rem;
+}
+
+.p485-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl, 14px);
+  padding: 1rem 1.1rem;
+}
+
+.p485-section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-dim);
+  margin-bottom: 0.7rem;
+}
+
+.p485-input {
+  width: 100%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius, 10px);
+  padding: 0.55rem 0.7rem;
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.p485-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.p485-input.has-error {
+  border-color: rgba(248, 113, 113, 0.55);
+}
+
+.p485-hint {
+  margin: 0.45rem 0 0;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.p485-hint.error {
+  color: var(--error, #f87171);
+}
+
+.p485-example-row {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  margin-top: 0.7rem;
+}
+
+.p485-example-btn {
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.p485-example-btn:hover,
+.p485-example-btn.active {
+  color: var(--text);
+  border-color: rgba(249, 115, 22, 0.45);
+  background: rgba(249, 115, 22, 0.14);
+}
+
+/* ── Bit strip ────────────────────────────── */
+.p485-bits {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.p485-bit {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text-muted);
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.p485-bit.one {
+  color: var(--text);
+}
+
+.p485-bit.best {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: rgba(16, 185, 129, 0.5);
+}
+
+.p485-bit.run {
+  background: rgba(249, 115, 22, 0.22);
+  border-color: rgba(249, 115, 22, 0.55);
+  color: var(--text);
+}
+
+.p485-bit.cursor {
+  box-shadow: 0 0 0 2px var(--accent-400, #fbbf24);
+}
+
+.p485-legend {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.65rem;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+.p485-swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+}
+
+.p485-swatch.run {
+  background: rgba(249, 115, 22, 0.5);
+}
+
+.p485-swatch.best {
+  background: rgba(16, 185, 129, 0.5);
+  margin-left: 0.7rem;
+}
+
+/* ── State readouts ───────────────────────── */
+.p485-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 0.5rem;
+}
+
+.p485-stat {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  font-size: 0.78rem;
+}
+
+.p485-stat-key {
+  color: var(--text-muted);
+}
+
+.p485-stat-val {
+  color: var(--text);
+  font-family: 'Fira Code', monospace;
+  font-weight: 700;
+}
+
+.p485-stat.highlight .p485-stat-val {
+  color: var(--accent-400, #fbbf24);
+}
+
+.p485-result {
+  text-align: center;
+  padding: 0.9rem;
+  border-radius: 10px;
+  background: rgba(249, 115, 22, 0.16);
+  border: 1px solid rgba(249, 115, 22, 0.4);
+}
+
+.p485-result-val {
+  color: var(--accent-400, #fb923c);
+  font-size: 1.6rem;
+  font-weight: 800;
+  font-family: 'Fira Code', monospace;
+}
+
+/* ── Code + status ────────────────────────── */
+.p485-panel-code {
+  position: relative;
+  height: 100%;
+  overflow: auto;
+}
+
+.p485-status {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.82rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 8px;
+  background: var(--surface2);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.p485-status.done {
+  background: rgba(16, 185, 129, 0.16);
+  border-color: rgba(16, 185, 129, 0.4);
+  color: #86efac;
+}
+
+.p485-status.error {
+  background: rgba(239, 68, 68, 0.16);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+}

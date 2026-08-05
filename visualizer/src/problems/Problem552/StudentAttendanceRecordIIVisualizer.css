@@ -1,0 +1,290 @@
+/* ─────────────────────────────────────────────
+   Student Attendance Record II (Problem 552)
+   ───────────────────────────────────────────── */
+
+.p552-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* Direct child of .problem-content, which supplies a definite height —
+     Lumino measures this element to size its panels. */
+  height: 100%;
+  min-height: 480px;
+  overflow: hidden;
+}
+
+.p552-panel-primary,
+.p552-panel-state,
+.p552-panel-status {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  padding: 1rem;
+  gap: 0.9rem;
+}
+
+.p552-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl, 14px);
+  padding: 1rem 1.1rem;
+}
+
+.p552-section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-dim);
+  margin-bottom: 0.7rem;
+}
+
+.p552-input {
+  width: 130px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius, 10px);
+  padding: 0.55rem 0.7rem;
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.p552-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.p552-input.has-error {
+  border-color: rgba(248, 113, 113, 0.55);
+}
+
+.p552-input-label {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+}
+
+.p552-hint {
+  margin: 0.5rem 0 0;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.p552-hint.error {
+  color: var(--error, #f87171);
+}
+
+.p552-example-row {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  margin-top: 0.7rem;
+}
+
+.p552-example-btn {
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.p552-example-btn:hover,
+.p552-example-btn.active {
+  color: var(--text);
+  border-color: rgba(167, 139, 250, 0.45);
+  background: rgba(167, 139, 250, 0.14);
+}
+
+/* ── DP state grid: 2 absent rows x 3 late-run columns ── */
+.p552-dp {
+  display: grid;
+  grid-template-columns: auto repeat(3, minmax(72px, 1fr));
+  gap: 4px;
+}
+
+.p552-dp-head {
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+  text-align: center;
+  padding: 0.2rem;
+}
+
+.p552-dp-rowhead {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  padding-right: 0.4rem;
+  font-family: 'Fira Code', monospace;
+}
+
+.p552-dp-cell {
+  padding: 0.5rem 0.35rem;
+  border-radius: 8px;
+  text-align: center;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.p552-dp-cell.zero {
+  color: var(--text-dim);
+}
+
+.p552-dp-cell.changed {
+  background: rgba(167, 139, 250, 0.22);
+  border-color: rgba(167, 139, 250, 0.55);
+  color: var(--text);
+}
+
+/* ── Transition explanation rows ──────────── */
+.p552-trans {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.p552-trans-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.4rem 0.55rem;
+  border-radius: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  font-family: 'Fira Code', monospace;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.p552-trans-tag {
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.68rem;
+}
+
+.p552-trans-tag.P { background: rgba(52, 211, 153, 0.22); color: #34d399; }
+.p552-trans-tag.A { background: rgba(248, 113, 113, 0.22); color: #f87171; }
+.p552-trans-tag.L { background: rgba(251, 191, 36, 0.22); color: #fbbf24; }
+
+/* ── Day strip ────────────────────────────── */
+.p552-days {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.p552-day {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  font-family: 'Fira Code', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-dim);
+}
+
+.p552-day.past {
+  background: rgba(167, 139, 250, 0.14);
+  border-color: rgba(167, 139, 250, 0.35);
+  color: var(--text);
+}
+
+.p552-day.current {
+  background: rgba(167, 139, 250, 0.32);
+  border-color: rgba(167, 139, 250, 0.75);
+  color: var(--text);
+}
+
+/* ── State readouts ───────────────────────── */
+.p552-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 0.5rem;
+}
+
+.p552-stat {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  font-size: 0.78rem;
+}
+
+.p552-stat-key { color: var(--text-muted); }
+
+.p552-stat-val {
+  color: var(--text);
+  font-family: 'Fira Code', monospace;
+  font-weight: 700;
+}
+
+.p552-stat.highlight .p552-stat-val { color: var(--accent-400, #a78bfa); }
+
+.p552-result {
+  text-align: center;
+  padding: 0.9rem;
+  border-radius: 10px;
+  background: rgba(167, 139, 250, 0.16);
+  border: 1px solid rgba(167, 139, 250, 0.4);
+}
+
+.p552-result-val {
+  color: var(--accent-400, #a78bfa);
+  font-size: 1.6rem;
+  font-weight: 800;
+  font-family: 'Fira Code', monospace;
+}
+
+/* ── Code panel ───────────────────────────── */
+.p552-panel-code {
+  position: relative;
+  height: 100%;
+  overflow: auto;
+}
+
+/* ── Status panel ─────────────────────────── */
+.p552-status {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.82rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 8px;
+  background: var(--surface2);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.p552-status.done {
+  background: rgba(16, 185, 129, 0.16);
+  border-color: rgba(16, 185, 129, 0.4);
+  color: #86efac;
+}
+
+.p552-status.error {
+  background: rgba(239, 68, 68, 0.16);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+}

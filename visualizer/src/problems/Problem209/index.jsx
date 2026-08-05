@@ -1,1 +1,1 @@
-export { default } from './MajorityElementIIVisualizer';
+export { default } from './Problem209Visualizer';

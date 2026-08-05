@@ -1,9 +1,9 @@
 export const meta = {
   number: 548,
-  title: 'Split Array Largest Sum',
-  slug: 'split-array-largest-sum',
+  title: 'Split Array with Equal Sum',
+  slug: 'split-array-with-equal-sum',
   difficulty: 'Hard',
-  tags: ['Binary Search', 'Greedy'],
-  description: 'Given an integer array nums and an integer m, split the array into m non-empty subarrays such that the maximum sum of any subarray is minimized.',
+  tags: ['Array', 'Prefix Sum', 'Hash Table'],
+  description: 'Given an integer array nums, determine whether there exist indices i < j < k that split the array into four non-empty parts (excluding nums[i], nums[j], nums[k]) with equal sums.',
   accent: '#38bdf8',
 }
