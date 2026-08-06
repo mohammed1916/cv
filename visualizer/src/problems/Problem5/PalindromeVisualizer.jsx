@@ -1,4 +1,4 @@
-import { Fragment, useState, useCallback, useMemo, useEffect } from 'react'
+import { Fragment, useState, useCallback, useMemo, useEffect, useRef, useLayoutEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -381,6 +381,8 @@ function DpCell({ i, j, dp, step }) {
 
   const val = dp ? dp[i]?.[j] : null
   const isActive = step && step.i === i && step.j === j
+  const isSource = step && step.inner && step.inner.l === i && step.inner.r === j
+  const isEmptyMiddleTarget = step && step.phase === 'check' && step.len === 2 && isActive
 
   let state = 'unvisited'
   if (isActive)        state = 'active'
@@ -389,7 +391,8 @@ function DpCell({ i, j, dp, step }) {
 
   return (
     <motion.div
-      className={`dp-cell ${state}`}
+      className={`dp-cell ${state} ${isSource ? 'dp-source' : ''}`}
+      data-cell={`${i}-${j}`}
       animate={{
         scale: isActive ? 1.18 : 1,
       }}
@@ -398,7 +401,114 @@ function DpCell({ i, j, dp, step }) {
         {val === true && '✓'}
         {val === false && '✗'}
         {val === null && isActive && '?'}
+        {isEmptyMiddleTarget && <span className="dp-empty-middle-badge" title="Empty middle — trivially true">∅=T</span>}
     </motion.div>
+  )
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DP TABLE PANEL (with animated source→target comparison ray)
+   ═══════════════════════════════════════════════════════════════ */
+function DpTablePanel({ n, str, dpTable, currentStep }) {
+  const gridRef = useRef(null)
+  const [gridSize, setGridSize] = useState(null)
+
+  const step = currentStep
+  const showRay = Boolean(step && step.phase === 'check' && step.inner)
+
+  useLayoutEffect(() => {
+    if (!gridRef.current) return
+    const measure = () => {
+      const bounds = gridRef.current.getBoundingClientRect()
+      setGridSize({ width: bounds.width, height: bounds.height })
+    }
+    measure()
+    const ro = new ResizeObserver(measure)
+    ro.observe(gridRef.current)
+    return () => ro.disconnect()
+  }, [n])
+
+  const getCellCenter = (row, col) => {
+    if (!gridRef.current) return null
+    const cellEl = gridRef.current.querySelector(`[data-cell="${row}-${col}"]`)
+    if (!cellEl) return null
+    const gridBounds = gridRef.current.getBoundingClientRect()
+    const cellBounds = cellEl.getBoundingClientRect()
+    return {
+      x: cellBounds.left - gridBounds.left + cellBounds.width / 2,
+      y: cellBounds.top - gridBounds.top + cellBounds.height / 2,
+    }
+  }
+
+  const sourceCenter = showRay ? getCellCenter(step.inner.l, step.inner.r) : null
+  const targetCenter = showRay ? getCellCenter(step.i, step.j) : null
+  const rayReady = showRay && gridSize && sourceCenter && targetCenter
+
+  return (
+    <div className="pv-card">
+      <div className="section-label">
+        DP Table — <span className="mono" style={{ color: 'var(--primary-l)' }}>dp[i][j]</span>
+        {' '}= is <span className="mono" style={{ color: 'var(--info)' }}>s[i..j]</span> a palindrome?
+      </div>
+
+      <div className="dp-scroll">
+        <div className="dp-grid-wrap">
+          <div className="dp-grid" ref={gridRef} style={{ '--cols': n + 1 }}>
+
+            {/* Corner + column headers */}
+            <div className="dp-corner" />
+            {Array.from({ length: n }, (_, j) => (
+              <div
+                key={j}
+                className={`dp-header ${currentStep && currentStep.j === j ? 'hdr-active' : ''}`}
+              >
+                <span>{j}</span>
+                <span className="mono" style={{ color: 'var(--text-muted)' }}>'{str[j]}'</span>
+              </div>
+            ))}
+
+            {/* Rows */}
+            {Array.from({ length: n }, (_, i) => (
+              <Fragment key={`row-${i}`}>
+                <div
+                  key={`rh-${i}`}
+                  className={`dp-header row-header ${currentStep && currentStep.i === i ? 'hdr-active' : ''}`}
+                >
+                  <span>{i}</span>
+                  <span className="mono" style={{ color: 'var(--text-muted)' }}>'{str[i]}'</span>
+                </div>
+                {Array.from({ length: n }, (_, j) => (
+                  <DpCell key={`c-${i}-${j}`} i={i} j={j} dp={dpTable} step={currentStep} />
+                ))}
+              </Fragment>
+            ))}
+          </div>
+
+          {rayReady && (
+            <svg className="dp-ray-overlay" viewBox={`0 0 ${gridSize.width} ${gridSize.height}`}>
+              <motion.line
+                key={`${step.i}-${step.j}-${step.inner.l}-${step.inner.r}`}
+                x1={sourceCenter.x} y1={sourceCenter.y}
+                initial={{ x2: sourceCenter.x, y2: sourceCenter.y, opacity: 0 }}
+                animate={{ x2: targetCenter.x, y2: targetCenter.y, opacity: 1 }}
+                transition={{ duration: 0.35, ease: 'easeOut' }}
+                stroke={step.innerOk ? 'var(--success)' : 'var(--error)'}
+                strokeWidth={2.5}
+                strokeLinecap="round"
+              />
+            </svg>
+          )}
+        </div>
+      </div>
+
+      {/* Legend */}
+      <div className="legend">
+        <div className="legend-item"><div className="lbox active" />Active</div>
+        <div className="legend-item"><div className="lbox palindrome" />Palindrome</div>
+        <div className="legend-item"><div className="lbox not-palindrome" />Not palindrome</div>
+        <div className="legend-item"><div className="lbox unvisited" />Unvisited</div>
+      </div>
+    </div>
   )
 }
 
@@ -687,53 +797,7 @@ export default function PalindromeVisualizer() {
 
       {/* DP TABLE */}
       {n > 0 && (
-        <div className="pv-card">
-          <div className="section-label">
-            DP Table — <span className="mono" style={{ color: 'var(--primary-l)' }}>dp[i][j]</span>
-            {' '}= is <span className="mono" style={{ color: 'var(--info)' }}>s[i..j]</span> a palindrome?
-          </div>
-
-          <div className="dp-scroll">
-            <div className="dp-grid" style={{ '--cols': n + 1 }}>
-
-              {/* Corner + column headers */}
-              <div className="dp-corner" />
-              {Array.from({ length: n }, (_, j) => (
-                <div
-                  key={j}
-                  className={`dp-header ${currentStep && currentStep.j === j ? 'hdr-active' : ''}`}
-                >
-                  <span>{j}</span>
-                  <span className="mono" style={{ color: 'var(--text-muted)' }}>'{str[j]}'</span>
-                </div>
-              ))}
-
-              {/* Rows */}
-              {Array.from({ length: n }, (_, i) => (
-                <Fragment key={`row-${i}`}>
-                  <div
-                    key={`rh-${i}`}
-                    className={`dp-header row-header ${currentStep && currentStep.i === i ? 'hdr-active' : ''}`}
-                  >
-                    <span>{i}</span>
-                    <span className="mono" style={{ color: 'var(--text-muted)' }}>'{str[i]}'</span>
-                  </div>
-                  {Array.from({ length: n }, (_, j) => (
-                    <DpCell key={`c-${i}-${j}`} i={i} j={j} dp={dpTable} step={currentStep} />
-                  ))}
-                </Fragment>
-              ))}
-            </div>
-          </div>
-
-          {/* Legend */}
-          <div className="legend">
-            <div className="legend-item"><div className="lbox active" />Active</div>
-            <div className="legend-item"><div className="lbox palindrome" />Palindrome</div>
-            <div className="legend-item"><div className="lbox not-palindrome" />Not palindrome</div>
-            <div className="legend-item"><div className="lbox unvisited" />Unvisited</div>
-          </div>
-        </div>
+        <DpTablePanel n={n} str={str} dpTable={dpTable} currentStep={currentStep} />
       )}
 
       {/* BEST PALINDROME */}
