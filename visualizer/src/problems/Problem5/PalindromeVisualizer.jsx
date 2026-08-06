@@ -1,4 +1,4 @@
-import { Fragment, useState, useCallback, useMemo, useEffect, useRef, useLayoutEffect } from 'react'
+import { Fragment, useState, useCallback, useMemo, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -7,8 +7,10 @@ import PatternOverlay from '../../components/PatternOverlay'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import GridRayOverlay from '../../components/shared/GridRayOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
+import { useGridRayOverlay } from '../../hooks/useGridRayOverlay'
 import './PalindromeVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -410,39 +412,22 @@ function DpCell({ i, j, dp, step }) {
    DP TABLE PANEL (with animated source→target comparison ray)
    ═══════════════════════════════════════════════════════════════ */
 function DpTablePanel({ n, str, dpTable, currentStep }) {
-  const gridRef = useRef(null)
-  const [gridSize, setGridSize] = useState(null)
+  const { gridRef, gridSize, getCellCenter } = useGridRayOverlay()
 
   const step = currentStep
   const showRay = Boolean(step && step.phase === 'check' && step.inner)
 
-  useLayoutEffect(() => {
-    if (!gridRef.current) return
-    const measure = () => {
-      const bounds = gridRef.current.getBoundingClientRect()
-      setGridSize({ width: bounds.width, height: bounds.height })
-    }
-    measure()
-    const ro = new ResizeObserver(measure)
-    ro.observe(gridRef.current)
-    return () => ro.disconnect()
-  }, [n])
-
-  const getCellCenter = (row, col) => {
-    if (!gridRef.current) return null
-    const cellEl = gridRef.current.querySelector(`[data-cell="${row}-${col}"]`)
-    if (!cellEl) return null
-    const gridBounds = gridRef.current.getBoundingClientRect()
-    const cellBounds = cellEl.getBoundingClientRect()
-    return {
-      x: cellBounds.left - gridBounds.left + cellBounds.width / 2,
-      y: cellBounds.top - gridBounds.top + cellBounds.height / 2,
-    }
-  }
-
   const sourceCenter = showRay ? getCellCenter(step.inner.l, step.inner.r) : null
   const targetCenter = showRay ? getCellCenter(step.i, step.j) : null
-  const rayReady = showRay && gridSize && sourceCenter && targetCenter
+
+  const rays = (showRay && sourceCenter && targetCenter)
+    ? [{
+        key: `${step.i}-${step.j}-${step.inner.l}-${step.inner.r}`,
+        from: sourceCenter,
+        to: targetCenter,
+        color: step.innerOk ? 'var(--success)' : 'var(--error)',
+      }]
+    : []
 
   return (
     <div className="pv-card">
@@ -484,20 +469,7 @@ function DpTablePanel({ n, str, dpTable, currentStep }) {
             ))}
           </div>
 
-          {rayReady && (
-            <svg className="dp-ray-overlay" viewBox={`0 0 ${gridSize.width} ${gridSize.height}`}>
-              <motion.line
-                key={`${step.i}-${step.j}-${step.inner.l}-${step.inner.r}`}
-                x1={sourceCenter.x} y1={sourceCenter.y}
-                initial={{ x2: sourceCenter.x, y2: sourceCenter.y, opacity: 0 }}
-                animate={{ x2: targetCenter.x, y2: targetCenter.y, opacity: 1 }}
-                transition={{ duration: 0.35, ease: 'easeOut' }}
-                stroke={step.innerOk ? 'var(--success)' : 'var(--error)'}
-                strokeWidth={2.5}
-                strokeLinecap="round"
-              />
-            </svg>
-          )}
+          <GridRayOverlay gridSize={gridSize} rays={rays} />
         </div>
       </div>
 

@@ -67,16 +67,6 @@
   position: relative;
 }
 
-.nq-ray-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow: visible;
-}
-
 .nq-cell.attacker {
   outline: 2px solid #cba6f7;
   box-shadow: 0 0 6px #cba6f766;

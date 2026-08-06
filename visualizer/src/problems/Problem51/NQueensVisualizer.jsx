@@ -1,4 +1,4 @@
-﻿import { useState, useMemo, useCallback, useRef, useLayoutEffect } from "react";
+﻿import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom';
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -7,9 +7,11 @@ import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
+import GridRayOverlay from "../../components/shared/GridRayOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
+import { useGridRayOverlay } from "../../hooks/useGridRayOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./NQueensVisualizer.css";
 
@@ -142,24 +144,24 @@ const ATTACK_COLORS = { row: "#89b4fa", col: "#fab387", diag: "#f38ba8" };
 
 // Board visualization panel component
 function BoardPanel({ EXAMPLES, ex, n, board, activeRow, activeCol, phase, attacked, attackers, step, applyEx }) {
-  const boardRef = useRef(null);
-  const [cellRect, setCellRect] = useState(null);
-
-  useLayoutEffect(() => {
-    if (!boardRef.current) return;
-    const measure = () => {
-      const rect = boardRef.current.getBoundingClientRect();
-      setCellRect({ size: rect.width / n, width: rect.width, height: rect.height });
-    };
-    measure();
-    const ro = new ResizeObserver(measure);
-    ro.observe(boardRef.current);
-    return () => ro.disconnect();
-  }, [n]);
+  const { gridRef: boardRef, gridSize, getCellCenter } = useGridRayOverlay();
 
   const showRays = (phase === "check" || phase === "skip") && activeRow >= 0 && activeCol >= 0 && attackers.length > 0;
-  const cx = (c) => cellRect ? (c + 0.5) * cellRect.size : 0;
-  const cy = (r) => cellRect ? (r + 0.5) * cellRect.size : 0;
+  const targetCenter = showRays ? getCellCenter(activeRow, activeCol) : null;
+  const rays = (showRays && targetCenter)
+    ? attackers
+        .map((a, i) => {
+          const from = getCellCenter(a.r, a.c);
+          if (!from) return null;
+          return {
+            key: `${step?.activeLine}-${activeRow}-${activeCol}-${a.r}-${a.c}-${i}`,
+            from,
+            to: targetCenter,
+            color: ATTACK_COLORS[a.type],
+          };
+        })
+        .filter(Boolean)
+    : [];
 
   return (
     <div className="nq-panel-content">
@@ -185,6 +187,7 @@ function BoardPanel({ EXAMPLES, ex, n, board, activeRow, activeCol, phase, attac
               return (
                 <motion.div
                   key={`${r}-${c}`}
+                  data-cell={`${r}-${c}`}
                   className={`nq-cell ${isDark ? "dark" : "light"} ${isQueen ? "queen" : ""} ${isActive && phase === "check" ? "checking" : ""} ${isActive && phase === "place" ? "placing" : ""} ${isActive && phase === "skip" ? "skipping" : ""} ${isAttack && isActiveRow ? "attacked" : ""} ${phase === "solution" ? "solution-flash" : ""} ${isAttacker ? "attacker" : ""}`}
                   animate={{ scale: isActive && phase === "place" ? 1.15 : isAttacker ? 1.1 : 1 }}
                   transition={{ type: "spring", stiffness: 400, damping: 20 }}
@@ -194,22 +197,7 @@ function BoardPanel({ EXAMPLES, ex, n, board, activeRow, activeCol, phase, attac
               );
             }))}
           </div>
-          {showRays && cellRect && (
-            <svg className="nq-ray-overlay" viewBox={`0 0 ${cellRect.width} ${cellRect.height}`}>
-              {attackers.map((a, i) => (
-                <motion.line
-                  key={`${step?.activeLine}-${activeRow}-${activeCol}-${a.r}-${a.c}-${i}`}
-                  x1={cx(a.c)} y1={cy(a.r)}
-                  initial={{ x2: cx(a.c), y2: cy(a.r), opacity: 0 }}
-                  animate={{ x2: cx(activeCol), y2: cy(activeRow), opacity: 1 }}
-                  transition={{ duration: 0.35, ease: "easeOut" }}
-                  stroke={ATTACK_COLORS[a.type]}
-                  strokeWidth={2.5}
-                  strokeLinecap="round"
-                />
-              ))}
-            </svg>
-          )}
+          <GridRayOverlay gridSize={gridSize} rays={rays} />
         </div>
       </div>
 
