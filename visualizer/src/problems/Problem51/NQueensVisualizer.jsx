@@ -1,4 +1,4 @@
-﻿import { useState, useMemo, useCallback } from "react";
+﻿import { useState, useMemo, useCallback, useRef, useLayoutEffect } from "react";
 import { createPortal } from 'react-dom';
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -124,8 +124,43 @@ function getAttacked(board, n) {
   return attacked;
 }
 
+function getAttackers(board, n, row, col) {
+  if (row < 0 || col < 0) return [];
+  const attackers = [];
+  for (let r = 0; r < n; r++) {
+    for (let c = 0; c < n; c++) {
+      if (board[r][c] !== "Q" || (r === row && c === col)) continue;
+      if (r === row) attackers.push({ r, c, type: "row" });
+      else if (c === col) attackers.push({ r, c, type: "col" });
+      else if (Math.abs(r - row) === Math.abs(c - col)) attackers.push({ r, c, type: "diag" });
+    }
+  }
+  return attackers;
+}
+
+const ATTACK_COLORS = { row: "#89b4fa", col: "#fab387", diag: "#f38ba8" };
+
 // Board visualization panel component
-function BoardPanel({ EXAMPLES, ex, n, board, activeRow, activeCol, phase, attacked, step, applyEx }) {
+function BoardPanel({ EXAMPLES, ex, n, board, activeRow, activeCol, phase, attacked, attackers, step, applyEx }) {
+  const boardRef = useRef(null);
+  const [cellRect, setCellRect] = useState(null);
+
+  useLayoutEffect(() => {
+    if (!boardRef.current) return;
+    const measure = () => {
+      const rect = boardRef.current.getBoundingClientRect();
+      setCellRect({ size: rect.width / n, width: rect.width, height: rect.height });
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(boardRef.current);
+    return () => ro.disconnect();
+  }, [n]);
+
+  const showRays = (phase === "check" || phase === "skip") && activeRow >= 0 && activeCol >= 0 && attackers.length > 0;
+  const cx = (c) => cellRect ? (c + 0.5) * cellRect.size : 0;
+  const cy = (r) => cellRect ? (r + 0.5) * cellRect.size : 0;
+
   return (
     <div className="nq-panel-content">
       <div className="nq-examples">
@@ -138,24 +173,43 @@ function BoardPanel({ EXAMPLES, ex, n, board, activeRow, activeCol, phase, attac
 
       <div className="nq-panel">
         <div className="nq-panel-label">Board ({n}×{n})</div>
-        <div className="nq-board" style={{ gridTemplateColumns: `repeat(${n}, 1fr)` }}>
-          {board.map((row, r) => row.map((cell, c) => {
-            const isActive = r === activeRow && c === activeCol;
-            const isQueen = cell === "Q";
-            const isAttack = attacked[r][c] && !isQueen;
-            const isActiveRow = r === activeRow && !step?.done;
-            const isDark = (r + c) % 2 === 1;
-            return (
-              <motion.div
-                key={`${r}-${c}`}
-                className={`nq-cell ${isDark ? "dark" : "light"} ${isQueen ? "queen" : ""} ${isActive && phase === "check" ? "checking" : ""} ${isActive && phase === "place" ? "placing" : ""} ${isActive && phase === "skip" ? "skipping" : ""} ${isAttack && isActiveRow ? "attacked" : ""} ${phase === "solution" ? "solution-flash" : ""}`}
-                animate={{ scale: isActive && phase === "place" ? 1.15 : 1 }}
-                transition={{ type: "spring", stiffness: 400, damping: 20 }}
-              >
-                {isQueen ? "♛" : ""}
-              </motion.div>
-            );
-          }))}
+        <div className="nq-board-wrap" style={{ maxWidth: 320 }}>
+          <div className="nq-board" ref={boardRef} style={{ gridTemplateColumns: `repeat(${n}, 1fr)` }}>
+            {board.map((row, r) => row.map((cell, c) => {
+              const isActive = r === activeRow && c === activeCol;
+              const isQueen = cell === "Q";
+              const isAttack = attacked[r][c] && !isQueen;
+              const isActiveRow = r === activeRow && !step?.done;
+              const isDark = (r + c) % 2 === 1;
+              const isAttacker = showRays && attackers.some(a => a.r === r && a.c === c);
+              return (
+                <motion.div
+                  key={`${r}-${c}`}
+                  className={`nq-cell ${isDark ? "dark" : "light"} ${isQueen ? "queen" : ""} ${isActive && phase === "check" ? "checking" : ""} ${isActive && phase === "place" ? "placing" : ""} ${isActive && phase === "skip" ? "skipping" : ""} ${isAttack && isActiveRow ? "attacked" : ""} ${phase === "solution" ? "solution-flash" : ""} ${isAttacker ? "attacker" : ""}`}
+                  animate={{ scale: isActive && phase === "place" ? 1.15 : isAttacker ? 1.1 : 1 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                >
+                  {isQueen ? "♛" : ""}
+                </motion.div>
+              );
+            }))}
+          </div>
+          {showRays && cellRect && (
+            <svg className="nq-ray-overlay" viewBox={`0 0 ${cellRect.width} ${cellRect.height}`}>
+              {attackers.map((a, i) => (
+                <motion.line
+                  key={`${step?.activeLine}-${activeRow}-${activeCol}-${a.r}-${a.c}-${i}`}
+                  x1={cx(a.c)} y1={cy(a.r)}
+                  initial={{ x2: cx(a.c), y2: cy(a.r), opacity: 0 }}
+                  animate={{ x2: cx(activeCol), y2: cy(activeRow), opacity: 1 }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
+                  stroke={ATTACK_COLORS[a.type]}
+                  strokeWidth={2.5}
+                  strokeLinecap="round"
+                />
+              ))}
+            </svg>
+          )}
         </div>
       </div>
 
@@ -205,10 +259,11 @@ export default function NQueensVisualizer() {
   const activeCol = step?.col ?? -1;
   const phase = step?.phase ?? "init";
   const attacked = useMemo(() => getAttacked(board, n), [board, n]);
+  const attackers = useMemo(() => getAttackers(board, n, activeRow, activeCol), [board, n, activeRow, activeCol]);
 
   // Extract panels into consts (before return)
   const primaryPanel = (
-    <BoardPanel EXAMPLES={EXAMPLES} ex={ex} n={n} board={board} activeRow={activeRow} activeCol={activeCol} phase={phase} attacked={attacked} step={step} applyEx={applyEx} />
+    <BoardPanel EXAMPLES={EXAMPLES} ex={ex} n={n} board={board} activeRow={activeRow} activeCol={activeCol} phase={phase} attacked={attacked} attackers={attackers} step={step} applyEx={applyEx} />
   );
 
   const codePanel = (
