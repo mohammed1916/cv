@@ -2,6 +2,7 @@ import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import GridRayOverlay from '../../components/shared/GridRayOverlay'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -13,6 +14,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
+import { useGridRayOverlay } from '../../hooks/useGridRayOverlay'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './RegularExpressionMatchingVisualizer.css'
@@ -287,6 +289,66 @@ function VisualizationPanel({
 }) {
   const m = s.length
   const n = p.length
+  const { gridRef, gridSize, getCellCenter } = useGridRayOverlay()
+
+  const raySourceCoords = useMemo(() => {
+    if (!step || step.i == null || step.j == null) return []
+    if (step.phase === 'char_or_dot' || step.phase === 'char_result') {
+      return [[step.i - 1, step.j - 1]]
+    }
+    if (step.phase === 'star_check' || step.phase === 'star_zero' || step.phase === 'star_multi' || step.phase === 'star_result') {
+      return [[step.i, step.j - 2], [step.i - 1, step.j]]
+    }
+    return []
+  }, [step])
+
+  const raySources = useMemo(
+    () => new Set(raySourceCoords.map(([r, c]) => `${r}-${c}`)),
+    [raySourceCoords]
+  )
+
+  const rays = useMemo(() => {
+    if (!step || step.i == null || step.j == null) return []
+    const target = getCellCenter(step.i, step.j)
+    if (!target) return []
+
+    if (step.phase === 'char_or_dot' || step.phase === 'char_result') {
+      const from = getCellCenter(step.i - 1, step.j - 1)
+      if (!from) return []
+      return [{
+        key: `diag-${step.i}-${step.j}`,
+        from, to: target,
+        color: step.match ? 'var(--success-color, #22c55e)' : 'var(--error-color, #ef4444)',
+      }]
+    }
+
+    if (step.phase === 'star_check' || step.phase === 'star_zero' || step.phase === 'star_multi' || step.phase === 'star_result') {
+      const zeroFrom = getCellCenter(step.i, step.j - 2)
+      const multiFrom = getCellCenter(step.i - 1, step.j)
+      const out = []
+      if (zeroFrom) {
+        out.push({
+          key: `zero-${step.i}-${step.j}`,
+          from: zeroFrom, to: target,
+          color: 'var(--active-border, #3b82f6)',
+        })
+      }
+      if (multiFrom) {
+        const multiKnown = step.phase === 'star_multi' || step.phase === 'star_result'
+        out.push({
+          key: `multi-${step.i}-${step.j}`,
+          from: multiFrom, to: target,
+          color: multiKnown
+            ? (step.match ? 'var(--success-color, #22c55e)' : 'var(--error-color, #ef4444)')
+            : 'var(--active-border, #3b82f6)',
+        })
+      }
+      return out
+    }
+
+    return []
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step, gridSize])
 
   return (
     <div className="rem-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -368,40 +430,46 @@ function VisualizationPanel({
 
         <div className="rem-dp-table-container">
           <span className="rem-section-title">DP Table (m={m}, n={n})</span>
-          <div className="rem-dp-table">
-            {/* Header row with pattern characters */}
-            <div className="rem-dp-row">
-              <div className="rem-dp-cell header empty"></div>
-              <div className="rem-dp-cell header empty">ε</div>
-              {p.split('').map((char, j) => (
-                <div key={`ph-${j}`} className="rem-dp-cell header">
-                  {char}
+          <div className="rem-dp-table-wrap">
+            <div className="rem-dp-table" ref={gridRef}>
+              {/* Header row with pattern characters */}
+              <div className="rem-dp-row">
+                <div className="rem-dp-cell header empty"></div>
+                <div className="rem-dp-cell header empty">ε</div>
+                {p.split('').map((char, j) => (
+                  <div key={`ph-${j}`} className="rem-dp-cell header">
+                    {char}
+                  </div>
+                ))}
+              </div>
+
+              {/* Data rows */}
+              {step?.dpTable && step.dpTable.map((row, i) => (
+                <div key={`row-${i}`} className="rem-dp-row">
+                  <div className="rem-dp-cell header empty">
+                    {i === 0 ? 'ε' : s[i - 1]}
+                  </div>
+                  {row.map((val, j) => {
+                    const isCurrent = step && step.i === i && step.j === j && step.phase !== 'done'
+                    const isTarget = step && step.phase === 'done' && i === m && j === n
+                    const isSource = raySources.has(`${i}-${j}`)
+
+                    return (
+                      <motion.div
+                        key={`cell-${i}-${j}`}
+                        data-cell={`${i}-${j}`}
+                        className={`rem-dp-cell ${val ? 'true' : 'false'} ${isCurrent ? 'current' : ''} ${isTarget ? 'target' : ''} ${isSource ? 'ray-source' : ''}`}
+                        animate={isCurrent || isTarget ? { scale: 1.05 } : { scale: 1 }}
+                      >
+                        {val ? 'T' : 'F'}
+                      </motion.div>
+                    )
+                  })}
                 </div>
               ))}
             </div>
 
-            {/* Data rows */}
-            {step?.dpTable && step.dpTable.map((row, i) => (
-              <div key={`row-${i}`} className="rem-dp-row">
-                <div className="rem-dp-cell header empty">
-                  {i === 0 ? 'ε' : s[i - 1]}
-                </div>
-                {row.map((val, j) => {
-                  const isCurrent = step && step.i === i && step.j === j && step.phase !== 'done'
-                  const isTarget = step && step.phase === 'done' && i === m && j === n
-
-                  return (
-                    <motion.div
-                      key={`cell-${i}-${j}`}
-                      className={`rem-dp-cell ${val ? 'true' : 'false'} ${isCurrent ? 'current' : ''} ${isTarget ? 'target' : ''}`}
-                      animate={isCurrent || isTarget ? { scale: 1.05 } : { scale: 1 }}
-                    >
-                      {val ? 'T' : 'F'}
-                    </motion.div>
-                  )
-                })}
-              </div>
-            ))}
+            <GridRayOverlay gridSize={gridSize} rays={rays} />
           </div>
         </div>
 

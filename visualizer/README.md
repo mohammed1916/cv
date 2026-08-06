@@ -24,7 +24,7 @@ Rollout order below is by Problem ID ascending — this is the traversal order f
 | Order | Problem | Visualizer file | Table meaning | Ray status |
 |---|---|---|---|---|
 | 1 | Problem5 – Longest Palindromic Substring | `Problem5/PalindromeVisualizer.jsx` | rows/cols = substring start/end indices; dp[i][j] = is-palindrome | **Done** (ray from dp[i+1][j-1] to dp[i][j], green/red by result; ∅=T badge for length-2 steps) |
-| 2 | Problem10 – Regular Expression Matching | `Problem10/RegularExpressionMatchingVisualizer.jsx` | rows = text index, cols = pattern index; dp[i][j] = match bool | Missing |
+| 2 | Problem10 – Regular Expression Matching | `Problem10/RegularExpressionMatchingVisualizer.jsx` | rows = text index, cols = pattern index; dp[i][j] = match bool | **Done** (diagonal ray for char/dot; simultaneous zero-occurrence + multi-occurrence rays for `*`, color by outcome) |
 | 3 | Problem44 – Wildcard Matching | `Problem44/WildcardMatchingVisualizer.jsx` | rows = string index, cols = pattern index; dp[i][j] = match bool | Missing |
 | 4 | Problem62 – Unique Paths | `Problem62/UniquePathsVisualizer.jsx` | rows/cols = grid position; dp[r][c] = path count | **Done** (above/left/curr arrows) |
 | 5 | Problem63 – Unique Paths II | `Problem63/UniquePathsIIVisualizer.jsx` | same as above, with obstacles | Missing |
@@ -46,5 +46,7 @@ Rollout order below is by Problem ID ascending — this is the traversal order f
 | 21 | Problem568 – Palindrome Subsequence variant | `Problem568/PalindromeSubsequenceVisualizer.jsx` | rows/cols = substring bounds | Missing |
 | 22 | Problem583 – Delete Operation for Two Strings | `Problem583/DeleteOperationVisualizer.jsx` | rows/cols = prefixes of word1/word2 | Missing |
 | 23 | Problem1143 – Longest Common Subsequence | `Problem1143/LCSVisualizer.jsx` | rows/cols = prefixes of the two strings; dp[i][j] = LCS length | Missing (step data already tracks dp[i-1][j-1]/dp[i-1][j]/dp[i][j-1]) |
+
+**Shared modules for the comparison ray**: `src/hooks/useGridRayOverlay.js` (grid + cell-center measurement via `data-cell="row-col"` attributes, real DOM `getBoundingClientRect()` — no cell-size math, so it's correct for any grid layout/gaps/headers) and `src/components/shared/GridRayOverlay.jsx` (SVG overlay rendering animated lines from a `rays` array of `{key, from, to, color, strokeWidth?}`). N-Queens (Problem51, attacker rays) and Problem5/Problem10 above all use these — extend the ray descriptor shape (not the hook/component signatures) for new needs unless a structurally new capability (curved paths, labels, arrowheads) is required.
 
 Font note: only Problem51 (N-Queens) renders a Unicode chess glyph (♛) with a symbol-font stack; Problem52 (N-Queens II) renders no glyph and isn't affected. No other DP/table problem uses a risky glyph font.
