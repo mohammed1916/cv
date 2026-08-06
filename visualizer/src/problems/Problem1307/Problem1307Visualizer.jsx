@@ -9,7 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
-import './Problem424Visualizer.css'
+import './Problem1307Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -176,7 +176,7 @@ function VisualizationPanel({ step }) {
   )
 }
 
-export default function Problem424Visualizer() {
+export default function Problem1307Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0])
   const SOLUTION_CODE = SOLUTION_CODE_INLINE
   const steps = useMemo(

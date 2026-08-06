@@ -1,1 +1,1 @@
-export { default } from './Problem424Visualizer'
+export { default } from './LongestRepeatingVisualizer'

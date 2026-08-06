@@ -1,5 +1,5 @@
 export const meta = {
-  number: '219',
+  number: '220',
   title: 'Contains Duplicate III',
   slug: 'contains-duplicate-iii',
   difficulty: 'Hard',

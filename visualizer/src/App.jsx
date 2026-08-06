@@ -515,6 +515,18 @@ function HomePage({
             aria-label="Problem tracks"
           >
             <button
+              className={`track-btn ${track === TRACKS.BLIND75 ? "active" : ""}`}
+              onClick={() => onTrackChange(TRACKS.BLIND75)}
+            >
+              Blind 75
+            </button>
+            <button
+              className={`track-btn ${track === TRACKS.NEETCODE150 ? "active" : ""}`}
+              onClick={() => onTrackChange(TRACKS.NEETCODE150)}
+            >
+              NeetCode 150
+            </button>
+            <button
               className={`track-btn ${track === TRACKS.LEETCODE ? "active" : ""}`}
               onClick={() => onTrackChange(TRACKS.LEETCODE)}
             >
@@ -531,18 +543,6 @@ function HomePage({
               onClick={() => onTrackChange(TRACKS.CODEFORCES)}
             >
               Codeforces Track
-            </button>
-            <button
-              className={`track-btn ${track === TRACKS.BLIND75 ? "active" : ""}`}
-              onClick={() => onTrackChange(TRACKS.BLIND75)}
-            >
-              Blind 75
-            </button>
-            <button
-              className={`track-btn ${track === TRACKS.NEETCODE150 ? "active" : ""}`}
-              onClick={() => onTrackChange(TRACKS.NEETCODE150)}
-            >
-              NeetCode 150
             </button>
           </div>
 
