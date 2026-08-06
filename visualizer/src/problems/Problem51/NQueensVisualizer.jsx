@@ -48,7 +48,7 @@ function generateSteps(n) {
   const solutions = [];
 
   steps.push({
-    activeLine: 2, boardRef: board,
+    activeLine: 2, boardRef: board.map(r => [...r]),
     row: 0, col: -1, phase: "init", solutions: 0,
     message: `Start N-Queens for n=${n}. Empty board.`,
   });
@@ -57,7 +57,7 @@ function generateSteps(n) {
     if (row === n) {
       solutions.push(board.map(r => [...r])); // Keep this copy for solutions storage (algo correctness)
       steps.push({
-        activeLine: 5, boardRef: board,
+        activeLine: 5, boardRef: board.map(r => [...r]),
         row, col: -1, phase: "solution", solutions: solutions.length,
         message: `✓ Solution #${solutions.length} found!`,
       });
@@ -65,13 +65,13 @@ function generateSteps(n) {
     }
     for (let col = 0; col < n; col++) {
       steps.push({
-        activeLine: 7, boardRef: board,
+        activeLine: 7, boardRef: board.map(r => [...r]),
         row, col, phase: "check", solutions: solutions.length,
         message: `Row ${row}, Col ${col}: check attacks`,
       });
       if (cols.has(col) || diag1.has(row - col) || diag2.has(row + col)) {
         steps.push({
-          activeLine: 8, boardRef: board,
+          activeLine: 8, boardRef: board.map(r => [...r]),
           row, col, phase: "skip", solutions: solutions.length,
           message: `(${row},${col}) under attack — skip`,
         });
@@ -80,7 +80,7 @@ function generateSteps(n) {
       board[row][col] = "Q";
       cols.add(col); diag1.add(row - col); diag2.add(row + col);
       steps.push({
-        activeLine: 9, boardRef: board,
+        activeLine: 9, boardRef: board.map(r => [...r]),
         row, col, phase: "place", solutions: solutions.length,
         message: `Place Queen at (${row},${col})`,
       });
@@ -88,7 +88,7 @@ function generateSteps(n) {
       board[row][col] = ".";
       cols.delete(col); diag1.delete(row - col); diag2.delete(row + col);
       steps.push({
-        activeLine: 11, boardRef: board,
+        activeLine: 11, boardRef: board.map(r => [...r]),
         row, col, phase: "remove", solutions: solutions.length,
         message: `Backtrack: remove Queen from (${row},${col})`,
       });
@@ -97,7 +97,7 @@ function generateSteps(n) {
 
   backtrack(0);
   steps.push({
-    activeLine: 1, boardRef: board,
+    activeLine: 1, boardRef: board.map(r => [...r]),
     row: -1, col: -1, phase: "done", solutions: solutions.length, done: true,
     message: `Done! Found ${solutions.length} solution(s) for n=${n}.`,
   });
