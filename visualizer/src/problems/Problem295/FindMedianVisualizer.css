@@ -103,6 +103,78 @@
     padding: 0 3px;
 }
 
+.fm-heap-cell.active {
+    box-shadow: 0 0 10px currentColor;
+}
+
+.fm-heap-canvas {
+    position: relative;
+}
+
+.fm-heap-node {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    background: #313244;
+    border: 2px solid;
+    z-index: 1;
+}
+
+.fm-heap-node.active {
+    box-shadow: 0 0 10px currentColor;
+    z-index: 2;
+}
+
+.fm-heap-node.median-source.root {
+    box-shadow: 0 0 12px #f9e2af;
+    outline: 2px solid #f9e2af;
+}
+
+.fm-heap-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #6c7086;
+    font-size: 12px;
+    font-style: italic;
+}
+
+.fm-view-toggle {
+    display: inline-flex;
+    gap: 4px;
+    padding: 3px;
+    background: #11111b;
+    border: 1px solid #313244;
+    border-radius: 8px;
+}
+
+.fm-view-btn {
+    background: transparent;
+    color: #a6adc8;
+    border: none;
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.fm-view-btn:hover {
+    color: #cdd6f4;
+}
+
+.fm-view-btn.active {
+    background: #313244;
+    color: #f9e2af;
+}
+
 .fm-median-col {
     display: flex;
     flex-direction: column;

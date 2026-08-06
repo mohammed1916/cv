@@ -6,6 +6,7 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
+import { buildTree, computeLayout, collectNodes, buildEdges, TreeSVG } from '../../components/treeUtils'
 import "./FindMedianVisualizer.css";
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -74,6 +75,7 @@ function generateSteps(nums) {
         steps.push({
             phase: "push_small", activeLine: 4,
             small: [...small], large: [...large], median: null,
+            activeSide: "small", activeValue: num,
             message: `Push ${num} to small (max-heap). small=[${small.map((v) => -v).join(",")}]`,
         });
 
@@ -84,6 +86,7 @@ function generateSteps(nums) {
             steps.push({
                 phase: "balance_order", activeLine: 6,
                 small: [...small], large: [...large], median: null,
+                activeSide: "large", activeValue: moved,
                 message: `Order fix: move ${moved} from small to large`,
             });
         }
@@ -95,6 +98,7 @@ function generateSteps(nums) {
             steps.push({
                 phase: "balance_size_sl", activeLine: 8,
                 small: [...small], large: [...large], median: null,
+                activeSide: "large", activeValue: moved,
                 message: `Size fix: move ${moved} from small to large`,
             });
         }
@@ -104,6 +108,7 @@ function generateSteps(nums) {
             steps.push({
                 phase: "balance_size_ls", activeLine: 10,
                 small: [...small], large: [...large], median: null,
+                activeSide: "small", activeValue: moved,
                 message: `Size fix: move ${moved} from large to small`,
             });
         }
@@ -115,6 +120,7 @@ function generateSteps(nums) {
         steps.push({
             phase: "median", activeLine: small.length === large.length ? 13 : 14,
             small: [...small], large: [...large], median,
+            activeSide: "both", activeValue: null,
             message: `After adding ${num}: median = ${median}`,
         });
     }
@@ -124,23 +130,83 @@ function generateSteps(nums) {
 
 const EXAMPLES = getExamples('find-median-data-stream');
 
-function HeapDisplay({ label, values, isMax, accent }) {
+const HEAP_TREE_W = 240;
+const HEAP_TREE_H = 180;
+const HEAP_NODE_R = 18;
+
+function HeapTree({ label, values, isMax, accent, isActiveSide, activeValue, isMedianRoot }) {
+    const display = isMax ? values.map((v) => -v) : values;
+
+    const { positions, edges, nodes } = useMemo(() => {
+        // A binary heap's array IS already a level-order layout (parent i ->
+        // children 2i+1, 2i+2), the same shape buildTree expects — no nulls
+        // to worry about since heap arrays are always dense.
+        const builtRoot = buildTree(display);
+        return {
+            positions: computeLayout(builtRoot, HEAP_TREE_W, 52),
+            edges: buildEdges(builtRoot),
+            nodes: collectNodes(builtRoot),
+        };
+    }, [display]);
+
+    return (
+        <div className="fm-heap-panel" style={{ borderColor: accent }}>
+            <div className="fm-heap-label" style={{ color: accent }}>{label}</div>
+            <div className="fm-heap-canvas" style={{ width: HEAP_TREE_W, height: HEAP_TREE_H }}>
+                <TreeSVG edges={edges} positions={positions} canvasWidth={HEAP_TREE_W} canvasHeight={HEAP_TREE_H} />
+                <AnimatePresence>
+                    {nodes.map((node) => {
+                        const pos = positions.get(node.id);
+                        if (!pos) return null;
+                        const isRoot = node.id === 0;
+                        const isActive = isActiveSide && node.val === activeValue;
+                        return (
+                            <motion.div
+                                key={`${node.id}-${node.val}`}
+                                className={`fm-heap-node ${isRoot ? "root" : ""} ${isActive ? "active" : ""} ${isRoot && isMedianRoot ? "median-source" : ""}`}
+                                style={{
+                                    left: pos.x - HEAP_NODE_R, top: pos.y - HEAP_NODE_R,
+                                    borderColor: isRoot ? accent : "#45475a",
+                                    color: isRoot ? accent : "#cdd6f4",
+                                }}
+                                initial={{ opacity: 0, scale: 0.6 }}
+                                animate={{ opacity: 1, scale: isActive ? 1.25 : 1 }}
+                                exit={{ opacity: 0, scale: 0.6 }}
+                                transition={{ type: "spring", stiffness: 380, damping: 22 }}
+                            >
+                                {node.val}
+                                {isRoot && <span className="fm-top-tag">{isMax ? "max" : "min"}</span>}
+                            </motion.div>
+                        );
+                    })}
+                </AnimatePresence>
+                {nodes.length === 0 && <div className="fm-heap-empty">empty</div>}
+            </div>
+        </div>
+    );
+}
+
+function HeapList({ label, values, isMax, accent, isActiveSide, activeValue }) {
     const display = isMax ? values.map((v) => -v) : values;
     return (
         <div className="fm-heap-panel" style={{ borderColor: accent }}>
             <div className="fm-heap-label" style={{ color: accent }}>{label}</div>
             <div className="fm-heap-cells">
                 <AnimatePresence mode="popLayout">
-                    {display.map((v, i) => (
-                        <motion.div key={`${i}-${v}`} className="fm-heap-cell"
-                            style={{ borderColor: i === 0 ? accent : "#45475a", color: i === 0 ? accent : "#cdd6f4" }}
-                            initial={{ opacity: 0, scale: 0.7 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.7 }}
-                            transition={{ type: "spring", stiffness: 380, damping: 22 }}>
-                            {v}
-                            {i === 0 && <span className="fm-top-tag">{isMax ? "max" : "min"}</span>}
-                        </motion.div>
-                    ))}
+                    {display.map((v, i) => {
+                        const isActive = isActiveSide && v === activeValue;
+                        return (
+                            <motion.div key={`${i}-${v}`} className={`fm-heap-cell ${isActive ? "active" : ""}`}
+                                style={{ borderColor: i === 0 ? accent : "#45475a", color: i === 0 ? accent : "#cdd6f4" }}
+                                initial={{ opacity: 0, scale: 0.7 }} animate={{ opacity: 1, scale: isActive ? 1.15 : 1 }} exit={{ opacity: 0, scale: 0.7 }}
+                                transition={{ type: "spring", stiffness: 380, damping: 22 }}>
+                                {v}
+                                {i === 0 && <span className="fm-top-tag">{isMax ? "max" : "min"}</span>}
+                            </motion.div>
+                        );
+                    })}
                 </AnimatePresence>
+                {display.length === 0 && <div className="fm-heap-empty">empty</div>}
             </div>
         </div>
     );
@@ -148,6 +214,7 @@ function HeapDisplay({ label, values, isMax, accent }) {
 
 export default function FindMedianVisualizer() {
     const [numsInput, setNumsInput] = useState("[1,2,3]");
+    const [heapView, setHeapView] = useState("tree"); // "tree" | "list"
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
     const { nums, inputErr } = useMemo(() => {
@@ -183,10 +250,37 @@ export default function FindMedianVisualizer() {
                         onChange={(e) => { setNumsInput(e.target.value); handleReset(); }} />
                     {inputErr && <span className="fm-error">{inputErr}</span>}
                 </div>
+                <div className="fm-view-toggle">
+                    <button
+                        className={`fm-view-btn ${heapView === "tree" ? "active" : ""}`}
+                        onClick={() => setHeapView("tree")}
+                    >
+                        Tree view
+                    </button>
+                    <button
+                        className={`fm-view-btn ${heapView === "list" ? "active" : ""}`}
+                        onClick={() => setHeapView("list")}
+                    >
+                        Priority list
+                    </button>
+                </div>
             </div>
 
             <div className="fm-heaps-row">
-                <HeapDisplay label="small (max-heap)" values={step?.small ?? []} isMax accent="#f38ba8" />
+                {heapView === "tree" ? (
+                    <HeapTree
+                        label="small (max-heap)" values={step?.small ?? []} isMax accent="#f38ba8"
+                        isActiveSide={step?.activeSide === "small" || step?.activeSide === "both"}
+                        activeValue={step?.activeValue}
+                        isMedianRoot={step?.phase === "median"}
+                    />
+                ) : (
+                    <HeapList
+                        label="small (max-heap)" values={step?.small ?? []} isMax accent="#f38ba8"
+                        isActiveSide={step?.activeSide === "small" || step?.activeSide === "both"}
+                        activeValue={step?.activeValue}
+                    />
+                )}
                 <div className="fm-median-col">
                     <div className="fm-median-label">median</div>
                     <motion.div className="fm-median-val"
@@ -196,7 +290,20 @@ export default function FindMedianVisualizer() {
                         {step?.median ?? "—"}
                     </motion.div>
                 </div>
-                <HeapDisplay label="large (min-heap)" values={step?.large ?? []} isMax={false} accent="#89b4fa" />
+                {heapView === "tree" ? (
+                    <HeapTree
+                        label="large (min-heap)" values={step?.large ?? []} isMax={false} accent="#89b4fa"
+                        isActiveSide={step?.activeSide === "large" || step?.activeSide === "both"}
+                        activeValue={step?.activeValue}
+                        isMedianRoot={step?.phase === "median"}
+                    />
+                ) : (
+                    <HeapList
+                        label="large (min-heap)" values={step?.large ?? []} isMax={false} accent="#89b4fa"
+                        isActiveSide={step?.activeSide === "large" || step?.activeSide === "both"}
+                        activeValue={step?.activeValue}
+                    />
+                )}
             </div>
 
             <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
