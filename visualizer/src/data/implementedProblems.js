@@ -6,6 +6,8 @@ export const TRACKS = {
   LEETCODE: "leetcode",
   BASICS: "basics",
   CODEFORCES: "codeforces",
+  BLIND75: "blind75",
+  NEETCODE150: "neetcode150",
 };
 
 // Build IMPLEMENTED_PROBLEMS from each problem's lightweight meta.js automatically.

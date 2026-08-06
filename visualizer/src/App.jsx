@@ -53,6 +53,114 @@ const CODEFORCES_PROBLEMS = ALL_PROBLEMS.filter((p) =>
   (p.tags || []).includes("Codeforces"),
 );
 
+// Curated by LeetCode problem number rather than a meta.js tag, since these
+// are fixed external lists (Blind 75 / NeetCode 150), not something to
+// remember to tag on every new problem.
+const BLIND75_NUMBERS = [
+  "1", "121", "217", "238", "53", "152", "153", "33", "15", "11", "371",
+  "191", "338", "268", "190", "70", "322", "300", "1143", "139", "39",
+  "198", "213", "91", "62", "55", "133", "207", "417", "200", "128",
+  "269", "261", "323", "57", "56", "435", "252", "253", "206", "141",
+  "21", "23", "19", "143", "73", "54", "48", "79", "3", "424", "76",
+  "242", "49", "20", "125", "5", "647", "271", "104", "100", "226",
+  "124", "102", "297", "572", "105", "98", "230", "235", "208", "211",
+  "212", "347", "295",
+];
+
+const NEETCODE150_ENTRIES = [
+  ["217", "Contains Duplicate"], ["242", "Valid Anagram"], ["1", "Two Sum"],
+  ["49", "Group Anagrams"], ["347", "Top K Frequent Elements"],
+  ["271", "Encode and Decode Strings"], ["238", "Product of Array Except Self"],
+  ["36", "Valid Sudoku"], ["128", "Longest Consecutive Sequence"],
+  ["125", "Valid Palindrome"], ["167", "Two Sum II - Input Array Is Sorted"],
+  ["15", "3Sum"], ["11", "Container With Most Water"], ["42", "Trapping Rain Water"],
+  ["121", "Best Time to Buy and Sell Stock"],
+  ["3", "Longest Substring Without Repeating Characters"],
+  ["424", "Longest Repeating Character Replacement"], ["567", "Permutation in String"],
+  ["76", "Minimum Window Substring"], ["239", "Sliding Window Maximum"],
+  ["20", "Valid Parentheses"], ["155", "Min Stack"],
+  ["150", "Evaluate Reverse Polish Notation"], ["739", "Daily Temperatures"],
+  ["853", "Car Fleet"], ["84", "Largest Rectangle in Histogram"],
+  ["704", "Binary Search"], ["74", "Search a 2D Matrix"], ["875", "Koko Eating Bananas"],
+  ["153", "Find Minimum in Rotated Sorted Array"], ["33", "Search in Rotated Sorted Array"],
+  ["981", "Time Based Key-Value Store"], ["4", "Median of Two Sorted Arrays"],
+  ["206", "Reverse Linked List"], ["21", "Merge Two Sorted Lists"],
+  ["141", "Linked List Cycle"], ["143", "Reorder List"],
+  ["19", "Remove Nth Node From End of List"], ["138", "Copy List with Random Pointer"],
+  ["2", "Add Two Numbers"], ["287", "Find the Duplicate Number"], ["146", "LRU Cache"],
+  ["23", "Merge k Sorted Lists"], ["25", "Reverse Nodes in k-Group"],
+  ["226", "Invert Binary Tree"], ["104", "Maximum Depth of Binary Tree"],
+  ["543", "Diameter of Binary Tree"], ["110", "Balanced Binary Tree"],
+  ["100", "Same Tree"], ["572", "Subtree of Another Tree"],
+  ["235", "Lowest Common Ancestor of a Binary Search Tree"],
+  ["102", "Binary Tree Level Order Traversal"], ["199", "Binary Tree Right Side View"],
+  ["1448", "Count Good Nodes in Binary Tree"], ["98", "Validate Binary Search Tree"],
+  ["230", "Kth Smallest Element in a BST"],
+  ["105", "Construct Binary Tree from Preorder and Inorder Traversal"],
+  ["124", "Binary Tree Maximum Path Sum"], ["297", "Serialize and Deserialize Binary Tree"],
+  ["703", "Kth Largest Element in a Stream"], ["1046", "Last Stone Weight"],
+  ["973", "K Closest Points to Origin"], ["215", "Kth Largest Element in an Array"],
+  ["621", "Task Scheduler"], ["355", "Design Twitter"],
+  ["295", "Find Median from Data Stream"], ["78", "Subsets"], ["39", "Combination Sum"],
+  ["40", "Combination Sum II"], ["46", "Permutations"], ["90", "Subsets II"],
+  ["22", "Generate Parentheses"], ["79", "Word Search"], ["131", "Palindrome Partitioning"],
+  ["17", "Letter Combinations of a Phone Number"], ["51", "N-Queens"],
+  ["208", "Implement Trie (Prefix Tree)"],
+  ["211", "Design Add and Search Words Data Structure"], ["212", "Word Search II"],
+  ["200", "Number of Islands"], ["695", "Max Area of Island"], ["133", "Clone Graph"],
+  ["286", "Walls and Gates"], ["994", "Rotting Oranges"],
+  ["417", "Pacific Atlantic Water Flow"], ["130", "Surrounded Regions"],
+  ["207", "Course Schedule"], ["210", "Course Schedule II"], ["261", "Graph Valid Tree"],
+  ["323", "Number of Connected Components in an Undirected Graph"],
+  ["684", "Redundant Connection"], ["127", "Word Ladder"], ["743", "Network Delay Time"],
+  ["332", "Reconstruct Itinerary"], ["1584", "Min Cost to Connect All Points"],
+  ["778", "Swim in Rising Water"], ["269", "Alien Dictionary"],
+  ["787", "Cheapest Flights Within K Stops"], ["70", "Climbing Stairs"],
+  ["746", "Min Cost Climbing Stairs"], ["198", "House Robber"], ["213", "House Robber II"],
+  ["5", "Longest Palindromic Substring"], ["647", "Palindromic Substrings"],
+  ["91", "Decode Ways"], ["322", "Coin Change"], ["152", "Maximum Product Subarray"],
+  ["139", "Word Break"], ["300", "Longest Increasing Subsequence"],
+  ["416", "Partition Equal Subset Sum"], ["62", "Unique Paths"],
+  ["1143", "Longest Common Subsequence"],
+  ["309", "Best Time to Buy and Sell Stock with Cooldown"], ["518", "Coin Change II"],
+  ["494", "Target Sum"], ["97", "Interleaving String"],
+  ["329", "Longest Increasing Path in a Matrix"], ["115", "Distinct Subsequences"],
+  ["72", "Edit Distance"], ["312", "Burst Balloons"], ["10", "Regular Expression Matching"],
+  ["53", "Maximum Subarray"], ["55", "Jump Game"], ["45", "Jump Game II"],
+  ["134", "Gas Station"], ["846", "Hand of Straights"],
+  ["1899", "Merge Triplets to Form Target Triplet"], ["763", "Partition Labels"],
+  ["678", "Valid Parenthesis String"], ["57", "Insert Interval"], ["56", "Merge Intervals"],
+  ["435", "Non-overlapping Intervals"], ["252", "Meeting Rooms"], ["253", "Meeting Rooms II"],
+  ["1851", "Minimum Interval to Include Each Query"], ["48", "Rotate Image"],
+  ["54", "Spiral Matrix"], ["73", "Set Matrix Zeroes"], ["202", "Happy Number"],
+  ["66", "Plus One"], ["50", "Pow(x, n)"], ["43", "Multiply Strings"],
+  ["2013", "Detect Squares"], ["136", "Single Number"], ["191", "Number of 1 Bits"],
+  ["338", "Counting Bits"], ["190", "Reverse Bits"], ["268", "Missing Number"],
+  ["371", "Sum of Two Integers"], ["7", "Reverse Integer"],
+];
+
+const BLIND75_PROBLEMS = BLIND75_NUMBERS
+  .map((num) => IMPLEMENTED_BY_NUMBER.get(num))
+  .filter(Boolean);
+
+const NEETCODE150_PROBLEMS = NEETCODE150_ENTRIES.map(([number, title]) => {
+  const implemented = IMPLEMENTED_BY_NUMBER.get(number);
+  if (implemented) return implemented;
+  return {
+    id: `neetcode150-${number}`,
+    number,
+    title,
+    slug: title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""),
+    description:
+      "Part of NeetCode 150. Visualizer not yet implemented in this app.",
+    difficulty: "Medium",
+    tags: ["NeetCode150"],
+    accent: "#64748b",
+    component: null,
+    implemented: false,
+  };
+});
+
 function buildCatalogProblems(catalogProblems) {
   return catalogProblems.map((problem) => {
     const implemented = IMPLEMENTED_BY_NUMBER.get(problem.number);
@@ -286,6 +394,8 @@ function HomePage({
 
   const isLeetCodeTrack = track === TRACKS.LEETCODE;
   const isCodeforcesTrack = track === TRACKS.CODEFORCES;
+  const isBlind75Track = track === TRACKS.BLIND75;
+  const isNeetCode150Track = track === TRACKS.NEETCODE150;
 
   useEffect(() => {
     if (!isLeetCodeTrack) return;
@@ -320,8 +430,16 @@ function HomePage({
   const allProblems = useMemo(() => {
     if (isLeetCodeTrack) return buildCatalogProblems(catalogProblems);
     if (isCodeforcesTrack) return CODEFORCES_PROBLEMS;
+    if (isBlind75Track) return BLIND75_PROBLEMS;
+    if (isNeetCode150Track) return NEETCODE150_PROBLEMS;
     return BASICS_PROBLEMS;
-  }, [catalogProblems, isCodeforcesTrack, isLeetCodeTrack]);
+  }, [
+    catalogProblems,
+    isCodeforcesTrack,
+    isLeetCodeTrack,
+    isBlind75Track,
+    isNeetCode150Track,
+  ]);
 
   const allTags = useMemo(() => {
     return Array.from(
@@ -382,7 +500,11 @@ function HomePage({
                   ? "LeetCode and interview patterns"
                   : isCodeforcesTrack
                     ? "Codeforces competitive programming problems"
-                    : "Core programming basics and loop patterns"}
+                    : isBlind75Track
+                      ? "The classic 75-problem interview prep list"
+                      : isNeetCode150Track
+                        ? "NeetCode's 150-problem interview roadmap"
+                        : "Core programming basics and loop patterns"}
               </p>
             </div>
           </Brand>
@@ -410,6 +532,18 @@ function HomePage({
             >
               Codeforces Track
             </button>
+            <button
+              className={`track-btn ${track === TRACKS.BLIND75 ? "active" : ""}`}
+              onClick={() => onTrackChange(TRACKS.BLIND75)}
+            >
+              Blind 75
+            </button>
+            <button
+              className={`track-btn ${track === TRACKS.NEETCODE150 ? "active" : ""}`}
+              onClick={() => onTrackChange(TRACKS.NEETCODE150)}
+            >
+              NeetCode 150
+            </button>
           </div>
 
           <LayoutControls layoutWidth={layoutWidth} onChange={onLayoutChange} />
@@ -421,7 +555,11 @@ function HomePage({
               ? `Total catalog: ${allProblems.length}`
               : isCodeforcesTrack
                 ? `Codeforces problems: ${allProblems.length}`
-                : `Basics topics: ${allProblems.length}`}
+                : isBlind75Track
+                  ? `Blind 75 problems: ${allProblems.length}`
+                  : isNeetCode150Track
+                    ? `NeetCode 150 problems: ${allProblems.length}`
+                    : `Basics topics: ${allProblems.length}`}
           </span>
           <span>
             Implemented:{" "}
@@ -455,7 +593,7 @@ function HomePage({
             <option>Hard</option>
           </select>
 
-          {isLeetCodeTrack ? (
+          {isLeetCodeTrack || isNeetCode150Track ? (
             <select
               className="filter-select"
               value={status}
@@ -469,7 +607,9 @@ function HomePage({
             <div className="track-note">
               {isCodeforcesTrack
                 ? "Codeforces track focuses on advanced contest strategies and data structures."
-                : "Basics track includes foundational loop visualizations."}
+                : isBlind75Track
+                  ? "Blind 75 is fully implemented in this app."
+                  : "Basics track includes foundational loop visualizations."}
             </div>
           )}
         </div>
