@@ -715,7 +715,7 @@ function HomePage({
             className="load-more-btn"
             onClick={() => setVisibleCount((count) => count + 60)}
           >
-            Load 60 more problems
+            Load atmost 60 more problems
           </button>
         </div>
       )}
