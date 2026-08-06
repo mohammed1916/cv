@@ -1,9 +1,10 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -220,95 +221,94 @@ export default function LCABSTVisualizer() {
     const edges = step?.edges ?? []
     const allNodes = step?.allNodes ?? []
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'input',
-            title: 'Input Setup',
-            content: (
-                <div className="lca-input-panel">
-                    <div className="lca-examples">
-                        {EXAMPLES.map((ex) => (
-                            <button key={ex.label} className="lca-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                        ))}
-                    </div>
-                    <div className="lca-inputs">
-                        <input className="lca-input wide" value={arrInput} onChange={(e) => { setArrInput(e.target.value); handleReset() }} placeholder="tree array" />
-                        <div className="lca-pq">
-                            <label>p=<input className="lca-input small" value={pInput} onChange={(e) => { setPInput(e.target.value); handleReset() }} /></label>
-                            <label>q=<input className="lca-input small" value={qInput} onChange={(e) => { setQInput(e.target.value); handleReset() }} /></label>
-                        </div>
-                    </div>
-                    {inputError && <span className="lca-error">{inputError}</span>}
+    const inputPanel = (
+        <div className="lca-input-panel">
+            <div className="lca-examples">
+                {EXAMPLES.map((ex) => (
+                    <button key={ex.label} className="lca-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
+                ))}
+            </div>
+            <div className="lca-inputs">
+                <input className="lca-input wide" value={arrInput} onChange={(e) => { setArrInput(e.target.value); handleReset() }} placeholder="tree array" />
+                <div className="lca-pq">
+                    <label>p=<input className="lca-input small" value={pInput} onChange={(e) => { setPInput(e.target.value); handleReset() }} /></label>
+                    <label>q=<input className="lca-input small" value={qInput} onChange={(e) => { setQInput(e.target.value); handleReset() }} /></label>
                 </div>
-            ),
-        },
-        {
-            id: 'viz',
-            title: 'Tree Visualization',
-            content: (
-                <TreeVisualizationPanel
-                    positions={positions}
-                    edges={edges}
-                    allNodes={allNodes}
-                    step={step}
-                    NODE_R={NODE_R}
-                    p={p}
-                    q={q}
-                    applyExample={applyExample}
-                    EXAMPLES={EXAMPLES}
-                    arrInput={arrInput}
-                    setArrInput={setArrInput}
-                    pInput={pInput}
-                    setPInput={setPInput}
-                    qInput={qInput}
-                    setQInput={setQInput}
-                    inputError={inputError}
-                    handleReset={handleReset}
-                />
-            ),
-        },
-        {
-            id: 'code',
-            title: 'Code Trace',
-            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} autoScroll={autoScrollCode} onActiveLineDomChange={setActiveLineDom} />,
-        },
-    ], [positions, edges, allNodes, step, p, q, applyExample, arrInput, setArrInput, pInput, setPInput, qInput, setQInput, inputError, handleReset, autoScrollCode, setActiveLineDom])
+            </div>
+            {inputError && <span className="lca-error">{inputError}</span>}
+        </div>
+    )
+
+    const vizPanel = (
+        <TreeVisualizationPanel
+            positions={positions}
+            edges={edges}
+            allNodes={allNodes}
+            step={step}
+            NODE_R={NODE_R}
+            p={p}
+            q={q}
+            applyExample={applyExample}
+            EXAMPLES={EXAMPLES}
+            arrInput={arrInput}
+            setArrInput={setArrInput}
+            pInput={pInput}
+            setPInput={setPInput}
+            qInput={qInput}
+            setQInput={setQInput}
+            inputError={inputError}
+            handleReset={handleReset}
+        />
+    )
+
+    const codePanel = <CodeTracePanel step={step} codeLines={SOLUTION_CODE} autoScroll={autoScrollCode} onActiveLineDomChange={setActiveLineDom} />
+
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(() => [
+        { id: 'input', title: 'Input Setup' },
+        { id: 'viz', title: 'Tree Visualization', dockMode: 'split-right' },
+        { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+    ], [])
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
         <div className="lca-shell">
-            <DockableWorkspace
-                title="BST LCA — Walk Toward Split"
-                panels={dockPanels}
-                initialLayout={{
-                    rows: [['input', 'viz'], ['code']],
-                    minimized: [],
-                }}
-            />
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+                    {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                </>
+            )}
 
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls
-                    onReset={handleReset}
-                    onPrev={stepBack}
-                    onPlayToggle={togglePlay}
-                    onNext={stepForward}
-                    resetDisabled={steps.length === 0}
-                    prevDisabled={stepIndex <= 0}
-                    nextDisabled={steps.length === 0 || isDone}
-                    isPlaying={isPlaying}
-                    isDone={isDone}
-                    speed={speed}
-                    onSpeedChange={(event) => setSpeed(Number(event.target.value))}
-                    speedIndicator={`${speed}ms`}
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    autoScrollLabel="Auto-scroll code"
-                    showAutoScroll
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
-                />
-            </FloatingPanel>
+            {createPortal(
+                <FloatingPanel title="Playback Controls">
+                    <PlaybackControls
+                        onReset={handleReset}
+                        onPrev={stepBack}
+                        onPlayToggle={togglePlay}
+                        onNext={stepForward}
+                        resetDisabled={steps.length === 0}
+                        prevDisabled={stepIndex <= 0}
+                        nextDisabled={steps.length === 0 || isDone}
+                        isPlaying={isPlaying}
+                        isDone={isDone}
+                        speed={speed}
+                        onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+                        speedIndicator={`${speed}ms`}
+                        autoScroll={autoScrollCode}
+                        onAutoScrollChange={setAutoScrollCode}
+                        autoScrollLabel="Auto-scroll code"
+                        showAutoScroll
+                        showPatternOverlay={showPatternOverlay}
+                        onShowPatternOverlayChange={setShowPatternOverlay}
+                        patternOverlayLabel="Show pattern overlay"
+                        showPatternOverlayToggle
+                    />
+                </FloatingPanel>,
+                document.body
+            )}
 
             {showPatternOverlay && step && (
                 <PatternOverlay step={step} activeLineDom={activeLineDom} />

@@ -1,9 +1,10 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -134,43 +135,36 @@ export default function DailyTemperaturesVisualizer() {
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  const dockPanels = useMemo(() => [
-    {
-      id: 'input',
-      title: 'Input & Visualization',
-      subtitle: temps.length ? `${temps.length} temperatures` : 'Enter temperatures to begin',
-      defaultZone: 'left',
-      content: (
-        <VisualizationPanel
-          step={step}
-          temps={temps}
-          inputError={inputError}
-          applyExample={applyExample}
-        />
-      ),
-    },
-    {
-      id: 'stack',
-      title: 'Stack State',
-      subtitle: step ? `Step ${stepIndex + 1} of ${steps.length}` : 'Press play to start',
-      defaultZone: 'left',
-      content: <StackStatePanel step={step} />,
-    },
-    {
-      id: 'code',
-      title: 'Code Trace',
-      subtitle: step ? `Active line ${step.activeLine}` : 'Line-by-line solution view',
-      defaultZone: 'full',
-      content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          onActiveLineDomChange={setActiveLineDom}
-          autoScroll={autoScrollCode}
-        />
-      ),
-    },
-  ], [temps, step, stepIndex, steps.length, inputError, applyExample, setActiveLineDom, autoScrollCode])
+  const inputPanel = (
+    <VisualizationPanel
+      step={step}
+      temps={temps}
+      inputError={inputError}
+      applyExample={applyExample}
+    />
+  )
+
+  const stackPanel = <StackStatePanel step={step} />
+
+  const codePanel = (
+    <CodeTracePanel
+      step={step}
+      codeLines={SOLUTION_CODE}
+      onActiveLineDomChange={setActiveLineDom}
+      autoScroll={autoScrollCode}
+    />
+  )
+
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'input', title: 'Input & Visualization' },
+      { id: 'stack', title: 'Stack State', dockMode: 'split-right' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   const summaryCards = [
     { label: 'Algorithm', value: 'Monotonic Stack' },
@@ -216,39 +210,42 @@ export default function DailyTemperaturesVisualizer() {
         </div>
       </section>
 
-      <DockableWorkspace
-        title="Daily Temperatures Workspace"
-        panels={dockPanels}
-        initialLayout={{
-          rows: [['input', 'stack'], ['code']],
-          minimized: [],
-        }}
-      />
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+          {panelDivs.stack && createPortal(stackPanel, panelDivs.stack)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+        </>
+      )}
 
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          speedIndicator={`${speed}ms`}
-          autoScroll={autoScrollCode}
-          onAutoScrollChange={setAutoScrollCode}
-          autoScrollLabel="Auto-scroll code"
-          showAutoScroll
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
+      {createPortal(
+        <FloatingPanel title="Playback Controls">
+          <PlaybackControls
+            isPlaying={isPlaying}
+            isDone={isDone}
+            speed={speed}
+            onPlayToggle={togglePlay}
+            onPrev={stepBack}
+            onNext={stepForward}
+            onReset={handleReset}
+            prevDisabled={stepIndex < 0}
+            nextDisabled={isDone}
+            resetDisabled={stepIndex < 0}
+            onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+            speedIndicator={`${speed}ms`}
+            autoScroll={autoScrollCode}
+            onAutoScrollChange={setAutoScrollCode}
+            autoScrollLabel="Auto-scroll code"
+            showAutoScroll
+            showPatternOverlay={showPatternOverlay}
+            onShowPatternOverlayChange={setShowPatternOverlay}
+            patternOverlayLabel="Show pattern overlay"
+            showPatternOverlayToggle
+          />
+        </FloatingPanel>,
+        document.body
+      )}
 
       {showPatternOverlay && step && (
         <PatternOverlay step={step} activeLineDom={activeLineDom} />

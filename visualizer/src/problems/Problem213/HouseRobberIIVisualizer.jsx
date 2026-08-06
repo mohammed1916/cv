@@ -1,10 +1,11 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import FloatingPanel from '../../components/shared/FloatingPanel'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -152,106 +153,92 @@ export default function HouseRobberIIVisualizer() {
         </div>
     )
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'input',
-            title: 'Input Playground',
-            subtitle: inputError ? 'Fix the input to resume playback.' : 'Edit the array and replay the solver.',
-            defaultZone: 'left',
-            content: (
-                <div className="hr2-panel-body">
-                    <div className="hr2-examples">
-                        {EXAMPLES.map((ex) => (
-                            <button key={ex.label} className="hr2-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                        ))}
-                    </div>
-                    <label className="hr2-field">
-                        <span>nums array</span>
-                        <input
-                            className="hr2-input"
-                            value={numsInput}
-                            onChange={(e) => {
-                                setNumsInput(e.target.value)
-                                handleReset()
-                            }}
-                        />
-                    </label>
-                    {inputError && <div className="hr2-error">{inputError}</div>}
-                    <div className="hr2-output-wrap">
-                        <div className="hr2-output-label">Input parsed</div>
-                        <div className="hr2-output mono">{nums.length > 0 ? `[${nums.join(', ')}]` : '[]'}</div>
-                    </div>
-                </div>
-            ),
-        },
-        {
-            id: 'state',
-            title: 'DP State Monitor',
-            subtitle: step ? `Step ${stepIndex + 1} of ${steps.length}` : 'Press play to start.',
-            defaultZone: 'right',
-            content: (
-                <div className="hr2-panel-body">
-                    <div className="hr2-metrics">
-                        <div className="hr2-metric-card">
-                            <span>Pass</span>
-                            <strong>{step?.pass > 0 ? step.pass : '—'}</strong>
-                        </div>
-                        <div className="hr2-metric-card">
-                            <span>Index</span>
-                            <strong>{step?.activeIdx >= 0 ? step.activeIdx : '—'}</strong>
-                        </div>
-                        <div className="hr2-metric-card">
-                            <span>prev2</span>
-                            <strong>{step?.prev2 ?? '—'}</strong>
-                        </div>
-                        <div className="hr2-metric-card">
-                            <span>prev1</span>
-                            <strong>{step?.prev1 ?? '—'}</strong>
-                        </div>
-                        <div className="hr2-metric-card">
-                            <span>cur</span>
-                            <strong className="accent">{step?.cur ?? '—'}</strong>
-                        </div>
-                    </div>
-
-                    <div className={`hr2-result ${step?.phase === 'done' ? 'done' : ''}`}>
-                        {step?.phase === 'done' ? `Final Result = ${step.cur}` : 'Computing…'}
-                    </div>
-
-                    <div className="hr2-message-box">
-                        <strong>Step Message</strong>
-                        <p>{step?.message || 'Press Play to begin.'}</p>
-                    </div>
-                </div>
-            ),
-        },
-        {
-            id: 'viz',
-            title: 'DP Array Visualization',
-            subtitle: step ? `Active pass: ${step.pass}` : 'Waiting for playback.',
-            defaultZone: 'full',
-            content: (
-                <div className="hr2-panel-body">
-                    {renderRow('Pass 1 (skip last)', step?.dp ?? [], step?.activeIdx, step?.pass, 1, nums)}
-                    {renderRow('Pass 2 (skip first)', step?.dp2 ?? [], step?.activeIdx, step?.pass, 2, nums)}
-                </div>
-            ),
-        },
-        {
-            id: 'code',
-            title: 'Code Trace',
-            subtitle: step ? `Active line ${step.activeLine}` : 'Line-by-line solution view.',
-            defaultZone: 'full',
-            content: (
-                <CodeTracePanel
-                    step={step}
-                    codeLines={SOLUTION_CODE}
-                    onActiveLineDomChange={setActiveLineDom}
-                    autoScroll={autoScrollCode}
+    const inputPanel = (
+        <div className="hr2-panel-body">
+            <div className="hr2-examples">
+                {EXAMPLES.map((ex) => (
+                    <button key={ex.label} className="hr2-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
+                ))}
+            </div>
+            <label className="hr2-field">
+                <span>nums array</span>
+                <input
+                    className="hr2-input"
+                    value={numsInput}
+                    onChange={(e) => {
+                        setNumsInput(e.target.value)
+                        handleReset()
+                    }}
                 />
-            ),
-        },
-    ], [inputError, applyExample, numsInput, handleReset, nums, step, stepIndex, steps, renderRow, setActiveLineDom, autoScrollCode])
+            </label>
+            {inputError && <div className="hr2-error">{inputError}</div>}
+            <div className="hr2-output-wrap">
+                <div className="hr2-output-label">Input parsed</div>
+                <div className="hr2-output mono">{nums.length > 0 ? `[${nums.join(', ')}]` : '[]'}</div>
+            </div>
+        </div>
+    )
+
+    const statePanel = (
+        <div className="hr2-panel-body">
+            <div className="hr2-metrics">
+                <div className="hr2-metric-card">
+                    <span>Pass</span>
+                    <strong>{step?.pass > 0 ? step.pass : '—'}</strong>
+                </div>
+                <div className="hr2-metric-card">
+                    <span>Index</span>
+                    <strong>{step?.activeIdx >= 0 ? step.activeIdx : '—'}</strong>
+                </div>
+                <div className="hr2-metric-card">
+                    <span>prev2</span>
+                    <strong>{step?.prev2 ?? '—'}</strong>
+                </div>
+                <div className="hr2-metric-card">
+                    <span>prev1</span>
+                    <strong>{step?.prev1 ?? '—'}</strong>
+                </div>
+                <div className="hr2-metric-card">
+                    <span>cur</span>
+                    <strong className="accent">{step?.cur ?? '—'}</strong>
+                </div>
+            </div>
+
+            <div className={`hr2-result ${step?.phase === 'done' ? 'done' : ''}`}>
+                {step?.phase === 'done' ? `Final Result = ${step.cur}` : 'Computing…'}
+            </div>
+
+            <div className="hr2-message-box">
+                <strong>Step Message</strong>
+                <p>{step?.message || 'Press Play to begin.'}</p>
+            </div>
+        </div>
+    )
+
+    const vizPanel = (
+        <div className="hr2-panel-body">
+            {renderRow('Pass 1 (skip last)', step?.dp ?? [], step?.activeIdx, step?.pass, 1, nums)}
+            {renderRow('Pass 2 (skip first)', step?.dp2 ?? [], step?.activeIdx, step?.pass, 2, nums)}
+        </div>
+    )
+
+    const codePanel = (
+        <CodeTracePanel
+            step={step}
+            codeLines={SOLUTION_CODE}
+            onActiveLineDomChange={setActiveLineDom}
+            autoScroll={autoScrollCode}
+        />
+    )
+
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(() => [
+        { id: 'input', title: 'Input Playground' },
+        { id: 'state', title: 'DP State Monitor', dockMode: 'split-right' },
+        { id: 'viz', title: 'DP Array Visualization', dockMode: 'split-bottom' },
+        { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+    ], [])
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
         <div className="problem-shell">
@@ -279,42 +266,43 @@ export default function HouseRobberIIVisualizer() {
                 </div>
             </section>
 
-            <DockableWorkspace
-                title="House Robber II Workspace"
-                panels={dockPanels}
-                initialLayout={{
-                    rows: [
-                        ['input', 'state'],
-                        ['viz', 'code'],
-                    ],
-                    minimized: [],
-                }}
-            />
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+                    {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+                    {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                </>
+            )}
 
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls
-                    onReset={handleReset}
-                    onPrev={stepBack}
-                    onPlayToggle={togglePlay}
-                    onNext={stepForward}
-                    resetDisabled={steps.length === 0}
-                    prevDisabled={stepIndex <= 0}
-                    nextDisabled={steps.length === 0 || isDone}
-                    isPlaying={isPlaying}
-                    isDone={isDone}
-                    speed={speed}
-                    onSpeedChange={(event) => setSpeed(Number(event.target.value))}
-                    speedIndicator={`${speed}ms`}
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    autoScrollLabel="Auto-scroll code"
-                    showAutoScroll
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
-                />
-            </FloatingPanel>
+            {createPortal(
+                <FloatingPanel title="Playback Controls">
+                    <PlaybackControls
+                        onReset={handleReset}
+                        onPrev={stepBack}
+                        onPlayToggle={togglePlay}
+                        onNext={stepForward}
+                        resetDisabled={steps.length === 0}
+                        prevDisabled={stepIndex <= 0}
+                        nextDisabled={steps.length === 0 || isDone}
+                        isPlaying={isPlaying}
+                        isDone={isDone}
+                        speed={speed}
+                        onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+                        speedIndicator={`${speed}ms`}
+                        autoScroll={autoScrollCode}
+                        onAutoScrollChange={setAutoScrollCode}
+                        autoScrollLabel="Auto-scroll code"
+                        showAutoScroll
+                        showPatternOverlay={showPatternOverlay}
+                        onShowPatternOverlayChange={setShowPatternOverlay}
+                        patternOverlayLabel="Show pattern overlay"
+                        showPatternOverlayToggle
+                    />
+                </FloatingPanel>,
+                document.body
+            )}
 
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>

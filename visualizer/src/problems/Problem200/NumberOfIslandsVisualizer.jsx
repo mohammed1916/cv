@@ -1,9 +1,10 @@
 import { useState, useCallback, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
@@ -197,13 +198,7 @@ export default function NumberOfIslandsVisualizer() {
   const rows = grid.length
   const cols = grid[0]?.length || 0
 
-  const dockPanels = useMemo(() => [
-    {
-      id: 'grid',
-      title: 'Grid View & Input',
-      subtitle: inputError ? 'Fix the input to resume playback.' : 'Edit the grid input and see visualization.',
-      defaultZone: 'left',
-      content: (
+  const gridPanel = (
         <div className="noi-panel-body">
           <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
             {EXAMPLES.map((ex) => (
@@ -274,14 +269,9 @@ export default function NumberOfIslandsVisualizer() {
             </div>
           </div>
         </div>
-      ),
-    },
-    {
-      id: 'state',
-      title: 'State & Queue',
-      subtitle: step ? `Islands: ${step.islands ?? 0}` : 'Queue and algorithm state.',
-      defaultZone: 'right',
-      content: (
+  )
+
+  const statePanel = (
         <div className="noi-panel-body">
           <div className="noi-stats-container">
             <div className="noi-stat-box">
@@ -342,59 +332,64 @@ export default function NumberOfIslandsVisualizer() {
             </div>
           </div>
         </div>
-      ),
-    },
-    {
-      id: 'code',
-      title: 'Code Trace',
-      subtitle: step ? `Active line ${step.activeLine}` : 'Line-by-line solution view.',
-      defaultZone: 'full',
-      content: (
+  )
+
+  const codePanel = (
         <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           onActiveLineDomChange={setActiveLineDom}
           autoScroll={autoScrollCode}
         />
-      ),
-    },
-  ], [step, applyExample, gridInput, handleReset, inputError, grid, rows, cols, setActiveLineDom, autoScrollCode])
+  )
+
+  const panelConfigs = useMemo(() => [
+    { id: 'grid', title: 'Grid View & Input' },
+    { id: 'state', title: 'State & Queue', dockMode: 'split-right' },
+    { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+  ], [])
+
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
     <div className="problem-shell">
-      <DockableWorkspace
-        title="Number of Islands Visualizer"
-        panels={dockPanels}
-        initialLayout={{
-          rows: [['grid', 'state'], ['code']],
-          minimized: [],
-        }}
-      />
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.grid && createPortal(gridPanel, panelDivs.grid)}
+          {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+        </>
+      )}
 
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          onReset={handleReset}
-          onPrev={stepBack}
-          onPlayToggle={togglePlay}
-          onNext={stepForward}
-          resetDisabled={steps.length === 0}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={steps.length === 0 || isDone}
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          speedIndicator={`${speed}ms`}
-          autoScroll={autoScrollCode}
-          onAutoScrollChange={setAutoScrollCode}
-          autoScrollLabel="Auto-scroll code"
-          showAutoScroll
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
+      {createPortal(
+        <FloatingPanel title="Playback Controls">
+          <PlaybackControls
+            onReset={handleReset}
+            onPrev={stepBack}
+            onPlayToggle={togglePlay}
+            onNext={stepForward}
+            resetDisabled={steps.length === 0}
+            prevDisabled={stepIndex < 0}
+            nextDisabled={steps.length === 0 || isDone}
+            isPlaying={isPlaying}
+            isDone={isDone}
+            speed={speed}
+            onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+            speedIndicator={`${speed}ms`}
+            autoScroll={autoScrollCode}
+            onAutoScrollChange={setAutoScrollCode}
+            autoScrollLabel="Auto-scroll code"
+            showAutoScroll
+            showPatternOverlay={showPatternOverlay}
+            onShowPatternOverlayChange={setShowPatternOverlay}
+            patternOverlayLabel="Show pattern overlay"
+            showPatternOverlayToggle
+          />
+        </FloatingPanel>,
+        document.body
+      )}
 
       {showPatternOverlay && step && (
         <PatternOverlay step={step} activeLineDom={activeLineDom} />

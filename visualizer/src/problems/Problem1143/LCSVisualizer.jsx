@@ -1,9 +1,10 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -183,73 +184,68 @@ export default function LCSVisualizer() {
       return Math.min(44, Math.floor(380 / (t2.length + 2)))
     }, [t2.length])
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'table',
-            title: '2-D DP Table',
-            subtitle: `text1="${t1}", text2="${t2}"`,
-            defaultZone: 'left',
-            content: <DPTablePanel EXAMPLES={EXAMPLES} t1={t1} t2={t2} dp={dp} step={step} stepIndex={stepIndex} steps={steps} CELL={CELL} applyExample={applyExample} handleReset={handleReset} setText1={setText1} setText2={setText2} MAX_LEN={MAX_LEN} text1={text1} text2={text2} />,
-        },
-        {
-            id: 'cell-info',
-            title: 'Current Cell',
-            subtitle: step ? `Step ${stepIndex + 1} of ${steps.length}` : 'Ready',
-            defaultZone: 'right',
-            content: <CurrentCellPanel step={step} t1={t1} t2={t2} dp={dp} />,
-        },
-        {
-            id: 'code',
-            title: 'Code Trace',
-            subtitle: step ? `Line ${step.activeLine}` : 'Solution code',
-            defaultZone: 'full',
-            content: (
-                <CodeTracePanel
-                    step={step}
-                    codeLines={SOLUTION_CODE}
-                    onActiveLineDomChange={setActiveLineDom}
-                    autoScroll={autoScrollCode}
-                />
-            ),
-        },
-    ], [EXAMPLES, t1, t2, dp, step, stepIndex, steps, CELL, applyExample, handleReset, setText1, setText2, text1, text2, setActiveLineDom, autoScrollCode])
+    const tablePanel = (
+        <DPTablePanel EXAMPLES={EXAMPLES} t1={t1} t2={t2} dp={dp} step={step} stepIndex={stepIndex} steps={steps} CELL={CELL} applyExample={applyExample} handleReset={handleReset} setText1={setText1} setText2={setText2} MAX_LEN={MAX_LEN} text1={text1} text2={text2} />
+    )
+
+    const cellInfoPanel = (
+        <CurrentCellPanel step={step} t1={t1} t2={t2} dp={dp} />
+    )
+
+    const codePanel = (
+        <CodeTracePanel
+            step={step}
+            codeLines={SOLUTION_CODE}
+            onActiveLineDomChange={setActiveLineDom}
+            autoScroll={autoScrollCode}
+        />
+    )
+
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(() => [
+        { id: 'table', title: '2-D DP Table' },
+        { id: 'cell-info', title: 'Current Cell', dockMode: 'split-right' },
+        { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+    ], [])
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
         <div className="problem-shell">
-            <DockableWorkspace
-                panels={dockPanels}
-                initialLayout={{
-                    rows: [
-                        ['table', 'cell-info'],
-                        ['code'],
-                    ],
-                    minimized: [],
-                }}
-            />
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.table && createPortal(tablePanel, panelDivs.table)}
+                    {panelDivs['cell-info'] && createPortal(cellInfoPanel, panelDivs['cell-info'])}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                </>
+            )}
 
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls
-                    isPlaying={isPlaying}
-                    isDone={isDone}
-                    speed={speed}
-                    onPlayToggle={togglePlay}
-                    onPrev={stepBack}
-                    onNext={stepForward}
-                    onReset={handleReset}
-                    prevDisabled={stepIndex < 0}
-                    nextDisabled={isDone}
-                    resetDisabled={stepIndex < 0}
-                    onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    autoScrollLabel="Auto-scroll code"
-                    showAutoScroll
-                />
-            </FloatingPanel>
+            {createPortal(
+                <FloatingPanel title="Playback Controls">
+                    <PlaybackControls
+                        isPlaying={isPlaying}
+                        isDone={isDone}
+                        speed={speed}
+                        onPlayToggle={togglePlay}
+                        onPrev={stepBack}
+                        onNext={stepForward}
+                        onReset={handleReset}
+                        prevDisabled={stepIndex < 0}
+                        nextDisabled={isDone}
+                        resetDisabled={stepIndex < 0}
+                        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+                        showPatternOverlay={showPatternOverlay}
+                        onShowPatternOverlayChange={setShowPatternOverlay}
+                        patternOverlayLabel="Show pattern overlay"
+                        showPatternOverlayToggle
+                        autoScroll={autoScrollCode}
+                        onAutoScrollChange={setAutoScrollCode}
+                        autoScrollLabel="Auto-scroll code"
+                        showAutoScroll
+                    />
+                </FloatingPanel>,
+                document.body
+            )}
 
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>

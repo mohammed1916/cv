@@ -1,10 +1,11 @@
 ﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import FloatingPanel from "../../components/shared/FloatingPanel";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
@@ -132,71 +133,64 @@ export default function LongestRepeatingVisualizer() {
         </div>
     );
 
-    const dockPanels = useMemo(() => [
-        {
-            id: "input",
-            title: "Input Playground",
-            subtitle: `String: "${str}" | k=${k}`,
-            defaultZone: "left",
-            content: (
-                <div className="lr-panel-body">
-                    <div className="lr-examples">
-                        {EXAMPLES.map((ex) => (
-                            <button key={ex.label} className="lr-chip" onClick={() => applyExample(ex)}>
-                                {ex.label}
-                            </button>
-                        ))}
-                    </div>
+    const inputPanel = (
+        <div className="lr-panel-body">
+            <div className="lr-examples">
+                {EXAMPLES.map((ex) => (
+                    <button key={ex.label} className="lr-chip" onClick={() => applyExample(ex)}>
+                        {ex.label}
+                    </button>
+                ))}
+            </div>
 
-                    <div style={{ display: "flex", gap: 10, alignItems: "center", marginTop: 12 }}>
-                        <input
-                            className="lr-input"
-                            value={sInput}
-                            onChange={(e) => { setSInput(e.target.value); handleReset(); }}
-                            placeholder="String"
-                        />
-                        <label className="lr-k-label">
-                            k=
-                            <input
-                                className="lr-k-input"
-                                type="number"
-                                min={0}
-                                value={kInput}
-                                onChange={(e) => { setKInput(e.target.value); handleReset(); }}
-                            />
-                        </label>
-                    </div>
-                </div>
-            ),
-        },
-        {
-            id: "viz",
-            title: "Visualization",
-            subtitle: step ? `Step ${stepIndex + 1} of ${steps.length}` : "Press play to start.",
-            defaultZone: "right",
-            content: (
-                <div className="lr-panel-body">
-                    <SlidingWindowVisualization />
-                    <CharacterCountsVisualization />
-                    <div className="lr-status">{step?.message ?? "Press Play to begin."}</div>
-                </div>
-            ),
-        },
-        {
-            id: "code",
-            title: "Code Trace",
-            subtitle: step ? `Active line ${step.activeLine}` : "Line-by-line solution view.",
-            defaultZone: "full",
-            content: (
-                <CodeTracePanel
-                    step={step}
-                    codeLines={SOLUTION_CODE}
-                    onActiveLineDomChange={setActiveLineDom}
-                    autoScroll={autoScrollCode}
+            <div style={{ display: "flex", gap: 10, alignItems: "center", marginTop: 12 }}>
+                <input
+                    className="lr-input"
+                    value={sInput}
+                    onChange={(e) => { setSInput(e.target.value); handleReset(); }}
+                    placeholder="String"
                 />
-            ),
-        },
-    ], [str, k, step, stepIndex, steps.length, setActiveLineDom, autoScrollCode]);
+                <label className="lr-k-label">
+                    k=
+                    <input
+                        className="lr-k-input"
+                        type="number"
+                        min={0}
+                        value={kInput}
+                        onChange={(e) => { setKInput(e.target.value); handleReset(); }}
+                    />
+                </label>
+            </div>
+        </div>
+    );
+
+    const vizPanel = (
+        <div className="lr-panel-body">
+            <SlidingWindowVisualization />
+            <CharacterCountsVisualization />
+            <div className="lr-status">{step?.message ?? "Press Play to begin."}</div>
+        </div>
+    );
+
+    const codePanel = (
+        <CodeTracePanel
+            step={step}
+            codeLines={SOLUTION_CODE}
+            onActiveLineDomChange={setActiveLineDom}
+            autoScroll={autoScrollCode}
+        />
+    );
+
+    const [panelDivs, setPanelDivs] = useState(null);
+    const panelConfigs = useMemo(
+        () => [
+            { id: "input", title: "Input Playground" },
+            { id: "viz", title: "Visualization", dockMode: "split-right" },
+            { id: "code", title: "Code Trace", dockMode: "split-bottom" },
+        ],
+        []
+    );
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
 
     return (
         <div className="lr-shell">
@@ -211,42 +205,42 @@ export default function LongestRepeatingVisualizer() {
                 </div>
             </section>
 
-            <DockableWorkspace
-                title="Longest Repeating Character Replacement Workspace"
-                panels={dockPanels}
-                initialLayout={{
-                    rows: [
-                        ["input", "viz"],
-                        ["code"],
-                    ],
-                    minimized: [],
-                }}
-            />
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+                    {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                </>
+            )}
 
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls
-                    onReset={handleReset}
-                    onPrev={stepBack}
-                    onPlayToggle={togglePlay}
-                    onNext={stepForward}
-                    resetDisabled={steps.length === 0}
-                    prevDisabled={stepIndex <= 0}
-                    nextDisabled={steps.length === 0 || isDone}
-                    isPlaying={isPlaying}
-                    isDone={isDone}
-                    speed={speed}
-                    onSpeedChange={(event) => setSpeed(Number(event.target.value))}
-                    speedIndicator={`${speed}ms`}
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    autoScrollLabel="Auto-scroll code"
-                    showAutoScroll
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
-                />
-            </FloatingPanel>
+            {createPortal(
+                <FloatingPanel title="Playback Controls">
+                    <PlaybackControls
+                        onReset={handleReset}
+                        onPrev={stepBack}
+                        onPlayToggle={togglePlay}
+                        onNext={stepForward}
+                        resetDisabled={steps.length === 0}
+                        prevDisabled={stepIndex <= 0}
+                        nextDisabled={steps.length === 0 || isDone}
+                        isPlaying={isPlaying}
+                        isDone={isDone}
+                        speed={speed}
+                        onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+                        speedIndicator={`${speed}ms`}
+                        autoScroll={autoScrollCode}
+                        onAutoScrollChange={setAutoScrollCode}
+                        autoScrollLabel="Auto-scroll code"
+                        showAutoScroll
+                        showPatternOverlay={showPatternOverlay}
+                        onShowPatternOverlayChange={setShowPatternOverlay}
+                        patternOverlayLabel="Show pattern overlay"
+                        showPatternOverlayToggle
+                    />
+                </FloatingPanel>,
+                document.body
+            )}
 
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>

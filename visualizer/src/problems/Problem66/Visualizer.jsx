@@ -1,6 +1,7 @@
 ﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -185,69 +186,73 @@ export default function Visualizer() {
 
     const arr = step?.arr ?? ex.digits;
 
-    const dockPanels = useMemo(() => [
-      {
-        id: 'code',
-        title: 'Code',
-        content: (
-          <div style={{ position: "relative" }}>
-            <CodeTracePanel
-              step={step}
-              codeLines={SOLUTION_CODE}
-              highlightedLines={connectivity.highlightedLines}
-              onLineSelect={connectivity.handleLineSelect}
-              onActiveLineDomChange={setActiveLineDom}
-            />
-            {showPatternOverlay && (
-              <CodePatternAnnotations
-                linePatterns={LINE_PATTERN_MAP}
-                currentPhase={step?.phase}
-                activeLineDom={activeLineDom}
-                activeLine={step?.activeLine}
-              />
-            )}
-          </div>
-        ),
-      },
-      {
-        id: 'viz',
-        title: '🧮 Domino Chain',
-        content: (
-          <VisualizationPanel
-            arr={arr}
-            step={step}
-            ex={ex}
-            applyEx={applyEx}
+    const codePanel = (
+      <div style={{ position: "relative" }}>
+        <CodeTracePanel
+          step={step}
+          codeLines={SOLUTION_CODE}
+          highlightedLines={connectivity.highlightedLines}
+          onLineSelect={connectivity.handleLineSelect}
+          onActiveLineDomChange={setActiveLineDom}
+        />
+        {showPatternOverlay && (
+          <CodePatternAnnotations
+            linePatterns={LINE_PATTERN_MAP}
+            currentPhase={step?.phase}
+            activeLineDom={activeLineDom}
+            activeLine={step?.activeLine}
           />
-        ),
-      },
-    ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, arr, ex, applyEx]);
+        )}
+      </div>
+    );
+
+    const vizPanel = (
+      <VisualizationPanel
+        arr={arr}
+        step={step}
+        ex={ex}
+        applyEx={applyEx}
+      />
+    );
+
+    const [panelDivs, setPanelDivs] = useState(null);
+    const panelConfigs = useMemo(() => [
+      { id: 'code', title: 'Code' },
+      { id: 'viz', title: '🧮 Domino Chain', dockMode: 'split-right' },
+    ], []);
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
 
     return (
       <div className="problem-shell">
-        <DockableWorkspace
-          panels={dockPanels}
-          initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
-        />
-        <FloatingPanel title="Playback Controls">
-          <PlaybackControls
-            isPlaying={isPlaying}
-            isDone={isDone}
-            speed={speed}
-            onPlayToggle={togglePlay}
-            onPrev={stepBack}
-            onNext={stepForward}
-            onReset={handleReset}
-            prevDisabled={stepIndex < 0}
-            nextDisabled={isDone}
-            resetDisabled={stepIndex < 0}
-            onSpeedChange={e => setSpeed(Number(e.target.value))}
-            showPatternOverlay={showPatternOverlay}
-            onShowPatternOverlayChange={setShowPatternOverlay}
-            patternOverlayLabel="Show pattern overlay"
-            showPatternOverlayToggle
-          />
-        </FloatingPanel>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+            {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+          </>
+        )}
+        {createPortal(
+          <FloatingPanel title="Playback Controls">
+            <PlaybackControls
+              isPlaying={isPlaying}
+              isDone={isDone}
+              speed={speed}
+              onPlayToggle={togglePlay}
+              onPrev={stepBack}
+              onNext={stepForward}
+              onReset={handleReset}
+              prevDisabled={stepIndex < 0}
+              nextDisabled={isDone}
+              resetDisabled={stepIndex < 0}
+              onSpeedChange={e => setSpeed(Number(e.target.value))}
+              showPatternOverlay={showPatternOverlay}
+              onShowPatternOverlayChange={setShowPatternOverlay}
+              patternOverlayLabel="Show pattern overlay"
+              showPatternOverlayToggle
+            />
+          </FloatingPanel>,
+          document.body
+        )}
       </div>
     );
 }

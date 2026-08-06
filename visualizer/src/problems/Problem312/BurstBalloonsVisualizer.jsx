@@ -1,6 +1,7 @@
 ﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -77,6 +78,7 @@ export default function BurstBalloonsVisualizer() {
     const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
     const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
+    const [panelDivs, setPanelDivs] = useState(null);
 
     const nums = [1, ...ex.nums, 1];
     const n = nums.length;
@@ -85,34 +87,27 @@ export default function BurstBalloonsVisualizer() {
     const activeR = step?.right ?? -1;
     const activeK = step?.k ?? -1;
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'code',
-            title: 'Code',
-            content: (
-                <div style={{ position: 'relative' }}>
-                    <CodeTracePanel
-                        step={step}
-                        codeLines={SOLUTION_CODE}
-                        highlightedLines={connectivity.highlightedLines}
-                        onLineSelect={connectivity.handleLineSelect}
-                        onActiveLineDomChange={setActiveLineDom}
-                    />
-                    {showPatternOverlay && (
-                        <CodePatternAnnotations
-                            linePatterns={LINE_PATTERN_MAP}
-                            currentPhase={step?.phase}
-                            activeLineDom={activeLineDom}
-                            activeLine={step?.activeLine}
-                        />
-                    )}
-                </div>
-            ),
-        },
-        {
-            id: 'viz',
-            title: '💥 Balloon Bursting',
-            content: (
+    const codePanel = (
+        <div style={{ position: 'relative' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                highlightedLines={connectivity.highlightedLines}
+                onLineSelect={connectivity.handleLineSelect}
+                onActiveLineDomChange={setActiveLineDom}
+            />
+            {showPatternOverlay && (
+                <CodePatternAnnotations
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
+                />
+            )}
+        </div>
+    );
+
+    const vizPanel = (
                 <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
                     <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                         {EXAMPLES.map(e => (
@@ -193,38 +188,48 @@ export default function BurstBalloonsVisualizer() {
 
                     {step?.done && <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #86efac', textAlign: 'center', fontWeight: 600, color: '#15803d' }}>✓ Max coins = {dp[0]?.[n - 1]}</div>}
                 </div>
-            ),
-        },
-    ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx, nums, n, dp, activeL, activeR, activeK]);
+    );
+
+    const panelConfigs = useMemo(() => [
+        { id: 'code', title: 'Code' },
+        { id: 'viz', title: '💥 Balloon Bursting', dockMode: 'split-right' },
+    ], []);
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
 
     return (
         <div className="problem-shell">
-            <DockableWorkspace
-                panels={dockPanels}
-                initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
-            />
-            <FloatingPanel title="Playback Controls">
-                {showPatternOverlay && (
-                    <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-                )}
-                <PlaybackControls
-                    isPlaying={isPlaying}
-                    isDone={isDone}
-                    speed={speed}
-                    onPlayToggle={togglePlay}
-                    onPrev={stepBack}
-                    onNext={stepForward}
-                    onReset={handleReset}
-                    prevDisabled={stepIndex < 0}
-                    nextDisabled={isDone}
-                    resetDisabled={stepIndex < 0}
-                    onSpeedChange={e => setSpeed(Number(e.target.value))}
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
-                />
-            </FloatingPanel>
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">
+                    {showPatternOverlay && (
+                        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+                    )}
+                    <PlaybackControls
+                        isPlaying={isPlaying}
+                        isDone={isDone}
+                        speed={speed}
+                        onPlayToggle={togglePlay}
+                        onPrev={stepBack}
+                        onNext={stepForward}
+                        onReset={handleReset}
+                        prevDisabled={stepIndex < 0}
+                        nextDisabled={isDone}
+                        resetDisabled={stepIndex < 0}
+                        onSpeedChange={e => setSpeed(Number(e.target.value))}
+                        showPatternOverlay={showPatternOverlay}
+                        onShowPatternOverlayChange={setShowPatternOverlay}
+                        patternOverlayLabel="Show pattern overlay"
+                        showPatternOverlayToggle
+                    />
+                </FloatingPanel>,
+                document.body
+            )}
         </div>
     );
 }

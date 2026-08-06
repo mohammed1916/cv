@@ -1,9 +1,10 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -84,56 +85,46 @@ export default function KthLargestElementVisualizer() {
     handleReset()
   }, [handleReset])
 
-  const dockPanels = useMemo(() => [
-    {
-      id: 'input',
-      title: 'Input & Heap Evolution',
-      subtitle: inputError ? 'Fix the input to resume playback.' : 'Edit array and k value.',
-      defaultZone: 'left',
-      content: (
-        <div className="kl-body">
-          <div className="kl-examples">{EXAMPLES.map((ex) => <button key={ex.label} className="kl-chip" onClick={() => applyExample(ex)}>{ex.label}</button>)}</div>
-          <div className="kl-inputs">
-            <input className="kl-input" value={numsInput} onChange={(e) => { setNumsInput(e.target.value); handleReset() }} placeholder="e.g., [3,2,1,5,6,4]" />
-            <input className="kl-input small" value={kInput} onChange={(e) => { setKInput(e.target.value); handleReset() }} placeholder="k" />
-          </div>
-          {inputError && <div className="kl-error">{inputError}</div>}
-          <div className="kl-stream">
-            {nums.map((v, i) => <motion.div key={`${v}-${i}`} className={`kl-num ${step?.i === i ? 'active' : ''}`} animate={step?.i === i ? { y: -5 } : { y: 0 }}>{v}</motion.div>)}
-          </div>
-        </div>
-      ),
-    },
-    {
-      id: 'heap',
-      title: 'Min-Heap State',
-      subtitle: step ? `Step ${stepIndex + 1} of ${steps.length}` : 'Heap visualization.',
-      defaultZone: 'right',
-      content: (
-        <div className="kl-body">
-          <div className="kl-heap">{(step?.heap || []).map((v, i) => <div key={`${v}-${i}`} className={`kl-node ${i === 0 ? 'root' : ''}`}>{v}</div>)}</div>
-          <div className={`kl-result ${step?.phase === 'done' ? 'ok' : ''}`}>{step?.phase === 'done' ? `Return ${step.heap[0]}` : `Current kth candidate: ${step?.heap?.[0] ?? '—'}`}</div>
-          <div className="kl-status">{step?.message || 'Press Play.'}</div>
-        </div>
-      ),
-    },
-    {
-      id: 'code',
-      title: 'Code Trace',
-      subtitle: step ? `Active line ${step.activeLine}` : 'Line-by-line solution view.',
-      defaultZone: 'full',
-      content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-          autoScroll={autoScrollCode}
-        />
-      ),
-    },
-  ], [inputError, applyExample, numsInput, handleReset, kInput, nums, step, stepIndex, steps, setActiveLineDom, autoScrollCode, connectivity])
+  const inputPanel = (
+    <div className="kl-body">
+      <div className="kl-examples">{EXAMPLES.map((ex) => <button key={ex.label} className="kl-chip" onClick={() => applyExample(ex)}>{ex.label}</button>)}</div>
+      <div className="kl-inputs">
+        <input className="kl-input" value={numsInput} onChange={(e) => { setNumsInput(e.target.value); handleReset() }} placeholder="e.g., [3,2,1,5,6,4]" />
+        <input className="kl-input small" value={kInput} onChange={(e) => { setKInput(e.target.value); handleReset() }} placeholder="k" />
+      </div>
+      {inputError && <div className="kl-error">{inputError}</div>}
+      <div className="kl-stream">
+        {nums.map((v, i) => <motion.div key={`${v}-${i}`} className={`kl-num ${step?.i === i ? 'active' : ''}`} animate={step?.i === i ? { y: -5 } : { y: 0 }}>{v}</motion.div>)}
+      </div>
+    </div>
+  )
+
+  const heapPanel = (
+    <div className="kl-body">
+      <div className="kl-heap">{(step?.heap || []).map((v, i) => <div key={`${v}-${i}`} className={`kl-node ${i === 0 ? 'root' : ''}`}>{v}</div>)}</div>
+      <div className={`kl-result ${step?.phase === 'done' ? 'ok' : ''}`}>{step?.phase === 'done' ? `Return ${step.heap[0]}` : `Current kth candidate: ${step?.heap?.[0] ?? '—'}`}</div>
+      <div className="kl-status">{step?.message || 'Press Play.'}</div>
+    </div>
+  )
+
+  const codePanel = (
+    <CodeTracePanel
+      step={step}
+      codeLines={SOLUTION_CODE}
+      highlightedLines={connectivity.highlightedLines}
+      onLineSelect={connectivity.handleLineSelect}
+      onActiveLineDomChange={setActiveLineDom}
+      autoScroll={autoScrollCode}
+    />
+  )
+
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(() => [
+    { id: 'input', title: 'Input & Heap Evolution' },
+    { id: 'heap', title: 'Min-Heap State', dockMode: 'split-right' },
+    { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+  ], [])
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
     <div className="kl-shell">
@@ -148,42 +139,42 @@ export default function KthLargestElementVisualizer() {
         </div>
       </section>
 
-      <DockableWorkspace
-        title="Kth Largest Element Workspace"
-        panels={dockPanels}
-        initialLayout={{
-          rows: [
-            ['input', 'heap'],
-            ['code'],
-          ],
-          minimized: [],
-        }}
-      />
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+          {panelDivs.heap && createPortal(heapPanel, panelDivs.heap)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+        </>
+      )}
 
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          onReset={handleReset}
-          onPrev={stepBack}
-          onPlayToggle={togglePlay}
-          onNext={stepForward}
-          resetDisabled={steps.length === 0}
-          prevDisabled={stepIndex <= 0}
-          nextDisabled={steps.length === 0 || isDone}
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          speedIndicator={`${speed}ms`}
-          autoScroll={autoScrollCode}
-          onAutoScrollChange={setAutoScrollCode}
-          autoScrollLabel="Auto-scroll code"
-          showAutoScroll
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
+      {createPortal(
+        <FloatingPanel title="Playback Controls">
+          <PlaybackControls
+            onReset={handleReset}
+            onPrev={stepBack}
+            onPlayToggle={togglePlay}
+            onNext={stepForward}
+            resetDisabled={steps.length === 0}
+            prevDisabled={stepIndex <= 0}
+            nextDisabled={steps.length === 0 || isDone}
+            isPlaying={isPlaying}
+            isDone={isDone}
+            speed={speed}
+            onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+            speedIndicator={`${speed}ms`}
+            autoScroll={autoScrollCode}
+            onAutoScrollChange={setAutoScrollCode}
+            autoScrollLabel="Auto-scroll code"
+            showAutoScroll
+            showPatternOverlay={showPatternOverlay}
+            onShowPatternOverlayChange={setShowPatternOverlay}
+            patternOverlayLabel="Show pattern overlay"
+            showPatternOverlayToggle
+          />
+        </FloatingPanel>,
+        document.body
+      )}
 
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>

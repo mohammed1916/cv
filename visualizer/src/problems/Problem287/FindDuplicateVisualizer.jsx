@@ -1,9 +1,10 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -181,64 +182,52 @@ export default function FindDuplicateVisualizer() {
         handleReset()
     }, [handleReset])
 
-    // Dock panels configuration
-    const dockPanels = useMemo(() => [
-        {
-            id: 'input',
-            title: 'Input Setup',
-            subtitle: inputError ? 'Fix the input to resume playback.' : 'Choose an example or enter your own array.',
-            defaultZone: 'left',
-            content: (
-                <div className="fd-input-panel">
-                    <div className="fd-examples">
-                        {EXAMPLES.map((ex) => (
-                            <button key={ex.label} className="fd-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                        ))}
-                    </div>
-                    <label className="fd-input-field">
-                        <span>Array input (JSON format)</span>
-                        <input
-                            className="fd-input"
-                            value={numsInput}
-                            onChange={(e) => {
-                                setNumsInput(e.target.value)
-                                handleReset()
-                            }}
-                        />
-                    </label>
-                    {inputError && <div className="fd-error-box">{inputError}</div>}
-                </div>
-            ),
-        },
-        {
-            id: 'viz',
-            title: 'Array Visualization',
-            subtitle: `Array length: ${nums.length}`,
-            defaultZone: 'right',
-            content: <ArrayVisualizationPanel nums={nums} step={step} />,
-        },
-        {
-            id: 'metrics',
-            title: 'Pointer State',
-            subtitle: step ? `Phase: ${!step.phase1Done ? 'Find cycle' : 'Find entrance'}` : 'Waiting...',
-            defaultZone: 'right',
-            content: <MetricsPanel step={step} />,
-        },
-        {
-            id: 'code',
-            title: 'Code Trace',
-            subtitle: step ? `Active line ${step.activeLine}` : 'Line-by-line solution view.',
-            defaultZone: 'full',
-            content: (
-                <CodeTracePanel
-                    step={step}
-                    codeLines={SOLUTION_CODE}
-                    onActiveLineDomChange={setActiveLineDom}
-                    autoScroll={autoScrollCode}
+    // Panel content (relocated out of the old DockableWorkspace panels array)
+    const inputPanel = (
+        <div className="fd-input-panel">
+            <div className="fd-examples">
+                {EXAMPLES.map((ex) => (
+                    <button key={ex.label} className="fd-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
+                ))}
+            </div>
+            <label className="fd-input-field">
+                <span>Array input (JSON format)</span>
+                <input
+                    className="fd-input"
+                    value={numsInput}
+                    onChange={(e) => {
+                        setNumsInput(e.target.value)
+                        handleReset()
+                    }}
                 />
-            ),
-        },
-    ], [inputError, applyExample, numsInput, handleReset, nums.length, nums, step, setActiveLineDom, autoScrollCode])
+            </label>
+            {inputError && <div className="fd-error-box">{inputError}</div>}
+        </div>
+    )
+
+    const vizPanel = <ArrayVisualizationPanel nums={nums} step={step} />
+
+    const metricsPanel = <MetricsPanel step={step} />
+
+    const codePanel = (
+        <div style={{ position: 'relative', height: '100%' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                onActiveLineDomChange={setActiveLineDom}
+                autoScroll={autoScrollCode}
+            />
+        </div>
+    )
+
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(() => [
+        { id: 'input', title: 'Input Setup' },
+        { id: 'viz', title: 'Array Visualization', dockMode: 'split-right' },
+        { id: 'metrics', title: 'Pointer State', dockMode: 'split-bottom' },
+        { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
+    ], [])
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
         <div className="fd-shell">
@@ -254,42 +243,43 @@ export default function FindDuplicateVisualizer() {
                 </div>
             </section>
 
-            <DockableWorkspace
-                title="Floyd's Cycle Detection Workspace"
-                panels={dockPanels}
-                initialLayout={{
-                    rows: [
-                        ['input', 'viz'],
-                        ['metrics', 'code'],
-                    ],
-                    minimized: [],
-                }}
-            />
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+                    {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+                    {panelDivs.metrics && createPortal(metricsPanel, panelDivs.metrics)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                </>
+            )}
 
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls
-                    onReset={handleReset}
-                    onPrev={stepBack}
-                    onPlayToggle={togglePlay}
-                    onNext={stepForward}
-                    resetDisabled={steps.length === 0}
-                    prevDisabled={stepIndex <= 0}
-                    nextDisabled={steps.length === 0 || isDone}
-                    isPlaying={isPlaying}
-                    isDone={isDone}
-                    speed={speed}
-                    onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                    speedIndicator={`${speed}ms`}
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    autoScrollLabel="Auto-scroll code"
-                    showAutoScroll
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
-                />
-            </FloatingPanel>
+            {createPortal(
+                <FloatingPanel title="Playback Controls">
+                    <PlaybackControls
+                        onReset={handleReset}
+                        onPrev={stepBack}
+                        onPlayToggle={togglePlay}
+                        onNext={stepForward}
+                        resetDisabled={steps.length === 0}
+                        prevDisabled={stepIndex <= 0}
+                        nextDisabled={steps.length === 0 || isDone}
+                        isPlaying={isPlaying}
+                        isDone={isDone}
+                        speed={speed}
+                        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+                        speedIndicator={`${speed}ms`}
+                        autoScroll={autoScrollCode}
+                        onAutoScrollChange={setAutoScrollCode}
+                        autoScrollLabel="Auto-scroll code"
+                        showAutoScroll
+                        showPatternOverlay={showPatternOverlay}
+                        onShowPatternOverlayChange={setShowPatternOverlay}
+                        patternOverlayLabel="Show pattern overlay"
+                        showPatternOverlayToggle
+                    />
+                </FloatingPanel>,
+                document.body
+            )}
 
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>

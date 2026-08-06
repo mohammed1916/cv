@@ -1,9 +1,10 @@
 ﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 ;
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
@@ -212,55 +213,58 @@ export default function LongestIncreasingPathVisualizer() {
 
     const maxDP = Math.max(...dpGrid.flat(), 1);
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'viz',
-            title: 'Visualization',
-            content: <VisualizationPanel EXAMPLES={EXAMPLES} ex={ex} matrix={matrix} dpGrid={dpGrid} activeCell={activeCell} neighbor={neighbor} visiting={visiting} visitSet={visitSet} globalBest={globalBest} step={step} maxDP={maxDP} applyEx={applyEx} />,
-        },
-        {
-            id: 'code',
-            title: 'Code Trace',
-            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} autoScroll={autoScrollCode} onActiveLineDomChange={setActiveLineDom} />,
-        },
-    ], [step, autoScrollCode, setActiveLineDom, matrix, dpGrid, activeCell, neighbor, visiting, visitSet, globalBest, maxDP, applyEx]);
+    const vizPanel = (
+        <VisualizationPanel EXAMPLES={EXAMPLES} ex={ex} matrix={matrix} dpGrid={dpGrid} activeCell={activeCell} neighbor={neighbor} visiting={visiting} visitSet={visitSet} globalBest={globalBest} step={step} maxDP={maxDP} applyEx={applyEx} />
+    );
+
+    const codePanel = (
+        <CodeTracePanel step={step} codeLines={SOLUTION_CODE} autoScroll={autoScrollCode} onActiveLineDomChange={setActiveLineDom} />
+    );
+
+    const [panelDivs, setPanelDivs] = useState(null);
+    const panelConfigs = useMemo(() => [
+        { id: 'viz', title: 'Visualization' },
+        { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
+    ], []);
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
 
     return (
         <div className="problem-shell">
-            <DockableWorkspace
-                title="Longest Increasing Path Workspace"
-                panels={dockPanels}
-                initialLayout={{
-                    rows: [['viz', 'code']],
-                    minimized: [],
-                }}
-            />
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                </>
+            )}
 
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls
-                    onReset={handleReset}
-                    onPrev={stepBack}
-                    onPlayToggle={togglePlay}
-                    onNext={stepForward}
-                    resetDisabled={steps.length === 0}
-                    prevDisabled={stepIndex <= 0}
-                    nextDisabled={steps.length === 0 || isDone}
-                    isPlaying={isPlaying}
-                    isDone={isDone}
-                    speed={speed}
-                    onSpeedChange={(event) => setSpeed(Number(event.target.value))}
-                    speedIndicator={`${speed}ms`}
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    autoScrollLabel="Auto-scroll code"
-                    showAutoScroll
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
-                />
-            </FloatingPanel>
-
+            {createPortal(
+                <FloatingPanel title="Playback Controls">
+                    <PlaybackControls
+                        onReset={handleReset}
+                        onPrev={stepBack}
+                        onPlayToggle={togglePlay}
+                        onNext={stepForward}
+                        resetDisabled={steps.length === 0}
+                        prevDisabled={stepIndex <= 0}
+                        nextDisabled={steps.length === 0 || isDone}
+                        isPlaying={isPlaying}
+                        isDone={isDone}
+                        speed={speed}
+                        onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+                        speedIndicator={`${speed}ms`}
+                        autoScroll={autoScrollCode}
+                        onAutoScrollChange={setAutoScrollCode}
+                        autoScrollLabel="Auto-scroll code"
+                        showAutoScroll
+                        showPatternOverlay={showPatternOverlay}
+                        onShowPatternOverlayChange={setShowPatternOverlay}
+                        patternOverlayLabel="Show pattern overlay"
+                        showPatternOverlayToggle
+                    />
+                </FloatingPanel>,
+                document.body
+            )}
         </div>
     );
 }

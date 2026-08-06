@@ -1,9 +1,10 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
@@ -162,158 +163,145 @@ export default function CoinChangeVisualizer() {
     const displayCount = Math.min(dp.length, 31)
     const displayDp = dp.slice(0, displayCount)
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'input',
-            title: 'Input Playground',
-            subtitle: inputError ? 'Fix the input to resume playback.' : 'Edit coins and amount to replay.',
-            defaultZone: 'left',
-            content: (
-                <div className="cc-panel-body">
-                    <div className="cc-examples">
-                        {EXAMPLES.map((ex) => (
-                            <button key={ex.label} className="cc-chip" onClick={() => applyExample(ex)}>
-                                {ex.label}
-                            </button>
-                        ))}
-                    </div>
-                    <div className="cc-inputs">
-                        <label className="cc-input-label">coins</label>
-                        <input
-                            className="cc-input"
-                            value={coinsInput}
-                            onChange={(e) => { setCoinsInput(e.target.value); handleReset() }}
-                            placeholder="[1,5,6,9]"
-                        />
-                        <label className="cc-input-label">amount</label>
-                        <input
-                            className="cc-input small"
-                            value={amountInput}
-                            onChange={(e) => { setAmountInput(e.target.value); handleReset() }}
-                            placeholder="11"
-                        />
-                    </div>
-                    {inputError && <div className="cc-error-box">{inputError}</div>}
-                </div>
-            ),
-        },
-        {
-            id: 'state',
-            title: 'Current State',
-            subtitle: step ? `Amount: ${activeA}, Coin: ${activeC >= 0 ? coins[activeC] : '—'}` : 'State values update during playback.',
-            defaultZone: 'left',
-            content: (
-                <div className="cc-panel-body">
-                    <div className="cc-state-row">
-                        <span className="cc-state-label">a (amount)</span>
-                        <span className="cc-state-val mono">{activeA >= 0 ? activeA : '—'}</span>
-                    </div>
-                    <div className="cc-state-row">
-                        <span className="cc-state-label">coin c</span>
-                        <span className="cc-state-val mono">{activeC >= 0 ? coins[activeC] : '—'}</span>
-                    </div>
-                    <div className="cc-state-row">
-                        <span className="cc-state-label">dp[a]</span>
-                        <span className="cc-state-val mono">{activeA >= 0 && dp[activeA] !== undefined ? (dp[activeA] === INF ? '∞' : dp[activeA]) : '—'}</span>
-                    </div>
-                    {activeC >= 0 && activeA >= 0 && coins[activeC] <= activeA && (
-                        <div className="cc-state-row highlight">
-                            <span className="cc-state-label">dp[a − c]</span>
-                            <span className="cc-state-val mono">
-                                {dp[activeA - coins[activeC]] === INF ? '∞' : dp[activeA - coins[activeC]]}
-                            </span>
-                        </div>
-                    )}
-                    {step?.improved && (
-                        <div className="cc-improved">Improved dp[{activeA}] ↓</div>
-                    )}
-                </div>
-            ),
-        },
-        {
-            id: 'code',
-            title: 'Solution Trace',
-            subtitle: step ? `Active line ${step.activeLine}` : 'Line-by-line solution view.',
-            defaultZone: 'full',
-            content: (
-                <CodeTracePanel
-                    step={step}
-                    codeLines={SOLUTION_CODE}
-                    autoScroll={autoScrollCode}
-                    onActiveLineDomChange={setActiveLineDom}
+    const inputPanel = (
+        <div className="cc-panel-body">
+            <div className="cc-examples">
+                {EXAMPLES.map((ex) => (
+                    <button key={ex.label} className="cc-chip" onClick={() => applyExample(ex)}>
+                        {ex.label}
+                    </button>
+                ))}
+            </div>
+            <div className="cc-inputs">
+                <label className="cc-input-label">coins</label>
+                <input
+                    className="cc-input"
+                    value={coinsInput}
+                    onChange={(e) => { setCoinsInput(e.target.value); handleReset() }}
+                    placeholder="[1,5,6,9]"
                 />
-            ),
-        },
-        {
-            id: 'visualization',
-            title: 'DP Array Visualization',
-            subtitle: step ? step.message : 'Press Play or Step to begin.',
-            defaultZone: 'full',
-            content: (
-                <div className="cc-panel-body cc-viz-body">
-                    {/* Coin chips */}
-                    <div className="cc-coins-row">
-                        <span className="cc-coins-label">coins:</span>
-                        {coins.map((c, ci) => (
-                            <motion.span
-                                key={ci}
-                                className={`cc-coin${activeC === ci ? ' active' : ''}`}
-                                animate={{ scale: activeC === ci ? 1.2 : 1 }}
-                                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                            >
-                                {c}
-                            </motion.span>
-                        ))}
-                    </div>
+                <label className="cc-input-label">amount</label>
+                <input
+                    className="cc-input small"
+                    value={amountInput}
+                    onChange={(e) => { setAmountInput(e.target.value); handleReset() }}
+                    placeholder="11"
+                />
+            </div>
+            {inputError && <div className="cc-error-box">{inputError}</div>}
+        </div>
+    )
 
-                    {/* DP array */}
-                    <div className="cc-dp-wrap">
-                        <div className="cc-dp-array">
-                            {displayDp.map((val, a) => {
-                                const isActive = activeA === a
-                                const isFinal = step?.phase === 'done' && a === amount
-                                const reachable = val !== INF
-                                return (
-                                    <div key={a} className="cc-dp-col">
-                                        <motion.div
-                                            className={`cc-dp-cell${isActive ? ' active' : ''}${isFinal ? ' final' : ''}${!reachable ? ' inf' : ''}`}
-                                            animate={{ scale: isActive ? 1.15 : 1, y: isActive ? -6 : 0 }}
-                                            transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-                                        >
-                                            {val === INF ? '∞' : val}
-                                        </motion.div>
-                                        <span className="cc-dp-idx">{a}</span>
-                                    </div>
-                                )
-                            })}
-                            {dp.length > displayCount && (
-                                <div className="cc-dp-col">
-                                    <div className="cc-dp-cell trunc">…</div>
-                                    <span className="cc-dp-idx">{dp.length - 1}</span>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-
-                    {/* Result */}
-                    <AnimatePresence>
-                        {step?.phase === 'done' && (
-                            <motion.div
-                                className={`cc-result${step.result === -1 ? ' fail' : ' ok'}`}
-                                initial={{ opacity: 0, y: 8 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0 }}
-                            >
-                                {step.result === -1
-                                    ? `Cannot make amount ${amount} with given coins. Return -1.`
-                                    : `Minimum coins to make ${amount}: ${step.result}`}
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
+    const statePanel = (
+        <div className="cc-panel-body">
+            <div className="cc-state-row">
+                <span className="cc-state-label">a (amount)</span>
+                <span className="cc-state-val mono">{activeA >= 0 ? activeA : '—'}</span>
+            </div>
+            <div className="cc-state-row">
+                <span className="cc-state-label">coin c</span>
+                <span className="cc-state-val mono">{activeC >= 0 ? coins[activeC] : '—'}</span>
+            </div>
+            <div className="cc-state-row">
+                <span className="cc-state-label">dp[a]</span>
+                <span className="cc-state-val mono">{activeA >= 0 && dp[activeA] !== undefined ? (dp[activeA] === INF ? '∞' : dp[activeA]) : '—'}</span>
+            </div>
+            {activeC >= 0 && activeA >= 0 && coins[activeC] <= activeA && (
+                <div className="cc-state-row highlight">
+                    <span className="cc-state-label">dp[a − c]</span>
+                    <span className="cc-state-val mono">
+                        {dp[activeA - coins[activeC]] === INF ? '∞' : dp[activeA - coins[activeC]]}
+                    </span>
                 </div>
-            ),
-        },
-    ], [inputError, applyExample, coinsInput, amountInput, handleReset, step, coins, activeA, activeC, dp, activeA, amount, displayCount, displayDp])
+            )}
+            {step?.improved && (
+                <div className="cc-improved">Improved dp[{activeA}] ↓</div>
+            )}
+        </div>
+    )
+
+    const codePanel = (
+        <CodeTracePanel
+            step={step}
+            codeLines={SOLUTION_CODE}
+            autoScroll={autoScrollCode}
+            onActiveLineDomChange={setActiveLineDom}
+        />
+    )
+
+    const visualizationPanel = (
+        <div className="cc-panel-body cc-viz-body">
+            {/* Coin chips */}
+            <div className="cc-coins-row">
+                <span className="cc-coins-label">coins:</span>
+                {coins.map((c, ci) => (
+                    <motion.span
+                        key={ci}
+                        className={`cc-coin${activeC === ci ? ' active' : ''}`}
+                        animate={{ scale: activeC === ci ? 1.2 : 1 }}
+                        transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                    >
+                        {c}
+                    </motion.span>
+                ))}
+            </div>
+
+            {/* DP array */}
+            <div className="cc-dp-wrap">
+                <div className="cc-dp-array">
+                    {displayDp.map((val, a) => {
+                        const isActive = activeA === a
+                        const isFinal = step?.phase === 'done' && a === amount
+                        const reachable = val !== INF
+                        return (
+                            <div key={a} className="cc-dp-col">
+                                <motion.div
+                                    className={`cc-dp-cell${isActive ? ' active' : ''}${isFinal ? ' final' : ''}${!reachable ? ' inf' : ''}`}
+                                    animate={{ scale: isActive ? 1.15 : 1, y: isActive ? -6 : 0 }}
+                                    transition={{ type: 'spring', stiffness: 420, damping: 26 }}
+                                >
+                                    {val === INF ? '∞' : val}
+                                </motion.div>
+                                <span className="cc-dp-idx">{a}</span>
+                            </div>
+                        )
+                    })}
+                    {dp.length > displayCount && (
+                        <div className="cc-dp-col">
+                            <div className="cc-dp-cell trunc">…</div>
+                            <span className="cc-dp-idx">{dp.length - 1}</span>
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            {/* Result */}
+            <AnimatePresence>
+                {step?.phase === 'done' && (
+                    <motion.div
+                        className={`cc-result${step.result === -1 ? ' fail' : ' ok'}`}
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0 }}
+                    >
+                        {step.result === -1
+                            ? `Cannot make amount ${amount} with given coins. Return -1.`
+                            : `Minimum coins to make ${amount}: ${step.result}`}
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </div>
+    )
+
+    const [panelDivs, setPanelDivs] = useState(null)
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+    const panelConfigs = useMemo(() => [
+        { id: 'visualization', title: 'DP Array Visualization' },
+        { id: 'code', title: 'Solution Trace', dockMode: 'split-right' },
+        { id: 'input', title: 'Input Playground', dockMode: 'split-bottom' },
+        { id: 'state', title: 'Current State', dockMode: 'split-right' },
+    ], [])
 
     return (
         <div className="cc-shell">
@@ -327,42 +315,43 @@ export default function CoinChangeVisualizer() {
                 </div>
             </section>
 
-            <DockableWorkspace
-                title="Coin Change Workspace"
-                panels={dockPanels}
-                initialLayout={{
-                    rows: [
-                        ['input', 'state'],
-                        ['visualization', 'code'],
-                    ],
-                    minimized: [],
-                }}
-            />
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.visualization && createPortal(visualizationPanel, panelDivs.visualization)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+                    {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+                </>
+            )}
 
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls
-                    onReset={handleReset}
-                    onPrev={stepBack}
-                    onPlayToggle={togglePlay}
-                    onNext={stepForward}
-                    resetDisabled={steps.length === 0}
-                    prevDisabled={stepIndex <= 0}
-                    nextDisabled={steps.length === 0 || isDone}
-                    isPlaying={isPlaying}
-                    isDone={isDone}
-                    speed={speed}
-                    onSpeedChange={(event) => setSpeed(Number(event.target.value))}
-                    speedIndicator={`${speed}ms`}
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    autoScrollLabel="Auto-scroll code"
-                    showAutoScroll
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
-                />
-            </FloatingPanel>
+            {createPortal(
+                <FloatingPanel title="Playback Controls">
+                    <PlaybackControls
+                        onReset={handleReset}
+                        onPrev={stepBack}
+                        onPlayToggle={togglePlay}
+                        onNext={stepForward}
+                        resetDisabled={steps.length === 0}
+                        prevDisabled={stepIndex <= 0}
+                        nextDisabled={steps.length === 0 || isDone}
+                        isPlaying={isPlaying}
+                        isDone={isDone}
+                        speed={speed}
+                        onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+                        speedIndicator={`${speed}ms`}
+                        autoScroll={autoScrollCode}
+                        onAutoScrollChange={setAutoScrollCode}
+                        autoScrollLabel="Auto-scroll code"
+                        showAutoScroll
+                        showPatternOverlay={showPatternOverlay}
+                        onShowPatternOverlayChange={setShowPatternOverlay}
+                        patternOverlayLabel="Show pattern overlay"
+                        showPatternOverlayToggle
+                    />
+                </FloatingPanel>,
+                document.body
+            )}
 
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>

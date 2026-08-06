@@ -1,8 +1,9 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
@@ -328,72 +329,76 @@ export default function TaskSchedulerVisualizer() {
         handleReset()
     }, [handleReset])
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'input',
-            title: 'Input',
-            content: <InputPanel tasks={tasks} n={n} setTasks={setTasks} setN={setN} applyExample={applyExample} />,
-        },
-        {
-            id: 'timeline',
-            title: 'Timeline',
-            content: <TimelineViz tasks={tasks} n={n} step={step} />,
-        },
-        {
-            id: 'freq-viz',
-            title: 'Task Frequency',
-            content: <TaskFrequencyViz step={step} />,
-        },
-        {
-            id: 'state-viz',
-            title: 'Algorithm State',
-            content: <AlgorithmStateViz step={step} />,
-        },
-        {
-            id: 'code',
-            title: 'Code Trace',
-            content: <CodeTracePanel
-                step={step}
-                codeLines={SOLUTION_CODE}
-                onActiveLineDomChange={setActiveLineDom}
-            />,
-        },
-    ], [tasks, n, step, applyExample])
+    const inputPanel = (
+        <InputPanel tasks={tasks} n={n} setTasks={setTasks} setN={setN} applyExample={applyExample} />
+    )
+
+    const timelinePanel = (
+        <TimelineViz tasks={tasks} n={n} step={step} />
+    )
+
+    const freqVizPanel = (
+        <TaskFrequencyViz step={step} />
+    )
+
+    const stateVizPanel = (
+        <AlgorithmStateViz step={step} />
+    )
+
+    const codePanel = (
+        <CodeTracePanel
+            step={step}
+            codeLines={SOLUTION_CODE}
+            onActiveLineDomChange={setActiveLineDom}
+        />
+    )
+
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(() => [
+        { id: 'input', title: 'Input' },
+        { id: 'timeline', title: 'Timeline', dockMode: 'split-right' },
+        { id: 'freq-viz', title: 'Task Frequency', dockMode: 'split-bottom' },
+        { id: 'state-viz', title: 'Algorithm State', dockMode: 'split-bottom' },
+        { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+    ], [])
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
         <div className="problem-shell">
-            <DockableWorkspace
-                panels={dockPanels}
-                initialLayout={{
-                    rows: [
-                        ['input', 'timeline'],
-                        ['freq-viz', 'state-viz'],
-                        ['code'],
-                    ],
-                    minimized: [],
-                }}
-            />
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+                    {panelDivs.timeline && createPortal(timelinePanel, panelDivs.timeline)}
+                    {panelDivs['freq-viz'] && createPortal(freqVizPanel, panelDivs['freq-viz'])}
+                    {panelDivs['state-viz'] && createPortal(stateVizPanel, panelDivs['state-viz'])}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                </>
+            )}
 
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls
-                    onReset={handleReset}
-                    onPrev={stepBack}
-                    onPlayToggle={togglePlay}
-                    onNext={stepForward}
-                    resetDisabled={steps.length === 0}
-                    prevDisabled={stepIndex < 0}
-                    nextDisabled={isDone}
-                    isPlaying={isPlaying}
-                    isDone={isDone}
-                    speed={speed}
-                    onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                    speedIndicator={`${speed}ms`}
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
-                />
-            </FloatingPanel>
+            {createPortal(
+                <FloatingPanel title="Playback Controls">
+                    <PlaybackControls
+                        onReset={handleReset}
+                        onPrev={stepBack}
+                        onPlayToggle={togglePlay}
+                        onNext={stepForward}
+                        resetDisabled={steps.length === 0}
+                        prevDisabled={stepIndex < 0}
+                        nextDisabled={isDone}
+                        isPlaying={isPlaying}
+                        isDone={isDone}
+                        speed={speed}
+                        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+                        speedIndicator={`${speed}ms`}
+                        showPatternOverlay={showPatternOverlay}
+                        onShowPatternOverlayChange={setShowPatternOverlay}
+                        patternOverlayLabel="Show pattern overlay"
+                        showPatternOverlayToggle
+                    />
+                </FloatingPanel>,
+                document.body
+            )}
 
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>

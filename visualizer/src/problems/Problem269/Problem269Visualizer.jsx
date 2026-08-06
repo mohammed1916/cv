@@ -1,9 +1,10 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -71,44 +72,66 @@ export default function Problem269Visualizer() {
     const { isPlaying, setIsPlaying, canNext, canPrev } = usePlaybackState(steps, currentStep, setCurrentStep)
     const { pattern, togglePattern } = usePatternOverlay(false)
 
+    const vizPanel = (
+        <div className="problem269-visualizer-viz-panel">
+            <div className="problem269-visualizer-canvas">
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                    className="problem269-visualizer-content"
+                >
+                    <p>{step.message}</p>
+                </motion.div>
+            </div>
+        </div>
+    )
+
+    const codePanel = (
+        <CodeTracePanel
+            code={SOLUTION_CODE}
+            activeLine={step.activeLine}
+            onTogglePattern={togglePattern}
+            patternActive={pattern}
+        />
+    )
+
+    const playbackPanel = (
+        <PlaybackControls
+            currentStep={currentStep}
+            totalSteps={steps.length}
+            onNext={() => setCurrentStep(c => c + 1)}
+            onPrev={() => setCurrentStep(c => c - 1)}
+            onPlayToggle={() => setIsPlaying(!isPlaying)}
+            isPlaying={isPlaying}
+            canNext={canNext}
+            canPrev={canPrev}
+        />
+    )
+
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(
+        () => [
+            { id: 'viz', title: 'Visualization' },
+            { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+        ],
+        []
+    )
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
     return (
-        <DockableWorkspace
-            title="Alien Dictionary"
-            subtitle="alien-dictionary"
-            accentColor="#f97316"
-        >
-            <FloatingPanel title="Visualization" position="main">
-                <div className="problem269-visualizer-viz-panel">
-                    <div className="problem269-visualizer-canvas">
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.3 }}
-                            className="problem269-visualizer-content"
-                        >
-                            <p>{step.message}</p>
-                        </motion.div>
-                    </div>
-                    <PlaybackControls
-                        currentStep={currentStep}
-                        totalSteps={steps.length}
-                        onNext={() => setCurrentStep(c => c + 1)}
-                        onPrev={() => setCurrentStep(c => c - 1)}
-                        onPlayToggle={() => setIsPlaying(!isPlaying)}
-                        isPlaying={isPlaying}
-                        canNext={canNext}
-                        canPrev={canPrev}
-                    />
-                </div>
-            </FloatingPanel>
-            <FloatingPanel title="Code Trace" position="bottom">
-                <CodeTracePanel
-                    code={SOLUTION_CODE}
-                    activeLine={step.activeLine}
-                    onTogglePattern={togglePattern}
-                    patternActive={pattern}
-                />
-            </FloatingPanel>
-        </DockableWorkspace>
+        <div className="problem269-visualizer-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
+                document.body
+            )}
+        </div>
     )
 }

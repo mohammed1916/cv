@@ -1,9 +1,10 @@
 import { useState, useCallback, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
@@ -254,14 +255,7 @@ export default function MaxAreaOfIslandVisualizer() {
   const rows = grid.length
   const cols = grid[0]?.length || 0
 
-  const dockPanels = useMemo(
-    () => [
-      {
-        id: 'grid',
-        title: 'Grid View & Input',
-        subtitle: inputError ? 'Fix the input to resume playback.' : 'Edit the grid input and see visualization.',
-        defaultZone: 'left',
-        content: (
+  const gridPanel = (
           <div className="maoi-panel-body">
             <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
               {EXAMPLES.map((ex) => (
@@ -332,14 +326,9 @@ export default function MaxAreaOfIslandVisualizer() {
               </div>
             </div>
           </div>
-        ),
-      },
-      {
-        id: 'state',
-        title: 'State & Info',
-        subtitle: step ? `Max: ${step.maxArea ?? 0}, Current: ${step.currentArea ?? 0}` : 'Algorithm state.',
-        defaultZone: 'right',
-        content: (
+  )
+
+  const statePanel = (
           <div className="maoi-panel-body">
             <div className="maoi-stats-container">
               <div className="maoi-stat-box">
@@ -397,37 +386,40 @@ export default function MaxAreaOfIslandVisualizer() {
               </div>
             </div>
           </div>
-        ),
-      },
-      {
-        id: 'code',
-        title: 'Code Trace',
-        subtitle: step ? `Line ${step.activeLine}` : 'Solution code',
-        defaultZone: 'full',
-        content: (
+  )
+
+  const codePanel = (
           <CodeTracePanel
             step={step}
             codeLines={SOLUTION_CODE}
             onActiveLineDomChange={setActiveLineDom}
             autoScroll={autoScrollCode}
           />
-        ),
-      },
-    ],
-    [step, applyExample, gridInput, handleReset, inputError, grid, rows, cols, setActiveLineDom, autoScrollCode]
   )
+
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: 'grid', title: 'Grid View & Input' },
+      { id: 'state', title: 'State & Info', dockMode: 'split-right' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
     <div className="problem-shell">
-      <DockableWorkspace
-        title="Max Area of Island Visualizer"
-        panels={dockPanels}
-        initialLayout={{
-          rows: [['grid', 'state'], ['code']],
-          minimized: [],
-        }}
-      />
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.grid && createPortal(gridPanel, panelDivs.grid)}
+          {panelDivs.state && createPortal(statePanel, panelDivs.state)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+        </>
+      )}
 
+      {createPortal(
       <FloatingPanel title="Playback Controls">
         <PlaybackControls
           onReset={handleReset}
@@ -451,7 +443,9 @@ export default function MaxAreaOfIslandVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
-      </FloatingPanel>
+      </FloatingPanel>,
+      document.body
+      )}
 
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>

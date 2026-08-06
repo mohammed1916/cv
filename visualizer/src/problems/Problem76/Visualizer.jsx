@@ -1,6 +1,7 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -362,94 +363,88 @@ export default function MinimumWindowSubstringVisualizer() {
   })
 
 
-  const dockPanels = useMemo(() => [
-    {
-      id: 'code',
-      title: 'Code',
-      content: (
-        <div style={{ position: "relative" }}>
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE_WITH_CONNECTIVITY}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-            onActiveLineDomChange={setActiveLineDom}
-            autoScroll={autoScrollCode}
-          />
-          {showPatternOverlay && (
-            <CodePatternAnnotations
-              linePatterns={LINE_PATTERN_MAP}
-              currentPhase={step?.phase}
-              activeLineDom={activeLineDom}
-              activeLine={step?.activeLine}
-            />
-          )}
-        </div>
-      ),
-    },
-    {
-      id: 'viz',
-      title: 'Visualization',
-      content: (
-        <div style={{ display: 'flex', height: '100%', width: '100%' }}>
-          <SlidingWindowViz
-            step={step}
-            s={s}
-            t={t}
-            EXAMPLES={EXAMPLES}
-            sInput={sInput}
-            setSInput={setSInput}
-            tInput={tInput}
-            setTInput={setTInput}
-            handleReset={handleReset}
-          />
-          <FrequencyState step={step} />
-        </div>
-      ),
-    },
-  ], [
-    step,
-    SOLUTION_CODE_WITH_CONNECTIVITY,
-    connectivity,
-    setActiveLineDom,
-    s,
-    t,
-    sInput,
-    tInput,
-    autoScrollCode,
-    handleReset,
-  ])
+  const codePanel = (
+    <div style={{ position: "relative" }}>
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE_WITH_CONNECTIVITY}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        autoScroll={autoScrollCode}
+      />
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
+        />
+      )}
+    </div>
+  )
+
+  const vizPanel = (
+    <div style={{ display: 'flex', height: '100%', width: '100%' }}>
+      <SlidingWindowViz
+        step={step}
+        s={s}
+        t={t}
+        EXAMPLES={EXAMPLES}
+        sInput={sInput}
+        setSInput={setSInput}
+        tInput={tInput}
+        setTInput={setTInput}
+        handleReset={handleReset}
+      />
+      <FrequencyState step={step} />
+    </div>
+  )
+
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(() => [
+    { id: 'code', title: 'Code' },
+    { id: 'viz', title: 'Visualization', dockMode: 'split-right' },
+  ], [])
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
     <div className="problem-shell">
-      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
-
-      <FloatingPanel title="Playback Controls">
-        <div style={{ marginBottom: '12px', fontSize: 12, color: '#475569' }}>
-          {step?.message ?? 'Press Play or Step to begin.'}
-        </div>
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showAutoScroll={true}
-          autoScroll={autoScrollCode}
-          onAutoScrollChange={setAutoScrollCode}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
-
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">
+          <div style={{ marginBottom: '12px', fontSize: 12, color: '#475569' }}>
+            {step?.message ?? 'Press Play or Step to begin.'}
+          </div>
+          <PlaybackControls
+            isPlaying={isPlaying}
+            isDone={isDone}
+            speed={speed}
+            onPlayToggle={togglePlay}
+            onPrev={stepBack}
+            onNext={stepForward}
+            onReset={handleReset}
+            prevDisabled={stepIndex < 0}
+            nextDisabled={isDone}
+            resetDisabled={stepIndex < 0}
+            onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+            showAutoScroll={true}
+            autoScroll={autoScrollCode}
+            onAutoScrollChange={setAutoScrollCode}
+            showPatternOverlay={showPatternOverlay}
+            onShowPatternOverlayChange={setShowPatternOverlay}
+            patternOverlayLabel="Show pattern overlay"
+            showPatternOverlayToggle
+          />
+        </FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

@@ -1,6 +1,7 @@
-﻿import { useState, useMemo } from "react"
+﻿import { useState, useMemo, useCallback } from "react"
+import { createPortal } from "react-dom"
 import { motion } from "framer-motion"
-import DockableWorkspace from "../../components/shared/DockableWorkspace"
+import LuminoDockPanel from "../../components/LuminoDockPanel"
 import FloatingPanel from "../../components/shared/FloatingPanel"
 import CodeTracePanel from "../../components/CodeTracePanel"
 import PlaybackControls from "../../components/PlaybackControls"
@@ -127,6 +128,13 @@ function generateSteps(nums, k) {
 
   return steps
 }
+
+const EXAMPLES = [
+  { label: "Duplicate found", nums: [1, 2, 3, 1], k: 3 },
+  { label: "No duplicate", nums: [1, 2, 3, 1, 2, 3], k: 2 },
+  { label: "Adjacent duplicate", nums: [99, 99, 2, 4, 5, 3, 9], k: 3 },
+  { label: "Duplicate too far apart", nums: [1, 0, 1, 1], k: 1 },
+]
 
 function ArrayDisplay({ nums, windowStart, windowEnd, highlighted }) {
   return (
@@ -265,52 +273,125 @@ function VisualizationPanel({ step }) {
 }
 
 export default function ContainsDuplicateIIVisualizer() {
-  const [nums] = useState([99, 99, 2, 4, 5, 3, 9])
-  const [k] = useState(3)
+  const [numsInput, setNumsInput] = useState("[99,99,2,4,5,3,9]")
+  const [kInput, setKInput] = useState("3")
+
+  const { nums, k, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput)
+      if (!Array.isArray(parsedNums) || parsedNums.some((n) => typeof n !== "number" || Number.isNaN(n))) {
+        throw new Error("nums must be an array of numbers")
+      }
+      const parsedK = Number(kInput)
+      if (!Number.isInteger(parsedK) || parsedK < 0) {
+        throw new Error("k must be a non-negative integer")
+      }
+      return { nums: parsedNums, k: parsedK, inputError: "" }
+    } catch (e) {
+      return { nums: [99, 99, 2, 4, 5, 3, 9], k: 3, inputError: e.message }
+    }
+  }, [numsInput, kInput])
+
   const steps = useMemo(() => generateSteps(nums, k).map((s) => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [nums, k])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  const dockPanels = useMemo(
-    () => [
-      {
-        id: "code",
-        title: "Code",
-        content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />,
-      },
-      {
-        id: "viz",
-        title: "🪟 Sliding Window",
-        content: <VisualizationPanel step={step} />,
-      },
-    ],
-    [step, connectivity, setActiveLineDom]
+  const applyExample = useCallback((ex) => {
+    setNumsInput(JSON.stringify(ex.nums))
+    setKInput(String(ex.k))
+    handleReset()
+  }, [handleReset])
+
+  const codePanel = (
+    <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />
   )
+
+  const vizPanel = (
+    <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 8, padding: 16, borderBottom: "1px solid #e2e8f0" }}>
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+          {EXAMPLES.map((ex) => (
+            <button
+              key={ex.label}
+              onClick={() => applyExample(ex)}
+              style={{
+                padding: "6px 12px", borderRadius: 6, border: "1px solid #cbd5e1",
+                background: "#f1f5f9", color: "#1e293b", fontSize: 12, cursor: "pointer",
+              }}
+            >
+              {ex.label}
+            </button>
+          ))}
+        </div>
+        <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
+          <label style={{ display: "flex", gap: 6, alignItems: "center", fontSize: 12, color: "#475569" }}>
+            nums:
+            <input
+              value={numsInput}
+              onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
+              style={{ minWidth: 220, padding: "6px 10px", borderRadius: 6, border: "1px solid #cbd5e1", fontFamily: "monospace", fontSize: 12 }}
+            />
+          </label>
+          <label style={{ display: "flex", gap: 6, alignItems: "center", fontSize: 12, color: "#475569" }}>
+            k:
+            <input
+              value={kInput}
+              onChange={(e) => { setKInput(e.target.value); handleReset() }}
+              style={{ width: 60, padding: "6px 10px", borderRadius: 6, border: "1px solid #cbd5e1", fontFamily: "monospace", fontSize: 12 }}
+            />
+          </label>
+          {inputError && <span style={{ color: "#ef4444", fontSize: 12 }}>{inputError}</span>}
+        </div>
+      </div>
+      <div style={{ flex: 1, overflow: "auto" }}>
+        <VisualizationPanel step={step} />
+      </div>
+    </div>
+  )
+
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(
+    () => [
+      { id: "code", title: "Code" },
+      { id: "viz", title: "🪟 Sliding Window", dockMode: "split-right" },
+    ],
+    []
+  )
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
     <div className="problem-shell">
-      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [["code", "viz"]], minimized: [] }} />
-      <FloatingPanel title="Controls">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Pattern"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Controls">
+          <PlaybackControls
+            isPlaying={isPlaying}
+            isDone={isDone}
+            speed={speed}
+            onPlayToggle={togglePlay}
+            onPrev={stepBack}
+            onNext={stepForward}
+            onReset={handleReset}
+            prevDisabled={stepIndex < 0}
+            nextDisabled={isDone}
+            resetDisabled={stepIndex < 0}
+            onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+            showPatternOverlay={showPatternOverlay}
+            onShowPatternOverlayChange={setShowPatternOverlay}
+            patternOverlayLabel="Pattern"
+            showPatternOverlayToggle
+          />
+        </FloatingPanel>,
+        document.body
+      )}
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )

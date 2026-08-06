@@ -1,14 +1,14 @@
 ﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import PatternOverlay from "../../components/PatternOverlay";
-;
+import LuminoDockPanel from "../../components/LuminoDockPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
 import { getExamples } from '../../config/examplesRegistry'
 import "./PartitionEqualSubsetVisualizer.css";
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -78,133 +78,131 @@ export default function PartitionEqualSubsetVisualizer() {
   const dpArr = step ? [...step.dp].sort((a, b) => a - b) : [0];
   const maxSum = target != null ? target + 2 : Math.max(...ex.nums) + 1;
 
-  // Create dockable panels
-  const dockPanels = useMemo(() => [
-    {
-      id: "input",
-      title: "Input",
-      content: (
-        <div className="pes-panel-body">
-          <div className="pes-examples">
-            {EXAMPLES.map((e) => (
-              <button
-                key={e.label}
-                className={`pes-chip ${ex.label === e.label ? "active" : ""}`}
-                onClick={() => applyEx(e)}
+  const inputPanel = (
+    <div className="pes-panel-body">
+      <div className="pes-examples">
+        {EXAMPLES.map((e) => (
+          <button
+            key={e.label}
+            className={`pes-chip ${ex.label === e.label ? "active" : ""}`}
+            onClick={() => applyEx(e)}
+          >
+            {e.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+
+  const vizPanel = (
+    <div className="pes-panel-body">
+      {/* Input nums */}
+      <div className="pes-panel">
+        <div className="pes-panel-label">nums (target = {target ?? "?"})</div>
+        <div className="pes-array-row">
+          {ex.nums.map((val, idx) => (
+            <motion.div
+              key={idx}
+              className={`pes-cell ${step?.numIdx === idx ? "cur" : ""}`}
+              animate={{ scale: step?.numIdx === idx ? 1.2 : 1 }}
+              transition={{ type: "spring", stiffness: 400, damping: 22 }}
+            >
+              {val}
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* DP set visualized as tiles 0..target */}
+      <div className="pes-panel">
+        <div className="pes-panel-label">Reachable sums (dp set)</div>
+        <div className="pes-dp-row">
+          {Array.from({ length: maxSum }, (_, s) => {
+            const inDp = step?.dp?.has(s);
+            const isTarget = s === target;
+            const isNew = inDp && step?.curNum != null && s >= (step.curNum ?? 0);
+            return (
+              <motion.div
+                key={s}
+                className={`pes-sum ${inDp ? "in" : "out"} ${isTarget ? "target" : ""}`}
+                animate={{ scale: inDp ? 1 : 0.85 }}
+                transition={{ type: "spring", stiffness: 350, damping: 22 }}
               >
-                {e.label}
-              </button>
-            ))}
-          </div>
+                {s}
+              </motion.div>
+            );
+          })}
         </div>
-      ),
-    },
-    {
-      id: "viz",
-      title: "Visualization",
-      content: (
-        <div className="pes-panel-body">
-          {/* Input nums */}
-          <div className="pes-panel">
-            <div className="pes-panel-label">nums (target = {target ?? "?"})</div>
-            <div className="pes-array-row">
-              {ex.nums.map((val, idx) => (
-                <motion.div
-                  key={idx}
-                  className={`pes-cell ${step?.numIdx === idx ? "cur" : ""}`}
-                  animate={{ scale: step?.numIdx === idx ? 1.2 : 1 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 22 }}
-                >
-                  {val}
-                </motion.div>
-              ))}
-            </div>
-          </div>
+      </div>
 
-          {/* DP set visualized as tiles 0..target */}
-          <div className="pes-panel">
-            <div className="pes-panel-label">Reachable sums (dp set)</div>
-            <div className="pes-dp-row">
-              {Array.from({ length: maxSum }, (_, s) => {
-                const inDp = step?.dp?.has(s);
-                const isTarget = s === target;
-                const isNew = inDp && step?.curNum != null && s >= (step.curNum ?? 0);
-                return (
-                  <motion.div
-                    key={s}
-                    className={`pes-sum ${inDp ? "in" : "out"} ${isTarget ? "target" : ""}`}
-                    animate={{ scale: inDp ? 1 : 0.85 }}
-                    transition={{ type: "spring", stiffness: 350, damping: 22 }}
-                  >
-                    {s}
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-
-          {step?.result != null && (
-            <div className={`pes-result ${step.result ? "true" : "false"}`}>
-              {step.result ? "✓ Can partition!" : "✗ Cannot partition."}
-            </div>
-          )}
-
-          <div className="pes-status">{step?.message ?? "Press Play to begin."}</div>
+      {step?.result != null && (
+        <div className={`pes-result ${step.result ? "true" : "false"}`}>
+          {step.result ? "✓ Can partition!" : "✗ Cannot partition."}
         </div>
-      ),
-    },
-    {
-      id: "code",
-      title: "Code Trace",
-      content: (
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          onActiveLineDomChange={setActiveLineDom}
-          autoScroll={autoScrollCode}
-        />
-      ),
-    },
-  ], [ex, applyEx, target, step, maxSum, setActiveLineDom, autoScrollCode]);
+      )}
+
+      <div className="pes-status">{step?.message ?? "Press Play to begin."}</div>
+    </div>
+  );
+
+  const codePanel = (
+    <CodeTracePanel
+      step={step}
+      codeLines={SOLUTION_CODE}
+      onActiveLineDomChange={setActiveLineDom}
+      autoScroll={autoScrollCode}
+    />
+  );
+
+  const [panelDivs, setPanelDivs] = useState(null);
+  const panelConfigs = useMemo(
+    () => [
+      { id: "input", title: "Input" },
+      { id: "viz", title: "Visualization", dockMode: "split-right" },
+      { id: "code", title: "Code Trace", dockMode: "split-bottom" },
+    ],
+    []
+  );
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
 
   return (
     <div className="pes-shell">
-      <DockableWorkspace
-        title="Partition Equal Subset Sum Workspace"
-        panels={dockPanels}
-        initialLayout={{
-          rows: [
-            ["input", "viz"],
-            ["code", "code"],
-          ],
-          minimized: [],
-        }}
-      />
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+          {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+        </>
+      )}
 
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          onReset={handleReset}
-          onPrev={stepBack}
-          onPlayToggle={togglePlay}
-          onNext={stepForward}
-          resetDisabled={steps.length === 0}
-          prevDisabled={stepIndex <= 0}
-          nextDisabled={steps.length === 0 || isDone}
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onSpeedChange={(event) => setSpeed(Number(event.target.value))}
-          speedIndicator={`${speed}ms`}
-          autoScroll={autoScrollCode}
-          onAutoScrollChange={setAutoScrollCode}
-          autoScrollLabel="Auto-scroll code"
-          showAutoScroll
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
+      {createPortal(
+        <FloatingPanel title="Playback Controls">
+          <PlaybackControls
+            onReset={handleReset}
+            onPrev={stepBack}
+            onPlayToggle={togglePlay}
+            onNext={stepForward}
+            resetDisabled={steps.length === 0}
+            prevDisabled={stepIndex <= 0}
+            nextDisabled={steps.length === 0 || isDone}
+            isPlaying={isPlaying}
+            isDone={isDone}
+            speed={speed}
+            onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+            speedIndicator={`${speed}ms`}
+            autoScroll={autoScrollCode}
+            onAutoScrollChange={setAutoScrollCode}
+            autoScrollLabel="Auto-scroll code"
+            showAutoScroll
+            showPatternOverlay={showPatternOverlay}
+            onShowPatternOverlayChange={setShowPatternOverlay}
+            patternOverlayLabel="Show pattern overlay"
+            showPatternOverlayToggle
+          />
+        </FloatingPanel>,
+        document.body
+      )}
 
       {showPatternOverlay && step && (
         <PatternOverlay step={step} activeLineDom={activeLineDom} />

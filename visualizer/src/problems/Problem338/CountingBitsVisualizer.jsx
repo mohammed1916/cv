@@ -1,6 +1,7 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -75,61 +76,70 @@ export default function CountingBitsVisualizer() {
         handleReset()
     }, [handleReset])
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'code',
-            title: 'Code',
-            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />
-        },
-        {
-            id: 'viz',
-            title: '📊 Counting Bits',
-            content: (
-                <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
-                    <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
-                        {EXAMPLES.map(ex => <button key={ex.label} onClick={() => applyExample(ex)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: '#f1f5f9' }}>
-                            {ex.label}
-                        </button>)}
-                        <label style={{ marginLeft: 'auto', display: 'flex', gap: 6, alignItems: 'center', fontSize: 12 }}>n = <input type="number" min="0" max="20" value={nInput} onChange={e => { setNInput(e.target.value); handleReset() }} style={{ width: 50, padding: '4px 8px', borderRadius: 4, border: '1px solid #cbd5e1' }} /></label>
-                    </div>
-                    {inputError && <div style={{ color: '#991b1b', fontSize: 11 }}>{inputError}</div>}
-                    <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>DP Array</div>
-                    <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap', flex: 1, overflow: 'auto' }}>
-                        {(step?.dp ?? []).map((val, i) => {
-                            const isActive = step?.i === i
-                            const isHalf = step?.half === i && step?.i !== -1
-                            return (
-                                <motion.div key={i} animate={isActive ? { y: -8, scale: 1.15 } : { y: 0, scale: 1 }} style={{
-                                    minWidth: 50, padding: '8px 4px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                                    backgroundColor: isActive ? '#fbbf24' : isHalf ? '#dbeafe' : step?.phase === 'done' ? '#f0fdf4' : '#f3f4f6',
-                                    border: isActive ? '2px solid #f59e0b' : '1px solid #cbd5e1', borderRadius: 4, fontSize: 11, fontWeight: 'bold'
-                                }}>
-                                    <span>{val}</span>
-                                    <span style={{ fontSize: 9, color: '#64748b' }}>{i.toString(2)}</span>
-                                </motion.div>
-                            )
-                        })}
-                    </div>
-                    {step?.i > 0 && (
-                        <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, border: '1px solid #e2e8f0', fontSize: 11 }}>
-                            <div>i = {step.i} ({step.binary}₂)</div>
-                            <div>i{'>>'}1 = {step.half}</div>
-                            <div>i & 1 = {step.lsb} ({step.lsb ? 'odd' : 'even'})</div>
-                            <div style={{ fontWeight: 'bold', color: '#0ea5e9' }}>dp[{step.i}] = {step.dp?.[step.i]}</div>
-                        </div>
-                    )}
-                    {step?.phase === 'done' && <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #86efac', fontSize: 11, fontWeight: 'bold', color: '#15803d' }}>✓ {`[${step.dp.join(', ')}]`}</div>}
+    const codePanel = (
+        <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />
+    )
+
+    const vizPanel = (
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
+                {EXAMPLES.map(ex => <button key={ex.label} onClick={() => applyExample(ex)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: '#f1f5f9' }}>
+                    {ex.label}
+                </button>)}
+                <label style={{ marginLeft: 'auto', display: 'flex', gap: 6, alignItems: 'center', fontSize: 12 }}>n = <input type="number" min="0" max="20" value={nInput} onChange={e => { setNInput(e.target.value); handleReset() }} style={{ width: 50, padding: '4px 8px', borderRadius: 4, border: '1px solid #cbd5e1' }} /></label>
+            </div>
+            {inputError && <div style={{ color: '#991b1b', fontSize: 11 }}>{inputError}</div>}
+            <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>DP Array</div>
+            <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap', flex: 1, overflow: 'auto' }}>
+                {(step?.dp ?? []).map((val, i) => {
+                    const isActive = step?.i === i
+                    const isHalf = step?.half === i && step?.i !== -1
+                    return (
+                        <motion.div key={i} animate={isActive ? { y: -8, scale: 1.15 } : { y: 0, scale: 1 }} style={{
+                            minWidth: 50, padding: '8px 4px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                            backgroundColor: isActive ? '#fbbf24' : isHalf ? '#dbeafe' : step?.phase === 'done' ? '#f0fdf4' : '#f3f4f6',
+                            border: isActive ? '2px solid #f59e0b' : '1px solid #cbd5e1', borderRadius: 4, fontSize: 11, fontWeight: 'bold'
+                        }}>
+                            <span>{val}</span>
+                            <span style={{ fontSize: 9, color: '#64748b' }}>{i.toString(2)}</span>
+                        </motion.div>
+                    )
+                })}
+            </div>
+            {step?.i > 0 && (
+                <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, border: '1px solid #e2e8f0', fontSize: 11 }}>
+                    <div>i = {step.i} ({step.binary}₂)</div>
+                    <div>i{'>>'}1 = {step.half}</div>
+                    <div>i & 1 = {step.lsb} ({step.lsb ? 'odd' : 'even'})</div>
+                    <div style={{ fontWeight: 'bold', color: '#0ea5e9' }}>dp[{step.i}] = {step.dp?.[step.i]}</div>
                 </div>
-            )
-        }
-    ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, nInput, inputError, applyExample])
+            )}
+            {step?.phase === 'done' && <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #86efac', fontSize: 11, fontWeight: 'bold', color: '#15803d' }}>✓ {`[${step.dp.join(', ')}]`}</div>}
+        </div>
+    )
+
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(() => [
+        { id: 'code', title: 'Code' },
+        { id: 'viz', title: '📊 Counting Bits', dockMode: 'split-right' }
+    ], [])
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
         <div className="problem-shell">
-            <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
-            <FloatingPanel title="Playback Controls">
-                <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
-            </FloatingPanel>
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">
+                    <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
+                </FloatingPanel>,
+                document.body
+            )}
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     )

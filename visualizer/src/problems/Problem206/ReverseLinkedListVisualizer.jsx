@@ -1,6 +1,7 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -268,63 +269,72 @@ export default function ReverseLinkedListVisualizer() {
     const nodes = step?.nodes ?? values
     const arrows = step?.arrows ?? []
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'code',
-            title: 'Code',
-            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
-        },
-        {
-            id: 'viz',
-            title: 'Visualization',
-            content: (
-                <div className="rll-top">
-                    <ReverseLinkedListViz
-                        step={step}
-                        values={values}
-                        nodes={nodes}
-                        arrows={arrows}
-                        EXAMPLES={EXAMPLES}
-                        valInput={valInput}
-                        setValInput={setValInput}
-                        handleReset={handleReset}
-                        inputError={inputError}
-                    />
-                    <ReverseLinkedListPointerState step={step} nodes={nodes} />
-                </div>
-            ),
-        },
-    ], [step, nodes, arrows, values, valInput, autoScrollCode, handleReset, inputError])
+    const codePanel = (
+        <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />
+    )
+
+    const vizPanel = (
+        <div className="rll-top">
+            <ReverseLinkedListViz
+                step={step}
+                values={values}
+                nodes={nodes}
+                arrows={arrows}
+                EXAMPLES={EXAMPLES}
+                valInput={valInput}
+                setValInput={setValInput}
+                handleReset={handleReset}
+                inputError={inputError}
+            />
+            <ReverseLinkedListPointerState step={step} nodes={nodes} />
+        </div>
+    )
+
+    const [panelDivs, setPanelDivs] = useState(null)
+    const panelConfigs = useMemo(() => [
+        { id: 'code', title: 'Code' },
+        { id: 'viz', title: 'Visualization', dockMode: 'split-right' },
+    ], [])
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
         <div className="problem-shell">
-            <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+                </>
+            )}
 
-            <FloatingPanel title="Playback Controls">
-                <div className="rll-status" style={{ marginBottom: '12px' }}>
-                    {step?.message ?? 'Press Play or Step to begin.'}
-                </div>
-                <PlaybackControls
-                    isPlaying={isPlaying}
-                    isDone={isDone}
-                    speed={speed}
-                    onPlayToggle={togglePlay}
-                    onPrev={stepBack}
-                    onNext={stepForward}
-                    onReset={handleReset}
-                    prevDisabled={stepIndex < 0}
-                    nextDisabled={isDone}
-                    resetDisabled={stepIndex < 0}
-                    onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                    showAutoScroll={true}
-                    autoScroll={autoScrollCode}
-                    onAutoScrollChange={setAutoScrollCode}
-                    showPatternOverlay={showPatternOverlay}
-                    onShowPatternOverlayChange={setShowPatternOverlay}
-                    patternOverlayLabel="Show pattern overlay"
-                    showPatternOverlayToggle
-                />
-            </FloatingPanel>
+            {createPortal(
+                <FloatingPanel title="Playback Controls">
+                    <div className="rll-status" style={{ marginBottom: '12px' }}>
+                        {step?.message ?? 'Press Play or Step to begin.'}
+                    </div>
+                    <PlaybackControls
+                        isPlaying={isPlaying}
+                        isDone={isDone}
+                        speed={speed}
+                        onPlayToggle={togglePlay}
+                        onPrev={stepBack}
+                        onNext={stepForward}
+                        onReset={handleReset}
+                        prevDisabled={stepIndex < 0}
+                        nextDisabled={isDone}
+                        resetDisabled={stepIndex < 0}
+                        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+                        showAutoScroll={true}
+                        autoScroll={autoScrollCode}
+                        onAutoScrollChange={setAutoScrollCode}
+                        showPatternOverlay={showPatternOverlay}
+                        onShowPatternOverlayChange={setShowPatternOverlay}
+                        patternOverlayLabel="Show pattern overlay"
+                        showPatternOverlayToggle
+                    />
+                </FloatingPanel>,
+                document.body
+            )}
 
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
