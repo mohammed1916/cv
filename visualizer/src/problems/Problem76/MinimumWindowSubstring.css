@@ -1,5 +1,7 @@
 .problem-shell {
+  position: relative;
   display: grid;
   gap: 12px;
   height: 100%;
+  overflow: hidden;
 }

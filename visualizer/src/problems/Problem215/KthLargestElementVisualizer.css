@@ -1,4 +1,4 @@
-.kl-shell { display: grid; gap: 12px; }
+.kl-shell { position: relative; display: flex; flex-direction: column; height: 100%; overflow: hidden; }
 
 .kl-hero {
   background: linear-gradient(135deg, rgba(30,41,59,.4) 0%, rgba(15,23,42,.6) 100%);

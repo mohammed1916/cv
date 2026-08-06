@@ -1,3 +1,11 @@
+.problem-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
 /* Catppuccin Mocha theme */
 :root {
   --ndt-rosewater: #f5e0dc;

@@ -1,3 +1,11 @@
+.problem286-visualizer-shell {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
 .problem286-visualizer-viz-panel {
     display: flex;
     flex-direction: column;

@@ -1,11 +1,10 @@
 .problem-shell {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    padding: 16px;
-    font-family: inherit;
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
+    font-family: inherit;
 }
 
 .hr2-hero {

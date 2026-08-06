@@ -1,3 +1,5 @@
+.problem-shell { position: relative; display: flex; flex-direction: column; height: 100%; overflow: hidden; }
+
 .rc-shell { display: grid; gap: 12px; }
 .rc-top { display: grid; grid-template-columns: 1.45fr 1fr; gap: 12px; }
 .rc-panel { border: 1px solid #334155; border-radius: 12px; overflow: hidden; background: rgba(15,23,42,.72); }

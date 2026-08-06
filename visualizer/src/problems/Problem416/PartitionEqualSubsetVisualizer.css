@@ -1,4 +1,4 @@
-.pes-shell { display: flex; flex-direction: column; gap: 12px; padding: 16px; font-family: inherit; }
+.pes-shell { position: relative; display: flex; flex-direction: column; font-family: inherit; height: 100%; overflow: hidden; }
 .pes-examples { display: flex; gap: 8px; flex-wrap: wrap; }
 .pes-chip { background: #313244; color: #cdd6f4; border: 2px solid #45475a; border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer; }
 .pes-chip.active, .pes-chip:hover { border-color: #f9e2af; color: #f9e2af; }

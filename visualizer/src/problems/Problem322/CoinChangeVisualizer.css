@@ -1,8 +1,9 @@
 .cc-shell {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 12px;
     height: 100%;
+    overflow: hidden;
 }
 
 .cc-hero {

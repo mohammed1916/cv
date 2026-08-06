@@ -9,6 +9,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
+import './KokoEatingBananasVisualizer.css'
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def minEatingSpeed(piles, h):' },
