@@ -18,8 +18,28 @@ import { useGridRayOverlay } from '../../hooks/useGridRayOverlay'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './RegularExpressionMatchingVisualizer.css'
-import { getSolutionCode } from '../../config/solutionCodeRegistry'
-const SOLUTION_CODE = getSolutionCode('regular-expression-matching')
+const SOLUTION_CODE = [
+  { line: 1, text: 'def isMatch(s, p):' },
+  { line: 2, text: '    m, n = len(s), len(p)' },
+  { line: 3, text: '    dp = [[False] * (n + 1) for _ in range(m + 1)]' },
+  { line: 4, text: '    dp[0][0] = True' },
+  { line: 5, text: "    for j in range(1, n + 1):" },
+  { line: 6, text: "        if p[j - 1] == '*': dp[0][j] = dp[0][j - 2]" },
+  { line: 7, text: '    for i in range(1, m + 1):' },
+  { line: 8, text: '        for j in range(1, n + 1):' },
+  { line: 9, text: "            if p[j - 1] != '*':" },
+  { line: 10, text: "                matches = p[j - 1] == '.' or s[i - 1] == p[j - 1]" },
+  { line: 11, text: '                if matches: dp[i][j] = dp[i - 1][j - 1]' },
+  { line: 12, text: '                # dp[i][j] now holds the character/dot result' },
+  { line: 13, text: '            else:' },
+  { line: 14, text: "                # '*' can match 0 or more of the preceding element" },
+  { line: 15, text: '                dp[i][j] = dp[i][j - 2]  # Case 1: zero occurrences' },
+  { line: 16, text: "                prev_matches = p[j - 2] == '.' or s[i - 1] == p[j - 2]" },
+  { line: 17, text: '                if prev_matches and dp[i - 1][j]: dp[i][j] = True' },
+  { line: 18, text: '                # else dp[i][j] keeps the zero-occurrence result' },
+  { line: 19, text: '' },
+  { line: 20, text: '    return dp[m][n]' },
+]
 
 const REGEX_PATTERNS = ['init', 'check', 'char_or_dot', 'char_result', 'star_check', 'star_zero', 'star_multi', 'star_result']
 
