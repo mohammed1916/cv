@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './BestTimeBuySellStockCooldown.css';
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 export default function BestTimeBuySellStockCooldown() {
   const [prices, setPrices] = useState([3, 3, 5, 0, 0, 3, 1, 4]);

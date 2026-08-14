@@ -12,6 +12,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { getExamples } from '../../config/examplesRegistry'
 import './SubsetsVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
     { line: 1, text: 'def subsets(nums):' },
@@ -160,6 +161,18 @@ export default function SubsetsVisualizer() {
                         const isPast = step?.path?.length > 0 && i < (step?.start ?? nums.length)
                         return (
                             <div key={i} className={`sub-num-cell ${isStart ? 'start' : ''} ${isPast ? 'past' : ''}`}>
+    <>
+      <ManualInputPanel
+        fields={[{"key":"nums","label":"nums","type":"array"}]}
+        values={{ nums: numsInput }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
                                 <span className="sub-num-val">{v}</span>
                                 <span className="sub-num-idx">{i}</span>
                             </div>
@@ -215,7 +228,6 @@ export default function SubsetsVisualizer() {
         <div className="sub-status">{step?.message || 'Press Play to begin.'}</div>
     )
     const playbackPanel = (
-        <>
             {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={SUBSETS_PATTERNS} />
             )}
@@ -252,7 +264,6 @@ export default function SubsetsVisualizer() {
         <div className="sub-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.results && createPortal(resultsPanel, panelDivs.results)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}

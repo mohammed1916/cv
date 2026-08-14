@@ -10,6 +10,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import "./AddAndSearchWordVisualizer.css"
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -295,8 +296,17 @@ function VisualizationPanel({ step, trie }) {
 
 export default function AddAndSearchWordVisualizer() {
   const [addedWords, setAddedWords] = useState(["bad", "dad", "mad"])
-  const [searchWord, setSearchWord] = useState("pad")
-  const [isAdd, setIsAdd] = useState(false)
+  const [searchWordInput, setSearchWordInput] = useState("pad");
+  const [isAddInput, setIsAddInput] = useState("false");
+  const { isAdd, searchWord, inputError } = useMemo(() => {
+    try {
+      const parsedIsAdd = isAddInput;
+      const parsedSearchWord = searchWordInput;
+      return { isAdd: parsedIsAdd, searchWord: parsedSearchWord, inputError: '' };
+    } catch (e) {
+      return { isAdd: false, searchWord: "pad", inputError: e.message };
+    }
+  }, [isAddInput, searchWordInput]);
   const trie = useMemo(() => buildWordTrie(addedWords), [addedWords])
   const steps = useMemo(() => generateSteps(searchWord, isAdd, trie).map((s) => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [searchWord, isAdd, trie])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
@@ -310,7 +320,8 @@ export default function AddAndSearchWordVisualizer() {
 
   const vizPanel = (
     <VisualizationPanel step={step} trie={trie} />
-  )
+  
+    </>)
 
   const [panelDivs, setPanelDivs] = useState(null)
   const panelConfigs = useMemo(
@@ -326,7 +337,6 @@ export default function AddAndSearchWordVisualizer() {
     <div className="problem-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
         </>

@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './LinkedListCycleIIVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -53,7 +54,8 @@ function buildList(nodes, cyclePos) {
 }
 
 function generateSteps(nodes, cyclePos) {
-  const steps = []
+const applyInput = useCallback((e) => { setInput(e); setNodesInput(JSON.stringify(e.nodes)); setPosInput(String(e.pos)); handleReset(); }, [handleReset]);
+    const steps = []
 
   const list = buildList(nodes, cyclePos)
   if (!list.head) {
@@ -220,7 +222,6 @@ function ListVisualization({ nodes, slowPos, fastPos, cycleStart, phase2Slow, ph
         {/* Nodes in circle if there's a cycle */}
         {cycleStart >= 0 ? (
           // Draw cycle
-          <>
             {nodes.map((val, idx) => {
               const angle = (idx / nodes.length) * 2 * Math.PI
               const x = 250 + radius * Math.cos(angle)
@@ -283,7 +284,6 @@ function ListVisualization({ nodes, slowPos, fastPos, cycleStart, phase2Slow, ph
           </>
         ) : (
           // Draw linear list
-          <>
             {nodes.map((val, idx) => {
               const x = 50 + idx * 70
               const y = 160
@@ -390,14 +390,25 @@ function VisualizationPanel({ step, nodes, cycleStart }) {
 }
 
 export default function LinkedListCycleIIVisualizer() {
-  const [input, setInput] = useState(EXAMPLES[0])
+  const [input, setInput] = useState(EXAMPLES[0]);
+  const [nodesInput, setNodesInput] = useState("[3,2,0,-4]");
+  const [posInput, setPosInput] = useState(1);
+  const { nodes, pos, inputError } = useMemo(() => {
+    try {
+      const parsedNodes = JSON.parse(nodesInput); if (!Array.isArray(parsedNodes)) throw new Error('nodes must be an array');
+      const parsedPos = Number(posInput); if (isNaN(parsedPos)) throw new Error('pos must be a number');
+      return { nodes: parsedNodes, pos: parsedPos, inputError: '' };
+    } catch (e) {
+      return { nodes: "[3,2,0,-4]", pos: 1, inputError: e.message };
+    }
+  }, [nodesInput, posInput]);
   const steps = useMemo(
     () =>
-      generateSteps(input.nodes, input.pos).map((s) => ({
+      generateSteps(nodes, pos).map((s) => ({
         ...s,
         relatedLines: s.relatedLines ?? (s.activeLine ? [s.activeLine] : []),
       })),
-    [input]
+    [nodes, pos]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
@@ -423,9 +434,10 @@ export default function LinkedListCycleIIVisualizer() {
 
   const vizPanel = (
     <div className="llc2-panel">
-      <VisualizationPanel step={step} nodes={input.nodes} cycleStart={input.pos} />
+      <VisualizationPanel step={step} nodes={nodes} cycleStart={pos} />
     </div>
-  )
+  
+    </>)
 
   const statusPanel = (
     <div className="llc2-status">
@@ -436,7 +448,6 @@ export default function LinkedListCycleIIVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -474,7 +485,6 @@ export default function LinkedListCycleIIVisualizer() {
     <div className="llc2-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

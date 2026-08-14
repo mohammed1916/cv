@@ -11,6 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
 import { getExamples } from '../../config/examplesRegistry'
 import './LCABinaryTreeVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -179,6 +180,17 @@ export default function LCABinaryTreeVisualizer() {
                             const isLCA = step?.lcaId === node.id
                             return (
                                 <motion.div key={node.id} style={{ position: 'absolute', left: pos.x - NODE_R, top: pos.y - NODE_R }}>
+      <ManualInputPanel
+        fields={[{"key":"arr","label":"arr","type":"string"},{"key":"p","label":"p","type":"string"},{"key":"q","label":"q","type":"string"}]}
+        values={{ arr: arrInput, p: pInput, q: qInput }}
+        onChange={(k, v) => { if (k === 'arr') setArrInput(v); if (k === 'p') setPInput(v); if (k === 'q') setQInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
                                     <motion.div
                                         className={`lcabt-node ${isActive ? 'active' : ''} ${isLCA ? 'lca' : ''} ${(isP || isQ) && !isLCA ? 'target' : ''}`}
                                         animate={isActive ? { scale: 1.2 } : { scale: 1 }}

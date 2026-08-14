@@ -12,6 +12,7 @@ import { useProblemCode } from '../../hooks/useProblemCode'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './AddTwoNumbersVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const ATN_PATTERNS = ['init', 'check_loop', 'get_vals', 'sum', 'carry', 'append', 'advance']
@@ -151,6 +152,19 @@ export default function AddTwoNumbersVisualizer({ problem }) {
   })
 
   const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"l1","label":"l1","type":"array"},{"key":"l2","label":"l2","type":"array"}]}
+        values={{ l1: l1Input, l2: l2Input }}
+        onChange={(k, v) => { if (k === 'l1') setL1Input(v); if (k === 'l2') setL2Input(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <div className="atn-panel">
       <div className="atn-panel-head">
         Linked Lists
@@ -257,7 +271,8 @@ export default function AddTwoNumbersVisualizer({ problem }) {
 
       </div>
     </div>
-  )
+  
+    </>)
 
   const statePanel = (
     <div className="atn-panel">
@@ -323,7 +338,6 @@ export default function AddTwoNumbersVisualizer({ problem }) {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={ATN_PATTERNS} />
       )}
@@ -363,7 +377,6 @@ export default function AddTwoNumbersVisualizer({ problem }) {
     <div className="atn-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state && createPortal(statePanel, panelDivs.state)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

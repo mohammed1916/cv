@@ -9,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './Problem364Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -183,19 +184,25 @@ const EXAMPLES = [
 
 export default function Problem364Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [listInput, setListInput] = useState(JSON.stringify(EXAMPLES[0]?.list ?? []));
+  const { list, inputError } = useMemo(() => {
+    try {
+      const parsedList = JSON.parse(listInput); if (!Array.isArray(parsedList)) throw new Error('list must be an array');
+      return { list: parsedList, inputError: '' };
+    } catch (e) {
+      return { list: EXAMPLES[exIdx]?.list ?? '', inputError: e.message };
+    }
+  }, [listInput]);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]
-  const steps = useMemo(() => generateSteps(ex.list), [ex])
+  const steps = useMemo(() => generateSteps(list), [ex])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
-  const applyExample = useCallback((idx) => {
-    setExIdx(idx)
-    handleReset()
-  }, [handleReset])
+  const applyExample = useCallback((i) => { setExIdx(i); setListInput(JSON.stringify(EXAMPLES[i].list)); handleReset(); }, [handleReset]);
 
   // Render tree structure visualization
   const treeVisualization = step ? (
@@ -335,7 +342,6 @@ export default function Problem364Visualizer() {
           </div>
 
           {step && (
-            <>
               <div className="nlws-step-info">
                 <div className="nlws-step-message">{step.message}</div>
                 <div className="nlws-step-details">{step.details}</div>
@@ -368,6 +374,7 @@ export default function Problem364Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         <PlaybackControls

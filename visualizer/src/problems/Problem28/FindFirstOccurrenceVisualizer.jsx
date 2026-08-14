@@ -8,6 +8,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './FindFirstOccurrenceVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
@@ -174,6 +175,19 @@ export default function FindFirstOccurrenceVisualizer({ problem }) {
 
   // Step 2: Extract panels into consts
   const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"haystack","label":"haystack","type":"string"},{"key":"needle","label":"needle","type":"string"}]}
+        values={{ haystack: haystackInput, needle: needleInput }}
+        onChange={(k, v) => { if (k === 'haystack') setHaystackInput(v); if (k === 'needle') setNeedleInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <div className="ffo-panel" style={{ flex: 1 }}>
       <div className="ffo-panel-head">String Matching</div>
       <div className="ffo-panel-body">
@@ -286,7 +300,8 @@ export default function FindFirstOccurrenceVisualizer({ problem }) {
         </div>
       </div>
     </div>
-  )
+  
+    </>)
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
@@ -316,7 +331,6 @@ export default function FindFirstOccurrenceVisualizer({ problem }) {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={FINDFIRSTOCCURRENCE_PATTERNS} />
       )}
@@ -357,7 +371,6 @@ export default function FindFirstOccurrenceVisualizer({ problem }) {
     <div className="ffo-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

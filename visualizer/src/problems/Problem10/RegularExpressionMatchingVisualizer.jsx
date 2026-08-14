@@ -18,6 +18,7 @@ import { useGridRayOverlay } from '../../hooks/useGridRayOverlay'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './RegularExpressionMatchingVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const SOLUTION_CODE = [
   { line: 1, text: 'def isMatch(s, p):' },
   { line: 2, text: '    m, n = len(s), len(p)' },
@@ -252,7 +253,6 @@ function VariablesPanel({ step, s, p }) {
       <div className="rem-panel-body" style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
 
         {step && step.i !== null && (
-          <>
             <div className="rem-var-card">
               <span className="rem-var-name">i (string index)</span>
               <span className="rem-var-val">{step.i}</span>
@@ -615,9 +615,20 @@ export default function RegularExpressionMatchingVisualizer() {
 
   return (
     <div className="rem-shell">
+    <>
+      <ManualInputPanel
+        fields={[{"key":"s","label":"s","type":"string"},{"key":"p","label":"p","type":"string"}]}
+        values={{ s: sInput, p: pInput }}
+        onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 'p') setPInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.main && createPortal(mainPanel, panelDivs.main)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

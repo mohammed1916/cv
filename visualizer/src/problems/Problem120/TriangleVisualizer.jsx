@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './TriangleVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -177,19 +178,27 @@ function VisualizationPanel({ step }) {
 }
 
 export default function TriangleVisualizer() {
-  const [input, setInput] = useState(EXAMPLES[0]?.triangle || [[2], [3, 4], [6, 5, 7], [4, 1, 8, 3]])
-  const steps = useMemo(
+  const [input, setInput] = useState({"label":"Example 1","triangle":[[2],[3,4],[6,5,7],[4,1,8,3]]});
+  const [triangleInput, setTriangleInput] = useState("[[2],[3,4],[6,5,7],[4,1,8,3]]");
+  const { triangle, inputError } = useMemo(() => {
+    try {
+      const parsedTriangle = JSON.parse(triangleInput); if (!Array.isArray(parsedTriangle)) throw new Error('triangle must be an array');
+      return { triangle: parsedTriangle, inputError: '' };
+    } catch (e) {
+      return { triangle: [[2],[3,4],[6,5,7],[4,1,8,3]], inputError: e.message };
+    }
+  }, [triangleInput]);  const steps = useMemo(
     () =>
-      generateSteps(input).map((s) => ({
+      generateSteps(triangle).map((s) => ({
         ...s,
         relatedLines: s.relatedLines ?? (s.activeLine ? [s.activeLine] : []),
       })),
-    [input]
+    [triangle]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setInput(e.triangle); handleReset() }, [handleReset])
+  const applyEx = useCallback((e) => { setTriangleInput(JSON.stringify(e.triangle)); handleReset(); }, [handleReset]);
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -212,7 +221,8 @@ export default function TriangleVisualizer() {
     <div className="tri-panel">
       <VisualizationPanel step={step} />
     </div>
-  )
+  
+    </>)
 
   const statusPanel = (
     <div className="tri-status">
@@ -225,7 +235,6 @@ export default function TriangleVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -263,7 +272,6 @@ export default function TriangleVisualizer() {
     <div className="tri-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

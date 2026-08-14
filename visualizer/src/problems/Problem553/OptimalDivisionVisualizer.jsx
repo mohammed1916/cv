@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './OptimalDivisionVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -386,9 +387,18 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
 export default function OptimalDivisionVisualizer() {
   const examples = useMemo(() => getExamplesOr('optimal-division', []), [])
-  const [arrayInput, setArrayInput] = useState('[1000, 100, 10, 2]')
+  const [arrayInput, setArrayInput] = useState("[1000, 100, 10, 2]");
+  const { array, inputError } = useMemo(() => {
+    try {
+      const parsed = JSON.parse(arrayInput)
+      if (!Array.isArray(parsed)) throw new Error('must be an array')
+      return { array: parsed, inputError: '' }
+    } catch (e) {
+      return { array: [1000, 100, 10, 2], inputError: e.message }
+    }
+  }, [arrayInput]);
 
-  const steps = useMemo(() => generateSteps(arrayInput), [arrayInput])
+  const steps = useMemo(() => generateSteps(array), [array])
 
   const {
     stepIndex,
@@ -480,6 +490,7 @@ export default function OptimalDivisionVisualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}

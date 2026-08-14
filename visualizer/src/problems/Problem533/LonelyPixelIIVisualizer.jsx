@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './LonelyPixelIIVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -268,15 +269,26 @@ function VisualizationPanel({ picture, N, step, applyEx }) {
 }
 
 export default function LonelyPixelIIVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { picture: [['W','B','W'],['W','B','W'],['W','B','W']], N: 2 })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [pictureInput, setPictureInput] = useState("[[\"W\",\"B\",\"W\"],[\"W\",\"B\",\"W\"],[\"W\",\"B\",\"W\"]]");
+  const [NInput, setNInput] = useState(2);
+  const { picture, N, inputError } = useMemo(() => {
+    try {
+      const parsedPicture = JSON.parse(pictureInput); if (!Array.isArray(parsedPicture)) throw new Error('picture must be an array');
+      const parsedN = Number(NInput); if (isNaN(parsedN)) throw new Error('N must be a number');
+      return { picture: parsedPicture, N: parsedN, inputError: '' };
+    } catch (e) {
+      return { picture: "[[\"W\",\"B\",\"W\"],[\"W\",\"B\",\"W\"],[\"W\",\"B\",\"W\"]]", N: 2, inputError: e.message };
+    }
+  }, [pictureInput, NInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.picture, ex.N).map((current) => ({
+      generateSteps(picture, N).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [picture, N]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -284,7 +296,7 @@ export default function LonelyPixelIIVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setPictureInput(JSON.stringify(e.picture)); setNInput(String(e.N)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -299,7 +311,7 @@ export default function LonelyPixelIIVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <div style={{ position: 'relative' }}>
+              <div style={{ position: 'relative' }}>
 
           <div style={{ position: 'relative' }}>
 
@@ -335,10 +347,8 @@ export default function LonelyPixelIIVisualizer() {
               />
 
 
-            )}
-
-
-          </div>
+            
+              </div>
           {showPatternOverlay && (
 
             <CodePatternAnnotations
@@ -362,8 +372,8 @@ export default function LonelyPixelIIVisualizer() {
       title: '🔍 Lonely Pixel II',
       content: (
         <VisualizationPanel
-          picture={ex.picture}
-          N={ex.N}
+          picture={picture}
+          N={N}
           step={step}
           applyEx={applyEx}
         />

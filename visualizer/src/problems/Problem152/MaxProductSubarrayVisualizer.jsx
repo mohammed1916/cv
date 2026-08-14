@@ -11,6 +11,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 import './MaxProductSubarrayVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -113,6 +114,19 @@ export default function MaxProductSubarrayVisualizer() {
     )
 
     const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"nums","label":"nums","type":"string"}]}
+        values={{ nums: numsInput }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
         <div className="mps-panel">
             <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
                 <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -190,7 +204,8 @@ export default function MaxProductSubarrayVisualizer() {
                 )}
             </div>
         </div>
-    )
+    
+    </>)
 
     const statusPanel = (
         <div className="mps-status">
@@ -199,7 +214,6 @@ export default function MaxProductSubarrayVisualizer() {
     )
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
             <PlaybackControls
                 isPlaying={isPlaying}
@@ -237,7 +251,6 @@ export default function MaxProductSubarrayVisualizer() {
         <div className="mps-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

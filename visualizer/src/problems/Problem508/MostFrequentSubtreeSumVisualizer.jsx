@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './MostFrequentSubtreeSumVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('most-frequent-subtree-sum')
@@ -160,13 +161,11 @@ function TreeNode({ node, x, y, offset, step }) {
   return (
     <g key={`tree-${node.val}-${x}-${y}`}>
       {node.left && (
-        <>
           <line x1={x} y1={y} x2={x - offset} y2={y + 80} stroke="#cbd5e1" strokeWidth="2" />
           <TreeNode node={node.left} x={x - offset} y={y + 80} offset={offset / 2} step={step} />
         </>
       )}
       {node.right && (
-        <>
           <line x1={x} y1={y} x2={x + offset} y2={y + 80} stroke="#cbd5e1" strokeWidth="2" />
           <TreeNode node={node.right} x={x + offset} y={y + 80} offset={offset / 2} step={step} />
         </>
@@ -295,15 +294,24 @@ function VisualizationPanel({ arr, step, applyEx }) {
 }
 
 export default function MostFrequentSubtreeSumVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { arr: [5, 2, -3] })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [arrInput, setArrInput] = useState("[5,2,-3]");
+  const { arr, inputError } = useMemo(() => {
+    try {
+      const parsedArr = JSON.parse(arrInput); if (!Array.isArray(parsedArr)) throw new Error('arr must be an array');
+      return { arr: parsedArr, inputError: '' };
+    } catch (e) {
+      return { arr: "[5,2,-3]", inputError: e.message };
+    }
+  }, [arrInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.arr).map((current) => ({
+      generateSteps(arr).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [arr]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -311,7 +319,7 @@ export default function MostFrequentSubtreeSumVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setArrInput(JSON.stringify(e.arr)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -326,7 +334,7 @@ export default function MostFrequentSubtreeSumVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
+              <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
@@ -340,7 +348,7 @@ export default function MostFrequentSubtreeSumVisualizer() {
       title: '🌳 Most Frequent Subtree Sum',
       content: (
         <VisualizationPanel
-          arr={ex.arr}
+          arr={arr}
           step={step}
           applyEx={applyEx}
         />
@@ -367,7 +375,8 @@ export default function MostFrequentSubtreeSumVisualizer() {
           prevDisabled={stepIndex < 0}
           nextDisabled={isDone}
           resetDisabled={stepIndex < 0}
-          onSpeedChange={e => setSpeed(Number(e.target.value))}
+          onSpeedChange={e => setSpeed(Number(e.target.value
+    </>))}
           showPatternOverlay={showPatternOverlay}
           onShowPatternOverlayChange={setShowPatternOverlay}
           patternOverlayLabel="Show pattern overlay"

@@ -7,6 +7,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./FirstBadVersionVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -109,7 +110,18 @@ function generateSteps(n, bad) {
 
 export default function FirstBadVersionVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => generateSteps(ex.n, ex.bad), [ex]);
+  const [nInput, setNInput] = useState(5);
+  const [badInput, setBadInput] = useState(4);
+  const { n, bad, inputError } = useMemo(() => {
+    try {
+      const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
+      const parsedBad = Number(badInput); if (isNaN(parsedBad)) throw new Error('bad must be a number');
+      return { n: parsedN, bad: parsedBad, inputError: '' };
+    } catch (e) {
+      return { n: 5, bad: 4, inputError: e.message };
+    }
+  }, [nInput, badInput]);
+  const steps = useMemo(() => generateSteps(n, bad), [n, bad]);
   const {
     stepIndex, stepForward, stepBack, togglePlay, handleReset,
     isPlaying, speed, setSpeed, isDone,
@@ -118,15 +130,13 @@ export default function FirstBadVersionVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
 
-  const applyEx = useCallback(
-    (e) => { setEx(e); handleReset(); },
-    [handleReset]
-  );
+  const applyEx = useCallback((e) => { setEx(e); setNInput(String(e.n)); setBadInput(String(e.bad)); handleReset(); }, [handleReset]);;
 
-  const versions = Array.from({ length: ex.n }, (_, i) => i + 1);
+  const versions = Array.from({ length: n }, (_, i) => i + 1);
 
   return (
     <div className="fbv-shell">
+      
       {/* Example selector */}
       <div className="fbv-examples">
         {EXAMPLES.map((e) => (
@@ -142,7 +152,7 @@ export default function FirstBadVersionVisualizer() {
 
       {/* Versions row */}
       <div className="fbv-panel">
-        <div className="fbv-panel-label">Versions (1 … {ex.n})</div>
+        <div className="fbv-panel-label">Versions (1 … {n})</div>
         <div className="fbv-versions">
           {versions.map((v) => {
             const isLo = step?.lo === v;
@@ -150,8 +160,8 @@ export default function FirstBadVersionVisualizer() {
             const isMid = step?.mid === v;
             const isResult = step?.result === v;
             const inRange =
-              step != null && v >= (step.lo ?? 1) && v <= (step.hi ?? ex.n);
-            const isActuallyBad = v >= ex.bad;
+              step != null && v >= (step.lo ?? 1) && v <= (step.hi ?? n);
+            const isActuallyBad = v >= bad;
 
             let cellCls = "fbv-cell";
             if (isResult) cellCls += " result";
@@ -191,7 +201,7 @@ export default function FirstBadVersionVisualizer() {
         {[
           { label: "lo", val: step?.lo ?? 1, cls: "lo" },
           { label: "mid", val: step?.mid != null ? step.mid : "-", cls: "mid" },
-          { label: "hi", val: step?.hi ?? ex.n, cls: "hi" },
+          { label: "hi", val: step?.hi ?? n, cls: "hi" },
           { label: "API calls", val: step?.apiCalls ?? 0, cls: "api" },
         ].map(({ label, val, cls }) => (
           <div key={label} className={`fbv-tracker ${cls}`}>

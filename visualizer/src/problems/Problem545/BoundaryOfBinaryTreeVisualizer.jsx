@@ -463,7 +463,6 @@ export default function BoundaryOfBinaryTreeVisualizer() {
               ))}
           </div>
           {step.reversedList && (
-            <>
               <div className="p545-section-label" style={{ margin: '0.8rem 0 0.5rem' }}>
                 reversed
               </div>
@@ -515,7 +514,6 @@ export default function BoundaryOfBinaryTreeVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -553,7 +551,6 @@ export default function BoundaryOfBinaryTreeVisualizer() {
     <div className="p545-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state && createPortal(statePanel, panelDivs.state)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

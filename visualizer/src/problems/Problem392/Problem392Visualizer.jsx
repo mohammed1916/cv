@@ -1,3 +1,4 @@
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 ﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -158,6 +159,17 @@ export default function Problem392Visualizer() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: '12px' }}>
+      <ManualInputPanel
+        fields={[{"key":"s","label":"s","type":"string"},{"key":"t","label":"t","type":"string"}]}
+        values={{ s: sInput, t: tInput }}
+        onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 't') setTInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
       <div style={{ display: 'flex', gap: 16, flex: 1 }}>
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
           <div style={{ display: 'flex', gap: 12, backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>

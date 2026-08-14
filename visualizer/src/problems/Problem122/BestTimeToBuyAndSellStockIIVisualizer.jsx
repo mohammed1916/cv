@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './BestTimeToBuyAndSellStockIIVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -193,19 +194,27 @@ function VisualizationPanel({ step }) {
 }
 
 export default function BestTimeToBuyAndSellStockIIVisualizer() {
-  const [input, setInput] = useState(EXAMPLES[0]?.prices || [7, 1, 5, 3, 6, 4])
-  const steps = useMemo(
+  const [input, setInput] = useState({"label":"Example 1","prices":[7,1,5,3,6,4]});
+  const [pricesInput, setPricesInput] = useState("[7,1,5,3,6,4]");
+  const { prices, inputError } = useMemo(() => {
+    try {
+      const parsedPrices = JSON.parse(pricesInput); if (!Array.isArray(parsedPrices)) throw new Error('prices must be an array');
+      return { prices: parsedPrices, inputError: '' };
+    } catch (e) {
+      return { prices: [7,1,5,3,6,4], inputError: e.message };
+    }
+  }, [pricesInput]);  const steps = useMemo(
     () =>
-      generateSteps(input).map((s) => ({
+      generateSteps(prices).map((s) => ({
         ...s,
         relatedLines: s.relatedLines ?? (s.activeLine ? [s.activeLine] : []),
       })),
-    [input]
+    [prices]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setInput(e.prices); handleReset() }, [handleReset])
+  const applyEx = useCallback((e) => { setPricesInput(JSON.stringify(e.prices)); handleReset(); }, [handleReset]);
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -233,7 +242,6 @@ export default function BestTimeToBuyAndSellStockIIVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -270,9 +278,9 @@ export default function BestTimeToBuyAndSellStockIIVisualizer() {
   // ─── Step 4: Replace return block ──────────────────────────────────────────
   return (
     <div className="btbass2-shell">
+      
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

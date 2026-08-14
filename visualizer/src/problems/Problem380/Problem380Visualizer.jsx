@@ -11,6 +11,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem380.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const PATTERNS = []
 
@@ -157,11 +158,20 @@ const EXAMPLES = [
 
 export default function Problem380Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [operationsInput, setOperationsInput] = useState(JSON.stringify(EXAMPLES[0]?.operations ?? []));
+  const { operations, inputError } = useMemo(() => {
+    try {
+      const parsedOperations = JSON.parse(operationsInput); if (!Array.isArray(parsedOperations)) throw new Error('operations must be an array');
+      return { operations: parsedOperations, inputError: '' };
+    } catch (e) {
+      return { operations: EXAMPLES[exIdx]?.operations ?? '', inputError: e.message };
+    }
+  }, [operationsInput]);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]
   const steps = useMemo(
-    () => generateSteps(ex.operations).map((current) => ({
+    () => generateSteps(operations).map((current) => ({
       ...current,
       relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
     })),
@@ -172,10 +182,7 @@ export default function Problem380Visualizer() {
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
-  const applyExample = useCallback((idx) => {
-    setExIdx(idx)
-    handleReset()
-  }, [handleReset])
+  const applyExample = useCallback((i) => { setExIdx(i); setOperationsInput(JSON.stringify(EXAMPLES[i].operations)); handleReset(); }, [handleReset]);
 
   const dockPanels = useMemo(() => [
     {
@@ -227,7 +234,6 @@ export default function Problem380Visualizer() {
           </div>
 
           {step && (
-            <>
               <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
                 <div style={{ fontWeight: 600, marginBottom: 8 }}>{step.message}</div>
               </div>
@@ -347,6 +353,7 @@ export default function Problem380Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         {showPatternOverlay && (

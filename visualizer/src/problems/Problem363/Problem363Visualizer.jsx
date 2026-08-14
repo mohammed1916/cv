@@ -9,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './Problem363.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -215,9 +216,20 @@ const EXAMPLES = [
 
 export default function Problem363Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [matrixInput, setMatrixInput] = useState(JSON.stringify(EXAMPLES[0]?.matrix ?? []));
+  const [KInput, setKInput] = useState("");
+  const { matrix, K, inputError } = useMemo(() => {
+    try {
+      const parsedMatrix = JSON.parse(matrixInput); if (!Array.isArray(parsedMatrix)) throw new Error('matrix must be an array');
+      const parsedK = JSON.parse(KInput); if (!Array.isArray(parsedK)) throw new Error('K must be an array');
+      return { matrix: parsedMatrix, K: parsedK, inputError: '' };
+    } catch (e) {
+      return { matrix: EXAMPLES[exIdx]?.matrix ?? '', K: EXAMPLES[exIdx]?.K ?? '', inputError: e.message };
+    }
+  }, [matrixInput, KInput]);
 
   const ex = EXAMPLES[exIdx]
-  const steps = useMemo(() => generateSteps(ex.matrix, ex.K), [ex])
+  const steps = useMemo(() => generateSteps(matrix, K), [ex])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
@@ -225,13 +237,10 @@ export default function Problem363Visualizer() {
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
-  const applyExample = useCallback((idx) => {
-    setExIdx(idx)
-    handleReset()
-  }, [handleReset])
+  const applyExample = useCallback((i) => { setExIdx(i); setMatrixInput(JSON.stringify(EXAMPLES[i].matrix)); setKInput(JSON.stringify(EXAMPLES[i].K)); handleReset(); }, [handleReset]);
 
-  const cols = ex.matrix[0].length
-  const rows = ex.matrix.length
+  const cols = matrix[0].length
+  const rows = matrix.length
 
   const dockPanels = useMemo(
     () => [
@@ -282,14 +291,14 @@ export default function Problem363Visualizer() {
                   {e.label}
                 </button>
               ))}
-              <span style={{ marginLeft: 'auto', fontSize: 12, fontWeight: 600, color: '#1e293b' }}>K = {ex.K}</span>
+              <span style={{ marginLeft: 'auto', fontSize: 12, fontWeight: 600, color: '#1e293b' }}>K = {K}</span>
             </div>
 
             {/* Matrix Display */}
             <div>
               <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Matrix</div>
               <div style={{ display: 'grid', gridTemplateColumns: `repeat(${cols}, minmax(60px, 1fr))`, gap: 4 }}>
-                {ex.matrix.map((row, i) =>
+                {matrix.map((row, i) =>
                   row.map((val, j) => {
                     const isInRange =
                       step?.left !== undefined &&
@@ -320,6 +329,7 @@ export default function Problem363Visualizer() {
                           color: '#1e293b',
                         }}
                       >
+      
                         {val}
                       </motion.div>
                     )
@@ -387,7 +397,6 @@ export default function Problem363Visualizer() {
                 </div>
                 <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
                   {step.maxSum !== null ? (
-                    <>
                       <span style={{ color: '#92400e' }}>
                         Max ≤ {step.target} found: {step.maxSum}
                       </span>

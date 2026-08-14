@@ -11,6 +11,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './IntegerToRoman.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const I2R_PATTERNS = ['init', 'check', 'loop', 'append', 'subtract', 'done']
 
@@ -266,6 +267,19 @@ export default function IntegerToRomanVisualizer() {
   )
 
   const vizPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"num","label":"num","type":"string"}]}
+        values={{ num: numInput }}
+        onChange={(k, v) => { if (k === 'num') setNumInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <div className="i2r-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {EXAMPLES.map((ex) => (
@@ -314,7 +328,6 @@ export default function IntegerToRomanVisualizer() {
       )}
 
       {step && (
-        <>
           <div style={{ padding: 12, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 12 }}>
             <div style={{ fontWeight: 600, marginBottom: 8 }}>{step.message}</div>
           </div>
@@ -369,7 +382,8 @@ export default function IntegerToRomanVisualizer() {
         </>
       )}
     </div>
-  )
+  
+    </>)
 
   const statusPanel = (
     <div className="i2r-status" style={{ padding: 12, backgroundColor: '#f1f5f9', fontSize: 12, borderTop: '1px solid #e2e8f0' }}>
@@ -378,7 +392,6 @@ export default function IntegerToRomanVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.activeLine ? LINE_PATTERN_MAP[step.activeLine] : undefined} usedPatterns={I2R_PATTERNS} />
       )}
@@ -418,7 +431,6 @@ export default function IntegerToRomanVisualizer() {
     <div className="i2r-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

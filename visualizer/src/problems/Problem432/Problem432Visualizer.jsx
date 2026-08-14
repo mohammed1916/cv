@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem432Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -212,17 +213,26 @@ function VisualizationPanel({ step, applyEx }) {
 }
 
 export default function Problem432Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [operationsInput, setOperationsInput] = useState("[[\"inc\",\"a\"],[\"inc\",\"b\"],[\"getMaxKey\"],[\"getMinKey\"],[\"inc\",\"a\"],[\"getMaxKey\"],[\"getMinKey\"]]");
+  const { operations, inputError } = useMemo(() => {
+    try {
+      const parsedOperations = JSON.parse(operationsInput); if (!Array.isArray(parsedOperations)) throw new Error('operations must be an array');
+      return { operations: parsedOperations, inputError: '' };
+    } catch (e) {
+      return { operations: "[[\"inc\",\"a\"],[\"inc\",\"b\"],[\"getMaxKey\"],[\"getMinKey\"],[\"inc\",\"a\"],[\"getMaxKey\"],[\"getMinKey\"]]", inputError: e.message };
+    }
+  }, [operationsInput]);
   const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(
-    () => generateSteps(ex.operations).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),
-    [ex]
+    () => generateSteps(operations).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),
+    [operations]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setOperationsInput(JSON.stringify(e.operations)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
@@ -250,6 +260,7 @@ export default function Problem432Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         <PlaybackControls

@@ -1,3 +1,4 @@
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 ﻿import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -259,6 +260,17 @@ export default function Problem402Visualizer() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: '12px' }}>
+      <ManualInputPanel
+        fields={[{"key":"num","label":"num","type":"string"},{"key":"k","label":"k","type":"number"}]}
+        values={{ num: numInput, k: kInput }}
+        onChange={(k, v) => { if (k === 'num') setNumInput(v); if (k === 'k') setKInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
       <div style={{ display: 'flex', gap: 16, flex: 1 }}>
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
           <div style={{ display: 'flex', gap: 12, backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>

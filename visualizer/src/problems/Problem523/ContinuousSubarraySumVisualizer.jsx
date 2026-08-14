@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './ContinuousSubarraySumVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -299,15 +300,26 @@ function VisualizationPanel({ nums, k, step, applyEx }) {
 }
 
 export default function ContinuousSubarraySumVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { nums: [23, 2, 4, 6, 7], k: 6 })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [numsInput, setNumsInput] = useState("[23,2,4,6,13]");
+  const [kInput, setKInput] = useState(6);
+  const { nums, k, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      const parsedK = Number(kInput); if (isNaN(parsedK)) throw new Error('k must be a number');
+      return { nums: parsedNums, k: parsedK, inputError: '' };
+    } catch (e) {
+      return { nums: "[23,2,4,6,13]", k: 6, inputError: e.message };
+    }
+  }, [numsInput, kInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.nums, ex.k).map((current) => ({
+      generateSteps(nums, k).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [nums, k]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -315,7 +327,7 @@ export default function ContinuousSubarraySumVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setNumsInput(JSON.stringify(e.nums)); setKInput(String(e.k)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -330,7 +342,7 @@ export default function ContinuousSubarraySumVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <div style={{ position: 'relative' }}>
+              <div style={{ position: 'relative' }}>
 
           <CodeTracePanel
           step={step}
@@ -355,9 +367,8 @@ export default function ContinuousSubarraySumVisualizer() {
 
             />
 
-          )}
-
-        </div>
+          
+            </div>
       ),
     },
     {
@@ -365,8 +376,8 @@ export default function ContinuousSubarraySumVisualizer() {
       title: '📊 Continuous Subarray Sum',
       content: (
         <VisualizationPanel
-          nums={ex.nums}
-          k={ex.k}
+          nums={nums}
+          k={k}
           step={step}
           applyEx={applyEx}
         />

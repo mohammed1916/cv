@@ -8,6 +8,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './BinarySearchVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const SOLUTION_CODE = [
@@ -160,6 +161,17 @@ export default function BinarySearchVisualizer() {
 
   return (
     <div className="bs-shell">
+      <ManualInputPanel
+        fields={[{"key":"nums","label":"nums","type":"array"},{"key":"target","label":"target","type":"number"}]}
+        values={{ nums: numsInput, target: targetInput }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'target') setTargetInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
       <div className="bs-top">
         <div className="bs-panel" style={{ flex: 1 }}>
           <div className="bs-panel-head">

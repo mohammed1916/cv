@@ -11,6 +11,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from "../../config/examplesRegistry";
 import "./BestTimeBuySellStockIIIVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -118,6 +119,19 @@ export default function BestTimeBuySellStockIIIVisualizer() {
     )
 
     const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"prices","label":"prices","type":"array"}]}
+        values={{ prices: pricesInput }}
+        onChange={(k, v) => { if (k === 'prices') setPricesInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
         <div className="bt3-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                 <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -157,7 +171,8 @@ export default function BestTimeBuySellStockIIIVisualizer() {
             </div>
             {step?.done && <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #86efac', textAlign: 'center', fontWeight: 600, color: '#15803d' }}>✓ Max profit = {s2}</div>}
         </div>
-    )
+    
+    </>)
 
     const statusPanel = (
         <div className="bt3-status">
@@ -166,7 +181,6 @@ export default function BestTimeBuySellStockIIIVisualizer() {
     )
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 isPlaying={isPlaying}
@@ -204,7 +218,6 @@ export default function BestTimeBuySellStockIIIVisualizer() {
         <div className="bt3-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

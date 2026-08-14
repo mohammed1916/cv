@@ -9,6 +9,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./MedianOfTwoSortedArraysVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 
@@ -676,6 +677,19 @@ export default function MedianOfTwoSortedArraysVisualizer() {
 
   // Panel extraction for Lumino layout
   const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"nums1","label":"nums1","type":"string"},{"key":"nums2","label":"nums2","type":"string"}]}
+        values={{ nums1: nums1Input, nums2: nums2Input }}
+        onChange={(k, v) => { if (k === 'nums1') setNums1Input(v); if (k === 'nums2') setNums2Input(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <div className="median-panel median-input-panel">
       <div className="median-panel-head">
         <span>Inputs & Examples</span>
@@ -756,7 +770,8 @@ export default function MedianOfTwoSortedArraysVisualizer() {
         </div>
       </div>
     </div>
-  );
+  
+    </>);
 
   const statePanel = (
     <div className="median-panel median-array-panel">
@@ -967,7 +982,6 @@ export default function MedianOfTwoSortedArraysVisualizer() {
   );
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={MEDIAN_PATTERNS} />
       )}
@@ -1009,7 +1023,6 @@ export default function MedianOfTwoSortedArraysVisualizer() {
     <div className="median-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state && createPortal(statePanel, panelDivs.state)}
           {panelDivs.secondary && createPortal(secondaryPanel, panelDivs.secondary)}

@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './EncodeAndDecodeTinyURLVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -260,15 +261,24 @@ function VisualizationPanel({ url, step, applyEx }) {
 }
 
 export default function EncodeAndDecodeTinyURLVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { url: 'https://leetcode.com/problems/design-tinyurl' })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [urlInput, setUrlInput] = useState("https://leetcode.com/problems/design-tinyurl");
+  const { url, inputError } = useMemo(() => {
+    try {
+      const parsedUrl = urlInput;
+      return { url: parsedUrl, inputError: '' };
+    } catch (e) {
+      return { url: "https://leetcode.com/problems/design-tinyurl", inputError: e.message };
+    }
+  }, [urlInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.url).map((current) => ({
+      generateSteps(url).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [url]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -276,7 +286,7 @@ export default function EncodeAndDecodeTinyURLVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setUrlInput(String(e.url)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -291,7 +301,7 @@ export default function EncodeAndDecodeTinyURLVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <div style={{ position: 'relative' }}>
+              <div style={{ position: 'relative' }}>
 
           <div style={{ position: 'relative' }}>
 
@@ -327,10 +337,8 @@ export default function EncodeAndDecodeTinyURLVisualizer() {
               />
 
 
-            )}
-
-
-          </div>
+            
+              </div>
           {showPatternOverlay && (
 
             <CodePatternAnnotations
@@ -354,7 +362,7 @@ export default function EncodeAndDecodeTinyURLVisualizer() {
       title: '🔗 Encode/Decode Tiny URL',
       content: (
         <VisualizationPanel
-          url={ex.url}
+          url={url}
           step={step}
           applyEx={applyEx}
         />

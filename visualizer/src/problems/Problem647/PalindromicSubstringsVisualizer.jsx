@@ -7,6 +7,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './PalindromicSubstringsVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const SOLUTION_CODE = [
@@ -121,6 +122,17 @@ export default function PalindromicSubstringsVisualizer() {
 
     return (
         <div className="ps-shell">
+      <ManualInputPanel
+        fields={[{"key":"s","label":"s","type":"string"}]}
+        values={{ s: sInput }}
+        onChange={(k, v) => { if (k === 's') setSInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
             <div className="ps-top">
                 <section className="ps-panel main">
                     <header className="ps-head"><span>Expand around center</span></header>

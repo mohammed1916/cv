@@ -9,6 +9,7 @@ import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { getExamples } from '../../config/examplesRegistry'
 import './MinimumWindowSubstringVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
@@ -136,6 +137,19 @@ export default function MinimumWindowSubstringVisualizer() {
 
   // Extract panels for Lumino layout
   const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"s","label":"s","type":"string"},{"key":"t","label":"t","type":"string"}]}
+        values={{ s: sInput, t: tInput }}
+        onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 't') setTInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <div className="mws-panel">
       <header className="mws-head"><span>Sliding Window</span></header>
       <div className="mws-body">
@@ -181,7 +195,8 @@ export default function MinimumWindowSubstringVisualizer() {
         </div>
       </div>
     </div>
-  )
+  
+    </>)
 
   const statePanel = (
     <div className="mws-panel">
@@ -261,7 +276,6 @@ export default function MinimumWindowSubstringVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {/* Playback controls handled in VisualizerPlaybackSection */}
     </>
   )
@@ -282,7 +296,6 @@ export default function MinimumWindowSubstringVisualizer() {
     <div className="mws-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state && createPortal(statePanel, panelDivs.state)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

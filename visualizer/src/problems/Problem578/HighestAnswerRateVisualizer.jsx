@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './HighestAnswerRateVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'SELECT q.question_id, ROUND(COUNT(a.answer_id)/' },
@@ -365,6 +366,17 @@ export default function HighestAnswerRateVisualizer() {
 
   return (
     <div className="problem-shell">
+      <ManualInputPanel
+        fields={[{"key":"questions","label":"questions","type":"array"},{"key":"answers","label":"answers","type":"array"}]}
+        values={{ questions: questionsInput, answers: answersInput }}
+        onChange={(k, v) => { if (k === 'questions') setQuestionsInput(v); if (k === 'answers') setAnswersInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        
+      />
+
       <DockableWorkspace
         leftPanelContent={
           <FloatingPanel title="SQL Solution" accent="#f59e0b">

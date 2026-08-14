@@ -10,6 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './Problem361.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -239,22 +240,28 @@ const PADDING = 20
 
 export default function Problem361Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [gridInput, setGridInput] = useState(JSON.stringify(EXAMPLES[0]?.grid ?? []));
+  const { grid, inputError } = useMemo(() => {
+    try {
+      const parsedGrid = JSON.parse(gridInput); if (!Array.isArray(parsedGrid)) throw new Error('grid must be an array');
+      return { grid: parsedGrid, inputError: '' };
+    } catch (e) {
+      return { grid: EXAMPLES[exIdx]?.grid ?? '', inputError: e.message };
+    }
+  }, [gridInput]);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]
-  const steps = useMemo(() => generateSteps(ex.grid), [ex])
+  const steps = useMemo(() => generateSteps(grid), [ex])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
-  const applyExample = useCallback((idx) => {
-    setExIdx(idx)
-    handleReset()
-  }, [handleReset])
+  const applyExample = useCallback((i) => { setExIdx(i); setGridInput(JSON.stringify(EXAMPLES[i].grid)); handleReset(); }, [handleReset]);
 
-  const gridHeight = ex.grid.length * CELL_SIZE + PADDING * 2
-  const gridWidth = (ex.grid[0]?.length || 0) * CELL_SIZE + PADDING * 2
+  const gridHeight = grid.length * CELL_SIZE + PADDING * 2
+  const gridWidth = (grid[0]?.length || 0) * CELL_SIZE + PADDING * 2
 
   const dockPanels = useMemo(() => [
     {
@@ -306,14 +313,13 @@ export default function Problem361Visualizer() {
           </div>
 
           {step && (
-            <>
               <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11, fontWeight: 600 }}>
                 {step.message}
               </div>
 
               <svg width="100%" height={gridHeight} viewBox={`0 0 ${gridWidth} ${gridHeight}`} style={{ border: '1px solid #e2e8f0', borderRadius: 6, backgroundColor: '#fafafa' }}>
                 {/* Grid cells */}
-                {ex.grid.map((row, i) =>
+                {grid.map((row, i) =>
                   row.map((cell, j) => {
                     const x = PADDING + j * CELL_SIZE
                     const y = PADDING + i * CELL_SIZE
@@ -322,6 +328,7 @@ export default function Problem361Visualizer() {
 
                     return (
                       <g key={`cell-${i}-${j}`}>
+      
                         <motion.rect
                           x={x}
                           y={y}
@@ -367,7 +374,6 @@ export default function Problem361Visualizer() {
 
                 {/* Direction rays */}
                 {step.selectedCell && step.directionRays && step.directionRays.length > 0 && (
-                  <>
                     {/* Left ray */}
                     {step.directionRays[0]?.count > 0 && (
                       <motion.line
@@ -502,7 +508,7 @@ export default function Problem361Visualizer() {
         </div>
       ),
     },
-  ], [step, connectivity, setActiveLineDom, exIdx, applyExample, ex.grid])
+  ], [step, connectivity, setActiveLineDom, exIdx, applyExample, grid])
 
   return (
     <div className="problem-shell">

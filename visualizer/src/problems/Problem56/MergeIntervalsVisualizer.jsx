@@ -7,6 +7,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './MergeIntervalsVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -182,6 +183,19 @@ export default function MergeIntervalsVisualizer() {
 
   // Step 3: Extract panel consts
   const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"intervals","label":"intervals","type":"array"}]}
+        values={{ intervals: intervalsInput }}
+        onChange={(k, v) => { if (k === 'intervals') setIntervalsInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <div className="mi-panel">
       <div className="mi-panel-head">
         Input Intervals
@@ -279,7 +293,8 @@ handleReset() }}
         </div>
       </div>
     </div>
-  )
+  
+    </>)
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
@@ -307,7 +322,6 @@ handleReset() }}
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={MERGEINTERVALS_PATTERNS} />
       )}
@@ -348,7 +362,6 @@ handleReset() }}
     <div className="mi-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

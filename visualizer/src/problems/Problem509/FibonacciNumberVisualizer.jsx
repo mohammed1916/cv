@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './FibonacciNumberVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('fibonacci-number')
@@ -219,7 +220,6 @@ function VisualizationPanel({ n, step, applyEx }) {
           whiteSpace: 'pre-wrap'
         }}>
           {step?.dp && step.dp.length > 0 ? (
-            <>
               F(0) = 0
               <br />
               {step.dp.length > 1 && `F(1) = 1`}
@@ -255,15 +255,24 @@ function VisualizationPanel({ n, step, applyEx }) {
 }
 
 export default function FibonacciNumberVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { n: 4 })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [nInput, setNInput] = useState(2);
+  const { n, inputError } = useMemo(() => {
+    try {
+      const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
+      return { n: parsedN, inputError: '' };
+    } catch (e) {
+      return { n: 2, inputError: e.message };
+    }
+  }, [nInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.n).map((current) => ({
+      generateSteps(n).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [n]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -271,7 +280,7 @@ export default function FibonacciNumberVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setNInput(String(e.n)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -286,7 +295,7 @@ export default function FibonacciNumberVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
+              <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
@@ -300,7 +309,7 @@ export default function FibonacciNumberVisualizer() {
       title: '🔢 Fibonacci Number',
       content: (
         <VisualizationPanel
-          n={ex.n}
+          n={n}
           step={step}
           applyEx={applyEx}
         />
@@ -327,7 +336,8 @@ export default function FibonacciNumberVisualizer() {
           prevDisabled={stepIndex < 0}
           nextDisabled={isDone}
           resetDisabled={stepIndex < 0}
-          onSpeedChange={e => setSpeed(Number(e.target.value))}
+          onSpeedChange={e => setSpeed(Number(e.target.value
+    </>))}
           showPatternOverlay={showPatternOverlay}
           onShowPatternOverlayChange={setShowPatternOverlay}
           patternOverlayLabel="Show pattern overlay"

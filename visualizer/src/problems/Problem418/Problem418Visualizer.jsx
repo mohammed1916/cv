@@ -9,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem418Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -282,11 +283,24 @@ function ScreenFittingVisualization({ sentence, rows, cols, step }) {
 
 export default function Problem418Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [sentenceInput, setSentenceInput] = useState(JSON.stringify(EXAMPLES[0]?.sentence ?? []));
+  const [rowsInput, setRowsInput] = useState("");
+  const [colsInput, setColsInput] = useState("");
+  const { sentence, rows, cols, inputError } = useMemo(() => {
+    try {
+      const parsedSentence = JSON.parse(sentenceInput); if (!Array.isArray(parsedSentence)) throw new Error('sentence must be an array');
+      const parsedRows = JSON.parse(rowsInput); if (!Array.isArray(parsedRows)) throw new Error('rows must be an array');
+      const parsedCols = JSON.parse(colsInput); if (!Array.isArray(parsedCols)) throw new Error('cols must be an array');
+      return { sentence: parsedSentence, rows: parsedRows, cols: parsedCols, inputError: '' };
+    } catch (e) {
+      return { sentence: EXAMPLES[exIdx]?.sentence ?? '', rows: EXAMPLES[exIdx]?.rows ?? '', cols: EXAMPLES[exIdx]?.cols ?? '', inputError: e.message };
+    }
+  }, [sentenceInput, rowsInput, colsInput]);
   const example = EXAMPLES[exIdx]
 
   const steps = useMemo(
     () =>
-      generateSteps(example.sentence, example.rows, example.cols).map((current) => ({
+      generateSteps(sentence, rows, cols).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
@@ -298,7 +312,7 @@ export default function Problem418Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((idx) => { setExIdx(idx); handleReset(); }, [handleReset])
+  const applyEx = useCallback((i) => { setExIdx(i); setSentenceInput(JSON.stringify(EXAMPLES[i].sentence)); setRowsInput(JSON.stringify(EXAMPLES[i].rows)); setColsInput(JSON.stringify(EXAMPLES[i].cols)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -350,7 +364,7 @@ export default function Problem418Visualizer() {
               ))}
             </div>
           </div>
-          <ScreenFittingVisualization sentence={example.sentence} rows={example.rows} cols={example.cols} step={step} />
+          <ScreenFittingVisualization sentence={sentence} rows={rows} cols={cols} step={step} />
         </div>
       ),
     },
@@ -358,6 +372,7 @@ export default function Problem418Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

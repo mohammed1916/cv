@@ -7,6 +7,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState';
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity';
 import { usePatternOverlay } from '../../hooks/usePatternOverlay';
 import './SqrtxVisualizer.css';
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
@@ -221,12 +222,21 @@ function generateSteps(x) {
 }
 
 export default function SqrtxVisualizer() {
-  const [exampleIdx, setExampleIdx] = useState(0);
+  const [exampleIdx, setExampleIdx] = useState(0)
+  const [xInput, setXInput] = useState(String(EXAMPLES[0]?.x ?? 0));
+  const { x, inputError } = useMemo(() => {
+    try {
+      const parsedX = Number(xInput); if (isNaN(parsedX)) throw new Error('x must be a number');
+      return { x: parsedX, inputError: '' };
+    } catch (e) {
+      return { x: EXAMPLES[exampleIdx]?.x ?? '', inputError: e.message };
+    }
+  }, [xInput]);;
   const example = EXAMPLES[exampleIdx];
 
   const steps = useMemo(
     () =>
-      generateSteps(example.x).map((current) => ({
+      generateSteps(x).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
@@ -250,13 +260,7 @@ export default function SqrtxVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
 
-  const applyExample = useCallback(
-    (idx) => {
-      setExampleIdx(idx);
-      handleReset();
-    },
-    [handleReset]
-  );
+  const applyExample = useCallback((i) => { setExampleIdx(i); setXInput(String(EXAMPLES[i].x)); handleReset(); }, [handleReset]);;
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -266,7 +270,7 @@ export default function SqrtxVisualizer() {
 
   const searchRangeSize = step && step.left != null && step.right != null
     ? Math.max(0, step.right - step.left + 1)
-    : example.x;
+    : x;
 
   // Panel consts
   const primaryPanel = (
@@ -298,7 +302,7 @@ export default function SqrtxVisualizer() {
         <div className="sqrtx-panel-label">Binary Search for Square Root</div>
 
         <div className="sqrtx-search-space">
-          <div className="sqrtx-search-label">Search Space: [{step?.left ?? '2'}, {step?.right ?? Math.floor(example.x / 2)}]</div>
+          <div className="sqrtx-search-label">Search Space: [{step?.left ?? '2'}, {step?.right ?? Math.floor(x / 2)}]</div>
           <motion.div
             className="sqrtx-search-bar"
             layout
@@ -314,11 +318,10 @@ export default function SqrtxVisualizer() {
               }}
             >
               {step?.left != null && step?.right != null && (
-                <>
                   <motion.div
                     className="sqrtx-bar-left"
                     animate={{
-                      left: `${(step.left / (Math.floor(example.x / 2) + 1)) * 100}%`,
+                      left: `${(step.left / (Math.floor(x / 2) + 1)) * 100}%`,
                     }}
                     transition={{ type: 'spring', stiffness: 300, damping: 25 }}
                     style={{
@@ -333,7 +336,7 @@ export default function SqrtxVisualizer() {
                   <motion.div
                     className="sqrtx-bar-right"
                     animate={{
-                      right: `${(1 - (step.right / (Math.floor(example.x / 2) + 1))) * 100}%`,
+                      right: `${(1 - (step.right / (Math.floor(x / 2) + 1))) * 100}%`,
                     }}
                     transition={{ type: 'spring', stiffness: 300, damping: 25 }}
                     style={{
@@ -349,7 +352,7 @@ export default function SqrtxVisualizer() {
                     <motion.div
                       className="sqrtx-bar-mid"
                       animate={{
-                        left: `${(step.mid / (Math.floor(example.x / 2) + 1)) * 100}%`,
+                        left: `${(step.mid / (Math.floor(x / 2) + 1)) * 100}%`,
                       }}
                       transition={{ type: 'spring', stiffness: 300, damping: 25 }}
                       style={{
@@ -462,7 +465,7 @@ export default function SqrtxVisualizer() {
           </div>
           <div className="sqrtx-stat-box">
             <span className="sqrtx-stat-label">Target</span>
-            <span className="sqrtx-stat-val">{example.x}</span>
+            <span className="sqrtx-stat-val">{x}</span>
           </div>
         </div>
 
@@ -476,13 +479,14 @@ export default function SqrtxVisualizer() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
-              √{example.x} = {step.result}
+              √{x} = {step.result}
             </motion.div>
           )}
         </AnimatePresence>
       </div>
     </div>
-  );
+  
+    </>);
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
@@ -512,7 +516,6 @@ export default function SqrtxVisualizer() {
   );
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={SQRTX_PATTERNS} />
       )}
@@ -552,7 +555,6 @@ export default function SqrtxVisualizer() {
     <div className="sqrtx-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

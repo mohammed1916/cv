@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem492Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('construct-the-rectangle')
@@ -99,18 +100,28 @@ function VisualizationPanel({ area, step, applyEx }) {
 }
 
 export default function Problem492Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
-  const steps = useMemo(() => generateSteps(ex.area).map((current) => ({ ...current, relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []) })), [ex])
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [areaInput, setAreaInput] = useState(8);
+  const { area, inputError } = useMemo(() => {
+    try {
+      const parsedArea = Number(areaInput); if (isNaN(parsedArea)) throw new Error('area must be a number');
+      return { area: parsedArea, inputError: '' };
+    } catch (e) {
+      return { area: 8, inputError: e.message };
+    }
+  }, [areaInput]);
+  const steps = useMemo(() => generateSteps(area).map((current) => ({ ...current, relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []) })), [area])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setAreaInput(String(e.area)); handleReset(); }, [handleReset]);
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
   const dockPanels = useMemo(() => [
     { id: 'code', title: 'Code', content: (<CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />) },
-    { id: 'viz', title: '📐 Rectangle', content: (<VisualizationPanel area={ex.area} step={step} applyEx={applyEx} />) },
+    { id: 'viz', title: '📐 Rectangle', content: (<VisualizationPanel area={area} step={step} applyEx={applyEx} />) },
   ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex])
-  return (<div className="problem-shell"><DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} /><FloatingPanel title="Playback Controls">
+  return (<div className="problem-shell">
+      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} /><FloatingPanel title="Playback Controls">
         {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
         <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
       </FloatingPanel>{showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}</div>)

@@ -11,6 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './CoinChangeVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -255,6 +256,18 @@ export default function CoinChangeVisualizer() {
                         const reachable = val !== INF
                         return (
                             <div key={a} className="cc-dp-col">
+    <>
+      <ManualInputPanel
+        fields={[{"key":"coins","label":"coins","type":"array"},{"key":"amount","label":"amount","type":"number"}]}
+        values={{ coins: coinsInput, amount: amountInput }}
+        onChange={(k, v) => { if (k === 'coins') setCoinsInput(v); if (k === 'amount') setAmountInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
                                 <motion.div
                                     className={`cc-dp-cell${isActive ? ' active' : ''}${isFinal ? ' final' : ''}${!reachable ? ' inf' : ''}`}
                                     animate={{ scale: isActive ? 1.15 : 1, y: isActive ? -6 : 0 }}
@@ -317,7 +330,6 @@ export default function CoinChangeVisualizer() {
 
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.visualization && createPortal(visualizationPanel, panelDivs.visualization)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.input && createPortal(inputPanel, panelDivs.input)}

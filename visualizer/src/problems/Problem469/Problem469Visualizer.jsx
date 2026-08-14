@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem469Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -165,7 +166,6 @@ function VisualizationPanel({ points, step, applyEx }) {
         viewBox="0 0 400 400"
       >
         {points.length > 1 && (
-          <>
             <polyline
               points={points.map(p => `${(p[0] % 100) * 3 + 50},${(p[1] % 100) * 3 + 50}`).join(' ')}
               fill="rgba(139, 92, 246, 0.2)"
@@ -219,15 +219,24 @@ function VisualizationPanel({ points, step, applyEx }) {
 }
 
 export default function Problem469Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { points: [[0,0],[0,1],[1,1],[1,0]] })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [pointsInput, setPointsInput] = useState("[[0,0],[0,1],[1,1],[1,0]]");
+  const { points, inputError } = useMemo(() => {
+    try {
+      const parsedPoints = JSON.parse(pointsInput); if (!Array.isArray(parsedPoints)) throw new Error('points must be an array');
+      return { points: parsedPoints, inputError: '' };
+    } catch (e) {
+      return { points: "[[0,0],[0,1],[1,1],[1,0]]", inputError: e.message };
+    }
+  }, [pointsInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.points).map((current) => ({
+      generateSteps(points).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [points]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -235,7 +244,7 @@ export default function Problem469Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setPointsInput(JSON.stringify(e.points)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -250,7 +259,7 @@ export default function Problem469Visualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
+              <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
@@ -264,7 +273,7 @@ export default function Problem469Visualizer() {
       title: '🔺 Convex Polygon',
       content: (
         <VisualizationPanel
-          points={ex.points}
+          points={points}
           step={step}
           applyEx={applyEx}
         />
@@ -290,7 +299,8 @@ export default function Problem469Visualizer() {
           prevDisabled={stepIndex < 0}
           nextDisabled={isDone}
           resetDisabled={stepIndex < 0}
-          onSpeedChange={e => setSpeed(Number(e.target.value))}
+          onSpeedChange={e => setSpeed(Number(e.target.value
+    </>))}
           showPatternOverlay={showPatternOverlay}
           onShowPatternOverlayChange={setShowPatternOverlay}
           patternOverlayLabel="Show pattern overlay"

@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './ConvertSortedListToBinarySearchTreeVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -291,6 +292,19 @@ export default function ConvertSortedListToBinarySearchTreeVisualizer() {
   )
 
   const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"list","label":"list","type":"array"}]}
+        values={{ list: listInput }}
+        onChange={(k, v) => { if (k === 'list') setListInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <VisualizationPanel
       step={step}
       listInput={listInput}
@@ -300,7 +314,8 @@ export default function ConvertSortedListToBinarySearchTreeVisualizer() {
       applyExample={applyExample}
       handleReset={handleReset}
     />
-  )
+  
+    </>)
 
   const statusPanel = (
     <div className="cslbtbst-status">
@@ -311,7 +326,6 @@ export default function ConvertSortedListToBinarySearchTreeVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -348,7 +362,6 @@ export default function ConvertSortedListToBinarySearchTreeVisualizer() {
     <div className="cslbtbst-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

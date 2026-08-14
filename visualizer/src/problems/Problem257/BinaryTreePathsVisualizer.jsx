@@ -11,6 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
 import { getExamples } from '../../config/examplesRegistry'
 import './BinaryTreePathsVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -294,6 +295,17 @@ export default function BinaryTreePathsVisualizer() {
 
     return (
         <div className="problem-shell">
+      <ManualInputPanel
+        fields={[{"key":"arr","label":"arr","type":"string"}]}
+        values={{ arr: arrInput }}
+        onChange={(k, v) => { if (k === 'arr') setArrInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
             <DockableWorkspace
                 title="Binary Tree Paths Visualizer"
                 panels={dockPanels}

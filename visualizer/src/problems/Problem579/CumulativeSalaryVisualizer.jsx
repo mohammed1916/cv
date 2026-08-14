@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './CumulativeSalaryVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const CUMULATIVE_PATTERNS = ['select', 'filter', 'window', 'cumsum', 'sort']
@@ -269,6 +270,17 @@ export default function CumulativeSalaryVisualizer() {
 
   return (
     <div className="cumulative-salary-shell">
+      <ManualInputPanel
+        fields={[{"key":"employees","label":"employees","type":"array"}]}
+        values={{ employees: employeesInput }}
+        onChange={(k, v) => { if (k === 'employees') setEmployeesInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
       <ResizableSplitPanels
         className="cumulative-salary-top-split"
         storageKey="cpviz.split.cumulative-salary.top"

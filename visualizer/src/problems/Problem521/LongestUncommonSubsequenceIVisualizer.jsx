@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './LongestUncommonSubsequenceIVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -196,15 +197,26 @@ function VisualizationPanel({ a, b, step, applyEx }) {
 }
 
 export default function LongestUncommonSubsequenceIVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { a: 'aba', b: 'cdc' })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [aInput, setAInput] = useState("aba");
+  const [bInput, setBInput] = useState("cdc");
+  const { a, b, inputError } = useMemo(() => {
+    try {
+      const parsedA = aInput;
+      const parsedB = bInput;
+      return { a: parsedA, b: parsedB, inputError: '' };
+    } catch (e) {
+      return { a: "aba", b: "cdc", inputError: e.message };
+    }
+  }, [aInput, bInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.a, ex.b).map((current) => ({
+      generateSteps(a, b).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [a, b]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -212,7 +224,7 @@ export default function LongestUncommonSubsequenceIVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setAInput(String(e.a)); setBInput(String(e.b)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -227,7 +239,7 @@ export default function LongestUncommonSubsequenceIVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <div style={{ position: 'relative' }}>
+              <div style={{ position: 'relative' }}>
 
           <CodeTracePanel
           step={step}
@@ -252,9 +264,8 @@ export default function LongestUncommonSubsequenceIVisualizer() {
 
             />
 
-          )}
-
-        </div>
+          
+            </div>
       ),
     },
     {
@@ -262,8 +273,8 @@ export default function LongestUncommonSubsequenceIVisualizer() {
       title: '🔤 Longest Uncommon Subsequence I',
       content: (
         <VisualizationPanel
-          a={ex.a}
-          b={ex.b}
+          a={a}
+          b={b}
           step={step}
           applyEx={applyEx}
         />

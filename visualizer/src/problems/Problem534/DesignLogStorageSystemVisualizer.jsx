@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './DesignLogStorageSystemVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -262,7 +263,18 @@ function VisualizationPanel({ step, applyEx }) {
 }
 
 export default function DesignLogStorageSystemVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || {})
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [operationsInput, setOperationsInput] = useState("[\"LogSystem\",\"put\",\"put\",\"retrieve\"]");
+  const [valuesInput, setValuesInput] = useState("[[],[1,\"2017:01:01:23:59:59\"],[2,\"2017:01:02:23:59:59\"],[1,\"2017:01:01:23:59:59\",\"2017:01:02:23:59:59\",\"Second\"]]");
+  const { operations, values, inputError } = useMemo(() => {
+    try {
+      const parsedOperations = JSON.parse(operationsInput); if (!Array.isArray(parsedOperations)) throw new Error('operations must be an array');
+      const parsedValues = JSON.parse(valuesInput); if (!Array.isArray(parsedValues)) throw new Error('values must be an array');
+      return { operations: parsedOperations, values: parsedValues, inputError: '' };
+    } catch (e) {
+      return { operations: "[\"LogSystem\",\"put\",\"put\",\"retrieve\"]", values: "[[],[1,\"2017:01:01:23:59:59\"],[2,\"2017:01:02:23:59:59\"],[1,\"2017:01:01:23:59:59\",\"2017:01:02:23:59:59\",\"Second\"]]", inputError: e.message };
+    }
+  }, [operationsInput, valuesInput]);
 
   const steps = useMemo(
     () =>
@@ -278,7 +290,7 @@ export default function DesignLogStorageSystemVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setOperationsInput(JSON.stringify(e.operations)); setValuesInput(JSON.stringify(e.values)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -293,7 +305,7 @@ export default function DesignLogStorageSystemVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <div style={{ position: 'relative' }}>
+              <div style={{ position: 'relative' }}>
 
           <CodeTracePanel
           step={step}
@@ -318,9 +330,8 @@ export default function DesignLogStorageSystemVisualizer() {
 
             />
 
-          )}
-
-        </div>
+          
+            </div>
       ),
     },
     {

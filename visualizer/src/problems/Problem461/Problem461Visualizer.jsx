@@ -14,6 +14,7 @@ import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
 
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const PATTERNS = ['binary', 'checking_bit', 'done', 'extract_bit', 'increment_count', 'init_count', 'shift_right', 'start', 'xor_computed']
 const LINE_PATTERN_MAP = {
   1: 'done',
@@ -500,6 +501,17 @@ export default function Problem461Visualizer() {
 
   return (
     <div className="problem-shell">
+      <ManualInputPanel
+        fields={[{"key":"x","label":"x","type":"string"},{"key":"y","label":"y","type":"string"}]}
+        values={{ x: xInput, y: yInput }}
+        onChange={(k, v) => { if (k === 'x') setXInput(v); if (k === 'y') setYInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
 
       <FloatingPanel title="Playback Controls">

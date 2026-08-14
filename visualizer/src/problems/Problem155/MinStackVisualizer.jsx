@@ -346,7 +346,6 @@ export default function MinStackVisualizer() {
   );
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend patterns={PATTERNS} />
       )}
@@ -403,7 +402,6 @@ export default function MinStackVisualizer() {
 
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

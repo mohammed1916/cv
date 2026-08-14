@@ -9,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem412Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -309,11 +310,20 @@ function FizzBuzzVisualization({ n, step }) {
 
 export default function Problem412Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [nInput, setNInput] = useState(String(EXAMPLES[0]?.n ?? 0));
+  const { n, inputError } = useMemo(() => {
+    try {
+      const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
+      return { n: parsedN, inputError: '' };
+    } catch (e) {
+      return { n: EXAMPLES[exIdx]?.n ?? '', inputError: e.message };
+    }
+  }, [nInput]);
   const example = EXAMPLES[exIdx]
 
   const steps = useMemo(
     () =>
-      generateSteps(example.n).map((current) => ({
+      generateSteps(n).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
@@ -325,7 +335,7 @@ export default function Problem412Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((idx) => { setExIdx(idx); handleReset(); }, [handleReset])
+  const applyEx = useCallback((i) => { setExIdx(i); setNInput(String(EXAMPLES[i].n)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -377,7 +387,7 @@ export default function Problem412Visualizer() {
               ))}
             </div>
           </div>
-          <FizzBuzzVisualization n={example.n} step={step} />
+          <FizzBuzzVisualization n={n} step={step} />
         </div>
       ),
     },
@@ -385,6 +395,7 @@ export default function Problem412Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem486Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('predict-the-winner')
@@ -270,15 +271,24 @@ function VisualizationPanel({ nums, step, applyEx }) {
 }
 
 export default function Problem486Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [numsInput, setNumsInput] = useState("[1,5,233,7]");
+  const { nums, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      return { nums: parsedNums, inputError: '' };
+    } catch (e) {
+      return { nums: "[1,5,233,7]", inputError: e.message };
+    }
+  }, [numsInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.nums).map((current) => ({
+      generateSteps(nums).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [nums]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -286,7 +296,7 @@ export default function Problem486Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setNumsInput(JSON.stringify(e.nums)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -315,7 +325,7 @@ export default function Problem486Visualizer() {
       title: '🎮 Predict the Winner',
       content: (
         <VisualizationPanel
-          nums={ex.nums}
+          nums={nums}
           step={step}
           applyEx={applyEx}
         />
@@ -325,6 +335,7 @@ export default function Problem486Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

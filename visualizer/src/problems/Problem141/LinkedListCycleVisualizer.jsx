@@ -11,6 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './LinkedListCycleVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -121,8 +122,17 @@ const EXAMPLES = getExamples('linked-list-cycle')
 const EXAMPLE_LABELS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 
 export default function LinkedListCycleVisualizer() {
-    const [nodeCount, setNodeCount] = useState(5)
-    const [tailTo, setTailTo] = useState(0)
+    const [nodeCountInput, setNodeCountInput] = useState(5);
+    const [tailToInput, setTailToInput] = useState(0);
+  const { nodeCount, tailTo, inputError } = useMemo(() => {
+    try {
+      const parsedNodeCount = Number(nodeCountInput); if (isNaN(parsedNodeCount)) throw new Error('nodeCount must be a number');
+      const parsedTailTo = Number(tailToInput); if (isNaN(parsedTailTo)) throw new Error('tailTo must be a number');
+      return { nodeCount: parsedNodeCount, tailTo: parsedTailTo, inputError: '' };
+    } catch (e) {
+      return { nodeCount: 5, tailTo: 0, inputError: e.message };
+    }
+  }, [nodeCountInput, tailToInput]);
     const [tailDesc, setTailDesc] = useState('Cycle 0')
 
     const steps = useMemo(() => generateSteps(nodeCount, tailTo), [nodeCount, tailTo])
@@ -353,7 +363,8 @@ export default function LinkedListCycleVisualizer() {
                 </AnimatePresence>
             </div>
         </div>
-    )
+    
+    </>)
 
     const statePanel = (
         <div className="llc-panel">
@@ -417,7 +428,6 @@ export default function LinkedListCycleVisualizer() {
     )
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 isPlaying={isPlaying}
@@ -461,7 +471,6 @@ export default function LinkedListCycleVisualizer() {
         <div className="llc-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.state && createPortal(statePanel, panelDivs.state)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}

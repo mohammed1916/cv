@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem493Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('reverse-pairs')
@@ -239,16 +240,25 @@ function VisualizationPanel({ nums, step, applyEx }) {
 }
 
 export default function Problem493Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [numsInput, setNumsInput] = useState("[1,3,2,3,1]");
+  const { nums, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      return { nums: parsedNums, inputError: '' };
+    } catch (e) {
+      return { nums: "[1,3,2,3,1]", inputError: e.message };
+    }
+  }, [numsInput]);
 
   const steps = useMemo(
-    () => generateSteps(ex.nums).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),
-    [ex]
+    () => generateSteps(nums).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),
+    [nums]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setNumsInput(JSON.stringify(e.nums)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
@@ -270,12 +280,13 @@ export default function Problem493Visualizer() {
     {
       id: 'viz',
       title: '🔄 Reverse Pairs',
-      content: <VisualizationPanel nums={ex.nums} step={step} applyEx={applyEx} />,
+      content: <VisualizationPanel nums={nums} step={step} applyEx={applyEx} />,
     },
   ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, applyEx, ex])
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}

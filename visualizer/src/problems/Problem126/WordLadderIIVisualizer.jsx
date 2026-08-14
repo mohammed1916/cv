@@ -9,6 +9,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './WordLadderIIVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -44,7 +45,8 @@ const SOLUTION_CODE_INLINE = [
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(beginWord, endWord, wordList) {
-  const steps = []
+const applyInput = useCallback((e) => { setInput(e); setBeginWordInput(String(e.beginWord)); setEndWordInput(String(e.endWord)); setWordListInput(JSON.stringify(e.wordList)); handleReset(); }, [handleReset]);
+    const steps = []
 
   if (!wordList.includes(endWord)) {
     steps.push({
@@ -235,14 +237,27 @@ function VisualizationPanel({ step }) {
 }
 
 export default function WordLadderIIVisualizer() {
-  const [input, setInput] = useState(EXAMPLES[0])
+  const [input, setInput] = useState(EXAMPLES[0]);
+  const [beginWordInput, setBeginWordInput] = useState("hit");
+  const [endWordInput, setEndWordInput] = useState("cog");
+  const [wordListInput, setWordListInput] = useState("[\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]");
+  const { beginWord, endWord, wordList, inputError } = useMemo(() => {
+    try {
+      const parsedBeginWord = beginWordInput;
+      const parsedEndWord = endWordInput;
+      const parsedWordList = JSON.parse(wordListInput); if (!Array.isArray(parsedWordList)) throw new Error('wordList must be an array');
+      return { beginWord: parsedBeginWord, endWord: parsedEndWord, wordList: parsedWordList, inputError: '' };
+    } catch (e) {
+      return { beginWord: "hit", endWord: "cog", wordList: "[\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]", inputError: e.message };
+    }
+  }, [beginWordInput, endWordInput, wordListInput]);
   const steps = useMemo(
     () =>
-      generateSteps(input.beginWord, input.endWord, input.wordList).map((s) => ({
+      generateSteps(beginWord, endWord, wordList).map((s) => ({
         ...s,
         relatedLines: s.relatedLines ?? (s.activeLine ? [s.activeLine] : []),
       })),
-    [input]
+    [beginWord, endWord, wordList]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
@@ -259,7 +274,8 @@ export default function WordLadderIIVisualizer() {
         <VisualizationPanel step={step} />
       </div>
     </div>
-  )
+  
+    </>)
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
@@ -289,7 +305,6 @@ export default function WordLadderIIVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -330,7 +345,6 @@ export default function WordLadderIIVisualizer() {
     <div className="wl2-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

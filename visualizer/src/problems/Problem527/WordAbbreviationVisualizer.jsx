@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './WordAbbreviationVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -284,15 +285,24 @@ function VisualizationPanel({ dict, step, applyEx }) {
 }
 
 export default function WordAbbreviationVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { dict: ['like', 'god', 'internal'] })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [dictInput, setDictInput] = useState("[\"like\",\"god\",\"internal\"]");
+  const { dict, inputError } = useMemo(() => {
+    try {
+      const parsedDict = JSON.parse(dictInput); if (!Array.isArray(parsedDict)) throw new Error('dict must be an array');
+      return { dict: parsedDict, inputError: '' };
+    } catch (e) {
+      return { dict: "[\"like\",\"god\",\"internal\"]", inputError: e.message };
+    }
+  }, [dictInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.dict).map((current) => ({
+      generateSteps(dict).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [dict]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -300,7 +310,7 @@ export default function WordAbbreviationVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setDictInput(JSON.stringify(e.dict)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -315,7 +325,7 @@ export default function WordAbbreviationVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <div style={{ position: 'relative' }}>
+              <div style={{ position: 'relative' }}>
 
           <CodeTracePanel
           step={step}
@@ -340,9 +350,8 @@ export default function WordAbbreviationVisualizer() {
 
             />
 
-          )}
-
-        </div>
+          
+            </div>
       ),
     },
     {
@@ -350,7 +359,7 @@ export default function WordAbbreviationVisualizer() {
       title: '📝 Word Abbreviation',
       content: (
         <VisualizationPanel
-          dict={ex.dict}
+          dict={dict}
           step={step}
           applyEx={applyEx}
         />

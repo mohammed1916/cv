@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './KokoEatingBananas.css';
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const KokoEatingBananas = () => {
   const [piles, setPiles] = useState([3, 6, 7, 11]);

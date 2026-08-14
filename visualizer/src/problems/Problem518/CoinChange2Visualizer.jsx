@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './CoinChange2Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -231,15 +232,26 @@ function VisualizationPanel({ amount, coins, step, applyEx }) {
 }
 
 export default function CoinChange2Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { amount: 5, coins: [1, 2, 5] })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [amountInput, setAmountInput] = useState(5);
+  const [coinsInput, setCoinsInput] = useState("[1,2,5]");
+  const { amount, coins, inputError } = useMemo(() => {
+    try {
+      const parsedAmount = Number(amountInput); if (isNaN(parsedAmount)) throw new Error('amount must be a number');
+      const parsedCoins = JSON.parse(coinsInput); if (!Array.isArray(parsedCoins)) throw new Error('coins must be an array');
+      return { amount: parsedAmount, coins: parsedCoins, inputError: '' };
+    } catch (e) {
+      return { amount: 5, coins: "[1,2,5]", inputError: e.message };
+    }
+  }, [amountInput, coinsInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.amount, ex.coins).map((current) => ({
+      generateSteps(amount, coins).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [amount, coins]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -247,7 +259,7 @@ export default function CoinChange2Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setAmountInput(String(e.amount)); setCoinsInput(JSON.stringify(e.coins)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -290,12 +302,13 @@ export default function CoinChange2Visualizer() {
 
   const vizPanel = (
     <VisualizationPanel
-      amount={ex.amount}
-      coins={ex.coins}
+      amount={amount}
+      coins={coins}
       step={step}
       applyEx={applyEx}
     />
-  )
+  
+    </>)
 
   const [panelDivs, setPanelDivs] = useState(null)
   const panelConfigs = useMemo(
@@ -311,7 +324,6 @@ export default function CoinChange2Visualizer() {
     <div className="problem-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
         </>

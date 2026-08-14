@@ -12,6 +12,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './LargestOrdersVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const SOLUTION_CODE = [
@@ -33,7 +34,7 @@ const LINE_PATTERN_MAP = {
 }
 
 function generateSteps(input) {
-  const steps = []
+    const steps = []
 
   let orders = []
   let customers = {}
@@ -409,8 +410,15 @@ function DetailsPanel({ step }) {
 const EXAMPLES = getExamples('largest-orders')
 
 export default function LargestOrdersVisualizer() {
-  const [input, setInput] = useState('')
-  const [inputError, setInputError] = useState('')
+  const [inputText, setInputText] = useState(JSON.stringify(EXAMPLES[0]));
+  const { input, inputError } = useMemo(() => {
+    try {
+      const parsedInput = JSON.parse(inputText);
+      return { input: parsedInput, inputError: '' };
+    } catch (e) {
+      return { input: EXAMPLES[0], inputError: e.message };
+    }
+  }, [inputText]);
 
   const steps = useMemo(
     () => generateSteps(input).map((current) => ({
@@ -428,7 +436,8 @@ export default function LargestOrdersVisualizer() {
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
   const applyExample = useCallback((ex) => {
-    setInput(JSON.stringify(ex))
+    setInput(ex)
+    setInputText(JSON.stringify(ex))
     handleReset()
   }, [handleReset])
 
@@ -442,6 +451,7 @@ export default function LargestOrdersVisualizer() {
 
   return (
     <div className="largest_orders-shell">
+
       <ResizableSplitPanels
         className="largest_orders-top-split"
         storageKey="cpviz.split.largest-orders.top"
@@ -466,8 +476,8 @@ export default function LargestOrdersVisualizer() {
 
               <div style={{ display: 'flex', gap: 12, marginBottom: 24 }}>
                 <textarea
-                  value={input}
-                  onChange={(e) => { setInput(e.target.value); handleReset() }}
+                  value={inputText}
+                  onChange={(e) => { setInputText(e.target.value); handleReset() }}
                   placeholder='Enter JSON: {"orders": [{"orderId": 1, "customerId": 1, "amount": 100}], "customers": {"1": "John"}}'
                   className="largest_orders-input"
                   style={{ flex: 1, minHeight: 80, fontFamily: 'monospace' }}

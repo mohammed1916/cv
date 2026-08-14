@@ -12,6 +12,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './AddBinaryVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('add-binary')
 
@@ -342,15 +343,26 @@ function VisualizationPanel({ a, b, step, applyEx }) {
 }
 
 export default function AddBinaryVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { a: '11', b: '1' })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [aInput, setAInput] = useState("11");
+  const [bInput, setBInput] = useState("1");
+  const { a, b, inputError } = useMemo(() => {
+    try {
+      const parsedA = aInput;
+      const parsedB = bInput;
+      return { a: parsedA, b: parsedB, inputError: '' };
+    } catch (e) {
+      return { a: "11", b: "1", inputError: e.message };
+    }
+  }, [aInput, bInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.a, ex.b).map((current) => ({
+      generateSteps(a, b).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [a, b]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -358,7 +370,7 @@ export default function AddBinaryVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setAInput(String(e.a)); setBInput(String(e.b)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -393,13 +405,14 @@ export default function AddBinaryVisualizer() {
   const vizPanel = (
     <div className="ab-panel">
       <VisualizationPanel
-        a={ex.a}
-        b={ex.b}
+        a={a}
+        b={b}
         step={step}
         applyEx={applyEx}
       />
     </div>
-  )
+  
+    </>)
 
   const statusPanel = (
     <div className="ab-status">
@@ -408,7 +421,6 @@ export default function AddBinaryVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={ADDBINARY_PATTERNS} />
       )}
@@ -449,7 +461,6 @@ export default function AddBinaryVisualizer() {
     <div className="ab-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

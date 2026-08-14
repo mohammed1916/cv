@@ -10,6 +10,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import "./ImplementTrieVisualizer.css"
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -110,8 +111,17 @@ function VisualizationPanel({ step, trie }) {
 }
 
 export default function ImplementTrieVisualizer() {
-  const [word, setWord] = useState("apple")
-  const [operation, setOperation] = useState("insert")
+  const [wordInput, setWordInput] = useState("apple");
+  const [operationInput, setOperationInput] = useState("insert");
+  const { word, operation, inputError } = useMemo(() => {
+    try {
+      const parsedWord = wordInput;
+      const parsedOperation = operationInput;
+      return { word: parsedWord, operation: parsedOperation, inputError: '' };
+    } catch (e) {
+      return { word: "apple", operation: "insert", inputError: e.message };
+    }
+  }, [wordInput, operationInput]);
   const [insertedWords, setInsertedWords] = useState(["app", "apple", "apply"])
   const trie = useMemo(() => buildTrie(insertedWords), [insertedWords])
   const steps = useMemo(() => generateSteps(word, operation).map(s => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [word, operation])
@@ -124,7 +134,8 @@ export default function ImplementTrieVisualizer() {
   )
   const vizPanel = (
     <VisualizationPanel step={step} trie={trie} />
-  )
+  
+    </>)
   const panelConfigs = useMemo(() => [
     { id: "code", title: "Code" },
     { id: "viz", title: "Trie Tree", dockMode: "split-right" },
@@ -135,7 +146,6 @@ export default function ImplementTrieVisualizer() {
     <div className="problem-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
         </>

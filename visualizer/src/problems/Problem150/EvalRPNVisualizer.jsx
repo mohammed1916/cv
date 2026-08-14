@@ -166,7 +166,6 @@ export default function EvalRPNVisualizer() {
     );
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 isPlaying={isPlaying}
@@ -204,7 +203,6 @@ export default function EvalRPNVisualizer() {
         <div className="rpn-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(vizPanel, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

@@ -12,6 +12,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 import './RomanToIntegerVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const R2I_PATTERNS = ['init', 'loop', 'check', 'subtract', 'add']
 
@@ -254,6 +255,19 @@ export default function RomanToIntegerVisualizer() {
   )
 
   const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"roman","label":"roman","type":"string"}]}
+        values={{ roman: romanInput }}
+        onChange={(k, v) => { if (k === 'roman') setRomanInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <div className="rti-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {EXAMPLES.map((e, i) => (
@@ -288,7 +302,6 @@ export default function RomanToIntegerVisualizer() {
       </div>
 
       {step && (
-        <>
           <div style={{ padding: 12, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 12, border: '1px solid #e2e8f0' }}>
             <div style={{ fontWeight: 600, marginBottom: 8, color: '#1e293b' }}>{step.message}</div>
           </div>
@@ -425,7 +438,8 @@ export default function RomanToIntegerVisualizer() {
         </>
       )}
     </div>
-  )
+  
+    </>)
 
   const statusPanel = (
     <div className="rti-status" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', fontSize: 12, color: '#64748b' }}>
@@ -434,7 +448,6 @@ export default function RomanToIntegerVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.activeLine ? LINE_PATTERN_MAP[step.activeLine] : undefined} usedPatterns={R2I_PATTERNS} />
       )}
@@ -475,7 +488,6 @@ export default function RomanToIntegerVisualizer() {
     <div className="rti-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

@@ -12,6 +12,7 @@ import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import './StudentAttendanceRecordIIVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const MOD = 1000000007
 
@@ -280,6 +281,19 @@ export default function StudentAttendanceRecordIIVisualizer() {
 
   /* ── Panels ───────────────────────────────────────────────── */
   const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"n","label":"n","type":"number"}]}
+        values={{ n: nInput }}
+        onChange={(k, v) => { if (k === 'n') setNInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <div className="p552-panel-primary">
       <div className="p552-card">
         <div className="p552-section-label">Input</div>
@@ -342,7 +356,8 @@ export default function StudentAttendanceRecordIIVisualizer() {
         </div>
       )}
     </div>
-  )
+  
+    </>)
 
   const statePanel = (
     <div className="p552-panel-state">
@@ -414,7 +429,6 @@ export default function StudentAttendanceRecordIIVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -452,7 +466,6 @@ export default function StudentAttendanceRecordIIVisualizer() {
     <div className="p552-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state   && createPortal(statePanel,   panelDivs.state)}
           {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}

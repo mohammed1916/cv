@@ -12,6 +12,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import './UniquePathsVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
     { line: 1, text: 'class Solution:' },
@@ -200,8 +201,22 @@ export default function UniquePathsVisualizer() {
 
     // Extract panels as consts
     const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"m","label":"m","type":"string"},{"key":"n","label":"n","type":"string"}]}
+        values={{ m: mInput, n: nInput }}
+        onChange={(k, v) => { if (k === 'm') setMInput(v); if (k === 'n') setNInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
         <UniquePathsVisualization m={m} n={n} step={step} onApplyExample={applyExample} mInput={mInput} nInput={nInput} setMInput={setMInput} setNInput={setNInput} handleReset={handleReset} />
-    )
+    
+    </>)
 
     const codePanel = (
         <div style={{ position: 'relative', height: '100%' }}>
@@ -230,7 +245,6 @@ export default function UniquePathsVisualizer() {
     )
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={UNIQUEPATHS_PATTERNS} />
             )}
@@ -264,7 +278,6 @@ export default function UniquePathsVisualizer() {
         <div className="up-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(<div className="up-panel">{primaryPanel}</div>, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

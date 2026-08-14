@@ -13,6 +13,7 @@ import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import './Problem400Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const PATTERNS = ['calculate', 'check_range', 'done', 'error', 'extract_digit', 'find_number', 'init', 'init_vars', 'range_update']
 const LINE_PATTERN_MAP = {
@@ -246,6 +247,19 @@ export default function Problem400Visualizer() {
 
   /* ── Panels ───────────────────────────────────────────────── */
   const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"n","label":"n","type":"number"}]}
+        values={{ n: nInput }}
+        onChange={(k, v) => { if (k === 'n') setNInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <div className="p400-panel-primary">
       <div className="p400-card">
         <div className="p400-section-label">Input</div>
@@ -316,7 +330,8 @@ export default function Problem400Visualizer() {
         </div>
       )}
     </div>
-  )
+  
+    </>)
 
   const statePanel = (
     <div className="p400-panel-state">
@@ -388,7 +403,6 @@ export default function Problem400Visualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -426,7 +440,6 @@ export default function Problem400Visualizer() {
     <div className="p400-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state   && createPortal(statePanel,   panelDivs.state)}
           {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}

@@ -9,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './IsomorphicStringsVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -39,7 +40,8 @@ const SOLUTION_CODE = [
 ]
 
 function generateSteps(s, t) {
-  const steps = []
+const applyInput = useCallback((e) => { setInput(e); setSInput(String(e.s)); setTInput(String(e.t)); handleReset(); }, [handleReset]);
+    const steps = []
   steps.push({
     activeLine: 1,
     s,
@@ -303,14 +305,25 @@ function VisualizationPanel({ step }) {
 }
 
 export default function IsomorphicStringsVisualizer() {
-  const [input, setInput] = useState(EXAMPLES[0])
+  const [input, setInput] = useState(EXAMPLES[0]);
+  const [sInput, setSInput] = useState("egg");
+  const [tInput, setTInput] = useState("add");
+  const { s, t, inputError } = useMemo(() => {
+    try {
+      const parsedS = sInput;
+      const parsedT = tInput;
+      return { s: parsedS, t: parsedT, inputError: '' };
+    } catch (e) {
+      return { s: "egg", t: "add", inputError: e.message };
+    }
+  }, [sInput, tInput]);
   const steps = useMemo(
     () =>
-      generateSteps(input.s, input.t).map((s) => ({
+      generateSteps(s, t).map((s) => ({
         ...s,
         relatedLines: s.relatedLines ?? [s.activeLine],
       })),
-    [input]
+    [s, t]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
@@ -336,6 +349,7 @@ export default function IsomorphicStringsVisualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Controls">
         <PlaybackControls

@@ -9,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem422Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -319,11 +320,20 @@ function WordSquareVisualization({ words, step }) {
 
 export default function Problem422Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [wordsInput, setWordsInput] = useState(JSON.stringify(EXAMPLES[0]?.words ?? []));
+  const { words, inputError } = useMemo(() => {
+    try {
+      const parsedWords = JSON.parse(wordsInput); if (!Array.isArray(parsedWords)) throw new Error('words must be an array');
+      return { words: parsedWords, inputError: '' };
+    } catch (e) {
+      return { words: EXAMPLES[exIdx]?.words ?? '', inputError: e.message };
+    }
+  }, [wordsInput]);
   const example = EXAMPLES[exIdx]
 
   const steps = useMemo(
     () =>
-      generateSteps(example.words).map((current) => ({
+      generateSteps(words).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
@@ -335,7 +345,7 @@ export default function Problem422Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((idx) => { setExIdx(idx); handleReset(); }, [handleReset])
+  const applyEx = useCallback((i) => { setExIdx(i); setWordsInput(JSON.stringify(EXAMPLES[i].words)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -387,7 +397,7 @@ export default function Problem422Visualizer() {
               ))}
             </div>
           </div>
-          <WordSquareVisualization words={example.words} step={step} />
+          <WordSquareVisualization words={words} step={step} />
         </div>
       ),
     },
@@ -395,6 +405,7 @@ export default function Problem422Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

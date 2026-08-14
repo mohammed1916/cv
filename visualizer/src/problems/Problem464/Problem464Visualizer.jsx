@@ -14,6 +14,7 @@ import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
 
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const PATTERNS = ['check_sum', 'dfs_start', 'done', 'exploring', 'impossible', 'init_memo', 'start']
 const LINE_PATTERN_MAP = {
   2: 'done',
@@ -502,6 +503,17 @@ export default function Problem464Visualizer() {
 
   return (
     <div className="problem-shell">
+      <ManualInputPanel
+        fields={[{"key":"maxChoosable","label":"maxChoosable","type":"string"},{"key":"desiredTotal","label":"desiredTotal","type":"string"}]}
+        values={{ maxChoosable: maxChoosableInput, desiredTotal: desiredTotalInput }}
+        onChange={(k, v) => { if (k === 'maxChoosable') setMaxChoosableInput(v); if (k === 'desiredTotal') setDesiredTotalInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
 
       <FloatingPanel title="Playback Controls">

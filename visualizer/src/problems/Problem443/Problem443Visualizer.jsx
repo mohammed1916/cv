@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem443Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -331,15 +332,24 @@ function VisualizationPanel({ step, applyEx }) {
 }
 
 export default function Problem443Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { chars: ['a', 'a', 'b', 'b', 'c', 'c', 'c'], label: 'Example 1' })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [charsInput, setCharsInput] = useState("[\"a\",\"a\",\"b\",\"b\",\"c\",\"c\",\"c\"]");
+  const { chars, inputError } = useMemo(() => {
+    try {
+      const parsedChars = JSON.parse(charsInput); if (!Array.isArray(parsedChars)) throw new Error('chars must be an array');
+      return { chars: parsedChars, inputError: '' };
+    } catch (e) {
+      return { chars: "[\"a\",\"a\",\"b\",\"b\",\"c\",\"c\",\"c\"]", inputError: e.message };
+    }
+  }, [charsInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.chars).map((current) => ({
+      generateSteps(chars).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [chars]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -347,7 +357,7 @@ export default function Problem443Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setCharsInput(JSON.stringify(e.chars)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -362,7 +372,7 @@ export default function Problem443Visualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
+              <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
@@ -401,7 +411,8 @@ export default function Problem443Visualizer() {
           prevDisabled={stepIndex < 0}
           nextDisabled={isDone}
           resetDisabled={stepIndex < 0}
-          onSpeedChange={e => setSpeed(Number(e.target.value))}
+          onSpeedChange={e => setSpeed(Number(e.target.value
+    </>))}
           showPatternOverlay={showPatternOverlay}
           onShowPatternOverlayChange={setShowPatternOverlay}
           patternOverlayLabel="Show pattern overlay"

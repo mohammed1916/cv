@@ -14,6 +14,7 @@ import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
 
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const PATTERNS = ['add_perimeter', 'adjust_left', 'adjust_up', 'checking_cell', 'done', 'found_land', 'init', 'start']
 const LINE_PATTERN_MAP = {
   1: 'done',
@@ -427,6 +428,17 @@ export default function Problem463Visualizer() {
 
   return (
     <div className="problem-shell">
+      <ManualInputPanel
+        fields={[{"key":"grid","label":"grid","type":"string"}]}
+        values={{ grid: gridInput }}
+        onChange={(k, v) => { if (k === 'grid') setGridInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
 
       <FloatingPanel title="Playback Controls">

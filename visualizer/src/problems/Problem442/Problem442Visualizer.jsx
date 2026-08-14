@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem442Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -293,15 +294,24 @@ function VisualizationPanel({ step, applyEx }) {
 }
 
 export default function Problem442Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { nums: [4, 3, 2, 7, 8, 2, 3, 1], label: 'Example 1' })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [numsInput, setNumsInput] = useState("[4,3,2,7,8,2,3,1]");
+  const { nums, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      return { nums: parsedNums, inputError: '' };
+    } catch (e) {
+      return { nums: "[4,3,2,7,8,2,3,1]", inputError: e.message };
+    }
+  }, [numsInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.nums).map((current) => ({
+      generateSteps(nums).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [nums]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -309,7 +319,7 @@ export default function Problem442Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setNumsInput(JSON.stringify(e.nums)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -324,7 +334,7 @@ export default function Problem442Visualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
+              <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
@@ -363,7 +373,8 @@ export default function Problem442Visualizer() {
           prevDisabled={stepIndex < 0}
           nextDisabled={isDone}
           resetDisabled={stepIndex < 0}
-          onSpeedChange={e => setSpeed(Number(e.target.value))}
+          onSpeedChange={e => setSpeed(Number(e.target.value
+    </>))}
           showPatternOverlay={showPatternOverlay}
           onShowPatternOverlayChange={setShowPatternOverlay}
           patternOverlayLabel="Show pattern overlay"

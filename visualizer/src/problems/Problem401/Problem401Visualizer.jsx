@@ -1,3 +1,4 @@
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 ﻿import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -174,6 +175,17 @@ export default function Problem401Visualizer() {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+      <ManualInputPanel
+        fields={[{"key":"n","label":"n","type":"number"}]}
+        values={{ n: nInput }}
+        onChange={(k, v) => { if (k === 'n') setNInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
         <div style={{ display: 'flex', gap: 4 }}>
           {hourBits.split('').map((bit, idx) => (
             <div

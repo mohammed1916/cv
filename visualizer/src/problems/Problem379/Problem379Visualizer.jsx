@@ -11,6 +11,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem379.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const PATTERNS = []
 
@@ -139,11 +140,22 @@ const EXAMPLES = [
 
 export default function Problem379Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [maxNumbersInput, setMaxNumbersInput] = useState(JSON.stringify(EXAMPLES[0]?.maxNumbers ?? []));
+  const [operationsInput, setOperationsInput] = useState("");
+  const { maxNumbers, operations, inputError } = useMemo(() => {
+    try {
+      const parsedMaxNumbers = JSON.parse(maxNumbersInput); if (!Array.isArray(parsedMaxNumbers)) throw new Error('maxNumbers must be an array');
+      const parsedOperations = JSON.parse(operationsInput); if (!Array.isArray(parsedOperations)) throw new Error('operations must be an array');
+      return { maxNumbers: parsedMaxNumbers, operations: parsedOperations, inputError: '' };
+    } catch (e) {
+      return { maxNumbers: EXAMPLES[exIdx]?.maxNumbers ?? '', operations: EXAMPLES[exIdx]?.operations ?? '', inputError: e.message };
+    }
+  }, [maxNumbersInput, operationsInput]);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]
   const steps = useMemo(
-    () => generateSteps(ex.maxNumbers, ex.operations).map((current) => ({
+    () => generateSteps(maxNumbers, operations).map((current) => ({
       ...current,
       relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
     })),
@@ -154,10 +166,7 @@ export default function Problem379Visualizer() {
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
-  const applyExample = useCallback((idx) => {
-    setExIdx(idx)
-    handleReset()
-  }, [handleReset])
+  const applyExample = useCallback((i) => { setExIdx(i); setMaxNumbersInput(JSON.stringify(EXAMPLES[i].maxNumbers)); setOperationsInput(JSON.stringify(EXAMPLES[i].operations)); handleReset(); }, [handleReset]);
 
   const dockPanels = useMemo(() => [
     {
@@ -209,7 +218,6 @@ export default function Problem379Visualizer() {
           </div>
 
           {step && (
-            <>
               <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
                 <div style={{ fontWeight: 600, marginBottom: 8 }}>{step.message}</div>
               </div>
@@ -315,6 +323,7 @@ export default function Problem379Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         {showPatternOverlay && (

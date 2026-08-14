@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem498Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('diagonal-traverse')
@@ -42,7 +43,7 @@ const EXAMPLES = getExamplesOr('diagonal-traverse', [
 ])
 
 function generateSteps(mat) {
-  const steps = []
+    const steps = []
   const result = []
   steps.push({ activeLine: 1, mat, result: [], visited: new Set(), message: 'Start diagonal traversal' })
   let m = mat.length, n = mat[0].length
@@ -72,17 +73,28 @@ function VisualizationPanel({ mat, step }) {
 }
 
 export default function Problem498Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
-  const steps = useMemo(() => generateSteps(ex.mat).map((c) => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })), [ex])
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [matInput, setMatInput] = useState("[[1,2,3],[4,5,6],[7,8,9]]");
+  const { mat, inputError } = useMemo(() => {
+    try {
+      const parsedMat = JSON.parse(matInput); if (!Array.isArray(parsedMat)) throw new Error('mat must be an array');
+      return { mat: parsedMat, inputError: '' };
+    } catch (e) {
+      return { mat: [[1,2,3],[4,5,6],[7,8,9]], inputError: e.message };
+    }
+  }, [matInput]);
+  const applyEx = useCallback((e) => { setEx(e); setMatInput(JSON.stringify(e.mat)); handleReset(); }, [handleReset]);
+  const steps = useMemo(() => generateSteps(mat).map((c) => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })), [mat])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
   const dockPanels = useMemo(() => [
     { id: 'code', title: 'Code', content: (<CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />) },
-    { id: 'viz', title: '↗️ Diagonal', content: (<VisualizationPanel mat={ex.mat} step={step} />) },
-  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex])
-  return (<div className="problem-shell"><DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} /><FloatingPanel title="Playback Controls">
+    { id: 'viz', title: '↗️ Diagonal', content: (<VisualizationPanel mat={mat} step={step} />) },
+  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, mat])
+  return (<div className="problem-shell">
+      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} /><FloatingPanel title="Playback Controls">
         {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
         <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
       </FloatingPanel>{showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}</div>)

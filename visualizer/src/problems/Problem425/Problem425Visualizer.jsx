@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem425Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -254,17 +255,26 @@ function VisualizationPanel({ words, step, applyEx }) {
 }
 
 export default function Problem425Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [wordsInput, setWordsInput] = useState("[\"abat\",\"baba\",\"atan\",\"tata\"]");
+  const { words, inputError } = useMemo(() => {
+    try {
+      const parsedWords = JSON.parse(wordsInput); if (!Array.isArray(parsedWords)) throw new Error('words must be an array');
+      return { words: parsedWords, inputError: '' };
+    } catch (e) {
+      return { words: "[\"abat\",\"baba\",\"atan\",\"tata\"]", inputError: e.message };
+    }
+  }, [wordsInput]);
   const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(
-    () => generateSteps(ex.words).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),
-    [ex]
+    () => generateSteps(words).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),
+    [words]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setWordsInput(JSON.stringify(e.words)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
@@ -286,12 +296,13 @@ export default function Problem425Visualizer() {
     {
       id: 'viz',
       title: '🔤 Word Squares',
-      content: <VisualizationPanel words={ex.words} step={step} applyEx={applyEx} />,
+      content: <VisualizationPanel words={words} step={step} applyEx={applyEx} />,
     },
   ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, applyEx, ex])
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         <PlaybackControls

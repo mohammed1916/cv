@@ -13,6 +13,7 @@ import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } fr
 import { TreeCanvas3D } from '../../components/viz3d'
 import { getExamples } from '../../config/examplesRegistry'
 import './BinaryTreeLevelOrderTraversalII.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -233,6 +234,19 @@ export default function BinaryTreeLevelOrderTraversalIIVisualizer() {
 
     // Extract panels as consts
     const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"arr","label":"arr","type":"string"}]}
+        values={{ arr: arrInput }}
+        onChange={(k, v) => { if (k === 'arr') setArrInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
         <div className="btloti-panel">
             <VisualizationPanel
                 EXAMPLES={EXAMPLES}
@@ -249,7 +263,8 @@ export default function BinaryTreeLevelOrderTraversalIIVisualizer() {
                 NODE_R={NODE_R}
             />
         </div>
-    )
+    
+    </>)
 
     const statePanel = (
         <div className="btloti-panel">
@@ -283,7 +298,6 @@ export default function BinaryTreeLevelOrderTraversalIIVisualizer() {
     )
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 onReset={handleReset}
@@ -327,7 +341,6 @@ export default function BinaryTreeLevelOrderTraversalIIVisualizer() {
         <div className="btloti-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.state && createPortal(statePanel, panelDivs.state)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}

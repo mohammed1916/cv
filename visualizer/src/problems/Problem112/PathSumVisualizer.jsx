@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './PathSumVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -58,7 +59,8 @@ function buildTree(arr) {
 }
 
 function generateSteps(root, targetSum) {
-  const steps = []
+const applyInput = useCallback((e) => { setInput(e); setRootInput(JSON.stringify(e.root)); setTargetSumInput(String(e.targetSum)); handleReset(); }, [handleReset]);
+    const steps = []
   const tree = buildTree(root)
 
   if (!tree) {
@@ -235,14 +237,25 @@ function VisualizationPanel({ step }) {
 }
 
 export default function PathSumVisualizer() {
-  const [input, setInput] = useState(EXAMPLES[0])
+  const [input, setInput] = useState(EXAMPLES[0]);
+  const [rootInput, setRootInput] = useState("[5,4,8,11,null,13,4,7,2,null,1]");
+  const [targetSumInput, setTargetSumInput] = useState(22);
+  const { root, targetSum, inputError } = useMemo(() => {
+    try {
+      const parsedRoot = JSON.parse(rootInput); if (!Array.isArray(parsedRoot)) throw new Error('root must be an array');
+      const parsedTargetSum = Number(targetSumInput); if (isNaN(parsedTargetSum)) throw new Error('targetSum must be a number');
+      return { root: parsedRoot, targetSum: parsedTargetSum, inputError: '' };
+    } catch (e) {
+      return { root: "[5,4,8,11,null,13,4,7,2,null,1]", targetSum: 22, inputError: e.message };
+    }
+  }, [rootInput, targetSumInput]);
   const steps = useMemo(
     () =>
-      generateSteps(input.root, input.targetSum).map((s) => ({
+      generateSteps(root, targetSum).map((s) => ({
         ...s,
         relatedLines: s.relatedLines ?? (s.activeLine ? [s.activeLine] : []),
       })),
-    [input]
+    [root, targetSum]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
@@ -256,7 +269,8 @@ export default function PathSumVisualizer() {
     <div className="ps-panel">
       <VisualizationPanel step={step} />
     </div>
-  )
+  
+    </>)
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
@@ -288,7 +302,6 @@ export default function PathSumVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend patterns={PATTERNS} linePatternMap={LINE_PATTERN_MAP} />
       )}
@@ -329,7 +342,6 @@ export default function PathSumVisualizer() {
     <div className="ps-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

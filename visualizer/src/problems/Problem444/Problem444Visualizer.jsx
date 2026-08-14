@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem444Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -403,15 +404,26 @@ function VisualizationPanel({ step, applyEx }) {
 }
 
 export default function Problem444Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { org: [1, 2, 3], seqs: [[1, 2], [1, 3]], label: 'Example 1' })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [orgInput, setOrgInput] = useState("[1,2,3]");
+  const [seqsInput, setSeqsInput] = useState("[[1,2],[1,3],[2,3]]");
+  const { org, seqs, inputError } = useMemo(() => {
+    try {
+      const parsedOrg = JSON.parse(orgInput); if (!Array.isArray(parsedOrg)) throw new Error('org must be an array');
+      const parsedSeqs = JSON.parse(seqsInput); if (!Array.isArray(parsedSeqs)) throw new Error('seqs must be an array');
+      return { org: parsedOrg, seqs: parsedSeqs, inputError: '' };
+    } catch (e) {
+      return { org: "[1,2,3]", seqs: "[[1,2],[1,3],[2,3]]", inputError: e.message };
+    }
+  }, [orgInput, seqsInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.org, ex.seqs).map((current) => ({
+      generateSteps(org, seqs).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [org, seqs]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -419,7 +431,7 @@ export default function Problem444Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setOrgInput(JSON.stringify(e.org)); setSeqsInput(JSON.stringify(e.seqs)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -434,7 +446,7 @@ export default function Problem444Visualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
+              <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
@@ -473,7 +485,8 @@ export default function Problem444Visualizer() {
           prevDisabled={stepIndex < 0}
           nextDisabled={isDone}
           resetDisabled={stepIndex < 0}
-          onSpeedChange={e => setSpeed(Number(e.target.value))}
+          onSpeedChange={e => setSpeed(Number(e.target.value
+    </>))}
           showPatternOverlay={showPatternOverlay}
           onShowPatternOverlayChange={setShowPatternOverlay}
           patternOverlayLabel="Show pattern overlay"

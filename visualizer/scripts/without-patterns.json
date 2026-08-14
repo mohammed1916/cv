@@ -1,0 +1,2613 @@
+[
+  {
+    "folder": "Problem103",
+    "number": "103",
+    "title": "Binary Tree Zigzag Level Order Traversal",
+    "pattern": "inputState",
+    "genArgs": "root"
+  },
+  {
+    "folder": "Problem106",
+    "number": "106",
+    "title": "Construct Binary Tree from Inorder and Postorder Traversal",
+    "pattern": "inputState",
+    "genArgs": "inorder, postorder"
+  },
+  {
+    "folder": "Problem112",
+    "number": "112",
+    "title": "Path Sum",
+    "pattern": "inputState",
+    "genArgs": "root, targetSum"
+  },
+  {
+    "folder": "Problem113",
+    "number": "113",
+    "title": "Path Sum II",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "arr, targetSum"
+  },
+  {
+    "folder": "Problem115",
+    "number": "115",
+    "title": "Distinct Subsequences",
+    "pattern": "exOnly",
+    "genArgs": "s, t"
+  },
+  {
+    "folder": "Problem116",
+    "number": "116",
+    "title": "Populating Next Right Pointers in Each Node",
+    "pattern": "inputState",
+    "genArgs": "root"
+  },
+  {
+    "folder": "Problem117",
+    "number": "117",
+    "title": "Populating Next Right Pointers in Each Node II",
+    "pattern": "inputState",
+    "genArgs": "root"
+  },
+  {
+    "folder": "Problem120",
+    "number": "120",
+    "title": "Triangle",
+    "pattern": "inputState",
+    "genArgs": "triangle"
+  },
+  {
+    "folder": "Problem122",
+    "number": "122",
+    "title": "Best Time to Buy and Sell Stock II",
+    "pattern": "inputState",
+    "genArgs": "prices"
+  },
+  {
+    "folder": "Problem126",
+    "number": "126",
+    "title": "Word Ladder II",
+    "pattern": "inputState",
+    "genArgs": "beginWord, endWord, wordList"
+  },
+  {
+    "folder": "Problem129",
+    "number": "129",
+    "title": "Sum Root to Leaf Numbers",
+    "pattern": "inputState",
+    "genArgs": "root"
+  },
+  {
+    "folder": "Problem130",
+    "number": "130",
+    "title": "Surrounded Regions",
+    "pattern": "inputState",
+    "genArgs": "board"
+  },
+  {
+    "folder": "Problem1307",
+    "number": "1307",
+    "title": "Verbal Arithmetic Puzzle",
+    "pattern": "exOnly",
+    "genArgs": "equation"
+  },
+  {
+    "folder": "Problem133",
+    "number": "133",
+    "title": "Clone Graph",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "adj, start = 1"
+  },
+  {
+    "folder": "Problem134",
+    "number": "134",
+    "title": "Gas Station",
+    "pattern": "exOnly",
+    "genArgs": "gas, cost"
+  },
+  {
+    "folder": "Problem135",
+    "number": "135",
+    "title": "Candy",
+    "pattern": "exOnly",
+    "genArgs": "ratingsIn"
+  },
+  {
+    "folder": "Problem136",
+    "number": "136",
+    "title": "Single Number",
+    "pattern": "exOnly",
+    "genArgs": "nums"
+  },
+  {
+    "folder": "Problem137",
+    "number": "137",
+    "title": "Single Number II",
+    "pattern": "inputState",
+    "genArgs": "nums"
+  },
+  {
+    "folder": "Problem138",
+    "number": "138",
+    "title": "Copy List with Random Pointer",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "nodes"
+  },
+  {
+    "folder": "Problem140",
+    "number": "140",
+    "title": "Word Break II",
+    "pattern": "inputState",
+    "genArgs": "s, wordDict"
+  },
+  {
+    "folder": "Problem141",
+    "number": "141",
+    "title": "Linked List Cycle",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "nodeCount, tailConnectsTo"
+  },
+  {
+    "folder": "Problem142",
+    "number": "142",
+    "title": "Linked List Cycle II",
+    "pattern": "inputState",
+    "genArgs": "nodes, cyclePos"
+  },
+  {
+    "folder": "Problem143",
+    "number": "143",
+    "title": "Reorder List",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "arr"
+  },
+  {
+    "folder": "Problem144",
+    "number": "144",
+    "title": "Binary Tree Preorder Traversal",
+    "pattern": "inputState",
+    "genArgs": "arr"
+  },
+  {
+    "folder": "Problem145",
+    "number": "145",
+    "title": "Binary Tree Postorder Traversal",
+    "pattern": "inputState",
+    "genArgs": "arr"
+  },
+  {
+    "folder": "Problem147",
+    "number": "147",
+    "title": "Insertion Sort List",
+    "pattern": "inputState",
+    "genArgs": "arr"
+  },
+  {
+    "folder": "Problem148",
+    "number": "148",
+    "title": "Sort List",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "initial"
+  },
+  {
+    "folder": "Problem149",
+    "number": "149",
+    "title": "Max Points on a Line",
+    "pattern": "exOnly",
+    "genArgs": "points"
+  },
+  {
+    "folder": "Problem151",
+    "number": "151",
+    "title": "Reverse Words in a String",
+    "pattern": "inputState",
+    "genArgs": "s"
+  },
+  {
+    "folder": "Problem154",
+    "number": "154",
+    "title": "Find Minimum in Rotated Sorted Array II",
+    "pattern": "inputState",
+    "genArgs": "nums"
+  },
+  {
+    "folder": "Problem157",
+    "number": "157",
+    "title": "Read N Characters Given Read4",
+    "pattern": "inputState",
+    "genArgs": "file, n"
+  },
+  {
+    "folder": "Problem158",
+    "number": "158",
+    "title": "Read N Characters Given Read4 II - Call multiple times",
+    "pattern": "inputState",
+    "genArgs": "file, callSequence"
+  },
+  {
+    "folder": "Problem159",
+    "number": "159",
+    "title": "Longest Substring with At Most Two Distinct Characters",
+    "pattern": "inputState",
+    "genArgs": "s"
+  },
+  {
+    "folder": "Problem160",
+    "number": "160",
+    "title": "Intersection of Two Linked Lists",
+    "pattern": "exOnly",
+    "genArgs": "ex"
+  },
+  {
+    "folder": "Problem161",
+    "number": "161",
+    "title": "One Edit Distance",
+    "pattern": "inputState",
+    "genArgs": "s1, s2"
+  },
+  {
+    "folder": "Problem162",
+    "number": "162",
+    "title": "Find Peak Element",
+    "pattern": "exOnly",
+    "genArgs": "nums"
+  },
+  {
+    "folder": "Problem163",
+    "number": "163",
+    "title": "Missing Ranges",
+    "pattern": "inputState",
+    "genArgs": "nums, lower, upper"
+  },
+  {
+    "folder": "Problem164",
+    "number": "164",
+    "title": "Maximum Gap",
+    "pattern": "exOnly",
+    "genArgs": "nums"
+  },
+  {
+    "folder": "Problem165",
+    "number": "165",
+    "title": "Compare Version Numbers",
+    "pattern": "inputState",
+    "genArgs": "version1, version2"
+  },
+  {
+    "folder": "Problem166",
+    "number": "166",
+    "title": "Fraction to Recurring Decimal",
+    "pattern": "inputState",
+    "genArgs": "numerator, denominator"
+  },
+  {
+    "folder": "Problem171",
+    "number": "171",
+    "title": "Excel Sheet Column Number",
+    "pattern": "inputState",
+    "genArgs": "s"
+  },
+  {
+    "folder": "Problem174",
+    "number": "174",
+    "title": "Dungeon Game",
+    "pattern": "exOnly",
+    "genArgs": "dungeon"
+  },
+  {
+    "folder": "Problem188",
+    "number": "188",
+    "title": "Best Time to Buy and Sell Stock IV",
+    "pattern": "exOnly",
+    "genArgs": "k, prices"
+  },
+  {
+    "folder": "Problem189",
+    "number": "189",
+    "title": "Rotate Array",
+    "pattern": "exOnly",
+    "genArgs": "inputNums, inputK"
+  },
+  {
+    "folder": "Problem190",
+    "number": "190",
+    "title": "Reverse Bits",
+    "pattern": "exOnly",
+    "genArgs": "nIn"
+  },
+  {
+    "folder": "Problem191",
+    "number": "191",
+    "title": "Number of 1 Bits",
+    "pattern": "exOnly",
+    "genArgs": "nIn"
+  },
+  {
+    "folder": "Problem200",
+    "number": "200",
+    "title": "Number of Islands",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "grid"
+  },
+  {
+    "folder": "Problem202",
+    "number": "202",
+    "title": "Happy Number",
+    "pattern": "inputState",
+    "genArgs": "n"
+  },
+  {
+    "folder": "Problem203",
+    "number": "203",
+    "title": "Remove Linked List Elements",
+    "pattern": "inputState",
+    "genArgs": "head, val"
+  },
+  {
+    "folder": "Problem204",
+    "number": "204",
+    "title": "Count Primes",
+    "pattern": "inputState",
+    "genArgs": "n"
+  },
+  {
+    "folder": "Problem205",
+    "number": "205",
+    "title": "Isomorphic Strings",
+    "pattern": "inputState",
+    "genArgs": "s, t"
+  },
+  {
+    "folder": "Problem207",
+    "number": "207",
+    "title": "Course Schedule",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "numCourses, prerequisites"
+  },
+  {
+    "folder": "Problem208",
+    "number": "208",
+    "title": "Implement Trie",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "word, operation"
+  },
+  {
+    "folder": "Problem211",
+    "number": "211",
+    "title": "Add and Search Word",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "word, isAdd, trie"
+  },
+  {
+    "folder": "Problem212",
+    "number": "212",
+    "title": "Word Search II",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "board, words"
+  },
+  {
+    "folder": "Problem216",
+    "number": "216",
+    "title": "Combination Sum III",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "k, n"
+  },
+  {
+    "folder": "Problem218",
+    "number": "218",
+    "title": "The Skyline Problem",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "buildings"
+  },
+  {
+    "folder": "Problem219",
+    "number": "220",
+    "title": "Contains Duplicate III",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "nums, k, t"
+  },
+  {
+    "folder": "Problem22",
+    "number": "22",
+    "title": "Generate Parentheses",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "n"
+  },
+  {
+    "folder": "Problem220",
+    "number": "217",
+    "title": "Contains Duplicate",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "nums"
+  },
+  {
+    "folder": "Problem221",
+    "number": "221",
+    "title": "Maximal Square",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "matrix"
+  },
+  {
+    "folder": "Problem224",
+    "number": "224",
+    "title": "Basic Calculator",
+    "pattern": "exOnly",
+    "genArgs": "s"
+  },
+  {
+    "folder": "Problem229",
+    "number": "229",
+    "title": "Majority Element II",
+    "pattern": "hardcodedOrOther",
+    "genArgs": ""
+  },
+  {
+    "folder": "Problem231",
+    "number": "231",
+    "title": "Power of Two",
+    "pattern": "exOnly",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem234",
+    "number": "234",
+    "title": "Palindrome Linked List",
+    "pattern": "exOnly",
+    "genArgs": "nums"
+  },
+  {
+    "folder": "Problem240",
+    "number": "240",
+    "title": "Search a 2D Matrix II",
+    "pattern": "hardcodedOrOther",
+    "genArgs": ""
+  },
+  {
+    "folder": "Problem244",
+    "number": "244",
+    "title": "Shortest Word Distance II",
+    "pattern": "hardcodedOrOther",
+    "genArgs": ""
+  },
+  {
+    "folder": "Problem245",
+    "number": "245",
+    "title": "Shortest Word Distance III",
+    "pattern": "hardcodedOrOther",
+    "genArgs": ""
+  },
+  {
+    "folder": "Problem247",
+    "number": "247",
+    "title": "Strobogrammatic Number II",
+    "pattern": "hardcodedOrOther",
+    "genArgs": ""
+  },
+  {
+    "folder": "Problem248",
+    "number": "248",
+    "title": "Strobogrammatic Number III",
+    "pattern": "hardcodedOrOther",
+    "genArgs": ""
+  },
+  {
+    "folder": "Problem25",
+    "number": "25",
+    "title": "Reverse Nodes in k-Group",
+    "pattern": "exOnly",
+    "genArgs": "listIn, k"
+  },
+  {
+    "folder": "Problem251",
+    "number": "251",
+    "title": "Flatten 2D Vector",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem252",
+    "number": "252",
+    "title": "Meeting Rooms",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem253",
+    "number": "253",
+    "title": "Meeting Rooms II",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem254",
+    "number": "254",
+    "title": "Factor Combinations",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem255",
+    "number": "255",
+    "title": "Verify Preorder Serialization of a BST",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem256",
+    "number": "256",
+    "title": "Paint House",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem258",
+    "number": "258",
+    "title": "Add Digits",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem259",
+    "number": "259",
+    "title": "3Sum Smaller",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem26",
+    "number": "26",
+    "title": "Remove Duplicates from Sorted Array",
+    "pattern": "exOnly",
+    "genArgs": "numsIn"
+  },
+  {
+    "folder": "Problem260",
+    "number": "260",
+    "title": "Single Number III",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem261",
+    "number": "261",
+    "title": "Graph Valid Tree",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem262",
+    "number": "262",
+    "title": "Trips and Users",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem263",
+    "number": "263",
+    "title": "Ugly Number",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem264",
+    "number": "264",
+    "title": "Ugly Number II",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem265",
+    "number": "265",
+    "title": "Paint House II",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem266",
+    "number": "266",
+    "title": "Palindrome Permutation",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem267",
+    "number": "267",
+    "title": "Palindrome Permutation II",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem268",
+    "number": "268",
+    "title": "Missing Number",
+    "pattern": "exOnly",
+    "genArgs": "nums"
+  },
+  {
+    "folder": "Problem269",
+    "number": "269",
+    "title": "Alien Dictionary",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem270",
+    "number": "270",
+    "title": "Closest Binary Search Tree Value",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem272",
+    "number": "272",
+    "title": "Closest Binary Search Tree Value II",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem273",
+    "number": "273",
+    "title": "Integer to English Words",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem274",
+    "number": "274",
+    "title": "H-Index",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem275",
+    "number": "275",
+    "title": "H-Index II",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem276",
+    "number": "276",
+    "title": "Paint Fence",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem277",
+    "number": "277",
+    "title": "Find the Celebrity",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem278",
+    "number": "278",
+    "title": "First Bad Version",
+    "pattern": "exOnly",
+    "genArgs": "n, bad"
+  },
+  {
+    "folder": "Problem280",
+    "number": "280",
+    "title": "Wiggle Sort",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem281",
+    "number": "281",
+    "title": "Zigzag Iterator",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem282",
+    "number": "282",
+    "title": "Expression Add Operators",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem283",
+    "number": "283",
+    "title": "Move Zeroes",
+    "pattern": "exOnly",
+    "genArgs": "numsIn"
+  },
+  {
+    "folder": "Problem284",
+    "number": "284",
+    "title": "Peeking Iterator",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem285",
+    "number": "285",
+    "title": "Inorder Successor in BST",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem286",
+    "number": "286",
+    "title": "Walls and Gates",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem288",
+    "number": "288",
+    "title": "Unique Word Abbreviation",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem289",
+    "number": "289",
+    "title": "Game of Life",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "board"
+  },
+  {
+    "folder": "Problem29",
+    "number": "29",
+    "title": "Divide Two Integers",
+    "pattern": "hardcodedOrOther",
+    "genArgs": ""
+  },
+  {
+    "folder": "Problem290",
+    "number": "290",
+    "title": "Word Pattern",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem291",
+    "number": "291",
+    "title": "Word Pattern II",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem292",
+    "number": "292",
+    "title": "Nim Game",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem293",
+    "number": "293",
+    "title": "Flip Game",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem294",
+    "number": "294",
+    "title": "Flip Game II",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem296",
+    "number": "296",
+    "title": "Best Meeting Point",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem297",
+    "number": "297",
+    "title": "Serialize and Deserialize Binary Tree",
+    "pattern": "exOnly",
+    "genArgs": ""
+  },
+  {
+    "folder": "Problem298",
+    "number": "298",
+    "title": "Binary Tree Longest Consecutive Sequence",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem30",
+    "number": "30",
+    "title": "Substring with Concatenation of All Words",
+    "pattern": "exOnly",
+    "genArgs": "s, words"
+  },
+  {
+    "folder": "Problem301",
+    "number": "301",
+    "title": "Remove Invalid Parentheses",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem302",
+    "number": "302",
+    "title": "Smallest Rectangle Enclosing Black Pixels",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem303",
+    "number": "303",
+    "title": "Range Sum Query - Immutable",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem304",
+    "number": "304",
+    "title": "Range Sum Query 2D - Immutable",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem305",
+    "number": "305",
+    "title": "Number of Islands II",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem306",
+    "number": "306",
+    "title": "Additive Number",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem307",
+    "number": "307",
+    "title": "Range Sum Query - Mutable",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem308",
+    "number": "308",
+    "title": "Range Sum Query 2D - Mutable",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem31",
+    "number": "31",
+    "title": "Next Permutation",
+    "pattern": "exOnly",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem310",
+    "number": "310",
+    "title": "Minimum Height Trees",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem311",
+    "number": "311",
+    "title": "Sparse Matrix Multiplication",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem312",
+    "number": "312",
+    "title": "Burst Balloons",
+    "pattern": "exOnly",
+    "genArgs": "numsOrig"
+  },
+  {
+    "folder": "Problem313",
+    "number": "313",
+    "title": "Super Ugly Number",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem314",
+    "number": "314",
+    "title": "Binary Tree Vertical Order Traversal",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem315",
+    "number": "315",
+    "title": "Count of Smaller Numbers After Self",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem316",
+    "number": "316",
+    "title": "Remove Duplicate Letters",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem317",
+    "number": "317",
+    "title": "Shortest Distance from All Buildings",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem318",
+    "number": "318",
+    "title": "Maximum Product of Word Lengths",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem321",
+    "number": "321",
+    "title": "Create Maximum Number",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem323",
+    "number": "323",
+    "title": "Number of Connected Components in an Undirected Graph",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem324",
+    "number": "324",
+    "title": "Wiggle Sort II",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem325",
+    "number": "325",
+    "title": "Maximum Size Subarray Sum Equals k",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem326",
+    "number": "326",
+    "title": "Power of Three",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem327",
+    "number": "327",
+    "title": "Count of Range Sum",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem328",
+    "number": "328",
+    "title": "Odd Even Linked List",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem329",
+    "number": "329",
+    "title": "Longest Increasing Path in a Matrix",
+    "pattern": "exOnly",
+    "genArgs": "matrix"
+  },
+  {
+    "folder": "Problem330",
+    "number": "330",
+    "title": "Patching Array",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem331",
+    "number": "331",
+    "title": "Verify Preorder Serialization of a Binary Tree",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "preorder"
+  },
+  {
+    "folder": "Problem332",
+    "number": "332",
+    "title": "Reconstruct Itinerary",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "tickets"
+  },
+  {
+    "folder": "Problem333",
+    "number": "333",
+    "title": "Largest BST Subtree",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "root"
+  },
+  {
+    "folder": "Problem334",
+    "number": "334",
+    "title": "Increasing Triplet Subsequence",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "nums"
+  },
+  {
+    "folder": "Problem335",
+    "number": "335",
+    "title": "Self Crossing",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "distances"
+  },
+  {
+    "folder": "Problem336",
+    "number": "336",
+    "title": "Palindrome Pairs",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "words"
+  },
+  {
+    "folder": "Problem337",
+    "number": "337",
+    "title": "House Robber III",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "treeArray"
+  },
+  {
+    "folder": "Problem339",
+    "number": "339",
+    "title": "Nested List Weight Sum",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "nestedList"
+  },
+  {
+    "folder": "Problem341",
+    "number": "341",
+    "title": "Flatten Nested List Iterator",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "nestedList"
+  },
+  {
+    "folder": "Problem344",
+    "number": "344",
+    "title": "Reverse String",
+    "pattern": "exOnly",
+    "genArgs": "sIn"
+  },
+  {
+    "folder": "Problem345",
+    "number": "345",
+    "title": "Reverse Vowels of a String",
+    "pattern": "exOnly",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem346",
+    "number": "346",
+    "title": "Moving Average from Data Stream",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem348",
+    "number": "348",
+    "title": "Design Tic-Tac-Toe",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem349",
+    "number": "349",
+    "title": "Intersection of Two Arrays",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem351",
+    "number": "351",
+    "title": "Data Stream as Disjoint Intervals",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "nums"
+  },
+  {
+    "folder": "Problem353",
+    "number": "353",
+    "title": "Design Underground System",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "events"
+  },
+  {
+    "folder": "Problem354",
+    "number": "354",
+    "title": "Russian Doll Envelopes",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "envelopes"
+  },
+  {
+    "folder": "Problem355",
+    "number": "355",
+    "title": "Design Twitter",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "scenario"
+  },
+  {
+    "folder": "Problem356",
+    "number": "356",
+    "title": "Line Reflection",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "points"
+  },
+  {
+    "folder": "Problem357",
+    "number": "357",
+    "title": "Count Numbers with Unique Digits",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "n"
+  },
+  {
+    "folder": "Problem359",
+    "number": "Problem359",
+    "title": "Problem359",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "requests, threshold"
+  },
+  {
+    "folder": "Problem36",
+    "number": "36",
+    "title": "Valid Sudoku",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "board"
+  },
+  {
+    "folder": "Problem360",
+    "number": "360",
+    "title": "Problem360",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "nums, a, b, c"
+  },
+  {
+    "folder": "Problem361",
+    "number": "361",
+    "title": "Bomb Enemy",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "grid"
+  },
+  {
+    "folder": "Problem362",
+    "number": "362",
+    "title": "Design Hit Counter",
+    "pattern": "hardcodedOrOther",
+    "genArgs": ""
+  },
+  {
+    "folder": "Problem363",
+    "number": "363",
+    "title": "Max Sum of Rectangle No Larger Than K",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "matrix, K"
+  },
+  {
+    "folder": "Problem364",
+    "number": "364",
+    "title": "Nested List Weight Sum II",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "nestedList"
+  },
+  {
+    "folder": "Problem365",
+    "number": "365",
+    "title": "Water and Jug Problem",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "a, b, z"
+  },
+  {
+    "folder": "Problem368",
+    "number": "368",
+    "title": "Largest Divisible Subset",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "nums"
+  },
+  {
+    "folder": "Problem369",
+    "number": "369",
+    "title": "Plus One Linked List",
+    "pattern": "exOnly",
+    "genArgs": "head"
+  },
+  {
+    "folder": "Problem37",
+    "number": "37",
+    "title": "Sudoku Solver",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "initBoard"
+  },
+  {
+    "folder": "Problem370",
+    "number": "370",
+    "title": "Range Addition",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "length, updates"
+  },
+  {
+    "folder": "Problem371",
+    "number": "371",
+    "title": "Sum of Two Integers",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "a, b"
+  },
+  {
+    "folder": "Problem372",
+    "number": "372",
+    "title": "Super Power",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "base, exponents"
+  },
+  {
+    "folder": "Problem374",
+    "number": "374",
+    "title": "Guess Number Higher or Lower",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "n, pick"
+  },
+  {
+    "folder": "Problem376",
+    "number": "376",
+    "title": "Wiggle Subsequence",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "nums"
+  },
+  {
+    "folder": "Problem377",
+    "number": "377",
+    "title": "Combination Sum IV",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "nums, target"
+  },
+  {
+    "folder": "Problem378",
+    "number": "378",
+    "title": "Kth Smallest Element in a Sorted Matrix",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "matrix, k"
+  },
+  {
+    "folder": "Problem379",
+    "number": "379",
+    "title": "Design Phone Directory",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "maxNumbers, operations"
+  },
+  {
+    "folder": "Problem380",
+    "number": "380",
+    "title": "Insert Delete GetRandom O(1)",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "operations"
+  },
+  {
+    "folder": "Problem381",
+    "number": "381",
+    "title": "Random Pick with Blacklist",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "n, blacklist"
+  },
+  {
+    "folder": "Problem382",
+    "number": "382",
+    "title": "Linked List Random Node",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "values"
+  },
+  {
+    "folder": "Problem383",
+    "number": "383",
+    "title": "Ransom Note",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "ransomNote, magazine"
+  },
+  {
+    "folder": "Problem384",
+    "number": "384",
+    "title": "Shuffle an Array",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "nums"
+  },
+  {
+    "folder": "Problem385",
+    "number": "385",
+    "title": "Mini Parser",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem386",
+    "number": "386",
+    "title": "Lexicographical Numbers",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "n"
+  },
+  {
+    "folder": "Problem387",
+    "number": "387",
+    "title": "First Unique Character in String",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "s"
+  },
+  {
+    "folder": "Problem388",
+    "number": "388",
+    "title": "Longest Absolute File Path",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem389",
+    "number": "389",
+    "title": "Find the Difference",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "s, t"
+  },
+  {
+    "folder": "Problem390",
+    "number": "390",
+    "title": "Elimination Game",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "n"
+  },
+  {
+    "folder": "Problem397",
+    "number": "397",
+    "title": "Integer Replacement",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "n"
+  },
+  {
+    "folder": "Problem403",
+    "number": "403",
+    "title": "Frog Jump",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "stones"
+  },
+  {
+    "folder": "Problem404",
+    "number": "404",
+    "title": "Sum of Left Leaves",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "tree"
+  },
+  {
+    "folder": "Problem405",
+    "number": "405",
+    "title": "Convert Number to Hex",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "num"
+  },
+  {
+    "folder": "Problem406",
+    "number": "406",
+    "title": "Queue Reconstruction by Height",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "people"
+  },
+  {
+    "folder": "Problem407",
+    "number": "407",
+    "title": "Trapping Rain Water II",
+    "pattern": "exOnly",
+    "genArgs": "heightMap"
+  },
+  {
+    "folder": "Problem408",
+    "number": "408",
+    "title": "Valid Word Abbreviation",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "word, abbr"
+  },
+  {
+    "folder": "Problem409",
+    "number": "409",
+    "title": "Longest Palindrome",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "s"
+  },
+  {
+    "folder": "Problem41",
+    "number": "41",
+    "title": "First Missing Positive",
+    "pattern": "exOnly",
+    "genArgs": "numsIn"
+  },
+  {
+    "folder": "Problem410",
+    "number": "410",
+    "title": "Split Array Largest Sum",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "nums, m"
+  },
+  {
+    "folder": "Problem411",
+    "number": "411",
+    "title": "Minimum Unique Word Abbreviation",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "word, dictionary"
+  },
+  {
+    "folder": "Problem412",
+    "number": "412",
+    "title": "Fizz Buzz",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "n"
+  },
+  {
+    "folder": "Problem413",
+    "number": "413",
+    "title": "Arithmetic Slices",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "nums"
+  },
+  {
+    "folder": "Problem414",
+    "number": "414",
+    "title": "Third Maximum Number",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "nums"
+  },
+  {
+    "folder": "Problem415",
+    "number": "415",
+    "title": "Add Strings",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "num1, num2"
+  },
+  {
+    "folder": "Problem416",
+    "number": "416",
+    "title": "Partition Equal Subset Sum",
+    "pattern": "exOnly",
+    "genArgs": "nums"
+  },
+  {
+    "folder": "Problem417",
+    "number": "417",
+    "title": "Pacific Atlantic Water Flow",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "heights"
+  },
+  {
+    "folder": "Problem418",
+    "number": "418",
+    "title": "Sentence Screen Fitting",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "sentence, rows, cols"
+  },
+  {
+    "folder": "Problem419",
+    "number": "419",
+    "title": "Battleships in a Board",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "board"
+  },
+  {
+    "folder": "Problem420",
+    "number": "420",
+    "title": "Strong Password Checker",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "password"
+  },
+  {
+    "folder": "Problem421",
+    "number": "421",
+    "title": "Maximum XOR of Two Numbers in Array",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "nums"
+  },
+  {
+    "folder": "Problem422",
+    "number": "422",
+    "title": "Valid Word Square",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "words"
+  },
+  {
+    "folder": "Problem423",
+    "number": "423",
+    "title": "Reconstruct Original Digits from English",
+    "pattern": "exOnly",
+    "genArgs": "s"
+  },
+  {
+    "folder": "Problem425",
+    "number": "425",
+    "title": "Word Squares",
+    "pattern": "exOnly",
+    "genArgs": "words"
+  },
+  {
+    "folder": "Problem426",
+    "number": "426",
+    "title": "Convert BST to Sorted Doubly Linked List",
+    "pattern": "exOnly",
+    "genArgs": "root"
+  },
+  {
+    "folder": "Problem427",
+    "number": "427",
+    "title": "Build an Expression Tree from Tokens",
+    "pattern": "exOnly",
+    "genArgs": "tokens"
+  },
+  {
+    "folder": "Problem428",
+    "number": "428",
+    "title": "Serialize and Deserialize N-ary Tree",
+    "pattern": "exOnly",
+    "genArgs": "root"
+  },
+  {
+    "folder": "Problem429",
+    "number": "429",
+    "title": "N-ary Tree Level Order Traversal",
+    "pattern": "exOnly",
+    "genArgs": "root"
+  },
+  {
+    "folder": "Problem430",
+    "number": "430",
+    "title": "Flatten a Multilevel Doubly Linked List",
+    "pattern": "exOnly",
+    "genArgs": "structure"
+  },
+  {
+    "folder": "Problem431",
+    "number": "431",
+    "title": "Encode N-ary Tree to Binary Tree",
+    "pattern": "exOnly",
+    "genArgs": "naryStructure"
+  },
+  {
+    "folder": "Problem432",
+    "number": "432",
+    "title": "All O(1) Data Structure",
+    "pattern": "exOnly",
+    "genArgs": "operations"
+  },
+  {
+    "folder": "Problem433",
+    "number": "433",
+    "title": "Minimum Genetic Mutation",
+    "pattern": "exOnly",
+    "genArgs": "start, end, bank"
+  },
+  {
+    "folder": "Problem435",
+    "number": "435",
+    "title": "Non-overlapping Intervals",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "intervals"
+  },
+  {
+    "folder": "Problem436",
+    "number": "436",
+    "title": "Find Right Interval",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "intervals"
+  },
+  {
+    "folder": "Problem437",
+    "number": "437",
+    "title": "Path Sum III",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "treeArr, target"
+  },
+  {
+    "folder": "Problem438",
+    "number": "438",
+    "title": "Find All Anagrams in String",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "s, p"
+  },
+  {
+    "folder": "Problem439",
+    "number": "439",
+    "title": "Ternary Expression Parser",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "expression"
+  },
+  {
+    "folder": "Problem44",
+    "number": "44",
+    "title": "Wildcard Matching",
+    "pattern": "exOnly",
+    "genArgs": "s, p"
+  },
+  {
+    "folder": "Problem440",
+    "number": "440",
+    "title": "K-th Smallest in Lexicographical Order",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "n, k"
+  },
+  {
+    "folder": "Problem441",
+    "number": "441",
+    "title": "Arranging Coins",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "n"
+  },
+  {
+    "folder": "Problem442",
+    "number": "442",
+    "title": "Find All Duplicates in Array",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "nums"
+  },
+  {
+    "folder": "Problem443",
+    "number": "443",
+    "title": "String Compression",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "chars"
+  },
+  {
+    "folder": "Problem444",
+    "number": "444",
+    "title": "Sequence Reconstruction",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "org, seqs"
+  },
+  {
+    "folder": "Problem45",
+    "number": "45",
+    "title": "Jump Game II",
+    "pattern": "exOnly",
+    "genArgs": "nums"
+  },
+  {
+    "folder": "Problem460",
+    "number": "460",
+    "title": "LFU Cache",
+    "pattern": "exOnly",
+    "genArgs": "capacity, ops"
+  },
+  {
+    "folder": "Problem463",
+    "number": "463",
+    "title": "Island Perimeter",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "grid"
+  },
+  {
+    "folder": "Problem466",
+    "number": "466",
+    "title": "Count The Repetitions",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "s1, s2"
+  },
+  {
+    "folder": "Problem467",
+    "number": "467",
+    "title": "Unique Substrings in Wraparound String",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "s"
+  },
+  {
+    "folder": "Problem468",
+    "number": "468",
+    "title": "Validate IP Address",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "ip"
+  },
+  {
+    "folder": "Problem469",
+    "number": "469",
+    "title": "Convex Polygon",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "points"
+  },
+  {
+    "folder": "Problem47",
+    "number": "47",
+    "title": "Permutations II",
+    "pattern": "hardcodedOrOther",
+    "genArgs": ""
+  },
+  {
+    "folder": "Problem470",
+    "number": "470",
+    "title": "Implement Rand10()",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "calls"
+  },
+  {
+    "folder": "Problem471",
+    "number": "471",
+    "title": "Encode String with Shortest Length",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "s"
+  },
+  {
+    "folder": "Problem472",
+    "number": "472",
+    "title": "Concatenated Words",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "words"
+  },
+  {
+    "folder": "Problem473",
+    "number": "473",
+    "title": "Matchsticks to Square",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "nums"
+  },
+  {
+    "folder": "Problem474",
+    "number": "474",
+    "title": "Ones and Zeroes",
+    "pattern": "exOnly",
+    "genArgs": "strs, m, n"
+  },
+  {
+    "folder": "Problem475",
+    "number": "475",
+    "title": "Heaters",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "houses, heaters"
+  },
+  {
+    "folder": "Problem476",
+    "number": "476",
+    "title": "Number Complement",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "num"
+  },
+  {
+    "folder": "Problem477",
+    "number": "477",
+    "title": "Total Hamming Distance",
+    "pattern": "exOnly",
+    "genArgs": "nums"
+  },
+  {
+    "folder": "Problem478",
+    "number": "478",
+    "title": "Generate Random Point in a Circle",
+    "pattern": "exOnly",
+    "genArgs": "radius"
+  },
+  {
+    "folder": "Problem479",
+    "number": "479",
+    "title": "Largest Palindrome Product",
+    "pattern": "exOnly",
+    "genArgs": "n"
+  },
+  {
+    "folder": "Problem48",
+    "number": "48",
+    "title": "Rotate Image",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "initial"
+  },
+  {
+    "folder": "Problem480",
+    "number": "480",
+    "title": "Sliding Window Median",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "nums, k"
+  },
+  {
+    "folder": "Problem481",
+    "number": "481",
+    "title": "Magical String",
+    "pattern": "exOnly",
+    "genArgs": "n"
+  },
+  {
+    "folder": "Problem482",
+    "number": "482",
+    "title": "License Key Formatting",
+    "pattern": "exOnly",
+    "genArgs": "s, k"
+  },
+  {
+    "folder": "Problem483",
+    "number": "483",
+    "title": "Smallest Good Base",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "n"
+  },
+  {
+    "folder": "Problem484",
+    "number": "484",
+    "title": "Find Permutation",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "s"
+  },
+  {
+    "folder": "Problem486",
+    "number": "486",
+    "title": "Predict the Winner",
+    "pattern": "exOnly",
+    "genArgs": "nums"
+  },
+  {
+    "folder": "Problem487",
+    "number": "487",
+    "title": "Max Consecutive Ones III",
+    "pattern": "exOnly",
+    "genArgs": "nums, k"
+  },
+  {
+    "folder": "Problem488",
+    "number": "488",
+    "title": "Zuma Game",
+    "pattern": "exOnly",
+    "genArgs": "board, hand"
+  },
+  {
+    "folder": "Problem489",
+    "number": "489",
+    "title": "Robot Room Cleaner",
+    "pattern": "exOnly",
+    "genArgs": "room"
+  },
+  {
+    "folder": "Problem490",
+    "number": "490",
+    "title": "The Maze",
+    "pattern": "exOnly",
+    "genArgs": "maze, start, destination"
+  },
+  {
+    "folder": "Problem491",
+    "number": "491",
+    "title": "Increasing Subsequences",
+    "pattern": "exOnly",
+    "genArgs": "nums"
+  },
+  {
+    "folder": "Problem492",
+    "number": "492",
+    "title": "Construct the Rectangle",
+    "pattern": "exOnly",
+    "genArgs": "area"
+  },
+  {
+    "folder": "Problem493",
+    "number": "493",
+    "title": "Reverse Pairs",
+    "pattern": "exOnly",
+    "genArgs": "nums"
+  },
+  {
+    "folder": "Problem494",
+    "number": "494",
+    "title": "Target Sum",
+    "pattern": "exOnly",
+    "genArgs": "nums, target"
+  },
+  {
+    "folder": "Problem495",
+    "number": "495",
+    "title": "Teemo Attacking",
+    "pattern": "exOnly",
+    "genArgs": "timeSeries, duration"
+  },
+  {
+    "folder": "Problem496",
+    "number": "496",
+    "title": "Next Greater Element I",
+    "pattern": "exOnly",
+    "genArgs": "nums1, nums2"
+  },
+  {
+    "folder": "Problem497",
+    "number": "497",
+    "title": "Random Point in Rectangles",
+    "pattern": "exOnly",
+    "genArgs": "rects"
+  },
+  {
+    "folder": "Problem498",
+    "number": "498",
+    "title": "Diagonal Traverse",
+    "pattern": "exOnly",
+    "genArgs": "mat"
+  },
+  {
+    "folder": "Problem499",
+    "number": "499",
+    "title": "The Maze III",
+    "pattern": "exOnly",
+    "genArgs": "maze, ball, hole"
+  },
+  {
+    "folder": "Problem50",
+    "number": "50",
+    "title": "Pow(x, n)",
+    "pattern": "exOnly",
+    "genArgs": "x, n"
+  },
+  {
+    "folder": "Problem500",
+    "number": "Problem500",
+    "title": "Keyboard Row",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "words"
+  },
+  {
+    "folder": "Problem501",
+    "number": "Problem501",
+    "title": "Find Mode in Binary Search Tree",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "treeArray"
+  },
+  {
+    "folder": "Problem502",
+    "number": "502",
+    "title": "IPO",
+    "pattern": "exOnly",
+    "genArgs": "k, initW, profits, capital"
+  },
+  {
+    "folder": "Problem505",
+    "number": "505",
+    "title": "Distribute Candies to People",
+    "pattern": "inputState",
+    "genArgs": "n, k"
+  },
+  {
+    "folder": "Problem506",
+    "number": "506",
+    "title": "Relative Ranks",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "nums"
+  },
+  {
+    "folder": "Problem507",
+    "number": "507",
+    "title": "Perfect Number",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "n"
+  },
+  {
+    "folder": "Problem508",
+    "number": "508",
+    "title": "Most Frequent Subtree Sum",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "arr"
+  },
+  {
+    "folder": "Problem509",
+    "number": "509",
+    "title": "Fibonacci Number",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "n"
+  },
+  {
+    "folder": "Problem51",
+    "number": "51",
+    "title": "N-Queens",
+    "pattern": "exOnly",
+    "genArgs": "n"
+  },
+  {
+    "folder": "Problem510",
+    "number": "510",
+    "title": "Inorder Successor in Binary Search Tree II",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "values, target"
+  },
+  {
+    "folder": "Problem511",
+    "number": "511",
+    "title": "Game Play Analysis I",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "events"
+  },
+  {
+    "folder": "Problem512",
+    "number": "512",
+    "title": "Game Play Analysis II",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "events"
+  },
+  {
+    "folder": "Problem513",
+    "number": "513",
+    "title": "Find Bottom Left Tree Value",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "arr"
+  },
+  {
+    "folder": "Problem514",
+    "number": "514",
+    "title": "Freedom Trail",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "ring, key"
+  },
+  {
+    "folder": "Problem515",
+    "number": "515",
+    "title": "Find Largest Value in Each Tree Row",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "arr"
+  },
+  {
+    "folder": "Problem516",
+    "number": "516",
+    "title": "Longest Palindromic Subsequence",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "s"
+  },
+  {
+    "folder": "Problem517",
+    "number": "517",
+    "title": "Super Washing Machines",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "machines"
+  },
+  {
+    "folder": "Problem518",
+    "number": "518",
+    "title": "Coin Change 2",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "amount, coins"
+  },
+  {
+    "folder": "Problem519",
+    "number": "519",
+    "title": "Random Flip Matrix",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "m, n, flips"
+  },
+  {
+    "folder": "Problem52",
+    "number": "52",
+    "title": "N-Queens II",
+    "pattern": "exOnly",
+    "genArgs": "n"
+  },
+  {
+    "folder": "Problem520",
+    "number": "520",
+    "title": "Detect Capital",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "word"
+  },
+  {
+    "folder": "Problem521",
+    "number": "521",
+    "title": "Longest Uncommon Subsequence I",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "a, b"
+  },
+  {
+    "folder": "Problem522",
+    "number": "522",
+    "title": "Longest Uncommon Subsequence II",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "strs"
+  },
+  {
+    "folder": "Problem523",
+    "number": "523",
+    "title": "Continuous Subarray Sum",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "nums, k"
+  },
+  {
+    "folder": "Problem524",
+    "number": "524",
+    "title": "Longest Word in Dictionary through Deleting Letters",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "s, dictionary"
+  },
+  {
+    "folder": "Problem525",
+    "number": "525",
+    "title": "Contiguous Array",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "arr"
+  },
+  {
+    "folder": "Problem526",
+    "number": "526",
+    "title": "Beautiful Arrangement",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "n"
+  },
+  {
+    "folder": "Problem527",
+    "number": "527",
+    "title": "Word Abbreviation",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "dict"
+  },
+  {
+    "folder": "Problem528",
+    "number": "528",
+    "title": "Random Pick With Weight",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "w"
+  },
+  {
+    "folder": "Problem529",
+    "number": "529",
+    "title": "Minesweeper",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "board, click"
+  },
+  {
+    "folder": "Problem530",
+    "number": "530",
+    "title": "Minimum Absolute Difference in BST",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "root"
+  },
+  {
+    "folder": "Problem531",
+    "number": "531",
+    "title": "Lonely Pixel I",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "picture"
+  },
+  {
+    "folder": "Problem532",
+    "number": "532",
+    "title": "K-Diff Pairs in Array",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "nums, k"
+  },
+  {
+    "folder": "Problem533",
+    "number": "533",
+    "title": "Lonely Pixel II",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "picture, N"
+  },
+  {
+    "folder": "Problem534",
+    "number": "534",
+    "title": "Design Log Storage System",
+    "pattern": "hardcodedOrOther",
+    "genArgs": ""
+  },
+  {
+    "folder": "Problem535",
+    "number": "535",
+    "title": "Encode and Decode TinyURL",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "url"
+  },
+  {
+    "folder": "Problem536",
+    "number": "536",
+    "title": "Construct Binary Tree from String",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "s"
+  },
+  {
+    "folder": "Problem538",
+    "number": "538",
+    "title": "Convert BST to Greater Tree",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "root"
+  },
+  {
+    "folder": "Problem539",
+    "number": "539",
+    "title": "Minimum Time Difference",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "timePoints"
+  },
+  {
+    "folder": "Problem540",
+    "number": "540",
+    "title": "Single Element in Sorted Array",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "nums"
+  },
+  {
+    "folder": "Problem542",
+    "number": "542",
+    "title": "01 Matrix",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "matrix"
+  },
+  {
+    "folder": "Problem547",
+    "number": "547",
+    "title": "Number of Provinces",
+    "pattern": "hardcodedOrOther",
+    "genArgs": ""
+  },
+  {
+    "folder": "Problem550",
+    "number": "Problem550",
+    "title": "Game Play Analysis I",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "activity"
+  },
+  {
+    "folder": "Problem553",
+    "number": "Problem553",
+    "title": "Optimal Division",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "numsStr"
+  },
+  {
+    "folder": "Problem554",
+    "number": "Problem554",
+    "title": "Brick Wall",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "wallInput"
+  },
+  {
+    "folder": "Problem555",
+    "number": "Problem555",
+    "title": "Split Concatenated Strings",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "strs"
+  },
+  {
+    "folder": "Problem559",
+    "number": "Problem559",
+    "title": "Maximum Depth of N-ary Tree",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "arr"
+  },
+  {
+    "folder": "Problem561",
+    "number": "Problem561",
+    "title": "Array Partition I",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "numsInput"
+  },
+  {
+    "folder": "Problem562",
+    "number": "Problem562",
+    "title": "Longest Line of Consecutive One in Matrix",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "matrix"
+  },
+  {
+    "folder": "Problem563",
+    "number": "Problem563",
+    "title": "Binary Tree Tilt",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "arr"
+  },
+  {
+    "folder": "Problem565",
+    "number": "Problem565",
+    "title": "Array Nesting",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "arrayInput"
+  },
+  {
+    "folder": "Problem567",
+    "number": "567",
+    "title": "Permutation in String",
+    "pattern": "exOnly",
+    "genArgs": "s1, s2"
+  },
+  {
+    "folder": "Problem569",
+    "number": "Problem569",
+    "title": "Median Employee Salary",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem57",
+    "number": "57",
+    "title": "Insert Interval",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "intervals, newInterval"
+  },
+  {
+    "folder": "Problem570",
+    "number": "Problem570",
+    "title": "Managers with at Least 5 Direct Reports",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem571",
+    "number": "Problem571",
+    "title": "Maximum Distance in Arrays",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "arrays"
+  },
+  {
+    "folder": "Problem575",
+    "number": "Problem575",
+    "title": "Distribute Candies",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "candies"
+  },
+  {
+    "folder": "Problem577",
+    "number": "Problem577",
+    "title": "Employee Free Time",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "schedules"
+  },
+  {
+    "folder": "Problem578",
+    "number": "Problem578",
+    "title": "Get Highest Answer Rate Question",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "questions, answers"
+  },
+  {
+    "folder": "Problem579",
+    "number": "579",
+    "title": "Find Cumulative Salary of an Employee",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "employees"
+  },
+  {
+    "folder": "Problem58",
+    "number": "58",
+    "title": "Length of Last Word",
+    "pattern": "exOnly",
+    "genArgs": "sIn"
+  },
+  {
+    "folder": "Problem580",
+    "number": "Problem580",
+    "title": "Count Student Number in Departments",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "students"
+  },
+  {
+    "folder": "Problem581",
+    "number": "Problem581",
+    "title": "Shortest Unsorted Continuous Subarray",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "nums"
+  },
+  {
+    "folder": "Problem583",
+    "number": "Problem583",
+    "title": "Delete Operation for Two Strings",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "s1, s2"
+  },
+  {
+    "folder": "Problem584",
+    "number": "Problem584",
+    "title": "Find Customer Referee",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "customers, targetRefereeId = 2"
+  },
+  {
+    "folder": "Problem586",
+    "number": "Problem586",
+    "title": "Customer Placing Largest Orders",
+    "pattern": "inputState",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem587",
+    "number": "Problem587",
+    "title": "Erect the Fence",
+    "pattern": "hardcodedOrOther",
+    "genArgs": ""
+  },
+  {
+    "folder": "Problem61",
+    "number": "61",
+    "title": "Rotate List",
+    "pattern": "exOnly",
+    "genArgs": "list, k"
+  },
+  {
+    "folder": "Problem64",
+    "number": "64",
+    "title": "Minimum Path Sum",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "grid"
+  },
+  {
+    "folder": "Problem65",
+    "number": "65",
+    "title": "Valid Number",
+    "pattern": "exOnly",
+    "genArgs": "s"
+  },
+  {
+    "folder": "Problem66",
+    "number": "66",
+    "title": "Plus One",
+    "pattern": "exOnly",
+    "genArgs": "digIn"
+  },
+  {
+    "folder": "Problem67",
+    "number": "67",
+    "title": "Add Binary",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "a, b"
+  },
+  {
+    "folder": "Problem68",
+    "number": "68",
+    "title": "Text Justification",
+    "pattern": "exOnly",
+    "genArgs": "words, maxWidth"
+  },
+  {
+    "folder": "Problem69",
+    "number": "69",
+    "title": "Sqrt(x)",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "x"
+  },
+  {
+    "folder": "Problem695",
+    "number": "695",
+    "title": "Max Area of Island",
+    "pattern": "hardcodedOrOther",
+    "genArgs": ""
+  },
+  {
+    "folder": "Problem71",
+    "number": "71",
+    "title": "Simplify Path",
+    "pattern": "exOnly",
+    "genArgs": "path"
+  },
+  {
+    "folder": "Problem72",
+    "number": "72",
+    "title": "Edit Distance",
+    "pattern": "exOnly",
+    "genArgs": "w1, w2"
+  },
+  {
+    "folder": "Problem721",
+    "number": "721",
+    "title": "Accounts Merge",
+    "pattern": "hardcodedOrOther",
+    "genArgs": ""
+  },
+  {
+    "folder": "Problem73",
+    "number": "73",
+    "title": "Set Matrix Zeroes",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "initial"
+  },
+  {
+    "folder": "Problem74",
+    "number": "74",
+    "title": "Search a 2D Matrix",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "matrix, target"
+  },
+  {
+    "folder": "Problem743",
+    "number": "743",
+    "title": "Network Delay Time",
+    "pattern": "hardcodedOrOther",
+    "genArgs": ""
+  },
+  {
+    "folder": "Problem746",
+    "number": "746",
+    "title": "Min Cost Climbing Stairs",
+    "pattern": "inputState",
+    "genArgs": "cost"
+  },
+  {
+    "folder": "Problem75",
+    "number": "75",
+    "title": "Sort Colors",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "initial"
+  },
+  {
+    "folder": "Problem778",
+    "number": "778",
+    "title": "Swim in Rising Water",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "grid"
+  },
+  {
+    "folder": "Problem80",
+    "number": "80",
+    "title": "Remove Duplicates from Sorted Array II",
+    "pattern": "exOnly",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem83",
+    "number": "83",
+    "title": "Remove Duplicates from Sorted List",
+    "pattern": "inputState",
+    "genArgs": "input"
+  },
+  {
+    "folder": "Problem85",
+    "number": "85",
+    "title": "Maximal Rectangle",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "matrix"
+  },
+  {
+    "folder": "Problem86",
+    "number": "86",
+    "title": "Partition List",
+    "pattern": "exOnly",
+    "genArgs": "list, x"
+  },
+  {
+    "folder": "Problem87",
+    "number": "87",
+    "title": "Scramble String",
+    "pattern": "hardcodedOrOther",
+    "genArgs": "s1, s2"
+  },
+  {
+    "folder": "Problem88",
+    "number": "88",
+    "title": "Merge Sorted Array",
+    "pattern": "exOnly",
+    "genArgs": "nums1Init, m, nums2, n"
+  },
+  {
+    "folder": "Problem90",
+    "number": "90",
+    "title": "Subsets II",
+    "pattern": "exOnly",
+    "genArgs": "inputNums"
+  },
+  {
+    "folder": "Problem92",
+    "number": "92",
+    "title": "Reverse Linked List II",
+    "pattern": "exOnly",
+    "genArgs": "list, left, right"
+  },
+  {
+    "folder": "Problem94",
+    "number": "94",
+    "title": "Binary Tree Inorder Traversal",
+    "pattern": "exOnly",
+    "genArgs": "treeArr"
+  },
+  {
+    "folder": "Problem95",
+    "number": "95",
+    "title": "Unique Binary Search Trees II",
+    "pattern": "exOnly",
+    "genArgs": "n"
+  },
+  {
+    "folder": "Problem96",
+    "number": "96",
+    "title": "Unique Binary Search Trees",
+    "pattern": "exOnly",
+    "genArgs": "n"
+  },
+  {
+    "folder": "Problem97",
+    "number": "97",
+    "title": "Interleaving String",
+    "pattern": "exOnly",
+    "genArgs": "s1, s2, s3"
+  },
+  {
+    "folder": "Problem99",
+    "number": "99",
+    "title": "Recover Binary Search Tree",
+    "pattern": "exOnly",
+    "genArgs": "treeArr"
+  }
+]

@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem487Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('max-consecutive-ones-iii')
@@ -219,12 +220,23 @@ function VisualizationPanel({ nums, step, applyEx, k }) {
 }
 
 export default function Problem487Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
-  const k = ex.k || 1
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [numsInput, setNumsInput] = useState("[1,1,1,0,0,0,1,1,1,1,0]");
+  const [kInput, setKInput] = useState(2);
+  const { nums: inputNums, k: inputK, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      const parsedK = Number(kInput); if (isNaN(parsedK)) throw new Error('k must be a number');
+      return { nums: parsedNums, k: parsedK, inputError: '' };
+    } catch (e) {
+      return { nums: "[1,1,1,0,0,0,1,1,1,1,0]", k: 2, inputError: e.message };
+    }
+  }, [numsInput, kInput]);
+  const k = inputK || 1
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.nums, k).map((current) => ({
+      generateSteps(inputNums, k).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
@@ -236,7 +248,7 @@ export default function Problem487Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setNumsInput(JSON.stringify(e.nums)); setKInput(String(e.k)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -265,7 +277,7 @@ export default function Problem487Visualizer() {
       title: '🔄 Max Consecutive Ones III',
       content: (
         <VisualizationPanel
-          nums={ex.nums}
+          nums={nums}
           step={step}
           applyEx={applyEx}
           k={k}
@@ -276,6 +288,7 @@ export default function Problem487Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

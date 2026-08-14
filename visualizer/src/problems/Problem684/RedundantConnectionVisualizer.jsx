@@ -11,6 +11,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 import './RedundantConnectionVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -128,6 +129,19 @@ export default function RedundantConnectionVisualizer() {
   )
 
   const vizPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"edges","label":"edges","type":"string"}]}
+        values={{ edges: edgesInput }}
+        onChange={(k, v) => { if (k === 'edges') setEdgesInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {EXAMPLES.map(ex => (
@@ -172,7 +186,8 @@ export default function RedundantConnectionVisualizer() {
         </div>
       )}
     </div>
-  )
+  
+    </>)
 
   const [panelDivs, setPanelDivs] = useState(null)
   const panelConfigs = useMemo(() => [
@@ -185,7 +200,6 @@ export default function RedundantConnectionVisualizer() {
     <div className="problem-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
         </>

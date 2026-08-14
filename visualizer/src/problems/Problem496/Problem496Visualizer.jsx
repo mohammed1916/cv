@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem496Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
 
 const PATTERNS = {
@@ -286,17 +287,28 @@ const SOLUTION_CODE_INLINE = [
 ]
 
 export default function Problem496Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [nums1Input, setNums1Input] = useState("[4,1,2]");
+  const [nums2Input, setNums2Input] = useState("[1,3,4,2]");
+  const { nums1, nums2, inputError } = useMemo(() => {
+    try {
+      const parsedNums1 = JSON.parse(nums1Input); if (!Array.isArray(parsedNums1)) throw new Error('nums1 must be an array');
+      const parsedNums2 = JSON.parse(nums2Input); if (!Array.isArray(parsedNums2)) throw new Error('nums2 must be an array');
+      return { nums1: parsedNums1, nums2: parsedNums2, inputError: '' };
+    } catch (e) {
+      return { nums1: "[4,1,2]", nums2: "[1,3,4,2]", inputError: e.message };
+    }
+  }, [nums1Input, nums2Input]);
   const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(
-    () => generateSteps(ex.nums1, ex.nums2).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),
-    [ex]
+    () => generateSteps(nums1, nums2).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),
+    [nums1, nums2]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setNums1Input(JSON.stringify(e.nums1)); setNums2Input(JSON.stringify(e.nums2)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
@@ -318,12 +330,13 @@ export default function Problem496Visualizer() {
     {
       id: 'viz',
       title: '📈 Next Greater Element',
-      content: <VisualizationPanel nums1={ex.nums1} nums2={ex.nums2} step={step} applyEx={applyEx} />,
+      content: <VisualizationPanel nums1={nums1} nums2={nums2} step={step} applyEx={applyEx} />,
     },
   ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, applyEx, ex])
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}

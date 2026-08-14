@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem428Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -167,8 +168,17 @@ function VisualizationPanel({ root, step }) {
 }
 
 export default function Problem428Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
-  const root = useMemo(() => normalize(ex.tree), [ex])
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [treeInput, setTreeInput] = useState("[object Object]");
+  const { tree, inputError } = useMemo(() => {
+    try {
+      const parsedTree = treeInput;
+      return { tree: parsedTree, inputError: '' };
+    } catch (e) {
+      return { tree: "[object Object]", inputError: e.message };
+    }
+  }, [treeInput]);
+  const root = useMemo(() => normalize(tree), [tree])
   const steps = useMemo(
     () => generateSteps(root).map((c) => ({
       ...c,
@@ -179,7 +189,7 @@ export default function Problem428Visualizer() {
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setTreeInput(String(e.tree)); handleReset(); }, [handleReset]);
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
   const dockPanels = useMemo(() => [
@@ -200,6 +210,7 @@ export default function Problem428Visualizer() {
   ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, root])
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         <PlaybackControls

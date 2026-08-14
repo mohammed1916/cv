@@ -1,0 +1,6050 @@
+{
+  "Problem103": {
+    "fields": [
+      "root"
+    ],
+    "types": {
+      "root": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "root": [
+        3,
+        9,
+        20,
+        null,
+        null,
+        15,
+        7
+      ]
+    }
+  },
+  "Problem106": {
+    "fields": [
+      "inorder",
+      "postorder"
+    ],
+    "types": {
+      "inorder": "array",
+      "postorder": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "inorder": [
+        9,
+        3,
+        15,
+        20,
+        7
+      ],
+      "postorder": [
+        9,
+        15,
+        7,
+        20,
+        3
+      ]
+    }
+  },
+  "Problem112": {
+    "fields": [
+      "root",
+      "targetSum"
+    ],
+    "types": {
+      "root": "array",
+      "targetSum": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "root": [
+        5,
+        4,
+        8,
+        11,
+        null,
+        13,
+        4,
+        7,
+        2,
+        null,
+        1
+      ],
+      "targetSum": 22
+    }
+  },
+  "Problem113": {
+    "fields": [
+      "root",
+      "targetSum"
+    ],
+    "types": {
+      "root": "array",
+      "targetSum": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "root": [
+        5,
+        4,
+        8,
+        11,
+        null,
+        13,
+        4,
+        7,
+        2,
+        null,
+        null,
+        5,
+        1
+      ],
+      "targetSum": 22
+    }
+  },
+  "Problem115": {
+    "fields": [
+      "s",
+      "t"
+    ],
+    "types": {
+      "s": "string",
+      "t": "string"
+    },
+    "example": {
+      "label": "Example 1",
+      "s": "rabbbit",
+      "t": "rabbit"
+    }
+  },
+  "Problem116": {
+    "fields": [
+      "root"
+    ],
+    "types": {
+      "root": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "root": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  "Problem117": {
+    "fields": [
+      "root"
+    ],
+    "types": {
+      "root": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "root": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        null,
+        7
+      ]
+    }
+  },
+  "Problem120": {
+    "fields": [
+      "triangle"
+    ],
+    "types": {
+      "triangle": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "triangle": [
+        [
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          6,
+          5,
+          7
+        ],
+        [
+          4,
+          1,
+          8,
+          3
+        ]
+      ]
+    }
+  },
+  "Problem122": {
+    "fields": [
+      "prices"
+    ],
+    "types": {
+      "prices": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "prices": [
+        7,
+        1,
+        5,
+        3,
+        6,
+        4
+      ]
+    }
+  },
+  "Problem126": {
+    "fields": [
+      "beginWord",
+      "endWord",
+      "wordList"
+    ],
+    "types": {
+      "beginWord": "string",
+      "endWord": "string",
+      "wordList": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "beginWord": "hit",
+      "endWord": "cog",
+      "wordList": [
+        "hot",
+        "dot",
+        "dog",
+        "lot",
+        "log",
+        "cog"
+      ]
+    }
+  },
+  "Problem129": {
+    "fields": [
+      "root"
+    ],
+    "types": {
+      "root": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "root": [
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  "Problem130": {
+    "fields": [
+      "board"
+    ],
+    "types": {
+      "board": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "board": [
+        [
+          "X",
+          "X",
+          "X",
+          "X"
+        ],
+        [
+          "X",
+          "O",
+          "O",
+          "X"
+        ],
+        [
+          "X",
+          "X",
+          "O",
+          "X"
+        ],
+        [
+          "X",
+          "O",
+          "X",
+          "X"
+        ]
+      ]
+    }
+  },
+  "Problem1307": {
+    "fields": [
+      "equation"
+    ],
+    "types": {
+      "equation": "string"
+    },
+    "example": {
+      "label": "Example 1",
+      "equation": "SEND+MORE=MONEY"
+    }
+  },
+  "Problem133": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem134": {
+    "fields": [
+      "gas",
+      "cost"
+    ],
+    "types": {
+      "gas": "array",
+      "cost": "array"
+    },
+    "example": {
+      "label": "Ex 1",
+      "gas": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "cost": [
+        3,
+        4,
+        5,
+        1,
+        2
+      ]
+    }
+  },
+  "Problem135": {
+    "fields": [
+      "ratings"
+    ],
+    "types": {
+      "ratings": "array"
+    },
+    "example": {
+      "label": "Ex 1",
+      "ratings": [
+        1,
+        0,
+        2
+      ]
+    }
+  },
+  "Problem136": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "Ex 1",
+      "nums": [
+        2,
+        2,
+        1
+      ]
+    }
+  },
+  "Problem137": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "nums": [
+        2,
+        2,
+        3,
+        2
+      ]
+    }
+  },
+  "Problem138": {
+    "fields": [
+      "nodes"
+    ],
+    "types": {
+      "nodes": "array"
+    },
+    "example": {
+      "label": "Ex1",
+      "nodes": [
+        {
+          "val": 7,
+          "random": null
+        },
+        {
+          "val": 13,
+          "random": 0
+        },
+        {
+          "val": 11,
+          "random": 4
+        },
+        {
+          "val": 10,
+          "random": 2
+        },
+        {
+          "val": 1,
+          "random": 0
+        }
+      ]
+    }
+  },
+  "Problem140": {
+    "fields": [
+      "s",
+      "wordDict"
+    ],
+    "types": {
+      "s": "string",
+      "wordDict": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "s": "catsandcatsdog",
+      "wordDict": [
+        "cat",
+        "cats",
+        "and",
+        "sand",
+        "dog"
+      ]
+    }
+  },
+  "Problem141": {
+    "fields": [
+      "nodeCount",
+      "tail",
+      "desc"
+    ],
+    "types": {
+      "nodeCount": "number",
+      "tail": "number",
+      "desc": "string"
+    },
+    "example": {
+      "label": "Cycle 0",
+      "nodeCount": 5,
+      "tail": 0,
+      "desc": "[3,2,0,-4] tail→pos 0"
+    }
+  },
+  "Problem142": {
+    "fields": [
+      "nodes",
+      "pos"
+    ],
+    "types": {
+      "nodes": "array",
+      "pos": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "nodes": [
+        3,
+        2,
+        0,
+        -4
+      ],
+      "pos": 1
+    }
+  },
+  "Problem143": {
+    "fields": [
+      "arr"
+    ],
+    "types": {
+      "arr": "array"
+    },
+    "example": {
+      "label": "[1,2,3,4]",
+      "arr": [
+        1,
+        2,
+        3,
+        4
+      ]
+    }
+  },
+  "Problem144": {
+    "fields": [
+      "root"
+    ],
+    "types": {
+      "root": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "root": [
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  "Problem145": {
+    "fields": [
+      "root"
+    ],
+    "types": {
+      "root": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "root": [
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  "Problem147": {
+    "fields": [
+      "head"
+    ],
+    "types": {
+      "head": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "head": [
+        4,
+        2,
+        1,
+        3
+      ]
+    }
+  },
+  "Problem148": {
+    "fields": [
+      "arr"
+    ],
+    "types": {
+      "arr": "array"
+    },
+    "example": {
+      "label": "[4,2,1,3]",
+      "arr": [
+        4,
+        2,
+        1,
+        3
+      ]
+    }
+  },
+  "Problem149": {
+    "fields": [
+      "points"
+    ],
+    "types": {
+      "points": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "points": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ]
+    }
+  },
+  "Problem151": {
+    "fields": [
+      "s"
+    ],
+    "types": {
+      "s": "string"
+    },
+    "example": {
+      "label": "Example 1",
+      "s": "  Hello World  "
+    }
+  },
+  "Problem154": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "nums": [
+        1,
+        3,
+        5
+      ]
+    }
+  },
+  "Problem157": {
+    "fields": [
+      "file",
+      "n"
+    ],
+    "types": {
+      "file": "string",
+      "n": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "file": "abcdefghij",
+      "n": 5
+    }
+  },
+  "Problem158": {
+    "fields": [
+      "file",
+      "calls"
+    ],
+    "types": {
+      "file": "string",
+      "calls": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "file": "abcdefghij",
+      "calls": [
+        [
+          3
+        ],
+        [
+          2
+        ],
+        [
+          4
+        ]
+      ]
+    }
+  },
+  "Problem159": {
+    "fields": [
+      "s"
+    ],
+    "types": {
+      "s": "string"
+    },
+    "example": {
+      "label": "Example 1",
+      "s": "eceba"
+    }
+  },
+  "Problem160": {
+    "fields": [
+      "listA",
+      "listB",
+      "shared",
+      "intersectVal"
+    ],
+    "types": {
+      "listA": "array",
+      "listB": "array",
+      "shared": "array",
+      "intersectVal": "number"
+    },
+    "example": {
+      "label": "Ex 1",
+      "listA": [
+        4,
+        1
+      ],
+      "listB": [
+        5,
+        6,
+        1
+      ],
+      "shared": [
+        8,
+        4,
+        5
+      ],
+      "intersectVal": 8
+    }
+  },
+  "Problem161": {
+    "fields": [
+      "s1",
+      "s2"
+    ],
+    "types": {
+      "s1": "string",
+      "s2": "string"
+    },
+    "example": {
+      "label": "Example 1",
+      "s1": "ab",
+      "s2": "acb"
+    }
+  },
+  "Problem162": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "nums": [
+        1,
+        2,
+        3,
+        1
+      ]
+    }
+  },
+  "Problem163": {
+    "fields": [
+      "nums",
+      "lower",
+      "upper"
+    ],
+    "types": {
+      "nums": "array",
+      "lower": "number",
+      "upper": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "nums": [
+        0,
+        1,
+        3,
+        50,
+        75
+      ],
+      "lower": 0,
+      "upper": 99
+    }
+  },
+  "Problem164": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "nums": [
+        3,
+        6,
+        9,
+        1
+      ]
+    }
+  },
+  "Problem165": {
+    "fields": [
+      "version1",
+      "version2"
+    ],
+    "types": {
+      "version1": "string",
+      "version2": "string"
+    },
+    "example": {
+      "label": "Example 1",
+      "version1": "1.0",
+      "version2": "1.0.0"
+    }
+  },
+  "Problem166": {
+    "fields": [
+      "numerator",
+      "denominator"
+    ],
+    "types": {
+      "numerator": "number",
+      "denominator": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "numerator": 1,
+      "denominator": 2
+    }
+  },
+  "Problem171": {
+    "fields": [
+      "s"
+    ],
+    "types": {
+      "s": "string"
+    },
+    "example": {
+      "label": "Example 1",
+      "s": "A"
+    }
+  },
+  "Problem174": {
+    "fields": [
+      "dungeon"
+    ],
+    "types": {
+      "dungeon": "array"
+    },
+    "example": {
+      "label": "Ex 1",
+      "dungeon": [
+        [
+          -2,
+          -3,
+          3
+        ],
+        [
+          -5,
+          -10,
+          1
+        ],
+        [
+          10,
+          30,
+          -5
+        ]
+      ]
+    }
+  },
+  "Problem188": {
+    "fields": [
+      "k",
+      "prices"
+    ],
+    "types": {
+      "k": "number",
+      "prices": "array"
+    },
+    "example": {
+      "label": "k=2 [3,2,6,5,0,3]",
+      "k": 2,
+      "prices": [
+        3,
+        2,
+        6,
+        5,
+        0,
+        3
+      ]
+    }
+  },
+  "Problem189": {
+    "fields": [
+      "nums",
+      "k"
+    ],
+    "types": {
+      "nums": "array",
+      "k": "number"
+    },
+    "example": {
+      "label": "[1,2,3,4,5,6,7], k=3",
+      "nums": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "k": 3
+    }
+  },
+  "Problem190": {
+    "fields": [
+      "n",
+      "desc"
+    ],
+    "types": {
+      "n": "number",
+      "desc": "string"
+    },
+    "example": {
+      "label": "Ex 1",
+      "n": 43261596,
+      "desc": "43261596"
+    }
+  },
+  "Problem191": {
+    "fields": [
+      "n",
+      "desc"
+    ],
+    "types": {
+      "n": "number",
+      "desc": "string"
+    },
+    "example": {
+      "label": "Ex 1",
+      "n": 11,
+      "desc": "11 (0b1011)"
+    }
+  },
+  "Problem200": {
+    "fields": [
+      "gridStr"
+    ],
+    "types": {
+      "gridStr": "string"
+    },
+    "example": {
+      "label": "Standard",
+      "gridStr": "[\n  [\"1\",\"1\",\"1\",\"1\",\"0\"],\n  [\"1\",\"1\",\"0\",\"1\",\"0\"],\n  [\"1\",\"1\",\"0\",\"0\",\"0\"],\n  [\"0\",\"0\",\"0\",\"0\",\"0\"]\n]"
+    }
+  },
+  "Problem202": {
+    "fields": [
+      "n"
+    ],
+    "types": {
+      "n": "number"
+    },
+    "example": {
+      "label": "19 (Happy)",
+      "n": 19
+    }
+  },
+  "Problem203": {
+    "fields": [
+      "head",
+      "val"
+    ],
+    "types": {
+      "head": "array",
+      "val": "number"
+    },
+    "example": {
+      "label": "Example",
+      "head": [
+        1,
+        2,
+        6,
+        3,
+        4,
+        5,
+        6
+      ],
+      "val": 6
+    }
+  },
+  "Problem204": {
+    "fields": [
+      "n"
+    ],
+    "types": {
+      "n": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "n": 10
+    }
+  },
+  "Problem205": {
+    "fields": [
+      "s",
+      "t"
+    ],
+    "types": {
+      "s": "string",
+      "t": "string"
+    },
+    "example": {
+      "label": "Example 1",
+      "s": "egg",
+      "t": "add"
+    }
+  },
+  "Problem207": {
+    "fields": [
+      "numCourses",
+      "prerequisites"
+    ],
+    "types": {
+      "numCourses": "number",
+      "prerequisites": "array"
+    },
+    "example": {
+      "label": "Simple Path",
+      "numCourses": 2,
+      "prerequisites": [
+        [
+          1,
+          0
+        ]
+      ]
+    }
+  },
+  "Problem208": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem211": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem212": {
+    "fields": [
+      "board",
+      "words"
+    ],
+    "types": {
+      "board": "array",
+      "words": "array"
+    },
+    "example": {
+      "label": "Ex 1",
+      "board": [
+        [
+          "o",
+          "a",
+          "a",
+          "n"
+        ],
+        [
+          "e",
+          "t",
+          "a",
+          "e"
+        ],
+        [
+          "i",
+          "h",
+          "k",
+          "r"
+        ],
+        [
+          "i",
+          "f",
+          "l",
+          "v"
+        ]
+      ],
+      "words": [
+        "oath",
+        "pea",
+        "eat",
+        "rain"
+      ]
+    }
+  },
+  "Problem216": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem218": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem219": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem22": {
+    "fields": [
+      "n"
+    ],
+    "types": {
+      "n": "number"
+    },
+    "example": {
+      "label": "n=1",
+      "n": 1
+    }
+  },
+  "Problem220": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "Has Dup",
+      "nums": [
+        1,
+        2,
+        3,
+        1
+      ]
+    }
+  },
+  "Problem221": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem224": {
+    "fields": [
+      "s"
+    ],
+    "types": {
+      "s": "string"
+    },
+    "example": {
+      "label": "1+1",
+      "s": "1 + 1"
+    }
+  },
+  "Problem229": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem231": {
+    "fields": [
+      "n",
+      "desc"
+    ],
+    "types": {
+      "n": "number",
+      "desc": "string"
+    },
+    "example": {
+      "label": "n=1",
+      "n": 1,
+      "desc": "2⁰ = 1"
+    }
+  },
+  "Problem234": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "1→2→2→1",
+      "nums": [
+        1,
+        2,
+        2,
+        1
+      ]
+    }
+  },
+  "Problem240": {
+    "fields": [
+      "matrix",
+      "target"
+    ],
+    "types": {
+      "matrix": "array",
+      "target": "number"
+    },
+    "example": {
+      "label": "Found (5)",
+      "matrix": [
+        [
+          1,
+          4,
+          7,
+          11,
+          15
+        ],
+        [
+          2,
+          5,
+          8,
+          12,
+          19
+        ],
+        [
+          3,
+          6,
+          9,
+          16,
+          22
+        ],
+        [
+          10,
+          13,
+          14,
+          17,
+          24
+        ],
+        [
+          18,
+          21,
+          23,
+          26,
+          30
+        ]
+      ],
+      "target": 5
+    }
+  },
+  "Problem244": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem245": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem247": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem248": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem25": {
+    "fields": [
+      "list",
+      "k"
+    ],
+    "types": {
+      "list": "array",
+      "k": "number"
+    },
+    "example": {
+      "label": "Ex 1",
+      "list": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "k": 2
+    }
+  },
+  "Problem251": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem252": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem253": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem254": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem255": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem256": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem258": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem259": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem26": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "Ex 1",
+      "nums": [
+        1,
+        1,
+        2
+      ]
+    }
+  },
+  "Problem260": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem261": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem262": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem263": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem264": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem265": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem266": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem267": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem268": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "nums": [
+        3,
+        0,
+        1
+      ]
+    }
+  },
+  "Problem269": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem270": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem272": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem273": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem274": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem275": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem276": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem277": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem278": {
+    "fields": [
+      "n",
+      "bad"
+    ],
+    "types": {
+      "n": "number",
+      "bad": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "n": 5,
+      "bad": 4
+    }
+  },
+  "Problem280": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem281": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem282": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem283": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "Ex 1",
+      "nums": [
+        0,
+        1,
+        0,
+        3,
+        12
+      ]
+    }
+  },
+  "Problem284": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem285": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem286": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem288": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem289": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem29": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem290": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem291": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem292": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem293": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem294": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem296": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem297": {
+    "fields": [
+      "tree"
+    ],
+    "types": {
+      "tree": "array"
+    },
+    "example": {
+      "label": "Ex 1",
+      "tree": [
+        1,
+        2,
+        3,
+        null,
+        null,
+        4,
+        5
+      ]
+    }
+  },
+  "Problem298": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem30": {
+    "fields": [
+      "s",
+      "words"
+    ],
+    "types": {
+      "s": "string",
+      "words": "array"
+    },
+    "example": {
+      "label": "Ex 1",
+      "s": "barfoothefoobarman",
+      "words": [
+        "foo",
+        "bar"
+      ]
+    }
+  },
+  "Problem301": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem302": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem303": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem304": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem305": {
+    "fields": [
+      "m",
+      "n",
+      "positions"
+    ],
+    "types": {
+      "m": "number",
+      "n": "number",
+      "positions": "array"
+    },
+    "example": {
+      "label": "Islands Form",
+      "m": 3,
+      "n": 3,
+      "positions": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          2,
+          1
+        ]
+      ]
+    }
+  },
+  "Problem306": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem307": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem308": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem31": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "[1,2,3]",
+      "nums": [
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  "Problem310": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem311": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem312": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "Ex 1",
+      "nums": [
+        3,
+        1,
+        5,
+        8
+      ]
+    }
+  },
+  "Problem313": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem314": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem315": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem316": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem317": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem318": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem321": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem323": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem324": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "Basic",
+      "nums": [
+        5,
+        7,
+        4,
+        3,
+        1
+      ]
+    }
+  },
+  "Problem325": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem326": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem327": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem328": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem329": {
+    "fields": [
+      "matrix"
+    ],
+    "types": {
+      "matrix": "array"
+    },
+    "example": {
+      "label": "Ex 1",
+      "matrix": [
+        [
+          9,
+          9,
+          4
+        ],
+        [
+          6,
+          6,
+          8
+        ],
+        [
+          2,
+          1,
+          1
+        ]
+      ]
+    }
+  },
+  "Problem330": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem331": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem332": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem333": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem334": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem335": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem336": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem337": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem339": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem341": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem344": {
+    "fields": [
+      "s"
+    ],
+    "types": {
+      "s": "array"
+    },
+    "example": {
+      "label": "Ex 1",
+      "s": [
+        "h",
+        "e",
+        "l",
+        "l",
+        "o"
+      ]
+    }
+  },
+  "Problem345": {
+    "fields": [
+      "s"
+    ],
+    "types": {
+      "s": "string"
+    },
+    "example": {
+      "label": "Example 1",
+      "s": "leetcode"
+    }
+  },
+  "Problem346": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem348": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem349": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem351": {
+    "fields": [
+      "nums",
+      "description"
+    ],
+    "types": {
+      "nums": "array",
+      "description": "string"
+    },
+    "example": {
+      "label": "Example 1: Gaps",
+      "nums": [
+        1,
+        3,
+        7,
+        9
+      ],
+      "description": "Numbers with gaps form separate intervals"
+    }
+  },
+  "Problem353": {
+    "fields": [
+      "events"
+    ],
+    "types": {
+      "events": "array"
+    },
+    "example": {
+      "label": "Example 1: Simple Route",
+      "events": [
+        {
+          "type": "checkIn",
+          "id": 1,
+          "stationName": "A",
+          "t": 0
+        },
+        {
+          "type": "checkOut",
+          "id": 1,
+          "stationName": "B",
+          "t": 5
+        },
+        {
+          "type": "checkIn",
+          "id": 2,
+          "stationName": "A",
+          "t": 1
+        },
+        {
+          "type": "checkOut",
+          "id": 2,
+          "stationName": "B",
+          "t": 9
+        }
+      ]
+    }
+  },
+  "Problem354": {
+    "fields": [
+      "envelopes"
+    ],
+    "types": {
+      "envelopes": "array"
+    },
+    "example": {
+      "label": "Simple nesting",
+      "envelopes": [
+        [
+          2,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          6,
+          7
+        ]
+      ]
+    }
+  },
+  "Problem355": {
+    "fields": [
+      "operations",
+      "params"
+    ],
+    "types": {
+      "operations": "array",
+      "params": "string"
+    },
+    "example": {
+      "label": "Example 1: Simple Timeline",
+      "operations": [
+        "postTweet",
+        "follow",
+        "postTweet",
+        "getNewsFeed"
+      ],
+      "params": {
+        "postTweet": [
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            2
+          ]
+        ],
+        "follow": [
+          [
+            1,
+            2
+          ]
+        ],
+        "getNewsFeed": [
+          1
+        ]
+      }
+    }
+  },
+  "Problem356": {
+    "fields": [
+      "points",
+      "description"
+    ],
+    "types": {
+      "points": "array",
+      "description": "string"
+    },
+    "example": {
+      "label": "Example 1: Valid",
+      "points": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          -1
+        ],
+        [
+          -1,
+          -1
+        ],
+        [
+          -1,
+          1
+        ]
+      ],
+      "description": "Square reflected across y-axis"
+    }
+  },
+  "Problem357": {
+    "fields": [
+      "n",
+      "description"
+    ],
+    "types": {
+      "n": "number",
+      "description": "string"
+    },
+    "example": {
+      "label": "n = 0",
+      "n": 0,
+      "description": "Only 0"
+    }
+  },
+  "Problem359": {
+    "fields": [
+      "logs"
+    ],
+    "types": {
+      "logs": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "logs": [
+        {
+          "timestamp": 1,
+          "message": "foo"
+        },
+        {
+          "timestamp": 1,
+          "message": "bar"
+        },
+        {
+          "timestamp": 3,
+          "message": "foo"
+        },
+        {
+          "timestamp": 10,
+          "message": "bar"
+        }
+      ]
+    }
+  },
+  "Problem36": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem360": {
+    "fields": [
+      "nums",
+      "a",
+      "b",
+      "c",
+      "description"
+    ],
+    "types": {
+      "nums": "array",
+      "a": "number",
+      "b": "number",
+      "c": "number",
+      "description": "string"
+    },
+    "example": {
+      "label": "U-shaped (a=1, b=-4, c=3)",
+      "nums": [
+        -4,
+        -2,
+        2,
+        4
+      ],
+      "a": 1,
+      "b": -4,
+      "c": 3,
+      "description": "Positive parabola: largest values at edges"
+    }
+  },
+  "Problem361": {
+    "fields": [
+      "grid"
+    ],
+    "types": {
+      "grid": "array"
+    },
+    "example": {
+      "label": "Simple Grid",
+      "grid": [
+        [
+          "0",
+          "E",
+          "0"
+        ],
+        [
+          "E",
+          "0",
+          "W"
+        ],
+        [
+          "0",
+          "E",
+          "0"
+        ]
+      ]
+    }
+  },
+  "Problem362": {
+    "fields": [
+      "desc"
+    ],
+    "types": {
+      "desc": "string"
+    },
+    "example": {
+      "label": "Example 1: Simple Sequence",
+      "desc": "Basic hit tracking"
+    }
+  },
+  "Problem363": {
+    "fields": [
+      "matrix",
+      "K"
+    ],
+    "types": {
+      "matrix": "array",
+      "K": "number"
+    },
+    "example": {
+      "label": "Simple 2×2",
+      "matrix": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          -2
+        ]
+      ],
+      "K": 0
+    }
+  },
+  "Problem364": {
+    "fields": [
+      "list",
+      "description"
+    ],
+    "types": {
+      "list": "array",
+      "description": "string"
+    },
+    "example": {
+      "label": "Example 1: Simple Nesting",
+      "list": [
+        [
+          1,
+          1
+        ],
+        2,
+        [
+          1,
+          1
+        ]
+      ],
+      "description": "Mixed integers and single nesting"
+    }
+  },
+  "Problem365": {
+    "fields": [
+      "a",
+      "b",
+      "z",
+      "description"
+    ],
+    "types": {
+      "a": "number",
+      "b": "number",
+      "z": "number",
+      "description": "string"
+    },
+    "example": {
+      "label": "Example 1: Achievable",
+      "a": 3,
+      "b": 5,
+      "z": 4,
+      "description": "gcd(3,5)=1, 4%1=0 → Possible (famous puzzle)"
+    }
+  },
+  "Problem368": {
+    "fields": [
+      "input"
+    ],
+    "types": {
+      "input": "array"
+    },
+    "example": {
+      "label": "Example 1: Powers of 2",
+      "input": [
+        1,
+        2,
+        4,
+        8
+      ]
+    }
+  },
+  "Problem369": {
+    "fields": [
+      "values"
+    ],
+    "types": {
+      "values": "array"
+    },
+    "example": {
+      "label": "Example 1: 999→1000",
+      "values": [
+        9,
+        9,
+        9
+      ]
+    }
+  },
+  "Problem37": {
+    "fields": [
+      "board"
+    ],
+    "types": {
+      "board": "array"
+    },
+    "example": {
+      "label": "Ex 1",
+      "board": [
+        [
+          "5",
+          "3",
+          ".",
+          ".",
+          "7",
+          ".",
+          ".",
+          ".",
+          "."
+        ],
+        [
+          "6",
+          ".",
+          ".",
+          "1",
+          "9",
+          "5",
+          ".",
+          ".",
+          "."
+        ],
+        [
+          ".",
+          "9",
+          "8",
+          ".",
+          ".",
+          ".",
+          ".",
+          "6",
+          "."
+        ],
+        [
+          "8",
+          ".",
+          ".",
+          ".",
+          "6",
+          ".",
+          ".",
+          ".",
+          "3"
+        ],
+        [
+          "4",
+          ".",
+          ".",
+          "8",
+          ".",
+          "3",
+          ".",
+          ".",
+          "1"
+        ],
+        [
+          "7",
+          ".",
+          ".",
+          ".",
+          "2",
+          ".",
+          ".",
+          ".",
+          "6"
+        ],
+        [
+          ".",
+          "6",
+          ".",
+          ".",
+          ".",
+          ".",
+          "2",
+          "8",
+          "."
+        ],
+        [
+          ".",
+          ".",
+          ".",
+          "4",
+          "1",
+          "9",
+          ".",
+          ".",
+          "5"
+        ],
+        [
+          ".",
+          ".",
+          ".",
+          ".",
+          "8",
+          ".",
+          ".",
+          "7",
+          "9"
+        ]
+      ]
+    }
+  },
+  "Problem370": {
+    "fields": [
+      "length",
+      "updates"
+    ],
+    "types": {
+      "length": "number",
+      "updates": "array"
+    },
+    "example": {
+      "label": "Simple Range",
+      "length": 5,
+      "updates": [
+        [
+          1,
+          3,
+          2
+        ]
+      ]
+    }
+  },
+  "Problem371": {
+    "fields": [
+      "a",
+      "b"
+    ],
+    "types": {
+      "a": "number",
+      "b": "number"
+    },
+    "example": {
+      "label": "1 + 1",
+      "a": 1,
+      "b": 1
+    }
+  },
+  "Problem372": {
+    "fields": [
+      "base",
+      "exponents"
+    ],
+    "types": {
+      "base": "number",
+      "exponents": "array"
+    },
+    "example": {
+      "label": "2^3",
+      "base": 2,
+      "exponents": [
+        3
+      ]
+    }
+  },
+  "Problem374": {
+    "fields": [
+      "n"
+    ],
+    "types": {
+      "n": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "n": 10
+    }
+  },
+  "Problem376": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "nums": [
+        1,
+        7,
+        4,
+        9,
+        2,
+        5
+      ]
+    }
+  },
+  "Problem377": {
+    "fields": [
+      "nums",
+      "target"
+    ],
+    "types": {
+      "nums": "array",
+      "target": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "nums": [
+        1,
+        2,
+        3
+      ],
+      "target": 4
+    }
+  },
+  "Problem378": {
+    "fields": [
+      "matrix",
+      "k"
+    ],
+    "types": {
+      "matrix": "array",
+      "k": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "matrix": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "k": 1
+    }
+  },
+  "Problem379": {
+    "fields": [
+      "maxNumbers",
+      "operations"
+    ],
+    "types": {
+      "maxNumbers": "number",
+      "operations": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "maxNumbers": 5,
+      "operations": [
+        {
+          "type": "get"
+        },
+        {
+          "type": "get"
+        },
+        {
+          "type": "check",
+          "number": 0
+        },
+        {
+          "type": "get"
+        },
+        {
+          "type": "release",
+          "number": 2
+        },
+        {
+          "type": "check",
+          "number": 2
+        }
+      ]
+    }
+  },
+  "Problem380": {
+    "fields": [
+      "operations"
+    ],
+    "types": {
+      "operations": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "operations": [
+        {
+          "type": "insert",
+          "val": 1
+        },
+        {
+          "type": "insert",
+          "val": 2
+        },
+        {
+          "type": "delete",
+          "val": 1
+        },
+        {
+          "type": "getRandom"
+        },
+        {
+          "type": "insert",
+          "val": 1
+        }
+      ]
+    }
+  },
+  "Problem381": {
+    "fields": [
+      "n",
+      "blacklist"
+    ],
+    "types": {
+      "n": "number",
+      "blacklist": "array"
+    },
+    "example": {
+      "label": "Simple",
+      "n": 7,
+      "blacklist": [
+        2
+      ]
+    }
+  },
+  "Problem382": {
+    "fields": [
+      "values"
+    ],
+    "types": {
+      "values": "array"
+    },
+    "example": {
+      "label": "Simple List",
+      "values": [
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  "Problem383": {
+    "fields": [
+      "ransomNote",
+      "magazine"
+    ],
+    "types": {
+      "ransomNote": "string",
+      "magazine": "string"
+    },
+    "example": {
+      "label": "Possible",
+      "ransomNote": "a",
+      "magazine": "b"
+    }
+  },
+  "Problem384": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "Small Array",
+      "nums": [
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  "Problem385": {
+    "fields": [
+      "input"
+    ],
+    "types": {
+      "input": "string"
+    },
+    "example": {
+      "label": "Simple Number",
+      "input": "324"
+    }
+  },
+  "Problem386": {
+    "fields": [
+      "n"
+    ],
+    "types": {
+      "n": "number"
+    },
+    "example": {
+      "label": "n=13",
+      "n": 13
+    }
+  },
+  "Problem387": {
+    "fields": [
+      "s"
+    ],
+    "types": {
+      "s": "string"
+    },
+    "example": {
+      "label": "With Unique",
+      "s": "leetcode"
+    }
+  },
+  "Problem388": {
+    "fields": [
+      "input"
+    ],
+    "types": {
+      "input": "string"
+    },
+    "example": {
+      "label": "Simple Dir",
+      "input": "dir\n\tfile.txt"
+    }
+  },
+  "Problem389": {
+    "fields": [
+      "s",
+      "t"
+    ],
+    "types": {
+      "s": "string",
+      "t": "string"
+    },
+    "example": {
+      "label": "Simple",
+      "s": "a",
+      "t": "aa"
+    }
+  },
+  "Problem390": {
+    "fields": [
+      "n"
+    ],
+    "types": {
+      "n": "number"
+    },
+    "example": {
+      "label": "n=8",
+      "n": 8
+    }
+  },
+  "Problem397": {
+    "fields": [
+      "n"
+    ],
+    "types": {
+      "n": "number"
+    },
+    "example": {
+      "label": "Example 1: n=8 (Power of 2)",
+      "n": 8
+    }
+  },
+  "Problem403": {
+    "fields": [
+      "stones",
+      "expected"
+    ],
+    "types": {
+      "stones": "array",
+      "expected": "boolean"
+    },
+    "example": {
+      "label": "Ex1",
+      "stones": [
+        0,
+        1,
+        3,
+        5,
+        6,
+        8,
+        12,
+        17
+      ],
+      "expected": true
+    }
+  },
+  "Problem404": {
+    "fields": [
+      "tree",
+      "expected"
+    ],
+    "types": {
+      "tree": "string",
+      "expected": "number"
+    },
+    "example": {
+      "label": "Ex1",
+      "tree": {
+        "val": 3,
+        "left": {
+          "val": 9
+        },
+        "right": {
+          "val": 20,
+          "left": {
+            "val": 15
+          },
+          "right": {
+            "val": 7
+          }
+        }
+      },
+      "expected": 24
+    }
+  },
+  "Problem405": {
+    "fields": [
+      "num",
+      "expected"
+    ],
+    "types": {
+      "num": "number",
+      "expected": "string"
+    },
+    "example": {
+      "label": "Ex1",
+      "num": 26,
+      "expected": "1a"
+    }
+  },
+  "Problem406": {
+    "fields": [
+      "people",
+      "expected"
+    ],
+    "types": {
+      "people": "array",
+      "expected": "array"
+    },
+    "example": {
+      "label": "Ex1",
+      "people": [
+        [
+          7,
+          0
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          5,
+          0
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          5,
+          2
+        ]
+      ],
+      "expected": [
+        [
+          5,
+          0
+        ],
+        [
+          7,
+          0
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          7,
+          1
+        ]
+      ]
+    }
+  },
+  "Problem407": {
+    "fields": [
+      "heightMap"
+    ],
+    "types": {
+      "heightMap": "array"
+    },
+    "example": {
+      "label": "Example",
+      "heightMap": [
+        [
+          1,
+          4,
+          3,
+          1,
+          3,
+          2
+        ],
+        [
+          3,
+          2,
+          1,
+          3,
+          2,
+          4
+        ],
+        [
+          2,
+          3,
+          3,
+          2,
+          3,
+          1
+        ]
+      ]
+    }
+  },
+  "Problem408": {
+    "fields": [
+      "word",
+      "abbr",
+      "expected"
+    ],
+    "types": {
+      "word": "string",
+      "abbr": "string",
+      "expected": "boolean"
+    },
+    "example": {
+      "label": "Valid",
+      "word": "internationalization",
+      "abbr": "i18n",
+      "expected": true
+    }
+  },
+  "Problem409": {
+    "fields": [
+      "s"
+    ],
+    "types": {
+      "s": "string"
+    },
+    "example": {
+      "label": "Example 1",
+      "s": "babad"
+    }
+  },
+  "Problem41": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "nums": [
+        1,
+        2,
+        0
+      ]
+    }
+  },
+  "Problem410": {
+    "fields": [
+      "nums",
+      "m",
+      "expected"
+    ],
+    "types": {
+      "nums": "array",
+      "m": "number",
+      "expected": "number"
+    },
+    "example": {
+      "label": "Ex1",
+      "nums": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "m": 2,
+      "expected": 9
+    }
+  },
+  "Problem411": {
+    "fields": [
+      "word",
+      "dictionary",
+      "expected"
+    ],
+    "types": {
+      "word": "string",
+      "dictionary": "array",
+      "expected": "string"
+    },
+    "example": {
+      "label": "Ex1",
+      "word": "apple",
+      "dictionary": [
+        "banana"
+      ],
+      "expected": "a3e"
+    }
+  },
+  "Problem412": {
+    "fields": [
+      "n",
+      "expected"
+    ],
+    "types": {
+      "n": "number",
+      "expected": "array"
+    },
+    "example": {
+      "label": "Small",
+      "n": 3,
+      "expected": [
+        "1",
+        "2",
+        "Fizz"
+      ]
+    }
+  },
+  "Problem413": {
+    "fields": [
+      "nums",
+      "expected"
+    ],
+    "types": {
+      "nums": "array",
+      "expected": "number"
+    },
+    "example": {
+      "label": "Small",
+      "nums": [
+        1,
+        2,
+        3
+      ],
+      "expected": 1
+    }
+  },
+  "Problem414": {
+    "fields": [
+      "nums",
+      "expected"
+    ],
+    "types": {
+      "nums": "array",
+      "expected": "number"
+    },
+    "example": {
+      "label": "Small",
+      "nums": [
+        3,
+        2,
+        1
+      ],
+      "expected": 1
+    }
+  },
+  "Problem415": {
+    "fields": [
+      "num1",
+      "num2",
+      "expected"
+    ],
+    "types": {
+      "num1": "string",
+      "num2": "string",
+      "expected": "string"
+    },
+    "example": {
+      "label": "Small",
+      "num1": "11",
+      "num2": "123",
+      "expected": "134"
+    }
+  },
+  "Problem416": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "[1,5,11,5]",
+      "nums": [
+        1,
+        5,
+        11,
+        5
+      ]
+    }
+  },
+  "Problem417": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem418": {
+    "fields": [
+      "sentence",
+      "rows",
+      "cols",
+      "expected"
+    ],
+    "types": {
+      "sentence": "array",
+      "rows": "number",
+      "cols": "number",
+      "expected": "number"
+    },
+    "example": {
+      "label": "Small",
+      "sentence": [
+        "a"
+      ],
+      "rows": 4,
+      "cols": 5,
+      "expected": 4
+    }
+  },
+  "Problem419": {
+    "fields": [
+      "board",
+      "expected"
+    ],
+    "types": {
+      "board": "array",
+      "expected": "number"
+    },
+    "example": {
+      "label": "Small",
+      "board": [
+        [
+          "X",
+          "X",
+          ".",
+          "X"
+        ],
+        [
+          ".",
+          ".",
+          ".",
+          "."
+        ],
+        [
+          ".",
+          ".",
+          ".",
+          "."
+        ]
+      ],
+      "expected": 2
+    }
+  },
+  "Problem420": {
+    "fields": [
+      "password",
+      "expected"
+    ],
+    "types": {
+      "password": "string",
+      "expected": "number"
+    },
+    "example": {
+      "label": "Short",
+      "password": "a",
+      "expected": 5
+    }
+  },
+  "Problem421": {
+    "fields": [
+      "nums",
+      "expected"
+    ],
+    "types": {
+      "nums": "array",
+      "expected": "number"
+    },
+    "example": {
+      "label": "Small",
+      "nums": [
+        3,
+        10,
+        5,
+        25,
+        2,
+        8
+      ],
+      "expected": 28
+    }
+  },
+  "Problem422": {
+    "fields": [
+      "words",
+      "expected"
+    ],
+    "types": {
+      "words": "array",
+      "expected": "boolean"
+    },
+    "example": {
+      "label": "Valid",
+      "words": [
+        "abcd",
+        "bnrt",
+        "crmy",
+        "dtye"
+      ],
+      "expected": true
+    }
+  },
+  "Problem423": {
+    "fields": [
+      "tokens"
+    ],
+    "types": {
+      "tokens": "string"
+    },
+    "example": {
+      "label": "Simple",
+      "tokens": "zerozerozerozerotwotwotwotwo"
+    }
+  },
+  "Problem425": {
+    "fields": [
+      "words"
+    ],
+    "types": {
+      "words": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "words": [
+        "abat",
+        "baba",
+        "atan",
+        "tata"
+      ]
+    }
+  },
+  "Problem426": {
+    "fields": [
+      "root"
+    ],
+    "types": {
+      "root": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "root": [
+        4,
+        2,
+        6,
+        1,
+        3,
+        5,
+        7
+      ]
+    }
+  },
+  "Problem427": {
+    "fields": [
+      "tokens"
+    ],
+    "types": {
+      "tokens": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "tokens": [
+        "2",
+        "1",
+        "+",
+        "3",
+        "*"
+      ]
+    }
+  },
+  "Problem428": {
+    "fields": [
+      "tree"
+    ],
+    "types": {
+      "tree": "string"
+    },
+    "example": {
+      "label": "Example 1",
+      "tree": {
+        "val": 1,
+        "children": [
+          {
+            "val": 3,
+            "children": [
+              {
+                "val": 5
+              },
+              {
+                "val": 6
+              }
+            ]
+          },
+          {
+            "val": 2
+          },
+          {
+            "val": 4
+          }
+        ]
+      }
+    }
+  },
+  "Problem429": {
+    "fields": [
+      "root"
+    ],
+    "types": {
+      "root": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "root": [
+        1,
+        null,
+        3,
+        2,
+        4,
+        null,
+        5,
+        6
+      ]
+    }
+  },
+  "Problem430": {
+    "fields": [
+      "head"
+    ],
+    "types": {
+      "head": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "head": [
+        1,
+        null,
+        2,
+        3,
+        null,
+        [
+          [
+            4,
+            null,
+            5,
+            6
+          ]
+        ]
+      ]
+    }
+  },
+  "Problem431": {
+    "fields": [
+      "root"
+    ],
+    "types": {
+      "root": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "root": [
+        1,
+        null,
+        [
+          3,
+          [
+            5,
+            6
+          ],
+          2,
+          4
+        ],
+        null,
+        [
+          2
+        ]
+      ]
+    }
+  },
+  "Problem432": {
+    "fields": [
+      "operations"
+    ],
+    "types": {
+      "operations": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "operations": [
+        [
+          "inc",
+          "a"
+        ],
+        [
+          "inc",
+          "b"
+        ],
+        [
+          "getMaxKey"
+        ],
+        [
+          "getMinKey"
+        ],
+        [
+          "inc",
+          "a"
+        ],
+        [
+          "getMaxKey"
+        ],
+        [
+          "getMinKey"
+        ]
+      ]
+    }
+  },
+  "Problem433": {
+    "fields": [
+      "startGene",
+      "endGene",
+      "bank"
+    ],
+    "types": {
+      "startGene": "string",
+      "endGene": "string",
+      "bank": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "startGene": "AACCCCCCCCCCCCCCCCCC",
+      "endGene": "AACCCCCCCCCCCCCCCCCC",
+      "bank": [
+        "AACCCCCCCCCCCCCCCCCC"
+      ]
+    }
+  },
+  "Problem435": {
+    "fields": [
+      "val"
+    ],
+    "types": {
+      "val": "string"
+    },
+    "example": {
+      "label": "LeetCode",
+      "val": "[[1,2],[2,3],[3,4],[1,3]]"
+    }
+  },
+  "Problem436": {
+    "fields": [
+      "intervals"
+    ],
+    "types": {
+      "intervals": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "intervals": [
+        [
+          1,
+          2
+        ]
+      ]
+    }
+  },
+  "Problem437": {
+    "fields": [
+      "root",
+      "targetSum"
+    ],
+    "types": {
+      "root": "array",
+      "targetSum": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "root": [
+        10,
+        5,
+        -3,
+        3,
+        2,
+        null,
+        11,
+        3,
+        -2,
+        null,
+        1
+      ],
+      "targetSum": 8
+    }
+  },
+  "Problem438": {
+    "fields": [
+      "s",
+      "p"
+    ],
+    "types": {
+      "s": "string",
+      "p": "string"
+    },
+    "example": {
+      "label": "Example 1",
+      "s": "cbaebabacd",
+      "p": "abc"
+    }
+  },
+  "Problem439": {
+    "fields": [
+      "expression"
+    ],
+    "types": {
+      "expression": "string"
+    },
+    "example": {
+      "label": "Example 1",
+      "expression": "T?2:3"
+    }
+  },
+  "Problem44": {
+    "fields": [
+      "s",
+      "p"
+    ],
+    "types": {
+      "s": "string",
+      "p": "string"
+    },
+    "example": {
+      "label": "aa / a*",
+      "s": "aa",
+      "p": "a*"
+    }
+  },
+  "Problem440": {
+    "fields": [
+      "n",
+      "k"
+    ],
+    "types": {
+      "n": "number",
+      "k": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "n": 13,
+      "k": 2
+    }
+  },
+  "Problem441": {
+    "fields": [
+      "n"
+    ],
+    "types": {
+      "n": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "n": 5
+    }
+  },
+  "Problem442": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "nums": [
+        4,
+        3,
+        2,
+        7,
+        8,
+        2,
+        3,
+        1
+      ]
+    }
+  },
+  "Problem443": {
+    "fields": [
+      "chars"
+    ],
+    "types": {
+      "chars": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "chars": [
+        "a",
+        "a",
+        "b",
+        "b",
+        "c",
+        "c",
+        "c"
+      ]
+    }
+  },
+  "Problem444": {
+    "fields": [
+      "org",
+      "seqs"
+    ],
+    "types": {
+      "org": "array",
+      "seqs": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "org": [
+        1,
+        2,
+        3
+      ],
+      "seqs": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          3
+        ]
+      ]
+    }
+  },
+  "Problem45": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "[2,3,1,1,4]",
+      "nums": [
+        2,
+        3,
+        1,
+        1,
+        4
+      ]
+    }
+  },
+  "Problem460": {
+    "fields": [
+      "capacity",
+      "ops"
+    ],
+    "types": {
+      "capacity": "number",
+      "ops": "array"
+    },
+    "example": {
+      "label": "LFU(2)",
+      "capacity": 2,
+      "ops": [
+        {
+          "type": "put",
+          "key": 1,
+          "val": 1
+        },
+        {
+          "type": "put",
+          "key": 2,
+          "val": 2
+        },
+        {
+          "type": "get",
+          "key": 1
+        },
+        {
+          "type": "put",
+          "key": 3,
+          "val": 3
+        },
+        {
+          "type": "get",
+          "key": 2
+        },
+        {
+          "type": "get",
+          "key": 3
+        },
+        {
+          "type": "put",
+          "key": 4,
+          "val": 4
+        },
+        {
+          "type": "get",
+          "key": 1
+        },
+        {
+          "type": "get",
+          "key": 3
+        },
+        {
+          "type": "get",
+          "key": 4
+        }
+      ]
+    }
+  },
+  "Problem463": {
+    "fields": [
+      "grid"
+    ],
+    "types": {
+      "grid": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "grid": [
+        [
+          1
+        ]
+      ]
+    }
+  },
+  "Problem466": {
+    "fields": [
+      "s1",
+      "n1",
+      "s2",
+      "n2"
+    ],
+    "types": {
+      "s1": "string",
+      "n1": "number",
+      "s2": "string",
+      "n2": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "s1": "acb",
+      "n1": 4,
+      "s2": "ab",
+      "n2": 2
+    }
+  },
+  "Problem467": {
+    "fields": [
+      "s"
+    ],
+    "types": {
+      "s": "string"
+    },
+    "example": {
+      "label": "Example 1",
+      "s": "abc"
+    }
+  },
+  "Problem468": {
+    "fields": [
+      "queryIP"
+    ],
+    "types": {
+      "queryIP": "string"
+    },
+    "example": {
+      "label": "Example 1",
+      "queryIP": "172.16.254.1"
+    }
+  },
+  "Problem469": {
+    "fields": [
+      "points"
+    ],
+    "types": {
+      "points": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ]
+    }
+  },
+  "Problem47": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "[1,1,2]",
+      "nums": [
+        1,
+        1,
+        2
+      ]
+    }
+  },
+  "Problem470": {
+    "fields": [],
+    "types": {},
+    "example": {
+      "label": "Example 1"
+    }
+  },
+  "Problem471": {
+    "fields": [
+      "s"
+    ],
+    "types": {
+      "s": "string"
+    },
+    "example": {
+      "label": "Example 1",
+      "s": "aabcb"
+    }
+  },
+  "Problem472": {
+    "fields": [
+      "words"
+    ],
+    "types": {
+      "words": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "words": [
+        "cat",
+        "cats",
+        "catsdogcats",
+        "dog",
+        "catscat",
+        "ratcatdogcat"
+      ]
+    }
+  },
+  "Problem473": {
+    "fields": [
+      "matchsticks"
+    ],
+    "types": {
+      "matchsticks": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "matchsticks": [
+        1,
+        1,
+        2,
+        2,
+        2
+      ]
+    }
+  },
+  "Problem474": {
+    "fields": [
+      "strs",
+      "m",
+      "n"
+    ],
+    "types": {
+      "strs": "array",
+      "m": "number",
+      "n": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "strs": [
+        "10",
+        "0001",
+        "111001",
+        "1",
+        "0"
+      ],
+      "m": 5,
+      "n": 3
+    }
+  },
+  "Problem475": {
+    "fields": [
+      "houses",
+      "heaters"
+    ],
+    "types": {
+      "houses": "array",
+      "heaters": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "houses": [
+        1,
+        2,
+        3
+      ],
+      "heaters": [
+        2
+      ]
+    }
+  },
+  "Problem476": {
+    "fields": [
+      "num"
+    ],
+    "types": {
+      "num": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "num": 5
+    }
+  },
+  "Problem477": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "nums": [
+        4,
+        14,
+        2
+      ]
+    }
+  },
+  "Problem478": {
+    "fields": [
+      "radius",
+      "x_center",
+      "y_center"
+    ],
+    "types": {
+      "radius": "number",
+      "x_center": "number",
+      "y_center": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "radius": 1,
+      "x_center": 0,
+      "y_center": 0
+    }
+  },
+  "Problem479": {
+    "fields": [
+      "n"
+    ],
+    "types": {
+      "n": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "n": 1
+    }
+  },
+  "Problem48": {
+    "fields": [
+      "matrix"
+    ],
+    "types": {
+      "matrix": "array"
+    },
+    "example": {
+      "label": "3×3",
+      "matrix": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          4,
+          5,
+          6
+        ],
+        [
+          7,
+          8,
+          9
+        ]
+      ]
+    }
+  },
+  "Problem480": {
+    "fields": [
+      "nums",
+      "k"
+    ],
+    "types": {
+      "nums": "array",
+      "k": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "nums": [
+        1,
+        3,
+        -1,
+        -3,
+        5,
+        3,
+        6,
+        7
+      ],
+      "k": 3
+    }
+  },
+  "Problem481": {
+    "fields": [
+      "n"
+    ],
+    "types": {
+      "n": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "n": 6
+    }
+  },
+  "Problem482": {
+    "fields": [
+      "s",
+      "k"
+    ],
+    "types": {
+      "s": "string",
+      "k": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "s": "5F3Z-2e-9-w",
+      "k": 4
+    }
+  },
+  "Problem483": {
+    "fields": [
+      "n"
+    ],
+    "types": {
+      "n": "string"
+    },
+    "example": {
+      "label": "Example 1",
+      "n": "13"
+    }
+  },
+  "Problem484": {
+    "fields": [
+      "n",
+      "s"
+    ],
+    "types": {
+      "n": "number",
+      "s": "string"
+    },
+    "example": {
+      "label": "Example 1",
+      "n": 3,
+      "s": "DI"
+    }
+  },
+  "Problem486": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "nums": [
+        1,
+        5,
+        233,
+        7
+      ]
+    }
+  },
+  "Problem487": {
+    "fields": [
+      "nums",
+      "k"
+    ],
+    "types": {
+      "nums": "array",
+      "k": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "nums": [
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "k": 2
+    }
+  },
+  "Problem488": {
+    "fields": [
+      "board",
+      "hand"
+    ],
+    "types": {
+      "board": "string",
+      "hand": "string"
+    },
+    "example": {
+      "label": "Example 1",
+      "board": "WWWWW",
+      "hand": "WWWWW"
+    }
+  },
+  "Problem489": {
+    "fields": [
+      "room"
+    ],
+    "types": {
+      "room": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "room": [
+        [
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          1
+        ]
+      ]
+    }
+  },
+  "Problem490": {
+    "fields": [
+      "maze",
+      "start",
+      "destination"
+    ],
+    "types": {
+      "maze": "array",
+      "start": "array",
+      "destination": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "maze": [
+        [
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "start": [
+        0,
+        0
+      ],
+      "destination": [
+        4,
+        4
+      ]
+    }
+  },
+  "Problem491": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "nums": [
+        4,
+        6,
+        7,
+        7
+      ]
+    }
+  },
+  "Problem492": {
+    "fields": [
+      "area"
+    ],
+    "types": {
+      "area": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "area": 8
+    }
+  },
+  "Problem493": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "nums": [
+        1,
+        3,
+        2,
+        3,
+        1
+      ]
+    }
+  },
+  "Problem494": {
+    "fields": [
+      "nums",
+      "target"
+    ],
+    "types": {
+      "nums": "array",
+      "target": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "nums": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "target": 3
+    }
+  },
+  "Problem495": {
+    "fields": [
+      "attackTime",
+      "duration"
+    ],
+    "types": {
+      "attackTime": "array",
+      "duration": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "attackTime": [
+        1,
+        4
+      ],
+      "duration": 2
+    }
+  },
+  "Problem496": {
+    "fields": [
+      "nums1",
+      "nums2"
+    ],
+    "types": {
+      "nums1": "array",
+      "nums2": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "nums1": [
+        4,
+        1,
+        2
+      ],
+      "nums2": [
+        1,
+        3,
+        4,
+        2
+      ]
+    }
+  },
+  "Problem497": {
+    "fields": [
+      "rects"
+    ],
+    "types": {
+      "rects": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "rects": [
+        [
+          1,
+          1,
+          5,
+          5
+        ],
+        [
+          6,
+          2,
+          10,
+          4
+        ]
+      ]
+    }
+  },
+  "Problem498": {
+    "fields": [
+      "matrix"
+    ],
+    "types": {
+      "matrix": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "matrix": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          4,
+          5,
+          6
+        ],
+        [
+          7,
+          8,
+          9
+        ]
+      ]
+    }
+  },
+  "Problem499": {
+    "fields": [
+      "maze",
+      "ball",
+      "hole"
+    ],
+    "types": {
+      "maze": "array",
+      "ball": "array",
+      "hole": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "maze": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0
+        ]
+      ],
+      "ball": [
+        4,
+        3
+      ],
+      "hole": [
+        0,
+        1
+      ]
+    }
+  },
+  "Problem50": {
+    "fields": [
+      "x",
+      "n"
+    ],
+    "types": {
+      "x": "number",
+      "n": "number"
+    },
+    "example": {
+      "label": "2^10",
+      "x": 2,
+      "n": 10
+    }
+  },
+  "Problem500": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem501": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem502": {
+    "fields": [
+      "k",
+      "w",
+      "profits",
+      "capital"
+    ],
+    "types": {
+      "k": "number",
+      "w": "number",
+      "profits": "array",
+      "capital": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "k": 1,
+      "w": 0,
+      "profits": [
+        1,
+        2,
+        3
+      ],
+      "capital": [
+        0,
+        1,
+        1
+      ]
+    }
+  },
+  "Problem505": {
+    "fields": [
+      "candies",
+      "num_people"
+    ],
+    "types": {
+      "candies": "number",
+      "num_people": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "candies": 7,
+      "num_people": 4
+    }
+  },
+  "Problem506": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem507": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem508": {
+    "fields": [
+      "tree"
+    ],
+    "types": {
+      "tree": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "tree": [
+        5,
+        2,
+        -3
+      ]
+    }
+  },
+  "Problem509": {
+    "fields": [
+      "n"
+    ],
+    "types": {
+      "n": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "n": 2
+    }
+  },
+  "Problem51": {
+    "fields": [
+      "n"
+    ],
+    "types": {
+      "n": "number"
+    },
+    "example": {
+      "label": "n=4",
+      "n": 4
+    }
+  },
+  "Problem510": {
+    "fields": [
+      "tree",
+      "p"
+    ],
+    "types": {
+      "tree": "array",
+      "p": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "tree": [
+        2,
+        1,
+        3
+      ],
+      "p": 1
+    }
+  },
+  "Problem511": {
+    "fields": [
+      "activity"
+    ],
+    "types": {
+      "activity": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "activity": [
+        {
+          "player_id": 1,
+          "device_id": 2,
+          "event_date": "2016-03-01",
+          "games_played": 5
+        },
+        {
+          "player_id": 1,
+          "device_id": 2,
+          "event_date": "2016-05-02",
+          "games_played": 6
+        }
+      ]
+    }
+  },
+  "Problem512": {
+    "fields": [
+      "activity"
+    ],
+    "types": {
+      "activity": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "activity": [
+        {
+          "player_id": 1,
+          "device_id": 2,
+          "event_date": "2016-03-01",
+          "games_played": 5
+        },
+        {
+          "player_id": 1,
+          "device_id": 2,
+          "event_date": "2016-03-02",
+          "games_played": 6
+        },
+        {
+          "player_id": 2,
+          "device_id": 3,
+          "event_date": "2017-06-25",
+          "games_played": 1
+        }
+      ]
+    }
+  },
+  "Problem513": {
+    "fields": [
+      "root"
+    ],
+    "types": {
+      "root": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "root": [
+        2,
+        1,
+        3
+      ]
+    }
+  },
+  "Problem514": {
+    "fields": [
+      "ring",
+      "key"
+    ],
+    "types": {
+      "ring": "string",
+      "key": "string"
+    },
+    "example": {
+      "label": "Example 1",
+      "ring": "godding",
+      "key": "gd"
+    }
+  },
+  "Problem515": {
+    "fields": [
+      "root"
+    ],
+    "types": {
+      "root": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "root": [
+        1,
+        3,
+        2,
+        5,
+        3,
+        null,
+        9
+      ]
+    }
+  },
+  "Problem516": {
+    "fields": [
+      "s"
+    ],
+    "types": {
+      "s": "string"
+    },
+    "example": {
+      "label": "Example 1",
+      "s": "bbbab"
+    }
+  },
+  "Problem517": {
+    "fields": [
+      "machines"
+    ],
+    "types": {
+      "machines": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "machines": [
+        1,
+        0,
+        5
+      ]
+    }
+  },
+  "Problem518": {
+    "fields": [
+      "amount",
+      "coins"
+    ],
+    "types": {
+      "amount": "number",
+      "coins": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "amount": 5,
+      "coins": [
+        1,
+        2,
+        5
+      ]
+    }
+  },
+  "Problem519": {
+    "fields": [
+      "m",
+      "n"
+    ],
+    "types": {
+      "m": "number",
+      "n": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "m": 3,
+      "n": 2
+    }
+  },
+  "Problem52": {
+    "fields": [
+      "n"
+    ],
+    "types": {
+      "n": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "n": 4
+    }
+  },
+  "Problem520": {
+    "fields": [
+      "word"
+    ],
+    "types": {
+      "word": "string"
+    },
+    "example": {
+      "label": "Example 1",
+      "word": "USA"
+    }
+  },
+  "Problem521": {
+    "fields": [
+      "a",
+      "b"
+    ],
+    "types": {
+      "a": "string",
+      "b": "string"
+    },
+    "example": {
+      "label": "Example 1",
+      "a": "aba",
+      "b": "cdc"
+    }
+  },
+  "Problem522": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "nums": [
+        "aba",
+        "cdc",
+        "eae"
+      ]
+    }
+  },
+  "Problem523": {
+    "fields": [
+      "nums",
+      "k"
+    ],
+    "types": {
+      "nums": "array",
+      "k": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "nums": [
+        23,
+        2,
+        4,
+        6,
+        13
+      ],
+      "k": 6
+    }
+  },
+  "Problem524": {
+    "fields": [
+      "words"
+    ],
+    "types": {
+      "words": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "words": [
+        "a",
+        "b",
+        "ba",
+        "bca",
+        "bda",
+        "bdca"
+      ]
+    }
+  },
+  "Problem525": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "Equal 0 and 1",
+      "nums": [
+        0,
+        1
+      ]
+    }
+  },
+  "Problem526": {
+    "fields": [
+      "n"
+    ],
+    "types": {
+      "n": "number"
+    },
+    "example": {
+      "label": "n=2",
+      "n": 2
+    }
+  },
+  "Problem527": {
+    "fields": [
+      "dict"
+    ],
+    "types": {
+      "dict": "array"
+    },
+    "example": {
+      "label": "Simple",
+      "dict": [
+        "like",
+        "god",
+        "internal"
+      ]
+    }
+  },
+  "Problem528": {
+    "fields": [
+      "w"
+    ],
+    "types": {
+      "w": "array"
+    },
+    "example": {
+      "label": "Simple",
+      "w": [
+        1
+      ]
+    }
+  },
+  "Problem529": {
+    "fields": [
+      "board",
+      "click"
+    ],
+    "types": {
+      "board": "array",
+      "click": "array"
+    },
+    "example": {
+      "label": "Simple",
+      "board": [
+        [
+          "E",
+          "E",
+          "E",
+          "E",
+          "E"
+        ],
+        [
+          "E",
+          "E",
+          "M",
+          "E",
+          "E"
+        ],
+        [
+          "E",
+          "E",
+          "E",
+          "E",
+          "E"
+        ],
+        [
+          "E",
+          "E",
+          "E",
+          "E",
+          "E"
+        ]
+      ],
+      "click": [
+        0,
+        0
+      ]
+    }
+  },
+  "Problem530": {
+    "fields": [
+      "root"
+    ],
+    "types": {
+      "root": "array"
+    },
+    "example": {
+      "label": "Simple",
+      "root": [
+        4,
+        2,
+        6,
+        1,
+        3
+      ]
+    }
+  },
+  "Problem531": {
+    "fields": [
+      "picture"
+    ],
+    "types": {
+      "picture": "array"
+    },
+    "example": {
+      "label": "Simple",
+      "picture": [
+        [
+          "W",
+          "W",
+          "B"
+        ],
+        [
+          "W",
+          "B",
+          "W"
+        ],
+        [
+          "B",
+          "W",
+          "W"
+        ]
+      ]
+    }
+  },
+  "Problem532": {
+    "fields": [
+      "nums",
+      "k"
+    ],
+    "types": {
+      "nums": "array",
+      "k": "number"
+    },
+    "example": {
+      "label": "k=1",
+      "nums": [
+        3,
+        1,
+        4,
+        1,
+        5
+      ],
+      "k": 1
+    }
+  },
+  "Problem533": {
+    "fields": [
+      "picture",
+      "N"
+    ],
+    "types": {
+      "picture": "array",
+      "N": "number"
+    },
+    "example": {
+      "label": "n=2",
+      "picture": [
+        [
+          "W",
+          "B",
+          "W"
+        ],
+        [
+          "W",
+          "B",
+          "W"
+        ],
+        [
+          "W",
+          "B",
+          "W"
+        ]
+      ],
+      "N": 2
+    }
+  },
+  "Problem534": {
+    "fields": [
+      "operations",
+      "values"
+    ],
+    "types": {
+      "operations": "array",
+      "values": "array"
+    },
+    "example": {
+      "label": "Sample 1",
+      "operations": [
+        "LogSystem",
+        "put",
+        "put",
+        "retrieve"
+      ],
+      "values": [
+        [],
+        [
+          1,
+          "2017:01:01:23:59:59"
+        ],
+        [
+          2,
+          "2017:01:02:23:59:59"
+        ],
+        [
+          1,
+          "2017:01:01:23:59:59",
+          "2017:01:02:23:59:59",
+          "Second"
+        ]
+      ]
+    }
+  },
+  "Problem535": {
+    "fields": [
+      "url"
+    ],
+    "types": {
+      "url": "string"
+    },
+    "example": {
+      "label": "Simple",
+      "url": "https://leetcode.com/problems/design-tinyurl"
+    }
+  },
+  "Problem536": {
+    "fields": [
+      "s"
+    ],
+    "types": {
+      "s": "string"
+    },
+    "example": {
+      "label": "Simple",
+      "s": "4(2(3)(1))(6(5))"
+    }
+  },
+  "Problem538": {
+    "fields": [
+      "root"
+    ],
+    "types": {
+      "root": "array"
+    },
+    "example": {
+      "label": "Simple",
+      "root": [
+        5,
+        2,
+        13
+      ]
+    }
+  },
+  "Problem539": {
+    "fields": [
+      "timePoints"
+    ],
+    "types": {
+      "timePoints": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "timePoints": [
+        "23:59",
+        "00:00"
+      ]
+    }
+  },
+  "Problem540": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "Simple",
+      "nums": [
+        1,
+        1,
+        2,
+        3,
+        3,
+        4,
+        4,
+        8,
+        8
+      ]
+    }
+  },
+  "Problem542": {
+    "fields": [
+      "mat"
+    ],
+    "types": {
+      "mat": "array"
+    },
+    "example": {
+      "label": "Simple",
+      "mat": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ]
+    }
+  },
+  "Problem547": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem550": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem553": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem554": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem555": {
+    "fields": [
+      "strs"
+    ],
+    "types": {
+      "strs": "array"
+    },
+    "example": {
+      "label": "Basic",
+      "strs": [
+        "ab1de",
+        "xyz"
+      ]
+    }
+  },
+  "Problem559": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem561": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem562": {
+    "fields": [
+      "matrix"
+    ],
+    "types": {
+      "matrix": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "matrix": [
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          1
+        ]
+      ]
+    }
+  },
+  "Problem563": {
+    "fields": [
+      "arr"
+    ],
+    "types": {
+      "arr": "array"
+    },
+    "example": {
+      "label": "Basic",
+      "arr": [
+        1,
+        0,
+        1
+      ]
+    }
+  },
+  "Problem565": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem567": {
+    "fields": [
+      "s1",
+      "s2"
+    ],
+    "types": {
+      "s1": "string",
+      "s2": "string"
+    },
+    "example": {
+      "label": "s1=\"ab\" s2=\"eidbaooo\"",
+      "s1": "ab",
+      "s2": "eidbaooo"
+    }
+  },
+  "Problem569": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem57": {
+    "fields": [
+      "intervals",
+      "newInterval"
+    ],
+    "types": {
+      "intervals": "array",
+      "newInterval": "array"
+    },
+    "example": {
+      "label": "Ex1",
+      "intervals": [
+        [
+          1,
+          3
+        ],
+        [
+          6,
+          9
+        ]
+      ],
+      "newInterval": [
+        2,
+        5
+      ]
+    }
+  },
+  "Problem570": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem571": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem575": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem577": {
+    "fields": [
+      "schedules"
+    ],
+    "types": {
+      "schedules": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "schedules": [
+        [
+          [
+            1,
+            2
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        [
+          [
+            1,
+            3
+          ]
+        ],
+        [
+          [
+            4,
+            6
+          ]
+        ]
+      ]
+    }
+  },
+  "Problem578": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem579": {
+    "fields": [
+      "employees"
+    ],
+    "types": {
+      "employees": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "employees": [
+        {
+          "id": 1,
+          "month": 1,
+          "salary": 5000
+        },
+        {
+          "id": 1,
+          "month": 2,
+          "salary": 5000
+        },
+        {
+          "id": 1,
+          "month": 3,
+          "salary": 5000
+        },
+        {
+          "id": 2,
+          "month": 1,
+          "salary": 3500
+        },
+        {
+          "id": 2,
+          "month": 2,
+          "salary": 3500
+        }
+      ]
+    }
+  },
+  "Problem58": {
+    "fields": [
+      "s"
+    ],
+    "types": {
+      "s": "string"
+    },
+    "example": {
+      "label": "Ex 1",
+      "s": "Hello World"
+    }
+  },
+  "Problem580": {
+    "fields": [
+      "students"
+    ],
+    "types": {
+      "students": "array"
+    },
+    "example": {
+      "label": "Multiple Departments",
+      "students": [
+        {
+          "student_id": 1,
+          "student_name": "Alice",
+          "department_id": 1
+        },
+        {
+          "student_id": 2,
+          "student_name": "Bob",
+          "department_id": 1
+        },
+        {
+          "student_id": 3,
+          "student_name": "Charlie",
+          "department_id": 2
+        },
+        {
+          "student_id": 4,
+          "student_name": "Diana",
+          "department_id": 2
+        },
+        {
+          "student_id": 5,
+          "student_name": "Eve",
+          "department_id": 3
+        }
+      ]
+    }
+  },
+  "Problem581": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem583": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem584": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem586": {
+    "fields": [
+      "orders",
+      "customers"
+    ],
+    "types": {
+      "orders": "array",
+      "customers": "string"
+    },
+    "example": {
+      "label": "Example 1",
+      "orders": [
+        {
+          "orderId": 1,
+          "customerId": 1,
+          "amount": 150
+        },
+        {
+          "orderId": 2,
+          "customerId": 1,
+          "amount": 200
+        },
+        {
+          "orderId": 3,
+          "customerId": 2,
+          "amount": 100
+        },
+        {
+          "orderId": 4,
+          "customerId": 3,
+          "amount": 300
+        },
+        {
+          "orderId": 5,
+          "customerId": 3,
+          "amount": 150
+        }
+      ],
+      "customers": {
+        "1": "Alice",
+        "2": "Bob",
+        "3": "Charlie"
+      }
+    }
+  },
+  "Problem587": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem61": {
+    "fields": [
+      "list",
+      "k"
+    ],
+    "types": {
+      "list": "array",
+      "k": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "list": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "k": 2
+    }
+  },
+  "Problem64": {
+    "fields": [
+      "grid"
+    ],
+    "types": {
+      "grid": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "grid": [
+        [
+          1,
+          3,
+          1
+        ],
+        [
+          1,
+          5,
+          1
+        ],
+        [
+          4,
+          2,
+          1
+        ]
+      ]
+    }
+  },
+  "Problem65": {
+    "fields": [
+      "s"
+    ],
+    "types": {
+      "s": "string"
+    },
+    "example": {
+      "label": "Valid decimal",
+      "s": "3.14"
+    }
+  },
+  "Problem66": {
+    "fields": [
+      "digits",
+      "desc"
+    ],
+    "types": {
+      "digits": "array",
+      "desc": "string"
+    },
+    "example": {
+      "label": "Ex 1",
+      "digits": [
+        1,
+        2,
+        3
+      ],
+      "desc": "123"
+    }
+  },
+  "Problem67": {
+    "fields": [
+      "a",
+      "b"
+    ],
+    "types": {
+      "a": "string",
+      "b": "string"
+    },
+    "example": {
+      "label": "11 + 1",
+      "a": "11",
+      "b": "1"
+    }
+  },
+  "Problem68": {
+    "fields": [
+      "words",
+      "maxWidth"
+    ],
+    "types": {
+      "words": "array",
+      "maxWidth": "number"
+    },
+    "example": {
+      "label": "Ex 1",
+      "words": [
+        "This",
+        "is",
+        "an",
+        "example",
+        "of",
+        "text",
+        "justification"
+      ],
+      "maxWidth": 16
+    }
+  },
+  "Problem69": {
+    "fields": [
+      "x",
+      "desc"
+    ],
+    "types": {
+      "x": "number",
+      "desc": "string"
+    },
+    "example": {
+      "label": "x = 4",
+      "x": 4,
+      "desc": "answer = 2"
+    }
+  },
+  "Problem695": {
+    "fields": [
+      "grid"
+    ],
+    "types": {
+      "grid": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "grid": [
+        [
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          1
+        ]
+      ]
+    }
+  },
+  "Problem71": {
+    "fields": [
+      "path"
+    ],
+    "types": {
+      "path": "string"
+    },
+    "example": {
+      "label": "Example 1",
+      "path": "/home//foo/"
+    }
+  },
+  "Problem72": {
+    "fields": [
+      "w1",
+      "w2"
+    ],
+    "types": {
+      "w1": "string",
+      "w2": "string"
+    },
+    "example": {
+      "label": "\"horse\"→\"ros\"",
+      "w1": "horse",
+      "w2": "ros"
+    }
+  },
+  "Problem721": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem73": {
+    "fields": [
+      "matrix"
+    ],
+    "types": {
+      "matrix": "array"
+    },
+    "example": {
+      "label": "Ex1",
+      "matrix": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ]
+    }
+  },
+  "Problem74": {
+    "fields": [
+      "matrix",
+      "target"
+    ],
+    "types": {
+      "matrix": "array",
+      "target": "number"
+    },
+    "example": {
+      "label": "target=3",
+      "matrix": [
+        [
+          1,
+          3,
+          5,
+          7
+        ],
+        [
+          10,
+          11,
+          16,
+          20
+        ],
+        [
+          23,
+          30,
+          34,
+          60
+        ]
+      ],
+      "target": 3
+    }
+  },
+  "Problem743": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem746": {
+    "fields": [
+      "input"
+    ],
+    "types": {
+      "input": "array"
+    },
+    "example": {
+      "label": "[10,15,20]",
+      "input": [
+        10,
+        15,
+        20
+      ]
+    }
+  },
+  "Problem75": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "[2,0,2,1,1,0]",
+      "nums": [
+        2,
+        0,
+        2,
+        1,
+        1,
+        0
+      ]
+    }
+  },
+  "Problem778": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem80": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "nums": [
+        1,
+        1,
+        1,
+        2,
+        2,
+        3
+      ]
+    }
+  },
+  "Problem83": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem85": {
+    "fields": [],
+    "types": {},
+    "example": null
+  },
+  "Problem86": {
+    "fields": [
+      "list",
+      "x"
+    ],
+    "types": {
+      "list": "array",
+      "x": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "list": [
+        1,
+        4,
+        3,
+        2,
+        5,
+        2
+      ],
+      "x": 3
+    }
+  },
+  "Problem87": {
+    "fields": [
+      "s1",
+      "s2"
+    ],
+    "types": {
+      "s1": "string",
+      "s2": "string"
+    },
+    "example": {
+      "label": "Example 1",
+      "s1": "great",
+      "s2": "rgeat"
+    }
+  },
+  "Problem88": {
+    "fields": [
+      "nums1",
+      "m",
+      "nums2",
+      "n"
+    ],
+    "types": {
+      "nums1": "array",
+      "m": "number",
+      "nums2": "array",
+      "n": "number"
+    },
+    "example": {
+      "label": "Ex 1",
+      "nums1": [
+        1,
+        2,
+        3,
+        0,
+        0,
+        0
+      ],
+      "m": 3,
+      "nums2": [
+        2,
+        5,
+        6
+      ],
+      "n": 3
+    }
+  },
+  "Problem90": {
+    "fields": [
+      "nums"
+    ],
+    "types": {
+      "nums": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "nums": [
+        1,
+        2,
+        2
+      ]
+    }
+  },
+  "Problem92": {
+    "fields": [
+      "list",
+      "left",
+      "right"
+    ],
+    "types": {
+      "list": "array",
+      "left": "number",
+      "right": "number"
+    },
+    "example": {
+      "label": "Example 1",
+      "list": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "left": 2,
+      "right": 4
+    }
+  },
+  "Problem94": {
+    "fields": [
+      "tree"
+    ],
+    "types": {
+      "tree": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "tree": [
+        1,
+        null,
+        2,
+        3
+      ]
+    }
+  },
+  "Problem95": {
+    "fields": [
+      "n"
+    ],
+    "types": {
+      "n": "number"
+    },
+    "example": {
+      "label": "n = 3",
+      "n": 3
+    }
+  },
+  "Problem96": {
+    "fields": [
+      "n"
+    ],
+    "types": {
+      "n": "number"
+    },
+    "example": {
+      "label": "n = 3",
+      "n": 3
+    }
+  },
+  "Problem97": {
+    "fields": [
+      "s1",
+      "s2",
+      "s3"
+    ],
+    "types": {
+      "s1": "string",
+      "s2": "string",
+      "s3": "string"
+    },
+    "example": {
+      "label": "Example 1",
+      "s1": "aabcc",
+      "s2": "dbbca",
+      "s3": "aadbbcbcac"
+    }
+  },
+  "Problem99": {
+    "fields": [
+      "tree"
+    ],
+    "types": {
+      "tree": "array"
+    },
+    "example": {
+      "label": "Example 1",
+      "tree": [
+        1,
+        3,
+        null,
+        null,
+        2
+      ]
+    }
+  }
+}

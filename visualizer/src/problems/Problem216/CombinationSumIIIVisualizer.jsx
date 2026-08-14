@@ -9,6 +9,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import "./CombinationSumIIIVisualizer.css"
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -238,8 +239,17 @@ function VisualizationPanel({ step }) {
 }
 
 export default function CombinationSumIIIVisualizer() {
-  const [k] = useState(3)
-  const [n] = useState(7)
+  const [kInput, setKInput] = useState(3);
+  const [nInput, setNInput] = useState(7);
+  const { k, n, inputError } = useMemo(() => {
+    try {
+      const parsedK = Number(kInput); if (isNaN(parsedK)) throw new Error('k must be a number');
+      const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
+      return { k: parsedK, n: parsedN, inputError: '' };
+    } catch (e) {
+      return { k: 3, n: 7, inputError: e.message };
+    }
+  }, [kInput, nInput]);
   const steps = useMemo(() => generateSteps(k, n).map((s) => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [k, n])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
@@ -264,6 +274,7 @@ export default function CombinationSumIIIVisualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [["code", "viz"]], minimized: [] }} />
       <FloatingPanel title="Controls">
         <PlaybackControls

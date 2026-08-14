@@ -9,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './SameTreeVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 
@@ -302,6 +303,19 @@ export default function SameTreeVisualizer() {
 
     // ─── Extract panels for Lumino layout ─────────────────────────────────────
     const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"p","label":"p","type":"string"},{"key":"q","label":"q","type":"string"}]}
+        values={{ p: pInput, q: qInput }}
+        onChange={(k, v) => { if (k === 'p') setPInput(v); if (k === 'q') setQInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
         <div className="st-panel main">
             <header className="st-head">
                 <span>Two Tree DFS Comparison</span>
@@ -379,7 +393,8 @@ export default function SameTreeVisualizer() {
                 </div>
             </div>
         </div>
-    )
+    
+    </>)
 
     const statePanel = (
         <div className="st-panel side">
@@ -465,7 +480,6 @@ export default function SameTreeVisualizer() {
     )
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 isPlaying={isPlaying}
@@ -504,7 +518,6 @@ export default function SameTreeVisualizer() {
         <div className="st-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.state   && createPortal(statePanel,   panelDivs.state)}
                     {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}

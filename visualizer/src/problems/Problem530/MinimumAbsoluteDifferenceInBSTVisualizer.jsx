@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './MinimumAbsoluteDifferenceInBSTVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -248,15 +249,24 @@ function VisualizationPanel({ root, step, applyEx }) {
 }
 
 export default function MinimumAbsoluteDifferenceInBSTVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { root: [4, 2, 6, 1, 3] })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [rootInput, setRootInput] = useState("[4,2,6,1,3]");
+  const { root, inputError } = useMemo(() => {
+    try {
+      const parsedRoot = JSON.parse(rootInput); if (!Array.isArray(parsedRoot)) throw new Error('root must be an array');
+      return { root: parsedRoot, inputError: '' };
+    } catch (e) {
+      return { root: "[4,2,6,1,3]", inputError: e.message };
+    }
+  }, [rootInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.root).map((current) => ({
+      generateSteps(root).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [root]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -264,7 +274,7 @@ export default function MinimumAbsoluteDifferenceInBSTVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setRootInput(JSON.stringify(e.root)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -279,7 +289,7 @@ export default function MinimumAbsoluteDifferenceInBSTVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <div style={{ position: 'relative' }}>
+              <div style={{ position: 'relative' }}>
 
           <CodeTracePanel
           step={step}
@@ -304,9 +314,8 @@ export default function MinimumAbsoluteDifferenceInBSTVisualizer() {
 
             />
 
-          )}
-
-        </div>
+          
+            </div>
       ),
     },
     {
@@ -314,7 +323,7 @@ export default function MinimumAbsoluteDifferenceInBSTVisualizer() {
       title: '🌳 Min Difference in BST',
       content: (
         <VisualizationPanel
-          root={ex.root}
+          root={root}
           step={step}
           applyEx={applyEx}
         />

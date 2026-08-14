@@ -10,6 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './FourSumVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 
@@ -208,6 +209,19 @@ export default function FourSumVisualizer() {
 
     // Step 2: Extract panels into consts
     const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"nums","label":"nums","type":"array"},{"key":"target","label":"target","type":"array"}]}
+        values={{ nums: numsInput, target: targetInput }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'target') setTargetInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
         <section className="fs4-panel main">
             <header className="fs4-head">
                 <span>Sorted Array · Two Pointers</span>
@@ -276,7 +290,8 @@ export default function FourSumVisualizer() {
                 )}
             </div>
         </section>
-    )
+    
+    </>)
 
     const statePanel = (
         <section className="fs4-panel results">
@@ -327,7 +342,6 @@ export default function FourSumVisualizer() {
     )
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={FOURSUM_PATTERNS} />
             )}
@@ -370,7 +384,6 @@ export default function FourSumVisualizer() {
         <div className="fs4-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.state && createPortal(statePanel, panelDivs.state)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}

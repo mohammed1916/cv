@@ -9,6 +9,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './BestTimeBuySellStockVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -169,6 +170,19 @@ export default function BestTimeBuySellStockVisualizer() {
 
     // Step 3: Extract panels into consts
     const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"prices","label":"prices","type":"array"}]}
+        values={{ prices: pricesInput }}
+        onChange={(k, v) => { if (k === 'prices') setPricesInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
         <section className="btbs-panel">
             <header className="btbs-head">
                 <span>Best Time to Buy and Sell Stock · Greedy One Pass</span>
@@ -250,7 +264,8 @@ export default function BestTimeBuySellStockVisualizer() {
                 )}
             </div>
         </section>
-    )
+    
+    </>)
 
     const codePanel = (
         <div style={{ position: 'relative', height: '100%' }}>
@@ -273,7 +288,6 @@ export default function BestTimeBuySellStockVisualizer() {
     )
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
@@ -306,7 +320,6 @@ export default function BestTimeBuySellStockVisualizer() {
         <div className="btbs-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

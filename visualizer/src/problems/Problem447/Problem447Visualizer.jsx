@@ -14,6 +14,7 @@ import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
 
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const PATTERNS = ['boomerang_found', 'checking', 'done', 'outer_loop', 'start']
 const LINE_PATTERN_MAP = {
   1: 'done',
@@ -419,6 +420,17 @@ export default function Problem447Visualizer() {
 
   return (
     <div className="problem-shell">
+      <ManualInputPanel
+        fields={[{"key":"points","label":"points","type":"string"}]}
+        values={{ points: pointsInput }}
+        onChange={(k, v) => { if (k === 'points') setPointsInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
 
       <FloatingPanel title="Playback Controls">

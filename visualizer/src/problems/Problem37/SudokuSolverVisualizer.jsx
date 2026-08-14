@@ -209,7 +209,6 @@ export default function SudokuSolverVisualizer() {
   );
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={SUDOKUSOLVER_PATTERNS} />
       )}
@@ -244,7 +243,6 @@ export default function SudokuSolverVisualizer() {
     <div className="su-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state && createPortal(statePanel, panelDivs.state)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

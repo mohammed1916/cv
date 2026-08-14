@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './PopulatingNextRightPointersVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -182,19 +183,27 @@ function VisualizationPanel({ step }) {
 }
 
 export default function PopulatingNextRightPointersVisualizer() {
-  const [input, setInput] = useState(EXAMPLES[0]?.root || [1, 2, 3, 4, 5, 6, 7])
-  const steps = useMemo(
+  const [input, setInput] = useState({"label":"Example 1","root":[1,2,3,4,5,6,7]});
+  const [rootInput, setRootInput] = useState("[1,2,3,4,5,6,7]");
+  const { root, inputError } = useMemo(() => {
+    try {
+      const parsedRoot = JSON.parse(rootInput); if (!Array.isArray(parsedRoot)) throw new Error('root must be an array');
+      return { root: parsedRoot, inputError: '' };
+    } catch (e) {
+      return { root: [1,2,3,4,5,6,7], inputError: e.message };
+    }
+  }, [rootInput]);  const steps = useMemo(
     () =>
-      generateSteps(input).map((s) => ({
+      generateSteps(root).map((s) => ({
         ...s,
         relatedLines: s.relatedLines ?? (s.activeLine ? [s.activeLine] : []),
       })),
-    [input]
+    [root]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setInput(e.root); handleReset() }, [handleReset])
+  const applyEx = useCallback((e) => { setRootInput(JSON.stringify(e.root)); handleReset(); }, [handleReset]);
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -217,7 +226,8 @@ export default function PopulatingNextRightPointersVisualizer() {
     <div className="problem116-panel">
       <VisualizationPanel step={step} />
     </div>
-  )
+  
+    </>)
 
   const statusPanel = (
     <div className="problem116-status">
@@ -226,7 +236,6 @@ export default function PopulatingNextRightPointersVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -265,7 +274,6 @@ export default function PopulatingNextRightPointersVisualizer() {
     <div className="problem116-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

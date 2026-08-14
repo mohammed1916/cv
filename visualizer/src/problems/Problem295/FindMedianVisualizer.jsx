@@ -8,6 +8,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import { buildTree, computeLayout, collectNodes, buildEdges, TreeSVG } from '../../components/treeUtils'
 import "./FindMedianVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -239,6 +240,17 @@ export default function FindMedianVisualizer() {
 
     return (
         <div className="fm-shell">
+      <ManualInputPanel
+        fields={[{"key":"nums","label":"nums","type":"array"}]}
+        values={{ nums: numsInput }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
             <div className="fm-controls-row">
                 <div className="fm-examples">
                     {EXAMPLES.map((ex) => (

@@ -10,6 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem408Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('valid-word-abbreviation')
 
@@ -324,11 +325,22 @@ function AbbreviationVisualization({ word, abbr, step }) {
 
 export default function Problem408Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [wordInput, setWordInput] = useState(EXAMPLES[0]?.word ?? '');
+  const [abbrInput, setAbbrInput] = useState("");
+  const { word, abbr, inputError } = useMemo(() => {
+    try {
+      const parsedWord = wordInput;
+      const parsedAbbr = JSON.parse(abbrInput); if (!Array.isArray(parsedAbbr)) throw new Error('abbr must be an array');
+      return { word: parsedWord, abbr: parsedAbbr, inputError: '' };
+    } catch (e) {
+      return { word: EXAMPLES[exIdx]?.word ?? '', abbr: EXAMPLES[exIdx]?.abbr ?? '', inputError: e.message };
+    }
+  }, [wordInput, abbrInput]);
   const example = EXAMPLES[exIdx]
 
   const steps = useMemo(
     () =>
-      generateSteps(example.word, example.abbr).map((current) => ({
+      generateSteps(word, abbr).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
@@ -340,7 +352,7 @@ export default function Problem408Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((idx) => { setExIdx(idx); handleReset(); }, [handleReset])
+  const applyEx = useCallback((i) => { setExIdx(i); setWordInput(String(EXAMPLES[i].word)); setAbbrInput(JSON.stringify(EXAMPLES[i].abbr)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -403,7 +415,7 @@ export default function Problem408Visualizer() {
               ))}
             </div>
           </div>
-          <AbbreviationVisualization word={example.word} abbr={example.abbr} step={step} />
+          <AbbreviationVisualization word={word} abbr={abbr} step={step} />
         </div>
       ),
     },
@@ -411,6 +423,7 @@ export default function Problem408Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

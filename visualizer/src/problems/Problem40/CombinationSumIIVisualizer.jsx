@@ -7,6 +7,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './CombinationSumIIVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
@@ -289,6 +290,19 @@ export default function CombinationSumIIVisualizer() {
 
   // Extract panels for Lumino DockPanel
   const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"candidates","label":"candidates","type":"array"},{"key":"target","label":"target","type":"number"}]}
+        values={{ candidates: candidatesInput, target: targetInput }}
+        onChange={(k, v) => { if (k === 'candidates') setCandidatesInput(v); if (k === 'target') setTargetInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <div className="csii-panel">
       <div className="csii-panel-head">
         State & Recursion Tree
@@ -390,7 +404,8 @@ export default function CombinationSumIIVisualizer() {
 
       </div>
     </div>
-  )
+  
+    </>)
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
@@ -419,7 +434,6 @@ export default function CombinationSumIIVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={COMBINATIONSUMII_PATTERNS} />
       )}
@@ -459,7 +473,6 @@ export default function CombinationSumIIVisualizer() {
     <div className="csii-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

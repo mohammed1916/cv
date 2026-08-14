@@ -8,6 +8,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './FindFirstLastPositionVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
@@ -306,6 +307,19 @@ export default function FindFirstLastPositionVisualizer() {
 
   // Step 2: Extract panels into consts
   const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"nums","label":"nums","type":"array"},{"key":"target","label":"target","type":"number"}]}
+        values={{ nums: numsInput, target: targetInput }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'target') setTargetInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <div className="ffp-panel" style={{ flex: 1 }}>
       <div className="ffp-panel-head">
         Sorted Array & Search Range
@@ -400,7 +414,8 @@ export default function FindFirstLastPositionVisualizer() {
 
       </div>
     </div>
-  )
+  
+    </>)
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
@@ -431,7 +446,6 @@ export default function FindFirstLastPositionVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={FINDFIRSTLASTPOSITION_PATTERNS} />
       )}
@@ -472,7 +486,6 @@ export default function FindFirstLastPositionVisualizer() {
     <div className="ffp-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}
           {panelDivs.status  && createPortal(statusPanel,  panelDivs.status)}

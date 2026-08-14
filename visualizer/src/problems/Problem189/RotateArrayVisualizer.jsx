@@ -10,6 +10,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./RotateArrayVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -170,15 +171,26 @@ function VisualizationPanel({ nums, step, n, k, applyEx }) {
 
 export default function RotateArrayVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => generateSteps(ex.nums, ex.k), [ex]);
+  const [numsInput, setNumsInput] = useState("[1,2,3,4,5,6,7]");
+  const [kInput, setKInput] = useState(3);
+  const { nums: inputNums, k, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      const parsedK = Number(kInput); if (isNaN(parsedK)) throw new Error('k must be a number');
+      return { nums: parsedNums, k: parsedK, inputError: '' };
+    } catch (e) {
+      return { nums: "[1,2,3,4,5,6,7]", k: 3, inputError: e.message };
+    }
+  }, [numsInput, kInput]);
+  const steps = useMemo(() => generateSteps(inputNums, k), [inputNums, k]);
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); setNumsInput(JSON.stringify(e.nums)); setKInput(String(e.k)); handleReset(); }, [handleReset]);;
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
 
-  const nums = step?.nums ?? ex.nums;
+  const nums = step?.nums ?? inputNums;
 
   const dockPanels = useMemo(() => [
     {
@@ -201,8 +213,8 @@ export default function RotateArrayVisualizer() {
         <VisualizationPanel
           nums={nums}
           step={step}
-          n={ex.nums.length}
-          k={ex.k}
+          n={nums.length}
+          k={k}
           applyEx={applyEx}
         />
       ),
@@ -211,6 +223,7 @@ export default function RotateArrayVisualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

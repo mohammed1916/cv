@@ -8,6 +8,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./CopyListRandomVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -72,15 +73,23 @@ const EXAMPLES = getExamples('copy-list-random');
 
 export default function CopyListRandomVisualizer() {
     const [sel, setSel] = useState(0);
+  const [nodesInput, setNodesInput] = useState(JSON.stringify(EXAMPLES[0]?.["nodes"] ?? null));
+  const { nodes, inputError } = useMemo(() => {
+    try {
+      const parsedNodes = JSON.parse(nodesInput); if (!Array.isArray(parsedNodes)) throw new Error('nodes must be an array');
+      return { nodes: parsedNodes, inputError: '' };
+    } catch (e) {
+      return { nodes: EXAMPLES[sel]?.nodes, inputError: e.message };
+    }
+  }, [nodesInput]);;
 
-    const { nodes } = EXAMPLES[sel];
-    const steps = useMemo(() => generateSteps(nodes), [nodes]);
+        const steps = useMemo(() => generateSteps(nodes), [nodes]);
     const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : steps[0];
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
-    const applyExample = useCallback((i) => { setSel(i); handleReset(); }, [handleReset]);
+    const applyExample = useCallback((i) => { setSel(i); setNodesInput(JSON.stringify(EXAMPLES[i].nodes)); handleReset(); }, [handleReset]);
 
     const cur = step?.cur ?? -1;
     const cloned = step?.cloned ?? new Set();
@@ -142,7 +151,8 @@ export default function CopyListRandomVisualizer() {
                 </div>
             )}
         </div>
-    );
+    
+    </>);
 
     const codePanel = (
         <div style={{ position: 'relative', height: '100%' }}>
@@ -161,7 +171,6 @@ export default function CopyListRandomVisualizer() {
     );
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
@@ -192,7 +201,6 @@ export default function CopyListRandomVisualizer() {
         <div className="clr-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

@@ -11,6 +11,7 @@ import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./LongestIncreasingPathVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 const PATTERNS = []
@@ -192,18 +193,26 @@ function VisualizationPanel({ EXAMPLES, ex, matrix, dpGrid, activeCell, neighbor
 
 export default function LongestIncreasingPathVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-    const steps = useMemo(() => generateSteps(ex.matrix).map((current) => ({
+  const [matrixInput, setMatrixInput] = useState("[[9,9,4],[6,6,8],[2,1,1]]");
+  const { matrix, inputError } = useMemo(() => {
+    try {
+      const parsedMatrix = JSON.parse(matrixInput); if (!Array.isArray(parsedMatrix)) throw new Error('matrix must be an array');
+      return { matrix: parsedMatrix, inputError: '' };
+    } catch (e) {
+      return { matrix: "[[9,9,4],[6,6,8],[2,1,1]]", inputError: e.message };
+    }
+  }, [matrixInput]);
+    const steps = useMemo(() => generateSteps(matrix).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
-    })), [ex]);
+    })), [matrix]);
     const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+    const applyEx = useCallback((e) => { setEx(e); setMatrixInput(JSON.stringify(e.matrix)); handleReset(); }, [handleReset]);;
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
-    const matrix = ex.matrix;
     const dpGrid = step?.dpGrid ?? matrix.map(r => r.map(() => 0));
     const activeCell = step?.activeCell ?? null;
     const neighbor = step?.neighbor ?? null;
@@ -215,7 +224,8 @@ export default function LongestIncreasingPathVisualizer() {
 
     const vizPanel = (
         <VisualizationPanel EXAMPLES={EXAMPLES} ex={ex} matrix={matrix} dpGrid={dpGrid} activeCell={activeCell} neighbor={neighbor} visiting={visiting} visitSet={visitSet} globalBest={globalBest} step={step} maxDP={maxDP} applyEx={applyEx} />
-    );
+    
+    </>);
 
     const codePanel = (
         <CodeTracePanel step={step} codeLines={SOLUTION_CODE} autoScroll={autoScrollCode} onActiveLineDomChange={setActiveLineDom} />
@@ -232,7 +242,6 @@ export default function LongestIncreasingPathVisualizer() {
         <div className="problem-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                 </>

@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem482Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
 
 const PATTERNS = {
@@ -241,17 +242,28 @@ const SOLUTION_CODE_INLINE = [
 ]
 
 export default function Problem482Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [sInput, setSInput] = useState("5F3Z-2e-9-w");
+  const [kInput, setKInput] = useState(4);
+  const { s, k, inputError } = useMemo(() => {
+    try {
+      const parsedS = sInput;
+      const parsedK = Number(kInput); if (isNaN(parsedK)) throw new Error('k must be a number');
+      return { s: parsedS, k: parsedK, inputError: '' };
+    } catch (e) {
+      return { s: "5F3Z-2e-9-w", k: 4, inputError: e.message };
+    }
+  }, [sInput, kInput]);
   const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(
-    () => generateSteps(ex.s, ex.k).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),
-    [ex]
+    () => generateSteps(s, k).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),
+    [s, k]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setSInput(String(e.s)); setKInput(String(e.k)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
@@ -273,12 +285,13 @@ export default function Problem482Visualizer() {
     {
       id: 'viz',
       title: '🔑 License Key Format',
-      content: <VisualizationPanel s={ex.s} k={ex.k} step={step} applyEx={applyEx} />,
+      content: <VisualizationPanel s={s} k={k} step={step} applyEx={applyEx} />,
     },
   ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, applyEx, ex])
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}

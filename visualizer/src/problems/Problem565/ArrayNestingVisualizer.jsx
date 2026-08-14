@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './ArrayNestingVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -380,8 +381,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
 export default function ArrayNestingVisualizer() {
   const examples = useMemo(() => getExamplesOr('array-nesting', []), [])
-  const [arrayInput, setArrayInput] = useState('[5,4,0,3,1,6,2]')
-
+  const [arrayInput, setArrayInput] = useState("[5,4,0,3,1,6,2]");
   const { array, inputError } = useMemo(() => {
     try {
       const arr = JSON.parse(arrayInput)
@@ -485,6 +485,7 @@ export default function ArrayNestingVisualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}

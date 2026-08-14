@@ -13,6 +13,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import './MinimumPathSumVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('minimum-path-sum')
 
@@ -196,13 +197,11 @@ function MinimumPathSumVisualization({
         {currR >= 1 && currC >= 1 && (step?.phase === 'fill' || step?.phase === 'fill-row' || step?.phase === 'fill-col') && (
           <div className="mps-arrows">
             {currR >= 1 && (
-              <>
                 <span className="mps-arrow above-arrow">↓ from above: {step.from_above}</span>
                 {currC >= 1 && <span className="mps-plus">+</span>}
               </>
             )}
             {currC >= 1 && (
-              <>
                 <span className="mps-arrow left-arrow">→ from left: {step.from_left}</span>
                 <span className="mps-plus">=</span>
               </>
@@ -306,6 +305,19 @@ export default function MinimumPathSumVisualizer() {
   )
 
   const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"grid","label":"grid","type":"array"}]}
+        values={{ grid: gridInput }}
+        onChange={(k, v) => { if (k === 'grid') setGridInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <MinimumPathSumVisualization
       m={m}
       n={n}
@@ -317,7 +329,8 @@ export default function MinimumPathSumVisualizer() {
       handleReset={handleReset}
       inputError={inputError}
     />
-  )
+  
+    </>)
 
   const statusPanel = (
     <div className="mps-status">
@@ -326,7 +339,6 @@ export default function MinimumPathSumVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={MINIMUMPATHSUM_PATTERNS} />
       )}
@@ -369,7 +381,6 @@ export default function MinimumPathSumVisualizer() {
     <div className="mps-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

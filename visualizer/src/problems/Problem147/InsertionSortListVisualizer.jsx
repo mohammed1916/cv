@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './InsertionSortListVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -208,7 +209,6 @@ function ListVisualization({ values }) {
                 {val}
               </text>
               {idx < values.length - 1 && (
-                <>
                   <line
                     x1={x + nodeWidth}
                     y1={y + nodeHeight / 2}
@@ -293,19 +293,27 @@ function VisualizationPanel({ step }) {
 }
 
 export default function InsertionSortListVisualizer() {
-  const [input, setInput] = useState(EXAMPLES[0]?.head || [4, 2, 1, 3])
-  const steps = useMemo(
+  const [input, setInput] = useState({"label":"Example 1","head":[4,2,1,3]});
+  const [arrInput, setArrInput] = useState("");
+  const { arr, inputError } = useMemo(() => {
+    try {
+      const parsedArr = arrInput;
+      return { arr: parsedArr, inputError: '' };
+    } catch (e) {
+      return { arr: "", inputError: e.message };
+    }
+  }, [arrInput]);  const steps = useMemo(
     () =>
-      generateSteps(input).map((s) => ({
+      generateSteps(arr).map((s) => ({
         ...s,
         relatedLines: s.relatedLines ?? (s.activeLine ? [s.activeLine] : []),
       })),
-    [input]
+    [arr]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setInput(e.head); handleReset() }, [handleReset])
+  const applyEx = useCallback((e) => { setArrInput(String(e.arr)); handleReset(); }, [handleReset]);
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -328,7 +336,8 @@ export default function InsertionSortListVisualizer() {
     <div className="isl-panel">
       <VisualizationPanel step={step} />
     </div>
-  )
+  
+    </>)
 
   const statusPanel = (
     <div className="isl-status">
@@ -341,7 +350,6 @@ export default function InsertionSortListVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -378,7 +386,6 @@ export default function InsertionSortListVisualizer() {
     <div className="isl-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

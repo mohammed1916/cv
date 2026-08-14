@@ -7,6 +7,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./PowerOfTwoVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -197,16 +198,27 @@ function AndRow({ andBits, highlightBit, bits }) {
 
 export default function PowerOfTwoVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => generateSteps(ex.n), [ex]);
+  const [nInput, setNInput] = useState(1);
+  const [descInput, setDescInput] = useState("2⁰ = 1");
+  const { n: inputN, desc, inputError } = useMemo(() => {
+    try {
+      const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
+      const parsedDesc = descInput;
+      return { n: parsedN, desc: parsedDesc, inputError: '' };
+    } catch (e) {
+      return { n: 1, desc: "2⁰ = 1", inputError: e.message };
+    }
+  }, [nInput, descInput]);
+  const steps = useMemo(() => generateSteps(inputN), [inputN]);
   const {
     stepIndex, stepForward, stepBack, togglePlay,
     handleReset, isPlaying, speed, setSpeed, isDone,
   } = usePlaybackState(steps.length);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); setNInput(String(e.n)); setDescInput(String(e.desc)); handleReset(); }, [handleReset]);;
 
-  const n = step?.n ?? ex.n;
+  const n = step?.n ?? inputN;
   const nMinus1 = step?.nMinus1 ?? null;
   const andBits = step?.andBits ?? null;
   const highlightBit = step?.highlightBit ?? null;
@@ -219,6 +231,7 @@ export default function PowerOfTwoVisualizer() {
 
   return (
     <div className="pt-shell">
+      
       {/* Example selector */}
       <div className="pt-examples">
         {EXAMPLES.map(e => (

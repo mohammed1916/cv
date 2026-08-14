@@ -11,6 +11,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import './Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const PATTERNS = ['init', 'split', 'skip', 'pop', 'push', 'join', 'done']
@@ -320,19 +321,28 @@ function VisualizationPanel({ step }) {
 }
 
 export default function Problem71Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [pathInput, setPathInput] = useState("/home//foo/");
+  const { path, inputError } = useMemo(() => {
+    try {
+      const parsedPath = pathInput;
+      return { path: parsedPath, inputError: '' };
+    } catch (e) {
+      return { path: "/home//foo/", inputError: e.message };
+    }
+  }, [pathInput]);
   const steps = useMemo(
     () =>
-      generateSteps(ex.path).map((c) => ({
+      generateSteps(path).map((c) => ({
         ...c,
         relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []),
       })),
-    [ex]
+    [path]
   )
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); handleReset() }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setPathInput(String(e.path)); handleReset(); }, [handleReset]);
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -382,7 +392,6 @@ export default function Problem71Visualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -418,9 +427,9 @@ export default function Problem71Visualizer() {
 
   return (
     <div className="problem71-shell">
+      
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.examples && createPortal(examplesPanel, panelDivs.examples)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}

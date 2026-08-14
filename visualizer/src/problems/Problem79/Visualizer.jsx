@@ -12,6 +12,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import './WordSearchVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -346,6 +347,19 @@ export default function WordSearchVisualizer() {
   )
 
   const vizPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"board","label":"board","type":"string"},{"key":"word","label":"word","type":"string"}]}
+        values={{ board: boardInput, word: wordInput }}
+        onChange={(k, v) => { if (k === 'board') setBoardInput(v); if (k === 'word') setWordInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <VisualizationPanel
       EXAMPLES={EXAMPLES}
       applyExample={applyExample}
@@ -360,7 +374,8 @@ export default function WordSearchVisualizer() {
       setWordInput={setWordInput}
       inputError={inputError}
     />
-  )
+  
+    </>)
 
   const codePanel = (
     <div style={{ position: "relative" }}>
@@ -396,7 +411,6 @@ export default function WordSearchVisualizer() {
     <div className="problem-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
         </>

@@ -193,7 +193,6 @@ export default function CloneGraphVisualizer() {
     );
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 onReset={handleReset}
@@ -260,7 +259,6 @@ export default function CloneGraphVisualizer() {
             <div className="cg-dock-shell">
                 <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
                 {panelDivs && (
-                    <>
                         {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                         {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
                         {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

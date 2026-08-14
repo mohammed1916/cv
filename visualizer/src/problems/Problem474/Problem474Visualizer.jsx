@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem474Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -204,17 +205,30 @@ function VisualizationPanel({ strs, m, n, step, applyEx }) {
 }
 
 export default function Problem474Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [strsInput, setStrsInput] = useState("[\"10\",\"0001\",\"111001\",\"1\",\"0\"]");
+  const [mInput, setMInput] = useState(5);
+  const [nInput, setNInput] = useState(3);
+  const { strs, m, n, inputError } = useMemo(() => {
+    try {
+      const parsedStrs = JSON.parse(strsInput); if (!Array.isArray(parsedStrs)) throw new Error('strs must be an array');
+      const parsedM = Number(mInput); if (isNaN(parsedM)) throw new Error('m must be a number');
+      const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
+      return { strs: parsedStrs, m: parsedM, n: parsedN, inputError: '' };
+    } catch (e) {
+      return { strs: "[\"10\",\"0001\",\"111001\",\"1\",\"0\"]", m: 5, n: 3, inputError: e.message };
+    }
+  }, [strsInput, mInput, nInput]);
   const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(
-    () => generateSteps(ex.strs, ex.m, ex.n).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),
-    [ex]
+    () => generateSteps(strs, m, n).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),
+    [strs, m, n]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setStrsInput(JSON.stringify(e.strs)); setMInput(String(e.m)); setNInput(String(e.n)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
@@ -236,12 +250,13 @@ export default function Problem474Visualizer() {
     {
       id: 'viz',
       title: '📦 Ones and Zeroes',
-      content: <VisualizationPanel strs={ex.strs} m={ex.m} n={ex.n} step={step} applyEx={applyEx} />,
+      content: <VisualizationPanel strs={strs} m={m} n={n} step={step} applyEx={applyEx} />,
     },
   ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, applyEx, ex])
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         <PlaybackControls

@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './FreedomTrailVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('freedom-trail')
@@ -294,15 +295,26 @@ function VisualizationPanel({ ring, key, step, applyEx }) {
 }
 
 export default function FreedomTrailVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { ring: 'godding', key: 'gd' })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [ringInput, setRingInput] = useState("godding");
+  const [keyInput, setKeyInput] = useState("gd");
+  const { ring, key, inputError } = useMemo(() => {
+    try {
+      const parsedRing = ringInput;
+      const parsedKey = keyInput;
+      return { ring: parsedRing, key: parsedKey, inputError: '' };
+    } catch (e) {
+      return { ring: "godding", key: "gd", inputError: e.message };
+    }
+  }, [ringInput, keyInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.ring, ex.key).map((current) => ({
+      generateSteps(ring, key).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [ring, key]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -310,7 +322,7 @@ export default function FreedomTrailVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setRingInput(String(e.ring)); setKeyInput(String(e.key)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -325,7 +337,7 @@ export default function FreedomTrailVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
+              <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
@@ -339,8 +351,8 @@ export default function FreedomTrailVisualizer() {
       title: '🔑 Freedom Trail',
       content: (
         <VisualizationPanel
-          ring={ex.ring}
-          key={ex.key}
+          ring={ring}
+          key={key}
           step={step}
           applyEx={applyEx}
         />
@@ -367,7 +379,8 @@ export default function FreedomTrailVisualizer() {
           prevDisabled={stepIndex < 0}
           nextDisabled={isDone}
           resetDisabled={stepIndex < 0}
-          onSpeedChange={e => setSpeed(Number(e.target.value))}
+          onSpeedChange={e => setSpeed(Number(e.target.value
+    </>))}
           showPatternOverlay={showPatternOverlay}
           onShowPatternOverlayChange={setShowPatternOverlay}
           patternOverlayLabel="Show pattern overlay"

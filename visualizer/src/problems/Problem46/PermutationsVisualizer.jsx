@@ -12,6 +12,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import './PermutationsVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
     { line: 1, text: 'def permute(nums):' },
@@ -188,6 +189,19 @@ export default function PermutationsVisualizer() {
 
     // Panels for Lumino
     const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"nums","label":"nums","type":"array"}]}
+        values={{ nums: numsInput }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
         <div className="perm-viz-panel">
             <VisualizationPanel
                 EXAMPLES={EXAMPLES}
@@ -200,7 +214,8 @@ export default function PermutationsVisualizer() {
                 step={step}
             />
         </div>
-    )
+    
+    </>)
 
     const codePanel = (
         <div style={{ position: 'relative', height: '100%' }}>
@@ -229,7 +244,6 @@ export default function PermutationsVisualizer() {
     )
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={PERMUTATIONS_PATTERNS} />
             )}
@@ -271,7 +285,6 @@ export default function PermutationsVisualizer() {
         <div className="perm-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

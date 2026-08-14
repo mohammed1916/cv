@@ -10,6 +10,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem353.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -178,19 +179,25 @@ const EXAMPLES = [
 
 export default function Problem353Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [eventsInput, setEventsInput] = useState(JSON.stringify(EXAMPLES[0]?.events ?? []));
+  const { events, inputError } = useMemo(() => {
+    try {
+      const parsedEvents = JSON.parse(eventsInput); if (!Array.isArray(parsedEvents)) throw new Error('events must be an array');
+      return { events: parsedEvents, inputError: '' };
+    } catch (e) {
+      return { events: EXAMPLES[exIdx]?.events ?? '', inputError: e.message };
+    }
+  }, [eventsInput]);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]
-  const steps = useMemo(() => generateSteps(ex.events), [ex])
+  const steps = useMemo(() => generateSteps(events), [events])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
-  const applyExample = useCallback((idx) => {
-    setExIdx(idx)
-    handleReset()
-  }, [handleReset])
+  const applyExample = useCallback((i) => { setExIdx(i); setEventsInput(JSON.stringify(EXAMPLES[i].events)); handleReset(); }, [handleReset]);
 
   // Extract unique stations
   const stations = useMemo(() => {
@@ -239,7 +246,7 @@ export default function Problem353Visualizer() {
       id: 'viz',
       title: '🚇 Underground System',
       content: (
-        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {EXAMPLES.map((e, i) => (
               <button
@@ -261,7 +268,6 @@ export default function Problem353Visualizer() {
           </div>
 
           {step && (
-            <>
               {/* Station Network Visualization */}
               <div style={{
                 border: '1px solid #cbd5e1',
@@ -451,6 +457,7 @@ export default function Problem353Visualizer() {
             </>
           )}
         </div>
+        </>
       ),
     },
   ], [step, connectivity, setActiveLineDom, exIdx, applyExample, stations, stationPositions])

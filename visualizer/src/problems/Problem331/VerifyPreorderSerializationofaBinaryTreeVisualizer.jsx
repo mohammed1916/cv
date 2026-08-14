@@ -175,9 +175,7 @@ const EXAMPLES = REGISTRY_EXAMPLES.length > 0 ? REGISTRY_EXAMPLES : FALLBACK_EXA
 const MAX_SLOT_BOXES = 16
 
 export default function VerifyPreorderSerializationofaBinaryTreeVisualizer() {
-  const [inputValue, setInputValue] = useState(
-    exampleToString(EXAMPLES[0]) || '9,3,4,#,#,1,#,#,2,#,6,#,#',
-  )
+  const [inputValue, setInputValue] = useState(exampleToString(EXAMPLES[0]) || '9,3,4,#,#,1,#,#,2,#,6,#,#')
 
   const parsed = useMemo(() => parsePreorder(inputValue), [inputValue])
   const inputError = parsed.error
@@ -267,7 +265,6 @@ export default function VerifyPreorderSerializationofaBinaryTreeVisualizer() {
                   Provide a valid preorder string to visualize.
                 </div>
               ) : (
-                <>
                   {/* Token sequence */}
                   <div>
                     <div style={{ color: C.muted, fontSize: 12, fontWeight: 600, marginBottom: 8, textTransform: 'uppercase', letterSpacing: 0.5 }}>

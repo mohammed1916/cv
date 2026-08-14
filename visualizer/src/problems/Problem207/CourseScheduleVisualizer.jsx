@@ -10,6 +10,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import "./CourseScheduleVisualizer.css"
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -88,8 +89,17 @@ function VisualizationPanel({ step }) {
 }
 
 export default function CourseScheduleVisualizer() {
-  const [numCourses] = useState(4)
-  const [prerequisites] = useState([[1, 0], [2, 1], [3, 2]])
+  const [numCoursesInput, setNumCoursesInput] = useState(4);
+  const [prerequisitesInput, setPrerequisitesInput] = useState("[[1,0],[2,1],[3,2]]");
+  const { numCourses, prerequisites, inputError } = useMemo(() => {
+    try {
+      const parsedNumCourses = Number(numCoursesInput); if (isNaN(parsedNumCourses)) throw new Error('numCourses must be a number');
+      const parsedPrerequisites = JSON.parse(prerequisitesInput); if (!Array.isArray(parsedPrerequisites)) throw new Error('prerequisites must be an array');
+      return { numCourses: parsedNumCourses, prerequisites: parsedPrerequisites, inputError: '' };
+    } catch (e) {
+      return { numCourses: 4, prerequisites: [[1,0],[2,1],[3,2]], inputError: e.message };
+    }
+  }, [numCoursesInput, prerequisitesInput]);
   const steps = useMemo(() => generateSteps(numCourses, prerequisites).map(s => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [numCourses, prerequisites])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
@@ -100,7 +110,8 @@ export default function CourseScheduleVisualizer() {
   )
   const vizPanel = (
     <VisualizationPanel step={step} />
-  )
+  
+    </>)
   const [panelDivs, setPanelDivs] = useState(null)
   const panelConfigs = useMemo(() => [
     { id: "code", title: "Code" },
@@ -111,7 +122,6 @@ export default function CourseScheduleVisualizer() {
     <div className="problem-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
         </>

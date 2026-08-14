@@ -11,6 +11,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 import './PascalsTriangleII.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -117,6 +118,19 @@ export default function PascalsTriangleIIVisualizer() {
   )
 
   const vizPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"rowIndex","label":"rowIndex","type":"string"}]}
+        values={{ rowIndex: rowIndexInput }}
+        onChange={(k, v) => { if (k === 'rowIndex') setRowIndexInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -162,7 +176,6 @@ export default function PascalsTriangleIIVisualizer() {
       </div>
 
       {step && (
-        <>
           <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
             <div style={{ fontWeight: 600, marginBottom: 12 }}>{step.message}</div>
 
@@ -232,7 +245,8 @@ export default function PascalsTriangleIIVisualizer() {
         </>
       )}
     </div>
-  )
+  
+    </>)
 
   const statusPanel = (
     <div className="pti-status">
@@ -241,7 +255,6 @@ export default function PascalsTriangleIIVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -279,7 +292,6 @@ export default function PascalsTriangleIIVisualizer() {
     <div className="pti-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

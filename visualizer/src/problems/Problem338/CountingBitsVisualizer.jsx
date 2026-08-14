@@ -11,6 +11,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 import './CountingBitsVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -81,6 +82,19 @@ export default function CountingBitsVisualizer() {
     )
 
     const vizPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"n","label":"n","type":"string"}]}
+        values={{ n: nInput }}
+        onChange={(k, v) => { if (k === 'n') setNInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
                 {EXAMPLES.map(ex => <button key={ex.label} onClick={() => applyExample(ex)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: '#f1f5f9' }}>
@@ -116,7 +130,8 @@ export default function CountingBitsVisualizer() {
             )}
             {step?.phase === 'done' && <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #86efac', fontSize: 11, fontWeight: 'bold', color: '#15803d' }}>✓ {`[${step.dp.join(', ')}]`}</div>}
         </div>
-    )
+    
+    </>)
 
     const [panelDivs, setPanelDivs] = useState(null)
     const panelConfigs = useMemo(() => [
@@ -129,7 +144,6 @@ export default function CountingBitsVisualizer() {
         <div className="problem-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
                 </>

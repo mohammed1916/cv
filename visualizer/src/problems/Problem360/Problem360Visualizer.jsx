@@ -10,6 +10,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import "./Problem360Visualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 const PATTERNS = ['done', 'init', 'merge', 'transform']
@@ -413,7 +414,22 @@ function VisualizationPanel({ step, ex, setEx, applyExample }) {
 }
 
 export default function Problem360Visualizer() {
-  const [exIdx, setExIdx] = useState(0);
+  const [exIdx, setExIdx] = useState(0)
+  const [numsInput, setNumsInput] = useState(JSON.stringify(EXAMPLES[0]?.nums ?? []));
+  const [aInput, setAInput] = useState("");
+  const [bInput, setBInput] = useState("");
+  const [cInput, setCInput] = useState("");
+  const { nums, a, b, c, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      const parsedA = JSON.parse(aInput); if (!Array.isArray(parsedA)) throw new Error('a must be an array');
+      const parsedB = JSON.parse(bInput); if (!Array.isArray(parsedB)) throw new Error('b must be an array');
+      const parsedC = JSON.parse(cInput); if (!Array.isArray(parsedC)) throw new Error('c must be an array');
+      return { nums: parsedNums, a: parsedA, b: parsedB, c: parsedC, inputError: '' };
+    } catch (e) {
+      return { nums: EXAMPLES[exIdx]?.nums ?? '', a: EXAMPLES[exIdx]?.a ?? '', b: EXAMPLES[exIdx]?.b ?? '', c: EXAMPLES[exIdx]?.c ?? '', inputError: e.message };
+    }
+  }, [numsInput, aInput, bInput, cInput]);;
   const ex = EXAMPLES[exIdx];
 
   const SOLUTION_CODE = [
@@ -435,14 +451,14 @@ export default function Problem360Visualizer() {
     { line: 16, text: "    return result" }
   ];
 
-  const steps = useMemo(() => generateSteps(ex.nums, ex.a, ex.b, ex.c), [ex]);
+  const steps = useMemo(() => generateSteps(nums, a, b, c), [ex]);
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyExample = useCallback((i) => { setExIdx(i); handleReset(); }, [handleReset]);
+  const applyExample = useCallback((i) => { setExIdx(i); setNumsInput(JSON.stringify(EXAMPLES[i].nums)); setAInput(JSON.stringify(EXAMPLES[i].a)); setBInput(JSON.stringify(EXAMPLES[i].b)); setCInput(JSON.stringify(EXAMPLES[i].c)); handleReset(); }, [handleReset]);;
 
   const dockPanels = useMemo(() => [
     {
@@ -473,12 +489,13 @@ export default function Problem360Visualizer() {
     {
       id: 'vars',
       title: 'Variables',
-      content: <VariablesPanel step={step} a={ex.a} b={ex.b} c={ex.c} />,
+      content: <VariablesPanel step={step} a={a} b={b} c={c} />,
     },
   ], [step, connectivity.highlightedLines, connectivity.handleLineSelect, setActiveLineDom, ex, applyExample]);
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz'], ['vars']], minimized: [] }}

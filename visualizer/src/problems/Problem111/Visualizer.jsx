@@ -14,6 +14,7 @@ import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } fr
 import { TreeCanvas3D } from '../../components/viz3d'
 import { getExamples } from '../../config/examplesRegistry'
 import './Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -304,6 +305,19 @@ export default function MinimumDepthOfBinaryTreeVisualizer() {
 
   // Extract panel JSX into consts
   const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"arr","label":"arr","type":"string"}]}
+        values={{ arr: arrInput }}
+        onChange={(k, v) => { if (k === 'arr') setArrInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <div className="mdbt-panel">
       <div className="mdbt-header">
         <h2>Minimum Depth of Binary Tree</h2>
@@ -326,7 +340,8 @@ export default function MinimumDepthOfBinaryTreeVisualizer() {
         NODE_R={NODE_R}
       />
     </div>
-  )
+  
+    </>)
 
   const statePanel = (
     <div className="mdbt-panel">
@@ -358,7 +373,6 @@ export default function MinimumDepthOfBinaryTreeVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         onReset={handleReset}
@@ -402,7 +416,6 @@ export default function MinimumDepthOfBinaryTreeVisualizer() {
     <div className="mdbt-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state && createPortal(statePanel, panelDivs.state)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

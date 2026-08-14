@@ -9,6 +9,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import "./RemoveLinkedListElementsVisualizer.css"
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -38,7 +39,8 @@ function buildList(arr) {
 }
 
 function generateSteps(head, val) {
-  const steps = []
+const applyEx = useCallback((e) => { setHeadInput(JSON.stringify(e.head)); setValInput(String(e.val)); handleReset(); }, [handleReset]);
+    const steps = []
   steps.push({ activeLine: 1, head, val, message: `Remove all ${val} from list`, relatedLines: [1] })
   steps.push({ activeLine: 2, message: "Create dummy node", relatedLines: [2, 3] })
   const dummy = { val: 0, next: head, id: -1 }
@@ -78,8 +80,18 @@ function VisualizationPanel({ step }) {
 }
 
 export default function RemoveLinkedListElementsVisualizer() {
-  const [input, setInput] = useState({ head: [1, 2, 6, 3, 4, 5, 6], val: 6 })
-  const steps = useMemo(() => generateSteps(buildList(input.head), input.val).map(s => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [input])
+  const [input, setInput] = useState({"label":"Example","head":[1,2,6,3,4,5,6],"val":6});
+  const [headInput, setHeadInput] = useState("[1,2,6,3,4,5,6]");
+  const [valInput, setValInput] = useState(6);
+  const { head, val, inputError } = useMemo(() => {
+    try {
+      const parsedHead = JSON.parse(headInput); if (!Array.isArray(parsedHead)) throw new Error('head must be an array');
+      const parsedVal = Number(valInput); if (isNaN(parsedVal)) throw new Error('val must be a number');
+      return { head: parsedHead, val: parsedVal, inputError: '' };
+    } catch (e) {
+      return { head: "[1,2,6,3,4,5,6]", val: 6, inputError: e.message };
+    }
+  }, [headInput, valInput]);  const steps = useMemo(() => generateSteps(buildList(head), val).map(s => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [head, val])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
@@ -90,6 +102,7 @@ export default function RemoveLinkedListElementsVisualizer() {
   ], [step, connectivity, setActiveLineDom])
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [["code", "viz"]], minimized: [] }} />
       <FloatingPanel title="Controls"><PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={(e) => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Pattern" showPatternOverlayToggle />
       </FloatingPanel>

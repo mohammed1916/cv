@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem371Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -458,15 +459,26 @@ function VisualizationPanel({ a, b, step, applyEx }) {
 }
 
 export default function Problem371Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { a: 1, b: 1 })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [aInput, setAInput] = useState(1);
+  const [bInput, setBInput] = useState(1);
+  const { a, b, inputError } = useMemo(() => {
+    try {
+      const parsedA = Number(aInput); if (isNaN(parsedA)) throw new Error('a must be a number');
+      const parsedB = Number(bInput); if (isNaN(parsedB)) throw new Error('b must be a number');
+      return { a: parsedA, b: parsedB, inputError: '' };
+    } catch (e) {
+      return { a: 1, b: 1, inputError: e.message };
+    }
+  }, [aInput, bInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.a, ex.b).map((current) => ({
+      generateSteps(a, b).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [a, b]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -474,7 +486,7 @@ export default function Problem371Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setAInput(String(e.a)); setBInput(String(e.b)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -506,12 +518,13 @@ export default function Problem371Visualizer() {
 
   const vizPanel = (
     <VisualizationPanel
-      a={ex.a}
-      b={ex.b}
+      a={a}
+      b={b}
       step={step}
       applyEx={applyEx}
     />
-  )
+  
+    </>)
 
   const [panelDivs, setPanelDivs] = useState(null)
   const panelConfigs = useMemo(() => [
@@ -524,7 +537,6 @@ export default function Problem371Visualizer() {
     <div className="problem-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
         </>

@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem484Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('find-permutation')
@@ -113,24 +114,34 @@ function VisualizationPanel({ s, step, applyEx }) {
 }
 
 export default function Problem484Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { s: 'DID' })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [sInput, setSInput] = useState("DI");
+  const { s, inputError } = useMemo(() => {
+    try {
+      const parsedS = sInput;
+      return { s: parsedS, inputError: '' };
+    } catch (e) {
+      return { s: "DI", inputError: e.message };
+    }
+  }, [sInput]);
 
-  const steps = useMemo(() => generateSteps(ex.s).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })), [ex])
+  const steps = useMemo(() => generateSteps(s).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })), [s])
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setSInput(String(e.s)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const dockPanels = useMemo(() => [
     { id: 'code', title: 'Code', content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} /> },
-    { id: 'viz', title: '🔢 Find Permutation', content: <VisualizationPanel s={ex.s} step={step} applyEx={applyEx} /> },
+    { id: 'viz', title: '🔢 Find Permutation', content: <VisualizationPanel s={s} step={step} applyEx={applyEx} /> },
   ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}

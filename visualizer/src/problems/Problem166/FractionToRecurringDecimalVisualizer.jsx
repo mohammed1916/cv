@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './FractionToRecurringDecimalVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -49,7 +50,8 @@ const SOLUTION_CODE_INLINE = [
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(numerator, denominator) {
-  const steps = []
+const applyInput = useCallback((e) => { setInput(e); setNumeratorInput(String(e.numerator)); setDenominatorInput(String(e.denominator)); handleReset(); }, [handleReset]);
+    const steps = []
 
   steps.push({
     activeLine: 1,
@@ -277,14 +279,25 @@ function VisualizationPanel({ step }) {
 }
 
 export default function FractionToRecurringDecimalVisualizer() {
-  const [input, setInput] = useState(EXAMPLES[0])
+  const [input, setInput] = useState(EXAMPLES[0]);
+  const [numeratorInput, setNumeratorInput] = useState(1);
+  const [denominatorInput, setDenominatorInput] = useState(2);
+  const { numerator, denominator, inputError } = useMemo(() => {
+    try {
+      const parsedNumerator = Number(numeratorInput); if (isNaN(parsedNumerator)) throw new Error('numerator must be a number');
+      const parsedDenominator = Number(denominatorInput); if (isNaN(parsedDenominator)) throw new Error('denominator must be a number');
+      return { numerator: parsedNumerator, denominator: parsedDenominator, inputError: '' };
+    } catch (e) {
+      return { numerator: 1, denominator: 2, inputError: e.message };
+    }
+  }, [numeratorInput, denominatorInput]);
   const steps = useMemo(
     () =>
-      generateSteps(input.numerator, input.denominator).map((s) => ({
+      generateSteps(numerator, denominator).map((s) => ({
         ...s,
         relatedLines: s.relatedLines ?? (s.activeLine ? [s.activeLine] : []),
       })),
-    [input]
+    [numerator, denominator]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
@@ -314,7 +327,6 @@ export default function FractionToRecurringDecimalVisualizer() {
     </div>
   )
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} linePatternMap={LINE_PATTERN_MAP} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -350,9 +362,9 @@ export default function FractionToRecurringDecimalVisualizer() {
 
   return (
     <div className="ftrd-shell">
+      
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

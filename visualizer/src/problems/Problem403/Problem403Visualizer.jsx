@@ -10,6 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem403Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('frog-jump')
 
@@ -246,11 +247,20 @@ function StoneVisualization({ stones, step, selectedStones }) {
 
 export default function Problem403Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [stonesInput, setStonesInput] = useState(JSON.stringify(EXAMPLES[0]?.stones ?? []));
+  const { stones, inputError } = useMemo(() => {
+    try {
+      const parsedStones = JSON.parse(stonesInput); if (!Array.isArray(parsedStones)) throw new Error('stones must be an array');
+      return { stones: parsedStones, inputError: '' };
+    } catch (e) {
+      return { stones: EXAMPLES[exIdx]?.stones ?? '', inputError: e.message };
+    }
+  }, [stonesInput]);
   const example = EXAMPLES[exIdx]
 
   const steps = useMemo(
     () =>
-      generateSteps(example.stones).map((current) => ({
+      generateSteps(stones).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
@@ -262,7 +272,7 @@ export default function Problem403Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((idx) => { setExIdx(idx); handleReset(); }, [handleReset])
+  const applyEx = useCallback((i) => { setExIdx(i); setStonesInput(JSON.stringify(EXAMPLES[i].stones)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -325,7 +335,7 @@ export default function Problem403Visualizer() {
               ))}
             </div>
           </div>
-          <StoneVisualization stones={example.stones} step={step} />
+          <StoneVisualization stones={stones} step={step} />
         </div>
       ),
     },
@@ -333,6 +343,7 @@ export default function Problem403Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

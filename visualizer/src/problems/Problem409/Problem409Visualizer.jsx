@@ -10,6 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem409Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('longest-palindrome')
 
@@ -261,7 +262,6 @@ function PalindromeVisualization({ s, step }) {
             wordBreak: 'break-all',
           }}>
             {entries.length > 0 ? (
-              <>
                 {entries.map(([char]) => char + char.repeat(Math.floor((charFreq[char] || 0) / 2) * 2 - 1)).join('')}
                 {step.oddCount > 0 ? entries[0][0] : ''}
               </>
@@ -277,11 +277,20 @@ function PalindromeVisualization({ s, step }) {
 
 export default function Problem409Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [sInput, setSInput] = useState(EXAMPLES[0]?.s ?? '');
+  const { s, inputError } = useMemo(() => {
+    try {
+      const parsedS = sInput;
+      return { s: parsedS, inputError: '' };
+    } catch (e) {
+      return { s: EXAMPLES[exIdx]?.s ?? '', inputError: e.message };
+    }
+  }, [sInput]);
   const example = EXAMPLES[exIdx]
 
   const steps = useMemo(
     () =>
-      generateSteps(example.s).map((current) => ({
+      generateSteps(s).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
@@ -293,7 +302,7 @@ export default function Problem409Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((idx) => { setExIdx(idx); handleReset(); }, [handleReset])
+  const applyEx = useCallback((i) => { setExIdx(i); setSInput(String(EXAMPLES[i].s)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -356,7 +365,7 @@ export default function Problem409Visualizer() {
               ))}
             </div>
           </div>
-          <PalindromeVisualization s={example.s} step={step} />
+          <PalindromeVisualization s={s} step={step} />
         </div>
       ),
     },
@@ -364,6 +373,7 @@ export default function Problem409Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

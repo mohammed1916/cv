@@ -11,6 +11,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem377.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const PATTERNS = []
 
@@ -107,11 +108,22 @@ const EXAMPLES = [
 
 export default function Problem377Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [numsInput, setNumsInput] = useState(JSON.stringify(EXAMPLES[0]?.nums ?? []));
+  const [targetInput, setTargetInput] = useState("");
+  const { nums, target, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      const parsedTarget = Number(targetInput); if (isNaN(parsedTarget)) throw new Error('target must be a number');
+      return { nums: parsedNums, target: parsedTarget, inputError: '' };
+    } catch (e) {
+      return { nums: EXAMPLES[exIdx]?.nums ?? '', target: EXAMPLES[exIdx]?.target ?? '', inputError: e.message };
+    }
+  }, [numsInput, targetInput]);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]
   const steps = useMemo(
-    () => generateSteps(ex.nums, ex.target).map((current) => ({
+    () => generateSteps(nums, target).map((current) => ({
       ...current,
       relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
     })),
@@ -122,10 +134,7 @@ export default function Problem377Visualizer() {
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
-  const applyExample = useCallback((idx) => {
-    setExIdx(idx)
-    handleReset()
-  }, [handleReset])
+  const applyExample = useCallback((i) => { setExIdx(i); setNumsInput(JSON.stringify(EXAMPLES[i].nums)); setTargetInput(String(EXAMPLES[i].target)); handleReset(); }, [handleReset]);
 
   const dockPanels = useMemo(() => [
     {
@@ -177,7 +186,6 @@ export default function Problem377Visualizer() {
           </div>
 
           {step && (
-            <>
               <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
                 <div style={{ fontWeight: 600, marginBottom: 8 }}>{step.message}</div>
               </div>
@@ -185,7 +193,7 @@ export default function Problem377Visualizer() {
               <div style={{ padding: 8, backgroundColor: '#fef3c7', borderRadius: 6, fontSize: 11 }}>
                 <div style={{ fontWeight: 600, marginBottom: 8 }}>Available Numbers:</div>
                 <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                  {ex.nums.map((num) => (
+                  {nums.map((num) => (
                     <motion.div
                       key={num}
                       animate={{ scale: num === step.currentNum ? 1.2 : 1 }}
@@ -243,7 +251,7 @@ export default function Problem377Visualizer() {
               <div style={{ padding: 8, backgroundColor: '#dcfce7', borderRadius: 6, fontSize: 11 }}>
                 <div style={{ fontWeight: 600, marginBottom: 8, color: '#15803d' }}>Result:</div>
                 <div style={{ fontSize: 12, fontWeight: 600, color: '#15803d' }}>
-                  {step.dp[ex.target]} ordered combinations sum to {ex.target}
+                  {step.dp[target]} ordered combinations sum to {target}
                 </div>
               </div>
             </>
@@ -255,6 +263,7 @@ export default function Problem377Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         {showPatternOverlay && (

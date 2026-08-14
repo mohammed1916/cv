@@ -12,6 +12,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './ScrambleStringVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('scramble-string')
 
@@ -520,15 +521,26 @@ function VisualizationPanel({ s1, s2, step, applyEx }) {
 }
 
 export default function ScrambleStringVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { s1: 'great', s2: 'rgeat', label: 'Example 1' })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [s1Input, setS1Input] = useState("great");
+  const [s2Input, setS2Input] = useState("rgeat");
+  const { s1, s2, inputError } = useMemo(() => {
+    try {
+      const parsedS1 = s1Input;
+      const parsedS2 = s2Input;
+      return { s1: parsedS1, s2: parsedS2, inputError: '' };
+    } catch (e) {
+      return { s1: "great", s2: "rgeat", inputError: e.message };
+    }
+  }, [s1Input, s2Input]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.s1, ex.s2).map((current) => ({
+      generateSteps(s1, s2).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [s1, s2]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -536,7 +548,7 @@ export default function ScrambleStringVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setS1Input(String(e.s1)); setS2Input(String(e.s2)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -571,13 +583,14 @@ export default function ScrambleStringVisualizer() {
   const primaryPanel = (
     <div className="scramble-primary-panel">
       <VisualizationPanel
-        s1={ex.s1}
-        s2={ex.s2}
+        s1={s1}
+        s2={s2}
         step={step}
         applyEx={applyEx}
       />
     </div>
-  )
+  
+    </>)
 
   const statusPanel = (
     <div className="scramble-status">
@@ -586,7 +599,6 @@ export default function ScrambleStringVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={SCRAMBLESTRING_PATTERNS} />
       )}
@@ -626,7 +638,6 @@ export default function ScrambleStringVisualizer() {
     <div className="scramble-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}
           {panelDivs.status  && createPortal(statusPanel,  panelDivs.status)}

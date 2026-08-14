@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './ConstructBinaryTreeFromInorderAndPostorderTraversalVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -41,7 +42,8 @@ const SOLUTION_CODE_INLINE = [
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(inorder, postorder) {
-  const steps = []
+const applyInput = useCallback((e) => { setInput(e); setInorderInput(JSON.stringify(e.inorder)); setPostorderInput(JSON.stringify(e.postorder)); handleReset(); }, [handleReset]);
+    const steps = []
 
   if (!inorder || inorder.length === 0) {
     steps.push({
@@ -214,14 +216,25 @@ function VisualizationPanel({ step }) {
 }
 
 export default function ConstructBinaryTreeFromInorderAndPostorderTraversalVisualizer() {
-  const [input, setInput] = useState(EXAMPLES[0])
+  const [input, setInput] = useState(EXAMPLES[0]);
+  const [inorderInput, setInorderInput] = useState("[9,3,15,20,7]");
+  const [postorderInput, setPostorderInput] = useState("[9,15,7,20,3]");
+  const { inorder, postorder, inputError } = useMemo(() => {
+    try {
+      const parsedInorder = JSON.parse(inorderInput); if (!Array.isArray(parsedInorder)) throw new Error('inorder must be an array');
+      const parsedPostorder = JSON.parse(postorderInput); if (!Array.isArray(parsedPostorder)) throw new Error('postorder must be an array');
+      return { inorder: parsedInorder, postorder: parsedPostorder, inputError: '' };
+    } catch (e) {
+      return { inorder: "[9,3,15,20,7]", postorder: "[9,15,7,20,3]", inputError: e.message };
+    }
+  }, [inorderInput, postorderInput]);
   const steps = useMemo(
     () =>
-      generateSteps(input.inorder, input.postorder).map((s) => ({
+      generateSteps(inorder, postorder).map((s) => ({
         ...s,
         relatedLines: s.relatedLines ?? (s.activeLine ? [s.activeLine] : []),
       })),
-    [input]
+    [inorder, postorder]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -237,7 +250,8 @@ export default function ConstructBinaryTreeFromInorderAndPostorderTraversalVisua
     <div className="cbtipt-panel">
       <VisualizationPanel step={step} />
     </div>
-  )
+  
+    </>)
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
@@ -260,7 +274,6 @@ export default function ConstructBinaryTreeFromInorderAndPostorderTraversalVisua
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -299,7 +312,6 @@ export default function ConstructBinaryTreeFromInorderAndPostorderTraversalVisua
     <div className="cbtipt-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

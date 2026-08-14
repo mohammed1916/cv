@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './TaskScheduler.css';
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const TaskScheduler = () => {
   const [tasks, setTasks] = useState(['A', 'A', 'A', 'B', 'B', 'B']);

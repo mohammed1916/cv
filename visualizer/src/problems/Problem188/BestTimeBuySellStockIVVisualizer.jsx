@@ -10,6 +10,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from "../../config/examplesRegistry";
 import "./BestTimeBuySellStockIVVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -64,20 +65,29 @@ function generateSteps(k, prices) {
 
 export default function BestTimeBuySellStockIVVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => generateSteps(ex.k, ex.prices), [ex]);
+  const [kInput, setKInput] = useState(2);
+  const [pricesInput, setPricesInput] = useState("[3,2,6,5,0,3]");
+  const { k, prices, inputError } = useMemo(() => {
+    try {
+      const parsedK = Number(kInput); if (isNaN(parsedK)) throw new Error('k must be a number');
+      const parsedPrices = JSON.parse(pricesInput); if (!Array.isArray(parsedPrices)) throw new Error('prices must be an array');
+      return { k: parsedK, prices: parsedPrices, inputError: '' };
+    } catch (e) {
+      return { k: 2, prices: "[3,2,6,5,0,3]", inputError: e.message };
+    }
+  }, [kInput, pricesInput]);
+  const steps = useMemo(() => generateSteps(k, prices), [k, prices]);
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); setKInput(String(e.k)); setPricesInput(JSON.stringify(e.prices)); handleReset(); }, [handleReset]);;
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
 
-  const dp = step?.dp ?? Array.from({ length: ex.k + 1 }, () => Array(ex.prices.length).fill(0));
+  const dp = step?.dp ?? Array.from({ length: k + 1 }, () => Array(prices.length).fill(0));
   const activeT = step?.t ?? -1;
   const activeI = step?.i ?? -1;
   const msf = step?.msf;
-  const prices = ex.prices;
-  const k = ex.k;
   const n = prices.length;
   const answer = dp[k]?.[n - 1] ?? 0;
 
@@ -157,6 +167,7 @@ export default function BestTimeBuySellStockIVVisualizer() {
                           color: isActive ? '#1e40af' : '#1e293b', fontWeight: isActive ? 'bold' : 'normal',
                           minWidth: 32, textAlign: 'center'
                         }}>
+      
                           {val}
                         </motion.td>
                       );

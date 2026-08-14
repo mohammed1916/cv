@@ -11,6 +11,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { getExamples } from '../../config/examplesRegistry'
 import './ReverseLinkedListVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -274,6 +275,19 @@ export default function ReverseLinkedListVisualizer() {
     )
 
     const vizPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"val","label":"val","type":"array"}]}
+        values={{ val: valInput }}
+        onChange={(k, v) => { if (k === 'val') setValInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
         <div className="rll-top">
             <ReverseLinkedListViz
                 step={step}
@@ -288,7 +302,8 @@ export default function ReverseLinkedListVisualizer() {
             />
             <ReverseLinkedListPointerState step={step} nodes={nodes} />
         </div>
-    )
+    
+    </>)
 
     const [panelDivs, setPanelDivs] = useState(null)
     const panelConfigs = useMemo(() => [
@@ -301,7 +316,6 @@ export default function ReverseLinkedListVisualizer() {
         <div className="problem-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
                 </>

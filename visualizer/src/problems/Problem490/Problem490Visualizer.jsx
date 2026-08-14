@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem490Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('the-maze')
@@ -245,15 +246,28 @@ function VisualizationPanel({ maze, start, destination, step, applyEx }) {
 }
 
 export default function Problem490Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [mazeInput, setMazeInput] = useState("[[0,0,1,0,0],[0,0,0,0,0],[0,0,0,1,0],[1,1,0,1,1],[0,0,0,0,0]]");
+  const [startInput, setStartInput] = useState("[0,0]");
+  const [destinationInput, setDestinationInput] = useState("[4,4]");
+  const { maze, start, destination, inputError } = useMemo(() => {
+    try {
+      const parsedMaze = JSON.parse(mazeInput); if (!Array.isArray(parsedMaze)) throw new Error('maze must be an array');
+      const parsedStart = JSON.parse(startInput); if (!Array.isArray(parsedStart)) throw new Error('start must be an array');
+      const parsedDestination = JSON.parse(destinationInput); if (!Array.isArray(parsedDestination)) throw new Error('destination must be an array');
+      return { maze: parsedMaze, start: parsedStart, destination: parsedDestination, inputError: '' };
+    } catch (e) {
+      return { maze: "[[0,0,1,0,0],[0,0,0,0,0],[0,0,0,1,0],[1,1,0,1,1],[0,0,0,0,0]]", start: "[0,0]", destination: "[4,4]", inputError: e.message };
+    }
+  }, [mazeInput, startInput, destinationInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.maze, ex.start, ex.destination).map((current) => ({
+      generateSteps(maze, start, destination).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [maze, start, destination]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -261,7 +275,7 @@ export default function Problem490Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setMazeInput(JSON.stringify(e.maze)); setStartInput(JSON.stringify(e.start)); setDestinationInput(JSON.stringify(e.destination)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -290,9 +304,9 @@ export default function Problem490Visualizer() {
       title: '🎱 The Maze',
       content: (
         <VisualizationPanel
-          maze={ex.maze}
-          start={ex.start}
-          destination={ex.destination}
+          maze={maze}
+          start={start}
+          destination={destination}
           step={step}
           applyEx={applyEx}
         />
@@ -302,6 +316,7 @@ export default function Problem490Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

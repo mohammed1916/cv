@@ -7,6 +7,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './SpiralMatrixIIVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
@@ -249,6 +250,19 @@ export default function SpiralMatrixIIVisualizer() {
 
   // Extract panels as consts
   const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"n","label":"n","type":"string"}]}
+        values={{ n: nInput }}
+        onChange={(k, v) => { if (k === 'n') setNInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <div className="smi-panel">
       <div className="smi-panel-head">
         Matrix Generation
@@ -314,7 +328,8 @@ export default function SpiralMatrixIIVisualizer() {
         </div>
       </div>
     </div>
-  )
+  
+    </>)
 
   const statePanel = (
     <div className="smi-panel">
@@ -376,7 +391,6 @@ export default function SpiralMatrixIIVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={SPIRALMATRIXII_PATTERNS} />
       )}
@@ -416,7 +430,6 @@ export default function SpiralMatrixIIVisualizer() {
     <div className="smi-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state   && createPortal(statePanel,   panelDivs.state)}
           {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}

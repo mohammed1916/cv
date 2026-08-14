@@ -9,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem413Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -242,11 +243,20 @@ function ArithmeticSlicesVisualization({ nums, step }) {
 
 export default function Problem413Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [numsInput, setNumsInput] = useState(JSON.stringify(EXAMPLES[0]?.nums ?? []));
+  const { nums, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      return { nums: parsedNums, inputError: '' };
+    } catch (e) {
+      return { nums: EXAMPLES[exIdx]?.nums ?? '', inputError: e.message };
+    }
+  }, [numsInput]);
   const example = EXAMPLES[exIdx]
 
   const steps = useMemo(
     () =>
-      generateSteps(example.nums).map((current) => ({
+      generateSteps(nums).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
@@ -258,7 +268,7 @@ export default function Problem413Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((idx) => { setExIdx(idx); handleReset(); }, [handleReset])
+  const applyEx = useCallback((i) => { setExIdx(i); setNumsInput(JSON.stringify(EXAMPLES[i].nums)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -310,7 +320,7 @@ export default function Problem413Visualizer() {
               ))}
             </div>
           </div>
-          <ArithmeticSlicesVisualization nums={example.nums} step={step} />
+          <ArithmeticSlicesVisualization nums={nums} step={step} />
         </div>
       ),
     },
@@ -318,6 +328,7 @@ export default function Problem413Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

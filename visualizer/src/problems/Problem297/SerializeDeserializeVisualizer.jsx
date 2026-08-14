@@ -7,6 +7,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./SerializeDeserializeVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const SOLUTION_CODE = [
@@ -120,14 +121,23 @@ function buildLayout(treeArr) {
 
 export default function SerializeDeserializeVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => serializeSteps(ex.tree), [ex]);
+  const [treeInput, setTreeInput] = useState("[1,2,3,null,null,4,5]");
+  const { tree, inputError } = useMemo(() => {
+    try {
+      const parsedTree = JSON.parse(treeInput); if (!Array.isArray(parsedTree)) throw new Error('tree must be an array');
+      return { tree: parsedTree, inputError: '' };
+    } catch (e) {
+      return { tree: "[1,2,3,null,null,4,5]", inputError: e.message };
+    }
+  }, [treeInput]);
+  const steps = useMemo(() => serializeSteps(tree), [tree]);
   const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); setTreeInput(JSON.stringify(e.tree)); handleReset(); }, [handleReset]);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
-  const layout = useMemo(() => buildLayout(ex.tree), [ex]);
+  const layout = useMemo(() => buildLayout(tree), [tree]);
   const serialized = step?.serialized ?? [];
   const phase = step?.phase ?? "init";
   const highlightIdx = step?.highlightIdx ?? -1;
@@ -135,6 +145,7 @@ export default function SerializeDeserializeVisualizer() {
 
   return (
     <div className="sd-shell">
+      
       <div className="sd-examples">
         {EXAMPLES.map(e => (
           <button key={e.label} className={`sd-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>

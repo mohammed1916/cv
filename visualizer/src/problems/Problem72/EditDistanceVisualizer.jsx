@@ -12,6 +12,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./EditDistanceVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const EDITDISTANCE_PATTERNS = ['init', 'match', 'mismatch']
 
@@ -51,13 +52,13 @@ function DPTablePanel({ step, ex, dpTable, maxVal }) {
             <tr>
               <th className="ed-th corner"></th>
               <th className="ed-th">ε</th>
-              {ex.w2.split("").map((c, j) => <th key={j} className="ed-th w2ch">{c}</th>)}
+              {w2.split("").map((c, j) => <th key={j} className="ed-th w2ch">{c}</th>)}
             </tr>
           </thead>
           <tbody>
             {dpTable.map((row, i) => (
               <tr key={i}>
-                <th className="ed-th w1ch">{i === 0 ? "ε" : ex.w1[i - 1]}</th>
+                <th className="ed-th w1ch">{i === 0 ? "ε" : w1[i - 1]}</th>
                 {row.map((val, j) => {
                   const isCur = step.curI === i && step.curJ === j;
                   const intensity = maxVal > 0 ? val / maxVal : 0;
@@ -91,8 +92,8 @@ function InputPanel({ EXAMPLES, ex, applyEx, step }) {
       </div>
 
       <div className="ed-strings">
-        <span className="ed-lbl w1">word1:</span><span className="ed-val">{ex.w1 || '""'}</span>
-        <span className="ed-lbl w2">word2:</span><span className="ed-val">{ex.w2 || '""'}</span>
+        <span className="ed-lbl w1">word1:</span><span className="ed-val">{w1 || '""'}</span>
+        <span className="ed-lbl w2">word2:</span><span className="ed-val">{w2 || '""'}</span>
       </div>
 
       <div className="ed-status">{step?.message ?? "Press Play to begin."}</div>
@@ -125,15 +126,26 @@ function generateSteps(w1, w2) {
 
 export default function EditDistanceVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => generateSteps(ex.w1, ex.w2), [ex]);
+  const [w1Input, setW1Input] = useState("horse");
+  const [w2Input, setW2Input] = useState("ros");
+  const { w1, w2, inputError } = useMemo(() => {
+    try {
+      const parsedW1 = w1Input;
+      const parsedW2 = w2Input;
+      return { w1: parsedW1, w2: parsedW2, inputError: '' };
+    } catch (e) {
+      return { w1: "horse", w2: "ros", inputError: e.message };
+    }
+  }, [w1Input, w2Input]);
+  const steps = useMemo(() => generateSteps(w1, w2), [w1, w2]);
   const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); setW1Input(String(e.w1)); setW2Input(String(e.w2)); handleReset(); }, [handleReset]);;
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
-  const dpTable = step ? step.dpRef : Array.from({ length: ex.w1.length + 1 }, () => Array.from({ length: ex.w2.length + 1 }, () => 0));
+  const dpTable = step ? step.dpRef : Array.from({ length: w1.length + 1 }, () => Array.from({ length: w2.length + 1 }, () => 0));
   const maxVal = useMemo(() => {
     return step ? Math.max(...dpTable.flat()) : 1;
   }, [step?.dp, dpTable]);
@@ -217,9 +229,9 @@ export default function EditDistanceVisualizer() {
   // Step 5: Replace return with portals
   return (
     <div className="ed-shell">
+      
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
           {panelDivs.table && createPortal(tablePanel, panelDivs.table)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

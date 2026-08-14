@@ -9,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem415Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -256,11 +257,22 @@ function AddStringsVisualization({ num1, num2, step }) {
 
 export default function Problem415Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [num1Input, setNum1Input] = useState(JSON.stringify(EXAMPLES[0]?.num1 ?? []));
+  const [num2Input, setNum2Input] = useState("");
+  const { num1, num2, inputError } = useMemo(() => {
+    try {
+      const parsedNum1 = JSON.parse(num1Input); if (!Array.isArray(parsedNum1)) throw new Error('num1 must be an array');
+      const parsedNum2 = JSON.parse(num2Input); if (!Array.isArray(parsedNum2)) throw new Error('num2 must be an array');
+      return { num1: parsedNum1, num2: parsedNum2, inputError: '' };
+    } catch (e) {
+      return { num1: EXAMPLES[exIdx]?.num1 ?? '', num2: EXAMPLES[exIdx]?.num2 ?? '', inputError: e.message };
+    }
+  }, [num1Input, num2Input]);
   const example = EXAMPLES[exIdx]
 
   const steps = useMemo(
     () =>
-      generateSteps(example.num1, example.num2).map((current) => ({
+      generateSteps(num1, num2).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
@@ -272,7 +284,7 @@ export default function Problem415Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((idx) => { setExIdx(idx); handleReset(); }, [handleReset])
+  const applyEx = useCallback((i) => { setExIdx(i); setNum1Input(JSON.stringify(EXAMPLES[i].num1)); setNum2Input(JSON.stringify(EXAMPLES[i].num2)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -324,7 +336,7 @@ export default function Problem415Visualizer() {
               ))}
             </div>
           </div>
-          <AddStringsVisualization num1={example.num1} num2={example.num2} step={step} />
+          <AddStringsVisualization num1={num1} num2={num2} step={step} />
         </div>
       ),
     },
@@ -332,6 +344,7 @@ export default function Problem415Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

@@ -7,6 +7,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./ReverseBitsVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -50,20 +51,32 @@ function generateSteps(nIn) {
 
 export default function ReverseBitsVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-    const steps = useMemo(() => generateSteps(ex.n), [ex]);
+  const [nInput, setNInput] = useState(43261596);
+  const [descInput, setDescInput] = useState("43261596");
+  const { n, desc, inputError } = useMemo(() => {
+    try {
+      const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
+      const parsedDesc = descInput;
+      return { n: parsedN, desc: parsedDesc, inputError: '' };
+    } catch (e) {
+      return { n: 43261596, desc: "43261596", inputError: e.message };
+    }
+  }, [nInput, descInput]);
+    const steps = useMemo(() => generateSteps(n), [n]);
     const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+    const applyEx = useCallback((e) => { setEx(e); setNInput(String(e.n)); setDescInput(String(e.desc)); handleReset(); }, [handleReset]);;
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
-    const displayN = step !== null ? step.n : (ex.n >>> 0);
+    const displayN = step !== null ? step.n : (n >>> 0);
     const displayR = step !== null ? step.result : 0;
     const i = step?.i ?? -1;
     const lsb = step?.lsb;
 
     return (
         <div className="rb-shell">
+      
             <div className="rb-examples">
                 {EXAMPLES.map(e => (
                     <button key={e.label} className={`rb-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>

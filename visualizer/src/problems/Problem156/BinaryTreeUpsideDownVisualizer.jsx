@@ -154,7 +154,6 @@ export default function BinaryTreeUpsideDownVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -193,7 +192,6 @@ export default function BinaryTreeUpsideDownVisualizer() {
     <div className="binary_tree_upside_down-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state   && createPortal(statePanel,   panelDivs.state)}
           {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}

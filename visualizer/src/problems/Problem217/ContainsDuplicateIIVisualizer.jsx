@@ -10,6 +10,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import "./ContainsDuplicateIIVisualizer.css"
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -309,6 +310,19 @@ export default function ContainsDuplicateIIVisualizer() {
   )
 
   const vizPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"nums","label":"nums","type":"array"},{"key":"k","label":"k","type":"number"}]}
+        values={{ nums: numsInput, k: kInput }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'k') setKInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
       <div style={{ display: "flex", flexDirection: "column", gap: 8, padding: 16, borderBottom: "1px solid #e2e8f0" }}>
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
@@ -349,7 +363,8 @@ export default function ContainsDuplicateIIVisualizer() {
         <VisualizationPanel step={step} />
       </div>
     </div>
-  )
+  
+    </>)
 
   const [panelDivs, setPanelDivs] = useState(null)
   const panelConfigs = useMemo(
@@ -365,7 +380,6 @@ export default function ContainsDuplicateIIVisualizer() {
     <div className="problem-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
         </>

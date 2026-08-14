@@ -12,6 +12,7 @@ import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } fr
 import { TreeCanvas3D } from '../../components/viz3d'
 import { getExamples } from '../../config/examplesRegistry'
 import './BTMaxPathVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -92,6 +93,19 @@ export default function BTMaxPathVisualizer() {
 
     // Step 2: Extract panels into consts
     const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"tree","label":"tree","type":"string"}]}
+        values={{ tree: treeInput }}
+        onChange={(k, v) => { if (k === 'tree') setTreeInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
         <div className="btmps-panel">
             <div className="btmps-panel-head">Tree Visualization</div>
             <div className="btmps-panel-body">
@@ -134,7 +148,8 @@ export default function BTMaxPathVisualizer() {
                 </div>
             </div>
         </div>
-    )
+    
+    </>)
 
     const inputPanel = (
         <div className="btmps-panel">
@@ -186,7 +201,6 @@ export default function BTMaxPathVisualizer() {
     )
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
             )}
@@ -233,7 +247,6 @@ export default function BTMaxPathVisualizer() {
         <div className="btmps-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}

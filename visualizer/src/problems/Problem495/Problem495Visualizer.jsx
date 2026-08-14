@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem495Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('teemo-attacking')
@@ -73,18 +74,30 @@ function VisualizationPanel({ timeSeries, duration, step }) {
 }
 
 export default function Problem495Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
-  const steps = useMemo(() => generateSteps(ex.timeSeries, ex.duration).map((c) => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })), [ex])
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [attackTimeInput, setAttackTimeInput] = useState("[1,4]");
+  const [durationInput, setDurationInput] = useState(2);
+  const { attackTime, duration, inputError } = useMemo(() => {
+    try {
+      const parsedAttackTime = JSON.parse(attackTimeInput); if (!Array.isArray(parsedAttackTime)) throw new Error('attackTime must be an array');
+      const parsedDuration = Number(durationInput); if (isNaN(parsedDuration)) throw new Error('duration must be a number');
+      return { attackTime: parsedAttackTime, duration: parsedDuration, inputError: '' };
+    } catch (e) {
+      return { attackTime: "[1,4]", duration: 2, inputError: e.message };
+    }
+  }, [attackTimeInput, durationInput]);
+  const steps = useMemo(() => generateSteps(timeSeries, duration).map((c) => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })), [timeSeries, duration])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setAttackTimeInput(JSON.stringify(e.attackTime)); setDurationInput(String(e.duration)); handleReset(); }, [handleReset]);
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
   const dockPanels = useMemo(() => [
     { id: 'code', title: 'Code', content: (<CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />) },
-    { id: 'viz', title: '⚔️ Teemo', content: (<VisualizationPanel timeSeries={ex.timeSeries} duration={ex.duration} step={step} />) },
+    { id: 'viz', title: '⚔️ Teemo', content: (<VisualizationPanel timeSeries={ex.timeSeries} duration={duration} step={step} />) },
   ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex])
-  return (<div className="problem-shell"><DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} /><FloatingPanel title="Playback Controls">
+  return (<div className="problem-shell">
+      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} /><FloatingPanel title="Playback Controls">
         {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
         <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
       </FloatingPanel>{showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}</div>)

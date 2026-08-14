@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './LongestSubstringWithAtMostTwoDistinctCharactersVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -297,19 +298,27 @@ function VisualizationPanel({ step }) {
 }
 
 export default function LongestSubstringWithAtMostTwoDistinctCharactersVisualizer() {
-  const [input, setInput] = useState(EXAMPLES[0]?.s || 'eceba')
-  const steps = useMemo(
+  const [input, setInput] = useState({"label":"Example 1","s":"eceba"});
+  const [sInput, setSInput] = useState("eceba");
+  const { s, inputError } = useMemo(() => {
+    try {
+      const parsedS = sInput;
+      return { s: parsedS, inputError: '' };
+    } catch (e) {
+      return { s: "eceba", inputError: e.message };
+    }
+  }, [sInput]);  const steps = useMemo(
     () =>
-      generateSteps(input).map((s) => ({
+      generateSteps(s).map((s) => ({
         ...s,
         relatedLines: s.relatedLines ?? (s.activeLine ? [s.activeLine] : []),
       })),
-    [input]
+    [s]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setInput(e.s); handleReset() }, [handleReset])
+  const applyEx = useCallback((e) => { setSInput(String(e.s)); handleReset(); }, [handleReset]);
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -332,7 +341,8 @@ export default function LongestSubstringWithAtMostTwoDistinctCharactersVisualize
     <div className="lsatdc-panel">
       <VisualizationPanel step={step} />
     </div>
-  )
+  
+    </>)
 
   const statusPanel = (
     <div className="lsatdc-status">
@@ -343,7 +353,6 @@ export default function LongestSubstringWithAtMostTwoDistinctCharactersVisualize
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -381,7 +390,6 @@ export default function LongestSubstringWithAtMostTwoDistinctCharactersVisualize
     <div className="lsatdc-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

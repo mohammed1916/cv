@@ -9,6 +9,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './OneEditDistanceVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -37,7 +38,8 @@ const SOLUTION_CODE_INLINE = [
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(s1, s2) {
-  const steps = []
+const applyInput = useCallback((e) => { setInput(e); setS1Input(String(e.s1)); setS2Input(String(e.s2)); handleReset(); }, [handleReset]);
+    const steps = []
 
   steps.push({
     activeLine: 1,
@@ -330,14 +332,25 @@ function VisualizationPanel({ step }) {
 }
 
 export default function OneEditDistanceVisualizer() {
-  const [input, setInput] = useState(EXAMPLES[0])
+  const [input, setInput] = useState(EXAMPLES[0]);
+  const [s1Input, setS1Input] = useState("ab");
+  const [s2Input, setS2Input] = useState("acb");
+  const { s1, s2, inputError } = useMemo(() => {
+    try {
+      const parsedS1 = s1Input;
+      const parsedS2 = s2Input;
+      return { s1: parsedS1, s2: parsedS2, inputError: '' };
+    } catch (e) {
+      return { s1: "ab", s2: "acb", inputError: e.message };
+    }
+  }, [s1Input, s2Input]);
   const steps = useMemo(
     () =>
-      generateSteps(input.s1, input.s2).map((s) => ({
+      generateSteps(s1, s2).map((s) => ({
         ...s,
         relatedLines: s.relatedLines ?? (s.activeLine ? [s.activeLine] : []),
       })),
-    [input]
+    [s1, s2]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
@@ -354,7 +367,8 @@ export default function OneEditDistanceVisualizer() {
         <VisualizationPanel step={step} />
       </div>
     </div>
-  )
+  
+    </>)
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
@@ -384,7 +398,6 @@ export default function OneEditDistanceVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -425,7 +438,6 @@ export default function OneEditDistanceVisualizer() {
     <div className="oed-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

@@ -11,6 +11,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./MaxPointsOnALineVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -165,7 +166,7 @@ function VizPanel({
             <div className="mpl-trackers">
                 <div className="mpl-tracker">
                     <span className="mpl-tracker-label">Origin</span>
-                    <span className="mpl-tracker-val">{origin >= 0 ? `pt${origin} (${ex.points[origin]?.join(",")})` : "—"}</span>
+                    <span className="mpl-tracker-val">{origin >= 0 ? `pt${origin} (${points[origin]?.join(",")})` : "—"}</span>
                 </div>
                 <div className="mpl-tracker">
                     <span className="mpl-tracker-label">Partner</span>
@@ -185,15 +186,24 @@ function VizPanel({
 
 export default function MaxPointsOnALineVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-    const steps = useMemo(() => generateSteps(ex.points), [ex]);
+  const [pointsInput, setPointsInput] = useState("[[1,1],[1,1],[2,2],[2,2]]");
+  const { points, inputError } = useMemo(() => {
+    try {
+      const parsedPoints = JSON.parse(pointsInput); if (!Array.isArray(parsedPoints)) throw new Error('points must be an array');
+      return { points: parsedPoints, inputError: '' };
+    } catch (e) {
+      return { points: "[[1,1],[1,1],[2,2],[2,2]]", inputError: e.message };
+    }
+  }, [pointsInput]);
+    const steps = useMemo(() => generateSteps(points), [points]);
     const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+    const applyEx = useCallback((e) => { setEx(e); setPointsInput(JSON.stringify(e.points)); handleReset(); }, [handleReset]);;
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
 
-    const svgPts = useMemo(() => toSvg(ex.points, W, H, PAD), [ex]);
+    const svgPts = useMemo(() => toSvg(points, W, H, PAD), [points]);
     const origin = step?.origin ?? -1;
     const partner = step?.partner ?? -1;
     const res = step?.res ?? 1;
@@ -201,10 +211,10 @@ export default function MaxPointsOnALineVisualizer() {
 
     // Find all points on same slope line from origin
     const slopePts = (step?.slope && origin >= 0)
-        ? ex.points.reduce((acc, _, idx) => {
+        ? points.reduce((acc, _, idx) => {
             if (idx === origin) return acc;
-            const [x1, y1] = ex.points[origin];
-            const [x2, y2] = ex.points[idx];
+            const [x1, y1] = points[origin];
+            const [x2, y2] = points[idx];
             const s = normalizeSlope(x2 - x1, y2 - y1);
             if (s === step.slope) acc.push(idx);
             return acc;
@@ -241,7 +251,8 @@ export default function MaxPointsOnALineVisualizer() {
                 applyEx={applyEx}
             />
         </div>
-    )
+    
+    </>)
     const statusPanel = (
         <div className="mpl-status-panel">
             {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
@@ -249,7 +260,6 @@ export default function MaxPointsOnALineVisualizer() {
         </div>
     )
     const playbackPanel = (
-        <>
             {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
@@ -283,7 +293,6 @@ export default function MaxPointsOnALineVisualizer() {
         <div className="mpl-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

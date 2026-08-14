@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './RandomPickWithWeightVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -290,15 +291,24 @@ function VisualizationPanel({ w, step, applyEx }) {
 }
 
 export default function RandomPickWithWeightVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { w: [1] })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [wInput, setWInput] = useState("[1]");
+  const { w, inputError } = useMemo(() => {
+    try {
+      const parsedW = JSON.parse(wInput); if (!Array.isArray(parsedW)) throw new Error('w must be an array');
+      return { w: parsedW, inputError: '' };
+    } catch (e) {
+      return { w: "[1]", inputError: e.message };
+    }
+  }, [wInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.w).map((current) => ({
+      generateSteps(w).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [w]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -306,7 +316,7 @@ export default function RandomPickWithWeightVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setWInput(JSON.stringify(e.w)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -321,7 +331,7 @@ export default function RandomPickWithWeightVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <div style={{ position: 'relative' }}>
+              <div style={{ position: 'relative' }}>
 
           <CodeTracePanel
           step={step}
@@ -346,9 +356,8 @@ export default function RandomPickWithWeightVisualizer() {
 
             />
 
-          )}
-
-        </div>
+          
+            </div>
       ),
     },
     {
@@ -356,7 +365,7 @@ export default function RandomPickWithWeightVisualizer() {
       title: '🎲 Random Pick With Weight',
       content: (
         <VisualizationPanel
-          w={ex.w}
+          w={w}
           step={step}
           applyEx={applyEx}
         />

@@ -11,6 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
 import { getExamples } from '../../config/examplesRegistry'
 import './ConvertSortedArrayToBinarySearchTreeVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -390,6 +391,19 @@ export default function ConvertSortedArrayToBinarySearchTreeVisualizer() {
 
     // Step 2: Extract panels into consts
     const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"arr","label":"arr","type":"array"}]}
+        values={{ arr: arrInput }}
+        onChange={(k, v) => { if (k === 'arr') setArrInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
         <div className="csatbst-panel" style={{ flex: 1 }}>
             <div className="csatbst-panel-head">Binary Search Tree</div>
             <div className="csatbst-panel-body">
@@ -404,7 +418,8 @@ export default function ConvertSortedArrayToBinarySearchTreeVisualizer() {
                 </div>
             </div>
         </div>
-    )
+    
+    </>)
 
     const statePanel = (
         <div className="csatbst-panel" style={{ flex: 1 }}>
@@ -442,7 +457,6 @@ export default function ConvertSortedArrayToBinarySearchTreeVisualizer() {
     )
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
             )}
@@ -489,7 +503,6 @@ export default function ConvertSortedArrayToBinarySearchTreeVisualizer() {
         <div className="csatbst-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.state && createPortal(statePanel, panelDivs.state)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}

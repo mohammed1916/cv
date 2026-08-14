@@ -13,6 +13,7 @@ import { useProblemCode } from "../../hooks/useProblemCode";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./RemoveDuplicatesVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const REMOVDUPLICATES_PATTERNS = ['check', 'duplicate', 'init', 'new', 'write']
 
@@ -50,27 +51,36 @@ function generateSteps(numsIn) {
 
 export default function RemoveDuplicatesVisualizer({ problem }) {
   const [ex, setEx] = useState(EXAMPLES[0]);
+  const [numsInput, setNumsInput] = useState("[1,1,2]");
+  const { nums, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      return { nums: parsedNums, inputError: '' };
+    } catch (e) {
+      return { nums: "[1,1,2]", inputError: e.message };
+    }
+  }, [numsInput]);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
   const codeLines = useProblemCode(problem, "remove-duplicates-from-sorted-array");
   const steps = useMemo(
     () =>
-      generateSteps(ex.nums).map((current) => ({
+      generateSteps(nums).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex],
+    [nums],
   );
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); setNumsInput(JSON.stringify(e.nums)); handleReset(); }, [handleReset]);;
   const connectivity = useCodeVisualConnectivity({
     steps,
     stepIndex,
     onStepJump: setStepIndex,
   });
 
-  const arr = step?.arr ?? ex.nums;
+  const arr = step?.arr ?? nums;
   const k = step?.k ?? 1;
   const i = step?.i ?? -1;
 
@@ -110,7 +120,8 @@ export default function RemoveDuplicatesVisualizer({ problem }) {
         <div className="rd-result">✓ k = {k}  →  unique values: [{arr.slice(0, k).join(", ")}]</div>
       )}
     </div>
-  );
+  
+    </>);
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
@@ -138,7 +149,6 @@ export default function RemoveDuplicatesVisualizer({ problem }) {
   );
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={REMOVDUPLICATES_PATTERNS} />
       )}
@@ -177,7 +187,6 @@ export default function RemoveDuplicatesVisualizer({ problem }) {
 
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

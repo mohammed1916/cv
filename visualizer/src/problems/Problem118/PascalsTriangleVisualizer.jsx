@@ -11,6 +11,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./PascalsTriangleVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -158,7 +159,6 @@ function PyramidVisualization({ triangle, step, ex }) {
         <div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, border: '1px solid #fcd34d' }}>
           <div style={{ fontSize: 12, fontFamily: 'monospace', color: '#92400e' }}>
             {step.prevJ?.[0] !== undefined && (
-              <>
                 prev[{step.prevJ[0]}] + prev[{step.prevJ[1]}] = <strong>{step.sum}</strong>
               </>
             )}
@@ -256,6 +256,19 @@ export default function PascalsTriangleVisualizer() {
 
   // Step 2: Extract panels into consts
   const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"numRows","label":"numRows","type":"string"}]}
+        values={{ numRows: numRowsInput }}
+        onChange={(k, v) => { if (k === 'numRows') setNumRowsInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <div className="pt-panel">
       <VisualizationPanel
         triangle={triangle}
@@ -268,7 +281,8 @@ export default function PascalsTriangleVisualizer() {
         handleReset={handleReset}
       />
     </div>
-  )
+  
+    </>)
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
@@ -291,7 +305,6 @@ export default function PascalsTriangleVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -330,7 +343,6 @@ export default function PascalsTriangleVisualizer() {
     <div className="pt-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}
           {panelDivs.status  && createPortal(statusPanel,  panelDivs.status)}

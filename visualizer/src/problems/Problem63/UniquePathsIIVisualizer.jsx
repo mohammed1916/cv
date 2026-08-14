@@ -12,6 +12,7 @@ import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import './UniquePathsIIVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
     { line: 1, text: 'class Solution:' },
@@ -381,6 +382,19 @@ export default function UniquePathsIIVisualizer() {
 
     // Step 2: Extract panels into consts
     const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"m","label":"m","type":"string"},{"key":"n","label":"n","type":"string"},{"key":"obstacleGrid","label":"obstacleGrid","type":"string"}]}
+        values={{ m: mInput, n: nInput, obstacleGrid: obstacleGridInput }}
+        onChange={(k, v) => { if (k === 'm') setMInput(v); if (k === 'n') setNInput(v); if (k === 'obstacleGrid') setObstacleGridInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        
+      />
+
         <div className="upii-panel">
             <header className="upii-head"><span>Unique Paths II · 2D DP with Obstacles</span></header>
             <div className="upii-body">
@@ -394,7 +408,8 @@ export default function UniquePathsIIVisualizer() {
                 />
             </div>
         </div>
-    )
+    
+    </>)
 
     const codePanel = (
         <div style={{ position: 'relative', height: '100%' }}>
@@ -423,7 +438,6 @@ export default function UniquePathsIIVisualizer() {
     )
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={UNIQUEPATHSII_PATTERNS} />
             )}
@@ -459,7 +473,6 @@ export default function UniquePathsIIVisualizer() {
         <div className="upii-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

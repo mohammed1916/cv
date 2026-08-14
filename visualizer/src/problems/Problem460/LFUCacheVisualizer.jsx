@@ -11,6 +11,7 @@ import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./LFUCacheVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 const PATTERNS = ['done', 'hit', 'init', 'miss', 'update']
@@ -106,11 +107,22 @@ function generateSteps(capacity, ops) {
 
 export default function LFUCacheVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-    const steps = useMemo(() => generateSteps(ex.capacity, ex.ops), [ex]);
+  const [capacityInput, setCapacityInput] = useState(2);
+  const [opsInput, setOpsInput] = useState("[{\"type\":\"put\",\"key\":1,\"val\":1},{\"type\":\"put\",\"key\":2,\"val\":2},{\"type\":\"get\",\"key\":1},{\"type\":\"put\",\"key\":3,\"val\":3},{\"type\":\"get\",\"key\":2},{\"type\":\"get\",\"key\":3},{\"type\":\"put\",\"key\":4,\"val\":4},{\"type\":\"get\",\"key\":1},{\"type\":\"get\",\"key\":3},{\"type\":\"get\",\"key\":4}]");
+  const { capacity, ops, inputError } = useMemo(() => {
+    try {
+      const parsedCapacity = Number(capacityInput); if (isNaN(parsedCapacity)) throw new Error('capacity must be a number');
+      const parsedOps = JSON.parse(opsInput); if (!Array.isArray(parsedOps)) throw new Error('ops must be an array');
+      return { capacity: parsedCapacity, ops: parsedOps, inputError: '' };
+    } catch (e) {
+      return { capacity: 2, ops: "[{\"type\":\"put\",\"key\":1,\"val\":1},{\"type\":\"put\",\"key\":2,\"val\":2},{\"type\":\"get\",\"key\":1},{\"type\":\"put\",\"key\":3,\"val\":3},{\"type\":\"get\",\"key\":2},{\"type\":\"get\",\"key\":3},{\"type\":\"put\",\"key\":4,\"val\":4},{\"type\":\"get\",\"key\":1},{\"type\":\"get\",\"key\":3},{\"type\":\"get\",\"key\":4}]", inputError: e.message };
+    }
+  }, [capacityInput, opsInput]);
+    const steps = useMemo(() => generateSteps(capacity, ops), [capacity, ops]);
     const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+    const applyEx = useCallback((e) => { setEx(e); setCapacityInput(String(e.capacity)); setOpsInput(JSON.stringify(e.ops)); handleReset(); }, [handleReset]);;
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
@@ -126,7 +138,7 @@ export default function LFUCacheVisualizer() {
         {
             id: "viz",
             title: "Cache Visualization",
-            subtitle: `Capacity ${ex.capacity}`,
+            subtitle: `Capacity ${capacity}`,
             defaultZone: "left",
             content: (
                 <div className="lfu-panel-body">
@@ -199,10 +211,11 @@ export default function LFUCacheVisualizer() {
                 <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />
             ),
         },
-    ], [ex.capacity, ex.label, opStr, result, minFreq, phase, cache, activeKey, evicted, steps, stepIndex, step, setActiveLineDom, autoScrollCode]);
+    ], [capacity, ex.label, opStr, result, minFreq, phase, cache, activeKey, evicted, steps, stepIndex, step, setActiveLineDom, autoScrollCode]);
 
     return (
         <div className="lfu-shell">
+      
             <DockableWorkspace
                 title="LFU Cache Workspace"
                 panels={dockPanels}

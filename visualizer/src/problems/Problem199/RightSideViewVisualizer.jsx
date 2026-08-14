@@ -8,6 +8,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
 import { getExamples } from '../../config/examplesRegistry'
 import './RightSideViewVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -151,6 +152,17 @@ export default function RightSideViewVisualizer() {
 
     return (
         <div className="rsv-shell">
+      <ManualInputPanel
+        fields={[{"key":"arr","label":"arr","type":"string"}]}
+        values={{ arr: arrInput }}
+        onChange={(k, v) => { if (k === 'arr') setArrInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
             <div className="rsv-top">
                 <section className="rsv-panel main">
                     <header className="rsv-head"><span>BFS Level-by-Level</span>{inputError && <span className="rsv-error">{inputError}</span>}</header>

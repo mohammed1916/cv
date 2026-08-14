@@ -11,6 +11,7 @@ import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput, TreeSVG } from '../../components/treeUtils'
 import { getExamples } from '../../config/examplesRegistry'
 import './MaxDepthBinaryTreeVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -155,6 +156,19 @@ export default function MaxDepthBinaryTreeVisualizer() {
     }, [handleReset])
 
     const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"arr","label":"arr","type":"string"}]}
+        values={{ arr: arrInput }}
+        onChange={(k, v) => { if (k === 'arr') setArrInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
         <div className="mdbt-panel main">
             <header className="mdbt-head">
                 <span>Binary Tree DFS</span>
@@ -200,7 +214,8 @@ export default function MaxDepthBinaryTreeVisualizer() {
                 </div>
             </div>
         </div>
-    )
+    
+    </>)
 
     const statePanel = (
         <div className="mdbt-panel side">
@@ -278,7 +293,6 @@ export default function MaxDepthBinaryTreeVisualizer() {
         <div className="mdbt-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.state && createPortal(statePanel, panelDivs.state)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}

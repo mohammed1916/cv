@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem483Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('smallest-good-base')
@@ -102,24 +103,34 @@ function VisualizationPanel({ n, step, applyEx }) {
 }
 
 export default function Problem483Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { n: '13' })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [nInput, setNInput] = useState("13");
+  const { n, inputError } = useMemo(() => {
+    try {
+      const parsedN = nInput;
+      return { n: parsedN, inputError: '' };
+    } catch (e) {
+      return { n: "13", inputError: e.message };
+    }
+  }, [nInput]);
 
-  const steps = useMemo(() => generateSteps(parseInt(ex.n)).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })), [ex])
+  const steps = useMemo(() => generateSteps(parseInt(n)).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })), [n])
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setNInput(String(e.n)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const dockPanels = useMemo(() => [
     { id: 'code', title: 'Code', content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} /> },
-    { id: 'viz', title: '🔍 Smallest Good Base', content: <VisualizationPanel n={parseInt(ex.n)} step={step} applyEx={applyEx} /> },
+    { id: 'viz', title: '🔍 Smallest Good Base', content: <VisualizationPanel n={parseInt(n)} step={step} applyEx={applyEx} /> },
   ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}

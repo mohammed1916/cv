@@ -10,6 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './PerfectNumberVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('perfect-number')
@@ -207,7 +208,15 @@ function VisualizationPanel({ n, step, applyEx }) {
 }
 
 export default function PerfectNumberVisualizer() {
-  const [n, setN] = useState(6)
+  const [nInput, setNInput] = useState(6);
+  const { n, inputError } = useMemo(() => {
+    try {
+      const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
+      return { n: parsedN, inputError: '' };
+    } catch (e) {
+      return { n: 6, inputError: e.message };
+    }
+  }, [nInput]);
 
   const steps = useMemo(
     () =>
@@ -262,6 +271,7 @@ export default function PerfectNumberVisualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

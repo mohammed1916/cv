@@ -11,6 +11,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import './Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const PATTERNS = ['init', 'digit', 'sign', 'dot', 'exp', 'invalid', 'done']
 
@@ -377,19 +378,28 @@ function VisualizationPanel({ step }) {
 }
 
 export default function Problem65Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [sInput, setSInput] = useState("3.14");
+  const { s, inputError } = useMemo(() => {
+    try {
+      const parsedS = sInput;
+      return { s: parsedS, inputError: '' };
+    } catch (e) {
+      return { s: "3.14", inputError: e.message };
+    }
+  }, [sInput]);
   const steps = useMemo(
     () =>
-      generateSteps(ex.s).map((c) => ({
+      generateSteps(s).map((c) => ({
         ...c,
         relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []),
       })),
-    [ex],
+    [s],
   )
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); handleReset() }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setSInput(String(e.s)); handleReset(); }, [handleReset]);
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -420,7 +430,8 @@ export default function Problem65Visualizer() {
         ))}
       </div>
     </div>
-  )
+  
+    </>)
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
@@ -456,7 +467,6 @@ export default function Problem65Visualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -497,7 +507,6 @@ export default function Problem65Visualizer() {
     <div className="problem65-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}

@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem407Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const EXAMPLES = getExamplesOr('trapping-rain-water-ii', [
   { label: 'Example', heightMap: [[1,4,3,1,3,2],[3,2,1,3,2,4],[2,3,3,2,3,1]] },
@@ -145,19 +146,28 @@ function VisualizationPanel({ step }) {
 }
 
 export default function Problem407Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [heightMapInput, setHeightMapInput] = useState("[[1,4,3,1,3,2],[3,2,1,3,2,4],[2,3,3,2,3,1]]");
+  const { heightMap, inputError } = useMemo(() => {
+    try {
+      const parsedHeightMap = JSON.parse(heightMapInput); if (!Array.isArray(parsedHeightMap)) throw new Error('heightMap must be an array');
+      return { heightMap: parsedHeightMap, inputError: '' };
+    } catch (e) {
+      return { heightMap: "[[1,4,3,1,3,2],[3,2,1,3,2,4],[2,3,3,2,3,1]]", inputError: e.message };
+    }
+  }, [heightMapInput]);
   const SOLUTION_CODE = SOLUTION_CODE_INLINE
   const steps = useMemo(
-    () => generateSteps(ex.heightMap).map((c) => ({
+    () => generateSteps(heightMap).map((c) => ({
       ...c,
       relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []),
     })),
-    [ex]
+    [heightMap]
   )
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setHeightMapInput(JSON.stringify(e.heightMap)); handleReset(); }, [handleReset]);
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
   const dockPanels = useMemo(() => [
@@ -189,6 +199,7 @@ export default function Problem407Visualizer() {
   ], [step, SOLUTION_CODE, connectivity, setActiveLineDom])
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         {showPatternOverlay && (

@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './SurroundedRegionsVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -249,19 +250,27 @@ function VisualizationPanel({ step }) {
 }
 
 export default function SurroundedRegionsVisualizer() {
-  const [input, setInput] = useState(EXAMPLES[0]?.board || [['X', 'X', 'X', 'X'], ['X', 'O', 'O', 'X'], ['X', 'X', 'O', 'X'], ['X', 'O', 'X', 'X']])
-  const steps = useMemo(
+  const [input, setInput] = useState({"label":"Example 1","board":[["X","X","X","X"],["X","O","O","X"],["X","X","O","X"],["X","O","X","X"]]});
+  const [boardInput, setBoardInput] = useState("[[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"O\",\"O\",\"X\"],[\"X\",\"X\",\"O\",\"X\"],[\"X\",\"O\",\"X\",\"X\"]]");
+  const { board, inputError } = useMemo(() => {
+    try {
+      const parsedBoard = JSON.parse(boardInput); if (!Array.isArray(parsedBoard)) throw new Error('board must be an array');
+      return { board: parsedBoard, inputError: '' };
+    } catch (e) {
+      return { board: [["X","X","X","X"],["X","O","O","X"],["X","X","O","X"],["X","O","X","X"]], inputError: e.message };
+    }
+  }, [boardInput]);  const steps = useMemo(
     () =>
-      generateSteps(input).map((s) => ({
+      generateSteps(board).map((s) => ({
         ...s,
         relatedLines: s.relatedLines ?? (s.activeLine ? [s.activeLine] : []),
       })),
-    [input]
+    [board]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setInput(e.board); handleReset() }, [handleReset])
+  const applyEx = useCallback((e) => { setBoardInput(JSON.stringify(e.board)); handleReset(); }, [handleReset]);
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
   const [panelDivs, setPanelDivs] = useState(null)
@@ -271,7 +280,8 @@ export default function SurroundedRegionsVisualizer() {
     <div className="srr-panel">
       <VisualizationPanel step={step} />
     </div>
-  )
+  
+    </>)
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
@@ -299,7 +309,6 @@ export default function SurroundedRegionsVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -336,7 +345,6 @@ export default function SurroundedRegionsVisualizer() {
     <div className="srr-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

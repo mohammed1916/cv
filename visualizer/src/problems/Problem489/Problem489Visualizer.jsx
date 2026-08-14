@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem489Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('robot-room-cleaner')
@@ -229,15 +230,24 @@ function VisualizationPanel({ room, step, applyEx }) {
 }
 
 export default function Problem489Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [roomInput, setRoomInput] = useState("[[1,1,1,0],[1,0,1,0],[1,1,1,1]]");
+  const { room, inputError } = useMemo(() => {
+    try {
+      const parsedRoom = JSON.parse(roomInput); if (!Array.isArray(parsedRoom)) throw new Error('room must be an array');
+      return { room: parsedRoom, inputError: '' };
+    } catch (e) {
+      return { room: "[[1,1,1,0],[1,0,1,0],[1,1,1,1]]", inputError: e.message };
+    }
+  }, [roomInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.room).map((current) => ({
+      generateSteps(room).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [room]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -245,7 +255,7 @@ export default function Problem489Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setRoomInput(JSON.stringify(e.room)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -274,7 +284,7 @@ export default function Problem489Visualizer() {
       title: '🤖 Robot Room Cleaner',
       content: (
         <VisualizationPanel
-          room={ex.room}
+          room={room}
           step={step}
           applyEx={applyEx}
         />
@@ -284,6 +294,7 @@ export default function Problem489Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

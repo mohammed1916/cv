@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './ReverseWordsInAStringVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -208,19 +209,27 @@ function VisualizationPanel({ step }) {
 }
 
 export default function ReverseWordsInAStringVisualizer() {
-  const [input, setInput] = useState(EXAMPLES[0]?.s || '  Hello World  ')
-  const steps = useMemo(
+  const [input, setInput] = useState({"label":"Example 1","s":"  Hello World  "});
+  const [sInput, setSInput] = useState("  Hello World  ");
+  const { s, inputError } = useMemo(() => {
+    try {
+      const parsedS = sInput;
+      return { s: parsedS, inputError: '' };
+    } catch (e) {
+      return { s: "  Hello World  ", inputError: e.message };
+    }
+  }, [sInput]);  const steps = useMemo(
     () =>
-      generateSteps(input).map((s) => ({
+      generateSteps(s).map((s) => ({
         ...s,
         relatedLines: s.relatedLines ?? (s.activeLine ? [s.activeLine] : []),
       })),
-    [input]
+    [s]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setInput(e.s); handleReset() }, [handleReset])
+  const applyEx = useCallback((e) => { setSInput(String(e.s)); handleReset(); }, [handleReset]);
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -243,7 +252,8 @@ export default function ReverseWordsInAStringVisualizer() {
     <div className="rwias-panel">
       <VisualizationPanel step={step} />
     </div>
-  )
+  
+    </>)
 
   const statusPanel = (
     <div className="rwias-status">
@@ -252,7 +262,6 @@ export default function ReverseWordsInAStringVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -290,7 +299,6 @@ export default function ReverseWordsInAStringVisualizer() {
     <div className="rwias-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

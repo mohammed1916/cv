@@ -11,6 +11,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { getExamples } from '../../config/examplesRegistry'
 import './WordBreakVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -237,13 +238,27 @@ export default function WordBreakVisualizer() {
 
     // Step 3: Extract panels into consts
     const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"s","label":"s","type":"string"},{"key":"dict","label":"dict","type":"string"}]}
+        values={{ s: sInput, dict: dictInput }}
+        onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 'dict') setDictInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
         <div className="wb-panel">
             <div className="wb-head">Visualization</div>
             <div className="wb-body" style={{ flex: 1, overflow: 'auto' }}>
                 <VisualizationContent />
             </div>
         </div>
-    )
+    
+    </>)
 
     const codePanel = (
         <div style={{ position: 'relative', height: '100%' }}>
@@ -265,7 +280,6 @@ export default function WordBreakVisualizer() {
     )
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
@@ -301,7 +315,6 @@ export default function WordBreakVisualizer() {
         <div className="wb-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

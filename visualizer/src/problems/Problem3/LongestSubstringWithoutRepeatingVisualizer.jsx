@@ -11,6 +11,7 @@ import { useApplyExample } from '../../hooks/useApplyExample'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './LongestSubstringWithoutRepeatingVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const LSWRC_PATTERNS = ['init', 'check_right', 'check_collision', 'move_left', 'update_map', 'update_max', 'skip_max']
@@ -149,6 +150,19 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
   }, [setSpeed])
 
   const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"str","label":"str","type":"string"}]}
+        values={{ str: strInput }}
+        onChange={(k, v) => { if (k === 'str') setStrInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <div className="lswrc-panel" style={{ flex: 2 }}>
       <div className="lswrc-panel-head">
         String View
@@ -216,7 +230,8 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
         </div>
       </div>
     </div>
-  )
+  
+    </>)
 
   const statePanel = (
     <div className="lswrc-panel">
@@ -315,7 +330,6 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={LSWRC_PATTERNS} />
       )}
@@ -356,7 +370,6 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
     <div className="lswrc-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state && createPortal(statePanel, panelDivs.state)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem480Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -176,25 +177,37 @@ function VisualizationPanel({ nums, k, step, applyEx }) {
 }
 
 export default function Problem480Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { nums: [1, 3, -1, -3, 5, 3, 6, 7], k: 3 })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [numsInput, setNumsInput] = useState("[1,3,-1,-3,5,3,6,7]");
+  const [kInput, setKInput] = useState(3);
+  const { nums, k, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      const parsedK = Number(kInput); if (isNaN(parsedK)) throw new Error('k must be a number');
+      return { nums: parsedNums, k: parsedK, inputError: '' };
+    } catch (e) {
+      return { nums: "[1,3,-1,-3,5,3,6,7]", k: 3, inputError: e.message };
+    }
+  }, [numsInput, kInput]);
   const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-  const steps = useMemo(() => generateSteps(ex.nums, ex.k).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })), [ex])
+  const steps = useMemo(() => generateSteps(nums, k).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })), [nums, k])
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setNumsInput(JSON.stringify(e.nums)); setKInput(String(e.k)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const dockPanels = useMemo(() => [
     { id: 'code', title: 'Code', content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} /> },
-    { id: 'viz', title: '📊 Sliding Window Median', content: <VisualizationPanel nums={ex.nums} k={ex.k} step={step} applyEx={applyEx} /> },
+    { id: 'viz', title: '📊 Sliding Window Median', content: <VisualizationPanel nums={nums} k={k} step={step} applyEx={applyEx} /> },
   ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />

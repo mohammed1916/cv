@@ -11,6 +11,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import './Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const PATTERNS = ['base', 'choose_root', 'build_subtrees', 'combine', 'done']
@@ -402,19 +403,28 @@ function VisualizationPanel({ step }) {
 
 // ─── Default export ───────────────────────────────────────────────────────────
 export default function Problem95Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [nInput, setNInput] = useState(3);
+  const { n, inputError } = useMemo(() => {
+    try {
+      const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
+      return { n: parsedN, inputError: '' };
+    } catch (e) {
+      return { n: 3, inputError: e.message };
+    }
+  }, [nInput]);
   const steps = useMemo(
     () =>
-      generateSteps(ex.n).map((c) => ({
+      generateSteps(n).map((c) => ({
         ...c,
         relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []),
       })),
-    [ex]
+    [n]
   )
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); handleReset() }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setNInput(String(e.n)); handleReset(); }, [handleReset]);
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -443,7 +453,8 @@ export default function Problem95Visualizer() {
     <div className="problem95-panel">
       <VisualizationPanel step={step} />
     </div>
-  )
+  
+    </>)
 
   const statusPanel = (
     <div className="problem95-status">
@@ -465,7 +476,6 @@ export default function Problem95Visualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -504,7 +514,6 @@ export default function Problem95Visualizer() {
     <div className="problem95-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

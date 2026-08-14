@@ -12,6 +12,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay';
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity';
 import { getExamples } from '../../config/examplesRegistry'
 import "./Visualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const PATTERNS = ['complete', 'init', 'process'];
 
@@ -32,7 +33,15 @@ function generateSteps(input) {
 }
 
 export default function Problem83Visualizer() {
-  const [input, setInput] = useState('');
+  const [inputInput, setInputInput] = useState("");
+  const { input, inputError } = useMemo(() => {
+    try {
+      const parsedInput = inputInput;
+      return { input: parsedInput, inputError: '' };
+    } catch (e) {
+      return { input: '', inputError: e.message };
+    }
+  }, [inputInput]);
   const [panelDivs, setPanelDivs] = useState(null);
   const { steps, currentStep } = usePlaybackState(useMemo(() => generateSteps(input), [input]));
   const { showPatternOverlay, activeLineDom } = usePatternOverlay();
@@ -47,7 +56,8 @@ export default function Problem83Visualizer() {
         </div>
       </div>
     </div>
-  );
+  
+    </>);
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
@@ -72,7 +82,6 @@ export default function Problem83Visualizer() {
   );
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -95,7 +104,6 @@ export default function Problem83Visualizer() {
     <div className="problem83-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}
           {panelDivs.status  && createPortal(statusPanel,  panelDivs.status)}

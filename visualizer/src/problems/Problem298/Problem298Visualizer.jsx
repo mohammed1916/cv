@@ -10,6 +10,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem298Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -62,10 +63,20 @@ function generateSteps(input) {
 export default function Problem298Visualizer() {
     const examples = useMemo(() => getExamplesOr('298', []), [])
     const [currentExample, setCurrentExample] = useState(0)
+  const [inputInput, setInputInput] = useState(JSON.stringify(examples[0]?.input ?? []));
+  const { input, inputError } = useMemo(() => {
+    try {
+      const parsedInput = JSON.parse(inputInput); if (!Array.isArray(parsedInput)) throw new Error('input must be an array');
+      return { input: parsedInput, inputError: '' };
+    } catch (e) {
+      return { input: examples[currentExample]?.input ?? '', inputError: e.message };
+    }
+  }, [inputInput]);
     const [currentStep, setCurrentStep] = useState(0)
 
     const example = examples[currentExample] || { input: [], output: [] }
-    const steps = useMemo(() => generateSteps(example.input), [example])
+const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.stringify(examples[i].input)); handleReset(); }, [handleReset]);
+      const steps = useMemo(() => generateSteps(input), [input])
     const step = steps[currentStep] || steps[0]
 
     const { isPlaying, setIsPlaying, canNext, canPrev } = usePlaybackState(steps, currentStep, setCurrentStep)
@@ -77,6 +88,7 @@ export default function Problem298Visualizer() {
             subtitle="binary-tree-longest-consecutive-sequence"
             accentColor="#ec4899"
         >
+      
             <FloatingPanel title="Visualization" position="main">
                 <div className="problem298-visualizer-viz-panel">
                     <div className="problem298-visualizer-canvas">

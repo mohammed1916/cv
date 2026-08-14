@@ -401,7 +401,6 @@ export default function LongestValidParenthesesVisualizer() {
   );
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={LONGESTVALIDPARENTHESES_PATTERNS} />
       )}
@@ -461,7 +460,6 @@ export default function LongestValidParenthesesVisualizer() {
       <div style={{ flex: 1, overflow: "hidden" }}>
         <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
         {panelDivs && (
-          <>
             {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
             {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
             {panelDivs.code && createPortal(codePanel, panelDivs.code)}

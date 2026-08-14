@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './SuperWashingMachinesVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -225,15 +226,24 @@ function VisualizationPanel({ machines, step, applyEx }) {
 }
 
 export default function SuperWashingMachinesVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { machines: [1, 0, 5] })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [machinesInput, setMachinesInput] = useState("[1,0,5]");
+  const { machines, inputError } = useMemo(() => {
+    try {
+      const parsedMachines = JSON.parse(machinesInput); if (!Array.isArray(parsedMachines)) throw new Error('machines must be an array');
+      return { machines: parsedMachines, inputError: '' };
+    } catch (e) {
+      return { machines: "[1,0,5]", inputError: e.message };
+    }
+  }, [machinesInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.machines).map((current) => ({
+      generateSteps(machines).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [machines]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -241,7 +251,7 @@ export default function SuperWashingMachinesVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setMachinesInput(JSON.stringify(e.machines)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -256,7 +266,7 @@ export default function SuperWashingMachinesVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <div style={{ position: 'relative' }}>
+              <div style={{ position: 'relative' }}>
 
           <CodeTracePanel
           step={step}
@@ -281,9 +291,8 @@ export default function SuperWashingMachinesVisualizer() {
 
             />
 
-          )}
-
-        </div>
+          
+            </div>
       ),
     },
     {
@@ -291,7 +300,7 @@ export default function SuperWashingMachinesVisualizer() {
       title: '🧺 Super Washing Machines',
       content: (
         <VisualizationPanel
-          machines={ex.machines}
+          machines={machines}
           step={step}
           applyEx={applyEx}
         />

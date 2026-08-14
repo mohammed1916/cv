@@ -6,6 +6,7 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import "./MultiplyStrings.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: "def multiply(num1: str, num2: str) -> str:" },
@@ -193,6 +194,17 @@ export default function MultiplyStringsVisualizer() {
 
   return (
     <div className="ms-shell">
+      <ManualInputPanel
+        fields={[{"key":"num1","label":"num1","type":"string"},{"key":"num2","label":"num2","type":"string"}]}
+        values={{ num1: num1Input, num2: num2Input }}
+        onChange={(k, v) => { if (k === 'num1') setNum1Input(v); if (k === 'num2') setNum2Input(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
       <div className="ms-container">
         <div className="ms-input-section">
           <div className="ms-panel">

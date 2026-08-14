@@ -10,6 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem410Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('split-array-largest-sum')
 
@@ -335,11 +336,22 @@ function SplitArrayVisualization({ nums, m, step }) {
 
 export default function Problem410Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [numsInput, setNumsInput] = useState(JSON.stringify(EXAMPLES[0]?.nums ?? []));
+  const [mInput, setMInput] = useState("");
+  const { nums, m, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      const parsedM = Number(mInput); if (isNaN(parsedM)) throw new Error('m must be a number');
+      return { nums: parsedNums, m: parsedM, inputError: '' };
+    } catch (e) {
+      return { nums: EXAMPLES[exIdx]?.nums ?? '', m: EXAMPLES[exIdx]?.m ?? '', inputError: e.message };
+    }
+  }, [numsInput, mInput]);
   const example = EXAMPLES[exIdx]
 
   const steps = useMemo(
     () =>
-      generateSteps(example.nums, example.m).map((current) => ({
+      generateSteps(nums, m).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
@@ -351,7 +363,7 @@ export default function Problem410Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((idx) => { setExIdx(idx); handleReset(); }, [handleReset])
+  const applyEx = useCallback((i) => { setExIdx(i); setNumsInput(JSON.stringify(EXAMPLES[i].nums)); setMInput(String(EXAMPLES[i].m)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -414,7 +426,7 @@ export default function Problem410Visualizer() {
               ))}
             </div>
           </div>
-          <SplitArrayVisualization nums={example.nums} m={example.m} step={step} />
+          <SplitArrayVisualization nums={nums} m={m} step={step} />
         </div>
       ),
     },
@@ -422,6 +434,7 @@ export default function Problem410Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

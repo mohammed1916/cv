@@ -11,6 +11,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./GasStationVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -192,11 +193,22 @@ function VisualizationPanel({ gas, cost, step, applyEx }) {
 
 export default function GasStationVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => generateSteps(ex.gas, ex.cost), [ex]);
+  const [gasInput, setGasInput] = useState("[1,2,3,4,5]");
+  const [costInput, setCostInput] = useState("[3,4,5,1,2]");
+  const { gas, cost, inputError } = useMemo(() => {
+    try {
+      const parsedGas = JSON.parse(gasInput); if (!Array.isArray(parsedGas)) throw new Error('gas must be an array');
+      const parsedCost = JSON.parse(costInput); if (!Array.isArray(parsedCost)) throw new Error('cost must be an array');
+      return { gas: parsedGas, cost: parsedCost, inputError: '' };
+    } catch (e) {
+      return { gas: "[1,2,3,4,5]", cost: "[3,4,5,1,2]", inputError: e.message };
+    }
+  }, [gasInput, costInput]);
+  const steps = useMemo(() => generateSteps(gas, cost), [gas, cost]);
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); setGasInput(JSON.stringify(e.gas)); setCostInput(JSON.stringify(e.cost)); handleReset(); }, [handleReset]);;
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
 
@@ -218,13 +230,14 @@ export default function GasStationVisualizer() {
   const vizPanel = (
     <div className="gs-panel">
       <VisualizationPanel
-        gas={ex.gas}
-        cost={ex.cost}
+        gas={gas}
+        cost={cost}
         step={step}
         applyEx={applyEx}
       />
     </div>
-  )
+  
+    </>)
 
   const statusPanel = (
     <div className="gs-status">
@@ -233,7 +246,6 @@ export default function GasStationVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -271,7 +283,6 @@ export default function GasStationVisualizer() {
     <div className="gs-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

@@ -12,6 +12,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./LengthOfLastWordVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const SOLUTION_CODE = [
   { line: 1, text: "def lengthOfLastWord(s):" },
   { line: 2, text: "    i = len(s) - 1" },
@@ -67,15 +68,24 @@ function generateSteps(sIn) {
 
 export default function LengthOfLastWordVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => generateSteps(ex.s), [ex]);
+  const [sInput, setSInput] = useState("Hello World");
+  const { s, inputError } = useMemo(() => {
+    try {
+      const parsedS = sInput;
+      return { s: parsedS, inputError: '' };
+    } catch (e) {
+      return { s: "Hello World", inputError: e.message };
+    }
+  }, [sInput]);
+  const steps = useMemo(() => generateSteps(s), [s]);
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); setSInput(String(e.s)); handleReset(); }, [handleReset]);;
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
 
-  const chars = ex.s.split("");
+  const chars = s.split("");
   const i = step?.i ?? chars.length - 1;
   const length = step?.length ?? 0;
   const phase = step?.phase ?? "init";
@@ -161,7 +171,8 @@ export default function LengthOfLastWordVisualizer() {
 
       {step?.done && <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #86efac', textAlign: 'center', fontWeight: 600, color: '#15803d' }}>✓ Length = {length}</div>}
     </div>
-  );
+  
+    </>);
 
   const statusPanel = (
     <div className="lw-status">
@@ -170,7 +181,6 @@ export default function LengthOfLastWordVisualizer() {
   );
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={LENGTHOFLASTWORD_PATTERNS} />
       )}
@@ -209,7 +219,6 @@ export default function LengthOfLastWordVisualizer() {
     <div className="lw-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

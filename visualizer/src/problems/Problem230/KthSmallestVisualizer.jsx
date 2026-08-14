@@ -8,6 +8,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
 import { getExamples } from '../../config/examplesRegistry'
 import './KthSmallestVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -134,6 +135,17 @@ export default function KthSmallestVisualizer() {
 
     return (
         <div className="ks-shell">
+      <ManualInputPanel
+        fields={[{"key":"arr","label":"arr","type":"string"},{"key":"k","label":"k","type":"string"}]}
+        values={{ arr: arrInput, k: kInput }}
+        onChange={(k, v) => { if (k === 'arr') setArrInput(v); if (k === 'k') setKInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
             <div className="ks-top">
                 <section className="ks-panel main">
                     <header className="ks-head"><span>Inorder DFS (sorted BST traversal)</span></header>

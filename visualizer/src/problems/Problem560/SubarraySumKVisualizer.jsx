@@ -10,6 +10,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./SubarraySumKVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const SOLUTION_CODE = [
     { line: 1, text: "def subarraySum(nums, k):" },
     { line: 2, text: "    count, prefix = 0, 0" },
@@ -149,6 +150,17 @@ export default function SubarraySumKVisualizer() {
 
     return (
         <div className="problem-shell">
+      <ManualInputPanel
+        fields={[{"key":"nums","label":"nums","type":"string"},{"key":"k","label":"k","type":"string"}]}
+        values={{ nums: numsInput, k: kInput }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'k') setKInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
             <div className="ssk-controls-row">
                 <div className="ssk-examples">
                     {EXAMPLES.map((ex) => (

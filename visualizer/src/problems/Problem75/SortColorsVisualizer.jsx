@@ -12,6 +12,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./SortColorsVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('sort-colors')
 const COLOR_LABEL = ["🔴", "⚪", "🔵"];
@@ -283,15 +284,23 @@ const EXAMPLES = getExamples('sort-colors');
 
 export default function SortColorsVisualizer() {
     const [sel, setSel] = useState(0);
+  const [initialInput, setInitialInput] = useState(JSON.stringify(EXAMPLES[0]?.["nums"] ?? null));
+  const { initial, inputError } = useMemo(() => {
+    try {
+      const parsedInitial = JSON.parse(initialInput); if (!Array.isArray(parsedInitial)) throw new Error('initial must be an array');
+      return { initial: parsedInitial, inputError: '' };
+    } catch (e) {
+      return { initial: EXAMPLES[sel]?.nums, inputError: e.message };
+    }
+  }, [initialInput]);;
     const [panelDivs, setPanelDivs] = useState(null);
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
-    const initial = EXAMPLES[sel].nums;
-    const steps = useMemo(() => generateSteps(initial), [initial]);
+        const steps = useMemo(() => generateSteps(initial), [initial]);
     const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : steps[0];
-    const applyExample = useCallback((i) => { setSel(i); handleReset(); }, [handleReset]);
+    const applyExample = useCallback((i) => { setSel(i); setInitialInput(JSON.stringify(EXAMPLES[i].nums)); handleReset(); }, [handleReset]);
     const connectivity = useCodeVisualConnectivity({
       steps,
       stepIndex,
@@ -327,7 +336,8 @@ export default function SortColorsVisualizer() {
         step={step}
         applyExample={applyExample}
       />
-    );
+    
+    </>);
 
     const statusPanel = (
       <div className="sc-status" style={{ display: 'flex', alignItems: 'center', padding: '8px 12px' }}>
@@ -336,7 +346,6 @@ export default function SortColorsVisualizer() {
     );
 
     const playbackPanel = (
-      <>
         {showPatternOverlay && (
           <PatternLegend currentPhase={step?.phase} usedPatterns={SORTCOLORS_PATTERNS} />
         )}
@@ -375,7 +384,6 @@ export default function SortColorsVisualizer() {
       <div className="sc-shell">
         <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
         {panelDivs && (
-          <>
             {panelDivs.code && createPortal(codePanel, panelDivs.code)}
             {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
             {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

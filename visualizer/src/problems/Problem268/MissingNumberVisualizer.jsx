@@ -7,6 +7,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./MissingNumberVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -46,19 +47,29 @@ function generateSteps(nums) {
 
 export default function MissingNumberVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-    const steps = useMemo(() => generateSteps(ex.nums), [ex]);
+  const [numsInput, setNumsInput] = useState("[3,0,1]");
+  const { nums, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      return { nums: parsedNums, inputError: '' };
+    } catch (e) {
+      return { nums: "[3,0,1]", inputError: e.message };
+    }
+  }, [numsInput]);
+    const steps = useMemo(() => generateSteps(nums), [nums]);
     const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+    const applyEx = useCallback((e) => { setEx(e); setNumsInput(JSON.stringify(e.nums)); handleReset(); }, [handleReset]);;
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
-    const n = ex.nums.length;
+    const n = nums.length;
     const full = Array.from({ length: n + 1 }, (_, i) => i); // 0..n
-    const numSet = new Set(ex.nums);
+    const numSet = new Set(nums);
 
     return (
         <div className="mn-shell">
+      
             <div className="mn-examples">
                 {EXAMPLES.map(e => (
                     <button key={e.label} className={`mn-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>{e.label}</button>
@@ -87,7 +98,7 @@ export default function MissingNumberVisualizer() {
             <div className="mn-panel">
                 <div className="mn-panel-label">Input nums</div>
                 <div className="mn-arr">
-                    {ex.nums.map((v, i) => {
+                    {nums.map((v, i) => {
                         const isCur = step?.cur === i;
                         return (
                             <motion.div key={i} className={`mn-cell ${isCur ? "cur" : ""}`}

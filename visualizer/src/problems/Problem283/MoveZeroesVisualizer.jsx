@@ -13,6 +13,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./MoveZeroesVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -41,28 +42,37 @@ function generateSteps(numsIn) {
 
 export default function MoveZeroesVisualizer({ problem }) {
     const [ex, setEx] = useState(EXAMPLES[0]);
+  const [numsInput, setNumsInput] = useState("[0,1,0,3,12]");
+  const { nums, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      return { nums: parsedNums, inputError: '' };
+    } catch (e) {
+      return { nums: "[0,1,0,3,12]", inputError: e.message };
+    }
+  }, [numsInput]);
     const codeLines = useProblemCode(problem, "move-zeroes");
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
     const steps = useMemo(
         () =>
-            generateSteps(ex.nums).map((current) => ({
+            generateSteps(nums).map((current) => ({
                 ...current,
                 relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
             })),
-        [ex]
+        [nums]
     );
     const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+    const applyEx = useCallback((e) => { setEx(e); setNumsInput(JSON.stringify(e.nums)); handleReset(); }, [handleReset]);;
     const connectivity = useCodeVisualConnectivity({
         steps,
         stepIndex,
         onStepJump: setStepIndex,
     });
 
-    const arr = step?.arr ?? ex.nums;
+    const arr = step?.arr ?? nums;
     const k = step?.k ?? 0;
     const i = step?.i ?? -1;
 
@@ -115,6 +125,7 @@ export default function MoveZeroesVisualizer({ problem }) {
                                 const isK = index === k;
                                 return (
                                     <div className="mz-ptrs">
+      
                                         {isI && <span className="mz-ptr i">i</span>}
                                         {isK && <span className="mz-ptr k">k</span>}
                                     </div>

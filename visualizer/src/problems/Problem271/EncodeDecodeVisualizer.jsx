@@ -7,6 +7,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./EncodeDecodeVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -137,6 +138,17 @@ export default function EncodeDecodeVisualizer() {
 
     return (
         <div className="ed-shell">
+      <ManualInputPanel
+        fields={[{"key":"strs","label":"strs","type":"array"}]}
+        values={{ strs: strsInput }}
+        onChange={(k, v) => { if (k === 'strs') setStrsInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
             <div className="ed-controls-row">
                 <div className="ed-examples">
                     {EXAMPLES.map((ex) => (

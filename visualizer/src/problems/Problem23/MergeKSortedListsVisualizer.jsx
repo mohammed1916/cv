@@ -103,12 +103,10 @@ function HeapVisualizationPanel({ step, lists, inputError, input, onInputChange,
     <div className="mk-body">
       <div className="mk-examples">{EXAMPLES.map((ex) => <button key={ex.label} className="mk-chip" onClick={() => onApplyExample(ex)}>{ex.label}</button>)}</div>
       {inputError ? (
-        <>
           <input className="mk-input" value={input} onChange={onInputChange} />
           <div className="mk-error-box">{inputError}</div>
         </>
       ) : (
-        <>
           <input className="mk-input" value={input} onChange={onInputChange} />
           <div className="mk-row-group">
             <div className="mk-row-label-title">Input Lists</div>
@@ -199,7 +197,6 @@ export default function MergeKSortedListsVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={MERGEKSORTEDLISTS_PATTERNS} />
       )}
@@ -244,7 +241,6 @@ export default function MergeKSortedListsVisualizer() {
     <div className="mk-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

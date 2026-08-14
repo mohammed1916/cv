@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./SingleNumberVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -168,18 +169,27 @@ function VisualizationPanel({ nums, step, applyEx }) {
 
 export default function SingleNumberVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
+  const [numsInput, setNumsInput] = useState("[2,2,1]");
+  const { nums, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      return { nums: parsedNums, inputError: '' };
+    } catch (e) {
+      return { nums: "[2,2,1]", inputError: e.message };
+    }
+  }, [numsInput]);
   const steps = useMemo(
     () =>
-      generateSteps(ex.nums).map((current) => ({
+      generateSteps(nums).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex],
+    [nums],
   );
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); setNumsInput(JSON.stringify(e.nums)); handleReset(); }, [handleReset]);
   const connectivity = useCodeVisualConnectivity({
     steps,
     stepIndex,
@@ -203,18 +213,18 @@ export default function SingleNumberVisualizer() {
   );
   const vizPanel = (
     <VisualizationPanel
-      nums={ex.nums}
+      nums={nums}
       step={step}
       applyEx={applyEx}
     />
-  );
+  
+    </>);
   const statusPanel = (
     <div className="sn-status">
       {step?.message || "Ready to start"}
     </div>
   );
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -252,7 +262,6 @@ export default function SingleNumberVisualizer() {
     <div className="sn-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

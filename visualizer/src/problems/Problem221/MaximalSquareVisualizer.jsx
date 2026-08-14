@@ -9,6 +9,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import "./MaximalSquareVisualizer.css"
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -158,7 +159,6 @@ function MatrixDisplay({ matrix, dp, highlightedCell }) {
             </motion.div>
           ))}
           {dp && dp[i] && (
-            <>
               <div style={{ width: 2, marginX: 4 }} />
               {dp[i].map((val, j) => (
                 <motion.div
@@ -256,12 +256,15 @@ function VisualizationPanel({ step, matrix }) {
 }
 
 export default function MaximalSquareVisualizer() {
-  const [matrix] = useState([
-    ["1", "0", "1", "0", "0"],
-    ["1", "0", "1", "1", "1"],
-    ["1", "1", "1", "1", "1"],
-    ["1", "0", "0", "1", "0"],
-  ])
+  const [matrixInput, setMatrixInput] = useState("[[\"1\",\"0\",\"1\",\"0\",\"0\"],[\"1\",\"0\",\"1\",\"1\",\"1\"],[\"1\",\"1\",\"1\",\"1\",\"1\"],[\"1\",\"0\",\"0\",\"1\",\"0\"]]");
+  const { matrix, inputError } = useMemo(() => {
+    try {
+      const parsedMatrix = JSON.parse(matrixInput); if (!Array.isArray(parsedMatrix)) throw new Error('matrix must be an array');
+      return { matrix: parsedMatrix, inputError: '' };
+    } catch (e) {
+      return { matrix: [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]], inputError: e.message };
+    }
+  }, [matrixInput]);
 
   const steps = useMemo(() => generateSteps(matrix).map((s) => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [matrix])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
@@ -287,6 +290,7 @@ export default function MaximalSquareVisualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [["code", "viz"]], minimized: [] }} />
       <FloatingPanel title="Controls">
         <PlaybackControls

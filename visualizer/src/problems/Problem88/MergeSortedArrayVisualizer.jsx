@@ -12,6 +12,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./MergeSortedArrayVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const MERGEARRAY_PATTERNS = ['init', 'compare', 'copy_nums1', 'copy_nums2', 'done']
 
@@ -95,13 +96,28 @@ function generateSteps(nums1Init, m, nums2, n) {
 
 export default function MergeSortedArrayVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => generateSteps(ex.nums1, ex.m, ex.nums2, ex.n), [ex]);
+  const [nums1Input, setNums1Input] = useState("[1,2,3,0,0,0]");
+  const [mInput, setMInput] = useState(3);
+  const [nums2Input, setNums2Input] = useState("[2,5,6]");
+  const [nInput, setNInput] = useState(3);
+  const { nums1, m, nums2, n, inputError } = useMemo(() => {
+    try {
+      const parsedNums1 = JSON.parse(nums1Input); if (!Array.isArray(parsedNums1)) throw new Error('nums1 must be an array');
+      const parsedM = Number(mInput); if (isNaN(parsedM)) throw new Error('m must be a number');
+      const parsedNums2 = JSON.parse(nums2Input); if (!Array.isArray(parsedNums2)) throw new Error('nums2 must be an array');
+      const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
+      return { nums1: parsedNums1, m: parsedM, nums2: parsedNums2, n: parsedN, inputError: '' };
+    } catch (e) {
+      return { nums1: "[1,2,3,0,0,0]", m: 3, nums2: "[2,5,6]", n: 3, inputError: e.message };
+    }
+  }, [nums1Input, mInput, nums2Input, nInput]);
+  const steps = useMemo(() => generateSteps(nums1, m, nums2, n), [nums1, m, nums2, n]);
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); setNums1Input(JSON.stringify(e.nums1)); setMInput(String(e.m)); setNums2Input(JSON.stringify(e.nums2)); setNInput(String(e.n)); handleReset(); }, [handleReset]);;
 
   const renderArray = (arr, label, pointers) => (
     <div className="msa-arr-block">
@@ -115,7 +131,7 @@ export default function MergeSortedArrayVisualizer() {
                 className={`msa-cell ${ptrs.some(p => p.name === "k") ? "k-cell" : ""} ${ptrs.some(p => p.name === "i") ? "i-cell" : ""}`}
                 animate={{ scale: ptrs.length > 0 ? 1.1 : 1 }}
                 transition={{ type: "spring", stiffness: 400, damping: 22 }}>
-                {v === 0 && label === "nums1" && idx >= ex.m && !step?.done ? <span className="msa-zero">0</span> : v}
+                {v === 0 && label === "nums1" && idx >= m && !step?.done ? <span className="msa-zero">0</span> : v}
               </motion.div>
               <div className="msa-idx">{idx}</div>
               <div className="msa-ptrs">
@@ -140,11 +156,12 @@ export default function MergeSortedArrayVisualizer() {
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {EXAMPLES.map(e => <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : '#f1f5f9' }}>{e.label}</button>)}
       </div>
-      <div>{renderArray(step?.a ?? ex.nums1, "nums1", nums1Ptrs)}</div>
-      <div>{renderArray(step?.b ?? ex.nums2, "nums2", nums2Ptrs)}</div>
+      <div>{renderArray(step?.a ?? nums1, "nums1", nums1Ptrs)}</div>
+      <div>{renderArray(step?.b ?? nums2, "nums2", nums2Ptrs)}</div>
       {step?.done && <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #86efac', textAlign: 'center', fontWeight: 600, color: '#15803d' }}>✓ [{(step?.a ?? []).join(", ")}]</div>}
     </div>
-  );
+  
+    </>);
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
@@ -174,7 +191,6 @@ export default function MergeSortedArrayVisualizer() {
   );
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={MERGEARRAY_PATTERNS} />
       )}
@@ -213,7 +229,6 @@ export default function MergeSortedArrayVisualizer() {
     <div className="msa-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

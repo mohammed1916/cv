@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './ReadNCharactersGivenRead4Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -37,7 +38,8 @@ const SOLUTION_CODE_INLINE = [
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(file, n) {
-  const steps = []
+const applyInput = useCallback((e) => { setInput(e); setFileInput(String(e.file)); setNInput(String(e.n)); handleReset(); }, [handleReset]);
+    const steps = []
 
   if (!file || file.length === 0) {
     steps.push({
@@ -260,14 +262,25 @@ function VisualizationPanel({ step }) {
 }
 
 export default function ReadNCharactersGivenRead4Visualizer() {
-  const [input, setInput] = useState(EXAMPLES[0])
+  const [input, setInput] = useState(EXAMPLES[0]);
+  const [fileInput, setFileInput] = useState("abcdefghij");
+  const [nInput, setNInput] = useState(5);
+  const { file, n, inputError } = useMemo(() => {
+    try {
+      const parsedFile = fileInput;
+      const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
+      return { file: parsedFile, n: parsedN, inputError: '' };
+    } catch (e) {
+      return { file: "abcdefghij", n: 5, inputError: e.message };
+    }
+  }, [fileInput, nInput]);
   const steps = useMemo(
     () =>
-      generateSteps(input.file, input.n).map((s) => ({
+      generateSteps(file, n).map((s) => ({
         ...s,
         relatedLines: s.relatedLines ?? (s.activeLine ? [s.activeLine] : []),
       })),
-    [input]
+    [file, n]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
@@ -295,7 +308,8 @@ export default function ReadNCharactersGivenRead4Visualizer() {
     <div style={{ position: 'relative', height: '100%', overflow: 'auto' }}>
       <VisualizationPanel step={step} />
     </div>
-  )
+  
+    </>)
 
   const statusPanel = (
     <div className="rn4-status" style={{ padding: 8, fontSize: 12, color: '#94a3b8' }}>
@@ -304,7 +318,6 @@ export default function ReadNCharactersGivenRead4Visualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend {...{}} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -342,7 +355,6 @@ export default function ReadNCharactersGivenRead4Visualizer() {
     <div className="rn4-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

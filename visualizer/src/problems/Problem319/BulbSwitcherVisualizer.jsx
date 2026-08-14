@@ -193,7 +193,6 @@ export default function BulbSwitcherVisualizer() {
               </div>
 
               {view && (
-                <>
                   <div className="bulb-switcher-readout">
                     <div className="bulb-switcher-stat">
                       <span className="bulb-switcher-stat-label">i</span>

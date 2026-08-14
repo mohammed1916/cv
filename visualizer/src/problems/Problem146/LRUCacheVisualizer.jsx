@@ -11,6 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './LRUCacheVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -289,6 +290,19 @@ export default function LRUCacheVisualizer() {
   )
 
   const vizPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"commands","label":"commands","type":"array"},{"key":"args","label":"args","type":"array"}]}
+        values={{ commands: commandsInput, args: argsInput }}
+        onChange={(k, v) => { if (k === 'commands') setCommandsInput(v); if (k === 'args') setArgsInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <div className="lru-panel-body lru-visuals">
       {/* Linked List visualization */}
       <div className="lru-list-container">
@@ -365,7 +379,8 @@ export default function LRUCacheVisualizer() {
         </div>
       </div>
     </div>
-  )
+  
+    </>)
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
@@ -387,7 +402,6 @@ export default function LRUCacheVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend />}
       <PlaybackControls
         onReset={handleReset}
@@ -430,7 +444,6 @@ export default function LRUCacheVisualizer() {
     <div className="lru-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

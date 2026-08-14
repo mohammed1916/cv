@@ -362,7 +362,6 @@ export default function Problem362Visualizer() {
           </div>
 
           {step && (
-            <>
               <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
                 <div style={{ fontWeight: 600, marginBottom: 4 }}>{step.message}</div>
                 <div style={{ fontSize: 10, color: '#64748b' }}>Example {step.exampleNum}: {EXAMPLES[step.exampleNum - 1]?.desc}</div>

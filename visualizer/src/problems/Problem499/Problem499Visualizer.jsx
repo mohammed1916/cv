@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem499Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('the-maze-iii')
@@ -254,18 +255,31 @@ function VisualizationPanel({ step }) {
 }
 
 export default function Problem499Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [mazeInput, setMazeInput] = useState("[[0,0,0,0,0],[1,1,0,0,1],[0,0,0,0,0],[0,1,0,1,0],[0,1,0,0,0]]");
+  const [ballInput, setBallInput] = useState("[4,3]");
+  const [holeInput, setHoleInput] = useState("[0,1]");
+  const { maze, ball, hole, inputError } = useMemo(() => {
+    try {
+      const parsedMaze = JSON.parse(mazeInput); if (!Array.isArray(parsedMaze)) throw new Error('maze must be an array');
+      const parsedBall = JSON.parse(ballInput); if (!Array.isArray(parsedBall)) throw new Error('ball must be an array');
+      const parsedHole = JSON.parse(holeInput); if (!Array.isArray(parsedHole)) throw new Error('hole must be an array');
+      return { maze: parsedMaze, ball: parsedBall, hole: parsedHole, inputError: '' };
+    } catch (e) {
+      return { maze: "[[0,0,0,0,0],[1,1,0,0,1],[0,0,0,0,0],[0,1,0,1,0],[0,1,0,0,0]]", ball: "[4,3]", hole: "[0,1]", inputError: e.message };
+    }
+  }, [mazeInput, ballInput, holeInput]);
   const steps = useMemo(
-    () => generateSteps(ex.maze, ex.ball, ex.hole).map((c) => ({
+    () => generateSteps(maze, ball, hole).map((c) => ({
       ...c,
       relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []),
     })),
-    [ex]
+    [maze, ball, hole]
   )
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setMazeInput(JSON.stringify(e.maze)); setBallInput(JSON.stringify(e.ball)); setHoleInput(JSON.stringify(e.hole)); handleReset(); }, [handleReset]);
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
   const dockPanels = useMemo(() => [
@@ -286,6 +300,7 @@ export default function Problem499Visualizer() {
   ], [step, SOLUTION_CODE, connectivity, setActiveLineDom])
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}

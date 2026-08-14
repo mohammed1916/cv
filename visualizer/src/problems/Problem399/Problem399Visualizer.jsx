@@ -13,6 +13,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import SvgViewport from '../../components/shared/SvgViewport'
 import './Problem399Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const PATTERNS = ['build_edge', 'dfs_end', 'dfs_start', 'done', 'error', 'init', 'query_invalid', 'query_start']
 
@@ -328,6 +329,19 @@ export default function Problem399Visualizer() {
 
   /* ── Panels ───────────────────────────────────────────────── */
   const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"equations","label":"equations","type":"array"},{"key":"values","label":"values","type":"array"},{"key":"query","label":"query","type":"array"}]}
+        values={{ equations: equationsInput, values: valuesInput, query: queryInput }}
+        onChange={(k, v) => { if (k === 'equations') setEquationsInput(v); if (k === 'values') setValuesInput(v); if (k === 'query') setQueryInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <div className="p399-panel-primary">
       <div className="p399-card">
         <div className="p399-section-label">Equations Graph</div>
@@ -439,14 +453,14 @@ export default function Problem399Visualizer() {
         </div>
       )}
     </div>
-  )
+  
+    </>)
 
   const statePanel = (
     <div className="p399-panel-state">
       <div className="p399-card">
         <div className="p399-section-label">Query</div>
         {step?.currentQuery ? (
-          <>
             <div className="p399-stat highlight">
               <span className="p399-stat-key">numerator</span>
               <span className="p399-stat-val">{step.currentQuery.num}</span>
@@ -530,7 +544,6 @@ export default function Problem399Visualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -568,7 +581,6 @@ export default function Problem399Visualizer() {
     <div className="p399-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state   && createPortal(statePanel,   panelDivs.state)}
           {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}

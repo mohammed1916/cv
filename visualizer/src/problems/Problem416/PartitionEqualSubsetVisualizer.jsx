@@ -11,6 +11,7 @@ import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./PartitionEqualSubsetVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 const PATTERNS = []
@@ -65,18 +66,27 @@ function generateSteps(nums) {
 
 export default function PartitionEqualSubsetVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => generateSteps(ex.nums), [ex]);
+  const [numsInput, setNumsInput] = useState("[1,5,11,5]");
+  const { nums, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      return { nums: parsedNums, inputError: '' };
+    } catch (e) {
+      return { nums: "[1,5,11,5]", inputError: e.message };
+    }
+  }, [numsInput]);
+  const steps = useMemo(() => generateSteps(nums), [nums]);
   const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); setNumsInput(JSON.stringify(e.nums)); handleReset(); }, [handleReset]);;
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
-  const total = ex.nums.reduce((a, b) => a + b, 0);
+  const total = nums.reduce((a, b) => a + b, 0);
   const target = step?.target ?? (total % 2 === 0 ? total / 2 : null);
   const dpArr = step ? [...step.dp].sort((a, b) => a - b) : [0];
-  const maxSum = target != null ? target + 2 : Math.max(...ex.nums) + 1;
+  const maxSum = target != null ? target + 2 : Math.max(...nums) + 1;
 
   const inputPanel = (
     <div className="pes-panel-body">
@@ -100,7 +110,7 @@ export default function PartitionEqualSubsetVisualizer() {
       <div className="pes-panel">
         <div className="pes-panel-label">nums (target = {target ?? "?"})</div>
         <div className="pes-array-row">
-          {ex.nums.map((val, idx) => (
+          {nums.map((val, idx) => (
             <motion.div
               key={idx}
               className={`pes-cell ${step?.numIdx === idx ? "cur" : ""}`}
@@ -143,7 +153,8 @@ export default function PartitionEqualSubsetVisualizer() {
 
       <div className="pes-status">{step?.message ?? "Press Play to begin."}</div>
     </div>
-  );
+  
+    </>);
 
   const codePanel = (
     <CodeTracePanel
@@ -169,7 +180,6 @@ export default function PartitionEqualSubsetVisualizer() {
     <div className="pes-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

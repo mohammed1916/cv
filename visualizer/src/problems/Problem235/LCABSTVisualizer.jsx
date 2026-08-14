@@ -12,6 +12,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
 import { getExamples } from '../../config/examplesRegistry'
 import './LCABSTVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -240,6 +241,19 @@ export default function LCABSTVisualizer() {
     )
 
     const vizPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"arr","label":"arr","type":"string"},{"key":"p","label":"p","type":"string"},{"key":"q","label":"q","type":"string"}]}
+        values={{ arr: arrInput, p: pInput, q: qInput }}
+        onChange={(k, v) => { if (k === 'arr') setArrInput(v); if (k === 'p') setPInput(v); if (k === 'q') setQInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
         <TreeVisualizationPanel
             positions={positions}
             edges={edges}
@@ -259,7 +273,8 @@ export default function LCABSTVisualizer() {
             inputError={inputError}
             handleReset={handleReset}
         />
-    )
+    
+    </>)
 
     const codePanel = <CodeTracePanel step={step} codeLines={SOLUTION_CODE} autoScroll={autoScrollCode} onActiveLineDomChange={setActiveLineDom} />
 
@@ -275,7 +290,6 @@ export default function LCABSTVisualizer() {
         <div className="lca-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
                     {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}

@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem436Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -288,15 +289,24 @@ function VisualizationPanel({ step, applyEx }) {
 }
 
 export default function Problem436Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { intervals: [[1, 2], [2, 3], [0, 1], [3, 4]], label: 'Example 1' })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [intervalsInput, setIntervalsInput] = useState("[[1,2]]");
+  const { intervals, inputError } = useMemo(() => {
+    try {
+      const parsedIntervals = JSON.parse(intervalsInput); if (!Array.isArray(parsedIntervals)) throw new Error('intervals must be an array');
+      return { intervals: parsedIntervals, inputError: '' };
+    } catch (e) {
+      return { intervals: "[[1,2]]", inputError: e.message };
+    }
+  }, [intervalsInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.intervals).map((current) => ({
+      generateSteps(intervals).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [intervals]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -304,7 +314,7 @@ export default function Problem436Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setIntervalsInput(JSON.stringify(e.intervals)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -319,7 +329,7 @@ export default function Problem436Visualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
+              <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
@@ -358,7 +368,8 @@ export default function Problem436Visualizer() {
           prevDisabled={stepIndex < 0}
           nextDisabled={isDone}
           resetDisabled={stepIndex < 0}
-          onSpeedChange={e => setSpeed(Number(e.target.value))}
+          onSpeedChange={e => setSpeed(Number(e.target.value
+    </>))}
           showPatternOverlay={showPatternOverlay}
           onShowPatternOverlayChange={setShowPatternOverlay}
           patternOverlayLabel="Show pattern overlay"

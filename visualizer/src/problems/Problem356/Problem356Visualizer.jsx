@@ -9,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './Problem356.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -210,22 +211,28 @@ const EXAMPLES = [
 
 export default function Problem356Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [pointsInput, setPointsInput] = useState(JSON.stringify(EXAMPLES[0]?.points ?? []));
+  const { points, inputError } = useMemo(() => {
+    try {
+      const parsedPoints = JSON.parse(pointsInput); if (!Array.isArray(parsedPoints)) throw new Error('points must be an array');
+      return { points: parsedPoints, inputError: '' };
+    } catch (e) {
+      return { points: EXAMPLES[exIdx]?.points ?? '', inputError: e.message };
+    }
+  }, [pointsInput]);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]
-  const steps = useMemo(() => generateSteps(ex.points), [ex.points])
+  const steps = useMemo(() => generateSteps(points), [points])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
-  const applyExample = useCallback((idx) => {
-    setExIdx(idx)
-    handleReset()
-  }, [handleReset])
+  const applyExample = useCallback((i) => { setExIdx(i); setPointsInput(JSON.stringify(EXAMPLES[i].points)); handleReset(); }, [handleReset]);
 
   // Calculate grid dimensions for visualization
-  const allPoints = step ? ex.points : []
+  const allPoints = step ? points : []
   const getGridDimensions = () => {
     if (allPoints.length === 0) return { minX: -3, maxX: 3, minY: -3, maxY: 3 }
     const xs = allPoints.map(p => p[0])
@@ -270,7 +277,7 @@ export default function Problem356Visualizer() {
       id: 'viz',
       title: '📐 Line Reflection Visualization',
       content: (
-        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
           {/* Example Selector */}
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {EXAMPLES.map((e, i) => (
@@ -297,7 +304,6 @@ export default function Problem356Visualizer() {
           </div>
 
           {step && (
-            <>
               {/* Message */}
               <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11, fontWeight: 600 }}>
                 {step.message}
@@ -472,6 +478,7 @@ export default function Problem356Visualizer() {
             </>
           )}
         </div>
+        </>
       ),
     },
   ], [step, connectivity, setActiveLineDom, exIdx, applyExample, ex, grid, gridWidth, gridHeight, screenX, screenY, allPoints])

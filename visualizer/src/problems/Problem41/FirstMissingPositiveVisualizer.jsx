@@ -9,6 +9,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./FirstMissingPositiveVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 
@@ -80,14 +81,23 @@ function generateSteps(numsIn) {
 
 export default function FirstMissingPositiveVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-    const steps = useMemo(() => generateSteps(ex.nums), [ex]);
+  const [numsInput, setNumsInput] = useState("[1,2,0]");
+  const { nums, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      return { nums: parsedNums, inputError: '' };
+    } catch (e) {
+      return { nums: "[1,2,0]", inputError: e.message };
+    }
+  }, [numsInput]);
+    const steps = useMemo(() => generateSteps(nums), [nums]);
     const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+    const applyEx = useCallback((e) => { setEx(e); setNumsInput(JSON.stringify(e.nums)); handleReset(); }, [handleReset]);;
 
-    const arr = step?.arr ?? ex.nums;
+    const arr = step?.arr ?? nums;
     const activeI = step?.i ?? -1;
     const activeJ = step?.j ?? -1;
     const phase = step?.phase ?? "init";
@@ -151,7 +161,8 @@ export default function FirstMissingPositiveVisualizer() {
                 <div className="fmp-result">✓ First missing positive = {step.missing}</div>
             )}
         </>
-    );
+    
+    </>);
 
     const codePanel = (
         <div style={{ position: 'relative', height: '100%' }}>
@@ -177,7 +188,6 @@ export default function FirstMissingPositiveVisualizer() {
     );
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={FIRSTMISSINGPOSITIVE_PATTERNS} />
             )}
@@ -218,7 +228,6 @@ export default function FirstMissingPositiveVisualizer() {
         <div className="fmp-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

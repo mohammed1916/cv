@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './DistributeCandiesPeopleVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
 
 const PATTERNS = {
@@ -221,16 +222,26 @@ function VisualizationPanel({ n, k, step, applyEx }) {
 }
 
 export default function DistributeCandiesPeopleVisualizer() {
-  const [input, setInput] = useState(EXAMPLES[0] || { n: 10, k: 3 })
-  const SOLUTION_CODE = SOLUTION_CODE_INLINE
+  const [input, setInput] = useState({"label":"Example 1","candies":7,"num_people":4});
+  const [nInput, setNInput] = useState("");
+  const [kInput, setKInput] = useState("");
+  const { n, k, inputError } = useMemo(() => {
+    try {
+      const parsedN = nInput;
+      const parsedK = kInput;
+      return { n: parsedN, k: parsedK, inputError: '' };
+    } catch (e) {
+      return { n: "", k: "", inputError: e.message };
+    }
+  }, [nInput, kInput]);  const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(
     () =>
-      generateSteps(input.n, input.k).map((current) => ({
+      generateSteps(n, k).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [input]
+    [n, k]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -238,7 +249,7 @@ export default function DistributeCandiesPeopleVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setInput(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setNInput(String(e.n)); setKInput(String(e.k)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -267,8 +278,8 @@ export default function DistributeCandiesPeopleVisualizer() {
       title: '🍬 Distribution',
       content: (
         <VisualizationPanel
-          n={input.n}
-          k={input.k}
+          n={n}
+          k={k}
           step={step}
           applyEx={applyEx}
         />
@@ -278,6 +289,7 @@ export default function DistributeCandiesPeopleVisualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

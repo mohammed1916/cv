@@ -10,6 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './Problem388Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const PATTERNS = ['complete', 'directory', 'file', 'init', 'parse', 'process', 'update']
 
@@ -180,11 +181,20 @@ const EXAMPLES = [
 
 export default function Problem388Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [inputInput, setInputInput] = useState(EXAMPLES[0]?.input ?? '');
+  const { input, inputError } = useMemo(() => {
+    try {
+      const parsedInput = inputInput;
+      return { input: parsedInput, inputError: '' };
+    } catch (e) {
+      return { input: EXAMPLES[exIdx]?.input ?? '', inputError: e.message };
+    }
+  }, [inputInput]);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]
   const steps = useMemo(
-    () => generateSteps(ex.input).map((current) => ({
+    () => generateSteps(input).map((current) => ({
       ...current,
       relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
     })),
@@ -195,10 +205,7 @@ export default function Problem388Visualizer() {
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
-  const applyExample = useCallback((idx) => {
-    setExIdx(idx)
-    handleReset()
-  }, [handleReset])
+  const applyExample = useCallback((i) => { setExIdx(i); setInputInput(String(EXAMPLES[i].input)); handleReset(); }, [handleReset]);
 
   const dockPanels = useMemo(() => [
     {
@@ -252,7 +259,6 @@ export default function Problem388Visualizer() {
           </div>
 
           {step && (
-            <>
               {/* Message */}
               <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 12, fontWeight: 500 }}>
                 {step.message}
@@ -282,6 +288,7 @@ export default function Problem388Visualizer() {
                           marginLeft: depth * 20,
                         }}
                       >
+      
                         {name.includes('.') ? '📄' : '📁'} {name}
                       </motion.div>
                     )

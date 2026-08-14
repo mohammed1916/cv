@@ -12,6 +12,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./PlusOneVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('plus-one')
 const EXAMPLES = getExamples('plus-one');
@@ -56,7 +57,7 @@ function DominoChainVisualization({ arr, step, ex }) {
         <AnimatePresence>
           {arr.map((d, idx) => {
             const isActive = idx === activeI;
-            const isNew = idx === 0 && arr.length > ex.digits.length;
+            const isNew = idx === 0 && arr.length > digits.length;
             const isFalling = isActive && carry;
 
             return (
@@ -184,15 +185,26 @@ function VisualizationPanel({ arr, step, ex, applyEx }) {
 
 export default function PlusOneVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-    const steps = useMemo(() => generateSteps(ex.digits), [ex]);
+  const [digitsInput, setDigitsInput] = useState("[1,2,3]");
+  const [descInput, setDescInput] = useState("123");
+  const { digits, desc, inputError } = useMemo(() => {
+    try {
+      const parsedDigits = JSON.parse(digitsInput); if (!Array.isArray(parsedDigits)) throw new Error('digits must be an array');
+      const parsedDesc = descInput;
+      return { digits: parsedDigits, desc: parsedDesc, inputError: '' };
+    } catch (e) {
+      return { digits: "[1,2,3]", desc: "123", inputError: e.message };
+    }
+  }, [digitsInput, descInput]);
+    const steps = useMemo(() => generateSteps(digits), [digits]);
     const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+    const applyEx = useCallback((e) => { setEx(e); setDigitsInput(JSON.stringify(e.digits)); setDescInput(String(e.desc)); handleReset(); }, [handleReset]);;
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
     const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
 
-    const arr = step?.arr ?? ex.digits;
+    const arr = step?.arr ?? digits;
 
     // Extract panels into consts
     const codePanel = (
@@ -224,14 +236,14 @@ export default function PlusOneVisualizer() {
           applyEx={applyEx}
         />
       </div>
-    )
+    
+    </>)
     const statusPanel = (
       <div className="po-status">
         {step?.message || 'Ready to start'}
       </div>
     )
     const playbackPanel = (
-      <>
         {showPatternOverlay && (
           <PatternLegend currentPhase={step?.phase} usedPatterns={PLUSONE_PATTERNS} />
         )}
@@ -270,7 +282,6 @@ export default function PlusOneVisualizer() {
       <div className="po-shell">
         <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
         {panelDivs && (
-          <>
             {panelDivs.code && createPortal(codePanel, panelDivs.code)}
             {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
             {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

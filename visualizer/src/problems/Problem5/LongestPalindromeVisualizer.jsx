@@ -8,6 +8,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './LongestPalindromeVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const LPAL_PATTERNS = ['init', 'loop', 'odd_init', 'odd_check', 'odd_match', 'odd_update', 'odd_expand', 'odd_break', 'even_init', 'even_check', 'even_match', 'even_update', 'even_expand', 'even_break']
@@ -212,6 +213,17 @@ export default function LongestPalindromeVisualizer() {
 
   return (
     <div className="lpal-shell">
+      <ManualInputPanel
+        fields={[{"key":"s","label":"s","type":"string"}]}
+        values={{ s: sInput }}
+        onChange={(k, v) => { if (k === 's') setSInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
       <div className="lpal-top">
         <div className="lpal-panel" style={{ flex: 1.5 }}>
           <div className="lpal-panel-head">

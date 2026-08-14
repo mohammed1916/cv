@@ -151,7 +151,6 @@ export default function ExcelSheetColumnTitleVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -190,7 +189,6 @@ export default function ExcelSheetColumnTitleVisualizer() {
     <div className="excel_sheet_column_title-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state && createPortal(statePanel, panelDivs.state)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

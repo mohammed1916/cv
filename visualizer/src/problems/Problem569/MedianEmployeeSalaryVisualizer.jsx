@@ -12,6 +12,7 @@ import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import './MedianEmployeeSalaryVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const PATTERNS = ['init', 'partition', 'rank', 'bounds', 'test_row', 'keep', 'drop', 'done', 'error']
 
@@ -220,7 +221,7 @@ const EXAMPLES = getExamplesOr('median-employee-salary', [
 ])
 
 export default function MedianEmployeeSalaryVisualizer() {
-  const [tableInput, setTableInput] = useState(DEFAULT_TABLE)
+  const [tableInput, setTableInput] = useState(DEFAULT_TABLE);
   const [panelDivs, setPanelDivs] = useState(null)
 
   const inputError = useMemo(() => {
@@ -372,7 +373,8 @@ export default function MedianEmployeeSalaryVisualizer() {
         )}
       </div>
     </div>
-  )
+  
+    </>)
 
   const statePanel = (
     <div className="p569-panel-state">
@@ -435,7 +437,6 @@ export default function MedianEmployeeSalaryVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -473,7 +474,6 @@ export default function MedianEmployeeSalaryVisualizer() {
     <div className="p569-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state   && createPortal(statePanel,   panelDivs.state)}
           {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}

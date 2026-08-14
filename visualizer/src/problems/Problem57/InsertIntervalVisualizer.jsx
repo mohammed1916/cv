@@ -12,6 +12,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./InsertIntervalVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const INSERTINTERVAL_PATTERNS = ['after', 'before', 'check', 'done', 'done_early', 'init', 'merge']
 
@@ -153,16 +154,26 @@ function IntervalVisualization({ intervals, newInterval, step, maxVal }) {
 
 export default function InsertIntervalVisualizer() {
     const [sel, setSel] = useState(0);
+  const [intervalsInput, setIntervalsInput] = useState(JSON.stringify(EXAMPLES[0]?.["intervals"] ?? null));
+  const [newIntervalInput, setNewIntervalInput] = useState(JSON.stringify(EXAMPLES[0]?.["newInterval"] ?? null));
+  const { intervals, newInterval, inputError } = useMemo(() => {
+    try {
+      const parsedIntervals = JSON.parse(intervalsInput); if (!Array.isArray(parsedIntervals)) throw new Error('intervals must be an array');
+      const parsedNewInterval = JSON.parse(newIntervalInput); if (!Array.isArray(parsedNewInterval)) throw new Error('newInterval must be an array');
+      return { intervals: parsedIntervals, newInterval: parsedNewInterval, inputError: '' };
+    } catch (e) {
+      return { intervals: EXAMPLES[sel]?.intervals, newInterval: EXAMPLES[sel]?.newInterval, inputError: e.message };
+    }
+  }, [intervalsInput, newIntervalInput]);;
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
-    const { intervals, newInterval } = EXAMPLES[sel];
-    const steps = useMemo(() => generateSteps(intervals, newInterval), [intervals, newInterval]);
+        const steps = useMemo(() => generateSteps(intervals, newInterval), [intervals, newInterval]);
     const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : steps[0];
 
-    const applyExample = useCallback((i) => { setSel(i); handleReset(); }, [handleReset]);
+    const applyExample = useCallback((i) => { setSel(i); setIntervalsInput(JSON.stringify(EXAMPLES[i].intervals)); setNewIntervalInput(JSON.stringify(EXAMPLES[i].newInterval)); handleReset(); }, [handleReset]);
 
     const maxVal = useMemo(() => {
       const allIntervals = [...intervals];
@@ -184,7 +195,8 @@ export default function InsertIntervalVisualizer() {
         </div>
         <IntervalVisualization intervals={intervals} newInterval={newInterval} step={step} maxVal={maxVal} />
       </div>
-    );
+    
+    </>);
 
     const codePanel = (
       <div style={{ position: 'relative', height: '100%' }}>
@@ -213,7 +225,6 @@ export default function InsertIntervalVisualizer() {
     );
 
     const playbackPanel = (
-      <>
         {showPatternOverlay && (
           <PatternLegend currentPhase={step?.phase} usedPatterns={INSERTINTERVAL_PATTERNS} />
         )}
@@ -248,7 +259,6 @@ export default function InsertIntervalVisualizer() {
       <div className="ii-shell">
         <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
         {panelDivs && (
-          <>
             {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
             {panelDivs.code && createPortal(codePanel, panelDivs.code)}
             {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

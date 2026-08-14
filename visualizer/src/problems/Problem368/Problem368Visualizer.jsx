@@ -9,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './Problem368.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -331,19 +332,25 @@ function ChainVisualization({ sorted, chain }) {
 
 export default function Problem368Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [inputInput, setInputInput] = useState(EXAMPLES[0]?.input ?? '');
+  const { input, inputError } = useMemo(() => {
+    try {
+      const parsedInput = inputInput;
+      return { input: parsedInput, inputError: '' };
+    } catch (e) {
+      return { input: EXAMPLES[exIdx]?.input ?? '', inputError: e.message };
+    }
+  }, [inputInput]);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]
-  const steps = useMemo(() => generateSteps(ex.input), [ex])
+  const steps = useMemo(() => generateSteps(input), [ex])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
-  const applyExample = useCallback((idx) => {
-    setExIdx(idx)
-    handleReset()
-  }, [handleReset])
+  const applyExample = useCallback((i) => { setExIdx(i); setInputInput(String(EXAMPLES[i].input)); handleReset(); }, [handleReset]);
 
   const dockPanels = useMemo(() => [
     {
@@ -396,7 +403,6 @@ export default function Problem368Visualizer() {
           </div>
 
           {step && (
-            <>
               {/* Status message */}
               <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
                 <div style={{ fontWeight: 600, marginBottom: 6, color: '#1e293b' }}>{step.message}</div>
@@ -425,6 +431,7 @@ export default function Problem368Visualizer() {
                           minWidth: 50,
                         }}
                       >
+      
                         <div>{num}</div>
                         <div style={{ fontSize: 9, opacity: 0.7, marginTop: 2 }}>
                           {step.dp[i] > 0 ? `L:${step.dp[i]}` : ''}

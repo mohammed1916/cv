@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem472Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -182,15 +183,24 @@ function VisualizationPanel({ words, step, applyEx }) {
 }
 
 export default function Problem472Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { words: ['cat','cats','catsdogcats','dog','catscat','rat','catsdog'] })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [wordsInput, setWordsInput] = useState("[\"cat\",\"cats\",\"catsdogcats\",\"dog\",\"catscat\",\"ratcatdogcat\"]");
+  const { words, inputError } = useMemo(() => {
+    try {
+      const parsedWords = JSON.parse(wordsInput); if (!Array.isArray(parsedWords)) throw new Error('words must be an array');
+      return { words: parsedWords, inputError: '' };
+    } catch (e) {
+      return { words: "[\"cat\",\"cats\",\"catsdogcats\",\"dog\",\"catscat\",\"ratcatdogcat\"]", inputError: e.message };
+    }
+  }, [wordsInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.words).map((current) => ({
+      generateSteps(words).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [words]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -198,7 +208,7 @@ export default function Problem472Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setWordsInput(JSON.stringify(e.words)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -213,7 +223,7 @@ export default function Problem472Visualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
+              <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
@@ -227,7 +237,7 @@ export default function Problem472Visualizer() {
       title: '🔗 Concatenated Words',
       content: (
         <VisualizationPanel
-          words={ex.words}
+          words={words}
           step={step}
           applyEx={applyEx}
         />
@@ -253,7 +263,8 @@ export default function Problem472Visualizer() {
           prevDisabled={stepIndex < 0}
           nextDisabled={isDone}
           resetDisabled={stepIndex < 0}
-          onSpeedChange={e => setSpeed(Number(e.target.value))}
+          onSpeedChange={e => setSpeed(Number(e.target.value
+    </>))}
           showPatternOverlay={showPatternOverlay}
           onShowPatternOverlayChange={setShowPatternOverlay}
           patternOverlayLabel="Show pattern overlay"

@@ -10,6 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './ThreeSumClosestVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
@@ -167,6 +168,19 @@ export default function ThreeSumClosestVisualizer() {
 
     // Step 2: Extract panels into consts
     const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"nums","label":"nums","type":"array"},{"key":"target","label":"target","type":"array"}]}
+        values={{ nums: numsInput, target: targetInput }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'target') setTargetInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
       <div className="tsc3-panel main">
         <header className="tsc3-head">
           <span>Sorted Array · Two Pointers</span>
@@ -236,7 +250,8 @@ export default function ThreeSumClosestVisualizer() {
           )}
         </div>
       </div>
-    )
+    
+    </>)
 
     const statePanel = (
       <div className="tsc3-panel results">
@@ -309,7 +324,6 @@ export default function ThreeSumClosestVisualizer() {
     )
 
     const playbackPanel = (
-      <>
         {showPatternOverlay && (
           <PatternLegend currentPhase={step?.phase} usedPatterns={THREESUMCLOSEST_PATTERNS} />
         )}
@@ -350,7 +364,6 @@ export default function ThreeSumClosestVisualizer() {
       <div className="tsc3-shell">
         <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
         {panelDivs && (
-          <>
             {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
             {panelDivs.state && createPortal(statePanel, panelDivs.state)}
             {panelDivs.code && createPortal(codePanel, panelDivs.code)}

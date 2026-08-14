@@ -12,6 +12,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./GenerateParenthesesVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const SOLUTION_CODE_INLINE = [
     { line: 1, text: "def generateParenthesis(n):" },
     { line: 2, text: "    res = []" },
@@ -84,7 +85,15 @@ const EXAMPLES = getExamples('generate-parentheses');
 
 
 export default function GenerateParenthesesVisualizer() {
-    const [n, setN] = useState(3);
+    const [nInput, setNInput] = useState(3);
+  const { n, inputError } = useMemo(() => {
+    try {
+      const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
+      return { n: parsedN, inputError: '' };
+    } catch (e) {
+      return { n: 3, inputError: e.message };
+    }
+  }, [nInput]);
 
     const steps = useMemo(() => generateSteps(n), [n]);
     const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -110,7 +119,8 @@ export default function GenerateParenthesesVisualizer() {
                 ))}
             </div>
         </div>
-    );
+    
+    </>);
 
     const vizPanel = (
         <div className="gp-panel-body">
@@ -181,7 +191,6 @@ export default function GenerateParenthesesVisualizer() {
     );
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={GENERATEPARENTHESES_PATTERNS} />
             )}
@@ -230,7 +239,6 @@ export default function GenerateParenthesesVisualizer() {
 
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}

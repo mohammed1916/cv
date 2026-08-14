@@ -7,6 +7,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './MinCostClimbingStairsVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const SOLUTION_CODE = [
@@ -21,7 +22,8 @@ const SOLUTION_CODE = [
 const EXAMPLES = getExamples('min-cost-climbing-stairs')
 
 function generateSteps(cost) {
-    const steps = []
+const applyEx = useCallback((e) => { setCostInput(JSON.stringify(e.cost)); handleReset(); }, [handleReset]);
+      const steps = []
     const n = cost.length
     const dp = new Array(n + 1).fill(null)
     dp[0] = 0
@@ -106,8 +108,16 @@ function generateSteps(cost) {
 }
 
 export default function MinCostClimbingStairsVisualizer() {
-    const [input, setInput] = useState([10, 15, 20])
-    const steps = useMemo(() => generateSteps(input), [input])
+    const [input, setInput] = useState({"label":"[10,15,20]","input":[10,15,20]});
+  const [costInput, setCostInput] = useState("");
+  const { cost, inputError } = useMemo(() => {
+    try {
+      const parsedCost = costInput;
+      return { cost: parsedCost, inputError: '' };
+    } catch (e) {
+      return { cost: "", inputError: e.message };
+    }
+  }, [costInput]);    const steps = useMemo(() => generateSteps(cost), [cost])
     const { currentStep, isPlaying, setCurrentStep, setIsPlaying } = usePlaybackState(steps.length)
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -122,6 +132,7 @@ export default function MinCostClimbingStairsVisualizer() {
 
     return (
         <div className="mcs-shell">
+      
             <div className="mcs-top">
                 <div className="mcs-panel mcs-panel-input">
                     <div className="mcs-head">Input</div>

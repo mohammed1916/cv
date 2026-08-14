@@ -11,6 +11,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./LongestRepeatingVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const SOLUTION_CODE = [
     { line: 1, text: "def characterReplacement(s, k):" },
     { line: 2, text: "    count = {}" },
@@ -165,12 +166,26 @@ export default function LongestRepeatingVisualizer() {
     );
 
     const vizPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"s","label":"s","type":"string"},{"key":"k","label":"k","type":"string"}]}
+        values={{ s: sInput, k: kInput }}
+        onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 'k') setKInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
         <div className="lr-panel-body">
             <SlidingWindowVisualization />
             <CharacterCountsVisualization />
             <div className="lr-status">{step?.message ?? "Press Play to begin."}</div>
         </div>
-    );
+    
+    </>);
 
     const codePanel = (
         <CodeTracePanel
@@ -207,7 +222,6 @@ export default function LongestRepeatingVisualizer() {
 
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
                     {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}

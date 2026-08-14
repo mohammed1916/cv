@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem476Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -203,15 +204,24 @@ function VisualizationPanel({ num, step, applyEx }) {
 }
 
 export default function Problem476Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { num: 5 })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [numInput, setNumInput] = useState(5);
+  const { num, inputError } = useMemo(() => {
+    try {
+      const parsedNum = Number(numInput); if (isNaN(parsedNum)) throw new Error('num must be a number');
+      return { num: parsedNum, inputError: '' };
+    } catch (e) {
+      return { num: 5, inputError: e.message };
+    }
+  }, [numInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.num).map((current) => ({
+      generateSteps(num).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [num]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -219,7 +229,7 @@ export default function Problem476Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setNumInput(String(e.num)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -234,7 +244,7 @@ export default function Problem476Visualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
+              <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
@@ -248,7 +258,7 @@ export default function Problem476Visualizer() {
       title: '🔄 Number Complement',
       content: (
         <VisualizationPanel
-          num={ex.num}
+          num={num}
           step={step}
           applyEx={applyEx}
         />
@@ -274,7 +284,8 @@ export default function Problem476Visualizer() {
           prevDisabled={stepIndex < 0}
           nextDisabled={isDone}
           resetDisabled={stepIndex < 0}
-          onSpeedChange={e => setSpeed(Number(e.target.value))}
+          onSpeedChange={e => setSpeed(Number(e.target.value
+    </>))}
           showPatternOverlay={showPatternOverlay}
           onShowPatternOverlayChange={setShowPatternOverlay}
           patternOverlayLabel="Show pattern overlay"

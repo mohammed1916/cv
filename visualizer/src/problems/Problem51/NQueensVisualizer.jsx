@@ -14,6 +14,7 @@ import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { useGridRayOverlay } from "../../hooks/useGridRayOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./NQueensVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const NQUEENS_PATTERNS = ['init', 'check', 'place', 'skip', 'remove', 'solution']
 
@@ -233,15 +234,23 @@ function BoardPanel({ EXAMPLES, ex, n, board, activeRow, activeCol, phase, attac
 
 export default function NQueensVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => generateSteps(ex.n), [ex]);
+  const [nInput, setNInput] = useState(4);
+  const { n, inputError } = useMemo(() => {
+    try {
+      const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
+      return { n: parsedN, inputError: '' };
+    } catch (e) {
+      return { n: 4, inputError: e.message };
+    }
+  }, [nInput]);
+  const steps = useMemo(() => generateSteps(n), [n]);
   const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); setNInput(String(e.n)); handleReset(); }, [handleReset]);;
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
 
-  const n = ex.n;
   const board = step?.boardRef ?? Array.from({ length: n }, () => Array(n).fill("."));
   const activeRow = step?.row ?? -1;
   const activeCol = step?.col ?? -1;
@@ -252,7 +261,8 @@ export default function NQueensVisualizer() {
   // Extract panels into consts (before return)
   const primaryPanel = (
     <BoardPanel EXAMPLES={EXAMPLES} ex={ex} n={n} board={board} activeRow={activeRow} activeCol={activeCol} phase={phase} attacked={attacked} attackers={attackers} step={step} applyEx={applyEx} />
-  );
+  
+    </>);
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
@@ -273,7 +283,6 @@ export default function NQueensVisualizer() {
   );
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={NQUEENS_PATTERNS} />
       )}
@@ -318,7 +327,6 @@ export default function NQueensVisualizer() {
     <div className="nq-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

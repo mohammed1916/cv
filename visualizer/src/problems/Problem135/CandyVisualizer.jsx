@@ -11,6 +11,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./CandyVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -72,15 +73,24 @@ const MAX_CANDY = 6;
 
 export default function CandyVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => generateSteps(ex.ratings), [ex]);
+  const [ratingsInput, setRatingsInput] = useState("[1,0,2]");
+  const { ratings: inputRatings, inputError } = useMemo(() => {
+    try {
+      const parsedRatings = JSON.parse(ratingsInput); if (!Array.isArray(parsedRatings)) throw new Error('ratings must be an array');
+      return { ratings: parsedRatings, inputError: '' };
+    } catch (e) {
+      return { ratings: "[1,0,2]", inputError: e.message };
+    }
+  }, [ratingsInput]);
+  const steps = useMemo(() => generateSteps(inputRatings), [inputRatings]);
   const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); setRatingsInput(JSON.stringify(e.ratings)); handleReset(); }, [handleReset]);;
 
-  const ratings = step?.ratings ?? ex.ratings;
-  const candies = step?.candies ?? Array(ex.ratings.length).fill(1);
+  const ratings = step?.ratings ?? inputRatings;
+  const candies = step?.candies ?? Array(ratings.length).fill(1);
   const activeI = step?.i ?? -1;
   const phase = step?.phase ?? "init";
 
@@ -146,7 +156,8 @@ export default function CandyVisualizer() {
 
       {step?.done && <div className="cy-result">✓ Minimum candies = {step.total}</div>}
     </div>
-  );
+  
+    </>);
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
@@ -165,7 +176,6 @@ export default function CandyVisualizer() {
   );
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -204,7 +214,6 @@ export default function CandyVisualizer() {
     <div className="cy-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

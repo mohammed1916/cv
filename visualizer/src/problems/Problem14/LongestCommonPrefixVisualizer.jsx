@@ -13,6 +13,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { getExamples } from '../../config/examplesRegistry'
 import './LongestCommonPrefixVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -275,7 +276,6 @@ function PrefixPanel({ step, strs }) {
               {step.phase === 'done' ? (
                 <div className="lcp-position-row">Final result computed</div>
               ) : step.col !== null ? (
-                <>
                   <div className="lcp-position-row">
                     <span className="lcp-label">Column:</span> {step.col}
                   </div>
@@ -402,7 +402,6 @@ export default function LongestCommonPrefixVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={LCP_PATTERNS} />
       )}
@@ -453,6 +452,18 @@ export default function LongestCommonPrefixVisualizer() {
 
   return (
     <div className="lcp-shell">
+    <>
+      <ManualInputPanel
+        fields={[{"key":"strs","label":"strs","type":"array"}]}
+        values={{ strs: strsInput }}
+        onChange={(k, v) => { if (k === 'strs') setStrsInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
       <section className="lcp-hero">
         <div className="lcp-hero-copy">
           <span className="lcp-kicker">Longest Common Prefix • LeetCode #14</span>
@@ -476,7 +487,6 @@ export default function LongestCommonPrefixVisualizer() {
 
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
           {panelDivs['strings-viz'] && createPortal(stringsVizPanel, panelDivs['strings-viz'])}
           {panelDivs['prefix-viz'] && createPortal(prefixVizPanel, panelDivs['prefix-viz'])}

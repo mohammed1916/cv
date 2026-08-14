@@ -14,6 +14,7 @@ import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
 
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const PATTERNS = ['deserialize_start', 'done', 'null_node', 'process_node', 'read_node', 'reading', 'serialized', 'start']
 const LINE_PATTERN_MAP = {
   1: 'done',
@@ -464,6 +465,17 @@ export default function Problem449Visualizer() {
 
   return (
     <div className="problem-shell">
+      <ManualInputPanel
+        fields={[{"key":"tree","label":"tree","type":"string"}]}
+        values={{ tree: treeInput }}
+        onChange={(k, v) => { if (k === 'tree') setTreeInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
 
       <FloatingPanel title="Playback Controls">

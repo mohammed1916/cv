@@ -10,6 +10,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./PalindromeLinkedListVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -84,7 +85,6 @@ function generateSteps(nums) {
 }
 
 function VisualizationPanel({ step, ex, onExampleChange }) {
-    const nums = ex.nums;
     const n = nums.length;
     const slow = step?.slow ?? 0;
     const fast = step?.fast ?? 0;
@@ -166,11 +166,20 @@ function VisualizationPanel({ step, ex, onExampleChange }) {
 
 export default function PalindromeLinkedListVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-    const steps = useMemo(() => generateSteps(ex.nums), [ex]);
+  const [numsInput, setNumsInput] = useState("[1,2,2,1]");
+  const { nums, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      return { nums: parsedNums, inputError: '' };
+    } catch (e) {
+      return { nums: "[1,2,2,1]", inputError: e.message };
+    }
+  }, [numsInput]);
+    const steps = useMemo(() => generateSteps(nums), [nums]);
     const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+    const applyEx = useCallback((e) => { setEx(e); setNumsInput(JSON.stringify(e.nums)); handleReset(); }, [handleReset]);;
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
 
@@ -189,6 +198,7 @@ export default function PalindromeLinkedListVisualizer() {
 
     return (
         <div className="problem-shell">
+      
             <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
             <FloatingPanel title="Playback Controls">
                 <PlaybackControls

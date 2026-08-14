@@ -9,6 +9,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import "./SkylineProblemVisualizer.css"
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -249,11 +250,15 @@ function VisualizationPanel({ step, buildings, keyPoints }) {
 }
 
 export default function SkylineProblemVisualizer() {
-  const [buildings] = useState([
-    [0, 2, 3],
-    [2, 5, 3],
-    [1, 3, 5],
-  ])
+  const [buildingsInput, setBuildingsInput] = useState("[[0,2,3],[2,5,3],[1,3,5]]");
+  const { buildings, inputError } = useMemo(() => {
+    try {
+      const parsedBuildings = JSON.parse(buildingsInput); if (!Array.isArray(parsedBuildings)) throw new Error('buildings must be an array');
+      return { buildings: parsedBuildings, inputError: '' };
+    } catch (e) {
+      return { buildings: [[0,2,3],[2,5,3],[1,3,5]], inputError: e.message };
+    }
+  }, [buildingsInput]);
   const keyPoints = useMemo(() => {
     const events = []
     for (const [l, r, h] of buildings) {
@@ -299,6 +304,7 @@ export default function SkylineProblemVisualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [["code", "viz"]], minimized: [] }} />
       <FloatingPanel title="Controls">
         <PlaybackControls

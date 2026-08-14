@@ -13,6 +13,7 @@ import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import './Problem209Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const PATTERNS = ['init', 'expand', 'shrink', 'record', 'done', 'error']
 const LINE_PATTERN_MAP = {
@@ -166,6 +167,19 @@ export default function Problem209Visualizer() {
   const nums = step?.nums ?? []
 
   const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"target","label":"target","type":"string"},{"key":"nums","label":"nums","type":"string"}]}
+        values={{ target: targetInput, nums: numsInput }}
+        onChange={(k, v) => { if (k === 'target') setTargetInput(v); if (k === 'nums') setNumsInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <div className="p209-panel-primary">
       <div className="p209-card">
         <div className="p209-section-label">Input</div>
@@ -261,7 +275,8 @@ export default function Problem209Visualizer() {
         </div>
       )}
     </div>
-  )
+  
+    </>)
 
   const statePanel = (
     <div className="p209-panel-state">
@@ -330,7 +345,6 @@ export default function Problem209Visualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -368,7 +382,6 @@ export default function Problem209Visualizer() {
     <div className="p209-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state && createPortal(statePanel, panelDivs.state)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

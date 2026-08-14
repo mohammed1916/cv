@@ -9,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './Problem370Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -191,19 +192,27 @@ const EXAMPLES = [
 
 export default function Problem370Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [lengthInput, setLengthInput] = useState(JSON.stringify(EXAMPLES[0]?.length ?? []));
+  const [updatesInput, setUpdatesInput] = useState("");
+  const { length, updates, inputError } = useMemo(() => {
+    try {
+      const parsedLength = JSON.parse(lengthInput); if (!Array.isArray(parsedLength)) throw new Error('length must be an array');
+      const parsedUpdates = JSON.parse(updatesInput); if (!Array.isArray(parsedUpdates)) throw new Error('updates must be an array');
+      return { length: parsedLength, updates: parsedUpdates, inputError: '' };
+    } catch (e) {
+      return { length: EXAMPLES[exIdx]?.length ?? '', updates: EXAMPLES[exIdx]?.updates ?? '', inputError: e.message };
+    }
+  }, [lengthInput, updatesInput]);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]
-  const steps = useMemo(() => generateSteps(ex.length, ex.updates), [ex])
+  const steps = useMemo(() => generateSteps(length, updates), [ex])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
-  const applyExample = useCallback((idx) => {
-    setExIdx(idx)
-    handleReset()
-  }, [handleReset])
+  const applyExample = useCallback((i) => { setExIdx(i); setLengthInput(JSON.stringify(EXAMPLES[i].length)); setUpdatesInput(JSON.stringify(EXAMPLES[i].updates)); handleReset(); }, [handleReset]);
 
   const dockPanels = useMemo(() => [
     {
@@ -256,7 +265,6 @@ export default function Problem370Visualizer() {
           </div>
 
           {step && (
-            <>
               {/* Message */}
               <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 12, fontWeight: 500 }}>
                 {step.message}
@@ -355,6 +363,7 @@ export default function Problem370Visualizer() {
                           textAlign: 'center',
                         }}
                       >
+      
                         {val}
                       </motion.div>
                     )

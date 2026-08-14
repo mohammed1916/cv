@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem475Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -112,7 +113,6 @@ function VisualizationPanel({ houses, heaters, step, applyEx }) {
         <svg width="100%" height="80" style={{ border: '1px solid #cbd5e1', borderRadius: 4 }}>
           <line x1="20" y1="40" x2="380" y2="40" stroke="#cbd5e1" strokeWidth="2" />
           {Math.min(...[...houses, ...heaters]) >= 0 && Math.max(...[...houses, ...heaters]) <= 50 && (
-            <>
               {houses.map((h, idx) => (
                 <circle
                   key={`house-${idx}`}
@@ -189,15 +189,26 @@ function VisualizationPanel({ houses, heaters, step, applyEx }) {
 }
 
 export default function Problem475Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { houses: [1,2,3], heaters: [2] })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [housesInput, setHousesInput] = useState("[1,2,3]");
+  const [heatersInput, setHeatersInput] = useState("[2]");
+  const { houses, heaters, inputError } = useMemo(() => {
+    try {
+      const parsedHouses = JSON.parse(housesInput); if (!Array.isArray(parsedHouses)) throw new Error('houses must be an array');
+      const parsedHeaters = JSON.parse(heatersInput); if (!Array.isArray(parsedHeaters)) throw new Error('heaters must be an array');
+      return { houses: parsedHouses, heaters: parsedHeaters, inputError: '' };
+    } catch (e) {
+      return { houses: "[1,2,3]", heaters: "[2]", inputError: e.message };
+    }
+  }, [housesInput, heatersInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.houses, ex.heaters).map((current) => ({
+      generateSteps(houses, heaters).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [houses, heaters]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -205,7 +216,7 @@ export default function Problem475Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setHousesInput(JSON.stringify(e.houses)); setHeatersInput(JSON.stringify(e.heaters)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -220,7 +231,7 @@ export default function Problem475Visualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
+              <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
@@ -234,8 +245,8 @@ export default function Problem475Visualizer() {
       title: '🔥 Heaters',
       content: (
         <VisualizationPanel
-          houses={ex.houses}
-          heaters={ex.heaters}
+          houses={houses}
+          heaters={heaters}
           step={step}
           applyEx={applyEx}
         />
@@ -261,7 +272,8 @@ export default function Problem475Visualizer() {
           prevDisabled={stepIndex < 0}
           nextDisabled={isDone}
           resetDisabled={stepIndex < 0}
-          onSpeedChange={e => setSpeed(Number(e.target.value))}
+          onSpeedChange={e => setSpeed(Number(e.target.value
+    </>))}
           showPatternOverlay={showPatternOverlay}
           onShowPatternOverlayChange={setShowPatternOverlay}
           patternOverlayLabel="Show pattern overlay"

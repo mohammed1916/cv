@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem435Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -274,15 +275,24 @@ function VisualizationPanel({ step, applyEx }) {
 }
 
 export default function Problem435Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { intervals: [[1, 2], [2, 3], [3, 4]], label: 'Simple' })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [intervalsInput, setIntervalsInput] = useState("[[1,2],[2,3],[3,4]]");
+  const { intervals, inputError } = useMemo(() => {
+    try {
+      const parsedIntervals = JSON.parse(intervalsInput); if (!Array.isArray(parsedIntervals)) throw new Error('intervals must be an array');
+      return { intervals: parsedIntervals, inputError: '' };
+    } catch (e) {
+      return { intervals: "[[1,2],[2,3],[3,4]]", inputError: e.message };
+    }
+  }, [intervalsInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.intervals).map((current) => ({
+      generateSteps(intervals).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [intervals]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -290,7 +300,7 @@ export default function Problem435Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setIntervalsInput(JSON.stringify(e.intervals)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -315,7 +325,8 @@ export default function Problem435Visualizer() {
       step={step}
       applyEx={applyEx}
     />
-  )
+  
+    </>)
 
   const [panelDivs, setPanelDivs] = useState(null)
   const panelConfigs = useMemo(() => [
@@ -328,7 +339,6 @@ export default function Problem435Visualizer() {
     <div className="problem-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
         </>

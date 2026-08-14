@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem438Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -265,19 +266,30 @@ function VisualizationPanel({ step, applyEx, s, p, windowStart, windowEnd, resul
 }
 
 export default function Problem438Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { s: 'cbaebabacd', p: 'abc', label: 'Example 1' })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [sInput, setSInput] = useState("cbaebabacd");
+  const [pInput, setPInput] = useState("abc");
+  const { s, p, inputError } = useMemo(() => {
+    try {
+      const parsedS = sInput;
+      const parsedP = pInput;
+      return { s: parsedS, p: parsedP, inputError: '' };
+    } catch (e) {
+      return { s: "cbaebabacd", p: "abc", inputError: e.message };
+    }
+  }, [sInput, pInput]);
   const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.s, ex.p).map((current) => ({
+      generateSteps(s, p).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
-        s: ex.s,
-        p: ex.p,
+        s: s,
+        p: p,
         result: current.result || [],
       })),
-    [ex]
+    [s, p]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -285,7 +297,7 @@ export default function Problem438Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setSInput(String(e.s)); setPInput(String(e.p)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -300,7 +312,7 @@ export default function Problem438Visualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
+              <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
@@ -316,8 +328,8 @@ export default function Problem438Visualizer() {
         <VisualizationPanel
           step={step}
           applyEx={applyEx}
-          s={ex.s}
-          p={ex.p}
+          s={s}
+          p={p}
           windowStart={step?.windowStart || 0}
           windowEnd={step?.windowEnd || 0}
           result={step?.result || []}
@@ -344,7 +356,8 @@ export default function Problem438Visualizer() {
           prevDisabled={stepIndex < 0}
           nextDisabled={isDone}
           resetDisabled={stepIndex < 0}
-          onSpeedChange={e => setSpeed(Number(e.target.value))}
+          onSpeedChange={e => setSpeed(Number(e.target.value
+    </>))}
           showPatternOverlay={showPatternOverlay}
           onShowPatternOverlayChange={setShowPatternOverlay}
           patternOverlayLabel="Show pattern overlay"

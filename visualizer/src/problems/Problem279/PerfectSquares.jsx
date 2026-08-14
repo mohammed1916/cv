@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './PerfectSquares.css';
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 export default function PerfectSquares() {
   const [n, setN] = useState(13);

@@ -7,6 +7,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './TrappingRainWaterVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
@@ -168,6 +169,19 @@ export default function TrappingRainWaterVisualizer() {
 
   // Step 3: Extract panel consts
   const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"height","label":"height","type":"array"}]}
+        values={{ height: heightInput }}
+        onChange={(k, v) => { if (k === 'height') setHeightInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <div className="tw-panel">
       <div className="tw-panel-head">
         Elevation Map
@@ -227,7 +241,6 @@ export default function TrappingRainWaterVisualizer() {
 
           {/* Max level indicators */}
           {step && step.leftMax !== null && step.rightMax !== null && step.phase !== 'done' && (
-            <>
               <div
                 className="tw-max-line left"
                 style={{
@@ -249,7 +262,8 @@ export default function TrappingRainWaterVisualizer() {
         </div>
       </div>
     </div>
-  )
+  
+    </>)
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
@@ -303,7 +317,6 @@ export default function TrappingRainWaterVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={TRAPPINGRAINWATER_PATTERNS} />
       )}
@@ -345,7 +358,6 @@ export default function TrappingRainWaterVisualizer() {
     <div className="trapping-water-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.state && createPortal(statePanel, panelDivs.state)}

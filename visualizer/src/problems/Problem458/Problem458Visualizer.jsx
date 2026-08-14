@@ -14,6 +14,7 @@ import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
 
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const PATTERNS = ['checking', 'done', 'init_pigs', 'start', 'states_calculated']
 const LINE_PATTERN_MAP = {
   1: 'done',
@@ -457,6 +458,17 @@ export default function Problem458Visualizer() {
 
   return (
     <div className="problem-shell">
+      <ManualInputPanel
+        fields={[{"key":"buckets","label":"buckets","type":"string"},{"key":"minutesToDie","label":"minutesToDie","type":"string"},{"key":"minutesToTest","label":"minutesToTest","type":"string"}]}
+        values={{ buckets: bucketsInput, minutesToDie: minutesToDieInput, minutesToTest: minutesToTestInput }}
+        onChange={(k, v) => { if (k === 'buckets') setBucketsInput(v); if (k === 'minutesToDie') setMinutesToDieInput(v); if (k === 'minutesToTest') setMinutesToTestInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
 
       <FloatingPanel title="Playback Controls">

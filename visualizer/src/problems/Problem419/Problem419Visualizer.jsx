@@ -9,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem419Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -280,11 +281,20 @@ function BattleshipsVisualization({ board, step }) {
 
 export default function Problem419Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [boardInput, setBoardInput] = useState(JSON.stringify(EXAMPLES[0]?.board ?? []));
+  const { board, inputError } = useMemo(() => {
+    try {
+      const parsedBoard = JSON.parse(boardInput); if (!Array.isArray(parsedBoard)) throw new Error('board must be an array');
+      return { board: parsedBoard, inputError: '' };
+    } catch (e) {
+      return { board: EXAMPLES[exIdx]?.board ?? '', inputError: e.message };
+    }
+  }, [boardInput]);
   const example = EXAMPLES[exIdx]
 
   const steps = useMemo(
     () =>
-      generateSteps(example.board).map((current) => ({
+      generateSteps(board).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
@@ -296,7 +306,7 @@ export default function Problem419Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((idx) => { setExIdx(idx); handleReset(); }, [handleReset])
+  const applyEx = useCallback((i) => { setExIdx(i); setBoardInput(JSON.stringify(EXAMPLES[i].board)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -348,7 +358,7 @@ export default function Problem419Visualizer() {
               ))}
             </div>
           </div>
-          <BattleshipsVisualization board={example.board} step={step} />
+          <BattleshipsVisualization board={board} step={step} />
         </div>
       ),
     },
@@ -356,6 +366,7 @@ export default function Problem419Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

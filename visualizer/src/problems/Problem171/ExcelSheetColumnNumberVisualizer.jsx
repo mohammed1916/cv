@@ -7,6 +7,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './ExcelSheetColumnNumberVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -31,7 +32,8 @@ const SOLUTION_CODE = [
 ]
 
 function generateSteps(s) {
-  const steps = []
+const applyInput = useCallback((e) => { setInput(e); setSInput(String(e.s)); handleReset(); }, [handleReset]);
+    const steps = []
   steps.push({ activeLine: 1, s, message: `Convert "${s}" to column number`, relatedLines: [1] })
   steps.push({ activeLine: 2, result: 0, message: 'Initialize result = 0', relatedLines: [2] })
 
@@ -76,8 +78,17 @@ function VisualizationPanel({ step }) {
 }
 
 export default function ExcelSheetColumnNumberVisualizer() {
-  const [input, setInput] = useState(EXAMPLES[0])
-  const steps = useMemo(() => generateSteps(input.s).map(s => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [input])
+  const [input, setInput] = useState(EXAMPLES[0]);
+  const [sInput, setSInput] = useState("A");
+  const { s, inputError } = useMemo(() => {
+    try {
+      const parsedS = sInput;
+      return { s: parsedS, inputError: '' };
+    } catch (e) {
+      return { s: "A", inputError: e.message };
+    }
+  }, [sInput]);
+  const steps = useMemo(() => generateSteps(s).map(s => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [s])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
@@ -91,7 +102,8 @@ export default function ExcelSheetColumnNumberVisualizer() {
         <VisualizationPanel step={step} />
       </div>
     </div>
-  )
+  
+    </>)
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
@@ -121,7 +133,6 @@ export default function ExcelSheetColumnNumberVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.activeLine} usedPatterns={PATTERNS} />
       )}
@@ -162,7 +173,6 @@ export default function ExcelSheetColumnNumberVisualizer() {
     <div className="escn-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

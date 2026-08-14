@@ -10,6 +10,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./PalindromePartitioningVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -84,6 +85,19 @@ export default function PalindromePartitioningVisualizer() {
     const [panelDivs, setPanelDivs] = useState(null);
 
     const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"s","label":"s","type":"string"}]}
+        values={{ s: sInput }}
+        onChange={(k, v) => { if (k === 's') setSInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
         <div className="pp-panel-body">
             <div className="pp-controls-row">
                 <div className="pp-examples">
@@ -152,7 +166,8 @@ export default function PalindromePartitioningVisualizer() {
                 </div>
             )}
         </div>
-    );
+    
+    </>);
 
     const codePanel = (
         <div style={{ position: 'relative', height: '100%' }}>
@@ -177,7 +192,6 @@ export default function PalindromePartitioningVisualizer() {
     );
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 onReset={handleReset}
@@ -219,7 +233,6 @@ export default function PalindromePartitioningVisualizer() {
         <div className="pp-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}
                     {panelDivs.status  && createPortal(statusPanel,  panelDivs.status)}

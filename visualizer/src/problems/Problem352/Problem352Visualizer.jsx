@@ -12,6 +12,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem352Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
 
 const PATTERNS = ['collision-self', 'collision-wall', 'direction', 'eat-food', 'idle', 'init', 'move-forward', 'state-update']
@@ -409,6 +410,17 @@ export default function DesignSnakeGameVisualizer() {
 
   return (
     <div className="dsg-shell">
+      <ManualInputPanel
+        fields={[{"key":"movements","label":"movements","type":"string"}]}
+        values={{ movements: movementsInput }}
+        onChange={(k, v) => { if (k === 'movements') setMovementsInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
       <FloatingPanel title="Movements & Examples" className="dsg-input-panel">
         <div className="dsg-example-row">
           {EXAMPLES.map((ex) => (

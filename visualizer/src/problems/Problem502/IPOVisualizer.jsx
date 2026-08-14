@@ -9,6 +9,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./IPOVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const PATTERNS = {
@@ -90,24 +91,40 @@ function generateSteps(k, initW, profits, capital) {
 
 export default function IPOVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
+  const [kInput, setKInput] = useState(1);
+  const [wInput, setWInput] = useState(0);
+  const [profitsInput, setProfitsInput] = useState("[1,2,3]");
+  const [capitalInput, setCapitalInput] = useState("[0,1,1]");
+  const { k, w: inputW, profits, capital, inputError } = useMemo(() => {
+    try {
+      const parsedK = Number(kInput); if (isNaN(parsedK)) throw new Error('k must be a number');
+      const parsedW = Number(wInput); if (isNaN(parsedW)) throw new Error('w must be a number');
+      const parsedProfits = JSON.parse(profitsInput); if (!Array.isArray(parsedProfits)) throw new Error('profits must be an array');
+      const parsedCapital = JSON.parse(capitalInput); if (!Array.isArray(parsedCapital)) throw new Error('capital must be an array');
+      return { k: parsedK, w: parsedW, profits: parsedProfits, capital: parsedCapital, inputError: '' };
+    } catch (e) {
+      return { k: 1, w: 0, profits: "[1,2,3]", capital: "[0,1,1]", inputError: e.message };
+    }
+  }, [kInput, wInput, profitsInput, capitalInput]);
     const steps = useMemo(
-    () => generateSteps(ex.k, ex.w, ex.profits, ex.capital).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })), [ex]);
+    () => generateSteps(k, inputW, profits, capital).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })), [k, inputW, profits, capital]);
     const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+    const applyEx = useCallback((e) => { setEx(e); setKInput(String(e.k)); setWInput(String(e.w)); setProfitsInput(JSON.stringify(e.profits)); setCapitalInput(JSON.stringify(e.capital)); handleReset(); }, [handleReset]);;
 
-    const w = step?.w ?? ex.w;
+    const w = step?.w ?? inputW;
     const round = step?.round ?? 0;
     const available = step?.available ?? [];
     const pickedProfit = step?.pickedProfit ?? null;
 
-    const projects = ex.profits.map((p, i) => ({ profit: p, capital: ex.capital[i] }))
+    const projects = profits.map((p, i) => ({ profit: p, capital: capital[i] }))
         .sort((a, b) => a.capital - b.capital);
 
     return (
         <div className="ipo-shell">
+      
             <div className="ipo-examples">
                 {EXAMPLES.map(e => (
                     <button key={e.label} className={`ipo-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>
@@ -123,7 +140,7 @@ export default function IPOVisualizer() {
                 </div>
                 <div className="ipo-panel ipo-info">
                     <div className="ipo-panel-label">Round</div>
-                    <div className="ipo-big">{round}/{ex.k}</div>
+                    <div className="ipo-big">{round}/{k}</div>
                 </div>
                 {pickedProfit !== null && (
                     <motion.div className="ipo-panel ipo-info" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}>

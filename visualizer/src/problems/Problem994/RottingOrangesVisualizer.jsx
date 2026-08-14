@@ -7,6 +7,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './RottingOrangesVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const SOLUTION_CODE = [
@@ -204,6 +205,17 @@ export default function RottingOrangesVisualizer() {
 
   return (
     <div className="rot-shell">
+      <ManualInputPanel
+        fields={[{"key":"grid","label":"grid","type":"string"}]}
+        values={{ grid: gridInput }}
+        onChange={(k, v) => { if (k === 'grid') setGridInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
       <div className="rot-top">
         <section className="rot-panel grid">
           <header className="rot-head">

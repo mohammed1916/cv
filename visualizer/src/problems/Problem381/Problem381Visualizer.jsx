@@ -10,6 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './Problem381Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const PATTERNS = ['build_map', 'complete', 'init', 'pick', 'remap']
 
@@ -202,11 +203,22 @@ const EXAMPLES = [
 
 export default function Problem381Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [nInput, setNInput] = useState(String(EXAMPLES[0]?.n ?? 0));
+  const [blacklistInput, setBlacklistInput] = useState("");
+  const { n, blacklist, inputError } = useMemo(() => {
+    try {
+      const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
+      const parsedBlacklist = JSON.parse(blacklistInput); if (!Array.isArray(parsedBlacklist)) throw new Error('blacklist must be an array');
+      return { n: parsedN, blacklist: parsedBlacklist, inputError: '' };
+    } catch (e) {
+      return { n: EXAMPLES[exIdx]?.n ?? '', blacklist: EXAMPLES[exIdx]?.blacklist ?? '', inputError: e.message };
+    }
+  }, [nInput, blacklistInput]);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]
   const steps = useMemo(
-    () => generateSteps(ex.n, ex.blacklist).map((current) => ({
+    () => generateSteps(n, blacklist).map((current) => ({
       ...current,
       relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
     })),
@@ -217,10 +229,7 @@ export default function Problem381Visualizer() {
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
-  const applyExample = useCallback((idx) => {
-    setExIdx(idx)
-    handleReset()
-  }, [handleReset])
+  const applyExample = useCallback((i) => { setExIdx(i); setNInput(String(EXAMPLES[i].n)); setBlacklistInput(JSON.stringify(EXAMPLES[i].blacklist)); handleReset(); }, [handleReset]);
 
   const dockPanels = useMemo(() => [
     {
@@ -274,7 +283,6 @@ export default function Problem381Visualizer() {
           </div>
 
           {step && (
-            <>
               {/* Message */}
               <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 12, fontWeight: 500 }}>
                 {step.message}
@@ -391,6 +399,7 @@ export default function Problem381Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         {showPatternOverlay && (

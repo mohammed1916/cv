@@ -11,6 +11,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import "./Visualizer.css"
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const PATTERNS = ['init', 'pack_word', 'close_line', 'justify', 'done']
 
@@ -321,19 +322,30 @@ function VisualizationPanel({ step }) {
 }
 
 export default function Problem68Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [wordsInput, setWordsInput] = useState("[\"This\",\"is\",\"an\",\"example\",\"of\",\"text\",\"justification\"]");
+  const [maxWidthInput, setMaxWidthInput] = useState(16);
+  const { words, maxWidth, inputError } = useMemo(() => {
+    try {
+      const parsedWords = JSON.parse(wordsInput); if (!Array.isArray(parsedWords)) throw new Error('words must be an array');
+      const parsedMaxWidth = Number(maxWidthInput); if (isNaN(parsedMaxWidth)) throw new Error('maxWidth must be a number');
+      return { words: parsedWords, maxWidth: parsedMaxWidth, inputError: '' };
+    } catch (e) {
+      return { words: "[\"This\",\"is\",\"an\",\"example\",\"of\",\"text\",\"justification\"]", maxWidth: 16, inputError: e.message };
+    }
+  }, [wordsInput, maxWidthInput]);
   const steps = useMemo(
-    () => generateSteps(ex.words, ex.maxWidth).map((c) => ({
+    () => generateSteps(words, maxWidth).map((c) => ({
       ...c,
-      wordsAll: ex.words,
+      wordsAll: words,
       relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []),
     })),
-    [ex]
+    [words, maxWidth]
   )
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); handleReset() }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setWordsInput(JSON.stringify(e.words)); setMaxWidthInput(String(e.maxWidth)); handleReset(); }, [handleReset]);
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -363,12 +375,12 @@ export default function Problem68Visualizer() {
     <div style={{ position: 'relative', height: '100%' }}>
       <VisualizationPanel step={step} />
     </div>
-  )
+  
+    </>)
 
   const statusPanel = (
     <div className="problem68-status" style={{ padding: '8px 16px', fontSize: 12, color: 'var(--text-secondary)', overflow: 'auto' }}>
       {step && (
-        <>
           <strong>Step {stepIndex + 1}:</strong> {step.phase}
         </>
       )}
@@ -376,7 +388,6 @@ export default function Problem68Visualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -428,7 +439,6 @@ export default function Problem68Visualizer() {
       </div>
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

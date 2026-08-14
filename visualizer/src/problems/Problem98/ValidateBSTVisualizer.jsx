@@ -8,6 +8,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
 import { getExamples } from '../../config/examplesRegistry'
 import './ValidateBSTVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
@@ -156,6 +157,19 @@ export default function ValidateBSTVisualizer() {
 
     // Extract panels for Lumino DockPanel
     const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"arr","label":"arr","type":"string"}]}
+        values={{ arr: arrInput }}
+        onChange={(k, v) => { if (k === 'arr') setArrInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
         <div className="vbst-panel main">
             <header className="vbst-head">
                 <span>DFS with (lo, hi) bounds</span>
@@ -198,7 +212,8 @@ export default function ValidateBSTVisualizer() {
                 </div>
             </div>
         </div>
-    )
+    
+    </>)
 
     const statePanel = (
         <div className="vbst-panel side">
@@ -257,7 +272,6 @@ export default function ValidateBSTVisualizer() {
     )
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={VALIDATEBST_PATTERNS} />
             )}
@@ -290,7 +304,6 @@ export default function ValidateBSTVisualizer() {
         <div className="vbst-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.state && createPortal(statePanel, panelDivs.state)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}

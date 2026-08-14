@@ -9,6 +9,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './CompareVersionNumbersVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -38,7 +39,8 @@ const SOLUTION_CODE_INLINE = [
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(version1, version2) {
-  const steps = []
+const applyInput = useCallback((e) => { setInput(e); setVersion1Input(String(e.version1)); setVersion2Input(String(e.version2)); handleReset(); }, [handleReset]);
+    const steps = []
 
   steps.push({
     activeLine: 1,
@@ -301,14 +303,25 @@ function VisualizationPanel({ step }) {
 }
 
 export default function CompareVersionNumbersVisualizer() {
-  const [input, setInput] = useState(EXAMPLES[0])
+  const [input, setInput] = useState(EXAMPLES[0]);
+  const [version1Input, setVersion1Input] = useState("1.0");
+  const [version2Input, setVersion2Input] = useState("1.0.0");
+  const { version1, version2, inputError } = useMemo(() => {
+    try {
+      const parsedVersion1 = version1Input;
+      const parsedVersion2 = version2Input;
+      return { version1: parsedVersion1, version2: parsedVersion2, inputError: '' };
+    } catch (e) {
+      return { version1: "1.0", version2: "1.0.0", inputError: e.message };
+    }
+  }, [version1Input, version2Input]);
   const steps = useMemo(
     () =>
-      generateSteps(input.version1, input.version2).map((s) => ({
+      generateSteps(version1, version2).map((s) => ({
         ...s,
         relatedLines: s.relatedLines ?? (s.activeLine ? [s.activeLine] : []),
       })),
-    [input]
+    [version1, version2]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
@@ -325,7 +338,8 @@ export default function CompareVersionNumbersVisualizer() {
         <VisualizationPanel step={step} />
       </div>
     </div>
-  )
+  
+    </>)
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
@@ -355,7 +369,6 @@ export default function CompareVersionNumbersVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -396,7 +409,6 @@ export default function CompareVersionNumbersVisualizer() {
     <div className="cvn-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

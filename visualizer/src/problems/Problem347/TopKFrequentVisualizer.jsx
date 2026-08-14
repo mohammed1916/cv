@@ -9,6 +9,7 @@ import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./TopKFrequentVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const PATTERNS = ['buckets', 'count', 'done']
@@ -127,6 +128,17 @@ export default function TopKFrequentVisualizer() {
 
     return (
         <div className="tkf-shell">
+      <ManualInputPanel
+        fields={[{"key":"nums","label":"nums","type":"string"},{"key":"k","label":"k","type":"string"}]}
+        values={{ nums: numsInput, k: kInput }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'k') setKInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
             <div className="tkf-controls-row">
                 <div className="tkf-examples">
                     {EXAMPLES.map((ex) => (

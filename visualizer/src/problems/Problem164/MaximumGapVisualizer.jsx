@@ -10,6 +10,7 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./MaximumGapVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -77,11 +78,20 @@ function generateSteps(nums) {
 
 export default function MaximumGapVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-    const steps = useMemo(() => generateSteps(ex.nums), [ex]);
+  const [numsInput, setNumsInput] = useState("[3,6,9,1]");
+  const { nums, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      return { nums: parsedNums, inputError: '' };
+    } catch (e) {
+      return { nums: "[3,6,9,1]", inputError: e.message };
+    }
+  }, [numsInput]);
+    const steps = useMemo(() => generateSteps(nums), [nums]);
     const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+    const applyEx = useCallback((e) => { setEx(e); setNumsInput(JSON.stringify(e.nums)); handleReset(); }, [handleReset]);;
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
     // Publish current step to the chatbot
@@ -95,13 +105,13 @@ export default function MaximumGapVisualizer() {
 
     // Publish baseline algorithm state even when playback has not started.
     useEffect(() => {
-        const n = ex.nums.length;
-        const lo = n > 0 ? Math.min(...ex.nums) : null;
-        const hi = n > 0 ? Math.max(...ex.nums) : null;
+        const n = nums.length;
+        const lo = n > 0 ? Math.min(...nums) : null;
+        const hi = n > 0 ? Math.max(...nums) : null;
         const bsize = n > 1 ? Math.max(1, Math.floor((hi - lo) / (n - 1))) : null;
         publishProblemState({
             problem: "Maximum Gap",
-            nums: ex.nums,
+            nums: nums,
             lo,
             hi,
             n,
@@ -112,7 +122,7 @@ export default function MaximumGapVisualizer() {
             // Provide the full solution source so the assistant can reference it when composing visualization
             solution: SOLUTION_CODE,
         });
-    }, [ex.nums, step, publishProblemState]);
+    }, [nums, step, publishProblemState]);
 
     const buckets = useMemo(() => step?.buckets ?? [], [step]);
     const activeB = step?.activeB ?? -1;
@@ -136,13 +146,13 @@ export default function MaximumGapVisualizer() {
             }
         });
         // register array element targets
-        ex.nums.forEach((v, i) => {
+        nums.forEach((v, i) => {
             if (registerTarget) {
                 cleanups.push(registerTarget({ id: `nums-${i}`, type: 'array-item', index: i, label: `nums[${i}]`, value: v }));
             }
         });
         return () => cleanups.forEach((fn) => fn && fn());
-    }, [visibleBuckets, ex.nums, registerTarget]);
+    }, [visibleBuckets, nums, registerTarget]);
 
     // Extract panels into consts (Step 2)
     const primaryPanel = (
@@ -158,11 +168,11 @@ export default function MaximumGapVisualizer() {
             <div className="mg-panel">
                 <div className="mg-panel-label">Input array</div>
                 <div className="mg-arr">
-                    {ex.nums.map((v, i) => (
+                    {nums.map((v, i) => (
                         <Selectable
                             key={i}
                             label={`nums[${i}] = ${v}`}
-                            data={{ index: i, value: v, arrayLength: ex.nums.length, step }}
+                            data={{ index: i, value: v, arrayLength: nums.length, step }}
                         >
                             <span className="mg-num">{v}</span>
                             {/* Render any annotations targeting this array element */}
@@ -215,7 +225,8 @@ export default function MaximumGapVisualizer() {
 
             {step?.done && <div className="mg-result">✓ Maximum gap = {res}</div>}
         </div>
-    )
+    
+    </>)
 
     const codePanel = (
         <div style={{ position: 'relative', height: '100%' }}>
@@ -234,7 +245,6 @@ export default function MaximumGapVisualizer() {
     )
 
     const playbackPanel = (
-        <>
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -265,7 +275,6 @@ export default function MaximumGapVisualizer() {
         <div className="mg-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}
                     {panelDivs.status  && createPortal(statusPanel,  panelDivs.status)}

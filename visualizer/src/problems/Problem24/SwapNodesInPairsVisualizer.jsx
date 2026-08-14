@@ -12,6 +12,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { getExamples } from '../../config/examplesRegistry'
 import './SwapNodesInPairsVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
     { line: 1, text: 'class Solution:' },
@@ -154,6 +155,19 @@ export default function SwapNodesInPairsVisualizer() {
 
     // Extract panels as consts
     const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"val","label":"val","type":"array"}]}
+        values={{ val: valInput }}
+        onChange={(k, v) => { if (k === 'val') setValInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        
+      />
+
         <div className="snip-panel main">
             <header className="snip-head">
                 <span>Linked List · Pair Swaps</span>
@@ -241,7 +255,8 @@ export default function SwapNodesInPairsVisualizer() {
                 </div>
             </div>
         </div>
-    )
+    
+    </>)
 
     const statePanel = (
         <div className="snip-panel side">
@@ -298,7 +313,6 @@ export default function SwapNodesInPairsVisualizer() {
     )
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={SWAPNODESINPAIRS_PATTERNS} />
             )}
@@ -342,7 +356,6 @@ export default function SwapNodesInPairsVisualizer() {
         <div className="snip-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.state && createPortal(statePanel, panelDivs.state)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}

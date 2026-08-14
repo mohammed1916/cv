@@ -10,6 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './Problem382Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const PATTERNS = ['check', 'complete', 'init', 'traverse', 'update']
 
@@ -139,11 +140,20 @@ const EXAMPLES = [
 
 export default function Problem382Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [valuesInput, setValuesInput] = useState(JSON.stringify(EXAMPLES[0]?.values ?? []));
+  const { values, inputError } = useMemo(() => {
+    try {
+      const parsedValues = JSON.parse(valuesInput); if (!Array.isArray(parsedValues)) throw new Error('values must be an array');
+      return { values: parsedValues, inputError: '' };
+    } catch (e) {
+      return { values: EXAMPLES[exIdx]?.values ?? '', inputError: e.message };
+    }
+  }, [valuesInput]);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]
   const steps = useMemo(
-    () => generateSteps(ex.values).map((current) => ({
+    () => generateSteps(values).map((current) => ({
       ...current,
       relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
     })),
@@ -154,10 +164,7 @@ export default function Problem382Visualizer() {
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
-  const applyExample = useCallback((idx) => {
-    setExIdx(idx)
-    handleReset()
-  }, [handleReset])
+  const applyExample = useCallback((i) => { setExIdx(i); setValuesInput(JSON.stringify(EXAMPLES[i].values)); handleReset(); }, [handleReset]);
 
   const dockPanels = useMemo(() => [
     {
@@ -211,7 +218,6 @@ export default function Problem382Visualizer() {
           </div>
 
           {step && (
-            <>
               {/* Message */}
               <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 12, fontWeight: 500 }}>
                 {step.message}
@@ -324,6 +330,7 @@ export default function Problem382Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         {showPatternOverlay && (

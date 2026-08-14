@@ -14,6 +14,7 @@ import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
 
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const PATTERNS = ['checking', 'done', 'init_pointers', 'matched', 'skip_cookie', 'sorted', 'start']
 const LINE_PATTERN_MAP = {
   1: 'done',
@@ -469,6 +470,17 @@ export default function Problem455Visualizer() {
 
   return (
     <div className="problem-shell">
+      <ManualInputPanel
+        fields={[{"key":"greed","label":"greed","type":"string"},{"key":"size","label":"size","type":"string"}]}
+        values={{ greed: greedInput, size: sizeInput }}
+        onChange={(k, v) => { if (k === 'greed') setGreedInput(v); if (k === 'size') setSizeInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
 
       <FloatingPanel title="Playback Controls">

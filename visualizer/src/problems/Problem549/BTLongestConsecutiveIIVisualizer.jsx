@@ -13,6 +13,7 @@ import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import './BTLongestConsecutiveIIVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const PATTERNS = ['init', 'visit', 'base', 'recurse_left', 'recurse_right', 'extend', 'combine', 'update_best', 'done', 'error']
 
@@ -325,6 +326,19 @@ export default function BTLongestConsecutiveIIVisualizer() {
 
   /* ── Panels ───────────────────────────────────────────────── */
   const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"tree","label":"tree","type":"string"}]}
+        values={{ tree: treeInput }}
+        onChange={(k, v) => { if (k === 'tree') setTreeInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <div className="p549-panel-primary">
       <div className="p549-card">
         <div className="p549-section-label">Input (level order)</div>
@@ -405,7 +419,8 @@ export default function BTLongestConsecutiveIIVisualizer() {
         </div>
       )}
     </div>
-  )
+  
+    </>)
 
   const statePanel = (
     <div className="p549-panel-state">
@@ -472,7 +487,6 @@ export default function BTLongestConsecutiveIIVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -510,7 +524,6 @@ export default function BTLongestConsecutiveIIVisualizer() {
     <div className="p549-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state   && createPortal(statePanel,   panelDivs.state)}
           {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}

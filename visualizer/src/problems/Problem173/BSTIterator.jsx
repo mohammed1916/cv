@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './BSTIterator.css';
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const BSTIterator = () => {
   const [tree, setTree] = useState(null);
@@ -153,7 +154,6 @@ const BSTIterator = () => {
     return (
       <g key={node.id}>
         {node.left && (
-          <>
             <line
               x1={x}
               y1={y}
@@ -166,7 +166,6 @@ const BSTIterator = () => {
         )}
 
         {node.right && (
-          <>
             <line
               x1={x}
               y1={y}

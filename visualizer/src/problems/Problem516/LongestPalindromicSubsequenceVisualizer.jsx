@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './LongestPalindromicSubsequenceVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -253,15 +254,24 @@ function VisualizationPanel({ s, step, applyEx }) {
 }
 
 export default function LongestPalindromicSubsequenceVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { s: 'bbbab' })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [sInput, setSInput] = useState("bbbab");
+  const { s, inputError } = useMemo(() => {
+    try {
+      const parsedS = sInput;
+      return { s: parsedS, inputError: '' };
+    } catch (e) {
+      return { s: "bbbab", inputError: e.message };
+    }
+  }, [sInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.s).map((current) => ({
+      generateSteps(s).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [s]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -269,7 +279,7 @@ export default function LongestPalindromicSubsequenceVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setSInput(String(e.s)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -284,7 +294,7 @@ export default function LongestPalindromicSubsequenceVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <div style={{ position: 'relative' }}>
+              <div style={{ position: 'relative' }}>
 
           <CodeTracePanel
           step={step}
@@ -309,9 +319,8 @@ export default function LongestPalindromicSubsequenceVisualizer() {
 
             />
 
-          )}
-
-        </div>
+          
+            </div>
       ),
     },
     {
@@ -319,7 +328,7 @@ export default function LongestPalindromicSubsequenceVisualizer() {
       title: '🔤 Longest Palindromic Subsequence',
       content: (
         <VisualizationPanel
-          s={ex.s}
+          s={s}
           step={step}
           applyEx={applyEx}
         />

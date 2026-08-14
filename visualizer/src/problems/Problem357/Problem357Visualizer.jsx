@@ -9,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './Problem357.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -353,19 +354,25 @@ function CountAccumulator({ count, n }) {
 
 export default function Problem357Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [nInput, setNInput] = useState(String(EXAMPLES[0]?.n ?? 0));
+  const { n, inputError } = useMemo(() => {
+    try {
+      const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
+      return { n: parsedN, inputError: '' };
+    } catch (e) {
+      return { n: EXAMPLES[exIdx]?.n ?? '', inputError: e.message };
+    }
+  }, [nInput]);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]
-  const steps = useMemo(() => generateSteps(ex.n), [ex.n])
+  const steps = useMemo(() => generateSteps(n), [n])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
-  const applyExample = useCallback((idx) => {
-    setExIdx(idx)
-    handleReset()
-  }, [handleReset])
+  const applyExample = useCallback((i) => { setExIdx(i); setNInput(String(EXAMPLES[i].n)); handleReset(); }, [handleReset]);
 
   const dockPanels = useMemo(() => [
     {
@@ -407,7 +414,6 @@ export default function Problem357Visualizer() {
           </div>
 
           {step && (
-            <>
               <div style={{ padding: 12, backgroundColor: '#f8fafc', borderRadius: 6, borderLeft: '4px solid #0ea5e9' }}>
                 <div style={{ fontWeight: 600, fontSize: 12, color: '#1e293b' }}>
                   {step.message}
@@ -439,6 +445,7 @@ export default function Problem357Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         <PlaybackControls

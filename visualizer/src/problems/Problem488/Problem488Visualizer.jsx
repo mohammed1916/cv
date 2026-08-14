@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem488Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('zuma-game')
@@ -215,15 +216,26 @@ function VisualizationPanel({ board, hand, step, applyEx }) {
 }
 
 export default function Problem488Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [boardInput, setBoardInput] = useState("WWWWW");
+  const [handInput, setHandInput] = useState("WWWWW");
+  const { board, hand, inputError } = useMemo(() => {
+    try {
+      const parsedBoard = boardInput;
+      const parsedHand = handInput;
+      return { board: parsedBoard, hand: parsedHand, inputError: '' };
+    } catch (e) {
+      return { board: "WWWWW", hand: "WWWWW", inputError: e.message };
+    }
+  }, [boardInput, handInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.board, ex.hand).map((current) => ({
+      generateSteps(board, hand).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [board, hand]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -231,7 +243,7 @@ export default function Problem488Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setBoardInput(String(e.board)); setHandInput(String(e.hand)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -260,8 +272,8 @@ export default function Problem488Visualizer() {
       title: '🎮 Zuma Game',
       content: (
         <VisualizationPanel
-          board={ex.board}
-          hand={ex.hand}
+          board={board}
+          hand={hand}
           step={step}
           applyEx={applyEx}
         />
@@ -271,6 +283,7 @@ export default function Problem488Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

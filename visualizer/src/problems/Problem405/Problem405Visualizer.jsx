@@ -10,6 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem405Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('convert-number-to-hex')
 
@@ -243,11 +244,20 @@ function HexConversionVisualization({ num, step }) {
 
 export default function Problem405Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [numInput, setNumInput] = useState(String(EXAMPLES[0]?.num ?? 0));
+  const { num, inputError } = useMemo(() => {
+    try {
+      const parsedNum = Number(numInput); if (isNaN(parsedNum)) throw new Error('num must be a number');
+      return { num: parsedNum, inputError: '' };
+    } catch (e) {
+      return { num: EXAMPLES[exIdx]?.num ?? '', inputError: e.message };
+    }
+  }, [numInput]);
   const example = EXAMPLES[exIdx]
 
   const steps = useMemo(
     () =>
-      generateSteps(example.num).map((current) => ({
+      generateSteps(num).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
@@ -259,7 +269,7 @@ export default function Problem405Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((idx) => { setExIdx(idx); handleReset(); }, [handleReset])
+  const applyEx = useCallback((i) => { setExIdx(i); setNumInput(String(EXAMPLES[i].num)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -322,7 +332,7 @@ export default function Problem405Visualizer() {
               ))}
             </div>
           </div>
-          <HexConversionVisualization num={example.num} step={step} />
+          <HexConversionVisualization num={num} step={step} />
         </div>
       ),
     },
@@ -330,6 +340,7 @@ export default function Problem405Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

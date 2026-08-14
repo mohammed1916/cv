@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './LongestWordDictionaryVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -245,15 +246,26 @@ function VisualizationPanel({ s, dictionary, step, applyEx }) {
 }
 
 export default function LongestWordDictionaryVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { s: 'abpcplea', dictionary: ['ale', 'apple', 'monkey', 'plea'] })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [sInput, setSInput] = useState("abpcplea");
+  const [dictionaryInput, setDictionaryInput] = useState("[\"ale\",\"apple\",\"monkey\",\"plea\"]");
+  const { s, dictionary, inputError } = useMemo(() => {
+    try {
+      const parsedS = sInput;
+      const parsedDictionary = JSON.parse(dictionaryInput); if (!Array.isArray(parsedDictionary)) throw new Error('dictionary must be an array');
+      return { s: parsedS, dictionary: parsedDictionary, inputError: '' };
+    } catch (e) {
+      return { s: "abpcplea", dictionary: "[\"ale\",\"apple\",\"monkey\",\"plea\"]", inputError: e.message };
+    }
+  }, [sInput, dictionaryInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.s, ex.dictionary).map((current) => ({
+      generateSteps(s, dictionary).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [s, dictionary]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -261,7 +273,7 @@ export default function LongestWordDictionaryVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setSInput(String(e.s)); setDictionaryInput(JSON.stringify(e.dictionary)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -276,7 +288,7 @@ export default function LongestWordDictionaryVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <div style={{ position: 'relative' }}>
+              <div style={{ position: 'relative' }}>
 
           <CodeTracePanel
           step={step}
@@ -301,9 +313,8 @@ export default function LongestWordDictionaryVisualizer() {
 
             />
 
-          )}
-
-        </div>
+          
+            </div>
       ),
     },
     {
@@ -311,8 +322,8 @@ export default function LongestWordDictionaryVisualizer() {
       title: '📖 Longest Word in Dictionary',
       content: (
         <VisualizationPanel
-          s={ex.s}
-          dictionary={ex.dictionary}
+          s={s}
+          dictionary={dictionary}
           step={step}
           applyEx={applyEx}
         />

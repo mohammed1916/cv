@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './InorderSuccessorBSTVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('inorder-successor-bst')
@@ -215,13 +216,11 @@ function TreeNode({ node, x, y, offset, step, targetNode, resultNode }) {
   return (
     <g key={`tree-${node.val}-${x}-${y}`}>
       {node.left && (
-        <>
           <line x1={x} y1={y} x2={x - offset} y2={y + 80} stroke="#cbd5e1" strokeWidth="2" />
           <TreeNode node={node.left} x={x - offset} y={y + 80} offset={offset / 2} step={step} targetNode={targetNode} resultNode={resultNode} />
         </>
       )}
       {node.right && (
-        <>
           <line x1={x} y1={y} x2={x + offset} y2={y + 80} stroke="#cbd5e1" strokeWidth="2" />
           <TreeNode node={node.right} x={x + offset} y={y + 80} offset={offset / 2} step={step} targetNode={targetNode} resultNode={resultNode} />
         </>
@@ -324,15 +323,26 @@ function VisualizationPanel({ values, target, step, applyEx }) {
 }
 
 export default function InorderSuccessorBSTVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { values: [2, 1, 3], target: 1 })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [valuesInput, setValuesInput] = useState("[2,1,3]");
+  const [targetInput, setTargetInput] = useState(1);
+  const { values, target, inputError } = useMemo(() => {
+    try {
+      const parsedValues = JSON.parse(valuesInput); if (!Array.isArray(parsedValues)) throw new Error('values must be an array');
+      const parsedTarget = Number(targetInput); if (isNaN(parsedTarget)) throw new Error('target must be a number');
+      return { values: parsedValues, target: parsedTarget, inputError: '' };
+    } catch (e) {
+      return { values: "[2,1,3]", target: 1, inputError: e.message };
+    }
+  }, [valuesInput, targetInput]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.values, ex.target).map((current) => ({
+      generateSteps(values, target).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [values, target]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -340,7 +350,7 @@ export default function InorderSuccessorBSTVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setValuesInput(JSON.stringify(e.values)); setTargetInput(String(e.target)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -355,7 +365,7 @@ export default function InorderSuccessorBSTVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
+              <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
@@ -369,8 +379,8 @@ export default function InorderSuccessorBSTVisualizer() {
       title: '🌳 Inorder Successor in BST',
       content: (
         <VisualizationPanel
-          values={ex.values}
-          target={ex.target}
+          values={values}
+          target={target}
           step={step}
           applyEx={applyEx}
         />
@@ -397,7 +407,8 @@ export default function InorderSuccessorBSTVisualizer() {
           prevDisabled={stepIndex < 0}
           nextDisabled={isDone}
           resetDisabled={stepIndex < 0}
-          onSpeedChange={e => setSpeed(Number(e.target.value))}
+          onSpeedChange={e => setSpeed(Number(e.target.value
+    </>))}
           showPatternOverlay={showPatternOverlay}
           onShowPatternOverlayChange={setShowPatternOverlay}
           patternOverlayLabel="Show pattern overlay"

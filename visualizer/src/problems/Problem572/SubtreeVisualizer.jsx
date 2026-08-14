@@ -8,6 +8,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { buildTree, computeLayout, collectNodes, buildEdges } from '../../components/treeUtils'
 import { getExamples } from '../../config/examplesRegistry'
 import './SubtreeVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const SOLUTION_CODE = [
@@ -149,6 +150,17 @@ export default function SubtreeVisualizer() {
 
     return (
         <div className="sot-shell">
+      <ManualInputPanel
+        fields={[{"key":"root","label":"root","type":"string"},{"key":"sub","label":"sub","type":"string"}]}
+        values={{ root: rootInput, sub: subInput }}
+        onChange={(k, v) => { if (k === 'root') setRootInput(v); if (k === 'sub') setSubInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
             <div className="sot-controls-row">
                 <div className="sot-examples">
                     {EXAMPLES.map((ex) => (

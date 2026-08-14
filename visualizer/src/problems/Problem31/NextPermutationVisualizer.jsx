@@ -12,6 +12,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./NextPermutationVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const SOLUTION_CODE = [
   { line: 1, text: "def nextPermutation(nums):" },
   { line: 2, text: "    i = len(nums) - 2" },
@@ -137,11 +138,20 @@ function StatusPanel({ step }) {
 
 export default function NextPermutationVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => generateSteps(ex.nums), [ex]);
+  const [numsInput, setNumsInput] = useState("[1,2,3]");
+  const { nums, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      return { nums: parsedNums, inputError: '' };
+    } catch (e) {
+      return { nums: "[1,2,3]", inputError: e.message };
+    }
+  }, [numsInput]);
+  const steps = useMemo(() => generateSteps(nums), [nums]);
   const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); setNumsInput(JSON.stringify(e.nums)); handleReset(); }, [handleReset]);;
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
 
@@ -154,7 +164,7 @@ export default function NextPermutationVisualizer() {
 
   const arrayPanel = (
     <div className="np-panel">
-      <ArrayVisualizationPanel step={step} exampleNums={ex.nums} />
+      <ArrayVisualizationPanel step={step} exampleNums={nums} />
     </div>
   );
 
@@ -185,7 +195,6 @@ export default function NextPermutationVisualizer() {
   );
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -229,9 +238,9 @@ export default function NextPermutationVisualizer() {
   // Step 5: Replace return block
   return (
     <div className="np-shell">
+      
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.examples && createPortal(examplesPanel, panelDivs.examples)}
           {panelDivs.array && createPortal(arrayPanel, panelDivs.array)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

@@ -11,6 +11,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./SortListVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -90,17 +91,25 @@ const EXAMPLES = getExamples('sort-list');
 
 export default function SortListVisualizer() {
     const [sel, setSel] = useState(0);
+  const [initialInput, setInitialInput] = useState(JSON.stringify(EXAMPLES[0]?.["arr"] ?? null));
+  const { initial, inputError } = useMemo(() => {
+    try {
+      const parsedInitial = JSON.parse(initialInput); if (!Array.isArray(parsedInitial)) throw new Error('initial must be an array');
+      return { initial: parsedInitial, inputError: '' };
+    } catch (e) {
+      return { initial: EXAMPLES[sel]?.arr, inputError: e.message };
+    }
+  }, [initialInput]);;
     const [panelDivs, setPanelDivs] = useState(null);
 
-    const initial = EXAMPLES[sel].arr;
-    const steps = useMemo(() => generateSteps(initial), [initial]);
+        const steps = useMemo(() => generateSteps(initial), [initial]);
     const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : steps[0];
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
     const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
 
-    const applyExample = useCallback((i) => { setSel(i); handleReset(); }, [handleReset]);
+    const applyExample = useCallback((i) => { setSel(i); setInitialInput(JSON.stringify(EXAMPLES[i].arr)); handleReset(); }, [handleReset]);
 
     // Extract panels as consts (step 3)
     const codePanel = (
@@ -132,7 +141,8 @@ export default function SortListVisualizer() {
                 {step?.merged && <div style={{ marginTop: 8 }}><LinkedListRow vals={step.merged} color="merged" /></div>}
             </div>}
         </div>
-    );
+    
+    </>);
 
     const statusPanel = (
         <div className="sl-status">
@@ -141,7 +151,6 @@ export default function SortListVisualizer() {
     );
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && <PatternLegend />}
             <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex <= 0} nextDisabled={isDone} resetDisabled={stepIndex <= 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
         </>
@@ -164,7 +173,6 @@ export default function SortListVisualizer() {
         <div className="sl-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

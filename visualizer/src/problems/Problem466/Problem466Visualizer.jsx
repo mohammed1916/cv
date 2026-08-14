@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem466Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -244,15 +245,26 @@ function VisualizationPanel({ s1, s2, step, applyEx }) {
 }
 
 export default function Problem466Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { s1: 'acb', s2: 'cab' })
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [s1Input, setS1Input] = useState("acb");
+  const [s2Input, setS2Input] = useState("ab");
+  const { s1, s2, inputError } = useMemo(() => {
+    try {
+      const parsedS1 = s1Input;
+      const parsedS2 = s2Input;
+      return { s1: parsedS1, s2: parsedS2, inputError: '' };
+    } catch (e) {
+      return { s1: "acb", s2: "ab", inputError: e.message };
+    }
+  }, [s1Input, s2Input]);
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.s1, ex.s2).map((current) => ({
+      generateSteps(s1, s2).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [s1, s2]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -260,7 +272,7 @@ export default function Problem466Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setS1Input(String(e.s1)); setS2Input(String(e.s2)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -275,7 +287,7 @@ export default function Problem466Visualizer() {
       id: 'code',
       title: 'Code',
       content: (
-        <CodeTracePanel
+              <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
@@ -289,8 +301,8 @@ export default function Problem466Visualizer() {
       title: '🔁 Count The Repetitions',
       content: (
         <VisualizationPanel
-          s1={ex.s1}
-          s2={ex.s2}
+          s1={s1}
+          s2={s2}
           step={step}
           applyEx={applyEx}
         />
@@ -316,7 +328,8 @@ export default function Problem466Visualizer() {
           prevDisabled={stepIndex < 0}
           nextDisabled={isDone}
           resetDisabled={stepIndex < 0}
-          onSpeedChange={e => setSpeed(Number(e.target.value))}
+          onSpeedChange={e => setSpeed(Number(e.target.value
+    </>))}
           showPatternOverlay={showPatternOverlay}
           onShowPatternOverlayChange={setShowPatternOverlay}
           patternOverlayLabel="Show pattern overlay"

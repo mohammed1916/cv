@@ -8,6 +8,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { GraphCanvas3D } from '../../components/viz3d'
 import { getExamples } from '../../config/examplesRegistry'
 import './CourseScheduleIIVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -149,6 +150,17 @@ export default function CourseScheduleIIVisualizer() {
 
   return (
     <div className="cs2-shell">
+      <ManualInputPanel
+        fields={[{"key":"num","label":"num","type":"number"},{"key":"pre","label":"pre","type":"array"}]}
+        values={{ num: numInput, pre: preInput }}
+        onChange={(k, v) => { if (k === 'num') setNumInput(v); if (k === 'pre') setPreInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
       <div className="cs2-top">
         <section className="cs2-panel graph">
           <header className="cs2-head">

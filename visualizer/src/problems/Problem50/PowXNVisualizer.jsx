@@ -11,6 +11,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './PowXNVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const POW_PATTERNS = ['base-case', 'recursion', 'multiplication']
 
@@ -42,12 +43,23 @@ function generateSteps(x, n) {
 }
 
 export default function PowXNVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
-  const steps = useMemo(() => generateSteps(ex.x, ex.n), [ex])
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [xInput, setXInput] = useState(2);
+  const [nInput, setNInput] = useState(10);
+  const { x, n, inputError } = useMemo(() => {
+    try {
+      const parsedX = Number(xInput); if (isNaN(parsedX)) throw new Error('x must be a number');
+      const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
+      return { x: parsedX, n: parsedN, inputError: '' };
+    } catch (e) {
+      return { x: 2, n: 10, inputError: e.message };
+    }
+  }, [xInput, nInput]);
+  const steps = useMemo(() => generateSteps(x, n), [x, n])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); handleReset() }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setXInput(String(e.x)); setNInput(String(e.n)); handleReset(); }, [handleReset]);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
@@ -88,11 +100,12 @@ export default function PowXNVisualizer() {
           </div>
         </div>
         <div style={{ fontSize: 14, fontWeight: 600, color: '#1e293b' }}>
-          {ex.x}^{ex.n} = {Math.pow(ex.x, ex.n).toFixed(6)}
+          {x}^{n} = {Math.pow(x, n).toFixed(6)}
         </div>
       </div>
     </div>
-  )
+  
+    </>)
 
   // Panel 3: Status (bottom strip)
   const statusPanel = (
@@ -103,7 +116,6 @@ export default function PowXNVisualizer() {
 
   // Panel 4: Playback controls (floating)
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={POW_PATTERNS} />
       )}
@@ -143,7 +155,6 @@ export default function PowXNVisualizer() {
     <div className="powxn-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

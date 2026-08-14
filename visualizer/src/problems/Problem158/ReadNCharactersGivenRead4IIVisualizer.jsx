@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './ReadNCharactersGivenRead4IIVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -41,7 +42,8 @@ const SOLUTION_CODE_INLINE = [
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(file, callSequence) {
-  const steps = []
+const applyInput = useCallback((e) => { setInput(e); setFileInput(String(e.file)); setCallsInput(JSON.stringify(e.calls)); handleReset(); }, [handleReset]);
+    const steps = []
 
   if (!file || file.length === 0) {
     steps.push({
@@ -283,14 +285,25 @@ function VisualizationPanel({ step }) {
 }
 
 export default function ReadNCharactersGivenRead4IIVisualizer() {
-  const [input, setInput] = useState(EXAMPLES[0])
+  const [input, setInput] = useState(EXAMPLES[0]);
+  const [fileInput, setFileInput] = useState("abcdefghij");
+  const [callsInput, setCallsInput] = useState("[[3],[2],[4]]");
+  const { file, calls, inputError } = useMemo(() => {
+    try {
+      const parsedFile = fileInput;
+      const parsedCalls = JSON.parse(callsInput); if (!Array.isArray(parsedCalls)) throw new Error('calls must be an array');
+      return { file: parsedFile, calls: parsedCalls, inputError: '' };
+    } catch (e) {
+      return { file: "abcdefghij", calls: "[[3],[2],[4]]", inputError: e.message };
+    }
+  }, [fileInput, callsInput]);
   const steps = useMemo(
     () =>
-      generateSteps(input.file, input.calls).map((s) => ({
+      generateSteps(file, calls).map((s) => ({
         ...s,
         relatedLines: s.relatedLines ?? (s.activeLine ? [s.activeLine] : []),
       })),
-    [input]
+    [file, calls]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
@@ -318,7 +331,8 @@ export default function ReadNCharactersGivenRead4IIVisualizer() {
     <div className="rnc2-panel">
       <VisualizationPanel step={step} />
     </div>
-  )
+  
+    </>)
 
   const statusPanel = (
     <div className="rnc2-status">
@@ -327,7 +341,6 @@ export default function ReadNCharactersGivenRead4IIVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -364,7 +377,6 @@ export default function ReadNCharactersGivenRead4IIVisualizer() {
     <div className="rnc2-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

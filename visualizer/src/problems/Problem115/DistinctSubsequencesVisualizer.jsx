@@ -11,6 +11,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./DistinctSubsequencesVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -62,19 +63,29 @@ function generateSteps(s, t) {
 
 export default function DistinctSubsequencesVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => generateSteps(ex.s, ex.t), [ex]);
+  const [sInput, setSInput] = useState("rabbbit");
+  const [tInput, setTInput] = useState("rabbit");
+  const { s, t, inputError } = useMemo(() => {
+    try {
+      const parsedS = sInput;
+      const parsedT = tInput;
+      return { s: parsedS, t: parsedT, inputError: '' };
+    } catch (e) {
+      return { s: "rabbbit", t: "rabbit", inputError: e.message };
+    }
+  }, [sInput, tInput]);
+  const steps = useMemo(() => generateSteps(s, t), [s, t]);
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); setSInput(String(e.s)); setTInput(String(e.t)); handleReset(); }, [handleReset]);;
 
-  const dp = step?.dp ?? Array.from({ length: ex.s.length + 1 }, () => Array(ex.t.length + 1).fill(0));
+  const dp = step?.dp ?? Array.from({ length: s.length + 1 }, () => Array(t.length + 1).fill(0));
   const activeI = step?.i ?? -1;
   const activeJ = step?.j ?? -1;
   const phase = step?.phase ?? "init";
-  const s = ex.s, t = ex.t;
   const answer = step?.dp?.[step.i]?.[step.j] ?? 0;
 
   // Extract panels as consts (Step 2)
@@ -125,7 +136,8 @@ export default function DistinctSubsequencesVisualizer() {
       </div>
       {step?.done && <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #86efac', textAlign: 'center', fontWeight: 600, color: '#15803d' }}>✓ {answer}</div>}
     </div>
-  );
+  
+    </>);
 
   const statusPanel = (
     <div className="ds-status" style={{ padding: '8px 12px', fontSize: '13px', color: '#a6adc8', minHeight: '36px' }}>
@@ -134,7 +146,6 @@ export default function DistinctSubsequencesVisualizer() {
   );
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -173,7 +184,6 @@ export default function DistinctSubsequencesVisualizer() {
     <div className="ds-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

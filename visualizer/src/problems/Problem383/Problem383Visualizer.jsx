@@ -10,6 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './Problem383Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const PATTERNS = ['build_freq', 'check', 'complete', 'init']
 
@@ -188,11 +189,22 @@ const EXAMPLES = [
 
 export default function Problem383Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [ransomNoteInput, setRansomNoteInput] = useState(JSON.stringify(EXAMPLES[0]?.ransomNote ?? []));
+  const [magazineInput, setMagazineInput] = useState("");
+  const { ransomNote, magazine, inputError } = useMemo(() => {
+    try {
+      const parsedRansomNote = JSON.parse(ransomNoteInput); if (!Array.isArray(parsedRansomNote)) throw new Error('ransomNote must be an array');
+      const parsedMagazine = JSON.parse(magazineInput); if (!Array.isArray(parsedMagazine)) throw new Error('magazine must be an array');
+      return { ransomNote: parsedRansomNote, magazine: parsedMagazine, inputError: '' };
+    } catch (e) {
+      return { ransomNote: EXAMPLES[exIdx]?.ransomNote ?? '', magazine: EXAMPLES[exIdx]?.magazine ?? '', inputError: e.message };
+    }
+  }, [ransomNoteInput, magazineInput]);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]
   const steps = useMemo(
-    () => generateSteps(ex.ransomNote, ex.magazine).map((current) => ({
+    () => generateSteps(ransomNote, magazine).map((current) => ({
       ...current,
       relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
     })),
@@ -203,10 +215,7 @@ export default function Problem383Visualizer() {
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
-  const applyExample = useCallback((idx) => {
-    setExIdx(idx)
-    handleReset()
-  }, [handleReset])
+  const applyExample = useCallback((i) => { setExIdx(i); setRansomNoteInput(JSON.stringify(EXAMPLES[i].ransomNote)); setMagazineInput(JSON.stringify(EXAMPLES[i].magazine)); handleReset(); }, [handleReset]);
 
   const dockPanels = useMemo(() => [
     {
@@ -260,7 +269,6 @@ export default function Problem383Visualizer() {
           </div>
 
           {step && (
-            <>
               {/* Message */}
               <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 12, fontWeight: 500 }}>
                 {step.message}
@@ -443,6 +451,7 @@ export default function Problem383Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         {showPatternOverlay && (

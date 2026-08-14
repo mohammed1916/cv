@@ -11,6 +11,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import "./Visualizer.css"
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const PATTERNS = ['init', 'scan', 'append_less', 'append_ge', 'join', 'done']
 
@@ -255,18 +256,29 @@ function VisualizationPanel({ step }) {
 }
 
 export default function Problem86Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [listInput, setListInput] = useState("[1,4,3,2,5,2]");
+  const [xInput, setXInput] = useState(3);
+  const { list, x, inputError } = useMemo(() => {
+    try {
+      const parsedList = JSON.parse(listInput); if (!Array.isArray(parsedList)) throw new Error('list must be an array');
+      const parsedX = Number(xInput); if (isNaN(parsedX)) throw new Error('x must be a number');
+      return { list: parsedList, x: parsedX, inputError: '' };
+    } catch (e) {
+      return { list: "[1,4,3,2,5,2]", x: 3, inputError: e.message };
+    }
+  }, [listInput, xInput]);
   const steps = useMemo(
-    () => generateSteps(ex.list, ex.x).map((c) => ({
+    () => generateSteps(list, x).map((c) => ({
       ...c,
       relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []),
     })),
-    [ex]
+    [list, x]
   )
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); handleReset() }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setListInput(JSON.stringify(e.list)); setXInput(String(e.x)); handleReset(); }, [handleReset]);
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -303,7 +315,8 @@ export default function Problem86Visualizer() {
         <VisualizationPanel step={step} />
       </div>
     </div>
-  )
+  
+    </>)
 
   // Status panel with example selector
   const statusPanel = (
@@ -333,7 +346,6 @@ export default function Problem86Visualizer() {
 
   // Playback panel with controls
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -373,7 +385,6 @@ export default function Problem86Visualizer() {
     <div className="problem86-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

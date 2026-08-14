@@ -10,6 +10,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./DungeonGameVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -146,17 +147,25 @@ function VizPanel({ EXAMPLES, ex, dungeon, R, C, CELL_W, CELL_H, dp, activeR, ac
 
 export default function DungeonGameVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-    const steps = useMemo(() => generateSteps(ex.dungeon), [ex]);
+  const [dungeonInput, setDungeonInput] = useState("[[-2,-3,3],[-5,-10,1],[10,30,-5]]");
+  const { dungeon, inputError } = useMemo(() => {
+    try {
+      const parsedDungeon = JSON.parse(dungeonInput); if (!Array.isArray(parsedDungeon)) throw new Error('dungeon must be an array');
+      return { dungeon: parsedDungeon, inputError: '' };
+    } catch (e) {
+      return { dungeon: "[[-2,-3,3],[-5,-10,1],[10,30,-5]]", inputError: e.message };
+    }
+  }, [dungeonInput]);
+    const steps = useMemo(() => generateSteps(dungeon), [dungeon]);
     const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+    const applyEx = useCallback((e) => { setEx(e); setDungeonInput(JSON.stringify(e.dungeon)); handleReset(); }, [handleReset]);;
 
     const dp = step?.dp ?? [];
     const activeR = step?.r ?? -1;
     const activeC = step?.c ?? -1;
-    const dungeon = ex.dungeon;
     const R = dungeon.length, C = dungeon[0].length;
 
     // Extract panels
@@ -164,7 +173,8 @@ export default function DungeonGameVisualizer() {
         <div className="dg-panel">
             <VizPanel EXAMPLES={EXAMPLES} ex={ex} dungeon={dungeon} R={R} C={C} CELL_W={CELL_W} CELL_H={CELL_H} dp={dp} activeR={activeR} activeC={activeC} step={step} applyEx={applyEx} setActiveLineDom={setActiveLineDom} />
         </div>
-    );
+    
+    </>);
 
     const codePanel = (
         <div style={{ position: 'relative', height: '100%' }}>
@@ -185,7 +195,6 @@ export default function DungeonGameVisualizer() {
     );
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
@@ -216,7 +225,6 @@ export default function DungeonGameVisualizer() {
         <div className="dg-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

@@ -11,6 +11,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./NumberOf1BitsVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -51,15 +52,26 @@ function generateSteps(nIn) {
 
 export default function NumberOf1BitsVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => generateSteps(ex.n), [ex]);
+  const [nInput, setNInput] = useState(11);
+  const [descInput, setDescInput] = useState("11 (0b1011)");
+  const { n, desc, inputError } = useMemo(() => {
+    try {
+      const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
+      const parsedDesc = descInput;
+      return { n: parsedN, desc: parsedDesc, inputError: '' };
+    } catch (e) {
+      return { n: 11, desc: "11 (0b1011)", inputError: e.message };
+    }
+  }, [nInput, descInput]);
+  const steps = useMemo(() => generateSteps(n), [n]);
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); setNInput(String(e.n)); setDescInput(String(e.desc)); handleReset(); }, [handleReset]);;
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
 
-  const displayN = step?.n ?? (ex.n >>> 0);
+  const displayN = step?.n ?? (n >>> 0);
   const count = step?.count ?? 0;
   const lsb = step?.lsb;
   const bin = toBin32(displayN);
@@ -145,7 +157,8 @@ export default function NumberOf1BitsVisualizer() {
             </div>
           )}
         </div>
-  );
+  
+    </>);
 
   const [panelDivs, setPanelDivs] = useState(null);
   const panelConfigs = useMemo(() => [
@@ -158,7 +171,6 @@ export default function NumberOf1BitsVisualizer() {
     <div className="problem-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
         </>

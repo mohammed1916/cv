@@ -11,6 +11,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem378.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const PATTERNS = []
 
@@ -120,11 +121,22 @@ const EXAMPLES = [
 
 export default function Problem378Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [matrixInput, setMatrixInput] = useState(JSON.stringify(EXAMPLES[0]?.matrix ?? []));
+  const [kInput, setKInput] = useState("");
+  const { matrix, k, inputError } = useMemo(() => {
+    try {
+      const parsedMatrix = JSON.parse(matrixInput); if (!Array.isArray(parsedMatrix)) throw new Error('matrix must be an array');
+      const parsedK = Number(kInput); if (isNaN(parsedK)) throw new Error('k must be a number');
+      return { matrix: parsedMatrix, k: parsedK, inputError: '' };
+    } catch (e) {
+      return { matrix: EXAMPLES[exIdx]?.matrix ?? '', k: EXAMPLES[exIdx]?.k ?? '', inputError: e.message };
+    }
+  }, [matrixInput, kInput]);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]
   const steps = useMemo(
-    () => generateSteps(ex.matrix, ex.k).map((current) => ({
+    () => generateSteps(matrix, k).map((current) => ({
       ...current,
       relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
     })),
@@ -135,10 +147,7 @@ export default function Problem378Visualizer() {
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
-  const applyExample = useCallback((idx) => {
-    setExIdx(idx)
-    handleReset()
-  }, [handleReset])
+  const applyExample = useCallback((i) => { setExIdx(i); setMatrixInput(JSON.stringify(EXAMPLES[i].matrix)); setKInput(String(EXAMPLES[i].k)); handleReset(); }, [handleReset]);
 
   const dockPanels = useMemo(() => [
     {
@@ -190,16 +199,15 @@ export default function Problem378Visualizer() {
           </div>
 
           {step && (
-            <>
               <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
                 <div style={{ fontWeight: 600, marginBottom: 8 }}>{step.message}</div>
-                <div style={{ fontSize: 10, color: '#64748b' }}>Target: Find {ex.k}th smallest</div>
+                <div style={{ fontSize: 10, color: '#64748b' }}>Target: Find {k}th smallest</div>
               </div>
 
               <div style={{ padding: 8, backgroundColor: '#fef3c7', borderRadius: 6, fontSize: 11 }}>
-                <div style={{ fontWeight: 600, marginBottom: 8 }}>Matrix ({ex.matrix.length}x{ex.matrix[0].length}):</div>
-                <div style={{ display: 'grid', gridTemplateColumns: `repeat(${ex.matrix[0].length}, 1fr)`, gap: 6 }}>
-                  {ex.matrix.map((row, i) =>
+                <div style={{ fontWeight: 600, marginBottom: 8 }}>Matrix ({matrix.length}x{matrix[0].length}):</div>
+                <div style={{ display: 'grid', gridTemplateColumns: `repeat(${matrix[0].length}, 1fr)`, gap: 6 }}>
+                  {matrix.map((row, i) =>
                     row.map((val, j) => (
                       <motion.div
                         key={`${i}-${j}`}
@@ -287,6 +295,7 @@ export default function Problem378Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         {showPatternOverlay && (

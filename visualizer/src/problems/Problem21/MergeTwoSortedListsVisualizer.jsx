@@ -9,6 +9,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./MergeTwoSortedListsVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 
@@ -264,6 +265,19 @@ export default function MergeTwoSortedListsVisualizer() {
   );
 
   const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"l1","label":"l1","type":"array"},{"key":"l2","label":"l2","type":"array"}]}
+        values={{ l1: l1Input, l2: l2Input }}
+        onChange={(k, v) => { if (k === 'l1') setL1Input(v); if (k === 'l2') setL2Input(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <div className="mtsl-panel">
       <div className="mtsl-panel-head">
         Linked Lists
@@ -514,7 +528,8 @@ export default function MergeTwoSortedListsVisualizer() {
         </div>
       </div>
     </div>
-  );
+  
+    </>);
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
@@ -545,7 +560,6 @@ export default function MergeTwoSortedListsVisualizer() {
   );
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={MERGETWOSORTEDLISTS_PATTERNS} />
       )}
@@ -584,7 +598,6 @@ export default function MergeTwoSortedListsVisualizer() {
     <div className="mtsl-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

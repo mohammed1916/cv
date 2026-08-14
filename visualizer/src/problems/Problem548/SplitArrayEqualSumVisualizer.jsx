@@ -12,6 +12,7 @@ import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import './SplitArrayEqualSumVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const PATTERNS = [
   'init', 'prefix', 'pick_j', 'reset_set', 'pick_i', 'left_match',
@@ -339,6 +340,19 @@ export default function SplitArrayEqualSumVisualizer() {
 
   /* ── Panels ───────────────────────────────────────────────── */
   const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"nums","label":"nums","type":"string"}]}
+        values={{ nums: numsInput }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <div className="p548-panel-primary">
       <div className="p548-card">
         <div className="p548-section-label">Input</div>
@@ -419,7 +433,8 @@ export default function SplitArrayEqualSumVisualizer() {
         </div>
       )}
     </div>
-  )
+  
+    </>)
 
   const statePanel = (
     <div className="p548-panel-state">
@@ -490,7 +505,6 @@ export default function SplitArrayEqualSumVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -528,7 +542,6 @@ export default function SplitArrayEqualSumVisualizer() {
     <div className="p548-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state   && createPortal(statePanel,   panelDivs.state)}
           {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}

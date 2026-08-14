@@ -12,6 +12,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./Search2DMatrixVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SEARCH2DMATRIX_PATTERNS = ['init', 'calc', 'found', 'lo', 'hi', 'not_found']
 
@@ -70,9 +71,19 @@ const EXAMPLES = getExamples('search2-dmatrix');
 
 export default function Search2DMatrixVisualizer() {
     const [sel, setSel] = useState(0);
+  const [matrixInput, setMatrixInput] = useState(JSON.stringify(EXAMPLES[0]?.["matrix"] ?? null));
+  const [targetInput, setTargetInput] = useState(JSON.stringify(EXAMPLES[0]?.["target"] ?? null));
+  const { matrix, target, inputError } = useMemo(() => {
+    try {
+      const parsedMatrix = JSON.parse(matrixInput); if (!Array.isArray(parsedMatrix)) throw new Error('matrix must be an array');
+      const parsedTarget = JSON.parse(targetInput); if (!Array.isArray(parsedTarget)) throw new Error('target must be an array');
+      return { matrix: parsedMatrix, target: parsedTarget, inputError: '' };
+    } catch (e) {
+      return { matrix: EXAMPLES[sel]?.matrix, target: EXAMPLES[sel]?.target, inputError: e.message };
+    }
+  }, [matrixInput, targetInput]);;
 
-    const { matrix, target } = EXAMPLES[sel];
-    const steps = useMemo(() => generateSteps(matrix, target), [matrix, target]);
+        const steps = useMemo(() => generateSteps(matrix, target), [matrix, target]);
     const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : steps[0];
@@ -80,7 +91,7 @@ export default function Search2DMatrixVisualizer() {
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
     const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
 
-    const applyExample = useCallback((i) => { setSel(i); handleReset(); }, [handleReset]);
+    const applyExample = useCallback((i) => { setSel(i); setMatrixInput(JSON.stringify(EXAMPLES[i].matrix)); setTargetInput(JSON.stringify(EXAMPLES[i].target)); handleReset(); }, [handleReset]);
 
     const cols = matrix[0].length;
     const lo = step?.lo ?? 0, hi = step?.hi ?? (matrix.length * cols - 1), mid = step?.mid ?? -1;
@@ -141,7 +152,8 @@ export default function Search2DMatrixVisualizer() {
                 </div>
             )}
         </div>
-    )
+    
+    </>)
 
     const codePanel = (
         <div style={{ position: 'relative', height: '100%' }}>
@@ -171,7 +183,6 @@ export default function Search2DMatrixVisualizer() {
     )
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={SEARCH2DMATRIX_PATTERNS} />
             )}
@@ -212,7 +223,6 @@ export default function Search2DMatrixVisualizer() {
         <div className="s2m-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

@@ -9,6 +9,7 @@ import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './KillProcessVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -358,6 +359,17 @@ export default function KillProcessVisualizer() {
 
   return (
     <div className="kp-shell">
+      <ManualInputPanel
+        fields={[{"key":"pid","label":"pid","type":"string"},{"key":"ppid","label":"ppid","type":"string"},{"key":"kill","label":"kill","type":"string"}]}
+        values={{ pid: pidInput, ppid: ppidInput, kill: killInput }}
+        onChange={(k, v) => { if (k === 'pid') setPidInput(v); if (k === 'ppid') setPpidInput(v); if (k === 'kill') setKillInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
       <div className="kp-top">
         <section className="kp-panel main">
           <header className="kp-head">

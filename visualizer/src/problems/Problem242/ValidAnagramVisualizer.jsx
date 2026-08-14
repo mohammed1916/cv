@@ -7,6 +7,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './ValidAnagramVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -134,6 +135,17 @@ export default function ValidAnagramVisualizer() {
 
     return (
         <div className="va-shell">
+      <ManualInputPanel
+        fields={[{"key":"s","label":"s","type":"string"},{"key":"t","label":"t","type":"string"}]}
+        values={{ s: sInput, t: tInput }}
+        onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 't') setTInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
             <div className="va-top">
                 {/* ── Main panel ── */}
                 <section className="va-panel main">

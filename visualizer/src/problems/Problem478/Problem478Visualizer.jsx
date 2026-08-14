@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem478Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -221,17 +222,30 @@ function VisualizationPanel({ radius, step, applyEx }) {
 }
 
 export default function Problem478Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [radiusInput, setRadiusInput] = useState(1);
+  const [x_centerInput, setX_centerInput] = useState(0);
+  const [y_centerInput, setY_centerInput] = useState(0);
+  const { radius, x_center, y_center, inputError } = useMemo(() => {
+    try {
+      const parsedRadius = Number(radiusInput); if (isNaN(parsedRadius)) throw new Error('radius must be a number');
+      const parsedX_center = Number(x_centerInput); if (isNaN(parsedX_center)) throw new Error('x_center must be a number');
+      const parsedY_center = Number(y_centerInput); if (isNaN(parsedY_center)) throw new Error('y_center must be a number');
+      return { radius: parsedRadius, x_center: parsedX_center, y_center: parsedY_center, inputError: '' };
+    } catch (e) {
+      return { radius: 1, x_center: 0, y_center: 0, inputError: e.message };
+    }
+  }, [radiusInput, x_centerInput, y_centerInput]);
   const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(
-    () => generateSteps(ex.radius).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),
-    [ex]
+    () => generateSteps(radius).map(c => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })),
+    [radius]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setRadiusInput(String(e.radius)); setX_centerInput(String(e.x_center)); setY_centerInput(String(e.y_center)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
@@ -253,12 +267,13 @@ export default function Problem478Visualizer() {
     {
       id: 'viz',
       title: '🔵 Random Point in Circle',
-      content: <VisualizationPanel radius={ex.radius} step={step} applyEx={applyEx} />,
+      content: <VisualizationPanel radius={radius} step={step} applyEx={applyEx} />,
     },
   ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, applyEx, ex])
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         <PlaybackControls

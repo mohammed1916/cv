@@ -8,6 +8,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./FindPeakElementVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -56,12 +57,21 @@ const BAR_MAX_H = 120;
 
 export default function FindPeakElementVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => generateSteps(ex.nums), [ex]);
+  const [numsInput, setNumsInput] = useState("[1,2,3,1]");
+  const { nums, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      return { nums: parsedNums, inputError: '' };
+    } catch (e) {
+      return { nums: "[1,2,3,1]", inputError: e.message };
+    }
+  }, [numsInput]);
+  const steps = useMemo(() => generateSteps(nums), [nums]);
   const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
-  const maxVal = Math.max(...ex.nums);
+  const applyEx = useCallback((e) => { setEx(e); setNumsInput(JSON.stringify(e.nums)); handleReset(); }, [handleReset]);;
+  const maxVal = Math.max(...nums);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
   // Step 2: Extract panels
@@ -69,13 +79,13 @@ export default function FindPeakElementVisualizer() {
     <div className="fp-panel">
       <div className="fp-panel-label">Array (bars)</div>
       <div className="fp-bars">
-        {ex.nums.map((v, i) => {
+        {nums.map((v, i) => {
           const h = Math.round((v / maxVal) * BAR_MAX_H);
           const isLo = step?.lo === i;
           const isHi = step?.hi === i;
           const isMid = step?.mid === i;
           const isResult = step?.result === i;
-          const inRange = step != null && i >= (step.lo ?? 0) && i <= (step.hi ?? ex.nums.length - 1);
+          const inRange = step != null && i >= (step.lo ?? 0) && i <= (step.hi ?? nums.length - 1);
           let cls = "fp-bar";
           if (isResult) cls += " result";
           else if (isMid) cls += " mid";
@@ -97,7 +107,8 @@ export default function FindPeakElementVisualizer() {
         })}
       </div>
     </div>
-  )
+  
+    </>)
 
   const statePanel = (
     <div>
@@ -111,7 +122,7 @@ export default function FindPeakElementVisualizer() {
         {[
           { label: "lo", val: step?.lo ?? 0, cls: "lo" },
           { label: "mid", val: step?.mid === -1 ? "-" : (step?.mid ?? "-"), cls: "mid" },
-          { label: "hi", val: step?.hi ?? ex.nums.length - 1, cls: "hi" },
+          { label: "hi", val: step?.hi ?? nums.length - 1, cls: "hi" },
         ].map(({ label, val, cls }) => (
           <div key={label} className={`fp-tracker ${cls}`}>
             <span className="fp-tracker-label">{label}</span>
@@ -121,7 +132,7 @@ export default function FindPeakElementVisualizer() {
       </div>
 
       {step?.result != null && (
-        <div className="fp-result">✓ Peak at index {step.result} (value {ex.nums[step.result]})</div>
+        <div className="fp-result">✓ Peak at index {step.result} (value {nums[step.result]})</div>
       )}
     </div>
   )
@@ -138,7 +149,6 @@ export default function FindPeakElementVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying} isDone={isDone} speed={speed}
@@ -171,7 +181,6 @@ export default function FindPeakElementVisualizer() {
     <div className="fp-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state   && createPortal(statePanel,   panelDivs.state)}
           {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}

@@ -13,6 +13,7 @@ import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import './Problem227Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const PATTERNS = ['init', 'read_digit', 'push', 'apply_high', 'negate', 'sum', 'done', 'error']
 const LINE_PATTERN_MAP = {
@@ -199,6 +200,19 @@ export default function Problem227Visualizer() {
   const expr = step?.expr ?? ''
 
   const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"expr","label":"expr","type":"string"}]}
+        values={{ expr: exprInput }}
+        onChange={(k, v) => { if (k === 'expr') setExprInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <div className="p227-panel-primary">
       <div className="p227-card">
         <div className="p227-section-label">Input</div>
@@ -275,7 +289,8 @@ export default function Problem227Visualizer() {
         </div>
       )}
     </div>
-  )
+  
+    </>)
 
   const statePanel = (
     <div className="p227-panel-state">
@@ -331,7 +346,6 @@ export default function Problem227Visualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -369,7 +383,6 @@ export default function Problem227Visualizer() {
     <div className="p227-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state && createPortal(statePanel, panelDivs.state)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

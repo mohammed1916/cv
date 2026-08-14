@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem369Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -169,8 +170,17 @@ function VisualizationPanel({ step }) {
 }
 
 export default function Problem369Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
-  const head = useMemo(() => buildList(ex.values), [ex])
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [valuesInput, setValuesInput] = useState("[9,9,9]");
+  const { values, inputError } = useMemo(() => {
+    try {
+      const parsedValues = JSON.parse(valuesInput); if (!Array.isArray(parsedValues)) throw new Error('values must be an array');
+      return { values: parsedValues, inputError: '' };
+    } catch (e) {
+      return { values: "[9,9,9]", inputError: e.message };
+    }
+  }, [valuesInput]);
+  const head = useMemo(() => buildList(values), [values])
   const steps = useMemo(
     () => generateSteps(head).map((c) => ({
       ...c,
@@ -181,7 +191,7 @@ export default function Problem369Visualizer() {
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setValuesInput(JSON.stringify(e.values)); handleReset(); }, [handleReset]);
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
   const dockPanels = useMemo(() => [
@@ -212,6 +222,7 @@ export default function Problem369Visualizer() {
   ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, head])
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         <PlaybackControls

@@ -12,6 +12,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./NQueensIIVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const NQUEENSII_PATTERNS = ['check', 'done', 'init', 'place', 'remove', 'skip', 'solution']
 
@@ -194,15 +195,23 @@ function BoardPanel({ EXAMPLES, ex, n, board, activeRow, activeCol, phase, attac
 
 export default function NQueensIIVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => generateSteps(ex.n), [ex]);
+  const [nInput, setNInput] = useState(4);
+  const { n, inputError } = useMemo(() => {
+    try {
+      const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
+      return { n: parsedN, inputError: '' };
+    } catch (e) {
+      return { n: 4, inputError: e.message };
+    }
+  }, [nInput]);
+  const steps = useMemo(() => generateSteps(n), [n]);
   const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); setNInput(String(e.n)); handleReset(); }, [handleReset]);;
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
 
-  const n = ex.n;
   const board = step?.boardRef ?? Array.from({ length: n }, () => Array(n).fill("."));
   const activeRow = step?.row ?? -1;
   const activeCol = step?.col ?? -1;
@@ -250,7 +259,6 @@ export default function NQueensIIVisualizer() {
   );
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={NQUEENSII_PATTERNS} />
       )}
@@ -294,9 +302,9 @@ export default function NQueensIIVisualizer() {
   // Step 5: Replace return block
   return (
     <div className="nqii-shell">
+      
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.board && createPortal(boardPanel, panelDivs.board)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

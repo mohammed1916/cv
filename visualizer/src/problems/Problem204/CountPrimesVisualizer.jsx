@@ -9,6 +9,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import "./CountPrimesVisualizer.css"
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -29,7 +30,8 @@ const SOLUTION_CODE = [
 ]
 
 function generateSteps(n) {
-  const steps = []
+const applyEx = useCallback((e) => { setNInput(String(e.n)); handleReset(); }, [handleReset]);
+    const steps = []
   steps.push({ activeLine: 1, n, message: `Count primes less than ${n}`, relatedLines: [1] })
   if (n <= 2) { steps.push({ activeLine: 2, result: 0, done: true, message: "n <= 2, no primes", relatedLines: [2] }); return steps }
   steps.push({ activeLine: 3, n, message: "Initialize array to mark primes", relatedLines: [3, 4] })
@@ -71,8 +73,16 @@ function VisualizationPanel({ step }) {
 }
 
 export default function CountPrimesVisualizer() {
-  const [input, setInput] = useState(10)
-  const steps = useMemo(() => generateSteps(input).map(s => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [input])
+  const [input, setInput] = useState({"label":"Example 1","n":10});
+  const [nInput, setNInput] = useState("10");
+  const { n, inputError } = useMemo(() => {
+    try {
+      const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
+      return { n: parsedN, inputError: '' };
+    } catch (e) {
+      return { n: 10, inputError: e.message };
+    }
+  }, [nInput]);  const steps = useMemo(() => generateSteps(n).map(s => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [n])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
@@ -83,6 +93,7 @@ export default function CountPrimesVisualizer() {
   ], [step, connectivity, setActiveLineDom])
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [["code", "viz"]], minimized: [] }} />
       <FloatingPanel title="Controls"><PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={(e) => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Pattern" showPatternOverlayToggle />
       </FloatingPanel>

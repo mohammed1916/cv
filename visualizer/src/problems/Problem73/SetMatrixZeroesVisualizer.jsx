@@ -162,7 +162,6 @@ export default function SetMatrixZeroesVisualizer() {
     );
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
             )}
@@ -196,7 +195,6 @@ export default function SetMatrixZeroesVisualizer() {
         <div className="smz-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

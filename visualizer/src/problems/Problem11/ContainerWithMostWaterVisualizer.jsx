@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './ContainerWithMostWaterVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 
@@ -185,6 +186,19 @@ export default function ContainerWithMostWaterVisualizer() {
 
   // Extract panels into consts (Step 3)
   const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"height","label":"height","type":"array"}]}
+        values={{ height: heightInput }}
+        onChange={(k, v) => { if (k === 'height') setHeightInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
     <div className="cw-panel">
       <div className="cw-panel-head">
         Input Array (Heights)
@@ -243,7 +257,8 @@ export default function ContainerWithMostWaterVisualizer() {
         </div>
       </div>
     </div>
-  )
+  
+    </>)
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
@@ -308,7 +323,6 @@ export default function ContainerWithMostWaterVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={CMW_PATTERNS} />
       )}
@@ -350,7 +364,6 @@ export default function ContainerWithMostWaterVisualizer() {
     <div className="container-water-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.state && createPortal(statePanel, panelDivs.state)}

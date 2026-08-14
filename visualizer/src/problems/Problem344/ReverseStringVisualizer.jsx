@@ -13,6 +13,7 @@ import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./ReverseStringVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 const PATTERNS = []
@@ -37,7 +38,7 @@ function generateSteps(sIn) {
 
 function RopeFlipVisualization({ arr, step, ex }) {
   const l = step?.l ?? 0;
-  const r = step?.r ?? (ex.s.length - 1);
+  const r = step?.r ?? (s.length - 1);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24, padding: 16 }}>
@@ -148,18 +149,27 @@ function VisualizationPanel({ arr, step, ex, applyEx }) {
 
 export default function ReverseStringVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
+  const [sInput, setSInput] = useState("[\"h\",\"e\",\"l\",\"l\",\"o\"]");
+  const { s, inputError } = useMemo(() => {
+    try {
+      const parsedS = JSON.parse(sInput); if (!Array.isArray(parsedS)) throw new Error('s must be an array');
+      return { s: parsedS, inputError: '' };
+    } catch (e) {
+      return { s: "[\"h\",\"e\",\"l\",\"l\",\"o\"]", inputError: e.message };
+    }
+  }, [sInput]);
     const steps = useMemo(
         () =>
-            generateSteps(ex.s).map((current) => ({
+            generateSteps(s).map((current) => ({
                 ...current,
                 relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
             })),
-        [ex]
+        [s]
     );
     const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+    const applyEx = useCallback((e) => { setEx(e); setSInput(JSON.stringify(e.s)); handleReset(); }, [handleReset]);;
     const connectivity = useCodeVisualConnectivity({
         steps,
         stepIndex,
@@ -167,7 +177,7 @@ export default function ReverseStringVisualizer() {
     });
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
-    const arr = step?.arr ?? ex.s;
+    const arr = step?.arr ?? s;
 
     const dockPanels = useMemo(() => [
       {
@@ -199,6 +209,7 @@ export default function ReverseStringVisualizer() {
 
     return (
       <div className="problem-shell">
+      
         <DockableWorkspace
           panels={dockPanels}
           initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

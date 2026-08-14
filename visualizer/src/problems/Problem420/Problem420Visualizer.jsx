@@ -9,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem420Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -302,11 +303,20 @@ function PasswordCheckerVisualization({ password, step }) {
 
 export default function Problem420Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [passwordInput, setPasswordInput] = useState(JSON.stringify(EXAMPLES[0]?.password ?? []));
+  const { password, inputError } = useMemo(() => {
+    try {
+      const parsedPassword = JSON.parse(passwordInput); if (!Array.isArray(parsedPassword)) throw new Error('password must be an array');
+      return { password: parsedPassword, inputError: '' };
+    } catch (e) {
+      return { password: EXAMPLES[exIdx]?.password ?? '', inputError: e.message };
+    }
+  }, [passwordInput]);
   const example = EXAMPLES[exIdx]
 
   const steps = useMemo(
     () =>
-      generateSteps(example.password).map((current) => ({
+      generateSteps(password).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
@@ -318,7 +328,7 @@ export default function Problem420Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((idx) => { setExIdx(idx); handleReset(); }, [handleReset])
+  const applyEx = useCallback((i) => { setExIdx(i); setPasswordInput(JSON.stringify(EXAMPLES[i].password)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -370,7 +380,7 @@ export default function Problem420Visualizer() {
               ))}
             </div>
           </div>
-          <PasswordCheckerVisualization password={example.password} step={step} />
+          <PasswordCheckerVisualization password={password} step={step} />
         </div>
       ),
     },
@@ -378,6 +388,7 @@ export default function Problem420Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

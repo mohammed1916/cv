@@ -10,6 +10,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from "../../config/examplesRegistry";
 import "./BasicCalculatorVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -78,11 +79,20 @@ function generateSteps(s) {
 
 export default function BasicCalculatorVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => generateSteps(ex.s), [ex]);
+  const [sInput, setSInput] = useState("1 + 1");
+  const { s, inputError } = useMemo(() => {
+    try {
+      const parsedS = sInput;
+      return { s: parsedS, inputError: '' };
+    } catch (e) {
+      return { s: "1 + 1", inputError: e.message };
+    }
+  }, [sInput]);
+  const steps = useMemo(() => generateSteps(s), [s]);
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); setSInput(String(e.s)); handleReset(); }, [handleReset]);;
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
 
@@ -92,7 +102,7 @@ export default function BasicCalculatorVisualizer() {
   const sign = step?.sign ?? 1;
   const charIdx = step?.charIdx ?? -1;
   const phase = step?.phase ?? "init";
-  const chars = ex.s.split("");
+  const chars = s.split("");
 
   const dockPanels = useMemo(() => [
     {
@@ -186,6 +196,7 @@ export default function BasicCalculatorVisualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

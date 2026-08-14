@@ -12,6 +12,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem494Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('target-sum')
@@ -80,15 +81,28 @@ function VisualizationPanel({ nums, target, step, applyEx }) {
 }
 
 export default function Problem494Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
-  const steps = useMemo(() => generateSteps(ex.nums, ex.target).map((c) => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })), [ex])
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [numsInput, setNumsInput] = useState("[1,1,1,1,1]");
+  const [targetInput, setTargetInput] = useState(3);
+  const { nums, target, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      const parsedTarget = Number(targetInput); if (isNaN(parsedTarget)) throw new Error('target must be a number');
+      return { nums: parsedNums, target: parsedTarget, inputError: '' };
+    } catch (e) {
+      return { nums: "[1,1,1,1,1]", target: 3, inputError: e.message };
+    }
+  }, [numsInput, targetInput]);
+  const steps = useMemo(() => generateSteps(nums, target).map((c) => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })), [nums, target])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setNumsInput(JSON.stringify(e.nums)); setTargetInput(String(e.target)); handleReset(); }, [handleReset]);
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
   const codePanel = (<CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />)
-  const vizPanel = (<VisualizationPanel nums={ex.nums} target={ex.target} step={step} applyEx={applyEx} />)
+  const vizPanel = (
+      <VisualizationPanel nums={nums} target={target} step={step} applyEx={applyEx} />
+    </>)
   const [panelDivs, setPanelDivs] = useState(null)
   const panelConfigs = useMemo(() => [
     { id: 'code', title: 'Code' },
@@ -98,7 +112,6 @@ export default function Problem494Visualizer() {
   return (<div className="problem-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
         </>

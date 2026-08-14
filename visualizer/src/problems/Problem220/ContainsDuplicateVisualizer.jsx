@@ -9,6 +9,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import "./ContainsDuplicateVisualizer.css"
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -207,7 +208,15 @@ function VisualizationPanel({ step }) {
 }
 
 export default function ContainsDuplicateVisualizer() {
-  const [nums] = useState([1, 2, 3, 1])
+  const [numsInput, setNumsInput] = useState("[1,2,3,1]");
+  const { nums, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      return { nums: parsedNums, inputError: '' };
+    } catch (e) {
+      return { nums: [1,2,3,1], inputError: e.message };
+    }
+  }, [numsInput]);
   const steps = useMemo(() => generateSteps(nums).map((s) => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [nums])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
@@ -232,6 +241,7 @@ export default function ContainsDuplicateVisualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [["code", "viz"]], minimized: [] }} />
       <FloatingPanel title="Controls">
         <PlaybackControls

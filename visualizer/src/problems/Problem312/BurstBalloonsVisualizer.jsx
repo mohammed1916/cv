@@ -12,6 +12,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./BurstBalloonsVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const PATTERNS = ['done', 'fill', 'init']
 const LINE_PATTERN_MAP = {
@@ -71,16 +72,25 @@ function generateSteps(numsOrig) {
 
 export default function BurstBalloonsVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-    const steps = useMemo(() => generateSteps(ex.nums), [ex]);
+  const [numsInput, setNumsInput] = useState("[3,1,5,8]");
+  const { nums: inputNums, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      return { nums: parsedNums, inputError: '' };
+    } catch (e) {
+      return { nums: "[3,1,5,8]", inputError: e.message };
+    }
+  }, [numsInput]);
+    const steps = useMemo(() => generateSteps(inputNums), [inputNums]);
     const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+    const applyEx = useCallback((e) => { setEx(e); setNumsInput(JSON.stringify(e.nums)); handleReset(); }, [handleReset]);;
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
     const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
     const [panelDivs, setPanelDivs] = useState(null);
 
-    const nums = [1, ...ex.nums, 1];
+    const nums = [1, ...nums, 1];
     const n = nums.length;
     const dp = step?.dp ?? Array.from({ length: n }, () => Array(n).fill(0));
     const activeL = step?.left ?? -1;
@@ -188,7 +198,8 @@ export default function BurstBalloonsVisualizer() {
 
                     {step?.done && <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #86efac', textAlign: 'center', fontWeight: 600, color: '#15803d' }}>✓ Max coins = {dp[0]?.[n - 1]}</div>}
                 </div>
-    );
+    
+    </>);
 
     const panelConfigs = useMemo(() => [
         { id: 'code', title: 'Code' },
@@ -200,7 +211,6 @@ export default function BurstBalloonsVisualizer() {
         <div className="problem-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
                 </>

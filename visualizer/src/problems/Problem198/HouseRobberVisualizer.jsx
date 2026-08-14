@@ -11,6 +11,7 @@ import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { getExamples } from '../../config/examplesRegistry'
 import './HouseRobberVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -137,6 +138,18 @@ export default function HouseRobberVisualizer({ problem }) {
 
   return (
     <div className="hr-shell">
+    <>
+      <ManualInputPanel
+        fields={[{"key":"nums","label":"nums","type":"string"}]}
+        values={{ nums: numsInput }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
       <ResizableSplitPanels
         className="hr-top-split"
         storageKey="cpviz.split.house-robber.top"
@@ -167,7 +180,6 @@ export default function HouseRobberVisualizer({ problem }) {
                 isActive: step?.i === index,
               })}
               renderItem={(value, index) => (
-                <>
                   <small>{index}</small>
                   <strong>{value}</strong>
                 </>

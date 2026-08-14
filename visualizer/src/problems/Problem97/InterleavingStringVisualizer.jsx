@@ -12,6 +12,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./InterleavingStringVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const SOLUTION_CODE = [
     { line: 1, text: "def isInterleave(s1, s2, s3):" },
     { line: 2, text: "    m, n = len(s1), len(s2)" },
@@ -88,15 +89,28 @@ function generateSteps(s1, s2, s3) {
 
 export default function InterleavingStringVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-    const steps = useMemo(() => { try { return generateSteps(ex.s1, ex.s2, ex.s3); } catch { return []; } }, [ex]);
+  const [s1Input, setS1Input] = useState("aabcc");
+  const [s2Input, setS2Input] = useState("dbbca");
+  const [s3Input, setS3Input] = useState("aadbbcbcac");
+  const { s1, s2, s3, inputError } = useMemo(() => {
+    try {
+      const parsedS1 = s1Input;
+      const parsedS2 = s2Input;
+      const parsedS3 = s3Input;
+      return { s1: parsedS1, s2: parsedS2, s3: parsedS3, inputError: '' };
+    } catch (e) {
+      return { s1: "aabcc", s2: "dbbca", s3: "aadbbcbcac", inputError: e.message };
+    }
+  }, [s1Input, s2Input, s3Input]);
+    const steps = useMemo(() => { try { return generateSteps(s1, s2, s3); } catch { return []; } }, [s1, s2, s3]);
     const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+    const applyEx = useCallback((e) => { setEx(e); setS1Input(String(e.s1)); setS2Input(String(e.s2)); setS3Input(String(e.s3)); handleReset(); }, [handleReset]);;
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
 
-    const m = ex.s1.length, n = ex.s2.length;
+    const m = s1.length, n = s2.length;
 
     // Panel content components
     const InputPanelContent = () => (
@@ -108,9 +122,9 @@ export default function InterleavingStringVisualizer() {
             </div>
 
             <div className="is-strings">
-                <span className="is-str-lbl s1">s1: </span><span className="is-str-val">{ex.s1}</span>
-                <span className="is-str-lbl s2">s2: </span><span className="is-str-val">{ex.s2}</span>
-                <span className="is-str-lbl s3">s3: </span><span className="is-str-val">{ex.s3}</span>
+                <span className="is-str-lbl s1">s1: </span><span className="is-str-val">{s1}</span>
+                <span className="is-str-lbl s2">s2: </span><span className="is-str-val">{s2}</span>
+                <span className="is-str-lbl s3">s3: </span><span className="is-str-val">{s3}</span>
             </div>
         </div>
     );
@@ -118,7 +132,6 @@ export default function InterleavingStringVisualizer() {
     const DPTablePanelContent = () => (
         <div className="is-panel-body">
             {step ? (
-                <>
                     <div className="is-panel-label">DP Table — dp[i][j] = can interleave s1[0..i-1] and s2[0..j-1] into s3[0..i+j-1]</div>
                     <div className="is-table-wrap">
                         <table className="is-table">
@@ -126,13 +139,13 @@ export default function InterleavingStringVisualizer() {
                                 <tr>
                                     <th className="is-th corner"></th>
                                     <th className="is-th idx">ε</th>
-                                    {ex.s2.split("").map((c, j) => <th key={j} className="is-th s2ch">{c}</th>)}
+                                    {s2.split("").map((c, j) => <th key={j} className="is-th s2ch">{c}</th>)}
                                 </tr>
                             </thead>
                             <tbody>
                                 {step.dp.map((row, i) => (
                                     <tr key={i}>
-                                        <th className="is-th s1ch">{i === 0 ? "ε" : ex.s1[i - 1]}</th>
+                                        <th className="is-th s1ch">{i === 0 ? "ε" : s1[i - 1]}</th>
                                         {row.map((val, j) => {
                                             const isCur = step.curI === i && step.curJ === j;
                                             return (
@@ -142,6 +155,7 @@ export default function InterleavingStringVisualizer() {
                                                     animate={{ scale: isCur ? 1.2 : 1 }}
                                                     transition={{ type: "spring", stiffness: 400, damping: 22 }}
                                                 >
+      
                                                     {val ? "T" : "F"}
                                                 </motion.td>
                                             );
@@ -209,7 +223,6 @@ export default function InterleavingStringVisualizer() {
     );
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 onReset={handleReset}
@@ -253,7 +266,6 @@ export default function InterleavingStringVisualizer() {
         <div className="is-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
                     {panelDivs.dp && createPortal(dpPanel, panelDivs.dp)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}

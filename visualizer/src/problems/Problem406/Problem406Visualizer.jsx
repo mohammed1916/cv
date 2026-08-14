@@ -10,6 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem406Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('queue-reconstruction-by-height')
 
@@ -223,11 +224,20 @@ function QueueVisualization({ people, step }) {
 
 export default function Problem406Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [peopleInput, setPeopleInput] = useState(JSON.stringify(EXAMPLES[0]?.people ?? []));
+  const { people, inputError } = useMemo(() => {
+    try {
+      const parsedPeople = JSON.parse(peopleInput); if (!Array.isArray(parsedPeople)) throw new Error('people must be an array');
+      return { people: parsedPeople, inputError: '' };
+    } catch (e) {
+      return { people: EXAMPLES[exIdx]?.people ?? '', inputError: e.message };
+    }
+  }, [peopleInput]);
   const example = EXAMPLES[exIdx]
 
   const steps = useMemo(
     () =>
-      generateSteps(example.people).map((current) => ({
+      generateSteps(people).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
@@ -239,7 +249,7 @@ export default function Problem406Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((idx) => { setExIdx(idx); handleReset(); }, [handleReset])
+  const applyEx = useCallback((i) => { setExIdx(i); setPeopleInput(JSON.stringify(EXAMPLES[i].people)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -302,7 +312,7 @@ export default function Problem406Visualizer() {
               ))}
             </div>
           </div>
-          <QueueVisualization people={example.people} step={step} />
+          <QueueVisualization people={people} step={step} />
         </div>
       ),
     },
@@ -310,6 +320,7 @@ export default function Problem406Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

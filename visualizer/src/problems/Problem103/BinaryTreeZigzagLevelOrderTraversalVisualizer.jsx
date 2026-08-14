@@ -9,6 +9,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './BinaryTreeZigzagLevelOrderTraversalVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -231,17 +232,25 @@ function VisualizationPanel({ step, applyEx }) {
 }
 
 export default function BinaryTreeZigzagLevelOrderTraversalVisualizer() {
-  const [input, setInput] = useState(EXAMPLES[0]?.root || [3, 9, 20, null, null, 15, 7])
-  const steps = useMemo(() => generateSteps(input).map((s) => ({
+  const [input, setInput] = useState({"label":"Example 1","root":[3,9,20,null,null,15,7]});
+  const [rootInput, setRootInput] = useState("[3,9,20,null,null,15,7]");
+  const { root, inputError } = useMemo(() => {
+    try {
+      const parsedRoot = JSON.parse(rootInput); if (!Array.isArray(parsedRoot)) throw new Error('root must be an array');
+      return { root: parsedRoot, inputError: '' };
+    } catch (e) {
+      return { root: [3,9,20,null,null,15,7], inputError: e.message };
+    }
+  }, [rootInput]);  const steps = useMemo(() => generateSteps(root).map((s) => ({
     ...s,
     relatedLines: s.relatedLines ?? (s.activeLine ? [s.activeLine] : []),
-  })), [input])
+  })), [root])
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setInput(e.root); handleReset() }, [handleReset])
+  const applyEx = useCallback((e) => { setRootInput(JSON.stringify(e.root)); handleReset(); }, [handleReset]);
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -253,7 +262,8 @@ export default function BinaryTreeZigzagLevelOrderTraversalVisualizer() {
         <VisualizationPanel step={step} applyEx={applyEx} />
       </div>
     </div>
-  )
+  
+    </>)
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
@@ -283,7 +293,6 @@ export default function BinaryTreeZigzagLevelOrderTraversalVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -323,7 +332,6 @@ export default function BinaryTreeZigzagLevelOrderTraversalVisualizer() {
     <div className="bzlt-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

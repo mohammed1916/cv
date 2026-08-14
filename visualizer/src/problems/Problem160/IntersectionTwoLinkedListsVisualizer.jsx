@@ -8,6 +8,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./IntersectionTwoLinkedListsVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -35,14 +36,14 @@ function buildNodeSequences(ex) {
   // nodeA: listA[0..] then shared[0..]
   // nodeB: listB[0..] then shared[0..]
   // After end of A, redirect to headB (index m in nodeB), etc.
-  const A = [...ex.listA, ...ex.shared];
-  const B = [...ex.listB, ...ex.shared];
-  const intersectIdxA = ex.shared.length > 0 ? ex.listA.length : -1;
-  const intersectIdxB = ex.shared.length > 0 ? ex.listB.length : -1;
+  const A = [...listA, ...shared];
+  const B = [...listB, ...shared];
+  const intersectIdxA = shared.length > 0 ? listA.length : -1;
+  const intersectIdxB = shared.length > 0 ? listB.length : -1;
   return { A, B, intersectIdxA, intersectIdxB };
 }
 
-function generateSteps(ex) {
+function generateSteps({ listA, listB, shared, intersectVal }) {
   const steps = [];
   const { A, B, intersectIdxA, intersectIdxB } = buildNodeSequences(ex);
   // Simulate two-pointer
@@ -75,12 +76,12 @@ function generateSteps(ex) {
     const inB2 = p2.list === "B" && p2.idx >= intersectIdxB && intersectIdxB >= 0;
     const sharedIdx1 = inA1 ? p1.idx - intersectIdxA : inB1 ? p1.idx - intersectIdxB : -99;
     const sharedIdx2 = inA2 ? p2.idx - intersectIdxA : inB2 ? p2.idx - intersectIdxB : -99;
-    if (ex.shared.length > 0 && sharedIdx1 >= 0 && sharedIdx2 >= 0) return sharedIdx1 === sharedIdx2;
+    if (shared.length > 0 && sharedIdx1 >= 0 && sharedIdx2 >= 0) return sharedIdx1 === sharedIdx2;
     if (!p1 && !p2) return true;
     return false;
   };
 
-  const noIntersect = ex.shared.length === 0;
+  const noIntersect = shared.length === 0;
 
   steps.push({ activeLine: 2, pA: { ...pA }, pB: { ...pB }, message: "Init pA=headA, pB=headB" });
 
@@ -150,11 +151,26 @@ function renderList(nodes, label, ptrIdx, ptrList, intersectStart, accent) {
 
 export default function IntersectionTwoLinkedListsVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => generateSteps(ex), [ex]);
+  const [listAInput, setListAInput] = useState("[4,1]");
+  const [listBInput, setListBInput] = useState("[5,6,1]");
+  const [sharedInput, setSharedInput] = useState("[8,4,5]");
+  const [intersectValInput, setIntersectValInput] = useState(8);
+  const { listA, listB, shared, intersectVal, inputError } = useMemo(() => {
+    try {
+      const parsedListA = JSON.parse(listAInput); if (!Array.isArray(parsedListA)) throw new Error('listA must be an array');
+      const parsedListB = JSON.parse(listBInput); if (!Array.isArray(parsedListB)) throw new Error('listB must be an array');
+      const parsedShared = JSON.parse(sharedInput); if (!Array.isArray(parsedShared)) throw new Error('shared must be an array');
+      const parsedIntersectVal = Number(intersectValInput); if (isNaN(parsedIntersectVal)) throw new Error('intersectVal must be a number');
+      return { listA: parsedListA, listB: parsedListB, shared: parsedShared, intersectVal: parsedIntersectVal, inputError: '' };
+    } catch (e) {
+      return { listA: "[4,1]", listB: "[5,6,1]", shared: "[8,4,5]", intersectVal: 8, inputError: e.message };
+    }
+  }, [listAInput, listBInput, sharedInput, intersectValInput]);
+  const steps = useMemo(() => generateSteps(ex), [listA, listB, shared, intersectVal]);
   const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); setListAInput(JSON.stringify(e.listA)); setListBInput(JSON.stringify(e.listB)); setSharedInput(JSON.stringify(e.shared)); setIntersectValInput(String(e.intersectVal)); handleReset(); }, [handleReset]);;
   const { A, B, intersectIdxA, intersectIdxB } = buildNodeSequences(ex);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
@@ -169,16 +185,17 @@ export default function IntersectionTwoLinkedListsVisualizer() {
       <div className="itll-panel-label">Linked Lists</div>
       {renderList(A, "List A", step?.pA?.list === "A" ? step.pA.idx : -1, step?.pA?.list, intersectIdxA, "#89b4fa")}
       {renderList(B, "List B", step?.pB?.list === "B" ? step.pB.idx : -1, step?.pB?.list, intersectIdxB, "#fab387")}
-      {ex.shared.length > 0 && (
-        <div className="itll-shared-note">Shared (intersection): [{ex.shared.join(" → ")}] starting at {ex.intersectVal}</div>
+      {shared.length > 0 && (
+        <div className="itll-shared-note">Shared (intersection): [{shared.join(" → ")}] starting at {intersectVal}</div>
       )}
       {step?.found && (
-        <div className={`itll-result ${ex.shared.length > 0 ? "ok" : "none"}`}>
-          {ex.shared.length > 0 ? `✓ Intersection at node with value ${ex.intersectVal}` : "✗ No intersection (return null)"}
+        <div className={`itll-result ${shared.length > 0 ? "ok" : "none"}`}>
+          {shared.length > 0 ? `✓ Intersection at node with value ${intersectVal}` : "✗ No intersection (return null)"}
         </div>
       )}
     </div>
-  )
+  
+    </>)
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
@@ -197,7 +214,6 @@ export default function IntersectionTwoLinkedListsVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying} isDone={isDone} speed={speed}
@@ -228,7 +244,6 @@ export default function IntersectionTwoLinkedListsVisualizer() {
     <div className="itll-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

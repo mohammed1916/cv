@@ -11,6 +11,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import "./ReverseKGroupVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const REVERSEKGROUP_PATTERNS = ['advance', 'done', 'find', 'found', 'init', 'reverse', 'reversed', 'short']
 
@@ -136,14 +137,25 @@ function generateSteps(listIn, k) {
 
 export default function ReverseKGroupVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-    const steps = useMemo(() => generateSteps(ex.list, ex.k), [ex]);
+  const [listInput, setListInput] = useState("[1,2,3,4,5]");
+  const [kInput, setKInput] = useState(2);
+  const { list, k, inputError } = useMemo(() => {
+    try {
+      const parsedList = JSON.parse(listInput); if (!Array.isArray(parsedList)) throw new Error('list must be an array');
+      const parsedK = Number(kInput); if (isNaN(parsedK)) throw new Error('k must be a number');
+      return { list: parsedList, k: parsedK, inputError: '' };
+    } catch (e) {
+      return { list: "[1,2,3,4,5]", k: 2, inputError: e.message };
+    }
+  }, [listInput, kInput]);
+    const steps = useMemo(() => generateSteps(list, k), [list, k]);
     const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+    const applyEx = useCallback((e) => { setEx(e); setListInput(JSON.stringify(e.list)); setKInput(String(e.k)); handleReset(); }, [handleReset]);;
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
-    const arr = step?.arr ?? ex.list;
+    const arr = step?.arr ?? list;
     const result = step?.result ?? [];
     const groupStart = step?.groupStart ?? -1;
     const groupEnd = step?.groupEnd ?? -1;
@@ -209,13 +221,14 @@ export default function ReverseKGroupVisualizer() {
                 </div>
                 <div className="rkg-tracker">
                     <span className="rkg-tracker-label">k</span>
-                    <span className="rkg-tracker-val">{ex.k}</span>
+                    <span className="rkg-tracker-val">{k}</span>
                 </div>
             </div>
 
             {step?.done && <div className="rkg-result">✓ Result: [{result.join(" → ")}]</div>}
         </div>
-    )
+    
+    </>)
 
     const codePanel = (
         <div style={{ position: 'relative', height: '100%' }}>
@@ -241,7 +254,6 @@ export default function ReverseKGroupVisualizer() {
     )
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={REVERSEKGROUP_PATTERNS} />
             )}
@@ -280,7 +292,6 @@ export default function ReverseKGroupVisualizer() {
         <div className="rkg-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

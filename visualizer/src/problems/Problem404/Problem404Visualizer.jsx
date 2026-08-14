@@ -10,6 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem404Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('sum-of-left-leaves')
 
@@ -153,7 +154,6 @@ function TreeVisualization({ tree, step }) {
       }}>
         <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
           {tree?.left && buildTreeLayout(tree).length > 1 && (
-            <>
               {tree.left && (
                 <line
                   x1={200 + 0}
@@ -240,11 +240,20 @@ function TreeVisualization({ tree, step }) {
 
 export default function Problem404Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [treeInput, setTreeInput] = useState(JSON.stringify(EXAMPLES[0]?.tree ?? []));
+  const { tree, inputError } = useMemo(() => {
+    try {
+      const parsedTree = JSON.parse(treeInput); if (!Array.isArray(parsedTree)) throw new Error('tree must be an array');
+      return { tree: parsedTree, inputError: '' };
+    } catch (e) {
+      return { tree: EXAMPLES[exIdx]?.tree ?? '', inputError: e.message };
+    }
+  }, [treeInput]);
   const example = EXAMPLES[exIdx]
 
   const steps = useMemo(
     () =>
-      generateSteps(example.tree).map((current) => ({
+      generateSteps(tree).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
@@ -256,7 +265,7 @@ export default function Problem404Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((idx) => { setExIdx(idx); handleReset(); }, [handleReset])
+  const applyEx = useCallback((i) => { setExIdx(i); setTreeInput(JSON.stringify(EXAMPLES[i].tree)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -319,7 +328,7 @@ export default function Problem404Visualizer() {
               ))}
             </div>
           </div>
-          <TreeVisualization tree={example.tree} step={step} />
+          <TreeVisualization tree={tree} step={step} />
         </div>
       ),
     },
@@ -327,6 +336,7 @@ export default function Problem404Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

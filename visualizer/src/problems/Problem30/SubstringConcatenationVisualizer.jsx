@@ -8,6 +8,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./SubstringConcatenationVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const SUBSTRINGCONCATENATION_PATTERNS = ['done', 'found', 'init', 'overflow', 'window']
@@ -88,15 +89,24 @@ function generateSteps(s, words) {
 
 export default function SubstringConcatenationVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-    const steps = useMemo(() => generateSteps(ex.s, ex.words), [ex]);
+  const [sInput, setSInput] = useState("barfoothefoobarman");
+  const [wordsInput, setWordsInput] = useState("[\"foo\",\"bar\"]");
+  const { s, words, inputError } = useMemo(() => {
+    try {
+      const parsedS = sInput;
+      const parsedWords = JSON.parse(wordsInput); if (!Array.isArray(parsedWords)) throw new Error('words must be an array');
+      return { s: parsedS, words: parsedWords, inputError: '' };
+    } catch (e) {
+      return { s: "barfoothefoobarman", words: "[\"foo\",\"bar\"]", inputError: e.message };
+    }
+  }, [sInput, wordsInput]);
+    const steps = useMemo(() => generateSteps(s, words), [s, words]);
     const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+    const applyEx = useCallback((e) => { setEx(e); setSInput(String(e.s)); setWordsInput(JSON.stringify(e.words)); handleReset(); }, [handleReset]);;
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
-    const s = ex.s;
-    const words = ex.words;
     const wlen = words[0].length;
     const window = step?.window ?? null;
     const wordStart = step?.wordStart ?? -1;
@@ -108,6 +118,7 @@ export default function SubstringConcatenationVisualizer() {
 
     return (
         <div className="sc-shell">
+      
             <div className="sc-examples">
                 {EXAMPLES.map(e => (
                     <button key={e.label} className={`sc-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>

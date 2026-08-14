@@ -12,6 +12,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import './CombinationsVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
     { line: 1, text: 'def combine(n, k):' },
@@ -216,10 +217,24 @@ export default function CombinationsVisualizer() {
 
     // Step 2: Extract panels into consts
     const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"n","label":"n","type":"string"},{"key":"k","label":"k","type":"string"}]}
+        values={{ n: nInput, k: kInput }}
+        onChange={(k, v) => { if (k === 'n') setNInput(v); if (k === 'k') setKInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
         <div className="comb-panel-wrapper">
             <VisualizationPanel EXAMPLES={EXAMPLES} applyExample={applyExample} nInput={nInput} setNInput={setNInput} kInput={kInput} setKInput={setKInput} n={n} k={k} inputError={inputError} handleReset={handleReset} step={step} />
         </div>
-    )
+    
+    </>)
 
     const codePanel = (
         <div style={{ position: 'relative', height: '100%' }}>
@@ -242,7 +257,6 @@ export default function CombinationsVisualizer() {
     )
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={COMBINATIONS_PATTERNS} />
             )}
@@ -279,7 +293,6 @@ export default function CombinationsVisualizer() {
         <div className="comb-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

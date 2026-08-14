@@ -285,7 +285,6 @@ export default function Problem355Visualizer() {
           </div>
 
           {step && (
-            <>
               {/* Current operation */}
               <div style={{ padding: 8, backgroundColor: '#fef3c7', borderRadius: 6, fontSize: 11, borderLeft: '3px solid #f59e0b' }}>
                 <div style={{ fontWeight: 600, marginBottom: 4, color: '#92400e' }}>Current Operation</div>
@@ -465,7 +464,6 @@ export default function Problem355Visualizer() {
     <div className="problem-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
         </>

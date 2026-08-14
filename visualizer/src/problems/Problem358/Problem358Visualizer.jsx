@@ -13,6 +13,7 @@ import { getExamplesOr } from '../../config/examplesRegistry'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import './Problem358.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
 
 const PATTERNS = ['cooldown_ready', 'cooldown_set', 'done', 'fill_gap', 'impossible', 'init', 'placement', 'ready']
@@ -674,6 +675,17 @@ export default function Problem358Visualizer() {
 
   return (
     <div className="problem-shell">
+      <ManualInputPanel
+        fields={[{"key":"s","label":"s","type":"string"},{"key":"k","label":"k","type":"string"}]}
+        values={{ s: sInput, k: kInput }}
+        onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 'k') setKInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
 
       <FloatingPanel title="Playback Controls">

@@ -10,6 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem411Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('minimum-unique-word-abbreviation')
 
@@ -321,11 +322,22 @@ function AbbreviationExplorer({ word, dictionary, step }) {
 
 export default function Problem411Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [wordInput, setWordInput] = useState(EXAMPLES[0]?.word ?? '');
+  const [dictionaryInput, setDictionaryInput] = useState("");
+  const { word, dictionary, inputError } = useMemo(() => {
+    try {
+      const parsedWord = wordInput;
+      const parsedDictionary = JSON.parse(dictionaryInput); if (!Array.isArray(parsedDictionary)) throw new Error('dictionary must be an array');
+      return { word: parsedWord, dictionary: parsedDictionary, inputError: '' };
+    } catch (e) {
+      return { word: EXAMPLES[exIdx]?.word ?? '', dictionary: EXAMPLES[exIdx]?.dictionary ?? '', inputError: e.message };
+    }
+  }, [wordInput, dictionaryInput]);
   const example = EXAMPLES[exIdx]
 
   const steps = useMemo(
     () =>
-      generateSteps(example.word, example.dictionary).map((current) => ({
+      generateSteps(word, dictionary).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
@@ -337,7 +349,7 @@ export default function Problem411Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((idx) => { setExIdx(idx); handleReset(); }, [handleReset])
+  const applyEx = useCallback((i) => { setExIdx(i); setWordInput(String(EXAMPLES[i].word)); setDictionaryInput(JSON.stringify(EXAMPLES[i].dictionary)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -389,7 +401,7 @@ export default function Problem411Visualizer() {
               ))}
             </div>
           </div>
-          <AbbreviationExplorer word={example.word} dictionary={example.dictionary} step={step} />
+          <AbbreviationExplorer word={word} dictionary={dictionary} step={step} />
         </div>
       ),
     },
@@ -397,6 +409,7 @@ export default function Problem411Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

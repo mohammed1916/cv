@@ -11,6 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './HouseRobberIIVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -216,11 +217,25 @@ export default function HouseRobberIIVisualizer() {
     )
 
     const vizPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"nums","label":"nums","type":"array"}]}
+        values={{ nums: numsInput }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
         <div className="hr2-panel-body">
             {renderRow('Pass 1 (skip last)', step?.dp ?? [], step?.activeIdx, step?.pass, 1, nums)}
             {renderRow('Pass 2 (skip first)', step?.dp2 ?? [], step?.activeIdx, step?.pass, 2, nums)}
         </div>
-    )
+    
+    </>)
 
     const codePanel = (
         <CodeTracePanel
@@ -268,7 +283,6 @@ export default function HouseRobberIIVisualizer() {
 
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
                     {panelDivs.state && createPortal(statePanel, panelDivs.state)}
                     {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}

@@ -9,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './Problem365Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -254,19 +255,29 @@ const EXAMPLES = [
 
 export default function Problem365Visualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [aInput, setAInput] = useState(JSON.stringify(EXAMPLES[0]?.a ?? []));
+  const [bInput, setBInput] = useState("");
+  const [zInput, setZInput] = useState("");
+  const { a, b, z, inputError } = useMemo(() => {
+    try {
+      const parsedA = JSON.parse(aInput); if (!Array.isArray(parsedA)) throw new Error('a must be an array');
+      const parsedB = JSON.parse(bInput); if (!Array.isArray(parsedB)) throw new Error('b must be an array');
+      const parsedZ = JSON.parse(zInput); if (!Array.isArray(parsedZ)) throw new Error('z must be an array');
+      return { a: parsedA, b: parsedB, z: parsedZ, inputError: '' };
+    } catch (e) {
+      return { a: EXAMPLES[exIdx]?.a ?? '', b: EXAMPLES[exIdx]?.b ?? '', z: EXAMPLES[exIdx]?.z ?? '', inputError: e.message };
+    }
+  }, [aInput, bInput, zInput]);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]
-  const steps = useMemo(() => generateSteps(ex.a, ex.b, ex.z), [ex])
+  const steps = useMemo(() => generateSteps(a, b, z), [ex])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
-  const applyExample = useCallback((idx) => {
-    setExIdx(idx)
-    handleReset()
-  }, [handleReset])
+  const applyExample = useCallback((i) => { setExIdx(i); setAInput(JSON.stringify(EXAMPLES[i].a)); setBInput(JSON.stringify(EXAMPLES[i].b)); setZInput(JSON.stringify(EXAMPLES[i].z)); handleReset(); }, [handleReset]);
 
   // Render jug visualization
   const jugVisualization = step ? (
@@ -496,7 +507,6 @@ export default function Problem365Visualizer() {
           </div>
 
           {step && (
-            <>
               <div className="wjp-step-info">
                 <div className="wjp-step-message">{step.message}</div>
                 <div className="wjp-step-details">{step.details}</div>
@@ -530,6 +540,7 @@ export default function Problem365Visualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         <PlaybackControls

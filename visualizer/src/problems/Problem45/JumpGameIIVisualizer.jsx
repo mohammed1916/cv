@@ -12,6 +12,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./JumpGameIIVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const JUMPGAMEII_PATTERNS = ['break', 'check', 'done', 'init', 'jump', 'reach']
 
@@ -122,15 +123,24 @@ function StatsDisplay({ step }) {
 
 export default function JumpGameIIVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => generateSteps(ex.nums), [ex]);
+  const [numsInput, setNumsInput] = useState("[2,3,1,1,4]");
+  const { nums, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      return { nums: parsedNums, inputError: '' };
+    } catch (e) {
+      return { nums: "[2,3,1,1,4]", inputError: e.message };
+    }
+  }, [numsInput]);
+  const steps = useMemo(() => generateSteps(nums), [nums]);
   const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); setNumsInput(JSON.stringify(e.nums)); handleReset(); }, [handleReset]);;
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
 
-  const maxVal = Math.max(...ex.nums, 1);
+  const maxVal = Math.max(...nums, 1);
 
   // Extract panel content
   const inputPanel = (
@@ -152,10 +162,11 @@ export default function JumpGameIIVisualizer() {
 
   const vizPanel = (
     <div className="jg2-panel">
-      <ArrayVisualization nums={ex.nums} step={step} maxVal={maxVal} />
+      <ArrayVisualization nums={nums} step={step} maxVal={maxVal} />
       <StatsDisplay step={step} />
     </div>
-  );
+  
+    </>);
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
@@ -184,7 +195,6 @@ export default function JumpGameIIVisualizer() {
   );
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={JUMPGAMEII_PATTERNS} />
       )}
@@ -228,7 +238,6 @@ export default function JumpGameIIVisualizer() {
     <div className="jg2-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

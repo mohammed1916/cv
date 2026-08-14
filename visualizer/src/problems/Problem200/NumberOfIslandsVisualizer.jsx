@@ -11,6 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './NumberOfIslandsVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -258,6 +259,18 @@ export default function NumberOfIslandsVisualizer() {
                         ...(isVisited && !isWater && islandColor ? { backgroundColor: islandColor, borderColor: islandColor } : {})
                       }}
                     >
+    <>
+      <ManualInputPanel
+        fields={[{"key":"grid","label":"grid","type":"array"}]}
+        values={{ grid: gridInput }}
+        onChange={(k, v) => { if (k === 'grid') setGridInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
                       {cell}
                       {isScan && !isBfs && <div className="noi-cell-indicator scan" />}
                       {isBfs && <div className="noi-cell-indicator bfs" />}
@@ -356,7 +369,6 @@ export default function NumberOfIslandsVisualizer() {
     <div className="problem-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.grid && createPortal(gridPanel, panelDivs.grid)}
           {panelDivs.state && createPortal(statePanel, panelDivs.state)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

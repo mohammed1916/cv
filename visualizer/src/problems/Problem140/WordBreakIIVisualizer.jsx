@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './WordBreakIIVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -43,7 +44,8 @@ const SOLUTION_CODE_INLINE = [
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(s, wordDict) {
-  const steps = []
+const applyInput = useCallback((e) => { setInput(e); setSInput(String(e.s)); setWordDictInput(JSON.stringify(e.wordDict)); handleReset(); }, [handleReset]);
+    const steps = []
 
   if (!s || !wordDict || wordDict.length === 0) {
     steps.push({
@@ -223,14 +225,25 @@ function VisualizationPanel({ step }) {
 }
 
 export default function WordBreakIIVisualizer() {
-  const [input, setInput] = useState(EXAMPLES[0])
+  const [input, setInput] = useState(EXAMPLES[0]);
+  const [sInput, setSInput] = useState("catsandcatsdog");
+  const [wordDictInput, setWordDictInput] = useState("[\"cat\",\"cats\",\"and\",\"sand\",\"dog\"]");
+  const { s, wordDict, inputError } = useMemo(() => {
+    try {
+      const parsedS = sInput;
+      const parsedWordDict = JSON.parse(wordDictInput); if (!Array.isArray(parsedWordDict)) throw new Error('wordDict must be an array');
+      return { s: parsedS, wordDict: parsedWordDict, inputError: '' };
+    } catch (e) {
+      return { s: "catsandcatsdog", wordDict: "[\"cat\",\"cats\",\"and\",\"sand\",\"dog\"]", inputError: e.message };
+    }
+  }, [sInput, wordDictInput]);
   const steps = useMemo(
     () =>
-      generateSteps(input.s, input.wordDict).map((s) => ({
+      generateSteps(s, wordDict).map((s) => ({
         ...s,
         relatedLines: s.relatedLines ?? (s.activeLine ? [s.activeLine] : []),
       })),
-    [input]
+    [s, wordDict]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
@@ -258,7 +271,8 @@ export default function WordBreakIIVisualizer() {
     <div className="wbii-panel">
       <VisualizationPanel step={step} />
     </div>
-  )
+  
+    </>)
 
   const statusPanel = (
     <div className="wbii-status">
@@ -269,7 +283,6 @@ export default function WordBreakIIVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -307,7 +320,6 @@ export default function WordBreakIIVisualizer() {
     <div className="wbii-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

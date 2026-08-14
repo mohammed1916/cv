@@ -11,6 +11,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./ReorderListVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -92,16 +93,24 @@ const EXAMPLES = getExamples('reorder-list');
 
 export default function ReorderListVisualizer() {
     const [sel, setSel] = useState(0);
+  const [arrInput, setArrInput] = useState(JSON.stringify(EXAMPLES[0]?.["arr"] ?? null));
+  const { arr, inputError } = useMemo(() => {
+    try {
+      const parsedArr = JSON.parse(arrInput); if (!Array.isArray(parsedArr)) throw new Error('arr must be an array');
+      return { arr: parsedArr, inputError: '' };
+    } catch (e) {
+      return { arr: EXAMPLES[sel]?.arr, inputError: e.message };
+    }
+  }, [arrInput]);;
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
-    const { arr } = EXAMPLES[sel];
-    const steps = useMemo(() => generateSteps(arr), [arr]);
+        const steps = useMemo(() => generateSteps(arr), [arr]);
     const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : steps[0];
     const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
 
-    const applyExample = useCallback((i) => { setSel(i); handleReset(); }, [handleReset]);
+    const applyExample = useCallback((i) => { setSel(i); setArrInput(JSON.stringify(EXAMPLES[i].arr)); handleReset(); }, [handleReset]);
 
     const displayList = step?.list ?? arr;
     const slow = step?.slow ?? -1, fast = step?.fast ?? -1;
@@ -151,7 +160,8 @@ export default function ReorderListVisualizer() {
                 </div>
             )}
         </div>
-    )
+    
+    </>)
 
     const statusPanel = (
         <div className="rl-status">
@@ -160,7 +170,6 @@ export default function ReorderListVisualizer() {
     )
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
             <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex <= 0} nextDisabled={isDone} resetDisabled={stepIndex <= 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
         </>
@@ -181,7 +190,6 @@ export default function ReorderListVisualizer() {
         <div className="rl-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

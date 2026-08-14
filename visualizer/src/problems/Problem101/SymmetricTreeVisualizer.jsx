@@ -10,6 +10,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { getExamples } from '../../config/examplesRegistry'
 import './SymmetricTreeVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -284,6 +285,19 @@ export default function SymmetricTreeVisualizer() {
 
     // Step 2: Extract panels into consts
     const primaryPanel = (
+    <>
+
+      <ManualInputPanel
+        fields={[{"key":"tree","label":"tree","type":"string"}]}
+        values={{ tree: treeInput }}
+        onChange={(k, v) => { if (k === 'tree') setTreeInput(v); handleReset(); }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+        showExamples={false}
+      />
+
         <div className="sym-panel" style={{ position: 'relative', height: '100%' }}>
             <div className="sym-panel-head">Symmetric Tree Mirror Check</div>
             <div className="sym-panel-body">
@@ -335,7 +349,8 @@ export default function SymmetricTreeVisualizer() {
                 </div>
             </div>
         </div>
-    )
+    
+    </>)
 
     const statePanel = (
         <div className="sym-panel" style={{ position: 'relative', height: '100%' }}>
@@ -421,7 +436,6 @@ export default function SymmetricTreeVisualizer() {
     )
 
     const playbackPanel = (
-        <>
             {showPatternOverlay && <PatternLegend usedPatterns={PATTERNS} />}
             <PlaybackControls
                 isPlaying={isPlaying}
@@ -464,7 +478,6 @@ export default function SymmetricTreeVisualizer() {
         <div className="sym-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.state && createPortal(statePanel, panelDivs.state)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}

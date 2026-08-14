@@ -9,6 +9,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import "./ContainsDuplicateIIIVisualizer.css"
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -255,9 +256,19 @@ function VisualizationPanel({ step }) {
 }
 
 export default function ContainsDuplicateIIIVisualizer() {
-  const [nums] = useState([1, 2, 3, 1, 2, 3])
-  const [k] = useState(2)
-  const [t] = useState(0)
+  const [numsInput, setNumsInput] = useState("[1,2,3,1,2,3]");
+  const [kInput, setKInput] = useState(2);
+  const [tInput, setTInput] = useState(0);
+  const { nums, k, t, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      const parsedK = Number(kInput); if (isNaN(parsedK)) throw new Error('k must be a number');
+      const parsedT = Number(tInput); if (isNaN(parsedT)) throw new Error('t must be a number');
+      return { nums: parsedNums, k: parsedK, t: parsedT, inputError: '' };
+    } catch (e) {
+      return { nums: [1,2,3,1,2,3], k: 2, t: 0, inputError: e.message };
+    }
+  }, [numsInput, kInput, tInput]);
   const steps = useMemo(() => generateSteps(nums, k, t).map((s) => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [nums, k, t])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
@@ -282,6 +293,7 @@ export default function ContainsDuplicateIIIVisualizer() {
 
   return (
     <div className="problem-shell">
+      
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [["code", "viz"]], minimized: [] }} />
       <FloatingPanel title="Controls">
         <PlaybackControls

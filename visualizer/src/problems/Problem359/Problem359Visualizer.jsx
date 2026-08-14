@@ -446,7 +446,6 @@ function DecisionFlow({ step }) {
             <strong>Message:</strong> "{step.message}" @ t={step.timestamp}
           </motion.div>
         ) : (
-          <>
             <motion.div
               style={{
                 padding: 12,

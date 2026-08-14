@@ -11,6 +11,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import './Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const PATTERNS = ['init', 'locate_prev', 'reverse', 'done']
 
@@ -325,19 +326,32 @@ function VisualizationPanel({ step }) {
 }
 
 export default function Problem92Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0])
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [listInput, setListInput] = useState("[1,2,3,4,5]");
+  const [leftInput, setLeftInput] = useState(2);
+  const [rightInput, setRightInput] = useState(4);
+  const { list, left, right, inputError } = useMemo(() => {
+    try {
+      const parsedList = JSON.parse(listInput); if (!Array.isArray(parsedList)) throw new Error('list must be an array');
+      const parsedLeft = Number(leftInput); if (isNaN(parsedLeft)) throw new Error('left must be a number');
+      const parsedRight = Number(rightInput); if (isNaN(parsedRight)) throw new Error('right must be a number');
+      return { list: parsedList, left: parsedLeft, right: parsedRight, inputError: '' };
+    } catch (e) {
+      return { list: "[1,2,3,4,5]", left: 2, right: 4, inputError: e.message };
+    }
+  }, [listInput, leftInput, rightInput]);
   const steps = useMemo(
     () =>
-      generateSteps(ex.list, ex.left, ex.right).map((c) => ({
+      generateSteps(list, left, right).map((c) => ({
         ...c,
         relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []),
       })),
-    [ex]
+    [list, left, right]
   )
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); handleReset() }, [handleReset])
+  const applyEx = useCallback((e) => { setEx(e); setListInput(JSON.stringify(e.list)); setLeftInput(String(e.left)); setRightInput(String(e.right)); handleReset(); }, [handleReset]);
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -367,7 +381,8 @@ export default function Problem92Visualizer() {
     <div className="problem92-panel">
       <VisualizationPanel step={step} />
     </div>
-  )
+  
+    </>)
 
   const statusPanel = (
     <div className="problem92-status">
@@ -395,7 +410,6 @@ export default function Problem92Visualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -436,7 +450,6 @@ export default function Problem92Visualizer() {
     <div className="problem92-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

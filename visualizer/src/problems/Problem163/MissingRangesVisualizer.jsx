@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './MissingRangesVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -43,7 +44,8 @@ const SOLUTION_CODE_INLINE = [
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(nums, lower, upper) {
-  const steps = []
+const applyInput = useCallback((e) => { setInput(e); setNumsInput(JSON.stringify(e.nums)); setLowerInput(String(e.lower)); setUpperInput(String(e.upper)); handleReset(); }, [handleReset]);
+    const steps = []
 
   steps.push({
     activeLine: 1,
@@ -340,14 +342,27 @@ function VisualizationPanel({ step }) {
 }
 
 export default function MissingRangesVisualizer() {
-  const [input, setInput] = useState(EXAMPLES[0])
+  const [input, setInput] = useState(EXAMPLES[0]);
+  const [numsInput, setNumsInput] = useState("[0,1,3,50,75]");
+  const [lowerInput, setLowerInput] = useState(0);
+  const [upperInput, setUpperInput] = useState(99);
+  const { nums, lower, upper, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      const parsedLower = Number(lowerInput); if (isNaN(parsedLower)) throw new Error('lower must be a number');
+      const parsedUpper = Number(upperInput); if (isNaN(parsedUpper)) throw new Error('upper must be a number');
+      return { nums: parsedNums, lower: parsedLower, upper: parsedUpper, inputError: '' };
+    } catch (e) {
+      return { nums: "[0,1,3,50,75]", lower: 0, upper: 99, inputError: e.message };
+    }
+  }, [numsInput, lowerInput, upperInput]);
   const steps = useMemo(
     () =>
-      generateSteps(input.nums, input.lower, input.upper).map((s) => ({
+      generateSteps(nums, lower, upper).map((s) => ({
         ...s,
         relatedLines: s.relatedLines ?? (s.activeLine ? [s.activeLine] : []),
       })),
-    [input]
+    [nums, lower, upper]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
@@ -375,7 +390,8 @@ export default function MissingRangesVisualizer() {
     <div className="mrv-panel">
       <VisualizationPanel step={step} />
     </div>
-  )
+  
+    </>)
 
   const statusPanel = (
     <div className="mrv-status">
@@ -390,7 +406,6 @@ export default function MissingRangesVisualizer() {
   )
 
   const playbackPanel = (
-    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -428,7 +443,6 @@ export default function MissingRangesVisualizer() {
     <div className="mrv-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

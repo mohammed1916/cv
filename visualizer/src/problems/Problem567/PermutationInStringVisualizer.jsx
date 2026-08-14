@@ -11,6 +11,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./PermutationInStringVisualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const SOLUTION_CODE = [
     { line: 1, text: "def checkInclusion(s1, s2):" },
     { line: 2, text: "    if len(s1) > len(s2): return False" },
@@ -70,11 +71,22 @@ function generateSteps(s1, s2) {
 
 export default function PermutationInStringVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-    const steps = useMemo(() => { try { return generateSteps(ex.s1, ex.s2); } catch { return []; } }, [ex]);
+  const [s1Input, setS1Input] = useState("ab");
+  const [s2Input, setS2Input] = useState("eidbaooo");
+  const { s1, s2, inputError } = useMemo(() => {
+    try {
+      const parsedS1 = s1Input;
+      const parsedS2 = s2Input;
+      return { s1: parsedS1, s2: parsedS2, inputError: '' };
+    } catch (e) {
+      return { s1: "ab", s2: "eidbaooo", inputError: e.message };
+    }
+  }, [s1Input, s2Input]);
+    const steps = useMemo(() => { try { return generateSteps(s1, s2); } catch { return []; } }, [s1, s2]);
     const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+    const applyEx = useCallback((e) => { setEx(e); setS1Input(String(e.s1)); setS2Input(String(e.s2)); handleReset(); }, [handleReset]);;
     const relevantChars = step ? [...new Set([...Object.keys(step.need), ...Object.keys(step.have)])] : [];
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
     const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
@@ -91,7 +103,7 @@ export default function PermutationInStringVisualizer() {
 
     const vizPanel = (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
-            <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>s1: <strong>{ex.s1}</strong> | s2: <strong>{ex.s2}</strong></div>
+            <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>s1: <strong>{s1}</strong> | s2: <strong>{s2}</strong></div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                 {EXAMPLES.map(e => (
                     <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: '#f1f5f9' }}>
@@ -101,7 +113,7 @@ export default function PermutationInStringVisualizer() {
             </div>
             <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginTop: 8 }}>Window</div>
             <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-                {ex.s2.split("").map((ch, i) => {
+                {s2.split("").map((ch, i) => {
                     const inWin = step && i >= step.winStart && i <= step.winEnd;
                     const isMatch = inWin && step.matchWin;
                     return (
@@ -147,7 +159,8 @@ export default function PermutationInStringVisualizer() {
                 </div>
             )}
         </div>
-    );
+    
+    </>);
 
     const [panelDivs, setPanelDivs] = useState(null);
     const panelConfigs = useMemo(() => [
@@ -160,7 +173,6 @@ export default function PermutationInStringVisualizer() {
         <div className="problem-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
-                <>
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
                 </>

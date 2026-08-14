@@ -10,6 +10,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import "./HappyNumberVisualizer.css"
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -27,7 +28,8 @@ const SOLUTION_CODE = [
 ]
 
 function generateSteps(n) {
-  const steps = []
+const applyEx = useCallback((e) => { setNInput(String(e.n)); handleReset(); }, [handleReset]);
+    const steps = []
   steps.push({ activeLine: 1, n, message: `Check if ${n} is happy`, relatedLines: [1] })
   steps.push({ activeLine: 2, message: "Initialize seen set", relatedLines: [2] })
   const seen = new Set()
@@ -63,8 +65,15 @@ function VisualizationPanel({ step }) {
 }
 
 export default function HappyNumberVisualizer() {
-  const [input, setInput] = useState(19)
-  const steps = useMemo(() => generateSteps(input).map(s => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [input])
+  const [nInput, setNInput] = useState("19");
+  const { n, inputError } = useMemo(() => {
+    try {
+      const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
+      return { n: parsedN, inputError: '' };
+    } catch (e) {
+      return { n: 19, inputError: e.message };
+    }
+  }, [nInput]);  const steps = useMemo(() => generateSteps(n).map(s => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [n])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
@@ -74,7 +83,8 @@ export default function HappyNumberVisualizer() {
   )
   const vizPanel = (
     <VisualizationPanel step={step} />
-  )
+  
+    </>)
 
   const [panelDivs, setPanelDivs] = useState(null)
   const panelConfigs = useMemo(() => [
@@ -87,7 +97,6 @@ export default function HappyNumberVisualizer() {
     <div className="problem-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
-        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
         </>
