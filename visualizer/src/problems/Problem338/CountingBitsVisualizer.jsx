@@ -87,12 +87,10 @@ export default function CountingBitsVisualizer() {
       <ManualInputPanel
         fields={[{"key":"n","label":"n","type":"string"}]}
         values={{ n: nInput }}
-        onChange={(k, v) => { if (k === 'n') setNInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'n') setNInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>

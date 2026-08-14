@@ -243,12 +243,9 @@ export default function FindMedianVisualizer() {
       <ManualInputPanel
         fields={[{"key":"nums","label":"nums","type":"array"}]}
         values={{ nums: numsInput }}
-        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
-        showExamples={false}
+        applyExample={applyExample}
       />
 
             <div className="fm-controls-row">

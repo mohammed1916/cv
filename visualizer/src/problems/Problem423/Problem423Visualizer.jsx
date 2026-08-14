@@ -132,15 +132,11 @@ function VisualizationPanel({ step }) {
 
 export default function Problem423Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [tokensInput, setTokensInput] = useState("zerozerozerozerotwotwotwotwo");
-  const { tokens, inputError } = useMemo(() => {
-    try {
-      const parsedTokens = tokensInput;
-      return { tokens: parsedTokens, inputError: '' };
-    } catch (e) {
-      return { tokens: "zerozerozerozerotwotwotwotwo", inputError: e.message };
-    }
-  }, [tokensInput]);
+  const [sInput, setSInput] = useState(EXAMPLES[0].s);
+  const { s, inputError } = useMemo(() => {
+    if (!sInput.trim()) return { s: '', inputError: 's must not be empty' };
+    return { s: sInput, inputError: '' };
+  }, [sInput]);
   const SOLUTION_CODE = SOLUTION_CODE_INLINE
   const steps = useMemo(
     () => generateSteps(s).map((c) => ({
@@ -152,7 +148,7 @@ export default function Problem423Visualizer() {
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); setTokensInput(String(e.tokens)); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); setSInput(e.s); handleReset(); }, [handleReset]);
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
   const dockPanels = useMemo(() => [

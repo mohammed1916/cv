@@ -75,21 +75,21 @@ function VisualizationPanel({ timeSeries, duration, step }) {
 
 export default function Problem495Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [attackTimeInput, setAttackTimeInput] = useState("[1,4]");
-  const [durationInput, setDurationInput] = useState(2);
-  const { attackTime, duration, inputError } = useMemo(() => {
+  const [timeSeriesInput, setTimeSeriesInput] = useState(JSON.stringify(EXAMPLES[0].timeSeries));
+  const [durationInput, setDurationInput] = useState(String(EXAMPLES[0].duration));
+  const { timeSeries, duration, inputError } = useMemo(() => {
     try {
-      const parsedAttackTime = JSON.parse(attackTimeInput); if (!Array.isArray(parsedAttackTime)) throw new Error('attackTime must be an array');
+      const parsedTimeSeries = JSON.parse(timeSeriesInput); if (!Array.isArray(parsedTimeSeries)) throw new Error('timeSeries must be an array');
       const parsedDuration = Number(durationInput); if (isNaN(parsedDuration)) throw new Error('duration must be a number');
-      return { attackTime: parsedAttackTime, duration: parsedDuration, inputError: '' };
+      return { timeSeries: parsedTimeSeries, duration: parsedDuration, inputError: '' };
     } catch (e) {
-      return { attackTime: "[1,4]", duration: 2, inputError: e.message };
+      return { timeSeries: EXAMPLES[0].timeSeries, duration: EXAMPLES[0].duration, inputError: e.message };
     }
-  }, [attackTimeInput, durationInput]);
+  }, [timeSeriesInput, durationInput]);
   const steps = useMemo(() => generateSteps(timeSeries, duration).map((c) => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })), [timeSeries, duration])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); setAttackTimeInput(JSON.stringify(e.attackTime)); setDurationInput(String(e.duration)); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); setTimeSeriesInput(JSON.stringify(e.timeSeries)); setDurationInput(String(e.duration)); handleReset(); }, [handleReset]);
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
   const dockPanels = useMemo(() => [

@@ -42,7 +42,6 @@ const SOLUTION_CODE_INLINE = [
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(inorder, postorder) {
-const applyInput = useCallback((e) => { setInput(e); setInorderInput(JSON.stringify(e.inorder)); setPostorderInput(JSON.stringify(e.postorder)); handleReset(); }, [handleReset]);
     const steps = []
 
   if (!inorder || inorder.length === 0) {

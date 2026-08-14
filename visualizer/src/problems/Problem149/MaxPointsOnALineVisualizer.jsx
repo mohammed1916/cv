@@ -96,6 +96,7 @@ function toSvg(points, W, H, PAD) {
 function VizPanel({
     EXAMPLES,
     ex,
+    points,
     svgPts,
     W,
     H,
@@ -240,6 +241,7 @@ export default function MaxPointsOnALineVisualizer() {
             <VizPanel
                 EXAMPLES={EXAMPLES}
                 ex={ex}
+                points={points}
                 svgPts={svgPts}
                 W={W}
                 H={H}

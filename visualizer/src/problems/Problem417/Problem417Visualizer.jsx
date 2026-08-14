@@ -7,7 +7,6 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem417Visualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -225,15 +224,7 @@ function Problem417Visualizer() {
     [5, 1, 7, 6, 2],
   ]
 
-  const [heightsInput, setHeightsInput] = useState("defaultHeights");
-  const { heights, inputError } = useMemo(() => {
-    try {
-      const parsedHeights = heightsInput;
-      return { heights: parsedHeights, inputError: '' };
-    } catch (e) {
-      return { heights: defaultHeights, inputError: e.message };
-    }
-  }, [heightsInput]);
+  const [heights, setHeights] = useState(defaultHeights)
   const [inputValue, setInputValue] = useState(JSON.stringify(defaultHeights))
 
   const steps = useMemo(() => generateSteps(heights).map((current) => ({

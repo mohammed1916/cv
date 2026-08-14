@@ -98,12 +98,9 @@ export default function BTMaxPathVisualizer() {
       <ManualInputPanel
         fields={[{"key":"tree","label":"tree","type":"string"}]}
         values={{ tree: treeInput }}
-        onChange={(k, v) => { if (k === 'tree') setTreeInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'tree') setTreeInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
-        showExamples={false}
+        applyExample={applyExample}
       />
 
         <div className="btmps-panel">

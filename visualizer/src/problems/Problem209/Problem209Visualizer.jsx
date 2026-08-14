@@ -172,12 +172,10 @@ export default function Problem209Visualizer() {
       <ManualInputPanel
         fields={[{"key":"target","label":"target","type":"string"},{"key":"nums","label":"nums","type":"string"}]}
         values={{ target: targetInput, nums: numsInput }}
-        onChange={(k, v) => { if (k === 'target') setTargetInput(v); if (k === 'nums') setNumsInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'target') setTargetInput(v); if (k === 'nums') setNumsInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
     <div className="p209-panel-primary">

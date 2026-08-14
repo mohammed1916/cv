@@ -206,12 +206,9 @@ export default function UniquePathsVisualizer() {
       <ManualInputPanel
         fields={[{"key":"m","label":"m","type":"string"},{"key":"n","label":"n","type":"string"}]}
         values={{ m: mInput, n: nInput }}
-        onChange={(k, v) => { if (k === 'm') setMInput(v); if (k === 'n') setNInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'm') setMInput(v); if (k === 'n') setNInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
-        showExamples={false}
+        applyExample={applyExample}
       />
 
         <UniquePathsVisualization m={m} n={n} step={step} onApplyExample={applyExample} mInput={mInput} nInput={nInput} setMInput={setMInput} setNInput={setNInput} handleReset={handleReset} />

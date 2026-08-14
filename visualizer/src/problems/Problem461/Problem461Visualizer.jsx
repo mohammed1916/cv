@@ -504,11 +504,7 @@ export default function Problem461Visualizer() {
       <ManualInputPanel
         fields={[{"key":"x","label":"x","type":"string"},{"key":"y","label":"y","type":"string"}]}
         values={{ x: xInput, y: yInput }}
-        onChange={(k, v) => { if (k === 'x') setXInput(v); if (k === 'y') setYInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
+        onChange={(k, v) => { if (k === 'x') setXInput(v); if (k === 'y') setYInput(v); handleReset() }}
         showExamples={false}
       />
 

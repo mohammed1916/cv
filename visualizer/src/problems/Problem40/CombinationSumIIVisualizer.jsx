@@ -295,12 +295,10 @@ export default function CombinationSumIIVisualizer() {
       <ManualInputPanel
         fields={[{"key":"candidates","label":"candidates","type":"array"},{"key":"target","label":"target","type":"number"}]}
         values={{ candidates: candidatesInput, target: targetInput }}
-        onChange={(k, v) => { if (k === 'candidates') setCandidatesInput(v); if (k === 'target') setTargetInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'candidates') setCandidatesInput(v); if (k === 'target') setTargetInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
     <div className="csii-panel">

@@ -142,12 +142,9 @@ export default function MinimumWindowSubstringVisualizer() {
       <ManualInputPanel
         fields={[{"key":"s","label":"s","type":"string"},{"key":"t","label":"t","type":"string"}]}
         values={{ s: sInput, t: tInput }}
-        onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 't') setTInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 't') setTInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
-        showExamples={false}
+        applyExample={applyExample}
       />
 
     <div className="mws-panel">

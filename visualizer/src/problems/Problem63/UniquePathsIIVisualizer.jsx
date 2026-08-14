@@ -387,12 +387,8 @@ export default function UniquePathsIIVisualizer() {
       <ManualInputPanel
         fields={[{"key":"m","label":"m","type":"string"},{"key":"n","label":"n","type":"string"},{"key":"obstacleGrid","label":"obstacleGrid","type":"string"}]}
         values={{ m: mInput, n: nInput, obstacleGrid: obstacleGridInput }}
-        onChange={(k, v) => { if (k === 'm') setMInput(v); if (k === 'n') setNInput(v); if (k === 'obstacleGrid') setObstacleGridInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
-        
+        onChange={(k, v) => { if (k === 'm') setMInput(v); if (k === 'n') setNInput(v); if (k === 'obstacleGrid') setObstacleGridInput(v); handleReset() }}
+        showExamples={false}
       />
 
         <div className="upii-panel">

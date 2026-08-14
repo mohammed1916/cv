@@ -32,7 +32,7 @@ const EXAMPLES = getExamples('intersection-two-linked-lists');
 
 // Build flat node list for each pointer traversal
 // Total nodes: listA + shared, listB + shared (shared pointer is same index >= listA.length)
-function buildNodeSequences(ex) {
+function buildNodeSequences({ listA, listB, shared }) {
   // nodeA: listA[0..] then shared[0..]
   // nodeB: listB[0..] then shared[0..]
   // After end of A, redirect to headB (index m in nodeB), etc.
@@ -45,7 +45,7 @@ function buildNodeSequences(ex) {
 
 function generateSteps({ listA, listB, shared, intersectVal }) {
   const steps = [];
-  const { A, B, intersectIdxA, intersectIdxB } = buildNodeSequences(ex);
+  const { A, B, intersectIdxA, intersectIdxB } = buildNodeSequences({ listA, listB, shared });
   // Simulate two-pointer
   // pA: 0..A.length-1 then null then B[0]..B[intersectIdxB] (or end)
   // We'll track as [list, idx] where list is 'A'|'B'|'null'
@@ -166,12 +166,12 @@ export default function IntersectionTwoLinkedListsVisualizer() {
       return { listA: "[4,1]", listB: "[5,6,1]", shared: "[8,4,5]", intersectVal: 8, inputError: e.message };
     }
   }, [listAInput, listBInput, sharedInput, intersectValInput]);
-  const steps = useMemo(() => generateSteps(ex), [listA, listB, shared, intersectVal]);
+  const steps = useMemo(() => generateSteps({ listA, listB, shared, intersectVal }), [listA, listB, shared, intersectVal]);
   const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
   const applyEx = useCallback((e) => { setEx(e); setListAInput(JSON.stringify(e.listA)); setListBInput(JSON.stringify(e.listB)); setSharedInput(JSON.stringify(e.shared)); setIntersectValInput(String(e.intersectVal)); handleReset(); }, [handleReset]);;
-  const { A, B, intersectIdxA, intersectIdxB } = buildNodeSequences(ex);
+  const { A, B, intersectIdxA, intersectIdxB } = buildNodeSequences({ listA, listB, shared });
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
   // Extract panels

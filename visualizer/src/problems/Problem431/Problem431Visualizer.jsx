@@ -206,15 +206,11 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem431Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [rootInput, setRootInput] = useState("[1,null,[3,[5,6],2,4],null,[2]]");
-  const { root, inputError } = useMemo(() => {
-    try {
-      const parsedRoot = JSON.parse(rootInput); if (!Array.isArray(parsedRoot)) throw new Error('root must be an array');
-      return { root: parsedRoot, inputError: '' };
-    } catch (e) {
-      return { root: "[1,null,[3,[5,6],2,4],null,[2]]", inputError: e.message };
-    }
-  }, [rootInput]);
+  const [naryStructureInput, setNaryStructureInput] = useState(EXAMPLES[0].naryStructure);
+  const { naryStructure, inputError } = useMemo(() => {
+    if (!naryStructureInput.trim()) return { naryStructure: '', inputError: 'naryStructure must not be empty' };
+    return { naryStructure: naryStructureInput, inputError: '' };
+  }, [naryStructureInput]);
   const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(
@@ -224,7 +220,7 @@ export default function Problem431Visualizer() {
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); setRootInput(JSON.stringify(e.root)); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); setNaryStructureInput(e.naryStructure); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()

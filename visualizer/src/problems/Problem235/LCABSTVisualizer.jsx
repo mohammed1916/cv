@@ -246,12 +246,10 @@ export default function LCABSTVisualizer() {
       <ManualInputPanel
         fields={[{"key":"arr","label":"arr","type":"string"},{"key":"p","label":"p","type":"string"},{"key":"q","label":"q","type":"string"}]}
         values={{ arr: arrInput, p: pInput, q: qInput }}
-        onChange={(k, v) => { if (k === 'arr') setArrInput(v); if (k === 'p') setPInput(v); if (k === 'q') setQInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'arr') setArrInput(v); if (k === 'p') setPInput(v); if (k === 'q') setQInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
         <TreeVisualizationPanel

@@ -352,12 +352,11 @@ export default function WordSearchVisualizer() {
       <ManualInputPanel
         fields={[{"key":"board","label":"board","type":"string"},{"key":"word","label":"word","type":"string"}]}
         values={{ board: boardInput, word: wordInput }}
-        onChange={(k, v) => { if (k === 'board') setBoardInput(v); if (k === 'word') setWordInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'board') setBoardInput(v); if (k === 'word') setWordInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        activeLabel={EXAMPLES[selected]?.label}
+        applyExample={(e) => applyExample(EXAMPLES.indexOf(e))}
         inputError={inputError}
-        showExamples={false}
       />
 
     <VisualizationPanel

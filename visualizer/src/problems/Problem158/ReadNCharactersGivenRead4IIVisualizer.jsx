@@ -42,7 +42,6 @@ const SOLUTION_CODE_INLINE = [
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(file, callSequence) {
-const applyInput = useCallback((e) => { setInput(e); setFileInput(String(e.file)); setCallsInput(JSON.stringify(e.calls)); handleReset(); }, [handleReset]);
     const steps = []
 
   if (!file || file.length === 0) {

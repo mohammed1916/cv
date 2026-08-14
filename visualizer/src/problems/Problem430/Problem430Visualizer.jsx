@@ -183,15 +183,11 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem430Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [headInput, setHeadInput] = useState("[1,null,2,3,null,[[4,null,5,6]]]");
-  const { head, inputError } = useMemo(() => {
-    try {
-      const parsedHead = JSON.parse(headInput); if (!Array.isArray(parsedHead)) throw new Error('head must be an array');
-      return { head: parsedHead, inputError: '' };
-    } catch (e) {
-      return { head: "[1,null,2,3,null,[[4,null,5,6]]]", inputError: e.message };
-    }
-  }, [headInput]);
+  const [structureInput, setStructureInput] = useState(EXAMPLES[0].structure);
+  const { structure, inputError } = useMemo(() => {
+    if (!structureInput.trim()) return { structure: '', inputError: 'structure must not be empty' };
+    return { structure: structureInput, inputError: '' };
+  }, [structureInput]);
   const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(
@@ -201,7 +197,7 @@ export default function Problem430Visualizer() {
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); setHeadInput(JSON.stringify(e.head)); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); setStructureInput(e.structure); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()

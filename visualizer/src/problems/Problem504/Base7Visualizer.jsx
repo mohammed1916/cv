@@ -331,12 +331,9 @@ export default function Base7Visualizer() {
       <ManualInputPanel
         fields={[{"key":"num","label":"num","type":"string"}]}
         values={{ num: numInput }}
-        onChange={(k, v) => { if (k === 'num') setNumInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
-        
+        onChange={(k, v) => { if (k === 'num') setNumInput(v); handleReset() }}
+        examples={examples}
+        applyExample={applyExample}
       />
 
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />

@@ -7,7 +7,6 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './SwimInRisingWaterVisualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const SOLUTION_CODE = [
@@ -188,15 +187,7 @@ function SwimInRisingWaterVisualizer() {
     [1, 3],
   ]
 
-  const [gridInput, setGridInput] = useState("defaultGrid");
-  const { grid, inputError } = useMemo(() => {
-    try {
-      const parsedGrid = gridInput;
-      return { grid: parsedGrid, inputError: '' };
-    } catch (e) {
-      return { grid: defaultGrid, inputError: e.message };
-    }
-  }, [gridInput]);
+  const [grid, setGrid] = useState(defaultGrid)
   const [inputValue, setInputValue] = useState(JSON.stringify(defaultGrid))
 
   const steps = useMemo(() => generateSteps(grid), [grid])

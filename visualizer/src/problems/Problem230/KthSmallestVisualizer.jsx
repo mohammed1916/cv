@@ -138,12 +138,9 @@ export default function KthSmallestVisualizer() {
       <ManualInputPanel
         fields={[{"key":"arr","label":"arr","type":"string"},{"key":"k","label":"k","type":"string"}]}
         values={{ arr: arrInput, k: kInput }}
-        onChange={(k, v) => { if (k === 'arr') setArrInput(v); if (k === 'k') setKInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'arr') setArrInput(v); if (k === 'k') setKInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
-        showExamples={false}
+        applyExample={applyExample}
       />
 
             <div className="ks-top">

@@ -229,12 +229,10 @@ export default function Problem391Visualizer() {
       <ManualInputPanel
         fields={[{"key":"rectangles","label":"rectangles","type":"array"}]}
         values={{ rectangles: rectanglesInput }}
-        onChange={(k, v) => { if (k === 'rectangles') setRectanglesInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'rectangles') setRectanglesInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
       <div style={{ display: 'flex', gap: 16, flex: 1 }}>

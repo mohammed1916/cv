@@ -252,12 +252,10 @@ export default function Problem400Visualizer() {
       <ManualInputPanel
         fields={[{"key":"n","label":"n","type":"number"}]}
         values={{ n: nInput }}
-        onChange={(k, v) => { if (k === 'n') setNInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'n') setNInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
     <div className="p400-panel-primary">

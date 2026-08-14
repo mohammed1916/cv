@@ -227,7 +227,7 @@ export default function RelativeRanksVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setNums(e.nums); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setNumsInput(JSON.stringify(e.nums)); handleReset(); }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,

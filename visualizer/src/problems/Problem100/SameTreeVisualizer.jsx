@@ -308,12 +308,11 @@ export default function SameTreeVisualizer() {
       <ManualInputPanel
         fields={[{"key":"p","label":"p","type":"string"},{"key":"q","label":"q","type":"string"}]}
         values={{ p: pInput, q: qInput }}
-        onChange={(k, v) => { if (k === 'p') setPInput(v); if (k === 'q') setQInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'p') setPInput(v); if (k === 'q') setQInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        activeLabel={EXAMPLES[selected]?.label}
+        applyExample={(e) => applyExample(EXAMPLES.indexOf(e))}
         inputError={inputError}
-        showExamples={false}
       />
 
         <div className="st-panel main">

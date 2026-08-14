@@ -188,12 +188,10 @@ export default function Problem395Visualizer() {
       <ManualInputPanel
         fields={[{"key":"s","label":"s","type":"string"},{"key":"k","label":"k","type":"number"}]}
         values={{ s: sInput, k: kInput }}
-        onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 'k') setKInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 'k') setKInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
       <div style={{ display: 'flex', gap: 16, flex: 1 }}>

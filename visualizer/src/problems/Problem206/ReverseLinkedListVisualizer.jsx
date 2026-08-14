@@ -280,12 +280,9 @@ export default function ReverseLinkedListVisualizer() {
       <ManualInputPanel
         fields={[{"key":"val","label":"val","type":"array"}]}
         values={{ val: valInput }}
-        onChange={(k, v) => { if (k === 'val') setValInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
+        onChange={(k, v) => { if (k === 'val') setValInput(v); handleReset() }}
         showExamples={false}
+        inputError={inputError}
       />
 
         <div className="rll-top">

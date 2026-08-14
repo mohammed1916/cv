@@ -54,7 +54,6 @@ function buildList(nodes, cyclePos) {
 }
 
 function generateSteps(nodes, cyclePos) {
-const applyInput = useCallback((e) => { setInput(e); setNodesInput(JSON.stringify(e.nodes)); setPosInput(String(e.pos)); handleReset(); }, [handleReset]);
     const steps = []
 
   const list = buildList(nodes, cyclePos)

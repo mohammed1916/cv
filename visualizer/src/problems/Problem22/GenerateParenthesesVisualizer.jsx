@@ -103,7 +103,7 @@ export default function GenerateParenthesesVisualizer() {
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
 
     const applyExample = useCallback(
-        (ex) => { setN(ex.n); handleReset(); },
+        (ex) => { setNInput(ex.n); handleReset(); },
         [handleReset]
     );
 

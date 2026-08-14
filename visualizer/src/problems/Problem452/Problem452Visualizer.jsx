@@ -449,11 +449,7 @@ export default function Problem452Visualizer() {
       <ManualInputPanel
         fields={[{"key":"points","label":"points","type":"string"}]}
         values={{ points: pointsInput }}
-        onChange={(k, v) => { if (k === 'points') setPointsInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
+        onChange={(k, v) => { if (k === 'points') setPointsInput(v); handleReset() }}
         showExamples={false}
       />
 

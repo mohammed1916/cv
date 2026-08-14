@@ -124,12 +124,11 @@ export default function BestTimeBuySellStockIIIVisualizer() {
       <ManualInputPanel
         fields={[{"key":"prices","label":"prices","type":"array"}]}
         values={{ prices: pricesInput }}
-        onChange={(k, v) => { if (k === 'prices') setPricesInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'prices') setPricesInput(v); handleReset() }}
         examples={EXAMPLES}
         activeLabel={ex?.label}
         applyExample={applyEx}
         inputError={inputError}
-        showExamples={false}
       />
 
         <div className="bt3-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>

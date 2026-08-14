@@ -131,12 +131,9 @@ export default function TopKFrequentVisualizer() {
       <ManualInputPanel
         fields={[{"key":"nums","label":"nums","type":"string"},{"key":"k","label":"k","type":"string"}]}
         values={{ nums: numsInput, k: kInput }}
-        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'k') setKInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'k') setKInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
-        showExamples={false}
+        applyExample={applyExample}
       />
 
             <div className="tkf-controls-row">

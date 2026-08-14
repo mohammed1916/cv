@@ -197,12 +197,9 @@ export default function MultiplyStringsVisualizer() {
       <ManualInputPanel
         fields={[{"key":"num1","label":"num1","type":"string"},{"key":"num2","label":"num2","type":"string"}]}
         values={{ num1: num1Input, num2: num2Input }}
-        onChange={(k, v) => { if (k === 'num1') setNum1Input(v); if (k === 'num2') setNum2Input(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
+        onChange={(k, v) => { if (k === 'num1') setNum1Input(v); if (k === 'num2') setNum2Input(v) }}
         showExamples={false}
+        inputError={inputError}
       />
 
       <div className="ms-container">

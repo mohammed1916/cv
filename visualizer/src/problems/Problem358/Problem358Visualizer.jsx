@@ -678,11 +678,7 @@ export default function Problem358Visualizer() {
       <ManualInputPanel
         fields={[{"key":"s","label":"s","type":"string"},{"key":"k","label":"k","type":"string"}]}
         values={{ s: sInput, k: kInput }}
-        onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 'k') setKInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
+        onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 'k') setKInput(v); handleReset() }}
         showExamples={false}
       />
 

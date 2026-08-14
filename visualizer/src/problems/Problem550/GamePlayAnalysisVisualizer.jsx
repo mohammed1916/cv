@@ -323,12 +323,10 @@ export default function GamePlayAnalysisVisualizer() {
       <ManualInputPanel
         fields={[{"key":"activity","label":"activity","type":"array"}]}
         values={{ activity: activityInput }}
-        onChange={(k, v) => { if (k === 'activity') setActivityInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        onChange={(k, v) => { if (k === 'activity') setActivityInput(v); handleReset() }}
+        examples={examples}
+        applyExample={applyExample}
         inputError={inputError}
-        
       />
 
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />

@@ -292,12 +292,10 @@ export default function ThreeSumVisualizer() {
       <ManualInputPanel
         fields={[{"key":"nums","label":"nums","type":"array"}]}
         values={{ nums: numsInput }}
-        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>

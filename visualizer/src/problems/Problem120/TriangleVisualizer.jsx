@@ -219,6 +219,14 @@ export default function TriangleVisualizer() {
 
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"triangle","label":"triangle","type":"string"}]}
+        values={{ triangle: triangleInput }}
+        onChange={(k, v) => { if (k === 'triangle') setTriangleInput(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="tri-panel">
       <VisualizationPanel step={step} />
     </div>

@@ -524,12 +524,10 @@ export default function EmployeeFreeTimeVisualizer() {
       <ManualInputPanel
         fields={[{"key":"schedules","label":"schedules","type":"array"}]}
         values={{ schedules: schedulesInput }}
-        onChange={(k, v) => { if (k === 'schedules') setSchedulesInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        onChange={(k, v) => { if (k === 'schedules') setSchedulesInput(v); handleReset() }}
+        examples={examples}
+        applyExample={applyExample}
         inputError={inputError}
-        
       />
 
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />

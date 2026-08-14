@@ -138,12 +138,10 @@ export default function ValidAnagramVisualizer() {
       <ManualInputPanel
         fields={[{"key":"s","label":"s","type":"string"},{"key":"t","label":"t","type":"string"}]}
         values={{ s: sInput, t: tInput }}
-        onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 't') setTInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 't') setTInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
             <div className="va-top">

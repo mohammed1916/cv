@@ -40,7 +40,6 @@ const SOLUTION_CODE = [
 ]
 
 function generateSteps(s, t) {
-const applyInput = useCallback((e) => { setInput(e); setSInput(String(e.s)); setTInput(String(e.t)); handleReset(); }, [handleReset]);
     const steps = []
   steps.push({
     activeLine: 1,

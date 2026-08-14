@@ -32,7 +32,6 @@ const SOLUTION_CODE = [
 ]
 
 function generateSteps(s) {
-const applyInput = useCallback((e) => { setInput(e); setSInput(String(e.s)); handleReset(); }, [handleReset]);
     const steps = []
   steps.push({ activeLine: 1, s, message: `Convert "${s}" to column number`, relatedLines: [1] })
   steps.push({ activeLine: 2, result: 0, message: 'Initialize result = 0', relatedLines: [2] })

@@ -38,7 +38,7 @@ function generateSteps(sIn) {
 
 function RopeFlipVisualization({ arr, step, ex }) {
   const l = step?.l ?? 0;
-  const r = step?.r ?? (s.length - 1);
+  const r = step?.r ?? (arr.length - 1);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24, padding: 16 }}>

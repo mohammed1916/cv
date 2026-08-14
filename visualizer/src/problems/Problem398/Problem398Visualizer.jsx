@@ -201,12 +201,10 @@ export default function Problem398Visualizer() {
       <ManualInputPanel
         fields={[{"key":"nums","label":"nums","type":"array"},{"key":"target","label":"target","type":"number"}]}
         values={{ nums: numsInput, target: targetInput }}
-        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'target') setTargetInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'target') setTargetInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
       <div style={{ display: 'flex', gap: 16, flex: 1 }}>

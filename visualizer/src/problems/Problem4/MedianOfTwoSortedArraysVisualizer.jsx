@@ -682,12 +682,9 @@ export default function MedianOfTwoSortedArraysVisualizer() {
       <ManualInputPanel
         fields={[{"key":"nums1","label":"nums1","type":"string"},{"key":"nums2","label":"nums2","type":"string"}]}
         values={{ nums1: nums1Input, nums2: nums2Input }}
-        onChange={(k, v) => { if (k === 'nums1') setNums1Input(v); if (k === 'nums2') setNums2Input(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'nums1') setNums1Input(v); if (k === 'nums2') setNums2Input(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
-        showExamples={false}
+        applyExample={applyExample}
       />
 
     <div className="median-panel median-input-panel">

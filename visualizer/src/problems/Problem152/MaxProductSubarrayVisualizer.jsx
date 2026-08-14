@@ -119,12 +119,10 @@ export default function MaxProductSubarrayVisualizer() {
       <ManualInputPanel
         fields={[{"key":"nums","label":"nums","type":"string"}]}
         values={{ nums: numsInput }}
-        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
         <div className="mps-panel">

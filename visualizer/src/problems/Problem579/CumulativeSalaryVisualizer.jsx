@@ -273,12 +273,10 @@ export default function CumulativeSalaryVisualizer() {
       <ManualInputPanel
         fields={[{"key":"employees","label":"employees","type":"array"}]}
         values={{ employees: employeesInput }}
-        onChange={(k, v) => { if (k === 'employees') setEmployeesInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'employees') setEmployeesInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
       <ResizableSplitPanels

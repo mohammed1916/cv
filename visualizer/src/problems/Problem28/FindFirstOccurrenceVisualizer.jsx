@@ -180,12 +180,10 @@ export default function FindFirstOccurrenceVisualizer({ problem }) {
       <ManualInputPanel
         fields={[{"key":"haystack","label":"haystack","type":"string"},{"key":"needle","label":"needle","type":"string"}]}
         values={{ haystack: haystackInput, needle: needleInput }}
-        onChange={(k, v) => { if (k === 'haystack') setHaystackInput(v); if (k === 'needle') setNeedleInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'haystack') setHaystackInput(v); if (k === 'needle') setNeedleInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
     <div className="ffo-panel" style={{ flex: 1 }}>

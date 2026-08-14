@@ -22,7 +22,6 @@ const SOLUTION_CODE = [
 const EXAMPLES = getExamples('min-cost-climbing-stairs')
 
 function generateSteps(cost) {
-const applyEx = useCallback((e) => { setCostInput(JSON.stringify(e.cost)); handleReset(); }, [handleReset]);
       const steps = []
     const n = cost.length
     const dp = new Array(n + 1).fill(null)

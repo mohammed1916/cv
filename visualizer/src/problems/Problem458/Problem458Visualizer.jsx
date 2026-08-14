@@ -461,11 +461,7 @@ export default function Problem458Visualizer() {
       <ManualInputPanel
         fields={[{"key":"buckets","label":"buckets","type":"string"},{"key":"minutesToDie","label":"minutesToDie","type":"string"},{"key":"minutesToTest","label":"minutesToTest","type":"string"}]}
         values={{ buckets: bucketsInput, minutesToDie: minutesToDieInput, minutesToTest: minutesToTestInput }}
-        onChange={(k, v) => { if (k === 'buckets') setBucketsInput(v); if (k === 'minutesToDie') setMinutesToDieInput(v); if (k === 'minutesToTest') setMinutesToTestInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
+        onChange={(k, v) => { if (k === 'buckets') setBucketsInput(v); if (k === 'minutesToDie') setMinutesToDieInput(v); if (k === 'minutesToTest') setMinutesToTestInput(v); handleReset() }}
         showExamples={false}
       />
 

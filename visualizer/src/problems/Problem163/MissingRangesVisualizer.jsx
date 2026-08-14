@@ -44,7 +44,6 @@ const SOLUTION_CODE_INLINE = [
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(nums, lower, upper) {
-const applyInput = useCallback((e) => { setInput(e); setNumsInput(JSON.stringify(e.nums)); setLowerInput(String(e.lower)); setUpperInput(String(e.upper)); handleReset(); }, [handleReset]);
     const steps = []
 
   steps.push({

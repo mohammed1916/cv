@@ -372,12 +372,10 @@ export default function KeyboardRowVisualizer() {
       <ManualInputPanel
         fields={[{"key":"words","label":"words","type":"array"}]}
         values={{ words: wordsInput }}
-        onChange={(k, v) => { if (k === 'words') setWordsInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        onChange={(k, v) => { if (k === 'words') setWordsInput(v); handleReset() }}
+        examples={examples}
+        applyExample={applyExample}
         inputError={inputError}
-        
       />
 
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />

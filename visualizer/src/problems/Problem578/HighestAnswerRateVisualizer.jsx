@@ -369,12 +369,10 @@ export default function HighestAnswerRateVisualizer() {
       <ManualInputPanel
         fields={[{"key":"questions","label":"questions","type":"array"},{"key":"answers","label":"answers","type":"array"}]}
         values={{ questions: questionsInput, answers: answersInput }}
-        onChange={(k, v) => { if (k === 'questions') setQuestionsInput(v); if (k === 'answers') setAnswersInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        onChange={(k, v) => { if (k === 'questions') setQuestionsInput(v); if (k === 'answers') setAnswersInput(v); handleReset() }}
+        examples={examples}
+        applyExample={applyExample}
         inputError={inputError}
-        
       />
 
       <DockableWorkspace

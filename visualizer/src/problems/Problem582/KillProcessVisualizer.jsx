@@ -362,12 +362,10 @@ export default function KillProcessVisualizer() {
       <ManualInputPanel
         fields={[{"key":"pid","label":"pid","type":"string"},{"key":"ppid","label":"ppid","type":"string"},{"key":"kill","label":"kill","type":"string"}]}
         values={{ pid: pidInput, ppid: ppidInput, kill: killInput }}
-        onChange={(k, v) => { if (k === 'pid') setPidInput(v); if (k === 'ppid') setPpidInput(v); if (k === 'kill') setKillInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'pid') setPidInput(v); if (k === 'ppid') setPpidInput(v); if (k === 'kill') setKillInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
       <div className="kp-top">

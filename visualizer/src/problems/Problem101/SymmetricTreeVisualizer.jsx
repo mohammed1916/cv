@@ -290,12 +290,11 @@ export default function SymmetricTreeVisualizer() {
       <ManualInputPanel
         fields={[{"key":"tree","label":"tree","type":"string"}]}
         values={{ tree: treeInput }}
-        onChange={(k, v) => { if (k === 'tree') setTreeInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'tree') setTreeInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        activeLabel={EXAMPLES[selected]?.label}
+        applyExample={(e) => applyExample(EXAMPLES.indexOf(e))}
         inputError={inputError}
-        showExamples={false}
       />
 
         <div className="sym-panel" style={{ position: 'relative', height: '100%' }}>

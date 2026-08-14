@@ -28,7 +28,6 @@ const SOLUTION_CODE = [
 ]
 
 function generateSteps(n) {
-const applyEx = useCallback((e) => { setNInput(String(e.n)); handleReset(); }, [handleReset]);
     const steps = []
   steps.push({ activeLine: 1, n, message: `Check if ${n} is happy`, relatedLines: [1] })
   steps.push({ activeLine: 2, message: "Initialize seen set", relatedLines: [2] })

@@ -175,12 +175,10 @@ export default function BestTimeBuySellStockVisualizer() {
       <ManualInputPanel
         fields={[{"key":"prices","label":"prices","type":"array"}]}
         values={{ prices: pricesInput }}
-        onChange={(k, v) => { if (k === 'prices') setPricesInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'prices') setPricesInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
         <section className="btbs-panel">

@@ -191,12 +191,10 @@ export default function ContainerWithMostWaterVisualizer() {
       <ManualInputPanel
         fields={[{"key":"height","label":"height","type":"array"}]}
         values={{ height: heightInput }}
-        onChange={(k, v) => { if (k === 'height') setHeightInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'height') setHeightInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
     <div className="cw-panel">

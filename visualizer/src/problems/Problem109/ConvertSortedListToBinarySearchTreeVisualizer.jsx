@@ -297,12 +297,10 @@ export default function ConvertSortedListToBinarySearchTreeVisualizer() {
       <ManualInputPanel
         fields={[{"key":"list","label":"list","type":"array"}]}
         values={{ list: listInput }}
-        onChange={(k, v) => { if (k === 'list') setListInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'list') setListInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
     <VisualizationPanel

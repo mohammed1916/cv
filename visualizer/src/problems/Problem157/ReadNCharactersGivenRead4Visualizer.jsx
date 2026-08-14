@@ -38,7 +38,6 @@ const SOLUTION_CODE_INLINE = [
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(file, n) {
-const applyInput = useCallback((e) => { setInput(e); setFileInput(String(e.file)); setNInput(String(e.n)); handleReset(); }, [handleReset]);
     const steps = []
 
   if (!file || file.length === 0) {

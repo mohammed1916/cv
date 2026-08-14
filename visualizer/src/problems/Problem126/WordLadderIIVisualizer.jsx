@@ -45,7 +45,6 @@ const SOLUTION_CODE_INLINE = [
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(beginWord, endWord, wordList) {
-const applyInput = useCallback((e) => { setInput(e); setBeginWordInput(String(e.beginWord)); setEndWordInput(String(e.endWord)); setWordListInput(JSON.stringify(e.wordList)); handleReset(); }, [handleReset]);
     const steps = []
 
   if (!wordList.includes(endWord)) {

@@ -134,12 +134,10 @@ export default function RedundantConnectionVisualizer() {
       <ManualInputPanel
         fields={[{"key":"edges","label":"edges","type":"string"}]}
         values={{ edges: edgesInput }}
-        onChange={(k, v) => { if (k === 'edges') setEdgesInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'edges') setEdgesInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>

@@ -141,12 +141,9 @@ export default function EncodeDecodeVisualizer() {
       <ManualInputPanel
         fields={[{"key":"strs","label":"strs","type":"array"}]}
         values={{ strs: strsInput }}
-        onChange={(k, v) => { if (k === 'strs') setStrsInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'strs') setStrsInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
-        showExamples={false}
+        applyExample={applyExample}
       />
 
             <div className="ed-controls-row">

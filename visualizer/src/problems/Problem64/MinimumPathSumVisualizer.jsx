@@ -312,12 +312,10 @@ export default function MinimumPathSumVisualizer() {
       <ManualInputPanel
         fields={[{"key":"grid","label":"grid","type":"array"}]}
         values={{ grid: gridInput }}
-        onChange={(k, v) => { if (k === 'grid') setGridInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'grid') setGridInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
     <MinimumPathSumVisualization

@@ -153,12 +153,9 @@ export default function SubtreeVisualizer() {
       <ManualInputPanel
         fields={[{"key":"root","label":"root","type":"string"},{"key":"sub","label":"sub","type":"string"}]}
         values={{ root: rootInput, sub: subInput }}
-        onChange={(k, v) => { if (k === 'root') setRootInput(v); if (k === 'sub') setSubInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'root') setRootInput(v); if (k === 'sub') setSubInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
-        showExamples={false}
+        applyExample={applyExample}
       />
 
             <div className="sot-controls-row">

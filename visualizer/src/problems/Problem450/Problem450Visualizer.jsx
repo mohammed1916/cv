@@ -482,11 +482,7 @@ export default function Problem450Visualizer() {
       <ManualInputPanel
         fields={[{"key":"tree","label":"tree","type":"string"},{"key":"key","label":"key","type":"string"}]}
         values={{ tree: treeInput, key: keyInput }}
-        onChange={(k, v) => { if (k === 'tree') setTreeInput(v); if (k === 'key') setKeyInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
+        onChange={(k, v) => { if (k === 'tree') setTreeInput(v); if (k === 'key') setKeyInput(v); handleReset() }}
         showExamples={false}
       />
 

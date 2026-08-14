@@ -262,12 +262,11 @@ export default function PascalsTriangleVisualizer() {
       <ManualInputPanel
         fields={[{"key":"numRows","label":"numRows","type":"string"}]}
         values={{ numRows: numRowsInput }}
-        onChange={(k, v) => { if (k === 'numRows') setNumRowsInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'numRows') setNumRowsInput(v); handleReset() }}
         examples={EXAMPLES}
         activeLabel={ex?.label}
         applyExample={applyEx}
         inputError={inputError}
-        showExamples={false}
       />
 
     <div className="pt-panel">

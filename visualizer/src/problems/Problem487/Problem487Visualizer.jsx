@@ -240,7 +240,7 @@ export default function Problem487Visualizer() {
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex, k]
+    [inputNums, k]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -277,7 +277,7 @@ export default function Problem487Visualizer() {
       title: '🔄 Max Consecutive Ones III',
       content: (
         <VisualizationPanel
-          nums={nums}
+          nums={inputNums}
           step={step}
           applyEx={applyEx}
           k={k}

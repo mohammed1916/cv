@@ -232,7 +232,7 @@ export default function PerfectNumberVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setN(e.n); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setNInput(e.n); handleReset(); }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,

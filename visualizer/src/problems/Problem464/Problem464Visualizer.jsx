@@ -506,11 +506,7 @@ export default function Problem464Visualizer() {
       <ManualInputPanel
         fields={[{"key":"maxChoosable","label":"maxChoosable","type":"string"},{"key":"desiredTotal","label":"desiredTotal","type":"string"}]}
         values={{ maxChoosable: maxChoosableInput, desiredTotal: desiredTotalInput }}
-        onChange={(k, v) => { if (k === 'maxChoosable') setMaxChoosableInput(v); if (k === 'desiredTotal') setDesiredTotalInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
+        onChange={(k, v) => { if (k === 'maxChoosable') setMaxChoosableInput(v); if (k === 'desiredTotal') setDesiredTotalInput(v); handleReset() }}
         showExamples={false}
       />
 

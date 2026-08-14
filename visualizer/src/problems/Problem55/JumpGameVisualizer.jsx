@@ -135,12 +135,10 @@ export default function JumpGameVisualizer() {
       <ManualInputPanel
         fields={[{"key":"nums","label":"nums","type":"array"}]}
         values={{ nums: numsInput }}
-        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
         <section className="jg-panel">

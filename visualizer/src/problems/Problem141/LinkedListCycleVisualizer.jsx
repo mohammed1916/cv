@@ -148,8 +148,8 @@ export default function LinkedListCycleVisualizer() {
     const step = stepIndex >= 0 ? steps[stepIndex] : null
 
     const applyExample = useCallback((ex) => {
-        setNodeCount(ex.nodeCount)
-        setTailTo(ex.tail)
+        setNodeCountInput(ex.nodeCount)
+        setTailToInput(ex.tail)
         setTailDesc(ex.label)
         handleReset()
     }, [handleReset])
@@ -180,7 +180,7 @@ export default function LinkedListCycleVisualizer() {
                     <select
                         className="llc-select"
                         value={nodeCount}
-                        onChange={(e) => { setNodeCount(Number(e.target.value)); handleReset() }}
+                        onChange={(e) => { setNodeCountInput(Number(e.target.value)); handleReset() }}
                     >
                         {[2, 3, 4, 5, 6, 7, 8].map(n => <option key={n} value={n}>{n}</option>)}
                     </select>
@@ -190,7 +190,7 @@ export default function LinkedListCycleVisualizer() {
                     <select
                         className="llc-select"
                         value={tailTo}
-                        onChange={(e) => { setTailTo(Number(e.target.value)); setTailDesc('custom'); handleReset() }}
+                        onChange={(e) => { setTailToInput(Number(e.target.value)); setTailDesc('custom'); handleReset() }}
                     >
                         <option value={-1}>None (no cycle)</option>
                         {nodes.map(n => <option key={n} value={n}>Node {n}</option>)}
@@ -387,7 +387,7 @@ export default function LinkedListCycleVisualizer() {
                         <select
                             className="llc-select"
                             value={nodeCount}
-                            onChange={(e) => { setNodeCount(Number(e.target.value)); handleReset() }}
+                            onChange={(e) => { setNodeCountInput(Number(e.target.value)); handleReset() }}
                         >
                             {[2, 3, 4, 5, 6, 7, 8].map(n => <option key={n} value={n}>{n}</option>)}
                         </select>
@@ -397,7 +397,7 @@ export default function LinkedListCycleVisualizer() {
                         <select
                             className="llc-select"
                             value={tailTo}
-                            onChange={(e) => { setTailTo(Number(e.target.value)); setTailDesc('custom'); handleReset() }}
+                            onChange={(e) => { setTailToInput(Number(e.target.value)); setTailDesc('custom'); handleReset() }}
                         >
                             <option value={-1}>None (no cycle)</option>
                             {nodes.map(n => <option key={n} value={n}>Node {n}</option>)}

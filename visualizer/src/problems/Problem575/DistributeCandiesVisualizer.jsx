@@ -411,12 +411,10 @@ export default function DistributeCandiesVisualizer() {
       <ManualInputPanel
         fields={[{"key":"candies","label":"candies","type":"array"}]}
         values={{ candies: candiesInput }}
-        onChange={(k, v) => { if (k === 'candies') setCandiesInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        onChange={(k, v) => { if (k === 'candies') setCandiesInput(v); handleReset() }}
+        examples={examples}
+        applyExample={applyExample}
         inputError={inputError}
-        
       />
 
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />

@@ -188,12 +188,10 @@ export default function MergeIntervalsVisualizer() {
       <ManualInputPanel
         fields={[{"key":"intervals","label":"intervals","type":"array"}]}
         values={{ intervals: intervalsInput }}
-        onChange={(k, v) => { if (k === 'intervals') setIntervalsInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'intervals') setIntervalsInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
     <div className="mi-panel">

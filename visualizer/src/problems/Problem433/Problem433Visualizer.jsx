@@ -233,19 +233,17 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem433Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [startGeneInput, setStartGeneInput] = useState("AACCCCCCCCCCCCCCCCCC");
-  const [endGeneInput, setEndGeneInput] = useState("AACCCCCCCCCCCCCCCCCC");
-  const [bankInput, setBankInput] = useState("[\"AACCCCCCCCCCCCCCCCCC\"]");
-  const { startGene, endGene, bank, inputError } = useMemo(() => {
+  const [startInput, setStartInput] = useState(EXAMPLES[0].start);
+  const [endInput, setEndInput] = useState(EXAMPLES[0].end);
+  const [bankInput, setBankInput] = useState(JSON.stringify(EXAMPLES[0].bank));
+  const { start, end, bank, inputError } = useMemo(() => {
     try {
-      const parsedStartGene = startGeneInput;
-      const parsedEndGene = endGeneInput;
       const parsedBank = JSON.parse(bankInput); if (!Array.isArray(parsedBank)) throw new Error('bank must be an array');
-      return { startGene: parsedStartGene, endGene: parsedEndGene, bank: parsedBank, inputError: '' };
+      return { start: startInput, end: endInput, bank: parsedBank, inputError: '' };
     } catch (e) {
-      return { startGene: "AACCCCCCCCCCCCCCCCCC", endGene: "AACCCCCCCCCCCCCCCCCC", bank: "[\"AACCCCCCCCCCCCCCCCCC\"]", inputError: e.message };
+      return { start: EXAMPLES[0].start, end: EXAMPLES[0].end, bank: EXAMPLES[0].bank, inputError: e.message };
     }
-  }, [startGeneInput, endGeneInput, bankInput]);
+  }, [startInput, endInput, bankInput]);
   const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
   const steps = useMemo(
@@ -255,7 +253,7 @@ export default function Problem433Visualizer() {
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setEx(e); setStartGeneInput(String(e.startGene)); setEndGeneInput(String(e.endGene)); setBankInput(JSON.stringify(e.bank)); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); setStartInput(e.start); setEndInput(e.end); setBankInput(JSON.stringify(e.bank)); handleReset(); }, [handleReset]);
 
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()

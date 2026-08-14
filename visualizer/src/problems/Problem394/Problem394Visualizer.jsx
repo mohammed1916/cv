@@ -11,7 +11,6 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./Problem394Visualizer.css";
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const PATTERNS = []
 
 // Map which code line corresponds to which pattern
@@ -138,18 +137,7 @@ export default function Problem394Visualizer() {
                                     width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center',
                                     backgroundColor: colors[type], border: isCur ? '3px solid #0ea5e9' : '1px solid #cbd5e1',
                                     borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: '#1e293b'
-                                }}>
-      <ManualInputPanel
-        fields={[{"key":"s","label":"s","type":"string"}]}
-        values={{ s: sInput }}
-        onChange={(k, v) => { if (k === 's') setSInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
-        showExamples={false}
-      />
-{ch}</motion.div>
+                                }}>{ch}</motion.div>
                             );
                         })}
                     </div>

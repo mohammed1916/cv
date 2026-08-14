@@ -515,12 +515,10 @@ export default function FindCelebrityVisualizer() {
       <ManualInputPanel
         fields={[{"key":"matrix","label":"matrix","type":"array"}]}
         values={{ matrix: matrixInput }}
-        onChange={(k, v) => { if (k === 'matrix') setMatrixInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        onChange={(k, v) => { if (k === 'matrix') setMatrixInput(v); handleReset() }}
+        examples={examples}
+        applyExample={applyExample}
         inputError={inputError}
-        
       />
 
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />

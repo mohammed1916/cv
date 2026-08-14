@@ -39,7 +39,6 @@ function buildList(arr) {
 }
 
 function generateSteps(head, val) {
-const applyEx = useCallback((e) => { setHeadInput(JSON.stringify(e.head)); setValInput(String(e.val)); handleReset(); }, [handleReset]);
     const steps = []
   steps.push({ activeLine: 1, head, val, message: `Remove all ${val} from list`, relatedLines: [1] })
   steps.push({ activeLine: 2, message: "Create dummy node", relatedLines: [2, 3] })

@@ -59,7 +59,6 @@ function buildTree(arr) {
 }
 
 function generateSteps(root, targetSum) {
-const applyInput = useCallback((e) => { setInput(e); setRootInput(JSON.stringify(e.root)); setTargetSumInput(String(e.targetSum)); handleReset(); }, [handleReset]);
     const steps = []
   const tree = buildTree(root)
 

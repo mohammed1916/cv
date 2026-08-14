@@ -334,12 +334,10 @@ export default function Problem399Visualizer() {
       <ManualInputPanel
         fields={[{"key":"equations","label":"equations","type":"array"},{"key":"values","label":"values","type":"array"},{"key":"query","label":"query","type":"array"}]}
         values={{ equations: equationsInput, values: valuesInput, query: queryInput }}
-        onChange={(k, v) => { if (k === 'equations') setEquationsInput(v); if (k === 'values') setValuesInput(v); if (k === 'query') setQueryInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'equations') setEquationsInput(v); if (k === 'values') setValuesInput(v); if (k === 'query') setQueryInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
     <div className="p399-panel-primary">

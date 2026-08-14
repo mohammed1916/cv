@@ -84,7 +84,7 @@ function generateSteps(nums) {
     return steps;
 }
 
-function VisualizationPanel({ step, ex, onExampleChange }) {
+function VisualizationPanel({ step, ex, nums, onExampleChange }) {
     const n = nums.length;
     const slow = step?.slow ?? 0;
     const fast = step?.fast ?? 0;
@@ -192,9 +192,9 @@ export default function PalindromeLinkedListVisualizer() {
         {
             id: 'viz',
             title: 'Visualization',
-            content: <VisualizationPanel step={step} ex={ex} onExampleChange={applyEx} />,
+            content: <VisualizationPanel step={step} ex={ex} nums={nums} onExampleChange={applyEx} />,
         },
-    ], [step, setActiveLineDom, autoScrollCode, ex, applyEx]);
+    ], [step, setActiveLineDom, autoScrollCode, ex, nums, applyEx]);
 
     return (
         <div className="problem-shell">

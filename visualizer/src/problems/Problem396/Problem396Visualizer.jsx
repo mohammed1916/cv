@@ -243,12 +243,10 @@ export default function Problem396Visualizer() {
       <ManualInputPanel
         fields={[{"key":"nums","label":"nums","type":"string"}]}
         values={{ nums: numsInput }}
-        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
       <div style={{ display: 'flex', gap: 16, flex: 1 }}>

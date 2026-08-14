@@ -153,12 +153,10 @@ export default function CourseScheduleIIVisualizer() {
       <ManualInputPanel
         fields={[{"key":"num","label":"num","type":"number"},{"key":"pre","label":"pre","type":"array"}]}
         values={{ num: numInput, pre: preInput }}
-        onChange={(k, v) => { if (k === 'num') setNumInput(v); if (k === 'pre') setPreInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'num') setNumInput(v); if (k === 'pre') setPreInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
       <div className="cs2-top">

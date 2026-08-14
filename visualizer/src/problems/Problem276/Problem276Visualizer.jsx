@@ -75,7 +75,7 @@ export default function Problem276Visualizer() {
     const [currentStep, setCurrentStep] = useState(0)
 
     const example = examples[currentExample] || { input: [], output: [] }
-const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.stringify(examples[i].input)); handleReset(); }, [handleReset]);
+const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.stringify(examples[i].input)); setCurrentStep(0); }, [setCurrentStep]);
       const steps = useMemo(() => generateSteps(input), [input])
     const step = steps[currentStep] || steps[0]
 

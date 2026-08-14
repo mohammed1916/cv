@@ -42,7 +42,7 @@ const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 const EXAMPLES = getExamples('edit-distance');
 
-function DPTablePanel({ step, ex, dpTable, maxVal }) {
+function DPTablePanel({ step, w1, w2, dpTable, maxVal }) {
   return step && (
     <div className="ed-panel">
       <div className="ed-panel-label">DP Table</div>
@@ -82,7 +82,7 @@ function DPTablePanel({ step, ex, dpTable, maxVal }) {
   );
 }
 
-function InputPanel({ EXAMPLES, ex, applyEx, step }) {
+function InputPanel({ EXAMPLES, ex, applyEx, step, w1, w2 }) {
   return (
     <div className="ed-input-panel">
       <div className="ed-examples">
@@ -153,13 +153,13 @@ export default function EditDistanceVisualizer() {
   // Step 3: Extract panels into consts
   const inputPanel = (
     <div className="ed-panel">
-      <InputPanel EXAMPLES={EXAMPLES} ex={ex} applyEx={applyEx} step={step} />
+      <InputPanel EXAMPLES={EXAMPLES} ex={ex} applyEx={applyEx} step={step} w1={w1} w2={w2} />
     </div>
   );
 
   const tablePanel = (
     <div className="ed-panel">
-      <DPTablePanel step={step} ex={ex} dpTable={dpTable} maxVal={maxVal} />
+      <DPTablePanel step={step} w1={w1} w2={w2} dpTable={dpTable} maxVal={maxVal} />
     </div>
   );
 

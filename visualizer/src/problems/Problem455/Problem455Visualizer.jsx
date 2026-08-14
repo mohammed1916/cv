@@ -473,11 +473,7 @@ export default function Problem455Visualizer() {
       <ManualInputPanel
         fields={[{"key":"greed","label":"greed","type":"string"},{"key":"size","label":"size","type":"string"}]}
         values={{ greed: greedInput, size: sizeInput }}
-        onChange={(k, v) => { if (k === 'greed') setGreedInput(v); if (k === 'size') setSizeInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
+        onChange={(k, v) => { if (k === 'greed') setGreedInput(v); if (k === 'size') setSizeInput(v); handleReset() }}
         showExamples={false}
       />
 

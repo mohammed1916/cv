@@ -456,12 +456,10 @@ export default function MaxDistanceVisualizer() {
       <ManualInputPanel
         fields={[{"key":"array","label":"array","type":"array"}]}
         values={{ array: arrayInput }}
-        onChange={(k, v) => { if (k === 'array') setArrayInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        onChange={(k, v) => { if (k === 'array') setArrayInput(v); handleReset() }}
+        examples={examples}
+        applyExample={applyExample}
         inputError={inputError}
-        
       />
 
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />

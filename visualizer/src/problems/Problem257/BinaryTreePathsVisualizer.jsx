@@ -298,12 +298,10 @@ export default function BinaryTreePathsVisualizer() {
       <ManualInputPanel
         fields={[{"key":"arr","label":"arr","type":"string"}]}
         values={{ arr: arrInput }}
-        onChange={(k, v) => { if (k === 'arr') setArrInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'arr') setArrInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
             <DockableWorkspace

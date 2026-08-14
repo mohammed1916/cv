@@ -216,12 +216,10 @@ export default function LongestPalindromeVisualizer() {
       <ManualInputPanel
         fields={[{"key":"s","label":"s","type":"string"}]}
         values={{ s: sInput }}
-        onChange={(k, v) => { if (k === 's') setSInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 's') setSInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
       <div className="lpal-top">

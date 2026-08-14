@@ -469,12 +469,10 @@ export default function DeleteOperationVisualizer() {
       <ManualInputPanel
         fields={[{"key":"s1","label":"s1","type":"string"},{"key":"s2","label":"s2","type":"string"}]}
         values={{ s1: s1Input, s2: s2Input }}
-        onChange={(k, v) => { if (k === 's1') setS1Input(v); if (k === 's2') setS2Input(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        onChange={(k, v) => { if (k === 's1') setS1Input(v); if (k === 's2') setS2Input(v); handleReset() }}
+        examples={examples}
+        applyExample={applyExample}
         inputError={inputError}
-        
       />
 
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />

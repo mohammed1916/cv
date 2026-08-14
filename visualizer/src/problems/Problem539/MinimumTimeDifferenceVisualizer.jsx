@@ -363,12 +363,10 @@ export default function MinimumTimeDifferenceVisualizer() {
       <ManualInputPanel
         fields={[{"key":"times","label":"times","type":"array"}]}
         values={{ times: timesInput }}
-        onChange={(k, v) => { if (k === 'times') setTimesInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        onChange={(k, v) => { if (k === 'times') setTimesInput(v); handleReset() }}
+        examples={examples}
+        applyExample={applyExample}
         inputError={inputError}
-        
       />
 
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />

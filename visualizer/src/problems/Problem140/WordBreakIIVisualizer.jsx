@@ -44,7 +44,6 @@ const SOLUTION_CODE_INLINE = [
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(s, wordDict) {
-const applyInput = useCallback((e) => { setInput(e); setSInput(String(e.s)); setWordDictInput(JSON.stringify(e.wordDict)); handleReset(); }, [handleReset]);
     const steps = []
 
   if (!s || !wordDict || wordDict.length === 0) {

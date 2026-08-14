@@ -541,12 +541,9 @@ export default function ErectFenceVisualizer() {
       <ManualInputPanel
         fields={[{"key":"points","label":"points","type":"array"}]}
         values={{ points: pointsInput }}
-        onChange={(k, v) => { if (k === 'points') setPointsInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
-        
+        onChange={(k, v) => { if (k === 'points') setPointsInput(v); handleReset() }}
+        examples={examples}
+        applyExample={applyExample}
       />
 
       <DockableWorkspace

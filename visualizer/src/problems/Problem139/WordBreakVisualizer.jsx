@@ -243,12 +243,10 @@ export default function WordBreakVisualizer() {
       <ManualInputPanel
         fields={[{"key":"s","label":"s","type":"string"},{"key":"dict","label":"dict","type":"string"}]}
         values={{ s: sInput, dict: dictInput }}
-        onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 'dict') setDictInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 'dict') setDictInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
         <div className="wb-panel">

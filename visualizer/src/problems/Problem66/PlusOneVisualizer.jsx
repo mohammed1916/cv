@@ -57,7 +57,8 @@ function DominoChainVisualization({ arr, step, ex }) {
         <AnimatePresence>
           {arr.map((d, idx) => {
             const isActive = idx === activeI;
-            const isNew = idx === 0 && arr.length > digits.length;
+            // The prepend step is the only one that reports i === -1.
+            const isNew = idx === 0 && step?.i === -1;
             const isFalling = isActive && carry;
 
             return (

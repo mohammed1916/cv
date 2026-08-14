@@ -8,7 +8,6 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './MaximalRectangleVisualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const SOLUTION_CODE = [
@@ -172,15 +171,7 @@ function MaximalRectangleVisualizer() {
     ['1', '1', '1'],
   ]
 
-  const [matrixInput, setMatrixInput] = useState("defaultMatrix");
-  const { matrix, inputError } = useMemo(() => {
-    try {
-      const parsedMatrix = matrixInput;
-      return { matrix: parsedMatrix, inputError: '' };
-    } catch (e) {
-      return { matrix: defaultMatrix, inputError: e.message };
-    }
-  }, [matrixInput]);
+  const [matrix, setMatrix] = useState(defaultMatrix)
   const [inputValue, setInputValue] = useState(JSON.stringify(defaultMatrix))
 
   const steps = useMemo(() => generateSteps(matrix), [matrix])

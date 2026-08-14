@@ -344,12 +344,10 @@ export default function CountStudentsVisualizer() {
       <ManualInputPanel
         fields={[{"key":"students","label":"students","type":"array"}]}
         values={{ students: studentsInput }}
-        onChange={(k, v) => { if (k === 'students') setStudentsInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        onChange={(k, v) => { if (k === 'students') setStudentsInput(v); handleReset() }}
+        examples={examples}
+        applyExample={applyExample}
         inputError={inputError}
-        
       />
 
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />

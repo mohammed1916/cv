@@ -490,11 +490,7 @@ export default function Problem445Visualizer() {
       <ManualInputPanel
         fields={[{"key":"list1","label":"list1","type":"string"},{"key":"list2","label":"list2","type":"string"}]}
         values={{ list1: list1Input, list2: list2Input }}
-        onChange={(k, v) => { if (k === 'list1') setList1Input(v); if (k === 'list2') setList2Input(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
+        onChange={(k, v) => { if (k === 'list1') setList1Input(v); if (k === 'list2') setList2Input(v); handleReset() }}
         showExamples={false}
       />
 

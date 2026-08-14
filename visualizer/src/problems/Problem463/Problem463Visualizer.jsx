@@ -431,11 +431,7 @@ export default function Problem463Visualizer() {
       <ManualInputPanel
         fields={[{"key":"grid","label":"grid","type":"string"}]}
         values={{ grid: gridInput }}
-        onChange={(k, v) => { if (k === 'grid') setGridInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
+        onChange={(k, v) => { if (k === 'grid') setGridInput(v); handleReset() }}
         showExamples={false}
       />
 

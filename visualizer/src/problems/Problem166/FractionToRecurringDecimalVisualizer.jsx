@@ -50,7 +50,6 @@ const SOLUTION_CODE_INLINE = [
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(numerator, denominator) {
-const applyInput = useCallback((e) => { setInput(e); setNumeratorInput(String(e.numerator)); setDenominatorInput(String(e.denominator)); handleReset(); }, [handleReset]);
     const steps = []
 
   steps.push({

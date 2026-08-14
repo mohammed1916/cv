@@ -160,12 +160,9 @@ export default function SwapNodesInPairsVisualizer() {
       <ManualInputPanel
         fields={[{"key":"val","label":"val","type":"array"}]}
         values={{ val: valInput }}
-        onChange={(k, v) => { if (k === 'val') setValInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        onChange={(k, v) => { if (k === 'val') setValInput(v); handleReset() }}
+        showExamples={false}
         inputError={inputError}
-        
       />
 
         <div className="snip-panel main">

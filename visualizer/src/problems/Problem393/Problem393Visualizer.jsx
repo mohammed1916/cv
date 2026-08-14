@@ -206,12 +206,10 @@ export default function Problem393Visualizer() {
       <ManualInputPanel
         fields={[{"key":"data","label":"data","type":"array"}]}
         values={{ data: dataInput }}
-        onChange={(k, v) => { if (k === 'data') setDataInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'data') setDataInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
       <div style={{ display: 'flex', gap: 16, flex: 1 }}>

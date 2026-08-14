@@ -30,7 +30,6 @@ const SOLUTION_CODE = [
 ]
 
 function generateSteps(n) {
-const applyEx = useCallback((e) => { setNInput(String(e.n)); handleReset(); }, [handleReset]);
     const steps = []
   steps.push({ activeLine: 1, n, message: `Count primes less than ${n}`, relatedLines: [1] })
   if (n <= 2) { steps.push({ activeLine: 2, result: 0, done: true, message: "n <= 2, no primes", relatedLines: [2] }); return steps }

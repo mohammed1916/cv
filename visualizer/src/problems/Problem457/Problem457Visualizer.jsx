@@ -453,11 +453,7 @@ export default function Problem457Visualizer() {
       <ManualInputPanel
         fields={[{"key":"nums","label":"nums","type":"string"}]}
         values={{ nums: numsInput }}
-        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
         showExamples={false}
       />
 

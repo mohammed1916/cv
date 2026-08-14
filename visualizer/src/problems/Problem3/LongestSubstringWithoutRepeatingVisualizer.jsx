@@ -155,12 +155,10 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
       <ManualInputPanel
         fields={[{"key":"str","label":"str","type":"string"}]}
         values={{ str: strInput }}
-        onChange={(k, v) => { if (k === 'str') setStrInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'str') setStrInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
     <div className="lswrc-panel" style={{ flex: 2 }}>

@@ -413,12 +413,10 @@ export default function DesignSnakeGameVisualizer() {
       <ManualInputPanel
         fields={[{"key":"movements","label":"movements","type":"string"}]}
         values={{ movements: movementsInput }}
-        onChange={(k, v) => { if (k === 'movements') setMovementsInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'movements') setMovementsInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
       <FloatingPanel title="Movements & Examples" className="dsg-input-panel">

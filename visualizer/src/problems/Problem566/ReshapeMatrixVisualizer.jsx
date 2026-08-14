@@ -614,12 +614,9 @@ export default function ReshapeMatrixVisualizer() {
       <ManualInputPanel
         fields={[{"key":"matrix","label":"matrix","type":"string"}]}
         values={{ matrix: matrixInput }}
-        onChange={(k, v) => { if (k === 'matrix') setMatrixInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
-        
+        onChange={(k, v) => { if (k === 'matrix') setMatrixInput(v); handleReset() }}
+        examples={examples}
+        applyExample={applyExample}
       />
 
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />

@@ -157,12 +157,10 @@ export default function AddTwoNumbersVisualizer({ problem }) {
       <ManualInputPanel
         fields={[{"key":"l1","label":"l1","type":"array"},{"key":"l2","label":"l2","type":"array"}]}
         values={{ l1: l1Input, l2: l2Input }}
-        onChange={(k, v) => { if (k === 'l1') setL1Input(v); if (k === 'l2') setL2Input(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'l1') setL1Input(v); if (k === 'l2') setL2Input(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
     <div className="atn-panel">

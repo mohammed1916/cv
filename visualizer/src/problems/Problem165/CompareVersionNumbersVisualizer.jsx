@@ -39,7 +39,6 @@ const SOLUTION_CODE_INLINE = [
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function generateSteps(version1, version2) {
-const applyInput = useCallback((e) => { setInput(e); setVersion1Input(String(e.version1)); setVersion2Input(String(e.version2)); handleReset(); }, [handleReset]);
     const steps = []
 
   steps.push({

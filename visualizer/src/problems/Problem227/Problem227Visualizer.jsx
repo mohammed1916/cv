@@ -205,12 +205,10 @@ export default function Problem227Visualizer() {
       <ManualInputPanel
         fields={[{"key":"expr","label":"expr","type":"string"}]}
         values={{ expr: exprInput }}
-        onChange={(k, v) => { if (k === 'expr') setExprInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'expr') setExprInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
     <div className="p227-panel-primary">

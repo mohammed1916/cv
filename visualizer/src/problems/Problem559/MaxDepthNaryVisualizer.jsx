@@ -572,12 +572,10 @@ export default function MaxDepthNaryVisualizer() {
       <ManualInputPanel
         fields={[{"key":"tree","label":"tree","type":"array"}]}
         values={{ tree: treeInput }}
-        onChange={(k, v) => { if (k === 'tree') setTreeInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        onChange={(k, v) => { if (k === 'tree') setTreeInput(v); handleReset() }}
+        examples={examples}
+        applyExample={applyExample}
         inputError={inputError}
-        
       />
 
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />

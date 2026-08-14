@@ -587,12 +587,10 @@ export default function QuadTreeVisualizer() {
       <ManualInputPanel
         fields={[{"key":"grid","label":"grid","type":"array"}]}
         values={{ grid: gridInput }}
-        onChange={(k, v) => { if (k === 'grid') setGridInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        onChange={(k, v) => { if (k === 'grid') setGridInput(v); handleReset() }}
+        examples={examples}
+        applyExample={applyExample}
         inputError={inputError}
-        
       />
 
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />

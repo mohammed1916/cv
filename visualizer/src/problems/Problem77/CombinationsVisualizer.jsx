@@ -222,12 +222,10 @@ export default function CombinationsVisualizer() {
       <ManualInputPanel
         fields={[{"key":"n","label":"n","type":"string"},{"key":"k","label":"k","type":"string"}]}
         values={{ n: nInput, k: kInput }}
-        onChange={(k, v) => { if (k === 'n') setNInput(v); if (k === 'k') setKInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'n') setNInput(v); if (k === 'k') setKInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
         <div className="comb-panel-wrapper">

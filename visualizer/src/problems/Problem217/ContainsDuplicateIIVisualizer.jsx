@@ -315,12 +315,10 @@ export default function ContainsDuplicateIIVisualizer() {
       <ManualInputPanel
         fields={[{"key":"nums","label":"nums","type":"array"},{"key":"k","label":"k","type":"number"}]}
         values={{ nums: numsInput, k: kInput }}
-        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'k') setKInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'k') setKInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
     <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>

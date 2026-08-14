@@ -295,12 +295,10 @@ export default function LRUCacheVisualizer() {
       <ManualInputPanel
         fields={[{"key":"commands","label":"commands","type":"array"},{"key":"args","label":"args","type":"array"}]}
         values={{ commands: commandsInput, args: argsInput }}
-        onChange={(k, v) => { if (k === 'commands') setCommandsInput(v); if (k === 'args') setArgsInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'commands') setCommandsInput(v); if (k === 'args') setArgsInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
     <div className="lru-panel-body lru-visuals">

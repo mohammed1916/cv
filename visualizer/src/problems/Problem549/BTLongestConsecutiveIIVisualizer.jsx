@@ -331,12 +331,10 @@ export default function BTLongestConsecutiveIIVisualizer() {
       <ManualInputPanel
         fields={[{"key":"tree","label":"tree","type":"string"}]}
         values={{ tree: treeInput }}
-        onChange={(k, v) => { if (k === 'tree') setTreeInput(v); handleReset(); }}
+        onChange={(k, v) => { if (k === 'tree') setTreeInput(v); handleReset() }}
         examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
+        applyExample={applyExample}
         inputError={inputError}
-        showExamples={false}
       />
 
     <div className="p549-panel-primary">
