@@ -228,6 +228,7 @@ export default function PlusOneVisualizer() {
       </div>
     )
     const vizPanel = (
+      <>
       <div className="po-panel">
         <VisualizationPanel
           arr={arr}
@@ -244,6 +245,7 @@ export default function PlusOneVisualizer() {
       </div>
     )
     const playbackPanel = (
+      <>
         {showPatternOverlay && (
           <PatternLegend currentPhase={step?.phase} usedPatterns={PLUSONE_PATTERNS} />
         )}
@@ -282,6 +284,7 @@ export default function PlusOneVisualizer() {
       <div className="po-shell">
         <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
         {panelDivs && (
+          <>
             {panelDivs.code && createPortal(codePanel, panelDivs.code)}
             {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
             {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

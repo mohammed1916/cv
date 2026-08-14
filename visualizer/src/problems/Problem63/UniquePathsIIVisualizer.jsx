@@ -438,6 +438,7 @@ export default function UniquePathsIIVisualizer() {
     )
 
     const playbackPanel = (
+      <>
             {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={UNIQUEPATHSII_PATTERNS} />
             )}
@@ -473,6 +474,7 @@ export default function UniquePathsIIVisualizer() {
         <div className="upii-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

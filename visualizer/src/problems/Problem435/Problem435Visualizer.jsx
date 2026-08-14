@@ -321,6 +321,7 @@ export default function Problem435Visualizer() {
   )
 
   const vizPanel = (
+    <>
     <VisualizationPanel
       step={step}
       applyEx={applyEx}
@@ -339,6 +340,7 @@ export default function Problem435Visualizer() {
     <div className="problem-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
         </>

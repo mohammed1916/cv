@@ -197,11 +197,13 @@ function MinimumPathSumVisualization({
         {currR >= 1 && currC >= 1 && (step?.phase === 'fill' || step?.phase === 'fill-row' || step?.phase === 'fill-col') && (
           <div className="mps-arrows">
             {currR >= 1 && (
+              <>
                 <span className="mps-arrow above-arrow">↓ from above: {step.from_above}</span>
                 {currC >= 1 && <span className="mps-plus">+</span>}
               </>
             )}
             {currC >= 1 && (
+              <>
                 <span className="mps-arrow left-arrow">→ from left: {step.from_left}</span>
                 <span className="mps-plus">=</span>
               </>
@@ -339,6 +341,7 @@ export default function MinimumPathSumVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={MINIMUMPATHSUM_PATTERNS} />
       )}
@@ -381,6 +384,7 @@ export default function MinimumPathSumVisualizer() {
     <div className="mps-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

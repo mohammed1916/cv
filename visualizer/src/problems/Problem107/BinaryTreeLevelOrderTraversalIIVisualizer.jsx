@@ -298,6 +298,7 @@ export default function BinaryTreeLevelOrderTraversalIIVisualizer() {
     )
 
     const playbackPanel = (
+      <>
             {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 onReset={handleReset}
@@ -341,6 +342,7 @@ export default function BinaryTreeLevelOrderTraversalIIVisualizer() {
         <div className="btloti-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.state && createPortal(statePanel, panelDivs.state)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}

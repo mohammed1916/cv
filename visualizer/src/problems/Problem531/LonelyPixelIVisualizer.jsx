@@ -10,7 +10,6 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './LonelyPixelIVisualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -284,24 +283,15 @@ function VisualizationPanel({ picture, step, applyEx }) {
 }
 
 export default function LonelyPixelIVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0]);
-  const [pictureInput, setPictureInput] = useState("[[\"W\",\"W\",\"B\"],[\"W\",\"B\",\"W\"],[\"B\",\"W\",\"W\"]]");
-  const { picture, inputError } = useMemo(() => {
-    try {
-      const parsedPicture = JSON.parse(pictureInput); if (!Array.isArray(parsedPicture)) throw new Error('picture must be an array');
-      return { picture: parsedPicture, inputError: '' };
-    } catch (e) {
-      return { picture: "[[\"W\",\"W\",\"B\"],[\"W\",\"B\",\"W\"],[\"B\",\"W\",\"W\"]]", inputError: e.message };
-    }
-  }, [pictureInput]);
+  const [ex, setEx] = useState(EXAMPLES[0] || { picture: [['W','W','B'],['W','B','W'],['B','W','W']] })
 
   const steps = useMemo(
     () =>
-      generateSteps(picture).map((current) => ({
+      generateSteps(ex.picture).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [picture]
+    [ex]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -309,7 +299,7 @@ export default function LonelyPixelIVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); setPictureInput(JSON.stringify(e.picture)); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -324,7 +314,7 @@ export default function LonelyPixelIVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-              <div style={{ position: 'relative' }}>
+        <div style={{ position: 'relative' }}>
 
           <div style={{ position: 'relative' }}>
 
@@ -360,8 +350,10 @@ export default function LonelyPixelIVisualizer() {
               />
 
 
-            
-              </div>
+            )}
+
+
+          </div>
           {showPatternOverlay && (
 
             <CodePatternAnnotations
@@ -385,7 +377,7 @@ export default function LonelyPixelIVisualizer() {
       title: '🔍 Lonely Pixel I',
       content: (
         <VisualizationPanel
-          picture={picture}
+          picture={ex.picture}
           step={step}
           applyEx={applyEx}
         />

@@ -12,7 +12,6 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './ReverseIntegerVisualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const REVIN_PATTERNS = ['init', 'loop', 'pop', 'check_max', 'check_min', 'push']
 
@@ -358,20 +357,9 @@ export default function ReverseIntegerVisualizer() {
 
   return (
     <div className="revin-shell">
-    <>
-      <ManualInputPanel
-        fields={[{"key":"x","label":"x","type":"string"}]}
-        values={{ x: xInput }}
-        onChange={(k, v) => { if (k === 'x') setXInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
-        showExamples={false}
-      />
-
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
           {panelDivs.bounds && createPortal(boundsPanel, panelDivs.bounds)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

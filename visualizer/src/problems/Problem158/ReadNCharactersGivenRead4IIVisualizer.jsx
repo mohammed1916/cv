@@ -328,6 +328,7 @@ export default function ReadNCharactersGivenRead4IIVisualizer() {
   )
 
   const vizPanel = (
+    <>
     <div className="rnc2-panel">
       <VisualizationPanel step={step} />
     </div>
@@ -341,6 +342,7 @@ export default function ReadNCharactersGivenRead4IIVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -377,6 +379,7 @@ export default function ReadNCharactersGivenRead4IIVisualizer() {
     <div className="rnc2-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

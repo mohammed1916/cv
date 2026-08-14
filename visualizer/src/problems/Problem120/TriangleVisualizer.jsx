@@ -218,6 +218,7 @@ export default function TriangleVisualizer() {
   )
 
   const primaryPanel = (
+    <>
     <div className="tri-panel">
       <VisualizationPanel step={step} />
     </div>
@@ -235,6 +236,7 @@ export default function TriangleVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -272,6 +274,7 @@ export default function TriangleVisualizer() {
     <div className="tri-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

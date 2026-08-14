@@ -10,7 +10,6 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './BeautifulArrangementVisualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -319,24 +318,15 @@ function VisualizationPanel({ n, step, applyEx }) {
 }
 
 export default function BeautifulArrangementVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0]);
-  const [nInput, setNInput] = useState(2);
-  const { n, inputError } = useMemo(() => {
-    try {
-      const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
-      return { n: parsedN, inputError: '' };
-    } catch (e) {
-      return { n: 2, inputError: e.message };
-    }
-  }, [nInput]);
+  const [ex, setEx] = useState(EXAMPLES[0] || { n: 2 })
 
   const steps = useMemo(
     () =>
-      generateSteps(n).map((current) => ({
+      generateSteps(ex.n).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [n]
+    [ex]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -344,7 +334,7 @@ export default function BeautifulArrangementVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); setNInput(String(e.n)); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -359,7 +349,7 @@ export default function BeautifulArrangementVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-              <div style={{ position: 'relative' }}>
+        <div style={{ position: 'relative' }}>
 
           <div style={{ position: 'relative' }}>
 
@@ -395,8 +385,10 @@ export default function BeautifulArrangementVisualizer() {
               />
 
 
-            
-              </div>
+            )}
+
+
+          </div>
           {showPatternOverlay && (
 
             <CodePatternAnnotations
@@ -420,7 +412,7 @@ export default function BeautifulArrangementVisualizer() {
       title: '↔ Beautiful Arrangement',
       content: (
         <VisualizationPanel
-          n={n}
+          n={ex.n}
           step={step}
           applyEx={applyEx}
         />

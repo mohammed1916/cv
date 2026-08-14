@@ -274,6 +274,7 @@ export default function SqrtxVisualizer() {
 
   // Panel consts
   const primaryPanel = (
+    <>
     <div className="sqrtx-panel">
       {/* Example selector */}
       <div className="sqrtx-examples">
@@ -318,6 +319,7 @@ export default function SqrtxVisualizer() {
               }}
             >
               {step?.left != null && step?.right != null && (
+                <>
                   <motion.div
                     className="sqrtx-bar-left"
                     animate={{
@@ -516,6 +518,7 @@ export default function SqrtxVisualizer() {
   );
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={SQRTX_PATTERNS} />
       )}
@@ -555,6 +558,7 @@ export default function SqrtxVisualizer() {
     <div className="sqrtx-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

@@ -257,6 +257,7 @@ export default function CombinationsVisualizer() {
     )
 
     const playbackPanel = (
+      <>
             {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={COMBINATIONS_PATTERNS} />
             )}
@@ -293,6 +294,7 @@ export default function CombinationsVisualizer() {
         <div className="comb-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

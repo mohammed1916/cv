@@ -195,6 +195,7 @@ export default function NextPermutationVisualizer() {
   );
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -241,6 +242,7 @@ export default function NextPermutationVisualizer() {
       
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.examples && createPortal(examplesPanel, panelDivs.examples)}
           {panelDivs.array && createPortal(arrayPanel, panelDivs.array)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

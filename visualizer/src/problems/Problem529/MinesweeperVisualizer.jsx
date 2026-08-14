@@ -10,7 +10,6 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './MinesweeperVisualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -272,26 +271,15 @@ function VisualizationPanel({ board, click, step, applyEx }) {
 }
 
 export default function MinesweeperVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0]);
-  const [boardInput, setBoardInput] = useState("[[\"E\",\"E\",\"E\",\"E\",\"E\"],[\"E\",\"E\",\"M\",\"E\",\"E\"],[\"E\",\"E\",\"E\",\"E\",\"E\"],[\"E\",\"E\",\"E\",\"E\",\"E\"]]");
-  const [clickInput, setClickInput] = useState("[0,0]");
-  const { board, click, inputError } = useMemo(() => {
-    try {
-      const parsedBoard = JSON.parse(boardInput); if (!Array.isArray(parsedBoard)) throw new Error('board must be an array');
-      const parsedClick = JSON.parse(clickInput); if (!Array.isArray(parsedClick)) throw new Error('click must be an array');
-      return { board: parsedBoard, click: parsedClick, inputError: '' };
-    } catch (e) {
-      return { board: "[[\"E\",\"E\",\"E\",\"E\",\"E\"],[\"E\",\"E\",\"M\",\"E\",\"E\"],[\"E\",\"E\",\"E\",\"E\",\"E\"],[\"E\",\"E\",\"E\",\"E\",\"E\"]]", click: "[0,0]", inputError: e.message };
-    }
-  }, [boardInput, clickInput]);
+  const [ex, setEx] = useState(EXAMPLES[0] || { board: [['E','E','E','E','E'],['E','E','M','E','E'],['E','E','E','E','E'],['E','E','E','E','E']], click: [0, 0] })
 
   const steps = useMemo(
     () =>
-      generateSteps(board, click).map((current) => ({
+      generateSteps(ex.board, ex.click).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [board, click]
+    [ex]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -299,7 +287,7 @@ export default function MinesweeperVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); setBoardInput(JSON.stringify(e.board)); setClickInput(JSON.stringify(e.click)); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -314,7 +302,7 @@ export default function MinesweeperVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-              <div style={{ position: 'relative' }}>
+        <div style={{ position: 'relative' }}>
 
           <CodeTracePanel
           step={step}
@@ -339,8 +327,9 @@ export default function MinesweeperVisualizer() {
 
             />
 
-          
-            </div>
+          )}
+
+        </div>
       ),
     },
     {
@@ -348,8 +337,8 @@ export default function MinesweeperVisualizer() {
       title: '💣 Minesweeper',
       content: (
         <VisualizationPanel
-          board={board}
-          click={click}
+          board={ex.board}
+          click={ex.click}
           step={step}
           applyEx={applyEx}
         />

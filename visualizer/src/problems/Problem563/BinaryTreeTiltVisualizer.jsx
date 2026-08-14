@@ -12,7 +12,6 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput, TreeSVG } from '../../components/treeUtils'
 import './BinaryTreeTiltVisualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -222,6 +221,7 @@ function VisualizationPanel({ step, positions, nodes, applyExample, examples }) 
           {(() => {
             const data = step.nodeData.get(step.activeId)
             return (
+              <>
                 <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #38bdf8' }}>
                   <div style={{ fontSize: 11, fontWeight: 600, color: '#38bdf8', marginBottom: 6 }}>Left Subtree Sum</div>
                   <div style={{ fontSize: 16, color: '#38bdf8', fontFamily: 'monospace', fontWeight: 700 }}>
@@ -410,18 +410,6 @@ export default function BinaryTreeTiltVisualizer() {
                     }}
                     transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                   >
-    <>
-      <ManualInputPanel
-        fields={[{"key":"arr","label":"arr","type":"string"}]}
-        values={{ arr: arrInput }}
-        onChange={(k, v) => { if (k === 'arr') setArrInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
-        
-      />
-
                     {node.val}
                     {nodeInfo && (
                       <div

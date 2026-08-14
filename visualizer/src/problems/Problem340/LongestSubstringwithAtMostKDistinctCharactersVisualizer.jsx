@@ -7,7 +7,6 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './LongestSubstringwithAtMostKDistinctCharactersVisualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'def length_of_longest_substring_k_distinct(s, k):' },
@@ -186,18 +185,6 @@ export default function LongestSubstringwithAtMostKDistinctCharactersVisualizer(
 
   return (
     <div className="longest-substringwith-at-most-k-distinct-characters-shell">
-    <>
-      <ManualInputPanel
-        fields={[{"key":"s","label":"s","type":"string"},{"key":"k","label":"k","type":"string"}]}
-        values={{ s: sInput, k: kInput }}
-        onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 'k') setKInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
-        showExamples={false}
-      />
-
       <div className="longest-substringwith-at-most-k-distinct-characters-panel">
         <div className="longest-substringwith-at-most-k-distinct-characters-panel-head">Input</div>
         <div className="longest-substringwith-at-most-k-distinct-characters-panel-body">
@@ -244,6 +231,7 @@ export default function LongestSubstringwithAtMostKDistinctCharactersVisualizer(
               </div>
 
               {!inputError && (
+                <>
                   {/* String boxes with window shading + pointers */}
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                     {chars.length === 0 && (

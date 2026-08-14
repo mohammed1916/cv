@@ -132,6 +132,7 @@ export default function InterleavingStringVisualizer() {
     const DPTablePanelContent = () => (
         <div className="is-panel-body">
             {step ? (
+              <>
                     <div className="is-panel-label">DP Table — dp[i][j] = can interleave s1[0..i-1] and s2[0..j-1] into s3[0..i+j-1]</div>
                     <div className="is-table-wrap">
                         <table className="is-table">
@@ -223,6 +224,7 @@ export default function InterleavingStringVisualizer() {
     );
 
     const playbackPanel = (
+      <>
             {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 onReset={handleReset}
@@ -266,6 +268,7 @@ export default function InterleavingStringVisualizer() {
         <div className="is-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
                     {panelDivs.dp && createPortal(dpPanel, panelDivs.dp)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}

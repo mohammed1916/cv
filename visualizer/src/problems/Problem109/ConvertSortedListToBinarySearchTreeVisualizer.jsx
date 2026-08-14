@@ -326,6 +326,7 @@ export default function ConvertSortedListToBinarySearchTreeVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -362,6 +363,7 @@ export default function ConvertSortedListToBinarySearchTreeVisualizer() {
     <div className="cslbtbst-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

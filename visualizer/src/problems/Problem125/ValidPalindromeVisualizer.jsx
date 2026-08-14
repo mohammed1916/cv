@@ -214,6 +214,7 @@ export default function ValidPalindromeVisualizer() {
     );
 
     const playbackPanel = (
+      <>
             {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 isPlaying={isPlaying}
@@ -251,6 +252,7 @@ export default function ValidPalindromeVisualizer() {
         <div className="vp-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

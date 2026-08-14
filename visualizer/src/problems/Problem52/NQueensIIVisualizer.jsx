@@ -259,6 +259,7 @@ export default function NQueensIIVisualizer() {
   );
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={NQUEENSII_PATTERNS} />
       )}
@@ -305,6 +306,7 @@ export default function NQueensIIVisualizer() {
       
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.board && createPortal(boardPanel, panelDivs.board)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

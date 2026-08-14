@@ -403,6 +403,7 @@ export default function Problem368Visualizer() {
           </div>
 
           {step && (
+            <>
               {/* Status message */}
               <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
                 <div style={{ fontWeight: 600, marginBottom: 6, color: '#1e293b' }}>{step.message}</div>

@@ -392,6 +392,7 @@ export default function Problem71Visualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -430,6 +431,7 @@ export default function Problem71Visualizer() {
       
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.examples && createPortal(examplesPanel, panelDivs.examples)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}

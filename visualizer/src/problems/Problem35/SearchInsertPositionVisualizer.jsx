@@ -324,6 +324,7 @@ export default function SearchInsertPositionVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={SEARCHINSERTPOSITION_PATTERNS} />
       )}
@@ -362,6 +363,7 @@ export default function SearchInsertPositionVisualizer() {
     <div className="sip-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

@@ -361,6 +361,7 @@ export default function OneEditDistanceVisualizer() {
 
   // Step 2: Extract panels into consts
   const primaryPanel = (
+    <>
     <div className="oed-panel">
       <div className="oed-panel-head">✏️ One Edit Distance</div>
       <div className="oed-panel-body">
@@ -398,6 +399,7 @@ export default function OneEditDistanceVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -438,6 +440,7 @@ export default function OneEditDistanceVisualizer() {
     <div className="oed-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

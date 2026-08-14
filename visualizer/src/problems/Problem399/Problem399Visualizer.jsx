@@ -461,6 +461,7 @@ export default function Problem399Visualizer() {
       <div className="p399-card">
         <div className="p399-section-label">Query</div>
         {step?.currentQuery ? (
+          <>
             <div className="p399-stat highlight">
               <span className="p399-stat-key">numerator</span>
               <span className="p399-stat-val">{step.currentQuery.num}</span>
@@ -544,6 +545,7 @@ export default function Problem399Visualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -581,6 +583,7 @@ export default function Problem399Visualizer() {
     <div className="p399-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state   && createPortal(statePanel,   panelDivs.state)}
           {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}

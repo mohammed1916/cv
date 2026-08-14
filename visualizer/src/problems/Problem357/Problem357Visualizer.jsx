@@ -414,6 +414,7 @@ export default function Problem357Visualizer() {
           </div>
 
           {step && (
+            <>
               <div style={{ padding: 12, backgroundColor: '#f8fafc', borderRadius: 6, borderLeft: '4px solid #0ea5e9' }}>
                 <div style={{ fontWeight: 600, fontSize: 12, color: '#1e293b' }}>
                   {step.message}

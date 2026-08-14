@@ -288,6 +288,7 @@ export default function BestTimeBuySellStockVisualizer() {
     )
 
     const playbackPanel = (
+      <>
             {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
@@ -320,6 +321,7 @@ export default function BestTimeBuySellStockVisualizer() {
         <div className="btbs-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

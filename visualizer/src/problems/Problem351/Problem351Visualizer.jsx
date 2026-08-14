@@ -232,6 +232,7 @@ export default function Problem351Visualizer() {
           </div>
 
           {step && (
+            <>
               <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
                 <div style={{ fontWeight: 600, marginBottom: 6, color: '#1e293b' }}>Step Message</div>
                 <div style={{ color: '#475569', fontSize: 12, lineHeight: 1.5 }}>{step.message}</div>

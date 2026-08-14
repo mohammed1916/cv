@@ -76,6 +76,7 @@ export default function FindPeakElementVisualizer() {
 
   // Step 2: Extract panels
   const primaryPanel = (
+    <>
     <div className="fp-panel">
       <div className="fp-panel-label">Array (bars)</div>
       <div className="fp-bars">
@@ -149,6 +150,7 @@ export default function FindPeakElementVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying} isDone={isDone} speed={speed}
@@ -181,6 +183,7 @@ export default function FindPeakElementVisualizer() {
     <div className="fp-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state   && createPortal(statePanel,   panelDivs.state)}
           {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}

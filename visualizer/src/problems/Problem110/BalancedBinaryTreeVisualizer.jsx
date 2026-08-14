@@ -287,6 +287,7 @@ export default function BalancedBinaryTreeVisualizer() {
     )
 
     const playbackPanel = (
+      <>
             {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
             <PlaybackControls
                 onReset={handleReset}
@@ -332,6 +333,7 @@ export default function BalancedBinaryTreeVisualizer() {
         <div className="bbt-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
                     {panelDivs.state && createPortal(statePanel, panelDivs.state)}
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}

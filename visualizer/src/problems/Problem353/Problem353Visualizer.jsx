@@ -246,6 +246,7 @@ export default function Problem353Visualizer() {
       id: 'viz',
       title: '🚇 Underground System',
       content: (
+        <>
                 <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {EXAMPLES.map((e, i) => (
@@ -268,6 +269,7 @@ export default function Problem353Visualizer() {
           </div>
 
           {step && (
+            <>
               {/* Station Network Visualization */}
               <div style={{
                 border: '1px solid #cbd5e1',

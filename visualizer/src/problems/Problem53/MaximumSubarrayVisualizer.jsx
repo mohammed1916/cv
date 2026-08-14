@@ -304,6 +304,7 @@ export default function MaximumSubarrayVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={MAXIMUMSUBARRAY_PATTERNS} />
       )}
@@ -345,6 +346,7 @@ export default function MaximumSubarrayVisualizer() {
     <div className="maxsub-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state && createPortal(statePanel, panelDivs.state)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

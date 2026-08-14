@@ -403,6 +403,7 @@ export default function AddBinaryVisualizer() {
   )
 
   const vizPanel = (
+    <>
     <div className="ab-panel">
       <VisualizationPanel
         a={a}
@@ -421,6 +422,7 @@ export default function AddBinaryVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={ADDBINARY_PATTERNS} />
       )}
@@ -461,6 +463,7 @@ export default function AddBinaryVisualizer() {
     <div className="ab-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

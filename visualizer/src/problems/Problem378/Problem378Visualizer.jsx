@@ -199,6 +199,7 @@ export default function Problem378Visualizer() {
           </div>
 
           {step && (
+            <>
               <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
                 <div style={{ fontWeight: 600, marginBottom: 8 }}>{step.message}</div>
                 <div style={{ fontSize: 10, color: '#64748b' }}>Target: Find {k}th smallest</div>

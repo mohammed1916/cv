@@ -254,6 +254,7 @@ export default function SumRootToLeafNumbersVisualizer() {
   )
 
   const primaryPanel = (
+    <>
     <div className="srln-panel">
       <VisualizationPanel step={step} />
     </div>
@@ -268,6 +269,7 @@ export default function SumRootToLeafNumbersVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} linePatternMap={LINE_PATTERN_MAP} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -305,6 +307,7 @@ export default function SumRootToLeafNumbersVisualizer() {
     <div className="srln-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

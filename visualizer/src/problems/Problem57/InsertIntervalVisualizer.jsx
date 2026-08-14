@@ -182,6 +182,7 @@ export default function InsertIntervalVisualizer() {
 
     // Step 3: Extract panels into consts
     const primaryPanel = (
+      <>
       <div className="ii-panel">
         <div className="ii-controls-row">
           <div className="ii-examples">
@@ -225,6 +226,7 @@ export default function InsertIntervalVisualizer() {
     );
 
     const playbackPanel = (
+      <>
         {showPatternOverlay && (
           <PatternLegend currentPhase={step?.phase} usedPatterns={INSERTINTERVAL_PATTERNS} />
         )}
@@ -259,6 +261,7 @@ export default function InsertIntervalVisualizer() {
       <div className="ii-shell">
         <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
         {panelDivs && (
+          <>
             {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
             {panelDivs.code && createPortal(codePanel, panelDivs.code)}
             {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

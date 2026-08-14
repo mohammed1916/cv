@@ -131,6 +131,7 @@ export default function ReorderListVisualizer() {
     )
 
     const primaryPanel = (
+      <>
         <div className="rl-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, overflow: 'auto' }}>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                 {EXAMPLES.map((ex, i) => <button key={ex.label} onClick={() => applyExample(i)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: sel === i ? '#dbeafe' : '#f1f5f9' }}>{ex.label}</button>)}
@@ -170,6 +171,7 @@ export default function ReorderListVisualizer() {
     )
 
     const playbackPanel = (
+      <>
             {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
             <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex <= 0} nextDisabled={isDone} resetDisabled={stepIndex <= 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
         </>
@@ -190,6 +192,7 @@ export default function ReorderListVisualizer() {
         <div className="rl-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

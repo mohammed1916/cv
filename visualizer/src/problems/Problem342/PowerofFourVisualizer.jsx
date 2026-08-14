@@ -321,6 +321,7 @@ export default function PowerofFourVisualizer() {
             </div>
 
             {view && (
+              <>
                 {/* Binary representation of n */}
                 <div>
                   <div style={{ color: COLORS.muted, fontSize: 12, marginBottom: 6, fontFamily: 'monospace' }}>

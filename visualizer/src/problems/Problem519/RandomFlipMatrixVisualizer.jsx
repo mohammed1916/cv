@@ -10,7 +10,6 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './RandomFlipMatrixVisualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -227,28 +226,15 @@ function VisualizationPanel({ m, n, flips, step, applyEx }) {
 }
 
 export default function RandomFlipMatrixVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0]);
-  const [mInput, setMInput] = useState(3);
-  const [nInput, setNInput] = useState(2);
-  const [flipsInput, setFlipsInput] = useState("[[1,0],[1,1]]");
-  const { m, n, flips, inputError } = useMemo(() => {
-    try {
-      const parsedM = Number(mInput); if (isNaN(parsedM)) throw new Error('m must be a number');
-      const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
-      const parsedFlips = JSON.parse(flipsInput); if (!Array.isArray(parsedFlips)) throw new Error('flips must be an array');
-      return { m: parsedM, n: parsedN, flips: parsedFlips, inputError: '' };
-    } catch (e) {
-      return { m: 3, n: 2, flips: "[[1,0],[1,1]]", inputError: e.message };
-    }
-  }, [mInput, nInput, flipsInput]);
+  const [ex, setEx] = useState(EXAMPLES[0] || { m: 3, n: 3, flips: [[1, 0], [1, 1]] })
 
   const steps = useMemo(
     () =>
-      generateSteps(m, n, flips).map((current) => ({
+      generateSteps(ex.m, ex.n, ex.flips).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [m, n, flips]
+    [ex]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -256,7 +242,7 @@ export default function RandomFlipMatrixVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); setMInput(String(e.m)); setNInput(String(e.n)); setFlipsInput(JSON.stringify(e.flips)); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -271,7 +257,7 @@ export default function RandomFlipMatrixVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-              <div style={{ position: 'relative' }}>
+        <div style={{ position: 'relative' }}>
 
           <CodeTracePanel
           step={step}
@@ -296,8 +282,9 @@ export default function RandomFlipMatrixVisualizer() {
 
             />
 
-          
-            </div>
+          )}
+
+        </div>
       ),
     },
     {
@@ -305,9 +292,9 @@ export default function RandomFlipMatrixVisualizer() {
       title: '🎲 Random Flip Matrix',
       content: (
         <VisualizationPanel
-          m={m}
-          n={n}
-          flips={flips}
+          m={ex.m}
+          n={ex.n}
+          flips={ex.flips}
           step={step}
           applyEx={applyEx}
         />

@@ -568,6 +568,7 @@ export default function Problem61Visualizer() {
   )
 
   const primaryPanel = (
+    <>
     <div className="problem61-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
         <span style={{ fontSize: 12, color: '#64748b', fontWeight: 600 }}>Examples:</span>
@@ -597,6 +598,7 @@ export default function Problem61Visualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -637,6 +639,7 @@ export default function Problem61Visualizer() {
     <div className="problem61-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

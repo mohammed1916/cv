@@ -12,7 +12,6 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { getExamples } from '../../config/examplesRegistry'
 import './KthLargestElementVisualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -129,18 +128,6 @@ export default function KthLargestElementVisualizer() {
 
   return (
     <div className="kl-shell">
-    <>
-      <ManualInputPanel
-        fields={[{"key":"nums","label":"nums","type":"string"},{"key":"k","label":"k","type":"number"}]}
-        values={{ nums: numsInput, k: kInput }}
-        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'k') setKInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
-        showExamples={false}
-      />
-
       <section className="kl-hero">
         <div className="kl-hero-copy">
           <span className="kl-kicker">LeetCode 215 • Binary Heap</span>
@@ -154,6 +141,7 @@ export default function KthLargestElementVisualizer() {
 
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
           {panelDivs.heap && createPortal(heapPanel, panelDivs.heap)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

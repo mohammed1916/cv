@@ -256,6 +256,7 @@ export default function BinaryTreeZigzagLevelOrderTraversalVisualizer() {
 
   // Extract panels into consts
   const primaryPanel = (
+    <>
     <div className="bzlt-panel">
       <div className="bzlt-panel-head">Zigzag Traversal</div>
       <div className="bzlt-panel-body">
@@ -293,6 +294,7 @@ export default function BinaryTreeZigzagLevelOrderTraversalVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -332,6 +334,7 @@ export default function BinaryTreeZigzagLevelOrderTraversalVisualizer() {
     <div className="bzlt-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

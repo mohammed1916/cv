@@ -292,6 +292,7 @@ export default function Problem96Visualizer() {
   )
 
   const primaryPanel = (
+    <>
     <div className="problem96-panel">
       <VisualizationPanel step={step} />
     </div>
@@ -324,6 +325,7 @@ export default function Problem96Visualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -362,6 +364,7 @@ export default function Problem96Visualizer() {
     <div className="problem96-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

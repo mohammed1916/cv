@@ -387,6 +387,7 @@ export default function MissingRangesVisualizer() {
   )
 
   const primaryPanel = (
+    <>
     <div className="mrv-panel">
       <VisualizationPanel step={step} />
     </div>
@@ -406,6 +407,7 @@ export default function MissingRangesVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -443,6 +445,7 @@ export default function MissingRangesVisualizer() {
     <div className="mrv-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

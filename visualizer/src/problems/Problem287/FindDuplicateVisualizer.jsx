@@ -11,7 +11,6 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { getExamples } from '../../config/examplesRegistry'
 import './FindDuplicateVisualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -232,18 +231,6 @@ export default function FindDuplicateVisualizer() {
 
     return (
         <div className="fd-shell">
-    <>
-      <ManualInputPanel
-        fields={[{"key":"nums","label":"nums","type":"array"}]}
-        values={{ nums: numsInput }}
-        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
-        showExamples={false}
-      />
-
             <section className="fd-hero">
                 <div className="fd-hero-copy">
                     <span className="fd-kicker">LeetCode 287</span>
@@ -258,6 +245,7 @@ export default function FindDuplicateVisualizer() {
 
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+                <>
                     {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
                     {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
                     {panelDivs.metrics && createPortal(metricsPanel, panelDivs.metrics)}

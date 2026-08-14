@@ -166,6 +166,7 @@ function VisualizationPanel({ points, step, applyEx }) {
         viewBox="0 0 400 400"
       >
         {points.length > 1 && (
+          <>
             <polyline
               points={points.map(p => `${(p[0] % 100) * 3 + 50},${(p[1] % 100) * 3 + 50}`).join(' ')}
               fill="rgba(139, 92, 246, 0.2)"
@@ -299,7 +300,8 @@ export default function Problem469Visualizer() {
           prevDisabled={stepIndex < 0}
           nextDisabled={isDone}
           resetDisabled={stepIndex < 0}
-          onSpeedChange={e => setSpeed(Number(e.target.value
+          onSpeedChange={e => setSpeed(Number(
+            <>e.target.value
     </>))}
           showPatternOverlay={showPatternOverlay}
           onShowPatternOverlayChange={setShowPatternOverlay}

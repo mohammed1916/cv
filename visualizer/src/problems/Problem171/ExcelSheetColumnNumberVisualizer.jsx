@@ -96,6 +96,7 @@ export default function ExcelSheetColumnNumberVisualizer() {
 
   // Step 2: Extract panels into consts
   const primaryPanel = (
+    <>
     <div className="escn-panel" style={{ flex: 1 }}>
       <div className="escn-panel-head">🔢 Excel Column</div>
       <div className="escn-panel-body">
@@ -133,6 +134,7 @@ export default function ExcelSheetColumnNumberVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.activeLine} usedPatterns={PATTERNS} />
       )}
@@ -173,6 +175,7 @@ export default function ExcelSheetColumnNumberVisualizer() {
     <div className="escn-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

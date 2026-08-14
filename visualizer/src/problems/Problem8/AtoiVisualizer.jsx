@@ -507,6 +507,7 @@ export default function AtoiVisualizer() {
           onPanelReady={(divs) => setPanelDivs(divs)}
         />
         {panelDivs && (
+          <>
             {createPortal(mainPanel, panelDivs['main'])}
             {showCode && createPortal(codePanel, panelDivs['code'])}
             {createPortal(statusPanel, panelDivs['status'])}

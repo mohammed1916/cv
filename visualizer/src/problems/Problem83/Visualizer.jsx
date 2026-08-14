@@ -48,6 +48,7 @@ export default function Problem83Visualizer() {
   const step = steps[currentStep];
 
   const primaryPanel = (
+    <>
     <div className="problem83-panel">
       <div className="problem83-panel-head">Visualization</div>
       <div className="problem83-panel-body">
@@ -82,6 +83,7 @@ export default function Problem83Visualizer() {
   );
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -104,6 +106,7 @@ export default function Problem83Visualizer() {
     <div className="problem83-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}
           {panelDivs.status  && createPortal(statusPanel,  panelDivs.status)}

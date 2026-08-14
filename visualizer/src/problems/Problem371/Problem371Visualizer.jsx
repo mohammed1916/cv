@@ -517,6 +517,7 @@ export default function Problem371Visualizer() {
   )
 
   const vizPanel = (
+    <>
     <VisualizationPanel
       a={a}
       b={b}
@@ -537,6 +538,7 @@ export default function Problem371Visualizer() {
     <div className="problem-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
         </>

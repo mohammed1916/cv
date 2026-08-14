@@ -309,6 +309,7 @@ export default function Problem86Visualizer() {
 
   // Extract visualization panel
   const vizPanel = (
+    <>
     <div className="problem86-panel">
       <div className="problem86-panel-head">✂️ Partition List</div>
       <div className="problem86-panel-body">
@@ -346,6 +347,7 @@ export default function Problem86Visualizer() {
 
   // Playback panel with controls
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -385,6 +387,7 @@ export default function Problem86Visualizer() {
     <div className="problem86-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

@@ -300,6 +300,7 @@ export default function Problem90Visualizer() {
 
   // Extract panels as constants for portal rendering
   const primaryPanel = (
+    <>
     <div className="problem90-panel">
       <VisualizationPanel step={step} />
     </div>
@@ -345,6 +346,7 @@ export default function Problem90Visualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -384,6 +386,7 @@ export default function Problem90Visualizer() {
     <div className="problem90-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

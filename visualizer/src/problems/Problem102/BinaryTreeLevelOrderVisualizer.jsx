@@ -279,6 +279,7 @@ export default function BinaryTreeLevelOrderVisualizer() {
     )
 
     const playbackPanel = (
+      <>
             {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
             <PlaybackControls
                 onReset={handleReset}
@@ -326,6 +327,7 @@ export default function BinaryTreeLevelOrderVisualizer() {
 
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.state && createPortal(statePanel, panelDivs.state)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}

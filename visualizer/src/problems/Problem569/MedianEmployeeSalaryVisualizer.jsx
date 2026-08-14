@@ -261,6 +261,7 @@ export default function MedianEmployeeSalaryVisualizer() {
 
   /* ── Panels ───────────────────────────────────────────────── */
   const primaryPanel = (
+    <>
     <div className="p569-panel-primary">
       <div className="p569-card">
         <div className="p569-section-label">Sample Employee Rows</div>
@@ -437,6 +438,7 @@ export default function MedianEmployeeSalaryVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -474,6 +476,7 @@ export default function MedianEmployeeSalaryVisualizer() {
     <div className="p569-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state   && createPortal(statePanel,   panelDivs.state)}
           {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}

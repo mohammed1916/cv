@@ -982,6 +982,7 @@ export default function MedianOfTwoSortedArraysVisualizer() {
   );
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={MEDIAN_PATTERNS} />
       )}
@@ -1023,6 +1024,7 @@ export default function MedianOfTwoSortedArraysVisualizer() {
     <div className="median-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state && createPortal(statePanel, panelDivs.state)}
           {panelDivs.secondary && createPortal(secondaryPanel, panelDivs.secondary)}

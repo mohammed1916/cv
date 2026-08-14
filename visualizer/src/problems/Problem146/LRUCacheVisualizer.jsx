@@ -402,6 +402,7 @@ export default function LRUCacheVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && <PatternLegend />}
       <PlaybackControls
         onReset={handleReset}
@@ -444,6 +445,7 @@ export default function LRUCacheVisualizer() {
     <div className="lru-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

@@ -159,6 +159,7 @@ function PyramidVisualization({ triangle, step, ex }) {
         <div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, border: '1px solid #fcd34d' }}>
           <div style={{ fontSize: 12, fontFamily: 'monospace', color: '#92400e' }}>
             {step.prevJ?.[0] !== undefined && (
+              <>
                 prev[{step.prevJ[0]}] + prev[{step.prevJ[1]}] = <strong>{step.sum}</strong>
               </>
             )}
@@ -305,6 +306,7 @@ export default function PascalsTriangleVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && <PatternLegend />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -343,6 +345,7 @@ export default function PascalsTriangleVisualizer() {
     <div className="pt-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}
           {panelDivs.status  && createPortal(statusPanel,  panelDivs.status)}

@@ -249,6 +249,7 @@ export default function ReverseWordsInAStringVisualizer() {
   )
 
   const vizPanel = (
+    <>
     <div className="rwias-panel">
       <VisualizationPanel step={step} />
     </div>
@@ -262,6 +263,7 @@ export default function ReverseWordsInAStringVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -299,6 +301,7 @@ export default function ReverseWordsInAStringVisualizer() {
     <div className="rwias-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

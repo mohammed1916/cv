@@ -10,7 +10,6 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './ContiguousArrayVisualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -259,24 +258,15 @@ function VisualizationPanel({ arr, step, applyEx }) {
 }
 
 export default function ContiguousArrayVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numsInput, setNumsInput] = useState("[0,1]");
-  const { nums, inputError } = useMemo(() => {
-    try {
-      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
-      return { nums: parsedNums, inputError: '' };
-    } catch (e) {
-      return { nums: "[0,1]", inputError: e.message };
-    }
-  }, [numsInput]);
+  const [ex, setEx] = useState(EXAMPLES[0] || { nums: [0, 1] })
 
   const steps = useMemo(
     () =>
-      generateSteps(nums).map((current) => ({
+      generateSteps(ex.nums).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [nums]
+    [ex]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -284,7 +274,7 @@ export default function ContiguousArrayVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); setNumsInput(JSON.stringify(e.nums)); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -299,7 +289,7 @@ export default function ContiguousArrayVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-              <div style={{ position: 'relative' }}>
+        <div style={{ position: 'relative' }}>
 
           <CodeTracePanel
           step={step}
@@ -324,8 +314,9 @@ export default function ContiguousArrayVisualizer() {
 
             />
 
-          
-            </div>
+          )}
+
+        </div>
       ),
     },
     {
@@ -333,7 +324,7 @@ export default function ContiguousArrayVisualizer() {
       title: '🎯 Contiguous Array',
       content: (
         <VisualizationPanel
-          arr={nums}
+          arr={ex.nums}
           step={step}
           applyEx={applyEx}
         />

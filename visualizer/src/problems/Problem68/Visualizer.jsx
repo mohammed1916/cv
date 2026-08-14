@@ -372,6 +372,7 @@ export default function Problem68Visualizer() {
   )
 
   const vizPanel = (
+    <>
     <div style={{ position: 'relative', height: '100%' }}>
       <VisualizationPanel step={step} />
     </div>
@@ -381,6 +382,7 @@ export default function Problem68Visualizer() {
   const statusPanel = (
     <div className="problem68-status" style={{ padding: '8px 16px', fontSize: 12, color: 'var(--text-secondary)', overflow: 'auto' }}>
       {step && (
+        <>
           <strong>Step {stepIndex + 1}:</strong> {step.phase}
         </>
       )}
@@ -388,6 +390,7 @@ export default function Problem68Visualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -439,6 +442,7 @@ export default function Problem68Visualizer() {
       </div>
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

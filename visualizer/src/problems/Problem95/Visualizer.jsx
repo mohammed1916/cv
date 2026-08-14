@@ -450,6 +450,7 @@ export default function Problem95Visualizer() {
   )
 
   const vizPanel = (
+    <>
     <div className="problem95-panel">
       <VisualizationPanel step={step} />
     </div>
@@ -476,6 +477,7 @@ export default function Problem95Visualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -514,6 +516,7 @@ export default function Problem95Visualizer() {
     <div className="problem95-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

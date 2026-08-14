@@ -313,6 +313,7 @@ export default function SwapNodesInPairsVisualizer() {
     )
 
     const playbackPanel = (
+      <>
             {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={SWAPNODESINPAIRS_PATTERNS} />
             )}
@@ -356,6 +357,7 @@ export default function SwapNodesInPairsVisualizer() {
         <div className="snip-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.state && createPortal(statePanel, panelDivs.state)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}

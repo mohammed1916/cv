@@ -581,6 +581,7 @@ export default function ScrambleStringVisualizer() {
   )
 
   const primaryPanel = (
+    <>
     <div className="scramble-primary-panel">
       <VisualizationPanel
         s1={s1}
@@ -599,6 +600,7 @@ export default function ScrambleStringVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={SCRAMBLESTRING_PATTERNS} />
       )}
@@ -638,6 +640,7 @@ export default function ScrambleStringVisualizer() {
     <div className="scramble-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}
           {panelDivs.status  && createPortal(statusPanel,  panelDivs.status)}

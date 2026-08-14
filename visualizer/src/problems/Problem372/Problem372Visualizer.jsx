@@ -10,7 +10,6 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem372Visualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -349,26 +348,15 @@ function VisualizationPanel({ base, exponents, step, applyEx }) {
 }
 
 export default function Problem372Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0]);
-  const [baseInput, setBaseInput] = useState(2);
-  const [exponentsInput, setExponentsInput] = useState("[3]");
-  const { base, exponents, inputError } = useMemo(() => {
-    try {
-      const parsedBase = Number(baseInput); if (isNaN(parsedBase)) throw new Error('base must be a number');
-      const parsedExponents = JSON.parse(exponentsInput); if (!Array.isArray(parsedExponents)) throw new Error('exponents must be an array');
-      return { base: parsedBase, exponents: parsedExponents, inputError: '' };
-    } catch (e) {
-      return { base: 2, exponents: "[3]", inputError: e.message };
-    }
-  }, [baseInput, exponentsInput]);
+  const [ex, setEx] = useState(EXAMPLES[0] || { base: 2, exponents: [3] })
 
   const steps = useMemo(
     () =>
-      generateSteps(base, exponents).map((current) => ({
+      generateSteps(ex.base, ex.exponents).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [base, exponents]
+    [ex]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -376,7 +364,7 @@ export default function Problem372Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); setBaseInput(String(e.base)); setExponentsInput(JSON.stringify(e.exponents)); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -391,7 +379,7 @@ export default function Problem372Visualizer() {
       id: 'code',
       title: 'Code',
       content: (
-              <div style={{ position: 'relative' }}>
+        <div style={{ position: 'relative' }}>
           <CodeTracePanel
             step={step}
             codeLines={SOLUTION_CODE}
@@ -406,8 +394,8 @@ export default function Problem372Visualizer() {
               activeLineDom={activeLineDom}
               activeLine={step.activeLine}
             />
-          
-            </div>
+          )}
+        </div>
       ),
     },
     {
@@ -415,8 +403,8 @@ export default function Problem372Visualizer() {
       title: '⚡ Modular Exponentiation',
       content: (
         <VisualizationPanel
-          base={base}
-          exponents={exponents}
+          base={ex.base}
+          exponents={ex.exponents}
           step={step}
           applyEx={applyEx}
         />

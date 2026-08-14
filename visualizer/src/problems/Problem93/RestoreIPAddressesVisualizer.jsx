@@ -421,6 +421,7 @@ export default function RestoreIPAddressesVisualizer() {
       <div className="restore-ip-panel-body">
         <div className="restore-ip-results-container">
           {step?.res && step.res.length > 0 ? (
+            <>
               <div className="restore-ip-results-header">
                 Found: {step.res.length}
               </div>
@@ -474,6 +475,7 @@ export default function RestoreIPAddressesVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={RESTOREIPADDRESSES_PATTERNS} />
       )}
@@ -515,6 +517,7 @@ export default function RestoreIPAddressesVisualizer() {
     <div className="restore-ip-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state && createPortal(statePanel, panelDivs.state)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

@@ -9,7 +9,6 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import './Problem367Visualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -456,6 +455,7 @@ function ResultPanel({ step }) {
                 <div className="p367-summary-title">Search Summary:</div>
                 <div className="p367-summary-content">
                     {step?.left !== null && step?.right !== null && (
+                        <>
                             <div className="p367-summary-row">
                                 <span className="p367-summary-key">Current Range:</span>
                                 <span className="p367-summary-val">[{step.left}, {step.right}]</span>
@@ -549,18 +549,6 @@ export default function Problem367Visualizer() {
 
     return (
         <div className="p367-shell">
-    <>
-      <ManualInputPanel
-        fields={[{"key":"num","label":"num","type":"number"}]}
-        values={{ num: numInput }}
-        onChange={(k, v) => { if (k === 'num') setNumInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
-        showExamples={false}
-      />
-
             <div className="p367-header">
                 <h2>Valid Perfect Square</h2>
                 <p className={`p367-message ${step?.isFound ? 'found' : step?.phase === 'done' ? 'not-found' : ''}`}>

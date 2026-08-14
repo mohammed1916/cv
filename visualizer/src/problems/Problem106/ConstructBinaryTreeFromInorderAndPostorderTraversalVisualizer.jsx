@@ -247,6 +247,7 @@ export default function ConstructBinaryTreeFromInorderAndPostorderTraversalVisua
 
   // Step 2: Extract panel consts
   const primaryPanel = (
+    <>
     <div className="cbtipt-panel">
       <VisualizationPanel step={step} />
     </div>
@@ -274,6 +275,7 @@ export default function ConstructBinaryTreeFromInorderAndPostorderTraversalVisua
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -312,6 +314,7 @@ export default function ConstructBinaryTreeFromInorderAndPostorderTraversalVisua
     <div className="cbtipt-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

@@ -397,6 +397,7 @@ export default function Problem363Visualizer() {
                 </div>
                 <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
                   {step.maxSum !== null ? (
+                    <>
                       <span style={{ color: '#92400e' }}>
                         Max ≤ {step.target} found: {step.maxSum}
                       </span>

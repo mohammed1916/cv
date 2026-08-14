@@ -212,6 +212,7 @@ export default function DailyTemperaturesVisualizer() {
 
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
           {panelDivs.stack && createPortal(stackPanel, panelDivs.stack)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

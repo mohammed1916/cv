@@ -235,6 +235,7 @@ export default function MaxPointsOnALineVisualizer() {
         </div>
     )
     const vizPanel = (
+      <>
         <div className="mpl-panel">
             <VizPanel
                 EXAMPLES={EXAMPLES}
@@ -260,6 +261,7 @@ export default function MaxPointsOnALineVisualizer() {
         </div>
     )
     const playbackPanel = (
+      <>
             {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
@@ -293,6 +295,7 @@ export default function MaxPointsOnALineVisualizer() {
         <div className="mpl-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

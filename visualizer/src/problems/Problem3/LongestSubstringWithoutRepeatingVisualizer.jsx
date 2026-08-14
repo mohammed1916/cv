@@ -330,6 +330,7 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={LSWRC_PATTERNS} />
       )}
@@ -370,6 +371,7 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
     <div className="lswrc-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state && createPortal(statePanel, panelDivs.state)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

@@ -283,6 +283,7 @@ export default function HouseRobberIIVisualizer() {
 
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
                     {panelDivs.state && createPortal(statePanel, panelDivs.state)}
                     {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}

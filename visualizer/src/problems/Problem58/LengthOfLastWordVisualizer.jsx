@@ -121,6 +121,7 @@ export default function LengthOfLastWordVisualizer() {
   );
 
   const primaryPanel = (
+    <>
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {EXAMPLES.map(e => (
@@ -181,6 +182,7 @@ export default function LengthOfLastWordVisualizer() {
   );
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={LENGTHOFLASTWORD_PATTERNS} />
       )}
@@ -219,6 +221,7 @@ export default function LengthOfLastWordVisualizer() {
     <div className="lw-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

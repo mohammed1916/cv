@@ -277,6 +277,7 @@ export default function Problem356Visualizer() {
       id: 'viz',
       title: '📐 Line Reflection Visualization',
       content: (
+        <>
                 <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
           {/* Example Selector */}
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -304,6 +305,7 @@ export default function Problem356Visualizer() {
           </div>
 
           {step && (
+            <>
               {/* Message */}
               <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11, fontWeight: 600 }}>
                 {step.message}

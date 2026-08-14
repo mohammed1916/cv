@@ -16,7 +16,6 @@ import { getExamples } from '../../config/examplesRegistry'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import './ClimbingStairsVisualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('climbing-stairs')
 
@@ -378,6 +377,7 @@ export default function ClimbingStairsVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={CLIMBINGSTAIRS_PATTERNS} />
       )}
@@ -422,20 +422,9 @@ export default function ClimbingStairsVisualizer() {
 
   return (
     <div className="cs-dp-shell">
-    <>
-      <ManualInputPanel
-        fields={[{"key":"n","label":"n","type":"string"}]}
-        values={{ n: nInput }}
-        onChange={(k, v) => { if (k === 'n') setNInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
-        showExamples={false}
-      />
-
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.viz && createPortal(visualizationPanel, panelDivs.viz)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.vars && createPortal(variablesPanel, panelDivs.vars)}

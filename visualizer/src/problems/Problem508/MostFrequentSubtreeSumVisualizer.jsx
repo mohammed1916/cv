@@ -161,11 +161,13 @@ function TreeNode({ node, x, y, offset, step }) {
   return (
     <g key={`tree-${node.val}-${x}-${y}`}>
       {node.left && (
+        <>
           <line x1={x} y1={y} x2={x - offset} y2={y + 80} stroke="#cbd5e1" strokeWidth="2" />
           <TreeNode node={node.left} x={x - offset} y={y + 80} offset={offset / 2} step={step} />
         </>
       )}
       {node.right && (
+        <>
           <line x1={x} y1={y} x2={x + offset} y2={y + 80} stroke="#cbd5e1" strokeWidth="2" />
           <TreeNode node={node.right} x={x + offset} y={y + 80} offset={offset / 2} step={step} />
         </>
@@ -375,7 +377,8 @@ export default function MostFrequentSubtreeSumVisualizer() {
           prevDisabled={stepIndex < 0}
           nextDisabled={isDone}
           resetDisabled={stepIndex < 0}
-          onSpeedChange={e => setSpeed(Number(e.target.value
+          onSpeedChange={e => setSpeed(Number(
+            <>e.target.value
     </>))}
           showPatternOverlay={showPatternOverlay}
           onShowPatternOverlayChange={setShowPatternOverlay}

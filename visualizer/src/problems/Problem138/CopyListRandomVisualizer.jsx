@@ -96,6 +96,7 @@ export default function CopyListRandomVisualizer() {
 
     // ─── Panel constants ───────────────────────────────────────────────────
     const primaryPanel = (
+      <>
         <div className="clr-panel" style={{ position: 'relative', height: '100%', overflowY: 'auto' }}>
             <div className="clr-controls-row">
                 <div className="clr-examples">
@@ -171,6 +172,7 @@ export default function CopyListRandomVisualizer() {
     );
 
     const playbackPanel = (
+      <>
             {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
@@ -201,6 +203,7 @@ export default function CopyListRandomVisualizer() {
         <div className="clr-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

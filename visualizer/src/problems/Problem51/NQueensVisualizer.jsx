@@ -260,6 +260,7 @@ export default function NQueensVisualizer() {
 
   // Extract panels into consts (before return)
   const primaryPanel = (
+    <>
     <BoardPanel EXAMPLES={EXAMPLES} ex={ex} n={n} board={board} activeRow={activeRow} activeCol={activeCol} phase={phase} attacked={attacked} attackers={attackers} step={step} applyEx={applyEx} />
   
     </>);
@@ -283,6 +284,7 @@ export default function NQueensVisualizer() {
   );
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={NQUEENS_PATTERNS} />
       )}
@@ -327,6 +329,7 @@ export default function NQueensVisualizer() {
     <div className="nq-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

@@ -159,6 +159,7 @@ function MatrixDisplay({ matrix, dp, highlightedCell }) {
             </motion.div>
           ))}
           {dp && dp[i] && (
+            <>
               <div style={{ width: 2, marginX: 4 }} />
               {dp[i].map((val, j) => (
                 <motion.div

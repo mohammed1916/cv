@@ -111,6 +111,7 @@ export default function GenerateParenthesesVisualizer() {
 
     // Step 3: Extract panel constants
     const primaryPanel = (
+      <>
         <div className="gp-panel-body">
             <div className="gp-examples">
                 {EXAMPLES.map((ex) => (
@@ -191,6 +192,7 @@ export default function GenerateParenthesesVisualizer() {
     );
 
     const playbackPanel = (
+      <>
             {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={GENERATEPARENTHESES_PATTERNS} />
             )}
@@ -239,6 +241,7 @@ export default function GenerateParenthesesVisualizer() {
 
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}

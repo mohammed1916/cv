@@ -121,6 +121,7 @@ export default function RotateImageVisualizer() {
         <div className="ri-status">{step?.message ?? "Press Play to begin."}</div>
     );
     const playbackPanel = (
+      <>
             {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={ROTATE_PATTERNS} />
             )}
@@ -163,6 +164,7 @@ export default function RotateImageVisualizer() {
 
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.state && createPortal(statePanel, panelDivs.state)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}

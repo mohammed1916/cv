@@ -201,6 +201,7 @@ export default function BTMaxPathVisualizer() {
     )
 
     const playbackPanel = (
+      <>
             {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
             )}
@@ -247,6 +248,7 @@ export default function BTMaxPathVisualizer() {
         <div className="btmps-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}

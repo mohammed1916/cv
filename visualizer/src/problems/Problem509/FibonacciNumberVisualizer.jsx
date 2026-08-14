@@ -220,6 +220,7 @@ function VisualizationPanel({ n, step, applyEx }) {
           whiteSpace: 'pre-wrap'
         }}>
           {step?.dp && step.dp.length > 0 ? (
+            <>
               F(0) = 0
               <br />
               {step.dp.length > 1 && `F(1) = 1`}
@@ -336,7 +337,8 @@ export default function FibonacciNumberVisualizer() {
           prevDisabled={stepIndex < 0}
           nextDisabled={isDone}
           resetDisabled={stepIndex < 0}
-          onSpeedChange={e => setSpeed(Number(e.target.value
+          onSpeedChange={e => setSpeed(Number(
+            <>e.target.value
     </>))}
           showPatternOverlay={showPatternOverlay}
           onShowPatternOverlayChange={setShowPatternOverlay}

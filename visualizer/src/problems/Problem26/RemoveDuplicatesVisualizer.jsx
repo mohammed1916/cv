@@ -86,6 +86,7 @@ export default function RemoveDuplicatesVisualizer({ problem }) {
 
   // Step 3: Extract panels into consts
   const primaryPanel = (
+    <>
     <div className="rd-panel">
       <div className="rd-panel-label">Array (in-place)</div>
       <AnimatedIterationList
@@ -149,6 +150,7 @@ export default function RemoveDuplicatesVisualizer({ problem }) {
   );
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={REMOVDUPLICATES_PATTERNS} />
       )}
@@ -187,6 +189,7 @@ export default function RemoveDuplicatesVisualizer({ problem }) {
 
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

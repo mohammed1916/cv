@@ -342,6 +342,7 @@ export default function Problem364Visualizer() {
           </div>
 
           {step && (
+            <>
               <div className="nlws-step-info">
                 <div className="nlws-step-message">{step.message}</div>
                 <div className="nlws-step-details">{step.details}</div>

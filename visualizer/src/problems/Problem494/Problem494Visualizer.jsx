@@ -101,6 +101,7 @@ export default function Problem494Visualizer() {
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
   const codePanel = (<CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />)
   const vizPanel = (
+    <>
       <VisualizationPanel nums={nums} target={target} step={step} applyEx={applyEx} />
     </>)
   const [panelDivs, setPanelDivs] = useState(null)
@@ -112,6 +113,7 @@ export default function Problem494Visualizer() {
   return (<div className="problem-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
         </>

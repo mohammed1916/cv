@@ -408,6 +408,7 @@ export default function Problem65Visualizer() {
 
   // Extract panels into consts
   const primaryPanel = (
+    <>
     <div className="problem65-panel">
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, padding: '12px 12px 0' }}>
         {EXAMPLES.map((e) => (
@@ -467,6 +468,7 @@ export default function Problem65Visualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -507,6 +509,7 @@ export default function Problem65Visualizer() {
     <div className="problem65-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}

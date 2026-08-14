@@ -113,6 +113,7 @@ function VisualizationPanel({ houses, heaters, step, applyEx }) {
         <svg width="100%" height="80" style={{ border: '1px solid #cbd5e1', borderRadius: 4 }}>
           <line x1="20" y1="40" x2="380" y2="40" stroke="#cbd5e1" strokeWidth="2" />
           {Math.min(...[...houses, ...heaters]) >= 0 && Math.max(...[...houses, ...heaters]) <= 50 && (
+            <>
               {houses.map((h, idx) => (
                 <circle
                   key={`house-${idx}`}
@@ -272,7 +273,8 @@ export default function Problem475Visualizer() {
           prevDisabled={stepIndex < 0}
           nextDisabled={isDone}
           resetDisabled={stepIndex < 0}
-          onSpeedChange={e => setSpeed(Number(e.target.value
+          onSpeedChange={e => setSpeed(Number(
+            <>e.target.value
     </>))}
           showPatternOverlay={showPatternOverlay}
           onShowPatternOverlayChange={setShowPatternOverlay}

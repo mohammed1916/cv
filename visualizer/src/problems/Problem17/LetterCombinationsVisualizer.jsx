@@ -210,6 +210,7 @@ export default function LetterCombinationsVisualizer() {
     );
 
     const playbackPanel = (
+      <>
             {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={LC_PATTERNS} />
             )}
@@ -249,6 +250,7 @@ export default function LetterCombinationsVisualizer() {
         <div className="lc-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

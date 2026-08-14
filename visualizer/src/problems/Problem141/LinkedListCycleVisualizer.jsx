@@ -285,6 +285,7 @@ export default function LinkedListCycleVisualizer() {
 
     // Extract panels into consts (Step 3)
     const primaryPanel = (
+      <>
         <div className="llc-panel">
             <header className="llc-head">
                 <span>Linked List Cycle · Floyd's Tortoise &amp; Hare</span>
@@ -428,6 +429,7 @@ export default function LinkedListCycleVisualizer() {
     )
 
     const playbackPanel = (
+      <>
             {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 isPlaying={isPlaying}
@@ -471,6 +473,7 @@ export default function LinkedListCycleVisualizer() {
         <div className="llc-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.state && createPortal(statePanel, panelDivs.state)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}

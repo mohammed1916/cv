@@ -247,6 +247,7 @@ export default function Problem397Visualizer() {
           </div>
 
           {step && (
+            <>
               {/* Message */}
               <div style={{ padding: 10, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 12, fontWeight: 500, color: '#1e293b' }}>
                 {step.message}

@@ -14,7 +14,6 @@ import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
 
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const PATTERNS = ['checking_length', 'comparing', 'divisible', 'done', 'extracted_pattern', 'found', 'not_divisible', 'start']
 const LINE_PATTERN_MAP = {
   1: 'done',
@@ -226,6 +225,7 @@ function StringVisualization({ step }) {
       </div>
 
       {pattern && (
+        <>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             <header style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>
               Pattern Found
@@ -467,18 +467,6 @@ export default function Problem459Visualizer() {
 
   return (
     <div className="problem-shell">
-    <>
-      <ManualInputPanel
-        fields={[{"key":"s","label":"s","type":"string"}]}
-        values={{ s: sInput }}
-        onChange={(k, v) => { if (k === 's') setSInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
-        showExamples={false}
-      />
-
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
 
       <FloatingPanel title="Playback Controls">

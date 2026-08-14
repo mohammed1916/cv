@@ -213,6 +213,7 @@ export default function LCSVisualizer() {
         <div className="problem-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.table && createPortal(tablePanel, panelDivs.table)}
                     {panelDivs['cell-info'] && createPortal(cellInfoPanel, panelDivs['cell-info'])}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}

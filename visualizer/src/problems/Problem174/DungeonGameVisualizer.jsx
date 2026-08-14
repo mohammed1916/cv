@@ -170,6 +170,7 @@ export default function DungeonGameVisualizer() {
 
     // Extract panels
     const primaryPanel = (
+      <>
         <div className="dg-panel">
             <VizPanel EXAMPLES={EXAMPLES} ex={ex} dungeon={dungeon} R={R} C={C} CELL_W={CELL_W} CELL_H={CELL_H} dp={dp} activeR={activeR} activeC={activeC} step={step} applyEx={applyEx} setActiveLineDom={setActiveLineDom} />
         </div>
@@ -195,6 +196,7 @@ export default function DungeonGameVisualizer() {
     );
 
     const playbackPanel = (
+      <>
             {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
@@ -225,6 +227,7 @@ export default function DungeonGameVisualizer() {
         <div className="dg-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

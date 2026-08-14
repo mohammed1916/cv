@@ -209,6 +209,7 @@ function ListVisualization({ values }) {
                 {val}
               </text>
               {idx < values.length - 1 && (
+                <>
                   <line
                     x1={x + nodeWidth}
                     y1={y + nodeHeight / 2}
@@ -333,6 +334,7 @@ export default function InsertionSortListVisualizer() {
   )
 
   const vizPanel = (
+    <>
     <div className="isl-panel">
       <VisualizationPanel step={step} />
     </div>
@@ -350,6 +352,7 @@ export default function InsertionSortListVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && <PatternLegend />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -386,6 +389,7 @@ export default function InsertionSortListVisualizer() {
     <div className="isl-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

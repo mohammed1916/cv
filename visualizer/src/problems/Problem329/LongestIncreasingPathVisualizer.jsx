@@ -223,6 +223,7 @@ export default function LongestIncreasingPathVisualizer() {
     const maxDP = Math.max(...dpGrid.flat(), 1);
 
     const vizPanel = (
+      <>
         <VisualizationPanel EXAMPLES={EXAMPLES} ex={ex} matrix={matrix} dpGrid={dpGrid} activeCell={activeCell} neighbor={neighbor} visiting={visiting} visitSet={visitSet} globalBest={globalBest} step={step} maxDP={maxDP} applyEx={applyEx} />
     
     </>);
@@ -242,6 +243,7 @@ export default function LongestIncreasingPathVisualizer() {
         <div className="problem-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                 </>

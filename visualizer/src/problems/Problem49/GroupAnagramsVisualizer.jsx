@@ -290,6 +290,7 @@ export default function GroupAnagramsVisualizer() {
     )
 
     const playbackPanel = (
+      <>
             {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={GROUPANAGRAMS_PATTERNS} />
             )}
@@ -346,6 +347,7 @@ export default function GroupAnagramsVisualizer() {
             <div className="ga-workspace">
                 <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
                 {panelDivs && (
+                  <>
                         {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
                         {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
                         {panelDivs.code && createPortal(codePanel, panelDivs.code)}

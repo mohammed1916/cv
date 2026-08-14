@@ -262,6 +262,7 @@ function PalindromeVisualization({ s, step }) {
             wordBreak: 'break-all',
           }}>
             {entries.length > 0 ? (
+              <>
                 {entries.map(([char]) => char + char.repeat(Math.floor((charFreq[char] || 0) / 2) * 2 - 1)).join('')}
                 {step.oddCount > 0 ? entries[0][0] : ''}
               </>

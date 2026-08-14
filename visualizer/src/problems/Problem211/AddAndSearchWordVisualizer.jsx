@@ -319,6 +319,7 @@ export default function AddAndSearchWordVisualizer() {
   )
 
   const vizPanel = (
+    <>
     <VisualizationPanel step={step} trie={trie} />
   
     </>)
@@ -337,6 +338,7 @@ export default function AddAndSearchWordVisualizer() {
     <div className="problem-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
         </>

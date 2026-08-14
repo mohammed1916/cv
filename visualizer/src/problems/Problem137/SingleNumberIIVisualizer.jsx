@@ -261,6 +261,7 @@ export default function SingleNumberIIVisualizer() {
   )
 
   const vizPanel = (
+    <>
     <div className="sn2-panel">
       <VisualizationPanel step={step} />
     </div>
@@ -274,6 +275,7 @@ export default function SingleNumberIIVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -311,6 +313,7 @@ export default function SingleNumberIIVisualizer() {
     <div className="sn2-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

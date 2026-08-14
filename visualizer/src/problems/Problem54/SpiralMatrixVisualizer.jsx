@@ -7,7 +7,6 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './SpiralMatrixVisualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
@@ -225,19 +224,6 @@ export default function SpiralMatrixVisualizer() {
 
   // Step 2: Extract panels into consts
   const primaryPanel = (
-    <>
-
-      <ManualInputPanel
-        fields={[{"key":"matrix","label":"matrix","type":"array"}]}
-        values={{ matrix: matrixInput }}
-        onChange={(k, v) => { if (k === 'matrix') setMatrixInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
-        showExamples={false}
-      />
-
     <div className="sm-panel">
       <div className="sm-panel-head">
         Matrix View
@@ -271,6 +257,7 @@ export default function SpiralMatrixVisualizer() {
             >
                 {/* Render boundary overlays */}
                 {step && step.phase !== 'done' && (
+                    <>
                         <div className="sm-boundary top-bound" style={{ top: `calc(${step.top} * 48px - 4px)` }} />
                         <div className="sm-boundary bottom-bound" style={{ top: `calc(${(step.bottom + 1)} * 48px - 4px)` }} />
                         <div className="sm-boundary left-bound" style={{ left: `calc(${step.left} * 48px - 4px)` }} />
@@ -317,8 +304,7 @@ export default function SpiralMatrixVisualizer() {
         </div>
       </div>
     </div>
-  
-    </>)
+  )
 
   const statePanel = (
     <div className="sm-panel">
@@ -373,6 +359,7 @@ export default function SpiralMatrixVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={SPIRALMATRIX_PATTERNS} />
       )}
@@ -414,6 +401,7 @@ export default function SpiralMatrixVisualizer() {
     <div className="spiral-matrix-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state && createPortal(statePanel, panelDivs.state)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

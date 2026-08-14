@@ -181,6 +181,7 @@ export default function ReverseKGroupVisualizer() {
     );
 
     const primaryPanel = (
+      <>
         <div className="rkg-panel">
             <div className="rkg-examples">
                 {EXAMPLES.map(e => (
@@ -254,6 +255,7 @@ export default function ReverseKGroupVisualizer() {
     )
 
     const playbackPanel = (
+      <>
             {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={REVERSEKGROUP_PATTERNS} />
             )}
@@ -292,6 +294,7 @@ export default function ReverseKGroupVisualizer() {
         <div className="rkg-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

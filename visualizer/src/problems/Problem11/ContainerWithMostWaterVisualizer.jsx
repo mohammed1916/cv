@@ -323,6 +323,7 @@ export default function ContainerWithMostWaterVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={CMW_PATTERNS} />
       )}
@@ -364,6 +365,7 @@ export default function ContainerWithMostWaterVisualizer() {
     <div className="container-water-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.state && createPortal(statePanel, panelDivs.state)}

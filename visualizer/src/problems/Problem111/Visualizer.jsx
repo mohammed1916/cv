@@ -373,6 +373,7 @@ export default function MinimumDepthOfBinaryTreeVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         onReset={handleReset}
@@ -416,6 +417,7 @@ export default function MinimumDepthOfBinaryTreeVisualizer() {
     <div className="mdbt-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state && createPortal(statePanel, panelDivs.state)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

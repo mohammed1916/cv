@@ -379,7 +379,8 @@ export default function FreedomTrailVisualizer() {
           prevDisabled={stepIndex < 0}
           nextDisabled={isDone}
           resetDisabled={stepIndex < 0}
-          onSpeedChange={e => setSpeed(Number(e.target.value
+          onSpeedChange={e => setSpeed(Number(
+            <>e.target.value
     </>))}
           showPatternOverlay={showPatternOverlay}
           onShowPatternOverlayChange={setShowPatternOverlay}

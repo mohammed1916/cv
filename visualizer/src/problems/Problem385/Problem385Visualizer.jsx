@@ -271,6 +271,7 @@ export default function Problem385Visualizer() {
           </div>
 
           {step && (
+            <>
               {/* Message */}
               <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 12, fontWeight: 500 }}>
                 {step.message}

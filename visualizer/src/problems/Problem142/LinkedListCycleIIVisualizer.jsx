@@ -221,6 +221,7 @@ function ListVisualization({ nodes, slowPos, fastPos, cycleStart, phase2Slow, ph
       <svg width={500} height={320} style={{ overflow: 'visible' }}>
         {/* Nodes in circle if there's a cycle */}
         {cycleStart >= 0 ? (
+          <>
           // Draw cycle
             {nodes.map((val, idx) => {
               const angle = (idx / nodes.length) * 2 * Math.PI
@@ -283,6 +284,7 @@ function ListVisualization({ nodes, slowPos, fastPos, cycleStart, phase2Slow, ph
             })}
           </>
         ) : (
+          <>
           // Draw linear list
             {nodes.map((val, idx) => {
               const x = 50 + idx * 70
@@ -433,6 +435,7 @@ export default function LinkedListCycleIIVisualizer() {
   )
 
   const vizPanel = (
+    <>
     <div className="llc2-panel">
       <VisualizationPanel step={step} nodes={nodes} cycleStart={pos} />
     </div>
@@ -448,6 +451,7 @@ export default function LinkedListCycleIIVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -485,6 +489,7 @@ export default function LinkedListCycleIIVisualizer() {
     <div className="llc2-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

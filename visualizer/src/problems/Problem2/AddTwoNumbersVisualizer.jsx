@@ -338,6 +338,7 @@ export default function AddTwoNumbersVisualizer({ problem }) {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={ATN_PATTERNS} />
       )}
@@ -377,6 +378,7 @@ export default function AddTwoNumbersVisualizer({ problem }) {
     <div className="atn-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state && createPortal(statePanel, panelDivs.state)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

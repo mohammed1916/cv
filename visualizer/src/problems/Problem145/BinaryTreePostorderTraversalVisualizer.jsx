@@ -389,6 +389,7 @@ export default function BinaryTreePostorderTraversalVisualizer() {
   )
 
   const primaryPanel = (
+    <>
     <div className="btp-panel">
       <VisualizationPanel step={step} root={root} />
     </div>
@@ -402,6 +403,7 @@ export default function BinaryTreePostorderTraversalVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -439,6 +441,7 @@ export default function BinaryTreePostorderTraversalVisualizer() {
     <div className="btp-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

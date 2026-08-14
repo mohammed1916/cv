@@ -10,7 +10,6 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './Problem374Visualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -391,26 +390,15 @@ function VisualizationPanel({ n, pick, step, applyEx }) {
 }
 
 export default function Problem374Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0]);
-  const [nInput, setNInput] = useState(10);
-  const [pickInput, setPickInput] = useState(6);
-  const { n, pick, inputError } = useMemo(() => {
-    try {
-      const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
-      const parsedPick = Number(pickInput); if (isNaN(parsedPick)) throw new Error('pick must be a number');
-      return { n: parsedN, pick: parsedPick, inputError: '' };
-    } catch (e) {
-      return { n: 10, pick: 6, inputError: e.message };
-    }
-  }, [nInput, pickInput]);
+  const [ex, setEx] = useState(EXAMPLES[0] || { n: 10, pick: 6 })
 
   const steps = useMemo(
     () =>
-      generateSteps(n, pick).map((current) => ({
+      generateSteps(ex.n, ex.pick).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [n, pick]
+    [ex]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -418,7 +406,7 @@ export default function Problem374Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); setNInput(String(e.n)); setPickInput(String(e.pick)); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -433,7 +421,7 @@ export default function Problem374Visualizer() {
       id: 'code',
       title: 'Code',
       content: (
-              <div style={{ position: 'relative' }}>
+        <div style={{ position: 'relative' }}>
           <CodeTracePanel
             step={step}
             codeLines={SOLUTION_CODE}
@@ -448,8 +436,8 @@ export default function Problem374Visualizer() {
               activeLineDom={activeLineDom}
               activeLine={step.activeLine}
             />
-          
-            </div>
+          )}
+        </div>
       ),
     },
     {
@@ -457,8 +445,8 @@ export default function Problem374Visualizer() {
       title: '🎯 Binary Search Guessing',
       content: (
         <VisualizationPanel
-          n={n}
-          pick={pick}
+          n={ex.n}
+          pick={ex.pick}
           step={step}
           applyEx={applyEx}
         />

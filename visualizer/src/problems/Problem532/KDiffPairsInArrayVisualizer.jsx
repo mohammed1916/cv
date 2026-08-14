@@ -10,7 +10,6 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './KDiffPairsInArrayVisualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -273,26 +272,15 @@ function VisualizationPanel({ nums, k, step, applyEx }) {
 }
 
 export default function KDiffPairsInArrayVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numsInput, setNumsInput] = useState("[3,1,4,1,5]");
-  const [kInput, setKInput] = useState(1);
-  const { nums, k, inputError } = useMemo(() => {
-    try {
-      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
-      const parsedK = Number(kInput); if (isNaN(parsedK)) throw new Error('k must be a number');
-      return { nums: parsedNums, k: parsedK, inputError: '' };
-    } catch (e) {
-      return { nums: "[3,1,4,1,5]", k: 1, inputError: e.message };
-    }
-  }, [numsInput, kInput]);
+  const [ex, setEx] = useState(EXAMPLES[0] || { nums: [3, 1, 4, 1, 5], k: 1 })
 
   const steps = useMemo(
     () =>
-      generateSteps(nums, k).map((current) => ({
+      generateSteps(ex.nums, ex.k).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [nums, k]
+    [ex]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -300,7 +288,7 @@ export default function KDiffPairsInArrayVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); setNumsInput(JSON.stringify(e.nums)); setKInput(String(e.k)); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -315,7 +303,7 @@ export default function KDiffPairsInArrayVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-              <div style={{ position: 'relative' }}>
+        <div style={{ position: 'relative' }}>
 
           <CodeTracePanel
           step={step}
@@ -340,8 +328,9 @@ export default function KDiffPairsInArrayVisualizer() {
 
             />
 
-          
-            </div>
+          )}
+
+        </div>
       ),
     },
     {
@@ -349,8 +338,8 @@ export default function KDiffPairsInArrayVisualizer() {
       title: '📊 K-Diff Pairs in Array',
       content: (
         <VisualizationPanel
-          nums={nums}
-          k={k}
+          nums={ex.nums}
+          k={ex.k}
           step={step}
           applyEx={applyEx}
         />

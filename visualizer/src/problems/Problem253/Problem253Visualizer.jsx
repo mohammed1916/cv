@@ -84,6 +84,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
     const { pattern, togglePattern } = usePatternOverlay(false)
 
     const vizPanel = (
+      <>
         <div className="problem253-visualizer-viz-panel">
             <div className="problem253-visualizer-canvas">
                 <motion.div
@@ -135,6 +136,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
         <div className="problem253-visualizer-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                 </>

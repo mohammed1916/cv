@@ -10,7 +10,6 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './DetectCapitalVisualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -248,24 +247,15 @@ function VisualizationPanel({ word, step, applyEx }) {
 }
 
 export default function DetectCapitalVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0]);
-  const [wordInput, setWordInput] = useState("USA");
-  const { word, inputError } = useMemo(() => {
-    try {
-      const parsedWord = wordInput;
-      return { word: parsedWord, inputError: '' };
-    } catch (e) {
-      return { word: "USA", inputError: e.message };
-    }
-  }, [wordInput]);
+  const [ex, setEx] = useState(EXAMPLES[0] || { word: 'FiCc' })
 
   const steps = useMemo(
     () =>
-      generateSteps(word).map((current) => ({
+      generateSteps(ex.word).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [word]
+    [ex]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -273,7 +263,7 @@ export default function DetectCapitalVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); setWordInput(String(e.word)); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -288,7 +278,7 @@ export default function DetectCapitalVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-              <div style={{ position: 'relative' }}>
+        <div style={{ position: 'relative' }}>
 
           <CodeTracePanel
           step={step}
@@ -313,8 +303,9 @@ export default function DetectCapitalVisualizer() {
 
             />
 
-          
-            </div>
+          )}
+
+        </div>
       ),
     },
     {
@@ -322,7 +313,7 @@ export default function DetectCapitalVisualizer() {
       title: '🔤 Detect Capital',
       content: (
         <VisualizationPanel
-          word={word}
+          word={ex.word}
           step={step}
           applyEx={applyEx}
         />

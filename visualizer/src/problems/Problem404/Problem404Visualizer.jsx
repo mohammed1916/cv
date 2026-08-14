@@ -154,6 +154,7 @@ function TreeVisualization({ tree, step }) {
       }}>
         <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
           {tree?.left && buildTreeLayout(tree).length > 1 && (
+            <>
               {tree.left && (
                 <line
                   x1={200 + 0}

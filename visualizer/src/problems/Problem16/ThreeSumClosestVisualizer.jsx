@@ -324,6 +324,7 @@ export default function ThreeSumClosestVisualizer() {
     )
 
     const playbackPanel = (
+      <>
         {showPatternOverlay && (
           <PatternLegend currentPhase={step?.phase} usedPatterns={THREESUMCLOSEST_PATTERNS} />
         )}
@@ -364,6 +365,7 @@ export default function ThreeSumClosestVisualizer() {
       <div className="tsc3-shell">
         <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
         {panelDivs && (
+          <>
             {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
             {panelDivs.state && createPortal(statePanel, panelDivs.state)}
             {panelDivs.code && createPortal(codePanel, panelDivs.code)}

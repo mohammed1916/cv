@@ -98,6 +98,7 @@ export default function Search2DMatrixVisualizer() {
 
     // Step 2: Extract panels into consts
     const primaryPanel = (
+      <>
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
                 {EXAMPLES.map((ex, i) => (
@@ -183,6 +184,7 @@ export default function Search2DMatrixVisualizer() {
     )
 
     const playbackPanel = (
+      <>
             {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={SEARCH2DMATRIX_PATTERNS} />
             )}
@@ -223,6 +225,7 @@ export default function Search2DMatrixVisualizer() {
         <div className="s2m-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

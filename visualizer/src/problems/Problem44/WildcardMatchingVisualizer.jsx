@@ -9,7 +9,6 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./WildcardMatchingVisualizer.css";
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from "../../components/LuminoDockPanel"
 
@@ -79,28 +78,18 @@ const CELL_SIZE = 34;
 
 export default function WildcardMatchingVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [sInput, setSInput] = useState("aa");
-  const [pInput, setPInput] = useState("a*");
-  const { s, p, inputError } = useMemo(() => {
-    try {
-      const parsedS = sInput;
-      const parsedP = pInput;
-      return { s: parsedS, p: parsedP, inputError: '' };
-    } catch (e) {
-      return { s: "aa", p: "a*", inputError: e.message };
-    }
-  }, [sInput, pInput]);
-  const steps = useMemo(() => generateSteps(s, p), [s, p]);
+  const steps = useMemo(() => generateSteps(ex.s, ex.p), [ex]);
   const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); setSInput(String(e.s)); setPInput(String(e.p)); handleReset(); }, [handleReset]);;
+  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
 
-  const dp = step?.dp ?? Array.from({ length: s.length + 1 }, () => Array(p.length + 1).fill(false));
+  const dp = step?.dp ?? Array.from({ length: ex.s.length + 1 }, () => Array(ex.p.length + 1).fill(false));
   const activeI = step?.i ?? -1;
   const activeJ = step?.j ?? -1;
   const phase = step?.phase ?? "init";
+  const s = ex.s, p = ex.p;
 
   // Step 2: Extract panels
   const primaryPanel = (
@@ -180,19 +169,18 @@ export default function WildcardMatchingVisualizer() {
         </div>
         <div className="wm-tracker">
           <span className="wm-tracker-label">Result</span>
-          <span className={`wm-tracker-val wm-result-val ${dp[s.length]?.[p.length] ? "true" : "false"}`}>
-            {step?.done ? String(dp[s.length][p.length]) : "…"}
+          <span className={`wm-tracker-val wm-result-val ${dp[ex.s.length]?.[ex.p.length] ? "true" : "false"}`}>
+            {step?.done ? String(dp[ex.s.length][ex.p.length]) : "…"}
           </span>
         </div>
       </div>
 
       {step?.done && (
-        <div className={`wm-result ${dp[s.length][p.length] ? "match" : "no-match"}`}>
-          {dp[s.length][p.length] ? `✓ "${s}" matches pattern "${p}"` : `✗ "${s}" does not match "${p}"`}
+        <div className={`wm-result ${dp[ex.s.length][ex.p.length] ? "match" : "no-match"}`}>
+          {dp[ex.s.length][ex.p.length] ? `✓ "${s}" matches pattern "${p}"` : `✗ "${s}" does not match "${p}"`}
         </div>
       )}
     </div>
-    </>
   )
 
   const codePanel = (
@@ -214,6 +202,7 @@ export default function WildcardMatchingVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={WILDCARDMATCHING_PATTERNS} />
       )}
@@ -247,6 +236,7 @@ export default function WildcardMatchingVisualizer() {
     <div className="wm-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}
           {panelDivs.status  && createPortal(statusPanel,  panelDivs.status)}

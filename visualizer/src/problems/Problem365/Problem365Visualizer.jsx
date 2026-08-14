@@ -507,6 +507,7 @@ export default function Problem365Visualizer() {
           </div>
 
           {step && (
+            <>
               <div className="wjp-step-info">
                 <div className="wjp-step-message">{step.message}</div>
                 <div className="wjp-step-details">{step.details}</div>

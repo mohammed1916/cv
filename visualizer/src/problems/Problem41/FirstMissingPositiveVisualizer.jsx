@@ -104,6 +104,7 @@ export default function FirstMissingPositiveVisualizer() {
 
     // Step 3: Extract panel consts
     const primaryPanel = (
+      <>
         <>
             <div className="fmp-examples">
                 {EXAMPLES.map(e => (
@@ -188,6 +189,7 @@ export default function FirstMissingPositiveVisualizer() {
     );
 
     const playbackPanel = (
+      <>
             {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={FIRSTMISSINGPOSITIVE_PATTERNS} />
             )}
@@ -228,6 +230,7 @@ export default function FirstMissingPositiveVisualizer() {
         <div className="fmp-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

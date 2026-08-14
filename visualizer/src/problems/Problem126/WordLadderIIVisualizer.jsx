@@ -268,6 +268,7 @@ export default function WordLadderIIVisualizer() {
 
   // Step 2: Extract panels into consts
   const primaryPanel = (
+    <>
     <div className="wl2-panel">
       <div className="wl2-panel-head">🔗 Word Ladder II</div>
       <div className="wl2-panel-body">
@@ -305,6 +306,7 @@ export default function WordLadderIIVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -345,6 +347,7 @@ export default function WordLadderIIVisualizer() {
     <div className="wl2-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

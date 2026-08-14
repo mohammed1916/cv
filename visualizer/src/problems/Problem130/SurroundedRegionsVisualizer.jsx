@@ -277,6 +277,7 @@ export default function SurroundedRegionsVisualizer() {
 
   // Extract panels into consts for Lumino portals
   const primaryPanel = (
+    <>
     <div className="srr-panel">
       <VisualizationPanel step={step} />
     </div>
@@ -309,6 +310,7 @@ export default function SurroundedRegionsVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -345,6 +347,7 @@ export default function SurroundedRegionsVisualizer() {
     <div className="srr-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

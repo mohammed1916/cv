@@ -133,6 +133,7 @@ export default function ImplementTrieVisualizer() {
     <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />
   )
   const vizPanel = (
+    <>
     <VisualizationPanel step={step} trie={trie} />
   
     </>)
@@ -146,6 +147,7 @@ export default function ImplementTrieVisualizer() {
     <div className="problem-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
         </>

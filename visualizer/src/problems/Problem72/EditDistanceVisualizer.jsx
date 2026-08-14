@@ -232,6 +232,7 @@ export default function EditDistanceVisualizer() {
       
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
           {panelDivs.table && createPortal(tablePanel, panelDivs.table)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

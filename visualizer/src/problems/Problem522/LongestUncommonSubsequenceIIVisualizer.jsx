@@ -10,7 +10,6 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './LongestUncommonSubsequenceIIVisualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -245,24 +244,15 @@ function VisualizationPanel({ strs, step, applyEx }) {
 }
 
 export default function LongestUncommonSubsequenceIIVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0]);
-  const [strsInput, setStrsInput] = useState("[\"abcdefg\",\"abc\",\"abcd\"]");
-  const { strs, inputError } = useMemo(() => {
-    try {
-      const parsedStrs = JSON.parse(strsInput); if (!Array.isArray(parsedStrs)) throw new Error('strs must be an array');
-      return { strs: parsedStrs, inputError: '' };
-    } catch (e) {
-      return { strs: "[\"abcdefg\",\"abc\",\"abcd\"]", inputError: e.message };
-    }
-  }, [strsInput]);
+  const [ex, setEx] = useState(EXAMPLES[0] || { strs: ['abcdefg', 'abc', 'abcd'] })
 
   const steps = useMemo(
     () =>
-      generateSteps(strs).map((current) => ({
+      generateSteps(ex.strs).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [strs]
+    [ex]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -270,7 +260,7 @@ export default function LongestUncommonSubsequenceIIVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); setStrsInput(JSON.stringify(e.strs)); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -285,7 +275,7 @@ export default function LongestUncommonSubsequenceIIVisualizer() {
       id: 'code',
       title: 'Code',
       content: (
-              <div style={{ position: 'relative' }}>
+        <div style={{ position: 'relative' }}>
 
           <CodeTracePanel
           step={step}
@@ -310,8 +300,9 @@ export default function LongestUncommonSubsequenceIIVisualizer() {
 
             />
 
-          
-            </div>
+          )}
+
+        </div>
       ),
     },
     {
@@ -319,7 +310,7 @@ export default function LongestUncommonSubsequenceIIVisualizer() {
       title: '🔤 Longest Uncommon Subsequence II',
       content: (
         <VisualizationPanel
-          strs={strs}
+          strs={ex.strs}
           step={step}
           applyEx={applyEx}
         />

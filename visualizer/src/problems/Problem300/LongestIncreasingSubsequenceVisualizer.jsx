@@ -11,7 +11,6 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './LongestIncreasingSubsequenceVisualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -157,18 +156,6 @@ export default function LongestIncreasingSubsequenceVisualizer() {
                         const isMax = isDone && dp[idx] === maxDp
                         return (
                             <div key={idx} className="lis-col">
-    <>
-      <ManualInputPanel
-        fields={[{"key":"nums","label":"nums","type":"array"}]}
-        values={{ nums: numsInput }}
-        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
-        showExamples={false}
-      />
-
                                 <motion.div
                                     className={`lis-cell nums-cell${isI ? ' curr-i' : ''}${isJ ? ' curr-j' : ''}${isMax ? ' max-cell' : ''}`}
                                     animate={{ y: isI ? -8 : isJ ? -4 : 0, scale: isI ? 1.12 : 1 }}
@@ -280,6 +267,7 @@ export default function LongestIncreasingSubsequenceVisualizer() {
         <div className="lis-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+                <>
                     {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                 </>

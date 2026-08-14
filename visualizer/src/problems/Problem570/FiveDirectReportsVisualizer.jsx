@@ -256,6 +256,7 @@ export default function FiveDirectReportsVisualizer() {
 
   /* ── Panels ───────────────────────────────────────────────── */
   const primaryPanel = (
+    <>
     <div className="p570-panel-primary">
       <div className="p570-card">
         <div className="p570-section-label">Sample Employee Rows</div>
@@ -479,6 +480,7 @@ export default function FiveDirectReportsVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -516,6 +518,7 @@ export default function FiveDirectReportsVisualizer() {
     <div className="p570-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state   && createPortal(statePanel,   panelDivs.state)}
           {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}

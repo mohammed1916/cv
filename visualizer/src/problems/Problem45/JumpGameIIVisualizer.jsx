@@ -161,6 +161,7 @@ export default function JumpGameIIVisualizer() {
   );
 
   const vizPanel = (
+    <>
     <div className="jg2-panel">
       <ArrayVisualization nums={nums} step={step} maxVal={maxVal} />
       <StatsDisplay step={step} />
@@ -195,6 +196,7 @@ export default function JumpGameIIVisualizer() {
   );
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={JUMPGAMEII_PATTERNS} />
       )}
@@ -238,6 +240,7 @@ export default function JumpGameIIVisualizer() {
     <div className="jg2-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

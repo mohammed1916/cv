@@ -168,6 +168,7 @@ function VizBody({ step, words }) {
   const showLookup = step && step.matchCase
 
   return (
+    <>
       <div>
         <div style={LABEL}>Words</div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>

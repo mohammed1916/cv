@@ -276,6 +276,7 @@ export default function MinimumWindowSubstringVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {/* Playback controls handled in VisualizerPlaybackSection */}
     </>
   )
@@ -296,6 +297,7 @@ export default function MinimumWindowSubstringVisualizer() {
     <div className="mws-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state && createPortal(statePanel, panelDivs.state)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}

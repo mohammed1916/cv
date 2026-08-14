@@ -313,6 +313,7 @@ export default function Problem361Visualizer() {
           </div>
 
           {step && (
+            <>
               <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11, fontWeight: 600 }}>
                 {step.message}
               </div>
@@ -374,6 +375,7 @@ export default function Problem361Visualizer() {
 
                 {/* Direction rays */}
                 {step.selectedCell && step.directionRays && step.directionRays.length > 0 && (
+                  <>
                     {/* Left ray */}
                     {step.directionRays[0]?.count > 0 && (
                       <motion.line

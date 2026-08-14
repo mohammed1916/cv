@@ -102,6 +102,7 @@ export default function PermutationInStringVisualizer() {
     );
 
     const vizPanel = (
+      <>
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
             <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>s1: <strong>{s1}</strong> | s2: <strong>{s2}</strong></div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -173,6 +174,7 @@ export default function PermutationInStringVisualizer() {
         <div className="problem-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                     {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
                 </>

@@ -265,6 +265,7 @@ export default function VerifyPreorderSerializationofaBinaryTreeVisualizer() {
                   Provide a valid preorder string to visualize.
                 </div>
               ) : (
+                <>
                   {/* Token sequence */}
                   <div>
                     <div style={{ color: C.muted, fontSize: 12, fontWeight: 600, marginBottom: 8, textTransform: 'uppercase', letterSpacing: 0.5 }}>

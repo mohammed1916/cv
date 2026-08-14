@@ -331,6 +331,7 @@ export default function SortColorsVisualizer() {
     );
 
     const vizPanel = (
+      <>
       <VisualizationPanel
         nums={nums}
         step={step}
@@ -346,6 +347,7 @@ export default function SortColorsVisualizer() {
     );
 
     const playbackPanel = (
+      <>
         {showPatternOverlay && (
           <PatternLegend currentPhase={step?.phase} usedPatterns={SORTCOLORS_PATTERNS} />
         )}
@@ -384,6 +386,7 @@ export default function SortColorsVisualizer() {
       <div className="sc-shell">
         <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
         {panelDivs && (
+          <>
             {panelDivs.code && createPortal(codePanel, panelDivs.code)}
             {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
             {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

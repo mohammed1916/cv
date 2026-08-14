@@ -11,7 +11,6 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './ConstructBTVisualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -220,18 +219,6 @@ export default function ConstructBTVisualizer() {
                             style={{ left: pos.x - 22, top: pos.y - 22 }}
                             initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
                             transition={{ type: 'spring', stiffness: 400, damping: 22 }}>
-    <>
-      <ManualInputPanel
-        fields={[{"key":"pre","label":"pre","type":"string"},{"key":"ino","label":"ino","type":"string"}]}
-        values={{ pre: preInput, ino: inoInput }}
-        onChange={(k, v) => { if (k === 'pre') setPreInput(v); if (k === 'ino') setInoInput(v); handleReset(); }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
-        showExamples={false}
-      />
-
                             {nd.val}
                         </motion.div>
                     )
@@ -303,6 +290,7 @@ export default function ConstructBTVisualizer() {
         <div className="ctpi-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+                <>
                     {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
                     {panelDivs.tree && createPortal(treePanel, panelDivs.tree)}
                     {panelDivs.arrays && createPortal(arraysPanel, panelDivs.arrays)}

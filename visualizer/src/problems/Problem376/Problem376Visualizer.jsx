@@ -205,6 +205,7 @@ export default function Problem376Visualizer() {
           </div>
 
           {step && (
+            <>
               <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
                 <div style={{ fontWeight: 600, marginBottom: 8 }}>{step.message}</div>
               </div>

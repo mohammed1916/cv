@@ -156,6 +156,7 @@ export default function MaximumGapVisualizer() {
 
     // Extract panels into consts (Step 2)
     const primaryPanel = (
+      <>
         <div className="mg-panel">
             <div className="mg-examples">
                 {EXAMPLES.map(e => (
@@ -245,6 +246,7 @@ export default function MaximumGapVisualizer() {
     )
 
     const playbackPanel = (
+      <>
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -275,6 +277,7 @@ export default function MaximumGapVisualizer() {
         <div className="mg-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}
                     {panelDivs.status  && createPortal(statusPanel,  panelDivs.status)}

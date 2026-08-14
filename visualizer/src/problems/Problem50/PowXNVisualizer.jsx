@@ -87,6 +87,7 @@ export default function PowXNVisualizer() {
 
   // Panel 2: Primary visualization
   const primaryPanel = (
+    <>
     <div className="powxn-panel">
       <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
         <div>
@@ -116,6 +117,7 @@ export default function PowXNVisualizer() {
 
   // Panel 4: Playback controls (floating)
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={POW_PATTERNS} />
       )}
@@ -155,6 +157,7 @@ export default function PowXNVisualizer() {
     <div className="powxn-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

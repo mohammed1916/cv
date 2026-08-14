@@ -152,6 +152,7 @@ function TreeVisualization({ tree, currentNode }) {
     return (
       <g key={`${node.idx}-${x}-${y}`}>
         {node.left && (
+          <>
             <line
               x1={x}
               y1={y}
@@ -164,6 +165,7 @@ function TreeVisualization({ tree, currentNode }) {
           </>
         )}
         {node.right && (
+          <>
             <line
               x1={x}
               y1={y}
@@ -391,7 +393,8 @@ export default function Problem437Visualizer() {
           prevDisabled={stepIndex < 0}
           nextDisabled={isDone}
           resetDisabled={stepIndex < 0}
-          onSpeedChange={e => setSpeed(Number(e.target.value
+          onSpeedChange={e => setSpeed(Number(
+            <>e.target.value
     </>))}
           showPatternOverlay={showPatternOverlay}
           onShowPatternOverlayChange={setShowPatternOverlay}

@@ -300,6 +300,7 @@ export default function FlattenNestedListIteratorVisualizer() {
                   Enter a valid nested list of integers to visualize the iterator.
                 </div>
               ) : (
+                <>
                   <div className="flatten-nested-list-iterator-columns">
                     <div className="flatten-nested-list-iterator-section">
                       <div className="flatten-nested-list-iterator-section-title">

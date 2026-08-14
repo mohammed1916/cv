@@ -226,6 +226,7 @@ export default function PopulatingNextRightPointersIIVisualizer() {
 
   // ─── Step 2: Extract panels into consts ────────────────────────────────────
   const primaryPanel = (
+    <>
     <div className="pnpii-panel">
       <VisualizationPanel step={step} />
     </div>
@@ -260,6 +261,7 @@ export default function PopulatingNextRightPointersIIVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend
           patterns={PATTERNS}
@@ -302,6 +304,7 @@ export default function PopulatingNextRightPointersIIVisualizer() {
     <div className="pnpii-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

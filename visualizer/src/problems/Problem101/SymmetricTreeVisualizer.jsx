@@ -436,6 +436,7 @@ export default function SymmetricTreeVisualizer() {
     )
 
     const playbackPanel = (
+      <>
             {showPatternOverlay && <PatternLegend usedPatterns={PATTERNS} />}
             <PlaybackControls
                 isPlaying={isPlaying}
@@ -478,6 +479,7 @@ export default function SymmetricTreeVisualizer() {
         <div className="sym-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.state && createPortal(statePanel, panelDivs.state)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}

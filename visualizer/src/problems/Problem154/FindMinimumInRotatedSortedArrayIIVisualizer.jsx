@@ -305,6 +305,7 @@ export default function FindMinimumInRotatedSortedArrayIIVisualizer() {
   )
 
   const primaryPanel = (
+    <>
     <div className="fmirsa2-panel">
       <VisualizationPanel step={step} />
     </div>
@@ -318,6 +319,7 @@ export default function FindMinimumInRotatedSortedArrayIIVisualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
@@ -355,6 +357,7 @@ export default function FindMinimumInRotatedSortedArrayIIVisualizer() {
     <div className="fmirsa2-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}

@@ -192,6 +192,7 @@ export default function PalindromePartitioningVisualizer() {
     );
 
     const playbackPanel = (
+      <>
             {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 onReset={handleReset}
@@ -233,6 +234,7 @@ export default function PalindromePartitioningVisualizer() {
         <div className="pp-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
+              <>
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code    && createPortal(codePanel,    panelDivs.code)}
                     {panelDivs.status  && createPortal(statusPanel,  panelDivs.status)}

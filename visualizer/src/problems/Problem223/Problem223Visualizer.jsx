@@ -244,6 +244,7 @@ export default function Problem223Visualizer() {
               const a = toSvg(view.A)
               const b = toSvg(view.B)
               return (
+                <>
                   <motion.rect
                     x={b.x} y={b.y} width={b.w} height={b.h}
                     className="p223-rect-b"
@@ -362,6 +363,7 @@ export default function Problem223Visualizer() {
   )
 
   const playbackPanel = (
+    <>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
       )}
@@ -399,6 +401,7 @@ export default function Problem223Visualizer() {
     <div className="p223-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
+        <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.state && createPortal(statePanel, panelDivs.state)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
