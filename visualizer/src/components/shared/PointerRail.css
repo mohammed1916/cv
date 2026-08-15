@@ -5,7 +5,7 @@
 }
 .pointer-rail-head { display: flex; justify-content: space-between; gap: 12px; color: var(--text-muted); font-size: 11px; margin-bottom: 8px; }
 .pointer-rail-head strong { color: var(--text); font-size: 12px; }
-.pointer-rail-track { display: flex; gap: 5px; overflow-x: auto; padding-top: 24px; }
+.pointer-rail-track { position: relative; display: flex; gap: 5px; overflow-x: auto; padding-top: 24px; }
 .pointer-rail-slot { position: relative; min-width: 38px; text-align: center; transition: opacity .18s ease; }
 .pointer-rail-slot.outside-range { opacity: .38; }
 .pointer-rail-tags { position: absolute; left: 50%; top: -24px; transform: translateX(-50%); display: flex; gap: 3px; white-space: nowrap; }
@@ -15,3 +15,7 @@
 .pointer-rail-cell.pointed { border: 2px solid var(--primary); background: color-mix(in srgb, var(--primary) 16%, var(--surface)); }
 .pointer-rail-index { display: block; color: var(--text-dim); font-size: 10px; margin-top: 3px; }
 .pointer-rail-note { margin: 9px 0 0; color: var(--text); font-size: 12px; line-height: 1.45; }
+.pointer-rail-boundaries { position: absolute; left: 0; right: 0; top: 0; bottom: 14px; pointer-events: none; }
+.pointer-rail-boundary { position: absolute; top: 0; bottom: 0; width: 2px; background: currentColor; transform: translateX(-1px); color: var(--success); }
+.pointer-rail-boundary span { position: absolute; top: -22px; left: 50%; transform: translateX(-50%); white-space: nowrap; padding: 2px 5px; border: 1px solid currentColor; background: var(--surface); font-size: 10px; font-weight: 800; }
+.pointer-rail-boundary.primary { color: var(--primary); }.pointer-rail-boundary.info { color: var(--info); }.pointer-rail-boundary.success { color: var(--success); }.pointer-rail-boundary.warning { color: var(--warning); }

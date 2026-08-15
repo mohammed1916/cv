@@ -17,7 +17,7 @@ export default function PointerRail({
       </header>
       <div className="pointer-rail-track">
         {values.map((value, index) => {
-          const at = pointers.filter((pointer) => pointer.index === index)
+          const at = pointers.filter((pointer) => !pointer.boundary && pointer.index === index)
           const inRange = !range || (index >= range.start && index <= range.end)
           return (
             <div key={`${index}-${value}`} className={`pointer-rail-slot ${inRange ? 'in-range' : 'outside-range'}`}>
@@ -29,6 +29,18 @@ export default function PointerRail({
             </div>
           )
         })}
+        <div className="pointer-rail-boundaries" aria-hidden="true">
+          {pointers.filter((pointer) => pointer.boundary).map((pointer) => (
+            <motion.div
+              layout
+              key={pointer.id}
+              className={`pointer-rail-boundary ${pointer.tone || 'primary'}`}
+              style={{ left: `${(pointer.index / Math.max(values.length, 1)) * 100}%` }}
+            >
+              <span>{pointer.label}</span>
+            </motion.div>
+          ))}
+        </div>
       </div>
       {note && <p className="pointer-rail-note">{note}</p>}
     </section>

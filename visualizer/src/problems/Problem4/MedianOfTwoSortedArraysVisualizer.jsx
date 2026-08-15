@@ -581,10 +581,10 @@ function PartitionPointerRail({ step, searchValues, otherValues }) {
     <PointerRail title="A — binary-search lane" values={searchValues} range={{ start: step?.low ?? 0, end: step?.high ?? searchValues.length }} pointers={[
       { id: 'low', label: `low ${step?.low ?? 0}`, index: Math.min(step?.low ?? 0, Math.max(searchValues.length - 1, 0)), tone: 'info' },
       { id: 'high', label: `high ${step?.high ?? searchValues.length}`, index: Math.min(step?.high ?? searchValues.length, Math.max(searchValues.length - 1, 0)), tone: 'warning' },
-      { id: 'cut-a', label: `cutA ${cutA}`, index: Math.min(cutA, Math.max(searchValues.length - 1, 0)), tone: 'success' },
+      { id: 'cut-a', label: `cutA ${cutA}`, index: cutA, tone: 'success', boundary: true },
     ]} />
     <PointerRail title="B — derived partition" values={otherValues} pointers={[
-      { id: 'cut-b', label: `cutB ${cutB}`, index: Math.min(cutB, Math.max(otherValues.length - 1, 0)), tone: 'success' },
+      { id: 'cut-b', label: `cutB ${cutB}`, index: cutB, tone: 'success', boundary: true },
     ]} note={`Invariant: cutA (${cutA}) + cutB (${cutB}) = left half (${step?.leftSize ?? 0}). ${direction}`} />
   </div>
 }
