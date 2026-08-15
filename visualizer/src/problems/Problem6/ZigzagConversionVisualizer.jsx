@@ -391,7 +391,7 @@ export default function ZigzagConversionVisualizer() {
   }, [])
 
   return (
-    <div className="problem-shell" style={{ height: 'calc(100vh - 200px)', minHeight: '480px', display: 'flex', flexDirection: 'column' }}>
+    <div className="problem-shell" style={{ height: '100%', minHeight: 0, display: 'flex', flexDirection: 'column' }}>
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
         <>

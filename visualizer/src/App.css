@@ -24,8 +24,8 @@
 
 .app-toolbar {
   position: fixed;
-  top: 1rem;
-  right: 1rem;
+  top: 0.45rem;
+  right: 0.65rem;
   /* Row so the theme toggle sits beside the settings button rather than
      stacking on top of it. */
   display: flex;
@@ -55,9 +55,9 @@
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  height: 40px;
-  padding: 0 0.8rem;
-  border-radius: 999px;
+  height: 32px;
+  padding: 0 0.55rem;
+  border-radius: 6px;
   border: 1px solid var(--border);
   background: var(--surface);
   color: var(--text);
@@ -374,6 +374,21 @@
   margin-left: 0.25rem;
 }
 
+.problem-header .layout-label {
+  display: none;
+}
+
+.problem-header .layout-pill {
+  padding: 2px;
+  border-radius: 5px;
+}
+
+.problem-header .layout-btn {
+  padding: 0.28rem 0.48rem;
+  border-radius: 3px;
+  font-size: 0.68rem;
+}
+
 .layout-label {
   font-size: 0.72rem;
   font-weight: 700;
@@ -624,8 +639,10 @@
 .problem-header {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  padding: 1.5rem var(--page-shell-padding);
+  gap: 0.75rem;
+  min-height: 48px;
+  padding: 0.45rem var(--page-shell-padding);
+  padding-right: 10rem;
   background: var(--surface);
   border-bottom: 1px solid var(--border);
   position: sticky;
@@ -661,16 +678,15 @@
 .back-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.65rem;
-
-  padding: 0.75rem 1.2rem;
+  gap: 0.4rem;
+  padding: 0.4rem 0.65rem;
 
   color: var(--primary);
   /* background: rgba(232, 114, 114, 0.04); */
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: 5px;
 
-  font-size: 0.95rem;
+  font-size: 0.78rem;
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
@@ -731,13 +747,13 @@
 .problem-title-group {
   display: flex;
   align-items: baseline;
-  gap: 0.8rem;
+  gap: 0.45rem;
   flex: 1;
   min-width: 0;
 }
 
 .problem-num {
-  font-size: 1rem;
+  font-size: 0.78rem;
   color: var(--primary-l);
   font-weight: 700;
   flex-shrink: 0;
@@ -745,8 +761,8 @@
 }
 
 .problem-title {
-  font-size: 1.45rem;
-  font-weight: 800;
+  font-size: 1rem;
+  font-weight: 750;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -754,10 +770,10 @@
 }
 
 .difficulty {
-  font-size: 0.85rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  padding: 6px 14px;
-  border-radius: 20px;
+  padding: 3px 8px;
+  border-radius: 4px;
   flex-shrink: 0;
   border: 1px solid currentColor;
   opacity: 0.9;
@@ -775,7 +791,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  padding: 1.75rem var(--page-shell-padding);
+  padding: 0.75rem var(--page-shell-padding);
   max-width: var(--page-shell-max-width);
   margin: 0 auto;
   width: 100%;
@@ -797,6 +813,7 @@
   .problem-header {
     flex-wrap: wrap;
     align-items: flex-start;
+    padding-right: var(--page-shell-padding);
   }
 }
 
