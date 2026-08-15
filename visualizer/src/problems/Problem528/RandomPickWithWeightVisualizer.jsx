@@ -9,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './RandomPickWithWeightVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -141,36 +142,13 @@ function generateSteps(w) {
   return steps
 }
 
-function VisualizationPanel({ w, step, applyEx }) {
+function VisualizationPanel({ w, step }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
       {/* Story */}
       <div style={{ padding: 12, backgroundColor: '#f0f9ff', borderRadius: 6, borderLeft: '4px solid #0284c7' }}>
         <div style={{ fontSize: 12, color: '#075985', fontStyle: 'italic' }}>
           "Build a prefix sum array to enable efficient weighted random index selection using binary search."
-        </div>
-      </div>
-
-      {/* Examples */}
-      <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {EXAMPLES.map(e => (
-            <button
-              key={e.label}
-              onClick={() => applyEx(e)}
-              style={{
-                padding: '6px 12px',
-                borderRadius: 4,
-                border: '1px solid #cbd5e1',
-                cursor: 'pointer',
-                fontSize: 12,
-                backgroundColor: '#f1f5f9'
-              }}
-            >
-              {e.label}
-            </button>
-          ))}
         </div>
       </div>
 
@@ -291,15 +269,28 @@ function VisualizationPanel({ w, step, applyEx }) {
 }
 
 export default function RandomPickWithWeightVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { w: [1] })
+  const [wInput, setWInput] = useState(JSON.stringify(EXAMPLES[0]?.w ?? [1]))
+  const [activeLabel, setActiveLabel] = useState(EXAMPLES[0]?.label ?? '')
+
+  const { w, inputError } = useMemo(() => {
+    try {
+      const parsed = JSON.parse(wInput)
+      if (!Array.isArray(parsed) || parsed.length === 0) throw new Error('w must be a non-empty array')
+      if (!parsed.every((n) => typeof n === 'number' && Number.isFinite(n) && n > 0))
+        throw new Error('w must contain positive numbers')
+      return { w: parsed, inputError: '' }
+    } catch (e) {
+      return { w: [1], inputError: e.message }
+    }
+  }, [wInput])
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.w).map((current) => ({
+      generateSteps(w).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [w]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -307,7 +298,17 @@ export default function RandomPickWithWeightVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => {
+    setWInput(JSON.stringify(e.w))
+    setActiveLabel(e.label)
+    handleReset()
+  }, [handleReset])
+
+  const handleFieldChange = useCallback((key, text) => {
+    if (key === 'w') setWInput(text)
+    setActiveLabel('')
+    handleReset()
+  }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -350,12 +351,22 @@ export default function RandomPickWithWeightVisualizer() {
           )}
 
         </div>),
-    viz: (<VisualizationPanel
-          w={ex.w}
+    viz: (<>
+        <ManualInputPanel
+          fields={[{ key: 'w', label: 'w', type: 'array' }]}
+          values={{ w: wInput }}
+          onChange={handleFieldChange}
+          examples={EXAMPLES}
+          activeLabel={activeLabel}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
+        <VisualizationPanel
+          w={w}
           step={step}
-          applyEx={applyEx}
-        />),
-  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
+        />
+      </>),
+  }), [step, connectivity, setActiveLineDom, showPatternOverlay, activeLineDom, w, wInput, activeLabel, inputError, applyEx, handleFieldChange])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

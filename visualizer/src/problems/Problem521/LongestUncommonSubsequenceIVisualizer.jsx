@@ -12,6 +12,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import './LongestUncommonSubsequenceIVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 import { createPortal } from 'react-dom'
 const SOLUTION_CODE = getSolutionCode('longest-uncommon-subsequence-i')
@@ -66,36 +67,13 @@ function generateSteps(a, b) {
   return steps
 }
 
-function VisualizationPanel({ a, b, step, applyEx }) {
+function VisualizationPanel({ a, b, step }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
       {/* Story */}
       <div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, borderLeft: '4px solid #f59e0b' }}>
         <div style={{ fontSize: 12, color: '#78350f', fontStyle: 'italic' }}>
           "An uncommon subsequence is a string that is NOT a subsequence of the other string."
-        </div>
-      </div>
-
-      {/* Examples */}
-      <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {EXAMPLES.map(e => (
-            <button
-              key={e.label}
-              onClick={() => applyEx(e)}
-              style={{
-                padding: '6px 12px',
-                borderRadius: 4,
-                border: '1px solid #cbd5e1',
-                cursor: 'pointer',
-                fontSize: 12,
-                backgroundColor: '#f1f5f9'
-              }}
-            >
-              {e.label}
-            </button>
-          ))}
         </div>
       </div>
 
@@ -197,15 +175,26 @@ function VisualizationPanel({ a, b, step, applyEx }) {
 }
 
 export default function LongestUncommonSubsequenceIVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { a: 'aba', b: 'cdc' })
+  const [aInput, setAInput] = useState(EXAMPLES?.[0]?.a ?? 'aba')
+  const [bInput, setBInput] = useState(EXAMPLES?.[0]?.b ?? 'cdc')
+  const [activeLabel, setActiveLabel] = useState(EXAMPLES?.[0]?.label ?? '')
+
+  const { a, b, inputError } = useMemo(() => {
+    const textA = aInput.trim()
+    const textB = bInput.trim()
+    if (!textA || !textB) {
+      return { a: textA || 'aba', b: textB || 'cdc', inputError: 'both strings must be non-empty' }
+    }
+    return { a: textA, b: textB, inputError: '' }
+  }, [aInput, bInput])
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.a, ex.b).map((current) => ({
+      generateSteps(a, b).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [a, b]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -213,7 +202,19 @@ export default function LongestUncommonSubsequenceIVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => {
+    setAInput(e.a ?? '')
+    setBInput(e.b ?? '')
+    setActiveLabel(e.label ?? '')
+    handleReset()
+  }, [handleReset])
+
+  const handleFieldChange = useCallback((key, text) => {
+    if (key === 'a') setAInput(text)
+    else if (key === 'b') setBInput(text)
+    setActiveLabel('')
+    handleReset()
+  }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -256,13 +257,26 @@ export default function LongestUncommonSubsequenceIVisualizer() {
           )}
 
         </div>),
-    viz: (<VisualizationPanel
-          a={ex.a}
-          b={ex.b}
+    viz: (<>
+        <ManualInputPanel
+          fields={[
+            { key: 'a', label: 'a', type: 'string' },
+            { key: 'b', label: 'b', type: 'string' },
+          ]}
+          values={{ a: aInput, b: bInput }}
+          onChange={handleFieldChange}
+          examples={EXAMPLES}
+          activeLabel={activeLabel}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
+        <VisualizationPanel
+          a={a}
+          b={b}
           step={step}
-          applyEx={applyEx}
-        />),
-  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
+        />
+      </>),
+  }), [step, connectivity, setActiveLineDom, showPatternOverlay, activeLineDom, a, b, aInput, bInput, activeLabel, inputError, applyEx, handleFieldChange])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

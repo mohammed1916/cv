@@ -9,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './KDiffPairsInArrayVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -29,6 +30,8 @@ const LINE_PATTERN_MAP = {
 
 
 const EXAMPLES = getExamples('k-diff-pairs-in-array')
+
+const FALLBACK_NUMS = [3, 1, 4, 1, 5]
 
 function generateSteps(nums, k) {
   const steps = []
@@ -146,36 +149,13 @@ function generateSteps(nums, k) {
   return steps
 }
 
-function VisualizationPanel({ nums, k, step, applyEx }) {
+function VisualizationPanel({ nums, k, step }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
       {/* Story */}
       <div style={{ padding: 12, backgroundColor: '#f0f9ff', borderRadius: 6, borderLeft: '4px solid #0284c7' }}>
         <div style={{ fontSize: 12, color: '#075985', fontStyle: 'italic' }}>
           "Count unique pairs (a, b) where a and b differ by exactly k."
-        </div>
-      </div>
-
-      {/* Examples */}
-      <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {EXAMPLES.map(e => (
-            <button
-              key={e.label}
-              onClick={() => applyEx(e)}
-              style={{
-                padding: '6px 12px',
-                borderRadius: 4,
-                border: '1px solid #cbd5e1',
-                cursor: 'pointer',
-                fontSize: 12,
-                backgroundColor: '#f1f5f9'
-              }}
-            >
-              {e.label}
-            </button>
-          ))}
         </div>
       </div>
 
@@ -273,15 +253,33 @@ function VisualizationPanel({ nums, k, step, applyEx }) {
 }
 
 export default function KDiffPairsInArrayVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { nums: [3, 1, 4, 1, 5], k: 1 })
+  const [numsInput, setNumsInput] = useState(JSON.stringify(EXAMPLES[0]?.nums ?? FALLBACK_NUMS))
+  const [kInput, setKInput] = useState(String(EXAMPLES[0]?.k ?? 1))
+  const [activeLabel, setActiveLabel] = useState(EXAMPLES[0]?.label ?? '')
+
+  const { nums, k, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput)
+      if (!Array.isArray(parsedNums) || parsedNums.length === 0) throw new Error('nums must be a non-empty array')
+      if (!parsedNums.every((n) => typeof n === 'number' && Number.isFinite(n)))
+        throw new Error('nums must contain numbers')
+
+      const parsedK = Number(kInput)
+      if (kInput.trim() === '' || !Number.isFinite(parsedK)) throw new Error('k must be a number')
+
+      return { nums: parsedNums, k: parsedK, inputError: '' }
+    } catch (e) {
+      return { nums: FALLBACK_NUMS, k: 1, inputError: e.message }
+    }
+  }, [numsInput, kInput])
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.nums, ex.k).map((current) => ({
+      generateSteps(nums, k).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [nums, k]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -289,7 +287,19 @@ export default function KDiffPairsInArrayVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => {
+    setNumsInput(JSON.stringify(e.nums))
+    setKInput(String(e.k))
+    setActiveLabel(e.label)
+    handleReset()
+  }, [handleReset])
+
+  const handleFieldChange = useCallback((key, text) => {
+    if (key === 'nums') setNumsInput(text)
+    else if (key === 'k') setKInput(text)
+    setActiveLabel('')
+    handleReset()
+  }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -332,13 +342,26 @@ export default function KDiffPairsInArrayVisualizer() {
           )}
 
         </div>),
-    viz: (<VisualizationPanel
-          nums={ex.nums}
-          k={ex.k}
+    viz: (<>
+        <ManualInputPanel
+          fields={[
+            { key: 'nums', label: 'nums', type: 'array' },
+            { key: 'k', label: 'k', type: 'number' },
+          ]}
+          values={{ nums: numsInput, k: kInput }}
+          onChange={handleFieldChange}
+          examples={EXAMPLES}
+          activeLabel={activeLabel}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
+        <VisualizationPanel
+          nums={nums}
+          k={k}
           step={step}
-          applyEx={applyEx}
-        />),
-  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
+        />
+      </>),
+  }), [step, connectivity, setActiveLineDom, showPatternOverlay, activeLineDom, nums, k, numsInput, kInput, activeLabel, inputError, applyEx, handleFieldChange])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

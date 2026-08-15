@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './ContiguousArrayVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { createPortal } from 'react-dom'
@@ -259,15 +260,30 @@ function VisualizationPanel({ arr, step, applyEx }) {
 }
 
 export default function ContiguousArrayVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { nums: [0, 1] })
+  const DEFAULT_NUMS = EXAMPLES[0]?.nums ?? [0, 1]
+
+  const [numsInput, setNumsInput] = useState(JSON.stringify(DEFAULT_NUMS))
+  const [activeLabel, setActiveLabel] = useState(EXAMPLES[0]?.label ?? '')
+
+  const { nums, inputError } = useMemo(() => {
+    try {
+      const parsed = JSON.parse(numsInput)
+      if (!Array.isArray(parsed) || parsed.some((n) => n !== 0 && n !== 1)) {
+        throw new Error('nums must be an array of 0s and 1s, e.g. [0,1,0]')
+      }
+      return { nums: parsed, inputError: '' }
+    } catch (e) {
+      return { nums: [0, 1], inputError: e.message }
+    }
+  }, [numsInput])
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.nums).map((current) => ({
+      generateSteps(nums).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [nums]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -275,7 +291,11 @@ export default function ContiguousArrayVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => {
+    setNumsInput(JSON.stringify(e.nums))
+    setActiveLabel(e.label)
+    handleReset()
+  }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -318,12 +338,27 @@ export default function ContiguousArrayVisualizer() {
           )}
 
         </div>),
-    viz: (<VisualizationPanel
-          arr={ex.nums}
+    viz: (<>
+        <ManualInputPanel
+          fields={[{ key: 'nums', label: 'nums', type: 'array' }]}
+          values={{ nums: numsInput }}
+          onChange={(key, text) => {
+            if (key === 'nums') setNumsInput(text)
+            setActiveLabel('')
+            handleReset()
+          }}
+          examples={EXAMPLES}
+          activeLabel={activeLabel}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
+        <VisualizationPanel
+          arr={nums}
           step={step}
           applyEx={applyEx}
-        />),
-  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
+        />
+      </>),
+  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, nums, numsInput, activeLabel, inputError, applyEx, handleReset])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

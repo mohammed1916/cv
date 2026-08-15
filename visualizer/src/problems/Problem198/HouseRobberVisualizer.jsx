@@ -1,7 +1,7 @@
 ﻿import { useState, useMemo, useCallback } from 'react'
 import VisualizerPlaybackSection from '../../components/VisualizerPlaybackSection'
 import AnimatedIterationList from '../../components/shared/AnimatedIterationList'
-import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { useProblemCode } from '../../hooks/useProblemCode'
@@ -15,6 +15,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
+import { createPortal } from 'react-dom'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -136,24 +137,12 @@ export default function HouseRobberVisualizer({ problem }) {
     handleReset()
   }, [handleReset])
 
-  return (
-    <div className="hr-shell">
-        <ManualInputPanel
-          fields={[{"key":"nums","label":"nums","type":"string"}]}
-          values={{ nums: numsInput }}
-          onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
-          examples={EXAMPLES}
-          applyExample={applyExample}
-          inputError={inputError}
-        />
-      <ResizableSplitPanels
-        className="hr-top-split"
-        storageKey="cpviz.split.house-robber.top"
-        initialLeftPercent={59}
-        minLeftPx={360}
-        minRightPx={280}
-        left={(
-          <section className="hr-panel">
+  const panelConfigs = useMemo(() => [
+    { id: 'left', title: "Input & State" },
+    { id: 'right', title: "Visualization", dockMode: 'split-right' },
+  ], [])
+  const panelContents = {
+    left: (<section className="hr-panel">
           <header className="hr-head">
             <span>Street & DP Transition</span>
             {inputError && <span className="hr-error">{inputError}</span>}
@@ -232,10 +221,8 @@ export default function HouseRobberVisualizer({ problem }) {
               </span>
             </div>
           </div>
-          </section>
-        )}
-        right={(
-          <section className="hr-panel side">
+          </section>),
+    right: (<section className="hr-panel side">
           <header className="hr-head"><span>Rolling State</span></header>
           <div className="hr-body">
             <div className="hr-metrics">
@@ -247,9 +234,29 @@ export default function HouseRobberVisualizer({ problem }) {
               {step?.phase === 'done' ? `Return ${step.prev1}` : 'Iterating houses'}
             </div>
           </div>
-          </section>
+          </section>),
+  }
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+  return (
+    <div className="hr-shell">
+        <ManualInputPanel
+          fields={[{"key":"nums","label":"nums","type":"string"}]}
+          values={{ nums: numsInput }}
+          onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
+          examples={EXAMPLES}
+          applyExample={applyExample}
+          inputError={inputError}
+        />
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.left && createPortal(panelContents.left, panelDivs.left)}
+            {panelDivs.right && createPortal(panelContents.right, panelDivs.right)}
+          </>
         )}
-      />
+      </>
 
       <VisualizerPlaybackSection
         step={step}

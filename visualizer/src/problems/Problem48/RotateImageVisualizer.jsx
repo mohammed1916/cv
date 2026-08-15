@@ -10,6 +10,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./RotateImageVisualizer.css";
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import LuminoDockPanel from "../../components/LuminoDockPanel"
 
 const ROTATE_PATTERNS = ['transpose', 'swap', 'reverse', 'done']
@@ -72,16 +73,37 @@ const EXAMPLES = getExamples('rotate-image');
 const ACCENT = "#f9e2af";
 
 export default function RotateImageVisualizer() {
-    const [selected, setSelected] = useState(0);
+    const [matrixInput, setMatrixInput] = useState(JSON.stringify(EXAMPLES[0].matrix));
+    const [activeLabel, setActiveLabel] = useState(EXAMPLES[0].label);
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
-    const initial = EXAMPLES[selected].matrix;
+    const { initial, inputError } = useMemo(() => {
+        try {
+            const parsed = JSON.parse(matrixInput);
+            if (!Array.isArray(parsed) || parsed.length === 0) throw new Error("matrix must be a non-empty array of rows");
+            if (!parsed.every((row) => Array.isArray(row) && row.length === parsed.length)) {
+                throw new Error("matrix must be square (n x n)");
+            }
+            if (!parsed.every((row) => row.every((v) => typeof v === "number" && Number.isFinite(v)))) {
+                throw new Error("matrix must contain only numbers");
+            }
+            if (parsed.length > 8) throw new Error("matrix must be 8x8 or smaller");
+            return { initial: parsed, inputError: "" };
+        } catch (e) {
+            return { initial: EXAMPLES[0].matrix, inputError: e.message };
+        }
+    }, [matrixInput]);
+
     const steps = useMemo(() => generateSteps(initial), [initial]);
     const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : steps[0];
 
-    const applyExample = useCallback((idx) => { setSelected(idx); handleReset(); }, [handleReset]);
+    const applyExample = useCallback((e) => {
+        setMatrixInput(JSON.stringify(e.matrix));
+        setActiveLabel(e.label);
+        handleReset();
+    }, [handleReset]);
 
     const matrix = step?.matrix ?? initial;
     const n = matrix.length;
@@ -89,6 +111,15 @@ export default function RotateImageVisualizer() {
     // Extract panels into consts (step 3)
     const primaryPanel = (
         <div className="ri-panel">
+            <ManualInputPanel
+                fields={[{ key: 'matrix', label: 'matrix (n x n)', type: 'array' }]}
+                values={{ matrix: matrixInput }}
+                onChange={(k, v) => { if (k === 'matrix') setMatrixInput(v); setActiveLabel(''); handleReset(); }}
+                examples={EXAMPLES}
+                activeLabel={activeLabel}
+                applyExample={applyExample}
+                inputError={inputError}
+            />
             <div className="ri-panel-label">Original</div>
             <MatrixGrid matrix={initial} n={n} hi={null} hj={null} accent={ACCENT} />
         </div>
@@ -154,14 +185,6 @@ export default function RotateImageVisualizer() {
     // Replace return block (step 5)
     return (
         <div className="ri-shell">
-            <div className="ri-controls-row">
-                <div className="ri-examples">
-                    {EXAMPLES.map((ex, i) => (
-                        <button key={ex.label} className={`ri-chip ${selected === i ? "active" : ""}`} onClick={() => applyExample(i)}>{ex.label}</button>
-                    ))}
-                </div>
-            </div>
-
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
               <>

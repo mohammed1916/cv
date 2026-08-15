@@ -9,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './LongestPalindromicSubsequenceVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -130,7 +131,7 @@ function generateSteps(s) {
   return steps
 }
 
-function VisualizationPanel({ s, step, applyEx }) {
+function VisualizationPanel({ s, step, inputPanel }) {
   const n = s.length
 
   return (
@@ -142,28 +143,8 @@ function VisualizationPanel({ s, step, applyEx }) {
         </div>
       </div>
 
-      {/* Examples */}
-      <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {EXAMPLES.map(e => (
-            <button
-              key={e.label}
-              onClick={() => applyEx(e)}
-              style={{
-                padding: '6px 12px',
-                borderRadius: 4,
-                border: '1px solid #cbd5e1',
-                cursor: 'pointer',
-                fontSize: 12,
-                backgroundColor: '#f1f5f9'
-              }}
-            >
-              {e.label}
-            </button>
-          ))}
-        </div>
-      </div>
+      {/* Manual input */}
+      {inputPanel}
 
       {/* String */}
       <div>
@@ -254,15 +235,21 @@ function VisualizationPanel({ s, step, applyEx }) {
 }
 
 export default function LongestPalindromicSubsequenceVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { s: 'bbbab' })
+  const [sInput, setSInput] = useState(EXAMPLES[0]?.s ?? 'bbbab')
+  const [activeLabel, setActiveLabel] = useState(EXAMPLES[0]?.label ?? '')
+
+  const { s, inputError } = useMemo(() => {
+    if (sInput.length > 24) return { s: '', inputError: 'Keep s at 24 characters or fewer' }
+    return { s: sInput, inputError: '' }
+  }, [sInput])
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.s).map((current) => ({
+      generateSteps(s).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [s]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -270,7 +257,11 @@ export default function LongestPalindromicSubsequenceVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => {
+    setSInput(e.s)
+    setActiveLabel(e.label)
+    handleReset()
+  }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -314,11 +305,21 @@ export default function LongestPalindromicSubsequenceVisualizer() {
 
         </div>),
     viz: (<VisualizationPanel
-          s={ex.s}
+          s={s}
           step={step}
-          applyEx={applyEx}
+          inputPanel={(
+            <ManualInputPanel
+              fields={[{ key: 's', label: 's', type: 'string' }]}
+              values={{ s: sInput }}
+              onChange={(k, v) => { if (k === 's') setSInput(v); setActiveLabel(''); handleReset() }}
+              examples={EXAMPLES}
+              activeLabel={activeLabel}
+              applyExample={applyEx}
+              inputError={inputError}
+            />
+          )}
         />),
-  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
+  }), [step, connectivity, setActiveLineDom, s, applyEx, sInput, activeLabel, inputError, handleReset, showPatternOverlay, activeLineDom])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

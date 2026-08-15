@@ -3,12 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './GroupShiftedStrings.css'
+import { createPortal } from 'react-dom'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'def solution(input):' },
@@ -84,16 +85,12 @@ export default function GroupShiftedStrings() {
 
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  return (
-    <div className="group-shifted-strings-shell">
-      <ResizableSplitPanels
-        className="group-shifted-strings-top-split"
-        storageKey="cpviz.split.group-shifted-strings.top"
-        initialLeftPercent={60}
-        minLeftPx={360}
-        minRightPx={280}
-        left={(
-          <div className="group-shifted-strings-panel">
+  const panelConfigs = useMemo(() => [
+    { id: 'left', title: "Input" },
+    { id: 'right', title: "Details", dockMode: 'split-right' },
+  ], [])
+  const panelContents = {
+    left: (<div className="group-shifted-strings-panel">
             <div className="group-shifted-strings-panel-head">
               Input
               {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
@@ -138,10 +135,8 @@ export default function GroupShiftedStrings() {
                 </motion.div>
               </div>
             </div>
-          </div>
-        )}
-        right={(
-          <div className="group-shifted-strings-panel">
+          </div>),
+    right: (<div className="group-shifted-strings-panel">
             <div className="group-shifted-strings-panel-head">Details</div>
             <div className="group-shifted-strings-panel-body">
               <div className="group-shifted-strings-info">
@@ -149,9 +144,21 @@ export default function GroupShiftedStrings() {
                 <p><strong>Story:</strong> String Shift Pattern Grouping - similar transformation patterns cluster together</p>
               </div>
             </div>
-          </div>
+          </div>),
+  }
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+  return (
+    <div className="group-shifted-strings-shell">
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.left && createPortal(panelContents.left, panelDivs.left)}
+            {panelDivs.right && createPortal(panelContents.right, panelDivs.right)}
+          </>
         )}
-      />
+      </>
 
       <CodeTracePanel
         step={step}

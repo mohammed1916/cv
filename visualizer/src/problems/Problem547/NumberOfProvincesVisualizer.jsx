@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -8,7 +8,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './NumberOfProvinces.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -134,22 +134,47 @@ const EXAMPLES = [
 ]
 
 export default function NumberOfProvincesVisualizer() {
-  const [exIdx, setExIdx] = useState(0)
+  const [isConnectedInput, setIsConnectedInput] = useState(JSON.stringify(EXAMPLES[0].isConnected))
+  const [activeLabel, setActiveLabel] = useState(EXAMPLES[0].label)
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  const ex = EXAMPLES[exIdx]
-  const steps = useMemo(() => generateSteps(ex.isConnected), [ex])
+  const { isConnected, inputError } = useMemo(() => {
+    try {
+      const parsed = JSON.parse(isConnectedInput)
+      if (!Array.isArray(parsed) || parsed.length === 0) {
+        throw new Error('isConnected must be a non-empty 2D array')
+      }
+      if (!parsed.every((row) => Array.isArray(row) && row.length === parsed.length)) {
+        throw new Error('isConnected must be a square matrix (n x n)')
+      }
+      if (!parsed.every((row) => row.every((v) => v === 0 || v === 1))) {
+        throw new Error('isConnected entries must be 0 or 1')
+      }
+      return { isConnected: parsed, inputError: '' }
+    } catch (e) {
+      return { isConnected: [[1]], inputError: e.message }
+    }
+  }, [isConnectedInput])
+
+  const steps = useMemo(() => generateSteps(isConnected), [isConnected])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
-  const step = stepIndex >= 0 ? steps[stepIndex] : null
+  const step = stepIndex >= 0 ? steps[stepIndex] ?? null : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
-  const applyExample = useCallback((idx) => {
-    setExIdx(idx)
+  const applyExample = useCallback((example) => {
+    setIsConnectedInput(JSON.stringify(example.isConnected))
+    setActiveLabel(example.label)
     handleReset()
   }, [handleReset])
 
-  const n = ex.isConnected.length
+  const handleFieldChange = useCallback((key, text) => {
+    if (key === 'isConnected') setIsConnectedInput(text)
+    setActiveLabel('')
+    handleReset()
+  }, [handleReset])
+
+  const n = isConnected.length
 
   const panelConfigs = useMemo(() => [
     { id: 'code', title: 'Code' },
@@ -185,24 +210,15 @@ export default function NumberOfProvincesVisualizer() {
 
         </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {EXAMPLES.map((e, i) => (
-              <button
-                key={i}
-                onClick={() => applyExample(i)}
-                style={{
-                  padding: '6px 12px',
-                  borderRadius: 4,
-                  border: '1px solid #cbd5e1',
-                  cursor: 'pointer',
-                  fontSize: 12,
-                  backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
-                }}
-              >
-                {e.label.split(':')[0]}
-              </button>
-            ))}
-          </div>
+          <ManualInputPanel
+            fields={[{ key: 'isConnected', label: 'isConnected', type: 'array' }]}
+            values={{ isConnected: isConnectedInput }}
+            onChange={handleFieldChange}
+            examples={EXAMPLES}
+            activeLabel={activeLabel}
+            applyExample={applyExample}
+            inputError={inputError}
+          />
 
           {step && (
             <>
@@ -244,7 +260,7 @@ export default function NumberOfProvincesVisualizer() {
                   {Array.from({ length: n }).map((_, i) => (
                     <div key={i} style={{ display: 'flex', gap: 4 }}>
                       {Array.from({ length: n }).map((_, j) => {
-                        const isConnected = ex.isConnected[i][j] === 1
+                        const isCellConnected = isConnected[i][j] === 1
                         const isHighlighted = step.highlighted?.includes(i) && step.highlighted?.includes(j)
                         return (
                           <motion.div
@@ -258,13 +274,13 @@ export default function NumberOfProvincesVisualizer() {
                               justifyContent: 'center',
                               borderRadius: 4,
                               border: isHighlighted ? '2px solid #ef4444' : '1px solid #cbd5e1',
-                              backgroundColor: isHighlighted ? '#ef4444' : isConnected ? '#dcfce7' : '#f5f5f5',
+                              backgroundColor: isHighlighted ? '#ef4444' : isCellConnected ? '#dcfce7' : '#f5f5f5',
                               color: isHighlighted ? '#fff' : '#1e293b',
                               fontSize: 12,
                               fontWeight: 600,
                             }}
                           >
-                            {ex.isConnected[i][j]}
+                            {isConnected[i][j]}
                           </motion.div>
                         )
                       })}
@@ -281,7 +297,7 @@ export default function NumberOfProvincesVisualizer() {
             </>
           )}
         </div>),
-  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, exIdx, applyExample, n, ex])
+  }), [step, connectivity, setActiveLineDom, applyExample, handleFieldChange, isConnectedInput, activeLabel, inputError, n, isConnected, showPatternOverlay, activeLineDom])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

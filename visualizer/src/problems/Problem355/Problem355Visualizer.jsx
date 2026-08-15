@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 
@@ -54,15 +55,21 @@ function generateSteps(scenario) {
   }
 
   // Parse scenario
-  const operations = scenario.operations || []
-  const params = scenario.params || {}
+  const operations = scenario?.operations || []
+  const params = scenario?.params || {}
+
+  // Sets are not JSON-serializable, so snapshot them as plain arrays.
+  const snapshotFollowing = () =>
+    JSON.stringify(
+      Object.fromEntries(Object.entries(following).map(([k, v]) => [k, Array.from(v)]))
+    )
 
   // Initial state
   steps.push({
     activeLine: 2,
     users: Array.from(users),
     tweets: { ...tweets },
-    following: JSON.stringify(following),
+    following: snapshotFollowing(),
     message: 'Initialize Twitter system with empty data structures.',
   })
 
@@ -78,7 +85,7 @@ function generateSteps(scenario) {
         activeLine: 8,
         users: Array.from(users),
         tweets: { ...tweets },
-        following: JSON.stringify(following),
+        following: snapshotFollowing(),
         currentOp: `Post Tweet`,
         opUser: userId,
         opTweet: tweetId,
@@ -91,7 +98,7 @@ function generateSteps(scenario) {
         activeLine: 9,
         users: Array.from(users),
         tweets: { ...tweets },
-        following: JSON.stringify(following),
+        following: snapshotFollowing(),
         currentOp: `Post Tweet`,
         opUser: userId,
         opTweet: tweetId,
@@ -107,7 +114,7 @@ function generateSteps(scenario) {
         activeLine: 11,
         users: Array.from(users),
         tweets: { ...tweets },
-        following: JSON.stringify(following),
+        following: snapshotFollowing(),
         currentOp: `Follow`,
         followerId,
         followeeId,
@@ -121,7 +128,7 @@ function generateSteps(scenario) {
           activeLine: 12,
           users: Array.from(users),
           tweets: { ...tweets },
-          following: JSON.stringify(following),
+          following: snapshotFollowing(),
           currentOp: `Follow`,
           followerId,
           followeeId,
@@ -138,7 +145,7 @@ function generateSteps(scenario) {
         activeLine: 11,
         users: Array.from(users),
         tweets: { ...tweets },
-        following: JSON.stringify(following),
+        following: snapshotFollowing(),
         currentOp: `Unfollow`,
         followerId,
         followeeId,
@@ -152,7 +159,7 @@ function generateSteps(scenario) {
           activeLine: 12,
           users: Array.from(users),
           tweets: { ...tweets },
-          following: JSON.stringify(following),
+          following: snapshotFollowing(),
           currentOp: `Unfollow`,
           followerId,
           followeeId,
@@ -167,7 +174,7 @@ function generateSteps(scenario) {
         activeLine: 14,
         users: Array.from(users),
         tweets: { ...tweets },
-        following: JSON.stringify(following),
+        following: snapshotFollowing(),
         currentOp: `Get Feed`,
         feedUserId: userId,
         message: `Fetch news feed for user ${userId}.`,
@@ -191,7 +198,7 @@ function generateSteps(scenario) {
         activeLine: 16,
         users: Array.from(users),
         tweets: { ...tweets },
-        following: JSON.stringify(following),
+        following: snapshotFollowing(),
         currentOp: `Get Feed`,
         feedUserId: userId,
         newsFeed,
@@ -239,14 +246,40 @@ export default function Problem355Visualizer() {
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const ex = EXAMPLES[exIdx]
-  const steps = useMemo(() => generateSteps(ex), [ex])
+  const [operationsInput, setOperationsInput] = useState(() => JSON.stringify(EXAMPLES[0].operations))
+  const [paramsInput, setParamsInput] = useState(() => JSON.stringify(EXAMPLES[0].params))
+
+  const { scenario, inputError } = useMemo(() => {
+    try {
+      const operations = JSON.parse(operationsInput)
+      if (!Array.isArray(operations) || !operations.every((o) => typeof o === 'string')) {
+        throw new Error('operations must be an array of strings, e.g. ["postTweet","getNewsFeed"]')
+      }
+      const params = JSON.parse(paramsInput)
+      if (!params || typeof params !== 'object' || Array.isArray(params)) {
+        throw new Error('params must be an object, e.g. {"postTweet":[[1,1]]}')
+      }
+      return { scenario: { operations, params }, inputError: '' }
+    } catch (e) {
+      return {
+        scenario: { operations: EXAMPLES[0].operations, params: EXAMPLES[0].params },
+        inputError: e.message,
+      }
+    }
+  }, [operationsInput, paramsInput])
+
+  const steps = useMemo(() => generateSteps(scenario), [scenario])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
   const applyExample = useCallback((idx) => {
+    const next = EXAMPLES[idx]
+    if (!next) return
     setExIdx(idx)
+    setOperationsInput(JSON.stringify(next.operations))
+    setParamsInput(JSON.stringify(next.params))
     handleReset()
   }, [handleReset])
 
@@ -283,6 +316,23 @@ export default function Problem355Visualizer() {
               </button>
             ))}
           </div>
+
+          <ManualInputPanel
+            fields={[
+              { key: 'operations', label: 'operations', type: 'array' },
+              { key: 'params', label: 'params', type: 'string' },
+            ]}
+            values={{ operations: operationsInput, params: paramsInput }}
+            onChange={(k, v) => {
+              if (k === 'operations') setOperationsInput(v)
+              else if (k === 'params') setParamsInput(v)
+              handleReset()
+            }}
+            examples={EXAMPLES}
+            activeLabel={ex?.label}
+            applyExample={(e) => applyExample(EXAMPLES.indexOf(e))}
+            inputError={inputError}
+          />
 
           {step && (
             <>
@@ -372,11 +422,11 @@ export default function Problem355Visualizer() {
               )}
 
               {/* Tweets timeline */}
-              {Object.keys(JSON.parse(step.tweets)).length > 0 && (
+              {Object.keys(step.tweets).length > 0 && (
                 <div style={{ padding: 8, backgroundColor: '#f3e8ff', borderRadius: 6 }}>
                   <div style={{ fontWeight: 600, marginBottom: 8, fontSize: 12, color: '#6b21a8' }}>Tweets Timeline</div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 10 }}>
-                    {Object.entries(JSON.parse(step.tweets))
+                    {Object.entries(step.tweets)
                       .filter(([_, tweetList]) => tweetList.length > 0)
                       .map(([userId, tweetList]) => (
                         <motion.div

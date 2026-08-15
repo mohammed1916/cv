@@ -5,6 +5,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -202,14 +203,15 @@ function generateSteps(envelopes) {
 }
 
 const EXAMPLES = getExamples('russian-doll-envelopes')
+const DEFAULT_ENVELOPES = EXAMPLES[0]?.envelopes ?? [
+  [5, 4],
+  [6, 4],
+  [6, 7],
+  [2, 3],
+]
 
-function VisualizationPanel({ EXAMPLES, applyExample, selected, handleReset, step }) {
-  const initial = EXAMPLES[selected]?.envelopes ?? [
-    [5, 4],
-    [6, 4],
-    [6, 7],
-    [2, 3],
-  ]
+function VisualizationPanel({ EXAMPLES, applyExample, selected, handleReset, step, inputEnvelopes }) {
+  const initial = inputEnvelopes ?? DEFAULT_ENVELOPES
   const envelopes = step?.sortedEnvelopes ?? initial
   const sortedEnvelopes = step?.sortedEnvelopes ?? []
 
@@ -217,8 +219,8 @@ function VisualizationPanel({ EXAMPLES, applyExample, selected, handleReset, ste
   const containerHeight = 350
 
   // Find max width and height for scaling
-  const maxW = Math.max(...envelopes.map(e => e[0]))
-  const maxH = Math.max(...envelopes.map(e => e[1]))
+  const maxW = Math.max(1, ...envelopes.map(e => e[0]))
+  const maxH = Math.max(1, ...envelopes.map(e => e[1]))
 
   const scaleX = (containerWidth - 40) / maxW
   const scaleY = (containerHeight - 40) / maxH
@@ -384,13 +386,22 @@ export default function Problem354Visualizer() {
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  const initial = EXAMPLES[selected]?.envelopes ?? [
-    [5, 4],
-    [6, 4],
-    [6, 7],
-    [2, 3],
-  ]
-  const steps = useMemo(() => generateSteps(initial), [initial])
+  const [envelopesInput, setEnvelopesInput] = useState(() => JSON.stringify(DEFAULT_ENVELOPES))
+
+  const { envelopes, inputError } = useMemo(() => {
+    try {
+      const parsed = JSON.parse(envelopesInput)
+      if (!Array.isArray(parsed)) throw new Error('envelopes must be an array, e.g. [[2,3],[5,4]]')
+      if (!parsed.every((e) => Array.isArray(e) && e.length === 2 && e.every((n) => typeof n === 'number'))) {
+        throw new Error('each envelope must be a [width, height] pair of numbers')
+      }
+      return { envelopes: parsed, inputError: '' }
+    } catch (e) {
+      return { envelopes: DEFAULT_ENVELOPES, inputError: e.message }
+    }
+  }, [envelopesInput])
+
+  const steps = useMemo(() => generateSteps(envelopes), [envelopes])
   const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
@@ -398,6 +409,8 @@ export default function Problem354Visualizer() {
   const applyExample = useCallback(
     (idx) => {
       setSelected(idx)
+      const next = EXAMPLES[idx]?.envelopes
+      if (next) setEnvelopesInput(JSON.stringify(next))
       handleReset()
     },
     [handleReset]
@@ -408,20 +421,34 @@ export default function Problem354Visualizer() {
     { id: 'code', title: 'Code', dockMode: 'split-right' },
   ], [])
   const panelContents = useMemo(() => ({
-    viz: (<VisualizationPanel
-            EXAMPLES={EXAMPLES}
-            applyExample={applyExample}
-            selected={selected}
-            handleReset={handleReset}
-            step={step}
-          />),
+    viz: (
+      <>
+        <ManualInputPanel
+          fields={[{ key: 'envelopes', label: 'envelopes', type: 'array' }]}
+          values={{ envelopes: envelopesInput }}
+          onChange={(k, v) => { if (k === 'envelopes') setEnvelopesInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={EXAMPLES[selected]?.label}
+          applyExample={(e) => applyExample(EXAMPLES.indexOf(e))}
+          inputError={inputError}
+        />
+        <VisualizationPanel
+          EXAMPLES={EXAMPLES}
+          applyExample={applyExample}
+          selected={selected}
+          handleReset={handleReset}
+          step={step}
+          inputEnvelopes={envelopes}
+        />
+      </>
+    ),
     code: (<CodeTracePanel
             step={step}
             codeLines={SOLUTION_CODE}
             onActiveLineDomChange={setActiveLineDom}
             autoScroll={autoScrollCode}
           />),
-  }), [step, autoScrollCode, selected])
+  }), [step, autoScrollCode, selected, envelopesInput, envelopes, inputError, applyExample, handleReset, setActiveLineDom])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

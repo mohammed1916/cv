@@ -12,6 +12,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import './LonelyPixelIIVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 import { createPortal } from 'react-dom'
 const SOLUTION_CODE = getSolutionCode('lonely-pixel-ii')
@@ -27,6 +28,12 @@ const LINE_PATTERN_MAP = {
 }
 
 const EXAMPLES = getExamples('lonely-pixel-ii')
+
+const DEFAULT_EX = EXAMPLES[0] || {
+  label: 'Default',
+  picture: [['W', 'B', 'W'], ['W', 'B', 'W'], ['W', 'B', 'W']],
+  N: 2,
+}
 
 function generateSteps(picture, N) {
   const steps = []
@@ -122,7 +129,7 @@ function generateSteps(picture, N) {
   return steps
 }
 
-function VisualizationPanel({ picture, N, step, applyEx }) {
+function VisualizationPanel({ N, step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
       {/* Story */}
@@ -269,15 +276,38 @@ function VisualizationPanel({ picture, N, step, applyEx }) {
 }
 
 export default function LonelyPixelIIVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { picture: [['W','B','W'],['W','B','W'],['W','B','W']], N: 2 })
+  const [pictureInput, setPictureInput] = useState(JSON.stringify(DEFAULT_EX.picture))
+  const [nInput, setNInput] = useState(String(DEFAULT_EX.N))
+  const [activeLabel, setActiveLabel] = useState(DEFAULT_EX.label)
+
+  const { picture, N, inputError } = useMemo(() => {
+    try {
+      const parsed = JSON.parse(pictureInput)
+      if (!Array.isArray(parsed) || parsed.length === 0 || !Array.isArray(parsed[0]) || parsed[0].length === 0) {
+        throw new Error('picture must be a non-empty 2D array, e.g. [["W","B"],["B","W"]]')
+      }
+      const width = parsed[0].length
+      for (const row of parsed) {
+        if (!Array.isArray(row) || row.length !== width) throw new Error('every picture row must have the same length')
+        for (const cell of row) {
+          if (typeof cell !== 'string') throw new Error('picture cells must be strings like "B" or "W"')
+        }
+      }
+      const n = Number(nInput)
+      if (!Number.isFinite(n) || n < 0) throw new Error('N must be a non-negative number')
+      return { picture: parsed, N: n, inputError: '' }
+    } catch (e) {
+      return { picture: DEFAULT_EX.picture, N: DEFAULT_EX.N, inputError: e.message }
+    }
+  }, [pictureInput, nInput])
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.picture, ex.N).map((current) => ({
+      generateSteps(picture, N).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [picture, N]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -285,7 +315,19 @@ export default function LonelyPixelIIVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => {
+    setPictureInput(JSON.stringify(e.picture))
+    setNInput(String(e.N))
+    setActiveLabel(e.label)
+    handleReset()
+  }, [handleReset])
+
+  const handleFieldChange = useCallback((key, text) => {
+    if (key === 'picture') setPictureInput(text)
+    else if (key === 'N') setNInput(text)
+    setActiveLabel('')
+    handleReset()
+  }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -357,13 +399,26 @@ export default function LonelyPixelIIVisualizer() {
           )}
 
         </div>),
-    viz: (<VisualizationPanel
-          picture={ex.picture}
-          N={ex.N}
+    viz: (<>
+        <ManualInputPanel
+          fields={[
+            { key: 'picture', label: 'picture', type: 'array' },
+            { key: 'N', label: 'N', type: 'number' },
+          ]}
+          values={{ picture: pictureInput, N: nInput }}
+          onChange={handleFieldChange}
+          examples={EXAMPLES}
+          activeLabel={activeLabel}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
+        <VisualizationPanel
+          N={N}
           step={step}
           applyEx={applyEx}
-        />),
-  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
+        />
+      </>),
+  }), [step, connectivity, setActiveLineDom, N, pictureInput, nInput, activeLabel, inputError, handleFieldChange, applyEx, showPatternOverlay, activeLineDom])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

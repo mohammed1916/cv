@@ -9,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './MinesweeperVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -30,6 +31,9 @@ const LINE_PATTERN_MAP = {
 
 
 const EXAMPLES = getExamples('minesweeper')
+
+const FALLBACK_BOARD = [['E', 'E', 'E', 'E', 'E'], ['E', 'E', 'M', 'E', 'E'], ['E', 'E', 'E', 'E', 'E'], ['E', 'E', 'E', 'E', 'E']]
+const FALLBACK_CLICK = [0, 0]
 
 function generateSteps(board, click) {
   const steps = []
@@ -173,7 +177,7 @@ function generateSteps(board, click) {
   return steps
 }
 
-function VisualizationPanel({ board, click, step, applyEx }) {
+function VisualizationPanel({ step }) {
   const getColor = (cell) => {
     if (cell === 'M') return { bg: '#fee2e2', border: '#dc2626', text: '#7f1d1d', icon: '💣' }
     if (cell === 'E') return { bg: '#e5e7eb', border: '#6b7280', text: '#1f2937', icon: '?' }
@@ -188,29 +192,6 @@ function VisualizationPanel({ board, click, step, applyEx }) {
       <div style={{ padding: 12, backgroundColor: '#f0f9ff', borderRadius: 6, borderLeft: '4px solid #0284c7' }}>
         <div style={{ fontSize: 12, color: '#075985', fontStyle: 'italic' }}>
           "Sweep minesweeper board using BFS, revealing safe cells and counting adjacent mines."
-        </div>
-      </div>
-
-      {/* Examples */}
-      <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {EXAMPLES.map(e => (
-            <button
-              key={e.label}
-              onClick={() => applyEx(e)}
-              style={{
-                padding: '6px 12px',
-                borderRadius: 4,
-                border: '1px solid #cbd5e1',
-                cursor: 'pointer',
-                fontSize: 12,
-                backgroundColor: '#f1f5f9'
-              }}
-            >
-              {e.label}
-            </button>
-          ))}
         </div>
       </div>
 
@@ -272,15 +253,39 @@ function VisualizationPanel({ board, click, step, applyEx }) {
 }
 
 export default function MinesweeperVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { board: [['E','E','E','E','E'],['E','E','M','E','E'],['E','E','E','E','E'],['E','E','E','E','E']], click: [0, 0] })
+  const [boardInput, setBoardInput] = useState(JSON.stringify(EXAMPLES[0]?.board ?? FALLBACK_BOARD))
+  const [clickInput, setClickInput] = useState(JSON.stringify(EXAMPLES[0]?.click ?? FALLBACK_CLICK))
+  const [activeLabel, setActiveLabel] = useState(EXAMPLES[0]?.label ?? '')
+
+  const { board, click, inputError } = useMemo(() => {
+    try {
+      const parsedBoard = JSON.parse(boardInput)
+      if (!Array.isArray(parsedBoard) || parsedBoard.length === 0) throw new Error('board must be a non-empty 2D array')
+      const width = Array.isArray(parsedBoard[0]) ? parsedBoard[0].length : 0
+      if (width === 0) throw new Error('board rows must be non-empty arrays')
+      if (!parsedBoard.every((row) => Array.isArray(row) && row.length === width && row.every((cell) => typeof cell === 'string')))
+        throw new Error('board rows must be equal-length arrays of strings')
+
+      const parsedClick = JSON.parse(clickInput)
+      if (!Array.isArray(parsedClick) || parsedClick.length !== 2 || !parsedClick.every((n) => Number.isInteger(n)))
+        throw new Error('click must be [row, col]')
+      const [r, c] = parsedClick
+      if (r < 0 || r >= parsedBoard.length || c < 0 || c >= width)
+        throw new Error('click is out of board bounds')
+
+      return { board: parsedBoard, click: parsedClick, inputError: '' }
+    } catch (e) {
+      return { board: FALLBACK_BOARD, click: FALLBACK_CLICK, inputError: e.message }
+    }
+  }, [boardInput, clickInput])
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.board, ex.click).map((current) => ({
+      generateSteps(board, click).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [board, click]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -288,7 +293,19 @@ export default function MinesweeperVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => {
+    setBoardInput(JSON.stringify(e.board))
+    setClickInput(JSON.stringify(e.click))
+    setActiveLabel(e.label)
+    handleReset()
+  }, [handleReset])
+
+  const handleFieldChange = useCallback((key, text) => {
+    if (key === 'board') setBoardInput(text)
+    else if (key === 'click') setClickInput(text)
+    setActiveLabel('')
+    handleReset()
+  }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -331,13 +348,22 @@ export default function MinesweeperVisualizer() {
           )}
 
         </div>),
-    viz: (<VisualizationPanel
-          board={ex.board}
-          click={ex.click}
-          step={step}
-          applyEx={applyEx}
-        />),
-  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
+    viz: (<>
+        <ManualInputPanel
+          fields={[
+            { key: 'board', label: 'board', type: 'array' },
+            { key: 'click', label: 'click', type: 'array' },
+          ]}
+          values={{ board: boardInput, click: clickInput }}
+          onChange={handleFieldChange}
+          examples={EXAMPLES}
+          activeLabel={activeLabel}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
+        <VisualizationPanel step={step} />
+      </>),
+  }), [step, connectivity, setActiveLineDom, showPatternOverlay, activeLineDom, boardInput, clickInput, activeLabel, inputError, applyEx, handleFieldChange])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

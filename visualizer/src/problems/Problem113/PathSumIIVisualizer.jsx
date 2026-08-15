@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -255,19 +256,19 @@ function StatePanel({ step }) {
 }
 
 export default function PathSumIIVisualizer() {
-    const [arrInput] = useState('[5,4,8,11,null,13,4,7,2,null,1]')
-    const [targetInput] = useState('22')
+    const [arrInput, setArrInput] = useState('[5,4,8,11,null,13,4,7,2,null,1]')
+    const [targetInput, setTargetInput] = useState('22')
 
-    const { arr, targetSum } = useMemo(() => {
+    const { arr, targetSum, inputError } = useMemo(() => {
+        const fallback = { arr: [5, 4, 8, 11, null, 13, 4, 7, 2, null, 1], targetSum: 22 }
         try {
             const parsedArr = parseTreeInput(arrInput)
+            if (!Array.isArray(parsedArr)) throw new Error('Tree must be an array, e.g. [5,4,8,null,1]')
             const parsedTarget = parseInt(targetInput, 10)
-            if (isNaN(parsedTarget)) {
-                return { arr: [5,4,8,11,null,13,4,7,2,null,1], targetSum: 22 }
-            }
-            return { arr: parsedArr, targetSum: parsedTarget }
-        } catch {
-            return { arr: [5,4,8,11,null,13,4,7,2,null,1], targetSum: 22 }
+            if (isNaN(parsedTarget)) throw new Error('targetSum must be a number')
+            return { arr: parsedArr, targetSum: parsedTarget, inputError: '' }
+        } catch (e) {
+            return { ...fallback, inputError: e.message }
         }
     }, [arrInput, targetInput])
 
@@ -292,6 +293,20 @@ export default function PathSumIIVisualizer() {
         <div className="psi-panel" style={{ flex: 1 }}>
             <div className="psi-panel-head">Tree Visualization</div>
             <div className="psi-panel-body">
+                <ManualInputPanel
+                    fields={[
+                        { key: 'tree', label: 'tree', type: 'array' },
+                        { key: 'targetSum', label: 'targetSum', type: 'number' },
+                    ]}
+                    values={{ tree: arrInput, targetSum: targetInput }}
+                    onChange={(k, v) => {
+                        if (k === 'tree') setArrInput(v)
+                        else if (k === 'targetSum') setTargetInput(v)
+                        handleReset()
+                    }}
+                    inputError={inputError}
+                    showExamples={false}
+                />
                 <TreeVisualizationPanel step={step} positions={positions} edges={edges} allNodes={allNodes} />
             </div>
         </div>

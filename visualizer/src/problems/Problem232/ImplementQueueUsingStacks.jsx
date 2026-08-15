@@ -3,12 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './ImplementQueueUsingStacks.css'
+import { createPortal } from 'react-dom'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'def solution(input):' },
@@ -84,16 +85,12 @@ export default function ImplementQueueUsingStacks() {
 
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  return (
-    <div className="implement-queue-using-stacks-shell">
-      <ResizableSplitPanels
-        className="implement-queue-using-stacks-top-split"
-        storageKey="cpviz.split.implement-queue-using-stacks.top"
-        initialLeftPercent={60}
-        minLeftPx={360}
-        minRightPx={280}
-        left={(
-          <div className="implement-queue-using-stacks-panel">
+  const panelConfigs = useMemo(() => [
+    { id: 'left', title: "Input" },
+    { id: 'right', title: "Details", dockMode: 'split-right' },
+  ], [])
+  const panelContents = {
+    left: (<div className="implement-queue-using-stacks-panel">
             <div className="implement-queue-using-stacks-panel-head">
               Input
               {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
@@ -138,10 +135,8 @@ export default function ImplementQueueUsingStacks() {
                 </motion.div>
               </div>
             </div>
-          </div>
-        )}
-        right={(
-          <div className="implement-queue-using-stacks-panel">
+          </div>),
+    right: (<div className="implement-queue-using-stacks-panel">
             <div className="implement-queue-using-stacks-panel-head">Details</div>
             <div className="implement-queue-using-stacks-panel-body">
               <div className="implement-queue-using-stacks-info">
@@ -149,9 +144,21 @@ export default function ImplementQueueUsingStacks() {
                 <p><strong>Story:</strong> Stack Flip Choreography - watch stacks flip and reverse to create queue ordering</p>
               </div>
             </div>
-          </div>
+          </div>),
+  }
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+  return (
+    <div className="implement-queue-using-stacks-shell">
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.left && createPortal(panelContents.left, panelDivs.left)}
+            {panelDivs.right && createPortal(panelContents.right, panelDivs.right)}
+          </>
         )}
-      />
+      </>
 
       <CodeTracePanel
         step={step}

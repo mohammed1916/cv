@@ -3,6 +3,7 @@ import { createPortal } from "react-dom"
 import { motion } from "framer-motion"
 import LuminoDockPanel from "../../components/LuminoDockPanel"
 import FloatingPanel from "../../components/shared/FloatingPanel"
+import ManualInputPanel from "../../components/shared/ManualInputPanel"
 import CodeTracePanel from "../../components/CodeTracePanel"
 import PlaybackControls from "../../components/PlaybackControls"
 import PatternOverlay from "../../components/PatternOverlay"
@@ -265,9 +266,37 @@ function VisualizationPanel({ step }) {
 }
 
 export default function WordSearchIIVisualizer() {
-  const board = useMemo(() => [["o", "a", "a", "n"], ["e", "t", "a", "e"], ["i", "h", "k", "r"], ["i", "f", "l", "v"]], [])
-  const words = useMemo(() => ["oath", "pea", "eat", "rain"], [])
-  const steps = useMemo(() => generateSteps(board, words).map((s) => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [board, words])
+  const [boardInput, setBoardInput] = useState('[["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]]')
+  const [wordsInput, setWordsInput] = useState('["oath","pea","eat","rain"]')
+
+  const { board, words, inputError } = useMemo(() => {
+    const fallback = {
+      board: [["o", "a", "a", "n"], ["e", "t", "a", "e"], ["i", "h", "k", "r"], ["i", "f", "l", "v"]],
+      words: ["oath", "pea", "eat", "rain"],
+    }
+    try {
+      const parsedBoard = JSON.parse(boardInput)
+      if (!Array.isArray(parsedBoard) || parsedBoard.length === 0 || !parsedBoard.every(Array.isArray)) {
+        throw new Error('board must be a non-empty array of rows, e.g. [["a","b"],["c","d"]]')
+      }
+      const width = parsedBoard[0].length
+      if (width === 0 || !parsedBoard.every((r) => r.length === width)) {
+        throw new Error('board rows must all be the same non-zero length')
+      }
+      if (!parsedBoard.every((r) => r.every((c) => typeof c === 'string'))) {
+        throw new Error('board cells must be strings')
+      }
+      const parsedWords = JSON.parse(wordsInput)
+      if (!Array.isArray(parsedWords) || !parsedWords.every((w) => typeof w === 'string')) {
+        throw new Error('words must be an array of strings, e.g. ["oath","eat"]')
+      }
+      return { board: parsedBoard, words: parsedWords, inputError: '' }
+    } catch (e) {
+      return { ...fallback, inputError: e.message }
+    }
+  }, [boardInput, wordsInput])
+
+  const steps = useMemo(() => generateSteps(board.map((r) => [...r]), words).map((s) => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [board, words])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
@@ -278,7 +307,23 @@ export default function WordSearchIIVisualizer() {
   )
 
   const vizPanel = (
-    <VisualizationPanel step={step} />
+    <>
+      <ManualInputPanel
+        fields={[
+          { key: 'board', label: 'board', type: 'array' },
+          { key: 'words', label: 'words', type: 'array' },
+        ]}
+        values={{ board: boardInput, words: wordsInput }}
+        onChange={(k, v) => {
+          if (k === 'board') setBoardInput(v)
+          else if (k === 'words') setWordsInput(v)
+          handleReset()
+        }}
+        inputError={inputError}
+        showExamples={false}
+      />
+      <VisualizationPanel step={step} />
+    </>
   )
 
   const [panelDivs, setPanelDivs] = useState(null)

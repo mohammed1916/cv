@@ -4,7 +4,7 @@ import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
-import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -12,6 +12,7 @@ import { getExamplesOr } from '../../config/examplesRegistry'
 import './CumulativeSalaryVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import { createPortal } from 'react-dom'
 
 const CUMULATIVE_PATTERNS = ['select', 'filter', 'window', 'cumsum', 'sort']
 
@@ -268,25 +269,12 @@ export default function CumulativeSalaryVisualizer() {
     return Math.max(...resultsData.map((r) => r.cumulativeSalary))
   }, [resultsData])
 
-  return (
-    <div className="cumulative-salary-shell">
-      <ManualInputPanel
-        fields={[{"key":"employees","label":"employees","type":"array"}]}
-        values={{ employees: employeesInput }}
-        onChange={(k, v) => { if (k === 'employees') setEmployeesInput(v); handleReset() }}
-        examples={EXAMPLES}
-        applyExample={applyExample}
-        inputError={inputError}
-      />
-
-      <ResizableSplitPanels
-        className="cumulative-salary-top-split"
-        storageKey="cpviz.split.cumulative-salary.top"
-        initialLeftPercent={50}
-        minLeftPx={320}
-        minRightPx={300}
-        left={
-          <div className="cumulative-salary-panel">
+  const panelConfigs = useMemo(() => [
+    { id: 'left', title: "Employee Salary Data" },
+    { id: 'right', title: "Cumulative Salary Results", dockMode: 'split-right' },
+  ], [])
+  const panelContents = {
+    left: (<div className="cumulative-salary-panel">
             <div className="cumulative-salary-panel-head">Employee Salary Data</div>
             <div className="cumulative-salary-panel-body">
               <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
@@ -345,10 +333,8 @@ export default function CumulativeSalaryVisualizer() {
                 </div>
               </div>
             </div>
-          </div>
-        }
-        right={
-          <div className="cumulative-salary-panel">
+          </div>),
+    right: (<div className="cumulative-salary-panel">
             <div className="cumulative-salary-panel-head">Cumulative Salary Results</div>
             <div className="cumulative-salary-panel-body">
               <div className="cumulative-salary-table-container">
@@ -415,9 +401,30 @@ export default function CumulativeSalaryVisualizer() {
                 </div>
               )}
             </div>
-          </div>
-        }
+          </div>),
+  }
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+  return (
+    <div className="cumulative-salary-shell">
+      <ManualInputPanel
+        fields={[{"key":"employees","label":"employees","type":"array"}]}
+        values={{ employees: employeesInput }}
+        onChange={(k, v) => { if (k === 'employees') setEmployeesInput(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyExample}
+        inputError={inputError}
       />
+
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.left && createPortal(panelContents.left, panelDivs.left)}
+            {panelDivs.right && createPortal(panelContents.right, panelDivs.right)}
+          </>
+        )}
+      </>
 
       <div style={{ position: 'relative' }}>
         <CodeTracePanel

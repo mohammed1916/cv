@@ -9,6 +9,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
+import ManualInputPanel from "../../components/shared/ManualInputPanel";
 import "./ValidSudokuVisualizer.css";
 
 const SOLUTION_CODE = [
@@ -58,7 +59,9 @@ const EXAMPLES = {
     },
 };
 
-const VALIDSUDOKU_PATTERNS = ['check', 'continue', 'duplicate', 'done', 'init', 'mark'];
+const EXAMPLE_LIST = Object.values(EXAMPLES);
+
+const VALIDSUDOKU_PATTERNS =['check', 'continue', 'duplicate', 'done', 'init', 'mark'];
 
 const LINE_PATTERN_MAP = {
     7: 'check',
@@ -135,8 +138,30 @@ function generateSteps(board) {
 }
 
 export default function ValidSudokuVisualizer() {
-    const [exKey, setExKey] = useState("valid");
-    const board = EXAMPLES[exKey].board;
+    const [activeLabel, setActiveLabel] = useState(EXAMPLES.valid.label);
+    const [boardInput, setBoardInput] = useState(JSON.stringify(EXAMPLES.valid.board));
+
+    const { board, inputError } = useMemo(() => {
+        try {
+            const parsed = JSON.parse(boardInput);
+            if (!Array.isArray(parsed) || parsed.length !== 9) {
+                throw new Error("board must be an array of 9 rows");
+            }
+            parsed.forEach((row) => {
+                if (!Array.isArray(row) || row.length !== 9) {
+                    throw new Error("each row must be an array of 9 cells");
+                }
+                row.forEach((cell) => {
+                    if (typeof cell !== "string" || !/^[1-9.]$/.test(cell)) {
+                        throw new Error('each cell must be "1"-"9" or "."');
+                    }
+                });
+            });
+            return { board: parsed, inputError: "" };
+        } catch (e) {
+            return { board: EXAMPLES.valid.board, inputError: e.message };
+        }
+    }, [boardInput]);
 
     const steps = useMemo(() => generateSteps(board), [board]);
     const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -146,18 +171,31 @@ export default function ValidSudokuVisualizer() {
 
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
 
-    const applyExample = useCallback((key) => { setExKey(key); handleReset(); }, [handleReset]);
+    const applyExample = useCallback((ex) => {
+        if (!ex) return;
+        setActiveLabel(ex.label);
+        setBoardInput(JSON.stringify(ex.board));
+        handleReset();
+    }, [handleReset]);
+
+    const handleInputChange = useCallback((key, text) => {
+        if (key === "board") setBoardInput(text);
+        setActiveLabel("");
+        handleReset();
+    }, [handleReset]);
 
     // Step 3: Extract panels into consts
     const primaryPanel = (
         <div className="vs-panel">
-            <div className="vs-controls-row">
-                {Object.entries(EXAMPLES).map(([key, ex]) => (
-                    <button key={key} className={`vs-chip ${exKey === key ? "active" : ""}`} onClick={() => applyExample(key)}>
-                        {ex.label}
-                    </button>
-                ))}
-            </div>
+            <ManualInputPanel
+                fields={[{ key: "board", label: "board (9x9)", type: "array" }]}
+                values={{ board: boardInput }}
+                onChange={handleInputChange}
+                examples={EXAMPLE_LIST}
+                activeLabel={activeLabel}
+                applyExample={applyExample}
+                inputError={inputError}
+            />
             <div className="vs-panel-label">Board</div>
             <div className="vs-grid">
                 {board.map((row, r) =>

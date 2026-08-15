@@ -10,6 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './GamePlayAnalysisIIVisualizer.css'
 import PatternOverlay from "../../components/PatternOverlay";
 import { createPortal } from 'react-dom'
@@ -125,7 +126,7 @@ function generateSteps(events) {
   return steps
 }
 
-function VisualizationPanel({ events, step, applyEx }) {
+function VisualizationPanel({ events, step, inputPanel }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
       {/* Story */}
@@ -135,28 +136,8 @@ function VisualizationPanel({ events, step, applyEx }) {
         </div>
       </div>
 
-      {/* Examples */}
-      <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {EXAMPLES.map(e => (
-            <button
-              key={e.label}
-              onClick={() => applyEx(e)}
-              style={{
-                padding: '6px 12px',
-                borderRadius: 4,
-                border: '1px solid #cbd5e1',
-                cursor: 'pointer',
-                fontSize: 12,
-                backgroundColor: '#f1f5f9'
-              }}
-            >
-              {e.label}
-            </button>
-          ))}
-        </div>
-      </div>
+      {/* Manual input */}
+      {inputPanel}
 
       {/* Events Table */}
       <div>
@@ -250,16 +231,34 @@ function VisualizationPanel({ events, step, applyEx }) {
 }
 
 export default function GamePlayAnalysisIIVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { events: [{ player_id: 1, device: 'phone', event_date: '2016-03-01' }] })
+  const DEFAULT_ACTIVITY = EXAMPLES[0]?.activity ?? [{ player_id: 1, device_id: 2, event_date: '2016-03-01' }]
+  const [activityInput, setActivityInput] = useState(JSON.stringify(DEFAULT_ACTIVITY))
+  const [activeLabel, setActiveLabel] = useState(EXAMPLES[0]?.label ?? '')
   const SOLUTION_CODE = SOLUTION_CODE_INLINE
+
+  const { events, inputError } = useMemo(() => {
+    try {
+      const parsed = JSON.parse(activityInput)
+      if (!Array.isArray(parsed)) throw new Error('activity must be an array of rows')
+      const rows = parsed.map((row, i) => {
+        if (!row || typeof row !== 'object' || Array.isArray(row)) throw new Error(`row ${i} must be an object`)
+        if (typeof row.player_id !== 'number') throw new Error(`row ${i} needs a numeric player_id`)
+        if (typeof row.event_date !== 'string') throw new Error(`row ${i} needs a string event_date`)
+        return { ...row, device: row.device ?? row.device_id }
+      })
+      return { events: rows, inputError: '' }
+    } catch (e) {
+      return { events: [], inputError: e.message }
+    }
+  }, [activityInput])
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.events).map((current) => ({
+      generateSteps(events).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [events]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -267,7 +266,11 @@ export default function GamePlayAnalysisIIVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => {
+    setActivityInput(JSON.stringify(e.activity))
+    setActiveLabel(e.label)
+    handleReset()
+  }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -290,11 +293,21 @@ export default function GamePlayAnalysisIIVisualizer() {
           onActiveLineDomChange={setActiveLineDom}
         />),
     viz: (<VisualizationPanel
-          events={ex.events}
+          events={events}
           step={step}
-          applyEx={applyEx}
+          inputPanel={(
+            <ManualInputPanel
+              fields={[{ key: 'activity', label: 'activity (JSON rows)', type: 'array' }]}
+              values={{ activity: activityInput }}
+              onChange={(k, v) => { if (k === 'activity') setActivityInput(v); setActiveLabel(''); handleReset() }}
+              examples={EXAMPLES}
+              activeLabel={activeLabel}
+              applyExample={applyEx}
+              inputError={inputError}
+            />
+          )}
         />),
-  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
+  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, events, applyEx, activityInput, activeLabel, inputError, handleReset])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

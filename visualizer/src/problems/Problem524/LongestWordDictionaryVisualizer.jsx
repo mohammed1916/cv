@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './LongestWordDictionaryVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -27,7 +28,19 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('longest-word-dictionary')
+const REGISTRY_EXAMPLES = getExamples('longest-word-dictionary')
+
+// The registry entry for this slug only carries a `words` list, which does not
+// match this visualizer's (s, dictionary) input. Fall back to correctly shaped
+// local examples whenever the registry rows are missing those fields.
+const EXAMPLES =
+  REGISTRY_EXAMPLES.length > 0 &&
+  REGISTRY_EXAMPLES.every((e) => typeof e.s === 'string' && Array.isArray(e.dictionary))
+    ? REGISTRY_EXAMPLES
+    : [
+        { label: 'Example 1', s: 'abpcplea', dictionary: ['ale', 'apple', 'monkey', 'plea'] },
+        { label: 'Example 2', s: 'abpcplea', dictionary: ['a', 'b', 'c'] },
+      ]
 
 function generateSteps(s, dictionary) {
   const steps = []
@@ -167,7 +180,7 @@ function VisualizationPanel({ s, dictionary, step, applyEx }) {
       <div>
         <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Dictionary</div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', maxHeight: 150, overflowY: 'auto' }}>
-          {step?.dictionary?.map((word, idx) => {
+          {(step?.dictionary ?? dictionary)?.map((word, idx) => {
             const isActive = step && idx === step.wordIdx && !step.done
             const isResult = step && word === step.result
             return (
@@ -246,15 +259,32 @@ function VisualizationPanel({ s, dictionary, step, applyEx }) {
 }
 
 export default function LongestWordDictionaryVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { s: 'abpcplea', dictionary: ['ale', 'apple', 'monkey', 'plea'] })
+  const DEFAULT_S = EXAMPLES[0]?.s ?? 'abpcplea'
+  const DEFAULT_DICT = EXAMPLES[0]?.dictionary ?? ['ale', 'apple', 'monkey', 'plea']
+
+  const [sInput, setSInput] = useState(DEFAULT_S)
+  const [dictionaryInput, setDictionaryInput] = useState(JSON.stringify(DEFAULT_DICT))
+  const [activeLabel, setActiveLabel] = useState(EXAMPLES[0]?.label ?? '')
+
+  const { s, dictionary, inputError } = useMemo(() => {
+    try {
+      const parsedDict = JSON.parse(dictionaryInput)
+      if (!Array.isArray(parsedDict) || parsedDict.some((w) => typeof w !== 'string')) {
+        throw new Error('dictionary must be an array of strings, e.g. ["ale","apple"]')
+      }
+      return { s: sInput, dictionary: parsedDict, inputError: '' }
+    } catch (e) {
+      return { s: sInput, dictionary: [], inputError: e.message }
+    }
+  }, [sInput, dictionaryInput])
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.s, ex.dictionary).map((current) => ({
+      generateSteps(s, dictionary).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [s, dictionary]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -262,7 +292,12 @@ export default function LongestWordDictionaryVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => {
+    setSInput(e.s)
+    setDictionaryInput(JSON.stringify(e.dictionary))
+    setActiveLabel(e.label)
+    handleReset()
+  }, [handleReset, setSInput, setDictionaryInput, setActiveLabel])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -305,13 +340,32 @@ export default function LongestWordDictionaryVisualizer() {
           )}
 
         </div>),
-    viz: (<VisualizationPanel
-          s={ex.s}
-          dictionary={ex.dictionary}
+    viz: (<>
+        <ManualInputPanel
+          fields={[
+            { key: 's', label: 's', type: 'string' },
+            { key: 'dictionary', label: 'dictionary', type: 'array' },
+          ]}
+          values={{ s: sInput, dictionary: dictionaryInput }}
+          onChange={(key, text) => {
+            if (key === 's') setSInput(text)
+            else if (key === 'dictionary') setDictionaryInput(text)
+            setActiveLabel('')
+            handleReset()
+          }}
+          examples={EXAMPLES}
+          activeLabel={activeLabel}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
+        <VisualizationPanel
+          s={s}
+          dictionary={dictionary}
           step={step}
           applyEx={applyEx}
-        />),
-  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
+        />
+      </>),
+  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, s, dictionary, sInput, dictionaryInput, activeLabel, inputError, applyEx, handleReset])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

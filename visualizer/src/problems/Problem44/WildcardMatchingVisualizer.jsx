@@ -10,6 +10,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./WildcardMatchingVisualizer.css";
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import LuminoDockPanel from "../../components/LuminoDockPanel"
 
 const WILDCARDMATCHING_PATTERNS = ['base', 'done', 'init', 'match', 'no-match', 'star']
@@ -77,30 +78,54 @@ function generateSteps(s, p) {
 const CELL_SIZE = 34;
 
 export default function WildcardMatchingVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => generateSteps(ex.s, ex.p), [ex]);
+  const [sInput, setSInput] = useState(EXAMPLES[0].s);
+  const [pInput, setPInput] = useState(EXAMPLES[0].p);
+  const [activeLabel, setActiveLabel] = useState(EXAMPLES[0].label);
+
+  const { s, p, inputError } = useMemo(() => {
+    if (sInput.length > 30 || pInput.length > 30) {
+      return { s: "", p: "", inputError: "Keep s and p at 30 characters or fewer" };
+    }
+    return { s: sInput, p: pInput, inputError: "" };
+  }, [sInput, pInput]);
+
+  const steps = useMemo(() => generateSteps(s, p), [s, p]);
   const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => {
+    setSInput(e.s);
+    setPInput(e.p);
+    setActiveLabel(e.label);
+    handleReset();
+  }, [handleReset]);
 
-  const dp = step?.dp ?? Array.from({ length: ex.s.length + 1 }, () => Array(ex.p.length + 1).fill(false));
+  const dp = step?.dp ?? Array.from({ length: s.length + 1 }, () => Array(p.length + 1).fill(false));
   const activeI = step?.i ?? -1;
   const activeJ = step?.j ?? -1;
   const phase = step?.phase ?? "init";
-  const s = ex.s, p = ex.p;
 
   // Step 2: Extract panels
   const primaryPanel = (
     <div className="wm-panel">
-      <div className="wm-examples">
-        {EXAMPLES.map(e => (
-          <button key={e.label} className={`wm-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>
-            {e.label}
-          </button>
-        ))}
-      </div>
+      <ManualInputPanel
+        fields={[
+          { key: 's', label: 's', type: 'string' },
+          { key: 'p', label: 'p (pattern)', type: 'string' },
+        ]}
+        values={{ s: sInput, p: pInput }}
+        onChange={(k, v) => {
+          if (k === 's') setSInput(v);
+          else if (k === 'p') setPInput(v);
+          setActiveLabel('');
+          handleReset();
+        }}
+        examples={EXAMPLES}
+        activeLabel={activeLabel}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
 
       <div className="wm-strings">
         <div className="wm-string-row">
@@ -169,15 +194,15 @@ export default function WildcardMatchingVisualizer() {
         </div>
         <div className="wm-tracker">
           <span className="wm-tracker-label">Result</span>
-          <span className={`wm-tracker-val wm-result-val ${dp[ex.s.length]?.[ex.p.length] ? "true" : "false"}`}>
-            {step?.done ? String(dp[ex.s.length][ex.p.length]) : "…"}
+          <span className={`wm-tracker-val wm-result-val ${dp[s.length]?.[p.length] ? "true" : "false"}`}>
+            {step?.done ? String(dp[s.length][p.length]) : "…"}
           </span>
         </div>
       </div>
 
       {step?.done && (
-        <div className={`wm-result ${dp[ex.s.length][ex.p.length] ? "match" : "no-match"}`}>
-          {dp[ex.s.length][ex.p.length] ? `✓ "${s}" matches pattern "${p}"` : `✗ "${s}" does not match "${p}"`}
+        <div className={`wm-result ${dp[s.length][p.length] ? "match" : "no-match"}`}>
+          {dp[s.length][p.length] ? `✓ "${s}" matches pattern "${p}"` : `✗ "${s}" does not match "${p}"`}
         </div>
       )}
     </div>

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -12,6 +12,7 @@ import './InvestmentsVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { createPortal } from 'react-dom'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -188,16 +189,12 @@ export default function InvestmentsVisualizer() {
   const includedCount = calc.rows.filter((r) => r.isIncluded).length
   const duplicateTivCount = Object.values(calc.tiv2015Groups).filter((group) => group.length > 1).length
 
-  return (
-    <div className="investments_2016-shell">
-      <ResizableSplitPanels
-        className="investments_2016-top-split"
-        storageKey="cpviz.split.investments-2016.top"
-        initialLeftPercent={60}
-        minLeftPx={360}
-        minRightPx={280}
-        left={(
-          <div className="investments_2016-panel">
+  const panelConfigs = useMemo(() => [
+    { id: 'left', title: "Input & Visualization" },
+    { id: 'right', title: "Analysis & Results", dockMode: 'split-right' },
+  ], [])
+  const panelContents = {
+    left: (<div className="investments_2016-panel">
             <div className="investments_2016-panel-head">Input & Visualization</div>
             <div className="investments_2016-panel-body">
               <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
@@ -276,10 +273,8 @@ export default function InvestmentsVisualizer() {
                 </div>
               )}
             </div>
-          </div>
-        )}
-        right={(
-          <div className="investments_2016-panel">
+          </div>),
+    right: (<div className="investments_2016-panel">
             <div className="investments_2016-panel-head">Analysis & Results</div>
             <div className="investments_2016-panel-body">
               {step && calc.rows.length > 0 && (
@@ -331,9 +326,21 @@ export default function InvestmentsVisualizer() {
                 </div>
               )}
             </div>
-          </div>
+          </div>),
+  }
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+  return (
+    <div className="investments_2016-shell">
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.left && createPortal(panelContents.left, panelDivs.left)}
+            {panelDivs.right && createPortal(panelContents.right, panelDivs.right)}
+          </>
         )}
-      />
+      </>
 
       <CodeTracePanel
         step={step}

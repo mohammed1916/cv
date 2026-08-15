@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -9,6 +9,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './NetworkDelayTime.css'
 
 const SOLUTION_CODE = [
@@ -144,18 +145,59 @@ const EXAMPLES = [
 ]
 
 export default function NetworkDelayTimeVisualizer() {
-  const [exIdx, setExIdx] = useState(0)
+  const [timesInput, setTimesInput] = useState(JSON.stringify(EXAMPLES[0].times))
+  const [nInput, setNInput] = useState(String(EXAMPLES[0].n))
+  const [kInput, setKInput] = useState(String(EXAMPLES[0].k))
+  const [activeLabel, setActiveLabel] = useState(EXAMPLES[0].label)
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  const ex = EXAMPLES[exIdx]
-  const steps = useMemo(() => generateSteps(ex.n, ex.k, ex.times), [ex])
+  const { n, k, times, inputError } = useMemo(() => {
+    const fallback = { n: 1, k: 1, times: [] }
+    try {
+      const parsedN = JSON.parse(nInput)
+      if (!Number.isInteger(parsedN) || parsedN < 1) throw new Error('n must be an integer >= 1')
+
+      const parsedK = JSON.parse(kInput)
+      if (!Number.isInteger(parsedK) || parsedK < 1 || parsedK > parsedN) {
+        throw new Error(`k must be an integer in 1..${parsedN}`)
+      }
+
+      const parsedTimes = JSON.parse(timesInput)
+      if (!Array.isArray(parsedTimes)) throw new Error('times must be an array of [u, v, w]')
+      parsedTimes.forEach((t) => {
+        if (!Array.isArray(t) || t.length !== 3 || !t.every((v) => typeof v === 'number')) {
+          throw new Error('each edge must be [u, v, w] numbers')
+        }
+        if (!Number.isInteger(t[0]) || t[0] < 1 || t[0] > parsedN || !Number.isInteger(t[1]) || t[1] < 1 || t[1] > parsedN) {
+          throw new Error(`edge endpoints must be integers in 1..${parsedN}`)
+        }
+      })
+
+      return { n: parsedN, k: parsedK, times: parsedTimes, inputError: '' }
+    } catch (e) {
+      return { ...fallback, inputError: e.message }
+    }
+  }, [nInput, kInput, timesInput])
+
+  const steps = useMemo(() => generateSteps(n, k, times), [n, k, times])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
-  const step = stepIndex >= 0 ? steps[stepIndex] : null
+  const step = stepIndex >= 0 ? steps[stepIndex] ?? null : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
-  const applyExample = useCallback((idx) => {
-    setExIdx(idx)
+  const applyExample = useCallback((example) => {
+    setTimesInput(JSON.stringify(example.times))
+    setNInput(String(example.n))
+    setKInput(String(example.k))
+    setActiveLabel(example.label)
+    handleReset()
+  }, [handleReset])
+
+  const handleFieldChange = useCallback((key, text) => {
+    if (key === 'times') setTimesInput(text)
+    else if (key === 'n') setNInput(text)
+    else if (key === 'k') setKInput(text)
+    setActiveLabel('')
     handleReset()
   }, [handleReset])
 
@@ -174,8 +216,8 @@ export default function NetworkDelayTimeVisualizer() {
     if (!step) return null
 
     const positions = {}
-    for (let i = 1; i <= ex.n; i++) {
-      positions[i] = getNodePosition(i, ex.n)
+    for (let i = 1; i <= n; i++) {
+      positions[i] = getNodePosition(i, n)
     }
 
     return (
@@ -204,7 +246,7 @@ export default function NetworkDelayTimeVisualizer() {
         </defs>
 
         {/* Edges */}
-        {ex.times.map((time, idx) => {
+        {times.map((time, idx) => {
           const [u, v, w] = time
           const pos1 = positions[u]
           const pos2 = positions[v]
@@ -237,7 +279,7 @@ export default function NetworkDelayTimeVisualizer() {
         })}
 
         {/* Nodes */}
-        {Array.from({ length: ex.n }, (_, i) => i + 1).map((node) => {
+        {Array.from({ length: n }, (_, i) => i + 1).map((node) => {
           const pos = positions[node]
           const isVisited = step.visited.has(node)
           const isCurrent = step.currentNode === node
@@ -293,25 +335,19 @@ export default function NetworkDelayTimeVisualizer() {
 
   const vizPanel = (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {EXAMPLES.map((e, i) => (
-              <button
-                key={i}
-                onClick={() => applyExample(i)}
-                style={{
-                  padding: '6px 12px',
-                  borderRadius: 4,
-                  border: '1px solid #cbd5e1',
-                  cursor: 'pointer',
-                  fontSize: 12,
-                  backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
-                  fontWeight: exIdx === i ? 600 : 400,
-                }}
-              >
-                {e.label}
-              </button>
-            ))}
-          </div>
+          <ManualInputPanel
+            fields={[
+              { key: 'times', label: 'times', type: 'array' },
+              { key: 'n', label: 'n', type: 'number' },
+              { key: 'k', label: 'k', type: 'number' },
+            ]}
+            values={{ times: timesInput, n: nInput, k: kInput }}
+            onChange={handleFieldChange}
+            examples={EXAMPLES}
+            activeLabel={activeLabel}
+            applyExample={applyExample}
+            inputError={inputError}
+          />
 
           {step && (
             <>
@@ -326,7 +362,7 @@ export default function NetworkDelayTimeVisualizer() {
               <div style={{ padding: 8, backgroundColor: '#f1f5f9', borderRadius: 6, fontSize: 11 }}>
                 <div style={{ fontWeight: 600, marginBottom: 8, color: '#0f172a' }}>Distances:</div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                  {Array.from({ length: ex.n }, (_, i) => i + 1).map((node) => {
+                  {Array.from({ length: n }, (_, i) => i + 1).map((node) => {
                     const dist = step.dist[node]
                     const isVisited = step.visited.has(node)
                     return (

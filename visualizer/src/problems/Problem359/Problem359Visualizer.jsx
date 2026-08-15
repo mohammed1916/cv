@@ -10,6 +10,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamplesOr } from '../../config/examplesRegistry'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './Problem359.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -555,78 +556,10 @@ function OutputLog({ step }) {
   )
 }
 
-function VisualizationPanel({ step, requests, threshold, EXAMPLES, handleExampleClick, currentExample, setCurrentExample, handleReset }) {
-  const example = EXAMPLES[currentExample] || EXAMPLES[0]
-
+function VisualizationPanel({ step, requests, inputPanel }) {
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
-      <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>
-          Examples
-        </div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {EXAMPLES.map((ex, idx) => (
-            <button
-              key={ex.label}
-              onClick={() => {
-                setCurrentExample(idx)
-                handleReset()
-              }}
-              style={{
-                padding: '6px 12px',
-                borderRadius: 4,
-                border: currentExample === idx ? '2px solid #3b82f6' : '1px solid #cbd5e1',
-                backgroundColor: currentExample === idx ? '#eff6ff' : '#f1f5f9',
-                cursor: 'pointer',
-                fontSize: 12,
-                fontWeight: 500,
-                color: currentExample === idx ? '#1e40af' : '#475569',
-                transition: 'all 0.2s',
-              }}
-            >
-              {ex.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-        <div>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>
-            Threshold (seconds)
-          </label>
-          <div style={{
-            padding: '8px 10px',
-            border: '1px solid #cbd5e1',
-            borderRadius: 4,
-            fontSize: 12,
-            fontFamily: 'monospace',
-            backgroundColor: '#f8fafc',
-            color: '#1e293b',
-            fontWeight: 600,
-          }}>
-            {threshold}s
-          </div>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'flex-end' }}>
-          <button
-            onClick={handleReset}
-            style={{
-              width: '100%',
-              padding: '8px 10px',
-              backgroundColor: '#3b82f6',
-              color: 'white',
-              border: 'none',
-              borderRadius: 4,
-              fontSize: 12,
-              fontWeight: 600,
-              cursor: 'pointer',
-            }}
-          >
-            Reset
-          </button>
-        </div>
-      </div>
+      {inputPanel}
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, flex: 1 }}>
         <RequestTimeline step={step} requests={requests} />
@@ -644,15 +577,36 @@ function VisualizationPanel({ step, requests, threshold, EXAMPLES, handleExample
 const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
 
 export default function Problem359Visualizer() {
-  const [currentExample, setCurrentExample] = useState(0)
+  const [activeLabel, setActiveLabel] = useState(EXAMPLES[0]?.label ?? '')
+  const [requestsInput, setRequestsInput] = useState(
+    JSON.stringify(EXAMPLES[0]?.requests ?? []),
+  )
+  const [thresholdInput, setThresholdInput] = useState(String(EXAMPLES[0]?.threshold ?? 10))
 
-  const { requests, threshold } = useMemo(() => {
-    const example = EXAMPLES[currentExample] || EXAMPLES[0]
-    return {
-      requests: example.requests || [],
-      threshold: example.threshold || 10,
+  const { requests, threshold, inputError } = useMemo(() => {
+    try {
+      const parsedRequests = JSON.parse(requestsInput)
+      if (!Array.isArray(parsedRequests)) throw new Error('requests must be an array')
+      parsedRequests.forEach((r) => {
+        if (!r || typeof r !== 'object' || Array.isArray(r)) {
+          throw new Error('each request must be an object { "timestamp": number, "message": string }')
+        }
+        if (typeof r.timestamp !== 'number' || !Number.isFinite(r.timestamp)) {
+          throw new Error('each request needs a numeric "timestamp"')
+        }
+        if (typeof r.message !== 'string') {
+          throw new Error('each request needs a string "message"')
+        }
+      })
+      const parsedThreshold = Number(thresholdInput)
+      if (!Number.isFinite(parsedThreshold) || parsedThreshold < 0) {
+        throw new Error('threshold must be a non-negative number')
+      }
+      return { requests: parsedRequests, threshold: parsedThreshold, inputError: '' }
+    } catch (e) {
+      return { requests: [], threshold: 10, inputError: e.message }
     }
-  }, [currentExample])
+  }, [requestsInput, thresholdInput])
 
   const steps = useMemo(
     () => generateSteps(requests, threshold).map((current) => ({
@@ -679,6 +633,20 @@ export default function Problem359Visualizer() {
     onStepJump: setStepIndex,
   })
 
+  const applyExample = useCallback((ex) => {
+    if (!ex) return
+    setActiveLabel(ex.label)
+    setRequestsInput(JSON.stringify(ex.requests ?? []))
+    setThresholdInput(String(ex.threshold ?? 10))
+    handleReset()
+  }, [handleReset])
+
+  const handleInputChange = useCallback((key, text) => {
+    if (key === 'requests') setRequestsInput(text)
+    if (key === 'threshold') setThresholdInput(text)
+    setActiveLabel('')
+    handleReset()
+  }, [handleReset])
 
   const panelConfigs = useMemo(() => [
     { id: 'code', title: 'Code' },
@@ -696,23 +664,33 @@ export default function Problem359Visualizer() {
     viz: (<VisualizationPanel
           step={step}
           requests={requests}
-          threshold={threshold}
-          EXAMPLES={EXAMPLES}
-          handleExampleClick={() => {}}
-          currentExample={currentExample}
-          setCurrentExample={setCurrentExample}
-          handleReset={handleReset}
+          inputPanel={(
+            <ManualInputPanel
+              fields={[
+                { key: 'requests', label: 'requests', type: 'array' },
+                { key: 'threshold', label: 'threshold', type: 'number' },
+              ]}
+              values={{ requests: requestsInput, threshold: thresholdInput }}
+              onChange={handleInputChange}
+              examples={EXAMPLES}
+              activeLabel={activeLabel}
+              applyExample={applyExample}
+              inputError={inputError}
+            />
+          )}
         />),
   }), [
     step,
-    SOLUTION_CODE_WITH_CONNECTIVITY,
     connectivity,
     setActiveLineDom,
     requests,
-    threshold,
-    currentExample,
+    requestsInput,
+    thresholdInput,
+    activeLabel,
+    inputError,
+    applyExample,
+    handleInputChange,
     autoScrollCode,
-    handleReset,
   ])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])

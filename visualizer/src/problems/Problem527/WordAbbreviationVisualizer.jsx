@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './WordAbbreviationVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -206,7 +207,6 @@ function VisualizationPanel({ dict, step, applyEx }) {
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {dict.map((word, idx) => {
             const isProcessing = step?.idx === idx
-            const abbr = step?.abbr
             return (
               <motion.div
                 key={`word-${idx}`}
@@ -285,15 +285,30 @@ function VisualizationPanel({ dict, step, applyEx }) {
 }
 
 export default function WordAbbreviationVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { dict: ['like', 'god', 'internal'] })
+  const DEFAULT_DICT = EXAMPLES[0]?.dict ?? ['like', 'god', 'internal']
+
+  const [dictInput, setDictInput] = useState(JSON.stringify(DEFAULT_DICT))
+  const [activeLabel, setActiveLabel] = useState(EXAMPLES[0]?.label ?? '')
+
+  const { dict, inputError } = useMemo(() => {
+    try {
+      const parsed = JSON.parse(dictInput)
+      if (!Array.isArray(parsed) || parsed.some((w) => typeof w !== 'string' || w.length === 0)) {
+        throw new Error('dict must be an array of non-empty strings, e.g. ["like","god"]')
+      }
+      return { dict: parsed, inputError: '' }
+    } catch (e) {
+      return { dict: [], inputError: e.message }
+    }
+  }, [dictInput])
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.dict).map((current) => ({
+      generateSteps(dict).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [dict]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -301,7 +316,11 @@ export default function WordAbbreviationVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => {
+    setDictInput(JSON.stringify(e.dict))
+    setActiveLabel(e.label)
+    handleReset()
+  }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -344,12 +363,27 @@ export default function WordAbbreviationVisualizer() {
           )}
 
         </div>),
-    viz: (<VisualizationPanel
-          dict={ex.dict}
+    viz: (<>
+        <ManualInputPanel
+          fields={[{ key: 'dict', label: 'dict', type: 'array' }]}
+          values={{ dict: dictInput }}
+          onChange={(key, text) => {
+            if (key === 'dict') setDictInput(text)
+            setActiveLabel('')
+            handleReset()
+          }}
+          examples={EXAMPLES}
+          activeLabel={activeLabel}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
+        <VisualizationPanel
+          dict={dict}
           step={step}
           applyEx={applyEx}
-        />),
-  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
+        />
+      </>),
+  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, dict, dictInput, activeLabel, inputError, applyEx, handleReset])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

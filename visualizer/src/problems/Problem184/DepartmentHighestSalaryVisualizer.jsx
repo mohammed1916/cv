@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -12,6 +12,7 @@ import './DepartmentHighestSalaryVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { createPortal } from 'react-dom'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -91,16 +92,12 @@ export default function DepartmentHighestSalaryVisualizer() {
 
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  return (
-    <div className="department_highest_salary-shell">
-      <ResizableSplitPanels
-        className="department_highest_salary-top-split"
-        storageKey="cpviz.split.department-highest-salary.top"
-        initialLeftPercent={60}
-        minLeftPx={360}
-        minRightPx={280}
-        left={(
-          <div className="department_highest_salary-panel">
+  const panelConfigs = useMemo(() => [
+    { id: 'left', title: "Input & State" },
+    { id: 'right', title: "Step Details", dockMode: 'split-right' },
+  ], [])
+  const panelContents = {
+    left: (<div className="department_highest_salary-panel">
             <div className="department_highest_salary-panel-head">Input & State</div>
             <div className="department_highest_salary-panel-body">
               <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
@@ -129,17 +126,27 @@ export default function DepartmentHighestSalaryVisualizer() {
                 {/* Visualization content */}
               </div>
             </div>
-          </div>
-        )}
-        right={(
-          <div className="department_highest_salary-panel">
+          </div>),
+    right: (<div className="department_highest_salary-panel">
             <div className="department_highest_salary-panel-head">Step Details</div>
             <div className="department_highest_salary-panel-body">
               {step && <div className="department_highest_salary-details">{/* Details */}</div>}
             </div>
-          </div>
+          </div>),
+  }
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+  return (
+    <div className="department_highest_salary-shell">
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.left && createPortal(panelContents.left, panelDivs.left)}
+            {panelDivs.right && createPortal(panelContents.right, panelDivs.right)}
+          </>
         )}
-      />
+      </>
 
       <CodeTracePanel
         step={step}

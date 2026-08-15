@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './ContinuousSubarraySumVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -173,7 +174,7 @@ function VisualizationPanel({ nums, k, step, applyEx }) {
           Array (k={k})
         </div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-          {step?.nums?.map((val, idx) => {
+          {(step?.nums ?? nums)?.map((val, idx) => {
             const isActive = step && idx === step.idx
             return (
               <motion.div
@@ -300,15 +301,36 @@ function VisualizationPanel({ nums, k, step, applyEx }) {
 }
 
 export default function ContinuousSubarraySumVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { nums: [23, 2, 4, 6, 7], k: 6 })
+  const DEFAULT_NUMS = EXAMPLES[0]?.nums ?? [23, 2, 4, 6, 7]
+  const DEFAULT_K = EXAMPLES[0]?.k ?? 6
+
+  const [numsInput, setNumsInput] = useState(JSON.stringify(DEFAULT_NUMS))
+  const [kInput, setKInput] = useState(String(DEFAULT_K))
+  const [activeLabel, setActiveLabel] = useState(EXAMPLES[0]?.label ?? '')
+
+  const { nums, k, inputError } = useMemo(() => {
+    try {
+      const parsedNums = JSON.parse(numsInput)
+      if (!Array.isArray(parsedNums) || parsedNums.some((n) => typeof n !== 'number' || !Number.isFinite(n))) {
+        throw new Error('nums must be an array of numbers, e.g. [23,2,4,6,13]')
+      }
+      const parsedK = Number(kInput.trim())
+      if (kInput.trim() === '' || !Number.isFinite(parsedK)) {
+        throw new Error('k must be a number')
+      }
+      return { nums: parsedNums, k: parsedK, inputError: '' }
+    } catch (e) {
+      return { nums: [23, 2, 4, 6, 7], k: 6, inputError: e.message }
+    }
+  }, [numsInput, kInput])
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.nums, ex.k).map((current) => ({
+      generateSteps(nums, k).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [nums, k]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -316,7 +338,12 @@ export default function ContinuousSubarraySumVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => {
+    setNumsInput(JSON.stringify(e.nums))
+    setKInput(String(e.k))
+    setActiveLabel(e.label)
+    handleReset()
+  }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -359,13 +386,32 @@ export default function ContinuousSubarraySumVisualizer() {
           )}
 
         </div>),
-    viz: (<VisualizationPanel
-          nums={ex.nums}
-          k={ex.k}
+    viz: (<>
+        <ManualInputPanel
+          fields={[
+            { key: 'nums', label: 'nums', type: 'array' },
+            { key: 'k', label: 'k', type: 'number' },
+          ]}
+          values={{ nums: numsInput, k: kInput }}
+          onChange={(key, text) => {
+            if (key === 'nums') setNumsInput(text)
+            else if (key === 'k') setKInput(text)
+            setActiveLabel('')
+            handleReset()
+          }}
+          examples={EXAMPLES}
+          activeLabel={activeLabel}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
+        <VisualizationPanel
+          nums={nums}
+          k={k}
           step={step}
           applyEx={applyEx}
-        />),
-  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
+        />
+      </>),
+  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, nums, k, numsInput, kInput, activeLabel, inputError, applyEx, handleReset])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

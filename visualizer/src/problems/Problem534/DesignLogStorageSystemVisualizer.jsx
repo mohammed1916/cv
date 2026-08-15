@@ -12,6 +12,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import './DesignLogStorageSystemVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 import { createPortal } from 'react-dom'
 const SOLUTION_CODE = getSolutionCode('design-log-storage-system')
@@ -29,7 +30,48 @@ const LINE_PATTERN_MAP = {
 
 const EXAMPLES = getExamples('design-log-storage-system')
 
-function generateSteps() {
+const PRECISIONS = { Year: 4, Month: 7, Day: 10, Hour: 13, Minute: 16, Second: 19 }
+
+const FALLBACK = {
+  logEntries: [
+    { id: 1, timestamp: '2017:01:01:23:59:59' },
+    { id: 2, timestamp: '2017:01:02:23:59:59' },
+  ],
+  start: '2017:01:01:23:59:59',
+  end: '2017:01:02:23:59:59',
+  granularity: 'Second',
+}
+
+// Turn a registry example ({ operations, values }) into the editable field values.
+function exToFields(e) {
+  const ops = Array.isArray(e?.operations) ? e.operations : []
+  const vals = Array.isArray(e?.values) ? e.values : []
+  const logEntries = []
+  let start = FALLBACK.start
+  let end = FALLBACK.end
+  let granularity = FALLBACK.granularity
+
+  ops.forEach((op, i) => {
+    const v = Array.isArray(vals[i]) ? vals[i] : []
+    if (op === 'put' && v.length >= 2) {
+      logEntries.push({ id: v[v.length - 2], timestamp: String(v[v.length - 1]) })
+    } else if (op === 'retrieve' && v.length >= 3) {
+      const tail = v.slice(-3)
+      start = String(tail[0])
+      end = String(tail[1])
+      granularity = String(tail[2])
+    }
+  })
+
+  return {
+    logEntries: logEntries.length ? logEntries : FALLBACK.logEntries,
+    start,
+    end,
+    granularity,
+  }
+}
+
+function generateSteps(logEntries, start, end, granularity) {
   const steps = []
   const logs = []
 
@@ -40,11 +82,6 @@ function generateSteps() {
     message: 'Initialize LogSystem',
     relatedLines: [1]
   })
-
-  const logEntries = [
-    { id: 1, timestamp: '2017:01:01:23:59:59' },
-    { id: 2, timestamp: '2017:01:02:23:59:59' },
-  ]
 
   for (const entry of logEntries) {
     logs.push(entry)
@@ -66,10 +103,7 @@ function generateSteps() {
     relatedLines: [6]
   })
 
-  const precisions = { 'Year': 4, 'Month': 7, 'Day': 10, 'Hour': 13, 'Minute': 16, 'Second': 19 }
-  const start = '2017:01:01:23:59:59'
-  const end = '2017:01:02:23:59:59'
-  const granularity = 'Second'
+  const precisions = PRECISIONS
 
   steps.push({
     activeLine: 7,
@@ -263,15 +297,53 @@ function VisualizationPanel({ step, applyEx }) {
 }
 
 export default function DesignLogStorageSystemVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || {})
+  const seed = useMemo(() => exToFields(EXAMPLES[0]), [])
+
+  const [logsInput, setLogsInput] = useState(JSON.stringify(seed.logEntries))
+  const [startInput, setStartInput] = useState(seed.start)
+  const [endInput, setEndInput] = useState(seed.end)
+  const [granularityInput, setGranularityInput] = useState(seed.granularity)
+  const [activeLabel, setActiveLabel] = useState(EXAMPLES[0]?.label || '')
+
+  const { logEntries, start, end, granularity, inputError } = useMemo(() => {
+    try {
+      const parsed = JSON.parse(logsInput)
+      if (!Array.isArray(parsed) || parsed.length === 0) {
+        throw new Error('logs must be a non-empty array of { "id": number, "timestamp": "Y:M:D:h:m:s" }')
+      }
+      for (const entry of parsed) {
+        if (!entry || typeof entry !== 'object' || Array.isArray(entry)) throw new Error('each log must be an object')
+        if (entry.id === undefined) throw new Error('each log needs an "id"')
+        if (typeof entry.timestamp !== 'string') throw new Error('each log needs a string "timestamp"')
+      }
+      if (!PRECISIONS[granularityInput]) {
+        throw new Error(`granularity must be one of ${Object.keys(PRECISIONS).join(', ')}`)
+      }
+      return {
+        logEntries: parsed,
+        start: startInput,
+        end: endInput,
+        granularity: granularityInput,
+        inputError: '',
+      }
+    } catch (e) {
+      return {
+        logEntries: FALLBACK.logEntries,
+        start: FALLBACK.start,
+        end: FALLBACK.end,
+        granularity: FALLBACK.granularity,
+        inputError: e.message,
+      }
+    }
+  }, [logsInput, startInput, endInput, granularityInput])
 
   const steps = useMemo(
     () =>
-      generateSteps().map((current) => ({
+      generateSteps(logEntries, start, end, granularity).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    []
+    [logEntries, start, end, granularity]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -279,7 +351,24 @@ export default function DesignLogStorageSystemVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => {
+    const f = exToFields(e)
+    setLogsInput(JSON.stringify(f.logEntries))
+    setStartInput(f.start)
+    setEndInput(f.end)
+    setGranularityInput(f.granularity)
+    setActiveLabel(e?.label || '')
+    handleReset()
+  }, [handleReset])
+
+  const handleFieldChange = useCallback((key, text) => {
+    if (key === 'logs') setLogsInput(text)
+    else if (key === 'start') setStartInput(text)
+    else if (key === 'end') setEndInput(text)
+    else if (key === 'granularity') setGranularityInput(text)
+    setActiveLabel('')
+    handleReset()
+  }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -322,11 +411,27 @@ export default function DesignLogStorageSystemVisualizer() {
           )}
 
         </div>),
-    viz: (<VisualizationPanel
+    viz: (<>
+        <ManualInputPanel
+          fields={[
+            { key: 'logs', label: 'logs', type: 'array' },
+            { key: 'start', label: 'start', type: 'string' },
+            { key: 'end', label: 'end', type: 'string' },
+            { key: 'granularity', label: 'granularity', type: 'string' },
+          ]}
+          values={{ logs: logsInput, start: startInput, end: endInput, granularity: granularityInput }}
+          onChange={handleFieldChange}
+          examples={EXAMPLES}
+          activeLabel={activeLabel}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
+        <VisualizationPanel
           step={step}
           applyEx={applyEx}
-        />),
-  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, applyEx])
+        />
+      </>),
+  }), [step, connectivity, setActiveLineDom, logsInput, startInput, endInput, granularityInput, activeLabel, inputError, handleFieldChange, applyEx, showPatternOverlay, activeLineDom])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

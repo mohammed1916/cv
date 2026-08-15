@@ -12,6 +12,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import './EncodeAndDecodeTinyURLVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 import { createPortal } from 'react-dom'
 const SOLUTION_CODE = getSolutionCode('encode-and-decode-tinyurl')
@@ -29,6 +30,8 @@ const LINE_PATTERN_MAP = {
 }
 
 const EXAMPLES = getExamples('encode-and-decode-tinyurl')
+
+const DEFAULT_EX = EXAMPLES[0] || { label: 'Default', url: 'https://leetcode.com/problems/design-tinyurl' }
 
 function generateSteps(url) {
   const steps = []
@@ -140,7 +143,7 @@ function generateSteps(url) {
   return steps
 }
 
-function VisualizationPanel({ url, step, applyEx }) {
+function VisualizationPanel({ step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
       {/* Story */}
@@ -261,15 +264,23 @@ function VisualizationPanel({ url, step, applyEx }) {
 }
 
 export default function EncodeAndDecodeTinyURLVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { url: 'https://leetcode.com/problems/design-tinyurl' })
+  const [urlInput, setUrlInput] = useState(DEFAULT_EX.url)
+  const [activeLabel, setActiveLabel] = useState(DEFAULT_EX.label)
+
+  // Plain string input - no JSON parsing, just validation.
+  const { url, inputError } = useMemo(() => {
+    const trimmed = urlInput.trim()
+    if (!trimmed) return { url: DEFAULT_EX.url, inputError: 'url must not be empty' }
+    return { url: trimmed, inputError: '' }
+  }, [urlInput])
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.url).map((current) => ({
+      generateSteps(url).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [url]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -277,7 +288,17 @@ export default function EncodeAndDecodeTinyURLVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => {
+    setUrlInput(e.url)
+    setActiveLabel(e.label)
+    handleReset()
+  }, [handleReset])
+
+  const handleFieldChange = useCallback((key, text) => {
+    if (key === 'url') setUrlInput(text)
+    setActiveLabel('')
+    handleReset()
+  }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -349,12 +370,22 @@ export default function EncodeAndDecodeTinyURLVisualizer() {
           )}
 
         </div>),
-    viz: (<VisualizationPanel
-          url={ex.url}
+    viz: (<>
+        <ManualInputPanel
+          fields={[{ key: 'url', label: 'url', type: 'string' }]}
+          values={{ url: urlInput }}
+          onChange={handleFieldChange}
+          examples={EXAMPLES}
+          activeLabel={activeLabel}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
+        <VisualizationPanel
           step={step}
           applyEx={applyEx}
-        />),
-  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
+        />
+      </>),
+  }), [step, connectivity, setActiveLineDom, urlInput, activeLabel, inputError, handleFieldChange, applyEx, showPatternOverlay, activeLineDom])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

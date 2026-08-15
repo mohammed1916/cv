@@ -9,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './Problem372Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -22,6 +23,7 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []
 
 const EXAMPLES = getExamples('super-power')
+const DEFAULT_EX = EXAMPLES[0] || { label: '2^3', base: 2, exponents: [3] }
 
 function generateSteps(base, exponents) {
   const steps = []
@@ -317,31 +319,10 @@ function SuperPowerVisualization({ base, exponents, step }) {
   )
 }
 
-function VisualizationPanel({ base, exponents, step, applyEx }) {
+function VisualizationPanel({ base, exponents, step, inputPanel }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
-      <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {EXAMPLES.map(e => (
-            <button
-              key={e.label}
-              onClick={() => applyEx(e)}
-              style={{
-                padding: '6px 12px',
-                borderRadius: 4,
-                border: '1px solid #cbd5e1',
-                cursor: 'pointer',
-                fontSize: 12,
-                backgroundColor: '#f1f5f9',
-                fontWeight: 500
-              }}
-            >
-              {e.label}
-            </button>
-          ))}
-        </div>
-      </div>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+      {inputPanel}
 
       <SuperPowerVisualization base={base} exponents={exponents} step={step} />
     </div>
@@ -349,15 +330,41 @@ function VisualizationPanel({ base, exponents, step, applyEx }) {
 }
 
 export default function Problem372Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { base: 2, exponents: [3] })
+  const [activeLabel, setActiveLabel] = useState(DEFAULT_EX.label ?? '')
+  const [baseInput, setBaseInput] = useState(String(DEFAULT_EX.base))
+  const [exponentsInput, setExponentsInput] = useState(JSON.stringify(DEFAULT_EX.exponents))
+
+  const { base, exponents, inputError } = useMemo(() => {
+    try {
+      const parsedBase = Number(baseInput)
+      if (!Number.isInteger(parsedBase) || parsedBase < 1) {
+        throw new Error('base must be a positive integer')
+      }
+      const parsedExponents = JSON.parse(exponentsInput)
+      if (!Array.isArray(parsedExponents) || parsedExponents.length === 0) {
+        throw new Error('exponents must be a non-empty array of digits')
+      }
+      if (parsedExponents.length > 12) {
+        throw new Error('exponents is limited to 12 digits in this visualizer')
+      }
+      parsedExponents.forEach((d) => {
+        if (!Number.isInteger(d) || d < 0 || d > 9) {
+          throw new Error('each exponent entry must be a single digit 0-9')
+        }
+      })
+      return { base: parsedBase, exponents: parsedExponents, inputError: '' }
+    } catch (e) {
+      return { base: 2, exponents: [3], inputError: e.message }
+    }
+  }, [baseInput, exponentsInput])
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.base, ex.exponents).map((current) => ({
+      generateSteps(base, exponents).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [base, exponents]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -365,7 +372,35 @@ export default function Problem372Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => {
+    if (!e) return
+    setActiveLabel(e.label)
+    setBaseInput(String(e.base))
+    setExponentsInput(JSON.stringify(e.exponents))
+    handleReset()
+  }, [handleReset])
+
+  const handleInputChange = useCallback((key, text) => {
+    if (key === 'base') setBaseInput(text)
+    if (key === 'exponents') setExponentsInput(text)
+    setActiveLabel('')
+    handleReset()
+  }, [handleReset])
+
+  const inputPanel = (
+    <ManualInputPanel
+      fields={[
+        { key: 'base', label: 'a (base)', type: 'number' },
+        { key: 'exponents', label: 'b (digits)', type: 'array' },
+      ]}
+      values={{ base: baseInput, exponents: exponentsInput }}
+      onChange={handleInputChange}
+      examples={EXAMPLES}
+      activeLabel={activeLabel}
+      applyExample={applyEx}
+      inputError={inputError}
+    />
+  )
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -398,12 +433,12 @@ export default function Problem372Visualizer() {
           )}
         </div>),
     viz: (<VisualizationPanel
-          base={ex.base}
-          exponents={ex.exponents}
+          base={base}
+          exponents={exponents}
           step={step}
-          applyEx={applyEx}
+          inputPanel={inputPanel}
         />),
-  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
+  }), [step, connectivity, setActiveLineDom, base, exponents, inputPanel])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

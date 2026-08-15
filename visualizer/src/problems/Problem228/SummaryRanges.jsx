@@ -3,12 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './SummaryRanges.css'
+import { createPortal } from 'react-dom'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'def solution(input):' },
@@ -84,16 +85,12 @@ export default function SummaryRanges() {
 
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  return (
-    <div className="summary-ranges-shell">
-      <ResizableSplitPanels
-        className="summary-ranges-top-split"
-        storageKey="cpviz.split.summary-ranges.top"
-        initialLeftPercent={60}
-        minLeftPx={360}
-        minRightPx={280}
-        left={(
-          <div className="summary-ranges-panel">
+  const panelConfigs = useMemo(() => [
+    { id: 'left', title: "Input" },
+    { id: 'right', title: "Details", dockMode: 'split-right' },
+  ], [])
+  const panelContents = {
+    left: (<div className="summary-ranges-panel">
             <div className="summary-ranges-panel-head">
               Input
               {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
@@ -138,10 +135,8 @@ export default function SummaryRanges() {
                 </motion.div>
               </div>
             </div>
-          </div>
-        )}
-        right={(
-          <div className="summary-ranges-panel">
+          </div>),
+    right: (<div className="summary-ranges-panel">
             <div className="summary-ranges-panel-head">Details</div>
             <div className="summary-ranges-panel-body">
               <div className="summary-ranges-info">
@@ -149,9 +144,21 @@ export default function SummaryRanges() {
                 <p><strong>Story:</strong> Number Grouping Parade - consecutive numbers march together into formation ranges</p>
               </div>
             </div>
-          </div>
+          </div>),
+  }
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+  return (
+    <div className="summary-ranges-shell">
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.left && createPortal(panelContents.left, panelDivs.left)}
+            {panelDivs.right && createPortal(panelContents.right, panelDivs.right)}
+          </>
         )}
-      />
+      </>
 
       <CodeTracePanel
         step={step}

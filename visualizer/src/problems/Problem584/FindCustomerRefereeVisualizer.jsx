@@ -10,14 +10,15 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './FindCustomerRefereeVisualizer.css'
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
-const SOLUTION_CODE = [
+const buildSolutionCode = (targetRefereeId) => [
   { line: 1, text: 'SELECT name FROM Customer' },
   { line: 2, text: 'WHERE referee_id IS NULL' },
-  { line: 3, text: '   OR referee_id != 2;' },
+  { line: 3, text: `   OR referee_id != ${targetRefereeId};` },
 ]
 
 const PATTERNS = ['init', 'check_referee', 'check_value', 'include', 'exclude', 'done']
@@ -76,8 +77,6 @@ function generateSteps(customers, targetRefereeId = 2) {
     })
 
     // Check if referee_id is NULL or != targetRefereeId
-    const isIncluded = refereeId === null || refereeId !== targetRefereeId
-
     if (refereeId === null) {
       steps.push({
         phase: 'check_value',
@@ -132,36 +131,60 @@ function generateSteps(customers, targetRefereeId = 2) {
   return steps
 }
 
-const EXAMPLES = getExamples('find-customer-referee')
+const EXAMPLES = getExamplesOr('find-customer-referee', [
+  {
+    label: 'Standard',
+    customers: [
+      { id: 1, name: 'Will', referee_id: null },
+      { id: 2, name: 'Jane', referee_id: null },
+      { id: 3, name: 'Alex', referee_id: 2 },
+      { id: 4, name: 'Bill', referee_id: null },
+      { id: 5, name: 'Zack', referee_id: 1 },
+    ],
+    refereeId: 2,
+  },
+  {
+    label: 'Minimal',
+    customers: [
+      { id: 1, name: 'Alice', referee_id: null },
+      { id: 2, name: 'Bob', referee_id: 1 },
+    ],
+    refereeId: 1,
+  },
+  {
+    label: 'All referred',
+    customers: [
+      { id: 1, name: 'Ann', referee_id: 2 },
+      { id: 2, name: 'Ben', referee_id: 2 },
+    ],
+    refereeId: 2,
+  },
+])
 
-const SNIPPETS = [
-  { id: 'select', label: 'SELECT', lines: [1] },
-  { id: 'where_null', label: 'IS NULL', lines: [2] },
-  { id: 'where_ne', label: '!= Check', lines: [3] },
-]
-
-function VisualizationPanel({ step, applyExample, examples }) {
-  const customers = step.result || []
-  const included = step.included || []
-  const excluded = step.excluded || []
-  const currentCustomer = step.currentCustomer
+function VisualizationPanel({ step, allCustomers, targetRefereeId, inputPanel }) {
+  const customers = step?.result || []
+  const included = step?.included || []
+  const excluded = step?.excluded || []
+  const currentCustomer = step?.currentCustomer
 
   return (
     <div className="find-customer-referee-visualizer">
+      {inputPanel}
+
       <motion.div
-        key={`message-${step.phase}`}
+        key={`message-${step?.phase}`}
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -10 }}
         className="step-message"
       >
-        {step.message}
+        {step?.message ?? 'Press Next to begin.'}
       </motion.div>
 
       <div className="filter-section">
         <div className="filter-header">Customer Table</div>
         <div className="filter-description">
-          Filtering customers where referee_id IS NULL or referee_id ≠ 2
+          Filtering customers where referee_id IS NULL or referee_id ≠ {targetRefereeId}
         </div>
 
         <motion.div
@@ -180,13 +203,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
             </thead>
             <tbody>
               <AnimatePresence mode="wait">
-                {[
-                  { id: 1, name: 'Will', referee_id: null },
-                  { id: 2, name: 'Jane', referee_id: null },
-                  { id: 3, name: 'Alex', referee_id: 2 },
-                  { id: 4, name: 'Bill', referee_id: null },
-                  { id: 5, name: 'Zack', referee_id: 1 },
-                ].map((customer) => {
+                {allCustomers.map((customer) => {
                   const isIncluded = included.some(c => c.id === customer.id)
                   const isExcluded = excluded.some(c => c.id === customer.id)
                   const isCurrent = currentCustomer?.id === customer.id
@@ -236,7 +253,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
         </motion.div>
       </div>
 
-      {step.done && (
+      {step?.done && (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -262,7 +279,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
         </motion.div>
       )}
 
-      {step.done && (included.length > 0 || excluded.length > 0) && (
+      {step?.done && (included.length > 0 || excluded.length > 0) && (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -317,48 +334,62 @@ function VisualizationPanel({ step, applyExample, examples }) {
 }
 
 export default function FindCustomerRefereeVisualizer() {
-  const defaultInput = [
-    { id: 1, name: 'Will', referee_id: null },
-    { id: 2, name: 'Jane', referee_id: null },
-    { id: 3, name: 'Alex', referee_id: 2 },
-    { id: 4, name: 'Bill', referee_id: null },
-    { id: 5, name: 'Zack', referee_id: 1 },
-  ]
+  const [customersInput, setCustomersInput] = useState(JSON.stringify(EXAMPLES[0].customers))
+  const [refereeIdInput, setRefereeIdInput] = useState(String(EXAMPLES[0].refereeId ?? 2))
+  const [activeLabel, setActiveLabel] = useState(EXAMPLES[0].label)
+  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  const { step, stepIndex, totalSteps, next, prev, reset, jump } =
-    usePlaybackState(defaultInput, generateSteps)
+  const { customers, targetRefereeId, inputError } = useMemo(() => {
+    const fallback = { customers: [], targetRefereeId: 2 }
+    try {
+      const parsedReferee = JSON.parse(refereeIdInput)
+      if (typeof parsedReferee !== 'number' || Number.isNaN(parsedReferee)) {
+        throw new Error('refereeId must be a number')
+      }
 
-  const { activeCodeLines } = useCodeVisualConnectivity(step, LINE_PATTERN_MAP)
-  const { patternOverlay } = usePatternOverlay(PATTERNS, LINE_PATTERN_MAP)
+      const parsed = JSON.parse(customersInput)
+      if (!Array.isArray(parsed)) throw new Error('customers must be an array')
+      parsed.forEach((c, i) => {
+        if (!c || typeof c !== 'object' || Array.isArray(c)) {
+          throw new Error(`customers[${i}] must be an object`)
+        }
+        if (typeof c.id !== 'number') throw new Error(`customers[${i}].id must be a number`)
+        if (typeof c.name !== 'string') throw new Error(`customers[${i}].name must be a string`)
+        if (c.referee_id !== null && typeof c.referee_id !== 'number') {
+          throw new Error(`customers[${i}].referee_id must be a number or null`)
+        }
+      })
 
-  const examples = EXAMPLES || [
-    {
-      id: 'example1',
-      input: [
-        { id: 1, name: 'Will', referee_id: null },
-        { id: 2, name: 'Jane', referee_id: null },
-        { id: 3, name: 'Alex', referee_id: 2 },
-        { id: 4, name: 'Bill', referee_id: null },
-        { id: 5, name: 'Zack', referee_id: 1 },
-      ],
-      label: 'Standard',
-    },
-    {
-      id: 'example2',
-      input: [
-        { id: 1, name: 'Alice', referee_id: null },
-        { id: 2, name: 'Bob', referee_id: 1 },
-      ],
-      label: 'Minimal',
-    },
-  ]
+      return { customers: parsed, targetRefereeId: parsedReferee, inputError: '' }
+    } catch (e) {
+      return { ...fallback, inputError: e.message }
+    }
+  }, [customersInput, refereeIdInput])
 
-  const applyExample = useCallback(
-    (exampleInput) => {
-      reset(exampleInput)
-    },
-    [reset]
-  )
+  const solutionCode = useMemo(() => buildSolutionCode(targetRefereeId), [targetRefereeId])
+  const steps = useMemo(() => generateSteps(customers, targetRefereeId), [customers, targetRefereeId])
+
+  const {
+    stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset,
+    isPlaying, speed, setSpeed, isDone,
+  } = usePlaybackState(steps.length)
+  const step = stepIndex >= 0 ? steps[stepIndex] ?? null : null
+
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
+
+  const applyExample = useCallback((example) => {
+    setCustomersInput(JSON.stringify(example.customers))
+    setRefereeIdInput(String(example.refereeId ?? 2))
+    setActiveLabel(example.label)
+    handleReset()
+  }, [handleReset])
+
+  const handleFieldChange = useCallback((key, text) => {
+    if (key === 'customers') setCustomersInput(text)
+    else if (key === 'refereeId') setRefereeIdInput(text)
+    setActiveLabel('')
+    handleReset()
+  }, [handleReset])
 
   const panelConfigs = useMemo(() => [
     { id: 'main', title: 'Visualization' },
@@ -368,24 +399,41 @@ export default function FindCustomerRefereeVisualizer() {
     main: (
       <VisualizationPanel
         step={step}
-        applyExample={applyExample}
-        examples={examples}
+        allCustomers={customers}
+        targetRefereeId={targetRefereeId}
+        inputPanel={(
+          <ManualInputPanel
+            fields={[
+              { key: 'customers', label: 'customers', type: 'array' },
+              { key: 'refereeId', label: 'refereeId', type: 'number' },
+            ]}
+            values={{ customers: customersInput, refereeId: refereeIdInput }}
+            onChange={handleFieldChange}
+            examples={EXAMPLES}
+            activeLabel={activeLabel}
+            applyExample={applyExample}
+            inputError={inputError}
+          />
+        )}
       />
     ),
     code: (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        <CodePatternAnnotations
-          code={SOLUTION_CODE}
-          activeLines={activeCodeLines}
-          patternOverlay={patternOverlay}
-          language="sql"
+      <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <CodeTracePanel
+          step={step}
+          codeLines={solutionCode}
+          highlightedLines={connectivity.highlightedLines}
+          onLineSelect={connectivity.handleLineSelect}
+          onActiveLineDomChange={setActiveLineDom}
         />
-        <PatternLegend
-          patterns={PATTERNS.map((p) => ({
-            id: p,
-            label: p.charAt(0).toUpperCase() + p.slice(1),
-          }))}
-        />
+        {showPatternOverlay && (
+          <CodePatternAnnotations
+            linePatterns={LINE_PATTERN_MAP}
+            currentPhase={step?.phase}
+            activeLineDom={activeLineDom}
+            activeLine={step?.activeLine}
+          />
+        )}
       </div>
     ),
   }
@@ -402,13 +450,25 @@ export default function FindCustomerRefereeVisualizer() {
         </>
       )}
       <FloatingPanel title="Playback Controls">
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
         <PlaybackControls
-          stepIndex={stepIndex}
-          totalSteps={totalSteps}
-          onNext={next}
-          onPrev={prev}
-          onReset={reset}
-          onJump={jump}
+          isPlaying={isPlaying}
+          isDone={isDone}
+          speed={speed}
+          onPlayToggle={togglePlay}
+          onPrev={stepBack}
+          onNext={stepForward}
+          onReset={handleReset}
+          prevDisabled={stepIndex <= 0}
+          nextDisabled={isDone}
+          resetDisabled={stepIndex < 0}
+          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+          showPatternOverlay={showPatternOverlay}
+          onShowPatternOverlayChange={setShowPatternOverlay}
+          patternOverlayLabel="Show pattern overlay"
+          showPatternOverlayToggle
         />
       </FloatingPanel>
     </div>

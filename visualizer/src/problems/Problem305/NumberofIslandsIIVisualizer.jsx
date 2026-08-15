@@ -4,13 +4,14 @@ import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
-import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './NumberofIslandsIIVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import { createPortal } from 'react-dom'
 
 const PATTERNS = ['init', 'process', 'done']
 
@@ -118,11 +119,12 @@ export default function NumberofIslandsIIVisualizer() {
     )
   }
 
-  return (
-    <div className="numberof-islands-i-i-shell">
-      <ResizableSplitPanels
-        left={
-          <div className="numberof-islands-i-i-panel numberof-islands-i-i-panel-input">
+  const panelConfigs = useMemo(() => [
+    { id: 'left', title: "Input" },
+    { id: 'right', title: "Visualization", dockMode: 'split-right' },
+  ], [])
+  const panelContents = {
+    left: (<div className="numberof-islands-i-i-panel numberof-islands-i-i-panel-input">
             <div className="numberof-islands-i-i-panel-head">Input</div>
             <div className="numberof-islands-i-i-panel-body">
               <textarea
@@ -132,20 +134,29 @@ export default function NumberofIslandsIIVisualizer() {
                 placeholder="Enter input..."
               />
             </div>
-          </div>
-        }
-        right={
-          <div className="numberof-islands-i-i-panel numberof-islands-i-i-panel-viz">
+          </div>),
+    right: (<div className="numberof-islands-i-i-panel numberof-islands-i-i-panel-viz">
             <div className="numberof-islands-i-i-panel-head">Visualization</div>
             <div className="numberof-islands-i-i-panel-body">
               <AnimatePresence mode="wait">
                 {renderVisualization()}
               </AnimatePresence>
             </div>
-          </div>
-        }
-        ratio={0.35}
-      />
+          </div>),
+  }
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+  return (
+    <div className="numberof-islands-i-i-shell">
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.left && createPortal(panelContents.left, panelDivs.left)}
+            {panelDivs.right && createPortal(panelContents.right, panelDivs.right)}
+          </>
+        )}
+      </>
 
       <div className="numberof-islands-i-i-middle">
         <div className="numberof-islands-i-i-panel">

@@ -3,12 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './NumberOfDigitOne.css'
+import { createPortal } from 'react-dom'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'def solution(input):' },
@@ -84,16 +85,12 @@ export default function NumberOfDigitOne() {
 
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  return (
-    <div className="number-of-digit-one-shell">
-      <ResizableSplitPanels
-        className="number-of-digit-one-top-split"
-        storageKey="cpviz.split.number-of-digit-one.top"
-        initialLeftPercent={60}
-        minLeftPx={360}
-        minRightPx={280}
-        left={(
-          <div className="number-of-digit-one-panel">
+  const panelConfigs = useMemo(() => [
+    { id: 'left', title: "Input" },
+    { id: 'right', title: "Details", dockMode: 'split-right' },
+  ], [])
+  const panelContents = {
+    left: (<div className="number-of-digit-one-panel">
             <div className="number-of-digit-one-panel-head">
               Input
               {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
@@ -138,10 +135,8 @@ export default function NumberOfDigitOne() {
                 </motion.div>
               </div>
             </div>
-          </div>
-        )}
-        right={(
-          <div className="number-of-digit-one-panel">
+          </div>),
+    right: (<div className="number-of-digit-one-panel">
             <div className="number-of-digit-one-panel-head">Details</div>
             <div className="number-of-digit-one-panel-body">
               <div className="number-of-digit-one-info">
@@ -149,9 +144,21 @@ export default function NumberOfDigitOne() {
                 <p><strong>Story:</strong> Digit 1 Census - count all ones by analyzing patterns in each digit position</p>
               </div>
             </div>
-          </div>
+          </div>),
+  }
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+  return (
+    <div className="number-of-digit-one-shell">
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.left && createPortal(panelContents.left, panelDivs.left)}
+            {panelDivs.right && createPortal(panelContents.right, panelDivs.right)}
+          </>
         )}
-      />
+      </>
 
       <CodeTracePanel
         step={step}

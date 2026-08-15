@@ -12,6 +12,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import './DetectCapitalVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
 
 const PATTERNS = ['init', 'loop']
@@ -107,7 +108,7 @@ function generateSteps(word) {
   return steps
 }
 
-function VisualizationPanel({ word, step, applyEx }) {
+function VisualizationPanel({ word, step }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
       {/* Story */}
@@ -117,36 +118,12 @@ function VisualizationPanel({ word, step, applyEx }) {
         </div>
       </div>
 
-      {/* Examples */}
-      <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {EXAMPLES.map(e => (
-            <button
-              key={e.label}
-              onClick={() => applyEx(e)}
-              style={{
-                padding: '6px 12px',
-                borderRadius: 4,
-                border: '1px solid #cbd5e1',
-                cursor: 'pointer',
-                fontSize: 12,
-                backgroundColor: '#f1f5f9'
-              }}
-            >
-              {e.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
       {/* Word Display */}
       <div>
         <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Word: {word}</div>
         <div style={{ display: 'flex', gap: 8 }}>
           {word.split('').map((char, idx) => {
             const isUpper = char === char.toUpperCase()
-            const isFirst = idx === 0
             return (
               <motion.div
                 key={`char-${idx}`}
@@ -248,15 +225,25 @@ function VisualizationPanel({ word, step, applyEx }) {
 }
 
 export default function DetectCapitalVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { word: 'FiCc' })
+  const [wordInput, setWordInput] = useState(EXAMPLES?.[0]?.word ?? 'FiCc')
+  const [activeLabel, setActiveLabel] = useState(EXAMPLES?.[0]?.label ?? '')
+
+  const { word, inputError } = useMemo(() => {
+    const text = wordInput.trim()
+    if (!text) return { word: 'USA', inputError: 'word must be a non-empty string' }
+    if (!/^[A-Za-z]+$/.test(text)) {
+      return { word: 'USA', inputError: 'word must contain only English letters' }
+    }
+    return { word: text, inputError: '' }
+  }, [wordInput])
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.word).map((current) => ({
+      generateSteps(word).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [word]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -264,7 +251,17 @@ export default function DetectCapitalVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => {
+    setWordInput(e.word ?? '')
+    setActiveLabel(e.label ?? '')
+    handleReset()
+  }, [handleReset])
+
+  const handleFieldChange = useCallback((key, text) => {
+    if (key === 'word') setWordInput(text)
+    setActiveLabel('')
+    handleReset()
+  }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -307,12 +304,22 @@ export default function DetectCapitalVisualizer() {
           )}
 
         </div>),
-    viz: (<VisualizationPanel
-          word={ex.word}
+    viz: (<>
+        <ManualInputPanel
+          fields={[{ key: 'word', label: 'word', type: 'string' }]}
+          values={{ word: wordInput }}
+          onChange={handleFieldChange}
+          examples={EXAMPLES}
+          activeLabel={activeLabel}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
+        <VisualizationPanel
+          word={word}
           step={step}
-          applyEx={applyEx}
-        />),
-  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
+        />
+      </>),
+  }), [step, connectivity, setActiveLineDom, showPatternOverlay, activeLineDom, word, wordInput, activeLabel, inputError, applyEx, handleFieldChange])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

@@ -12,6 +12,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import './ConstructBinaryTreeFromStringVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 import { createPortal } from 'react-dom'
 const SOLUTION_CODE = getSolutionCode('construct-binary-tree-from-string')
@@ -26,6 +27,12 @@ const LINE_PATTERN_MAP = {
 
 
 const EXAMPLES = getExamples('construct-binary-tree-from-string')
+
+const DEFAULT_EX = EXAMPLES[0] || { label: 'Default', s: '4(2(3)(1))(6(5))' }
+
+// The parser below only advances on digits, '-', '(' and ')'. Any other character
+// would leave the index unchanged and spin forever, so the input is restricted here.
+const VALID_CHARS = /^[0-9()-]*$/
 
 function generateSteps(s) {
   const steps = []
@@ -190,15 +197,25 @@ function VisualizationPanel({ s, step, applyEx }) {
 }
 
 export default function ConstructBinaryTreeFromStringVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { s: '4(2(3)(1))(6(5))' })
+  const [sInput, setSInput] = useState(DEFAULT_EX.s)
+  const [activeLabel, setActiveLabel] = useState(DEFAULT_EX.label)
+
+  // Plain string input - no JSON parsing, just validation.
+  const { s, inputError } = useMemo(() => {
+    const text = sInput.trim()
+    if (!VALID_CHARS.test(text)) {
+      return { s: DEFAULT_EX.s, inputError: 'only digits, "-", "(" and ")" are allowed' }
+    }
+    return { s: text, inputError: '' }
+  }, [sInput])
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.s).map((current) => ({
+      generateSteps(s).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [s]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -206,7 +223,17 @@ export default function ConstructBinaryTreeFromStringVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => {
+    setSInput(e.s)
+    setActiveLabel(e.label)
+    handleReset()
+  }, [handleReset])
+
+  const handleFieldChange = useCallback((key, text) => {
+    if (key === 's') setSInput(text)
+    setActiveLabel('')
+    handleReset()
+  }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -249,12 +276,23 @@ export default function ConstructBinaryTreeFromStringVisualizer() {
           )}
 
         </div>),
-    viz: (<VisualizationPanel
-          s={ex.s}
+    viz: (<>
+        <ManualInputPanel
+          fields={[{ key: 's', label: 's', type: 'string' }]}
+          values={{ s: sInput }}
+          onChange={handleFieldChange}
+          examples={EXAMPLES}
+          activeLabel={activeLabel}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
+        <VisualizationPanel
+          s={s}
           step={step}
           applyEx={applyEx}
-        />),
-  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
+        />
+      </>),
+  }), [step, connectivity, setActiveLineDom, s, sInput, activeLabel, inputError, handleFieldChange, applyEx, showPatternOverlay, activeLineDom])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

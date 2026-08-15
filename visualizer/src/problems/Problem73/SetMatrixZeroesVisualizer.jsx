@@ -7,7 +7,8 @@ import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+import { getExamplesOr } from '../../config/examplesRegistry'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import "./SetMatrixZeroesVisualizer.css";
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -69,19 +70,50 @@ function generateSteps(initial) {
     return steps;
 }
 
-const EXAMPLES = getExamples('set-matrix-zeroes');
+const EXAMPLES = getExamplesOr('set-matrix-zeroes', [
+    { label: 'Ex1', matrix: [[1, 1, 1], [1, 0, 1], [1, 1, 1]] },
+]);
 
 export default function SetMatrixZeroesVisualizer() {
-    const [selected, setSelected] = useState(0);
+    const [matrixInput, setMatrixInput] = useState(JSON.stringify(EXAMPLES[0].matrix));
+    const [activeLabel, setActiveLabel] = useState(EXAMPLES[0].label);
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
-    const initial = EXAMPLES[selected].matrix;
+    const { initial, inputError } = useMemo(() => {
+        try {
+            const parsed = JSON.parse(matrixInput);
+            if (!Array.isArray(parsed) || parsed.length === 0) {
+                throw new Error('matrix must be a non-empty 2D array');
+            }
+            const width = Array.isArray(parsed[0]) ? parsed[0].length : -1;
+            if (width < 1 || !parsed.every((row) => Array.isArray(row) && row.length === width)) {
+                throw new Error('every row must be a non-empty array of the same length');
+            }
+            if (!parsed.every((row) => row.every((v) => typeof v === 'number'))) {
+                throw new Error('matrix entries must be numbers');
+            }
+            return { initial: parsed, inputError: '' };
+        } catch (e) {
+            return { initial: [[0]], inputError: e.message };
+        }
+    }, [matrixInput]);
+
     const steps = useMemo(() => generateSteps(initial), [initial]);
     const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
-    const step = stepIndex >= 0 ? steps[stepIndex] : steps[0];
+    const step = stepIndex >= 0 ? steps[stepIndex] ?? steps[0] : steps[0];
 
-    const applyExample = useCallback((idx) => { setSelected(idx); handleReset(); }, [handleReset]);
+    const applyExample = useCallback((example) => {
+        setMatrixInput(JSON.stringify(example.matrix));
+        setActiveLabel(example.label);
+        handleReset();
+    }, [handleReset]);
+
+    const handleFieldChange = useCallback((key, text) => {
+        if (key === 'matrix') setMatrixInput(text);
+        setActiveLabel('');
+        handleReset();
+    }, [handleReset]);
 
     const matrix = step?.matrix ?? initial;
     const cols = matrix[0]?.length ?? 0;
@@ -92,11 +124,15 @@ export default function SetMatrixZeroesVisualizer() {
     const primaryPanel = (
         <div className="smz-panel">
             <div className="smz-controls-row">
-                <div className="smz-examples">
-                    {EXAMPLES.map((ex, i) => (
-                        <button key={ex.label} className={`smz-chip ${selected === i ? "active" : ""}`} onClick={() => applyExample(i)}>{ex.label}</button>
-                    ))}
-                </div>
+                <ManualInputPanel
+                    fields={[{ key: 'matrix', label: 'matrix', type: 'array' }]}
+                    values={{ matrix: matrixInput }}
+                    onChange={handleFieldChange}
+                    examples={EXAMPLES}
+                    activeLabel={activeLabel}
+                    applyExample={applyExample}
+                    inputError={inputError}
+                />
             </div>
 
             {/* Row/col sets */}

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -12,6 +12,7 @@ import './RepeatedDnaSequencesVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { createPortal } from 'react-dom'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -87,16 +88,12 @@ export default function RepeatedDnaSequencesVisualizer() {
 
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  return (
-    <div className="repeated_dna_sequences-shell">
-      <ResizableSplitPanels
-        className="repeated_dna_sequences-top-split"
-        storageKey="cpviz.split.repeated-dna-sequences.top"
-        initialLeftPercent={60}
-        minLeftPx={360}
-        minRightPx={280}
-        left={(
-          <div className="repeated_dna_sequences-panel">
+  const panelConfigs = useMemo(() => [
+    { id: 'left', title: "Input & State" },
+    { id: 'right', title: "Step Details", dockMode: 'split-right' },
+  ], [])
+  const panelContents = {
+    left: (<div className="repeated_dna_sequences-panel">
             <div className="repeated_dna_sequences-panel-head">Input & State</div>
             <div className="repeated_dna_sequences-panel-body">
               <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
@@ -125,17 +122,27 @@ export default function RepeatedDnaSequencesVisualizer() {
                 {/* Visualization content */}
               </div>
             </div>
-          </div>
-        )}
-        right={(
-          <div className="repeated_dna_sequences-panel">
+          </div>),
+    right: (<div className="repeated_dna_sequences-panel">
             <div className="repeated_dna_sequences-panel-head">Step Details</div>
             <div className="repeated_dna_sequences-panel-body">
               {step && <div className="repeated_dna_sequences-details">{/* Details */}</div>}
             </div>
-          </div>
+          </div>),
+  }
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+  return (
+    <div className="repeated_dna_sequences-shell">
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.left && createPortal(panelContents.left, panelDivs.left)}
+            {panelDivs.right && createPortal(panelContents.right, panelDivs.right)}
+          </>
         )}
-      />
+      </>
 
       <CodeTracePanel
         step={step}

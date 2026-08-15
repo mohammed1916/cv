@@ -12,6 +12,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import './RandomFlipMatrixVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 import { createPortal } from 'react-dom'
 const SOLUTION_CODE = getSolutionCode('random-flip-matrix')
@@ -27,6 +28,8 @@ const LINE_PATTERN_MAP = {
 
 
 const EXAMPLES = getExamples('random-flip-matrix')
+
+const FALLBACK = { m: 3, n: 2, flips: [[0, 0]] }
 
 function generateSteps(m, n, flips) {
   const steps = []
@@ -88,7 +91,7 @@ function generateSteps(m, n, flips) {
   return steps
 }
 
-function VisualizationPanel({ m, n, flips, step, applyEx }) {
+function VisualizationPanel({ m, n, flips, step }) {
   const flipped = step?.flipped || new Set()
 
   return (
@@ -97,29 +100,6 @@ function VisualizationPanel({ m, n, flips, step, applyEx }) {
       <div style={{ padding: 12, backgroundColor: '#faf5ff', borderRadius: 6, borderLeft: '4px solid #8b5cf6' }}>
         <div style={{ fontSize: 12, color: '#6b21a8', fontStyle: 'italic' }}>
           "Randomly flip cells in matrix without replacement. Use mapping to track flipped cells."
-        </div>
-      </div>
-
-      {/* Examples */}
-      <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {EXAMPLES.map(e => (
-            <button
-              key={e.label}
-              onClick={() => applyEx(e)}
-              style={{
-                padding: '6px 12px',
-                borderRadius: 4,
-                border: '1px solid #cbd5e1',
-                cursor: 'pointer',
-                fontSize: 12,
-                backgroundColor: '#f1f5f9'
-              }}
-            >
-              {e.label}
-            </button>
-          ))}
         </div>
       </div>
 
@@ -227,15 +207,45 @@ function VisualizationPanel({ m, n, flips, step, applyEx }) {
 }
 
 export default function RandomFlipMatrixVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { m: 3, n: 3, flips: [[1, 0], [1, 1]] })
+  const [mInput, setMInput] = useState(String(EXAMPLES?.[0]?.m ?? FALLBACK.m))
+  const [nInput, setNInput] = useState(String(EXAMPLES?.[0]?.n ?? FALLBACK.n))
+  const [flipsInput, setFlipsInput] = useState(
+    JSON.stringify(EXAMPLES?.[0]?.flips ?? FALLBACK.flips)
+  )
+  const [activeLabel, setActiveLabel] = useState(EXAMPLES?.[0]?.label ?? '')
+
+  const { m, n, flips, inputError } = useMemo(() => {
+    try {
+      const parsedM = JSON.parse(mInput)
+      const parsedN = JSON.parse(nInput)
+      if (!Number.isInteger(parsedM) || parsedM < 1) throw new Error('m must be an integer >= 1')
+      if (!Number.isInteger(parsedN) || parsedN < 1) throw new Error('n must be an integer >= 1')
+      if (parsedM * parsedN > 400) throw new Error('m * n must be <= 400 for display')
+
+      const parsedFlips = JSON.parse(flipsInput)
+      if (!Array.isArray(parsedFlips)) throw new Error('flips must be an array of [row, col] pairs')
+      parsedFlips.forEach((flip) => {
+        if (!Array.isArray(flip) || flip.length !== 2 || !flip.every((v) => Number.isInteger(v))) {
+          throw new Error('each flip must be a [row, col] pair of integers')
+        }
+        if (flip[0] < 0 || flip[0] >= parsedM || flip[1] < 0 || flip[1] >= parsedN) {
+          throw new Error(`flip [${flip[0]}, ${flip[1]}] is outside the ${parsedM}x${parsedN} matrix`)
+        }
+      })
+
+      return { m: parsedM, n: parsedN, flips: parsedFlips, inputError: '' }
+    } catch (e) {
+      return { m: FALLBACK.m, n: FALLBACK.n, flips: FALLBACK.flips, inputError: e.message }
+    }
+  }, [mInput, nInput, flipsInput])
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.m, ex.n, ex.flips).map((current) => ({
+      generateSteps(m, n, flips).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [m, n, flips]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -243,7 +253,21 @@ export default function RandomFlipMatrixVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => {
+    setMInput(String(e.m ?? FALLBACK.m))
+    setNInput(String(e.n ?? FALLBACK.n))
+    setFlipsInput(JSON.stringify(e.flips ?? [[0, 0]]))
+    setActiveLabel(e.label ?? '')
+    handleReset()
+  }, [handleReset])
+
+  const handleFieldChange = useCallback((key, text) => {
+    if (key === 'm') setMInput(text)
+    else if (key === 'n') setNInput(text)
+    else if (key === 'flips') setFlipsInput(text)
+    setActiveLabel('')
+    handleReset()
+  }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -286,14 +310,28 @@ export default function RandomFlipMatrixVisualizer() {
           )}
 
         </div>),
-    viz: (<VisualizationPanel
-          m={ex.m}
-          n={ex.n}
-          flips={ex.flips}
+    viz: (<>
+        <ManualInputPanel
+          fields={[
+            { key: 'm', label: 'm (rows)', type: 'number' },
+            { key: 'n', label: 'n (cols)', type: 'number' },
+            { key: 'flips', label: 'flips', type: 'array' },
+          ]}
+          values={{ m: mInput, n: nInput, flips: flipsInput }}
+          onChange={handleFieldChange}
+          examples={EXAMPLES}
+          activeLabel={activeLabel}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
+        <VisualizationPanel
+          m={m}
+          n={n}
+          flips={flips}
           step={step}
-          applyEx={applyEx}
-        />),
-  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
+        />
+      </>),
+  }), [step, connectivity, setActiveLineDom, showPatternOverlay, activeLineDom, m, n, flips, mInput, nInput, flipsInput, activeLabel, inputError, applyEx, handleFieldChange])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

@@ -10,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './BeautifulArrangementVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -31,7 +32,6 @@ const EXAMPLES = getExamples('beautiful-arrangement')
 
 function generateSteps(n) {
   const steps = []
-  const recursionStack = []
   const validArrangements = []
 
   steps.push({
@@ -319,15 +319,33 @@ function VisualizationPanel({ n, step, applyEx }) {
 }
 
 export default function BeautifulArrangementVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { n: 2 })
+  const DEFAULT_N = EXAMPLES[0]?.n ?? 2
+
+  const [nInput, setNInput] = useState(String(DEFAULT_N))
+  const [activeLabel, setActiveLabel] = useState(EXAMPLES[0]?.label ?? '')
+
+  const { n, inputError } = useMemo(() => {
+    try {
+      const parsed = Number(nInput.trim())
+      if (nInput.trim() === '' || !Number.isInteger(parsed)) {
+        throw new Error('n must be an integer')
+      }
+      if (parsed < 1 || parsed > 8) {
+        throw new Error('n must be between 1 and 8 (backtracking blows up beyond that)')
+      }
+      return { n: parsed, inputError: '' }
+    } catch (e) {
+      return { n: DEFAULT_N, inputError: e.message }
+    }
+  }, [nInput, DEFAULT_N])
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.n).map((current) => ({
+      generateSteps(n).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [n]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -335,7 +353,11 @@ export default function BeautifulArrangementVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => {
+    setNInput(String(e.n))
+    setActiveLabel(e.label)
+    handleReset()
+  }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -407,12 +429,27 @@ export default function BeautifulArrangementVisualizer() {
           )}
 
         </div>),
-    viz: (<VisualizationPanel
-          n={ex.n}
+    viz: (<>
+        <ManualInputPanel
+          fields={[{ key: 'n', label: 'n', type: 'number' }]}
+          values={{ n: nInput }}
+          onChange={(key, text) => {
+            if (key === 'n') setNInput(text)
+            setActiveLabel('')
+            handleReset()
+          }}
+          examples={EXAMPLES}
+          activeLabel={activeLabel}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
+        <VisualizationPanel
+          n={n}
           step={step}
           applyEx={applyEx}
-        />),
-  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
+        />
+      </>),
+  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, n, nInput, activeLabel, inputError, applyEx, handleReset])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

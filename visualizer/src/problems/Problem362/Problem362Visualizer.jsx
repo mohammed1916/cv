@@ -8,6 +8,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './Problem362.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -32,284 +33,160 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-function generateSteps() {
+function generateSteps(hits, queryTime, windowSize) {
   const steps = []
-
-  // Example 1: Simple sequence
-  steps.push({
-    activeLine: 2,
+  const timelineMax = Math.max(queryTime, ...(hits.length ? hits : [0]), 1)
+  const base = {
     hits: [],
     windowStart: null,
     windowEnd: null,
     result: null,
+    inWindow: null,
+    timelineMax,
+    windowSize,
+  }
+
+  steps.push({
+    ...base,
+    activeLine: 2,
     message: 'Initialize: Empty queue to store hit timestamps.',
-    exampleNum: 1,
   })
 
-  // Hit at 1
-  steps.push({
-    activeLine: 5,
-    hits: [1],
-    windowStart: null,
-    windowEnd: null,
-    result: null,
-    message: 'hit(1): Add timestamp 1 to queue.',
-    exampleNum: 1,
-  })
-
-  // Hit at 100
-  steps.push({
-    activeLine: 5,
-    hits: [1, 100],
-    windowStart: null,
-    windowEnd: null,
-    result: null,
-    message: 'hit(100): Add timestamp 100 to queue.',
-    exampleNum: 1,
-  })
-
-  // Hit at 150
-  steps.push({
-    activeLine: 5,
-    hits: [1, 100, 150],
-    windowStart: null,
-    windowEnd: null,
-    result: null,
-    message: 'hit(150): Add timestamp 150 to queue.',
-    exampleNum: 1,
-  })
-
-  // getHits(150) - window [0, 150]
-  steps.push({
-    activeLine: 6,
-    hits: [1, 100, 150],
-    windowStart: 0,
-    windowEnd: 150,
-    result: null,
-    inWindow: [true, true, true],
-    message: 'getHits(150): Check window (150 - 300 = -150). All hits valid.',
-    exampleNum: 1,
-  })
-
-  steps.push({
-    activeLine: 10,
-    hits: [1, 100, 150],
-    windowStart: 0,
-    windowEnd: 150,
-    result: 3,
-    inWindow: [true, true, true],
-    message: 'Return count: 3 hits in 300-second window.',
-    exampleNum: 1,
-  })
-
-  // Example 2: Hits with expiration
-  steps.push({
-    activeLine: 2,
-    hits: [],
-    windowStart: null,
-    windowEnd: null,
-    result: null,
-    message: 'Example 2: New counter. Initialize.',
-    exampleNum: 2,
-  })
-
-  // Build up hits: 1, 100, 150, 300, 400, 500
-  const exampleHits = [1, 100, 150, 300, 400, 500]
-  exampleHits.forEach((timestamp, idx) => {
+  hits.forEach((t, idx) => {
     steps.push({
+      ...base,
       activeLine: 5,
-      hits: exampleHits.slice(0, idx + 1),
-      windowStart: null,
-      windowEnd: null,
-      result: null,
-      message: `hit(${timestamp}): Add timestamp ${timestamp}.`,
-      exampleNum: 2,
+      hits: hits.slice(0, idx + 1),
+      message: `hit(${t}): Add timestamp ${t} to queue.`,
     })
   })
 
-  // getHits(500) - window [200, 500]
+  const cutoff = queryTime - windowSize
+  const displayStart = Math.max(cutoff, 0)
+  const inWindow = hits.map((t) => t > cutoff)
+  const stale = hits.filter((t) => t <= cutoff)
+
   steps.push({
+    ...base,
     activeLine: 6,
-    hits: exampleHits,
-    windowStart: 200,
-    windowEnd: 500,
-    result: null,
-    inWindow: [false, false, false, true, true, true],
-    message: 'getHits(500): Window (500 - 300 = 200). Hits 1, 100, 150 outside window.',
-    exampleNum: 2,
+    hits: [...hits],
+    windowStart: displayStart,
+    windowEnd: queryTime,
+    inWindow,
+    message:
+      stale.length > 0
+        ? `getHits(${queryTime}): cutoff = ${queryTime} - ${windowSize} = ${cutoff}. ${stale.length} hit(s) outside the window.`
+        : `getHits(${queryTime}): cutoff = ${queryTime} - ${windowSize} = ${cutoff}. All hits are still valid.`,
   })
 
-  // Remove stale hits
-  steps.push({
-    activeLine: 7,
-    hits: exampleHits,
-    windowStart: 200,
-    windowEnd: 500,
-    result: null,
-    inWindow: [false, false, false, true, true, true],
-    message: 'Remove hit 1 (1 <= 200): Outside window.',
-    exampleNum: 2,
-  })
-
-  steps.push({
-    activeLine: 7,
-    hits: exampleHits,
-    windowStart: 200,
-    windowEnd: 500,
-    result: null,
-    inWindow: [false, false, false, true, true, true],
-    message: 'Remove hit 100 (100 <= 200): Outside window.',
-    exampleNum: 2,
-  })
-
-  steps.push({
-    activeLine: 7,
-    hits: exampleHits,
-    windowStart: 200,
-    windowEnd: 500,
-    result: null,
-    inWindow: [false, false, false, true, true, true],
-    message: 'Remove hit 150 (150 <= 200): Outside window.',
-    exampleNum: 2,
-  })
-
-  steps.push({
-    activeLine: 9,
-    hits: [300, 400, 500],
-    windowStart: 200,
-    windowEnd: 500,
-    result: null,
-    inWindow: [true, true, true],
-    message: 'After removal: [300, 400, 500] remain in window.',
-    exampleNum: 2,
-  })
-
-  steps.push({
-    activeLine: 10,
-    hits: [300, 400, 500],
-    windowStart: 200,
-    windowEnd: 500,
-    result: 3,
-    inWindow: [true, true, true],
-    message: 'Return count: 3 hits in 300-second window.',
-    exampleNum: 2,
-  })
-
-  // Example 3: Multiple windows
-  steps.push({
-    activeLine: 2,
-    hits: [],
-    windowStart: null,
-    windowEnd: null,
-    result: null,
-    message: 'Example 3: Rate limiting scenario.',
-    exampleNum: 3,
-  })
-
-  const example3Hits = [1, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500]
-  example3Hits.slice(0, 6).forEach((timestamp, idx) => {
+  let remaining = [...hits]
+  while (remaining.length > 0 && remaining[0] <= cutoff) {
+    const removed = remaining[0]
+    remaining = remaining.slice(1)
     steps.push({
-      activeLine: 5,
-      hits: example3Hits.slice(0, idx + 1),
-      windowStart: null,
-      windowEnd: null,
-      result: null,
-      message: `hit(${timestamp}): Add request at ${timestamp}.`,
-      exampleNum: 3,
+      ...base,
+      activeLine: 9,
+      hits: [...remaining],
+      windowStart: displayStart,
+      windowEnd: queryTime,
+      inWindow: remaining.map(() => true),
+      message: `Remove hit ${removed} (${removed} <= ${cutoff}): outside window.`,
     })
-  })
-
-  // getHits(300) - window [0, 300]
-  steps.push({
-    activeLine: 6,
-    hits: example3Hits.slice(0, 6),
-    windowStart: 0,
-    windowEnd: 300,
-    result: null,
-    inWindow: [true, true, true, true, true, true],
-    message: 'getHits(300): All 6 requests in window [0, 300].',
-    exampleNum: 3,
-  })
+  }
 
   steps.push({
+    ...base,
     activeLine: 10,
-    hits: example3Hits.slice(0, 6),
-    windowStart: 0,
-    windowEnd: 300,
-    result: 6,
-    inWindow: [true, true, true, true, true, true],
-    message: 'Rate limit check: 6 hits per 300 seconds - ALLOWED.',
-    exampleNum: 3,
-  })
-
-  // Add more hits
-  example3Hits.slice(6).forEach((timestamp, idx) => {
-    steps.push({
-      activeLine: 5,
-      hits: example3Hits.slice(0, 6 + idx + 1),
-      windowStart: null,
-      windowEnd: null,
-      result: null,
-      message: `hit(${timestamp}): Add request at ${timestamp}.`,
-      exampleNum: 3,
-    })
-  })
-
-  // getHits(500) - window [200, 500]
-  steps.push({
-    activeLine: 6,
-    hits: example3Hits,
-    windowStart: 200,
-    windowEnd: 500,
-    result: null,
-    inWindow: [false, false, false, false, true, true, true, true, true, true, true],
-    message: 'getHits(500): Window [200, 500]. Hits 1, 50, 100, 150 outside.',
-    exampleNum: 3,
-  })
-
-  steps.push({
-    activeLine: 9,
-    hits: [200, 250, 300, 350, 400, 450, 500],
-    windowStart: 200,
-    windowEnd: 500,
-    result: null,
-    inWindow: [true, true, true, true, true, true, true],
-    message: 'Remove stale hits. 7 hits remain in window.',
-    exampleNum: 3,
-  })
-
-  steps.push({
-    activeLine: 10,
-    hits: [200, 250, 300, 350, 400, 450, 500],
-    windowStart: 200,
-    windowEnd: 500,
-    result: 7,
-    inWindow: [true, true, true, true, true, true, true],
-    message: 'Rate limit check: 7 hits per 300 seconds - EXCEEDED.',
-    exampleNum: 3,
+    hits: [...remaining],
+    windowStart: displayStart,
+    windowEnd: queryTime,
+    inWindow: remaining.map(() => true),
+    result: remaining.length,
+    message: `Return count: ${remaining.length} hit(s) in the ${windowSize}-second window.`,
   })
 
   return steps
 }
 
 const EXAMPLES = [
-  { label: 'Example 1: Simple Sequence', desc: 'Basic hit tracking' },
-  { label: 'Example 2: Window Expiration', desc: 'Removing stale hits' },
-  { label: 'Example 3: Rate Limiting', desc: 'Monitoring request volume' },
+  {
+    label: 'Example 1: Simple Sequence',
+    desc: 'Basic hit tracking',
+    hits: [1, 100, 150],
+    timestamp: 150,
+    windowSize: 300,
+  },
+  {
+    label: 'Example 2: Window Expiration',
+    desc: 'Removing stale hits',
+    hits: [1, 100, 150, 300, 400, 500],
+    timestamp: 500,
+    windowSize: 300,
+  },
+  {
+    label: 'Example 3: Rate Limiting',
+    desc: 'Monitoring request volume',
+    hits: [1, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500],
+    timestamp: 500,
+    windowSize: 300,
+  },
 ]
 
+
 export default function Problem362Visualizer() {
-  const [exIdx, setExIdx] = useState(0)
+  const [activeLabel, setActiveLabel] = useState(EXAMPLES[0].label)
+  const [hitsInput, setHitsInput] = useState(JSON.stringify(EXAMPLES[0].hits))
+  const [timestampInput, setTimestampInput] = useState(String(EXAMPLES[0].timestamp))
+  const [windowInput, setWindowInput] = useState(String(EXAMPLES[0].windowSize))
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  const steps = useMemo(() => generateSteps(), [])
+  const { hits, queryTime, windowSize, inputError } = useMemo(() => {
+    const fallback = { hits: [], queryTime: 0, windowSize: 300 }
+    try {
+      const parsedHits = JSON.parse(hitsInput)
+      if (!Array.isArray(parsedHits)) throw new Error('hits must be an array of timestamps')
+      parsedHits.forEach((t, i) => {
+        if (typeof t !== 'number' || !Number.isFinite(t) || t < 0) {
+          throw new Error('every hit timestamp must be a non-negative number')
+        }
+        if (i > 0 && t < parsedHits[i - 1]) {
+          throw new Error('hit timestamps must be in non-decreasing order')
+        }
+      })
+      const parsedQuery = Number(timestampInput)
+      if (!Number.isFinite(parsedQuery) || parsedQuery < 0) {
+        throw new Error('timestamp must be a non-negative number')
+      }
+      const parsedWindow = Number(windowInput)
+      if (!Number.isFinite(parsedWindow) || parsedWindow <= 0) {
+        throw new Error('window must be a positive number')
+      }
+      return { hits: parsedHits, queryTime: parsedQuery, windowSize: parsedWindow, inputError: '' }
+    } catch (e) {
+      return { ...fallback, inputError: e.message }
+    }
+  }, [hitsInput, timestampInput, windowInput])
+
+  const steps = useMemo(() => generateSteps(hits, queryTime, windowSize), [hits, queryTime, windowSize])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
-  const applyExample = useCallback((idx) => {
-    setExIdx(idx)
+  const applyExample = useCallback((ex) => {
+    if (!ex) return
+    setActiveLabel(ex.label)
+    setHitsInput(JSON.stringify(ex.hits))
+    setTimestampInput(String(ex.timestamp))
+    setWindowInput(String(ex.windowSize))
+    handleReset()
+  }, [handleReset])
+
+  const handleInputChange = useCallback((key, text) => {
+    if (key === 'hits') setHitsInput(text)
+    if (key === 'timestamp') setTimestampInput(text)
+    if (key === 'window') setWindowInput(text)
+    setActiveLabel('')
     handleReset()
   }, [handleReset])
 
@@ -336,35 +213,28 @@ export default function Problem362Visualizer() {
           )}
         </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {EXAMPLES.map((e, i) => (
-              <button
-                key={i}
-                onClick={() => applyExample(i)}
-                style={{
-                  padding: '6px 12px',
-                  borderRadius: 4,
-                  border: '1px solid #cbd5e1',
-                  cursor: 'pointer',
-                  fontSize: 12,
-                  backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
-                  fontWeight: exIdx === i ? 600 : 400,
-                }}
-              >
-                {e.label}
-              </button>
-            ))}
-          </div>
+          <ManualInputPanel
+            fields={[
+              { key: 'hits', label: 'hits', type: 'array' },
+              { key: 'timestamp', label: 'getHits at', type: 'number' },
+              { key: 'window', label: 'window (s)', type: 'number' },
+            ]}
+            values={{ hits: hitsInput, timestamp: timestampInput, window: windowInput }}
+            onChange={handleInputChange}
+            examples={EXAMPLES}
+            activeLabel={activeLabel}
+            applyExample={applyExample}
+            inputError={inputError}
+          />
 
           {step && (
             <>
               <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
                 <div style={{ fontWeight: 600, marginBottom: 4 }}>{step.message}</div>
-                <div style={{ fontSize: 10, color: '#64748b' }}>Example {step.exampleNum}: {EXAMPLES[step.exampleNum - 1]?.desc}</div>
               </div>
 
               <div style={{ padding: 12, backgroundColor: '#f0f9ff', borderRadius: 6, border: '1px solid #bfdbfe' }}>
-                <div style={{ fontSize: 10, fontWeight: 600, marginBottom: 8, color: '#1e40af' }}>Timeline (0-500s)</div>
+                <div style={{ fontSize: 10, fontWeight: 600, marginBottom: 8, color: '#1e40af' }}>Timeline (0-{step.timelineMax}s)</div>
                 <div style={{ position: 'relative', height: 60, backgroundColor: '#ffffff', borderRadius: 4, border: '1px solid #e0e7ff', padding: '8px 4px', overflow: 'hidden' }}>
                   {step.windowStart !== null && step.windowEnd !== null && (
                     <motion.div
@@ -372,8 +242,8 @@ export default function Problem362Visualizer() {
                       animate={{ opacity: 0.15 }}
                       style={{
                         position: 'absolute',
-                        left: `${(step.windowStart / 500) * 100}%`,
-                        right: `${100 - (step.windowEnd / 500) * 100}%`,
+                        left: `${(step.windowStart / step.timelineMax) * 100}%`,
+                        right: `${100 - (step.windowEnd / step.timelineMax) * 100}%`,
                         top: 0,
                         bottom: 0,
                         backgroundColor: '#3b82f6',
@@ -386,10 +256,10 @@ export default function Problem362Visualizer() {
                     <AnimatePresence>
                       {step.hits.map((hit, idx) => {
                         const isInWindow = step.inWindow ? step.inWindow[idx] : true
-                        const position = (hit / 500) * 100
+                        const position = (hit / step.timelineMax) * 100
                         return (
                           <motion.div
-                            key={hit}
+                            key={`${hit}-${idx}`}
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
@@ -442,7 +312,7 @@ export default function Problem362Visualizer() {
                       const isInWindow = step.inWindow ? step.inWindow[idx] : true
                       return (
                         <motion.div
-                          key={hit}
+                          key={`${hit}-${idx}`}
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
                           exit={{ scale: 0 }}
@@ -473,7 +343,7 @@ export default function Problem362Visualizer() {
                   <div style={{ fontSize: 10, fontWeight: 600, marginBottom: 4, color: '#15803d' }}>Hit Count Result</div>
                   <div style={{ fontSize: 28, fontWeight: 'bold', color: '#15803d', textAlign: 'center' }}>{step.result}</div>
                   <div style={{ fontSize: 9, color: '#059669', textAlign: 'center', marginTop: 4 }}>
-                    Hits in 300-second window
+                    Hits in {step.windowSize}-second window
                   </div>
                 </motion.div>
               )}
@@ -484,7 +354,7 @@ export default function Problem362Visualizer() {
             </>
           )}
         </div>),
-  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, exIdx, applyExample])
+  }), [step, connectivity, setActiveLineDom, hitsInput, timestampInput, windowInput, inputError, activeLabel, applyExample, handleInputChange])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

@@ -11,6 +11,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import "./SudokuSolverVisualizer.css";
 import FloatingPanel from '../../components/shared/FloatingPanel';
 import LuminoDockPanel from '../../components/LuminoDockPanel';
+import ManualInputPanel from '../../components/shared/ManualInputPanel';
 
 const SUDOKUSOLVER_PATTERNS = ['backtrack', 'done', 'init', 'place', 'recurse', 'skip']
 
@@ -47,6 +48,9 @@ const SOLUTION_CODE = [
 
 const EXAMPLES = getExamples('sudoku-solver');
 
+// Guard against pathological user-supplied boards blowing up the browser.
+const MAX_STEPS = 20000;
+
 function generateSteps(initBoard) {
   const steps = [];
   const board = initBoard.map(r => [...r]); // Init copy only
@@ -63,6 +67,7 @@ function generateSteps(initBoard) {
   }
 
   function backtrack() {
+    if (steps.length >= MAX_STEPS) return true; // abort: too many steps
     for (let r = 0; r < 9; r++) {
       for (let c = 0; c < 9; c++) {
         if (board[r][c] !== ".") continue;
@@ -106,14 +111,73 @@ function generateSteps(initBoard) {
 }
 
 export default function SudokuSolverVisualizer() {
-  const [ex] = useState(EXAMPLES[0]);
-  const steps = useMemo(() => generateSteps(ex.board), [ex]);
+  const [activeLabel, setActiveLabel] = useState(EXAMPLES[0]?.label ?? '');
+  const [boardInput, setBoardInput] = useState(JSON.stringify(EXAMPLES[0].board));
+
+  const { initialBoard, inputError } = useMemo(() => {
+    try {
+      const parsed = JSON.parse(boardInput);
+      if (!Array.isArray(parsed) || parsed.length !== 9) {
+        throw new Error('board must be an array of 9 rows');
+      }
+      parsed.forEach((row) => {
+        if (!Array.isArray(row) || row.length !== 9) {
+          throw new Error('each row must be an array of 9 cells');
+        }
+        row.forEach((cell) => {
+          if (typeof cell !== 'string' || !/^[1-9.]$/.test(cell)) {
+            throw new Error('each cell must be "1"-"9" or "."');
+          }
+        });
+      });
+      // Reject boards whose givens already conflict — the solver would thrash.
+      for (let r = 0; r < 9; r++) {
+        for (let c = 0; c < 9; c++) {
+          const v = parsed[r][c];
+          if (v === '.') continue;
+          for (let i = 0; i < 9; i++) {
+            if (i !== c && parsed[r][i] === v) throw new Error(`duplicate "${v}" in row ${r}`);
+            if (i !== r && parsed[i][c] === v) throw new Error(`duplicate "${v}" in column ${c}`);
+          }
+          const br = 3 * Math.floor(r / 3);
+          const bc = 3 * Math.floor(c / 3);
+          for (let dr = 0; dr < 3; dr++) {
+            for (let dc = 0; dc < 3; dc++) {
+              const rr = br + dr;
+              const cc = bc + dc;
+              if ((rr !== r || cc !== c) && parsed[rr][cc] === v) {
+                throw new Error(`duplicate "${v}" in the 3x3 box at (${br},${bc})`);
+              }
+            }
+          }
+        }
+      }
+      return { initialBoard: parsed, inputError: '' };
+    } catch (e) {
+      return { initialBoard: EXAMPLES[0].board, inputError: e.message };
+    }
+  }, [boardInput]);
+
+  const steps = useMemo(() => generateSteps(initialBoard), [initialBoard]);
   const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
-  const board = step?.board ?? ex.board;
+  const applyExample = useCallback((example) => {
+    if (!example) return;
+    setActiveLabel(example.label);
+    setBoardInput(JSON.stringify(example.board));
+    handleReset();
+  }, [handleReset]);
+
+  const handleInputChange = useCallback((key, text) => {
+    if (key === 'board') setBoardInput(text);
+    setActiveLabel('');
+    handleReset();
+  }, [handleReset]);
+
+  const board = step?.board ?? initialBoard;
   const activeR = step?.activeR ?? -1;
   const activeC = step?.activeC ?? -1;
   const phase = step?.phase ?? "init";
@@ -123,13 +187,22 @@ export default function SudokuSolverVisualizer() {
     const s = new Set();
     for (let r = 0; r < 9; r++)
       for (let c = 0; c < 9; c++)
-        if (ex.board[r][c] === ".") s.add(`${r},${c}`);
+        if (initialBoard[r][c] === ".") s.add(`${r},${c}`);
     return s;
-  }, [ex]);
+  }, [initialBoard]);
 
   // Step 3: Extract panels into consts
   const primaryPanel = (
     <div className="su-panel">
+      <ManualInputPanel
+        fields={[{ key: 'board', label: 'board (9x9)', type: 'array' }]}
+        values={{ board: boardInput }}
+        onChange={handleInputChange}
+        examples={EXAMPLES}
+        activeLabel={activeLabel}
+        applyExample={applyExample}
+        inputError={inputError}
+      />
       <div className="su-panel-label">Sudoku Board</div>
       <div className="su-grid">
         {board.map((row, r) =>

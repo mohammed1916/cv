@@ -4,13 +4,14 @@ import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
-import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './WiggleSortIIVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import { createPortal } from 'react-dom'
 
 const PATTERNS = ['done', 'init', 'process']
 const LINE_PATTERN_MAP = {
@@ -115,11 +116,12 @@ export default function WiggleSortIIVisualizer() {
     )
   }
 
-  return (
-    <div className="wiggle-sort-i-i-shell">
-      <ResizableSplitPanels
-        left={
-          <div className="wiggle-sort-i-i-panel wiggle-sort-i-i-panel-input">
+  const panelConfigs = useMemo(() => [
+    { id: 'left', title: "Input" },
+    { id: 'right', title: "Visualization", dockMode: 'split-right' },
+  ], [])
+  const panelContents = {
+    left: (<div className="wiggle-sort-i-i-panel wiggle-sort-i-i-panel-input">
             <div className="wiggle-sort-i-i-panel-head">Input</div>
             <div className="wiggle-sort-i-i-panel-body">
               <textarea
@@ -129,20 +131,29 @@ export default function WiggleSortIIVisualizer() {
                 placeholder="Enter input..."
               />
             </div>
-          </div>
-        }
-        right={
-          <div className="wiggle-sort-i-i-panel wiggle-sort-i-i-panel-viz">
+          </div>),
+    right: (<div className="wiggle-sort-i-i-panel wiggle-sort-i-i-panel-viz">
             <div className="wiggle-sort-i-i-panel-head">Visualization</div>
             <div className="wiggle-sort-i-i-panel-body">
               <AnimatePresence mode="wait">
                 {renderVisualization()}
               </AnimatePresence>
             </div>
-          </div>
-        }
-        ratio={0.35}
-      />
+          </div>),
+  }
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+  return (
+    <div className="wiggle-sort-i-i-shell">
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.left && createPortal(panelContents.left, panelDivs.left)}
+            {panelDivs.right && createPortal(panelContents.right, panelDivs.right)}
+          </>
+        )}
+      </>
 
       <div style={{ position: 'relative' }}>
         <CodeTracePanel

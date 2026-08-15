@@ -4,13 +4,14 @@ import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
-import ResizableSplitPanels from '../../components/shared/ResizableSplitPanels'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './RangeSumQuery2D-ImmutableVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import { createPortal } from 'react-dom'
 
 const PATTERNS = ['init', 'process', 'done']
 
@@ -118,11 +119,12 @@ export default function RangeSumQuery2DImmutableVisualizer() {
     )
   }
 
-  return (
-    <div className="range-sum-query2-d--immutable-shell">
-      <ResizableSplitPanels
-        left={
-          <div className="range-sum-query2-d--immutable-panel range-sum-query2-d--immutable-panel-input">
+  const panelConfigs = useMemo(() => [
+    { id: 'left', title: "Input" },
+    { id: 'right', title: "Visualization", dockMode: 'split-right' },
+  ], [])
+  const panelContents = {
+    left: (<div className="range-sum-query2-d--immutable-panel range-sum-query2-d--immutable-panel-input">
             <div className="range-sum-query2-d--immutable-panel-head">Input</div>
             <div className="range-sum-query2-d--immutable-panel-body">
               <textarea
@@ -132,20 +134,29 @@ export default function RangeSumQuery2DImmutableVisualizer() {
                 placeholder="Enter input..."
               />
             </div>
-          </div>
-        }
-        right={
-          <div className="range-sum-query2-d--immutable-panel range-sum-query2-d--immutable-panel-viz">
+          </div>),
+    right: (<div className="range-sum-query2-d--immutable-panel range-sum-query2-d--immutable-panel-viz">
             <div className="range-sum-query2-d--immutable-panel-head">Visualization</div>
             <div className="range-sum-query2-d--immutable-panel-body">
               <AnimatePresence mode="wait">
                 {renderVisualization()}
               </AnimatePresence>
             </div>
-          </div>
-        }
-        ratio={0.35}
-      />
+          </div>),
+  }
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+  return (
+    <div className="range-sum-query2-d--immutable-shell">
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.left && createPortal(panelContents.left, panelDivs.left)}
+            {panelDivs.right && createPortal(panelContents.right, panelDivs.right)}
+          </>
+        )}
+      </>
 
       <div className="range-sum-query2-d--immutable-middle">
         <div className="range-sum-query2-d--immutable-panel">

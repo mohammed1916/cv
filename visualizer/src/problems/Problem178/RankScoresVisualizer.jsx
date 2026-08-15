@@ -85,16 +85,12 @@ export default function RankScoresVisualizer() {
 
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  return (
-    <div className="rank_scores-shell">
-      <ResizableSplitPanels
-        className="rank_scores-top-split"
-        storageKey="cpviz.split.rank-scores.top"
-        initialLeftPercent={60}
-        minLeftPx={360}
-        minRightPx={280}
-        left={(
-          <div className="rank_scores-panel">
+  const panelConfigs = useMemo(() => [
+    { id: 'left', title: "Input & State" },
+    { id: 'right', title: "Step Details", dockMode: 'split-right' },
+  ], [])
+  const panelContents = {
+    left: (<div className="rank_scores-panel">
             <div className="rank_scores-panel-head">Input & State</div>
             <div className="rank_scores-panel-body">
               <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
@@ -123,17 +119,27 @@ export default function RankScoresVisualizer() {
                 {/* Visualization content */}
               </div>
             </div>
-          </div>
-        )}
-        right={(
-          <div className="rank_scores-panel">
+          </div>),
+    right: (<div className="rank_scores-panel">
             <div className="rank_scores-panel-head">Step Details</div>
             <div className="rank_scores-panel-body">
               {step && <div className="rank_scores-details">{/* Details */}</div>}
             </div>
-          </div>
+          </div>),
+  }
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+  return (
+    <div className="rank_scores-shell">
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.left && createPortal(panelContents.left, panelDivs.left)}
+            {panelDivs.right && createPortal(panelContents.right, panelDivs.right)}
+          </>
         )}
-      />
+      </>
 
       <CodeTracePanel
         step={step}

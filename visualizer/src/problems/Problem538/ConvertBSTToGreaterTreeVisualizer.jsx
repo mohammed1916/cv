@@ -6,6 +6,7 @@ import CodeTracePanel from'../../components/CodeTracePanel'
 import PlaybackControls from'../../components/PlaybackControls'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { createPortal } from 'react-dom'
 import{useCodeVisualConnectivity}from'../../hooks/useCodeVisualConnectivity'
@@ -21,6 +22,8 @@ const LINE_PATTERN_MAP = {
 
 
 const EXAMPLES=getExamples('convert-bst-to-greater-tree')
+
+const DEFAULT_EX = EXAMPLES[0] || { label: 'Default', root: [5, 2, 13] }
 
 const SOLUTION_CODE_INLINE=[
   {line:1,text:'def bstToGst(root):'},
@@ -45,12 +48,29 @@ const val=root[idx];seq.push(val);acc+=val;steps.push({activeLine:4,root,val,idx
 const leftIdx=idx*2+1;if(leftIdx<root.length)dfs(leftIdx,depth+1)}
 dfs(0);steps.push({activeLine:10,root,reversedSequence:seq,accumulated:acc,phase:'done',message:`BST converted to greater tree. Accumulated sum: ${acc}`,relatedLines:[10],done:true,result:acc})
 return steps}
-function VisualizationPanel({root,step,applyEx}){return(<div style={{display:'flex',flexDirection:'column',gap:20,padding:16}}><div style={{padding:12,backgroundColor:'#f0f9ff',borderRadius:6,borderLeft:'4px solid #0284c7'}}><div style={{fontSize:12,color:'#075985',fontStyle:'italic'}}>Transform BST to greater tree via reverse inorder traversal.</div></div><div><div style={{fontSize:13,fontWeight:600,color:'#1e293b',marginBottom:8}}>Examples</div><div style={{display:'flex',gap:6,flexWrap:'wrap'}}>{EXAMPLES.map(e=>(<button key={e.label}onClick={()=>applyEx(e)}style={{padding:'6px 12px',borderRadius:4,border:'1px solid #cbd5e1',cursor:'pointer',fontSize:12,backgroundColor:'#f1f5f9'}}>{e.label}</button>))}</div></div><div><div style={{fontSize:13,fontWeight:600,color:'#1e293b',marginBottom:8}}>Reverse Inorder Sequence</div><div style={{display:'flex',gap:6,flexWrap:'wrap'}}>{step?.reversedSequence?.map((val,idx)=>(<motion.div key={`val-${idx}`}style={{padding:'10px 14px',borderRadius:6,border:'2px solid',fontFamily:'monospace',fontSize:13,fontWeight:600,backgroundColor:'#dbeafe',borderColor:'#0284c7',color:'#0c4a6e'}}animate={{scale:1}}>{val}</motion.div>))}</div></div><motion.div style={{padding:16,backgroundColor:'#f0f9ff',borderRadius:6,border:'2px solid #0284c7',textAlign:'center'}}initial={{opacity:0}}animate={{opacity:1}}><div style={{fontSize:13,fontWeight:600,color:'#0c4a6e',marginBottom:8}}>Accumulated Sum</div><div style={{fontSize:28,fontWeight:'bold',color:'#0284c7'}}>{step?.accumulated||0}</div><div style={{fontSize:12,color:'#0284c7',marginTop:8}}>{step?.message||''}</div></motion.div></div>)}
-export default function ConvertBSTToGreaterTreeVisualizer(){const[ex,setEx]=useState(EXAMPLES[0]||{root:[5,2,13]})
-const steps=useMemo(()=>generateSteps(ex.root).map(c=>({...c,relatedLines:c.relatedLines??(c.activeLine!=null?[c.activeLine]:[])})),[ex])
+function VisualizationPanel({step,applyEx}){return(<div style={{display:'flex',flexDirection:'column',gap:20,padding:16}}><div style={{padding:12,backgroundColor:'#f0f9ff',borderRadius:6,borderLeft:'4px solid #0284c7'}}><div style={{fontSize:12,color:'#075985',fontStyle:'italic'}}>Transform BST to greater tree via reverse inorder traversal.</div></div><div><div style={{fontSize:13,fontWeight:600,color:'#1e293b',marginBottom:8}}>Examples</div><div style={{display:'flex',gap:6,flexWrap:'wrap'}}>{EXAMPLES.map(e=>(<button key={e.label}onClick={()=>applyEx(e)}style={{padding:'6px 12px',borderRadius:4,border:'1px solid #cbd5e1',cursor:'pointer',fontSize:12,backgroundColor:'#f1f5f9'}}>{e.label}</button>))}</div></div><div><div style={{fontSize:13,fontWeight:600,color:'#1e293b',marginBottom:8}}>Reverse Inorder Sequence</div><div style={{display:'flex',gap:6,flexWrap:'wrap'}}>{step?.reversedSequence?.map((val,idx)=>(<motion.div key={`val-${idx}`}style={{padding:'10px 14px',borderRadius:6,border:'2px solid',fontFamily:'monospace',fontSize:13,fontWeight:600,backgroundColor:'#dbeafe',borderColor:'#0284c7',color:'#0c4a6e'}}animate={{scale:1}}>{val}</motion.div>))}</div></div><motion.div style={{padding:16,backgroundColor:'#f0f9ff',borderRadius:6,border:'2px solid #0284c7',textAlign:'center'}}initial={{opacity:0}}animate={{opacity:1}}><div style={{fontSize:13,fontWeight:600,color:'#0c4a6e',marginBottom:8}}>Accumulated Sum</div><div style={{fontSize:28,fontWeight:'bold',color:'#0284c7'}}>{step?.accumulated||0}</div><div style={{fontSize:12,color:'#0284c7',marginTop:8}}>{step?.message||''}</div></motion.div></div>)}
+export default function ConvertBSTToGreaterTreeVisualizer(){
+const [rootInput, setRootInput] = useState(JSON.stringify(DEFAULT_EX.root))
+const [activeLabel, setActiveLabel] = useState(DEFAULT_EX.label)
+
+const { root, inputError } = useMemo(() => {
+  try {
+    const parsed = JSON.parse(rootInput)
+    if (!Array.isArray(parsed) || parsed.length === 0) throw new Error('root must be a non-empty array, e.g. [5,2,13]')
+    for (const v of parsed) {
+      if (typeof v !== 'number' || !Number.isFinite(v)) throw new Error('root values must be numbers (level-order, no nulls)')
+    }
+    return { root: parsed, inputError: '' }
+  } catch (e) {
+    return { root: DEFAULT_EX.root, inputError: e.message }
+  }
+}, [rootInput])
+
+const steps=useMemo(()=>generateSteps(root).map(c=>({...c,relatedLines:c.relatedLines??(c.activeLine!=null?[c.activeLine]:[])})),[root])
 const{stepIndex,setStepIndex,stepForward,stepBack,togglePlay,handleReset,isPlaying,speed,setSpeed,isDone}=usePlaybackState(steps.length)
 const step=stepIndex>=0?steps[stepIndex]:null
-const applyEx=useCallback(e=>{setEx(e);handleReset()},[handleReset])
+const applyEx=useCallback(e=>{setRootInput(JSON.stringify(e.root));setActiveLabel(e.label);handleReset()},[handleReset])
+const handleFieldChange=useCallback((key,text)=>{if(key==='root')setRootInput(text);setActiveLabel('');handleReset()},[handleReset])
 const connectivity=useCodeVisualConnectivity({steps,stepIndex,onStepJump:setStepIndex})
 const{showPatternOverlay,setShowPatternOverlay,activeLineDom,setActiveLineDom}=usePatternOverlay()
 const panelConfigs = useMemo(() => [
@@ -59,8 +79,19 @@ const panelConfigs = useMemo(() => [
 ], [])
 const panelContents = useMemo(() => ({
   code: (<div style={{ position: 'relative' }}><CodeTracePanel step={step}codeLines={SOLUTION_CODE}highlightedLines={connectivity.highlightedLines}onLineSelect={connectivity.handleLineSelect}onActiveLineDomChange={setActiveLineDom}/>{showPatternOverlay && (<CodePatternAnnotations linePatterns={LINE_PATTERN_MAP} currentPhase={step?.phase} activeLineDom={activeLineDom} activeLine={step?.activeLine} />)}</div>),
-  viz: (<VisualizationPanel root={ex.root}step={step}applyEx={applyEx}/>),
-}), [step,SOLUTION_CODE,connectivity,setActiveLineDom,ex,applyEx])
+  viz: (<>
+    <ManualInputPanel
+      fields={[{ key: 'root', label: 'root', type: 'array' }]}
+      values={{ root: rootInput }}
+      onChange={handleFieldChange}
+      examples={EXAMPLES}
+      activeLabel={activeLabel}
+      applyExample={applyEx}
+      inputError={inputError}
+    />
+    <VisualizationPanel step={step} applyEx={applyEx} />
+  </>),
+}), [step,connectivity,setActiveLineDom,rootInput,activeLabel,inputError,handleFieldChange,applyEx,showPatternOverlay,activeLineDom])
 const [panelDivs, setPanelDivs] = useState(null)
 const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 return(<div className="problem-shell"><>

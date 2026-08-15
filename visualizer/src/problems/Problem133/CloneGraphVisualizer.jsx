@@ -6,6 +6,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
+import ManualInputPanel from "../../components/shared/ManualInputPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
@@ -47,6 +48,23 @@ const EXAMPLES = {
         positions: { 1: [110, 70], 2: [40, 20], 3: [180, 20], 4: [110, 140] },
     },
 };
+
+const EXAMPLE_LIST = Object.entries(EXAMPLES).map(([key, e]) => ({ key, ...e }));
+
+// Lay nodes out on a circle when the adjacency list no longer matches a canned example.
+function circleLayout(nodeIds) {
+    const positions = {};
+    const cx = 110, cy = 85, r = 62;
+    const n = nodeIds.length || 1;
+    nodeIds.forEach((id, i) => {
+        const angle = (2 * Math.PI * i) / n - Math.PI / 2;
+        positions[id] = [
+            Math.round(cx + r * Math.cos(angle)),
+            Math.round(cy + r * Math.sin(angle)),
+        ];
+    });
+    return positions;
+}
 
 function generateSteps(adj, start = 1) {
     const steps = [];
@@ -155,12 +173,48 @@ function VisualizationPanel({ adj, positions, step }) {
 
 export default function CloneGraphVisualizer() {
     const [exKey, setExKey] = useState("ex1");
+    const [adjInput, setAdjInput] = useState(() => JSON.stringify(EXAMPLES.ex1.adj));
     const ex = EXAMPLES[exKey];
-    const steps = useMemo(() => generateSteps(ex.adj), [ex]);
+
+    const { adj, positions, inputError } = useMemo(() => {
+        const withPositions = (parsed) => {
+            const ids = Object.keys(parsed).map(Number);
+            const canned = EXAMPLES[exKey]?.positions ?? {};
+            const cannedIds = Object.keys(canned).map(Number);
+            const matches =
+                ids.length === cannedIds.length && ids.every((id) => canned[id] !== undefined);
+            return matches ? canned : circleLayout(ids);
+        };
+        try {
+            const parsed = JSON.parse(adjInput);
+            if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+                throw new Error('adjacency must be an object, e.g. {"1":[2],"2":[1]}');
+            }
+            for (const [k, v] of Object.entries(parsed)) {
+                if (!Array.isArray(v)) throw new Error(`neighbors of node ${k} must be an array`);
+                if (v.some((n) => typeof n !== 'number')) {
+                    throw new Error(`neighbors of node ${k} must be numbers`);
+                }
+            }
+            return { adj: parsed, positions: withPositions(parsed), inputError: '' };
+        } catch (e) {
+            const fallback = EXAMPLES.ex1;
+            return { adj: fallback.adj, positions: fallback.positions, inputError: e.message };
+        }
+    }, [adjInput, exKey]);
+
+    const steps = useMemo(() => {
+        const start = Number(Object.keys(adj)[0] ?? 1);
+        return generateSteps(adj, start);
+    }, [adj]);
     const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((k) => { setExKey(k); handleReset(); }, [handleReset]);
+    const applyEx = useCallback((k) => {
+        setExKey(k);
+        setAdjInput(JSON.stringify(EXAMPLES[k].adj));
+        handleReset();
+    }, [handleReset]);
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
@@ -180,9 +234,18 @@ export default function CloneGraphVisualizer() {
 
     const vizPanel = (
         <div className="cg-panel">
+            <ManualInputPanel
+                fields={[{ key: 'adjacency', label: 'adjacency', type: 'string' }]}
+                values={{ adjacency: adjInput }}
+                onChange={(k, v) => { if (k === 'adjacency') setAdjInput(v); handleReset(); }}
+                examples={EXAMPLE_LIST}
+                activeLabel={ex?.label}
+                applyExample={(e) => applyEx(e.key)}
+                inputError={inputError}
+            />
             <VisualizationPanel
-                adj={ex.adj}
-                positions={ex.positions}
+                adj={adj}
+                positions={positions}
                 step={step}
             />
         </div>

@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -8,7 +8,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './AccountsMerge.css'
 import { createPortal } from 'react-dom'
 
@@ -55,7 +55,7 @@ function generateSteps(accounts) {
   })
 
   // Union-Find process
-  accounts.forEach(([name, ...emails]) => {
+  accounts.forEach(([, ...emails]) => {
     for (let i = 0; i < emails.length - 1; i++) {
       const email1 = emails[i]
       const email2 = emails[i + 1]
@@ -128,18 +128,40 @@ const EXAMPLES = [
 ]
 
 export default function AccountsMergeVisualizer() {
-  const [exIdx, setExIdx] = useState(0)
+  const [accountsInput, setAccountsInput] = useState(JSON.stringify(EXAMPLES[0].accounts))
+  const [activeLabel, setActiveLabel] = useState(EXAMPLES[0].label)
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  const ex = EXAMPLES[exIdx]
-  const steps = useMemo(() => generateSteps(ex.accounts), [ex])
+  const { accounts, inputError } = useMemo(() => {
+    try {
+      const parsed = JSON.parse(accountsInput)
+      if (!Array.isArray(parsed) || parsed.length === 0) {
+        throw new Error('accounts must be a non-empty array')
+      }
+      if (!parsed.every((a) => Array.isArray(a) && a.length >= 2 && a.every((s) => typeof s === 'string'))) {
+        throw new Error('each account must be ["Name", "email1", ...] with at least one email')
+      }
+      return { accounts: parsed, inputError: '' }
+    } catch (e) {
+      return { accounts: [['John', 'j1@com']], inputError: e.message }
+    }
+  }, [accountsInput])
+
+  const steps = useMemo(() => generateSteps(accounts), [accounts])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
-  const step = stepIndex >= 0 ? steps[stepIndex] : null
+  const step = stepIndex >= 0 ? steps[stepIndex] ?? null : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
-  const applyExample = useCallback((idx) => {
-    setExIdx(idx)
+  const applyExample = useCallback((example) => {
+    setAccountsInput(JSON.stringify(example.accounts))
+    setActiveLabel(example.label)
+    handleReset()
+  }, [handleReset])
+
+  const handleFieldChange = useCallback((key, text) => {
+    if (key === 'accounts') setAccountsInput(text)
+    setActiveLabel('')
     handleReset()
   }, [handleReset])
 
@@ -158,24 +180,15 @@ export default function AccountsMergeVisualizer() {
           onActiveLineDomChange={setActiveLineDom}
         />),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {EXAMPLES.map((e, i) => (
-              <button
-                key={i}
-                onClick={() => applyExample(i)}
-                style={{
-                  padding: '6px 12px',
-                  borderRadius: 4,
-                  border: '1px solid #cbd5e1',
-                  cursor: 'pointer',
-                  fontSize: 12,
-                  backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
-                }}
-              >
-                {e.label}
-              </button>
-            ))}
-          </div>
+          <ManualInputPanel
+            fields={[{ key: 'accounts', label: 'accounts', type: 'array' }]}
+            values={{ accounts: accountsInput }}
+            onChange={handleFieldChange}
+            examples={EXAMPLES}
+            activeLabel={activeLabel}
+            applyExample={applyExample}
+            inputError={inputError}
+          />
 
           {step && (
             <>
@@ -237,7 +250,7 @@ export default function AccountsMergeVisualizer() {
             </>
           )}
         </div>),
-  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, exIdx, applyExample, emailNodes])
+  }), [step, connectivity, setActiveLineDom, applyExample, handleFieldChange, accountsInput, activeLabel, inputError, emailNodes])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

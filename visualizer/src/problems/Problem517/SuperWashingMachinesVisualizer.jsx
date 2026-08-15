@@ -12,6 +12,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import './SuperWashingMachinesVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 import { createPortal } from 'react-dom'
 const SOLUTION_CODE = getSolutionCode('super-washing-machines')
@@ -100,36 +101,13 @@ function generateSteps(machines) {
   return steps
 }
 
-function VisualizationPanel({ machines, step, applyEx }) {
+function VisualizationPanel({ machines, step }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
       {/* Story */}
       <div style={{ padding: 12, backgroundColor: '#d1fae5', borderRadius: 6, borderLeft: '4px solid #10b981' }}>
         <div style={{ fontSize: 12, color: '#065f46', fontStyle: 'italic' }}>
           "Distribute dresses equally among washing machines. Transfer operations move one dress left or right in one step."
-        </div>
-      </div>
-
-      {/* Examples */}
-      <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {EXAMPLES.map(e => (
-            <button
-              key={e.label}
-              onClick={() => applyEx(e)}
-              style={{
-                padding: '6px 12px',
-                borderRadius: 4,
-                border: '1px solid #cbd5e1',
-                cursor: 'pointer',
-                fontSize: 12,
-                backgroundColor: '#f1f5f9'
-              }}
-            >
-              {e.label}
-            </button>
-          ))}
         </div>
       </div>
 
@@ -226,15 +204,33 @@ function VisualizationPanel({ machines, step, applyEx }) {
 }
 
 export default function SuperWashingMachinesVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { machines: [1, 0, 5] })
+  const [machinesInput, setMachinesInput] = useState(
+    JSON.stringify(EXAMPLES?.[0]?.machines ?? [1, 0, 5])
+  )
+  const [activeLabel, setActiveLabel] = useState(EXAMPLES?.[0]?.label ?? '')
+
+  const { machines, inputError } = useMemo(() => {
+    try {
+      const parsed = JSON.parse(machinesInput)
+      if (!Array.isArray(parsed) || parsed.length === 0) {
+        throw new Error('machines must be a non-empty array, e.g. [1,0,5]')
+      }
+      if (!parsed.every((v) => typeof v === 'number' && Number.isFinite(v) && v >= 0)) {
+        throw new Error('machines must contain non-negative numbers')
+      }
+      return { machines: parsed, inputError: '' }
+    } catch (e) {
+      return { machines: [1, 0, 5], inputError: e.message }
+    }
+  }, [machinesInput])
 
   const steps = useMemo(
     () =>
-      generateSteps(ex.machines).map((current) => ({
+      generateSteps(machines).map((current) => ({
         ...current,
         relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [ex]
+    [machines]
   )
 
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
@@ -242,7 +238,17 @@ export default function SuperWashingMachinesVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => {
+    setMachinesInput(JSON.stringify(e.machines ?? []))
+    setActiveLabel(e.label ?? '')
+    handleReset()
+  }, [handleReset])
+
+  const handleFieldChange = useCallback((key, text) => {
+    if (key === 'machines') setMachinesInput(text)
+    setActiveLabel('')
+    handleReset()
+  }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -285,12 +291,22 @@ export default function SuperWashingMachinesVisualizer() {
           )}
 
         </div>),
-    viz: (<VisualizationPanel
-          machines={ex.machines}
+    viz: (<>
+        <ManualInputPanel
+          fields={[{ key: 'machines', label: 'machines', type: 'array' }]}
+          values={{ machines: machinesInput }}
+          onChange={handleFieldChange}
+          examples={EXAMPLES}
+          activeLabel={activeLabel}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
+        <VisualizationPanel
+          machines={machines}
           step={step}
-          applyEx={applyEx}
-        />),
-  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
+        />
+      </>),
+  }), [step, connectivity, setActiveLineDom, showPatternOverlay, activeLineDom, machines, machinesInput, activeLabel, inputError, applyEx, handleFieldChange])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
