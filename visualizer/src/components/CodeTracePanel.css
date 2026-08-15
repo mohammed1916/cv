@@ -2,9 +2,9 @@
   position: relative;
   min-width: 0;
   overflow: hidden;
-  border-radius: 16px;
-  border: 1px solid var(--panel-border, var(--overlay-medium));
-  background: var(--panel-bg, var(--code-surface));
+  border-radius: 0;
+  border: 1px solid var(--code-line);
+  background: var(--code-bg);
 }
 
 .ctp-panel.editing-below {
@@ -26,8 +26,9 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 14px 16px;
-  border-bottom: 1px solid var(--panel-border, var(--overlay-medium));
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--code-line);
+  background: var(--code-surface);
 }
 
 .ctp-title {
@@ -47,8 +48,8 @@
 .ctp-chip {
   padding: 2px 8px;
   font-size: 0.78rem;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  border: 1px solid var(--code-line);
   background: var(--overlay-weak);
 }
 
@@ -59,8 +60,8 @@
   margin-top: 7px;
   padding: 3px 7px;
   border: 1px solid var(--ctp-pattern-color);
-  border-radius: 999px;
-  background: var(--overlay-weak);
+  border-radius: 3px;
+  background: var(--code-bg);
   color: var(--text);
   font-size: 0.7rem;
   font-weight: 700;
@@ -74,10 +75,10 @@
   min-height: 36px;
   padding: 6px 10px;
   cursor: pointer;
-  border-radius: 8px;
-  color: var(--text, var(--text));
-  background: var(--overlay-weak);
-  border: 1px solid var(--overlay-weak);
+  border-radius: 3px;
+  color: var(--code-text);
+  background: var(--code-bg);
+  border: 1px solid var(--code-line);
 
   transition:
     background 0.12s ease,
@@ -93,9 +94,8 @@
 
 .ctp-copy-btn:hover,
 .ctp-editor-btn:hover {
-  background: var(--overlay-weak);
-  border-color: var(--overlay-medium);
-  transform: translateY(-1px);
+  background: var(--code-line);
+  border-color: var(--primary);
 }
 
 .ctp-copy-btn.copied {
@@ -117,7 +117,8 @@
 
 .ctp-scroll {
   overflow: auto;
-  padding: 10px;
+  padding: 8px 0;
+  background: var(--code-bg);
   touch-action: pan-y;
 }
 
@@ -173,7 +174,7 @@
   width: min(1100px, calc(100vw - 48px));
   max-height: calc(100vh - 48px);
   overflow: auto;
-  border-radius: 14px;
+  border-radius: 4px;
   border: 1px solid var(--overlay-medium);
   background: var(--code-bg);
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
@@ -194,7 +195,7 @@
   gap: 8px;
 
   padding: 8px;
-  border-radius: 10px;
+  border-radius: 3px;
 
   border: 1px solid rgba(255, 255, 255, 0.04);
 
@@ -208,7 +209,7 @@
   align-items: center;
   gap: 8px;
   padding: 4px 6px;
-  border-radius: 8px;
+  border-radius: 3px;
 }
 
 /* =========================================
@@ -226,7 +227,7 @@
 
   padding: 6px 36px 6px 12px;
 
-  border-radius: 8px;
+  border-radius: 3px;
   border: 1px solid var(--overlay-medium);
 
   color: var(--code-text);
@@ -279,8 +280,8 @@
 }
 
 .ctp-editor-select option {
-  background: var(--surface);
-  color: var(--surface2);
+  background: var(--code-bg);
+  color: var(--code-text);
 }
 
 /* =========================================
@@ -295,7 +296,7 @@
   resize: vertical;
 
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 3px;
 
   color: var(--text, var(--text));
 
@@ -324,8 +325,9 @@
   gap: 10px;
   align-items: start;
 
-  padding: 6px 10px;
-  border-radius: 10px;
+  padding: 6px 14px;
+  border-radius: 0;
+  border-left: 3px solid transparent;
 }
 
 .ctp-row.clickable {
@@ -333,20 +335,21 @@
 }
 
 .ctp-row.clickable:hover {
-  background: rgba(56, 189, 248, 0.08);
+  background: var(--overlay-weak);
 }
 
 .ctp-row.related {
-  background: rgba(148, 163, 184, 0.08);
+  background: var(--overlay-weak);
+  border-left-color: var(--text-dim);
 }
 
 .ctp-row.external-highlight {
-  box-shadow: inset 0 0 0 1px rgba(56, 189, 248, 0.45);
+  border-left-color: var(--info);
 }
 
 .ctp-row.active {
-  background: rgba(56, 189, 248, 0.16);
-  box-shadow: inset 0 0 0 1px rgba(56, 189, 248, 0.34);
+  background: color-mix(in srgb, var(--primary) 16%, var(--code-bg));
+  border-left-color: var(--primary);
 }
 
 .ctp-no {
@@ -362,53 +365,7 @@
   font-size: 0.82rem;
   line-height: 1.45;
 
-  color: var(--text, var(--text));
-}
-
-/* =========================================
-   DARK MODE
-   ========================================= */
-
-@media (prefers-color-scheme: dark) {
-  .ctp-editor-controls {
-    background: linear-gradient(180deg,
-        var(--code-bg),
-        var(--code-surface));
-
-    border-color: var(--overlay-weak);
-  }
-
-  .ctp-copy-btn,
-  .ctp-editor-btn {
-    background-color: rgba(255, 255, 255, 0.02);
-    border-color: var(--overlay-weak);
-  }
-
-  .ctp-editor-select,
-  .ctp-editor-select[type='number'] {
-    background-color: var(--code-bg);
-    border-color: var(--overlay-medium);
-    color: var(--text);
-  }
-
-  .ctp-editor-select option {
-    background: #020617;
-    color: var(--text);
-  }
-
-  .ctp-copy-btn:focus,
-  .ctp-editor-btn:focus,
-  .ctp-editor-select:focus,
-  .ctp-editor-select[type='number']:focus {
-    border-color: rgba(56, 189, 248, 0.8);
-    box-shadow: 0 0 0 6px rgba(56, 189, 248, 0.12);
-  }
-
-  .ctp-editor-btn:active,
-  .ctp-editor-select:active {
-    background: rgba(255, 255, 255, 0.04);
-    border-color: var(--overlay-medium);
-  }
+  color: var(--code-text);
 }
 
 /* =========================================
