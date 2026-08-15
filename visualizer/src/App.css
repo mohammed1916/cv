@@ -827,6 +827,16 @@
   max-height: 100%;
 }
 
+/* Lumino's workspace node is absolutely positioned. A number of older
+   visualizers did not establish a containing block for it, so the dock used
+   the page/viewport as its origin and its tab strip appeared underneath the
+   sticky problem header. This catches every direct Lumino host, including
+   future problems, without requiring a one-off layout patch per visualizer. */
+.problem-content *:has(> .lumino-dock-container) {
+  position: relative !important;
+  min-height: 0;
+}
+
 @media (max-width: 960px) {
   .filters-row {
     grid-template-columns: 1fr;
