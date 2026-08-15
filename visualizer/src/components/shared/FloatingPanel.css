@@ -3,8 +3,8 @@
   top: 0;
   left: 0;
   z-index: 1900;
-  min-width: 280px;
-  min-height: 96px;
+  min-width: 220px;
+  min-height: 92px;
   max-width: min(92vw, 520px);
   border-radius: 16px;
   border: 1px solid var(--border);
@@ -108,8 +108,39 @@
 
 .floating-panel-body {
   padding: 10px;
-  height: calc(100% - 42px);
+  height: calc(100% - 68px);
   overflow: auto;
+}
+
+.floating-panel:not(.has-size-control) .floating-panel-body {
+  height: calc(100% - 42px);
+}
+
+.floating-panel.has-size-control .floating-panel-body {
+  padding-bottom: 4px;
+}
+
+/* This is deliberately independent from the corner resize grip: it scales the
+   learning controls themselves (text, icons, toggles, and pattern guide) while
+   preserving the panel's physical width and height. */
+.floating-panel.has-size-control .floating-panel-body > * {
+  zoom: var(--playback-ui-scale, 1);
+}
+
+.floating-panel-size-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 10px 8px;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.floating-panel-size-control input {
+  flex: 1;
+  min-width: 0;
+  accent-color: var(--primary);
 }
 
 .floating-panel-resizer {

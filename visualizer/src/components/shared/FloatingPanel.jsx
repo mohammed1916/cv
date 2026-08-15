@@ -11,10 +11,11 @@ export default function FloatingPanel({
   const [position, setPosition] = useState(null);
   const [collapsed, setCollapsed] = useState(false);
   const [isPinned, setIsPinned] = useState(false);
+  const [controlScale, setControlScale] = useState(100);
   const [size, setSize] = useState(() => {
     try {
       const stored = JSON.parse(window.localStorage.getItem("floating-playback-size"));
-      if (stored?.width >= 280 && stored?.height >= 96) return stored;
+      if (stored?.width >= 220 && stored?.height >= 92) return stored;
     } catch {
       // A sensible default is preferable to a broken persisted value.
     }
@@ -40,8 +41,8 @@ export default function FloatingPanel({
       if (!resizeState.current) return;
       const { startX, startY, width, height } = resizeState.current;
       setSize({
-        width: Math.min(Math.max(280, width + event.clientX - startX), window.innerWidth - 16),
-        height: Math.min(Math.max(96, height + event.clientY - startY), window.innerHeight - 16),
+        width: Math.min(Math.max(220, width + event.clientX - startX), window.innerWidth - 16),
+        height: Math.min(Math.max(92, height + event.clientY - startY), window.innerHeight - 16),
       });
     };
     const onUp = () => {
@@ -109,8 +110,13 @@ export default function FloatingPanel({
   return (
     <div
       ref={panelRef}
-      className={`floating-panel ${collapsed ? "collapsed" : ""} ${isPinned ? "pinned" : ""}`}
-      style={position ? { top: position.y, left: position.x, width: size.width, height: collapsed ? undefined : size.height } : { width: size.width, height: collapsed ? undefined : size.height }}
+      className={`floating-panel ${collapsed ? "collapsed" : ""} ${isPinned ? "pinned" : ""} ${title === 'Playback Controls' ? 'has-size-control' : ''}`}
+      style={{
+        ...(position ? { top: position.y, left: position.x } : {}),
+        width: size.width,
+        height: collapsed ? undefined : size.height,
+        '--playback-ui-scale': controlScale / 100,
+      }}
     >
       <div
         className="floating-panel-handle"
@@ -142,6 +148,19 @@ export default function FloatingPanel({
         </button>
       </div>
       {!collapsed && <div className="floating-panel-body">{children}</div>}
+      {!collapsed && title === 'Playback Controls' && (
+        <label className="floating-panel-size-control">
+          <span>Control scale</span>
+          <input
+            type="range"
+            min="65"
+            max="120"
+            value={controlScale}
+            onChange={(event) => setControlScale(Number(event.target.value))}
+            aria-label="Playback controls scale"
+          />
+        </label>
+      )}
       {!collapsed && (
         <div
           className="floating-panel-resizer"

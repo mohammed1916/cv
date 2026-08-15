@@ -7,6 +7,26 @@
   transform: translateX(-50%);
   z-index: 1900;
   pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.zoom-controls-panel[style] {
+  transform: none !important;
+}
+
+.zoom-controls-handle {
+  color: var(--text-muted);
+  cursor: grab;
+  font-size: 16px;
+  line-height: 1;
+  user-select: none;
+  touch-action: none;
+}
+
+.zoom-controls-handle:active {
+  cursor: grabbing;
 }
 
 .zoom-controls-inner {
