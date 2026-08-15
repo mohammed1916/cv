@@ -56,14 +56,22 @@ export default function LuminoDockPanel({ panels, onPanelReady }) {
         const minBtn = document.createElement('button')
         minBtn.type = 'button'
         minBtn.className = 'lumino-panel-minbtn'
-        minBtn.title = 'Minimize panel'
-        minBtn.setAttribute('aria-label', 'Minimize panel')
-        minBtn.textContent = '—'
+        const setMinButtonState = (collapsed) => {
+          const label = collapsed ? 'Restore panel' : 'Collapse panel'
+          minBtn.title = label
+          minBtn.setAttribute('aria-label', label)
+          // A small chevron reads as an affordance without competing with the
+          // visualizer content. The static SVG is created locally, not from
+          // user content.
+          minBtn.innerHTML = collapsed
+            ? '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4.5 6 3.5 3.5L11.5 6" /></svg>'
+            : '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4.5 10 3.5-3.5 3.5 3.5" /></svg>'
+        }
+        setMinButtonState(false)
         minBtn.addEventListener('click', (e) => {
           e.stopPropagation()
           this._collapsed = !this._collapsed
-          minBtn.textContent = this._collapsed ? '▢' : '—'
-          minBtn.title = this._collapsed ? 'Restore panel' : 'Minimize panel'
+          setMinButtonState(this._collapsed)
           collapseCallbackRef.current?.(id, this._collapsed)
         })
         this.node.appendChild(minBtn)

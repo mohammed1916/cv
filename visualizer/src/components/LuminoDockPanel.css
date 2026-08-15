@@ -53,26 +53,40 @@
   top: 4px;
   right: 6px;
   z-index: 5;
-  width: 22px;
-  height: 22px;
+  width: 26px;
+  height: 26px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
-  font-size: 14px;
   line-height: 1;
   color: var(--text-muted, var(--text-muted));
-  background: var(--surface3, var(--surface3));
-  border: 1px solid var(--lm-panel-border);
-  border-radius: 5px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease;
 }
 
 .lumino-panel-minbtn:hover {
-  background: var(--info, var(--primary));
-  color: var(--surface);
-  border-color: var(--info, var(--primary));
+  background: var(--overlay-medium);
+  color: var(--text);
+  border-color: var(--lm-panel-border);
+}
+
+.lumino-panel-minbtn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.lumino-panel-minbtn svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 /* ── Resize handles: always visible, high-contrast ── */
