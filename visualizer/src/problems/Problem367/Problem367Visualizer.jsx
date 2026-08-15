@@ -271,7 +271,7 @@ function SearchVisualizationPanel({ step, numInput, setNumInput, applyExample, h
                             y1="25"
                             x2="100%"
                             y2="25"
-                            stroke="#313244"
+                            stroke="var(--code-line)"
                             strokeWidth="3"
                         />
 

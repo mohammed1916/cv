@@ -11,7 +11,7 @@
     flex-shrink: 0;
     padding: 24px;
     background: linear-gradient(135deg, var(--code-bg) 0%, #181825 100%);
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 12px;
 }
 
@@ -51,7 +51,7 @@
 
 .hr2-summary-card {
     background: var(--code-surface);
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 8px;
     padding: 12px;
     display: flex;
@@ -113,7 +113,7 @@
 .hr2-output {
     padding: 8px 12px;
     background: var(--code-surface);
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 6px;
     font-size: 12px;
     color: #89b4fa;
@@ -129,7 +129,7 @@
 
 .hr2-metric-card {
     background: var(--code-surface);
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 6px;
     padding: 10px;
     display: flex;
@@ -159,7 +159,7 @@
 .hr2-message-box {
     padding: 12px;
     background: var(--code-surface);
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 6px;
 }
 
@@ -187,7 +187,7 @@
 
 .hr2-panel {
     background: var(--code-bg);
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 10px;
     overflow: hidden;
     flex: 1;
@@ -228,7 +228,7 @@
 }
 
 .hr2-chip {
-    background: #313244;
+    background: var(--code-line);
     color: var(--code-text);
     border: none;
     border-radius: 6px;
@@ -288,7 +288,7 @@
 .hr2-cell {
     width: 42px;
     height: 42px;
-    background: #313244;
+    background: var(--code-line);
     border: 2px solid var(--code-line);
     border-radius: 8px;
     display: flex;
@@ -344,7 +344,7 @@
 .hr2-result {
     text-align: center;
     padding: 8px;
-    background: #313244;
+    background: var(--code-line);
     border-radius: 8px;
     font-size: 14px;
     color: #999cad;
@@ -360,7 +360,7 @@
 .hr2-status {
     padding: 8px 12px;
     background: var(--code-bg);
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 8px;
     font-size: 13px;
     color: var(--code-dim);

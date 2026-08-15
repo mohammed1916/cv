@@ -22,7 +22,7 @@
   --p368-overlay0: var(--code-dim);
   --p368-surface2: #585b70;
   --p368-surface1: var(--code-line);
-  --p368-surface0: #313244;
+  --p368-surface0: var(--code-line);
   --p368-base: var(--code-bg);
   --p368-mantle: #181825;
   --p368-crust: var(--code-surface);

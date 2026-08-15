@@ -268,7 +268,7 @@ function VisualizationPanel({ EXAMPLES, applyExample, selected, handleReset, ste
                   height={containerHeight}
                   className="rde-envelope-canvas"
                   style={{
-                    border: '1px solid #313244',
+                    border: '1px solid var(--code-line)',
                     borderRadius: '8px',
                     backgroundColor: 'var(--code-bg)',
                   }}

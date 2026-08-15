@@ -214,7 +214,7 @@ function MaximalRectangleVisualizer() {
     }
     return matrix[r][c] === '1' || matrix[r][c] === 1
       ? 'var(--code-line)'
-      : '#313244'
+      : 'var(--code-line)'
   }
 
   return (

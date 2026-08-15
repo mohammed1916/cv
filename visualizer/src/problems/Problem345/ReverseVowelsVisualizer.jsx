@@ -194,7 +194,7 @@ function VisualizationPanel({ step }) {
           const isSwapped = swapped.has(idx)
           const inPair = pairSet.has(idx)
 
-          let bg = '#313244'
+          let bg = 'var(--code-line)'
           let color = 'var(--code-text)'
           if (isSwapped) {
             bg = '#a6e3a1'
@@ -258,7 +258,7 @@ function VisualizationPanel({ step }) {
           <span style={{ width: 14, height: 14, borderRadius: 3, background: '#89b4fa', display: 'inline-block' }} /> Vowel
         </span>
         <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-          <span style={{ width: 14, height: 14, borderRadius: 3, background: '#313244', display: 'inline-block' }} /> Consonant
+          <span style={{ width: 14, height: 14, borderRadius: 3, background: 'var(--code-line)', display: 'inline-block' }} /> Consonant
         </span>
         <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
           <span style={{ width: 14, height: 14, borderRadius: 3, background: '#a6e3a1', display: 'inline-block' }} /> Swapped

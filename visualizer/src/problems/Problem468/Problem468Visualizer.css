@@ -32,7 +32,7 @@
 
 .viz-ip-display {
   padding: 12px;
-  background-color: #313244;
+  background-color: var(--code-line);
   border-radius: 4px;
   font-family: 'Monaco', 'Menlo', monospace;
   font-size: 14px;

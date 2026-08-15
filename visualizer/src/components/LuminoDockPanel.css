@@ -30,11 +30,20 @@
 
 /* Status is deliberately dense: the message is visible without taking space
    away from the code trace or the animation. */
-.lumino-panel-widget:has([data-panel-id='status']) [data-panel-id='status'] {
-  overflow: hidden !important;
+.lumino-inline-status {
+  flex: 0 0 auto;
+  overflow: visible;
+  border-bottom: 1px solid var(--lm-panel-border);
+  background: var(--surface2);
 }
 
-.lumino-panel-widget:has([data-panel-id='status']) [data-panel-id='status'] > * {
+.lumino-code-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.lumino-code-content > * {
+  flex: 1 1 auto;
   min-height: 0;
 }
 

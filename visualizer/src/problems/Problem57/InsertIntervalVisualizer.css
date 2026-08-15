@@ -22,7 +22,7 @@
 }
 
 .ii-chip {
-    background: #313244;
+    background: var(--code-line);
     color: var(--code-text);
     border: 2px solid var(--code-line);
     border-radius: 6px;

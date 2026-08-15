@@ -24,7 +24,7 @@
 }
 
 .ctpi-chip {
-    background: #313244;
+    background: var(--code-line);
     color: var(--code-text);
     border: none;
     border-radius: 6px;
@@ -79,7 +79,7 @@
 
 .ctpi-arr-panel {
     background: var(--code-bg);
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 8px;
     padding: 10px 14px;
     width: 100%;
@@ -109,7 +109,7 @@
     font-size: 14px;
     font-weight: 700;
     border-radius: 6px;
-    background: #313244;
+    background: var(--code-line);
     color: var(--code-text);
     border: 2px solid var(--code-line);
 }
@@ -181,7 +181,7 @@
 .ctpi-status {
     padding: 8px 12px;
     background: var(--code-bg);
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 8px;
     font-size: 13px;
     color: var(--code-dim);

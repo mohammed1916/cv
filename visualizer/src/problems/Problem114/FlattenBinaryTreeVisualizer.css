@@ -8,9 +8,9 @@
   overflow: hidden;
 }
 .fbt-examples { display: flex; gap: 8px; flex-wrap: wrap; }
-.fbt-chip { background: #313244; color: var(--code-text); border: 2px solid var(--code-line); border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer; }
+.fbt-chip { background: var(--code-line); color: var(--code-text); border: 2px solid var(--code-line); border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer; }
 .fbt-chip.active, .fbt-chip:hover { border-color: #89dceb; color: #198093; }
-.fbt-panel { background: var(--code-bg); border: 1px solid #313244; border-radius: 10px; padding: 12px 14px; }
+.fbt-panel { background: var(--code-bg); border: 1px solid var(--code-line); border-radius: 10px; padding: 12px 14px; }
 .fbt-panel-label { font-size: 11px; font-weight: 700; color: var(--code-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
 .fbt-svg { display: block; }
 .fbt-list-row { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; min-height: 40px; }
@@ -19,4 +19,4 @@
 .fbt-list-node.cur { border-color: #a6e3a1; background: #002010; color: #a6e3a1; }
 .fbt-list-arrow { font-size: 18px; color: #1a6df5; }
 .fbt-empty { color: var(--code-line); font-size: 13px; font-style: italic; }
-.fbt-status { padding: 8px 12px; background: var(--code-bg); border: 1px solid #313244; border-radius: 8px; font-size: 13px; color: var(--code-dim); min-height: 36px; }
+.fbt-status { padding: 8px 12px; background: var(--code-bg); border: 1px solid var(--code-line); border-radius: 8px; font-size: 13px; color: var(--code-dim); min-height: 36px; }

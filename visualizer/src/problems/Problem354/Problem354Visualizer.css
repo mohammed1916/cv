@@ -1,14 +1,14 @@
 /* Catppuccin Mocha Theme Colors */
 :root {
   --rde-base: var(--code-bg);
-  --rde-surface0: #313244;
+  --rde-surface0: var(--code-line);
   --rde-surface1: var(--code-line);
   --rde-surface2: #585b70;
   --rde-text: var(--code-text);
   --rde-green: #a6e3a1;
   --rde-pink: #f5c6de;
   --rde-blue: #89b4fa;
-  --rde-border: #313244;
+  --rde-border: var(--code-line);
 }
 
 .rde-viz-panel {

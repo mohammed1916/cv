@@ -7,7 +7,7 @@
 
 .ksm-panel {
     background: var(--code-bg);
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 12px;
     display: flex;
     flex-direction: column;
@@ -18,11 +18,11 @@
 
 .ksm-head {
     padding: 10px 14px;
-    border-bottom: 1px solid #313244;
+    border-bottom: 1px solid var(--code-line);
     font-size: 13px;
     font-weight: 700;
     color: var(--code-text);
-    background: #313244;
+    background: var(--code-line);
     flex-shrink: 0;
 }
 
@@ -60,7 +60,7 @@
 .ksm-input,
 .ksm-textarea {
     padding: 8px 10px;
-    background: #313244;
+    background: var(--code-line);
     border: 1px solid var(--code-line);
     border-radius: 6px;
     color: var(--code-text);
@@ -112,7 +112,7 @@
 
 .ksm-example-btn {
     padding: 6px 10px;
-    background: #313244;
+    background: var(--code-line);
     border: 1px solid var(--code-line);
     border-radius: 6px;
     color: var(--code-text);
@@ -134,7 +134,7 @@
 
 .ksm-status {
     padding: 12px;
-    background: #313244;
+    background: var(--code-line);
     border: 1px solid var(--code-line);
     border-radius: 8px;
     border-left: 3px solid #8b5cf6;
@@ -183,7 +183,7 @@
     height: auto;
     margin: 12px auto 0;
     padding: 12px;
-    background: #313244;
+    background: var(--code-line);
     border-radius: 8px;
     border: 1px solid var(--code-line);
 }
@@ -195,7 +195,7 @@
 /* #89b4fa - blue (info) */
 /* #f5c2e7 - pink (highlight) */
 /* var(--code-bg) - base background */
-/* #313244 - surface0 */
+/* var(--code-line) - surface0 */
 /* var(--code-line) - surface1 */
 /* var(--code-text) - text */
 /* #f87171 - red (error) */

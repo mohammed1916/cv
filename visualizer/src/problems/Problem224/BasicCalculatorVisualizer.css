@@ -1,8 +1,8 @@
 .bc-shell { display: flex; flex-direction: column; gap: 12px; padding: 16px; font-family: inherit; }
 .bc-examples { display: flex; gap: 8px; flex-wrap: wrap; }
-.bc-chip { background: #313244; color: var(--code-text); border: 2px solid var(--code-line); border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer; }
+.bc-chip { background: var(--code-line); color: var(--code-text); border: 2px solid var(--code-line); border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer; }
 .bc-chip.active, .bc-chip:hover { border-color: #cba6f7; color: #964cef; }
-.bc-panel { background: var(--code-bg); border: 1px solid #313244; border-radius: 10px; padding: 12px 14px; }
+.bc-panel { background: var(--code-bg); border: 1px solid var(--code-line); border-radius: 10px; padding: 12px 14px; }
 .bc-panel-label { font-size: 11px; font-weight: 700; color: var(--code-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
 .bc-expr { display: flex; flex-wrap: wrap; gap: 2px; font-family: monospace; font-size: 20px; align-items: center; }
 .bc-char { padding: 2px 4px; border-radius: 4px; color: #6773a1; border: 1px solid transparent; }
@@ -31,4 +31,4 @@
 .bc-state-val.bc-phase.close { color: #964cef; }
 .bc-state-val.bc-phase.done  { color: #2f8628; }
 .bc-result-box { padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 700; background: #0e0020; border: 2px solid #cba6f7; color: #cba6f7; }
-.bc-status { padding: 8px 12px; background: var(--code-bg); border: 1px solid #313244; border-radius: 8px; font-size: 13px; color: var(--code-dim); min-height: 36px; }
+.bc-status { padding: 8px 12px; background: var(--code-bg); border: 1px solid var(--code-line); border-radius: 8px; font-size: 13px; color: var(--code-dim); min-height: 36px; }

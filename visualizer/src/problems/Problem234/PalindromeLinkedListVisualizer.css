@@ -1,8 +1,8 @@
 .pll-shell { display: flex; flex-direction: column; gap: 12px; padding: 16px; font-family: inherit; }
 .pll-examples { display: flex; gap: 8px; flex-wrap: wrap; }
-.pll-chip { background: #313244; color: var(--code-text); border: 2px solid var(--code-line); border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer; }
+.pll-chip { background: var(--code-line); color: var(--code-text); border: 2px solid var(--code-line); border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer; }
 .pll-chip.active, .pll-chip:hover { border-color: #f5c2e7; color: #d423a3; }
-.pll-panel { background: var(--code-bg); border: 1px solid #313244; border-radius: 10px; padding: 12px 14px; }
+.pll-panel { background: var(--code-bg); border: 1px solid var(--code-line); border-radius: 10px; padding: 12px 14px; }
 .pll-panel-label { font-size: 11px; font-weight: 700; color: var(--code-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
 .pll-list { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; min-height: 56px; }
 .pll-node-wrap { display: flex; flex-direction: column; align-items: center; gap: 2px; }
@@ -22,4 +22,4 @@
 .pll-result { padding: 10px 14px; border-radius: 8px; font-size: 15px; font-weight: 700; }
 .pll-result.ok   { background: #001a08; border: 2px solid #a6e3a1; color: #a6e3a1; }
 .pll-result.fail { background: #1a0808; border: 2px solid #f38ba8; color: #f38ba8; }
-.pll-status { padding: 8px 12px; background: var(--code-bg); border: 1px solid #313244; border-radius: 8px; font-size: 13px; color: var(--code-dim); min-height: 36px; }
+.pll-status { padding: 8px 12px; background: var(--code-bg); border: 1px solid var(--code-line); border-radius: 8px; font-size: 13px; color: var(--code-dim); min-height: 36px; }

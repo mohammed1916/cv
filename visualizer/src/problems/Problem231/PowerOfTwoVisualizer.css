@@ -14,7 +14,7 @@
   flex-wrap: wrap;
 }
 .pt-chip {
-  background: #313244;
+  background: var(--code-line);
   color: var(--code-text);
   border: 2px solid var(--code-line);
   border-radius: 6px;
@@ -42,7 +42,7 @@
 /* ── Insight card ──────────────────────────────────────────────────── */
 .pt-insight {
   background: var(--code-bg);
-  border: 1px solid #313244;
+  border: 1px solid var(--code-line);
   border-left: 4px solid #89b4fa;
   border-radius: 8px;
   padding: 10px 14px;
@@ -71,7 +71,7 @@
 /* ── Bit panel ─────────────────────────────────────────────────────── */
 .pt-panel {
   background: var(--code-bg);
-  border: 1px solid #313244;
+  border: 1px solid var(--code-line);
   border-radius: 10px;
   padding: 14px 16px;
   display: flex;
@@ -215,7 +215,7 @@
   align-items: center;
   gap: 6px;
   background: var(--code-bg);
-  border: 1px solid #313244;
+  border: 1px solid var(--code-line);
   border-radius: 8px;
   padding: 10px 8px;
 }
@@ -258,7 +258,7 @@
 .pt-status {
   padding: 8px 12px;
   background: var(--code-bg);
-  border: 1px solid #313244;
+  border: 1px solid var(--code-line);
   border-radius: 8px;
   font-size: 13px;
   color: var(--code-dim);

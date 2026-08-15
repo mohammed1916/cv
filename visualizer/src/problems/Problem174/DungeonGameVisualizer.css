@@ -16,7 +16,7 @@
 }
 
 .dg-chip {
-    background: #313244;
+    background: var(--code-line);
     color: var(--code-text);
     border: 2px solid var(--code-line);
     border-radius: 6px;
@@ -70,7 +70,7 @@
     font-size: 13px;
     font-weight: 700;
     border-radius: 5px;
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
 }
 
 .dungeon-cell {
@@ -98,7 +98,7 @@
 .dp-cell {
     background: #181825;
     color: #7e819c;
-    border: 1px dashed #313244;
+    border: 1px dashed var(--code-line);
 }
 
 .dp-cell.filled {
@@ -125,7 +125,7 @@
     align-items: center;
     gap: 4px;
     background: var(--code-bg);
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 8px;
     padding: 10px 0;
 }
@@ -166,7 +166,7 @@
 .dg-status {
     padding: 8px 12px;
     background: var(--code-bg);
-    border-top: 1px solid #313244;
+    border-top: 1px solid var(--code-line);
     border-radius: 0;
     font-size: 13px;
     color: var(--code-dim);

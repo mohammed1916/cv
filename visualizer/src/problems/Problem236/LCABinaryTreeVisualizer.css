@@ -22,7 +22,7 @@
 }
 
 .lcabt-chip {
-    background: #313244;
+    background: var(--code-line);
     color: var(--code-text);
     border: none;
     border-radius: 6px;
@@ -70,7 +70,7 @@
 .lcabt-canvas {
     position: relative;
     overflow: hidden;
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 8px;
     background: var(--code-surface);
     flex-shrink: 0;
@@ -80,7 +80,7 @@
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: #313244;
+    background: var(--code-line);
     border: 2px solid var(--code-line);
     display: flex;
     align-items: center;
@@ -181,7 +181,7 @@
     height: 14px;
     border-radius: 50%;
     border: 2px solid var(--code-line);
-    background: #313244;
+    background: var(--code-line);
 }
 
 .lcabt-dot.active {
@@ -202,7 +202,7 @@
 .lcabt-result {
     text-align: center;
     padding: 8px 12px;
-    background: #313244;
+    background: var(--code-line);
     border-radius: 8px;
     font-size: 14px;
     color: #999cad;

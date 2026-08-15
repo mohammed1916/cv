@@ -62,7 +62,7 @@
 }
 
 .lr-chip {
-    background: #313244;
+    background: var(--code-line);
     color: var(--code-text);
     border: none;
     border-radius: 6px;
@@ -106,7 +106,7 @@
 
 .lr-panel {
     background: var(--code-bg);
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 10px;
     padding: 12px 14px;
 }
@@ -137,7 +137,7 @@
     font-size: 18px;
     font-weight: 700;
     border-radius: 7px;
-    background: #313244;
+    background: var(--code-line);
     color: #999cad;
     border: 2px solid var(--code-line);
 }
@@ -193,7 +193,7 @@
     align-items: center;
     gap: 2px;
     width: 44px;
-    background: #313244;
+    background: var(--code-line);
     border: 2px solid var(--code-line);
     border-radius: 8px;
     padding: 6px 0;
@@ -227,7 +227,7 @@
 .lr-status {
     padding: 8px 12px;
     background: var(--code-bg);
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 8px;
     font-size: 13px;
     color: var(--code-dim);

@@ -9,7 +9,7 @@
     position: relative;
     background: linear-gradient(135deg, #1a1b26 0%, #16172b 100%);
     border-radius: 8px;
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     overflow: hidden;
 }
 
@@ -81,7 +81,7 @@
     background: var(--code-bg);
     padding: 8px 10px;
     border-radius: 6px;
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     word-break: break-word;
 }
 
@@ -154,7 +154,7 @@
 
 .btp-chip {
     padding: 6px 12px;
-    background: #313244;
+    background: var(--code-line);
     border: 1px solid var(--code-line);
     border-radius: 20px;
     color: var(--code-text);
@@ -173,7 +173,7 @@
     width: 100%;
     padding: 8px 10px;
     background: var(--code-bg);
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 6px;
     color: var(--code-text);
     font-family: 'Monaco', 'Menlo', monospace;

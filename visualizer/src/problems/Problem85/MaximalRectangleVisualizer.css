@@ -1,13 +1,13 @@
 /* Catppuccin Mocha Theme Colors */
 :root {
   --mr-base: var(--code-bg);
-  --mr-surface0: #313244;
+  --mr-surface0: var(--code-line);
   --mr-surface1: var(--code-line);
   --mr-surface2: #585b70;
   --mr-text: var(--code-text);
   --mr-green: #a6e3a1;
   --mr-pink: #f5c6de;
-  --mr-border: #313244;
+  --mr-border: var(--code-line);
 }
 
 .mr-shell {

@@ -7,7 +7,7 @@
 
 .asw-panel {
     background: var(--code-bg);
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 12px;
     display: flex;
     flex-direction: column;
@@ -18,11 +18,11 @@
 
 .asw-head {
     padding: 10px 14px;
-    border-bottom: 1px solid #313244;
+    border-bottom: 1px solid var(--code-line);
     font-size: 13px;
     font-weight: 700;
     color: var(--code-text);
-    background: #313244;
+    background: var(--code-line);
     flex-shrink: 0;
 }
 
@@ -61,7 +61,7 @@
 .asw-input {
     flex: 1;
     padding: 6px 10px;
-    background: #313244;
+    background: var(--code-line);
     border: 1px solid var(--code-line);
     border-radius: 6px;
     color: var(--code-text);
@@ -126,7 +126,7 @@
     align-items: center;
     gap: 6px;
     padding: 6px 10px;
-    background: #313244;
+    background: var(--code-line);
     border: 1px solid var(--code-line);
     border-radius: 6px;
     font-size: 12px;
@@ -152,7 +152,7 @@
 
 .asw-divider {
     height: 1px;
-    background: #313244;
+    background: var(--code-line);
     margin: 4px 0;
 }
 
@@ -173,7 +173,7 @@
 
 .asw-example-btn {
     padding: 4px 8px;
-    background: #313244;
+    background: var(--code-line);
     border: 1px solid var(--code-line);
     border-radius: 4px;
     color: var(--code-text);
@@ -191,7 +191,7 @@
 
 .asw-status {
     padding: 10px 12px;
-    background: #313244;
+    background: var(--code-line);
     border: 1px solid var(--code-line);
     border-radius: 6px;
     min-height: 40px;
@@ -209,7 +209,7 @@
 .asw-trie-viz {
     width: 100%;
     height: 350px;
-    background: #313244;
+    background: var(--code-line);
     border-radius: 8px;
     border: 1px solid var(--code-line);
     margin-top: 8px;
@@ -221,7 +221,7 @@
 /* #a6e3a1 - green (primary) */
 /* #f5c2e7 - pink (secondary) */
 /* var(--code-bg) - base background */
-/* #313244 - surface0 */
+/* var(--code-line) - surface0 */
 /* var(--code-line) - surface1 */
 /* var(--code-text) - text */
 /* #f87171 - red (danger) */

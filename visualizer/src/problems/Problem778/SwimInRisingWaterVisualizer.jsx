@@ -228,13 +228,13 @@ function SwimInRisingWaterVisualizer() {
     // Color based on elevation relative to mid
     if (mid !== null && mid !== undefined) {
       if (val <= mid) {
-        return isReachable ? '#94e2d5' : '#313244' // Cyan if reachable, dark if not
+        return isReachable ? '#94e2d5' : 'var(--code-line)' // Cyan if reachable, dark if not
       } else {
         return '#f5a97f' // Orange for cells above threshold
       }
     }
 
-    return '#313244'
+    return 'var(--code-line)'
   }
 
   return (

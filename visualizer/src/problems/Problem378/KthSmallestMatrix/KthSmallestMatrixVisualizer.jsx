@@ -268,7 +268,7 @@ function KthSmallestMatrixVisualizer() {
                                                     ? '#8b5cf6'
                                                     : isHighlighted
                                                         ? '#f5c2e7'
-                                                        : '#313244'
+                                                        : 'var(--code-line)'
                                         }
                                         stroke={
                                             isResult

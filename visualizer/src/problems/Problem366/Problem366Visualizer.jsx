@@ -278,7 +278,7 @@ function TreeVisualizationPanel({ step, positions, edges, allNodes, EXAMPLES, ar
                                 y1={from.y}
                                 x2={to.x}
                                 y2={to.y}
-                                stroke={isHighlighted ? '#f38ba8' : '#313244'}
+                                stroke={isHighlighted ? '#f38ba8' : 'var(--code-line)'}
                                 strokeWidth={isHighlighted ? 3 : 2}
                                 strokeDasharray={step?.leafIds?.has(fromId) && step?.leafIds?.has(toId) ? '4,4' : 'none'}
                             />

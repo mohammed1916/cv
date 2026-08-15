@@ -289,7 +289,7 @@ function VisualizationPanel({ step }) {
           const isSecond = id === secondId
           const isSwapNode = isFirst || isSecond
 
-          let bg = '#313244'
+          let bg = 'var(--code-line)'
           let border = 'var(--code-line)'
           let color = 'var(--code-text)'
           if (isSwapNode) { bg = swapped ? '#166534' : '#7f1d1d'; border = swapped ? '#22c55e' : '#f38ba8'; color = 'var(--surface)' }

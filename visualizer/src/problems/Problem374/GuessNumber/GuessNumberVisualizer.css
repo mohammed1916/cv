@@ -10,7 +10,7 @@
 /* ── Main Panel ── */
 .gn-panel {
     background: #252535;
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 12px;
     display: flex;
     flex-direction: column;
@@ -21,7 +21,7 @@
 
 .gn-head {
     padding: 10px 14px;
-    border-bottom: 1px solid #313244;
+    border-bottom: 1px solid var(--code-line);
     font-size: 13px;
     font-weight: 700;
     color: var(--code-text);
@@ -61,7 +61,7 @@
 }
 
 .gn-chip {
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     color: var(--code-dim);
     background: rgba(30, 30, 46, 0.8);
     border-radius: 999px;
@@ -182,7 +182,7 @@
     left: 0;
     right: 0;
     height: 8px;
-    background: #313244;
+    background: var(--code-line);
     border-radius: 4px;
     z-index: 1;
 }
@@ -371,7 +371,7 @@
 .gn-status {
     padding: 8px 14px;
     background: var(--code-bg);
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 8px;
     font-size: 13px;
     color: var(--code-dim);

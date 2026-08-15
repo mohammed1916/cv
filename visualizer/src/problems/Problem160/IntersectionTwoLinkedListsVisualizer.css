@@ -9,11 +9,11 @@
   font-family: inherit;
 }
 .itll-examples { display: flex; gap: 8px; flex-wrap: wrap; }
-.itll-chip { background: #313244; color: var(--code-text); border: 2px solid var(--code-line); border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer; }
+.itll-chip { background: var(--code-line); color: var(--code-text); border: 2px solid var(--code-line); border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer; }
 .itll-chip.active, .itll-chip:hover { border-color: #89b4fa; color: #1a6df5; }
 .itll-panel {
   background: var(--code-bg);
-  border: 1px solid #313244;
+  border: 1px solid var(--code-line);
   border-radius: 10px;
   padding: 12px 14px;
   display: flex;

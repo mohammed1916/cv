@@ -14,7 +14,7 @@
 
 .mcs-panel {
     background: var(--code-bg);
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 10px;
     overflow: hidden;
     flex: 1;
@@ -50,7 +50,7 @@
 }
 
 .mcs-chip {
-    background: #313244;
+    background: var(--code-line);
     color: var(--code-text);
     border: none;
     border-radius: 6px;
@@ -66,7 +66,7 @@
 .mcs-array-container {
     position: relative;
     overflow: auto;
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 8px;
     background: var(--code-surface);
     padding: 12px;
@@ -90,7 +90,7 @@
     gap: 4px;
     border-radius: 6px;
     border: 2px solid var(--code-line);
-    background: #313244;
+    background: var(--code-line);
     color: var(--code-text);
 }
 
@@ -106,7 +106,7 @@
 
 .mcs-cell.uncomputed {
     border-color: var(--code-line);
-    background: #313244;
+    background: var(--code-line);
 }
 
 .mcs-cost-cell {
@@ -173,12 +173,12 @@
     height: 14px;
     border-radius: 50%;
     border: 2px solid var(--code-line);
-    background: #313244;
+    background: var(--code-line);
 }
 
 .mcs-dot.uncomputed {
     border-color: var(--code-line);
-    background: #313244;
+    background: var(--code-line);
 }
 
 .mcs-dot.computed {
@@ -189,7 +189,7 @@
 .mcs-status {
     padding: 8px 12px;
     background: var(--code-bg);
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 8px;
     font-size: 13px;
     color: var(--code-dim);

@@ -22,7 +22,7 @@
 }
 
 .cg-hero {
-    background: linear-gradient(135deg, var(--code-bg) 0%, #313244 100%);
+    background: linear-gradient(135deg, var(--code-bg) 0%, var(--code-line) 100%);
     border: 1px solid var(--code-line);
     border-radius: 12px;
     padding: 24px;
@@ -61,7 +61,7 @@
 }
 
 .cg-chip {
-    background: #313244;
+    background: var(--code-line);
     color: var(--code-text);
     border: 2px solid var(--code-line);
     border-radius: 6px;
@@ -91,7 +91,7 @@
 
 .cg-panel {
     background: var(--code-bg);
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 10px;
     padding: 12px 14px;
 }
@@ -135,7 +135,7 @@
 
 .cg-vis-badge.pending {
     background: var(--code-bg);
-    border-color: #313244;
+    border-color: var(--code-line);
     color: #8386a0;
 }
 
@@ -148,7 +148,7 @@
 .cg-status {
     padding: 8px 12px;
     background: var(--code-bg);
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 8px;
     font-size: 13px;
     color: var(--code-dim);

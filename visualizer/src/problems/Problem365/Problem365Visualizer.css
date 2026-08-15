@@ -22,7 +22,7 @@
   --wjp-overlay0: var(--code-dim);
   --wjp-surface2: #585b70;
   --wjp-surface1: var(--code-line);
-  --wjp-surface0: #313244;
+  --wjp-surface0: var(--code-line);
   --wjp-base: var(--code-bg);
   --wjp-mantle: #181825;
   --wjp-crust: var(--code-surface);

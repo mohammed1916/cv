@@ -14,7 +14,7 @@
     gap: 8px;
     padding: 16px 16px 0 16px;
     background: #0f0f1e;
-    border-bottom: 1px solid #313244;
+    border-bottom: 1px solid var(--code-line);
 }
 
 .btlo-header h2 {
@@ -58,7 +58,7 @@
 }
 
 .btlo-chip {
-    background: #313244;
+    background: var(--code-line);
     color: var(--code-text);
     border: none;
     border-radius: 6px;
@@ -85,7 +85,7 @@
 .btlo-canvas {
     position: relative;
     overflow: hidden;
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 8px;
     background: var(--code-surface);
     flex-shrink: 0;
@@ -96,7 +96,7 @@
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: #313244;
+    background: var(--code-line);
     border: 2px solid var(--code-line);
     display: flex;
     align-items: center;
@@ -167,7 +167,7 @@
 .btlo-result {
     text-align: center;
     padding: 8px 12px;
-    background: #313244;
+    background: var(--code-line);
     border-radius: 8px;
     font-size: 14px;
     color: #999cad;
@@ -194,7 +194,7 @@
     gap: 6px;
     padding: 8px 14px;
     background: #0f0f1e;
-    border-top: 1px solid #313244;
+    border-top: 1px solid var(--code-line);
     font-size: 12px;
     color: var(--code-dim);
     height: 100%;

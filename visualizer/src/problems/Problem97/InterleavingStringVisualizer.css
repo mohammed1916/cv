@@ -15,7 +15,7 @@
 }
 
 .is-chip {
-    background: #313244;
+    background: var(--code-line);
     color: var(--code-text);
     border: 2px solid var(--code-line);
     border-radius: 6px;
@@ -114,7 +114,7 @@
     text-align: center;
     min-width: 36px;
     height: 36px;
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 4px;
 }
 
@@ -156,7 +156,7 @@
 .is-status {
     padding: 8px 12px;
     background: var(--code-bg);
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 8px;
     font-size: 13px;
     color: var(--code-dim);

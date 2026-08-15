@@ -22,7 +22,7 @@
   --nlws-overlay0: var(--code-dim);
   --nlws-surface2: #585b70;
   --nlws-surface1: var(--code-line);
-  --nlws-surface0: #313244;
+  --nlws-surface0: var(--code-line);
   --nlws-base: var(--code-bg);
   --nlws-mantle: #181825;
   --nlws-crust: var(--code-surface);

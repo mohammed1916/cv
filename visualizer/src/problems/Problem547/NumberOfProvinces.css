@@ -119,7 +119,7 @@
 }
 
 .nop-section {
-  background: #313244;
+  background: var(--code-line);
   padding: 1.5rem;
   border-radius: 12px;
   border-left: 4px solid #8b5cf6;
@@ -157,7 +157,7 @@
 }
 
 .nop-matrix-cell.nop-connected {
-  background: #313244;
+  background: var(--code-line);
   color: #a6e3a1;
 }
 
@@ -226,7 +226,7 @@
 }
 
 .nop-stat {
-  background: #313244;
+  background: var(--code-line);
   padding: 1.5rem 2rem;
   border-radius: 10px;
   border-left: 4px solid #8b5cf6;
@@ -250,7 +250,7 @@
 }
 
 .nop-operations {
-  background: #313244;
+  background: var(--code-line);
   padding: 1.5rem;
   border-radius: 12px;
   margin-top: 2rem;

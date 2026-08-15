@@ -22,7 +22,7 @@
   --ctp-overlay0: var(--code-dim);
   --ctp-surface2: #585b70;
   --ctp-surface1: var(--code-line);
-  --ctp-surface0: #313244;
+  --ctp-surface0: var(--code-line);
   --ctp-base: var(--code-bg);
   --ctp-mantle: #181825;
   --ctp-crust: var(--code-surface);
@@ -366,7 +366,7 @@
 
 .ps-hero {
   padding: 40px 20px;
-  background: linear-gradient(135deg, var(--code-bg) 0%, #313244 100%);
+  background: linear-gradient(135deg, var(--code-bg) 0%, var(--code-line) 100%);
   border-bottom: 1px solid var(--code-line);
   margin-bottom: 20px;
 }
@@ -419,7 +419,7 @@
   padding: 6px 12px;
   border-radius: 4px;
   border: 1px solid var(--code-line);
-  background: #313244;
+  background: var(--code-line);
   color: var(--code-text);
   cursor: pointer;
   font-size: 12px;
@@ -447,7 +447,7 @@
 
 .ps-input {
   padding: 8px 12px;
-  background: #313244;
+  background: var(--code-line);
   border: 1px solid var(--code-line);
   border-radius: 4px;
   color: var(--code-text);
@@ -478,7 +478,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 8px;
-  background: #313244;
+  background: var(--code-line);
   border-radius: 3px;
   font-size: 12px;
 }
@@ -523,7 +523,7 @@
   flex-wrap: wrap;
   align-items: center;
   padding: 12px;
-  background: #313244;
+  background: var(--code-line);
   border-radius: 6px;
 }
 
@@ -554,7 +554,7 @@
 /* DP Array */
 .ps-dp-wrap {
   padding: 16px;
-  background: #313244;
+  background: var(--code-line);
   border-radius: 6px;
   overflow-x: auto;
 }

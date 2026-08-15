@@ -268,7 +268,7 @@ function Problem417Visualizer() {
     if (isBoth) return '#6366f1' // Catppuccin Lavender (both)
     if (isPacific) return '#89b4fa' // Catppuccin Blue (Pacific)
     if (isAtlantic) return '#f9e2af' // Catppuccin Yellow (Atlantic)
-    return '#313244' // Catppuccin Surface 2
+    return 'var(--code-line)' // Catppuccin Surface 2
   }
 
   return (

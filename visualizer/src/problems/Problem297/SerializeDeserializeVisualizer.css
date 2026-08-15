@@ -1,8 +1,8 @@
 .sd-shell { display: flex; flex-direction: column; gap: 12px; padding: 16px; font-family: inherit; }
 .sd-examples { display: flex; gap: 8px; flex-wrap: wrap; }
-.sd-chip { background: #313244; color: var(--code-text); border: 2px solid var(--code-line); border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer; }
+.sd-chip { background: var(--code-line); color: var(--code-text); border: 2px solid var(--code-line); border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer; }
 .sd-chip.active, .sd-chip:hover { border-color: #89dceb; color: #198093; }
-.sd-panel { background: var(--code-bg); border: 1px solid #313244; border-radius: 10px; padding: 12px 14px; }
+.sd-panel { background: var(--code-bg); border: 1px solid var(--code-line); border-radius: 10px; padding: 12px 14px; }
 .sd-panel-label { font-size: 11px; font-weight: 700; color: var(--code-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
 .sd-tree { position: relative; width: 100%; height: 160px; }
 .sd-edges { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
@@ -19,7 +19,7 @@
 .sd-ptr-cell { width: 33px; min-width: 33px; text-align: center; }
 .sd-ptr-marker { color: #996d0c; font-size: 14px; font-weight: 900; }
 .sd-trackers { display: flex; gap: 10px; }
-.sd-tracker { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; background: var(--code-bg); border: 1px solid #313244; border-radius: 8px; padding: 10px 0; }
+.sd-tracker { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; background: var(--code-bg); border: 1px solid var(--code-line); border-radius: 8px; padding: 10px 0; }
 .sd-tracker-label { font-size: 11px; font-weight: 700; color: var(--code-dim); text-transform: uppercase; }
 .sd-tracker-val { font-size: 20px; font-weight: 700; color: #4f6ed8; }
 .sd-tracker-val.sd-phase { font-size: 13px; }
@@ -27,4 +27,4 @@
 .sd-tracker-val.sd-phase.deserialize { color: #964cef; }
 .sd-tracker-val.sd-phase.done { color: #2f8628; }
 .sd-result { padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 700; background: #001a20; border: 2px solid #89dceb; color: #89dceb; }
-.sd-status { padding: 8px 12px; background: var(--code-bg); border: 1px solid #313244; border-radius: 8px; font-size: 13px; color: var(--code-dim); min-height: 36px; }
+.sd-status { padding: 8px 12px; background: var(--code-bg); border: 1px solid var(--code-line); border-radius: 8px; font-size: 13px; color: var(--code-dim); min-height: 36px; }

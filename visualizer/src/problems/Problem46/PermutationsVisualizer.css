@@ -24,7 +24,7 @@
 
 .perm-panel {
     background: var(--code-bg);
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 10px;
     overflow: hidden;
     flex: 1;
@@ -75,7 +75,7 @@
 }
 
 .perm-chip {
-    background: #313244;
+    background: var(--code-line);
     color: var(--code-text);
     border: none;
     border-radius: 6px;
@@ -139,7 +139,7 @@
     align-items: center;
     gap: 3px;
     width: 46px;
-    background: #313244;
+    background: var(--code-line);
     border: 2px solid var(--code-line);
     border-radius: 8px;
     padding: 6px 0;
@@ -179,7 +179,7 @@
 }
 
 .perm-res-item {
-    background: #313244;
+    background: var(--code-line);
     border: 1px solid var(--code-line);
     border-radius: 6px;
     padding: 5px 10px;
@@ -197,7 +197,7 @@
 .perm-status {
     padding: 8px 12px;
     background: var(--code-bg);
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 8px;
     font-size: 13px;
     color: var(--code-dim);

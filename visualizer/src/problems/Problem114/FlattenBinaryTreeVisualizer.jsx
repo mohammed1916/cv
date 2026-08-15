@@ -235,7 +235,7 @@ export default function FlattenBinaryTreeVisualizer() {
             return (
               <g key={`node-${i}`}>
                 <circle cx={p.x} cy={p.y} r={NODE_R}
-                  fill={isCur ? "#0d2a1a" : isPre ? "#2a1200" : "#313244"}
+                  fill={isCur ? "#0d2a1a" : isPre ? "#2a1200" : "var(--code-line)"}
                   stroke={isCur ? "#a6e3a1" : isPre ? "#fab387" : "var(--code-line)"}
                   strokeWidth={2} />
                 <text x={p.x} y={p.y} dominantBaseline="middle" textAnchor="middle"

@@ -87,7 +87,7 @@ export default function TreeCanvas3D({
                   />
                   <stop
                     offset="100%"
-                    stopColor={isVisited ? "#a6e3a1" : "#313244"}
+                    stopColor={isVisited ? "#a6e3a1" : "var(--code-line)"}
                     stopOpacity="0.6"
                   />
                 </linearGradient>
@@ -126,7 +126,7 @@ export default function TreeCanvas3D({
           const isQueued = queueIds.has(node.id);
           const zOffset = depthMap.get(node.id) ?? 0;
 
-          let bgColor = "#313244";
+          let bgColor = "var(--code-line)";
           let borderColor = "var(--code-line)";
           let textColor = "var(--code-text)";
           let glowColor = "rgba(0, 0, 0, 0)";

@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import "./CodeTracePanel.css";
 import ResizerHandle from "./ResizerHandle";
+import { resolvePattern } from "./patternCatalog";
 
 import MonacoEditor from "@monaco-editor/react";
 
@@ -132,6 +133,7 @@ export default function CodeTracePanel({
     () => new Set(highlightedLines),
     [highlightedLines],
   );
+  const activePattern = useMemo(() => resolvePattern(step?.phase), [step?.phase]);
   const commentsText = `# Write your notes here\n# Toggle comments off to edit cleanly.`;
   const fileHandleRef = useRef(null);
   const monacoRef = useRef(null);
@@ -573,6 +575,11 @@ export default function CodeTracePanel({
                 idleLabel
               ))}
           </div>
+          {activePattern && (
+            <span className="ctp-pattern-chip" style={{ "--ctp-pattern-color": activePattern.color }}>
+              <span aria-hidden="true">{activePattern.icon}</span> {activePattern.label}
+            </span>
+          )}
         </div>
         <button
           type="button"

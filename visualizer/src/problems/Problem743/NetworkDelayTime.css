@@ -30,7 +30,7 @@
   --ndt-overlay0: var(--code-dim);
   --ndt-surface2: #585b70;
   --ndt-surface1: var(--code-line);
-  --ndt-surface0: #313244;
+  --ndt-surface0: var(--code-line);
   --ndt-base: var(--code-bg);
   --ndt-mantle: #181825;
   --ndt-crust: var(--code-surface);

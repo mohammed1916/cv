@@ -14,7 +14,7 @@
 
 .rsv-panel {
     background: var(--code-bg);
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 10px;
     overflow: hidden;
     flex: 1;
@@ -63,7 +63,7 @@
 }
 
 .rsv-chip {
-    background: #313244;
+    background: var(--code-line);
     color: var(--code-text);
     border: none;
     border-radius: 6px;
@@ -90,7 +90,7 @@
 .rsv-canvas {
     position: relative;
     overflow: hidden;
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 8px;
     background: var(--code-surface);
     flex-shrink: 0;
@@ -101,7 +101,7 @@
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: #313244;
+    background: var(--code-line);
     border: 2px solid var(--code-line);
     display: flex;
     align-items: center;
@@ -136,7 +136,7 @@
 }
 
 .rsv-q-cell {
-    background: #313244;
+    background: var(--code-line);
     color: #89dceb;
     border: 1px solid #89dceb44;
     border-radius: 6px;
@@ -196,7 +196,7 @@
     height: 14px;
     border-radius: 50%;
     border: 2px solid var(--code-line);
-    background: #313244;
+    background: var(--code-line);
 }
 
 .rsv-dot.active {
@@ -216,7 +216,7 @@
 .rsv-status {
     padding: 8px 12px;
     background: var(--code-bg);
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 8px;
     font-size: 13px;
     color: var(--code-dim);

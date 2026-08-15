@@ -1,14 +1,14 @@
 /* Catppuccin Mocha Theme Colors */
 :root {
   --srw-base: var(--code-bg);
-  --srw-surface0: #313244;
+  --srw-surface0: var(--code-line);
   --srw-surface1: var(--code-line);
   --srw-surface2: #585b70;
   --srw-text: var(--code-text);
   --srw-cyan: #94e2d5;
   --srw-orange: #f5a97f;
   --srw-red: #f38ba8;
-  --srw-border: #313244;
+  --srw-border: var(--code-line);
 }
 
 .srw-shell {

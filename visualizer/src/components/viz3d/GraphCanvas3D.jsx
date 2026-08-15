@@ -31,7 +31,7 @@ export default function GraphCanvas3D({
     const isVisited = visitedSet.has(nodeId);
 
     if (isClone) {
-      if (!isVisited) return { bg: "var(--code-bg)", border: "#313244", text: "var(--code-line)" };
+      if (!isVisited) return { bg: "var(--code-bg)", border: "var(--code-line)", text: "var(--code-line)" };
       if (isActive)
         return {
           bg: "#0d2a1a",
@@ -58,7 +58,7 @@ export default function GraphCanvas3D({
           border: "#cba6f7",
           text: "#cba6f7",
         };
-      return { bg: "#313244", border: "var(--code-line)", text: "var(--code-dim)" };
+      return { bg: "var(--code-line)", border: "var(--code-line)", text: "var(--code-dim)" };
     }
   };
 
@@ -115,7 +115,7 @@ export default function GraphCanvas3D({
                   />
                   <stop
                     offset="100%"
-                    stopColor={isActive ? "#a6e3a1" : "#313244"}
+                    stopColor={isActive ? "#a6e3a1" : "var(--code-line)"}
                     stopOpacity={isActive ? "0.7" : "0.3"}
                   />
                 </linearGradient>

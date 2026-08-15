@@ -22,7 +22,7 @@
   --ed-overlay0: var(--code-dim);
   --ed-surface2: #585b70;
   --ed-surface1: var(--code-line);
-  --ed-surface0: #313244;
+  --ed-surface0: var(--code-line);
   --ed-base: var(--code-bg);
   --ed-mantle: #181825;
   --ed-crust: var(--code-surface);

@@ -17,7 +17,7 @@
 }
 
 .rkg-chip {
-    background: #313244;
+    background: var(--code-line);
     color: var(--code-text);
     border: 2px solid var(--code-line);
     border-radius: 6px;
@@ -117,7 +117,7 @@
     align-items: center;
     gap: 4px;
     background: var(--code-bg);
-    border: 1px solid #313244;
+    border: 1px solid var(--code-line);
     border-radius: 8px;
     padding: 10px 4px;
 }
@@ -190,7 +190,7 @@
     padding: 8px 12px;
     background: var(--code-bg);
     border: none;
-    border-top: 1px solid #313244;
+    border-top: 1px solid var(--code-line);
     border-radius: 0;
     font-size: 13px;
     color: var(--code-dim);

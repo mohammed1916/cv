@@ -52,6 +52,20 @@
   background: var(--overlay-weak);
 }
 
+.ctp-pattern-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 7px;
+  padding: 3px 7px;
+  border: 1px solid var(--ctp-pattern-color);
+  border-radius: 999px;
+  background: var(--overlay-weak);
+  color: var(--text);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
 .ctp-copy-btn,
 .ctp-editor-btn {
   display: inline-flex;
@@ -408,4 +422,4 @@
   .ctp-editor-select {
     border-color: #fff;
   }
-}   
+}

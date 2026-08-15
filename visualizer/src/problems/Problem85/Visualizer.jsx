@@ -174,7 +174,7 @@ function VisualizationPanel({ EXAMPLES, applyExample, selected, handleReset, ste
     if (step?.currentRow === r) {
       return matrix[r][c] === '1' || matrix[r][c] === 1 ? '#a6e3a1' : '#f5c6de'
     }
-    return matrix[r][c] === '1' || matrix[r][c] === 1 ? 'var(--code-line)' : '#313244'
+    return matrix[r][c] === '1' || matrix[r][c] === 1 ? 'var(--code-line)' : 'var(--code-line)'
   }
 
   return (

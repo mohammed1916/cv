@@ -22,7 +22,7 @@
   --am-overlay0: var(--code-dim);
   --am-surface2: #585b70;
   --am-surface1: var(--code-line);
-  --am-surface0: #313244;
+  --am-surface0: var(--code-line);
   --am-base: var(--code-bg);
   --am-mantle: #181825;
   --am-crust: var(--code-surface);
