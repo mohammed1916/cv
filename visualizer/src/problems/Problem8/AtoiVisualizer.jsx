@@ -382,33 +382,6 @@ export default function AtoiVisualizer() {
           transition={{ duration: 0.14 }}
         />
       </div>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={currentStep?.phase} usedPatterns={ATOI_PATTERNS} />
-      )}
-      <PlaybackControls
-        className="atoi-controls"
-        buttonClassName="atoi-btn"
-        ghostButtonClassName="atoi-btn-ghost"
-        playButtonClassName="atoi-btn-play"
-        onReset={handleReset}
-        onPrev={stepBack}
-        onPlayToggle={togglePlay}
-        onNext={stepForward}
-        resetDisabled={stepIndex < 0}
-        prevDisabled={stepIndex < 0}
-        nextDisabled={isDone}
-        isPlaying={isPlaying}
-        isDone={isDone}
-        speedWrapClassName="atoi-speed-wrap"
-        speedLabelClassName="atoi-speed-label"
-        speed={speed}
-        speedRangeValue={1480 - speed}
-        onSpeedChange={(event) => setSpeed(1480 - Number(event.target.value))}
-        showPatternOverlay={showPatternOverlay}
-        onShowPatternOverlayChange={setShowPatternOverlay}
-        patternOverlayLabel="Show pattern overlay"
-        showPatternOverlayToggle
-      />
     </div>
   )
 
