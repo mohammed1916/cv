@@ -8,7 +8,7 @@ import ResizablePanel from "../ResizablePanel";
 import "./chatbot.css";
 
 const Icon = ({ name }) => {
-  const paths = { close: 'M5 5l6 6m0-6-6 6', clear: 'M4 5h8m-7 0 .7 8h4.6l.7-8M7 5V3h2v2', send: 'M3 3l10 5-10 5 2-5-2-5zm2 5h5', plus: 'M8 3v10M3 8h10', history: 'M3 8a5 5 0 1 0 1.5-3.5M3 3v3h3', select: 'M4 3l7 5-4 1-1 4-2-10z', pin: 'M5 3h6l-1 3 2 2H4l2-2-1-3zM8 8v5' };
+  const paths = { close: 'M5 5l6 6m0-6-6 6', clear: 'M4 5h8m-7 0 .7 8h4.6l.7-8M7 5V3h2v2', send: 'M3 3l10 5-10 5 2-5-2-5zm2 5h5', plus: 'M8 3v10M3 8h10', history: 'M3 8a5 5 0 1 0 1.5-3.5M3 3v3h3', select: 'M4 3l7 5-4 1-1 4-2-10z', pin: 'M5 3h6l-1 3 2 2H4l2-2-1-3zM8 8v5', float: 'M3 3h4M3 3v4M13 3H9m4 0v4M3 13h4m-4 0V9m10 4H9m4 0V9' };
   return <svg className="chat-icon" viewBox="0 0 16 16" aria-hidden="true"><path d={paths[name]} /></svg>;
 };
 
@@ -292,6 +292,7 @@ export default function ChatDrawer() {
 
   // Floating position (persisted)
   const startDrag = (e) => {
+    if (e.target.closest('button, select, input, textarea')) return;
     e.preventDefault();
     draggingRef.current = true;
     const clientX = e.type.startsWith('touch') ? e.touches[0].clientX : e.clientX;
@@ -336,10 +337,17 @@ export default function ChatDrawer() {
           <div className="chat-header-left">
           <span className="chat-header-icon">AI</span>
           <div>
-            <div className="chat-header-title">Algorithm Assistant <span className="chat-shortcut">Alt+C</span></div>
-            <select className="chat-provider-select" value={providerConfig.provider} onChange={(e) => { const next = { ...providerConfig, provider: e.target.value }; setProviderConfig(next); localStorage.setItem('chat.provider.v1', JSON.stringify(next)) }}>
-              <option value="ollama-local">Ollama Local</option><option value="ollama-cloud">Ollama Cloud</option><option value="gemini">Gemini</option>
-            </select>
+            <div className="chat-header-title">Algorithm Assistant <span className="chat-shortcut" title="Open or close chat with Alt+C">Alt+C</span></div>
+            <div className="chat-model-controls" data-chat-ignore>
+              <label>Provider
+                <select value={providerConfig.provider} onChange={(e) => { const provider = e.target.value; const model = provider === 'gemini' ? 'gemini-2.5-flash' : provider === 'ollama-cloud' ? 'gpt-oss:120b' : 'gemma4:e2b'; const next = { provider, model }; setProviderConfig(next); localStorage.setItem('chat.provider.v1', JSON.stringify(next)) }}>
+                  <option value="ollama-local">Ollama Local</option><option value="ollama-cloud">Ollama Cloud</option><option value="gemini">Gemini</option>
+                </select>
+              </label>
+              <label>Model
+                <input value={providerConfig.model || ''} onChange={(e) => { const next = { ...providerConfig, model: e.target.value }; setProviderConfig(next); localStorage.setItem('chat.provider.v1', JSON.stringify(next)) }} placeholder="Model name" />
+              </label>
+            </div>
           </div>
         </div>
         <div className="chat-header-actions">
@@ -365,7 +373,7 @@ export default function ChatDrawer() {
             onClick={() => toggleFloatingMode()}
             title="Toggle floating chat"
           >
-            {floatingMode ? 'Dock' : 'Float'}
+            <Icon name="float" />
           </button>
           <button
             className={`chat-select-toggle ${selectMode ? 'active' : ''}`}
