@@ -100,7 +100,7 @@ function processFile(file) {
   return { file, ok: true, removed: hits.map((h) => `${h.name} in ${h.owner}()`) }
 }
 
-let files = execSync('git ls-files "src/problems/**/*.jsx"', { encoding: 'utf8' }).trim().split('\n')
+let files = execSync(`git ls-files 'src/problems/*.jsx' 'src/problems/**/*.jsx'`, { encoding: 'utf8' }).trim().split('\n')
 if (ONLY) files = files.filter((f) => f.includes(ONLY))
 
 const done = []

@@ -73,7 +73,7 @@ function survey(file) {
   return { file, shape: panelsShape, panelCount, layout, parent: elParentType, attrs: Object.keys(attrs) }
 }
 
-const files = execSync('git ls-files "src/problems/**/*.jsx"', { encoding: 'utf8' }).trim().split('\n')
+const files = execSync(`git ls-files 'src/problems/*.jsx' 'src/problems/**/*.jsx'`, { encoding: 'utf8' }).trim().split('\n')
 const rows = files.map(survey).filter(Boolean)
 
 const tally = (key) => {

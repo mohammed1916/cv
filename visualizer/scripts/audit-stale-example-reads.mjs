@@ -71,7 +71,7 @@ function auditFile(file) {
   return hits.length ? { file, hits } : null
 }
 
-const files = execSync('git ls-files "src/problems/**/*.jsx"', { encoding: 'utf8' }).trim().split('\n')
+const files = execSync(`git ls-files 'src/problems/*.jsx' 'src/problems/**/*.jsx'`, { encoding: 'utf8' }).trim().split('\n')
 const results = files.map(auditFile).filter(Boolean)
 
 let total = 0

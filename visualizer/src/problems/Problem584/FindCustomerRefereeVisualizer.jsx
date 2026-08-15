@@ -1,6 +1,7 @@
 import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -359,41 +360,48 @@ export default function FindCustomerRefereeVisualizer() {
     [reset]
   )
 
+  const panelConfigs = useMemo(() => [
+    { id: 'main', title: 'Visualization' },
+    { id: 'code', title: 'SQL Code', dockMode: 'split-right' },
+  ], [])
+  const panelContents = {
+    main: (
+      <VisualizationPanel
+        step={step}
+        applyExample={applyExample}
+        examples={examples}
+      />
+    ),
+    code: (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <CodePatternAnnotations
+          code={SOLUTION_CODE}
+          activeLines={activeCodeLines}
+          patternOverlay={patternOverlay}
+          language="sql"
+        />
+        <PatternLegend
+          patterns={PATTERNS.map((p) => ({
+            id: p,
+            label: p.charAt(0).toUpperCase() + p.slice(1),
+          }))}
+        />
+      </div>
+    ),
+  }
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
   return (
-    <DockableWorkspace
-      title="Find Customer Referee Visualizer"
-      panels={{
-        main: {
-          label: 'Visualization',
-          content: (
-            <VisualizationPanel
-              step={step}
-              applyExample={applyExample}
-              examples={examples}
-            />
-          ),
-        },
-        code: {
-          label: 'SQL Code',
-          content: (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <CodePatternAnnotations
-                code={SOLUTION_CODE}
-                activeLines={activeCodeLines}
-                patternOverlay={patternOverlay}
-                language="sql"
-              />
-              <PatternLegend
-                patterns={PATTERNS.map((p) => ({
-                  id: p,
-                  label: p.charAt(0).toUpperCase() + p.slice(1),
-                }))}
-              />
-            </div>
-          ),
-        },
-      }}
-      footer={
+    <div className="problem-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.main && createPortal(panelContents.main, panelDivs.main)}
+          {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+        </>
+      )}
+      <FloatingPanel title="Playback Controls">
         <PlaybackControls
           stepIndex={stepIndex}
           totalSteps={totalSteps}
@@ -402,7 +410,7 @@ export default function FindCustomerRefereeVisualizer() {
           onReset={reset}
           onJump={jump}
         />
-      }
-    />
+      </FloatingPanel>
+    </div>
   )
 }

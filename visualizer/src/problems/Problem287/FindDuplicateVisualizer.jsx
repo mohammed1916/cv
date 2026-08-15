@@ -183,7 +183,7 @@ export default function FindDuplicateVisualizer() {
         handleReset()
     }, [handleReset])
 
-    // Panel content (relocated out of the old DockableWorkspace panels array)
+    // Panel content (relocated out of the old dock panels array)
     const inputPanel = (
         <div className="fd-input-panel">
             <div className="fd-examples">

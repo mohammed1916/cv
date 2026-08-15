@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -12,6 +12,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './HighestAnswerRateVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
+import { createPortal } from 'react-dom'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'SELECT q.question_id, ROUND(COUNT(a.answer_id)/' },
@@ -364,21 +365,13 @@ export default function HighestAnswerRateVisualizer() {
     handleReset()
   }, [handleReset])
 
-  return (
-    <div className="problem-shell">
-      <ManualInputPanel
-        fields={[{"key":"questions","label":"questions","type":"array"},{"key":"answers","label":"answers","type":"array"}]}
-        values={{ questions: questionsInput, answers: answersInput }}
-        onChange={(k, v) => { if (k === 'questions') setQuestionsInput(v); if (k === 'answers') setAnswersInput(v); handleReset() }}
-        examples={examples}
-        applyExample={applyExample}
-        inputError={inputError}
-      />
-
-      <DockableWorkspace
-        leftPanelContent={
-          <FloatingPanel title="SQL Solution" accent="#f59e0b">
-            <CodeTracePanel
+  const panelConfigs = useMemo(() => [
+    { id: 'left', title: "SQL Solution" },
+    { id: 'right', title: "Data Visualization", dockMode: 'split-right' },
+    { id: 'bottom', title: "bottom", dockMode: 'split-bottom' },
+  ], [])
+  const panelContents = {
+    left: (<CodeTracePanel
               codeLines={SOLUTION_CODE}
               currentLineNumber={step?.activeLine}
               relatedLineNumbers={step?.relatedLines || []}
@@ -392,16 +385,9 @@ export default function HighestAnswerRateVisualizer() {
                   onLineRef={setActiveLineDom}
                 />
               )}
-            </CodeTracePanel>
-          </FloatingPanel>
-        }
-        rightPanelContent={
-          <FloatingPanel title="Data Visualization" accent="#f59e0b">
-            <VisualizationPanel step={step} applyExample={applyExample} examples={examples} />
-          </FloatingPanel>
-        }
-        bottomPanelContent={
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, overflow: 'auto' }}>
+            </CodeTracePanel>),
+    right: (<VisualizationPanel step={step} applyExample={applyExample} examples={examples} />),
+    bottom: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, overflow: 'auto' }}>
             <div>
               <label style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', display: 'block', marginBottom: 6 }}>
                 Questions (JSON)
@@ -445,10 +431,32 @@ export default function HighestAnswerRateVisualizer() {
               />
             </div>
             {inputError && <div style={{ color: '#ef4444', fontSize: 11, fontWeight: 600 }}>Error: {inputError}</div>}
-          </div>
-        }
-      >
-        <PlaybackControls
+          </div>),
+  }
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+  return (
+    <div className="problem-shell">
+      <ManualInputPanel
+        fields={[{"key":"questions","label":"questions","type":"array"},{"key":"answers","label":"answers","type":"array"}]}
+        values={{ questions: questionsInput, answers: answersInput }}
+        onChange={(k, v) => { if (k === 'questions') setQuestionsInput(v); if (k === 'answers') setAnswersInput(v); handleReset() }}
+        examples={examples}
+        applyExample={applyExample}
+        inputError={inputError}
+      />
+
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.left && createPortal(panelContents.left, panelDivs.left)}
+            {panelDivs.right && createPortal(panelContents.right, panelDivs.right)}
+            {panelDivs.bottom && createPortal(panelContents.bottom, panelDivs.bottom)}
+          </>
+        )}
+        <FloatingPanel title="Playback Controls">
+<PlaybackControls
           onPlay={togglePlay}
           onPause={() => togglePlay()}
           onNext={stepForward}
@@ -464,7 +472,8 @@ export default function HighestAnswerRateVisualizer() {
           showPatterns={showPatternOverlay}
           accent="#f59e0b"
         />
-      </DockableWorkspace>
+        </FloatingPanel>
+      </>
     </div>
   )
 }

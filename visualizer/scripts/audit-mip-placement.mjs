@@ -83,7 +83,7 @@ function classify(file) {
   }
 }
 
-const files = execSync('git ls-files "src/problems/**/*.jsx"', { encoding: 'utf8' }).trim().split('\n')
+const files = execSync(`git ls-files 'src/problems/*.jsx' 'src/problems/**/*.jsx'`, { encoding: 'utf8' }).trim().split('\n')
 const results = files.map(classify)
 
 const byStatus = {}

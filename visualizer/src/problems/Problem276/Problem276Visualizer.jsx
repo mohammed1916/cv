@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -13,6 +13,7 @@ import './Problem276Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { createPortal } from 'react-dom'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -82,13 +83,13 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
     const { isPlaying, setIsPlaying, canNext, canPrev } = usePlaybackState(steps, currentStep, setCurrentStep)
     const { pattern, togglePattern } = usePatternOverlay(false)
 
-    return (
-        <DockableWorkspace
-            title="Paint Fence"
-            subtitle="paint-fence"
-            accentColor="#8b5cf6"
-        >
-        <ManualInputPanel
+    const panelConfigs = useMemo(() => [
+      { id: 'main', title: "Visualization" },
+      { id: 'bottom', title: "Code Trace", dockMode: 'split-bottom' },
+    ], [])
+    const panelContents = {
+      main: (<>
+<ManualInputPanel
           fields={[{"key":"input","label":"input","type":"string"}]}
           values={{ input: inputInput }}
           onChange={(k, v) => { if (k === 'input') setInputInput(v) }}
@@ -97,9 +98,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
           applyExample={(e) => applyEx(examples.indexOf(e))}
           inputError={inputError}
         />
-      
-            <FloatingPanel title="Visualization" position="main">
-                <div className="problem276-visualizer-viz-panel">
+<div className="problem276-visualizer-viz-panel">
                     <div className="problem276-visualizer-canvas">
                         <motion.div
                             initial={{ opacity: 0 }}
@@ -121,15 +120,25 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                         canPrev={canPrev}
                     />
                 </div>
-            </FloatingPanel>
-            <FloatingPanel title="Code Trace" position="bottom">
-                <CodeTracePanel
+</>),
+      bottom: (<CodeTracePanel
                     code={SOLUTION_CODE}
                     activeLine={step.activeLine}
                     onTogglePattern={togglePattern}
                     patternActive={pattern}
-                />
-            </FloatingPanel>
-        </DockableWorkspace>
+                />),
+    }
+    const [panelDivs, setPanelDivs] = useState(null)
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+    return (
+        <>
+          <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+          {panelDivs && (
+            <>
+              {panelDivs.main && createPortal(panelContents.main, panelDivs.main)}
+              {panelDivs.bottom && createPortal(panelContents.bottom, panelDivs.bottom)}
+            </>
+          )}
+        </>
     )
 }

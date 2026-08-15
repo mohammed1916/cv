@@ -1,6 +1,7 @@
 ﻿import { useState, useCallback, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import DockableWorkspace from '../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../components/LuminoDockPanel'
 import FloatingPanel from '../components/shared/FloatingPanel'
 import CodeTracePanel from '../components/CodeTracePanel'
 import PlaybackControls from '../components/PlaybackControls'
@@ -292,54 +293,55 @@ export default function YourProblemVisualizer() {
   }, [handleReset])
 
   // Build dockable panels
-  const dockPanels = useMemo(() => {
-    const panels = [
-      {
-        id: 'code',
-        title: 'Code',
-        content: (
-          <CodeTracePanel
-            step={step}
-            codeLines={codeLines}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-            onActiveLineDomChange={setActiveLineDom}
-            autoScroll={autoScrollCode}
-          />
-        ),
-      },
-      {
-        id: 'viz',
-        title: 'Visualization',
-        content: (
-          <VisualizationPanel
-            inputs={validatedInputs.inputs}
-            inputErrors={validatedInputs.errors}
-            onInputChange={handleInputChange}
-            applyExample={applyExample}
-            examples={getExamples('your-problem-slug') || []}
-            step={step}
-            handleReset={handleReset}
-          />
-        ),
-      },
-      // Optional: Add variables panel
-      {
-        id: 'vars',
-        title: 'Variables',
-        content: <VariablesPanel step={step} />,
-      },
-    ]
-    return panels
-  }, [step, codeLines, connectivity.highlightedLines, connectivity.handleLineSelect,
+  // LuminoDockPanel takes the panel shells; the content is portaled into the
+  // divs it hands back via onPanelReady. Every panel docks relative to the
+  // first, so dockMode describes where it sits next to panelConfigs[0].
+  const panelConfigs = useMemo(() => [
+    { id: 'code', title: 'Code' },
+    { id: 'viz', title: 'Visualization', dockMode: 'split-right' },
+    // Optional: Add variables panel
+    { id: 'vars', title: 'Variables', dockMode: 'split-bottom' },
+  ], [])
+
+  const panelContents = useMemo(() => ({
+    code: (
+      <CodeTracePanel
+        step={step}
+        codeLines={codeLines}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        autoScroll={autoScrollCode}
+      />
+    ),
+    viz: (
+      <VisualizationPanel
+        inputs={validatedInputs.inputs}
+        inputErrors={validatedInputs.errors}
+        onInputChange={handleInputChange}
+        applyExample={applyExample}
+        examples={getExamples('your-problem-slug') || []}
+        step={step}
+        handleReset={handleReset}
+      />
+    ),
+    vars: <VariablesPanel step={step} />,
+  }), [step, codeLines, connectivity.highlightedLines, connectivity.handleLineSelect,
       autoScrollCode, validatedInputs, handleInputChange, applyExample, handleReset, setActiveLineDom])
+
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
     <div className="problem-shell">
-      <DockableWorkspace
-        panels={dockPanels}
-        initialLayout={{ rows: [['code', 'viz'], ['vars']], minimized: [] }}
-      />
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+          {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+          {panelDivs.vars && createPortal(panelContents.vars, panelDivs.vars)}
+        </>
+      )}
       <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}

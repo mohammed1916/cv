@@ -125,10 +125,12 @@ function ensureCreatePortal(src) {
 
 function swapDockImport(src) {
   // `from` is not always followed by a space, and the file may start with a
-  // BOM, so this stays unanchored and tolerant of the spacing.
+  // BOM, so this stays unanchored and tolerant of the spacing. The prefix is
+  // taken from the original path — files sit at different depths, so a
+  // hardcoded '../../' would be wrong for some.
   return src.replace(
-    /import DockableWorkspace from\s*['"][^'"]*DockableWorkspace['"];?/,
-    "import LuminoDockPanel from '../../components/LuminoDockPanel'"
+    /import DockableWorkspace from\s*(['"])([^'"]*?)shared\/DockableWorkspace\1;?/,
+    (_m, q, prefix) => `import LuminoDockPanel from ${q}${prefix}LuminoDockPanel${q}`
   )
 }
 
@@ -146,7 +148,11 @@ function migrate(file) {
   const el = els[0]
   const attrs = attrsOf(el)
   if (attrs['<spread>']) return { file, skip: 'spread props' }
-  if (!attrs.panels) return { file, skip: 'children-based (no panels prop)' }
+  if (!attrs.panels) {
+    const slots = ['leftPanelContent', 'rightPanelContent', 'bottomPanelContent', 'topPanelContent']
+    if (slots.some((s) => attrs[s])) return migratePanelContentProps(file, src, ast, el, attrs, slots)
+    return migrateChildrenBased(file, src, ast, el)
+  }
 
   const resolved = resolvePanelsArray(ast, attrs.panels)
   if (!resolved) return { file, skip: 'panels array not resolvable' }
@@ -158,7 +164,8 @@ function migrate(file) {
     const get = (k) => e.properties.find((p) => p.key?.name === k || p.key?.value === k)
     const id = get('id')
     const title = get('title')
-    const content = get('content')
+    // A few files spell the slot `component` rather than `content`.
+    const content = get('content') || get('component')
     if (!id || id.value?.type !== 'StringLiteral') return { file, skip: 'panel id is not a string literal' }
     if (!content) return { file, skip: 'panel entry has no content' }
     entries.push({
@@ -249,6 +256,206 @@ function migrate(file) {
   return { file, ok: true, panels: entries.map((e) => e.id) }
 }
 
+// Returns the inner source of a <FloatingPanel> wrapper, plus its title, so
+// the wrapper can be dropped and its children become the dock panel's content.
+function unwrapFloatingPanel(src, expr) {
+  if (expr?.type !== 'JSXElement' || expr.openingElement?.name?.name !== 'FloatingPanel') {
+    return { title: null, contentSrc: src_(src, expr) }
+  }
+  const a = attrsOf(expr)
+  const title = a.title
+    ? (a.title.type === 'StringLiteral' ? JSON.stringify(a.title.value) : src_(src, a.title))
+    : null
+  const inner = expr.children
+  const first = inner.find((c) => c.type !== 'JSXText' || c.value.trim())
+  const lastIdx = [...inner].reverse().findIndex((c) => c.type !== 'JSXText' || c.value.trim())
+  const last = lastIdx === -1 ? null : inner[inner.length - 1 - lastIdx]
+  return { title, contentSrc: first && last ? src.slice(first.range[0], last.range[1]) : 'null' }
+}
+
+// Handles the `leftPanelContent` / `rightPanelContent` / `bottomPanelContent`
+// prop style, where each slot holds one panel and the element's children are
+// the playback controls.
+function migratePanelContentProps(file, src, ast, el, attrs, slots) {
+  const MODE = { leftPanelContent: null, rightPanelContent: 'split-right', bottomPanelContent: 'split-bottom', topPanelContent: 'split-top' }
+  const ID = { leftPanelContent: 'left', rightPanelContent: 'right', bottomPanelContent: 'bottom', topPanelContent: 'top' }
+
+  const present = slots.filter((s) => attrs[s])
+  const entries = present.map((s, i) => {
+    const { title, contentSrc } = unwrapFloatingPanel(src, attrs[s])
+    return { id: ID[s], titleSrc: title ?? JSON.stringify(ID[s]), contentSrc, mode: i === 0 ? null : MODE[s] ?? 'split-right' }
+  })
+
+  const kids = el.children.filter((c) => c.type === 'JSXElement')
+  const extras = kids.map((k) => src_(src, k)).join('\n')
+
+  const taken = new Set()
+  walk(ast.program, (n) => {
+    if (n.type === 'Program' || n.type === 'BlockStatement') declarationsInBody(n.body, taken)
+  })
+  const NCONF = uniqueName('panelConfigs', taken)
+  const NCONT = uniqueName('panelContents', taken)
+  const NDIVS = uniqueName('panelDivs', taken)
+  const NREADY = uniqueName('handlePanelReady', taken)
+  const NSET = uniqueName('setPanelDivs', taken)
+
+  let ret = null
+  walk(ast.program, (n) => {
+    if (n.type !== 'ReturnStatement' || !n.argument) return
+    if (el.range[0] >= n.range[0] && el.range[1] <= n.range[1]) ret = n
+  })
+  if (!ret) return { file, skip: 'panel-content props: enclosing return not found' }
+
+  const retLineStart = src.lastIndexOf('\n', ret.range[0]) + 1
+  const ind = /^[ \t]*/.exec(src.slice(retLineStart))[0]
+
+  const decl = [
+    `${ind}const ${NCONF} = useMemo(() => [`,
+    ...entries.map((e) => `${ind}  { id: '${e.id}', title: ${e.titleSrc}${e.mode ? `, dockMode: '${e.mode}'` : ''} },`),
+    `${ind}], [])`,
+    `${ind}const ${NCONT} = {`,
+    ...entries.map((e) => `${ind}  ${e.id}: (${e.contentSrc}),`),
+    `${ind}}`,
+    `${ind}const [${NDIVS}, ${NSET}] = useState(null)`,
+    `${ind}const ${NREADY} = useCallback((divs) => ${NSET}(divs), [])`,
+    '',
+  ].join('\n')
+
+  const elIndent = /^[ \t]*/.exec(src.slice(src.lastIndexOf('\n', el.range[0]) + 1))[0]
+  const portals = entries
+    .map((e) => `${elIndent}      {${NDIVS}.${e.id} && createPortal(${NCONT}.${e.id}, ${NDIVS}.${e.id})}`)
+    .join('\n')
+
+  const replacement = [
+    `<>`,
+    `${elIndent}  <LuminoDockPanel panels={${NCONF}} onPanelReady={${NREADY}} />`,
+    `${elIndent}  {${NDIVS} && (`,
+    `${elIndent}    <>`,
+    portals,
+    `${elIndent}    </>`,
+    `${elIndent}  )}`,
+    ...(extras ? [`${elIndent}  <FloatingPanel title="Playback Controls">`, extras, `${elIndent}  </FloatingPanel>`] : []),
+    `${elIndent}</>`,
+  ].join('\n')
+
+  let out = src.slice(0, el.range[0]) + replacement + src.slice(el.range[1])
+  out = out.slice(0, retLineStart) + decl + out.slice(retLineStart)
+
+  out = swapDockImport(out)
+  out = ensureCreatePortal(out)
+  out = ensureReactImports(out, ['useState', 'useMemo', 'useCallback'])
+
+  try { parseFile(out) } catch (e) { return { file, skip: `panel-content props would break: ${e.message}` } }
+  if (!DRY) writeFileSync(file, out)
+  return { file, ok: true, panels: entries.map((e) => e.id) }
+}
+
+// Handles `<DockableWorkspace title=...><FloatingPanel position="main">...`.
+//
+// These never worked: DockableWorkspace renders only `panels` and calls
+// panels.map() on undefined, so every one of them throws on render. Each
+// <FloatingPanel title position> child becomes a dock panel, and any loose
+// child (an injected ManualInputPanel) is folded into the first panel.
+function migrateChildrenBased(file, src, ast, el) {
+  const POSITION_MODE = { main: null, bottom: 'split-bottom', right: 'split-right', left: 'split-left', top: 'split-top' }
+
+  const kids = el.children.filter((c) => c.type === 'JSXElement')
+  if (!kids.length) return { file, skip: 'children-based: no element children' }
+
+  const panelsK = []
+  const looseK = []
+  for (const k of kids) {
+    if (k.openingElement?.name?.name === 'FloatingPanel') panelsK.push(k)
+    else looseK.push(k)
+  }
+  if (!panelsK.length) return { file, skip: 'children-based: no FloatingPanel children' }
+
+  const entries = panelsK.map((k, i) => {
+    const a = attrsOf(k)
+    const pos = a.position?.type === 'StringLiteral' ? a.position.value : a.position?.value
+    const id = typeof pos === 'string' && pos ? pos : `panel${i + 1}`
+    const titleSrc = a.title
+      ? (a.title.type === 'StringLiteral' ? JSON.stringify(a.title.value) : src_(src, a.title))
+      : JSON.stringify(id)
+    const inner = k.children
+    const first = inner.find((c) => c.type !== 'JSXText' || c.value.trim())
+    const lastIdx = [...inner].reverse().findIndex((c) => c.type !== 'JSXText' || c.value.trim())
+    const last = lastIdx === -1 ? null : inner[inner.length - 1 - lastIdx]
+    const contentSrc = first && last ? src.slice(first.range[0], last.range[1]) : 'null'
+    return { id, titleSrc, contentSrc, mode: POSITION_MODE[id] ?? (i === 0 ? null : 'split-right') }
+  })
+
+  // Fold loose children (e.g. the input panel) into the first dock panel.
+  if (looseK.length) {
+    const loose = looseK.map((k) => src_(src, k)).join('\n')
+    entries[0].contentSrc = `<>\n${loose}\n${entries[0].contentSrc}\n</>`
+  }
+
+  const taken = new Set()
+  walk(ast.program, (n) => {
+    if (n.type === 'Program' || n.type === 'BlockStatement') declarationsInBody(n.body, taken)
+  })
+  const NCONF = uniqueName('panelConfigs', taken)
+  const NCONT = uniqueName('panelContents', taken)
+  const NDIVS = uniqueName('panelDivs', taken)
+  const NREADY = uniqueName('handlePanelReady', taken)
+  const NSET = uniqueName('setPanelDivs', taken)
+
+  // Insert the declarations just before the return that holds the element.
+  let ret = null
+  walk(ast.program, (n) => {
+    if (n.type !== 'ReturnStatement' || !n.argument) return
+    if (el.range[0] >= n.range[0] && el.range[1] <= n.range[1]) ret = n
+  })
+  if (!ret) return { file, skip: 'children-based: enclosing return not found' }
+
+  const retLineStart = src.lastIndexOf('\n', ret.range[0]) + 1
+  const ind = /^[ \t]*/.exec(src.slice(retLineStart))[0]
+
+  const decl = [
+    `${ind}const ${NCONF} = useMemo(() => [`,
+    ...entries.map((e) => `${ind}  { id: '${e.id}', title: ${e.titleSrc}${e.mode ? `, dockMode: '${e.mode}'` : ''} },`),
+    `${ind}], [])`,
+    `${ind}const ${NCONT} = {`,
+    ...entries.map((e) => `${ind}  ${/^[A-Za-z_$][\w$]*$/.test(e.id) ? e.id : JSON.stringify(e.id)}: (${e.contentSrc}),`),
+    `${ind}}`,
+    `${ind}const [${NDIVS}, ${NSET}] = useState(null)`,
+    `${ind}const ${NREADY} = useCallback((divs) => ${NSET}(divs), [])`,
+    '',
+  ].join('\n')
+
+  const elIndent = /^[ \t]*/.exec(src.slice(src.lastIndexOf('\n', el.range[0]) + 1))[0]
+  const portals = entries
+    .map((e) => {
+      const acc = /^[A-Za-z_$][\w$]*$/.test(e.id) ? `.${e.id}` : `[${JSON.stringify(e.id)}]`
+      return `${elIndent}      {${NDIVS}${acc} && createPortal(${NCONT}${acc}, ${NDIVS}${acc})}`
+    })
+    .join('\n')
+
+  const replacement = [
+    `<>`,
+    `${elIndent}  <LuminoDockPanel panels={${NCONF}} onPanelReady={${NREADY}} />`,
+    `${elIndent}  {${NDIVS} && (`,
+    `${elIndent}    <>`,
+    portals,
+    `${elIndent}    </>`,
+    `${elIndent}  )}`,
+    `${elIndent}</>`,
+  ].join('\n')
+
+  // Element first, then the declarations, so the earlier offset stays valid.
+  let out = src.slice(0, el.range[0]) + replacement + src.slice(el.range[1])
+  out = out.slice(0, retLineStart) + decl + out.slice(retLineStart)
+
+  out = swapDockImport(out)
+  out = ensureCreatePortal(out)
+  out = ensureReactImports(out, ['useState', 'useMemo', 'useCallback'])
+
+  try { parseFile(out) } catch (e) { return { file, skip: `children-based would break: ${e.message}` } }
+  if (!DRY) writeFileSync(file, out)
+  return { file, ok: true, panels: entries.map((e) => e.id) }
+}
+
 // Smallest VariableDeclaration statement containing this declarator.
 function findEnclosingStatement(ast, declarator) {
   let hit = null
@@ -259,7 +466,7 @@ function findEnclosingStatement(ast, declarator) {
   return hit
 }
 
-let files = execSync('git ls-files "src/problems/**/*.jsx"', { encoding: 'utf8' }).trim().split('\n')
+let files = execSync(`git ls-files 'src/problems/*.jsx' 'src/problems/**/*.jsx'`, { encoding: 'utf8' }).trim().split('\n')
 if (ONLY) files = files.filter((f) => f.includes(ONLY))
 
 const done = []

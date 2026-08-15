@@ -104,7 +104,7 @@ function processFile(file) {
   return { file, ok: true, notes }
 }
 
-let files = execSync('git ls-files "src/problems/**/*.jsx"', { encoding: 'utf8' }).trim().split('\n')
+let files = execSync(`git ls-files 'src/problems/*.jsx' 'src/problems/**/*.jsx'`, { encoding: 'utf8' }).trim().split('\n')
 if (ONLY) files = files.filter((f) => f.includes(ONLY))
 
 const done = []

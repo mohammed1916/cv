@@ -1,4 +1,5 @@
 ﻿import { useCallback, useEffect, useMemo, useState, useRef } from "react";
+import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -15,7 +16,7 @@ import "./DualRepresentationView.css";
 import { Stack3D } from "../../components/viz3d";
 import PartialAnswersPanel from "../../components/PartialAnswersPanel";
 import TreeStatePanel from "./TreeStatePanel";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
 import DPDetailPanel from "./DPDetailPanel";
 import ComparisonBox from "./ComparisonBox";
 import RankHighlightOverlay from "./RankHighlightOverlay";
@@ -1199,6 +1200,25 @@ export default function GameOnGrowingTreeVisualizer() {
     },
   ], [enabledVizIds, step, dpSnapshot, currentTree, parentZeroBased, qInput, parentsInput, parsedParentSnapshot, inputError, answers, steps, stepIndex, currentPhase, treeFocus, stepKey, selectedNode]);
 
+  // The panel set is dynamic (enabledVizIds toggles entries in and out), so
+  // the dock config is derived from dockPanels rather than listed statically.
+  // LuminoDockPanel docks every widget relative to the first, so defaultZone
+  // maps onto a split direction off that anchor.
+  const DOCK_MODE_FOR_ZONE = { left: 'split-left', right: 'split-right', full: 'split-bottom' };
+  const panelConfigs = useMemo(
+    () =>
+      dockPanels.map((panel, index) => ({
+        id: panel.id,
+        title: panel.title,
+        ...(index === 0
+          ? {}
+          : { dockMode: DOCK_MODE_FOR_ZONE[panel.defaultZone] ?? 'split-right' }),
+      })),
+    [dockPanels]
+  );
+  const [panelDivs, setPanelDivs] = useState(null);
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
+
   return (
     <div className="gogt-shell">
         <ManualInputPanel
@@ -1275,17 +1295,13 @@ export default function GameOnGrowingTreeVisualizer() {
               highlightNode={selectedNode}
               dpCellPositions={{}}
             />
-            <DockableWorkspace
-              title="Game On Growing Tree Workspace"
-              panels={dockPanels}
-              initialLayout={{
-                rows: [
-                  ["input", "storyboard"],
-                  ["tree", "code"],
-                ],
-                minimized: [],
-              }}
-            />
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs &&
+              dockPanels.map((panel) =>
+                panelDivs[panel.id]
+                  ? createPortal(panel.content, panelDivs[panel.id], panel.id)
+                  : null
+              )}
           </>
         ) : (
           <DualRepresentationView

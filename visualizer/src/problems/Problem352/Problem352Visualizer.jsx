@@ -1,6 +1,6 @@
 ﻿import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -14,6 +14,7 @@ import { getExamplesOr } from '../../config/examplesRegistry'
 import './Problem352Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
+import { createPortal } from 'react-dom'
 
 const PATTERNS = ['collision-self', 'collision-wall', 'direction', 'eat-food', 'idle', 'init', 'move-forward', 'state-update']
 const LINE_PATTERN_MAP = {
@@ -371,25 +372,19 @@ export default function DesignSnakeGameVisualizer() {
     handleReset()
   }, [handleReset])
 
-  const dockPanels = useMemo(() => [
-    {
-      id: 'code',
-      title: 'Code',
-      component: (
-        <CodeTracePanel
+  const panelConfigs = useMemo(() => [
+    { id: 'code', title: 'Code' },
+    { id: 'grid', title: 'Game Grid', dockMode: 'split-right' },
+  ], [])
+  const panelContents = useMemo(() => ({
+    code: (<CodeTracePanel
           step={step}
           codeLines={solutionCode || SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
           onLineSelect={connectivity.handleLineSelect}
           onActiveLineDomChange={setActiveLineDom}
-        />
-      ),
-    },
-    {
-      id: 'grid',
-      title: 'Game Grid',
-      component: (
-        <div className="dsg-viz-container">
+        />),
+    grid: (<div className="dsg-viz-container">
           <GridVisualization step={step} />
           <div className="dsg-stats-row">
             <StateCard label="Score" value={step?.score ?? 1} accent="primary" icon="🐍" />
@@ -403,10 +398,10 @@ export default function DesignSnakeGameVisualizer() {
               </div>
             )}
           </AnimatePresence>
-        </div>
-      ),
-    },
-  ], [step, solutionCode, connectivity])
+        </div>),
+  }), [step, solutionCode, connectivity])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
     <div className="dsg-shell">
@@ -493,7 +488,15 @@ export default function DesignSnakeGameVisualizer() {
         </div>
       </FloatingPanel>
 
-      <DockableWorkspace panels={dockPanels} storageKey="dsg-dock" />
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+            {panelDivs.grid && createPortal(panelContents.grid, panelDivs.grid)}
+          </>
+        )}
+      </>
 
       <div className={`dsg-status ${step?.phase?.includes('collision') ? 'danger' : step?.phase === 'eat-food' ? 'success' : ''}`}>
         {step?.message || 'Press Play or Step to begin.'}
