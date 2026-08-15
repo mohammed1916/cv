@@ -13,6 +13,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
+import PointerRail from '../../components/shared/PointerRail'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -162,29 +163,20 @@ export default function ValidPalindromeVisualizer() {
             {/* Cleaned string with two-pointer highlights */}
             <div className="vp-chars-panel">
                 <div className="vp-panel-label">Cleaned string (alphanumeric, lowercase)</div>
-                <div className="vp-chars-row">
-                    {cleaned.split("").map((c, i) => {
-                        const isL = i === step?.l;
-                        const isR = i === step?.r;
-                        const between =
-                            step?.l != null && i > step.l && i < step.r;
-                        const done = step?.result === true;
-                        return (
-                            <motion.div
-                                key={i}
-                                className={`vp-char ${isL ? "ptr-l" : ""} ${isR ? "ptr-r" : ""} ${between ? "between" : ""
-                                    } ${done ? "palindrome" : ""} ${step?.result === false && (isL || isR) ? "bad" : ""
-                                    }`}
-                                animate={{ scale: isL || isR ? 1.18 : 1 }}
-                                transition={{ type: "spring", stiffness: 400, damping: 22 }}
-                            >
-                                {c}
-                                {isL && <span className="vp-ptr-label">L</span>}
-                                {isR && <span className="vp-ptr-label">R</span>}
-                            </motion.div>
-                        );
-                    })}
-                </div>
+                <PointerRail
+                    title="Two-pointer comparison lane"
+                    values={cleaned.split("")}
+                    range={step ? { start: step.l, end: step.r } : null}
+                    pointers={step ? [
+                        { id: "left", label: `L ${step.l}`, index: step.l, tone: "info" },
+                        { id: "right", label: `R ${step.r}`, index: step.r, tone: "warning" },
+                    ] : []}
+                    note={step?.result === false
+                        ? "Mismatch: these two pointers identify the characters that end the search."
+                        : step?.result === true
+                            ? "Pointers crossed after every mirrored pair matched."
+                            : "Compare the two endpoints, then move both pointers inward when they match."}
+                />
             </div>
 
             {step?.result != null && (

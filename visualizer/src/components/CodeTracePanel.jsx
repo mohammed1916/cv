@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import "./CodeTracePanel.css";
 import ResizerHandle from "./ResizerHandle";
 import { resolvePattern } from "./patternCatalog";
+import PointerStateBand from "./shared/PointerStateBand";
 
 import MonacoEditor from "@monaco-editor/react";
 
@@ -619,6 +620,8 @@ export default function CodeTracePanel({
           Editor: {editorPlacement === "overlay" ? "Modal" : "Below"}
         </button>
       </div>
+
+      <PointerStateBand step={step} />
 
       <div
         className="ctp-scroll"

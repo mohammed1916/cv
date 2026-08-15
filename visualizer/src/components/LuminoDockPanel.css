@@ -154,6 +154,19 @@
   transition: background 0.15s ease, color 0.15s ease;
 }
 
+.lm-TabBar-tab::before {
+  content: '⠿';
+  margin-right: 7px;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  line-height: 1;
+  cursor: grab;
+}
+
+.lm-TabBar-tab:active::before {
+  cursor: grabbing;
+}
+
 .lm-TabBar-tab:hover {
   background: var(--surface3, var(--surface3));
   color: var(--text, var(--text));
