@@ -465,35 +465,6 @@ export default function ChatDrawer() {
 
   return (
     <>
-      {/* Layout preview overlay when dragging */}
-      {floatingMode && draggingRef.current && (
-        <div className="chat-layout-preview-wrapper">
-          <div className="chat-layout-preview">
-            <div className="chat-layout-grid">
-              {Object.entries(LAYOUT_ZONES).map(([key, zone]) => {
-                const isHovered = key === hoveredZone;
-                return (
-                  <div
-                    key={key}
-                    className={`chat-zone ${isHovered ? 'hovered' : ''}`}
-                    style={{
-                      gridRow: zone.row + 1,
-                      gridColumn: zone.col + 1,
-                    }}>
-                    <div className="chat-zone-inner">
-                      <div className="chat-zone-label">{zone.label}</div>
-                      <div className="chat-zone-name">{zone.name}</div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-            <div className="chat-preview-title">Drop Chat Here</div>
-          </div>
-          <div className="chat-preview-backdrop" />
-        </div>
-      )}
-
       {/* Backdrop (click to close) — ignore when select or floating mode is active */}
       <div
         className="chat-backdrop"
