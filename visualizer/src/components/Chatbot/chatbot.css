@@ -55,8 +55,8 @@
   bottom: 0;
   z-index: 1002;
   width: min(480px, 100vw);
-  background: var(--code-bg);
-  border-left: 1px solid var(--surface2);
+  background: var(--surface);
+  border-left: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   box-shadow: -8px 0 40px rgba(0, 0, 0, 0.5);
@@ -91,13 +91,22 @@
 }
 
 .chat-header-icon {
-  font-size: 22px;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--primary);
+  background: var(--primary-glow);
+  color: var(--primary);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .04em;
 }
 
 .chat-header-title {
   font-size: 14px;
   font-weight: 600;
-  color: var(--surface2);
+  color: var(--text);
 }
 
 .chat-header-sub {
@@ -134,7 +143,7 @@
 
 .chat-history-panel {
   border-bottom: 1px solid var(--surface2);
-  background: #0b1324;
+  background: var(--surface2);
   max-height: 180px;
   overflow-y: auto;
   padding: 8px;
@@ -148,9 +157,9 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  background: #111c33;
-  border: 1px solid #1f2e4a;
-  border-radius: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 5px;
   padding: 8px 10px;
   cursor: pointer;
 }
@@ -263,6 +272,127 @@
   margin-bottom: 12px;
 }
 
+/* VS Code-inspired secondary side bar: opaque surface, compact actions,
+   visible divider/grip, a sessions strip, and a single bottom composer. */
+.chat-panel-docked.resizable-panel {
+  min-width: 300px;
+  background: var(--surface) !important;
+  border-left: 1px solid var(--border) !important;
+  box-shadow: -10px 0 28px rgba(0, 0, 0, .14);
+}
+
+.chat-panel-docked .resize-handle--left {
+  width: 7px;
+  background: var(--border);
+}
+
+.chat-panel-docked .resize-handle--left::after {
+  width: 2px;
+  height: 100%;
+  border-radius: 0;
+  background: var(--border);
+}
+
+.chat-panel-docked .resize-handle--left:hover,
+.chat-panel-docked .resize-handle--left:hover::after {
+  background: var(--primary);
+  box-shadow: none;
+}
+
+.chat-drawer--docked {
+  background: var(--surface);
+  border: 0;
+  box-shadow: none;
+  animation: none;
+}
+
+.chat-drawer--docked .chat-header {
+  min-height: 42px;
+  padding: 7px 10px;
+  background: var(--surface2);
+  border-bottom-color: var(--border);
+}
+
+.chat-drawer--docked .chat-header-left { min-width: 0; gap: 7px; }
+.chat-drawer--docked .chat-header-title { font-size: 12px; white-space: nowrap; }
+.chat-drawer--docked .chat-header-sub { display: none; }
+.chat-drawer--docked .chat-header-icon { width: 24px; height: 24px; font-size: 9px; }
+.chat-drawer--docked .chat-header-actions { margin-left: auto; gap: 3px; }
+
+.chat-drawer--docked .chat-header-actions button,
+.chat-drawer--docked .chat-attach-step-btn,
+.chat-drawer--docked .chat-history-toggle,
+.chat-drawer--docked .chat-new-toggle,
+.chat-drawer--docked .chat-float-toggle,
+.chat-drawer--docked .chat-select-toggle {
+  height: 25px;
+  width: 25px;
+  padding: 0;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 10px;
+  box-shadow: none;
+}
+
+.chat-icon {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.chat-drawer--docked .chat-header-actions .chat-select-hint { display: none; }
+
+.chat-drawer--docked .chat-header-actions button:hover:not(:disabled),
+.chat-drawer--docked .chat-select-toggle.active {
+  color: var(--text);
+  border-color: var(--border);
+  background: var(--surface);
+}
+
+.chat-drawer--docked .chat-messages { padding: 12px; gap: 12px; background: var(--surface); }
+.chat-drawer--docked .chat-msg-body { max-width: 88%; }
+.chat-drawer--docked .chat-msg-text { padding: 8px 10px; font-size: 12px; line-height: 1.55; }
+.chat-drawer--docked .chat-msg-avatar { min-width: 24px; height: 24px; font-size: 9px; }
+
+.chat-input-wrap {
+  gap: 7px;
+  padding: 9px;
+  border-top-color: var(--border);
+  background: var(--surface2);
+  backdrop-filter: none;
+}
+
+.chat-icon-btn {
+  width: auto;
+  height: 27px;
+  padding: 0 7px;
+  border-radius: 3px;
+  border-color: var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+.chat-textarea {
+  min-height: 48px;
+  padding: 8px 9px;
+  border-radius: 3px;
+  border-color: var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 12px;
+}
+
+.chat-textarea:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 1px var(--primary); }
+.chat-send-btn { border-radius: 3px; background: var(--primary); color: white; }
+.ctx-badge { border-radius: 3px; background: var(--primary-glow); border-color: var(--primary); color: var(--text); }
+
 .chat-empty p {
   font-size: 13px;
   line-height: 1.6;
@@ -299,7 +429,16 @@
 }
 
 .chat-msg-avatar {
-  font-size: 18px;
+  min-width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .04em;
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -335,7 +474,8 @@
 
 .chat-msg-text {
   background: var(--surface2);
-  border-radius: 12px 12px 12px 2px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
   padding: 10px 14px;
   font-size: 13px;
   line-height: 1.65;
@@ -345,9 +485,46 @@
 }
 
 .chat-msg--user .chat-msg-text {
-  background: #312e81;
-  border-radius: 12px 12px 2px 12px;
-  color: #e0e7ff;
+  background: var(--primary-glow);
+  border-color: var(--primary);
+  border-radius: 6px;
+  color: var(--text);
+}
+
+/* Docked chat is a compact work surface, not a full-screen dark drawer. */
+.chat-panel-docked {
+  border-left: 1px solid var(--border) !important;
+  box-shadow: -14px 0 32px rgba(0, 0, 0, .16);
+  background: var(--surface);
+}
+
+.chat-drawer--docked .chat-header {
+  padding: 9px 10px;
+  background: var(--surface2);
+}
+
+.chat-drawer--docked .chat-header-actions { gap: 4px; }
+
+.chat-drawer--docked .chat-header-actions button,
+.chat-drawer--docked .chat-attach-step-btn {
+  padding: 4px 7px;
+  border-radius: 4px;
+  font-size: 11px;
+}
+
+.chat-drawer--docked .chat-messages { padding: 12px 10px; }
+
+.chat-empty-icon {
+  width: 42px;
+  height: 42px;
+  margin: 0 auto 12px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--primary);
+  background: var(--primary-glow);
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 800;
 }
 
 .chat-msg-text.streaming {

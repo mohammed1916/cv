@@ -1,10 +1,16 @@
 import { useEffect, useRef, useCallback, useState } from "react";
 import { useChatContext } from "../../context/ChatContext";
 import { useVisualizationContext } from "../../context/VisualizationContext";
-import { streamChat } from "../../services/ollama";
+import { streamProviderChat, getChatProvider } from "../../services/chatProviders";
 import ChatMessage from "./ChatMessage";
 import ChatInput from "./ChatInput";
 import ResizablePanel from "../ResizablePanel";
+import "./chatbot.css";
+
+const Icon = ({ name }) => {
+  const paths = { close: 'M5 5l6 6m0-6-6 6', clear: 'M4 5h8m-7 0 .7 8h4.6l.7-8M7 5V3h2v2', send: 'M3 3l10 5-10 5 2-5-2-5zm2 5h5', plus: 'M8 3v10M3 8h10', history: 'M3 8a5 5 0 1 0 1.5-3.5M3 3v3h3', select: 'M4 3l7 5-4 1-1 4-2-10z', pin: 'M5 3h6l-1 3 2 2H4l2-2-1-3zM8 8v5' };
+  return <svg className="chat-icon" viewBox="0 0 16 16" aria-hidden="true"><path d={paths[name]} /></svg>;
+};
 
 const LAYOUT_ZONES = {
   topLeft: { name: 'Code Panel', label: 'CODE', row: 0, col: 0 },
@@ -58,6 +64,7 @@ export default function ChatDrawer() {
   const [selectAnnouncement, setSelectAnnouncement] = useState('');
   const [historyOpen, setHistoryOpen] = useState(false);
   const [hoveredZone, setHoveredZone] = useState(null);
+  const [providerConfig, setProviderConfig] = useState(getChatProvider);
 
   const handleToggleSelectMode = useCallback(() => {
     const newMode = !selectMode;
@@ -222,14 +229,14 @@ export default function ChatDrawer() {
         ];
 
         let accumulated = "";
-        for await (const delta of streamChat(history)) {
+        for await (const delta of streamProviderChat(history, providerConfig)) {
           accumulated += delta;
           updateLastMessage({ text: accumulated });
         }
         updateLastMessage({ text: accumulated, isStreaming: false });
       } catch (err) {
         updateLastMessage({
-          text: `⚠️ Error: ${err.message}\n\nMake sure Ollama is running with \`ollama serve\` and the model gemma4:e2b is available.`,
+          text: `Error: ${err.message}\n\nMake sure Ollama is running with \`ollama serve\` and the model gemma4:e2b is available.`,
           isStreaming: false,
         });
       } finally {
@@ -237,7 +244,7 @@ export default function ChatDrawer() {
         setIsStreaming(false);
       }
     },
-    [messages, addMessage, updateLastMessage, problemTitle, currentStep, problemDescription, problemState, getManifest],
+    [messages, addMessage, updateLastMessage, problemTitle, currentStep, problemDescription, problemState, getManifest, providerConfig],
   );
 
   if (!isOpen) return null;
@@ -330,11 +337,13 @@ export default function ChatDrawer() {
         onTouchStart={floatingMode ? startDrag : undefined}
         style={floatingMode ? { cursor: 'move' } : {}}
       >
-        <div className="chat-header-left">
-          <span className="chat-header-icon">🤖</span>
+          <div className="chat-header-left">
+          <span className="chat-header-icon">AI</span>
           <div>
-            <div className="chat-header-title">Gemma Assistant <span className="chat-shortcut">(Alt+C)</span></div>
-            <div className="chat-header-sub">gemma4:e2b · Ollama</div>
+            <div className="chat-header-title">Algorithm Assistant <span className="chat-shortcut">(Alt+C)</span></div>
+            <select className="chat-provider-select" value={providerConfig.provider} onChange={(e) => { const next = { ...providerConfig, provider: e.target.value }; setProviderConfig(next); localStorage.setItem('chat.provider.v1', JSON.stringify(next)) }}>
+              <option value="ollama-local">Ollama Local</option><option value="ollama-cloud">Ollama Cloud</option><option value="gemini">Gemini</option>
+            </select>
           </div>
         </div>
         <div className="chat-header-actions">
@@ -343,7 +352,7 @@ export default function ChatDrawer() {
             onClick={() => setHistoryOpen((v) => !v)}
             title="Toggle chat history"
           >
-            🕘 History
+            <Icon name="history" />
           </button>
           <button
             className="chat-new-toggle"
@@ -353,14 +362,14 @@ export default function ChatDrawer() {
             }}
             title="Start new chat"
           >
-            ＋ New
+            <Icon name="plus" />
           </button>
           <button
             className={`chat-float-toggle ${floatingMode ? 'active' : ''}`}
             onClick={() => toggleFloatingMode()}
             title="Toggle floating chat"
           >
-            <span className="">⛶</span> {floatingMode ? 'Dock' : 'Float'}
+            {floatingMode ? 'Dock' : 'Float'}
           </button>
           <button
             className={`chat-select-toggle ${selectMode ? 'active' : ''}`}
@@ -368,7 +377,7 @@ export default function ChatDrawer() {
             aria-pressed={selectMode}
             title="Toggle Select Mode (hover to highlight, click to attach)"
           >
-            🔍 Select mode
+            <Icon name="select" />
             {selectMode && <span className="chat-select-hint">Select mode ON</span>}
           </button>
           <div className="visually-hidden" aria-live="polite">{selectAnnouncement}</div>
@@ -379,13 +388,13 @@ export default function ChatDrawer() {
             disabled={!currentStep}
             title={currentStep ? `Attach current step from ${problemTitle || "visualizer"}` : "No active visualizer step"}
           >
-            📎 Attach step
+            <Icon name="pin" />
           </button>
           <button className="chat-clear-btn" onClick={clearMessages} title="Clear chat">
-            🗑️
+            <Icon name="clear" />
           </button>
           <button className="chat-close-btn" onClick={closeChat} title="Close chat">
-            ✕
+            <Icon name="close" />
           </button>
         </div>
       </div>
@@ -433,10 +442,10 @@ export default function ChatDrawer() {
       <div className="chat-messages">
         {messages.length === 0 && (
           <div className="chat-empty">
-            <div className="chat-empty-icon">💬</div>
+            <div className="chat-empty-icon">AI</div>
             <p>Ask Gemma anything about the algorithm you&apos;re visualizing.</p>
             <p className="chat-empty-hint">
-              Use <strong>📎 Attach step</strong> to share the current timestep, or click any highlighted element in the visualizer.
+              Use <strong>Attach step</strong> to share the current timestep, or select any visual element to attach it.
             </p>
           </div>
         )}
@@ -511,7 +520,7 @@ export default function ChatDrawer() {
           onResizeEnd={handleResizeEnd}
           handles={['left']}
           className="chat-panel-docked"
-          style={{ position: 'fixed', top: 0, right: 0, height: '100vh', zIndex: 1002 }}
+          style={{ position: 'fixed', top: '60px', right: 0, height: 'calc(100vh - 60px)', zIndex: 1002 }}
         >
           {chatContent}
         </ResizablePanel>

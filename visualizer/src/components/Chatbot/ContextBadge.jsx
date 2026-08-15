@@ -5,7 +5,7 @@
 export default function ContextBadge({ label, onRemove }) {
   return (
     <span className="ctx-badge">
-      <span className="ctx-badge-icon">📎</span>
+      <span className="ctx-badge-icon">CTX</span>
       <span className="ctx-badge-label">{label}</span>
       {onRemove && (
         <button className="ctx-badge-remove" onClick={onRemove} title="Remove context">

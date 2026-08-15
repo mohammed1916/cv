@@ -40,7 +40,7 @@ export default function ChatMessage({ message }) {
 
   return (
     <div className={`chat-msg chat-msg--${role}`}>
-      <div className="chat-msg-avatar">{isUser ? "🧑" : "🤖"}</div>
+      <div className="chat-msg-avatar">{isUser ? "You" : "AI"}</div>
       <div className="chat-msg-body">
         {/* Attached context badge (user messages only) */}
         {isUser && contextLabel && (

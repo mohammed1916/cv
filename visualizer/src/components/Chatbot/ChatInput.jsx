@@ -162,7 +162,7 @@ export default function ChatInput({ onSend, attachedContext, onClearContext, dis
           onClick={() => fileInputRef.current?.click()}
           disabled={disabled}
         >
-          🖼️
+          Image
         </button>
 
         {/* Screenshot */}
@@ -172,7 +172,7 @@ export default function ChatInput({ onSend, attachedContext, onClearContext, dis
           onClick={handleScreenshot}
           disabled={disabled || isCapturing}
         >
-          📸
+          Capture
         </button>
 
         {/* Mic */}
@@ -182,7 +182,7 @@ export default function ChatInput({ onSend, attachedContext, onClearContext, dis
           onClick={handleMic}
           disabled={disabled}
         >
-          🎤
+          Voice
         </button>
 
       </div>
