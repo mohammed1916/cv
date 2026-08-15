@@ -257,6 +257,14 @@ export default function FiveDirectReportsVisualizer() {
   /* ── Panels ───────────────────────────────────────────────── */
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"table","label":"table","type":"string"}]}
+        values={{ table: tableInput }}
+        onChange={(k, v) => { if (k === 'table') setTableInput(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyExample}
+        inputError={inputError}
+      />
     <div className="p570-panel-primary">
       <div className="p570-card">
         <div className="p570-section-label">Sample Employee Rows</div>

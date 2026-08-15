@@ -49,6 +49,13 @@ export default function Problem83Visualizer() {
 
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"input","label":"input","type":"string"}]}
+        values={{ input: inputInput }}
+        onChange={(k, v) => { if (k === 'input') setInputInput(v) }}
+        showExamples={false}
+        inputError={inputError}
+      />
     <div className="problem83-panel">
       <div className="problem83-panel-head">Visualization</div>
       <div className="problem83-panel-body">

@@ -103,6 +103,15 @@ export default function PermutationInStringVisualizer() {
 
     const vizPanel = (
       <>
+          <ManualInputPanel
+            fields={[{"key":"s1","label":"s1","type":"string"},{"key":"s2","label":"s2","type":"string"}]}
+            values={{ s1: s1Input, s2: s2Input }}
+            onChange={(k, v) => { if (k === 's1') setS1Input(v); if (k === 's2') setS2Input(v); handleReset() }}
+            examples={EXAMPLES}
+            activeLabel={ex?.label}
+            applyExample={applyEx}
+            inputError={inputError}
+          />
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
             <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>s1: <strong>{s1}</strong> | s2: <strong>{s2}</strong></div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>

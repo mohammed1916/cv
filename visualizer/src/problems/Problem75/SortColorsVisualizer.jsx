@@ -332,6 +332,15 @@ export default function SortColorsVisualizer() {
 
     const vizPanel = (
       <>
+        <ManualInputPanel
+          fields={[{"key":"initial","label":"initial","type":"string"}]}
+          values={{ initial: initialInput }}
+          onChange={(k, v) => { if (k === 'initial') setInitialInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={EXAMPLES[sel]?.label}
+          applyExample={(e) => applyExample(EXAMPLES.indexOf(e))}
+          inputError={inputError}
+        />
       <VisualizationPanel
         nums={nums}
         step={step}

@@ -231,6 +231,15 @@ export default function PowerOfTwoVisualizer() {
 
   return (
     <div className="pt-shell">
+        <ManualInputPanel
+          fields={[{"key":"n","label":"n","type":"number"},{"key":"desc","label":"desc","type":"string"}]}
+          values={{ n: nInput, desc: descInput }}
+          onChange={(k, v) => { if (k === 'n') setNInput(v); if (k === 'desc') setDescInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       
       {/* Example selector */}
       <div className="pt-examples">

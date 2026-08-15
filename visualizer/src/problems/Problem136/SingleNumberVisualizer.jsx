@@ -213,6 +213,15 @@ export default function SingleNumberVisualizer() {
   );
   const vizPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"nums","label":"nums","type":"array"}]}
+        values={{ nums: numsInput }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <VisualizationPanel
       nums={nums}
       step={step}

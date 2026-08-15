@@ -13,6 +13,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import './ConstructBTVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -152,6 +153,13 @@ export default function ConstructBTVisualizer() {
     // Extract panel consts for Lumino DockPanel
     const inputPanel = (
         <div className="ctpi-panel-body">
+              <ManualInputPanel
+                fields={[{"key":"pre","label":"pre","type":"string"},{"key":"ino","label":"ino","type":"string"}]}
+                values={{ pre: preInput, ino: inoInput }}
+                onChange={(k, v) => { if (k === 'pre') setPreInput(v); if (k === 'ino') setInoInput(v); handleReset() }}
+                examples={EXAMPLES}
+                applyExample={applyExample}
+              />
             <div className="ctpi-examples">
                 {EXAMPLES.map((ex) => (
                     <button key={ex.label} className="ctpi-chip" onClick={() => applyExample(ex)}>{ex.label}</button>

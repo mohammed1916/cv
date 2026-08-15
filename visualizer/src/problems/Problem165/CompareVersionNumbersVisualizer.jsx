@@ -332,6 +332,14 @@ export default function CompareVersionNumbersVisualizer() {
   // Step 2: Extract panels into consts
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"version1","label":"version1","type":"string"},{"key":"version2","label":"version2","type":"string"}]}
+        values={{ version1: version1Input, version2: version2Input }}
+        onChange={(k, v) => { if (k === 'version1') setVersion1Input(v); if (k === 'version2') setVersion2Input(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="cvn-panel" style={{ flex: 1 }}>
       <div className="cvn-panel-head">Compare Versions</div>
       <div className="cvn-panel-body">

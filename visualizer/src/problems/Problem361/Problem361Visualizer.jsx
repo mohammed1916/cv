@@ -514,6 +514,15 @@ export default function Problem361Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"grid","label":"grid","type":"array"}]}
+          values={{ grid: gridInput }}
+          onChange={(k, v) => { if (k === 'grid') setGridInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={(e) => applyExample(EXAMPLES.indexOf(e))}
+          inputError={inputError}
+        />
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         <PlaybackControls

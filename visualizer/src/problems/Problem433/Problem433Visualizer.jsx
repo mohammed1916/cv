@@ -281,6 +281,15 @@ export default function Problem433Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"start","label":"start","type":"string"},{"key":"end","label":"end","type":"string"},{"key":"bank","label":"bank","type":"array"}]}
+          values={{ start: startInput, end: endInput, bank: bankInput }}
+          onChange={(k, v) => { if (k === 'start') setStartInput(v); if (k === 'end') setEndInput(v); if (k === 'bank') setBankInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">

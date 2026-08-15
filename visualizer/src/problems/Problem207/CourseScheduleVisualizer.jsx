@@ -110,6 +110,13 @@ export default function CourseScheduleVisualizer() {
   )
   const vizPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"numCourses","label":"numCourses","type":"number"},{"key":"prerequisites","label":"prerequisites","type":"array"}]}
+        values={{ numCourses: numCoursesInput, prerequisites: prerequisitesInput }}
+        onChange={(k, v) => { if (k === 'numCourses') setNumCoursesInput(v); if (k === 'prerequisites') setPrerequisitesInput(v); handleReset() }}
+        showExamples={false}
+        inputError={inputError}
+      />
     <VisualizationPanel step={step} />
   
     </>)

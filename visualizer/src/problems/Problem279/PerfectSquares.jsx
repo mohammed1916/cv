@@ -109,6 +109,12 @@ export default function PerfectSquares() {
 
   return (
     <div className="psq-container">
+        <ManualInputPanel
+          fields={[{"key":"custom","label":"custom","type":"string"}]}
+          values={{ custom: customInput }}
+          onChange={(k, v) => { if (k === 'custom') setCustomInput(v) }}
+          showExamples={false}
+        />
       <h1 className="psq-title">LC 279: Perfect Squares</h1>
 
       <div className="psq-input-section">

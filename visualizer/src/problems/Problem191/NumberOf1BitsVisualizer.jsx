@@ -88,6 +88,15 @@ export default function NumberOf1BitsVisualizer() {
 
   const vizPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"n","label":"n","type":"number"},{"key":"desc","label":"desc","type":"string"}]}
+        values={{ n: nInput, desc: descInput }}
+        onChange={(k, v) => { if (k === 'n') setNInput(v); if (k === 'desc') setDescInput(v); handleReset() }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16 }}>
           <div>
             <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>

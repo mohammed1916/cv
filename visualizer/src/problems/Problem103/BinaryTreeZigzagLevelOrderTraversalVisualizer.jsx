@@ -257,6 +257,14 @@ export default function BinaryTreeZigzagLevelOrderTraversalVisualizer() {
   // Extract panels into consts
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"root","label":"root","type":"array"}]}
+        values={{ root: rootInput }}
+        onChange={(k, v) => { if (k === 'root') setRootInput(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="bzlt-panel">
       <div className="bzlt-panel-head">Zigzag Traversal</div>
       <div className="bzlt-panel-body">

@@ -12,6 +12,7 @@ import './Problem367Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const PATTERNS = ['compute-mid', 'compute-square', 'done', 'edge-case', 'found', 'init', 'search-left', 'search-right', 'setup']
 const LINE_PATTERN_MAP = {
@@ -549,6 +550,12 @@ export default function Problem367Visualizer() {
 
     return (
         <div className="p367-shell">
+              <ManualInputPanel
+                fields={[{"key":"num","label":"num","type":"string"}]}
+                values={{ num: numInput }}
+                onChange={(k, v) => { if (k === 'num') setNumInput(v); handleReset() }}
+                showExamples={false}
+              />
             <div className="p367-header">
                 <h2>Valid Perfect Square</h2>
                 <p className={`p367-message ${step?.isFound ? 'found' : step?.phase === 'done' ? 'not-found' : ''}`}>

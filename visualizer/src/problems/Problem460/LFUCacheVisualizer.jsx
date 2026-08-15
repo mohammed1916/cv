@@ -215,6 +215,15 @@ export default function LFUCacheVisualizer() {
 
     return (
         <div className="lfu-shell">
+        <ManualInputPanel
+          fields={[{"key":"capacity","label":"capacity","type":"number"},{"key":"ops","label":"ops","type":"array"}]}
+          values={{ capacity: capacityInput, ops: opsInput }}
+          onChange={(k, v) => { if (k === 'capacity') setCapacityInput(v); if (k === 'ops') setOpsInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       
             <DockableWorkspace
                 title="LFU Cache Workspace"

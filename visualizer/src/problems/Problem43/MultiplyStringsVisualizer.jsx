@@ -11,6 +11,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './MultiplyStrings.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const MULTIPLYSTRINGS_PATTERNS = ['add_to_result', 'create_result_array', 'done', 'init', 'multiply', 'trim_zeros', 'update_cells']
 
@@ -201,6 +202,14 @@ export default function MultiplyStringsVisualizer() {
 
   const vizPanel = (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+        <ManualInputPanel
+          fields={[{"key":"num1","label":"num1","type":"string"},{"key":"num2","label":"num2","type":"string"}]}
+          values={{ num1: num1Input, num2: num2Input }}
+          onChange={(k, v) => { if (k === 'num1') setNum1Input(v); if (k === 'num2') setNum2Input(v); handleReset() }}
+          examples={EXAMPLES}
+          applyExample={applyExample}
+          inputError={inputError}
+        />
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {EXAMPLES.map((e) => (
           <button

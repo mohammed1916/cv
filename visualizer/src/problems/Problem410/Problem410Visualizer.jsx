@@ -434,6 +434,15 @@ export default function Problem410Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"nums","label":"nums","type":"array"},{"key":"m","label":"m","type":"number"}]}
+          values={{ nums: numsInput, m: mInput }}
+          onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'm') setMInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={EXAMPLES[exIdx]?.label}
+          applyExample={(e) => applyEx(EXAMPLES.indexOf(e))}
+          inputError={inputError}
+        />
       
       <DockableWorkspace
         panels={dockPanels}

@@ -236,6 +236,15 @@ export default function Problem429Visualizer() {
   ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, root])
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"root","label":"root","type":"array"}]}
+          values={{ root: rootInput }}
+          onChange={(k, v) => { if (k === 'root') setRootInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">

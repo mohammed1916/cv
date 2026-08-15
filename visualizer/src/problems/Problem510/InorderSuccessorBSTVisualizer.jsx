@@ -392,6 +392,15 @@ export default function InorderSuccessorBSTVisualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"values","label":"values","type":"string"},{"key":"target","label":"target","type":"string"}]}
+          values={{ values: valuesInput, target: targetInput }}
+          onChange={(k, v) => { if (k === 'values') setValuesInput(v); if (k === 'target') setTargetInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

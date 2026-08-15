@@ -233,7 +233,17 @@ export default function BestTimeToBuyAndSellStockIIVisualizer() {
     </div>
   )
 
-  const primaryPanel = <VisualizationPanel step={step} />
+  const primaryPanel = <>
+    <ManualInputPanel
+      fields={[{"key":"prices","label":"prices","type":"array"}]}
+      values={{ prices: pricesInput }}
+      onChange={(k, v) => { if (k === 'prices') setPricesInput(v); handleReset() }}
+      examples={EXAMPLES}
+      applyExample={applyEx}
+      inputError={inputError}
+    />
+    <VisualizationPanel step={step} />
+  </>
 
   const statusPanel = (
     <div style={{ padding: 12, backgroundColor: '#1e293b', color: '#94a3b8', fontSize: 12, height: '100%', display: 'flex', alignItems: 'center', overflow: 'auto' }}>

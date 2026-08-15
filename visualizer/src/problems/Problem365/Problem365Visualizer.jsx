@@ -541,6 +541,15 @@ export default function Problem365Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"a","label":"a","type":"number"},{"key":"b","label":"b","type":"number"},{"key":"z","label":"z","type":"number"}]}
+          values={{ a: aInput, b: bInput, z: zInput }}
+          onChange={(k, v) => { if (k === 'a') setAInput(v); if (k === 'b') setBInput(v); if (k === 'z') setZInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={(e) => applyExample(EXAMPLES.indexOf(e))}
+          inputError={inputError}
+        />
       
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">

@@ -92,6 +92,13 @@ export default function CountPrimesVisualizer() {
   ], [step, connectivity, setActiveLineDom])
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"n","label":"n","type":"number"}]}
+          values={{ n: nInput }}
+          onChange={(k, v) => { if (k === 'n') setNInput(v); handleReset() }}
+          showExamples={false}
+          inputError={inputError}
+        />
       
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [["code", "viz"]], minimized: [] }} />
       <FloatingPanel title="Controls"><PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={(e) => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Pattern" showPatternOverlayToggle />

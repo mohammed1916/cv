@@ -18,6 +18,7 @@ import { useGridRayOverlay } from '../../hooks/useGridRayOverlay'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './RegularExpressionMatchingVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const SOLUTION_CODE = [
   { line: 1, text: 'def isMatch(s, p):' },
   { line: 2, text: '    m, n = len(s), len(p)' },
@@ -591,7 +592,16 @@ export default function RegularExpressionMatchingVisualizer() {
   )
 
   const mainPanel = (
-    <VisualizationPanel
+    <>
+      <ManualInputPanel
+        fields={[{"key":"s","label":"s","type":"string"},{"key":"p","label":"p","type":"string"}]}
+        values={{ s: sInput, p: pInput }}
+        onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 'p') setPInput(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyExample}
+        inputError={inputError}
+      />
+      <VisualizationPanel
       sInput={sInput}
       setSInput={setSInput}
       pInput={pInput}
@@ -603,6 +613,7 @@ export default function RegularExpressionMatchingVisualizer() {
       step={step}
       applyExample={applyExample}
     />
+    </>
   )
 
   const statusPanel = (

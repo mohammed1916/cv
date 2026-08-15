@@ -82,6 +82,13 @@ export default function HappyNumberVisualizer() {
   )
   const vizPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"n","label":"n","type":"number"}]}
+        values={{ n: nInput }}
+        onChange={(k, v) => { if (k === 'n') setNInput(v); handleReset() }}
+        showExamples={false}
+        inputError={inputError}
+      />
     <VisualizationPanel step={step} />
   
     </>)

@@ -304,6 +304,13 @@ export default function SkylineProblemVisualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"buildings","label":"buildings","type":"string"}]}
+          values={{ buildings: buildingsInput }}
+          onChange={(k, v) => { if (k === 'buildings') setBuildingsInput(v); handleReset() }}
+          showExamples={false}
+          inputError={inputError}
+        />
       
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [["code", "viz"]], minimized: [] }} />
       <FloatingPanel title="Controls">

@@ -14,6 +14,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import './Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -276,6 +277,14 @@ export default function BinaryTreeLevelOrderTraversalIIVisualizer() {
 
     return (
         <div className="btlo2-shell">
+              <ManualInputPanel
+                fields={[{"key":"arr","label":"arr","type":"string"}]}
+                values={{ arr: arrInput }}
+                onChange={(k, v) => { if (k === 'arr') setArrInput(v); handleReset() }}
+                examples={EXAMPLES}
+                applyExample={applyExample}
+                inputError={inputError}
+              />
             <div className="btlo2-header">
                 <h2>Binary Tree Level Order Traversal II</h2>
                 <p className={`btlo2-message ${step?.phase === 'done' ? 'ok' : ''}`}>

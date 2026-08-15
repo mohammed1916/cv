@@ -241,6 +241,13 @@ export default function ContainsDuplicateVisualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"nums","label":"nums","type":"array"}]}
+          values={{ nums: numsInput }}
+          onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
+          showExamples={false}
+          inputError={inputError}
+        />
       
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [["code", "viz"]], minimized: [] }} />
       <FloatingPanel title="Controls">

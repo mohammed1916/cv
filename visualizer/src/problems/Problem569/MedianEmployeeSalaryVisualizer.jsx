@@ -262,6 +262,14 @@ export default function MedianEmployeeSalaryVisualizer() {
   /* ── Panels ───────────────────────────────────────────────── */
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"table","label":"table","type":"string"}]}
+        values={{ table: tableInput }}
+        onChange={(k, v) => { if (k === 'table') setTableInput(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyExample}
+        inputError={inputError}
+      />
     <div className="p569-panel-primary">
       <div className="p569-card">
         <div className="p569-section-label">Sample Employee Rows</div>

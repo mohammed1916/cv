@@ -256,6 +256,15 @@ export default function Problem474Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"strs","label":"strs","type":"array"},{"key":"m","label":"m","type":"number"},{"key":"n","label":"n","type":"number"}]}
+          values={{ strs: strsInput, m: mInput, n: nInput }}
+          onChange={(k, v) => { if (k === 'strs') setStrsInput(v); if (k === 'm') setMInput(v); if (k === 'n') setNInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">

@@ -280,6 +280,15 @@ export default function Problem80Visualizer() {
 
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"nums","label":"nums","type":"array"}]}
+        values={{ nums: numsInput }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="problem80-panel">
       <VisualizationPanel step={step} />
     </div>

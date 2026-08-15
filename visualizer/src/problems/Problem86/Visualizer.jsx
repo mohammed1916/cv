@@ -310,6 +310,15 @@ export default function Problem86Visualizer() {
   // Extract visualization panel
   const vizPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"list","label":"list","type":"array"},{"key":"x","label":"x","type":"number"}]}
+        values={{ list: listInput, x: xInput }}
+        onChange={(k, v) => { if (k === 'list') setListInput(v); if (k === 'x') setXInput(v); handleReset() }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="problem86-panel">
       <div className="problem86-panel-head">✂️ Partition List</div>
       <div className="problem86-panel-body">

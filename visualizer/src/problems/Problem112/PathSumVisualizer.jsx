@@ -266,6 +266,14 @@ export default function PathSumVisualizer() {
   // Step 2: Extract panel consts
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"root","label":"root","type":"array"},{"key":"targetSum","label":"targetSum","type":"number"}]}
+        values={{ root: rootInput, targetSum: targetSumInput }}
+        onChange={(k, v) => { if (k === 'root') setRootInput(v); if (k === 'targetSum') setTargetSumInput(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="ps-panel">
       <VisualizationPanel step={step} />
     </div>

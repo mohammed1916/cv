@@ -423,6 +423,15 @@ export default function Problem408Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"word","label":"word","type":"string"},{"key":"abbr","label":"abbr","type":"string"}]}
+          values={{ word: wordInput, abbr: abbrInput }}
+          onChange={(k, v) => { if (k === 'word') setWordInput(v); if (k === 'abbr') setAbbrInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={EXAMPLES[exIdx]?.label}
+          applyExample={(e) => applyEx(EXAMPLES.indexOf(e))}
+          inputError={inputError}
+        />
       
       <DockableWorkspace
         panels={dockPanels}

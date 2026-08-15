@@ -340,6 +340,15 @@ export default function Problem405Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"num","label":"num","type":"number"}]}
+          values={{ num: numInput }}
+          onChange={(k, v) => { if (k === 'num') setNumInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={EXAMPLES[exIdx]?.label}
+          applyExample={(e) => applyEx(EXAMPLES.indexOf(e))}
+          inputError={inputError}
+        />
       
       <DockableWorkspace
         panels={dockPanels}

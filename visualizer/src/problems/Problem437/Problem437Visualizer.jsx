@@ -377,6 +377,15 @@ export default function Problem437Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"tree","label":"tree","type":"string"},{"key":"target","label":"target","type":"string"}]}
+          values={{ tree: treeInput, target: targetInput }}
+          onChange={(k, v) => { if (k === 'tree') setTreeInput(v); if (k === 'target') setTargetInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

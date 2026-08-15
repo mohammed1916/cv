@@ -320,6 +320,15 @@ export default function Problem406Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"people","label":"people","type":"array"}]}
+          values={{ people: peopleInput }}
+          onChange={(k, v) => { if (k === 'people') setPeopleInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={EXAMPLES[exIdx]?.label}
+          applyExample={(e) => applyEx(EXAMPLES.indexOf(e))}
+          inputError={inputError}
+        />
       
       <DockableWorkspace
         panels={dockPanels}

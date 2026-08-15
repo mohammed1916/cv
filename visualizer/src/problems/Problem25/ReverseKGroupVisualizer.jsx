@@ -182,6 +182,15 @@ export default function ReverseKGroupVisualizer() {
 
     const primaryPanel = (
       <>
+          <ManualInputPanel
+            fields={[{"key":"list","label":"list","type":"array"},{"key":"k","label":"k","type":"number"}]}
+            values={{ list: listInput, k: kInput }}
+            onChange={(k, v) => { if (k === 'list') setListInput(v); if (k === 'k') setKInput(v); handleReset() }}
+            examples={EXAMPLES}
+            activeLabel={ex?.label}
+            applyExample={applyEx}
+            inputError={inputError}
+          />
         <div className="rkg-panel">
             <div className="rkg-examples">
                 {EXAMPLES.map(e => (

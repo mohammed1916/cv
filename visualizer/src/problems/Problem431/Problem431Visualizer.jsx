@@ -248,6 +248,15 @@ export default function Problem431Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"naryStructure","label":"naryStructure","type":"string"}]}
+          values={{ naryStructure: naryStructureInput }}
+          onChange={(k, v) => { if (k === 'naryStructure') setNaryStructureInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">

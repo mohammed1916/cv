@@ -12,6 +12,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput, TreeSVG } from '../../components/treeUtils'
 import './BinaryTreeTiltVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -446,6 +447,14 @@ export default function BinaryTreeTiltVisualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"arr","label":"arr","type":"array"}]}
+          values={{ arr: arrInput }}
+          onChange={(k, v) => { if (k === 'arr') setArrInput(v); handleReset() }}
+          examples={examples}
+          applyExample={applyExample}
+          inputError={inputError}
+        />
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}

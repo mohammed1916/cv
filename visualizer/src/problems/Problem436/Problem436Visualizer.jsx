@@ -352,6 +352,15 @@ export default function Problem436Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"intervals","label":"intervals","type":"array"}]}
+          values={{ intervals: intervalsInput }}
+          onChange={(k, v) => { if (k === 'intervals') setIntervalsInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

@@ -153,6 +153,15 @@ export default function EditDistanceVisualizer() {
   // Step 3: Extract panels into consts
   const inputPanel = (
     <div className="ed-panel">
+        <ManualInputPanel
+          fields={[{"key":"w1","label":"w1","type":"string"},{"key":"w2","label":"w2","type":"string"}]}
+          values={{ w1: w1Input, w2: w2Input }}
+          onChange={(k, v) => { if (k === 'w1') setW1Input(v); if (k === 'w2') setW2Input(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       <InputPanel EXAMPLES={EXAMPLES} ex={ex} applyEx={applyEx} step={step} w1={w1} w2={w2} />
     </div>
   );

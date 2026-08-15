@@ -227,6 +227,14 @@ export default function PopulatingNextRightPointersIIVisualizer() {
   // ─── Step 2: Extract panels into consts ────────────────────────────────────
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"root","label":"root","type":"array"}]}
+        values={{ root: rootInput }}
+        onChange={(k, v) => { if (k === 'root') setRootInput(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="pnpii-panel">
       <VisualizationPanel step={step} />
     </div>

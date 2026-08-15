@@ -293,6 +293,15 @@ export default function Problem96Visualizer() {
 
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"n","label":"n","type":"number"}]}
+        values={{ n: nInput }}
+        onChange={(k, v) => { if (k === 'n') setNInput(v); handleReset() }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="problem96-panel">
       <VisualizationPanel step={step} />
     </div>

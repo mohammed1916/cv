@@ -301,6 +301,15 @@ export default function Problem90Visualizer() {
   // Extract panels as constants for portal rendering
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"nums","label":"nums","type":"array"}]}
+        values={{ nums: numsInput }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="problem90-panel">
       <VisualizationPanel step={step} />
     </div>

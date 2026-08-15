@@ -195,6 +195,12 @@ const BSTIterator = () => {
 
   return (
     <div className="bsti-container">
+        <ManualInputPanel
+          fields={[{"key":"custom","label":"custom","type":"string"}]}
+          values={{ custom: customInput }}
+          onChange={(k, v) => { if (k === 'custom') setCustomInput(v) }}
+          showExamples={false}
+        />
       <div className="bsti-header">
         <h1>Binary Search Tree Iterator (LC 173)</h1>
         <p className="bsti-subtitle">Controlled in-order traversal using stack</p>

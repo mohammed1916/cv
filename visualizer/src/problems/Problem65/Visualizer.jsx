@@ -409,6 +409,15 @@ export default function Problem65Visualizer() {
   // Extract panels into consts
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"s","label":"s","type":"string"}]}
+        values={{ s: sInput }}
+        onChange={(k, v) => { if (k === 's') setSInput(v); handleReset() }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="problem65-panel">
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, padding: '12px 12px 0' }}>
         {EXAMPLES.map((e) => (

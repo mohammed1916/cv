@@ -229,6 +229,15 @@ export default function GasStationVisualizer() {
 
   const vizPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"gas","label":"gas","type":"array"},{"key":"cost","label":"cost","type":"array"}]}
+        values={{ gas: gasInput, cost: costInput }}
+        onChange={(k, v) => { if (k === 'gas') setGasInput(v); if (k === 'cost') setCostInput(v); handleReset() }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="gs-panel">
       <VisualizationPanel
         gas={gas}

@@ -452,6 +452,15 @@ export default function Problem383Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"ransomNote","label":"ransomNote","type":"string"},{"key":"magazine","label":"magazine","type":"string"}]}
+          values={{ ransomNote: ransomNoteInput, magazine: magazineInput }}
+          onChange={(k, v) => { if (k === 'ransomNote') setRansomNoteInput(v); if (k === 'magazine') setMagazineInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={(e) => applyExample(EXAMPLES.indexOf(e))}
+          inputError={inputError}
+        />
       
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">

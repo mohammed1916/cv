@@ -397,6 +397,15 @@ export default function Problem99Visualizer() {
 
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"tree","label":"tree","type":"array"}]}
+        values={{ tree: treeInput }}
+        onChange={(k, v) => { if (k === 'tree') setTreeInput(v); handleReset() }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="problem99-panel">
       <VisualizationPanel step={step} />
     </div>

@@ -171,6 +171,15 @@ export default function DungeonGameVisualizer() {
     // Extract panels
     const primaryPanel = (
       <>
+          <ManualInputPanel
+            fields={[{"key":"dungeon","label":"dungeon","type":"array"}]}
+            values={{ dungeon: dungeonInput }}
+            onChange={(k, v) => { if (k === 'dungeon') setDungeonInput(v); handleReset() }}
+            examples={EXAMPLES}
+            activeLabel={ex?.label}
+            applyExample={applyEx}
+            inputError={inputError}
+          />
         <div className="dg-panel">
             <VizPanel EXAMPLES={EXAMPLES} ex={ex} dungeon={dungeon} R={R} C={C} CELL_W={CELL_W} CELL_H={CELL_H} dp={dp} activeR={activeR} activeC={activeC} step={step} applyEx={applyEx} setActiveLineDom={setActiveLineDom} />
         </div>

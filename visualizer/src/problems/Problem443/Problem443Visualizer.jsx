@@ -395,6 +395,15 @@ export default function Problem443Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"chars","label":"chars","type":"array"}]}
+          values={{ chars: charsInput }}
+          onChange={(k, v) => { if (k === 'chars') setCharsInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

@@ -13,6 +13,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { getExamples } from '../../config/examplesRegistry'
 import './LongestCommonPrefixVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -361,13 +362,23 @@ export default function LongestCommonPrefixVisualizer() {
 
   // Extract panels into consts
   const inputPanel = (
-    <InputPanel
+    <>
+      <ManualInputPanel
+        fields={[{"key":"strs","label":"strs","type":"string"}]}
+        values={{ strs: strsInput }}
+        onChange={(k, v) => { if (k === 'strs') setStrsInput(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyExample}
+        inputError={inputError}
+      />
+      <InputPanel
       strsInput={strsInput}
       setStrsInput={setStrsInput}
       handleReset={handleReset}
       applyExample={applyExample}
       inputError={inputError}
     />
+    </>
   )
 
   const stringsVizPanel = (

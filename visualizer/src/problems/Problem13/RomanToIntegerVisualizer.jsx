@@ -12,6 +12,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 import './RomanToIntegerVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const R2I_PATTERNS = ['init', 'loop', 'check', 'subtract', 'add']
 
@@ -255,6 +256,14 @@ export default function RomanToIntegerVisualizer() {
 
   const primaryPanel = (
     <div className="rti-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+        <ManualInputPanel
+          fields={[{"key":"roman","label":"roman","type":"string"}]}
+          values={{ roman: romanInput }}
+          onChange={(k, v) => { if (k === 'roman') setRomanInput(v); handleReset() }}
+          examples={EXAMPLES}
+          applyExample={applyExample}
+          inputError={inputError}
+        />
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {EXAMPLES.map((e, i) => (
           <button

@@ -402,6 +402,15 @@ export default function FindLargestValueEachRowVisualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"arr","label":"arr","type":"string"}]}
+          values={{ arr: arrInput }}
+          onChange={(k, v) => { if (k === 'arr') setArrInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

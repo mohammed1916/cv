@@ -31,6 +31,7 @@ import SituationOverlay from "./SituationOverlay";
 import { useSituationAnalysis } from "./useSituationAnalysis";
 import { usePruningAnalysis } from "./usePruningAnalysis";
 import DualRepresentationView from "./DualRepresentationView";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const MAX_TREE_NODES_TO_RENDER = 120;
 
 const EXAMPLES = getExamples('game-on-growing-tree');
@@ -1200,6 +1201,13 @@ export default function GameOnGrowingTreeVisualizer() {
 
   return (
     <div className="gogt-shell">
+        <ManualInputPanel
+          fields={[{"key":"q","label":"q","type":"string"},{"key":"parents","label":"parents","type":"string"}]}
+          values={{ q: qInput, parents: parentsInput }}
+          onChange={(k, v) => { if (k === 'q') setQInput(v); if (k === 'parents') setParentsInput(v); handleReset() }}
+          showExamples={false}
+          inputError={inputError}
+        />
       <section className="gogt-hero">
         <div className="gogt-hero-copy">
           <span className="gogt-kicker">Codeforces F • Tree game + DP</span>

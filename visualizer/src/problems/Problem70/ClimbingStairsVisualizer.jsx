@@ -17,6 +17,7 @@ import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import './ClimbingStairsVisualizer.css'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const SOLUTION_CODE = getSolutionCode('climbing-stairs')
 
 const CLIMBINGSTAIRS_PATTERNS = ['add', 'done', 'init', 'loop', 'shift', 'temp']
@@ -355,7 +356,16 @@ export default function ClimbingStairsVisualizer() {
   )
 
   const visualizationPanel = (
-    <VisualizationPanel
+    <>
+      <ManualInputPanel
+        fields={[{"key":"n","label":"n","type":"string"}]}
+        values={{ n: nInput }}
+        onChange={(k, v) => { if (k === 'n') setNInput(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyExample}
+        inputError={inputError}
+      />
+      <VisualizationPanel
       nInput={nInput}
       setNInput={setNInput}
       n={n}
@@ -366,6 +376,7 @@ export default function ClimbingStairsVisualizer() {
       step={step}
       applyExample={applyExample}
     />
+    </>
   )
 
   const variablesPanel = <VariablesPanel step={step} />

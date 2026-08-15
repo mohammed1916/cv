@@ -469,6 +469,15 @@ export default function Problem444Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"org","label":"org","type":"array"},{"key":"seqs","label":"seqs","type":"array"}]}
+          values={{ org: orgInput, seqs: seqsInput }}
+          onChange={(k, v) => { if (k === 'org') setOrgInput(v); if (k === 'seqs') setSeqsInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

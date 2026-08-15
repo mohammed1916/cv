@@ -294,6 +294,15 @@ export default function Problem489Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"room","label":"room","type":"array"}]}
+          values={{ room: roomInput }}
+          onChange={(k, v) => { if (k === 'room') setRoomInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       
       <DockableWorkspace
         panels={dockPanels}

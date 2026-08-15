@@ -13,6 +13,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import './NumberOfIslandsVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -200,6 +201,14 @@ export default function NumberOfIslandsVisualizer() {
 
   const gridPanel = (
         <div className="noi-panel-body">
+            <ManualInputPanel
+              fields={[{"key":"grid","label":"grid","type":"string"}]}
+              values={{ grid: gridInput }}
+              onChange={(k, v) => { if (k === 'grid') setGridInput(v); handleReset() }}
+              examples={EXAMPLES}
+              applyExample={applyExample}
+              inputError={inputError}
+            />
           <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
             {EXAMPLES.map((ex) => (
               <button

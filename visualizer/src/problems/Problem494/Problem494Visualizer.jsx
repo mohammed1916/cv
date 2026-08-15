@@ -102,6 +102,15 @@ export default function Problem494Visualizer() {
   const codePanel = (<CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />)
   const vizPanel = (
     <>
+        <ManualInputPanel
+          fields={[{"key":"nums","label":"nums","type":"array"},{"key":"target","label":"target","type":"number"}]}
+          values={{ nums: numsInput, target: targetInput }}
+          onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'target') setTargetInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       <VisualizationPanel nums={nums} target={target} step={step} applyEx={applyEx} />
     </>)
   const [panelDivs, setPanelDivs] = useState(null)

@@ -490,6 +490,14 @@ export default function OptimalDivisionVisualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"array","label":"array","type":"string"}]}
+          values={{ array: arrayInput }}
+          onChange={(k, v) => { if (k === 'array') setArrayInput(v); handleReset() }}
+          examples={examples}
+          applyExample={applyExample}
+          inputError={inputError}
+        />
       
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">

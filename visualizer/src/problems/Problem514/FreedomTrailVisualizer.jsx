@@ -362,6 +362,15 @@ export default function FreedomTrailVisualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"ring","label":"ring","type":"string"},{"key":"key","label":"key","type":"string"}]}
+          values={{ ring: ringInput, key: keyInput }}
+          onChange={(k, v) => { if (k === 'ring') setRingInput(v); if (k === 'key') setKeyInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

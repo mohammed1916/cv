@@ -177,6 +177,15 @@ export default function IntersectionTwoLinkedListsVisualizer() {
   // Extract panels
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"listA","label":"listA","type":"array"},{"key":"listB","label":"listB","type":"array"},{"key":"shared","label":"shared","type":"array"},{"key":"intersectVal","label":"intersectVal","type":"number"}]}
+        values={{ listA: listAInput, listB: listBInput, shared: sharedInput, intersectVal: intersectValInput }}
+        onChange={(k, v) => { if (k === 'listA') setListAInput(v); if (k === 'listB') setListBInput(v); if (k === 'shared') setSharedInput(v); if (k === 'intersectVal') setIntersectValInput(v); handleReset() }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="itll-panel">
       <div className="itll-examples">
         {EXAMPLES.map(e => (

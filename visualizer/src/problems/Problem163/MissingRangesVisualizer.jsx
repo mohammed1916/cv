@@ -387,6 +387,14 @@ export default function MissingRangesVisualizer() {
 
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"nums","label":"nums","type":"array"},{"key":"lower","label":"lower","type":"number"},{"key":"upper","label":"upper","type":"number"}]}
+        values={{ nums: numsInput, lower: lowerInput, upper: upperInput }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'lower') setLowerInput(v); if (k === 'upper') setUpperInput(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="mrv-panel">
       <VisualizationPanel step={step} />
     </div>

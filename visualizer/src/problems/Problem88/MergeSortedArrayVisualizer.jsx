@@ -153,6 +153,15 @@ export default function MergeSortedArrayVisualizer() {
   // Extract panels into consts
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"nums1","label":"nums1","type":"array"},{"key":"m","label":"m","type":"number"},{"key":"nums2","label":"nums2","type":"array"},{"key":"n","label":"n","type":"number"}]}
+        values={{ nums1: nums1Input, m: mInput, nums2: nums2Input, n: nInput }}
+        onChange={(k, v) => { if (k === 'nums1') setNums1Input(v); if (k === 'm') setMInput(v); if (k === 'nums2') setNums2Input(v); if (k === 'n') setNInput(v); handleReset() }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {EXAMPLES.map(e => <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : '#f1f5f9' }}>{e.label}</button>)}

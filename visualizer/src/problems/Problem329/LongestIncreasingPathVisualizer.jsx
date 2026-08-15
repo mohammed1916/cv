@@ -224,6 +224,15 @@ export default function LongestIncreasingPathVisualizer() {
 
     const vizPanel = (
       <>
+          <ManualInputPanel
+            fields={[{"key":"matrix","label":"matrix","type":"array"}]}
+            values={{ matrix: matrixInput }}
+            onChange={(k, v) => { if (k === 'matrix') setMatrixInput(v); handleReset() }}
+            examples={EXAMPLES}
+            activeLabel={ex?.label}
+            applyExample={applyEx}
+            inputError={inputError}
+          />
         <VisualizationPanel EXAMPLES={EXAMPLES} ex={ex} matrix={matrix} dpGrid={dpGrid} activeCell={activeCell} neighbor={neighbor} visiting={visiting} visitSet={visitSet} globalBest={globalBest} step={step} maxDP={maxDP} applyEx={applyEx} />
     
     </>);

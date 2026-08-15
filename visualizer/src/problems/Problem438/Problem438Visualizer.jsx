@@ -340,6 +340,15 @@ export default function Problem438Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"s","label":"s","type":"string"},{"key":"p","label":"p","type":"string"}]}
+          values={{ s: sInput, p: pInput }}
+          onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 'p') setPInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

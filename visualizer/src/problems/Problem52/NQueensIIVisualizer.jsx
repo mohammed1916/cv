@@ -220,7 +220,17 @@ export default function NQueensIIVisualizer() {
 
   // Step 3: Extract panel consts
   const boardPanel = (
-    <BoardPanel
+    <>
+      <ManualInputPanel
+        fields={[{"key":"n","label":"n","type":"number"}]}
+        values={{ n: nInput }}
+        onChange={(k, v) => { if (k === 'n') setNInput(v); handleReset() }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
+      <BoardPanel
       EXAMPLES={EXAMPLES}
       ex={ex}
       n={n}
@@ -232,6 +242,7 @@ export default function NQueensIIVisualizer() {
       step={step}
       applyEx={applyEx}
     />
+    </>
   );
 
   const codePanel = (

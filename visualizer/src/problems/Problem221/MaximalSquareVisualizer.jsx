@@ -291,6 +291,13 @@ export default function MaximalSquareVisualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"matrix","label":"matrix","type":"string"}]}
+          values={{ matrix: matrixInput }}
+          onChange={(k, v) => { if (k === 'matrix') setMatrixInput(v); handleReset() }}
+          showExamples={false}
+          inputError={inputError}
+        />
       
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [["code", "viz"]], minimized: [] }} />
       <FloatingPanel title="Controls">

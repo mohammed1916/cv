@@ -105,6 +105,15 @@ export default function FirstMissingPositiveVisualizer() {
     // Step 3: Extract panel consts
     const primaryPanel = (
       <>
+          <ManualInputPanel
+            fields={[{"key":"nums","label":"nums","type":"array"}]}
+            values={{ nums: numsInput }}
+            onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
+            examples={EXAMPLES}
+            activeLabel={ex?.label}
+            applyExample={applyEx}
+            inputError={inputError}
+          />
         <>
             <div className="fmp-examples">
                 {EXAMPLES.map(e => (

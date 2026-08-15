@@ -11,6 +11,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { getExamples } from '../../config/examplesRegistry'
 import './Visualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
     { line: 1, text: 'def subsets(nums):' },
@@ -175,7 +176,17 @@ export default function SubsetsVisualizer() {
     const applyExample = useCallback((ex) => { setNumsInput(JSON.stringify(ex.nums)); handleReset() }, [handleReset])
 
     const vizPanel = (
-        <VisualizationPanel EXAMPLES={EXAMPLES} applyExample={applyExample} numsInput={numsInput} setNumsInput={setNumsInput} nums={nums} inputError={inputError} handleReset={handleReset} step={step} />
+        <>
+          <ManualInputPanel
+            fields={[{"key":"nums","label":"nums","type":"string"}]}
+            values={{ nums: numsInput }}
+            onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
+            examples={EXAMPLES}
+            applyExample={applyExample}
+            inputError={inputError}
+          />
+          <VisualizationPanel EXAMPLES={EXAMPLES} applyExample={applyExample} numsInput={numsInput} setNumsInput={setNumsInput} nums={nums} inputError={inputError} handleReset={handleReset} step={step} />
+        </>
     )
 
     const codePanel = (

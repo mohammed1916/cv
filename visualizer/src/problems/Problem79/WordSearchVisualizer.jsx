@@ -11,6 +11,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import './WordSearchVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const WORDSEARCH_PATTERNS = ['init', 'match', 'success', 'backtrack', 'not_found']
 
@@ -232,6 +233,14 @@ export default function WordSearchVisualizer() {
 
   const primaryPanel = (
     <div className="ws-panel">
+        <ManualInputPanel
+          fields={[{"key":"board","label":"board","type":"string"},{"key":"word","label":"word","type":"string"}]}
+          values={{ board: boardInput, word: wordInput }}
+          onChange={(k, v) => { if (k === 'board') setBoardInput(v); if (k === 'word') setWordInput(v); handleReset() }}
+          examples={EXAMPLES}
+          applyExample={applyExample}
+          inputError={inputError}
+        />
       <header className="ws-head">
         <span>DFS Backtracking Grid</span>
         {inputError && <span className="ws-error">{inputError}</span>}

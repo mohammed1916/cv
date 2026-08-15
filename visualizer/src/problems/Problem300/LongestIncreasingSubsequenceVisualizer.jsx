@@ -13,6 +13,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import './LongestIncreasingSubsequenceVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -225,7 +226,17 @@ export default function LongestIncreasingSubsequenceVisualizer() {
         </div>
     )
 
-    const vizPanel = <VisualizationContent />
+    const vizPanel = <>
+      <ManualInputPanel
+        fields={[{"key":"nums","label":"nums","type":"string"}]}
+        values={{ nums: numsInput }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyExample}
+        inputError={inputError}
+      />
+      <VisualizationContent />
+    </>
 
     const codePanel = (
         <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />

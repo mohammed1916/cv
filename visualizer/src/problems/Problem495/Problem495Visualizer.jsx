@@ -94,9 +94,18 @@ export default function Problem495Visualizer() {
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
   const dockPanels = useMemo(() => [
     { id: 'code', title: 'Code', content: (<CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />) },
-    { id: 'viz', title: '⚔️ Teemo', content: (<VisualizationPanel timeSeries={ex.timeSeries} duration={duration} step={step} />) },
-  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex])
+    { id: 'viz', title: '⚔️ Teemo', content: (<VisualizationPanel timeSeries={timeSeries} duration={duration} step={step} />) },
+  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, timeSeries, duration])
   return (<div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"timeSeries","label":"timeSeries","type":"string"},{"key":"duration","label":"duration","type":"number"}]}
+          values={{ timeSeries: timeSeriesInput, duration: durationInput }}
+          onChange={(k, v) => { if (k === 'timeSeries') setTimeSeriesInput(v); if (k === 'duration') setDurationInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} /><FloatingPanel title="Playback Controls">
         {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
         <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />

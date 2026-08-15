@@ -10,6 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './StringToIntegerAtoiVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -213,6 +214,14 @@ export default function StringToIntegerAtoiVisualizer() {
 
   const mainPanel = (
       <div className="atoi-top">
+          <ManualInputPanel
+            fields={[{"key":"s","label":"s","type":"string"}]}
+            values={{ s: sInput }}
+            onChange={(k, v) => { if (k === 's') setSInput(v); handleReset() }}
+            examples={EXAMPLES}
+            applyExample={applyExample}
+            inputError={inputError}
+          />
         <div className="atoi-panel" style={{ flex: 1.5 }}>
           <div className="atoi-panel-head">
             String Parsing

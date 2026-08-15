@@ -99,6 +99,12 @@ const TaskScheduler = () => {
 
   return (
     <div className="ts-container">
+        <ManualInputPanel
+          fields={[{"key":"custom","label":"custom","type":"string"}]}
+          values={{ custom: customInput }}
+          onChange={(k, v) => { if (k === 'custom') setCustomInput(v) }}
+          showExamples={false}
+        />
       <div className="ts-header">
         <h1>Task Scheduler (LC 621)</h1>
         <p className="ts-subtitle">Find minimum time needed to complete all tasks</p>

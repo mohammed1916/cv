@@ -262,6 +262,14 @@ export default function SingleNumberIIVisualizer() {
 
   const vizPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"nums","label":"nums","type":"array"}]}
+        values={{ nums: numsInput }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="sn2-panel">
       <VisualizationPanel step={step} />
     </div>

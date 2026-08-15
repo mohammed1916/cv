@@ -329,6 +329,15 @@ export default function ReverseVowelsVisualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"s","label":"s","type":"string"}]}
+          values={{ s: sInput }}
+          onChange={(k, v) => { if (k === 's') setSInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       
       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', padding: '8px 12px' }}>
         {EXAMPLES.map((e) => (

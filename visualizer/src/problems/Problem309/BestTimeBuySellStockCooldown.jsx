@@ -81,6 +81,12 @@ export default function BestTimeBuySellStockCooldown() {
 
   return (
     <div className="cooldown-container">
+        <ManualInputPanel
+          fields={[{"key":"custom","label":"custom","type":"string"}]}
+          values={{ custom: customInput }}
+          onChange={(k, v) => { if (k === 'custom') setCustomInput(v) }}
+          showExamples={false}
+        />
       <h1 className="cooldown-title">LC 309: Best Time to Buy and Sell Stock with Cooldown</h1>
 
       <div className="cooldown-input-section">

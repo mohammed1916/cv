@@ -11,6 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './MaxAreaOfIsland.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'def maxAreaOfIsland(grid: List[List[int]]) -> int:' },
@@ -257,6 +258,14 @@ export default function MaxAreaOfIslandVisualizer() {
 
   const gridPanel = (
           <div className="maoi-panel-body">
+              <ManualInputPanel
+                fields={[{"key":"grid","label":"grid","type":"array"}]}
+                values={{ grid: gridInput }}
+                onChange={(k, v) => { if (k === 'grid') setGridInput(v); handleReset() }}
+                examples={EXAMPLES}
+                applyExample={applyExample}
+                inputError={inputError}
+              />
             <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
               {EXAMPLES.map((ex) => (
                 <button

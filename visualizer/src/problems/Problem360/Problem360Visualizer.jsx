@@ -495,6 +495,15 @@ export default function Problem360Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"nums","label":"nums","type":"array"},{"key":"a","label":"a","type":"number"},{"key":"b","label":"b","type":"number"},{"key":"c","label":"c","type":"number"}]}
+          values={{ nums: numsInput, a: aInput, b: bInput, c: cInput }}
+          onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'a') setAInput(v); if (k === 'b') setBInput(v); if (k === 'c') setCInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={(e) => applyExample(EXAMPLES.indexOf(e))}
+          inputError={inputError}
+        />
       
       <DockableWorkspace
         panels={dockPanels}

@@ -131,6 +131,14 @@ export default function MinCostClimbingStairsVisualizer() {
 
     return (
         <div className="mcs-shell">
+        <ManualInputPanel
+          fields={[{"key":"cost","label":"cost","type":"string"}]}
+          values={{ cost: costInput }}
+          onChange={(k, v) => { if (k === 'cost') setCostInput(v) }}
+          examples={EXAMPLES}
+          applyExample={handleExample}
+          inputError={inputError}
+        />
       
             <div className="mcs-top">
                 <div className="mcs-panel mcs-panel-input">

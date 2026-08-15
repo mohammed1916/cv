@@ -12,6 +12,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { getExamples } from '../../config/examplesRegistry'
 import './SubsetsVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
     { line: 1, text: 'def subsets(nums):' },
@@ -190,7 +191,17 @@ export default function SubsetsVisualizer() {
     )
 
     // Extract panels for Lumino DockPanel
-    const primaryPanel = <SubsetsVizComponent />
+    const primaryPanel = <>
+      <ManualInputPanel
+        fields={[{"key":"nums","label":"nums","type":"string"}]}
+        values={{ nums: numsInput }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyExample}
+        inputError={inputError}
+      />
+      <SubsetsVizComponent />
+    </>
     const resultsPanel = <ResultsComponent />
     const codePanel = (
         <div style={{ position: 'relative', height: '100%' }}>

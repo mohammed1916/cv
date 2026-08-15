@@ -302,6 +302,15 @@ export default function CoinChange2Visualizer() {
 
   const vizPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"amount","label":"amount","type":"number"},{"key":"coins","label":"coins","type":"array"}]}
+        values={{ amount: amountInput, coins: coinsInput }}
+        onChange={(k, v) => { if (k === 'amount') setAmountInput(v); if (k === 'coins') setCoinsInput(v); handleReset() }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <VisualizationPanel
       amount={amount}
       coins={coins}

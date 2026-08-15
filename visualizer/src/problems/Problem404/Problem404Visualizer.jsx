@@ -337,6 +337,15 @@ export default function Problem404Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"tree","label":"tree","type":"string"}]}
+          values={{ tree: treeInput }}
+          onChange={(k, v) => { if (k === 'tree') setTreeInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={EXAMPLES[exIdx]?.label}
+          applyExample={(e) => applyEx(EXAMPLES.indexOf(e))}
+          inputError={inputError}
+        />
       
       <DockableWorkspace
         panels={dockPanels}

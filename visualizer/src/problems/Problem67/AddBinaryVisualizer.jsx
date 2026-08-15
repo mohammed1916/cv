@@ -404,6 +404,15 @@ export default function AddBinaryVisualizer() {
 
   const vizPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"a","label":"a","type":"string"},{"key":"b","label":"b","type":"string"}]}
+        values={{ a: aInput, b: bInput }}
+        onChange={(k, v) => { if (k === 'a') setAInput(v); if (k === 'b') setBInput(v); handleReset() }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="ab-panel">
       <VisualizationPanel
         a={a}

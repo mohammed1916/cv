@@ -12,6 +12,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './MinimumWindowSubstring.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'def minWindow(s: str, t: str) -> str:' },
@@ -386,6 +387,12 @@ export default function MinimumWindowSubstringVisualizer() {
 
   const vizPanel = (
     <div style={{ display: 'flex', height: '100%', width: '100%' }}>
+        <ManualInputPanel
+          fields={[{"key":"s","label":"s","type":"string"},{"key":"t","label":"t","type":"string"}]}
+          values={{ s: sInput, t: tInput }}
+          onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 't') setTInput(v); handleReset() }}
+          showExamples={false}
+        />
       <SlidingWindowViz
         step={step}
         s={s}

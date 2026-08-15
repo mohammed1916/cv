@@ -9,6 +9,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './MatrixIterationBasicsVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const MODE_META = {
   full: {
@@ -359,6 +360,12 @@ export default function MatrixIterationBasicsVisualizer({ problem }) {
 
   return (
     <div className="mib-shell">
+        <ManualInputPanel
+          fields={[{"key":"size","label":"size","type":"string"}]}
+          values={{ size: sizeInput }}
+          onChange={(k, v) => { if (k === 'size') setSizeInput(v); handleReset() }}
+          showExamples={false}
+        />
       <section className="mib-hero">
         <div className="mib-hero-copy">
           <h2>Matrix Iteration Patterns</h2>

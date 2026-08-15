@@ -220,6 +220,15 @@ export default function Problem1307Visualizer() {
   ], [step, SOLUTION_CODE, connectivity, setActiveLineDom])
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"equation","label":"equation","type":"string"}]}
+          values={{ equation: equationInput }}
+          onChange={(k, v) => { if (k === 'equation') setEquationInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">

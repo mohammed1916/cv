@@ -77,6 +77,15 @@ export default function FindPeakElementVisualizer() {
   // Step 2: Extract panels
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"nums","label":"nums","type":"array"}]}
+        values={{ nums: numsInput }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="fp-panel">
       <div className="fp-panel-label">Array (bars)</div>
       <div className="fp-bars">

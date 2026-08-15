@@ -124,6 +124,15 @@ export default function IPOVisualizer() {
 
     return (
         <div className="ipo-shell">
+        <ManualInputPanel
+          fields={[{"key":"k","label":"k","type":"number"},{"key":"w","label":"w","type":"number"},{"key":"profits","label":"profits","type":"array"},{"key":"capital","label":"capital","type":"array"}]}
+          values={{ k: kInput, w: wInput, profits: profitsInput, capital: capitalInput }}
+          onChange={(k, v) => { if (k === 'k') setKInput(v); if (k === 'w') setWInput(v); if (k === 'profits') setProfitsInput(v); if (k === 'capital') setCapitalInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       
             <div className="ipo-examples">
                 {EXAMPLES.map(e => (

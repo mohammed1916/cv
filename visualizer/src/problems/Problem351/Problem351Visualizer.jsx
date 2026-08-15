@@ -241,7 +241,7 @@ export default function Problem351Visualizer() {
               <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6 }}>
                 <div style={{ fontWeight: 600, marginBottom: 8, color: '#1e293b', fontSize: 11 }}>Input Stream</div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-                  {ex.nums.map((num, i) => (
+                  {nums.map((num, i) => (
                     <motion.div
                       key={num}
                       animate={{
@@ -312,10 +312,19 @@ export default function Problem351Visualizer() {
         </div>
       ),
     },
-  ], [step, connectivity, setActiveLineDom, exIdx, applyExample, ex.nums])
+  ], [step, connectivity, setActiveLineDom, exIdx, applyExample, nums])
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"nums","label":"nums","type":"array"}]}
+          values={{ nums: numsInput }}
+          onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={(e) => applyExample(EXAMPLES.indexOf(e))}
+          inputError={inputError}
+        />
       
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">

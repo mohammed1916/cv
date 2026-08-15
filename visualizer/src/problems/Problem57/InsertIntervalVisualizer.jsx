@@ -183,6 +183,15 @@ export default function InsertIntervalVisualizer() {
     // Step 3: Extract panels into consts
     const primaryPanel = (
       <>
+        <ManualInputPanel
+          fields={[{"key":"intervals","label":"intervals","type":"array"},{"key":"newInterval","label":"newInterval","type":"array"}]}
+          values={{ intervals: intervalsInput, newInterval: newIntervalInput }}
+          onChange={(k, v) => { if (k === 'intervals') setIntervalsInput(v); if (k === 'newInterval') setNewIntervalInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={EXAMPLES[sel]?.label}
+          applyExample={(e) => applyExample(EXAMPLES.indexOf(e))}
+          inputError={inputError}
+        />
       <div className="ii-panel">
         <div className="ii-controls-row">
           <div className="ii-examples">

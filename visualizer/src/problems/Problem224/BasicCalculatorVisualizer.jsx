@@ -196,6 +196,15 @@ export default function BasicCalculatorVisualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"s","label":"s","type":"string"}]}
+          values={{ s: sInput }}
+          onChange={(k, v) => { if (k === 's') setSInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       
       <DockableWorkspace
         panels={dockPanels}

@@ -297,6 +297,15 @@ export default function Problem468Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"ip","label":"ip","type":"string"}]}
+          values={{ ip: ipInput }}
+          onChange={(k, v) => { if (k === 'ip') setIpInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

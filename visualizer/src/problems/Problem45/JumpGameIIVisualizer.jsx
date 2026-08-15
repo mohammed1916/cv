@@ -162,6 +162,15 @@ export default function JumpGameIIVisualizer() {
 
   const vizPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"nums","label":"nums","type":"array"}]}
+        values={{ nums: numsInput }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="jg2-panel">
       <ArrayVisualization nums={nums} step={step} maxVal={maxVal} />
       <StatsDisplay step={step} />

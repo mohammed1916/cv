@@ -122,6 +122,15 @@ export default function LengthOfLastWordVisualizer() {
 
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"s","label":"s","type":"string"}]}
+        values={{ s: sInput }}
+        onChange={(k, v) => { if (k === 's') setSInput(v); handleReset() }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {EXAMPLES.map(e => (

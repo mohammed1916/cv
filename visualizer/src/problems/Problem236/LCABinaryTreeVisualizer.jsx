@@ -13,6 +13,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import './LCABinaryTreeVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -236,6 +237,13 @@ export default function LCABinaryTreeVisualizer() {
 
     return (
         <div className="lcabt-shell">
+              <ManualInputPanel
+                fields={[{"key":"arr","label":"arr","type":"string"},{"key":"p","label":"p","type":"string"},{"key":"q","label":"q","type":"string"}]}
+                values={{ arr: arrInput, p: pInput, q: qInput }}
+                onChange={(k, v) => { if (k === 'arr') setArrInput(v); if (k === 'p') setPInput(v); if (k === 'q') setQInput(v); handleReset() }}
+                examples={EXAMPLES}
+                applyExample={applyExample}
+              />
             <DockableWorkspace
                 title="LCA in Binary Tree Visualizer"
                 panels={dockPanels}

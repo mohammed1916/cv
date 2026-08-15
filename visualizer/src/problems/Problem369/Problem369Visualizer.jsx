@@ -222,6 +222,15 @@ export default function Problem369Visualizer() {
   ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, head])
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"values","label":"values","type":"array"}]}
+          values={{ values: valuesInput }}
+          onChange={(k, v) => { if (k === 'values') setValuesInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">

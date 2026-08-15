@@ -13,6 +13,7 @@ import { getExamplesOr } from '../../config/examplesRegistry'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const PATTERNS = ['checking_length', 'comparing', 'divisible', 'done', 'extracted_pattern', 'found', 'not_divisible', 'start']
 const LINE_PATTERN_MAP = {
@@ -467,6 +468,12 @@ export default function Problem459Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"s","label":"s","type":"string"}]}
+          values={{ s: sInput }}
+          onChange={(k, v) => { if (k === 's') setSInput(v); handleReset() }}
+          showExamples={false}
+        />
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
 
       <FloatingPanel title="Playback Controls">

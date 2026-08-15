@@ -324,6 +324,15 @@ export default function Problem379Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"maxNumbers","label":"maxNumbers","type":"number"},{"key":"operations","label":"operations","type":"array"}]}
+          values={{ maxNumbers: maxNumbersInput, operations: operationsInput }}
+          onChange={(k, v) => { if (k === 'maxNumbers') setMaxNumbersInput(v); if (k === 'operations') setOperationsInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={(e) => applyExample(EXAMPLES.indexOf(e))}
+          inputError={inputError}
+        />
       
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">

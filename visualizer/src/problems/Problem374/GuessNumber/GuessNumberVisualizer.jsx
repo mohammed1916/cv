@@ -8,6 +8,7 @@ import { usePatternOverlay } from '../../../hooks/usePatternOverlay'
 import { getExamples } from '../../../config/examplesRegistry'
 import './GuessNumberVisualizer.css'
 import FloatingPanel from '../../../components/shared/FloatingPanel'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
     { line: 1,  text: 'class Solution:' },
@@ -154,6 +155,14 @@ export default function GuessNumberVisualizer() {
 
     return (
         <div className="gn-shell">
+              <ManualInputPanel
+                fields={[{"key":"pick","label":"pick","type":"string"}]}
+                values={{ pick: pickInput }}
+                onChange={(k, v) => { if (k === 'pick') setPickInput(v); handleReset() }}
+                examples={EXAMPLES}
+                applyExample={applyExample}
+                inputError={inputError}
+              />
             <section className="gn-panel">
                 <header className="gn-head">
                     <span>Guess Number Higher or Lower · Binary Search</span>

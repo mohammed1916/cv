@@ -278,6 +278,14 @@ export default function SurroundedRegionsVisualizer() {
   // Extract panels into consts for Lumino portals
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"board","label":"board","type":"array"}]}
+        values={{ board: boardInput }}
+        onChange={(k, v) => { if (k === 'board') setBoardInput(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="srr-panel">
       <VisualizationPanel step={step} />
     </div>

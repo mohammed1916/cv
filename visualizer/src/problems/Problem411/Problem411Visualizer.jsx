@@ -409,6 +409,15 @@ export default function Problem411Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"word","label":"word","type":"string"},{"key":"dictionary","label":"dictionary","type":"array"}]}
+          values={{ word: wordInput, dictionary: dictionaryInput }}
+          onChange={(k, v) => { if (k === 'word') setWordInput(v); if (k === 'dictionary') setDictionaryInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={EXAMPLES[exIdx]?.label}
+          applyExample={(e) => applyEx(EXAMPLES.indexOf(e))}
+          inputError={inputError}
+        />
       
       <DockableWorkspace
         panels={dockPanels}

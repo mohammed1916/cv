@@ -306,6 +306,14 @@ export default function FindMinimumInRotatedSortedArrayIIVisualizer() {
 
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"nums","label":"nums","type":"array"}]}
+        values={{ nums: numsInput }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="fmirsa2-panel">
       <VisualizationPanel step={step} />
     </div>

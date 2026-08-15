@@ -435,6 +435,14 @@ export default function LinkedListCycleIIVisualizer() {
 
   const vizPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"nodes","label":"nodes","type":"array"},{"key":"pos","label":"pos","type":"number"}]}
+        values={{ nodes: nodesInput, pos: posInput }}
+        onChange={(k, v) => { if (k === 'nodes') setNodesInput(v); if (k === 'pos') setPosInput(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="llc2-panel">
       <VisualizationPanel step={step} nodes={nodes} cycleStart={pos} />
     </div>

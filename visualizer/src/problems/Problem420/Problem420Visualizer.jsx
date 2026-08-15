@@ -388,6 +388,15 @@ export default function Problem420Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"password","label":"password","type":"string"}]}
+          values={{ password: passwordInput }}
+          onChange={(k, v) => { if (k === 'password') setPasswordInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={EXAMPLES[exIdx]?.label}
+          applyExample={(e) => applyEx(EXAMPLES.indexOf(e))}
+          inputError={inputError}
+        />
       
       <DockableWorkspace
         panels={dockPanels}

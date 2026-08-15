@@ -300,6 +300,15 @@ export default function Problem499Visualizer() {
   ], [step, SOLUTION_CODE, connectivity, setActiveLineDom])
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"maze","label":"maze","type":"array"},{"key":"ball","label":"ball","type":"array"},{"key":"hole","label":"hole","type":"array"}]}
+          values={{ maze: mazeInput, ball: ballInput, hole: holeInput }}
+          onChange={(k, v) => { if (k === 'maze') setMazeInput(v); if (k === 'ball') setBallInput(v); if (k === 'hole') setHoleInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">

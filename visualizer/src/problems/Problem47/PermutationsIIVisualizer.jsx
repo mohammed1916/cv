@@ -12,6 +12,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './PermutationsIIVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -337,6 +338,14 @@ export default function PermutationsIIVisualizer() {
 
   const vizPanel = (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 12, overflow: 'auto' }}>
+        <ManualInputPanel
+          fields={[{"key":"nums","label":"nums","type":"array"}]}
+          values={{ nums: numsInput }}
+          onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
+          examples={examples}
+          applyExample={applyExample}
+          inputError={inputError}
+        />
       <div>
         <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Input Array</div>
         <textarea

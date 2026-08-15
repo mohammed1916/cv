@@ -157,6 +157,15 @@ export default function MaximumGapVisualizer() {
     // Extract panels into consts (Step 2)
     const primaryPanel = (
       <>
+          <ManualInputPanel
+            fields={[{"key":"nums","label":"nums","type":"array"}]}
+            values={{ nums: numsInput }}
+            onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
+            examples={EXAMPLES}
+            activeLabel={ex?.label}
+            applyExample={applyEx}
+            inputError={inputError}
+          />
         <div className="mg-panel">
             <div className="mg-examples">
                 {EXAMPLES.map(e => (

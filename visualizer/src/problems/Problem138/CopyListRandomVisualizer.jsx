@@ -97,6 +97,15 @@ export default function CopyListRandomVisualizer() {
     // ─── Panel constants ───────────────────────────────────────────────────
     const primaryPanel = (
       <>
+          <ManualInputPanel
+            fields={[{"key":"nodes","label":"nodes","type":"array"}]}
+            values={{ nodes: nodesInput }}
+            onChange={(k, v) => { if (k === 'nodes') setNodesInput(v); handleReset() }}
+            examples={EXAMPLES}
+            activeLabel={EXAMPLES[sel]?.label}
+            applyExample={(e) => applyExample(EXAMPLES.indexOf(e))}
+            inputError={inputError}
+          />
         <div className="clr-panel" style={{ position: 'relative', height: '100%', overflowY: 'auto' }}>
             <div className="clr-controls-row">
                 <div className="clr-examples">

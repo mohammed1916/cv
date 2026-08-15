@@ -283,6 +283,15 @@ export default function Problem488Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"board","label":"board","type":"string"},{"key":"hand","label":"hand","type":"string"}]}
+          values={{ board: boardInput, hand: handInput }}
+          onChange={(k, v) => { if (k === 'board') setBoardInput(v); if (k === 'hand') setHandInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       
       <DockableWorkspace
         panels={dockPanels}

@@ -569,6 +569,15 @@ export default function Problem61Visualizer() {
 
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"list","label":"list","type":"array"},{"key":"k","label":"k","type":"number"}]}
+        values={{ list: listInput, k: kInput }}
+        onChange={(k, v) => { if (k === 'list') setListInput(v); if (k === 'k') setKInput(v); handleReset() }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="problem61-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
         <span style={{ fontSize: 12, color: '#64748b', fontWeight: 600 }}>Examples:</span>

@@ -319,7 +319,17 @@ export default function FractionToRecurringDecimalVisualizer() {
       {showPatternOverlay && <CodePatternAnnotations step={step} linePatternMap={LINE_PATTERN_MAP} patterns={PATTERNS} activeLineDom={activeLineDom} />}
     </div>
   )
-  const primaryPanel = <VisualizationPanel step={step} />
+  const primaryPanel = <>
+    <ManualInputPanel
+      fields={[{"key":"numerator","label":"numerator","type":"number"},{"key":"denominator","label":"denominator","type":"number"}]}
+      values={{ numerator: numeratorInput, denominator: denominatorInput }}
+      onChange={(k, v) => { if (k === 'numerator') setNumeratorInput(v); if (k === 'denominator') setDenominatorInput(v); handleReset() }}
+      examples={EXAMPLES}
+      applyExample={applyEx}
+      inputError={inputError}
+    />
+    <VisualizationPanel step={step} />
+  </>
   const statusPanel = (
     <div className="ftrd-status" style={{ padding: 8, fontSize: 12, color: '#94a3b8', display: 'flex', alignItems: 'center', gap: 8 }}>
       {step ? `Step ${stepIndex + 1} of ${steps.length}` : 'Ready'}

@@ -343,6 +343,15 @@ export default function Problem403Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"stones","label":"stones","type":"array"}]}
+          values={{ stones: stonesInput }}
+          onChange={(k, v) => { if (k === 'stones') setStonesInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={EXAMPLES[exIdx]?.label}
+          applyExample={(e) => applyEx(EXAMPLES.indexOf(e))}
+          inputError={inputError}
+        />
       
       <DockableWorkspace
         panels={dockPanels}

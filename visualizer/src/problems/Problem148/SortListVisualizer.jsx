@@ -128,6 +128,15 @@ export default function SortListVisualizer() {
 
     const vizPanel = (
       <>
+          <ManualInputPanel
+            fields={[{"key":"initial","label":"initial","type":"string"}]}
+            values={{ initial: initialInput }}
+            onChange={(k, v) => { if (k === 'initial') setInitialInput(v); handleReset() }}
+            examples={EXAMPLES}
+            activeLabel={EXAMPLES[sel]?.label}
+            applyExample={(e) => applyExample(EXAMPLES.indexOf(e))}
+            inputError={inputError}
+          />
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                 {EXAMPLES.map((ex, i) => <button key={ex.label} onClick={() => applyExample(i)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: sel === i ? '#dbeafe' : '#f1f5f9' }}>{ex.label}</button>)}

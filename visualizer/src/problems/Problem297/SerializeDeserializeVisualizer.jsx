@@ -145,6 +145,15 @@ export default function SerializeDeserializeVisualizer() {
 
   return (
     <div className="sd-shell">
+        <ManualInputPanel
+          fields={[{"key":"tree","label":"tree","type":"array"}]}
+          values={{ tree: treeInput }}
+          onChange={(k, v) => { if (k === 'tree') setTreeInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       
       <div className="sd-examples">
         {EXAMPLES.map(e => (

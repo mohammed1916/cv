@@ -348,6 +348,13 @@ export default function IsomorphicStringsVisualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"s","label":"s","type":"string"},{"key":"t","label":"t","type":"string"}]}
+          values={{ s: sInput, t: tInput }}
+          onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 't') setTInput(v); handleReset() }}
+          showExamples={false}
+          inputError={inputError}
+        />
       
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Controls">

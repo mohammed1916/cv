@@ -466,6 +466,15 @@ export default function Problem353Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"events","label":"events","type":"array"}]}
+          values={{ events: eventsInput }}
+          onChange={(k, v) => { if (k === 'events') setEventsInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={(e) => applyExample(EXAMPLES.indexOf(e))}
+          inputError={inputError}
+        />
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         <PlaybackControls

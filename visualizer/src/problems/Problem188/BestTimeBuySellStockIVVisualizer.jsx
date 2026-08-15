@@ -206,6 +206,15 @@ export default function BestTimeBuySellStockIVVisualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"k","label":"k","type":"number"},{"key":"prices","label":"prices","type":"array"}]}
+          values={{ k: kInput, prices: pricesInput }}
+          onChange={(k, v) => { if (k === 'k') setKInput(v); if (k === 'prices') setPricesInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

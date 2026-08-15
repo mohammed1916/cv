@@ -12,6 +12,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import './PerfectSquares.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -288,6 +289,14 @@ export default function PerfectSquaresVisualizer() {
 
     return (
         <div className="ps-shell">
+              <ManualInputPanel
+                fields={[{"key":"n","label":"n","type":"string"}]}
+                values={{ n: nInput }}
+                onChange={(k, v) => { if (k === 'n') setNInput(v); handleReset() }}
+                examples={EXAMPLES}
+                applyExample={applyExample}
+                inputError={inputError}
+              />
             <section className="ps-hero">
                 <div className="ps-hero-copy">
                     <span className="ps-kicker">Perfect Squares · Dynamic Programming</span>

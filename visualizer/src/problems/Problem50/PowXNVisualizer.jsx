@@ -88,6 +88,15 @@ export default function PowXNVisualizer() {
   // Panel 2: Primary visualization
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"x","label":"x","type":"number"},{"key":"n","label":"n","type":"number"}]}
+        values={{ x: xInput, n: nInput }}
+        onChange={(k, v) => { if (k === 'x') setXInput(v); if (k === 'n') setNInput(v); handleReset() }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="powxn-panel">
       <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
         <div>

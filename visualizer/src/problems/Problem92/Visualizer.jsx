@@ -379,6 +379,15 @@ export default function Problem92Visualizer() {
 
   const vizPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"list","label":"list","type":"array"},{"key":"left","label":"left","type":"number"},{"key":"right","label":"right","type":"number"}]}
+        values={{ list: listInput, left: leftInput, right: rightInput }}
+        onChange={(k, v) => { if (k === 'list') setListInput(v); if (k === 'left') setLeftInput(v); if (k === 'right') setRightInput(v); handleReset() }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="problem92-panel">
       <VisualizationPanel step={step} />
     </div>

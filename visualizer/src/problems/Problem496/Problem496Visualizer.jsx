@@ -336,6 +336,15 @@ export default function Problem496Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"nums1","label":"nums1","type":"array"},{"key":"nums2","label":"nums2","type":"array"}]}
+          values={{ nums1: nums1Input, nums2: nums2Input }}
+          onChange={(k, v) => { if (k === 'nums1') setNums1Input(v); if (k === 'nums2') setNums2Input(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">

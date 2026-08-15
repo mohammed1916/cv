@@ -305,6 +305,14 @@ export default function ReadNCharactersGivenRead4Visualizer() {
 
   const vizPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"file","label":"file","type":"string"},{"key":"n","label":"n","type":"number"}]}
+        values={{ file: fileInput, n: nInput }}
+        onChange={(k, v) => { if (k === 'file') setFileInput(v); if (k === 'n') setNInput(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div style={{ position: 'relative', height: '100%', overflow: 'auto' }}>
       <VisualizationPanel step={step} />
     </div>

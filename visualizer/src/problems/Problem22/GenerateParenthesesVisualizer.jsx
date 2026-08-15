@@ -112,6 +112,14 @@ export default function GenerateParenthesesVisualizer() {
     // Step 3: Extract panel constants
     const primaryPanel = (
       <>
+          <ManualInputPanel
+            fields={[{"key":"n","label":"n","type":"number"}]}
+            values={{ n: nInput }}
+            onChange={(k, v) => { if (k === 'n') setNInput(v); handleReset() }}
+            examples={EXAMPLES}
+            applyExample={applyExample}
+            inputError={inputError}
+          />
         <div className="gp-panel-body">
             <div className="gp-examples">
                 {EXAMPLES.map((ex) => (

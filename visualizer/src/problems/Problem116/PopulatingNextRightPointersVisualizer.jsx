@@ -224,6 +224,14 @@ export default function PopulatingNextRightPointersVisualizer() {
 
   const vizPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"root","label":"root","type":"array"}]}
+        values={{ root: rootInput }}
+        onChange={(k, v) => { if (k === 'root') setRootInput(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="problem116-panel">
       <VisualizationPanel step={step} />
     </div>

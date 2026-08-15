@@ -11,6 +11,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import LuminoDockPanel from '../../components/LuminoDockPanel'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
   { line: 1,  text: 'class Solution:' },
@@ -225,6 +226,14 @@ export default function SpiralMatrixVisualizer() {
   // Step 2: Extract panels into consts
   const primaryPanel = (
     <div className="sm-panel">
+        <ManualInputPanel
+          fields={[{"key":"matrix","label":"matrix","type":"string"}]}
+          values={{ matrix: matrixInput }}
+          onChange={(k, v) => { if (k === 'matrix') setMatrixInput(v); handleReset() }}
+          examples={EXAMPLES}
+          applyExample={applyExample}
+          inputError={inputError}
+        />
       <div className="sm-panel-head">
         Matrix View
         {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}

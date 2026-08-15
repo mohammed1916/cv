@@ -128,6 +128,15 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
             subtitle="game-of-life"
             accentColor="#8b5cf6"
         >
+        <ManualInputPanel
+          fields={[{"key":"input","label":"input","type":"string"}]}
+          values={{ input: inputInput }}
+          onChange={(k, v) => { if (k === 'input') setInputInput(v) }}
+          examples={examples}
+          activeLabel={examples[currentExample]?.label}
+          applyExample={(e) => applyEx(examples.indexOf(e))}
+          inputError={inputError}
+        />
       
             <FloatingPanel title="Visualization" position="main">
                 <div className="problem289-visualizer-viz-panel">

@@ -506,6 +506,14 @@ export default function BrickWallVisualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"wall","label":"wall","type":"string"}]}
+          values={{ wall: wallInput }}
+          onChange={(k, v) => { if (k === 'wall') setWallInput(v); handleReset() }}
+          examples={examples}
+          applyExample={applyExample}
+          inputError={inputError}
+        />
       
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">

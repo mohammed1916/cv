@@ -268,6 +268,14 @@ export default function WordLadderIIVisualizer() {
   // Step 2: Extract panels into consts
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"beginWord","label":"beginWord","type":"string"},{"key":"endWord","label":"endWord","type":"string"},{"key":"wordList","label":"wordList","type":"array"}]}
+        values={{ beginWord: beginWordInput, endWord: endWordInput, wordList: wordListInput }}
+        onChange={(k, v) => { if (k === 'beginWord') setBeginWordInput(v); if (k === 'endWord') setEndWordInput(v); if (k === 'wordList') setWordListInput(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="wl2-panel">
       <div className="wl2-panel-head">🔗 Word Ladder II</div>
       <div className="wl2-panel-body">

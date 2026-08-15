@@ -250,6 +250,14 @@ export default function ReverseWordsInAStringVisualizer() {
 
   const vizPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"s","label":"s","type":"string"}]}
+        values={{ s: sInput }}
+        onChange={(k, v) => { if (k === 's') setSInput(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="rwias-panel">
       <VisualizationPanel step={step} />
     </div>

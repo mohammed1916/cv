@@ -320,6 +320,13 @@ export default function AddAndSearchWordVisualizer() {
 
   const vizPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"searchWord","label":"searchWord","type":"string"},{"key":"isAdd","label":"isAdd","type":"string"}]}
+        values={{ searchWord: searchWordInput, isAdd: isAddInput }}
+        onChange={(k, v) => { if (k === 'searchWord') setSearchWordInput(v); if (k === 'isAdd') setIsAddInput(v); handleReset() }}
+        showExamples={false}
+        inputError={inputError}
+      />
     <VisualizationPanel step={step} trie={trie} />
   
     </>)

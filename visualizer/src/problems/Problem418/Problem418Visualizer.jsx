@@ -372,6 +372,15 @@ export default function Problem418Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"sentence","label":"sentence","type":"array"},{"key":"rows","label":"rows","type":"number"},{"key":"cols","label":"cols","type":"number"}]}
+          values={{ sentence: sentenceInput, rows: rowsInput, cols: colsInput }}
+          onChange={(k, v) => { if (k === 'sentence') setSentenceInput(v); if (k === 'rows') setRowsInput(v); if (k === 'cols') setColsInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={EXAMPLES[exIdx]?.label}
+          applyExample={(e) => applyEx(EXAMPLES.indexOf(e))}
+          inputError={inputError}
+        />
       
       <DockableWorkspace
         panels={dockPanels}

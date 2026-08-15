@@ -322,6 +322,15 @@ export default function Problem435Visualizer() {
 
   const vizPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"intervals","label":"intervals","type":"string"}]}
+        values={{ intervals: intervalsInput }}
+        onChange={(k, v) => { if (k === 'intervals') setIntervalsInput(v); handleReset() }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <VisualizationPanel
       step={step}
       applyEx={applyEx}

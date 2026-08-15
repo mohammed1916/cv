@@ -14,6 +14,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import './KthLargestElementVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -87,6 +88,14 @@ export default function KthLargestElementVisualizer() {
 
   const inputPanel = (
     <div className="kl-body">
+        <ManualInputPanel
+          fields={[{"key":"nums","label":"nums","type":"string"},{"key":"k","label":"k","type":"string"}]}
+          values={{ nums: numsInput, k: kInput }}
+          onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'k') setKInput(v); handleReset() }}
+          examples={EXAMPLES}
+          applyExample={applyExample}
+          inputError={inputError}
+        />
       <div className="kl-examples">{EXAMPLES.map((ex) => <button key={ex.label} className="kl-chip" onClick={() => applyExample(ex)}>{ex.label}</button>)}</div>
       <div className="kl-inputs">
         <input className="kl-input" value={numsInput} onChange={(e) => { setNumsInput(e.target.value); handleReset() }} placeholder="e.g., [3,2,1,5,6,4]" />

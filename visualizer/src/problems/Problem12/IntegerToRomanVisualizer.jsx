@@ -11,6 +11,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './IntegerToRoman.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const I2R_PATTERNS = ['init', 'check', 'loop', 'append', 'subtract', 'done']
 
@@ -267,6 +268,14 @@ export default function IntegerToRomanVisualizer() {
 
   const vizPanel = (
     <div className="i2r-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+        <ManualInputPanel
+          fields={[{"key":"num","label":"num","type":"string"}]}
+          values={{ num: numInput }}
+          onChange={(k, v) => { if (k === 'num') setNumInput(v); handleReset() }}
+          examples={EXAMPLES}
+          applyExample={applyExample}
+          inputError={inputError}
+        />
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {EXAMPLES.map((ex) => (
           <button

@@ -316,6 +316,15 @@ export default function Problem490Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"maze","label":"maze","type":"array"},{"key":"start","label":"start","type":"array"},{"key":"destination","label":"destination","type":"array"}]}
+          values={{ maze: mazeInput, start: startInput, destination: destinationInput }}
+          onChange={(k, v) => { if (k === 'maze') setMazeInput(v); if (k === 'start') setStartInput(v); if (k === 'destination') setDestinationInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       
       <DockableWorkspace
         panels={dockPanels}

@@ -12,6 +12,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './TwoSumVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const TWOSUM_PATTERNS = ['init', 'loop', 'calc_diff', 'check_map', 'found', 'add_map']
 
@@ -148,6 +149,14 @@ export default function TwoSumVisualizer() {
 
   const arrayPanel = (
     <div className="twosum-panel">
+        <ManualInputPanel
+          fields={[{"key":"nums","label":"nums","type":"string"},{"key":"target","label":"target","type":"string"}]}
+          values={{ nums: numsInput, target: targetInput }}
+          onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'target') setTargetInput(v); handleReset() }}
+          examples={EXAMPLES}
+          applyExample={applyExample}
+          inputError={inputError}
+        />
       <div className="twosum-panel-head">
         Array & Target
         {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}

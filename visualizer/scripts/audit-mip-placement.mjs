@@ -47,7 +47,10 @@ function classify(file) {
           insideIterator = a.callee.property.name
           break
         }
-        if (a.type === 'FunctionDeclaration' && a.id?.name && !/Visualizer$/.test(a.id.name)) {
+        // A capitalised name is a component, a legitimate host for the panel —
+        // plenty are named PerfectSquares rather than *Visualizer. Only a
+        // lowercase-named helper is suspicious.
+        if (a.type === 'FunctionDeclaration' && a.id?.name && !/^[A-Z]/.test(a.id.name)) {
           insideNonDefaultFn = a.id.name
         }
       }

@@ -210,6 +210,15 @@ export default function Problem428Visualizer() {
   ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, root])
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"tree","label":"tree","type":"string"}]}
+          values={{ tree: treeInput }}
+          onChange={(k, v) => { if (k === 'tree') setTreeInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">

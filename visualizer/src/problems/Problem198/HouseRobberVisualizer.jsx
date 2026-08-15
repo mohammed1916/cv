@@ -14,6 +14,7 @@ import './HouseRobberVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -137,6 +138,14 @@ export default function HouseRobberVisualizer({ problem }) {
 
   return (
     <div className="hr-shell">
+        <ManualInputPanel
+          fields={[{"key":"nums","label":"nums","type":"string"}]}
+          values={{ nums: numsInput }}
+          onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
+          examples={EXAMPLES}
+          applyExample={applyExample}
+          inputError={inputError}
+        />
       <ResizableSplitPanels
         className="hr-top-split"
         storageKey="cpviz.split.house-robber.top"

@@ -273,6 +273,15 @@ export default function Problem497Visualizer() {
   ], [step, SOLUTION_CODE, connectivity, setActiveLineDom])
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"rects","label":"rects","type":"array"}]}
+          values={{ rects: rectsInput }}
+          onChange={(k, v) => { if (k === 'rects') setRectsInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">

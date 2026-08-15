@@ -247,6 +247,14 @@ export default function ConstructBinaryTreeFromInorderAndPostorderTraversalVisua
   // Step 2: Extract panel consts
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"inorder","label":"inorder","type":"array"},{"key":"postorder","label":"postorder","type":"array"}]}
+        values={{ inorder: inorderInput, postorder: postorderInput }}
+        onChange={(k, v) => { if (k === 'inorder') setInorderInput(v); if (k === 'postorder') setPostorderInput(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="cbtipt-panel">
       <VisualizationPanel step={step} />
     </div>

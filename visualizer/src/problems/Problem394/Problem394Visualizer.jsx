@@ -11,6 +11,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
 import "./Problem394Visualizer.css";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const PATTERNS = []
 
 // Map which code line corresponds to which pattern
@@ -175,6 +176,13 @@ export default function Problem394Visualizer() {
 
     return (
         <div className="problem-shell">
+              <ManualInputPanel
+                fields={[{"key":"s","label":"s","type":"string"}]}
+                values={{ s: sInput }}
+                onChange={(k, v) => { if (k === 's') setSInput(v); handleReset() }}
+                examples={EXAMPLES}
+                applyExample={applyExample}
+              />
             <DockableWorkspace
                 panels={dockPanels}
                 initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

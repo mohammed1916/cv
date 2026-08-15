@@ -96,6 +96,13 @@ export default function ExcelSheetColumnNumberVisualizer() {
   // Step 2: Extract panels into consts
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"s","label":"s","type":"string"}]}
+        values={{ s: sInput }}
+        onChange={(k, v) => { if (k === 's') setSInput(v); handleReset() }}
+        showExamples={false}
+        inputError={inputError}
+      />
     <div className="escn-panel" style={{ flex: 1 }}>
       <div className="escn-panel-head">🔢 Excel Column</div>
       <div className="escn-panel-body">

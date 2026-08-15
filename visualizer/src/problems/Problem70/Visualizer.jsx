@@ -16,6 +16,7 @@ import { getVisualizationFeatures } from '../../config/visualizationRegistry'
 import { getExamples } from '../../config/examplesRegistry'
 import './Visualizer.css'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const SOLUTION_CODE = getSolutionCode('climbing-stairs')
 
 function generateSteps(n) {
@@ -340,7 +341,16 @@ export default function ClimbingStairsVisualizer() {
   )
 
   const vizPanel = (
-    <VisualizationPanel
+    <>
+      <ManualInputPanel
+        fields={[{"key":"n","label":"n","type":"string"}]}
+        values={{ n: nInput }}
+        onChange={(k, v) => { if (k === 'n') setNInput(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyExample}
+        inputError={inputError}
+      />
+      <VisualizationPanel
       nInput={nInput}
       setNInput={setNInput}
       n={n}
@@ -351,6 +361,7 @@ export default function ClimbingStairsVisualizer() {
       step={step}
       applyExample={applyExample}
     />
+    </>
   )
 
   const varsPanel = <VariablesPanel step={step} />

@@ -289,6 +289,14 @@ export default function DistributeCandiesPeopleVisualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"n","label":"n","type":"string"},{"key":"k","label":"k","type":"string"}]}
+          values={{ n: nInput, k: kInput }}
+          onChange={(k, v) => { if (k === 'n') setNInput(v); if (k === 'k') setKInput(v); handleReset() }}
+          examples={EXAMPLES}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       
       <DockableWorkspace
         panels={dockPanels}

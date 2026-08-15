@@ -286,6 +286,14 @@ export default function LinkedListCycleVisualizer() {
     // Extract panels into consts (Step 3)
     const primaryPanel = (
       <>
+          <ManualInputPanel
+            fields={[{"key":"nodeCount","label":"nodeCount","type":"number"},{"key":"tailTo","label":"tailTo","type":"string"}]}
+            values={{ nodeCount: nodeCountInput, tailTo: tailToInput }}
+            onChange={(k, v) => { if (k === 'nodeCount') setNodeCountInput(v); if (k === 'tailTo') setTailToInput(v); handleReset() }}
+            examples={EXAMPLES}
+            applyExample={applyExample}
+            inputError={inputError}
+          />
         <div className="llc-panel">
             <header className="llc-head">
                 <span>Linked List Cycle · Floyd's Tortoise &amp; Hare</span>

@@ -328,6 +328,14 @@ export default function ReadNCharactersGivenRead4IIVisualizer() {
 
   const vizPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"file","label":"file","type":"string"},{"key":"calls","label":"calls","type":"array"}]}
+        values={{ file: fileInput, calls: callsInput }}
+        onChange={(k, v) => { if (k === 'file') setFileInput(v); if (k === 'calls') setCallsInput(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="rnc2-panel">
       <VisualizationPanel step={step} />
     </div>

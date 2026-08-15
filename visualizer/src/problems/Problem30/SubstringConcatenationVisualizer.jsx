@@ -118,6 +118,15 @@ export default function SubstringConcatenationVisualizer() {
 
     return (
         <div className="sc-shell">
+        <ManualInputPanel
+          fields={[{"key":"s","label":"s","type":"string"},{"key":"words","label":"words","type":"array"}]}
+          values={{ s: sInput, words: wordsInput }}
+          onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 'words') setWordsInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       
             <div className="sc-examples">
                 {EXAMPLES.map(e => (

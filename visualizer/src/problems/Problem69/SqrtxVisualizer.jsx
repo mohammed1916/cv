@@ -275,6 +275,15 @@ export default function SqrtxVisualizer() {
   // Panel consts
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"x","label":"x","type":"number"}]}
+        values={{ x: xInput }}
+        onChange={(k, v) => { if (k === 'x') setXInput(v); handleReset() }}
+        examples={EXAMPLES}
+        activeLabel={EXAMPLES[exampleIdx]?.label}
+        applyExample={(e) => applyExample(EXAMPLES.indexOf(e))}
+        inputError={inputError}
+      />
     <div className="sqrtx-panel">
       {/* Example selector */}
       <div className="sqrtx-examples">

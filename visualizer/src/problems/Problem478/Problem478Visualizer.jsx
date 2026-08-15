@@ -273,6 +273,15 @@ export default function Problem478Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"radius","label":"radius","type":"number"},{"key":"x_center","label":"x_center","type":"number"},{"key":"y_center","label":"y_center","type":"number"}]}
+          values={{ radius: radiusInput, x_center: x_centerInput, y_center: y_centerInput }}
+          onChange={(k, v) => { if (k === 'radius') setRadiusInput(v); if (k === 'x_center') setX_centerInput(v); if (k === 'y_center') setY_centerInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">

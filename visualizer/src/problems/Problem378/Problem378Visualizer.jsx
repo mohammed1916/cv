@@ -296,6 +296,15 @@ export default function Problem378Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"matrix","label":"matrix","type":"array"},{"key":"k","label":"k","type":"number"}]}
+          values={{ matrix: matrixInput, k: kInput }}
+          onChange={(k, v) => { if (k === 'matrix') setMatrixInput(v); if (k === 'k') setKInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={(e) => applyExample(EXAMPLES.indexOf(e))}
+          inputError={inputError}
+        />
       
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">

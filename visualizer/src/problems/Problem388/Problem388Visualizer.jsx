@@ -402,6 +402,15 @@ export default function Problem388Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"input","label":"input","type":"string"}]}
+          values={{ input: inputInput }}
+          onChange={(k, v) => { if (k === 'input') setInputInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={(e) => applyExample(EXAMPLES.indexOf(e))}
+          inputError={inputError}
+        />
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         {showPatternOverlay && (

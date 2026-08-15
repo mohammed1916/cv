@@ -12,6 +12,7 @@ import './RemoveElementVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -91,6 +92,13 @@ export default function RemoveElementVisualizer() {
   // Extract panels into consts
   const primaryPanel = (
     <div className="removeel-panel">
+        <ManualInputPanel
+          fields={[{"key":"nums","label":"nums","type":"string"},{"key":"val","label":"val","type":"string"}]}
+          values={{ nums: numsInput, val: valInput }}
+          onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'val') setValInput(v); handleReset() }}
+          examples={EXAMPLES}
+          applyExample={applyExample}
+        />
       <div className="removeel-panel-head">Array Cleanup</div>
       <div className="removeel-panel-body">
         <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>

@@ -14,6 +14,7 @@ import './CoinChangeVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const PATTERNS = ['check_coin', 'done', 'init', 'outer', 'update']
 const LINE_PATTERN_MAP = {
@@ -231,6 +232,14 @@ export default function CoinChangeVisualizer() {
 
     const visualizationPanel = (
         <div className="cc-panel-body cc-viz-body">
+              <ManualInputPanel
+                fields={[{"key":"coins","label":"coins","type":"string"},{"key":"amount","label":"amount","type":"string"}]}
+                values={{ coins: coinsInput, amount: amountInput }}
+                onChange={(k, v) => { if (k === 'coins') setCoinsInput(v); if (k === 'amount') setAmountInput(v); handleReset() }}
+                examples={EXAMPLES}
+                applyExample={applyExample}
+                inputError={inputError}
+              />
             {/* Coin chips */}
             <div className="cc-coins-row">
                 <span className="cc-coins-label">coins:</span>

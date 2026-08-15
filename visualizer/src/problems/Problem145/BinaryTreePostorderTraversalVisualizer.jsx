@@ -390,6 +390,14 @@ export default function BinaryTreePostorderTraversalVisualizer() {
 
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"arr","label":"arr","type":"string"}]}
+        values={{ arr: arrInput }}
+        onChange={(k, v) => { if (k === 'arr') setArrInput(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="btp-panel">
       <VisualizationPanel step={step} root={root} />
     </div>

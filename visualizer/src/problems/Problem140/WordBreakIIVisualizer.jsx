@@ -268,6 +268,14 @@ export default function WordBreakIIVisualizer() {
 
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"s","label":"s","type":"string"},{"key":"wordDict","label":"wordDict","type":"array"}]}
+        values={{ s: sInput, wordDict: wordDictInput }}
+        onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 'wordDict') setWordDictInput(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="wbii-panel">
       <VisualizationPanel step={step} />
     </div>

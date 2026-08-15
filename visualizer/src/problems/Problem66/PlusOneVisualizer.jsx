@@ -230,6 +230,15 @@ export default function PlusOneVisualizer() {
     )
     const vizPanel = (
       <>
+        <ManualInputPanel
+          fields={[{"key":"digits","label":"digits","type":"array"},{"key":"desc","label":"desc","type":"string"}]}
+          values={{ digits: digitsInput, desc: descInput }}
+          onChange={(k, v) => { if (k === 'digits') setDigitsInput(v); if (k === 'desc') setDescInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       <div className="po-panel">
         <VisualizationPanel
           arr={arr}

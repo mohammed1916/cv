@@ -271,6 +271,13 @@ export default function PerfectNumberVisualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"n","label":"n","type":"string"}]}
+          values={{ n: nInput }}
+          onChange={(k, v) => { if (k === 'n') setNInput(v); handleReset() }}
+          showExamples={false}
+          inputError={inputError}
+        />
       
       <DockableWorkspace
         panels={dockPanels}

@@ -400,6 +400,15 @@ export default function Problem381Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"n","label":"n","type":"number"},{"key":"blacklist","label":"blacklist","type":"array"}]}
+          values={{ n: nInput, blacklist: blacklistInput }}
+          onChange={(k, v) => { if (k === 'n') setNInput(v); if (k === 'blacklist') setBlacklistInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={(e) => applyExample(EXAMPLES.indexOf(e))}
+          inputError={inputError}
+        />
       
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">

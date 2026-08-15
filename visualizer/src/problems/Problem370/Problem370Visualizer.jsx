@@ -474,6 +474,15 @@ export default function Problem370Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"length","label":"length","type":"number"},{"key":"updates","label":"updates","type":"array"}]}
+          values={{ length: lengthInput, updates: updatesInput }}
+          onChange={(k, v) => { if (k === 'length') setLengthInput(v); if (k === 'updates') setUpdatesInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={(e) => applyExample(EXAMPLES.indexOf(e))}
+          inputError={inputError}
+        />
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">
         <PlaybackControls

@@ -196,6 +196,15 @@ export default function Problem427Visualizer() {
   ], [step, SOLUTION_CODE, connectivity, setActiveLineDom])
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"tokens","label":"tokens","type":"array"}]}
+          values={{ tokens: tokensInput }}
+          onChange={(k, v) => { if (k === 'tokens') setTokensInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">

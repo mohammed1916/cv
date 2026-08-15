@@ -190,15 +190,24 @@ function injectInto(file) {
   if (!target) return { file, skip: 'no JSX target' }
 
   const off = firstChildOffset(target.jsx)
-  if (off == null) return { file, skip: `target ${target.name} is self-closing` }
-
-  const lineStart = src.lastIndexOf('\n', off) + 1
+  const anchor = off ?? target.jsx.range[0]
+  const lineStart = src.lastIndexOf('\n', anchor) + 1
   const baseIndent = /^[ \t]*/.exec(src.slice(lineStart))[0] + '  '
 
   const helpers = detectHelpers(src, component, src)
   const panel = buildPanel(baseIndent, fields, helpers)
 
-  let out = src.slice(0, off) + '\n' + panel + src.slice(off)
+  let out
+  if (off != null) {
+    out = src.slice(0, off) + '\n' + panel + src.slice(off)
+  } else {
+    // A self-closing target takes no children, so wrap it and the panel in a
+    // fragment. Safe here because the element's exact range is known.
+    const [start, end] = target.jsx.range
+    const indent = /^[ \t]*/.exec(src.slice(lineStart))[0]
+    const original = src.slice(start, end)
+    out = src.slice(0, start) + `<>\n${panel}\n${indent}  ${original}\n${indent}</>` + src.slice(end)
+  }
   out = ensureImport(out)
 
   // Reject anything that no longer parses rather than writing it out.

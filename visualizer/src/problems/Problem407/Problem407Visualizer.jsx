@@ -199,6 +199,15 @@ export default function Problem407Visualizer() {
   ], [step, SOLUTION_CODE, connectivity, setActiveLineDom])
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"heightMap","label":"heightMap","type":"array"}]}
+          values={{ heightMap: heightMapInput }}
+          onChange={(k, v) => { if (k === 'heightMap') setHeightMapInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
       <FloatingPanel title="Playback Controls">

@@ -99,6 +99,15 @@ export default function CandyVisualizer() {
   // Step 3: Extract panels into consts
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"ratings","label":"ratings","type":"array"}]}
+        values={{ ratings: ratingsInput }}
+        onChange={(k, v) => { if (k === 'ratings') setRatingsInput(v); handleReset() }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="cy-panel">
       <div className="cy-examples">
         {EXAMPLES.map(e => (

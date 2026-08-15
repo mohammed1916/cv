@@ -284,6 +284,15 @@ export default function Problem469Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"points","label":"points","type":"array"}]}
+          values={{ points: pointsInput }}
+          onChange={(k, v) => { if (k === 'points') setPointsInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

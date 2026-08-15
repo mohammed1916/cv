@@ -274,6 +274,13 @@ export default function CombinationSumIIIVisualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"k","label":"k","type":"string"},{"key":"n","label":"n","type":"string"}]}
+          values={{ k: kInput, n: nInput }}
+          onChange={(k, v) => { if (k === 'k') setKInput(v); if (k === 'n') setNInput(v); handleReset() }}
+          showExamples={false}
+          inputError={inputError}
+        />
       
       <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [["code", "viz"]], minimized: [] }} />
       <FloatingPanel title="Controls">

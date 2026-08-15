@@ -373,6 +373,15 @@ export default function Problem68Visualizer() {
 
   const vizPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"words","label":"words","type":"array"},{"key":"maxWidth","label":"maxWidth","type":"number"}]}
+        values={{ words: wordsInput, maxWidth: maxWidthInput }}
+        onChange={(k, v) => { if (k === 'words') setWordsInput(v); if (k === 'maxWidth') setMaxWidthInput(v); handleReset() }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div style={{ position: 'relative', height: '100%' }}>
       <VisualizationPanel step={step} />
     </div>

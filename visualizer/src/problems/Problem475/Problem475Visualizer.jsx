@@ -257,6 +257,15 @@ export default function Problem475Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"houses","label":"houses","type":"array"},{"key":"heaters","label":"heaters","type":"array"}]}
+          values={{ houses: housesInput, heaters: heatersInput }}
+          onChange={(k, v) => { if (k === 'houses') setHousesInput(v); if (k === 'heaters') setHeatersInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

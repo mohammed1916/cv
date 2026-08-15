@@ -518,6 +518,15 @@ export default function Problem371Visualizer() {
 
   const vizPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"a","label":"a","type":"number"},{"key":"b","label":"b","type":"number"}]}
+        values={{ a: aInput, b: bInput }}
+        onChange={(k, v) => { if (k === 'a') setAInput(v); if (k === 'b') setBInput(v); handleReset() }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <VisualizationPanel
       a={a}
       b={b}

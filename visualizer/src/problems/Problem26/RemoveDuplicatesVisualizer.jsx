@@ -87,6 +87,15 @@ export default function RemoveDuplicatesVisualizer({ problem }) {
   // Step 3: Extract panels into consts
   const primaryPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"nums","label":"nums","type":"array"}]}
+        values={{ nums: numsInput }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
+        examples={EXAMPLES}
+        activeLabel={ex?.label}
+        applyExample={applyEx}
+        inputError={inputError}
+      />
     <div className="rd-panel">
       <div className="rd-panel-label">Array (in-place)</div>
       <AnimatedIterationList

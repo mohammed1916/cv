@@ -13,6 +13,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import './PascalsTriangleII.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -118,6 +119,15 @@ export default function PascalsTriangleIIVisualizer() {
 
   const vizPanel = (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+        <ManualInputPanel
+          fields={[{"key":"rowIndex","label":"rowIndex","type":"string"}]}
+          values={{ rowIndex: rowIndexInput }}
+          onChange={(k, v) => { if (k === 'rowIndex') setRowIndexInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={(e) => applyExample(EXAMPLES.indexOf(e))}
+          inputError={inputError}
+        />
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map((e, i) => (

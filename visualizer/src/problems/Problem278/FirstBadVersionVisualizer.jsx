@@ -136,6 +136,15 @@ export default function FirstBadVersionVisualizer() {
 
   return (
     <div className="fbv-shell">
+        <ManualInputPanel
+          fields={[{"key":"n","label":"n","type":"number"},{"key":"bad","label":"bad","type":"number"}]}
+          values={{ n: nInput, bad: badInput }}
+          onChange={(k, v) => { if (k === 'n') setNInput(v); if (k === 'bad') setBadInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       
       {/* Example selector */}
       <div className="fbv-examples">

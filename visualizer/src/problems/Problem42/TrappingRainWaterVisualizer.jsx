@@ -11,6 +11,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import LuminoDockPanel from '../../components/LuminoDockPanel'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -169,6 +170,14 @@ export default function TrappingRainWaterVisualizer() {
   // Step 3: Extract panel consts
   const primaryPanel = (
     <div className="tw-panel">
+        <ManualInputPanel
+          fields={[{"key":"height","label":"height","type":"string"}]}
+          values={{ height: heightInput }}
+          onChange={(k, v) => { if (k === 'height') setHeightInput(v); handleReset() }}
+          examples={EXAMPLES}
+          applyExample={applyExample}
+          inputError={inputError}
+        />
       <div className="tw-panel-head">
         Elevation Map
         {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}

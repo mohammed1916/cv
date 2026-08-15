@@ -12,6 +12,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './ReverseIntegerVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const REVIN_PATTERNS = ['init', 'loop', 'pop', 'check_max', 'check_min', 'push']
 
@@ -172,6 +173,14 @@ export default function ReverseIntegerVisualizer() {
 
   const inputPanel = (
     <div className="revin-panel">
+        <ManualInputPanel
+          fields={[{"key":"x","label":"x","type":"string"}]}
+          values={{ x: xInput }}
+          onChange={(k, v) => { if (k === 'x') setXInput(v); handleReset() }}
+          examples={EXAMPLES}
+          applyExample={applyExample}
+          inputError={inputError}
+        />
       <div className="revin-panel-head">
         Pop & Push Digits
         {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}

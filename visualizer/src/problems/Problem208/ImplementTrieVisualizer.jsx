@@ -134,6 +134,13 @@ export default function ImplementTrieVisualizer() {
   )
   const vizPanel = (
     <>
+      <ManualInputPanel
+        fields={[{"key":"word","label":"word","type":"string"},{"key":"operation","label":"operation","type":"string"}]}
+        values={{ word: wordInput, operation: operationInput }}
+        onChange={(k, v) => { if (k === 'word') setWordInput(v); if (k === 'operation') setOperationInput(v); handleReset() }}
+        showExamples={false}
+        inputError={inputError}
+      />
     <VisualizationPanel step={step} trie={trie} />
   
     </>)

@@ -187,6 +187,15 @@ export default function InterleavingStringVisualizer() {
     // Extract panels into consts
     const inputPanel = (
         <div className="is-panel">
+              <ManualInputPanel
+                fields={[{"key":"s1","label":"s1","type":"string"},{"key":"s2","label":"s2","type":"string"},{"key":"s3","label":"s3","type":"string"}]}
+                values={{ s1: s1Input, s2: s2Input, s3: s3Input }}
+                onChange={(k, v) => { if (k === 's1') setS1Input(v); if (k === 's2') setS2Input(v); if (k === 's3') setS3Input(v); handleReset() }}
+                examples={EXAMPLES}
+                activeLabel={ex?.label}
+                applyExample={applyEx}
+                inputError={inputError}
+              />
             <InputPanelContent />
         </div>
     );

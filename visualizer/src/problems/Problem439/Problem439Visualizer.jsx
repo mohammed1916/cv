@@ -373,6 +373,15 @@ export default function Problem439Visualizer() {
 
   return (
     <div className="problem-shell">
+        <ManualInputPanel
+          fields={[{"key":"expression","label":"expression","type":"string"}]}
+          values={{ expression: expressionInput }}
+          onChange={(k, v) => { if (k === 'expression') setExpressionInput(v); handleReset() }}
+          examples={EXAMPLES}
+          activeLabel={ex?.label}
+          applyExample={applyEx}
+          inputError={inputError}
+        />
       <DockableWorkspace
         panels={dockPanels}
         initialLayout={{ rows: [['code', 'viz']], minimized: [] }}

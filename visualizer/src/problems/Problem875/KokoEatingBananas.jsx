@@ -124,6 +124,12 @@ const KokoEatingBananas = () => {
 
   return (
     <div className="keb-container">
+        <ManualInputPanel
+          fields={[{"key":"custom","label":"custom","type":"string"}]}
+          values={{ custom: customInput }}
+          onChange={(k, v) => { if (k === 'custom') setCustomInput(v) }}
+          showExamples={false}
+        />
       <div className="keb-header">
         <h1>Koko Eating Bananas (LC 875)</h1>
         <p className="keb-subtitle">Find minimum eating speed to finish all piles in time</p>

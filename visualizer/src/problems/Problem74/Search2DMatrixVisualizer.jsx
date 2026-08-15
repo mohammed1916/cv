@@ -99,6 +99,15 @@ export default function Search2DMatrixVisualizer() {
     // Step 2: Extract panels into consts
     const primaryPanel = (
       <>
+          <ManualInputPanel
+            fields={[{"key":"matrix","label":"matrix","type":"array"},{"key":"target","label":"target","type":"number"}]}
+            values={{ matrix: matrixInput, target: targetInput }}
+            onChange={(k, v) => { if (k === 'matrix') setMatrixInput(v); if (k === 'target') setTargetInput(v); handleReset() }}
+            examples={EXAMPLES}
+            activeLabel={EXAMPLES[sel]?.label}
+            applyExample={(e) => applyExample(EXAMPLES.indexOf(e))}
+            inputError={inputError}
+          />
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
                 {EXAMPLES.map((ex, i) => (

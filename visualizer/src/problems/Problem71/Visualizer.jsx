@@ -383,7 +383,18 @@ export default function Problem71Visualizer() {
     </div>
   )
 
-  const vizPanel = <VisualizationPanel step={step} />
+  const vizPanel = <>
+    <ManualInputPanel
+      fields={[{"key":"path","label":"path","type":"string"}]}
+      values={{ path: pathInput }}
+      onChange={(k, v) => { if (k === 'path') setPathInput(v); handleReset() }}
+      examples={EXAMPLES}
+      activeLabel={ex?.label}
+      applyExample={applyEx}
+      inputError={inputError}
+    />
+    <VisualizationPanel step={step} />
+  </>
 
   const statusPanel = (
     <div className="problem71-status" style={{ padding: '6px 12px', fontSize: 12, color: '#64748b' }}>

@@ -10,6 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './ZigzagVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const ZIGZAG_PATTERNS = ['walk', 'early_return']
 
@@ -375,6 +376,14 @@ export default function ZigzagVisualizer() {
 
   return (
     <div className="zv">
+        <ManualInputPanel
+          fields={[{"key":"rowCount","label":"rowCount","type":"string"}]}
+          values={{ rowCount: rowCountInput }}
+          onChange={(k, v) => { if (k === 'rowCount') setRowCountInput(v); handleReset() }}
+          examples={EXAMPLES}
+          applyExample={applyExample}
+          inputError={inputError}
+        />
       <div className="zv-card zv-input-card">
         <div className="zv-input-row">
           <div className="zv-field-group zv-field-string">

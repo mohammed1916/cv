@@ -7,6 +7,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './IntegerBreakVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -204,6 +205,13 @@ export default function IntegerBreakVisualizer() {
 
   return (
     <div className="integer-break-shell">
+        <ManualInputPanel
+          fields={[{"key":"n","label":"n","type":"string"}]}
+          values={{ n: nInput }}
+          onChange={(k, v) => { if (k === 'n') setNInput(v); handleReset() }}
+          showExamples={false}
+          inputError={inputError}
+        />
       <div className="integer-break-panel">
         <div className="integer-break-panel-head">Input — Integer Break (n)</div>
         <div className="integer-break-panel-body">
