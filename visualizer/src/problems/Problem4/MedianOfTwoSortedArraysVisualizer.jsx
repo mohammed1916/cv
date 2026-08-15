@@ -680,94 +680,94 @@ export default function MedianOfTwoSortedArraysVisualizer() {
     <>
 
       <ManualInputPanel
-        fields={[{"key":"nums1","label":"nums1","type":"string"},{"key":"nums2","label":"nums2","type":"string"}]}
+        fields={[{ "key": "nums1", "label": "nums1", "type": "string" }, { "key": "nums2", "label": "nums2", "type": "string" }]}
         values={{ nums1: nums1Input, nums2: nums2Input }}
         onChange={(k, v) => { if (k === 'nums1') setNums1Input(v); if (k === 'nums2') setNums2Input(v); handleReset() }}
         examples={EXAMPLES}
         applyExample={applyExample}
       />
 
-    <div className="median-panel median-input-panel">
-      <div className="median-panel-head">
-        <span>Inputs & Examples</span>
-        {prepared.inputError && (
-          <span className="median-error-pill">{prepared.inputError}</span>
-        )}
-      </div>
-
-      <div className="median-panel-body">
-        <div className="median-example-row">
-          {EXAMPLES.map((example) => (
-            <button
-              key={example.label}
-              className="median-example-btn"
-              onClick={() => applyExample(example)}
-            >
-              {example.label}
-            </button>
-          ))}
-        </div>
-
-        <div className="median-input-grid">
-          <div className="median-input-group">
-            <span className="median-input-prefix">nums1 =</span>
-            <input
-              className="median-input"
-              value={nums1Input}
-              onChange={(event) => {
-                setNums1Input(event.target.value);
-                handleReset();
-              }}
-              placeholder="[1, 3]"
-            />
-          </div>
-
-          <div className="median-input-group">
-            <span className="median-input-prefix">nums2 =</span>
-            <input
-              className="median-input"
-              value={nums2Input}
-              onChange={(event) => {
-                setNums2Input(event.target.value);
-                handleReset();
-              }}
-              placeholder="[2]"
-            />
-          </div>
-        </div>
-
-        <div className="median-note-box">
-          <div className="median-note-title">How the search is set up</div>
-          <div className="median-note-text">
-            We always binary-search the smaller array.{" "}
-            <strong>{sourceLabel}</strong>.
-          </div>
-          <div className="median-note-text">
-            Search space stays small because only cut A moves left or right.
-          </div>
-          {prepared.autoSorted && (
-            <div className="median-note-text">
-              Input arrays were automatically sorted for visualization.
-            </div>
+      <div className="median-panel median-input-panel">
+        <div className="median-panel-head">
+          <span>Inputs & Examples</span>
+          {prepared.inputError && (
+            <span className="median-error-pill">{prepared.inputError}</span>
           )}
         </div>
 
-        <div className="median-input-stats">
-          <MetricCard
-            label="len(nums1)"
-            value={prepared.nums1.length}
-            tone="blue"
-          />
-          <MetricCard
-            label="len(nums2)"
-            value={prepared.nums2.length}
-            tone="cyan"
-          />
-          <MetricCard label="Total" value={total} tone="amber" />
+        <div className="median-panel-body">
+          <div className="median-example-row">
+            {EXAMPLES.map((example) => (
+              <button
+                key={example.label}
+                className="median-example-btn"
+                onClick={() => applyExample(example)}
+              >
+                {example.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="median-input-grid">
+            <div className="median-input-group">
+              <span className="median-input-prefix">nums1 =</span>
+              <input
+                className="median-input"
+                value={nums1Input}
+                onChange={(event) => {
+                  setNums1Input(event.target.value);
+                  handleReset();
+                }}
+                placeholder="[1, 3]"
+              />
+            </div>
+
+            <div className="median-input-group">
+              <span className="median-input-prefix">nums2 =</span>
+              <input
+                className="median-input"
+                value={nums2Input}
+                onChange={(event) => {
+                  setNums2Input(event.target.value);
+                  handleReset();
+                }}
+                placeholder="[2]"
+              />
+            </div>
+          </div>
+
+          <div className="median-note-box">
+            <div className="median-note-title">How the search is set up</div>
+            <div className="median-note-text">
+              We always binary-search the smaller array.{" "}
+              <strong>{sourceLabel}</strong>.
+            </div>
+            <div className="median-note-text">
+              Search space stays small because only cut A moves left or right.
+            </div>
+            {prepared.autoSorted && (
+              <div className="median-note-text">
+                Input arrays were automatically sorted for visualization.
+              </div>
+            )}
+          </div>
+
+          <div className="median-input-stats">
+            <MetricCard
+              label="len(nums1)"
+              value={prepared.nums1.length}
+              tone="blue"
+            />
+            <MetricCard
+              label="len(nums2)"
+              value={prepared.nums2.length}
+              tone="cyan"
+            />
+            <MetricCard label="Total" value={total} tone="amber" />
+          </div>
         </div>
       </div>
-    </div>
-  
+
     </>);
 
   const statePanel = (
@@ -951,30 +951,29 @@ export default function MedianOfTwoSortedArraysVisualizer() {
   );
 
   const codePanel = (
-    <div style={{ position: 'relative', height: '100%' }}>
-      <CodeTracePanel
-        step={step}
-        codeLines={SOLUTION_CODE}
-        onActiveLineDomChange={setActiveLineDom}
-        disableResizer
-      />
-
-      {showPatternOverlay && (
-        <CodePatternAnnotations
-          linePatterns={LINE_PATTERN_MAP}
-          currentPhase={step?.phase}
-          activeLineDom={activeLineDom}
-          activeLine={step?.activeLine}
+    <div className="median-code-shell">
+      <div
+        className={`median-status-strip ${step?.phase === "found" || step?.phase === "done" ? "success" : step?.phase === "move_left" || step?.phase === "move_right" ? "update" : ""}`}
+      >
+        {step?.message || "Press Play or Step to begin."}
+      </div>
+      <div className="median-code-panel-body" style={{ position: 'relative', height: '100%' }}>
+        <CodeTracePanel
+          step={step}
+          codeLines={SOLUTION_CODE}
+          onActiveLineDomChange={setActiveLineDom}
+          disableResizer
         />
-      )}
-    </div>
-  );
 
-  const statusPanel = (
-    <div
-      className={`median-status ${step?.phase === "found" || step?.phase === "done" ? "success" : step?.phase === "move_left" || step?.phase === "move_right" ? "update" : ""}`}
-    >
-      {step?.message || "Press Play or Step to begin."}
+        {showPatternOverlay && (
+          <CodePatternAnnotations
+            linePatterns={LINE_PATTERN_MAP}
+            currentPhase={step?.phase}
+            activeLineDom={activeLineDom}
+            activeLine={step?.activeLine}
+          />
+        )}
+      </div>
     </div>
   );
 
@@ -1010,8 +1009,7 @@ export default function MedianOfTwoSortedArraysVisualizer() {
       { id: 'primary', title: 'Inputs & Examples', dockMode: 'split-right' },
       { id: 'state', title: 'Partition Visualization', dockMode: 'split-right' },
       { id: 'secondary', title: 'Partition Math & Verdict', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
-      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
     ],
     []
   );
@@ -1026,7 +1024,6 @@ export default function MedianOfTwoSortedArraysVisualizer() {
           {panelDivs.state && createPortal(statePanel, panelDivs.state)}
           {panelDivs.secondary && createPortal(secondaryPanel, panelDivs.secondary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
-          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
         </>
       )}
       {createPortal(

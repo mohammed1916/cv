@@ -4,11 +4,8 @@ const ThemeContext = createContext()
 
 const STORAGE_KEY = 'cpviz.theme'
 
-// Light is the default, deliberately regardless of the OS setting: only a
-// choice the user made here overrides it. Falling back to
-// prefers-color-scheme was tried and reverted — it silently handed anyone on
-// a dark-mode machine the dark theme, which is not what "light by default"
-// means.
+// Dark is the default to match the app's intended visual design and keep the
+// visualizers readable on modern dark-mode displays without needing a toggle.
 function initialTheme() {
   try {
     const stored = window.localStorage.getItem(STORAGE_KEY)
@@ -16,7 +13,7 @@ function initialTheme() {
   } catch {
     // Ignore localStorage failures (private mode, old browsers).
   }
-  return 'light'
+  return 'dark'
 }
 
 export function ThemeProvider({ children }) {

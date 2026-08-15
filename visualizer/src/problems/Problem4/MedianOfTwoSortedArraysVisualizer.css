@@ -10,11 +10,9 @@
 }
 
 .median-panel {
-    background: linear-gradient(
-        180deg,
-        rgba(15, 23, 42, 0.98),
-        rgba(10, 16, 28, 0.98)
-    );
+    background: linear-gradient(180deg,
+            rgba(15, 23, 42, 0.98),
+            rgba(10, 16, 28, 0.98));
     border: 1px solid #334155;
     border-radius: 4px;
     padding: 12px;
@@ -148,7 +146,7 @@
     line-height: 1.55;
 }
 
-.median-note-text + .median-note-text {
+.median-note-text+.median-note-text {
     margin-top: 6px;
 }
 
@@ -283,11 +281,9 @@
     position: absolute;
     top: 38px;
     height: 52px;
-    background: linear-gradient(
-        90deg,
-        rgba(59, 130, 246, 0.08),
-        rgba(56, 189, 248, 0.16)
-    );
+    background: linear-gradient(90deg,
+            rgba(59, 130, 246, 0.08),
+            rgba(56, 189, 248, 0.16));
     border: 1px solid rgba(56, 189, 248, 0.24);
     border-radius: 14px;
     z-index: 0;
@@ -341,11 +337,9 @@
     width: 2px;
     height: 20px;
     border-radius: 999px;
-    background: linear-gradient(
-        180deg,
-        rgba(34, 197, 94, 0.85),
-        rgba(34, 197, 94, 0.1)
-    );
+    background: linear-gradient(180deg,
+            rgba(34, 197, 94, 0.85),
+            rgba(34, 197, 94, 0.1));
 }
 
 .median-marker.partition .median-marker-value {
@@ -535,7 +529,7 @@
     gap: 10px 12px;
 }
 
-.median-boundary-grid > div {
+.median-boundary-grid>div {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -574,11 +568,9 @@
     padding: 12px;
     border-radius: 14px;
     border: 1px solid rgba(71, 85, 105, 0.75);
-    background: linear-gradient(
-        180deg,
-        rgba(2, 6, 23, 0.52),
-        rgba(15, 23, 42, 0.48)
-    );
+    background: linear-gradient(180deg,
+            rgba(2, 6, 23, 0.52),
+            rgba(15, 23, 42, 0.48));
 }
 
 .median-compare-title {
@@ -719,10 +711,12 @@
         transform: scale(1);
         box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.32);
     }
+
     50% {
         transform: scale(1.08);
         box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
     }
+
     100% {
         transform: scale(1);
         box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
@@ -730,10 +724,12 @@
 }
 
 @keyframes flowArrow {
+
     0%,
     100% {
         transform: translateX(0);
     }
+
     50% {
         transform: translateX(4px);
     }
@@ -761,26 +757,45 @@
     font-size: 13px;
 }
 
-.median-status {
-    padding: 12px;
-    border-radius: 4px;
-    border: 1px solid #334155;
-    background: rgba(15, 23, 42, 0.72);
-    color: #cbd5e1;
+.median-code-shell {
+    display: flex;
+    flex-direction: column;
     height: 100%;
+    min-height: 0;
+    background: rgba(10, 16, 28, 0.92);
+    border: 1px solid rgba(71, 85, 105, 0.8);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.median-status-strip {
+    flex: 0 0 auto;
     display: flex;
     align-items: center;
-    overflow: auto;
+    min-height: 38px;
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    background: rgba(15, 23, 42, 0.9);
+    color: #dfeaf7;
+    font-size: 12px;
+    line-height: 1.4;
+    font-weight: 600;
+    letter-spacing: 0.01em;
 }
 
-.median-status.success {
-    border-color: rgba(34, 197, 94, 0.45);
-    color: #12873c;
+.median-status-strip.success {
+    border-bottom-color: rgba(34, 197, 94, 0.35);
+    color: #9ae6b4;
 }
 
-.median-status.update {
-    border-color: rgba(56, 189, 248, 0.45);
-    color: #047cb5;
+.median-status-strip.update {
+    border-bottom-color: rgba(56, 189, 248, 0.35);
+    color: #7dd3fc;
+}
+
+.median-code-panel-body {
+    flex: 1 1 auto;
+    min-height: 0;
 }
 
 .median-dock {
@@ -794,6 +809,7 @@
 }
 
 @media (max-width: 860px) {
+
     .median-input-stats,
     .median-metric-grid,
     .median-boundary-grid {

@@ -87,7 +87,7 @@ export default function LuminoDockPanel({ panels, onPanelReady }) {
       if (index === 0) {
         dock.addWidget(widget)
       } else {
-        const refWidget = widgetRefsRef.current[panels[0].id]
+        const refWidget = widgetRefsRef.current[panels[index - 1].id]
         dock.addWidget(widget, {
           mode: panelConfig.dockMode || 'split-right',
           ref: refWidget,
