@@ -73,12 +73,11 @@ export function TreeHighlightOverlay({ step, treeNodePositions, dpSnapshot }) {
   const sourcePos = sourceNode !== undefined ? treeNodePositions.get(sourceNode) : null;
   const targetPos = targetNode !== undefined ? treeNodePositions.get(targetNode) : null;
 
+  // This overlay is rendered inside TreeStatePanel's SVG (1000 × 300). Keep
+  // it as a group in that same coordinate system; a nested 1000 × 1000 SVG
+  // stretches/offsets the source-to-target connector on wide tree panels.
   return (
-    <svg
-      className="tree-highlight-overlay"
-      viewBox="0 0 1000 1000"
-      preserveAspectRatio="xMidYMid slice"
-    >
+    <g className="tree-highlight-overlay">
       {/* Highlight source node */}
       {sourcePos && (
         <motion.g
@@ -180,6 +179,6 @@ export function TreeHighlightOverlay({ step, treeNodePositions, dpSnapshot }) {
           transition={{ duration: 0.5, delay: 0.2 }}
         />
       )}
-    </svg>
+    </g>
   );
 }
