@@ -17,6 +17,10 @@ export default function PointerRail({
         {range && <span>search window: {range.start}–{range.end}</span>}
       </header>
       <div className="pointer-rail-track">
+        <div
+          className="pointer-rail-canvas"
+          style={{ gridTemplateColumns: `repeat(${Math.max(values.length, 1)}, minmax(38px, 1fr))` }}
+        >
         {values.map((value, index) => {
           const at = pointers.filter((pointer) => !pointer.boundary && pointer.index === index)
           const inRange = !range || (index >= range.start && index <= range.end)
@@ -41,6 +45,7 @@ export default function PointerRail({
               <span>{pointer.label}</span>
             </motion.div>
           ))}
+        </div>
         </div>
       </div>
       {note && <p className="pointer-rail-note">{note}</p>}

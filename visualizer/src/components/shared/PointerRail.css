@@ -5,7 +5,8 @@
 }
 .pointer-rail-head { display: flex; justify-content: space-between; gap: 12px; color: var(--text-muted); font-size: 11px; margin-bottom: 8px; }
 .pointer-rail-head strong { color: var(--text); font-size: 12px; }
-.pointer-rail-track { position: relative; display: flex; gap: 5px; overflow-x: auto; padding-top: 24px; }
+.pointer-rail-track { overflow-x: auto; }
+.pointer-rail-canvas { position: relative; display: grid; min-width: 100%; width: max-content; padding-top: 24px; }
 .pointer-rail-slot { position: relative; min-width: 38px; text-align: center; transition: opacity .18s ease; }
 .pointer-rail-slot.outside-range { opacity: .38; }
 .pointer-rail-tags { position: absolute; left: 50%; top: -24px; transform: translateX(-50%); display: flex; gap: 3px; white-space: nowrap; }
