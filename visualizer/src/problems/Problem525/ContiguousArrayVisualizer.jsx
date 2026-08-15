@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -12,6 +12,7 @@ import { getExamples } from '../../config/examplesRegistry'
 import './ContiguousArrayVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { createPortal } from 'react-dom'
 
 const PATTERNS = ['init', 'loop', 'process']
 
@@ -284,12 +285,12 @@ export default function ContiguousArrayVisualizer() {
 
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  const dockPanels = useMemo(() => [
-    {
-      id: 'code',
-      title: 'Code',
-      content: (
-        <div style={{ position: 'relative' }}>
+  const panelConfigs = useMemo(() => [
+    { id: 'code', title: 'Code' },
+    { id: 'viz', title: '🎯 Contiguous Array', dockMode: 'split-right' },
+  ], [])
+  const panelContents = useMemo(() => ({
+    code: (<div style={{ position: 'relative' }}>
 
           <CodeTracePanel
           step={step}
@@ -316,28 +317,27 @@ export default function ContiguousArrayVisualizer() {
 
           )}
 
-        </div>
-      ),
-    },
-    {
-      id: 'viz',
-      title: '🎯 Contiguous Array',
-      content: (
-        <VisualizationPanel
+        </div>),
+    viz: (<VisualizationPanel
           arr={ex.nums}
           step={step}
           applyEx={applyEx}
-        />
-      ),
-    },
-  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
+        />),
+  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
     <div className="problem-shell">
-      <DockableWorkspace
-        panels={dockPanels}
-        initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
-      />
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+            {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+          </>
+        )}
+      </>
       <FloatingPanel title="Playback Controls">
         {showPatternOverlay && (
           <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />

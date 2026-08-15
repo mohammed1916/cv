@@ -1,12 +1,13 @@
 ﻿import{useState,useMemo,useCallback}from'react'
 import{motion}from'framer-motion'
-import DockableWorkspace from'../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from'../../components/shared/FloatingPanel'
 import CodeTracePanel from'../../components/CodeTracePanel'
 import PlaybackControls from'../../components/PlaybackControls'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
+import { createPortal } from 'react-dom'
 import{useCodeVisualConnectivity}from'../../hooks/useCodeVisualConnectivity'
 import{usePatternOverlay}from'../../hooks/usePatternOverlay'
 import{getExamples}from'../../config/examplesRegistry'
@@ -52,8 +53,25 @@ const step=stepIndex>=0?steps[stepIndex]:null
 const applyEx=useCallback(e=>{setEx(e);handleReset()},[handleReset])
 const connectivity=useCodeVisualConnectivity({steps,stepIndex,onStepJump:setStepIndex})
 const{showPatternOverlay,setShowPatternOverlay,activeLineDom,setActiveLineDom}=usePatternOverlay()
-const dockPanels=useMemo(()=>[{id:'code',title:'Code',content:(<div style={{ position: 'relative' }}><CodeTracePanel step={step}codeLines={SOLUTION_CODE}highlightedLines={connectivity.highlightedLines}onLineSelect={connectivity.handleLineSelect}onActiveLineDomChange={setActiveLineDom}/>{showPatternOverlay && (<CodePatternAnnotations linePatterns={LINE_PATTERN_MAP} currentPhase={step?.phase} activeLineDom={activeLineDom} activeLine={step?.activeLine} />)}</div>)},{id:'viz',title:'🌳 Convert BST to Greater Tree',content:(<VisualizationPanel root={ex.root}step={step}applyEx={applyEx}/>)}],[step,SOLUTION_CODE,connectivity,setActiveLineDom,ex,applyEx])
-return(<div className="problem-shell"><DockableWorkspace panels={dockPanels}initialLayout={{rows:[['code','viz']],minimized:[]}}/><FloatingPanel title="Playback Controls">
+const panelConfigs = useMemo(() => [
+  { id: 'code', title: 'Code' },
+  { id: 'viz', title: '🌳 Convert BST to Greater Tree', dockMode: 'split-right' },
+], [])
+const panelContents = useMemo(() => ({
+  code: (<div style={{ position: 'relative' }}><CodeTracePanel step={step}codeLines={SOLUTION_CODE}highlightedLines={connectivity.highlightedLines}onLineSelect={connectivity.handleLineSelect}onActiveLineDomChange={setActiveLineDom}/>{showPatternOverlay && (<CodePatternAnnotations linePatterns={LINE_PATTERN_MAP} currentPhase={step?.phase} activeLineDom={activeLineDom} activeLine={step?.activeLine} />)}</div>),
+  viz: (<VisualizationPanel root={ex.root}step={step}applyEx={applyEx}/>),
+}), [step,SOLUTION_CODE,connectivity,setActiveLineDom,ex,applyEx])
+const [panelDivs, setPanelDivs] = useState(null)
+const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+return(<div className="problem-shell"><>
+  <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+  {panelDivs && (
+    <>
+      {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+      {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+    </>
+  )}
+</><FloatingPanel title="Playback Controls">
         {showPatternOverlay && (
           <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
         )}

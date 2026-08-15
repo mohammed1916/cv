@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
@@ -13,6 +13,7 @@ import './Problem354Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
+import { createPortal } from 'react-dom'
 
 const PATTERNS = ['binary_search', 'binary_search_init', 'done', 'dp_append', 'dp_update', 'envelope_start', 'sort_done', 'sort_start']
 
@@ -402,40 +403,39 @@ export default function Problem354Visualizer() {
     [handleReset]
   )
 
-  const dockPanels = useMemo(
-    () => [
-      {
-        id: 'viz',
-        title: 'Visualization',
-        content: (
-          <VisualizationPanel
+  const panelConfigs = useMemo(() => [
+    { id: 'viz', title: 'Visualization' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
+  ], [])
+  const panelContents = useMemo(() => ({
+    viz: (<VisualizationPanel
             EXAMPLES={EXAMPLES}
             applyExample={applyExample}
             selected={selected}
             handleReset={handleReset}
             step={step}
-          />
-        ),
-      },
-      {
-        id: 'code',
-        title: 'Code',
-        content: (
-          <CodeTracePanel
+          />),
+    code: (<CodeTracePanel
             step={step}
             codeLines={SOLUTION_CODE}
             onActiveLineDomChange={setActiveLineDom}
             autoScroll={autoScrollCode}
-          />
-        ),
-      },
-    ],
-    [step, autoScrollCode, selected]
-  )
+          />),
+  }), [step, autoScrollCode, selected])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
     <div className="problem-shell">
-      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['viz', 'code']], minimized: [] }} />
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+            {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+          </>
+        )}
+      </>
       <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}

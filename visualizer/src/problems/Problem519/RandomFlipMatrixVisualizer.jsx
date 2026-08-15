@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -13,6 +13,7 @@ import './RandomFlipMatrixVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
+import { createPortal } from 'react-dom'
 const SOLUTION_CODE = getSolutionCode('random-flip-matrix')
 
 const PATTERNS = ['init', 'loop']
@@ -252,12 +253,12 @@ export default function RandomFlipMatrixVisualizer() {
 
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  const dockPanels = useMemo(() => [
-    {
-      id: 'code',
-      title: 'Code',
-      content: (
-        <div style={{ position: 'relative' }}>
+  const panelConfigs = useMemo(() => [
+    { id: 'code', title: 'Code' },
+    { id: 'viz', title: '🎲 Random Flip Matrix', dockMode: 'split-right' },
+  ], [])
+  const panelContents = useMemo(() => ({
+    code: (<div style={{ position: 'relative' }}>
 
           <CodeTracePanel
           step={step}
@@ -284,30 +285,29 @@ export default function RandomFlipMatrixVisualizer() {
 
           )}
 
-        </div>
-      ),
-    },
-    {
-      id: 'viz',
-      title: '🎲 Random Flip Matrix',
-      content: (
-        <VisualizationPanel
+        </div>),
+    viz: (<VisualizationPanel
           m={ex.m}
           n={ex.n}
           flips={ex.flips}
           step={step}
           applyEx={applyEx}
-        />
-      ),
-    },
-  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
+        />),
+  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
     <div className="problem-shell">
-      <DockableWorkspace
-        panels={dockPanels}
-        initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
-      />
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+            {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+          </>
+        )}
+      </>
       <FloatingPanel title="Playback Controls">
         {showPatternOverlay && (
           <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />

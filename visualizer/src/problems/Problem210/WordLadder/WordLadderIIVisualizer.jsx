@@ -1,6 +1,6 @@
-﻿import { useState, useMemo } from "react"
+﻿import { useState, useMemo, useCallback } from "react"
 import { motion } from "framer-motion"
-import DockableWorkspace from "../../../components/shared/DockableWorkspace"
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../../components/shared/FloatingPanel"
 import CodeTracePanel from "../../../components/CodeTracePanel"
 import PlaybackControls from "../../../components/PlaybackControls"
@@ -9,6 +9,7 @@ import { usePlaybackState } from "../../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../../hooks/usePatternOverlay"
 import "./WordLadderIIVisualizer.css"
+import { createPortal } from 'react-dom'
 const SOLUTION_CODE = [
   { line: 1, text: "def findLadders(beginWord, endWord, wordList):" },
   { line: 2, text: "    neighbors = {w: [] for w in wordList}" },
@@ -101,13 +102,27 @@ export default function WordLadderIIVisualizer() {
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
-  const dockPanels = useMemo(() => [
-    { id: "code", title: "Code", content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} /> },
-    { id: "viz", title: "Word Ladder Paths", content: <VisualizationPanel step={step} /> },
-  ], [step, connectivity, setActiveLineDom])
+  const panelConfigs = useMemo(() => [
+    { id: 'code', title: "Code" },
+    { id: 'viz', title: "Word Ladder Paths", dockMode: 'split-right' },
+  ], [])
+  const panelContents = useMemo(() => ({
+    code: (<CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />),
+    viz: (<VisualizationPanel step={step} />),
+  }), [step, connectivity, setActiveLineDom])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
   return (
     <div className="problem-shell">
-      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [["code", "viz"]], minimized: [] }} />
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+            {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+          </>
+        )}
+      </>
       <FloatingPanel title="Controls"><PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={(e) => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Pattern" showPatternOverlayToggle />
       </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}

@@ -1,6 +1,6 @@
 ﻿import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import DockableWorkspace from "../../../components/shared/DockableWorkspace";
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../../components/CodeTracePanel";
 import PlaybackControls from "../../../components/PlaybackControls";
@@ -10,6 +10,7 @@ import { usePatternOverlay } from "../../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../../config/examplesRegistry'
 import "./RandomizedCollectionVisualizer.css";
+import { createPortal } from 'react-dom'
 const SOLUTION_CODE = [
     { line: 1, text: "class RandomizedCollection:" },
     { line: 2, text: "    def __init__(self):" },
@@ -94,25 +95,19 @@ export default function RandomizedCollectionVisualizer() {
     const result = step?.result;
     const opStr = step?.op ?? "—";
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'code',
-            title: 'Code',
-            content: (
-                <CodeTracePanel
+    const panelConfigs = useMemo(() => [
+      { id: 'code', title: 'Code' },
+      { id: 'viz', title: '🎲 Collections', dockMode: 'split-right' },
+    ], [])
+    const panelContents = useMemo(() => ({
+      code: (<CodeTracePanel
                     step={step}
                     codeLines={SOLUTION_CODE}
                     highlightedLines={connectivity.highlightedLines}
                     onLineSelect={connectivity.handleLineSelect}
                     onActiveLineDomChange={setActiveLineDom}
-                />
-            ),
-        },
-        {
-            id: 'viz',
-            title: '🎲 Collections',
-            content: (
-                <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+                />),
+      viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
                     <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                         {EXAMPLES.map(e => (
                             <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : '#f1f5f9' }}>
@@ -181,17 +176,22 @@ export default function RandomizedCollectionVisualizer() {
                             </span>
                         ))}
                     </div>
-                </div>
-            ),
-        },
-    ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx, nums, idx, phase, result, opStr, steps, stepIndex]);
+                </div>),
+    }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx, nums, idx, phase, result, opStr, steps, stepIndex])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
         <div className="problem-shell">
-            <DockableWorkspace
-                panels={dockPanels}
-                initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
-            />
+            <>
+              <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+              {panelDivs && (
+                <>
+                  {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+                  {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+                </>
+              )}
+            </>
             <FloatingPanel title="Playback Controls">
                 <PlaybackControls
                     isPlaying={isPlaying}

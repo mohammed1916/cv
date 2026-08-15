@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -14,6 +14,7 @@ import './BinaryTreePathsVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { createPortal } from 'react-dom'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -265,33 +266,25 @@ export default function BinaryTreePathsVisualizer() {
     const edges = step?.edges ?? []
     const allNodes = step?.allNodes ?? []
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'input',
-            title: 'Input',
-            content: <InputPanel arrInput={arrInput} setArrInput={setArrInput} applyExample={applyExample} inputError={inputError} />,
-        },
-        {
-            id: 'tree',
-            title: 'Tree Visualization',
-            content: <TreeVisualizationPanel step={step} positions={positions} edges={edges} allNodes={allNodes} />,
-        },
-        {
-            id: 'state',
-            title: 'State',
-            content: <StatePanel step={step} allNodes={allNodes} />,
-        },
-        {
-            id: 'code',
-            title: 'Code Trace',
-            content: <CodeTracePanel
+    const panelConfigs = useMemo(() => [
+      { id: 'input', title: 'Input' },
+      { id: 'tree', title: 'Tree Visualization', dockMode: 'split-bottom' },
+      { id: 'state', title: 'State', dockMode: 'split-right' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+    ], [])
+    const panelContents = useMemo(() => ({
+      input: (<InputPanel arrInput={arrInput} setArrInput={setArrInput} applyExample={applyExample} inputError={inputError} />),
+      tree: (<TreeVisualizationPanel step={step} positions={positions} edges={edges} allNodes={allNodes} />),
+      state: (<StatePanel step={step} allNodes={allNodes} />),
+      code: (<CodeTracePanel
                 step={step}
                 codeLines={SOLUTION_CODE}
                 onActiveLineDomChange={setActiveLineDom}
                 autoScroll={autoScrollCode}
-            />,
-        },
-    ], [arrInput, setArrInput, applyExample, inputError, step, positions, edges, allNodes, setActiveLineDom, autoScrollCode])
+            />),
+    }), [arrInput, setArrInput, applyExample, inputError, step, positions, edges, allNodes, setActiveLineDom, autoScrollCode])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
         <div className="problem-shell">
@@ -304,17 +297,17 @@ export default function BinaryTreePathsVisualizer() {
         inputError={inputError}
       />
 
-            <DockableWorkspace
-                title="Binary Tree Paths Visualizer"
-                panels={dockPanels}
-                initialLayout={{
-                    rows: [
-                        ['input', 'state'],
-                        ['tree', 'code'],
-                    ],
-                    minimized: [],
-                }}
-            />
+            <>
+              <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+              {panelDivs && (
+                <>
+                  {panelDivs.input && createPortal(panelContents.input, panelDivs.input)}
+                  {panelDivs.tree && createPortal(panelContents.tree, panelDivs.tree)}
+                  {panelDivs.state && createPortal(panelContents.state, panelDivs.state)}
+                  {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+                </>
+              )}
+            </>
 
             <FloatingPanel title="Playback Controls">
                 <PlaybackControls

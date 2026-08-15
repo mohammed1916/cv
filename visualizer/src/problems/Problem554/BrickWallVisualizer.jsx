@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -12,6 +12,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './BrickWallVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
+import { createPortal } from 'react-dom'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -443,13 +444,12 @@ export default function BrickWallVisualizer() {
     [handleReset]
   )
 
-  const dockPanels = useMemo(
-    () => [
-      {
-        id: 'code',
-        title: 'Code',
-        content: (
-          <div style={{ position: 'relative' }}>
+  const panelConfigs = useMemo(() => [
+    { id: 'code', title: 'Code' },
+    { id: 'viz', title: '🧱 Brick Wall', dockMode: 'split-right' },
+  ], [])
+  const panelContents = useMemo(() => ({
+    code: (<div style={{ position: 'relative' }}>
             <CodeTracePanel
               step={step}
               codeLines={SOLUTION_CODE}
@@ -465,14 +465,8 @@ export default function BrickWallVisualizer() {
                 activeLine={step?.activeLine}
               />
             )}
-          </div>
-        ),
-      },
-      {
-        id: 'viz',
-        title: '🧱 Brick Wall',
-        content: (
-          <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
+          </div>),
+    viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div>
               <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Wall (JSON)</div>
               <textarea
@@ -497,12 +491,10 @@ export default function BrickWallVisualizer() {
               {inputError && <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
             </div>
             <VisualizationPanel step={step} applyExample={applyExample} examples={examples} wall={wall} />
-          </div>
-        ),
-      },
-    ],
-    [step, connectivity, setActiveLineDom, wallInput, inputError, examples, applyExample, handleReset, showPatternOverlay, activeLineDom, wall]
-  )
+          </div>),
+  }), [step, connectivity, setActiveLineDom, wallInput, inputError, examples, applyExample, handleReset, showPatternOverlay, activeLineDom, wall])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
     <div className="problem-shell">
@@ -515,7 +507,15 @@ export default function BrickWallVisualizer() {
           inputError={inputError}
         />
       
-      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+            {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+          </>
+        )}
+      </>
       <FloatingPanel title="Playback Controls">
         {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
         <PlaybackControls

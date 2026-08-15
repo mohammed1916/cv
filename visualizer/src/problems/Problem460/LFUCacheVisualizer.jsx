@@ -4,7 +4,7 @@ import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 ;
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
@@ -14,6 +14,7 @@ import "./LFUCacheVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { createPortal } from 'react-dom'
 const PATTERNS = ['done', 'hit', 'init', 'miss', 'update']
 const LINE_PATTERN_MAP = {
   3: 'init',
@@ -134,14 +135,12 @@ export default function LFUCacheVisualizer() {
     const evicted = step?.evicted ?? null;
     const opStr = step?.op ?? "—";
 
-    const dockPanels = useMemo(() => [
-        {
-            id: "viz",
-            title: "Cache Visualization",
-            subtitle: `Capacity ${capacity}`,
-            defaultZone: "left",
-            content: (
-                <div className="lfu-panel-body">
+    const panelConfigs = useMemo(() => [
+      { id: 'viz', title: "Cache Visualization" },
+      { id: 'code', title: "Code Trace", dockMode: 'split-right' },
+    ], [])
+    const panelContents = useMemo(() => ({
+      viz: (<div className="lfu-panel-body">
                     <div className="lfu-examples">
                         {EXAMPLES.map(e => (
                             <button key={e.label} className={`lfu-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>
@@ -199,19 +198,11 @@ export default function LFUCacheVisualizer() {
                     </div>
 
                     <div className="lfu-status">{step?.message ?? "Press Play to begin."}</div>
-                </div>
-            ),
-        },
-        {
-            id: "code",
-            title: "Code Trace",
-            subtitle: step ? `Line ${step.activeLine}` : "Code visualization",
-            defaultZone: "right",
-            content: (
-                <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />
-            ),
-        },
-    ], [capacity, ex.label, opStr, result, minFreq, phase, cache, activeKey, evicted, steps, stepIndex, step, setActiveLineDom, autoScrollCode]);
+                </div>),
+      code: (<CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />),
+    }), [capacity, ex.label, opStr, result, minFreq, phase, cache, activeKey, evicted, steps, stepIndex, step, setActiveLineDom, autoScrollCode])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
         <div className="lfu-shell">
@@ -225,14 +216,15 @@ export default function LFUCacheVisualizer() {
           inputError={inputError}
         />
       
-            <DockableWorkspace
-                title="LFU Cache Workspace"
-                panels={dockPanels}
-                initialLayout={{
-                    rows: [["viz", "code"]],
-                    minimized: [],
-                }}
-            />
+            <>
+              <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+              {panelDivs && (
+                <>
+                  {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+                  {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+                </>
+              )}
+            </>
 
             <FloatingPanel title="Playback Controls">
                 <PlaybackControls

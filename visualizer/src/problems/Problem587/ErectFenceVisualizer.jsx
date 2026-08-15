@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -12,6 +12,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './ErectFenceVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
+import { createPortal } from 'react-dom'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -472,13 +473,12 @@ export default function ErectFenceVisualizer() {
     [handleReset]
   )
 
-  const dockPanels = useMemo(
-    () => [
-      {
-        id: 'code',
-        title: 'Code',
-        content: (
-          <div style={{ position: 'relative' }}>
+  const panelConfigs = useMemo(() => [
+    { id: 'code', title: 'Code' },
+    { id: 'viz', title: '⬠ Convex Hull', dockMode: 'split-right' },
+  ], [])
+  const panelContents = useMemo(() => ({
+    code: (<div style={{ position: 'relative' }}>
             <CodeTracePanel
               step={step}
               codeLines={SOLUTION_CODE}
@@ -494,14 +494,8 @@ export default function ErectFenceVisualizer() {
                 activeLine={step?.activeLine}
               />
             )}
-          </div>
-        ),
-      },
-      {
-        id: 'viz',
-        title: '⬠ Convex Hull',
-        content: (
-          <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
+          </div>),
+    viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
               <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>
                 Points (GeoJSON format)
@@ -529,12 +523,10 @@ export default function ErectFenceVisualizer() {
             </div>
 
             <VisualizationPanel points={points} hull={step?.hull || []} step={step} applyExample={applyExample} examples={examples} />
-          </div>
-        ),
-      },
-    ],
-    [step, connectivity, showPatternOverlay, activeLineDom, pointsInput, points, examples, applyExample, handleReset]
-  )
+          </div>),
+  }), [step, connectivity, showPatternOverlay, activeLineDom, pointsInput, points, examples, applyExample, handleReset])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
     <div className="problem-shell">
@@ -546,66 +538,15 @@ export default function ErectFenceVisualizer() {
         applyExample={applyExample}
       />
 
-      <DockableWorkspace
-        panels={dockPanels}
-        defaultLayout={{ code: 0.4, viz: 0.6 }}
-        panelMinSize={0.2}
-      >
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, flex: 1, overflow: 'auto' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <h3 style={{ margin: 0, color: '#e2e8f0', fontSize: 16, fontWeight: 600 }}>Graham Scan Visualization</h3>
-            <button
-              onClick={() => setShowPatternOverlay(!showPatternOverlay)}
-              style={{
-                padding: '6px 12px',
-                borderRadius: 4,
-                border: '1px solid #475569',
-                backgroundColor: showPatternOverlay ? '#a78bfa' : '#1e293b',
-                color: showPatternOverlay ? '#0c0a1d' : '#e2e8f0',
-                cursor: 'pointer',
-                fontSize: 11,
-                fontWeight: 600,
-              }}
-            >
-              {showPatternOverlay ? 'Hide Patterns' : 'Show Patterns'}
-            </button>
-          </div>
-
-          <PlaybackControls
-            isPlaying={isPlaying}
-            isDone={isDone}
-            speed={speed}
-            stepIndex={stepIndex}
-            totalSteps={steps.length}
-            onPlayToggle={togglePlay}
-            onStepForward={stepForward}
-            onStepBack={stepBack}
-            onReset={handleReset}
-            onSpeedChange={setSpeed}
-            onStepJump={setStepIndex}
-          />
-
-          {step?.done && (
-            <motion.div
-              style={{
-                padding: 16,
-                backgroundColor: '#1e293b',
-                borderRadius: 6,
-                border: '2px solid #a78bfa',
-                textAlign: 'center',
-              }}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Complete</div>
-              <div style={{ fontSize: 14, fontWeight: 'bold', color: '#a78bfa' }}>
-                Convex Hull: {step.hull.length} points from {points.length} total
-              </div>
-            </motion.div>
-          )}
-        </div>
-      </DockableWorkspace>
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+            {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+          </>
+        )}
+      </>
     </div>
   )
 }

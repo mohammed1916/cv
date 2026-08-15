@@ -4,7 +4,7 @@ import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import AnimatedIterationList from "../../components/shared/AnimatedIterationList";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
@@ -16,6 +16,7 @@ import "./MoveZeroesVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { createPortal } from 'react-dom'
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
@@ -76,14 +77,13 @@ export default function MoveZeroesVisualizer({ problem }) {
     const k = step?.k ?? 0;
     const i = step?.i ?? -1;
 
-    const dockPanels = useMemo(() => [
-        {
-            id: "input",
-            title: "Input Examples",
-            subtitle: "Select an example or reset.",
-            defaultZone: "left",
-            content: (
-                <div className="mz-panel-body">
+    const panelConfigs = useMemo(() => [
+      { id: 'input', title: "Input Examples" },
+      { id: 'viz', title: "Array Visualization", dockMode: 'split-right' },
+      { id: 'code', title: "Code Trace", dockMode: 'split-bottom' },
+    ], [])
+    const panelContents = useMemo(() => ({
+      input: (<div className="mz-panel-body">
                     <div className="mz-examples">
                         {EXAMPLES.map(e => (
                             <button
@@ -95,16 +95,8 @@ export default function MoveZeroesVisualizer({ problem }) {
                             </button>
                         ))}
                     </div>
-                </div>
-            ),
-        },
-        {
-            id: "viz",
-            title: "Array Visualization",
-            subtitle: step ? `Step ${stepIndex + 1} of ${steps.length}` : "Array state visualization.",
-            defaultZone: "right",
-            content: (
-                <div className="mz-panel-body">
+                </div>),
+      viz: (<div className="mz-panel-body">
                     <div className="mz-panel">
                         <div className="mz-panel-label">Array (in-place)</div>
                         <AnimatedIterationList
@@ -148,26 +140,18 @@ export default function MoveZeroesVisualizer({ problem }) {
                     )}
 
                     <div className="mz-status">{step?.message ?? "Press Play to begin."}</div>
-                </div>
-            ),
-        },
-        {
-            id: "code",
-            title: "Code Trace",
-            subtitle: step ? `Active line ${step.activeLine}` : "Code line-by-line trace.",
-            defaultZone: "full",
-            content: (
-                <CodeTracePanel
+                </div>),
+      code: (<CodeTracePanel
                     step={step}
                     codeLines={codeLines}
                     highlightedLines={connectivity.highlightedLines}
                     onLineSelect={connectivity.handleLineSelect}
                     onActiveLineDomChange={setActiveLineDom}
                     autoScroll={autoScrollCode}
-                />
-            ),
-        },
-    ], [ex, applyEx, step, stepIndex, steps.length, arr, k, i, codeLines, connectivity.highlightedLines, connectivity.handleLineSelect, setActiveLineDom, autoScrollCode]);
+                />),
+    }), [ex, applyEx, step, stepIndex, steps.length, arr, k, i, codeLines, connectivity.highlightedLines, connectivity.handleLineSelect, setActiveLineDom, autoScrollCode])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
         <div className="mz-shell">
@@ -180,17 +164,16 @@ export default function MoveZeroesVisualizer({ problem }) {
                 applyExample={applyEx}
                 inputError={inputError}
               />
-            <DockableWorkspace
-                title="Move Zeroes Workspace"
-                panels={dockPanels}
-                initialLayout={{
-                    rows: [
-                        ["input", "viz"],
-                        ["code"],
-                    ],
-                    minimized: [],
-                }}
-            />
+            <>
+              <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+              {panelDivs && (
+                <>
+                  {panelDivs.input && createPortal(panelContents.input, panelDivs.input)}
+                  {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+                  {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+                </>
+              )}
+            </>
 
             <FloatingPanel title="Playback Controls">
                 <PlaybackControls

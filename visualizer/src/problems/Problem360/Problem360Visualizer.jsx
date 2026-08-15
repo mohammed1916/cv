@@ -1,6 +1,6 @@
 ﻿import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -13,6 +13,7 @@ import "./Problem360Visualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { createPortal } from 'react-dom'
 const PATTERNS = ['done', 'init', 'merge', 'transform']
 
 const EXAMPLES = [
@@ -460,38 +461,29 @@ export default function Problem360Visualizer() {
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
   const applyExample = useCallback((i) => { setExIdx(i); setNumsInput(JSON.stringify(EXAMPLES[i].nums)); setAInput(JSON.stringify(EXAMPLES[i].a)); setBInput(JSON.stringify(EXAMPLES[i].b)); setCInput(JSON.stringify(EXAMPLES[i].c)); handleReset(); }, [handleReset]);;
 
-  const dockPanels = useMemo(() => [
-    {
-      id: 'code',
-      title: 'Code',
-      content: (
-        <CodeTracePanel
+  const panelConfigs = useMemo(() => [
+    { id: 'code', title: 'Code' },
+    { id: 'viz', title: 'Visualization', dockMode: 'split-right' },
+    { id: 'vars', title: 'Variables', dockMode: 'split-bottom' },
+  ], [])
+  const panelContents = useMemo(() => ({
+    code: (<CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
           highlightedLines={connectivity.highlightedLines}
           onLineSelect={connectivity.handleLineSelect}
           onActiveLineDomChange={setActiveLineDom}
-        />
-      ),
-    },
-    {
-      id: 'viz',
-      title: 'Visualization',
-      content: (
-        <VisualizationPanel
+        />),
+    viz: (<VisualizationPanel
           step={step}
           ex={ex}
           setEx={() => {}}
           applyExample={applyExample}
-        />
-      ),
-    },
-    {
-      id: 'vars',
-      title: 'Variables',
-      content: <VariablesPanel step={step} a={a} b={b} c={c} />,
-    },
-  ], [step, connectivity.highlightedLines, connectivity.handleLineSelect, setActiveLineDom, ex, applyExample]);
+        />),
+    vars: (<VariablesPanel step={step} a={a} b={b} c={c} />),
+  }), [step, connectivity.highlightedLines, connectivity.handleLineSelect, setActiveLineDom, ex, applyExample])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
     <div className="problem-shell">
@@ -505,10 +497,16 @@ export default function Problem360Visualizer() {
           inputError={inputError}
         />
       
-      <DockableWorkspace
-        panels={dockPanels}
-        initialLayout={{ rows: [['code', 'viz'], ['vars']], minimized: [] }}
-      />
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+            {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+            {panelDivs.vars && createPortal(panelContents.vars, panelDivs.vars)}
+          </>
+        )}
+      </>
       <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}

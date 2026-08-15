@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity
 import { getExamples } from '../../config/examplesRegistry'
 import "./Visualizer.css";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
+import { createPortal } from 'react-dom'
 const SOLUTION_CODE = getSolutionCode('sort-colors')
 const COLOR_LABEL = ["??", "?", "??"];
 const COLOR_NAME = ["Red", "White", "Blue"];
@@ -288,12 +289,12 @@ export default function SortColorsVisualizer() {
 
     const nums = step?.nums ?? initial;
 
-    const dockPanels = useMemo(() => [
-      {
-        id: 'code',
-        title: 'Code',
-        content: (
-          <div style={{ position: "relative" }}>
+    const panelConfigs = useMemo(() => [
+      { id: 'code', title: 'Code' },
+      { id: 'viz', title: '?? Three Lanes', dockMode: 'split-right' },
+    ], [])
+    const panelContents = useMemo(() => ({
+      code: (<div style={{ position: "relative" }}>
             <CodeTracePanel
               step={step}
               codeLines={SOLUTION_CODE}
@@ -309,28 +310,27 @@ export default function SortColorsVisualizer() {
                 activeLine={step?.activeLine}
               />
             )}
-          </div>
-        ),
-      },
-      {
-        id: 'viz',
-        title: '?? Three Lanes',
-        content: (
-          <VisualizationPanel
+          </div>),
+      viz: (<VisualizationPanel
             nums={nums}
             step={step}
             applyExample={applyExample}
-          />
-        ),
-      },
-    ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, nums, applyExample]);
+          />),
+    }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, nums, applyExample])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
       <div className="problem-shell">
-        <DockableWorkspace
-          panels={dockPanels}
-          initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
-        />
+        <>
+          <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+          {panelDivs && (
+            <>
+              {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+              {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+            </>
+          )}
+        </>
         <FloatingPanel title="Playback Controls">
           <PlaybackControls
             isPlaying={isPlaying}

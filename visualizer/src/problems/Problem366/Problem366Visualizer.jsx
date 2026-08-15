@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -15,6 +15,7 @@ import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
+import { createPortal } from 'react-dom'
 
 const PATTERNS = ['collect-leaf', 'compute-height', 'done', 'init', 'null', 'recurse-left', 'recurse-right', 'return-height', 'visit']
 const LINE_PATTERN_MAP = {
@@ -385,14 +386,13 @@ export default function Problem366Visualizer() {
     const edges = step?.edges ?? []
     const allNodes = step?.allNodes ?? []
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'viz',
-            title: 'Tree Visualization',
-            subtitle: inputError ? 'Fix the input to resume.' : 'Watch leaves get collected by height.',
-            defaultZone: 'left',
-            content: (
-                <TreeVisualizationPanel
+    const panelConfigs = useMemo(() => [
+      { id: 'viz', title: 'Tree Visualization' },
+      { id: 'result', title: 'Leaf Collection', dockMode: 'split-right' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+    ], [])
+    const panelContents = useMemo(() => ({
+      viz: (<TreeVisualizationPanel
                     step={step}
                     positions={positions}
                     edges={edges}
@@ -402,29 +402,13 @@ export default function Problem366Visualizer() {
                     setArrInput={setArrInput}
                     applyExample={applyExample}
                     handleReset={handleReset}
-                />
-            ),
-        },
-        {
-            id: 'result',
-            title: 'Leaf Collection',
-            subtitle: step ? `Phase: ${step.phase}` : 'Leaves grouped by removal iteration.',
-            defaultZone: 'left',
-            content: (
-                <ResultPanel
+                />),
+      result: (<ResultPanel
                     step={step}
                     inputError={inputError}
                     collectedLeaves={step?.collectedLeaves ?? []}
-                />
-            ),
-        },
-        {
-            id: 'code',
-            title: 'Code Trace',
-            subtitle: step ? `Active line ${step.activeLine}` : 'DFS with height tracking.',
-            defaultZone: 'full',
-            content: (
-                <div style={{ position: 'relative' }}>
+                />),
+      code: (<div style={{ position: 'relative' }}>
                     <CodeTracePanel
                         step={step}
                         codeLines={SOLUTION_CODE}
@@ -439,10 +423,10 @@ export default function Problem366Visualizer() {
                             activeLine={step.activeLine}
                         />
                     )}
-                </div>
-            ),
-        },
-    ], [arrInput, setArrInput, positions, edges, allNodes, step, applyExample, handleReset, inputError, setActiveLineDom, autoScrollCode])
+                </div>),
+    }), [arrInput, setArrInput, positions, edges, allNodes, step, applyExample, handleReset, inputError, setActiveLineDom, autoScrollCode])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
         <div className="p366-shell">
@@ -462,14 +446,16 @@ export default function Problem366Visualizer() {
                 </p>
             </div>
 
-            <DockableWorkspace
-                title="Leaf Removal Workspace"
-                panels={dockPanels}
-                initialLayout={{
-                    rows: [['viz', 'result'], ['code']],
-                    minimized: [],
-                }}
-            />
+            <>
+              <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+              {panelDivs && (
+                <>
+                  {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+                  {panelDivs.result && createPortal(panelContents.result, panelDivs.result)}
+                  {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+                </>
+              )}
+            </>
 
             <FloatingPanel title="Playback Controls">
                 <PlaybackControls

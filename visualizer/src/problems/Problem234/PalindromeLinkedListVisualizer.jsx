@@ -1,6 +1,6 @@
 ﻿import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -13,6 +13,7 @@ import "./PalindromeLinkedListVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { createPortal } from 'react-dom'
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
@@ -183,18 +184,16 @@ export default function PalindromeLinkedListVisualizer() {
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'code',
-            title: 'Code',
-            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
-        },
-        {
-            id: 'viz',
-            title: 'Visualization',
-            content: <VisualizationPanel step={step} ex={ex} nums={nums} onExampleChange={applyEx} />,
-        },
-    ], [step, setActiveLineDom, autoScrollCode, ex, nums, applyEx]);
+    const panelConfigs = useMemo(() => [
+      { id: 'code', title: 'Code' },
+      { id: 'viz', title: 'Visualization', dockMode: 'split-right' },
+    ], [])
+    const panelContents = useMemo(() => ({
+      code: (<CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />),
+      viz: (<VisualizationPanel step={step} ex={ex} nums={nums} onExampleChange={applyEx} />),
+    }), [step, setActiveLineDom, autoScrollCode, ex, nums, applyEx])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
         <div className="problem-shell">
@@ -208,7 +207,15 @@ export default function PalindromeLinkedListVisualizer() {
           inputError={inputError}
         />
       
-            <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
+            <>
+              <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+              {panelDivs && (
+                <>
+                  {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+                  {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+                </>
+              )}
+            </>
             <FloatingPanel title="Playback Controls">
                 <PlaybackControls
                     isPlaying={isPlaying} isDone={isDone} speed={speed}

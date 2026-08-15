@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -14,6 +14,7 @@ import './LCABinaryTreeVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
+import { createPortal } from 'react-dom'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -144,14 +145,13 @@ export default function LCABinaryTreeVisualizer() {
     const allNodes = step?.allNodes ?? []
 
     // Create dockable panels
-    const dockPanels = useMemo(() => [
-        {
-            id: 'input',
-            title: 'Input & Tree',
-            subtitle: 'Configure the tree and target nodes.',
-            defaultZone: 'left',
-            content: (
-                <div className="lcabt-panel-body">
+    const panelConfigs = useMemo(() => [
+      { id: 'input', title: 'Input & Tree' },
+      { id: 'state', title: 'Search State', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
+    ], [])
+    const panelContents = useMemo(() => ({
+      input: (<div className="lcabt-panel-body">
                     <div className="lcabt-examples">
                         {EXAMPLES.map((ex) => (
                             <button key={ex.label} className="lcabt-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
@@ -194,16 +194,8 @@ export default function LCABinaryTreeVisualizer() {
                             )
                         })}
                     </div>
-                </div>
-            ),
-        },
-        {
-            id: 'state',
-            title: 'Search State',
-            subtitle: step ? `Phase: ${step?.phase}` : 'Ready to start.',
-            defaultZone: 'left',
-            content: (
-                <div className="lcabt-panel-body">
+                </div>),
+      state: (<div className="lcabt-panel-body">
                     <div className="lcabt-metric"><span className="lcabt-label">p</span><strong className="lcabt-val p-color">{pVal}</strong></div>
                     <div className="lcabt-metric"><span className="lcabt-label">q</span><strong className="lcabt-val q-color">{qVal}</strong></div>
                     <div className="lcabt-legend">
@@ -216,24 +208,16 @@ export default function LCABinaryTreeVisualizer() {
                             ? `LCA = ${allNodes.find((n) => n.id === step.lcaId)?.val}`
                             : 'Searching…'}
                     </div>
-                </div>
-            ),
-        },
-        {
-            id: 'code',
-            title: 'Code Trace',
-            subtitle: step ? `Line ${step.activeLine}` : 'Solution walkthrough.',
-            defaultZone: 'right',
-            content: (
-                <CodeTracePanel
+                </div>),
+      code: (<CodeTracePanel
                     step={step}
                     codeLines={SOLUTION_CODE}
                     onActiveLineDomChange={setActiveLineDom}
                     autoScroll={autoScrollCode}
-                />
-            ),
-        },
-    ], [applyExample, arrInput, handleReset, pInput, qInput, edges, positions, allNodes, step, pVal, qVal, setActiveLineDom, autoScrollCode])
+                />),
+    }), [applyExample, arrInput, handleReset, pInput, qInput, edges, positions, allNodes, step, pVal, qVal, setActiveLineDom, autoScrollCode])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
         <div className="lcabt-shell">
@@ -244,14 +228,16 @@ export default function LCABinaryTreeVisualizer() {
                 examples={EXAMPLES}
                 applyExample={applyExample}
               />
-            <DockableWorkspace
-                title="LCA in Binary Tree Visualizer"
-                panels={dockPanels}
-                initialLayout={{
-                    rows: [['input', 'code'], ['state']],
-                    minimized: [],
-                }}
-            />
+            <>
+              <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+              {panelDivs && (
+                <>
+                  {panelDivs.input && createPortal(panelContents.input, panelDivs.input)}
+                  {panelDivs.state && createPortal(panelContents.state, panelDivs.state)}
+                  {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+                </>
+              )}
+            </>
 
             <FloatingPanel title="Playback Controls">
                 <PlaybackControls

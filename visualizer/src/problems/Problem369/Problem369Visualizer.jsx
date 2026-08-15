@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -15,6 +15,7 @@ import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
+import { createPortal } from 'react-dom'
 const SOLUTION_CODE = getSolutionCode('plus-one-linked-list')
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -194,12 +195,12 @@ export default function Problem369Visualizer() {
   const applyEx = useCallback((e) => { setEx(e); setValuesInput(JSON.stringify(e.values)); handleReset(); }, [handleReset]);
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
-  const dockPanels = useMemo(() => [
-    {
-      id: 'code',
-      title: 'Code',
-      content: (
-        <div style={{ position: 'relative' }}>
+  const panelConfigs = useMemo(() => [
+    { id: 'code', title: 'Code' },
+    { id: 'viz', title: '🔗 Plus One', dockMode: 'split-right' },
+  ], [])
+  const panelContents = useMemo(() => ({
+    code: (<div style={{ position: 'relative' }}>
           <CodeTracePanel
             step={step}
             codeLines={SOLUTION_CODE}
@@ -215,11 +216,11 @@ export default function Problem369Visualizer() {
               activeLine={step.activeLine}
             />
           )}
-        </div>
-      ),
-    },
-    { id: 'viz', title: '🔗 Plus One', content: (<VisualizationPanel step={step} />) },
-  ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, head])
+        </div>),
+    viz: (<VisualizationPanel step={step} />),
+  }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, head])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
   return (
     <div className="problem-shell">
         <ManualInputPanel
@@ -232,7 +233,15 @@ export default function Problem369Visualizer() {
           inputError={inputError}
         />
       
-      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+            {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+          </>
+        )}
+      </>
       <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}

@@ -1,6 +1,6 @@
 ﻿import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
-import DockableWorkspace from "../../../components/shared/DockableWorkspace";
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../../components/CodeTracePanel";
 import PlaybackControls from "../../../components/PlaybackControls";
@@ -10,6 +10,7 @@ import { usePatternOverlay } from "../../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../../config/examplesRegistry'
 import "./Visualizer.css";
+import { createPortal } from 'react-dom'
 const SOLUTION_CODE = [
     { line: 1, text: "def searchMatrix(matrix, target):" },
     { line: 2, text: "    rows, cols = len(matrix), len(matrix[0])" },
@@ -77,25 +78,19 @@ export default function SearchA2DMatrixVisualizer() {
     const cols = matrix[0].length;
     const lo = step?.lo ?? 0, hi = step?.hi ?? (matrix.length * cols - 1), mid = step?.mid ?? -1;
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'code',
-            title: 'Code',
-            content: (
-                <CodeTracePanel
+    const panelConfigs = useMemo(() => [
+      { id: 'code', title: 'Code' },
+      { id: 'viz', title: '🔍 Binary Search', dockMode: 'split-right' },
+    ], [])
+    const panelContents = useMemo(() => ({
+      code: (<CodeTracePanel
                     step={step}
                     codeLines={SOLUTION_CODE}
                     highlightedLines={connectivity.highlightedLines}
                     onLineSelect={connectivity.handleLineSelect}
                     onActiveLineDomChange={setActiveLineDom}
-                />
-            ),
-        },
-        {
-            id: 'viz',
-            title: '🔍 Binary Search',
-            content: (
-                <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+                />),
+      viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
                     <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
                         {EXAMPLES.map((ex, i) => (
                             <button key={ex.label} onClick={() => applyExample(i)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: sel === i ? '#dbeafe' : '#f1f5f9' }}>
@@ -148,17 +143,22 @@ export default function SearchA2DMatrixVisualizer() {
                             {step?.found ? `✓ Found ${target}` : `✗ ${target} not found`}
                         </div>
                     )}
-                </div>
-            ),
-        },
-    ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, matrix, cols, lo, hi, mid, target, sel, applyExample]);
+                </div>),
+    }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, matrix, cols, lo, hi, mid, target, sel, applyExample])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
         <div className="problem-shell">
-            <DockableWorkspace
-                panels={dockPanels}
-                initialLayout={{ rows: [['code', 'viz']], minimized: [] }}
-            />
+            <>
+              <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+              {panelDivs && (
+                <>
+                  {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+                  {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+                </>
+              )}
+            </>
             <FloatingPanel title="Playback Controls">
                 <PlaybackControls
                     isPlaying={isPlaying}

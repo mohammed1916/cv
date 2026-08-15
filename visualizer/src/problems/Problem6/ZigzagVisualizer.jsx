@@ -1,6 +1,6 @@
 import { useCallback, useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -11,6 +11,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './ZigzagVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
+import { createPortal } from 'react-dom'
 
 const ZIGZAG_PATTERNS = ['walk', 'early_return']
 
@@ -338,12 +339,12 @@ export default function ZigzagVisualizer() {
   }, [setIsPlaying, setStepIndex])
 
   // Dock panels configuration
-  const dockPanels = useMemo(() => [
-    {
-      id: 'viz',
-      title: 'Visualization',
-      content: (
-        <ZigzagVisualizationPanel
+  const panelConfigs = useMemo(() => [
+    { id: 'viz', title: 'Visualization' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
+  ], [])
+  const panelContents = useMemo(() => ({
+    viz: (<ZigzagVisualizationPanel
           numRows={numRows}
           source={source}
           currentStep={currentStep}
@@ -351,14 +352,8 @@ export default function ZigzagVisualizer() {
           stepIndex={stepIndex}
           steps={steps}
           isDone={isDone}
-        />
-      ),
-    },
-    {
-      id: 'code',
-      title: 'Code',
-      content: (
-        <div style={{ position: 'relative' }}>
+        />),
+    code: (<div style={{ position: 'relative' }}>
           <CodeTracePanel step={currentStep} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
 
           {showPatternOverlay && (
@@ -369,10 +364,10 @@ export default function ZigzagVisualizer() {
               activeLine={currentStep?.activeLine}
             />
           )}
-        </div>
-      ),
-    },
-  ], [numRows, source, currentStep, previousStep, stepIndex, steps, isDone])
+        </div>),
+  }), [numRows, source, currentStep, previousStep, stepIndex, steps, isDone])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
     <div className="zv">
@@ -457,10 +452,15 @@ export default function ZigzagVisualizer() {
             : `Step ${stepIndex + 1} / ${steps.length}`}
       </div>
 
-      <DockableWorkspace
-        panels={dockPanels}
-        initialLayout={{ rows: [['viz', 'code']], minimized: [] }}
-      />
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+            {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+          </>
+        )}
+      </>
 
       <FloatingPanel title="Playback Controls">
         {showPatternOverlay && (

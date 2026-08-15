@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -11,6 +11,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import './Problem382Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
+import { createPortal } from 'react-dom'
 
 const PATTERNS = ['check', 'complete', 'init', 'traverse', 'update']
 
@@ -166,12 +167,12 @@ export default function Problem382Visualizer() {
 
   const applyExample = useCallback((i) => { setExIdx(i); setValuesInput(JSON.stringify(EXAMPLES[i].values)); handleReset(); }, [handleReset]);
 
-  const dockPanels = useMemo(() => [
-    {
-      id: 'code',
-      title: 'Code',
-      content: (
-        <div style={{ position: "relative" }}>
+  const panelConfigs = useMemo(() => [
+    { id: 'code', title: 'Code' },
+    { id: 'viz', title: '🔗 Reservoir Sampling', dockMode: 'split-right' },
+  ], [])
+  const panelContents = useMemo(() => ({
+    code: (<div style={{ position: "relative" }}>
         <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
@@ -188,14 +189,8 @@ export default function Problem382Visualizer() {
             activeLine={step?.activeLine}
           />
         )}
-      </div>
-      ),
-    },
-    {
-      id: 'viz',
-      title: '🔗 Reservoir Sampling',
-      content: (
-        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+      </div>),
+    viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
           {/* Example selector */}
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {EXAMPLES.map((e, i) => (
@@ -324,10 +319,10 @@ export default function Problem382Visualizer() {
               )}
             </>
           )}
-        </div>
-      ),
-    },
-  ], [step, connectivity, setActiveLineDom, exIdx, applyExample])
+        </div>),
+  }), [step, connectivity, setActiveLineDom, exIdx, applyExample])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
     <div className="problem-shell">
@@ -341,7 +336,15 @@ export default function Problem382Visualizer() {
           inputError={inputError}
         />
       
-      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+            {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+          </>
+        )}
+      </>
       <FloatingPanel title="Playback Controls">
         {showPatternOverlay && (
           <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />

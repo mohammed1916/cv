@@ -1,6 +1,6 @@
 ﻿import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -11,6 +11,7 @@ import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { getExamples } from '../../config/examplesRegistry'
 import "./SubarraySumKVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
+import { createPortal } from 'react-dom'
 const SOLUTION_CODE = [
     { line: 1, text: "def subarraySum(nums, k):" },
     { line: 2, text: "    count, prefix = 0, 0" },
@@ -135,18 +136,16 @@ export default function SubarraySumKVisualizer() {
         [handleReset]
     );
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'code',
-            title: 'Code',
-            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
-        },
-        {
-            id: 'viz',
-            title: 'Visualization',
-            content: <VizPanel nums={nums} step={step} k={k} />,
-        },
-    ], [step, autoScrollCode, nums, k]);
+    const panelConfigs = useMemo(() => [
+      { id: 'code', title: 'Code' },
+      { id: 'viz', title: 'Visualization', dockMode: 'split-right' },
+    ], [])
+    const panelContents = useMemo(() => ({
+      code: (<CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />),
+      viz: (<VizPanel nums={nums} step={step} k={k} />),
+    }), [step, autoScrollCode, nums, k])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
         <div className="problem-shell">
@@ -172,7 +171,15 @@ export default function SubarraySumKVisualizer() {
                 </div>
             </div>
 
-            <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
+            <>
+              <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+              {panelDivs && (
+                <>
+                  {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+                  {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+                </>
+              )}
+            </>
             <FloatingPanel title="Playback Controls">
                 <PlaybackControls
                     isPlaying={isPlaying} isDone={isDone} speed={speed}

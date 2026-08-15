@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -12,6 +12,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import './Problem361.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
+import { createPortal } from 'react-dom'
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
@@ -263,12 +264,12 @@ export default function Problem361Visualizer() {
   const gridHeight = grid.length * CELL_SIZE + PADDING * 2
   const gridWidth = (grid[0]?.length || 0) * CELL_SIZE + PADDING * 2
 
-  const dockPanels = useMemo(() => [
-    {
-      id: 'code',
-      title: 'Code',
-      content: (
-        <div style={{ position: 'relative' }}>
+  const panelConfigs = useMemo(() => [
+    { id: 'code', title: 'Code' },
+    { id: 'viz', title: '💣 Bomb Enemy Visualization', dockMode: 'split-right' },
+  ], [])
+  const panelContents = useMemo(() => ({
+    code: (<div style={{ position: 'relative' }}>
           <CodeTracePanel
             step={step}
             codeLines={SOLUTION_CODE}
@@ -284,14 +285,8 @@ export default function Problem361Visualizer() {
               activeLine={step.activeLine}
             />
           )}
-        </div>
-      ),
-    },
-    {
-      id: 'viz',
-      title: '💣 Bomb Enemy Visualization',
-      content: (
-        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+        </div>),
+    viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {EXAMPLES.map((e, i) => (
               <button
@@ -507,10 +502,10 @@ export default function Problem361Visualizer() {
               )}
             </>
           )}
-        </div>
-      ),
-    },
-  ], [step, connectivity, setActiveLineDom, exIdx, applyExample, grid])
+        </div>),
+  }), [step, connectivity, setActiveLineDom, exIdx, applyExample, grid])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
     <div className="problem-shell">
@@ -523,7 +518,15 @@ export default function Problem361Visualizer() {
           applyExample={(e) => applyExample(EXAMPLES.indexOf(e))}
           inputError={inputError}
         />
-      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+            {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+          </>
+        )}
+      </>
       <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}

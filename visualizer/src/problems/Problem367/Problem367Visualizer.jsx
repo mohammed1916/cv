@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -13,6 +13,7 @@ import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
+import { createPortal } from 'react-dom'
 
 const PATTERNS = ['compute-mid', 'compute-square', 'done', 'edge-case', 'found', 'init', 'search-left', 'search-right', 'setup']
 const LINE_PATTERN_MAP = {
@@ -494,14 +495,13 @@ export default function Problem367Visualizer() {
     const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
     const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'viz',
-            title: 'Search Visualization',
-            subtitle: 'Binary search for perfect square root',
-            defaultZone: 'left',
-            content: (
-                <SearchVisualizationPanel
+    const panelConfigs = useMemo(() => [
+      { id: 'viz', title: 'Search Visualization' },
+      { id: 'result', title: 'Result Panel', dockMode: 'split-right' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+    ], [])
+    const panelContents = useMemo(() => ({
+      viz: (<SearchVisualizationPanel
                     step={step}
                     numInput={numInput}
                     setNumInput={setNumInput}
@@ -510,25 +510,9 @@ export default function Problem367Visualizer() {
                         handleReset()
                     }}
                     handleReset={handleReset}
-                />
-            ),
-        },
-        {
-            id: 'result',
-            title: 'Result Panel',
-            subtitle: step ? `Phase: ${step.phase}` : 'Searching for perfect square...',
-            defaultZone: 'right',
-            content: (
-                <ResultPanel step={step} />
-            ),
-        },
-        {
-            id: 'code',
-            title: 'Code Trace',
-            subtitle: step ? `Active line ${step.activeLine}` : 'Binary search implementation',
-            defaultZone: 'full',
-            content: (
-                <div style={{ position: 'relative' }}>
+                />),
+      result: (<ResultPanel step={step} />),
+      code: (<div style={{ position: 'relative' }}>
                     <CodeTracePanel
                         step={step}
                         codeLines={SOLUTION_CODE}
@@ -543,10 +527,10 @@ export default function Problem367Visualizer() {
                             activeLine={step.activeLine}
                         />
                     )}
-                </div>
-            ),
-        },
-    ], [numInput, setNumInput, step, handleReset, setActiveLineDom, autoScrollCode])
+                </div>),
+    }), [numInput, setNumInput, step, handleReset, setActiveLineDom, autoScrollCode])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
         <div className="p367-shell">
@@ -563,14 +547,16 @@ export default function Problem367Visualizer() {
                 </p>
             </div>
 
-            <DockableWorkspace
-                title="Binary Search Workspace"
-                panels={dockPanels}
-                initialLayout={{
-                    rows: [['viz', 'result'], ['code']],
-                    minimized: [],
-                }}
-            />
+            <>
+              <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+              {panelDivs && (
+                <>
+                  {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+                  {panelDivs.result && createPortal(panelContents.result, panelDivs.result)}
+                  {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+                </>
+              )}
+            </>
 
             <FloatingPanel title="Playback Controls">
                 <PlaybackControls

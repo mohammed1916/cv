@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
@@ -15,6 +15,7 @@ import './Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
+import { createPortal } from 'react-dom'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -230,14 +231,13 @@ export default function BinaryTreeLevelOrderTraversalIIVisualizer() {
     const LEVEL_COLORS = ['#89b4fa', '#a6e3a1', '#f9e2af', '#cba6f7', '#f38ba8', '#89dceb']
 
     // Create dock panels
-    const dockPanels = useMemo(() => [
-        {
-            id: 'viz',
-            title: 'Tree Visualization',
-            subtitle: inputError ? 'Fix the input to resume playback.' : 'Visualize the level-order traversal.',
-            defaultZone: 'left',
-            content: (
-                <VisualizationPanel
+    const panelConfigs = useMemo(() => [
+      { id: 'viz', title: 'Tree Visualization' },
+      { id: 'result', title: 'Level Results', dockMode: 'split-right' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+    ], [])
+    const panelContents = useMemo(() => ({
+      viz: (<VisualizationPanel
                     EXAMPLES={EXAMPLES}
                     arrInput={arrInput}
                     setArrInput={setArrInput}
@@ -250,30 +250,16 @@ export default function BinaryTreeLevelOrderTraversalIIVisualizer() {
                     CANVAS_W={CANVAS_W}
                     CANVAS_H={CANVAS_H}
                     NODE_R={NODE_R}
-                />
-            ),
-        },
-        {
-            id: 'result',
-            title: 'Level Results',
-            subtitle: step ? `Phase: ${step.phase}` : 'Levels returned bottom-up.',
-            defaultZone: 'left',
-            content: (
-                <ResultPanel
+                />),
+      result: (<ResultPanel
                     step={step}
                     inputError={inputError}
                     LEVEL_COLORS={LEVEL_COLORS}
-                />
-            ),
-        },
-        {
-            id: 'code',
-            title: 'Code Trace',
-            subtitle: step ? `Active line ${step.activeLine}` : 'Step-by-step code execution.',
-            defaultZone: 'full',
-            content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />,
-        },
-    ], [arrInput, setArrInput, positions, edges, allNodes, step, applyExample, handleReset, inputError, setActiveLineDom, autoScrollCode])
+                />),
+      code: (<CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} />),
+    }), [arrInput, setArrInput, positions, edges, allNodes, step, applyExample, handleReset, inputError, setActiveLineDom, autoScrollCode])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
         <div className="btlo2-shell">
@@ -292,14 +278,16 @@ export default function BinaryTreeLevelOrderTraversalIIVisualizer() {
                 </p>
             </div>
 
-            <DockableWorkspace
-                title="Level Order (Bottom-Up) Workspace"
-                panels={dockPanels}
-                initialLayout={{
-                    rows: [['viz', 'result'], ['code']],
-                    minimized: [],
-                }}
-            />
+            <>
+              <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+              {panelDivs && (
+                <>
+                  {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+                  {panelDivs.result && createPortal(panelContents.result, panelDivs.result)}
+                  {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+                </>
+              )}
+            </>
 
             <FloatingPanel title="Playback Controls">
                 <PlaybackControls

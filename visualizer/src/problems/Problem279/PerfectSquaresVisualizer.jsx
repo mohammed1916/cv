@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -13,6 +13,7 @@ import './PerfectSquares.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
+import { createPortal } from 'react-dom'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -139,14 +140,14 @@ export default function PerfectSquaresVisualizer() {
     const displayCount = Math.min(dp.length, 41)
     const displayDp = dp.slice(0, displayCount)
 
-    const dockPanels = useMemo(() => [
-        {
-            id: 'input',
-            title: 'Input & Examples',
-            subtitle: inputError ? 'Fix the input to resume playback.' : 'Choose example or enter n.',
-            defaultZone: 'left',
-            content: (
-                <div className="ps-panel-body">
+    const panelConfigs = useMemo(() => [
+      { id: 'input', title: 'Input & Examples' },
+      { id: 'state', title: 'Current State', dockMode: 'split-right' },
+      { id: 'code', title: 'Solution Trace', dockMode: 'split-bottom' },
+      { id: 'visualization', title: 'DP Array Visualization', dockMode: 'split-bottom' },
+    ], [])
+    const panelContents = useMemo(() => ({
+      input: (<div className="ps-panel-body">
                     <div className="ps-examples">
                         {EXAMPLES.map((ex) => (
                             <button key={ex.label} className="ps-chip" onClick={() => applyExample(ex)}>
@@ -164,16 +165,8 @@ export default function PerfectSquaresVisualizer() {
                         />
                     </div>
                     {inputError && <div className="ps-error-box">{inputError}</div>}
-                </div>
-            ),
-        },
-        {
-            id: 'state',
-            title: 'Current State',
-            subtitle: step ? `i: ${activeI}, sq: ${activeSq >= 0 ? activeSq : '—'}` : 'State values update during playback.',
-            defaultZone: 'left',
-            content: (
-                <div className="ps-panel-body">
+                </div>),
+      state: (<div className="ps-panel-body">
                     <div className="ps-state-row">
                         <span className="ps-state-label">i (target)</span>
                         <span className="ps-state-val mono">{activeI >= 0 ? activeI : '—'}</span>
@@ -201,30 +194,14 @@ export default function PerfectSquaresVisualizer() {
                     {step?.improved && (
                         <div className="ps-improved">Improved dp[{activeI}] ↓</div>
                     )}
-                </div>
-            ),
-        },
-        {
-            id: 'code',
-            title: 'Solution Trace',
-            subtitle: step ? `Active line ${step.activeLine}` : 'Line-by-line solution view.',
-            defaultZone: 'full',
-            content: (
-                <CodeTracePanel
+                </div>),
+      code: (<CodeTracePanel
                     step={step}
                     codeLines={SOLUTION_CODE}
                     autoScroll={true}
                     onActiveLineDomChange={setActiveLineDom}
-                />
-            ),
-        },
-        {
-            id: 'visualization',
-            title: 'DP Array Visualization',
-            subtitle: step ? step.message : 'Press Play or Step to begin.',
-            defaultZone: 'full',
-            content: (
-                <div className="ps-panel-body ps-viz-body">
+                />),
+      visualization: (<div className="ps-panel-body ps-viz-body">
                     <div className="ps-perfect-squares-row">
                         <span className="ps-squares-label">Perfect squares available:</span>
                         {Array.from({ length: Math.floor(Math.sqrt(n)) }, (_, i) => {
@@ -282,10 +259,10 @@ export default function PerfectSquaresVisualizer() {
                             </motion.div>
                         )}
                     </AnimatePresence>
-                </div>
-            ),
-        },
-    ], [inputError, applyExample, nInput, handleReset, step, n, dp, activeI, activeSq, sqVal, displayCount, displayDp])
+                </div>),
+    }), [inputError, applyExample, nInput, handleReset, step, n, dp, activeI, activeSq, sqVal, displayCount, displayDp])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
         <div className="ps-shell">
@@ -307,17 +284,17 @@ export default function PerfectSquaresVisualizer() {
                 </div>
             </section>
 
-            <DockableWorkspace
-                title="Perfect Squares Workspace"
-                panels={dockPanels}
-                initialLayout={{
-                    rows: [
-                        ['input', 'state'],
-                        ['visualization', 'code'],
-                    ],
-                    minimized: [],
-                }}
-            />
+            <>
+              <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+              {panelDivs && (
+                <>
+                  {panelDivs.input && createPortal(panelContents.input, panelDivs.input)}
+                  {panelDivs.state && createPortal(panelContents.state, panelDivs.state)}
+                  {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+                  {panelDivs.visualization && createPortal(panelContents.visualization, panelDivs.visualization)}
+                </>
+              )}
+            </>
 
             <FloatingPanel title="Playback Controls">
                 <PlaybackControls

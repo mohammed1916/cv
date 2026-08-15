@@ -1,6 +1,6 @@
 ﻿import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import DockableWorkspace from "../../components/shared/DockableWorkspace";
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -11,6 +11,7 @@ import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity
 import { getExamples } from '../../config/examplesRegistry'
 import "./Visualizer.css";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
+import { createPortal } from 'react-dom'
 const SOLUTION_CODE = getSolutionCode('merge-sorted-array')
 function generateSteps(nums1Init, m, nums2, n) {
   const steps = [];
@@ -175,12 +176,13 @@ export default function MergeSortedArrayVisualizer() {
   ].filter(p => p.pos >= 0) : [];
   const nums2Ptrs = step ? [{ name: "j", pos: step.j }].filter(p => p.pos >= 0) : [];
 
-  const dockPanels = useMemo(() => [
-    {
-      id: 'code',
-      title: 'Code',
-      content: (
-        <div style={{ position: "relative" }}>
+  const panelConfigs = useMemo(() => [
+    { id: 'code', title: 'Code' },
+    { id: 'viz', title: 'Visualization', dockMode: 'split-right' },
+    { id: 'vars', title: 'Variables', dockMode: 'split-bottom' },
+  ], [])
+  const panelContents = useMemo(() => ({
+    code: (<div style={{ position: "relative" }}>
           <CodeTracePanel
             step={step}
             codeLines={SOLUTION_CODE}
@@ -196,36 +198,32 @@ export default function MergeSortedArrayVisualizer() {
               activeLine={step?.activeLine}
             />
           )}
-        </div>
-      ),
-    },
-    {
-      id: 'viz',
-      title: 'Visualization',
-      content: (
-        <VisualizationPanel
+        </div>),
+    viz: (<VisualizationPanel
           ex={ex}
           setEx={setEx}
           step={step}
           applyEx={applyEx}
           nums1Ptrs={nums1Ptrs}
           nums2Ptrs={nums2Ptrs}
-        />
-      ),
-    },
-    {
-      id: 'vars',
-      title: 'Variables',
-      content: <VariablesPanel step={step} ex={ex} />,
-    },
-  ], [step, SOLUTION_CODE, connectivity.highlightedLines, connectivity.handleLineSelect, setActiveLineDom, ex, applyEx, nums1Ptrs, nums2Ptrs]);
+        />),
+    vars: (<VariablesPanel step={step} ex={ex} />),
+  }), [step, SOLUTION_CODE, connectivity.highlightedLines, connectivity.handleLineSelect, setActiveLineDom, ex, applyEx, nums1Ptrs, nums2Ptrs])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
     <div className="problem-shell">
-      <DockableWorkspace
-        panels={dockPanels}
-        initialLayout={{ rows: [['code', 'viz'], ['vars']], minimized: [] }}
-      />
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+            {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+            {panelDivs.vars && createPortal(panelContents.vars, panelDivs.vars)}
+          </>
+        )}
+      </>
       <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}

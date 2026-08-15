@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from 'react'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
@@ -10,6 +10,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './MatrixIterationBasicsVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
+import { createPortal } from 'react-dom'
 
 const MODE_META = {
   full: {
@@ -217,14 +218,14 @@ export default function MatrixIterationBasicsVisualizer({ problem }) {
   }
 
   // Build dockable panels for workspace
-  const dockPanels = useMemo(() => [
-    {
-      id: 'controls',
-      title: 'Pattern Controls',
-      subtitle: MODE_META[mode].badge,
-      defaultZone: 'left',
-      content: (
-        <div className="mib-panel-body">
+  const panelConfigs = useMemo(() => [
+    { id: 'controls', title: 'Pattern Controls' },
+    { id: 'matrix', title: 'Matrix View', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
+    { id: 'legend', title: 'Legend', dockMode: 'split-bottom' },
+  ], [])
+  const panelContents = useMemo(() => ({
+    controls: (<div className="mib-panel-body">
           <div className="mib-mode-row">
             {Object.entries(MODE_META).map(([key, meta]) => (
               <button
@@ -300,16 +301,8 @@ export default function MatrixIterationBasicsVisualizer({ problem }) {
             <div><span>Visited</span><strong>{visitedCount}</strong></div>
             <div><span>Current</span><strong>{step && step.i !== null && step.j !== null ? `(${step.i}, ${step.j})` : 'None'}</strong></div>
           </div>
-        </div>
-      ),
-    },
-    {
-      id: 'matrix',
-      title: 'Matrix View',
-      subtitle: `${size} x ${size}`,
-      defaultZone: 'left',
-      content: (
-        <div className="mib-panel-body">
+        </div>),
+    matrix: (<div className="mib-panel-body">
           <div className="mib-matrix" style={{ gridTemplateColumns: `repeat(${size}, minmax(48px, 1fr))` }}>
             {matrix.map((row, i) => row.map((value, j) => (
               <div className={getCellClassName(i, j)} key={`${i}-${j}`}>
@@ -321,16 +314,8 @@ export default function MatrixIterationBasicsVisualizer({ problem }) {
               </div>
             )))}
           </div>
-        </div>
-      ),
-    },
-    {
-      id: 'code',
-      title: 'Code Trace',
-      subtitle: step ? `Active line ${step.activeLine}` : 'Line-by-line code view.',
-      defaultZone: 'right',
-      content: (
-        <CodeTracePanel
+        </div>),
+    code: (<CodeTracePanel
           step={step}
           codeLines={codeLines}
           title="Loop Pattern"
@@ -339,24 +324,17 @@ export default function MatrixIterationBasicsVisualizer({ problem }) {
           activeLabelSuffix=""
           onActiveLineDomChange={setActiveLineDom}
           autoScroll={autoScrollCode}
-        />
-      ),
-    },
-    {
-      id: 'legend',
-      title: 'Legend',
-      defaultZone: 'right',
-      content: (
-        <div className="mib-panel-body mib-legend">
+        />),
+    legend: (<div className="mib-panel-body mib-legend">
           <p><span className="dot current-hit" /> Current + visited</p>
           <p><span className="dot current-miss" /> Current + skipped</p>
           <p><span className="dot visited" /> Visited cell</p>
           <p><span className="dot scanned" /> Scanned but skipped</p>
           <p><span className="dot idle" /> Not touched yet</p>
-        </div>
-      ),
-    },
-  ], [mode, exprEnabled, size, error, scannedCount, visitedCount, step, matrix, codeLines, setActiveLineDom, autoScrollCode])
+        </div>),
+  }), [mode, exprEnabled, size, error, scannedCount, visitedCount, step, matrix, codeLines, setActiveLineDom, autoScrollCode])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
     <div className="mib-shell">
@@ -377,17 +355,17 @@ export default function MatrixIterationBasicsVisualizer({ problem }) {
         <div className="mib-status-display">{status}</div>
       </section>
 
-      <DockableWorkspace
-        title="Matrix Iteration Workspace"
-        panels={dockPanels}
-        initialLayout={{
-          rows: [
-            ['controls', 'code'],
-            ['matrix', 'legend'],
-          ],
-          minimized: [],
-        }}
-      />
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.controls && createPortal(panelContents.controls, panelDivs.controls)}
+            {panelDivs.matrix && createPortal(panelContents.matrix, panelDivs.matrix)}
+            {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+            {panelDivs.legend && createPortal(panelContents.legend, panelDivs.legend)}
+          </>
+        )}
+      </>
 
       <FloatingPanel title="Playback Controls">
         <PlaybackControls

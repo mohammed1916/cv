@@ -1,6 +1,6 @@
 ﻿import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import DockableWorkspace from "../../../components/shared/DockableWorkspace";
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../../components/CodeTracePanel";
 import PlaybackControls from "../../../components/PlaybackControls";
@@ -10,6 +10,7 @@ import { usePatternOverlay } from "../../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../../config/examplesRegistry'
 import "./FindAllAnagramsVisualizer.css";
+import { createPortal } from 'react-dom'
 const SOLUTION_CODE_INLINE = [
     { line: 1, text: "def findAnagrams(s, p):" },
     { line: 2, text: "    need = Counter(p)" },
@@ -93,10 +94,13 @@ export default function FindAllAnagramsVisualizer() {
     // Only show letters present in need or have
     const relevantChars = step ? [...new Set([...Object.keys(step.need), ...Object.keys(step.have)])] : [];
 
-    const dockPanels = useMemo(() => [
-        { id: 'code', title: 'Code', content: <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} /> },
-        { id: 'viz', title: '🔍 Anagrams', content: (
-            <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+    const panelConfigs = useMemo(() => [
+      { id: 'code', title: 'Code' },
+      { id: 'viz', title: '🔍 Anagrams', dockMode: 'split-right' },
+    ], [])
+    const panelContents = useMemo(() => ({
+      code: (<CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />),
+      viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
                 <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                     {EXAMPLES.map(e => <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : '#f1f5f9' }}>{e.label}</button>)}
                 </div>
@@ -137,13 +141,22 @@ export default function FindAllAnagramsVisualizer() {
                 <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
                     <div style={{ fontWeight: 600, marginBottom: 4 }}>Results: {(step?.result ?? []).join(', ') || 'none'}</div>
                 </div>
-            </div>
-        )}
-    ], [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx, relevantChars]);
+            </div>),
+    }), [step, SOLUTION_CODE, connectivity, setActiveLineDom, ex, applyEx, relevantChars])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
         <div className="problem-shell">
-            <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
+            <>
+              <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+              {panelDivs && (
+                <>
+                  {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+                  {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+                </>
+              )}
+            </>
             <FloatingPanel title="Playback Controls">
                 <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
             </FloatingPanel>

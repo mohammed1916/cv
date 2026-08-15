@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import DockableWorkspace from '../../components/shared/DockableWorkspace'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -12,6 +12,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './LongestLineVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
+import { createPortal } from 'react-dom'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -563,13 +564,12 @@ export default function LongestLineVisualizer() {
     [handleReset]
   )
 
-  const dockPanels = useMemo(
-    () => [
-      {
-        id: 'code',
-        title: 'Code',
-        content: (
-          <div style={{ position: 'relative' }}>
+  const panelConfigs = useMemo(() => [
+    { id: 'code', title: 'Code' },
+    { id: 'viz', title: '🔲 Longest Line', dockMode: 'split-right' },
+  ], [])
+  const panelContents = useMemo(() => ({
+    code: (<div style={{ position: 'relative' }}>
             <CodeTracePanel
               step={step}
               codeLines={SOLUTION_CODE}
@@ -585,14 +585,8 @@ export default function LongestLineVisualizer() {
                 activeLine={step?.activeLine}
               />
             )}
-          </div>
-        ),
-      },
-      {
-        id: 'viz',
-        title: '🔲 Longest Line',
-        content: (
-          <VisualizationPanel
+          </div>),
+    viz: (<VisualizationPanel
             step={step}
             applyExample={applyExample}
             examples={examples}
@@ -600,12 +594,10 @@ export default function LongestLineVisualizer() {
             setMatrixInput={setMatrixInput}
             inputError={inputError}
             handleReset={handleReset}
-          />
-        ),
-      },
-    ],
-    [step, connectivity, setActiveLineDom, matrixInput, inputError, examples, applyExample, handleReset, showPatternOverlay, activeLineDom]
-  )
+          />),
+  }), [step, connectivity, setActiveLineDom, matrixInput, inputError, examples, applyExample, handleReset, showPatternOverlay, activeLineDom])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
     <div className="problem-shell">
@@ -618,7 +610,15 @@ export default function LongestLineVisualizer() {
         inputError={inputError}
       />
 
-      <DockableWorkspace panels={dockPanels} initialLayout={{ rows: [['code', 'viz']], minimized: [] }} />
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+            {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+          </>
+        )}
+      </>
       <FloatingPanel title="Playback Controls">
         {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
         <PlaybackControls
