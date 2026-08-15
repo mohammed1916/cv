@@ -16,9 +16,9 @@
 
 .pc-btn {
   appearance: none;
-  border: 1px solid #334155;
-  background: #0f172a;
-  color: #e2e8f0;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
   border-radius: 10px;
   padding: 8px 12px;
   font-size: 13px;
@@ -29,8 +29,8 @@
 }
 
 .pc-btn:hover:not(:disabled) {
-  background: #1e293b;
-  border-color: #475569;
+  background: var(--surface2);
+  border-color: var(--border);
 }
 
 .pc-btn:active:not(:disabled) {
@@ -43,14 +43,14 @@
 }
 
 .pc-btn-play {
-  background: linear-gradient(180deg, #1d4ed8, #1e40af);
-  border-color: #3b82f6;
-  color: #dbeafe;
+  background: linear-gradient(180deg, var(--primary-d), var(--primary-d));
+  border-color: var(--primary);
+  color: var(--surface3);
 }
 
 .pc-btn-play:hover:not(:disabled) {
-  background: linear-gradient(180deg, #2563eb, #1d4ed8);
-  border-color: #60a5fa;
+  background: linear-gradient(180deg, var(--primary-d), var(--primary-d));
+  border-color: var(--primary-l);
 }
 
 .pc-speed-outer {
@@ -63,23 +63,23 @@
   align-items: center;
   gap: 8px;
   padding: 6px 10px;
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 10px;
-  background: #0b1220;
+  background: var(--surface);
 }
 
 .pc-speed-label {
-  color: #94a3b8;
+  color: var(--text-muted);
   font-size: 12px;
   font-weight: 600;
 }
 
 .pc-speed-input {
-  accent-color: #3b82f6;
+  accent-color: var(--primary);
 }
 
 .pc-speed-indicator {
-  color: #cbd5e1;
+  color: var(--text-muted);
   font-size: 12px;
   min-width: 60px;
   text-align: right;
@@ -95,42 +95,42 @@
   align-items: center;
   gap: 6px;
   padding: 6px 10px;
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 10px;
-  background: #0b1220;
+  background: var(--surface);
   cursor: pointer;
   user-select: none;
   transition: border-color 0.15s ease, background 0.15s ease;
 }
 
 .pc-autoscroll-label:hover {
-  border-color: #475569;
-  background: #0f172a;
+  border-color: var(--border);
+  background: var(--surface);
 }
 
 .pc-autoscroll-input {
   appearance: none;
   width: 16px;
   height: 16px;
-  border: 1px solid #64748b;
+  border: 1px solid var(--text-dim);
   border-radius: 4px;
-  background: #0f172a;
+  background: var(--surface);
   cursor: pointer;
-  accent-color: #3b82f6;
+  accent-color: var(--primary);
   transition: border-color 0.15s ease, background 0.15s ease;
 }
 
 .pc-autoscroll-input:checked {
-  background: #3b82f6;
-  border-color: #3b82f6;
+  background: var(--primary);
+  border-color: var(--primary);
 }
 
 .pc-autoscroll-input:hover {
-  border-color: #94a3b8;
+  border-color: var(--text-muted);
 }
 
 .pc-autoscroll-text {
-  color: #94a3b8;
+  color: var(--text-muted);
   font-size: 12px;
   font-weight: 600;
 }
@@ -145,42 +145,42 @@
   align-items: center;
   gap: 6px;
   padding: 6px 10px;
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 10px;
-  background: #0b1220;
+  background: var(--surface);
   cursor: pointer;
   user-select: none;
   transition: border-color 0.15s ease, background 0.15s ease;
 }
 
 .pc-pattern-label:hover {
-  border-color: #475569;
-  background: #0f172a;
+  border-color: var(--border);
+  background: var(--surface);
 }
 
 .pc-pattern-input {
   appearance: none;
   width: 16px;
   height: 16px;
-  border: 1px solid #64748b;
+  border: 1px solid var(--text-dim);
   border-radius: 4px;
-  background: #0f172a;
+  background: var(--surface);
   cursor: pointer;
-  accent-color: #3b82f6;
+  accent-color: var(--primary);
   transition: border-color 0.15s ease, background 0.15s ease;
 }
 
 .pc-pattern-input:checked {
-  background: #3b82f6;
-  border-color: #3b82f6;
+  background: var(--primary);
+  border-color: var(--primary);
 }
 
 .pc-pattern-input:hover {
-  border-color: #94a3b8;
+  border-color: var(--text-muted);
 }
 
 .pc-pattern-text {
-  color: #94a3b8;
+  color: var(--text-muted);
   font-size: 12px;
   font-weight: 600;
 }

@@ -11,6 +11,8 @@ import ProblemScaffold from "./components/panels/ProblemScaffold";
 import ProblemInfoPanel from "./components/ProblemInfoPanel";
 import ZoomControls from "./components/ZoomControls";
 import { ZoomProvider } from "./context/ZoomContext";
+import ThemeToggle from "./components/ThemeToggle";
+import { ThemeProvider } from "./context/ThemeContext";
 import "./App.css";
 import { TRACKS } from "./data/implementedProblems";
 
@@ -808,10 +810,12 @@ export default function App() {
   );
 
   return (
-    <ZoomProvider>
+    <ThemeProvider>
+      <ZoomProvider>
       <ZoomControls />
       <div className={`app layout-${layoutWidth}`}>
         <div className="app-toolbar">
+          <ThemeToggle />
           <SettingsMenu
             navigationTransitionsEnabled={navigationTransitionsEnabled}
             onToggleNavigationTransitions={setNavigationTransitionsEnabled}
@@ -839,6 +843,7 @@ export default function App() {
           )}
         </div>
       </div>
-    </ZoomProvider>
+      </ZoomProvider>
+    </ThemeProvider>
   );
 }

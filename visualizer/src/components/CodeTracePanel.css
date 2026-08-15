@@ -35,13 +35,13 @@
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--text-dim, #9ca3af);
+  color: var(--text-dim, var(--text-dim));
 }
 
 .ctp-subtitle {
   margin-top: 3px;
   font-size: 0.86rem;
-  color: var(--text, #e5e7eb);
+  color: var(--text, var(--text));
 }
 
 .ctp-chip {
@@ -61,7 +61,7 @@
   padding: 6px 10px;
   cursor: pointer;
   border-radius: 8px;
-  color: var(--text, #e5e7eb);
+  color: var(--text, var(--text));
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.06);
 
@@ -85,7 +85,7 @@
 }
 
 .ctp-copy-btn.copied {
-  color: #86efac;
+  color: var(--success);
   border-color: rgba(34, 197, 94, 0.45);
 }
 
@@ -215,7 +215,7 @@
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.08);
 
-  color: #e5e7eb;
+  color: var(--text);
   background-color: rgba(15, 23, 42, 0.92);
 
   font-size: 0.82rem;
@@ -231,8 +231,8 @@
 
   /* custom dropdown arrow */
   background-image:
-    linear-gradient(45deg, transparent 50%, #cbd5e1 50%),
-    linear-gradient(135deg, #cbd5e1 50%, transparent 50%);
+    linear-gradient(45deg, transparent 50%, var(--text-muted) 50%),
+    linear-gradient(135deg, var(--text-muted) 50%, transparent 50%);
 
   background-position:
     calc(100% - 16px) 50%,
@@ -265,8 +265,8 @@
 }
 
 .ctp-editor-select option {
-  background: #0f172a;
-  color: #f8fafc;
+  background: var(--surface);
+  color: var(--surface2);
 }
 
 /* =========================================
@@ -283,7 +283,7 @@
   padding: 10px;
   border-radius: 8px;
 
-  color: var(--text, #e5e7eb);
+  color: var(--text, var(--text));
 
   border: 1px solid rgba(255, 255, 255, 0.04);
 
@@ -338,7 +338,7 @@
 .ctp-no {
   font-size: 0.76rem;
   line-height: 1.4;
-  color: var(--text-dim, #9ca3af);
+  color: var(--text-dim, var(--text-dim));
 }
 
 .ctp-text {
@@ -348,7 +348,7 @@
   font-size: 0.82rem;
   line-height: 1.45;
 
-  color: var(--text, #e5e7eb);
+  color: var(--text, var(--text));
 }
 
 /* =========================================
@@ -374,12 +374,12 @@
   .ctp-editor-select[type='number'] {
     background-color: rgba(2, 6, 23, 0.92);
     border-color: rgba(255, 255, 255, 0.08);
-    color: #e2e8f0;
+    color: var(--text);
   }
 
   .ctp-editor-select option {
     background: #020617;
-    color: #e2e8f0;
+    color: var(--text);
   }
 
   .ctp-copy-btn:focus,

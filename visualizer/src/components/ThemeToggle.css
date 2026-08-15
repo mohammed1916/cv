@@ -1,0 +1,57 @@
+/* Lives inside .app-toolbar, next to the settings button. The toolbar is
+   fixed at top-right and sets `pointer-events: none` so it does not block the
+   page, so the button re-enables them for itself. */
+.theme-toggle-panel {
+  pointer-events: auto;
+}
+
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 6px 20px var(--primary-glow);
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.theme-toggle-btn:hover {
+  background: var(--surface2);
+  border-color: var(--primary);
+  box-shadow: 0 8px 26px var(--primary-glow);
+}
+
+.theme-toggle-btn:active {
+  transform: translateY(1px);
+}
+
+.theme-toggle-btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.theme-toggle-icon {
+  font-size: 15px;
+  line-height: 1;
+  color: var(--primary);
+}
+
+.theme-toggle-label {
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 640px) {
+  .theme-toggle-label {
+    display: none;
+  }
+  .theme-toggle-btn {
+    padding: 9px 11px;
+  }
+}

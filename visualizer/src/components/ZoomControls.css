@@ -1,3 +1,5 @@
+/* Token-driven so the controls follow the active theme; these were previously
+   hardcoded to the dark palette and stayed dark-on-light. */
 .zoom-controls-panel {
   position: fixed;
   top: 1rem;
@@ -12,18 +14,18 @@
   align-items: center;
   gap: 6px;
   padding: 8px 10px;
-  border: 1px solid rgba(56, 189, 248, 0.3);
+  border: 1px solid var(--border);
   border-radius: 12px;
-  background: rgba(2, 6, 23, 0.94);
+  background: var(--surface);
   backdrop-filter: blur(10px);
-  box-shadow: 0 8px 24px rgba(2, 6, 23, 0.5);
+  box-shadow: 0 8px 24px var(--primary-glow);
 }
 
 .zoom-btn {
   appearance: none;
-  border: 1px solid #334155;
-  background: #0f172a;
-  color: #e2e8f0;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text);
   border-radius: 8px;
   padding: 6px 8px;
   font-size: 13px;
@@ -35,12 +37,17 @@
 }
 
 .zoom-btn:hover:not(:disabled) {
-  background: #1e293b;
-  border-color: #475569;
+  background: var(--surface3);
+  border-color: var(--primary);
 }
 
 .zoom-btn:active:not(:disabled) {
   transform: translateY(1px);
+}
+
+.zoom-btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
 .zoom-btn:disabled {
@@ -52,6 +59,7 @@
 .zoom-btn-out {
   font-weight: 700;
   font-size: 14px;
+  color: var(--primary);
 }
 
 .zoom-btn-reset {
@@ -59,7 +67,7 @@
 }
 
 .zoom-value {
-  color: #cbd5e1;
+  color: var(--text-muted);
   font-size: 12px;
   font-weight: 600;
   min-width: 38px;

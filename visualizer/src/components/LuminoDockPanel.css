@@ -3,9 +3,9 @@
 
 /* Local tokens so the divider highlight is bright regardless of the faint --border */
 .lumino-dock-container {
-  --lm-divider: rgba(148, 163, 184, 0.35); /* clearly visible slate divider */
-  --lm-divider-hover: var(--info, #38bdf8); /* bright cyan on hover */
-  --lm-panel-border: rgba(148, 163, 184, 0.22);
+  --lm-divider: var(--border); /* clearly visible slate divider */
+  --lm-divider-hover: var(--info, var(--primary)); /* bright cyan on hover */
+  --lm-panel-border: var(--border);
 
   position: absolute;
   top: 0;
@@ -17,15 +17,15 @@
 
 /* ── Dock panel background ─────────────────────────── */
 .lm-DockPanel {
-  background: var(--surface, #0f0f24);
-  color: var(--text, #f1f5f9);
+  background: var(--surface, var(--surface));
+  color: var(--text, var(--text));
 }
 
 /* ── Each panel gets a visible border so its bounds are clear ── */
 .lumino-panel-widget {
   border: 1px solid var(--lm-panel-border);
   border-radius: 8px;
-  background: var(--surface, #0f0f24);
+  background: var(--surface, var(--surface));
 }
 
 /* ── Per-panel minimize/restore button (top-right corner) ── */
@@ -42,8 +42,8 @@
   padding: 0;
   font-size: 14px;
   line-height: 1;
-  color: var(--text-muted, #94a3b8);
-  background: var(--surface3, #21213a);
+  color: var(--text-muted, var(--text-muted));
+  background: var(--surface3, var(--surface3));
   border: 1px solid var(--lm-panel-border);
   border-radius: 5px;
   cursor: pointer;
@@ -51,9 +51,9 @@
 }
 
 .lumino-panel-minbtn:hover {
-  background: var(--info, #38bdf8);
-  color: #0b1120;
-  border-color: var(--info, #38bdf8);
+  background: var(--info, var(--primary));
+  color: var(--surface);
+  border-color: var(--info, var(--primary));
 }
 
 /* ── Resize handles: always visible, high-contrast ── */
@@ -85,7 +85,7 @@
 /* Bright accent + glow on hover so it's obvious the divider is draggable */
 .lm-DockPanel-handle:hover {
   background: var(--lm-divider-hover) !important;
-  box-shadow: 0 0 8px 1px rgba(56, 189, 248, 0.6);
+  box-shadow: 0 0 8px 1px var(--primary-glow);
 }
 
 /* ── Tab bars ──────────────────────────────────────── */
@@ -94,12 +94,12 @@
    DockLayout allocates 0px for the tab bar and the tabs are invisible. So we
    set concrete heights here — this is what makes the draggable tabs appear. */
 .lm-DockPanel-tabBar {
-  background: var(--surface2, #17172e);
+  background: var(--surface2, var(--surface2));
   min-height: 36px;
 }
 
 .lm-TabBar {
-  background: var(--surface2, #17172e);
+  background: var(--surface2, var(--surface2));
   border-bottom: 1px solid var(--lm-panel-border);
   min-height: 36px;
 }
@@ -112,8 +112,8 @@
   height: 36px;
   padding: 0 16px;
   align-items: center;
-  color: var(--text-muted, #94a3b8);
-  background: var(--surface2, #17172e);
+  color: var(--text-muted, var(--text-muted));
+  background: var(--surface2, var(--surface2));
   border-right: 1px solid var(--lm-panel-border);
   border-bottom: 2px solid transparent;
   cursor: pointer;
@@ -122,15 +122,15 @@
 }
 
 .lm-TabBar-tab:hover {
-  background: var(--surface3, #21213a);
-  color: var(--text, #f1f5f9);
+  background: var(--surface3, var(--surface3));
+  color: var(--text, var(--text));
 }
 
 /* Active tab: strong highlight bar + surface change */
 .lm-TabBar-tab.lm-mod-current {
-  color: var(--text, #f1f5f9);
-  background: var(--surface, #0f0f24);
-  border-bottom-color: var(--info, #38bdf8);
+  color: var(--text, var(--text));
+  background: var(--surface, var(--surface));
+  border-bottom-color: var(--info, var(--primary));
 }
 
 .lm-TabBar-tabLabel {
@@ -151,24 +151,24 @@
 }
 
 .lm-TabBar-tabCloseIcon:hover {
-  background: rgba(248, 113, 113, 0.2);
+  background: var(--error-glow);
 }
 
 .lm-TabBar-tabCloseIcon:before {
   content: '×';
   font-size: 16px;
   line-height: 1;
-  color: var(--text-muted, #94a3b8);
+  color: var(--text-muted, var(--text-muted));
 }
 
 .lm-TabBar-tabCloseIcon:hover:before {
-  color: var(--error, #f87171);
+  color: var(--error, var(--error));
 }
 
 /* ── Drag overlay (drop zone indicator) ────────────── */
 .lm-DockPanel-overlay {
-  background: rgba(56, 189, 248, 0.12);
-  border: 2px solid var(--info, #38bdf8);
+  background: var(--primary-glow);
+  border: 2px solid var(--info, var(--primary));
   border-radius: 6px;
 }
 
@@ -179,7 +179,7 @@
 }
 
 .lumino-panel-widget ::-webkit-scrollbar-track {
-  background: var(--surface2, #17172e);
+  background: var(--surface2, var(--surface2));
 }
 
 .lumino-panel-widget ::-webkit-scrollbar-thumb {
@@ -188,5 +188,5 @@
 }
 
 .lumino-panel-widget ::-webkit-scrollbar-thumb:hover {
-  background: var(--text-muted, #94a3b8);
+  background: var(--text-muted, var(--text-muted));
 }
