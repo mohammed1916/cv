@@ -343,42 +343,19 @@ export default function ZigzagVisualizer() {
     { id: 'viz', title: 'Visualization' },
     { id: 'code', title: 'Code', dockMode: 'split-right' },
   ], [])
-  const panelContents = useMemo(() => ({
-    viz: (<ZigzagVisualizationPanel
-          numRows={numRows}
-          source={source}
-          currentStep={currentStep}
-          previousStep={previousStep}
-          stepIndex={stepIndex}
-          steps={steps}
-          isDone={isDone}
-        />),
-    code: (<div style={{ position: 'relative' }}>
-          <CodeTracePanel step={currentStep} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-
-          {showPatternOverlay && (
-            <CodePatternAnnotations
-              linePatterns={LINE_PATTERN_MAP}
-              currentPhase={currentStep?.phase}
-              activeLineDom={activeLineDom}
-              activeLine={currentStep?.activeLine}
-            />
-          )}
-        </div>),
-  }), [numRows, source, currentStep, previousStep, stepIndex, steps, isDone])
-  const [panelDivs, setPanelDivs] = useState(null)
-  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
-
-  return (
-    <div className="zv">
-        <ManualInputPanel
-          fields={[{"key":"rowCount","label":"rowCount","type":"string"}]}
-          values={{ rowCount: rowCountInput }}
-          onChange={(k, v) => { if (k === 'rowCount') setRowCountInput(v); handleReset() }}
-          examples={EXAMPLES}
-          applyExample={applyExample}
-          inputError={inputError}
-        />
+  const panelContents = {
+    // Keep all Zigzag-specific controls inside its Visualization panel. This
+    // lets the shared dock tab bar sit directly below the problem header,
+    // consistently with every other problem workspace.
+    viz: (<div className="zv-visualization-panel">
+      <ManualInputPanel
+        fields={[{"key":"rowCount","label":"rowCount","type":"string"}]}
+        values={{ rowCount: rowCountInput }}
+        onChange={(k, v) => { if (k === 'rowCount') setRowCountInput(v); handleReset() }}
+        examples={EXAMPLES}
+        applyExample={applyExample}
+        inputError={inputError}
+      />
       <div className="zv-card zv-input-card">
         <div className="zv-input-row">
           <div className="zv-field-group zv-field-string">
@@ -395,7 +372,6 @@ export default function ZigzagVisualizer() {
               maxLength={28}
             />
           </div>
-
           <div className="zv-field-group zv-field-rows">
             <label className="zv-input-label">Rows</label>
             <input
@@ -409,10 +385,8 @@ export default function ZigzagVisualizer() {
               inputMode="numeric"
             />
           </div>
-
           <button className="zv-btn zv-btn-primary" onClick={handleVisualize}>Visualize</button>
         </div>
-
         <div className="zv-support-row">
           <p className={`zv-hint ${inputError || rowError ? 'error' : ''}`}>
             {inputError || rowError || 'Try the canonical PAYPALISHIRING example or a short string to inspect each bounce.'}
@@ -422,7 +396,6 @@ export default function ZigzagVisualizer() {
             <span className="zv-pill mono">rows {rowCountInput || 0}</span>
           </div>
         </div>
-
         <div className="zv-example-grid">
           {EXAMPLES.map((example) => (
             <button
@@ -440,19 +413,41 @@ export default function ZigzagVisualizer() {
           ))}
         </div>
       </div>
-
       <div className="zv-progress-track">
         <motion.div className="zv-progress-fill" animate={{ width: `${progress}%` }} transition={{ duration: 0.14 }} />
       </div>
       <div className="zv-step-counter">
-        {stepIndex < 0
-          ? 'Not started — press Play or Next'
-          : isDone
-            ? `Done! Built output "${currentStep?.output}"`
-            : `Step ${stepIndex + 1} / ${steps.length}`}
+        {stepIndex < 0 ? 'Not started — press Play or Next' : isDone ? `Done! Built output "${currentStep?.output}"` : `Step ${stepIndex + 1} / ${steps.length}`}
       </div>
+      <ZigzagVisualizationPanel
+        numRows={numRows}
+        source={source}
+        currentStep={currentStep}
+        previousStep={previousStep}
+        stepIndex={stepIndex}
+        steps={steps}
+        isDone={isDone}
+      />
+    </div>),
+    code: (<div style={{ position: 'relative' }}>
+          <CodeTracePanel step={currentStep} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
 
-      <>
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={currentStep?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={currentStep?.activeLine}
+            />
+          )}
+        </div>),
+  }
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  return (
+    <div className="zv">
+      <div className="zv-workspace">
         <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
         {panelDivs && (
           <>
@@ -460,7 +455,7 @@ export default function ZigzagVisualizer() {
             {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
           </>
         )}
-      </>
+      </div>
 
       <FloatingPanel title="Playback Controls">
         {showPatternOverlay && (

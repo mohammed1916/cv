@@ -1,8 +1,26 @@
 .zv {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-  padding-bottom: 3rem;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+/* The dock is the workspace itself, so its tab headers begin immediately
+   under the shared problem header. Zigzag-specific inputs live in the
+   Visualization tab instead of pushing the entire dock below the viewport. */
+.zv-workspace {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.zv-visualization-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  min-height: 100%;
+  padding: 0.85rem;
+  overflow: auto;
 }
 
 .zv-card {
