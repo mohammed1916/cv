@@ -567,7 +567,7 @@ function ArrayTape({
   );
 }
 
-function PartitionPointerRail({ step, values }) {
+function PartitionPointerRail({ step, searchValues, otherValues }) {
   const direction = step?.phase === 'move_left'
     ? 'Cut A is too far right: move high left.'
     : step?.phase === 'move_right'
@@ -575,11 +575,18 @@ function PartitionPointerRail({ step, values }) {
       : step?.phase === 'found' || step?.phase === 'done'
         ? 'The cut is valid: every value on the left is ≤ every value on the right.'
         : 'Low and high bound the only cuts still worth testing.'
-  return <PointerRail title="Binary-search pointer lane" values={values} range={{ start: step?.low ?? 0, end: step?.high ?? values.length }} pointers={[
-    { id: 'low', label: `low ${step?.low ?? 0}`, index: Math.min(step?.low ?? 0, Math.max(values.length - 1, 0)), tone: 'info' },
-    { id: 'high', label: `high ${step?.high ?? values.length}`, index: Math.min(step?.high ?? values.length, Math.max(values.length - 1, 0)), tone: 'warning' },
-    { id: 'cut', label: `cut ${step?.partitionA ?? 0}`, index: Math.min(step?.partitionA ?? 0, Math.max(values.length - 1, 0)), tone: 'success' },
-  ]} note={direction} />
+  const cutA = step?.partitionA ?? 0
+  const cutB = step?.partitionB ?? step?.leftSize ?? 0
+  return <div className="median-pointer-lanes">
+    <PointerRail title="A — binary-search lane" values={searchValues} range={{ start: step?.low ?? 0, end: step?.high ?? searchValues.length }} pointers={[
+      { id: 'low', label: `low ${step?.low ?? 0}`, index: Math.min(step?.low ?? 0, Math.max(searchValues.length - 1, 0)), tone: 'info' },
+      { id: 'high', label: `high ${step?.high ?? searchValues.length}`, index: Math.min(step?.high ?? searchValues.length, Math.max(searchValues.length - 1, 0)), tone: 'warning' },
+      { id: 'cut-a', label: `cutA ${cutA}`, index: Math.min(cutA, Math.max(searchValues.length - 1, 0)), tone: 'success' },
+    ]} />
+    <PointerRail title="B — derived partition" values={otherValues} pointers={[
+      { id: 'cut-b', label: `cutB ${cutB}`, index: Math.min(cutB, Math.max(otherValues.length - 1, 0)), tone: 'success' },
+    ]} note={`Invariant: cutA (${cutA}) + cutB (${cutB}) = left half (${step?.leftSize ?? 0}). ${direction}`} />
+  </div>
 }
 
 export default function MedianOfTwoSortedArraysVisualizer() {
@@ -811,7 +818,7 @@ export default function MedianOfTwoSortedArraysVisualizer() {
           showBounds
           colorClass="a-tape"
         />
-        <PartitionPointerRail step={step} values={prepared.searchArray} />
+        <PartitionPointerRail step={step} searchValues={prepared.searchArray} otherValues={prepared.otherArray} />
 
         <ArrayTape
           title="B"
