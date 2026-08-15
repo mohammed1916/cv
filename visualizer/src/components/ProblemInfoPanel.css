@@ -50,7 +50,7 @@
 .problem-info-panel {
     overflow: hidden;
     border-bottom: 1px solid var(--border, #2a2a3d);
-    background: var(--surface-raised, #16161e);
+    background: var(--surface);
 }
 
 .problem-info-inner {

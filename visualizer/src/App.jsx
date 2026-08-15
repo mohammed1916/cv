@@ -13,6 +13,9 @@ import ZoomControls from "./components/ZoomControls";
 import { ZoomProvider } from "./context/ZoomContext";
 import ThemeToggle from "./components/ThemeToggle";
 import { ThemeProvider } from "./context/ThemeContext";
+import { useVisualizationContext } from "./context/VisualizationContext";
+import { useChatContext } from "./context/ChatContext";
+import { ChatDrawer } from "./components/Chatbot";
 import "./App.css";
 import { TRACKS } from "./data/implementedProblems";
 
@@ -309,6 +312,12 @@ function ProblemPage({
   utilityControls,
 }) {
   const Component = problem.component;
+  const { publishStep, publishDescription } = useVisualizationContext();
+  useEffect(() => {
+    publishStep(null, problem.title);
+    publishDescription(problem.description || null);
+    return () => publishStep(null, '');
+  }, [problem.title, problem.description, publishStep, publishDescription]);
   const Shell = enableTransitions ? motion.div : "div";
   const shellProps = enableTransitions
     ? {
@@ -378,6 +387,40 @@ function ProblemPage({
       </div>
     </Shell>
   );
+}
+
+function ChatAssistant() {
+  const { openChat, selectMode, toggleSelectMode, attachContext } = useChatContext();
+
+  useEffect(() => {
+    if (!selectMode) return undefined;
+    const onSelect = (event) => {
+      if (event.target.closest('[data-chat-ignore], button, input, textarea, select, a')) return;
+      const element = event.target;
+      if (!element || element.closest('.chat-drawer, .chat-launcher')) return;
+      event.preventDefault();
+      event.stopPropagation();
+      const text = (element.innerText || element.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 1200);
+      const label = element.getAttribute('aria-label') || element.dataset.chatLabel || element.className || element.tagName;
+      attachContext(`Selected: ${String(label).slice(0, 120)}`, {
+        tag: element.tagName.toLowerCase(),
+        text,
+        id: element.id || undefined,
+        classes: typeof element.className === 'string' ? element.className : undefined,
+      });
+      toggleSelectMode();
+      openChat();
+    };
+    document.addEventListener('click', onSelect, true);
+    return () => document.removeEventListener('click', onSelect, true);
+  }, [selectMode, attachContext, toggleSelectMode, openChat]);
+
+  return <>
+    <button type="button" className={`chat-launcher ${selectMode ? 'selecting' : ''}`} onClick={selectMode ? toggleSelectMode : openChat} title={selectMode ? 'Click an element to add it to chat' : 'Open algorithm assistant'}>
+      {selectMode ? 'Select element…' : 'Ask AI'}
+    </button>
+    <ChatDrawer />
+  </>;
 }
 
 function HomePage({
@@ -849,6 +892,7 @@ export default function App() {
             pageContent
           )}
         </div>
+        <ChatAssistant />
       </div>
       </ZoomProvider>
     </ThemeProvider>
