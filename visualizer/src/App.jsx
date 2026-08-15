@@ -306,6 +306,7 @@ function ProblemPage({
   onLayoutChange,
   enableTransitions,
   problemDescriptions,
+  utilityControls,
 }) {
   const Component = problem.component;
   const Shell = enableTransitions ? motion.div : "div";
@@ -351,6 +352,7 @@ function ProblemPage({
           onChange={onLayoutChange}
           compact
         />
+        <div className="problem-utilities">{utilityControls}</div>
       </header>
       <ProblemInfoPanel
         slug={problem.slug}
@@ -787,6 +789,16 @@ export default function App() {
     setActive(null);
   };
 
+  const utilityControls = (
+    <>
+      <ThemeToggle />
+      <SettingsMenu
+        navigationTransitionsEnabled={navigationTransitionsEnabled}
+        onToggleNavigationTransitions={setNavigationTransitionsEnabled}
+      />
+    </>
+  );
+
   const pageContent = active ? (
     <ProblemPage
       key={active.id}
@@ -796,6 +808,7 @@ export default function App() {
       onLayoutChange={setLayoutWidth}
       enableTransitions={navigationTransitionsEnabled}
       problemDescriptions={problemDescriptions}
+      utilityControls={utilityControls}
     />
   ) : (
     <HomePage
@@ -814,13 +827,7 @@ export default function App() {
       <ZoomProvider>
       <ZoomControls />
       <div className={`app layout-${layoutWidth}`}>
-        <div className="app-toolbar">
-          <ThemeToggle />
-          <SettingsMenu
-            navigationTransitionsEnabled={navigationTransitionsEnabled}
-            onToggleNavigationTransitions={setNavigationTransitionsEnabled}
-          />
-        </div>
+        {!active && <div className="app-toolbar">{utilityControls}</div>}
         {/* A flex column (not overflow:auto) so children get a definite height to
             resolve `height: 100%` against — an auto-overflow box lets children
             grow and scroll instead of constraining them, which left every
@@ -831,7 +838,7 @@ export default function App() {
           style={{
             flex: '1 1 0',
             minHeight: 0,
-            marginTop: '60px',
+            marginTop: active ? '0' : '60px',
             display: 'flex',
             flexDirection: 'column',
           }}
