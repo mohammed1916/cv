@@ -390,7 +390,7 @@ function ProblemPage({
 }
 
 function ChatAssistant() {
-  const { openChat, selectMode, toggleSelectMode, attachContext } = useChatContext();
+  const { openChat, closeChat, selectMode, toggleSelectMode, attachContext } = useChatContext();
 
   useEffect(() => {
     if (!selectMode) return undefined;
@@ -409,6 +409,7 @@ function ChatAssistant() {
         classes: typeof element.className === 'string' ? element.className : undefined,
       });
       toggleSelectMode();
+      document.body.classList.remove('chat-select-mode');
       openChat();
     };
     document.addEventListener('click', onSelect, true);
@@ -416,7 +417,7 @@ function ChatAssistant() {
   }, [selectMode, attachContext, toggleSelectMode, openChat]);
 
   return <>
-    <button type="button" className={`chat-launcher ${selectMode ? 'selecting' : ''}`} onClick={selectMode ? toggleSelectMode : openChat} title={selectMode ? 'Click an element to add it to chat' : 'Open algorithm assistant'}>
+    <button type="button" className={`chat-launcher ${selectMode ? 'selecting' : ''}`} onClick={selectMode ? () => { toggleSelectMode(); document.body.classList.remove('chat-select-mode'); closeChat(); } : openChat} title={selectMode ? 'Exit selection and close chat' : 'Open algorithm assistant'}>
       {selectMode ? 'Select element…' : 'Ask AI'}
     </button>
     <ChatDrawer />

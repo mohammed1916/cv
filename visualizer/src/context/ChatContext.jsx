@@ -47,7 +47,7 @@ export function ChatProvider({ children }) {
   const [attachedContext, setAttachedContext] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selectMode, setSelectMode] = useState(false);
-  const [floatingMode, setFloatingMode] = useState(false);
+  const [floatingMode, setFloatingMode] = useState(true);
 
   useEffect(() => {
     try {

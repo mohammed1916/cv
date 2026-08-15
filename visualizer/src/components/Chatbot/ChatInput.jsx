@@ -2,6 +2,11 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import ContextBadge from "./ContextBadge";
 import { captureVisualizer } from "../../services/screenshot";
 
+const InputIcon = ({ name }) => {
+  const paths = { image: 'M3 3h10v10H3V3zm2 7 2-2 2 2 1-1 2 2M5 6h.01', capture: 'M4 5h8v7H4V5zm2-2h4M7 8h2', voice: 'M8 3a2 2 0 0 0-2 2v3a2 2 0 0 0 4 0V5a2 2 0 0 0-2-2zm-4 4a4 4 0 0 0 8 0M8 11v2' };
+  return <svg className="chat-input-icon" viewBox="0 0 16 16" aria-hidden="true"><path d={paths[name]} /></svg>;
+};
+
 /**
  * Chat input bar with:
  * - Textarea (Enter sends, Shift+Enter newline)
@@ -162,7 +167,7 @@ export default function ChatInput({ onSend, attachedContext, onClearContext, dis
           onClick={() => fileInputRef.current?.click()}
           disabled={disabled}
         >
-          Image
+          <InputIcon name="image" />
         </button>
 
         {/* Screenshot */}
@@ -172,7 +177,7 @@ export default function ChatInput({ onSend, attachedContext, onClearContext, dis
           onClick={handleScreenshot}
           disabled={disabled || isCapturing}
         >
-          Capture
+          <InputIcon name="capture" />
         </button>
 
         {/* Mic */}
@@ -182,7 +187,7 @@ export default function ChatInput({ onSend, attachedContext, onClearContext, dis
           onClick={handleMic}
           disabled={disabled}
         >
-          Voice
+          <InputIcon name="voice" />
         </button>
 
       </div>

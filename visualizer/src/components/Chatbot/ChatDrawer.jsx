@@ -124,10 +124,6 @@ export default function ChatDrawer() {
       draggingRef.current = false;
 
       // Snap to zone if hovering
-      if (hoveredZone) {
-        snapToZone(hoveredZone);
-      }
-
       setHoveredZone(null);
       try { window.localStorage.setItem('chat.pos', JSON.stringify(pos)); } catch (err) { void err }
       document.body.style.userSelect = '';
