@@ -147,15 +147,15 @@
   padding: 6px 10px;
   border: 1px solid var(--border);
   border-radius: 10px;
-  background: var(--surface);
+  background: var(--surface2);
   cursor: pointer;
   user-select: none;
   transition: border-color 0.15s ease, background 0.15s ease;
 }
 
 .pc-pattern-label:hover {
-  border-color: var(--border);
-  background: var(--surface);
+  border-color: var(--primary);
+  background: var(--overlay-weak);
 }
 
 .pc-pattern-input {
@@ -180,7 +180,7 @@
 }
 
 .pc-pattern-text {
-  color: var(--text-muted);
+  color: var(--text);
   font-size: 12px;
   font-weight: 600;
 }

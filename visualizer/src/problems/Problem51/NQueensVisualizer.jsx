@@ -16,15 +16,19 @@ import { getExamples } from '../../config/examplesRegistry'
 import "./NQueensVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
-const NQUEENS_PATTERNS = ['init', 'check', 'place', 'skip', 'remove', 'solution']
+const NQUEENS_PATTERNS = ['state_setup', 'candidate_loop', 'conflict_check', 'prune_conflict', 'place', 'recursive_search', 'remove', 'solution', 'done']
 
 const LINE_PATTERN_MAP = {
+  1: 'state_setup',
+  2: 'state_setup',
+  3: 'state_setup',
+  4: 'recursive_search',
   5: 'solution',
-  6: 'check',
-  7: 'check',
-  8: 'skip',
+  6: 'candidate_loop',
+  7: 'conflict_check',
+  8: 'prune_conflict',
   9: 'place',
-  10: 'place',
+  10: 'recursive_search',
   11: 'remove',
 }
 
@@ -69,13 +73,13 @@ function generateSteps(n) {
     for (let col = 0; col < n; col++) {
       steps.push({
         activeLine: 7, boardRef: board.map(r => [...r]),
-        row, col, phase: "check", solutions: solutions.length,
+        row, col, phase: "conflict_check", solutions: solutions.length,
         message: `Row ${row}, Col ${col}: check attacks`,
       });
       if (cols.has(col) || diag1.has(row - col) || diag2.has(row + col)) {
         steps.push({
           activeLine: 8, boardRef: board.map(r => [...r]),
-          row, col, phase: "skip", solutions: solutions.length,
+          row, col, phase: "prune_conflict", solutions: solutions.length,
           message: `(${row},${col}) under attack — skip`,
         });
         continue;
@@ -147,7 +151,7 @@ const ATTACK_COLORS = { row: "#89b4fa", col: "#fab387", diag: "#f38ba8" };
 function BoardPanel({ EXAMPLES, ex, n, board, activeRow, activeCol, phase, attacked, attackers, step, applyEx }) {
   const { gridRef: boardRef, gridSize, getCellCenter } = useGridRayOverlay();
 
-  const showRays = (phase === "check" || phase === "skip") && activeRow >= 0 && activeCol >= 0 && attackers.length > 0;
+  const showRays = (phase === "conflict_check" || phase === "prune_conflict") && activeRow >= 0 && activeCol >= 0 && attackers.length > 0;
   const targetCenter = showRays ? getCellCenter(activeRow, activeCol) : null;
   const rays = (showRays && targetCenter)
     ? attackers
@@ -189,7 +193,7 @@ function BoardPanel({ EXAMPLES, ex, n, board, activeRow, activeCol, phase, attac
                 <motion.div
                   key={`${r}-${c}`}
                   data-cell={`${r}-${c}`}
-                  className={`nq-cell ${isDark ? "dark" : "light"} ${isQueen ? "queen" : ""} ${isActive && phase === "check" ? "checking" : ""} ${isActive && phase === "place" ? "placing" : ""} ${isActive && phase === "skip" ? "skipping" : ""} ${isAttack && isActiveRow ? "attacked" : ""} ${phase === "solution" ? "solution-flash" : ""} ${isAttacker ? "attacker" : ""}`}
+                  className={`nq-cell ${isDark ? "dark" : "light"} ${isQueen ? "queen" : ""} ${isActive && phase === "conflict_check" ? "checking" : ""} ${isActive && phase === "place" ? "placing" : ""} ${isActive && phase === "prune_conflict" ? "skipping" : ""} ${isAttack && isActiveRow ? "attacked" : ""} ${phase === "solution" ? "solution-flash" : ""} ${isAttacker ? "attacker" : ""}`}
                   animate={{ scale: isActive && phase === "place" ? 1.15 : isAttacker ? 1.1 : 1 }}
                   transition={{ type: "spring", stiffness: 400, damping: 20 }}
                 >
@@ -351,4 +355,3 @@ export default function NQueensVisualizer() {
     </div>
   );
 }
-

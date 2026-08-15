@@ -14,12 +14,20 @@ import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { createPortal } from 'react-dom'
 
-const PATTERNS = ['check', 'loop']
+const PATTERNS = ['setup_sets', 'find_root', 'path_compression', 'scan_edges', 'union_roots', 'count_components']
 
 const LINE_PATTERN_MAP = {
-  3: 'loop',
-  12: 'check',
-  13: 'check'
+  3: 'setup_sets',
+  4: 'find_root',
+  5: 'path_compression',
+  6: 'find_root',
+  7: 'union_roots',
+  8: 'find_root',
+  9: 'union_roots',
+  10: 'scan_edges',
+  11: 'scan_edges',
+  12: 'union_roots',
+  13: 'count_components'
 }
 
 
@@ -46,6 +54,7 @@ function generateSteps(isConnected) {
 
   steps.push({
     activeLine: 3,
+    phase: 'setup_sets',
     parent: [...parent],
     connections: [],
     visited: new Set(),
@@ -54,8 +63,20 @@ function generateSteps(isConnected) {
 
   const find = (x) => {
     if (parent[x] === x) return x
-    parent[x] = find(parent[x])
-    return parent[x]
+    const oldParent = parent[x]
+    const root = find(oldParent)
+    if (oldParent !== root) {
+      parent[x] = root
+      steps.push({
+        activeLine: 5,
+        phase: 'path_compression',
+        parent: [...parent],
+        connections: [],
+        visited: new Set([x, oldParent, root]),
+        message: `Path compression: point ${x} directly to root ${root}.`,
+      })
+    }
+    return root
   }
 
   for (let i = 0; i < n; i++) {
@@ -68,6 +89,7 @@ function generateSteps(isConnected) {
           parent[px] = py
           steps.push({
             activeLine: 12,
+            phase: 'union_roots',
             parent: [...parent],
             connections: [[i, j]],
             visited: new Set([i, j]),
@@ -86,6 +108,7 @@ function generateSteps(isConnected) {
 
   steps.push({
     activeLine: 13,
+    phase: 'count_components',
     parent: [...parent],
     connections: [],
     visited: new Set(),

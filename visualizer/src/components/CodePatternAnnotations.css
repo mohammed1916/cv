@@ -28,15 +28,15 @@
   padding: 5px 10px;
   border-radius: 6px;
   border: 1px solid var(--pattern-color);
-  background: rgba(2, 6, 23, 0.85);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  background: var(--surface);
+  box-shadow: 0 4px 12px var(--overlay-medium);
   backdrop-filter: blur(6px);
   white-space: nowrap;
 }
 
 .code-annotation.active .annotation-badge {
-  background: rgba(2, 6, 23, 0.95);
-  box-shadow: 0 0 16px var(--pattern-color), inset 0 0 8px rgba(var(--pattern-color-rgb), 0.1);
+  background: var(--surface2);
+  box-shadow: 0 0 16px var(--pattern-color), inset 0 0 8px var(--overlay-weak);
   border-color: var(--pattern-color);
   border-width: 1.5px;
 }
@@ -51,11 +51,11 @@
 
 .annotation-label {
   font-size: 11px;
-  color: var(--pattern-color);
+  color: var(--text);
   font-weight: 500;
 }
 
 .code-annotation.active .annotation-label {
-  color: var(--surface2);
+  color: var(--text);
   font-weight: 600;
 }

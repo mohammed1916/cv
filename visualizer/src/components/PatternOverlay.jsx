@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useAlgorithmState } from '../hooks/useAlgorithmState';
+import { resolvePattern } from './patternCatalog';
 import './PatternOverlay.css';
 
 const PatternLabels = {
@@ -107,7 +108,9 @@ export default function PatternOverlay({ step, activeLineDom }) {
       };
     }
 
-    return null;
+    // Phases are authored by individual visualizers.  A readable fallback is
+    // preferable to silently showing no teaching cue for an unfamiliar phase.
+    return resolvePattern(step.phase);
   }, [step, algorithmState]);
 
   if (!patternInfo || !activeLineDom) {

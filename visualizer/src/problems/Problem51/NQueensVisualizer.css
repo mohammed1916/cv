@@ -25,7 +25,7 @@
 }
 
 .nq-chip {
-  background: #313244;
+  background: var(--surface2);
   color: var(--code-text);
   border: 2px solid var(--code-line);
   border-radius: 6px;
@@ -36,13 +36,13 @@
 
 .nq-chip.active,
 .nq-chip:hover {
-  border-color: #f5c2e7;
-  color: #d423a3;
+  border-color: var(--primary);
+  color: var(--primary-d);
 }
 
 .nq-panel {
-  background: var(--code-bg);
-  border: 1px solid #313244;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 10px;
   padding: 12px 14px;
 }
@@ -87,43 +87,43 @@
 }
 
 .nq-cell.light {
-  background: #2a2a3a;
+  background: color-mix(in srgb, var(--surface3) 82%, var(--primary) 18%);
 }
 
 .nq-cell.dark {
-  background: #1a1a2a;
+  background: color-mix(in srgb, var(--surface2) 74%, var(--primary-d) 26%);
 }
 
 .nq-cell.queen {
-  background: #1a0830 !important;
-  color: #f5c2e7;
+  background: color-mix(in srgb, var(--primary) 22%, var(--surface)) !important;
+  color: var(--primary-d);
   font-size: 24px;
 }
 
 .nq-cell.checking {
-  background: #1a1200 !important;
-  outline: 2px solid #f9e2af;
+  background: color-mix(in srgb, var(--warning) 18%, var(--surface)) !important;
+  outline: 2px solid var(--warning);
 }
 
 .nq-cell.placing {
-  background: #1a0830 !important;
-  outline: 2px solid #f5c2e7;
-  box-shadow: 0 0 8px #f5c2e766;
+  background: color-mix(in srgb, var(--primary) 22%, var(--surface)) !important;
+  outline: 2px solid var(--primary);
+  box-shadow: 0 0 8px var(--primary-glow);
 }
 
 .nq-cell.skipping {
-  background: #1a0010 !important;
-  outline: 2px solid #f38ba8;
+  background: color-mix(in srgb, var(--error) 16%, var(--surface)) !important;
+  outline: 2px solid var(--error);
 }
 
 .nq-cell.attacked {
-  background: #1a0a0a !important;
-  opacity: 0.6;
+  background: color-mix(in srgb, var(--error) 10%, var(--surface)) !important;
+  opacity: 0.78;
 }
 
 .nq-cell.solution-flash.queen {
-  box-shadow: 0 0 10px #a6e3a155;
-  background: #001a08 !important;
+  box-shadow: 0 0 10px var(--success-glow);
+  background: color-mix(in srgb, var(--success) 20%, var(--surface)) !important;
 }
 
 .nq-trackers {
@@ -139,8 +139,8 @@
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  background: var(--code-bg);
-  border: 1px solid #313244;
+  background: var(--surface2);
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 10px 0;
 }
@@ -199,15 +199,15 @@
   border-radius: 8px;
   font-size: 14px;
   font-weight: 700;
-  background: #1a0830;
-  border: 2px solid #f5c2e7;
-  color: #f5c2e7;
+  background: color-mix(in srgb, var(--success) 14%, var(--surface));
+  border: 2px solid var(--success);
+  color: var(--success-d);
 }
 
 .nq-status {
   padding: 8px 12px;
-  background: var(--code-bg);
-  border: 1px solid #313244;
+  background: var(--surface2);
+  border: 1px solid var(--border);
   border-radius: 8px;
   font-size: 13px;
   color: var(--code-dim);

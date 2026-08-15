@@ -1,20 +1,6 @@
 import { useMemo } from 'react'
 import './CodePatternAnnotations.css'
-
-const PatternInfo = {
-  'init': { icon: '◯', label: 'Initialize', color: '#06b6d4' },
-  'loop': { icon: '⟳', label: 'Iterate', color: '#3b82f6' },
-  'calc_diff': { icon: '−', label: 'Calculate', color: '#f59e0b' },
-  'check_map': { icon: '🔍', label: 'Search', color: '#8b5cf6' },
-  'found': { icon: '✓', label: 'Match Found', color: '#10b981' },
-  'add_map': { icon: '➕', label: 'Store', color: '#ec4899' },
-  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#3b82f6' },
-  'get_vals': { icon: '→', label: 'Get Values', color: '#06b6d4' },
-  'sum': { icon: '+', label: 'Sum', color: '#f59e0b' },
-  'carry': { icon: '↻', label: 'Carry', color: '#ec4899' },
-  'append': { icon: '➕', label: 'Append', color: '#22c55e' },
-  'advance': { icon: '→', label: 'Advance', color: '#3b82f6' },
-}
+import { resolvePattern } from './patternCatalog'
 
 // Standard Monaco Editor line height
 const LINE_HEIGHT = 20
@@ -25,7 +11,7 @@ export default function CodePatternAnnotations({ linePatterns, currentPhase, act
     return Object.entries(linePatterns).map(([line, phase]) => ({
       line: parseInt(line),
       phase,
-      ...PatternInfo[phase],
+      ...resolvePattern(phase),
     }))
   }, [linePatterns])
 
