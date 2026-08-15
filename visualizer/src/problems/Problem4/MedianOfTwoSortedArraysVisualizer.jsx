@@ -567,7 +567,7 @@ function ArrayTape({
   );
 }
 
-function PartitionPointerRail({ step, searchValues, otherValues }) {
+function PartitionPointerRail({ step, searchValues, otherValues, searchName, otherName }) {
   const direction = step?.phase === 'move_left'
     ? 'Cut A is too far right: move high left.'
     : step?.phase === 'move_right'
@@ -578,14 +578,14 @@ function PartitionPointerRail({ step, searchValues, otherValues }) {
   const cutA = step?.partitionA ?? 0
   const cutB = step?.partitionB ?? step?.leftSize ?? 0
   return <div className="median-pointer-lanes">
-    <PointerRail title="A — binary-search lane" values={searchValues} range={{ start: step?.low ?? 0, end: step?.high ?? searchValues.length }} pointers={[
+    <PointerRail title={`A = ${searchName} — binary-search lane`} values={searchValues} partition={cutA} range={{ start: step?.low ?? 0, end: step?.high ?? searchValues.length }} pointers={[
       { id: 'low', label: `low ${step?.low ?? 0}`, index: Math.min(step?.low ?? 0, Math.max(searchValues.length - 1, 0)), tone: 'info' },
       { id: 'high', label: `high ${step?.high ?? searchValues.length}`, index: Math.min(step?.high ?? searchValues.length, Math.max(searchValues.length - 1, 0)), tone: 'warning' },
       { id: 'cut-a', label: `cutA ${cutA}`, index: cutA, tone: 'success', boundary: true },
     ]} />
-    <PointerRail title="B — derived partition" values={otherValues} pointers={[
+    <PointerRail title={`B = ${otherName} — derived cut (not searched)`} values={otherValues} partition={cutB} pointers={[
       { id: 'cut-b', label: `cutB ${cutB}`, index: cutB, tone: 'success', boundary: true },
-    ]} note={`Invariant: cutA (${cutA}) + cutB (${cutB}) = left half (${step?.leftSize ?? 0}). ${direction}`} />
+    ]} note={`Derived, not searched: cutB = left half − cutA = ${step?.leftSize ?? 0} − ${cutA} = ${cutB}. ${direction}`} />
   </div>
 }
 
@@ -807,29 +807,12 @@ export default function MedianOfTwoSortedArraysVisualizer() {
       </div>
 
       <div className="median-panel-body">
-        <ArrayTape
-          title="A"
-          subtitle={`searched array (${prepared.swapped ? "nums2" : "nums1"})`}
-          values={prepared.searchArray}
-          partition={step?.partitionA ?? 0}
-          low={step?.low ?? 0}
-          high={step?.high ?? prepared.searchArray.length}
-          showRange
-          showBounds
-          colorClass="a-tape"
-        />
-        <PartitionPointerRail step={step} searchValues={prepared.searchArray} otherValues={prepared.otherArray} />
-
-        <ArrayTape
-          title="B"
-          subtitle={`other array (${prepared.swapped ? "nums1" : "nums2"})`}
-          values={prepared.otherArray}
-          partition={step?.partitionB ?? leftSize}
-          low={null}
-          high={null}
-          showRange={false}
-          showBounds={false}
-          colorClass="b-tape"
+        <PartitionPointerRail
+          step={step}
+          searchValues={prepared.searchArray}
+          otherValues={prepared.otherArray}
+          searchName={prepared.searchSource}
+          otherName={prepared.otherSource}
         />
       </div>
     </div>

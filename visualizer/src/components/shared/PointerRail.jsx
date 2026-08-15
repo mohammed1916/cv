@@ -7,6 +7,7 @@ export default function PointerRail({
   values = [],
   pointers = [],
   range = null,
+  partition = null,
   note,
 }) {
   return (
@@ -24,7 +25,7 @@ export default function PointerRail({
               <div className="pointer-rail-tags">
                 {at.map((pointer) => <motion.span layout key={pointer.id} className={`pointer-rail-tag ${pointer.tone || 'primary'}`}>{pointer.label}</motion.span>)}
               </div>
-              <div className={`pointer-rail-cell ${at.length ? 'pointed' : ''}`}>{value}</div>
+              <div className={`pointer-rail-cell ${at.length ? 'pointed' : ''} ${partition !== null && index < partition ? 'left-partition' : ''} ${partition !== null && index >= partition ? 'right-partition' : ''}`}>{value}</div>
               <span className="pointer-rail-index">{index}</span>
             </div>
           )
