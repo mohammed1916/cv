@@ -191,7 +191,7 @@ export default function Problem401Visualizer() {
               style={{
                 width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center',
                 backgroundColor: bit === '1' ? '#10b981' : '#334155',
-                color: '#e2e8f0', borderRadius: '3px', fontSize: '11px', fontWeight: 'bold'
+                color: '#5577a4', borderRadius: '3px', fontSize: '11px', fontWeight: 'bold'
               }}
             >
               {bit}
@@ -205,7 +205,7 @@ export default function Problem401Visualizer() {
               style={{
                 width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center',
                 backgroundColor: bit === '1' ? '#10b981' : '#334155',
-                color: '#e2e8f0', borderRadius: '3px', fontSize: '11px', fontWeight: 'bold'
+                color: '#5577a4', borderRadius: '3px', fontSize: '11px', fontWeight: 'bold'
               }}
             >
               {bit}
@@ -222,7 +222,7 @@ export default function Problem401Visualizer() {
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
           <div style={{ display: 'flex', gap: 12, backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
             <div style={{ width: '120px' }}>
-              <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '6px' }}>LEDs Count (n)</div>
+              <div style={{ color: '#627794', fontSize: '13px', marginBottom: '6px' }}>LEDs Count (n)</div>
               <input
                 value={nInput}
                 onChange={(e) => { setNInput(e.target.value); handleReset() }}
@@ -239,7 +239,7 @@ export default function Problem401Visualizer() {
           </div>
 
           {inputError && (
-            <div style={{ color: '#f87171', fontSize: '12px' }}>{inputError}</div>
+            <div style={{ color: '#ea0c0c', fontSize: '12px' }}>{inputError}</div>
           )}
 
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -259,12 +259,12 @@ export default function Problem401Visualizer() {
 
           {step?.currentH !== undefined && step?.currentM !== undefined && (
             <div style={{ backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
-              <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '8px' }}>
+              <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>
                 Current Time: {step.currentH}:{step.currentM < 10 ? '0' + step.currentM : step.currentM}
               </div>
               {renderBinaryWatch(step.currentH, step.currentM)}
               {step?.hBits !== undefined && step?.mBits !== undefined && (
-                <div style={{ marginTop: '8px', color: '#cbd5e1', fontSize: '12px' }}>
+                <div style={{ marginTop: '8px', color: '#5a779b', fontSize: '12px' }}>
                   Hour bits: {step.hBits}, Minute bits: {step.mBits}, Total: {step.hBits + step.mBits}
                 </div>
               )}
@@ -273,7 +273,7 @@ export default function Problem401Visualizer() {
 
           <div style={{ flex: 1, backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: 12, overflow: 'auto' }}>
             <div>
-              <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '8px' }}>Valid Times ({step?.validTimes?.length || 0})</div>
+              <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>Valid Times ({step?.validTimes?.length || 0})</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 4, maxHeight: '200px', overflow: 'auto' }}>
                 {step?.validTimes?.length === 0 ? (
                   <div style={{ color: '#64748b', fontSize: '12px' }}>No valid times yet</div>
@@ -285,7 +285,7 @@ export default function Problem401Visualizer() {
                       animate={{ x: 0, opacity: 1 }}
                       style={{
                         backgroundColor: '#334155', padding: '6px 8px', borderRadius: '4px',
-                        color: '#10b981', fontFamily: 'monospace', fontWeight: 'bold', fontSize: '12px'
+                        color: '#11c589', fontFamily: 'monospace', fontWeight: 'bold', fontSize: '12px'
                       }}
                     >
                       {time}
@@ -298,7 +298,7 @@ export default function Problem401Visualizer() {
             {step?.totalChecked !== undefined && (
               <div style={{ backgroundColor: '#334155', padding: '8px', borderRadius: '4px' }}>
                 <div style={{ color: '#64748b', fontSize: '12px' }}>Progress</div>
-                <div style={{ color: '#10b981', fontSize: '14px', fontWeight: 'bold', marginTop: '4px' }}>
+                <div style={{ color: '#0c865d', fontSize: '14px', fontWeight: 'bold', marginTop: '4px' }}>
                   {step.totalChecked} / 720 combinations checked
                 </div>
                 <div style={{ width: '100%', height: '4px', backgroundColor: '#1e293b', borderRadius: '2px', marginTop: '4px', overflow: 'hidden' }}>

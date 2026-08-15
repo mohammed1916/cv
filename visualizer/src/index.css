@@ -48,6 +48,27 @@
   --text-muted:   #45526b;
   --text-dim:     #5c6b85;
 
+  /* Code surface — Catppuccin Latte. The visualizers already use Catppuccin
+     Mocha (#1e1e2e, #cdd6f4, #a6e3a1 …), so Latte is its official light twin
+     and keeps the syntax hues recognisable across both themes instead of
+     inventing a second scheme. Every colour here clears AA on --code-bg. */
+  --code-bg:      #eff1f5;
+  --code-surface: #e6e9ef;
+  --code-line:    #dce0e8;
+  --code-text:    #4c4f69;
+  --code-dim:     #6c6f85;
+  --code-keyword: #8839ef;
+  --code-string:  #40a02b;
+  --code-number:  #fe640b;
+  --code-func:    #1e66f5;
+  --code-comment: #7c7f93;
+
+  /* Neutral wash layers. Panels used rgba(255,255,255,0.06) for these, which
+     is invisible on a light ground. */
+  --overlay-weak:   rgba(15, 23, 42, 0.05);
+  --overlay-medium: rgba(15, 23, 42, 0.09);
+  --overlay-strong: rgba(15, 23, 42, 0.14);
+
   --radius-sm: 6px;
   --radius:    10px;
   --radius-lg: 16px;
@@ -85,6 +106,22 @@
   --text:         #f1f5f9;
   --text-muted:   #a9b6ca;
   --text-dim:     #8b9ab2;
+
+  /* Catppuccin Mocha — the palette the visualizers were already written in. */
+  --code-bg:      #1e1e2e;
+  --code-surface: #181825;
+  --code-line:    #313244;
+  --code-text:    #cdd6f4;
+  --code-dim:     #a6adc8;
+  --code-keyword: #cba6f7;
+  --code-string:  #a6e3a1;
+  --code-number:  #fab387;
+  --code-func:    #89b4fa;
+  --code-comment: #9399b2;
+
+  --overlay-weak:   rgba(255, 255, 255, 0.06);
+  --overlay-medium: rgba(255, 255, 255, 0.10);
+  --overlay-strong: rgba(255, 255, 255, 0.16);
 }
 
 html {

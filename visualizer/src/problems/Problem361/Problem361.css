@@ -189,7 +189,7 @@ svg {
 }
 
 .code-line-number {
-  color: #94a3b8;
+  color: #627794;
   font-weight: 600;
   min-width: 32px;
   text-align: right;
@@ -208,7 +208,7 @@ svg {
 }
 
 .code-line.active .code-line-number {
-  color: #f59e0b;
+  color: #a36907;
 }
 
 .code-line.active .code-line-text {

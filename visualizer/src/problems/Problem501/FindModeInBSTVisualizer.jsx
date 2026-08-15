@@ -167,7 +167,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -192,7 +192,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.count && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Value Counts</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Value Counts</div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
             <AnimatePresence mode="popLayout">
               {Object.entries(step.count)
@@ -225,8 +225,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.maxCount !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#a78bfa', marginBottom: 6 }}>Max Count</div>
-          <div style={{ fontSize: 16, fontWeight: 700, color: '#c4b5fd' }}>{step.maxCount}</div>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Max Count</div>
+          <div style={{ fontSize: 16, fontWeight: 700, color: '#7957fa' }}>{step.maxCount}</div>
         </div>
       )}
 
@@ -244,7 +244,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
           transition={{ duration: 0.3 }}
         >
           <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Mode</div>
-          <div style={{ fontSize: 16, fontFamily: 'monospace', fontWeight: 'bold', color: '#22c55e' }}>
+          <div style={{ fontSize: 16, fontFamily: 'monospace', fontWeight: 'bold', color: '#178740' }}>
             [{step.result.join(', ')}]
           </div>
         </motion.div>
@@ -318,7 +318,7 @@ export default function FindModeInBSTVisualizer() {
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Tree (level-order, nulls allowed)</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Tree (level-order, nulls allowed)</div>
               <textarea
                 value={treeInput}
                 onChange={(e) => {
@@ -340,7 +340,7 @@ export default function FindModeInBSTVisualizer() {
                 placeholder='[1,null,2,2]'
               />
               {inputError && (
-                <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>
+                <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>
               )}
             </div>
             <VisualizationPanel treeArray={tree} step={step} applyExample={applyExample} examples={examples} />

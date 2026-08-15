@@ -161,7 +161,7 @@ function WordSquareVisualization({ square }) {
           ))}
         </div>
       ) : (
-        <div style={{ fontSize: 12, color: '#94a3b8', fontStyle: 'italic' }}>
+        <div style={{ fontSize: 12, color: '#627794', fontStyle: 'italic' }}>
           No square formed yet
         </div>
       )}

@@ -272,7 +272,7 @@ function ScreenFittingVisualization({ sentence, rows, cols, step }) {
       {/* Result */}
       <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #10b981' }}>
         <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 4 }}>Times Sentence Fits</div>
-        <div style={{ fontSize: 24, fontWeight: 'bold', color: '#10b981' }}>
+        <div style={{ fontSize: 24, fontWeight: 'bold', color: '#0c865d' }}>
           {result}
         </div>
       </div>

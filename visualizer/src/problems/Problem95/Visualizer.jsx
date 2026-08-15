@@ -249,7 +249,7 @@ function TreeCell({ tree, index, highlight }) {
             alignItems: 'center',
             justifyContent: 'center',
             height: CELL_H - 20,
-            color: '#94a3b8',
+            color: '#627794',
             fontSize: 12,
             fontStyle: 'italic',
           }}
@@ -388,7 +388,7 @@ function VisualizationPanel({ step }) {
         }}
       >
         {trees.length === 0 ? (
-          <div style={{ color: '#94a3b8', fontSize: 13, fontStyle: 'italic' }}>
+          <div style={{ color: '#627794', fontSize: 13, fontStyle: 'italic' }}>
             No trees collected yet.
           </div>
         ) : (

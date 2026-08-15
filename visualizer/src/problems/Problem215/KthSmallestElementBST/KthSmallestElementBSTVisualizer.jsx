@@ -209,7 +209,7 @@ function VisualizationPanel({ step, root }) {
 
       {step.result !== undefined && (
         <motion.div style={{ padding: 12, backgroundColor: "#dcfce7", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 16, fontWeight: 700, color: "#10b981" }}>
+          <div style={{ fontSize: 16, fontWeight: 700, color: "#0c865d" }}>
             Result: {step.result}
           </div>
         </motion.div>

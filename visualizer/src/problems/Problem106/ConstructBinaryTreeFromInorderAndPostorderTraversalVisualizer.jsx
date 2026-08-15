@@ -127,7 +127,7 @@ function generateSteps(inorder, postorder) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: '#94a3b8' }}>Press play to start</div>
+  if (!step) return <div style={{ padding: 16, color: '#627794' }}>Press play to start</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>

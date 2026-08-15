@@ -225,7 +225,7 @@ export default function SumOfTwoIntegersVisualizer() {
                   animate={{ opacity: 1, scale: 1 }}
                   style={{ padding: 12, backgroundColor: '#f0fdfa', borderRadius: 6, border: '1px solid #99f6e4' }}
                 >
-                  <div style={{ fontSize: 11, fontWeight: 600, color: '#0d9488', marginBottom: 6 }}>
+                  <div style={{ fontSize: 11, fontWeight: 600, color: '#0c8479', marginBottom: 6 }}>
                     Operation: {step.operation?.toUpperCase()}
                   </div>
                   <div style={{ fontSize: 11, color: '#0f766e', fontFamily: 'monospace' }}>
@@ -250,7 +250,7 @@ export default function SumOfTwoIntegersVisualizer() {
               )}
 
               {step.iteration > 0 && (
-                <div style={{ fontSize: 11, color: '#64748b', padding: 8, backgroundColor: '#f1f5f9', borderRadius: 4 }}>
+                <div style={{ fontSize: 11, color: '#617086', padding: 8, backgroundColor: '#f1f5f9', borderRadius: 4 }}>
                   Iteration {step.iteration} / ~32 bits
                 </div>
               )}

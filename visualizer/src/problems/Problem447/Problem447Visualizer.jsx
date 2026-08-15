@@ -212,7 +212,7 @@ function DistanceMap({ distMap }) {
       </header>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
         {entries.length === 0 ? (
-          <div style={{ fontSize: 11, color: '#94a3b8', fontStyle: 'italic' }}>Empty</div>
+          <div style={{ fontSize: 11, color: '#627794', fontStyle: 'italic' }}>Empty</div>
         ) : (
           entries.map(([distSq, count]) => (
             <motion.div
@@ -319,7 +319,7 @@ function VisualizationPanel({ step, points, EXAMPLES, handleExampleClick, points
         <div style={{ fontSize: 11, fontWeight: 600, color: '#166534', marginBottom: 2 }}>
           Count: {step?.count ?? 0}
         </div>
-        <div style={{ fontSize: 12, color: '#22c55e', lineHeight: 1.4 }}>
+        <div style={{ fontSize: 12, color: '#178740', lineHeight: 1.4 }}>
           A boomerang is 3 points where the distance from A to B equals the distance from A to C.
         </div>
       </div>

@@ -18,7 +18,7 @@
 .viz-story-box p {
   margin: 0;
   font-size: 12px;
-  color: #cdd6f4;
+  color: #4f6ed8;
   font-style: italic;
   line-height: 1.6;
 }
@@ -26,7 +26,7 @@
 .viz-label {
   font-size: 13px;
   font-weight: 600;
-  color: #cdd6f4;
+  color: #4f6ed8;
   margin-bottom: 12px;
 }
 
@@ -82,7 +82,7 @@
 
 .viz-dp-cell .count {
   font-size: 12px;
-  color: #10b981;
+  color: #0c865d;
   margin-top: 4px;
 }
 
@@ -108,7 +108,7 @@
 .viz-stat-box .value {
   font-size: 28px;
   font-weight: 700;
-  color: #10b981;
+  color: #0c865d;
 }
 
 .viz-status-box {
@@ -120,6 +120,6 @@
 
 .viz-status-box .message {
   font-size: 12px;
-  color: #cdd6f4;
+  color: #4f6ed8;
   line-height: 1.6;
 }

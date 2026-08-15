@@ -27,7 +27,7 @@
 .mg-chip.active,
 .mg-chip:hover {
     border-color: #89dceb;
-    color: #89dceb;
+    color: #198093;
 }
 
 .mg-panel {
@@ -109,7 +109,7 @@
     font-family: monospace;
     font-size: 13px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .mg-empty {
@@ -144,16 +144,16 @@
 .mg-tracker-val {
     font-size: 15px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
     font-family: monospace;
 }
 
 .mg-tracker-val.mg-gap {
-    color: #fab387;
+    color: #c65108;
 }
 
 .mg-tracker-val.mg-res {
-    color: #89dceb;
+    color: #198093;
     font-size: 20px;
 }
 

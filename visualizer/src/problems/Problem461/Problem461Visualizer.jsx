@@ -398,7 +398,7 @@ function VisualizationPanel({ step, x, y, EXAMPLES, handleExampleClick, xInput, 
         <div style={{ fontSize: 11, fontWeight: 600, color: '#166534', marginBottom: 2 }}>
           XOR Strategy
         </div>
-        <div style={{ fontSize: 12, color: '#22c55e', lineHeight: 1.4 }}>
+        <div style={{ fontSize: 12, color: '#178740', lineHeight: 1.4 }}>
           XOR two numbers to highlight differing bits. Count set bits in result.
         </div>
       </div>

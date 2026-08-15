@@ -182,7 +182,7 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -207,15 +207,15 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
 
       <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
         <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Input</div>
-        <div style={{ fontSize: 13, color: '#e2e8f0', fontFamily: 'monospace', fontWeight: 600 }}>
+        <div style={{ fontSize: 13, color: '#5577a4', fontFamily: 'monospace', fontWeight: 600 }}>
           [{nums.join(', ')}]
         </div>
       </div>
 
       {step?.currentPath !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#a78bfa', marginBottom: 6 }}>Current Path</div>
-          <div style={{ fontSize: 13, color: '#e2e8f0', fontFamily: 'monospace', fontWeight: 600 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Current Path</div>
+          <div style={{ fontSize: 13, color: '#5577a4', fontFamily: 'monospace', fontWeight: 600 }}>
             [{step.currentPath.join(', ')}] ({step.currentPath.length}/{nums.length})
           </div>
         </div>
@@ -223,7 +223,7 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
 
       {step?.result && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>
             Permutations Found ({step.result.length})
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4, maxHeight: 150, overflowY: 'auto' }}>
@@ -266,7 +266,7 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
           transition={{ duration: 0.3 }}
         >
           <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Total Permutations</div>
-          <div style={{ fontSize: 24, fontWeight: 'bold', color: '#22c55e' }}>{step.result.length}</div>
+          <div style={{ fontSize: 24, fontWeight: 'bold', color: '#178740' }}>{step.result.length}</div>
         </motion.div>
       )}
     </div>
@@ -347,7 +347,7 @@ export default function PermutationsIIVisualizer() {
           inputError={inputError}
         />
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Input Array</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Input Array</div>
         <textarea
           value={numsInput}
           onChange={(e) => {
@@ -369,7 +369,7 @@ export default function PermutationsIIVisualizer() {
           placeholder="[1,1,2]"
         />
         {inputError && (
-          <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>
+          <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>
         )}
       </div>
       <VisualizationPanel nums={nums} step={step} applyExample={applyExample} examples={examples} />

@@ -265,7 +265,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -290,8 +290,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.currentValue !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #22c55e' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#22c55e', marginBottom: 6 }}>Current Node</div>
-          <div style={{ fontSize: 16, color: '#22c55e', fontFamily: 'monospace', fontWeight: 700 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#178740', marginBottom: 6 }}>Current Node</div>
+          <div style={{ fontSize: 16, color: '#178740', fontFamily: 'monospace', fontWeight: 700 }}>
             {step.currentValue}
           </div>
         </div>
@@ -299,8 +299,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.childValue !== undefined && step.phase === 'recurse' && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #38bdf8' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#38bdf8', marginBottom: 6 }}>Recursing on Child</div>
-          <div style={{ fontSize: 16, color: '#38bdf8', fontFamily: 'monospace', fontWeight: 700 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#067db1', marginBottom: 6 }}>Recursing on Child</div>
+          <div style={{ fontSize: 16, color: '#067db1', fontFamily: 'monospace', fontWeight: 700 }}>
             {step.childValue}
           </div>
         </div>
@@ -308,15 +308,15 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.childDepth !== undefined && step.phase === 'compare' && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #f59e0b' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#f59e0b', marginBottom: 6 }}>Depth Comparison</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 12, color: '#e2e8f0' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', marginBottom: 6 }}>Depth Comparison</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 12, color: '#5577a4' }}>
             <div>
-              Child <span style={{ color: '#38bdf8', fontWeight: 600 }}>{step.childValue}</span> depth:{' '}
-              <span style={{ color: '#a78bfa', fontWeight: 600 }}>{step.childDepth}</span>
+              Child <span style={{ color: '#067db1', fontWeight: 600 }}>{step.childValue}</span> depth:{' '}
+              <span style={{ color: '#7e56f8', fontWeight: 600 }}>{step.childDepth}</span>
             </div>
             <div>
               Max so far:{' '}
-              <span style={{ color: '#a78bfa', fontWeight: 600 }}>{step.maxChildDepth}</span>
+              <span style={{ color: '#7e56f8', fontWeight: 600 }}>{step.maxChildDepth}</span>
             </div>
           </div>
         </div>
@@ -324,8 +324,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.returnDepth !== undefined && step.phase === 'return' && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#a78bfa', marginBottom: 6 }}>Returning Depth</div>
-          <div style={{ fontSize: 16, color: '#a78bfa', fontFamily: 'monospace', fontWeight: 700 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Returning Depth</div>
+          <div style={{ fontSize: 16, color: '#7e56f8', fontFamily: 'monospace', fontWeight: 700 }}>
             {step.returnDepth}
           </div>
           <div style={{ fontSize: 11, color: '#64748b', marginTop: 6 }}>From node {step.currentValue}</div>
@@ -351,7 +351,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
               fontSize: 24,
               fontFamily: 'monospace',
               fontWeight: 'bold',
-              color: '#22c55e',
+              color: '#178740',
             }}
           >
             {step.maxDepth}
@@ -364,7 +364,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
           <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Call Stack</div>
           <div style={{ display: 'flex', flexDirection: 'column-reverse', gap: 4 }}>
             {step.callStack.map((val, i) => (
-              <div key={i} style={{ fontSize: 11, color: '#e2e8f0', paddingLeft: `${i * 12}px` }}>
+              <div key={i} style={{ fontSize: 11, color: '#5577a4', paddingLeft: `${i * 12}px` }}>
                 → maxDepth({val})
               </div>
             ))}
@@ -523,7 +523,7 @@ export default function MaxDepthNaryVisualizer() {
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Tree Structure (Nested Array)</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Tree Structure (Nested Array)</div>
               <textarea
                 value={treeInput}
                 onChange={(e) => {
@@ -543,11 +543,11 @@ export default function MaxDepthNaryVisualizer() {
                   resize: 'vertical',
                 }}
               />
-              {inputError && <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
+              {inputError && <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
             </div>
 
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 8, overflow: 'auto' }}>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0' }}>Tree Visualization</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4' }}>Tree Visualization</div>
               <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <TreeVisualization root={tree} nodeMap={nodeMap} step={step} canvasWidth={360} canvasHeight={280} />
               </div>

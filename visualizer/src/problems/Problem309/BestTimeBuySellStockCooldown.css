@@ -265,15 +265,15 @@
 }
 
 .cooldown-value.hold {
-  color: #ec4899;
+  color: #e0177a;
 }
 
 .cooldown-value.sold {
-  color: #a6e3a1;
+  color: #2f8628;
 }
 
 .cooldown-value.rest {
-  color: #89dceb;
+  color: #198093;
 }
 
 .cooldown-transition {

@@ -168,7 +168,7 @@ function VisualizationPanel({ radius, step, applyEx }) {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(70px, 1fr))', gap: 8 }}>
         <div style={{ padding: 10, backgroundColor: '#f0fdf4', borderRadius: 6, border: '1px solid #10b981' }}>
           <div style={{ fontSize: 10, fontWeight: 600, color: '#166534' }}>X Coord</div>
-          <div style={{ fontSize: 13, fontWeight: 700, color: '#16a34a', fontFamily: 'monospace' }}>
+          <div style={{ fontSize: 13, fontWeight: 700, color: '#12873d', fontFamily: 'monospace' }}>
             {step?.x !== undefined ? step.x.toFixed(3) : '—'}
           </div>
         </div>
@@ -182,7 +182,7 @@ function VisualizationPanel({ radius, step, applyEx }) {
 
         <div style={{ padding: 10, backgroundColor: '#fef3c7', borderRadius: 6, border: '1px solid #f59e0b' }}>
           <div style={{ fontSize: 10, fontWeight: 600, color: '#92400e' }}>Distance</div>
-          <div style={{ fontSize: 13, fontWeight: 700, color: '#f59e0b', fontFamily: 'monospace' }}>
+          <div style={{ fontSize: 13, fontWeight: 700, color: '#a36907', fontFamily: 'monospace' }}>
             {step?.distance !== undefined ? step.distance.toFixed(3) : '—'}
           </div>
         </div>
@@ -207,7 +207,7 @@ function VisualizationPanel({ radius, step, applyEx }) {
               </div>
             ))}
             {step.points.length > 5 && (
-              <div style={{ fontSize: 10, color: '#94a3b8' }}>... and {step.points.length - 5} more</div>
+              <div style={{ fontSize: 10, color: '#627794' }}>... and {step.points.length - 5} more</div>
             )}
           </div>
         </div>

@@ -143,7 +143,7 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -167,7 +167,7 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
       )}
 
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Array</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Array</div>
         <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', maxHeight: 120, overflowY: 'auto' }}>
           <AnimatePresence mode="popLayout">
             {nums.map((n, idx) => {
@@ -198,7 +198,7 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
                             ? '#a78bfa'
                             : '#334155',
                     borderColor: isLeft ? '#16a34a' : isRight ? '#d97706' : isMid ? '#0ea5e9' : inMidPair ? '#8b5cf6' : '#64748b',
-                    color: '#e2e8f0',
+                    color: '#5577a4',
                   }}
                   animate={{ scale: isLeft || isRight || isMid ? 1.2 : 1 }}
                   transition={{ duration: 0.2 }}
@@ -214,15 +214,15 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
         <div style={{ padding: 10, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
           <div style={{ fontSize: 10, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Left</div>
-          <div style={{ fontSize: 16, fontWeight: 700, color: '#22c55e' }}>{step?.left ?? '-'}</div>
+          <div style={{ fontSize: 16, fontWeight: 700, color: '#178740' }}>{step?.left ?? '-'}</div>
         </div>
         <div style={{ padding: 10, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
           <div style={{ fontSize: 10, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Mid</div>
-          <div style={{ fontSize: 16, fontWeight: 700, color: '#38bdf8' }}>{step?.mid !== undefined ? step.mid : '-'}</div>
+          <div style={{ fontSize: 16, fontWeight: 700, color: '#067db1' }}>{step?.mid !== undefined ? step.mid : '-'}</div>
         </div>
         <div style={{ padding: 10, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
           <div style={{ fontSize: 10, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Right</div>
-          <div style={{ fontSize: 16, fontWeight: 700, color: '#f59e0b' }}>{step?.right ?? '-'}</div>
+          <div style={{ fontSize: 16, fontWeight: 700, color: '#a36907' }}>{step?.right ?? '-'}</div>
         </div>
       </div>
 
@@ -238,7 +238,7 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
           <div style={{ fontSize: 11, fontWeight: 600, color: step.pairMatched ? '#38bdf8' : '#f59e0b', marginBottom: 6 }}>
             {step.pairMatched ? 'Pair Matched' : 'Pair Broken'}
           </div>
-          <div style={{ fontSize: 12, color: '#e2e8f0', fontFamily: 'monospace' }}>
+          <div style={{ fontSize: 12, color: '#5577a4', fontFamily: 'monospace' }}>
             {step.pairMatched
               ? `nums[${step.mid}] == nums[${step.mid + 1}] → Single on RIGHT`
               : `nums[${step.mid}] != nums[${step.mid + 1}] → Single on LEFT`}
@@ -260,7 +260,7 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
           transition={{ duration: 0.3 }}
         >
           <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Single Element</div>
-          <div style={{ fontSize: 24, fontWeight: 'bold', color: '#22c55e' }}>{step.result}</div>
+          <div style={{ fontSize: 24, fontWeight: 'bold', color: '#178740' }}>{step.result}</div>
         </motion.div>
       )}
     </div>
@@ -332,7 +332,7 @@ export default function SingleElementInSortedArrayVisualizer() {
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Input Array</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Input Array</div>
               <textarea
                 value={numsInput}
                 onChange={(e) => {
@@ -354,7 +354,7 @@ export default function SingleElementInSortedArrayVisualizer() {
                 placeholder="[1,1,2,3,3,4,4,8,8]"
               />
               {inputError && (
-                <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>
+                <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>
               )}
             </div>
             <VisualizationPanel nums={nums} step={step} applyExample={applyExample} examples={examples} />

@@ -198,7 +198,7 @@ function VisualizationPanel({ points, step, applyEx }) {
         }}
       >
         <div style={{ fontSize: 13, fontWeight: 600, color: '#065f46', marginBottom: 8 }}>Cross Product</div>
-        <div style={{ fontSize: 24, fontWeight: 'bold', color: '#10b981' }}>
+        <div style={{ fontSize: 24, fontWeight: 'bold', color: '#0c865d' }}>
           {step?.crossProduct ?? 0}
         </div>
       </motion.div>

@@ -117,7 +117,7 @@ function VisualizationPanel({ n, step, applyEx }) {
       {step?.n && (
         <div style={{ padding: 10, backgroundColor: '#f0fdf4', borderRadius: 6, border: '1px solid #10b981' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#166534' }}>Digit Count</div>
-          <div style={{ fontSize: 13, fontFamily: 'monospace', fontWeight: 700, color: '#16a34a', marginTop: 4 }}>
+          <div style={{ fontSize: 13, fontFamily: 'monospace', fontWeight: 700, color: '#12873d', marginTop: 4 }}>
             {step.n}-digit numbers
           </div>
         </div>
@@ -127,19 +127,19 @@ function VisualizationPanel({ n, step, applyEx }) {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(80px, 1fr))', gap: 8 }}>
           <div style={{ padding: 10, backgroundColor: '#dbeafe', borderRadius: 6, border: '1px solid #0284c7' }}>
             <div style={{ fontSize: 10, fontWeight: 600, color: '#0c4a6e' }}>First Factor</div>
-            <div style={{ fontSize: 12, fontFamily: 'monospace', fontWeight: 700, color: '#0284c7', marginTop: 4 }}>
+            <div style={{ fontSize: 12, fontFamily: 'monospace', fontWeight: 700, color: '#027bba', marginTop: 4 }}>
               {step.i}
             </div>
           </div>
           <div style={{ padding: 10, backgroundColor: '#cffafe', borderRadius: 6, border: '1px solid #06b6d4' }}>
             <div style={{ fontSize: 10, fontWeight: 600, color: '#0e7490' }}>Second Factor</div>
-            <div style={{ fontSize: 12, fontFamily: 'monospace', fontWeight: 700, color: '#06b6d4', marginTop: 4 }}>
+            <div style={{ fontSize: 12, fontFamily: 'monospace', fontWeight: 700, color: '#048196', marginTop: 4 }}>
               {step.j}
             </div>
           </div>
           <div style={{ padding: 10, backgroundColor: '#fef3c7', borderRadius: 6, border: '1px solid #f59e0b' }}>
             <div style={{ fontSize: 10, fontWeight: 600, color: '#92400e' }}>Product</div>
-            <div style={{ fontSize: 12, fontFamily: 'monospace', fontWeight: 700, color: '#f59e0b', marginTop: 4 }}>
+            <div style={{ fontSize: 12, fontFamily: 'monospace', fontWeight: 700, color: '#a36907', marginTop: 4 }}>
               {step.product}
             </div>
           </div>
@@ -161,7 +161,7 @@ function VisualizationPanel({ n, step, applyEx }) {
         <div style={{ padding: 12, backgroundColor: '#dcfce7', borderRadius: 6, border: '2px solid #22c55e' }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#166534', marginBottom: 6 }}>Current Maximum</div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <div style={{ fontSize: 16, fontFamily: 'monospace', fontWeight: 700, color: '#16a34a' }}>
+            <div style={{ fontSize: 16, fontFamily: 'monospace', fontWeight: 700, color: '#12873d' }}>
               {step.maxPalindrome}
             </div>
             {step.maxI && step.maxJ && (

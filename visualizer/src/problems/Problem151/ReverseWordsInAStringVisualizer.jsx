@@ -141,7 +141,7 @@ function WordBox({ word, isReversed }) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: '#94a3b8' }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: '#627794' }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
@@ -266,7 +266,7 @@ export default function ReverseWordsInAStringVisualizer() {
 
   const statusPanel = (
     <div className="rwias-status">
-      {step?.message && <div style={{ fontSize: 12, color: '#94a3b8' }}>{step.message}</div>}
+      {step?.message && <div style={{ fontSize: 12, color: '#627794' }}>{step.message}</div>}
     </div>
   )
 

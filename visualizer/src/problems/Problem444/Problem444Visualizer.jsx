@@ -248,7 +248,7 @@ function SequencesVisualization({ seqs, currentSeq }) {
             })}
           </div>
         ) : (
-          <div style={{ color: '#94a3b8', fontSize: 12 }}>No sequences</div>
+          <div style={{ color: '#627794', fontSize: 12 }}>No sequences</div>
         )}
       </div>
     </div>
@@ -328,7 +328,7 @@ function RelationshipsVisualization({ relationships, currentRel }) {
             })}
           </div>
         ) : (
-          <div style={{ color: '#94a3b8', fontSize: 12 }}>No relations yet</div>
+          <div style={{ color: '#627794', fontSize: 12 }}>No relations yet</div>
         )}
       </div>
     </div>

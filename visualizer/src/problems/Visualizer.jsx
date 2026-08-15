@@ -104,7 +104,7 @@ function VisualizationPanel({
     <div className="viz-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <div className="viz-panel-head">
         Visualization
-        {inputErrors?.main && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputErrors.main}</span>}
+        {inputErrors?.main && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputErrors.main}</span>}
       </div>
       <div className="viz-panel-body" style={{ flex: 1, overflow: 'auto' }}>
 
@@ -176,7 +176,7 @@ function VisualizationPanel({
 
         {/* Visualization Area - customize this */}
         <div className="viz-area" style={{ flex: 1, border: '1px solid #334155', borderRadius: '4px', padding: 16, backgroundColor: '#0f172a' }}>
-          <div style={{ color: '#94a3b8', fontSize: 14, fontFamily: 'monospace', textAlign: 'center' }}>
+          <div style={{ color: '#627794', fontSize: 14, fontFamily: 'monospace', textAlign: 'center' }}>
             {step ? `Phase: ${step.phase}` : 'Ready to visualize...'}
           </div>
         </div>
@@ -211,10 +211,10 @@ function VariablesPanel({ step }) {
             initial={{ opacity: 0 }}
             exit={{ opacity: 0 }}
           >
-            <div style={{ color: '#94a3b8', fontSize: 12, marginBottom: 4 }}>
+            <div style={{ color: '#627794', fontSize: 12, marginBottom: 4 }}>
               <span style={{ fontFamily: 'monospace', fontWeight: 'bold' }}>phase</span>
             </div>
-            <div style={{ color: '#e2e8f0', fontSize: 14, fontWeight: 'bold', fontFamily: 'monospace' }}>
+            <div style={{ color: '#5577a4', fontSize: 14, fontWeight: 'bold', fontFamily: 'monospace' }}>
               {step.phase}
             </div>
           </motion.div>
@@ -405,10 +405,10 @@ export function createVariableCard(name, value, description, type = 'default') {
       initial={{ opacity: 0 }}
       exit={{ opacity: 0 }}
     >
-      <div style={{ color: '#94a3b8', fontSize: 12, marginBottom: 4 }}>
+      <div style={{ color: '#627794', fontSize: 12, marginBottom: 4 }}>
         <span style={{ fontFamily: 'monospace', fontWeight: 'bold' }}>{name}</span>
       </div>
-      <div style={{ color: '#e2e8f0', fontSize: 14, fontWeight: 'bold', fontFamily: 'monospace', marginBottom: 4 }}>
+      <div style={{ color: '#5577a4', fontSize: 14, fontWeight: 'bold', fontFamily: 'monospace', marginBottom: 4 }}>
         {typeof value === 'object' ? JSON.stringify(value) : String(value)}
       </div>
       {description && (
@@ -455,7 +455,7 @@ export function createInputControls(schema, values, errors, onChange) {
             max={fieldSchema.max}
           />
           {errors?.[key] && (
-            <span style={{ color: '#f87171', fontSize: 12 }}>{errors[key]}</span>
+            <span style={{ color: '#ea0c0c', fontSize: 12 }}>{errors[key]}</span>
           )}
         </div>
       ))}

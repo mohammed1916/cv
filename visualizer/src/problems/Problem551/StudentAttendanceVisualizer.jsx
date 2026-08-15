@@ -117,7 +117,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -143,7 +143,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
       {step?.s && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Record</div>
-          <div style={{ fontSize: 14, fontFamily: 'monospace', color: '#e2e8f0', letterSpacing: '2px' }}>
+          <div style={{ fontSize: 14, fontFamily: 'monospace', color: '#5577a4', letterSpacing: '2px' }}>
             {step.s.split('').map((char, i) => (
               <span
                 key={i}
@@ -170,8 +170,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#f87171', marginBottom: 6 }}>Absence Count</div>
-          <div style={{ fontSize: 18, fontWeight: 'bold', color: '#f87171' }}>{step.absentCount}</div>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#ea0c0c', marginBottom: 6 }}>Absence Count</div>
+          <div style={{ fontSize: 18, fontWeight: 'bold', color: '#ea0c0c' }}>{step.absentCount}</div>
         </motion.div>
       )}
 
@@ -186,8 +186,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#f59e0b', marginBottom: 6 }}>Three Consecutive Lates</div>
-          <div style={{ fontSize: 16, fontWeight: 'bold', color: '#f59e0b' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', marginBottom: 6 }}>Three Consecutive Lates</div>
+          <div style={{ fontSize: 16, fontWeight: 'bold', color: '#a36907' }}>
             {step.hasLateLate ? '✗ Found' : '✓ Not found'}
           </div>
         </motion.div>
@@ -271,7 +271,7 @@ export default function StudentAttendanceVisualizer() {
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Record (P/A/L)</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Record (P/A/L)</div>
               <input
                 type="text"
                 value={record}

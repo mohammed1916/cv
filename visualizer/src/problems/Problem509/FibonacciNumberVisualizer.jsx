@@ -18,11 +18,11 @@ import { createPortal } from 'react-dom'
 const SOLUTION_CODE = getSolutionCode('fibonacci-number')
 
 const PATTERNS = {
-  'init': { icon: '◯', label: 'Initialize', color: '#06b6d4' },
-  'loop': { icon: '⟳', label: 'Iterate', color: '#3b82f6' },
-  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#3b82f6' },
-  'found': { icon: '✓', label: 'Match Found', color: '#10b981' },
-  'done': { icon: '✓', label: 'Complete', color: '#10b981' },
+  'init': { icon: '◯', label: 'Initialize', color: '#048196' },
+  'loop': { icon: '⟳', label: 'Iterate', color: '#1b6df5' },
+  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#1b6df5' },
+  'found': { icon: '✓', label: 'Match Found', color: '#0c865d' },
+  'done': { icon: '✓', label: 'Complete', color: '#0c865d' },
 }
 
 const LINE_PATTERN_MAP = {
@@ -245,10 +245,10 @@ function VisualizationPanel({ n, step, applyEx }) {
         animate={{ opacity: 1 }}
       >
         <div style={{ fontSize: 13, fontWeight: 600, color: '#5b21b6', marginBottom: 8 }}>Result</div>
-        <div style={{ fontSize: 28, fontWeight: 'bold', color: '#8b5cf6' }}>
+        <div style={{ fontSize: 28, fontWeight: 'bold', color: '#8553f6' }}>
           F({step?.n || n}) = {step?.result !== undefined ? step.result : '...'}
         </div>
-        <div style={{ fontSize: 12, color: '#8b5cf6', marginTop: 8 }}>
+        <div style={{ fontSize: 12, color: '#8553f6', marginTop: 8 }}>
           {step?.message || ''}
         </div>
       </motion.div>

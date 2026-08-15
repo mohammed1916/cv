@@ -198,11 +198,11 @@ export default function BurstBalloonsVisualizer() {
                         </div>
                         <div>
                             <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>Coins</div>
-                            <div style={{ fontSize: 13, fontWeight: 'bold', color: '#f59e0b' }}>{step?.coins ?? '—'}</div>
+                            <div style={{ fontSize: 13, fontWeight: 'bold', color: '#a36907' }}>{step?.coins ?? '—'}</div>
                         </div>
                         <div>
                             <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>Total</div>
-                            <div style={{ fontSize: 13, fontWeight: 'bold', color: '#0ea5e9' }}>{step?.val ?? '—'}</div>
+                            <div style={{ fontSize: 13, fontWeight: 'bold', color: '#0b7db0' }}>{step?.val ?? '—'}</div>
                         </div>
                     </div>
 

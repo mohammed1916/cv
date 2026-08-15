@@ -156,7 +156,7 @@ function generateSteps(s, wordDict) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: '#94a3b8' }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: '#627794' }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
@@ -284,7 +284,7 @@ export default function WordBreakIIVisualizer() {
 
   const statusPanel = (
     <div className="wbii-status">
-      <div style={{ fontSize: 11, color: '#cbd5e1', padding: '4px 8px' }}>
+      <div style={{ fontSize: 11, color: '#5a779b', padding: '4px 8px' }}>
         Step {stepIndex >= 0 ? stepIndex + 1 : 0} / {steps.length}
       </div>
     </div>

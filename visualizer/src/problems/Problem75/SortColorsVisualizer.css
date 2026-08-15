@@ -33,7 +33,7 @@
 .sc-chip.active,
 .sc-chip:hover {
     border-color: #89b4fa;
-    color: #89b4fa;
+    color: #1a6df5;
 }
 
 .sc-panel {
@@ -113,15 +113,15 @@
 }
 
 .sc-ptr.lo {
-    color: #f38ba8;
+    color: #e51851;
 }
 
 .sc-ptr.mid {
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .sc-ptr.hi {
-    color: #89b4fa;
+    color: #1a6df5;
 }
 
 .sc-legend {

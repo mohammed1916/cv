@@ -327,10 +327,10 @@ function DirectionIndicator({ direction, value }) {
   if (!direction) return null
 
   const directionMap = {
-    horizontal: { label: '→ Horizontal', color: '#3b82f6' },
-    vertical: { label: '↓ Vertical', color: '#10b981' },
-    diagonal: { label: '↘ Diagonal', color: '#8b5cf6' },
-    'anti-diagonal': { label: '↙ Anti-Diagonal', color: '#ec4899' },
+    horizontal: { label: '→ Horizontal', color: '#1b6df5' },
+    vertical: { label: '↓ Vertical', color: '#0c865d' },
+    diagonal: { label: '↘ Diagonal', color: '#8553f6' },
+    'anti-diagonal': { label: '↙ Anti-Diagonal', color: '#e0177a' },
   }
 
   const info = directionMap[direction] || directionMap.horizontal
@@ -349,7 +349,7 @@ function DirectionIndicator({ direction, value }) {
     >
       <div style={{ fontSize: 11, fontWeight: 600, color: info.color, marginBottom: 6 }}>Scanning Direction</div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ fontSize: 14, color: '#e2e8f0', fontWeight: 700 }}>{info.label}</div>
+        <div style={{ fontSize: 14, color: '#5577a4', fontWeight: 700 }}>{info.label}</div>
         <div style={{ fontSize: 18, color: info.color, fontFamily: 'monospace', fontWeight: 'bold' }}>{value}</div>
       </div>
     </motion.div>
@@ -369,7 +369,7 @@ function VisualizationPanel({
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -393,7 +393,7 @@ function VisualizationPanel({
       )}
 
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Matrix (JSON)</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Matrix (JSON)</div>
         <textarea
           value={matrixInput}
           onChange={(e) => {
@@ -413,12 +413,12 @@ function VisualizationPanel({
             resize: 'vertical',
           }}
         />
-        {inputError && <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
+        {inputError && <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
       </div>
 
       {step?.currentCell && step?.matrix && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Matrix Visualization</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Matrix Visualization</div>
           <MatrixGrid
             matrix={step.matrix}
             currentCell={step.currentCell}
@@ -454,25 +454,25 @@ function VisualizationPanel({
         >
           <div>
             <div style={{ fontSize: 10, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Horizontal</div>
-            <div style={{ fontSize: 14, color: '#3b82f6', fontFamily: 'monospace', fontWeight: 'bold' }}>
+            <div style={{ fontSize: 14, color: '#1b6df5', fontFamily: 'monospace', fontWeight: 'bold' }}>
               {step.directionValues.horizontal}
             </div>
           </div>
           <div>
             <div style={{ fontSize: 10, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Vertical</div>
-            <div style={{ fontSize: 14, color: '#10b981', fontFamily: 'monospace', fontWeight: 'bold' }}>
+            <div style={{ fontSize: 14, color: '#0c865d', fontFamily: 'monospace', fontWeight: 'bold' }}>
               {step.directionValues.vertical}
             </div>
           </div>
           <div>
             <div style={{ fontSize: 10, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Diagonal</div>
-            <div style={{ fontSize: 14, color: '#8b5cf6', fontFamily: 'monospace', fontWeight: 'bold' }}>
+            <div style={{ fontSize: 14, color: '#8553f6', fontFamily: 'monospace', fontWeight: 'bold' }}>
               {step.directionValues.diagonal}
             </div>
           </div>
           <div>
             <div style={{ fontSize: 10, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Anti-Diag</div>
-            <div style={{ fontSize: 14, color: '#ec4899', fontFamily: 'monospace', fontWeight: 'bold' }}>
+            <div style={{ fontSize: 14, color: '#e0177a', fontFamily: 'monospace', fontWeight: 'bold' }}>
               {step.directionValues.antiDiagonal}
             </div>
           </div>
@@ -493,7 +493,7 @@ function VisualizationPanel({
           transition={{ duration: 0.3 }}
         >
           <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Running Maximum</div>
-          <div style={{ fontSize: 20, fontFamily: 'monospace', fontWeight: 'bold', color: '#f59e0b' }}>
+          <div style={{ fontSize: 20, fontFamily: 'monospace', fontWeight: 'bold', color: '#a36907' }}>
             {step.maxLen}
           </div>
         </motion.div>
@@ -513,7 +513,7 @@ function VisualizationPanel({
           transition={{ duration: 0.3 }}
         >
           <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Result</div>
-          <div style={{ fontSize: 20, fontFamily: 'monospace', fontWeight: 'bold', color: '#22c55e' }}>
+          <div style={{ fontSize: 20, fontFamily: 'monospace', fontWeight: 'bold', color: '#178740' }}>
             {step.result}
           </div>
         </motion.div>

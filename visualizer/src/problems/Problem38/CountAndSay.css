@@ -84,7 +84,7 @@
 .count-and-say-title {
   font-weight: 600;
   font-size: 14px;
-  color: #8b5cf6;
+  color: #8553f6;
   font-style: italic;
 }
 
@@ -97,7 +97,7 @@
 
 .count-and-say-story {
   font-size: 12px;
-  color: #94a3b8;
+  color: #627794;
   font-style: italic;
   margin: 0;
   line-height: 1.5;
@@ -112,7 +112,7 @@
 
 .count-and-say-index {
   font-size: 11px;
-  color: #8b5cf6;
+  color: #8553f6;
   margin: 4px 0;
 }
 
@@ -131,7 +131,7 @@
 .count-and-say-info p {
   margin: 0;
   font-size: 12px;
-  color: #94a3b8;
+  color: #627794;
   line-height: 1.5;
 }
 

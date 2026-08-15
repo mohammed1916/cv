@@ -238,7 +238,7 @@ function StackVisualization({ stack }) {
             ))}
           </div>
         ) : (
-          <div style={{ color: '#94a3b8', fontSize: 12 }}>Stack empty</div>
+          <div style={{ color: '#627794', fontSize: 12 }}>Stack empty</div>
         )}
       </div>
     </div>

@@ -19,7 +19,7 @@
     margin: 0;
     font-size: 18px;
     font-weight: 600;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .p366-message {
@@ -181,7 +181,7 @@
 }
 
 .p366-height-row {
-    color: #89b4fa;
+    color: #1a6df5;
     padding: 2px 4px;
     border-radius: 3px;
 }
@@ -225,14 +225,14 @@
 
 .p366-layer-idx {
     font-size: 11px;
-    color: #f38ba8;
+    color: #e51851;
     font-weight: 700;
     min-width: 50px;
 }
 
 .p366-layer-vals {
     font-size: 12px;
-    color: #cdd6f4;
+    color: #4f6ed8;
     font-family: monospace;
     font-weight: 600;
 }
@@ -249,7 +249,7 @@
     background: #313244;
     border-radius: 8px;
     font-size: 13px;
-    color: #6c7086;
+    color: #999cad;
     font-weight: 600;
 }
 

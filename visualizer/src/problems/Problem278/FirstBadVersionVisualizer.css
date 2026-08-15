@@ -19,7 +19,7 @@
   transition: border-color 0.2s, color 0.2s;
 }
 .fbv-chip.active,
-.fbv-chip:hover { border-color: #a6e3a1; color: #a6e3a1; }
+.fbv-chip:hover { border-color: #a6e3a1; color: #2f8628; }
 
 /* Panel card */
 .fbv-panel {
@@ -93,7 +93,7 @@
 .fbv-cell.out {
   background: #191926;
   border-color: #31324466;
-  color: #45475a;
+  color: #7f829d;
 }
 .fbv-cell.result {
   background: #0a2010;
@@ -170,9 +170,9 @@
 .fbv-tracker-val {
   font-size: 20px;
   font-weight: 700;
-  color: #cdd6f4;
+  color: #4f6ed8;
 }
-.fbv-tracker.api .fbv-tracker-val { color: #f9e2af; }
+.fbv-tracker.api .fbv-tracker-val { color: #996d0c; }
 
 /* Result banner */
 .fbv-result {

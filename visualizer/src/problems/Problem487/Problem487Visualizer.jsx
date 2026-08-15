@@ -18,11 +18,11 @@ import { createPortal } from 'react-dom'
 const SOLUTION_CODE = getSolutionCode('max-consecutive-ones-iii')
 
 const PATTERNS = {
-  'init': { icon: '◯', label: 'Initialize', color: '#06b6d4' },
-  'loop': { icon: '⟳', label: 'Iterate', color: '#3b82f6' },
-  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#3b82f6' },
-  'found': { icon: '✓', label: 'Match Found', color: '#10b981' },
-  'done': { icon: '✓', label: 'Complete', color: '#10b981' },
+  'init': { icon: '◯', label: 'Initialize', color: '#048196' },
+  'loop': { icon: '⟳', label: 'Iterate', color: '#1b6df5' },
+  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#1b6df5' },
+  'found': { icon: '✓', label: 'Match Found', color: '#0c865d' },
+  'done': { icon: '✓', label: 'Complete', color: '#0c865d' },
 }
 
 const LINE_PATTERN_MAP = {
@@ -179,19 +179,19 @@ function VisualizationPanel({ nums, step, applyEx, k }) {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 8 }}>
             <div>
               <div style={{ fontSize: 11, color: '#831843', marginBottom: 4 }}>Left</div>
-              <div style={{ fontSize: 16, fontWeight: 700, color: '#ec4899' }}>{step.left}</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: '#e0177a' }}>{step.left}</div>
             </div>
             <div>
               <div style={{ fontSize: 11, color: '#831843', marginBottom: 4 }}>Right</div>
-              <div style={{ fontSize: 16, fontWeight: 700, color: '#ec4899' }}>{step.right}</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: '#e0177a' }}>{step.right}</div>
             </div>
             <div>
               <div style={{ fontSize: 11, color: '#831843', marginBottom: 4 }}>Zeros</div>
-              <div style={{ fontSize: 16, fontWeight: 700, color: '#ec4899' }}>{step.zeros}/{k}</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: '#e0177a' }}>{step.zeros}/{k}</div>
             </div>
             <div>
               <div style={{ fontSize: 11, color: '#831843', marginBottom: 4 }}>Length</div>
-              <div style={{ fontSize: 16, fontWeight: 700, color: '#ec4899' }}>{step.right - step.left + 1}</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: '#e0177a' }}>{step.right - step.left + 1}</div>
             </div>
           </div>
         </motion.div>
@@ -209,10 +209,10 @@ function VisualizationPanel({ nums, step, applyEx, k }) {
         animate={{ opacity: 1 }}
       >
         <div style={{ fontSize: 13, fontWeight: 600, color: '#581c87', marginBottom: 8 }}>Max Consecutive Ones</div>
-        <div style={{ fontSize: 32, fontWeight: 'bold', color: '#a855f7' }}>
+        <div style={{ fontSize: 32, fontWeight: 'bold', color: '#9e42f6' }}>
           {step?.maxLen ?? 0}
         </div>
-        <div style={{ fontSize: 12, color: '#a855f7', marginTop: 8 }}>
+        <div style={{ fontSize: 12, color: '#9e42f6', marginTop: 8 }}>
           {step?.message || ''}
         </div>
       </motion.div>

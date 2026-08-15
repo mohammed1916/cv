@@ -351,7 +351,7 @@ export default function RestoreIPAddressesVisualizer() {
     <div className="restore-ip-panel">
       <div className="restore-ip-panel-head">
         Input
-        {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
+        {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
       </div>
       <div className="restore-ip-panel-body">
         <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>

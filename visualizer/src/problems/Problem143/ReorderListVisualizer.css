@@ -33,7 +33,7 @@
 .rl-chip.active,
 .rl-chip:hover {
     border-color: #89dceb;
-    color: #89dceb;
+    color: #198093;
 }
 
 .rl-panel {
@@ -106,11 +106,11 @@
 }
 
 .rl-ptr-label.slow {
-    color: #89dceb;
+    color: #198093;
 }
 
 .rl-ptr-label.fast {
-    color: #fab387;
+    color: #c65108;
 }
 
 .rl-halves-row {

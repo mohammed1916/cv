@@ -172,13 +172,13 @@ function IntervalVisualization({ intervals, removed, current, title }) {
                     />
                   </div>
                   {isRemoved && (
-                    <div style={{ fontSize: 11, color: '#ef4444', fontWeight: 600 }}>removed</div>
+                    <div style={{ fontSize: 11, color: '#e91414', fontWeight: 600 }}>removed</div>
                   )}
                 </motion.div>
               )
             })
           ) : (
-            <div style={{ color: '#94a3b8', fontSize: 12 }}>No intervals</div>
+            <div style={{ color: '#627794', fontSize: 12 }}>No intervals</div>
           )}
         </div>
       </div>
@@ -202,7 +202,7 @@ function StatsVisualization({ intervals, removed }) {
           border: '2px solid #10b981',
         }}>
           <div style={{ fontSize: 11, color: '#047857', fontWeight: 600 }}>Total Intervals</div>
-          <div style={{ fontSize: 20, fontWeight: 700, color: '#059669', marginTop: 4 }}>
+          <div style={{ fontSize: 20, fontWeight: 700, color: '#04865e', marginTop: 4 }}>
             {intervals.length}
           </div>
         </div>
@@ -213,7 +213,7 @@ function StatsVisualization({ intervals, removed }) {
           border: '2px solid #ef4444',
         }}>
           <div style={{ fontSize: 11, color: '#dc2626', fontWeight: 600 }}>Removed</div>
-          <div style={{ fontSize: 20, fontWeight: 700, color: '#ef4444', marginTop: 4 }}>
+          <div style={{ fontSize: 20, fontWeight: 700, color: '#e91414', marginTop: 4 }}>
             {removed.length}
           </div>
         </div>
@@ -225,7 +225,7 @@ function StatsVisualization({ intervals, removed }) {
           gridColumn: '1 / -1',
         }}>
           <div style={{ fontSize: 11, color: '#0c4a6e', fontWeight: 600 }}>Keep (Minimum)</div>
-          <div style={{ fontSize: 20, fontWeight: 700, color: '#0284c7', marginTop: 4 }}>
+          <div style={{ fontSize: 20, fontWeight: 700, color: '#027bba', marginTop: 4 }}>
             {intervals.length - removed.length}
           </div>
         </div>

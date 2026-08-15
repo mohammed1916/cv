@@ -471,19 +471,19 @@ export default function Problem361Visualizer() {
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
                       <div style={{ padding: 6, backgroundColor: '#dbeafe', borderRadius: 4, textAlign: 'center' }}>
                         <div style={{ color: '#0369a1', fontWeight: 600 }}>Left</div>
-                        <div style={{ fontSize: 14, fontWeight: 'bold', color: '#3b82f6' }}>{step.breakdown.left}</div>
+                        <div style={{ fontSize: 14, fontWeight: 'bold', color: '#1b6df5' }}>{step.breakdown.left}</div>
                       </div>
                       <div style={{ padding: 6, backgroundColor: '#ede9fe', borderRadius: 4, textAlign: 'center' }}>
                         <div style={{ color: '#6d28d9', fontWeight: 600 }}>Right</div>
-                        <div style={{ fontSize: 14, fontWeight: 'bold', color: '#8b5cf6' }}>{step.breakdown.right}</div>
+                        <div style={{ fontSize: 14, fontWeight: 'bold', color: '#8553f6' }}>{step.breakdown.right}</div>
                       </div>
                       <div style={{ padding: 6, backgroundColor: '#d1fae5', borderRadius: 4, textAlign: 'center' }}>
                         <div style={{ color: '#065f46', fontWeight: 600 }}>Up</div>
-                        <div style={{ fontSize: 14, fontWeight: 'bold', color: '#10b981' }}>{step.breakdown.up}</div>
+                        <div style={{ fontSize: 14, fontWeight: 'bold', color: '#0c865d' }}>{step.breakdown.up}</div>
                       </div>
                       <div style={{ padding: 6, backgroundColor: '#fef3c7', borderRadius: 4, textAlign: 'center' }}>
                         <div style={{ color: '#92400e', fontWeight: 600 }}>Down</div>
-                        <div style={{ fontSize: 14, fontWeight: 'bold', color: '#f59e0b' }}>{step.breakdown.down}</div>
+                        <div style={{ fontSize: 14, fontWeight: 'bold', color: '#a36907' }}>{step.breakdown.down}</div>
                       </div>
                     </div>
                   </motion.div>

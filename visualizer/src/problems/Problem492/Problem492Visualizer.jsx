@@ -18,11 +18,11 @@ import { createPortal } from 'react-dom'
 const SOLUTION_CODE = getSolutionCode('construct-the-rectangle')
 
 const PATTERNS = {
-  'init': { icon: '◯', label: 'Initialize', color: '#06b6d4' },
-  'loop': { icon: '⟳', label: 'Iterate', color: '#3b82f6' },
-  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#3b82f6' },
-  'found': { icon: '✓', label: 'Match Found', color: '#10b981' },
-  'done': { icon: '✓', label: 'Complete', color: '#10b981' },
+  'init': { icon: '◯', label: 'Initialize', color: '#048196' },
+  'loop': { icon: '⟳', label: 'Iterate', color: '#1b6df5' },
+  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#1b6df5' },
+  'found': { icon: '✓', label: 'Match Found', color: '#0c865d' },
+  'done': { icon: '✓', label: 'Complete', color: '#0c865d' },
 }
 
 const LINE_PATTERN_MAP = {
@@ -84,7 +84,7 @@ function VisualizationPanel({ area, step, applyEx }) {
             alignItems: 'center',
             justifyContent: 'center',
             fontWeight: 700,
-            color: '#06b6d4',
+            color: '#04788c',
             fontSize: 14
           }}>
             {step.width} × {step.height}
@@ -93,8 +93,8 @@ function VisualizationPanel({ area, step, applyEx }) {
       )}
       <motion.div style={{ padding: 16, backgroundColor: '#cffafe', borderRadius: 6, border: '2px solid #06b6d4', textAlign: 'center' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
         <div style={{ fontSize: 13, fontWeight: 600, color: '#164e63' }}>Dimensions</div>
-        <div style={{ fontSize: 24, fontWeight: 'bold', color: '#06b6d4' }}>{step?.width || 0} × {step?.height || 0}</div>
-        <div style={{ fontSize: 12, color: '#06b6d4', marginTop: 8 }}>{step?.message || ''}</div>
+        <div style={{ fontSize: 24, fontWeight: 'bold', color: '#048196' }}>{step?.width || 0} × {step?.height || 0}</div>
+        <div style={{ fontSize: 12, color: '#048196', marginTop: 8 }}>{step?.message || ''}</div>
       </motion.div>
     </div>
   )

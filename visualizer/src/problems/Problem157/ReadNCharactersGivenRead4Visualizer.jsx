@@ -153,7 +153,7 @@ function CharacterBox({ char, style = {} }) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: '#94a3b8' }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: '#627794' }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
@@ -320,7 +320,7 @@ export default function ReadNCharactersGivenRead4Visualizer() {
     </>)
 
   const statusPanel = (
-    <div className="rn4-status" style={{ padding: 8, fontSize: 12, color: '#94a3b8' }}>
+    <div className="rn4-status" style={{ padding: 8, fontSize: 12, color: '#627794' }}>
       {step ? `Step ${stepIndex + 1} / ${steps.length}: ${step.message || 'Processing'}` : 'Ready'}
     </div>
   )

@@ -148,7 +148,7 @@ function VisualizationPanel({ s, step, applyEx }) {
           }}
         >
           <div style={{ fontSize: 12, color: '#065f46', fontWeight: 600, marginBottom: 8 }}>Position</div>
-          <div style={{ fontSize: 24, fontWeight: 'bold', color: '#10b981' }}>
+          <div style={{ fontSize: 24, fontWeight: 'bold', color: '#0c865d' }}>
             {step?.index ?? 0} / {s.length}
           </div>
         </motion.div>
@@ -162,7 +162,7 @@ function VisualizationPanel({ s, step, applyEx }) {
           }}
         >
           <div style={{ fontSize: 12, color: '#92400e', fontWeight: 600, marginBottom: 8 }}>Repetitions</div>
-          <div style={{ fontSize: 24, fontWeight: 'bold', color: '#f59e0b' }}>
+          <div style={{ fontSize: 24, fontWeight: 'bold', color: '#a36907' }}>
             {step?.repetitions ?? 1}x
           </div>
         </motion.div>

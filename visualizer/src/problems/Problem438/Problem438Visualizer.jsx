@@ -212,7 +212,7 @@ function ResultsVisualization({ s, result }) {
             ))}
           </div>
         ) : (
-          <div style={{ color: '#94a3b8', fontSize: 12 }}>No anagrams found yet</div>
+          <div style={{ color: '#627794', fontSize: 12 }}>No anagrams found yet</div>
         )}
       </div>
     </div>

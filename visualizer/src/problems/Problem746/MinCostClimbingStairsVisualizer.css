@@ -122,15 +122,15 @@
 .mcs-cell-value {
     font-size: 16px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .mcs-cell.current .mcs-cell-value {
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .mcs-cell.computed .mcs-cell-value {
-    color: #89b4fa;
+    color: #1a6df5;
 }
 
 .mcs-metric {
@@ -151,7 +151,7 @@
 
 .mcs-val {
     font-size: 18px;
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .mcs-legend {
@@ -165,7 +165,7 @@
     align-items: center;
     gap: 8px;
     font-size: 12px;
-    color: #a6adc8;
+    color: #6773a1;
 }
 
 .mcs-dot {

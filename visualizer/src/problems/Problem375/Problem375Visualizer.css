@@ -234,7 +234,7 @@
 
 .p375-split-val.big {
   font-size: 1.3rem;
-  color: #e9d5ff;
+  color: #9b40ff;
 }
 
 /* ── State readouts ───────────────────────── */
@@ -263,7 +263,7 @@
   font-weight: 700;
 }
 
-.p375-stat.highlight .p375-stat-val { color: #e9d5ff; }
+.p375-stat.highlight .p375-stat-val { color: #9b40ff; }
 
 .p375-formula {
   margin: 0;
@@ -287,7 +287,7 @@
 }
 
 .p375-result-val {
-  color: #86efac;
+  color: #12873c;
   font-size: 1.6rem;
   font-weight: 800;
   font-family: 'Fira Code', monospace;

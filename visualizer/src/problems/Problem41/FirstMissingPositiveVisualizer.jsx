@@ -163,7 +163,7 @@ export default function FirstMissingPositiveVisualizer() {
                 </div>
                 <div className="fmp-tracker">
                     <span className="fmp-tracker-label">j (swap target)</span>
-                    <span className="fmp-tracker-val" style={{ color: "#f9e2af" }}>{activeJ < 0 ? "—" : activeJ}</span>
+                    <span className="fmp-tracker-val" style={{ color: "#996d0c" }}>{activeJ < 0 ? "—" : activeJ}</span>
                 </div>
             </div>
 

@@ -81,7 +81,7 @@
 
 .cs-label {
   font-size: 13px;
-  color: #94a3b8;
+  color: #627794;
   font-weight: 500;
 }
 
@@ -113,7 +113,7 @@
 .cs-val {
   font-size: 16px;
   font-weight: 600;
-  color: #f8fafc;
+  color: #4879a9;
   font-family: monospace;
 }
 
@@ -152,7 +152,7 @@
 
 .cs-card-value {
   font-size: 18px;
-  color: #f8fafc;
+  color: #4879a9;
   font-family: monospace;
   font-weight: 600;
 }
@@ -164,16 +164,16 @@
 }
 
 .cs-card-value.match {
-  color: #22c55e;
+  color: #178740;
 }
 
 .cs-card-value.exceed {
-  color: #ef4444;
+  color: #e91414;
 }
 
 .cs-section-title {
   font-size: 12px;
-  color: #94a3b8;
+  color: #627794;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 8px;
@@ -203,7 +203,7 @@
 .cs-tree-node {
   font-family: monospace;
   font-size: 13px;
-  color: #94a3b8;
+  color: #627794;
   white-space: pre;
 }
 

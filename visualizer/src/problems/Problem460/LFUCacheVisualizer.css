@@ -35,7 +35,7 @@
 .lfu-chip.active,
 .lfu-chip:hover {
     border-color: #f38ba8;
-    color: #f38ba8;
+    color: #e51851;
 }
 
 .lfu-panel {
@@ -71,7 +71,7 @@
     font-family: monospace;
     font-size: 14px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .lfu-result-val {
@@ -81,17 +81,17 @@
 }
 
 .lfu-result-val.hit {
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .lfu-result-val.miss {
-    color: #f38ba8;
+    color: #e51851;
 }
 
 .lfu-mf {
     font-size: 22px;
     font-weight: 700;
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .lfu-phase {
@@ -102,7 +102,7 @@
 }
 
 .lfu-phase.init {
-    color: #89b4fa;
+    color: #1a6df5;
 }
 
 .lfu-phase.hit {
@@ -131,7 +131,7 @@
 }
 
 .lfu-phase.done {
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .lfu-empty {
@@ -184,14 +184,14 @@
     font-family: monospace;
     font-size: 14px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .lfu-freq {
     font-family: monospace;
     font-size: 14px;
     font-weight: 700;
-    color: #f9e2af;
+    color: #996d0c;
     margin-left: auto;
 }
 
@@ -211,23 +211,23 @@
 }
 
 .lfu-log-entry.hit {
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .lfu-log-entry.miss {
-    color: #f38ba8;
+    color: #e51851;
 }
 
 .lfu-log-entry.update {
-    color: #89dceb;
+    color: #198093;
 }
 
 .lfu-log-entry.insert {
-    color: #cba6f7;
+    color: #964cef;
 }
 
 .lfu-log-entry.evict {
-    color: #f38ba8;
+    color: #e51851;
 }
 
 .lfu-status {

@@ -167,7 +167,7 @@ function generateSteps(input) {
 function VisualizationPanel({ step }) {
   if (!step) {
     return (
-      <div style={{ padding: 16, color: '#7f849c', fontSize: 13 }}>
+      <div style={{ padding: 16, color: '#6e748f', fontSize: 13 }}>
         Press play to reverse the vowels with two pointers.
       </div>
     )
@@ -213,8 +213,8 @@ function VisualizationPanel({ step }) {
             <div key={idx} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, width: 44 }}>
               {/* Pointer markers */}
               <div style={{ height: 18, fontSize: 12, fontWeight: 800 }}>
-                {isLeft && <span style={{ color: '#f38ba8' }}>L{isRight ? '/R' : ''}</span>}
-                {!isLeft && isRight && <span style={{ color: '#fab387' }}>R</span>}
+                {isLeft && <span style={{ color: '#e51851' }}>L{isRight ? '/R' : ''}</span>}
+                {!isLeft && isRight && <span style={{ color: '#c65108' }}>R</span>}
               </div>
               <motion.div
                 layout
@@ -236,7 +236,7 @@ function VisualizationPanel({ step }) {
               >
                 {ch === ' ' ? ' ' : ch}
               </motion.div>
-              <div style={{ fontSize: 11, color: '#7f849c' }}>{idx}</div>
+              <div style={{ fontSize: 11, color: '#6e748f' }}>{idx}</div>
             </div>
           )
         })}

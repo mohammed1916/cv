@@ -152,7 +152,7 @@
   gap: 14px;
   align-items: center;
   font-size: 12px;
-  color: #cbd5e1;
+  color: #5a779b;
 }
 
 .house-robber-i-i-i-legend-item {
@@ -212,7 +212,7 @@
 .house-robber-i-i-i-empty {
   padding: 24px;
   text-align: center;
-  color: #94a3b8;
+  color: #627794;
   font-size: 13px;
 }
 
@@ -292,6 +292,6 @@
 }
 
 .house-robber-i-i-i-answer strong {
-  color: #22c55e;
+  color: #178740;
   font-size: 16px;
 }

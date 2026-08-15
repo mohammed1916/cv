@@ -296,11 +296,11 @@ export default function Problem388Visualizer() {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
                 <div style={{ padding: 10, backgroundColor: '#f0f9ff', borderRadius: 6, fontSize: 12 }}>
                   <div style={{ fontWeight: 600, color: '#0c4a6e' }}>Max Length</div>
-                  <div style={{ fontSize: 14, fontWeight: 700, color: '#0284c7', marginTop: 4 }}>{step.maxLength}</div>
+                  <div style={{ fontSize: 14, fontWeight: 700, color: '#027bba', marginTop: 4 }}>{step.maxLength}</div>
                 </div>
                 <div style={{ padding: 10, backgroundColor: '#fef3c7', borderRadius: 6, fontSize: 12 }}>
                   <div style={{ fontWeight: 600, color: '#92400e' }}>Depth</div>
-                  <div style={{ fontSize: 14, fontWeight: 700, color: '#f59e0b', marginTop: 4 }}>
+                  <div style={{ fontSize: 14, fontWeight: 700, color: '#a36907', marginTop: 4 }}>
                     {step.depth !== undefined ? step.depth : 'N/A'}
                   </div>
                 </div>

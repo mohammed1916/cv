@@ -3,7 +3,7 @@
     flex-direction: column;
     gap: 14px;
     padding: 14px;
-    color: #e2e8f0;
+    color: #5577a4;
 }
 
 .dsg-input-panel,
@@ -56,7 +56,7 @@
 }
 
 .dsg-input-prefix {
-    color: #94a3b8;
+    color: #627794;
     font-family: monospace;
     font-size: 13px;
     white-space: nowrap;
@@ -96,7 +96,7 @@
 }
 
 .dsg-note-title {
-    color: #cbd5e1;
+    color: #5a779b;
     font-size: 12px;
     font-weight: 600;
     margin-bottom: 6px;
@@ -105,7 +105,7 @@
 }
 
 .dsg-note-text {
-    color: #94a3b8;
+    color: #627794;
     font-size: 12px;
     line-height: 1.5;
 }
@@ -215,7 +215,7 @@
     align-items: center;
     justify-content: center;
     gap: 6px;
-    color: #94a3b8;
+    color: #627794;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -227,21 +227,21 @@
 }
 
 .dsg-state-value {
-    color: #f8fafc;
+    color: #4879a9;
     font-size: 18px;
     font-weight: 700;
 }
 
 .dsg-state-value.primary {
-    color: #ef4444;
+    color: #e91414;
 }
 
 .dsg-state-value.success {
-    color: #34d399;
+    color: #1d855f;
 }
 
 .dsg-state-value.cyan {
-    color: #60a5fa;
+    color: #0870f0;
 }
 
 .dsg-direction-display {
@@ -270,7 +270,7 @@
 }
 
 .dsg-status-title {
-    color: #94a3b8;
+    color: #627794;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -315,7 +315,7 @@
 }
 
 .dsg-trace-title {
-    color: #94a3b8;
+    color: #627794;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -352,12 +352,12 @@
 }
 
 .dsg-segment-label {
-    color: #cbd5e1;
+    color: #5a779b;
     font-weight: 600;
 }
 
 .dsg-segment-coord {
-    color: #94a3b8;
+    color: #627794;
     font-family: monospace;
 }
 
@@ -367,7 +367,7 @@
 }
 
 .dsg-info-title {
-    color: #94a3b8;
+    color: #627794;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.05em;

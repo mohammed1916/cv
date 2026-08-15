@@ -45,7 +45,7 @@
 
 .tkf-k-label {
     font-size: 13px;
-    color: #a6adc8;
+    color: #6773a1;
     display: flex;
     align-items: center;
     gap: 4px;
@@ -62,7 +62,7 @@
 }
 
 .tkf-error {
-    color: #f38ba8;
+    color: #e51851;
     font-size: 11px;
 }
 
@@ -108,11 +108,11 @@
 .tkf-count-num {
     font-size: 16px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .tkf-count-cell.active .tkf-count-num {
-    color: #fab387;
+    color: #c65108;
 }
 
 .tkf-count-freq {
@@ -121,7 +121,7 @@
 }
 
 .tkf-count-cell.active .tkf-count-freq {
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .tkf-buckets-row {
@@ -148,7 +148,7 @@
 .tkf-bucket-idx {
     font-size: 11px;
     font-weight: 700;
-    color: #6c7086;
+    color: #999cad;
     background: #313244;
     border: 1px solid #45475a;
     border-radius: 4px;

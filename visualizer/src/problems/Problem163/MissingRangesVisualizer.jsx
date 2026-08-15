@@ -268,7 +268,7 @@ function NumberLine({ nums, lower, upper, currentIdx, gap, finalGap }) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: '#94a3b8' }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: '#627794' }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
@@ -404,7 +404,7 @@ export default function MissingRangesVisualizer() {
   const statusPanel = (
     <div className="mrv-status">
       {step?.message ? (
-        <div style={{ padding: '8px 12px', fontSize: 12, color: '#94a3b8' }}>
+        <div style={{ padding: '8px 12px', fontSize: 12, color: '#627794' }}>
           {step.message}
         </div>
       ) : (

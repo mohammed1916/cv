@@ -38,14 +38,14 @@
 .obb-cell.current {
   border-color: #38bdf8;
   background-color: #0c4a6e;
-  color: #38bdf8;
+  color: #43c1f8;
   box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
 }
 
 .obb-cell.out-of-bounds {
   border-color: #22c55e;
   background-color: #064e3b;
-  color: #22c55e;
+  color: #23cd62;
 }
 
 .obb-cell.disabled {
@@ -80,7 +80,7 @@
 .obb-stat-value {
   font-size: 16px;
   font-weight: 700;
-  color: #38bdf8;
+  color: #067db1;
   font-family: 'monospace';
 }
 
@@ -109,7 +109,7 @@
 .obb-direction.active {
   border-color: #38bdf8;
   background-color: #0c4a6e;
-  color: #38bdf8;
+  color: #43c1f8;
   font-weight: 600;
 }
 

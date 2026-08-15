@@ -163,7 +163,7 @@ function MaxXORVisualization({ nums, step }) {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
             <div style={{ padding: 8, backgroundColor: '#ffffff', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#164e63', fontWeight: 600 }}>Num1</div>
-              <div style={{ fontSize: 14, fontWeight: 'bold', color: '#06b6d4', fontFamily: 'monospace' }}>
+              <div style={{ fontSize: 14, fontWeight: 'bold', color: '#048196', fontFamily: 'monospace' }}>
                 {currentPair.a}
               </div>
               <div style={{ fontSize: 9, color: '#164e63', marginTop: 4, fontFamily: 'monospace' }}>
@@ -172,7 +172,7 @@ function MaxXORVisualization({ nums, step }) {
             </div>
             <div style={{ padding: 8, backgroundColor: '#ffffff', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#164e63', fontWeight: 600 }}>Num2</div>
-              <div style={{ fontSize: 14, fontWeight: 'bold', color: '#06b6d4', fontFamily: 'monospace' }}>
+              <div style={{ fontSize: 14, fontWeight: 'bold', color: '#048196', fontFamily: 'monospace' }}>
                 {currentPair.b}
               </div>
               <div style={{ fontSize: 9, color: '#164e63', marginTop: 4, fontFamily: 'monospace' }}>
@@ -181,7 +181,7 @@ function MaxXORVisualization({ nums, step }) {
             </div>
             <div style={{ padding: 8, backgroundColor: '#dbeafe', borderRadius: 4, border: '2px solid #0284c7' }}>
               <div style={{ fontSize: 10, color: '#0c4a6e', fontWeight: 600 }}>Result</div>
-              <div style={{ fontSize: 14, fontWeight: 'bold', color: '#0284c7', fontFamily: 'monospace' }}>
+              <div style={{ fontSize: 14, fontWeight: 'bold', color: '#027bba', fontFamily: 'monospace' }}>
                 {currentPair.xor}
               </div>
               <div style={{ fontSize: 9, color: '#0c4a6e', marginTop: 4, fontFamily: 'monospace' }}>
@@ -243,7 +243,7 @@ function MaxXORVisualization({ nums, step }) {
       {/* Result */}
       <div style={{ padding: 12, backgroundColor: '#cffafe', borderRadius: 6, border: '2px solid #06b6d4' }}>
         <div style={{ fontSize: 12, fontWeight: 600, color: '#164e63', marginBottom: 4 }}>Maximum XOR</div>
-        <div style={{ fontSize: 24, fontWeight: 'bold', color: '#06b6d4', fontFamily: 'monospace' }}>
+        <div style={{ fontSize: 24, fontWeight: 'bold', color: '#048196', fontFamily: 'monospace' }}>
           {result}
         </div>
         <div style={{ fontSize: 10, color: '#164e63', marginTop: 6, fontFamily: 'monospace' }}>

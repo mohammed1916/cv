@@ -273,7 +273,7 @@ export default function Problem402Visualizer() {
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
           <div style={{ display: 'flex', gap: 12, backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
             <div style={{ flex: 1 }}>
-              <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '6px' }}>Number</div>
+              <div style={{ color: '#627794', fontSize: '13px', marginBottom: '6px' }}>Number</div>
               <input
                 value={numInput}
                 onChange={(e) => { setNumInput(e.target.value); handleReset() }}
@@ -285,7 +285,7 @@ export default function Problem402Visualizer() {
               />
             </div>
             <div style={{ width: '80px' }}>
-              <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '6px' }}>Remove (k)</div>
+              <div style={{ color: '#627794', fontSize: '13px', marginBottom: '6px' }}>Remove (k)</div>
               <input
                 value={kInput}
                 onChange={(e) => { setKInput(e.target.value); handleReset() }}
@@ -301,7 +301,7 @@ export default function Problem402Visualizer() {
           </div>
 
           {inputError && (
-            <div style={{ color: '#f87171', fontSize: '12px' }}>{inputError}</div>
+            <div style={{ color: '#ea0c0c', fontSize: '12px' }}>{inputError}</div>
           )}
 
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -320,7 +320,7 @@ export default function Problem402Visualizer() {
           </div>
 
           <div style={{ backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
-            <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '8px' }}>Digits</div>
+            <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>Digits</div>
             <div style={{ display: 'flex', gap: '2px', flexWrap: 'wrap' }}>
               {step?.digits?.map((digit, idx) => {
                 const inStack = step?.stack?.includes(digit) && idx < step.currentIdx
@@ -334,7 +334,7 @@ export default function Problem402Visualizer() {
                     style={{
                       width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center',
                       backgroundColor: isCurrent ? '#a78bfa' : '#334155',
-                      color: '#e2e8f0', borderRadius: '6px', fontSize: '13px', fontWeight: 'bold',
+                      color: '#5577a4', borderRadius: '6px', fontSize: '13px', fontWeight: 'bold',
                       border: isCurrent ? '2px solid #8b5cf6' : 'none',
                       opacity: step?.phase === 'trim_end' || step?.phase === 'trim_zeros' || step?.phase === 'done' ? 0.5 : 1
                     }}
@@ -347,7 +347,7 @@ export default function Problem402Visualizer() {
           </div>
 
           <div style={{ backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
-            <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '8px' }}>Stack</div>
+            <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>Stack</div>
             <div style={{ display: 'flex', gap: '2px', flexWrap: 'wrap' }}>
               {(!step?.stack || step.stack.length === 0) ? (
                 <div style={{ color: '#64748b', fontSize: '12px' }}>Empty</div>
@@ -373,13 +373,13 @@ export default function Problem402Visualizer() {
           <div style={{ flex: 1, backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: 12 }}>
             <div style={{ display: 'flex', gap: 12 }}>
               <div style={{ flex: 1 }}>
-                <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '6px' }}>K Remaining</div>
-                <div style={{ backgroundColor: '#334155', padding: '8px', borderRadius: '4px', color: '#a78bfa', fontWeight: 'bold', textAlign: 'center' }}>
+                <div style={{ color: '#627794', fontSize: '13px', marginBottom: '6px' }}>K Remaining</div>
+                <div style={{ backgroundColor: '#334155', padding: '8px', borderRadius: '4px', color: '#b69ffb', fontWeight: 'bold', textAlign: 'center' }}>
                   {step?.kRemaining ?? step?.k ?? 0}
                 </div>
               </div>
               <div style={{ flex: 1 }}>
-                <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '6px' }}>Current Index</div>
+                <div style={{ color: '#627794', fontSize: '13px', marginBottom: '6px' }}>Current Index</div>
                 <div style={{ backgroundColor: '#334155', padding: '8px', borderRadius: '4px', color: '#cbd5e1', fontWeight: 'bold', textAlign: 'center' }}>
                   {step?.currentIdx !== undefined ? step.currentIdx : '-'}
                 </div>
@@ -388,8 +388,8 @@ export default function Problem402Visualizer() {
 
             {step?.removed && (
               <div style={{ backgroundColor: '#ef444466', padding: '8px', borderRadius: '4px' }}>
-                <div style={{ color: '#94a3b8', fontSize: '12px' }}>Removed</div>
-                <div style={{ color: '#fca5a5', fontSize: '16px', fontWeight: 'bold' }}>
+                <div style={{ color: '#627794', fontSize: '12px' }}>Removed</div>
+                <div style={{ color: '#eb0808', fontSize: '16px', fontWeight: 'bold' }}>
                   {step.removed}
                 </div>
               </div>
@@ -397,8 +397,8 @@ export default function Problem402Visualizer() {
 
             {step?.result && (
               <div style={{ backgroundColor: '#a78bfa66', padding: '12px', borderRadius: '4px', textAlign: 'center' }}>
-                <div style={{ color: '#94a3b8', fontSize: '12px' }}>Result</div>
-                <div style={{ color: '#a78bfa', fontSize: '20px', fontWeight: 'bold', fontFamily: 'monospace' }}>
+                <div style={{ color: '#627794', fontSize: '12px' }}>Result</div>
+                <div style={{ color: '#7e56f8', fontSize: '20px', fontWeight: 'bold', fontFamily: 'monospace' }}>
                   {step.result}
                 </div>
               </div>

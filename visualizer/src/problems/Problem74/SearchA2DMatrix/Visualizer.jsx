@@ -130,7 +130,7 @@ export default function SearchA2DMatrixVisualizer() {
                         </div>
                         <div>
                             <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>mid</div>
-                            <div style={{ fontSize: 13, fontWeight: 'bold', color: '#f59e0b' }}>{mid >= 0 ? mid : '—'}</div>
+                            <div style={{ fontSize: 13, fontWeight: 'bold', color: '#a36907' }}>{mid >= 0 ? mid : '—'}</div>
                         </div>
                         <div>
                             <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>hi</div>

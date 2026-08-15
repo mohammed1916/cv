@@ -34,7 +34,7 @@
 }
 
 .mps-error {
-    color: #f38ba8;
+    color: #e51851;
     font-size: 11px;
 }
 
@@ -127,7 +127,7 @@
 .mps-val {
     font-size: 18px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .mps-candidates {
@@ -152,12 +152,12 @@
 
 .mps-cand.hi {
     border-color: #a6e3a1;
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .mps-cand.lo {
     border-color: #f38ba8;
-    color: #f38ba8;
+    color: #e51851;
 }
 
 .mps-label {
@@ -187,15 +187,15 @@
 }
 
 .mps-hi {
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .mps-lo {
-    color: #f38ba8;
+    color: #e51851;
 }
 
 .mps-res {
-    color: #cba6f7;
+    color: #964cef;
 }
 
 .mps-result {
@@ -204,7 +204,7 @@
     background: #313244;
     border-radius: 8px;
     font-size: 14px;
-    color: #6c7086;
+    color: #999cad;
 }
 
 .mps-result.ok {
@@ -224,6 +224,6 @@
 }
 
 .mps-status.ok {
-    color: #a6e3a1;
+    color: #2f8628;
     border-color: #a6e3a1;
 }

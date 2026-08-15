@@ -44,7 +44,7 @@
 }
 
 .swm-k-label {
-    color: #a6adc8;
+    color: #6773a1;
     font-size: 13px;
 }
 
@@ -60,7 +60,7 @@
 }
 
 .swm-error {
-    color: #f38ba8;
+    color: #e51851;
     font-size: 12px;
 }
 
@@ -122,15 +122,15 @@
 .swm-cell-val {
     font-size: 16px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .swm-cell.in-window .swm-cell-val {
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .swm-cell.max .swm-cell-val {
-    color: #f9e2af;
+    color: #996d0c;
     font-size: 18px;
 }
 
@@ -178,16 +178,16 @@
 .swm-deq-val {
     font-size: 16px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .swm-deque-cell.front .swm-deq-val {
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .swm-front-tag {
     font-size: 9px;
-    color: #f9e2af;
+    color: #996d0c;
     font-weight: 700;
 }
 

@@ -234,7 +234,7 @@ export default function ConstructBTVisualizer() {
             </div>
         </div>
     ) : (
-        <div style={{ padding: '16px', textAlign: 'center', color: '#a6adc8' }}>
+        <div style={{ padding: '16px', textAlign: 'center', color: '#6773a1' }}>
             Tree visualization will appear when you start playback.
         </div>
     )

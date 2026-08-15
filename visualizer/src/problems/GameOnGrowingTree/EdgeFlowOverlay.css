@@ -25,7 +25,7 @@
 .edge-flow-empty {
   padding: 20px;
   text-align: center;
-  color: #999;
+  color: #757575;
   font-size: 13px;
 }
 
@@ -190,7 +190,7 @@
 }
 
 .edge-flow-explanation strong {
-  color: #fd7e14;
+  color: #be5702;
   font-weight: 600;
 }
 

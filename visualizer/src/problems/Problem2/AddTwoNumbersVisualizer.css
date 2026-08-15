@@ -136,9 +136,9 @@
   transition: all 0.3s ease;
 }
 
-.atn-node.l1 { border-color: #f43f5e; color: #fda4af; }
-.atn-node.l2 { border-color: #0ea5e9; color: #bae6fd; }
-.atn-node.res { border-color: #22c55e; color: #86efac; }
+.atn-node.l1 { border-color: #f43f5e; color: #eb0522; }
+.atn-node.l2 { border-color: #0ea5e9; color: #057bb9; }
+.atn-node.res { border-color: #22c55e; color: #12873c; }
 
 .atn-node.processed {
   background: #0f172a;
@@ -152,7 +152,7 @@
 }
 
 .atn-node-arrow {
-  color: #94a3b8;
+  color: #627794;
   font-size: 18px;
   font-weight: bold;
 }
@@ -178,7 +178,7 @@
   font-size: 14px;
   font-family: monospace;
   font-weight: bold;
-  color: #22c55e;
+  color: #178740;
 }
 
 .atn-tail-indicator {
@@ -233,7 +233,7 @@
   font-family: monospace;
   font-weight: bold;
   font-size: 14px;
-  color: #94a3b8;
+  color: #627794;
   margin-bottom: 8px;
 }
 
@@ -241,7 +241,7 @@
   font-size: 32px;
   font-weight: bold;
   font-family: monospace;
-  color: #f8fafc;
+  color: #4879a9;
 }
 
 .atn-math-box {
@@ -259,27 +259,27 @@
   align-items: center;
   gap: 8px;
   font-family: monospace;
-  color: #94a3b8;
+  color: #627794;
   font-size: 12px;
 }
 
 .atn-math-row.vals {
   font-size: 20px;
   font-weight: bold;
-  color: #f8fafc;
+  color: #4879a9;
 }
 
-.atn-math-row.vals .val1 { color: #f43f5e; }
-.atn-math-row.vals .val2 { color: #0ea5e9; }
-.atn-math-row.vals .val3 { color: #f59e0b; }
-.atn-math-row.vals .val4 { color: #22c55e; }
+.atn-math-row.vals .val1 { color: #e90d33; }
+.atn-math-row.vals .val2 { color: #0b7db0; }
+.atn-math-row.vals .val3 { color: #a36907; }
+.atn-math-row.vals .val4 { color: #178740; }
 
 .atn-math-res {
   margin-top: 8px;
   padding-top: 8px;
   border-top: 1px dashed #475569;
   font-family: monospace;
-  color: #a855f7;
+  color: #9e42f6;
   font-weight: bold;
 }
 

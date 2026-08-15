@@ -118,7 +118,7 @@ function VisualizationPanel({ n, step, applyExample, examples }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -143,20 +143,20 @@ function VisualizationPanel({ n, step, applyExample, examples }) {
 
       <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
         <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Teams</div>
-        <div style={{ fontSize: 16, fontWeight: 700, color: '#38bdf8' }}>{n}</div>
+        <div style={{ fontSize: 16, fontWeight: 700, color: '#067db1' }}>{n}</div>
       </div>
 
       {step?.round !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#a78bfa', marginBottom: 6 }}>Round {step.round}</div>
-          <div style={{ fontSize: 12, color: '#e2e8f0' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Round {step.round}</div>
+          <div style={{ fontSize: 12, color: '#5577a4' }}>
             {step.teams.length} {step.teams.length === 1 ? 'winner' : 'matches'}
           </div>
         </div>
       )}
 
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>
+        <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>
           {step?.round ? `Round ${step.round} Matches` : 'Bracket'}
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6, maxHeight: 200, overflowY: 'auto' }}>
@@ -201,7 +201,7 @@ function VisualizationPanel({ n, step, applyExample, examples }) {
           transition={{ duration: 0.3 }}
         >
           <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>🏆 Champion</div>
-          <div style={{ fontSize: 18, fontFamily: 'monospace', fontWeight: 'bold', color: '#22c55e' }}>
+          <div style={{ fontSize: 18, fontFamily: 'monospace', fontWeight: 'bold', color: '#178740' }}>
             {step.result}
           </div>
         </motion.div>
@@ -265,7 +265,7 @@ export default function OutputContestMatchesVisualizer() {
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Number of Teams</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Number of Teams</div>
               <input
                 type="number"
                 value={nValue}

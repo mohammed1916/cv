@@ -92,11 +92,11 @@
 .lc-key-digit {
     font-size: 16px;
     font-weight: 900;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .lc-key.active .lc-key-digit {
-    color: #89b4fa;
+    color: #1a6df5;
 }
 
 .lc-key-letters {
@@ -111,7 +111,7 @@
 }
 
 .lc-letter.lit {
-    color: #f9e2af;
+    color: #996d0c;
     font-size: 13px;
 }
 

@@ -221,7 +221,7 @@ function VisualizationPanel({ n, step, applyEx }) {
               fontFamily: 'monospace',
               fontSize: 14,
               fontWeight: 600,
-              color: '#94a3b8',
+              color: '#627794',
               textAlign: 'center',
               minWidth: 50
             }}>
@@ -307,10 +307,10 @@ function VisualizationPanel({ n, step, applyEx }) {
         animate={{ opacity: 1 }}
       >
         <div style={{ fontSize: 13, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>Arrangements Found</div>
-        <div style={{ fontSize: 28, fontWeight: 'bold', color: '#0284c7' }}>
+        <div style={{ fontSize: 28, fontWeight: 'bold', color: '#027bba' }}>
           {step?.count !== undefined ? step.count : '...'}
         </div>
-        <div style={{ fontSize: 12, color: '#0284c7', marginTop: 8 }}>
+        <div style={{ fontSize: 12, color: '#027bba', marginTop: 8 }}>
           {step?.message || ''}
         </div>
       </motion.div>

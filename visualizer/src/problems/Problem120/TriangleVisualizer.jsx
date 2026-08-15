@@ -109,7 +109,7 @@ function generateSteps(triangle) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: '#94a3b8' }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: '#627794' }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
@@ -236,7 +236,7 @@ export default function TriangleVisualizer() {
   const statusPanel = (
     <div className="tri-status">
       {step?.message && (
-        <div style={{ padding: 8, fontSize: 12, color: '#e2e8f0' }}>
+        <div style={{ padding: 8, fontSize: 12, color: '#5577a4' }}>
           {step.message}
         </div>
       )}

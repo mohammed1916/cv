@@ -312,7 +312,7 @@ function AbbreviationExplorer({ word, dictionary, step }) {
           animate={{ opacity: 1, scale: 1 }}
         >
           <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 4 }}>Result</div>
-          <div style={{ fontSize: 18, fontFamily: 'monospace', fontWeight: 'bold', color: '#0284c7' }}>"{step.result}"</div>
+          <div style={{ fontSize: 18, fontFamily: 'monospace', fontWeight: 'bold', color: '#027bba' }}>"{step.result}"</div>
         </motion.div>
       )}
 

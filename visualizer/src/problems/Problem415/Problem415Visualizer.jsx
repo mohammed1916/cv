@@ -221,23 +221,23 @@ function AddStringsVisualization({ num1, num2, step }) {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 8 }}>
             <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#ffffff', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#92400e' }}>d1</div>
-              <div style={{ fontSize: 14, fontWeight: 'bold', color: '#f59e0b' }}>{step.digit1}</div>
+              <div style={{ fontSize: 14, fontWeight: 'bold', color: '#a36907' }}>{step.digit1}</div>
             </div>
             <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#ffffff', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#92400e' }}>d2</div>
-              <div style={{ fontSize: 14, fontWeight: 'bold', color: '#f59e0b' }}>{step.digit2}</div>
+              <div style={{ fontSize: 14, fontWeight: 'bold', color: '#a36907' }}>{step.digit2}</div>
             </div>
             <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#ffffff', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#92400e' }}>c</div>
-              <div style={{ fontSize: 14, fontWeight: 'bold', color: '#f59e0b' }}>{step.carry}</div>
+              <div style={{ fontSize: 14, fontWeight: 'bold', color: '#a36907' }}>{step.carry}</div>
             </div>
             <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#ffffff', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#92400e' }}>=</div>
-              <div style={{ fontSize: 14, fontWeight: 'bold', color: '#f59e0b' }}>{step.sum}</div>
+              <div style={{ fontSize: 14, fontWeight: 'bold', color: '#a36907' }}>{step.sum}</div>
             </div>
             <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#fef3c7', borderRadius: 4, border: '2px solid #f59e0b' }}>
               <div style={{ fontSize: 10, color: '#92400e', fontWeight: 600 }}>digit</div>
-              <div style={{ fontSize: 14, fontWeight: 'bold', color: '#f59e0b' }}>{step.resultDigit}</div>
+              <div style={{ fontSize: 14, fontWeight: 'bold', color: '#a36907' }}>{step.resultDigit}</div>
             </div>
           </div>
         </motion.div>
@@ -246,7 +246,7 @@ function AddStringsVisualization({ num1, num2, step }) {
       {/* Result */}
       <div style={{ padding: 12, backgroundColor: '#dbeafe', borderRadius: 6, border: '2px solid #0284c7' }}>
         <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 4 }}>Result</div>
-        <div style={{ fontSize: 20, fontWeight: 'bold', color: '#0284c7', fontFamily: 'monospace' }}>
+        <div style={{ fontSize: 20, fontWeight: 'bold', color: '#027bba', fontFamily: 'monospace' }}>
           "{result}"
         </div>
       </div>

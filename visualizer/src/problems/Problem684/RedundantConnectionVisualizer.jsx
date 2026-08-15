@@ -173,7 +173,7 @@ export default function RedundantConnectionVisualizer() {
           <div key={n} style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 4, border: '1px solid #e2e8f0', textAlign: 'center' }}>
             <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>Node {n}</div>
             <div style={{ fontSize: 12, fontWeight: 'bold', color: '#1e293b' }}>p:{step?.parent?.[n] ?? n}</div>
-            <div style={{ fontSize: 12, fontWeight: 'bold', color: '#0ea5e9' }}>r:{step?.rank?.[n] ?? 1}</div>
+            <div style={{ fontSize: 12, fontWeight: 'bold', color: '#0b7db0' }}>r:{step?.rank?.[n] ?? 1}</div>
           </div>
         ))}
       </div>

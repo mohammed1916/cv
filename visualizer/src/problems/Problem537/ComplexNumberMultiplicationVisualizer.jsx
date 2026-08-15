@@ -137,7 +137,7 @@ function VisualizationPanel({ num1, num2, step, applyExample, examples }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -167,7 +167,7 @@ function VisualizationPanel({ num1, num2, step, applyExample, examples }) {
             style={{
               fontSize: 16,
               fontWeight: 700,
-              color: '#38bdf8',
+              color: '#067db1',
               fontFamily: 'monospace',
               wordBreak: 'break-all',
             }}
@@ -181,7 +181,7 @@ function VisualizationPanel({ num1, num2, step, applyExample, examples }) {
             style={{
               fontSize: 16,
               fontWeight: 700,
-              color: '#38bdf8',
+              color: '#067db1',
               fontFamily: 'monospace',
               wordBreak: 'break-all',
             }}
@@ -193,8 +193,8 @@ function VisualizationPanel({ num1, num2, step, applyExample, examples }) {
 
       {step?.phase === 'parse' && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f59e0b' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#f59e0b', marginBottom: 6 }}>Parsed Values</div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, fontSize: 12, color: '#e2e8f0', fontFamily: 'monospace' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', marginBottom: 6 }}>Parsed Values</div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, fontSize: 12, color: '#5577a4', fontFamily: 'monospace' }}>
             <div>a = {step.a}</div>
             <div>b = {step.b}</div>
             <div>c = {step.c}</div>
@@ -205,22 +205,22 @@ function VisualizationPanel({ num1, num2, step, applyExample, examples }) {
 
       {step?.phase === 'calc_real' && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#a78bfa', marginBottom: 6 }}>Real Part</div>
-          <div style={{ fontSize: 13, color: '#e2e8f0', fontFamily: 'monospace', marginBottom: 6 }}>
-            <span style={{ color: '#22c55e' }}>{step.a * step.c}</span>
-            {' '}- <span style={{ color: '#22c55e' }}>{step.b * step.d}</span>
-            {' '}= <span style={{ color: '#f59e0b', fontWeight: 600 }}>{step.real}</span>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Real Part</div>
+          <div style={{ fontSize: 13, color: '#5577a4', fontFamily: 'monospace', marginBottom: 6 }}>
+            <span style={{ color: '#178740' }}>{step.a * step.c}</span>
+            {' '}- <span style={{ color: '#178740' }}>{step.b * step.d}</span>
+            {' '}= <span style={{ color: '#a36907', fontWeight: 600 }}>{step.real}</span>
           </div>
         </div>
       )}
 
       {step?.phase === 'calc_imag' && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#a78bfa', marginBottom: 6 }}>Imaginary Part</div>
-          <div style={{ fontSize: 13, color: '#e2e8f0', fontFamily: 'monospace', marginBottom: 6 }}>
-            <span style={{ color: '#22c55e' }}>{step.a * step.d}</span>
-            {' '} + <span style={{ color: '#22c55e' }}>{step.b * step.c}</span>
-            {' '}= <span style={{ color: '#f59e0b', fontWeight: 600 }}>{step.imag}</span>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Imaginary Part</div>
+          <div style={{ fontSize: 13, color: '#5577a4', fontFamily: 'monospace', marginBottom: 6 }}>
+            <span style={{ color: '#178740' }}>{step.a * step.d}</span>
+            {' '} + <span style={{ color: '#178740' }}>{step.b * step.c}</span>
+            {' '}= <span style={{ color: '#a36907', fontWeight: 600 }}>{step.imag}</span>
           </div>
         </div>
       )}
@@ -239,7 +239,7 @@ function VisualizationPanel({ num1, num2, step, applyExample, examples }) {
           transition={{ duration: 0.3 }}
         >
           <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Result</div>
-          <div style={{ fontSize: 24, fontWeight: 'bold', color: '#22c55e', fontFamily: 'monospace' }}>
+          <div style={{ fontSize: 24, fontWeight: 'bold', color: '#178740', fontFamily: 'monospace' }}>
             {step.result}
           </div>
         </motion.div>
@@ -305,7 +305,7 @@ export default function ComplexNumberMultiplicationVisualizer() {
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Input</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Input</div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
                 <input
                   type="text"

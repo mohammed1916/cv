@@ -161,18 +161,18 @@
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: #94a3b8;
+  color: #627794;
 }
 
 .nested-list-weight-sum-stat-value {
   font-size: 16px;
   font-weight: 700;
-  color: #e2e8f0;
+  color: #5577a4;
   font-family: monospace;
 }
 
 .nested-list-weight-sum-total .nested-list-weight-sum-stat-value {
-  color: #f59e0b;
+  color: #a36907;
 }
 
 .nested-list-weight-sum-tree {
@@ -193,7 +193,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #e2e8f0;
+  color: #5577a4;
 }
 
 .nested-list-weight-sum-int-value {
@@ -213,7 +213,7 @@
   margin-left: auto;
   font-size: 12px;
   font-weight: 600;
-  color: #22c55e;
+  color: #178740;
 }
 
 .nested-list-weight-sum-list {
@@ -224,7 +224,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #94a3b8;
+  color: #627794;
   font-size: 12px;
 }
 
@@ -250,7 +250,7 @@
 }
 
 .nested-list-weight-sum-empty {
-  color: #94a3b8;
+  color: #627794;
   font-size: 13px;
   padding: 16px;
   text-align: center;

@@ -33,7 +33,7 @@
 .bb-chip.active,
 .bb-chip:hover {
     border-color: #f9e2af;
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .bb-panel {
@@ -89,12 +89,12 @@
 .bb-val {
     font-size: 15px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
     font-family: monospace;
 }
 
 .bb-num.pivot .bb-val {
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .bb-table-wrap {
@@ -119,7 +119,7 @@
     height: 28px;
     text-align: center;
     border: 1px solid #252535;
-    color: #45475a;
+    color: #7e819c;
     background: #181825;
 }
 
@@ -168,16 +168,16 @@
 .bb-tracker-val {
     font-size: 16px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
     font-family: monospace;
 }
 
 .bb-tracker-val.bb-coins {
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .bb-tracker-val.bb-val-v {
-    color: #89dceb;
+    color: #198093;
 }
 
 .bb-result {

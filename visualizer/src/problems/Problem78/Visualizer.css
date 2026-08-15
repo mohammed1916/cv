@@ -35,7 +35,7 @@
 }
 
 .subsets-error {
-    color: #f38ba8;
+    color: #e51851;
     font-size: 11px;
 }
 
@@ -145,11 +145,11 @@
 .subsets-num-val {
     font-size: 16px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .subsets-num-cell.start .subsets-num-val {
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .subsets-num-idx {

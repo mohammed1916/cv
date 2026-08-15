@@ -232,7 +232,7 @@ function SplitArrayVisualization({ nums, m, step }) {
           </div>
           <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#dbeafe', borderRadius: 4, border: '2px solid #0284c7' }}>
             <div style={{ fontSize: 10, color: '#0c4a6e', fontWeight: 600 }}>Can Split?</div>
-            <div style={{ fontSize: 12, fontWeight: 'bold', color: '#0284c7' }}>
+            <div style={{ fontSize: 12, fontWeight: 'bold', color: '#027bba' }}>
               {step?.canSplit === null ? '—' : step.canSplit ? '✓' : '✗'}
             </div>
           </div>
@@ -292,8 +292,8 @@ function SplitArrayVisualization({ nums, m, step }) {
 
           {/* Labels */}
           <div style={{ position: 'absolute', left: 4, top: 2, fontSize: 9, color: '#dc2626', fontWeight: 'bold' }}>L</div>
-          {step?.mid && <div style={{ position: 'absolute', left: `${((step.mid) / totalSum) * 100}%`, top: 2, transform: 'translateX(-50%)', fontSize: 9, color: '#0284c7', fontWeight: 'bold' }}>M</div>}
-          <div style={{ position: 'absolute', right: 4, top: 2, fontSize: 9, color: '#10b981', fontWeight: 'bold' }}>R</div>
+          {step?.mid && <div style={{ position: 'absolute', left: `${((step.mid) / totalSum) * 100}%`, top: 2, transform: 'translateX(-50%)', fontSize: 9, color: '#027bba', fontWeight: 'bold' }}>M</div>}
+          <div style={{ position: 'absolute', right: 4, top: 2, fontSize: 9, color: '#0c865d', fontWeight: 'bold' }}>R</div>
         </div>
       </div>
 
@@ -326,7 +326,7 @@ function SplitArrayVisualization({ nums, m, step }) {
           animate={{ opacity: 1, scale: 1 }}
         >
           <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 4 }}>Result</div>
-          <div style={{ fontSize: 20, fontWeight: 'bold', color: '#0284c7' }}>Minimum Max Sum: {step.result}</div>
+          <div style={{ fontSize: 20, fontWeight: 'bold', color: '#027bba' }}>Minimum Max Sum: {step.result}</div>
         </motion.div>
       )}
 

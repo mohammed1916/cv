@@ -25,7 +25,7 @@
 .source-empty {
   padding: 20px;
   text-align: center;
-  color: #999;
+  color: #757575;
   font-size: 13px;
 }
 
@@ -82,7 +82,7 @@
 
 .formula-equals {
   font-weight: 700;
-  color: #fd7e14;
+  color: #be5702;
   font-size: 14px;
 }
 
@@ -90,7 +90,7 @@
   font-family: 'Monaco', 'Menlo', monospace;
   font-size: 18px;
   font-weight: 700;
-  color: #fd7e14;
+  color: #be5702;
 }
 
 .formula-reason {
@@ -104,7 +104,7 @@
 
 .reason-label {
   font-weight: 600;
-  color: #fd7e14;
+  color: #be5702;
 }
 
 .reason-text {
@@ -141,7 +141,7 @@
 }
 
 .comp-equals {
-  color: #adb5bd;
+  color: #6a7784;
 }
 
 .comp-value {
@@ -202,6 +202,6 @@
 }
 
 .source-explanation strong {
-  color: #fd7e14;
+  color: #be5702;
   font-weight: 600;
 }

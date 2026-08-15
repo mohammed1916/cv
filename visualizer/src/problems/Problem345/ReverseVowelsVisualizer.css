@@ -37,7 +37,7 @@
 }
 
 .rv-error {
-    color: #f38ba8;
+    color: #e51851;
     font-size: 11px;
 }
 
@@ -110,7 +110,7 @@
 
 .rv-val {
     font-size: 18px;
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .rv-legend {
@@ -124,7 +124,7 @@
     align-items: center;
     gap: 8px;
     font-size: 12px;
-    color: #a6adc8;
+    color: #6773a1;
 }
 
 .rv-dot {

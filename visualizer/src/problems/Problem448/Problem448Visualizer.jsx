@@ -223,7 +223,7 @@ function ResultBuilder({ result }) {
       </header>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', minHeight: 80, alignContent: 'flex-start' }}>
         {result.length === 0 ? (
-          <div style={{ fontSize: 11, color: '#94a3b8', fontStyle: 'italic' }}>None</div>
+          <div style={{ fontSize: 11, color: '#627794', fontStyle: 'italic' }}>None</div>
         ) : (
           result.map((num, i) => (
             <motion.div
@@ -330,7 +330,7 @@ function VisualizationPanel({ step, nums, EXAMPLES, handleExampleClick, numsInpu
         <div style={{ fontSize: 11, fontWeight: 600, color: '#166534', marginBottom: 2 }}>
           Story: Finding the Missing Guests
         </div>
-        <div style={{ fontSize: 12, color: '#22c55e', lineHeight: 1.4 }}>
+        <div style={{ fontSize: 12, color: '#178740', lineHeight: 1.4 }}>
           Track which guests attended the party (1 to n), then identify who was invited but didn't show.
         </div>
       </div>

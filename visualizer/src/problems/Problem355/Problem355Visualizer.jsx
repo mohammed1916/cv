@@ -496,7 +496,7 @@ export default function Problem355Visualizer() {
           )}
 
           {!step && (
-            <div style={{ padding: 16, backgroundColor: '#f1f5f9', borderRadius: 6, textAlign: 'center', color: '#64748b' }}>
+            <div style={{ padding: 16, backgroundColor: '#f1f5f9', borderRadius: 6, textAlign: 'center', color: '#617086' }}>
               Press Play or Step to begin.
             </div>
           )}

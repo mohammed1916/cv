@@ -16,11 +16,11 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { createPortal } from 'react-dom'
 
 const PATTERNS = {
-  'init': { icon: '◯', label: 'Initialize', color: '#06b6d4' },
-  'loop': { icon: '⟳', label: 'Iterate', color: '#3b82f6' },
-  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#3b82f6' },
-  'found': { icon: '✓', label: 'Match Found', color: '#10b981' },
-  'done': { icon: '✓', label: 'Complete', color: '#10b981' },
+  'init': { icon: '◯', label: 'Initialize', color: '#048196' },
+  'loop': { icon: '⟳', label: 'Iterate', color: '#1b6df5' },
+  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#1b6df5' },
+  'found': { icon: '✓', label: 'Match Found', color: '#0c865d' },
+  'done': { icon: '✓', label: 'Complete', color: '#0c865d' },
 }
 
 const LINE_PATTERN_MAP = {
@@ -159,7 +159,7 @@ function VisualizationPanel({ n, step, applyEx }) {
       {step?.n && (
         <div style={{ padding: 10, backgroundColor: '#f0fdf4', borderRadius: 6, border: '1px solid #10b981' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#166534' }}>Target Length</div>
-          <div style={{ fontSize: 14, fontFamily: 'monospace', fontWeight: 700, color: '#16a34a' }}>{step.n}</div>
+          <div style={{ fontSize: 14, fontFamily: 'monospace', fontWeight: 700, color: '#12873d' }}>{step.n}</div>
         </div>
       )}
 
@@ -197,7 +197,7 @@ function VisualizationPanel({ n, step, applyEx }) {
       {step?.index !== undefined && (
         <div style={{ padding: 10, backgroundColor: '#fef3c7', borderRadius: 6, border: '2px solid #f59e0b' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#92400e', marginBottom: 4 }}>Current Index Pointer</div>
-          <div style={{ fontSize: 13, fontFamily: 'monospace', fontWeight: 700, color: '#f59e0b' }}>i = {step.index}</div>
+          <div style={{ fontSize: 13, fontFamily: 'monospace', fontWeight: 700, color: '#a36907' }}>i = {step.index}</div>
         </div>
       )}
 
@@ -218,7 +218,7 @@ function VisualizationPanel({ n, step, applyEx }) {
       {step?.result !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#ecfdf5', borderRadius: 6, border: '2px solid #10b981' }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#166534', marginBottom: 4 }}>Count of '1's in First {step.n} Chars</div>
-          <div style={{ fontSize: 20, fontFamily: 'monospace', fontWeight: 700, color: '#16a34a' }}>{step.result}</div>
+          <div style={{ fontSize: 20, fontFamily: 'monospace', fontWeight: 700, color: '#12873d' }}>{step.result}</div>
         </div>
       )}
     </div>

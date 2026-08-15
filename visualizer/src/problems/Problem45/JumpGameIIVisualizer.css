@@ -9,7 +9,7 @@
 }
 .jg2-examples { display: flex; gap: 8px; flex-wrap: wrap; }
 .jg2-chip { background: #313244; color: #cdd6f4; border: 2px solid #45475a; border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer; }
-.jg2-chip.active, .jg2-chip:hover { border-color: #a6e3a1; color: #a6e3a1; }
+.jg2-chip.active, .jg2-chip:hover { border-color: #a6e3a1; color: #2f8628; }
 .jg2-panel { background: #1e1e2e; border: 1px solid #313244; border-radius: 10px; padding: 12px 14px; }
 .jg2-panel-label { font-size: 11px; font-weight: 700; color: #6c7086; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
 .jg2-array-wrap { display: flex; gap: 6px; align-items: flex-end; }
@@ -24,15 +24,15 @@
 .jg2-cell.farthest { box-shadow: 0 0 12px #a6e3a188; border-color: #a6e3a1; }
 .jg2-idx { font-size: 10px; color: #6c7086; }
 .jg2-ptr { font-size: 10px; font-weight: 700; margin-top: 1px; }
-.jg2-ptr.cur-ptr { color: #fab387; }
-.jg2-ptr.far-ptr { color: #a6e3a1; }
-.jg2-ptr.end-ptr { color: #89b4fa; }
+.jg2-ptr.cur-ptr { color: #c65108; }
+.jg2-ptr.far-ptr { color: #2f8628; }
+.jg2-ptr.end-ptr { color: #1a6df5; }
 .jg2-stats-row { display: flex; gap: 12px; flex-wrap: wrap; }
 .jg2-stat { display: flex; gap: 8px; align-items: center; background: #1e1e2e; border: 1px solid #313244; border-radius: 8px; padding: 8px 14px; }
 .jg2-stat-l { font-size: 11px; font-weight: 700; color: #6c7086; text-transform: uppercase; }
 .jg2-stat-v { font-size: 18px; font-weight: 700; font-family: monospace; }
-.jg2-stat-v.jumps { color: #f9e2af; }
-.jg2-stat-v.curend { color: #89b4fa; }
-.jg2-stat-v.farthest { color: #a6e3a1; }
+.jg2-stat-v.jumps { color: #996d0c; }
+.jg2-stat-v.curend { color: #1a6df5; }
+.jg2-stat-v.farthest { color: #2f8628; }
 .jg2-status { padding: 8px 12px; background: #1e1e2e; border: 1px solid #313244; border-radius: 8px; font-size: 13px; color: #a6adc8; min-height: 36px; }
 .jg2-status-bar { padding: 8px 12px; background: #1e1e2e; border-top: 1px solid #313244; font-size: 13px; color: #a6adc8; height: 100%; display: flex; align-items: center; }

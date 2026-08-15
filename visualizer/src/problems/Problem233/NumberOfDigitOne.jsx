@@ -93,7 +93,7 @@ export default function NumberOfDigitOne() {
     left: (<div className="number-of-digit-one-panel">
             <div className="number-of-digit-one-panel-head">
               Input
-              {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
+              {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
             </div>
             <div className="number-of-digit-one-panel-body">
               <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>

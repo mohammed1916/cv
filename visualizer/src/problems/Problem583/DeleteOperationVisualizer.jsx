@@ -214,7 +214,7 @@ function VisualizationPanel({ step, s1, s2, applyExample, examples, inputError }
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -272,7 +272,7 @@ function VisualizationPanel({ step, s1, s2, applyExample, examples, inputError }
       {/* DP Table */}
       {step?.dpTable && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>DP Table (LCS)</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>DP Table (LCS)</div>
           <DPTableDisplay
             dpTable={step.dpTable}
             s1={s1}
@@ -305,13 +305,13 @@ function VisualizationPanel({ step, s1, s2, applyExample, examples, inputError }
       {step?.lcsLen !== undefined && step?.deletions === undefined && (
         <motion.div
           className="do-result"
-          style={{ borderColor: '#22c55e', color: '#22c55e' }}
+          style={{ borderColor: '#22c55e', color: '#178740' }}
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
           <div className="do-result-label">LCS Length</div>
-          <div className="do-result-value" style={{ color: '#22c55e' }}>{step.lcsLen}</div>
+          <div className="do-result-value" style={{ color: '#178740' }}>{step.lcsLen}</div>
           <div className="do-result-desc">
             Computing final result...
           </div>
@@ -395,7 +395,7 @@ export default function DeleteOperationVisualizer() {
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>String 1</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>String 1</div>
               <textarea
                 value={s1Input}
                 onChange={(e) => {
@@ -418,7 +418,7 @@ export default function DeleteOperationVisualizer() {
               />
             </div>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>String 2</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>String 2</div>
               <textarea
                 value={s2Input}
                 onChange={(e) => {
@@ -441,7 +441,7 @@ export default function DeleteOperationVisualizer() {
               />
             </div>
             {inputError && (
-              <div style={{ color: '#f87171', fontSize: 11 }}>{inputError}</div>
+              <div style={{ color: '#ea0c0c', fontSize: 11 }}>{inputError}</div>
             )}
             <VisualizationPanel
               step={step}

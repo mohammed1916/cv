@@ -232,7 +232,7 @@ export default function SerializeDeserializeVisualizer() {
         {phase === "deserialize" && (
           <div className="sd-tracker">
             <span className="sd-tracker-label">ptr</span>
-            <span className="sd-tracker-val" style={{ color: "#f9e2af" }}>{ptr}</span>
+            <span className="sd-tracker-val" style={{ color: "#996d0c" }}>{ptr}</span>
           </div>
         )}
       </div>

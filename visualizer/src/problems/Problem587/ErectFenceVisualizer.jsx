@@ -327,7 +327,7 @@ function VisualizationPanel({ points, hull, step, applyExample, examples }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -386,7 +386,7 @@ function VisualizationPanel({ points, hull, step, applyExample, examples }) {
           transition={{ duration: 0.2 }}
         >
           <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Status</div>
-          <div style={{ fontSize: 13, color: '#e2e8f0' }}>{step.message}</div>
+          <div style={{ fontSize: 13, color: '#5577a4' }}>{step.message}</div>
         </motion.div>
       )}
 
@@ -402,8 +402,8 @@ function VisualizationPanel({ points, hull, step, applyExample, examples }) {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.2 }}
         >
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#a78bfa', marginBottom: 6 }}>Convex Hull</div>
-          <div style={{ fontSize: 12, fontFamily: 'monospace', color: '#e2e8f0', wordBreak: 'break-all' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Convex Hull</div>
+          <div style={{ fontSize: 12, fontFamily: 'monospace', color: '#5577a4', wordBreak: 'break-all' }}>
             {step.hull.map((p, i) => `[${p[0]},${p[1]}]`).join(' → ')}
           </div>
         </motion.div>

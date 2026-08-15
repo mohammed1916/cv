@@ -137,14 +137,14 @@
 .ds-stack-k {
     font-size: 12px;
     font-weight: 700;
-    color: #fab387;
+    color: #c65108;
     font-family: monospace;
 }
 
 .ds-stack-prev {
     font-size: 13px;
     font-weight: 700;
-    color: #cba6f7;
+    color: #964cef;
     font-family: monospace;
 }
 
@@ -181,7 +181,7 @@
 .ds-state-val {
     font-size: 16px;
     font-weight: 700;
-    color: #a6e3a1;
+    color: #2f8628;
     font-family: monospace;
 }
 

@@ -365,7 +365,7 @@ export default function Problem353Visualizer() {
                             justifyContent: 'center',
                             fontSize: 10,
                             fontWeight: 600,
-                            color: '#92400e',
+                            color: '#8a3c0d',
                             boxShadow: '0 2px 6px rgba(245, 158, 11, 0.4)',
                           }}
                         >

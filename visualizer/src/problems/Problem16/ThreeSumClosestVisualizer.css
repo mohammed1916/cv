@@ -116,7 +116,7 @@
   justify-content: center;
   font-weight: bold;
   font-size: 14px;
-  color: #64748b;
+  color: #607086;
   transition: all 0.2s;
   position: relative;
   z-index: 1;
@@ -150,7 +150,7 @@
   left: 50%;
   transform: translateX(-50%);
   font-size: 10px;
-  color: #94a3b8;
+  color: #627794;
   font-weight: 500;
 }
 
@@ -175,7 +175,7 @@
 
 .tsc3-ptr-i {
   background: #eab308;
-  color: #854d0e;
+  color: #6d3f0c;
 }
 
 .tsc3-ptr-l {
@@ -211,12 +211,12 @@
 .tsc3-sum-val {
   font-size: 18px;
   font-weight: bold;
-  color: #0ea5e9;
+  color: #0b7db0;
 }
 
 .tsc3-sum-diff {
   font-size: 12px;
-  color: #64748b;
+  color: #617086;
   padding: 4px 6px;
   background: #f1f5f9;
   border-radius: 3px;
@@ -273,7 +273,7 @@
 .tsc3-closest-value {
   font-size: 20px;
   font-weight: bold;
-  color: #0ea5e9;
+  color: #0b7db0;
 }
 
 .tsc3-result-box {

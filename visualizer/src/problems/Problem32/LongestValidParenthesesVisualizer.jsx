@@ -346,7 +346,7 @@ export default function LongestValidParenthesesVisualizer() {
                 style={{
                   fontSize: 48,
                   fontWeight: "bold",
-                  color: "#16a34a",
+                  color: "#12873d",
                 }}
               >
                 {maxLen}

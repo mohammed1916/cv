@@ -33,13 +33,13 @@
 .s2m-chip.active,
 .s2m-chip:hover {
     border-color: #cba6f7;
-    color: #cba6f7;
+    color: #964cef;
 }
 
 .s2m-target-tag {
     font-size: 14px;
     font-weight: 700;
-    color: #cba6f7;
+    color: #964cef;
     font-family: monospace;
 }
 
@@ -80,7 +80,7 @@
 .s2m-val {
     font-size: 17px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .s2m-flat {
@@ -94,7 +94,7 @@
 }
 
 .s2m-cell.in-range .s2m-val {
-    color: #cba6f7;
+    color: #964cef;
 }
 
 .s2m-cell.mid {
@@ -104,7 +104,7 @@
 }
 
 .s2m-cell.mid .s2m-val {
-    color: #f9e2af;
+    color: #996d0c;
     font-size: 20px;
 }
 
@@ -115,7 +115,7 @@
 }
 
 .s2m-cell.found .s2m-val {
-    color: #a6e3a1;
+    color: #2f8628;
     font-size: 20px;
 }
 

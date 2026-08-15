@@ -9,7 +9,7 @@
 }
 .sn-examples { display: flex; gap: 8px; flex-wrap: wrap; }
 .sn-chip { background: #313244; color: #cdd6f4; border: 2px solid #45475a; border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer; }
-.sn-chip.active, .sn-chip:hover { border-color: #cba6f7; color: #cba6f7; }
+.sn-chip.active, .sn-chip:hover { border-color: #cba6f7; color: #964cef; }
 .sn-panel { background: #1e1e2e; border: 1px solid #313244; border-radius: 10px; padding: 12px 14px; }
 .sn-panel-label { font-size: 11px; font-weight: 700; color: #6c7086; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
 .sn-arr { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -24,12 +24,12 @@
 .sn-bits-row { display: flex; gap: 4px; }
 .sn-bit { width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; border-radius: 5px; font-size: 13px; font-weight: 700; font-family: monospace; border: 1px solid #45475a; }
 .sn-bit.one { background: #1a1535; color: #cba6f7; border-color: #cba6f7; }
-.sn-bit.zero { background: #1e1e2e; color: #45475a; }
+.sn-bit.zero { background: #1e1e2e; color: #8386a0; }
 .sn-bit.cur.one { background: #102030; color: #89b4fa; border-color: #89b4fa; }
-.sn-bit.cur.zero { background: #1e1e2e; color: #45475a; }
+.sn-bit.cur.zero { background: #1e1e2e; color: #8386a0; }
 .sn-bit.result.one { background: #20103a; color: #cba6f7; border-color: #cba6f7; }
-.sn-dec { font-size: 16px; font-weight: 700; color: #cdd6f4; }
-.sn-dec.result { font-size: 22px; color: #cba6f7; }
-.sn-xor-sym { font-size: 16px; font-weight: 700; color: #f38ba8; }
+.sn-dec { font-size: 16px; font-weight: 700; color: #4f6ed8; }
+.sn-dec.result { font-size: 22px; color: #964cef; }
+.sn-xor-sym { font-size: 16px; font-weight: 700; color: #e51851; }
 .sn-result { padding: 10px 14px; border-radius: 8px; font-size: 15px; font-weight: 700; background: #1a0a2e; border: 2px solid #cba6f7; color: #cba6f7; }
 .sn-status { padding: 8px 12px; background: #1e1e2e; border: 1px solid #313244; border-radius: 8px; font-size: 13px; color: #a6adc8; min-height: 36px; }

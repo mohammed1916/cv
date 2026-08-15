@@ -34,13 +34,13 @@
 .ii-chip.active,
 .ii-chip:hover {
     border-color: #fab387;
-    color: #fab387;
+    color: #c65108;
 }
 
 .ii-new-tag {
     font-size: 14px;
     font-weight: 700;
-    color: #fab387;
+    color: #c65108;
     font-family: monospace;
 }
 
@@ -83,7 +83,7 @@
 }
 
 .ii-bar-idx.new {
-    color: #fab387;
+    color: #c65108;
 }
 
 .ii-bar-track {

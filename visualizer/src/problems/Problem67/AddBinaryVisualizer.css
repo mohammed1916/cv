@@ -27,7 +27,7 @@
 .ab-chip.active,
 .ab-chip:hover {
     border-color: #a6e3a1;
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .ab-panel {
@@ -97,7 +97,7 @@
 .ab-calc-title {
     font-size: 12px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
     margin-bottom: 8px;
 }
 
@@ -140,14 +140,14 @@
 
 .ab-calc-label {
     font-size: 10px;
-    color: #a6adc8;
+    color: #6773a1;
     margin-bottom: 4px;
 }
 
 .ab-calc-value {
     font-size: 16px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .ab-result {
@@ -200,7 +200,7 @@
 .ab-pointer-val {
     font-size: 18px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .ab-pointer.i {
@@ -208,7 +208,7 @@
 }
 
 .ab-pointer.i .ab-pointer-val {
-    color: #89b4fa;
+    color: #1a6df5;
 }
 
 .ab-pointer.j {
@@ -216,5 +216,5 @@
 }
 
 .ab-pointer.j .ab-pointer-val {
-    color: #f38ba8;
+    color: #e51851;
 }

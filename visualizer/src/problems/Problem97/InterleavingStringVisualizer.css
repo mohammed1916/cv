@@ -27,7 +27,7 @@
 .is-chip.active,
 .is-chip:hover {
     border-color: #cba6f7;
-    color: #cba6f7;
+    color: #964cef;
 }
 
 .is-strings {
@@ -43,20 +43,20 @@
 }
 
 .is-str-lbl.s1 {
-    color: #89b4fa;
+    color: #1a6df5;
 }
 
 .is-str-lbl.s2 {
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .is-str-lbl.s3 {
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .is-str-val {
     font-family: monospace;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .is-panel {
@@ -100,11 +100,11 @@
 }
 
 .is-th.s1ch {
-    color: #89b4fa;
+    color: #1a6df5;
 }
 
 .is-th.s2ch {
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .is-td {
@@ -125,7 +125,7 @@
 
 .is-td.false {
     background: #1e1e2e;
-    color: #45475a;
+    color: #8386a0;
 }
 
 .is-td.cur {

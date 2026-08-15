@@ -149,7 +149,7 @@ function VisualizationPanel({ root, step }) {
       <div>
         <div style={{ fontSize: 12, fontWeight: 600, color: '#5b21b6', marginBottom: 6 }}>Serialized output</div>
         <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-          {(step.out || []).length === 0 && <span style={{ fontSize: 12, color: '#9ca3af' }}>—</span>}
+          {(step.out || []).length === 0 && <span style={{ fontSize: 12, color: '#6c7686' }}>—</span>}
           {(step.out || []).map((tok, i) => (
             <motion.div key={i} initial={{ scale: 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
               style={{ padding: '4px 8px', borderRadius: 4, fontSize: 12, fontWeight: 700, fontFamily: 'monospace',

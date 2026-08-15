@@ -112,7 +112,7 @@
 .bulb-switcher-example-btn.active {
   background: #fbbf24;
   border-color: #fbbf24;
-  color: white;
+  color: #535353;
 }
 
 .bulb-switcher-examples {
@@ -149,7 +149,7 @@
 .bulb-switcher-input-label {
   font-size: 12px;
   font-weight: 600;
-  color: #e2e8f0;
+  color: #5577a4;
 }
 
 .bulb-switcher-input {
@@ -172,7 +172,7 @@
 .bulb-switcher-hint {
   font-size: 12px;
   line-height: 1.5;
-  color: #94a3b8;
+  color: #627794;
 }
 
 /* --- State readout --- */
@@ -197,14 +197,14 @@
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: #94a3b8;
+  color: #627794;
 }
 
 .bulb-switcher-stat-value {
   font-family: monospace;
   font-size: 18px;
   font-weight: 700;
-  color: #e2e8f0;
+  color: #5577a4;
 }
 
 .bulb-switcher-stat-ans {
@@ -212,7 +212,7 @@
 }
 
 .bulb-switcher-stat-ans .bulb-switcher-stat-value {
-  color: #22c55e;
+  color: #178740;
 }
 
 /* --- Bulb row --- */
@@ -255,7 +255,7 @@
   font-family: monospace;
   font-size: 12px;
   font-weight: 600;
-  color: #e2e8f0;
+  color: #5577a4;
 }
 
 /* --- Legend --- */
@@ -264,7 +264,7 @@
   flex-wrap: wrap;
   gap: 16px;
   font-size: 12px;
-  color: #94a3b8;
+  color: #627794;
 }
 
 .bulb-switcher-legend-item {

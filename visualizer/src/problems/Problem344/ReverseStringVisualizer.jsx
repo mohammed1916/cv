@@ -92,7 +92,7 @@ function RopeFlipVisualization({ arr, step, ex }) {
       {/* Current state */}
       <div style={{ padding: 12, backgroundColor: '#f8fafc', borderRadius: 6, border: '2px solid #0ea5e9' }}>
         <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Reversed String</div>
-        <div style={{ fontSize: 24, fontFamily: 'monospace', fontWeight: 'bold', color: '#0ea5e9', letterSpacing: 4 }}>
+        <div style={{ fontSize: 24, fontFamily: 'monospace', fontWeight: 'bold', color: '#0b7db0', letterSpacing: 4 }}>
           {arr.join("")}
         </div>
       </div>

@@ -175,11 +175,11 @@
 
 .ks-val {
     font-size: 22px;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .ks-val.accent {
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .ks-inorder {
@@ -214,11 +214,11 @@
 .ks-inorder-cell span:last-child {
     font-size: 13px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .ks-inorder-cell.kth span:last-child {
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .ks-result {
@@ -227,7 +227,7 @@
     background: #313244;
     border-radius: 8px;
     font-size: 14px;
-    color: #6c7086;
+    color: #999cad;
 }
 
 .ks-result.done {

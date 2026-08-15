@@ -216,7 +216,7 @@ function VisualizationPanel({ word, step }) {
         }}>
           {step?.result ? '✓ Valid' : '✗ Invalid'}
         </div>
-        <div style={{ fontSize: 12, color: '#ec4899', marginTop: 8 }}>
+        <div style={{ fontSize: 12, color: '#e0177a', marginTop: 8 }}>
           {step?.message || ''}
         </div>
       </motion.div>

@@ -148,7 +148,7 @@ function generateSteps(root) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: '#94a3b8' }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: '#627794' }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
@@ -263,7 +263,7 @@ export default function PopulatingNextRightPointersIIVisualizer() {
   )
 
   const statusPanel = (
-    <div className="pnpii-status" style={{ padding: '8px 12px', fontSize: '12px', color: '#94a3b8', borderTop: '1px solid #334155' }}>
+    <div className="pnpii-status" style={{ padding: '8px 12px', fontSize: '12px', color: '#627794', borderTop: '1px solid #334155' }}>
       {step && step.message ? step.message : 'Ready'}
     </div>
   )

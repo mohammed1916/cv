@@ -256,7 +256,7 @@ export default function Problem379Visualizer() {
                         borderRadius: 4,
                         border: '2px solid #22c55e',
                         backgroundColor: '#86efac',
-                        color: '#15803d',
+                        color: '#126d34',
                         fontSize: 11,
                         fontWeight: 600,
                         minWidth: 32,

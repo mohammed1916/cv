@@ -211,7 +211,7 @@ export default function Problem398Visualizer() {
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
           <div style={{ display: 'flex', gap: 12, backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
             <div style={{ flex: 1 }}>
-              <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '6px' }}>Array (nums)</div>
+              <div style={{ color: '#627794', fontSize: '13px', marginBottom: '6px' }}>Array (nums)</div>
               <input
                 value={numsInput}
                 onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
@@ -223,7 +223,7 @@ export default function Problem398Visualizer() {
               />
             </div>
             <div style={{ width: '80px' }}>
-              <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '6px' }}>Target</div>
+              <div style={{ color: '#627794', fontSize: '13px', marginBottom: '6px' }}>Target</div>
               <input
                 value={targetInput}
                 onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
@@ -238,7 +238,7 @@ export default function Problem398Visualizer() {
           </div>
 
           {inputError && (
-            <div style={{ color: '#f87171', fontSize: '12px' }}>{inputError}</div>
+            <div style={{ color: '#ea0c0c', fontSize: '12px' }}>{inputError}</div>
           )}
 
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -257,7 +257,7 @@ export default function Problem398Visualizer() {
           </div>
 
           <div style={{ backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
-            <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '8px' }}>Array Visualization</div>
+            <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>Array Visualization</div>
             <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
               {nums.map((val, idx) => {
                 const isMatch = val === target
@@ -272,12 +272,12 @@ export default function Problem398Visualizer() {
                       width: '44px', height: '44px', display: 'flex', flexDirection: 'column',
                       alignItems: 'center', justifyContent: 'center', gap: 2,
                       backgroundColor: isSelected ? '#06b6d4' : isMatch ? '#8b5cf6' : '#334155',
-                      color: '#e2e8f0', borderRadius: '6px', fontSize: '13px', fontWeight: 'bold',
+                      color: '#5577a4', borderRadius: '6px', fontSize: '13px', fontWeight: 'bold',
                       border: isSelected ? '2px solid #0ea5e9' : '1px solid transparent',
                     }}
                   >
                     <div>{val}</div>
-                    <div style={{ fontSize: '10px', color: '#cbd5e1' }}>{idx}</div>
+                    <div style={{ fontSize: '10px', color: '#5a779b' }}>{idx}</div>
                   </motion.div>
                 )
               })}
@@ -286,14 +286,14 @@ export default function Problem398Visualizer() {
 
           <div style={{ flex: 1, backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: 12 }}>
             <div>
-              <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '8px' }}>Matching Indices</div>
+              <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>Matching Indices</div>
               <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                 {step?.matchIndices?.map((idx) => (
                   <div
                     key={idx}
                     style={{
                       backgroundColor: step?.selectedIndex === idx ? '#06b6d4' : '#8b5cf666',
-                      padding: '6px 12px', borderRadius: '4px', color: '#e2e8f0', fontSize: '12px',
+                      padding: '6px 12px', borderRadius: '4px', color: '#5577a4', fontSize: '12px',
                       fontWeight: 'bold', border: step?.selectedIndex === idx ? '2px solid #0ea5e9' : 'none'
                     }}
                   >
@@ -309,7 +309,7 @@ export default function Problem398Visualizer() {
             {step?.probability && (
               <div style={{ backgroundColor: '#334155', padding: '8px', borderRadius: '4px' }}>
                 <div style={{ color: '#64748b', fontSize: '12px' }}>Current Probability</div>
-                <div style={{ color: '#a78bfa', fontSize: '16px', fontWeight: 'bold' }}>
+                <div style={{ color: '#7e56f8', fontSize: '16px', fontWeight: 'bold' }}>
                   {step.probability}
                 </div>
               </div>
@@ -318,7 +318,7 @@ export default function Problem398Visualizer() {
             {step?.result !== undefined && (
               <div style={{ backgroundColor: '#334155', padding: '8px', borderRadius: '4px', textAlign: 'center' }}>
                 <div style={{ color: '#64748b', fontSize: '12px' }}>Selected Index</div>
-                <div style={{ color: '#06b6d4', fontSize: '18px', fontWeight: 'bold' }}>
+                <div style={{ color: '#048196', fontSize: '18px', fontWeight: 'bold' }}>
                   {step.result === -1 ? 'None' : step.result}
                 </div>
               </div>

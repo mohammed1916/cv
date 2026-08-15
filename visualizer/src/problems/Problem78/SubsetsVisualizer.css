@@ -39,7 +39,7 @@
 }
 
 .sub-error {
-    color: #f38ba8;
+    color: #e51851;
     font-size: 11px;
 }
 
@@ -149,11 +149,11 @@
 .sub-num-val {
     font-size: 16px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .sub-num-cell.start .sub-num-val {
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .sub-num-idx {

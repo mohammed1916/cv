@@ -285,7 +285,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -310,8 +310,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.currentString && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #38bdf8' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#38bdf8', marginBottom: 6 }}>Input String</div>
-          <div style={{ fontSize: 16, color: '#38bdf8', fontFamily: 'monospace', fontWeight: 700, wordBreak: 'break-all' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#067db1', marginBottom: 6 }}>Input String</div>
+          <div style={{ fontSize: 16, color: '#067db1', fontFamily: 'monospace', fontWeight: 700, wordBreak: 'break-all' }}>
             "{step.currentString}"
           </div>
         </div>
@@ -320,7 +320,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
       {step?.compareChars && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #64748b' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Character Comparison</div>
-          <div style={{ display: 'flex', gap: 12, alignItems: 'center', fontSize: 13, color: '#e2e8f0' }}>
+          <div style={{ display: 'flex', gap: 12, alignItems: 'center', fontSize: 13, color: '#5577a4' }}>
             <div
               style={{
                 padding: '6px 12px',
@@ -361,8 +361,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#f59e0b', marginBottom: 6 }}>Cell Value</div>
-          <div style={{ fontSize: 18, fontFamily: 'monospace', fontWeight: 'bold', color: '#f59e0b' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', marginBottom: 6 }}>Cell Value</div>
+          <div style={{ fontSize: 18, fontFamily: 'monospace', fontWeight: 'bold', color: '#a36907' }}>
             {step.cellValue}
           </div>
         </motion.div>
@@ -381,13 +381,13 @@ function VisualizationPanel({ step, applyExample, examples }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#22c55e', marginBottom: 8 }}>Result</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#178740', marginBottom: 8 }}>Result</div>
           <div
             style={{
               fontSize: 24,
               fontFamily: 'monospace',
               fontWeight: 'bold',
-              color: '#22c55e',
+              color: '#178740',
             }}
           >
             {step.result}
@@ -467,7 +467,7 @@ export default function PalindromeSubsequenceVisualizer() {
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Input String</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Input String</div>
               <input
                 type="text"
                 value={s}

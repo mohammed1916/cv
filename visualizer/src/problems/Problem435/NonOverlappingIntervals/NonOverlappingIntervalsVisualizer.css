@@ -37,7 +37,7 @@
 }
 
 .noi-error {
-    color: #f38ba8;
+    color: #e51851;
     font-size: 11px;
 }
 
@@ -89,7 +89,7 @@
     bottom: 22px;
     transform: translateX(-50%);
     font-size: 10px;
-    color: #cba6f7;
+    color: #964cef;
     white-space: nowrap;
 }
 
@@ -111,15 +111,15 @@
 
 .noi-val {
     font-size: 22px;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .end-color {
-    color: #cba6f7;
+    color: #964cef;
 }
 
 .removed-color {
-    color: #f38ba8;
+    color: #e51851;
 }
 
 .noi-legend {
@@ -133,7 +133,7 @@
     align-items: center;
     gap: 8px;
     font-size: 12px;
-    color: #a6adc8;
+    color: #6773a1;
 }
 
 .noi-dot {
@@ -171,7 +171,7 @@
     background: #313244;
     border-radius: 8px;
     font-size: 14px;
-    color: #6c7086;
+    color: #999cad;
 }
 
 .noi-result.done {

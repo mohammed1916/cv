@@ -242,7 +242,7 @@ export default function Problem376Visualizer() {
                         borderRadius: 4,
                         border: '2px solid #22c55e',
                         backgroundColor: '#86efac',
-                        color: '#15803d',
+                        color: '#126d34',
                         fontSize: 11,
                         fontWeight: 600,
                         minWidth: 32,
@@ -260,15 +260,15 @@ export default function Problem376Visualizer() {
                 <div style={{ display: 'flex', gap: 12 }}>
                   <div>
                     <span style={{ color: '#1e40af' }}>up: </span>
-                    <span style={{ fontWeight: 600, color: '#0ea5e9' }}>{step.ups}</span>
+                    <span style={{ fontWeight: 600, color: '#0b7db0' }}>{step.ups}</span>
                   </div>
                   <div>
                     <span style={{ color: '#1e40af' }}>down: </span>
-                    <span style={{ fontWeight: 600, color: '#0ea5e9' }}>{step.downs}</span>
+                    <span style={{ fontWeight: 600, color: '#0b7db0' }}>{step.downs}</span>
                   </div>
                   <div>
                     <span style={{ color: '#1e40af' }}>result: </span>
-                    <span style={{ fontWeight: 600, color: '#0ea5e9' }}>{Math.max(step.ups, step.downs)}</span>
+                    <span style={{ fontWeight: 600, color: '#0b7db0' }}>{Math.max(step.ups, step.downs)}</span>
                   </div>
                 </div>
               </div>

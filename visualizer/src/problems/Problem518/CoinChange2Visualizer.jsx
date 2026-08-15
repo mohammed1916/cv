@@ -220,10 +220,10 @@ function VisualizationPanel({ amount, coins, step, applyEx }) {
         animate={{ opacity: 1 }}
       >
         <div style={{ fontSize: 13, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>Combinations</div>
-        <div style={{ fontSize: 28, fontWeight: 'bold', color: '#0284c7' }}>
+        <div style={{ fontSize: 28, fontWeight: 'bold', color: '#027bba' }}>
           {step?.result !== undefined ? step.result : '...'}
         </div>
-        <div style={{ fontSize: 12, color: '#0284c7', marginTop: 8 }}>
+        <div style={{ fontSize: 12, color: '#027bba', marginTop: 8 }}>
           {step?.message || ''}
         </div>
       </motion.div>

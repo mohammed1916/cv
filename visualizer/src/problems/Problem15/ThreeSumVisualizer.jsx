@@ -338,7 +338,7 @@ export default function ThreeSumVisualizer() {
             }}
             placeholder="[-1,0,1,2,-1,-4]"
           />
-          {inputError && <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
+          {inputError && <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
         </div>
 
         <div>
@@ -381,7 +381,7 @@ export default function ThreeSumVisualizer() {
                         >
                           {val}
                         </motion.div>
-                        <div style={{ fontSize: 10, color: '#94a3b8' }}>{idx}</div>
+                        <div style={{ fontSize: 10, color: '#627794' }}>{idx}</div>
                         <div style={{ display: 'flex', gap: 2, minHeight: 18 }}>
                           {isI && (
                             <span style={{ fontSize: 9, fontWeight: 700, backgroundColor: 'rgba(245, 158, 11, 0.2)', color: '#d97706', padding: '1px 5px', borderRadius: 4 }}>
@@ -453,7 +453,7 @@ export default function ThreeSumVisualizer() {
                         </motion.div>
                       ))
                     ) : (
-                      <div style={{ color: '#94a3b8', fontSize: 12, textAlign: 'center', padding: '16px 0' }}>
+                      <div style={{ color: '#627794', fontSize: 12, textAlign: 'center', padding: '16px 0' }}>
                         No triplets yet
                       </div>
                     )}

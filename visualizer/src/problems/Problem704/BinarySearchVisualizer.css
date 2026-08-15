@@ -101,9 +101,9 @@
   font-weight: bold;
 }
 
-.bs-legend-item.left { color: #f43f5e; }
-.bs-legend-item.mid { color: #0ea5e9; }
-.bs-legend-item.right { color: #8b5cf6; }
+.bs-legend-item.left { color: #e90d33; }
+.bs-legend-item.mid { color: #0b7db0; }
+.bs-legend-item.right { color: #8553f6; }
 
 .bs-legend-swatch {
   width: 12px;
@@ -222,7 +222,7 @@
 
 .bs-stat-label {
   font-size: 11px;
-  color: #94a3b8;
+  color: #627794;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 8px;
@@ -231,7 +231,7 @@
 .bs-stat-val {
   font-size: 24px;
   font-weight: bold;
-  color: #f8fafc;
+  color: #4879a9;
   font-family: monospace;
 }
 

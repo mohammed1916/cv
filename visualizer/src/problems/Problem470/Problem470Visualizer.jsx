@@ -148,10 +148,10 @@ function VisualizationPanel({ calls, step, applyEx }) {
           }}
         >
           <div style={{ fontSize: 12, color: '#065f46', fontWeight: 600, marginBottom: 8 }}>Current Value</div>
-          <div style={{ fontSize: 28, fontWeight: 'bold', color: '#10b981' }}>
+          <div style={{ fontSize: 28, fontWeight: 'bold', color: '#0c865d' }}>
             {step?.random ?? 0}
           </div>
-          <div style={{ fontSize: 11, color: '#059669', marginTop: 4 }}>From rand7() combination</div>
+          <div style={{ fontSize: 11, color: '#04865e', marginTop: 4 }}>From rand7() combination</div>
         </motion.div>
 
         <motion.div
@@ -163,7 +163,7 @@ function VisualizationPanel({ calls, step, applyEx }) {
           }}
         >
           <div style={{ fontSize: 12, color: '#92400e', fontWeight: 600, marginBottom: 8 }}>Result</div>
-          <div style={{ fontSize: 28, fontWeight: 'bold', color: '#f59e0b' }}>
+          <div style={{ fontSize: 28, fontWeight: 'bold', color: '#a36907' }}>
             {step?.result || '-'}
           </div>
           <div style={{ fontSize: 11, color: '#b45309', marginTop: 4 }}>Valid output 1-10</div>

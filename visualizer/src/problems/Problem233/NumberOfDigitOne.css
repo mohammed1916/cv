@@ -87,7 +87,7 @@
 .number-of-digit-one-title {
   font-weight: 600;
   font-size: 14px;
-  color: #3b82f6;
+  color: #1b6df5;
   font-style: italic;
 }
 
@@ -100,7 +100,7 @@
 
 .number-of-digit-one-story {
   font-size: 12px;
-  color: #94a3b8;
+  color: #627794;
   font-style: italic;
   margin: 0;
   line-height: 1.5;
@@ -115,7 +115,7 @@
 
 .number-of-digit-one-index {
   font-size: 11px;
-  color: #3b82f6;
+  color: #1b6df5;
   margin: 4px 0;
 }
 
@@ -134,7 +134,7 @@
 .number-of-digit-one-info p {
   margin: 0;
   font-size: 12px;
-  color: #94a3b8;
+  color: #627794;
   line-height: 1.5;
 }
 

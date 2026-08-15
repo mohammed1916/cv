@@ -174,7 +174,7 @@ function BoardPanel({ EXAMPLES, ex, n, board, activeRow, activeCol, phase, attac
         </div>
         <div className="nqii-tracker">
           <span className="nqii-tracker-label">Count</span>
-          <motion.span key={step?.solutions} className="nqii-tracker-val nqii-sol" initial={{ scale: 1.4, color: "#a6e3a1" }} animate={{ scale: 1, color: "#cdd6f4" }}>
+          <motion.span key={step?.solutions} className="nqii-tracker-val nqii-sol" initial={{ scale: 1.4, color: "#2f8628" }} animate={{ scale: 1, color: "#4f6ed8" }}>
             {step?.solutions ?? 0}
           </motion.span>
         </div>

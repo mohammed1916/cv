@@ -44,7 +44,7 @@
     align-items: center;
     gap: 6px;
     font-size: 12px;
-    color: #a6adc8;
+    color: #6773a1;
 }
 
 .sot-input {
@@ -58,7 +58,7 @@
 }
 
 .sot-error {
-    color: #f38ba8;
+    color: #e51851;
     font-size: 11px;
 }
 

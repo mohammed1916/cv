@@ -319,8 +319,8 @@ function TreeVisualization({ tree, depth = 0 }) {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
       >
-        <div style={{ fontSize: 11, fontWeight: 600, color: '#22c55e' }}>Leaf</div>
-        <div style={{ fontSize: 14, fontWeight: 'bold', color: '#f1f5f9', marginTop: 4 }}>
+        <div style={{ fontSize: 11, fontWeight: 600, color: '#178740' }}>Leaf</div>
+        <div style={{ fontSize: 14, fontWeight: 'bold', color: '#4879a9', marginTop: 4 }}>
           {tree.val}
         </div>
       </motion.div>
@@ -342,7 +342,7 @@ function TreeVisualization({ tree, depth = 0 }) {
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
     >
-      <div style={{ fontSize: 11, fontWeight: 600, color: '#f59e0b', textAlign: 'center' }}>Internal Node</div>
+      <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', textAlign: 'center' }}>Internal Node</div>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, fontSize: 11 }}>
         <div>
           <div style={{ color: '#64748b', marginBottom: 4 }}>Top-Left</div>
@@ -370,7 +370,7 @@ function VisualizationPanel({ step, applyExample, examples, gridSize }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -395,7 +395,7 @@ function VisualizationPanel({ step, applyExample, examples, gridSize }) {
 
       {step?.grid && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Grid Visualization</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Grid Visualization</div>
           <div style={{ overflow: 'auto' }}>
             <GridVisualization
               grid={step.grid}
@@ -408,8 +408,8 @@ function VisualizationPanel({ step, applyExample, examples, gridSize }) {
 
       {step?.currentRegion && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f59e0b' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#f59e0b', marginBottom: 6 }}>Current Region</div>
-          <div style={{ fontSize: 12, color: '#e2e8f0', fontFamily: 'monospace', lineHeight: 1.6 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', marginBottom: 6 }}>Current Region</div>
+          <div style={{ fontSize: 12, color: '#5577a4', fontFamily: 'monospace', lineHeight: 1.6 }}>
             <div>Row: [{step.currentRegion.row}:{step.currentRegion.row + step.currentRegion.size}]</div>
             <div>Col: [{step.currentRegion.col}:{step.currentRegion.col + step.currentRegion.size}]</div>
             <div>Size: {step.currentRegion.size}x{step.currentRegion.size}</div>
@@ -430,14 +430,14 @@ function VisualizationPanel({ step, applyExample, examples, gridSize }) {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
         >
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#22c55e', marginBottom: 6 }}>Leaf Node Created</div>
-          <div style={{ fontSize: 16, fontWeight: 'bold', color: '#f1f5f9' }}>{step.nodeValue}</div>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#178740', marginBottom: 6 }}>Leaf Node Created</div>
+          <div style={{ fontSize: 16, fontWeight: 'bold', color: '#4879a9' }}>{step.nodeValue}</div>
         </motion.div>
       )}
 
       {step?.tree && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Quad Tree Structure</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Quad Tree Structure</div>
           <div style={{ maxHeight: 400, overflow: 'auto', padding: 8, backgroundColor: '#0f172a', borderRadius: 6 }}>
             <TreeVisualization tree={step.tree} />
           </div>
@@ -518,7 +518,7 @@ export default function QuadTreeVisualizer() {
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
               <div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Grid Size</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Grid Size</div>
                 <input
                   type="number"
                   value={gridSize}
@@ -546,7 +546,7 @@ export default function QuadTreeVisualizer() {
               </div>
             </div>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Grid (JSON)</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Grid (JSON)</div>
               <textarea
                 value={gridInput}
                 onChange={(e) => {
@@ -566,7 +566,7 @@ export default function QuadTreeVisualizer() {
                   resize: 'vertical',
                 }}
               />
-              {inputError && <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
+              {inputError && <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
             </div>
             <VisualizationPanel step={step} applyExample={applyExample} examples={examples} gridSize={gridSize} />
           </div>),

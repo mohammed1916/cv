@@ -47,7 +47,7 @@
 }
 
 .perm-error {
-    color: #f38ba8;
+    color: #e51851;
     font-size: 11px;
 }
 
@@ -154,11 +154,11 @@
 .perm-num-val {
     font-size: 16px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .perm-num-cell.used .perm-num-val {
-    color: #fab387;
+    color: #c65108;
 }
 
 .perm-num-flag {
@@ -167,7 +167,7 @@
 }
 
 .perm-num-cell.used .perm-num-flag {
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .perm-res-list {

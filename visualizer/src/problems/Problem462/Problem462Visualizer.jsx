@@ -320,7 +320,7 @@ function VisualizationPanel({ step, nums, EXAMPLES, handleExampleClick, numsInpu
         <div style={{ fontSize: 11, fontWeight: 600, color: '#166534', marginBottom: 2 }}>
           Median Strategy
         </div>
-        <div style={{ fontSize: 12, color: '#22c55e', lineHeight: 1.4 }}>
+        <div style={{ fontSize: 12, color: '#178740', lineHeight: 1.4 }}>
           The median minimizes sum of absolute differences. Sort and find median, then sum distances.
         </div>
       </div>

@@ -243,11 +243,11 @@ export default function Problem382Visualizer() {
                         {val}
                       </motion.div>
                       {idx < step.values.length - 1 && (
-                        <div style={{ fontSize: 14, color: '#cbd5e1' }}>→</div>
+                        <div style={{ fontSize: 14, color: '#5a779b' }}>→</div>
                       )}
                     </div>
                   ))}
-                  <div style={{ fontSize: 12, color: '#94a3b8' }}>null</div>
+                  <div style={{ fontSize: 12, color: '#627794' }}>null</div>
                 </div>
               </div>
 
@@ -255,11 +255,11 @@ export default function Problem382Visualizer() {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
                 <div style={{ padding: 10, backgroundColor: '#f0f9ff', borderRadius: 6, fontSize: 12 }}>
                   <div style={{ fontWeight: 600, color: '#0c4a6e' }}>Count</div>
-                  <div style={{ fontSize: 14, fontWeight: 700, color: '#0284c7', marginTop: 4 }}>{step.count}</div>
+                  <div style={{ fontSize: 14, fontWeight: 700, color: '#027bba', marginTop: 4 }}>{step.count}</div>
                 </div>
                 <div style={{ padding: 10, backgroundColor: '#fef3c7', borderRadius: 6, fontSize: 12 }}>
                   <div style={{ fontWeight: 600, color: '#92400e' }}>Selected Value</div>
-                  <div style={{ fontSize: 14, fontWeight: 700, color: '#f59e0b', marginTop: 4 }}>
+                  <div style={{ fontSize: 14, fontWeight: 700, color: '#a36907', marginTop: 4 }}>
                     {step.result !== null ? step.result : 'pending'}
                   </div>
                 </div>

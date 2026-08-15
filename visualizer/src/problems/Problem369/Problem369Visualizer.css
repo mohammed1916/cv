@@ -23,7 +23,7 @@
   margin: 0;
   display: inline-block;
   background: #f39c12;
-  color: white;
+  color: #424242;
   padding: 4px 12px;
   border-radius: 20px;
   font-size: 12px;
@@ -80,13 +80,13 @@
 
 .p369-code-section h3 {
   margin: 0 0 10px 0;
-  color: #ecf0f1;
+  color: #5f7a80;
   font-size: 15px;
 }
 
 .p369-code {
   margin: 0;
-  color: #ecf0f1;
+  color: #5f7a80;
   font-size: 11px;
   line-height: 1.4;
   overflow-x: auto;
@@ -200,7 +200,7 @@
   width: 30px;
   height: 30px;
   background: #f39c12;
-  color: white;
+  color: #424242;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -234,7 +234,7 @@
     color: #2c3e50;
   }
   50% {
-    color: #3498db;
+    color: #207bb7;
   }
 }
 

@@ -222,13 +222,13 @@
 }
 
 .cumulative-salary-status.processing {
-  color: #3b82f6;
+  color: #1b6df5;
 }
 
 .cumulative-salary-status.complete {
-  color: #10b981;
+  color: #0c865d;
 }
 
 .cumulative-salary-status.error {
-  color: #ef4444;
+  color: #e91414;
 }

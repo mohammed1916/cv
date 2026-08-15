@@ -150,7 +150,7 @@ export default function DistinctSubsequencesVisualizer() {
     </>);
 
   const statusPanel = (
-    <div className="ds-status" style={{ padding: '8px 12px', fontSize: '13px', color: '#a6adc8', minHeight: '36px' }}>
+    <div className="ds-status" style={{ padding: '8px 12px', fontSize: '13px', color: '#6773a1', minHeight: '36px' }}>
       {step?.message || 'Ready'}
     </div>
   );

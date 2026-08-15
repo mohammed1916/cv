@@ -174,8 +174,8 @@
   color: var(--text);
 }
 
-.p548-part.match .p548-part-sum { color: #34d399; }
-.p548-part.mismatch .p548-part-sum { color: #f87171; }
+.p548-part.match .p548-part-sum { color: #1d855f; }
+.p548-part.mismatch .p548-part-sum { color: #ea0c0c; }
 
 /* ── Candidate set (sums seen left of j) ──── */
 .p548-set {

@@ -199,7 +199,7 @@ function VisualizationPanel({ step }) {
           </div>
           <div style={{ textAlign: 'center', marginTop: 12, fontFamily: 'monospace' }}>
             <div style={{ color: '#b45309', fontSize: 11, marginBottom: 4 }}>Difference</div>
-            <div style={{ fontSize: 18, fontWeight: 700, color: '#10b981' }}>{step.diff}</div>
+            <div style={{ fontSize: 18, fontWeight: 700, color: '#0c865d' }}>{step.diff}</div>
           </div>
         </motion.div>
       )}
@@ -217,10 +217,10 @@ function VisualizationPanel({ step }) {
         animate={{ opacity: 1 }}
       >
         <div style={{ fontSize: 13, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>Min Absolute Difference</div>
-        <div style={{ fontSize: 28, fontWeight: 'bold', color: '#0284c7' }}>
+        <div style={{ fontSize: 28, fontWeight: 'bold', color: '#027bba' }}>
           {step?.minDiff === Infinity ? '∞' : step?.minDiff}
         </div>
-        <div style={{ fontSize: 12, color: '#0284c7', marginTop: 8 }}>
+        <div style={{ fontSize: 12, color: '#027bba', marginTop: 8 }}>
           {step?.message || ''}
         </div>
       </motion.div>

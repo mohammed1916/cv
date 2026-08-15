@@ -166,7 +166,7 @@ export default function AddTwoNumbersVisualizer({ problem }) {
     <div className="atn-panel">
       <div className="atn-panel-head">
         Linked Lists
-        {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
+        {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
       </div>
       <div className="atn-panel-body">
         <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>

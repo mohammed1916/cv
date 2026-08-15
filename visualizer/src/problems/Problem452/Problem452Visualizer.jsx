@@ -255,7 +255,7 @@ function ArrowCount({ arrows, lastPos }) {
         {lastPos !== undefined && (
           <div style={{
             fontSize: 11,
-            color: '#16a34a',
+            color: '#12873d',
             marginTop: 8,
             fontFamily: 'monospace',
           }}>
@@ -345,7 +345,7 @@ function VisualizationPanel({ step, points, EXAMPLES, handleExampleClick, points
         <div style={{ fontSize: 11, fontWeight: 600, color: '#166534', marginBottom: 2 }}>
           Story: Greedy Balloon Bursting
         </div>
-        <div style={{ fontSize: 12, color: '#22c55e', lineHeight: 1.4 }}>
+        <div style={{ fontSize: 12, color: '#178740', lineHeight: 1.4 }}>
           Sort by ending position, place arrow at rightmost end, and reuse for overlapping balloons.
         </div>
       </div>

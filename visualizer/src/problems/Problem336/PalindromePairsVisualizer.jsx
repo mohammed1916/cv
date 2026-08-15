@@ -130,7 +130,7 @@ const EXAMPLES = REGISTRY_EXAMPLES.length > 0 ? REGISTRY_EXAMPLES : [
   { label: 'empty + a', inputs: ['a', ''] },
 ]
 
-const LABEL = { fontSize: 12, fontWeight: 600, color: '#94a3b8', marginBottom: 8, textTransform: 'uppercase', letterSpacing: 0.5 }
+const LABEL = { fontSize: 12, fontWeight: 600, color: '#627794', marginBottom: 8, textTransform: 'uppercase', letterSpacing: 0.5 }
 const GREEN = '#22c55e'
 const RED = '#ef4444'
 
@@ -194,14 +194,14 @@ function VizBody({ step, words }) {
           <div style={LABEL}>Current split at position {step.k}</div>
           <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
             <div>
-              <div style={{ fontSize: 11, color: '#94a3b8', marginBottom: 6 }}>
+              <div style={{ fontSize: 11, color: '#627794', marginBottom: 6 }}>
                 prefix
                 <Badge ok={step.prefixIsPal}>{step.prefixIsPal ? 'palindrome' : 'not palindrome'}</Badge>
               </div>
               <Segment text={step.prefix} color={step.prefixIsPal ? GREEN : '#64748b'} />
             </div>
             <div>
-              <div style={{ fontSize: 11, color: '#94a3b8', marginBottom: 6 }}>
+              <div style={{ fontSize: 11, color: '#627794', marginBottom: 6 }}>
                 suffix
                 <Badge ok={step.suffixIsPal}>{step.suffixIsPal ? 'palindrome' : 'not palindrome'}</Badge>
               </div>
@@ -219,7 +219,7 @@ function VizBody({ step, words }) {
             border: `1px solid ${step.found ? GREEN : '#334155'}`,
             color: '#e2e8f0', fontSize: 13,
           }}>
-            <span style={{ color: '#94a3b8' }}>
+            <span style={{ color: '#627794' }}>
               {step.matchCase === 'prefix' ? 'reverse(suffix)' : 'reverse(prefix)'} =
             </span>{' '}
             <span style={{ fontFamily: 'monospace', fontWeight: 700 }}>

@@ -337,7 +337,7 @@ function ListVisualization({ nodes, slowPos, fastPos, cycleStart, phase2Slow, ph
 }
 
 function VisualizationPanel({ step, nodes, cycleStart }) {
-  if (!step) return <div style={{ padding: 16, color: '#94a3b8' }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: '#627794' }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
@@ -375,7 +375,7 @@ function VisualizationPanel({ step, nodes, cycleStart }) {
           <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 4 }}>
             Cycle Start Position
           </div>
-          <div style={{ fontSize: 16, fontWeight: 700, color: '#10b981' }}>
+          <div style={{ fontSize: 16, fontWeight: 700, color: '#0c865d' }}>
             {step.result}
           </div>
         </motion.div>

@@ -205,16 +205,16 @@
 }
 
 .sm-var-name {
-  color: #94a3b8;
+  color: #627794;
 }
 
 .sm-var-val {
-  color: #f8fafc;
+  color: #4879a9;
   font-weight: 500;
 }
 
 .sm-var-val.highlight {
-  color: #22c55e;
+  color: #178740;
 }
 
 .sm-status {

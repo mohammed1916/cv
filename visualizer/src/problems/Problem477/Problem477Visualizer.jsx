@@ -228,7 +228,7 @@ function VisualizationPanel({ nums, step, applyEx }) {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: 8 }}>
           <div style={{ padding: 10, backgroundColor: '#dcfce7', borderRadius: 6, border: '1px solid #10b981' }}>
             <div style={{ fontSize: 10, fontWeight: 600, color: '#166534' }}>Ones</div>
-            <div style={{ fontSize: 16, fontWeight: 700, color: '#16a34a', marginTop: 4 }}>
+            <div style={{ fontSize: 16, fontWeight: 700, color: '#12873d', marginTop: 4 }}>
               {step.ones}
             </div>
           </div>
@@ -240,7 +240,7 @@ function VisualizationPanel({ nums, step, applyEx }) {
           </div>
           <div style={{ padding: 10, backgroundColor: '#fef3c7', borderRadius: 6, border: '1px solid #f59e0b' }}>
             <div style={{ fontSize: 10, fontWeight: 600, color: '#92400e' }}>Pairs Differ</div>
-            <div style={{ fontSize: 16, fontWeight: 700, color: '#f59e0b', marginTop: 4 }}>
+            <div style={{ fontSize: 16, fontWeight: 700, color: '#a36907', marginTop: 4 }}>
               {step.contribution}
             </div>
           </div>
@@ -259,7 +259,7 @@ function VisualizationPanel({ nums, step, applyEx }) {
       {step?.result !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#dcfce7', borderRadius: 6, border: '2px solid #22c55e' }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#166534' }}>Total Hamming Distance</div>
-          <div style={{ fontSize: 20, fontFamily: 'monospace', fontWeight: 700, color: '#16a34a', marginTop: 4 }}>
+          <div style={{ fontSize: 20, fontFamily: 'monospace', fontWeight: 700, color: '#12873d', marginTop: 4 }}>
             {step.result}
           </div>
         </div>

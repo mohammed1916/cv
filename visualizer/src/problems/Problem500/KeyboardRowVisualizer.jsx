@@ -43,9 +43,9 @@ const LINE_PATTERN_MAP = {
 }
 
 const KEYBOARD_ROWS = [
-  { name: 'Row 1', chars: 'qwertyuiop', color: '#38bdf8' },
-  { name: 'Row 2', chars: 'asdfghjkl', color: '#a78bfa' },
-  { name: 'Row 3', chars: 'zxcvbnm', color: '#f59e0b' },
+  { name: 'Row 1', chars: 'qwertyuiop', color: '#067db1' },
+  { name: 'Row 2', chars: 'asdfghjkl', color: '#7e56f8' },
+  { name: 'Row 3', chars: 'zxcvbnm', color: '#a36907' },
 ]
 
 function generateSteps(words) {
@@ -154,7 +154,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -178,7 +178,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Keyboard Rows</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Keyboard Rows</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
           {KEYBOARD_ROWS.map((row, idx) => (
             <div
@@ -203,8 +203,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.word && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#a78bfa', marginBottom: 6 }}>Current Word</div>
-          <div style={{ fontSize: 13, color: '#e2e8f0', fontFamily: 'monospace', fontWeight: 600 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Current Word</div>
+          <div style={{ fontSize: 13, color: '#5577a4', fontFamily: 'monospace', fontWeight: 600 }}>
             "{step.word}"
           </div>
         </div>
@@ -212,7 +212,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.result && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>
             Found Words ({step.result.length})
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, minHeight: 40 }}>
@@ -256,7 +256,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
           transition={{ duration: 0.3 }}
         >
           <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Total Words</div>
-          <div style={{ fontSize: 24, fontWeight: 'bold', color: '#22c55e' }}>{step.result.length}</div>
+          <div style={{ fontSize: 24, fontWeight: 'bold', color: '#178740' }}>{step.result.length}</div>
         </motion.div>
       )}
     </div>
@@ -328,7 +328,7 @@ export default function KeyboardRowVisualizer() {
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Words</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Words</div>
               <textarea
                 value={wordsInput}
                 onChange={(e) => {
@@ -350,7 +350,7 @@ export default function KeyboardRowVisualizer() {
                 placeholder='["Hello","Alaska","Dad","Peace"]'
               />
               {inputError && (
-                <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>
+                <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>
               )}
             </div>
             <VisualizationPanel words={words} step={step} applyExample={applyExample} examples={examples} />

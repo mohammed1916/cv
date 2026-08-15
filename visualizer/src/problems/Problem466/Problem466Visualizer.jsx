@@ -208,7 +208,7 @@ function VisualizationPanel({ s1, s2, step, applyEx }) {
           }}
         >
           <div style={{ fontSize: 12, color: '#065f46', fontWeight: 600, marginBottom: 8 }}>Repetitions Found</div>
-          <div style={{ fontSize: 28, fontWeight: 'bold', color: '#10b981' }}>
+          <div style={{ fontSize: 28, fontWeight: 'bold', color: '#0c865d' }}>
             {step?.count ?? 0}
           </div>
         </motion.div>

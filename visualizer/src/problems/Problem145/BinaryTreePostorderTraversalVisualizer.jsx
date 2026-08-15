@@ -281,7 +281,7 @@ function TreeVisualization({ root, currentNode, processedIds }) {
 }
 
 function VisualizationPanel({ step, root }) {
-  if (!step) return <div style={{ padding: 16, color: '#94a3b8' }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: '#627794' }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
@@ -406,7 +406,7 @@ export default function BinaryTreePostorderTraversalVisualizer() {
 
   const statusPanel = (
     <div className="btp-status">
-      {step?.message && <div style={{ fontSize: 13, color: '#94a3b8', padding: '8px 12px' }}>{step.message}</div>}
+      {step?.message && <div style={{ fontSize: 13, color: '#627794', padding: '8px 12px' }}>{step.message}</div>}
     </div>
   )
 

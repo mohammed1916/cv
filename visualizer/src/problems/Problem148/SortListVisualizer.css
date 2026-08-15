@@ -33,7 +33,7 @@
 .sl-chip.active,
 .sl-chip:hover {
     border-color: #a6e3a1;
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .sl-panel {
@@ -132,15 +132,15 @@
 }
 
 .sl-half-label.left {
-    color: #89b4fa;
+    color: #1a6df5;
 }
 
 .sl-half-label.right {
-    color: #cba6f7;
+    color: #964cef;
 }
 
 .sl-half-label.merged {
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .sl-status {

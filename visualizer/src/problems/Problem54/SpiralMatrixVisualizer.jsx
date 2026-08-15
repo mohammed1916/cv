@@ -236,7 +236,7 @@ export default function SpiralMatrixVisualizer() {
         />
       <div className="sm-panel-head">
         Matrix View
-        {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
+        {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
       </div>
       <div className="sm-panel-body">
         <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
@@ -293,7 +293,7 @@ export default function SpiralMatrixVisualizer() {
         </div>
 
         <div className="sm-res-container">
-            <span style={{ color: '#94a3b8', fontSize: 13, marginRight: 8, fontFamily: 'monospace' }}>res =</span>
+            <span style={{ color: '#627794', fontSize: 13, marginRight: 8, fontFamily: 'monospace' }}>res =</span>
             <div className="sm-res-array">
                 <AnimatePresence>
                     {step?.res.map((val, i) => (
@@ -322,19 +322,19 @@ export default function SpiralMatrixVisualizer() {
         <div className="sm-vars">
           <div className="sm-var-row">
             <span className="sm-var-name">top</span>
-            <span className="sm-var-val" style={{ color: '#ef4444' }}>{step?.top ?? '–'}</span>
+            <span className="sm-var-val" style={{ color: '#e91414' }}>{step?.top ?? '–'}</span>
           </div>
           <div className="sm-var-row">
             <span className="sm-var-name">bottom</span>
-            <span className="sm-var-val" style={{ color: '#f97316' }}>{step?.bottom ?? '–'}</span>
+            <span className="sm-var-val" style={{ color: '#c35305' }}>{step?.bottom ?? '–'}</span>
           </div>
           <div className="sm-var-row">
             <span className="sm-var-name">left</span>
-            <span className="sm-var-val" style={{ color: '#3b82f6' }}>{step?.left ?? '–'}</span>
+            <span className="sm-var-val" style={{ color: '#1b6df5' }}>{step?.left ?? '–'}</span>
           </div>
           <div className="sm-var-row">
             <span className="sm-var-name">right</span>
-            <span className="sm-var-val" style={{ color: '#8b5cf6' }}>{step?.right ?? '–'}</span>
+            <span className="sm-var-val" style={{ color: '#8553f6' }}>{step?.right ?? '–'}</span>
           </div>
           <div className="sm-var-row">
             <span className="sm-var-name">matrix[i][j]</span>

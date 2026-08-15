@@ -185,7 +185,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -210,13 +210,13 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {['load_questions', 'load_answers', 'join_data'].includes(step.phase) && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Questions Table</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Questions Table</div>
           <div style={{ overflowX: 'auto', border: '1px solid #475569', borderRadius: 4 }}>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
                 <tr style={{ backgroundColor: '#334155' }}>
-                  <th className="table-cell" style={{ color: '#f59e0b', fontWeight: 600 }}>question_id</th>
-                  <th className="table-cell" style={{ color: '#f59e0b', fontWeight: 600 }}>submissions</th>
+                  <th className="table-cell" style={{ color: '#a36907', fontWeight: 600 }}>question_id</th>
+                  <th className="table-cell" style={{ color: '#a36907', fontWeight: 600 }}>submissions</th>
                 </tr>
               </thead>
               <tbody>
@@ -234,16 +234,16 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {['load_answers', 'join_data', 'aggregate', 'calculate_rate', 'find_highest', 'done'].includes(step.phase) && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>
             Answer Submissions (is_accepted = 1)
           </div>
           <div style={{ overflowX: 'auto', border: '1px solid #475569', borderRadius: 4, maxHeight: 200 }}>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
                 <tr style={{ backgroundColor: '#334155' }}>
-                  <th className="table-cell" style={{ color: '#f59e0b', fontWeight: 600 }}>answer_id</th>
-                  <th className="table-cell" style={{ color: '#f59e0b', fontWeight: 600 }}>question_id</th>
-                  <th className="table-cell" style={{ color: '#f59e0b', fontWeight: 600 }}>is_accepted</th>
+                  <th className="table-cell" style={{ color: '#a36907', fontWeight: 600 }}>answer_id</th>
+                  <th className="table-cell" style={{ color: '#a36907', fontWeight: 600 }}>question_id</th>
+                  <th className="table-cell" style={{ color: '#a36907', fontWeight: 600 }}>is_accepted</th>
                 </tr>
               </thead>
               <tbody>
@@ -251,7 +251,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
                   <tr key={a.id} className="table-row">
                     <td className="table-cell">{a.id}</td>
                     <td className="table-cell">{a.question_id}</td>
-                    <td className="table-cell" style={{ color: '#22c55e', fontWeight: 600 }}>1</td>
+                    <td className="table-cell" style={{ color: '#178740', fontWeight: 600 }}>1</td>
                   </tr>
                 ))}
               </tbody>
@@ -262,15 +262,15 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {['aggregate', 'calculate_rate', 'find_highest', 'done'].includes(step.phase) && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Aggregated Results</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Aggregated Results</div>
           <div style={{ overflowX: 'auto', border: '1px solid #475569', borderRadius: 4 }}>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
                 <tr style={{ backgroundColor: '#334155' }}>
-                  <th className="table-cell" style={{ color: '#f59e0b', fontWeight: 600 }}>question_id</th>
-                  <th className="table-cell" style={{ color: '#f59e0b', fontWeight: 600 }}>total_submissions</th>
-                  <th className="table-cell" style={{ color: '#f59e0b', fontWeight: 600 }}>accepted_count</th>
-                  <th className="table-cell" style={{ color: '#f59e0b', fontWeight: 600 }}>answer_rate</th>
+                  <th className="table-cell" style={{ color: '#a36907', fontWeight: 600 }}>question_id</th>
+                  <th className="table-cell" style={{ color: '#a36907', fontWeight: 600 }}>total_submissions</th>
+                  <th className="table-cell" style={{ color: '#a36907', fontWeight: 600 }}>accepted_count</th>
+                  <th className="table-cell" style={{ color: '#a36907', fontWeight: 600 }}>answer_rate</th>
                 </tr>
               </thead>
               <tbody>
@@ -308,11 +308,11 @@ function VisualizationPanel({ step, applyExample, examples }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#22c55e', marginBottom: 8 }}>HIGHEST ANSWER RATE</div>
-          <div style={{ fontSize: 14, fontWeight: 'bold', color: '#e2e8f0', marginBottom: 4 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#178740', marginBottom: 8 }}>HIGHEST ANSWER RATE</div>
+          <div style={{ fontSize: 14, fontWeight: 'bold', color: '#5577a4', marginBottom: 4 }}>
             Question ID: {step.result.question_id}
           </div>
-          <div style={{ fontSize: 13, color: '#cbd5e1' }}>Answer Rate: {step.result.answer_rate}</div>
+          <div style={{ fontSize: 13, color: '#5a779b' }}>Answer Rate: {step.result.answer_rate}</div>
         </motion.div>
       )}
     </div>
@@ -389,7 +389,7 @@ export default function HighestAnswerRateVisualizer() {
     right: (<VisualizationPanel step={step} applyExample={applyExample} examples={examples} />),
     bottom: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, overflow: 'auto' }}>
             <div>
-              <label style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', display: 'block', marginBottom: 6 }}>
+              <label style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', display: 'block', marginBottom: 6 }}>
                 Questions (JSON)
               </label>
               <textarea
@@ -410,7 +410,7 @@ export default function HighestAnswerRateVisualizer() {
               />
             </div>
             <div>
-              <label style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', display: 'block', marginBottom: 6 }}>
+              <label style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', display: 'block', marginBottom: 6 }}>
                 Answer Submissions (JSON)
               </label>
               <textarea
@@ -430,7 +430,7 @@ export default function HighestAnswerRateVisualizer() {
                 }}
               />
             </div>
-            {inputError && <div style={{ color: '#ef4444', fontSize: 11, fontWeight: 600 }}>Error: {inputError}</div>}
+            {inputError && <div style={{ color: '#e91414', fontSize: 11, fontWeight: 600 }}>Error: {inputError}</div>}
           </div>),
   }
   const [panelDivs, setPanelDivs] = useState(null)

@@ -195,10 +195,10 @@ function VisualizationPanel({ m, n, flips, step }) {
         animate={{ opacity: 1 }}
       >
         <div style={{ fontSize: 13, fontWeight: 600, color: '#5b21b6', marginBottom: 8 }}>Status</div>
-        <div style={{ fontSize: 20, fontWeight: 'bold', color: '#8b5cf6' }}>
+        <div style={{ fontSize: 20, fontWeight: 'bold', color: '#8553f6' }}>
           Flipped: {flipped.size} / Total: {m * n}
         </div>
-        <div style={{ fontSize: 12, color: '#8b5cf6', marginTop: 8 }}>
+        <div style={{ fontSize: 12, color: '#8553f6', marginTop: 8 }}>
           {step?.message || ''}
         </div>
       </motion.div>

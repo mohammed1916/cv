@@ -169,7 +169,7 @@ export default function LengthOfLastWordVisualizer() {
         </div>
         <div>
           <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>length</div>
-          <motion.div key={length} initial={{ scale: 1.4 }} animate={{ scale: 1 }} style={{ fontSize: 13, fontWeight: 'bold', color: '#0ea5e9' }}>
+          <motion.div key={length} initial={{ scale: 1.4 }} animate={{ scale: 1 }} style={{ fontSize: 13, fontWeight: 'bold', color: '#0b7db0' }}>
             {length}
           </motion.div>
         </div>

@@ -165,7 +165,7 @@ function VisualizationPanel({ N, step, applyEx }) {
       {/* N Parameter */}
       <div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, border: '1px solid #fbbf24', textAlign: 'center' }}>
         <div style={{ fontSize: 11, color: '#b45309', marginBottom: 4 }}>Threshold N</div>
-        <div style={{ fontSize: 24, fontWeight: 'bold', color: '#f59e0b' }}>{N}</div>
+        <div style={{ fontSize: 24, fontWeight: 'bold', color: '#a36907' }}>{N}</div>
       </div>
 
       {/* Grid */}
@@ -264,10 +264,10 @@ function VisualizationPanel({ N, step, applyEx }) {
         animate={{ opacity: 1 }}
       >
         <div style={{ fontSize: 13, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>Lonely Pixels (N={N})</div>
-        <div style={{ fontSize: 28, fontWeight: 'bold', color: '#0284c7' }}>
+        <div style={{ fontSize: 28, fontWeight: 'bold', color: '#027bba' }}>
           {step?.count !== undefined ? step.count : '...'}
         </div>
-        <div style={{ fontSize: 12, color: '#0284c7', marginTop: 8 }}>
+        <div style={{ fontSize: 12, color: '#027bba', marginTop: 8 }}>
           {step?.message || ''}
         </div>
       </motion.div>

@@ -188,7 +188,7 @@ function VisualizationPanel({ s, step, applyEx }) {
         animate={{ opacity: 1 }}
       >
         <div style={{ fontSize: 13, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>Parsing Status</div>
-        <div style={{ fontSize: 12, color: '#0284c7' }}>
+        <div style={{ fontSize: 12, color: '#027bba' }}>
           {step?.message || ''}
         </div>
       </motion.div>

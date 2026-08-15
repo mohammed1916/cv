@@ -192,7 +192,7 @@ function VisualizationPanel({ step, applyExample, examples, wall }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -218,7 +218,7 @@ function VisualizationPanel({ step, applyExample, examples, wall }) {
       {/* Brick Wall Visualization */}
       {wall && wall.length > 0 && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 12 }}>Brick Wall</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 12 }}>Brick Wall</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
             {wall.map((row, rowIdx) => (
               <div
@@ -231,7 +231,7 @@ function VisualizationPanel({ step, applyExample, examples, wall }) {
                   transition: 'opacity 0.2s',
                 }}
               >
-                <div style={{ fontSize: 10, color: '#94a3b8', minWidth: 25 }}>R{rowIdx}</div>
+                <div style={{ fontSize: 10, color: '#627794', minWidth: 25 }}>R{rowIdx}</div>
                 <div style={{ display: 'flex', gap: 1, flex: 1 }}>
                   {row.map((brickWidth, brickIdx) => {
                     const isCurrentBrick = step?.rowIndex === rowIdx && step?.brickIndex === brickIdx
@@ -248,7 +248,7 @@ function VisualizationPanel({ step, applyExample, examples, wall }) {
                           alignItems: 'center',
                           justifyContent: 'center',
                           fontSize: 10,
-                          color: '#cbd5e1',
+                          color: '#5a779b',
                           fontWeight: 500,
                           transition: 'background-color 0.2s',
                         }}
@@ -264,8 +264,8 @@ function VisualizationPanel({ step, applyExample, examples, wall }) {
 
           {/* Edge Positions Visualization */}
           {step?.position !== undefined && (
-            <div style={{ marginTop: 16, fontSize: 11, color: '#cbd5e1' }}>
-              <div style={{ fontWeight: 600, marginBottom: 8, color: '#f59e0b' }}>Current Position: {step.position}</div>
+            <div style={{ marginTop: 16, fontSize: 11, color: '#5a779b' }}>
+              <div style={{ fontWeight: 600, marginBottom: 8, color: '#a36907' }}>Current Position: {step.position}</div>
               <div
                 style={{
                   position: 'relative',
@@ -322,7 +322,7 @@ function VisualizationPanel({ step, applyExample, examples, wall }) {
       {/* Edge Count Hash Map */}
       {step?.edgeCount && Object.keys(step.edgeCount).length > 0 && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Edge Count Map</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Edge Count Map</div>
           <div
             style={{
               display: 'grid',
@@ -366,8 +366,8 @@ function VisualizationPanel({ step, applyExample, examples, wall }) {
       {/* Max Edges Info */}
       {step?.maxEdges !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #22c55e' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#22c55e', marginBottom: 6 }}>Maximum Edges</div>
-          <div style={{ fontSize: 14, color: '#22c55e', fontFamily: 'monospace', fontWeight: 700 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#178740', marginBottom: 6 }}>Maximum Edges</div>
+          <div style={{ fontSize: 14, color: '#178740', fontFamily: 'monospace', fontWeight: 700 }}>
             {step.maxEdges}
           </div>
         </div>
@@ -393,7 +393,7 @@ function VisualizationPanel({ step, applyExample, examples, wall }) {
               fontSize: 20,
               fontFamily: 'monospace',
               fontWeight: 'bold',
-              color: '#f59e0b',
+              color: '#a36907',
             }}
           >
             {step.result}
@@ -468,7 +468,7 @@ export default function BrickWallVisualizer() {
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Wall (JSON)</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Wall (JSON)</div>
               <textarea
                 value={wallInput}
                 onChange={(e) => {
@@ -488,7 +488,7 @@ export default function BrickWallVisualizer() {
                   resize: 'vertical',
                 }}
               />
-              {inputError && <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
+              {inputError && <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
             </div>
             <VisualizationPanel step={step} applyExample={applyExample} examples={examples} wall={wall} />
           </div>),

@@ -163,11 +163,11 @@ function VisualizationPanel({ nums, k, step }) {
       <div style={{ display: 'flex', gap: 16 }}>
         <div style={{ padding: 12, backgroundColor: '#f1f5f9', borderRadius: 6, flex: 1 }}>
           <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>Target Difference</div>
-          <div style={{ fontSize: 20, fontWeight: 'bold', color: '#0284c7' }}>{k}</div>
+          <div style={{ fontSize: 20, fontWeight: 'bold', color: '#027bba' }}>{k}</div>
         </div>
         <div style={{ padding: 12, backgroundColor: '#f1f5f9', borderRadius: 6, flex: 1 }}>
           <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>Array Size</div>
-          <div style={{ fontSize: 20, fontWeight: 'bold', color: '#0284c7' }}>{nums.length}</div>
+          <div style={{ fontSize: 20, fontWeight: 'bold', color: '#027bba' }}>{nums.length}</div>
         </div>
       </div>
 
@@ -217,11 +217,11 @@ function VisualizationPanel({ nums, k, step }) {
             Pair Found!
           </div>
           {k === 0 ? (
-            <div style={{ color: '#0284c7', fontFamily: 'monospace', fontSize: 12 }}>
+            <div style={{ color: '#027bba', fontFamily: 'monospace', fontSize: 12 }}>
               ({step.num}, {step.num}) - count: {step.count.get(step.num)}
             </div>
           ) : (
-            <div style={{ color: '#0284c7', fontFamily: 'monospace', fontSize: 12 }}>
+            <div style={{ color: '#027bba', fontFamily: 'monospace', fontSize: 12 }}>
               ({step.num}, {step.target}) - diff: {step.target - step.num}
             </div>
           )}
@@ -241,10 +241,10 @@ function VisualizationPanel({ nums, k, step }) {
         animate={{ opacity: 1 }}
       >
         <div style={{ fontSize: 13, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>K-Diff Pairs</div>
-        <div style={{ fontSize: 28, fontWeight: 'bold', color: '#0284c7' }}>
+        <div style={{ fontSize: 28, fontWeight: 'bold', color: '#027bba' }}>
           {step?.pairs !== undefined ? step.pairs : '...'}
         </div>
-        <div style={{ fontSize: 12, color: '#0284c7', marginTop: 8 }}>
+        <div style={{ fontSize: 12, color: '#027bba', marginTop: 8 }}>
           {step?.message || ''}
         </div>
       </motion.div>

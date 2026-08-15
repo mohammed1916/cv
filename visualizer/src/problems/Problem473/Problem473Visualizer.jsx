@@ -153,7 +153,7 @@ function VisualizationPanel({ nums, step, applyEx }) {
               <div style={{ fontSize: 12, color: '#065f46', fontWeight: 600, marginBottom: 4 }}>
                 Side {sideIdx + 1}
               </div>
-              <div style={{ fontSize: 20, fontWeight: 'bold', color: '#10b981' }}>
+              <div style={{ fontSize: 20, fontWeight: 'bold', color: '#0c865d' }}>
                 {step?.sides[sideIdx] ?? 0}
               </div>
             </motion.div>

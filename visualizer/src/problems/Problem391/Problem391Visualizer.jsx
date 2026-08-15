@@ -238,8 +238,8 @@ export default function Problem391Visualizer() {
       <div style={{ display: 'flex', gap: 16, flex: 1 }}>
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
           <div style={{ backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
-            <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '8px' }}>
-              Rectangles {inputError && <span style={{ color: '#f87171' }}>— {inputError}</span>}
+            <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>
+              Rectangles {inputError && <span style={{ color: '#ea0c0c' }}>— {inputError}</span>}
             </div>
             <input
               value={rectanglesInput}
@@ -306,11 +306,11 @@ export default function Problem391Visualizer() {
             <div style={{ display: 'flex', gap: 12, fontSize: '13px' }}>
               <div style={{ backgroundColor: '#1e293b', padding: '8px', borderRadius: '4px', flex: 1 }}>
                 <span style={{ color: '#64748b' }}>Total Area: </span>
-                <span style={{ color: '#fbbf24', fontWeight: 'bold' }}>{step.totalArea}</span>
+                <span style={{ color: '#986e03', fontWeight: 'bold' }}>{step.totalArea}</span>
               </div>
               <div style={{ backgroundColor: '#1e293b', padding: '8px', borderRadius: '4px', flex: 1 }}>
                 <span style={{ color: '#64748b' }}>Expected Area: </span>
-                <span style={{ color: '#fbbf24', fontWeight: 'bold' }}>{step.expectedArea}</span>
+                <span style={{ color: '#986e03', fontWeight: 'bold' }}>{step.expectedArea}</span>
               </div>
               <div style={{ backgroundColor: step?.isValid ? '#10b98166' : '#ef444466', padding: '8px', borderRadius: '4px', flex: 1, textAlign: 'center' }}>
                 <span style={{ color: step?.isValid ? '#86efac' : '#fca5a5', fontWeight: 'bold' }}>

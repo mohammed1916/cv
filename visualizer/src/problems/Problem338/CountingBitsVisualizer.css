@@ -45,7 +45,7 @@
 }
 
 .cb-error {
-    color: #f38ba8;
+    color: #e51851;
     font-size: 11px;
 }
 
@@ -139,7 +139,7 @@
 .cb-val {
     font-size: 20px;
     font-weight: 800;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .cb-bin {
@@ -149,7 +149,7 @@
 }
 
 .cb-cell.active .cb-bin {
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .cb-breakdown {
@@ -175,12 +175,12 @@
 .cb-bval {
     font-size: 14px;
     font-weight: 600;
-    color: #cdd6f4;
+    color: #4f6ed8;
     font-family: monospace;
 }
 
 .cb-bval.odd {
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .cb-bval.even {
@@ -193,7 +193,7 @@
     background: #313244;
     border-radius: 8px;
     font-size: 13px;
-    color: #6c7086;
+    color: #999cad;
     font-family: monospace;
     word-break: break-all;
 }
@@ -215,6 +215,6 @@
 }
 
 .cb-status.ok {
-    color: #a6e3a1;
+    color: #2f8628;
     border-color: #a6e3a1;
 }

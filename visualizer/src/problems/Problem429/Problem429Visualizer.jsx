@@ -173,7 +173,7 @@ function VisualizationPanel({ root, step }) {
         <div style={{ fontSize: 12, fontWeight: 600, color: '#14532d', marginBottom: 6 }}>Result (levels)</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
           {(step?.result || []).map((lvl, i) => (
-            <div key={i} style={{ fontFamily: 'monospace', fontSize: 13, color: '#16a34a' }}>
+            <div key={i} style={{ fontFamily: 'monospace', fontSize: 13, color: '#12873d' }}>
               [{lvl.join(', ')}]
             </div>
           ))}
@@ -188,7 +188,7 @@ function VisualizationPanel({ root, step }) {
         initial={{ opacity: 0 }} animate={{ opacity: 1 }}
       >
         <div style={{ fontSize: 12, color: '#14532d' }}>Current queue: [{(step?.queue || []).join(', ') || '∅'}]</div>
-        <div style={{ fontSize: 12, color: '#16a34a', marginTop: 6 }}>{step?.message}</div>
+        <div style={{ fontSize: 12, color: '#12873d', marginTop: 6 }}>{step?.message}</div>
       </motion.div>
     </div>
   )

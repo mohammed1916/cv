@@ -280,7 +280,7 @@ function VisualizationPanel({ step, m, n, maxMove, startRow, startCol, applyExam
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -405,7 +405,7 @@ function VisualizationPanel({ step, m, n, maxMove, startRow, startCol, applyExam
           <div style={{ fontSize: 11, fontWeight: 600, marginBottom: 8 }}>Direction Results</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
             {step.directionResults.map((dr, i) => (
-              <div key={i} style={{ fontSize: 12, color: '#38bdf8' }}>
+              <div key={i} style={{ fontSize: 12, color: '#067db1' }}>
                 {dr.dir}: {dr.count}
               </div>
             ))}
@@ -506,7 +506,7 @@ export default function OutOfBoundaryVisualizer() {
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 8 }}>
               <div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Rows (m)</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Rows (m)</div>
                 <input
                   type="number"
                   value={m}
@@ -529,7 +529,7 @@ export default function OutOfBoundaryVisualizer() {
                 />
               </div>
               <div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Cols (n)</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Cols (n)</div>
                 <input
                   type="number"
                   value={n}
@@ -552,7 +552,7 @@ export default function OutOfBoundaryVisualizer() {
                 />
               </div>
               <div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Max Moves</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Max Moves</div>
                 <input
                   type="number"
                   value={maxMove}
@@ -575,7 +575,7 @@ export default function OutOfBoundaryVisualizer() {
                 />
               </div>
               <div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Start Row</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Start Row</div>
                 <input
                   type="number"
                   value={startRow}
@@ -599,7 +599,7 @@ export default function OutOfBoundaryVisualizer() {
               </div>
             </div>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Start Col</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Start Col</div>
               <input
                 type="number"
                 value={startCol}

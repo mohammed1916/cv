@@ -18,11 +18,11 @@ import { createPortal } from 'react-dom'
 const SOLUTION_CODE = getSolutionCode('zuma-game')
 
 const PATTERNS = {
-  'init': { icon: '◯', label: 'Initialize', color: '#06b6d4' },
-  'loop': { icon: '⟳', label: 'Iterate', color: '#3b82f6' },
-  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#3b82f6' },
-  'found': { icon: '✓', label: 'Match Found', color: '#10b981' },
-  'done': { icon: '✓', label: 'Complete', color: '#10b981' },
+  'init': { icon: '◯', label: 'Initialize', color: '#048196' },
+  'loop': { icon: '⟳', label: 'Iterate', color: '#1b6df5' },
+  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#1b6df5' },
+  'found': { icon: '✓', label: 'Match Found', color: '#0c865d' },
+  'done': { icon: '✓', label: 'Complete', color: '#0c865d' },
 }
 
 const LINE_PATTERN_MAP = {
@@ -133,7 +133,7 @@ function VisualizationPanel({ board, hand, step, applyEx }) {
                 alignItems: 'center',
                 justifyContent: 'center',
                 fontWeight: 700,
-                color: '#fff',
+                color: '#757575',
                 fontSize: 12
               }}
               animate={{ scale: step?.inserted === idx ? 1.3 : 1 }}
@@ -159,7 +159,7 @@ function VisualizationPanel({ board, hand, step, applyEx }) {
                 alignItems: 'center',
                 justifyContent: 'center',
                 fontWeight: 700,
-                color: '#fff',
+                color: '#757575',
                 fontSize: 12,
                 border: '2px solid #333'
               }}
@@ -208,7 +208,7 @@ function VisualizationPanel({ board, hand, step, applyEx }) {
         animate={{ opacity: 1 }}
       >
         <div style={{ fontSize: 13, fontWeight: 600, color: '#92400e', marginBottom: 8 }}>Strategy</div>
-        <div style={{ fontSize: 12, color: '#f59e0b' }}>
+        <div style={{ fontSize: 12, color: '#a36907' }}>
           {step?.message || 'Finding minimum balls to shoot...'}
         </div>
       </motion.div>

@@ -354,7 +354,7 @@ export default function ContainsDuplicateIIVisualizer() {
               style={{ width: 60, padding: "6px 10px", borderRadius: 6, border: "1px solid #cbd5e1", fontFamily: "monospace", fontSize: 12 }}
             />
           </label>
-          {inputError && <span style={{ color: "#ef4444", fontSize: 12 }}>{inputError}</span>}
+          {inputError && <span style={{ color: "#e91414", fontSize: 12 }}>{inputError}</span>}
         </div>
       </div>
       <div style={{ flex: 1, overflow: "auto" }}>

@@ -385,7 +385,7 @@ function VisualizationPanel({ step }) {
         }}
       >
         {nodes.length === 0 && (
-          <div style={{ fontSize: 13, color: '#94a3b8' }}>null (empty list)</div>
+          <div style={{ fontSize: 13, color: '#627794' }}>null (empty list)</div>
         )}
         {nodes.map((node, idx) => {
           const isPointer = idx === step.pointer
@@ -429,12 +429,12 @@ function VisualizationPanel({ step }) {
                     marginBottom: 2,
                   }}
                 >
-                  {isPointer && <span style={{ color: '#0ea5e9' }}>ptr</span>}
+                  {isPointer && <span style={{ color: '#0b7db0' }}>ptr</span>}
                   {(isNewHead || isFirstAfterRotate) && (
-                    <span style={{ color: '#16a34a' }}>newHead</span>
+                    <span style={{ color: '#12873d' }}>newHead</span>
                   )}
                   {isNewTail && <span style={{ color: '#dc2626' }}>newTail</span>}
-                  {isTail && !isNewTail && <span style={{ color: '#d97706' }}>tail</span>}
+                  {isTail && !isNewTail && <span style={{ color: '#b16105' }}>tail</span>}
                 </div>
                 <motion.div
                   animate={{ scale: isPointer ? 1.12 : 1 }}

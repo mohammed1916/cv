@@ -191,7 +191,7 @@ export default function GrayCodeVisualizer() {
                                 }}
                             >
                                 <span>{val}</span>
-                                <span style={{ fontSize: 9, color: '#65a30d' }}>{toBinary(val, n)}</span>
+                                <span style={{ fontSize: 9, color: '#51820a' }}>{toBinary(val, n)}</span>
                             </motion.div>
                         )
                     })}

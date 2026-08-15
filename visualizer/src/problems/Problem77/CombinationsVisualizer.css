@@ -62,7 +62,7 @@
 }
 
 .comb-error {
-  color: #ef4444;
+  color: #e91414;
   font-size: 12px;
   font-weight: 500;
 }
@@ -145,7 +145,7 @@
 
 .comb-num-cell.used {
   background: #e2e8f0;
-  color: #64748b;
+  color: #5a687d;
   border-color: #cbd5e1;
 }
 
@@ -258,7 +258,7 @@
   }
 
   .comb-section-label {
-    color: #94a3b8;
+    color: #627794;
   }
 
   .comb-num-cell {
@@ -276,7 +276,7 @@
   .comb-num-cell.used {
     background: #334155;
     border-color: #475569;
-    color: #94a3b8;
+    color: #a1aec0;
   }
 
   .comb-path-row {
@@ -285,7 +285,7 @@
   }
 
   .comb-bracket {
-    color: #e2e8f0;
+    color: #5577a4;
   }
 
   .comb-path-cell {
@@ -294,7 +294,7 @@
   }
 
   .comb-path-progress {
-    color: #94a3b8;
+    color: #627794;
   }
 
   .comb-res-item {

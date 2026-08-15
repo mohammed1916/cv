@@ -199,7 +199,7 @@ function generateSteps(numerator, denominator) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: '#94a3b8' }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: '#627794' }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
@@ -331,7 +331,7 @@ export default function FractionToRecurringDecimalVisualizer() {
     <VisualizationPanel step={step} />
   </>
   const statusPanel = (
-    <div className="ftrd-status" style={{ padding: 8, fontSize: 12, color: '#94a3b8', display: 'flex', alignItems: 'center', gap: 8 }}>
+    <div className="ftrd-status" style={{ padding: 8, fontSize: 12, color: '#627794', display: 'flex', alignItems: 'center', gap: 8 }}>
       {step ? `Step ${stepIndex + 1} of ${steps.length}` : 'Ready'}
     </div>
   )

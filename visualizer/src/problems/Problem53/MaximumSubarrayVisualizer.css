@@ -114,7 +114,7 @@
 }
 
 .maxsub-cell.neg {
-  color: #fca5a5;
+  color: #eb0808;
 }
 
 .maxsub-cell.in-sub {
@@ -144,7 +144,7 @@
   padding: 2px 6px;
   border-radius: 4px;
   background: #22c55e;
-  color: white;
+  color: #3f3f3f;
 }
 
 .maxsub-math-box {
@@ -167,7 +167,7 @@
 .maxsub-math-label {
   width: 120px;
   font-size: 12px;
-  color: #94a3b8;
+  color: #627794;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -186,13 +186,13 @@
   font-weight: bold;
 }
 
-.maxsub-var { color: #94a3b8; }
+.maxsub-var { color: #627794; }
 .maxsub-op { color: #64748b; }
-.maxsub-val { color: #f8fafc; }
-.maxsub-val.n { color: #4ade80; }
+.maxsub-val { color: #4879a9; }
+.maxsub-val.n { color: #198741; }
 
 .maxsub-var.new, .maxsub-val.new {
-  color: #0ea5e9;
+  color: #0b7db0;
 }
 
 .maxsub-val.new.highlight {
@@ -222,7 +222,7 @@
   font-family: monospace;
   font-weight: bold;
   font-size: 14px;
-  color: #94a3b8;
+  color: #627794;
 }
 
 .maxsub-badge {
@@ -230,7 +230,7 @@
   font-weight: bold;
   padding: 2px 6px;
   border-radius: 4px;
-  color: white;
+  color: #757575;
   animation: maxsub-pop 0.3s ease;
 }
 
@@ -246,10 +246,10 @@
   font-size: 32px;
   font-weight: bold;
   font-family: monospace;
-  color: #f8fafc;
+  color: #4879a9;
 }
 
-.maxsub-var-value.neg { color: #ef4444; }
+.maxsub-var-value.neg { color: #e91414; }
 
 .maxsub-var-desc {
   font-size: 11px;

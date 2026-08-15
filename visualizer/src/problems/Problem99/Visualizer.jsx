@@ -325,13 +325,13 @@ function VisualizationPanel({ step }) {
         })}
       </div>
 
-      <div className="problem99-legend" style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'center', fontSize: 11, color: '#a6adc8' }}>
+      <div className="problem99-legend" style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'center', fontSize: 11, color: '#6773a1' }}>
         <LegendDot color="#89b4fa" label="current" />
         <LegendDot color="#89dceb" label="prev" />
         <LegendDot color={swapped ? '#22c55e' : '#f38ba8'} label={swapped ? 'swapped ✓' : 'misplaced'} />
       </div>
 
-      <div className="problem99-message" style={{ marginTop: 4, textAlign: 'center', fontSize: 13, color: '#cdd6f4', maxWidth: 480 }}>
+      <div className="problem99-message" style={{ marginTop: 4, textAlign: 'center', fontSize: 13, color: '#4f6ed8', maxWidth: 480 }}>
         {step.message}
       </div>
     </div>

@@ -241,11 +241,11 @@ export default function Problem386Visualizer() {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
                 <div style={{ padding: 10, backgroundColor: '#f0f9ff', borderRadius: 6, fontSize: 12 }}>
                   <div style={{ fontWeight: 600, color: '#0c4a6e' }}>n (limit)</div>
-                  <div style={{ fontSize: 14, fontWeight: 700, color: '#0284c7', marginTop: 4 }}>{step.n}</div>
+                  <div style={{ fontSize: 14, fontWeight: 700, color: '#027bba', marginTop: 4 }}>{step.n}</div>
                 </div>
                 <div style={{ padding: 10, backgroundColor: '#fef3c7', borderRadius: 6, fontSize: 12 }}>
                   <div style={{ fontWeight: 600, color: '#92400e' }}>Count</div>
-                  <div style={{ fontSize: 14, fontWeight: 700, color: '#f59e0b', marginTop: 4 }}>{step.result.length}</div>
+                  <div style={{ fontSize: 14, fontWeight: 700, color: '#a36907', marginTop: 4 }}>{step.result.length}</div>
                 </div>
               </div>
 
@@ -313,7 +313,7 @@ export default function Problem386Visualizer() {
                     </motion.div>
                   ))}
                   {step.result.length > 20 && (
-                    <div style={{ padding: '6px 10px', fontSize: 12, color: '#94a3b8', fontWeight: 600 }}>
+                    <div style={{ padding: '6px 10px', fontSize: 12, color: '#627794', fontWeight: 600 }}>
                       ... ({step.result.length - 20} more)
                     </div>
                   )}

@@ -231,7 +231,7 @@ function CompressedStringVisualization({ result }) {
             ))}
           </div>
         ) : (
-          <div style={{ color: '#94a3b8', fontSize: 12 }}>Compressing...</div>
+          <div style={{ color: '#627794', fontSize: 12 }}>Compressing...</div>
         )}
       </div>
     </div>
@@ -256,7 +256,7 @@ function StatsVisualization({ chars, result, write }) {
           border: '2px solid #ef4444',
         }}>
           <div style={{ fontSize: 11, color: '#dc2626', fontWeight: 600 }}>Original Length</div>
-          <div style={{ fontSize: 20, fontWeight: 700, color: '#ef4444', marginTop: 4 }}>
+          <div style={{ fontSize: 20, fontWeight: 700, color: '#e91414', marginTop: 4 }}>
             {originalLen}
           </div>
         </div>
@@ -267,7 +267,7 @@ function StatsVisualization({ chars, result, write }) {
           border: '2px solid #10b981',
         }}>
           <div style={{ fontSize: 11, color: '#047857', fontWeight: 600 }}>Compressed Length</div>
-          <div style={{ fontSize: 20, fontWeight: 700, color: '#10b981', marginTop: 4 }}>
+          <div style={{ fontSize: 20, fontWeight: 700, color: '#0c865d', marginTop: 4 }}>
             {write}
           </div>
         </div>
@@ -279,7 +279,7 @@ function StatsVisualization({ chars, result, write }) {
           gridColumn: '1 / -1',
         }}>
           <div style={{ fontSize: 11, color: '#0c4a6e', fontWeight: 600 }}>Reduction</div>
-          <div style={{ fontSize: 20, fontWeight: 700, color: '#0284c7', marginTop: 4 }}>
+          <div style={{ fontSize: 20, fontWeight: 700, color: '#027bba', marginTop: 4 }}>
             {originalLen - write} chars
           </div>
         </div>

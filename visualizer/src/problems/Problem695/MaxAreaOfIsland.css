@@ -82,7 +82,7 @@
 
 .maoi-cell.water {
   background: #1e293b;
-  color: #475569;
+  color: #8192aa;
   border-color: #334155;
 }
 
@@ -93,7 +93,7 @@
 }
 
 .maoi-cell.land.visited {
-  color: #ffffff;
+  color: #757575;
 }
 
 .maoi-cell-indicator {
@@ -142,7 +142,7 @@
 
 .maoi-stat-label {
   font-size: 12px;
-  color: #94a3b8;
+  color: #627794;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 4px;
@@ -151,7 +151,7 @@
 .maoi-stat-val {
   font-size: 28px;
   font-weight: 700;
-  color: #22c55e;
+  color: #178740;
   font-family: monospace;
 }
 
@@ -185,7 +185,7 @@
   align-items: center;
   gap: 8px;
   font-size: 12px;
-  color: #94a3b8;
+  color: #627794;
 }
 
 .maoi-legend-box {

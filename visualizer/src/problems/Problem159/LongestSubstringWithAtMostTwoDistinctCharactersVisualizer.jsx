@@ -230,7 +230,7 @@ function StringVisualization({ s, left, right }) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: '#94a3b8' }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: '#627794' }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
@@ -282,7 +282,7 @@ function VisualizationPanel({ step }) {
             Maximum Length
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4, fontSize: 12, color: '#065f46' }}>
-            <div style={{ fontSize: 16, fontWeight: 700, color: '#10b981' }}>{step.maxLen}</div>
+            <div style={{ fontSize: 16, fontWeight: 700, color: '#0c865d' }}>{step.maxLen}</div>
             {step.maxSubstring && <div>"{step.maxSubstring}"</div>}
           </div>
         </motion.div>
@@ -355,7 +355,7 @@ export default function LongestSubstringWithAtMostTwoDistinctCharactersVisualize
 
   const statusPanel = (
     <div className="lsatdc-status">
-      <div style={{ fontSize: 12, color: '#94a3b8' }}>
+      <div style={{ fontSize: 12, color: '#627794' }}>
         {step && step.message ? step.message : 'Press play to begin'}
       </div>
     </div>

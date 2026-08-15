@@ -196,7 +196,7 @@ export default function DailyTemperaturesVisualizer() {
 
         <div className="dt-input-section">
           <label style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <span style={{ fontSize: '13px', fontWeight: '600', color: '#e2e8f0' }}>Input Temperatures</span>
+            <span style={{ fontSize: '13px', fontWeight: '600', color: '#5577a4' }}>Input Temperatures</span>
             <input
               className="dt-input"
               value={input}

@@ -321,7 +321,7 @@ export default function FindFirstLastPositionVisualizer() {
     <div className="ffp-panel" style={{ flex: 1 }}>
       <div className="ffp-panel-head">
         Sorted Array & Search Range
-        {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
+        {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
       </div>
       <div className="ffp-panel-body">
         <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
@@ -402,11 +402,11 @@ export default function FindFirstLastPositionVisualizer() {
           </div>
           <div className="ffp-stat-box">
             <span className="ffp-stat-label">First Position</span>
-            <span className="ffp-stat-val" style={{ color: '#06b6d4' }}>{step?.firstPos ?? '-'}</span>
+            <span className="ffp-stat-val" style={{ color: '#048196' }}>{step?.firstPos ?? '-'}</span>
           </div>
           <div className="ffp-stat-box">
             <span className="ffp-stat-label">Last Position</span>
-            <span className="ffp-stat-val" style={{ color: '#ec4899' }}>{step?.lastPos ?? '-'}</span>
+            <span className="ffp-stat-val" style={{ color: '#e0177a' }}>{step?.lastPos ?? '-'}</span>
           </div>
         </div>
 

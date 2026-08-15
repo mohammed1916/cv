@@ -120,7 +120,7 @@ function TreeDisplay({ node, depth = 0, inverted = false }) {
           borderRadius: 4,
           backgroundColor: isHighlighted ? "#fbbf24" : "#334155",
           border: "2px solid " + (isHighlighted ? "#f59e0b" : "#64748b"),
-          color: "#e2e8f0",
+          color: "#5577a4",
           fontWeight: 600,
           fontSize: 12,
           fontFamily: "monospace",

@@ -211,14 +211,14 @@ function VisualizationPanel({ step, applyExample, examples }) {
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 12, padding: 16 }}>
           <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #38bdf8' }}>
             <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Numerator</div>
-            <div style={{ fontSize: 16, fontWeight: 700, color: '#38bdf8', fontFamily: 'monospace' }}>
+            <div style={{ fontSize: 16, fontWeight: 700, color: '#067db1', fontFamily: 'monospace' }}>
               {nums[0]}
             </div>
           </div>
           <div style={{ fontSize: 18, color: '#64748b', fontWeight: 700 }}>÷</div>
           <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f59e0b' }}>
             <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Denominator</div>
-            <div style={{ fontSize: 16, fontWeight: 700, color: '#f59e0b', fontFamily: 'monospace' }}>
+            <div style={{ fontSize: 16, fontWeight: 700, color: '#a36907', fontFamily: 'monospace' }}>
               {nums[1]}
             </div>
           </div>
@@ -240,24 +240,24 @@ function VisualizationPanel({ step, applyExample, examples }) {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#a78bfa', marginBottom: 12 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 12 }}>
             Optimal Division Pattern
           </div>
           <div
             style={{
               fontFamily: 'monospace',
               fontSize: 13,
-              color: '#e2e8f0',
+              color: '#5577a4',
               display: 'flex',
               alignItems: 'center',
               gap: 8,
               flexWrap: 'wrap',
             }}
           >
-            <span style={{ color: '#38bdf8', fontWeight: 700 }}>{nums[0]}</span>
+            <span style={{ color: '#067db1', fontWeight: 700 }}>{nums[0]}</span>
             <span style={{ color: '#64748b' }}>÷</span>
             <span style={{ color: '#64748b' }}>(</span>
-            <span style={{ color: '#f59e0b' }}>{nums.slice(1).join(' ÷ ')}</span>
+            <span style={{ color: '#a36907' }}>{nums.slice(1).join(' ÷ ')}</span>
             <span style={{ color: '#64748b' }}>)</span>
           </div>
           {step?.denominator && (
@@ -290,7 +290,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -315,7 +315,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.array && step.array.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Input Array</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Input Array</div>
           <div
             style={{
               display: 'flex',
@@ -368,7 +368,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
               fontSize: 13,
               fontFamily: 'monospace',
               fontWeight: 'bold',
-              color: '#22c55e',
+              color: '#178740',
               marginBottom: 8,
               wordBreak: 'break-all',
             }}
@@ -376,8 +376,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
             {step.result}
           </div>
           {step?.numericalResult !== undefined && (
-            <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 8, paddingTop: 8, borderTop: '1px solid #475569' }}>
-              Numerical value: <span style={{ color: '#22c55e', fontWeight: 600 }}>{step.numericalResult.toFixed(2)}</span>
+            <div style={{ fontSize: 11, color: '#627794', marginTop: 8, paddingTop: 8, borderTop: '1px solid #475569' }}>
+              Numerical value: <span style={{ color: '#178740', fontWeight: 600 }}>{step.numericalResult.toFixed(2)}</span>
             </div>
           )}
         </motion.div>
@@ -450,7 +450,7 @@ export default function OptimalDivisionVisualizer() {
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>
                 Array (JSON format)
               </div>
               <textarea

@@ -152,7 +152,7 @@ export default function EvalRPNVisualizer() {
             {step?.a != null && (
                 <div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, border: '1px solid #fcd34d', display: 'flex', gap: 8, alignItems: 'center', justifyContent: 'center', fontSize: 16, fontWeight: 'bold' }}>
                     <span>{step.a}</span>
-                    <span style={{ color: '#f59e0b' }}>{step.op}</span>
+                    <span style={{ color: '#a36907' }}>{step.op}</span>
                     <span>{step.b}</span>
                 </div>
             )}

@@ -158,7 +158,7 @@ function VisualizationPanel({ nums, k, step, applyEx }) {
 
       <motion.div style={{ padding: 16, backgroundColor: '#fef3c7', border: '2px solid #f59e0b', borderRadius: 6 }}>
         <div style={{ fontSize: 13, fontWeight: 600, color: '#92400e', marginBottom: 8 }}>Median</div>
-        <div style={{ fontSize: 28, fontFamily: 'monospace', fontWeight: 'bold', color: '#f59e0b' }}>
+        <div style={{ fontSize: 28, fontFamily: 'monospace', fontWeight: 'bold', color: '#a36907' }}>
           {step?.median !== undefined ? step.median.toFixed(1) : '—'}
         </div>
       </motion.div>

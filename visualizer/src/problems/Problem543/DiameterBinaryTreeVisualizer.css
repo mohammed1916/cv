@@ -37,7 +37,7 @@
 }
 
 .dbt-error {
-    color: #f38ba8;
+    color: #e51851;
     font-size: 11px;
 }
 
@@ -174,7 +174,7 @@
 }
 
 .dbt-depth-val {
-    color: #a6e3a1;
+    color: #2f8628;
     font-weight: 700;
 }
 
@@ -189,7 +189,7 @@
     background: #313244;
     border-radius: 8px;
     font-size: 14px;
-    color: #6c7086;
+    color: #999cad;
 }
 
 .dbt-result.ok {
@@ -209,6 +209,6 @@
 }
 
 .dbt-status.ok {
-    color: #a6e3a1;
+    color: #2f8628;
     border-color: #a6e3a1;
 }

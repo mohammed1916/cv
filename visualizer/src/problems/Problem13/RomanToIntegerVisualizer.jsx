@@ -293,7 +293,7 @@ export default function RomanToIntegerVisualizer() {
           className="rti-input"
           style={{ flex: 1, margin: 0 }}
         />
-        {inputError && <span style={{ color: '#f87171', fontSize: 12 }}>{inputError}</span>}
+        {inputError && <span style={{ color: '#ea0c0c', fontSize: 12 }}>{inputError}</span>}
       </div>
 
       {step && (
@@ -373,7 +373,7 @@ export default function RomanToIntegerVisualizer() {
                     padding: '12px 16px',
                     borderRadius: 6,
                     backgroundColor: '#f59e0b',
-                    color: '#ffffff',
+                    color: '#434343',
                     fontFamily: 'monospace',
                     fontSize: 16,
                     fontWeight: 700,

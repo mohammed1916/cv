@@ -25,7 +25,7 @@
 .faa-chip.active,
 .faa-chip:hover {
     border-color: #fab387;
-    color: #fab387;
+    color: #c65108;
 }
 
 .faa-panel {
@@ -89,7 +89,7 @@
     top: -8px;
     right: -6px;
     font-size: 10px;
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .faa-freq-row {

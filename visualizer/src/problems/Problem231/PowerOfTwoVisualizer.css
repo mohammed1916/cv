@@ -29,14 +29,14 @@
 .pt-chip:hover,
 .pt-chip.active {
   border-color: #a6e3a1;
-  color: #a6e3a1;
+  color: #2f8628;
 }
 .pt-chip-desc {
   color: #6c7086;
   font-size: 11px;
 }
 .pt-chip.active .pt-chip-desc {
-  color: #a6e3a1;
+  color: #2f8628;
 }
 
 /* ── Insight card ──────────────────────────────────────────────────── */
@@ -58,7 +58,7 @@
   flex-shrink: 0;
   margin-top: 1px;
 }
-.pt-insight strong { color: #a6e3a1; }
+.pt-insight strong { color: #2f8628; }
 .pt-insight code {
   background: #252535;
   border-radius: 4px;
@@ -66,7 +66,7 @@
   font-size: 12px;
   color: #f9e2af;
 }
-.pt-insight em { color: #89b4fa; font-style: normal; font-weight: 700; }
+.pt-insight em { color: #1a6df5; font-style: normal; font-weight: 700; }
 
 /* ── Bit panel ─────────────────────────────────────────────────────── */
 .pt-panel {
@@ -136,7 +136,7 @@
 }
 .pt-bit.n-row.zero {
   background: #181825;
-  color: #45475a;
+  color: #7e819c;
 }
 
 /* n-1 row - yellow tint for 1s */
@@ -147,7 +147,7 @@
 }
 .pt-bit.nm1-row.zero {
   background: #181825;
-  color: #45475a;
+  color: #7e819c;
 }
 
 /* AND result row */
@@ -162,7 +162,7 @@
   border-color: #a6e3a1;
 }
 .pt-bit.zero.empty {
-  color: #313244;
+  color: #7e80a2;
   background: #181825;
 }
 
@@ -180,7 +180,7 @@
   margin: 4px 0 4px 100px;
 }
 .pt-and-row .pt-bit-row-label {
-  color: #cba6f7;
+  color: #964cef;
   font-size: 12px;
 }
 
@@ -199,7 +199,7 @@
   flex-shrink: 0;
 }
 .pt-bit-idx.active {
-  color: #cba6f7;
+  color: #964cef;
   font-weight: 700;
 }
 
@@ -229,11 +229,11 @@
 .pt-tracker-val {
   font-size: 22px;
   font-weight: 700;
-  color: #cdd6f4;
+  color: #4f6ed8;
   font-variant-numeric: tabular-nums;
 }
-.pt-tracker-val.val-green { color: #a6e3a1; }
-.pt-tracker-val.val-red   { color: #f38ba8; }
+.pt-tracker-val.val-green { color: #2f8628; }
+.pt-tracker-val.val-red   { color: #e51851; }
 
 /* ── Result banner ─────────────────────────────────────────────────── */
 .pt-result-banner {

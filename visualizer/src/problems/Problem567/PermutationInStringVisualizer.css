@@ -33,7 +33,7 @@
 .pis-chip.active,
 .pis-chip:hover {
     border-color: #89b4fa;
-    color: #89b4fa;
+    color: #1a6df5;
 }
 
 .pis-strings {
@@ -49,16 +49,16 @@
 }
 
 .pis-lbl.s1 {
-    color: #89b4fa;
+    color: #1a6df5;
 }
 
 .pis-lbl.s2 {
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .pis-val {
     font-family: monospace;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .pis-panel {

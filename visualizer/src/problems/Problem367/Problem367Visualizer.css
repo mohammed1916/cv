@@ -19,7 +19,7 @@
     margin: 0;
     font-size: 18px;
     font-weight: 600;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .p367-message {
@@ -93,7 +93,7 @@
 
 .p367-input-row label {
     font-size: 12px;
-    color: #a6adc8;
+    color: #6773a1;
     font-weight: 600;
     white-space: nowrap;
 }
@@ -176,7 +176,7 @@
 }
 
 .p367-range-value {
-    color: #89b4fa;
+    color: #1a6df5;
     font-weight: 700;
     font-family: monospace;
 }
@@ -229,17 +229,17 @@
 }
 
 .p367-val-square {
-    color: #f9e2af;
+    color: #996d0c;
     border: 1px solid #f9e2af;
 }
 
 .p367-val-target {
-    color: #89b4fa;
+    color: #1a6df5;
     border: 1px solid #89b4fa;
 }
 
 .p367-comp-symbol {
-    color: #a6adc8;
+    color: #6773a1;
     font-weight: 600;
     font-size: 13px;
 }
@@ -294,20 +294,20 @@
 
 .p367-found-icon {
     font-size: 32px;
-    color: #a6e3a1;
+    color: #2f8628;
     margin-bottom: 8px;
     font-weight: 700;
 }
 
 .p367-found-text {
     font-size: 16px;
-    color: #a6e3a1;
+    color: #2f8628;
     font-weight: 700;
 }
 
 .p367-found-detail {
     font-size: 12px;
-    color: #94e2d5;
+    color: #238373;
     margin-top: 4px;
     font-family: monospace;
 }
@@ -323,20 +323,20 @@
 
 .p367-not-found-icon {
     font-size: 32px;
-    color: #f38ba8;
+    color: #e51851;
     margin-bottom: 8px;
     font-weight: 700;
 }
 
 .p367-not-found-text {
     font-size: 16px;
-    color: #f38ba8;
+    color: #e51851;
     font-weight: 700;
 }
 
 .p367-not-found-detail {
     font-size: 12px;
-    color: #f5c2e7;
+    color: #d423a3;
     margin-top: 4px;
 }
 
@@ -351,7 +351,7 @@
 
 .p367-searching-text {
     font-size: 14px;
-    color: #a6adc8;
+    color: #6773a1;
     font-weight: 600;
 }
 
@@ -406,7 +406,7 @@
 }
 
 .p367-summary-val {
-    color: #cdd6f4;
+    color: #4f6ed8;
     font-family: monospace;
     font-weight: 700;
 }

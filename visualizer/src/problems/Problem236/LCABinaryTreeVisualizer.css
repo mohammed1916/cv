@@ -155,11 +155,11 @@
 }
 
 .p-color {
-    color: #89b4fa;
+    color: #1a6df5;
 }
 
 .q-color {
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .lcabt-legend {
@@ -173,7 +173,7 @@
     align-items: center;
     gap: 8px;
     font-size: 12px;
-    color: #a6adc8;
+    color: #6773a1;
 }
 
 .lcabt-dot {
@@ -205,7 +205,7 @@
     background: #313244;
     border-radius: 8px;
     font-size: 14px;
-    color: #6c7086;
+    color: #999cad;
 }
 
 .lcabt-result.done {

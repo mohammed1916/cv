@@ -37,7 +37,7 @@
 }
 
 .rsv-error {
-    color: #f38ba8;
+    color: #e51851;
     font-size: 11px;
 }
 
@@ -188,7 +188,7 @@
     align-items: center;
     gap: 8px;
     font-size: 12px;
-    color: #a6adc8;
+    color: #6773a1;
 }
 
 .rsv-dot {

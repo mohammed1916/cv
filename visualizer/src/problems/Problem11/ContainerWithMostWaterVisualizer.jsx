@@ -200,7 +200,7 @@ export default function ContainerWithMostWaterVisualizer() {
     <div className="cw-panel">
       <div className="cw-panel-head">
         Input Array (Heights)
-        {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
+        {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
       </div>
       <div className="cw-panel-body">
         <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>

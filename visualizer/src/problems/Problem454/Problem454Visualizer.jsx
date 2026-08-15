@@ -256,7 +256,7 @@ function SumMapDisplay({ sumMap }) {
           </motion.div>
         ))}
         {entries.length === 0 && (
-          <div style={{ fontSize: 11, color: '#94a3b8', fontStyle: 'italic' }}>Empty</div>
+          <div style={{ fontSize: 11, color: '#627794', fontStyle: 'italic' }}>Empty</div>
         )}
       </div>
     </div>
@@ -381,7 +381,7 @@ function VisualizationPanel({ step, nums1, nums2, nums3, nums4, EXAMPLES, handle
         <div style={{ fontSize: 11, fontWeight: 600, color: '#166534', marginBottom: 2 }}>
           Story: Quadruple Matching
         </div>
-        <div style={{ fontSize: 12, color: '#22c55e', lineHeight: 1.4 }}>
+        <div style={{ fontSize: 12, color: '#178740', lineHeight: 1.4 }}>
           Build map of sums from two arrays, then check if complement exists from the other two.
         </div>
       </div>

@@ -238,9 +238,9 @@ export default function GeneralizedAbbreviationVisualizer() {
               {inputError}
             </div>
           )}
-          <div style={{ fontSize: 12, color: '#94a3b8', lineHeight: 1.5 }}>
-            Each character is either <span style={{ color: '#22c55e', fontWeight: 600 }}>kept</span> or{' '}
-            <span style={{ color: '#a78bfa', fontWeight: 600 }}>abbreviated</span> (counted). Backtracking explores
+          <div style={{ fontSize: 12, color: '#627794', lineHeight: 1.5 }}>
+            Each character is either <span style={{ color: '#178740', fontWeight: 600 }}>kept</span> or{' '}
+            <span style={{ color: '#7e56f8', fontWeight: 600 }}>abbreviated</span> (counted). Backtracking explores
             every combination, producing 2<sup>n</sup> abbreviations.
           </div>
         </div>
@@ -283,12 +283,12 @@ export default function GeneralizedAbbreviationVisualizer() {
                     flexWrap: 'wrap',
                   }}
                 >
-                  <span style={{ fontSize: 12, color: '#94a3b8' }}>Building</span>
-                  <span style={{ fontFamily: 'monospace', fontSize: 22, fontWeight: 700, color: '#e2e8f0' }}>
+                  <span style={{ fontSize: 12, color: '#627794' }}>Building</span>
+                  <span style={{ fontFamily: 'monospace', fontSize: 22, fontWeight: 700, color: '#5577a4' }}>
                     {previewAbbrev}
                   </span>
-                  <span style={{ marginLeft: 'auto', display: 'flex', gap: 16, fontSize: 12, color: '#94a3b8' }}>
-                    <span>index <b style={{ color: '#e2e8f0' }}>{step.index}</b></span>
+                  <span style={{ marginLeft: 'auto', display: 'flex', gap: 16, fontSize: 12, color: '#627794' }}>
+                    <span>index <b style={{ color: '#5577a4' }}>{step.index}</b></span>
                     <span>count <b style={{ color: step.count > 0 ? '#a78bfa' : '#e2e8f0' }}>{step.count}</b></span>
                   </span>
                 </div>
@@ -296,7 +296,7 @@ export default function GeneralizedAbbreviationVisualizer() {
 
               {/* Growing list of results */}
               <div>
-                <div style={{ fontSize: 12, color: '#94a3b8', marginBottom: 8 }}>
+                <div style={{ fontSize: 12, color: '#627794', marginBottom: 8 }}>
                   Completed abbreviations ({results.length})
                 </div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>

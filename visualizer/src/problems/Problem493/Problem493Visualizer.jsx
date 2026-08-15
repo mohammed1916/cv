@@ -18,11 +18,11 @@ import { createPortal } from 'react-dom'
 const SOLUTION_CODE = getSolutionCode('reverse-pairs')
 
 const PATTERNS = {
-  'init': { icon: '◯', label: 'Initialize', color: '#06b6d4' },
-  'loop': { icon: '⟳', label: 'Iterate', color: '#3b82f6' },
-  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#3b82f6' },
-  'found': { icon: '✓', label: 'Match Found', color: '#10b981' },
-  'done': { icon: '✓', label: 'Complete', color: '#10b981' },
+  'init': { icon: '◯', label: 'Initialize', color: '#048196' },
+  'loop': { icon: '⟳', label: 'Iterate', color: '#1b6df5' },
+  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#1b6df5' },
+  'found': { icon: '✓', label: 'Match Found', color: '#0c865d' },
+  'done': { icon: '✓', label: 'Complete', color: '#0c865d' },
 }
 
 const LINE_PATTERN_MAP = {
@@ -168,15 +168,15 @@ function VisualizationPanel({ nums, step, applyEx }) {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(90px, 1fr))', gap: 8 }}>
           <div style={{ padding: 10, backgroundColor: '#dbeafe', borderRadius: 6, border: '1px solid #0284c7' }}>
             <div style={{ fontSize: 10, fontWeight: 600, color: '#0c4a6e' }}>nums[{step.i}]</div>
-            <div style={{ fontSize: 14, fontWeight: 700, color: '#0284c7', marginTop: 4 }}>{step.nums_i}</div>
+            <div style={{ fontSize: 14, fontWeight: 700, color: '#027bba', marginTop: 4 }}>{step.nums_i}</div>
           </div>
           <div style={{ padding: 10, backgroundColor: '#cffafe', borderRadius: 6, border: '1px solid #06b6d4' }}>
             <div style={{ fontSize: 10, fontWeight: 600, color: '#0e7490' }}>nums[{step.j}]</div>
-            <div style={{ fontSize: 14, fontWeight: 700, color: '#06b6d4', marginTop: 4 }}>{step.nums_j}</div>
+            <div style={{ fontSize: 14, fontWeight: 700, color: '#048196', marginTop: 4 }}>{step.nums_j}</div>
           </div>
           <div style={{ padding: 10, backgroundColor: '#fef3c7', borderRadius: 6, border: '1px solid #f59e0b' }}>
             <div style={{ fontSize: 10, fontWeight: 600, color: '#92400e' }}>2×nums[{step.j}]</div>
-            <div style={{ fontSize: 14, fontWeight: 700, color: '#f59e0b', marginTop: 4 }}>{step.threshold}</div>
+            <div style={{ fontSize: 14, fontWeight: 700, color: '#a36907', marginTop: 4 }}>{step.threshold}</div>
           </div>
         </div>
       )}
@@ -211,7 +211,7 @@ function VisualizationPanel({ nums, step, applyEx }) {
               </motion.div>
             ))}
             {step.pairs.length > 12 && (
-              <div style={{ fontSize: 11, color: '#94a3b8', alignSelf: 'center' }}>
+              <div style={{ fontSize: 11, color: '#627794', alignSelf: 'center' }}>
                 ... and {step.pairs.length - 12} more
               </div>
             )}
@@ -222,7 +222,7 @@ function VisualizationPanel({ nums, step, applyEx }) {
       {step?.count !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, border: '2px solid #f59e0b' }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#92400e' }}>Pair Count</div>
-          <div style={{ fontSize: 18, fontFamily: 'monospace', fontWeight: 700, color: '#f59e0b', marginTop: 4 }}>
+          <div style={{ fontSize: 18, fontFamily: 'monospace', fontWeight: 700, color: '#a36907', marginTop: 4 }}>
             {step.count}
           </div>
         </div>
@@ -231,7 +231,7 @@ function VisualizationPanel({ nums, step, applyEx }) {
       {step?.result !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#dcfce7', borderRadius: 6, border: '2px solid #22c55e' }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#166534' }}>Total Reverse Pairs</div>
-          <div style={{ fontSize: 20, fontFamily: 'monospace', fontWeight: 700, color: '#16a34a', marginTop: 4 }}>
+          <div style={{ fontSize: 20, fontFamily: 'monospace', fontWeight: 700, color: '#12873d', marginTop: 4 }}>
             {step.result}
           </div>
         </div>

@@ -217,7 +217,7 @@ function VisualizationPanel({ step, applyEx }) {
 
       {step?.distance !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, border: '2px solid #f59e0b' }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: '#f59e0b' }}>Distance: {step.distance}</div>
+          <div style={{ fontSize: 14, fontWeight: 700, color: '#a36907' }}>Distance: {step.distance}</div>
         </div>
       )}
 

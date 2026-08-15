@@ -168,7 +168,7 @@ function VisualizationPanel({ n, step, applyExample, examples }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -193,35 +193,35 @@ function VisualizationPanel({ n, step, applyExample, examples }) {
 
       <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
         <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>n Value</div>
-        <div style={{ fontSize: 16, fontWeight: 700, color: '#38bdf8' }}>{n}</div>
+        <div style={{ fontSize: 16, fontWeight: 700, color: '#067db1' }}>{n}</div>
       </div>
 
       {step?.iteration !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#a78bfa', marginBottom: 6 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>
             Iteration {step.iteration}/{step.n - 1}
           </div>
-          <div style={{ fontSize: 12, color: '#e2e8f0', fontFamily: 'monospace' }}>
-            Current: <span style={{ color: '#38bdf8', fontWeight: 600 }}>"{step.s}"</span>
+          <div style={{ fontSize: 12, color: '#5577a4', fontFamily: 'monospace' }}>
+            Current: <span style={{ color: '#067db1', fontWeight: 600 }}>"{step.s}"</span>
           </div>
         </div>
       )}
 
       {step?.digit !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f59e0b' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#f59e0b', marginBottom: 6 }}>Digit Analysis</div>
-          <div style={{ fontSize: 12, color: '#e2e8f0', fontFamily: 'monospace' }}>
-            Digit: <span style={{ color: '#22c55e', fontWeight: 600 }}>{step.digit}</span>
-            {' '}| Count: <span style={{ color: '#22c55e', fontWeight: 600 }}>{step.count}</span>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', marginBottom: 6 }}>Digit Analysis</div>
+          <div style={{ fontSize: 12, color: '#5577a4', fontFamily: 'monospace' }}>
+            Digit: <span style={{ color: '#178740', fontWeight: 600 }}>{step.digit}</span>
+            {' '}| Count: <span style={{ color: '#178740', fontWeight: 600 }}>{step.count}</span>
           </div>
         </div>
       )}
 
       {step?.nextSeq !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #38bdf8' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#38bdf8', marginBottom: 6 }}>Building Next Sequence</div>
-          <div style={{ fontSize: 12, color: '#e2e8f0', fontFamily: 'monospace', wordBreak: 'break-all' }}>
-            next_seq = "<span style={{ color: '#22c55e', fontWeight: 600 }}>{step.nextSeq}</span>"
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#067db1', marginBottom: 6 }}>Building Next Sequence</div>
+          <div style={{ fontSize: 12, color: '#5577a4', fontFamily: 'monospace', wordBreak: 'break-all' }}>
+            next_seq = "<span style={{ color: '#178740', fontWeight: 600 }}>{step.nextSeq}</span>"
           </div>
         </div>
       )}
@@ -240,7 +240,7 @@ function VisualizationPanel({ n, step, applyExample, examples }) {
           transition={{ duration: 0.3 }}
         >
           <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Result</div>
-          <div style={{ fontSize: 16, fontFamily: 'monospace', fontWeight: 'bold', color: '#22c55e', wordBreak: 'break-all' }}>
+          <div style={{ fontSize: 16, fontFamily: 'monospace', fontWeight: 'bold', color: '#178740', wordBreak: 'break-all' }}>
             "{step.result}"
           </div>
         </motion.div>
@@ -305,7 +305,7 @@ export default function CountAndSayVisualizer() {
   const vizPanel = (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>n Value (1-8)</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>n Value (1-8)</div>
         <input
           type="number"
           value={nValue}

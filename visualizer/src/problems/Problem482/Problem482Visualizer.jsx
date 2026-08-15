@@ -16,11 +16,11 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { createPortal } from 'react-dom'
 
 const PATTERNS = {
-  'init': { icon: '◯', label: 'Initialize', color: '#06b6d4' },
-  'loop': { icon: '⟳', label: 'Iterate', color: '#3b82f6' },
-  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#3b82f6' },
-  'found': { icon: '✓', label: 'Match Found', color: '#10b981' },
-  'done': { icon: '✓', label: 'Complete', color: '#10b981' },
+  'init': { icon: '◯', label: 'Initialize', color: '#048196' },
+  'loop': { icon: '⟳', label: 'Iterate', color: '#1b6df5' },
+  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#1b6df5' },
+  'found': { icon: '✓', label: 'Match Found', color: '#0c865d' },
+  'done': { icon: '✓', label: 'Complete', color: '#0c865d' },
 }
 
 const LINE_PATTERN_MAP = {
@@ -148,7 +148,7 @@ function VisualizationPanel({ s, k, step, applyEx }) {
         </div>
         <div style={{ padding: 10, backgroundColor: '#fef3c7', borderRadius: 6, border: '1px solid #f59e0b' }}>
           <div style={{ fontSize: 10, fontWeight: 600, color: '#92400e' }}>Group Size</div>
-          <div style={{ fontSize: 13, fontFamily: 'monospace', fontWeight: 700, color: '#f59e0b', marginTop: 4 }}>
+          <div style={{ fontSize: 13, fontFamily: 'monospace', fontWeight: 700, color: '#a36907', marginTop: 4 }}>
             {k}
           </div>
         </div>
@@ -220,7 +220,7 @@ function VisualizationPanel({ s, k, step, applyEx }) {
       {step?.result && (
         <div style={{ padding: 12, backgroundColor: '#dcfce7', borderRadius: 6, border: '2px solid #22c55e' }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#166534', marginBottom: 6 }}>Final Result</div>
-          <div style={{ fontSize: 13, fontFamily: 'monospace', fontWeight: 700, color: '#16a34a', wordBreak: 'break-all' }}>
+          <div style={{ fontSize: 13, fontFamily: 'monospace', fontWeight: 700, color: '#12873d', wordBreak: 'break-all' }}>
             {step.result}
           </div>
         </div>

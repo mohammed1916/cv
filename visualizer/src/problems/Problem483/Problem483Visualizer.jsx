@@ -18,11 +18,11 @@ import { createPortal } from 'react-dom'
 const SOLUTION_CODE = getSolutionCode('smallest-good-base')
 
 const PATTERNS = {
-  'init': { icon: '◯', label: 'Initialize', color: '#06b6d4' },
-  'loop': { icon: '⟳', label: 'Iterate', color: '#3b82f6' },
-  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#3b82f6' },
-  'found': { icon: '✓', label: 'Match Found', color: '#10b981' },
-  'done': { icon: '✓', label: 'Complete', color: '#10b981' },
+  'init': { icon: '◯', label: 'Initialize', color: '#048196' },
+  'loop': { icon: '⟳', label: 'Iterate', color: '#1b6df5' },
+  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#1b6df5' },
+  'found': { icon: '✓', label: 'Match Found', color: '#0c865d' },
+  'done': { icon: '✓', label: 'Complete', color: '#0c865d' },
 }
 
 const LINE_PATTERN_MAP = {
@@ -87,12 +87,12 @@ function VisualizationPanel({ n, step, applyEx }) {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
         <motion.div style={{ padding: 16, backgroundColor: '#f0fdf4', border: '2px solid #10b981', borderRadius: 6 }}>
           <div style={{ fontSize: 12, color: '#065f46', fontWeight: 600, marginBottom: 8 }}>Current Base</div>
-          <div style={{ fontSize: 24, fontFamily: 'monospace', fontWeight: 'bold', color: '#10b981' }}>{step?.base ?? 0}</div>
+          <div style={{ fontSize: 24, fontFamily: 'monospace', fontWeight: 'bold', color: '#0c865d' }}>{step?.base ?? 0}</div>
         </motion.div>
 
         <motion.div style={{ padding: 16, backgroundColor: '#fef3c7', border: '2px solid #f59e0b', borderRadius: 6 }}>
           <div style={{ fontSize: 12, color: '#92400e', fontWeight: 600, marginBottom: 8 }}>Exponent</div>
-          <div style={{ fontSize: 24, fontFamily: 'monospace', fontWeight: 'bold', color: '#f59e0b' }}>{step?.m ?? 0}</div>
+          <div style={{ fontSize: 24, fontFamily: 'monospace', fontWeight: 'bold', color: '#a36907' }}>{step?.m ?? 0}</div>
         </motion.div>
       </div>
 

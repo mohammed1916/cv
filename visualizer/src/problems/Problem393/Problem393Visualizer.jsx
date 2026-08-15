@@ -215,8 +215,8 @@ export default function Problem393Visualizer() {
       <div style={{ display: 'flex', gap: 16, flex: 1 }}>
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
           <div style={{ backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
-            <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '8px' }}>
-              Byte Array {inputError && <span style={{ color: '#f87171' }}>— {inputError}</span>}
+            <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>
+              Byte Array {inputError && <span style={{ color: '#ea0c0c' }}>— {inputError}</span>}
             </div>
             <input
               value={dataInput}
@@ -245,7 +245,7 @@ export default function Problem393Visualizer() {
           </div>
 
           <div style={{ backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px', flex: 1, overflowY: 'auto' }}>
-            <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '8px' }}>Bytes</div>
+            <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>Bytes</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {data.map((byte, idx) => {
                 const bits = byte.toString(2).padStart(8, '0')
@@ -264,11 +264,11 @@ export default function Problem393Visualizer() {
                       border: isCurrentIdx ? '2px solid #fbbf24' : 'none'
                     }}
                   >
-                    <div style={{ color: '#e2e8f0', fontSize: '12px', fontWeight: 'bold', fontFamily: 'monospace' }}>
+                    <div style={{ color: '#5577a4', fontSize: '12px', fontWeight: 'bold', fontFamily: 'monospace' }}>
                       [{idx}] {byte.toString().padStart(3, ' ')} = {bits}
                     </div>
                     {isCurrentIdx && step?.byteStr && (
-                      <div style={{ color: '#cbd5e1', fontSize: '11px', marginTop: '4px' }}>
+                      <div style={{ color: '#5a779b', fontSize: '11px', marginTop: '4px' }}>
                         Binary: {step.byteStr}
                       </div>
                     )}
@@ -282,7 +282,7 @@ export default function Problem393Visualizer() {
             <div style={{ display: 'flex', gap: 12, fontSize: '13px' }}>
               <div style={{ backgroundColor: '#1e293b', padding: '8px', borderRadius: '4px', flex: 1 }}>
                 <span style={{ color: '#64748b' }}>n_bytes: </span>
-                <span style={{ color: '#60a5fa', fontWeight: 'bold' }}>{step.nBytes}</span>
+                <span style={{ color: '#0870f0', fontWeight: 'bold' }}>{step.nBytes}</span>
               </div>
               <div style={{ backgroundColor: step?.isValid ? '#10b98166' : step?.isValid === false ? '#ef444466' : '#1e293b', padding: '8px', borderRadius: '4px', flex: 1, textAlign: 'center' }}>
                 <span style={{ color: step?.isValid ? '#86efac' : step?.isValid === false ? '#fca5a5' : '#cbd5e1', fontWeight: 'bold' }}>

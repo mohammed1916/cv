@@ -285,7 +285,7 @@ function VisualizationPanel({ step }) {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column-reverse', gap: 4 }}>
             {(step.stack ?? []).length === 0 && (
-              <div style={{ fontSize: 12, color: '#94a3b8', fontStyle: 'italic' }}>empty</div>
+              <div style={{ fontSize: 12, color: '#627794', fontStyle: 'italic' }}>empty</div>
             )}
             {(step.stack ?? []).map((v, i) => (
               <motion.div
@@ -306,12 +306,12 @@ function VisualizationPanel({ step }) {
 
         {/* Output row */}
         <div style={{ flex: 1, minWidth: 160 }}>
-          <div style={{ fontSize: 11, fontWeight: 700, color: '#059669', marginBottom: 4 }}>
+          <div style={{ fontSize: 11, fontWeight: 700, color: '#04865e', marginBottom: 4 }}>
             Output (inorder)
           </div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {(step.output ?? []).length === 0 && (
-              <div style={{ fontSize: 12, color: '#94a3b8', fontStyle: 'italic' }}>[]</div>
+              <div style={{ fontSize: 12, color: '#627794', fontStyle: 'italic' }}>[]</div>
             )}
             {(step.output ?? []).map((v, i) => (
               <motion.div
@@ -398,7 +398,7 @@ export default function Problem94Visualizer() {
   const statusPanel = (
     <div className="p94-status" style={{ display: 'flex', alignItems: 'center', padding: '8px 12px', gap: 12, fontSize: 12, color: '#64748b' }}>
       <span>Step: <strong>{stepIndex + 1}</strong> / {steps.length}</span>
-      {step?.phase && <span style={{ color: '#8b5cf6' }}>Phase: <strong>{step.phase}</strong></span>}
+      {step?.phase && <span style={{ color: '#8553f6' }}>Phase: <strong>{step.phase}</strong></span>}
     </div>
   )
 

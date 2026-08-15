@@ -99,7 +99,7 @@
     gap: 12px;
     align-items: center;
     font-size: 13px;
-    color: #a6adc8;
+    color: #6773a1;
 }
 
 .lca-canvas {
@@ -211,7 +211,7 @@
 
 .lca-target strong {
     font-size: 24px;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .lca-label {
@@ -224,17 +224,17 @@
 .lca-phase {
     text-align: center;
     font-size: 14px;
-    color: #a6adc8;
+    color: #6773a1;
     min-height: 24px;
 }
 
 .lca-dir {
-    color: #89b4fa;
+    color: #1a6df5;
     font-weight: 600;
 }
 
 .lca-found {
-    color: #cba6f7;
+    color: #964cef;
     font-weight: 700;
 }
 
@@ -244,7 +244,7 @@
     background: #313244;
     border-radius: 8px;
     font-size: 14px;
-    color: #6c7086;
+    color: #999cad;
 }
 
 .lca-result.ok {

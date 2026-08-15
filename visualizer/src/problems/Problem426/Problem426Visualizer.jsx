@@ -186,10 +186,10 @@ function VisualizationPanel({ root, step }) {
       <div>
         <div style={{ fontSize: 12, fontWeight: 600, color: '#155e75', marginBottom: 6 }}>Doubly linked list (in-order)</div>
         <div style={{ display: 'flex', gap: 4, alignItems: 'center', flexWrap: 'wrap' }}>
-          {(step.order || []).length === 0 && <span style={{ fontSize: 12, color: '#9ca3af' }}>—</span>}
+          {(step.order || []).length === 0 && <span style={{ fontSize: 12, color: '#6c7686' }}>—</span>}
           {(step.order || []).map((id, i) => (
             <div key={id} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-              {i > 0 && <span style={{ color: '#06b6d4', fontSize: 14 }}>⇄</span>}
+              {i > 0 && <span style={{ color: '#048196', fontSize: 14 }}>⇄</span>}
               <motion.div initial={{ scale: 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
                 style={{ width: 32, height: 32, borderRadius: 6, backgroundColor: '#06b6d4', color: '#fff',
                   display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700 }}>
@@ -204,7 +204,7 @@ function VisualizationPanel({ root, step }) {
         style={{ padding: 12, backgroundColor: '#cffafe', borderRadius: 6, border: '2px solid #06b6d4', textAlign: 'center' }}
         initial={{ opacity: 0 }} animate={{ opacity: 1 }}
       >
-        <div style={{ fontSize: 12, color: '#06b6d4' }}>{step.message}</div>
+        <div style={{ fontSize: 12, color: '#048196' }}>{step.message}</div>
       </motion.div>
     </div>
   )

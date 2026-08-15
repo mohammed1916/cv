@@ -281,7 +281,7 @@ export default function Problem362Visualizer() {
                                 justifyContent: 'center',
                                 fontSize: 8,
                                 fontWeight: 'bold',
-                                color: '#fff',
+                                color: '#757575',
                               }}
                               title={`${hit}s`}
                             >
@@ -342,7 +342,7 @@ export default function Problem362Visualizer() {
                 >
                   <div style={{ fontSize: 10, fontWeight: 600, marginBottom: 4, color: '#15803d' }}>Hit Count Result</div>
                   <div style={{ fontSize: 28, fontWeight: 'bold', color: '#15803d', textAlign: 'center' }}>{step.result}</div>
-                  <div style={{ fontSize: 9, color: '#059669', textAlign: 'center', marginTop: 4 }}>
+                  <div style={{ fontSize: 9, color: '#04865e', textAlign: 'center', marginTop: 4 }}>
                     Hits in {step.windowSize}-second window
                   </div>
                 </motion.div>

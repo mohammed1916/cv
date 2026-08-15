@@ -369,7 +369,7 @@ function VisualizationPanel({ step, treeValues, EXAMPLES, handleExampleClick, tr
         <div style={{ fontSize: 11, fontWeight: 600, color: '#166534', marginBottom: 2 }}>
           BST Deletion
         </div>
-        <div style={{ fontSize: 12, color: '#22c55e', lineHeight: 1.4 }}>
+        <div style={{ fontSize: 12, color: '#178740', lineHeight: 1.4 }}>
           Find node and delete while maintaining BST property using inorder successor.
         </div>
       </div>

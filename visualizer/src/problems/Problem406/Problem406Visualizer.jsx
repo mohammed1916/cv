@@ -117,7 +117,7 @@ function QueueVisualization({ people, step }) {
       {/* Current queue */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         {queue.length === 0 ? (
-          <div style={{ padding: 16, textAlign: 'center', color: '#94a3b8', fontSize: 13 }}>
+          <div style={{ padding: 16, textAlign: 'center', color: '#627794', fontSize: 13 }}>
             (empty queue - process people to fill)
           </div>
         ) : (
@@ -210,7 +210,7 @@ function QueueVisualization({ people, step }) {
         </div>
         <div style={{ padding: 10, backgroundColor: '#dbeafe', borderRadius: 4, textAlign: 'center' }}>
           <div style={{ fontSize: 10, color: '#0c4a6e', fontWeight: 600 }}>Queue Size</div>
-          <div style={{ fontSize: 14, fontWeight: 'bold', color: '#0284c7' }}>{queue.length}</div>
+          <div style={{ fontSize: 14, fontWeight: 'bold', color: '#027bba' }}>{queue.length}</div>
         </div>
         <div style={{ padding: 10, backgroundColor: '#d1fae5', borderRadius: 4, textAlign: 'center' }}>
           <div style={{ fontSize: 10, color: '#065f46', fontWeight: 600 }}>Remaining</div>

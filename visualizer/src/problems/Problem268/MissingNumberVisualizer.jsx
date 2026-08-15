@@ -129,7 +129,7 @@ export default function MissingNumberVisualizer() {
                 <div className="mn-tracker">
                     <span className="mn-tracker-label">actual sum</span>
                     <motion.span key={step?.runSum} className="mn-tracker-val"
-                        initial={{ scale: 1.3, color: "#fab387" }} animate={{ scale: 1, color: "#cdd6f4" }}>
+                        initial={{ scale: 1.3, color: "#c65108" }} animate={{ scale: 1, color: "#4f6ed8" }}>
                         {step?.runSum ?? 0}
                     </motion.span>
                 </div>

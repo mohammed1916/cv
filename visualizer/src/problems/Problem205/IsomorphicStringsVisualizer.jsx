@@ -213,7 +213,7 @@ function MappingPanel({ title, map, maxItems = 5 }) {
         {title}
       </div>
       {Object.keys(map).length === 0 ? (
-        <div style={{ fontSize: 12, color: '#a78bfa' }}>Empty</div>
+        <div style={{ fontSize: 12, color: '#7e56f8' }}>Empty</div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
           {Object.entries(map)
@@ -224,7 +224,7 @@ function MappingPanel({ title, map, maxItems = 5 }) {
               </div>
             ))}
           {Object.keys(map).length > maxItems && (
-            <div style={{ fontSize: 11, color: '#a78bfa' }}>
+            <div style={{ fontSize: 11, color: '#7e56f8' }}>
               ...and {Object.keys(map).length - maxItems} more
             </div>
           )}

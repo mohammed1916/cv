@@ -33,7 +33,7 @@
 }
 
 .gn-error {
-    color: #f38ba8;
+    color: #e51851;
     font-size: 12px;
     font-weight: 400;
 }
@@ -93,7 +93,7 @@
 .gn-label {
     font-size: 11px;
     font-weight: 700;
-    color: #a6adc8;
+    color: #6773a1;
     text-transform: uppercase;
     letter-spacing: 0.04em;
 }
@@ -151,7 +151,7 @@
     font-family: monospace;
     font-size: 18px;
     font-weight: 800;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 /* ── Range Bar ── */
@@ -291,9 +291,9 @@
     white-space: nowrap;
 }
 
-.lo-lbl  { color: #89b4fa; }
-.hi-lbl  { color: #cba6f7; }
-.mid-lbl { color: #f9e2af; }
+.lo-lbl  { color: #1a6df5; }
+.hi-lbl  { color: #964cef; }
+.mid-lbl { color: #996d0c; }
 
 /* Tick marks */
 .gn-ticks {
@@ -379,6 +379,6 @@
 }
 
 .gn-status.ok {
-    color: #a6e3a1;
+    color: #2f8628;
     border-color: rgba(166, 227, 161, 0.35);
 }

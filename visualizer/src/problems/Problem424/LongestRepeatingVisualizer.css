@@ -21,7 +21,7 @@
 .lr-kicker {
     font-size: 11px;
     font-weight: 700;
-    color: #89b4fa;
+    color: #1a6df5;
     text-transform: uppercase;
     letter-spacing: 0.12em;
 }
@@ -29,13 +29,13 @@
 .lr-hero h2 {
     font-size: 28px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
     margin: 8px 0;
 }
 
 .lr-hero p {
     font-size: 14px;
-    color: #a6adc8;
+    color: #6773a1;
     margin: 8px 0 0 0;
     max-width: 600px;
 }
@@ -88,7 +88,7 @@
 
 .lr-k-label {
     font-size: 13px;
-    color: #a6adc8;
+    color: #6773a1;
     display: flex;
     align-items: center;
     gap: 4px;
@@ -138,7 +138,7 @@
     font-weight: 700;
     border-radius: 7px;
     background: #313244;
-    color: #6c7086;
+    color: #999cad;
     border: 2px solid #45475a;
 }
 
@@ -161,7 +161,7 @@
     bottom: -16px;
     font-size: 9px;
     font-weight: 900;
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .lr-info-row {
@@ -169,15 +169,15 @@
     flex-wrap: wrap;
     gap: 14px;
     font-size: 13px;
-    color: #a6adc8;
+    color: #6773a1;
 }
 
 .lr-info-row strong {
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .lr-res strong {
-    color: #f9e2af;
+    color: #996d0c;
     font-size: 15px;
 }
 
@@ -207,11 +207,11 @@
 .lr-count-char {
     font-size: 15px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .lr-count-cell.max .lr-count-char {
-    color: #fab387;
+    color: #c65108;
 }
 
 .lr-count-val {
@@ -220,7 +220,7 @@
 }
 
 .lr-count-cell.max .lr-count-val {
-    color: #f9e2af;
+    color: #996d0c;
     font-weight: 700;
 }
 

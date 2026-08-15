@@ -331,7 +331,7 @@ export default function EvaluateDivisionVisualizer() {
               <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 8 }}>
                 {step.path.length > 0 && (
                   <div style={{ padding: 8, backgroundColor: '#eff6ff', borderRadius: 6, border: '1px solid #0ea5e9', flex: 1 }}>
-                    <div style={{ fontSize: 10, fontWeight: 600, color: '#0284c7', marginBottom: 6 }}>Path:</div>
+                    <div style={{ fontSize: 10, fontWeight: 600, color: '#027bba', marginBottom: 6 }}>Path:</div>
                     <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', alignItems: 'center' }}>
                       {step.path.map((node, i) => (
                         <span key={i}>
@@ -348,7 +348,7 @@ export default function EvaluateDivisionVisualizer() {
                           >
                             {node}
                           </motion.span>
-                          {i < step.path.length - 1 && <span style={{ margin: '0 4px', color: '#94a3b8' }}>→</span>}
+                          {i < step.path.length - 1 && <span style={{ margin: '0 4px', color: '#627794' }}>→</span>}
                         </span>
                       ))}
                     </div>
@@ -357,9 +357,9 @@ export default function EvaluateDivisionVisualizer() {
 
                 {step.product !== 1 && step.path.length > 0 && (
                   <div style={{ padding: 8, backgroundColor: '#fef3c7', borderRadius: 6, border: '1px solid #f59e0b', flex: 1 }}>
-                    <div style={{ fontSize: 10, fontWeight: 600, color: '#d97706', marginBottom: 6 }}>Product:</div>
+                    <div style={{ fontSize: 10, fontWeight: 600, color: '#b16105', marginBottom: 6 }}>Product:</div>
                     <motion.div
-                      style={{ fontSize: 14, fontWeight: 700, color: '#d97706' }}
+                      style={{ fontSize: 14, fontWeight: 700, color: '#b16105' }}
                       animate={{ scale: 1.05 }}
                     >
                       {step.product.toFixed(5)}
@@ -370,7 +370,7 @@ export default function EvaluateDivisionVisualizer() {
 
               {step.results.length > 0 && (
                 <div style={{ padding: 8, backgroundColor: '#ecfdf5', borderRadius: 6, border: '1px solid #10b981' }}>
-                  <div style={{ fontSize: 10, fontWeight: 600, color: '#059669', marginBottom: 6 }}>Results:</div>
+                  <div style={{ fontSize: 10, fontWeight: 600, color: '#04865e', marginBottom: 6 }}>Results:</div>
                   <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                     {step.results.map((res, i) => (
                       <motion.div

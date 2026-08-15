@@ -249,7 +249,7 @@ export default function LRUCacheVisualizer() {
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 16 }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          <span style={{ fontSize: 11, color: '#94a3b8' }}>commands</span>
+          <span style={{ fontSize: 11, color: '#627794' }}>commands</span>
           <input
             value={commandsInput}
             onChange={(e) => { setCommandsInput(e.target.value); handleReset() }}
@@ -257,7 +257,7 @@ export default function LRUCacheVisualizer() {
           />
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          <span style={{ fontSize: 11, color: '#94a3b8' }}>args</span>
+          <span style={{ fontSize: 11, color: '#627794' }}>args</span>
           <input
             value={argsInput}
             onChange={(e) => { setArgsInput(e.target.value); handleReset() }}
@@ -266,7 +266,7 @@ export default function LRUCacheVisualizer() {
         </div>
       </div>
 
-      {inputError && <span style={{ color: '#f87171', marginBottom: 12 }}>{inputError}</span>}
+      {inputError && <span style={{ color: '#ea0c0c', marginBottom: 12 }}>{inputError}</span>}
 
       <div className="lru-commands-list">
         {commands.map((cmd, i) => {

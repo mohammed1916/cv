@@ -123,8 +123,8 @@
   position: relative;
 }
 
-.mtsl-node.l1 { border-color: #f43f5e; color: #fda4af; }
-.mtsl-node.l2 { border-color: #0ea5e9; color: #bae6fd; }
+.mtsl-node.l1 { border-color: #f43f5e; color: #eb0522; }
+.mtsl-node.l2 { border-color: #0ea5e9; color: #057bb9; }
 
 .mtsl-node.processed {
   background: #0f172a;
@@ -146,7 +146,7 @@
 }
 
 .mtsl-node-arrow {
-  color: #94a3b8;
+  color: #627794;
   font-size: 18px;
   font-weight: bold;
 }
@@ -176,7 +176,7 @@
   font-size: 14px;
   font-family: monospace;
   font-weight: bold;
-  color: #22c55e;
+  color: #178740;
 }
 
 .mtsl-tail-indicator {

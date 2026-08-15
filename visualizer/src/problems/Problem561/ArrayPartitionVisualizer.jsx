@@ -166,7 +166,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -229,10 +229,10 @@ function VisualizationPanel({ step, applyExample, examples }) {
               )
             })}
           </div>
-          <div style={{ fontSize: 10, color: '#94a3b8', marginTop: 8 }}>
-            <span style={{ color: '#22c55e', fontWeight: 600 }}>Green</span> = min of pair,{' '}
-            <span style={{ color: '#f97316', fontWeight: 600 }}>Orange</span> = max of pair,{' '}
-            <span style={{ color: '#38bdf8', fontWeight: 600 }}>Cyan</span> = selected minimums
+          <div style={{ fontSize: 10, color: '#627794', marginTop: 8 }}>
+            <span style={{ color: '#178740', fontWeight: 600 }}>Green</span> = min of pair,{' '}
+            <span style={{ color: '#c35305', fontWeight: 600 }}>Orange</span> = max of pair,{' '}
+            <span style={{ color: '#067db1', fontWeight: 600 }}>Cyan</span> = selected minimums
           </div>
         </div>
       )}
@@ -256,8 +256,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
                 >
                   ({pair.min}, {pair.max})
                 </div>
-                <span style={{ color: '#94a3b8' }}>→</span>
-                <span style={{ color: '#22c55e', fontWeight: 600 }}>min: {pair.min}</span>
+                <span style={{ color: '#627794' }}>→</span>
+                <span style={{ color: '#178740', fontWeight: 600 }}>min: {pair.min}</span>
               </div>
             ))}
           </div>
@@ -266,19 +266,19 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.currentPair && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f97316' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#f97316', marginBottom: 6 }}>Current Pair</div>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#c35305', marginBottom: 6 }}>Current Pair</div>
           <div style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 13 }}>
             <span>({step.currentPair.min}, {step.currentPair.max})</span>
-            <span style={{ color: '#94a3b8' }}>→</span>
-            <span style={{ color: '#22c55e', fontWeight: 600 }}>Add {step.currentPair.min}</span>
+            <span style={{ color: '#627794' }}>→</span>
+            <span style={{ color: '#178740', fontWeight: 600 }}>Add {step.currentPair.min}</span>
           </div>
         </div>
       )}
 
       {step?.total !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #38bdf8' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#38bdf8', marginBottom: 6 }}>Running Total</div>
-          <div style={{ fontSize: 16, color: '#38bdf8', fontFamily: 'monospace', fontWeight: 700 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#067db1', marginBottom: 6 }}>Running Total</div>
+          <div style={{ fontSize: 16, color: '#067db1', fontFamily: 'monospace', fontWeight: 700 }}>
             {step.total}
           </div>
         </div>
@@ -303,12 +303,12 @@ function VisualizationPanel({ step, applyExample, examples }) {
               fontSize: 20,
               fontFamily: 'monospace',
               fontWeight: 'bold',
-              color: '#22c55e',
+              color: '#178740',
             }}
           >
             {step.result}
           </div>
-          <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 8 }}>
+          <div style={{ fontSize: 11, color: '#627794', marginTop: 8 }}>
             Sum of all pair minimums
           </div>
         </motion.div>
@@ -385,7 +385,7 @@ export default function ArrayPartitionVisualizer() {
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Array (JSON)</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Array (JSON)</div>
               <textarea
                 value={arrayInput}
                 onChange={(e) => {
@@ -405,7 +405,7 @@ export default function ArrayPartitionVisualizer() {
                   resize: 'vertical',
                 }}
               />
-              {inputError && <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
+              {inputError && <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
             </div>
             <VisualizationPanel step={step} applyExample={applyExample} examples={examples} />
           </div>),

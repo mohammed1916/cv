@@ -231,17 +231,17 @@ function VisualizationPanel({ step, allCustomers, targetRefereeId, inputPanel })
                       </td>
                       <td>
                         {isIncluded && (
-                          <span style={{ color: '#22c55e', fontWeight: 600 }}>
+                          <span style={{ color: '#178740', fontWeight: 600 }}>
                             ✓ Include
                           </span>
                         )}
                         {isExcluded && (
-                          <span style={{ color: '#ef4444', fontWeight: 600 }}>
+                          <span style={{ color: '#e91414', fontWeight: 600 }}>
                             ✗ Exclude
                           </span>
                         )}
                         {!isIncluded && !isExcluded && (
-                          <span style={{ color: '#9ca3af' }}>–</span>
+                          <span style={{ color: '#6c7686' }}>–</span>
                         )}
                       </td>
                     </motion.tr>

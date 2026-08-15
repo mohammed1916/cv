@@ -26,14 +26,14 @@
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: #fdba74;
+    color: #b55e03;
 }
 
 .gogt-hero-copy h2 {
     margin: 0;
     font-size: clamp(1.45rem, 2vw, 2rem);
     line-height: 1.08;
-    color: #fff7ed;
+    color: #b06200;
 }
 
 .gogt-hero-copy p {
@@ -363,7 +363,7 @@
 }
 
 .gogt-error {
-    color: #f87171;
+    color: #ea0c0c;
     font-size: 0.75rem;
     font-weight: 600;
 }
@@ -663,7 +663,7 @@
 }
 
 .gogt-tree-truncated {
-    color: #fbbf24;
+    color: #986e03;
     font-size: 0.76rem;
 }
 
@@ -747,7 +747,7 @@
 .gogt-overview-value {
     font-size: 1.1rem;
     font-weight: 700;
-    color: #fdba74;
+    color: #b55e03;
     text-transform: capitalize;
 }
 

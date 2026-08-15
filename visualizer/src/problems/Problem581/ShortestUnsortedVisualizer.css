@@ -40,12 +40,12 @@
 
 .bounds-item {
   font-size: 12px;
-  color: #e2e8f0;
+  color: #5577a4;
 }
 
 .bounds-label {
   font-weight: 600;
-  color: #94a3b8;
+  color: #627794;
   margin-bottom: 2px;
 }
 
@@ -53,5 +53,5 @@
   font-family: monospace;
   font-size: 14px;
   font-weight: 700;
-  color: #38bdf8;
+  color: #067db1;
 }

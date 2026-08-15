@@ -190,7 +190,7 @@ function InputPanel({ strsInput, setStrsInput, handleReset, applyExample, inputE
           />
         </label>
         {inputError && (
-          <div style={{ color: '#f87171', fontSize: 12, marginTop: 8 }}>
+          <div style={{ color: '#ea0c0c', fontSize: 12, marginTop: 8 }}>
             {inputError}
           </div>
         )}

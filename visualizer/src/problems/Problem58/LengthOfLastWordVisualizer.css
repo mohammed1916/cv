@@ -27,7 +27,7 @@
 .lw-chip.active,
 .lw-chip:hover {
     border-color: #f9e2af;
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .lw-panel {
@@ -77,14 +77,14 @@
 }
 
 .lw-char.space {
-    color: #45475a;
+    color: #80839e;
     background: #1a1a2a;
 }
 
 .lw-char.skip-cell {
     border-color: #6c7086;
     background: #202030;
-    color: #6c7086;
+    color: #85899d;
 }
 
 .lw-char.count-cell {
@@ -119,7 +119,7 @@
 
 .lw-ptr.skip-ptr {
     background: #202030;
-    color: #6c7086;
+    color: #85899d;
 }
 
 .lw-ptr.count-ptr {
@@ -154,11 +154,11 @@
 .lw-tracker-val {
     font-size: 20px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .lw-tracker-val.lw-len {
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .lw-tracker-val.lw-phase {
@@ -170,15 +170,15 @@
 }
 
 .lw-tracker-val.lw-phase.count {
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .lw-tracker-val.lw-phase.done {
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .lw-tracker-val.lw-phase.init {
-    color: #89b4fa;
+    color: #1a6df5;
 }
 
 .lw-result {

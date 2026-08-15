@@ -420,7 +420,7 @@ export default function Problem397Visualizer() {
                   <div style={{ fontSize: 12, fontWeight: 700, color: '#047857', marginBottom: 6 }}>
                     ✓ Reached 1 Successfully!
                   </div>
-                  <div style={{ fontSize: 14, fontWeight: 700, color: '#059669' }}>
+                  <div style={{ fontSize: 14, fontWeight: 700, color: '#04865e' }}>
                     Minimum Steps: {step.result}
                   </div>
                 </motion.div>

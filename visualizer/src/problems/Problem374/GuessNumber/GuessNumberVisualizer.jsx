@@ -197,9 +197,9 @@ export default function GuessNumberVisualizer() {
                     {/* ── State Variables ── */}
                     <div className="gn-vars">
                         {[
-                            { label: 'lo',  value: lo,  color: '#89b4fa' },
-                            { label: 'hi',  value: hi,  color: '#cba6f7' },
-                            { label: 'mid', value: mid !== null ? mid : '—', color: '#f9e2af' },
+                            { label: 'lo',  value: lo,  color: '#1a6df5' },
+                            { label: 'hi',  value: hi,  color: '#964cef' },
+                            { label: 'mid', value: mid !== null ? mid : '—', color: '#996d0c' },
                             { label: 'guess(mid)',
                               value: res !== null ? (res === 0 ? '0 ✓' : res === -1 ? '-1 (↓)' : '+1 (↑)') : '—',
                               color: res === 0 ? '#a6e3a1' : res === -1 ? '#f38ba8' : res === 1 ? '#fab387' : '#6c7086' },

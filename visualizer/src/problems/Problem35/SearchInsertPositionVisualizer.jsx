@@ -193,7 +193,7 @@ export default function SearchInsertPositionVisualizer() {
     <div className="sip-panel" style={{ flex: 1 }}>
       <div className="sip-panel-head">
         Array State & Search Space
-        {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
+        {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
       </div>
       <div className="sip-panel-body">
         <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
@@ -280,12 +280,12 @@ export default function SearchInsertPositionVisualizer() {
           </div>
           <div className="sip-stat-box">
             <span className="sip-stat-label">Target</span>
-            <span className="sip-stat-val" style={{ color: '#eab308' }}>{target}</span>
+            <span className="sip-stat-val" style={{ color: '#937005' }}>{target}</span>
           </div>
           {step?.insertPos !== undefined && (
             <div className="sip-stat-box">
               <span className="sip-stat-label">Insert Position</span>
-              <span className="sip-stat-val" style={{ color: '#06b6d4' }}>{step.insertPos}</span>
+              <span className="sip-stat-val" style={{ color: '#048196' }}>{step.insertPos}</span>
             </div>
           )}
         </div>

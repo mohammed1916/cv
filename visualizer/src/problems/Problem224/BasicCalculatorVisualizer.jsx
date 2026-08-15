@@ -165,7 +165,7 @@ export default function BasicCalculatorVisualizer() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6, padding: 8, backgroundColor: '#f8fafc', borderRadius: 4 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12 }}>
                   <span style={{ color: '#64748b' }}>result</span>
-                  <motion.span key={result} initial={{ scale: 1.3 }} animate={{ scale: 1 }} style={{ fontWeight: 'bold', color: '#0ea5e9' }}>{result}</motion.span>
+                  <motion.span key={result} initial={{ scale: 1.3 }} animate={{ scale: 1 }} style={{ fontWeight: 'bold', color: '#0b7db0' }}>{result}</motion.span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12 }}>
                   <span style={{ color: '#64748b' }}>num</span>
@@ -177,7 +177,7 @@ export default function BasicCalculatorVisualizer() {
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12 }}>
                   <span style={{ color: '#64748b' }}>phase</span>
-                  <span style={{ fontWeight: 'bold', color: '#8b5cf6' }}>{phase}</span>
+                  <span style={{ fontWeight: 'bold', color: '#8553f6' }}>{phase}</span>
                 </div>
               </div>
             </div>

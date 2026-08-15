@@ -18,11 +18,11 @@ import { createPortal } from 'react-dom'
 const SOLUTION_CODE = getSolutionCode('most-frequent-subtree-sum')
 
 const PATTERNS = {
-  'init': { icon: '◯', label: 'Initialize', color: '#06b6d4' },
-  'loop': { icon: '⟳', label: 'Iterate', color: '#3b82f6' },
-  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#3b82f6' },
-  'found': { icon: '✓', label: 'Match Found', color: '#10b981' },
-  'done': { icon: '✓', label: 'Complete', color: '#10b981' },
+  'init': { icon: '◯', label: 'Initialize', color: '#048196' },
+  'loop': { icon: '⟳', label: 'Iterate', color: '#1b6df5' },
+  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#1b6df5' },
+  'found': { icon: '✓', label: 'Match Found', color: '#0c865d' },
+  'done': { icon: '✓', label: 'Complete', color: '#0c865d' },
 }
 
 const LINE_PATTERN_MAP = {
@@ -265,7 +265,7 @@ function VisualizationPanel({ arr, step, applyEx }) {
                 textAlign: 'center'
               }}>
                 <div style={{ fontWeight: 600, color: '#065f46' }}>{sum}</div>
-                <div style={{ fontSize: 11, color: '#059669' }}>freq: {freq}</div>
+                <div style={{ fontSize: 11, color: '#04865e' }}>freq: {freq}</div>
               </div>
             ))}
           </div>
@@ -285,10 +285,10 @@ function VisualizationPanel({ arr, step, applyEx }) {
         animate={{ opacity: 1 }}
       >
         <div style={{ fontSize: 13, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>Result</div>
-        <div style={{ fontSize: 18, fontWeight: 'bold', color: '#0284c7' }}>
+        <div style={{ fontSize: 18, fontWeight: 'bold', color: '#027bba' }}>
           {step?.result ? `[${step.result.join(', ')}]` : 'Computing...'}
         </div>
-        <div style={{ fontSize: 12, color: '#0284c7', marginTop: 8 }}>
+        <div style={{ fontSize: 12, color: '#027bba', marginTop: 8 }}>
           {step?.message || ''}
         </div>
       </motion.div>

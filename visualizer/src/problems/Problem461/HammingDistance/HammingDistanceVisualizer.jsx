@@ -291,7 +291,7 @@ function VisualizationPanel({ x, y, step, applyEx }) {
         <div style={{
           fontSize: 28,
           fontWeight: 'bold',
-          color: '#22c55e',
+          color: '#178740',
           marginBottom: 8
         }}>
           {step?.distance ?? 0}

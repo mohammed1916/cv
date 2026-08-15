@@ -146,7 +146,7 @@ function VisualizationPanel({ words, step, applyEx }) {
           }}
         >
           <div style={{ fontSize: 12, color: '#065f46', fontWeight: 600, marginBottom: 8 }}>Current Word</div>
-          <div style={{ fontSize: 14, fontFamily: 'monospace', fontWeight: 'bold', color: '#10b981' }}>
+          <div style={{ fontSize: 14, fontFamily: 'monospace', fontWeight: 'bold', color: '#0c865d' }}>
             {step?.currentWord || '-'}
           </div>
         </motion.div>

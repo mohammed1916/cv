@@ -176,7 +176,7 @@
   border-radius: 4px;
   font-weight: 600;
   font-size: 9px;
-  color: white;
+  color: #757575;
 }
 
 .legend-badge.rank-1 {
@@ -265,7 +265,7 @@
 }
 
 .stat-row.pruned {
-  color: #9ca3af;
+  color: #6c7686;
 }
 
 .stat-row.pruned .stat-value {
@@ -301,15 +301,15 @@
   }
 
   .legend-title {
-    color: #f9fafb;
+    color: #607890;
   }
 
   .stat-label {
-    color: #d1d5db;
+    color: #6a7688;
   }
 
   .stat-value {
-    color: #e5e7eb;
+    color: #6b768b;
   }
 }
 

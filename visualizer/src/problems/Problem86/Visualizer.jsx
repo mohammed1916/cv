@@ -149,7 +149,7 @@ function generateSteps(list, x) {
 function NodeRow({ nodes, currentId, accent, emptyLabel }) {
   if (!nodes || nodes.length === 0) {
     return (
-      <div style={{ fontSize: 12, color: '#94a3b8', fontStyle: 'italic', padding: '8px 4px' }}>
+      <div style={{ fontSize: 12, color: '#627794', fontStyle: 'italic', padding: '8px 4px' }}>
         {emptyLabel}
       </div>
     )
@@ -195,7 +195,7 @@ function NodeRow({ nodes, currentId, accent, emptyLabel }) {
 function VisualizationPanel({ step }) {
   if (!step) {
     return (
-      <div style={{ padding: 16, color: '#94a3b8', fontSize: 13 }}>
+      <div style={{ padding: 16, color: '#627794', fontSize: 13 }}>
         Press play or step to partition the list.
       </div>
     )
@@ -208,7 +208,7 @@ function VisualizationPanel({ step }) {
     fontWeight: 700,
     letterSpacing: '0.04em',
     textTransform: 'uppercase',
-    color: '#94a3b8',
+    color: '#627794',
     marginBottom: 6,
   }
 
@@ -233,12 +233,12 @@ function VisualizationPanel({ step }) {
       </div>
 
       <div>
-        <div style={{ ...sectionLabel, color: '#34d399' }}>Less than {x}</div>
+        <div style={{ ...sectionLabel, color: '#1d855f' }}>Less than {x}</div>
         <NodeRow nodes={less} currentId={currentId} accent="#065f46" emptyLabel="(none yet)" />
       </div>
 
       <div>
-        <div style={{ ...sectionLabel, color: '#f87171' }}>Greater or equal to {x}</div>
+        <div style={{ ...sectionLabel, color: '#ea0c0c' }}>Greater or equal to {x}</div>
         <NodeRow nodes={ge} currentId={currentId} accent="#7f1d1d" emptyLabel="(none yet)" />
       </div>
 
@@ -247,7 +247,7 @@ function VisualizationPanel({ step }) {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <div style={{ ...sectionLabel, color: '#60a5fa' }}>Result (less → ≥ x)</div>
+          <div style={{ ...sectionLabel, color: '#0870f0' }}>Result (less → ≥ x)</div>
           <NodeRow nodes={merged} currentId={null} accent="#1d4ed8" emptyLabel="empty" />
         </motion.div>
       )}

@@ -37,7 +37,7 @@
 }
 
 .kp-error {
-  color: #f38ba8;
+  color: #e51851;
   font-size: 11px;
 }
 
@@ -88,7 +88,7 @@
 }
 
 .kp-control-group label {
-  color: #a6adc8;
+  color: #6773a1;
   font-size: 12px;
   font-weight: 600;
 }
@@ -255,7 +255,7 @@
   background: #313244;
   border-radius: 8px;
   font-size: 14px;
-  color: #6c7086;
+  color: #999cad;
 }
 
 .kp-result.ok {
@@ -275,11 +275,11 @@
 }
 
 .kp-status.ok {
-  color: #a6e3a1;
+  color: #2f8628;
   border-color: #a6e3a1;
 }
 
 .kp-status.killing {
-  color: #f9e2af;
+  color: #996d0c;
   border-color: #f9e2af;
 }

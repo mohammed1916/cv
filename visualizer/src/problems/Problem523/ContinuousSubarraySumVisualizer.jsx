@@ -292,7 +292,7 @@ function VisualizationPanel({ nums, k, step, applyEx }) {
         }}>
           {step?.result ? '✓ Found' : '✗ Not Found'}
         </div>
-        <div style={{ fontSize: 12, color: '#0284c7', marginTop: 8 }}>
+        <div style={{ fontSize: 12, color: '#027bba', marginTop: 8 }}>
           {step?.message || ''}
         </div>
       </motion.div>

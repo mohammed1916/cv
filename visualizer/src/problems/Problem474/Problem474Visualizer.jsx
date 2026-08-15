@@ -112,7 +112,7 @@ function DPTableView({ dp, m, n, updateRow, updateCol }) {
           ))}
         </tbody>
       </table>
-      {maxRows < m + 1 && <div style={{ fontSize: 10, color: '#94a3b8', marginTop: 4 }}>... (showing first {maxRows} rows)</div>}
+      {maxRows < m + 1 && <div style={{ fontSize: 10, color: '#627794', marginTop: 4 }}>... (showing first {maxRows} rows)</div>}
     </div>
   )
 }
@@ -174,7 +174,7 @@ function VisualizationPanel({ strs, m, n, step, applyEx }) {
         <div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, border: '2px solid #f59e0b' }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#92400e', marginBottom: 6 }}>Current String</div>
           <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
-            <div style={{ fontSize: 14, fontFamily: 'monospace', fontWeight: 700, color: '#f59e0b' }}>"{step.currentStr}"</div>
+            <div style={{ fontSize: 14, fontFamily: 'monospace', fontWeight: 700, color: '#a36907' }}>"{step.currentStr}"</div>
             <div style={{ fontSize: 11, color: '#92400e' }}>
               {step.zeros} zeros, {step.ones} ones
             </div>
@@ -198,7 +198,7 @@ function VisualizationPanel({ strs, m, n, step, applyEx }) {
       {step?.result !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#dcfce7', borderRadius: 6, border: '2px solid #22c55e' }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#166534', marginBottom: 4 }}>Maximum Strings</div>
-          <div style={{ fontSize: 20, fontWeight: 700, color: '#16a34a', fontFamily: 'monospace' }}>{step.result}</div>
+          <div style={{ fontSize: 20, fontWeight: 700, color: '#12873d', fontFamily: 'monospace' }}>{step.result}</div>
         </div>
       )}
     </div>

@@ -378,7 +378,7 @@ function VisualizationPanel({ step, s, EXAMPLES, handleExampleClick, sInput, set
         <div style={{ fontSize: 11, fontWeight: 600, color: '#166534', marginBottom: 2 }}>
           Pattern Matching
         </div>
-        <div style={{ fontSize: 12, color: '#22c55e', lineHeight: 1.4 }}>
+        <div style={{ fontSize: 12, color: '#178740', lineHeight: 1.4 }}>
           Check all divisors of string length as potential pattern lengths, then verify.
         </div>
       </div>

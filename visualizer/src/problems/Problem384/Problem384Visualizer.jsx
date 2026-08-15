@@ -300,7 +300,7 @@ export default function Problem384Visualizer() {
                   <div style={{ fontSize: 12, fontWeight: 600, color: '#92400e' }}>
                     Randomly select j from [0, {step.swapI}]
                   </div>
-                  <div style={{ fontSize: 13, fontWeight: 700, color: '#f59e0b', marginTop: 4 }}>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: '#a36907', marginTop: 4 }}>
                     j = {step.swapJ}
                   </div>
                 </motion.div>

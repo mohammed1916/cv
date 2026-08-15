@@ -97,7 +97,7 @@ function RoadJourneyVisualization({ gas, cost, step }) {
                   justifyContent: 'center',
                   fontSize: 16,
                   boxShadow: isCurrent ? '0 0 12px #fbbf24' : 'none',
-                  color: 'white'
+                  color: '#757575'
                 }}
               >
                 {isStart && !isCurrent ? '🚗' : isCurrent ? '⛽' : i}
@@ -149,7 +149,7 @@ function RoadJourneyVisualization({ gas, cost, step }) {
       {/* Stats */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
         <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '1px solid #86efac' }}>
-          <div style={{ fontSize: 11, color: '#65a30d' }}>Total Balance</div>
+          <div style={{ fontSize: 11, color: '#51820a' }}>Total Balance</div>
           <div style={{ fontSize: 18, fontWeight: 'bold', color: '#15803d' }}>{step?.total ?? 0}</div>
         </div>
         <div style={{ padding: 12, backgroundColor: '#eff6ff', borderRadius: 6, border: '1px solid #93c5fd' }}>

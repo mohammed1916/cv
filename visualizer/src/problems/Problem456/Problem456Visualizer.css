@@ -160,7 +160,7 @@
   color: var(--text-muted);
 }
 
-.p456-bar-val.cursor { color: #f9a8d4; }
+.p456-bar-val.cursor { color: #e00f81; }
 
 .p456-bar-idx {
   font-size: 0.58rem;
@@ -247,7 +247,7 @@
   font-weight: 700;
 }
 
-.p456-stat.highlight .p456-stat-val { color: #f9a8d4; }
+.p456-stat.highlight .p456-stat-val { color: #e00f81; }
 
 .p456-result {
   text-align: center;
@@ -274,8 +274,8 @@
   color: var(--text);
 }
 
-.p456-result.yes .p456-result-val { color: #86efac; }
-.p456-result.no .p456-result-val { color: #fca5a5; }
+.p456-result.yes .p456-result-val { color: #12873c; }
+.p456-result.no .p456-result-val { color: #eb0808; }
 
 /* ── Code panel ───────────────────────────── */
 .p456-panel-code {

@@ -213,7 +213,7 @@ function BoardPanel({ EXAMPLES, ex, n, board, activeRow, activeCol, phase, attac
         </div>
         <div className="nq-tracker">
           <span className="nq-tracker-label">Solutions</span>
-          <motion.span key={step?.solutions} className="nq-tracker-val nq-sol" initial={{ scale: 1.4, color: "#a6e3a1" }} animate={{ scale: 1, color: "#cdd6f4" }}>
+          <motion.span key={step?.solutions} className="nq-tracker-val nq-sol" initial={{ scale: 1.4, color: "#2f8628" }} animate={{ scale: 1, color: "#4f6ed8" }}>
             {step?.solutions ?? 0}
           </motion.span>
         </div>

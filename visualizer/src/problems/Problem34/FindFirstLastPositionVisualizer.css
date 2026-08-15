@@ -166,17 +166,17 @@
 }
 
 .ffp-ptr.left {
-  color: #06b6d4;
+  color: #048196;
   top: -20px;
 }
 
 .ffp-ptr.mid {
-  color: #f59e0b;
+  color: #a36907;
   top: -20px;
 }
 
 .ffp-ptr.right {
-  color: #ec4899;
+  color: #e0177a;
   top: -20px;
 }
 
@@ -217,6 +217,6 @@
 }
 
 .ffp-status.success {
-  color: #22c55e;
+  color: #178740;
   font-weight: 500;
 }

@@ -25,7 +25,7 @@
 .mz-chip.active,
 .mz-chip:hover {
     border-color: #f9e2af;
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .mz-panel {
@@ -86,7 +86,7 @@
 .mz-cell.zero {
     border-color: #313244;
     background: #1a1a2a;
-    color: #45475a;
+    color: #80839e;
 }
 
 .mz-idx {
@@ -144,7 +144,7 @@
 .mz-tracker-val {
     font-size: 20px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .mz-result {

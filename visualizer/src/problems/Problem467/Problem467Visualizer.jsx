@@ -177,7 +177,7 @@ function VisualizationPanel({ s, step, applyEx }) {
               animate={{ opacity: 1, scale: 1 }}
             >
               <div style={{ fontSize: 14, fontWeight: 700, color: '#047857' }}>{letter}</div>
-              <div style={{ fontSize: 12, color: '#10b981', marginTop: 4 }}>{maxLen}</div>
+              <div style={{ fontSize: 12, color: '#0c865d', marginTop: 4 }}>{maxLen}</div>
             </motion.div>
           ))}
         </div>
@@ -193,7 +193,7 @@ function VisualizationPanel({ s, step, applyEx }) {
           }}
         >
           <div style={{ fontSize: 12, color: '#065f46', fontWeight: 600, marginBottom: 8 }}>Current Length</div>
-          <div style={{ fontSize: 28, fontWeight: 'bold', color: '#10b981' }}>
+          <div style={{ fontSize: 28, fontWeight: 'bold', color: '#0c865d' }}>
             {step?.length ?? 1}
           </div>
         </motion.div>

@@ -18,11 +18,11 @@ import { createPortal } from 'react-dom'
 const SOLUTION_CODE = getSolutionCode('predict-the-winner')
 
 const PATTERNS = {
-  'init': { icon: '◯', label: 'Initialize', color: '#06b6d4' },
-  'loop': { icon: '⟳', label: 'Iterate', color: '#3b82f6' },
-  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#3b82f6' },
-  'found': { icon: '✓', label: 'Match Found', color: '#10b981' },
-  'done': { icon: '✓', label: 'Complete', color: '#10b981' },
+  'init': { icon: '◯', label: 'Initialize', color: '#048196' },
+  'loop': { icon: '⟳', label: 'Iterate', color: '#1b6df5' },
+  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#1b6df5' },
+  'found': { icon: '✓', label: 'Match Found', color: '#0c865d' },
+  'done': { icon: '✓', label: 'Complete', color: '#0c865d' },
 }
 
 const LINE_PATTERN_MAP = {
@@ -206,19 +206,19 @@ function VisualizationPanel({ nums, step, applyEx }) {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 8 }}>
             <div>
               <div style={{ fontSize: 11, color: '#0c4a6e', marginBottom: 4 }}>Current Player</div>
-              <div style={{ fontSize: 16, fontWeight: 700, color: '#0284c7' }}>P{step.player}</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: '#027bba' }}>P{step.player}</div>
             </div>
             <div>
               <div style={{ fontSize: 11, color: '#0c4a6e', marginBottom: 4 }}>Left Index</div>
-              <div style={{ fontSize: 16, fontWeight: 700, color: '#0284c7' }}>{step.left}</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: '#027bba' }}>{step.left}</div>
             </div>
             <div>
               <div style={{ fontSize: 11, color: '#0c4a6e', marginBottom: 4 }}>Right Index</div>
-              <div style={{ fontSize: 16, fontWeight: 700, color: '#0284c7' }}>{step.right}</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: '#027bba' }}>{step.right}</div>
             </div>
             <div>
               <div style={{ fontSize: 11, color: '#0c4a6e', marginBottom: 4 }}>Can Win</div>
-              <div style={{ fontSize: 16, fontWeight: 700, color: '#0284c7 ' }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: '#027bba' }}>
                 {step.canWin !== null ? (step.canWin ? '✓' : '✗') : '?'}
               </div>
             </div>
@@ -260,10 +260,10 @@ function VisualizationPanel({ nums, step, applyEx }) {
         animate={{ opacity: 1 }}
       >
         <div style={{ fontSize: 13, fontWeight: 600, color: '#92400e', marginBottom: 8 }}>Winner</div>
-        <div style={{ fontSize: 24, fontWeight: 'bold', color: '#f59e0b' }}>
+        <div style={{ fontSize: 24, fontWeight: 'bold', color: '#a36907' }}>
           {step?.canWin === true ? 'Player 1 Wins' : step?.canWin === false ? 'Player 2 Wins' : '...'}
         </div>
-        <div style={{ fontSize: 12, color: '#f59e0b', marginTop: 8 }}>
+        <div style={{ fontSize: 12, color: '#a36907', marginTop: 8 }}>
           {step?.message || ''}
         </div>
       </motion.div>

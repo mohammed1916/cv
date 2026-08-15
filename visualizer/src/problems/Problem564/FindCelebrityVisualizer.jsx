@@ -194,7 +194,7 @@ function MatrixVisualization({ step, n, knowsMatrix }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <div style={{ fontSize: 11, fontWeight: 600, color: '#94a3b8' }}>Knows Matrix</div>
+      <div style={{ fontSize: 11, fontWeight: 600, color: '#627794' }}>Knows Matrix</div>
       <div style={{ display: 'flex', gap: 2, overflow: 'auto' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           {Array.from({ length: n }).map((_, i) => (
@@ -280,7 +280,7 @@ function VisualizationPanel({ step, applyExample, examples, n, knowsMatrix }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -308,14 +308,14 @@ function VisualizationPanel({ step, applyExample, examples, n, knowsMatrix }) {
       {step?.left !== undefined && step?.right !== undefined && (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
           <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #60a5fa' }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#60a5fa', marginBottom: 6 }}>Left Pointer</div>
-            <div style={{ fontSize: 16, color: '#60a5fa', fontFamily: 'monospace', fontWeight: 700 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: '#0870f0', marginBottom: 6 }}>Left Pointer</div>
+            <div style={{ fontSize: 16, color: '#0870f0', fontFamily: 'monospace', fontWeight: 700 }}>
               {step.left}
             </div>
           </div>
           <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f59e0b' }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#f59e0b', marginBottom: 6 }}>Right Pointer</div>
-            <div style={{ fontSize: 16, color: '#f59e0b', fontFamily: 'monospace', fontWeight: 700 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', marginBottom: 6 }}>Right Pointer</div>
+            <div style={{ fontSize: 16, color: '#a36907', fontFamily: 'monospace', fontWeight: 700 }}>
               {step.right}
             </div>
           </div>
@@ -324,8 +324,8 @@ function VisualizationPanel({ step, applyExample, examples, n, knowsMatrix }) {
 
       {step?.candidate !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #22c55e' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#22c55e', marginBottom: 6 }}>Candidate</div>
-          <div style={{ fontSize: 16, color: '#22c55e', fontFamily: 'monospace', fontWeight: 700 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#178740', marginBottom: 6 }}>Candidate</div>
+          <div style={{ fontSize: 16, color: '#178740', fontFamily: 'monospace', fontWeight: 700 }}>
             {step.candidate}
           </div>
         </div>
@@ -334,7 +334,7 @@ function VisualizationPanel({ step, applyExample, examples, n, knowsMatrix }) {
       {step?.checkPerson !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #64748b' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Verification Check</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 12, color: '#e2e8f0' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 12, color: '#5577a4' }}>
             <div>
               Candidate → {step.checkPerson}:{' '}
               <span style={{ color: step.candidateKnows ? '#f87171' : '#22c55e', fontWeight: 600 }}>
@@ -450,7 +450,7 @@ export default function FindCelebrityVisualizer() {
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
               <div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>N (people)</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>N (people)</div>
                 <input
                   type="number"
                   value={n}
@@ -474,7 +474,7 @@ export default function FindCelebrityVisualizer() {
               </div>
             </div>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Knows Matrix (JSON)</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Knows Matrix (JSON)</div>
               <textarea
                 value={matrixInput}
                 onChange={(e) => {
@@ -494,7 +494,7 @@ export default function FindCelebrityVisualizer() {
                   resize: 'vertical',
                 }}
               />
-              {inputError && <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
+              {inputError && <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
             </div>
             <VisualizationPanel step={step} applyExample={applyExample} examples={examples} n={n} knowsMatrix={matrix} />
           </div>),

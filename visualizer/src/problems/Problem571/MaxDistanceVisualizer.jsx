@@ -191,7 +191,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -219,7 +219,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           {step.arrays.map((arr, arrIdx) => (
             <div key={arrIdx} style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <div style={{ fontSize: 11, fontWeight: 600, color: '#e2e8f0' }}>Array[{arrIdx}]</div>
+              <div style={{ fontSize: 11, fontWeight: 600, color: '#5577a4' }}>Array[{arrIdx}]</div>
               <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', alignItems: 'center' }}>
                 {arr.map((val, valIdx) => {
                   const isCurrentMin = step.currentArrayIndex === arrIdx && val === step.currentArrayMin
@@ -279,14 +279,14 @@ function VisualizationPanel({ step, applyExample, examples }) {
       {step?.minVal !== undefined && step?.maxVal !== undefined && (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
           <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #0ea5e9' }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#0ea5e9', marginBottom: 6 }}>Global Min</div>
-            <div style={{ fontSize: 16, color: '#0ea5e9', fontFamily: 'monospace', fontWeight: 700 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: '#0b7db0', marginBottom: 6 }}>Global Min</div>
+            <div style={{ fontSize: 16, color: '#0b7db0', fontFamily: 'monospace', fontWeight: 700 }}>
               {step.minVal}
             </div>
           </div>
           <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f97316' }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#f97316', marginBottom: 6 }}>Global Max</div>
-            <div style={{ fontSize: 16, color: '#f97316', fontFamily: 'monospace', fontWeight: 700 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: '#c35305', marginBottom: 6 }}>Global Max</div>
+            <div style={{ fontSize: 16, color: '#c35305', fontFamily: 'monospace', fontWeight: 700 }}>
               {step.maxVal}
             </div>
           </div>
@@ -297,20 +297,20 @@ function VisualizationPanel({ step, applyExample, examples }) {
       {step?.distance1 !== undefined && step?.distance2 !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #64748b' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Distance Calculations</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 12, color: '#e2e8f0' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 12, color: '#5577a4' }}>
             <div>
-              <span style={{ color: '#ea580c', fontWeight: 600 }}>{step.currentArrayMax}</span>
+              <span style={{ color: '#ca4c0a', fontWeight: 600 }}>{step.currentArrayMax}</span>
               {' - '}
-              <span style={{ color: '#0ea5e9', fontWeight: 600 }}>{step.minVal}</span>
+              <span style={{ color: '#0b7db0', fontWeight: 600 }}>{step.minVal}</span>
               {' = '}
-              <span style={{ color: '#22c55e', fontWeight: 700 }}>{step.distance1}</span>
+              <span style={{ color: '#178740', fontWeight: 700 }}>{step.distance1}</span>
             </div>
             <div>
-              <span style={{ color: '#f97316', fontWeight: 600 }}>{step.maxVal}</span>
+              <span style={{ color: '#c35305', fontWeight: 600 }}>{step.maxVal}</span>
               {' - '}
-              <span style={{ color: '#3b82f6', fontWeight: 600 }}>{step.currentArrayMin}</span>
+              <span style={{ color: '#1b6df5', fontWeight: 600 }}>{step.currentArrayMin}</span>
               {' = '}
-              <span style={{ color: '#22c55e', fontWeight: 700 }}>{step.distance2}</span>
+              <span style={{ color: '#178740', fontWeight: 700 }}>{step.distance2}</span>
             </div>
           </div>
         </div>
@@ -336,7 +336,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
               fontSize: 18,
               fontFamily: 'monospace',
               fontWeight: 'bold',
-              color: '#38bdf8',
+              color: '#067db1',
             }}
           >
             {step.maxDistance}
@@ -413,7 +413,7 @@ export default function MaxDistanceVisualizer() {
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>
                 Arrays (JSON)
               </div>
               <textarea
@@ -435,7 +435,7 @@ export default function MaxDistanceVisualizer() {
                   resize: 'vertical',
                 }}
               />
-              {inputError && <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
+              {inputError && <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
             </div>
             <VisualizationPanel step={step} applyExample={applyExample} examples={examples} />
           </div>),

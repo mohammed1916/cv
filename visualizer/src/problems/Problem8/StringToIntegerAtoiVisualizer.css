@@ -200,12 +200,12 @@
   font-weight: bold;
 }
 
-.atoi-math-formula .var { color: #94a3b8; }
+.atoi-math-formula .var { color: #627794; }
 .atoi-math-formula .op { color: #64748b; }
-.atoi-math-formula .val { color: #f8fafc; }
+.atoi-math-formula .val { color: #4879a9; }
 
-.atoi-math-formula .highlight { color: #22c55e; }
-.atoi-math-formula .new { color: #0ea5e9; }
+.atoi-math-formula .highlight { color: #178740; }
+.atoi-math-formula .new { color: #0b7db0; }
 
 .atoi-var-row {
   display: flex;
@@ -229,7 +229,7 @@
 
 .atoi-var-title {
   font-size: 12px;
-  color: #94a3b8;
+  color: #627794;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 8px;
@@ -240,12 +240,12 @@
   font-family: monospace;
   font-size: 24px;
   font-weight: bold;
-  color: #f8fafc;
+  color: #4879a9;
 }
 
-.atoi-var-val.neg { color: #ef4444; }
-.atoi-var-val.pos { color: #22c55e; }
-.atoi-var-val.large { font-size: 32px; color: #38bdf8; word-break: break-all; }
+.atoi-var-val.neg { color: #e91414; }
+.atoi-var-val.pos { color: #178740; }
+.atoi-var-val.large { font-size: 32px; color: #067db1; word-break: break-all; }
 
 .atoi-bounds-box {
   display: flex;
@@ -264,8 +264,8 @@
   font-size: 12px;
 }
 
-.atoi-bound .label { color: #94a3b8; }
-.atoi-bound .val { color: #f8fafc; font-weight: bold; }
+.atoi-bound .label { color: #627794; }
+.atoi-bound .val { color: #4879a9; font-weight: bold; }
 
 .atoi-clamp-alert {
   background: rgba(239, 68, 68, 0.1);
@@ -298,7 +298,7 @@
 
 .atoi-final-result .label {
   font-size: 12px;
-  color: #4ade80;
+  color: #198741;
   text-transform: uppercase;
   font-weight: bold;
 }
@@ -307,11 +307,11 @@
   font-size: 36px;
   font-weight: bold;
   font-family: monospace;
-  color: #22c55e;
+  color: #178740;
 }
 
 .atoi-final-result .val.clamped {
-  color: #ef4444;
+  color: #e91414;
 }
 
 .atoi-status {

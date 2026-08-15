@@ -231,7 +231,7 @@ function TreeVisualization({ tree, step }) {
         </div>
         <div style={{ padding: 10, backgroundColor: '#dbeafe', borderRadius: 4, textAlign: 'center' }}>
           <div style={{ fontSize: 10, color: '#0c4a6e', fontWeight: 600 }}>Sum</div>
-          <div style={{ fontSize: 16, fontWeight: 'bold', color: '#0284c7' }}>{step?.sum ?? 0}</div>
+          <div style={{ fontSize: 16, fontWeight: 'bold', color: '#027bba' }}>{step?.sum ?? 0}</div>
         </div>
       </div>
 

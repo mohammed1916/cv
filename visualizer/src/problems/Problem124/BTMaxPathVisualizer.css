@@ -93,7 +93,7 @@
 }
 
 .btmps-val {
-    color: #f38ba8;
+    color: #e51851;
     font-size: 18px;
 }
 
@@ -136,22 +136,22 @@
 .btmps-node-val {
     font-size: 14px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
     line-height: 1;
 }
 
 .btmps-node.active .btmps-node-val {
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .btmps-node.computed .btmps-node-val {
-    color: #f38ba8;
+    color: #e51851;
 }
 
 .btmps-gain-badge {
     font-size: 9px;
     font-weight: 700;
-    color: #a6e3a1;
+    color: #2f8628;
     line-height: 1;
 }
 

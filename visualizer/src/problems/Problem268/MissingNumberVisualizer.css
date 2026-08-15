@@ -25,7 +25,7 @@
 .mn-chip.active,
 .mn-chip:hover {
     border-color: #a6e3a1;
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .mn-panel {
@@ -122,11 +122,11 @@
 .mn-tracker-val {
     font-size: 20px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .mn-tracker-val.result-val {
-    color: #a6e3a1;
+    color: #2f8628;
     font-size: 24px;
 }
 

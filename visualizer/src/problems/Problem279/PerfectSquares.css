@@ -232,7 +232,7 @@
 
 .psq-dp-active .psq-dp-index,
 .psq-dp-active .psq-dp-value {
-  color: white;
+  color: #757575;
 }
 
 .psq-dp-path {
@@ -381,20 +381,20 @@
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
-  color: #89dceb;
+  color: #198093;
   margin-bottom: 8px;
 }
 
 .ps-hero-copy h2 {
   font-size: 28px;
   font-weight: 700;
-  color: #cdd6f4;
+  color: #4f6ed8;
   margin: 12px 0;
 }
 
 .ps-hero-copy p {
   font-size: 14px;
-  color: #bac2de;
+  color: #6072b3;
   line-height: 1.6;
   margin: 12px 0 0;
 }
@@ -441,7 +441,7 @@
 .ps-input-label {
   font-size: 12px;
   font-weight: 600;
-  color: #89dceb;
+  color: #198093;
   text-transform: uppercase;
 }
 
@@ -465,7 +465,7 @@
   padding: 8px 12px;
   background: #f38ba8;
   background: rgba(243, 139, 168, 0.15);
-  color: #f38ba8;
+  color: #7d0d2c;
   border-radius: 4px;
   font-size: 12px;
   border: 1px solid #f38ba8;
@@ -489,12 +489,12 @@
 }
 
 .ps-state-label {
-  color: #bac2de;
+  color: #6072b3;
   font-weight: 500;
 }
 
 .ps-state-val {
-  color: #89dceb;
+  color: #198093;
   font-weight: 600;
   font-family: monospace;
 }
@@ -530,7 +530,7 @@
 .ps-squares-label {
   font-size: 12px;
   font-weight: 600;
-  color: #89dceb;
+  color: #198093;
   text-transform: uppercase;
 }
 
@@ -603,7 +603,7 @@
 }
 
 .ps-dp-cell.inf {
-  color: #a6adc8;
+  color: #6773a1;
   font-style: italic;
 }
 
@@ -614,7 +614,7 @@
 
 .ps-dp-idx {
   font-size: 10px;
-  color: #a6adc8;
+  color: #6773a1;
   font-weight: 500;
 }
 

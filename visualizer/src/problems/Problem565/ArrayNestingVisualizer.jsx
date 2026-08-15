@@ -239,7 +239,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -264,7 +264,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.array && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Array</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Array</div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(40px, 1fr))', gap: 6 }}>
             {step.array.map((val, idx) => {
               const isCurrentIndex = idx === step.currentIndex
@@ -296,12 +296,12 @@ function VisualizationPanel({ step, applyExample, examples }) {
                     textAlign: 'center',
                     fontFamily: 'monospace',
                     fontWeight: 600,
-                    color: '#e2e8f0',
+                    color: '#5577a4',
                     fontSize: 12,
                   }}
                   animate={{ scale: isCurrentIndex ? 1.1 : 1 }}
                 >
-                  <div style={{ fontSize: 10, color: '#94a3b8' }}>i:{idx}</div>
+                  <div style={{ fontSize: 10, color: '#627794' }}>i:{idx}</div>
                   <div>{val}</div>
                 </motion.div>
               )
@@ -312,7 +312,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.path && step?.path.length > 0 && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #9f7aea' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#9f7aea', marginBottom: 8 }}>Path (Index Jumps)</div>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#8758e5', marginBottom: 8 }}>Path (Index Jumps)</div>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
             {step.path.map((idx, i) => (
               <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -331,7 +331,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
                   {idx}
                 </div>
                 {i < step.path.length - 1 && (
-                  <div style={{ color: '#9f7aea', fontWeight: 'bold' }}>→</div>
+                  <div style={{ color: '#8758e5', fontWeight: 'bold' }}>→</div>
                 )}
               </div>
             ))}
@@ -341,8 +341,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.cycleSize !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f87171' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#f87171', marginBottom: 6 }}>Cycle Size</div>
-          <div style={{ fontSize: 18, fontFamily: 'monospace', fontWeight: 700, color: '#f87171' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#ea0c0c', marginBottom: 6 }}>Cycle Size</div>
+          <div style={{ fontSize: 18, fontFamily: 'monospace', fontWeight: 700, color: '#ea0c0c' }}>
             {step.cycleSize}
           </div>
         </div>
@@ -350,8 +350,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.maxCycle !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #38bdf8' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#38bdf8', marginBottom: 6 }}>Max Cycle Found</div>
-          <div style={{ fontSize: 18, fontFamily: 'monospace', fontWeight: 700, color: '#38bdf8' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#067db1', marginBottom: 6 }}>Max Cycle Found</div>
+          <div style={{ fontSize: 18, fontFamily: 'monospace', fontWeight: 700, color: '#067db1' }}>
             {step.maxCycle}
           </div>
         </div>
@@ -371,7 +371,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
           transition={{ duration: 0.3 }}
         >
           <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Result</div>
-          <div style={{ fontSize: 20, fontFamily: 'monospace', fontWeight: 'bold', color: '#22c55e' }}>
+          <div style={{ fontSize: 20, fontFamily: 'monospace', fontWeight: 'bold', color: '#178740' }}>
             Longest Cycle: {step.result}
           </div>
         </motion.div>
@@ -447,7 +447,7 @@ export default function ArrayNestingVisualizer() {
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Array (JSON)</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Array (JSON)</div>
               <textarea
                 value={arrayInput}
                 onChange={(e) => {
@@ -467,7 +467,7 @@ export default function ArrayNestingVisualizer() {
                   resize: 'vertical',
                 }}
               />
-              {inputError && <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
+              {inputError && <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
             </div>
             <VisualizationPanel step={step} applyExample={applyExample} examples={examples} />
           </div>),

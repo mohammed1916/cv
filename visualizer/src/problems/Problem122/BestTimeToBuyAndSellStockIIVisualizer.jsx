@@ -122,7 +122,7 @@ function generateSteps(prices) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: '#94a3b8' }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: '#627794' }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
@@ -157,7 +157,7 @@ function VisualizationPanel({ step }) {
                     paddingBottom: 4,
                     fontSize: 10,
                     fontWeight: 600,
-                    color: '#fff',
+                    color: '#757575',
                   }}
                   animate={{ scale: step.currentIdx === idx ? 1.1 : 1 }}
                 >

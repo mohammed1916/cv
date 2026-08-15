@@ -15,7 +15,7 @@
   gap: 2px;
   margin-bottom: 8px;
   font-size: 10px;
-  color: #94a3b8;
+  color: #627794;
   padding: 0 4px;
 }
 
@@ -35,7 +35,7 @@
 .schedule-label {
   font-size: 12px;
   font-weight: 600;
-  color: #a78bfa;
+  color: #7e56f8;
   margin-bottom: 8px;
 }
 
@@ -71,7 +71,7 @@
 .merged-label {
   font-size: 12px;
   font-weight: 600;
-  color: #38bdf8;
+  color: #067db1;
   margin-bottom: 8px;
 }
 
@@ -109,7 +109,7 @@
 .free-time-label {
   font-size: 12px;
   font-weight: 600;
-  color: #22c55e;
+  color: #178740;
   margin-bottom: 8px;
 }
 
@@ -149,6 +149,6 @@
 
 .step-message {
   font-size: 12px;
-  color: #e2e8f0;
+  color: #5577a4;
   font-weight: 500;
 }

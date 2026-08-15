@@ -172,7 +172,7 @@ function VisualizationPanel({ str, numRows, step, applyExample, examples }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -198,19 +198,19 @@ function VisualizationPanel({ str, numRows, step, applyExample, examples }) {
       <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 12 }}>
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>String</div>
-          <div style={{ fontSize: 13, color: '#e2e8f0', fontFamily: 'monospace', fontWeight: 600, wordBreak: 'break-all' }}>
+          <div style={{ fontSize: 13, color: '#5577a4', fontFamily: 'monospace', fontWeight: 600, wordBreak: 'break-all' }}>
             "{str}"
           </div>
         </div>
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Rows</div>
-          <div style={{ fontSize: 16, fontWeight: 700, color: '#38bdf8' }}>{numRows}</div>
+          <div style={{ fontSize: 16, fontWeight: 700, color: '#067db1' }}>{numRows}</div>
         </div>
       </div>
 
       {step?.rows && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Zigzag Pattern</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Zigzag Pattern</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4, fontFamily: 'monospace', fontSize: 11 }}>
             <AnimatePresence mode="wait">
               {step.rows.map((row, idx) => {
@@ -252,7 +252,7 @@ function VisualizationPanel({ str, numRows, step, applyExample, examples }) {
           transition={{ duration: 0.3 }}
         >
           <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Result</div>
-          <div style={{ fontSize: 14, fontFamily: 'monospace', fontWeight: 'bold', color: '#22c55e', wordBreak: 'break-all' }}>
+          <div style={{ fontSize: 14, fontFamily: 'monospace', fontWeight: 'bold', color: '#178740', wordBreak: 'break-all' }}>
             "{step.result}"
           </div>
         </motion.div>
@@ -299,7 +299,7 @@ export default function ZigzagConversionVisualizer() {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>String</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>String</div>
           <input
             type="text"
             value={str}
@@ -321,7 +321,7 @@ export default function ZigzagConversionVisualizer() {
           />
         </div>
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Rows</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Rows</div>
           <input
             type="number"
             value={numRows}
@@ -371,7 +371,7 @@ export default function ZigzagConversionVisualizer() {
 
   const statusPanel = (
     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '12px 16px', minHeight: 0 }}>
-      <div style={{ fontSize: 13, color: '#e2e8f0' }}>
+      <div style={{ fontSize: 13, color: '#5577a4' }}>
         {stepIndex < 0 ? 'Not started' : isDone ? `Done! ${steps.length} steps` : `Step ${stepIndex + 1} / ${steps.length}`}
       </div>
     </div>

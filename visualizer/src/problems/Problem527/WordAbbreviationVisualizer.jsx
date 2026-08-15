@@ -254,7 +254,7 @@ function VisualizationPanel({ dict, step, applyEx }) {
           <div style={{ fontFamily: 'monospace', fontSize: 12, color: '#b45309', marginBottom: 4 }}>
             Middle count: {Math.max(0, step.word.length - step.currentLength - 1)}
           </div>
-          <div style={{ fontFamily: 'monospace', fontSize: 13, color: '#10b981', fontWeight: 600, marginTop: 8 }}>
+          <div style={{ fontFamily: 'monospace', fontSize: 13, color: '#0c865d', fontWeight: 600, marginTop: 8 }}>
             Result: {step.abbr}
           </div>
         </motion.div>
@@ -273,10 +273,10 @@ function VisualizationPanel({ dict, step, applyEx }) {
         animate={{ opacity: 1 }}
       >
         <div style={{ fontSize: 13, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>Processing Status</div>
-        <div style={{ fontSize: 14, fontWeight: 600, color: '#0284c7', marginBottom: 8 }}>
+        <div style={{ fontSize: 14, fontWeight: 600, color: '#027bba', marginBottom: 8 }}>
           Length: k={step?.currentLength || 0}
         </div>
-        <div style={{ fontSize: 12, color: '#0284c7' }}>
+        <div style={{ fontSize: 12, color: '#027bba' }}>
           {step?.message || ''}
         </div>
       </motion.div>

@@ -123,7 +123,7 @@ export default function CountingBitsVisualizer() {
                     <div>i = {step.i} ({step.binary}₂)</div>
                     <div>i{'>>'}1 = {step.half}</div>
                     <div>i & 1 = {step.lsb} ({step.lsb ? 'odd' : 'even'})</div>
-                    <div style={{ fontWeight: 'bold', color: '#0ea5e9' }}>dp[{step.i}] = {step.dp?.[step.i]}</div>
+                    <div style={{ fontWeight: 'bold', color: '#0b7db0' }}>dp[{step.i}] = {step.dp?.[step.i]}</div>
                 </div>
             )}
             {step?.phase === 'done' && <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #86efac', fontSize: 11, fontWeight: 'bold', color: '#15803d' }}>✓ {`[${step.dp.join(', ')}]`}</div>}

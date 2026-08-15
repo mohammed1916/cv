@@ -167,7 +167,7 @@ function VisualizationPanel({ matrix, step, applyExample, examples }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -191,7 +191,7 @@ function VisualizationPanel({ matrix, step, applyExample, examples }) {
       )}
 
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Matrix (distances to nearest 0)</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Matrix (distances to nearest 0)</div>
         <div style={{ display: 'grid', gridTemplateColumns: `repeat(${cols}, ${cellSize}px)`, gap: 4, alignContent: 'start' }}>
           <AnimatePresence mode="popLayout">
             {step?.result?.map((row, r) =>
@@ -224,7 +224,7 @@ function VisualizationPanel({ matrix, step, applyExample, examples }) {
                               ? '#475569'
                               : '#334155',
                       borderColor: isCurrent ? '#fbbf24' : isInQueue ? '#0ea5e9' : '#64748b',
-                      color: '#e2e8f0',
+                      color: '#5577a4',
                     }}
                     animate={{ scale: isCurrent ? 1.2 : 1 }}
                     transition={{ duration: 0.2 }}
@@ -239,8 +239,8 @@ function VisualizationPanel({ matrix, step, applyExample, examples }) {
       </div>
 
       <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
-        <div style={{ fontSize: 11, fontWeight: 600, color: '#94a3b8', marginBottom: 6 }}>Status</div>
-        <div style={{ fontSize: 12, color: '#e2e8f0' }}>
+        <div style={{ fontSize: 11, fontWeight: 600, color: '#627794', marginBottom: 6 }}>Status</div>
+        <div style={{ fontSize: 12, color: '#5577a4' }}>
           {step?.message || 'Initialize algorithm...'}
         </div>
         {step?.queueSize !== undefined && (
@@ -320,7 +320,7 @@ export default function ZeroOneMatrixVisualizer() {
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Input</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Input</div>
               <textarea
                 value={matrixInput}
                 onChange={(e) => {
@@ -342,7 +342,7 @@ export default function ZeroOneMatrixVisualizer() {
                 placeholder="[[0,0,0],[0,1,0],[1,1,1]]"
               />
               {inputError && (
-                <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>
+                <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>
               )}
             </div>
             <VisualizationPanel matrix={matrix} step={step} applyExample={applyExample} examples={examples} />

@@ -258,7 +258,7 @@ export default function LongestSubstringwithAtMostKDistinctCharactersVisualizer(
                       const marker = isLeft && isRight ? 'L,R' : isLeft ? 'L' : isRight ? 'R' : ''
                       return (
                         <div key={`${ch}-${i}`} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-                          <div style={{ height: 16, fontSize: 11, fontWeight: 700, color: '#f59e0b' }}>{marker}</div>
+                          <div style={{ height: 16, fontSize: 11, fontWeight: 700, color: '#a36907' }}>{marker}</div>
                           <div
                             style={{
                               width: 34,

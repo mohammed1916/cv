@@ -6,7 +6,7 @@
     min-height: 480px;
     gap: 0;
     overflow: hidden;
-    color: #e2e8f0;
+    color: #5577a4;
 }
 
 .median-panel {
@@ -31,7 +31,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    color: #f8fafc;
+    color: #4879a9;
     font-size: 15px;
     font-weight: 700;
     letter-spacing: 0.01em;
@@ -91,7 +91,7 @@
 }
 
 .median-input-prefix {
-    color: #94a3b8;
+    color: #627794;
     font-family: monospace;
     font-size: 13px;
     white-space: nowrap;
@@ -133,7 +133,7 @@
 .median-result-title,
 .median-boundary-title,
 .median-history-title {
-    color: #f8fafc;
+    color: #4879a9;
     font-size: 13px;
     font-weight: 700;
     margin-bottom: 6px;
@@ -143,7 +143,7 @@
 .median-result-subtext,
 .median-history-text,
 .median-history-empty {
-    color: #cbd5e1;
+    color: #5a779b;
     font-size: 13px;
     line-height: 1.55;
 }
@@ -153,7 +153,7 @@
 }
 
 .median-note-text strong {
-    color: #e2e8f0;
+    color: #5577a4;
 }
 
 .median-input-stats,
@@ -168,7 +168,7 @@
 }
 
 .median-metric-label {
-    color: #94a3b8;
+    color: #627794;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.06em;
@@ -183,15 +183,15 @@
 }
 
 .median-metric-value.blue {
-    color: #93c5fd;
+    color: #0471eb;
 }
 
 .median-metric-value.cyan {
-    color: #67e8f9;
+    color: #068191;
 }
 
 .median-metric-value.amber {
-    color: #fcd34d;
+    color: #927002;
 }
 
 .median-array-panel,
@@ -252,13 +252,13 @@
 }
 
 .median-tape-title {
-    color: #f8fafc;
+    color: #4879a9;
     font-size: 14px;
     font-weight: 800;
 }
 
 .median-tape-subtitle {
-    color: #94a3b8;
+    color: #627794;
     font-size: 12px;
     margin-top: 2px;
 }
@@ -357,7 +357,7 @@
 }
 
 .median-marker-label {
-    color: #94a3b8;
+    color: #627794;
     font-size: 10px;
     font-weight: 800;
     text-transform: uppercase;
@@ -447,7 +447,7 @@
         ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 18px;
     font-weight: 900;
-    color: #f8fafc;
+    color: #4879a9;
 }
 
 .median-result-box {
@@ -461,15 +461,15 @@
 }
 
 .median-result-value.success {
-    color: #86efac;
+    color: #12873c;
 }
 
 .median-result-value.danger {
-    color: #fca5a5;
+    color: #eb0808;
 }
 
 .median-result-value.neutral {
-    color: #e2e8f0;
+    color: #5577a4;
 }
 
 .median-condition-box,
@@ -498,7 +498,7 @@
 }
 
 .median-condition-label {
-    color: #cbd5e1;
+    color: #5a779b;
     font-size: 13px;
 }
 
@@ -548,12 +548,12 @@
 }
 
 .median-boundary-grid .key {
-    color: #94a3b8;
+    color: #627794;
     font-weight: 700;
 }
 
 .median-boundary-grid span:last-child {
-    color: #f8fafc;
+    color: #4879a9;
     font-family:
         ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-weight: 800;
@@ -566,7 +566,7 @@
 }
 
 .median-history-empty {
-    color: #94a3b8;
+    color: #627794;
     padding: 8px 0 2px;
 }
 
@@ -582,7 +582,7 @@
 }
 
 .median-compare-title {
-    color: #f8fafc;
+    color: #4879a9;
     font-size: 13px;
     font-weight: 700;
     margin-bottom: 10px;
@@ -650,7 +650,7 @@
 }
 
 .median-compare-key {
-    color: #94a3b8;
+    color: #627794;
     font-size: 10px;
     font-weight: 800;
     text-transform: uppercase;
@@ -658,7 +658,7 @@
 }
 
 .median-compare-value {
-    color: #f8fafc;
+    color: #4879a9;
     font-family:
         ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 18px;
@@ -678,7 +678,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: #94a3b8;
+    color: #627794;
     font-size: 22px;
     font-weight: 900;
     text-shadow: 0 0 12px rgba(148, 163, 184, 0.2);
@@ -689,7 +689,7 @@
 }
 
 .median-compare-arrow-caption {
-    color: #94a3b8;
+    color: #627794;
     font-size: 10px;
     font-weight: 800;
     text-transform: uppercase;
@@ -697,13 +697,13 @@
 }
 
 .median-compare-row.pass .median-compare-arrow-line {
-    color: #86efac;
+    color: #12873c;
     text-shadow: 0 0 14px rgba(34, 197, 94, 0.32);
     animation: flowArrow 1.2s ease-in-out infinite;
 }
 
 .median-compare-row.fail .median-compare-arrow-line {
-    color: #fca5a5;
+    color: #eb0808;
     text-shadow: 0 0 14px rgba(248, 113, 113, 0.28);
     animation: flowArrow 1.1s ease-in-out infinite;
 }
@@ -711,7 +711,7 @@
 .median-compare-row.focus-left .median-compare-arrow-caption,
 .median-compare-row.focus-right .median-compare-arrow-caption,
 .median-compare-row.focus-both .median-compare-arrow-caption {
-    color: #e2e8f0;
+    color: #5577a4;
 }
 
 @keyframes cutPulse {
@@ -750,14 +750,14 @@
 }
 
 .median-history-step {
-    color: #67e8f9;
+    color: #068191;
     font-size: 12px;
     font-weight: 900;
     min-width: 36px;
 }
 
 .median-history-text {
-    color: #cbd5e1;
+    color: #5a779b;
     font-size: 13px;
 }
 
@@ -775,12 +775,12 @@
 
 .median-status.success {
     border-color: rgba(34, 197, 94, 0.45);
-    color: #86efac;
+    color: #12873c;
 }
 
 .median-status.update {
     border-color: rgba(56, 189, 248, 0.45);
-    color: #7dd3fc;
+    color: #047cb5;
 }
 
 .median-dock {

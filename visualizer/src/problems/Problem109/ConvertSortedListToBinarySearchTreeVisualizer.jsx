@@ -142,7 +142,7 @@ function generateSteps(list) {
 }
 
 function VisualizationPanel({ step, listInput, setListInput, inputError, EXAMPLES, applyExample, handleReset }) {
-  if (!step) return <div style={{ padding: 16, color: '#94a3b8' }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: '#627794' }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
@@ -317,7 +317,7 @@ export default function ConvertSortedListToBinarySearchTreeVisualizer() {
 
   const statusPanel = (
     <div className="cslbtbst-status">
-      <div style={{ fontSize: 11, color: '#94a3b8', padding: '4px 8px' }}>
+      <div style={{ fontSize: 11, color: '#627794', padding: '4px 8px' }}>
         Step {stepIndex >= 0 ? stepIndex + 1 : 0} / {steps.length}
       </div>
     </div>

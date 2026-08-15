@@ -241,7 +241,7 @@ function VisualizationPanel({ step }) {
             )
           })}
         </div>
-        <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 4 }}>∅ = empty component</div>
+        <div style={{ fontSize: 11, color: '#627794', marginTop: 4 }}>∅ = empty component</div>
       </div>
 
       {/* Stack (vertical column) */}
@@ -251,7 +251,7 @@ function VisualizationPanel({ step }) {
         </div>
         <div style={{ display: 'flex', flexDirection: 'column-reverse', gap: 4, alignItems: 'flex-start' }}>
           {stack.length === 0 ? (
-            <div style={{ fontSize: 13, color: '#94a3b8', fontStyle: 'italic', padding: '8px 0' }}>
+            <div style={{ fontSize: 13, color: '#627794', fontStyle: 'italic', padding: '8px 0' }}>
               (empty — currently at root "/")
             </div>
           ) : (
@@ -274,7 +274,7 @@ function VisualizationPanel({ step }) {
               >
                 {item}
                 {i === stack.length - 1 && (
-                  <span style={{ marginLeft: 8, fontSize: 10, color: '#16a34a', fontWeight: 800 }}>← top</span>
+                  <span style={{ marginLeft: 8, fontSize: 10, color: '#12873d', fontWeight: 800 }}>← top</span>
                 )}
               </motion.div>
             ))

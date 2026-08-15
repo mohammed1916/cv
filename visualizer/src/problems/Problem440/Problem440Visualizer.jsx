@@ -243,13 +243,13 @@ function LexicographicalTreeVisualization({ n, current }) {
                   {level}
                 </motion.div>
                 {idx < levels.length - 1 && (
-                  <div style={{ fontSize: 14, color: '#cbd5e1' }}>→</div>
+                  <div style={{ fontSize: 14, color: '#5a779b' }}>→</div>
                 )}
               </div>
             ))}
           </div>
         ) : (
-          <div style={{ color: '#94a3b8', fontSize: 12 }}>Building path...</div>
+          <div style={{ color: '#627794', fontSize: 12 }}>Building path...</div>
         )}
       </div>
     </div>
@@ -272,7 +272,7 @@ function StatsVisualization({ k, current, result }) {
           border: '2px solid #0284c7',
         }}>
           <div style={{ fontSize: 11, color: '#0c4a6e', fontWeight: 600 }}>Target (K)</div>
-          <div style={{ fontSize: 20, fontWeight: 700, color: '#0284c7', marginTop: 4 }}>
+          <div style={{ fontSize: 20, fontWeight: 700, color: '#027bba', marginTop: 4 }}>
             {k}
           </div>
         </div>

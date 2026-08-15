@@ -100,7 +100,7 @@ function CollisionVisualization({ nums, step }) {
         <div style={{
           fontSize: 32,
           fontWeight: 'bold',
-          color: '#0ea5e9',
+          color: '#0b7db0',
           fontFamily: 'monospace'
         }}>
           {step?.result ?? 0}
@@ -113,7 +113,7 @@ function CollisionVisualization({ nums, step }) {
       {/* Eliminated pairs */}
       {eliminated.size > 0 && (
         <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 8, border: '1px solid #86efac' }}>
-          <div style={{ fontSize: 12, color: '#65a30d', marginBottom: 8 }}>Cancelled Out</div>
+          <div style={{ fontSize: 12, color: '#51820a', marginBottom: 8 }}>Cancelled Out</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {Array.from(eliminated).map(idx => (
               <div

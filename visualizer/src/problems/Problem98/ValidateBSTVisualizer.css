@@ -36,7 +36,7 @@
 }
 
 .vbst-error {
-    color: #f38ba8;
+    color: #e51851;
     font-size: 11px;
 }
 
@@ -144,17 +144,17 @@
 
 .vbst-lo {
     font-size: 18px;
-    color: #89b4fa;
+    color: #1a6df5;
 }
 
 .vbst-hi {
     font-size: 18px;
-    color: #f38ba8;
+    color: #e51851;
 }
 
 .vbst-node-val {
     font-size: 18px;
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .vbst-legend {
@@ -168,7 +168,7 @@
     align-items: center;
     gap: 8px;
     font-size: 12px;
-    color: #a6adc8;
+    color: #6773a1;
 }
 
 .vbst-dot {
@@ -199,7 +199,7 @@
     background: #313244;
     border-radius: 8px;
     font-size: 14px;
-    color: #6c7086;
+    color: #999cad;
 }
 
 .vbst-result.ok {
@@ -225,11 +225,11 @@
 }
 
 .vbst-status.ok {
-    color: #a6e3a1;
+    color: #2f8628;
     border-color: #a6e3a1;
 }
 
 .vbst-status.fail {
-    color: #f38ba8;
+    color: #e51851;
     border-color: #f38ba8;
 }

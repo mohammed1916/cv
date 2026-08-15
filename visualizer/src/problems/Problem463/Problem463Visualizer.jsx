@@ -334,7 +334,7 @@ function VisualizationPanel({ step, EXAMPLES, handleExampleClick, gridInput, set
         <div style={{ fontSize: 11, fontWeight: 600, color: '#166534', marginBottom: 2 }}>
           Perimeter Calculation
         </div>
-        <div style={{ fontSize: 12, color: '#22c55e', lineHeight: 1.4 }}>
+        <div style={{ fontSize: 12, color: '#178740', lineHeight: 1.4 }}>
           Each land cell contributes 4 edges. Subtract 2 for each shared edge with neighbors.
         </div>
       </div>

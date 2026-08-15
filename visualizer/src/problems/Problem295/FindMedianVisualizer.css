@@ -44,7 +44,7 @@
 }
 
 .fm-error {
-    color: #f38ba8;
+    color: #e51851;
     font-size: 11px;
 }
 
@@ -167,7 +167,7 @@
 }
 
 .fm-view-btn:hover {
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .fm-view-btn.active {

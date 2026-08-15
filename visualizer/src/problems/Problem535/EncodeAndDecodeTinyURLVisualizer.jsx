@@ -197,7 +197,7 @@ function VisualizationPanel({ step, applyEx }) {
               <div style={{ color: '#334155', marginBottom: 4, wordBreak: 'break-all' }}>
                 {originalUrl.slice(0, 40)}...
               </div>
-              <div style={{ color: '#0284c7', fontWeight: 600 }}>
+              <div style={{ color: '#027bba', fontWeight: 600 }}>
                 → http://tinyurl.com/{code}
               </div>
             </motion.div>
@@ -218,7 +218,7 @@ function VisualizationPanel({ step, applyEx }) {
           animate={{ opacity: 1 }}
         >
           <div style={{ color: '#0c4a6e', fontWeight: 600, marginBottom: 8 }}>Encoded URL</div>
-          <div style={{ color: '#0284c7', fontFamily: 'monospace', fontSize: 12, wordBreak: 'break-all' }}>
+          <div style={{ color: '#027bba', fontFamily: 'monospace', fontSize: 12, wordBreak: 'break-all' }}>
             {step.tinyUrl}
           </div>
         </motion.div>
@@ -236,7 +236,7 @@ function VisualizationPanel({ step, applyEx }) {
           animate={{ opacity: 1 }}
         >
           <div style={{ color: '#0c4a6e', fontWeight: 600, marginBottom: 8 }}>Decoded URL</div>
-          <div style={{ color: '#0284c7', fontFamily: 'monospace', fontSize: 11, wordBreak: 'break-all' }}>
+          <div style={{ color: '#027bba', fontFamily: 'monospace', fontSize: 11, wordBreak: 'break-all' }}>
             {step.url}
           </div>
         </motion.div>
@@ -255,7 +255,7 @@ function VisualizationPanel({ step, applyEx }) {
         animate={{ opacity: 1 }}
       >
         <div style={{ fontSize: 13, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>Status</div>
-        <div style={{ fontSize: 12, color: '#0284c7' }}>
+        <div style={{ fontSize: 12, color: '#027bba' }}>
           {step?.message || ''}
         </div>
       </motion.div>

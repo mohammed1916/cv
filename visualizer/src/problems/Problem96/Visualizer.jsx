@@ -214,7 +214,7 @@ function VisualizationPanel({ step }) {
                 >
                   {filled[idx] || idx === i ? v : '·'}
                 </div>
-                <div style={{ marginTop: 4, fontSize: 11, color: '#94a3b8', fontFamily: 'monospace' }}>
+                <div style={{ marginTop: 4, fontSize: 11, color: '#627794', fontFamily: 'monospace' }}>
                   dp[{idx}]
                 </div>
               </motion.div>

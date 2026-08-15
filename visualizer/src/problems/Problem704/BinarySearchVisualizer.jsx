@@ -174,7 +174,7 @@ export default function BinarySearchVisualizer() {
         <div className="bs-panel" style={{ flex: 1 }}>
           <div className="bs-panel-head">
             Array State & Search Space
-            {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
+            {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
           </div>
           <div className="bs-panel-body">
             <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
@@ -251,7 +251,7 @@ export default function BinarySearchVisualizer() {
               </div>
               <div className="bs-stat-box">
                 <span className="bs-stat-label">Target</span>
-                <span className="bs-stat-val" style={{ color: '#eab308' }}>{target}</span>
+                <span className="bs-stat-val" style={{ color: '#937005' }}>{target}</span>
               </div>
             </div>
 

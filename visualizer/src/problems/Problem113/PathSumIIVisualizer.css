@@ -79,14 +79,14 @@
 .psi-node.active {
   background-color: #fbbf24;
   border-color: #f59e0b;
-  color: #92400e;
+  color: #8a3c0d;
   box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
 }
 
 .psi-node.on-path {
   background-color: #f38ba8;
   border-color: #ec4899;
-  color: #ffffff;
+  color: #3e3e3e;
 }
 
 .psi-state-panel {
@@ -263,7 +263,7 @@
   :root[data-theme="dark"] .psi-status {
     border-bottom-color: #334155;
     border-top-color: #334155;
-    color: #e2e8f0;
+    color: #5577a4;
   }
 
   :root[data-theme="dark"] .psi-panel-body {
@@ -306,7 +306,7 @@
   }
 
   :root[data-theme="dark"] .psi-empty {
-    color: #94a3b8;
+    color: #627794;
   }
 
   :root[data-theme="dark"] .psi-legend {
@@ -314,7 +314,7 @@
   }
 
   :root[data-theme="dark"] .psi-legend-item {
-    color: #cbd5e1;
+    color: #5a779b;
   }
 
   :root[data-theme="dark"] .psi-input {

@@ -276,7 +276,7 @@ function VisualizationPanel({ step }) {
         </div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
           {chars.length === 0 && (
-            <div style={{ fontSize: 13, color: '#94a3b8', fontStyle: 'italic' }}>
+            <div style={{ fontSize: 13, color: '#627794', fontStyle: 'italic' }}>
               (empty string)
             </div>
           )}
@@ -302,7 +302,7 @@ function VisualizationPanel({ step }) {
             }
             return (
               <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-                <span style={{ fontSize: 10, color: '#94a3b8', fontFamily: 'monospace' }}>{i}</span>
+                <span style={{ fontSize: 10, color: '#627794', fontFamily: 'monospace' }}>{i}</span>
                 <motion.div
                   animate={isCurrent ? { y: -6, scale: 1.1 } : { y: 0, scale: 1 }}
                   transition={{ type: 'spring', stiffness: 220, damping: 20 }}

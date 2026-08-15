@@ -141,7 +141,7 @@ export default function NumberOf1BitsVisualizer() {
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '2px solid #86efac' }}>
-              <div style={{ fontSize: 11, color: '#65a30d', marginBottom: 4 }}>Count</div>
+              <div style={{ fontSize: 11, color: '#51820a', marginBottom: 4 }}>Count</div>
               <motion.div key={count} initial={{ scale: 1.4 }} animate={{ scale: 1 }} style={{ fontSize: 24, fontWeight: 'bold', color: '#15803d' }}>
                 {count}
               </motion.div>

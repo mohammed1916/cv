@@ -190,7 +190,7 @@ function VisualizationPanel({ step }) {
               >
                 {v}
               </motion.div>
-              <div style={{ fontSize: 10, color: '#94a3b8', marginTop: 4 }}>{i}</div>
+              <div style={{ fontSize: 10, color: '#627794', marginTop: 4 }}>{i}</div>
             </div>
           )
         })}

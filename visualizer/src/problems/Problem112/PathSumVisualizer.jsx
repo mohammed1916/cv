@@ -160,7 +160,7 @@ function generateSteps(root, targetSum) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: '#94a3b8' }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: '#627794' }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
@@ -303,7 +303,7 @@ export default function PathSumVisualizer() {
 
   const statusPanel = (
     <div className="ps-status">
-      <div style={{ fontSize: 12, color: '#94a3b8', padding: '4px 8px' }}>
+      <div style={{ fontSize: 12, color: '#627794', padding: '4px 8px' }}>
         Step {stepIndex + 1} / {steps.length}
       </div>
     </div>

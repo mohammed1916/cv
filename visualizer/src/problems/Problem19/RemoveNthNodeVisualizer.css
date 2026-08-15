@@ -40,7 +40,7 @@
 }
 
 .rnn-error {
-  color: #f87171;
+  color: #ea0c0c;
   margin-left: auto;
 }
 
@@ -107,7 +107,7 @@
   font-size: 12px;
   font-family: monospace;
   font-weight: bold;
-  color: #94a3b8;
+  color: #627794;
 }
 
 .rnn-canvas {
@@ -170,25 +170,25 @@
 
 .rnn-node.fast {
   border-color: #0ea5e9;
-  color: #bae6fd;
+  color: #057bb9;
   box-shadow: 0 0 15px rgba(14, 165, 233, 0.4);
 }
 
 .rnn-node.slow {
   border-color: #a855f7;
-  color: #e9d5ff;
+  color: #9b40ff;
   box-shadow: 0 0 12px rgba(168, 85, 247, 0.3);
 }
 
 .rnn-node.target {
   border-color: #ef4444;
-  color: #fca5a5;
+  color: #eb0808;
   box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
 }
 
 .rnn-node.result {
   border-color: #22c55e;
-  color: #86efac;
+  color: #12873c;
 }
 
 .rnn-node.removed-visual {
@@ -280,22 +280,22 @@
 }
 
 .rnn-state-label.fast {
-  color: #0ea5e9;
+  color: #0b7db0;
   border-left: 4px solid #0ea5e9;
 }
 
 .rnn-state-label.slow {
-  color: #a855f7;
+  color: #9e42f6;
   border-left: 4px solid #a855f7;
 }
 
 .rnn-state-label.target {
-  color: #ef4444;
+  color: #e91414;
   border-left: 4px solid #ef4444;
 }
 
 .rnn-state-val {
-  color: #f8fafc;
+  color: #4879a9;
   font-family: monospace;
   font-size: 13px;
   text-align: right;

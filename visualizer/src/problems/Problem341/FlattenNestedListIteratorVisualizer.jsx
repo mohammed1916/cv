@@ -181,12 +181,12 @@ function generateSteps(nestedList) {
 }
 
 const ACTION_META = {
-  init: { label: 'INIT', color: '#94a3b8' },
-  peek: { label: 'PEEK TOP', color: '#60a5fa' },
-  'has-next': { label: 'hasNext -> True', color: '#f59e0b' },
-  expand: { label: 'EXPAND LIST', color: '#a78bfa' },
-  emit: { label: 'next() -> EMIT', color: '#22c55e' },
-  done: { label: 'DONE', color: '#22c55e' },
+  init: { label: 'INIT', color: '#627794' },
+  peek: { label: 'PEEK TOP', color: '#0870f0' },
+  'has-next': { label: 'hasNext -> True', color: '#a36907' },
+  expand: { label: 'EXPAND LIST', color: '#7e56f8' },
+  emit: { label: 'next() -> EMIT', color: '#178740' },
+  done: { label: 'DONE', color: '#178740' },
 }
 
 const PREFIX = 'flatten-nested-list-iterator'
@@ -253,7 +253,7 @@ export default function FlattenNestedListIteratorVisualizer() {
 
   const displayStack = step ? [...step.stack].reverse() : []
   const output = step ? step.output : []
-  const actionMeta = step ? ACTION_META[step.action] || { label: '', color: '#94a3b8' } : null
+  const actionMeta = step ? ACTION_META[step.action] || { label: '', color: '#627794' } : null
 
   return (
     <div className="flatten-nested-list-iterator-shell">

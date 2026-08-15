@@ -180,7 +180,7 @@ export default function TrappingRainWaterVisualizer() {
         />
       <div className="tw-panel-head">
         Elevation Map
-        {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
+        {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
       </div>
       <div className="tw-panel-body">
         <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
@@ -298,7 +298,7 @@ export default function TrappingRainWaterVisualizer() {
           </div>
           <div className="tw-var-row" style={{ borderColor: '#3b82f6' }}>
             <span className="tw-var-name">water</span>
-            <span className="tw-var-val" style={{ color: '#60a5fa' }}>{step?.water ?? '–'}</span>
+            <span className="tw-var-val" style={{ color: '#0870f0' }}>{step?.water ?? '–'}</span>
           </div>
         </div>
       </div>

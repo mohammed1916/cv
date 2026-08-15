@@ -248,8 +248,8 @@ function SlidingWindowViz({ step, s, EXAMPLES, sInput, setSInput, tInput, setTIn
                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
               >
                 {ch}
-                {isLeft && <span style={{ position: 'absolute', top: -18, fontSize: 10, color: '#a855f7', fontWeight: 'bold' }}>L</span>}
-                {isRight && <span style={{ position: 'absolute', top: -18, fontSize: 10, color: '#a855f7', fontWeight: 'bold' }}>R</span>}
+                {isLeft && <span style={{ position: 'absolute', top: -18, fontSize: 10, color: '#9e42f6', fontWeight: 'bold' }}>L</span>}
+                {isRight && <span style={{ position: 'absolute', top: -18, fontSize: 10, color: '#9e42f6', fontWeight: 'bold' }}>R</span>}
               </motion.div>
             )
           })}

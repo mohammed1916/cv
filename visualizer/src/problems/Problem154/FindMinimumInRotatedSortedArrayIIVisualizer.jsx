@@ -207,7 +207,7 @@ function ArrayVisualization({ nums, left, right, mid }) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: '#94a3b8' }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: '#627794' }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
@@ -249,7 +249,7 @@ function VisualizationPanel({ step }) {
           <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 4 }}>
             Minimum
           </div>
-          <div style={{ fontSize: 16, fontWeight: 700, color: '#10b981' }}>
+          <div style={{ fontSize: 16, fontWeight: 700, color: '#0c865d' }}>
             {step.result}
           </div>
         </motion.div>
@@ -322,7 +322,7 @@ export default function FindMinimumInRotatedSortedArrayIIVisualizer() {
 
   const statusPanel = (
     <div className="fmirsa2-status">
-      {step?.message && <div style={{ padding: '8px 12px', fontSize: '12px', color: '#cbd5e1' }}>{step.message}</div>}
+      {step?.message && <div style={{ padding: '8px 12px', fontSize: '12px', color: '#5a779b' }}>{step.message}</div>}
     </div>
   )
 

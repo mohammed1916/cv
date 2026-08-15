@@ -164,7 +164,7 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
     <div className="lswrc-panel" style={{ flex: 2 }}>
       <div className="lswrc-panel-head">
         String View
-        {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
+        {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
       </div>
       <div className="lswrc-panel-body">
         <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
@@ -314,7 +314,7 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
           </div>
           <div className="lswrc-var-row" style={{ borderColor: '#8b5cf6' }}>
             <span className="lswrc-var-name">max_len</span>
-            <span className="lswrc-var-val highlight" style={{ color: '#a78bfa' }}>{step?.maxLen ?? '–'}</span>
+            <span className="lswrc-var-val highlight" style={{ color: '#7e56f8' }}>{step?.maxLen ?? '–'}</span>
           </div>
         </div>
       </div>

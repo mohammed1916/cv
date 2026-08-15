@@ -113,7 +113,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -138,9 +138,9 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.activity && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Activity Table</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Activity Table</div>
           <div style={{ maxHeight: 150, overflowY: 'auto' }}>
-            <table style={{ width: '100%', fontSize: 11, color: '#e2e8f0', borderCollapse: 'collapse' }}>
+            <table style={{ width: '100%', fontSize: 11, color: '#5577a4', borderCollapse: 'collapse' }}>
               <thead>
                 <tr style={{ borderBottom: '1px solid #475569' }}>
                   <th style={{ textAlign: 'left', padding: 6, color: '#64748b' }}>Player</th>
@@ -168,7 +168,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.playerLogins && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>First Logins</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>First Logins</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
             <AnimatePresence mode="popLayout">
               {Object.entries(step.playerLogins).map(([playerId, date]) => (
@@ -189,7 +189,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
                   exit={{ opacity: 0 }}
                 >
                   <span>Player {playerId}</span>
-                  <span style={{ color: '#22c55e' }}>{date}</span>
+                  <span style={{ color: '#178740' }}>{date}</span>
                 </motion.div>
               ))}
             </AnimatePresence>
@@ -210,7 +210,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
           transition={{ duration: 0.3 }}
         >
           <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Result Count</div>
-          <div style={{ fontSize: 16, color: '#22c55e', fontWeight: 'bold' }}>{step.result.length} records</div>
+          <div style={{ fontSize: 16, color: '#178740', fontWeight: 'bold' }}>{step.result.length} records</div>
         </motion.div>
       )}
     </div>
@@ -282,7 +282,7 @@ export default function GamePlayAnalysisVisualizer() {
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Activity (JSON)</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Activity (JSON)</div>
               <textarea
                 value={activityInput}
                 onChange={(e) => {
@@ -302,7 +302,7 @@ export default function GamePlayAnalysisVisualizer() {
                   resize: 'vertical',
                 }}
               />
-              {inputError && <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
+              {inputError && <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
             </div>
             <VisualizationPanel step={step} applyExample={applyExample} examples={examples} />
           </div>),

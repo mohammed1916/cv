@@ -307,7 +307,7 @@ function AbbreviationVisualization({ word, abbr, step }) {
         </div>
         <div style={{ padding: 10, backgroundColor: '#dbeafe', borderRadius: 4, textAlign: 'center' }}>
           <div style={{ fontSize: 10, color: '#0c4a6e', fontWeight: 600 }}>Abbr Index</div>
-          <div style={{ fontSize: 14, fontWeight: 'bold', color: '#0284c7' }}>{step?.aIdx ?? 0}</div>
+          <div style={{ fontSize: 14, fontWeight: 'bold', color: '#027bba' }}>{step?.aIdx ?? 0}</div>
         </div>
         <div style={{ padding: 10, backgroundColor: '#fce7f3', borderRadius: 4, textAlign: 'center' }}>
           <div style={{ fontSize: 10, color: '#831843', fontWeight: 600 }}>Skipped</div>

@@ -109,7 +109,7 @@ function CarouselVisualization({ nums, step, n, k }) {
 
       <div style={{ textAlign: 'center', color: '#475569', fontSize: 14 }}>
         <div>↻ Rotating by <strong>{k}</strong> steps</div>
-        <div style={{ fontSize: 12, marginTop: 4, color: '#78909c' }}>
+        <div style={{ fontSize: 12, marginTop: 4, color: '#617984' }}>
           {step?.phase === 'done' ? '✓ Complete' : `Phase: ${step?.phase || 'start'}`}
         </div>
       </div>

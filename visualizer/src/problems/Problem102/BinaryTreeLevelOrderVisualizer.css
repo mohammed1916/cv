@@ -21,7 +21,7 @@
     margin: 0;
     font-size: 18px;
     font-weight: 600;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .btlo-viz-panel {
@@ -155,7 +155,7 @@
 .btlo-level-vals {
     font-size: 13px;
     font-weight: 600;
-    color: #cdd6f4;
+    color: #4f6ed8;
     font-family: monospace;
 }
 
@@ -170,7 +170,7 @@
     background: #313244;
     border-radius: 8px;
     font-size: 14px;
-    color: #6c7086;
+    color: #999cad;
 }
 
 .btlo-result.ok {

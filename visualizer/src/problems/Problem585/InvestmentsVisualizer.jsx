@@ -255,9 +255,9 @@ export default function InvestmentsVisualizer() {
                           <td>{row.lon}</td>
                           <td>
                             {row.isIncluded ? (
-                              <span style={{ color: '#3b82f6', fontWeight: '600' }}>✓ Include</span>
+                              <span style={{ color: '#1b6df5', fontWeight: '600' }}>✓ Include</span>
                             ) : (
-                              <span style={{ color: '#9ca3af' }}>✗ Exclude</span>
+                              <span style={{ color: '#6c7686' }}>✗ Exclude</span>
                             )}
                           </td>
                         </motion.tr>
@@ -286,7 +286,7 @@ export default function InvestmentsVisualizer() {
                     </div>
                     <div className="investments_2016-stat">
                       <div className="investments_2016-stat-label">Included Count</div>
-                      <div className="investments_2016-stat-value" style={{ color: '#3b82f6' }}>{includedCount}</div>
+                      <div className="investments_2016-stat-value" style={{ color: '#1b6df5' }}>{includedCount}</div>
                     </div>
                     <div className="investments_2016-stat">
                       <div className="investments_2016-stat-label">Non-Unique TIV 2015</div>
@@ -294,7 +294,7 @@ export default function InvestmentsVisualizer() {
                     </div>
                     <div className="investments_2016-stat">
                       <div className="investments_2016-stat-label">Result Sum</div>
-                      <div className="investments_2016-stat-value" style={{ color: '#22c55e', fontSize: '18px' }}>
+                      <div className="investments_2016-stat-value" style={{ color: '#178740', fontSize: '18px' }}>
                         {step?.result ?? calc.result}
                       </div>
                     </div>

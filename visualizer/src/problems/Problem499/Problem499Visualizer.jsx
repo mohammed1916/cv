@@ -18,11 +18,11 @@ import { createPortal } from 'react-dom'
 const SOLUTION_CODE = getSolutionCode('the-maze-iii')
 
 const PATTERNS = {
-  'init': { icon: '◯', label: 'Initialize', color: '#06b6d4' },
-  'loop': { icon: '⟳', label: 'Iterate', color: '#3b82f6' },
-  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#3b82f6' },
-  'found': { icon: '✓', label: 'Match Found', color: '#10b981' },
-  'done': { icon: '✓', label: 'Complete', color: '#10b981' },
+  'init': { icon: '◯', label: 'Initialize', color: '#048196' },
+  'loop': { icon: '⟳', label: 'Iterate', color: '#1b6df5' },
+  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#1b6df5' },
+  'found': { icon: '✓', label: 'Match Found', color: '#0c865d' },
+  'done': { icon: '✓', label: 'Complete', color: '#0c865d' },
 }
 
 const LINE_PATTERN_MAP = {
@@ -228,15 +228,15 @@ function VisualizationPanel({ step }) {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
         <div style={{ padding: 10, backgroundColor: '#fffbeb', borderRadius: 6, border: '1px solid #f59e0b' }}>
           <div style={{ fontSize: 11, color: '#92400e' }}>Current dist</div>
-          <div style={{ fontSize: 16, fontWeight: 700, color: '#f59e0b' }}>{step.dist ?? '—'}</div>
+          <div style={{ fontSize: 16, fontWeight: 700, color: '#a36907' }}>{step.dist ?? '—'}</div>
         </div>
         <div style={{ padding: 10, backgroundColor: '#fffbeb', borderRadius: 6, border: '1px solid #f59e0b' }}>
           <div style={{ fontSize: 11, color: '#92400e' }}>Heap size</div>
-          <div style={{ fontSize: 16, fontWeight: 700, color: '#f59e0b' }}>{step.heapSize ?? 0}</div>
+          <div style={{ fontSize: 16, fontWeight: 700, color: '#a36907' }}>{step.heapSize ?? 0}</div>
         </div>
         <div style={{ padding: 10, backgroundColor: '#fffbeb', borderRadius: 6, border: '1px solid #f59e0b' }}>
           <div style={{ fontSize: 11, color: '#92400e' }}>Finalized</div>
-          <div style={{ fontSize: 16, fontWeight: 700, color: '#f59e0b' }}>{Object.keys(seen).length}</div>
+          <div style={{ fontSize: 16, fontWeight: 700, color: '#a36907' }}>{Object.keys(seen).length}</div>
         </div>
       </div>
 
@@ -246,7 +246,7 @@ function VisualizationPanel({ step }) {
         animate={{ opacity: 1 }}
       >
         <div style={{ fontSize: 13, fontWeight: 600, color: '#92400e' }}>Best path to hole</div>
-        <div style={{ fontSize: 18, fontWeight: 'bold', color: '#f59e0b', fontFamily: 'monospace' }}>
+        <div style={{ fontSize: 18, fontWeight: 'bold', color: '#a36907', fontFamily: 'monospace' }}>
           {step.done ? (step.best === 'impossible' ? 'impossible' : step.best) : (step.best && step.best !== 'impossible' ? step.best : 'searching…')}
         </div>
         <div style={{ fontSize: 12, color: '#92400e', marginTop: 8 }}>{step.message}</div>

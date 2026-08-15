@@ -45,7 +45,7 @@
 
 .ssk-k-label {
     font-size: 13px;
-    color: #a6adc8;
+    color: #6773a1;
     display: flex;
     align-items: center;
     gap: 4px;
@@ -62,7 +62,7 @@
 }
 
 .ssk-error {
-    color: #f38ba8;
+    color: #e51851;
     font-size: 11px;
 }
 
@@ -83,7 +83,7 @@
 }
 
 .ssk-panel-label strong {
-    color: #89dceb;
+    color: #198093;
     font-size: 14px;
 }
 
@@ -117,11 +117,11 @@
 .ssk-cell-val {
     font-size: 15px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .ssk-cell.active .ssk-cell-val {
-    color: #89dceb;
+    color: #198093;
 }
 
 .ssk-cell-idx {
@@ -155,11 +155,11 @@
 .ssk-freq-key {
     font-size: 14px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .ssk-freq-cell.need .ssk-freq-key {
-    color: #cba6f7;
+    color: #964cef;
 }
 
 .ssk-freq-val {
@@ -168,7 +168,7 @@
 }
 
 .ssk-freq-cell.need .ssk-freq-val {
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .ssk-found-badge {

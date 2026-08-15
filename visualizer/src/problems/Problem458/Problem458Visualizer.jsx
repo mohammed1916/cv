@@ -154,7 +154,7 @@ function PigMathVisualization({ step }) {
           <div style={{ fontSize: 28, fontWeight: 700, color: '#1e40af' }}>
             {states}
           </div>
-          <div style={{ fontSize: 10, color: '#3b82f6', marginTop: 4 }}>
+          <div style={{ fontSize: 10, color: '#1b6df5', marginTop: 4 }}>
             (minutesToTest / minutesToDie + 1)
           </div>
         </motion.div>
@@ -199,7 +199,7 @@ function PigMathVisualization({ step }) {
           <div style={{ fontSize: 28, fontWeight: 700, color: '#047857' }}>
             {capacity}
           </div>
-          <div style={{ fontSize: 10, color: '#059669', marginTop: 4 }}>
+          <div style={{ fontSize: 10, color: '#04865e', marginTop: 4 }}>
             ({states}^{pigs})
           </div>
         </motion.div>
@@ -352,7 +352,7 @@ function VisualizationPanel({ step, EXAMPLES, handleExampleClick, bucketsInput, 
         <div style={{ fontSize: 11, fontWeight: 600, color: '#166534', marginBottom: 2 }}>
           Pig Logic
         </div>
-        <div style={{ fontSize: 12, color: '#22c55e', lineHeight: 1.4 }}>
+        <div style={{ fontSize: 12, color: '#178740', lineHeight: 1.4 }}>
           Each pig can distinguish multiple states. Find minimum pigs where states^pigs &gt;= buckets.
         </div>
       </div>

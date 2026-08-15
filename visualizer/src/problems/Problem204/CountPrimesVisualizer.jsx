@@ -66,7 +66,7 @@ function VisualizationPanel({ step }) {
       {step.j && <motion.div style={{ padding: 12, backgroundColor: "#fee2e2", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}><div style={{ fontSize: 12 }}>Marking {step.j} as composite</div></motion.div>}
       {step.marked && step.marked.length > 0 && <motion.div style={{ padding: 12, backgroundColor: "#fee2e2", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}><div style={{ fontSize: 12, fontWeight: 600 }}>Marked ({step.marked.length}): {step.marked.slice(0, 8).join(", ")}{step.marked.length > 8 ? "..." : ""}</div></motion.div>}
       {step.primes && <motion.div style={{ padding: 12, backgroundColor: "#dcfce7", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}><div style={{ fontSize: 12, fontWeight: 600, color: "#065f46" }}>Primes ({step.primes.length}): {step.primes.slice(0, 12).join(", ")}{step.primes.length > 12 ? "..." : ""}</div></motion.div>}
-      {step.result !== undefined && <motion.div style={{ padding: 12, backgroundColor: "#dcfce7", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}><div style={{ fontSize: 16, fontWeight: 700, color: "#10b981" }}>Result: {step.result}</div></motion.div>}
+      {step.result !== undefined && <motion.div style={{ padding: 12, backgroundColor: "#dcfce7", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}><div style={{ fontSize: 16, fontWeight: 700, color: "#0c865d" }}>Result: {step.result}</div></motion.div>}
       {step.message && <motion.div style={{ padding: 12, backgroundColor: "#fef3c7", borderRadius: 6, fontSize: 12, color: "#92400e" }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>{step.message}</motion.div>}
     </div>
   )

@@ -206,9 +206,9 @@ function Node({ node, pos, step, isLast }) {
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
       {/* pointer labels above */}
       <div style={{ height: 18, display: 'flex', gap: 4, fontSize: 10, fontWeight: 700 }}>
-        {isPrev && <span style={{ color: '#a78bfa' }}>prev</span>}
-        {isCurr && <span style={{ color: '#38bdf8' }}>curr</span>}
-        {isMoved && <span style={{ color: '#f59e0b' }}>moved</span>}
+        {isPrev && <span style={{ color: '#7e56f8' }}>prev</span>}
+        {isCurr && <span style={{ color: '#067db1' }}>curr</span>}
+        {isMoved && <span style={{ color: '#a36907' }}>moved</span>}
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
         <motion.div
@@ -225,7 +225,7 @@ function Node({ node, pos, step, isLast }) {
             border,
             background: bg,
             boxShadow: glow,
-            color: '#e2e8f0',
+            color: '#5577a4',
             fontWeight: 700,
             fontSize: 15,
             padding: '0 8px',
@@ -245,7 +245,7 @@ function Node({ node, pos, step, isLast }) {
 function VisualizationPanel({ step }) {
   if (!step) {
     return (
-      <div style={{ padding: 16, color: '#94a3b8', fontSize: 13 }}>
+      <div style={{ padding: 16, color: '#627794', fontSize: 13 }}>
         Press play to reverse the sublist.
       </div>
     )
@@ -300,10 +300,10 @@ function VisualizationPanel({ step }) {
         ))}
       </div>
 
-      <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', fontSize: 11, color: '#94a3b8' }}>
-        <span style={{ color: '#a78bfa' }}>prev = node before window</span>
-        <span style={{ color: '#38bdf8' }}>curr = first sublist node (stays)</span>
-        <span style={{ color: '#f59e0b' }}>moved = node re-inserted after prev</span>
+      <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', fontSize: 11, color: '#627794' }}>
+        <span style={{ color: '#7e56f8' }}>prev = node before window</span>
+        <span style={{ color: '#067db1' }}>curr = first sublist node (stays)</span>
+        <span style={{ color: '#a36907' }}>moved = node re-inserted after prev</span>
         <span>
           window shaded: [{step.left}..{step.right}]
         </span>
@@ -409,7 +409,7 @@ export default function Problem92Visualizer() {
               fontWeight: 600,
               border: ex.label === e.label ? '2px solid #38bdf8' : '1px solid #334155',
               background: ex.label === e.label ? '#08344a' : '#1e293b',
-              color: '#e2e8f0',
+              color: '#5577a4',
             }}
           >
             {e.label}: [{e.list.join(',')}] left={e.left} right={e.right}

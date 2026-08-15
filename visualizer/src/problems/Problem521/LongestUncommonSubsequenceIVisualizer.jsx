@@ -166,7 +166,7 @@ function VisualizationPanel({ a, b, step }) {
         }}>
           {step?.result !== undefined ? step.result : '...'}
         </div>
-        <div style={{ fontSize: 12, color: '#f59e0b', marginTop: 8 }}>
+        <div style={{ fontSize: 12, color: '#a36907', marginTop: 8 }}>
           {step?.message || ''}
         </div>
       </motion.div>

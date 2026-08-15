@@ -187,7 +187,7 @@ function IntervalsVisualization({ intervals, result, currentIdx }) {
             })}
           </div>
         ) : (
-          <div style={{ color: '#94a3b8', fontSize: 12 }}>No intervals</div>
+          <div style={{ color: '#627794', fontSize: 12 }}>No intervals</div>
         )}
       </div>
     </div>

@@ -36,7 +36,7 @@
 .cg-kicker {
     font-size: 12px;
     font-weight: 700;
-    color: #a6e3a1;
+    color: #2f8628;
     text-transform: uppercase;
     letter-spacing: 0.08em;
 }
@@ -44,12 +44,12 @@
 .cg-hero h2 {
     margin: 8px 0 12px;
     font-size: 24px;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .cg-hero p {
     font-size: 14px;
-    color: #a6adc8;
+    color: #6773a1;
     line-height: 1.6;
 }
 
@@ -73,7 +73,7 @@
 .cg-chip.active,
 .cg-chip:hover {
     border-color: #a6e3a1;
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .cg-graphs-row {
@@ -136,7 +136,7 @@
 .cg-vis-badge.pending {
     background: #1e1e2e;
     border-color: #313244;
-    color: #45475a;
+    color: #8386a0;
 }
 
 .cg-viz-container {

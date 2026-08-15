@@ -203,7 +203,7 @@ function SeenMapVisualization({ seen }) {
             ))}
           </div>
         ) : (
-          <div style={{ color: '#94a3b8', fontSize: 12 }}>Building map...</div>
+          <div style={{ color: '#627794', fontSize: 12 }}>Building map...</div>
         )}
       </div>
     </div>
@@ -233,7 +233,7 @@ function DuplicatesVisualization({ duplicates }) {
                   border: '2px solid #ef4444',
                   fontSize: 12,
                   fontWeight: 600,
-                  color: '#dc2626',
+                  color: '#b51d1d',
                 }}
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
@@ -244,7 +244,7 @@ function DuplicatesVisualization({ duplicates }) {
             ))}
           </div>
         ) : (
-          <div style={{ color: '#94a3b8', fontSize: 12 }}>No duplicates yet</div>
+          <div style={{ color: '#627794', fontSize: 12 }}>No duplicates yet</div>
         )}
       </div>
     </div>

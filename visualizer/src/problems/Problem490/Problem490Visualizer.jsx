@@ -18,11 +18,11 @@ import { createPortal } from 'react-dom'
 const SOLUTION_CODE = getSolutionCode('the-maze')
 
 const PATTERNS = {
-  'init': { icon: '◯', label: 'Initialize', color: '#06b6d4' },
-  'loop': { icon: '⟳', label: 'Iterate', color: '#3b82f6' },
-  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#3b82f6' },
-  'found': { icon: '✓', label: 'Match Found', color: '#10b981' },
-  'done': { icon: '✓', label: 'Complete', color: '#10b981' },
+  'init': { icon: '◯', label: 'Initialize', color: '#048196' },
+  'loop': { icon: '⟳', label: 'Iterate', color: '#1b6df5' },
+  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#1b6df5' },
+  'found': { icon: '✓', label: 'Match Found', color: '#0c865d' },
+  'done': { icon: '✓', label: 'Complete', color: '#0c865d' },
 }
 
 const LINE_PATTERN_MAP = {
@@ -209,15 +209,15 @@ function VisualizationPanel({ maze, start, destination, step, applyEx }) {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
             <div>
               <div style={{ fontSize: 11, color: '#312e81', marginBottom: 4 }}>Current</div>
-              <div style={{ fontSize: 14, fontWeight: 700, color: '#6366f1' }}>({step.current[0]},{step.current[1]})</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: '#6063f1' }}>({step.current[0]},{step.current[1]})</div>
             </div>
             <div>
               <div style={{ fontSize: 11, color: '#312e81', marginBottom: 4 }}>Visited</div>
-              <div style={{ fontSize: 14, fontWeight: 700, color: '#6366f1' }}>{step.visited?.size || 0}</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: '#6063f1' }}>{step.visited?.size || 0}</div>
             </div>
             <div>
               <div style={{ fontSize: 11, color: '#312e81', marginBottom: 4 }}>Queue Size</div>
-              <div style={{ fontSize: 14, fontWeight: 700, color: '#6366f1' }}>{step.queue?.length || 0}</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: '#6063f1' }}>{step.queue?.length || 0}</div>
             </div>
           </div>
         </motion.div>
@@ -235,10 +235,10 @@ function VisualizationPanel({ maze, start, destination, step, applyEx }) {
         animate={{ opacity: 1 }}
       >
         <div style={{ fontSize: 13, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>Result</div>
-        <div style={{ fontSize: 16, fontWeight: 'bold', color: '#0284c7' }}>
+        <div style={{ fontSize: 16, fontWeight: 'bold', color: '#027bba' }}>
           {step?.found ? '✓ Reachable' : step?.done ? '✗ Not Reachable' : '...'}
         </div>
-        <div style={{ fontSize: 12, color: '#0284c7', marginTop: 8 }}>
+        <div style={{ fontSize: 12, color: '#027bba', marginTop: 8 }}>
           {step?.message || ''}
         </div>
       </motion.div>

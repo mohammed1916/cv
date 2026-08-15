@@ -18,11 +18,11 @@ import { createPortal } from 'react-dom'
 const SOLUTION_CODE = getSolutionCode('find-largest-value-each-row')
 
 const PATTERNS = {
-  'init': { icon: '◯', label: 'Initialize', color: '#06b6d4' },
-  'loop': { icon: '⟳', label: 'Iterate', color: '#3b82f6' },
-  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#3b82f6' },
-  'found': { icon: '✓', label: 'Match Found', color: '#10b981' },
-  'done': { icon: '✓', label: 'Complete', color: '#10b981' },
+  'init': { icon: '◯', label: 'Initialize', color: '#048196' },
+  'loop': { icon: '⟳', label: 'Iterate', color: '#1b6df5' },
+  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#1b6df5' },
+  'found': { icon: '✓', label: 'Match Found', color: '#0c865d' },
+  'done': { icon: '✓', label: 'Complete', color: '#0c865d' },
 }
 
 const LINE_PATTERN_MAP = {
@@ -327,10 +327,10 @@ function VisualizationPanel({ arr, step, applyEx }) {
         animate={{ opacity: 1 }}
       >
         <div style={{ fontSize: 13, fontWeight: 600, color: '#831843', marginBottom: 8 }}>Result</div>
-        <div style={{ fontSize: 18, fontWeight: 'bold', color: '#ec4899' }}>
+        <div style={{ fontSize: 18, fontWeight: 'bold', color: '#e0177a' }}>
           {step?.result ? `[${step.result.join(', ')}]` : '...'}
         </div>
-        <div style={{ fontSize: 12, color: '#ec4899', marginTop: 8 }}>
+        <div style={{ fontSize: 12, color: '#e0177a', marginTop: 8 }}>
           {step?.message || ''}
         </div>
       </motion.div>

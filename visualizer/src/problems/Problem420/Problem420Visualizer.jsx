@@ -292,7 +292,7 @@ function PasswordCheckerVisualization({ password, step }) {
       {/* Edits needed */}
       <div style={{ padding: 12, backgroundColor: '#f3e8ff', borderRadius: 6, border: '2px solid #d946ef' }}>
         <div style={{ fontSize: 12, fontWeight: 600, color: '#7e22ce', marginBottom: 4 }}>Minimum Edits</div>
-        <div style={{ fontSize: 24, fontWeight: 'bold', color: '#d946ef' }}>
+        <div style={{ fontSize: 24, fontWeight: 'bold', color: '#c613e0' }}>
           {result}
         </div>
       </div>

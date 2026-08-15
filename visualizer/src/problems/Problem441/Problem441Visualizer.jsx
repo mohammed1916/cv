@@ -227,7 +227,7 @@ function StatsVisualization({ stairs, used, remaining, n }) {
           border: '2px solid #0284c7',
         }}>
           <div style={{ fontSize: 11, color: '#0c4a6e', fontWeight: 600 }}>Complete Stairs</div>
-          <div style={{ fontSize: 20, fontWeight: 700, color: '#0284c7', marginTop: 4 }}>
+          <div style={{ fontSize: 20, fontWeight: 700, color: '#027bba', marginTop: 4 }}>
             {stairs}
           </div>
         </div>
@@ -238,7 +238,7 @@ function StatsVisualization({ stairs, used, remaining, n }) {
           border: '2px solid #f59e0b',
         }}>
           <div style={{ fontSize: 11, color: '#b45309', fontWeight: 600 }}>Leftover Coins</div>
-          <div style={{ fontSize: 20, fontWeight: 700, color: '#f59e0b', marginTop: 4 }}>
+          <div style={{ fontSize: 20, fontWeight: 700, color: '#a36907', marginTop: 4 }}>
             {remaining}
           </div>
         </div>
@@ -250,7 +250,7 @@ function StatsVisualization({ stairs, used, remaining, n }) {
           gridColumn: '1 / -1',
         }}>
           <div style={{ fontSize: 11, color: '#047857', fontWeight: 600 }}>Coins Used</div>
-          <div style={{ fontSize: 20, fontWeight: 700, color: '#10b981', marginTop: 4 }}>
+          <div style={{ fontSize: 20, fontWeight: 700, color: '#0c865d', marginTop: 4 }}>
             {used} / {n}
           </div>
         </div>

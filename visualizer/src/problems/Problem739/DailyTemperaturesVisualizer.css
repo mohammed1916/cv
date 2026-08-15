@@ -26,7 +26,7 @@
 .dt-kicker {
   font-size: 12px;
   font-weight: 600;
-  color: #94a3b8;
+  color: #627794;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -34,13 +34,13 @@
 .dt-hero h2 {
   font-size: 28px;
   font-weight: 700;
-  color: #f1f5f9;
+  color: #4879a9;
   margin: 0;
 }
 
 .dt-hero p {
   font-size: 14px;
-  color: #cbd5e1;
+  color: #5a779b;
   margin: 0;
   line-height: 1.6;
 }
@@ -68,13 +68,13 @@
 
 .dt-summary-card span {
   font-size: 12px;
-  color: #94a3b8;
+  color: #627794;
   font-weight: 600;
 }
 
 .dt-summary-card strong {
   font-size: 16px;
-  color: #f8fafc;
+  color: #4879a9;
 }
 
 /* Panel Content */
@@ -92,7 +92,7 @@
 .dt-section-title {
   font-size: 13px;
   font-weight: 600;
-  color: #e2e8f0;
+  color: #5577a4;
   margin: 0;
   padding: 0;
 }
@@ -165,12 +165,12 @@
 }
 
 .dt-cell span {
-  color: #f8fafc;
+  color: #4879a9;
   font-weight: 700;
 }
 
 .dt-cell small {
-  color: #94a3b8;
+  color: #627794;
   font-size: 10px;
 }
 

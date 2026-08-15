@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  color: #888;
+  color: #757575;
   font-style: italic;
 }
 
@@ -129,7 +129,7 @@
 .tsv-formula-result {
   font-size: 24px;
   font-weight: 700;
-  color: #10b981;
+  color: #0c865d;
   text-align: center;
   font-family: 'Courier New', monospace;
 }
@@ -146,7 +146,7 @@
 }
 
 .tsv-final {
-  color: #059669;
+  color: #04865e;
   font-size: 28px;
 }
 

@@ -36,7 +36,7 @@
 .clr-chip.active,
 .clr-chip:hover {
     border-color: #89dceb;
-    color: #89dceb;
+    color: #198093;
 }
 
 .clr-panel {
@@ -126,13 +126,13 @@
 .clr-node-val {
     font-size: 18px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .clr-node-rnd {
     font-size: 10px;
     font-weight: 700;
-    color: #f38ba8;
+    color: #e51851;
 }
 
 .clr-arrow {
@@ -141,7 +141,7 @@
 }
 
 .clr-arrow.clone-arrow {
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .clr-status {

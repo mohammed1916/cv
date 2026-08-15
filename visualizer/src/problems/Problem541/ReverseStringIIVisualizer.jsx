@@ -107,7 +107,7 @@ function VisualizationPanel({ str, k, step, applyExample, examples }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -133,18 +133,18 @@ function VisualizationPanel({ str, k, step, applyExample, examples }) {
       <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 12 }}>
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>String</div>
-          <div style={{ fontSize: 14, color: '#e2e8f0', fontFamily: 'monospace', fontWeight: 600, wordBreak: 'break-all' }}>
+          <div style={{ fontSize: 14, color: '#5577a4', fontFamily: 'monospace', fontWeight: 600, wordBreak: 'break-all' }}>
             "{str}"
           </div>
         </div>
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>k Value</div>
-          <div style={{ fontSize: 20, fontWeight: 700, color: '#38bdf8' }}>{k}</div>
+          <div style={{ fontSize: 20, fontWeight: 700, color: '#067db1' }}>{k}</div>
         </div>
       </div>
 
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Current State</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Current State</div>
         <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap', minHeight: 40 }}>
           <AnimatePresence mode="popLayout">
             {step?.arr?.map((char, idx) => {
@@ -165,7 +165,7 @@ function VisualizationPanel({ str, k, step, applyExample, examples }) {
                     textAlign: 'center',
                     backgroundColor: isReversing ? '#a78bfa' : inSegment ? '#38bdf8' : '#334155',
                     borderColor: isReversing ? '#8b5cf6' : inSegment ? '#0ea5e9' : '#64748b',
-                    color: '#e2e8f0',
+                    color: '#5577a4',
                   }}
                   animate={{ scale: inSegment ? 1.15 : 1 }}
                   transition={{ duration: 0.2 }}
@@ -180,8 +180,8 @@ function VisualizationPanel({ str, k, step, applyExample, examples }) {
 
       {step?.segmentStart !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#a78bfa', marginBottom: 6 }}>Segment</div>
-          <div style={{ fontSize: 12, color: '#e2e8f0', fontFamily: 'monospace' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Segment</div>
+          <div style={{ fontSize: 12, color: '#5577a4', fontFamily: 'monospace' }}>
             Index {step.segmentStart} to {step.segmentEnd - 1} (length: {step.segmentEnd - step.segmentStart})
           </div>
         </div>
@@ -201,7 +201,7 @@ function VisualizationPanel({ str, k, step, applyExample, examples }) {
           transition={{ duration: 0.3 }}
         >
           <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Result</div>
-          <div style={{ fontSize: 16, fontFamily: 'monospace', fontWeight: 'bold', color: '#22c55e', wordBreak: 'break-all' }}>
+          <div style={{ fontSize: 16, fontFamily: 'monospace', fontWeight: 'bold', color: '#178740', wordBreak: 'break-all' }}>
             "{step.result}"
           </div>
         </motion.div>
@@ -267,7 +267,7 @@ export default function ReverseStringIIVisualizer() {
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Input</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Input</div>
               <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 8 }}>
                 <input
                   type="text"

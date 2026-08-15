@@ -89,9 +89,9 @@
   font-weight: bold;
 }
 
-.sip-legend-item.left { color: #f43f5e; }
-.sip-legend-item.mid { color: #0ea5e9; }
-.sip-legend-item.right { color: #8b5cf6; }
+.sip-legend-item.left { color: #e90d33; }
+.sip-legend-item.mid { color: #0b7db0; }
+.sip-legend-item.right { color: #8553f6; }
 
 .sip-legend-swatch {
   width: 12px;
@@ -239,7 +239,7 @@
 
 .sip-stat-label {
   font-size: 11px;
-  color: #94a3b8;
+  color: #627794;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 8px;
@@ -248,7 +248,7 @@
 .sip-stat-val {
   font-size: 24px;
   font-weight: bold;
-  color: #f8fafc;
+  color: #4879a9;
   font-family: monospace;
 }
 

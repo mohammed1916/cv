@@ -198,7 +198,7 @@ export default function Problem395Visualizer() {
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
           <div style={{ display: 'flex', gap: 12, backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
             <div style={{ flex: 1 }}>
-              <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '6px' }}>String (s)</div>
+              <div style={{ color: '#627794', fontSize: '13px', marginBottom: '6px' }}>String (s)</div>
               <input
                 value={sInput}
                 onChange={(e) => { setSInput(e.target.value); handleReset() }}
@@ -210,7 +210,7 @@ export default function Problem395Visualizer() {
               />
             </div>
             <div style={{ width: '80px' }}>
-              <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '6px' }}>Min Count (k)</div>
+              <div style={{ color: '#627794', fontSize: '13px', marginBottom: '6px' }}>Min Count (k)</div>
               <input
                 value={kInput}
                 onChange={(e) => { setKInput(e.target.value); handleReset() }}
@@ -226,7 +226,7 @@ export default function Problem395Visualizer() {
           </div>
 
           {inputError && (
-            <div style={{ color: '#f87171', fontSize: '12px' }}>{inputError}</div>
+            <div style={{ color: '#ea0c0c', fontSize: '12px' }}>{inputError}</div>
           )}
 
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -245,7 +245,7 @@ export default function Problem395Visualizer() {
           </div>
 
           <div style={{ backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
-            <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '8px' }}>String: {s}</div>
+            <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>String: {s}</div>
             <div style={{ display: 'flex', gap: '2px', flexWrap: 'wrap' }}>
               {s.split('').map((char, idx) => {
                 const inCurrentStr = step?.currentStr?.includes(char)
@@ -257,7 +257,7 @@ export default function Problem395Visualizer() {
                     style={{
                       width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center',
                       backgroundColor: inCurrentStr ? (freq >= k ? '#10b981' : '#ef4444') : '#334155',
-                      color: '#e2e8f0', borderRadius: '4px', fontSize: '13px', fontWeight: 'bold',
+                      color: '#5577a4', borderRadius: '4px', fontSize: '13px', fontWeight: 'bold',
                       position: 'relative'
                     }}
                   >
@@ -270,7 +270,7 @@ export default function Problem395Visualizer() {
 
           <div style={{ flex: 1, backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: 12 }}>
             <div>
-              <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '8px' }}>Character Frequencies</div>
+              <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>Character Frequencies</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                 {step?.freq && Object.entries(step.freq).map(([char, count]) => (
                   <div
@@ -280,7 +280,7 @@ export default function Problem395Visualizer() {
                       padding: '6px', borderRadius: '4px', display: 'flex', justifyContent: 'space-between'
                     }}
                   >
-                    <span style={{ color: '#e2e8f0', fontWeight: 'bold' }}>'{char}'</span>
+                    <span style={{ color: '#5577a4', fontWeight: 'bold' }}>'{char}'</span>
                     <span style={{ color: count >= k ? '#86efac' : '#fca5a5', fontWeight: 'bold' }}>
                       {count} {count >= k ? '✓' : '✗'}
                     </span>
@@ -292,7 +292,7 @@ export default function Problem395Visualizer() {
             {step?.result !== undefined && (
               <div style={{ backgroundColor: '#334155', padding: '8px', borderRadius: '4px', textAlign: 'center' }}>
                 <div style={{ color: '#64748b', fontSize: '12px' }}>Result</div>
-                <div style={{ color: '#60a5fa', fontSize: '18px', fontWeight: 'bold' }}>
+                <div style={{ color: '#0870f0', fontSize: '18px', fontWeight: 'bold' }}>
                   {step.result}
                 </div>
               </div>
@@ -303,7 +303,7 @@ export default function Problem395Visualizer() {
             <div style={{ display: 'flex', gap: 12, fontSize: '13px' }}>
               <div style={{ backgroundColor: '#1e293b', padding: '8px', borderRadius: '4px', flex: 1 }}>
                 <span style={{ color: '#64748b' }}>K: </span>
-                <span style={{ color: '#fbbf24', fontWeight: 'bold' }}>{k}</span>
+                <span style={{ color: '#986e03', fontWeight: 'bold' }}>{k}</span>
               </div>
               <div style={{ backgroundColor: step?.isValid ? '#10b98166' : step?.isValid === false ? '#ef444466' : '#1e293b', padding: '8px', borderRadius: '4px', flex: 1, textAlign: 'center' }}>
                 <span style={{ color: step?.isValid ? '#86efac' : step?.isValid === false ? '#fca5a5' : '#cbd5e1', fontWeight: 'bold' }}>

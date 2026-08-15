@@ -27,7 +27,7 @@
 .bt3-chip.active,
 .bt3-chip:hover {
     border-color: #a6e3a1;
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .bt3-panel {
@@ -121,19 +121,19 @@
 }
 
 .bt3-state-val.b1 {
-    color: #89b4fa;
+    color: #1a6df5;
 }
 
 .bt3-state-val.s1 {
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .bt3-state-val.b2 {
-    color: #cba6f7;
+    color: #964cef;
 }
 
 .bt3-state-val.s2 {
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .bt3-state-desc {
@@ -169,15 +169,15 @@
 .bt3-tracker-val {
     font-size: 18px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .bt3-tracker-val.bt3-price-val {
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .bt3-tracker-val.bt3-answer {
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .bt3-tracker-val.bt3-phase {
@@ -185,15 +185,15 @@
 }
 
 .bt3-tracker-val.bt3-phase.init {
-    color: #89b4fa;
+    color: #1a6df5;
 }
 
 .bt3-tracker-val.bt3-phase.update {
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .bt3-tracker-val.bt3-phase.done {
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .bt3-result {

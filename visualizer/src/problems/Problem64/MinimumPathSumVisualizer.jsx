@@ -133,7 +133,7 @@ function MinimumPathSumVisualization({
     <section className="mps-panel">
       <header className="mps-head">
         <span>Minimum Path Sum · 2D DP</span>
-        {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
+        {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
       </header>
       <div className="mps-body">
         <div className="mps-top-row">

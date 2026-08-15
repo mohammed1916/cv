@@ -185,7 +185,7 @@ export default function BestTimeBuySellStockIVVisualizer() {
             </div>
             <div>
               <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>max_so_far</div>
-              <div style={{ fontSize: 13, fontWeight: 'bold', color: '#f59e0b' }}>{msf == null ? '—' : msf}</div>
+              <div style={{ fontSize: 13, fontWeight: 'bold', color: '#a36907' }}>{msf == null ? '—' : msf}</div>
             </div>
           </div>
 

@@ -16,11 +16,11 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { createPortal } from 'react-dom'
 
 const PATTERNS = {
-  'init': { icon: '◯', label: 'Initialize', color: '#06b6d4' },
-  'loop': { icon: '⟳', label: 'Iterate', color: '#3b82f6' },
-  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#3b82f6' },
-  'found': { icon: '✓', label: 'Match Found', color: '#10b981' },
-  'done': { icon: '✓', label: 'Complete', color: '#10b981' },
+  'init': { icon: '◯', label: 'Initialize', color: '#048196' },
+  'loop': { icon: '⟳', label: 'Iterate', color: '#1b6df5' },
+  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#1b6df5' },
+  'found': { icon: '✓', label: 'Match Found', color: '#0c865d' },
+  'done': { icon: '✓', label: 'Complete', color: '#0c865d' },
 }
 
 const LINE_PATTERN_MAP = {
@@ -228,10 +228,10 @@ function VisualizationPanel({ events, step, inputPanel }) {
         animate={{ opacity: 1 }}
       >
         <div style={{ fontSize: 13, fontWeight: 600, color: '#78350f', marginBottom: 8 }}>Progress</div>
-        <div style={{ fontSize: 18, fontWeight: 'bold', color: '#f59e0b' }}>
+        <div style={{ fontSize: 18, fontWeight: 'bold', color: '#a36907' }}>
           {step?.processed?.length ?? 0} / {step?.events?.length ?? events?.length ?? 0}
         </div>
-        <div style={{ fontSize: 12, color: '#f59e0b', marginTop: 8 }}>
+        <div style={{ fontSize: 12, color: '#a36907', marginTop: 8 }}>
           {step?.message || ''}
         </div>
       </motion.div>

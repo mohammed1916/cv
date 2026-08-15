@@ -29,7 +29,7 @@
 .rkg-chip.active,
 .rkg-chip:hover {
     border-color: #f38ba8;
-    color: #f38ba8;
+    color: #e51851;
 }
 
 .rkg-panel {
@@ -133,7 +133,7 @@
 .rkg-tracker-val {
     font-size: 20px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .rkg-tracker-val.rkg-small {
@@ -145,31 +145,31 @@
 }
 
 .rkg-tracker-val.rkg-phase.init {
-    color: #89b4fa;
+    color: #1a6df5;
 }
 
 .rkg-tracker-val.rkg-phase.find {
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .rkg-tracker-val.rkg-phase.found {
-    color: #fab387;
+    color: #c65108;
 }
 
 .rkg-tracker-val.rkg-phase.reverse {
-    color: #f38ba8;
+    color: #e51851;
 }
 
 .rkg-tracker-val.rkg-phase.reversed {
-    color: #cba6f7;
+    color: #964cef;
 }
 
 .rkg-tracker-val.rkg-phase.advance {
-    color: #89dceb;
+    color: #198093;
 }
 
 .rkg-tracker-val.rkg-phase.done {
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .rkg-tracker-val.rkg-phase.short {

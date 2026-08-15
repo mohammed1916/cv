@@ -320,7 +320,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -354,11 +354,11 @@ function VisualizationPanel({ step, applyExample, examples }) {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#a78bfa', marginBottom: 6 }}>Current Interval</div>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Current Interval</div>
           <div
             style={{
               fontSize: 13,
-              color: '#e2e8f0',
+              color: '#5577a4',
               fontFamily: 'monospace',
               fontWeight: 600,
             }}
@@ -370,7 +370,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.allIntervals && step.allIntervals.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>All Intervals</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>All Intervals</div>
           <TimelineBar intervals={step.allIntervals} />
         </div>
       )}
@@ -379,7 +379,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
         <div className="merged-section">
           <div className="merged-label">✓ Merged Intervals</div>
           <TimelineBar intervals={step.merged} merged={true} />
-          <div style={{ fontSize: 10, color: '#94a3b8', marginTop: 8 }}>
+          <div style={{ fontSize: 10, color: '#627794', marginTop: 8 }}>
             {step.merged.map((i) => `[${i[0]}, ${i[1]}]`).join(' → ')}
           </div>
         </div>
@@ -480,7 +480,7 @@ export default function EmployeeFreeTimeVisualizer() {
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Employee Schedules</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Employee Schedules</div>
               <textarea
                 value={schedulesInput}
                 onChange={(e) => {
@@ -502,7 +502,7 @@ export default function EmployeeFreeTimeVisualizer() {
                 placeholder='[[[1,2],[5,6]],[[1,3]],[[4,6]]]'
               />
               {inputError && (
-                <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>
+                <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>
               )}
             </div>
             <VisualizationPanel schedules={schedules} step={step} applyExample={applyExample} examples={examples} />

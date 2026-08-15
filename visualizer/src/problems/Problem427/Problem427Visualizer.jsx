@@ -135,7 +135,7 @@ function VisualizationPanel({ step }) {
       <div>
         <div style={{ fontSize: 12, fontWeight: 600, color: '#7c2d12', marginBottom: 6 }}>Stack (bottom → top)</div>
         <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start', minHeight: 60, padding: 8, backgroundColor: '#fff7ed', borderRadius: 6, border: '1px solid #fdba74' }}>
-          {stack.length === 0 && <span style={{ fontSize: 12, color: '#9ca3af' }}>empty</span>}
+          {stack.length === 0 && <span style={{ fontSize: 12, color: '#6c7686' }}>empty</span>}
           {stack.map((n) => (
             <motion.div key={n.id} initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
               style={{ border: step.highlightId === n.id ? '2px dashed #ea580c' : 'none', borderRadius: 6, padding: 4 }}>
@@ -149,7 +149,7 @@ function VisualizationPanel({ step }) {
         style={{ padding: 12, backgroundColor: '#ffedd5', borderRadius: 6, border: '2px solid #ea580c', textAlign: 'center' }}
         initial={{ opacity: 0 }} animate={{ opacity: 1 }}
       >
-        <div style={{ fontSize: 12, color: '#ea580c' }}>{step.message}</div>
+        <div style={{ fontSize: 12, color: '#ca4c0a' }}>{step.message}</div>
       </motion.div>
     </div>
   )

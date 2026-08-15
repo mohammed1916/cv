@@ -54,7 +54,7 @@ function generateSteps(s) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: '#94a3b8' }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: '#627794' }}>Press play</div>
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
       <div style={{ padding: 12, backgroundColor: '#d1fae5', borderRadius: 6, borderLeft: '4px solid #10b981' }}>
@@ -69,7 +69,7 @@ function VisualizationPanel({ step }) {
       </motion.div>}
       {step.result !== undefined && <motion.div style={{ padding: 12, backgroundColor: '#dcfce7', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
         <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46' }}>Result</div>
-        <div style={{ fontSize: 18, fontWeight: 700, color: '#10b981' }}>{step.result}</div>
+        <div style={{ fontSize: 18, fontWeight: 700, color: '#0c865d' }}>{step.result}</div>
       </motion.div>}
       {step.message && <motion.div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, fontSize: 12, color: '#92400e' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>{step.message}</motion.div>}
     </div>

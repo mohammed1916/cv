@@ -215,7 +215,7 @@ function FrequencyMap({ step }) {
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10, flex: 1 }}>
         {entries.length === 0 ? (
-          <div style={{ fontSize: 12, color: '#94a3b8', fontStyle: 'italic' }}>
+          <div style={{ fontSize: 12, color: '#627794', fontStyle: 'italic' }}>
             No elements yet
           </div>
         ) : (
@@ -410,7 +410,7 @@ function ResultBuilder({ step }) {
         <div style={{ fontSize: 11, fontWeight: 600, color: '#166534', marginBottom: 2 }}>
           Story: Finding Common Members
         </div>
-        <div style={{ fontSize: 12, color: '#22c55e', lineHeight: 1.4 }}>
+        <div style={{ fontSize: 12, color: '#178740', lineHeight: 1.4 }}>
           Like a roster check: count all members in Group 1, then see which from Group 2 are also in Group 1 (respecting duplicates).
         </div>
       </div>

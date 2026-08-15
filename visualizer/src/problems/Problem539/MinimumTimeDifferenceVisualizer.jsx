@@ -135,7 +135,7 @@ function VisualizationPanel({ timePoints, step, applyExample, examples }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -159,7 +159,7 @@ function VisualizationPanel({ timePoints, step, applyExample, examples }) {
       )}
 
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Input Times</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Input Times</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           <AnimatePresence mode="popLayout">
             {timePoints.map((t, idx) => (
@@ -185,7 +185,7 @@ function VisualizationPanel({ timePoints, step, applyExample, examples }) {
 
       {step?.minutes && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Sorted Minutes</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Sorted Minutes</div>
           <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
             <AnimatePresence mode="popLayout">
               {step.minutes.map((min, idx) => {
@@ -202,7 +202,7 @@ function VisualizationPanel({ timePoints, step, applyExample, examples }) {
                       fontWeight: 600,
                       backgroundColor: isCurrent ? '#38bdf8' : '#334155',
                       borderColor: isCurrent ? '#0ea5e9' : '#64748b',
-                      color: '#e2e8f0',
+                      color: '#5577a4',
                     }}
                     animate={{ scale: isCurrent ? 1.15 : 1 }}
                   >
@@ -217,8 +217,8 @@ function VisualizationPanel({ timePoints, step, applyExample, examples }) {
 
       {step?.currentDiff !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#a78bfa', marginBottom: 6 }}>Current Comparison</div>
-          <div style={{ fontSize: 12, color: '#e2e8f0', fontFamily: 'monospace' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Current Comparison</div>
+          <div style={{ fontSize: 12, color: '#5577a4', fontFamily: 'monospace' }}>
             Difference: {step.currentDiff} min
           </div>
         </div>
@@ -226,8 +226,8 @@ function VisualizationPanel({ timePoints, step, applyExample, examples }) {
 
       {step?.wrapDiff !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f59e0b' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#f59e0b', marginBottom: 6 }}>Wrap-Around</div>
-          <div style={{ fontSize: 12, color: '#e2e8f0', fontFamily: 'monospace' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', marginBottom: 6 }}>Wrap-Around</div>
+          <div style={{ fontSize: 12, color: '#5577a4', fontFamily: 'monospace' }}>
             1440 - {step.minutes[step.minutes.length - 1]} + {step.minutes[0]} = {step.wrapDiff} min
           </div>
         </div>
@@ -247,7 +247,7 @@ function VisualizationPanel({ timePoints, step, applyExample, examples }) {
           transition={{ duration: 0.3 }}
         >
           <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Minimum Difference</div>
-          <div style={{ fontSize: 24, fontWeight: 'bold', color: '#22c55e' }}>{step.result} min</div>
+          <div style={{ fontSize: 24, fontWeight: 'bold', color: '#178740' }}>{step.result} min</div>
         </motion.div>
       )}
     </div>
@@ -319,7 +319,7 @@ export default function MinimumTimeDifferenceVisualizer() {
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Input Times</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Input Times</div>
               <textarea
                 value={timesInput}
                 onChange={(e) => {
@@ -341,7 +341,7 @@ export default function MinimumTimeDifferenceVisualizer() {
                 placeholder='["23:59","00:00"]'
               />
               {inputError && (
-                <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>
+                <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>
               )}
             </div>
             <VisualizationPanel times={times} step={step} applyExample={applyExample} examples={examples} />

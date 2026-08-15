@@ -189,7 +189,7 @@
   border-radius: 4px;
   background: #E3F2FD;
   font-weight: 600;
-  color: #1976D2;
+  color: #176dc2;
 }
 
 .ps-final-result {
@@ -217,7 +217,7 @@
 .ps-k-val {
   font-size: 1.2rem;
   font-weight: 700;
-  color: #E65100;
+  color: #ce4900;
 }
 
 .ps-factorial-list {
@@ -243,7 +243,7 @@
 .ps-fact-val {
   font-family: 'Courier New', monospace;
   font-weight: 700;
-  color: #2196F3;
+  color: #0b78ce;
 }
 
 .ps-status {
@@ -266,7 +266,7 @@
 
   .ps-head {
     border-bottom-color: #444;
-    color: #e0e0e0;
+    color: #757575;
   }
 
   .ps-body {
@@ -328,18 +328,18 @@
   }
 
   .ps-fact-label {
-    color: #aaa;
+    color: #757575;
   }
 
   .ps-fact-val {
-    color: #64B5F6;
+    color: #0c77ce;
   }
 
   .ps-section-label {
-    color: #aaa;
+    color: #757575;
   }
 
   .ps-info {
-    color: #aaa;
+    color: #757575;
   }
 }

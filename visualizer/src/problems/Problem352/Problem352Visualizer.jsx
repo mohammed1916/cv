@@ -277,7 +277,7 @@ function GridVisualization({ step, gridSize = GRID_SIZE, cellSize = CELL_SIZE })
                   ★
                 </motion.div>
               )}
-              {isBody && <span style={{ color: '#f1f5f9', fontSize: '14px' }}>●</span>}
+              {isBody && <span style={{ color: '#4879a9', fontSize: '14px' }}>●</span>}
               {isNextHead && (
                 <motion.div
                   className="dsg-next-head-preview"

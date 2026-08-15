@@ -172,7 +172,7 @@ export default function Problem392Visualizer() {
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
           <div style={{ display: 'flex', gap: 12, backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
             <div style={{ flex: 1 }}>
-              <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '6px' }}>Subsequence (s)</div>
+              <div style={{ color: '#627794', fontSize: '13px', marginBottom: '6px' }}>Subsequence (s)</div>
               <input
                 value={sInput}
                 onChange={(e) => { setSInput(e.target.value); handleReset() }}
@@ -184,7 +184,7 @@ export default function Problem392Visualizer() {
               />
             </div>
             <div style={{ flex: 1 }}>
-              <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '6px' }}>Text (t)</div>
+              <div style={{ color: '#627794', fontSize: '13px', marginBottom: '6px' }}>Text (t)</div>
               <input
                 value={tInput}
                 onChange={(e) => { setTInput(e.target.value); handleReset() }}
@@ -198,7 +198,7 @@ export default function Problem392Visualizer() {
           </div>
 
           {inputError && (
-            <div style={{ color: '#f87171', fontSize: '12px' }}>{inputError}</div>
+            <div style={{ color: '#ea0c0c', fontSize: '12px' }}>{inputError}</div>
           )}
 
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -217,7 +217,7 @@ export default function Problem392Visualizer() {
           </div>
 
           <div style={{ backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
-            <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '8px' }}>Subsequence: {s}</div>
+            <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>Subsequence: {s}</div>
             <div style={{ display: 'flex', gap: '2px', flexWrap: 'wrap' }}>
               {s.split('').map((char, idx) => (
                 <div
@@ -225,7 +225,7 @@ export default function Problem392Visualizer() {
                   style={{
                     width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center',
                     backgroundColor: idx < (step?.sIdx ?? 0) ? '#10b981' : '#334155',
-                    color: '#e2e8f0', borderRadius: '4px', fontSize: '14px', fontWeight: 'bold'
+                    color: '#5577a4', borderRadius: '4px', fontSize: '14px', fontWeight: 'bold'
                   }}
                 >
                   {char}
@@ -235,7 +235,7 @@ export default function Problem392Visualizer() {
           </div>
 
           <div style={{ backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px', flex: 1, overflowY: 'auto' }}>
-            <div style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '8px' }}>Text: {t}</div>
+            <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>Text: {t}</div>
             <div style={{ display: 'flex', gap: '2px', flexWrap: 'wrap' }}>
               {t.split('').map((char, idx) => {
                 const isCurrentChar = idx === step?.tIdx
@@ -252,7 +252,7 @@ export default function Problem392Visualizer() {
                     key={idx}
                     style={{
                       width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      backgroundColor: bgColor, color: '#e2e8f0', borderRadius: '4px', fontSize: '14px', fontWeight: 'bold',
+                      backgroundColor: bgColor, color: '#5577a4', borderRadius: '4px', fontSize: '14px', fontWeight: 'bold',
                       border: isCurrentChar ? '2px solid #fbbf24' : 'none'
                     }}
                   >
@@ -267,7 +267,7 @@ export default function Problem392Visualizer() {
             <div style={{ display: 'flex', gap: 12, fontSize: '13px' }}>
               <div style={{ backgroundColor: '#1e293b', padding: '8px', borderRadius: '4px', flex: 1 }}>
                 <span style={{ color: '#64748b' }}>s_idx: </span>
-                <span style={{ color: '#60a5fa', fontWeight: 'bold' }}>{step.sIdx}/{s.length}</span>
+                <span style={{ color: '#0870f0', fontWeight: 'bold' }}>{step.sIdx}/{s.length}</span>
               </div>
               <div style={{ backgroundColor: step?.isSubsequence ? '#10b98166' : step?.isSubsequence === false ? '#ef444466' : '#1e293b', padding: '8px', borderRadius: '4px', flex: 1, textAlign: 'center' }}>
                 <span style={{ color: step?.isSubsequence ? '#86efac' : step?.isSubsequence === false ? '#fca5a5' : '#cbd5e1', fontWeight: 'bold' }}>

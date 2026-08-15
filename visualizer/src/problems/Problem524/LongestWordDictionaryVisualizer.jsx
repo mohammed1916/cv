@@ -247,10 +247,10 @@ function VisualizationPanel({ s, dictionary, step, applyEx }) {
         animate={{ opacity: 1 }}
       >
         <div style={{ fontSize: 13, fontWeight: 600, color: '#5b21b6', marginBottom: 8 }}>Result</div>
-        <div style={{ fontSize: 22, fontWeight: 'bold', color: '#8b5cf6', fontFamily: 'monospace' }}>
+        <div style={{ fontSize: 22, fontWeight: 'bold', color: '#8553f6', fontFamily: 'monospace' }}>
           "{step?.result !== undefined ? step.result : '...'}"
         </div>
-        <div style={{ fontSize: 12, color: '#8b5cf6', marginTop: 8 }}>
+        <div style={{ fontSize: 12, color: '#8553f6', marginTop: 8 }}>
           {step?.message || ''}
         </div>
       </motion.div>

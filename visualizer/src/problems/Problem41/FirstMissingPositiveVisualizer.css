@@ -28,7 +28,7 @@
 .fmp-chip.active,
 .fmp-chip:hover {
     border-color: #89b4fa;
-    color: #89b4fa;
+    color: #1a6df5;
 }
 
 .fmp-panel {
@@ -163,7 +163,7 @@
 .fmp-tracker-val {
     font-size: 20px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .fmp-tracker-val.fmp-phase {
@@ -171,27 +171,27 @@
 }
 
 .fmp-tracker-val.fmp-phase.init {
-    color: #89b4fa;
+    color: #1a6df5;
 }
 
 .fmp-tracker-val.fmp-phase.place {
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .fmp-tracker-val.fmp-phase.swap {
-    color: #fab387;
+    color: #c65108;
 }
 
 .fmp-tracker-val.fmp-phase.swapped {
-    color: #cba6f7;
+    color: #964cef;
 }
 
 .fmp-tracker-val.fmp-phase.scan {
-    color: #89dceb;
+    color: #198093;
 }
 
 .fmp-tracker-val.fmp-phase.found {
-    color: #f38ba8;
+    color: #e51851;
 }
 
 .fmp-result {

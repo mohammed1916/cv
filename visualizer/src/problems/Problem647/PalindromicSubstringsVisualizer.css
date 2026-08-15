@@ -114,15 +114,15 @@
 .ps-char-val {
     font-size: 20px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .ps-char.center .ps-char-val {
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .ps-char.active-range .ps-char-val {
-    color: #cba6f7;
+    color: #964cef;
 }
 
 .ps-char-idx {
@@ -187,7 +187,7 @@
 
 .ps-found-chip.more {
     background: #313244;
-    color: #6c7086;
+    color: #999cad;
 }
 
 .ps-metric {
@@ -208,19 +208,19 @@
 
 .ps-val {
     font-size: 18px;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .l-color {
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .r-color {
-    color: #f38ba8;
+    color: #e51851;
 }
 
 .ps-val.accent {
-    color: #cba6f7;
+    color: #964cef;
 }
 
 .ps-result {
@@ -229,7 +229,7 @@
     background: #313244;
     border-radius: 8px;
     font-size: 14px;
-    color: #6c7086;
+    color: #999cad;
 }
 
 .ps-result.done {

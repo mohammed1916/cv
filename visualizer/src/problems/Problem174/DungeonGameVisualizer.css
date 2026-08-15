@@ -28,7 +28,7 @@
 .dg-chip.active,
 .dg-chip:hover {
     border-color: #cba6f7;
-    color: #cba6f7;
+    color: #964cef;
 }
 
 .dg-panel {
@@ -97,7 +97,7 @@
 
 .dp-cell {
     background: #181825;
-    color: #45475a;
+    color: #7e819c;
     border: 1px dashed #313244;
 }
 
@@ -140,16 +140,16 @@
 .dg-tracker-val {
     font-size: 14px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
     font-family: monospace;
 }
 
 .dg-tracker-val.dg-need {
-    color: #fab387;
+    color: #c65108;
 }
 
 .dg-tracker-val.dg-dpval {
-    color: #cba6f7;
+    color: #964cef;
     font-size: 20px;
 }
 

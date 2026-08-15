@@ -23,7 +23,7 @@
     display: inline-block;
     font-size: 11px;
     font-weight: 700;
-    color: #89b4fa;
+    color: #1a6df5;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     margin-bottom: 8px;
@@ -32,13 +32,13 @@
 .hr2-hero-copy h2 {
     font-size: 20px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
     margin: 8px 0;
 }
 
 .hr2-hero-copy p {
     font-size: 13px;
-    color: #a6adc8;
+    color: #6773a1;
     line-height: 1.5;
     margin: 8px 0 0 0;
 }
@@ -69,7 +69,7 @@
 
 .hr2-summary-card strong {
     font-size: 20px;
-    color: #cdd6f4;
+    color: #4f6ed8;
     font-weight: 700;
 }
 
@@ -91,7 +91,7 @@
 .hr2-field span {
     font-size: 12px;
     font-weight: 600;
-    color: #cdd6f4;
+    color: #4f6ed8;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
@@ -148,12 +148,12 @@
 
 .hr2-metric-card strong {
     font-size: 16px;
-    color: #cdd6f4;
+    color: #4f6ed8;
     font-weight: 700;
 }
 
 .hr2-metric-card strong.accent {
-    color: #fab387;
+    color: #c65108;
 }
 
 .hr2-message-box {
@@ -174,7 +174,7 @@
 
 .hr2-message-box p {
     font-size: 12px;
-    color: #cdd6f4;
+    color: #4f6ed8;
     line-height: 1.4;
     margin: 0;
 }
@@ -210,7 +210,7 @@
 }
 
 .hr2-error {
-    color: #f38ba8;
+    color: #e51851;
     font-size: 11px;
 }
 
@@ -313,7 +313,7 @@
 }
 
 .hr2-dp-val.filled {
-    color: #89b4fa;
+    color: #1a6df5;
 }
 
 .hr2-metric {
@@ -334,11 +334,11 @@
 
 .hr2-val {
     font-size: 18px;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .hr2-val.accent {
-    color: #fab387;
+    color: #c65108;
 }
 
 .hr2-result {
@@ -347,7 +347,7 @@
     background: #313244;
     border-radius: 8px;
     font-size: 14px;
-    color: #6c7086;
+    color: #999cad;
 }
 
 .hr2-result.done {

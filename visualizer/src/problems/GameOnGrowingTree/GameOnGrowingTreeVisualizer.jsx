@@ -1264,7 +1264,7 @@ export default function GameOnGrowingTreeVisualizer() {
           fontWeight: 600,
           textTransform: 'uppercase',
           letterSpacing: '0.05em',
-          color: '#94a3b8',
+          color: '#627794',
         }}>
           {viewMode === 'panels' ? 'Panel View' : 'Structure View'}
         </span>
@@ -1275,7 +1275,7 @@ export default function GameOnGrowingTreeVisualizer() {
             background: viewMode === 'dual-rep' ? 'rgba(59, 130, 246, 0.9)' : 'rgba(100, 116, 139, 0.5)',
             border: '1px solid rgba(148, 163, 184, 0.3)',
             borderRadius: '6px',
-            color: '#e2e8f0',
+            color: '#5577a4',
             fontWeight: 600,
             fontSize: '12px',
             cursor: 'pointer',

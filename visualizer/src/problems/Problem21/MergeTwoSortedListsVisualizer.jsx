@@ -280,7 +280,7 @@ export default function MergeTwoSortedListsVisualizer() {
       <div className="mtsl-panel-head">
         Linked Lists
         {inputError && (
-          <span style={{ color: "#f87171", marginLeft: 8 }}>
+          <span style={{ color: "#ea0c0c", marginLeft: 8 }}>
             {inputError}
           </span>
         )}
@@ -315,7 +315,7 @@ export default function MergeTwoSortedListsVisualizer() {
         >
           <span
             style={{
-              color: "#f43f5e",
+              color: "#e90d33",
               fontSize: 13,
               fontFamily: "monospace",
               fontWeight: "bold",
@@ -339,7 +339,7 @@ export default function MergeTwoSortedListsVisualizer() {
           />
           <span
             style={{
-              color: "#0ea5e9",
+              color: "#0b7db0",
               fontSize: 13,
               fontFamily: "monospace",
               fontWeight: "bold",
@@ -366,7 +366,7 @@ export default function MergeTwoSortedListsVisualizer() {
         <div className="mtsl-lists-container">
           {/* List 1 */}
           <div className="mtsl-list-row">
-            <div className="mtsl-list-label" style={{ color: "#f43f5e" }}>
+            <div className="mtsl-list-label" style={{ color: "#e90d33" }}>
               list1
             </div>
             <div className="mtsl-list-nodes">
@@ -423,7 +423,7 @@ export default function MergeTwoSortedListsVisualizer() {
 
           {/* List 2 */}
           <div className="mtsl-list-row">
-            <div className="mtsl-list-label" style={{ color: "#0ea5e9" }}>
+            <div className="mtsl-list-label" style={{ color: "#0b7db0" }}>
               list2
             </div>
             <div className="mtsl-list-nodes">

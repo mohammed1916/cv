@@ -203,7 +203,7 @@ function FizzBuzzVisualization({ n, step }) {
             </div>
             <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#dbeafe', borderRadius: 4, border: '2px solid #0284c7' }}>
               <div style={{ fontSize: 10, color: '#0c4a6e', fontWeight: 600 }}>Output</div>
-              <div style={{ fontSize: 13, fontWeight: 'bold', color: '#0284c7', fontFamily: 'monospace' }}>
+              <div style={{ fontSize: 13, fontWeight: 'bold', color: '#027bba', fontFamily: 'monospace' }}>
                 "{step.current}"
               </div>
             </div>

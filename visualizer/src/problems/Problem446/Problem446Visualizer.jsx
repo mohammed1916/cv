@@ -297,7 +297,7 @@ function VisualizationPanel({ step, nums, EXAMPLES, handleExampleClick, numsInpu
         <div style={{ fontSize: 11, fontWeight: 600, color: '#166534', marginBottom: 2 }}>
           Count: {step?.count ?? 0}
         </div>
-        <div style={{ fontSize: 12, color: '#22c55e', lineHeight: 1.4 }}>
+        <div style={{ fontSize: 12, color: '#178740', lineHeight: 1.4 }}>
           Counting subsequences where consecutive differences match, building on previous solutions.
         </div>
       </div>

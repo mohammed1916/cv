@@ -25,7 +25,7 @@
 .rc-chip.active,
 .rc-chip:hover {
     border-color: #94e2d5;
-    color: #94e2d5;
+    color: #238373;
 }
 
 .rc-panel {
@@ -61,7 +61,7 @@
     font-family: monospace;
     font-size: 14px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .rc-ret {
@@ -72,15 +72,15 @@
 }
 
 .rc-ret.ok {
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .rc-ret.no {
-    color: #f38ba8;
+    color: #e51851;
 }
 
 .rc-ret.rnd {
-    color: #94e2d5;
+    color: #238373;
 }
 
 .rc-phase {
@@ -91,7 +91,7 @@
 }
 
 .rc-phase.init {
-    color: #89b4fa;
+    color: #1a6df5;
 }
 
 .rc-phase.insert {
@@ -110,7 +110,7 @@
 }
 
 .rc-phase.done {
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .rc-nums {
@@ -144,7 +144,7 @@
 .rc-cv {
     font-size: 15px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
     font-family: monospace;
 }
 
@@ -169,7 +169,7 @@
 .rc-idx-key {
     font-size: 14px;
     font-weight: 700;
-    color: #94e2d5;
+    color: #238373;
     min-width: 20px;
 }
 
@@ -179,7 +179,7 @@
 
 .rc-idx-vals {
     font-size: 13px;
-    color: #a6adc8;
+    color: #6773a1;
 }
 
 .rc-log {
@@ -198,15 +198,15 @@
 }
 
 .rc-log-entry.insert {
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .rc-log-entry.remove {
-    color: #f38ba8;
+    color: #e51851;
 }
 
 .rc-log-entry.random {
-    color: #94e2d5;
+    color: #238373;
 }
 
 .rc-status {

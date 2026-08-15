@@ -159,7 +159,7 @@ function CandyArray({ candies, processedIndex, alice_size }) {
 
   return (
     <div style={{ padding: 16, backgroundColor: '#1e293b', borderRadius: 8 }}>
-      <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 12 }}>Candy Distribution</div>
+      <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 12 }}>Candy Distribution</div>
       <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginBottom: 12 }}>
         {candies.map((candy, idx) => {
           const isAlice = idx < aliceCount
@@ -181,7 +181,7 @@ function CandyArray({ candies, processedIndex, alice_size }) {
                 justifyContent: 'center',
                 fontSize: 12,
                 fontWeight: 700,
-                color: '#fff',
+                color: '#757575',
                 border: `2px solid ${isAlice ? '#22c55e' : '#64748b'}`,
                 boxShadow: isProcessed ? '0 0 8px rgba(34, 197, 94, 0.5)' : 'none',
                 cursor: 'default',
@@ -194,9 +194,9 @@ function CandyArray({ candies, processedIndex, alice_size }) {
         })}
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, fontSize: 11, color: '#cbd5e1' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, fontSize: 11, color: '#5a779b' }}>
         <div>
-          <span style={{ color: '#22c55e', fontWeight: 600 }}>▪</span> Alice's portion (0-{aliceCount - 1})
+          <span style={{ color: '#178740', fontWeight: 600 }}>▪</span> Alice's portion (0-{aliceCount - 1})
         </div>
         <div>
           <span style={{ color: '#64748b', fontWeight: 600 }}>▪</span> Bob's portion ({aliceCount}-{candies.length - 1})
@@ -211,7 +211,7 @@ function VisualizationPanel({ step, applyExample, examples, candies }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -249,8 +249,8 @@ function VisualizationPanel({ step, applyExample, examples, candies }) {
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.3 }}
           >
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#22c55e', marginBottom: 6 }}>Unique Types</div>
-            <div style={{ fontSize: 18, color: '#22c55e', fontFamily: 'monospace', fontWeight: 700 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: '#178740', marginBottom: 6 }}>Unique Types</div>
+            <div style={{ fontSize: 18, color: '#178740', fontFamily: 'monospace', fontWeight: 700 }}>
               {step.unique_count}
             </div>
           </motion.div>
@@ -265,8 +265,8 @@ function VisualizationPanel({ step, applyExample, examples, candies }) {
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.3 }}
           >
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#38bdf8', marginBottom: 6 }}>Max Unique (n/2)</div>
-            <div style={{ fontSize: 18, color: '#38bdf8', fontFamily: 'monospace', fontWeight: 700 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: '#067db1', marginBottom: 6 }}>Max Unique (n/2)</div>
+            <div style={{ fontSize: 18, color: '#067db1', fontFamily: 'monospace', fontWeight: 700 }}>
               {step.alice_size}
             </div>
           </motion.div>
@@ -293,7 +293,7 @@ function VisualizationPanel({ step, applyExample, examples, candies }) {
               fontSize: 24,
               fontFamily: 'monospace',
               fontWeight: 'bold',
-              color: '#22c55e',
+              color: '#178740',
             }}
           >
             {step.result}
@@ -370,7 +370,7 @@ export default function DistributeCandiesVisualizer() {
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Candies (JSON array)</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Candies (JSON array)</div>
               <textarea
                 value={candiesInput}
                 onChange={(e) => {
@@ -390,7 +390,7 @@ export default function DistributeCandiesVisualizer() {
                   resize: 'vertical',
                 }}
               />
-              {inputError && <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
+              {inputError && <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
             </div>
             <VisualizationPanel step={step} applyExample={applyExample} examples={examples} candies={candies} />
           </div>),

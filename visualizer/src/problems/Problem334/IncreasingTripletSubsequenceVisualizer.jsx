@@ -249,7 +249,7 @@ export default function IncreasingTripletSubsequenceVisualizer() {
 
             {/* Array of boxes */}
             {nums.length === 0 ? (
-              <div style={{ color: '#94a3b8', fontSize: 13 }}>Provide a non-empty array to visualize.</div>
+              <div style={{ color: '#627794', fontSize: 13 }}>Provide a non-empty array to visualize.</div>
             ) : (
               <AnimatePresence mode="wait">
                 <motion.div

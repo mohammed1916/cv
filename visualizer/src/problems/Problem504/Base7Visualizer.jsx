@@ -159,7 +159,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -185,21 +185,21 @@ function VisualizationPanel({ step, applyExample, examples }) {
       {step?.num !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Current Number</div>
-          <div style={{ fontSize: 14, color: '#e2e8f0', fontFamily: 'monospace', fontWeight: 600 }}>{step.num}</div>
+          <div style={{ fontSize: 14, color: '#5577a4', fontFamily: 'monospace', fontWeight: 600 }}>{step.num}</div>
         </div>
       )}
 
       {step?.remainder !== undefined && (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
           <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #38bdf8' }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#38bdf8', marginBottom: 6 }}>Remainder</div>
-            <div style={{ fontSize: 16, color: '#38bdf8', fontFamily: 'monospace', fontWeight: 700 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: '#067db1', marginBottom: 6 }}>Remainder</div>
+            <div style={{ fontSize: 16, color: '#067db1', fontFamily: 'monospace', fontWeight: 700 }}>
               {step.remainder}
             </div>
           </div>
           <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#a78bfa', marginBottom: 6 }}>Iteration</div>
-            <div style={{ fontSize: 16, color: '#a78bfa', fontFamily: 'monospace', fontWeight: 700 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Iteration</div>
+            <div style={{ fontSize: 16, color: '#7e56f8', fontFamily: 'monospace', fontWeight: 700 }}>
               {step.iteration}
             </div>
           </div>
@@ -222,7 +222,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
           <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>
             {step.done ? 'Final Result' : 'Current Result'}
           </div>
-          <div style={{ fontSize: 18, fontFamily: 'monospace', fontWeight: 'bold', color: '#22c55e' }}>
+          <div style={{ fontSize: 18, fontFamily: 'monospace', fontWeight: 'bold', color: '#178740' }}>
             "{step.result}"
           </div>
         </motion.div>
@@ -230,7 +230,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.negative && (
         <div style={{ padding: 10, backgroundColor: '#1e293b', borderRadius: 4, border: '1px solid #f87171' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#f87171' }}>Negative number detected</div>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#ea0c0c' }}>Negative number detected</div>
         </div>
       )}
     </div>
@@ -292,7 +292,7 @@ export default function Base7Visualizer() {
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Number</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Number</div>
               <input
                 type="number"
                 value={numInput}

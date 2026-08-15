@@ -263,7 +263,7 @@ function ChainVisualization({ sorted, chain }) {
 
   return (
     <div style={{ padding: 12, backgroundColor: '#065f46', borderRadius: 6, border: '2px solid #10b981' }}>
-      <div style={{ fontSize: 11, fontWeight: 600, color: '#d1fae5', marginBottom: 8 }}>
+      <div style={{ fontSize: 11, fontWeight: 600, color: '#0f8749', marginBottom: 8 }}>
         Final Divisible Subset (length: {chain.length}):
       </div>
       <svg width="100%" height={80} style={{ minHeight: 80 }}>

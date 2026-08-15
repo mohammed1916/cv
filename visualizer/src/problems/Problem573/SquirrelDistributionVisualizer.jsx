@@ -208,7 +208,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -281,8 +281,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.squirrel !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#a78bfa', marginBottom: 6 }}>Squirrel Position</div>
-          <div style={{ fontSize: 16, color: '#a78bfa', fontFamily: 'monospace', fontWeight: 700 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Squirrel Position</div>
+          <div style={{ fontSize: 16, color: '#7e56f8', fontFamily: 'monospace', fontWeight: 700 }}>
             {step.squirrel}
           </div>
         </div>
@@ -290,8 +290,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.distance !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #22c55e' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#22c55e', marginBottom: 6 }}>Distance Calculation</div>
-          <div style={{ fontSize: 13, color: '#e2e8f0', fontFamily: 'monospace' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#178740', marginBottom: 6 }}>Distance Calculation</div>
+          <div style={{ fontSize: 13, color: '#5577a4', fontFamily: 'monospace' }}>
             |{step.fromPos} - {step.toPos}| = {step.distance}
           </div>
         </div>
@@ -323,8 +323,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.totalDist !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #f59e0b' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#f59e0b', marginBottom: 6 }}>Current Path Distance</div>
-          <div style={{ fontSize: 13, color: '#e2e8f0' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', marginBottom: 6 }}>Current Path Distance</div>
+          <div style={{ fontSize: 13, color: '#5577a4' }}>
             DP[{step.chairIdx}] + Distance = {step.totalDist}
           </div>
         </div>
@@ -350,7 +350,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
               fontSize: 18,
               fontFamily: 'monospace',
               fontWeight: 'bold',
-              color: '#22c55e',
+              color: '#178740',
             }}
           >
             {step.result === Infinity ? '∞' : step.result}
@@ -435,7 +435,7 @@ export default function SquirrelDistributionVisualizer() {
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
               <div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Trees (JSON)</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Trees (JSON)</div>
                 <input
                   type="text"
                   value={trees}
@@ -456,7 +456,7 @@ export default function SquirrelDistributionVisualizer() {
                 />
               </div>
               <div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Chairs (JSON)</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Chairs (JSON)</div>
                 <input
                   type="text"
                   value={chairs}
@@ -477,7 +477,7 @@ export default function SquirrelDistributionVisualizer() {
                 />
               </div>
               <div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Squirrel Position</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Squirrel Position</div>
                 <input
                   type="number"
                   value={squirrel}
@@ -498,7 +498,7 @@ export default function SquirrelDistributionVisualizer() {
                 />
               </div>
             </div>
-            {inputError && <div style={{ color: '#f87171', fontSize: 11 }}>{inputError}</div>}
+            {inputError && <div style={{ color: '#ea0c0c', fontSize: 11 }}>{inputError}</div>}
             <VisualizationPanel step={step} applyExample={applyExample} examples={examples} />
           </div>),
   }), [step, connectivity, setActiveLineDom, trees, chairs, squirrel, inputError, examples, applyExample, handleReset, showPatternOverlay, activeLineDom])

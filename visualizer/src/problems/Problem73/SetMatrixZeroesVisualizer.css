@@ -41,7 +41,7 @@
 .smz-chip.active,
 .smz-chip:hover {
     border-color: #f9e2af;
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .smz-sets-row {
@@ -70,7 +70,7 @@
 .smz-set-val {
     font-size: 13px;
     font-weight: 700;
-    color: #f9e2af;
+    color: #996d0c;
     font-family: monospace;
 }
 

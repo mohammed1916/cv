@@ -218,7 +218,7 @@ function StackView({ stack, label, style = {} }) {
       </header>
       <div style={{ display: 'flex', flexDirection: 'column-reverse', gap: 6, minHeight: 80, justifyContent: 'flex-end' }}>
         {stack.length === 0 ? (
-          <div style={{ fontSize: 11, color: '#94a3b8', fontStyle: 'italic' }}>Empty</div>
+          <div style={{ fontSize: 11, color: '#627794', fontStyle: 'italic' }}>Empty</div>
         ) : (
           stack.map((val, idx) => (
             <motion.div
@@ -380,7 +380,7 @@ function VisualizationPanel({ step, list1, list2, EXAMPLES, handleExampleClick, 
         <div style={{ fontSize: 11, fontWeight: 600, color: '#166534', marginBottom: 2 }}>
           Story: Building Sum from Right to Left
         </div>
-        <div style={{ fontSize: 12, color: '#22c55e', lineHeight: 1.4 }}>
+        <div style={{ fontSize: 12, color: '#178740', lineHeight: 1.4 }}>
           Like counting from right to left with coins of different denominations, handling carries as we go.
         </div>
       </div>

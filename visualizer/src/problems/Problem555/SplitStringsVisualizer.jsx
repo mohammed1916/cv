@@ -225,7 +225,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -250,8 +250,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.currentString && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #38bdf8' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#38bdf8', marginBottom: 6 }}>Current String</div>
-          <div style={{ fontSize: 14, color: '#38bdf8', fontFamily: 'monospace', fontWeight: 700 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#067db1', marginBottom: 6 }}>Current String</div>
+          <div style={{ fontSize: 14, color: '#067db1', fontFamily: 'monospace', fontWeight: 700 }}>
             {step.currentString}
           </div>
         </div>
@@ -259,8 +259,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.currentWord && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #22c55e' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#22c55e', marginBottom: 6 }}>Current Word</div>
-          <div style={{ fontSize: 14, color: '#22c55e', fontFamily: 'monospace', fontWeight: 700 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#178740', marginBottom: 6 }}>Current Word</div>
+          <div style={{ fontSize: 14, color: '#178740', fontFamily: 'monospace', fontWeight: 700 }}>
             {step.currentWord}
           </div>
         </div>
@@ -268,7 +268,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.rotations && step?.rotations.length > 0 && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #a78bfa' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#a78bfa', marginBottom: 8 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 8 }}>
             Rotations ({step.rotations.length})
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
@@ -293,8 +293,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.maxRotation && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f59e0b' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#f59e0b', marginBottom: 6 }}>Max Rotation</div>
-          <div style={{ fontSize: 14, color: '#f59e0b', fontFamily: 'monospace', fontWeight: 700 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', marginBottom: 6 }}>Max Rotation</div>
+          <div style={{ fontSize: 14, color: '#a36907', fontFamily: 'monospace', fontWeight: 700 }}>
             {step.maxRotation}
           </div>
         </div>
@@ -302,8 +302,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.globalMax !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #06b6d4' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#06b6d4', marginBottom: 6 }}>Global Maximum</div>
-          <div style={{ fontSize: 14, color: '#06b6d4', fontFamily: 'monospace', fontWeight: 700 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#048196', marginBottom: 6 }}>Global Maximum</div>
+          <div style={{ fontSize: 14, color: '#048196', fontFamily: 'monospace', fontWeight: 700 }}>
             {step.globalMax || '(empty)'}
           </div>
         </div>
@@ -312,7 +312,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
       {step?.splitNum !== undefined && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #64748b' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Split Marker</div>
-          <div style={{ fontSize: 13, color: '#e2e8f0' }}>Skip next {step.splitNum} character(s)</div>
+          <div style={{ fontSize: 13, color: '#5577a4' }}>Skip next {step.splitNum} character(s)</div>
         </div>
       )}
 
@@ -335,7 +335,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
               fontSize: 18,
               fontFamily: 'monospace',
               fontWeight: 'bold',
-              color: '#22c55e',
+              color: '#178740',
             }}
           >
             "{step.result || '(empty)'}"
@@ -412,7 +412,7 @@ export default function SplitStringsVisualizer() {
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>
                 Input Strings (JSON array)
               </div>
               <textarea
@@ -434,7 +434,7 @@ export default function SplitStringsVisualizer() {
                   resize: 'vertical',
                 }}
               />
-              {inputError && <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
+              {inputError && <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
             </div>
             <VisualizationPanel step={step} applyExample={applyExample} examples={examples} />
           </div>),

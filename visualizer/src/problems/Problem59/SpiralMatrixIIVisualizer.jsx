@@ -264,7 +264,7 @@ export default function SpiralMatrixIIVisualizer() {
     <div className="smi-panel">
       <div className="smi-panel-head">
         Matrix Generation
-        {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
+        {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
       </div>
       <div className="smi-panel-body">
         <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
@@ -280,7 +280,7 @@ export default function SpiralMatrixIIVisualizer() {
         </div>
 
         <div style={{ marginBottom: 12 }}>
-          <label style={{ fontSize: 13, color: '#94a3b8', display: 'block', marginBottom: 6 }}>
+          <label style={{ fontSize: 13, color: '#627794', display: 'block', marginBottom: 6 }}>
             n (matrix size):
           </label>
           <input
@@ -321,8 +321,8 @@ export default function SpiralMatrixIIVisualizer() {
           </div>
         </div>
 
-        <div style={{ marginTop: 12, fontSize: 13, color: '#94a3b8' }}>
-          Current num: <span style={{ color: '#60a5fa', fontWeight: 600 }}>{step?.num ?? '–'}</span>
+        <div style={{ marginTop: 12, fontSize: 13, color: '#627794' }}>
+          Current num: <span style={{ color: '#0870f0', fontWeight: 600 }}>{step?.num ?? '–'}</span>
         </div>
       </div>
     </div>
@@ -336,19 +336,19 @@ export default function SpiralMatrixIIVisualizer() {
         <div className="smi-vars">
           <div className="smi-var-row">
             <span className="smi-var-name">top</span>
-            <span className="smi-var-val" style={{ color: '#ef4444' }}>{step?.top ?? '–'}</span>
+            <span className="smi-var-val" style={{ color: '#e91414' }}>{step?.top ?? '–'}</span>
           </div>
           <div className="smi-var-row">
             <span className="smi-var-name">bottom</span>
-            <span className="smi-var-val" style={{ color: '#f97316' }}>{step?.bottom ?? '–'}</span>
+            <span className="smi-var-val" style={{ color: '#c35305' }}>{step?.bottom ?? '–'}</span>
           </div>
           <div className="smi-var-row">
             <span className="smi-var-name">left</span>
-            <span className="smi-var-val" style={{ color: '#3b82f6' }}>{step?.left ?? '–'}</span>
+            <span className="smi-var-val" style={{ color: '#1b6df5' }}>{step?.left ?? '–'}</span>
           </div>
           <div className="smi-var-row">
             <span className="smi-var-name">right</span>
-            <span className="smi-var-val" style={{ color: '#8b5cf6' }}>{step?.right ?? '–'}</span>
+            <span className="smi-var-val" style={{ color: '#8553f6' }}>{step?.right ?? '–'}</span>
           </div>
           <div className="smi-var-row">
             <span className="smi-var-name">num</span>

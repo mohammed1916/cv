@@ -187,7 +187,7 @@ function VisualizationPanel({ step, applyEx }) {
               </div>
             ))}
             {step.map.size > 5 && (
-              <div style={{ fontSize: 11, color: '#94a3b8' }}>... and {step.map.size - 5} more</div>
+              <div style={{ fontSize: 11, color: '#627794' }}>... and {step.map.size - 5} more</div>
             )}
           </div>
         </div>
@@ -196,7 +196,7 @@ function VisualizationPanel({ step, applyEx }) {
       {step?.currentOp && (
         <div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, border: '2px solid #f59e0b' }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#92400e' }}>Current Operation</div>
-          <div style={{ fontSize: 13, fontFamily: 'monospace', fontWeight: 700, color: '#f59e0b', marginTop: 4 }}>
+          <div style={{ fontSize: 13, fontFamily: 'monospace', fontWeight: 700, color: '#a36907', marginTop: 4 }}>
             {step.currentOp}
           </div>
         </div>

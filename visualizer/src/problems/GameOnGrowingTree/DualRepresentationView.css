@@ -33,7 +33,7 @@
   margin: 0;
   font-size: 0.95rem;
   font-weight: 700;
-  color: #f0f9ff;
+  color: #0079c9;
   letter-spacing: 0.5px;
 }
 
@@ -68,12 +68,12 @@
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #60a5fa;
+  color: #0870f0;
   padding-left: 2px;
 }
 
 .section-title.debug {
-  color: #f97316;
+  color: #c35305;
 }
 
 /* State Box */
@@ -94,13 +94,13 @@
 }
 
 .state-line .label {
-  color: #94a3b8;
+  color: #627794;
   flex-shrink: 0;
   min-width: 90px;
 }
 
 .state-line .value {
-  color: #bfdbfe;
+  color: #046ff4;
   font-weight: 600;
   word-break: break-word;
 }
@@ -117,7 +117,7 @@
 }
 
 .action-line {
-  color: #60a5fa;
+  color: #0870f0;
   font-weight: 600;
 }
 
@@ -129,7 +129,7 @@
 }
 
 .action-response {
-  color: #cbd5e1;
+  color: #5a779b;
   font-size: 0.75rem;
   line-height: 1.4;
   padding-left: 4px;
@@ -164,7 +164,7 @@
 }
 
 .delta-line .arrow {
-  color: #a78bfa;
+  color: #7e56f8;
   font-weight: 800;
   flex-shrink: 0;
 }
@@ -227,14 +227,14 @@
 }
 
 .debug-line .label {
-  color: #fb7185;
+  color: #ea0728;
   flex-shrink: 0;
   min-width: 110px;
   font-weight: 600;
 }
 
 .debug-line .value {
-  color: #fecaca;
+  color: #eb0404;
   font-weight: 600;
 }
 
@@ -246,7 +246,7 @@
 }
 
 .reason-text {
-  color: #f5d4d4;
+  color: #d34040;
   font-size: 0.7rem;
   line-height: 1.3;
 }
@@ -286,6 +286,6 @@
   }
 
   .story-box {
-    color: #e2e8f0;
+    color: #5577a4;
   }
 }

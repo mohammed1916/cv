@@ -27,7 +27,7 @@
 .po-chip.active,
 .po-chip:hover {
     border-color: #fab387;
-    color: #fab387;
+    color: #c65108;
 }
 
 .po-panel {
@@ -142,11 +142,11 @@
 .po-tracker-val {
     font-size: 20px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .po-tracker-val.carry-val {
-    color: #f38ba8;
+    color: #e51851;
 }
 
 .po-result {

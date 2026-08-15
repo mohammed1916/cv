@@ -201,7 +201,7 @@ function VisualizationPanel({ step, applyExample, examples, nums }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -225,7 +225,7 @@ function VisualizationPanel({ step, applyExample, examples, nums }) {
       )}
 
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Array</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Array</div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569', minHeight: 60 }}>
           <AnimatePresence mode="popLayout">
             {nums.map((num, idx) => {
@@ -283,37 +283,37 @@ function VisualizationPanel({ step, applyExample, examples, nums }) {
 
       {step?.phase && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#a78bfa', marginBottom: 6 }}>Phase</div>
-          <div style={{ fontSize: 13, color: '#e2e8f0', fontFamily: 'monospace', fontWeight: 600 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Phase</div>
+          <div style={{ fontSize: 13, color: '#5577a4', fontFamily: 'monospace', fontWeight: 600 }}>
             {step.phase.replace(/_/g, ' ').toUpperCase()}
           </div>
         </div>
       )}
 
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Bounds Analysis</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Bounds Analysis</div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, padding: 10, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
           <div>
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#94a3b8', marginBottom: 4 }}>Left Index</div>
-            <div style={{ fontFamily: 'monospace', fontSize: 16, fontWeight: 700, color: '#38bdf8' }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: '#627794', marginBottom: 4 }}>Left Index</div>
+            <div style={{ fontFamily: 'monospace', fontSize: 16, fontWeight: 700, color: '#067db1' }}>
               {step?.left === nums.length ? '—' : step?.left}
             </div>
           </div>
           <div>
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#94a3b8', marginBottom: 4 }}>Right Index</div>
-            <div style={{ fontFamily: 'monospace', fontSize: 16, fontWeight: 700, color: '#38bdf8' }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: '#627794', marginBottom: 4 }}>Right Index</div>
+            <div style={{ fontFamily: 'monospace', fontSize: 16, fontWeight: 700, color: '#067db1' }}>
               {step?.right === -1 ? '—' : step?.right}
             </div>
           </div>
           <div>
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#94a3b8', marginBottom: 4 }}>Max (Left Pass)</div>
-            <div style={{ fontFamily: 'monospace', fontSize: 16, fontWeight: 700, color: '#f59e0b' }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: '#627794', marginBottom: 4 }}>Max (Left Pass)</div>
+            <div style={{ fontFamily: 'monospace', fontSize: 16, fontWeight: 700, color: '#a36907' }}>
               {step?.maxFromLeft === -Infinity ? '—' : step?.maxFromLeft}
             </div>
           </div>
           <div>
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#94a3b8', marginBottom: 4 }}>Min (Right Pass)</div>
-            <div style={{ fontFamily: 'monospace', fontSize: 16, fontWeight: 700, color: '#f59e0b' }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: '#627794', marginBottom: 4 }}>Min (Right Pass)</div>
+            <div style={{ fontFamily: 'monospace', fontSize: 16, fontWeight: 700, color: '#a36907' }}>
               {step?.minFromRight === Infinity ? '—' : step?.minFromRight}
             </div>
           </div>
@@ -334,9 +334,9 @@ function VisualizationPanel({ step, applyExample, examples, nums }) {
           transition={{ duration: 0.3 }}
         >
           <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Length</div>
-          <div style={{ fontSize: 28, fontWeight: 'bold', color: '#22c55e' }}>{step.length}</div>
+          <div style={{ fontSize: 28, fontWeight: 'bold', color: '#178740' }}>{step.length}</div>
           {step.length > 0 && (
-            <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 8 }}>
+            <div style={{ fontSize: 11, color: '#627794', marginTop: 8 }}>
               Subarray [{step.left}, {step.right}] needs sorting
             </div>
           )}
@@ -412,7 +412,7 @@ export default function ShortestUnsortedVisualizer() {
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Array</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Array</div>
               <textarea
                 value={arrayInput}
                 onChange={(e) => {
@@ -434,7 +434,7 @@ export default function ShortestUnsortedVisualizer() {
                 placeholder='[1,2,4,5,3]'
               />
               {inputError && (
-                <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>
+                <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>
               )}
             </div>
             <VisualizationPanel nums={nums} step={step} applyExample={applyExample} examples={examples} />

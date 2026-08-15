@@ -234,7 +234,7 @@ function ArithmeticSlicesVisualization({ nums, step }) {
       {/* Result */}
       <div style={{ padding: 12, backgroundColor: '#dbeafe', borderRadius: 6, border: '2px solid #0284c7' }}>
         <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 4 }}>Total Count</div>
-        <div style={{ fontSize: 24, fontWeight: 'bold', color: '#0284c7', fontFamily: 'monospace' }}>{count}</div>
+        <div style={{ fontSize: 24, fontWeight: 'bold', color: '#027bba', fontFamily: 'monospace' }}>{count}</div>
       </div>
 
       <div style={{ fontSize: 12, color: '#475569' }}>{step?.message}</div>

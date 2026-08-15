@@ -101,7 +101,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -144,18 +144,18 @@ function VisualizationPanel({ step, applyExample, examples }) {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
         >
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#f87171', marginBottom: 6 }}>Current Student</div>
-          <div style={{ fontSize: 13, color: '#e2e8f0', fontFamily: 'monospace', fontWeight: 600 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#ea0c0c', marginBottom: 6 }}>Current Student</div>
+          <div style={{ fontSize: 13, color: '#5577a4', fontFamily: 'monospace', fontWeight: 600 }}>
             {step.currentStudent.student_name}
           </div>
-          <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 4 }}>
+          <div style={{ fontSize: 11, color: '#627794', marginTop: 4 }}>
             Dept: {step.currentStudent.department_id}
           </div>
         </motion.div>
       )}
 
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>
+        <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>
           Department Summary ({step?.result?.length || 0})
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6, maxHeight: 400, overflowY: 'auto' }}>
@@ -178,7 +178,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
                 exit={{ opacity: 0, x: -20 }}
               >
                 <div>
-                  <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0' }}>
+                  <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4' }}>
                     Department {dept.department_id}
                   </div>
                 </div>
@@ -215,7 +215,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
           transition={{ duration: 0.3 }}
         >
           <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Total Students</div>
-          <div style={{ fontSize: 24, fontWeight: 'bold', color: '#22c55e' }}>
+          <div style={{ fontSize: 24, fontWeight: 'bold', color: '#178740' }}>
             {step.result.reduce((sum, d) => sum + d.count, 0)}
           </div>
           <div style={{ fontSize: 11, color: '#64748b', marginTop: 6 }}>
@@ -300,7 +300,7 @@ export default function CountStudentsVisualizer() {
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Student Data</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Student Data</div>
               <textarea
                 value={studentsInput}
                 onChange={(e) => {
@@ -322,7 +322,7 @@ export default function CountStudentsVisualizer() {
                 placeholder="[{student_id, student_name, department_id}]"
               />
               {inputError && (
-                <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>
+                <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>
               )}
             </div>
             <VisualizationPanel students={students} step={step} applyExample={applyExample} examples={examples} />

@@ -252,7 +252,7 @@ function MatrixGrid({ matrix, title, highlight = null, extractHighlight = null }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <div style={{ fontSize: 11, fontWeight: 600, color: '#e2e8f0' }}>{title}</div>
+      <div style={{ fontSize: 11, fontWeight: 600, color: '#5577a4' }}>{title}</div>
       <div
         style={{
           display: 'inline-grid',
@@ -307,7 +307,7 @@ function FlattenedArray({ flat, highlightIndex = null }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <div style={{ fontSize: 11, fontWeight: 600, color: '#e2e8f0' }}>Flattened Array</div>
+      <div style={{ fontSize: 11, fontWeight: 600, color: '#5577a4' }}>Flattened Array</div>
       <div
         style={{
           display: 'flex',
@@ -415,8 +415,8 @@ function VisualizationPanel({ step }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#f87171', marginBottom: 8 }}>Cannot Reshape</div>
-          <div style={{ fontSize: 13, color: '#e2e8f0' }}>Dimensions don't match. Returning original matrix.</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#ea0c0c', marginBottom: 8 }}>Cannot Reshape</div>
+          <div style={{ fontSize: 13, color: '#5577a4' }}>Dimensions don't match. Returning original matrix.</div>
         </motion.div>
       )}
 
@@ -434,8 +434,8 @@ function VisualizationPanel({ step }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#22c55e', marginBottom: 8 }}>Complete</div>
-          <div style={{ fontSize: 13, color: '#e2e8f0' }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#178740', marginBottom: 8 }}>Complete</div>
+          <div style={{ fontSize: 13, color: '#5577a4' }}>
             Successfully reshaped {step.m}x{step.n} matrix to {step.r}x{step.c}
           </div>
         </motion.div>
@@ -504,7 +504,7 @@ export default function ReshapeMatrixVisualizer() {
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
               <div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Matrix (JSON)</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Matrix (JSON)</div>
                 <textarea
                   value={matrixInput}
                   onChange={(e) => {
@@ -526,7 +526,7 @@ export default function ReshapeMatrixVisualizer() {
                 />
               </div>
               <div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Rows (r)</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Rows (r)</div>
                 <input
                   type="number"
                   value={r}
@@ -547,7 +547,7 @@ export default function ReshapeMatrixVisualizer() {
                     marginBottom: 8,
                   }}
                 />
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Cols (c)</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Cols (c)</div>
                 <input
                   type="number"
                   value={c}
@@ -571,7 +571,7 @@ export default function ReshapeMatrixVisualizer() {
               <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 {examples?.length > 0 && (
                   <div>
-                    <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+                    <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                       {examples.map((ex, i) => (
                         <button

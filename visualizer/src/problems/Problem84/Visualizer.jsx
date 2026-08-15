@@ -138,7 +138,7 @@ function HistogramVisualization({ step, heights, inputError, input, setInput, ha
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
       <header style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>
         Histogram Visualization
-        {inputError && <span style={{ marginLeft: 8, color: '#ef4444', fontSize: 12 }}>{inputError}</span>}
+        {inputError && <span style={{ marginLeft: 8, color: '#e91414', fontSize: 12 }}>{inputError}</span>}
       </header>
 
       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -192,7 +192,7 @@ function HistogramVisualization({ step, heights, inputError, input, setInput, ha
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: '#fff',
+                  color: '#757575',
                   fontSize: 12,
                   fontWeight: 600,
                   transition: 'all 0.3s ease',
@@ -234,7 +234,7 @@ function StackState({ step, heights }) {
             }}
           >
             {(step?.stack || []).length === 0 ? (
-              <span style={{ fontSize: 12, color: '#94a3b8' }}>[ empty ]</span>
+              <span style={{ fontSize: 12, color: '#627794' }}>[ empty ]</span>
             ) : (
               (step?.stack || []).map((s, i) => (
                 <span

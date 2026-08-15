@@ -18,11 +18,11 @@ import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('target-sum')
 
 const PATTERNS = {
-  'init': { icon: '◯', label: 'Initialize', color: '#06b6d4' },
-  'loop': { icon: '⟳', label: 'Iterate', color: '#3b82f6' },
-  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#3b82f6' },
-  'found': { icon: '✓', label: 'Match Found', color: '#10b981' },
-  'done': { icon: '✓', label: 'Complete', color: '#10b981' },
+  'init': { icon: '◯', label: 'Initialize', color: '#048196' },
+  'loop': { icon: '⟳', label: 'Iterate', color: '#1b6df5' },
+  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#1b6df5' },
+  'found': { icon: '✓', label: 'Match Found', color: '#0c865d' },
+  'done': { icon: '✓', label: 'Complete', color: '#0c865d' },
 }
 
 const LINE_PATTERN_MAP = {
@@ -73,8 +73,8 @@ function VisualizationPanel({ nums, target, step, applyEx }) {
       <div><div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Array: [{nums.join(', ')}], Target: {target}</div></div>
       <motion.div style={{ padding: 16, backgroundColor: '#fce7f3', borderRadius: 6, border: '2px solid #ec4899', textAlign: 'center' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
         <div style={{ fontSize: 13, fontWeight: 600, color: '#831843' }}>Ways to Reach Target</div>
-        <div style={{ fontSize: 32, fontWeight: 'bold', color: '#ec4899' }}>{step?.count ?? 0}</div>
-        <div style={{ fontSize: 12, color: '#ec4899', marginTop: 8 }}>{step?.message || ''}</div>
+        <div style={{ fontSize: 32, fontWeight: 'bold', color: '#e0177a' }}>{step?.count ?? 0}</div>
+        <div style={{ fontSize: 12, color: '#e0177a', marginTop: 8 }}>{step?.message || ''}</div>
       </motion.div>
     </div>
   )

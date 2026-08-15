@@ -28,7 +28,7 @@
 .vs-chip.active,
 .vs-chip:hover {
     border-color: #f38ba8;
-    color: #f38ba8;
+    color: #e51851;
 }
 
 .vs-panel {
@@ -66,7 +66,7 @@
     font-weight: 700;
     border-radius: 3px;
     border: 1px solid #313244;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .vs-cell.box-even {
@@ -79,7 +79,7 @@
 
 .vs-cell.current {
     border-color: #89b4fa;
-    color: #89b4fa;
+    color: #1a6df5;
 }
 
 .vs-cell.conflict {

@@ -86,7 +86,7 @@
 .do-string-label {
   font-size: 11px;
   font-weight: 600;
-  color: #94a3b8;
+  color: #627794;
   min-width: 30px;
 }
 
@@ -129,19 +129,19 @@
 .do-result-label {
   font-size: 12px;
   font-weight: 600;
-  color: #94a3b8;
+  color: #627794;
   margin-bottom: 8px;
 }
 
 .do-result-value {
   font-size: 28px;
   font-weight: 700;
-  color: #f59e0b;
+  color: #a36907;
 }
 
 .do-result-desc {
   font-size: 11px;
-  color: #cbd5e1;
+  color: #5a779b;
   margin-top: 8px;
   font-family: monospace;
 }

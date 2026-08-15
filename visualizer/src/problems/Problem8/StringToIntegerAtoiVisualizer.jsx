@@ -225,7 +225,7 @@ export default function StringToIntegerAtoiVisualizer() {
         <div className="atoi-panel" style={{ flex: 1.5 }}>
           <div className="atoi-panel-head">
             String Parsing
-            {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
+            {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
           </div>
           <div className="atoi-panel-body">
             <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
@@ -281,9 +281,9 @@ export default function StringToIntegerAtoiVisualizer() {
                     </div>
                     <div className="atoi-type-label">
                       {isSpace && <span style={{ color: '#64748b' }}>space</span>}
-                      {isSign && <span style={{ color: '#a855f7' }}>sign</span>}
-                      {isDigit && <span style={{ color: '#22c55e' }}>digit</span>}
-                      {!isSpace && !isSign && !isDigit && <span style={{ color: '#ef4444' }}>other</span>}
+                      {isSign && <span style={{ color: '#9e42f6' }}>sign</span>}
+                      {isDigit && <span style={{ color: '#178740' }}>digit</span>}
+                      {!isSpace && !isSign && !isDigit && <span style={{ color: '#e91414' }}>other</span>}
                     </div>
                   </div>
                 )
@@ -293,7 +293,7 @@ export default function StringToIntegerAtoiVisualizer() {
 
             {step?.phase === 'calc_res' && (
               <div className="atoi-math-box">
-                <span style={{ color: '#94a3b8', fontSize: 12, textTransform: 'uppercase' }}>Accumulate:</span>
+                <span style={{ color: '#627794', fontSize: 12, textTransform: 'uppercase' }}>Accumulate:</span>
                 <div className="atoi-math-formula">
                   <span className="var">res</span>
                   <span className="op">*</span>

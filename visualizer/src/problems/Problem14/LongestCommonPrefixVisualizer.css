@@ -33,12 +33,12 @@
   font-size: 28px;
   margin: 8px 0 16px;
   font-weight: 700;
-  color: #f1f5f9;
+  color: #4879a9;
 }
 
 .lcp-hero p {
   font-size: 14px;
-  color: #cbd5e1;
+  color: #5a779b;
   line-height: 1.6;
   max-width: 700px;
 }
@@ -62,7 +62,7 @@
 
 .lcp-summary-card span {
   font-size: 11px;
-  color: #94a3b8;
+  color: #627794;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -70,7 +70,7 @@
 
 .lcp-summary-card strong {
   font-size: 16px;
-  color: #e2e8f0;
+  color: #5577a4;
   font-weight: 700;
 }
 
@@ -145,12 +145,12 @@
 
 .lcp-help-title {
   font-weight: 600;
-  color: #4faafe;
+  color: #0174de;
   margin-bottom: 4px;
 }
 
 .lcp-help-text {
-  color: #cbd5e1;
+  color: #5a779b;
   font-family: 'Fira Code', monospace;
 }
 
@@ -165,7 +165,7 @@
   margin: 0;
   font-size: 13px;
   font-weight: 600;
-  color: #cbd5e1;
+  color: #5a779b;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -195,7 +195,7 @@
 .lcp-row-label {
   font-family: 'Fira Code', monospace;
   font-size: 12px;
-  color: #94a3b8;
+  color: #627794;
   font-weight: 600;
   white-space: nowrap;
   min-width: 65px;
@@ -284,7 +284,7 @@
   font-family: 'Fira Code', monospace;
   font-size: 18px;
   font-weight: 700;
-  color: #86efac;
+  color: #12873c;
   word-break: break-all;
   margin-bottom: 8px;
 }
@@ -297,11 +297,11 @@
 
 .lcp-prefix-length {
   font-size: 12px;
-  color: #94a3b8;
+  color: #627794;
 }
 
 .lcp-length-value {
-  color: #4faafe;
+  color: #0174de;
   font-weight: 600;
   font-family: 'Fira Code', monospace;
 }
@@ -317,7 +317,7 @@
 .lcp-info-title {
   font-size: 11px;
   font-weight: 600;
-  color: #4faafe;
+  color: #0174de;
   text-transform: uppercase;
   margin-bottom: 8px;
 }
@@ -331,11 +331,11 @@
 .lcp-position-row {
   font-family: 'Fira Code', monospace;
   font-size: 12px;
-  color: #cbd5e1;
+  color: #5a779b;
 }
 
 .lcp-label {
-  color: #94a3b8;
+  color: #627794;
   font-weight: 600;
   margin-right: 6px;
 }
@@ -350,7 +350,7 @@
 .lcp-step-info {
   font-size: 13px;
   line-height: 1.6;
-  color: #cbd5e1;
+  color: #5a779b;
   padding: 8px 0;
 }
 

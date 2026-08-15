@@ -46,7 +46,7 @@
 }
 
 .rpn-error {
-    color: #f38ba8;
+    color: #e51851;
     font-size: 12px;
 }
 
@@ -158,14 +158,14 @@
 .rpn-op-b {
     font-size: 20px;
     font-weight: 700;
-    color: #89b4fa;
+    color: #1a6df5;
     font-family: monospace;
 }
 
 .rpn-op-sym {
     font-size: 22px;
     font-weight: 900;
-    color: #f9e2af;
+    color: #996d0c;
 }
 
 .rpn-status {

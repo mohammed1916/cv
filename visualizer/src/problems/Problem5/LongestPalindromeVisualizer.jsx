@@ -226,7 +226,7 @@ export default function LongestPalindromeVisualizer() {
         <div className="lpal-panel" style={{ flex: 1.5 }}>
           <div className="lpal-panel-head">
             String Expansion
-            {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
+            {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
           </div>
           <div className="lpal-panel-body">
             <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>

@@ -221,7 +221,7 @@ export default function NumberOfIslandsVisualizer() {
             ))}
           </div>
 
-          {inputError && <div style={{ color: '#f87171', marginBottom: 12, fontSize: 13 }}>{inputError}</div>}
+          {inputError && <div style={{ color: '#ea0c0c', marginBottom: 12, fontSize: 13 }}>{inputError}</div>}
 
           <textarea
             className="noi-input-textarea"

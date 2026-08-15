@@ -294,7 +294,7 @@ function NumbersByLengthDisplay({ n, count }) {
                 style={{
                   fontSize: 11,
                   fontWeight: 700,
-                  color: '#0ea5e9',
+                  color: '#0b7db0',
                 }}
               >
                 {item.count} numbers
@@ -316,8 +316,8 @@ function NumbersByLengthDisplay({ n, count }) {
           textAlign: 'center',
         }}
       >
-        <div style={{ fontSize: 10, color: '#059669', marginBottom: 4 }}>Total Count</div>
-        <div style={{ fontSize: 18, fontWeight: 700, color: '#16a34a' }}>
+        <div style={{ fontSize: 10, color: '#04865e', marginBottom: 4 }}>Total Count</div>
+        <div style={{ fontSize: 18, fontWeight: 700, color: '#12873d' }}>
           {count}
         </div>
       </motion.div>
@@ -345,7 +345,7 @@ function CountAccumulator({ count, n }) {
         <div style={{ fontSize: 11, color: '#92400e', marginBottom: 4 }}>
           Numbers with unique digits from 0 to 10^{n}:
         </div>
-        <div style={{ fontSize: 24, fontWeight: 700, color: '#d97706' }}>
+        <div style={{ fontSize: 24, fontWeight: 700, color: '#b16105' }}>
           {count}
         </div>
       </motion.div>

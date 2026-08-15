@@ -164,7 +164,7 @@ function BitVisualization({ value, label }) {
               justifyContent: 'center',
               borderRadius: 3,
               backgroundColor: bit === '1' ? '#06b6d4' : '#94a3b8',
-              color: 'white',
+              color: '#757575',
               fontSize: 11,
               fontWeight: 600,
               fontFamily: 'monospace',
@@ -180,7 +180,7 @@ function BitVisualization({ value, label }) {
 }
 
 function VisualizationPanel({ step }) {
-  if (!step) return <div style={{ padding: 16, color: '#94a3b8' }}>Press play</div>
+  if (!step) return <div style={{ padding: 16, color: '#627794' }}>Press play</div>
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>

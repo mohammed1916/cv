@@ -40,7 +40,7 @@
 }
 
 .lcs-error {
-    color: #f87171;
+    color: #ea0c0c;
     font-size: 12px;
     font-weight: 400;
 }
@@ -145,7 +145,7 @@
 
 .lcs-cell.current {
     border-color: #94a3b8;
-    color: #94a3b8;
+    color: #627794;
 }
 
 .lcs-cell.start {

@@ -325,8 +325,8 @@ export default function PowerOfTwoVisualizer() {
           <motion.span
             key={n}
             className="pt-tracker-val"
-            initial={{ scale: 1.3, color: "#89b4fa" }}
-            animate={{ scale: 1, color: "#cdd6f4" }}
+            initial={{ scale: 1.3, color: "#1a6df5" }}
+            animate={{ scale: 1, color: "#4f6ed8" }}
             transition={{ duration: 0.3 }}
           >
             {n}

@@ -195,7 +195,7 @@ function VisualizationPanel({ step, positions, nodes, applyExample, examples }) 
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -225,14 +225,14 @@ function VisualizationPanel({ step, positions, nodes, applyExample, examples }) 
             return (
               <>
                 <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #38bdf8' }}>
-                  <div style={{ fontSize: 11, fontWeight: 600, color: '#38bdf8', marginBottom: 6 }}>Left Subtree Sum</div>
-                  <div style={{ fontSize: 16, color: '#38bdf8', fontFamily: 'monospace', fontWeight: 700 }}>
+                  <div style={{ fontSize: 11, fontWeight: 600, color: '#067db1', marginBottom: 6 }}>Left Subtree Sum</div>
+                  <div style={{ fontSize: 16, color: '#067db1', fontFamily: 'monospace', fontWeight: 700 }}>
                     {data.leftSum}
                   </div>
                 </div>
                 <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f59e0b' }}>
-                  <div style={{ fontSize: 11, fontWeight: 600, color: '#f59e0b', marginBottom: 6 }}>Right Subtree Sum</div>
-                  <div style={{ fontSize: 16, color: '#f59e0b', fontFamily: 'monospace', fontWeight: 700 }}>
+                  <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', marginBottom: 6 }}>Right Subtree Sum</div>
+                  <div style={{ fontSize: 16, color: '#a36907', fontFamily: 'monospace', fontWeight: 700 }}>
                     {data.rightSum}
                   </div>
                 </div>
@@ -244,11 +244,11 @@ function VisualizationPanel({ step, positions, nodes, applyExample, examples }) 
 
       {step?.activeId !== undefined && step?.nodeData?.has(step.activeId) && (
         <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#a78bfa', marginBottom: 6 }}>Node Tilt</div>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Node Tilt</div>
           {(() => {
             const data = step.nodeData.get(step.activeId)
             return (
-              <div style={{ fontSize: 13, color: '#e2e8f0', fontFamily: 'monospace' }}>
+              <div style={{ fontSize: 13, color: '#5577a4', fontFamily: 'monospace' }}>
                 |{data.leftSum} - {data.rightSum}| = {data.tilt}
               </div>
             )
@@ -274,7 +274,7 @@ function VisualizationPanel({ step, positions, nodes, applyExample, examples }) 
             fontSize: 20,
             fontFamily: 'monospace',
             fontWeight: 'bold',
-            color: '#a78bfa',
+            color: '#7e56f8',
           }}
         >
           {step?.totalTilt ?? 0}
@@ -348,7 +348,7 @@ export default function BinaryTreeTiltVisualizer() {
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Tree Input (Array)</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Tree Input (Array)</div>
               <textarea
                 value={arrInput}
                 onChange={(e) => {
@@ -368,7 +368,7 @@ export default function BinaryTreeTiltVisualizer() {
                   resize: 'vertical',
                 }}
               />
-              {inputError && <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
+              {inputError && <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
             </div>
 
             <div style={{ position: 'relative', width: CANVAS_W, height: CANVAS_H, margin: '0 auto', backgroundColor: '#0f172a', borderRadius: 6, border: '1px solid #1e293b' }}>

@@ -226,7 +226,7 @@ function VisualizationPanel({ step, words, word1, word2, applyExample, examples 
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {examples.map((ex, i) => (
               <button
@@ -267,7 +267,7 @@ function VisualizationPanel({ step, words, word1, word2, applyExample, examples 
                         : step.indices2?.includes(idx)
                           ? '#f59e0b'
                           : '#334155',
-                  color: '#fff',
+                  color: '#757575',
                   fontSize: 11,
                   fontWeight: 600,
                   border: '1px solid',
@@ -287,8 +287,8 @@ function VisualizationPanel({ step, words, word1, word2, applyExample, examples 
           <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Word Indices Map</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 11 }}>
             {Object.entries(step.wordIndices).map(([word, indices]) => (
-              <div key={word} style={{ color: '#e2e8f0' }}>
-                <span style={{ color: '#a78bfa', fontWeight: 600 }}>{word}</span>: [{indices.join(', ')}]
+              <div key={word} style={{ color: '#5577a4' }}>
+                <span style={{ color: '#7e56f8', fontWeight: 600 }}>{word}</span>: [{indices.join(', ')}]
               </div>
             ))}
           </div>
@@ -298,18 +298,18 @@ function VisualizationPanel({ step, words, word1, word2, applyExample, examples 
       {step?.indices1 && step?.indices2 && (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
           <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #38bdf8' }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#38bdf8', marginBottom: 6 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: '#067db1', marginBottom: 6 }}>
               "{step.word1}" Indices
             </div>
-            <div style={{ fontSize: 13, color: '#e2e8f0', fontFamily: 'monospace' }}>
+            <div style={{ fontSize: 13, color: '#5577a4', fontFamily: 'monospace' }}>
               [{step.indices1.join(', ')}]
             </div>
           </div>
           <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f59e0b' }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#f59e0b', marginBottom: 6 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', marginBottom: 6 }}>
               "{step.word2}" Indices
             </div>
-            <div style={{ fontSize: 13, color: '#e2e8f0', fontFamily: 'monospace' }}>
+            <div style={{ fontSize: 13, color: '#5577a4', fontFamily: 'monospace' }}>
               [{step.indices2.join(', ')}]
             </div>
           </div>
@@ -319,14 +319,14 @@ function VisualizationPanel({ step, words, word1, word2, applyExample, examples 
       {step?.i !== undefined && step?.j !== undefined && (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
           <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #38bdf8' }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#38bdf8', marginBottom: 6 }}>Pointer i</div>
-            <div style={{ fontSize: 16, color: '#38bdf8', fontFamily: 'monospace', fontWeight: 700 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: '#067db1', marginBottom: 6 }}>Pointer i</div>
+            <div style={{ fontSize: 16, color: '#067db1', fontFamily: 'monospace', fontWeight: 700 }}>
               {step.i} → idx: {step.indices1?.[step.i]}
             </div>
           </div>
           <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f59e0b' }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#f59e0b', marginBottom: 6 }}>Pointer j</div>
-            <div style={{ fontSize: 16, color: '#f59e0b', fontFamily: 'monospace', fontWeight: 700 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', marginBottom: 6 }}>Pointer j</div>
+            <div style={{ fontSize: 16, color: '#a36907', fontFamily: 'monospace', fontWeight: 700 }}>
               {step.j} → idx: {step.indices2?.[step.j]}
             </div>
           </div>
@@ -336,14 +336,14 @@ function VisualizationPanel({ step, words, word1, word2, applyExample, examples 
       {step?.currentDistance !== undefined && (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
           <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #ec4899' }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#ec4899', marginBottom: 6 }}>Current Distance</div>
-            <div style={{ fontSize: 18, color: '#ec4899', fontFamily: 'monospace', fontWeight: 700 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: '#e0177a', marginBottom: 6 }}>Current Distance</div>
+            <div style={{ fontSize: 18, color: '#e0177a', fontFamily: 'monospace', fontWeight: 700 }}>
               {step.currentDistance}
             </div>
           </div>
           <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #22c55e' }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#22c55e', marginBottom: 6 }}>Min Distance</div>
-            <div style={{ fontSize: 18, color: '#22c55e', fontFamily: 'monospace', fontWeight: 700 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: '#178740', marginBottom: 6 }}>Min Distance</div>
+            <div style={{ fontSize: 18, color: '#178740', fontFamily: 'monospace', fontWeight: 700 }}>
               {step.minDistance === Infinity ? '∞' : step.minDistance}
             </div>
           </div>
@@ -451,7 +451,7 @@ export default function ShortestWordDistanceVisualizer() {
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Word List (JSON)</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Word List (JSON)</div>
               <textarea
                 value={wordsInput}
                 onChange={(e) => {
@@ -471,11 +471,11 @@ export default function ShortestWordDistanceVisualizer() {
                   resize: 'vertical',
                 }}
               />
-              {inputError && <div style={{ color: '#f87171', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
+              {inputError && <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
               <div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Word 1</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Word 1</div>
                 <input
                   type="text"
                   value={word1}
@@ -496,7 +496,7 @@ export default function ShortestWordDistanceVisualizer() {
                 />
               </div>
               <div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#e2e8f0', marginBottom: 6 }}>Word 2</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Word 2</div>
                 <input
                   type="text"
                   value={word2}

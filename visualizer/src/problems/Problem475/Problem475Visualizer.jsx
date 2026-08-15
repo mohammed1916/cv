@@ -153,7 +153,7 @@ function VisualizationPanel({ houses, heaters, step, applyEx }) {
           }}
         >
           <div style={{ fontSize: 12, color: '#065f46', fontWeight: 600, marginBottom: 8 }}>Current House</div>
-          <div style={{ fontSize: 20, fontFamily: 'monospace', fontWeight: 'bold', color: '#10b981' }}>
+          <div style={{ fontSize: 20, fontFamily: 'monospace', fontWeight: 'bold', color: '#0c865d' }}>
             {step?.currentHouse ?? '-'}
           </div>
         </motion.div>
@@ -167,7 +167,7 @@ function VisualizationPanel({ houses, heaters, step, applyEx }) {
           }}
         >
           <div style={{ fontSize: 12, color: '#92400e', fontWeight: 600, marginBottom: 8 }}>Min Distance</div>
-          <div style={{ fontSize: 20, fontFamily: 'monospace', fontWeight: 'bold', color: '#f59e0b' }}>
+          <div style={{ fontSize: 20, fontFamily: 'monospace', fontWeight: 'bold', color: '#a36907' }}>
             {step?.maxRadius ?? 0}
           </div>
         </motion.div>

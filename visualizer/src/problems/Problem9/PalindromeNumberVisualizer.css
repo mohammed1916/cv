@@ -3,7 +3,7 @@
     flex-direction: column;
     gap: 14px;
     padding: 14px;
-    color: #e2e8f0;
+    color: #5577a4;
 }
 
 .pn-top {
@@ -37,7 +37,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    color: #f8fafc;
+    color: #4879a9;
     font-size: 15px;
     font-weight: 700;
     letter-spacing: 0.01em;
@@ -97,7 +97,7 @@
 }
 
 .pn-input-prefix {
-    color: #94a3b8;
+    color: #627794;
     font-family: monospace;
     font-size: 13px;
 }
@@ -133,7 +133,7 @@
 }
 
 .pn-state-label {
-    color: #94a3b8;
+    color: #627794;
     font-size: 12px;
     margin-bottom: 6px;
     text-transform: uppercase;
@@ -148,19 +148,19 @@
 }
 
 .pn-state-value.primary {
-    color: #93c5fd;
+    color: #0471eb;
 }
 
 .pn-state-value.success {
-    color: #86efac;
+    color: #12873c;
 }
 
 .pn-state-value.cyan {
-    color: #67e8f9;
+    color: #068191;
 }
 
 .pn-state-value.amber {
-    color: #fcd34d;
+    color: #927002;
 }
 
 .pn-note-box,
@@ -181,7 +181,7 @@
 .pn-note-title,
 .pn-history-title,
 .pn-result-title {
-    color: #f8fafc;
+    color: #4879a9;
     font-size: 13px;
     font-weight: 700;
     margin-bottom: 6px;
@@ -192,7 +192,7 @@
 .pn-edge-note,
 .pn-history-text,
 .pn-history-empty {
-    color: #cbd5e1;
+    color: #5a779b;
     font-size: 13px;
     line-height: 1.55;
 }
@@ -216,7 +216,7 @@
 
 .pn-message {
     padding: 12px 14px;
-    color: #e2e8f0;
+    color: #5577a4;
     min-height: 48px;
     display: flex;
     align-items: center;
@@ -234,23 +234,23 @@
     grid-template-columns: 70px 1fr 26px auto;
     align-items: center;
     gap: 8px;
-    color: #e2e8f0;
+    color: #5577a4;
     font-family:
         ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 .pn-formula-key {
-    color: #67e8f9;
+    color: #068191;
     font-weight: 700;
 }
 
 .pn-formula-val {
-    color: #f8fafc;
+    color: #4879a9;
     word-break: break-word;
 }
 
 .pn-formula-eq {
-    color: #94a3b8;
+    color: #627794;
     text-align: center;
 }
 
@@ -270,7 +270,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: #f8fafc;
+    color: #4879a9;
     font-weight: 700;
     margin-bottom: 8px;
 }
@@ -282,15 +282,15 @@
 }
 
 .pn-tape-value.cyan {
-    color: #67e8f9;
+    color: #068191;
 }
 
 .pn-tape-value.green {
-    color: #86efac;
+    color: #12873c;
 }
 
 .pn-tape-value.neutral {
-    color: #cbd5e1;
+    color: #5a779b;
 }
 
 .pn-tape-meta {
@@ -298,12 +298,12 @@
     justify-content: space-between;
     gap: 12px;
     margin-bottom: 10px;
-    color: #94a3b8;
+    color: #627794;
     font-size: 12px;
 }
 
 .pn-meta-val {
-    color: #e2e8f0;
+    color: #5577a4;
     font-family: monospace;
     font-weight: 700;
 }
@@ -328,7 +328,7 @@
 
 .pn-sign,
 .pn-empty {
-    color: #94a3b8;
+    color: #627794;
     font-size: 18px;
     font-weight: 800;
     font-family: monospace;
@@ -392,7 +392,7 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    color: #cbd5e1;
+    color: #5a779b;
 }
 
 .pn-connector-line {
@@ -412,7 +412,7 @@
     position: absolute;
     top: -10px;
     right: -4px;
-    color: #22c55e;
+    color: #178740;
     font-size: 18px;
 }
 
@@ -437,7 +437,7 @@
 
 .pn-connector-label {
     font-size: 12px;
-    color: #94a3b8;
+    color: #627794;
     text-transform: lowercase;
 }
 
@@ -452,15 +452,15 @@
 }
 
 .pn-result-value.success {
-    color: #86efac;
+    color: #12873c;
 }
 
 .pn-result-value.danger {
-    color: #fca5a5;
+    color: #eb0808;
 }
 
 .pn-result-value.neutral {
-    color: #e2e8f0;
+    color: #5577a4;
 }
 
 .pn-edge-list {
@@ -478,7 +478,7 @@
 }
 
 .pn-edge-label {
-    color: #f8fafc;
+    color: #4879a9;
     font-weight: 700;
     font-size: 13px;
     margin-bottom: 4px;
@@ -492,7 +492,7 @@
 
 .pn-history-empty {
     padding: 8px 0;
-    color: #94a3b8;
+    color: #627794;
 }
 
 .pn-history-row {
@@ -503,7 +503,7 @@
 }
 
 .pn-history-step {
-    color: #67e8f9;
+    color: #068191;
     font-size: 12px;
     font-weight: 800;
     min-width: 36px;
@@ -523,12 +523,12 @@
 
 .pn-status.success {
     border-color: rgba(34, 197, 94, 0.45);
-    color: #86efac;
+    color: #12873c;
 }
 
 .pn-status.danger {
     border-color: rgba(248, 113, 113, 0.45);
-    color: #fca5a5;
+    color: #eb0808;
 }
 
 .pn-badge {

@@ -353,7 +353,7 @@ function VisualizationPanel({ step, s, EXAMPLES, handleExampleClick, input, setI
         <div style={{ fontSize: 11, fontWeight: 600, color: '#166534', marginBottom: 2 }}>
           Story: Ranking Characters by Popularity
         </div>
-        <div style={{ fontSize: 12, color: '#22c55e', lineHeight: 1.4 }}>
+        <div style={{ fontSize: 12, color: '#178740', lineHeight: 1.4 }}>
           Count how often each character appears, then arrange them in order of popularity.
         </div>
       </div>

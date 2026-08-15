@@ -93,7 +93,7 @@ export default function CountAndSay() {
     left: (<div className="count-and-say-panel">
             <div className="count-and-say-panel-head">
               Input
-              {inputError && <span style={{ color: '#f87171', marginLeft: 8 }}>{inputError}</span>}
+              {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
             </div>
             <div className="count-and-say-panel-body">
               <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>

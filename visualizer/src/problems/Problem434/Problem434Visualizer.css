@@ -149,7 +149,7 @@
   border-color: rgba(45, 212, 191, 0.6);
 }
 
-.p434-char.start .p434-char-glyph { color: #5eead4; }
+.p434-char.start .p434-char-glyph { color: #118472; }
 
 .p434-char.inside {
   background: rgba(99, 102, 241, 0.18);
@@ -237,7 +237,7 @@
   font-weight: 700;
 }
 
-.p434-stat.highlight .p434-stat-val { color: #5eead4; }
+.p434-stat.highlight .p434-stat-val { color: #118472; }
 
 .p434-result {
   text-align: center;
@@ -248,7 +248,7 @@
 }
 
 .p434-result-val {
-  color: #5eead4;
+  color: #118472;
   font-size: 1.6rem;
   font-weight: 800;
   font-family: 'Fira Code', monospace;

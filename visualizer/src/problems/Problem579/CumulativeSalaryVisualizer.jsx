@@ -309,7 +309,7 @@ export default function CumulativeSalaryVisualizer() {
                     }}
                   />
                   {inputError && (
-                    <div style={{ color: '#f87171', fontSize: '12px', marginTop: '6px' }}>
+                    <div style={{ color: '#ea0c0c', fontSize: '12px', marginTop: '6px' }}>
                       {inputError}
                     </div>
                   )}

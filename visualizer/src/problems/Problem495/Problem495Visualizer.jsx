@@ -18,11 +18,11 @@ import { createPortal } from 'react-dom'
 const SOLUTION_CODE = getSolutionCode('teemo-attacking')
 
 const PATTERNS = {
-  'init': { icon: '◯', label: 'Initialize', color: '#06b6d4' },
-  'loop': { icon: '⟳', label: 'Iterate', color: '#3b82f6' },
-  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#3b82f6' },
-  'found': { icon: '✓', label: 'Match Found', color: '#10b981' },
-  'done': { icon: '✓', label: 'Complete', color: '#10b981' },
+  'init': { icon: '◯', label: 'Initialize', color: '#048196' },
+  'loop': { icon: '⟳', label: 'Iterate', color: '#1b6df5' },
+  'check_loop': { icon: '⟳', label: 'Loop Check', color: '#1b6df5' },
+  'found': { icon: '✓', label: 'Match Found', color: '#0c865d' },
+  'done': { icon: '✓', label: 'Complete', color: '#0c865d' },
 }
 
 const LINE_PATTERN_MAP = {
@@ -67,8 +67,8 @@ function VisualizationPanel({ timeSeries, duration, step }) {
       <div><div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Attack Times: [{timeSeries.join(', ')}]</div></div>
       <motion.div style={{ padding: 16, backgroundColor: '#ccfbf1', borderRadius: 6, border: '2px solid #14b8a6', textAlign: 'center' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
         <div style={{ fontSize: 13, fontWeight: 600, color: '#134e4a' }}>Total Damage</div>
-        <div style={{ fontSize: 32, fontWeight: 'bold', color: '#14b8a6' }}>{step?.totalDamage ?? 0}</div>
-        <div style={{ fontSize: 12, color: '#14b8a6', marginTop: 8 }}>{step?.message || ''}</div>
+        <div style={{ fontSize: 32, fontWeight: 'bold', color: '#0e8477' }}>{step?.totalDamage ?? 0}</div>
+        <div style={{ fontSize: 12, color: '#0e8477', marginTop: 8 }}>{step?.message || ''}</div>
       </motion.div>
     </div>
   )

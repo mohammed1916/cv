@@ -92,7 +92,7 @@ function DominoChainVisualization({ arr, step, ex }) {
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 0.6, repeat: Infinity }}
-            style={{ fontSize: 12, color: '#f59e0b', fontWeight: 'bold' }}
+            style={{ fontSize: 12, color: '#a36907', fontWeight: 'bold' }}
           >
             ⬇️ Carry cascading...
           </motion.div>
@@ -103,7 +103,7 @@ function DominoChainVisualization({ arr, step, ex }) {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
         <div style={{ padding: 12, backgroundColor: '#f8fafc', borderRadius: 6, border: '1px solid #cbd5e1' }}>
           <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>Current Index</div>
-          <div style={{ fontSize: 20, fontWeight: 'bold', color: '#0ea5e9' }}>
+          <div style={{ fontSize: 20, fontWeight: 'bold', color: '#0b7db0' }}>
             {activeI < 0 ? '—' : activeI}
           </div>
         </div>

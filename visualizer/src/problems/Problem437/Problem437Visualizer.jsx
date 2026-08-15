@@ -255,7 +255,7 @@ function PathsVisualization({ paths, count, target }) {
             ))}
           </div>
         ) : (
-          <div style={{ color: '#94a3b8', fontSize: 12 }}>Searching...</div>
+          <div style={{ color: '#627794', fontSize: 12 }}>Searching...</div>
         )}
       </div>
       <div style={{
@@ -265,7 +265,7 @@ function PathsVisualization({ paths, count, target }) {
         border: '2px solid #0284c7',
       }}>
         <div style={{ fontSize: 11, color: '#0c4a6e', fontWeight: 600 }}>Total Paths Found</div>
-        <div style={{ fontSize: 20, fontWeight: 700, color: '#0284c7', marginTop: 4 }}>
+        <div style={{ fontSize: 20, fontWeight: 700, color: '#027bba', marginTop: 4 }}>
           {count}
         </div>
       </div>

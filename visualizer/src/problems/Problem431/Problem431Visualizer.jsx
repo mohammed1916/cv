@@ -173,7 +173,7 @@ function VisualizationPanel({ step, applyEx }) {
       {step?.current && (
         <div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, border: '2px solid #f59e0b' }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#92400e', marginBottom: 4 }}>Current Node</div>
-          <div style={{ fontSize: 16, fontFamily: 'monospace', fontWeight: 700, color: '#f59e0b' }}>{step.current}</div>
+          <div style={{ fontSize: 16, fontFamily: 'monospace', fontWeight: 700, color: '#a36907' }}>{step.current}</div>
         </div>
       )}
 
@@ -187,7 +187,7 @@ function VisualizationPanel({ step, applyEx }) {
               </div>
             ))}
             {step.encodedPairs.length > 4 && (
-              <div style={{ fontSize: 11, color: '#94a3b8' }}>... and {step.encodedPairs.length - 4} more</div>
+              <div style={{ fontSize: 11, color: '#627794' }}>... and {step.encodedPairs.length - 4} more</div>
             )}
           </div>
         </div>

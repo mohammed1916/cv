@@ -348,7 +348,7 @@ function LogMapState({ step }) {
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8, flex: 1 }}>
         {Object.entries(step.logs || {}).length === 0 ? (
-          <div style={{ color: '#94a3b8', fontSize: 12, fontStyle: 'italic' }}>
+          <div style={{ color: '#627794', fontSize: 12, fontStyle: 'italic' }}>
             (empty)
           </div>
         ) : (
@@ -518,7 +518,7 @@ function OutputLog({ step }) {
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8, flex: 1, overflowY: 'auto', maxHeight: 300 }}>
         {(step.printedMessages || []).length === 0 ? (
-          <div style={{ color: '#94a3b8', fontSize: 12, fontStyle: 'italic' }}>
+          <div style={{ color: '#627794', fontSize: 12, fontStyle: 'italic' }}>
             (none printed yet)
           </div>
         ) : (

@@ -270,7 +270,7 @@ function BattleshipsVisualization({ board, step }) {
       {/* Result */}
       <div style={{ padding: 12, backgroundColor: '#fed7aa', borderRadius: 6, border: '2px solid #f97316' }}>
         <div style={{ fontSize: 12, fontWeight: 600, color: '#92400e', marginBottom: 4 }}>Total Battleships</div>
-        <div style={{ fontSize: 24, fontWeight: 'bold', color: '#f97316' }}>
+        <div style={{ fontSize: 24, fontWeight: 'bold', color: '#c35305' }}>
           {result}
         </div>
       </div>

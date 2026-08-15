@@ -156,12 +156,12 @@ export default function Problem394Visualizer() {
 
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                         <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '1px solid #86efac' }}>
-                            <div style={{ fontSize: 11, color: '#65a30d' }}>Current String</div>
+                            <div style={{ fontSize: 11, color: '#51820a' }}>Current String</div>
                             <div style={{ fontSize: 14, fontFamily: 'monospace', fontWeight: 'bold', color: '#15803d', marginTop: 4 }}>"{step?.cur ?? ''}"</div>
                         </div>
                         <div style={{ padding: 12, backgroundColor: '#dbeafe', borderRadius: 6, border: '1px solid #0ea5e9' }}>
                             <div style={{ fontSize: 11, color: '#1e40af' }}>Multiplier</div>
-                            <div style={{ fontSize: 24, fontWeight: 'bold', color: '#0ea5e9', marginTop: 4 }}>{step?.k ?? 0}</div>
+                            <div style={{ fontSize: 24, fontWeight: 'bold', color: '#0b7db0', marginTop: 4 }}>{step?.k ?? 0}</div>
                         </div>
                     </div>
                 </div>),

@@ -281,9 +281,9 @@ export default function Problem370Visualizer() {
                 >
                   <div style={{ fontWeight: 600 }}>Current Update:</div>
                   <div style={{ marginTop: 4 }}>
-                    Add <span style={{ color: '#d97706', fontWeight: 600 }}>+{step.currentUpdate[2]}</span> to range [
-                    <span style={{ color: '#d97706', fontWeight: 600 }}>{step.currentUpdate[0]}</span>,{' '}
-                    <span style={{ color: '#d97706', fontWeight: 600 }}>{step.currentUpdate[1]}</span>]
+                    Add <span style={{ color: '#b16105', fontWeight: 600 }}>+{step.currentUpdate[2]}</span> to range [
+                    <span style={{ color: '#b16105', fontWeight: 600 }}>{step.currentUpdate[0]}</span>,{' '}
+                    <span style={{ color: '#b16105', fontWeight: 600 }}>{step.currentUpdate[1]}</span>]
                   </div>
                 </motion.div>
               )}

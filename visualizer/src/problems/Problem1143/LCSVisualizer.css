@@ -78,7 +78,7 @@
 }
 
 .lcs-th-label {
-    color: #6c7086;
+    color: #7e8297;
     font-size: 13px;
     background: #181825;
 }
@@ -136,19 +136,19 @@
 
 .lcs-val {
     font-size: 18px;
-    color: #cdd6f4;
+    color: #4f6ed8;
 }
 
 .lcs-val.match-ok {
-    color: #a6e3a1;
+    color: #2f8628;
 }
 
 .lcs-val.match-fail {
-    color: #f38ba8;
+    color: #e51851;
 }
 
 .lcs-val.accent {
-    color: #cba6f7;
+    color: #964cef;
 }
 
 .lcs-result {
@@ -157,7 +157,7 @@
     background: #313244;
     border-radius: 8px;
     font-size: 14px;
-    color: #6c7086;
+    color: #999cad;
 }
 
 .lcs-result.done {

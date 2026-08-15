@@ -37,7 +37,7 @@
 .nq-chip.active,
 .nq-chip:hover {
   border-color: #f5c2e7;
-  color: #f5c2e7;
+  color: #d423a3;
 }
 
 .nq-panel {
@@ -155,11 +155,11 @@
 .nq-tracker-val {
   font-size: 18px;
   font-weight: 700;
-  color: #cdd6f4;
+  color: #4f6ed8;
 }
 
 .nq-tracker-val.nq-sol {
-  color: #a6e3a1;
+  color: #2f8628;
 }
 
 .nq-tracker-val.nq-phase {
@@ -167,31 +167,31 @@
 }
 
 .nq-tracker-val.nq-phase.init {
-  color: #89b4fa;
+  color: #1a6df5;
 }
 
 .nq-tracker-val.nq-phase.check {
-  color: #f9e2af;
+  color: #996d0c;
 }
 
 .nq-tracker-val.nq-phase.place {
-  color: #f5c2e7;
+  color: #d423a3;
 }
 
 .nq-tracker-val.nq-phase.skip {
-  color: #f38ba8;
+  color: #e51851;
 }
 
 .nq-tracker-val.nq-phase.remove {
-  color: #fab387;
+  color: #c65108;
 }
 
 .nq-tracker-val.nq-phase.solution {
-  color: #a6e3a1;
+  color: #2f8628;
 }
 
 .nq-tracker-val.nq-phase.done {
-  color: #a6e3a1;
+  color: #2f8628;
 }
 
 .nq-result {

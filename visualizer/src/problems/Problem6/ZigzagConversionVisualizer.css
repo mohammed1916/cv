@@ -213,7 +213,7 @@
 
 .zigzag-var-title {
   font-size: 12px;
-  color: #94a3b8;
+  color: #627794;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 8px;
@@ -224,11 +224,11 @@
   font-family: monospace;
   font-size: 24px;
   font-weight: bold;
-  color: #f8fafc;
+  color: #4879a9;
 }
 
-.zigzag-var-val.true { color: #f43f5e; } /* down */
-.zigzag-var-val.false { color: #0ea5e9; } /* up */
+.zigzag-var-val.true { color: #e90d33; } /* down */
+.zigzag-var-val.false { color: #0b7db0; } /* up */
 
 .zigzag-result-box {
   background: #1e293b;
@@ -242,7 +242,7 @@
 
 .zigzag-result-label {
   font-size: 12px;
-  color: #94a3b8;
+  color: #627794;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 8px;
@@ -253,7 +253,7 @@
   font-family: monospace;
   font-size: 20px;
   font-weight: bold;
-  color: #4ade80;
+  color: #198741;
   word-break: break-all;
 }
 
