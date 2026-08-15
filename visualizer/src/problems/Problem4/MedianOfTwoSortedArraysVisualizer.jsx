@@ -12,6 +12,7 @@ import "./MedianOfTwoSortedArraysVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
+import PointerRail from '../../components/shared/PointerRail'
 
 const MEDIAN_PATTERNS = ['init', 'partition', 'evaluate', 'found', 'move_left', 'move_right']
 
@@ -566,6 +567,21 @@ function ArrayTape({
   );
 }
 
+function PartitionPointerRail({ step, values }) {
+  const direction = step?.phase === 'move_left'
+    ? 'Cut A is too far right: move high left.'
+    : step?.phase === 'move_right'
+      ? 'Cut A is too far left: move low right.'
+      : step?.phase === 'found' || step?.phase === 'done'
+        ? 'The cut is valid: every value on the left is ≤ every value on the right.'
+        : 'Low and high bound the only cuts still worth testing.'
+  return <PointerRail title="Binary-search pointer lane" values={values} range={{ start: step?.low ?? 0, end: step?.high ?? values.length }} pointers={[
+    { id: 'low', label: `low ${step?.low ?? 0}`, index: Math.min(step?.low ?? 0, Math.max(values.length - 1, 0)), tone: 'info' },
+    { id: 'high', label: `high ${step?.high ?? values.length}`, index: Math.min(step?.high ?? values.length, Math.max(values.length - 1, 0)), tone: 'warning' },
+    { id: 'cut', label: `cut ${step?.partitionA ?? 0}`, index: Math.min(step?.partitionA ?? 0, Math.max(values.length - 1, 0)), tone: 'success' },
+  ]} note={direction} />
+}
+
 export default function MedianOfTwoSortedArraysVisualizer() {
   const [nums1Input, setNums1Input] = useState("[1, 3]");
   const [nums2Input, setNums2Input] = useState("[2]");
@@ -795,6 +811,7 @@ export default function MedianOfTwoSortedArraysVisualizer() {
           showBounds
           colorClass="a-tape"
         />
+        <PartitionPointerRail step={step} values={prepared.searchArray} />
 
         <ArrayTape
           title="B"

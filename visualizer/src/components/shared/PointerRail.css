@@ -1,0 +1,17 @@
+.pointer-rail {
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  padding: 10px;
+}
+.pointer-rail-head { display: flex; justify-content: space-between; gap: 12px; color: var(--text-muted); font-size: 11px; margin-bottom: 8px; }
+.pointer-rail-head strong { color: var(--text); font-size: 12px; }
+.pointer-rail-track { display: flex; gap: 5px; overflow-x: auto; padding-top: 24px; }
+.pointer-rail-slot { position: relative; min-width: 38px; text-align: center; transition: opacity .18s ease; }
+.pointer-rail-slot.outside-range { opacity: .38; }
+.pointer-rail-tags { position: absolute; left: 50%; top: -24px; transform: translateX(-50%); display: flex; gap: 3px; white-space: nowrap; }
+.pointer-rail-tag { padding: 2px 5px; border: 1px solid currentColor; background: var(--surface); font-size: 10px; font-weight: 800; }
+.pointer-rail-tag.primary { color: var(--primary); }.pointer-rail-tag.info { color: var(--info); }.pointer-rail-tag.success { color: var(--success); }.pointer-rail-tag.warning { color: var(--warning); }
+.pointer-rail-cell { border: 1px solid var(--border); background: var(--surface); color: var(--text); min-height: 34px; display: grid; place-items: center; font: 700 13px ui-monospace, monospace; }
+.pointer-rail-cell.pointed { border: 2px solid var(--primary); background: color-mix(in srgb, var(--primary) 16%, var(--surface)); }
+.pointer-rail-index { display: block; color: var(--text-dim); font-size: 10px; margin-top: 3px; }
+.pointer-rail-note { margin: 9px 0 0; color: var(--text); font-size: 12px; line-height: 1.45; }

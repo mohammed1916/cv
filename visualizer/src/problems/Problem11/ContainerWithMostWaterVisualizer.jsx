@@ -13,6 +13,7 @@ import './ContainerWithMostWaterVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
+import PointerRail from '../../components/shared/PointerRail'
 
 const CMW_PATTERNS = ['init', 'compute', 'update', 'skip', 'move']
 
@@ -220,6 +221,17 @@ export default function ContainerWithMostWaterVisualizer() {
           onChange={(e) => { setHeightInput(e.target.value); handleReset() }}
           placeholder="[1,8,6,2,5,4,8,3,7]"
           className="cw-input"
+        />
+
+        <PointerRail
+          title="Two-pointer lane"
+          values={height}
+          pointers={step ? [
+            { id: 'left', label: `L ${step.left}`, index: step.left, tone: 'info' },
+            { id: 'right', label: `R ${step.right}`, index: step.right, tone: 'warning' },
+          ] : []}
+          range={step ? { start: step.left, end: step.right } : null}
+          note={step?.phase === 'move' ? step.message : 'The shorter wall moves inward; the wider container is already being considered.'}
         />
 
         <div className="cw-chart-container">

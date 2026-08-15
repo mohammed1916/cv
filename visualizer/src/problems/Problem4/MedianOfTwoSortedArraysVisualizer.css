@@ -6,13 +6,11 @@
     min-height: 480px;
     gap: 0;
     overflow: hidden;
-    color: #5577a4;
+    color: var(--text);
 }
 
 .median-panel {
-    background: linear-gradient(180deg,
-            rgba(15, 23, 42, 0.98),
-            rgba(10, 16, 28, 0.98));
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 4px;
     padding: 12px;
@@ -29,7 +27,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    color: #4879a9;
+    color: var(--text);
     font-size: 15px;
     font-weight: 700;
     letter-spacing: 0.01em;
@@ -98,10 +96,10 @@
 .median-input {
     flex: 1;
     min-width: 0;
-    background: rgba(2, 6, 23, 0.55);
-    border: 1px solid #243244;
+    background: var(--code-bg);
+    border: 1px solid var(--code-line);
     border-radius: 12px;
-    color: var(--surface);
+    color: var(--code-text);
     padding: 10px 12px;
     font-size: 15px;
     outline: none;
@@ -118,8 +116,8 @@
 .median-history-box,
 .median-condition-box,
 .median-metric-card {
-    background: rgba(2, 6, 23, 0.45);
-    border: 1px solid rgba(71, 85, 105, 0.75);
+    background: var(--surface2);
+    border: 1px solid var(--border);
     border-radius: 14px;
 }
 
@@ -131,7 +129,7 @@
 .median-result-title,
 .median-boundary-title,
 .median-history-title {
-    color: #4879a9;
+    color: var(--text);
     font-size: 13px;
     font-weight: 700;
     margin-bottom: 6px;
@@ -141,7 +139,7 @@
 .median-result-subtext,
 .median-history-text,
 .median-history-empty {
-    color: #5a779b;
+    color: var(--text-muted);
     font-size: 13px;
     line-height: 1.55;
 }
@@ -151,7 +149,7 @@
 }
 
 .median-note-text strong {
-    color: #5577a4;
+    color: var(--text);
 }
 
 .median-input-stats,
@@ -230,7 +228,7 @@
     border-radius: 16px;
     padding: 12px;
     border: 1px solid rgba(71, 85, 105, 0.85);
-    background: rgba(8, 15, 28, 0.82);
+    background: var(--surface2);
 }
 
 .median-tape-card.a-tape {
@@ -250,13 +248,13 @@
 }
 
 .median-tape-title {
-    color: #4879a9;
+    color: var(--text);
     font-size: 14px;
     font-weight: 800;
 }
 
 .median-tape-subtitle {
-    color: #627794;
+    color: var(--text-muted);
     font-size: 12px;
     margin-top: 2px;
 }
@@ -398,7 +396,7 @@
     min-width: 46px;
     border-radius: 14px;
     border: 1px solid var(--border);
-    background: rgba(15, 23, 42, 0.95);
+    background: var(--surface);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -409,13 +407,13 @@
 }
 
 .median-cell.left {
-    background: rgba(37, 99, 235, 0.12);
-    border-color: rgba(59, 130, 246, 0.3);
+    background: color-mix(in srgb, var(--info) 14%, var(--surface));
+    border-color: var(--info);
 }
 
 .median-cell.right {
-    background: rgba(34, 197, 94, 0.1);
-    border-color: rgba(34, 197, 94, 0.28);
+    background: color-mix(in srgb, var(--success) 14%, var(--surface));
+    border-color: var(--success);
 }
 
 .median-cell.boundary-left {
@@ -441,7 +439,7 @@
         ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 18px;
     font-weight: 900;
-    color: #4879a9;
+    color: var(--text);
 }
 
 .median-result-box {
