@@ -6,7 +6,7 @@
 }
 
 .ksm-panel {
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 12px;
     display: flex;
@@ -21,7 +21,7 @@
     border-bottom: 1px solid #313244;
     font-size: 13px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: var(--code-text);
     background: #313244;
     flex-shrink: 0;
 }
@@ -61,9 +61,9 @@
 .ksm-textarea {
     padding: 8px 10px;
     background: #313244;
-    border: 1px solid #45475a;
+    border: 1px solid var(--code-line);
     border-radius: 6px;
-    color: #cdd6f4;
+    color: var(--code-text);
     font-size: 12px;
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
     outline: none;
@@ -113,9 +113,9 @@
 .ksm-example-btn {
     padding: 6px 10px;
     background: #313244;
-    border: 1px solid #45475a;
+    border: 1px solid var(--code-line);
     border-radius: 6px;
-    color: #cdd6f4;
+    color: var(--code-text);
     font-size: 11px;
     font-weight: 500;
     cursor: pointer;
@@ -123,7 +123,7 @@
 }
 
 .ksm-example-btn:hover {
-    background: #45475a;
+    background: var(--code-line);
     border-color: #8b5cf6;
     color: #c4acfa;
 }
@@ -135,7 +135,7 @@
 .ksm-status {
     padding: 12px;
     background: #313244;
-    border: 1px solid #45475a;
+    border: 1px solid var(--code-line);
     border-radius: 8px;
     border-left: 3px solid #8b5cf6;
 }
@@ -185,7 +185,7 @@
     padding: 12px;
     background: #313244;
     border-radius: 8px;
-    border: 1px solid #45475a;
+    border: 1px solid var(--code-line);
 }
 
 /* Catppuccin Mocha theme colors */
@@ -194,8 +194,8 @@
 /* #89dceb - cyan (secondary) */
 /* #89b4fa - blue (info) */
 /* #f5c2e7 - pink (highlight) */
-/* #1e1e2e - base background */
+/* var(--code-bg) - base background */
 /* #313244 - surface0 */
-/* #45475a - surface1 */
-/* #cdd6f4 - text */
+/* var(--code-line) - surface1 */
+/* var(--code-text) - text */
 /* #f87171 - red (error) */

@@ -285,7 +285,7 @@ function FrequencyHistogram({ step }) {
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
         Character Frequency
       </header>
 
@@ -300,8 +300,8 @@ function FrequencyHistogram({ step }) {
               transition={{ duration: 0.2 }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12 }}>
-                <span style={{ fontWeight: 600, color: '#1e293b' }}>{ch}</span>
-                <span style={{ color: '#64748b' }}>{freq}</span>
+                <span style={{ fontWeight: 600, color: 'var(--surface2)' }}>{ch}</span>
+                <span style={{ color: 'var(--text-muted)' }}>{freq}</span>
               </div>
               <motion.div
                 style={{
@@ -344,14 +344,14 @@ function QueueAndCooldown({ step }) {
   if (!step) return null
 
   return (
-    <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16, borderLeft: '1px solid #e2e8f0' }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>
+    <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16, borderLeft: '1px solid var(--text)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
         Queue & Cooldown
       </header>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12, flex: 1 }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', textTransform: 'uppercase' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase' }}>
             Available ({(step.queue || []).length})
           </div>
           <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', minHeight: 40 }}>
@@ -380,7 +380,7 @@ function QueueAndCooldown({ step }) {
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', textTransform: 'uppercase' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase' }}>
             Cooldown ({(step.cooldown || []).length})
           </div>
           <div style={{ display: 'flex', gap: 4, flexDirection: 'column' }}>
@@ -421,7 +421,7 @@ function ResultBuilder({ step, k }) {
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
         Result: {result.length} chars
       </header>
 
@@ -452,7 +452,7 @@ function ResultBuilder({ step, k }) {
                   borderRadius: 6,
                   fontSize: 13,
                   fontWeight: 700,
-                  color: '#1e293b',
+                  color: 'var(--surface2)',
                   position: 'relative',
                 }}
               >
@@ -461,7 +461,7 @@ function ResultBuilder({ step, k }) {
                   position: 'absolute',
                   bottom: -20,
                   fontSize: 10,
-                  color: '#64748b',
+                  color: 'var(--text-muted)',
                   fontWeight: 500,
                 }}>
                   {i}
@@ -488,7 +488,7 @@ function VisualizationPanel({ step, s, k, EXAMPLES, handleExampleClick, sInput, 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
           Examples
         </div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -499,8 +499,8 @@ function VisualizationPanel({ step, s, k, EXAMPLES, handleExampleClick, sInput, 
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
-                backgroundColor: '#f1f5f9',
+                border: '1px solid var(--border)',
+                backgroundColor: 'var(--surface2)',
                 cursor: 'pointer',
                 fontSize: 12,
                 fontWeight: 500,
@@ -515,7 +515,7 @@ function VisualizationPanel({ step, s, k, EXAMPLES, handleExampleClick, sInput, 
 
       <div style={{ display: 'flex', gap: 8, flexDirection: 'column' }}>
         <div>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>
+          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
             String (s)
           </label>
           <input
@@ -525,7 +525,7 @@ function VisualizationPanel({ step, s, k, EXAMPLES, handleExampleClick, sInput, 
             style={{
               width: '100%',
               padding: '8px 10px',
-              border: '1px solid #cbd5e1',
+              border: '1px solid var(--border)',
               borderRadius: 4,
               fontSize: 12,
               fontFamily: 'monospace',
@@ -536,7 +536,7 @@ function VisualizationPanel({ step, s, k, EXAMPLES, handleExampleClick, sInput, 
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
           <div>
-            <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>
+            <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
               Distance (k)
             </label>
             <input
@@ -547,7 +547,7 @@ function VisualizationPanel({ step, s, k, EXAMPLES, handleExampleClick, sInput, 
               style={{
                 width: '100%',
                 padding: '8px 10px',
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 borderRadius: 4,
                 fontSize: 12,
                 boxSizing: 'border-box',
@@ -688,7 +688,7 @@ export default function Problem358Visualizer() {
       </>
 
       <FloatingPanel title="Playback Controls">
-        <div style={{ marginBottom: '12px', fontSize: 12, color: '#475569' }}>
+        <div style={{ marginBottom: '12px', fontSize: 12, color: 'var(--text-muted)' }}>
           {step?.message ?? 'Press Play or Step to begin.'}
         </div>
         <PlaybackControls

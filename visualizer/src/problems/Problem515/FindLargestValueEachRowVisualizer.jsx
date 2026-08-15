@@ -171,13 +171,13 @@ function TreeNode({ node, x, y, offset, step }) {
     <g key={`tree-${node.val}-${x}-${y}`}>
       {node.left && (
         <>
-          <line x1={x} y1={y} x2={x - offset} y2={y + 80} stroke="#cbd5e1" strokeWidth="2" />
+          <line x1={x} y1={y} x2={x - offset} y2={y + 80} stroke="var(--border)" strokeWidth="2" />
           <TreeNode node={node.left} x={x - offset} y={y + 80} offset={offset / 2} step={step} />
         </>
       )}
       {node.right && (
         <>
-          <line x1={x} y1={y} x2={x + offset} y2={y + 80} stroke="#cbd5e1" strokeWidth="2" />
+          <line x1={x} y1={y} x2={x + offset} y2={y + 80} stroke="var(--border)" strokeWidth="2" />
           <TreeNode node={node.right} x={x + offset} y={y + 80} offset={offset / 2} step={step} />
         </>
       )}
@@ -185,8 +185,8 @@ function TreeNode({ node, x, y, offset, step }) {
         cx={x}
         cy={y}
         r="28"
-        fill={isCurrent ? '#fbcfe8' : inLevel ? '#fbcfe8' : '#f1f5f9'}
-        stroke={isCurrent ? '#ec4899' : inLevel ? '#f472b6' : '#cbd5e1'}
+        fill={isCurrent ? '#fbcfe8' : inLevel ? '#fbcfe8' : 'var(--surface2)'}
+        stroke={isCurrent ? '#ec4899' : inLevel ? '#f472b6' : 'var(--border)'}
         strokeWidth={isCurrent ? '3' : '2'}
         animate={{ scale: isCurrent ? 1.2 : 1 }}
       />
@@ -198,7 +198,7 @@ function TreeNode({ node, x, y, offset, step }) {
         fontFamily="monospace"
         fontSize="14"
         fontWeight="600"
-        fill={isCurrent || inLevel ? '#be185d' : '#334155'}
+        fill={isCurrent || inLevel ? '#be185d' : 'var(--border)'}
       >
         {node.val}
       </text>
@@ -218,7 +218,7 @@ function VisualizationPanel({ arr, step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -227,10 +227,10 @@ function VisualizationPanel({ arr, step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9'
+                backgroundColor: 'var(--surface2)'
               }}
             >
               {e.label}
@@ -241,7 +241,7 @@ function VisualizationPanel({ arr, step, applyEx }) {
 
       {/* Tree */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Binary Tree</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Binary Tree</div>
         <svg width="100%" height="400" viewBox="0 0 500 400" style={{ border: '1px solid #e5e7eb', borderRadius: 6 }}>
           <TreeNode node={step?.tree || (arr && arr.length > 0 ? buildTree(arr) : null)} x={250} y={40} offset={100} step={step} />
         </svg>

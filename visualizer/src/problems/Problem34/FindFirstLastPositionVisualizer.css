@@ -19,7 +19,7 @@
 
 .ffp-panel-head {
   padding: 12px 16px;
-  border-bottom: 1px solid var(--border-color, #e2e8f0);
+  border-bottom: 1px solid var(--border-color, var(--text));
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -35,9 +35,9 @@
 
 .ffp-example-btn {
   padding: 6px 12px;
-  border: 1px solid var(--border-color, #e2e8f0);
+  border: 1px solid var(--border-color, var(--text));
   border-radius: 4px;
-  background: var(--button-bg, #f8fafc);
+  background: var(--button-bg, var(--surface));
   cursor: pointer;
   font-size: 12px;
   font-weight: 500;
@@ -45,13 +45,13 @@
 }
 
 .ffp-example-btn:hover {
-  background: var(--button-hover-bg, #e2e8f0);
+  background: var(--button-hover-bg, var(--text));
   border-color: var(--accent-color, #0ea5e9);
 }
 
 .ffp-input {
   padding: 8px 12px;
-  border: 1px solid var(--border-color, #e2e8f0);
+  border: 1px solid var(--border-color, var(--text));
   border-radius: 4px;
   font-family: 'Courier New', monospace;
   font-size: 13px;
@@ -108,7 +108,7 @@
 
 .ffp-index {
   font-size: 11px;
-  color: #64748b;
+  color: var(--text-muted);
   font-weight: 500;
 }
 
@@ -118,7 +118,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--text);
   border-radius: 4px;
   font-weight: 600;
   font-size: 14px;
@@ -184,7 +184,7 @@
   display: flex;
   gap: 12px;
   padding: 12px;
-  background: var(--stats-bg, #f1f5f9);
+  background: var(--stats-bg, var(--surface2));
   border-radius: 4px;
 }
 
@@ -197,7 +197,7 @@
 
 .ffp-stat-label {
   font-size: 11px;
-  color: #64748b;
+  color: var(--text-muted);
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -210,7 +210,7 @@
 }
 
 .ffp-status {
-  color: #475569;
+  color: var(--text-muted);
   font-size: 13px;
   white-space: pre-wrap;
   word-break: break-word;

@@ -142,15 +142,15 @@ function TreeVisualization({ tree, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Tree Structure</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Tree Structure</div>
 
       <div style={{
         position: 'relative',
         height: Math.max(300, maxY + 80),
         width: '100%',
-        backgroundColor: '#f8fafc',
+        backgroundColor: 'var(--surface)',
         borderRadius: 8,
-        border: '2px solid #cbd5e1',
+        border: '2px solid var(--border)',
         overflow: 'auto',
       }}>
         <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
@@ -162,7 +162,7 @@ function TreeVisualization({ tree, step }) {
                   y1={20}
                   x2={200 + (buildTreeLayout(tree.left)[0]?.x ?? -50)}
                   y2={20 + 60}
-                  stroke="#cbd5e1"
+                  stroke="var(--border)"
                   strokeWidth="2"
                 />
               )}
@@ -172,7 +172,7 @@ function TreeVisualization({ tree, step }) {
                   y1={20}
                   x2={200 + (buildTreeLayout(tree.right)[0]?.x ?? 50)}
                   y2={20 + 60}
-                  stroke="#cbd5e1"
+                  stroke="var(--border)"
                   strokeWidth="2"
                 />
               )}
@@ -206,9 +206,9 @@ function TreeVisualization({ tree, step }) {
                     justifyContent: 'center',
                     fontSize: 12,
                     fontWeight: 700,
-                    borderColor: status === 'current' ? '#dc2626' : status === 'left_leaf' ? '#10b981' : '#cbd5e1',
-                    backgroundColor: status === 'current' ? '#fee2e2' : status === 'left_leaf' ? '#d1fae5' : '#f1f5f9',
-                    color: status === 'current' ? '#7f1d1d' : status === 'left_leaf' ? '#065f46' : '#334155',
+                    borderColor: status === 'current' ? '#dc2626' : status === 'left_leaf' ? '#10b981' : 'var(--border)',
+                    backgroundColor: status === 'current' ? '#fee2e2' : status === 'left_leaf' ? '#d1fae5' : 'var(--surface2)',
+                    color: status === 'current' ? '#7f1d1d' : status === 'left_leaf' ? '#065f46' : 'var(--border)',
                   }}
                   animate={{ scale: status === 'current' ? 1.2 : 1 }}
                 >
@@ -235,7 +235,7 @@ function TreeVisualization({ tree, step }) {
         </div>
       </div>
 
-      <div style={{ fontSize: 12, color: '#475569' }}>{step?.message}</div>
+      <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{step?.message}</div>
     </div>
   )
 }
@@ -302,7 +302,7 @@ export default function Problem404Visualizer() {
       </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button
@@ -311,11 +311,11 @@ export default function Problem404Visualizer() {
                   style={{
                     padding: '6px 12px',
                     borderRadius: 4,
-                    border: exIdx === idx ? '2px solid #10b981' : '1px solid #cbd5e1',
+                    border: exIdx === idx ? '2px solid #10b981' : '1px solid var(--border)',
                     cursor: 'pointer',
                     fontSize: 12,
-                    backgroundColor: exIdx === idx ? '#d1fae5' : '#f1f5f9',
-                    color: exIdx === idx ? '#065f46' : '#334155',
+                    backgroundColor: exIdx === idx ? '#d1fae5' : 'var(--surface2)',
+                    color: exIdx === idx ? '#065f46' : 'var(--border)',
                     fontWeight: exIdx === idx ? '600' : '400',
                   }}
                 >

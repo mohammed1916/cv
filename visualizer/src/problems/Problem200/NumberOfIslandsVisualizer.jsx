@@ -307,7 +307,7 @@ export default function NumberOfIslandsVisualizer() {
                 ))}
               </AnimatePresence>
               {(!step || !step.queue || step.queue.length === 0) && (
-                <span style={{ color: '#475569', fontStyle: 'italic', fontSize: 13, padding: '4px 0' }}>Queue is empty</span>
+                <span style={{ color: 'var(--text-muted)', fontStyle: 'italic', fontSize: 13, padding: '4px 0' }}>Queue is empty</span>
               )}
             </div>
           </div>

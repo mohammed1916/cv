@@ -21,7 +21,7 @@
 
 .fm-chip {
     background: #313244;
-    color: #cdd6f4;
+    color: var(--code-text);
     border: none;
     border-radius: 6px;
     padding: 4px 10px;
@@ -30,13 +30,13 @@
 }
 
 .fm-chip:hover {
-    background: #45475a;
+    background: var(--code-line);
 }
 
 .fm-input {
-    background: #11111b;
-    color: #cdd6f4;
-    border: 1px solid #45475a;
+    background: var(--code-surface);
+    color: var(--code-text);
+    border: 1px solid var(--code-line);
     border-radius: 6px;
     padding: 6px 10px;
     font-size: 13px;
@@ -58,7 +58,7 @@
 .fm-heap-panel {
     flex: 1;
     min-width: 160px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 2px solid;
     border-radius: 10px;
     padding: 12px;
@@ -99,7 +99,7 @@
     transform: translateX(-50%);
     font-size: 8px;
     font-weight: 900;
-    background: #1e1e2e;
+    background: var(--code-bg);
     padding: 0 3px;
 }
 
@@ -141,7 +141,7 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    color: #6c7086;
+    color: var(--code-dim);
     font-size: 12px;
     font-style: italic;
 }
@@ -150,14 +150,14 @@
     display: inline-flex;
     gap: 4px;
     padding: 3px;
-    background: #11111b;
+    background: var(--code-surface);
     border: 1px solid #313244;
     border-radius: 8px;
 }
 
 .fm-view-btn {
     background: transparent;
-    color: #a6adc8;
+    color: var(--code-dim);
     border: none;
     border-radius: 6px;
     padding: 5px 10px;
@@ -185,7 +185,7 @@
 .fm-median-label {
     font-size: 11px;
     font-weight: 700;
-    color: #6c7086;
+    color: var(--code-dim);
     text-transform: uppercase;
     letter-spacing: 0.08em;
 }
@@ -204,10 +204,10 @@
 
 .fm-status {
     padding: 8px 12px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 8px;
     font-size: 13px;
-    color: #a6adc8;
+    color: var(--code-dim);
     min-height: 36px;
 }

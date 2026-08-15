@@ -132,7 +132,7 @@ function VisualizationPanel({ s, dictionary, step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -141,10 +141,10 @@ function VisualizationPanel({ s, dictionary, step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9'
+                backgroundColor: 'var(--surface2)'
               }}
             >
               {e.label}
@@ -155,7 +155,7 @@ function VisualizationPanel({ s, dictionary, step, applyEx }) {
 
       {/* String */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>String: {s}</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>String: {s}</div>
         <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
           {s.split('').map((char, idx) => (
             <div
@@ -163,11 +163,11 @@ function VisualizationPanel({ s, dictionary, step, applyEx }) {
               style={{
                 padding: '8px 12px',
                 borderRadius: 4,
-                border: '2px solid #cbd5e1',
+                border: '2px solid var(--border)',
                 fontFamily: 'monospace',
                 fontWeight: 600,
-                backgroundColor: '#f1f5f9',
-                color: '#334155'
+                backgroundColor: 'var(--surface2)',
+                color: 'var(--border)'
               }}
             >
               {char}
@@ -178,7 +178,7 @@ function VisualizationPanel({ s, dictionary, step, applyEx }) {
 
       {/* Dictionary */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Dictionary</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Dictionary</div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', maxHeight: 150, overflowY: 'auto' }}>
           {(step?.dictionary ?? dictionary)?.map((word, idx) => {
             const isActive = step && idx === step.wordIdx && !step.done
@@ -193,9 +193,9 @@ function VisualizationPanel({ s, dictionary, step, applyEx }) {
                   fontFamily: 'monospace',
                   fontSize: 12,
                   fontWeight: 600,
-                  backgroundColor: isResult ? '#e9d5ff' : isActive ? '#ede9fe' : '#f1f5f9',
-                  borderColor: isResult ? '#8b5cf6' : isActive ? '#c084fc' : '#cbd5e1',
-                  color: isResult ? '#5b21b6' : isActive ? '#7c3aed' : '#334155'
+                  backgroundColor: isResult ? '#e9d5ff' : isActive ? '#ede9fe' : 'var(--surface2)',
+                  borderColor: isResult ? '#8b5cf6' : isActive ? '#c084fc' : 'var(--border)',
+                  color: isResult ? '#5b21b6' : isActive ? '#7c3aed' : 'var(--border)'
                 }}
                 animate={{ scale: isActive || isResult ? 1.15 : 1 }}
               >

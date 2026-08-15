@@ -275,22 +275,22 @@ export default function Problem363Visualizer() {
                   style={{
                     padding: '6px 12px',
                     borderRadius: 4,
-                    border: '1px solid #cbd5e1',
+                    border: '1px solid var(--border)',
                     cursor: 'pointer',
                     fontSize: 12,
-                    backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
+                    backgroundColor: exIdx === i ? '#dbeafe' : 'var(--surface2)',
                     fontWeight: exIdx === i ? 600 : 400,
                   }}
                 >
                   {e.label}
                 </button>
               ))}
-              <span style={{ marginLeft: 'auto', fontSize: 12, fontWeight: 600, color: '#1e293b' }}>K = {K}</span>
+              <span style={{ marginLeft: 'auto', fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>K = {K}</span>
             </div>
 
             {/* Matrix Display */}
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Matrix</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Matrix</div>
               <div style={{ display: 'grid', gridTemplateColumns: `repeat(${cols}, minmax(60px, 1fr))`, gap: 4 }}>
                 {matrix.map((row, i) =>
                   row.map((val, j) => {
@@ -315,12 +315,12 @@ export default function Problem363Visualizer() {
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          backgroundColor: isCurrentCol ? '#fbbf24' : isInRange ? '#dbeafe' : '#f1f5f9',
-                          border: isCurrentCol ? '2px solid #f59e0b' : isInRange ? '1px solid #0ea5e9' : '1px solid #cbd5e1',
+                          backgroundColor: isCurrentCol ? '#fbbf24' : isInRange ? '#dbeafe' : 'var(--surface2)',
+                          border: isCurrentCol ? '2px solid #f59e0b' : isInRange ? '1px solid #0ea5e9' : '1px solid var(--border)',
                           borderRadius: 4,
                           fontSize: 13,
                           fontWeight: 700,
-                          color: '#1e293b',
+                          color: 'var(--surface2)',
                         }}
                       >
       
@@ -433,10 +433,10 @@ export default function Problem363Visualizer() {
               <div
                 style={{
                   padding: 10,
-                  backgroundColor: '#f8fafc',
+                  backgroundColor: 'var(--surface)',
                   borderRadius: 6,
                   fontSize: 11,
-                  color: '#475569',
+                  color: 'var(--text-muted)',
                   borderLeft: '3px solid #0ea5e9',
                 }}
               >

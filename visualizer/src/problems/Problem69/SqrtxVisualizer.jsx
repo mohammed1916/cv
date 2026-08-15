@@ -322,7 +322,7 @@ export default function SqrtxVisualizer() {
               style={{
                 width: '100%',
                 height: 8,
-                backgroundColor: '#e2e8f0',
+                backgroundColor: 'var(--text)',
                 borderRadius: 4,
                 position: 'relative',
               }}

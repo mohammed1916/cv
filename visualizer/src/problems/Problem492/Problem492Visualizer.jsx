@@ -71,7 +71,7 @@ function VisualizationPanel({ area, step, applyEx }) {
           Find rectangle dimensions with given area, maximizing the length to width ratio (length &gt;= width).
         </div>
       </div>
-      <div><div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Given Area: {area}</div></div>
+      <div><div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Given Area: {area}</div></div>
       {step && step.width > 0 && (
         <motion.div style={{ padding: 16, backgroundColor: '#cffafe', borderRadius: 6, border: '2px solid #06b6d4' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ fontSize: 13, fontWeight: 600, color: '#164e63', marginBottom: 12 }}>Result Rectangle</div>

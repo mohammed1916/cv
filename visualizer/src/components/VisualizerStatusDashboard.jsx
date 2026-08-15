@@ -9,7 +9,7 @@ export default function VisualizerStatusDashboard() {
     <div style={{ padding: 24, maxWidth: 1200, margin: '0 auto' }}>
       <section style={{ marginBottom: 32 }}>
         <h1 style={{ margin: '0 0 16px 0', fontSize: 28, fontWeight: 700 }}>Visualizer Status</h1>
-        <p style={{ margin: 0, color: '#64748b', fontSize: 14 }}>Overview of which problems have story-based visualizers</p>
+        <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: 14 }}>Overview of which problems have story-based visualizers</p>
       </section>
 
       <section style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginBottom: 32 }}>
@@ -41,10 +41,10 @@ export default function VisualizerStatusDashboard() {
                 fontSize: 12,
               }}
             >
-              <div style={{ fontWeight: 700, color: '#1e293b', marginBottom: 4 }}>
+              <div style={{ fontWeight: 700, color: 'var(--surface2)', marginBottom: 4 }}>
                 #{problem.number} {problem.title}
               </div>
-              <div style={{ color: '#64748b', marginBottom: 8, fontSize: 11 }}>
+              <div style={{ color: 'var(--text-muted)', marginBottom: 8, fontSize: 11 }}>
                 <span style={{ display: 'inline-block', marginRight: 8 }}>{problem.difficulty}</span>
                 <span style={{ display: 'inline-block' }}>{problem.slug}</span>
               </div>
@@ -54,11 +54,11 @@ export default function VisualizerStatusDashboard() {
                     key={tag}
                     style={{
                       padding: '2px 6px',
-                      backgroundColor: '#f1f5f9',
-                      border: '1px solid #cbd5e1',
+                      backgroundColor: 'var(--surface2)',
+                      border: '1px solid var(--border)',
                       borderRadius: 3,
                       fontSize: 10,
-                      color: '#475569',
+                      color: 'var(--text-muted)',
                     }}
                   >
                     {tag}

@@ -40,15 +40,15 @@
 }
 
 .lis-chip:hover {
-    background: #334155;
+    background: var(--border);
     color: var(--text);
 }
 
 .lis-input {
     padding: 8px 12px;
     border-radius: 8px;
-    border: 1px solid #334155;
-    background: #0f172a;
+    border: 1px solid var(--border);
+    background: var(--code-bg);
     color: var(--text);
     font-family: monospace;
     font-size: 13px;
@@ -100,12 +100,12 @@
     font-size: 16px;
     font-weight: 700;
     font-family: monospace;
-    border: 2px solid #334155;
+    border: 2px solid var(--border);
     transition: background 0.2s, border-color 0.2s;
 }
 
 .nums-cell {
-    background: #1e293b;
+    background: var(--surface2);
     color: var(--text);
 }
 

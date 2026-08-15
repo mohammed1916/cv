@@ -229,13 +229,13 @@ export default function Problem362Visualizer() {
 
           {step && (
             <>
-              <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
+              <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 11 }}>
                 <div style={{ fontWeight: 600, marginBottom: 4 }}>{step.message}</div>
               </div>
 
               <div style={{ padding: 12, backgroundColor: '#f0f9ff', borderRadius: 6, border: '1px solid #bfdbfe' }}>
                 <div style={{ fontSize: 10, fontWeight: 600, marginBottom: 8, color: '#1e40af' }}>Timeline (0-{step.timelineMax}s)</div>
-                <div style={{ position: 'relative', height: 60, backgroundColor: '#ffffff', borderRadius: 4, border: '1px solid #e0e7ff', padding: '8px 4px', overflow: 'hidden' }}>
+                <div style={{ position: 'relative', height: 60, backgroundColor: 'var(--surface)', borderRadius: 4, border: '1px solid #e0e7ff', padding: '8px 4px', overflow: 'hidden' }}>
                   {step.windowStart !== null && step.windowEnd !== null && (
                     <motion.div
                       initial={{ opacity: 0 }}
@@ -295,7 +295,7 @@ export default function Problem362Visualizer() {
                 </div>
 
                 {step.windowStart !== null && step.windowEnd !== null && (
-                  <div style={{ marginTop: 8, fontSize: 10, color: '#475569', display: 'flex', justifyContent: 'space-between' }}>
+                  <div style={{ marginTop: 8, fontSize: 10, color: 'var(--text-muted)', display: 'flex', justifyContent: 'space-between' }}>
                     <span>Window: [{step.windowStart}, {step.windowEnd}]</span>
                     <span>Duration: {step.windowEnd - step.windowStart}s</span>
                   </div>
@@ -305,7 +305,7 @@ export default function Problem362Visualizer() {
               <div style={{ padding: 12, backgroundColor: '#dbeafe', borderRadius: 6, border: '1px solid #7dd3fc' }}>
                 <div style={{ fontSize: 10, fontWeight: 600, marginBottom: 8, color: '#1e40af' }}>Queue State</div>
                 {step.hits.length === 0 ? (
-                  <div style={{ fontSize: 11, color: '#64748b', fontStyle: 'italic' }}>Queue is empty</div>
+                  <div style={{ fontSize: 11, color: 'var(--text-muted)', fontStyle: 'italic' }}>Queue is empty</div>
                 ) : (
                   <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
                     {step.hits.map((hit, idx) => {

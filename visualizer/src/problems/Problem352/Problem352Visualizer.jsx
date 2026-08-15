@@ -232,9 +232,9 @@ function GridVisualization({ step, gridSize = GRID_SIZE, cellSize = CELL_SIZE })
           gridTemplateColumns: `repeat(${gridSize}, ${cellSize}px)`,
           gap: '1px',
           padding: '12px',
-          backgroundColor: '#0f172a',
+          backgroundColor: 'var(--code-bg)',
           borderRadius: '8px',
-          border: '2px solid #334155',
+          border: '2px solid var(--border)',
         }}
       >
         {Array.from({ length: gridSize * gridSize }).map((_, idx) => {
@@ -252,7 +252,7 @@ function GridVisualization({ step, gridSize = GRID_SIZE, cellSize = CELL_SIZE })
               style={{
                 width: cellSize,
                 height: cellSize,
-                backgroundColor: isHead ? '#ef4444' : isBody ? '#f97316' : isFood ? '#eab308' : '#1e293b',
+                backgroundColor: isHead ? '#ef4444' : isBody ? '#f97316' : isFood ? '#eab308' : 'var(--surface2)',
                 borderRadius: '4px',
                 transition: 'all 0.15s ease',
                 display: 'flex',

@@ -177,7 +177,7 @@ function InputPanel({ strsInput, setStrsInput, handleReset, applyExample, inputE
 
       <div className="lcp-input-section">
         <label htmlFor="strs-input" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ fontFamily: 'monospace', fontSize: 13, color: '#64748b', minWidth: 60 }}>strs =</span>
+          <span style={{ fontFamily: 'monospace', fontSize: 13, color: 'var(--text-muted)', minWidth: 60 }}>strs =</span>
           <input
             id="strs-input"
             value={strsInput}

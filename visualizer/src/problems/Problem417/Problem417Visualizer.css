@@ -1,10 +1,10 @@
 /* Catppuccin Mocha Theme Colors */
 :root {
-  --paw-base: #1e1e2e;
+  --paw-base: var(--code-bg);
   --paw-surface0: #313244;
-  --paw-surface1: #45475a;
+  --paw-surface1: var(--code-line);
   --paw-surface2: #585b70;
-  --paw-text: #cdd6f4;
+  --paw-text: var(--code-text);
   --paw-blue: #89b4fa;
   --paw-yellow: #f9e2af;
   --paw-lavender: #6366f1;

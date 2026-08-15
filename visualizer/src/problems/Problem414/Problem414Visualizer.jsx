@@ -144,11 +144,11 @@ function ThirdMaxVisualization({ nums, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Third Maximum Number</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Third Maximum Number</div>
 
       {/* Input array */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Input Array</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Input Array</div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {nums.map((val, idx) => {
             const isCurrent = val === step?.currentNum
@@ -157,13 +157,13 @@ function ThirdMaxVisualization({ nums, step }) {
                 key={idx}
                 style={{
                   padding: '8px 12px',
-                  backgroundColor: isCurrent ? '#c7d2fe' : '#f1f5f9',
+                  backgroundColor: isCurrent ? '#c7d2fe' : 'var(--surface2)',
                   borderRadius: 6,
-                  border: `2px solid ${isCurrent ? '#6366f1' : '#cbd5e1'}`,
+                  border: `2px solid ${isCurrent ? '#6366f1' : 'var(--border)'}`,
                   textAlign: 'center',
                   fontSize: 13,
                   fontWeight: 700,
-                  color: isCurrent ? '#4f46e5' : '#334155',
+                  color: isCurrent ? '#4f46e5' : 'var(--border)',
                   minWidth: 50,
                 }}
                 animate={{
@@ -180,38 +180,38 @@ function ThirdMaxVisualization({ nums, step }) {
 
       {/* Ranking display */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Current Rankings</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Current Rankings</div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
           <div style={{
             padding: 12,
-            backgroundColor: first !== null ? '#dbeafe' : '#f1f5f9',
+            backgroundColor: first !== null ? '#dbeafe' : 'var(--surface2)',
             borderRadius: 6,
-            border: `2px solid ${first !== null ? '#0284c7' : '#cbd5e1'}`,
+            border: `2px solid ${first !== null ? '#0284c7' : 'var(--border)'}`,
           }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: first !== null ? '#0c4a6e' : '#64748b' }}>1st Max</div>
-            <div style={{ fontSize: 18, fontWeight: 'bold', color: first !== null ? '#0284c7' : '#cbd5e1', fontFamily: 'monospace', marginTop: 6 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: first !== null ? '#0c4a6e' : 'var(--text-muted)' }}>1st Max</div>
+            <div style={{ fontSize: 18, fontWeight: 'bold', color: first !== null ? '#0284c7' : 'var(--border)', fontFamily: 'monospace', marginTop: 6 }}>
               {first !== null ? first : '—'}
             </div>
           </div>
           <div style={{
             padding: 12,
-            backgroundColor: second !== null ? '#fef3c7' : '#f1f5f9',
+            backgroundColor: second !== null ? '#fef3c7' : 'var(--surface2)',
             borderRadius: 6,
-            border: `2px solid ${second !== null ? '#f59e0b' : '#cbd5e1'}`,
+            border: `2px solid ${second !== null ? '#f59e0b' : 'var(--border)'}`,
           }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: second !== null ? '#92400e' : '#64748b' }}>2nd Max</div>
-            <div style={{ fontSize: 18, fontWeight: 'bold', color: second !== null ? '#f59e0b' : '#cbd5e1', fontFamily: 'monospace', marginTop: 6 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: second !== null ? '#92400e' : 'var(--text-muted)' }}>2nd Max</div>
+            <div style={{ fontSize: 18, fontWeight: 'bold', color: second !== null ? '#f59e0b' : 'var(--border)', fontFamily: 'monospace', marginTop: 6 }}>
               {second !== null ? second : '—'}
             </div>
           </div>
           <div style={{
             padding: 12,
-            backgroundColor: third !== null ? '#f0fdf4' : '#f1f5f9',
+            backgroundColor: third !== null ? '#f0fdf4' : 'var(--surface2)',
             borderRadius: 6,
-            border: `2px solid ${third !== null ? '#10b981' : '#cbd5e1'}`,
+            border: `2px solid ${third !== null ? '#10b981' : 'var(--border)'}`,
           }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: third !== null ? '#065f46' : '#64748b' }}>3rd Max</div>
-            <div style={{ fontSize: 18, fontWeight: 'bold', color: third !== null ? '#10b981' : '#cbd5e1', fontFamily: 'monospace', marginTop: 6 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: third !== null ? '#065f46' : 'var(--text-muted)' }}>3rd Max</div>
+            <div style={{ fontSize: 18, fontWeight: 'bold', color: third !== null ? '#10b981' : 'var(--border)', fontFamily: 'monospace', marginTop: 6 }}>
               {third !== null ? third : '—'}
             </div>
           </div>
@@ -221,19 +221,19 @@ function ThirdMaxVisualization({ nums, step }) {
       {/* Distinct values */}
       {step?.distinct && step.distinct.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Distinct Values (Sorted)</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Distinct Values (Sorted)</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {step.distinct.map((val, idx) => (
               <div
                 key={idx}
                 style={{
                   padding: '6px 10px',
-                  backgroundColor: '#f1f5f9',
+                  backgroundColor: 'var(--surface2)',
                   borderRadius: 4,
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid var(--border)',
                   fontSize: 12,
                   fontWeight: 600,
-                  color: '#334155',
+                  color: 'var(--border)',
                 }}
               >
                 {val}
@@ -256,7 +256,7 @@ function ThirdMaxVisualization({ nums, step }) {
         )}
       </div>
 
-      <div style={{ fontSize: 12, color: '#475569' }}>{step?.message}</div>
+      <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{step?.message}</div>
     </div>
   )
 }
@@ -312,7 +312,7 @@ export default function Problem414Visualizer() {
         />),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button
@@ -321,11 +321,11 @@ export default function Problem414Visualizer() {
                   style={{
                     padding: '6px 12px',
                     borderRadius: 4,
-                    border: exIdx === idx ? '2px solid #6366f1' : '1px solid #cbd5e1',
+                    border: exIdx === idx ? '2px solid #6366f1' : '1px solid var(--border)',
                     cursor: 'pointer',
                     fontSize: 12,
-                    backgroundColor: exIdx === idx ? '#e0e7ff' : '#f1f5f9',
-                    color: exIdx === idx ? '#3730a3' : '#334155',
+                    backgroundColor: exIdx === idx ? '#e0e7ff' : 'var(--surface2)',
+                    color: exIdx === idx ? '#3730a3' : 'var(--border)',
                     fontWeight: exIdx === idx ? '600' : '400',
                   }}
                 >

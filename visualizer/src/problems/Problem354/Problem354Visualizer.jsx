@@ -270,7 +270,7 @@ function VisualizationPanel({ EXAMPLES, applyExample, selected, handleReset, ste
                   style={{
                     border: '1px solid #313244',
                     borderRadius: '8px',
-                    backgroundColor: '#1e1e2e',
+                    backgroundColor: 'var(--code-bg)',
                   }}
                 >
                   <defs>
@@ -297,7 +297,7 @@ function VisualizationPanel({ EXAMPLES, applyExample, selected, handleReset, ste
                           width={w * scaleX}
                           height={h * scaleY}
                           fill={getEnvelopeColor(idx)}
-                          stroke="#cdd6f4"
+                          stroke="var(--code-text)"
                           strokeWidth="2"
                           rx="4"
                           filter="url(#shadow)"
@@ -312,7 +312,7 @@ function VisualizationPanel({ EXAMPLES, applyExample, selected, handleReset, ste
                           textAnchor="middle"
                           dominantBaseline="middle"
                           className="rde-envelope-label"
-                          fill="#1e1e2e"
+                          fill="var(--code-bg)"
                           fontWeight="bold"
                           fontSize="12"
                         >

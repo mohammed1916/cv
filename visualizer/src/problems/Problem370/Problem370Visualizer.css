@@ -6,7 +6,7 @@
   display: flex;
   gap: 12px;
   padding: 12px;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
   overflow: hidden;
 }
 
@@ -36,14 +36,14 @@
 .range-title {
   font-size: 14px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--code-bg);
   margin-bottom: 12px;
 }
 
 .range-label {
   font-size: 12px;
   font-weight: 600;
-  color: #64748b;
+  color: var(--text-muted);
   margin-bottom: 6px;
 }
 
@@ -64,10 +64,10 @@
   border-radius: 6px;
   font-size: 14px;
   font-weight: 600;
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--text);
   transition: all 0.2s ease;
-  background-color: #f1f5f9;
-  color: #334155;
+  background-color: var(--surface2);
+  color: var(--border);
 }
 
 .array-cell:hover {
@@ -119,17 +119,17 @@
   padding: 8px 12px;
   font-size: 12px;
   font-weight: 500;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border);
   border-radius: 4px;
-  background-color: #f1f5f9;
-  color: #334155;
+  background-color: var(--surface2);
+  color: var(--border);
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .example-btn:hover {
-  background-color: #e2e8f0;
-  border-color: #94a3b8;
+  background-color: var(--text);
+  border-color: var(--text-muted);
 }
 
 .example-btn.active {

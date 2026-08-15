@@ -154,7 +154,7 @@ function VisualizationPanel({ w, step }) {
 
       {/* Weights */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Weights</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Weights</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {w.map((weight, idx) => {
             const isProcessing = step?.idx === idx
@@ -170,9 +170,9 @@ function VisualizationPanel({ w, step }) {
                   fontWeight: 600,
                   minWidth: 60,
                   textAlign: 'center',
-                  backgroundColor: isProcessing ? '#dbeafe' : '#f1f5f9',
-                  borderColor: isProcessing ? '#0284c7' : '#cbd5e1',
-                  color: isProcessing ? '#0c4a6e' : '#334155'
+                  backgroundColor: isProcessing ? '#dbeafe' : 'var(--surface2)',
+                  borderColor: isProcessing ? '#0284c7' : 'var(--border)',
+                  color: isProcessing ? '#0c4a6e' : 'var(--border)'
                 }}
                 animate={{ scale: isProcessing ? 1.15 : 1 }}
               >
@@ -186,7 +186,7 @@ function VisualizationPanel({ w, step }) {
 
       {/* Prefix Sum Array */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Prefix Sum Array</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Prefix Sum Array</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', overflowX: 'auto', paddingBottom: 8 }}>
           {step?.prefix?.map((val, idx) => {
             const isCurrent = step?.idx === idx
@@ -203,9 +203,9 @@ function VisualizationPanel({ w, step }) {
                   fontWeight: 600,
                   minWidth: 70,
                   textAlign: 'center',
-                  backgroundColor: isMid ? '#fecaca' : isCurrent ? '#dbeafe' : '#f1f5f9',
-                  borderColor: isMid ? '#f87171' : isCurrent ? '#0284c7' : '#cbd5e1',
-                  color: isMid ? '#7f1d1d' : isCurrent ? '#0c4a6e' : '#334155'
+                  backgroundColor: isMid ? '#fecaca' : isCurrent ? '#dbeafe' : 'var(--surface2)',
+                  borderColor: isMid ? '#f87171' : isCurrent ? '#0284c7' : 'var(--border)',
+                  color: isMid ? '#7f1d1d' : isCurrent ? '#0c4a6e' : 'var(--border)'
                 }}
                 animate={{ scale: isMid ? 1.2 : isCurrent ? 1.15 : 1 }}
               >

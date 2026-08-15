@@ -208,14 +208,14 @@ function TrieNodeDisplay({ node, level = 0, maxLevel = 2, highlighted = [] }) {
           key={char}
           style={{
             padding: 6,
-            backgroundColor: highlighted.includes(char) ? "#fbbf24" : "#e2e8f0",
+            backgroundColor: highlighted.includes(char) ? "#fbbf24" : "var(--text)",
             borderRadius: 3,
             marginBottom: 4,
             fontSize: 11,
             fontFamily: "monospace",
             fontWeight: 600,
-            color: highlighted.includes(char) ? "#000" : "#334155",
-            border: child.isWord ? "2px solid #06b6d4" : "1px solid #94a3b8",
+            color: highlighted.includes(char) ? "#000" : "var(--border)",
+            border: child.isWord ? "2px solid #06b6d4" : "1px solid var(--text-muted)",
           }}
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}

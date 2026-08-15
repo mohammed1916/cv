@@ -198,11 +198,11 @@ function DPTableVisualization({ tableState, currentString, highlightCells = [], 
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                backgroundColor: '#1e293b',
-                border: '1px solid #475569',
+                backgroundColor: 'var(--surface2)',
+                border: '1px solid var(--text-muted)',
                 fontSize: 12,
                 fontWeight: 600,
-                color: '#e2e8f0',
+                color: 'var(--text)',
               }}
             >
               {char}
@@ -221,11 +221,11 @@ function DPTableVisualization({ tableState, currentString, highlightCells = [], 
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                backgroundColor: '#1e293b',
-                border: '1px solid #475569',
+                backgroundColor: 'var(--surface2)',
+                border: '1px solid var(--text-muted)',
                 fontSize: 12,
                 fontWeight: 600,
-                color: '#e2e8f0',
+                color: 'var(--text)',
               }}
             >
               {currentString[i]}
@@ -246,26 +246,26 @@ function DPTableVisualization({ tableState, currentString, highlightCells = [], 
                     alignItems: 'center',
                     justifyContent: 'center',
                     backgroundColor: !isUpperTriangle
-                      ? '#0f172a'
+                      ? 'var(--code-bg)'
                       : isHighlighted
                       ? '#22c55e'
                       : val === 0
-                      ? '#1e293b'
-                      : '#475569',
-                    border: isHighlighted ? '2px solid #a78bfa' : '1px solid #475569',
+                      ? 'var(--surface2)'
+                      : 'var(--text-muted)',
+                    border: isHighlighted ? '2px solid #a78bfa' : '1px solid var(--text-muted)',
                     fontSize: 11,
                     fontWeight: 600,
-                    color: isHighlighted ? '#000' : isUpperTriangle && val > 0 ? '#a78bfa' : '#64748b',
+                    color: isHighlighted ? '#000' : isUpperTriangle && val > 0 ? '#a78bfa' : 'var(--text-muted)',
                     cursor: isUpperTriangle ? 'default' : 'not-allowed',
                   }}
                   animate={{
                     backgroundColor: !isUpperTriangle
-                      ? '#0f172a'
+                      ? 'var(--code-bg)'
                       : isHighlighted
                       ? '#a78bfa'
                       : val === 0
-                      ? '#1e293b'
-                      : '#475569',
+                      ? 'var(--surface2)'
+                      : 'var(--text-muted)',
                   }}
                   transition={{ duration: 0.2 }}
                 >
@@ -294,11 +294,11 @@ function VisualizationPanel({ step, applyExample, examples }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -309,7 +309,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.currentString && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #38bdf8' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #38bdf8' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#067db1', marginBottom: 6 }}>Input String</div>
           <div style={{ fontSize: 16, color: '#067db1', fontFamily: 'monospace', fontWeight: 700, wordBreak: 'break-all' }}>
             "{step.currentString}"
@@ -318,13 +318,13 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.compareChars && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #64748b' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Character Comparison</div>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Character Comparison</div>
           <div style={{ display: 'flex', gap: 12, alignItems: 'center', fontSize: 13, color: '#5577a4' }}>
             <div
               style={{
                 padding: '6px 12px',
-                backgroundColor: '#475569',
+                backgroundColor: 'var(--text-muted)',
                 borderRadius: 4,
                 fontFamily: 'monospace',
                 fontWeight: 600,
@@ -332,11 +332,11 @@ function VisualizationPanel({ step, applyExample, examples }) {
             >
               {step.compareChars[0]}
             </div>
-            <div style={{ color: '#64748b' }}>vs</div>
+            <div style={{ color: 'var(--text-muted)' }}>vs</div>
             <div
               style={{
                 padding: '6px 12px',
-                backgroundColor: '#475569',
+                backgroundColor: 'var(--text-muted)',
                 borderRadius: 4,
                 fontFamily: 'monospace',
                 fontWeight: 600,
@@ -352,7 +352,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
         <motion.div
           style={{
             padding: 12,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #f59e0b',
             textAlign: 'center',
@@ -372,7 +372,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #22c55e',
             textAlign: 'center',
@@ -392,7 +392,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
           >
             {step.result}
           </div>
-          <div style={{ fontSize: 11, color: '#64748b', marginTop: 8 }}>
+          <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 8 }}>
             Longest palindromic subsequence length
           </div>
         </motion.div>
@@ -479,16 +479,16 @@ export default function PalindromeSubsequenceVisualizer() {
                   width: '100%',
                   padding: '8px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  border: '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                   fontSize: 12,
                 }}
               />
             </div>
 
-            <div style={{ flex: 1, overflow: 'auto', backgroundColor: '#0f172a', borderRadius: 6 }}>
+            <div style={{ flex: 1, overflow: 'auto', backgroundColor: 'var(--code-bg)', borderRadius: 6 }}>
               <DPTableVisualization
                 tableState={step?.tableState}
                 currentString={step?.currentString || s}

@@ -152,11 +152,11 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -196,8 +196,8 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
                           ? '#38bdf8'
                           : inMidPair
                             ? '#a78bfa'
-                            : '#334155',
-                    borderColor: isLeft ? '#16a34a' : isRight ? '#d97706' : isMid ? '#0ea5e9' : inMidPair ? '#8b5cf6' : '#64748b',
+                            : 'var(--border)',
+                    borderColor: isLeft ? '#16a34a' : isRight ? '#d97706' : isMid ? '#0ea5e9' : inMidPair ? '#8b5cf6' : 'var(--text-muted)',
                     color: '#5577a4',
                   }}
                   animate={{ scale: isLeft || isRight || isMid ? 1.2 : 1 }}
@@ -212,16 +212,16 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
-        <div style={{ padding: 10, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
-          <div style={{ fontSize: 10, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Left</div>
+        <div style={{ padding: 10, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+          <div style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>Left</div>
           <div style={{ fontSize: 16, fontWeight: 700, color: '#178740' }}>{step?.left ?? '-'}</div>
         </div>
-        <div style={{ padding: 10, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
-          <div style={{ fontSize: 10, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Mid</div>
+        <div style={{ padding: 10, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+          <div style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>Mid</div>
           <div style={{ fontSize: 16, fontWeight: 700, color: '#067db1' }}>{step?.mid !== undefined ? step.mid : '-'}</div>
         </div>
-        <div style={{ padding: 10, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
-          <div style={{ fontSize: 10, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Right</div>
+        <div style={{ padding: 10, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+          <div style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>Right</div>
           <div style={{ fontSize: 16, fontWeight: 700, color: '#a36907' }}>{step?.right ?? '-'}</div>
         </div>
       </div>
@@ -230,7 +230,7 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
         <div
           style={{
             padding: 12,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: step.pairMatched ? '2px solid #38bdf8' : '2px solid #f59e0b',
           }}
@@ -250,7 +250,7 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #22c55e',
             textAlign: 'center',
@@ -259,7 +259,7 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Single Element</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Single Element</div>
           <div style={{ fontSize: 24, fontWeight: 'bold', color: '#178740' }}>{step.result}</div>
         </motion.div>
       )}
@@ -344,9 +344,9 @@ export default function SingleElementInSortedArrayVisualizer() {
                   height: 60,
                   padding: '8px',
                   borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid #475569',
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                   fontSize: 12,
                   resize: 'vertical',

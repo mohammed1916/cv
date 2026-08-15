@@ -115,12 +115,12 @@ function generateSteps(intervals) {
 function IntervalVisualization({ intervals, removed, current, title }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>{title}</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>{title}</div>
       <div style={{
         padding: 12,
-        backgroundColor: '#f1f5f9',
+        backgroundColor: 'var(--surface2)',
         borderRadius: 8,
-        border: '2px solid #cbd5e1',
+        border: '2px solid var(--border)',
         minHeight: 100,
       }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -138,15 +138,15 @@ function IntervalVisualization({ intervals, removed, current, title }) {
                     gap: 12,
                     padding: '8px 12px',
                     borderRadius: 6,
-                    border: isCurrent ? '3px solid #dc2626' : isRemoved ? '2px solid #ef4444' : '2px solid #cbd5e1',
-                    backgroundColor: isRemoved ? '#fee2e2' : isCurrent ? '#fef2f2' : '#f8fafc',
+                    border: isCurrent ? '3px solid #dc2626' : isRemoved ? '2px solid #ef4444' : '2px solid var(--border)',
+                    backgroundColor: isRemoved ? '#fee2e2' : isCurrent ? '#fef2f2' : 'var(--surface)',
                   }}
                   animate={{
                     scale: isCurrent ? 1.05 : 1,
                     opacity: isRemoved ? 0.6 : 1,
                   }}
                 >
-                  <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', minWidth: 50 }}>
+                  <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', minWidth: 50 }}>
                     [{start}, {end}]
                   </div>
                   <div style={{
@@ -189,7 +189,7 @@ function IntervalVisualization({ intervals, removed, current, title }) {
 function StatsVisualization({ intervals, removed }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Statistics</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Statistics</div>
       <div style={{
         display: 'grid',
         gridTemplateColumns: '1fr 1fr',
@@ -238,7 +238,7 @@ function VisualizationPanel({ step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -247,10 +247,10 @@ function VisualizationPanel({ step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9',
+                backgroundColor: 'var(--surface2)',
               }}
             >
               {e.label}

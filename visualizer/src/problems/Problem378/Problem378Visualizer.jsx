@@ -182,10 +182,10 @@ export default function Problem378Visualizer() {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid var(--border)',
                   cursor: 'pointer',
                   fontSize: 12,
-                  backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
+                  backgroundColor: exIdx === i ? '#dbeafe' : 'var(--surface2)',
                 }}
               >
                 {e.label}
@@ -195,9 +195,9 @@ export default function Problem378Visualizer() {
 
           {step && (
             <>
-              <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
+              <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 11 }}>
                 <div style={{ fontWeight: 600, marginBottom: 8 }}>{step.message}</div>
-                <div style={{ fontSize: 10, color: '#64748b' }}>Target: Find {k}th smallest</div>
+                <div style={{ fontSize: 10, color: 'var(--text-muted)' }}>Target: Find {k}th smallest</div>
               </div>
 
               <div style={{ padding: 8, backgroundColor: '#fef3c7', borderRadius: 6, fontSize: 11 }}>
@@ -244,7 +244,7 @@ export default function Problem378Visualizer() {
                       style={{
                         padding: 8,
                         borderRadius: 4,
-                        border: idx === 0 ? '2px solid #0ea5e9' : '1px solid #cbd5e1',
+                        border: idx === 0 ? '2px solid #0ea5e9' : '1px solid var(--border)',
                         backgroundColor: idx === 0 ? '#0ea5e9' : '#dbeafe',
                         color: idx === 0 ? '#fff' : '#1e40af',
                         fontSize: 11,
@@ -255,7 +255,7 @@ export default function Problem378Visualizer() {
                       {item.val}
                     </motion.div>
                   ))}
-                  {step.heap.length > 5 && <span style={{ color: '#64748b' }}>+{step.heap.length - 5} more</span>}
+                  {step.heap.length > 5 && <span style={{ color: 'var(--text-muted)' }}>+{step.heap.length - 5} more</span>}
                 </div>
               </div>
 

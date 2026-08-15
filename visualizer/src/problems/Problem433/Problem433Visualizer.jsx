@@ -111,9 +111,9 @@ function GeneSequenceVisualization({ gene, highlight }) {
       display: 'flex',
       gap: 4,
       padding: 12,
-      backgroundColor: '#f1f5f9',
+      backgroundColor: 'var(--surface2)',
       borderRadius: 8,
-      border: '2px solid #cbd5e1',
+      border: '2px solid var(--border)',
     }}>
       {geneArray.map((base, idx) => (
         <motion.div
@@ -122,14 +122,14 @@ function GeneSequenceVisualization({ gene, highlight }) {
             width: 36,
             height: 36,
             borderRadius: 4,
-            backgroundColor: highlight && highlight === idx ? '#dbeafe' : bases.includes(base) ? '#f3f4f6' : '#f1f5f9',
-            border: highlight && highlight === idx ? '3px solid #0284c7' : bases.includes(base) ? '2px solid #cbd5e1' : '1px solid #cbd5e1',
+            backgroundColor: highlight && highlight === idx ? '#dbeafe' : bases.includes(base) ? '#f3f4f6' : 'var(--surface2)',
+            border: highlight && highlight === idx ? '3px solid #0284c7' : bases.includes(base) ? '2px solid var(--border)' : '1px solid var(--border)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             fontSize: 12,
             fontWeight: 600,
-            color: highlight && highlight === idx ? '#0c4a6e' : bases.includes(base) ? '#1e293b' : '#64748b',
+            color: highlight && highlight === idx ? '#0c4a6e' : bases.includes(base) ? 'var(--surface2)' : 'var(--text-muted)',
           }}
           animate={{
             scale: highlight && highlight === idx ? 1.15 : 1,
@@ -152,7 +152,7 @@ function VisualizationPanel({ step, applyEx }) {
       )}
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -161,10 +161,10 @@ function VisualizationPanel({ step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9',
+                backgroundColor: 'var(--surface2)',
               }}
             >
               {e.label}
@@ -174,12 +174,12 @@ function VisualizationPanel({ step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Start Gene</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Start Gene</div>
         <GeneSequenceVisualization gene={step?.start} />
       </div>
 
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>End Gene (Target)</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>End Gene (Target)</div>
         <GeneSequenceVisualization gene={step?.end} />
       </div>
 
@@ -210,7 +210,7 @@ function VisualizationPanel({ step, applyEx }) {
                 {i}. {q}
               </div>
             ))}
-            {step.queue.length > 3 && <div style={{ fontSize: 11, color: '#64748b' }}>... and {step.queue.length - 3} more</div>}
+            {step.queue.length > 3 && <div style={{ fontSize: 11, color: 'var(--text-muted)' }}>... and {step.queue.length - 3} more</div>}
           </div>
         </div>
       )}

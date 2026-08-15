@@ -2,7 +2,7 @@
 
 .kl-hero {
   background: linear-gradient(135deg, rgba(30,41,59,.4) 0%, rgba(15,23,42,.6) 100%);
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 20px;
 }
@@ -40,10 +40,10 @@
 .kl-examples { display: flex; gap: 6px; flex-wrap: wrap; }
 
 .kl-chip {
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 999px;
   background: rgba(30,41,59,.8);
-  color: #cbd5e1;
+  color: var(--border);
   padding: 4px 10px;
   cursor: pointer;
   font-size: 12px;
@@ -59,10 +59,10 @@
 .kl-inputs { display: flex; gap: 8px; }
 
 .kl-input {
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 8px;
-  background: #0f172a;
-  color: #f8fafc;
+  background: var(--code-bg);
+  color: var(--surface);
   font-family: monospace;
   padding: 8px 10px;
   width: 100%;
@@ -72,7 +72,7 @@
 .kl-input.small { max-width: 90px; }
 
 .kl-input::placeholder {
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .kl-error {
@@ -88,10 +88,10 @@
 
 .kl-num {
   min-width: 36px;
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 8px;
   background: rgba(30,41,59,.75);
-  color: #f8fafc;
+  color: var(--surface);
   font-family: monospace;
   display: grid;
   place-items: center;
@@ -107,9 +107,9 @@
 
 .kl-heap {
   min-height: 80px;
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 8px;
-  background: #0f172a;
+  background: var(--code-bg);
   padding: 8px;
   display: flex;
   gap: 6px;
@@ -123,9 +123,9 @@
   border-radius: 999px;
   display: grid;
   place-items: center;
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   background: rgba(30,41,59,.8);
-  color: #f8fafc;
+  color: var(--surface);
   font-family: monospace;
   font-size: 13px;
 }
@@ -138,11 +138,11 @@
 }
 
 .kl-result, .kl-status {
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 8px;
   background: rgba(15,23,42,.7);
   padding: 10px 12px;
-  color: #cbd5e1;
+  color: var(--border);
   font-family: monospace;
   font-size: 13px;
 }

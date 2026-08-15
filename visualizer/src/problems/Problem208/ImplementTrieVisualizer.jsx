@@ -83,7 +83,7 @@ function TrieDisplay({ trie, highlightedPath = [] }) {
     return (
       <div key={key} style={{ marginLeft: depth > 0 ? 20 : 0, marginTop: 8 }}>
         {children.map(([char, child]) => (
-          <motion.div key={char} style={{ padding: 6, backgroundColor: highlightedPath.includes(char) ? "#fbbf24" : "#e2e8f0", borderRadius: 3, marginBottom: 4, fontSize: 12, fontFamily: "monospace", fontWeight: 600, color: highlightedPath.includes(char) ? "#000" : "#334155", border: child.isEnd ? "2px solid #10b981" : "1px solid #94a3b8" }} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}>
+          <motion.div key={char} style={{ padding: 6, backgroundColor: highlightedPath.includes(char) ? "#fbbf24" : "var(--text)", borderRadius: 3, marginBottom: 4, fontSize: 12, fontFamily: "monospace", fontWeight: 600, color: highlightedPath.includes(char) ? "#000" : "var(--border)", border: child.isEnd ? "2px solid #10b981" : "1px solid var(--text-muted)" }} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}>
             {char}{child.isEnd && " ✓"}
           </motion.div>
         ))}{children.map(([char, child]) => renderNode(child, depth + 1, char))}

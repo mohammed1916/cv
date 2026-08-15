@@ -356,12 +356,12 @@ export default function MaxAreaOfIslandVisualizer() {
                 <div
                   style={{
                     padding: 10,
-                    backgroundColor: '#0f172a',
+                    backgroundColor: 'var(--code-bg)',
                     borderRadius: 6,
-                    border: '1px solid #334155',
+                    border: '1px solid var(--border)',
                     fontSize: 12,
                     lineHeight: 1.5,
-                    color: '#cbd5e1',
+                    color: 'var(--border)',
                   }}
                 >
                   {step.message}

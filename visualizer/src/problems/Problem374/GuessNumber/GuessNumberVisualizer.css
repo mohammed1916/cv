@@ -24,8 +24,8 @@
     border-bottom: 1px solid #313244;
     font-size: 13px;
     font-weight: 700;
-    color: #cdd6f4;
-    background: #1e1e2e;
+    color: var(--code-text);
+    background: var(--code-bg);
     flex-shrink: 0;
     display: flex;
     justify-content: space-between;
@@ -62,7 +62,7 @@
 
 .gn-chip {
     border: 1px solid #313244;
-    color: #a6adc8;
+    color: var(--code-dim);
     background: rgba(30, 30, 46, 0.8);
     border-radius: 999px;
     padding: 4px 12px;
@@ -72,8 +72,8 @@
 }
 
 .gn-chip:hover {
-    background: #45475a;
-    color: #cdd6f4;
+    background: var(--code-line);
+    color: var(--code-text);
     border-color: #89b4fa;
 }
 
@@ -101,9 +101,9 @@
 .gn-input {
     padding: 7px 11px;
     border-radius: 7px;
-    border: 1px solid #45475a;
-    background: #1e1e2e;
-    color: #cdd6f4;
+    border: 1px solid var(--code-line);
+    background: var(--code-bg);
+    color: var(--code-text);
     font-family: monospace;
     font-size: 13px;
 }
@@ -128,8 +128,8 @@
 .gn-var {
     flex: 1;
     min-width: 90px;
-    background: #1e1e2e;
-    border: 2px solid #45475a;
+    background: var(--code-bg);
+    border: 2px solid var(--code-line);
     border-radius: 10px;
     padding: 8px 12px;
     display: flex;
@@ -142,7 +142,7 @@
 .gn-var-label {
     font-size: 10px;
     font-weight: 700;
-    color: #6c7086;
+    color: var(--code-dim);
     text-transform: uppercase;
     letter-spacing: 0.06em;
 }
@@ -164,7 +164,7 @@
 .gn-bar-label {
     font-size: 11px;
     font-weight: 700;
-    color: #6c7086;
+    color: var(--code-dim);
     text-transform: uppercase;
     letter-spacing: 0.06em;
 }
@@ -315,13 +315,13 @@
 .gn-tick-line {
     width: 1px;
     height: 6px;
-    background: #45475a;
+    background: var(--code-line);
     margin-top: 2px;
 }
 
 .gn-tick-label {
     font-size: 9px;
-    color: #6c7086;
+    color: var(--code-dim);
     font-family: monospace;
     margin-top: 2px;
 }
@@ -370,11 +370,11 @@
 /* ── Status Bar ── */
 .gn-status {
     padding: 8px 14px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 8px;
     font-size: 13px;
-    color: #a6adc8;
+    color: var(--code-dim);
     flex-shrink: 0;
 }
 

@@ -164,7 +164,7 @@ function VisualizationPanel({ step, applyEx }) {
       )}
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -173,10 +173,10 @@ function VisualizationPanel({ step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9',
+                backgroundColor: 'var(--surface2)',
               }}
             >
               {e.label}
@@ -194,7 +194,7 @@ function VisualizationPanel({ step, applyEx }) {
 
       {step?.nums && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Input Array</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Input Array</div>
           <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
             {step.nums.map((num, i) => (
               <motion.div
@@ -203,14 +203,14 @@ function VisualizationPanel({ step, applyEx }) {
                   width: 45,
                   height: 45,
                   borderRadius: 6,
-                  backgroundColor: '#f1f5f9',
-                  border: '1px solid #cbd5e1',
+                  backgroundColor: 'var(--surface2)',
+                  border: '1px solid var(--border)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   fontSize: 13,
                   fontWeight: 700,
-                  color: '#475569',
+                  color: 'var(--text-muted)',
                 }}
               >
                 {num}

@@ -155,7 +155,7 @@ function GuessVisualization({ n, pick, step }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
       {/* Range display */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 12 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 12 }}>
           Search Space
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12 }}>
@@ -220,14 +220,14 @@ function GuessVisualization({ n, pick, step }) {
 
       {/* Number range visualization */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 12 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 12 }}>
           Number Range [1, {n}]
         </div>
         <div style={{
           padding: 16,
-          backgroundColor: '#f8fafc',
+          backgroundColor: 'var(--surface)',
           borderRadius: 6,
-          border: '1px solid #cbd5e1'
+          border: '1px solid var(--border)'
         }}>
           <div style={{
             display: 'flex',
@@ -236,11 +236,11 @@ function GuessVisualization({ n, pick, step }) {
             gap: 12,
             marginBottom: 16
           }}>
-            <div style={{ fontSize: 12, color: '#64748b' }}>1</div>
+            <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>1</div>
             <div style={{
               flex: 1,
               height: 8,
-              backgroundColor: '#e2e8f0',
+              backgroundColor: 'var(--text)',
               borderRadius: 4,
               overflow: 'hidden',
               position: 'relative'
@@ -282,9 +282,9 @@ function GuessVisualization({ n, pick, step }) {
                 />
               )}
             </div>
-            <div style={{ fontSize: 12, color: '#64748b' }}>{n}</div>
+            <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{n}</div>
           </div>
-          <div style={{ fontSize: 11, color: '#64748b', textAlign: 'center' }}>
+          <div style={{ fontSize: 11, color: 'var(--text-muted)', textAlign: 'center' }}>
             {step?.left && step?.right
               ? `Search space: ${searchSpaceSize} numbers [${step.left}, ${step.right}]`
               : `Full range: ${n} numbers [1, ${n}]`
@@ -307,7 +307,7 @@ function GuessVisualization({ n, pick, step }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 4 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 4 }}>
             Oracle Response
           </div>
           <div style={{
@@ -361,7 +361,7 @@ function VisualizationPanel({ n, pick, step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -370,14 +370,14 @@ function VisualizationPanel({ n, pick, step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9',
+                backgroundColor: 'var(--surface2)',
                 transition: 'all 0.2s ease'
               }}
-              onMouseEnter={(ev) => ev.target.style.backgroundColor = '#e2e8f0'}
-              onMouseLeave={(ev) => ev.target.style.backgroundColor = '#f1f5f9'}
+              onMouseEnter={(ev) => ev.target.style.backgroundColor = 'var(--text)'}
+              onMouseLeave={(ev) => ev.target.style.backgroundColor = 'var(--surface2)'}
             >
               {e.label}
             </button>

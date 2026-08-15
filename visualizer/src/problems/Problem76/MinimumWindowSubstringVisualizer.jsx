@@ -267,7 +267,7 @@ export default function MinimumWindowSubstringVisualizer() {
   )
 
   const statusPanel = (
-    <div className="mws-status" style={{ borderRadius: '8px', padding: '10px 12px', background: 'rgba(15,23,42,.7)', borderTop: '1px solid #334155' }}>
+    <div className="mws-status" style={{ borderRadius: '8px', padding: '10px 12px', background: 'rgba(15,23,42,.7)', borderTop: '1px solid var(--border)' }}>
       {step?.message || 'Press Play to begin.'}
     </div>
   )

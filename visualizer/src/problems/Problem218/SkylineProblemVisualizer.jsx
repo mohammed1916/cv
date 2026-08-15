@@ -156,11 +156,11 @@ function SkylineVisualization({ buildings, keyPoints }) {
   const height = 200
 
   return (
-    <svg width={width} height={height} style={{ border: "1px solid #64748b", borderRadius: 4 }}>
+    <svg width={width} height={height} style={{ border: "1px solid var(--text-muted)", borderRadius: 4 }}>
       {/* Buildings */}
       {buildings.map((b, idx) => (
         <g key={`building-${idx}`}>
-          <rect x={b[0] * 20} y={height - b[2] * 15} width={(b[1] - b[0]) * 20} height={b[2] * 15} fill="#cbd5e1" opacity="0.6" stroke="#64748b" strokeWidth="1" />
+          <rect x={b[0] * 20} y={height - b[2] * 15} width={(b[1] - b[0]) * 20} height={b[2] * 15} fill="var(--border)" opacity="0.6" stroke="var(--text-muted)" strokeWidth="1" />
         </g>
       ))}
       {/* Skyline */}

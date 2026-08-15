@@ -137,12 +137,12 @@ function generateSteps(intervals) {
 function IntervalsVisualization({ intervals, result, currentIdx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Intervals & Results</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Intervals & Results</div>
       <div style={{
         padding: 12,
-        backgroundColor: '#f1f5f9',
+        backgroundColor: 'var(--surface2)',
         borderRadius: 8,
-        border: '2px solid #cbd5e1',
+        border: '2px solid var(--border)',
         minHeight: 120,
       }}>
         {intervals.length > 0 ? (
@@ -160,15 +160,15 @@ function IntervalsVisualization({ intervals, result, currentIdx }) {
                     gap: 12,
                     padding: '8px 12px',
                     borderRadius: 6,
-                    border: isCurrent ? '3px solid #dc2626' : '2px solid #cbd5e1',
-                    backgroundColor: isCurrent ? '#fef2f2' : '#f8fafc',
+                    border: isCurrent ? '3px solid #dc2626' : '2px solid var(--border)',
+                    backgroundColor: isCurrent ? '#fef2f2' : 'var(--surface)',
                   }}
                   animate={{ scale: isCurrent ? 1.05 : 1 }}
                 >
-                  <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', minWidth: 80 }}>
+                  <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', minWidth: 80 }}>
                     [{start}, {end}]
                   </div>
-                  <div style={{ flex: 1, fontSize: 12, color: '#64748b' }}>→</div>
+                  <div style={{ flex: 1, fontSize: 12, color: 'var(--text-muted)' }}>→</div>
                   <div style={{
                     padding: '4px 8px',
                     backgroundColor: resultIdx !== -1 ? '#dbeafe' : '#fee2e2',
@@ -199,14 +199,14 @@ function BinarySearchVisualization({ startValues, searchState }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
         Binary Search: Find start &gt;= {searchState.end}
       </div>
       <div style={{
         padding: 12,
-        backgroundColor: '#f1f5f9',
+        backgroundColor: 'var(--surface2)',
         borderRadius: 8,
-        border: '2px solid #cbd5e1',
+        border: '2px solid var(--border)',
         minHeight: 80,
       }}>
         <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', alignItems: 'flex-end' }}>
@@ -231,14 +231,14 @@ function BinarySearchVisualization({ startValues, searchState }) {
                   padding: '4px 8px',
                   backgroundColor: iFound ? '#dbeafe' : isMid ? '#fbbf24' : isLeft ? '#86efac' : isRight ? '#f87171' : isValid ? '#c7d2fe' : '#f3f4f6',
                   borderRadius: 4,
-                  border: isMid ? '3px solid #f59e0b' : iFound ? '2px solid #0284c7' : '1px solid #cbd5e1',
+                  border: isMid ? '3px solid #f59e0b' : iFound ? '2px solid #0284c7' : '1px solid var(--border)',
                   fontSize: 12,
                   fontWeight: 600,
-                  color: iFound ? '#0c4a6e' : isMid ? '#b45309' : isLeft ? '#166534' : isRight ? '#7f1d1d' : '#1e293b',
+                  color: iFound ? '#0c4a6e' : isMid ? '#b45309' : isLeft ? '#166534' : isRight ? '#7f1d1d' : 'var(--surface2)',
                 }}>
                   {val}
                 </div>
-                <div style={{ fontSize: 10, color: '#64748b', fontWeight: 500, textAlign: 'center', minWidth: 40 }}>
+                <div style={{ fontSize: 10, color: 'var(--text-muted)', fontWeight: 500, textAlign: 'center', minWidth: 40 }}>
                   {isMid ? 'mid' : isLeft ? 'L' : isRight ? 'R' : idx}
                 </div>
               </motion.div>
@@ -254,7 +254,7 @@ function VisualizationPanel({ step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -263,10 +263,10 @@ function VisualizationPanel({ step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9',
+                backgroundColor: 'var(--surface2)',
               }}
             >
               {e.label}

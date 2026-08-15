@@ -123,27 +123,27 @@ function AddStringsVisualization({ num1, num2, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>String Addition</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>String Addition</div>
 
       {/* Input numbers */}
-      <div style={{ padding: 12, backgroundColor: '#f1f5f9', borderRadius: 6, border: '2px solid #cbd5e1' }}>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#475569', marginBottom: 8 }}>Inputs</div>
+      <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid var(--border)' }}>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Inputs</div>
         <div style={{ display: 'flex', gap: 16, fontSize: 13, fontFamily: 'monospace' }}>
-          <div style={{ color: '#1e293b' }}>
-            <span style={{ fontWeight: 600, color: '#64748b' }}>num1:</span> {num1}
+          <div style={{ color: 'var(--surface2)' }}>
+            <span style={{ fontWeight: 600, color: 'var(--text-muted)' }}>num1:</span> {num1}
           </div>
-          <div style={{ color: '#1e293b' }}>
-            <span style={{ fontWeight: 600, color: '#64748b' }}>num2:</span> {num2}
+          <div style={{ color: 'var(--surface2)' }}>
+            <span style={{ fontWeight: 600, color: 'var(--text-muted)' }}>num2:</span> {num2}
           </div>
         </div>
       </div>
 
       {/* Digit visualization */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Processing</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Processing</div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 12 }}>
           <div>
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>num1 digits</div>
+            <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>num1 digits</div>
             <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
               {num1.split('').map((d, idx) => {
                 const globalIdx = idx
@@ -153,13 +153,13 @@ function AddStringsVisualization({ num1, num2, step }) {
                     key={idx}
                     style={{
                       padding: '6px 8px',
-                      backgroundColor: isCurrent ? '#c7d2fe' : '#f1f5f9',
+                      backgroundColor: isCurrent ? '#c7d2fe' : 'var(--surface2)',
                       borderRadius: 4,
-                      border: `2px solid ${isCurrent ? '#6366f1' : '#cbd5e1'}`,
+                      border: `2px solid ${isCurrent ? '#6366f1' : 'var(--border)'}`,
                       textAlign: 'center',
                       fontSize: 12,
                       fontWeight: 700,
-                      color: isCurrent ? '#4f46e5' : '#334155',
+                      color: isCurrent ? '#4f46e5' : 'var(--border)',
                       minWidth: 36,
                     }}
                     animate={{
@@ -173,7 +173,7 @@ function AddStringsVisualization({ num1, num2, step }) {
             </div>
           </div>
           <div>
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>num2 digits</div>
+            <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>num2 digits</div>
             <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
               {num2.split('').map((d, idx) => {
                 const globalIdx = idx
@@ -183,13 +183,13 @@ function AddStringsVisualization({ num1, num2, step }) {
                     key={idx}
                     style={{
                       padding: '6px 8px',
-                      backgroundColor: isCurrent ? '#c7d2fe' : '#f1f5f9',
+                      backgroundColor: isCurrent ? '#c7d2fe' : 'var(--surface2)',
                       borderRadius: 4,
-                      border: `2px solid ${isCurrent ? '#6366f1' : '#cbd5e1'}`,
+                      border: `2px solid ${isCurrent ? '#6366f1' : 'var(--border)'}`,
                       textAlign: 'center',
                       fontSize: 12,
                       fontWeight: 700,
-                      color: isCurrent ? '#4f46e5' : '#334155',
+                      color: isCurrent ? '#4f46e5' : 'var(--border)',
                       minWidth: 36,
                     }}
                     animate={{
@@ -219,19 +219,19 @@ function AddStringsVisualization({ num1, num2, step }) {
         >
           <div style={{ fontSize: 12, fontWeight: 600, color: '#92400e', marginBottom: 8 }}>Current Calculation</div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 8 }}>
-            <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#ffffff', borderRadius: 4 }}>
+            <div style={{ textAlign: 'center', padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#92400e' }}>d1</div>
               <div style={{ fontSize: 14, fontWeight: 'bold', color: '#a36907' }}>{step.digit1}</div>
             </div>
-            <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#ffffff', borderRadius: 4 }}>
+            <div style={{ textAlign: 'center', padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#92400e' }}>d2</div>
               <div style={{ fontSize: 14, fontWeight: 'bold', color: '#a36907' }}>{step.digit2}</div>
             </div>
-            <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#ffffff', borderRadius: 4 }}>
+            <div style={{ textAlign: 'center', padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#92400e' }}>c</div>
               <div style={{ fontSize: 14, fontWeight: 'bold', color: '#a36907' }}>{step.carry}</div>
             </div>
-            <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#ffffff', borderRadius: 4 }}>
+            <div style={{ textAlign: 'center', padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#92400e' }}>=</div>
               <div style={{ fontSize: 14, fontWeight: 'bold', color: '#a36907' }}>{step.sum}</div>
             </div>
@@ -251,7 +251,7 @@ function AddStringsVisualization({ num1, num2, step }) {
         </div>
       </div>
 
-      <div style={{ fontSize: 12, color: '#475569' }}>{step?.message}</div>
+      <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{step?.message}</div>
     </div>
   )
 }
@@ -309,7 +309,7 @@ export default function Problem415Visualizer() {
         />),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button
@@ -318,11 +318,11 @@ export default function Problem415Visualizer() {
                   style={{
                     padding: '6px 12px',
                     borderRadius: 4,
-                    border: exIdx === idx ? '2px solid #ec4899' : '1px solid #cbd5e1',
+                    border: exIdx === idx ? '2px solid #ec4899' : '1px solid var(--border)',
                     cursor: 'pointer',
                     fontSize: 12,
-                    backgroundColor: exIdx === idx ? '#fce7f3' : '#f1f5f9',
-                    color: exIdx === idx ? '#831843' : '#334155',
+                    backgroundColor: exIdx === idx ? '#fce7f3' : 'var(--surface2)',
+                    color: exIdx === idx ? '#831843' : 'var(--border)',
                     fontWeight: exIdx === idx ? '600' : '400',
                   }}
                 >

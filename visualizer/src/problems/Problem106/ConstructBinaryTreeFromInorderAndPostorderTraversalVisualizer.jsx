@@ -159,7 +159,7 @@ function VisualizationPanel({ step }) {
                     ? '2px solid #d97706'
                     : step.leftInRange && idx >= step.leftInRange[0] && idx <= step.leftInRange[1]
                       ? '1px solid #4f46e5'
-                      : '1px solid #cbd5e1',
+                      : '1px solid var(--border)',
                 fontWeight: step.rootIdx === idx ? 700 : 600,
               }}
               animate={{ scale: step.rootIdx === idx ? 1.15 : 1 }}
@@ -190,7 +190,7 @@ function VisualizationPanel({ step }) {
                     ? '2px solid #d97706'
                     : step.postRange && idx >= step.postRange[0] && idx <= step.postRange[1]
                       ? '1px solid #4f46e5'
-                      : '1px solid #cbd5e1',
+                      : '1px solid var(--border)',
                 fontWeight: step.postRange && idx === step.postRange[1] ? 700 : 600,
               }}
               animate={{ scale: step.postRange && idx === step.postRange[1] ? 1.15 : 1 }}

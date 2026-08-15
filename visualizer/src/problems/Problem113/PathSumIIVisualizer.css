@@ -20,10 +20,10 @@
 
 .psi-panel-head {
   padding: 12px 16px;
-  border-bottom: 1px solid var(--border-color, #e2e8f0);
+  border-bottom: 1px solid var(--border-color, var(--text));
   font-weight: 600;
   font-size: 14px;
-  color: var(--text-primary, #0f172a);
+  color: var(--text-primary, var(--code-bg));
   flex-shrink: 0;
 }
 
@@ -36,10 +36,10 @@
 /* Status panel */
 .psi-status {
   padding: 12px 16px;
-  border-top: 1px solid var(--border-color, #e2e8f0);
+  border-top: 1px solid var(--border-color, var(--text));
   font-size: 13px;
-  color: var(--text-secondary, #64748b);
-  background-color: var(--bg-secondary, #f8fafc);
+  color: var(--text-secondary, var(--text-muted));
+  background-color: var(--bg-secondary, var(--surface));
   height: 100%;
   display: flex;
   align-items: center;
@@ -55,9 +55,9 @@
 
 .psi-canvas {
   position: relative;
-  border: 1px solid var(--border-color, #e2e8f0);
+  border: 1px solid var(--border-color, var(--text));
   border-radius: 6px;
-  background-color: var(--bg-secondary, #ffffff);
+  background-color: var(--bg-secondary, var(--surface));
   flex-shrink: 0;
 }
 
@@ -104,7 +104,7 @@
 .psi-label {
   font-size: 12px;
   font-weight: 600;
-  color: var(--text-secondary, #64748b);
+  color: var(--text-secondary, var(--text-muted));
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -112,18 +112,18 @@
 .psi-value {
   font-size: 16px;
   font-weight: 700;
-  color: var(--text-primary, #0f172a);
+  color: var(--text-primary, var(--code-bg));
   font-family: 'Monaco', 'Menlo', monospace;
 }
 
 .psi-path-display {
   font-size: 14px;
   font-family: 'Monaco', 'Menlo', monospace;
-  color: var(--text-primary, #0f172a);
+  color: var(--text-primary, var(--code-bg));
   padding: 8px 12px;
-  background-color: var(--bg-tertiary, #f1f5f9);
+  background-color: var(--bg-tertiary, var(--surface2));
   border-radius: 4px;
-  border: 1px solid var(--border-color, #e2e8f0);
+  border: 1px solid var(--border-color, var(--text));
   word-break: break-all;
 }
 
@@ -134,23 +134,23 @@
   max-height: 120px;
   overflow-y: auto;
   padding: 8px;
-  background-color: var(--bg-tertiary, #f1f5f9);
+  background-color: var(--bg-tertiary, var(--surface2));
   border-radius: 4px;
-  border: 1px solid var(--border-color, #e2e8f0);
+  border: 1px solid var(--border-color, var(--text));
 }
 
 .psi-path-item {
   font-size: 12px;
   font-family: 'Monaco', 'Menlo', monospace;
-  color: var(--text-primary, #0f172a);
+  color: var(--text-primary, var(--code-bg));
   padding: 4px 6px;
-  background-color: var(--bg-secondary, #ffffff);
+  background-color: var(--bg-secondary, var(--surface));
   border-radius: 2px;
 }
 
 .psi-empty {
   font-size: 12px;
-  color: var(--text-secondary, #64748b);
+  color: var(--text-secondary, var(--text-muted));
   font-style: italic;
 }
 
@@ -159,7 +159,7 @@
   flex-direction: column;
   gap: 8px;
   padding-top: 8px;
-  border-top: 1px solid var(--border-color, #e2e8f0);
+  border-top: 1px solid var(--border-color, var(--text));
 }
 
 .psi-legend-item {
@@ -167,7 +167,7 @@
   align-items: center;
   gap: 8px;
   font-size: 12px;
-  color: var(--text-secondary, #64748b);
+  color: var(--text-secondary, var(--text-muted));
 }
 
 .psi-dot {
@@ -203,10 +203,10 @@
 
 .psi-chip {
   padding: 6px 12px;
-  border: 1px solid var(--border-color, #e2e8f0);
+  border: 1px solid var(--border-color, var(--text));
   border-radius: 4px;
-  background-color: var(--bg-secondary, #ffffff);
-  color: var(--text-primary, #0f172a);
+  background-color: var(--bg-secondary, var(--surface));
+  color: var(--text-primary, var(--code-bg));
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
@@ -214,8 +214,8 @@
 }
 
 .psi-chip:hover {
-  background-color: #e2e8f0;
-  border-color: #cbd5e1;
+  background-color: var(--text);
+  border-color: var(--border);
 }
 
 .psi-input-row {
@@ -228,7 +228,7 @@
 .psi-input-row label {
   font-size: 13px;
   font-weight: 600;
-  color: var(--text-secondary, #64748b);
+  color: var(--text-secondary, var(--text-muted));
   min-width: 60px;
 }
 
@@ -236,10 +236,10 @@
   flex: 1;
   min-width: 200px;
   padding: 8px 12px;
-  border: 1px solid var(--border-color, #e2e8f0);
+  border: 1px solid var(--border-color, var(--text));
   border-radius: 4px;
-  background-color: var(--bg-secondary, #ffffff);
-  color: var(--text-primary, #0f172a);
+  background-color: var(--bg-secondary, var(--surface));
+  color: var(--text-primary, var(--code-bg));
   font-size: 13px;
   font-family: 'Monaco', 'Menlo', monospace;
   transition: all 150ms ease;
@@ -261,18 +261,18 @@
 @media (prefers-color-scheme: dark) {
   :root[data-theme="dark"] .psi-panel-head,
   :root[data-theme="dark"] .psi-status {
-    border-bottom-color: #334155;
-    border-top-color: #334155;
+    border-bottom-color: var(--border);
+    border-top-color: var(--border);
     color: #5577a4;
   }
 
   :root[data-theme="dark"] .psi-panel-body {
-    background-color: #1e293b;
+    background-color: var(--surface2);
   }
 
   :root[data-theme="dark"] .psi-canvas {
-    background-color: #1e293b;
-    border-color: #334155;
+    background-color: var(--surface2);
+    border-color: var(--border);
   }
 
   :root[data-theme="dark"] .psi-node {
@@ -295,14 +295,14 @@
 
   :root[data-theme="dark"] .psi-path-display,
   :root[data-theme="dark"] .psi-paths-list {
-    background-color: #0f172a;
-    border-color: #334155;
-    color: #e2e8f0;
+    background-color: var(--code-bg);
+    border-color: var(--border);
+    color: var(--text);
   }
 
   :root[data-theme="dark"] .psi-path-item {
-    background-color: #1e293b;
-    color: #e2e8f0;
+    background-color: var(--surface2);
+    color: var(--text);
   }
 
   :root[data-theme="dark"] .psi-empty {
@@ -310,7 +310,7 @@
   }
 
   :root[data-theme="dark"] .psi-legend {
-    border-top-color: #334155;
+    border-top-color: var(--border);
   }
 
   :root[data-theme="dark"] .psi-legend-item {
@@ -318,9 +318,9 @@
   }
 
   :root[data-theme="dark"] .psi-input {
-    background-color: #1e293b;
-    color: #e2e8f0;
-    border-color: #334155;
+    background-color: var(--surface2);
+    color: var(--text);
+    border-color: var(--border);
   }
 
   :root[data-theme="dark"] .psi-input:focus {
@@ -329,13 +329,13 @@
   }
 
   :root[data-theme="dark"] .psi-chip {
-    background-color: #1e293b;
-    color: #e2e8f0;
-    border-color: #334155;
+    background-color: var(--surface2);
+    color: var(--text);
+    border-color: var(--border);
   }
 
   :root[data-theme="dark"] .psi-chip:hover {
-    background-color: #334155;
-    border-color: #475569;
+    background-color: var(--border);
+    border-color: var(--text-muted);
   }
 }

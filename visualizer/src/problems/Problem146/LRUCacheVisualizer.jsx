@@ -372,7 +372,7 @@ export default function LRUCacheVisualizer() {
             })}
           </AnimatePresence>
           {(!step || Object.keys(step.cache).length === 0) && (
-            <span style={{ color: '#475569', fontStyle: 'italic', fontSize: 13, padding: 8 }}>Cache is empty</span>
+            <span style={{ color: 'var(--text-muted)', fontStyle: 'italic', fontSize: 13, padding: 8 }}>Cache is empty</span>
           )}
         </div>
       </div>

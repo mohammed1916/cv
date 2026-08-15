@@ -171,10 +171,10 @@ function ParabolaVisualization({ a, b, c, transformed, highlightIdx }) {
   const pathData = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p[0]} ${p[1]}`).join(' ');
 
   return (
-    <svg width={graphWidth} height={graphHeight} style={{ border: '1px solid #cbd5e1', borderRadius: 6, backgroundColor: '#f8fafc' }}>
+    <svg width={graphWidth} height={graphHeight} style={{ border: '1px solid var(--border)', borderRadius: 6, backgroundColor: 'var(--surface)' }}>
       {/* Grid lines */}
       {[0.25, 0.5, 0.75].map(frac => (
-        <line key={`h-${frac}`} x1={padding} y1={graphHeight - padding - frac * (graphHeight - 2 * padding)} x2={graphWidth - padding} y2={graphHeight - padding - frac * (graphHeight - 2 * padding)} stroke="#e2e8f0" strokeDasharray="2,2" strokeWidth="0.5" />
+        <line key={`h-${frac}`} x1={padding} y1={graphHeight - padding - frac * (graphHeight - 2 * padding)} x2={graphWidth - padding} y2={graphHeight - padding - frac * (graphHeight - 2 * padding)} stroke="var(--text)" strokeDasharray="2,2" strokeWidth="0.5" />
       ))}
 
       {/* Parabola curve */}
@@ -209,7 +209,7 @@ function ArrayVisualization({ nums, transformed, left, right, result, fillIdx })
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
       {/* Input array */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#475569', marginBottom: 8 }}>Input Array (nums)</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Input Array (nums)</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {nums.map((val, idx) => (
             <div key={`input-${idx}`} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -239,7 +239,7 @@ function ArrayVisualization({ nums, transformed, left, right, result, fillIdx })
 
       {/* Transformed array */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#475569', marginBottom: 8 }}>Transformed Array (f(x))</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Transformed Array (f(x))</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {transformed.map((val, idx) => (
             <div key={`trans-${idx}`} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -273,7 +273,7 @@ function ArrayVisualization({ nums, transformed, left, right, result, fillIdx })
       {/* Result array */}
       {result.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#475569', marginBottom: 8 }}>Result (sorted)</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Result (sorted)</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {result.map((val, idx) => (
               <div key={`result-${idx}`} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -283,7 +283,7 @@ function ArrayVisualization({ nums, transformed, left, right, result, fillIdx })
                     height: 40,
                     borderRadius: 6,
                     backgroundColor: idx === fillIdx ? '#fbbf24' : val !== undefined ? '#bbf7d0' : '#f3f4f6',
-                    border: idx === fillIdx ? '2px solid #d97706' : val !== undefined ? '2px solid #10b981' : '2px solid #cbd5e1',
+                    border: idx === fillIdx ? '2px solid #d97706' : val !== undefined ? '2px solid #10b981' : '2px solid var(--border)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -333,7 +333,7 @@ function VariablesPanel({ step, a, b, c }) {
         </div>
       </div>
 
-      <div style={{ padding: 12, backgroundColor: '#f3f4f6', borderRadius: 6, border: '1px solid #cbd5e1', fontSize: 12, color: '#374151', flex: 1, overflow: 'auto' }}>
+      <div style={{ padding: 12, backgroundColor: '#f3f4f6', borderRadius: 6, border: '1px solid var(--border)', fontSize: 12, color: '#374151', flex: 1, overflow: 'auto' }}>
         <div style={{ marginBottom: 6, color: '#6b7280', fontSize: 11, fontWeight: 700, textTransform: 'uppercase' }}>Message</div>
         {step?.message || "Initialize two pointers at edges"}
       </div>
@@ -345,7 +345,7 @@ function VisualizationPanel({ step, ex, setEx, applyExample }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map((e, i) => (
             <button
@@ -354,12 +354,12 @@ function VisualizationPanel({ step, ex, setEx, applyExample }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 11,
-                backgroundColor: ex.label === e.label ? '#dbeafe' : '#f1f5f9',
+                backgroundColor: ex.label === e.label ? '#dbeafe' : 'var(--surface2)',
                 fontWeight: ex.label === e.label ? 600 : 400,
-                color: ex.label === e.label ? '#0c4a6e' : '#475569'
+                color: ex.label === e.label ? '#0c4a6e' : 'var(--text-muted)'
               }}
             >
               {e.label}
@@ -370,7 +370,7 @@ function VisualizationPanel({ step, ex, setEx, applyExample }) {
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, alignItems: 'start' }}>
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#475569', marginBottom: 8 }}>Parabola Graph</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Parabola Graph</div>
           <ParabolaVisualization
             a={ex.a}
             b={ex.b}

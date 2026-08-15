@@ -117,7 +117,7 @@ function generateSteps(words) {
 function WordSquareVisualization({ square }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Word Square</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Word Square</div>
       {square.length > 0 ? (
         <div style={{
           display: 'inline-block',
@@ -146,12 +146,12 @@ function WordSquareVisualization({ square }) {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    backgroundColor: i === j ? '#dbeafe' : '#f1f5f9',
-                    borderRight: j < word.length - 1 ? '1px solid #cbd5e1' : 'none',
-                    borderBottom: i < square.length - 1 ? '1px solid #cbd5e1' : 'none',
+                    backgroundColor: i === j ? '#dbeafe' : 'var(--surface2)',
+                    borderRight: j < word.length - 1 ? '1px solid var(--border)' : 'none',
+                    borderBottom: i < square.length - 1 ? '1px solid var(--border)' : 'none',
                     fontSize: 14,
                     fontWeight: 600,
-                    color: i === j ? '#0c4a6e' : '#475569',
+                    color: i === j ? '#0c4a6e' : 'var(--text-muted)',
                   }}
                 >
                   {char}
@@ -179,7 +179,7 @@ function VisualizationPanel({ words, step, applyEx }) {
       )}
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -188,10 +188,10 @@ function VisualizationPanel({ words, step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9',
+                backgroundColor: 'var(--surface2)',
               }}
             >
               {e.label}
@@ -201,7 +201,7 @@ function VisualizationPanel({ words, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Input Words</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Input Words</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {words.map((w, i) => (
             <motion.div

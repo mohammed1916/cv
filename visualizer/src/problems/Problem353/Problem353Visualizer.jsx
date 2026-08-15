@@ -251,10 +251,10 @@ export default function Problem353Visualizer() {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid var(--border)',
                   cursor: 'pointer',
                   fontSize: 12,
-                  backgroundColor: exIdx === i ? '#e9d5ff' : '#f1f5f9',
+                  backgroundColor: exIdx === i ? '#e9d5ff' : 'var(--surface2)',
                   fontWeight: exIdx === i ? 600 : 400,
                 }}
               >
@@ -267,7 +267,7 @@ export default function Problem353Visualizer() {
             <>
               {/* Station Network Visualization */}
               <div style={{
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 borderRadius: 8,
                 backgroundColor: '#f9fafb',
                 padding: 12,
@@ -288,7 +288,7 @@ export default function Problem353Visualizer() {
                         y1={pos1.y}
                         x2={pos2.x}
                         y2={pos2.y}
-                        stroke={step.selectedRoute === route ? '#8b5cf6' : '#cbd5e1'}
+                        stroke={step.selectedRoute === route ? '#8b5cf6' : 'var(--border)'}
                         strokeWidth={step.selectedRoute === route ? 3 : 1}
                         opacity={step.selectedRoute === route ? 0.9 : 0.5}
                       />
@@ -384,7 +384,7 @@ export default function Problem353Visualizer() {
                 borderRadius: 6,
                 fontSize: 12,
                 fontWeight: 500,
-                color: '#334155',
+                color: 'var(--border)',
                 borderLeft: '4px solid #8b5cf6',
               }}>
                 {step.message}

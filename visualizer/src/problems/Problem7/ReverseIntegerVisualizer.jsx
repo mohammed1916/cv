@@ -199,7 +199,7 @@ export default function ReverseIntegerVisualizer() {
         </div>
 
         <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center' }}>
-          <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace' }}>x=</span>
+          <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>x=</span>
           <input
             value={xInput}
             onChange={(e) => { setXInput(e.target.value); handleReset() }}

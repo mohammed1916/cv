@@ -242,7 +242,7 @@ function NumberLine({ nums, lower, upper, currentIdx, gap, finalGap }) {
                   : isNum
                   ? '#86efac'
                   : isInRange
-                  ? '#e2e8f0'
+                  ? 'var(--text)'
                   : '#f5f5f5',
               border:
                 isGap || isFinalGap
@@ -250,11 +250,11 @@ function NumberLine({ nums, lower, upper, currentIdx, gap, finalGap }) {
                   : isNum
                   ? '2px solid #22c55e'
                   : isInRange
-                  ? '1px solid #cbd5e1'
+                  ? '1px solid var(--border)'
                   : 'none',
               fontSize: 11,
               fontWeight: 600,
-              color: '#0f172a',
+              color: 'var(--code-bg)',
               fontFamily: 'monospace',
             }}
             animate={{ scale: isGap || isFinalGap ? 1.1 : 1 }}
@@ -408,7 +408,7 @@ export default function MissingRangesVisualizer() {
           {step.message}
         </div>
       ) : (
-        <div style={{ padding: '8px 12px', fontSize: 12, color: '#64748b' }}>Ready</div>
+        <div style={{ padding: '8px 12px', fontSize: 12, color: 'var(--text-muted)' }}>Ready</div>
       )}
     </div>
   )

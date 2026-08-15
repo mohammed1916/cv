@@ -18,8 +18,8 @@
 
 .rd-chip {
     background: #313244;
-    color: #cdd6f4;
-    border: 2px solid #45475a;
+    color: var(--code-text);
+    border: 2px solid var(--code-line);
     border-radius: 6px;
     padding: 4px 12px;
     font-size: 12px;
@@ -33,7 +33,7 @@
 }
 
 .rd-panel {
-    background: #1e1e2e;
+    background: var(--code-bg);
     border-radius: 0;
     padding: 16px;
     display: flex;
@@ -45,7 +45,7 @@
 .rd-panel-label {
     font-size: 11px;
     font-weight: 700;
-    color: #6c7086;
+    color: var(--code-dim);
     text-transform: uppercase;
     letter-spacing: 0.08em;
 }
@@ -72,9 +72,9 @@
     font-size: 17px;
     font-weight: 700;
     border-radius: 7px;
-    border: 2px solid #45475a;
+    border: 2px solid var(--code-line);
     background: #252535;
-    color: #cdd6f4;
+    color: var(--code-text);
 }
 
 .rd-cell.i-cell {
@@ -97,7 +97,7 @@
 
 .rd-idx {
     font-size: 10px;
-    color: #6c7086;
+    color: var(--code-dim);
 }
 
 .rd-ptrs {
@@ -131,7 +131,7 @@
 
 .rd-divider-label {
     font-size: 10px;
-    color: #6c7086;
+    color: var(--code-dim);
 }
 
 .rd-divider-bar {
@@ -153,11 +153,11 @@
 
 .rd-status {
     padding: 8px 16px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border-top: 1px solid #313244;
     border-radius: 0;
     font-size: 13px;
-    color: #a6adc8;
+    color: var(--code-dim);
     min-height: 36px;
     display: flex;
     align-items: center;

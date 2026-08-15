@@ -56,7 +56,7 @@ function PyramidVisualization({ triangle, step, ex }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20, padding: 16 }}>
-      <svg width="100%" height="400" viewBox="0 0 400 400" style={{ border: '1px solid #e2e8f0', borderRadius: 8 }}>
+      <svg width="100%" height="400" viewBox="0 0 400 400" style={{ border: '1px solid var(--text)', borderRadius: 8 }}>
         {triangle.map((row, ri) => {
           const totalWidth = ex.numRows * 30;
           const startX = (400 - (row.length * 30)) / 2;
@@ -83,7 +83,7 @@ function PyramidVisualization({ triangle, step, ex }) {
                       height={24}
                       rx={4}
                       fill={isPrev ? '#fbbf24' : isCur ? '#3b82f6' : '#dbeafe'}
-                      stroke={isPrev ? '#f59e0b' : isCur ? '#0ea5e9' : '#cbd5e1'}
+                      stroke={isPrev ? '#f59e0b' : isCur ? '#0ea5e9' : 'var(--border)'}
                       strokeWidth={isPrev || isCur ? '2' : '1'}
                     />
                     <text
@@ -149,7 +149,7 @@ function PyramidVisualization({ triangle, step, ex }) {
 
         {/* Row labels */}
         {triangle.map((row, ri) => (
-          <text key={`label-${ri}`} x="10" y={50 + ri * 35 + 4} fontSize="11" fill="#94a3b8">
+          <text key={`label-${ri}`} x="10" y={50 + ri * 35 + 4} fontSize="11" fill="var(--text-muted)">
             R{ri}
           </text>
         ))}
@@ -167,7 +167,7 @@ function PyramidVisualization({ triangle, step, ex }) {
         </div>
       )}
 
-      <div style={{ fontSize: 12, color: '#64748b', textAlign: 'center' }}>
+      <div style={{ fontSize: 12, color: 'var(--text-muted)', textAlign: 'center' }}>
         Building row {curRow} • {curRow + 1} element{curRow !== 0 ? 's' : ''}
       </div>
     </div>
@@ -178,7 +178,7 @@ function VisualizationPanel({ triangle, step, ex, applyEx, numRowsInput, setNumR
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 12 }}>
           {EXAMPLES.map(e => (
             <button
@@ -187,10 +187,10 @@ function VisualizationPanel({ triangle, step, ex, applyEx, numRowsInput, setNumR
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9'
+                backgroundColor: 'var(--surface2)'
               }}
             >
               {e.label}
@@ -198,7 +198,7 @@ function VisualizationPanel({ triangle, step, ex, applyEx, numRowsInput, setNumR
           ))}
         </div>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-          <label style={{ fontSize: 12, fontWeight: 500, color: '#475569' }}>numRows:</label>
+          <label style={{ fontSize: 12, fontWeight: 500, color: 'var(--text-muted)' }}>numRows:</label>
           <input
             value={numRowsInput}
             onChange={(e) => {
@@ -210,7 +210,7 @@ function VisualizationPanel({ triangle, step, ex, applyEx, numRowsInput, setNumR
               padding: '6px 8px',
               fontSize: 12,
               borderRadius: 4,
-              border: '1px solid #cbd5e1',
+              border: '1px solid var(--border)',
               width: '60px',
             }}
             type="number"

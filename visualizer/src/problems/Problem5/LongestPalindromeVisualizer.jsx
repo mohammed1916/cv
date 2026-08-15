@@ -242,7 +242,7 @@ export default function LongestPalindromeVisualizer() {
             </div>
 
             <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center' }}>
-              <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace' }}>s=</span>
+              <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>s=</span>
               <input
                 value={sInput}
                 onChange={(e) => { setSInput(e.target.value); handleReset() }}
@@ -305,7 +305,7 @@ export default function LongestPalindromeVisualizer() {
               <div className={`lpal-result-val \${step?.phase === 'odd_update' || step?.phase === 'even_update' ? 'highlight' : ''}`}>
                 "{step?.res || ''}"
               </div>
-              {step?.res === "" && <span style={{ color: '#475569', fontSize: 13, fontStyle: 'italic', marginTop: 8 }}>Empty</span>}
+              {step?.res === "" && <span style={{ color: 'var(--text-muted)', fontSize: 13, fontStyle: 'italic', marginTop: 8 }}>Empty</span>}
             </div>
 
             <div className="lpal-result-box len">

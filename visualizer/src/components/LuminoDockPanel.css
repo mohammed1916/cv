@@ -28,6 +28,16 @@
   background: var(--surface, var(--surface));
 }
 
+/* Status is deliberately dense: the message is visible without taking space
+   away from the code trace or the animation. */
+.lumino-panel-widget:has([data-panel-id='status']) [data-panel-id='status'] {
+  overflow: hidden !important;
+}
+
+.lumino-panel-widget:has([data-panel-id='status']) [data-panel-id='status'] > * {
+  min-height: 0;
+}
+
 /* ── Per-panel minimize/restore button (top-right corner) ── */
 .lumino-panel-minbtn {
   position: absolute;

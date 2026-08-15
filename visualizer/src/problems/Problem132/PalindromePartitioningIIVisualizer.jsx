@@ -144,7 +144,7 @@ export default function PalindromePartitioningIIVisualizer() {
           padding: '8px 12px',
           fontSize: 12,
           borderRadius: 4,
-          border: '1px solid #cbd5e1',
+          border: '1px solid var(--border)',
           marginBottom: '8px',
           width: '100%',
           boxSizing: 'border-box',

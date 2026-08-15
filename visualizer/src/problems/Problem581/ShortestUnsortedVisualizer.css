@@ -32,9 +32,9 @@
   grid-template-columns: 1fr 1fr;
   gap: 10px;
   padding: 10px;
-  background-color: #1e293b;
+  background-color: var(--surface2);
   border-radius: 6px;
-  border: 1px solid #475569;
+  border: 1px solid var(--text-muted);
   margin-top: 8px;
 }
 

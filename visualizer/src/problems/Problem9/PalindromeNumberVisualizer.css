@@ -19,7 +19,7 @@
         rgba(15, 23, 42, 0.98),
         rgba(10, 16, 28, 0.98)
     );
-    border: 1px solid #334155;
+    border: 1px solid var(--border);
     border-radius: 18px;
     padding: 16px;
     box-shadow: 0 16px 40px rgba(2, 6, 23, 0.26);
@@ -72,9 +72,9 @@
 }
 
 .pn-example-btn {
-    border: 1px solid #334155;
+    border: 1px solid var(--border);
     background: rgba(15, 23, 42, 0.55);
-    color: #cbd5e1;
+    color: var(--border);
     border-radius: 999px;
     padding: 7px 12px;
     cursor: pointer;
@@ -108,7 +108,7 @@
     background: rgba(2, 6, 23, 0.55);
     border: 1px solid #243244;
     border-radius: 12px;
-    color: #f8fafc;
+    color: var(--surface);
     padding: 10px 12px;
     font-size: 15px;
     outline: none;
@@ -198,7 +198,7 @@
 }
 
 .pn-note-text code {
-    color: #e2e8f0;
+    color: var(--text);
     background: rgba(148, 163, 184, 0.12);
     padding: 1px 5px;
     border-radius: 6px;
@@ -323,7 +323,7 @@
 
 .pn-tape.empty {
     justify-content: center;
-    color: #64748b;
+    color: var(--text-muted);
 }
 
 .pn-sign,
@@ -343,8 +343,8 @@
     justify-content: center;
     border-radius: 12px;
     background: rgba(15, 23, 42, 0.95);
-    border: 1px solid #334155;
-    color: #f8fafc;
+    border: 1px solid var(--border);
+    color: var(--surface);
     font-family:
         ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-weight: 800;
@@ -367,7 +367,7 @@
     left: 50%;
     transform: translateX(-50%);
     font-size: 10px;
-    color: #64748b;
+    color: var(--text-muted);
 }
 
 .pn-pointer {
@@ -516,9 +516,9 @@
 .pn-status {
     padding: 12px 14px;
     border-radius: 14px;
-    border: 1px solid #334155;
+    border: 1px solid var(--border);
     background: rgba(15, 23, 42, 0.72);
-    color: #cbd5e1;
+    color: var(--border);
 }
 
 .pn-status.success {
@@ -542,7 +542,7 @@
 }
 
 .pn-badge.neutral {
-    color: #cbd5e1;
+    color: var(--border);
     background: rgba(100, 116, 139, 0.12);
     border-color: rgba(100, 116, 139, 0.25);
 }

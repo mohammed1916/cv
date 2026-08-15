@@ -119,7 +119,7 @@ function VisualizationPanel({ board, hand, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Game Board (Circular)</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Game Board (Circular)</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', padding: 12, backgroundColor: '#f5f5f5', borderRadius: 6 }}>
           {board.split('').map((color, idx) => (
             <motion.div
@@ -128,7 +128,7 @@ function VisualizationPanel({ board, hand, step, applyEx }) {
                 width: 32,
                 height: 32,
                 borderRadius: '50%',
-                backgroundColor: colorMap[color] || '#cbd5e1',
+                backgroundColor: colorMap[color] || 'var(--border)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -145,7 +145,7 @@ function VisualizationPanel({ board, hand, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Hand</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Hand</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {hand.split('').map((color, idx) => (
             <motion.div
@@ -154,7 +154,7 @@ function VisualizationPanel({ board, hand, step, applyEx }) {
                 width: 32,
                 height: 32,
                 borderRadius: '50%',
-                backgroundColor: colorMap[color] || '#cbd5e1',
+                backgroundColor: colorMap[color] || 'var(--border)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',

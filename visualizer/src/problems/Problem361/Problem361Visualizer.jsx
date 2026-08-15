@@ -295,10 +295,10 @@ export default function Problem361Visualizer() {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid var(--border)',
                   cursor: 'pointer',
                   fontSize: 12,
-                  backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
+                  backgroundColor: exIdx === i ? '#dbeafe' : 'var(--surface2)',
                   fontWeight: exIdx === i ? 600 : 400,
                 }}
               >
@@ -309,11 +309,11 @@ export default function Problem361Visualizer() {
 
           {step && (
             <>
-              <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11, fontWeight: 600 }}>
+              <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 11, fontWeight: 600 }}>
                 {step.message}
               </div>
 
-              <svg width="100%" height={gridHeight} viewBox={`0 0 ${gridWidth} ${gridHeight}`} style={{ border: '1px solid #e2e8f0', borderRadius: 6, backgroundColor: '#fafafa' }}>
+              <svg width="100%" height={gridHeight} viewBox={`0 0 ${gridWidth} ${gridHeight}`} style={{ border: '1px solid var(--text)', borderRadius: 6, backgroundColor: '#fafafa' }}>
                 {/* Grid cells */}
                 {grid.map((row, i) =>
                   row.map((cell, j) => {

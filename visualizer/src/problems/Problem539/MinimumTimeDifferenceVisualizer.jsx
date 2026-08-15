@@ -144,11 +144,11 @@ function VisualizationPanel({ timePoints, step, applyExample, examples }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -168,12 +168,12 @@ function VisualizationPanel({ timePoints, step, applyExample, examples }) {
                 style={{
                   padding: '10px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
-                  backgroundColor: '#334155',
+                  border: '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--border)',
                   fontFamily: 'monospace',
                   fontSize: 12,
                   fontWeight: 600,
-                  color: '#e2e8f0',
+                  color: 'var(--text)',
                 }}
               >
                 {t}
@@ -200,8 +200,8 @@ function VisualizationPanel({ timePoints, step, applyExample, examples }) {
                       fontFamily: 'monospace',
                       fontSize: 12,
                       fontWeight: 600,
-                      backgroundColor: isCurrent ? '#38bdf8' : '#334155',
-                      borderColor: isCurrent ? '#0ea5e9' : '#64748b',
+                      backgroundColor: isCurrent ? '#38bdf8' : 'var(--border)',
+                      borderColor: isCurrent ? '#0ea5e9' : 'var(--text-muted)',
                       color: '#5577a4',
                     }}
                     animate={{ scale: isCurrent ? 1.15 : 1 }}
@@ -216,7 +216,7 @@ function VisualizationPanel({ timePoints, step, applyExample, examples }) {
       )}
 
       {step?.currentDiff !== undefined && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #a78bfa' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Current Comparison</div>
           <div style={{ fontSize: 12, color: '#5577a4', fontFamily: 'monospace' }}>
             Difference: {step.currentDiff} min
@@ -225,7 +225,7 @@ function VisualizationPanel({ timePoints, step, applyExample, examples }) {
       )}
 
       {step?.wrapDiff !== undefined && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f59e0b' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #f59e0b' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', marginBottom: 6 }}>Wrap-Around</div>
           <div style={{ fontSize: 12, color: '#5577a4', fontFamily: 'monospace' }}>
             1440 - {step.minutes[step.minutes.length - 1]} + {step.minutes[0]} = {step.wrapDiff} min
@@ -237,7 +237,7 @@ function VisualizationPanel({ timePoints, step, applyExample, examples }) {
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #22c55e',
             textAlign: 'center',
@@ -246,7 +246,7 @@ function VisualizationPanel({ timePoints, step, applyExample, examples }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Minimum Difference</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Minimum Difference</div>
           <div style={{ fontSize: 24, fontWeight: 'bold', color: '#178740' }}>{step.result} min</div>
         </motion.div>
       )}
@@ -331,9 +331,9 @@ export default function MinimumTimeDifferenceVisualizer() {
                   height: 60,
                   padding: '8px',
                   borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid #475569',
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                   fontSize: 12,
                   resize: 'vertical',

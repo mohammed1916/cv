@@ -188,10 +188,10 @@ export default function Problem376Visualizer() {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid var(--border)',
                   cursor: 'pointer',
                   fontSize: 12,
-                  backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
+                  backgroundColor: exIdx === i ? '#dbeafe' : 'var(--surface2)',
                 }}
               >
                 {e.label}
@@ -201,7 +201,7 @@ export default function Problem376Visualizer() {
 
           {step && (
             <>
-              <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
+              <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 11 }}>
                 <div style={{ fontWeight: 600, marginBottom: 8 }}>{step.message}</div>
               </div>
 

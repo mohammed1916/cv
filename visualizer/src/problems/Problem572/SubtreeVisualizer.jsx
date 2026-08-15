@@ -102,7 +102,7 @@ function TreeViz({ root, checkingId, matchId, foundId, label, accent }) {
                     {edges.map((e) => {
                         const pn = layout.get(e.from); const cn = layout.get(e.to)
                         if (!pn || !cn) return null
-                        return <line key={`${e.from}-${e.to}`} x1={pn.x} y1={pn.y} x2={cn.x} y2={cn.y} stroke="#45475a" strokeWidth={2} />
+                        return <line key={`${e.from}-${e.to}`} x1={pn.x} y1={pn.y} x2={cn.x} y2={cn.y} stroke="var(--code-line)" strokeWidth={2} />
                     })}
                 </svg>
                 {nodes.map((nd) => {

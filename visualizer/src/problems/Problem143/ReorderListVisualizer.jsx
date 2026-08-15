@@ -143,12 +143,12 @@ export default function ReorderListVisualizer() {
           />
         <div className="rl-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, overflow: 'auto' }}>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                {EXAMPLES.map((ex, i) => <button key={ex.label} onClick={() => applyExample(i)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: sel === i ? '#dbeafe' : '#f1f5f9' }}>{ex.label}</button>)}
+                {EXAMPLES.map((ex, i) => <button key={ex.label} onClick={() => applyExample(i)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: sel === i ? '#dbeafe' : 'var(--surface2)' }}>{ex.label}</button>)}
             </div>
-            <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+            <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, display: 'flex', gap: 2, flexWrap: 'wrap' }}>
                 {displayList.map((v, i) => (
                     <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                        <motion.div animate={{ scale: i === slow || i === fast ? 1.15 : 1 }} style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#dbeafe', border: '1px solid #0ea5e9', borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: '#1e293b' }}>{v}</motion.div>
+                        <motion.div animate={{ scale: i === slow || i === fast ? 1.15 : 1 }} style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#dbeafe', border: '1px solid #0ea5e9', borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: 'var(--surface2)' }}>{v}</motion.div>
                         {i < displayList.length - 1 && <span style={{ color: '#5a779b' }}>→</span>}
                     </div>
                 ))}

@@ -25,8 +25,8 @@
 
 .ri-chip {
     background: #313244;
-    color: #cdd6f4;
-    border: 2px solid #45475a;
+    color: var(--code-text);
+    border: 2px solid var(--code-line);
     border-radius: 6px;
     padding: 4px 12px;
     font-size: 12px;
@@ -44,7 +44,7 @@
 }
 
 .ri-panel {
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: none;
     border-radius: 0;
     padding: 12px 14px;
@@ -57,7 +57,7 @@
 .ri-panel-label {
     font-size: 11px;
     font-weight: 700;
-    color: #6c7086;
+    color: var(--code-dim);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-bottom: 10px;
@@ -78,8 +78,8 @@
     font-weight: 700;
     border-radius: 8px;
     background: #313244;
-    border: 2px solid #45475a;
-    color: #cdd6f4;
+    border: 2px solid var(--code-line);
+    color: var(--code-text);
 }
 
 .ri-cell.row-hi {
@@ -102,11 +102,11 @@
 
 .ri-status {
     padding: 8px 12px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: none;
     border-radius: 0;
     font-size: 13px;
-    color: #a6adc8;
+    color: var(--code-dim);
     height: 100%;
     display: flex;
     align-items: center;

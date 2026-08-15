@@ -1,1 +1,1 @@
-.problem-shell{width:100%;height:100%;display:flex;flex-direction:column;background:#1e1e2e;color:#cdd6f4}
+.problem-shell{width:100%;height:100%;display:flex;flex-direction:column;background:var(--code-bg);color:var(--code-text)}

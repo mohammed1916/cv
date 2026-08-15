@@ -109,7 +109,7 @@ function VisualizationPanel({ nums, step, applyEx }) {
       )}
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -118,10 +118,10 @@ function VisualizationPanel({ nums, step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9',
+                backgroundColor: 'var(--surface2)',
               }}
             >
               {e.label}
@@ -138,8 +138,8 @@ function VisualizationPanel({ nums, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Array</div>
-        <div style={{ display: 'flex', gap: 3, flexWrap: 'wrap', padding: 10, backgroundColor: '#f9fafb', borderRadius: 6, border: '1px solid #cbd5e1' }}>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Array</div>
+        <div style={{ display: 'flex', gap: 3, flexWrap: 'wrap', padding: 10, backgroundColor: '#f9fafb', borderRadius: 6, border: '1px solid var(--border)' }}>
           {nums.map((num, idx) => (
             <motion.div
               key={idx}
@@ -147,14 +147,14 @@ function VisualizationPanel({ nums, step, applyEx }) {
                 width: 45,
                 height: 45,
                 borderRadius: 4,
-                backgroundColor: step?.i === idx || step?.j === idx ? '#dbeafe' : '#f1f5f9',
-                border: step?.i === idx ? '3px solid #0284c7' : step?.j === idx ? '2px solid #06b6d4' : '1px solid #cbd5e1',
+                backgroundColor: step?.i === idx || step?.j === idx ? '#dbeafe' : 'var(--surface2)',
+                border: step?.i === idx ? '3px solid #0284c7' : step?.j === idx ? '2px solid #06b6d4' : '1px solid var(--border)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 fontSize: 12,
                 fontWeight: 700,
-                color: step?.i === idx ? '#0c4a6e' : step?.j === idx ? '#0e7490' : '#475569',
+                color: step?.i === idx ? '#0c4a6e' : step?.j === idx ? '#0e7490' : 'var(--text-muted)',
               }}
               animate={{ scale: step?.i === idx ? 1.2 : step?.j === idx ? 1.1 : 1 }}
             >

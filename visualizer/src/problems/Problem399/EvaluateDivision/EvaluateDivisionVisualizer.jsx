@@ -238,10 +238,10 @@ export default function EvaluateDivisionVisualizer() {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid var(--border)',
                   cursor: 'pointer',
                   fontSize: 12,
-                  backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
+                  backgroundColor: exIdx === i ? '#dbeafe' : 'var(--surface2)',
                 }}
               >
                 {e.label}
@@ -251,11 +251,11 @@ export default function EvaluateDivisionVisualizer() {
 
           {step && (
             <>
-              <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
+              <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 11 }}>
                 <div style={{ fontWeight: 600, marginBottom: 8 }}>{step.message}</div>
               </div>
 
-              <svg style={{ width: '100%', height: 280, border: '1px solid #e2e8f0', borderRadius: 6, backgroundColor: '#fafbfc' }} viewBox="0 0 400 300">
+              <svg style={{ width: '100%', height: 280, border: '1px solid var(--text)', borderRadius: 6, backgroundColor: '#fafbfc' }} viewBox="0 0 400 300">
                 {Object.entries(step.graph).map(([from, edges]) =>
                   edges.map((edge, idx) => {
                     const [to, weight] = edge
@@ -273,7 +273,7 @@ export default function EvaluateDivisionVisualizer() {
                           y1={posFrom.y}
                           x2={posTo.x}
                           y2={posTo.y}
-                          stroke={isHighlighted ? '#0ea5e9' : '#cbd5e1'}
+                          stroke={isHighlighted ? '#0ea5e9' : 'var(--border)'}
                           strokeWidth={isHighlighted ? 3 : 2}
                           animate={{ strokeWidth: isHighlighted ? 3 : 2 }}
                         />
@@ -283,7 +283,7 @@ export default function EvaluateDivisionVisualizer() {
                           textAnchor="middle"
                           fontSize="11"
                           fontWeight={isHighlighted ? 700 : 500}
-                          fill={isHighlighted ? '#0ea5e9' : '#64748b'}
+                          fill={isHighlighted ? '#0ea5e9' : 'var(--text-muted)'}
                         >
                           {weight.toFixed(2)}
                         </text>
@@ -305,8 +305,8 @@ export default function EvaluateDivisionVisualizer() {
                         cx={pos.x}
                         cy={pos.y}
                         r={28}
-                        fill={isInPath ? '#0ea5e9' : isVisited ? '#dbeafe' : '#f1f5f9'}
-                        stroke={isTarget ? '#dc2626' : isStart ? '#16a34a' : isVisited ? '#0284c7' : '#cbd5e1'}
+                        fill={isInPath ? '#0ea5e9' : isVisited ? '#dbeafe' : 'var(--surface2)'}
+                        stroke={isTarget ? '#dc2626' : isStart ? '#16a34a' : isVisited ? '#0284c7' : 'var(--border)'}
                         strokeWidth={isInPath ? 3 : 2}
                         animate={{
                           r: isInPath ? 32 : 28,
@@ -319,7 +319,7 @@ export default function EvaluateDivisionVisualizer() {
                         textAnchor="middle"
                         fontSize="14"
                         fontWeight="700"
-                        fill="#1e293b"
+                        fill="var(--surface2)"
                       >
                         {node}
                       </text>

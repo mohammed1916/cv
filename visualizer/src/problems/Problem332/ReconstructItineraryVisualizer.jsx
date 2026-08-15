@@ -181,8 +181,8 @@ function generateSteps(tickets) {
 
 const ACCENT = '#38bdf8'
 const GREEN = '#22c55e'
-const TEXT = '#e2e8f0'
-const MUTED = '#64748b'
+const TEXT = 'var(--text)'
+const MUTED = 'var(--text-muted)'
 
 const chipBase = {
   display: 'inline-flex',
@@ -193,8 +193,8 @@ const chipBase = {
   fontSize: 13,
   fontWeight: 600,
   fontFamily: 'monospace',
-  border: '1px solid #334155',
-  background: '#1e293b',
+  border: '1px solid var(--border)',
+  background: 'var(--surface2)',
   color: TEXT,
 }
 
@@ -321,8 +321,8 @@ export default function ReconstructItineraryVisualizer() {
                           key={`${from}-${to}-${i}`}
                           style={{
                             ...chipBase,
-                            borderColor: hot ? ACCENT : '#334155',
-                            background: hot ? '#38bdf822' : '#1e293b',
+                            borderColor: hot ? ACCENT : 'var(--border)',
+                            background: hot ? '#38bdf822' : 'var(--surface2)',
                             color: hot ? ACCENT : TEXT,
                           }}
                         >
@@ -351,7 +351,7 @@ export default function ReconstructItineraryVisualizer() {
                             gap: 8,
                             padding: '8px 10px',
                             borderRadius: 8,
-                            border: `1px solid ${isCurrent ? ACCENT : '#1e293b'}`,
+                            border: `1px solid ${isCurrent ? ACCENT : 'var(--surface2)'}`,
                             background: isCurrent ? '#38bdf814' : 'transparent',
                           }}
                         >
@@ -359,8 +359,8 @@ export default function ReconstructItineraryVisualizer() {
                             style={{
                               ...chipBase,
                               minWidth: 44,
-                              borderColor: isCurrent ? ACCENT : '#475569',
-                              background: isCurrent ? ACCENT : '#0f172a',
+                              borderColor: isCurrent ? ACCENT : 'var(--text-muted)',
+                              background: isCurrent ? ACCENT : 'var(--code-bg)',
                               color: isCurrent ? '#0b1120' : TEXT,
                             }}
                           >
@@ -378,8 +378,8 @@ export default function ReconstructItineraryVisualizer() {
                                     key={`${ap}-${d}-${i}`}
                                     style={{
                                       ...chipBase,
-                                      borderColor: used ? GREEN : '#334155',
-                                      background: used ? '#22c55e22' : '#1e293b',
+                                      borderColor: used ? GREEN : 'var(--border)',
+                                      background: used ? '#22c55e22' : 'var(--surface2)',
                                       color: used ? GREEN : TEXT,
                                     }}
                                   >
@@ -404,7 +404,7 @@ export default function ReconstructItineraryVisualizer() {
                       gap: 6,
                       padding: 8,
                       borderRadius: 8,
-                      border: '1px solid #1e293b',
+                      border: '1px solid var(--surface2)',
                       minHeight: 60,
                     }}
                   >
@@ -419,8 +419,8 @@ export default function ReconstructItineraryVisualizer() {
                           style={{
                             ...chipBase,
                             justifyContent: 'space-between',
-                            borderColor: isTop ? ACCENT : '#334155',
-                            background: isTop ? '#38bdf822' : '#1e293b',
+                            borderColor: isTop ? ACCENT : 'var(--border)',
+                            background: isTop ? '#38bdf822' : 'var(--surface2)',
                             color: isTop ? ACCENT : TEXT,
                           }}
                         >

@@ -70,7 +70,7 @@ function VisualizationPanel({ nums, target, step, applyEx }) {
       <div style={{ padding: 12, backgroundColor: '#fce7f3', borderRadius: 6, borderLeft: '4px solid #ec4899' }}>
         <div style={{ fontSize: 12, color: '#831843', fontStyle: 'italic' }}>Find count of ways to assign +/- operators to nums to reach target.</div>
       </div>
-      <div><div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Array: [{nums.join(', ')}], Target: {target}</div></div>
+      <div><div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Array: [{nums.join(', ')}], Target: {target}</div></div>
       <motion.div style={{ padding: 16, backgroundColor: '#fce7f3', borderRadius: 6, border: '2px solid #ec4899', textAlign: 'center' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
         <div style={{ fontSize: 13, fontWeight: 600, color: '#831843' }}>Ways to Reach Target</div>
         <div style={{ fontSize: 32, fontWeight: 'bold', color: '#e0177a' }}>{step?.count ?? 0}</div>

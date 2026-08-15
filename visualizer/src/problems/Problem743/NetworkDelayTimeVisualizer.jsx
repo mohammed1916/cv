@@ -231,7 +231,7 @@ export default function NetworkDelayTimeVisualizer() {
             refY="3"
             orient="auto"
           >
-            <polygon points="0 0, 10 3, 0 6" fill="#64748b" />
+            <polygon points="0 0, 10 3, 0 6" fill="var(--text-muted)" />
           </marker>
           <marker
             id="arrowhead-highlight"
@@ -259,7 +259,7 @@ export default function NetworkDelayTimeVisualizer() {
                 y1={pos1.y}
                 x2={pos2.x}
                 y2={pos2.y}
-                stroke={isRelaxing ? '#0ea5e9' : '#cbd5e1'}
+                stroke={isRelaxing ? '#0ea5e9' : 'var(--border)'}
                 strokeWidth={isRelaxing ? 3 : 2}
                 markerEnd={isRelaxing ? 'url(#arrowhead-highlight)' : 'url(#arrowhead)'}
                 opacity={isRelaxing ? 1 : 0.7}
@@ -270,7 +270,7 @@ export default function NetworkDelayTimeVisualizer() {
                 textAnchor="middle"
                 fontSize="12"
                 fontWeight="600"
-                fill="#475569"
+                fill="var(--text-muted)"
               >
                 {w}
               </text>
@@ -291,8 +291,8 @@ export default function NetworkDelayTimeVisualizer() {
                 cx={pos.x}
                 cy={pos.y}
                 r={24}
-                fill={isCurrent ? '#0ea5e9' : isVisited ? '#86efac' : '#f1f5f9'}
-                stroke={isCurrent ? '#0284c7' : isVisited ? '#22c55e' : '#cbd5e1'}
+                fill={isCurrent ? '#0ea5e9' : isVisited ? '#86efac' : 'var(--surface2)'}
+                stroke={isCurrent ? '#0284c7' : isVisited ? '#22c55e' : 'var(--border)'}
                 strokeWidth={2}
                 animate={{ scale: isCurrent ? 1.2 : 1 }}
               />
@@ -302,7 +302,7 @@ export default function NetworkDelayTimeVisualizer() {
                 textAnchor="middle"
                 fontSize="14"
                 fontWeight="700"
-                fill={isCurrent || isVisited ? '#fff' : '#1e293b'}
+                fill={isCurrent || isVisited ? '#fff' : 'var(--surface2)'}
               >
                 {node}
               </text>
@@ -312,7 +312,7 @@ export default function NetworkDelayTimeVisualizer() {
                 textAnchor="middle"
                 fontSize="11"
                 fontWeight="600"
-                fill="#475569"
+                fill="var(--text-muted)"
               >
                 d:{distance === Infinity ? '∞' : distance}
               </text>
@@ -351,7 +351,7 @@ export default function NetworkDelayTimeVisualizer() {
 
           {step && (
             <>
-              <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11, fontWeight: 500 }}>
+              <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 11, fontWeight: 500 }}>
                 {step.message}
               </div>
 
@@ -359,8 +359,8 @@ export default function NetworkDelayTimeVisualizer() {
                 {renderGraphVisualization()}
               </div>
 
-              <div style={{ padding: 8, backgroundColor: '#f1f5f9', borderRadius: 6, fontSize: 11 }}>
-                <div style={{ fontWeight: 600, marginBottom: 8, color: '#0f172a' }}>Distances:</div>
+              <div style={{ padding: 8, backgroundColor: 'var(--surface2)', borderRadius: 6, fontSize: 11 }}>
+                <div style={{ fontWeight: 600, marginBottom: 8, color: 'var(--code-bg)' }}>Distances:</div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                   {Array.from({ length: n }, (_, i) => i + 1).map((node) => {
                     const dist = step.dist[node]
@@ -372,11 +372,11 @@ export default function NetworkDelayTimeVisualizer() {
                         style={{
                           padding: '6px 10px',
                           borderRadius: 4,
-                          border: '1px solid #cbd5e1',
-                          backgroundColor: isVisited ? '#d1fae5' : '#e2e8f0',
+                          border: '1px solid var(--border)',
+                          backgroundColor: isVisited ? '#d1fae5' : 'var(--text)',
                           fontSize: 11,
                           fontWeight: 600,
-                          color: '#0f172a',
+                          color: 'var(--code-bg)',
                         }}
                       >
                         {node}: {dist === Infinity ? '∞' : dist}
@@ -386,11 +386,11 @@ export default function NetworkDelayTimeVisualizer() {
                 </div>
               </div>
 
-              <div style={{ padding: 8, backgroundColor: '#f1f5f9', borderRadius: 6, fontSize: 11 }}>
-                <div style={{ fontWeight: 600, marginBottom: 8, color: '#0f172a' }}>Heap:</div>
+              <div style={{ padding: 8, backgroundColor: 'var(--surface2)', borderRadius: 6, fontSize: 11 }}>
+                <div style={{ fontWeight: 600, marginBottom: 8, color: 'var(--code-bg)' }}>Heap:</div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
                   {step.heap.length === 0 ? (
-                    <span style={{ color: '#64748b', fontSize: 10 }}>Empty</span>
+                    <span style={{ color: 'var(--text-muted)', fontSize: 10 }}>Empty</span>
                   ) : (
                     step.heap.map((item, idx) => (
                       <div
@@ -398,7 +398,7 @@ export default function NetworkDelayTimeVisualizer() {
                         style={{
                           padding: '4px 8px',
                           borderRadius: 3,
-                          border: '1px solid #cbd5e1',
+                          border: '1px solid var(--border)',
                           backgroundColor: '#fff',
                           fontSize: 10,
                           fontFamily: 'monospace',

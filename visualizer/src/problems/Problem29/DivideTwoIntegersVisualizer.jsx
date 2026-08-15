@@ -150,11 +150,11 @@ function VisualizationPanel({ dividend, divisor, step, applyExample, examples })
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -165,23 +165,23 @@ function VisualizationPanel({ dividend, divisor, step, applyExample, examples })
       )}
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Dividend</div>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Dividend</div>
           <div style={{ fontSize: 16, fontWeight: 700, color: '#067db1' }}>{dividend}</div>
         </div>
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Divisor</div>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Divisor</div>
           <div style={{ fontSize: 16, fontWeight: 700, color: '#067db1' }}>{divisor}</div>
         </div>
       </div>
 
       {step?.quotient !== undefined && (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-          <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}>
+          <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #a78bfa' }}>
             <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Quotient</div>
             <div style={{ fontSize: 16, fontWeight: 700, color: '#7957fa' }}>{step.quotient}</div>
           </div>
-          <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}>
+          <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #a78bfa' }}>
             <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Remainder</div>
             <div style={{ fontSize: 16, fontWeight: 700, color: '#7957fa' }}>{step.dividend}</div>
           </div>
@@ -189,7 +189,7 @@ function VisualizationPanel({ dividend, divisor, step, applyExample, examples })
       )}
 
       {step?.tempDivisor !== undefined && step.phase === 'find_multiple' && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f59e0b' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #f59e0b' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', marginBottom: 6 }}>Finding Multiple</div>
           <div style={{ fontSize: 12, color: '#5577a4', fontFamily: 'monospace' }}>
             Temp Divisor: <span style={{ color: '#178740', fontWeight: 600 }}>{step.tempDivisor}</span>
@@ -202,7 +202,7 @@ function VisualizationPanel({ dividend, divisor, step, applyExample, examples })
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #22c55e',
             textAlign: 'center',
@@ -211,7 +211,7 @@ function VisualizationPanel({ dividend, divisor, step, applyExample, examples })
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Result</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Result</div>
           <div style={{ fontSize: 24, fontWeight: 'bold', color: '#178740' }}>{step.result}</div>
         </motion.div>
       )}
@@ -289,9 +289,9 @@ export default function DivideTwoIntegersVisualizer() {
                     width: '100%',
                     padding: '8px',
                     borderRadius: 4,
-                    border: '1px solid #475569',
-                    backgroundColor: '#1e293b',
-                    color: '#e2e8f0',
+                    border: '1px solid var(--text-muted)',
+                    backgroundColor: 'var(--surface2)',
+                    color: 'var(--text)',
                     fontFamily: 'monospace',
                     fontSize: 12,
                   }}
@@ -310,9 +310,9 @@ export default function DivideTwoIntegersVisualizer() {
                     width: '100%',
                     padding: '8px',
                     borderRadius: 4,
-                    border: '1px solid #475569',
-                    backgroundColor: '#1e293b',
-                    color: '#e2e8f0',
+                    border: '1px solid var(--text-muted)',
+                    backgroundColor: 'var(--surface2)',
+                    color: 'var(--text)',
                     fontFamily: 'monospace',
                     fontSize: 12,
                   }}

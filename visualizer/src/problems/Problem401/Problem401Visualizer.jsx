@@ -190,7 +190,7 @@ export default function Problem401Visualizer() {
               key={`h${idx}`}
               style={{
                 width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                backgroundColor: bit === '1' ? '#10b981' : '#334155',
+                backgroundColor: bit === '1' ? '#10b981' : 'var(--border)',
                 color: '#5577a4', borderRadius: '3px', fontSize: '11px', fontWeight: 'bold'
               }}
             >
@@ -204,7 +204,7 @@ export default function Problem401Visualizer() {
               key={`m${idx}`}
               style={{
                 width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                backgroundColor: bit === '1' ? '#10b981' : '#334155',
+                backgroundColor: bit === '1' ? '#10b981' : 'var(--border)',
                 color: '#5577a4', borderRadius: '3px', fontSize: '11px', fontWeight: 'bold'
               }}
             >
@@ -220,7 +220,7 @@ export default function Problem401Visualizer() {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: '12px' }}>
       <div style={{ display: 'flex', gap: 16, flex: 1 }}>
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <div style={{ display: 'flex', gap: 12, backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
+          <div style={{ display: 'flex', gap: 12, backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px' }}>
             <div style={{ width: '120px' }}>
               <div style={{ color: '#627794', fontSize: '13px', marginBottom: '6px' }}>LEDs Count (n)</div>
               <input
@@ -231,8 +231,8 @@ export default function Problem401Visualizer() {
                 min="0"
                 max="11"
                 style={{
-                  width: '100%', padding: '8px', backgroundColor: '#0f172a', color: '#e2e8f0',
-                  border: '1px solid #334155', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
+                  width: '100%', padding: '8px', backgroundColor: 'var(--code-bg)', color: 'var(--text)',
+                  border: '1px solid var(--border)', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
                 }}
               />
             </div>
@@ -248,7 +248,7 @@ export default function Problem401Visualizer() {
                 key={ex.label}
                 onClick={() => applyExample(ex)}
                 style={{
-                  padding: '6px 12px', backgroundColor: '#334155', color: '#e2e8f0',
+                  padding: '6px 12px', backgroundColor: 'var(--border)', color: 'var(--text)',
                   border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '12px'
                 }}
               >
@@ -258,7 +258,7 @@ export default function Problem401Visualizer() {
           </div>
 
           {step?.currentH !== undefined && step?.currentM !== undefined && (
-            <div style={{ backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
+            <div style={{ backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px' }}>
               <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>
                 Current Time: {step.currentH}:{step.currentM < 10 ? '0' + step.currentM : step.currentM}
               </div>
@@ -271,12 +271,12 @@ export default function Problem401Visualizer() {
             </div>
           )}
 
-          <div style={{ flex: 1, backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: 12, overflow: 'auto' }}>
+          <div style={{ flex: 1, backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: 12, overflow: 'auto' }}>
             <div>
               <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>Valid Times ({step?.validTimes?.length || 0})</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 4, maxHeight: '200px', overflow: 'auto' }}>
                 {step?.validTimes?.length === 0 ? (
-                  <div style={{ color: '#64748b', fontSize: '12px' }}>No valid times yet</div>
+                  <div style={{ color: 'var(--text-muted)', fontSize: '12px' }}>No valid times yet</div>
                 ) : (
                   step?.validTimes?.map((time, idx) => (
                     <motion.div
@@ -284,7 +284,7 @@ export default function Problem401Visualizer() {
                       initial={{ x: -10, opacity: 0 }}
                       animate={{ x: 0, opacity: 1 }}
                       style={{
-                        backgroundColor: '#334155', padding: '6px 8px', borderRadius: '4px',
+                        backgroundColor: 'var(--border)', padding: '6px 8px', borderRadius: '4px',
                         color: '#11c589', fontFamily: 'monospace', fontWeight: 'bold', fontSize: '12px'
                       }}
                     >
@@ -296,12 +296,12 @@ export default function Problem401Visualizer() {
             </div>
 
             {step?.totalChecked !== undefined && (
-              <div style={{ backgroundColor: '#334155', padding: '8px', borderRadius: '4px' }}>
-                <div style={{ color: '#64748b', fontSize: '12px' }}>Progress</div>
+              <div style={{ backgroundColor: 'var(--border)', padding: '8px', borderRadius: '4px' }}>
+                <div style={{ color: 'var(--text-muted)', fontSize: '12px' }}>Progress</div>
                 <div style={{ color: '#0c865d', fontSize: '14px', fontWeight: 'bold', marginTop: '4px' }}>
                   {step.totalChecked} / 720 combinations checked
                 </div>
-                <div style={{ width: '100%', height: '4px', backgroundColor: '#1e293b', borderRadius: '2px', marginTop: '4px', overflow: 'hidden' }}>
+                <div style={{ width: '100%', height: '4px', backgroundColor: 'var(--surface2)', borderRadius: '2px', marginTop: '4px', overflow: 'hidden' }}>
                   <div style={{
                     height: '100%', backgroundColor: '#10b981',
                     width: `${(step.totalChecked / 720) * 100}%`
@@ -335,8 +335,8 @@ export default function Problem401Visualizer() {
       </div>
 
       <div style={{
-        backgroundColor: step?.phase === 'done' ? '#10b98166' : step?.error ? '#ef444466' : '#1e293b',
-        padding: '12px', borderRadius: '6px', color: step?.phase === 'done' ? '#86efac' : step?.error ? '#fca5a5' : '#cbd5e1',
+        backgroundColor: step?.phase === 'done' ? '#10b98166' : step?.error ? '#ef444466' : 'var(--surface2)',
+        padding: '12px', borderRadius: '6px', color: step?.phase === 'done' ? '#86efac' : step?.error ? '#fca5a5' : 'var(--border)',
         fontSize: '13px', fontFamily: 'monospace'
       }}>
         {step?.message ?? 'Press Play or Step to begin.'}

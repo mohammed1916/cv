@@ -11,6 +11,16 @@ export default function FloatingPanel({
   const [position, setPosition] = useState(null);
   const [collapsed, setCollapsed] = useState(false);
   const [isPinned, setIsPinned] = useState(false);
+  const [size, setSize] = useState(() => {
+    try {
+      const stored = JSON.parse(window.localStorage.getItem("floating-playback-size"));
+      if (stored?.width >= 280 && stored?.height >= 96) return stored;
+    } catch {
+      // A sensible default is preferable to a broken persisted value.
+    }
+    return { width: 460, height: 148 };
+  });
+  const resizeState = useRef(null);
 
   useLayoutEffect(() => {
     if (position) return;
@@ -24,6 +34,43 @@ export default function FloatingPanel({
       },
     );
   }, [position, defaultPosition]);
+
+  useLayoutEffect(() => {
+    const onMove = (event) => {
+      if (!resizeState.current) return;
+      const { startX, startY, width, height } = resizeState.current;
+      setSize({
+        width: Math.min(Math.max(280, width + event.clientX - startX), window.innerWidth - 16),
+        height: Math.min(Math.max(96, height + event.clientY - startY), window.innerHeight - 16),
+      });
+    };
+    const onUp = () => {
+      if (!resizeState.current) return;
+      resizeState.current = null;
+      document.body.classList.remove("resizing-playback");
+    };
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
+    return () => {
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+    };
+  }, []);
+
+  useLayoutEffect(() => {
+    try {
+      window.localStorage.setItem("floating-playback-size", JSON.stringify(size));
+    } catch {
+      // Storage can be unavailable in private/embedded contexts.
+    }
+  }, [size]);
+
+  const startResize = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    resizeState.current = { startX: event.clientX, startY: event.clientY, ...size };
+    document.body.classList.add("resizing-playback");
+  };
 
   const clampToViewport = (point) => {
     const rect = panelRef.current.getBoundingClientRect();
@@ -63,7 +110,7 @@ export default function FloatingPanel({
     <div
       ref={panelRef}
       className={`floating-panel ${collapsed ? "collapsed" : ""} ${isPinned ? "pinned" : ""}`}
-      style={position ? { top: position.y, left: position.x } : undefined}
+      style={position ? { top: position.y, left: position.x, width: size.width, height: collapsed ? undefined : size.height } : { width: size.width, height: collapsed ? undefined : size.height }}
     >
       <div
         className="floating-panel-handle"
@@ -95,6 +142,15 @@ export default function FloatingPanel({
         </button>
       </div>
       {!collapsed && <div className="floating-panel-body">{children}</div>}
+      {!collapsed && (
+        <div
+          className="floating-panel-resizer"
+          role="separator"
+          aria-label="Resize playback controls"
+          aria-orientation="both"
+          onPointerDown={startResize}
+        />
+      )}
     </div>
   );
 }

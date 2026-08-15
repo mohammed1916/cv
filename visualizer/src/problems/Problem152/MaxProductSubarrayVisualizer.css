@@ -10,7 +10,7 @@
 }
 
 .mps-panel {
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 10px;
     overflow: hidden;
@@ -27,7 +27,7 @@
     background: #181825;
     font-size: 13px;
     font-weight: 600;
-    color: #cdd6f4;
+    color: var(--code-text);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -53,7 +53,7 @@
 
 .mps-chip {
     background: #313244;
-    color: #cdd6f4;
+    color: var(--code-text);
     border: none;
     border-radius: 6px;
     padding: 4px 10px;
@@ -62,13 +62,13 @@
 }
 
 .mps-chip:hover {
-    background: #45475a;
+    background: var(--code-line);
 }
 
 .mps-input {
-    background: #11111b;
-    color: #cdd6f4;
-    border: 1px solid #45475a;
+    background: var(--code-surface);
+    color: var(--code-text);
+    border: 1px solid var(--code-line);
     border-radius: 6px;
     padding: 6px 10px;
     font-size: 13px;
@@ -86,7 +86,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 2px solid #45475a;
+    border: 2px solid var(--code-line);
     border-radius: 8px;
     padding: 8px 12px;
     min-width: 44px;
@@ -108,7 +108,7 @@
 
 .mps-cell.zero {
     background: #2a2a3e;
-    border-color: #6c7086;
+    border-color: var(--code-dim);
 }
 
 .mps-cell.active.pos {
@@ -121,7 +121,7 @@
 
 .mps-idx {
     font-size: 10px;
-    color: #6c7086;
+    color: var(--code-dim);
 }
 
 .mps-val {
@@ -136,7 +136,7 @@
     gap: 8px;
     flex-wrap: wrap;
     padding: 8px 12px;
-    background: #11111b;
+    background: var(--code-surface);
     border-radius: 8px;
 }
 
@@ -144,7 +144,7 @@
     padding: 4px 10px;
     border-radius: 6px;
     background: #313244;
-    color: #cdd6f4;
+    color: var(--code-text);
     font-size: 14px;
     font-weight: 600;
     border: 2px solid transparent;
@@ -162,7 +162,7 @@
 
 .mps-label {
     font-size: 11px;
-    color: #6c7086;
+    color: var(--code-dim);
     text-transform: uppercase;
     letter-spacing: 0.08em;
 }
@@ -178,7 +178,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 8px 12px;
-    background: #11111b;
+    background: var(--code-surface);
     border-radius: 8px;
 }
 
@@ -215,11 +215,11 @@
 
 .mps-status {
     padding: 8px 12px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 8px;
     font-size: 13px;
-    color: #a6adc8;
+    color: var(--code-dim);
     min-height: 36px;
 }
 

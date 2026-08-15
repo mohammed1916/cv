@@ -272,11 +272,11 @@ export default function RomanToIntegerVisualizer() {
             style={{
               padding: '6px 12px',
               borderRadius: 4,
-              border: '1px solid #cbd5e1',
+              border: '1px solid var(--border)',
               cursor: 'pointer',
               fontSize: 12,
-              backgroundColor: romanInput === (e.s || '') ? '#dbeafe' : '#f1f5f9',
-              color: romanInput === (e.s || '') ? '#1e40af' : '#1e293b',
+              backgroundColor: romanInput === (e.s || '') ? '#dbeafe' : 'var(--surface2)',
+              color: romanInput === (e.s || '') ? '#1e40af' : 'var(--surface2)',
             }}
           >
             {e.label}
@@ -285,7 +285,7 @@ export default function RomanToIntegerVisualizer() {
       </div>
 
       <div style={{ display: 'flex', gap: 12, marginBottom: 16, alignItems: 'center' }}>
-        <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace', fontWeight: 600 }}>Input:</span>
+        <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace', fontWeight: 600 }}>Input:</span>
         <input
           value={romanInput}
           onChange={(e) => { setRomanInput(e.target.value.toUpperCase()); handleReset() }}
@@ -298,13 +298,13 @@ export default function RomanToIntegerVisualizer() {
 
       {step && (
         <>
-          <div style={{ padding: 12, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 12, border: '1px solid #e2e8f0' }}>
-            <div style={{ fontWeight: 600, marginBottom: 8, color: '#1e293b' }}>{step.message}</div>
+          <div style={{ padding: 12, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 12, border: '1px solid var(--text)' }}>
+            <div style={{ fontWeight: 600, marginBottom: 8, color: 'var(--surface2)' }}>{step.message}</div>
           </div>
 
           {/* String visualization */}
-          <div style={{ padding: 12, backgroundColor: '#f1f5f9', borderRadius: 6 }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 8, textTransform: 'uppercase' }}>
+          <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8, textTransform: 'uppercase' }}>
               Roman String
             </div>
             <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
@@ -313,13 +313,13 @@ export default function RomanToIntegerVisualizer() {
                   key={i}
                   animate={{
                     scale: step.index === i ? 1.2 : 1,
-                    backgroundColor: step.index === i ? '#3b82f6' : '#ffffff',
-                    color: step.index === i ? '#ffffff' : '#1e293b',
+                    backgroundColor: step.index === i ? '#3b82f6' : 'var(--surface)',
+                    color: step.index === i ? 'var(--surface)' : 'var(--surface2)',
                   }}
                   style={{
                     padding: '8px 12px',
                     borderRadius: 4,
-                    border: step.index === i ? '2px solid #3b82f6' : '1px solid #cbd5e1',
+                    border: step.index === i ? '2px solid #3b82f6' : '1px solid var(--border)',
                     fontFamily: 'monospace',
                     fontSize: 14,
                     fontWeight: 700,
@@ -345,7 +345,7 @@ export default function RomanToIntegerVisualizer() {
                     padding: '12px 16px',
                     borderRadius: 6,
                     backgroundColor: '#3b82f6',
-                    color: '#ffffff',
+                    color: 'var(--surface)',
                     fontFamily: 'monospace',
                     fontSize: 16,
                     fontWeight: 700,
@@ -419,7 +419,7 @@ export default function RomanToIntegerVisualizer() {
               style={{
                 padding: '16px',
                 borderRadius: 6,
-                backgroundColor: '#ffffff',
+                backgroundColor: 'var(--surface)',
                 border: '2px solid #0ea5e9',
                 fontFamily: 'monospace',
                 fontSize: 24,
@@ -437,7 +437,7 @@ export default function RomanToIntegerVisualizer() {
   )
 
   const statusPanel = (
-    <div className="rti-status" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', fontSize: 12, color: '#64748b' }}>
+    <div className="rti-status" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', fontSize: 12, color: 'var(--text-muted)' }}>
       Step {stepIndex + 1} / {steps.length}
     </div>
   )

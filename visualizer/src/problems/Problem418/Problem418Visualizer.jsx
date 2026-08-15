@@ -164,39 +164,39 @@ function ScreenFittingVisualization({ sentence, rows, cols, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Sentence Screen Fitting</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Sentence Screen Fitting</div>
 
       {/* Parameters */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
-        <div style={{ padding: 10, backgroundColor: '#f1f5f9', borderRadius: 6, border: '2px solid #cbd5e1' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b' }}>Rows</div>
-          <div style={{ fontSize: 16, fontWeight: 'bold', color: '#1e293b' }}>{rows}</div>
+        <div style={{ padding: 10, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid var(--border)' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)' }}>Rows</div>
+          <div style={{ fontSize: 16, fontWeight: 'bold', color: 'var(--surface2)' }}>{rows}</div>
         </div>
-        <div style={{ padding: 10, backgroundColor: '#f1f5f9', borderRadius: 6, border: '2px solid #cbd5e1' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b' }}>Cols</div>
-          <div style={{ fontSize: 16, fontWeight: 'bold', color: '#1e293b' }}>{cols}</div>
+        <div style={{ padding: 10, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid var(--border)' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)' }}>Cols</div>
+          <div style={{ fontSize: 16, fontWeight: 'bold', color: 'var(--surface2)' }}>{cols}</div>
         </div>
-        <div style={{ padding: 10, backgroundColor: '#f1f5f9', borderRadius: 6, border: '2px solid #cbd5e1' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b' }}>Words</div>
-          <div style={{ fontSize: 16, fontWeight: 'bold', color: '#1e293b' }}>{sentence.length}</div>
+        <div style={{ padding: 10, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid var(--border)' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)' }}>Words</div>
+          <div style={{ fontSize: 16, fontWeight: 'bold', color: 'var(--surface2)' }}>{sentence.length}</div>
         </div>
       </div>
 
       {/* Sentence */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Sentence Words</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Sentence Words</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {sentence.map((word, idx) => (
             <div
               key={idx}
               style={{
                 padding: '6px 10px',
-                backgroundColor: '#f1f5f9',
+                backgroundColor: 'var(--surface2)',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 fontSize: 12,
                 fontWeight: 600,
-                color: '#334155',
+                color: 'var(--border)',
               }}
             >
               "{word}"
@@ -207,15 +207,15 @@ function ScreenFittingVisualization({ sentence, rows, cols, step }) {
 
       {/* Screen visualization */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Screen</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Screen</div>
         <div style={{
           display: 'grid',
           gridTemplateColumns: `repeat(${Math.min(cols, 15)}, minmax(20px, 1fr))`,
           gap: 2,
           padding: 8,
-          backgroundColor: '#f1f5f9',
+          backgroundColor: 'var(--surface2)',
           borderRadius: 6,
-          border: '2px solid #cbd5e1',
+          border: '2px solid var(--border)',
         }}>
           {Array(rows * cols).fill(0).map((_, idx) => {
             const row = Math.floor(idx / cols)
@@ -229,9 +229,9 @@ function ScreenFittingVisualization({ sentence, rows, cols, step }) {
                 key={idx}
                 style={{
                   aspectRatio: '1',
-                  backgroundColor: isCurrent ? '#c7d2fe' : isFilled ? '#dbeafe' : '#ffffff',
+                  backgroundColor: isCurrent ? '#c7d2fe' : isFilled ? '#dbeafe' : 'var(--surface)',
                   borderRadius: 2,
-                  border: `1px solid ${isCurrent ? '#6366f1' : isFilled ? '#0284c7' : '#e2e8f0'}`,
+                  border: `1px solid ${isCurrent ? '#6366f1' : isFilled ? '#0284c7' : 'var(--text)'}`,
                 }}
                 animate={{
                   scale: isCurrent ? 1.2 : 1,
@@ -240,26 +240,26 @@ function ScreenFittingVisualization({ sentence, rows, cols, step }) {
             )
           })}
         </div>
-        <div style={{ fontSize: 11, color: '#64748b', marginTop: 6 }}>
+        <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 6 }}>
           Blue = filled, White = empty (total {rows} rows × {cols} cols)
         </div>
       </div>
 
       {/* Row content */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Row Content</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Row Content</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
           {lines.map((text, idx) => (
             <div
               key={idx}
               style={{
                 padding: '8px 10px',
-                backgroundColor: step?.currentLine === idx ? '#c7d2fe' : '#f1f5f9',
+                backgroundColor: step?.currentLine === idx ? '#c7d2fe' : 'var(--surface2)',
                 borderRadius: 4,
-                border: `2px solid ${step?.currentLine === idx ? '#6366f1' : '#cbd5e1'}`,
+                border: `2px solid ${step?.currentLine === idx ? '#6366f1' : 'var(--border)'}`,
                 fontSize: 12,
                 fontFamily: 'monospace',
-                color: '#1e293b',
+                color: 'var(--surface2)',
                 minHeight: 24,
               }}
             >
@@ -277,7 +277,7 @@ function ScreenFittingVisualization({ sentence, rows, cols, step }) {
         </div>
       </div>
 
-      <div style={{ fontSize: 12, color: '#475569' }}>{step?.message}</div>
+      <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{step?.message}</div>
     </div>
   )
 }
@@ -337,7 +337,7 @@ export default function Problem418Visualizer() {
         />),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button
@@ -346,11 +346,11 @@ export default function Problem418Visualizer() {
                   style={{
                     padding: '6px 12px',
                     borderRadius: 4,
-                    border: exIdx === idx ? '2px solid #84cc16' : '1px solid #cbd5e1',
+                    border: exIdx === idx ? '2px solid #84cc16' : '1px solid var(--border)',
                     cursor: 'pointer',
                     fontSize: 12,
-                    backgroundColor: exIdx === idx ? '#e8f48d' : '#f1f5f9',
-                    color: exIdx === idx ? '#3f6212' : '#334155',
+                    backgroundColor: exIdx === idx ? '#e8f48d' : 'var(--surface2)',
+                    color: exIdx === idx ? '#3f6212' : 'var(--border)',
                     fontWeight: exIdx === idx ? '600' : '400',
                   }}
                 >

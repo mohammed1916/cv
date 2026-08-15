@@ -215,7 +215,7 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
               </div>
             )
           })}
-          {s.length === 0 && <div style={{ color: '#64748b', fontStyle: 'italic' }}>Empty String</div>}
+          {s.length === 0 && <div style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>Empty String</div>}
         </div>
 
         <div className="lswrc-window-indicator">
@@ -239,7 +239,7 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
       <div className="lswrc-panel-body">
         <AnimatePresence mode="sync">
           {(!step || Object.keys(step.charMap ?? {}).length === 0) ? (
-            <p style={{ color: '#475569', fontSize: 12, fontStyle: 'italic' }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: 12, fontStyle: 'italic' }}>
               Map is empty.
             </p>
           ) : (

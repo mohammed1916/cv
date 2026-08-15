@@ -234,11 +234,11 @@ function VisualizationPanel({ step, applyExample, examples }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -249,7 +249,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.currentString && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #38bdf8' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #38bdf8' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#067db1', marginBottom: 6 }}>Current String</div>
           <div style={{ fontSize: 14, color: '#067db1', fontFamily: 'monospace', fontWeight: 700 }}>
             {step.currentString}
@@ -258,7 +258,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.currentWord && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #22c55e' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #22c55e' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#178740', marginBottom: 6 }}>Current Word</div>
           <div style={{ fontSize: 14, color: '#178740', fontFamily: 'monospace', fontWeight: 700 }}>
             {step.currentWord}
@@ -267,7 +267,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.rotations && step?.rotations.length > 0 && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #a78bfa' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid #a78bfa' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 8 }}>
             Rotations ({step.rotations.length})
           </div>
@@ -277,11 +277,11 @@ function VisualizationPanel({ step, applyExample, examples }) {
                 key={i}
                 style={{
                   padding: 6,
-                  backgroundColor: step.currentRotationIndex === i ? '#0f172a' : '#0f172a',
-                  borderLeft: `3px solid ${step.currentRotationIndex === i ? '#f59e0b' : '#475569'}`,
+                  backgroundColor: step.currentRotationIndex === i ? 'var(--code-bg)' : 'var(--code-bg)',
+                  borderLeft: `3px solid ${step.currentRotationIndex === i ? '#f59e0b' : 'var(--text-muted)'}`,
                   fontFamily: 'monospace',
                   fontSize: 12,
-                  color: step.currentRotationIndex === i ? '#f59e0b' : '#e2e8f0',
+                  color: step.currentRotationIndex === i ? '#f59e0b' : 'var(--text)',
                 }}
               >
                 {rot}
@@ -292,7 +292,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.maxRotation && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f59e0b' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #f59e0b' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', marginBottom: 6 }}>Max Rotation</div>
           <div style={{ fontSize: 14, color: '#a36907', fontFamily: 'monospace', fontWeight: 700 }}>
             {step.maxRotation}
@@ -301,7 +301,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.globalMax !== undefined && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #06b6d4' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #06b6d4' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#048196', marginBottom: 6 }}>Global Maximum</div>
           <div style={{ fontSize: 14, color: '#048196', fontFamily: 'monospace', fontWeight: 700 }}>
             {step.globalMax || '(empty)'}
@@ -310,8 +310,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.splitNum !== undefined && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #64748b' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Split Marker</div>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Split Marker</div>
           <div style={{ fontSize: 13, color: '#5577a4' }}>Skip next {step.splitNum} character(s)</div>
         </div>
       )}
@@ -320,7 +320,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #22c55e',
             textAlign: 'center',
@@ -329,7 +329,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Result</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Result</div>
           <div
             style={{
               fontSize: 18,
@@ -426,9 +426,9 @@ export default function SplitStringsVisualizer() {
                   height: 80,
                   padding: '8px',
                   borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid #475569',
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                   fontSize: 12,
                   resize: 'vertical',

@@ -247,10 +247,10 @@ export default function Problem370Visualizer() {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid var(--border)',
                   cursor: 'pointer',
                   fontSize: 12,
-                  backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
+                  backgroundColor: exIdx === i ? '#dbeafe' : 'var(--surface2)',
                   fontWeight: exIdx === i ? 600 : 400,
                 }}
               >
@@ -262,7 +262,7 @@ export default function Problem370Visualizer() {
           {step && (
             <>
               {/* Message */}
-              <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 12, fontWeight: 500 }}>
+              <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 12, fontWeight: 500 }}>
                 {step.message}
               </div>
 
@@ -290,7 +290,7 @@ export default function Problem370Visualizer() {
 
               {/* Original Array */}
               <div>
-                <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Original Array</div>
+                <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Original Array</div>
                 <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
                   {step.originalArray.map((val, idx) => (
                     <div
@@ -298,11 +298,11 @@ export default function Problem370Visualizer() {
                       style={{
                         padding: '8px 12px',
                         borderRadius: 4,
-                        border: '1px solid #cbd5e1',
-                        backgroundColor: '#f1f5f9',
+                        border: '1px solid var(--border)',
+                        backgroundColor: 'var(--surface2)',
                         fontSize: 12,
                         fontWeight: 600,
-                        color: '#334155',
+                        color: 'var(--border)',
                         minWidth: 40,
                         textAlign: 'center',
                       }}
@@ -315,14 +315,14 @@ export default function Problem370Visualizer() {
 
               {/* Difference Array */}
               <div>
-                <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>
+                <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>
                   Difference Array {step.phase === 'processing' ? '(Building)' : '(Complete)'}
                 </div>
                 <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
                   {step.diff.map((val, idx) => {
-                    let bgColor = '#f1f5f9'
-                    let borderColor = '#cbd5e1'
-                    let textColor = '#334155'
+                    let bgColor = 'var(--surface2)'
+                    let borderColor = 'var(--border)'
+                    let textColor = 'var(--border)'
 
                     if (step.highlighted?.type === 'mark_start' && idx === step.highlighted.position) {
                       bgColor = '#dcfce7'
@@ -369,7 +369,7 @@ export default function Problem370Visualizer() {
 
               {/* Result Array (Prefix Sum) */}
               <div>
-                <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>
+                <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>
                   Result Array (Prefix Sum)
                 </div>
                 <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
@@ -389,9 +389,9 @@ export default function Problem370Visualizer() {
                           border: '2px solid',
                           fontSize: 12,
                           fontWeight: 600,
-                          backgroundColor: isCurrent ? '#fbbf24' : isProcessed ? '#d1fae5' : '#f1f5f9',
-                          borderColor: isCurrent ? '#f59e0b' : isProcessed ? '#10b981' : '#cbd5e1',
-                          color: isCurrent ? '#78350f' : isProcessed ? '#047857' : '#334155',
+                          backgroundColor: isCurrent ? '#fbbf24' : isProcessed ? '#d1fae5' : 'var(--surface2)',
+                          borderColor: isCurrent ? '#f59e0b' : isProcessed ? '#10b981' : 'var(--border)',
+                          color: isCurrent ? '#78350f' : isProcessed ? '#047857' : 'var(--border)',
                           minWidth: 45,
                           textAlign: 'center',
                         }}

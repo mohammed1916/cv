@@ -171,7 +171,7 @@ function VisualizationPanel({
         </div>
 
         <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center' }}>
-          <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace' }}>n =</span>
+          <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>n =</span>
           <input
             type="number"
             value={nInput}
@@ -204,14 +204,14 @@ function VisualizationPanel({
                       <rect
                         x={x} y={y}
                         width={stepWidth} height={180 - y}
-                        fill={isActive ? 'rgba(14, 165, 233, 0.2)' : isVisited ? '#1e293b' : '#0f172a'}
-                        stroke={isActive ? '#0ea5e9' : '#334155'}
+                        fill={isActive ? 'rgba(14, 165, 233, 0.2)' : isVisited ? 'var(--surface2)' : 'var(--code-bg)'}
+                        stroke={isActive ? '#0ea5e9' : 'var(--border)'}
                         strokeWidth={isActive ? 2 : 1}
                       />
                       <text
                         x={x + stepWidth / 2} y={y - 10}
                         textAnchor="middle"
-                        fill={isActive ? '#38bdf8' : isVisited ? '#94a3b8' : '#475569'}
+                        fill={isActive ? '#38bdf8' : isVisited ? 'var(--text-muted)' : 'var(--text-muted)'}
                         fontSize="12"
                         fontWeight={isActive ? "bold" : "normal"}
                       >

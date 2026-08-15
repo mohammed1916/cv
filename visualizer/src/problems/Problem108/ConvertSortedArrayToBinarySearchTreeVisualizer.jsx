@@ -252,7 +252,7 @@ function TreeVisualizationPanel({ step, positions, edges, allNodes }) {
                                 y1={from.y}
                                 x2={to.x}
                                 y2={to.y}
-                                stroke="#94a3b8"
+                                stroke="var(--text-muted)"
                                 strokeWidth={2}
                             />
                         )

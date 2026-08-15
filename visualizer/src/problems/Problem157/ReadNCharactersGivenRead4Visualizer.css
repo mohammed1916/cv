@@ -9,6 +9,6 @@
 }
 
 .rn4-status {
-  background: #1e293b;
-  border-top: 1px solid #334155;
+  background: var(--surface2);
+  border-top: 1px solid var(--border);
 }

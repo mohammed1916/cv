@@ -308,7 +308,7 @@ export default function SpiralMatrixVisualizer() {
                         </motion.div>
                     ))}
                 </AnimatePresence>
-                {(!step || step.res.length === 0) && <span style={{ color: '#475569', fontStyle: 'italic', padding: 4 }}>[ ]</span>}
+                {(!step || step.res.length === 0) && <span style={{ color: 'var(--text-muted)', fontStyle: 'italic', padding: 4 }}>[ ]</span>}
             </div>
         </div>
       </div>

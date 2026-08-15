@@ -23,16 +23,16 @@ const SOLUTION_CODE = [
 
 // Colors (dark theme)
 const C = {
-  text: '#e2e8f0',
-  muted: '#94a3b8',
-  dim: '#64748b',
+  text: 'var(--text)',
+  muted: 'var(--text-muted)',
+  dim: 'var(--text-muted)',
   accent: '#38bdf8',
   valid: '#22c55e',
   invalid: '#f87171',
   amber: '#f59e0b',
-  surface: '#0f172a',
-  box: '#1e293b',
-  border: '#334155',
+  surface: 'var(--code-bg)',
+  box: 'var(--surface2)',
+  border: 'var(--border)',
 }
 
 // Parse a comma-separated preorder string into tokens, guarding bad input.

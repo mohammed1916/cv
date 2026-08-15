@@ -180,8 +180,8 @@ export default function FlattenBinaryTreeVisualizer() {
                 padding: '6px 12px',
                 fontSize: 12,
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
-                backgroundColor: '#f1f5f9',
+                border: '1px solid var(--border)',
+                backgroundColor: 'var(--surface2)',
                 cursor: 'pointer',
                 fontWeight: 500,
               }}
@@ -198,7 +198,7 @@ export default function FlattenBinaryTreeVisualizer() {
             padding: '8px 12px',
             fontSize: 12,
             borderRadius: 4,
-            border: '1px solid #cbd5e1',
+            border: '1px solid var(--border)',
             fontFamily: 'monospace',
             width: '100%',
             boxSizing: 'border-box',
@@ -222,7 +222,7 @@ export default function FlattenBinaryTreeVisualizer() {
             return (
               <g key={`edges-${i}`}>
                 {rp && <line x1={p.x} y1={p.y} x2={rp.x} y2={rp.y} stroke="#89b4fa" strokeWidth={1.5} />}
-                {lp && <line x1={p.x} y1={p.y} x2={lp.x} y2={lp.y} stroke="#45475a" strokeWidth={1.5} strokeDasharray="4 3" />}
+                {lp && <line x1={p.x} y1={p.y} x2={lp.x} y2={lp.y} stroke="var(--code-line)" strokeWidth={1.5} strokeDasharray="4 3" />}
               </g>
             );
           })}
@@ -236,10 +236,10 @@ export default function FlattenBinaryTreeVisualizer() {
               <g key={`node-${i}`}>
                 <circle cx={p.x} cy={p.y} r={NODE_R}
                   fill={isCur ? "#0d2a1a" : isPre ? "#2a1200" : "#313244"}
-                  stroke={isCur ? "#a6e3a1" : isPre ? "#fab387" : "#45475a"}
+                  stroke={isCur ? "#a6e3a1" : isPre ? "#fab387" : "var(--code-line)"}
                   strokeWidth={2} />
                 <text x={p.x} y={p.y} dominantBaseline="middle" textAnchor="middle"
-                  fill={isCur ? "#a6e3a1" : isPre ? "#fab387" : "#cdd6f4"} fontSize={13} fontWeight="bold">{v}</text>
+                  fill={isCur ? "#a6e3a1" : isPre ? "#fab387" : "var(--code-text)"} fontSize={13} fontWeight="bold">{v}</text>
               </g>
             );
           })}

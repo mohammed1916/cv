@@ -134,13 +134,13 @@ export default function LengthOfLastWordVisualizer() {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {EXAMPLES.map(e => (
-          <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : '#f1f5f9' }}>
+          <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : 'var(--surface2)' }}>
             {e.label}
           </button>
         ))}
       </div>
 
-      <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>Characters</div>
+      <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>Characters</div>
       <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap', alignItems: 'flex-end' }}>
         {chars.map((ch, idx) => {
           const isActive = idx === i;
@@ -151,31 +151,31 @@ export default function LengthOfLastWordVisualizer() {
               <motion.div animate={{ scale: isActive ? 1.2 : 1 }} style={{
                 width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center',
                 backgroundColor: isDoneHighlight ? '#dcfce7' : isActive ? '#fbbf24' : '#f3f4f6',
-                border: isActive ? '2px solid #f59e0b' : isDoneHighlight ? '2px solid #86efac' : '1px solid #cbd5e1',
-                borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: '#1e293b'
+                border: isActive ? '2px solid #f59e0b' : isDoneHighlight ? '2px solid #86efac' : '1px solid var(--border)',
+                borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: 'var(--surface2)'
               }}>
                 {isSpace ? '·' : ch}
               </motion.div>
-              <span style={{ fontSize: 10, color: '#64748b' }}>{idx}</span>
+              <span style={{ fontSize: 10, color: 'var(--text-muted)' }}>{idx}</span>
             </div>
           );
         })}
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, padding: 8, backgroundColor: '#f8fafc', borderRadius: 6 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6 }}>
         <div>
-          <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>i</div>
-          <div style={{ fontSize: 13, fontWeight: 'bold', color: '#1e293b' }}>{i < 0 ? '-1' : i}</div>
+          <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>i</div>
+          <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--surface2)' }}>{i < 0 ? '-1' : i}</div>
         </div>
         <div>
-          <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>length</div>
+          <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>length</div>
           <motion.div key={length} initial={{ scale: 1.4 }} animate={{ scale: 1 }} style={{ fontSize: 13, fontWeight: 'bold', color: '#0b7db0' }}>
             {length}
           </motion.div>
         </div>
         <div>
-          <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>phase</div>
-          <div style={{ fontSize: 13, fontWeight: 'bold', color: '#1e293b' }}>{phase}</div>
+          <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>phase</div>
+          <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--surface2)' }}>{phase}</div>
         </div>
       </div>
 

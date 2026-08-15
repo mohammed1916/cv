@@ -82,7 +82,7 @@
   flex-shrink: 0;
   border: 1px solid var(--border-color, #d1d5db);
   border-radius: 4px;
-  background-color: var(--bg-canvas, #ffffff);
+  background-color: var(--bg-canvas, var(--surface));
   overflow: auto;
 }
 

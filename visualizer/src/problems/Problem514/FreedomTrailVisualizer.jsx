@@ -175,7 +175,7 @@ function VisualizationPanel({ ring, key, step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -184,10 +184,10 @@ function VisualizationPanel({ ring, key, step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9'
+                backgroundColor: 'var(--surface2)'
               }}
             >
               {e.label}
@@ -198,9 +198,9 @@ function VisualizationPanel({ ring, key, step, applyEx }) {
 
       {/* Ring Visualization */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Ring: {ring}</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Ring: {ring}</div>
         <svg width="100%" height="250" viewBox="0 0 250 250" style={{ border: '1px solid #e5e7eb', borderRadius: 6 }}>
-          <circle cx="125" cy="125" r="80" fill="none" stroke="#cbd5e1" strokeWidth="2" />
+          <circle cx="125" cy="125" r="80" fill="none" stroke="var(--border)" strokeWidth="2" />
           {ring.split('').map((char, idx) => {
             const angle = (idx / ring.length) * 2 * Math.PI - Math.PI / 2
             const x = 125 + 80 * Math.cos(angle)
@@ -214,8 +214,8 @@ function VisualizationPanel({ ring, key, step, applyEx }) {
                   cx={x}
                   cy={y}
                   r="18"
-                  fill={isActive ? '#e9d5ff' : isTarget ? '#dbeafe' : '#f1f5f9'}
-                  stroke={isActive ? '#8b5cf6' : isTarget ? '#0284c7' : '#cbd5e1'}
+                  fill={isActive ? '#e9d5ff' : isTarget ? '#dbeafe' : 'var(--surface2)'}
+                  stroke={isActive ? '#8b5cf6' : isTarget ? '#0284c7' : 'var(--border)'}
                   strokeWidth="2"
                 />
                 <text
@@ -226,7 +226,7 @@ function VisualizationPanel({ ring, key, step, applyEx }) {
                   fontFamily="monospace"
                   fontSize="16"
                   fontWeight="700"
-                  fill={isActive ? '#5b21b6' : isTarget ? '#0c4a6e' : '#334155'}
+                  fill={isActive ? '#5b21b6' : isTarget ? '#0c4a6e' : 'var(--border)'}
                 >
                   {char}
                 </text>
@@ -242,7 +242,7 @@ function VisualizationPanel({ ring, key, step, applyEx }) {
 
       {/* Key Progress */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
           Spelling Progress
         </div>
         <div style={{ display: 'flex', gap: 8 }}>
@@ -258,9 +258,9 @@ function VisualizationPanel({ ring, key, step, applyEx }) {
                   border: '2px solid',
                   fontFamily: 'monospace',
                   fontWeight: 600,
-                  backgroundColor: isCurrent ? '#ede9fe' : isSpelled ? '#e9d5ff' : '#f1f5f9',
-                  borderColor: isCurrent ? '#8b5cf6' : isSpelled ? '#c084fc' : '#cbd5e1',
-                  color: isCurrent ? '#5b21b6' : isSpelled ? '#7c3aed' : '#334155'
+                  backgroundColor: isCurrent ? '#ede9fe' : isSpelled ? '#e9d5ff' : 'var(--surface2)',
+                  borderColor: isCurrent ? '#8b5cf6' : isSpelled ? '#c084fc' : 'var(--border)',
+                  color: isCurrent ? '#5b21b6' : isSpelled ? '#7c3aed' : 'var(--border)'
                 }}
                 animate={{ scale: isCurrent ? 1.15 : 1 }}
               >

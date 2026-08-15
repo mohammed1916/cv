@@ -176,12 +176,12 @@ function SplitArrayVisualization({ nums, m, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Binary Search for Min Max Sum</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Binary Search for Min Max Sum</div>
 
       {/* Array visualization */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Array: {JSON.stringify(nums)}</div>
-        <div style={{ display: 'flex', gap: 4, alignItems: 'flex-end', height: 100, padding: 8, backgroundColor: '#f1f5f9', borderRadius: 6, border: '2px solid #cbd5e1' }}>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Array: {JSON.stringify(nums)}</div>
+        <div style={{ display: 'flex', gap: 4, alignItems: 'flex-end', height: 100, padding: 8, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid var(--border)' }}>
           {nums.map((num, idx) => (
             <div
               key={idx}
@@ -196,7 +196,7 @@ function SplitArrayVisualization({ nums, m, step }) {
                 paddingBottom: 4,
                 fontSize: 11,
                 fontWeight: 'bold',
-                color: '#ffffff',
+                color: 'var(--surface)',
               }}
             >
               {num}
@@ -218,15 +218,15 @@ function SplitArrayVisualization({ nums, m, step }) {
       >
         <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 8 }}>Binary Search State</div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8 }}>
-          <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#ffffff', borderRadius: 4 }}>
+          <div style={{ textAlign: 'center', padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
             <div style={{ fontSize: 10, color: '#065f46' }}>Left (min)</div>
             <div style={{ fontSize: 14, fontWeight: 'bold', color: '#047857' }}>{step?.left ?? maxSum}</div>
           </div>
-          <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#ffffff', borderRadius: 4 }}>
+          <div style={{ textAlign: 'center', padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
             <div style={{ fontSize: 10, color: '#065f46' }}>Mid</div>
             <div style={{ fontSize: 14, fontWeight: 'bold', color: '#047857' }}>{step?.mid ?? '—'}</div>
           </div>
-          <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#ffffff', borderRadius: 4 }}>
+          <div style={{ textAlign: 'center', padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
             <div style={{ fontSize: 10, color: '#065f46' }}>Right (max)</div>
             <div style={{ fontSize: 14, fontWeight: 'bold', color: '#047857' }}>{step?.right ?? totalSum}</div>
           </div>
@@ -241,13 +241,13 @@ function SplitArrayVisualization({ nums, m, step }) {
 
       {/* Range visualization */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Search Range</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Search Range</div>
         <div style={{
           position: 'relative',
           height: 40,
-          backgroundColor: '#f1f5f9',
+          backgroundColor: 'var(--surface2)',
           borderRadius: 6,
-          border: '2px solid #cbd5e1',
+          border: '2px solid var(--border)',
           overflow: 'hidden',
         }}>
           {/* Left marker */}
@@ -330,7 +330,7 @@ function SplitArrayVisualization({ nums, m, step }) {
         </motion.div>
       )}
 
-      <div style={{ fontSize: 12, color: '#475569' }}>{step?.message}</div>
+      <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{step?.message}</div>
     </div>
   )
 }
@@ -399,7 +399,7 @@ export default function Problem410Visualizer() {
       </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button
@@ -408,11 +408,11 @@ export default function Problem410Visualizer() {
                   style={{
                     padding: '6px 12px',
                     borderRadius: 4,
-                    border: exIdx === idx ? '2px solid #a855f7' : '1px solid #cbd5e1',
+                    border: exIdx === idx ? '2px solid #a855f7' : '1px solid var(--border)',
                     cursor: 'pointer',
                     fontSize: 12,
-                    backgroundColor: exIdx === idx ? '#f3e8ff' : '#f1f5f9',
-                    color: exIdx === idx ? '#6d28d9' : '#334155',
+                    backgroundColor: exIdx === idx ? '#f3e8ff' : 'var(--surface2)',
+                    color: exIdx === idx ? '#6d28d9' : 'var(--border)',
                     fontWeight: exIdx === idx ? '600' : '400',
                   }}
                 >

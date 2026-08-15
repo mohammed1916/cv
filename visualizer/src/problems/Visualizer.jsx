@@ -118,22 +118,22 @@ function VisualizationPanel({
                 className="viz-example-btn"
                 style={{
                   padding: '6px 12px',
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   borderRadius: '4px',
-                  backgroundColor: '#0f172a',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--code-bg)',
+                  color: 'var(--text)',
                   fontSize: 12,
                   fontFamily: 'monospace',
                   cursor: 'pointer',
                   transition: 'all 0.2s ease',
                 }}
                 onMouseEnter={(e) => {
-                  e.target.style.backgroundColor = '#1e293b'
-                  e.target.style.borderColor = '#64748b'
+                  e.target.style.backgroundColor = 'var(--surface2)'
+                  e.target.style.borderColor = 'var(--text-muted)'
                 }}
                 onMouseLeave={(e) => {
-                  e.target.style.backgroundColor = '#0f172a'
-                  e.target.style.borderColor = '#475569'
+                  e.target.style.backgroundColor = 'var(--code-bg)'
+                  e.target.style.borderColor = 'var(--text-muted)'
                 }}
               >
                 {ex.label}
@@ -147,7 +147,7 @@ function VisualizationPanel({
           {/* Add input fields based on your problem's needs */}
           {/* Example:
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <label style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace' }}>
+            <label style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>
               Input:
             </label>
             <input
@@ -158,10 +158,10 @@ function VisualizationPanel({
               className="viz-input"
               style={{
                 padding: '6px 8px',
-                border: inputErrors?.data ? '2px solid #f87171' : '1px solid #cbd5e1',
+                border: inputErrors?.data ? '2px solid #f87171' : '1px solid var(--border)',
                 borderRadius: '4px',
-                backgroundColor: '#1e293b',
-                color: '#e2e8f0',
+                backgroundColor: 'var(--surface2)',
+                color: 'var(--text)',
                 fontSize: 13,
                 fontFamily: 'monospace',
                 width: '150px',
@@ -175,7 +175,7 @@ function VisualizationPanel({
         </div>
 
         {/* Visualization Area - customize this */}
-        <div className="viz-area" style={{ flex: 1, border: '1px solid #334155', borderRadius: '4px', padding: 16, backgroundColor: '#0f172a' }}>
+        <div className="viz-area" style={{ flex: 1, border: '1px solid var(--border)', borderRadius: '4px', padding: 16, backgroundColor: 'var(--code-bg)' }}>
           <div style={{ color: '#627794', fontSize: 14, fontFamily: 'monospace', textAlign: 'center' }}>
             {step ? `Phase: ${step.phase}` : 'Ready to visualize...'}
           </div>
@@ -204,7 +204,7 @@ function VariablesPanel({ step }) {
             style={{
               padding: 12,
               borderRadius: '4px',
-              background: '#1e293b',
+              background: 'var(--surface2)',
               borderLeft: '4px solid #0ea5e9',
             }}
             animate={{ opacity: 1 }}
@@ -387,11 +387,11 @@ export default function YourProblemVisualizer() {
  */
 export function createVariableCard(name, value, description, type = 'default') {
   const typeStyles = {
-    default: { background: '#1e293b', borderLeft: '4px solid #64748b' },
-    active: { background: '#1e293b', borderLeft: '4px solid #0ea5e9' },
-    success: { background: '#1e293b', borderLeft: '4px solid #10b981' },
-    warning: { background: '#1e293b', borderLeft: '4px solid #f59e0b' },
-    error: { background: '#1e293b', borderLeft: '4px solid #f87171' },
+    default: { background: 'var(--surface2)', borderLeft: '4px solid var(--text-muted)' },
+    active: { background: 'var(--surface2)', borderLeft: '4px solid #0ea5e9' },
+    success: { background: 'var(--surface2)', borderLeft: '4px solid #10b981' },
+    warning: { background: 'var(--surface2)', borderLeft: '4px solid #f59e0b' },
+    error: { background: 'var(--surface2)', borderLeft: '4px solid #f87171' },
   }
 
   return (
@@ -412,7 +412,7 @@ export function createVariableCard(name, value, description, type = 'default') {
         {typeof value === 'object' ? JSON.stringify(value) : String(value)}
       </div>
       {description && (
-        <div style={{ color: '#64748b', fontSize: 11 }}>
+        <div style={{ color: 'var(--text-muted)', fontSize: 11 }}>
           {description}
         </div>
       )}
@@ -432,7 +432,7 @@ export function createInputControls(schema, values, errors, onChange) {
     <div style={{ display: 'flex', gap: 12, marginBottom: 24, flexWrap: 'wrap', alignItems: 'center' }}>
       {Object.entries(schema).map(([key, fieldSchema]) => (
         <div key={key} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <label htmlFor={`input-${key}`} style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace' }}>
+          <label htmlFor={`input-${key}`} style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>
             {fieldSchema.label || key}:
           </label>
           <input
@@ -443,10 +443,10 @@ export function createInputControls(schema, values, errors, onChange) {
             placeholder={fieldSchema.placeholder || String(fieldSchema.default)}
             style={{
               padding: '6px 8px',
-              border: errors?.[key] ? '2px solid #f87171' : '1px solid #cbd5e1',
+              border: errors?.[key] ? '2px solid #f87171' : '1px solid var(--border)',
               borderRadius: '4px',
-              backgroundColor: '#1e293b',
-              color: '#e2e8f0',
+              backgroundColor: 'var(--surface2)',
+              color: 'var(--text)',
               fontSize: 13,
               fontFamily: 'monospace',
               width: fieldSchema.width || '100px',
@@ -479,22 +479,22 @@ export function createExampleButtons(examples, onExampleClick) {
           onClick={() => onExampleClick(ex.inputs || ex)}
           style={{
             padding: '6px 12px',
-            border: '1px solid #475569',
+            border: '1px solid var(--text-muted)',
             borderRadius: '4px',
-            backgroundColor: '#0f172a',
-            color: '#e2e8f0',
+            backgroundColor: 'var(--code-bg)',
+            color: 'var(--text)',
             fontSize: 12,
             fontFamily: 'monospace',
             cursor: 'pointer',
             transition: 'all 0.2s ease',
           }}
           onMouseEnter={(e) => {
-            e.target.style.backgroundColor = '#1e293b'
-            e.target.style.borderColor = '#64748b'
+            e.target.style.backgroundColor = 'var(--surface2)'
+            e.target.style.borderColor = 'var(--text-muted)'
           }}
           onMouseLeave={(e) => {
-            e.target.style.backgroundColor = '#0f172a'
-            e.target.style.borderColor = '#475569'
+            e.target.style.backgroundColor = 'var(--code-bg)'
+            e.target.style.borderColor = 'var(--text-muted)'
           }}
         >
           {ex.label}

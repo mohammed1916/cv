@@ -144,7 +144,7 @@ export default function BSTIteratorVisualizer() {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
       {step && (
         <>
-          <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
+          <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 11 }}>
             <div style={{ fontWeight: 600, marginBottom: 8 }}>{step.message}</div>
           </div>
 
@@ -152,7 +152,7 @@ export default function BSTIteratorVisualizer() {
             <div style={{ fontSize: 10, fontWeight: 600, marginBottom: 6, color: '#1e40af' }}>Stack:</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               {step.stack.length === 0 ? (
-                <span style={{ fontSize: 11, color: '#64748b' }}>empty</span>
+                <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>empty</span>
               ) : (
                 step.stack.map((val, i) => (
                   <motion.div
@@ -165,7 +165,7 @@ export default function BSTIteratorVisualizer() {
                       borderRadius: 3,
                       fontSize: 11,
                       fontWeight: 'bold',
-                      color: i === step.stack.length - 1 ? '#fff' : '#1e293b',
+                      color: i === step.stack.length - 1 ? '#fff' : 'var(--surface2)',
                     }}
                   >
                     {val}
@@ -202,7 +202,7 @@ export default function BSTIteratorVisualizer() {
   )
 
   const statusPanel = (
-    <div style={{ padding: 8, fontSize: 11, color: '#64748b' }}>
+    <div style={{ padding: 8, fontSize: 11, color: 'var(--text-muted)' }}>
       {step ? `Step ${stepIndex + 1} of ${steps.length}` : 'No step'}
     </div>
   )

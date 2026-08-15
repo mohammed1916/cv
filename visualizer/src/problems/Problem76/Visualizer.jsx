@@ -144,7 +144,7 @@ function SlidingWindowViz({ step, s, EXAMPLES, sInput, setSInput, tInput, setTIn
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
         Sliding Window
       </header>
 
@@ -156,8 +156,8 @@ function SlidingWindowViz({ step, s, EXAMPLES, sInput, setSInput, tInput, setTIn
             style={{
               padding: '6px 12px',
               borderRadius: 4,
-              border: '1px solid #cbd5e1',
-              backgroundColor: '#f1f5f9',
+              border: '1px solid var(--border)',
+              backgroundColor: 'var(--surface2)',
               cursor: 'pointer',
               fontSize: 12,
               fontWeight: 500,
@@ -175,7 +175,7 @@ function SlidingWindowViz({ step, s, EXAMPLES, sInput, setSInput, tInput, setTIn
           placeholder="Enter string s"
           style={{
             padding: '8px 10px',
-            border: '1px solid #cbd5e1',
+            border: '1px solid var(--border)',
             borderRadius: 4,
             fontSize: 12,
             fontFamily: 'monospace',
@@ -187,7 +187,7 @@ function SlidingWindowViz({ step, s, EXAMPLES, sInput, setSInput, tInput, setTIn
           placeholder="Enter string t"
           style={{
             padding: '8px 10px',
-            border: '1px solid #cbd5e1',
+            border: '1px solid var(--border)',
             borderRadius: 4,
             fontSize: 12,
             fontFamily: 'monospace',
@@ -203,9 +203,9 @@ function SlidingWindowViz({ step, s, EXAMPLES, sInput, setSInput, tInput, setTIn
             const isRight = i === step?.right
             const inBest = step?.best && i >= step.best.l && i <= step.best.r
 
-            let bgColor = '#f1f5f9'
-            let borderColor = '#cbd5e1'
-            let textColor = '#475569'
+            let bgColor = 'var(--surface2)'
+            let borderColor = 'var(--border)'
+            let textColor = 'var(--text-muted)'
 
             if (inBest) {
               bgColor = '#fef08a'
@@ -261,33 +261,33 @@ function SlidingWindowViz({ step, s, EXAMPLES, sInput, setSInput, tInput, setTIn
 
 function FrequencyState({ step }) {
   return (
-    <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16, borderLeft: '1px solid #e2e8f0' }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>
+    <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16, borderLeft: '1px solid var(--text)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
         Frequency State
       </header>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 8 }}>
-          <div style={{ padding: 10, backgroundColor: '#f1f5f9', borderRadius: 4 }}>
-            <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>formed</div>
-            <div style={{ fontSize: 14, fontWeight: 600, color: '#1e293b' }}>{step?.formed ?? 0}</div>
+          <div style={{ padding: 10, backgroundColor: 'var(--surface2)', borderRadius: 4 }}>
+            <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>formed</div>
+            <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--surface2)' }}>{step?.formed ?? 0}</div>
           </div>
-          <div style={{ padding: 10, backgroundColor: '#f1f5f9', borderRadius: 4 }}>
-            <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>required</div>
-            <div style={{ fontSize: 14, fontWeight: 600, color: '#1e293b' }}>{step?.required ?? 0}</div>
+          <div style={{ padding: 10, backgroundColor: 'var(--surface2)', borderRadius: 4 }}>
+            <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>required</div>
+            <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--surface2)' }}>{step?.required ?? 0}</div>
           </div>
         </div>
 
-        <div style={{ padding: 10, backgroundColor: '#f1f5f9', borderRadius: 4 }}>
-          <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>best window</div>
-          <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', fontFamily: 'monospace' }}>
+        <div style={{ padding: 10, backgroundColor: 'var(--surface2)', borderRadius: 4 }}>
+          <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>best window</div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', fontFamily: 'monospace' }}>
             {step?.best?.value ?? 'None'}
           </div>
         </div>
       </div>
 
       <div style={{ flex: 1 }}>
-        <header style={{ fontSize: 11, fontWeight: 600, color: '#475569', marginBottom: 8 }}>
+        <header style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>
           Character Frequencies
         </header>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(60px, 1fr))', gap: 6 }}>
@@ -311,10 +311,10 @@ function FrequencyState({ step }) {
                 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
               >
-                <div style={{ fontSize: 13, fontWeight: 700, color: '#1e293b' }}>
+                <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--surface2)' }}>
                   {ch}
                 </div>
-                <div style={{ fontSize: 10, color: '#475569', marginTop: 2 }}>
+                <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 2 }}>
                   {hv}/{req}
                 </div>
               </motion.div>
@@ -426,7 +426,7 @@ export default function MinimumWindowSubstringVisualizer() {
       )}
       {createPortal(
         <FloatingPanel title="Playback Controls">
-          <div style={{ marginBottom: '12px', fontSize: 12, color: '#475569' }}>
+          <div style={{ marginBottom: '12px', fontSize: 12, color: 'var(--text-muted)' }}>
             {step?.message ?? 'Press Play or Step to begin.'}
           </div>
           <PlaybackControls

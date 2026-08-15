@@ -161,7 +161,7 @@ function VisualizationPanel({ nums, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Game Array</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Game Array</div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {nums.map((num, idx) => {
             const inWindow = step && idx >= step.left && idx <= step.right
@@ -176,9 +176,9 @@ function VisualizationPanel({ nums, step, applyEx }) {
                   fontFamily: 'monospace',
                   fontSize: 14,
                   fontWeight: 700,
-                  backgroundColor: isEndpoint ? '#dbeafe' : inWindow ? '#e0f2fe' : '#f1f5f9',
-                  borderColor: isEndpoint ? '#0284c7' : inWindow ? '#0ea5e9' : '#cbd5e1',
-                  color: isEndpoint ? '#0c4a6e' : inWindow ? '#164e63' : '#334155'
+                  backgroundColor: isEndpoint ? '#dbeafe' : inWindow ? '#e0f2fe' : 'var(--surface2)',
+                  borderColor: isEndpoint ? '#0284c7' : inWindow ? '#0ea5e9' : 'var(--border)',
+                  color: isEndpoint ? '#0c4a6e' : inWindow ? '#164e63' : 'var(--border)'
                 }}
                 animate={{ scale: isEndpoint ? 1.15 : inWindow ? 1.05 : 1 }}
               >

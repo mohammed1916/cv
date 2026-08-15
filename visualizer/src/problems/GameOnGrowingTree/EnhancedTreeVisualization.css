@@ -275,7 +275,7 @@
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   .tree-node {
-    fill: #0f172a;
+    fill: var(--code-bg);
     stroke: #0ea5e9;
   }
 

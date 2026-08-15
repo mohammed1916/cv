@@ -141,7 +141,7 @@ function VisualizationPanel({ events, step, inputPanel }) {
 
       {/* Events Table */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Events</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Events</div>
         <div style={{ overflowX: 'auto', maxHeight: 200, overflowY: 'auto' }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 12 }}>
             <thead>

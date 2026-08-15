@@ -13,7 +13,7 @@
     background: linear-gradient(180deg,
             rgba(15, 23, 42, 0.98),
             rgba(10, 16, 28, 0.98));
-    border: 1px solid #334155;
+    border: 1px solid var(--border);
     border-radius: 4px;
     padding: 12px;
     box-shadow: 0 4px 12px rgba(2, 6, 23, 0.2);
@@ -58,9 +58,9 @@
 }
 
 .median-example-btn {
-    border: 1px solid #334155;
+    border: 1px solid var(--border);
     background: rgba(15, 23, 42, 0.55);
-    color: #cbd5e1;
+    color: var(--border);
     border-radius: 999px;
     padding: 7px 12px;
     cursor: pointer;
@@ -101,7 +101,7 @@
     background: rgba(2, 6, 23, 0.55);
     border: 1px solid #243244;
     border-radius: 12px;
-    color: #f8fafc;
+    color: var(--surface);
     padding: 10px 12px;
     font-size: 15px;
     outline: none;
@@ -209,7 +209,7 @@
 }
 
 .median-badge.neutral {
-    color: #cbd5e1;
+    color: var(--border);
     background: rgba(100, 116, 139, 0.12);
     border-color: rgba(100, 116, 139, 0.25);
 }
@@ -262,7 +262,7 @@
 }
 
 .median-tape-count {
-    color: #cbd5e1;
+    color: var(--border);
     font-size: 12px;
     padding: 4px 8px;
     border: 1px solid rgba(71, 85, 105, 0.7);
@@ -367,7 +367,7 @@
     border-radius: 999px;
     border: 1px solid rgba(71, 85, 105, 0.75);
     background: rgba(15, 23, 42, 0.9);
-    color: #e2e8f0;
+    color: var(--text);
     font-size: 12px;
     font-family:
         ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -384,7 +384,7 @@
 }
 
 .median-empty {
-    color: #64748b;
+    color: var(--text-muted);
     font-style: italic;
     min-height: 72px;
     display: flex;
@@ -397,7 +397,7 @@
     flex: 1 1 0;
     min-width: 46px;
     border-radius: 14px;
-    border: 1px solid #334155;
+    border: 1px solid var(--border);
     background: rgba(15, 23, 42, 0.95);
     display: flex;
     flex-direction: column;
@@ -431,7 +431,7 @@
     top: -18px;
     left: 50%;
     transform: translateX(-50%);
-    color: #64748b;
+    color: var(--text-muted);
     font-size: 10px;
     font-weight: 800;
 }
@@ -518,7 +518,7 @@
 }
 
 .median-condition-pill.neutral {
-    color: #e2e8f0;
+    color: var(--text);
     background: rgba(100, 116, 139, 0.12);
     border: 1px solid rgba(100, 116, 139, 0.25);
 }

@@ -69,20 +69,20 @@ function VariablesPanel({ step, ex }) {
     <div className="msa-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <div className="msa-panel-label">Variables</div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 12px', backgroundColor: '#252535', borderRadius: 6, border: '1px solid #45475a' }}>
-          <span style={{ color: '#6c7086', fontSize: 12 }}>i</span>
+        <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 12px', backgroundColor: '#252535', borderRadius: 6, border: '1px solid var(--code-line)' }}>
+          <span style={{ color: 'var(--code-dim)', fontSize: 12 }}>i</span>
           <span style={{ color: '#c65108', fontWeight: 600 }}>{step?.i ?? (ex?.m - 1 ?? -1)}</span>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 12px', backgroundColor: '#252535', borderRadius: 6, border: '1px solid #45475a' }}>
-          <span style={{ color: '#6c7086', fontSize: 12 }}>j</span>
+        <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 12px', backgroundColor: '#252535', borderRadius: 6, border: '1px solid var(--code-line)' }}>
+          <span style={{ color: 'var(--code-dim)', fontSize: 12 }}>j</span>
           <span style={{ color: '#1a6df5', fontWeight: 600 }}>{step?.j ?? (ex?.n - 1 ?? -1)}</span>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 12px', backgroundColor: '#252535', borderRadius: 6, border: '1px solid #45475a' }}>
-          <span style={{ color: '#6c7086', fontSize: 12 }}>k</span>
+        <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 12px', backgroundColor: '#252535', borderRadius: 6, border: '1px solid var(--code-line)' }}>
+          <span style={{ color: 'var(--code-dim)', fontSize: 12 }}>k</span>
           <span style={{ color: '#2f8628', fontWeight: 600 }}>{step?.k ?? (ex ? ex.m + ex.n - 1 : -1)}</span>
         </div>
-        <div style={{ padding: '8px 12px', backgroundColor: '#252535', borderRadius: 6, border: '1px solid #45475a', fontSize: 12, color: '#a6adc8' }}>
-          <div style={{ marginBottom: 6, color: '#6c7086', fontSize: 11, fontWeight: 700, textTransform: 'uppercase' }}>Current Action</div>
+        <div style={{ padding: '8px 12px', backgroundColor: '#252535', borderRadius: 6, border: '1px solid var(--code-line)', fontSize: 12, color: 'var(--code-dim)' }}>
+          <div style={{ marginBottom: 6, color: 'var(--code-dim)', fontSize: 11, fontWeight: 700, textTransform: 'uppercase' }}>Current Action</div>
           {step?.message || "Initialize pointers"}
         </div>
       </div>
@@ -128,10 +128,10 @@ function VisualizationPanel({ ex, setEx, step, applyEx, nums1Ptrs, nums2Ptrs }) 
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: ex.label === e.label ? '#dbeafe' : '#f1f5f9'
+                backgroundColor: ex.label === e.label ? '#dbeafe' : 'var(--surface2)'
               }}
             >
               {e.label}

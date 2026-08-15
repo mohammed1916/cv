@@ -14,18 +14,18 @@
   --p368-sapphire: #74c7ec;
   --p368-blue: #89b4fa;
   --p368-lavender: #b4befe;
-  --p368-text: #cdd6f4;
+  --p368-text: var(--code-text);
   --p368-subtext1: #bac2de;
-  --p368-subtext0: #a6adc8;
+  --p368-subtext0: var(--code-dim);
   --p368-overlay2: #9399b2;
   --p368-overlay1: #7f849c;
-  --p368-overlay0: #6c7086;
+  --p368-overlay0: var(--code-dim);
   --p368-surface2: #585b70;
-  --p368-surface1: #45475a;
+  --p368-surface1: var(--code-line);
   --p368-surface0: #313244;
-  --p368-base: #1e1e2e;
+  --p368-base: var(--code-bg);
   --p368-mantle: #181825;
-  --p368-crust: #11111b;
+  --p368-crust: var(--code-surface);
 }
 
 .p368-container {

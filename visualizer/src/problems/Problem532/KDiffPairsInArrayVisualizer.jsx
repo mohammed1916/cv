@@ -161,19 +161,19 @@ function VisualizationPanel({ nums, k, step }) {
 
       {/* Parameters */}
       <div style={{ display: 'flex', gap: 16 }}>
-        <div style={{ padding: 12, backgroundColor: '#f1f5f9', borderRadius: 6, flex: 1 }}>
-          <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>Target Difference</div>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, flex: 1 }}>
+          <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>Target Difference</div>
           <div style={{ fontSize: 20, fontWeight: 'bold', color: '#027bba' }}>{k}</div>
         </div>
-        <div style={{ padding: 12, backgroundColor: '#f1f5f9', borderRadius: 6, flex: 1 }}>
-          <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>Array Size</div>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, flex: 1 }}>
+          <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>Array Size</div>
           <div style={{ fontSize: 20, fontWeight: 'bold', color: '#027bba' }}>{nums.length}</div>
         </div>
       </div>
 
       {/* Frequency Map */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Number Frequencies</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Number Frequencies</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {step?.count && Array.from(step.count.entries()).map(([num, freq]) => {
             const isCurrent = step?.num === num
@@ -187,9 +187,9 @@ function VisualizationPanel({ nums, k, step }) {
                   fontFamily: 'monospace',
                   fontSize: 13,
                   fontWeight: 600,
-                  backgroundColor: isCurrent ? '#dbeafe' : '#f1f5f9',
-                  borderColor: isCurrent ? '#0284c7' : '#cbd5e1',
-                  color: isCurrent ? '#0c4a6e' : '#334155'
+                  backgroundColor: isCurrent ? '#dbeafe' : 'var(--surface2)',
+                  borderColor: isCurrent ? '#0284c7' : 'var(--border)',
+                  color: isCurrent ? '#0c4a6e' : 'var(--border)'
                 }}
                 animate={{ scale: isCurrent ? 1.15 : 1 }}
               >

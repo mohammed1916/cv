@@ -18,8 +18,8 @@
 
 .rkg-chip {
     background: #313244;
-    color: #cdd6f4;
-    border: 2px solid #45475a;
+    color: var(--code-text);
+    border: 2px solid var(--code-line);
     border-radius: 6px;
     padding: 4px 12px;
     font-size: 12px;
@@ -33,7 +33,7 @@
 }
 
 .rkg-panel {
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: none;
     border-radius: 0;
     padding: 16px;
@@ -46,7 +46,7 @@
 .rkg-panel-label {
     font-size: 11px;
     font-weight: 700;
-    color: #6c7086;
+    color: var(--code-dim);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-bottom: 10px;
@@ -75,9 +75,9 @@
     font-size: 17px;
     font-weight: 700;
     border-radius: 8px;
-    border: 2px solid #45475a;
+    border: 2px solid var(--code-line);
     background: #252535;
-    color: #cdd6f4;
+    color: var(--code-text);
 }
 
 .rkg-node.in-group {
@@ -100,7 +100,7 @@
 }
 
 .rkg-arrow {
-    color: #6c7086;
+    color: var(--code-dim);
     font-size: 14px;
     padding: 0 2px;
 }
@@ -116,7 +116,7 @@
     flex-direction: column;
     align-items: center;
     gap: 4px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 8px;
     padding: 10px 4px;
@@ -125,7 +125,7 @@
 .rkg-tracker-label {
     font-size: 11px;
     font-weight: 700;
-    color: #6c7086;
+    color: var(--code-dim);
     text-transform: uppercase;
     text-align: center;
 }
@@ -173,7 +173,7 @@
 }
 
 .rkg-tracker-val.rkg-phase.short {
-    color: #6c7086;
+    color: var(--code-dim);
 }
 
 .rkg-result {
@@ -188,12 +188,12 @@
 
 .rkg-status {
     padding: 8px 12px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: none;
     border-top: 1px solid #313244;
     border-radius: 0;
     font-size: 13px;
-    color: #a6adc8;
+    color: var(--code-dim);
     min-height: 36px;
     flex-shrink: 0;
 }

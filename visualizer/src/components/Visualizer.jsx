@@ -236,7 +236,7 @@ export function createInputControls(inputSchema, inputs, errors, onInputChange) 
     <div className="visualizer-inputs" style={{ display: 'flex', gap: 12, marginBottom: 24, flexWrap: 'wrap', alignItems: 'center' }}>
       {Object.entries(inputSchema).map(([key, schema]) => (
         <div key={key} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <label htmlFor={`input-${key}`} style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace' }}>
+          <label htmlFor={`input-${key}`} style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>
             {schema.label || key} {schema.type === 'array' ? '[]' : ''}:
           </label>
           <input
@@ -248,10 +248,10 @@ export function createInputControls(inputSchema, inputs, errors, onInputChange) 
             className="visualizer-input"
             style={{
               padding: '6px 8px',
-              border: errors[key] ? '2px solid #f87171' : '1px solid #cbd5e1',
+              border: errors[key] ? '2px solid #f87171' : '1px solid var(--border)',
               borderRadius: '4px',
-              backgroundColor: '#1e293b',
-              color: '#e2e8f0',
+              backgroundColor: 'var(--surface2)',
+              color: 'var(--text)',
               fontSize: 13,
               fontFamily: 'monospace',
               width: schema.width || '100px',
@@ -284,22 +284,22 @@ export function createExampleButtons(examples, onExampleClick) {
           className="visualizer-example-btn"
           style={{
             padding: '6px 12px',
-            border: '1px solid #475569',
+            border: '1px solid var(--text-muted)',
             borderRadius: '4px',
-            backgroundColor: '#0f172a',
-            color: '#e2e8f0',
+            backgroundColor: 'var(--code-bg)',
+            color: 'var(--text)',
             fontSize: 12,
             fontFamily: 'monospace',
             cursor: 'pointer',
             transition: 'all 0.2s ease',
           }}
           onMouseEnter={(e) => {
-            e.target.style.backgroundColor = '#1e293b'
-            e.target.style.borderColor = '#64748b'
+            e.target.style.backgroundColor = 'var(--surface2)'
+            e.target.style.borderColor = 'var(--text-muted)'
           }}
           onMouseLeave={(e) => {
-            e.target.style.backgroundColor = '#0f172a'
-            e.target.style.borderColor = '#475569'
+            e.target.style.backgroundColor = 'var(--code-bg)'
+            e.target.style.borderColor = 'var(--text-muted)'
           }}
         >
           {ex.label}
@@ -315,11 +315,11 @@ export function createExampleButtons(examples, onExampleClick) {
  */
 export function createVariableCard(name, value, description, type = 'default') {
   const typeStyles = {
-    default: { background: '#1e293b', borderLeft: '4px solid #64748b' },
-    active: { background: '#1e293b', borderLeft: '4px solid #0ea5e9' },
-    success: { background: '#1e293b', borderLeft: '4px solid #10b981' },
-    warning: { background: '#1e293b', borderLeft: '4px solid #f59e0b' },
-    error: { background: '#1e293b', borderLeft: '4px solid #f87171' },
+    default: { background: 'var(--surface2)', borderLeft: '4px solid var(--text-muted)' },
+    active: { background: 'var(--surface2)', borderLeft: '4px solid #0ea5e9' },
+    success: { background: 'var(--surface2)', borderLeft: '4px solid #10b981' },
+    warning: { background: 'var(--surface2)', borderLeft: '4px solid #f59e0b' },
+    error: { background: 'var(--surface2)', borderLeft: '4px solid #f87171' },
   }
 
   return (
@@ -334,14 +334,14 @@ export function createVariableCard(name, value, description, type = 'default') {
       initial={{ opacity: 0 }}
       exit={{ opacity: 0 }}
     >
-      <div style={{ color: '#94a3b8', fontSize: 12, marginBottom: 4 }}>
+      <div style={{ color: 'var(--text-muted)', fontSize: 12, marginBottom: 4 }}>
         <span style={{ fontFamily: 'monospace', fontWeight: 'bold' }}>{name}</span>
       </div>
-      <div style={{ color: '#e2e8f0', fontSize: 14, fontWeight: 'bold', fontFamily: 'monospace', marginBottom: 4 }}>
+      <div style={{ color: 'var(--text)', fontSize: 14, fontWeight: 'bold', fontFamily: 'monospace', marginBottom: 4 }}>
         {typeof value === 'object' ? JSON.stringify(value) : String(value)}
       </div>
       {description && (
-        <div style={{ color: '#64748b', fontSize: 11 }}>
+        <div style={{ color: 'var(--text-muted)', fontSize: 11 }}>
           {description}
         </div>
       )}

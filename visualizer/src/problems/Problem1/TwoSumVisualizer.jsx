@@ -182,7 +182,7 @@ export default function TwoSumVisualizer() {
             className="twosum-input"
             style={{ flex: 1, margin: 0 }}
           />
-          <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace' }}>target=</span>
+          <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>target=</span>
           <input
             value={targetInput}
             onChange={(e) => { setTargetInput(e.target.value); handleReset() }}

@@ -49,7 +49,7 @@ export default function PatternOverlay({ step, activeLineDom }) {
       return PatternLabels[`dp-${decision}`] || {
         icon: '?',
         label: decision ? decision.toUpperCase() : 'DP',
-        color: '#94a3b8',
+        color: 'var(--text-muted)',
       };
     }
 

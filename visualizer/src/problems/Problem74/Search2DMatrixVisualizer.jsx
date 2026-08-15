@@ -111,14 +111,14 @@ export default function Search2DMatrixVisualizer() {
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
                 {EXAMPLES.map((ex, i) => (
-                    <button key={ex.label} onClick={() => applyExample(i)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: sel === i ? '#dbeafe' : '#f1f5f9' }}>
+                    <button key={ex.label} onClick={() => applyExample(i)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: sel === i ? '#dbeafe' : 'var(--surface2)' }}>
                         {ex.label}
                     </button>
                 ))}
-                <span style={{ fontSize: 12, fontWeight: 'bold', color: '#1e293b', marginLeft: 'auto' }}>target = {target}</span>
+                <span style={{ fontSize: 12, fontWeight: 'bold', color: 'var(--surface2)', marginLeft: 'auto' }}>target = {target}</span>
             </div>
 
-            <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>Matrix</div>
+            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>Matrix</div>
             <div style={{ display: 'grid', gridTemplateColumns: `repeat(${cols}, minmax(50px, 1fr))`, gap: 4 }}>
                 {matrix.map((row, i) =>
                     row.map((val, j) => {
@@ -130,29 +130,29 @@ export default function Search2DMatrixVisualizer() {
                             <motion.div key={`${i}-${j}`} animate={{ scale: isMid ? 1.15 : 1 }} style={{
                                 padding: '8px 4px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
                                 backgroundColor: isFound ? '#dcfce7' : isMid ? '#fbbf24' : inRange ? '#dbeafe' : '#f3f4f6',
-                                border: isMid ? '2px solid #f59e0b' : inRange ? '1px solid #0ea5e9' : '1px solid #cbd5e1',
-                                borderRadius: 4, fontSize: 11, fontWeight: 'bold', color: '#1e293b'
+                                border: isMid ? '2px solid #f59e0b' : inRange ? '1px solid #0ea5e9' : '1px solid var(--border)',
+                                borderRadius: 4, fontSize: 11, fontWeight: 'bold', color: 'var(--surface2)'
                             }}>
                                 <span>{val}</span>
-                                <span style={{ fontSize: 9, color: '#64748b' }}>[{flat}]</span>
+                                <span style={{ fontSize: 9, color: 'var(--text-muted)' }}>[{flat}]</span>
                             </motion.div>
                         );
                     })
                 )}
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, padding: 8, backgroundColor: '#f8fafc', borderRadius: 6 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6 }}>
                 <div>
-                    <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>lo</div>
-                    <div style={{ fontSize: 13, fontWeight: 'bold', color: '#1e293b' }}>{lo}</div>
+                    <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>lo</div>
+                    <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--surface2)' }}>{lo}</div>
                 </div>
                 <div>
-                    <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>mid</div>
+                    <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>mid</div>
                     <div style={{ fontSize: 13, fontWeight: 'bold', color: '#a36907' }}>{mid >= 0 ? mid : '—'}</div>
                 </div>
                 <div>
-                    <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>hi</div>
-                    <div style={{ fontSize: 13, fontWeight: 'bold', color: '#1e293b' }}>{hi}</div>
+                    <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>hi</div>
+                    <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--surface2)' }}>{hi}</div>
                 </div>
             </div>
 

@@ -194,11 +194,11 @@ function VisualizationPanel({ step, applyExample, examples }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -211,10 +211,10 @@ function VisualizationPanel({ step, applyExample, examples }) {
       {['load_questions', 'load_answers', 'join_data'].includes(step.phase) && (
         <div>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Questions Table</div>
-          <div style={{ overflowX: 'auto', border: '1px solid #475569', borderRadius: 4 }}>
+          <div style={{ overflowX: 'auto', border: '1px solid var(--text-muted)', borderRadius: 4 }}>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
-                <tr style={{ backgroundColor: '#334155' }}>
+                <tr style={{ backgroundColor: 'var(--border)' }}>
                   <th className="table-cell" style={{ color: '#a36907', fontWeight: 600 }}>question_id</th>
                   <th className="table-cell" style={{ color: '#a36907', fontWeight: 600 }}>submissions</th>
                 </tr>
@@ -237,10 +237,10 @@ function VisualizationPanel({ step, applyExample, examples }) {
           <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>
             Answer Submissions (is_accepted = 1)
           </div>
-          <div style={{ overflowX: 'auto', border: '1px solid #475569', borderRadius: 4, maxHeight: 200 }}>
+          <div style={{ overflowX: 'auto', border: '1px solid var(--text-muted)', borderRadius: 4, maxHeight: 200 }}>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
-                <tr style={{ backgroundColor: '#334155' }}>
+                <tr style={{ backgroundColor: 'var(--border)' }}>
                   <th className="table-cell" style={{ color: '#a36907', fontWeight: 600 }}>answer_id</th>
                   <th className="table-cell" style={{ color: '#a36907', fontWeight: 600 }}>question_id</th>
                   <th className="table-cell" style={{ color: '#a36907', fontWeight: 600 }}>is_accepted</th>
@@ -263,10 +263,10 @@ function VisualizationPanel({ step, applyExample, examples }) {
       {['aggregate', 'calculate_rate', 'find_highest', 'done'].includes(step.phase) && (
         <div>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Aggregated Results</div>
-          <div style={{ overflowX: 'auto', border: '1px solid #475569', borderRadius: 4 }}>
+          <div style={{ overflowX: 'auto', border: '1px solid var(--text-muted)', borderRadius: 4 }}>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
-                <tr style={{ backgroundColor: '#334155' }}>
+                <tr style={{ backgroundColor: 'var(--border)' }}>
                   <th className="table-cell" style={{ color: '#a36907', fontWeight: 600 }}>question_id</th>
                   <th className="table-cell" style={{ color: '#a36907', fontWeight: 600 }}>total_submissions</th>
                   <th className="table-cell" style={{ color: '#a36907', fontWeight: 600 }}>accepted_count</th>
@@ -287,7 +287,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
                     <td
                       className="table-cell"
                       style={{
-                        color: step.result?.question_id === agg.question_id ? '#22c55e' : '#cbd5e1',
+                        color: step.result?.question_id === agg.question_id ? '#22c55e' : 'var(--border)',
                         fontWeight: step.result?.question_id === agg.question_id ? 600 : 400,
                       }}
                     >
@@ -399,9 +399,9 @@ export default function HighestAnswerRateVisualizer() {
                   width: '100%',
                   padding: 8,
                   borderRadius: 4,
-                  border: '1px solid #475569',
-                  backgroundColor: '#0f172a',
-                  color: '#e2e8f0',
+                  border: '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--code-bg)',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                   fontSize: 11,
                   minHeight: 60,
@@ -420,9 +420,9 @@ export default function HighestAnswerRateVisualizer() {
                   width: '100%',
                   padding: 8,
                   borderRadius: 4,
-                  border: '1px solid #475569',
-                  backgroundColor: '#0f172a',
-                  color: '#e2e8f0',
+                  border: '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--code-bg)',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                   fontSize: 11,
                   minHeight: 60,

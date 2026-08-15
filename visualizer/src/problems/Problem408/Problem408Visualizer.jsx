@@ -203,11 +203,11 @@ function generateSteps(word, abbr) {
 function AbbreviationVisualization({ word, abbr, step }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Matching Process</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Matching Process</div>
 
       {/* Word alignment */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Word: "{word}"</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Word: "{word}"</div>
         <div style={{ display: 'flex', gap: 3, flexWrap: 'wrap' }}>
           {word.split('').map((char, idx) => {
             const isPassed = step?.wIdx > idx
@@ -217,13 +217,13 @@ function AbbreviationVisualization({ word, abbr, step }) {
                 key={idx}
                 style={{
                   padding: '8px 10px',
-                  backgroundColor: isCurrent ? '#fee2e2' : isPassed ? '#d1fae5' : '#f1f5f9',
+                  backgroundColor: isCurrent ? '#fee2e2' : isPassed ? '#d1fae5' : 'var(--surface2)',
                   borderRadius: 4,
-                  border: isCurrent ? '2px solid #dc2626' : isPassed ? '1px solid #10b981' : '1px solid #cbd5e1',
+                  border: isCurrent ? '2px solid #dc2626' : isPassed ? '1px solid #10b981' : '1px solid var(--border)',
                   fontFamily: 'monospace',
                   fontSize: 13,
                   fontWeight: 600,
-                  color: isCurrent ? '#7f1d1d' : isPassed ? '#065f46' : '#334155',
+                  color: isCurrent ? '#7f1d1d' : isPassed ? '#065f46' : 'var(--border)',
                   minWidth: 30,
                   textAlign: 'center',
                 }}
@@ -238,7 +238,7 @@ function AbbreviationVisualization({ word, abbr, step }) {
 
       {/* Abbreviation alignment */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Abbr: "{abbr}"</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Abbr: "{abbr}"</div>
         <div style={{ display: 'flex', gap: 3, flexWrap: 'wrap' }}>
           {abbr.split('').map((char, idx) => {
             const isPassed = step?.aIdx > idx
@@ -249,13 +249,13 @@ function AbbreviationVisualization({ word, abbr, step }) {
                 key={idx}
                 style={{
                   padding: '8px 10px',
-                  backgroundColor: isCurrent ? '#dbeafe' : isPassed ? '#d1fae5' : '#f1f5f9',
+                  backgroundColor: isCurrent ? '#dbeafe' : isPassed ? '#d1fae5' : 'var(--surface2)',
                   borderRadius: 4,
-                  border: isCurrent ? '2px solid #0284c7' : isPassed ? '1px solid #10b981' : '1px solid #cbd5e1',
+                  border: isCurrent ? '2px solid #0284c7' : isPassed ? '1px solid #10b981' : '1px solid var(--border)',
                   fontFamily: 'monospace',
                   fontSize: 13,
                   fontWeight: 700,
-                  color: isCurrent ? '#0c4a6e' : isPassed ? '#065f46' : isDigit ? '#7c3aed' : '#334155',
+                  color: isCurrent ? '#0c4a6e' : isPassed ? '#065f46' : isDigit ? '#7c3aed' : 'var(--border)',
                   minWidth: 30,
                   textAlign: 'center',
                 }}
@@ -319,7 +319,7 @@ function AbbreviationVisualization({ word, abbr, step }) {
         </div>
       </div>
 
-      <div style={{ fontSize: 12, color: '#475569' }}>{step?.message}</div>
+      <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{step?.message}</div>
     </div>
   )
 }
@@ -388,7 +388,7 @@ export default function Problem408Visualizer() {
       </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button
@@ -397,11 +397,11 @@ export default function Problem408Visualizer() {
                   style={{
                     padding: '6px 12px',
                     borderRadius: 4,
-                    border: exIdx === idx ? '2px solid #06b6d4' : '1px solid #cbd5e1',
+                    border: exIdx === idx ? '2px solid #06b6d4' : '1px solid var(--border)',
                     cursor: 'pointer',
                     fontSize: 12,
-                    backgroundColor: exIdx === idx ? '#cffafe' : '#f1f5f9',
-                    color: exIdx === idx ? '#164e63' : '#334155',
+                    backgroundColor: exIdx === idx ? '#cffafe' : 'var(--surface2)',
+                    color: exIdx === idx ? '#164e63' : 'var(--border)',
                     fontWeight: exIdx === idx ? '600' : '400',
                   }}
                 >

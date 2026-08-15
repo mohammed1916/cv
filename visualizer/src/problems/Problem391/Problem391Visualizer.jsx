@@ -237,7 +237,7 @@ export default function Problem391Visualizer() {
 
       <div style={{ display: 'flex', gap: 16, flex: 1 }}>
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <div style={{ backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
+          <div style={{ backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px' }}>
             <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>
               Rectangles {inputError && <span style={{ color: '#ea0c0c' }}>— {inputError}</span>}
             </div>
@@ -246,8 +246,8 @@ export default function Problem391Visualizer() {
               onChange={(e) => { setRectanglesInput(e.target.value); handleReset() }}
               placeholder="[[1,1,3,3],[2,0,3,1]]"
               style={{
-                width: '100%', padding: '8px', backgroundColor: '#0f172a', color: '#e2e8f0',
-                border: '1px solid #334155', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
+                width: '100%', padding: '8px', backgroundColor: 'var(--code-bg)', color: 'var(--text)',
+                border: '1px solid var(--border)', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
               }}
             />
           </div>
@@ -258,7 +258,7 @@ export default function Problem391Visualizer() {
                 key={ex.label}
                 onClick={() => applyExample(ex)}
                 style={{
-                  padding: '6px 12px', backgroundColor: '#334155', color: '#e2e8f0',
+                  padding: '6px 12px', backgroundColor: 'var(--border)', color: 'var(--text)',
                   border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '12px'
                 }}
               >
@@ -268,18 +268,18 @@ export default function Problem391Visualizer() {
           </div>
 
           <div style={{
-            flex: 1, backgroundColor: '#0f172a', borderRadius: '8px', border: '1px solid #334155',
+            flex: 1, backgroundColor: 'var(--code-bg)', borderRadius: '8px', border: '1px solid var(--border)',
             position: 'relative', minHeight: 300
           }}>
             <svg width="100%" height="100%" style={{ position: 'absolute' }}>
               <defs>
                 <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#334155" strokeWidth="0.5" />
+                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="var(--border)" strokeWidth="0.5" />
                 </pattern>
               </defs>
-              <rect width="100%" height="100%" fill="#1e293b" />
+              <rect width="100%" height="100%" fill="var(--surface2)" />
               <rect x={padding} y={padding} width={gridSize - 2 * padding} height={gridSize - 2 * padding}
-                fill="url(#grid)" stroke="#475569" strokeWidth="1" />
+                fill="url(#grid)" stroke="var(--text-muted)" strokeWidth="1" />
 
               {step?.rectangles?.map((rect, idx) => {
                 const props = getRectPath(rect, 0.5, idx === step?.highlightedRect)
@@ -304,12 +304,12 @@ export default function Problem391Visualizer() {
 
           {step && (
             <div style={{ display: 'flex', gap: 12, fontSize: '13px' }}>
-              <div style={{ backgroundColor: '#1e293b', padding: '8px', borderRadius: '4px', flex: 1 }}>
-                <span style={{ color: '#64748b' }}>Total Area: </span>
+              <div style={{ backgroundColor: 'var(--surface2)', padding: '8px', borderRadius: '4px', flex: 1 }}>
+                <span style={{ color: 'var(--text-muted)' }}>Total Area: </span>
                 <span style={{ color: '#986e03', fontWeight: 'bold' }}>{step.totalArea}</span>
               </div>
-              <div style={{ backgroundColor: '#1e293b', padding: '8px', borderRadius: '4px', flex: 1 }}>
-                <span style={{ color: '#64748b' }}>Expected Area: </span>
+              <div style={{ backgroundColor: 'var(--surface2)', padding: '8px', borderRadius: '4px', flex: 1 }}>
+                <span style={{ color: 'var(--text-muted)' }}>Expected Area: </span>
                 <span style={{ color: '#986e03', fontWeight: 'bold' }}>{step.expectedArea}</span>
               </div>
               <div style={{ backgroundColor: step?.isValid ? '#10b98166' : '#ef444466', padding: '8px', borderRadius: '4px', flex: 1, textAlign: 'center' }}>
@@ -344,8 +344,8 @@ export default function Problem391Visualizer() {
       </div>
 
       <div style={{
-        backgroundColor: step?.isValid ? '#10b98166' : step?.isValid === false ? '#ef444466' : '#1e293b',
-        padding: '12px', borderRadius: '6px', color: step?.isValid ? '#86efac' : step?.isValid === false ? '#fca5a5' : '#cbd5e1',
+        backgroundColor: step?.isValid ? '#10b98166' : step?.isValid === false ? '#ef444466' : 'var(--surface2)',
+        padding: '12px', borderRadius: '6px', color: step?.isValid ? '#86efac' : step?.isValid === false ? '#fca5a5' : 'var(--border)',
         fontSize: '13px', fontFamily: 'monospace'
       }}>
         {step?.message ?? 'Press Play or Step to begin.'}

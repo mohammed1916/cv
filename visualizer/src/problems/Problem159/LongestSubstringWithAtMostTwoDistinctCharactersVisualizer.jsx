@@ -212,11 +212,11 @@ function StringVisualization({ s, left, right }) {
               alignItems: 'center',
               justifyContent: 'center',
               borderRadius: 4,
-              backgroundColor: inWindow ? '#a5b4fc' : '#e2e8f0',
-              border: idx === left || idx === right ? '3px solid #4f46e5' : '1px solid #cbd5e1',
+              backgroundColor: inWindow ? '#a5b4fc' : 'var(--text)',
+              border: idx === left || idx === right ? '3px solid #4f46e5' : '1px solid var(--border)',
               fontSize: 13,
               fontWeight: 600,
-              color: '#0f172a',
+              color: 'var(--code-bg)',
               fontFamily: 'monospace',
             }}
             animate={{ scale: inWindow ? 1.1 : 1 }}

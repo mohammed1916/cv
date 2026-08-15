@@ -6,7 +6,7 @@
 }
 
 .asw-panel {
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 12px;
     display: flex;
@@ -21,7 +21,7 @@
     border-bottom: 1px solid #313244;
     font-size: 13px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: var(--code-text);
     background: #313244;
     flex-shrink: 0;
 }
@@ -62,9 +62,9 @@
     flex: 1;
     padding: 6px 10px;
     background: #313244;
-    border: 1px solid #45475a;
+    border: 1px solid var(--code-line);
     border-radius: 6px;
-    color: #cdd6f4;
+    color: var(--code-text);
     font-size: 12px;
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
     outline: none;
@@ -89,7 +89,7 @@
     border-radius: 6px;
     font-size: 12px;
     font-weight: 600;
-    color: #1e1e2e;
+    color: var(--code-bg);
     cursor: pointer;
     transition: all 200ms;
     white-space: nowrap;
@@ -117,7 +117,7 @@
 
 .asw-empty {
     font-size: 12px;
-    color: #6c7086;
+    color: var(--code-dim);
     font-style: italic;
 }
 
@@ -127,11 +127,11 @@
     gap: 6px;
     padding: 6px 10px;
     background: #313244;
-    border: 1px solid #45475a;
+    border: 1px solid var(--code-line);
     border-radius: 6px;
     font-size: 12px;
     font-weight: 500;
-    color: #cdd6f4;
+    color: var(--code-text);
 }
 
 .asw-chip-remove {
@@ -174,9 +174,9 @@
 .asw-example-btn {
     padding: 4px 8px;
     background: #313244;
-    border: 1px solid #45475a;
+    border: 1px solid var(--code-line);
     border-radius: 4px;
-    color: #cdd6f4;
+    color: var(--code-text);
     font-size: 11px;
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
     cursor: pointer;
@@ -184,7 +184,7 @@
 }
 
 .asw-example-btn:hover {
-    background: #45475a;
+    background: var(--code-line);
     border-color: #f5c2e7;
     color: #f5c2e7;
 }
@@ -192,7 +192,7 @@
 .asw-status {
     padding: 10px 12px;
     background: #313244;
-    border: 1px solid #45475a;
+    border: 1px solid var(--code-line);
     border-radius: 6px;
     min-height: 40px;
     display: flex;
@@ -211,7 +211,7 @@
     height: 350px;
     background: #313244;
     border-radius: 8px;
-    border: 1px solid #45475a;
+    border: 1px solid var(--code-line);
     margin-top: 8px;
 }
 
@@ -220,8 +220,8 @@
 /* #94e2d5 - teal (accent) */
 /* #a6e3a1 - green (primary) */
 /* #f5c2e7 - pink (secondary) */
-/* #1e1e2e - base background */
+/* var(--code-bg) - base background */
 /* #313244 - surface0 */
-/* #45475a - surface1 */
-/* #cdd6f4 - text */
+/* var(--code-line) - surface1 */
+/* var(--code-text) - text */
 /* #f87171 - red (danger) */

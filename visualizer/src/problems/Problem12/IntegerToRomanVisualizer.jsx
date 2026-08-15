@@ -284,10 +284,10 @@ export default function IntegerToRomanVisualizer() {
             style={{
               padding: '6px 12px',
               borderRadius: 4,
-              border: '1px solid #cbd5e1',
+              border: '1px solid var(--border)',
               cursor: 'pointer',
               fontSize: 12,
-              backgroundColor: numInput === ex.num ? '#dbeafe' : '#f1f5f9',
+              backgroundColor: numInput === ex.num ? '#dbeafe' : 'var(--surface2)',
               fontWeight: numInput === ex.num ? 600 : 400,
             }}
             title={ex.note}
@@ -298,7 +298,7 @@ export default function IntegerToRomanVisualizer() {
       </div>
 
       <div style={{ display: 'flex', gap: 12, marginBottom: 16, alignItems: 'center' }}>
-        <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace' }}>num=</span>
+        <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>num=</span>
         <input
           type="number"
           value={numInput}
@@ -309,7 +309,7 @@ export default function IntegerToRomanVisualizer() {
             flex: 1,
             padding: '8px 12px',
             borderRadius: 4,
-            border: '1px solid #cbd5e1',
+            border: '1px solid var(--border)',
             fontFamily: 'monospace',
             fontSize: 13,
           }}
@@ -324,7 +324,7 @@ export default function IntegerToRomanVisualizer() {
 
       {step && (
         <>
-          <div style={{ padding: 12, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 12 }}>
+          <div style={{ padding: 12, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 12 }}>
             <div style={{ fontWeight: 600, marginBottom: 8 }}>{step.message}</div>
           </div>
 
@@ -344,7 +344,7 @@ export default function IntegerToRomanVisualizer() {
           </div>
 
           <div style={{ paddingTop: 8 }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Value-Symbol Pairs:</div>
+            <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Value-Symbol Pairs:</div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(70px, 1fr))', gap: 6 }}>
               {VALUE_SYMBOL_PAIRS.map(({ value, symbol }, idx) => {
                 const isActive = step.currentIdx === idx
@@ -354,17 +354,17 @@ export default function IntegerToRomanVisualizer() {
                     key={`${value}-${symbol}`}
                     animate={{
                       scale: isActive ? 1.1 : 1,
-                      backgroundColor: isActive ? '#0ea5e9' : isProcessed ? '#dcfce7' : '#f1f5f9',
+                      backgroundColor: isActive ? '#0ea5e9' : isProcessed ? '#dcfce7' : 'var(--surface2)',
                     }}
                     style={{
                       padding: '8px',
                       borderRadius: 4,
-                      border: isActive ? '2px solid #0ea5e9' : '1px solid #cbd5e1',
+                      border: isActive ? '2px solid #0ea5e9' : '1px solid var(--border)',
                       textAlign: 'center',
                       fontSize: 11,
                       fontFamily: 'monospace',
                       fontWeight: 600,
-                      color: isActive ? '#fff' : isProcessed ? '#166534' : '#1e293b',
+                      color: isActive ? '#fff' : isProcessed ? '#166534' : 'var(--surface2)',
                       cursor: 'default',
                     }}
                   >
@@ -381,7 +381,7 @@ export default function IntegerToRomanVisualizer() {
   )
 
   const statusPanel = (
-    <div className="i2r-status" style={{ padding: 12, backgroundColor: '#f1f5f9', fontSize: 12, borderTop: '1px solid #e2e8f0' }}>
+    <div className="i2r-status" style={{ padding: 12, backgroundColor: 'var(--surface2)', fontSize: 12, borderTop: '1px solid var(--text)' }}>
       Status: Step {stepIndex + 1} of {steps.length}
     </div>
   )

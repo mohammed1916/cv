@@ -265,10 +265,10 @@ export default function Problem381Visualizer() {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid var(--border)',
                   cursor: 'pointer',
                   fontSize: 12,
-                  backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
+                  backgroundColor: exIdx === i ? '#dbeafe' : 'var(--surface2)',
                   fontWeight: exIdx === i ? 600 : 400,
                 }}
               >
@@ -280,7 +280,7 @@ export default function Problem381Visualizer() {
           {step && (
             <>
               {/* Message */}
-              <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 12, fontWeight: 500 }}>
+              <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 12, fontWeight: 500 }}>
                 {step.message}
               </div>
 
@@ -298,7 +298,7 @@ export default function Problem381Visualizer() {
 
               {/* Blacklist */}
               <div>
-                <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Blacklist</div>
+                <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Blacklist</div>
                 <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
                   {step.blacklist.map((val) => (
                     <motion.div
@@ -326,7 +326,7 @@ export default function Problem381Visualizer() {
               {/* Mapping Display */}
               {step.phase !== 'init' && (
                 <div>
-                  <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Blacklist → Valid Mapping</div>
+                  <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Blacklist → Valid Mapping</div>
                   <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
                     {Array.from(step.blMap.entries()).map(([key, val]) => (
                       <motion.div
@@ -339,9 +339,9 @@ export default function Problem381Visualizer() {
                           border: '2px solid',
                           fontSize: 12,
                           fontWeight: 600,
-                          backgroundColor: step.remappedTo === key ? '#dcfce7' : '#f1f5f9',
-                          borderColor: step.remappedTo === key ? '#10b981' : '#cbd5e1',
-                          color: step.remappedTo === key ? '#047857' : '#334155',
+                          backgroundColor: step.remappedTo === key ? '#dcfce7' : 'var(--surface2)',
+                          borderColor: step.remappedTo === key ? '#10b981' : 'var(--border)',
+                          color: step.remappedTo === key ? '#047857' : 'var(--border)',
                         }}
                       >
                         {key} → {val === null ? 'ignore' : val}

@@ -307,10 +307,10 @@ export default function ThreeSumVisualizer() {
             style={{
               padding: '6px 12px',
               borderRadius: 4,
-              border: '1px solid #cbd5e1',
+              border: '1px solid var(--border)',
               cursor: 'pointer',
               fontSize: 12,
-              backgroundColor: '#f1f5f9',
+              backgroundColor: 'var(--surface2)',
               fontWeight: 500,
             }}
           >
@@ -321,13 +321,13 @@ export default function ThreeSumVisualizer() {
 
       <div style={{ display: 'flex', gap: 8, flexDirection: 'column' }}>
         <div>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Input Array</div>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Input Array</div>
           <input
             style={{
               width: '100%',
               padding: '8px 12px',
               borderRadius: 4,
-              border: '1px solid #cbd5e1',
+              border: '1px solid var(--border)',
               fontFamily: 'monospace',
               fontSize: 12,
             }}
@@ -342,7 +342,7 @@ export default function ThreeSumVisualizer() {
         </div>
 
         <div>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Sorted Array · Pointers</div>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Sorted Array · Pointers</div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
             {sorted.map((val, idx) => {
               const isI = step?.i === idx
@@ -372,9 +372,9 @@ export default function ThreeSumVisualizer() {
                                   ? '#dbeafe'
                                   : isR
                                     ? '#fed7aa'
-                                    : '#f1f5f9',
-                            borderColor: isFound ? '#22c55e' : isI ? '#f59e0b' : isL ? '#0ea5e9' : isR ? '#f97316' : '#cbd5e1',
-                            color: isFound ? '#22c55e' : isI ? '#d97706' : isL ? '#0284c7' : isR ? '#ea580c' : '#1e293b',
+                                    : 'var(--surface2)',
+                            borderColor: isFound ? '#22c55e' : isI ? '#f59e0b' : isL ? '#0ea5e9' : isR ? '#f97316' : 'var(--border)',
+                            color: isFound ? '#22c55e' : isI ? '#d97706' : isL ? '#0284c7' : isR ? '#ea580c' : 'var(--surface2)',
                           }}
                           animate={{ y: lifted ? -12 : 0, scale: lifted ? 1.15 : 1 }}
                           transition={{ type: 'spring', stiffness: 420, damping: 26 }}
@@ -406,11 +406,11 @@ export default function ThreeSumVisualizer() {
               </div>
 
               {step?.sum != null && (
-                <div style={{ padding: 10, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 12, border: '1px solid #e2e8f0' }}>
+                <div style={{ padding: 10, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 12, border: '1px solid var(--text)' }}>
                   <div style={{ fontWeight: 600, marginBottom: 6 }}>Sum Calculation</div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
                     <span style={{ fontFamily: 'monospace', fontSize: 13 }}>nums[i] + nums[l] + nums[r] =</span>
-                    <span style={{ fontFamily: 'monospace', fontSize: 14, fontWeight: 700, color: '#1e293b' }}>{step.sum}</span>
+                    <span style={{ fontFamily: 'monospace', fontSize: 14, fontWeight: 700, color: 'var(--surface2)' }}>{step.sum}</span>
                     <span
                       style={{
                         fontSize: 11,
@@ -429,7 +429,7 @@ export default function ThreeSumVisualizer() {
               )}
 
               <div>
-                <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Triplets Found</div>
+                <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Triplets Found</div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                   <AnimatePresence>
                     {(step?.result ?? []).length > 0 ? (
@@ -473,7 +473,7 @@ export default function ThreeSumVisualizer() {
 
   const statusPanel = (
     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '12px 16px', minHeight: 0 }}>
-      <div style={{ fontSize: 12, color: '#64748b' }}>
+      <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>
         {step?.message ?? 'Press Play or Step to begin.'}
       </div>
     </div>

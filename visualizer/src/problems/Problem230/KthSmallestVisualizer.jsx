@@ -162,7 +162,7 @@ export default function KthSmallestVisualizer() {
                                     const from = positions.get(fromId)
                                     const to = positions.get(toId)
                                     if (!from || !to) return null
-                                    return <line key={`${fromId}-${toId}`} x1={from.x} y1={from.y} x2={to.x} y2={to.y} stroke="#45475a" strokeWidth={1.5} />
+                                    return <line key={`${fromId}-${toId}`} x1={from.x} y1={from.y} x2={to.x} y2={to.y} stroke="var(--code-line)" strokeWidth={1.5} />
                                 })}
                             </svg>
                             {allNodes.map((node) => {

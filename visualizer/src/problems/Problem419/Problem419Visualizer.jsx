@@ -156,19 +156,19 @@ function BattleshipsVisualization({ board, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Battleships Counter</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Battleships Counter</div>
 
       {/* Board visualization */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Board ({m}x{n})</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Board ({m}x{n})</div>
         <div style={{
           display: 'grid',
           gridTemplateColumns: `repeat(${n}, minmax(60px, 1fr))`,
           gap: 4,
           padding: 8,
-          backgroundColor: '#f1f5f9',
+          backgroundColor: 'var(--surface2)',
           borderRadius: 6,
-          border: '2px solid #cbd5e1',
+          border: '2px solid var(--border)',
           width: 'fit-content',
         }}>
           {board.map((row, i) =>
@@ -177,8 +177,8 @@ function BattleshipsVisualization({ board, step }) {
               const isVisited = visited[i] && visited[i][j]
               const isShip = cell === 'X'
 
-              let bgColor = '#f1f5f9'
-              let borderColor = '#cbd5e1'
+              let bgColor = 'var(--surface2)'
+              let borderColor = 'var(--border)'
               let content = '·'
 
               if (isShip) {
@@ -191,7 +191,7 @@ function BattleshipsVisualization({ board, step }) {
                   borderColor = '#f97316'
                   content = 'X'
                 } else {
-                  bgColor = '#ffffff'
+                  bgColor = 'var(--surface)'
                   borderColor = '#f97316'
                   content = 'X'
                 }
@@ -208,7 +208,7 @@ function BattleshipsVisualization({ board, step }) {
                     textAlign: 'center',
                     fontSize: 14,
                     fontWeight: 700,
-                    color: isShip ? '#f97316' : '#cbd5e1',
+                    color: isShip ? '#f97316' : 'var(--border)',
                     minWidth: 50,
                     display: 'flex',
                     alignItems: 'center',
@@ -228,7 +228,7 @@ function BattleshipsVisualization({ board, step }) {
 
       {/* Legend */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
-        <div style={{ padding: 10, backgroundColor: '#ffffff', borderRadius: 4, border: '2px solid #f97316' }}>
+        <div style={{ padding: 10, backgroundColor: 'var(--surface)', borderRadius: 4, border: '2px solid #f97316' }}>
           <div style={{ fontSize: 10, fontWeight: 600, color: '#92400e' }}>Unvisited Ship</div>
           <div style={{ fontSize: 11, color: '#92400e', marginTop: 4 }}>Potential ship</div>
         </div>
@@ -236,16 +236,16 @@ function BattleshipsVisualization({ board, step }) {
           <div style={{ fontSize: 10, fontWeight: 600, color: '#92400e' }}>Visited Ship</div>
           <div style={{ fontSize: 11, color: '#92400e', marginTop: 4 }}>Part of a ship</div>
         </div>
-        <div style={{ padding: 10, backgroundColor: '#f1f5f9', borderRadius: 4, border: '2px solid #cbd5e1' }}>
-          <div style={{ fontSize: 10, fontWeight: 600, color: '#64748b' }}>Water</div>
-          <div style={{ fontSize: 11, color: '#64748b', marginTop: 4 }}>Empty cell</div>
+        <div style={{ padding: 10, backgroundColor: 'var(--surface2)', borderRadius: 4, border: '2px solid var(--border)' }}>
+          <div style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-muted)' }}>Water</div>
+          <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 4 }}>Empty cell</div>
         </div>
       </div>
 
       {/* Ships list */}
       {ships.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Detected Ships</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Detected Ships</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {ships.map((pos, idx) => (
               <div
@@ -275,7 +275,7 @@ function BattleshipsVisualization({ board, step }) {
         </div>
       </div>
 
-      <div style={{ fontSize: 12, color: '#475569' }}>{step?.message}</div>
+      <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{step?.message}</div>
     </div>
   )
 }
@@ -331,7 +331,7 @@ export default function Problem419Visualizer() {
         />),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button
@@ -340,11 +340,11 @@ export default function Problem419Visualizer() {
                   style={{
                     padding: '6px 12px',
                     borderRadius: 4,
-                    border: exIdx === idx ? '2px solid #f97316' : '1px solid #cbd5e1',
+                    border: exIdx === idx ? '2px solid #f97316' : '1px solid var(--border)',
                     cursor: 'pointer',
                     fontSize: 12,
-                    backgroundColor: exIdx === idx ? '#fed7aa' : '#f1f5f9',
-                    color: exIdx === idx ? '#92400e' : '#334155',
+                    backgroundColor: exIdx === idx ? '#fed7aa' : 'var(--surface2)',
+                    color: exIdx === idx ? '#92400e' : 'var(--border)',
                     fontWeight: exIdx === idx ? '600' : '400',
                   }}
                 >

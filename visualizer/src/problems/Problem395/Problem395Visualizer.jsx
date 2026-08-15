@@ -196,7 +196,7 @@ export default function Problem395Visualizer() {
 
       <div style={{ display: 'flex', gap: 16, flex: 1 }}>
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <div style={{ display: 'flex', gap: 12, backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
+          <div style={{ display: 'flex', gap: 12, backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px' }}>
             <div style={{ flex: 1 }}>
               <div style={{ color: '#627794', fontSize: '13px', marginBottom: '6px' }}>String (s)</div>
               <input
@@ -204,8 +204,8 @@ export default function Problem395Visualizer() {
                 onChange={(e) => { setSInput(e.target.value); handleReset() }}
                 placeholder="aaab"
                 style={{
-                  width: '100%', padding: '8px', backgroundColor: '#0f172a', color: '#e2e8f0',
-                  border: '1px solid #334155', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
+                  width: '100%', padding: '8px', backgroundColor: 'var(--code-bg)', color: 'var(--text)',
+                  border: '1px solid var(--border)', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
                 }}
               />
             </div>
@@ -218,8 +218,8 @@ export default function Problem395Visualizer() {
                 type="number"
                 min="1"
                 style={{
-                  width: '100%', padding: '8px', backgroundColor: '#0f172a', color: '#e2e8f0',
-                  border: '1px solid #334155', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
+                  width: '100%', padding: '8px', backgroundColor: 'var(--code-bg)', color: 'var(--text)',
+                  border: '1px solid var(--border)', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
                 }}
               />
             </div>
@@ -235,7 +235,7 @@ export default function Problem395Visualizer() {
                 key={ex.label}
                 onClick={() => applyExample(ex)}
                 style={{
-                  padding: '6px 12px', backgroundColor: '#334155', color: '#e2e8f0',
+                  padding: '6px 12px', backgroundColor: 'var(--border)', color: 'var(--text)',
                   border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '12px'
                 }}
               >
@@ -244,7 +244,7 @@ export default function Problem395Visualizer() {
             ))}
           </div>
 
-          <div style={{ backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
+          <div style={{ backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px' }}>
             <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>String: {s}</div>
             <div style={{ display: 'flex', gap: '2px', flexWrap: 'wrap' }}>
               {s.split('').map((char, idx) => {
@@ -256,7 +256,7 @@ export default function Problem395Visualizer() {
                     key={idx}
                     style={{
                       width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      backgroundColor: inCurrentStr ? (freq >= k ? '#10b981' : '#ef4444') : '#334155',
+                      backgroundColor: inCurrentStr ? (freq >= k ? '#10b981' : '#ef4444') : 'var(--border)',
                       color: '#5577a4', borderRadius: '4px', fontSize: '13px', fontWeight: 'bold',
                       position: 'relative'
                     }}
@@ -268,7 +268,7 @@ export default function Problem395Visualizer() {
             </div>
           </div>
 
-          <div style={{ flex: 1, backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <div style={{ flex: 1, backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: 12 }}>
             <div>
               <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>Character Frequencies</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
@@ -290,8 +290,8 @@ export default function Problem395Visualizer() {
             </div>
 
             {step?.result !== undefined && (
-              <div style={{ backgroundColor: '#334155', padding: '8px', borderRadius: '4px', textAlign: 'center' }}>
-                <div style={{ color: '#64748b', fontSize: '12px' }}>Result</div>
+              <div style={{ backgroundColor: 'var(--border)', padding: '8px', borderRadius: '4px', textAlign: 'center' }}>
+                <div style={{ color: 'var(--text-muted)', fontSize: '12px' }}>Result</div>
                 <div style={{ color: '#0870f0', fontSize: '18px', fontWeight: 'bold' }}>
                   {step.result}
                 </div>
@@ -301,12 +301,12 @@ export default function Problem395Visualizer() {
 
           {step && (
             <div style={{ display: 'flex', gap: 12, fontSize: '13px' }}>
-              <div style={{ backgroundColor: '#1e293b', padding: '8px', borderRadius: '4px', flex: 1 }}>
-                <span style={{ color: '#64748b' }}>K: </span>
+              <div style={{ backgroundColor: 'var(--surface2)', padding: '8px', borderRadius: '4px', flex: 1 }}>
+                <span style={{ color: 'var(--text-muted)' }}>K: </span>
                 <span style={{ color: '#986e03', fontWeight: 'bold' }}>{k}</span>
               </div>
-              <div style={{ backgroundColor: step?.isValid ? '#10b98166' : step?.isValid === false ? '#ef444466' : '#1e293b', padding: '8px', borderRadius: '4px', flex: 1, textAlign: 'center' }}>
-                <span style={{ color: step?.isValid ? '#86efac' : step?.isValid === false ? '#fca5a5' : '#cbd5e1', fontWeight: 'bold' }}>
+              <div style={{ backgroundColor: step?.isValid ? '#10b98166' : step?.isValid === false ? '#ef444466' : 'var(--surface2)', padding: '8px', borderRadius: '4px', flex: 1, textAlign: 'center' }}>
+                <span style={{ color: step?.isValid ? '#86efac' : step?.isValid === false ? '#fca5a5' : 'var(--border)', fontWeight: 'bold' }}>
                   {step?.isValid === true ? 'Valid' : step?.isValid === false ? 'Invalid' : 'Checking...'}
                 </span>
               </div>
@@ -337,8 +337,8 @@ export default function Problem395Visualizer() {
       </div>
 
       <div style={{
-        backgroundColor: step?.isValid === true ? '#10b98166' : step?.isValid === false ? '#ef444466' : '#1e293b',
-        padding: '12px', borderRadius: '6px', color: step?.isValid === true ? '#86efac' : step?.isValid === false ? '#fca5a5' : '#cbd5e1',
+        backgroundColor: step?.isValid === true ? '#10b98166' : step?.isValid === false ? '#ef444466' : 'var(--surface2)',
+        padding: '12px', borderRadius: '6px', color: step?.isValid === true ? '#86efac' : step?.isValid === false ? '#fca5a5' : 'var(--border)',
         fontSize: '13px', fontFamily: 'monospace'
       }}>
         {step?.message ?? 'Press Play or Step to begin.'}

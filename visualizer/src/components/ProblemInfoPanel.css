@@ -5,7 +5,7 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0 1.25rem;
-    background: var(--surface, #1e1e2e);
+    background: var(--surface, var(--code-bg));
     border-bottom: 1px solid var(--border, #2a2a3d);
 }
 
@@ -81,7 +81,7 @@
 }
 
 .problem-info-inner pre {
-    background: var(--surface, #1e1e2e);
+    background: var(--surface, var(--code-bg));
     border: 1px solid var(--border, #2a2a3d);
     border-radius: 6px;
     padding: 0.75rem 1rem;
@@ -117,7 +117,7 @@
 /* Premium problems: an explicit note reads as an explanation rather than the
    bug that "Description not available" implied. */
 .problem-info-premium {
-    color: var(--text-muted, #94a3b8);
+    color: var(--text-muted, var(--text-muted));
     font-size: 0.85rem;
     line-height: 1.6;
     padding: 0.7rem 0.85rem;

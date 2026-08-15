@@ -665,9 +665,9 @@
 
   padding: 0.75rem 1.2rem;
 
-  color: #33e9c2;
+  color: var(--primary);
   /* background: rgba(232, 114, 114, 0.04); */
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border);
   border-radius: 999px;
 
   font-size: 0.95rem;
@@ -686,7 +686,7 @@
 }
 
 .back-btn:hover {
-  color: #8a22e4;
+  color: var(--primary-d);
   /* background: rgba(139, 92, 246, 0.12); */
   border-color: rgba(167, 139, 250, 0.35);
   box-shadow: 0 8px 24px rgba(139, 92, 246, 0.18);
@@ -712,7 +712,7 @@
 }
 
 .back-btn-icon {
-  stroke: #8b5cf6;
+  stroke: var(--primary);
   stroke-width: 2.4;
   fill: none;
 
@@ -723,7 +723,7 @@
 }
 
 .back-btn:hover .back-btn-icon {
-  stroke: #22d3ee;
+  stroke: var(--info);
   transform: translateX(-4px);
   filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.45));
 }
@@ -769,11 +769,24 @@
      taller than the window rather than clipping against .problem-page. */
   flex: 1 1 0;
   min-height: 0;
-  overflow-y: auto;
+  /* The workspace, rather than the browser, owns its scroll area.  This
+     leaves every visualizer with a real viewport-sized canvas once the short
+     page chrome is out of the way. */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   padding: 1.75rem var(--page-shell-padding);
   max-width: var(--page-shell-max-width);
   margin: 0 auto;
   width: 100%;
+}
+
+/* Most visualizers already declare a 100% shell.  The fallback makes that
+   contract true for older problems too, so a diagram remains beside the code
+   instead of being pushed below it by an unconstrained parent. */
+.problem-content > * {
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
 @media (max-width: 960px) {

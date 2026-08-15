@@ -92,12 +92,12 @@ function BinaryVisualization({ nums, binaries, bitPos }) {
   if (!binaries) return null
 
   return (
-    <div style={{ padding: 12, backgroundColor: '#f9fafb', borderRadius: 6, border: '1px solid #cbd5e1' }}>
-      <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Binary View</div>
+    <div style={{ padding: 12, backgroundColor: '#f9fafb', borderRadius: 6, border: '1px solid var(--border)' }}>
+      <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Binary View</div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
         {binaries.map((bin, i) => (
           <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 10 }}>
-            <div style={{ fontWeight: 600, color: '#1e293b', minWidth: 40 }}>{nums[i]}</div>
+            <div style={{ fontWeight: 600, color: 'var(--surface2)', minWidth: 40 }}>{nums[i]}</div>
             <div style={{ fontFamily: 'monospace', display: 'flex', gap: 1 }}>
               {bin.split('').map((bit, j) => (
                 <div
@@ -106,13 +106,13 @@ function BinaryVisualization({ nums, binaries, bitPos }) {
                     width: 20,
                     height: 20,
                     borderRadius: 3,
-                    backgroundColor: j === bitPos ? (bit === '1' ? '#dcfce7' : '#fee2e2') : '#f1f5f9',
-                    border: j === bitPos ? `2px solid ${bit === '1' ? '#10b981' : '#dc2626'}` : '1px solid #cbd5e1',
+                    backgroundColor: j === bitPos ? (bit === '1' ? '#dcfce7' : '#fee2e2') : 'var(--surface2)',
+                    border: j === bitPos ? `2px solid ${bit === '1' ? '#10b981' : '#dc2626'}` : '1px solid var(--border)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     fontWeight: 700,
-                    color: j === bitPos ? (bit === '1' ? '#166534' : '#991b1b') : '#475569',
+                    color: j === bitPos ? (bit === '1' ? '#166534' : '#991b1b') : 'var(--text-muted)',
                   }}
                 >
                   {bit}
@@ -136,7 +136,7 @@ function VisualizationPanel({ nums, step, applyEx }) {
       )}
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -145,10 +145,10 @@ function VisualizationPanel({ nums, step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9',
+                backgroundColor: 'var(--surface2)',
               }}
             >
               {e.label}
@@ -165,8 +165,8 @@ function VisualizationPanel({ nums, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Input Numbers</div>
-        <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', padding: 10, backgroundColor: '#f9fafb', borderRadius: 6, border: '1px solid #cbd5e1' }}>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Input Numbers</div>
+        <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', padding: 10, backgroundColor: '#f9fafb', borderRadius: 6, border: '1px solid var(--border)' }}>
           {nums.map((num, i) => (
             <motion.div
               key={i}

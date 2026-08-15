@@ -30,17 +30,17 @@
 
 .scramble-example-btn {
   padding: 8px 16px;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border);
   border-radius: 4px;
-  background: #f1f5f9;
+  background: var(--surface2);
   cursor: pointer;
   font-size: 12px;
   transition: all 0.2s;
 }
 
 .scramble-example-btn:hover {
-  background: #e2e8f0;
-  border-color: #94a3b8;
+  background: var(--text);
+  border-color: var(--text-muted);
 }
 
 .scramble-example-btn.active {
@@ -63,7 +63,7 @@
 
 .scramble-string-label {
   font-size: 11px;
-  color: #64748b;
+  color: var(--text-muted);
   font-weight: 500;
 }
 
@@ -120,10 +120,10 @@
 
 .scramble-status {
   padding: 12px;
-  background: #f1f5f9;
+  background: var(--surface2);
   border-radius: 4px;
   font-size: 12px;
-  color: #475569;
+  color: var(--text-muted);
   font-family: monospace;
   min-height: 40px;
   word-break: break-word;

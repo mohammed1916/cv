@@ -80,7 +80,7 @@
 }
 
 .lcs-chip:hover {
-    background: #334155;
+    background: var(--border);
     color: var(--text);
 }
 
@@ -99,8 +99,8 @@
 .lcs-input {
     padding: 7px 11px;
     border-radius: 7px;
-    border: 1px solid #334155;
-    background: #0f172a;
+    border: 1px solid var(--border);
+    background: var(--code-bg);
     color: var(--text);
     font-family: monospace;
     font-size: 13px;
@@ -137,14 +137,14 @@
     font-family: monospace;
     font-size: 15px;
     font-weight: 700;
-    border: 2px solid #334155;
-    background: #1e293b;
+    border: 2px solid var(--border);
+    background: var(--surface2);
     color: var(--text);
     transition: background 0.2s, border-color 0.2s, color 0.2s;
 }
 
 .lcs-cell.current {
-    border-color: #94a3b8;
+    border-color: var(--text-muted);
     color: #627794;
 }
 
@@ -156,8 +156,8 @@
 }
 
 .lcs-cell.skip {
-    border-color: #475569;
-    color: #475569;
+    border-color: var(--text-muted);
+    color: var(--text-muted);
     opacity: 0.5;
 }
 

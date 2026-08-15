@@ -18,7 +18,7 @@
   display: grid;
   gap: 6px;
   padding: 12px;
-  background: #ffffff;
+  background: var(--surface);
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
@@ -48,19 +48,19 @@
 }
 
 .matrix-cell.neutral {
-  background-color: #f1f5f9;
-  border: 1px solid #cbd5e1;
-  color: #1e293b;
+  background-color: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--surface2);
 }
 
 /* Info Panel */
 .info-panel {
   padding: 12px;
-  background: #f8fafc;
+  background: var(--surface);
   border-left: 3px solid #0ea5e9;
   border-radius: 6px;
   font-size: 11px;
-  color: #475569;
+  color: var(--text-muted);
   line-height: 1.5;
 }
 
@@ -111,7 +111,7 @@
 
 .sum-badge.active {
   background: #0ea5e9;
-  color: #ffffff;
+  color: var(--surface);
   transform: scale(1.15);
 }
 
@@ -119,11 +119,11 @@
 .example-button {
   padding: 6px 12px;
   border-radius: 4px;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border);
   cursor: pointer;
   font-size: 12px;
-  background-color: #f1f5f9;
-  color: #1e293b;
+  background-color: var(--surface2);
+  color: var(--surface2);
   font-weight: 400;
   transition: all 0.2s ease;
 }
@@ -136,7 +136,7 @@
 }
 
 .example-button:hover {
-  background-color: #e2e8f0;
+  background-color: var(--text);
 }
 
 /* Result Box */
@@ -175,11 +175,11 @@
 /* Message Box */
 .message-box {
   padding: 10px;
-  background-color: #f8fafc;
+  background-color: var(--surface);
   border-left: 3px solid #0ea5e9;
   border-radius: 6px;
   font-size: 11px;
-  color: #475569;
+  color: var(--text-muted);
   line-height: 1.6;
 }
 

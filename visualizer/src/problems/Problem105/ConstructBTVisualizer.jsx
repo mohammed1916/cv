@@ -216,7 +216,7 @@ export default function ConstructBTVisualizer() {
                     {allEdges.map((e) => {
                         const p = treeLayout.get(e.from), c = treeLayout.get(e.to)
                         if (!p || !c || !builtSet.has(e.from) || !builtSet.has(e.to)) return null
-                        return <line key={`${e.from}-${e.to}`} x1={p.x} y1={p.y} x2={c.x} y2={c.y} stroke="#45475a" strokeWidth={2} />
+                        return <line key={`${e.from}-${e.to}`} x1={p.x} y1={p.y} x2={c.x} y2={c.y} stroke="var(--code-line)" strokeWidth={2} />
                     })}
                 </svg>
                 {(step?.builtNodes ?? []).map((nd) => {

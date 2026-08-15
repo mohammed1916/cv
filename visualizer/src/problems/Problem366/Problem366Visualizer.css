@@ -25,9 +25,9 @@
 .p366-message {
     margin: 0;
     font-size: 13px;
-    color: #a6adc8;
+    color: var(--code-dim);
     padding: 6px 10px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 6px;
 }
@@ -73,7 +73,7 @@
 
 .p366-chip {
     background: #313244;
-    color: #cdd6f4;
+    color: var(--code-text);
     border: none;
     border-radius: 6px;
     padding: 4px 10px;
@@ -83,13 +83,13 @@
 }
 
 .p366-chip:hover {
-    background: #45475a;
+    background: var(--code-line);
 }
 
 .p366-input {
-    background: #11111b;
-    color: #cdd6f4;
-    border: 1px solid #45475a;
+    background: var(--code-surface);
+    color: var(--code-text);
+    border: 1px solid var(--code-line);
     border-radius: 6px;
     padding: 6px 10px;
     font-size: 13px;
@@ -102,7 +102,7 @@
     overflow: hidden;
     border: 1px solid #313244;
     border-radius: 8px;
-    background: #11111b;
+    background: var(--code-surface);
     flex-shrink: 0;
 }
 
@@ -112,13 +112,13 @@
     height: 44px;
     border-radius: 50%;
     background: #313244;
-    border: 2px solid #45475a;
+    border: 2px solid var(--code-line);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 15px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: var(--code-text);
     transition: border-color 0.2s, background 0.2s;
     cursor: default;
     user-select: none;
@@ -135,7 +135,7 @@
     bottom: -18px;
     font-size: 10px;
     color: #89b4fa;
-    background: #11111b;
+    background: var(--code-surface);
     padding: 1px 4px;
     border-radius: 3px;
     border: 1px solid #313244;
@@ -160,7 +160,7 @@
 
 .p366-heights-label {
     font-size: 12px;
-    color: #6c7086;
+    color: var(--code-dim);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -171,7 +171,7 @@
     flex-direction: column;
     gap: 4px;
     padding: 8px;
-    background: #11111b;
+    background: var(--code-surface);
     border-radius: 6px;
     border: 1px solid #313244;
     max-height: 120px;
@@ -194,7 +194,7 @@
 
 .p366-leaves-label {
     font-size: 12px;
-    color: #6c7086;
+    color: var(--code-dim);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -206,7 +206,7 @@
     flex-direction: column;
     gap: 6px;
     padding: 8px;
-    background: #11111b;
+    background: var(--code-surface);
     border-radius: 6px;
     border: 1px solid #313244;
     flex-grow: 1;
@@ -218,7 +218,7 @@
     align-items: center;
     gap: 8px;
     padding: 6px 8px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border-left: 3px solid #f38ba8;
     border-radius: 4px;
 }
@@ -238,7 +238,7 @@
 }
 
 .p366-empty {
-    color: #6c7086;
+    color: var(--code-dim);
     font-size: 12px;
     padding: 8px;
 }

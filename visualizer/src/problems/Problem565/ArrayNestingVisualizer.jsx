@@ -248,11 +248,11 @@ function VisualizationPanel({ step, applyExample, examples }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -271,8 +271,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
               const isInPath = step.path?.includes(idx)
               const isVisited = step.visited?.[idx]
 
-              let bgColor = '#1e293b'
-              let borderColor = '#475569'
+              let bgColor = 'var(--surface2)'
+              let borderColor = 'var(--text-muted)'
 
               if (isCurrentIndex) {
                 bgColor = '#fca5a5'
@@ -311,7 +311,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.path && step?.path.length > 0 && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #9f7aea' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #9f7aea' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#8758e5', marginBottom: 8 }}>Path (Index Jumps)</div>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
             {step.path.map((idx, i) => (
@@ -319,10 +319,10 @@ function VisualizationPanel({ step, applyExample, examples }) {
                 <div
                   style={{
                     padding: '4px 8px',
-                    backgroundColor: '#0f172a',
+                    backgroundColor: 'var(--code-bg)',
                     border: '1px solid #9f7aea',
                     borderRadius: 3,
-                    color: '#e2e8f0',
+                    color: 'var(--text)',
                     fontFamily: 'monospace',
                     fontWeight: 600,
                     fontSize: 12,
@@ -340,7 +340,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.cycleSize !== undefined && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f87171' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #f87171' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#ea0c0c', marginBottom: 6 }}>Cycle Size</div>
           <div style={{ fontSize: 18, fontFamily: 'monospace', fontWeight: 700, color: '#ea0c0c' }}>
             {step.cycleSize}
@@ -349,7 +349,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.maxCycle !== undefined && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #38bdf8' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #38bdf8' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#067db1', marginBottom: 6 }}>Max Cycle Found</div>
           <div style={{ fontSize: 18, fontFamily: 'monospace', fontWeight: 700, color: '#067db1' }}>
             {step.maxCycle}
@@ -361,7 +361,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #22c55e',
             textAlign: 'center',
@@ -370,7 +370,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Result</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Result</div>
           <div style={{ fontSize: 20, fontFamily: 'monospace', fontWeight: 'bold', color: '#178740' }}>
             Longest Cycle: {step.result}
           </div>
@@ -459,9 +459,9 @@ export default function ArrayNestingVisualizer() {
                   height: 60,
                   padding: '8px',
                   borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid #475569',
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                   fontSize: 12,
                   resize: 'vertical',

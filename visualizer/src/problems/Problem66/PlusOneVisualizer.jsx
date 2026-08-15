@@ -79,7 +79,7 @@ function DominoChainVisualization({ arr, step, ex }) {
                   width: 50,
                   height: 70,
                   backgroundColor: isNew ? '#10b981' : isFalling ? '#f59e0b' : isActive ? '#3b82f6' : '#dbeafe',
-                  border: isActive ? '3px solid #0ea5e9' : '2px solid #cbd5e1',
+                  border: isActive ? '3px solid #0ea5e9' : '2px solid var(--border)',
                   borderRadius: 6,
                   display: 'flex',
                   alignItems: 'center',
@@ -113,8 +113,8 @@ function DominoChainVisualization({ arr, step, ex }) {
 
       {/* Status cards */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-        <div style={{ padding: 12, backgroundColor: '#f8fafc', borderRadius: 6, border: '1px solid #cbd5e1' }}>
-          <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>Current Index</div>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface)', borderRadius: 6, border: '1px solid var(--border)' }}>
+          <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>Current Index</div>
           <div style={{ fontSize: 20, fontWeight: 'bold', color: '#0b7db0' }}>
             {activeI < 0 ? '—' : activeI}
           </div>
@@ -125,7 +125,7 @@ function DominoChainVisualization({ arr, step, ex }) {
           borderRadius: 6,
           border: carry ? '1px solid #fcd34d' : '1px solid #e5e7eb'
         }}>
-          <div style={{ fontSize: 11, color: carry ? '#92400e' : '#64748b', marginBottom: 4 }}>Carry</div>
+          <div style={{ fontSize: 11, color: carry ? '#92400e' : 'var(--text-muted)', marginBottom: 4 }}>Carry</div>
           <motion.div
             key={String(carry)}
             initial={{ scale: 1.3 }}
@@ -158,7 +158,7 @@ function VisualizationPanel({ arr, step, ex, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -167,10 +167,10 @@ function VisualizationPanel({ arr, step, ex, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9'
+                backgroundColor: 'var(--surface2)'
               }}
             >
               {e.label}

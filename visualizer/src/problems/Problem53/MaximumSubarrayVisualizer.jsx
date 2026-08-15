@@ -176,7 +176,7 @@ export default function MaximumSubarrayVisualizer() {
         </div>
 
         <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center' }}>
-          <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace' }}>nums=</span>
+          <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>nums=</span>
           <input
             value={numsInput}
             onChange={(e) => { setNumsInput(e.target.value); handleReset() }}

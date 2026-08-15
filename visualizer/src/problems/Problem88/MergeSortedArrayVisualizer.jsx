@@ -164,7 +164,7 @@ export default function MergeSortedArrayVisualizer() {
       />
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-        {EXAMPLES.map(e => <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : '#f1f5f9' }}>{e.label}</button>)}
+        {EXAMPLES.map(e => <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : 'var(--surface2)' }}>{e.label}</button>)}
       </div>
       <div>{renderArray(step?.a ?? nums1, "nums1", nums1Ptrs)}</div>
       <div>{renderArray(step?.b ?? nums2, "nums2", nums2Ptrs)}</div>

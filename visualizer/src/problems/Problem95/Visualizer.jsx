@@ -224,8 +224,8 @@ function TreeCell({ tree, index, highlight }) {
         width: CELL_W,
         height: CELL_H + 18,
         borderRadius: 10,
-        border: highlight ? '2px solid #10b981' : '1px solid #cbd5e1',
-        background: highlight ? '#ecfdf5' : '#ffffff',
+        border: highlight ? '2px solid #10b981' : '1px solid var(--border)',
+        background: highlight ? '#ecfdf5' : 'var(--surface)',
         boxShadow: highlight ? '0 0 0 3px #10b98122' : '0 1px 3px #0000000f',
         position: 'relative',
         flex: '0 0 auto',
@@ -234,7 +234,7 @@ function TreeCell({ tree, index, highlight }) {
       <div
         style={{
           fontSize: 10,
-          color: '#64748b',
+          color: 'var(--text-muted)',
           textAlign: 'center',
           padding: '3px 0',
           fontWeight: 600,
@@ -269,7 +269,7 @@ function TreeCell({ tree, index, highlight }) {
                 y1={a.y}
                 x2={b.x}
                 y2={b.y}
-                stroke="#94a3b8"
+                stroke="var(--text-muted)"
                 strokeWidth={1.5}
               />
             )
@@ -281,7 +281,7 @@ function TreeCell({ tree, index, highlight }) {
                 cy={nd.y}
                 r={R}
                 fill={highlight ? '#10b981' : '#3b82f6'}
-                stroke="#1e293b"
+                stroke="var(--surface2)"
                 strokeWidth={1}
               />
               <text
@@ -291,7 +291,7 @@ function TreeCell({ tree, index, highlight }) {
                 dominantBaseline="central"
                 fontSize={12}
                 fontWeight={700}
-                fill="#ffffff"
+                fill="var(--surface)"
               >
                 {nd.val}
               </text>
@@ -306,7 +306,7 @@ function TreeCell({ tree, index, highlight }) {
 function VisualizationPanel({ step }) {
   if (!step) {
     return (
-      <div style={{ padding: 16, color: '#64748b', fontSize: 13 }}>
+      <div style={{ padding: 16, color: 'var(--text-muted)', fontSize: 13 }}>
         Press play to generate all unique BSTs.
       </div>
     )
@@ -342,8 +342,8 @@ function VisualizationPanel({ step }) {
           style={{
             padding: '8px 14px',
             borderRadius: 8,
-            background: currentRoot != null ? '#fef3c7' : '#f1f5f9',
-            border: `1px solid ${currentRoot != null ? '#fde68a' : '#e2e8f0'}`,
+            background: currentRoot != null ? '#fef3c7' : 'var(--surface2)',
+            border: `1px solid ${currentRoot != null ? '#fde68a' : 'var(--text)'}`,
             fontSize: 13,
             color: '#78350f',
             fontWeight: 600,
@@ -369,11 +369,11 @@ function VisualizationPanel({ step }) {
       <div
         style={{
           padding: 10,
-          background: '#f8fafc',
+          background: 'var(--surface)',
           borderRadius: 8,
           borderLeft: '4px solid #3b82f6',
           fontSize: 12.5,
-          color: '#334155',
+          color: 'var(--border)',
         }}
       >
         {step.message}

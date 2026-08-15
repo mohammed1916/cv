@@ -110,7 +110,7 @@ export default function RandomizedCollectionVisualizer() {
       viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
                     <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                         {EXAMPLES.map(e => (
-                            <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : '#f1f5f9' }}>
+                            <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : 'var(--surface2)' }}>
                                 {e.label}
                             </button>
                         ))}
@@ -121,19 +121,19 @@ export default function RandomizedCollectionVisualizer() {
                             <div style={{ fontSize: 11, color: '#1e40af', marginBottom: 4 }}>Operation</div>
                             <div style={{ fontSize: 13, fontWeight: 'bold', color: '#1e40af' }}>{opStr}</div>
                         </div>
-                        <div style={{ padding: 8, backgroundColor: phase === "random" ? '#fef3c7' : result === true ? '#dcfce7' : result === false ? '#fee2e2' : '#f8fafc', borderRadius: 6, border: phase === "random" ? '1px solid #fcd34d' : result === true ? '1px solid #86efac' : result === false ? '1px solid #fecaca' : '1px solid #e2e8f0' }}>
-                            <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>Return</div>
-                            <div style={{ fontSize: 13, fontWeight: 'bold', color: phase === "random" ? '#92400e' : result === true ? '#15803d' : result === false ? '#991b1b' : '#1e293b' }}>
+                        <div style={{ padding: 8, backgroundColor: phase === "random" ? '#fef3c7' : result === true ? '#dcfce7' : result === false ? '#fee2e2' : 'var(--surface)', borderRadius: 6, border: phase === "random" ? '1px solid #fcd34d' : result === true ? '1px solid #86efac' : result === false ? '1px solid #fecaca' : '1px solid var(--text)' }}>
+                            <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>Return</div>
+                            <div style={{ fontSize: 13, fontWeight: 'bold', color: phase === "random" ? '#92400e' : result === true ? '#15803d' : result === false ? '#991b1b' : 'var(--surface2)' }}>
                                 {result === null || result === undefined ? '—' : String(result)}
                             </div>
                         </div>
-                        <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, border: '1px solid #e2e8f0' }}>
-                            <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>Phase</div>
-                            <div style={{ fontSize: 13, fontWeight: 'bold', color: '#1e293b' }}>{phase}</div>
+                        <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, border: '1px solid var(--text)' }}>
+                            <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>Phase</div>
+                            <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--surface2)' }}>{phase}</div>
                         </div>
                     </div>
 
-                    <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>nums array</div>
+                    <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>nums array</div>
                     <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', minHeight: 50, alignItems: 'center' }}>
                         <AnimatePresence>
                             {nums.map((v, i) => (
@@ -142,29 +142,29 @@ export default function RandomizedCollectionVisualizer() {
                                     backgroundColor: i === step?.swapI ? '#fbbf24' : '#dbeafe', border: i === step?.swapI ? '2px solid #f59e0b' : '1px solid #0ea5e9',
                                     borderRadius: 4, fontSize: 11
                                 }}>
-                                    <span style={{ color: '#64748b' }}>{i}</span>
-                                    <span style={{ fontSize: 13, fontWeight: 'bold', color: '#1e293b' }}>{v}</span>
+                                    <span style={{ color: 'var(--text-muted)' }}>{i}</span>
+                                    <span style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--surface2)' }}>{v}</span>
                                 </motion.div>
                             ))}
                         </AnimatePresence>
-                        {nums.length === 0 && <span style={{ color: '#64748b', fontSize: 12 }}>empty</span>}
+                        {nums.length === 0 && <span style={{ color: 'var(--text-muted)', fontSize: 12 }}>empty</span>}
                     </div>
 
-                    <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>idx map</div>
+                    <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>idx map</div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 4, minHeight: 40 }}>
                         {Object.entries(idx).filter(([, v]) => v.length > 0).map(([k, arr]) => (
                             <div key={k} style={{ display: 'flex', gap: 6, alignItems: 'center', fontSize: 11 }}>
-                                <span style={{ fontWeight: 'bold', color: '#1e293b', minWidth: 20 }}>{k}</span>
-                                <span style={{ color: '#64748b' }}>→</span>
+                                <span style={{ fontWeight: 'bold', color: 'var(--surface2)', minWidth: 20 }}>{k}</span>
+                                <span style={{ color: 'var(--text-muted)' }}>→</span>
                                 <span style={{ padding: '2px 6px', backgroundColor: '#f0fdf4', borderRadius: 3, color: '#15803d', fontFamily: 'monospace', fontWeight: 'bold' }}>
                                     {`{${arr.join(", ")}}`}
                                 </span>
                             </div>
                         ))}
-                        {Object.values(idx).every(v => v.length === 0) && <span style={{ color: '#64748b', fontSize: 12 }}>empty</span>}
+                        {Object.values(idx).every(v => v.length === 0) && <span style={{ color: 'var(--text-muted)', fontSize: 12 }}>empty</span>}
                     </div>
 
-                    <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginTop: 4 }}>Operations log</div>
+                    <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginTop: 4 }}>Operations log</div>
                     <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap', flex: 1, overflow: 'auto', paddingBottom: 4 }}>
                         {steps.slice(0, stepIndex + 1).filter(s => s.phase !== "init" && s.phase !== "done").map((s, i) => (
                             <span key={i} style={{

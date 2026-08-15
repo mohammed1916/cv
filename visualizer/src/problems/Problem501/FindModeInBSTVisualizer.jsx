@@ -176,11 +176,11 @@ function VisualizationPanel({ step, applyExample, examples }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -207,9 +207,9 @@ function VisualizationPanel({ step, applyExample, examples }) {
                       fontFamily: 'monospace',
                       fontSize: 12,
                       fontWeight: 600,
-                      backgroundColor: cnt === step.maxCount ? '#1e293b' : '#334155',
-                      borderColor: cnt === step.maxCount ? '#22c55e' : '#64748b',
-                      color: cnt === step.maxCount ? '#22c55e' : '#94a3b8',
+                      backgroundColor: cnt === step.maxCount ? 'var(--surface2)' : 'var(--border)',
+                      borderColor: cnt === step.maxCount ? '#22c55e' : 'var(--text-muted)',
+                      color: cnt === step.maxCount ? '#22c55e' : 'var(--text-muted)',
                     }}
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -224,7 +224,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.maxCount !== undefined && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #a78bfa' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Max Count</div>
           <div style={{ fontSize: 16, fontWeight: 700, color: '#7957fa' }}>{step.maxCount}</div>
         </div>
@@ -234,7 +234,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #22c55e',
             textAlign: 'center',
@@ -243,7 +243,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Mode</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Mode</div>
           <div style={{ fontSize: 16, fontFamily: 'monospace', fontWeight: 'bold', color: '#178740' }}>
             [{step.result.join(', ')}]
           </div>
@@ -330,9 +330,9 @@ export default function FindModeInBSTVisualizer() {
                   height: 60,
                   padding: '8px',
                   borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid #475569',
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                   fontSize: 12,
                   resize: 'vertical',

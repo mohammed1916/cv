@@ -101,20 +101,20 @@ export default function EvalRPNVisualizer() {
     const vizPanel = (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
             <div>
-                <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+                <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
                 <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                     {EXAMPLES.map(ex => (
-                        <button key={ex.label} onClick={() => applyExample(ex)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: '#f1f5f9' }}>
+                        <button key={ex.label} onClick={() => applyExample(ex)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: 'var(--surface2)' }}>
                             {ex.label}
                         </button>
                     ))}
                 </div>
             </div>
 
-            <input style={{ padding: '8px', borderRadius: 4, border: '1px solid #cbd5e1', fontSize: 12, fontFamily: 'monospace' }} value={input} onChange={(e) => { setInput(e.target.value); handleReset(); }} placeholder='["2","1","+","3","*"]' />
+            <input style={{ padding: '8px', borderRadius: 4, border: '1px solid var(--border)', fontSize: 12, fontFamily: 'monospace' }} value={input} onChange={(e) => { setInput(e.target.value); handleReset(); }} placeholder='["2","1","+","3","*"]' />
             {err && <div style={{ padding: 8, backgroundColor: '#fee2e2', color: '#991b1b', borderRadius: 4, fontSize: 12 }}>{err}</div>}
 
-            <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 4 }}>Tokens</div>
+            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 4 }}>Tokens</div>
             <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', minHeight: 40 }}>
                 {tokens.map((t, i) => {
                     const isOp = ['+', '-', '*', '/'].includes(t);
@@ -123,7 +123,7 @@ export default function EvalRPNVisualizer() {
                         <motion.div key={i} animate={{ scale: isCurrent ? 1.3 : 1 }} style={{
                             padding: '6px 10px',
                             backgroundColor: isOp ? '#fee2e2' : '#dbeafe',
-                            border: isCurrent ? '3px solid #0ea5e9' : '1px solid #cbd5e1',
+                            border: isCurrent ? '3px solid #0ea5e9' : '1px solid var(--border)',
                             borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: isOp ? '#991b1b' : '#1e3a8a'
                         }}>
                             {t}
@@ -132,21 +132,21 @@ export default function EvalRPNVisualizer() {
                 })}
             </div>
 
-            <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 4 }}>Stack</div>
-            <div style={{ display: 'flex', gap: 6, alignItems: 'flex-end', minHeight: 60, paddingBottom: 8, borderBottom: '1px solid #e2e8f0' }}>
+            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 4 }}>Stack</div>
+            <div style={{ display: 'flex', gap: 6, alignItems: 'flex-end', minHeight: 60, paddingBottom: 8, borderBottom: '1px solid var(--text)' }}>
                 <AnimatePresence mode="popLayout">
                     {(step?.stack ?? []).map((v, i) => (
                         <motion.div key={`${i}-${v}`} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} style={{
                             padding: '8px 12px',
                             backgroundColor: i === (step?.stack?.length ?? 0) - 1 ? '#dbeafe' : '#f3f4f6',
-                            border: i === (step?.stack?.length ?? 0) - 1 ? '2px solid #0ea5e9' : '1px solid #cbd5e1',
-                            borderRadius: 4, fontSize: 14, fontWeight: 'bold', color: '#1e293b'
+                            border: i === (step?.stack?.length ?? 0) - 1 ? '2px solid #0ea5e9' : '1px solid var(--border)',
+                            borderRadius: 4, fontSize: 14, fontWeight: 'bold', color: 'var(--surface2)'
                         }}>
                             {v}
                         </motion.div>
                     ))}
                 </AnimatePresence>
-                {(step?.stack?.length ?? 0) === 0 && <span style={{ color: '#64748b', fontSize: 12 }}>empty</span>}
+                {(step?.stack?.length ?? 0) === 0 && <span style={{ color: 'var(--text-muted)', fontSize: 12 }}>empty</span>}
             </div>
 
             {step?.a != null && (

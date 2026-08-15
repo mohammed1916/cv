@@ -91,10 +91,10 @@
 
 .powxn-status {
   padding: 12px 16px;
-  background: #f1f5f9;
+  background: var(--surface2);
   border-top: 2px solid #a7f3d0;
   font-size: 13px;
-  color: #475569;
+  color: var(--text-muted);
   height: 100%;
   display: flex;
   align-items: center;

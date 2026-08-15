@@ -176,10 +176,10 @@ export default function SumOfTwoIntegersVisualizer() {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid var(--border)',
                   cursor: 'pointer',
                   fontSize: 12,
-                  backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
+                  backgroundColor: exIdx === i ? '#dbeafe' : 'var(--surface2)',
                 }}
               >
                 {e.label}
@@ -192,9 +192,9 @@ export default function SumOfTwoIntegersVisualizer() {
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                style={{ padding: 12, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 12 }}
+                style={{ padding: 12, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 12 }}
               >
-                <div style={{ fontWeight: 600, marginBottom: 8, color: '#1e293b' }}>{step.message}</div>
+                <div style={{ fontWeight: 600, marginBottom: 8, color: 'var(--surface2)' }}>{step.message}</div>
               </motion.div>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
@@ -250,7 +250,7 @@ export default function SumOfTwoIntegersVisualizer() {
               )}
 
               {step.iteration > 0 && (
-                <div style={{ fontSize: 11, color: '#617086', padding: 8, backgroundColor: '#f1f5f9', borderRadius: 4 }}>
+                <div style={{ fontSize: 11, color: '#617086', padding: 8, backgroundColor: 'var(--surface2)', borderRadius: 4 }}>
                   Iteration {step.iteration} / ~32 bits
                 </div>
               )}

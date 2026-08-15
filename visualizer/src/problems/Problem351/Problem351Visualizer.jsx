@@ -214,10 +214,10 @@ export default function Problem351Visualizer() {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid var(--border)',
                   cursor: 'pointer',
                   fontSize: 12,
-                  backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
+                  backgroundColor: exIdx === i ? '#dbeafe' : 'var(--surface2)',
                   fontWeight: exIdx === i ? 600 : 400,
                 }}
               >
@@ -228,28 +228,28 @@ export default function Problem351Visualizer() {
 
           {step && (
             <>
-              <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
-                <div style={{ fontWeight: 600, marginBottom: 6, color: '#1e293b' }}>Step Message</div>
-                <div style={{ color: '#475569', fontSize: 12, lineHeight: 1.5 }}>{step.message}</div>
+              <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 11 }}>
+                <div style={{ fontWeight: 600, marginBottom: 6, color: 'var(--surface2)' }}>Step Message</div>
+                <div style={{ color: 'var(--text-muted)', fontSize: 12, lineHeight: 1.5 }}>{step.message}</div>
               </div>
 
-              <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6 }}>
-                <div style={{ fontWeight: 600, marginBottom: 8, color: '#1e293b', fontSize: 11 }}>Input Stream</div>
+              <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6 }}>
+                <div style={{ fontWeight: 600, marginBottom: 8, color: 'var(--surface2)', fontSize: 11 }}>Input Stream</div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
                   {nums.map((num, i) => (
                     <motion.div
                       key={num}
                       animate={{
                         scale: step?.currentNum === num ? 1.3 : 1,
-                        backgroundColor: step?.currentNum === num ? '#fbbf24' : step?.addedNums.includes(num) ? '#dcfce7' : '#e2e8f0',
+                        backgroundColor: step?.currentNum === num ? '#fbbf24' : step?.addedNums.includes(num) ? '#dcfce7' : 'var(--text)',
                       }}
                       style={{
                         padding: '6px 10px',
                         borderRadius: 4,
-                        border: '1px solid #cbd5e1',
+                        border: '1px solid var(--border)',
                         fontSize: 12,
                         fontWeight: 600,
-                        color: '#1e293b',
+                        color: 'var(--surface2)',
                       }}
                     >
                       {num}
@@ -288,16 +288,16 @@ export default function Problem351Visualizer() {
                       </motion.div>
                     ))
                   ) : (
-                    <div style={{ color: '#64748b', fontSize: 12 }}>No intervals yet</div>
+                    <div style={{ color: 'var(--text-muted)', fontSize: 12 }}>No intervals yet</div>
                   )}
                 </div>
               </div>
 
               <div style={{ padding: 8, backgroundColor: '#f3f4f6', borderRadius: 6 }}>
-                <div style={{ fontWeight: 600, marginBottom: 6, color: '#1e293b', fontSize: 11 }}>Summary</div>
+                <div style={{ fontWeight: 600, marginBottom: 6, color: 'var(--surface2)', fontSize: 11 }}>Summary</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <span style={{ fontSize: 12, color: '#475569' }}>Intervals:</span>
-                  <span style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>
+                  <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>Intervals:</span>
+                  <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
                     {formatIntervals(step.intervals)}
                   </span>
                 </div>

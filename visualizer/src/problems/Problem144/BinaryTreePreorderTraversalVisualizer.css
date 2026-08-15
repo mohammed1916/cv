@@ -6,7 +6,7 @@
   min-height: 480px;
   gap: 0;
   overflow: hidden;
-  background: #0f172a;
+  background: var(--code-bg);
 }
 
 .btpt-panel {
@@ -17,8 +17,8 @@
 
 .btpt-status {
   padding: 8px 12px;
-  background: #1e293b;
-  border-top: 1px solid #334155;
+  background: var(--surface2);
+  border-top: 1px solid var(--border);
   overflow: auto;
   height: 100%;
 }

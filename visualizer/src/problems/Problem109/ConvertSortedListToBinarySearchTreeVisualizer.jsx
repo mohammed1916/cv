@@ -156,8 +156,8 @@ function VisualizationPanel({ step, listInput, setListInput, inputError, EXAMPLE
                 padding: '6px 12px',
                 fontSize: 12,
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
-                backgroundColor: '#f1f5f9',
+                border: '1px solid var(--border)',
+                backgroundColor: 'var(--surface2)',
                 cursor: 'pointer',
                 fontWeight: 500,
               }}
@@ -174,7 +174,7 @@ function VisualizationPanel({ step, listInput, setListInput, inputError, EXAMPLE
             padding: '8px 12px',
             fontSize: 12,
             borderRadius: 4,
-            border: '1px solid #cbd5e1',
+            border: '1px solid var(--border)',
             fontFamily: 'monospace',
             width: '100%',
             boxSizing: 'border-box',
@@ -202,7 +202,7 @@ function VisualizationPanel({ step, listInput, setListInput, inputError, EXAMPLE
                   padding: '4px 8px',
                   borderRadius: 3,
                   backgroundColor: step.midVal === val ? '#c7d2fe' : '#e0e7ff',
-                  border: step.midVal === val ? '2px solid #4f46e5' : '1px solid #cbd5e1',
+                  border: step.midVal === val ? '2px solid #4f46e5' : '1px solid var(--border)',
                   fontWeight: step.midVal === val ? 700 : 500,
                 }}
                 animate={{ scale: step.midVal === val ? 1.15 : 1 }}

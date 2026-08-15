@@ -268,14 +268,14 @@ function MatrixGrid({ matrix, currentCell, h, v, d, ad, direction }) {
 
   const getCellColor = (i, j) => {
     if (!currentCell || currentCell[0] !== i || currentCell[1] !== j) {
-      return matrix[i][j] === 1 ? '#1e293b' : '#0f172a'
+      return matrix[i][j] === 1 ? 'var(--surface2)' : 'var(--code-bg)'
     }
     return '#f59e0b'
   }
 
   const getCellBorder = (i, j) => {
     if (!currentCell || currentCell[0] !== i || currentCell[1] !== j) {
-      return '1px solid #334155'
+      return '1px solid var(--border)'
     }
     return '3px solid #f59e0b'
   }
@@ -287,7 +287,7 @@ function MatrixGrid({ matrix, currentCell, h, v, d, ad, direction }) {
         gridTemplateColumns: `repeat(${n}, 1fr)`,
         gap: 6,
         padding: 12,
-        backgroundColor: '#0f172a',
+        backgroundColor: 'var(--code-bg)',
         borderRadius: 6,
       }}
     >
@@ -304,14 +304,14 @@ function MatrixGrid({ matrix, currentCell, h, v, d, ad, direction }) {
               backgroundColor: getCellColor(i, j),
               border: getCellBorder(i, j),
               borderRadius: 4,
-              color: val === 1 ? '#f59e0b' : '#64748b',
+              color: val === 1 ? '#f59e0b' : 'var(--text-muted)',
               fontWeight: 700,
               fontSize: 14,
               fontFamily: 'monospace',
             }}
             animate={{
               backgroundColor: getCellColor(i, j),
-              borderColor: currentCell && currentCell[0] === i && currentCell[1] === j ? '#f59e0b' : '#334155',
+              borderColor: currentCell && currentCell[0] === i && currentCell[1] === j ? '#f59e0b' : 'var(--border)',
             }}
             transition={{ duration: 0.2 }}
           >
@@ -339,7 +339,7 @@ function DirectionIndicator({ direction, value }) {
     <motion.div
       style={{
         padding: 12,
-        backgroundColor: '#1e293b',
+        backgroundColor: 'var(--surface2)',
         borderRadius: 6,
         border: `2px solid ${info.color}`,
       }}
@@ -378,11 +378,11 @@ function VisualizationPanel({
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -405,9 +405,9 @@ function VisualizationPanel({
             height: 100,
             padding: '8px',
             borderRadius: 4,
-            border: inputError ? '2px solid #f87171' : '1px solid #475569',
-            backgroundColor: '#1e293b',
-            color: '#e2e8f0',
+            border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
+            backgroundColor: 'var(--surface2)',
+            color: 'var(--text)',
             fontFamily: 'monospace',
             fontSize: 12,
             resize: 'vertical',
@@ -441,7 +441,7 @@ function VisualizationPanel({
         <motion.div
           style={{
             padding: 12,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #f59e0b',
             display: 'grid',
@@ -453,25 +453,25 @@ function VisualizationPanel({
           transition={{ duration: 0.2 }}
         >
           <div>
-            <div style={{ fontSize: 10, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Horizontal</div>
+            <div style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>Horizontal</div>
             <div style={{ fontSize: 14, color: '#1b6df5', fontFamily: 'monospace', fontWeight: 'bold' }}>
               {step.directionValues.horizontal}
             </div>
           </div>
           <div>
-            <div style={{ fontSize: 10, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Vertical</div>
+            <div style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>Vertical</div>
             <div style={{ fontSize: 14, color: '#0c865d', fontFamily: 'monospace', fontWeight: 'bold' }}>
               {step.directionValues.vertical}
             </div>
           </div>
           <div>
-            <div style={{ fontSize: 10, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Diagonal</div>
+            <div style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>Diagonal</div>
             <div style={{ fontSize: 14, color: '#8553f6', fontFamily: 'monospace', fontWeight: 'bold' }}>
               {step.directionValues.diagonal}
             </div>
           </div>
           <div>
-            <div style={{ fontSize: 10, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Anti-Diag</div>
+            <div style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>Anti-Diag</div>
             <div style={{ fontSize: 14, color: '#e0177a', fontFamily: 'monospace', fontWeight: 'bold' }}>
               {step.directionValues.antiDiagonal}
             </div>
@@ -483,7 +483,7 @@ function VisualizationPanel({
         <motion.div
           style={{
             padding: 12,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #f59e0b',
             textAlign: 'center',
@@ -492,7 +492,7 @@ function VisualizationPanel({
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Running Maximum</div>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Running Maximum</div>
           <div style={{ fontSize: 20, fontFamily: 'monospace', fontWeight: 'bold', color: '#a36907' }}>
             {step.maxLen}
           </div>
@@ -503,7 +503,7 @@ function VisualizationPanel({
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #22c55e',
             textAlign: 'center',
@@ -512,7 +512,7 @@ function VisualizationPanel({
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Result</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Result</div>
           <div style={{ fontSize: 20, fontFamily: 'monospace', fontWeight: 'bold', color: '#178740' }}>
             {step.result}
           </div>

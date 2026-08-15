@@ -109,7 +109,7 @@ export function TreeSVG({ edges, positions, canvasWidth, canvasHeight, highlight
                         key={`${fromId}-${toId}`}
                         x1={from.x} y1={from.y}
                         x2={to.x} y2={to.y}
-                        stroke={isHighlighted ? '#f9e2af' : '#45475a'}
+                        stroke={isHighlighted ? '#f9e2af' : 'var(--code-line)'}
                         strokeWidth={isHighlighted ? 2.5 : 1.5}
                     />
                 )

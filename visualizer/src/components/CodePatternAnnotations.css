@@ -56,6 +56,6 @@
 }
 
 .code-annotation.active .annotation-label {
-  color: #f1f5f9;
+  color: var(--surface2);
   font-weight: 600;
 }

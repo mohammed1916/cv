@@ -10,7 +10,7 @@
 }
 
 .cs2-panel {
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
   background: rgba(15, 23, 42, 0.7);
@@ -18,7 +18,7 @@
 
 .cs2-head {
   padding: 10px 12px;
-  border-bottom: 1px solid #334155;
+  border-bottom: 1px solid var(--border);
   display: flex;
   justify-content: space-between;
   color: #5577a4;
@@ -44,8 +44,8 @@
 }
 
 .cs2-chip {
-  border: 1px solid #334155;
-  color: #cbd5e1;
+  border: 1px solid var(--border);
+  color: var(--border);
   background: rgba(30, 41, 59, 0.8);
   border-radius: 999px;
   padding: 4px 10px;
@@ -60,9 +60,9 @@
 .cs2-input {
   width: 100%;
   border-radius: 8px;
-  border: 1px solid #334155;
-  background: #0f172a;
-  color: #f8fafc;
+  border: 1px solid var(--border);
+  background: var(--code-bg);
+  color: var(--surface);
   font-family: monospace;
   padding: 8px 10px;
 }
@@ -72,14 +72,14 @@
 }
 
 .cs2-canvas {
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 8px;
   overflow: hidden;
   min-height: 260px;
 }
 
 .edge {
-  stroke: #64748b;
+  stroke: var(--text-muted);
   stroke-width: 2px;
 }
 
@@ -89,8 +89,8 @@
 }
 
 .node {
-  fill: #1e293b;
-  stroke: #334155;
+  fill: var(--surface2);
+  stroke: var(--border);
   stroke-width: 2px;
 }
 
@@ -110,7 +110,7 @@
 }
 
 .node-label {
-  fill: #f8fafc;
+  fill: var(--surface);
   font-size: 12px;
   font-family: monospace;
 }
@@ -135,9 +135,9 @@
 .cs2-list {
   margin-top: 6px;
   min-height: 42px;
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 8px;
-  background: #0f172a;
+  background: var(--code-bg);
   padding: 8px;
   display: flex;
   gap: 6px;
@@ -150,8 +150,8 @@
   border-radius: 6px;
   display: grid;
   place-items: center;
-  background: #1e293b;
-  color: #f8fafc;
+  background: var(--surface2);
+  color: var(--surface);
   font-family: monospace;
 }
 
@@ -162,11 +162,11 @@
 
 .cs2-result,
 .cs2-status {
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 8px;
   background: rgba(15, 23, 42, 0.7);
   padding: 10px 12px;
-  color: #cbd5e1;
+  color: var(--border);
   font-family: monospace;
   font-size: 13px;
 }

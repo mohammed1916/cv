@@ -166,12 +166,12 @@ function FizzBuzzVisualization({ n, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>FizzBuzz Sequence</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>FizzBuzz Sequence</div>
 
       {/* Parameter */}
-      <div style={{ padding: 10, backgroundColor: '#f1f5f9', borderRadius: 6, border: '2px solid #cbd5e1' }}>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#475569' }}>
-          n = <span style={{ fontFamily: 'monospace', color: '#1e293b' }}>{n}</span>
+      <div style={{ padding: 10, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid var(--border)' }}>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)' }}>
+          n = <span style={{ fontFamily: 'monospace', color: 'var(--surface2)' }}>{n}</span>
         </div>
       </div>
 
@@ -189,15 +189,15 @@ function FizzBuzzVisualization({ n, step }) {
         >
           <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 8 }}>Current: i={step.currentNum}</div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
-            <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#ffffff', borderRadius: 4 }}>
+            <div style={{ textAlign: 'center', padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#065f46' }}>÷3?</div>
-              <div style={{ fontSize: 14, fontWeight: 'bold', color: step.div3 ? '#047857' : '#94a3b8' }}>
+              <div style={{ fontSize: 14, fontWeight: 'bold', color: step.div3 ? '#047857' : 'var(--text-muted)' }}>
                 {step.div3 ? '✓' : '✗'}
               </div>
             </div>
-            <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#ffffff', borderRadius: 4 }}>
+            <div style={{ textAlign: 'center', padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#065f46' }}>÷5?</div>
-              <div style={{ fontSize: 14, fontWeight: 'bold', color: step.div5 ? '#047857' : '#94a3b8' }}>
+              <div style={{ fontSize: 14, fontWeight: 'bold', color: step.div5 ? '#047857' : 'var(--text-muted)' }}>
                 {step.div5 ? '✓' : '✗'}
               </div>
             </div>
@@ -213,7 +213,7 @@ function FizzBuzzVisualization({ n, step }) {
 
       {/* Result grid */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>
           Output ({result.length} items)
         </div>
         <div style={{
@@ -223,9 +223,9 @@ function FizzBuzzVisualization({ n, step }) {
           maxHeight: 300,
           overflow: 'auto',
           padding: 12,
-          backgroundColor: '#f1f5f9',
+          backgroundColor: 'var(--surface2)',
           borderRadius: 6,
-          border: '2px solid #cbd5e1',
+          border: '2px solid var(--border)',
         }}>
           {result.map((item, idx) => {
             const num = idx + 1
@@ -234,9 +234,9 @@ function FizzBuzzVisualization({ n, step }) {
             const isFizzBuzz = item === 'FizzBuzz'
             const isCurrent = step?.currentNum === num
 
-            let bgColor = '#f1f5f9'
-            let borderColor = '#cbd5e1'
-            let textColor = '#334155'
+            let bgColor = 'var(--surface2)'
+            let borderColor = 'var(--border)'
+            let textColor = 'var(--border)'
 
             if (isFizzBuzz) {
               bgColor = '#fce7f3'
@@ -287,7 +287,7 @@ function FizzBuzzVisualization({ n, step }) {
 
       {/* Pattern legend */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Pattern Legend</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Pattern Legend</div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 8 }}>
           <div style={{ padding: 10, backgroundColor: '#dbeafe', borderRadius: 4, border: '2px solid #0284c7' }}>
             <div style={{ fontSize: 10, color: '#0c4a6e', fontWeight: 600 }}>÷3: Fizz</div>
@@ -304,7 +304,7 @@ function FizzBuzzVisualization({ n, step }) {
         </div>
       </div>
 
-      <div style={{ fontSize: 12, color: '#475569' }}>{step?.message}</div>
+      <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{step?.message}</div>
     </div>
   )
 }
@@ -360,7 +360,7 @@ export default function Problem412Visualizer() {
         />),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button
@@ -369,11 +369,11 @@ export default function Problem412Visualizer() {
                   style={{
                     padding: '6px 12px',
                     borderRadius: 4,
-                    border: exIdx === idx ? '2px solid #14b8a6' : '1px solid #cbd5e1',
+                    border: exIdx === idx ? '2px solid #14b8a6' : '1px solid var(--border)',
                     cursor: 'pointer',
                     fontSize: 12,
-                    backgroundColor: exIdx === idx ? '#ccfbf1' : '#f1f5f9',
-                    color: exIdx === idx ? '#0f766e' : '#334155',
+                    backgroundColor: exIdx === idx ? '#ccfbf1' : 'var(--surface2)',
+                    color: exIdx === idx ? '#0f766e' : 'var(--border)',
                     fontWeight: exIdx === idx ? '600' : '400',
                   }}
                 >

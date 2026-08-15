@@ -6,7 +6,7 @@
   min-height: 480px;
   gap: 0;
   overflow: hidden;
-  background: #0f172a;
+  background: var(--code-bg);
 }
 
 .wl2-panel {
@@ -14,16 +14,16 @@
   flex-direction: column;
   height: 100%;
   overflow: hidden;
-  background: #0f172a;
+  background: var(--code-bg);
 }
 
 .wl2-panel-head {
   padding: 12px 16px;
   font-size: 14px;
   font-weight: 600;
-  color: #e2e8f0;
-  background: #1e293b;
-  border-bottom: 1px solid #334155;
+  color: var(--text);
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
   flex-shrink: 0;
 }
 
@@ -36,8 +36,8 @@
 .wl2-status {
   padding: 12px 16px;
   font-size: 13px;
-  color: #cbd5e1;
-  background: #1e293b;
-  border-top: 1px solid #334155;
+  color: var(--border);
+  background: var(--surface2);
+  border-top: 1px solid var(--border);
   overflow-y: auto;
 }

@@ -13,8 +13,8 @@
 .tsc3-panel {
   display: flex;
   flex-direction: column;
-  background: #f8fafc;
-  border: 1px solid #cbd5e1;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -24,11 +24,11 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px;
-  background: #f1f5f9;
-  border-bottom: 1px solid #cbd5e1;
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
   font-weight: 600;
   font-size: 13px;
-  color: #1e293b;
+  color: var(--surface2);
   flex-shrink: 0;
 }
 
@@ -55,13 +55,13 @@
 
 .tsc3-chip {
   padding: 6px 12px;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border);
   border-radius: 4px;
   background: #fff;
   font-size: 12px;
   cursor: pointer;
   transition: all 0.2s;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .tsc3-chip:hover {
@@ -78,7 +78,7 @@
 .tsc3-input {
   flex: 1;
   padding: 8px;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border);
   border-radius: 4px;
   font-size: 12px;
   font-family: 'Monaco', 'Courier New', monospace;
@@ -110,7 +110,7 @@
   height: 50px;
   border-radius: 6px;
   background: #f3f4f6;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -194,7 +194,7 @@
   gap: 8px;
   padding: 10px;
   background: #fff;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--text);
   border-radius: 4px;
   margin-top: 12px;
 }
@@ -202,7 +202,7 @@
 .tsc3-sum-label {
   grid-column: 1 / -1;
   font-size: 11px;
-  color: #64748b;
+  color: var(--text-muted);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -218,7 +218,7 @@
   font-size: 12px;
   color: #617086;
   padding: 4px 6px;
-  background: #f1f5f9;
+  background: var(--surface2);
   border-radius: 3px;
   text-align: center;
 }
@@ -258,13 +258,13 @@
   gap: 6px;
   padding: 10px;
   background: #fff;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--text);
   border-radius: 4px;
 }
 
 .tsc3-closest-label {
   font-size: 11px;
-  color: #64748b;
+  color: var(--text-muted);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -303,10 +303,10 @@
 
 .tsc3-status {
   padding: 12px;
-  background: #f8fafc;
-  border-top: 1px solid #cbd5e1;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
   font-size: 12px;
-  color: #475569;
+  color: var(--text-muted);
   line-height: 1.5;
   flex-shrink: 0;
   min-height: 50px;
@@ -336,10 +336,10 @@
 }
 
 .tsc3-body::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: var(--border);
   border-radius: 3px;
 }
 
 .tsc3-body::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: var(--text-muted);
 }

@@ -9,7 +9,7 @@
 }
 
 .mk-panel {
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
   background: rgba(15, 23, 42, 0.72);
@@ -28,19 +28,19 @@
 }
 
 .mk-chip {
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 999px;
   background: rgba(30, 41, 59, 0.8);
-  color: #cbd5e1;
+  color: var(--border);
   padding: 4px 10px;
   cursor: pointer;
 }
 
 .mk-input {
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 8px;
-  background: #0f172a;
-  color: #f8fafc;
+  background: var(--code-bg);
+  color: var(--surface);
   font-family: monospace;
   padding: 8px 10px;
 }
@@ -72,10 +72,10 @@
 
 .mk-cell {
   min-width: 34px;
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 8px;
   background: rgba(30, 41, 59, 0.75);
-  color: #f8fafc;
+  color: var(--surface);
   font-family: monospace;
   display: grid;
   place-items: center;
@@ -90,9 +90,9 @@
 .mk-heap,
 .mk-merged {
   min-height: 48px;
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 8px;
-  background: #0f172a;
+  background: var(--code-bg);
   padding: 8px;
   display: flex;
   gap: 6px;
@@ -101,10 +101,10 @@
 
 .mk-heap-item,
 .mk-merged span {
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 6px;
   background: rgba(30, 41, 59, 0.75);
-  color: #f8fafc;
+  color: var(--surface);
   font-family: monospace;
   padding: 4px 6px;
 }
@@ -114,11 +114,11 @@
 }
 
 .mk-status {
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 8px;
   background: rgba(15, 23, 42, 0.7);
   padding: 10px 12px;
-  color: #cbd5e1;
+  color: var(--border);
   font-family: monospace;
   font-size: 13px;
 }

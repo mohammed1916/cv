@@ -216,7 +216,7 @@ function TreeCanvas({ positions, edges, nodes, activePId, activeQId, nodeStates,
                                 key={`${fromId}-${toId}`}
                                 x1={from.x} y1={from.y}
                                 x2={to.x}   y2={to.y}
-                                stroke="#45475a"
+                                stroke="var(--code-line)"
                                 strokeWidth={1.5}
                             />
                         )

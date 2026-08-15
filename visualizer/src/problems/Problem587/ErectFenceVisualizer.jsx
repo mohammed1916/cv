@@ -218,7 +218,7 @@ function VisualizationCanvas({ points, hull, step, width = 400, height = 400 }) 
   if (!points || points.length === 0) {
     return (
       <div style={{ width, height, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ color: '#64748b', fontSize: 12 }}>No points to display</div>
+        <div style={{ color: 'var(--text-muted)', fontSize: 12 }}>No points to display</div>
       </div>
     )
   }
@@ -250,7 +250,7 @@ function VisualizationCanvas({ points, hull, step, width = 400, height = 400 }) 
       {/* Grid background */}
       <defs>
         <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#334155" strokeWidth="0.5" opacity="0.3" />
+          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="var(--border)" strokeWidth="0.5" opacity="0.3" />
         </pattern>
       </defs>
       <rect width={width} height={height} fill="url(#grid)" />
@@ -312,7 +312,7 @@ function VisualizationCanvas({ points, hull, step, width = 400, height = 400 }) 
             cx={svg.x}
             cy={svg.y}
             r={isCurrent ? 6 : isRemoved ? 4 : 3}
-            fill={isRemoved ? '#ef4444' : isCurrent ? '#60a5fa' : '#94a3b8'}
+            fill={isRemoved ? '#ef4444' : isCurrent ? '#60a5fa' : 'var(--text-muted)'}
             opacity={isRemoved ? 0.6 : isCurrent ? 1 : 0.6}
             className="fence-point"
           />
@@ -336,11 +336,11 @@ function VisualizationPanel({ points, hull, step, applyExample, examples }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -364,7 +364,7 @@ function VisualizationPanel({ points, hull, step, applyExample, examples }) {
           <span>Current</span>
         </div>
         <div className="fence-legend-item">
-          <div className="fence-legend-dot" style={{ backgroundColor: '#94a3b8' }}></div>
+          <div className="fence-legend-dot" style={{ backgroundColor: 'var(--text-muted)' }}></div>
           <span>Interior</span>
         </div>
         <div className="fence-legend-item">
@@ -377,15 +377,15 @@ function VisualizationPanel({ points, hull, step, applyExample, examples }) {
         <motion.div
           style={{
             padding: 12,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
-            border: '1px solid #475569',
+            border: '1px solid var(--text-muted)',
           }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.2 }}
         >
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Status</div>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Status</div>
           <div style={{ fontSize: 13, color: '#5577a4' }}>{step.message}</div>
         </motion.div>
       )}
@@ -394,7 +394,7 @@ function VisualizationPanel({ points, hull, step, applyExample, examples }) {
         <motion.div
           style={{
             padding: 12,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '1px solid #a78bfa',
           }}
@@ -496,8 +496,8 @@ export default function ErectFenceVisualizer() {
             )}
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
-            <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
-              <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>
+            <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+              <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>
                 Points (GeoJSON format)
               </div>
               <textarea
@@ -512,9 +512,9 @@ export default function ErectFenceVisualizer() {
                   minHeight: 80,
                   padding: '8px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
-                  backgroundColor: '#0f172a',
-                  color: '#e2e8f0',
+                  border: '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--code-bg)',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                   fontSize: 11,
                   resize: 'vertical',

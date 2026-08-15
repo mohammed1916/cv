@@ -159,7 +159,7 @@
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--surface-1);
-  color: #e2e8f0;
+  color: var(--text);
   width: 100%;
   box-sizing: border-box;
 }
@@ -232,7 +232,7 @@
   border-radius: 10px;
   background: var(--surface-1);
   border: 1px solid var(--border);
-  color: #475569;
+  color: var(--text-muted);
 }
 
 .bulb-switcher-bulb.is-on {
@@ -278,7 +278,7 @@
   height: 14px;
   border-radius: 4px;
   background: var(--surface-1);
-  border: 1px solid #475569;
+  border: 1px solid var(--text-muted);
   display: inline-block;
 }
 

@@ -194,17 +194,17 @@ function generateSteps(a, b) {
 function BinaryRepresentation({ label, number, binary, highlight = false }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>
+      <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
         {label}
       </div>
       <div style={{
         padding: '10px 12px',
-        backgroundColor: highlight ? '#dbeafe' : '#f1f5f9',
+        backgroundColor: highlight ? '#dbeafe' : 'var(--surface2)',
         borderRadius: 6,
-        border: `2px solid ${highlight ? '#0284c7' : '#cbd5e1'}`,
+        border: `2px solid ${highlight ? '#0284c7' : 'var(--border)'}`,
         fontFamily: 'monospace',
         fontSize: 12,
-        color: '#1e293b'
+        color: 'var(--surface2)'
       }}>
         {number}
       </div>
@@ -224,9 +224,9 @@ function BinaryRepresentation({ label, number, binary, highlight = false }) {
               fontFamily: 'monospace',
               fontSize: 11,
               fontWeight: 600,
-              backgroundColor: bit === '1' ? '#ecfdf5' : '#f1f5f9',
-              borderColor: bit === '1' ? '#10b981' : '#cbd5e1',
-              color: bit === '1' ? '#047857' : '#64748b'
+              backgroundColor: bit === '1' ? '#ecfdf5' : 'var(--surface2)',
+              borderColor: bit === '1' ? '#10b981' : 'var(--border)',
+              color: bit === '1' ? '#047857' : 'var(--text-muted)'
             }}
             animate={{ scale: highlight ? 1.05 : 1 }}
           >
@@ -243,7 +243,7 @@ function VisualizationPanel({ a, b, step, applyEx }) {
     padding: '12px 14px',
     borderRadius: 6,
     border: '2px solid',
-    backgroundColor: '#f8fafc',
+    backgroundColor: 'var(--surface)',
     ...(() => {
       switch (label) {
         case 'XOR':
@@ -262,7 +262,7 @@ function VisualizationPanel({ a, b, step, applyEx }) {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -271,10 +271,10 @@ function VisualizationPanel({ a, b, step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9',
+                backgroundColor: 'var(--surface2)',
                 fontWeight: 500
               }}
             >
@@ -292,9 +292,9 @@ function VisualizationPanel({ a, b, step, applyEx }) {
             gridTemplateColumns: '1fr 1fr',
             gap: 16,
             padding: 16,
-            backgroundColor: '#f8fafc',
+            backgroundColor: 'var(--surface)',
             borderRadius: 8,
-            border: '2px solid #e2e8f0'
+            border: '2px solid var(--text)'
           }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

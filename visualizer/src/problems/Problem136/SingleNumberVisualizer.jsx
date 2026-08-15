@@ -56,7 +56,7 @@ function CollisionVisualization({ nums, step }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
       {/* Array with collision effects */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Active Elements</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Active Elements</div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', minHeight: 60 }}>
           <AnimatePresence>
             {nums.map((val, idx) => {
@@ -95,8 +95,8 @@ function CollisionVisualization({ nums, step }) {
       </div>
 
       {/* Result accumulator */}
-      <div style={{ padding: 16, backgroundColor: '#f8fafc', borderRadius: 8, border: '2px solid #0ea5e9' }}>
-        <div style={{ fontSize: 12, color: '#64748b', marginBottom: 8 }}>Accumulated Result (XOR)</div>
+      <div style={{ padding: 16, backgroundColor: 'var(--surface)', borderRadius: 8, border: '2px solid #0ea5e9' }}>
+        <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 8 }}>Accumulated Result (XOR)</div>
         <div style={{
           fontSize: 32,
           fontWeight: 'bold',
@@ -105,7 +105,7 @@ function CollisionVisualization({ nums, step }) {
         }}>
           {step?.result ?? 0}
         </div>
-        <div style={{ fontSize: 11, color: '#64748b', marginTop: 8 }}>
+        <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 8 }}>
           Binary: {toBin(step?.result ?? 0, 8)}
         </div>
       </div>
@@ -141,7 +141,7 @@ function VisualizationPanel({ nums, step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -150,10 +150,10 @@ function VisualizationPanel({ nums, step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9'
+                backgroundColor: 'var(--surface2)'
               }}
             >
               {e.label}

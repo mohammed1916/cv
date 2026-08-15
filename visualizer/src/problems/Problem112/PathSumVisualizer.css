@@ -6,7 +6,7 @@
   min-height: 480px;
   gap: 0;
   overflow: hidden;
-  background: #0f172a;
+  background: var(--code-bg);
 }
 
 .ps-panel {
@@ -16,11 +16,11 @@
 
 .ps-status {
   height: 100%;
-  background: #1e293b;
-  border-top: 1px solid #334155;
+  background: var(--surface2);
+  border-top: 1px solid var(--border);
   display: flex;
   align-items: center;
   padding: 0 12px;
   font-size: 12px;
-  color: #94a3b8;
+  color: var(--text-muted);
 }

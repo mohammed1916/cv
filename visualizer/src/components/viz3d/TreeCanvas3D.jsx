@@ -82,7 +82,7 @@ export default function TreeCanvas3D({
                 >
                   <stop
                     offset="0%"
-                    stopColor={isActive ? "#f9e2af" : "#45475a"}
+                    stopColor={isActive ? "#f9e2af" : "var(--code-line)"}
                     stopOpacity="0.8"
                   />
                   <stop
@@ -127,8 +127,8 @@ export default function TreeCanvas3D({
           const zOffset = depthMap.get(node.id) ?? 0;
 
           let bgColor = "#313244";
-          let borderColor = "#45475a";
-          let textColor = "#cdd6f4";
+          let borderColor = "var(--code-line)";
+          let textColor = "var(--code-text)";
           let glowColor = "rgba(0, 0, 0, 0)";
 
           if (isActive) {
@@ -143,8 +143,8 @@ export default function TreeCanvas3D({
             glowColor = "rgba(166, 227, 161, 0.3)";
           } else if (isVisited) {
             bgColor = "#1a1a2a";
-            borderColor = "#6c7086";
-            textColor = "#a6adc8";
+            borderColor = "var(--code-dim)";
+            textColor = "var(--code-dim)";
             glowColor = "rgba(108, 112, 134, 0.2)";
           }
 

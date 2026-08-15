@@ -44,23 +44,23 @@
   border-radius: 99px;
   font-size: 12px;
   cursor: pointer;
-  background: #1e293b;
-  border: 1px solid #334155;
-  color: #94a3b8;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
   transition: all 0.2s ease;
 }
 
 .mi-example-btn:hover {
-  background: #334155;
-  color: #f8fafc;
+  background: var(--border);
+  color: var(--surface);
 }
 
 .mi-input {
   padding: 8px 12px;
   border-radius: 8px;
-  border: 1px solid #334155;
-  background: #0f172a;
-  color: #f8fafc;
+  border: 1px solid var(--border);
+  background: var(--code-bg);
+  color: var(--surface);
   font-family: monospace;
   font-size: 14px;
   margin-bottom: 16px;
@@ -74,9 +74,9 @@
 .mi-canvas {
   position: relative;
   flex: 1;
-  background: #0f172a;
+  background: var(--code-bg);
   border-radius: 8px;
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   padding: 16px;
   overflow-y: auto;
   display: flex;
@@ -88,10 +88,10 @@
   position: sticky;
   top: 0;
   height: 20px;
-  border-bottom: 1px solid #334155;
+  border-bottom: 1px solid var(--border);
   margin-bottom: 8px;
   z-index: 10;
-  background: #0f172a;
+  background: var(--code-bg);
 }
 
 .mi-axis-tick {
@@ -99,7 +99,7 @@
   bottom: 0;
   height: 6px;
   width: 1px;
-  background: #64748b;
+  background: var(--text-muted);
 }
 
 .mi-tick-label {
@@ -136,7 +136,7 @@
 .mi-row-idx {
   font-family: monospace;
   font-size: 12px;
-  color: #64748b;
+  color: var(--text-muted);
   width: 24px;
   text-align: right;
 }
@@ -197,7 +197,7 @@
 .mi-empty-text {
   font-family: monospace;
   font-size: 13px;
-  color: #64748b;
+  color: var(--text-muted);
   padding-left: 36px;
   font-style: italic;
 }

@@ -109,20 +109,20 @@ export default function Problem394Visualizer() {
       </div>),
       viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
                     <div>
-                        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+                        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
                         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                             {EXAMPLES.map(e => (
-                                <button key={e.label} onClick={() => applyExample(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: '#f1f5f9' }}>
+                                <button key={e.label} onClick={() => applyExample(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: 'var(--surface2)' }}>
                                     {e.label}
                                 </button>
                             ))}
                         </div>
                     </div>
 
-                    <input style={{ padding: '8px', borderRadius: 4, border: '1px solid #cbd5e1', fontSize: 12, fontFamily: 'monospace' }} value={sInput}
+                    <input style={{ padding: '8px', borderRadius: 4, border: '1px solid var(--border)', fontSize: 12, fontFamily: 'monospace' }} value={sInput}
                         onChange={(e) => { setSInput(e.target.value); handleReset(); }} placeholder="encoded string" />
 
-                    <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 4 }}>Input</div>
+                    <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 4 }}>Input</div>
                     <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', minHeight: 40 }}>
                         {sInput.split("").map((ch, i) => {
                             const isCur = step?.ci === i;
@@ -131,19 +131,19 @@ export default function Problem394Visualizer() {
                             return (
                                 <motion.div key={i} animate={{ scale: isCur ? 1.3 : 1 }} style={{
                                     width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                    backgroundColor: colors[type], border: isCur ? '3px solid #0ea5e9' : '1px solid #cbd5e1',
-                                    borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: '#1e293b'
+                                    backgroundColor: colors[type], border: isCur ? '3px solid #0ea5e9' : '1px solid var(--border)',
+                                    borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: 'var(--surface2)'
                                 }}>{ch}</motion.div>
                             );
                         })}
                     </div>
 
-                    <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 4 }}>Stack</div>
-                    <div style={{ display: 'flex', gap: 6, alignItems: 'flex-start', minHeight: 50, paddingBottom: 8, borderBottom: '1px solid #e2e8f0' }}>
+                    <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 4 }}>Stack</div>
+                    <div style={{ display: 'flex', gap: 6, alignItems: 'flex-start', minHeight: 50, paddingBottom: 8, borderBottom: '1px solid var(--text)' }}>
                         <AnimatePresence mode="popLayout">
                             {(step?.stack ?? []).map((item, i) => (
                                 <motion.div key={`${i}-${item.k}`} initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} style={{
-                                    padding: '8px', backgroundColor: '#f8fafc', border: i === (step?.stack?.length - 1) ? '2px solid #3b82f6' : '1px solid #cbd5e1',
+                                    padding: '8px', backgroundColor: 'var(--surface)', border: i === (step?.stack?.length - 1) ? '2px solid #3b82f6' : '1px solid var(--border)',
                                     borderRadius: 4, fontSize: 11, fontFamily: 'monospace'
                                 }}>
                                     <div>k={item.k}</div>
@@ -151,7 +151,7 @@ export default function Problem394Visualizer() {
                                 </motion.div>
                             ))}
                         </AnimatePresence>
-                        {(step?.stack?.length ?? 0) === 0 && <span style={{ color: '#64748b', fontSize: 12 }}>empty</span>}
+                        {(step?.stack?.length ?? 0) === 0 && <span style={{ color: 'var(--text-muted)', fontSize: 12 }}>empty</span>}
                     </div>
 
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>

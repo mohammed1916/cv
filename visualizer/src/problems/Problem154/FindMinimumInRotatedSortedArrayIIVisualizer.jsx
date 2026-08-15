@@ -190,11 +190,11 @@ function ArrayVisualization({ nums, left, right, mid }) {
               alignItems: 'center',
               justifyContent: 'center',
               borderRadius: 4,
-              backgroundColor: isMid ? '#fbbf24' : isInRange ? '#dbeafe' : '#e2e8f0',
-              border: isLeft || isRight ? '3px solid #ef4444' : isMid ? '2px solid #f59e0b' : '1px solid #cbd5e1',
+              backgroundColor: isMid ? '#fbbf24' : isInRange ? '#dbeafe' : 'var(--text)',
+              border: isLeft || isRight ? '3px solid #ef4444' : isMid ? '2px solid #f59e0b' : '1px solid var(--border)',
               fontSize: 12,
               fontWeight: 600,
-              color: '#0f172a',
+              color: 'var(--code-bg)',
             }}
             animate={{ scale: isMid ? 1.15 : 1 }}
           >

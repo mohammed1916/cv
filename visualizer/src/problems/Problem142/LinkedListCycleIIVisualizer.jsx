@@ -237,8 +237,8 @@ function ListVisualization({ nodes, slowPos, fastPos, cycleStart, phase2Slow, ph
                     cx={x}
                     cy={y}
                     r={nodeRadius}
-                    fill={isSlow ? '#fbbf24' : isFast ? '#f87171' : isInCycle ? '#c7d2fe' : '#e2e8f0'}
-                    stroke={isSlow || isFast ? '#000' : isInCycle ? '#4f46e5' : '#94a3b8'}
+                    fill={isSlow ? '#fbbf24' : isFast ? '#f87171' : isInCycle ? '#c7d2fe' : 'var(--text)'}
+                    stroke={isSlow || isFast ? '#000' : isInCycle ? '#4f46e5' : 'var(--text-muted)'}
                     strokeWidth={isSlow || isFast ? 3 : 2}
                   />
                   <text
@@ -248,7 +248,7 @@ function ListVisualization({ nodes, slowPos, fastPos, cycleStart, phase2Slow, ph
                     dy="0.3em"
                     fontSize={14}
                     fontWeight="600"
-                    fill="#0f172a"
+                    fill="var(--code-bg)"
                   >
                     {val}
                   </text>
@@ -275,7 +275,7 @@ function ListVisualization({ nodes, slowPos, fastPos, cycleStart, phase2Slow, ph
                   y1={y1}
                   x2={x2}
                   y2={y2}
-                  stroke="#94a3b8"
+                  stroke="var(--text-muted)"
                   strokeWidth={2}
                   markerEnd="url(#arrowhead)"
                 />
@@ -298,8 +298,8 @@ function ListVisualization({ nodes, slowPos, fastPos, cycleStart, phase2Slow, ph
                     cx={x}
                     cy={y}
                     r={nodeRadius}
-                    fill={isSlow ? '#fbbf24' : isFast ? '#f87171' : '#e2e8f0'}
-                    stroke={isSlow || isFast ? '#000' : '#94a3b8'}
+                    fill={isSlow ? '#fbbf24' : isFast ? '#f87171' : 'var(--text)'}
+                    stroke={isSlow || isFast ? '#000' : 'var(--text-muted)'}
                     strokeWidth={isSlow || isFast ? 3 : 2}
                   />
                   <text
@@ -309,7 +309,7 @@ function ListVisualization({ nodes, slowPos, fastPos, cycleStart, phase2Slow, ph
                     dy="0.3em"
                     fontSize={14}
                     fontWeight="600"
-                    fill="#0f172a"
+                    fill="var(--code-bg)"
                   >
                     {val}
                   </text>
@@ -328,7 +328,7 @@ function ListVisualization({ nodes, slowPos, fastPos, cycleStart, phase2Slow, ph
             refY="3"
             orient="auto"
           >
-            <polygon points="0 0, 10 3, 0 6" fill="#94a3b8" />
+            <polygon points="0 0, 10 3, 0 6" fill="var(--text-muted)" />
           </marker>
         </defs>
       </svg>
@@ -451,7 +451,7 @@ export default function LinkedListCycleIIVisualizer() {
 
   const statusPanel = (
     <div className="llc2-status">
-      <div style={{ fontSize: 12, padding: '4px 8px', color: '#64748b' }}>
+      <div style={{ fontSize: 12, padding: '4px 8px', color: 'var(--text-muted)' }}>
         {step ? `Step ${stepIndex + 1} / ${steps.length}` : 'Ready'}
       </div>
     </div>

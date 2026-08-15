@@ -398,7 +398,7 @@ export default function MergeTwoSortedListsVisualizer() {
               {list1.length === 0 && (
                 <span
                   style={{
-                    color: "#64748b",
+                    color: "var(--text-muted)",
                     fontStyle: "italic",
                     fontSize: 12,
                   }}
@@ -409,7 +409,7 @@ export default function MergeTwoSortedListsVisualizer() {
               {step?.l1 >= list1.length && list1.length > 0 && (
                 <span
                   style={{
-                    color: "#64748b",
+                    color: "var(--text-muted)",
                     fontStyle: "italic",
                     fontSize: 12,
                     marginLeft: 8,
@@ -455,7 +455,7 @@ export default function MergeTwoSortedListsVisualizer() {
               {list2.length === 0 && (
                 <span
                   style={{
-                    color: "#64748b",
+                    color: "var(--text-muted)",
                     fontStyle: "italic",
                     fontSize: 12,
                   }}
@@ -466,7 +466,7 @@ export default function MergeTwoSortedListsVisualizer() {
               {step?.l2 >= list2.length && list2.length > 0 && (
                 <span
                   style={{
-                    color: "#64748b",
+                    color: "var(--text-muted)",
                     fontStyle: "italic",
                     fontSize: 12,
                     marginLeft: 8,

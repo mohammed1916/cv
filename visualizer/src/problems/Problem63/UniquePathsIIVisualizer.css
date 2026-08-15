@@ -72,7 +72,7 @@
 }
 
 .upii-chip:hover {
-    background: #334155;
+    background: var(--border);
     color: var(--text);
 }
 
@@ -95,8 +95,8 @@
     width: 60px;
     padding: 6px 8px;
     border-radius: 7px;
-    border: 1px solid #334155;
-    background: #0f172a;
+    border: 1px solid var(--border);
+    background: var(--code-bg);
     color: var(--text);
     font-size: 13px;
     font-family: monospace;
@@ -144,7 +144,7 @@
     font-size: 20px;
     font-weight: 700;
     border: 2px solid var(--border);
-    background: #1e293b;
+    background: var(--surface2);
     color: var(--text-muted);
     cursor: pointer;
     transition: all 0.18s ease;
@@ -178,8 +178,8 @@
     font-size: 16px;
     font-weight: 700;
     font-family: monospace;
-    background: #1e293b;
-    border: 2px solid #334155;
+    background: var(--surface2);
+    border: 2px solid var(--border);
     color: var(--text);
     transition: background 0.2s, border-color 0.2s;
     position: relative;

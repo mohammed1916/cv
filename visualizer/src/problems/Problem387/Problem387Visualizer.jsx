@@ -214,10 +214,10 @@ export default function Problem387Visualizer() {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid var(--border)',
                   cursor: 'pointer',
                   fontSize: 12,
-                  backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
+                  backgroundColor: exIdx === i ? '#dbeafe' : 'var(--surface2)',
                   fontWeight: exIdx === i ? 600 : 400,
                 }}
               >
@@ -229,13 +229,13 @@ export default function Problem387Visualizer() {
           {step && (
             <>
               {/* Message */}
-              <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 12, fontWeight: 500 }}>
+              <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 12, fontWeight: 500 }}>
                 {step.message}
               </div>
 
               {/* Input String */}
               <div>
-                <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Input String</div>
+                <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Input String</div>
                 <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
                   {step.s.split('').map((char, idx) => (
                     <motion.div
@@ -272,7 +272,7 @@ export default function Problem387Visualizer() {
               {/* Character Frequency Map */}
               {step.phase !== 'init' && (
                 <div>
-                  <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Character Frequencies</div>
+                  <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Character Frequencies</div>
                   <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
                     {Object.entries(step.charCount)
                       .sort((a, b) => a[0].localeCompare(b[0]))
@@ -289,13 +289,13 @@ export default function Problem387Visualizer() {
                                 ? count === 1
                                   ? '#dcfce7'
                                   : '#fee2e2'
-                                : '#f1f5f9',
+                                : 'var(--surface2)',
                             border:
                               step.highlighted === char
                                 ? count === 1
                                   ? '2px solid #10b981'
                                   : '2px solid #ef4444'
-                                : '1px solid #cbd5e1',
+                                : '1px solid var(--border)',
                             fontSize: 12,
                             fontWeight: 600,
                             color:
@@ -303,7 +303,7 @@ export default function Problem387Visualizer() {
                                 ? count === 1
                                   ? '#047857'
                                   : '#991b1b'
-                                : '#334155',
+                                : 'var(--border)',
                           }}
                         >
                           '{char}': {count}

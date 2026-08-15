@@ -64,7 +64,7 @@ function VisualizationPanel({ timeSeries, duration, step }) {
       <div style={{ padding: 12, backgroundColor: '#ccfbf1', borderRadius: 6, borderLeft: '4px solid #14b8a6' }}>
         <div style={{ fontSize: 12, color: '#134e4a', fontStyle: 'italic' }}>Teemo deals 1 damage per second for {duration}s after attack, then cooldown starts.</div>
       </div>
-      <div><div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Attack Times: [{timeSeries.join(', ')}]</div></div>
+      <div><div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Attack Times: [{timeSeries.join(', ')}]</div></div>
       <motion.div style={{ padding: 16, backgroundColor: '#ccfbf1', borderRadius: 6, border: '2px solid #14b8a6', textAlign: 'center' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
         <div style={{ fontSize: 13, fontWeight: 600, color: '#134e4a' }}>Total Damage</div>
         <div style={{ fontSize: 32, fontWeight: 'bold', color: '#0e8477' }}>{step?.totalDamage ?? 0}</div>

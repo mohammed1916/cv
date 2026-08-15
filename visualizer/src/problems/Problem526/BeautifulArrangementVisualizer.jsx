@@ -165,7 +165,7 @@ function VisualizationPanel({ n, step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -174,10 +174,10 @@ function VisualizationPanel({ n, step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9'
+                backgroundColor: 'var(--surface2)'
               }}
             >
               {e.label}
@@ -188,7 +188,7 @@ function VisualizationPanel({ n, step, applyEx }) {
 
       {/* Current Arrangement */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
           Current Arrangement (Position {step?.pos || 0}/{n})
         </div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -217,7 +217,7 @@ function VisualizationPanel({ n, step, applyEx }) {
             <div style={{
               padding: '12px 16px',
               borderRadius: 6,
-              border: '2px dashed #cbd5e1',
+              border: '2px dashed var(--border)',
               fontFamily: 'monospace',
               fontSize: 14,
               fontWeight: 600,
@@ -234,7 +234,7 @@ function VisualizationPanel({ n, step, applyEx }) {
 
       {/* Available Numbers */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Available Numbers</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Available Numbers</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {Array.from({ length: n }, (_, i) => i + 1).map(num => {
             const isAvailable = step && (step.available & (1 << num)) > 0
@@ -251,9 +251,9 @@ function VisualizationPanel({ n, step, applyEx }) {
                   fontWeight: 600,
                   minWidth: 40,
                   textAlign: 'center',
-                  backgroundColor: isCandidate ? '#fecaca' : isAvailable ? '#f1f5f9' : '#f8fafc',
-                  borderColor: isCandidate ? '#f87171' : isAvailable ? '#cbd5e1' : '#e2e8f0',
-                  color: isCandidate ? '#7f1d1d' : isAvailable ? '#1e293b' : '#94a3b8',
+                  backgroundColor: isCandidate ? '#fecaca' : isAvailable ? 'var(--surface2)' : 'var(--surface)',
+                  borderColor: isCandidate ? '#f87171' : isAvailable ? 'var(--border)' : 'var(--text)',
+                  color: isCandidate ? '#7f1d1d' : isAvailable ? 'var(--surface2)' : 'var(--text-muted)',
                   opacity: isAvailable ? 1 : 0.5
                 }}
                 animate={{ scale: isCandidate ? 1.2 : 1 }}

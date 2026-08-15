@@ -134,7 +134,7 @@ function VisualizationPanel({ n, k, step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES_LIST.map(e => (
             <button
@@ -143,10 +143,10 @@ function VisualizationPanel({ n, k, step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9'
+                backgroundColor: 'var(--surface2)'
               }}
             >
               {e.label}
@@ -157,7 +157,7 @@ function VisualizationPanel({ n, k, step, applyEx }) {
 
       {/* People Distribution */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
           People Candies Distribution (Total: {n} candies)
         </div>
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
@@ -172,9 +172,9 @@ function VisualizationPanel({ n, k, step, applyEx }) {
                 fontFamily: 'monospace',
                 fontSize: 14,
                 fontWeight: 600,
-                backgroundColor: step && idx === step.current && !step.done ? '#fee2e2' : '#f1f5f9',
-                borderColor: step && idx === step.current && !step.done ? '#dc2626' : '#cbd5e1',
-                color: step && idx === step.current && !step.done ? '#991b1b' : '#334155',
+                backgroundColor: step && idx === step.current && !step.done ? '#fee2e2' : 'var(--surface2)',
+                borderColor: step && idx === step.current && !step.done ? '#dc2626' : 'var(--border)',
+                color: step && idx === step.current && !step.done ? '#991b1b' : 'var(--border)',
                 minWidth: 80
               }}
               animate={{ scale: step && idx === step.current && !step.done ? 1.1 : 1 }}

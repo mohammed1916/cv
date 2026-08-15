@@ -105,7 +105,7 @@ function VisualizationPanel({ m, n, flips, step }) {
 
       {/* Matrix */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
           Matrix ({m}x{n})
         </div>
         <div style={{
@@ -133,9 +133,9 @@ function VisualizationPanel({ m, n, flips, step }) {
                   justifyContent: 'center',
                   fontWeight: 600,
                   cursor: 'pointer',
-                  backgroundColor: isCurrentFlip ? '#f472b6' : isCellFlipped ? '#e9d5ff' : '#f1f5f9',
-                  borderColor: isCurrentFlip ? '#ec4899' : isCellFlipped ? '#c084fc' : '#cbd5e1',
-                  color: isCurrentFlip ? '#fff' : isCellFlipped ? '#7c3aed' : '#334155'
+                  backgroundColor: isCurrentFlip ? '#f472b6' : isCellFlipped ? '#e9d5ff' : 'var(--surface2)',
+                  borderColor: isCurrentFlip ? '#ec4899' : isCellFlipped ? '#c084fc' : 'var(--border)',
+                  color: isCurrentFlip ? '#fff' : isCellFlipped ? '#7c3aed' : 'var(--border)'
                 }}
                 animate={{ scale: isCurrentFlip ? 1.2 : 1 }}
               >
@@ -169,10 +169,10 @@ function VisualizationPanel({ m, n, flips, step }) {
                   padding: '6px 12px',
                   backgroundColor: isActive ? '#e9d5ff' : '#f3f4f6',
                   borderRadius: 4,
-                  border: `1px solid ${isActive ? '#c084fc' : '#cbd5e1'}`,
+                  border: `1px solid ${isActive ? '#c084fc' : 'var(--border)'}`,
                   fontSize: 11,
                   fontWeight: 600,
-                  color: isActive ? '#7c3aed' : '#334155'
+                  color: isActive ? '#7c3aed' : 'var(--border)'
                 }}>
                   [{flip[0]}, {flip[1]}]
                 </div>

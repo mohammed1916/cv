@@ -139,12 +139,12 @@ function generateSteps(chars) {
 function OriginalStringVisualization({ chars, readIdx, current }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Original String</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Original String</div>
       <div style={{
         padding: 12,
-        backgroundColor: '#f1f5f9',
+        backgroundColor: 'var(--surface2)',
         borderRadius: 8,
-        border: '2px solid #cbd5e1',
+        border: '2px solid var(--border)',
         minHeight: 100,
       }}>
         <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
@@ -166,14 +166,14 @@ function OriginalStringVisualization({ chars, readIdx, current }) {
                   width: 36,
                   height: 36,
                   borderRadius: 6,
-                  backgroundColor: inGroup ? '#dbeafe' : '#f8fafc',
-                  border: isStart ? '3px solid #dc2626' : inGroup ? '2px solid #0284c7' : '2px solid #cbd5e1',
+                  backgroundColor: inGroup ? '#dbeafe' : 'var(--surface)',
+                  border: isStart ? '3px solid #dc2626' : inGroup ? '2px solid #0284c7' : '2px solid var(--border)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   fontSize: 12,
                   fontWeight: 700,
-                  color: inGroup ? '#0c4a6e' : '#64748b',
+                  color: inGroup ? '#0c4a6e' : 'var(--text-muted)',
                 }}
                 animate={{
                   scale: isStart ? 1.15 : 1,
@@ -181,7 +181,7 @@ function OriginalStringVisualization({ chars, readIdx, current }) {
                 >
                   {char}
                 </div>
-                <div style={{ fontSize: 10, color: '#64748b', fontWeight: 500, minWidth: 24, textAlign: 'center' }}>
+                <div style={{ fontSize: 10, color: 'var(--text-muted)', fontWeight: 500, minWidth: 24, textAlign: 'center' }}>
                   {idx}
                 </div>
               </motion.div>
@@ -196,7 +196,7 @@ function OriginalStringVisualization({ chars, readIdx, current }) {
 function CompressedStringVisualization({ result }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Compressed Result</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Compressed Result</div>
       <div style={{
         padding: 12,
         backgroundColor: '#ecfdf5',
@@ -243,7 +243,7 @@ function StatsVisualization({ chars, result, write }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Statistics</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Statistics</div>
       <div style={{
         display: 'grid',
         gridTemplateColumns: '1fr 1fr',
@@ -292,7 +292,7 @@ function VisualizationPanel({ step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -301,10 +301,10 @@ function VisualizationPanel({ step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9',
+                backgroundColor: 'var(--surface2)',
               }}
             >
               {e.label}

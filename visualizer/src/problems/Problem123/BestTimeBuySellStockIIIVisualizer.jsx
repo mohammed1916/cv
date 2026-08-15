@@ -134,7 +134,7 @@ export default function BestTimeBuySellStockIIIVisualizer() {
         <div className="bt3-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                 <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                    {EXAMPLES.map(e => <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : '#f1f5f9' }}>{e.label}</button>)}
+                    {EXAMPLES.map(e => <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : 'var(--surface2)' }}>{e.label}</button>)}
                 </div>
                 <input
                     value={pricesInput}
@@ -147,7 +147,7 @@ export default function BestTimeBuySellStockIIIVisualizer() {
                         padding: '8px 12px',
                         fontSize: 12,
                         borderRadius: 4,
-                        border: '1px solid #cbd5e1',
+                        border: '1px solid var(--border)',
                         fontFamily: 'monospace',
                         width: '100%',
                         boxSizing: 'border-box',
@@ -155,7 +155,7 @@ export default function BestTimeBuySellStockIIIVisualizer() {
                 />
                 {inputError && <div style={{ fontSize: 11, color: '#dc2626' }}>{inputError}</div>}
             </div>
-            <svg width={SVG_W} height={SVG_H + 4} style={{ border: '1px solid #e2e8f0', borderRadius: 4 }}>
+            <svg width={SVG_W} height={SVG_H + 4} style={{ border: '1px solid var(--text)', borderRadius: 4 }}>
                 <polyline points={polyline} fill="none" stroke="#0ea5e9" strokeWidth="2" />
                 {prices.map((p, i) => <circle key={i} cx={10 + i * xStep} cy={SVG_H - p * yScale} r={i === idx ? 5 : 3} fill={i === idx ? '#fbbf24' : '#0ea5e9'} />)}
                 {idx >= 0 && <line x1={10 + idx * xStep} y1={0} x2={10 + idx * xStep} y2={SVG_H} stroke="#f9e2af44" strokeWidth="1" strokeDasharray="3,3" />}
@@ -163,8 +163,8 @@ export default function BestTimeBuySellStockIIIVisualizer() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8 }}>
                 {[{ label: 'b1', val: fmt(b1), cls: '#fee2e2' }, { label: 's1', val: fmt(s1), cls: '#dcfce7' }, { label: 'b2', val: fmt(b2), cls: '#fee2e2' }, { label: 's2', val: fmt(s2), cls: '#dbeafe' }].map(({ label, val, cls }) => (
                     <div key={label} style={{ padding: 8, backgroundColor: cls, borderRadius: 6, textAlign: 'center' }}>
-                        <div style={{ fontSize: 11, fontWeight: '600', color: '#1e293b', marginBottom: 4 }}>{label}</div>
-                        <motion.div key={String(val)} initial={{ scale: 1.2 }} animate={{ scale: 1 }} style={{ fontSize: 13, fontWeight: 'bold', color: '#1e293b' }}>{val}</motion.div>
+                        <div style={{ fontSize: 11, fontWeight: '600', color: 'var(--surface2)', marginBottom: 4 }}>{label}</div>
+                        <motion.div key={String(val)} initial={{ scale: 1.2 }} animate={{ scale: 1 }} style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--surface2)' }}>{val}</motion.div>
                     </div>
                 ))}
             </div>

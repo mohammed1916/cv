@@ -190,7 +190,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
           <div
             style={{
               padding: 12,
-              backgroundColor: '#1e293b',
+              backgroundColor: 'var(--surface2)',
               borderRadius: 6,
               border: '2px solid #38bdf8',
               fontSize: 14,
@@ -209,15 +209,15 @@ function VisualizationPanel({ step, applyExample, examples }) {
     if (nums.length === 2) {
       return (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 12, padding: 16 }}>
-          <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #38bdf8' }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Numerator</div>
+          <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #38bdf8' }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>Numerator</div>
             <div style={{ fontSize: 16, fontWeight: 700, color: '#067db1', fontFamily: 'monospace' }}>
               {nums[0]}
             </div>
           </div>
-          <div style={{ fontSize: 18, color: '#64748b', fontWeight: 700 }}>÷</div>
-          <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f59e0b' }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Denominator</div>
+          <div style={{ fontSize: 18, color: 'var(--text-muted)', fontWeight: 700 }}>÷</div>
+          <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #f59e0b' }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>Denominator</div>
             <div style={{ fontSize: 16, fontWeight: 700, color: '#a36907', fontFamily: 'monospace' }}>
               {nums[1]}
             </div>
@@ -232,7 +232,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #a78bfa',
           }}
@@ -255,14 +255,14 @@ function VisualizationPanel({ step, applyExample, examples }) {
             }}
           >
             <span style={{ color: '#067db1', fontWeight: 700 }}>{nums[0]}</span>
-            <span style={{ color: '#64748b' }}>÷</span>
-            <span style={{ color: '#64748b' }}>(</span>
+            <span style={{ color: 'var(--text-muted)' }}>÷</span>
+            <span style={{ color: 'var(--text-muted)' }}>(</span>
             <span style={{ color: '#a36907' }}>{nums.slice(1).join(' ÷ ')}</span>
-            <span style={{ color: '#64748b' }}>)</span>
+            <span style={{ color: 'var(--text-muted)' }}>)</span>
           </div>
           {step?.denominator && (
-            <div style={{ marginTop: 12, paddingTop: 12, borderTop: '1px solid #475569' }}>
-              <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>
+            <div style={{ marginTop: 12, paddingTop: 12, borderTop: '1px solid var(--text-muted)' }}>
+              <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>
                 Denominator Expression
               </div>
               <div
@@ -271,7 +271,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
                   fontSize: 12,
                   color: '#f59e0b',
                   padding: 8,
-                  backgroundColor: '#0f172a',
+                  backgroundColor: 'var(--code-bg)',
                   borderRadius: 4,
                 }}
               >
@@ -299,11 +299,11 @@ function VisualizationPanel({ step, applyExample, examples }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -322,9 +322,9 @@ function VisualizationPanel({ step, applyExample, examples }) {
               gap: 8,
               flexWrap: 'wrap',
               padding: 12,
-              backgroundColor: '#1e293b',
+              backgroundColor: 'var(--surface2)',
               borderRadius: 6,
-              border: '1px solid #475569',
+              border: '1px solid var(--text-muted)',
             }}
           >
             {step.array.map((num, i) => (
@@ -332,7 +332,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
                 key={i}
                 style={{
                   padding: '6px 12px',
-                  backgroundColor: '#0f172a',
+                  backgroundColor: 'var(--code-bg)',
                   borderRadius: 4,
                   border: '1px solid #38bdf8',
                   color: '#38bdf8',
@@ -353,7 +353,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #22c55e',
             textAlign: 'center',
@@ -362,7 +362,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Result</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Result</div>
           <div
             style={{
               fontSize: 13,
@@ -376,7 +376,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
             {step.result}
           </div>
           {step?.numericalResult !== undefined && (
-            <div style={{ fontSize: 11, color: '#627794', marginTop: 8, paddingTop: 8, borderTop: '1px solid #475569' }}>
+            <div style={{ fontSize: 11, color: '#627794', marginTop: 8, paddingTop: 8, borderTop: '1px solid var(--text-muted)' }}>
               Numerical value: <span style={{ color: '#178740', fontWeight: 600 }}>{step.numericalResult.toFixed(2)}</span>
             </div>
           )}
@@ -464,9 +464,9 @@ export default function OptimalDivisionVisualizer() {
                   height: 60,
                   padding: '8px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  border: '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                   fontSize: 12,
                   resize: 'vertical',

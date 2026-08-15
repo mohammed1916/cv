@@ -93,14 +93,14 @@ function NodeDisplay({ val, isCurrent, isChild }) {
         width: 45,
         height: 45,
         borderRadius: 6,
-        backgroundColor: isCurrent ? '#dbeafe' : isChild ? '#f3e8ff' : '#f1f5f9',
-        border: isCurrent ? '3px solid #0284c7' : isChild ? '2px solid #d8b4fe' : '1px solid #cbd5e1',
+        backgroundColor: isCurrent ? '#dbeafe' : isChild ? '#f3e8ff' : 'var(--surface2)',
+        border: isCurrent ? '3px solid #0284c7' : isChild ? '2px solid #d8b4fe' : '1px solid var(--border)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         fontSize: 13,
         fontWeight: 700,
-        color: isCurrent ? '#0c4a6e' : isChild ? '#6b21a8' : '#475569',
+        color: isCurrent ? '#0c4a6e' : isChild ? '#6b21a8' : 'var(--text-muted)',
       }}
       animate={{ scale: isCurrent ? 1.15 : 1 }}
     >
@@ -119,7 +119,7 @@ function VisualizationPanel({ step, applyEx }) {
       )}
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -128,10 +128,10 @@ function VisualizationPanel({ step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9',
+                backgroundColor: 'var(--surface2)',
               }}
             >
               {e.label}
@@ -141,7 +141,7 @@ function VisualizationPanel({ step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Algorithm Overview</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Algorithm Overview</div>
         <div style={{ padding: 12, backgroundColor: '#f0f9ff', borderRadius: 6, border: '1px solid #bfdbfe', fontSize: 11, color: '#1e40af' }}>
           DFS-based flattening: traverse next, check for child, save next if child exists, recursively flatten child, link child tail to saved next
         </div>
@@ -149,7 +149,7 @@ function VisualizationPanel({ step, applyEx }) {
 
       {step?.flatList && step.flatList.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Flattened So Far</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Flattened So Far</div>
           <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
             {step.flatList.map((val, i) => (
               <NodeDisplay key={i} val={val} isCurrent={step.current === val && !step.inChild} isChild={step.inChild && step.flatList.indexOf(val) > 2} />

@@ -63,7 +63,7 @@
 }
 
 .up-chip:hover {
-    background: #334155;
+    background: var(--border);
     color: var(--text);
 }
 
@@ -86,8 +86,8 @@
     width: 60px;
     padding: 6px 8px;
     border-radius: 7px;
-    border: 1px solid #334155;
-    background: #0f172a;
+    border: 1px solid var(--border);
+    background: var(--code-bg);
     color: var(--text);
     font-size: 13px;
     font-family: monospace;
@@ -119,8 +119,8 @@
     font-size: 16px;
     font-weight: 700;
     font-family: monospace;
-    background: #1e293b;
-    border: 2px solid #334155;
+    background: var(--surface2);
+    border: 2px solid var(--border);
     color: var(--text);
     transition: background 0.2s, border-color 0.2s;
     position: relative;
@@ -129,7 +129,7 @@
 .up-cell.edge {
     background: rgba(30, 41, 59, 0.5);
     color: var(--text-muted);
-    border-color: #1e293b;
+    border-color: var(--surface2);
 }
 
 .up-cell.start {

@@ -70,23 +70,23 @@
   border-radius: 99px;
   font-size: 12px;
   cursor: pointer;
-  background: #1e293b;
-  border: 1px solid #334155;
-  color: #94a3b8;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
   transition: all 0.2s ease;
 }
 
 .twosum-example-btn:hover {
-  background: #334155;
-  color: #f8fafc;
+  background: var(--border);
+  color: var(--surface);
 }
 
 .twosum-input {
   padding: 8px 12px;
   border-radius: 8px;
-  border: 1px solid #334155;
-  background: #0f172a;
-  color: #f8fafc;
+  border: 1px solid var(--border);
+  background: var(--code-bg);
+  color: var(--surface);
   font-family: monospace;
   font-size: 14px;
 }
@@ -114,7 +114,7 @@
 
 .twosum-index {
   font-size: 11px;
-  color: #64748b;
+  color: var(--text-muted);
   margin-bottom: 6px;
   font-family: monospace;
 }
@@ -125,10 +125,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #1e293b;
-  border: 2px solid #334155;
+  background: var(--surface2);
+  border: 2px solid var(--border);
   border-radius: 8px;
-  color: #f8fafc;
+  color: var(--surface);
   font-size: 16px;
   font-weight: 600;
   font-family: monospace;
@@ -178,8 +178,8 @@
 }
 
 .twosum-formula-box {
-  background: #0f172a;
-  border: 1px solid #334155;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 16px;
   display: flex;
@@ -203,7 +203,7 @@
 }
 
 .twosum-formula .var { color: #627794; }
-.twosum-formula .op { color: #64748b; }
+.twosum-formula .op { color: var(--text-muted); }
 .twosum-formula .val { color: #4879a9; }
 
 .twosum-formula .diff {
@@ -227,8 +227,8 @@
 .twosum-map-container {
   display: flex;
   flex-direction: column;
-  background: #0f172a;
-  border: 1px solid #334155;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
   border-radius: 8px;
   flex: 1;
   overflow: hidden;
@@ -237,8 +237,8 @@
 .twosum-map-headers {
   display: flex;
   padding: 8px 16px;
-  background: #1e293b;
-  border-bottom: 1px solid #334155;
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
   font-size: 11px;
   text-transform: uppercase;
   color: #8392a6;
@@ -267,7 +267,7 @@
 }
 
 .twosum-map-arrow {
-  color: #64748b;
+  color: var(--text-muted);
   margin: 0 auto;
 }
 
@@ -294,7 +294,7 @@
 
 .twosum-empty-map {
   padding: 16px;
-  color: #475569;
+  color: var(--text-muted);
   font-style: italic;
   font-size: 13px;
   text-align: center;

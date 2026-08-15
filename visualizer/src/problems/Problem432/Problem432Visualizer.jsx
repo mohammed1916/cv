@@ -106,7 +106,7 @@ function VisualizationPanel({ step, applyEx }) {
       )}
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -115,10 +115,10 @@ function VisualizationPanel({ step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9',
+                backgroundColor: 'var(--surface2)',
               }}
             >
               {e.label}
@@ -136,7 +136,7 @@ function VisualizationPanel({ step, applyEx }) {
 
       {step?.array && step.array.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Array (Values)</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Array (Values)</div>
           <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
             {step.array.map((val, i) => (
               <motion.div
@@ -145,14 +145,14 @@ function VisualizationPanel({ step, applyEx }) {
                   width: 45,
                   height: 45,
                   borderRadius: 6,
-                  backgroundColor: step.val === val ? '#dbeafe' : step.randomVal === val ? '#fef08a' : '#f1f5f9',
-                  border: step.val === val ? '3px solid #0284c7' : step.randomVal === val ? '3px solid #eab308' : '1px solid #cbd5e1',
+                  backgroundColor: step.val === val ? '#dbeafe' : step.randomVal === val ? '#fef08a' : 'var(--surface2)',
+                  border: step.val === val ? '3px solid #0284c7' : step.randomVal === val ? '3px solid #eab308' : '1px solid var(--border)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   fontSize: 13,
                   fontWeight: 700,
-                  color: step.val === val ? '#0c4a6e' : step.randomVal === val ? '#713f12' : '#475569',
+                  color: step.val === val ? '#0c4a6e' : step.randomVal === val ? '#713f12' : 'var(--text-muted)',
                   flexDirection: 'column',
                   gap: 2,
                 }}
@@ -168,7 +168,7 @@ function VisualizationPanel({ step, applyEx }) {
 
       {step?.map && step.map.size > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Map (val → idx)</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Map (val → idx)</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
             {Array.from(step.map.entries()).slice(0, 5).map(([val, idx], i) => (
               <div

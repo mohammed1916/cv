@@ -73,7 +73,7 @@
 
 /* Route visualization */
 .route-line {
-  stroke: #cbd5e1;
+  stroke: var(--border);
   stroke-width: 1;
   opacity: 0.5;
   transition: all 0.3s ease;
@@ -130,12 +130,12 @@
 /* Message box */
 .message-box {
   padding: 12px;
-  background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+  background: linear-gradient(135deg, #f0f4f8 0%, var(--text) 100%);
   border-radius: 6px;
   border-left: 4px solid #8b5cf6;
   font-size: 12px;
   font-weight: 500;
-  color: #334155;
+  color: var(--border);
   line-height: 1.5;
 }
 
@@ -143,18 +143,18 @@
 .example-button {
   padding: 8px 14px;
   border-radius: 6px;
-  border: 1px solid #cbd5e1;
-  background: #f1f5f9;
+  border: 1px solid var(--border);
+  background: var(--surface2);
   cursor: pointer;
   font-size: 12px;
   font-weight: 500;
-  color: #475569;
+  color: var(--text-muted);
   transition: all 0.2s ease;
 }
 
 .example-button:hover {
-  background: #e2e8f0;
-  border-color: #94a3b8;
+  background: var(--text);
+  border-color: var(--text-muted);
 }
 
 .example-button.active {
@@ -226,7 +226,7 @@
 /* Network visualization container */
 .network-container {
   position: relative;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border);
   border-radius: 8px;
   background: #f9fafb;
   padding: 12px;

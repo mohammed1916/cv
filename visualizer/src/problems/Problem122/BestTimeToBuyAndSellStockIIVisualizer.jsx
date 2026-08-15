@@ -149,7 +149,7 @@ function VisualizationPanel({ step }) {
                   style={{
                     flex: 1,
                     height: `${height}%`,
-                    backgroundColor: isUpward ? '#10b981' : step.currentIdx === idx ? '#f59e0b' : '#cbd5e1',
+                    backgroundColor: isUpward ? '#10b981' : step.currentIdx === idx ? '#f59e0b' : 'var(--border)',
                     borderRadius: '4px 4px 0 0',
                     display: 'flex',
                     alignItems: 'flex-end',
@@ -246,7 +246,7 @@ export default function BestTimeToBuyAndSellStockIIVisualizer() {
   </>
 
   const statusPanel = (
-    <div style={{ padding: 12, backgroundColor: '#1e293b', color: '#94a3b8', fontSize: 12, height: '100%', display: 'flex', alignItems: 'center', overflow: 'auto' }}>
+    <div style={{ padding: 12, backgroundColor: 'var(--surface2)', color: 'var(--text-muted)', fontSize: 12, height: '100%', display: 'flex', alignItems: 'center', overflow: 'auto' }}>
       {step?.message || 'Ready'}
     </div>
   )

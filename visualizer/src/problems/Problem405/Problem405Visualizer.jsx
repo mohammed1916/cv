@@ -132,20 +132,20 @@ function HexConversionVisualization({ num, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Number: {num}</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Number: {num}</div>
 
       {/* Binary representation */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Binary Representation</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Binary Representation</div>
         <div style={{
           padding: 12,
-          backgroundColor: '#f1f5f9',
+          backgroundColor: 'var(--surface2)',
           borderRadius: 6,
           fontFamily: 'monospace',
           fontSize: 13,
-          color: '#334155',
+          color: 'var(--border)',
           wordBreak: 'break-all',
-          border: '2px solid #cbd5e1',
+          border: '2px solid var(--border)',
         }}>
           {step?.binary ? step.binary.split('').map((bit, idx) => (
             <span
@@ -178,13 +178,13 @@ function HexConversionVisualization({ num, step }) {
         >
           <div style={{ fontSize: 12, fontWeight: 600, color: '#92400e', marginBottom: 8 }}>Current Extraction</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
-            <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#ffffff', borderRadius: 4, border: '1px solid #f59e0b' }}>
+            <div style={{ textAlign: 'center', padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4, border: '1px solid #f59e0b' }}>
               <div style={{ fontSize: 10, color: '#92400e' }}>Last 4 Bits</div>
               <div style={{ fontSize: 14, fontWeight: 'bold', color: '#78350f', fontFamily: 'monospace' }}>
                 {step.remainder.toString(2).padStart(4, '0')}
               </div>
             </div>
-            <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#ffffff', borderRadius: 4, border: '1px solid #f59e0b' }}>
+            <div style={{ textAlign: 'center', padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4, border: '1px solid #f59e0b' }}>
               <div style={{ fontSize: 10, color: '#92400e' }}>Decimal</div>
               <div style={{ fontSize: 14, fontWeight: 'bold', color: '#78350f' }}>{step.remainder}</div>
             </div>
@@ -198,22 +198,22 @@ function HexConversionVisualization({ num, step }) {
 
       {/* Hex digit table */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Hex Digit Mapping</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Hex Digit Mapping</div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(8, 1fr)', gap: 4 }}>
           {Array.from({ length: 16 }, (_, i) => (
             <div
               key={i}
               style={{
                 padding: 8,
-                backgroundColor: step?.digit === HEX_CHARS[i] ? '#dbeafe' : '#f1f5f9',
+                backgroundColor: step?.digit === HEX_CHARS[i] ? '#dbeafe' : 'var(--surface2)',
                 borderRadius: 4,
                 textAlign: 'center',
                 fontSize: 11,
-                border: step?.digit === HEX_CHARS[i] ? '2px solid #0284c7' : '1px solid #cbd5e1',
+                border: step?.digit === HEX_CHARS[i] ? '2px solid #0284c7' : '1px solid var(--border)',
               }}
             >
-              <div style={{ color: '#64748b', fontSize: 9 }}>{i}</div>
-              <div style={{ fontFamily: 'monospace', fontWeight: 'bold', color: '#1e293b' }}>{HEX_CHARS[i]}</div>
+              <div style={{ color: 'var(--text-muted)', fontSize: 9 }}>{i}</div>
+              <div style={{ fontFamily: 'monospace', fontWeight: 'bold', color: 'var(--surface2)' }}>{HEX_CHARS[i]}</div>
             </div>
           ))}
         </div>
@@ -221,7 +221,7 @@ function HexConversionVisualization({ num, step }) {
 
       {/* Result */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Hexadecimal Result</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Hexadecimal Result</div>
         <div style={{
           padding: 16,
           backgroundColor: '#dbeafe',
@@ -238,7 +238,7 @@ function HexConversionVisualization({ num, step }) {
         </div>
       </div>
 
-      <div style={{ fontSize: 12, color: '#475569' }}>{step?.message}</div>
+      <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{step?.message}</div>
     </div>
   )
 }
@@ -305,7 +305,7 @@ export default function Problem405Visualizer() {
       </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button
@@ -314,11 +314,11 @@ export default function Problem405Visualizer() {
                   style={{
                     padding: '6px 12px',
                     borderRadius: 4,
-                    border: exIdx === idx ? '2px solid #8b5cf6' : '1px solid #cbd5e1',
+                    border: exIdx === idx ? '2px solid #8b5cf6' : '1px solid var(--border)',
                     cursor: 'pointer',
                     fontSize: 12,
-                    backgroundColor: exIdx === idx ? '#ede9fe' : '#f1f5f9',
-                    color: exIdx === idx ? '#6d28d9' : '#334155',
+                    backgroundColor: exIdx === idx ? '#ede9fe' : 'var(--surface2)',
+                    color: exIdx === idx ? '#6d28d9' : 'var(--border)',
                     fontWeight: exIdx === idx ? '600' : '400',
                   }}
                 >

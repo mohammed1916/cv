@@ -161,7 +161,7 @@ function generateSteps(board, words) {
 
 function GridDisplay({ board, highlightedCell, currentPath = [] }) {
   return (
-    <div style={{ display: "inline-block", gap: 2, backgroundColor: "#1e293b", padding: 8, borderRadius: 4 }}>
+    <div style={{ display: "inline-block", gap: 2, backgroundColor: "var(--surface2)", padding: 8, borderRadius: 4 }}>
       {board.map((row, i) => (
         <div key={i} style={{ display: "flex", gap: 2, marginBottom: 2 }}>
           {row.map((cell, j) => (
@@ -175,16 +175,16 @@ function GridDisplay({ board, highlightedCell, currentPath = [] }) {
                 justifyContent: "center",
                 backgroundColor:
                   cell === "#"
-                    ? "#64748b"
+                    ? "var(--text-muted)"
                     : highlightedCell && highlightedCell[0] === i && highlightedCell[1] === j
                       ? "#fbbf24"
                       : currentPath.some((p) => p[0] === i && p[1] === j)
                         ? "#93c5fd"
-                        : "#334155",
+                        : "var(--border)",
                 borderRadius: 4,
                 fontFamily: "monospace",
                 fontWeight: 700,
-                color: cell === "#" ? "#94a3b8" : "#fff",
+                color: cell === "#" ? "var(--text-muted)" : "#fff",
                 fontSize: 14,
               }}
               initial={{ opacity: 0 }}

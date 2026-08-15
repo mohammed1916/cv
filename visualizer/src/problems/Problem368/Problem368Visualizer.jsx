@@ -200,7 +200,7 @@ function DivisibilityArrows({ sorted, highlighted, currentIdx }) {
           refY="3"
           orient="auto"
         >
-          <polygon points="0 0, 10 3, 0 6" fill="#64748b" />
+          <polygon points="0 0, 10 3, 0 6" fill="var(--text-muted)" />
         </marker>
         <marker
           id="arrowhead-highlight"
@@ -231,8 +231,8 @@ function DivisibilityArrows({ sorted, highlighted, currentIdx }) {
               cx={x}
               cy={y}
               r={radius}
-              fill={isCurrent ? '#fbbf24' : isHighlighted ? '#0ea5e9' : '#334155'}
-              stroke={isCurrent ? '#f59e0b' : isHighlighted ? '#0ea5e9' : '#64748b'}
+              fill={isCurrent ? '#fbbf24' : isHighlighted ? '#0ea5e9' : 'var(--border)'}
+              stroke={isCurrent ? '#f59e0b' : isHighlighted ? '#0ea5e9' : 'var(--text-muted)'}
               strokeWidth={isCurrent || isHighlighted ? 3 : 2}
               style={{ transition: 'all 0.3s ease' }}
             />
@@ -385,10 +385,10 @@ export default function Problem368Visualizer() {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid var(--border)',
                   cursor: 'pointer',
                   fontSize: 12,
-                  backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
+                  backgroundColor: exIdx === i ? '#dbeafe' : 'var(--surface2)',
                   fontWeight: exIdx === i ? 600 : 400,
                 }}
               >
@@ -400,8 +400,8 @@ export default function Problem368Visualizer() {
           {step && (
             <>
               {/* Status message */}
-              <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
-                <div style={{ fontWeight: 600, marginBottom: 6, color: '#1e293b' }}>{step.message}</div>
+              <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 11 }}>
+                <div style={{ fontWeight: 600, marginBottom: 6, color: 'var(--surface2)' }}>{step.message}</div>
               </div>
 
               {/* Array and DP state */}
@@ -418,9 +418,9 @@ export default function Problem368Visualizer() {
                         style={{
                           padding: 8,
                           borderRadius: 4,
-                          border: isCurrent || isHighlighted ? '2px solid #0ea5e9' : '1px solid #cbd5e1',
-                          backgroundColor: isCurrent ? '#fef08a' : isHighlighted ? '#0ea5e9' : '#f1f5f9',
-                          color: isHighlighted ? '#fff' : '#1e293b',
+                          border: isCurrent || isHighlighted ? '2px solid #0ea5e9' : '1px solid var(--border)',
+                          backgroundColor: isCurrent ? '#fef08a' : isHighlighted ? '#0ea5e9' : 'var(--surface2)',
+                          color: isHighlighted ? '#fff' : 'var(--surface2)',
                           fontSize: 11,
                           fontWeight: 600,
                           textAlign: 'center',

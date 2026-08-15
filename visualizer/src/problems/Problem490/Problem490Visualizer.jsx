@@ -159,7 +159,7 @@ function VisualizationPanel({ maze, start, destination, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Maze</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Maze</div>
         <div style={{
           display: 'inline-grid',
           gridTemplateColumns: `repeat(${maze[0].length}, 1fr)`,
@@ -175,8 +175,8 @@ function VisualizationPanel({ maze, start, destination, step, applyEx }) {
                 style={{
                   width: 30,
                   height: 30,
-                  backgroundColor: cell === 1 ? '#1f2937' : isVisited ? '#c7d2fe' : '#f1f5f9',
-                  border: '1px solid #cbd5e1',
+                  backgroundColor: cell === 1 ? '#1f2937' : isVisited ? '#c7d2fe' : 'var(--surface2)',
+                  border: '1px solid var(--border)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',

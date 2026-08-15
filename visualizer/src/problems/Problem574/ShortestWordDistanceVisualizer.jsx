@@ -235,11 +235,11 @@ function VisualizationPanel({ step, words, word1, word2, applyExample, examples 
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -250,8 +250,8 @@ function VisualizationPanel({ step, words, word1, word2, applyExample, examples 
       )}
 
       {step?.words && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #64748b' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Word List</div>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Word List</div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
             {step.words.map((word, idx) => (
               <div
@@ -266,7 +266,7 @@ function VisualizationPanel({ step, words, word1, word2, applyExample, examples 
                         ? '#38bdf8'
                         : step.indices2?.includes(idx)
                           ? '#f59e0b'
-                          : '#334155',
+                          : 'var(--border)',
                   color: '#757575',
                   fontSize: 11,
                   fontWeight: 600,
@@ -283,8 +283,8 @@ function VisualizationPanel({ step, words, word1, word2, applyExample, examples 
       )}
 
       {step?.wordIndices && Object.keys(step.wordIndices).length > 0 && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #64748b' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Word Indices Map</div>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Word Indices Map</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 11 }}>
             {Object.entries(step.wordIndices).map(([word, indices]) => (
               <div key={word} style={{ color: '#5577a4' }}>
@@ -297,7 +297,7 @@ function VisualizationPanel({ step, words, word1, word2, applyExample, examples 
 
       {step?.indices1 && step?.indices2 && (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-          <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #38bdf8' }}>
+          <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #38bdf8' }}>
             <div style={{ fontSize: 11, fontWeight: 600, color: '#067db1', marginBottom: 6 }}>
               "{step.word1}" Indices
             </div>
@@ -305,7 +305,7 @@ function VisualizationPanel({ step, words, word1, word2, applyExample, examples 
               [{step.indices1.join(', ')}]
             </div>
           </div>
-          <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f59e0b' }}>
+          <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #f59e0b' }}>
             <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', marginBottom: 6 }}>
               "{step.word2}" Indices
             </div>
@@ -318,13 +318,13 @@ function VisualizationPanel({ step, words, word1, word2, applyExample, examples 
 
       {step?.i !== undefined && step?.j !== undefined && (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-          <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #38bdf8' }}>
+          <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #38bdf8' }}>
             <div style={{ fontSize: 11, fontWeight: 600, color: '#067db1', marginBottom: 6 }}>Pointer i</div>
             <div style={{ fontSize: 16, color: '#067db1', fontFamily: 'monospace', fontWeight: 700 }}>
               {step.i} → idx: {step.indices1?.[step.i]}
             </div>
           </div>
-          <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f59e0b' }}>
+          <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #f59e0b' }}>
             <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', marginBottom: 6 }}>Pointer j</div>
             <div style={{ fontSize: 16, color: '#a36907', fontFamily: 'monospace', fontWeight: 700 }}>
               {step.j} → idx: {step.indices2?.[step.j]}
@@ -335,13 +335,13 @@ function VisualizationPanel({ step, words, word1, word2, applyExample, examples 
 
       {step?.currentDistance !== undefined && (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-          <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #ec4899' }}>
+          <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #ec4899' }}>
             <div style={{ fontSize: 11, fontWeight: 600, color: '#e0177a', marginBottom: 6 }}>Current Distance</div>
             <div style={{ fontSize: 18, color: '#e0177a', fontFamily: 'monospace', fontWeight: 700 }}>
               {step.currentDistance}
             </div>
           </div>
-          <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #22c55e' }}>
+          <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #22c55e' }}>
             <div style={{ fontSize: 11, fontWeight: 600, color: '#178740', marginBottom: 6 }}>Min Distance</div>
             <div style={{ fontSize: 18, color: '#178740', fontFamily: 'monospace', fontWeight: 700 }}>
               {step.minDistance === Infinity ? '∞' : step.minDistance}
@@ -354,7 +354,7 @@ function VisualizationPanel({ step, words, word1, word2, applyExample, examples 
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid',
             borderColor: step.result >= 0 ? '#22c55e' : '#f87171',
@@ -364,7 +364,7 @@ function VisualizationPanel({ step, words, word1, word2, applyExample, examples 
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Result</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Result</div>
           <div
             style={{
               fontSize: 18,
@@ -463,9 +463,9 @@ export default function ShortestWordDistanceVisualizer() {
                   height: 60,
                   padding: '8px',
                   borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid #475569',
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                   fontSize: 12,
                   resize: 'vertical',
@@ -487,9 +487,9 @@ export default function ShortestWordDistanceVisualizer() {
                     width: '100%',
                     padding: '8px',
                     borderRadius: 4,
-                    border: '1px solid #475569',
-                    backgroundColor: '#1e293b',
-                    color: '#e2e8f0',
+                    border: '1px solid var(--text-muted)',
+                    backgroundColor: 'var(--surface2)',
+                    color: 'var(--text)',
                     fontFamily: 'monospace',
                     fontSize: 12,
                   }}
@@ -508,9 +508,9 @@ export default function ShortestWordDistanceVisualizer() {
                     width: '100%',
                     padding: '8px',
                     borderRadius: 4,
-                    border: '1px solid #475569',
-                    backgroundColor: '#1e293b',
-                    color: '#e2e8f0',
+                    border: '1px solid var(--text-muted)',
+                    backgroundColor: 'var(--surface2)',
+                    color: 'var(--text)',
                     fontFamily: 'monospace',
                     fontSize: 12,
                   }}

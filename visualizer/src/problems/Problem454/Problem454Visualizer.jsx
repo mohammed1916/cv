@@ -188,7 +188,7 @@ function snippetIdForPhase(phase) {
 function ArrayInput({ label, arr, highlight }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-      <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', textTransform: 'uppercase' }}>
+      <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase' }}>
         {label}
       </div>
       <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
@@ -230,7 +230,7 @@ function SumMapDisplay({ sumMap }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
         Pair Sum Map ({entries.length} entries)
       </header>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 4, maxHeight: 200, overflowY: 'auto' }}>
@@ -267,7 +267,7 @@ function VisualizationPanel({ step, nums1, nums2, nums3, nums4, EXAMPLES, handle
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
           Examples
         </div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -278,8 +278,8 @@ function VisualizationPanel({ step, nums1, nums2, nums3, nums4, EXAMPLES, handle
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
-                backgroundColor: '#f1f5f9',
+                border: '1px solid var(--border)',
+                backgroundColor: 'var(--surface2)',
                 cursor: 'pointer',
                 fontSize: 12,
                 fontWeight: 500,
@@ -299,7 +299,7 @@ function VisualizationPanel({ step, nums1, nums2, nums3, nums4, EXAMPLES, handle
           { label: 'nums4', val: input4, set: setInput4, nums: nums4 },
         ].map(({ label, val, set, nums }) => (
           <div key={label}>
-            <label style={{ display: 'block', fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>
+            <label style={{ display: 'block', fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
               {label}
             </label>
             <input
@@ -309,7 +309,7 @@ function VisualizationPanel({ step, nums1, nums2, nums3, nums4, EXAMPLES, handle
               style={{
                 width: '100%',
                 padding: '6px 8px',
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 borderRadius: 4,
                 fontSize: 11,
                 fontFamily: 'monospace',
@@ -352,7 +352,7 @@ function VisualizationPanel({ step, nums1, nums2, nums3, nums4, EXAMPLES, handle
         <SumMapDisplay sumMap={step?.sumMap || {}} />
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <header style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>
+          <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
             Count of Quadruples
           </header>
           <div style={{
@@ -510,7 +510,7 @@ export default function Problem454Visualizer() {
       </>
 
       <FloatingPanel title="Playback Controls">
-        <div style={{ marginBottom: '12px', fontSize: 12, color: '#475569' }}>
+        <div style={{ marginBottom: '12px', fontSize: 12, color: 'var(--text-muted)' }}>
           {step?.message ?? 'Press Play or Step to begin.'}
         </div>
         <PlaybackControls

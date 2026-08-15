@@ -156,7 +156,7 @@ function VisualizationPanel({ strs, step, currentWordIdx, currentKey, anagramMap
             {currentKey && (
                 <motion.div className="ga-key-box"
                     initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-                    style={{ borderColor: keyToColor[currentKey] ?? '#475569', color: keyToColor[currentKey] ?? 'var(--text)' }}>
+                    style={{ borderColor: keyToColor[currentKey] ?? 'var(--text-muted)', color: keyToColor[currentKey] ?? 'var(--text)' }}>
                     sorted key: <strong>"{currentKey}"</strong>
                 </motion.div>
             )}
@@ -166,7 +166,7 @@ function VisualizationPanel({ strs, step, currentWordIdx, currentKey, anagramMap
             <div className="ga-groups">
                 <AnimatePresence>
                     {Object.entries(anagramMap).map(([k, words]) => {
-                        const col = keyToColor[k] ?? '#475569'
+                        const col = keyToColor[k] ?? 'var(--text-muted)'
                         const isActive = k === currentKey
                         return (
                             <motion.div key={k} className={['ga-group', isActive ? 'active' : ''].filter(Boolean).join(' ')}

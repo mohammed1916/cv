@@ -175,11 +175,11 @@ function BinaryVisualization({ a, b, step }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
       {/* Input strings */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Input Strings</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Input Strings</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           {/* String a */}
           <div>
-            <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>a = "{a}"</div>
+            <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>a = "{a}"</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {a.split('').map((bit, idx) => {
                 const isCurrent = idx === i && step && !step.done
@@ -194,9 +194,9 @@ function BinaryVisualization({ a, b, step }) {
                       fontFamily: 'monospace',
                       fontSize: 13,
                       fontWeight: 600,
-                      backgroundColor: isCurrent ? '#dbeafe' : isProcessed ? '#d1fae5' : '#f1f5f9',
-                      borderColor: isCurrent ? '#0284c7' : isProcessed ? '#10b981' : '#cbd5e1',
-                      color: isCurrent ? '#0c4a6e' : isProcessed ? '#047857' : '#334155'
+                      backgroundColor: isCurrent ? '#dbeafe' : isProcessed ? '#d1fae5' : 'var(--surface2)',
+                      borderColor: isCurrent ? '#0284c7' : isProcessed ? '#10b981' : 'var(--border)',
+                      color: isCurrent ? '#0c4a6e' : isProcessed ? '#047857' : 'var(--border)'
                     }}
                     animate={{ scale: isCurrent ? 1.1 : 1 }}
                   >
@@ -209,7 +209,7 @@ function BinaryVisualization({ a, b, step }) {
 
           {/* String b */}
           <div>
-            <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>b = "{b}"</div>
+            <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>b = "{b}"</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {b.split('').map((bit, idx) => {
                 const isCurrent = idx === j && step && !step.done
@@ -224,9 +224,9 @@ function BinaryVisualization({ a, b, step }) {
                       fontFamily: 'monospace',
                       fontSize: 13,
                       fontWeight: 600,
-                      backgroundColor: isCurrent ? '#fee2e2' : isProcessed ? '#d1fae5' : '#f1f5f9',
-                      borderColor: isCurrent ? '#dc2626' : isProcessed ? '#10b981' : '#cbd5e1',
-                      color: isCurrent ? '#991b1b' : isProcessed ? '#047857' : '#334155'
+                      backgroundColor: isCurrent ? '#fee2e2' : isProcessed ? '#d1fae5' : 'var(--surface2)',
+                      borderColor: isCurrent ? '#dc2626' : isProcessed ? '#10b981' : 'var(--border)',
+                      color: isCurrent ? '#991b1b' : isProcessed ? '#047857' : 'var(--border)'
                     }}
                     animate={{ scale: isCurrent ? 1.1 : 1 }}
                   >
@@ -244,14 +244,14 @@ function BinaryVisualization({ a, b, step }) {
         <motion.div
           style={{
             padding: 12,
-            backgroundColor: '#f8fafc',
+            backgroundColor: 'var(--surface)',
             borderRadius: 6,
             border: '2px solid #8b5cf6'
           }}
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Current Bit Addition</div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Current Bit Addition</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 8, marginBottom: 8 }}>
             <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#dbeafe', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#1e40af' }}>a[i]</div>
@@ -271,7 +271,7 @@ function BinaryVisualization({ a, b, step }) {
             </div>
           </div>
           {step.sum !== null && (
-            <div style={{ fontSize: 12, color: '#475569', fontFamily: 'monospace' }}>
+            <div style={{ fontSize: 12, color: 'var(--text-muted)', fontFamily: 'monospace' }}>
               {step.a_bit} + {step.b_bit} + {step.carry} = {step.sum} → digit: {step.digit ?? '—'}, carry: {step.carry}
             </div>
           )}
@@ -280,7 +280,7 @@ function BinaryVisualization({ a, b, step }) {
 
       {/* Result */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Result</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Result</div>
         <div style={{
           padding: 16,
           backgroundColor: '#ecfdf5',
@@ -316,7 +316,7 @@ function VisualizationPanel({ a, b, step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -325,10 +325,10 @@ function VisualizationPanel({ a, b, step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9'
+                backgroundColor: 'var(--surface2)'
               }}
             >
               {e.label}

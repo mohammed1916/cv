@@ -90,12 +90,12 @@ function generateSteps(s, p) {
 function StringVisualization({ s, windowStart, windowEnd }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>String with Window</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>String with Window</div>
       <div style={{
         padding: 12,
-        backgroundColor: '#f1f5f9',
+        backgroundColor: 'var(--surface2)',
         borderRadius: 8,
-        border: '2px solid #cbd5e1',
+        border: '2px solid var(--border)',
         minHeight: 80,
       }}>
         <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap', alignItems: 'flex-start' }}>
@@ -116,20 +116,20 @@ function StringVisualization({ s, windowStart, windowEnd }) {
                   width: 32,
                   height: 32,
                   borderRadius: 4,
-                  backgroundColor: inWindow ? '#dbeafe' : '#f1f5f9',
-                  border: inWindow ? '2px solid #0284c7' : '1px solid #cbd5e1',
+                  backgroundColor: inWindow ? '#dbeafe' : 'var(--surface2)',
+                  border: inWindow ? '2px solid #0284c7' : '1px solid var(--border)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   fontSize: 12,
                   fontWeight: 700,
-                  color: inWindow ? '#0c4a6e' : '#64748b',
+                  color: inWindow ? '#0c4a6e' : 'var(--text-muted)',
                 }}
                 animate={{ scale: inWindow ? 1.1 : 1 }}
                 >
                   {char}
                 </div>
-                <div style={{ fontSize: 10, color: '#64748b', fontWeight: 500, minWidth: 24, textAlign: 'center' }}>
+                <div style={{ fontSize: 10, color: 'var(--text-muted)', fontWeight: 500, minWidth: 24, textAlign: 'center' }}>
                   {idx}
                 </div>
               </motion.div>
@@ -144,7 +144,7 @@ function StringVisualization({ s, windowStart, windowEnd }) {
 function PatternVisualization({ p }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Pattern to Find</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Pattern to Find</div>
       <div style={{
         padding: 12,
         backgroundColor: '#f3e8ff',
@@ -181,7 +181,7 @@ function PatternVisualization({ p }) {
 function ResultsVisualization({ s, result }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Anagram Start Indices</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Anagram Start Indices</div>
       <div style={{
         padding: 12,
         backgroundColor: '#ecfdf5',
@@ -229,7 +229,7 @@ function VisualizationPanel({ step, applyEx, s, p, windowStart, windowEnd, resul
       )}
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -238,10 +238,10 @@ function VisualizationPanel({ step, applyEx, s, p, windowStart, windowEnd, resul
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9',
+                backgroundColor: 'var(--surface2)',
               }}
             >
               {e.label}

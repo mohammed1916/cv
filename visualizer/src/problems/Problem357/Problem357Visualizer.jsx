@@ -161,7 +161,7 @@ function DigitChoiceTree({ length, choicesPerPosition }) {
 
   return (
     <div style={{ padding: '12px 0' }}>
-      <div style={{ fontSize: 12, fontWeight: 600, marginBottom: 8, color: '#475569' }}>
+      <div style={{ fontSize: 12, fontWeight: 600, marginBottom: 8, color: 'var(--text-muted)' }}>
         Choices per position:
       </div>
       <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
@@ -193,13 +193,13 @@ function DigitChoiceTree({ length, choicesPerPosition }) {
             >
               {choices}
             </div>
-            <div style={{ fontSize: 10, color: '#64748b' }}>
+            <div style={{ fontSize: 10, color: 'var(--text-muted)' }}>
               Pos {pos}
             </div>
           </motion.div>
         ))}
       </div>
-      <div style={{ marginTop: 8, fontSize: 11, color: '#475569' }}>
+      <div style={{ marginTop: 8, fontSize: 11, color: 'var(--text-muted)' }}>
         Product: {choicesPerPosition.reduce((a, b) => a * b, 1)} numbers
       </div>
     </div>
@@ -212,7 +212,7 @@ function AvailableDigitsDisplay({ length, usedCount }) {
 
   return (
     <div style={{ padding: '12px 0' }}>
-      <div style={{ fontSize: 12, fontWeight: 600, marginBottom: 8, color: '#475569' }}>
+      <div style={{ fontSize: 12, fontWeight: 600, marginBottom: 8, color: 'var(--text-muted)' }}>
         Available digits for remaining positions:
       </div>
       <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
@@ -234,9 +234,9 @@ function AvailableDigitsDisplay({ length, usedCount }) {
                   borderRadius: 4,
                   fontSize: 11,
                   fontWeight: 600,
-                  backgroundColor: isAvailable ? '#dcfce7' : '#f1f5f9',
-                  border: isAvailable ? '2px solid #22c55e' : '1px solid #cbd5e1',
-                  color: isAvailable ? '#16a34a' : '#94a3b8',
+                  backgroundColor: isAvailable ? '#dcfce7' : 'var(--surface2)',
+                  border: isAvailable ? '2px solid #22c55e' : '1px solid var(--border)',
+                  color: isAvailable ? '#16a34a' : 'var(--text-muted)',
                   cursor: 'pointer',
                 }}
               >
@@ -246,7 +246,7 @@ function AvailableDigitsDisplay({ length, usedCount }) {
           })}
         </AnimatePresence>
       </div>
-      <div style={{ marginTop: 8, fontSize: 11, color: '#475569' }}>
+      <div style={{ marginTop: 8, fontSize: 11, color: 'var(--text-muted)' }}>
         {availableCount} digits available
       </div>
     </div>
@@ -263,7 +263,7 @@ function NumbersByLengthDisplay({ n, count }) {
 
   return (
     <div style={{ padding: '12px 0' }}>
-      <div style={{ fontSize: 12, fontWeight: 600, marginBottom: 8, color: '#475569' }}>
+      <div style={{ fontSize: 12, fontWeight: 600, marginBottom: 8, color: 'var(--text-muted)' }}>
         Numbers grouped by digit count:
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
@@ -328,7 +328,7 @@ function NumbersByLengthDisplay({ n, count }) {
 function CountAccumulator({ count, n }) {
   return (
     <div style={{ padding: '12px 0' }}>
-      <div style={{ fontSize: 12, fontWeight: 600, marginBottom: 8, color: '#475569' }}>
+      <div style={{ fontSize: 12, fontWeight: 600, marginBottom: 8, color: 'var(--text-muted)' }}>
         Running count accumulator:
       </div>
       <motion.div
@@ -396,10 +396,10 @@ export default function Problem357Visualizer() {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid var(--border)',
                   cursor: 'pointer',
                   fontSize: 12,
-                  backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
+                  backgroundColor: exIdx === i ? '#dbeafe' : 'var(--surface2)',
                   fontWeight: exIdx === i ? 600 : 400,
                 }}
               >
@@ -410,12 +410,12 @@ export default function Problem357Visualizer() {
 
           {step && (
             <>
-              <div style={{ padding: 12, backgroundColor: '#f8fafc', borderRadius: 6, borderLeft: '4px solid #0ea5e9' }}>
-                <div style={{ fontWeight: 600, fontSize: 12, color: '#1e293b' }}>
+              <div style={{ padding: 12, backgroundColor: 'var(--surface)', borderRadius: 6, borderLeft: '4px solid #0ea5e9' }}>
+                <div style={{ fontWeight: 600, fontSize: 12, color: 'var(--surface2)' }}>
                   {step.message}
                 </div>
                 {step.calculation && (
-                  <div style={{ marginTop: 6, fontSize: 11, color: '#475569', fontFamily: 'monospace', backgroundColor: '#ffffff', padding: 6, borderRadius: 4 }}>
+                  <div style={{ marginTop: 6, fontSize: 11, color: 'var(--text-muted)', fontFamily: 'monospace', backgroundColor: 'var(--surface)', padding: 6, borderRadius: 4 }}>
                     {step.calculation}
                   </div>
                 )}

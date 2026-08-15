@@ -79,7 +79,7 @@ function VisualizationPanel({ a, b, step }) {
 
       {/* Strings */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 12 }}>Strings</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 12 }}>Strings</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           <div>
             <div style={{ fontSize: 12, color: '#6b7280', marginBottom: 4 }}>String A:</div>

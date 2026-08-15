@@ -147,7 +147,7 @@ function snippetIdForPhase(phase) {
 function ArrayDisplay({ nums, minVal, currentIdx, currentNum, diff }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
         Array Elements
       </header>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', minHeight: 80, alignContent: 'flex-start' }}>
@@ -200,7 +200,7 @@ function ArrayDisplay({ nums, minVal, currentIdx, currentNum, diff }) {
 function MoveCounter({ moves, minVal }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
         Total Moves
       </header>
       <div style={{
@@ -236,7 +236,7 @@ function VisualizationPanel({ step, nums, EXAMPLES, handleExampleClick, numsInpu
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
           Examples
         </div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -247,8 +247,8 @@ function VisualizationPanel({ step, nums, EXAMPLES, handleExampleClick, numsInpu
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
-                backgroundColor: '#f1f5f9',
+                border: '1px solid var(--border)',
+                backgroundColor: 'var(--surface2)',
                 cursor: 'pointer',
                 fontSize: 12,
                 fontWeight: 500,
@@ -261,7 +261,7 @@ function VisualizationPanel({ step, nums, EXAMPLES, handleExampleClick, numsInpu
       </div>
 
       <div>
-        <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>
+        <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
           Array (comma-separated)
         </label>
         <div style={{ display: 'flex', gap: 8 }}>
@@ -272,7 +272,7 @@ function VisualizationPanel({ step, nums, EXAMPLES, handleExampleClick, numsInpu
             style={{
               flex: 1,
               padding: '8px 10px',
-              border: '1px solid #cbd5e1',
+              border: '1px solid var(--border)',
               borderRadius: 4,
               fontSize: 12,
               fontFamily: 'monospace',
@@ -419,7 +419,7 @@ export default function Problem453Visualizer() {
       </>
 
       <FloatingPanel title="Playback Controls">
-        <div style={{ marginBottom: '12px', fontSize: 12, color: '#475569' }}>
+        <div style={{ marginBottom: '12px', fontSize: 12, color: 'var(--text-muted)' }}>
           {step?.message ?? 'Press Play or Step to begin.'}
         </div>
         <PlaybackControls

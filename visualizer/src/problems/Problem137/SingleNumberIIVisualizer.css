@@ -11,13 +11,13 @@
 .sn2-panel {
   overflow-y: auto;
   padding: 12px;
-  background: #0f172a;
+  background: var(--code-bg);
 }
 
 .sn2-status {
   padding: 4px 8px;
-  border-top: 1px solid #475569;
-  background: #1e293b;
+  border-top: 1px solid var(--text-muted);
+  background: var(--surface2);
   font-size: 11px;
-  color: #cbd5e1;
+  color: var(--border);
 }

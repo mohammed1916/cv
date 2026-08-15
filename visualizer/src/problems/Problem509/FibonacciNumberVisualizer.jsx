@@ -152,7 +152,7 @@ function VisualizationPanel({ n, step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -161,10 +161,10 @@ function VisualizationPanel({ n, step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9'
+                backgroundColor: 'var(--surface2)'
               }}
             >
               {e.label}
@@ -175,7 +175,7 @@ function VisualizationPanel({ n, step, applyEx }) {
 
       {/* DP Table */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
           DP Array: F[0..{step?.n || n}]
         </div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', overflowX: 'auto', paddingBottom: 8 }}>
@@ -194,9 +194,9 @@ function VisualizationPanel({ n, step, applyEx }) {
                   fontWeight: 600,
                   minWidth: 60,
                   textAlign: 'center',
-                  backgroundColor: isActive ? '#ede9fe' : isProcessed ? '#e9d5ff' : '#f1f5f9',
-                  borderColor: isActive ? '#8b5cf6' : isProcessed ? '#c084fc' : '#cbd5e1',
-                  color: isActive ? '#5b21b6' : isProcessed ? '#7c3aed' : '#334155'
+                  backgroundColor: isActive ? '#ede9fe' : isProcessed ? '#e9d5ff' : 'var(--surface2)',
+                  borderColor: isActive ? '#8b5cf6' : isProcessed ? '#c084fc' : 'var(--border)',
+                  color: isActive ? '#5b21b6' : isProcessed ? '#7c3aed' : 'var(--border)'
                 }}
                 animate={{ scale: isActive ? 1.15 : 1 }}
               >
@@ -210,7 +210,7 @@ function VisualizationPanel({ n, step, applyEx }) {
 
       {/* Computation Steps */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Building Sequence</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Building Sequence</div>
         <div style={{
           padding: 12,
           backgroundColor: '#faf5ff',

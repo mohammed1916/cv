@@ -21,7 +21,7 @@
 }
 
 .cb-panel {
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 10px;
     overflow: hidden;
@@ -38,7 +38,7 @@
     background: #181825;
     font-size: 13px;
     font-weight: 600;
-    color: #cdd6f4;
+    color: var(--code-text);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -64,7 +64,7 @@
 
 .cb-chip {
     background: #313244;
-    color: #cdd6f4;
+    color: var(--code-text);
     border: none;
     border-radius: 6px;
     padding: 4px 10px;
@@ -73,7 +73,7 @@
 }
 
 .cb-chip:hover {
-    background: #45475a;
+    background: var(--code-line);
 }
 
 .cb-input-row {
@@ -84,15 +84,15 @@
 
 .cb-label {
     font-size: 11px;
-    color: #6c7086;
+    color: var(--code-dim);
     text-transform: uppercase;
     letter-spacing: 0.08em;
 }
 
 .cb-input {
-    background: #11111b;
-    color: #cdd6f4;
-    border: 1px solid #45475a;
+    background: var(--code-surface);
+    color: var(--code-text);
+    border: 1px solid var(--code-line);
     border-radius: 6px;
     padding: 6px 10px;
     font-size: 14px;
@@ -111,7 +111,7 @@
     flex-direction: column;
     align-items: center;
     background: #313244;
-    border: 2px solid #45475a;
+    border: 2px solid var(--code-line);
     border-radius: 8px;
     padding: 6px 8px;
     min-width: 48px;
@@ -133,7 +133,7 @@
 
 .cb-idx {
     font-size: 10px;
-    color: #6c7086;
+    color: var(--code-dim);
 }
 
 .cb-val {
@@ -144,7 +144,7 @@
 
 .cb-bin {
     font-size: 10px;
-    color: #45475a;
+    color: var(--code-line);
     font-family: monospace;
 }
 
@@ -163,7 +163,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 6px 10px;
-    background: #11111b;
+    background: var(--code-surface);
     border-radius: 6px;
 }
 
@@ -184,7 +184,7 @@
 }
 
 .cb-bval.even {
-    color: #6c7086;
+    color: var(--code-dim);
 }
 
 .cb-result {
@@ -206,11 +206,11 @@
 
 .cb-status {
     padding: 8px 12px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 8px;
     font-size: 13px;
-    color: #a6adc8;
+    color: var(--code-dim);
     min-height: 36px;
 }
 

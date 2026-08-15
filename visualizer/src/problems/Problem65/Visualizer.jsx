@@ -241,14 +241,14 @@ function FlagBadge({ label, value }) {
         padding: '10px 14px',
         borderRadius: 8,
         minWidth: 92,
-        backgroundColor: value ? '#dcfce7' : '#f1f5f9',
-        border: `2px solid ${value ? '#16a34a' : '#cbd5e1'}`,
+        backgroundColor: value ? '#dcfce7' : 'var(--surface2)',
+        border: `2px solid ${value ? '#16a34a' : 'var(--border)'}`,
       }}
     >
-      <span style={{ fontSize: 11, fontWeight: 700, color: '#475569', fontFamily: 'monospace' }}>
+      <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-muted)', fontFamily: 'monospace' }}>
         {label}
       </span>
-      <span style={{ fontSize: 13, fontWeight: 800, color: value ? '#15803d' : '#94a3b8' }}>
+      <span style={{ fontSize: 13, fontWeight: 800, color: value ? '#15803d' : 'var(--text-muted)' }}>
         {value ? 'true' : 'false'}
       </span>
     </div>
@@ -258,7 +258,7 @@ function FlagBadge({ label, value }) {
 function VisualizationPanel({ step }) {
   if (!step) {
     return (
-      <div style={{ padding: 16, color: '#64748b', fontSize: 13 }}>
+      <div style={{ padding: 16, color: 'var(--text-muted)', fontSize: 13 }}>
         Press play to scan the string character by character.
       </div>
     )
@@ -271,7 +271,7 @@ function VisualizationPanel({ step }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 18, padding: 16 }}>
       {/* Character cells */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 700, color: '#475569', marginBottom: 8 }}>
+        <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-muted)', marginBottom: 8 }}>
           Input scan
         </div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
@@ -284,9 +284,9 @@ function VisualizationPanel({ step }) {
             const isCurrent = i === idx
             const isPast = idx >= 0 && i < idx
             const isBadHere = isCurrent && valid === false
-            let bg = '#f8fafc'
-            let border = '#e2e8f0'
-            let color = '#334155'
+            let bg = 'var(--surface)'
+            let border = 'var(--text)'
+            let color = 'var(--border)'
             if (isBadHere) {
               bg = '#fee2e2'
               border = '#dc2626'
@@ -331,7 +331,7 @@ function VisualizationPanel({ step }) {
 
       {/* Flags panel */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 700, color: '#475569', marginBottom: 8 }}>
+        <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-muted)', marginBottom: 8 }}>
           Flags
         </div>
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
@@ -371,7 +371,7 @@ function VisualizationPanel({ step }) {
               ? '✗ Invalid so far'
               : 'Valid so far'}
         </div>
-        <div style={{ fontSize: 13, color: '#334155' }}>{step.message}</div>
+        <div style={{ fontSize: 13, color: 'var(--border)' }}>{step.message}</div>
       </motion.div>
     </div>
   )
@@ -427,9 +427,9 @@ export default function Problem65Visualizer() {
             style={{
               padding: '6px 12px',
               borderRadius: 6,
-              border: `1px solid ${ex.label === e.label ? '#8b5cf6' : '#cbd5e1'}`,
-              backgroundColor: ex.label === e.label ? '#ede9fe' : '#ffffff',
-              color: ex.label === e.label ? '#5b21b6' : '#475569',
+              border: `1px solid ${ex.label === e.label ? '#8b5cf6' : 'var(--border)'}`,
+              backgroundColor: ex.label === e.label ? '#ede9fe' : 'var(--surface)',
+              color: ex.label === e.label ? '#5b21b6' : 'var(--text-muted)',
               fontSize: 12,
               fontWeight: 700,
               cursor: 'pointer',
@@ -471,7 +471,7 @@ export default function Problem65Visualizer() {
   )
 
   const statusPanel = (
-    <div className="problem65-status" style={{ padding: 8, fontSize: 12, color: '#64748b' }}>
+    <div className="problem65-status" style={{ padding: 8, fontSize: 12, color: 'var(--text-muted)' }}>
       Step {stepIndex + 1} / {steps.length}
     </div>
   )

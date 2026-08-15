@@ -152,11 +152,11 @@ function PalindromeVisualization({ s, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Palindrome Construction</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Palindrome Construction</div>
 
       {/* Input string */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Input: "{s}"</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Input: "{s}"</div>
         <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
           {s.split('').map((char, idx) => {
             const isCurrent = step?.currentChar === char && step?.phase === 'count'
@@ -165,13 +165,13 @@ function PalindromeVisualization({ s, step }) {
                 key={idx}
                 style={{
                   padding: '6px 8px',
-                  backgroundColor: isCurrent ? '#dbeafe' : '#f1f5f9',
+                  backgroundColor: isCurrent ? '#dbeafe' : 'var(--surface2)',
                   borderRadius: 3,
                   fontFamily: 'monospace',
                   fontSize: 12,
                   fontWeight: 600,
-                  border: isCurrent ? '2px solid #0284c7' : '1px solid #cbd5e1',
-                  color: isCurrent ? '#0c4a6e' : '#334155',
+                  border: isCurrent ? '2px solid #0284c7' : '1px solid var(--border)',
+                  color: isCurrent ? '#0c4a6e' : 'var(--border)',
                 }}
                 animate={{ scale: isCurrent ? 1.1 : 1 }}
               >
@@ -184,7 +184,7 @@ function PalindromeVisualization({ s, step }) {
 
       {/* Frequency map */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Frequency Map</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Frequency Map</div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(80px, 1fr))', gap: 8 }}>
           {entries.map(([char, count]) => {
             const pairs = Math.floor(count / 2)
@@ -196,17 +196,17 @@ function PalindromeVisualization({ s, step }) {
                 key={char}
                 style={{
                   padding: 10,
-                  backgroundColor: isCurrent ? '#dbeafe' : '#f1f5f9',
+                  backgroundColor: isCurrent ? '#dbeafe' : 'var(--surface2)',
                   borderRadius: 6,
-                  border: isCurrent ? '2px solid #0284c7' : '1px solid #cbd5e1',
+                  border: isCurrent ? '2px solid #0284c7' : '1px solid var(--border)',
                   textAlign: 'center',
                 }}
                 animate={{ scale: isCurrent ? 1.05 : 1 }}
               >
-                <div style={{ fontSize: 14, fontFamily: 'monospace', fontWeight: 'bold', color: '#1e293b' }}>
+                <div style={{ fontSize: 14, fontFamily: 'monospace', fontWeight: 'bold', color: 'var(--surface2)' }}>
                   {char}
                 </div>
-                <div style={{ fontSize: 11, color: '#64748b', marginTop: 4 }}>
+                <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 4 }}>
                   count: {count}
                 </div>
                 <div style={{ fontSize: 10, color: '#78350f', marginTop: 2 }}>
@@ -231,12 +231,12 @@ function PalindromeVisualization({ s, step }) {
       >
         <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 8 }}>Calculation</div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
-          <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#ffffff', borderRadius: 4 }}>
+          <div style={{ textAlign: 'center', padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
             <div style={{ fontSize: 10, color: '#065f46' }}>Pairs</div>
             <div style={{ fontSize: 16, fontWeight: 'bold', color: '#047857' }}>{Math.floor((step?.length || 0) / 2)}</div>
             <div style={{ fontSize: 10, color: '#065f46', marginTop: 4 }}>× 2 = {step?.length || 0}</div>
           </div>
-          <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#ffffff', borderRadius: 4 }}>
+          <div style={{ textAlign: 'center', padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
             <div style={{ fontSize: 10, color: '#831843' }}>Odd Count</div>
             <div style={{ fontSize: 16, fontWeight: 'bold', color: '#be185d' }}>{step?.oddCount || 0}</div>
           </div>
@@ -250,7 +250,7 @@ function PalindromeVisualization({ s, step }) {
       {/* Visual palindrome example */}
       {step?.length && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Example Palindrome (length: {step.length})</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Example Palindrome (length: {step.length})</div>
           <div style={{
             padding: 12,
             backgroundColor: '#fef3c7',
@@ -272,7 +272,7 @@ function PalindromeVisualization({ s, step }) {
         </div>
       )}
 
-      <div style={{ fontSize: 12, color: '#475569' }}>{step?.message}</div>
+      <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{step?.message}</div>
     </div>
   )
 }
@@ -339,7 +339,7 @@ export default function Problem409Visualizer() {
       </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button
@@ -348,11 +348,11 @@ export default function Problem409Visualizer() {
                   style={{
                     padding: '6px 12px',
                     borderRadius: 4,
-                    border: exIdx === idx ? '2px solid #ec4899' : '1px solid #cbd5e1',
+                    border: exIdx === idx ? '2px solid #ec4899' : '1px solid var(--border)',
                     cursor: 'pointer',
                     fontSize: 12,
-                    backgroundColor: exIdx === idx ? '#fbf1f9' : '#f1f5f9',
-                    color: exIdx === idx ? '#831843' : '#334155',
+                    backgroundColor: exIdx === idx ? '#fbf1f9' : 'var(--surface2)',
+                    color: exIdx === idx ? '#831843' : 'var(--border)',
                     fontWeight: exIdx === idx ? '600' : '400',
                   }}
                 >

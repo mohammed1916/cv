@@ -122,11 +122,11 @@ function VisualizationPanel({ step, applyExample, examples }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -142,9 +142,9 @@ function VisualizationPanel({ step, applyExample, examples }) {
           <div style={{ maxHeight: 150, overflowY: 'auto' }}>
             <table style={{ width: '100%', fontSize: 11, color: '#5577a4', borderCollapse: 'collapse' }}>
               <thead>
-                <tr style={{ borderBottom: '1px solid #475569' }}>
-                  <th style={{ textAlign: 'left', padding: 6, color: '#64748b' }}>Player</th>
-                  <th style={{ textAlign: 'left', padding: 6, color: '#64748b' }}>Date</th>
+                <tr style={{ borderBottom: '1px solid var(--text-muted)' }}>
+                  <th style={{ textAlign: 'left', padding: 6, color: 'var(--text-muted)' }}>Player</th>
+                  <th style={{ textAlign: 'left', padding: 6, color: 'var(--text-muted)' }}>Date</th>
                 </tr>
               </thead>
               <tbody>
@@ -152,8 +152,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
                   <tr
                     key={idx}
                     style={{
-                      borderBottom: '1px solid #334155',
-                      backgroundColor: idx === step.currentIdx ? '#334155' : 'transparent',
+                      borderBottom: '1px solid var(--border)',
+                      backgroundColor: idx === step.currentIdx ? 'var(--border)' : 'transparent',
                     }}
                   >
                     <td style={{ padding: 6, fontFamily: 'monospace' }}>{row.playerId}</td>
@@ -176,9 +176,9 @@ function VisualizationPanel({ step, applyExample, examples }) {
                   key={`${playerId}-${date}`}
                   style={{
                     padding: '8px',
-                    backgroundColor: '#334155',
+                    backgroundColor: 'var(--border)',
                     borderRadius: 4,
-                    border: '1px solid #475569',
+                    border: '1px solid var(--text-muted)',
                     fontFamily: 'monospace',
                     fontSize: 11,
                     display: 'flex',
@@ -201,7 +201,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
         <motion.div
           style={{
             padding: 12,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #22c55e',
           }}
@@ -209,7 +209,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Result Count</div>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Result Count</div>
           <div style={{ fontSize: 16, color: '#178740', fontWeight: 'bold' }}>{step.result.length} records</div>
         </motion.div>
       )}
@@ -294,9 +294,9 @@ export default function GamePlayAnalysisVisualizer() {
                   height: 100,
                   padding: '8px',
                   borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid #475569',
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                   fontSize: 11,
                   resize: 'vertical',

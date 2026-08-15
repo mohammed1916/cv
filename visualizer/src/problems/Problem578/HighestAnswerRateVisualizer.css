@@ -8,21 +8,21 @@
 
 .table-cell {
   padding: 8px 12px;
-  border: 1px solid #475569;
+  border: 1px solid var(--text-muted);
   text-align: center;
   font-family: monospace;
   font-size: 12px;
 }
 
 .table-header {
-  background-color: #334155;
-  color: #e2e8f0;
+  background-color: var(--border);
+  color: var(--text);
   font-weight: 600;
 }
 
 .table-row {
-  background-color: #1e293b;
-  color: #cbd5e1;
+  background-color: var(--surface2);
+  color: var(--border);
 }
 
 .table-row.highlighted {
@@ -35,8 +35,8 @@
   margin: 8px 0;
   border-radius: 4px;
   border-left: 3px solid #f59e0b;
-  background-color: #1e293b;
-  color: #cbd5e1;
+  background-color: var(--surface2);
+  color: var(--border);
   font-size: 12px;
 }
 

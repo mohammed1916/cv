@@ -217,10 +217,10 @@ export default function Problem380Visualizer() {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid var(--border)',
                   cursor: 'pointer',
                   fontSize: 12,
-                  backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
+                  backgroundColor: exIdx === i ? '#dbeafe' : 'var(--surface2)',
                 }}
               >
                 {e.label}
@@ -230,7 +230,7 @@ export default function Problem380Visualizer() {
 
           {step && (
             <>
-              <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
+              <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 11 }}>
                 <div style={{ fontWeight: 600, marginBottom: 8 }}>{step.message}</div>
               </div>
 
@@ -238,7 +238,7 @@ export default function Problem380Visualizer() {
                 <div style={{ fontWeight: 600, marginBottom: 8, color: '#1e40af' }}>Array (Values):</div>
                 <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', minHeight: 32 }}>
                   {step.array.length === 0 ? (
-                    <span style={{ color: '#64748b' }}>Empty</span>
+                    <span style={{ color: 'var(--text-muted)' }}>Empty</span>
                   ) : (
                     step.array.map((val, idx) => (
                       <motion.div
@@ -293,7 +293,7 @@ export default function Problem380Visualizer() {
                       <div style={{ fontSize: 10, opacity: 0.8 }}>→ {idx}</div>
                     </motion.div>
                   ))}
-                  {Object.keys(step.map).length === 0 && <span style={{ color: '#64748b' }}>Empty</span>}
+                  {Object.keys(step.map).length === 0 && <span style={{ color: 'var(--text-muted)' }}>Empty</span>}
                 </div>
               </div>
 

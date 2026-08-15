@@ -67,8 +67,8 @@ function CarouselVisualization({ nums, step, n, k }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24 }}>
-      <svg width="360" height="360" viewBox="0 0 360 360" style={{ border: '2px solid #e2e8f0', borderRadius: 8 }}>
-        <circle cx="180" cy="180" r={radius} fill="none" stroke="#e2e8f0" strokeWidth="2" />
+      <svg width="360" height="360" viewBox="0 0 360 360" style={{ border: '2px solid var(--text)', borderRadius: 8 }}>
+        <circle cx="180" cy="180" r={radius} fill="none" stroke="var(--text)" strokeWidth="2" />
         <circle cx="180" cy="180" r="12" fill="#3b82f6" />
 
         {nums.map((val, idx) => {
@@ -98,7 +98,7 @@ function CarouselVisualization({ nums, step, n, k }) {
               </text>
               <text
                 x={x} y={y + 28} textAnchor="middle"
-                fontSize="12" fill="#64748b"
+                fontSize="12" fill="var(--text-muted)"
               >
                 {idx}
               </text>
@@ -107,7 +107,7 @@ function CarouselVisualization({ nums, step, n, k }) {
         })}
       </svg>
 
-      <div style={{ textAlign: 'center', color: '#475569', fontSize: 14 }}>
+      <div style={{ textAlign: 'center', color: 'var(--text-muted)', fontSize: 14 }}>
         <div>↻ Rotating by <strong>{k}</strong> steps</div>
         <div style={{ fontSize: 12, marginTop: 4, color: '#617984' }}>
           {step?.phase === 'done' ? '✓ Complete' : `Phase: ${step?.phase || 'start'}`}
@@ -121,7 +121,7 @@ function VisualizationPanel({ nums, step, n, k, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -130,10 +130,10 @@ function VisualizationPanel({ nums, step, n, k, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9'
+                backgroundColor: 'var(--surface2)'
               }}
             >
               {e.label}
@@ -144,7 +144,7 @@ function VisualizationPanel({ nums, step, n, k, applyEx }) {
 
       <CarouselVisualization nums={nums} step={step} n={n} k={k} />
 
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Array State</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Array State</div>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {nums.map((val, idx) => (
           <div

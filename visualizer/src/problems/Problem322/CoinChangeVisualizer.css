@@ -84,7 +84,7 @@
 }
 
 .cc-chip:hover {
-    background: #334155;
+    background: var(--border);
     color: var(--text);
 }
 
@@ -104,8 +104,8 @@
 .cc-input {
     padding: 8px 12px;
     border-radius: 8px;
-    border: 1px solid #334155;
-    background: #0f172a;
+    border: 1px solid var(--border);
+    background: var(--code-bg);
     color: var(--text);
     font-family: monospace;
     font-size: 13px;
@@ -142,8 +142,8 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: #1e293b;
-    border: 2px solid #334155;
+    background: var(--surface2);
+    border: 2px solid var(--border);
     font-size: 13px;
     font-weight: 700;
     font-family: monospace;
@@ -184,8 +184,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #1e293b;
-    border: 2px solid #334155;
+    background: var(--surface2);
+    border: 2px solid var(--border);
     border-radius: 8px;
     font-size: 13px;
     font-weight: 700;

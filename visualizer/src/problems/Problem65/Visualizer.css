@@ -24,7 +24,7 @@
   border-top: 1px solid var(--border);
   padding: 8px 16px;
   font-size: 12px;
-  color: #64748b;
+  color: var(--text-muted);
   display: flex;
   align-items: center;
   flex-shrink: 0;

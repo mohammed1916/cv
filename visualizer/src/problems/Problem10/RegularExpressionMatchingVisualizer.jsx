@@ -391,7 +391,7 @@ function VisualizationPanel({
         </div>
 
         <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center', flexWrap: 'wrap' }}>
-          <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace' }}>s =</span>
+          <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>s =</span>
           <input
             value={sInput}
             onChange={(e) => { setSInput(e.target.value); handleReset() }}
@@ -399,7 +399,7 @@ function VisualizationPanel({
             className="rem-input"
             style={{ flex: 1, minWidth: '120px', margin: 0 }}
           />
-          <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace' }}>p =</span>
+          <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>p =</span>
           <input
             value={pInput}
             onChange={(e) => { setPInput(e.target.value); handleReset() }}
@@ -618,7 +618,7 @@ export default function RegularExpressionMatchingVisualizer() {
 
   const statusPanel = (
     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '12px 16px', minHeight: 0 }}>
-      <div style={{ fontSize: 13, color: '#475569' }}>
+      <div style={{ fontSize: 13, color: 'var(--text-muted)' }}>
         {step ? (step.phase === 'done' ? `Match: ${step.dpTable[s.length][p.length] ? 'Yes' : 'No'}` : step.message) : 'Press Play or Step to begin.'}
       </div>
     </div>

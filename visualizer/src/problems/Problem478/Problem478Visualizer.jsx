@@ -85,7 +85,7 @@ function CircleVisualization({ radius, points, currentPoint }) {
   const cy = height / 2
 
   return (
-    <svg width="100%" height="300" viewBox={`0 0 ${width} ${height}`} style={{ border: '1px solid #cbd5e1', borderRadius: 4, backgroundColor: '#f9fafb' }}>
+    <svg width="100%" height="300" viewBox={`0 0 ${width} ${height}`} style={{ border: '1px solid var(--border)', borderRadius: 4, backgroundColor: '#f9fafb' }}>
       {/* Circle */}
       <circle cx={cx} cy={cy} r={radius * scale} fill="rgba(139, 92, 246, 0.05)" stroke="#8b5cf6" strokeWidth="2" />
 
@@ -135,7 +135,7 @@ function VisualizationPanel({ radius, step, applyEx }) {
       )}
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -144,10 +144,10 @@ function VisualizationPanel({ radius, step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9',
+                backgroundColor: 'var(--surface2)',
               }}
             >
               {e.label}

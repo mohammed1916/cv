@@ -283,10 +283,10 @@ export default function Problem356Visualizer() {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid var(--border)',
                   cursor: 'pointer',
                   fontSize: 12,
-                  backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
+                  backgroundColor: exIdx === i ? '#dbeafe' : 'var(--surface2)',
                 }}
               >
                 {e.label}
@@ -295,14 +295,14 @@ export default function Problem356Visualizer() {
           </div>
 
           {/* Description */}
-          <div style={{ fontSize: 11, color: '#64748b' }}>
+          <div style={{ fontSize: 11, color: 'var(--text-muted)' }}>
             {ex.description}
           </div>
 
           {step && (
             <>
               {/* Message */}
-              <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11, fontWeight: 600 }}>
+              <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 11, fontWeight: 600 }}>
                 {step.message}
               </div>
 
@@ -311,7 +311,7 @@ export default function Problem356Visualizer() {
                 width={gridWidth}
                 height={gridHeight}
                 style={{
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid var(--border)',
                   borderRadius: 6,
                   backgroundColor: '#fff',
                 }}
@@ -326,7 +326,7 @@ export default function Problem356Visualizer() {
                       y1={0}
                       x2={screenX(x)}
                       y2={gridHeight}
-                      stroke="#e2e8f0"
+                      stroke="var(--text)"
                       strokeWidth="0.5"
                     />
                   )
@@ -340,15 +340,15 @@ export default function Problem356Visualizer() {
                       y1={screenY(y)}
                       x2={gridWidth}
                       y2={screenY(y)}
-                      stroke="#e2e8f0"
+                      stroke="var(--text)"
                       strokeWidth="0.5"
                     />
                   )
                 })}
 
                 {/* Axes */}
-                <line x1={screenX(0)} y1={0} x2={screenX(0)} y2={gridHeight} stroke="#94a3b8" strokeWidth="1" />
-                <line x1={0} y1={screenY(0)} x2={gridWidth} y2={screenY(0)} stroke="#94a3b8" strokeWidth="1" />
+                <line x1={screenX(0)} y1={0} x2={screenX(0)} y2={gridHeight} stroke="var(--text-muted)" strokeWidth="1" />
+                <line x1={0} y1={screenY(0)} x2={gridWidth} y2={screenY(0)} stroke="var(--text-muted)" strokeWidth="1" />
 
                 {/* Reflection line */}
                 {step.reflectionLine !== null && (
@@ -418,7 +418,7 @@ export default function Problem356Visualizer() {
                           cx={sx}
                           cy={sy}
                           r="5"
-                          fill={isInvalid ? '#ef4444' : isValidPairStart ? '#3b82f6' : '#64748b'}
+                          fill={isInvalid ? '#ef4444' : isValidPairStart ? '#3b82f6' : 'var(--text-muted)'}
                           opacity={isInvalid ? 1 : isChecked ? 0.9 : 0.6}
                         />
                         {/* Point label */}
@@ -427,7 +427,7 @@ export default function Problem356Visualizer() {
                           y={sy - 12}
                           textAnchor="middle"
                           fontSize="10"
-                          fill={isInvalid ? '#ef4444' : '#1e293b'}
+                          fill={isInvalid ? '#ef4444' : 'var(--surface2)'}
                           fontWeight="600"
                         >
                           ({x}, {y})

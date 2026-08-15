@@ -200,10 +200,10 @@ export default function Problem382Visualizer() {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid var(--border)',
                   cursor: 'pointer',
                   fontSize: 12,
-                  backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
+                  backgroundColor: exIdx === i ? '#dbeafe' : 'var(--surface2)',
                   fontWeight: exIdx === i ? 600 : 400,
                 }}
               >
@@ -215,13 +215,13 @@ export default function Problem382Visualizer() {
           {step && (
             <>
               {/* Message */}
-              <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 12, fontWeight: 500 }}>
+              <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 12, fontWeight: 500 }}>
                 {step.message}
               </div>
 
               {/* Linked List */}
               <div>
-                <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Linked List</div>
+                <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Linked List</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
                   {step.values.map((val, idx) => (
                     <div key={`node-${idx}`} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -233,11 +233,11 @@ export default function Problem382Visualizer() {
                         style={{
                           padding: '8px 12px',
                           borderRadius: 4,
-                          backgroundColor: step.currentIdx === idx ? '#dbeafe' : '#f1f5f9',
-                          border: `2px solid ${step.currentIdx === idx ? '#0284c7' : '#cbd5e1'}`,
+                          backgroundColor: step.currentIdx === idx ? '#dbeafe' : 'var(--surface2)',
+                          border: `2px solid ${step.currentIdx === idx ? '#0284c7' : 'var(--border)'}`,
                           fontSize: 12,
                           fontWeight: 600,
-                          color: step.currentIdx === idx ? '#0c4a6e' : '#334155',
+                          color: step.currentIdx === idx ? '#0c4a6e' : 'var(--border)',
                         }}
                       >
                         {val}

@@ -151,11 +151,11 @@ function VisualizationPanel({ step, applyExample, examples }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -166,7 +166,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.input && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #38bdf8' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #38bdf8' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#067db1', marginBottom: 6 }}>Input String</div>
           <div style={{ fontSize: 13, color: '#5577a4', fontFamily: 'monospace', wordBreak: 'break-all' }}>
             "{step.input}"
@@ -175,19 +175,19 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.words && step?.wordsCount !== undefined && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #64748b' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Words Array</div>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Words Array</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {step.words.map((word, idx) => (
               <div
                 key={idx}
                 style={{
                   padding: '6px 10px',
-                  backgroundColor: '#0f172a',
+                  backgroundColor: 'var(--code-bg)',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   fontSize: 12,
-                  color: '#e2e8f0',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                 }}
               >
@@ -202,7 +202,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
         <motion.div
           style={{
             padding: 12,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #f59e0b',
           }}
@@ -213,14 +213,14 @@ function VisualizationPanel({ step, applyExample, examples }) {
           <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', marginBottom: 6 }}>Current Word</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 10, color: '#64748b', marginBottom: 4 }}>Original</div>
+              <div style={{ fontSize: 10, color: 'var(--text-muted)', marginBottom: 4 }}>Original</div>
               <div style={{ fontSize: 14, color: '#5577a4', fontFamily: 'monospace', fontWeight: 600 }}>
                 "{step.currentWord}"
               </div>
             </div>
             {step.reversedWord && (
               <div>
-                <div style={{ fontSize: 10, color: '#64748b', marginBottom: 4 }}>Reversed</div>
+                <div style={{ fontSize: 10, color: 'var(--text-muted)', marginBottom: 4 }}>Reversed</div>
                 <div style={{ fontSize: 14, color: '#178740', fontFamily: 'monospace', fontWeight: 600 }}>
                   "{step.reversedWord}"
                 </div>
@@ -231,8 +231,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.reversedWords && step?.reversedWords.length > 0 && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #64748b' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>
             Reversed Words ({step.reversedWords.length})
           </div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -241,7 +241,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
                 key={idx}
                 style={{
                   padding: '6px 10px',
-                  backgroundColor: '#0f172a',
+                  backgroundColor: 'var(--code-bg)',
                   borderRadius: 4,
                   border: '2px solid #a78bfa',
                   fontSize: 12,
@@ -264,7 +264,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #22c55e',
             textAlign: 'center',
@@ -273,7 +273,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Result</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Result</div>
           <div
             style={{
               fontSize: 14,
@@ -359,9 +359,9 @@ export default function ReverseWordsVisualizer() {
                   width: '100%',
                   padding: '8px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  border: '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                   fontSize: 12,
                 }}

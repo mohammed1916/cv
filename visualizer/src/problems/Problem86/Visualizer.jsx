@@ -173,7 +173,7 @@ function NodeRow({ nodes, currentId, accent, emptyLabel }) {
                 borderRadius: 8,
                 fontSize: 15,
                 fontWeight: 700,
-                color: isCurrent ? '#0f172a' : '#e2e8f0',
+                color: isCurrent ? 'var(--code-bg)' : 'var(--text)',
                 background: isCurrent ? '#fde047' : accent,
                 border: isCurrent ? '3px solid #f59e0b' : `2px solid ${accent}`,
                 boxShadow: isCurrent ? '0 0 12px rgba(253,224,71,0.6)' : 'none',
@@ -182,12 +182,12 @@ function NodeRow({ nodes, currentId, accent, emptyLabel }) {
               {node.val}
             </motion.div>
             {idx < nodes.length - 1 && (
-              <span style={{ color: '#64748b', fontSize: 16, fontWeight: 700 }}>→</span>
+              <span style={{ color: 'var(--text-muted)', fontSize: 16, fontWeight: 700 }}>→</span>
             )}
           </div>
         )
       })}
-      <span style={{ color: '#64748b', fontSize: 13, marginLeft: 4 }}>→ ∅</span>
+      <span style={{ color: 'var(--text-muted)', fontSize: 13, marginLeft: 4 }}>→ ∅</span>
     </div>
   )
 }
@@ -217,11 +217,11 @@ function VisualizationPanel({ step }) {
       <div
         style={{
           padding: 10,
-          background: '#1e293b',
+          background: 'var(--surface2)',
           borderRadius: 8,
           borderLeft: '4px solid #3b82f6',
           fontSize: 13,
-          color: '#e2e8f0',
+          color: 'var(--text)',
         }}
       >
         {step.message}
@@ -229,7 +229,7 @@ function VisualizationPanel({ step }) {
 
       <div>
         <div style={sectionLabel}>Original List (x = {x})</div>
-        <NodeRow nodes={original} currentId={currentId} accent="#334155" emptyLabel="empty" />
+        <NodeRow nodes={original} currentId={currentId} accent="var(--border)" emptyLabel="empty" />
       </div>
 
       <div>
@@ -342,8 +342,8 @@ export default function Problem86Visualizer() {
               fontSize: 12,
               cursor: 'pointer',
               fontWeight: 600,
-              background: e.label === ex.label ? '#3b82f6' : '#1e293b',
-              color: e.label === ex.label ? '#fff' : '#cbd5e1',
+              background: e.label === ex.label ? '#3b82f6' : 'var(--surface2)',
+              color: e.label === ex.label ? '#fff' : 'var(--border)',
               border: '1px solid #3b82f660',
             }}
           >

@@ -115,7 +115,7 @@ function VisualizationPanel({ EXAMPLES, applyExample, nInput, setNInput, kInput,
 
                         <div style={{ display: 'flex', gap: 12, marginBottom: 16, alignItems: 'center' }}>
                             <div style={{ flex: 1 }}>
-                                <label style={{ display: 'block', fontSize: 12, color: '#64748b', marginBottom: 4 }}>n</label>
+                                <label style={{ display: 'block', fontSize: 12, color: 'var(--text-muted)', marginBottom: 4 }}>n</label>
                                 <input
                                     className="comb-input"
                                     value={nInput}
@@ -129,7 +129,7 @@ function VisualizationPanel({ EXAMPLES, applyExample, nInput, setNInput, kInput,
                                 />
                             </div>
                             <div style={{ flex: 1 }}>
-                                <label style={{ display: 'block', fontSize: 12, color: '#64748b', marginBottom: 4 }}>k</label>
+                                <label style={{ display: 'block', fontSize: 12, color: 'var(--text-muted)', marginBottom: 4 }}>k</label>
                                 <input
                                     className="comb-input"
                                     value={kInput}

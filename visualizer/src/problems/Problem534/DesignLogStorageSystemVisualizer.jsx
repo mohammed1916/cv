@@ -191,7 +191,7 @@ function VisualizationPanel({ step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -200,10 +200,10 @@ function VisualizationPanel({ step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9'
+                backgroundColor: 'var(--surface2)'
               }}
             >
               {e.label}
@@ -214,7 +214,7 @@ function VisualizationPanel({ step, applyEx }) {
 
       {/* Logs */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Stored Logs</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Stored Logs</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
           {step?.logs?.map((log, idx) => {
             const isCurrent = step?.log?.id === log.id
@@ -227,9 +227,9 @@ function VisualizationPanel({ step, applyEx }) {
                   border: '2px solid',
                   fontFamily: 'monospace',
                   fontSize: 12,
-                  backgroundColor: isCurrent ? '#dbeafe' : '#f1f5f9',
-                  borderColor: isCurrent ? '#0284c7' : '#cbd5e1',
-                  color: isCurrent ? '#0c4a6e' : '#334155'
+                  backgroundColor: isCurrent ? '#dbeafe' : 'var(--surface2)',
+                  borderColor: isCurrent ? '#0284c7' : 'var(--border)',
+                  color: isCurrent ? '#0c4a6e' : 'var(--border)'
                 }}
                 animate={{ scale: isCurrent ? 1.05 : 1 }}
               >

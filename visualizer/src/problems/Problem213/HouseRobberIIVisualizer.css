@@ -10,7 +10,7 @@
 .hr2-hero {
     flex-shrink: 0;
     padding: 24px;
-    background: linear-gradient(135deg, #1e1e2e 0%, #181825 100%);
+    background: linear-gradient(135deg, var(--code-bg) 0%, #181825 100%);
     border: 1px solid #313244;
     border-radius: 12px;
 }
@@ -50,7 +50,7 @@
 }
 
 .hr2-summary-card {
-    background: #11111b;
+    background: var(--code-surface);
     border: 1px solid #313244;
     border-radius: 8px;
     padding: 12px;
@@ -61,7 +61,7 @@
 
 .hr2-summary-card span {
     font-size: 11px;
-    color: #6c7086;
+    color: var(--code-dim);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     font-weight: 600;
@@ -105,14 +105,14 @@
 .hr2-output-label {
     font-size: 11px;
     font-weight: 600;
-    color: #6c7086;
+    color: var(--code-dim);
     text-transform: uppercase;
     letter-spacing: 0.08em;
 }
 
 .hr2-output {
     padding: 8px 12px;
-    background: #11111b;
+    background: var(--code-surface);
     border: 1px solid #313244;
     border-radius: 6px;
     font-size: 12px;
@@ -128,7 +128,7 @@
 }
 
 .hr2-metric-card {
-    background: #11111b;
+    background: var(--code-surface);
     border: 1px solid #313244;
     border-radius: 6px;
     padding: 10px;
@@ -140,7 +140,7 @@
 
 .hr2-metric-card span {
     font-size: 10px;
-    color: #6c7086;
+    color: var(--code-dim);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     font-weight: 600;
@@ -158,7 +158,7 @@
 
 .hr2-message-box {
     padding: 12px;
-    background: #11111b;
+    background: var(--code-surface);
     border: 1px solid #313244;
     border-radius: 6px;
 }
@@ -166,7 +166,7 @@
 .hr2-message-box strong {
     display: block;
     font-size: 11px;
-    color: #6c7086;
+    color: var(--code-dim);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-bottom: 6px;
@@ -186,7 +186,7 @@
 }
 
 .hr2-panel {
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 10px;
     overflow: hidden;
@@ -203,7 +203,7 @@
     background: #181825;
     font-size: 13px;
     font-weight: 600;
-    color: #cdd6f4;
+    color: var(--code-text);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -229,7 +229,7 @@
 
 .hr2-chip {
     background: #313244;
-    color: #cdd6f4;
+    color: var(--code-text);
     border: none;
     border-radius: 6px;
     padding: 4px 10px;
@@ -238,13 +238,13 @@
 }
 
 .hr2-chip:hover {
-    background: #45475a;
+    background: var(--code-line);
 }
 
 .hr2-input {
-    background: #11111b;
-    color: #cdd6f4;
-    border: 1px solid #45475a;
+    background: var(--code-surface);
+    color: var(--code-text);
+    border: 1px solid var(--code-line);
     border-radius: 6px;
     padding: 6px 10px;
     font-size: 13px;
@@ -261,7 +261,7 @@
 .hr2-row-label {
     font-size: 11px;
     font-weight: 700;
-    color: #6c7086;
+    color: var(--code-dim);
     text-transform: uppercase;
     letter-spacing: 0.07em;
 }
@@ -289,14 +289,14 @@
     width: 42px;
     height: 42px;
     background: #313244;
-    border: 2px solid #45475a;
+    border: 2px solid var(--code-line);
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 15px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: var(--code-text);
 }
 
 .hr2-cell.active {
@@ -308,7 +308,7 @@
 
 .hr2-dp-val {
     font-size: 11px;
-    color: #6c7086;
+    color: var(--code-dim);
     min-height: 14px;
 }
 
@@ -321,13 +321,13 @@
     justify-content: space-between;
     align-items: center;
     padding: 8px 12px;
-    background: #11111b;
+    background: var(--code-surface);
     border-radius: 8px;
 }
 
 .hr2-label {
     font-size: 11px;
-    color: #6c7086;
+    color: var(--code-dim);
     text-transform: uppercase;
     letter-spacing: 0.08em;
 }
@@ -359,11 +359,11 @@
 
 .hr2-status {
     padding: 8px 12px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 8px;
     font-size: 13px;
-    color: #a6adc8;
+    color: var(--code-dim);
     min-height: 36px;
 }
 

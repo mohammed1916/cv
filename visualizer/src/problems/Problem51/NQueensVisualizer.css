@@ -26,8 +26,8 @@
 
 .nq-chip {
   background: #313244;
-  color: #cdd6f4;
-  border: 2px solid #45475a;
+  color: var(--code-text);
+  border: 2px solid var(--code-line);
   border-radius: 6px;
   padding: 4px 14px;
   font-size: 12px;
@@ -41,7 +41,7 @@
 }
 
 .nq-panel {
-  background: #1e1e2e;
+  background: var(--code-bg);
   border: 1px solid #313244;
   border-radius: 10px;
   padding: 12px 14px;
@@ -50,7 +50,7 @@
 .nq-panel-label {
   font-size: 11px;
   font-weight: 700;
-  color: #6c7086;
+  color: var(--code-dim);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-bottom: 10px;
@@ -139,7 +139,7 @@
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  background: #1e1e2e;
+  background: var(--code-bg);
   border: 1px solid #313244;
   border-radius: 8px;
   padding: 10px 0;
@@ -148,7 +148,7 @@
 .nq-tracker-label {
   font-size: 11px;
   font-weight: 700;
-  color: #6c7086;
+  color: var(--code-dim);
   text-transform: uppercase;
 }
 
@@ -206,11 +206,11 @@
 
 .nq-status {
   padding: 8px 12px;
-  background: #1e1e2e;
+  background: var(--code-bg);
   border: 1px solid #313244;
   border-radius: 8px;
   font-size: 13px;
-  color: #a6adc8;
+  color: var(--code-dim);
   min-height: 36px;
   margin: 12px;
 }

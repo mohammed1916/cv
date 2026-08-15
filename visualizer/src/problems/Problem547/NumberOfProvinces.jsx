@@ -186,7 +186,7 @@ const NumberOfProvinces = () => {
                     className="nop-uf-value"
                     style={{
                       backgroundColor: highlightedCells.includes(i) ? '#f38ba8' : getNodeColor(i),
-                      color: '#1e1e2e',
+                      color: 'var(--code-bg)',
                     }}
                   >
                     {i}: {p}
@@ -255,7 +255,7 @@ const NumberOfProvinces = () => {
                     y={y}
                     textAnchor="middle"
                     dy="0.3em"
-                    fill="#1e1e2e"
+                    fill="var(--code-bg)"
                     fontWeight="bold"
                   >
                     {i}

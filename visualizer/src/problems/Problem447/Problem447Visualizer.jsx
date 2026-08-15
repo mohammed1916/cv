@@ -168,7 +168,7 @@ function snippetIdForPhase(phase) {
 function PointsVisualizer({ points, centerIdx, otherIdx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
         Points (2D Plot)
       </header>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', minHeight: 80, alignContent: 'flex-start' }}>
@@ -207,7 +207,7 @@ function DistanceMap({ distMap }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
         Distance Map (center iteration)
       </header>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
@@ -245,7 +245,7 @@ function VisualizationPanel({ step, points, EXAMPLES, handleExampleClick, points
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
           Examples
         </div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -256,8 +256,8 @@ function VisualizationPanel({ step, points, EXAMPLES, handleExampleClick, points
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
-                backgroundColor: '#f1f5f9',
+                border: '1px solid var(--border)',
+                backgroundColor: 'var(--surface2)',
                 cursor: 'pointer',
                 fontSize: 12,
                 fontWeight: 500,
@@ -270,7 +270,7 @@ function VisualizationPanel({ step, points, EXAMPLES, handleExampleClick, points
       </div>
 
       <div>
-        <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>
+        <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
           Points (format: [x,y] separated by spaces, e.g., [0,0] [1,0] [2,0])
         </label>
         <div style={{ display: 'flex', gap: 8 }}>
@@ -281,7 +281,7 @@ function VisualizationPanel({ step, points, EXAMPLES, handleExampleClick, points
             style={{
               flex: 1,
               padding: '8px 10px',
-              border: '1px solid #cbd5e1',
+              border: '1px solid var(--border)',
               borderRadius: 4,
               fontSize: 12,
               fontFamily: 'monospace',
@@ -433,7 +433,7 @@ export default function Problem447Visualizer() {
       </>
 
       <FloatingPanel title="Playback Controls">
-        <div style={{ marginBottom: '12px', fontSize: 12, color: '#475569' }}>
+        <div style={{ marginBottom: '12px', fontSize: 12, color: 'var(--text-muted)' }}>
           {step?.message ?? 'Press Play or Step to begin.'}
         </div>
         <PlaybackControls

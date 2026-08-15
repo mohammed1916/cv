@@ -10,7 +10,7 @@
 }
 
 .rot-panel {
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
   background: rgba(15, 23, 42, 0.72);
@@ -18,7 +18,7 @@
 
 .rot-head {
   padding: 10px 12px;
-  border-bottom: 1px solid #334155;
+  border-bottom: 1px solid var(--border);
   display: flex;
   justify-content: space-between;
   font-size: 13px;
@@ -45,18 +45,18 @@
 
 .rot-chip {
   border-radius: 999px;
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   background: rgba(30, 41, 59, 0.8);
-  color: #cbd5e1;
+  color: var(--border);
   padding: 4px 10px;
   cursor: pointer;
 }
 
 .rot-input {
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 8px;
-  background: #0f172a;
-  color: #f8fafc;
+  background: var(--code-bg);
+  color: var(--surface);
   font-family: monospace;
   padding: 8px 10px;
 }
@@ -67,7 +67,7 @@
 }
 
 .rot-cell {
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 8px;
   min-height: 48px;
   display: grid;
@@ -77,7 +77,7 @@
 
 .rot-cell.v0 {
   background: rgba(15, 23, 42, 0.65);
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .rot-cell.v1 {
@@ -120,9 +120,9 @@
 }
 
 .rot-metrics div {
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 8px;
-  background: #0f172a;
+  background: var(--code-bg);
   padding: 8px;
   display: grid;
   gap: 2px;
@@ -149,9 +149,9 @@
 .rot-queue {
   margin-top: 6px;
   min-height: 42px;
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 8px;
-  background: #0f172a;
+  background: var(--code-bg);
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
@@ -170,11 +170,11 @@
 
 .rot-result,
 .rot-status {
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 8px;
   background: rgba(15, 23, 42, 0.7);
   padding: 10px 12px;
-  color: #cbd5e1;
+  color: var(--border);
   font-family: monospace;
   font-size: 13px;
 }

@@ -21,7 +21,7 @@
 
 .ssk-chip {
     background: #313244;
-    color: #cdd6f4;
+    color: var(--code-text);
     border: none;
     border-radius: 6px;
     padding: 4px 10px;
@@ -30,13 +30,13 @@
 }
 
 .ssk-chip:hover {
-    background: #45475a;
+    background: var(--code-line);
 }
 
 .ssk-input {
-    background: #11111b;
-    color: #cdd6f4;
-    border: 1px solid #45475a;
+    background: var(--code-surface);
+    color: var(--code-text);
+    border: 1px solid var(--code-line);
     border-radius: 6px;
     padding: 6px 10px;
     font-size: 13px;
@@ -52,9 +52,9 @@
 }
 
 .ssk-k-input {
-    background: #11111b;
-    color: #cdd6f4;
-    border: 1px solid #45475a;
+    background: var(--code-surface);
+    color: var(--code-text);
+    border: 1px solid var(--code-line);
     border-radius: 6px;
     padding: 6px 8px;
     font-size: 13px;
@@ -67,7 +67,7 @@
 }
 
 .ssk-panel {
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 10px;
     padding: 12px 14px;
@@ -76,7 +76,7 @@
 .ssk-panel-label {
     font-size: 11px;
     font-weight: 700;
-    color: #6c7086;
+    color: var(--code-dim);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-bottom: 10px;
@@ -100,7 +100,7 @@
     gap: 3px;
     width: 42px;
     background: #313244;
-    border: 2px solid #45475a;
+    border: 2px solid var(--code-line);
     border-radius: 8px;
     padding: 6px 0;
 }
@@ -126,7 +126,7 @@
 
 .ssk-cell-idx {
     font-size: 10px;
-    color: #6c7086;
+    color: var(--code-dim);
 }
 
 .ssk-freq-row {
@@ -142,7 +142,7 @@
     gap: 3px;
     padding: 8px 12px;
     background: #313244;
-    border: 2px solid #45475a;
+    border: 2px solid var(--code-line);
     border-radius: 8px;
     min-width: 46px;
 }
@@ -164,7 +164,7 @@
 
 .ssk-freq-val {
     font-size: 11px;
-    color: #6c7086;
+    color: var(--code-dim);
 }
 
 .ssk-freq-cell.need .ssk-freq-val {
@@ -183,10 +183,10 @@
 
 .ssk-status {
     padding: 8px 12px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 8px;
     font-size: 13px;
-    color: #a6adc8;
+    color: var(--code-dim);
     min-height: 36px;
 }

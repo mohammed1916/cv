@@ -169,14 +169,14 @@ function VisualizationPanel({ step }) {
                   justifyContent: 'center',
                   fontSize: 18,
                   fontWeight: 700,
-                  color: isKept ? '#0c4a6e' : '#64748b',
+                  color: isKept ? '#0c4a6e' : 'var(--text-muted)',
                   backgroundColor: justSkipped
                     ? '#fecaca'
                     : justKept
                     ? '#a7f3d0'
                     : isKept
                     ? '#bae6fd'
-                    : '#f1f5f9',
+                    : 'var(--surface2)',
                   border: isRead
                     ? '3px solid #f59e0b'
                     : isWrite
@@ -185,7 +185,7 @@ function VisualizationPanel({ step }) {
                     ? '2px solid #059669'
                     : justSkipped
                     ? '2px solid #dc2626'
-                    : '1px solid #cbd5e1',
+                    : '1px solid var(--border)',
                 }}
               >
                 {v}
@@ -305,10 +305,10 @@ export default function Problem80Visualizer() {
             style={{
               padding: '6px 12px',
               borderRadius: 4,
-              border: ex.label === e.label ? '2px solid #0891b2' : '1px solid #cbd5e1',
+              border: ex.label === e.label ? '2px solid #0891b2' : '1px solid var(--border)',
               cursor: 'pointer',
               fontSize: 12,
-              backgroundColor: ex.label === e.label ? '#cffafe' : '#f1f5f9',
+              backgroundColor: ex.label === e.label ? '#cffafe' : 'var(--surface2)',
               color: '#155e75',
               fontWeight: 600,
             }}

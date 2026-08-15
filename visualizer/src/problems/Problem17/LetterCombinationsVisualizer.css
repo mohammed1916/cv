@@ -23,7 +23,7 @@
 
 .lc-chip {
     background: #313244;
-    color: #cdd6f4;
+    color: var(--code-text);
     border: none;
     border-radius: 6px;
     padding: 4px 10px;
@@ -32,13 +32,13 @@
 }
 
 .lc-chip:hover {
-    background: #45475a;
+    background: var(--code-line);
 }
 
 .lc-input {
-    background: #11111b;
-    color: #cdd6f4;
-    border: 1px solid #45475a;
+    background: var(--code-surface);
+    color: var(--code-text);
+    border: 1px solid var(--code-line);
     border-radius: 6px;
     padding: 6px 10px;
     font-size: 13px;
@@ -46,7 +46,7 @@
 }
 
 .lc-panel {
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 10px;
     padding: 12px 14px;
@@ -55,7 +55,7 @@
 .lc-panel-label {
     font-size: 11px;
     font-weight: 700;
-    color: #6c7086;
+    color: var(--code-dim);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-bottom: 10px;
@@ -74,7 +74,7 @@
     gap: 3px;
     width: 58px;
     background: #313244;
-    border: 2px solid #45475a;
+    border: 2px solid var(--code-line);
     border-radius: 8px;
     padding: 6px 4px;
 }
@@ -107,7 +107,7 @@
 .lc-letter {
     font-size: 11px;
     font-weight: 700;
-    color: #6c7086;
+    color: var(--code-dim);
 }
 
 .lc-letter.lit {
@@ -138,7 +138,7 @@
 }
 
 .lc-empty {
-    color: #45475a;
+    color: var(--code-line);
     font-size: 14px;
     font-style: italic;
 }
@@ -151,12 +151,12 @@
 
 .lc-res-item {
     background: #313244;
-    border: 2px solid #45475a;
+    border: 2px solid var(--code-line);
     border-radius: 8px;
     padding: 7px 14px;
     font-size: 14px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: var(--code-text);
     font-family: monospace;
 }
 
@@ -168,10 +168,10 @@
 
 .lc-status {
     padding: 8px 12px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 8px;
     font-size: 13px;
-    color: #a6adc8;
+    color: var(--code-dim);
     min-height: 36px;
 }

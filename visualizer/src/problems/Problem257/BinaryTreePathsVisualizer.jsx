@@ -160,7 +160,7 @@ function TreeVisualizationPanel({ step, positions, edges, allNodes }) {
                                 y1={from.y}
                                 x2={to.x}
                                 y2={to.y}
-                                stroke={isOnPath ? '#f38ba8' : '#45475a'}
+                                stroke={isOnPath ? '#f38ba8' : 'var(--code-line)'}
                                 strokeWidth={isOnPath ? 2.5 : 1.5}
                             />
                         )

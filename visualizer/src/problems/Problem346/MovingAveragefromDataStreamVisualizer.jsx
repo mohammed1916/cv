@@ -200,7 +200,7 @@ export default function MovingAveragefromDataStreamVisualizer() {
         </div>
       </div>
 
-      <div className="moving-averagefrom-data-stream-status" style={{ margin: '16px', color: '#64748b' }}>
+      <div className="moving-averagefrom-data-stream-status" style={{ margin: '16px', color: 'var(--text-muted)' }}>
         {step?.message ?? 'Press Play or Step to begin.'}
       </div>
 

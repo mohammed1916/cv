@@ -11,7 +11,7 @@
 
 .gp-hero {
     padding: 20px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 12px;
 }
@@ -25,7 +25,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: #6c7086;
+    color: var(--code-dim);
 }
 
 .gp-hero-copy h2 {
@@ -58,7 +58,7 @@
 
 .gp-chip {
     background: #313244;
-    color: #cdd6f4;
+    color: var(--code-text);
     border: none;
     border-radius: 6px;
     padding: 4px 12px;
@@ -80,7 +80,7 @@
 }
 
 .gp-panel {
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 10px;
     padding: 12px 14px;
@@ -89,7 +89,7 @@
 .gp-panel-label {
     font-size: 11px;
     font-weight: 700;
-    color: #6c7086;
+    color: var(--code-dim);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-bottom: 10px;
@@ -132,7 +132,7 @@
 }
 
 .gp-empty-str {
-    color: #45475a;
+    color: var(--code-line);
     font-size: 18px;
     font-style: italic;
 }
@@ -145,12 +145,12 @@
 
 .gp-res-item {
     background: #313244;
-    border: 2px solid #45475a;
+    border: 2px solid var(--code-line);
     border-radius: 8px;
     padding: 7px 14px;
     font-size: 15px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: var(--code-text);
     font-family: monospace;
 }
 
@@ -162,22 +162,22 @@
 
 .gp-status {
     padding: 8px 12px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 8px;
     font-size: 13px;
-    color: #a6adc8;
+    color: var(--code-dim);
     min-height: 36px;
     margin-top: 8px;
 }
 
 .gp-status-panel {
     padding: 8px 12px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 0;
     font-size: 13px;
-    color: #a6adc8;
+    color: var(--code-dim);
     height: 100%;
     display: flex;
     align-items: center;

@@ -221,11 +221,11 @@ function VisualizationPanel({ step, applyExample, examples }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -237,7 +237,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.digits && (
         <motion.div
-          style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #38bdf8' }}
+          style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #38bdf8' }}
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.2 }}
@@ -246,7 +246,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
           <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
             {step.digits.map((digit, idx) => {
               let borderColor = '#38bdf8'
-              let backgroundColor = '#0f172a'
+              let backgroundColor = 'var(--code-bg)'
 
               if (step.swappedPositions?.includes(idx)) {
                 borderColor = '#f59e0b'
@@ -291,21 +291,21 @@ function VisualizationPanel({ step, applyExample, examples }) {
             })}
           </div>
           {step.position !== undefined && (
-            <div style={{ fontSize: 11, color: '#64748b', marginTop: 8 }}>Position: {step.position}</div>
+            <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 8 }}>Position: {step.position}</div>
           )}
         </motion.div>
       )}
 
       {step?.position !== undefined && !step?.pivotFound && !step?.successorFound && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #64748b' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Searching Pivot</div>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Searching Pivot</div>
           <div style={{ fontSize: 13, color: '#5577a4' }}>Position: {step.position}</div>
         </div>
       )}
 
       {step?.pivotFound && (
         <motion.div
-          style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f87171' }}
+          style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #f87171' }}
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
@@ -319,7 +319,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.successorFound && (
         <motion.div
-          style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #22c55e' }}
+          style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #22c55e' }}
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
@@ -333,7 +333,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.swappedPositions && (
         <motion.div
-          style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f59e0b' }}
+          style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #f59e0b' }}
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
@@ -347,7 +347,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {step?.reversedStart !== undefined && (
         <motion.div
-          style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}
+          style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #a78bfa' }}
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
@@ -363,7 +363,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid',
             borderColor: step.result >= 0 ? '#22c55e' : '#f87171',
@@ -373,7 +373,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Result</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Result</div>
           <div
             style={{
               fontSize: 18,
@@ -458,9 +458,9 @@ export default function NextGreaterVisualizer() {
                   width: '100%',
                   padding: '8px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  border: '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                   fontSize: 12,
                 }}

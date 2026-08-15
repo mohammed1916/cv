@@ -176,10 +176,10 @@ function VisualizationPanel({ step }) {
                 style={{
                   padding: "4px 8px",
                   borderRadius: 3,
-                  backgroundColor: idx === step.i ? "#fbbf24" : "#e2e8f0",
+                  backgroundColor: idx === step.i ? "#fbbf24" : "var(--text)",
                   fontFamily: "monospace",
                   fontWeight: 600,
-                  color: idx === step.i ? "#000" : "#334155",
+                  color: idx === step.i ? "#000" : "var(--border)",
                   fontSize: 11,
                 }}
               >

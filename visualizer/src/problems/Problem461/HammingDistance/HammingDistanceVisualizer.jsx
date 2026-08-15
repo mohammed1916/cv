@@ -117,7 +117,7 @@ function VisualizationPanel({ x, y, step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -126,10 +126,10 @@ function VisualizationPanel({ x, y, step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9'
+                backgroundColor: 'var(--surface2)'
               }}
             >
               {e.label}
@@ -175,14 +175,14 @@ function VisualizationPanel({ x, y, step, applyEx }) {
       <motion.div
         style={{
           padding: 16,
-          backgroundColor: '#f1f5f9',
+          backgroundColor: 'var(--surface2)',
           borderRadius: 6,
-          border: '2px solid #cbd5e1'
+          border: '2px solid var(--border)'
         }}
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 12 }}>Bit-by-Bit Comparison</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 12 }}>Bit-by-Bit Comparison</div>
         <div style={{ display: 'flex', gap: 2, justifyContent: 'flex-end' }}>
           {xBinary.split('').map((bit, idx) => {
             const yBit = yBinary[idx]
@@ -203,12 +203,12 @@ function VisualizationPanel({ x, y, step, applyEx }) {
                 <div style={{
                   padding: '6px 8px',
                   borderRadius: 3,
-                  backgroundColor: isCurrent ? '#dbeafe' : '#ffffff',
-                  border: `2px solid ${isCurrent ? '#0284c7' : '#cbd5e1'}`,
+                  backgroundColor: isCurrent ? '#dbeafe' : 'var(--surface)',
+                  border: `2px solid ${isCurrent ? '#0284c7' : 'var(--border)'}`,
                   fontFamily: 'monospace',
                   fontSize: 12,
                   fontWeight: 600,
-                  color: '#334155'
+                  color: 'var(--border)'
                 }}>
                   {bit}
                 </div>
@@ -226,12 +226,12 @@ function VisualizationPanel({ x, y, step, applyEx }) {
                 <div style={{
                   padding: '6px 8px',
                   borderRadius: 3,
-                  backgroundColor: isCurrent ? '#fee2e2' : '#ffffff',
-                  border: `2px solid ${isCurrent ? '#ef4444' : '#cbd5e1'}`,
+                  backgroundColor: isCurrent ? '#fee2e2' : 'var(--surface)',
+                  border: `2px solid ${isCurrent ? '#ef4444' : 'var(--border)'}`,
                   fontFamily: 'monospace',
                   fontSize: 12,
                   fontWeight: 600,
-                  color: '#334155'
+                  color: 'var(--border)'
                 }}>
                   {yBit}
                 </div>

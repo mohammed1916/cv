@@ -201,10 +201,10 @@ export default function Problem379Visualizer() {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid var(--border)',
                   cursor: 'pointer',
                   fontSize: 12,
-                  backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
+                  backgroundColor: exIdx === i ? '#dbeafe' : 'var(--surface2)',
                 }}
               >
                 {e.label}
@@ -214,7 +214,7 @@ export default function Problem379Visualizer() {
 
           {step && (
             <>
-              <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
+              <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 11 }}>
                 <div style={{ fontWeight: 600, marginBottom: 8 }}>{step.message}</div>
               </div>
 
@@ -240,7 +240,7 @@ export default function Problem379Visualizer() {
                       {num}
                     </motion.div>
                   ))}
-                  {step.available.size === 0 && <span style={{ color: '#64748b' }}>None</span>}
+                  {step.available.size === 0 && <span style={{ color: 'var(--text-muted)' }}>None</span>}
                 </div>
               </div>
 
@@ -266,7 +266,7 @@ export default function Problem379Visualizer() {
                       {num}
                     </motion.div>
                   ))}
-                  {step.allocated.size === 0 && <span style={{ color: '#64748b' }}>None</span>}
+                  {step.allocated.size === 0 && <span style={{ color: 'var(--text-muted)' }}>None</span>}
                 </div>
               </div>
 
@@ -292,7 +292,7 @@ export default function Problem379Visualizer() {
                       {num}
                     </motion.div>
                   ))}
-                  {step.released.length === 0 && <span style={{ color: '#64748b' }}>Empty</span>}
+                  {step.released.length === 0 && <span style={{ color: 'var(--text-muted)' }}>Empty</span>}
                 </div>
               </div>
 

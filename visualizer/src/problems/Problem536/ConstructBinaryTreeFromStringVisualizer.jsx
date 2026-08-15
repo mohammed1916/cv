@@ -121,7 +121,7 @@ function VisualizationPanel({ s, step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -130,10 +130,10 @@ function VisualizationPanel({ s, step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9'
+                backgroundColor: 'var(--surface2)'
               }}
             >
               {e.label}
@@ -144,15 +144,15 @@ function VisualizationPanel({ s, step, applyEx }) {
 
       {/* Input String */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Input String</div>
-        <div style={{ padding: 12, backgroundColor: '#f1f5f9', borderRadius: 6, fontFamily: 'monospace', fontSize: 12, wordBreak: 'break-all' }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Input String</div>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, fontFamily: 'monospace', fontSize: 12, wordBreak: 'break-all' }}>
           {s}
         </div>
       </div>
 
       {/* Parse Progress */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Parse Position</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Parse Position</div>
         <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
           {s.split('').map((char, idx) => (
             <div
@@ -164,9 +164,9 @@ function VisualizationPanel({ s, step, applyEx }) {
                 fontFamily: 'monospace',
                 fontSize: 12,
                 fontWeight: 600,
-                backgroundColor: step?.i === idx ? '#dbeafe' : '#f1f5f9',
-                borderColor: step?.i === idx ? '#0284c7' : '#cbd5e1',
-                color: step?.i === idx ? '#0c4a6e' : '#334155'
+                backgroundColor: step?.i === idx ? '#dbeafe' : 'var(--surface2)',
+                borderColor: step?.i === idx ? '#0284c7' : 'var(--border)',
+                color: step?.i === idx ? '#0c4a6e' : 'var(--border)'
               }}
             >
               {char}

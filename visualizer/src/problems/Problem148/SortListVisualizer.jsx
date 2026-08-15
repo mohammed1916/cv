@@ -139,13 +139,13 @@ export default function SortListVisualizer() {
           />
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                {EXAMPLES.map((ex, i) => <button key={ex.label} onClick={() => applyExample(i)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: sel === i ? '#dbeafe' : '#f1f5f9' }}>{ex.label}</button>)}
+                {EXAMPLES.map((ex, i) => <button key={ex.label} onClick={() => applyExample(i)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: sel === i ? '#dbeafe' : 'var(--surface2)' }}>{ex.label}</button>)}
             </div>
-            <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
+            <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 11 }}>
                 <div style={{ fontWeight: 600, marginBottom: 4 }}>Array</div>
                 <LinkedListRow vals={step?.arr ?? initial} color="main" />
             </div>
-            {step?.left && <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
+            {step?.left && <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 11 }}>
                 <div style={{ fontWeight: 600, marginBottom: 4 }}>Merge</div>
                 <LinkedListRow vals={step.left} color="left" /> ↔ <LinkedListRow vals={step.right} color="right" />
                 {step?.merged && <div style={{ marginTop: 8 }}><LinkedListRow vals={step.merged} color="merged" /></div>}

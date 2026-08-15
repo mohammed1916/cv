@@ -128,10 +128,10 @@ export default function GrayCodeVisualizer() {
 
         <div className="gc-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
-                {EXAMPLES && EXAMPLES.length > 0 && EXAMPLES.map(ex => <button key={ex.label} onClick={() => applyExample(ex)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: '#f1f5f9' }}>
+                {EXAMPLES && EXAMPLES.length > 0 && EXAMPLES.map(ex => <button key={ex.label} onClick={() => applyExample(ex)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: 'var(--surface2)' }}>
                     {ex.label}
                 </button>)}
-                <label style={{ marginLeft: 'auto', display: 'flex', gap: 6, alignItems: 'center', fontSize: 12 }}>n = <input type="number" min="0" max="8" value={nInput} onChange={e => { setNInput(e.target.value); handleReset() }} style={{ width: 50, padding: '4px 8px', borderRadius: 4, border: '1px solid #cbd5e1' }} /></label>
+                <label style={{ marginLeft: 'auto', display: 'flex', gap: 6, alignItems: 'center', fontSize: 12 }}>n = <input type="number" min="0" max="8" value={nInput} onChange={e => { setNInput(e.target.value); handleReset() }} style={{ width: 50, padding: '4px 8px', borderRadius: 4, border: '1px solid var(--border)' }} /></label>
             </div>
             {inputError && <div style={{ color: '#991b1b', fontSize: 11 }}>{inputError}</div>}
 
@@ -139,9 +139,9 @@ export default function GrayCodeVisualizer() {
                 <div
                     style={{
                         padding: 12,
-                        backgroundColor: '#f8fafc',
+                        backgroundColor: 'var(--surface)',
                         borderRadius: 6,
-                        border: '1px solid #e2e8f0',
+                        border: '1px solid var(--text)',
                         fontSize: 11,
                         fontFamily: 'monospace',
                     }}
@@ -164,7 +164,7 @@ export default function GrayCodeVisualizer() {
                 </div>
             )}
 
-            <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>Result Sequence</div>
+            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>Result Sequence</div>
             <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', flex: 1, overflow: 'auto', alignItems: 'flex-start' }}>
                 <AnimatePresence mode="popLayout">
                     {(step?.result ?? []).map((val, idx) => {
@@ -223,7 +223,7 @@ export default function GrayCodeVisualizer() {
     )
 
     const statusPanel = (
-        <div className="gc-status" style={{ padding: 8, fontSize: 12, color: '#1e293b', backgroundColor: '#f8fafc', borderTop: '1px solid #e2e8f0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+        <div className="gc-status" style={{ padding: 8, fontSize: 12, color: 'var(--surface2)', backgroundColor: 'var(--surface)', borderTop: '1px solid var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
             {step?.message || 'Ready'}
         </div>
     )

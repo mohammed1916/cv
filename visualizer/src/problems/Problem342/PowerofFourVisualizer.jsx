@@ -24,14 +24,14 @@ const SOLUTION_CODE = [
 const EVEN_MASK = 0x55555555
 
 const COLORS = {
-  text: '#e2e8f0',
-  muted: '#94a3b8',
+  text: 'var(--text)',
+  muted: 'var(--text-muted)',
   setBit: '#38bdf8',
   pass: '#22c55e',
   fail: '#f87171',
-  surface: '#1e293b',
-  surface2: '#0f172a',
-  border: '#334155',
+  surface: 'var(--surface2)',
+  surface2: 'var(--code-bg)',
+  border: 'var(--border)',
 }
 
 function toBin(n, bits) {
@@ -401,7 +401,7 @@ export default function PowerofFourVisualizer() {
                         fontWeight: 800,
                         fontSize: 16,
                         textAlign: 'center',
-                        color: '#0f172a',
+                        color: 'var(--code-bg)',
                         background: result ? COLORS.pass : COLORS.fail,
                       }}
                     >

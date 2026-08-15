@@ -148,7 +148,7 @@ function VisualizationPanel({ s, step, inputPanel }) {
 
       {/* String */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>String: {s}</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>String: {s}</div>
         <div style={{ display: 'flex', gap: 4 }}>
           {s.split('').map((char, idx) => {
             const isInRange = step && idx >= step.i && idx <= step.j
@@ -161,9 +161,9 @@ function VisualizationPanel({ s, step, inputPanel }) {
                   border: '2px solid',
                   fontFamily: 'monospace',
                   fontWeight: 600,
-                  backgroundColor: isInRange ? '#fef08a' : '#f1f5f9',
-                  borderColor: isInRange ? '#f59e0b' : '#cbd5e1',
-                  color: isInRange ? '#78350f' : '#334155'
+                  backgroundColor: isInRange ? '#fef08a' : 'var(--surface2)',
+                  borderColor: isInRange ? '#f59e0b' : 'var(--border)',
+                  color: isInRange ? '#78350f' : 'var(--border)'
                 }}
                 animate={{ scale: isInRange ? 1.1 : 1 }}
               >
@@ -176,7 +176,7 @@ function VisualizationPanel({ s, step, inputPanel }) {
 
       {/* DP Table */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>DP Table</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>DP Table</div>
         <div style={{ overflowX: 'auto' }}>
           <table style={{ borderCollapse: 'collapse', fontSize: 11, minWidth: 300 }}>
             <tbody>
@@ -196,7 +196,7 @@ function VisualizationPanel({ s, step, inputPanel }) {
                           textAlign: 'center',
                           backgroundColor: isActive ? '#fef08a' : i > j ? '#f9fafb' : '#fff',
                           fontWeight: isActive ? 600 : 500,
-                          color: isActive ? '#78350f' : '#334155'
+                          color: isActive ? '#78350f' : 'var(--border)'
                         }}
                       >
                         {i <= j ? val : '-'}

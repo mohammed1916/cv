@@ -76,7 +76,7 @@
 }
 
 .rll-chip:hover {
-    background: #334155;
+    background: var(--border);
     color: var(--text);
 }
 
@@ -88,8 +88,8 @@
     flex: 1;
     padding: 8px 12px;
     border-radius: 8px;
-    border: 1px solid #334155;
-    background: #0f172a;
+    border: 1px solid var(--border);
+    background: var(--code-bg);
     color: var(--text);
     font-family: monospace;
     font-size: 13px;
@@ -118,7 +118,7 @@
 }
 
 .rll-arrow-line {
-    stroke: #334155;
+    stroke: var(--border);
     stroke-width: 2;
     transition: stroke 0.3s;
 }
@@ -134,7 +134,7 @@
 }
 
 .rll-arrow-head {
-    fill: #334155;
+    fill: var(--border);
     transition: fill 0.3s;
 }
 
@@ -163,8 +163,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #1e293b;
-    border: 2px solid #334155;
+    background: var(--surface2);
+    border: 2px solid var(--border);
     border-radius: 10px;
     color: var(--text);
     font-size: 20px;

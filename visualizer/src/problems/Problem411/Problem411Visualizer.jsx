@@ -182,24 +182,24 @@ function generateSteps(word, dictionary) {
 function AbbreviationExplorer({ word, dictionary, step }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Abbreviation Search</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Abbreviation Search</div>
 
       {/* Word display */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Word: "{word}"</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Word: "{word}"</div>
         <div style={{ display: 'flex', gap: 3 }}>
           {word.split('').map((char, idx) => (
             <div
               key={idx}
               style={{
                 padding: '8px 10px',
-                backgroundColor: '#f1f5f9',
+                backgroundColor: 'var(--surface2)',
                 borderRadius: 4,
                 fontFamily: 'monospace',
                 fontSize: 13,
                 fontWeight: 600,
-                border: '1px solid #cbd5e1',
-                color: '#334155',
+                border: '1px solid var(--border)',
+                color: 'var(--border)',
                 minWidth: 30,
                 textAlign: 'center',
               }}
@@ -212,7 +212,7 @@ function AbbreviationExplorer({ word, dictionary, step }) {
 
       {/* Dictionary display */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Dictionary</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Dictionary</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {dictionary.map((dictWord, idx) => {
             const matches = step?.compareWord === dictWord
@@ -221,12 +221,12 @@ function AbbreviationExplorer({ word, dictionary, step }) {
                 key={idx}
                 style={{
                   padding: '6px 12px',
-                  backgroundColor: matches ? '#dbeafe' : '#f1f5f9',
+                  backgroundColor: matches ? '#dbeafe' : 'var(--surface2)',
                   borderRadius: 4,
                   fontSize: 12,
                   fontWeight: 600,
-                  border: matches ? '2px solid #0284c7' : '1px solid #cbd5e1',
-                  color: matches ? '#0c4a6e' : '#334155',
+                  border: matches ? '2px solid #0284c7' : '1px solid var(--border)',
+                  color: matches ? '#0c4a6e' : 'var(--border)',
                   fontFamily: 'monospace',
                 }}
                 animate={{ scale: matches ? 1.1 : 1 }}
@@ -275,7 +275,7 @@ function AbbreviationExplorer({ word, dictionary, step }) {
       {/* Candidates checked */}
       {step?.checked && step.checked.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Candidates Checked</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Candidates Checked</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {step.checked.map((item, idx) => (
               <motion.div
@@ -316,7 +316,7 @@ function AbbreviationExplorer({ word, dictionary, step }) {
         </motion.div>
       )}
 
-      <div style={{ fontSize: 12, color: '#475569' }}>{step?.message}</div>
+      <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{step?.message}</div>
     </div>
   )
 }
@@ -374,7 +374,7 @@ export default function Problem411Visualizer() {
         />),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button
@@ -383,11 +383,11 @@ export default function Problem411Visualizer() {
                   style={{
                     padding: '6px 12px',
                     borderRadius: 4,
-                    border: exIdx === idx ? '2px solid #f97316' : '1px solid #cbd5e1',
+                    border: exIdx === idx ? '2px solid #f97316' : '1px solid var(--border)',
                     cursor: 'pointer',
                     fontSize: 12,
-                    backgroundColor: exIdx === idx ? '#ffedd5' : '#f1f5f9',
-                    color: exIdx === idx ? '#92400e' : '#334155',
+                    backgroundColor: exIdx === idx ? '#ffedd5' : 'var(--surface2)',
+                    color: exIdx === idx ? '#92400e' : 'var(--border)',
                     fontWeight: exIdx === idx ? '600' : '400',
                   }}
                 >

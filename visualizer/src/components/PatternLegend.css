@@ -14,7 +14,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #94a3b8;
+  color: var(--text-muted);
   margin-bottom: 6px;
 }
 
@@ -29,7 +29,7 @@
   align-items: center;
   gap: 6px;
   padding: 6px 8px;
-  border-left: 3px solid #334155;
+  border-left: 3px solid var(--border);
   border-radius: 6px;
   background: rgba(15, 23, 42, 0.8);
   transition: all 0.15s ease;
@@ -51,11 +51,11 @@
 
 .pattern-legend-label {
   font-size: 12px;
-  color: #cbd5e1;
+  color: var(--border);
   font-weight: 500;
 }
 
 .pattern-legend-item.active .pattern-legend-label {
-  color: #f1f5f9;
+  color: var(--surface2);
   font-weight: 600;
 }

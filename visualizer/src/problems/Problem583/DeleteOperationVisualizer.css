@@ -9,8 +9,8 @@
 .do-dp-table {
   display: inline-block;
   border-collapse: collapse;
-  background-color: #0f172a;
-  border: 1px solid #475569;
+  background-color: var(--code-bg);
+  border: 1px solid var(--text-muted);
   border-radius: 4px;
   overflow: hidden;
 }
@@ -21,31 +21,31 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   font-family: monospace;
   font-size: 12px;
   font-weight: 600;
-  color: #cbd5e1;
-  background-color: #1e293b;
+  color: var(--border);
+  background-color: var(--surface2);
 }
 
 .do-dp-cell.header {
-  background-color: #0f172a;
-  color: #94a3b8;
+  background-color: var(--code-bg);
+  color: var(--text-muted);
   font-weight: 700;
-  border-color: #475569;
+  border-color: var(--text-muted);
 }
 
 .do-dp-cell.current {
   background-color: #f59e0b;
-  color: #1e293b;
+  color: var(--surface2);
   box-shadow: 0 0 0 2px #f59e0b;
   animation: pulse 0.5s ease-in-out;
 }
 
 .do-dp-cell.lcs {
   background-color: #22c55e;
-  color: #1e293b;
+  color: var(--surface2);
   font-weight: 700;
 }
 
@@ -72,9 +72,9 @@
   flex-direction: column;
   gap: 12px;
   padding: 12px;
-  background-color: #1e293b;
+  background-color: var(--surface2);
   border-radius: 6px;
-  border: 1px solid #475569;
+  border: 1px solid var(--text-muted);
 }
 
 .do-string-row {
@@ -97,30 +97,30 @@
   align-items: center;
   justify-content: center;
   border-radius: 4px;
-  border: 1px solid #475569;
+  border: 1px solid var(--text-muted);
   font-family: monospace;
   font-size: 12px;
   font-weight: 600;
-  color: #e2e8f0;
-  background-color: #0f172a;
+  color: var(--text);
+  background-color: var(--code-bg);
 }
 
 .do-char.highlight {
   background-color: #f59e0b;
-  color: #1e293b;
+  color: var(--surface2);
   border-color: #f59e0b;
 }
 
 .do-char.match {
   background-color: #22c55e;
-  color: #1e293b;
+  color: var(--surface2);
   border-color: #22c55e;
 }
 
 /* Result display */
 .do-result {
   padding: 16px;
-  background-color: #1e293b;
+  background-color: var(--surface2);
   border-radius: 6px;
   border: 2px solid #f59e0b;
   text-align: center;

@@ -23,7 +23,7 @@
 
 .lcs-chip {
     background: #313244;
-    color: #cdd6f4;
+    color: var(--code-text);
     border: none;
     border-radius: 6px;
     padding: 4px 10px;
@@ -32,7 +32,7 @@
 }
 
 .lcs-chip:hover {
-    background: #45475a;
+    background: var(--code-line);
 }
 
 .lcs-inputs {
@@ -43,16 +43,16 @@
 
 .lcs-inputs label {
     font-size: 12px;
-    color: #6c7086;
+    color: var(--code-dim);
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
 .lcs-input {
-    background: #11111b;
-    color: #cdd6f4;
-    border: 1px solid #45475a;
+    background: var(--code-surface);
+    color: var(--code-text);
+    border: 1px solid var(--code-line);
     border-radius: 6px;
     padding: 5px 8px;
     font-size: 13px;
@@ -95,8 +95,8 @@
 
 .lcs-cell {
     background: #313244;
-    color: #cdd6f4;
-    border: 1px solid #45475a;
+    color: var(--code-text);
+    border: 1px solid var(--code-line);
     border-radius: 4px;
 }
 
@@ -123,13 +123,13 @@
     justify-content: space-between;
     align-items: center;
     padding: 8px 12px;
-    background: #11111b;
+    background: var(--code-surface);
     border-radius: 8px;
 }
 
 .lcs-label {
     font-size: 11px;
-    color: #6c7086;
+    color: var(--code-dim);
     text-transform: uppercase;
     letter-spacing: 0.08em;
 }

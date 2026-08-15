@@ -167,8 +167,8 @@ function HeapTree({ label, values, isMax, accent, isActiveSide, activeValue, isM
                                 className={`fm-heap-node ${isRoot ? "root" : ""} ${isActive ? "active" : ""} ${isRoot && isMedianRoot ? "median-source" : ""}`}
                                 style={{
                                     left: pos.x - HEAP_NODE_R, top: pos.y - HEAP_NODE_R,
-                                    borderColor: isRoot ? accent : "#45475a",
-                                    color: isRoot ? accent : "#cdd6f4",
+                                    borderColor: isRoot ? accent : "var(--code-line)",
+                                    color: isRoot ? accent : "var(--code-text)",
                                 }}
                                 initial={{ opacity: 0, scale: 0.6 }}
                                 animate={{ opacity: 1, scale: isActive ? 1.25 : 1 }}
@@ -198,7 +198,7 @@ function HeapList({ label, values, isMax, accent, isActiveSide, activeValue }) {
                         const isActive = isActiveSide && v === activeValue;
                         return (
                             <motion.div key={`${i}-${v}`} className={`fm-heap-cell ${isActive ? "active" : ""}`}
-                                style={{ borderColor: i === 0 ? accent : "#45475a", color: i === 0 ? accent : "#cdd6f4" }}
+                                style={{ borderColor: i === 0 ? accent : "var(--code-line)", color: i === 0 ? accent : "var(--code-text)" }}
                                 initial={{ opacity: 0, scale: 0.7 }} animate={{ opacity: 1, scale: isActive ? 1.15 : 1 }} exit={{ opacity: 0, scale: 0.7 }}
                                 transition={{ type: "spring", stiffness: 380, damping: 22 }}>
                                 {v}

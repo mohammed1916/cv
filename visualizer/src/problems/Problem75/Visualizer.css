@@ -20,8 +20,8 @@
 
 .sc-chip {
     background: #313244;
-    color: #cdd6f4;
-    border: 2px solid #45475a;
+    color: var(--code-text);
+    border: 2px solid var(--code-line);
     border-radius: 6px;
     padding: 4px 12px;
     font-size: 12px;
@@ -35,7 +35,7 @@
 }
 
 .sc-panel {
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 10px;
     padding: 12px 14px;
@@ -44,7 +44,7 @@
 .sc-panel-label {
     font-size: 11px;
     font-weight: 700;
-    color: #6c7086;
+    color: var(--code-dim);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-bottom: 10px;
@@ -72,7 +72,7 @@
     font-size: 18px;
     font-weight: 900;
     border-radius: 8px;
-    border: 2px solid #45475a;
+    border: 2px solid var(--code-line);
 }
 
 .sc-cell.red {
@@ -82,9 +82,9 @@
 }
 
 .sc-cell.white {
-    background: #1e1e2e;
-    border-color: #cdd6f4;
-    color: #cdd6f4;
+    background: var(--code-bg);
+    border-color: var(--code-text);
+    color: var(--code-text);
 }
 
 .sc-cell.blue {
@@ -142,7 +142,7 @@
 
 .sc-leg.white {
     background: #252538;
-    color: #cdd6f4;
+    color: var(--code-text);
 }
 
 .sc-leg.blue {
@@ -171,7 +171,7 @@
 
 .sc-region.white-region {
     background: #252538;
-    color: #cdd6f4;
+    color: var(--code-text);
     border: 1px solid #cdd6f455;
 }
 
@@ -189,10 +189,10 @@
 
 .sc-status {
     padding: 8px 12px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 8px;
     font-size: 13px;
-    color: #a6adc8;
+    color: var(--code-dim);
     min-height: 36px;
 }

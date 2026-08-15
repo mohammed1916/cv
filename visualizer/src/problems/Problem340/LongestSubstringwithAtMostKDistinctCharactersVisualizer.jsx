@@ -154,7 +154,7 @@ const EXAMPLES =
         { label: 'k=0 edge', s: 'abc', k: 0 },
       ]
 
-const COL = { text: '#e2e8f0', muted: '#64748b', window: '#38bdf8', best: '#22c55e', over: '#ef4444' }
+const COL = { text: 'var(--text)', muted: 'var(--text-muted)', window: '#38bdf8', best: '#22c55e', over: '#ef4444' }
 
 export default function LongestSubstringwithAtMostKDistinctCharactersVisualizer() {
   const [sInput, setSInput] = useState('eceba')
@@ -254,7 +254,7 @@ export default function LongestSubstringwithAtMostKDistinctCharactersVisualizer(
                         ? `2px solid ${COL.best}`
                         : inWindow
                           ? `2px solid ${COL.window}`
-                          : '1px solid #334155'
+                          : '1px solid var(--border)'
                       const marker = isLeft && isRight ? 'L,R' : isLeft ? 'L' : isRight ? 'R' : ''
                       return (
                         <div key={`${ch}-${i}`} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
@@ -268,7 +268,7 @@ export default function LongestSubstringwithAtMostKDistinctCharactersVisualizer(
                               justifyContent: 'center',
                               borderRadius: 8,
                               border,
-                              background: inWindow ? `${COL.window}22` : '#1e293b',
+                              background: inWindow ? `${COL.window}22` : 'var(--surface2)',
                               color: COL.text,
                               fontFamily: 'monospace',
                               fontSize: 18,
@@ -309,8 +309,8 @@ export default function LongestSubstringwithAtMostKDistinctCharactersVisualizer(
                             alignItems: 'center',
                             padding: '4px 10px',
                             borderRadius: 6,
-                            border: `1px solid ${overLimit ? COL.over : '#334155'}`,
-                            background: '#1e293b',
+                            border: `1px solid ${overLimit ? COL.over : 'var(--border)'}`,
+                            background: 'var(--surface2)',
                             color: COL.text,
                             fontFamily: 'monospace',
                             fontSize: 13,

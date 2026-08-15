@@ -159,15 +159,15 @@ function generateSteps(expression) {
 function ExpressionVisualization({ expression, pos }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Expression</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Expression</div>
       <div style={{
         padding: 12,
-        backgroundColor: '#f1f5f9',
+        backgroundColor: 'var(--surface2)',
         borderRadius: 8,
-        border: '2px solid #cbd5e1',
+        border: '2px solid var(--border)',
         minHeight: 80,
       }}>
-        <div style={{ fontSize: 13, fontFamily: 'monospace', fontWeight: 600, color: '#1e293b', marginBottom: 12 }}>
+        <div style={{ fontSize: 13, fontFamily: 'monospace', fontWeight: 600, color: 'var(--surface2)', marginBottom: 12 }}>
           {expression}
         </div>
         <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
@@ -181,14 +181,14 @@ function ExpressionVisualization({ expression, pos }) {
                   width: 32,
                   height: 32,
                   borderRadius: 4,
-                  backgroundColor: isActive ? '#dc2626' : char === ' ' ? '#f1f5f9' : '#dbeafe',
-                  border: isActive ? '2px solid #991b1b' : char === ' ' ? '1px solid #cbd5e1' : '2px solid #0284c7',
+                  backgroundColor: isActive ? '#dc2626' : char === ' ' ? 'var(--surface2)' : '#dbeafe',
+                  border: isActive ? '2px solid #991b1b' : char === ' ' ? '1px solid var(--border)' : '2px solid #0284c7',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   fontSize: 11,
                   fontWeight: 700,
-                  color: isActive ? '#white' : char === ' ' ? '#94a3b8' : '#0c4a6e',
+                  color: isActive ? '#white' : char === ' ' ? 'var(--text-muted)' : '#0c4a6e',
                 }}
                 animate={{ scale: isActive ? 1.15 : 1 }}
               >
@@ -205,12 +205,12 @@ function ExpressionVisualization({ expression, pos }) {
 function StackVisualization({ stack }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Processing Stack</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Processing Stack</div>
       <div style={{
         padding: 12,
-        backgroundColor: '#f1f5f9',
+        backgroundColor: 'var(--surface2)',
         borderRadius: 8,
-        border: '2px solid #cbd5e1',
+        border: '2px solid var(--border)',
         minHeight: 100,
       }}>
         {stack && stack.length > 0 ? (
@@ -248,7 +248,7 @@ function StackVisualization({ stack }) {
 function ResultVisualization({ result }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Result</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Result</div>
       <div style={{
         padding: 12,
         backgroundColor: '#ecfdf5',
@@ -273,7 +273,7 @@ function VisualizationPanel({ step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -282,10 +282,10 @@ function VisualizationPanel({ step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9',
+                backgroundColor: 'var(--surface2)',
               }}
             >
               {e.label}

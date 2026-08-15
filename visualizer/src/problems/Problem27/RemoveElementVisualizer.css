@@ -18,7 +18,7 @@
 .removeel-array-container { display: flex; gap: 8px; flex-wrap: wrap; padding: 12px; background: #fafaf9; border-radius: 8px; border-left: 4px solid #f97316; min-height: 80px; }
 .removeel-cell-wrapper { position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; }
 .removeel-index { font-size: 11px; color: #627794; font-weight: 600; }
-.removeel-cell { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; background: white; border: 2px solid #fed7aa; border-radius: 8px; font-family: monospace; font-weight: 600; font-size: 16px; color: #1e293b; cursor: default; transition: all 0.2s; }
+.removeel-cell { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; background: white; border: 2px solid #fed7aa; border-radius: 8px; font-family: monospace; font-weight: 600; font-size: 16px; color: var(--surface2); cursor: default; transition: all 0.2s; }
 .removeel-cell.active { background: #f97316; color: white; border-color: #f97316; box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4); }
 .removeel-cell.target { border-color: #fbbf24; }
 .removeel-cell.moving { transform: scale(1.1); box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3); }
@@ -30,7 +30,7 @@
 .removeel-narrative { padding: 12px; background: #fff7ed; border-left: 4px solid #f97316; border-radius: 6px; font-size: 14px; color: #7c2d12; line-height: 1.5; font-weight: 500; }
 .removeel-stats { display: flex; flex-direction: column; gap: 12px; }
 .removeel-stat { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: #f9fafb; border-left: 4px solid #f97316; border-radius: 6px; }
-.stat-label { font-size: 13px; font-weight: 600; color: #475569; }
-.stat-value { font-family: monospace; font-size: 16px; font-weight: 700; color: #1e293b; }
-.removeel-status { padding: 12px 16px; background: #f1f5f9; border-top: 2px solid #fed7aa; font-size: 13px; color: #475569; font-weight: 500; }
+.stat-label { font-size: 13px; font-weight: 600; color: var(--text-muted); }
+.stat-value { font-family: monospace; font-size: 16px; font-weight: 700; color: var(--surface2); }
+.removeel-status { padding: 12px 16px; background: var(--surface2); border-top: 2px solid #fed7aa; font-size: 13px; color: var(--text-muted); font-weight: 500; }
 .removeel-dock { padding: 12px 16px; background: white; border-top: 2px solid #fed7aa; display: flex; justify-content: center; }

@@ -230,7 +230,7 @@ function GridVisualization({ grid, currentRegion, highlightRegions = [] }) {
   const gridSize = grid.length * cellSize
 
   return (
-    <div style={{ position: 'relative', width: gridSize + 2, height: gridSize + 2, border: '1px solid #64748b', background: '#0f172a' }}>
+    <div style={{ position: 'relative', width: gridSize + 2, height: gridSize + 2, border: '1px solid var(--text-muted)', background: 'var(--code-bg)' }}>
       {/* Highlight regions */}
       {highlightRegions.map((region, idx) => {
         const top = region.row * cellSize
@@ -283,13 +283,13 @@ function GridVisualization({ grid, currentRegion, highlightRegions = [] }) {
               left: j * cellSize,
               width: cellSize,
               height: cellSize,
-              backgroundColor: val === 1 ? '#1e293b' : '#f1f5f9',
-              border: '1px solid #64748b',
+              backgroundColor: val === 1 ? 'var(--surface2)' : 'var(--surface2)',
+              border: '1px solid var(--text-muted)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               fontSize: cellSize > 30 ? 12 : 10,
-              color: val === 1 ? '#f1f5f9' : '#1e293b',
+              color: val === 1 ? 'var(--surface2)' : 'var(--surface2)',
               fontWeight: 'bold',
             }}
           >
@@ -309,7 +309,7 @@ function TreeVisualization({ tree, depth = 0 }) {
       <motion.div
         style={{
           padding: 12,
-          backgroundColor: '#1e293b',
+          backgroundColor: 'var(--surface2)',
           border: '2px solid #22c55e',
           borderRadius: 4,
           marginBottom: 8,
@@ -334,7 +334,7 @@ function TreeVisualization({ tree, depth = 0 }) {
         flexDirection: 'column',
         gap: 12,
         padding: 12,
-        backgroundColor: '#1e293b',
+        backgroundColor: 'var(--surface2)',
         border: '2px solid #f59e0b',
         borderRadius: 4,
         marginBottom: 8,
@@ -345,19 +345,19 @@ function TreeVisualization({ tree, depth = 0 }) {
       <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', textAlign: 'center' }}>Internal Node</div>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, fontSize: 11 }}>
         <div>
-          <div style={{ color: '#64748b', marginBottom: 4 }}>Top-Left</div>
+          <div style={{ color: 'var(--text-muted)', marginBottom: 4 }}>Top-Left</div>
           {tree.topLeft && <TreeVisualization tree={tree.topLeft} depth={depth + 1} />}
         </div>
         <div>
-          <div style={{ color: '#64748b', marginBottom: 4 }}>Top-Right</div>
+          <div style={{ color: 'var(--text-muted)', marginBottom: 4 }}>Top-Right</div>
           {tree.topRight && <TreeVisualization tree={tree.topRight} depth={depth + 1} />}
         </div>
         <div>
-          <div style={{ color: '#64748b', marginBottom: 4 }}>Bottom-Left</div>
+          <div style={{ color: 'var(--text-muted)', marginBottom: 4 }}>Bottom-Left</div>
           {tree.bottomLeft && <TreeVisualization tree={tree.bottomLeft} depth={depth + 1} />}
         </div>
         <div>
-          <div style={{ color: '#64748b', marginBottom: 4 }}>Bottom-Right</div>
+          <div style={{ color: 'var(--text-muted)', marginBottom: 4 }}>Bottom-Right</div>
           {tree.bottomRight && <TreeVisualization tree={tree.bottomRight} depth={depth + 1} />}
         </div>
       </div>
@@ -379,11 +379,11 @@ function VisualizationPanel({ step, applyExample, examples, gridSize }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -407,7 +407,7 @@ function VisualizationPanel({ step, applyExample, examples, gridSize }) {
       )}
 
       {step?.currentRegion && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f59e0b' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #f59e0b' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', marginBottom: 6 }}>Current Region</div>
           <div style={{ fontSize: 12, color: '#5577a4', fontFamily: 'monospace', lineHeight: 1.6 }}>
             <div>Row: [{step.currentRegion.row}:{step.currentRegion.row + step.currentRegion.size}]</div>
@@ -422,7 +422,7 @@ function VisualizationPanel({ step, applyExample, examples, gridSize }) {
         <motion.div
           style={{
             padding: 12,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #22c55e',
             textAlign: 'center',
@@ -438,7 +438,7 @@ function VisualizationPanel({ step, applyExample, examples, gridSize }) {
       {step?.tree && (
         <div>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Quad Tree Structure</div>
-          <div style={{ maxHeight: 400, overflow: 'auto', padding: 8, backgroundColor: '#0f172a', borderRadius: 6 }}>
+          <div style={{ maxHeight: 400, overflow: 'auto', padding: 8, backgroundColor: 'var(--code-bg)', borderRadius: 6 }}>
             <TreeVisualization tree={step.tree} />
           </div>
         </div>
@@ -536,9 +536,9 @@ export default function QuadTreeVisualizer() {
                     width: '100%',
                     padding: '8px',
                     borderRadius: 4,
-                    border: '1px solid #475569',
-                    backgroundColor: '#1e293b',
-                    color: '#e2e8f0',
+                    border: '1px solid var(--text-muted)',
+                    backgroundColor: 'var(--surface2)',
+                    color: 'var(--text)',
                     fontFamily: 'monospace',
                     fontSize: 12,
                   }}
@@ -558,9 +558,9 @@ export default function QuadTreeVisualizer() {
                   height: 80,
                   padding: '8px',
                   borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid #475569',
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                   fontSize: 12,
                   resize: 'vertical',

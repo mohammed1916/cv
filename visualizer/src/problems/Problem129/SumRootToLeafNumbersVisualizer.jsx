@@ -270,7 +270,7 @@ export default function SumRootToLeafNumbersVisualizer() {
     </>)
 
   const statusPanel = (
-    <div className="srln-status" style={{ padding: '8px 12px', fontSize: '12px', color: '#5a779b', borderTop: '1px solid #334155', display: 'flex', alignItems: 'center', gap: '12px' }}>
+    <div className="srln-status" style={{ padding: '8px 12px', fontSize: '12px', color: '#5a779b', borderTop: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: '12px' }}>
       <span>Step {Math.max(0, stepIndex + 1)} / {steps.length}</span>
       {step?.message && <span>│ {step.message}</span>}
     </div>

@@ -12,7 +12,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  background: #1e293b;
-  border-top: 1px solid #334155;
+  background: var(--surface2);
+  border-top: 1px solid var(--border);
   padding: 4px 8px;
 }

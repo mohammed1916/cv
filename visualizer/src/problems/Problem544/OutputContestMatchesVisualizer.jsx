@@ -127,11 +127,11 @@ function VisualizationPanel({ n, step, applyExample, examples }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `n=${ex.n}`}
@@ -141,13 +141,13 @@ function VisualizationPanel({ n, step, applyExample, examples }) {
         </div>
       )}
 
-      <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
-        <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Teams</div>
+      <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+        <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Teams</div>
         <div style={{ fontSize: 16, fontWeight: 700, color: '#067db1' }}>{n}</div>
       </div>
 
       {step?.round !== undefined && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #a78bfa' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Round {step.round}</div>
           <div style={{ fontSize: 12, color: '#5577a4' }}>
             {step.teams.length} {step.teams.length === 1 ? 'winner' : 'matches'}
@@ -168,12 +168,12 @@ function VisualizationPanel({ n, step, applyExample, examples }) {
                   padding: '10px 12px',
                   borderRadius: 4,
                   border: '2px solid',
-                  backgroundColor: '#1e293b',
+                  backgroundColor: 'var(--surface2)',
                   fontFamily: 'monospace',
                   fontSize: 12,
                   fontWeight: 600,
-                  borderColor: step?.matchIdx === idx ? '#f59e0b' : '#475569',
-                  color: step?.matchIdx === idx ? '#fbbf24' : '#e2e8f0',
+                  borderColor: step?.matchIdx === idx ? '#f59e0b' : 'var(--text-muted)',
+                  color: step?.matchIdx === idx ? '#fbbf24' : 'var(--text)',
                   wordBreak: 'break-all',
                 }}
                 initial={{ opacity: 0, x: -10 }}
@@ -191,7 +191,7 @@ function VisualizationPanel({ n, step, applyExample, examples }) {
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #22c55e',
             textAlign: 'center',
@@ -200,7 +200,7 @@ function VisualizationPanel({ n, step, applyExample, examples }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>🏆 Champion</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>🏆 Champion</div>
           <div style={{ fontSize: 18, fontFamily: 'monospace', fontWeight: 'bold', color: '#178740' }}>
             {step.result}
           </div>
@@ -279,9 +279,9 @@ export default function OutputContestMatchesVisualizer() {
                   width: '100%',
                   padding: '8px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  border: '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                   fontSize: 12,
                 }}

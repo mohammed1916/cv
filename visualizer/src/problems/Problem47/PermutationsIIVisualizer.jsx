@@ -191,11 +191,11 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -205,15 +205,15 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
         </div>
       )}
 
-      <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
-        <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Input</div>
+      <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+        <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Input</div>
         <div style={{ fontSize: 13, color: '#5577a4', fontFamily: 'monospace', fontWeight: 600 }}>
           [{nums.join(', ')}]
         </div>
       </div>
 
       {step?.currentPath !== undefined && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #a78bfa' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Current Path</div>
           <div style={{ fontSize: 13, color: '#5577a4', fontFamily: 'monospace', fontWeight: 600 }}>
             [{step.currentPath.join(', ')}] ({step.currentPath.length}/{nums.length})
@@ -234,8 +234,8 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
                   style={{
                     padding: '8px 10px',
                     borderRadius: 4,
-                    border: '1px solid #475569',
-                    backgroundColor: '#334155',
+                    border: '1px solid var(--text-muted)',
+                    backgroundColor: 'var(--border)',
                     fontFamily: 'monospace',
                     fontSize: 12,
                     color: '#22c55e',
@@ -256,7 +256,7 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #22c55e',
             textAlign: 'center',
@@ -265,7 +265,7 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Total Permutations</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Total Permutations</div>
           <div style={{ fontSize: 24, fontWeight: 'bold', color: '#178740' }}>{step.result.length}</div>
         </motion.div>
       )}
@@ -359,9 +359,9 @@ export default function PermutationsIIVisualizer() {
             height: 60,
             padding: '8px',
             borderRadius: 4,
-            border: inputError ? '2px solid #f87171' : '1px solid #475569',
-            backgroundColor: '#1e293b',
-            color: '#e2e8f0',
+            border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
+            backgroundColor: 'var(--surface2)',
+            color: 'var(--text)',
             fontFamily: 'monospace',
             fontSize: 12,
             resize: 'vertical',
@@ -377,7 +377,7 @@ export default function PermutationsIIVisualizer() {
   )
 
   const statusPanel = (
-    <div style={{ fontSize: 13, color: '#64748b', padding: '8px 12px' }}>
+    <div style={{ fontSize: 13, color: 'var(--text-muted)', padding: '8px 12px' }}>
       Step {stepIndex + 1} / {steps.length}
     </div>
   )

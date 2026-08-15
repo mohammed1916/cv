@@ -15,7 +15,7 @@
   height: 100%;
   overflow: auto;
   padding: 12px;
-  background: var(--background-primary, #ffffff);
+  background: var(--background-primary, var(--surface));
 }
 
 @media (prefers-color-scheme: dark) {

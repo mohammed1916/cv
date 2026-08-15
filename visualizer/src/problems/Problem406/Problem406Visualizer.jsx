@@ -112,7 +112,7 @@ function QueueVisualization({ people, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Queue State</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Queue State</div>
 
       {/* Current queue */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -128,25 +128,25 @@ function QueueVisualization({ people, step }) {
                 key={idx}
                 style={{
                   padding: 12,
-                  backgroundColor: isInserted ? '#dbeafe' : '#f1f5f9',
+                  backgroundColor: isInserted ? '#dbeafe' : 'var(--surface2)',
                   borderRadius: 6,
-                  border: isInserted ? '2px solid #0284c7' : '1px solid #cbd5e1',
+                  border: isInserted ? '2px solid #0284c7' : '1px solid var(--border)',
                   display: 'flex',
                   gap: 12,
                   alignItems: 'center',
                 }}
                 animate={{ scale: isInserted ? 1.05 : 1 }}
               >
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', minWidth: 30 }}>#{idx}</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', minWidth: 30 }}>#{idx}</div>
                 <div style={{ flex: 1, display: 'flex', gap: 8, alignItems: 'center' }}>
                   <div style={{
                     padding: '8px 12px',
-                    backgroundColor: '#ffffff',
+                    backgroundColor: 'var(--surface)',
                     borderRadius: 4,
                     fontWeight: 600,
                     fontSize: 13,
-                    color: '#1e293b',
-                    border: '1px solid #cbd5e1',
+                    color: 'var(--surface2)',
+                    border: '1px solid var(--border)',
                     minWidth: 50,
                     textAlign: 'center',
                   }}>
@@ -154,12 +154,12 @@ function QueueVisualization({ people, step }) {
                   </div>
                   <div style={{
                     padding: '8px 12px',
-                    backgroundColor: '#ffffff',
+                    backgroundColor: 'var(--surface)',
                     borderRadius: 4,
                     fontWeight: 600,
                     fontSize: 13,
-                    color: '#1e293b',
-                    border: '1px solid #cbd5e1',
+                    color: 'var(--surface2)',
+                    border: '1px solid var(--border)',
                     minWidth: 50,
                     textAlign: 'center',
                   }}>
@@ -186,13 +186,13 @@ function QueueVisualization({ people, step }) {
         >
           <div style={{ fontSize: 12, fontWeight: 600, color: '#92400e', marginBottom: 8 }}>Current Operation</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-            <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#ffffff', borderRadius: 4 }}>
+            <div style={{ textAlign: 'center', padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#92400e' }}>Person</div>
               <div style={{ fontSize: 14, fontWeight: 'bold', color: '#78350f', fontFamily: 'monospace' }}>
                 [{step.currentPerson[0]}, {step.currentPerson[1]}]
               </div>
             </div>
-            <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#ffffff', borderRadius: 4 }}>
+            <div style={{ textAlign: 'center', padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#92400e' }}>Insert Position</div>
               <div style={{ fontSize: 14, fontWeight: 'bold', color: '#78350f' }}>
                 {step.insertPos !== undefined ? step.insertPos : step.currentIdx}
@@ -218,7 +218,7 @@ function QueueVisualization({ people, step }) {
         </div>
       </div>
 
-      <div style={{ fontSize: 12, color: '#475569' }}>{step?.message}</div>
+      <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{step?.message}</div>
     </div>
   )
 }
@@ -285,7 +285,7 @@ export default function Problem406Visualizer() {
       </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button
@@ -294,11 +294,11 @@ export default function Problem406Visualizer() {
                   style={{
                     padding: '6px 12px',
                     borderRadius: 4,
-                    border: exIdx === idx ? '2px solid #f59e0b' : '1px solid #cbd5e1',
+                    border: exIdx === idx ? '2px solid #f59e0b' : '1px solid var(--border)',
                     cursor: 'pointer',
                     fontSize: 12,
-                    backgroundColor: exIdx === idx ? '#fef3c7' : '#f1f5f9',
-                    color: exIdx === idx ? '#92400e' : '#334155',
+                    backgroundColor: exIdx === idx ? '#fef3c7' : 'var(--surface2)',
+                    color: exIdx === idx ? '#92400e' : 'var(--border)',
                     fontWeight: exIdx === idx ? '600' : '400',
                   }}
                 >

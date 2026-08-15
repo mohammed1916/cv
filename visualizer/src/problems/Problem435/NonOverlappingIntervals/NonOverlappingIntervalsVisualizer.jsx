@@ -148,11 +148,11 @@ export default function NonOverlappingIntervalsVisualizer() {
                         <div className="noi-timeline-wrap">
                             <svg width={TIMELINE_W} height={CANVAS_H}>
                                 {/* Axis */}
-                                <line x1={TIMELINE_PAD} y1={CANVAS_H - 20} x2={TIMELINE_W - TIMELINE_PAD} y2={CANVAS_H - 20} stroke="#45475a" strokeWidth={1} />
+                                <line x1={TIMELINE_PAD} y1={CANVAS_H - 20} x2={TIMELINE_W - TIMELINE_PAD} y2={CANVAS_H - 20} stroke="var(--code-line)" strokeWidth={1} />
                                 {Array.from({ length: max - min + 1 }, (_, i) => min + i).map((v) => (
                                     <g key={v}>
-                                        <line x1={toX(v, min, max)} y1={CANVAS_H - 24} x2={toX(v, min, max)} y2={CANVAS_H - 16} stroke="#45475a" strokeWidth={1} />
-                                        <text x={toX(v, min, max)} y={CANVAS_H - 6} textAnchor="middle" fontSize={10} fill="#6c7086">{v}</text>
+                                        <line x1={toX(v, min, max)} y1={CANVAS_H - 24} x2={toX(v, min, max)} y2={CANVAS_H - 16} stroke="var(--code-line)" strokeWidth={1} />
+                                        <text x={toX(v, min, max)} y={CANVAS_H - 6} textAnchor="middle" fontSize={10} fill="var(--code-dim)">{v}</text>
                                     </g>
                                 ))}
 

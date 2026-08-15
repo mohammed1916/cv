@@ -200,7 +200,7 @@ export default function IntersectionofTwoArraysVisualizer() {
         </div>
       </div>
 
-      <div className="intersectionof-two-arrays-status" style={{ margin: '16px', color: '#64748b' }}>
+      <div className="intersectionof-two-arrays-status" style={{ margin: '16px', color: 'var(--text-muted)' }}>
         {step?.message ?? 'Press Play or Step to begin.'}
       </div>
 

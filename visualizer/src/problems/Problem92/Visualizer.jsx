@@ -190,8 +190,8 @@ function Node({ node, pos, step, isLast }) {
   const isCurr = node.id === step.currId
   const isMoved = node.id === step.movedId
 
-  let border = '2px solid #334155'
-  let bg = inWindow ? '#0e2a3f' : '#1e293b'
+  let border = '2px solid var(--border)'
+  let bg = inWindow ? '#0e2a3f' : 'var(--surface2)'
   let glow = 'none'
   if (isMoved) {
     border = '3px solid #f59e0b'
@@ -234,10 +234,10 @@ function Node({ node, pos, step, isLast }) {
           {node.val}
         </motion.div>
         {!isLast && (
-          <span style={{ color: '#64748b', fontSize: 20, fontWeight: 700 }}>→</span>
+          <span style={{ color: 'var(--text-muted)', fontSize: 20, fontWeight: 700 }}>→</span>
         )}
       </div>
-      <div style={{ fontSize: 10, color: inWindow ? '#38bdf8' : '#64748b' }}>pos {pos}</div>
+      <div style={{ fontSize: 10, color: inWindow ? '#38bdf8' : 'var(--text-muted)' }}>pos {pos}</div>
     </div>
   )
 }
@@ -263,8 +263,8 @@ function VisualizationPanel({ step }) {
           flexWrap: 'wrap',
           padding: '12px 8px',
           borderRadius: 10,
-          background: '#0f172a',
-          border: '1px solid #1e293b',
+          background: 'var(--code-bg)',
+          border: '1px solid var(--surface2)',
           minHeight: 96,
         }}
       >
@@ -278,17 +278,17 @@ function VisualizationPanel({ step }) {
               alignItems: 'center',
               justifyContent: 'center',
               borderRadius: 10,
-              border: '2px dashed #475569',
-              color: '#64748b',
+              border: '2px dashed var(--text-muted)',
+              color: 'var(--text-muted)',
               fontSize: 11,
               fontWeight: 600,
             }}
           >
             dummy
           </div>
-          <div style={{ fontSize: 10, color: '#64748b' }}>head</div>
+          <div style={{ fontSize: 10, color: 'var(--text-muted)' }}>head</div>
         </div>
-        <span style={{ color: '#64748b', fontSize: 20, fontWeight: 700, alignSelf: 'center' }}>→</span>
+        <span style={{ color: 'var(--text-muted)', fontSize: 20, fontWeight: 700, alignSelf: 'center' }}>→</span>
         {nodes.map((node, i) => (
           <Node
             key={node.id}
@@ -315,7 +315,7 @@ function VisualizationPanel({ step }) {
           borderRadius: 8,
           background: '#0e2a3f',
           border: '1px solid #1e3a52',
-          color: '#cbd5e1',
+          color: 'var(--border)',
           fontSize: 13,
         }}
       >
@@ -407,8 +407,8 @@ export default function Problem92Visualizer() {
               fontSize: 12,
               cursor: 'pointer',
               fontWeight: 600,
-              border: ex.label === e.label ? '2px solid #38bdf8' : '1px solid #334155',
-              background: ex.label === e.label ? '#08344a' : '#1e293b',
+              border: ex.label === e.label ? '2px solid #38bdf8' : '1px solid var(--border)',
+              background: ex.label === e.label ? '#08344a' : 'var(--surface2)',
               color: '#5577a4',
             }}
           >

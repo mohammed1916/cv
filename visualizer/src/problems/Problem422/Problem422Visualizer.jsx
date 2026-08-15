@@ -155,19 +155,19 @@ function WordSquareVisualization({ words, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Valid Word Square</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Valid Word Square</div>
 
       {/* Grid display */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Word Grid</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Word Grid</div>
         <div style={{
           display: 'grid',
           gridTemplateColumns: `repeat(${Math.max(...words.map(w => w.length))}, minmax(50px, 1fr))`,
           gap: 4,
           padding: 8,
-          backgroundColor: '#f1f5f9',
+          backgroundColor: 'var(--surface2)',
           borderRadius: 6,
-          border: '2px solid #cbd5e1',
+          border: '2px solid var(--border)',
           width: 'fit-content',
         }}>
           {words.map((word, i) =>
@@ -176,9 +176,9 @@ function WordSquareVisualization({ words, step }) {
               const isMirrorPos = step?.checkI === j && step?.checkJ === i
               const mismatch = step?.char1 !== step?.char2 && step?.char1 !== undefined
 
-              let bgColor = '#f1f5f9'
-              let borderColor = '#cbd5e1'
-              let textColor = '#334155'
+              let bgColor = 'var(--surface2)'
+              let borderColor = 'var(--border)'
+              let textColor = 'var(--border)'
 
               if (isCheckPos) {
                 bgColor = '#c7d2fe'
@@ -246,20 +246,20 @@ function WordSquareVisualization({ words, step }) {
             {step?.char1 === step?.char2 ? '✓ Match' : '✗ Mismatch'}
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
-            <div style={{ padding: 8, backgroundColor: '#ffffff', borderRadius: 4 }}>
-              <div style={{ fontSize: 10, color: '#64748b' }}>words[{step?.checkI}][{step?.checkJ}]</div>
-              <div style={{ fontSize: 16, fontWeight: 'bold', color: '#1e293b', marginTop: 4 }}>
+            <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
+              <div style={{ fontSize: 10, color: 'var(--text-muted)' }}>words[{step?.checkI}][{step?.checkJ}]</div>
+              <div style={{ fontSize: 16, fontWeight: 'bold', color: 'var(--surface2)', marginTop: 4 }}>
                 '{step?.char1}'
               </div>
             </div>
-            <div style={{ padding: 8, backgroundColor: '#ffffff', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <div style={{ fontSize: 14, fontWeight: 'bold', color: '#64748b' }}>
+            <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ fontSize: 14, fontWeight: 'bold', color: 'var(--text-muted)' }}>
                 {step?.char1 === step?.char2 ? '==' : '!='}
               </div>
             </div>
-            <div style={{ padding: 8, backgroundColor: '#ffffff', borderRadius: 4 }}>
-              <div style={{ fontSize: 10, color: '#64748b' }}>words[{step?.checkJ}][{step?.checkI}]</div>
-              <div style={{ fontSize: 16, fontWeight: 'bold', color: '#1e293b', marginTop: 4 }}>
+            <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
+              <div style={{ fontSize: 10, color: 'var(--text-muted)' }}>words[{step?.checkJ}][{step?.checkI}]</div>
+              <div style={{ fontSize: 16, fontWeight: 'bold', color: 'var(--surface2)', marginTop: 4 }}>
                 '{step?.char2}'
               </div>
             </div>
@@ -269,19 +269,19 @@ function WordSquareVisualization({ words, step }) {
 
       {/* Words list */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Words</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Words</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
           {words.map((word, idx) => (
             <div
               key={idx}
               style={{
                 padding: '8px 10px',
-                backgroundColor: step?.checkI === idx ? '#c7d2fe' : '#f1f5f9',
+                backgroundColor: step?.checkI === idx ? '#c7d2fe' : 'var(--surface2)',
                 borderRadius: 4,
-                border: `2px solid ${step?.checkI === idx ? '#6366f1' : '#cbd5e1'}`,
+                border: `2px solid ${step?.checkI === idx ? '#6366f1' : 'var(--border)'}`,
                 fontSize: 12,
                 fontFamily: 'monospace',
-                color: '#1e293b',
+                color: 'var(--surface2)',
               }}
             >
               words[{idx}] = "{word}"
@@ -293,14 +293,14 @@ function WordSquareVisualization({ words, step }) {
       {/* Result */}
       <div style={{
         padding: 12,
-        backgroundColor: result ? '#f0fdf4' : result === false ? '#fee2e2' : '#f1f5f9',
+        backgroundColor: result ? '#f0fdf4' : result === false ? '#fee2e2' : 'var(--surface2)',
         borderRadius: 6,
-        border: `2px solid ${result ? '#10b981' : result === false ? '#ef4444' : '#cbd5e1'}`,
+        border: `2px solid ${result ? '#10b981' : result === false ? '#ef4444' : 'var(--border)'}`,
       }}>
         <div style={{
           fontSize: 12,
           fontWeight: 600,
-          color: result ? '#065f46' : result === false ? '#7f1d1d' : '#64748b',
+          color: result ? '#065f46' : result === false ? '#7f1d1d' : 'var(--text-muted)',
           marginBottom: 4
         }}>
           Result
@@ -308,13 +308,13 @@ function WordSquareVisualization({ words, step }) {
         <div style={{
           fontSize: 18,
           fontWeight: 'bold',
-          color: result ? '#10b981' : result === false ? '#ef4444' : '#cbd5e1',
+          color: result ? '#10b981' : result === false ? '#ef4444' : 'var(--border)',
         }}>
           {result === null ? '—' : result ? 'Valid Square' : 'Invalid Square'}
         </div>
       </div>
 
-      <div style={{ fontSize: 12, color: '#475569' }}>{step?.message}</div>
+      <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{step?.message}</div>
     </div>
   )
 }
@@ -370,7 +370,7 @@ export default function Problem422Visualizer() {
         />),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button
@@ -379,11 +379,11 @@ export default function Problem422Visualizer() {
                   style={{
                     padding: '6px 12px',
                     borderRadius: 4,
-                    border: exIdx === idx ? '2px solid #10b981' : '1px solid #cbd5e1',
+                    border: exIdx === idx ? '2px solid #10b981' : '1px solid var(--border)',
                     cursor: 'pointer',
                     fontSize: 12,
-                    backgroundColor: exIdx === idx ? '#d1fae5' : '#f1f5f9',
-                    color: exIdx === idx ? '#065f46' : '#334155',
+                    backgroundColor: exIdx === idx ? '#d1fae5' : 'var(--surface2)',
+                    color: exIdx === idx ? '#065f46' : 'var(--border)',
                     fontWeight: exIdx === idx ? '600' : '400',
                   }}
                 >

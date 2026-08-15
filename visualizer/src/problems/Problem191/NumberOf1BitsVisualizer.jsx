@@ -99,13 +99,13 @@ export default function NumberOf1BitsVisualizer() {
       />
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16 }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map(e => (
                 <button
                   key={e.label}
                   onClick={() => applyEx(e)}
-                  style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: '#f1f5f9' }}
+                  style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: 'var(--surface2)' }}
                 >
                   {e.label}
                 </button>
@@ -113,7 +113,7 @@ export default function NumberOf1BitsVisualizer() {
             </div>
           </div>
 
-          <div style={{ padding: 12, backgroundColor: '#f8fafc', borderRadius: 6, border: '1px solid #cbd5e1', fontFamily: 'monospace', fontSize: 13 }}>
+          <div style={{ padding: 12, backgroundColor: 'var(--surface)', borderRadius: 6, border: '1px solid var(--border)', fontFamily: 'monospace', fontSize: 13 }}>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
               {bin.split("").map((bit, idx) => (
                 <motion.div
@@ -126,7 +126,7 @@ export default function NumberOf1BitsVisualizer() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     backgroundColor: bit === '1' ? '#dbeafe' : '#f3f4f6',
-                    border: idx === 31 && lsb !== null ? '2px solid #0ea5e9' : '1px solid #cbd5e1',
+                    border: idx === 31 && lsb !== null ? '2px solid #0ea5e9' : '1px solid var(--border)',
                     borderRadius: 4,
                     fontWeight: 'bold',
                     color: bit === '1' ? '#1e3a8a' : '#9ca3af'
@@ -136,7 +136,7 @@ export default function NumberOf1BitsVisualizer() {
                 </motion.div>
               ))}
             </div>
-            <div style={{ fontSize: 11, color: '#64748b', marginTop: 8 }}>32-bit representation (LSB rightmost)</div>
+            <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 8 }}>32-bit representation (LSB rightmost)</div>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
@@ -146,14 +146,14 @@ export default function NumberOf1BitsVisualizer() {
                 {count}
               </motion.div>
             </div>
-            <div style={{ padding: 12, backgroundColor: lsb === 1 ? '#dbeafe' : '#f3f4f6', borderRadius: 6, border: lsb === 1 ? '2px solid #0ea5e9' : '1px solid #cbd5e1' }}>
-              <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>LSB (n & 1)</div>
+            <div style={{ padding: 12, backgroundColor: lsb === 1 ? '#dbeafe' : '#f3f4f6', borderRadius: 6, border: lsb === 1 ? '2px solid #0ea5e9' : '1px solid var(--border)' }}>
+              <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>LSB (n & 1)</div>
               <AnimatePresence mode="wait">
                 <motion.div
                   key={lsb === null ? 'none' : lsb}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  style={{ fontSize: 24, fontWeight: 'bold', color: lsb === 1 ? '#0ea5e9' : '#94a3b8' }}
+                  style={{ fontSize: 24, fontWeight: 'bold', color: lsb === 1 ? '#0ea5e9' : 'var(--text-muted)' }}
                 >
                   {lsb === null ? '—' : lsb}
                 </motion.div>

@@ -1,8 +1,8 @@
 .nop-container {
   padding: 2rem;
-  background: linear-gradient(135deg, #1e1e2e 0%, #2a2a3e 100%);
+  background: linear-gradient(135deg, var(--code-bg) 0%, #2a2a3e 100%);
   min-height: 100vh;
-  color: #cdd6f4;
+  color: var(--code-text);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -21,7 +21,7 @@
 .nop-difficulty {
   display: inline-block;
   background: #8b5cf6;
-  color: #1e1e2e;
+  color: var(--code-bg);
   padding: 0.5rem 1rem;
   border-radius: 20px;
   font-weight: 600;
@@ -61,7 +61,7 @@
 
 .nop-button-primary {
   background: #8b5cf6;
-  color: #1e1e2e;
+  color: var(--code-bg);
 }
 
 .nop-button-primary:hover:not(:disabled) {
@@ -70,8 +70,8 @@
 }
 
 .nop-button-secondary {
-  background: #45475a;
-  color: #cdd6f4;
+  background: var(--code-line);
+  color: var(--code-text);
 }
 
 .nop-button-secondary:hover:not(:disabled) {
@@ -90,8 +90,8 @@
 }
 
 .nop-example-btn {
-  background: #45475a;
-  color: #cdd6f4;
+  background: var(--code-line);
+  color: var(--code-text);
   border: 2px solid transparent;
   padding: 0.6rem 1.2rem;
   margin: 0.5rem;
@@ -108,7 +108,7 @@
 .nop-example-btn.nop-active {
   border-color: #8b5cf6;
   background: #8b5cf6;
-  color: #1e1e2e;
+  color: var(--code-bg);
 }
 
 .nop-content {
@@ -149,7 +149,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #45475a;
+  border: 1px solid var(--code-line);
   font-weight: bold;
   font-size: 1rem;
   transition: all 0.3s ease;
@@ -168,7 +168,7 @@
 
 .nop-matrix-cell.nop-highlight {
   background: #f38ba8;
-  color: #1e1e2e;
+  color: var(--code-bg);
   box-shadow: inset 0 0 8px rgba(243, 139, 168, 0.5);
 }
 
@@ -273,10 +273,10 @@
   background: #252734;
   padding: 0.75rem 1rem;
   border-radius: 6px;
-  border-left: 3px solid #45475a;
+  border-left: 3px solid var(--code-line);
   font-family: 'Courier New', monospace;
   font-size: 0.9rem;
-  color: #cdd6f4;
+  color: var(--code-text);
   transition: all 0.3s ease;
 }
 

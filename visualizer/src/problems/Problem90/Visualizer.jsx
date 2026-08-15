@@ -148,7 +148,7 @@ function generateSteps(inputNums) {
 function VisualizationPanel({ step }) {
   if (!step) {
     return (
-      <div style={{ padding: 16, color: '#64748b', fontSize: 13 }}>
+      <div style={{ padding: 16, color: 'var(--text-muted)', fontSize: 13 }}>
         Press play to generate all unique subsets.
       </div>
     )
@@ -167,7 +167,7 @@ function VisualizationPanel({ step }) {
 
       {/* Sorted nums row with the current index highlighted */}
       <div>
-        <div style={{ fontSize: 12, color: '#64748b', marginBottom: 6, fontWeight: 600 }}>Sorted nums</div>
+        <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 6, fontWeight: 600 }}>Sorted nums</div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {nums.map((v, i) => {
             const isActive = i === activeIndex
@@ -205,7 +205,7 @@ function VisualizationPanel({ step }) {
 
       {/* Current path */}
       <div>
-        <div style={{ fontSize: 12, color: '#64748b', marginBottom: 6, fontWeight: 600 }}>Current path</div>
+        <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 6, fontWeight: 600 }}>Current path</div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 16, fontWeight: 700, color: '#78350f' }}>
           <span>[</span>
           {path.map((v, i) => (
@@ -229,7 +229,7 @@ function VisualizationPanel({ step }) {
 
       {/* Accumulated result subsets */}
       <div>
-        <div style={{ fontSize: 12, color: '#64748b', marginBottom: 6, fontWeight: 600 }}>
+        <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 6, fontWeight: 600 }}>
           Result subsets ({res.length})
         </div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>

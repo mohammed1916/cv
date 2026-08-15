@@ -113,14 +113,14 @@ export default function BestTimeBuySellStockIVVisualizer() {
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {EXAMPLES.map(e => (
-              <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : '#f1f5f9' }}>
+              <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : 'var(--surface2)' }}>
                 {e.label}
               </button>
             ))}
           </div>
 
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>Price chart</div>
-          <svg width={SVG_W} height={SVG_H + 4} style={{ border: '1px solid #e2e8f0', borderRadius: 4, backgroundColor: '#f8fafc' }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>Price chart</div>
+          <svg width={SVG_W} height={SVG_H + 4} style={{ border: '1px solid var(--text)', borderRadius: 4, backgroundColor: 'var(--surface)' }}>
             <polyline points={polyline} fill="none" stroke="#0ea5e9" strokeWidth="2" />
             {prices.map((p, i) => (
               <circle key={i} cx={10 + i * xStep} cy={SVG_H - p * yScale} r={i === activeI ? 5 : 3}
@@ -132,34 +132,34 @@ export default function BestTimeBuySellStockIVVisualizer() {
               <span key={i} style={{
                 padding: '4px 6px', borderRadius: 3,
                 backgroundColor: i === activeI ? '#fbbf24' : '#f3f4f6',
-                color: '#1e293b'
+                color: 'var(--surface2)'
               }}>
                 {p}
               </span>
             ))}
           </div>
 
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginTop: 4 }}>DP table (partial)</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginTop: 4 }}>DP table (partial)</div>
           <div style={{ overflowX: 'auto', flex: 1 }}>
             <table style={{ borderCollapse: 'collapse', fontSize: 10 }}>
               <thead>
                 <tr>
-                  <th style={{ padding: '4px 6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc' }}>t</th>
-                  {prices.slice(0, 5).map((_, i) => <th key={i} style={{ padding: '4px 6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc', fontWeight: 600, minWidth: 32 }}>{i}</th>)}
-                  {prices.length > 5 && <th style={{ padding: '4px 6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc' }}>...</th>}
+                  <th style={{ padding: '4px 6px', border: '1px solid var(--text)', backgroundColor: 'var(--surface)' }}>t</th>
+                  {prices.slice(0, 5).map((_, i) => <th key={i} style={{ padding: '4px 6px', border: '1px solid var(--text)', backgroundColor: 'var(--surface)', fontWeight: 600, minWidth: 32 }}>{i}</th>)}
+                  {prices.length > 5 && <th style={{ padding: '4px 6px', border: '1px solid var(--text)', backgroundColor: 'var(--surface)' }}>...</th>}
                 </tr>
               </thead>
               <tbody>
                 {dp.slice(0, Math.min(k + 1, 4)).map((row, t) => (
                   <tr key={t}>
-                    <th style={{ padding: '4px 6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc', fontWeight: 600 }}>{t}</th>
+                    <th style={{ padding: '4px 6px', border: '1px solid var(--text)', backgroundColor: 'var(--surface)', fontWeight: 600 }}>{t}</th>
                     {row.slice(0, 5).map((val, i) => {
                       const isActive = t === activeT && i === activeI;
                       return (
                         <motion.td key={i} animate={{ scale: isActive ? 1.2 : 1 }} style={{
-                          padding: '4px 6px', border: '1px solid #e2e8f0',
+                          padding: '4px 6px', border: '1px solid var(--text)',
                           backgroundColor: isActive ? '#dbeafe' : val > 0 ? '#f0fdf4' : 'white',
-                          color: isActive ? '#1e40af' : '#1e293b', fontWeight: isActive ? 'bold' : 'normal',
+                          color: isActive ? '#1e40af' : 'var(--surface2)', fontWeight: isActive ? 'bold' : 'normal',
                           minWidth: 32, textAlign: 'center'
                         }}>
       
@@ -167,24 +167,24 @@ export default function BestTimeBuySellStockIVVisualizer() {
                         </motion.td>
                       );
                     })}
-                    {row.length > 5 && <td style={{ padding: '4px 6px', border: '1px solid #e2e8f0', color: '#64748b' }}>...</td>}
+                    {row.length > 5 && <td style={{ padding: '4px 6px', border: '1px solid var(--text)', color: 'var(--text-muted)' }}>...</td>}
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, padding: 8, backgroundColor: '#f8fafc', borderRadius: 6 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6 }}>
             <div>
-              <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>Transactions</div>
-              <div style={{ fontSize: 13, fontWeight: 'bold', color: '#1e293b' }}>{activeT >= 0 ? activeT : '—'}</div>
+              <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>Transactions</div>
+              <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--surface2)' }}>{activeT >= 0 ? activeT : '—'}</div>
             </div>
             <div>
-              <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>Day</div>
-              <div style={{ fontSize: 13, fontWeight: 'bold', color: '#1e293b' }}>{activeI >= 0 ? activeI : '—'}</div>
+              <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>Day</div>
+              <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--surface2)' }}>{activeI >= 0 ? activeI : '—'}</div>
             </div>
             <div>
-              <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>max_so_far</div>
+              <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>max_so_far</div>
               <div style={{ fontSize: 13, fontWeight: 'bold', color: '#a36907' }}>{msf == null ? '—' : msf}</div>
             </div>
           </div>

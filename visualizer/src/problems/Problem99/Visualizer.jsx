@@ -272,7 +272,7 @@ function VisualizationPanel({ step }) {
               <line
                 key={`${fromId}-${toId}`}
                 x1={from.x} y1={from.y} x2={to.x} y2={to.y}
-                stroke={isSwapEdge ? '#f9e2af' : '#45475a'}
+                stroke={isSwapEdge ? '#f9e2af' : 'var(--code-line)'}
                 strokeWidth={isSwapEdge ? 2.5 : 1.5}
               />
             )
@@ -290,11 +290,11 @@ function VisualizationPanel({ step }) {
           const isSwapNode = isFirst || isSecond
 
           let bg = '#313244'
-          let border = '#45475a'
-          let color = '#cdd6f4'
-          if (isSwapNode) { bg = swapped ? '#166534' : '#7f1d1d'; border = swapped ? '#22c55e' : '#f38ba8'; color = '#ffffff' }
-          if (isPrev) { bg = '#334155'; border = '#89dceb' }
-          if (isCurrent) { bg = '#1e3a8a'; border = '#89b4fa'; color = '#ffffff' }
+          let border = 'var(--code-line)'
+          let color = 'var(--code-text)'
+          if (isSwapNode) { bg = swapped ? '#166534' : '#7f1d1d'; border = swapped ? '#22c55e' : '#f38ba8'; color = 'var(--surface)' }
+          if (isPrev) { bg = 'var(--border)'; border = '#89dceb' }
+          if (isCurrent) { bg = '#1e3a8a'; border = '#89b4fa'; color = 'var(--surface)' }
 
           return (
             <motion.div

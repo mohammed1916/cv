@@ -208,7 +208,7 @@ function MatrixVisualization({ step, n, knowsMatrix }) {
                 justifyContent: 'center',
                 fontSize: 10,
                 fontWeight: 600,
-                color: '#64748b',
+                color: 'var(--text-muted)',
               }}
             >
               {i}
@@ -220,8 +220,8 @@ function MatrixVisualization({ step, n, knowsMatrix }) {
             <div key={`row-${i}`} style={{ display: 'flex', gap: 2 }}>
               {Array.from({ length: n }).map((_, j) => {
                 const value = knowsMatrix[i] && knowsMatrix[i][j]
-                let bgColor = '#1e293b'
-                let borderColor = '#475569'
+                let bgColor = 'var(--surface2)'
+                let borderColor = 'var(--text-muted)'
 
                 if (step.matrixState === 'checking') {
                   if ((i === step.checkA && j === step.checkB) || (i === step.checkB && j === step.checkA)) {
@@ -289,11 +289,11 @@ function VisualizationPanel({ step, applyExample, examples, n, knowsMatrix }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -307,13 +307,13 @@ function VisualizationPanel({ step, applyExample, examples, n, knowsMatrix }) {
 
       {step?.left !== undefined && step?.right !== undefined && (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-          <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #60a5fa' }}>
+          <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #60a5fa' }}>
             <div style={{ fontSize: 11, fontWeight: 600, color: '#0870f0', marginBottom: 6 }}>Left Pointer</div>
             <div style={{ fontSize: 16, color: '#0870f0', fontFamily: 'monospace', fontWeight: 700 }}>
               {step.left}
             </div>
           </div>
-          <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f59e0b' }}>
+          <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #f59e0b' }}>
             <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', marginBottom: 6 }}>Right Pointer</div>
             <div style={{ fontSize: 16, color: '#a36907', fontFamily: 'monospace', fontWeight: 700 }}>
               {step.right}
@@ -323,7 +323,7 @@ function VisualizationPanel({ step, applyExample, examples, n, knowsMatrix }) {
       )}
 
       {step?.candidate !== undefined && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #22c55e' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #22c55e' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#178740', marginBottom: 6 }}>Candidate</div>
           <div style={{ fontSize: 16, color: '#178740', fontFamily: 'monospace', fontWeight: 700 }}>
             {step.candidate}
@@ -332,8 +332,8 @@ function VisualizationPanel({ step, applyExample, examples, n, knowsMatrix }) {
       )}
 
       {step?.checkPerson !== undefined && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #64748b' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Verification Check</div>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Verification Check</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 12, color: '#5577a4' }}>
             <div>
               Candidate → {step.checkPerson}:{' '}
@@ -355,7 +355,7 @@ function VisualizationPanel({ step, applyExample, examples, n, knowsMatrix }) {
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid',
             borderColor: step.result >= 0 ? '#22c55e' : '#f87171',
@@ -365,7 +365,7 @@ function VisualizationPanel({ step, applyExample, examples, n, knowsMatrix }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Result</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Result</div>
           <div
             style={{
               fontSize: 18,
@@ -464,9 +464,9 @@ export default function FindCelebrityVisualizer() {
                     width: '100%',
                     padding: '8px',
                     borderRadius: 4,
-                    border: '1px solid #475569',
-                    backgroundColor: '#1e293b',
-                    color: '#e2e8f0',
+                    border: '1px solid var(--text-muted)',
+                    backgroundColor: 'var(--surface2)',
+                    color: 'var(--text)',
                     fontFamily: 'monospace',
                     fontSize: 12,
                   }}
@@ -486,9 +486,9 @@ export default function FindCelebrityVisualizer() {
                   height: 80,
                   padding: '8px',
                   borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid #475569',
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                   fontSize: 12,
                   resize: 'vertical',

@@ -57,7 +57,7 @@
 
 .llc-chip:hover,
 .llc-chip.active {
-    background: #334155;
+    background: var(--border);
     color: var(--text);
     border-color: var(--primary);
 }
@@ -80,8 +80,8 @@
 .llc-select {
     padding: 6px 10px;
     border-radius: 7px;
-    border: 1px solid #334155;
-    background: #0f172a;
+    border: 1px solid var(--border);
+    background: var(--code-bg);
     color: var(--text);
     font-size: 13px;
 }
@@ -125,8 +125,8 @@
     font-size: 16px;
     font-weight: 700;
     font-family: monospace;
-    background: #1e293b;
-    border: 2px solid #334155;
+    background: var(--surface2);
+    border: 2px solid var(--border);
     color: var(--text);
     transition: background 0.2s, border-color 0.2s;
     position: relative;

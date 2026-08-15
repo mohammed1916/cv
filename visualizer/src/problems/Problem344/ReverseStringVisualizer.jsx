@@ -45,7 +45,7 @@ function RopeFlipVisualization({ arr, step, ex }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24, padding: 16 }}>
       {/* Rope visualization */}
       <div style={{ position: 'relative', height: 160 }}>
-        <svg width="100%" height="160" viewBox="0 0 400 160" style={{ border: '1px solid #e2e8f0', borderRadius: 8 }}>
+        <svg width="100%" height="160" viewBox="0 0 400 160" style={{ border: '1px solid var(--text)', borderRadius: 8 }}>
           {/* Rope curve showing the flip */}
           {arr.map((ch, idx) => {
             const isL = idx === l && !step?.done;
@@ -61,7 +61,7 @@ function RopeFlipVisualization({ arr, step, ex }) {
                   cy={y}
                   r={isL || isR ? 12 : 8}
                   fill={isL ? '#3b82f6' : isR ? '#ef4444' : '#dbeafe'}
-                  stroke={isL ? '#0ea5e9' : isR ? '#dc2626' : '#cbd5e1'}
+                  stroke={isL ? '#0ea5e9' : isR ? '#dc2626' : 'var(--border)'}
                   strokeWidth={isL || isR ? '2' : '1'}
                   animate={{ scale: isL || isR ? 1.3 : 1 }}
                   transition={{ duration: 0.2 }}
@@ -80,7 +80,7 @@ function RopeFlipVisualization({ arr, step, ex }) {
                 </text>
 
                 {/* Index label */}
-                <text x={x} y={y + 28} textAnchor="middle" fontSize="10" fill="#64748b">
+                <text x={x} y={y + 28} textAnchor="middle" fontSize="10" fill="var(--text-muted)">
                   {idx}
                 </text>
               </motion.g>
@@ -90,8 +90,8 @@ function RopeFlipVisualization({ arr, step, ex }) {
       </div>
 
       {/* Current state */}
-      <div style={{ padding: 12, backgroundColor: '#f8fafc', borderRadius: 6, border: '2px solid #0ea5e9' }}>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Reversed String</div>
+      <div style={{ padding: 12, backgroundColor: 'var(--surface)', borderRadius: 6, border: '2px solid #0ea5e9' }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Reversed String</div>
         <div style={{ fontSize: 24, fontFamily: 'monospace', fontWeight: 'bold', color: '#0b7db0', letterSpacing: 4 }}>
           {arr.join("")}
         </div>
@@ -122,7 +122,7 @@ function VisualizationPanel({ arr, step, ex, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -131,10 +131,10 @@ function VisualizationPanel({ arr, step, ex, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9'
+                backgroundColor: 'var(--surface2)'
               }}
             >
               {e.label}

@@ -218,11 +218,11 @@ export default function MultiplyStringsVisualizer() {
             style={{
               padding: '6px 12px',
               borderRadius: 4,
-              border: '1px solid #cbd5e1',
+              border: '1px solid var(--border)',
               cursor: 'pointer',
               fontSize: 12,
               backgroundColor:
-                num1 === e.num1 && num2 === e.num2 ? '#dbeafe' : '#f1f5f9',
+                num1 === e.num1 && num2 === e.num2 ? '#dbeafe' : 'var(--surface2)',
               fontWeight: num1 === e.num1 && num2 === e.num2 ? 600 : 400,
             }}
           >
@@ -243,7 +243,7 @@ export default function MultiplyStringsVisualizer() {
             <div style={{ fontWeight: 600, marginBottom: 8, color: '#1e40af' }}>Input Numbers:</div>
             <div style={{ display: 'flex', gap: 12 }}>
               <div>
-                <div style={{ fontSize: 10, color: '#64748b', marginBottom: 4 }}>num1</div>
+                <div style={{ fontSize: 10, color: 'var(--text-muted)', marginBottom: 4 }}>num1</div>
                 <div style={{ display: 'flex', gap: 4 }}>
                   {num1.split('').map((d, i) => (
                     <motion.div
@@ -271,7 +271,7 @@ export default function MultiplyStringsVisualizer() {
                 </div>
               </div>
               <div>
-                <div style={{ fontSize: 10, color: '#64748b', marginBottom: 4 }}>num2</div>
+                <div style={{ fontSize: 10, color: 'var(--text-muted)', marginBottom: 4 }}>num2</div>
                 <div style={{ display: 'flex', gap: 4 }}>
                   {num2.split('').map((d, i) => (
                     <motion.div

@@ -86,7 +86,7 @@ function VisualizationPanel({ nums, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -95,10 +95,10 @@ function VisualizationPanel({ nums, step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9'
+                backgroundColor: 'var(--surface2)'
               }}
             >
               {e.label}
@@ -108,7 +108,7 @@ function VisualizationPanel({ nums, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
           Matchsticks: {JSON.stringify(nums)}
         </div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -122,9 +122,9 @@ function VisualizationPanel({ nums, step, applyEx }) {
                 fontFamily: 'monospace',
                 fontSize: 14,
                 fontWeight: 600,
-                backgroundColor: step && idx === step.index ? '#fef08a' : '#f1f5f9',
-                borderColor: step && idx === step.index ? '#eab308' : '#cbd5e1',
-                color: step && idx === step.index ? '#854d0e' : '#334155'
+                backgroundColor: step && idx === step.index ? '#fef08a' : 'var(--surface2)',
+                borderColor: step && idx === step.index ? '#eab308' : 'var(--border)',
+                color: step && idx === step.index ? '#854d0e' : 'var(--border)'
               }}
               animate={{ scale: step && idx === step.index ? 1.15 : 1 }}
             >
@@ -135,7 +135,7 @@ function VisualizationPanel({ nums, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Square Sides</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Square Sides</div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
           {[0, 1, 2, 3].map((sideIdx) => (
             <motion.div

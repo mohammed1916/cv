@@ -20,10 +20,10 @@
 
 .rem-panel-head {
   padding: 12px 16px;
-  border-bottom: 1px solid var(--border-color, #e2e8f0);
+  border-bottom: 1px solid var(--border-color, var(--text));
   font-weight: 600;
   font-size: 14px;
-  color: var(--text-primary, #1e293b);
+  color: var(--text-primary, var(--surface2));
   flex-shrink: 0;
 }
 
@@ -31,7 +31,7 @@
   flex: 1;
   overflow: auto;
   padding: 16px;
-  color: var(--text-primary, #1e293b);
+  color: var(--text-primary, var(--surface2));
 }
 
 /* Variables panel styling */
@@ -40,9 +40,9 @@
   flex-direction: column;
   gap: 4px;
   padding: 12px;
-  background: var(--card-bg, #f8fafc);
+  background: var(--card-bg, var(--surface));
   border-radius: 6px;
-  border-left: 3px solid var(--border-accent, #cbd5e1);
+  border-left: 3px solid var(--border-accent, var(--border));
 }
 
 .rem-var-card.highlight {
@@ -53,7 +53,7 @@
 .rem-var-name {
   font-size: 12px;
   font-weight: 600;
-  color: var(--text-secondary, #64748b);
+  color: var(--text-secondary, var(--text-muted));
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -61,13 +61,13 @@
 .rem-var-val {
   font-size: 16px;
   font-weight: 700;
-  color: var(--text-primary, #1e293b);
+  color: var(--text-primary, var(--surface2));
   font-family: 'Courier New', monospace;
 }
 
 .rem-var-desc {
   font-size: 12px;
-  color: var(--text-muted, #94a3b8);
+  color: var(--text-muted, var(--text-muted));
 }
 
 .rem-result-card {
@@ -76,7 +76,7 @@
   gap: 4px;
   padding: 12px;
   border-radius: 6px;
-  border: 2px solid var(--border-color, #e2e8f0);
+  border: 2px solid var(--border-color, var(--text));
 }
 
 .rem-result-card.match {
@@ -92,7 +92,7 @@
 .rem-result-label {
   font-size: 12px;
   font-weight: 600;
-  color: var(--text-secondary, #64748b);
+  color: var(--text-secondary, var(--text-muted));
   text-transform: uppercase;
 }
 
@@ -105,10 +105,10 @@
 /* Visualization panel styling */
 .rem-example-btn {
   padding: 8px 12px;
-  border: 1px solid var(--border-color, #cbd5e1);
+  border: 1px solid var(--border-color, var(--border));
   border-radius: 4px;
-  background: var(--button-bg, #f1f5f9);
-  color: var(--text-primary, #1e293b);
+  background: var(--button-bg, var(--surface2));
+  color: var(--text-primary, var(--surface2));
   font-size: 12px;
   cursor: pointer;
   transition: all 0.2s;
@@ -116,18 +116,18 @@
 }
 
 .rem-example-btn:hover {
-  background: var(--button-hover-bg, #e2e8f0);
-  border-color: var(--border-accent, #94a3b8);
+  background: var(--button-hover-bg, var(--text));
+  border-color: var(--border-accent, var(--text-muted));
 }
 
 .rem-input {
   padding: 8px 12px;
-  border: 1px solid var(--border-color, #cbd5e1);
+  border: 1px solid var(--border-color, var(--border));
   border-radius: 4px;
   font-size: 13px;
   font-family: 'Courier New', monospace;
   background: var(--input-bg, #fff);
-  color: var(--text-primary, #1e293b);
+  color: var(--text-primary, var(--surface2));
 }
 
 .rem-input:focus {
@@ -152,7 +152,7 @@
 .rem-string-label {
   font-size: 13px;
   font-weight: 600;
-  color: var(--text-secondary, #64748b);
+  color: var(--text-secondary, var(--text-muted));
   min-width: 80px;
 }
 
@@ -169,13 +169,13 @@
   justify-content: center;
   width: 32px;
   height: 32px;
-  border: 2px solid var(--border-color, #cbd5e1);
+  border: 2px solid var(--border-color, var(--border));
   border-radius: 4px;
   font-weight: 600;
   font-size: 13px;
   font-family: 'Courier New', monospace;
   background: var(--char-bg, #fff);
-  color: var(--text-primary, #1e293b);
+  color: var(--text-primary, var(--surface2));
   transition: all 0.2s;
 }
 
@@ -186,13 +186,13 @@
 }
 
 .rem-char-box.processed {
-  background: var(--processed-bg, #f1f5f9);
-  color: var(--processed-text, #94a3b8);
+  background: var(--processed-bg, var(--surface2));
+  color: var(--processed-text, var(--text-muted));
 }
 
 .rem-empty-label {
   font-size: 12px;
-  color: var(--text-muted, #cbd5e1);
+  color: var(--text-muted, var(--border));
   font-style: italic;
 }
 
@@ -205,7 +205,7 @@
 .rem-section-title {
   font-size: 13px;
   font-weight: 600;
-  color: var(--text-secondary, #64748b);
+  color: var(--text-secondary, var(--text-muted));
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -219,7 +219,7 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  border: 1px solid var(--border-color, #cbd5e1);
+  border: 1px solid var(--border-color, var(--border));
   border-radius: 6px;
   overflow: hidden;
   background: var(--table-bg, #fff);
@@ -234,7 +234,7 @@
 .rem-dp-row {
   display: flex;
   gap: 0;
-  border-bottom: 1px solid var(--border-color, #cbd5e1);
+  border-bottom: 1px solid var(--border-color, var(--border));
 }
 
 .rem-dp-row:last-child {
@@ -248,11 +248,11 @@
   width: 40px;
   height: 40px;
   min-width: 40px;
-  border-right: 1px solid var(--border-color, #cbd5e1);
+  border-right: 1px solid var(--border-color, var(--border));
   font-size: 12px;
   font-weight: 600;
   font-family: 'Courier New', monospace;
-  color: var(--text-primary, #1e293b);
+  color: var(--text-primary, var(--surface2));
   background: var(--cell-bg, #fff);
   transition: all 0.2s;
 }
@@ -262,13 +262,13 @@
 }
 
 .rem-dp-cell.header {
-  background: var(--header-bg, #f1f5f9);
-  color: var(--header-text, #475569);
+  background: var(--header-bg, var(--surface2));
+  color: var(--header-text, var(--text-muted));
   font-weight: 700;
 }
 
 .rem-dp-cell.header.empty {
-  background: var(--empty-header-bg, #e2e8f0);
+  background: var(--empty-header-bg, var(--text));
 }
 
 .rem-dp-cell.true {
@@ -295,11 +295,11 @@
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   :root[data-theme="dark"] .rem-panel {
-    background: #1e293b;
+    background: var(--surface2);
   }
 
   :root[data-theme="dark"] .rem-panel-head {
-    border-bottom-color: #334155;
+    border-bottom-color: var(--border);
     color: #4879a9;
   }
 
@@ -308,8 +308,8 @@
   }
 
   :root[data-theme="dark"] .rem-var-card {
-    background: #0f172a;
-    border-left-color: #475569;
+    background: var(--code-bg);
+    border-left-color: var(--text-muted);
   }
 
   :root[data-theme="dark"] .rem-var-card.highlight {
@@ -326,11 +326,11 @@
   }
 
   :root[data-theme="dark"] .rem-var-desc {
-    color: #64748b;
+    color: var(--text-muted);
   }
 
   :root[data-theme="dark"] .rem-result-card {
-    border-color: #475569;
+    border-color: var(--text-muted);
   }
 
   :root[data-theme="dark"] .rem-result-card.match {
@@ -344,20 +344,20 @@
   }
 
   :root[data-theme="dark"] .rem-example-btn {
-    background: #334155;
-    color: #f1f5f9;
-    border-color: #475569;
+    background: var(--border);
+    color: var(--surface2);
+    border-color: var(--text-muted);
   }
 
   :root[data-theme="dark"] .rem-example-btn:hover {
-    background: #475569;
-    border-color: #64748b;
+    background: var(--text-muted);
+    border-color: var(--text-muted);
   }
 
   :root[data-theme="dark"] .rem-input {
-    background: #0f172a;
-    color: #f1f5f9;
-    border-color: #334155;
+    background: var(--code-bg);
+    color: var(--surface2);
+    border-color: var(--border);
   }
 
   :root[data-theme="dark"] .rem-input:focus {
@@ -370,9 +370,9 @@
   }
 
   :root[data-theme="dark"] .rem-char-box {
-    background: #0f172a;
-    color: #f1f5f9;
-    border-color: #334155;
+    background: var(--code-bg);
+    color: var(--surface2);
+    border-color: var(--border);
   }
 
   :root[data-theme="dark"] .rem-char-box.active {
@@ -382,7 +382,7 @@
   }
 
   :root[data-theme="dark"] .rem-char-box.processed {
-    background: #0f172a;
+    background: var(--code-bg);
     color: #72839a;
   }
 
@@ -391,27 +391,27 @@
   }
 
   :root[data-theme="dark"] .rem-dp-table {
-    background: #0f172a;
-    border-color: #334155;
+    background: var(--code-bg);
+    border-color: var(--border);
   }
 
   :root[data-theme="dark"] .rem-dp-row {
-    border-bottom-color: #334155;
+    border-bottom-color: var(--border);
   }
 
   :root[data-theme="dark"] .rem-dp-cell {
-    background: #0f172a;
-    color: #e2e8f0;
-    border-right-color: #334155;
+    background: var(--code-bg);
+    color: var(--text);
+    border-right-color: var(--border);
   }
 
   :root[data-theme="dark"] .rem-dp-cell.header {
-    background: #1e293b;
-    color: #cbd5e1;
+    background: var(--surface2);
+    color: var(--border);
   }
 
   :root[data-theme="dark"] .rem-dp-cell.header.empty {
-    background: #334155;
+    background: var(--border);
   }
 
   :root[data-theme="dark"] .rem-dp-cell.true {

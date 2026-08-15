@@ -204,11 +204,11 @@ function VisualizationPanel({ step, positions, nodes, applyExample, examples }) 
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -224,13 +224,13 @@ function VisualizationPanel({ step, positions, nodes, applyExample, examples }) 
             const data = step.nodeData.get(step.activeId)
             return (
               <>
-                <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #38bdf8' }}>
+                <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #38bdf8' }}>
                   <div style={{ fontSize: 11, fontWeight: 600, color: '#067db1', marginBottom: 6 }}>Left Subtree Sum</div>
                   <div style={{ fontSize: 16, color: '#067db1', fontFamily: 'monospace', fontWeight: 700 }}>
                     {data.leftSum}
                   </div>
                 </div>
-                <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f59e0b' }}>
+                <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #f59e0b' }}>
                   <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', marginBottom: 6 }}>Right Subtree Sum</div>
                   <div style={{ fontSize: 16, color: '#a36907', fontFamily: 'monospace', fontWeight: 700 }}>
                     {data.rightSum}
@@ -243,7 +243,7 @@ function VisualizationPanel({ step, positions, nodes, applyExample, examples }) 
       )}
 
       {step?.activeId !== undefined && step?.nodeData?.has(step.activeId) && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #a78bfa' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Node Tilt</div>
           {(() => {
             const data = step.nodeData.get(step.activeId)
@@ -259,7 +259,7 @@ function VisualizationPanel({ step, positions, nodes, applyExample, examples }) 
       <motion.div
         style={{
           padding: 16,
-          backgroundColor: '#1e293b',
+          backgroundColor: 'var(--surface2)',
           borderRadius: 6,
           border: '2px solid #a78bfa',
           textAlign: 'center',
@@ -268,7 +268,7 @@ function VisualizationPanel({ step, positions, nodes, applyExample, examples }) 
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.3 }}
       >
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Total Tilt</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Total Tilt</div>
         <div
           style={{
             fontSize: 20,
@@ -360,9 +360,9 @@ export default function BinaryTreeTiltVisualizer() {
                   height: 60,
                   padding: '8px',
                   borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid #475569',
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                   fontSize: 11,
                   resize: 'vertical',
@@ -371,7 +371,7 @@ export default function BinaryTreeTiltVisualizer() {
               {inputError && <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
             </div>
 
-            <div style={{ position: 'relative', width: CANVAS_W, height: CANVAS_H, margin: '0 auto', backgroundColor: '#0f172a', borderRadius: 6, border: '1px solid #1e293b' }}>
+            <div style={{ position: 'relative', width: CANVAS_W, height: CANVAS_H, margin: '0 auto', backgroundColor: 'var(--code-bg)', borderRadius: 6, border: '1px solid var(--surface2)' }}>
               <TreeSVG edges={edges} positions={positions} canvasWidth={CANVAS_W} canvasHeight={CANVAS_H} />
               {nodes.map((node) => {
                 const pos = positions.get(node.id)
@@ -395,9 +395,9 @@ export default function BinaryTreeTiltVisualizer() {
                       fontSize: 13,
                       cursor: 'pointer',
                       userSelect: 'none',
-                      backgroundColor: isActive ? '#a78bfa' : nodeInfo ? '#6366f1' : '#1e293b',
-                      color: isActive || nodeInfo ? '#000' : '#e2e8f0',
-                      border: isActive ? '3px solid #a78bfa' : '2px solid #475569',
+                      backgroundColor: isActive ? '#a78bfa' : nodeInfo ? '#6366f1' : 'var(--surface2)',
+                      color: isActive || nodeInfo ? '#000' : 'var(--text)',
+                      border: isActive ? '3px solid #a78bfa' : '2px solid var(--text-muted)',
                       boxShadow: isActive ? '0 0 12px rgba(167, 139, 250, 0.5)' : 'none',
                     }}
                     animate={{
@@ -416,7 +416,7 @@ export default function BinaryTreeTiltVisualizer() {
                           fontSize: 10,
                           fontWeight: 600,
                           color: '#a78bfa',
-                          backgroundColor: '#0f172a',
+                          backgroundColor: 'var(--code-bg)',
                           padding: '2px 6px',
                           borderRadius: 3,
                           border: '1px solid #a78bfa',

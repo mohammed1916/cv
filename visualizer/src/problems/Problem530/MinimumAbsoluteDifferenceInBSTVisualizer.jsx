@@ -143,7 +143,7 @@ function VisualizationPanel({ step }) {
 
       {/* Inorder Sequence */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Inorder Sequence</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Inorder Sequence</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {step?.inorderSequence?.map((val, idx) => {
             const isLast = idx === step.inorderSequence.length - 1
@@ -158,9 +158,9 @@ function VisualizationPanel({ step }) {
                   fontFamily: 'monospace',
                   fontSize: 13,
                   fontWeight: 600,
-                  backgroundColor: isPrev ? '#dbeafe' : '#f1f5f9',
-                  borderColor: isPrev ? '#0284c7' : '#cbd5e1',
-                  color: isPrev ? '#0c4a6e' : '#334155'
+                  backgroundColor: isPrev ? '#dbeafe' : 'var(--surface2)',
+                  borderColor: isPrev ? '#0284c7' : 'var(--border)',
+                  color: isPrev ? '#0c4a6e' : 'var(--border)'
                 }}
                 animate={{ scale: isPrev ? 1.15 : 1 }}
               >

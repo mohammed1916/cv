@@ -176,11 +176,11 @@ function VisualizationPanel({ matrix, step, applyExample, examples }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -221,9 +221,9 @@ function VisualizationPanel({ matrix, step, applyExample, examples }) {
                           : isInQueue
                             ? '#38bdf8'
                             : dist === Infinity
-                              ? '#475569'
-                              : '#334155',
-                      borderColor: isCurrent ? '#fbbf24' : isInQueue ? '#0ea5e9' : '#64748b',
+                              ? 'var(--text-muted)'
+                              : 'var(--border)',
+                      borderColor: isCurrent ? '#fbbf24' : isInQueue ? '#0ea5e9' : 'var(--text-muted)',
                       color: '#5577a4',
                     }}
                     animate={{ scale: isCurrent ? 1.2 : 1 }}
@@ -238,13 +238,13 @@ function VisualizationPanel({ matrix, step, applyExample, examples }) {
         </div>
       </div>
 
-      <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
+      <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
         <div style={{ fontSize: 11, fontWeight: 600, color: '#627794', marginBottom: 6 }}>Status</div>
         <div style={{ fontSize: 12, color: '#5577a4' }}>
           {step?.message || 'Initialize algorithm...'}
         </div>
         {step?.queueSize !== undefined && (
-          <div style={{ fontSize: 11, color: '#64748b', marginTop: 6 }}>
+          <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 6 }}>
             Queue size: {step.queueSize} | Processed: {step.processed}
           </div>
         )}
@@ -332,9 +332,9 @@ export default function ZeroOneMatrixVisualizer() {
                   height: 60,
                   padding: '8px',
                   borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid #475569',
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                   fontSize: 12,
                   resize: 'vertical',

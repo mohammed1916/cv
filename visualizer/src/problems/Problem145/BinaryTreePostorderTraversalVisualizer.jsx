@@ -219,7 +219,7 @@ function TreeVisualization({ root, currentNode, processedIds }) {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <svg width={width} height={height} style={{ border: '1px solid #334155' }}>
+      <svg width={width} height={height} style={{ border: '1px solid var(--border)' }}>
         {edges.map((edge, idx) => (
           <line
             key={idx}
@@ -227,7 +227,7 @@ function TreeVisualization({ root, currentNode, processedIds }) {
             y1={edge.y1}
             x2={edge.x2}
             y2={edge.y2}
-            stroke="#64748b"
+            stroke="var(--text-muted)"
             strokeWidth={2}
             markerEnd="url(#arrowhead)"
           />
@@ -243,8 +243,8 @@ function TreeVisualization({ root, currentNode, processedIds }) {
                 cx={node.x}
                 cy={node.y}
                 r={24}
-                fill={isCurrent ? '#fbbf24' : isProcessed ? '#f472b6' : '#e2e8f0'}
-                stroke={isCurrent ? '#f59e0b' : isProcessed ? '#ec4899' : '#94a3b8'}
+                fill={isCurrent ? '#fbbf24' : isProcessed ? '#f472b6' : 'var(--text)'}
+                stroke={isCurrent ? '#f59e0b' : isProcessed ? '#ec4899' : 'var(--text-muted)'}
                 strokeWidth={isCurrent ? 3 : 2}
                 animate={{ scale: isCurrent ? 1.15 : 1 }}
               />
@@ -255,7 +255,7 @@ function TreeVisualization({ root, currentNode, processedIds }) {
                 dy="0.3em"
                 fontSize={14}
                 fontWeight={600}
-                fill="#0f172a"
+                fill="var(--code-bg)"
               >
                 {node.val}
               </text>
@@ -272,7 +272,7 @@ function TreeVisualization({ root, currentNode, processedIds }) {
             refY="3"
             orient="auto"
           >
-            <polygon points="0 0, 10 3, 0 6" fill="#64748b" />
+            <polygon points="0 0, 10 3, 0 6" fill="var(--text-muted)" />
           </marker>
         </defs>
       </svg>

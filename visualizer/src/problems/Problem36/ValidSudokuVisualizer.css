@@ -17,8 +17,8 @@
 
 .vs-chip {
     background: #313244;
-    color: #cdd6f4;
-    border: 2px solid #45475a;
+    color: var(--code-text);
+    border: 2px solid var(--code-line);
     border-radius: 6px;
     padding: 4px 12px;
     font-size: 12px;
@@ -32,7 +32,7 @@
 }
 
 .vs-panel {
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 10px;
     padding: 12px 14px;
@@ -43,7 +43,7 @@
 .vs-panel-label {
     font-size: 11px;
     font-weight: 700;
-    color: #6c7086;
+    color: var(--code-dim);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-bottom: 10px;
@@ -74,7 +74,7 @@
 }
 
 .vs-cell.box-odd {
-    background: #1e1e2e;
+    background: var(--code-bg);
 }
 
 .vs-cell.current {
@@ -109,11 +109,11 @@
 
 .vs-status {
     padding: 8px 12px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 8px;
     font-size: 13px;
-    color: #a6adc8;
+    color: var(--code-dim);
     min-height: 36px;
     height: 100%;
     overflow-y: auto;

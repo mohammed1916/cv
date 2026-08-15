@@ -241,7 +241,7 @@ export default function StringToIntegerAtoiVisualizer() {
             </div>
 
             <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center' }}>
-              <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace' }}>s=</span>
+              <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>s=</span>
               <input
                 value={sInput}
                 onChange={(e) => { setSInput(e.target.value); handleReset() }}
@@ -280,7 +280,7 @@ export default function StringToIntegerAtoiVisualizer() {
                       {isI && <div className="atoi-ptr">i</div>}
                     </div>
                     <div className="atoi-type-label">
-                      {isSpace && <span style={{ color: '#64748b' }}>space</span>}
+                      {isSpace && <span style={{ color: 'var(--text-muted)' }}>space</span>}
                       {isSign && <span style={{ color: '#9e42f6' }}>sign</span>}
                       {isDigit && <span style={{ color: '#178740' }}>digit</span>}
                       {!isSpace && !isSign && !isDigit && <span style={{ color: '#e91414' }}>other</span>}
@@ -288,7 +288,7 @@ export default function StringToIntegerAtoiVisualizer() {
                   </div>
                 )
               })}
-              {displayStr === '' && <span style={{ color: '#64748b', fontStyle: 'italic' }}>Empty string</span>}
+              {displayStr === '' && <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>Empty string</span>}
             </div>
 
             {step?.phase === 'calc_res' && (

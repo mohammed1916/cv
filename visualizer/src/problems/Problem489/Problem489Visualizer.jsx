@@ -141,7 +141,7 @@ function VisualizationPanel({ room, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Room Layout</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Room Layout</div>
         <div style={{
           display: 'inline-grid',
           gridTemplateColumns: `repeat(${room[0].length}, 1fr)`,
@@ -159,8 +159,8 @@ function VisualizationPanel({ room, step, applyEx }) {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  backgroundColor: cell === 0 ? '#000' : isCleaned ? '#d1fae5' : '#f1f5f9',
-                  border: '1px solid #cbd5e1',
+                  backgroundColor: cell === 0 ? '#000' : isCleaned ? '#d1fae5' : 'var(--surface2)',
+                  border: '1px solid var(--border)',
                   borderRadius: 4,
                   fontWeight: 700,
                   fontSize: 18,

@@ -31,7 +31,7 @@ export default function GraphCanvas3D({
     const isVisited = visitedSet.has(nodeId);
 
     if (isClone) {
-      if (!isVisited) return { bg: "#1e1e2e", border: "#313244", text: "#45475a" };
+      if (!isVisited) return { bg: "var(--code-bg)", border: "#313244", text: "var(--code-line)" };
       if (isActive)
         return {
           bg: "#0d2a1a",
@@ -58,7 +58,7 @@ export default function GraphCanvas3D({
           border: "#cba6f7",
           text: "#cba6f7",
         };
-      return { bg: "#313244", border: "#45475a", text: "#a6adc8" };
+      return { bg: "#313244", border: "var(--code-line)", text: "var(--code-dim)" };
     }
   };
 
@@ -110,7 +110,7 @@ export default function GraphCanvas3D({
                 <linearGradient id={gradId} x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop
                     offset="0%"
-                    stopColor={isActive ? "#a6e3a1" : "#45475a"}
+                    stopColor={isActive ? "#a6e3a1" : "var(--code-line)"}
                     stopOpacity={isActive ? "0.9" : "0.5"}
                   />
                   <stop

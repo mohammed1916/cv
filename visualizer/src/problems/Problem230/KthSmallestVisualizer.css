@@ -13,7 +13,7 @@
 }
 
 .ks-panel {
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 10px;
     overflow: hidden;
@@ -30,7 +30,7 @@
     background: #181825;
     font-size: 13px;
     font-weight: 600;
-    color: #cdd6f4;
+    color: var(--code-text);
 }
 
 .ks-body {
@@ -43,7 +43,7 @@
 .ks-sub-head {
     font-size: 11px;
     font-weight: 700;
-    color: #6c7086;
+    color: var(--code-dim);
     text-transform: uppercase;
     letter-spacing: 0.08em;
 }
@@ -56,7 +56,7 @@
 
 .ks-chip {
     background: #313244;
-    color: #cdd6f4;
+    color: var(--code-text);
     border: none;
     border-radius: 6px;
     padding: 4px 10px;
@@ -65,7 +65,7 @@
 }
 
 .ks-chip:hover {
-    background: #45475a;
+    background: var(--code-line);
 }
 
 .ks-inputs {
@@ -77,16 +77,16 @@
 
 .ks-inputs label {
     font-size: 12px;
-    color: #6c7086;
+    color: var(--code-dim);
     display: flex;
     align-items: center;
     gap: 6px;
 }
 
 .ks-input {
-    background: #11111b;
-    color: #cdd6f4;
-    border: 1px solid #45475a;
+    background: var(--code-surface);
+    color: var(--code-text);
+    border: 1px solid var(--code-line);
     border-radius: 6px;
     padding: 5px 8px;
     font-size: 13px;
@@ -105,7 +105,7 @@
     overflow: hidden;
     border: 1px solid #313244;
     border-radius: 8px;
-    background: #11111b;
+    background: var(--code-surface);
     flex-shrink: 0;
 }
 
@@ -114,13 +114,13 @@
     height: 44px;
     border-radius: 50%;
     background: #313244;
-    border: 2px solid #45475a;
+    border: 2px solid var(--code-line);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 15px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: var(--code-text);
 }
 
 .ks-node.active {
@@ -145,7 +145,7 @@
     top: -6px;
     right: -6px;
     background: #89b4fa;
-    color: #11111b;
+    color: var(--code-surface);
     border-radius: 10px;
     font-size: 10px;
     font-weight: 800;
@@ -162,13 +162,13 @@
     justify-content: space-between;
     align-items: center;
     padding: 8px 12px;
-    background: #11111b;
+    background: var(--code-surface);
     border-radius: 8px;
 }
 
 .ks-label {
     font-size: 11px;
-    color: #6c7086;
+    color: var(--code-dim);
     text-transform: uppercase;
     letter-spacing: 0.08em;
 }
@@ -195,7 +195,7 @@
     align-items: center;
     gap: 2px;
     background: #313244;
-    border: 1px solid #45475a;
+    border: 1px solid var(--code-line);
     border-radius: 6px;
     width: 34px;
     padding: 4px 0;
@@ -208,7 +208,7 @@
 
 .ks-inorder-idx {
     font-size: 9px;
-    color: #6c7086;
+    color: var(--code-dim);
 }
 
 .ks-inorder-cell span:last-child {
@@ -239,10 +239,10 @@
 
 .ks-status {
     padding: 8px 12px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 8px;
     font-size: 13px;
-    color: #a6adc8;
+    color: var(--code-dim);
     min-height: 36px;
 }

@@ -200,7 +200,7 @@ export default function DesignTicTacToeVisualizer() {
         </div>
       </div>
 
-      <div className="design-tic--tac--toe-status" style={{ margin: '16px', color: '#64748b' }}>
+      <div className="design-tic--tac--toe-status" style={{ margin: '16px', color: 'var(--text-muted)' }}>
         {step?.message ?? 'Press Play or Step to begin.'}
       </div>
 

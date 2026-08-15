@@ -8,7 +8,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './IncreasingTripletSubsequenceVisualizer.css'
 
-const COLOR_TEXT = '#e2e8f0'
+const COLOR_TEXT = 'var(--text)'
 const COLOR_FIRST = '#38bdf8'
 const COLOR_SECOND = '#a78bfa'
 const COLOR_FOUND = '#22c55e'
@@ -307,7 +307,7 @@ export default function IncreasingTripletSubsequenceVisualizer() {
                         >
                           {val}
                         </div>
-                        <div style={{ fontSize: 10, color: '#64748b', fontFamily: 'monospace' }}>{i}</div>
+                        <div style={{ fontSize: 10, color: 'var(--text-muted)', fontFamily: 'monospace' }}>{i}</div>
                       </div>
                     )
                   })}

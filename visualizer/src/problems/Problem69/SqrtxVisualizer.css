@@ -29,9 +29,9 @@
 
 .sqrtx-chip {
   padding: 0.5rem 1rem;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border);
   border-radius: 0.375rem;
-  background: #f8fafc;
+  background: var(--surface);
   cursor: pointer;
   font-size: 0.875rem;
   transition: all 0.2s;

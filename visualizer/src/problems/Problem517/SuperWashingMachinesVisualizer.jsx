@@ -113,7 +113,7 @@ function VisualizationPanel({ machines, step }) {
 
       {/* Machines */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
           Washing Machines (Target: {step?.target ?? Math.floor((step?.total || 0) / machines.length)})
         </div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -132,9 +132,9 @@ function VisualizationPanel({ machines, step }) {
                   fontWeight: 600,
                   textAlign: 'center',
                   minWidth: 80,
-                  backgroundColor: isActive ? '#a7f3d0' : isProcessed ? '#d1fae5' : '#f1f5f9',
-                  borderColor: isActive ? '#10b981' : isProcessed ? '#6ee7b7' : '#cbd5e1',
-                  color: isActive ? '#065f46' : isProcessed ? '#059669' : '#334155'
+                  backgroundColor: isActive ? '#a7f3d0' : isProcessed ? '#d1fae5' : 'var(--surface2)',
+                  borderColor: isActive ? '#10b981' : isProcessed ? '#6ee7b7' : 'var(--border)',
+                  color: isActive ? '#065f46' : isProcessed ? '#059669' : 'var(--border)'
                 }}
                 animate={{ scale: isActive ? 1.15 : 1 }}
               >
@@ -165,12 +165,12 @@ function VisualizationPanel({ machines, step }) {
             {step.balance.map((bal, idx) => (
               <div key={idx} style={{
                 padding: '6px 12px',
-                backgroundColor: bal > 0 ? '#d1fae5' : bal < 0 ? '#fecaca' : '#f1f5f9',
+                backgroundColor: bal > 0 ? '#d1fae5' : bal < 0 ? '#fecaca' : 'var(--surface2)',
                 borderRadius: 4,
-                border: `1px solid ${bal > 0 ? '#10b981' : bal < 0 ? '#ef4444' : '#cbd5e1'}`,
+                border: `1px solid ${bal > 0 ? '#10b981' : bal < 0 ? '#ef4444' : 'var(--border)'}`,
                 fontSize: 11,
                 fontWeight: 600,
-                color: bal > 0 ? '#065f46' : bal < 0 ? '#7f1d1d' : '#334155'
+                color: bal > 0 ? '#065f46' : bal < 0 ? '#7f1d1d' : 'var(--border)'
               }}>
                 M{idx}: {bal}
               </div>

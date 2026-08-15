@@ -323,11 +323,11 @@ function StringVisualization({ s1, s2, step }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
       {/* Input strings */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Input Strings</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Input Strings</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           {/* String s1 */}
           <div>
-            <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>s1 = "{s1}"</div>
+            <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>s1 = "{s1}"</div>
             <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
               {s1.split('').map((char, idx) => (
                 <motion.div
@@ -351,7 +351,7 @@ function StringVisualization({ s1, s2, step }) {
 
           {/* String s2 */}
           <div>
-            <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>s2 = "{s2}"</div>
+            <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>s2 = "{s2}"</div>
             <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
               {s2.split('').map((char, idx) => (
                 <motion.div
@@ -380,14 +380,14 @@ function StringVisualization({ s1, s2, step }) {
         <motion.div
           style={{
             padding: 12,
-            backgroundColor: '#f8fafc',
+            backgroundColor: 'var(--surface)',
             borderRadius: 6,
             border: '2px solid #8b5cf6'
           }}
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Current Check</div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Current Check</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
             <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#dbeafe', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#1e40af' }}>s1</div>
@@ -417,10 +417,10 @@ function StringVisualization({ s1, s2, step }) {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Split Attempt</div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Split Attempt</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
             <div>
-              <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>No Swap</div>
+              <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>No Swap</div>
               <div style={{ display: 'flex', gap: 4, fontSize: 12 }}>
                 <span style={{ padding: '4px 8px', backgroundColor: '#dbeafe', borderRadius: 3 }}>"
                   {step.s1.substring(0, step.splitIndex)}"
@@ -432,7 +432,7 @@ function StringVisualization({ s1, s2, step }) {
               </div>
             </div>
             <div>
-              <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>With Swap</div>
+              <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>With Swap</div>
               <div style={{ display: 'flex', gap: 4, fontSize: 12 }}>
                 <span style={{ padding: '4px 8px', backgroundColor: '#dbeafe', borderRadius: 3 }}>"
                   {step.s1.substring(0, step.splitIndex)}"
@@ -475,7 +475,7 @@ function VisualizationPanel({ s1, s2, step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -484,10 +484,10 @@ function VisualizationPanel({ s1, s2, step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9'
+                backgroundColor: 'var(--surface2)'
               }}
             >
               {e.label}
@@ -503,10 +503,10 @@ function VisualizationPanel({ s1, s2, step, applyEx }) {
         <motion.div
           style={{
             padding: 10,
-            backgroundColor: '#f1f5f9',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 4,
             fontSize: 12,
-            color: '#475569',
+            color: 'var(--text-muted)',
             fontFamily: 'monospace',
             minHeight: 40
           }}

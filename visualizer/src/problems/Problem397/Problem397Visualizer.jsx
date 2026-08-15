@@ -228,12 +228,12 @@ export default function Problem397Visualizer() {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid var(--border)',
                   cursor: 'pointer',
                   fontSize: 12,
-                  backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
+                  backgroundColor: exIdx === i ? '#dbeafe' : 'var(--surface2)',
                   fontWeight: exIdx === i ? 600 : 400,
-                  color: exIdx === i ? '#0c4a6e' : '#334155',
+                  color: exIdx === i ? '#0c4a6e' : 'var(--border)',
                 }}
               >
                 {e.label}
@@ -244,7 +244,7 @@ export default function Problem397Visualizer() {
           {step && (
             <>
               {/* Message */}
-              <div style={{ padding: 10, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 12, fontWeight: 500, color: '#1e293b' }}>
+              <div style={{ padding: 10, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 12, fontWeight: 500, color: 'var(--surface2)' }}>
                 {step.message}
               </div>
 
@@ -261,7 +261,7 @@ export default function Problem397Visualizer() {
                     border: step.phase === 'complete' ? '2px solid #10b981' : '2px solid #0284c7',
                   }}
                 >
-                  <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Current Number</div>
+                  <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>Current Number</div>
                   <div style={{ fontSize: 20, fontWeight: 700, color: step.phase === 'complete' ? '#047857' : '#0c4a6e' }}>
                     {step.current}
                   </div>
@@ -278,7 +278,7 @@ export default function Problem397Visualizer() {
                     border: '2px solid #f59e0b',
                   }}
                 >
-                  <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Steps Taken</div>
+                  <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>Steps Taken</div>
                   <div style={{ fontSize: 20, fontWeight: 700, color: '#92400e' }}>{step.stepCount}</div>
                 </motion.div>
               </div>
@@ -309,27 +309,27 @@ export default function Problem397Visualizer() {
                         <div style={{
                           flex: 1,
                           padding: 8,
-                          backgroundColor: step.chosen === '-1' ? '#dcfce7' : '#f1f5f9',
+                          backgroundColor: step.chosen === '-1' ? '#dcfce7' : 'var(--surface2)',
                           borderRadius: 4,
-                          border: step.chosen === '-1' ? '2px solid #10b981' : '1px solid #cbd5e1',
+                          border: step.chosen === '-1' ? '2px solid #10b981' : '1px solid var(--border)',
                           fontWeight: 600,
-                          color: step.chosen === '-1' ? '#047857' : '#334155',
+                          color: step.chosen === '-1' ? '#047857' : 'var(--border)',
                         }}>
                           {step.option1}
                         </div>
                         <div style={{
                           flex: 1,
                           padding: 8,
-                          backgroundColor: step.chosen === '+1' ? '#dcfce7' : '#f1f5f9',
+                          backgroundColor: step.chosen === '+1' ? '#dcfce7' : 'var(--surface2)',
                           borderRadius: 4,
-                          border: step.chosen === '+1' ? '2px solid #10b981' : '1px solid #cbd5e1',
+                          border: step.chosen === '+1' ? '2px solid #10b981' : '1px solid var(--border)',
                           fontWeight: 600,
-                          color: step.chosen === '+1' ? '#047857' : '#334155',
+                          color: step.chosen === '+1' ? '#047857' : 'var(--border)',
                         }}>
                           {step.option2}
                         </div>
                       </div>
-                      <div style={{ fontSize: 11, color: '#64748b', fontStyle: 'italic' }}>
+                      <div style={{ fontSize: 11, color: 'var(--text-muted)', fontStyle: 'italic' }}>
                         Greedy: Choose operation leading to most divisions by 2
                       </div>
                     </div>
@@ -339,7 +339,7 @@ export default function Problem397Visualizer() {
 
               {/* Path taken */}
               <div>
-                <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>
+                <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>
                   Path Taken ({step.path.length} numbers)
                 </div>
                 <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
@@ -357,13 +357,13 @@ export default function Problem397Visualizer() {
                             ? '#dcfce7'
                             : idx === step.path.length - 1
                             ? '#dbeafe'
-                            : '#f1f5f9',
+                            : 'var(--surface2)',
                         border:
                           num === 1
                             ? '2px solid #10b981'
                             : idx === step.path.length - 1
                             ? '2px solid #0284c7'
-                            : '1px solid #cbd5e1',
+                            : '1px solid var(--border)',
                         fontSize: 12,
                         fontWeight: 600,
                         color:
@@ -371,7 +371,7 @@ export default function Problem397Visualizer() {
                             ? '#047857'
                             : idx === step.path.length - 1
                             ? '#0c4a6e'
-                            : '#475569',
+                            : 'var(--text-muted)',
                       }}
                     >
                       {num}

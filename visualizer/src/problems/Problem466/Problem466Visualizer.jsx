@@ -115,7 +115,7 @@ function VisualizationPanel({ s1, s2, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -124,10 +124,10 @@ function VisualizationPanel({ s1, s2, step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9'
+                backgroundColor: 'var(--surface2)'
               }}
             >
               {e.label}
@@ -137,7 +137,7 @@ function VisualizationPanel({ s1, s2, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
           s1: "{s1}"
         </div>
         <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
@@ -154,9 +154,9 @@ function VisualizationPanel({ s1, s2, step, applyEx }) {
                   fontFamily: 'monospace',
                   fontSize: 14,
                   fontWeight: 600,
-                  backgroundColor: isActive ? '#fef08a' : isProcessed ? '#d1fae5' : '#f1f5f9',
-                  borderColor: isActive ? '#eab308' : isProcessed ? '#10b981' : '#cbd5e1',
-                  color: isActive ? '#854d0e' : isProcessed ? '#047857' : '#334155'
+                  backgroundColor: isActive ? '#fef08a' : isProcessed ? '#d1fae5' : 'var(--surface2)',
+                  borderColor: isActive ? '#eab308' : isProcessed ? '#10b981' : 'var(--border)',
+                  color: isActive ? '#854d0e' : isProcessed ? '#047857' : 'var(--border)'
                 }}
                 animate={{ scale: isActive ? 1.15 : 1 }}
               >
@@ -168,7 +168,7 @@ function VisualizationPanel({ s1, s2, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
           s2: "{s2}" (Match target)
         </div>
         <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
@@ -185,9 +185,9 @@ function VisualizationPanel({ s1, s2, step, applyEx }) {
                   fontFamily: 'monospace',
                   fontSize: 14,
                   fontWeight: 600,
-                  backgroundColor: isActive ? '#fee2e2' : isMatched ? '#dcfce7' : '#f1f5f9',
-                  borderColor: isActive ? '#dc2626' : isMatched ? '#22c55e' : '#cbd5e1',
-                  color: isActive ? '#991b1b' : isMatched ? '#16a34a' : '#334155'
+                  backgroundColor: isActive ? '#fee2e2' : isMatched ? '#dcfce7' : 'var(--surface2)',
+                  borderColor: isActive ? '#dc2626' : isMatched ? '#22c55e' : 'var(--border)',
+                  color: isActive ? '#991b1b' : isMatched ? '#16a34a' : 'var(--border)'
                 }}
                 animate={{ scale: isActive ? 1.15 : 1 }}
               >

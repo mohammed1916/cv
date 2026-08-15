@@ -177,11 +177,11 @@ function VisualizationPanel({ n, step, applyExample, examples }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `n=${ex.n}`}
@@ -191,13 +191,13 @@ function VisualizationPanel({ n, step, applyExample, examples }) {
         </div>
       )}
 
-      <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
-        <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>n Value</div>
+      <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+        <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>n Value</div>
         <div style={{ fontSize: 16, fontWeight: 700, color: '#067db1' }}>{n}</div>
       </div>
 
       {step?.iteration !== undefined && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #a78bfa' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>
             Iteration {step.iteration}/{step.n - 1}
           </div>
@@ -208,7 +208,7 @@ function VisualizationPanel({ n, step, applyExample, examples }) {
       )}
 
       {step?.digit !== undefined && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f59e0b' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #f59e0b' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', marginBottom: 6 }}>Digit Analysis</div>
           <div style={{ fontSize: 12, color: '#5577a4', fontFamily: 'monospace' }}>
             Digit: <span style={{ color: '#178740', fontWeight: 600 }}>{step.digit}</span>
@@ -218,7 +218,7 @@ function VisualizationPanel({ n, step, applyExample, examples }) {
       )}
 
       {step?.nextSeq !== undefined && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #38bdf8' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #38bdf8' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#067db1', marginBottom: 6 }}>Building Next Sequence</div>
           <div style={{ fontSize: 12, color: '#5577a4', fontFamily: 'monospace', wordBreak: 'break-all' }}>
             next_seq = "<span style={{ color: '#178740', fontWeight: 600 }}>{step.nextSeq}</span>"
@@ -230,7 +230,7 @@ function VisualizationPanel({ n, step, applyExample, examples }) {
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #22c55e',
             textAlign: 'center',
@@ -239,7 +239,7 @@ function VisualizationPanel({ n, step, applyExample, examples }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Result</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Result</div>
           <div style={{ fontSize: 16, fontFamily: 'monospace', fontWeight: 'bold', color: '#178740', wordBreak: 'break-all' }}>
             "{step.result}"
           </div>
@@ -319,9 +319,9 @@ export default function CountAndSayVisualizer() {
             width: '100%',
             padding: '8px',
             borderRadius: 4,
-            border: '1px solid #475569',
-            backgroundColor: '#1e293b',
-            color: '#e2e8f0',
+            border: '1px solid var(--text-muted)',
+            backgroundColor: 'var(--surface2)',
+            color: 'var(--text)',
             fontFamily: 'monospace',
             fontSize: 12,
           }}

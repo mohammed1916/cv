@@ -1,10 +1,10 @@
 /* Catppuccin Mocha Theme Colors */
 :root {
-  --mr-base: #1e1e2e;
+  --mr-base: var(--code-bg);
   --mr-surface0: #313244;
-  --mr-surface1: #45475a;
+  --mr-surface1: var(--code-line);
   --mr-surface2: #585b70;
-  --mr-text: #cdd6f4;
+  --mr-text: var(--code-text);
   --mr-green: #a6e3a1;
   --mr-pink: #f5c6de;
   --mr-border: #313244;

@@ -96,7 +96,7 @@ function VisualizationPanel({ num, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -105,10 +105,10 @@ function VisualizationPanel({ num, step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9'
+                backgroundColor: 'var(--surface2)'
               }}
             >
               {e.label}
@@ -118,10 +118,10 @@ function VisualizationPanel({ num, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Number</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Number</div>
         <div style={{
           padding: 12,
-          backgroundColor: '#f1f5f9',
+          backgroundColor: 'var(--surface2)',
           borderRadius: 6,
           fontFamily: 'monospace',
           fontSize: 14,
@@ -132,7 +132,7 @@ function VisualizationPanel({ num, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Bits</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Bits</div>
         <div style={{ display: 'flex', gap: 4, justifyContent: 'center' }}>
           {binary.split('').map((bit, idx) => (
             <motion.div
@@ -144,11 +144,11 @@ function VisualizationPanel({ num, step, applyEx }) {
                 alignItems: 'center',
                 justifyContent: 'center',
                 borderRadius: 4,
-                border: '2px solid #cbd5e1',
+                border: '2px solid var(--border)',
                 fontFamily: 'monospace',
                 fontSize: 16,
                 fontWeight: 700,
-                backgroundColor: '#f1f5f9'
+                backgroundColor: 'var(--surface2)'
               }}
             >
               {bit}

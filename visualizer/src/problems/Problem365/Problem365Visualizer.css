@@ -14,18 +14,18 @@
   --wjp-sapphire: #74c7ec;
   --wjp-blue: #89b4fa;
   --wjp-lavender: #b4befe;
-  --wjp-text: #cdd6f4;
+  --wjp-text: var(--code-text);
   --wjp-subtext1: #bac2de;
-  --wjp-subtext0: #a6adc8;
+  --wjp-subtext0: var(--code-dim);
   --wjp-overlay2: #9399b2;
   --wjp-overlay1: #7f849c;
-  --wjp-overlay0: #6c7086;
+  --wjp-overlay0: var(--code-dim);
   --wjp-surface2: #585b70;
-  --wjp-surface1: #45475a;
+  --wjp-surface1: var(--code-line);
   --wjp-surface0: #313244;
-  --wjp-base: #1e1e2e;
+  --wjp-base: var(--code-bg);
   --wjp-mantle: #181825;
-  --wjp-crust: #11111b;
+  --wjp-crust: var(--code-surface);
 }
 
 .problem-shell {

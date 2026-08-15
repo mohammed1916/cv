@@ -197,7 +197,7 @@ function VisualizationPanel({ step }) {
 
       {/* Board */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Board State</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Board State</div>
         <div style={{ display: 'grid', gridTemplateColumns: `repeat(${step?.board[0]?.length || 5}, 1fr)`, gap: 4 }}>
           {step?.board?.map((row, r) =>
             row.map((cell, c) => {

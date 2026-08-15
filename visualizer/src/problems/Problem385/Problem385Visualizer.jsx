@@ -253,10 +253,10 @@ export default function Problem385Visualizer() {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid var(--border)',
                   cursor: 'pointer',
                   fontSize: 12,
-                  backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
+                  backgroundColor: exIdx === i ? '#dbeafe' : 'var(--surface2)',
                   fontWeight: exIdx === i ? 600 : 400,
                 }}
               >
@@ -268,13 +268,13 @@ export default function Problem385Visualizer() {
           {step && (
             <>
               {/* Message */}
-              <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 12, fontWeight: 500 }}>
+              <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 12, fontWeight: 500 }}>
                 {step.message}
               </div>
 
               {/* Input String */}
               <div>
-                <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Input String</div>
+                <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Input String</div>
                 <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
                   {step.input.split('').map((char, idx) => (
                     <motion.div
@@ -317,7 +317,7 @@ export default function Problem385Visualizer() {
               {/* Stack/Result */}
               {step.stack.length > 0 && (
                 <div>
-                  <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Parsed Items</div>
+                  <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Parsed Items</div>
                   <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
                     {step.stack.map((val, idx) => (
                       <motion.div

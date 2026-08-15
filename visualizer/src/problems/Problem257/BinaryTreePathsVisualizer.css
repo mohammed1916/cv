@@ -24,7 +24,7 @@
     align-items: center;
     justify-content: center;
     font-weight: 600;
-    color: #1e1e2e;
+    color: var(--code-bg);
     font-size: 14px;
     box-shadow: 0 4px 12px rgba(137, 180, 250, 0.3);
     transition: all 0.2s ease;
@@ -44,9 +44,9 @@
 
 .btp-status {
     font-size: 13px;
-    color: #a6adc8;
+    color: var(--code-dim);
     padding: 8px 12px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border-radius: 8px;
     min-height: 36px;
     display: flex;
@@ -77,8 +77,8 @@
 .btp-path-display {
     font-family: 'Monaco', 'Menlo', monospace;
     font-size: 12px;
-    color: #cdd6f4;
-    background: #1e1e2e;
+    color: var(--code-text);
+    background: var(--code-bg);
     padding: 8px 10px;
     border-radius: 6px;
     border: 1px solid #313244;
@@ -96,15 +96,15 @@
 .btp-path-item {
     font-family: 'Monaco', 'Menlo', monospace;
     font-size: 11px;
-    color: #a6adc8;
-    background: #1e1e2e;
+    color: var(--code-dim);
+    background: var(--code-bg);
     padding: 6px 8px;
     border-radius: 4px;
     border-left: 2px solid #f38ba8;
 }
 
 .btp-empty {
-    color: #6c7086;
+    color: var(--code-dim);
     font-size: 12px;
 }
 
@@ -155,16 +155,16 @@
 .btp-chip {
     padding: 6px 12px;
     background: #313244;
-    border: 1px solid #45475a;
+    border: 1px solid var(--code-line);
     border-radius: 20px;
-    color: #cdd6f4;
+    color: var(--code-text);
     font-size: 12px;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .btp-chip:hover {
-    background: #45475a;
+    background: var(--code-line);
     border-color: #585b70;
     color: #f5a0b8;
 }
@@ -172,10 +172,10 @@
 .btp-input {
     width: 100%;
     padding: 8px 10px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 6px;
-    color: #cdd6f4;
+    color: var(--code-text);
     font-family: 'Monaco', 'Menlo', monospace;
     font-size: 12px;
     box-sizing: border-box;

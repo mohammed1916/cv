@@ -132,7 +132,7 @@ function VisualizationPanel({ arr, step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -141,10 +141,10 @@ function VisualizationPanel({ arr, step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9'
+                backgroundColor: 'var(--surface2)'
               }}
             >
               {e.label}
@@ -155,7 +155,7 @@ function VisualizationPanel({ arr, step, applyEx }) {
 
       {/* Array visualization */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
           Array: {JSON.stringify(step?.arr || arr)}
         </div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -172,9 +172,9 @@ function VisualizationPanel({ arr, step, applyEx }) {
                   fontFamily: 'monospace',
                   fontSize: 14,
                   fontWeight: 600,
-                  backgroundColor: isActive ? '#dbeafe' : inSubarray ? '#dcfce7' : '#f1f5f9',
-                  borderColor: isActive ? '#0284c7' : inSubarray ? '#22c55e' : '#cbd5e1',
-                  color: isActive ? '#0c4a6e' : inSubarray ? '#166534' : '#334155'
+                  backgroundColor: isActive ? '#dbeafe' : inSubarray ? '#dcfce7' : 'var(--surface2)',
+                  borderColor: isActive ? '#0284c7' : inSubarray ? '#22c55e' : 'var(--border)',
+                  color: isActive ? '#0c4a6e' : inSubarray ? '#166534' : 'var(--border)'
                 }}
                 animate={{ scale: isActive ? 1.15 : 1 }}
               >
@@ -187,7 +187,7 @@ function VisualizationPanel({ arr, step, applyEx }) {
 
       {/* Count info */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
           Running Count (0→-1, 1→+1)
         </div>
         <div style={{

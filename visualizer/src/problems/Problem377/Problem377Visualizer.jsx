@@ -169,10 +169,10 @@ export default function Problem377Visualizer() {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid var(--border)',
                   cursor: 'pointer',
                   fontSize: 12,
-                  backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
+                  backgroundColor: exIdx === i ? '#dbeafe' : 'var(--surface2)',
                 }}
               >
                 {e.label}
@@ -182,7 +182,7 @@ export default function Problem377Visualizer() {
 
           {step && (
             <>
-              <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
+              <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 11 }}>
                 <div style={{ fontWeight: 600, marginBottom: 8 }}>{step.message}</div>
               </div>
 
@@ -221,17 +221,17 @@ export default function Problem377Visualizer() {
                       style={{
                         padding: 8,
                         borderRadius: 4,
-                        border: sum === step.currentIdx ? '2px solid #0ea5e9' : sum === 0 ? '2px solid #10b981' : '1px solid #cbd5e1',
+                        border: sum === step.currentIdx ? '2px solid #0ea5e9' : sum === 0 ? '2px solid #10b981' : '1px solid var(--border)',
                         backgroundColor:
                           sum === step.currentIdx ? '#0ea5e9' :
                           sum === 0 ? '#d1fae5' :
                           step.highlighted?.includes(sum) ? '#bfdbfe' :
-                          '#f1f5f9',
+                          'var(--surface2)',
                         color:
                           sum === step.currentIdx ? '#fff' :
                           sum === 0 ? '#065f46' :
                           step.highlighted?.includes(sum) ? '#1e40af' :
-                          '#1e293b',
+                          'var(--surface2)',
                         fontSize: 11,
                         fontWeight: 600,
                         textAlign: 'center',

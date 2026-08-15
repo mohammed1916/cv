@@ -223,10 +223,10 @@ export default function Problem389Visualizer() {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid var(--border)',
                   cursor: 'pointer',
                   fontSize: 12,
-                  backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
+                  backgroundColor: exIdx === i ? '#dbeafe' : 'var(--surface2)',
                   fontWeight: exIdx === i ? 600 : 400,
                 }}
               >
@@ -238,14 +238,14 @@ export default function Problem389Visualizer() {
           {step && (
             <>
               {/* Message */}
-              <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 12, fontWeight: 500 }}>
+              <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 12, fontWeight: 500 }}>
                 {step.message}
               </div>
 
               {/* Strings */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
                 <div>
-                  <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>String s</div>
+                  <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>String s</div>
                   <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
                     {step.s.split('').map((char, idx) => (
                       <motion.div
@@ -256,11 +256,11 @@ export default function Problem389Visualizer() {
                         style={{
                           padding: '8px 12px',
                           borderRadius: 4,
-                          backgroundColor: step.sIdx === idx ? '#dbeafe' : '#f1f5f9',
-                          border: step.sIdx === idx ? '2px solid #0284c7' : '1px solid #cbd5e1',
+                          backgroundColor: step.sIdx === idx ? '#dbeafe' : 'var(--surface2)',
+                          border: step.sIdx === idx ? '2px solid #0284c7' : '1px solid var(--border)',
                           fontSize: 12,
                           fontWeight: 600,
-                          color: step.sIdx === idx ? '#0c4a6e' : '#334155',
+                          color: step.sIdx === idx ? '#0c4a6e' : 'var(--border)',
                         }}
                       >
                         {char}
@@ -270,7 +270,7 @@ export default function Problem389Visualizer() {
                 </div>
 
                 <div>
-                  <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>String t</div>
+                  <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>String t</div>
                   <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
                     {step.t.split('').map((char, idx) => (
                       <motion.div
@@ -281,11 +281,11 @@ export default function Problem389Visualizer() {
                         style={{
                           padding: '8px 12px',
                           borderRadius: 4,
-                          backgroundColor: step.tIdx === idx ? '#dcfce7' : '#f1f5f9',
-                          border: step.tIdx === idx ? '2px solid #10b981' : '1px solid #cbd5e1',
+                          backgroundColor: step.tIdx === idx ? '#dcfce7' : 'var(--surface2)',
+                          border: step.tIdx === idx ? '2px solid #10b981' : '1px solid var(--border)',
                           fontSize: 12,
                           fontWeight: 600,
-                          color: step.tIdx === idx ? '#047857' : '#334155',
+                          color: step.tIdx === idx ? '#047857' : 'var(--border)',
                         }}
                       >
                         {char}

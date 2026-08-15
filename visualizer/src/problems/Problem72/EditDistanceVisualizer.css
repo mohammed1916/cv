@@ -15,22 +15,22 @@
 /* Input panel */
 .ed-input-panel { display: flex; flex-direction: column; gap: 12px; }
 .ed-examples { display: flex; gap: 8px; flex-wrap: wrap; }
-.ed-chip { background: #313244; color: #cdd6f4; border: 2px solid #45475a; border-radius: 6px; padding: 4px 10px; font-size: 12px; cursor: pointer; transition: all 0.2s ease; }
+.ed-chip { background: #313244; color: var(--code-text); border: 2px solid var(--code-line); border-radius: 6px; padding: 4px 10px; font-size: 12px; cursor: pointer; transition: all 0.2s ease; }
 .ed-chip.active, .ed-chip:hover { border-color: #89b4fa; color: #89b4fa; background: rgba(137, 180, 250, 0.1); }
 .ed-strings { display: flex; gap: 14px; font-size: 14px; flex-wrap: wrap; align-items: center; }
 .ed-lbl { font-weight: 700; margin-right: 3px; }
 .ed-lbl.w1 { color: #1a6df5; }
 .ed-lbl.w2 { color: #2f8628; }
 .ed-val { font-family: monospace; color: #4f6ed8; }
-.ed-status { padding: 8px 12px; background: #1e1e2e; border: 1px solid #313244; border-radius: 8px; font-size: 13px; color: #a6adc8; min-height: 36px; }
+.ed-status { padding: 8px 12px; background: var(--code-bg); border: 1px solid #313244; border-radius: 8px; font-size: 13px; color: var(--code-dim); min-height: 36px; }
 
 /* DP Table visualization */
-.ed-panel-label { font-size: 11px; font-weight: 700; color: #6c7086; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+.ed-panel-label { font-size: 11px; font-weight: 700; color: var(--code-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
 .ed-table-wrap { overflow-x: auto; }
 .ed-table { border-collapse: collapse; }
-.ed-th { padding: 5px 10px; font-size: 13px; font-weight: 700; color: #6c7086; text-align: center; min-width: 36px; }
+.ed-th { padding: 5px 10px; font-size: 13px; font-weight: 700; color: var(--code-dim); text-align: center; min-width: 36px; }
 .ed-th.w1ch { color: #1a6df5; }
 .ed-th.w2ch { color: #2f8628; }
 .ed-td { padding: 4px 8px; font-size: 14px; font-weight: 700; text-align: center; min-width: 36px; height: 36px; border: 1px solid #313244; border-radius: 3px; color: #4f6ed8; }
 .ed-td.cur { border-color: #f9e2af !important; box-shadow: 0 0 10px #f9e2af66; color: #f9e2af; background: #2a2000 !important; }
-.ed-td.zero { color: #45475a; }
+.ed-td.zero { color: var(--code-line); }

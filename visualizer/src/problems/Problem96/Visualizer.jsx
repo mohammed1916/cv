@@ -152,7 +152,7 @@ function VisualizationPanel({ step }) {
     if (idx === left) return { bg: '#dbeafe', border: '3px solid #2563eb', text: '#1e40af' } // left operand
     if (idx === right) return { bg: '#dcfce7', border: '3px solid #16a34a', text: '#166534' } // right operand
     if (filled[idx]) return { bg: '#f5f3ff', border: '1px solid #c4b5fd', text: '#5b21b6' } // done
-    return { bg: '#f8fafc', border: '1px dashed #cbd5e1', text: '#94a3b8' } // pending
+    return { bg: 'var(--surface)', border: '1px dashed var(--border)', text: 'var(--text-muted)' } // pending
   }
 
   return (
@@ -183,7 +183,7 @@ function VisualizationPanel({ step }) {
 
       {/* DP array */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#475569', marginBottom: 8 }}>DP Table</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>DP Table</div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
           {dp.map((v, idx) => {
             const c = cellColor(idx)
@@ -224,12 +224,12 @@ function VisualizationPanel({ step }) {
       </div>
 
       {/* Legend */}
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, fontSize: 11, color: '#475569' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, fontSize: 11, color: 'var(--text-muted)' }}>
         <span><span style={{ display: 'inline-block', width: 12, height: 12, borderRadius: 3, background: '#ede9fe', border: '2px solid #7c3aed', verticalAlign: 'middle', marginRight: 4 }} />dp[i] building</span>
         <span><span style={{ display: 'inline-block', width: 12, height: 12, borderRadius: 3, background: '#dbeafe', border: '2px solid #2563eb', verticalAlign: 'middle', marginRight: 4 }} />left dp[j-1]</span>
         <span><span style={{ display: 'inline-block', width: 12, height: 12, borderRadius: 3, background: '#dcfce7', border: '2px solid #16a34a', verticalAlign: 'middle', marginRight: 4 }} />right dp[i-j]</span>
         <span><span style={{ display: 'inline-block', width: 12, height: 12, borderRadius: 3, background: '#f5f3ff', border: '1px solid #c4b5fd', verticalAlign: 'middle', marginRight: 4 }} />filled</span>
-        <span><span style={{ display: 'inline-block', width: 12, height: 12, borderRadius: 3, background: '#f8fafc', border: '1px dashed #cbd5e1', verticalAlign: 'middle', marginRight: 4 }} />pending</span>
+        <span><span style={{ display: 'inline-block', width: 12, height: 12, borderRadius: 3, background: 'var(--surface)', border: '1px dashed var(--border)', verticalAlign: 'middle', marginRight: 4 }} />pending</span>
       </div>
 
       {/* Message */}
@@ -318,11 +318,11 @@ export default function Problem96Visualizer() {
             style={{
               padding: '6px 12px',
               borderRadius: 6,
-              border: e.label === ex.label ? '2px solid #7c3aed' : '1px solid #cbd5e1',
+              border: e.label === ex.label ? '2px solid #7c3aed' : '1px solid var(--border)',
               cursor: 'pointer',
               fontSize: 12,
               fontWeight: e.label === ex.label ? 700 : 500,
-              backgroundColor: e.label === ex.label ? '#ede9fe' : '#f8fafc',
+              backgroundColor: e.label === ex.label ? '#ede9fe' : 'var(--surface)',
               color: '#5b21b6',
             }}
           >

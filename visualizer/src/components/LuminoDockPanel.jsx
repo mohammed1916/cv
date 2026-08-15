@@ -87,13 +87,49 @@ export default function LuminoDockPanel({ panels, onPanelReady }) {
       if (index === 0) {
         dock.addWidget(widget)
       } else {
-        const refWidget = widgetRefsRef.current[panels[index - 1].id]
+        // A consistent learning layout matters more than the historical order
+        // in which each problem happened to register its panels: visualization
+        // on the left, code on the right, and the short status readout above
+        // the code.  Older visualizers all use these conventional ids.
+        const codeWidget = widgetRefsRef.current.code
+        const isCode = panelConfig.id === 'code'
+        const isStatus = panelConfig.id === 'status' && codeWidget
+        const refWidget = isCode
+          ? widgetRefsRef.current[panels[0].id]
+          : isStatus
+            ? codeWidget
+            : widgetRefsRef.current[panels[index - 1].id]
         dock.addWidget(widget, {
-          mode: panelConfig.dockMode || 'split-right',
+          mode: isCode ? 'split-right' : isStatus ? 'split-top' : (panelConfig.dockMode || 'split-right'),
           ref: refWidget,
         })
       }
     })
+
+    // The status strip only needs a line or two.  Give it a compact share of
+    // the code column rather than the default 50/50 split Lumino assigns.
+    const compactStatusStrip = () => {
+      const codeWidget = widgetRefsRef.current.code
+      const statusWidget = widgetRefsRef.current.status
+      if (!codeWidget || !statusWidget) return
+      const config = dock.saveLayout()
+      const visit = (node) => {
+        if (!node || node.type !== 'split-area') return false
+        const statusIndex = node.children.findIndex((child) =>
+          child.type === 'tab-area' && child.widgets.includes(statusWidget)
+        )
+        const codeIndex = node.children.findIndex((child) =>
+          child.type === 'tab-area' && child.widgets.includes(codeWidget)
+        )
+        if (statusIndex >= 0 && codeIndex >= 0) {
+          node.sizes = node.sizes.map((_, index) => index === statusIndex ? 0.16 : index === codeIndex ? 0.84 : 0)
+          return true
+        }
+        return node.children.some(visit)
+      }
+      if (visit(config.main)) dock.restoreLayout(config)
+    }
+    compactStatusStrip()
 
     // Use BoxPanel to manage dock sizing
     const box = new BoxPanel({ direction: 'top-to-bottom', spacing: 0 })

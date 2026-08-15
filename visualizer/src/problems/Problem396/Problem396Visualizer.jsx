@@ -251,7 +251,7 @@ export default function Problem396Visualizer() {
 
       <div style={{ display: 'flex', gap: 16, flex: 1 }}>
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <div style={{ backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
+          <div style={{ backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px' }}>
             <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>
               Array (comma-separated) {inputError && <span style={{ color: '#ea0c0c' }}>— {inputError}</span>}
             </div>
@@ -260,8 +260,8 @@ export default function Problem396Visualizer() {
               onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
               placeholder="1,2,3,4"
               style={{
-                width: '100%', padding: '8px', backgroundColor: '#0f172a', color: '#e2e8f0',
-                border: '1px solid #334155', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
+                width: '100%', padding: '8px', backgroundColor: 'var(--code-bg)', color: 'var(--text)',
+                border: '1px solid var(--border)', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
               }}
             />
           </div>
@@ -272,7 +272,7 @@ export default function Problem396Visualizer() {
                 key={ex.label}
                 onClick={() => applyExample(ex)}
                 style={{
-                  padding: '6px 12px', backgroundColor: '#334155', color: '#e2e8f0',
+                  padding: '6px 12px', backgroundColor: 'var(--border)', color: 'var(--text)',
                   border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '12px'
                 }}
               >
@@ -281,7 +281,7 @@ export default function Problem396Visualizer() {
             ))}
           </div>
 
-          <div style={{ backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
+          <div style={{ backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px' }}>
             <div style={{ color: '#627794', fontSize: '13px', marginBottom: '10px' }}>
               Current Array (Rotation {step?.currentK ?? 0})
             </div>
@@ -292,10 +292,10 @@ export default function Problem396Visualizer() {
                   layoutId={`array-${idx}`}
                   style={{
                     width: '48px', height: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    backgroundColor: '#334155', color: '#e2e8f0', borderRadius: '6px', fontSize: '13px',
-                    fontWeight: 'bold', border: '1px solid #475569'
+                    backgroundColor: 'var(--border)', color: 'var(--text)', borderRadius: '6px', fontSize: '13px',
+                    fontWeight: 'bold', border: '1px solid var(--text-muted)'
                   }}
-                  animate={{ backgroundColor: '#475569' }}
+                  animate={{ backgroundColor: 'var(--text-muted)' }}
                   transition={{ duration: 0.3 }}
                 >
                   <motion.div
@@ -310,7 +310,7 @@ export default function Problem396Visualizer() {
             </div>
           </div>
 
-          <div style={{ backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
+          <div style={{ backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px' }}>
             <div style={{ color: '#627794', fontSize: '13px', marginBottom: '10px' }}>Index Multipliers</div>
             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', minHeight: '50px' }}>
               {step?.rotatedNums && step.rotatedNums.map((_, idx) => (
@@ -329,24 +329,24 @@ export default function Problem396Visualizer() {
           </div>
 
           <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <div style={{ backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
+            <div style={{ backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px' }}>
               <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>
                 Current F Value
               </div>
               <div style={{
-                backgroundColor: '#0f172a', padding: '12px', borderRadius: '4px',
+                backgroundColor: 'var(--code-bg)', padding: '12px', borderRadius: '4px',
                 color: '#60a5fa', fontSize: '18px', fontWeight: 'bold', textAlign: 'center'
               }}>
                 {step?.currentF ?? '-'}
               </div>
               {step?.currentK !== undefined && (
-                <div style={{ color: '#64748b', fontSize: '11px', marginTop: '6px', textAlign: 'center' }}>
+                <div style={{ color: 'var(--text-muted)', fontSize: '11px', marginTop: '6px', textAlign: 'center' }}>
                   F({step.currentK})
                 </div>
               )}
             </div>
 
-            <div style={{ backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
+            <div style={{ backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px' }}>
               <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>All F Values</div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', minHeight: '40px' }}>
                 {step?.allF && step.allF.map((f, k) => (
@@ -356,8 +356,8 @@ export default function Problem396Visualizer() {
                     animate={{ scale: step?.maxF === f ? 1.15 : 1, opacity: 1 }}
                     style={{
                       padding: '6px 10px', borderRadius: '4px', fontSize: '12px', fontWeight: 'bold',
-                      backgroundColor: step?.maxF === f ? '#10b981' : '#334155',
-                      color: step?.maxF === f ? '#ecfdf5' : '#cbd5e1',
+                      backgroundColor: step?.maxF === f ? '#10b981' : 'var(--border)',
+                      color: step?.maxF === f ? '#ecfdf5' : 'var(--border)',
                       border: step?.maxF === f ? '2px solid #6ee7b7' : 'none'
                     }}
                   >
@@ -421,8 +421,8 @@ export default function Problem396Visualizer() {
       </div>
 
       <div style={{
-        backgroundColor: step?.isNewMax ? '#10b98166' : '#1e293b',
-        padding: '12px', borderRadius: '6px', color: step?.isNewMax ? '#86efac' : '#cbd5e1',
+        backgroundColor: step?.isNewMax ? '#10b98166' : 'var(--surface2)',
+        padding: '12px', borderRadius: '6px', color: step?.isNewMax ? '#86efac' : 'var(--border)',
         fontSize: '13px', fontFamily: 'monospace'
       }}>
         {step?.message ?? 'Press Play or Step to begin.'}

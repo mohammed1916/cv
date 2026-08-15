@@ -217,11 +217,11 @@ function VisualizationPanel({ step, applyExample, examples }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -232,16 +232,16 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.trees && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Trees (Positions)</div>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Trees (Positions)</div>
           <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
             {step.trees.map((t, i) => (
               <div
                 key={i}
                 style={{
                   padding: '4px 8px',
-                  backgroundColor: i === step.treeIdx ? '#38bdf8' : '#334155',
-                  color: i === step.treeIdx ? '#000' : '#e2e8f0',
+                  backgroundColor: i === step.treeIdx ? '#38bdf8' : 'var(--border)',
+                  color: i === step.treeIdx ? '#000' : 'var(--text)',
                   borderRadius: 4,
                   fontSize: 12,
                   fontWeight: 600,
@@ -256,16 +256,16 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.chairs && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Chairs (Positions)</div>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Chairs (Positions)</div>
           <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
             {step.chairs.map((c, i) => (
               <div
                 key={i}
                 style={{
                   padding: '4px 8px',
-                  backgroundColor: i === step.chairIdx ? '#f97316' : '#334155',
-                  color: i === step.chairIdx ? '#000' : '#e2e8f0',
+                  backgroundColor: i === step.chairIdx ? '#f97316' : 'var(--border)',
+                  color: i === step.chairIdx ? '#000' : 'var(--text)',
                   borderRadius: 4,
                   fontSize: 12,
                   fontWeight: 600,
@@ -280,7 +280,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.squirrel !== undefined && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #a78bfa' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Squirrel Position</div>
           <div style={{ fontSize: 16, color: '#7e56f8', fontFamily: 'monospace', fontWeight: 700 }}>
             {step.squirrel}
@@ -289,7 +289,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.distance !== undefined && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #22c55e' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #22c55e' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#178740', marginBottom: 6 }}>Distance Calculation</div>
           <div style={{ fontSize: 13, color: '#5577a4', fontFamily: 'monospace' }}>
             |{step.fromPos} - {step.toPos}| = {step.distance}
@@ -298,16 +298,16 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.dp && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #64748b' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>DP State</div>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>DP State</div>
           <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
             {step.dp.map((val, i) => (
               <div
                 key={i}
                 style={{
                   padding: '4px 8px',
-                  backgroundColor: step.updatedIdx === i ? '#38bdf8' : '#334155',
-                  color: step.updatedIdx === i ? '#000' : '#e2e8f0',
+                  backgroundColor: step.updatedIdx === i ? '#38bdf8' : 'var(--border)',
+                  color: step.updatedIdx === i ? '#000' : 'var(--text)',
                   borderRadius: 4,
                   fontSize: 11,
                   fontWeight: 600,
@@ -322,7 +322,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.totalDist !== undefined && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #f59e0b' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid #f59e0b' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', marginBottom: 6 }}>Current Path Distance</div>
           <div style={{ fontSize: 13, color: '#5577a4' }}>
             DP[{step.chairIdx}] + Distance = {step.totalDist}
@@ -334,7 +334,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid',
             borderColor: '#22c55e',
@@ -344,7 +344,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Minimum Distance</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Minimum Distance</div>
           <div
             style={{
               fontSize: 18,
@@ -447,9 +447,9 @@ export default function SquirrelDistributionVisualizer() {
                     width: '100%',
                     padding: '8px',
                     borderRadius: 4,
-                    border: inputError ? '2px solid #f87171' : '1px solid #475569',
-                    backgroundColor: '#1e293b',
-                    color: '#e2e8f0',
+                    border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
+                    backgroundColor: 'var(--surface2)',
+                    color: 'var(--text)',
                     fontFamily: 'monospace',
                     fontSize: 12,
                   }}
@@ -468,9 +468,9 @@ export default function SquirrelDistributionVisualizer() {
                     width: '100%',
                     padding: '8px',
                     borderRadius: 4,
-                    border: inputError ? '2px solid #f87171' : '1px solid #475569',
-                    backgroundColor: '#1e293b',
-                    color: '#e2e8f0',
+                    border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
+                    backgroundColor: 'var(--surface2)',
+                    color: 'var(--text)',
                     fontFamily: 'monospace',
                     fontSize: 12,
                   }}
@@ -489,9 +489,9 @@ export default function SquirrelDistributionVisualizer() {
                     width: '100%',
                     padding: '8px',
                     borderRadius: 4,
-                    border: inputError ? '2px solid #f87171' : '1px solid #475569',
-                    backgroundColor: '#1e293b',
-                    color: '#e2e8f0',
+                    border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
+                    backgroundColor: 'var(--surface2)',
+                    color: 'var(--text)',
                     fontFamily: 'monospace',
                     fontSize: 12,
                   }}

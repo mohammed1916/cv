@@ -170,7 +170,7 @@ function generateSteps(path) {
 const ACTION_COLORS = {
   split: { bg: '#e0f2fe', border: '#0284c7', text: '#075985' },
   init: { bg: '#e0f2fe', border: '#0284c7', text: '#075985' },
-  skip: { bg: '#f1f5f9', border: '#94a3b8', text: '#475569' },
+  skip: { bg: 'var(--surface2)', border: 'var(--text-muted)', text: 'var(--text-muted)' },
   pop: { bg: '#fee2e2', border: '#dc2626', text: '#991b1b' },
   push: { bg: '#dcfce7', border: '#16a34a', text: '#166534' },
   join: { bg: '#ede9fe', border: '#7c3aed', text: '#5b21b6' },
@@ -180,7 +180,7 @@ const ACTION_COLORS = {
 function VisualizationPanel({ step }) {
   if (!step) {
     return (
-      <div style={{ padding: 16, color: '#64748b', fontSize: 13 }}>
+      <div style={{ padding: 16, color: 'var(--text-muted)', fontSize: 13 }}>
         Press play (or step forward) to simplify the path.
       </div>
     )
@@ -213,7 +213,7 @@ function VisualizationPanel({ step }) {
 
       {/* Tokens row */}
       <div>
-        <div style={{ fontSize: 11, fontWeight: 700, color: '#64748b', marginBottom: 6, textTransform: 'uppercase' }}>
+        <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-muted)', marginBottom: 6, textTransform: 'uppercase' }}>
           Components (split by "/")
         </div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
@@ -231,9 +231,9 @@ function VisualizationPanel({ step }) {
                   fontSize: 13,
                   fontFamily: 'monospace',
                   fontWeight: isCurrent ? 800 : 500,
-                  backgroundColor: isCurrent ? color.bg : '#ffffff',
-                  border: isCurrent ? `3px solid ${color.border}` : '1px solid #cbd5e1',
-                  color: isCurrent ? color.text : '#334155',
+                  backgroundColor: isCurrent ? color.bg : 'var(--surface)',
+                  border: isCurrent ? `3px solid ${color.border}` : '1px solid var(--border)',
+                  color: isCurrent ? color.text : 'var(--border)',
                 }}
               >
                 {p === '' ? '∅' : p}
@@ -246,7 +246,7 @@ function VisualizationPanel({ step }) {
 
       {/* Stack (vertical column) */}
       <div>
-        <div style={{ fontSize: 11, fontWeight: 700, color: '#64748b', marginBottom: 6, textTransform: 'uppercase' }}>
+        <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-muted)', marginBottom: 6, textTransform: 'uppercase' }}>
           Stack {stack.length > 0 ? '(top → bottom)' : '(empty)'}
         </div>
         <div style={{ display: 'flex', flexDirection: 'column-reverse', gap: 4, alignItems: 'flex-start' }}>
@@ -284,7 +284,7 @@ function VisualizationPanel({ step }) {
 
       {/* Built path */}
       <div>
-        <div style={{ fontSize: 11, fontWeight: 700, color: '#64748b', marginBottom: 6, textTransform: 'uppercase' }}>
+        <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-muted)', marginBottom: 6, textTransform: 'uppercase' }}>
           Result path
         </div>
         <div
@@ -294,7 +294,7 @@ function VisualizationPanel({ step }) {
             fontSize: 16,
             fontFamily: 'monospace',
             fontWeight: 800,
-            backgroundColor: '#0f172a',
+            backgroundColor: 'var(--code-bg)',
             color: '#38bdf8',
             wordBreak: 'break-all',
           }}
@@ -309,9 +309,9 @@ function VisualizationPanel({ step }) {
           padding: 12,
           borderRadius: 8,
           fontSize: 13,
-          backgroundColor: '#f8fafc',
-          border: '1px solid #e2e8f0',
-          color: '#334155',
+          backgroundColor: 'var(--surface)',
+          border: '1px solid var(--text)',
+          color: 'var(--border)',
         }}
       >
         {step.message}
@@ -397,7 +397,7 @@ export default function Problem71Visualizer() {
   </>
 
   const statusPanel = (
-    <div className="problem71-status" style={{ padding: '6px 12px', fontSize: 12, color: '#64748b' }}>
+    <div className="problem71-status" style={{ padding: '6px 12px', fontSize: 12, color: 'var(--text-muted)' }}>
       Step {stepIndex + 1} / {steps.length}
     </div>
   )

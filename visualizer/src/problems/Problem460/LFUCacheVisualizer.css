@@ -24,8 +24,8 @@
 
 .lfu-chip {
     background: #313244;
-    color: #cdd6f4;
-    border: 2px solid #45475a;
+    color: var(--code-text);
+    border: 2px solid var(--code-line);
     border-radius: 6px;
     padding: 4px 12px;
     font-size: 12px;
@@ -39,7 +39,7 @@
 }
 
 .lfu-panel {
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 10px;
     padding: 12px 14px;
@@ -48,7 +48,7 @@
 .lfu-panel-label {
     font-size: 11px;
     font-weight: 700;
-    color: #6c7086;
+    color: var(--code-dim);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-bottom: 8px;
@@ -77,7 +77,7 @@
 .lfu-result-val {
     font-size: 22px;
     font-weight: 700;
-    color: #45475a;
+    color: var(--code-line);
 }
 
 .lfu-result-val.hit {
@@ -136,7 +136,7 @@
 
 .lfu-empty {
     font-size: 13px;
-    color: #45475a;
+    color: var(--code-line);
 }
 
 .lfu-entry {
@@ -207,7 +207,7 @@
     padding: 2px 7px;
     border-radius: 4px;
     background: #252535;
-    color: #a6adc8;
+    color: var(--code-dim);
 }
 
 .lfu-log-entry.hit {
@@ -232,10 +232,10 @@
 
 .lfu-status {
     padding: 8px 12px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 8px;
     font-size: 13px;
-    color: #a6adc8;
+    color: var(--code-dim);
     min-height: 36px;
 }

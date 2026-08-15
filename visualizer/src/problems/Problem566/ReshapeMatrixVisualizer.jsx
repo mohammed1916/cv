@@ -259,9 +259,9 @@ function MatrixGrid({ matrix, title, highlight = null, extractHighlight = null }
           gridTemplateColumns: `repeat(${matrix[0].length}, 1fr)`,
           gap: 4,
           padding: 8,
-          backgroundColor: '#0f172a',
+          backgroundColor: 'var(--code-bg)',
           borderRadius: 6,
-          border: '1px solid #334155',
+          border: '1px solid var(--border)',
         }}
       >
         {matrix.map((row, i) =>
@@ -282,9 +282,9 @@ function MatrixGrid({ matrix, title, highlight = null, extractHighlight = null }
                   fontSize: 12,
                   fontWeight: 600,
                   fontFamily: 'monospace',
-                  backgroundColor: isHighlighted ? '#38bdf8' : isExtracted ? '#fbbf24' : '#1e293b',
-                  color: isHighlighted ? '#0f172a' : isExtracted ? '#0f172a' : '#e2e8f0',
-                  border: isHighlighted || isExtracted ? '2px solid #38bdf8' : '1px solid #475569',
+                  backgroundColor: isHighlighted ? '#38bdf8' : isExtracted ? '#fbbf24' : 'var(--surface2)',
+                  color: isHighlighted ? 'var(--code-bg)' : isExtracted ? 'var(--code-bg)' : 'var(--text)',
+                  border: isHighlighted || isExtracted ? '2px solid #38bdf8' : '1px solid var(--text-muted)',
                 }}
                 animate={{
                   scale: isHighlighted || isExtracted ? 1.1 : 1,
@@ -313,9 +313,9 @@ function FlattenedArray({ flat, highlightIndex = null }) {
           display: 'flex',
           gap: 4,
           padding: 8,
-          backgroundColor: '#0f172a',
+          backgroundColor: 'var(--code-bg)',
           borderRadius: 6,
-          border: '1px solid #334155',
+          border: '1px solid var(--border)',
           flexWrap: 'wrap',
         }}
       >
@@ -335,9 +335,9 @@ function FlattenedArray({ flat, highlightIndex = null }) {
                 fontSize: 11,
                 fontWeight: 600,
                 fontFamily: 'monospace',
-                backgroundColor: isHighlighted ? '#38bdf8' : '#1e293b',
-                color: isHighlighted ? '#0f172a' : '#e2e8f0',
-                border: isHighlighted ? '2px solid #38bdf8' : '1px solid #475569',
+                backgroundColor: isHighlighted ? '#38bdf8' : 'var(--surface2)',
+                color: isHighlighted ? 'var(--code-bg)' : 'var(--text)',
+                border: isHighlighted ? '2px solid #38bdf8' : '1px solid var(--text-muted)',
               }}
               animate={{
                 scale: isHighlighted ? 1.15 : 1,
@@ -350,7 +350,7 @@ function FlattenedArray({ flat, highlightIndex = null }) {
           )
         })}
       </div>
-      <div style={{ fontSize: 10, color: '#64748b' }}>[0] to [{flat.length - 1}]</div>
+      <div style={{ fontSize: 10, color: 'var(--text-muted)' }}>[0] to [{flat.length - 1}]</div>
     </div>
   )
 }
@@ -364,11 +364,11 @@ function VisualizationPanel({ step }) {
       <motion.div
         style={{
           padding: 12,
-          backgroundColor: '#1e293b',
+          backgroundColor: 'var(--surface2)',
           borderRadius: 6,
           border: '1px solid #38bdf8',
           fontSize: 13,
-          color: '#e2e8f0',
+          color: 'var(--text)',
           fontFamily: 'monospace',
         }}
         initial={{ opacity: 0 }}
@@ -406,7 +406,7 @@ function VisualizationPanel({ step }) {
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #f87171',
             textAlign: 'center',
@@ -425,7 +425,7 @@ function VisualizationPanel({ step }) {
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #22c55e',
             textAlign: 'center',
@@ -516,9 +516,9 @@ export default function ReshapeMatrixVisualizer() {
                     height: 60,
                     padding: '8px',
                     borderRadius: 4,
-                    border: '1px solid #475569',
-                    backgroundColor: '#1e293b',
-                    color: '#e2e8f0',
+                    border: '1px solid var(--text-muted)',
+                    backgroundColor: 'var(--surface2)',
+                    color: 'var(--text)',
                     fontFamily: 'monospace',
                     fontSize: 12,
                     resize: 'vertical',
@@ -539,9 +539,9 @@ export default function ReshapeMatrixVisualizer() {
                     width: '100%',
                     padding: '8px',
                     borderRadius: 4,
-                    border: '1px solid #475569',
-                    backgroundColor: '#1e293b',
-                    color: '#e2e8f0',
+                    border: '1px solid var(--text-muted)',
+                    backgroundColor: 'var(--surface2)',
+                    color: 'var(--text)',
                     fontFamily: 'monospace',
                     fontSize: 12,
                     marginBottom: 8,
@@ -560,9 +560,9 @@ export default function ReshapeMatrixVisualizer() {
                     width: '100%',
                     padding: '8px',
                     borderRadius: 4,
-                    border: '1px solid #475569',
-                    backgroundColor: '#1e293b',
-                    color: '#e2e8f0',
+                    border: '1px solid var(--text-muted)',
+                    backgroundColor: 'var(--surface2)',
+                    color: 'var(--text)',
                     fontFamily: 'monospace',
                     fontSize: 12,
                   }}
@@ -580,11 +580,11 @@ export default function ReshapeMatrixVisualizer() {
                           style={{
                             padding: '6px 12px',
                             borderRadius: 4,
-                            border: '1px solid #475569',
+                            border: '1px solid var(--text-muted)',
                             cursor: 'pointer',
                             fontSize: 11,
-                            backgroundColor: '#1e293b',
-                            color: '#e2e8f0',
+                            backgroundColor: 'var(--surface2)',
+                            color: 'var(--text)',
                           }}
                         >
                           {ex.label || `Example ${i + 1}`}

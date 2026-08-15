@@ -14,18 +14,18 @@
   --nlws-sapphire: #74c7ec;
   --nlws-blue: #89b4fa;
   --nlws-lavender: #b4befe;
-  --nlws-text: #cdd6f4;
+  --nlws-text: var(--code-text);
   --nlws-subtext1: #bac2de;
-  --nlws-subtext0: #a6adc8;
+  --nlws-subtext0: var(--code-dim);
   --nlws-overlay2: #9399b2;
   --nlws-overlay1: #7f849c;
-  --nlws-overlay0: #6c7086;
+  --nlws-overlay0: var(--code-dim);
   --nlws-surface2: #585b70;
-  --nlws-surface1: #45475a;
+  --nlws-surface1: var(--code-line);
   --nlws-surface0: #313244;
-  --nlws-base: #1e1e2e;
+  --nlws-base: var(--code-bg);
   --nlws-mantle: #181825;
-  --nlws-crust: #11111b;
+  --nlws-crust: var(--code-surface);
 }
 
 .problem-shell {

@@ -180,7 +180,7 @@ function VisualizationPanel({ dict, step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -189,10 +189,10 @@ function VisualizationPanel({ dict, step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9'
+                backgroundColor: 'var(--surface2)'
               }}
             >
               {e.label}
@@ -203,7 +203,7 @@ function VisualizationPanel({ dict, step, applyEx }) {
 
       {/* Input Words */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Input Words</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Input Words</div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {dict.map((word, idx) => {
             const isProcessing = step?.idx === idx
@@ -217,9 +217,9 @@ function VisualizationPanel({ dict, step, applyEx }) {
                   fontFamily: 'monospace',
                   fontSize: 13,
                   fontWeight: 600,
-                  backgroundColor: isProcessing ? '#fecaca' : '#f1f5f9',
-                  borderColor: isProcessing ? '#f87171' : '#cbd5e1',
-                  color: isProcessing ? '#7f1d1d' : '#1e293b'
+                  backgroundColor: isProcessing ? '#fecaca' : 'var(--surface2)',
+                  borderColor: isProcessing ? '#f87171' : 'var(--border)',
+                  color: isProcessing ? '#7f1d1d' : 'var(--surface2)'
                 }}
                 animate={{ scale: isProcessing ? 1.1 : 1 }}
               >

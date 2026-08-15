@@ -160,7 +160,7 @@ function VisualizationPanel({ step }) {
 
       {/* Grid */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Picture</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Picture</div>
         <div style={{ display: 'grid', gridTemplateColumns: `repeat(${step?.picture[0]?.length || 3}, 1fr)`, gap: 4 }}>
           {step?.picture?.map((row, r) =>
             row.map((cell, c) => {
@@ -179,8 +179,8 @@ function VisualizationPanel({ step }) {
                     border: '2px solid',
                     fontWeight: 600,
                     fontSize: 14,
-                    backgroundColor: cell === 'B' ? '#1f2937' : '#f1f5f9',
-                    borderColor: isLonely ? '#10b981' : isCurrent ? '#f59e0b' : cell === 'B' ? '#374151' : '#cbd5e1',
+                    backgroundColor: cell === 'B' ? '#1f2937' : 'var(--surface2)',
+                    borderColor: isLonely ? '#10b981' : isCurrent ? '#f59e0b' : cell === 'B' ? '#374151' : 'var(--border)',
                     color: cell === 'B' ? '#f3f4f6' : '#1f2937'
                   }}
                   animate={{ scale: isLonely ? 1.2 : isCurrent ? 1.1 : 1 }}
@@ -196,7 +196,7 @@ function VisualizationPanel({ step }) {
       {/* Row and Column Counts */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 6 }}>Row Counts</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 6 }}>Row Counts</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
             {step?.rowCount?.map((count, idx) => (
               <div
@@ -204,11 +204,11 @@ function VisualizationPanel({ step }) {
                 style={{
                   padding: '6px 10px',
                   borderRadius: 4,
-                  backgroundColor: step?.r === idx ? '#dbeafe' : '#f1f5f9',
-                  border: `1px solid ${step?.r === idx ? '#0284c7' : '#cbd5e1'}`,
+                  backgroundColor: step?.r === idx ? '#dbeafe' : 'var(--surface2)',
+                  border: `1px solid ${step?.r === idx ? '#0284c7' : 'var(--border)'}`,
                   fontFamily: 'monospace',
                   fontSize: 12,
-                  color: step?.r === idx ? '#0c4a6e' : '#334155'
+                  color: step?.r === idx ? '#0c4a6e' : 'var(--border)'
                 }}
               >
                 Row[{idx}]: {count}
@@ -217,7 +217,7 @@ function VisualizationPanel({ step }) {
           </div>
         </div>
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 6 }}>Col Counts</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 6 }}>Col Counts</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
             {step?.colCount?.map((count, idx) => (
               <div
@@ -225,11 +225,11 @@ function VisualizationPanel({ step }) {
                 style={{
                   padding: '6px 10px',
                   borderRadius: 4,
-                  backgroundColor: step?.c === idx ? '#dbeafe' : '#f1f5f9',
-                  border: `1px solid ${step?.c === idx ? '#0284c7' : '#cbd5e1'}`,
+                  backgroundColor: step?.c === idx ? '#dbeafe' : 'var(--surface2)',
+                  border: `1px solid ${step?.c === idx ? '#0284c7' : 'var(--border)'}`,
                   fontFamily: 'monospace',
                   fontSize: 12,
-                  color: step?.c === idx ? '#0c4a6e' : '#334155'
+                  color: step?.c === idx ? '#0c4a6e' : 'var(--border)'
                 }}
               >
                 Col[{idx}]: {count}

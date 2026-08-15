@@ -128,7 +128,7 @@ function generateSteps(matrix) {
 
 function MatrixDisplay({ matrix, dp, highlightedCell }) {
   return (
-    <div style={{ display: "inline-block", backgroundColor: "#1e293b", padding: 8, borderRadius: 4 }}>
+    <div style={{ display: "inline-block", backgroundColor: "var(--surface2)", padding: 8, borderRadius: 4 }}>
       {matrix.map((row, i) => (
         <div key={i} style={{ display: "flex", gap: 2, marginBottom: 2 }}>
           {row.map((cell, j) => (
@@ -145,13 +145,13 @@ function MatrixDisplay({ matrix, dp, highlightedCell }) {
                     ? "#fbbf24"
                     : cell === "1"
                       ? "#d1fae5"
-                      : "#e2e8f0",
+                      : "var(--text)",
                 borderRadius: 4,
                 fontFamily: "monospace",
                 fontWeight: 700,
-                color: "#334155",
+                color: "var(--border)",
                 fontSize: 14,
-                border: "1px solid #64748b",
+                border: "1px solid var(--text-muted)",
               }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -171,13 +171,13 @@ function MatrixDisplay({ matrix, dp, highlightedCell }) {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    backgroundColor: val > 0 ? "#fecdd3" : "#e2e8f0",
+                    backgroundColor: val > 0 ? "#fecdd3" : "var(--text)",
                     borderRadius: 4,
                     fontFamily: "monospace",
                     fontWeight: 700,
-                    color: val > 0 ? "#7f1d1d" : "#94a3b8",
+                    color: val > 0 ? "#7f1d1d" : "var(--text-muted)",
                     fontSize: 12,
-                    border: "1px solid #94a3b8",
+                    border: "1px solid var(--text-muted)",
                   }}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}

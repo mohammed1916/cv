@@ -23,9 +23,9 @@
   padding: 12px 16px;
   font-weight: 600;
   font-size: 14px;
-  color: #1e293b;
-  border-bottom: 1px solid #e2e8f0;
-  background: #f8fafc;
+  color: var(--surface2);
+  border-bottom: 1px solid var(--text);
+  background: var(--surface);
 }
 
 .csatbst-panel-body {
@@ -38,9 +38,9 @@
 .csatbst-status {
   padding: 12px 16px;
   font-size: 13px;
-  color: #475569;
-  border-top: 1px solid #e2e8f0;
-  background: #f8fafc;
+  color: var(--text-muted);
+  border-top: 1px solid var(--text);
+  background: var(--surface);
   line-height: 1.5;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -56,7 +56,7 @@
 
 .csatbst-canvas {
   position: relative;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border);
   border-radius: 6px;
   background: #fff;
 }
@@ -100,7 +100,7 @@
 .csatbst-array-label {
   font-weight: 600;
   font-size: 13px;
-  color: #1e293b;
+  color: var(--surface2);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -110,7 +110,7 @@
   gap: 8px;
   flex-wrap: wrap;
   padding: 12px;
-  background: #f1f5f9;
+  background: var(--surface2);
   border-radius: 6px;
 }
 
@@ -121,8 +121,8 @@
   justify-content: center;
   gap: 4px;
   padding: 8px 12px;
-  background: #e2e8f0;
-  border: 1px solid #cbd5e1;
+  background: var(--text);
+  border: 1px solid var(--border);
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -141,14 +141,14 @@
 
 .csatbst-array-idx {
   font-size: 11px;
-  color: #64748b;
+  color: var(--text-muted);
   font-weight: 600;
 }
 
 .csatbst-array-val {
   font-size: 14px;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--surface2);
 }
 
 /* State panel styling */
@@ -163,14 +163,14 @@
   justify-content: space-between;
   align-items: center;
   padding: 12px;
-  background: #f1f5f9;
+  background: var(--surface2);
   border-radius: 6px;
   border-left: 3px solid #3b82f6;
 }
 
 .csatbst-label {
   font-size: 12px;
-  color: #64748b;
+  color: var(--text-muted);
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -187,7 +187,7 @@
   flex-direction: column;
   gap: 8px;
   padding-top: 12px;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid var(--text);
 }
 
 .csatbst-legend-item {
@@ -195,7 +195,7 @@
   align-items: center;
   gap: 8px;
   font-size: 12px;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .csatbst-dot {
@@ -247,11 +247,11 @@
 
 .csatbst-input {
   padding: 8px 12px;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border);
   border-radius: 4px;
   font-size: 13px;
   font-family: monospace;
-  color: #1e293b;
+  color: var(--surface2);
   background: #fff;
 }
 

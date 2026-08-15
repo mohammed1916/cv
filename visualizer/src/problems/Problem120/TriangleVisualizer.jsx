@@ -136,7 +136,7 @@ function VisualizationPanel({ step }) {
                       backgroundColor:
                         step.currentRow === idx && step.currentCol === jdx ? '#a7f3d0' : step.currentRow === idx ? '#bfdbfe' : '#e5e7eb',
                       border:
-                        step.currentRow === idx && step.currentCol === jdx ? '2px solid #10b981' : '1px solid #cbd5e1',
+                        step.currentRow === idx && step.currentCol === jdx ? '2px solid #10b981' : '1px solid var(--border)',
                       fontSize: 12,
                       fontWeight: 600,
                       textAlign: 'center',

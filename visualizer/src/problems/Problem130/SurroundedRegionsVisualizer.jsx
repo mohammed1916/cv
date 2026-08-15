@@ -161,7 +161,7 @@ function GridVisualization({ board, currentCell, visitedCells, rows = 4, cols = 
         gridTemplateColumns: `repeat(${board[0]?.length || 1}, ${cellSize}px)`,
         gap: `${gapSize}px`,
         padding: 8,
-        backgroundColor: '#1e293b',
+        backgroundColor: 'var(--surface2)',
         borderRadius: 6,
       }}>
         {board.map((row, r) =>
@@ -181,8 +181,8 @@ function GridVisualization({ board, currentCell, visitedCells, rows = 4, cols = 
                   borderRadius: 4,
                   fontWeight: 600,
                   fontSize: 14,
-                  backgroundColor: isCurrent ? '#fbbf24' : isVisited ? '#86efac' : cell === 'X' ? '#94a3b8' : '#e2e8f0',
-                  color: cell === 'X' ? 'white' : '#0f172a',
+                  backgroundColor: isCurrent ? '#fbbf24' : isVisited ? '#86efac' : cell === 'X' ? 'var(--text-muted)' : 'var(--text)',
+                  color: cell === 'X' ? 'white' : 'var(--code-bg)',
                   border: isCurrent ? '3px solid #f59e0b' : isVisited && cell === 'O' ? '2px solid #22c55e' : 'none',
                 }}
                 animate={{ scale: isCurrent ? 1.1 : 1 }}

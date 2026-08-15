@@ -4,8 +4,8 @@
   flex-direction: column;
   height: 100%;
   min-height: 480px;
-  background: #0f172a;
-  color: #e2e8f0;
+  background: var(--code-bg);
+  color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   gap: 0;
   overflow: hidden;
@@ -13,8 +13,8 @@
 
 .lcp-hero {
   padding: 32px 40px;
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-  border-bottom: 1px solid #334155;
+  background: linear-gradient(135deg, var(--surface2) 0%, var(--code-bg) 100%);
+  border-bottom: 1px solid var(--border);
 }
 
 .lcp-hero-copy {
@@ -24,7 +24,7 @@
 .lcp-kicker {
   font-size: 12px;
   font-weight: 600;
-  color: #64748b;
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -52,7 +52,7 @@
 
 .lcp-summary-card {
   background: rgba(30, 41, 59, 0.6);
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 12px 16px;
   display: flex;
@@ -120,10 +120,10 @@
 .lcp-input {
   flex: 1;
   padding: 8px 12px;
-  background: #1e293b;
-  border: 1px solid #334155;
+  background: var(--surface2);
+  border: 1px solid var(--border);
   border-radius: 4px;
-  color: #e2e8f0;
+  color: var(--text);
   font-family: 'Fira Code', monospace;
   font-size: 12px;
   transition: border-color 0.2s;
@@ -184,7 +184,7 @@
   padding: 8px;
   background: rgba(30, 41, 59, 0.4);
   border-radius: 4px;
-  border-left: 3px solid #64748b;
+  border-left: 3px solid var(--text-muted);
 }
 
 .lcp-string-row.base {
@@ -218,7 +218,7 @@
 
 .lcp-col-index {
   font-size: 10px;
-  color: #64748b;
+  color: var(--text-muted);
   font-weight: 600;
   height: 14px;
 }
@@ -229,13 +229,13 @@
   justify-content: center;
   width: 32px;
   height: 32px;
-  background: #1e293b;
-  border: 1px solid #334155;
+  background: var(--surface2);
+  border: 1px solid var(--border);
   border-radius: 4px;
   font-family: 'Fira Code', monospace;
   font-size: 14px;
   font-weight: 600;
-  color: #cbd5e1;
+  color: var(--border);
   transition: all 0.2s;
 }
 
@@ -266,7 +266,7 @@
 
 .lcp-empty-string,
 .lcp-empty-array {
-  color: #64748b;
+  color: var(--text-muted);
   font-style: italic;
   font-size: 13px;
 }
@@ -275,7 +275,7 @@
 .lcp-prefix-display {
   padding: 16px;
   background: rgba(30, 41, 59, 0.6);
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 6px;
   text-align: center;
 }
@@ -291,7 +291,7 @@
 
 .lcp-prefix-empty {
   font-size: 18px;
-  color: #64748b;
+  color: var(--text-muted);
   margin-bottom: 8px;
 }
 
@@ -375,12 +375,12 @@
 }
 
 .lcp-panel-body::-webkit-scrollbar-thumb {
-  background: #475569;
+  background: var(--text-muted);
   border-radius: 3px;
 }
 
 .lcp-panel-body::-webkit-scrollbar-thumb:hover {
-  background: #64748b;
+  background: var(--text-muted);
 }
 
 /* Responsive */

@@ -310,7 +310,7 @@ function generateSteps(list, k) {
 function VisualizationPanel({ step }) {
   if (!step) {
     return (
-      <div style={{ padding: 16, color: '#64748b', fontSize: 13 }}>
+      <div style={{ padding: 16, color: 'var(--text-muted)', fontSize: 13 }}>
         Press play (or step) to rotate the linked list.
       </div>
     )
@@ -364,8 +364,8 @@ function VisualizationPanel({ step }) {
           style={{
             padding: '4px 10px',
             borderRadius: 6,
-            background: step.ring ? '#fef3c7' : '#f1f5f9',
-            color: step.ring ? '#92400e' : '#475569',
+            background: step.ring ? '#fef3c7' : 'var(--surface2)',
+            color: step.ring ? '#92400e' : 'var(--text-muted)',
             fontWeight: 600,
           }}
         >
@@ -451,7 +451,7 @@ function VisualizationPanel({ step }) {
                     justifyContent: 'center',
                     fontSize: 15,
                     fontWeight: 700,
-                    color: '#1e293b',
+                    color: 'var(--surface2)',
                   }}
                 >
                   {node.val}
@@ -460,7 +460,7 @@ function VisualizationPanel({ step }) {
 
               {/* forward arrow to next node */}
               {!isLast && (
-                <span style={{ margin: '0 4px', color: '#64748b', fontSize: 20, marginTop: 18 }}>
+                <span style={{ margin: '0 4px', color: 'var(--text-muted)', fontSize: 20, marginTop: 18 }}>
                   →
                 </span>
               )}
@@ -470,7 +470,7 @@ function VisualizationPanel({ step }) {
                   style={{
                     marginLeft: 6,
                     fontSize: 12,
-                    color: step.ring ? '#d97706' : '#94a3b8',
+                    color: step.ring ? '#d97706' : 'var(--text-muted)',
                     fontWeight: 600,
                     marginTop: 18,
                   }}
@@ -580,7 +580,7 @@ export default function Problem61Visualizer() {
       />
     <div className="problem61-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
-        <span style={{ fontSize: 12, color: '#64748b', fontWeight: 600 }}>Examples:</span>
+        <span style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 600 }}>Examples:</span>
         {EXAMPLES.map((e) => (
           <button
             key={e.label}
@@ -601,7 +601,7 @@ export default function Problem61Visualizer() {
     </>)
 
   const statusPanel = (
-    <div className="problem61-status" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', fontSize: 12, color: '#64748b' }}>
+    <div className="problem61-status" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', fontSize: 12, color: 'var(--text-muted)' }}>
       Step {stepIndex + 1} / {steps.length}
     </div>
   )

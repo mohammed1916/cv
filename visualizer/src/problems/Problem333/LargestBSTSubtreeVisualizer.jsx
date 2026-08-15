@@ -142,7 +142,7 @@ function TreeView({ tree, layout, step }) {
             <line
               key={`${fromId}-${toId}`}
               x1={a.x} y1={a.y} x2={b.x} y2={b.y}
-              stroke={childValid ? '#22c55e' : '#334155'}
+              stroke={childValid ? '#22c55e' : 'var(--border)'}
               strokeWidth={childValid ? 2.5 : 1.5}
             />
           )
@@ -152,11 +152,11 @@ function TreeView({ tree, layout, step }) {
           if (!p) return null
           const c = computed[node.id]
           const isCurrent = node.id === current
-          let fill = '#1e293b'
-          let stroke = '#334155'
+          let fill = 'var(--surface2)'
+          let stroke = 'var(--border)'
           if (c) {
             if (c.isBST) { fill = 'rgba(34,197,94,0.18)'; stroke = '#22c55e' }
-            else { fill = 'rgba(100,116,139,0.20)'; stroke = '#64748b' }
+            else { fill = 'rgba(100,116,139,0.20)'; stroke = 'var(--text-muted)' }
           }
           if (isCurrent) stroke = '#f9e2af'
           return (
@@ -175,14 +175,14 @@ function TreeView({ tree, layout, step }) {
               />
               <text
                 x={p.x} y={p.y} textAnchor="middle" dominantBaseline="central"
-                fill="#e2e8f0" fontSize={14} fontWeight={600}
+                fill="var(--text)" fontSize={14} fontWeight={600}
               >
                 {node.val}
               </text>
               {c && (
                 <text
                   x={p.x} y={p.y + NODE_R + 14} textAnchor="middle"
-                  fill={c.isBST ? '#22c55e' : '#94a3b8'} fontSize={11} fontWeight={600}
+                  fill={c.isBST ? '#22c55e' : 'var(--text-muted)'} fontSize={11} fontWeight={600}
                 >
                   {c.isBST ? `BST·${c.size}` : `✗·${c.size}`}
                 </text>

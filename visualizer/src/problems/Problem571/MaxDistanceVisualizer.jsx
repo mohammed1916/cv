@@ -200,11 +200,11 @@ function VisualizationPanel({ step, applyExample, examples }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -227,9 +227,9 @@ function VisualizationPanel({ step, applyExample, examples }) {
                   const isGlobalMin = val === step.minVal && (arrIdx < step.currentArrayIndex || arrIdx === 0)
                   const isGlobalMax = val === step.maxVal && (arrIdx < step.currentArrayIndex || arrIdx === 0)
 
-                  let bgColor = '#1e293b'
-                  let borderColor = '#475569'
-                  let textColor = '#e2e8f0'
+                  let bgColor = 'var(--surface2)'
+                  let borderColor = 'var(--text-muted)'
+                  let textColor = 'var(--text)'
 
                   if (isCurrentMin) {
                     bgColor = '#1e3a8a'
@@ -240,7 +240,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
                     borderColor = '#ea580c'
                     textColor = '#ea580c'
                   } else if (isGlobalMin) {
-                    bgColor = '#0f172a'
+                    bgColor = 'var(--code-bg)'
                     borderColor = '#0ea5e9'
                     textColor = '#0ea5e9'
                   } else if (isGlobalMax) {
@@ -278,13 +278,13 @@ function VisualizationPanel({ step, applyExample, examples }) {
       {/* Current values display */}
       {step?.minVal !== undefined && step?.maxVal !== undefined && (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-          <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #0ea5e9' }}>
+          <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #0ea5e9' }}>
             <div style={{ fontSize: 11, fontWeight: 600, color: '#0b7db0', marginBottom: 6 }}>Global Min</div>
             <div style={{ fontSize: 16, color: '#0b7db0', fontFamily: 'monospace', fontWeight: 700 }}>
               {step.minVal}
             </div>
           </div>
-          <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f97316' }}>
+          <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #f97316' }}>
             <div style={{ fontSize: 11, fontWeight: 600, color: '#c35305', marginBottom: 6 }}>Global Max</div>
             <div style={{ fontSize: 16, color: '#c35305', fontFamily: 'monospace', fontWeight: 700 }}>
               {step.maxVal}
@@ -295,8 +295,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
       {/* Distance calculation */}
       {step?.distance1 !== undefined && step?.distance2 !== undefined && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #64748b' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Distance Calculations</div>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Distance Calculations</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 12, color: '#5577a4' }}>
             <div>
               <span style={{ color: '#ca4c0a', fontWeight: 600 }}>{step.currentArrayMax}</span>
@@ -321,7 +321,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #38bdf8',
             textAlign: 'center',
@@ -330,7 +330,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Maximum Distance</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Maximum Distance</div>
           <div
             style={{
               fontSize: 18,
@@ -427,9 +427,9 @@ export default function MaxDistanceVisualizer() {
                   height: 80,
                   padding: '8px',
                   borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid #475569',
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                   fontSize: 12,
                   resize: 'vertical',

@@ -110,20 +110,20 @@ function VisualizationPanel({ step, applyExample, examples }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                   transition: 'all 0.2s',
                 }}
                 onMouseEnter={(e) => {
-                  e.target.style.backgroundColor = '#334155'
-                  e.target.style.borderColor = '#64748b'
+                  e.target.style.backgroundColor = 'var(--border)'
+                  e.target.style.borderColor = 'var(--text-muted)'
                 }}
                 onMouseLeave={(e) => {
-                  e.target.style.backgroundColor = '#1e293b'
-                  e.target.style.borderColor = '#475569'
+                  e.target.style.backgroundColor = 'var(--surface2)'
+                  e.target.style.borderColor = 'var(--text-muted)'
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -137,7 +137,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
         <motion.div
           style={{
             padding: 12,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #f87171',
           }}
@@ -167,7 +167,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
                   padding: '12px',
                   borderRadius: 6,
                   border: '2px solid',
-                  backgroundColor: '#1e293b',
+                  backgroundColor: 'var(--surface2)',
                   borderColor: '#f87171',
                   display: 'flex',
                   justifyContent: 'space-between',
@@ -187,7 +187,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
                     fontSize: 16,
                     fontWeight: 'bold',
                     color: '#22c55e',
-                    backgroundColor: '#1e293b',
+                    backgroundColor: 'var(--surface2)',
                     borderRadius: 4,
                     padding: '4px 12px',
                     border: '1px solid #22c55e',
@@ -205,7 +205,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #22c55e',
             textAlign: 'center',
@@ -214,11 +214,11 @@ function VisualizationPanel({ step, applyExample, examples }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Total Students</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Total Students</div>
           <div style={{ fontSize: 24, fontWeight: 'bold', color: '#178740' }}>
             {step.result.reduce((sum, d) => sum + d.count, 0)}
           </div>
-          <div style={{ fontSize: 11, color: '#64748b', marginTop: 6 }}>
+          <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 6 }}>
             Across {step.result.length} department{step.result.length !== 1 ? 's' : ''}
           </div>
         </motion.div>
@@ -312,9 +312,9 @@ export default function CountStudentsVisualizer() {
                   height: 80,
                   padding: '8px',
                   borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid #475569',
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                   fontSize: 12,
                   resize: 'vertical',

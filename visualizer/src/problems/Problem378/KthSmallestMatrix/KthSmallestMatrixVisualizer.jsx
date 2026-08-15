@@ -275,7 +275,7 @@ function KthSmallestMatrixVisualizer() {
                                                 ? '#22c55e'
                                                 : isHighlighted
                                                     ? '#f5c2e7'
-                                                    : '#45475a'
+                                                    : 'var(--code-line)'
                                         }
                                         strokeWidth={isHighlighted || isCountedCell || isResult ? 2 : 1}
                                     />
@@ -286,7 +286,7 @@ function KthSmallestMatrixVisualizer() {
                                         dy="0.3em"
                                         fontSize="14"
                                         fontWeight="700"
-                                        fill={isCountedCell || isResult ? '#1e1e2e' : '#cdd6f4'}
+                                        fill={isCountedCell || isResult ? 'var(--code-bg)' : 'var(--code-text)'}
                                     >
                                         {val}
                                     </text>

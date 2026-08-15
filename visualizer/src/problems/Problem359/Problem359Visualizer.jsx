@@ -252,7 +252,7 @@ function RequestTimeline({ step, requests }) {
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
         Request Timeline
       </header>
 
@@ -277,7 +277,7 @@ function RequestTimeline({ step, requests }) {
                   top: 0,
                   fontSize: 11,
                   fontWeight: 600,
-                  color: '#64748b',
+                  color: 'var(--text-muted)',
                   minWidth: 50,
                 }}>
                   t={req.timestamp}
@@ -287,17 +287,17 @@ function RequestTimeline({ step, requests }) {
                   style={{
                     height: 40,
                     position: 'relative',
-                    backgroundColor: '#f1f5f9',
+                    backgroundColor: 'var(--surface2)',
                     borderRadius: 4,
-                    border: `2px solid ${isPrinted ? '#22c55e' : '#e2e8f0'}`,
+                    border: `2px solid ${isPrinted ? '#22c55e' : 'var(--text)'}`,
                     paddingLeft: 12,
                     display: 'flex',
                     alignItems: 'center',
                     gap: 8,
                   }}
                   animate={{
-                    backgroundColor: isActive ? '#fef3c7' : isPrinted ? '#f0fdf4' : '#f1f5f9',
-                    borderColor: isActive ? '#fbbf24' : isPrinted ? '#22c55e' : '#e2e8f0',
+                    backgroundColor: isActive ? '#fef3c7' : isPrinted ? '#f0fdf4' : 'var(--surface2)',
+                    borderColor: isActive ? '#fbbf24' : isPrinted ? '#22c55e' : 'var(--text)',
                   }}
                   transition={{ duration: 0.2 }}
                 >
@@ -306,7 +306,7 @@ function RequestTimeline({ step, requests }) {
                       fontFamily: 'monospace',
                       fontWeight: 600,
                       fontSize: 13,
-                      color: '#1e293b',
+                      color: 'var(--surface2)',
                     }}
                     animate={{ scale: isActive ? 1.1 : 1 }}
                   >
@@ -341,8 +341,8 @@ function LogMapState({ step }) {
   if (!step) return null
 
   return (
-    <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16, borderLeft: '1px solid #e2e8f0' }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>
+    <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16, borderLeft: '1px solid var(--text)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
         Message Map (message → last_print_time)
       </header>
 
@@ -366,8 +366,8 @@ function LogMapState({ step }) {
                   exit={{ opacity: 0, x: 20 }}
                   style={{
                     padding: '10px 12px',
-                    backgroundColor: isExpired && step.timestamp !== null ? '#fef3c7' : '#f8fafc',
-                    border: `2px solid ${isExpired && step.timestamp !== null ? '#fbbf24' : '#cbd5e1'}`,
+                    backgroundColor: isExpired && step.timestamp !== null ? '#fef3c7' : 'var(--surface)',
+                    border: `2px solid ${isExpired && step.timestamp !== null ? '#fbbf24' : 'var(--border)'}`,
                     borderRadius: 4,
                     display: 'flex',
                     justifyContent: 'space-between',
@@ -376,10 +376,10 @@ function LogMapState({ step }) {
                     fontSize: 12,
                   }}
                 >
-                  <span style={{ fontWeight: 600, color: '#1e293b' }}>"{msg}"</span>
+                  <span style={{ fontWeight: 600, color: 'var(--surface2)' }}>"{msg}"</span>
 
                   <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                    <span style={{ color: '#64748b' }}>last: {lastTime}</span>
+                    <span style={{ color: 'var(--text-muted)' }}>last: {lastTime}</span>
                     {step.timestamp !== null && (
                       <motion.span
                         style={{
@@ -423,7 +423,7 @@ function DecisionFlow({ step }) {
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
         Decision Flow
       </header>
 
@@ -490,11 +490,11 @@ function DecisionFlow({ step }) {
                 transition={{ duration: 0.3, delay: 0.2 }}
                 style={{
                   padding: 10,
-                  backgroundColor: '#f1f5f9',
+                  backgroundColor: 'var(--surface2)',
                   borderRadius: 4,
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid var(--border)',
                   fontSize: 11,
-                  color: '#475569',
+                  color: 'var(--text-muted)',
                 }}
               >
                 <strong>Reason:</strong> {step.reason}
@@ -511,8 +511,8 @@ function OutputLog({ step }) {
   if (!step) return null
 
   return (
-    <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16, borderLeft: '1px solid #e2e8f0' }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>
+    <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16, borderLeft: '1px solid var(--text)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
         Printed Output ({(step.printedMessages || []).length})
       </header>
 
@@ -708,7 +708,7 @@ export default function Problem359Visualizer() {
       </>
 
       <FloatingPanel title="Playback Controls">
-        <div style={{ marginBottom: '12px', fontSize: 12, color: '#475569' }}>
+        <div style={{ marginBottom: '12px', fontSize: 12, color: 'var(--text-muted)' }}>
           {step?.message ?? 'Press Play or Step to begin.'}
         </div>
         <PlaybackControls

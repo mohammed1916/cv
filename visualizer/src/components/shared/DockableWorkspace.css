@@ -323,7 +323,7 @@
   left: 32px;
   font-size: 12px;
   font-weight: 600;
-  color: #94a3b8;
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -398,7 +398,7 @@
 .dock-cell-label {
   font-size: 12px;
   font-weight: 600;
-  color: #cbd5e1;
+  color: var(--border);
   text-align: center;
   white-space: nowrap;
   overflow: hidden;

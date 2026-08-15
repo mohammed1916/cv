@@ -159,7 +159,7 @@ function TreeVisualization({ tree, currentNode }) {
               y1={y}
               x2={x - offsetX}
               y2={y + 60}
-              stroke={isActive ? '#dc2626' : '#cbd5e1'}
+              stroke={isActive ? '#dc2626' : 'var(--border)'}
               strokeWidth={2}
             />
             {renderNode(node.left, x - offsetX, y + 60, offsetX / 2)}
@@ -172,7 +172,7 @@ function TreeVisualization({ tree, currentNode }) {
               y1={y}
               x2={x + offsetX}
               y2={y + 60}
-              stroke={isActive ? '#dc2626' : '#cbd5e1'}
+              stroke={isActive ? '#dc2626' : 'var(--border)'}
               strokeWidth={2}
             />
             {renderNode(node.right, x + offsetX, y + 60, offsetX / 2)}
@@ -204,14 +204,14 @@ function TreeVisualization({ tree, currentNode }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Tree Structure</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Tree Structure</div>
       <svg
         style={{
           width: '100%',
           height: 300,
-          backgroundColor: '#f1f5f9',
+          backgroundColor: 'var(--surface2)',
           borderRadius: 8,
-          border: '2px solid #cbd5e1',
+          border: '2px solid var(--border)',
         }}
         viewBox="0 0 300 300"
       >
@@ -224,12 +224,12 @@ function TreeVisualization({ tree, currentNode }) {
 function PathsVisualization({ paths, count, target }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Found Paths (Sum = {target})</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Found Paths (Sum = {target})</div>
       <div style={{
         padding: 12,
-        backgroundColor: '#f1f5f9',
+        backgroundColor: 'var(--surface2)',
         borderRadius: 8,
-        border: '2px solid #cbd5e1',
+        border: '2px solid var(--border)',
         minHeight: 80,
       }}>
         {paths.length > 0 ? (
@@ -277,7 +277,7 @@ function VisualizationPanel({ step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -286,10 +286,10 @@ function VisualizationPanel({ step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9',
+                backgroundColor: 'var(--surface2)',
               }}
             >
               {e.label}

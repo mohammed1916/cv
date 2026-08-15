@@ -11,7 +11,7 @@
 }
 
 .subsets-panel {
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 10px;
     overflow: hidden;
@@ -28,7 +28,7 @@
     background: #181825;
     font-size: 13px;
     font-weight: 600;
-    color: #cdd6f4;
+    color: var(--code-text);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -51,7 +51,7 @@
 .subsets-section-label {
     font-size: 11px;
     font-weight: 700;
-    color: #6c7086;
+    color: var(--code-dim);
     text-transform: uppercase;
     letter-spacing: 0.08em;
 }
@@ -64,7 +64,7 @@
 
 .subsets-chip {
     background: #313244;
-    color: #cdd6f4;
+    color: var(--code-text);
     border: none;
     border-radius: 6px;
     padding: 4px 10px;
@@ -73,13 +73,13 @@
 }
 
 .subsets-chip:hover {
-    background: #45475a;
+    background: var(--code-line);
 }
 
 .subsets-input {
-    background: #11111b;
-    color: #cdd6f4;
-    border: 1px solid #45475a;
+    background: var(--code-surface);
+    color: var(--code-text);
+    border: 1px solid var(--code-line);
     border-radius: 6px;
     padding: 6px 10px;
     font-size: 13px;
@@ -97,7 +97,7 @@
 
 .subsets-bracket {
     font-size: 28px;
-    color: #6c7086;
+    color: var(--code-dim);
     line-height: 1;
 }
 
@@ -128,7 +128,7 @@
     gap: 3px;
     width: 44px;
     background: #313244;
-    border: 2px solid #45475a;
+    border: 2px solid var(--code-line);
     border-radius: 8px;
     padding: 6px 0;
 }
@@ -154,7 +154,7 @@
 
 .subsets-num-idx {
     font-size: 10px;
-    color: #6c7086;
+    color: var(--code-dim);
 }
 
 .subsets-res-list {
@@ -167,7 +167,7 @@
 
 .subsets-res-item {
     background: #313244;
-    border: 1px solid #45475a;
+    border: 1px solid var(--code-line);
     border-radius: 6px;
     padding: 5px 10px;
     font-size: 13px;
@@ -183,10 +183,10 @@
 
 .subsets-status {
     padding: 8px 12px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 8px;
     font-size: 13px;
-    color: #a6adc8;
+    color: var(--code-dim);
     min-height: 36px;
 }

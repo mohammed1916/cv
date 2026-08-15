@@ -149,7 +149,7 @@ function BitVisualization({ value, label }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b' }}>
+      <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)' }}>
         {label}: {value} (0b{bits})
       </div>
       <div style={{ display: 'flex', gap: 2 }}>
@@ -163,7 +163,7 @@ function BitVisualization({ value, label }) {
               alignItems: 'center',
               justifyContent: 'center',
               borderRadius: 3,
-              backgroundColor: bit === '1' ? '#06b6d4' : '#94a3b8',
+              backgroundColor: bit === '1' ? '#06b6d4' : 'var(--text-muted)',
               color: '#757575',
               fontSize: 11,
               fontWeight: 600,

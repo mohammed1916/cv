@@ -148,14 +148,14 @@ function Badge({ ok, children }) {
 
 function Segment({ text, color }) {
   if (text === '') {
-    return <span style={{ color: '#64748b', fontStyle: 'italic', fontFamily: 'monospace' }}>ε</span>
+    return <span style={{ color: 'var(--text-muted)', fontStyle: 'italic', fontFamily: 'monospace' }}>ε</span>
   }
   return (
     <span style={{ fontFamily: 'monospace' }}>
       {text.split('').map((c, idx) => (
         <span key={idx} style={{
           display: 'inline-block', padding: '3px 6px', margin: 1, borderRadius: 4,
-          background: '#0f172a', border: `1px solid ${color}`, color,
+          background: 'var(--code-bg)', border: `1px solid ${color}`, color,
         }}>{c}</span>
       ))}
     </span>
@@ -177,11 +177,11 @@ function VizBody({ step, words }) {
             return (
               <div key={idx} style={{
                 padding: '6px 10px', borderRadius: 8, fontFamily: 'monospace', fontSize: 13,
-                border: `2px solid ${active ? GREEN : '#334155'}`,
-                background: active ? `${GREEN}1f` : '#1e293b',
-                color: active ? GREEN : '#e2e8f0',
+                border: `2px solid ${active ? GREEN : 'var(--border)'}`,
+                background: active ? `${GREEN}1f` : 'var(--surface2)',
+                color: active ? GREEN : 'var(--text)',
               }}>
-                <span style={{ color: '#64748b', fontSize: 10, marginRight: 6 }}>{idx}</span>
+                <span style={{ color: 'var(--text-muted)', fontSize: 10, marginRight: 6 }}>{idx}</span>
                 {w === '' ? 'ε' : w}
               </div>
             )
@@ -198,14 +198,14 @@ function VizBody({ step, words }) {
                 prefix
                 <Badge ok={step.prefixIsPal}>{step.prefixIsPal ? 'palindrome' : 'not palindrome'}</Badge>
               </div>
-              <Segment text={step.prefix} color={step.prefixIsPal ? GREEN : '#64748b'} />
+              <Segment text={step.prefix} color={step.prefixIsPal ? GREEN : 'var(--text-muted)'} />
             </div>
             <div>
               <div style={{ fontSize: 11, color: '#627794', marginBottom: 6 }}>
                 suffix
                 <Badge ok={step.suffixIsPal}>{step.suffixIsPal ? 'palindrome' : 'not palindrome'}</Badge>
               </div>
-              <Segment text={step.suffix} color={step.suffixIsPal ? GREEN : '#64748b'} />
+              <Segment text={step.suffix} color={step.suffixIsPal ? GREEN : 'var(--text-muted)'} />
             </div>
           </div>
         </div>
@@ -215,9 +215,9 @@ function VizBody({ step, words }) {
         <div>
           <div style={LABEL}>Reverse lookup</div>
           <div style={{
-            padding: 12, borderRadius: 8, background: '#0f172a',
-            border: `1px solid ${step.found ? GREEN : '#334155'}`,
-            color: '#e2e8f0', fontSize: 13,
+            padding: 12, borderRadius: 8, background: 'var(--code-bg)',
+            border: `1px solid ${step.found ? GREEN : 'var(--border)'}`,
+            color: 'var(--text)', fontSize: 13,
           }}>
             <span style={{ color: '#627794' }}>
               {step.matchCase === 'prefix' ? 'reverse(suffix)' : 'reverse(prefix)'} =
@@ -234,7 +234,7 @@ function VizBody({ step, words }) {
         <div style={LABEL}>Found pairs ({pairs.length})</div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
           {pairs.length === 0 && (
-            <span style={{ color: '#64748b', fontStyle: 'italic', fontSize: 13 }}>none yet</span>
+            <span style={{ color: 'var(--text-muted)', fontStyle: 'italic', fontSize: 13 }}>none yet</span>
           )}
           {pairs.map((p, idx) => {
             const justAdded = step?.newPair && idx === pairs.length - 1 &&
@@ -247,12 +247,12 @@ function VizBody({ step, words }) {
                 style={{
                   padding: '6px 12px', borderRadius: 8, fontFamily: 'monospace', fontSize: 13,
                   fontWeight: 700,
-                  border: `2px solid ${justAdded ? GREEN : '#334155'}`,
-                  background: justAdded ? `${GREEN}22` : '#1e293b',
-                  color: justAdded ? GREEN : '#e2e8f0',
+                  border: `2px solid ${justAdded ? GREEN : 'var(--border)'}`,
+                  background: justAdded ? `${GREEN}22` : 'var(--surface2)',
+                  color: justAdded ? GREEN : 'var(--text)',
                 }}
               >
-                <span style={{ color: '#64748b', fontSize: 10, marginRight: 6 }}>({p.a},{p.b})</span>
+                <span style={{ color: 'var(--text-muted)', fontSize: 10, marginRight: 6 }}>({p.a},{p.b})</span>
                 {p.label}
               </motion.div>
             )

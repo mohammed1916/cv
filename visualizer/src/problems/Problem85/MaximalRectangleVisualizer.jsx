@@ -213,7 +213,7 @@ function MaximalRectangleVisualizer() {
         : '#f5c6de'
     }
     return matrix[r][c] === '1' || matrix[r][c] === 1
-      ? '#45475a'
+      ? 'var(--code-line)'
       : '#313244'
   }
 

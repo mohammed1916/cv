@@ -212,7 +212,7 @@ function generateSteps(treeArr) {
 function VisualizationPanel({ step }) {
   if (!step) {
     return (
-      <div style={{ padding: 16, color: '#64748b', fontSize: 13 }}>
+      <div style={{ padding: 16, color: 'var(--text-muted)', fontSize: 13 }}>
         Press play to walk the iterative inorder traversal.
       </div>
     )
@@ -229,20 +229,20 @@ function VisualizationPanel({ step }) {
     if (id === currentId) return '#f59e0b'
     if (stackIds.has(id)) return '#a78bfa'
     if (visitedIds.has(id)) return '#34d399'
-    return '#1e293b'
+    return 'var(--surface2)'
   }
   const nodeStroke = (id) => {
     if (id === currentId) return '#b45309'
     if (stackIds.has(id)) return '#6d28d9'
     if (visitedIds.has(id)) return '#059669'
-    return '#475569'
+    return 'var(--text-muted)'
   }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 12 }}>
-      <div style={{ fontSize: 12, color: '#334155' }}>{step.message}</div>
+      <div style={{ fontSize: 12, color: 'var(--border)' }}>{step.message}</div>
 
-      <svg width={CANVAS_W} height={CANVAS_H} style={{ background: '#0f172a', borderRadius: 8, maxWidth: '100%' }}>
+      <svg width={CANVAS_W} height={CANVAS_H} style={{ background: 'var(--code-bg)', borderRadius: 8, maxWidth: '100%' }}>
         {edges.map((e, i) => {
           const a = positions.get(e.from)
           const b = positions.get(e.to)
@@ -251,7 +251,7 @@ function VisualizationPanel({ step }) {
             <line
               key={`e${i}`}
               x1={a.x} y1={a.y} x2={b.x} y2={b.y}
-              stroke="#475569" strokeWidth={2}
+              stroke="var(--text-muted)" strokeWidth={2}
             />
           )
         })}
@@ -269,7 +269,7 @@ function VisualizationPanel({ step }) {
               x={p.x} y={p.y + 5}
               textAnchor="middle"
               fontSize={14} fontWeight={700}
-              fill={p.id === currentId || visitedIds.has(p.id) ? '#0f172a' : '#e2e8f0'}
+              fill={p.id === currentId || visitedIds.has(p.id) ? 'var(--code-bg)' : 'var(--text)'}
             >
               {p.val}
             </text>
@@ -396,7 +396,7 @@ export default function Problem94Visualizer() {
     </>)
 
   const statusPanel = (
-    <div className="p94-status" style={{ display: 'flex', alignItems: 'center', padding: '8px 12px', gap: 12, fontSize: 12, color: '#64748b' }}>
+    <div className="p94-status" style={{ display: 'flex', alignItems: 'center', padding: '8px 12px', gap: 12, fontSize: 12, color: 'var(--text-muted)' }}>
       <span>Step: <strong>{stepIndex + 1}</strong> / {steps.length}</span>
       {step?.phase && <span style={{ color: '#8553f6' }}>Phase: <strong>{step.phase}</strong></span>}
     </div>
@@ -448,9 +448,9 @@ export default function Problem94Visualizer() {
             onClick={() => applyEx(e)}
             style={{
               padding: '6px 12px', borderRadius: 6, cursor: 'pointer',
-              border: e.label === ex.label ? '2px solid #059669' : '1px solid #cbd5e1',
-              background: e.label === ex.label ? '#d1fae5' : '#f8fafc',
-              color: '#0f172a', fontSize: 12, fontWeight: 600,
+              border: e.label === ex.label ? '2px solid #059669' : '1px solid var(--border)',
+              background: e.label === ex.label ? '#d1fae5' : 'var(--surface)',
+              color: 'var(--code-bg)', fontSize: 12, fontWeight: 600,
             }}
           >
             {e.label} [{e.tree.map((v) => (v == null ? 'null' : v)).join(',')}]

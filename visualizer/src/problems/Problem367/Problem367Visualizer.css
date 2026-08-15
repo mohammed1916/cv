@@ -25,9 +25,9 @@
 .p367-message {
     margin: 0;
     font-size: 13px;
-    color: #a6adc8;
+    color: var(--code-dim);
     padding: 6px 10px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 6px;
     transition: border-color 0.3s, color 0.3s;
@@ -71,7 +71,7 @@
 
 .p367-chip {
     background: #313244;
-    color: #cdd6f4;
+    color: var(--code-text);
     border: none;
     border-radius: 6px;
     padding: 4px 10px;
@@ -81,7 +81,7 @@
 }
 
 .p367-chip:hover {
-    background: #45475a;
+    background: var(--code-line);
     color: #f9e2af;
 }
 
@@ -99,9 +99,9 @@
 }
 
 .p367-input {
-    background: #11111b;
-    color: #cdd6f4;
-    border: 1px solid #45475a;
+    background: var(--code-surface);
+    color: var(--code-text);
+    border: 1px solid var(--code-line);
     border-radius: 6px;
     padding: 6px 10px;
     font-size: 13px;
@@ -120,7 +120,7 @@
     flex-direction: column;
     gap: 12px;
     padding: 14px;
-    background: #11111b;
+    background: var(--code-surface);
     border: 1px solid #313244;
     border-radius: 8px;
     flex-shrink: 0;
@@ -128,7 +128,7 @@
 
 .p367-number-line-label {
     font-size: 11px;
-    color: #6c7086;
+    color: var(--code-dim);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -137,7 +137,7 @@
 .p367-number-line {
     position: relative;
     height: 60px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 6px;
     overflow: hidden;
@@ -165,13 +165,13 @@
     align-items: center;
     gap: 6px;
     padding: 6px 10px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border-radius: 4px;
     border: 1px solid #313244;
 }
 
 .p367-range-label {
-    color: #6c7086;
+    color: var(--code-dim);
     font-weight: 600;
 }
 
@@ -183,14 +183,14 @@
 
 .p367-comparison {
     padding: 12px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 6px;
 }
 
 .p367-comp-title {
     font-size: 11px;
-    color: #6c7086;
+    color: var(--code-dim);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -214,7 +214,7 @@
 
 .p367-comp-label {
     font-size: 11px;
-    color: #6c7086;
+    color: var(--code-dim);
 }
 
 .p367-comp-val {
@@ -222,7 +222,7 @@
     font-weight: 700;
     font-family: monospace;
     padding: 4px 8px;
-    background: #11111b;
+    background: var(--code-surface);
     border-radius: 4px;
     min-width: 60px;
     text-align: center;
@@ -343,7 +343,7 @@
 .p367-searching-box {
     text-align: center;
     padding: 16px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 8px;
     width: 100%;
@@ -357,7 +357,7 @@
 
 .p367-searching-detail {
     font-size: 12px;
-    color: #6c7086;
+    color: var(--code-dim);
     margin-top: 4px;
     font-family: monospace;
 }
@@ -370,14 +370,14 @@
 
 .p367-search-summary {
     padding: 12px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 6px;
 }
 
 .p367-summary-title {
     font-size: 11px;
-    color: #6c7086;
+    color: var(--code-dim);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -396,12 +396,12 @@
     align-items: center;
     font-size: 12px;
     padding: 4px 8px;
-    background: #11111b;
+    background: var(--code-surface);
     border-radius: 4px;
 }
 
 .p367-summary-key {
-    color: #6c7086;
+    color: var(--code-dim);
     font-weight: 600;
 }
 
@@ -412,7 +412,7 @@
 }
 
 .p367-empty {
-    color: #6c7086;
+    color: var(--code-dim);
     font-size: 12px;
     padding: 8px;
     text-align: center;

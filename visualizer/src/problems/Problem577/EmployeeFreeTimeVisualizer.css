@@ -27,7 +27,7 @@
 .schedule-row {
   margin-bottom: 12px;
   padding: 10px;
-  background-color: #1e293b;
+  background-color: var(--surface2);
   border-radius: 6px;
   border-left: 4px solid #a78bfa;
 }
@@ -42,9 +42,9 @@
 .intervals-bar {
   position: relative;
   height: 32px;
-  background-color: #0f172a;
+  background-color: var(--code-bg);
   border-radius: 4px;
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
 }
 
 .interval-block {
@@ -56,14 +56,14 @@
   justify-content: center;
   font-size: 10px;
   font-weight: 600;
-  color: #0f172a;
+  color: var(--code-bg);
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .merged-section {
   margin: 16px 0;
   padding: 12px;
-  background-color: #1e293b;
+  background-color: var(--surface2);
   border-radius: 6px;
   border: 2px solid #38bdf8;
 }
@@ -78,7 +78,7 @@
 .merged-intervals-bar {
   position: relative;
   height: 40px;
-  background-color: #0f172a;
+  background-color: var(--code-bg);
   border-radius: 4px;
   border: 2px solid #38bdf8;
   margin-bottom: 8px;
@@ -94,14 +94,14 @@
   justify-content: center;
   font-size: 11px;
   font-weight: 600;
-  color: #0f172a;
+  color: var(--code-bg);
   border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 .free-time-section {
   margin: 16px 0;
   padding: 12px;
-  background-color: #1e293b;
+  background-color: var(--surface2);
   border-radius: 6px;
   border: 2px solid #22c55e;
 }
@@ -130,7 +130,7 @@
 
 .free-time-item {
   padding: 6px 10px;
-  background-color: #0f172a;
+  background-color: var(--code-bg);
   border-radius: 4px;
   border: 1px solid #22c55e;
   color: #22c55e;
@@ -141,7 +141,7 @@
 
 .step-info {
   padding: 12px;
-  background-color: #1e293b;
+  background-color: var(--surface2);
   border-radius: 6px;
   border-left: 4px solid #a78bfa;
   margin-top: 12px;

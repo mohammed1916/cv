@@ -77,14 +77,14 @@ function VisualizationPanel({ s, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {EXAMPLES.map(e => <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: '#f1f5f9' }}>{e.label}</button>)}
+          {EXAMPLES.map(e => <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: 'var(--surface2)' }}>{e.label}</button>)}
         </div>
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Pattern: "{s}"</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Pattern: "{s}"</div>
         <div style={{ display: 'flex', gap: 4 }}>
           {s.split('').map((char, i) => (
             <motion.div key={`char-${i}`} style={{ padding: '8px 14px', borderRadius: 4, border: '2px solid', fontFamily: 'monospace', fontWeight: 700, fontSize: 16, backgroundColor: char === 'D' ? '#fee2e2' : '#f0fdf4', borderColor: char === 'D' ? '#dc2626' : '#10b981', color: char === 'D' ? '#dc2626' : '#10b981' }} animate={{ scale: step?.index === i ? 1.2 : 1 }}>
@@ -96,7 +96,7 @@ function VisualizationPanel({ s, step, applyEx }) {
 
       {step?.perm && (
         <div>
-          <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Permutation</div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Permutation</div>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
             {step.perm.map((num, i) => (
               <motion.div key={`perm-${i}`} style={{ padding: '10px 16px', borderRadius: 6, border: '2px solid #8b5cf6', backgroundColor: '#f8f4ff', fontFamily: 'monospace', fontWeight: 700, fontSize: 14, color: '#7f4bf5' }} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}>

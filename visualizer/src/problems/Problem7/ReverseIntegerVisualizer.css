@@ -55,23 +55,23 @@
   border-radius: 99px;
   font-size: 12px;
   cursor: pointer;
-  background: #1e293b;
-  border: 1px solid #334155;
-  color: #94a3b8;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
   transition: all 0.2s ease;
 }
 
 .revin-example-btn:hover {
-  background: #334155;
-  color: #f8fafc;
+  background: var(--border);
+  color: var(--surface);
 }
 
 .revin-input {
   padding: 8px 12px;
   border-radius: 8px;
-  border: 1px solid #334155;
-  background: #0f172a;
-  color: #f8fafc;
+  border: 1px solid var(--border);
+  background: var(--code-bg);
+  color: var(--surface);
   font-family: monospace;
   font-size: 14px;
 }
@@ -87,15 +87,15 @@
   justify-content: space-between;
   gap: 24px;
   padding: 32px 16px;
-  background: #0f172a;
-  border: 1px solid #334155;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
   border-radius: 8px;
   flex: 1;
 }
 
 .revin-math-box {
-  background: #1e293b;
-  border: 1px solid #334155;
+  background: var(--surface2);
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 24px;
   display: flex;
@@ -133,7 +133,7 @@
 .revin-math-equation {
   margin-top: 16px;
   padding-top: 16px;
-  border-top: 1px dashed #475569;
+  border-top: 1px dashed var(--text-muted);
   font-family: monospace;
   color: #9e42f6;
   font-weight: bold;
@@ -179,10 +179,10 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  background: #1e293b;
+  background: var(--surface2);
   padding: 16px;
   border-radius: 8px;
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   margin-bottom: 16px;
 }
 
@@ -195,13 +195,13 @@
 
 .revin-bound.sub {
   font-size: 11px;
-  color: #64748b;
+  color: var(--text-muted);
   margin-top: 4px;
 }
 
 .revin-bound .label { color: #627794; }
 .revin-bound .val { color: #4879a9; font-weight: bold; }
-.revin-bound.sub .val { color: #64748b; font-weight: normal; }
+.revin-bound.sub .val { color: var(--text-muted); font-weight: normal; }
 
 .revin-check-box {
   background: rgba(234, 179, 8, 0.1);

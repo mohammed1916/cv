@@ -47,7 +47,7 @@
 }
 
 .scaffold-title {
-  color: #f8fafc;
+  color: var(--surface);
   font-weight: 700;
 }
 

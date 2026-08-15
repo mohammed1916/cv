@@ -304,11 +304,11 @@ export default function Problem355Visualizer() {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid var(--border)',
                   cursor: 'pointer',
                   fontSize: 12,
-                  backgroundColor: exIdx === i ? '#1da1f2' : '#f1f5f9',
-                  color: exIdx === i ? '#fff' : '#1e293b',
+                  backgroundColor: exIdx === i ? '#1da1f2' : 'var(--surface2)',
+                  color: exIdx === i ? '#fff' : 'var(--surface2)',
                   fontWeight: exIdx === i ? 600 : 400,
                 }}
               >
@@ -496,7 +496,7 @@ export default function Problem355Visualizer() {
           )}
 
           {!step && (
-            <div style={{ padding: 16, backgroundColor: '#f1f5f9', borderRadius: 6, textAlign: 'center', color: '#617086' }}>
+            <div style={{ padding: 16, backgroundColor: 'var(--surface2)', borderRadius: 6, textAlign: 'center', color: '#617086' }}>
               Press Play or Step to begin.
             </div>
           )}

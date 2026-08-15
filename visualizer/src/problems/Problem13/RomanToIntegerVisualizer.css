@@ -19,15 +19,15 @@
   align-items: center;
   justify-content: center;
   padding: 0 16px;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid var(--text);
 }
 
 .rti-input {
   padding: 8px 12px;
   border-radius: 8px;
-  border: 1px solid #cbd5e1;
-  background: #f8fafc;
-  color: #1e293b;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--surface2);
   font-family: monospace;
   font-size: 14px;
   font-weight: 600;

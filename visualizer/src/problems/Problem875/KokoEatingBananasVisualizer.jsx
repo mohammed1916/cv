@@ -138,10 +138,10 @@ export default function KokoEatingBananasVisualizer() {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid var(--border)',
                   cursor: 'pointer',
                   fontSize: 12,
-                  backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
+                  backgroundColor: exIdx === i ? '#dbeafe' : 'var(--surface2)',
                 }}
               >
                 {e.label}
@@ -151,7 +151,7 @@ export default function KokoEatingBananasVisualizer() {
 
           {step && (
             <>
-              <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
+              <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 11 }}>
                 <div style={{ fontWeight: 600, marginBottom: 8 }}>{step.message}</div>
                 <div style={{ marginTop: 8 }}>
                   h = {ex.h} hours, piles = [{ex.piles.join(', ')}]
@@ -172,16 +172,16 @@ export default function KokoEatingBananasVisualizer() {
                 </div>
               )}
 
-              <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6 }}>
+              <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6 }}>
                 <div style={{ fontSize: 10, fontWeight: 600, marginBottom: 6 }}>Search Range Visualization:</div>
-                <div style={{ display: 'flex', height: 30, borderRadius: 4, overflow: 'hidden', border: '1px solid #cbd5e1' }}>
+                <div style={{ display: 'flex', height: 30, borderRadius: 4, overflow: 'hidden', border: '1px solid var(--border)' }}>
                   {Array.from({ length: Math.min(step.right, 20) }, (_, i) => {
                     const isInRange = i >= step.left - 1 && i < step.right
                     const isMid = step.mid !== undefined && i === step.mid - 1
                     return (
                       <motion.div
                         key={i}
-                        animate={{ backgroundColor: isMid ? '#0ea5e9' : isInRange ? '#dbeafe' : '#e2e8f0' }}
+                        animate={{ backgroundColor: isMid ? '#0ea5e9' : isInRange ? '#dbeafe' : 'var(--text)' }}
                         style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8 }}
                       >
                         {i + 1}

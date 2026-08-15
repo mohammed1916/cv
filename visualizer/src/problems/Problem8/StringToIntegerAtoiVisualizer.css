@@ -55,23 +55,23 @@
   border-radius: 99px;
   font-size: 12px;
   cursor: pointer;
-  background: #1e293b;
-  border: 1px solid #334155;
-  color: #94a3b8;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
   transition: all 0.2s ease;
 }
 
 .atoi-example-btn:hover {
-  background: #334155;
-  color: #f8fafc;
+  background: var(--border);
+  color: var(--surface);
 }
 
 .atoi-input {
   padding: 8px 12px;
   border-radius: 8px;
-  border: 1px solid #334155;
-  background: #0f172a;
-  color: #f8fafc;
+  border: 1px solid var(--border);
+  background: var(--code-bg);
+  color: var(--surface);
   font-family: monospace;
   font-size: 16px;
 }
@@ -100,8 +100,8 @@
   min-height: 80px;
   align-items: flex-start;
   padding: 16px;
-  background: #0f172a;
-  border: 1px solid #334155;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
   border-radius: 8px;
 }
 
@@ -114,7 +114,7 @@
 
 .atoi-index {
   font-size: 11px;
-  color: #64748b;
+  color: var(--text-muted);
   margin-bottom: 6px;
   font-family: monospace;
 }
@@ -125,10 +125,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #1e293b;
-  border: 2px solid #334155;
+  background: var(--surface2);
+  border: 2px solid var(--border);
   border-radius: 6px;
-  color: #f8fafc;
+  color: var(--surface);
   font-size: 20px;
   font-weight: 600;
   font-family: monospace;
@@ -136,7 +136,7 @@
 }
 
 .atoi-char.space {
-  color: #475569;
+  color: var(--text-muted);
 }
 
 .atoi-char.active {
@@ -149,7 +149,7 @@
 
 .atoi-char.processed {
   opacity: 0.5;
-  border-color: #475569;
+  border-color: var(--text-muted);
 }
 
 .atoi-ptr-container {
@@ -178,8 +178,8 @@
 }
 
 .atoi-math-box {
-  background: #1e293b;
-  border: 1px solid #334155;
+  background: var(--surface2);
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 16px;
   display: flex;
@@ -201,7 +201,7 @@
 }
 
 .atoi-math-formula .var { color: #627794; }
-.atoi-math-formula .op { color: #64748b; }
+.atoi-math-formula .op { color: var(--text-muted); }
 .atoi-math-formula .val { color: #4879a9; }
 
 .atoi-math-formula .highlight { color: #178740; }
@@ -213,8 +213,8 @@
 }
 
 .atoi-var-card {
-  background: #0f172a;
-  border: 1px solid #334155;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 16px;
   display: flex;
@@ -251,10 +251,10 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  background: #1e293b;
+  background: var(--surface2);
   padding: 12px;
   border-radius: 8px;
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
 }
 
 .atoi-bound {

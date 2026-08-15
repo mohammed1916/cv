@@ -209,7 +209,7 @@ function FrequencyMap({ step }) {
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
         Frequency Map (from nums1)
       </header>
 
@@ -228,10 +228,10 @@ function FrequencyMap({ step }) {
               transition={{ duration: 0.2 }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12 }}>
-                <span style={{ fontWeight: 600, color: '#1e293b', fontFamily: 'monospace' }}>
+                <span style={{ fontWeight: 600, color: 'var(--surface2)', fontFamily: 'monospace' }}>
                   {key}
                 </span>
-                <span style={{ color: '#64748b', fontWeight: 500 }}>
+                <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>
                   count: {count}
                 </span>
               </div>
@@ -275,14 +275,14 @@ function InputArrays({ step }) {
   if (!step) return null
 
   return (
-    <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16, borderLeft: '1px solid #e2e8f0' }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>
+    <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16, borderLeft: '1px solid var(--text)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
         Input Arrays
       </header>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12, flex: 1 }}>
         <div>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', marginBottom: 8 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: 8 }}>
             nums1
           </div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', minHeight: 50 }}>
@@ -313,7 +313,7 @@ function InputArrays({ step }) {
         </div>
 
         <div>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', textTransform: 'uppercase', marginBottom: 8 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: 8 }}>
             nums2
           </div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', minHeight: 50 }}>
@@ -363,7 +363,7 @@ function ResultBuilder({ step }) {
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
         Result: [{result.length} element{result.length !== 1 ? 's' : ''}]
       </header>
 
@@ -396,7 +396,7 @@ function ResultBuilder({ step }) {
                 position: 'absolute',
                 top: -20,
                 fontSize: 10,
-                color: '#64748b',
+                color: 'var(--text-muted)',
                 fontWeight: 500,
               }}>
                 [{i}]
@@ -422,7 +422,7 @@ function VisualizationPanel({ step, nums1, nums2, EXAMPLES, handleExampleClick, 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
           Examples
         </div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -433,8 +433,8 @@ function VisualizationPanel({ step, nums1, nums2, EXAMPLES, handleExampleClick, 
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
-                backgroundColor: '#f1f5f9',
+                border: '1px solid var(--border)',
+                backgroundColor: 'var(--surface2)',
                 cursor: 'pointer',
                 fontSize: 12,
                 fontWeight: 500,
@@ -449,7 +449,7 @@ function VisualizationPanel({ step, nums1, nums2, EXAMPLES, handleExampleClick, 
 
       <div style={{ display: 'flex', gap: 8, flexDirection: 'column' }}>
         <div>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>
+          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
             nums1 (comma-separated)
           </label>
           <input
@@ -459,7 +459,7 @@ function VisualizationPanel({ step, nums1, nums2, EXAMPLES, handleExampleClick, 
             style={{
               width: '100%',
               padding: '8px 10px',
-              border: '1px solid #cbd5e1',
+              border: '1px solid var(--border)',
               borderRadius: 4,
               fontSize: 12,
               fontFamily: 'monospace',
@@ -469,7 +469,7 @@ function VisualizationPanel({ step, nums1, nums2, EXAMPLES, handleExampleClick, 
         </div>
 
         <div>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>
+          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
             nums2 (comma-separated)
           </label>
           <input
@@ -479,7 +479,7 @@ function VisualizationPanel({ step, nums1, nums2, EXAMPLES, handleExampleClick, 
             style={{
               width: '100%',
               padding: '8px 10px',
-              border: '1px solid #cbd5e1',
+              border: '1px solid var(--border)',
               borderRadius: 4,
               fontSize: 12,
               fontFamily: 'monospace',
@@ -627,7 +627,7 @@ export default function Problem350Visualizer() {
       </>
 
       <FloatingPanel title="Playback Controls">
-        <div style={{ marginBottom: '12px', fontSize: 12, color: '#475569' }}>
+        <div style={{ marginBottom: '12px', fontSize: 12, color: 'var(--text-muted)' }}>
           {step?.message ?? 'Press Play or Step to begin.'}
         </div>
         <PlaybackControls

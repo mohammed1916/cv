@@ -181,11 +181,11 @@ function VisualizationPanel({ str, numRows, step, applyExample, examples }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -196,14 +196,14 @@ function VisualizationPanel({ str, numRows, step, applyExample, examples }) {
       )}
 
       <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 12 }}>
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>String</div>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>String</div>
           <div style={{ fontSize: 13, color: '#5577a4', fontFamily: 'monospace', fontWeight: 600, wordBreak: 'break-all' }}>
             "{str}"
           </div>
         </div>
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Rows</div>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Rows</div>
           <div style={{ fontSize: 16, fontWeight: 700, color: '#067db1' }}>{numRows}</div>
         </div>
       </div>
@@ -222,9 +222,9 @@ function VisualizationPanel({ str, numRows, step, applyExample, examples }) {
                       padding: '8px 10px',
                       borderRadius: 4,
                       border: '2px solid',
-                      backgroundColor: isCurrent ? '#38bdf8' : '#334155',
-                      borderColor: isCurrent ? '#0ea5e9' : '#64748b',
-                      color: isCurrent ? '#0c4a6e' : '#e2e8f0',
+                      backgroundColor: isCurrent ? '#38bdf8' : 'var(--border)',
+                      borderColor: isCurrent ? '#0ea5e9' : 'var(--text-muted)',
+                      color: isCurrent ? '#0c4a6e' : 'var(--text)',
                       fontWeight: isCurrent ? 600 : 400,
                     }}
                     animate={{ scale: isCurrent ? 1.05 : 1 }}
@@ -242,7 +242,7 @@ function VisualizationPanel({ str, numRows, step, applyExample, examples }) {
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #22c55e',
             textAlign: 'center',
@@ -251,7 +251,7 @@ function VisualizationPanel({ str, numRows, step, applyExample, examples }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Result</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Result</div>
           <div style={{ fontSize: 14, fontFamily: 'monospace', fontWeight: 'bold', color: '#178740', wordBreak: 'break-all' }}>
             "{step.result}"
           </div>
@@ -312,9 +312,9 @@ export default function ZigzagConversionVisualizer() {
               width: '100%',
               padding: '8px',
               borderRadius: 4,
-              border: '1px solid #475569',
-              backgroundColor: '#1e293b',
-              color: '#e2e8f0',
+              border: '1px solid var(--text-muted)',
+              backgroundColor: 'var(--surface2)',
+              color: 'var(--text)',
               fontFamily: 'monospace',
               fontSize: 12,
             }}
@@ -335,9 +335,9 @@ export default function ZigzagConversionVisualizer() {
               width: '100%',
               padding: '8px',
               borderRadius: 4,
-              border: '1px solid #475569',
-              backgroundColor: '#1e293b',
-              color: '#e2e8f0',
+              border: '1px solid var(--text-muted)',
+              backgroundColor: 'var(--surface2)',
+              color: 'var(--text)',
               fontFamily: 'monospace',
               fontSize: 12,
             }}

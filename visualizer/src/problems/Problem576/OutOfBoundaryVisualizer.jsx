@@ -289,11 +289,11 @@ function VisualizationPanel({ step, m, n, maxMove, startRow, startCol, applyExam
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -344,7 +344,7 @@ function VisualizationPanel({ step, m, n, maxMove, startRow, startCol, applyExam
         <motion.div
           style={{
             padding: 12,
-            backgroundColor: '#0f172a',
+            backgroundColor: 'var(--code-bg)',
             borderRadius: 6,
             border: '2px solid #22c55e',
             color: '#22c55e',
@@ -362,7 +362,7 @@ function VisualizationPanel({ step, m, n, maxMove, startRow, startCol, applyExam
         <motion.div
           style={{
             padding: 12,
-            backgroundColor: '#0f172a',
+            backgroundColor: 'var(--code-bg)',
             borderRadius: 6,
             border: '2px solid #f87171',
             color: '#f87171',
@@ -380,7 +380,7 @@ function VisualizationPanel({ step, m, n, maxMove, startRow, startCol, applyExam
         <div
           style={{
             padding: 12,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #fbbf24',
             color: '#fbbf24',
@@ -396,10 +396,10 @@ function VisualizationPanel({ step, m, n, maxMove, startRow, startCol, applyExam
         <div
           style={{
             padding: 12,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
-            border: '1px solid #475569',
-            color: '#cbd5e1',
+            border: '1px solid var(--text-muted)',
+            color: 'var(--border)',
           }}
         >
           <div style={{ fontSize: 11, fontWeight: 600, marginBottom: 8 }}>Direction Results</div>
@@ -428,11 +428,11 @@ function VisualizationPanel({ step, m, n, maxMove, startRow, startCol, applyExam
       <div
         style={{
           padding: 12,
-          backgroundColor: '#0f172a',
+          backgroundColor: 'var(--code-bg)',
           borderRadius: 6,
-          border: '1px solid #475569',
+          border: '1px solid var(--text-muted)',
           fontSize: 12,
-          color: '#cbd5e1',
+          color: 'var(--border)',
           lineHeight: '1.5',
         }}
       >
@@ -520,9 +520,9 @@ export default function OutOfBoundaryVisualizer() {
                     width: '100%',
                     padding: '8px',
                     borderRadius: 4,
-                    border: '1px solid #475569',
-                    backgroundColor: '#1e293b',
-                    color: '#e2e8f0',
+                    border: '1px solid var(--text-muted)',
+                    backgroundColor: 'var(--surface2)',
+                    color: 'var(--text)',
                     fontFamily: 'monospace',
                     fontSize: 12,
                   }}
@@ -543,9 +543,9 @@ export default function OutOfBoundaryVisualizer() {
                     width: '100%',
                     padding: '8px',
                     borderRadius: 4,
-                    border: '1px solid #475569',
-                    backgroundColor: '#1e293b',
-                    color: '#e2e8f0',
+                    border: '1px solid var(--text-muted)',
+                    backgroundColor: 'var(--surface2)',
+                    color: 'var(--text)',
                     fontFamily: 'monospace',
                     fontSize: 12,
                   }}
@@ -566,9 +566,9 @@ export default function OutOfBoundaryVisualizer() {
                     width: '100%',
                     padding: '8px',
                     borderRadius: 4,
-                    border: '1px solid #475569',
-                    backgroundColor: '#1e293b',
-                    color: '#e2e8f0',
+                    border: '1px solid var(--text-muted)',
+                    backgroundColor: 'var(--surface2)',
+                    color: 'var(--text)',
                     fontFamily: 'monospace',
                     fontSize: 12,
                   }}
@@ -589,9 +589,9 @@ export default function OutOfBoundaryVisualizer() {
                     width: '100%',
                     padding: '8px',
                     borderRadius: 4,
-                    border: '1px solid #475569',
-                    backgroundColor: '#1e293b',
-                    color: '#e2e8f0',
+                    border: '1px solid var(--text-muted)',
+                    backgroundColor: 'var(--surface2)',
+                    color: 'var(--text)',
                     fontFamily: 'monospace',
                     fontSize: 12,
                   }}
@@ -613,9 +613,9 @@ export default function OutOfBoundaryVisualizer() {
                   width: '100%',
                   padding: '8px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  border: '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                   fontSize: 12,
                 }}

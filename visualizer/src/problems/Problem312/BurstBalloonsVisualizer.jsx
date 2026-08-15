@@ -131,39 +131,39 @@ export default function BurstBalloonsVisualizer() {
                 <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
                     <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                         {EXAMPLES.map(e => (
-                            <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : '#f1f5f9' }}>
+                            <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : 'var(--surface2)' }}>
                                 {e.label}
                             </button>
                         ))}
                     </div>
 
-                    <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginTop: 4 }}>Padded array</div>
+                    <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginTop: 4 }}>Padded array</div>
                     <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap', alignItems: 'center' }}>
                         {nums.map((v, i) => (
                             <motion.div key={i} animate={{ scale: i === activeK ? 1.3 : 1 }} style={{
                                 width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center',
                                 backgroundColor: i === 0 || i === n - 1 ? '#e5e7eb' : i === activeK ? '#fbbf24' : '#f3f4f6',
-                                border: i === activeK ? '2px solid #f59e0b' : '1px solid #cbd5e1',
-                                borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: '#1e293b'
+                                border: i === activeK ? '2px solid #f59e0b' : '1px solid var(--border)',
+                                borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: 'var(--surface2)'
                             }}>
                                 {v}
                             </motion.div>
                         ))}
                     </div>
 
-                    <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginTop: 8 }}>DP table</div>
+                    <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginTop: 8 }}>DP table</div>
                     <div style={{ overflowX: 'auto', flex: 1 }}>
                         <table style={{ borderCollapse: 'collapse', fontSize: 11, marginBottom: 8 }}>
                             <thead>
                                 <tr>
-                                    <th style={{ padding: '4px 6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc' }}></th>
-                                    {Array.from({ length: n }, (_, c) => <th key={c} style={{ padding: '4px 6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc', fontWeight: 600, minWidth: 32 }}>{c}</th>)}
+                                    <th style={{ padding: '4px 6px', border: '1px solid var(--text)', backgroundColor: 'var(--surface)' }}></th>
+                                    {Array.from({ length: n }, (_, c) => <th key={c} style={{ padding: '4px 6px', border: '1px solid var(--text)', backgroundColor: 'var(--surface)', fontWeight: 600, minWidth: 32 }}>{c}</th>)}
                                 </tr>
                             </thead>
                             <tbody>
                                 {dp.slice(0, n).map((row, r) => (
                                     <tr key={r}>
-                                        <th style={{ padding: '4px 6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc', fontWeight: 600 }}>{r}</th>
+                                        <th style={{ padding: '4px 6px', border: '1px solid var(--text)', backgroundColor: 'var(--surface)', fontWeight: 600 }}>{r}</th>
                                         {row.slice(0, n).map((v, c) => {
                                             const isActive = r === activeL && c === activeR;
                                             const isK = (r === activeL && c === activeK) || (c === activeR && r === activeK);
@@ -171,10 +171,10 @@ export default function BurstBalloonsVisualizer() {
                                                 <motion.td key={c}
                                                     animate={{ scale: isActive ? 1.2 : 1 }}
                                                     style={{
-                                                        padding: '6px 8px', border: '1px solid #e2e8f0',
+                                                        padding: '6px 8px', border: '1px solid var(--text)',
                                                         backgroundColor: isActive ? '#dbeafe' : isK ? '#fef3c7' : v > 0 ? '#f0fdf4' : 'white',
                                                         fontWeight: isActive ? 'bold' : 'normal',
-                                                        color: isActive ? '#1e40af' : '#1e293b',
+                                                        color: isActive ? '#1e40af' : 'var(--surface2)',
                                                         minWidth: 32, textAlign: 'center'
                                                     }}>
                                                     {v || '·'}
@@ -187,21 +187,21 @@ export default function BurstBalloonsVisualizer() {
                         </table>
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 8, padding: 8, backgroundColor: '#f8fafc', borderRadius: 6 }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 8, padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6 }}>
                         <div>
-                            <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>Window</div>
-                            <div style={{ fontSize: 13, fontWeight: 'bold', color: '#1e293b' }}>[{activeL},{activeR}]</div>
+                            <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>Window</div>
+                            <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--surface2)' }}>[{activeL},{activeR}]</div>
                         </div>
                         <div>
-                            <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>Pivot k</div>
-                            <div style={{ fontSize: 13, fontWeight: 'bold', color: '#1e293b' }}>{activeK >= 0 ? activeK : '—'}</div>
+                            <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>Pivot k</div>
+                            <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--surface2)' }}>{activeK >= 0 ? activeK : '—'}</div>
                         </div>
                         <div>
-                            <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>Coins</div>
+                            <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>Coins</div>
                             <div style={{ fontSize: 13, fontWeight: 'bold', color: '#a36907' }}>{step?.coins ?? '—'}</div>
                         </div>
                         <div>
-                            <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>Total</div>
+                            <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>Total</div>
                             <div style={{ fontSize: 13, fontWeight: 'bold', color: '#0b7db0' }}>{step?.val ?? '—'}</div>
                         </div>
                     </div>

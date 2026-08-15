@@ -241,10 +241,10 @@ export default function Problem388Visualizer() {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #cbd5e1',
+                  border: '1px solid var(--border)',
                   cursor: 'pointer',
                   fontSize: 12,
-                  backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
+                  backgroundColor: exIdx === i ? '#dbeafe' : 'var(--surface2)',
                   fontWeight: exIdx === i ? 600 : 400,
                 }}
               >
@@ -256,13 +256,13 @@ export default function Problem388Visualizer() {
           {step && (
             <>
               {/* Message */}
-              <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 12, fontWeight: 500 }}>
+              <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 12, fontWeight: 500 }}>
                 {step.message}
               </div>
 
               {/* Input Structure */}
               <div>
-                <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>File Structure</div>
+                <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>File Structure</div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                   {step.lines.map((line, idx) => {
                     const depth = line.length - line.replace(/^\t+/, '').length
@@ -271,8 +271,8 @@ export default function Problem388Visualizer() {
                       <motion.div
                         key={`line-${idx}`}
                         animate={{
-                          backgroundColor: step.currentLineIdx === idx ? '#fed7aa' : '#f1f5f9',
-                          borderColor: step.currentLineIdx === idx ? '#f59e0b' : '#cbd5e1',
+                          backgroundColor: step.currentLineIdx === idx ? '#fed7aa' : 'var(--surface2)',
+                          borderColor: step.currentLineIdx === idx ? '#f59e0b' : 'var(--border)',
                         }}
                         style={{
                           padding: '8px 12px',
@@ -280,7 +280,7 @@ export default function Problem388Visualizer() {
                           border: '2px solid',
                           fontSize: 12,
                           fontWeight: 600,
-                          color: '#334155',
+                          color: 'var(--border)',
                           marginLeft: depth * 20,
                         }}
                       >
@@ -309,7 +309,7 @@ export default function Problem388Visualizer() {
               {/* Path Lengths Map */}
               {step.phase !== 'init' && (
                 <div>
-                  <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>Path Lengths</div>
+                  <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Path Lengths</div>
                   <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
                     {Object.entries(step.pathLengths)
                       .sort((a, b) => parseInt(a[0]) - parseInt(b[0]))

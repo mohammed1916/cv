@@ -160,9 +160,9 @@ function StoneVisualization({ stones, step, selectedStones }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Stone Layout</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Stone Layout</div>
 
-      <div style={{ position: 'relative', height: 60, backgroundColor: '#f1f5f9', borderRadius: 8, overflow: 'hidden', border: '2px solid #cbd5e1' }}>
+      <div style={{ position: 'relative', height: 60, backgroundColor: 'var(--surface2)', borderRadius: 8, overflow: 'hidden', border: '2px solid var(--border)' }}>
         <div style={{ position: 'absolute', width: '100%', height: '100%', display: 'flex', alignItems: 'flex-end' }}>
           {stones.map((stone, idx) => {
             const isStart = stone === 0
@@ -191,9 +191,9 @@ function StoneVisualization({ stones, step, selectedStones }) {
                     fontSize: 10,
                     fontWeight: 600,
                     cursor: 'pointer',
-                    borderColor: isCurrent ? '#dc2626' : isEnd ? '#10b981' : isStart ? '#0284c7' : isReachable ? '#f59e0b' : '#cbd5e1',
-                    backgroundColor: isCurrent ? '#fee2e2' : isEnd ? '#d1fae5' : isStart ? '#dbeafe' : isReachable ? '#fef3c7' : '#f1f5f9',
-                    color: isCurrent ? '#7f1d1d' : isEnd ? '#065f46' : isStart ? '#0c4a6e' : isReachable ? '#92400e' : '#64748b',
+                    borderColor: isCurrent ? '#dc2626' : isEnd ? '#10b981' : isStart ? '#0284c7' : isReachable ? '#f59e0b' : 'var(--border)',
+                    backgroundColor: isCurrent ? '#fee2e2' : isEnd ? '#d1fae5' : isStart ? '#dbeafe' : isReachable ? '#fef3c7' : 'var(--surface2)',
+                    color: isCurrent ? '#7f1d1d' : isEnd ? '#065f46' : isStart ? '#0c4a6e' : isReachable ? '#92400e' : 'var(--text-muted)',
                   }}
                   animate={{ scale: isCurrent ? 1.3 : 1 }}
                 >
@@ -241,7 +241,7 @@ function StoneVisualization({ stones, step, selectedStones }) {
         </div>
       )}
 
-      <div style={{ fontSize: 12, color: '#475569', fontStyle: 'italic' }}>{step?.message}</div>
+      <div style={{ fontSize: 12, color: 'var(--text-muted)', fontStyle: 'italic' }}>{step?.message}</div>
     </div>
   )
 }
@@ -308,7 +308,7 @@ export default function Problem403Visualizer() {
       </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button
@@ -317,11 +317,11 @@ export default function Problem403Visualizer() {
                   style={{
                     padding: '6px 12px',
                     borderRadius: 4,
-                    border: exIdx === idx ? '2px solid #ef4444' : '1px solid #cbd5e1',
+                    border: exIdx === idx ? '2px solid #ef4444' : '1px solid var(--border)',
                     cursor: 'pointer',
                     fontSize: 12,
-                    backgroundColor: exIdx === idx ? '#fee2e2' : '#f1f5f9',
-                    color: exIdx === idx ? '#7f1d1d' : '#334155',
+                    backgroundColor: exIdx === idx ? '#fee2e2' : 'var(--surface2)',
+                    color: exIdx === idx ? '#7f1d1d' : 'var(--border)',
                     fontWeight: exIdx === idx ? '600' : '400',
                   }}
                 >

@@ -14,18 +14,18 @@
   --ctp-sapphire: #74c7ec;
   --ctp-blue: #89b4fa;
   --ctp-lavender: #b4befe;
-  --ctp-text: #cdd6f4;
+  --ctp-text: var(--code-text);
   --ctp-subtext1: #bac2de;
-  --ctp-subtext0: #a6adc8;
+  --ctp-subtext0: var(--code-dim);
   --ctp-overlay2: #9399b2;
   --ctp-overlay1: #7f849c;
-  --ctp-overlay0: #6c7086;
+  --ctp-overlay0: var(--code-dim);
   --ctp-surface2: #585b70;
-  --ctp-surface1: #45475a;
+  --ctp-surface1: var(--code-line);
   --ctp-surface0: #313244;
-  --ctp-base: #1e1e2e;
+  --ctp-base: var(--code-bg);
   --ctp-mantle: #181825;
-  --ctp-crust: #11111b;
+  --ctp-crust: var(--code-surface);
 
   --accent-blue: #3b82f6;
   --accent-bright: #89dceb;

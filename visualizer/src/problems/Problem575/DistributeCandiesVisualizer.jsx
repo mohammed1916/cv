@@ -158,7 +158,7 @@ function CandyArray({ candies, processedIndex, alice_size }) {
   const aliceCount = Math.floor(candies.length / 2)
 
   return (
-    <div style={{ padding: 16, backgroundColor: '#1e293b', borderRadius: 8 }}>
+    <div style={{ padding: 16, backgroundColor: 'var(--surface2)', borderRadius: 8 }}>
       <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 12 }}>Candy Distribution</div>
       <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginBottom: 12 }}>
         {candies.map((candy, idx) => {
@@ -182,7 +182,7 @@ function CandyArray({ candies, processedIndex, alice_size }) {
                 fontSize: 12,
                 fontWeight: 700,
                 color: '#757575',
-                border: `2px solid ${isAlice ? '#22c55e' : '#64748b'}`,
+                border: `2px solid ${isAlice ? '#22c55e' : 'var(--text-muted)'}`,
                 boxShadow: isProcessed ? '0 0 8px rgba(34, 197, 94, 0.5)' : 'none',
                 cursor: 'default',
               }}
@@ -199,7 +199,7 @@ function CandyArray({ candies, processedIndex, alice_size }) {
           <span style={{ color: '#178740', fontWeight: 600 }}>▪</span> Alice's portion (0-{aliceCount - 1})
         </div>
         <div>
-          <span style={{ color: '#64748b', fontWeight: 600 }}>▪</span> Bob's portion ({aliceCount}-{candies.length - 1})
+          <span style={{ color: 'var(--text-muted)', fontWeight: 600 }}>▪</span> Bob's portion ({aliceCount}-{candies.length - 1})
         </div>
       </div>
     </div>
@@ -220,11 +220,11 @@ function VisualizationPanel({ step, applyExample, examples, candies }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -241,7 +241,7 @@ function VisualizationPanel({ step, applyExample, examples, candies }) {
           <motion.div
             style={{
               padding: 12,
-              backgroundColor: '#1e293b',
+              backgroundColor: 'var(--surface2)',
               borderRadius: 6,
               border: '2px solid #22c55e',
             }}
@@ -257,7 +257,7 @@ function VisualizationPanel({ step, applyExample, examples, candies }) {
           <motion.div
             style={{
               padding: 12,
-              backgroundColor: '#1e293b',
+              backgroundColor: 'var(--surface2)',
               borderRadius: 6,
               border: '2px solid #38bdf8',
             }}
@@ -277,7 +277,7 @@ function VisualizationPanel({ step, applyExample, examples, candies }) {
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid',
             borderColor: '#22c55e',
@@ -287,7 +287,7 @@ function VisualizationPanel({ step, applyExample, examples, candies }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Maximum Unique Candies</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Maximum Unique Candies</div>
           <div
             style={{
               fontSize: 24,
@@ -382,9 +382,9 @@ export default function DistributeCandiesVisualizer() {
                   height: 60,
                   padding: '8px',
                   borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid #475569',
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                   fontSize: 12,
                   resize: 'vertical',

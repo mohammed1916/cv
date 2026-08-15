@@ -153,11 +153,11 @@ function ArrayDisplay({ nums, windowStart, windowEnd, highlighted }) {
                 ? "#fbbf24"
                 : inWindow
                   ? "#93c5fd"
-                  : "#e2e8f0",
-              border: inWindow ? "2px solid #3b82f6" : "1px solid #94a3b8",
+                  : "var(--text)",
+              border: inWindow ? "2px solid #3b82f6" : "1px solid var(--text-muted)",
               fontFamily: "monospace",
               fontWeight: 600,
-              color: isHighlighted ? "#000" : "#334155",
+              color: isHighlighted ? "#000" : "var(--border)",
               fontSize: 12,
             }}
             initial={{ opacity: 0, scale: 0.8 }}
@@ -322,15 +322,15 @@ export default function ContainsDuplicateIIVisualizer() {
       />
 
     <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-      <div style={{ display: "flex", flexDirection: "column", gap: 8, padding: 16, borderBottom: "1px solid #e2e8f0" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 8, padding: 16, borderBottom: "1px solid var(--text)" }}>
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
           {EXAMPLES.map((ex) => (
             <button
               key={ex.label}
               onClick={() => applyExample(ex)}
               style={{
-                padding: "6px 12px", borderRadius: 6, border: "1px solid #cbd5e1",
-                background: "#f1f5f9", color: "#1e293b", fontSize: 12, cursor: "pointer",
+                padding: "6px 12px", borderRadius: 6, border: "1px solid var(--border)",
+                background: "var(--surface2)", color: "var(--surface2)", fontSize: 12, cursor: "pointer",
               }}
             >
               {ex.label}
@@ -338,20 +338,20 @@ export default function ContainsDuplicateIIVisualizer() {
           ))}
         </div>
         <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
-          <label style={{ display: "flex", gap: 6, alignItems: "center", fontSize: 12, color: "#475569" }}>
+          <label style={{ display: "flex", gap: 6, alignItems: "center", fontSize: 12, color: "var(--text-muted)" }}>
             nums:
             <input
               value={numsInput}
               onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-              style={{ minWidth: 220, padding: "6px 10px", borderRadius: 6, border: "1px solid #cbd5e1", fontFamily: "monospace", fontSize: 12 }}
+              style={{ minWidth: 220, padding: "6px 10px", borderRadius: 6, border: "1px solid var(--border)", fontFamily: "monospace", fontSize: 12 }}
             />
           </label>
-          <label style={{ display: "flex", gap: 6, alignItems: "center", fontSize: 12, color: "#475569" }}>
+          <label style={{ display: "flex", gap: 6, alignItems: "center", fontSize: 12, color: "var(--text-muted)" }}>
             k:
             <input
               value={kInput}
               onChange={(e) => { setKInput(e.target.value); handleReset() }}
-              style={{ width: 60, padding: "6px 10px", borderRadius: 6, border: "1px solid #cbd5e1", fontFamily: "monospace", fontSize: 12 }}
+              style={{ width: 60, padding: "6px 10px", borderRadius: 6, border: "1px solid var(--border)", fontFamily: "monospace", fontSize: 12 }}
             />
           </label>
           {inputError && <span style={{ color: "#e91414", fontSize: 12 }}>{inputError}</span>}

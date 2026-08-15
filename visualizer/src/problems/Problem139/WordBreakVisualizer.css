@@ -63,7 +63,7 @@
 }
 
 .wb-chip:hover {
-    background: #334155;
+    background: var(--border);
     color: var(--text);
 }
 
@@ -88,8 +88,8 @@
 .wb-input {
     padding: 7px 11px;
     border-radius: 7px;
-    border: 1px solid #334155;
-    background: #0f172a;
+    border: 1px solid var(--border);
+    background: var(--code-bg);
     color: var(--text);
     font-family: monospace;
     font-size: 13px;
@@ -123,8 +123,8 @@
     font-size: 16px;
     font-weight: 700;
     font-family: monospace;
-    background: #1e293b;
-    border: 2px solid #334155;
+    background: var(--surface2);
+    border: 2px solid var(--border);
     color: var(--text);
     transition: background 0.2s, border-color 0.2s;
     gap: 2px;
@@ -174,7 +174,7 @@
     font-size: 12px;
     font-weight: 700;
     font-family: monospace;
-    border: 2px solid #334155;
+    border: 2px solid var(--border);
     transition: background 0.2s, border-color 0.2s;
 }
 
@@ -245,8 +245,8 @@
 /* ── Word dict panel ── */
 .wb-word {
     padding: 6px 12px;
-    background: #1e293b;
-    border: 1px solid #334155;
+    background: var(--surface2);
+    border: 1px solid var(--border);
     border-radius: 6px;
     font-family: monospace;
     font-size: 14px;

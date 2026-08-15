@@ -15,8 +15,8 @@
 }
 .pt-chip {
   background: #313244;
-  color: #cdd6f4;
-  border: 2px solid #45475a;
+  color: var(--code-text);
+  border: 2px solid var(--code-line);
   border-radius: 6px;
   padding: 4px 12px;
   font-size: 12px;
@@ -32,7 +32,7 @@
   color: #2f8628;
 }
 .pt-chip-desc {
-  color: #6c7086;
+  color: var(--code-dim);
   font-size: 11px;
 }
 .pt-chip.active .pt-chip-desc {
@@ -41,13 +41,13 @@
 
 /* ── Insight card ──────────────────────────────────────────────────── */
 .pt-insight {
-  background: #1e1e2e;
+  background: var(--code-bg);
   border: 1px solid #313244;
   border-left: 4px solid #89b4fa;
   border-radius: 8px;
   padding: 10px 14px;
   font-size: 13px;
-  color: #a6adc8;
+  color: var(--code-dim);
   display: flex;
   gap: 10px;
   align-items: flex-start;
@@ -70,7 +70,7 @@
 
 /* ── Bit panel ─────────────────────────────────────────────────────── */
 .pt-panel {
-  background: #1e1e2e;
+  background: var(--code-bg);
   border: 1px solid #313244;
   border-radius: 10px;
   padding: 14px 16px;
@@ -81,7 +81,7 @@
 .pt-panel-label {
   font-size: 11px;
   font-weight: 700;
-  color: #6c7086;
+  color: var(--code-dim);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-bottom: 4px;
@@ -97,14 +97,14 @@
   min-width: 90px;
   font-size: 11px;
   font-weight: 700;
-  color: #6c7086;
+  color: var(--code-dim);
   text-align: right;
   flex-shrink: 0;
 }
 .pt-bit-row-val {
   min-width: 40px;
   font-size: 11px;
-  color: #6c7086;
+  color: var(--code-dim);
   margin-left: 4px;
 }
 
@@ -124,7 +124,7 @@
   font-size: 13px;
   font-weight: 700;
   border-radius: 5px;
-  border: 1px solid #45475a;
+  border: 1px solid var(--code-line);
   transition: background 0.2s, border-color 0.2s, color 0.2s;
 }
 
@@ -176,7 +176,7 @@
 /* ── AND divider ───────────────────────────────────────────────────── */
 .pt-divider {
   height: 1px;
-  background: #45475a;
+  background: var(--code-line);
   margin: 4px 0 4px 100px;
 }
 .pt-and-row .pt-bit-row-label {
@@ -195,7 +195,7 @@
   width: 26px;
   text-align: center;
   font-size: 9px;
-  color: #45475a;
+  color: var(--code-line);
   flex-shrink: 0;
 }
 .pt-bit-idx.active {
@@ -214,7 +214,7 @@
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  background: #1e1e2e;
+  background: var(--code-bg);
   border: 1px solid #313244;
   border-radius: 8px;
   padding: 10px 8px;
@@ -222,7 +222,7 @@
 .pt-tracker-label {
   font-size: 11px;
   font-weight: 700;
-  color: #6c7086;
+  color: var(--code-dim);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -257,11 +257,11 @@
 /* ── Status message ────────────────────────────────────────────────── */
 .pt-status {
   padding: 8px 12px;
-  background: #1e1e2e;
+  background: var(--code-bg);
   border: 1px solid #313244;
   border-radius: 8px;
   font-size: 13px;
-  color: #a6adc8;
+  color: var(--code-dim);
   min-height: 36px;
   line-height: 1.5;
 }

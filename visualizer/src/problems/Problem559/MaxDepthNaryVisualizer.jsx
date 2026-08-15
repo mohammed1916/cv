@@ -274,11 +274,11 @@ function VisualizationPanel({ step, applyExample, examples }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -289,7 +289,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.currentValue !== undefined && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #22c55e' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #22c55e' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#178740', marginBottom: 6 }}>Current Node</div>
           <div style={{ fontSize: 16, color: '#178740', fontFamily: 'monospace', fontWeight: 700 }}>
             {step.currentValue}
@@ -298,7 +298,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.childValue !== undefined && step.phase === 'recurse' && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #38bdf8' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #38bdf8' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#067db1', marginBottom: 6 }}>Recursing on Child</div>
           <div style={{ fontSize: 16, color: '#067db1', fontFamily: 'monospace', fontWeight: 700 }}>
             {step.childValue}
@@ -307,7 +307,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.childDepth !== undefined && step.phase === 'compare' && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #f59e0b' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid #f59e0b' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', marginBottom: 6 }}>Depth Comparison</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 12, color: '#5577a4' }}>
             <div>
@@ -323,12 +323,12 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.returnDepth !== undefined && step.phase === 'return' && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #a78bfa' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Returning Depth</div>
           <div style={{ fontSize: 16, color: '#7e56f8', fontFamily: 'monospace', fontWeight: 700 }}>
             {step.returnDepth}
           </div>
-          <div style={{ fontSize: 11, color: '#64748b', marginTop: 6 }}>From node {step.currentValue}</div>
+          <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 6 }}>From node {step.currentValue}</div>
         </div>
       )}
 
@@ -336,7 +336,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #22c55e',
             textAlign: 'center',
@@ -345,7 +345,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Maximum Depth</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Maximum Depth</div>
           <div
             style={{
               fontSize: 24,
@@ -360,8 +360,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.callStack && step.callStack.length > 0 && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #64748b' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Call Stack</div>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Call Stack</div>
           <div style={{ display: 'flex', flexDirection: 'column-reverse', gap: 4 }}>
             {step.callStack.map((val, i) => (
               <div key={i} style={{ fontSize: 11, color: '#5577a4', paddingLeft: `${i * 12}px` }}>
@@ -380,7 +380,7 @@ function TreeVisualization({ root, nodeMap, step, canvasWidth = 400, canvasHeigh
 
   if (!root) {
     return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: canvasHeight, color: '#64748b' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: canvasHeight, color: 'var(--text-muted)' }}>
         Empty tree
       </div>
     )
@@ -403,7 +403,7 @@ function TreeVisualization({ root, nodeMap, step, canvasWidth = 400, canvasHeigh
           y1={pos1.y}
           x2={pos2.x}
           y2={pos2.y}
-          stroke="#475569"
+          stroke="var(--text-muted)"
           strokeWidth="2"
         />
       )
@@ -411,7 +411,7 @@ function TreeVisualization({ root, nodeMap, step, canvasWidth = 400, canvasHeigh
   })
 
   return (
-    <svg width={canvasWidth} height={canvasHeight} style={{ border: '1px solid #334155', borderRadius: 6 }}>
+    <svg width={canvasWidth} height={canvasHeight} style={{ border: '1px solid var(--border)', borderRadius: 6 }}>
       {edgeElements}
       {nodes.map((node) => {
         const pos = positions.get(node.id)
@@ -421,8 +421,8 @@ function TreeVisualization({ root, nodeMap, step, canvasWidth = 400, canvasHeigh
         const isProcessing = step?.processingChild === node.id
         const returnDepth = step?.depthMap?.get(node.id)
 
-        let fill = '#1e293b'
-        let stroke = '#475569'
+        let fill = 'var(--surface2)'
+        let stroke = 'var(--text-muted)'
         let strokeWidth = 2
 
         if (isActive) {
@@ -442,7 +442,7 @@ function TreeVisualization({ root, nodeMap, step, canvasWidth = 400, canvasHeigh
         return (
           <g key={`node-${node.id}`}>
             <circle cx={pos.x} cy={pos.y} r="20" fill={fill} stroke={stroke} strokeWidth={strokeWidth} />
-            <text x={pos.x} y={pos.y + 5} textAnchor="middle" fontSize="14" fontWeight="700" fill="#ffffff">
+            <text x={pos.x} y={pos.y + 5} textAnchor="middle" fontSize="14" fontWeight="700" fill="var(--surface)">
               {node.val}
             </text>
             {returnDepth !== undefined && (
@@ -535,9 +535,9 @@ export default function MaxDepthNaryVisualizer() {
                   height: 60,
                   padding: '8px',
                   borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid #475569',
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                   fontSize: 12,
                   resize: 'vertical',

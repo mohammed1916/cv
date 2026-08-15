@@ -137,10 +137,10 @@ export default function PascalsTriangleIIVisualizer() {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: exIdx === i ? '#dbeafe' : '#f1f5f9',
+                backgroundColor: exIdx === i ? '#dbeafe' : 'var(--surface2)',
               }}
             >
               {e.label}
@@ -148,7 +148,7 @@ export default function PascalsTriangleIIVisualizer() {
           ))}
         </div>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-          <label style={{ fontSize: 12, fontWeight: 500, color: '#475569' }}>rowIndex:</label>
+          <label style={{ fontSize: 12, fontWeight: 500, color: 'var(--text-muted)' }}>rowIndex:</label>
           <input
             value={rowIndexInput}
             onChange={(e) => {
@@ -160,7 +160,7 @@ export default function PascalsTriangleIIVisualizer() {
               padding: '6px 8px',
               fontSize: 12,
               borderRadius: 4,
-              border: '1px solid #cbd5e1',
+              border: '1px solid var(--border)',
               width: '60px',
             }}
             type="number"
@@ -173,7 +173,7 @@ export default function PascalsTriangleIIVisualizer() {
 
       {step && (
         <>
-          <div style={{ padding: 8, backgroundColor: '#f8fafc', borderRadius: 6, fontSize: 11 }}>
+          <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 11 }}>
             <div style={{ fontWeight: 600, marginBottom: 12 }}>{step.message}</div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'center' }}>

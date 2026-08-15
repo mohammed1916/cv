@@ -170,7 +170,7 @@ export default function Problem392Visualizer() {
 
       <div style={{ display: 'flex', gap: 16, flex: 1 }}>
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <div style={{ display: 'flex', gap: 12, backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
+          <div style={{ display: 'flex', gap: 12, backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px' }}>
             <div style={{ flex: 1 }}>
               <div style={{ color: '#627794', fontSize: '13px', marginBottom: '6px' }}>Subsequence (s)</div>
               <input
@@ -178,8 +178,8 @@ export default function Problem392Visualizer() {
                 onChange={(e) => { setSInput(e.target.value); handleReset() }}
                 placeholder="abc"
                 style={{
-                  width: '100%', padding: '8px', backgroundColor: '#0f172a', color: '#e2e8f0',
-                  border: '1px solid #334155', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
+                  width: '100%', padding: '8px', backgroundColor: 'var(--code-bg)', color: 'var(--text)',
+                  border: '1px solid var(--border)', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
                 }}
               />
             </div>
@@ -190,8 +190,8 @@ export default function Problem392Visualizer() {
                 onChange={(e) => { setTInput(e.target.value); handleReset() }}
                 placeholder="ahbgdc"
                 style={{
-                  width: '100%', padding: '8px', backgroundColor: '#0f172a', color: '#e2e8f0',
-                  border: '1px solid #334155', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
+                  width: '100%', padding: '8px', backgroundColor: 'var(--code-bg)', color: 'var(--text)',
+                  border: '1px solid var(--border)', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
                 }}
               />
             </div>
@@ -207,7 +207,7 @@ export default function Problem392Visualizer() {
                 key={ex.label}
                 onClick={() => applyExample(ex)}
                 style={{
-                  padding: '6px 12px', backgroundColor: '#334155', color: '#e2e8f0',
+                  padding: '6px 12px', backgroundColor: 'var(--border)', color: 'var(--text)',
                   border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '12px'
                 }}
               >
@@ -216,7 +216,7 @@ export default function Problem392Visualizer() {
             ))}
           </div>
 
-          <div style={{ backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
+          <div style={{ backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px' }}>
             <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>Subsequence: {s}</div>
             <div style={{ display: 'flex', gap: '2px', flexWrap: 'wrap' }}>
               {s.split('').map((char, idx) => (
@@ -224,7 +224,7 @@ export default function Problem392Visualizer() {
                   key={idx}
                   style={{
                     width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    backgroundColor: idx < (step?.sIdx ?? 0) ? '#10b981' : '#334155',
+                    backgroundColor: idx < (step?.sIdx ?? 0) ? '#10b981' : 'var(--border)',
                     color: '#5577a4', borderRadius: '4px', fontSize: '14px', fontWeight: 'bold'
                   }}
                 >
@@ -234,7 +234,7 @@ export default function Problem392Visualizer() {
             </div>
           </div>
 
-          <div style={{ backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px', flex: 1, overflowY: 'auto' }}>
+          <div style={{ backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px', flex: 1, overflowY: 'auto' }}>
             <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>Text: {t}</div>
             <div style={{ display: 'flex', gap: '2px', flexWrap: 'wrap' }}>
               {t.split('').map((char, idx) => {
@@ -242,10 +242,10 @@ export default function Problem392Visualizer() {
                 const isMatched = step?.matched && idx === step?.tIdx
                 const isProcessed = idx < (step?.tIdx ?? 0)
 
-                let bgColor = '#334155'
+                let bgColor = 'var(--border)'
                 if (isMatched) bgColor = '#10b981'
                 else if (isCurrentChar) bgColor = '#f59e0b'
-                else if (isProcessed) bgColor = '#64748b'
+                else if (isProcessed) bgColor = 'var(--text-muted)'
 
                 return (
                   <div
@@ -265,12 +265,12 @@ export default function Problem392Visualizer() {
 
           {step && (
             <div style={{ display: 'flex', gap: 12, fontSize: '13px' }}>
-              <div style={{ backgroundColor: '#1e293b', padding: '8px', borderRadius: '4px', flex: 1 }}>
-                <span style={{ color: '#64748b' }}>s_idx: </span>
+              <div style={{ backgroundColor: 'var(--surface2)', padding: '8px', borderRadius: '4px', flex: 1 }}>
+                <span style={{ color: 'var(--text-muted)' }}>s_idx: </span>
                 <span style={{ color: '#0870f0', fontWeight: 'bold' }}>{step.sIdx}/{s.length}</span>
               </div>
-              <div style={{ backgroundColor: step?.isSubsequence ? '#10b98166' : step?.isSubsequence === false ? '#ef444466' : '#1e293b', padding: '8px', borderRadius: '4px', flex: 1, textAlign: 'center' }}>
-                <span style={{ color: step?.isSubsequence ? '#86efac' : step?.isSubsequence === false ? '#fca5a5' : '#cbd5e1', fontWeight: 'bold' }}>
+              <div style={{ backgroundColor: step?.isSubsequence ? '#10b98166' : step?.isSubsequence === false ? '#ef444466' : 'var(--surface2)', padding: '8px', borderRadius: '4px', flex: 1, textAlign: 'center' }}>
+                <span style={{ color: step?.isSubsequence ? '#86efac' : step?.isSubsequence === false ? '#fca5a5' : 'var(--border)', fontWeight: 'bold' }}>
                   {step?.isSubsequence === true ? 'Subsequence Found' : step?.isSubsequence === false ? 'Not Subsequence' : '...'}
                 </span>
               </div>
@@ -301,8 +301,8 @@ export default function Problem392Visualizer() {
       </div>
 
       <div style={{
-        backgroundColor: step?.isSubsequence === true ? '#10b98166' : step?.isSubsequence === false ? '#ef444466' : '#1e293b',
-        padding: '12px', borderRadius: '6px', color: step?.isSubsequence === true ? '#86efac' : step?.isSubsequence === false ? '#fca5a5' : '#cbd5e1',
+        backgroundColor: step?.isSubsequence === true ? '#10b98166' : step?.isSubsequence === false ? '#ef444466' : 'var(--surface2)',
+        padding: '12px', borderRadius: '6px', color: step?.isSubsequence === true ? '#86efac' : step?.isSubsequence === false ? '#fca5a5' : 'var(--border)',
         fontSize: '13px', fontFamily: 'monospace'
       }}>
         {step?.message ?? 'Press Play or Step to begin.'}

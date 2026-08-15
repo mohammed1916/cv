@@ -210,11 +210,11 @@ function VisualizationPanel({ step, applyExample, examples, nums }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -226,26 +226,26 @@ function VisualizationPanel({ step, applyExample, examples, nums }) {
 
       <div>
         <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Array</div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569', minHeight: 60 }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)', minHeight: 60 }}>
           <AnimatePresence mode="popLayout">
             {nums.map((num, idx) => {
-              let color = '#64748b'
-              let borderColor = '#475569'
-              let bgColor = '#0f172a'
+              let color = 'var(--text-muted)'
+              let borderColor = 'var(--text-muted)'
+              let bgColor = 'var(--code-bg)'
 
               if (step?.left <= idx && idx <= step?.right && step?.right !== -1) {
                 // In unsorted subarray
-                color = '#ffffff'
+                color = 'var(--surface)'
                 borderColor = '#ef4444'
                 bgColor = '#7f1d1d'
               } else if (step?.scannedRight?.includes(idx)) {
                 // Scanned in right pass
-                color = '#94a3b8'
+                color = 'var(--text-muted)'
                 borderColor = '#38bdf8'
                 bgColor = '#0c2340'
               } else if (step?.scannedLeft?.includes(idx)) {
                 // Scanned in left pass
-                color = '#94a3b8'
+                color = 'var(--text-muted)'
                 borderColor = '#a78bfa'
                 bgColor = '#2d1b4e'
               }
@@ -282,7 +282,7 @@ function VisualizationPanel({ step, applyExample, examples, nums }) {
       </div>
 
       {step?.phase && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #a78bfa' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Phase</div>
           <div style={{ fontSize: 13, color: '#5577a4', fontFamily: 'monospace', fontWeight: 600 }}>
             {step.phase.replace(/_/g, ' ').toUpperCase()}
@@ -292,7 +292,7 @@ function VisualizationPanel({ step, applyExample, examples, nums }) {
 
       <div>
         <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Bounds Analysis</div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, padding: 10, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, padding: 10, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
           <div>
             <div style={{ fontSize: 11, fontWeight: 600, color: '#627794', marginBottom: 4 }}>Left Index</div>
             <div style={{ fontFamily: 'monospace', fontSize: 16, fontWeight: 700, color: '#067db1' }}>
@@ -324,7 +324,7 @@ function VisualizationPanel({ step, applyExample, examples, nums }) {
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #22c55e',
             textAlign: 'center',
@@ -333,7 +333,7 @@ function VisualizationPanel({ step, applyExample, examples, nums }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Length</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Length</div>
           <div style={{ fontSize: 28, fontWeight: 'bold', color: '#178740' }}>{step.length}</div>
           {step.length > 0 && (
             <div style={{ fontSize: 11, color: '#627794', marginTop: 8 }}>
@@ -424,9 +424,9 @@ export default function ShortestUnsortedVisualizer() {
                   height: 60,
                   padding: '8px',
                   borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid #475569',
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                   fontSize: 12,
                   resize: 'vertical',

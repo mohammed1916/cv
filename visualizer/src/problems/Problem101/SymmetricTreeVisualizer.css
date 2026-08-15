@@ -11,7 +11,7 @@
 
 /* ── Panels ─────────────────────────────────────────────────────────────────── */
 .sym-panel {
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: none;
     overflow: hidden;
     display: flex;
@@ -24,7 +24,7 @@
     background: #181825;
     font-size: 13px;
     font-weight: 600;
-    color: #cdd6f4;
+    color: var(--code-text);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -54,7 +54,7 @@
 
 .sym-chip {
     background: #313244;
-    color: #cdd6f4;
+    color: var(--code-text);
     border: 1px solid transparent;
     border-radius: 6px;
     padding: 4px 10px;
@@ -64,7 +64,7 @@
 }
 
 .sym-chip:hover {
-    background: #45475a;
+    background: var(--code-line);
 }
 
 .sym-chip.selected {
@@ -81,15 +81,15 @@
 
 .sym-input-label {
     font-size: 11px;
-    color: #6c7086;
+    color: var(--code-dim);
     text-transform: uppercase;
     letter-spacing: 0.08em;
 }
 
 .sym-input {
-    background: #11111b;
-    color: #cdd6f4;
-    border: 1px solid #45475a;
+    background: var(--code-surface);
+    color: var(--code-text);
+    border: 1px solid var(--code-line);
     border-radius: 6px;
     padding: 6px 10px;
     font-size: 13px;
@@ -124,7 +124,7 @@
     overflow: hidden;
     border: 1px solid #313244;
     border-radius: 8px;
-    background: #11111b;
+    background: var(--code-surface);
     flex-shrink: 0;
 }
 
@@ -134,7 +134,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #6c7086;
+    color: var(--code-dim);
     font-size: 14px;
     font-style: italic;
 }
@@ -169,13 +169,13 @@
     height: 44px;
     border-radius: 50%;
     background: #313244;
-    border: 2px solid #45475a;
+    border: 2px solid var(--code-line);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 14px;
     font-weight: 700;
-    color: #cdd6f4;
+    color: var(--code-text);
     user-select: none;
 }
 
@@ -230,7 +230,7 @@
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    border: 2px solid #45475a;
+    border: 2px solid var(--code-line);
     flex-shrink: 0;
 }
 
@@ -246,7 +246,7 @@
 }
 
 .sym-state-label {
-    color: #6c7086;
+    color: var(--code-dim);
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.07em;
@@ -289,11 +289,11 @@
 /* ── Status bar ─────────────────────────────────────────────────────────────── */
 .sym-status {
     padding: 8px 12px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 8px;
     font-size: 13px;
-    color: #a6adc8;
+    color: var(--code-dim);
     min-height: 36px;
     transition: color 0.2s, border-color 0.2s;
 }

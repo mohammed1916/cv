@@ -6,7 +6,7 @@
   min-height: 480px;
   gap: 0;
   overflow: hidden;
-  background: #0f172a;
+  background: var(--code-bg);
 }
 
 .srr-panel {
@@ -22,10 +22,10 @@
   align-items: center;
   justify-content: flex-start;
   height: 100%;
-  background: #1e293b;
-  border-top: 1px solid #334155;
+  background: var(--surface2);
+  border-top: 1px solid var(--border);
   padding: 0 8px;
   font-size: 11px;
-  color: #94a3b8;
+  color: var(--text-muted);
   overflow: hidden;
 }

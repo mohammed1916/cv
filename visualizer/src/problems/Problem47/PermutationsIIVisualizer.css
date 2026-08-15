@@ -95,10 +95,10 @@
 
 .permutii-status {
   padding: 12px 16px;
-  background: #f1f5f9;
+  background: var(--surface2);
   border-top: 2px solid #a5f3fc;
   font-size: 13px;
-  color: #475569;
+  color: var(--text-muted);
 }
 
 .permutii-dock {

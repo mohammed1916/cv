@@ -22,18 +22,18 @@
   --ndt-sapphire: #74c7ec;
   --ndt-blue: #89b4fa;
   --ndt-lavender: #b4befe;
-  --ndt-text: #cdd6f4;
+  --ndt-text: var(--code-text);
   --ndt-subtext1: #bac2de;
-  --ndt-subtext0: #a6adc8;
+  --ndt-subtext0: var(--code-dim);
   --ndt-overlay2: #9399b2;
   --ndt-overlay1: #7f849c;
-  --ndt-overlay0: #6c7086;
+  --ndt-overlay0: var(--code-dim);
   --ndt-surface2: #585b70;
-  --ndt-surface1: #45475a;
+  --ndt-surface1: var(--code-line);
   --ndt-surface0: #313244;
-  --ndt-base: #1e1e2e;
+  --ndt-base: var(--code-bg);
   --ndt-mantle: #181825;
-  --ndt-crust: #11111b;
+  --ndt-crust: var(--code-surface);
 }
 
 .ndt-container {

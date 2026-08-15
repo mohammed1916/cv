@@ -50,7 +50,7 @@
 
 .btmps-chip {
     background: #313244;
-    color: #cdd6f4;
+    color: var(--code-text);
     border: none;
     border-radius: 6px;
     padding: 4px 10px;
@@ -59,13 +59,13 @@
 }
 
 .btmps-chip:hover {
-    background: #45475a;
+    background: var(--code-line);
 }
 
 .btmps-input {
-    background: #11111b;
-    color: #cdd6f4;
-    border: 1px solid #45475a;
+    background: var(--code-surface);
+    color: var(--code-text);
+    border: 1px solid var(--code-line);
     border-radius: 6px;
     padding: 6px 10px;
     font-size: 13px;
@@ -86,7 +86,7 @@
     padding: 8px 16px;
     font-size: 14px;
     font-weight: 700;
-    color: #a6adc8;
+    color: var(--code-dim);
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -98,7 +98,7 @@
 }
 
 .btmps-tree-panel {
-    background: #1e1e2e;
+    background: var(--code-bg);
     border: 1px solid #313244;
     border-radius: 10px;
     padding: 14px;
@@ -114,7 +114,7 @@
     width: 52px;
     height: 52px;
     border-radius: 50%;
-    border: 2px solid #45475a;
+    border: 2px solid var(--code-line);
     background: #313244;
     display: flex;
     flex-direction: column;
@@ -166,11 +166,11 @@
 
 .btmps-status {
     padding: 8px 12px;
-    background: #1e1e2e;
+    background: var(--code-bg);
     border-top: 1px solid #313244;
     border-radius: 0;
     font-size: 13px;
-    color: #a6adc8;
+    color: var(--code-dim);
     min-height: 36px;
     display: flex;
     align-items: center;

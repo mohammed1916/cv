@@ -116,11 +116,11 @@ function MaxXORVisualization({ nums, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Maximum XOR of Two Numbers</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Maximum XOR of Two Numbers</div>
 
       {/* Input array */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Array</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Array</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {nums.map((val, idx) => {
             const isCurrent = currentPair && (currentPair.i === idx || currentPair.j === idx)
@@ -129,12 +129,12 @@ function MaxXORVisualization({ nums, step }) {
                 key={idx}
                 style={{
                   padding: '6px 10px',
-                  backgroundColor: isCurrent ? '#c7d2fe' : '#f1f5f9',
+                  backgroundColor: isCurrent ? '#c7d2fe' : 'var(--surface2)',
                   borderRadius: 4,
-                  border: `2px solid ${isCurrent ? '#6366f1' : '#cbd5e1'}`,
+                  border: `2px solid ${isCurrent ? '#6366f1' : 'var(--border)'}`,
                   fontSize: 12,
                   fontWeight: 700,
-                  color: isCurrent ? '#4f46e5' : '#334155',
+                  color: isCurrent ? '#4f46e5' : 'var(--border)',
                 }}
                 animate={{
                   scale: isCurrent ? 1.15 : 1,
@@ -161,7 +161,7 @@ function MaxXORVisualization({ nums, step }) {
         >
           <div style={{ fontSize: 12, fontWeight: 600, color: '#164e63', marginBottom: 10 }}>Current Pair XOR</div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
-            <div style={{ padding: 8, backgroundColor: '#ffffff', borderRadius: 4 }}>
+            <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#164e63', fontWeight: 600 }}>Num1</div>
               <div style={{ fontSize: 14, fontWeight: 'bold', color: '#048196', fontFamily: 'monospace' }}>
                 {currentPair.a}
@@ -170,7 +170,7 @@ function MaxXORVisualization({ nums, step }) {
                 {toBinary(currentPair.a)}
               </div>
             </div>
-            <div style={{ padding: 8, backgroundColor: '#ffffff', borderRadius: 4 }}>
+            <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#164e63', fontWeight: 600 }}>Num2</div>
               <div style={{ fontSize: 14, fontWeight: 'bold', color: '#048196', fontFamily: 'monospace' }}>
                 {currentPair.b}
@@ -193,15 +193,15 @@ function MaxXORVisualization({ nums, step }) {
       )}
 
       {/* Bit representation legend */}
-      <div style={{ padding: 10, backgroundColor: '#f1f5f9', borderRadius: 6, border: '1px solid #cbd5e1' }}>
-        <div style={{ fontSize: 10, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>XOR Rule: 1⊕1=0, 0⊕0=0, 1⊕0=1</div>
-        <div style={{ fontSize: 9, color: '#64748b' }}>Result 1 when bits differ, 0 when same</div>
+      <div style={{ padding: 10, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--border)' }}>
+        <div style={{ fontSize: 10, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>XOR Rule: 1⊕1=0, 0⊕0=0, 1⊕0=1</div>
+        <div style={{ fontSize: 9, color: 'var(--text-muted)' }}>Result 1 when bits differ, 0 when same</div>
       </div>
 
       {/* Pairs table */}
       {step?.pairs && step.pairs.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>All Pairs (first 6)</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>All Pairs (first 6)</div>
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
@@ -209,9 +209,9 @@ function MaxXORVisualization({ nums, step }) {
             maxHeight: 200,
             overflowY: 'auto',
             padding: 8,
-            backgroundColor: '#f1f5f9',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
-            border: '1px solid #cbd5e1',
+            border: '1px solid var(--border)',
           }}>
             {step.pairs.map((pair, idx) => {
               const isMax = pair.xor === step.result
@@ -220,17 +220,17 @@ function MaxXORVisualization({ nums, step }) {
                   key={idx}
                   style={{
                     padding: '8px',
-                    backgroundColor: isMax ? '#dbeafe' : '#ffffff',
+                    backgroundColor: isMax ? '#dbeafe' : 'var(--surface)',
                     borderRadius: 4,
-                    border: `1px solid ${isMax ? '#0284c7' : '#e2e8f0'}`,
+                    border: `1px solid ${isMax ? '#0284c7' : 'var(--text)'}`,
                     textAlign: 'center',
                     fontSize: 11,
                   }}
                 >
-                  <div style={{ fontWeight: 600, color: '#1e293b' }}>
+                  <div style={{ fontWeight: 600, color: 'var(--surface2)' }}>
                     {pair.a} ^ {pair.b}
                   </div>
-                  <div style={{ fontSize: 10, color: isMax ? '#0284c7' : '#64748b', fontWeight: 700, marginTop: 4 }}>
+                  <div style={{ fontSize: 10, color: isMax ? '#0284c7' : 'var(--text-muted)', fontWeight: 700, marginTop: 4 }}>
                     = {pair.xor}
                   </div>
                 </div>
@@ -251,7 +251,7 @@ function MaxXORVisualization({ nums, step }) {
         </div>
       </div>
 
-      <div style={{ fontSize: 12, color: '#475569' }}>{step?.message}</div>
+      <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{step?.message}</div>
     </div>
   )
 }
@@ -307,7 +307,7 @@ export default function Problem421Visualizer() {
         />),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button
@@ -316,11 +316,11 @@ export default function Problem421Visualizer() {
                   style={{
                     padding: '6px 12px',
                     borderRadius: 4,
-                    border: exIdx === idx ? '2px solid #06b6d4' : '1px solid #cbd5e1',
+                    border: exIdx === idx ? '2px solid #06b6d4' : '1px solid var(--border)',
                     cursor: 'pointer',
                     fontSize: 12,
-                    backgroundColor: exIdx === idx ? '#cffafe' : '#f1f5f9',
-                    color: exIdx === idx ? '#164e63' : '#334155',
+                    backgroundColor: exIdx === idx ? '#cffafe' : 'var(--surface2)',
+                    color: exIdx === idx ? '#164e63' : 'var(--border)',
                     fontWeight: exIdx === idx ? '600' : '400',
                   }}
                 >

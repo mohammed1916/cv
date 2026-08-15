@@ -193,8 +193,8 @@ function ListVisualization({ values }) {
                 width={nodeWidth}
                 height={nodeHeight}
                 rx={4}
-                fill="#e2e8f0"
-                stroke="#94a3b8"
+                fill="var(--text)"
+                stroke="var(--text-muted)"
                 strokeWidth={2}
               />
               <text
@@ -204,7 +204,7 @@ function ListVisualization({ values }) {
                 dy="0.3em"
                 fontSize={14}
                 fontWeight={600}
-                fill="#0f172a"
+                fill="var(--code-bg)"
               >
                 {val}
               </text>
@@ -215,7 +215,7 @@ function ListVisualization({ values }) {
                     y1={y + nodeHeight / 2}
                     x2={x + nodeWidth + gap}
                     y2={y + nodeHeight / 2}
-                    stroke="#94a3b8"
+                    stroke="var(--text-muted)"
                     strokeWidth={2}
                     markerEnd="url(#arrowhead)"
                   />
@@ -234,7 +234,7 @@ function ListVisualization({ values }) {
             refY="3"
             orient="auto"
           >
-            <polygon points="0 0, 10 3, 0 6" fill="#94a3b8" />
+            <polygon points="0 0, 10 3, 0 6" fill="var(--text-muted)" />
           </marker>
         </defs>
       </svg>

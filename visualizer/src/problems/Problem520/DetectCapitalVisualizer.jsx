@@ -120,7 +120,7 @@ function VisualizationPanel({ word, step }) {
 
       {/* Word Display */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Word: {word}</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Word: {word}</div>
         <div style={{ display: 'flex', gap: 8 }}>
           {word.split('').map((char, idx) => {
             const isUpper = char === char.toUpperCase()
@@ -136,9 +136,9 @@ function VisualizationPanel({ word, step }) {
                   fontWeight: 700,
                   minWidth: 50,
                   textAlign: 'center',
-                  backgroundColor: isUpper ? '#fbcfe8' : '#f1f5f9',
-                  borderColor: isUpper ? '#ec4899' : '#cbd5e1',
-                  color: isUpper ? '#be185d' : '#334155'
+                  backgroundColor: isUpper ? '#fbcfe8' : 'var(--surface2)',
+                  borderColor: isUpper ? '#ec4899' : 'var(--border)',
+                  color: isUpper ? '#be185d' : 'var(--border)'
                 }}
               >
                 {char}
@@ -165,31 +165,31 @@ function VisualizationPanel({ word, step }) {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: 8 }}>
           <div style={{
             padding: '8px 12px',
-            backgroundColor: word === word.toUpperCase() ? '#fbcfe8' : '#f1f5f9',
+            backgroundColor: word === word.toUpperCase() ? '#fbcfe8' : 'var(--surface2)',
             borderRadius: 4,
             fontSize: 11,
             fontWeight: 600,
-            color: word === word.toUpperCase() ? '#be185d' : '#334155'
+            color: word === word.toUpperCase() ? '#be185d' : 'var(--border)'
           }}>
             All Upper: {word === word.toUpperCase() ? '✓' : '✗'}
           </div>
           <div style={{
             padding: '8px 12px',
-            backgroundColor: word === word.toLowerCase() ? '#fbcfe8' : '#f1f5f9',
+            backgroundColor: word === word.toLowerCase() ? '#fbcfe8' : 'var(--surface2)',
             borderRadius: 4,
             fontSize: 11,
             fontWeight: 600,
-            color: word === word.toLowerCase() ? '#be185d' : '#334155'
+            color: word === word.toLowerCase() ? '#be185d' : 'var(--border)'
           }}>
             All Lower: {word === word.toLowerCase() ? '✓' : '✗'}
           </div>
           <div style={{
             padding: '8px 12px',
-            backgroundColor: (word[0] === word[0].toUpperCase() && word.slice(1) === word.slice(1).toLowerCase()) ? '#fbcfe8' : '#f1f5f9',
+            backgroundColor: (word[0] === word[0].toUpperCase() && word.slice(1) === word.slice(1).toLowerCase()) ? '#fbcfe8' : 'var(--surface2)',
             borderRadius: 4,
             fontSize: 11,
             fontWeight: 600,
-            color: (word[0] === word[0].toUpperCase() && word.slice(1) === word.slice(1).toLowerCase()) ? '#be185d' : '#334155'
+            color: (word[0] === word[0].toUpperCase() && word.slice(1) === word.slice(1).toLowerCase()) ? '#be185d' : 'var(--border)'
           }}>
             First Cap: {(word[0] === word[0].toUpperCase() && word.slice(1) === word.slice(1).toLowerCase()) ? '✓' : '✗'}
           </div>

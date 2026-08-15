@@ -136,7 +136,7 @@ const EXAMPLES = getExamplesOr('largest-rectangle-in-histogram', [
 function HistogramVisualization({ step, heights, inputError, input, setInput, handleReset, applyExample }) {
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
         Histogram Visualization
         {inputError && <span style={{ marginLeft: 8, color: '#e91414', fontSize: 12 }}>{inputError}</span>}
       </header>
@@ -149,8 +149,8 @@ function HistogramVisualization({ step, heights, inputError, input, setInput, ha
             style={{
               padding: '6px 12px',
               borderRadius: 4,
-              border: '1px solid #cbd5e1',
-              backgroundColor: '#f1f5f9',
+              border: '1px solid var(--border)',
+              backgroundColor: 'var(--surface2)',
               cursor: 'pointer',
               fontSize: 12,
             }}
@@ -169,14 +169,14 @@ function HistogramVisualization({ step, heights, inputError, input, setInput, ha
         placeholder="[2,1,5,6,2,3]"
         style={{
           padding: '8px 10px',
-          border: '1px solid #cbd5e1',
+          border: '1px solid var(--border)',
           borderRadius: 4,
           fontSize: 12,
         }}
       />
 
       {/* Histogram bars */}
-      <div style={{ flex: 1, display: 'flex', alignItems: 'flex-end', gap: 8, padding: '16px 0', borderBottom: '2px solid #e2e8f0', minHeight: 300 }}>
+      <div style={{ flex: 1, display: 'flex', alignItems: 'flex-end', gap: 8, padding: '16px 0', borderBottom: '2px solid var(--text)', minHeight: 300 }}>
         {heights.map((v, i) => {
           const active = step?.i === i
           const inRect = step?.rect && i >= step?.rect.start && i <= step?.rect.end && v >= step?.rect.height
@@ -201,7 +201,7 @@ function HistogramVisualization({ step, heights, inputError, input, setInput, ha
               >
                 {v > 0 && v}
               </motion.div>
-              <small style={{ fontSize: 11, color: '#64748b', fontWeight: 500 }}>{i}</small>
+              <small style={{ fontSize: 11, color: 'var(--text-muted)', fontWeight: 500 }}>{i}</small>
             </div>
           )
         })}
@@ -212,19 +212,19 @@ function HistogramVisualization({ step, heights, inputError, input, setInput, ha
 
 function StackState({ step, heights }) {
   return (
-    <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 16, padding: 16, borderLeft: '1px solid #e2e8f0' }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>
+    <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 16, padding: 16, borderLeft: '1px solid var(--text)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
         Stack & State
       </header>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         {/* Stack display */}
         <div>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#475569', marginBottom: 8 }}>Stack (start, height):</div>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Stack (start, height):</div>
           <div
             style={{
               padding: 12,
-              backgroundColor: '#f1f5f9',
+              backgroundColor: 'var(--surface2)',
               borderRadius: 4,
               minHeight: 40,
               display: 'flex',
@@ -258,16 +258,16 @@ function StackState({ step, heights }) {
 
         {/* Current state */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-          <div style={{ padding: 12, backgroundColor: '#f1f5f9', borderRadius: 4 }}>
-            <div style={{ fontSize: 11, fontWeight: 500, color: '#475569', marginBottom: 6 }}>Current Index</div>
-            <div style={{ fontSize: 14, fontFamily: 'monospace', fontWeight: 600, color: '#1e293b' }}>
+          <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 4 }}>
+            <div style={{ fontSize: 11, fontWeight: 500, color: 'var(--text-muted)', marginBottom: 6 }}>Current Index</div>
+            <div style={{ fontSize: 14, fontFamily: 'monospace', fontWeight: 600, color: 'var(--surface2)' }}>
               {step?.i >= 0 ? step.i : '-'}
             </div>
           </div>
 
-          <div style={{ padding: 12, backgroundColor: '#f1f5f9', borderRadius: 4 }}>
-            <div style={{ fontSize: 11, fontWeight: 500, color: '#475569', marginBottom: 6 }}>Current Height</div>
-            <div style={{ fontSize: 14, fontFamily: 'monospace', fontWeight: 600, color: '#1e293b' }}>
+          <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 4 }}>
+            <div style={{ fontSize: 11, fontWeight: 500, color: 'var(--text-muted)', marginBottom: 6 }}>Current Height</div>
+            <div style={{ fontSize: 14, fontFamily: 'monospace', fontWeight: 600, color: 'var(--surface2)' }}>
               {step?.h >= 0 ? step.h : '-'}
             </div>
           </div>
@@ -388,7 +388,7 @@ export default function LargestRectangleInHistogramVisualizer() {
       )}
       {createPortal(
         <FloatingPanel title="Playback Controls">
-          <div style={{ marginBottom: '12px', fontSize: 12, color: '#475569' }}>
+          <div style={{ marginBottom: '12px', fontSize: 12, color: 'var(--text-muted)' }}>
             {step?.message ?? 'Press Play or Step to begin.'}
           </div>
           <PlaybackControls

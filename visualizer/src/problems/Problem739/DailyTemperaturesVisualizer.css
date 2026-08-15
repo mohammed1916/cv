@@ -10,7 +10,7 @@
 .dt-hero {
   padding: 32px 24px;
   background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.8) 100%);
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 12px;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -57,7 +57,7 @@
 }
 
 .dt-summary-card {
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 8px;
   background: rgba(30, 41, 59, 0.5);
   padding: 12px;
@@ -105,10 +105,10 @@
 }
 
 .dt-chip {
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 999px;
   background: rgba(30, 41, 59, 0.8);
-  color: #cbd5e1;
+  color: var(--border);
   padding: 4px 10px;
   cursor: pointer;
   font-size: 12px;
@@ -116,16 +116,16 @@
 }
 
 .dt-chip:hover {
-  border-color: #475569;
+  border-color: var(--text-muted);
   background: rgba(30, 41, 59, 1);
-  color: #f1f5f9;
+  color: var(--surface2);
 }
 
 .dt-input {
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 8px;
-  background: #0f172a;
-  color: #f8fafc;
+  background: var(--code-bg);
+  color: var(--surface);
   font-family: monospace;
   padding: 8px 10px;
   font-size: 13px;
@@ -133,7 +133,7 @@
 
 .dt-input:focus {
   outline: none;
-  border-color: #475569;
+  border-color: var(--text-muted);
   box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
 }
 
@@ -145,7 +145,7 @@
 
 .dt-cell {
   min-width: 44px;
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 8px;
   background: rgba(30, 41, 59, 0.75);
   display: grid;
@@ -176,9 +176,9 @@
 
 .dt-result-cell {
   min-width: 30px;
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 6px;
-  background: #0f172a;
+  background: var(--code-bg);
   color: #bae6fd;
   font-family: monospace;
   display: grid;
@@ -189,9 +189,9 @@
 
 .dt-stack {
   min-height: 42px;
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 8px;
-  background: #0f172a;
+  background: var(--code-bg);
   padding: 8px;
   display: flex;
   gap: 6px;
@@ -212,11 +212,11 @@
 }
 
 .dt-status {
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 8px;
   background: rgba(15, 23, 42, 0.7);
   padding: 10px 12px;
-  color: #cbd5e1;
+  color: var(--border);
   font-family: monospace;
   font-size: 13px;
   min-height: 60px;

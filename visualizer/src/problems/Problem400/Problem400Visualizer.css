@@ -139,7 +139,7 @@
 
 .p400-digit.target {
   background: var(--accent-400, #fbbf24);
-  color: #1e293b;
+  color: var(--surface2);
   box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.85);
 }
 

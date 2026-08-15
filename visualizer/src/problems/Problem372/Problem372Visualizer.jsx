@@ -169,7 +169,7 @@ function SuperPowerVisualization({ base, exponents, step }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
       {/* Exponent digits breakdown */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Exponent Digits</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Exponent Digits</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
           {expDigits.map((digit, idx) => {
             const isCurrent = idx === step?.currentIdx && step && !step.done
@@ -184,9 +184,9 @@ function SuperPowerVisualization({ base, exponents, step }) {
                   fontFamily: 'monospace',
                   fontSize: 13,
                   fontWeight: 600,
-                  backgroundColor: isCurrent ? '#dbeafe' : isProcessed ? '#d1fae5' : '#f1f5f9',
-                  borderColor: isCurrent ? '#0284c7' : isProcessed ? '#10b981' : '#cbd5e1',
-                  color: isCurrent ? '#0c4a6e' : isProcessed ? '#047857' : '#334155'
+                  backgroundColor: isCurrent ? '#dbeafe' : isProcessed ? '#d1fae5' : 'var(--surface2)',
+                  borderColor: isCurrent ? '#0284c7' : isProcessed ? '#10b981' : 'var(--border)',
+                  color: isCurrent ? '#0c4a6e' : isProcessed ? '#047857' : 'var(--border)'
                 }}
                 animate={{ scale: isCurrent ? 1.15 : 1 }}
               >
@@ -195,7 +195,7 @@ function SuperPowerVisualization({ base, exponents, step }) {
             )
           })}
         </div>
-        <div style={{ fontSize: 11, color: '#64748b', marginTop: 8 }}>
+        <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 8 }}>
           Exponents = [{expDigits.join(', ')}], processing right to left
         </div>
       </div>
@@ -205,14 +205,14 @@ function SuperPowerVisualization({ base, exponents, step }) {
         <motion.div
           style={{
             padding: 12,
-            backgroundColor: '#f8fafc',
+            backgroundColor: 'var(--surface)',
             borderRadius: 6,
             border: '2px solid #3b82f6'
           }}
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Base Power Calculation</div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Base Power Calculation</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, marginBottom: 8 }}>
             <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#dbeafe', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#1e40af' }}>Base</div>
@@ -228,7 +228,7 @@ function SuperPowerVisualization({ base, exponents, step }) {
             </div>
           </div>
           {step.moduloReduction !== null && (
-            <div style={{ fontSize: 12, color: '#475569', fontFamily: 'monospace' }}>
+            <div style={{ fontSize: 12, color: 'var(--text-muted)', fontFamily: 'monospace' }}>
               Calculated base^{step.currentDigit} mod {MOD} = {step.digitPower}
             </div>
           )}
@@ -277,7 +277,7 @@ function SuperPowerVisualization({ base, exponents, step }) {
 
       {/* Final result */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Result</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Result</div>
         <motion.div
           style={{
             padding: 16,

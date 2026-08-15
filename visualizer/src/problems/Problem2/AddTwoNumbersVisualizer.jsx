@@ -182,7 +182,7 @@ export default function AddTwoNumbersVisualizer({ problem }) {
         </div>
 
         <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center' }}>
-          <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace' }}>l1=</span>
+          <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>l1=</span>
           <input
             value={l1Input}
             onChange={(e) => { setL1Input(e.target.value); handleReset() }}
@@ -190,7 +190,7 @@ export default function AddTwoNumbersVisualizer({ problem }) {
             className="atn-input"
             style={{ flex: 1, margin: 0 }}
           />
-          <span style={{ color: '#64748b', fontSize: 13, fontFamily: 'monospace' }}>l2=</span>
+          <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>l2=</span>
           <input
             value={l2Input}
             onChange={(e) => { setL2Input(e.target.value); handleReset() }}

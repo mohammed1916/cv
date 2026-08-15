@@ -20,10 +20,10 @@
 
 .ffo-panel-head {
   padding: 12px 16px;
-  border-bottom: 1px solid var(--border-color, #e2e8f0);
+  border-bottom: 1px solid var(--border-color, var(--text));
   font-weight: 600;
   font-size: 14px;
-  color: var(--text-primary, #0f172a);
+  color: var(--text-primary, var(--code-bg));
   flex-shrink: 0;
 }
 
@@ -36,10 +36,10 @@
 /* Status panel */
 .ffo-status {
   padding: 12px 16px;
-  border-top: 1px solid var(--border-color, #e2e8f0);
+  border-top: 1px solid var(--border-color, var(--text));
   font-size: 13px;
-  color: var(--text-secondary, #64748b);
-  background-color: var(--bg-secondary, #f8fafc);
+  color: var(--text-secondary, var(--text-muted));
+  background-color: var(--bg-secondary, var(--surface));
 }
 
 .ffo-status.success {
@@ -61,7 +61,7 @@
 .ffo-label {
   font-size: 12px;
   font-weight: 600;
-  color: var(--text-secondary, #64748b);
+  color: var(--text-secondary, var(--text-muted));
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 8px;
@@ -73,7 +73,7 @@
   flex-wrap: wrap;
   padding: 12px;
   border-radius: 6px;
-  background-color: var(--bg-tertiary, #f1f5f9);
+  background-color: var(--bg-tertiary, var(--surface2));
 }
 
 .ffo-char {
@@ -85,9 +85,9 @@
   border-radius: 4px;
   font-weight: 600;
   font-size: 14px;
-  background-color: var(--bg-secondary, #ffffff);
-  border: 1px solid var(--border-color, #e2e8f0);
-  color: var(--text-primary, #0f172a);
+  background-color: var(--bg-secondary, var(--surface));
+  border: 1px solid var(--border-color, var(--text));
+  color: var(--text-primary, var(--code-bg));
   transition: all 150ms ease;
 }
 
@@ -122,7 +122,7 @@
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 12px;
   padding: 12px;
-  background-color: var(--bg-tertiary, #f1f5f9);
+  background-color: var(--bg-tertiary, var(--surface2));
   border-radius: 6px;
 }
 
@@ -131,15 +131,15 @@
   flex-direction: column;
   align-items: center;
   padding: 12px;
-  background-color: var(--bg-secondary, #ffffff);
+  background-color: var(--bg-secondary, var(--surface));
   border-radius: 4px;
-  border: 1px solid var(--border-color, #e2e8f0);
+  border: 1px solid var(--border-color, var(--text));
 }
 
 .ffo-stat-label {
   font-size: 11px;
   font-weight: 600;
-  color: var(--text-secondary, #64748b);
+  color: var(--text-secondary, var(--text-muted));
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 4px;
@@ -148,17 +148,17 @@
 .ffo-stat-val {
   font-size: 18px;
   font-weight: 700;
-  color: var(--text-primary, #0f172a);
+  color: var(--text-primary, var(--code-bg));
   font-family: 'Monaco', 'Menlo', monospace;
 }
 
 /* Example buttons */
 .ffo-example-btn {
   padding: 6px 12px;
-  border: 1px solid var(--border-color, #e2e8f0);
+  border: 1px solid var(--border-color, var(--text));
   border-radius: 4px;
-  background-color: var(--bg-secondary, #ffffff);
-  color: var(--text-primary, #0f172a);
+  background-color: var(--bg-secondary, var(--surface));
+  color: var(--text-primary, var(--code-bg));
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
@@ -166,17 +166,17 @@
 }
 
 .ffo-example-btn:hover {
-  background-color: #e2e8f0;
-  border-color: #cbd5e1;
+  background-color: var(--text);
+  border-color: var(--border);
 }
 
 /* Input styles */
 .ffo-input {
   padding: 8px 12px;
-  border: 1px solid var(--border-color, #e2e8f0);
+  border: 1px solid var(--border-color, var(--text));
   border-radius: 4px;
-  background-color: var(--bg-secondary, #ffffff);
-  color: var(--text-primary, #0f172a);
+  background-color: var(--bg-secondary, var(--surface));
+  color: var(--text-primary, var(--code-bg));
   font-size: 13px;
   font-family: 'Monaco', 'Menlo', monospace;
   transition: all 150ms ease;
@@ -192,25 +192,25 @@
 @media (prefers-color-scheme: dark) {
   :root[data-theme="dark"] .ffo-panel-head,
   :root[data-theme="dark"] .ffo-status {
-    border-bottom-color: #334155;
-    border-top-color: #334155;
+    border-bottom-color: var(--border);
+    border-top-color: var(--border);
     color: #5577a4;
   }
 
   :root[data-theme="dark"] .ffo-panel-body {
-    background-color: #1e293b;
+    background-color: var(--surface2);
   }
 
   :root[data-theme="dark"] .ffo-string-display,
   :root[data-theme="dark"] .ffo-stats {
-    background-color: #0f172a;
+    background-color: var(--code-bg);
   }
 
   :root[data-theme="dark"] .ffo-char,
   :root[data-theme="dark"] .ffo-stat-box {
-    background-color: #1e293b;
-    border-color: #334155;
-    color: #e2e8f0;
+    background-color: var(--surface2);
+    border-color: var(--border);
+    color: var(--text);
   }
 
   :root[data-theme="dark"] .ffo-char.current-window {
@@ -238,19 +238,19 @@
   }
 
   :root[data-theme="dark"] .ffo-input {
-    background-color: #1e293b;
-    color: #e2e8f0;
-    border-color: #334155;
+    background-color: var(--surface2);
+    color: var(--text);
+    border-color: var(--border);
   }
 
   :root[data-theme="dark"] .ffo-example-btn {
-    background-color: #1e293b;
-    color: #e2e8f0;
-    border-color: #334155;
+    background-color: var(--surface2);
+    color: var(--text);
+    border-color: var(--border);
   }
 
   :root[data-theme="dark"] .ffo-example-btn:hover {
-    background-color: #334155;
-    border-color: #475569;
+    background-color: var(--border);
+    border-color: var(--text-muted);
   }
 }

@@ -14,18 +14,18 @@
   --ctp-sapphire: #74c7ec;
   --ctp-blue: #89b4fa;
   --ctp-lavender: #b4befe;
-  --ctp-text: #cdd6f4;
+  --ctp-text: var(--code-text);
   --ctp-subtext1: #bac2de;
-  --ctp-subtext0: #a6adc8;
+  --ctp-subtext0: var(--code-dim);
   --ctp-overlay2: #9399b2;
   --ctp-overlay1: #7f849c;
-  --ctp-overlay0: #6c7086;
+  --ctp-overlay0: var(--code-dim);
   --ctp-surface2: #585b70;
-  --ctp-surface1: #45475a;
+  --ctp-surface1: var(--code-line);
   --ctp-surface0: #313244;
-  --ctp-base: #1e1e2e;
+  --ctp-base: var(--code-bg);
   --ctp-mantle: #181825;
-  --ctp-crust: #11111b;
+  --ctp-crust: var(--code-surface);
 }
 
 .psq-container {
@@ -366,8 +366,8 @@
 
 .ps-hero {
   padding: 40px 20px;
-  background: linear-gradient(135deg, #1e1e2e 0%, #313244 100%);
-  border-bottom: 1px solid #45475a;
+  background: linear-gradient(135deg, var(--code-bg) 0%, #313244 100%);
+  border-bottom: 1px solid var(--code-line);
   margin-bottom: 20px;
 }
 
@@ -418,9 +418,9 @@
 .ps-chip {
   padding: 6px 12px;
   border-radius: 4px;
-  border: 1px solid #45475a;
+  border: 1px solid var(--code-line);
   background: #313244;
-  color: #cdd6f4;
+  color: var(--code-text);
   cursor: pointer;
   font-size: 12px;
   font-weight: 500;
@@ -428,7 +428,7 @@
 }
 
 .ps-chip:hover {
-  background: #45475a;
+  background: var(--code-line);
   border-color: #89dceb;
 }
 
@@ -448,9 +448,9 @@
 .ps-input {
   padding: 8px 12px;
   background: #313244;
-  border: 1px solid #45475a;
+  border: 1px solid var(--code-line);
   border-radius: 4px;
-  color: #cdd6f4;
+  color: var(--code-text);
   font-size: 14px;
   font-family: monospace;
 }
@@ -536,8 +536,8 @@
 
 .ps-square-chip {
   padding: 6px 10px;
-  background: #45475a;
-  color: #cdd6f4;
+  background: var(--code-line);
+  color: var(--code-text);
   border-radius: 4px;
   font-size: 12px;
   font-weight: 600;
@@ -547,7 +547,7 @@
 
 .ps-square-chip.active {
   background: #89dceb;
-  color: #1e1e2e;
+  color: var(--code-bg);
   box-shadow: 0 0 8px rgba(137, 220, 235, 0.4);
 }
 
@@ -578,18 +578,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #45475a;
+  background: var(--code-line);
   border: 1px solid #585b70;
   border-radius: 3px;
   font-size: 12px;
   font-weight: 600;
-  color: #cdd6f4;
+  color: var(--code-text);
   transition: all 0.2s;
 }
 
 .ps-dp-cell.active {
   background: #89dceb;
-  color: #1e1e2e;
+  color: var(--code-bg);
   border-color: #89dceb;
   transform: scale(1.15);
   box-shadow: 0 0 12px rgba(137, 220, 235, 0.4);
@@ -597,7 +597,7 @@
 
 .ps-dp-cell.final {
   background: #a6e3a1;
-  color: #1e1e2e;
+  color: var(--code-bg);
   border-color: #a6e3a1;
   box-shadow: 0 0 12px rgba(166, 227, 161, 0.3);
 }

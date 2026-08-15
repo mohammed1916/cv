@@ -6,19 +6,19 @@
   min-height: 480px;
   gap: 0;
   overflow: hidden;
-  background: #ffffff;
-  color: #1e293b;
+  background: var(--surface);
+  color: var(--surface2);
 }
 
 .i2r-panel {
-  background: #ffffff;
+  background: var(--surface);
   overflow: auto;
 }
 
 .i2r-status {
   padding: 12px;
-  background-color: #f1f5f9;
+  background-color: var(--surface2);
   font-size: 12px;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid var(--text);
   overflow: hidden;
 }

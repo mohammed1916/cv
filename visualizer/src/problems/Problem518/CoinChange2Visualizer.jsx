@@ -125,7 +125,7 @@ function VisualizationPanel({ amount, coins, step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -134,10 +134,10 @@ function VisualizationPanel({ amount, coins, step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9'
+                backgroundColor: 'var(--surface2)'
               }}
             >
               {e.label}
@@ -148,7 +148,7 @@ function VisualizationPanel({ amount, coins, step, applyEx }) {
 
       {/* Coins */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Coins: {coins.join(', ')}</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Coins: {coins.join(', ')}</div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {coins.map((coin, idx) => {
             const isActive = step && idx === step.coinIdx
@@ -162,9 +162,9 @@ function VisualizationPanel({ amount, coins, step, applyEx }) {
                   fontFamily: 'monospace',
                   fontSize: 14,
                   fontWeight: 600,
-                  backgroundColor: isActive ? '#dbeafe' : '#f1f5f9',
-                  borderColor: isActive ? '#0284c7' : '#cbd5e1',
-                  color: isActive ? '#0c4a6e' : '#334155'
+                  backgroundColor: isActive ? '#dbeafe' : 'var(--surface2)',
+                  borderColor: isActive ? '#0284c7' : 'var(--border)',
+                  color: isActive ? '#0c4a6e' : 'var(--border)'
                 }}
                 animate={{ scale: isActive ? 1.15 : 1 }}
               >
@@ -177,7 +177,7 @@ function VisualizationPanel({ amount, coins, step, applyEx }) {
 
       {/* DP Array */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>DP Array</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>DP Array</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', overflowX: 'auto', paddingBottom: 8 }}>
           {step?.dp?.map((val, idx) => {
             const isActive = step && idx === step.amountIdx && step.amountIdx !== -1
@@ -193,9 +193,9 @@ function VisualizationPanel({ amount, coins, step, applyEx }) {
                   fontWeight: 600,
                   minWidth: 60,
                   textAlign: 'center',
-                  backgroundColor: isActive ? '#dbeafe' : '#f1f5f9',
-                  borderColor: isActive ? '#0284c7' : '#cbd5e1',
-                  color: isActive ? '#0c4a6e' : '#334155'
+                  backgroundColor: isActive ? '#dbeafe' : 'var(--surface2)',
+                  borderColor: isActive ? '#0284c7' : 'var(--border)',
+                  color: isActive ? '#0c4a6e' : 'var(--border)'
                 }}
                 animate={{ scale: isActive ? 1.15 : 1 }}
               >

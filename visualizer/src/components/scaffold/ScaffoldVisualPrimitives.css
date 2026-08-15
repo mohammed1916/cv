@@ -10,7 +10,7 @@
   border-radius: 999px;
   background: rgba(148, 163, 184, 0.12);
   border: 1px solid rgba(148, 163, 184, 0.24);
-  color: #cbd5e1;
+  color: var(--border);
 }
 
 .svp-array {
@@ -22,7 +22,7 @@
 .svp-array-cell {
   min-width: 42px;
   padding: 0.45rem 0.35rem;
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 10px;
   background: rgba(15, 23, 42, 0.78);
   display: grid;
@@ -40,12 +40,12 @@
 }
 
 .svp-array-cell span {
-  color: #f8fafc;
+  color: var(--surface);
   font-weight: 700;
 }
 
 .svp-array-cell small {
-  color: #94a3b8;
+  color: var(--text-muted);
   font-size: 0.62rem;
 }
 
@@ -56,12 +56,12 @@
 }
 
 .svp-matrix-cell {
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 8px;
   min-height: 36px;
   display: grid;
   place-items: center;
-  color: #e2e8f0;
+  color: var(--text);
   background: rgba(15, 23, 42, 0.7);
   font-size: 0.84rem;
 }
@@ -80,7 +80,7 @@
 
 .svp-char {
   min-width: 34px;
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 0.3rem;
   display: grid;
@@ -99,11 +99,11 @@
 }
 
 .svp-char span {
-  color: #f8fafc;
+  color: var(--surface);
 }
 
 .svp-char small {
-  color: #94a3b8;
+  color: var(--text-muted);
   font-size: 0.62rem;
 }
 
@@ -120,9 +120,9 @@
 
 .svp-edge {
   border-radius: 8px;
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   padding: 0.28rem 0.45rem;
-  color: #cbd5e1;
+  color: var(--border);
   font-size: 0.74rem;
   background: rgba(15, 23, 42, 0.75);
 }
@@ -137,8 +137,8 @@
   min-width: 34px;
   min-height: 34px;
   border-radius: 999px;
-  border: 1px solid #334155;
-  color: #e2e8f0;
+  border: 1px solid var(--border);
+  color: var(--text);
   display: grid;
   place-items: center;
   background: rgba(15, 23, 42, 0.8);
@@ -151,7 +151,7 @@
 }
 
 .svp-metric {
-  border: 1px solid #334155;
+  border: 1px solid var(--border);
   border-radius: 10px;
   padding: 0.55rem 0.6rem;
   display: flex;
@@ -161,12 +161,12 @@
 }
 
 .svp-metric span {
-  color: #94a3b8;
+  color: var(--text-muted);
   font-size: 0.72rem;
 }
 
 .svp-metric strong {
-  color: #f8fafc;
+  color: var(--surface);
   font-size: 0.86rem;
 }
 

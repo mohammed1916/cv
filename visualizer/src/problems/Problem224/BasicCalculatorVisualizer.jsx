@@ -119,23 +119,23 @@ export default function BasicCalculatorVisualizer() {
         />),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map(e => (
-                <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: '#f1f5f9' }}>
+                <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: 'var(--surface2)' }}>
                   {e.label}
                 </button>
               ))}
             </div>
           </div>
 
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 4 }}>Expression</div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, minHeight: 40, padding: 8, backgroundColor: '#f8fafc', borderRadius: 4 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 4 }}>Expression</div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, minHeight: 40, padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
             {chars.map((ch, i) => (
               <motion.span key={i} animate={{ scale: i === charIdx ? 1.4 : 1 }} style={{
                 fontSize: 14, fontWeight: 'bold', padding: '4px 8px',
                 backgroundColor: i === charIdx ? '#fbbf24' : /\d/.test(ch) ? '#dbeafe' : ch === '(' || ch === ')' ? '#fee2e2' : '#f3f4f6',
-                borderRadius: 4, color: '#1e293b'
+                borderRadius: 4, color: 'var(--surface2)'
               }}>
                 {ch}
               </motion.span>
@@ -144,8 +144,8 @@ export default function BasicCalculatorVisualizer() {
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 6 }}>Stack (top→bottom)</div>
-              <div style={{ display: 'flex', flexDirection: 'column-reverse', gap: 4, minHeight: 60, padding: 8, backgroundColor: '#f8fafc', borderRadius: 4 }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 6 }}>Stack (top→bottom)</div>
+              <div style={{ display: 'flex', flexDirection: 'column-reverse', gap: 4, minHeight: 60, padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
                 <AnimatePresence>
                   {stack.map((v, i) => (
                     <motion.div key={`${i}-${v}`} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }} style={{
@@ -156,27 +156,27 @@ export default function BasicCalculatorVisualizer() {
                     </motion.div>
                   ))}
                 </AnimatePresence>
-                {stack.length === 0 && <span style={{ color: '#64748b', fontSize: 12 }}>empty</span>}
+                {stack.length === 0 && <span style={{ color: 'var(--text-muted)', fontSize: 12 }}>empty</span>}
               </div>
             </div>
 
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginBottom: 6 }}>State</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 6, padding: 8, backgroundColor: '#f8fafc', borderRadius: 4 }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 6 }}>State</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 6, padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12 }}>
-                  <span style={{ color: '#64748b' }}>result</span>
+                  <span style={{ color: 'var(--text-muted)' }}>result</span>
                   <motion.span key={result} initial={{ scale: 1.3 }} animate={{ scale: 1 }} style={{ fontWeight: 'bold', color: '#0b7db0' }}>{result}</motion.span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12 }}>
-                  <span style={{ color: '#64748b' }}>num</span>
-                  <span style={{ fontWeight: 'bold', color: '#1e293b' }}>{num}</span>
+                  <span style={{ color: 'var(--text-muted)' }}>num</span>
+                  <span style={{ fontWeight: 'bold', color: 'var(--surface2)' }}>{num}</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12 }}>
-                  <span style={{ color: '#64748b' }}>sign</span>
+                  <span style={{ color: 'var(--text-muted)' }}>sign</span>
                   <span style={{ fontWeight: 'bold', color: sign > 0 ? '#10b981' : '#ef4444' }}>{sign > 0 ? '+1' : '−1'}</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12 }}>
-                  <span style={{ color: '#64748b' }}>phase</span>
+                  <span style={{ color: 'var(--text-muted)' }}>phase</span>
                   <span style={{ fontWeight: 'bold', color: '#8553f6' }}>{phase}</span>
                 </div>
               </div>

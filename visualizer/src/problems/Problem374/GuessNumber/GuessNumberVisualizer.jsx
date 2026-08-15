@@ -202,7 +202,7 @@ export default function GuessNumberVisualizer() {
                             { label: 'mid', value: mid !== null ? mid : '—', color: '#996d0c' },
                             { label: 'guess(mid)',
                               value: res !== null ? (res === 0 ? '0 ✓' : res === -1 ? '-1 (↓)' : '+1 (↑)') : '—',
-                              color: res === 0 ? '#a6e3a1' : res === -1 ? '#f38ba8' : res === 1 ? '#fab387' : '#6c7086' },
+                              color: res === 0 ? '#a6e3a1' : res === -1 ? '#f38ba8' : res === 1 ? '#fab387' : 'var(--code-dim)' },
                         ].map(v => (
                             <motion.div
                                 key={v.label}

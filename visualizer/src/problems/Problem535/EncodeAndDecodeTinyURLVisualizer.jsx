@@ -155,7 +155,7 @@ function VisualizationPanel({ step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -164,10 +164,10 @@ function VisualizationPanel({ step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9'
+                backgroundColor: 'var(--surface2)'
               }}
             >
               {e.label}
@@ -178,7 +178,7 @@ function VisualizationPanel({ step, applyEx }) {
 
       {/* URL Mapping */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>URL Mappings</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>URL Mappings</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {step?.urlToCode && Array.from(step.urlToCode.entries()).map(([originalUrl, code]) => (
             <motion.div
@@ -186,15 +186,15 @@ function VisualizationPanel({ step, applyEx }) {
               style={{
                 padding: '10px 12px',
                 borderRadius: 6,
-                border: '2px solid #cbd5e1',
-                backgroundColor: '#f1f5f9',
+                border: '2px solid var(--border)',
+                backgroundColor: 'var(--surface2)',
                 fontFamily: 'monospace',
                 fontSize: 11
               }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
             >
-              <div style={{ color: '#334155', marginBottom: 4, wordBreak: 'break-all' }}>
+              <div style={{ color: 'var(--border)', marginBottom: 4, wordBreak: 'break-all' }}>
                 {originalUrl.slice(0, 40)}...
               </div>
               <div style={{ color: '#027bba', fontWeight: 600 }}>

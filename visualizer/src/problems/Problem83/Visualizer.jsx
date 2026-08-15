@@ -59,7 +59,7 @@ export default function Problem83Visualizer() {
     <div className="problem83-panel">
       <div className="problem83-panel-head">Visualization</div>
       <div className="problem83-panel-body">
-        <div style={{padding: 20, textAlign: 'center', minHeight: 200, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#64748b'}}>
+        <div style={{padding: 20, textAlign: 'center', minHeight: 200, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)'}}>
           {step?.message}
         </div>
       </div>
@@ -69,7 +69,7 @@ export default function Problem83Visualizer() {
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
-      <div style={{padding: 12, fontSize: 12, fontFamily: 'monospace', color: '#64748b'}}>Algorithm code here</div>
+      <div style={{padding: 12, fontSize: 12, fontFamily: 'monospace', color: 'var(--text-muted)'}}>Algorithm code here</div>
       {showPatternOverlay && (
         <CodePatternAnnotations
           linePatterns={LINE_PATTERN_MAP}
@@ -83,7 +83,7 @@ export default function Problem83Visualizer() {
 
   const statusPanel = (
     <div className="problem83-status">
-      <div style={{ padding: '8px 16px', fontSize: '12px', color: '#64748b' }}>
+      <div style={{ padding: '8px 16px', fontSize: '12px', color: 'var(--text-muted)' }}>
         Status: {step?.phase}
       </div>
     </div>

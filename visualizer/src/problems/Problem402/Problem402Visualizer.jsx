@@ -271,7 +271,7 @@ export default function Problem402Visualizer() {
 
       <div style={{ display: 'flex', gap: 16, flex: 1 }}>
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <div style={{ display: 'flex', gap: 12, backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
+          <div style={{ display: 'flex', gap: 12, backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px' }}>
             <div style={{ flex: 1 }}>
               <div style={{ color: '#627794', fontSize: '13px', marginBottom: '6px' }}>Number</div>
               <input
@@ -279,8 +279,8 @@ export default function Problem402Visualizer() {
                 onChange={(e) => { setNumInput(e.target.value); handleReset() }}
                 placeholder="1432219"
                 style={{
-                  width: '100%', padding: '8px', backgroundColor: '#0f172a', color: '#e2e8f0',
-                  border: '1px solid #334155', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
+                  width: '100%', padding: '8px', backgroundColor: 'var(--code-bg)', color: 'var(--text)',
+                  border: '1px solid var(--border)', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
                 }}
               />
             </div>
@@ -293,8 +293,8 @@ export default function Problem402Visualizer() {
                 type="number"
                 min="0"
                 style={{
-                  width: '100%', padding: '8px', backgroundColor: '#0f172a', color: '#e2e8f0',
-                  border: '1px solid #334155', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
+                  width: '100%', padding: '8px', backgroundColor: 'var(--code-bg)', color: 'var(--text)',
+                  border: '1px solid var(--border)', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
                 }}
               />
             </div>
@@ -310,7 +310,7 @@ export default function Problem402Visualizer() {
                 key={ex.label}
                 onClick={() => applyExample(ex)}
                 style={{
-                  padding: '6px 12px', backgroundColor: '#334155', color: '#e2e8f0',
+                  padding: '6px 12px', backgroundColor: 'var(--border)', color: 'var(--text)',
                   border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '12px'
                 }}
               >
@@ -319,7 +319,7 @@ export default function Problem402Visualizer() {
             ))}
           </div>
 
-          <div style={{ backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
+          <div style={{ backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px' }}>
             <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>Digits</div>
             <div style={{ display: 'flex', gap: '2px', flexWrap: 'wrap' }}>
               {step?.digits?.map((digit, idx) => {
@@ -333,7 +333,7 @@ export default function Problem402Visualizer() {
                     animate={{ scale: isCurrent ? 1.2 : 1 }}
                     style={{
                       width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      backgroundColor: isCurrent ? '#a78bfa' : '#334155',
+                      backgroundColor: isCurrent ? '#a78bfa' : 'var(--border)',
                       color: '#5577a4', borderRadius: '6px', fontSize: '13px', fontWeight: 'bold',
                       border: isCurrent ? '2px solid #8b5cf6' : 'none',
                       opacity: step?.phase === 'trim_end' || step?.phase === 'trim_zeros' || step?.phase === 'done' ? 0.5 : 1
@@ -346,11 +346,11 @@ export default function Problem402Visualizer() {
             </div>
           </div>
 
-          <div style={{ backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
+          <div style={{ backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px' }}>
             <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>Stack</div>
             <div style={{ display: 'flex', gap: '2px', flexWrap: 'wrap' }}>
               {(!step?.stack || step.stack.length === 0) ? (
-                <div style={{ color: '#64748b', fontSize: '12px' }}>Empty</div>
+                <div style={{ color: 'var(--text-muted)', fontSize: '12px' }}>Empty</div>
               ) : (
                 step.stack.map((digit, idx) => (
                   <motion.div
@@ -359,7 +359,7 @@ export default function Problem402Visualizer() {
                     animate={{ scale: 1 }}
                     style={{
                       width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      backgroundColor: '#06b6d4', color: '#1e293b', borderRadius: '6px',
+                      backgroundColor: '#06b6d4', color: 'var(--surface2)', borderRadius: '6px',
                       fontSize: '13px', fontWeight: 'bold'
                     }}
                   >
@@ -370,17 +370,17 @@ export default function Problem402Visualizer() {
             </div>
           </div>
 
-          <div style={{ flex: 1, backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <div style={{ flex: 1, backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: 12 }}>
             <div style={{ display: 'flex', gap: 12 }}>
               <div style={{ flex: 1 }}>
                 <div style={{ color: '#627794', fontSize: '13px', marginBottom: '6px' }}>K Remaining</div>
-                <div style={{ backgroundColor: '#334155', padding: '8px', borderRadius: '4px', color: '#b69ffb', fontWeight: 'bold', textAlign: 'center' }}>
+                <div style={{ backgroundColor: 'var(--border)', padding: '8px', borderRadius: '4px', color: '#b69ffb', fontWeight: 'bold', textAlign: 'center' }}>
                   {step?.kRemaining ?? step?.k ?? 0}
                 </div>
               </div>
               <div style={{ flex: 1 }}>
                 <div style={{ color: '#627794', fontSize: '13px', marginBottom: '6px' }}>Current Index</div>
-                <div style={{ backgroundColor: '#334155', padding: '8px', borderRadius: '4px', color: '#cbd5e1', fontWeight: 'bold', textAlign: 'center' }}>
+                <div style={{ backgroundColor: 'var(--border)', padding: '8px', borderRadius: '4px', color: 'var(--border)', fontWeight: 'bold', textAlign: 'center' }}>
                   {step?.currentIdx !== undefined ? step.currentIdx : '-'}
                 </div>
               </div>
@@ -429,8 +429,8 @@ export default function Problem402Visualizer() {
       </div>
 
       <div style={{
-        backgroundColor: step?.phase === 'done' ? '#10b98166' : step?.error ? '#ef444466' : '#1e293b',
-        padding: '12px', borderRadius: '6px', color: step?.phase === 'done' ? '#86efac' : step?.error ? '#fca5a5' : '#cbd5e1',
+        backgroundColor: step?.phase === 'done' ? '#10b98166' : step?.error ? '#ef444466' : 'var(--surface2)',
+        padding: '12px', borderRadius: '6px', color: step?.phase === 'done' ? '#86efac' : step?.error ? '#fca5a5' : 'var(--border)',
         fontSize: '13px', fontFamily: 'monospace'
       }}>
         {step?.message ?? 'Press Play or Step to begin.'}

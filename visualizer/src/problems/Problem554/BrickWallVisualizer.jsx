@@ -201,11 +201,11 @@ function VisualizationPanel({ step, applyExample, examples, wall }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -217,7 +217,7 @@ function VisualizationPanel({ step, applyExample, examples, wall }) {
 
       {/* Brick Wall Visualization */}
       {wall && wall.length > 0 && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 12 }}>Brick Wall</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
             {wall.map((row, rowIdx) => (
@@ -241,8 +241,8 @@ function VisualizationPanel({ step, applyExample, examples, wall }) {
                         style={{
                           flex: brickWidth,
                           height: 30,
-                          backgroundColor: isCurrentBrick ? '#f59e0b' : '#0f172a',
-                          border: '1px solid #334155',
+                          backgroundColor: isCurrentBrick ? '#f59e0b' : 'var(--code-bg)',
+                          border: '1px solid var(--border)',
                           borderRadius: 2,
                           display: 'flex',
                           alignItems: 'center',
@@ -270,9 +270,9 @@ function VisualizationPanel({ step, applyExample, examples, wall }) {
                 style={{
                   position: 'relative',
                   height: 60,
-                  backgroundColor: '#0f172a',
+                  backgroundColor: 'var(--code-bg)',
                   borderRadius: 4,
-                  border: '1px solid #334155',
+                  border: '1px solid var(--border)',
                   marginBottom: 8,
                 }}
               >
@@ -295,7 +295,7 @@ function VisualizationPanel({ step, applyExample, examples, wall }) {
                     bottom: 4,
                     left: 8,
                     fontSize: 10,
-                    color: '#64748b',
+                    color: 'var(--text-muted)',
                   }}
                 >
                   0
@@ -307,7 +307,7 @@ function VisualizationPanel({ step, applyExample, examples, wall }) {
                       bottom: 4,
                       right: 8,
                       fontSize: 10,
-                      color: '#64748b',
+                      color: 'var(--text-muted)',
                     }}
                   >
                     {wallWidth}
@@ -321,7 +321,7 @@ function VisualizationPanel({ step, applyExample, examples, wall }) {
 
       {/* Edge Count Hash Map */}
       {step?.edgeCount && Object.keys(step.edgeCount).length > 0 && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Edge Count Map</div>
           <div
             style={{
@@ -339,14 +339,14 @@ function VisualizationPanel({ step, applyExample, examples, wall }) {
                     key={position}
                     style={{
                       padding: 8,
-                      backgroundColor: isMaxPosition ? '#1e293b' : '#0f172a',
-                      border: isMaxPosition ? '2px solid #22c55e' : '1px solid #334155',
+                      backgroundColor: isMaxPosition ? 'var(--surface2)' : 'var(--code-bg)',
+                      border: isMaxPosition ? '2px solid #22c55e' : '1px solid var(--border)',
                       borderRadius: 4,
                       textAlign: 'center',
                       transition: 'all 0.2s',
                     }}
                   >
-                    <div style={{ fontSize: 10, color: '#64748b', marginBottom: 4 }}>pos {position}</div>
+                    <div style={{ fontSize: 10, color: 'var(--text-muted)', marginBottom: 4 }}>pos {position}</div>
                     <div
                       style={{
                         fontSize: 14,
@@ -365,7 +365,7 @@ function VisualizationPanel({ step, applyExample, examples, wall }) {
 
       {/* Max Edges Info */}
       {step?.maxEdges !== undefined && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #22c55e' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid #22c55e' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#178740', marginBottom: 6 }}>Maximum Edges</div>
           <div style={{ fontSize: 14, color: '#178740', fontFamily: 'monospace', fontWeight: 700 }}>
             {step.maxEdges}
@@ -378,7 +378,7 @@ function VisualizationPanel({ step, applyExample, examples, wall }) {
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #f59e0b',
             textAlign: 'center',
@@ -387,7 +387,7 @@ function VisualizationPanel({ step, applyExample, examples, wall }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Minimum Bricks to Cross</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Minimum Bricks to Cross</div>
           <div
             style={{
               fontSize: 20,
@@ -480,9 +480,9 @@ export default function BrickWallVisualizer() {
                   height: 100,
                   padding: '8px',
                   borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid #475569',
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                   fontSize: 12,
                   resize: 'vertical',

@@ -209,7 +209,7 @@ export default function Problem398Visualizer() {
 
       <div style={{ display: 'flex', gap: 16, flex: 1 }}>
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <div style={{ display: 'flex', gap: 12, backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
+          <div style={{ display: 'flex', gap: 12, backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px' }}>
             <div style={{ flex: 1 }}>
               <div style={{ color: '#627794', fontSize: '13px', marginBottom: '6px' }}>Array (nums)</div>
               <input
@@ -217,8 +217,8 @@ export default function Problem398Visualizer() {
                 onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
                 placeholder="[1,2,3,3,3]"
                 style={{
-                  width: '100%', padding: '8px', backgroundColor: '#0f172a', color: '#e2e8f0',
-                  border: '1px solid #334155', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
+                  width: '100%', padding: '8px', backgroundColor: 'var(--code-bg)', color: 'var(--text)',
+                  border: '1px solid var(--border)', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
                 }}
               />
             </div>
@@ -230,8 +230,8 @@ export default function Problem398Visualizer() {
                 placeholder="3"
                 type="number"
                 style={{
-                  width: '100%', padding: '8px', backgroundColor: '#0f172a', color: '#e2e8f0',
-                  border: '1px solid #334155', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
+                  width: '100%', padding: '8px', backgroundColor: 'var(--code-bg)', color: 'var(--text)',
+                  border: '1px solid var(--border)', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
                 }}
               />
             </div>
@@ -247,7 +247,7 @@ export default function Problem398Visualizer() {
                 key={ex.label}
                 onClick={() => applyExample(ex)}
                 style={{
-                  padding: '6px 12px', backgroundColor: '#334155', color: '#e2e8f0',
+                  padding: '6px 12px', backgroundColor: 'var(--border)', color: 'var(--text)',
                   border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '12px'
                 }}
               >
@@ -256,7 +256,7 @@ export default function Problem398Visualizer() {
             ))}
           </div>
 
-          <div style={{ backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px' }}>
+          <div style={{ backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px' }}>
             <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>Array Visualization</div>
             <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
               {nums.map((val, idx) => {
@@ -271,7 +271,7 @@ export default function Problem398Visualizer() {
                     style={{
                       width: '44px', height: '44px', display: 'flex', flexDirection: 'column',
                       alignItems: 'center', justifyContent: 'center', gap: 2,
-                      backgroundColor: isSelected ? '#06b6d4' : isMatch ? '#8b5cf6' : '#334155',
+                      backgroundColor: isSelected ? '#06b6d4' : isMatch ? '#8b5cf6' : 'var(--border)',
                       color: '#5577a4', borderRadius: '6px', fontSize: '13px', fontWeight: 'bold',
                       border: isSelected ? '2px solid #0ea5e9' : '1px solid transparent',
                     }}
@@ -284,7 +284,7 @@ export default function Problem398Visualizer() {
             </div>
           </div>
 
-          <div style={{ flex: 1, backgroundColor: '#1e293b', padding: '12px', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <div style={{ flex: 1, backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: 12 }}>
             <div>
               <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>Matching Indices</div>
               <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -301,14 +301,14 @@ export default function Problem398Visualizer() {
                   </div>
                 ))}
                 {!step?.matchIndices || step.matchIndices.length === 0 && (
-                  <div style={{ color: '#64748b', fontSize: '12px' }}>No matches found</div>
+                  <div style={{ color: 'var(--text-muted)', fontSize: '12px' }}>No matches found</div>
                 )}
               </div>
             </div>
 
             {step?.probability && (
-              <div style={{ backgroundColor: '#334155', padding: '8px', borderRadius: '4px' }}>
-                <div style={{ color: '#64748b', fontSize: '12px' }}>Current Probability</div>
+              <div style={{ backgroundColor: 'var(--border)', padding: '8px', borderRadius: '4px' }}>
+                <div style={{ color: 'var(--text-muted)', fontSize: '12px' }}>Current Probability</div>
                 <div style={{ color: '#7e56f8', fontSize: '16px', fontWeight: 'bold' }}>
                   {step.probability}
                 </div>
@@ -316,8 +316,8 @@ export default function Problem398Visualizer() {
             )}
 
             {step?.result !== undefined && (
-              <div style={{ backgroundColor: '#334155', padding: '8px', borderRadius: '4px', textAlign: 'center' }}>
-                <div style={{ color: '#64748b', fontSize: '12px' }}>Selected Index</div>
+              <div style={{ backgroundColor: 'var(--border)', padding: '8px', borderRadius: '4px', textAlign: 'center' }}>
+                <div style={{ color: 'var(--text-muted)', fontSize: '12px' }}>Selected Index</div>
                 <div style={{ color: '#048196', fontSize: '18px', fontWeight: 'bold' }}>
                   {step.result === -1 ? 'None' : step.result}
                 </div>
@@ -349,8 +349,8 @@ export default function Problem398Visualizer() {
       </div>
 
       <div style={{
-        backgroundColor: step?.phase === 'done' ? '#10b98166' : step?.error ? '#ef444466' : '#1e293b',
-        padding: '12px', borderRadius: '6px', color: step?.phase === 'done' ? '#86efac' : step?.error ? '#fca5a5' : '#cbd5e1',
+        backgroundColor: step?.phase === 'done' ? '#10b98166' : step?.error ? '#ef444466' : 'var(--surface2)',
+        padding: '12px', borderRadius: '6px', color: step?.phase === 'done' ? '#86efac' : step?.error ? '#fca5a5' : 'var(--border)',
         fontSize: '13px', fontFamily: 'monospace'
       }}>
         {step?.message ?? 'Press Play or Step to begin.'}

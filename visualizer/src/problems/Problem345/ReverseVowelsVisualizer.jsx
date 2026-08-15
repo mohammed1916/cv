@@ -195,16 +195,16 @@ function VisualizationPanel({ step }) {
           const inPair = pairSet.has(idx)
 
           let bg = '#313244'
-          let color = '#cdd6f4'
+          let color = 'var(--code-text)'
           if (isSwapped) {
             bg = '#a6e3a1'
-            color = '#11111b'
+            color = 'var(--code-surface)'
           } else if (isVowel) {
             bg = '#89b4fa'
-            color = '#11111b'
+            color = 'var(--code-surface)'
           }
 
-          let border = '2px solid #45475a'
+          let border = '2px solid var(--code-line)'
           if (isLeft) border = '3px solid #f38ba8'
           else if (isRight) border = '3px solid #fab387'
           else if (isVowel) border = '2px solid #74c7ec'
@@ -348,12 +348,12 @@ export default function ReverseVowelsVisualizer() {
             style={{
               padding: '6px 12px',
               borderRadius: 6,
-              border: ex.label === e.label ? '2px solid #3b82f6' : '1px solid #cbd5e1',
+              border: ex.label === e.label ? '2px solid #3b82f6' : '1px solid var(--border)',
               cursor: 'pointer',
               fontSize: 12,
               fontWeight: 600,
-              backgroundColor: ex.label === e.label ? '#eff6ff' : '#f1f5f9',
-              color: '#1e293b',
+              backgroundColor: ex.label === e.label ? '#eff6ff' : 'var(--surface2)',
+              color: 'var(--surface2)',
             }}
           >
             {e.label}: "{e.s}"

@@ -175,11 +175,11 @@ function VisualizationPanel({ step, applyExample, examples }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -190,8 +190,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.array && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #64748b' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Array</div>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Array</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
             {step.array.map((val, idx) => {
               const isSelected = step.selectedIndices && step.selectedIndices.includes(idx)
@@ -210,8 +210,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
                         ? '#22c55e'
                         : isMax
                           ? '#f97316'
-                          : '#334155',
-                    color: isSelected || isMin || isMax ? '#0f172a' : '#e2e8f0',
+                          : 'var(--border)',
+                    color: isSelected || isMin || isMax ? 'var(--code-bg)' : 'var(--text)',
                     fontFamily: 'monospace',
                     fontWeight: 700,
                     fontSize: 12,
@@ -238,8 +238,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.pairs && step.pairs.length > 0 && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #64748b' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Pairs Formed</div>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Pairs Formed</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
             {step.pairs.map((pair, i) => (
               <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 12 }}>
@@ -247,9 +247,9 @@ function VisualizationPanel({ step, applyExample, examples }) {
                   style={{
                     padding: '4px 8px',
                     borderRadius: 3,
-                    backgroundColor: '#334155',
+                    backgroundColor: 'var(--border)',
                     fontFamily: 'monospace',
-                    color: '#e2e8f0',
+                    color: 'var(--text)',
                     minWidth: 50,
                     textAlign: 'center',
                   }}
@@ -265,7 +265,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.currentPair && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f97316' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #f97316' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#c35305', marginBottom: 6 }}>Current Pair</div>
           <div style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 13 }}>
             <span>({step.currentPair.min}, {step.currentPair.max})</span>
@@ -276,7 +276,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
       )}
 
       {step?.total !== undefined && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #38bdf8' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #38bdf8' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#067db1', marginBottom: 6 }}>Running Total</div>
           <div style={{ fontSize: 16, color: '#067db1', fontFamily: 'monospace', fontWeight: 700 }}>
             {step.total}
@@ -288,7 +288,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #22c55e',
             textAlign: 'center',
@@ -297,7 +297,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Maximum Sum</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Maximum Sum</div>
           <div
             style={{
               fontSize: 20,
@@ -397,9 +397,9 @@ export default function ArrayPartitionVisualizer() {
                   height: 60,
                   padding: '8px',
                   borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid #475569',
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                   fontFamily: 'monospace',
                   fontSize: 12,
                   resize: 'vertical',

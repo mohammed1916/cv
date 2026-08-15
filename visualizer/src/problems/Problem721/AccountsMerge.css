@@ -14,18 +14,18 @@
   --am-sapphire: #74c7ec;
   --am-blue: #89b4fa;
   --am-lavender: #b4befe;
-  --am-text: #cdd6f4;
+  --am-text: var(--code-text);
   --am-subtext1: #bac2de;
-  --am-subtext0: #a6adc8;
+  --am-subtext0: var(--code-dim);
   --am-overlay2: #9399b2;
   --am-overlay1: #7f849c;
-  --am-overlay0: #6c7086;
+  --am-overlay0: var(--code-dim);
   --am-surface2: #585b70;
-  --am-surface1: #45475a;
+  --am-surface1: var(--code-line);
   --am-surface0: #313244;
-  --am-base: #1e1e2e;
+  --am-base: var(--code-bg);
   --am-mantle: #181825;
-  --am-crust: #11111b;
+  --am-crust: var(--code-surface);
 }
 
 .am-container {

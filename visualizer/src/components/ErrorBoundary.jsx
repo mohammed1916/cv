@@ -26,7 +26,7 @@ export default class ErrorBoundary extends Component {
             height: "100%",
             gap: 16,
             padding: 32,
-            color: "#94a3b8",
+            color: "var(--text-muted)",
             textAlign: "center",
           }}
         >
@@ -41,9 +41,9 @@ export default class ErrorBoundary extends Component {
             style={{
               padding: "8px 20px",
               borderRadius: 8,
-              border: "1px solid #334155",
-              background: "#1e293b",
-              color: "#f8fafc",
+              border: "1px solid var(--border)",
+              background: "var(--surface2)",
+              color: "var(--surface)",
               cursor: "pointer",
               fontSize: 14,
             }}

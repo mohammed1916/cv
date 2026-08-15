@@ -200,7 +200,7 @@ function snippetIdForPhase(phase) {
 function TreeDisplay({ treeValues, currentVal, key }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
         Tree Structure ({treeValues.filter(v => v !== null && v !== undefined).length} nodes)
       </header>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', minHeight: 80, alignContent: 'flex-start' }}>
@@ -240,16 +240,16 @@ function TreeDisplay({ treeValues, currentVal, key }) {
 function SearchStatus({ step }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
         Search Status
       </header>
       <div style={{
         padding: 12,
-        backgroundColor: '#f8fafc',
+        backgroundColor: 'var(--surface)',
         borderRadius: 4,
-        border: '1px solid #cbd5e1',
+        border: '1px solid var(--border)',
         fontSize: 12,
-        color: '#475569',
+        color: 'var(--text-muted)',
         minHeight: 60,
       }}>
         {step?.message || 'Waiting...'}
@@ -274,7 +274,7 @@ function VisualizationPanel({ step, treeValues, EXAMPLES, handleExampleClick, tr
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
           Examples
         </div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -285,8 +285,8 @@ function VisualizationPanel({ step, treeValues, EXAMPLES, handleExampleClick, tr
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
-                backgroundColor: '#f1f5f9',
+                border: '1px solid var(--border)',
+                backgroundColor: 'var(--surface2)',
                 cursor: 'pointer',
                 fontSize: 12,
                 fontWeight: 500,
@@ -300,7 +300,7 @@ function VisualizationPanel({ step, treeValues, EXAMPLES, handleExampleClick, tr
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
         <div>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>
+          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
             Tree (comma-separated)
           </label>
           <input
@@ -310,7 +310,7 @@ function VisualizationPanel({ step, treeValues, EXAMPLES, handleExampleClick, tr
             style={{
               width: '100%',
               padding: '8px 10px',
-              border: '1px solid #cbd5e1',
+              border: '1px solid var(--border)',
               borderRadius: 4,
               fontSize: 12,
               fontFamily: 'monospace',
@@ -320,7 +320,7 @@ function VisualizationPanel({ step, treeValues, EXAMPLES, handleExampleClick, tr
         </div>
 
         <div>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>
+          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
             Key to Delete
           </label>
           <input
@@ -330,7 +330,7 @@ function VisualizationPanel({ step, treeValues, EXAMPLES, handleExampleClick, tr
             style={{
               width: '100%',
               padding: '8px 10px',
-              border: '1px solid #cbd5e1',
+              border: '1px solid var(--border)',
               borderRadius: 4,
               fontSize: 12,
               fontFamily: 'monospace',
@@ -492,7 +492,7 @@ export default function Problem450Visualizer() {
       </>
 
       <FloatingPanel title="Playback Controls">
-        <div style={{ marginBottom: '12px', fontSize: 12, color: '#475569' }}>
+        <div style={{ marginBottom: '12px', fontSize: 12, color: 'var(--text-muted)' }}>
           {step?.message ?? 'Press Play or Step to begin.'}
         </div>
         <PlaybackControls

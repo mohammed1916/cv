@@ -116,7 +116,7 @@ export default function DistinctSubsequencesVisualizer() {
       />
     <div className="ds-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-        {EXAMPLES.map(e => <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid #cbd5e1', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : '#f1f5f9' }}>{e.label}</button>)}
+        {EXAMPLES.map(e => <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : 'var(--surface2)' }}>{e.label}</button>)}
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 8, fontSize: 11 }}>
         <div><span style={{ fontWeight: 600 }}>s:</span> {s}</div>
@@ -126,18 +126,18 @@ export default function DistinctSubsequencesVisualizer() {
         <table style={{ borderCollapse: 'collapse', fontSize: 10 }}>
           <thead>
             <tr>
-              <th style={{ padding: '4px 6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc' }}></th>
-              <th style={{ padding: '4px 6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc', fontWeight: 600 }}>ε</th>
-              {t.split("").map((ch, j) => <th key={j} style={{ padding: '4px 6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc', fontWeight: 600, minWidth: 32 }}>{ch}</th>)}
+              <th style={{ padding: '4px 6px', border: '1px solid var(--text)', backgroundColor: 'var(--surface)' }}></th>
+              <th style={{ padding: '4px 6px', border: '1px solid var(--text)', backgroundColor: 'var(--surface)', fontWeight: 600 }}>ε</th>
+              {t.split("").map((ch, j) => <th key={j} style={{ padding: '4px 6px', border: '1px solid var(--text)', backgroundColor: 'var(--surface)', fontWeight: 600, minWidth: 32 }}>{ch}</th>)}
             </tr>
           </thead>
           <tbody>
             {dp.slice(0, Math.min(dp.length, 8)).map((row, i) => (
               <tr key={i}>
-                <td style={{ padding: '4px 6px', border: '1px solid #e2e8f0', backgroundColor: '#f8fafc', fontWeight: 600 }}>{i === 0 ? 'ε' : s[i - 1]}</td>
+                <td style={{ padding: '4px 6px', border: '1px solid var(--text)', backgroundColor: 'var(--surface)', fontWeight: 600 }}>{i === 0 ? 'ε' : s[i - 1]}</td>
                 {row.slice(0, Math.min(row.length, 8)).map((val, j) => {
                   const isActive = i === activeI && j === activeJ;
-                  return <motion.td key={j} animate={{ scale: isActive ? 1.2 : 1 }} style={{ padding: '4px 6px', border: '1px solid #e2e8f0', backgroundColor: isActive ? '#dbeafe' : val > 0 ? '#f0fdf4' : 'white', fontWeight: isActive ? 'bold' : 'normal', color: isActive ? '#1e40af' : '#1e293b', minWidth: 32, textAlign: 'center' }}>{val}</motion.td>;
+                  return <motion.td key={j} animate={{ scale: isActive ? 1.2 : 1 }} style={{ padding: '4px 6px', border: '1px solid var(--text)', backgroundColor: isActive ? '#dbeafe' : val > 0 ? '#f0fdf4' : 'white', fontWeight: isActive ? 'bold' : 'normal', color: isActive ? '#1e40af' : 'var(--surface2)', minWidth: 32, textAlign: 'center' }}>{val}</motion.td>;
                 })}
               </tr>
             ))}

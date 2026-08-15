@@ -102,12 +102,12 @@ function StaircaseVisualization({ stairs, n, used }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Staircase</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Staircase</div>
       <div style={{
         padding: 16,
-        backgroundColor: '#f1f5f9',
+        backgroundColor: 'var(--surface2)',
         borderRadius: 8,
-        border: '2px solid #cbd5e1',
+        border: '2px solid var(--border)',
         minHeight: 150,
         display: 'flex',
         flexDirection: 'column-reverse',
@@ -133,14 +133,14 @@ function StaircaseVisualization({ stairs, n, used }) {
                     width: 24,
                     height: 24,
                     borderRadius: 4,
-                    backgroundColor: isActive ? '#dbeafe' : '#e2e8f0',
-                    border: isActive ? '2px solid #0284c7' : '1px solid #cbd5e1',
+                    backgroundColor: isActive ? '#dbeafe' : 'var(--text)',
+                    border: isActive ? '2px solid #0284c7' : '1px solid var(--border)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     fontSize: 10,
                     fontWeight: 600,
-                    color: isActive ? '#0c4a6e' : '#94a3b8',
+                    color: isActive ? '#0c4a6e' : 'var(--text-muted)',
                   }}
                   animate={{
                     scale: isActive ? 1 : 0.8,
@@ -153,7 +153,7 @@ function StaircaseVisualization({ stairs, n, used }) {
               <div style={{
                 fontSize: 11,
                 fontWeight: 600,
-                color: isActive ? '#0284c7' : '#cbd5e1',
+                color: isActive ? '#0284c7' : 'var(--border)',
                 minWidth: 20,
                 textAlign: 'center',
               }}>
@@ -172,12 +172,12 @@ function CoinsVisualization({ n, used, remaining, stairs }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Coins</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Coins</div>
       <div style={{
         padding: 12,
-        backgroundColor: '#f1f5f9',
+        backgroundColor: 'var(--surface2)',
         borderRadius: 8,
-        border: '2px solid #cbd5e1',
+        border: '2px solid var(--border)',
       }}>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 12 }}>
           {Array.from({ length: n }, (_, i) => (
@@ -214,7 +214,7 @@ function CoinsVisualization({ n, used, remaining, stairs }) {
 function StatsVisualization({ stairs, used, remaining, n }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Statistics</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Statistics</div>
       <div style={{
         display: 'grid',
         gridTemplateColumns: '1fr 1fr',
@@ -263,7 +263,7 @@ function VisualizationPanel({ step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -272,10 +272,10 @@ function VisualizationPanel({ step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9',
+                backgroundColor: 'var(--surface2)',
               }}
             >
               {e.label}

@@ -174,15 +174,15 @@ function PasswordCheckerVisualization({ password, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Strong Password Checker</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Strong Password Checker</div>
 
       {/* Password display */}
-      <div style={{ padding: 12, backgroundColor: '#f1f5f9', borderRadius: 6, border: '2px solid #cbd5e1' }}>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Password</div>
+      <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid var(--border)' }}>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Password</div>
         <div style={{
           fontSize: 14,
           fontFamily: 'monospace',
-          color: '#1e293b',
+          color: 'var(--surface2)',
           wordBreak: 'break-all',
           letterSpacing: '2px',
         }}>
@@ -192,7 +192,7 @@ function PasswordCheckerVisualization({ password, step }) {
             const isDigit = /[0-9]/.test(char)
             const isCurrent = step?.currentChar === idx
 
-            let color = '#64748b'
+            let color = 'var(--text-muted)'
             if (isLower) color = '#059669'
             if (isUpper) color = '#0284c7'
             if (isDigit) color = '#f59e0b'
@@ -217,7 +217,7 @@ function PasswordCheckerVisualization({ password, step }) {
 
       {/* Requirements checklist */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Requirements</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Requirements</div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 8 }}>
           <div style={{
             padding: 10,
@@ -297,7 +297,7 @@ function PasswordCheckerVisualization({ password, step }) {
         </div>
       </div>
 
-      <div style={{ fontSize: 12, color: '#475569' }}>{step?.message}</div>
+      <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{step?.message}</div>
     </div>
   )
 }
@@ -353,7 +353,7 @@ export default function Problem420Visualizer() {
         />),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button
@@ -362,11 +362,11 @@ export default function Problem420Visualizer() {
                   style={{
                     padding: '6px 12px',
                     borderRadius: 4,
-                    border: exIdx === idx ? '2px solid #d946ef' : '1px solid #cbd5e1',
+                    border: exIdx === idx ? '2px solid #d946ef' : '1px solid var(--border)',
                     cursor: 'pointer',
                     fontSize: 12,
-                    backgroundColor: exIdx === idx ? '#f3e8ff' : '#f1f5f9',
-                    color: exIdx === idx ? '#7e22ce' : '#334155',
+                    backgroundColor: exIdx === idx ? '#f3e8ff' : 'var(--surface2)',
+                    color: exIdx === idx ? '#7e22ce' : 'var(--border)',
                     fontWeight: exIdx === idx ? '600' : '400',
                   }}
                 >

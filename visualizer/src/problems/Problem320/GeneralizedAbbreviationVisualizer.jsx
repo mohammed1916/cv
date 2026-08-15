@@ -147,7 +147,7 @@ const EXAMPLES =
 const STATE_COLORS = {
   keep: '#22c55e',
   abbr: '#a78bfa',
-  pending: '#64748b',
+  pending: 'var(--text-muted)',
 }
 
 function CharBox({ ch, state, isCurrent }) {
@@ -171,9 +171,9 @@ function CharBox({ ch, state, isCurrent }) {
           fontFamily: 'monospace',
           fontSize: 20,
           fontWeight: 700,
-          color: state === 'pending' ? '#94a3b8' : '#0b1120',
+          color: state === 'pending' ? 'var(--text-muted)' : '#0b1120',
           background: state === 'pending' ? 'rgba(100,116,139,0.15)' : color,
-          border: `2px solid ${isCurrent ? '#f8fafc' : color}`,
+          border: `2px solid ${isCurrent ? 'var(--surface)' : color}`,
           boxShadow: isCurrent ? '0 0 0 3px rgba(248,250,252,0.35)' : 'none',
           borderRadius: 8,
           transition: 'all 0.2s ease',
@@ -181,7 +181,7 @@ function CharBox({ ch, state, isCurrent }) {
       >
         {ch}
       </div>
-      <span style={{ fontSize: 10, color: '#64748b', fontFamily: 'monospace' }}>
+      <span style={{ fontSize: 10, color: 'var(--text-muted)', fontFamily: 'monospace' }}>
         {state === 'keep' ? 'keep' : state === 'abbr' ? 'skip' : ''}
       </span>
     </div>
@@ -289,7 +289,7 @@ export default function GeneralizedAbbreviationVisualizer() {
                   </span>
                   <span style={{ marginLeft: 'auto', display: 'flex', gap: 16, fontSize: 12, color: '#627794' }}>
                     <span>index <b style={{ color: '#5577a4' }}>{step.index}</b></span>
-                    <span>count <b style={{ color: step.count > 0 ? '#a78bfa' : '#e2e8f0' }}>{step.count}</b></span>
+                    <span>count <b style={{ color: step.count > 0 ? '#a78bfa' : 'var(--text)' }}>{step.count}</b></span>
                   </span>
                 </div>
               )}
@@ -301,7 +301,7 @@ export default function GeneralizedAbbreviationVisualizer() {
                 </div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
                   {results.length === 0 && (
-                    <span style={{ fontSize: 12, color: '#64748b', fontStyle: 'italic' }}>none yet</span>
+                    <span style={{ fontSize: 12, color: 'var(--text-muted)', fontStyle: 'italic' }}>none yet</span>
                   )}
                   {results.map((r, i) => {
                     const isNewest = i === step?.highlightResult
@@ -317,7 +317,7 @@ export default function GeneralizedAbbreviationVisualizer() {
                           fontFamily: 'monospace',
                           fontSize: 14,
                           fontWeight: isNewest ? 700 : 500,
-                          color: isNewest ? '#0b1120' : '#e2e8f0',
+                          color: isNewest ? '#0b1120' : 'var(--text)',
                           background: isNewest ? '#22c55e' : 'rgba(148,163,184,0.12)',
                           border: `1px solid ${isNewest ? '#22c55e' : 'rgba(148,163,184,0.25)'}`,
                         }}

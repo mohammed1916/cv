@@ -47,6 +47,9 @@
   --text:         #0b1020;
   --text-muted:   #45526b;
   --text-dim:     #5c6b85;
+  /* Compatibility aliases used by older problem panels. */
+  --accent:       var(--primary);
+  --text-secondary: var(--text-muted);
 
   /* Code surface — Catppuccin Latte. The visualizers already use Catppuccin
      Mocha (#1e1e2e, #cdd6f4, #a6e3a1 …), so Latte is its official light twin
@@ -106,6 +109,8 @@
   --text:         #f1f5f9;
   --text-muted:   #a9b6ca;
   --text-dim:     #8b9ab2;
+  --accent:       var(--primary);
+  --text-secondary: var(--text-muted);
 
   /* Catppuccin Mocha — the palette the visualizers were already written in. */
   --code-bg:      #1e1e2e;

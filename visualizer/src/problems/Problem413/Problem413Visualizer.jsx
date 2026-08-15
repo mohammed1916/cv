@@ -142,11 +142,11 @@ function ArithmeticSlicesVisualization({ nums, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Arithmetic Slices Counting</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Arithmetic Slices Counting</div>
 
       {/* Input array */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Input Array</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Input Array</div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {nums.map((val, idx) => {
             const isCurrent = step?.currentI === idx
@@ -157,13 +157,13 @@ function ArithmeticSlicesVisualization({ nums, step }) {
                 key={idx}
                 style={{
                   padding: '8px 12px',
-                  backgroundColor: isCurrent ? '#c7d2fe' : isProcessed ? '#dbeafe' : '#f1f5f9',
+                  backgroundColor: isCurrent ? '#c7d2fe' : isProcessed ? '#dbeafe' : 'var(--surface2)',
                   borderRadius: 6,
-                  border: `2px solid ${isCurrent ? '#6366f1' : isProcessed ? '#0284c7' : '#cbd5e1'}`,
+                  border: `2px solid ${isCurrent ? '#6366f1' : isProcessed ? '#0284c7' : 'var(--border)'}`,
                   textAlign: 'center',
                   fontSize: 13,
                   fontWeight: 700,
-                  color: isCurrent ? '#4f46e5' : isProcessed ? '#0284c7' : '#334155',
+                  color: isCurrent ? '#4f46e5' : isProcessed ? '#0284c7' : 'var(--border)',
                   minWidth: 50,
                 }}
                 animate={{
@@ -180,19 +180,19 @@ function ArithmeticSlicesVisualization({ nums, step }) {
 
       {/* DP table */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>DP Table (slices ending at i)</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>DP Table (slices ending at i)</div>
         <div style={{ display: 'grid', gridTemplateColumns: `repeat(${nums.length}, minmax(60px, 1fr))`, gap: 8 }}>
           {nums.map((_, idx) => (
             <div key={idx} style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: 10, color: '#64748b', marginBottom: 4 }}>i={idx}</div>
+              <div style={{ fontSize: 10, color: 'var(--text-muted)', marginBottom: 4 }}>i={idx}</div>
               <div style={{
                 padding: '8px 6px',
-                backgroundColor: step?.currentI === idx ? '#fef3c7' : '#f1f5f9',
+                backgroundColor: step?.currentI === idx ? '#fef3c7' : 'var(--surface2)',
                 borderRadius: 4,
-                border: `2px solid ${step?.currentI === idx ? '#f59e0b' : '#cbd5e1'}`,
+                border: `2px solid ${step?.currentI === idx ? '#f59e0b' : 'var(--border)'}`,
                 fontSize: 13,
                 fontWeight: 700,
-                color: '#1e293b',
+                color: 'var(--surface2)',
               }}>
                 {dp[idx]}
               </div>
@@ -215,15 +215,15 @@ function ArithmeticSlicesVisualization({ nums, step }) {
         >
           <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 8 }}>Current Slice Check</div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
-            <div style={{ padding: 8, backgroundColor: '#ffffff', borderRadius: 4 }}>
+            <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#065f46' }}>nums[{step.currentI - 2}]</div>
               <div style={{ fontSize: 14, fontWeight: 'bold', color: '#047857' }}>{nums[step.currentI - 2]}</div>
             </div>
-            <div style={{ padding: 8, backgroundColor: '#ffffff', borderRadius: 4 }}>
+            <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#065f46' }}>nums[{step.currentI - 1}]</div>
               <div style={{ fontSize: 14, fontWeight: 'bold', color: '#047857' }}>{nums[step.currentI - 1]}</div>
             </div>
-            <div style={{ padding: 8, backgroundColor: '#ffffff', borderRadius: 4 }}>
+            <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#065f46' }}>nums[{step.currentI}]</div>
               <div style={{ fontSize: 14, fontWeight: 'bold', color: '#047857' }}>{nums[step.currentI]}</div>
             </div>
@@ -237,7 +237,7 @@ function ArithmeticSlicesVisualization({ nums, step }) {
         <div style={{ fontSize: 24, fontWeight: 'bold', color: '#027bba', fontFamily: 'monospace' }}>{count}</div>
       </div>
 
-      <div style={{ fontSize: 12, color: '#475569' }}>{step?.message}</div>
+      <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>{step?.message}</div>
     </div>
   )
 }
@@ -293,7 +293,7 @@ export default function Problem413Visualizer() {
         />),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button
@@ -302,11 +302,11 @@ export default function Problem413Visualizer() {
                   style={{
                     padding: '6px 12px',
                     borderRadius: 4,
-                    border: exIdx === idx ? '2px solid #f59e0b' : '1px solid #cbd5e1',
+                    border: exIdx === idx ? '2px solid #f59e0b' : '1px solid var(--border)',
                     cursor: 'pointer',
                     fontSize: 12,
-                    backgroundColor: exIdx === idx ? '#fef3c7' : '#f1f5f9',
-                    color: exIdx === idx ? '#92400e' : '#334155',
+                    backgroundColor: exIdx === idx ? '#fef3c7' : 'var(--surface2)',
+                    color: exIdx === idx ? '#92400e' : 'var(--border)',
                     fontWeight: exIdx === idx ? '600' : '400',
                   }}
                 >

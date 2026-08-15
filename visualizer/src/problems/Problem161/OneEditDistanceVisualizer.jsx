@@ -181,7 +181,7 @@ function StringComparison({ s1, s2, highlightIdx, mismatchPos }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
       <div>
-        <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>
+        <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>
           String 1
         </div>
         <div style={{ display: 'flex', gap: 2 }}>
@@ -199,11 +199,11 @@ function StringComparison({ s1, s2, highlightIdx, mismatchPos }) {
                   alignItems: 'center',
                   justifyContent: 'center',
                   borderRadius: 4,
-                  backgroundColor: isMismatch ? '#fecaca' : isHighlight ? '#fbbf24' : '#e2e8f0',
-                  border: isMismatch ? '2px solid #ef4444' : isHighlight ? '2px solid #f59e0b' : '1px solid #cbd5e1',
+                  backgroundColor: isMismatch ? '#fecaca' : isHighlight ? '#fbbf24' : 'var(--text)',
+                  border: isMismatch ? '2px solid #ef4444' : isHighlight ? '2px solid #f59e0b' : '1px solid var(--border)',
                   fontSize: 12,
                   fontWeight: 600,
-                  color: '#0f172a',
+                  color: 'var(--code-bg)',
                   fontFamily: 'monospace',
                 }}
                 animate={{ scale: isHighlight ? 1.15 : 1 }}
@@ -216,7 +216,7 @@ function StringComparison({ s1, s2, highlightIdx, mismatchPos }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>
+        <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>
           String 2
         </div>
         <div style={{ display: 'flex', gap: 2 }}>
@@ -234,11 +234,11 @@ function StringComparison({ s1, s2, highlightIdx, mismatchPos }) {
                   alignItems: 'center',
                   justifyContent: 'center',
                   borderRadius: 4,
-                  backgroundColor: isMismatch ? '#fecaca' : isHighlight ? '#fbbf24' : '#e2e8f0',
-                  border: isMismatch ? '2px solid #ef4444' : isHighlight ? '2px solid #f59e0b' : '1px solid #cbd5e1',
+                  backgroundColor: isMismatch ? '#fecaca' : isHighlight ? '#fbbf24' : 'var(--text)',
+                  border: isMismatch ? '2px solid #ef4444' : isHighlight ? '2px solid #f59e0b' : '1px solid var(--border)',
                   fontSize: 12,
                   fontWeight: 600,
-                  color: '#0f172a',
+                  color: 'var(--code-bg)',
                   fontFamily: 'monospace',
                 }}
                 animate={{ scale: isHighlight ? 1.15 : 1 }}

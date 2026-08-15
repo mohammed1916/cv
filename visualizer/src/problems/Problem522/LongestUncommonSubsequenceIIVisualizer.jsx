@@ -137,7 +137,7 @@ function VisualizationPanel({ step }) {
 
       {/* Strings */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Strings</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Strings</div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {step?.strs?.map((str, idx) => {
             const isActive = step && idx === step.currentIdx && !step.done
@@ -152,9 +152,9 @@ function VisualizationPanel({ step }) {
                   fontFamily: 'monospace',
                   fontSize: 14,
                   fontWeight: 600,
-                  backgroundColor: isActive ? '#a7f3d0' : isTesting ? '#d1fae5' : '#f1f5f9',
-                  borderColor: isActive ? '#10b981' : isTesting ? '#6ee7b7' : '#cbd5e1',
-                  color: isActive ? '#065f46' : isTesting ? '#059669' : '#334155'
+                  backgroundColor: isActive ? '#a7f3d0' : isTesting ? '#d1fae5' : 'var(--surface2)',
+                  borderColor: isActive ? '#10b981' : isTesting ? '#6ee7b7' : 'var(--border)',
+                  color: isActive ? '#065f46' : isTesting ? '#059669' : 'var(--border)'
                 }}
                 animate={{ scale: isActive ? 1.15 : 1 }}
               >

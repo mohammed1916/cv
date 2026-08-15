@@ -146,11 +146,11 @@ function VisualizationPanel({ num1, num2, step, applyExample, examples }) {
                 style={{
                   padding: '6px 12px',
                   borderRadius: 4,
-                  border: '1px solid #475569',
+                  border: '1px solid var(--text-muted)',
                   cursor: 'pointer',
                   fontSize: 11,
-                  backgroundColor: '#1e293b',
-                  color: '#e2e8f0',
+                  backgroundColor: 'var(--surface2)',
+                  color: 'var(--text)',
                 }}
               >
                 {ex.label || `Example ${i + 1}`}
@@ -161,8 +161,8 @@ function VisualizationPanel({ num1, num2, step, applyExample, examples }) {
       )}
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>num1</div>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>num1</div>
           <div
             style={{
               fontSize: 16,
@@ -175,8 +175,8 @@ function VisualizationPanel({ num1, num2, step, applyExample, examples }) {
             {num1}
           </div>
         </div>
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '1px solid #475569' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 6 }}>num2</div>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>num2</div>
           <div
             style={{
               fontSize: 16,
@@ -192,7 +192,7 @@ function VisualizationPanel({ num1, num2, step, applyExample, examples }) {
       </div>
 
       {step?.phase === 'parse' && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #f59e0b' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #f59e0b' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#a36907', marginBottom: 6 }}>Parsed Values</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, fontSize: 12, color: '#5577a4', fontFamily: 'monospace' }}>
             <div>a = {step.a}</div>
@@ -204,7 +204,7 @@ function VisualizationPanel({ num1, num2, step, applyExample, examples }) {
       )}
 
       {step?.phase === 'calc_real' && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #a78bfa' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Real Part</div>
           <div style={{ fontSize: 13, color: '#5577a4', fontFamily: 'monospace', marginBottom: 6 }}>
             <span style={{ color: '#178740' }}>{step.a * step.c}</span>
@@ -215,7 +215,7 @@ function VisualizationPanel({ num1, num2, step, applyExample, examples }) {
       )}
 
       {step?.phase === 'calc_imag' && (
-        <div style={{ padding: 12, backgroundColor: '#1e293b', borderRadius: 6, border: '2px solid #a78bfa' }}>
+        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #a78bfa' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Imaginary Part</div>
           <div style={{ fontSize: 13, color: '#5577a4', fontFamily: 'monospace', marginBottom: 6 }}>
             <span style={{ color: '#178740' }}>{step.a * step.d}</span>
@@ -229,7 +229,7 @@ function VisualizationPanel({ num1, num2, step, applyExample, examples }) {
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: '#1e293b',
+            backgroundColor: 'var(--surface2)',
             borderRadius: 6,
             border: '2px solid #22c55e',
             textAlign: 'center',
@@ -238,7 +238,7 @@ function VisualizationPanel({ num1, num2, step, applyExample, examples }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#64748b', marginBottom: 8 }}>Result</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Result</div>
           <div style={{ fontSize: 24, fontWeight: 'bold', color: '#178740', fontFamily: 'monospace' }}>
             {step.result}
           </div>
@@ -318,9 +318,9 @@ export default function ComplexNumberMultiplicationVisualizer() {
                   style={{
                     padding: '8px',
                     borderRadius: 4,
-                    border: '1px solid #475569',
-                    backgroundColor: '#1e293b',
-                    color: '#e2e8f0',
+                    border: '1px solid var(--text-muted)',
+                    backgroundColor: 'var(--surface2)',
+                    color: 'var(--text)',
                     fontFamily: 'monospace',
                     fontSize: 12,
                   }}
@@ -336,9 +336,9 @@ export default function ComplexNumberMultiplicationVisualizer() {
                   style={{
                     padding: '8px',
                     borderRadius: 4,
-                    border: '1px solid #475569',
-                    backgroundColor: '#1e293b',
-                    color: '#e2e8f0',
+                    border: '1px solid var(--text-muted)',
+                    backgroundColor: 'var(--surface2)',
+                    color: 'var(--text)',
                     fontFamily: 'monospace',
                     fontSize: 12,
                   }}

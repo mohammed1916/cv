@@ -122,13 +122,13 @@ const DEFAULT_EXAMPLES = [
 const EXAMPLES = REGISTRY_EXAMPLES.length > 0 ? REGISTRY_EXAMPLES : DEFAULT_EXAMPLES
 
 const COLORS = {
-  text: '#e2e8f0',
-  dim: '#64748b',
+  text: 'var(--text)',
+  dim: 'var(--text-muted)',
   current: '#f59e0b',
   filled: '#22c55e',
   operand: '#38bdf8',
-  surface: '#1e293b',
-  border: '#334155',
+  surface: 'var(--surface2)',
+  border: 'var(--border)',
 }
 
 function cellStyle(idx, value, step) {

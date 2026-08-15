@@ -115,12 +115,12 @@ function generateSteps(nums) {
 function ArrayVisualization({ nums, current, seen, duplicates }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Array</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Array</div>
       <div style={{
         padding: 12,
-        backgroundColor: '#f1f5f9',
+        backgroundColor: 'var(--surface2)',
         borderRadius: 8,
-        border: '2px solid #cbd5e1',
+        border: '2px solid var(--border)',
         minHeight: 100,
       }}>
         <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
@@ -143,14 +143,14 @@ function ArrayVisualization({ nums, current, seen, duplicates }) {
                   width: 36,
                   height: 36,
                   borderRadius: 6,
-                  backgroundColor: isDuplicate ? '#fee2e2' : isCurrent ? '#fef2f2' : isSeen ? '#ecfdf5' : '#f8fafc',
-                  border: isDuplicate ? '2px solid #ef4444' : isCurrent ? '3px solid #dc2626' : isSeen ? '2px solid #10b981' : '2px solid #cbd5e1',
+                  backgroundColor: isDuplicate ? '#fee2e2' : isCurrent ? '#fef2f2' : isSeen ? '#ecfdf5' : 'var(--surface)',
+                  border: isDuplicate ? '2px solid #ef4444' : isCurrent ? '3px solid #dc2626' : isSeen ? '2px solid #10b981' : '2px solid var(--border)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   fontSize: 12,
                   fontWeight: 700,
-                  color: isDuplicate ? '#dc2626' : isCurrent ? '#dc2626' : isSeen ? '#047857' : '#64748b',
+                  color: isDuplicate ? '#dc2626' : isCurrent ? '#dc2626' : isSeen ? '#047857' : 'var(--text-muted)',
                 }}
                 animate={{
                   scale: isCurrent ? 1.15 : 1,
@@ -158,7 +158,7 @@ function ArrayVisualization({ nums, current, seen, duplicates }) {
                 >
                   {num}
                 </div>
-                <div style={{ fontSize: 10, color: '#64748b', fontWeight: 500, minWidth: 24, textAlign: 'center' }}>
+                <div style={{ fontSize: 10, color: 'var(--text-muted)', fontWeight: 500, minWidth: 24, textAlign: 'center' }}>
                   {idx}
                 </div>
               </motion.div>
@@ -173,12 +173,12 @@ function ArrayVisualization({ nums, current, seen, duplicates }) {
 function SeenMapVisualization({ seen }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Seen Map</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Seen Map</div>
       <div style={{
         padding: 12,
-        backgroundColor: '#f1f5f9',
+        backgroundColor: 'var(--surface2)',
         borderRadius: 8,
-        border: '2px solid #cbd5e1',
+        border: '2px solid var(--border)',
         minHeight: 80,
       }}>
         {seen && seen.size > 0 ? (
@@ -213,7 +213,7 @@ function SeenMapVisualization({ seen }) {
 function DuplicatesVisualization({ duplicates }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b' }}>Duplicates Found</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Duplicates Found</div>
       <div style={{
         padding: 12,
         backgroundColor: '#fee2e2',
@@ -255,7 +255,7 @@ function VisualizationPanel({ step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -264,10 +264,10 @@ function VisualizationPanel({ step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9',
+                backgroundColor: 'var(--surface2)',
               }}
             >
               {e.label}

@@ -179,7 +179,7 @@ function generateSteps(version1, version2) {
 function VersionParts({ parts, label }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-      <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b' }}>
+      <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)' }}>
         {label}
       </div>
       <div style={{ display: 'flex', gap: 4 }}>
@@ -248,7 +248,7 @@ function VisualizationPanel({ step }) {
             <div style={{ color: '#0c4a6e' }}>
               {step.p1}
             </div>
-            <div style={{ color: '#64748b' }}>
+            <div style={{ color: 'var(--text-muted)' }}>
               {step.p1 < step.p2 ? '<' : step.p1 > step.p2 ? '>' : '=='}
             </div>
             <div style={{ color: '#0c4a6e' }}>

@@ -102,7 +102,7 @@ function RoadJourneyVisualization({ gas, cost, step }) {
               >
                 {isStart && !isCurrent ? '🚗' : isCurrent ? '⛽' : i}
               </motion.div>
-              <div style={{ marginTop: 8, fontSize: 11, textAlign: 'center', color: '#64748b' }}>
+              <div style={{ marginTop: 8, fontSize: 11, textAlign: 'center', color: 'var(--text-muted)' }}>
                 <div>gas:{g}</div>
                 <div>cost:{cost[i]}</div>
               </div>
@@ -117,7 +117,7 @@ function RoadJourneyVisualization({ gas, cost, step }) {
         <div style={{
           flex: 1,
           height: 28,
-          backgroundColor: '#e2e8f0',
+          backgroundColor: 'var(--text)',
           borderRadius: 4,
           overflow: 'hidden',
           position: 'relative'
@@ -138,7 +138,7 @@ function RoadJourneyVisualization({ gas, cost, step }) {
             transform: 'translate(-50%, -50%)',
             fontSize: 12,
             fontWeight: 600,
-            color: '#1e293b',
+            color: 'var(--surface2)',
             pointerEvents: 'none'
           }}>
             {tankLevel.toFixed(0)}
@@ -165,7 +165,7 @@ function VisualizationPanel({ gas, cost, step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -174,10 +174,10 @@ function VisualizationPanel({ gas, cost, step, applyEx }) {
               style={{
                 padding: '6px 12px',
                 borderRadius: 4,
-                border: '1px solid #cbd5e1',
+                border: '1px solid var(--border)',
                 cursor: 'pointer',
                 fontSize: 12,
-                backgroundColor: '#f1f5f9'
+                backgroundColor: 'var(--surface2)'
               }}
             >
               {e.label}

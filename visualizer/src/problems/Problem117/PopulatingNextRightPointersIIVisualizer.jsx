@@ -263,7 +263,7 @@ export default function PopulatingNextRightPointersIIVisualizer() {
   )
 
   const statusPanel = (
-    <div className="pnpii-status" style={{ padding: '8px 12px', fontSize: '12px', color: '#627794', borderTop: '1px solid #334155' }}>
+    <div className="pnpii-status" style={{ padding: '8px 12px', fontSize: '12px', color: '#627794', borderTop: '1px solid var(--border)' }}>
       {step && step.message ? step.message : 'Ready'}
     </div>
   )
