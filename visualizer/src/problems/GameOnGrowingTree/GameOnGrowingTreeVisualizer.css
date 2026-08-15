@@ -1,6 +1,15 @@
 .gogt-shell {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: 14px;
+    height: 100%;
+    min-height: 0;
+}
+
+.gogt-workspace {
+    position: relative;
+    flex: 1 1 0;
+    min-height: 0;
 }
 
 .gogt-hero {

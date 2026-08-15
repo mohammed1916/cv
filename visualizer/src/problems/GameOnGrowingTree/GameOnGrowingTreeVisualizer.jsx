@@ -1221,34 +1221,6 @@ export default function GameOnGrowingTreeVisualizer() {
 
   return (
     <div className="gogt-shell">
-        <ManualInputPanel
-          fields={[{"key":"q","label":"q","type":"string"},{"key":"parents","label":"parents","type":"string"}]}
-          values={{ q: qInput, parents: parentsInput }}
-          onChange={(k, v) => { if (k === 'q') setQInput(v); if (k === 'parents') setParentsInput(v); handleReset() }}
-          showExamples={false}
-          inputError={inputError}
-        />
-      <section className="gogt-hero">
-        <div className="gogt-hero-copy">
-          <span className="gogt-kicker">Codeforces F • Tree game + DP</span>
-          <h2>See how each prefix of the growing tree gets solved.</h2>
-          <p>
-            This walkthrough combines the divide-and-conquer outer loop, the
-            `first/second/third` DP arrays, and a live tree preview so the score
-            update is easier to follow at every step.
-          </p>
-        </div>
-
-        <div className="gogt-summary-grid">
-          {summaryCards.map((card) => (
-            <div key={card.label} className="gogt-summary-card">
-              <span>{card.label}</span>
-              <strong>{card.value}</strong>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* View Mode Toggle */}
       <div style={{
         display: 'flex',
@@ -1287,7 +1259,7 @@ export default function GameOnGrowingTreeVisualizer() {
           {viewMode === 'panels' ? '⟨→⟩ Structure' : '⊞ Panels'}
         </button>
       </div>
-      <div style={{ position: 'relative', minHeight: viewMode === 'dual-rep' ? '600px' : 'auto' }}>
+      <div className="gogt-workspace" style={{ minHeight: viewMode === 'dual-rep' ? '600px' : 0 }}>
         {viewMode === 'panels' ? (
           <>
             <TreeDPConnector
@@ -1407,4 +1379,3 @@ export default function GameOnGrowingTreeVisualizer() {
     </div>
   );
 }
-
