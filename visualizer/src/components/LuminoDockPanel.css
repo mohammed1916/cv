@@ -151,7 +151,15 @@
   border-bottom: 2px solid transparent;
   cursor: pointer;
   user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
   transition: background 0.15s ease, color 0.15s ease;
+}
+
+.lm-TabBar-tabLabel,
+.lm-TabBar-tab * {
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .lm-TabBar-tab::before {

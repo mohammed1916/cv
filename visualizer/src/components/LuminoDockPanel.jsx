@@ -35,6 +35,10 @@ export default function LuminoDockPanel({ panels, onPanelReady }) {
     // Be explicit: this is a user-arrangeable workspace. Lumino defaults to
     // movable tabs, but setting it here prevents version/config regressions.
     const dock = new DockPanel({ spacing: 6, tabsMovable: true })
+    // Set the runtime property too: it propagates to tab bars created as the
+    // layout changes, whereas relying only on constructor options proved
+    // inconsistent in some Lumino versions.
+    dock.tabsMovable = true
     dock.id = 'dock'
     dockRef.current = dock
     const inlineStatusInCode = panels.some((panel) => panel.id === 'code') && panels.some((panel) => panel.id === 'status')

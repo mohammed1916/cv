@@ -405,8 +405,14 @@ export default function TreeStatePanel({
                                     )}
                                 </g>
                             </g>
-                            {step && <TreeHighlightOverlay step={step} treeNodePositions={currentTree?.positions} dpSnapshot={dpSnapshot} />}
-                            {showTraversalTrail && step && <TreeTraversalHighlight currentTree={currentTree} parentZeroBased={parentZeroBased} isBottomUp={step.activeLine >= 9 && step.activeLine <= 14} />}
+                            {/* Overlays must share the tree's pan/zoom transform; otherwise
+                                their connectors remain in the old coordinate space. */}
+                            <g transform={`translate(${treeViewport.x} ${treeViewport.y})`}>
+                                <g transform={`scale(${treeViewport.scale})`}>
+                                    {step && <TreeHighlightOverlay step={step} treeNodePositions={currentTree?.positions} dpSnapshot={dpSnapshot} />}
+                                    {showTraversalTrail && step && <TreeTraversalHighlight currentTree={currentTree} parentZeroBased={parentZeroBased} isBottomUp={step.activeLine >= 9 && step.activeLine <= 14} />}
+                                </g>
+                            </g>
                         </motion.svg>
 
                         {/* Pruning Legend and Statistics */}
