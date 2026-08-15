@@ -336,7 +336,7 @@ export default function ChatDrawer() {
           <div className="chat-header-left">
           <span className="chat-header-icon">AI</span>
           <div>
-            <div className="chat-header-title">Algorithm Assistant <span className="chat-shortcut">(Alt+C)</span></div>
+            <div className="chat-header-title">Algorithm Assistant <span className="chat-shortcut">Alt+C</span></div>
             <select className="chat-provider-select" value={providerConfig.provider} onChange={(e) => { const next = { ...providerConfig, provider: e.target.value }; setProviderConfig(next); localStorage.setItem('chat.provider.v1', JSON.stringify(next)) }}>
               <option value="ollama-local">Ollama Local</option><option value="ollama-cloud">Ollama Cloud</option><option value="gemini">Gemini</option>
             </select>
@@ -394,6 +394,8 @@ export default function ChatDrawer() {
           </button>
         </div>
       </div>
+
+      {selectMode && <div className="chat-selection-banner">Selection mode: click any visual element to add it as context.</div>}
 
       {historyOpen && (
         <div className="chat-history-panel">
