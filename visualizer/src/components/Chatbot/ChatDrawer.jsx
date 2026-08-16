@@ -5,6 +5,7 @@ import { streamProviderChat, getChatProvider } from "../../services/chatProvider
 import ChatMessage from "./ChatMessage";
 import ChatInput from "./ChatInput";
 import ResizablePanel from "../ResizablePanel";
+import PanelScaleControl from '../shared/PanelScaleControl';
 import "./chatbot.css";
 
 const Icon = ({ name }) => {
@@ -100,6 +101,20 @@ export default function ChatDrawer() {
   const [chatSize, setChatSize] = useState(() => {
     try { const s = window.localStorage.getItem('chat.size'); if (s) return JSON.parse(s); } catch (err) { void err }
     return { width: 380, height: 520 };
+  });
+  const [dockedSize, setDockedSize] = useState(() => {
+    try {
+      const saved = JSON.parse(window.localStorage.getItem('chat.docked-size'));
+      if (saved?.width >= 300 && saved?.height >= 320) return saved;
+    } catch (err) { void err }
+    return { width: 380, height: Math.max(360, window.innerHeight - 60) };
+  });
+  const [contentScale, setContentScale] = useState(() => {
+    try {
+      const saved = Number(window.localStorage.getItem('chat.content-scale'));
+      if (saved >= 65 && saved <= 120) return saved;
+    } catch (err) { void err }
+    return 100;
   });
   const draggingRef = useRef(false);
   const dragStartRef = useRef({ x: 0, y: 0, origX: 0, origY: 0 });
@@ -318,6 +333,16 @@ export default function ChatDrawer() {
   const handleResizeEnd = () => {
     try { window.localStorage.setItem('chat.size', JSON.stringify(chatSize)); } catch (err) { void err }
   };
+  const handleDockedResize = (size) => {
+    setDockedSize((current) => ({ ...current, ...size }));
+  };
+  const handleDockedResizeEnd = () => {
+    try { window.localStorage.setItem('chat.docked-size', JSON.stringify(dockedSize)); } catch (err) { void err }
+  };
+  const handleContentScale = (nextScale) => {
+    setContentScale(nextScale);
+    try { window.localStorage.setItem('chat.content-scale', String(nextScale)); } catch (err) { void err }
+  };
 
   // render content (header, messages, input)
   const chatContent = (
@@ -327,6 +352,7 @@ export default function ChatDrawer() {
       aria-label="AI Chat Assistant"
       style={floatingMode ? { position: 'relative', width: '100%', height: '100%', cursor: 'default' } : { position: 'relative', width: '100%', height: '100%' }}
     >
+      <div className="chat-content-scale" style={{ '--chat-content-scale': contentScale / 100 }}>
       {/* Header */}
       <div
         className="chat-header"
@@ -468,6 +494,13 @@ export default function ChatDrawer() {
         onClearContext={clearContext}
         disabled={isStreaming}
       />
+      </div>
+      <PanelScaleControl
+        value={contentScale}
+        onChange={handleContentScale}
+        label="AI scale"
+        ariaLabel="AI assistant content scale"
+      />
     </div >
   );
 
@@ -492,12 +525,17 @@ export default function ChatDrawer() {
         </div>
       ) : (
         <ResizablePanel
-          width={chatSize.width}
-          onResize={handleResize}
-          onResizeEnd={handleResizeEnd}
-          handles={['left']}
+          width={dockedSize.width}
+          height={dockedSize.height}
+          minWidth={300}
+          minHeight={320}
+          maxWidth={Math.max(300, window.innerWidth - 16)}
+          maxHeight={Math.max(320, window.innerHeight - 60)}
+          onResize={handleDockedResize}
+          onResizeEnd={handleDockedResizeEnd}
+          handles={['left', 'bottom', 'corner']}
           className="chat-panel-docked"
-          style={{ position: 'fixed', top: '60px', right: 0, height: 'calc(100vh - 60px)', zIndex: 1002 }}
+          style={{ position: 'fixed', top: '60px', right: 0, zIndex: 1002 }}
         >
           {chatContent}
         </ResizablePanel>

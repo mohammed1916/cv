@@ -127,22 +127,6 @@
   zoom: var(--playback-ui-scale, 1);
 }
 
-.floating-panel-size-control {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 5px 10px 8px;
-  color: var(--text-muted);
-  font-size: 11px;
-  font-weight: 600;
-}
-
-.floating-panel-size-control input {
-  flex: 1;
-  min-width: 0;
-  accent-color: var(--primary);
-}
-
 .floating-panel-resizer {
   position: absolute;
   right: 3px;

@@ -63,6 +63,15 @@
   animation: drawerSlideIn 0.25s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* The shared scale slider stays readable while the chat work surface scales. */
+.chat-content-scale {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+  flex-direction: column;
+  zoom: var(--chat-content-scale, 1);
+}
+
 @keyframes drawerSlideIn {
   from {
     transform: translateX(100%);
@@ -297,6 +306,11 @@
 .chat-panel-docked .resize-handle--left:hover::after {
   background: var(--primary);
   box-shadow: none;
+}
+
+.chat-panel-docked .resize-handle--corner {
+  z-index: 10000;
+  background: linear-gradient(135deg, transparent 45%, var(--text-dim) 46% 52%, transparent 53% 62%, var(--text-dim) 63% 69%, transparent 70%);
 }
 
 .chat-drawer--docked {

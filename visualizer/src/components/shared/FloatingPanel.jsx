@@ -1,5 +1,6 @@
 import { useRef, useState, useLayoutEffect } from "react";
 import "./FloatingPanel.css";
+import PanelScaleControl from './PanelScaleControl';
 
 export default function FloatingPanel({
   title = "Panel",
@@ -149,17 +150,11 @@ export default function FloatingPanel({
       </div>
       {!collapsed && <div className="floating-panel-body">{children}</div>}
       {!collapsed && title === 'Playback Controls' && (
-        <label className="floating-panel-size-control">
-          <span>Control scale</span>
-          <input
-            type="range"
-            min="65"
-            max="120"
-            value={controlScale}
-            onChange={(event) => setControlScale(Number(event.target.value))}
-            aria-label="Playback controls scale"
-          />
-        </label>
+        <PanelScaleControl
+          value={controlScale}
+          onChange={setControlScale}
+          ariaLabel="Playback controls scale"
+        />
       )}
       {!collapsed && (
         <div
