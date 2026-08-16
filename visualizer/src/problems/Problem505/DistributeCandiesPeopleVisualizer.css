@@ -35,8 +35,8 @@
 }
 
 .distribute-chip.active {
-  background: #ec4899;
-  color: #fff;
+  background: var(--primary-glow);
+  color: var(--text);
   border-color: #ec4899;
 }
 

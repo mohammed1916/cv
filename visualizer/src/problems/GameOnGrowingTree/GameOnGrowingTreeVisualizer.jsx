@@ -1329,9 +1329,9 @@ export default function GameOnGrowingTreeVisualizer() {
               onClick={() => setSelectedNode(null)}
               style={{
                 padding: '6px 12px',
-                background: '#ff6b35',
-                color: 'white',
-                border: 'none',
+                background: 'color-mix(in srgb, #ff6b35 24%, var(--surface))',
+                color: 'var(--text)',
+                border: '1px solid #ff6b35',
                 borderRadius: '4px',
                 cursor: 'pointer',
                 fontWeight: 600,

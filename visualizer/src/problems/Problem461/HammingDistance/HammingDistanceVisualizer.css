@@ -35,8 +35,8 @@
 }
 
 .hamming-chip.active {
-  background: #3b82f6;
-  color: #fff;
+  background: var(--primary-glow);
+  color: var(--text);
   border-color: #3b82f6;
 }
 

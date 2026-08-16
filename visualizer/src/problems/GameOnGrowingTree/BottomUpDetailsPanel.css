@@ -163,8 +163,9 @@
 }
 
 .rank-badge.rejected {
-  background: #ff6b6b;
-  color: white;
+  background: color-mix(in srgb, #ff6b6b 24%, var(--surface));
+  color: var(--text);
+  border: 1px solid #ff6b6b;
 }
 
 .rank-explanation {

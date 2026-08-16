@@ -307,7 +307,7 @@
   background: rgba(16, 185, 129, 0.15);
   border: 1px solid #10b981;
   border-radius: 6px;
-  color: #6ee7b7;
+  color: var(--success);
   font-size: 13px;
   font-weight: bold;
   text-align: center;

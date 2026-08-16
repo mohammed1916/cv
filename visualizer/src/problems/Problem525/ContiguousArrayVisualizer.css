@@ -35,8 +35,8 @@
 }
 
 .contiguous-array-chip.active {
-  background: #0284c7;
-  color: #fff;
+  background: var(--primary-glow);
+  color: var(--text);
   border-color: #0284c7;
 }
 

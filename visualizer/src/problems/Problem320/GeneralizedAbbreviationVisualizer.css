@@ -110,9 +110,9 @@
 }
 
 .generalized-abbreviation-example-btn.active {
-  background: #8b5cf6;
-  border-color: #8b5cf6;
-  color: white;
+  background: var(--primary-glow);
+  border-color: var(--primary);
+  color: var(--text);
 }
 
 .generalized-abbreviation-examples {

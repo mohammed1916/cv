@@ -338,8 +338,8 @@ export default function EvaluateDivisionVisualizer() {
                           <motion.span
                             style={{
                               padding: '4px 8px',
-                              backgroundColor: '#0ea5e9',
-                              color: '#fff',
+                              backgroundColor: 'color-mix(in srgb, #0ea5e9 24%, var(--surface))',
+                              color: 'var(--text)',
                               borderRadius: 3,
                               fontSize: 11,
                               fontWeight: 600,
@@ -432,4 +432,3 @@ export default function EvaluateDivisionVisualizer() {
     </div>
   )
 }
-

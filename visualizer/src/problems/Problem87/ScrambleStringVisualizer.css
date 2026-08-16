@@ -44,8 +44,8 @@
 }
 
 .scramble-example-btn.active {
-  background: #0284c7;
-  color: white;
+  background: var(--primary-glow);
+  color: var(--text);
   border-color: #0284c7;
 }
 

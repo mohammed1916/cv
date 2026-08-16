@@ -324,9 +324,9 @@ function VisualizationPanel({ step, nums1, nums2, nums3, nums4, EXAMPLES, handle
         onClick={handleReset}
         style={{
           padding: '8px 10px',
-          backgroundColor: '#3b82f6',
-          color: 'white',
-          border: 'none',
+          backgroundColor: 'var(--primary-glow)',
+          color: 'var(--text)',
+          border: '1px solid var(--primary)',
           borderRadius: 4,
           fontSize: 12,
           fontWeight: 600,

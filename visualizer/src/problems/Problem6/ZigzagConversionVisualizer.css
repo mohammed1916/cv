@@ -164,9 +164,9 @@
 }
 
 .zigzag-row-block.active .zigzag-row-label {
-  background: #a855f7;
-  color: white;
-  border-right-color: #a855f7;
+  background: var(--primary-glow);
+  color: var(--text);
+  border-right-color: var(--primary);
 }
 
 .zigzag-row-indicator {

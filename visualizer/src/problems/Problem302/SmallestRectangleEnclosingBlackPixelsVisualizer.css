@@ -110,9 +110,9 @@
 }
 
 .smallest-rectangle-enclosing-black-pixels-example-btn.active {
-  background: #8b5cf6;
-  border-color: #8b5cf6;
-  color: white;
+  background: var(--primary-glow);
+  border-color: var(--primary);
+  color: var(--text);
 }
 
 .smallest-rectangle-enclosing-black-pixels-examples {

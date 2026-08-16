@@ -191,7 +191,7 @@ function VisualizationPanel({ root, step }) {
             <div key={id} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
               {i > 0 && <span style={{ color: '#048196', fontSize: 14 }}>⇄</span>}
               <motion.div initial={{ scale: 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
-                style={{ width: 32, height: 32, borderRadius: 6, backgroundColor: '#06b6d4', color: '#fff',
+                style={{ width: 32, height: 32, border: '1px solid #06b6d4', borderRadius: 6, backgroundColor: 'color-mix(in srgb, #06b6d4 24%, var(--surface))', color: 'var(--text)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700 }}>
                 {idToVal[id]}
               </motion.div>

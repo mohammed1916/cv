@@ -44,8 +44,8 @@
 
 .sqrtx-chip.active {
   border-color: #3b82f6;
-  background: #3b82f6;
-  color: white;
+  background: var(--primary-glow);
+  color: var(--text);
 }
 
 .sqrtx-chip-desc {

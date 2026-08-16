@@ -319,7 +319,7 @@ function VisualizationPanel({ step, root }) {
           </div>
           <div style={{ display: 'flex', gap: 6 }}>
             {step.stack2.map((node, idx) => (
-              <div key={idx} style={{ padding: '4px 8px', backgroundColor: '#f472b6', borderRadius: 3, fontSize: 11, fontWeight: 600, color: '#fff' }}>
+              <div key={idx} style={{ padding: '4px 8px', backgroundColor: 'color-mix(in srgb, #f472b6 24%, var(--surface))', border: '1px solid #ec4899', borderRadius: 3, fontSize: 11, fontWeight: 600, color: 'var(--text)' }}>
                 {node.val}
               </div>
             ))}

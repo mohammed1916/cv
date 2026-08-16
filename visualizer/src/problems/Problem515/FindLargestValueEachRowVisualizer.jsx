@@ -299,12 +299,12 @@ function VisualizationPanel({ arr, step, applyEx }) {
             {step.maxValues.map((val, idx) => (
               <div key={idx} style={{
                 padding: '8px 12px',
-                backgroundColor: '#f472b6',
+                backgroundColor: 'color-mix(in srgb, #f472b6 24%, var(--surface))',
                 borderRadius: 4,
                 border: '1px solid #ec4899',
                 fontSize: 12,
                 fontWeight: 600,
-                color: '#fff',
+                color: 'var(--text)',
                 textAlign: 'center'
               }}>
                 Lvl {idx}: {val}
@@ -441,4 +441,3 @@ export default function FindLargestValueEachRowVisualizer() {
     </div>
   )
 }
-

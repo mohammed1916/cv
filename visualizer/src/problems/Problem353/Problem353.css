@@ -206,9 +206,9 @@
 }
 
 .route-card.active {
-  background: #8b5cf6;
-  color: #fff;
-  border-color: #7c3aed;
+  background: var(--primary-glow);
+  color: var(--text);
+  border-color: var(--primary);
   box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
 }
 
