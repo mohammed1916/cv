@@ -8,7 +8,16 @@ export default defineConfig({
     include: ['@monaco-editor/react', 'monaco-editor'],
   },
   server: {
+    // Pin the dev server and HMR client to IPv4. On this machine Vite was
+    // listening only on ::1 while the browser resolved localhost to 127.0.0.1,
+    // so the page loaded through a fallback but its HMR WebSocket could not.
+    host: '127.0.0.1',
     port: 3010,
+    hmr: {
+      host: '127.0.0.1',
+      protocol: 'ws',
+      clientPort: 3010,
+    },
     configureServer(server) {
       server.middlewares.use('/api/chat', async (req, res) => {
         if (req.method !== 'POST') { res.statusCode = 405; res.end(); return }
