@@ -199,9 +199,9 @@
   border-radius: 4px;
 }
 
-.bs-ptr.left { background: #f43f5e; color: white; }
-.bs-ptr.mid { background: #0ea5e9; color: white; }
-.bs-ptr.right { background: #8b5cf6; color: white; }
+.bs-ptr.left { background: var(--error-glow); color: var(--text); border: 1px solid var(--error); }
+.bs-ptr.mid { background: var(--primary-glow); color: var(--text); border: 1px solid var(--primary); }
+.bs-ptr.right { background: var(--primary-glow); color: var(--text); border: 1px solid var(--primary); }
 
 .bs-stats {
   display: flex;

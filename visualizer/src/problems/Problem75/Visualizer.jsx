@@ -85,8 +85,9 @@ function DutchFlagVisualization({ nums, step }) {
                     width: 40,
                     height: 40,
                     borderRadius: 6,
-                    backgroundColor: '#ef4444',
-                    color: 'white',
+                    backgroundColor: 'var(--error-glow)',
+                    color: 'var(--text)',
+                    border: '2px solid var(--error)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -166,8 +167,9 @@ function DutchFlagVisualization({ nums, step }) {
                     width: 40,
                     height: 40,
                     borderRadius: 6,
-                    backgroundColor: '#3b82f6',
-                    color: 'white',
+                    backgroundColor: 'var(--primary-glow)',
+                    color: 'var(--text)',
+                    border: '2px solid var(--primary)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -354,4 +356,3 @@ export default function SortColorsVisualizer() {
       </div>
     );
 }
-

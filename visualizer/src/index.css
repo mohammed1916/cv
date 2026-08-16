@@ -47,6 +47,17 @@
   --text:         #0b1020;
   --text-muted:   #45526b;
   --text-dim:     #5c6b85;
+
+  /* Semantic component roles.  These preserve a consistent accessible base
+     for reusable controls while problem visualizers remain free to define
+     their own instructional/state colours. */
+  --ui-card-bg:         var(--surface2);
+  --ui-card-raised-bg:  var(--surface3);
+  --ui-card-border:     var(--border);
+  --ui-control-bg:      var(--surface3);
+  --ui-control-fg:      var(--text);
+  --ui-control-hover-bg: var(--primary-glow);
+  --ui-control-hover-border: var(--primary);
   /* Compatibility aliases used by older problem panels. */
   --accent:       var(--primary);
   --text-secondary: var(--text-muted);
@@ -109,6 +120,13 @@
   --text:         #f1f5f9;
   --text-muted:   #a9b6ca;
   --text-dim:     #8b9ab2;
+  --ui-card-bg:         var(--surface2);
+  --ui-card-raised-bg:  var(--surface3);
+  --ui-card-border:     var(--border);
+  --ui-control-bg:      var(--surface3);
+  --ui-control-fg:      var(--text);
+  --ui-control-hover-bg: var(--primary-glow);
+  --ui-control-hover-border: var(--primary);
   --accent:       var(--primary);
   --text-secondary: var(--text-muted);
 

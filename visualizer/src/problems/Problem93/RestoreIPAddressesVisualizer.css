@@ -56,9 +56,9 @@
 }
 
 .restore-ip-example-btn.active {
-  background: #3b82f6;
-  border-color: #2563eb;
-  color: #fff;
+  background: var(--primary-glow);
+  border-color: var(--primary);
+  color: var(--text);
 }
 
 .restore-ip-input {
@@ -128,9 +128,9 @@
 }
 
 .restore-ip-char.current .restore-ip-char-val {
-  background: #3b82f6;
-  border-color: #2563eb;
-  color: #fff;
+  background: var(--primary-glow);
+  border-color: var(--primary);
+  color: var(--text);
 }
 
 .restore-ip-char-idx {

@@ -1,4 +1,6 @@
 .permutii-shell {
+  --permutii-accent-bg: color-mix(in srgb, #06b6d4 24%, var(--surface));
+  --permutii-accent-border: #0e7490;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -18,11 +20,11 @@
 
 .permutii-panel-head {
   padding: 12px 16px;
-  background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
-  color: white;
+  background: var(--permutii-accent-bg);
+  color: var(--text);
   font-weight: 600;
   font-size: 14px;
-  border-bottom: 2px solid #0e7490;
+  border-bottom: 2px solid var(--permutii-accent-border);
 }
 
 .permutii-panel-body {
@@ -36,9 +38,9 @@
 
 .permutii-example-btn {
   padding: 6px 12px;
-  background: #06b6d4;
-  color: white;
-  border: none;
+  background: var(--permutii-accent-bg);
+  color: var(--text);
+  border: 1px solid var(--permutii-accent-border);
   border-radius: 6px;
   cursor: pointer;
   font-size: 12px;
@@ -65,8 +67,9 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  background: #06b6d4;
-  color: white;
+  background: var(--permutii-accent-bg);
+  color: var(--text);
+  border: 1px solid var(--permutii-accent-border);
   border-radius: 6px;
   font-family: monospace;
   font-weight: 700;

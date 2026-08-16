@@ -101,7 +101,7 @@ function auditCss(file, src) {
 }
 
 const files = execSync(`git ls-files 'src/problems/*.jsx' 'src/problems/**/*.jsx' 'src/problems/**/*.css'`, { encoding: 'utf8' })
-  .trim().split('\n').filter(Boolean)
+  .trim().split('\n').filter(Boolean).filter((file) => !file.split('/').some((part) => part.startsWith('._')))
 
 for (const f of files) {
   let src

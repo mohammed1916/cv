@@ -102,9 +102,9 @@
 }
 
 .ps-chip.active {
-  background: #2196F3;
-  color: white;
-  border-color: #2196F3;
+  background: color-mix(in srgb, #2196f3 24%, var(--surface));
+  color: var(--text);
+  border-color: #1976d2;
 }
 
 .ps-inputs {
@@ -167,9 +167,9 @@
 }
 
 .ps-num-cell.selected {
-  background: #4CAF50;
-  color: white;
-  border-color: #4CAF50;
+  background: color-mix(in srgb, #4caf50 24%, var(--surface));
+  color: var(--text);
+  border-color: #2e7d32;
 }
 
 .ps-result-row {

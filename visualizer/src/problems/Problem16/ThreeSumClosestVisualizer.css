@@ -65,9 +65,9 @@
 }
 
 .tsc3-chip:hover {
-  background: #0ea5e9;
-  color: #fff;
-  border-color: #0ea5e9;
+  background: var(--primary-glow);
+  color: var(--text);
+  border-color: var(--primary);
 }
 
 .tsc3-input-row {
@@ -179,13 +179,15 @@
 }
 
 .tsc3-ptr-l {
-  background: #ef4444;
-  color: #fff;
+  background: var(--error-glow);
+  color: var(--text);
+  border: 1px solid var(--error);
 }
 
 .tsc3-ptr-r {
-  background: #10b981;
-  color: #fff;
+  background: var(--success-glow);
+  color: var(--text);
+  border: 1px solid var(--success);
 }
 
 .tsc3-sum-box {

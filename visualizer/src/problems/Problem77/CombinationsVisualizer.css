@@ -138,9 +138,9 @@
 }
 
 .comb-num-cell.selected {
-  background: #3b82f6;
-  color: white;
-  border-color: #3b82f6;
+  background: var(--primary-glow);
+  color: var(--text);
+  border-color: var(--primary);
 }
 
 .comb-num-cell.used {
@@ -167,8 +167,9 @@
 
 .comb-path-cell {
   padding: 6px 12px;
-  background: #3b82f6;
-  color: white;
+  background: var(--primary-glow);
+  color: var(--text);
+  border: 1px solid var(--primary);
   border-radius: 4px;
   font-weight: 600;
   font-size: 14px;
@@ -268,9 +269,9 @@
   }
 
   .comb-num-cell.selected {
-    background: #3b82f6;
-    border-color: #3b82f6;
-    color: white;
+    background: var(--primary-glow);
+    border-color: var(--primary);
+    color: var(--text);
   }
 
   .comb-num-cell.used {
@@ -289,8 +290,9 @@
   }
 
   .comb-path-cell {
-    background: #3b82f6;
-    color: white;
+    background: var(--primary-glow);
+    color: var(--text);
+    border-color: var(--primary);
   }
 
   .comb-path-progress {

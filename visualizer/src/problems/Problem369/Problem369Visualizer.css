@@ -147,11 +147,12 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: #3498db;
+  background: color-mix(in srgb, #3498db 26%, var(--surface));
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: var(--text);
+  border: 2px solid #2980b9;
   font-size: 28px;
   font-weight: 700;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -296,9 +297,9 @@
 }
 
 .p369-example.selected {
-  background: #3498db;
+  background: color-mix(in srgb, #3498db 26%, var(--surface));
   border-color: #2980b9;
-  color: white;
+  color: var(--text);
 }
 
 .p369-example-name {
@@ -334,8 +335,9 @@
   padding: 10px;
   border: none;
   border-radius: 6px;
-  background: #3498db;
-  color: white;
+  background: color-mix(in srgb, #3498db 26%, var(--surface));
+  color: var(--text);
+  border: 1px solid #2980b9;
   font-weight: 600;
   font-size: 13px;
   cursor: pointer;
@@ -365,9 +367,9 @@
 .p369-reset-btn {
   width: 100%;
   padding: 10px;
-  background: #95a5a6;
-  color: white;
-  border: none;
+  background: var(--ui-card-raised-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
   border-radius: 6px;
   font-weight: 600;
   font-size: 13px;
