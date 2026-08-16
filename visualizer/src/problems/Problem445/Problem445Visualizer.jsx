@@ -357,9 +357,9 @@ function VisualizationPanel({ step, list1, list2, EXAMPLES, handleExampleClick, 
           onClick={handleReset}
           style={{
             padding: '8px 10px',
-            backgroundColor: '#3b82f6',
-            color: 'white',
-            border: 'none',
+            backgroundColor: 'var(--primary-glow)',
+            color: 'var(--text)',
+            border: '1px solid var(--primary)',
             borderRadius: 4,
             fontSize: 12,
             fontWeight: 600,

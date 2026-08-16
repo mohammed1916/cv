@@ -110,9 +110,9 @@
 }
 
 .sparse-matrix-multiplication-example-btn.active {
-  background: #3b82f6;
-  border-color: #3b82f6;
-  color: white;
+  background: var(--primary-glow);
+  border-color: var(--primary);
+  color: var(--text);
 }
 
 .sparse-matrix-multiplication-examples {

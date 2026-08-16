@@ -110,9 +110,9 @@
 }
 
 .reconstruct-itinerary-example-btn.active {
-  background: #f43f5e;
-  border-color: #f43f5e;
-  color: white;
+  background: var(--error-glow);
+  border-color: var(--error);
+  color: var(--text);
 }
 
 .reconstruct-itinerary-examples {

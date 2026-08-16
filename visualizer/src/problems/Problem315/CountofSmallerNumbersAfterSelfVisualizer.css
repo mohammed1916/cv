@@ -110,9 +110,9 @@
 }
 
 .countof-smaller-numbers-after-self-example-btn.active {
-  background: #ec4899;
-  border-color: #ec4899;
-  color: white;
+  background: var(--primary-glow);
+  border-color: var(--primary);
+  color: var(--text);
 }
 
 .countof-smaller-numbers-after-self-examples {
