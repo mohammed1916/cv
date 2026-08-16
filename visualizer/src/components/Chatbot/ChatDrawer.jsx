@@ -70,6 +70,12 @@ export default function ChatDrawer() {
     try { return window.sessionStorage.getItem('chat.ollama-api-key') || ''; } catch (err) { void err }
     return '';
   });
+  const selectedModel = providerConfig.model || (providerConfig.provider === 'gemini' ? 'gemini-2.5-flash' : providerConfig.provider === 'ollama-cloud' ? 'gpt-oss:120b' : 'gemma4:e2b');
+  const selectedProviderLabel = providerConfig.provider === 'gemini'
+    ? 'Gemini'
+    : providerConfig.provider === 'ollama-cloud'
+      ? 'Ollama Cloud'
+      : 'Ollama Local';
 
   const handleToggleSelectMode = useCallback(() => {
     const newMode = !selectMode;
@@ -251,10 +257,10 @@ export default function ChatDrawer() {
         updateLastMessage({ text: accumulated, isStreaming: false });
       } catch (err) {
         const guidance = providerConfig.provider === 'ollama-cloud'
-          ? 'Set `OLLAMA_API_KEY` for the Vite server and use a model available through Ollama Cloud.'
+          ? `Set \`OLLAMA_API_KEY\` for the Vite server and confirm \`${selectedModel}\` is available through Ollama Cloud.`
           : providerConfig.provider === 'gemini'
-            ? 'Set `GEMINI_API_KEY` for the Vite server and verify the selected Gemini model.'
-            : `Make sure Ollama is running with \`ollama serve\` and the model \`${providerConfig.model || 'gemma4:e2b'}\` is available.`;
+            ? `Set \`GEMINI_API_KEY\` for the Vite server and verify the selected model \`${selectedModel}\`.`
+            : `Make sure Ollama is running with \`ollama serve\` and the model \`${selectedModel}\` is available.`;
         updateLastMessage({
           text: `Error: ${err.message}\n\n${guidance}`,
           isStreaming: false,
@@ -264,7 +270,7 @@ export default function ChatDrawer() {
         setIsStreaming(false);
       }
     },
-    [messages, addMessage, updateLastMessage, problemTitle, currentStep, problemDescription, problemState, getManifest, providerConfig, ollamaApiKey],
+    [messages, addMessage, updateLastMessage, problemTitle, currentStep, problemDescription, problemState, getManifest, providerConfig, ollamaApiKey, selectedModel],
   );
 
   if (!isOpen) return null;
@@ -505,7 +511,7 @@ export default function ChatDrawer() {
         {messages.length === 0 && (
           <div className="chat-empty">
             <div className="chat-empty-icon">AI</div>
-            <p>Ask Gemma anything about the algorithm you&apos;re visualizing.</p>
+            <p>Ask {selectedModel} via {selectedProviderLabel} anything about the algorithm you&apos;re visualizing.</p>
             <p className="chat-empty-hint">
               Use <strong>Attach step</strong> to share the current timestep, or select any visual element to attach it.
             </p>
