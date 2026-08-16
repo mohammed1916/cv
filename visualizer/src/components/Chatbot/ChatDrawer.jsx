@@ -66,6 +66,10 @@ export default function ChatDrawer() {
   const [historyOpen, setHistoryOpen] = useState(false);
   const [hoveredZone, setHoveredZone] = useState(null);
   const [providerConfig, setProviderConfig] = useState(getChatProvider);
+  const [ollamaApiKey, setOllamaApiKey] = useState(() => {
+    try { return window.sessionStorage.getItem('chat.ollama-api-key') || ''; } catch (err) { void err }
+    return '';
+  });
 
   const handleToggleSelectMode = useCallback(() => {
     const newMode = !selectMode;
@@ -112,7 +116,7 @@ export default function ChatDrawer() {
   const [contentScale, setContentScale] = useState(() => {
     try {
       const saved = Number(window.localStorage.getItem('chat.content-scale'));
-      if (saved >= 65 && saved <= 120) return saved;
+      if (saved >= 65 && saved <= 240) return saved;
     } catch (err) { void err }
     return 100;
   });
@@ -240,14 +244,19 @@ export default function ChatDrawer() {
         ];
 
         let accumulated = "";
-        for await (const delta of streamProviderChat(history, providerConfig)) {
+        for await (const delta of streamProviderChat(history, { ...providerConfig, ollamaApiKey })) {
           accumulated += delta;
           updateLastMessage({ text: accumulated });
         }
         updateLastMessage({ text: accumulated, isStreaming: false });
       } catch (err) {
+        const guidance = providerConfig.provider === 'ollama-cloud'
+          ? 'Set `OLLAMA_API_KEY` for the Vite server and use a model available through Ollama Cloud.'
+          : providerConfig.provider === 'gemini'
+            ? 'Set `GEMINI_API_KEY` for the Vite server and verify the selected Gemini model.'
+            : `Make sure Ollama is running with \`ollama serve\` and the model \`${providerConfig.model || 'gemma4:e2b'}\` is available.`;
         updateLastMessage({
-          text: `Error: ${err.message}\n\nMake sure Ollama is running with \`ollama serve\` and the model gemma4:e2b is available.`,
+          text: `Error: ${err.message}\n\n${guidance}`,
           isStreaming: false,
         });
       } finally {
@@ -255,7 +264,7 @@ export default function ChatDrawer() {
         setIsStreaming(false);
       }
     },
-    [messages, addMessage, updateLastMessage, problemTitle, currentStep, problemDescription, problemState, getManifest, providerConfig],
+    [messages, addMessage, updateLastMessage, problemTitle, currentStep, problemDescription, problemState, getManifest, providerConfig, ollamaApiKey],
   );
 
   if (!isOpen) return null;
@@ -364,7 +373,7 @@ export default function ChatDrawer() {
           <span className="chat-header-icon">AI</span>
           <div>
             <div className="chat-header-title">Algorithm Assistant <span className="chat-shortcut" title="Open or close chat with Alt+C">Alt+C</span></div>
-            <div className="chat-model-controls" data-chat-ignore>
+            <form className="chat-model-controls" data-chat-ignore onSubmit={(event) => event.preventDefault()}>
               <label>Provider
                 <select value={providerConfig.provider} onChange={(e) => { const provider = e.target.value; const model = provider === 'gemini' ? 'gemini-2.5-flash' : provider === 'ollama-cloud' ? 'gpt-oss:120b' : 'gemma4:e2b'; const next = { provider, model }; setProviderConfig(next); localStorage.setItem('chat.provider.v1', JSON.stringify(next)) }}>
                   <option value="ollama-local">Ollama Local</option><option value="ollama-cloud">Ollama Cloud</option><option value="gemini">Gemini</option>
@@ -373,7 +382,28 @@ export default function ChatDrawer() {
               <label>Model
                 <input value={providerConfig.model || ''} onChange={(e) => { const next = { ...providerConfig, model: e.target.value }; setProviderConfig(next); localStorage.setItem('chat.provider.v1', JSON.stringify(next)) }} placeholder="Model name" />
               </label>
-            </div>
+              {providerConfig.provider === 'ollama-cloud' && (
+                <label className="chat-cloud-key">Ollama API key
+                  <input
+                    type="password"
+                    value={ollamaApiKey}
+                    onChange={(e) => {
+                      const nextKey = e.target.value;
+                      setOllamaApiKey(nextKey);
+                      try {
+                        if (nextKey) window.sessionStorage.setItem('chat.ollama-api-key', nextKey);
+                        else window.sessionStorage.removeItem('chat.ollama-api-key');
+                      } catch (err) { void err }
+                    }}
+                    placeholder="ollama.com API key"
+                    autoComplete="off"
+                  />
+                </label>
+              )}
+            </form>
+            {providerConfig.provider === 'ollama-cloud' && (
+              <p className="chat-cloud-key-note">Kept only for this browser session; sent to the chat proxy and Ollama Cloud for your request, never saved by this app.</p>
+            )}
           </div>
         </div>
         <div className="chat-header-actions">
@@ -500,6 +530,7 @@ export default function ChatDrawer() {
         onChange={handleContentScale}
         label="AI scale"
         ariaLabel="AI assistant content scale"
+        max={240}
       />
     </div >
   );
