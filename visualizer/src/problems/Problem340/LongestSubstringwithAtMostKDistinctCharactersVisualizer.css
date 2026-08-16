@@ -110,9 +110,9 @@
 }
 
 .longest-substringwith-at-most-k-distinct-characters-example-btn.active {
-  background: #06b6d4;
-  border-color: #06b6d4;
-  color: white;
+  background: var(--primary-glow);
+  border-color: var(--primary);
+  color: var(--text);
 }
 
 .longest-substringwith-at-most-k-distinct-characters-examples {

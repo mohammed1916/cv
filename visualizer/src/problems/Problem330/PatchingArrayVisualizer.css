@@ -110,9 +110,9 @@
 }
 
 .patching-array-example-btn.active {
-  background: #14b8a6;
-  border-color: #14b8a6;
-  color: white;
+  background: var(--primary-glow);
+  border-color: var(--primary);
+  color: var(--text);
 }
 
 .patching-array-examples {

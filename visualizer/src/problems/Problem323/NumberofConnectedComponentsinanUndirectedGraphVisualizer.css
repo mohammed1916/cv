@@ -110,9 +110,9 @@
 }
 
 .numberof-connected-componentsinan-undirected-graph-example-btn.active {
-  background: #10b981;
-  border-color: #10b981;
-  color: white;
+  background: var(--primary-glow);
+  border-color: var(--primary);
+  color: var(--text);
 }
 
 .numberof-connected-componentsinan-undirected-graph-examples {

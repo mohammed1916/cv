@@ -110,9 +110,9 @@
 }
 
 .binary-tree-vertical-order-traversal-example-btn.active {
-  background: #10b981;
-  border-color: #10b981;
-  color: white;
+  background: var(--primary-glow);
+  border-color: var(--primary);
+  color: var(--text);
 }
 
 .binary-tree-vertical-order-traversal-examples {

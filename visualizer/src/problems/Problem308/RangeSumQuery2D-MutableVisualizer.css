@@ -110,9 +110,9 @@
 }
 
 .range-sum-query2-d--mutable-example-btn.active {
-  background: #06b6d4;
-  border-color: #06b6d4;
-  color: white;
+  background: var(--primary-glow);
+  border-color: var(--primary);
+  color: var(--text);
 }
 
 .range-sum-query2-d--mutable-examples {
