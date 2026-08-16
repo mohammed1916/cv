@@ -22,13 +22,15 @@ export default function ChatMessage({ message }) {
     // For assistant messages, render Markdown + LaTeX. For user messages, keep plain text
     if (!isUser) {
       return (
-        <ReactMarkdown
-          remarkPlugins={[remarkGfm, remarkMath]}
-          rehypePlugins={[rehypeKatex]}
-          linkTarget="_blank"
-        >
-          {text}
-        </ReactMarkdown>
+        <div className="chat-markdown">
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm, remarkMath]}
+            rehypePlugins={[rehypeKatex]}
+            linkTarget="_blank"
+          >
+            {text}
+          </ReactMarkdown>
+        </div>
       );
     }
 
