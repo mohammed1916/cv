@@ -20,45 +20,24 @@ import { createPortal } from 'react-dom'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# Single Number III Solution' },
-    { line: 2, text: '# Find two elements appearing once in array.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'def singleNumber(nums):' },
+    { line: 2, text: '    xor_all = 0' },
+    { line: 3, text: '    for value in nums: xor_all ^= value' },
+    { line: 4, text: '    low_bit = xor_all & -xor_all' },
+    { line: 5, text: '    first = second = 0' },
+    { line: 6, text: '    for value in nums:' },
+    { line: 7, text: '        if value & low_bit: first ^= value' },
+    { line: 8, text: '        else: second ^= value' },
+    { line: 9, text: '    return [first, second]' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Find two elements appearing once in array.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+    const nums = Array.isArray(input) ? input.map(Number) : []; let xorAll = 0
+    const steps = [{ phase: 'init', activeLine: 2, message: 'XOR duplicates away to retain the two unique values combined.', state: { xorAll, lowBit: null, first: 0, second: 0, output: null } }]
+    nums.forEach(value => { xorAll ^= value; steps.push({ phase: 'process', activeLine: 3, message: `xor_all ^= ${value} → ${xorAll}.`, state: { xorAll, lowBit: null, first: 0, second: 0, output: null } }) })
+    const lowBit = xorAll & -xorAll; let first = 0, second = 0; steps.push({ phase: 'process', activeLine: 4, message: `Lowest distinguishing bit is ${lowBit}.`, state: { xorAll, lowBit, first, second, output: null } })
+    nums.forEach(value => { if (value & lowBit) first ^= value; else second ^= value; steps.push({ phase: 'process', activeLine: value & lowBit ? 7 : 8, message: `Place ${value} in its bit partition.`, state: { xorAll, lowBit, first, second, output: null } }) })
+    steps.push({ phase: 'done', activeLine: 9, message: `Unique values are ${first} and ${second}.`, state: { xorAll, lowBit, first, second, output: [first, second] } }); return steps
 }
 
 export default function Problem260Visualizer() {
@@ -107,6 +86,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             className="problem260-visualizer-content"
                         >
                             <p>{step.message}</p>
+                            <div className="problem260-visualizer-xor">xor: {step.state.xorAll} · bit: {step.state.lowBit ?? '—'} · groups: {step.state.first}, {step.state.second}</div>
                         </motion.div>
                     </div>
                     <PlaybackControls

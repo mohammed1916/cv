@@ -21,44 +21,15 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
     { line: 1, text: '# Binary Tree Longest Consecutive Sequence Solution' },
-    { line: 2, text: '# Find longest consecutive sequence in tree.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 2, text: 'def longest_consecutive(level_order):' },
+    { line: 3, text: '    stack = [(0, 1)]' },
+    { line: 4, text: '    while stack: node, length = stack.pop()' },
+    { line: 5, text: '        push children with length + 1 only when child == value + 1' },
+    { line: 6, text: '    return best' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Find longest consecutive sequence in tree.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+ const values=Array.isArray(input?.[0])?input[0]:input||[],stack=values.length?[[0,1]]:[],steps=[],seen=[];let best=0;while(stack.length){const [index,length]=stack.pop(),value=values[index];if(value==null)continue;best=Math.max(best,length);seen.push(index);steps.push({activeLine:4,message:`Visit ${value}: consecutive chain length ${length}.`,state:{values,seen:[...seen],index,best}});for(const child of [2*index+1,2*index+2])if(values[child]!=null)stack.push([child,values[child]===value+1?length+1:1])}steps.push({activeLine:6,message:`Longest consecutive chain has length ${best}.`,state:{values,seen,best,done:true}});return steps
 }
 
 export default function Problem298Visualizer() {
@@ -106,7 +77,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             transition={{ duration: 0.3 }}
                             className="problem298-visualizer-content"
                         >
-                            <p>{step.message}</p>
+                            <p>{step.message}</p><div className="problem298-tree">{(step.state.values || []).map((value,index)=>value != null && <span key={index} className={step.state.index===index?'active':step.state.seen?.includes(index)?'seen':''}>{value}</span>)}</div><strong>best chain: {step.state.best ?? 0}</strong>
                         </motion.div>
                     </div>
                     <PlaybackControls
@@ -142,4 +113,3 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
         </>
     )
 }
-

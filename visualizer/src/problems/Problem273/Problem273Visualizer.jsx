@@ -20,45 +20,20 @@ import { createPortal } from 'react-dom'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# Integer to English Words Solution' },
-    { line: 2, text: '# Convert integer to English words.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'def numberToWords(num):' },
+    { line: 2, text: '    if num == 0: return "Zero"' },
+    { line: 3, text: '    groups = [(1_000_000_000, "Billion"), (1_000_000, "Million"), (1_000, "Thousand"), (1, "")]' },
+    { line: 4, text: '    for scale, name in groups:' },
+    { line: 5, text: '        if num >= scale: append_words_under_thousand(num // scale); num %= scale' },
+    { line: 6, text: '    return " ".join(words)' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Convert integer to English words.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+    const small = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen'], tens = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety']; const underThousand = n => n >= 100 ? `${small[Math.floor(n/100)]} Hundred${n%100 ? ` ${underThousand(n%100)}` : ''}` : n >= 20 ? `${tens[Math.floor(n/10)]}${n%10 ? ` ${small[n%10]}` : ''}` : small[n]
+    let value = Math.max(0, Math.floor(Number(Array.isArray(input) ? input[0] : input) || 0)); if (!value) return [{ phase: 'done', activeLine: 2, message: 'Zero is the only special case.', state: { groups: [], output: 'Zero' } }]
+    const groups = [[1_000_000_000,'Billion'],[1_000_000,'Million'],[1000,'Thousand'],[1,'']], words = [], steps = [{ phase: 'init', activeLine: 3, message: `Split ${value} into groups of three digits.`, state: { groups: [], output: null } }]
+    groups.forEach(([scale, name]) => { const part = Math.floor(value / scale); if (part) { const phrase = `${underThousand(part)}${name ? ` ${name}` : ''}`; words.push(phrase); value %= scale; steps.push({ phase: 'process', activeLine: 5, message: `Convert ${part} in the ${name || 'ones'} group: ${phrase}.`, state: { groups: [...words], output: null } }) } })
+    const output = words.join(' '); steps.push({ phase: 'done', activeLine: 6, message: output, state: { groups: words, output } }); return steps
 }
 
 export default function Problem273Visualizer() {
@@ -107,6 +82,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             className="problem273-visualizer-content"
                         >
                             <p>{step.message}</p>
+                            <div className="problem273-visualizer-groups">{(step.state.groups || []).map(group => <span key={group}>{group}</span>)}</div>
                         </motion.div>
                     </div>
                     <PlaybackControls

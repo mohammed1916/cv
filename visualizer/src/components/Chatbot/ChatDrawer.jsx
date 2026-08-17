@@ -22,6 +22,17 @@ const LAYOUT_ZONES = {
   bottomRight: { name: 'Chat / Hints', label: 'CHAT', row: 1, col: 2 },
 };
 
+// Keep the embedded tutor focused. This is deliberately narrow: normal coding
+// questions are still sent to the selected model, while clear lifestyle/email
+// requests get a useful local redirect without spending the user's API quota.
+function isClearlyOffTopic(text = '') {
+  const value = text.toLowerCase();
+  return /\b(hi|dear)\s+[a-z]/.test(value)
+    && /\b(regards|sincerely|thank you for your time|follow up regarding|interview process|managerial round)\b/.test(value);
+}
+
+const OFF_TOPIC_REPLY = "I’m the algorithm tutor for this visualizer, so I can help with the selected problem, its code, complexity, or its animation. For that email, a general writing assistant would be a better fit.";
+
 /**
  * Formats the current visualizer step as a readable context string
  * to inject into the chat message before the user's question.
@@ -182,6 +193,12 @@ export default function ChatDrawer() {
     async ({ text, images, contextLabel, contextData }) => {
       if (isStreamingRef.current) return;
 
+      if (isClearlyOffTopic(text)) {
+        addMessage({ id: Date.now(), role: "user", text, images, contextLabel });
+        addMessage({ id: Date.now() + 1, role: "assistant", text: OFF_TOPIC_REPLY, isStreaming: false });
+        return;
+      }
+
       // Build context block to prepend to the user's question
       let contextBlock = "";
       const wantsVisualization = /\b(visuali[sz]e|show|annotat|highlight|animate)\b/i.test(text || "");
@@ -246,7 +263,7 @@ export default function ChatDrawer() {
         const history = [
           {
             role: "system",
-            text: `You are a helpful coding assistant embedded in a competitive programming visualizer. ${problemContext}${stepContext}${descContext}${solutionContext}${manifestText}${stepStateText}${problemStateText}${assistantInstructions}\n\nAnswer questions assuming this problem context. When the user asks about "why" or "how" something works, answer in the context of this problem's algorithm. When the user shares visualizer step data, explain what is happening in the algorithm at that step in clear, concise terms. When asked about code or data structures, be precise and educational.`,
+            text: `You are a helpful coding assistant embedded in a competitive programming visualizer. ${problemContext}${stepContext}${descContext}${solutionContext}${manifestText}${stepStateText}${problemStateText}${assistantInstructions}\n\nAnswer questions only about the selected algorithm, its implementation, complexity, debugging, or visualization. If a request is unrelated (for example email writing, personal messages, interview follow-ups, or general life advice), briefly state that you are the algorithm tutor and redirect the user to ask about the current problem. When the user asks about "why" or "how" something works, answer in the context of this problem's algorithm. When the user shares visualizer step data, explain what is happening in the algorithm at that step in clear, concise terms. When asked about code or data structures, be precise and educational.`,
           },
           // Previous messages (last 10 pairs for context window)
           ...messages.slice(-20).map((m) => ({ role: m.role, text: m.text, images: m.images })),

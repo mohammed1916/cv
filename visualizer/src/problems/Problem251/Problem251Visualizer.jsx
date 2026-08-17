@@ -20,45 +20,19 @@ import { createPortal } from 'react-dom'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# Flatten 2D Vector Solution' },
-    { line: 2, text: '# Design an iterator to flatten a 2D vector on the fly.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'class Vector2D:' },
+    { line: 2, text: '    def __init__(self, vector): self.vector = vector; self.row = self.col = 0' },
+    { line: 3, text: '    def advance(self):' },
+    { line: 4, text: '        while self.row < len(self.vector) and self.col == len(self.vector[self.row]): self.row += 1; self.col = 0' },
+    { line: 5, text: '    def next(self):' },
+    { line: 6, text: '        self.advance(); value = self.vector[self.row][self.col]; self.col += 1; return value' },
+    { line: 7, text: '    def hasNext(self): self.advance(); return self.row < len(self.vector)' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Design an iterator to flatten a 2D vector on the fly.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+    const vector = (Array.isArray(input) ? input : []).filter(Array.isArray), output = [], steps = [{ phase: 'init', activeLine: 2, message: 'Start at row 0, column 0.', state: { vector, row: 0, col: 0, output: [], value: null } }]
+    vector.forEach((row, r) => row.forEach((value, c) => { output.push(value); steps.push({ phase: 'process', activeLine: 6, message: `Emit ${value} at [${r}][${c}].`, state: { vector, row: r, col: c, output: [...output], value } }) }))
+    steps.push({ phase: 'done', activeLine: 7, message: `Flattened output: [${output.join(', ')}].`, state: { vector, row: vector.length, col: 0, output, value: null } }); return steps
 }
 
 export default function Problem251Visualizer() {
@@ -107,6 +81,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             className="problem251-visualizer-content"
                         >
                             <p>{step.message}</p>
+                            <div className="problem251-visualizer-output">output: {(step.state.output || []).join(', ') || '—'}</div>
                         </motion.div>
                     </div>
                     <PlaybackControls

@@ -20,45 +20,21 @@ import PatternLegend from '../../components/PatternLegend'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# Walls and Gates Solution' },
-    { line: 2, text: '# Fill grid with distance to gate.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'def wallsAndGates(rooms):' },
+    { line: 2, text: '    queue = deque(all_gate_positions(rooms))' },
+    { line: 3, text: '    while queue:' },
+    { line: 4, text: '        row, col = queue.popleft()' },
+    { line: 5, text: '        for next_row, next_col in four_neighbors(row, col):' },
+    { line: 6, text: '            if rooms[next_row][next_col] == INF:' },
+    { line: 7, text: '                rooms[next_row][next_col] = rooms[row][col] + 1' },
+    { line: 8, text: '                queue.append((next_row, next_col))' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Fill grid with distance to gate.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+    const rooms = (Array.isArray(input?.[0]) ? input[0] : input || []).map(row => [...row]), queue = []; rooms.forEach((row, r) => row.forEach((value, c) => value === 0 && queue.push([r, c])))
+    const steps = [{ phase: 'init', activeLine: 2, message: `Start BFS from ${queue.length} gate(s).`, state: { rooms: rooms.map(row => [...row]), queue: [...queue], active: null, output: null } }]
+    for (let head = 0; head < queue.length; head += 1) { const [row, col] = queue[head]; for (const [nr, nc] of [[row-1,col],[row+1,col],[row,col-1],[row,col+1]]) if (rooms[nr]?.[nc] === 2147483647) { rooms[nr][nc] = rooms[row][col] + 1; queue.push([nr,nc]); steps.push({ phase: 'process', activeLine: 7, message: `Set (${nr}, ${nc}) to distance ${rooms[nr][nc]}.`, state: { rooms: rooms.map(item => [...item]), queue: queue.slice(head + 1), active: [nr,nc], output: null } }) } }
+    steps.push({ phase: 'done', activeLine: 8, message: 'Every reachable room now has its nearest-gate distance.', state: { rooms, queue: [], active: null, output: rooms } }); return steps
 }
 
 export default function Problem286Visualizer() {
@@ -103,6 +79,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                     className="problem286-visualizer-content"
                 >
                     <p>{step.message}</p>
+                    <div className="problem286-visualizer-grid">{(step.state.rooms || []).map((row, r) => <span key={r}>[{row.join(', ')}]</span>)}</div>
                 </motion.div>
             </div>
         </div>
@@ -157,4 +134,3 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
         </div>
     )
 }
-

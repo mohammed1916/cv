@@ -21,44 +21,16 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
     { line: 1, text: '# Expression Add Operators Solution' },
-    { line: 2, text: '# Find all expressions evaluating to target.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 2, text: 'def add_operators(digits, target):' },
+    { line: 3, text: '    def dfs(index, expression, total, previous):' },
+    { line: 4, text: '        if index == len(digits) and total == target: result.append(expression)' },
+    { line: 5, text: '        # extend with +, -, or * while tracking precedence' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Find all expressions evaluating to target.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+ const digits=String(input?.[0]??''), target=Number(input?.[1]), output=[], steps=[]
+ const dfs=(i,expr,total,last)=>{if(output.length>20)return;if(i===digits.length){if(total===target){output.push(expr);steps.push({activeLine:4,message:`${expr} = ${target}; keep this expression.`,state:{digits,target,expr,output:[...output]}})}return}for(let end=i;end<digits.length;end++){if(end>i&&digits[i]==='0')break;const token=digits.slice(i,end+1),n=Number(token);if(!i)dfs(end+1,token,n,n);else{steps.push({activeLine:5,message:`Try ${expr}+${token}.`,state:{digits,target,expr:`${expr}+${token}`,output:[...output]}});dfs(end+1,`${expr}+${token}`,total+n,n);dfs(end+1,`${expr}-${token}`,total-n,-n);dfs(end+1,`${expr}*${token}`,total-last+last*n,last*n)}}}
+ steps.push({activeLine:2,message:`Build expressions from ${digits} for target ${target}.`,state:{digits,target,expr:'',output:[]}});dfs(0,'',0,0);steps.push({activeLine:4,message:`Found ${output.length} expression(s).`,state:{digits,target,expr:'',output}});return steps
 }
 
 export default function Problem282Visualizer() {
@@ -142,4 +114,3 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
         </>
     )
 }
-

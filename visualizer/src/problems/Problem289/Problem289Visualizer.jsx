@@ -20,16 +20,27 @@ import { createPortal } from 'react-dom'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# Game of Life Solution' },
-    { line: 2, text: '# Simulate game of life cellular automaton.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'def gameOfLife(board):' },
+    { line: 2, text: '    next_board = copy(board)' },
+    { line: 3, text: '    for row, col in every_cell(board):' },
+    { line: 4, text: '        live_neighbors = count_live_neighbors(board, row, col)' },
+    { line: 5, text: '        next_board[row][col] = lives_next(board[row][col], live_neighbors)' },
+    { line: 6, text: '    board[:] = next_board' },
 ]
 
-function generateSteps(board) {
+function generateSteps(input) {
+    const board = Array.isArray(input?.[0]) && Array.isArray(input[0]?.[0]) ? input[0] : input
     const steps = []
-    if (!board || board.length === 0) return steps
+    if (!Array.isArray(board) || board.length === 0 || !Array.isArray(board[0])) {
+        return [{
+            phase: 'init',
+            activeLine: 1,
+            message: 'Enter a non-empty 0/1 grid to simulate one Game of Life generation.',
+            board: [],
+            newBoard: null,
+            currentCell: null,
+        }]
+    }
 
     const rows = board.length
     const cols = board[0]?.length || 0
@@ -76,7 +87,7 @@ function generateSteps(board) {
 
             steps.push({
                 phase: 'evaluate',
-                activeLine: 3,
+                activeLine: 5,
                 message: `Cell [${i}][${j}]: ${liveNeighbors} neighbors, ${wasAlive ? 'alive' : 'dead'} -> ${willLive ? 'LIVES' : 'dies'}`,
                 board: originalBoard,
                 newBoard: newBoard,
@@ -92,7 +103,7 @@ function generateSteps(board) {
 
     steps.push({
         phase: 'done',
-        activeLine: 5,
+        activeLine: 6,
         message: `Generation complete: ${cellsChanged} cells changed, ${aliveCount} alive`,
         board: newBoard,
         newBoard: null,
@@ -118,7 +129,13 @@ export default function Problem289Visualizer() {
     const example = examples[currentExample] || { input: [], output: [] }
 const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.stringify(examples[i].input)); setCurrentStep(0); }, [setCurrentStep]);
       const steps = useMemo(() => generateSteps(input), [input])
-    const step = steps[currentStep] || steps[0]
+    const step = steps[currentStep] || steps[0] || {
+      message: 'No visualization step is available for this input.',
+      activeLine: 1,
+      board: [],
+      newBoard: null,
+      currentCell: null,
+    }
 
     const { isPlaying, setIsPlaying, canNext, canPrev } = usePlaybackState(steps, currentStep, setCurrentStep)
     const { pattern, togglePattern } = usePatternOverlay(false)
@@ -182,4 +199,3 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
         </>
     )
 }
-

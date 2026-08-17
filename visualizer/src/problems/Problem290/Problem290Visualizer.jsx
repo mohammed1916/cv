@@ -20,44 +20,30 @@ import { createPortal } from 'react-dom'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# Word Pattern Solution' },
-    { line: 2, text: '# Check if word sequence matches pattern.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'def wordPattern(pattern, sentence):' },
+    { line: 2, text: '    words = sentence.split()' },
+    { line: 3, text: '    if len(pattern) != len(words): return False' },
+    { line: 4, text: '    forward, reverse = {}, {}' },
+    { line: 5, text: '    for char, word in zip(pattern, words):' },
+    { line: 6, text: '        if forward.get(char, word) != word: return False' },
+    { line: 7, text: '        if reverse.get(word, char) != char: return False' },
+    { line: 8, text: '        forward[char] = word; reverse[word] = char' },
+    { line: 9, text: '    return True' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Check if word sequence matches pattern.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
+    const [pattern = '', sentence = ''] = Array.isArray(input) ? input : ['', '']
+    const words = String(sentence).trim().split(/\s+/).filter(Boolean)
+    const forward = {}, reverse = {}
+    const steps = [{ phase: 'init', activeLine: 2, message: `Compare pattern “${pattern}” with ${words.length} word(s).`, state: { pattern, words, forward, reverse, output: null } }]
+    if (pattern.length !== words.length) return [...steps, { phase: 'done', activeLine: 3, message: 'Lengths differ, so no one-to-one pattern is possible.', state: { pattern, words, forward, reverse, output: false } }]
+    for (let index = 0; index < pattern.length; index += 1) {
+      const char = pattern[index], word = words[index]
+      if ((forward[char] && forward[char] !== word) || (reverse[word] && reverse[word] !== char)) return [...steps, { phase: 'done', activeLine: forward[char] ? 6 : 7, message: `Conflict at ${char} ↔ ${word}; the mapping is not bijective.`, state: { pattern, words, forward, reverse, index, output: false } }]
+      forward[char] = word; reverse[word] = char
+      steps.push({ phase: 'process', activeLine: 8, message: `Map ${char} ↔ ${word}.`, state: { pattern, words, forward: { ...forward }, reverse: { ...reverse }, index, output: null } })
+    }
+    steps.push({ phase: 'done', activeLine: 9, message: 'Every character and word has one partner.', state: { pattern, words, forward, reverse, output: true } })
     return steps
 }
 
@@ -107,6 +93,10 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             className="problem290-visualizer-content"
                         >
                             <p>{step.message}</p>
+                            <div className="problem290-visualizer-mapping">
+                              {Object.entries(step.state.forward || {}).map(([char, word]) => <span key={char}><b>{char}</b> ↔ {word}</span>)}
+                            </div>
+                            {step.state.output !== null && <strong>matches: {String(step.state.output)}</strong>}
                         </motion.div>
                     </div>
                     <PlaybackControls
@@ -142,4 +132,3 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
         </>
     )
 }
-

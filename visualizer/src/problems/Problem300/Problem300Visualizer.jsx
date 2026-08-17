@@ -12,45 +12,20 @@ import './Problem300Visualizer.css'
 
 // ─── Solution code ────────────────────────────────────────────────────────
 const SOLUTION_CODE = [
-    { line: 1, text: '# Longest Increasing Subsequence Solution' },
-    { line: 2, text: '# Find length of longest increasing subsequence.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'def lengthOfLIS(nums):' },
+    { line: 2, text: '    tails = []' },
+    { line: 3, text: '    for value in nums:' },
+    { line: 4, text: '        index = bisect_left(tails, value)' },
+    { line: 5, text: '        if index == len(tails): tails.append(value)' },
+    { line: 6, text: '        else: tails[index] = value' },
+    { line: 7, text: '    return len(tails)' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Find length of longest increasing subsequence.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+    const nums = Array.isArray(input) ? input.map(Number) : [], tails = []
+    const steps = [{ phase: 'init', activeLine: 2, message: 'Maintain the smallest possible tail for every subsequence length.', state: { nums, tails: [], index: null, output: null } }]
+    nums.forEach((value, index) => { let low = 0, high = tails.length; while (low < high) { const middle = Math.floor((low + high) / 2); if (tails[middle] < value) low = middle + 1; else high = middle } if (low === tails.length) tails.push(value); else tails[low] = value; steps.push({ phase: 'process', activeLine: low === tails.length - 1 ? 5 : 6, message: `Place ${value} at tail position ${low}.`, state: { nums, tails: [...tails], index, output: null } }) })
+    steps.push({ phase: 'done', activeLine: 7, message: `LIS length is ${tails.length}.`, state: { nums, tails, index: null, output: tails.length } }); return steps
 }
 
 export default function Problem300Visualizer() {
@@ -75,6 +50,7 @@ export default function Problem300Visualizer() {
                     className="problem300-visualizer-content"
                 >
                     <p>{step.message}</p>
+                    <div className="problem300-visualizer-tails">tails: {(step.state.tails || []).join(', ') || 'empty'}</div>
                 </motion.div>
             </div>
         </div>
@@ -133,4 +109,3 @@ export default function Problem300Visualizer() {
         </div>
     )
 }
-

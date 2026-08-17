@@ -20,45 +20,22 @@ import PatternLegend from '../../components/PatternLegend'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# Alien Dictionary Solution' },
-    { line: 2, text: '# Derive alien alphabet order from word list.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'def alienOrder(words):' },
+    { line: 2, text: '    graph = {char: set() for word in words for char in word}' },
+    { line: 3, text: '    for first, second in zip(words, words[1:]):' },
+    { line: 4, text: '        for left, right in zip(first, second):' },
+    { line: 5, text: '            if left != right: graph[left].add(right); break' },
+    { line: 6, text: '    indegree = count_incoming_edges(graph)' },
+    { line: 7, text: '    queue = zero_indegree_nodes(indegree)' },
+    { line: 8, text: '    return topological_bfs(graph, indegree, queue)' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Derive alien alphabet order from word list.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+    const words = Array.isArray(input) ? input.map(String) : [], graph = {}, indegree = {}; words.forEach(word => [...word].forEach(char => { graph[char] ||= new Set(); indegree[char] ||= 0 }))
+    const steps = [{ phase: 'init', activeLine: 2, message: `Collect ${Object.keys(graph).length} alphabet symbols.`, state: { graph: {}, indegree: { ...indegree }, order: '', output: null } }]
+    for (let index = 1; index < words.length; index += 1) { const first = words[index - 1], second = words[index]; if (first.startsWith(second) && first.length > second.length) return [...steps, { phase: 'done', activeLine: 3, message: 'A longer word cannot precede its own prefix.', state: { graph: {}, indegree, order: '', output: '' } }]; for (let pos = 0; pos < Math.min(first.length, second.length); pos += 1) if (first[pos] !== second[pos]) { const left = first[pos], right = second[pos]; if (!graph[left].has(right)) { graph[left].add(right); indegree[right] += 1; steps.push({ phase: 'process', activeLine: 5, message: `${left} must precede ${right}.`, state: { graph: Object.fromEntries(Object.entries(graph).map(([k,v])=>[k,[...v]])), indegree: { ...indegree }, order: '', output: null } }) } break } }
+    const queue = Object.keys(indegree).filter(char => indegree[char] === 0), order = []; while (queue.length) { const char = queue.shift(); order.push(char); graph[char].forEach(next => { indegree[next] -= 1; if (!indegree[next]) queue.push(next) }); steps.push({ phase: 'process', activeLine: 8, message: `Emit ${char} from the zero-indegree queue.`, state: { graph: Object.fromEntries(Object.entries(graph).map(([k,v])=>[k,[...v]])), indegree: { ...indegree }, order: order.join(''), output: null } }) }
+    const output = order.length === Object.keys(graph).length ? order.join('') : ''; steps.push({ phase: 'done', activeLine: 8, message: output ? `Alien order: ${output}.` : 'A cycle prevents an alphabet order.', state: { graph: Object.fromEntries(Object.entries(graph).map(([k,v])=>[k,[...v]])), indegree, order: output, output } }); return steps
 }
 
 export default function Problem269Visualizer() {
@@ -103,6 +80,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                     className="problem269-visualizer-content"
                 >
                     <p>{step.message}</p>
+                    <div className="problem269-visualizer-order">order: {step.state.order || '—'}</div>
                 </motion.div>
             </div>
         </div>

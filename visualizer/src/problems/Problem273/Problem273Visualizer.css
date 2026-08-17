@@ -24,6 +24,7 @@
     text-align: center;
     font-family: 'Courier New', monospace;
 }
+.problem273-visualizer-groups { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }.problem273-visualizer-groups span { padding:7px 9px; border:1px solid var(--border); border-radius:7px; background:var(--surface-1); }
 
 .problem273-visualizer-item {
     position: relative;

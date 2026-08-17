@@ -20,45 +20,22 @@ import { createPortal } from 'react-dom'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# Trips and Users Solution' },
-    { line: 2, text: '# Find SQL join of trips and users.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'def cancellationRate(trips, users):' },
+    { line: 2, text: '    banned = {user.id for user in users if user.banned}' },
+    { line: 3, text: '    daily = defaultdict(lambda: [0, 0])' },
+    { line: 4, text: '    for trip in trips:' },
+    { line: 5, text: '        if trip.client_id in banned or trip.driver_id in banned: continue' },
+    { line: 6, text: '        daily[trip.day][0] += 1' },
+    { line: 7, text: '        daily[trip.day][1] += trip.status != "completed"' },
+    { line: 8, text: '    return {day: cancelled / total for day, (total, cancelled) in daily.items()}' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Find SQL join of trips and users.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+    const [trips = [], users = []] = Array.isArray(input) ? input : []
+    const banned = new Set((users || []).filter(user => user.banned === 'Yes' || user.banned === true).map(user => user.id ?? user.users_id))
+    const daily = {}, steps = [{ phase: 'init', activeLine: 2, message: `Load ${banned.size} banned user(s).`, state: { banned: [...banned], daily: {}, output: null } }]
+    ;(trips || []).forEach((trip, index) => { const client = trip.client_id ?? trip.clientId, driver = trip.driver_id ?? trip.driverId, day = trip.request_at ?? trip.day, cancelled = (trip.status || '').toLowerCase() !== 'completed'; if (banned.has(client) || banned.has(driver)) { steps.push({ phase: 'process', activeLine: 5, message: `Skip trip ${index}: it involves a banned user.`, state: { banned: [...banned], daily: { ...daily }, output: null } }); return } const entry = daily[day] ||= { total: 0, cancelled: 0 }; entry.total += 1; entry.cancelled += Number(cancelled); steps.push({ phase: 'process', activeLine: 7, message: `Count ${cancelled ? 'a cancellation' : 'a completed trip'} on ${day}.`, state: { banned: [...banned], daily: JSON.parse(JSON.stringify(daily)), output: null } }) })
+    const output = Object.fromEntries(Object.entries(daily).map(([day, value]) => [day, value.total ? +(value.cancelled / value.total).toFixed(2) : 0])); steps.push({ phase: 'done', activeLine: 8, message: 'Compute each day’s cancellation rate.', state: { banned: [...banned], daily, output } }); return steps
 }
 
 export default function Problem262Visualizer() {
@@ -107,6 +84,8 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             className="problem262-visualizer-content"
                         >
                             <p>{step.message}</p>
+                            <div className="problem262-visualizer-daily">{Object.entries(step.state.daily || {}).map(([day, value]) => <span key={day}>{day}: {value.cancelled}/{value.total}</span>)}</div>
+                            {step.state.output !== null && <strong>{JSON.stringify(step.state.output)}</strong>}
                         </motion.div>
                     </div>
                     <PlaybackControls

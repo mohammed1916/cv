@@ -20,45 +20,18 @@ import { createPortal } from 'react-dom'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# Add Digits Solution' },
-    { line: 2, text: '# Keep summing digits until single digit.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'def addDigits(num):' },
+    { line: 2, text: '    while num >= 10:' },
+    { line: 3, text: '        total = 0' },
+    { line: 4, text: '        for digit in str(num): total += int(digit)' },
+    { line: 5, text: '        num = total' },
+    { line: 6, text: '    return num' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Keep summing digits until single digit.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+    let value = Math.abs(Math.floor(Number(Array.isArray(input) ? input[0] : input) || 0)); const steps = [{ phase: 'init', activeLine: 1, message: `Reduce ${value} by repeated digit sums.`, state: { value, digits: String(value).split(''), output: null } }]
+    while (value >= 10) { const digits = String(value).split('').map(Number), total = digits.reduce((sum, digit) => sum + digit, 0); steps.push({ phase: 'process', activeLine: 5, message: `${digits.join(' + ')} = ${total}.`, state: { value: total, digits, output: null } }); value = total }
+    steps.push({ phase: 'done', activeLine: 6, message: `Single-digit result: ${value}.`, state: { value, digits: [value], output: value } }); return steps
 }
 
 export default function Problem258Visualizer() {
@@ -107,6 +80,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             className="problem258-visualizer-content"
                         >
                             <p>{step.message}</p>
+                            <div className="problem258-visualizer-digits">{(step.state.digits || []).join(' + ')} = {step.state.value}</div>
                         </motion.div>
                     </div>
                     <PlaybackControls

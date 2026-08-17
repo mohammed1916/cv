@@ -32,6 +32,7 @@
     text-align: center;
     font-family: 'Courier New', monospace;
 }
+.problem286-visualizer-grid { display:flex; flex-direction:column; gap:5px; margin-top:12px; }.problem286-visualizer-grid span { padding:6px 9px; border:1px solid var(--border); border-radius:6px; background:var(--surface-1); }
 
 .problem286-visualizer-item {
     position: relative;

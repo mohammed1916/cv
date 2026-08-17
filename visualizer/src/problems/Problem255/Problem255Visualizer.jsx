@@ -20,45 +20,21 @@ import { createPortal } from 'react-dom'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# Verify Preorder Serialization of a BST Solution' },
-    { line: 2, text: '# Verify if preorder serialization of BST is valid.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'def verifyPreorder(preorder):' },
+    { line: 2, text: '    lower_bound = float("-inf"); stack = []' },
+    { line: 3, text: '    for value in preorder:' },
+    { line: 4, text: '        if value < lower_bound: return False' },
+    { line: 5, text: '        while stack and value > stack[-1]:' },
+    { line: 6, text: '            lower_bound = stack.pop()' },
+    { line: 7, text: '        stack.append(value)' },
+    { line: 8, text: '    return True' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Verify if preorder serialization of BST is valid.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+    const values = (Array.isArray(input) ? input : []).map(Number), stack = []; let lowerBound = -Infinity
+    const steps = [{ phase: 'init', activeLine: 2, message: 'Start with no lower bound and an empty ancestor stack.', state: { stack: [], lowerBound, output: null } }]
+    for (let index = 0; index < values.length; index += 1) { const value = values[index]; if (value < lowerBound) return [...steps, { phase: 'done', activeLine: 4, message: `${value} is below the required lower bound ${lowerBound}.`, state: { stack: [...stack], lowerBound, index, value, output: false } }]; while (stack.length && value > stack.at(-1)) lowerBound = stack.pop(); stack.push(value); steps.push({ phase: 'process', activeLine: 7, message: `Place ${value}; its allowed lower bound is ${lowerBound}.`, state: { stack: [...stack], lowerBound, index, value, output: null } }) }
+    steps.push({ phase: 'done', activeLine: 8, message: 'Every value respects its ancestor bounds.', state: { stack, lowerBound, output: true } }); return steps
 }
 
 export default function Problem255Visualizer() {
@@ -107,6 +83,8 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             className="problem255-visualizer-content"
                         >
                             <p>{step.message}</p>
+                            <div className="problem255-visualizer-stack">stack: {(step.state.stack || []).join(' → ') || 'empty'} · lower bound: {step.state.lowerBound}</div>
+                            {step.state.output !== null && <strong>valid preorder: {String(step.state.output)}</strong>}
                         </motion.div>
                     </div>
                     <PlaybackControls

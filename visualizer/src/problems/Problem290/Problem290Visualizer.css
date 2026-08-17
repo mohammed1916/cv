@@ -25,6 +25,9 @@
     font-family: 'Courier New', monospace;
 }
 
+.problem290-visualizer-mapping { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.problem290-visualizer-mapping span { padding: 7px 10px; border: 1px solid var(--border); border-radius: 7px; background: var(--surface-1); color: var(--text-main); }
+
 .problem290-visualizer-item {
     position: relative;
     display: inline-flex;

@@ -21,44 +21,14 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
     { line: 1, text: '# Flip Game II Solution' },
-    { line: 2, text: '# Determine if first player can win.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 2, text: 'def can_win(state, memo={}):' },
+    { line: 3, text: '    for i in range(len(state) - 1):' },
+    { line: 4, text: '        if state[i:i+2] == "++" and not can_win(state[:i]+"--"+state[i+2:]): return True' },
+    { line: 5, text: '    return False' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Determine if first player can win.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+ const state=String(Array.isArray(input)?input[0]??'':input??''),memo=new Map(),steps=[];const win=s=>{if(memo.has(s))return memo.get(s);for(let i=0;i<s.length-1;i++)if(s.slice(i,i+2)==='++'){const next=s.slice(0,i)+'--'+s.slice(i+2);steps.push({activeLine:4,message:`Flip positions ${i} and ${i+1}: ${s} → ${next}.`,state:{state:s,next,i}});if(!win(next)){memo.set(s,true);return true}}memo.set(s,false);return false};const result=win(state);steps.push({activeLine:5,message:result?'A move can force a win.':'Every move lets the opponent win.',state:{state,result,done:true}});return steps
 }
 
 export default function Problem294Visualizer() {
@@ -106,7 +76,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             transition={{ duration: 0.3 }}
                             className="problem294-visualizer-content"
                         >
-                            <p>{step.message}</p>
+                            <p>{step.message}</p><div className="problem294-board">{[...(step.state.next || step.state.state || '')].map((value,index)=><span key={index} className={value==='+'?'on':'off'}>{value}</span>)}</div>{step.state.done && <strong>{step.state.result ? 'Winning state' : 'Losing state'}</strong>}
                         </motion.div>
                     </div>
                     <PlaybackControls
@@ -142,4 +112,3 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
         </>
     )
 }
-

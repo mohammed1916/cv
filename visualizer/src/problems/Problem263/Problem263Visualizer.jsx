@@ -20,44 +20,20 @@ import { createPortal } from 'react-dom'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# Ugly Number Solution' },
-    { line: 2, text: '# Check if number only has factors 2, 3, 5.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'def isUgly(n):' },
+    { line: 2, text: '    if n <= 0: return False' },
+    { line: 3, text: '    for factor in (2, 3, 5):' },
+    { line: 4, text: '        while n % factor == 0:' },
+    { line: 5, text: '            n //= factor' },
+    { line: 6, text: '    return n == 1' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Check if number only has factors 2, 3, 5.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
+    let value = Number(Array.isArray(input) ? input[0] : input)
+    const steps = [{ phase: 'init', activeLine: 1, message: `Try reducing ${value} by 2, 3, and 5.`, state: { value, factor: null, output: null } }]
+    if (!Number.isInteger(value) || value <= 0) return [...steps, { phase: 'done', activeLine: 2, message: 'Only positive integers can be ugly.', state: { value, factor: null, output: false } }]
+    for (const factor of [2, 3, 5]) while (value % factor === 0) { value /= factor; steps.push({ phase: 'process', activeLine: 5, message: `Divide by ${factor}; remainder is now ${value}.`, state: { value, factor, output: null } }) }
+    steps.push({ phase: 'done', activeLine: 6, message: value === 1 ? 'All prime factors were 2, 3, or 5.' : `${value} is a remaining unsupported prime factor.`, state: { value, factor: null, output: value === 1 } })
     return steps
 }
 
@@ -107,6 +83,8 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             className="problem263-visualizer-content"
                         >
                             <p>{step.message}</p>
+                            <div className="problem263-visualizer-factor-state">current value: <b>{step.state.value}</b>{step.state.factor && ` ÷ ${step.state.factor}`}</div>
+                            {step.state.output !== null && <strong>ugly: {String(step.state.output)}</strong>}
                         </motion.div>
                     </div>
                     <PlaybackControls

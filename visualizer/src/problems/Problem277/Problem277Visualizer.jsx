@@ -20,45 +20,21 @@ import { createPortal } from 'react-dom'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# Find the Celebrity Solution' },
-    { line: 2, text: '# Find celebrity everyone knows.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'def findCelebrity(n):' },
+    { line: 2, text: '    candidate = 0' },
+    { line: 3, text: '    for person in range(1, n):' },
+    { line: 4, text: '        if knows(candidate, person): candidate = person' },
+    { line: 5, text: '    for person in range(n):' },
+    { line: 6, text: '        if person != candidate and (knows(candidate, person) or not knows(person, candidate)): return -1' },
+    { line: 7, text: '    return candidate' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Find celebrity everyone knows.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+    const matrix = Array.isArray(input?.[0]) ? input[0] : (Array.isArray(input) ? input : []), n = matrix.length; let candidate = 0
+    const steps = [{ phase: 'init', activeLine: 2, message: `Start candidate elimination across ${n} people.`, state: { candidate, check: null, output: null } }]
+    for (let person = 1; person < n; person += 1) { if (matrix[candidate]?.[person]) candidate = person; steps.push({ phase: 'process', activeLine: 4, message: `Compare candidate with ${person}; survivor is ${candidate}.`, state: { candidate, check: person, output: null } }) }
+    for (let person = 0; person < n; person += 1) if (person !== candidate && (matrix[candidate]?.[person] || !matrix[person]?.[candidate])) return [...steps, { phase: 'done', activeLine: 6, message: `${candidate} fails verification against ${person}.`, state: { candidate, check: person, output: -1 } }]
+    steps.push({ phase: 'done', activeLine: 7, message: n ? `${candidate} is known by everyone and knows nobody.` : 'No people supplied.', state: { candidate, check: null, output: n ? candidate : -1 } }); return steps
 }
 
 export default function Problem277Visualizer() {
@@ -107,6 +83,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             className="problem277-visualizer-content"
                         >
                             <p>{step.message}</p>
+                            <div className="problem277-visualizer-candidate">candidate: {step.state.candidate}{step.state.check !== null && ` · checking ${step.state.check}`}</div>
                         </motion.div>
                     </div>
                     <PlaybackControls

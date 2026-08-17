@@ -20,45 +20,21 @@ import PatternLegend from '../../components/PatternLegend'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# Meeting Rooms II Solution' },
-    { line: 2, text: '# Find minimum conference rooms needed for all meetings.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'def minMeetingRooms(intervals):' },
+    { line: 2, text: '    intervals.sort(key=lambda interval: interval[0])' },
+    { line: 3, text: '    room_ends = []' },
+    { line: 4, text: '    for start, end in intervals:' },
+    { line: 5, text: '        if room_ends and room_ends[0] <= start: heappop(room_ends)' },
+    { line: 6, text: '        heappush(room_ends, end)' },
+    { line: 7, text: '    return len(room_ends)' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Find minimum conference rooms needed for all meetings.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+    const intervals = (Array.isArray(input) ? input : []).filter(item => Array.isArray(item) && item.length >= 2).map(([start, end]) => [Number(start), Number(end)]).sort((a, b) => a[0] - b[0])
+    const ends = [], steps = [{ phase: 'init', activeLine: 2, message: 'Sort meetings by start time.', state: { intervals, ends: [], index: null, peak: 0, output: null } }]
+    let peak = 0
+    intervals.forEach(([start, end], index) => { while (ends.length && ends[0] <= start) ends.shift(); ends.push(end); ends.sort((a, b) => a - b); peak = Math.max(peak, ends.length); steps.push({ phase: 'process', activeLine: 6, message: `Meeting ${start}–${end} uses a room; active rooms end at ${ends.join(', ')}.`, state: { intervals, ends: [...ends], index, peak, output: null } }) })
+    steps.push({ phase: 'done', activeLine: 7, message: `Peak concurrent rooms: ${peak}.`, state: { intervals, ends, index: null, peak, output: peak } }); return steps
 }
 
 export default function Problem253Visualizer() {
@@ -103,6 +79,8 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                     className="problem253-visualizer-content"
                 >
                     <p>{step.message}</p>
+                    <div className="problem253-visualizer-rooms">active room end-times: {(step.state.ends || []).join(', ') || 'none'}</div>
+                    {step.state.output !== null && <strong>rooms required: {step.state.output}</strong>}
                 </motion.div>
             </div>
         </div>

@@ -19,11 +19,20 @@
 }
 
 .problem267-visualizer-content {
-    color: #6773a1;
+    color: #dbeafe;
     font-size: 14px;
     text-align: center;
     font-family: 'Courier New', monospace;
 }
+
+.problem267-summary, .problem267-results { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.problem267-summary { flex-direction: column; margin-bottom: 22px; color: #e0e7ff; }
+.problem267-summary span { color: #a5b4fc; }
+.problem267-build { display: flex; align-items: center; gap: 7px; font-size: 26px; font-weight: 700; color: #f8fafc; margin-bottom: 22px; }
+.problem267-build span, .problem267-build i { min-width: 48px; padding: 8px 12px; border-radius: 8px; background: #1e3a5f; }
+.problem267-build i { background: #713f12; color: #fde68a; font-style: normal; }
+.problem267-results code, .problem267-results em { padding: 7px 10px; border: 1px solid #2563eb; border-radius: 6px; color: #bfdbfe; background: #172554; font-family: inherit; }
+.problem267-results em { border-color: #475569; color: #cbd5e1; background: #1e293b; }
 
 .problem267-visualizer-item {
     position: relative;

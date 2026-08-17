@@ -20,44 +20,23 @@ import { createPortal } from 'react-dom'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# Paint Fence Solution' },
-    { line: 2, text: '# Count ways to paint n posts with k colors.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'def numWays(n, k):' },
+    { line: 2, text: '    if n == 0: return 0' },
+    { line: 3, text: '    same, different = 0, k' },
+    { line: 4, text: '    for post in range(2, n + 1):' },
+    { line: 5, text: '        same = different' },
+    { line: 6, text: '        different = (same + different) * (k - 1)' },
+    { line: 7, text: '    return same + different' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Count ways to paint n posts with k colors.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
+    const n = Math.max(0, Number(Array.isArray(input) ? input[0] : input?.n) || 0)
+    const k = Math.max(0, Number(Array.isArray(input) ? input[1] : input?.k) || 0)
+    if (!n) return [{ phase: 'done', activeLine: 2, message: 'Zero posts have zero paint assignments.', state: { same: 0, different: 0, output: 0 } }]
+    let same = 0, different = k
+    const steps = [{ phase: 'init', activeLine: 3, message: `For post 1, there are ${k} different-color arrangements.`, state: { same, different, post: 1, output: null } }]
+    for (let post = 2; post <= n; post += 1) { const previous = same + different; same = different; different = previous * (k - 1); steps.push({ phase: 'process', activeLine: 6, message: `Post ${post}: same=${same}, different=${different}.`, state: { same, different, post, output: null } }) }
+    steps.push({ phase: 'done', activeLine: 7, message: `Total valid paintings: ${same + different}.`, state: { same, different, post: n, output: same + different } })
     return steps
 }
 
@@ -107,6 +86,8 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             className="problem276-visualizer-content"
                         >
                             <p>{step.message}</p>
+                            <div className="problem276-visualizer-states"><span>same: {step.state.same}</span><span>different: {step.state.different}</span></div>
+                            {step.state.output !== null && <strong>ways: {step.state.output}</strong>}
                         </motion.div>
                     </div>
                     <PlaybackControls

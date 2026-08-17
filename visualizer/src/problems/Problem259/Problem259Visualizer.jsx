@@ -20,45 +20,22 @@ import { createPortal } from 'react-dom'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# 3Sum Smaller Solution' },
-    { line: 2, text: '# Count triplets with sum smaller than target.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'def threeSumSmaller(nums, target):' },
+    { line: 2, text: '    nums.sort(); count = 0' },
+    { line: 3, text: '    for first in range(len(nums) - 2):' },
+    { line: 4, text: '        left, right = first + 1, len(nums) - 1' },
+    { line: 5, text: '        while left < right:' },
+    { line: 6, text: '            if nums[first] + nums[left] + nums[right] < target:' },
+    { line: 7, text: '                count += right - left; left += 1' },
+    { line: 8, text: '            else: right -= 1' },
+    { line: 9, text: '    return count' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Count triplets with sum smaller than target.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+    const nums = Array.isArray(input?.[0]) ? [...input[0]] : (Array.isArray(input) ? [...input] : []), target = Number(Array.isArray(input) ? input.at(-1) : 0)
+    nums.sort((a, b) => a - b); let count = 0; const steps = [{ phase: 'init', activeLine: 2, message: `Sort values: [${nums.join(', ')}].`, state: { nums, target, count, pointers: [], output: null } }]
+    for (let first = 0; first < nums.length - 2; first += 1) for (let left = first + 1, right = nums.length - 1; left < right;) { const sum = nums[first] + nums[left] + nums[right]; if (sum < target) { count += right - left; steps.push({ phase: 'process', activeLine: 7, message: `${sum} < ${target}, so ${right - left} choices of the third value work.`, state: { nums, target, count, pointers: [first, left, right], output: null } }); left += 1 } else { steps.push({ phase: 'process', activeLine: 8, message: `${sum} is too large; move the right pointer.`, state: { nums, target, count, pointers: [first, left, right], output: null } }); right -= 1 } }
+    steps.push({ phase: 'done', activeLine: 9, message: `Counted ${count} valid triples.`, state: { nums, target, count, pointers: [], output: count } }); return steps
 }
 
 export default function Problem259Visualizer() {
@@ -107,6 +84,8 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             className="problem259-visualizer-content"
                         >
                             <p>{step.message}</p>
+                            <div className="problem259-visualizer-array">{(step.state.nums || []).map((value, index) => <span className={(step.state.pointers || []).includes(index) ? 'active' : ''} key={index}>{value}</span>)}</div>
+                            <strong>count: {step.state.count}</strong>
                         </motion.div>
                     </div>
                     <PlaybackControls

@@ -21,44 +21,14 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
     { line: 1, text: '# Best Meeting Point Solution' },
-    { line: 2, text: '# Find best meeting point in grid.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 2, text: 'def min_total_distance(grid):' },
+    { line: 3, text: '    rows, cols = homes_by_row(grid), homes_by_col(grid)' },
+    { line: 4, text: '    row, col = rows[len(rows)//2], cols[len(cols)//2]' },
+    { line: 5, text: '    return sum(abs(r-row)+abs(c-col) for r,c in homes)' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Find best meeting point in grid.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+ const grid=Array.isArray(input?.[0])?input[0]:input,homes=[];(grid||[]).forEach((row,r)=>row.forEach((cell,c)=>{if(cell)homes.push([r,c])}));const rows=homes.map(x=>x[0]).sort((a,b)=>a-b),cols=homes.map(x=>x[1]).sort((a,b)=>a-b),point=[rows[Math.floor(rows.length/2)],cols[Math.floor(cols.length/2)]],steps=[{activeLine:3,message:`Collect ${homes.length} home coordinates.`,state:{grid,homes,point:null}}];steps.push({activeLine:4,message:`Medians choose meeting point (${point}).`,state:{grid,homes,point}});const distance=homes.reduce((sum,[r,c])=>sum+Math.abs(r-point[0])+Math.abs(c-point[1]),0);steps.push({activeLine:5,message:`Total Manhattan distance: ${distance}.`,state:{grid,homes,point,distance}});return steps
 }
 
 export default function Problem296Visualizer() {
@@ -106,7 +76,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             transition={{ duration: 0.3 }}
                             className="problem296-visualizer-content"
                         >
-                            <p>{step.message}</p>
+                            <p>{step.message}</p><div className="problem296-grid">{(step.state.grid || []).map((row,r)=><div key={r}>{row.map((cell,c)=><span key={c} className={step.state.point?.[0]===r && step.state.point?.[1]===c?'meeting':cell?'home':''}>{step.state.point?.[0]===r && step.state.point?.[1]===c?'★':cell?'●':'·'}</span>)}</div>)}</div>{step.state.distance !== undefined && <strong>distance: {step.state.distance}</strong>}
                         </motion.div>
                     </div>
                     <PlaybackControls
@@ -142,4 +112,3 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
         </>
     )
 }
-

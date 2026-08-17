@@ -21,44 +21,18 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
     { line: 1, text: '# Inorder Successor in BST Solution' },
-    { line: 2, text: '# Find inorder successor in BST.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 2, text: 'def inorder_successor(root, value):' },
+    { line: 3, text: '    successor = None' },
+    { line: 4, text: '    while root:' },
+    { line: 5, text: '        if value < root.val: successor, root = root, root.left' },
+    { line: 6, text: '        else: root = root.right' },
+    { line: 7, text: '    return successor' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Find inorder successor in BST.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+ const values=Array.isArray(input?.[0])?input[0]:input, target=Number(Array.isArray(input?.[0])?input[1]:input?.at(-1)); let node=0,successor=null;const steps=[]
+ while(Array.isArray(values)&&node<values.length&&values[node]!=null){const value=values[node];steps.push({activeLine:4,message:`Visit ${value}.`,state:{values,target,node,successor}});if(target<value){successor=value;node=2*node+1;steps.push({activeLine:5,message:`${value} is a larger candidate; move left.`,state:{values,target,node,successor}})}else node=2*node+2}
+ steps.push({activeLine:7,message:successor===null?'No successor exists.':`Successor of ${target} is ${successor}.`,state:{values,target,node:-1,successor}});return steps
 }
 
 export default function Problem285Visualizer() {
@@ -106,7 +80,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             transition={{ duration: 0.3 }}
                             className="problem285-visualizer-content"
                         >
-                            <p>{step.message}</p>
+                            <p>{step.message}</p><div className="problem285-tree">{(step.state.values || []).map((value,index)=>value != null && <span key={index} className={index===step.state.node?'active':value===step.state.successor?'successor':''}>{value}</span>)}</div><strong>candidate successor: {step.state.successor ?? 'none'}</strong>
                         </motion.div>
                     </div>
                     <PlaybackControls
@@ -142,4 +116,3 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
         </>
     )
 }
-

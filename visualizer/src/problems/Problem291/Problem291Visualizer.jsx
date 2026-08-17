@@ -21,44 +21,15 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
     { line: 1, text: '# Word Pattern II Solution' },
-    { line: 2, text: '# Match pattern with multiple character mappings.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 2, text: 'def word_pattern_match(pattern, text):' },
+    { line: 3, text: '    def search(i, j, mapping, used):' },
+    { line: 4, text: '        if pattern[i] in mapping: verify its mapped prefix' },
+    { line: 5, text: '        else: try each unused text prefix for the character' },
+    { line: 6, text: '    return search(0, 0, {}, set())' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Match pattern with multiple character mappings.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+ const pattern=String(input?.[0]??''),text=String(input?.[1]??''),steps=[];let answer=false;const dfs=(i,j,map,used)=>{if(i===pattern.length)return j===text.length;const char=pattern[i];if(map[char])return text.startsWith(map[char],j)&&dfs(i+1,j+map[char].length,map,used);for(let end=j+1;end<=text.length;end++){const word=text.slice(j,end);if(used.has(word))continue;const next={...map,[char]:word};steps.push({activeLine:5,message:`Try ${char} → “${word}”.`,state:{pattern,text,map:next}});if(dfs(i+1,end,next,new Set([...used,word])))return true}return false};answer=dfs(0,0,{},new Set());steps.push({activeLine:6,message:answer?'A one-to-one mapping matches the full text.':'No one-to-one mapping matches.',state:{pattern,text,map:{},answer}});return steps
 }
 
 export default function Problem291Visualizer() {
@@ -106,7 +77,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             transition={{ duration: 0.3 }}
                             className="problem291-visualizer-content"
                         >
-                            <p>{step.message}</p>
+                            <p>{step.message}</p><div className="problem291-map">{Object.entries(step.state.map || {}).map(([letter,word])=><span key={letter}>{letter} → <b>{word}</b></span>)}</div><code>{step.state.pattern} / {step.state.text}</code>
                         </motion.div>
                     </div>
                     <PlaybackControls
@@ -142,4 +113,3 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
         </>
     )
 }
-

@@ -20,45 +20,22 @@ import PatternLegend from '../../components/PatternLegend'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# Graph Valid Tree Solution' },
-    { line: 2, text: '# Determine if edges form a tree.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'def validTree(n, edges):' },
+    { line: 2, text: '    if len(edges) != n - 1: return False' },
+    { line: 3, text: '    parent = list(range(n))' },
+    { line: 4, text: '    for left, right in edges:' },
+    { line: 5, text: '        if find(left) == find(right): return False' },
+    { line: 6, text: '        parent[find(left)] = find(right)' },
+    { line: 7, text: '    return True' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Determine if edges form a tree.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+    const n = Number(Array.isArray(input) ? input[0] : input?.n) || 0, edges = Array.isArray(input?.[1]) ? input[1] : (input?.edges || [])
+    const parent = Array.from({ length: n }, (_, index) => index), find = node => { while (parent[node] !== node) { parent[node] = parent[parent[node]]; node = parent[node] } return node }
+    const steps = [{ phase: 'init', activeLine: 3, message: `Start ${n} separate components.`, state: { parent: [...parent], edge: null, output: null } }]
+    if (edges.length !== n - 1) return [...steps, { phase: 'done', activeLine: 2, message: `A tree with ${n} nodes needs exactly ${n - 1} edges.`, state: { parent, edge: null, output: false } }]
+    for (const edge of edges) { const [left, right] = edge, a = find(left), b = find(right); if (a === b) return [...steps, { phase: 'done', activeLine: 5, message: `Edge ${left}–${right} closes a cycle.`, state: { parent: [...parent], edge, output: false } }]; parent[a] = b; steps.push({ phase: 'process', activeLine: 6, message: `Union components through edge ${left}–${right}.`, state: { parent: [...parent], edge, output: null } }) }
+    steps.push({ phase: 'done', activeLine: 7, message: 'Correct edge count and no cycle means this graph is a tree.', state: { parent, edge: null, output: true } }); return steps
 }
 
 export default function Problem261Visualizer() {
@@ -103,6 +80,8 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                     className="problem261-visualizer-content"
                 >
                     <p>{step.message}</p>
+                    <div className="problem261-visualizer-parents">parents: {(step.state.parent || []).join(', ')}</div>
+                    {step.state.output !== null && <strong>valid tree: {String(step.state.output)}</strong>}
                 </motion.div>
             </div>
         </div>

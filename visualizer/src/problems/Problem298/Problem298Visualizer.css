@@ -24,6 +24,7 @@
     text-align: center;
     font-family: 'Courier New', monospace;
 }
+.problem298-tree{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:20px}.problem298-tree span{padding:10px;border:1px solid #475569;border-radius:50%;color:#dbeafe}.problem298-tree .seen{background:#1e3a8a}.problem298-tree .active{background:#9a3412;border-color:#fb923c}
 
 .problem298-visualizer-item {
     position: relative;

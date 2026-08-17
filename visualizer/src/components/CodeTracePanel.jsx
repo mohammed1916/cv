@@ -11,6 +11,10 @@ import MonacoEditor from "@monaco-editor/react";
 export default function CodeTracePanel({
   step,
   codeLines,
+  // `code` and `activeLine` are retained for older visualizers while they
+  // migrate to the richer step/codeLines API.
+  code,
+  activeLine,
   highlightedLines = [],
   onLineSelect,
   title = "Solution Code",
@@ -22,6 +26,12 @@ export default function CodeTracePanel({
   onActiveLineDomChange,
   disableResizer = false,
 }) {
+  const resolvedCodeLines = Array.isArray(codeLines)
+    ? codeLines
+    : Array.isArray(code)
+      ? code
+      : [];
+  const resolvedStep = step || (Number.isFinite(activeLine) ? { activeLine } : undefined);
   const codeRef = useRef(null);
   const lastManualScrollTsRef = useRef(0);
   const [copied, setCopied] = useState(false);
@@ -39,10 +49,10 @@ export default function CodeTracePanel({
   const [isResizing, setIsResizing] = useState(false);
 
   useEffect(() => {
-    if (!step?.activeLine || !codeRef.current) return;
+    if (!resolvedStep?.activeLine || !codeRef.current) return;
 
     const el = codeRef.current.querySelector(
-      `[data-line="${step.activeLine}"]`,
+      `[data-line="${resolvedStep.activeLine}"]`,
     );
 
     if (!el) {
@@ -66,7 +76,7 @@ export default function CodeTracePanel({
     if (elTop < ctTop || elBottom > ctBottom) {
       el.scrollIntoView({ block: "nearest", behavior: "auto" });
     }
-  }, [step, autoScroll, onActiveLineDomChange]);
+  }, [resolvedStep, autoScroll, onActiveLineDomChange]);
 
   useEffect(() => {
     if (!copied) return;
@@ -76,7 +86,7 @@ export default function CodeTracePanel({
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(
-      codeLines.map(({ text }) => text).join("\n"),
+      resolvedCodeLines.map(({ text }) => text).join("\n"),
     );
     setCopied(true);
   };
@@ -126,7 +136,7 @@ export default function CodeTracePanel({
     } catch (err) {
       void err;
     }
-    return codeLines.map(({ text }) => text).join("\n");
+    return resolvedCodeLines.map(({ text }) => text).join("\n");
   };
   const [editorContent, setEditorContent] = useState(initialEditor);
   const [showComments, setShowComments] = useState(true);
@@ -134,7 +144,7 @@ export default function CodeTracePanel({
     () => new Set(highlightedLines),
     [highlightedLines],
   );
-  const activePattern = useMemo(() => resolvePattern(step?.phase), [step?.phase]);
+  const activePattern = useMemo(() => resolvePattern(resolvedStep?.phase), [resolvedStep?.phase]);
   const commentsText = `# Write your notes here\n# Toggle comments off to edit cleanly.`;
   const fileHandleRef = useRef(null);
   const monacoRef = useRef(null);
@@ -566,10 +576,10 @@ export default function CodeTracePanel({
           <div className="ctp-title">{title}</div>
           <div className="ctp-subtitle">
             {subtitle ||
-              (step ? (
+              (resolvedStep ? (
                 <>
                   {activeLabelPrefix}{" "}
-                  <span className="mono ctp-chip">{step.activeLine}</span>{" "}
+                  <span className="mono ctp-chip">{resolvedStep.activeLine}</span>{" "}
                   {activeLabelSuffix}
                 </>
               ) : (
@@ -621,7 +631,7 @@ export default function CodeTracePanel({
         </button>
       </div>
 
-      <PointerStateBand step={step} />
+      <PointerStateBand step={resolvedStep} />
 
       <div
         className="ctp-scroll"
@@ -634,9 +644,9 @@ export default function CodeTracePanel({
             : { height: codeAreaHeight }
         }
       >
-        {codeLines.map(({ line, text }) => {
-          const isActive = step?.activeLine === line;
-          const isRelated = step?.relatedLines?.includes(line);
+        {resolvedCodeLines.map(({ line, text }) => {
+          const isActive = resolvedStep?.activeLine === line;
+          const isRelated = resolvedStep?.relatedLines?.includes(line);
           const isExternallyHighlighted = highlightedLineSet.has(line);
           return (
             <motion.div
@@ -646,7 +656,7 @@ export default function CodeTracePanel({
               animate={{
                 x: isActive ? 6 : 0,
                 opacity:
-                  isRelated || isActive || isExternallyHighlighted || !step
+                  isRelated || isActive || isExternallyHighlighted || !resolvedStep
                     ? 1
                     : 0.56,
               }}

@@ -19,11 +19,15 @@
 }
 
 .problem270-visualizer-content {
-    color: #6773a1;
+    color: #dbeafe;
     font-size: 14px;
     text-align: center;
     font-family: 'Courier New', monospace;
 }
+.problem270-tree { display:flex; flex-wrap:wrap; justify-content:center; gap:9px; margin:24px 0; max-width:520px; }
+.problem270-tree span { padding:10px 13px; color:#dbeafe; border:1px solid #475569; border-radius:50%; background:#1e293b; }
+.problem270-tree span.active { border-color:#fbbf24; background:#78350f; color:#fef3c7; transform:scale(1.12); }
+.problem270-tree span.closest { border-color:#34d399; background:#064e3b; color:#d1fae5; }
 
 .problem270-visualizer-item {
     position: relative;

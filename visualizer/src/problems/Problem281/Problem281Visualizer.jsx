@@ -20,45 +20,20 @@ import { createPortal } from 'react-dom'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# Zigzag Iterator Solution' },
-    { line: 2, text: '# Iterate vectors in zigzag pattern.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'class ZigzagIterator:' },
+    { line: 2, text: '    def __init__(self, first, second):' },
+    { line: 3, text: '        self.queue = deque((vector, 0) for vector in (first, second) if vector)' },
+    { line: 4, text: '    def next(self):' },
+    { line: 5, text: '        vector, index = self.queue.popleft()' },
+    { line: 6, text: '        if index + 1 < len(vector): self.queue.append((vector, index + 1))' },
+    { line: 7, text: '        return vector[index]' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Iterate vectors in zigzag pattern.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+    const vectors = (Array.isArray(input) ? input : []).filter(Array.isArray), queue = vectors.map((_, vector) => ({ vector, index: 0 })).filter(item => vectors[item.vector].length), output = []
+    const steps = [{ phase: 'init', activeLine: 3, message: `Queue ${queue.length} non-empty vectors.`, state: { queue: queue.map(x => ({ ...x })), output: [], value: null } }]
+    while (queue.length) { const current = queue.shift(), value = vectors[current.vector][current.index]; output.push(value); if (current.index + 1 < vectors[current.vector].length) queue.push({ vector: current.vector, index: current.index + 1 }); steps.push({ phase: 'process', activeLine: 7, message: `Emit ${value} from vector ${current.vector}.`, state: { queue: queue.map(x => ({ ...x })), output: [...output], value } }) }
+    steps.push({ phase: 'done', activeLine: 7, message: `Zigzag output: [${output.join(', ')}].`, state: { queue: [], output, value: null } }); return steps
 }
 
 export default function Problem281Visualizer() {
@@ -107,6 +82,8 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             className="problem281-visualizer-content"
                         >
                             <p>{step.message}</p>
+                            <div className="problem281-visualizer-output">output: {(step.state.output || []).join(', ') || '—'}</div>
+                            <small>queue: {(step.state.queue || []).map(x => `v${x.vector}[${x.index}]`).join(' · ') || 'empty'}</small>
                         </motion.div>
                     </div>
                     <PlaybackControls
@@ -142,4 +119,3 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
         </>
     )
 }
-

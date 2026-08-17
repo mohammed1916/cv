@@ -20,45 +20,22 @@ import { createPortal } from 'react-dom'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# Factor Combinations Solution' },
-    { line: 2, text: '# Find all combinations of factors of a number.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'def getFactors(n):' },
+    { line: 2, text: '    answer = []' },
+    { line: 3, text: '    def search(remaining, start, path):' },
+    { line: 4, text: '        for factor in range(start, int(sqrt(remaining)) + 1):' },
+    { line: 5, text: '            if remaining % factor == 0:' },
+    { line: 6, text: '                answer.append(path + [factor, remaining // factor])' },
+    { line: 7, text: '                search(remaining // factor, factor, path + [factor])' },
+    { line: 8, text: '    search(n, 2, []); return answer' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Find all combinations of factors of a number.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+    const n = Math.floor(Number(Array.isArray(input) ? input[0] : input) || 0), answer = []
+    const steps = [{ phase: 'init', activeLine: 2, message: `Search factor pairs of ${n}.`, state: { path: [], answer: [], output: null } }]
+    const search = (remaining, start, path) => { for (let factor = start; factor * factor <= remaining; factor += 1) if (remaining % factor === 0) { const combo = [...path, factor, remaining / factor]; answer.push(combo); steps.push({ phase: 'process', activeLine: 6, message: `Found ${combo.join(' × ')} = ${n}.`, state: { path: [...path, factor], answer: answer.map(x => [...x]), output: null } }); search(remaining / factor, factor, [...path, factor]) } }
+    if (n > 1) search(n, 2, [])
+    steps.push({ phase: 'done', activeLine: 8, message: `${answer.length} factor combination(s) found.`, state: { path: [], answer, output: answer } }); return steps
 }
 
 export default function Problem254Visualizer() {
@@ -107,6 +84,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             className="problem254-visualizer-content"
                         >
                             <p>{step.message}</p>
+                            <div className="problem254-visualizer-combos">{(step.state.answer || []).map((combo, index) => <span key={index}>{combo.join(' × ')}</span>)}</div>
                         </motion.div>
                     </div>
                     <PlaybackControls

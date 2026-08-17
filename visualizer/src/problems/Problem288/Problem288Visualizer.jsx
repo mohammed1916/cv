@@ -20,45 +20,20 @@ import { createPortal } from 'react-dom'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# Unique Word Abbreviation Solution' },
-    { line: 2, text: '# Design data structure for unique abbreviations.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'class ValidWordAbbr:' },
+    { line: 2, text: '    def __init__(self, dictionary):' },
+    { line: 3, text: '        self.words = defaultdict(set)' },
+    { line: 4, text: '        for word in dictionary: self.words[abbr(word)].add(word)' },
+    { line: 5, text: '    def isUnique(self, word):' },
+    { line: 6, text: '        matches = self.words[abbr(word)]' },
+    { line: 7, text: '        return not matches or matches == {word}' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Design data structure for unique abbreviations.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+    const [dictionary = [], queries = []] = Array.isArray(input) ? input : [], abbr = word => word.length <= 2 ? word : `${word[0]}${word.length - 2}${word.at(-1)}`, index = {}
+    const steps = [{ phase: 'init', activeLine: 3, message: 'Create an abbreviation-to-words index.', state: { index: {}, query: null, output: null } }]
+    ;(dictionary || []).forEach(word => { const key = abbr(word); (index[key] ||= new Set()).add(word); steps.push({ phase: 'process', activeLine: 4, message: `Index ${word} as ${key}.`, state: { index: Object.fromEntries(Object.entries(index).map(([k,v])=>[k,[...v]])), query: null, output: null } }) })
+    const result = {}; (queries || []).forEach(word => { const matches = index[abbr(word)] || new Set(), unique = !matches.size || (matches.size === 1 && matches.has(word)); result[word] = unique; steps.push({ phase: 'process', activeLine: 7, message: `${word} → ${abbr(word)} is ${unique ? 'unique' : 'ambiguous'}.`, state: { index: Object.fromEntries(Object.entries(index).map(([k,v])=>[k,[...v]])), query: word, output: { ...result } } }) }); steps.push({ phase: 'done', activeLine: 7, message: 'All abbreviation queries are answered.', state: { index: Object.fromEntries(Object.entries(index).map(([k,v])=>[k,[...v]])), query: null, output: result } }); return steps
 }
 
 export default function Problem288Visualizer() {
@@ -107,6 +82,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             className="problem288-visualizer-content"
                         >
                             <p>{step.message}</p>
+                            <div className="problem288-visualizer-index">{Object.entries(step.state.index || {}).map(([key, values]) => <span key={key}>{key}: {values.join('|')}</span>)}</div>
                         </motion.div>
                     </div>
                     <PlaybackControls
@@ -142,4 +118,3 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
         </>
     )
 }
-

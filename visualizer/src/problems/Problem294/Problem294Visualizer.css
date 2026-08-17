@@ -24,6 +24,7 @@
     text-align: center;
     font-family: 'Courier New', monospace;
 }
+.problem294-board{display:flex;gap:8px;justify-content:center;margin:24px}.problem294-board span{padding:12px;border-radius:7px;font-weight:800}.problem294-board .on{background:#166534;color:#dcfce7}.problem294-board .off{background:#7f1d1d;color:#fecaca}
 
 .problem294-visualizer-item {
     position: relative;

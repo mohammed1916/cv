@@ -20,44 +20,24 @@ import { createPortal } from 'react-dom'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# Palindrome Permutation Solution' },
-    { line: 2, text: '# Check if string can form palindrome.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'def canPermutePalindrome(s):' },
+    { line: 2, text: '    odd = set()' },
+    { line: 3, text: '    for char in s:' },
+    { line: 4, text: '        if char in odd: odd.remove(char)' },
+    { line: 5, text: '        else: odd.add(char)' },
+    { line: 6, text: '    return len(odd) <= 1' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Check if string can form palindrome.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
+    const value = String(Array.isArray(input) ? input[0] ?? '' : input ?? '')
+    const odd = new Set()
+    const steps = [{ phase: 'init', activeLine: 2, message: 'A palindrome can have at most one odd-frequency character.', state: { value, odd: [], output: null } }]
+    for (let index = 0; index < value.length; index += 1) {
+      const char = value[index]
+      if (odd.has(char)) odd.delete(char); else odd.add(char)
+      steps.push({ phase: 'process', activeLine: odd.has(char) ? 5 : 4, message: `${char} ${odd.has(char) ? 'now has' : 'now has an even count; remove it from'} the odd set.`, state: { value, index, odd: [...odd], output: null } })
+    }
+    steps.push({ phase: 'done', activeLine: 6, message: odd.size <= 1 ? 'The counts can be arranged into a palindrome.' : 'More than one odd count prevents a palindrome.', state: { value, odd: [...odd], output: odd.size <= 1 } })
     return steps
 }
 
@@ -107,6 +87,8 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             className="problem266-visualizer-content"
                         >
                             <p>{step.message}</p>
+                            <div className="problem266-visualizer-odd-set">odd counts: {(step.state.odd || []).join(', ') || 'none'}</div>
+                            {step.state.output !== null && <strong>possible: {String(step.state.output)}</strong>}
                         </motion.div>
                     </div>
                     <PlaybackControls

@@ -20,45 +20,19 @@ import { createPortal } from 'react-dom'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# H-Index Solution' },
-    { line: 2, text: '# Find H-Index in citation counts.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'def hIndex(citations):' },
+    { line: 2, text: '    citations.sort(reverse=True)' },
+    { line: 3, text: '    h = 0' },
+    { line: 4, text: '    for index, count in enumerate(citations, 1):' },
+    { line: 5, text: '        if count < index: break' },
+    { line: 6, text: '        h = index' },
+    { line: 7, text: '    return h' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Find H-Index in citation counts.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+    const citations = (Array.isArray(input) ? input : []).map(Number).sort((a,b) => b-a); let h = 0; const steps = [{ phase: 'init', activeLine: 2, message: `Sort descending: [${citations.join(', ')}].`, state: { citations, index: null, h, output: null } }]
+    for (let index = 0; index < citations.length; index += 1) { if (citations[index] < index + 1) { steps.push({ phase: 'done', activeLine: 5, message: `${citations[index]} citations cannot support h=${index + 1}.`, state: { citations, index, h, output: h } }); return steps } h = index + 1; steps.push({ phase: 'process', activeLine: 6, message: `${h} papers each have at least ${h} citations.`, state: { citations, index, h, output: null } }) }
+    steps.push({ phase: 'done', activeLine: 7, message: `H-index is ${h}.`, state: { citations, index: null, h, output: h } }); return steps
 }
 
 export default function Problem274Visualizer() {
@@ -107,6 +81,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             className="problem274-visualizer-content"
                         >
                             <p>{step.message}</p>
+                            <div className="problem274-visualizer-h">h: {step.state.h}</div>
                         </motion.div>
                     </div>
                     <PlaybackControls

@@ -20,45 +20,17 @@ import { createPortal } from 'react-dom'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# Wiggle Sort Solution' },
-    { line: 2, text: '# Rearrange array in wiggle fashion.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'def wiggleSort(nums):' },
+    { line: 2, text: '    for index in range(1, len(nums)):' },
+    { line: 3, text: '        should_swap = (index % 2 and nums[index] < nums[index - 1]) or (not index % 2 and nums[index] > nums[index - 1])' },
+    { line: 4, text: '        if should_swap:' },
+    { line: 5, text: '            nums[index], nums[index - 1] = nums[index - 1], nums[index]' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Rearrange array in wiggle fashion.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+    const nums = Array.isArray(input) ? [...input].map(Number) : []; const steps = [{ phase: 'init', activeLine: 1, message: `Enforce ≤ at even positions and ≥ at odd positions.`, state: { nums: [...nums], index: null, output: null } }]
+    for (let index = 1; index < nums.length; index += 1) { const swap = (index % 2 && nums[index] < nums[index - 1]) || (!(index % 2) && nums[index] > nums[index - 1]); if (swap) [nums[index], nums[index - 1]] = [nums[index - 1], nums[index]]; steps.push({ phase: 'process', activeLine: swap ? 5 : 3, message: swap ? `Swap adjacent values at ${index - 1} and ${index}.` : `Pair at ${index - 1}, ${index} already wiggles correctly.`, state: { nums: [...nums], index, output: null } }) }
+    steps.push({ phase: 'done', activeLine: 5, message: `Wiggle order: [${nums.join(', ')}].`, state: { nums, index: null, output: nums } }); return steps
 }
 
 export default function Problem280Visualizer() {
@@ -107,6 +79,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             className="problem280-visualizer-content"
                         >
                             <p>{step.message}</p>
+                            <div className="problem280-visualizer-array">{(step.state.nums || []).map((value, index) => <span className={step.state.index === index || step.state.index - 1 === index ? 'active' : ''} key={index}>{value}</span>)}</div>
                         </motion.div>
                     </div>
                     <PlaybackControls

@@ -20,45 +20,19 @@ import PatternLegend from '../../components/PatternLegend'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# Meeting Rooms Solution' },
-    { line: 2, text: '# Determine if a person can attend all meetings.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'def canAttendMeetings(intervals):' },
+    { line: 2, text: '    intervals.sort(key=lambda interval: interval[0])' },
+    { line: 3, text: '    for index in range(1, len(intervals)):' },
+    { line: 4, text: '        previous, current = intervals[index - 1], intervals[index]' },
+    { line: 5, text: '        if current[0] < previous[1]: return False' },
+    { line: 6, text: '    return True' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Determine if a person can attend all meetings.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+    const intervals = (Array.isArray(input) ? input : []).filter(item => Array.isArray(item) && item.length >= 2).map(([start, end]) => [Number(start), Number(end)]).sort((a, b) => a[0] - b[0])
+    const steps = [{ phase: 'init', activeLine: 2, message: `Sort meetings by start: ${intervals.map(x => `[${x}]`).join(' ')}.`, state: { intervals, index: null, output: null } }]
+    for (let index = 1; index < intervals.length; index += 1) { const overlaps = intervals[index][0] < intervals[index - 1][1]; steps.push({ phase: overlaps ? 'done' : 'process', activeLine: overlaps ? 5 : 4, message: overlaps ? `${intervals[index].join('–')} overlaps ${intervals[index - 1].join('–')}.` : `${intervals[index].join('–')} starts after the prior meeting ends.`, state: { intervals, index, output: overlaps ? false : null } }); if (overlaps) return steps }
+    steps.push({ phase: 'done', activeLine: 6, message: 'No adjacent sorted meetings overlap.', state: { intervals, index: null, output: true } }); return steps
 }
 
 export default function Problem252Visualizer() {
@@ -103,6 +77,8 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                     className="problem252-visualizer-content"
                 >
                     <p>{step.message}</p>
+                    <div className="problem252-visualizer-intervals">{(step.state.intervals || []).map((interval, index) => <span className={step.state.index === index || step.state.index - 1 === index ? 'active' : ''} key={index}>{interval[0]}–{interval[1]}</span>)}</div>
+                    {step.state.output !== null && <strong>attend all: {String(step.state.output)}</strong>}
                 </motion.div>
             </div>
         </div>

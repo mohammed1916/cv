@@ -21,44 +21,17 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
     { line: 1, text: '# Closest Binary Search Tree Value II Solution' },
-    { line: 2, text: '# Find k closest values in BST.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 2, text: 'def closest_k(values, target, k):' },
+    { line: 3, text: '    ranked = sorted(values, key=lambda x: abs(x - target))' },
+    { line: 4, text: '    return ranked[:k]' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Find k closest values in BST.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+  const values=(Array.isArray(input?.[0])?input[0]:input).filter?.(Number.isFinite)||[], target=Number(input?.[1]), k=Number(input?.[2])||1
+  const ranked=[...values].sort((a,b)=>Math.abs(a-target)-Math.abs(b-target)), chosen=[]
+  const steps=[{phase:'init',activeLine:3,message:`Rank values by distance from ${target}.`,state:{values,target,chosen:[]}}]
+  ranked.forEach(value=>{if(chosen.length<k)chosen.push(value);steps.push({phase:'pick',activeLine:3,message:`Consider ${value}; selected: [${chosen}].`,state:{values,target,chosen:[...chosen]}})})
+  steps.push({phase:'done',activeLine:4,message:`Closest ${k}: [${chosen}].`,state:{values,target,chosen,done:true}});return steps
 }
 
 export default function Problem272Visualizer() {

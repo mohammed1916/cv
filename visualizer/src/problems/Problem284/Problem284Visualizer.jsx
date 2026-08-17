@@ -20,45 +20,20 @@ import { createPortal } from 'react-dom'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# Peeking Iterator Solution' },
-    { line: 2, text: '# Implement iterator with peek capability.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'class PeekingIterator:' },
+    { line: 2, text: '    def __init__(self, iterator): self.buffer = next(iterator, None)' },
+    { line: 3, text: '    def peek(self): return self.buffer' },
+    { line: 4, text: '    def next(self):' },
+    { line: 5, text: '        value = self.buffer; self.buffer = next(self.iterator, None)' },
+    { line: 6, text: '        return value' },
+    { line: 7, text: '    def hasNext(self): return self.buffer is not None' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Implement iterator with peek capability.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+    const values = Array.isArray(input?.[0]) ? input[0] : (Array.isArray(input) ? input : []), operations = Array.isArray(input?.[1]) ? input[1] : values.map(() => 'next'); let index = 0, buffer = values[index++] ?? null; const output = []
+    const steps = [{ phase: 'init', activeLine: 2, message: `Preload the first iterator value: ${buffer ?? 'empty'}.`, state: { buffer, index, output: [], operation: null } }]
+    operations.forEach(operation => { if (operation === 'peek') { output.push(buffer); steps.push({ phase: 'process', activeLine: 3, message: `peek returns ${buffer} without consuming it.`, state: { buffer, index, output: [...output], operation } }) } else if (operation === 'next') { const value = buffer; buffer = values[index++] ?? null; output.push(value); steps.push({ phase: 'process', activeLine: 5, message: `next returns ${value}, then preloads ${buffer ?? 'end'}.`, state: { buffer, index, output: [...output], operation } }) } })
+    steps.push({ phase: 'done', activeLine: 7, message: 'All requested iterator operations are complete.', state: { buffer, index, output, operation: null } }); return steps
 }
 
 export default function Problem284Visualizer() {
@@ -107,6 +82,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             className="problem284-visualizer-content"
                         >
                             <p>{step.message}</p>
+                            <div className="problem284-visualizer-buffer">buffer: {String(step.state.buffer)} · output: {(step.state.output || []).join(', ')}</div>
                         </motion.div>
                     </div>
                     <PlaybackControls
@@ -142,4 +118,3 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
         </>
     )
 }
-

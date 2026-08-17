@@ -21,44 +21,21 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
     { line: 1, text: '# Closest Binary Search Tree Value Solution' },
-    { line: 2, text: '# Find BST value closest to target.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 2, text: 'def closest_value(values, target):' },
+    { line: 3, text: '    node, closest = 0, values[0]' },
+    { line: 4, text: '    while node < len(values) and values[node] is not None:' },
+    { line: 5, text: '        if abs(values[node] - target) < abs(closest - target): closest = values[node]' },
+    { line: 6, text: '        node = 2 * node + (2 if target > values[node] else 1)' },
+    { line: 7, text: '    return closest' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Find BST value closest to target.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+    const values = Array.isArray(input?.[0]) ? input[0] : (Array.isArray(input) ? input.filter(Number.isFinite) : [])
+    const target = Number(Array.isArray(input) && !Array.isArray(input[0]) ? input.at(-1) : input?.[1])
+    if (!values.length || !Number.isFinite(target)) return [{ activeLine: 1, message: 'Enter [levelOrderValues, target] to trace the BST search.', state: { values: [], target: '—', path: [], closest: '—' } }]
+    let node = 0, closest = values[0]; const steps = [{ activeLine: 3, message: `Start at root ${closest}; target is ${target}.`, state: { values, target, path: [0], closest } }]
+    while (node < values.length && values[node] != null) { const value = values[node]; if (Math.abs(value-target) < Math.abs(closest-target)) closest=value; steps.push({ activeLine: 5, message: `${value} is checked; closest is ${closest}.`, state: { values, target, path: [node], closest } }); node=2*node+(target>value?2:1) }
+    steps.push({ activeLine: 7, message: `Search ends: ${closest} is closest to ${target}.`, state: { values, target, path: [], closest, done:true } }); return steps
 }
 
 export default function Problem270Visualizer() {
@@ -106,7 +83,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             transition={{ duration: 0.3 }}
                             className="problem270-visualizer-content"
                         >
-                            <p>{step.message}</p>
+                            <strong>{step.message}</strong><div className="problem270-tree">{step.state.values.map((value, index) => value != null && <span className={step.state.path.includes(index) ? 'active' : value === step.state.closest ? 'closest' : ''} key={index}>{value}</span>)}</div><p>target: <b>{step.state.target}</b> · closest: <b>{step.state.closest}</b></p>
                         </motion.div>
                     </div>
                     <PlaybackControls

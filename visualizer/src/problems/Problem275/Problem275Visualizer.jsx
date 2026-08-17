@@ -20,45 +20,21 @@ import { createPortal } from 'react-dom'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# H-Index II Solution' },
-    { line: 2, text: '# Find H-Index in sorted array.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'def hIndex(citations):' },
+    { line: 2, text: '    low, high = 0, len(citations) - 1' },
+    { line: 3, text: '    while low <= high:' },
+    { line: 4, text: '        middle = (low + high) // 2' },
+    { line: 5, text: '        papers = len(citations) - middle' },
+    { line: 6, text: '        if citations[middle] == papers: return papers' },
+    { line: 7, text: '        if citations[middle] < papers: low = middle + 1' },
+    { line: 8, text: '        else: high = middle - 1' },
+    { line: 9, text: '    return len(citations) - low' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Find H-Index in sorted array.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+    const citations = (Array.isArray(input) ? input : []).map(Number); let low = 0, high = citations.length - 1; const steps = [{ phase: 'init', activeLine: 2, message: `Binary-search the sorted citations [${citations.join(', ')}].`, state: { citations, low, high, middle: null, output: null } }]
+    while (low <= high) { const middle = Math.floor((low + high) / 2), papers = citations.length - middle; if (citations[middle] === papers) return [...steps, { phase: 'done', activeLine: 6, message: `${papers} papers have at least ${papers} citations.`, state: { citations, low, high, middle, output: papers } }]; if (citations[middle] < papers) { steps.push({ phase: 'process', activeLine: 7, message: `${citations[middle]} is below ${papers}; search right.`, state: { citations, low, high, middle, output: null } }); low = middle + 1 } else { steps.push({ phase: 'process', activeLine: 8, message: `${citations[middle]} exceeds ${papers}; search left.`, state: { citations, low, high, middle, output: null } }); high = middle - 1 } }
+    const output = citations.length - low; steps.push({ phase: 'done', activeLine: 9, message: `H-index is ${output}.`, state: { citations, low, high, middle: null, output } }); return steps
 }
 
 export default function Problem275Visualizer() {
@@ -107,6 +83,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             className="problem275-visualizer-content"
                         >
                             <p>{step.message}</p>
+                            <div className="problem275-visualizer-search">low {step.state.low} · mid {step.state.middle ?? '—'} · high {step.state.high}</div>
                         </motion.div>
                     </div>
                     <PlaybackControls

@@ -20,45 +20,13 @@ import { createPortal } from 'react-dom'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# Nim Game Solution' },
-    { line: 2, text: '# Determine winning move in Nim game.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'def canWinNim(n):' },
+    { line: 2, text: '    return n % 4 != 0' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Determine winning move in Nim game.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+    const n = Math.max(0, Math.floor(Number(Array.isArray(input) ? input[0] : input) || 0)), winning = n % 4 !== 0
+    return [{ phase: 'init', activeLine: 1, message: `Group ${n} stones into complete groups of four.`, state: { n, remainder: n % 4, output: null } }, { phase: 'done', activeLine: 2, message: winning ? `${n} mod 4 = ${n % 4}; take ${n % 4} first and mirror the opponent.` : `${n} is a multiple of 4, a losing position with perfect play.`, state: { n, remainder: n % 4, output: winning } }]
 }
 
 export default function Problem292Visualizer() {
@@ -107,6 +75,8 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             className="problem292-visualizer-content"
                         >
                             <p>{step.message}</p>
+                            <div className="problem292-visualizer-nim">stones: {step.state.n} · remainder: {step.state.remainder}</div>
+                            {step.state.output !== null && <strong>winning: {String(step.state.output)}</strong>}
                         </motion.div>
                     </div>
                     <PlaybackControls
@@ -142,4 +112,3 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
         </>
     )
 }
-

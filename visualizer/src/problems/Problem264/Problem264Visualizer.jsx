@@ -20,44 +20,29 @@ import { createPortal } from 'react-dom'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# Ugly Number II Solution' },
-    { line: 2, text: '# Find nth ugly number.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'def nthUglyNumber(n):' },
+    { line: 2, text: '    ugly = [1]; i2 = i3 = i5 = 0' },
+    { line: 3, text: '    while len(ugly) < n:' },
+    { line: 4, text: '        next_value = min(2*ugly[i2], 3*ugly[i3], 5*ugly[i5])' },
+    { line: 5, text: '        ugly.append(next_value)' },
+    { line: 6, text: '        if next_value == 2*ugly[i2]: i2 += 1' },
+    { line: 7, text: '        if next_value == 3*ugly[i3]: i3 += 1' },
+    { line: 8, text: '        if next_value == 5*ugly[i5]: i5 += 1' },
+    { line: 9, text: '    return ugly[-1]' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Find nth ugly number.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
+    const n = Math.max(1, Number(Array.isArray(input) ? input[0] : input) || 1)
+    const ugly = [1], pointers = [0, 0, 0], factors = [2, 3, 5]
+    const steps = [{ phase: 'init', activeLine: 2, message: 'Seed the sequence with 1 and three factor pointers.', state: { ugly: [...ugly], pointers: [...pointers], output: null } }]
+    while (ugly.length < n) {
+      const candidates = factors.map((factor, index) => factor * ugly[pointers[index]])
+      const next = Math.min(...candidates); ugly.push(next)
+      steps.push({ phase: 'process', activeLine: 5, message: `Append the smallest candidate, ${next}.`, state: { ugly: [...ugly], pointers: [...pointers], candidates, output: null } })
+      candidates.forEach((candidate, index) => { if (candidate === next) pointers[index] += 1 })
+      steps.push({ phase: 'process', activeLine: 6, message: `Advance every pointer that produced ${next}.`, state: { ugly: [...ugly], pointers: [...pointers], candidates, output: null } })
+    }
+    steps.push({ phase: 'done', activeLine: 9, message: `The ${n}th ugly number is ${ugly.at(-1)}.`, state: { ugly, pointers, output: ugly.at(-1) } })
     return steps
 }
 
@@ -107,6 +92,8 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             className="problem264-visualizer-content"
                         >
                             <p>{step.message}</p>
+                            <div className="problem264-visualizer-sequence">{(step.state.ugly || []).map((value, index) => <span key={index}>{value}</span>)}</div>
+                            <small>pointers: {(step.state.pointers || []).join(', ')}</small>
                         </motion.div>
                     </div>
                     <PlaybackControls

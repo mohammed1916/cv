@@ -20,45 +20,18 @@ import { createPortal } from 'react-dom'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# Flip Game Solution' },
-    { line: 2, text: '# Find all possible states after one flip.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'def generatePossibleNextMoves(state):' },
+    { line: 2, text: '    answer = []' },
+    { line: 3, text: '    for index in range(len(state) - 1):' },
+    { line: 4, text: '        if state[index:index + 2] == "++":' },
+    { line: 5, text: '            answer.append(state[:index] + "--" + state[index + 2:])' },
+    { line: 6, text: '    return answer' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Find all possible states after one flip.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
-    return steps
+    const value = String(Array.isArray(input) ? input[0] ?? '' : input ?? ''), output = [], steps = [{ phase: 'init', activeLine: 2, message: `Scan “${value}” for consecutive plus signs.`, state: { value, index: null, output: [], result: null } }]
+    for (let index = 0; index < value.length - 1; index += 1) if (value.slice(index, index + 2) === '++') { const next = `${value.slice(0,index)}--${value.slice(index+2)}`; output.push(next); steps.push({ phase: 'process', activeLine: 5, message: `Flip positions ${index} and ${index + 1}: ${next}.`, state: { value, index, output: [...output], result: null } }) }
+    steps.push({ phase: 'done', activeLine: 6, message: `${output.length} possible next state(s).`, state: { value, index: null, output, result: output } }); return steps
 }
 
 export default function Problem293Visualizer() {
@@ -107,6 +80,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             className="problem293-visualizer-content"
                         >
                             <p>{step.message}</p>
+                            <div className="problem293-visualizer-states">{(step.state.output || []).map(state => <span key={state}>{state}</span>)}</div>
                         </motion.div>
                     </div>
                     <PlaybackControls
@@ -142,4 +116,3 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
         </>
     )
 }
-

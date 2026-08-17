@@ -20,44 +20,26 @@ import { createPortal } from 'react-dom'
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
-    { line: 1, text: '# Paint House II Solution' },
-    { line: 2, text: '# Minimize cost with k colors for n houses.' },
-    { line: 3, text: 'def solve(input):' },
-    { line: 4, text: '    # Implementation details' },
-    { line: 5, text: '    return result' },
+    { line: 1, text: 'def minCostII(costs):' },
+    { line: 2, text: '    dp = costs[0][:]' },
+    { line: 3, text: '    for house in costs[1:]:' },
+    { line: 4, text: '        min1, min2 = two_smallest(dp)' },
+    { line: 5, text: '        dp = [cost + (min2 if color == min1.index else min1.value) for color, cost in enumerate(house)]' },
+    { line: 6, text: '    return min(dp)' },
 ]
 
 function generateSteps(input) {
-    const steps = []
-
-    steps.push({
-        phase: 'init',
-        activeLine: 1,
-        message: 'Start: Minimize cost with k colors for n houses.',
-        state: { input, processing: false, output: null },
-    })
-
-    steps.push({
-        phase: 'process',
-        activeLine: 3,
-        message: 'Processing input...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'work',
-        activeLine: 4,
-        message: 'Working on solution...',
-        state: { input, processing: true, output: null },
-    })
-
-    steps.push({
-        phase: 'done',
-        activeLine: 5,
-        message: 'Complete: Result obtained',
-        state: { input, processing: false, output: 'Result' },
-    })
-
+    const costs = Array.isArray(input?.[0]) ? input : (Array.isArray(input) ? input : [])
+    if (!costs.length || !costs[0]?.length) return [{ phase: 'done', activeLine: 6, message: 'No houses to paint.', state: { dp: [], output: 0 } }]
+    let dp = [...costs[0]]
+    const steps = [{ phase: 'init', activeLine: 2, message: `Start with the first house costs: [${dp.join(', ')}].`, state: { dp: [...dp], row: 0, output: null } }]
+    for (let row = 1; row < costs.length; row += 1) {
+      const sorted = dp.map((value, index) => ({ value, index })).sort((a, b) => a.value - b.value)
+      const previous = [...dp]
+      dp = costs[row].map((cost, color) => cost + (color === sorted[0].index ? sorted[1].value : sorted[0].value))
+      steps.push({ phase: 'process', activeLine: 5, message: `House ${row}: combine each color with the cheapest different previous color.`, state: { dp: [...dp], previous, row, min1: sorted[0], min2: sorted[1], output: null } })
+    }
+    steps.push({ phase: 'done', activeLine: 6, message: `Minimum total painting cost is ${Math.min(...dp)}.`, state: { dp, row: costs.length - 1, output: Math.min(...dp) } })
     return steps
 }
 
@@ -107,6 +89,8 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             className="problem265-visualizer-content"
                         >
                             <p>{step.message}</p>
+                            <div className="problem265-visualizer-costs">{(step.state.dp || []).map((cost, color) => <span key={color}>c{color}: {cost}</span>)}</div>
+                            {step.state.output !== null && <strong>minimum: {step.state.output}</strong>}
                         </motion.div>
                     </div>
                     <PlaybackControls
