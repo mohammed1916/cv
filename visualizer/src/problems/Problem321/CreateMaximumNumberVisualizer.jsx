@@ -21,21 +21,19 @@ const LINE_PATTERN_MAP = {
   1: 'init',
   4: 'choose',
   7: 'compare',
-  10: 'done',
+  9: 'done',
 }
 
 const SOLUTION_CODE = [
-  { line: 1, text: 'function maxNumber(nums1, nums2, k) {' },
-  { line: 2, text: '  let best = [];' },
-  { line: 3, text: '  for (let take1 = Math.max(0, k - nums2.length);' },
-  { line: 4, text: '       take1 <= Math.min(k, nums1.length); take1++) {' },
-  { line: 5, text: '    const a = pickMax(nums1, take1); // monotonic stack' },
-  { line: 6, text: '    const b = pickMax(nums2, k - take1);' },
-  { line: 7, text: '    const candidate = merge(a, b); // lexicographically larger suffix' },
-  { line: 8, text: '    if (greater(candidate, 0, best, 0)) best = candidate;' },
-  { line: 9, text: '  }' },
-  { line: 10, text: '  return best;' },
-  { line: 11, text: '}' },
+  { line: 1, text: 'class Solution:' },
+  { line: 2, text: '    def maxNumber(self, nums1: List[int], nums2: List[int], k: int) -> List[int]:' },
+  { line: 3, text: '        best = []' },
+  { line: 4, text: '        for take1 in range(max(0, k - len(nums2)), min(k, len(nums1)) + 1):' },
+  { line: 5, text: '            a = pick_max(nums1, take1)  # monotonic stack' },
+  { line: 6, text: '            b = pick_max(nums2, k - take1)' },
+  { line: 7, text: '            candidate = merge(a, b)     # take larger remaining suffix' },
+  { line: 8, text: '            best = max(best, candidate)' },
+  { line: 9, text: '        return best' },
 ]
 
 function pickMax(nums, count) {
@@ -84,7 +82,7 @@ function generateSteps({ nums1, nums2, k }) {
     if (replacesBest) best = candidate
     steps.push({ phase: 'compare', activeLine: 8, nums1, nums2, k, take1, take2, chosen1, chosen2, candidate, best, replacesBest, message: replacesBest ? 'This merged candidate is lexicographically larger, so it becomes the best answer.' : 'The current best answer remains lexicographically larger.' })
   }
-  steps.push({ phase: 'done', activeLine: 10, nums1, nums2, k, best, message: `All splits are checked. The maximum number is ${best.join('')}.` })
+  steps.push({ phase: 'done', activeLine: 9, nums1, nums2, k, best, message: `All splits are checked. The maximum number is ${best.join('')}.` })
   return steps
 }
 

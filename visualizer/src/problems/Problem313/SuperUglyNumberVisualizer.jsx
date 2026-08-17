@@ -11,6 +11,7 @@ import { getExamplesOr } from '../../config/examplesRegistry'
 import './SuperUglyNumberVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { DPTable } from '../../components/shared'
+import PointerRail from '../../components/shared/PointerRail'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { createPortal } from 'react-dom'
@@ -20,22 +21,20 @@ const LINE_PATTERN_MAP = {
   1: 'init',
   4: 'candidate',
   7: 'advance',
-  10: 'done'
+  9: 'done'
 }
 
 
 const SOLUTION_CODE = [
-  { line: 1, text: 'function nthSuperUglyNumber(n, primes) {' },
-  { line: 2, text: '  const ugly = [1], pointers = Array(primes.length).fill(0);' },
-  { line: 3, text: '  const next = [...primes];' },
-  { line: 4, text: '  for (let i = 1; i < n; i++) {' },
-  { line: 5, text: '    ugly[i] = Math.min(...next);' },
-  { line: 6, text: '    for (let p = 0; p < primes.length; p++) {' },
-  { line: 7, text: '      while (next[p] === ugly[i]) next[p] = primes[p] * ugly[++pointers[p]];' },
-  { line: 8, text: '    }' },
-  { line: 9, text: '  }' },
-  { line: 10, text: '  return ugly[n - 1];' },
-  { line: 11, text: '}' },
+  { line: 1, text: 'class Solution:' },
+  { line: 2, text: '    def nthSuperUglyNumber(self, n: int, primes: List[int]) -> int:' },
+  { line: 3, text: '        ugly, pointers, next_vals = [1], [0] * len(primes), list(primes)' },
+  { line: 4, text: '        for _ in range(1, n):' },
+  { line: 5, text: '            ugly.append(min(next_vals))' },
+  { line: 6, text: '            for p, prime in enumerate(primes):' },
+  { line: 7, text: '                while next_vals[p] == ugly[-1]:' },
+  { line: 8, text: '                    pointers[p] += 1; next_vals[p] = prime * ugly[pointers[p]]' },
+  { line: 9, text: '        return ugly[-1]' },
 ]
 
 function generateSteps({ n, primes }) {
@@ -51,7 +50,7 @@ function generateSteps({ n, primes }) {
       steps.push({ phase: 'advance', activeLine: 7, ugly: [...ugly], activeIndex: index, pointers: [...pointers], next: [...next], primes, activePrime: primeIndex, message: `Advance prime ${primes[primeIndex]}'s pointer to avoid emitting ${value} again.` })
     }
   }
-  steps.push({ phase: 'done', activeLine: 10, ugly, activeIndex: n - 1, pointers, next, primes, message: `The ${n}th super ugly number is ${ugly[n - 1]}.` })
+  steps.push({ phase: 'done', activeLine: 9, ugly, activeIndex: n - 1, pointers, next, primes, message: `The ${n}th super ugly number is ${ugly[n - 1]}.` })
   return steps
 }
 
@@ -116,6 +115,7 @@ export default function SuperUglyNumberVisualizer() {
         {!input ? <div className="super-ugly-number-error">{inputError}</div> : <>
           <div className="super-ugly-number-step-info"><h3>{step?.message ?? 'Press Play or Step to begin.'}</h3></div>
           <DPTable title="Ugly-number DP sequence" values={[step?.ugly || [1]]} activeCell={{ row: 0, column: step?.activeIndex ?? -1 }} />
+          <PointerRail title="Prime pointers on the DP sequence" values={step?.ugly || [1]} pointers={(step?.primes || input.primes).map((prime, index) => ({ id: `prime-${prime}`, label: `p${prime}`, index: step?.pointers?.[index] ?? 0, tone: step?.activePrime === index ? 'warning' : 'primary' }))} note="Each prime multiplies the ugly number at its pointer." />
         </>}
       </div>
     </div>),

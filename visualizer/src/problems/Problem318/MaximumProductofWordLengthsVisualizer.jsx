@@ -11,6 +11,7 @@ import { getExamplesOr } from '../../config/examplesRegistry'
 import './MaximumProductofWordLengthsVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { BitmaskLane } from '../../components/shared'
+import PointerRail from '../../components/shared/PointerRail'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { createPortal } from 'react-dom'
@@ -20,22 +21,20 @@ const LINE_PATTERN_MAP = {
   1: 'init',
   3: 'encode',
   7: 'compare',
-  10: 'done'
+  9: 'done'
 }
 
 
 const SOLUTION_CODE = [
-  { line: 1, text: 'function maxProduct(words) {' },
-  { line: 2, text: '  const masks = words.map(word => {' },
-  { line: 3, text: '    let mask = 0; for (const ch of word) mask |= 1 << (ch.charCodeAt(0) - 97);' },
-  { line: 4, text: '    return mask;' },
-  { line: 5, text: '  }); let best = 0;' },
-  { line: 6, text: '  for (let i = 0; i < words.length; i++) {' },
-  { line: 7, text: '    for (let j = i + 1; j < words.length; j++) {' },
-  { line: 8, text: '      if ((masks[i] & masks[j]) === 0) best = Math.max(best, words[i].length * words[j].length);' },
-  { line: 9, text: '    }' },
-  { line: 10, text: '  } return best;' },
-  { line: 11, text: '}' },
+  { line: 1, text: 'class Solution:' },
+  { line: 2, text: '    def maxProduct(self, words: List[str]) -> int:' },
+  { line: 3, text: '        masks = [sum(1 << (ord(ch) - ord("a")) for ch in set(word)) for word in words]' },
+  { line: 4, text: '        best = 0' },
+  { line: 5, text: '        for i in range(len(words)):' },
+  { line: 6, text: '            for j in range(i + 1, len(words)):' },
+  { line: 7, text: '                if masks[i] & masks[j] == 0:' },
+  { line: 8, text: '                    best = max(best, len(words[i]) * len(words[j]))' },
+  { line: 9, text: '        return best' },
 ]
 
 function letters(word) { return [...new Set(word)].sort().join('') }
@@ -58,7 +57,7 @@ function generateSteps({ words }) {
     if (improves) best = product
     steps.push({ phase: 'compare', activeLine: 8, words, masks, pair: [i, j], overlap, product, improves, best, message: overlap ? `${words[i]} and ${words[j]} share {${letters(words[i]).split('').filter((ch) => letters(words[j]).includes(ch)).join('')}} — reject this pair.` : `${words[i]} and ${words[j]} are disjoint: product = ${product}${improves ? ', a new best.' : '.'}` })
   }
-  steps.push({ phase: 'done', activeLine: 10, words, masks, best, message: `Every pair is checked. The maximum product is ${best}.` })
+  steps.push({ phase: 'done', activeLine: 9, words, masks, best, message: `Every pair is checked. The maximum product is ${best}.` })
   return steps
 }
 
@@ -117,6 +116,7 @@ export default function MaximumProductofWordLengthsVisualizer() {
           pair={step?.pair}
           overlap={Boolean(step?.overlap)}
         />
+        {step?.pair && <PointerRail title="Pair scan pointers" values={step.words} pointers={[{ id: 'i', label: 'i', index: step.pair[0], tone: 'primary' }, { id: 'j', label: 'j', index: step.pair[1], tone: 'warning' }]} note="Compare only pairs i < j." />}
         {step?.pair && <div className={`maximum-productof-word-lengths-pair ${step.overlap ? 'overlap' : 'disjoint'}`}><span>Pair</span><code>{step.words[step.pair[0]]} × {step.words[step.pair[1]]} = {step.product}</code><span>{step.overlap ? 'shared letters' : 'disjoint'}</span></div>}
         <div className="maximum-productof-word-lengths-best"><span>best product</span><strong>{step?.best ?? 0}</strong></div>
       </div>
