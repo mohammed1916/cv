@@ -70,6 +70,10 @@ export default function ChatDrawer() {
     try { return window.sessionStorage.getItem('chat.ollama-api-key') || ''; } catch (err) { void err }
     return '';
   });
+  const [geminiApiKey, setGeminiApiKey] = useState(() => {
+    try { return window.sessionStorage.getItem('chat.gemini-api-key') || ''; } catch (err) { void err }
+    return '';
+  });
   const selectedModel = providerConfig.model || (providerConfig.provider === 'gemini' ? 'gemini-2.5-flash' : providerConfig.provider === 'ollama-cloud' ? 'gpt-oss:120b' : 'gemma4:e2b');
   const selectedProviderLabel = providerConfig.provider === 'gemini'
     ? 'Gemini'
@@ -250,7 +254,7 @@ export default function ChatDrawer() {
         ];
 
         let accumulated = "";
-        for await (const delta of streamProviderChat(history, { ...providerConfig, ollamaApiKey })) {
+        for await (const delta of streamProviderChat(history, { ...providerConfig, ollamaApiKey, geminiApiKey })) {
           accumulated += delta;
           updateLastMessage({ text: accumulated });
         }
@@ -259,7 +263,7 @@ export default function ChatDrawer() {
         const guidance = providerConfig.provider === 'ollama-cloud'
           ? `Set \`OLLAMA_API_KEY\` for the Vite server and confirm \`${selectedModel}\` is available through Ollama Cloud.`
           : providerConfig.provider === 'gemini'
-            ? `Set \`GEMINI_API_KEY\` for the Vite server and verify the selected model \`${selectedModel}\`.`
+            ? `Enter a Gemini API key above or set \`GEMINI_API_KEY\` for the Vite server, then verify \`${selectedModel}\`.`
             : `Make sure Ollama is running with \`ollama serve\` and the model \`${selectedModel}\` is available.`;
         updateLastMessage({
           text: `Error: ${err.message}\n\n${guidance}`,
@@ -270,7 +274,7 @@ export default function ChatDrawer() {
         setIsStreaming(false);
       }
     },
-    [messages, addMessage, updateLastMessage, problemTitle, currentStep, problemDescription, problemState, getManifest, providerConfig, ollamaApiKey, selectedModel],
+    [messages, addMessage, updateLastMessage, problemTitle, currentStep, problemDescription, problemState, getManifest, providerConfig, ollamaApiKey, geminiApiKey, selectedModel],
   );
 
   if (!isOpen) return null;
@@ -406,9 +410,30 @@ export default function ChatDrawer() {
                   />
                 </label>
               )}
+              {providerConfig.provider === 'gemini' && (
+                <label className="chat-cloud-key">Gemini API key
+                  <input
+                    type="password"
+                    value={geminiApiKey}
+                    onChange={(e) => {
+                      const nextKey = e.target.value;
+                      setGeminiApiKey(nextKey);
+                      try {
+                        if (nextKey) window.sessionStorage.setItem('chat.gemini-api-key', nextKey);
+                        else window.sessionStorage.removeItem('chat.gemini-api-key');
+                      } catch (err) { void err }
+                    }}
+                    placeholder="Google AI API key"
+                    autoComplete="off"
+                  />
+                </label>
+              )}
             </form>
             {providerConfig.provider === 'ollama-cloud' && (
               <p className="chat-cloud-key-note">Kept only for this browser session; sent to the chat proxy and Ollama Cloud for your request, never saved by this app.</p>
+            )}
+            {providerConfig.provider === 'gemini' && (
+              <p className="chat-cloud-key-note">Kept only for this browser session; sent to the chat proxy and Google for your request, never saved by this app.</p>
             )}
           </div>
         </div>

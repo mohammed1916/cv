@@ -11,18 +11,19 @@ function chatApiPlugin(env) {
         req.on('data', (chunk) => { raw += chunk })
         req.on('end', async () => {
           try {
-            const { provider = 'ollama-local', model, messages = [], ollamaApiKey } = JSON.parse(raw || '{}')
+            const { provider = 'ollama-local', model, messages = [], ollamaApiKey, geminiApiKey } = JSON.parse(raw || '{}')
+            // Browser-session BYOK values take precedence. They are used only
+            // for this request and are never written to disk or logs.
+            const googleApiKey = geminiApiKey || env.GEMINI_API_KEY
             const endpoint = provider === 'gemini'
-              ? `https://generativelanguage.googleapis.com/v1beta/models/${model || env.GEMINI_MODEL || 'gemini-2.5-flash'}:streamGenerateContent?alt=sse&key=${env.GEMINI_API_KEY || ''}`
+              ? `https://generativelanguage.googleapis.com/v1beta/models/${model || env.GEMINI_MODEL || 'gemini-2.5-flash'}:streamGenerateContent?alt=sse&key=${googleApiKey || ''}`
               : provider === 'ollama-cloud'
                 ? `${env.OLLAMA_CLOUD_URL || 'https://ollama.com'}/api/chat`
                 : `${env.OLLAMA_LOCAL_URL || 'http://localhost:11434'}/api/chat`
-            if (provider === 'gemini' && !env.GEMINI_API_KEY) throw new Error('GEMINI_API_KEY is not configured')
+            if (provider === 'gemini' && !googleApiKey) throw new Error('GEMINI_API_KEY is not configured')
             const payload = provider === 'gemini'
               ? { contents: messages.filter(m => m.role !== 'system').map(m => ({ role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.text || '' }] })), systemInstruction: { parts: [{ text: messages.find(m => m.role === 'system')?.text || '' }] } }
               : { model: model || env.OLLAMA_MODEL || 'gemma4:e2b', messages: messages.map(m => ({ role: m.role, content: m.text || '' })), stream: true }
-            // A browser-session BYOK takes precedence. It is used only for
-            // this request and deliberately never written to disk or logs.
             const cloudApiKey = ollamaApiKey || env.OLLAMA_API_KEY || env.OLLAMA_CLOUD_API_KEY
             if (provider === 'ollama-cloud' && !cloudApiKey) throw new Error('OLLAMA_API_KEY is not configured')
             const upstream = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', ...(provider === 'ollama-cloud' ? { Authorization: `Bearer ${cloudApiKey}` } : {}) }, body: JSON.stringify(payload) })
