@@ -133,11 +133,9 @@ export default function LuminoDockPanel({ panels, onPanelReady }) {
         // on the left, code on the right, and the short status readout above
         // the code.  Older visualizers all use these conventional ids.
         const isCode = panelConfig.id === 'code'
-        const refWidget = isCode
-          ? firstWidget
-          : previousWidget
+        const refWidget = isCode && !panelConfig.dockMode ? firstWidget : previousWidget
         dock.addWidget(widget, {
-          mode: isCode ? 'split-right' : (panelConfig.dockMode || 'split-right'),
+          mode: panelConfig.dockMode || 'split-right',
           ref: refWidget,
         })
       }

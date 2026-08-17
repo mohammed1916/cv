@@ -158,8 +158,8 @@ export default function CreateMaximumNumberVisualizer() {
   }
 
   const panelConfigs = useMemo(() => [
-    { id: 'code', title: 'Code' },
-    { id: 'input', title: 'Input', dockMode: 'split-bottom' },
+    { id: 'input', title: 'Input' },
+    { id: 'code', title: 'Code', dockMode: 'split-bottom' },
     { id: 'viz', title: '📚 Greedy stacks', dockMode: 'split-right' },
   ], [])
   const panelContents = {

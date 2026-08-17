@@ -15,6 +15,10 @@
 .algorithm-dp-table small { color: var(--text-muted); text-align: center; font-size: 10px; }
 .algorithm-dp-table b { display: grid; min-height: 30px; place-items: center; border: 1px solid var(--border); border-radius: 5px; background: var(--surface); color: var(--text); font: 600 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
 .algorithm-dp-table b.active { border-color: var(--primary); background: var(--primary-glow); }
+.algorithm-dp-table b.related { border-color: var(--warning); background: var(--warning-glow); }
+.algorithm-graph-host { height: 250px; min-height: 180px; }
+.algorithm-graph-embedded { display: flex; flex: 1 1 auto; min-height: 0; height: 100%; }
+.algorithm-graph-embedded .algorithm-graph-host { flex: 1 1 auto; height: 100%; min-height: 0; }
 .algorithm-graph-canvas { width: 100%; min-height: 155px; border: 1px solid var(--border); border-radius: 7px; background: var(--surface); }
 .algorithm-graph-canvas line { stroke: var(--border); stroke-width: 2; }
 .algorithm-graph-canvas circle { fill: var(--surface2); stroke: var(--border); stroke-width: 2; }

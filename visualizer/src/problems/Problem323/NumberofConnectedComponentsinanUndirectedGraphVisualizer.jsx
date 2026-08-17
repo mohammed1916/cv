@@ -17,25 +17,26 @@ import { createPortal } from 'react-dom'
 
 const PATTERNS = ['init', 'component', 'traverse', 'done']
 const LINE_PATTERN_MAP = {
-  1: 'init',
-  4: 'component',
-  7: 'traverse',
-  10: 'done'
+  3: 'init',
+  8: 'component',
+  11: 'traverse',
+  12: 'done'
 }
 
 
 const SOLUTION_CODE = [
-  { line: 1, text: 'function countComponents(n, edges) {' },
-  { line: 2, text: '  const graph = Array.from({ length: n }, () => []);' },
-  { line: 3, text: '  for (const [u, v] of edges) graph[u].push(v), graph[v].push(u);' },
-  { line: 4, text: '  const visited = new Set(); let components = 0;' },
-  { line: 5, text: '  for (let start = 0; start < n; start++) {' },
-  { line: 6, text: '    if (visited.has(start)) continue; components++;' },
-  { line: 7, text: '    const stack = [start]; while (stack.length) {' },
-  { line: 8, text: '      const node = stack.pop(); if (visited.has(node)) continue;' },
-  { line: 9, text: '      visited.add(node); stack.push(...graph[node]);' },
-  { line: 10, text: '    } } return components;' },
-  { line: 11, text: '}' },
+  { line: 1, text: 'class Solution:' },
+  { line: 2, text: '    def countComponents(self, n: int, edges: List[List[int]]) -> int:' },
+  { line: 3, text: '        graph = [[] for _ in range(n)]' },
+  { line: 4, text: '        for u, v in edges: graph[u].append(v); graph[v].append(u)' },
+  { line: 5, text: '        visited, components = set(), 0' },
+  { line: 6, text: '        for start in range(n):' },
+  { line: 7, text: '            if start in visited: continue' },
+  { line: 8, text: '            components += 1; stack = [start]' },
+  { line: 9, text: '            while stack:' },
+  { line: 10, text: '                node = stack.pop()' },
+  { line: 11, text: '                if node not in visited: visited.add(node); stack.extend(graph[node])' },
+  { line: 12, text: '        return components' },
 ]
 
 function generateSteps({ n, edges }) {
@@ -49,16 +50,16 @@ function generateSteps({ n, edges }) {
     if (visited.has(start)) continue
     components += 1
     const stack = [start]
-    steps.push({ phase: 'component', activeLine: 6, nodes, edges, visited: [...visited].map(String), activeNode: String(start), components, stack: [...stack], message: `Node ${start} is unvisited, so it starts component ${components}.` })
+    steps.push({ phase: 'component', activeLine: 8, nodes, edges, visited: [...visited].map(String), activeNode: String(start), components, stack: [...stack], message: `Node ${start} is unvisited, so it starts component ${components}.` })
     while (stack.length) {
       const node = stack.pop()
       if (visited.has(node)) continue
       visited.add(node)
       for (const neighbor of graph[node]) if (!visited.has(neighbor)) stack.push(neighbor)
-      steps.push({ phase: 'traverse', activeLine: 9, nodes, edges, visited: [...visited].map(String), activeNode: String(node), components, stack: [...stack], message: `Visit ${node}; add its unvisited neighbors to the DFS stack.` })
+      steps.push({ phase: 'traverse', activeLine: 11, nodes, edges, visited: [...visited].map(String), activeNode: String(node), components, stack: [...stack], message: `Visit ${node}; add its unvisited neighbors to the DFS stack.` })
     }
   }
-  steps.push({ phase: 'done', activeLine: 10, nodes, edges, visited: [...visited].map(String), components, stack: [], message: `All nodes are visited. The graph has ${components} connected component${components === 1 ? '' : 's'}.` })
+  steps.push({ phase: 'done', activeLine: 12, nodes, edges, visited: [...visited].map(String), components, stack: [], message: `All nodes are visited. The graph has ${components} connected component${components === 1 ? '' : 's'}.` })
   return steps
 }
 
@@ -110,16 +111,16 @@ export default function NumberofConnectedComponentsinanUndirectedGraphVisualizer
   }, [handleReset])
 
   const panelConfigs = useMemo(() => [
-    { id: 'code', title: 'Code' },
-    { id: 'input', title: 'Input', dockMode: 'split-bottom' },
+    { id: 'input', title: 'Input' },
+    { id: 'code', title: 'Code', dockMode: 'split-bottom' },
     { id: 'graph', title: '🕸️ DFS graph', dockMode: 'split-right' },
     { id: 'frontier', title: 'DFS frontier', dockMode: 'split-bottom' },
   ], [])
   const panelContents = {
     code: (<div style={{ position: 'relative', height: '100%', minHeight: 0 }}><CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} disableResizer />{showPatternOverlay && <CodePatternAnnotations linePatterns={LINE_PATTERN_MAP} currentPhase={step?.phase} activeLineDom={activeLineDom} activeLine={step?.activeLine} />}</div>),
     input: (<div className="numberof-connected-componentsinan-undirected-graph-panel"><div className="numberof-connected-componentsinan-undirected-graph-panel-head">Nodes and edges</div><div className="numberof-connected-componentsinan-undirected-graph-panel-body"><textarea value={inputValue} onChange={(e) => setInputValue(e.target.value)} className="numberof-connected-componentsinan-undirected-graph-textarea" placeholder="Enter input..." /><div className="numberof-connected-componentsinan-undirected-graph-examples">{EXAMPLES.map((example, i) => <button key={i} className="numberof-connected-componentsinan-undirected-graph-example-btn" onClick={() => applyExample(example)}>{example.label}</button>)}</div></div></div>),
-    graph: (<div className="numberof-connected-componentsinan-undirected-graph-panel numberof-connected-componentsinan-undirected-graph-panel-viz"><div className="numberof-connected-componentsinan-undirected-graph-panel-head">DFS graph</div><div className="numberof-connected-componentsinan-undirected-graph-panel-body">
-      {!input ? <div className="numberof-connected-componentsinan-undirected-graph-error">{inputError}</div> : <><div className="numberof-connected-componentsinan-undirected-graph-step-info"><h3>{step?.message ?? 'Press Play or Step to begin.'}</h3></div><GraphFrontierLane nodes={step?.nodes || []} edges={step?.edges || []} activeNode={step?.activeNode} visited={step?.visited || []} /></>}
+    graph: (<div className="numberof-connected-componentsinan-undirected-graph-panel numberof-connected-componentsinan-undirected-graph-panel-viz"><div className="numberof-connected-componentsinan-undirected-graph-panel-head">DFS graph</div><div className="numberof-connected-componentsinan-undirected-graph-panel-body numberof-connected-componentsinan-undirected-graph-canvas-body">
+      {!input ? <div className="numberof-connected-componentsinan-undirected-graph-error">{inputError}</div> : <GraphFrontierLane nodes={step?.nodes || []} edges={step?.edges || []} activeNode={step?.activeNode} visited={step?.visited || []} embedded />}
     </div></div>),
     frontier: (<div className="numberof-connected-componentsinan-undirected-graph-panel numberof-connected-componentsinan-undirected-graph-panel-viz"><div className="numberof-connected-componentsinan-undirected-graph-panel-head">Traversal state</div><div className="numberof-connected-componentsinan-undirected-graph-panel-body"><div className="numberof-connected-componentsinan-undirected-graph-state"><span>components <b>{step?.components ?? 0}</b></span><span>DFS stack <code>[{(step?.stack || []).join(', ')}]</code></span></div></div></div>),
   }
