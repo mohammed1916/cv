@@ -51,6 +51,12 @@ const SOLUTION_CODE = [
   { line: 30, text: '        return list(pacific & atlantic)' },
 ]
 
+const EXAMPLES = [
+  { label: 'Classic 5 × 5', input: [[1,2,2,3,5],[3,2,3,4,4],[2,4,5,3,1],[6,7,1,4,5],[5,1,1,2,4]] },
+  { label: 'Single cell', input: [[7]] },
+  { label: 'Flat grid', input: [[1,1,1],[1,1,1],[1,1,1]] },
+]
+
 function generateSteps(heights) {
   const steps = []
 
@@ -216,13 +222,7 @@ function generateSteps(heights) {
 }
 
 function Problem417Visualizer() {
-  const defaultHeights = [
-    [4, 2, 7, 3, 4],
-    [7, 4, 6, 5, 9],
-    [6, 9, 6, 7, 6],
-    [7, 5, 1, 6, 3],
-    [5, 1, 7, 6, 2],
-  ]
+  const defaultHeights = EXAMPLES[0].input
 
   const [heights, setHeights] = useState(defaultHeights)
   const [inputValue, setInputValue] = useState(JSON.stringify(defaultHeights))
@@ -231,21 +231,23 @@ function Problem417Visualizer() {
       ...current,
       relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
     })), [heights])
-  const { activeStepIndex, isPlaying, togglePlayback, reset, setActiveStepIndex } =
-    usePlaybackState(steps)
+  const { stepIndex, isPlaying, speed, setSpeed, togglePlay, handleReset: reset, stepForward, stepBack, isDone, setStepIndex } = usePlaybackState(steps.length)
 
-  const { highlightLines } = useCodeVisualConnectivity(activeStepIndex, steps)
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  const activeStep = steps[activeStepIndex]
+  const activeStep = steps[Math.max(0, stepIndex)] || steps[0]
 
   const handleRun = useCallback(() => {
     try {
       const parsed = JSON.parse(inputValue)
+      if (!Array.isArray(parsed) || !parsed.length || !parsed.every(row => Array.isArray(row) && row.length === parsed[0].length && row.every(Number.isFinite))) throw new Error('Enter a non-empty rectangular JSON matrix of numbers.')
       setHeights(parsed)
       reset()
     } catch (e) {
-      alert('Invalid JSON input')
+      // Keep the current runnable grid in place; the inline input error below
+      // tells the learner exactly why it was not applied.
+      setInputValue((value) => value)
     }
   }, [inputValue, reset])
 
@@ -276,8 +278,9 @@ function Problem417Visualizer() {
       <div className="paw-top">
         <div className="paw-panel paw-code-panel">
           <CodeTracePanel
-            lines={SOLUTION_CODE}
-            highlightLines={highlightLines}
+            codeLines={SOLUTION_CODE}
+            step={activeStep}
+            highlightedLines={connectivity.highlightedLines}
             title="Solution Code"
             onActiveLineDomChange={setActiveLineDom}
           />
@@ -381,11 +384,17 @@ function Problem417Visualizer() {
       <div className="paw-bottom">
         <FloatingPanel title="Playback Controls">
         <PlaybackControls
-          activeStep={activeStepIndex}
-          totalSteps={steps.length}
           isPlaying={isPlaying}
-          onTogglePlayback={togglePlayback}
-          onStepChange={setActiveStepIndex}
+          isDone={isDone}
+          speed={speed}
+          onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+          onPlayToggle={togglePlay}
+          onPrev={stepBack}
+          onNext={stepForward}
+          onReset={reset}
+          prevDisabled={stepIndex < 0}
+          nextDisabled={isDone}
+          resetDisabled={stepIndex < 0}
           showPatternOverlay={showPatternOverlay}
           onShowPatternOverlayChange={setShowPatternOverlay}
           patternOverlayLabel="Show pattern overlay"

@@ -361,7 +361,7 @@ export default function IsomorphicStringsVisualizer() {
           </>
         )}
       </>
-      <FloatingPanel title="Controls">
+      <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}

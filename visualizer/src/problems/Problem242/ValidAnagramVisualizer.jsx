@@ -9,8 +9,10 @@ import { getExamples } from '../../config/examplesRegistry'
 import './ValidAnagramVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { createPortal } from 'react-dom'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -133,9 +135,13 @@ export default function ValidAnagramVisualizer() {
     const count = step?.count ?? {}
     const allKeys = Array.from(new Set([...Object.keys(count), ...s.split(''), ...t.split('')])).sort()
 
-    return (
-        <div className="va-shell">
-      <ManualInputPanel
+    const panelConfigs = useMemo(() => [
+        { id: 'input', title: 'Input', dockMode: 'split-top' },
+        { id: 'visualization', title: 'Visualization' },
+        { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
+    ], [])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const inputPanel = <ManualInputPanel
         fields={[{"key":"s","label":"s","type":"string"},{"key":"t","label":"t","type":"string"}]}
         values={{ s: sInput, t: tInput }}
         onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 't') setTInput(v); handleReset() }}
@@ -143,7 +149,7 @@ export default function ValidAnagramVisualizer() {
         applyExample={applyExample}
         inputError={inputError}
       />
-
+    const visualizationPanel = <div className="va-shell">
             <div className="va-top">
                 {/* ── Main panel ── */}
                 <section className="va-panel main">
@@ -152,35 +158,6 @@ export default function ValidAnagramVisualizer() {
                         {inputError && <span className="va-error">{inputError}</span>}
                     </header>
                     <div className="va-body">
-                        <div className="va-examples">
-                            {EXAMPLES.map((ex) => (
-                                <button key={ex.label} className="va-chip" onClick={() => applyExample(ex)}>
-                                    {ex.label}
-                                </button>
-                            ))}
-                        </div>
-
-                        <div className="va-inputs">
-                            <div className="va-input-group">
-                                <label className="va-label">s</label>
-                                <input
-                                    className="va-input"
-                                    value={sInput}
-                                    onChange={(e) => { setSInput(e.target.value); handleReset() }}
-                                    placeholder="anagram"
-                                />
-                            </div>
-                            <div className="va-input-group">
-                                <label className="va-label">t</label>
-                                <input
-                                    className="va-input"
-                                    value={tInput}
-                                    onChange={(e) => { setTInput(e.target.value); handleReset() }}
-                                    placeholder="nagaram"
-                                />
-                            </div>
-                        </div>
-
                         {/* String display rows */}
                         {['s', 't'].map((str) => {
                             const chars = (str === 's' ? s : t).split('')
@@ -249,11 +226,21 @@ export default function ValidAnagramVisualizer() {
                 </section>
             </div>
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-
-            <div className={`va-status${step?.result === true ? ' ok' : step?.result === false ? ' fail' : ''}`}>
+    </div>
+    const codePanel = <>
+      <div className={`va-status${step?.result === true ? ' ok' : step?.result === false ? ' fail' : ''}`}>
                 {step?.message ?? 'Press Play or Step to begin.'}
-            </div>
+      </div>
+      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+    </>
+    return (
+        <>
+          <LuminoDockPanel panels={panelConfigs} onPanelReady={setPanelDivs} />
+          {panelDivs && <>
+            {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+            {panelDivs.visualization && createPortal(visualizationPanel, panelDivs.visualization)}
+            {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          </>}
 
             <FloatingPanel title="Playback Controls">
         <PlaybackControls
@@ -269,6 +256,6 @@ export default function ValidAnagramVisualizer() {
             />
       </FloatingPanel>
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
-        </div>
+        </>
     )
 }

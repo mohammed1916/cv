@@ -3,6 +3,8 @@ import PlaybackControls from './PlaybackControls'
 import CodeSnippetChips from './CodeSnippetChips'
 import CodeVisualLinkLegend from './CodeVisualLinkLegend'
 import VisualizationControls from './VisualizationControls'
+import FloatingPanel from './shared/FloatingPanel'
+import { createPortal } from 'react-dom'
 
 export default function VisualizerPlaybackSection({
   step,
@@ -15,6 +17,7 @@ export default function VisualizerPlaybackSection({
   fallbackStatus = 'Press Play to begin.',
   controlsContainerClassName,
   playback,
+  floatingPlayback = false,
   connectivity = null,
   // Visualization features (optional)
   visualizationFeatures = [],
@@ -70,7 +73,9 @@ export default function VisualizerPlaybackSection({
     <>
       {codeTraceContainerClassName ? <div className={codeTraceContainerClassName}>{codeTrace}</div> : codeTrace}
       <div className={statusClass}>{statusMessage || fallbackStatus}</div>
-      {controlsContainerClassName ? <div className={controlsContainerClassName}>{controls}</div> : controls}
+      {floatingPlayback
+        ? createPortal(<FloatingPanel title="Playback Controls">{controls}</FloatingPanel>, document.body)
+        : controlsContainerClassName ? <div className={controlsContainerClassName}>{controls}</div> : controls}
     </>
   )
 }

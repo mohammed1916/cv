@@ -384,7 +384,7 @@ export default function ContainsDuplicateIIVisualizer() {
         </>
       )}
       {createPortal(
-        <FloatingPanel title="Controls">
+        <FloatingPanel title="Playback Controls">
           <PlaybackControls
             isPlaying={isPlaying}
             isDone={isDone}
@@ -409,4 +409,3 @@ export default function ContainsDuplicateIIVisualizer() {
     </div>
   )
 }
-

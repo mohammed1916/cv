@@ -9,6 +9,7 @@ import { usePlaybackState } from '../../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../../hooks/usePatternOverlay'
 import { getExamples } from '../../../config/examplesRegistry'
+import ManualInputPanel from '../../../components/shared/ManualInputPanel'
 import './HammingDistanceVisualizer.css'
 import { createPortal } from 'react-dom'
 const EXAMPLES = getExamples('hamming-distance')
@@ -305,7 +306,8 @@ function VisualizationPanel({ x, y, step, applyEx }) {
 }
 
 export default function HammingDistanceVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { x: 1, y: 4 })
+  const [inputText, setInputText] = useState(JSON.stringify(EXAMPLES[0] || { x: 1, y: 4 }))
+  const { ex, inputError } = useMemo(() => { try { const value = JSON.parse(inputText), x = Number(value.x), y = Number(value.y); if (!Number.isInteger(x) || !Number.isInteger(y) || x < 0 || y < 0 || x > 2147483647 || y > 2147483647) throw new Error('Use non-negative 32-bit integer values for x and y.'); return { ex: { x, y }, inputError: '' } } catch (error) { return { ex: { x: 1, y: 4 }, inputError: error.message } } }, [inputText])
 
   const steps = useMemo(
     () =>
@@ -321,7 +323,7 @@ export default function HammingDistanceVisualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setInputText(JSON.stringify(e)); handleReset(); }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -332,8 +334,9 @@ export default function HammingDistanceVisualizer() {
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const panelConfigs = useMemo(() => [
-    { id: 'code', title: 'Code' },
-    { id: 'viz', title: '🔢 Hamming Distance', dockMode: 'split-right' },
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: '🔢 Hamming Distance', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
   ], [])
   const panelContents = useMemo(() => ({
     code: (<CodeTracePanel
@@ -359,6 +362,7 @@ export default function HammingDistanceVisualizer() {
         <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
         {panelDivs && (
           <>
+            {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'operands', label: 'x and y (JSON)', type: 'string' }]} values={{ operands: inputText }} onChange={(_, value) => { setInputText(value); handleReset() }} examples={EXAMPLES} activeLabel={null} applyExample={applyEx} inputError={inputError} />, panelDivs.input)}
             {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
             {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
           </>
@@ -387,4 +391,3 @@ export default function HammingDistanceVisualizer() {
     </div>
   )
 }
-

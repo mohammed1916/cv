@@ -9,8 +9,10 @@ import { getExamples } from '../../config/examplesRegistry'
 import "./ReverseBitsVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { createPortal } from 'react-dom'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -74,9 +76,14 @@ export default function ReverseBitsVisualizer() {
     const i = step?.i ?? -1;
     const lsb = step?.lsb;
 
-    return (
-        <div className="rb-shell">
-        <ManualInputPanel
+    const panelConfigs = useMemo(() => [
+        { id: 'input', title: 'Input', dockMode: 'split-top' },
+        { id: 'visualization', title: 'Visualization' },
+        { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
+    ], [])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const inputPanel = <>
+      <ManualInputPanel
           fields={[{"key":"n","label":"n","type":"number"},{"key":"desc","label":"desc","type":"string"}]}
           values={{ n: nInput, desc: descInput }}
           onChange={(k, v) => { if (k === 'n') setNInput(v); if (k === 'desc') setDescInput(v); handleReset() }}
@@ -84,16 +91,9 @@ export default function ReverseBitsVisualizer() {
           activeLabel={ex?.label}
           applyExample={applyEx}
           inputError={inputError}
-        />
-      
-            <div className="rb-examples">
-                {EXAMPLES.map(e => (
-                    <button key={e.label} className={`rb-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>
-                        {e.label}: {e.desc}
-                    </button>
-                ))}
-            </div>
-
+      />
+    </>
+    const visualizationPanel = <div className="rb-shell">
             <div className="rb-panel">
                 <div className="rb-panel-label">Input n</div>
                 <div className="rb-bits">
@@ -139,8 +139,19 @@ export default function ReverseBitsVisualizer() {
 
             {step?.done && <div className="rb-result">✓ Reversed: {displayR >>> 0}</div>}
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-            <div className="rb-status">{step?.message ?? "Press Play to begin."}</div>
+    </div>
+    const codePanel = <>
+      <div className="rb-status">{step?.message ?? "Press Play to begin."}</div>
+      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+    </>
+    return (
+        <>
+          <LuminoDockPanel panels={panelConfigs} onPanelReady={setPanelDivs} />
+          {panelDivs && <>
+            {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+            {panelDivs.visualization && createPortal(visualizationPanel, panelDivs.visualization)}
+            {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          </>}
             <FloatingPanel title="Playback Controls">
         <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
@@ -154,6 +165,6 @@ export default function ReverseBitsVisualizer() {
             />
       </FloatingPanel>
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
-        </div>
+        </>
     );
 }

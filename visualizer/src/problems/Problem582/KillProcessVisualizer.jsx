@@ -448,6 +448,7 @@ export default function KillProcessVisualizer() {
       </div>
 
       <VisualizerPlaybackSection
+        floatingPlayback
         step={step}
         codeLines={SOLUTION_CODE}
         statusClassName="kp-status"

@@ -10,8 +10,10 @@ import { getExamples } from '../../config/examplesRegistry'
 import './KthSmallestVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { createPortal } from 'react-dom'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -133,29 +135,24 @@ export default function KthSmallestVisualizer() {
     const edges = step?.edges ?? []
     const allNodes = step?.allNodes ?? []
 
-    return (
-        <div className="ks-shell">
-      <ManualInputPanel
+    const panelConfigs = useMemo(() => [
+        { id: 'input', title: 'Input', dockMode: 'split-top' },
+        { id: 'visualization', title: 'Visualization' },
+        { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
+    ], [])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const inputPanel = <ManualInputPanel
         fields={[{"key":"arr","label":"arr","type":"string"},{"key":"k","label":"k","type":"string"}]}
         values={{ arr: arrInput, k: kInput }}
         onChange={(k, v) => { if (k === 'arr') setArrInput(v); if (k === 'k') setKInput(v); handleReset() }}
         examples={EXAMPLES}
         applyExample={applyExample}
       />
-
+    const visualizationPanel = <div className="ks-shell">
             <div className="ks-top">
                 <section className="ks-panel main">
                     <header className="ks-head"><span>Inorder DFS (sorted BST traversal)</span></header>
                     <div className="ks-body">
-                        <div className="ks-examples">
-                            {EXAMPLES.map((ex) => (
-                                <button key={ex.label} className="ks-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                            ))}
-                        </div>
-                        <div className="ks-inputs">
-                            <label>Tree <input className="ks-input wide" value={arrInput} onChange={(e) => { setArrInput(e.target.value); handleReset() }} /></label>
-                            <label>k <input className="ks-input narrow" value={kInput} onChange={(e) => { setKInput(e.target.value); handleReset() }} /></label>
-                        </div>
                         <div className="ks-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
                             <svg style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }} width={CANVAS_W} height={CANVAS_H}>
                                 {edges.map(({ fromId, toId }) => {
@@ -218,8 +215,19 @@ export default function KthSmallestVisualizer() {
                 </section>
             </div>
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-            <div className="ks-status">{step?.message || 'Press Play to begin.'}</div>
+    </div>
+    const codePanel = <>
+      <div className="ks-status">{step?.message || 'Press Play to begin.'}</div>
+      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+    </>
+    return (
+        <>
+          <LuminoDockPanel panels={panelConfigs} onPanelReady={setPanelDivs} />
+          {panelDivs && <>
+            {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+            {panelDivs.visualization && createPortal(visualizationPanel, panelDivs.visualization)}
+            {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          </>}
             <FloatingPanel title="Playback Controls">
         <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
@@ -233,6 +241,6 @@ export default function KthSmallestVisualizer() {
             />
       </FloatingPanel>
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
-        </div>
+        </>
     )
 }

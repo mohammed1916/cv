@@ -259,6 +259,7 @@ export default function HouseRobberVisualizer({ problem }) {
       </>
 
       <VisualizerPlaybackSection
+        floatingPlayback
         step={step}
         codeLines={codeLines}
         statusClassName="hr-status"

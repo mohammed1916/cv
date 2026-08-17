@@ -33,6 +33,13 @@ const SOLUTION_CODE = [
   { line: 13, text: "    return result" },
 ]
 
+const EXAMPLES = [
+  { label: 'Two numbers → 9', k: 2, n: 9 },
+  { label: 'Three numbers → 7', k: 3, n: 7 },
+  { label: 'No solution', k: 4, n: 1 },
+  { label: 'All nine numbers', k: 9, n: 45 },
+]
+
 function generateSteps(k, n) {
   const steps = []
   steps.push({
@@ -240,15 +247,15 @@ function VisualizationPanel({ step }) {
 }
 
 export default function CombinationSumIIIVisualizer() {
-  const [kInput, setKInput] = useState(3);
-  const [nInput, setNInput] = useState(7);
+  const [kInput, setKInput] = useState(EXAMPLES[1].k);
+  const [nInput, setNInput] = useState(EXAMPLES[1].n);
   const { k, n, inputError } = useMemo(() => {
     try {
-      const parsedK = Number(kInput); if (isNaN(parsedK)) throw new Error('k must be a number');
-      const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
+      const parsedK = Number(kInput); if (!Number.isInteger(parsedK) || parsedK < 1 || parsedK > 9) throw new Error('k must be an integer from 1 through 9');
+      const parsedN = Number(nInput); if (!Number.isInteger(parsedN) || parsedN < 1 || parsedN > 45) throw new Error('n must be an integer from 1 through 45');
       return { k: parsedK, n: parsedN, inputError: '' };
     } catch (e) {
-      return { k: 3, n: 7, inputError: e.message };
+      return { k: EXAMPLES[1].k, n: EXAMPLES[1].n, inputError: e.message };
     }
   }, [kInput, nInput]);
   const steps = useMemo(() => generateSteps(k, n).map((s) => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [k, n])
@@ -258,8 +265,8 @@ export default function CombinationSumIIIVisualizer() {
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const panelConfigs = useMemo(() => [
-    { id: 'code', title: "Code" },
-    { id: 'viz', title: "🔢 Combinations", dockMode: 'split-right' },
+    { id: 'viz', title: "🔢 Combinations" },
+    { id: 'code', title: "Code", dockMode: 'split-right' },
   ], [])
   const panelContents = useMemo(() => ({
     code: (<CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />),
@@ -274,7 +281,9 @@ export default function CombinationSumIIIVisualizer() {
           fields={[{"key":"k","label":"k","type":"string"},{"key":"n","label":"n","type":"string"}]}
           values={{ k: kInput, n: nInput }}
           onChange={(k, v) => { if (k === 'k') setKInput(v); if (k === 'n') setNInput(v); handleReset() }}
-          showExamples={false}
+          examples={EXAMPLES}
+          activeLabel={null}
+          applyExample={(example) => { setKInput(example.k); setNInput(example.n); handleReset() }}
           inputError={inputError}
         />
       
@@ -287,7 +296,7 @@ export default function CombinationSumIIIVisualizer() {
           </>
         )}
       </>
-      <FloatingPanel title="Controls">
+      <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -310,4 +319,3 @@ export default function CombinationSumIIIVisualizer() {
     </div>
   )
 }
-

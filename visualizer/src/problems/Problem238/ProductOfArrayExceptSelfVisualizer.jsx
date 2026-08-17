@@ -9,8 +9,10 @@ import { getExamples } from '../../config/examplesRegistry'
 import './ProductOfArrayExceptSelfVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { createPortal } from 'react-dom'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -154,9 +156,13 @@ export default function ProductOfArrayExceptSelfVisualizer() {
     const displayNums = step?.nums ?? nums
     const displayOutput = step?.output ?? Array(nums.length).fill(1)
 
-    return (
-        <div className="poaes-shell">
-      <ManualInputPanel
+    const panelConfigs = useMemo(() => [
+        { id: 'input', title: 'Input', dockMode: 'split-top' },
+        { id: 'visualization', title: 'Visualization' },
+        { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
+    ], [])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const inputPanel = <ManualInputPanel
         fields={[{"key":"nums","label":"nums","type":"array"}]}
         values={{ nums: numsInput }}
         onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
@@ -164,29 +170,13 @@ export default function ProductOfArrayExceptSelfVisualizer() {
         applyExample={applyExample}
         inputError={inputError}
       />
-
+    const visualizationPanel = <div className="poaes-shell">
             <section className="poaes-panel">
                 <header className="poaes-head">
                     <span>Product of Array Except Self · Prefix × Suffix</span>
                     {inputError && <span className="poaes-error">{inputError}</span>}
                 </header>
                 <div className="poaes-body">
-                    <div className="poaes-row-top">
-                        <div className="poaes-examples">
-                            {EXAMPLES.map((ex) => (
-                                <button key={ex.label} className="poaes-chip" onClick={() => applyExample(ex)}>
-                                    {ex.label}
-                                </button>
-                            ))}
-                        </div>
-                        <input
-                            className="poaes-input"
-                            value={numsInput}
-                            onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-                            placeholder="[1,2,3,4]"
-                        />
-                    </div>
-
                     {/* Pass indicator */}
                     <div className="poaes-pass-bar">
                         <span className={`poaes-pass-badge${step?.pass === 'left' ? ' active-left' : ''}`}>
@@ -260,11 +250,21 @@ export default function ProductOfArrayExceptSelfVisualizer() {
                 </div>
             </section>
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-
-            <div className={`poaes-status${step?.phase === 'done' ? ' done' : ''}`}>
+    </div>
+    const codePanel = <>
+      <div className={`poaes-status${step?.phase === 'done' ? ' done' : ''}`}>
                 {step?.message ?? 'Press Play or Step to begin.'}
-            </div>
+      </div>
+      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+    </>
+    return (
+        <>
+          <LuminoDockPanel panels={panelConfigs} onPanelReady={setPanelDivs} />
+          {panelDivs && <>
+            {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+            {panelDivs.visualization && createPortal(visualizationPanel, panelDivs.visualization)}
+            {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          </>}
 
             <FloatingPanel title="Playback Controls">
         <PlaybackControls
@@ -287,6 +287,6 @@ export default function ProductOfArrayExceptSelfVisualizer() {
       </FloatingPanel>
 
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
-        </div>
+        </>
     )
 }

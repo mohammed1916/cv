@@ -38,6 +38,13 @@ const SOLUTION_CODE = [
   { line: 18, text: "        return node.is_end" },
 ]
 
+const EXAMPLES = [
+  { label: 'Insert new word', word: 'apt', operation: 'insert' },
+  { label: 'Find full word', word: 'apple', operation: 'search' },
+  { label: 'Prefix only', word: 'ap', operation: 'search' },
+  { label: 'Missing word', word: 'banana', operation: 'search' },
+]
+
 function buildTrie(words) {
   const root = { children: {}, isEnd: false, val: "ROOT" }
   for (const word of words) {
@@ -51,7 +58,7 @@ function buildTrie(words) {
   return root
 }
 
-function generateSteps(word, operation) {
+function generateSteps(word, operation, insertedWords) {
   const steps = []
   steps.push({ activeLine: operation === "insert" ? 6 : 13, word, operation, message: `${operation === "insert" ? "Insert" : "Search"} word: "${word}"`, relatedLines: [operation === "insert" ? 6 : 13] })
   steps.push({ activeLine: operation === "insert" ? 7 : 14, word, message: "Start at root node", relatedLines: [operation === "insert" ? 7 : 14] })
@@ -71,7 +78,8 @@ function generateSteps(word, operation) {
     steps.push({ activeLine: 12, word, result: true, done: true, message: `Inserted "${word}"`, relatedLines: [12] })
   } else {
     steps.push({ activeLine: 18, word, pathChars, message: `Check if end-of-word marked`, relatedLines: [18] })
-    steps.push({ activeLine: 18, word, result: true, done: true, message: `Found "${word}"`, relatedLines: [18] })
+    const found = insertedWords.includes(word)
+    steps.push({ activeLine: 18, word, result: found, done: true, message: found ? `Found "${word}"` : `"${word}" is not a stored word`, relatedLines: [18] })
   }
   return steps
 }
@@ -104,27 +112,27 @@ function VisualizationPanel({ step, trie }) {
       {step.operation && <motion.div style={{ padding: 12, backgroundColor: "#f3e8ff", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}><div style={{ fontSize: 12, color: "#5b21b6" }}>Operation: {step.operation}</div></motion.div>}
       {step.pathChars && step.pathChars.length > 0 && <motion.div style={{ padding: 12, backgroundColor: "#fed7aa", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}><div style={{ fontSize: 11, fontWeight: 600, color: "#92400e", marginBottom: 6 }}>Path: {step.pathChars.join(" → ")}</div></motion.div>}
       {trie && <motion.div style={{ padding: 12, backgroundColor: "#f5f3ff", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}><div style={{ fontSize: 11, fontWeight: 600, color: "#5b21b6", marginBottom: 8 }}>Trie Structure</div><TrieDisplay trie={trie} highlightedPath={step.pathChars || []} /></motion.div>}
-      {step.result !== undefined && <motion.div style={{ padding: 12, backgroundColor: "#dcfce7", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}><div style={{ fontSize: 16, fontWeight: 700, color: "#0c865d" }}>{step.operation === "insert" ? "Inserted" : "Found"}</div></motion.div>}
+      {step.result !== undefined && <motion.div style={{ padding: 12, backgroundColor: step.result ? "#dcfce7" : "#fee2e2", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}><div style={{ fontSize: 16, fontWeight: 700, color: step.result ? "#0c865d" : "#b91c1c" }}>{step.operation === "insert" ? "Inserted" : step.result ? "Found" : "Not found"}</div></motion.div>}
       {step.message && <motion.div style={{ padding: 12, backgroundColor: "#fef3c7", borderRadius: 6, fontSize: 12, color: "#92400e" }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>{step.message}</motion.div>}
     </div>
   )
 }
 
 export default function ImplementTrieVisualizer() {
-  const [wordInput, setWordInput] = useState("apple");
-  const [operationInput, setOperationInput] = useState("insert");
+  const [wordInput, setWordInput] = useState(EXAMPLES[0].word);
+  const [operationInput, setOperationInput] = useState(EXAMPLES[0].operation);
   const { word, operation, inputError } = useMemo(() => {
     try {
-      const parsedWord = wordInput;
-      const parsedOperation = operationInput;
+      const parsedWord = wordInput.trim().toLowerCase(); if (!/^[a-z]+$/.test(parsedWord)) throw new Error('Enter one lowercase alphabetic word.');
+      const parsedOperation = operationInput; if (!['insert', 'search'].includes(parsedOperation)) throw new Error('Operation must be insert or search.');
       return { word: parsedWord, operation: parsedOperation, inputError: '' };
     } catch (e) {
-      return { word: "apple", operation: "insert", inputError: e.message };
+      return { word: EXAMPLES[0].word, operation: EXAMPLES[0].operation, inputError: e.message };
     }
   }, [wordInput, operationInput]);
   const [insertedWords, setInsertedWords] = useState(["app", "apple", "apply"])
-  const trie = useMemo(() => buildTrie(insertedWords), [insertedWords])
-  const steps = useMemo(() => generateSteps(word, operation).map(s => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [word, operation])
+  const trie = useMemo(() => buildTrie(operation === 'insert' ? [...insertedWords, word] : insertedWords), [insertedWords, operation, word])
+  const steps = useMemo(() => generateSteps(word, operation, insertedWords).map(s => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [word, operation, insertedWords])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
@@ -132,21 +140,11 @@ export default function ImplementTrieVisualizer() {
   const codePanel = (
     <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />
   )
-  const vizPanel = (
-    <>
-      <ManualInputPanel
-        fields={[{"key":"word","label":"word","type":"string"},{"key":"operation","label":"operation","type":"string"}]}
-        values={{ word: wordInput, operation: operationInput }}
-        onChange={(k, v) => { if (k === 'word') setWordInput(v); if (k === 'operation') setOperationInput(v); handleReset() }}
-        showExamples={false}
-        inputError={inputError}
-      />
-    <VisualizationPanel step={step} trie={trie} />
-  
-    </>)
+  const vizPanel = <VisualizationPanel step={step} trie={trie} />
   const panelConfigs = useMemo(() => [
-    { id: "code", title: "Code" },
-    { id: "viz", title: "Trie Tree", dockMode: "split-right" },
+    { id: 'input', title: 'Input' },
+    { id: "viz", title: "Trie Tree", dockMode: "split-bottom" },
+    { id: "code", title: "Code", dockMode: "split-right" },
   ], [])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
@@ -155,12 +153,13 @@ export default function ImplementTrieVisualizer() {
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
         <>
+          {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'word', label: 'Word', type: 'string' }, { key: 'operation', label: 'Operation: insert | search', type: 'string' }]} values={{ word: wordInput, operation: operationInput }} onChange={(key, value) => { if (key === 'word') setWordInput(value); if (key === 'operation') setOperationInput(value); handleReset() }} examples={EXAMPLES} activeLabel={null} applyExample={(example) => { setWordInput(example.word); setOperationInput(example.operation); handleReset() }} inputError={inputError} />, panelDivs.input)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
         </>
       )}
       {createPortal(
-        <FloatingPanel title="Controls"><PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={(e) => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Pattern" showPatternOverlayToggle />
+        <FloatingPanel title="Playback Controls"><PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={(e) => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Pattern" showPatternOverlayToggle />
         </FloatingPanel>,
         document.body
       )}
@@ -168,4 +167,3 @@ export default function ImplementTrieVisualizer() {
     </div>
   )
 }
-

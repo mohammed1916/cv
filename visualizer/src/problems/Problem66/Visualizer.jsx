@@ -10,6 +10,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import "./Visualizer.css";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('plus-one')
@@ -175,12 +176,19 @@ function VisualizationPanel({ arr, step, ex, applyEx }) {
 const LINE_PATTERN_MAP = {}
 
 export default function Visualizer() {
-    const [ex, setEx] = useState(EXAMPLES[0]);
+    const [inputText, setInputText] = useState(JSON.stringify(EXAMPLES[0]?.digits ?? EXAMPLES[0]?.input ?? [1, 2, 3]));
+    const { ex, inputError } = useMemo(() => {
+      try {
+        const digits = JSON.parse(inputText)
+        if (!Array.isArray(digits) || !digits.length || digits.some(value => !Number.isInteger(Number(value)) || Number(value) < 0 || Number(value) > 9)) throw new Error('Enter a non-empty JSON array of digits (0–9).')
+        return { ex: { digits: digits.map(Number) }, inputError: '' }
+      } catch (error) { return { ex: { digits: [1, 2, 3] }, inputError: error.message } }
+    }, [inputText]);
     const steps = useMemo(() => generateSteps(ex.digits), [ex]);
     const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+    const applyEx = useCallback((e) => { setInputText(JSON.stringify(e.digits ?? e.input)); handleReset(); }, [handleReset]);
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
     const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
 
@@ -217,8 +225,9 @@ export default function Visualizer() {
 
     const [panelDivs, setPanelDivs] = useState(null);
     const panelConfigs = useMemo(() => [
-      { id: 'code', title: 'Code' },
-      { id: 'viz', title: '🧮 Domino Chain', dockMode: 'split-right' },
+      { id: 'input', title: 'Input' },
+      { id: 'viz', title: '🧮 Domino Chain', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
     ], []);
     const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
 
@@ -227,6 +236,7 @@ export default function Visualizer() {
         <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
         {panelDivs && (
           <>
+            {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'digits', label: 'Digits (JSON)', type: 'array' }]} values={{ digits: inputText }} onChange={(_, value) => { setInputText(value); handleReset() }} examples={EXAMPLES} activeLabel={null} applyExample={applyEx} inputError={inputError} />, panelDivs.input)}
             {panelDivs.code && createPortal(codePanel, panelDivs.code)}
             {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
           </>
@@ -256,4 +266,3 @@ export default function Visualizer() {
       </div>
     );
 }
-

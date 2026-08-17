@@ -9,8 +9,10 @@ import { getExamples } from '../../config/examplesRegistry'
 import "./EncodeDecodeVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { createPortal } from 'react-dom'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -136,29 +138,20 @@ export default function EncodeDecodeVisualizer() {
     const encoded = step?.encoded ?? "";
     const hl = step?.highlightEncoded;
 
-    return (
-        <div className="ed-shell">
-      <ManualInputPanel
+    const panelConfigs = useMemo(() => [
+      { id: 'input', title: 'Input', dockMode: 'split-top' },
+      { id: 'visualization', title: 'Visualization' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
+    ], [])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const inputPanel = <ManualInputPanel
         fields={[{"key":"strs","label":"strs","type":"array"}]}
         values={{ strs: strsInput }}
         onChange={(k, v) => { if (k === 'strs') setStrsInput(v); handleReset() }}
         examples={EXAMPLES}
         applyExample={applyExample}
       />
-
-            <div className="ed-controls-row">
-                <div className="ed-examples">
-                    {EXAMPLES.map((ex) => (
-                        <button key={ex.label} className="ed-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                    ))}
-                </div>
-                <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-                    <input className="ed-input" value={strsInput}
-                        onChange={(e) => { setStrsInput(e.target.value); handleReset(); }} />
-                    {inputErr && <span className="ed-error">{inputErr}</span>}
-                </div>
-            </div>
-
+    const visualizationPanel = <div className="ed-shell">
             <div className="ed-two-col">
                 {/* Input words */}
                 <div className="ed-panel">
@@ -208,8 +201,19 @@ export default function EncodeDecodeVisualizer() {
                 </div>
             )}
 
-            <CodeTracePanel step={step} codeLines={[...ENCODE_CODE, ...DECODE_CODE]} onActiveLineDomChange={setActiveLineDom} />
-            <div className="ed-status">{step?.message ?? "Press Play to begin."}</div>
+    </div>
+    const codePanel = <>
+      <div className="ed-status">{step?.message ?? "Press Play to begin."}</div>
+      <CodeTracePanel step={step} codeLines={[...ENCODE_CODE, ...DECODE_CODE]} onActiveLineDomChange={setActiveLineDom} />
+    </>
+    return (
+        <>
+          <LuminoDockPanel panels={panelConfigs} onPanelReady={setPanelDivs} />
+          {panelDivs && <>
+            {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+            {panelDivs.visualization && createPortal(visualizationPanel, panelDivs.visualization)}
+            {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          </>}
             <FloatingPanel title="Playback Controls">
         <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
@@ -223,6 +227,6 @@ export default function EncodeDecodeVisualizer() {
             />
       </FloatingPanel>
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
-        </div>
+        </>
     );
 }

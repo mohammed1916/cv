@@ -14,8 +14,10 @@ export default function CodeTracePanel({
   // `code` and `activeLine` are retained for older visualizers while they
   // migrate to the richer step/codeLines API.
   code,
+  lines,
   activeLine,
   highlightedLines = [],
+  highlightLines,
   onLineSelect,
   title = "Solution Code",
   subtitle = null,
@@ -30,7 +32,10 @@ export default function CodeTracePanel({
     ? codeLines
     : Array.isArray(code)
       ? code
-      : [];
+      : Array.isArray(lines)
+        ? lines
+        : [];
+  const resolvedHighlightedLines = Array.isArray(highlightLines) ? highlightLines : highlightedLines;
   const resolvedStep = step || (Number.isFinite(activeLine) ? { activeLine } : undefined);
   const codeRef = useRef(null);
   const lastManualScrollTsRef = useRef(0);
@@ -141,8 +146,8 @@ export default function CodeTracePanel({
   const [editorContent, setEditorContent] = useState(initialEditor);
   const [showComments, setShowComments] = useState(true);
   const highlightedLineSet = useMemo(
-    () => new Set(highlightedLines),
-    [highlightedLines],
+    () => new Set(resolvedHighlightedLines),
+    [resolvedHighlightedLines],
   );
   const activePattern = useMemo(() => resolvePattern(resolvedStep?.phase), [resolvedStep?.phase]);
   const commentsText = `# Write your notes here\n# Toggle comments off to edit cleanly.`;

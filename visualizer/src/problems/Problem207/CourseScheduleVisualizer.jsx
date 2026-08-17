@@ -36,6 +36,13 @@ const SOLUTION_CODE = [
   { line: 16, text: "    return True" },
 ]
 
+const EXAMPLES = [
+  { label: 'Simple chain', numCourses: 4, prerequisites: [[1,0],[2,1],[3,2]] },
+  { label: 'Two-course cycle', numCourses: 2, prerequisites: [[1,0],[0,1]] },
+  { label: 'Independent courses', numCourses: 3, prerequisites: [] },
+  { label: 'Self-cycle', numCourses: 1, prerequisites: [[0,0]] },
+]
+
 function generateSteps(numCourses, prerequisites) {
   const steps = []
   steps.push({ activeLine: 1, numCourses, message: "Can finish all courses?", relatedLines: [1] })
@@ -89,15 +96,15 @@ function VisualizationPanel({ step }) {
 }
 
 export default function CourseScheduleVisualizer() {
-  const [numCoursesInput, setNumCoursesInput] = useState(4);
-  const [prerequisitesInput, setPrerequisitesInput] = useState("[[1,0],[2,1],[3,2]]");
+  const [numCoursesInput, setNumCoursesInput] = useState(EXAMPLES[0].numCourses);
+  const [prerequisitesInput, setPrerequisitesInput] = useState(JSON.stringify(EXAMPLES[0].prerequisites));
   const { numCourses, prerequisites, inputError } = useMemo(() => {
     try {
-      const parsedNumCourses = Number(numCoursesInput); if (isNaN(parsedNumCourses)) throw new Error('numCourses must be a number');
-      const parsedPrerequisites = JSON.parse(prerequisitesInput); if (!Array.isArray(parsedPrerequisites)) throw new Error('prerequisites must be an array');
+      const parsedNumCourses = Number(numCoursesInput); if (!Number.isInteger(parsedNumCourses) || parsedNumCourses < 1) throw new Error('numCourses must be a positive integer');
+      const parsedPrerequisites = JSON.parse(prerequisitesInput); if (!Array.isArray(parsedPrerequisites) || !parsedPrerequisites.every(([course, prerequisite]) => Number.isInteger(course) && Number.isInteger(prerequisite) && course >= 0 && prerequisite >= 0 && course < parsedNumCourses && prerequisite < parsedNumCourses)) throw new Error('Use prerequisite pairs [course, prerequisite] within the course range.');
       return { numCourses: parsedNumCourses, prerequisites: parsedPrerequisites, inputError: '' };
     } catch (e) {
-      return { numCourses: 4, prerequisites: [[1,0],[2,1],[3,2]], inputError: e.message };
+      return { numCourses: EXAMPLES[0].numCourses, prerequisites: EXAMPLES[0].prerequisites, inputError: e.message };
     }
   }, [numCoursesInput, prerequisitesInput]);
   const steps = useMemo(() => generateSteps(numCourses, prerequisites).map(s => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [numCourses, prerequisites])
@@ -108,22 +115,12 @@ export default function CourseScheduleVisualizer() {
   const codePanel = (
     <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />
   )
-  const vizPanel = (
-    <>
-      <ManualInputPanel
-        fields={[{"key":"numCourses","label":"numCourses","type":"number"},{"key":"prerequisites","label":"prerequisites","type":"array"}]}
-        values={{ numCourses: numCoursesInput, prerequisites: prerequisitesInput }}
-        onChange={(k, v) => { if (k === 'numCourses') setNumCoursesInput(v); if (k === 'prerequisites') setPrerequisitesInput(v); handleReset() }}
-        showExamples={false}
-        inputError={inputError}
-      />
-    <VisualizationPanel step={step} />
-  
-    </>)
+  const vizPanel = <VisualizationPanel step={step} />
   const [panelDivs, setPanelDivs] = useState(null)
   const panelConfigs = useMemo(() => [
-    { id: "code", title: "Code" },
-    { id: "viz", title: "Cycle Detection", dockMode: "split-right" },
+    { id: 'input', title: 'Input' },
+    { id: "viz", title: "Cycle Detection", dockMode: "split-bottom" },
+    { id: "code", title: "Code", dockMode: "split-right" },
   ], [])
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
   return (
@@ -131,12 +128,21 @@ export default function CourseScheduleVisualizer() {
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
         <>
+          {panelDivs.input && createPortal(<ManualInputPanel
+            fields={[{ key: 'numCourses', label: 'Number of courses', type: 'string' }, { key: 'prerequisites', label: 'Prerequisites (JSON)', type: 'string' }]}
+            values={{ numCourses: numCoursesInput, prerequisites: prerequisitesInput }}
+            onChange={(key, value) => { if (key === 'numCourses') setNumCoursesInput(value); if (key === 'prerequisites') setPrerequisitesInput(value); handleReset() }}
+            examples={EXAMPLES}
+            activeLabel={null}
+            applyExample={(example) => { setNumCoursesInput(example.numCourses); setPrerequisitesInput(JSON.stringify(example.prerequisites)); handleReset() }}
+            inputError={inputError}
+          />, panelDivs.input)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
         </>
       )}
       {createPortal(
-        <FloatingPanel title="Controls"><PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={(e) => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Pattern" showPatternOverlayToggle />
+        <FloatingPanel title="Playback Controls"><PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={(e) => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Pattern" showPatternOverlayToggle />
         </FloatingPanel>,
         document.body
       )}
@@ -144,4 +150,3 @@ export default function CourseScheduleVisualizer() {
     </div>
   )
 }
-

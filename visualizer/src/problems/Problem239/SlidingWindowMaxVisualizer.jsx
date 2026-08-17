@@ -9,8 +9,10 @@ import { getExamples } from '../../config/examplesRegistry'
 import "./SlidingWindowMaxVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { createPortal } from 'react-dom'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -110,30 +112,20 @@ export default function SlidingWindowMaxVisualizer() {
     const qSet = new Set(step?.q ?? []);
     const qFront = (step?.q ?? [])[0] ?? -1;
 
-    return (
-        <div className="swm-shell">
-      <ManualInputPanel
+    const panelConfigs = useMemo(() => [
+        { id: 'input', title: 'Input', dockMode: 'split-top' },
+        { id: 'visualization', title: 'Visualization' },
+        { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
+    ], [])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const inputPanel = <ManualInputPanel
         fields={[{"key":"nums","label":"nums","type":"string"},{"key":"k","label":"k","type":"string"}]}
         values={{ nums: numsInput, k: kInput }}
         onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'k') setKInput(v); handleReset() }}
         examples={EXAMPLES}
         applyExample={applyExample}
       />
-
-            <div className="swm-controls-row">
-                <div className="swm-examples">
-                    {EXAMPLES.map((ex) => (
-                        <button key={ex.label} className="swm-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                    ))}
-                </div>
-                <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                    <input className="swm-input" value={numsInput} onChange={(e) => { setNumsInput(e.target.value); handleReset(); }} />
-                    <label className="swm-k-label">k=<input className="swm-k-input" type="number" min={1} value={kInput}
-                        onChange={(e) => { setKInput(e.target.value); handleReset(); }} /></label>
-                    {err && <span className="swm-error">{err}</span>}
-                </div>
-            </div>
-
+    const visualizationPanel = <div className="swm-shell">
             {/* Array */}
             <div className="swm-panel">
                 <div className="swm-panel-label">Array — window [{l}, {r}]</div>
@@ -185,8 +177,19 @@ export default function SlidingWindowMaxVisualizer() {
                 </div>
             )}
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-            <div className="swm-status">{step?.message ?? "Press Play to begin."}</div>
+    </div>
+    const codePanel = <>
+      <div className="swm-status">{step?.message ?? "Press Play to begin."}</div>
+      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+    </>
+    return (
+        <>
+          <LuminoDockPanel panels={panelConfigs} onPanelReady={setPanelDivs} />
+          {panelDivs && <>
+            {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+            {panelDivs.visualization && createPortal(visualizationPanel, panelDivs.visualization)}
+            {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          </>}
             <FloatingPanel title="Playback Controls">
         <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
@@ -200,6 +203,6 @@ export default function SlidingWindowMaxVisualizer() {
             />
       </FloatingPanel>
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
-        </div>
+        </>
     );
 }

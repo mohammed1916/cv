@@ -8,6 +8,9 @@ import { usePatternOverlay } from '../../../hooks/usePatternOverlay'
 import { getExamples } from '../../../config/examplesRegistry'
 import './FindDisappearedNumbersVisualizer.css'
 import FloatingPanel from '../../../components/shared/FloatingPanel'
+import ManualInputPanel from '../../../components/shared/ManualInputPanel'
+import LuminoDockPanel from '../../../components/LuminoDockPanel'
+import { createPortal } from 'react-dom'
 
 const SOLUTION_CODE = [
     { line: 1, text: 'def findDisappearedNumbers(nums):' },
@@ -143,36 +146,30 @@ const EXAMPLES_OBJ = [
 ]
 
 export default function FindDisappearedNumbersVisualizer() {
-    const [input, setInput] = useState([4, 3, 2, 7, 8, 2, 3, 1])
+    const [inputText, setInputText] = useState(JSON.stringify([4, 3, 2, 7, 8, 2, 3, 1]))
+    const { input, inputError } = useMemo(() => { try { const values = JSON.parse(inputText); if (!Array.isArray(values) || !values.length || values.some(value => !Number.isInteger(Number(value)) || Number(value) < 1 || Number(value) > values.length)) throw new Error('Enter a JSON array where every value is from 1 to n.'); return { input: values.map(Number), inputError: '' } } catch (error) { return { input: [4, 3, 2, 7, 8, 2, 3, 1], inputError: error.message } } }, [inputText])
     const steps = useMemo(() => generateSteps(input), [input])
-    const { currentStep, isPlaying, setCurrentStep, setIsPlaying } = usePlaybackState(steps.length)
+    const { stepIndex, isPlaying, speed, setSpeed, stepForward, stepBack, togglePlay, handleReset, isDone } = usePlaybackState(steps.length)
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
     const handleExample = useCallback((ex) => {
-        setInput(ex.input)
-        setCurrentStep(0)
-    }, [setCurrentStep])
+        setInputText(JSON.stringify(ex.input))
+        handleReset()
+    }, [handleReset])
 
     if (steps.length === 0) return null
 
-    const step = steps[currentStep]
+    const step = steps[Math.max(0, stepIndex)] || steps[0]
 
-    return (
-        <div className="fdn-shell">
+    const panelConfigs = useMemo(() => [
+      { id: 'input', title: 'Input', dockMode: 'split-top' },
+      { id: 'visualization', title: 'Visualization' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
+    ], [])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const inputPanel = <ManualInputPanel fields={[{ key: 'nums', label: 'Numbers (JSON)', type: 'array' }]} values={{ nums: inputText }} onChange={(_, value) => { setInputText(value); handleReset() }} examples={EXAMPLES_OBJ} activeLabel={null} applyExample={handleExample} inputError={inputError} />
+    const visualizationPanel = <div className="fdn-shell">
             <div className="fdn-top">
-                <div className="fdn-panel fdn-panel-input">
-                    <div className="fdn-head">Input</div>
-                    <div className="fdn-body">
-                        <div className="fdn-examples">
-                            {EXAMPLES_OBJ.map((ex) => (
-                                <button key={ex.label} className="fdn-chip" onClick={() => handleExample(ex)}>
-                                    {ex.label}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-
                 <div className="fdn-panel fdn-panel-stats">
                     <div className="fdn-head">Info</div>
                     <div className="fdn-body">
@@ -248,20 +245,33 @@ export default function FindDisappearedNumbersVisualizer() {
                 </div>
             </div>
 
-            <CodeTracePanel code={SOLUTION_CODE} activeLine={step.activeLine} onActiveLineDomChange={setActiveLineDom} />
-
-            <div className="fdn-panel">
-                <div className="fdn-head">Status</div>
-                <div className="fdn-status">{step.message}</div>
-            </div>
+    </div>
+    const codePanel = <>
+      <div className="fdn-panel"><div className="fdn-head">Status</div><div className="fdn-status">{step.message}</div></div>
+      <CodeTracePanel code={SOLUTION_CODE} activeLine={step.activeLine} onActiveLineDomChange={setActiveLineDom} />
+    </>
+    return (
+        <>
+          <LuminoDockPanel panels={panelConfigs} onPanelReady={setPanelDivs} />
+          {panelDivs && <>
+            {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+            {panelDivs.visualization && createPortal(visualizationPanel, panelDivs.visualization)}
+            {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          </>}
 
             <FloatingPanel title="Playback Controls">
         <PlaybackControls
-              currentStep={currentStep}
-              totalSteps={steps.length}
-              onStepChange={setCurrentStep}
               isPlaying={isPlaying}
-              onPlayingChange={setIsPlaying}
+              isDone={isDone}
+              speed={speed}
+              onPlayToggle={togglePlay}
+              onPrev={stepBack}
+              onNext={stepForward}
+              onReset={handleReset}
+              prevDisabled={stepIndex < 0}
+              nextDisabled={isDone}
+              resetDisabled={stepIndex < 0}
+              onSpeedChange={(event) => setSpeed(Number(event.target.value))}
               showPatternOverlay={showPatternOverlay}
               onShowPatternOverlayChange={setShowPatternOverlay}
               patternOverlayLabel="Show pattern overlay"
@@ -270,6 +280,6 @@ export default function FindDisappearedNumbersVisualizer() {
       </FloatingPanel>
 
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
-        </div>
+        </>
     )
 }

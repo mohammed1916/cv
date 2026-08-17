@@ -35,6 +35,13 @@ const SOLUTION_CODE = [
   { line: 15, text: "    return result" },
 ]
 
+const EXAMPLES = [
+  { label: 'Overlapping', input: [[0,2,3],[2,5,3],[1,3,5]] },
+  { label: 'Disjoint', input: [[0,2,3],[4,6,4]] },
+  { label: 'Same height', input: [[1,3,2],[3,5,2]] },
+  { label: 'Single building', input: [[2,9,6]] },
+]
+
 function generateSteps(buildings) {
   const steps = []
   steps.push({
@@ -251,13 +258,13 @@ function VisualizationPanel({ step, buildings, keyPoints }) {
 }
 
 export default function SkylineProblemVisualizer() {
-  const [buildingsInput, setBuildingsInput] = useState("[[0,2,3],[2,5,3],[1,3,5]]");
+  const [buildingsInput, setBuildingsInput] = useState(JSON.stringify(EXAMPLES[0].input));
   const { buildings, inputError } = useMemo(() => {
     try {
-      const parsedBuildings = JSON.parse(buildingsInput); if (!Array.isArray(parsedBuildings)) throw new Error('buildings must be an array');
+      const parsedBuildings = JSON.parse(buildingsInput); if (!Array.isArray(parsedBuildings) || !parsedBuildings.length || !parsedBuildings.every(([left, right, height]) => Number.isFinite(left) && Number.isFinite(right) && Number.isFinite(height) && left < right && height > 0)) throw new Error('Enter buildings as [[left,right,height], …] with left < right and positive height.');
       return { buildings: parsedBuildings, inputError: '' };
     } catch (e) {
-      return { buildings: [[0,2,3],[2,5,3],[1,3,5]], inputError: e.message };
+      return { buildings: EXAMPLES[0].input, inputError: e.message };
     }
   }, [buildingsInput]);
   const keyPoints = useMemo(() => {
@@ -288,8 +295,8 @@ export default function SkylineProblemVisualizer() {
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const panelConfigs = useMemo(() => [
-    { id: 'code', title: "Code" },
-    { id: 'viz', title: "🏢 Skyline Events", dockMode: 'split-right' },
+    { id: 'viz', title: "🏢 Skyline Events" },
+    { id: 'code', title: "Code", dockMode: 'split-right' },
   ], [])
   const panelContents = useMemo(() => ({
     code: (<CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />),
@@ -304,7 +311,9 @@ export default function SkylineProblemVisualizer() {
           fields={[{"key":"buildings","label":"buildings","type":"string"}]}
           values={{ buildings: buildingsInput }}
           onChange={(k, v) => { if (k === 'buildings') setBuildingsInput(v); handleReset() }}
-          showExamples={false}
+          examples={EXAMPLES}
+          activeLabel={null}
+          applyExample={(example) => { setBuildingsInput(JSON.stringify(example.input)); handleReset() }}
           inputError={inputError}
         />
       
@@ -317,7 +326,7 @@ export default function SkylineProblemVisualizer() {
           </>
         )}
       </>
-      <FloatingPanel title="Controls">
+      <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -340,4 +349,3 @@ export default function SkylineProblemVisualizer() {
     </div>
   )
 }
-

@@ -237,6 +237,7 @@ export default function MaxDepthBinaryTreeVisualizer() {
     const codePanel = (
         <div style={{ position: 'relative', height: '100%' }}>
             <VisualizerPlaybackSection
+              floatingPlayback
                 step={step}
                 codeLines={SOLUTION_CODE}
                 statusClassName="mdbt-status"

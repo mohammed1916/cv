@@ -9,6 +9,7 @@ import { usePlaybackState } from "../../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../../config/examplesRegistry'
+import ManualInputPanel from '../../../components/shared/ManualInputPanel'
 import "./RandomizedCollectionVisualizer.css";
 import { createPortal } from 'react-dom'
 const SOLUTION_CODE = [
@@ -80,12 +81,13 @@ function generateSteps(ops) {
 }
 
 export default function RandomizedCollectionVisualizer() {
-    const [ex, setEx] = useState(EXAMPLES[0]);
+    const [inputText, setInputText] = useState(JSON.stringify(EXAMPLES[0] || { ops: [] }));
+    const { ex, inputError } = useMemo(() => { try { const value = JSON.parse(inputText), ops = value.ops; if (!Array.isArray(ops) || ops.some(op => !op || !['insert', 'remove', 'getRandom'].includes(op.type) || (op.type !== 'getRandom' && !Number.isFinite(Number(op.val)))) throw new Error('Use {"ops":[{"type":"insert|remove","val":number}|{"type":"getRandom"}]}.'); return { ex: { ops: ops.map(op => op.type === 'getRandom' ? { type: op.type } : { type: op.type, val: Number(op.val) }) }, inputError: '' } } catch (error) { return { ex: EXAMPLES[0], inputError: error.message } } }, [inputText])
     const steps = useMemo(() => generateSteps(ex.ops), [ex]);
     const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+    const applyEx = useCallback((e) => { setInputText(JSON.stringify(e)); handleReset(); }, [handleReset]);
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
     const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
 
@@ -96,8 +98,9 @@ export default function RandomizedCollectionVisualizer() {
     const opStr = step?.op ?? "—";
 
     const panelConfigs = useMemo(() => [
-      { id: 'code', title: 'Code' },
-      { id: 'viz', title: '🎲 Collections', dockMode: 'split-right' },
+      { id: 'input', title: 'Input' },
+      { id: 'viz', title: '🎲 Collections', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
     ], [])
     const panelContents = useMemo(() => ({
       code: (<CodeTracePanel
@@ -187,6 +190,7 @@ export default function RandomizedCollectionVisualizer() {
               <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
               {panelDivs && (
                 <>
+                  {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'ops', label: 'Operations (JSON)', type: 'string' }]} values={{ ops: inputText }} onChange={(_, value) => { setInputText(value); handleReset() }} examples={EXAMPLES} activeLabel={null} applyExample={applyEx} inputError={inputError} />, panelDivs.input)}
                   {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
                   {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
                 </>
@@ -215,4 +219,3 @@ export default function RandomizedCollectionVisualizer() {
         </div>
     );
 }
-

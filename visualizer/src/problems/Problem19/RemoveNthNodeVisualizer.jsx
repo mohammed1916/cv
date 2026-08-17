@@ -509,11 +509,10 @@ export default function RemoveNthNodeVisualizer() {
         </>
       )}
       {createPortal(
-        <FloatingPanel title="Controls">{playbackPanel}</FloatingPanel>,
+        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
         document.body
       )}
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }
-

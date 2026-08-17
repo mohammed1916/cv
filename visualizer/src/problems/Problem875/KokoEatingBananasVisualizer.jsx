@@ -9,6 +9,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './KokoEatingBananasVisualizer.css'
 
 const SOLUTION_CODE_INLINE = [
@@ -104,9 +105,10 @@ const EXAMPLES = [
 
 export default function KokoEatingBananasVisualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [inputText, setInputText] = useState(JSON.stringify({ piles: EXAMPLES[0].piles, h: EXAMPLES[0].h }))
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  const ex = EXAMPLES[exIdx]
+  const { ex, inputError } = useMemo(() => { try { const value = JSON.parse(inputText), piles = value.piles, h = Number(value.h); if (!Array.isArray(piles) || !piles.length || piles.some(value => !Number.isInteger(Number(value)) || Number(value) < 1) || !Number.isInteger(h) || h < piles.length) throw new Error('Use {"piles": positive integers, "h": integer at least the pile count}.'); return { ex: { piles: piles.map(Number), h }, inputError: '' } } catch (error) { return { ex: EXAMPLES[0], inputError: error.message } } }, [inputText])
   const steps = useMemo(() => generateSteps(ex.piles, ex.h), [ex])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
@@ -115,6 +117,7 @@ export default function KokoEatingBananasVisualizer() {
 
   const applyExample = useCallback((idx) => {
     setExIdx(idx)
+    setInputText(JSON.stringify({ piles: EXAMPLES[idx].piles, h: EXAMPLES[idx].h }))
     handleReset()
   }, [handleReset])
 
@@ -197,8 +200,9 @@ export default function KokoEatingBananasVisualizer() {
 
   const [panelDivs, setPanelDivs] = useState(null)
   const panelConfigs = useMemo(() => [
-    { id: 'code', title: 'Code' },
-    { id: 'viz', title: '🍌 Binary Search', dockMode: 'split-right' },
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: '🍌 Binary Search', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
   ], [])
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
@@ -207,6 +211,7 @@ export default function KokoEatingBananasVisualizer() {
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
         <>
+          {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'koko', label: 'Piles and hours (JSON)', type: 'string' }]} values={{ koko: inputText }} onChange={(_, value) => { setInputText(value); handleReset() }} examples={EXAMPLES.map(example => ({ ...example, input: { piles: example.piles, h: example.h } }))} activeLabel={null} applyExample={(example) => { setInputText(JSON.stringify(example.input)); handleReset() }} inputError={inputError} />, panelDivs.input)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
         </>

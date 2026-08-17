@@ -9,6 +9,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import "./Visualizer.css";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 import { createPortal } from 'react-dom'
@@ -161,14 +162,15 @@ function VisualizationPanel({ ex, setEx, step, applyEx, nums1Ptrs, nums2Ptrs }) 
 const LINE_PATTERN_MAP = {}
 
 export default function MergeSortedArrayVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [inputText, setInputText] = useState(JSON.stringify(EXAMPLES[0] ?? { nums1: [1, 2, 3, 0, 0, 0], m: 3, nums2: [2, 5, 6], n: 3 }));
+  const { ex, inputError } = useMemo(() => { try { const value = JSON.parse(inputText), nums1 = value.nums1, nums2 = value.nums2, m = Number(value.m), n = Number(value.n); if (!Array.isArray(nums1) || !Array.isArray(nums2) || !Number.isInteger(m) || !Number.isInteger(n) || m < 0 || n < 0 || m > nums1.length || n !== nums2.length || nums1.length < m + n || [...nums1, ...nums2].some(value => !Number.isFinite(Number(value)))) throw new Error('Use {nums1, m, nums2, n}; nums1 must have m+n slots and nums2 must have n items.'); return { ex: { nums1: nums1.map(Number), m, nums2: nums2.map(Number), n }, inputError: '' } } catch (error) { return { ex: { nums1: [1, 2, 3, 0, 0, 0], m: 3, nums2: [2, 5, 6], n: 3 }, inputError: error.message } } }, [inputText]);
   const steps = useMemo(() => generateSteps(ex.nums1, ex.m, ex.nums2, ex.n), [ex]);
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setInputText(JSON.stringify(e)); handleReset(); }, [handleReset]);
 
   const nums1Ptrs = step ? [
     { name: "i", pos: step.i },
@@ -177,8 +179,9 @@ export default function MergeSortedArrayVisualizer() {
   const nums2Ptrs = step ? [{ name: "j", pos: step.j }].filter(p => p.pos >= 0) : [];
 
   const panelConfigs = useMemo(() => [
-    { id: 'code', title: 'Code' },
-    { id: 'viz', title: 'Visualization', dockMode: 'split-right' },
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: 'Visualization', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
     { id: 'vars', title: 'Variables', dockMode: 'split-bottom' },
   ], [])
   const panelContents = useMemo(() => ({
@@ -201,7 +204,6 @@ export default function MergeSortedArrayVisualizer() {
         </div>),
     viz: (<VisualizationPanel
           ex={ex}
-          setEx={setEx}
           step={step}
           applyEx={applyEx}
           nums1Ptrs={nums1Ptrs}
@@ -218,6 +220,7 @@ export default function MergeSortedArrayVisualizer() {
         <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
         {panelDivs && (
           <>
+            {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'merge', label: 'Merge input (JSON)', type: 'string' }]} values={{ merge: inputText }} onChange={(_, value) => { setInputText(value); handleReset() }} examples={EXAMPLES} activeLabel={null} applyExample={applyEx} inputError={inputError} />, panelDivs.input)}
             {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
             {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
             {panelDivs.vars && createPortal(panelContents.vars, panelDivs.vars)}
@@ -246,4 +249,3 @@ export default function MergeSortedArrayVisualizer() {
     </div>
   );
 }
-

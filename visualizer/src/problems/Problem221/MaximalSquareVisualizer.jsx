@@ -34,8 +34,16 @@ const SOLUTION_CODE = [
   { line: 14, text: "    return max_side * max_side" },
 ]
 
+const EXAMPLES = [
+  { label: 'Classic', input: [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]] },
+  { label: 'All zeroes', input: [["0","0"],["0","0"]] },
+  { label: 'All ones', input: [["1","1","1"],["1","1","1"]] },
+  { label: 'Single cell', input: [["1"]] },
+]
+
 function generateSteps(matrix) {
   const steps = []
+  if (!matrix?.length || !matrix[0]?.length) return [{ activeLine: 2, matrix: [], dp: [], maxSide: 0, result: 0, done: true, message: 'Empty matrix: the maximal square area is 0.', relatedLines: [2] }]
   const m = matrix.length
   const n = matrix[0].length
 
@@ -258,13 +266,13 @@ function VisualizationPanel({ step, matrix }) {
 }
 
 export default function MaximalSquareVisualizer() {
-  const [matrixInput, setMatrixInput] = useState("[[\"1\",\"0\",\"1\",\"0\",\"0\"],[\"1\",\"0\",\"1\",\"1\",\"1\"],[\"1\",\"1\",\"1\",\"1\",\"1\"],[\"1\",\"0\",\"0\",\"1\",\"0\"]]");
+  const [matrixInput, setMatrixInput] = useState(JSON.stringify(EXAMPLES[0].input));
   const { matrix, inputError } = useMemo(() => {
     try {
-      const parsedMatrix = JSON.parse(matrixInput); if (!Array.isArray(parsedMatrix)) throw new Error('matrix must be an array');
+      const parsedMatrix = JSON.parse(matrixInput); if (!Array.isArray(parsedMatrix) || !parsedMatrix.length || !parsedMatrix.every(row => Array.isArray(row) && row.length === parsedMatrix[0].length && row.every(value => value === '0' || value === '1'))) throw new Error('Enter a non-empty rectangular JSON matrix containing "0" and "1".');
       return { matrix: parsedMatrix, inputError: '' };
     } catch (e) {
-      return { matrix: [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]], inputError: e.message };
+      return { matrix: EXAMPLES[0].input, inputError: e.message };
     }
   }, [matrixInput]);
 
@@ -275,8 +283,8 @@ export default function MaximalSquareVisualizer() {
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const panelConfigs = useMemo(() => [
-    { id: 'code', title: "Code" },
-    { id: 'viz', title: "⬜ Maximal Square", dockMode: 'split-right' },
+    { id: 'viz', title: "⬜ Maximal Square" },
+    { id: 'code', title: "Code", dockMode: 'split-right' },
   ], [])
   const panelContents = useMemo(() => ({
     code: (<CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />),
@@ -291,7 +299,9 @@ export default function MaximalSquareVisualizer() {
           fields={[{"key":"matrix","label":"matrix","type":"string"}]}
           values={{ matrix: matrixInput }}
           onChange={(k, v) => { if (k === 'matrix') setMatrixInput(v); handleReset() }}
-          showExamples={false}
+          examples={EXAMPLES}
+          activeLabel={null}
+          applyExample={(example) => { setMatrixInput(JSON.stringify(example.input)); handleReset() }}
           inputError={inputError}
         />
       
@@ -304,7 +314,7 @@ export default function MaximalSquareVisualizer() {
           </>
         )}
       </>
-      <FloatingPanel title="Controls">
+      <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -327,4 +337,3 @@ export default function MaximalSquareVisualizer() {
     </div>
   )
 }
-

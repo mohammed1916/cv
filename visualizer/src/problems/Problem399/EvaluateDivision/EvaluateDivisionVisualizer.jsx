@@ -8,6 +8,7 @@ import PatternOverlay from '../../../components/PatternOverlay'
 import { usePlaybackState } from '../../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../../hooks/useCodeVisualConnectivity'
+import ManualInputPanel from '../../../components/shared/ManualInputPanel'
 import './EvaluateDivision.css'
 import { createPortal } from 'react-dom'
 const SOLUTION_CODE = [
@@ -203,9 +204,10 @@ function getNodePosition(node) {
 
 export default function EvaluateDivisionVisualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [inputText, setInputText] = useState(JSON.stringify(EXAMPLES[0]))
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  const ex = EXAMPLES[exIdx]
+  const { ex, inputError } = useMemo(() => { try { const value = JSON.parse(inputText), { equations, values, queries } = value; if (!Array.isArray(equations) || !Array.isArray(values) || !Array.isArray(queries) || equations.length !== values.length || !equations.every(pair => Array.isArray(pair) && pair.length === 2 && pair.every(item => typeof item === 'string')) || !queries.every(pair => Array.isArray(pair) && pair.length === 2 && pair.every(item => typeof item === 'string')) || values.some(value => !Number.isFinite(Number(value)) || Number(value) === 0)) throw new Error('Use {equations:[[string,string]], values:[non-zero numbers], queries:[[string,string]]}.'); return { ex: { equations, values: values.map(Number), queries }, inputError: '' } } catch (error) { return { ex: EXAMPLES[0], inputError: error.message } } }, [inputText])
   const steps = useMemo(() => generateSteps(ex.equations, ex.values, ex.queries), [ex])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
@@ -214,12 +216,14 @@ export default function EvaluateDivisionVisualizer() {
 
   const applyExample = useCallback((idx) => {
     setExIdx(idx)
+    setInputText(JSON.stringify(EXAMPLES[idx]))
     handleReset()
   }, [handleReset])
 
   const panelConfigs = useMemo(() => [
-    { id: 'code', title: 'Code' },
-    { id: 'viz', title: '🔍 DFS Graph Exploration', dockMode: 'split-right' },
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: '🔍 DFS Graph Exploration', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
   ], [])
   const panelContents = useMemo(() => ({
     code: (<CodeTracePanel
@@ -404,6 +408,7 @@ export default function EvaluateDivisionVisualizer() {
         <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
         {panelDivs && (
           <>
+            {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'division', label: 'Equations, values, queries (JSON)', type: 'string' }]} values={{ division: inputText }} onChange={(_, value) => { setInputText(value); handleReset() }} examples={EXAMPLES} activeLabel={null} applyExample={(example) => { setInputText(JSON.stringify(example)); handleReset() }} inputError={inputError} />, panelDivs.input)}
             {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
             {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
           </>

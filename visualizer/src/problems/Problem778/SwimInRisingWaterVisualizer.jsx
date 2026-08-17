@@ -42,6 +42,12 @@ const SOLUTION_CODE = [
   { line: 30, text: '        return left' },
 ]
 
+const EXAMPLES = [
+  { label: '2 × 2 baseline', input: [[0, 2], [1, 3]] },
+  { label: 'Single cell', input: [[0]] },
+  { label: '3 × 3 winding path', input: [[0, 1, 2], [5, 4, 3], [6, 7, 8]] },
+]
+
 function generateSteps(grid) {
   const steps = []
 
@@ -182,27 +188,24 @@ function generateSteps(grid) {
 }
 
 function SwimInRisingWaterVisualizer() {
-  const defaultGrid = [
-    [0, 2],
-    [1, 3],
-  ]
+  const defaultGrid = EXAMPLES[0].input
 
   const [grid, setGrid] = useState(defaultGrid)
   const [inputValue, setInputValue] = useState(JSON.stringify(defaultGrid))
 
   const steps = useMemo(() => generateSteps(grid), [grid])
-  const { activeStepIndex, isPlaying, togglePlayback, reset, setActiveStepIndex } =
-    usePlaybackState(steps)
+  const { stepIndex, isPlaying, speed, setSpeed, togglePlay, handleReset: reset, stepForward, stepBack, isDone, setStepIndex } = usePlaybackState(steps.length)
 
-  const { highlightLines } = useCodeVisualConnectivity(activeStepIndex, steps)
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  const activeStep = steps[activeStepIndex]
+  const activeStep = steps[Math.max(0, stepIndex)] || steps[0]
 
   const handleRun = useCallback(() => {
     try {
       const parsed = JSON.parse(inputValue)
+      if (!Array.isArray(parsed) || !parsed.length || !parsed.every(row => Array.isArray(row) && row.length === parsed.length && row.every(Number.isFinite))) throw new Error('Enter a square JSON grid of numbers.')
       setGrid(parsed)
       reset()
     } catch (e) {
@@ -242,8 +245,9 @@ function SwimInRisingWaterVisualizer() {
       <div className="srw-top">
         <div className="srw-panel srw-code-panel">
           <CodeTracePanel
-            lines={SOLUTION_CODE}
-            highlightLines={highlightLines}
+            codeLines={SOLUTION_CODE}
+            step={activeStep}
+            highlightedLines={connectivity.highlightedLines}
             title="Solution Code"
             onActiveLineDomChange={setActiveLineDom}
           />
@@ -342,6 +346,9 @@ function SwimInRisingWaterVisualizer() {
         <div className="srw-panel srw-controls">
           <div className="srw-panel-head">Input</div>
           <div className="srw-panel-body">
+            <div className="srw-examples">
+              {EXAMPLES.map((example) => <button key={example.label} className="srw-button" onClick={() => { setGrid(example.input); setInputValue(JSON.stringify(example.input)); reset() }}>{example.label}</button>)}
+            </div>
             <textarea
               className="srw-input"
               value={inputValue}
@@ -361,11 +368,17 @@ function SwimInRisingWaterVisualizer() {
       <div className="srw-bottom">
         <FloatingPanel title="Playback Controls">
         <PlaybackControls
-          activeStep={activeStepIndex}
-          totalSteps={steps.length}
           isPlaying={isPlaying}
-          onTogglePlayback={togglePlayback}
-          onStepChange={setActiveStepIndex}
+          isDone={isDone}
+          speed={speed}
+          onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+          onPlayToggle={togglePlay}
+          onPrev={stepBack}
+          onNext={stepForward}
+          onReset={reset}
+          prevDisabled={stepIndex < 0}
+          nextDisabled={isDone}
+          resetDisabled={stepIndex < 0}
           showPatternOverlay={showPatternOverlay}
           onShowPatternOverlayChange={setShowPatternOverlay}
           patternOverlayLabel="Show pattern overlay"

@@ -10,6 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './MaximalRectangleVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -158,12 +159,7 @@ function generateSteps(matrix) {
 
 const EXAMPLES = getExamples('maximal-rectangle')
 
-function VisualizationPanel({ EXAMPLES, applyExample, selected, handleReset, step }) {
-  const initial = EXAMPLES[selected]?.matrix ?? [
-    ['1', '0', '1'],
-    ['1', '0', '1'],
-    ['1', '1', '1'],
-  ]
+function VisualizationPanel({ EXAMPLES, applyExample, selected, initial, step }) {
   const matrix = step?.matrix ?? initial
   const n = matrix[0]?.length || 0
   const m = matrix.length || 0
@@ -289,14 +285,11 @@ const LINE_PATTERN_MAP = {}
 
 export default function MaximalRectangleVisualizer() {
   const [selected, setSelected] = useState(0)
+  const [inputText, setInputText] = useState(JSON.stringify(EXAMPLES[0]?.matrix ?? [['1', '0', '1'], ['1', '0', '1'], ['1', '1', '1']]))
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  const initial = EXAMPLES[selected]?.matrix ?? [
-    ['1', '0', '1'],
-    ['1', '0', '1'],
-    ['1', '1', '1'],
-  ]
+  const { initial, inputError } = useMemo(() => { try { const matrix = JSON.parse(inputText); if (!Array.isArray(matrix) || !matrix.length || !matrix.every(row => Array.isArray(row) && row.length === matrix[0]?.length && row.every(value => String(value) === '0' || String(value) === '1'))) throw new Error('Enter a non-empty rectangular JSON matrix of "0" and "1".'); return { initial: matrix.map(row => row.map(String)), inputError: '' } } catch (error) { return { initial: [['1', '0', '1'], ['1', '0', '1'], ['1', '1', '1']], inputError: error.message } } }, [inputText])
   const steps = useMemo(() => generateSteps(initial), [initial])
   const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
@@ -305,6 +298,7 @@ export default function MaximalRectangleVisualizer() {
   const applyExample = useCallback(
     (idx) => {
       setSelected(idx)
+      setInputText(JSON.stringify(EXAMPLES[idx]?.matrix ?? [[]]))
       handleReset()
     },
     [handleReset]
@@ -316,7 +310,7 @@ export default function MaximalRectangleVisualizer() {
       EXAMPLES={EXAMPLES}
       applyExample={applyExample}
       selected={selected}
-      handleReset={handleReset}
+      initial={initial}
       step={step}
     />
   )
@@ -372,9 +366,9 @@ export default function MaximalRectangleVisualizer() {
   const [panelDivs, setPanelDivs] = useState(null)
   const panelConfigs = useMemo(
     () => [
-      { id: 'primary', title: 'Maximal Rectangle', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
-      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+      { id: 'input', title: 'Input' },
+      { id: 'primary', title: 'Maximal Rectangle', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
     ],
     []
   )
@@ -386,9 +380,9 @@ export default function MaximalRectangleVisualizer() {
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
         <>
+          {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'matrix', label: 'Binary matrix (JSON)', type: 'array' }]} values={{ matrix: inputText }} onChange={(_, value) => { setInputText(value); handleReset() }} examples={EXAMPLES} activeLabel={null} applyExample={(example) => applyExample(EXAMPLES.indexOf(example))} inputError={inputError} />, panelDivs.input)}
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
-          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
         </>
       )}
       {createPortal(

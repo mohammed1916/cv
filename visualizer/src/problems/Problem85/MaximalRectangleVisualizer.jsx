@@ -28,6 +28,13 @@ const SOLUTION_CODE = [
   { line: 15, text: '            max_area = max(max_area, largestRectangleArea(heights))' },
 ]
 
+const EXAMPLES = [
+  { label: 'Mixed rectangle', input: [['1','0','1'], ['1','0','1'], ['1','1','1']] },
+  { label: 'All zeroes', input: [['0','0'], ['0','0']] },
+  { label: 'All ones', input: [['1','1','1'], ['1','1','1']] },
+  { label: 'Single cell', input: [['1']] },
+]
+
 const MAXIMALRECTANGLE_PATTERNS = ['area_calc', 'area_final', 'done', 'height_update', 'init', 'row_end', 'row_start']
 
 // Map which code line corresponds to which pattern
@@ -165,11 +172,7 @@ function generateSteps(matrix) {
 }
 
 function MaximalRectangleVisualizer() {
-  const defaultMatrix = [
-    ['1', '0', '1'],
-    ['1', '0', '1'],
-    ['1', '1', '1'],
-  ]
+  const defaultMatrix = EXAMPLES[0].input
 
   const [matrix, setMatrix] = useState(defaultMatrix)
   const [inputValue, setInputValue] = useState(JSON.stringify(defaultMatrix))
@@ -189,6 +192,7 @@ function MaximalRectangleVisualizer() {
   const handleRun = useCallback(() => {
     try {
       const parsed = JSON.parse(inputValue)
+      if (!Array.isArray(parsed) || !parsed.length || !parsed.every(row => Array.isArray(row) && row.length === parsed[0].length && row.every(value => value === '0' || value === '1' || value === 0 || value === 1))) throw new Error('Enter a non-empty rectangular JSON matrix containing only 0 or 1.')
       setMatrix(parsed)
       reset()
     } catch (e) {
@@ -335,6 +339,9 @@ function MaximalRectangleVisualizer() {
         <div className="mr-panel mr-controls">
           <div className="mr-panel-head">Input</div>
           <div className="mr-panel-body">
+            <div className="mr-examples">
+              {EXAMPLES.map((example) => <button key={example.label} className="mr-button" onClick={() => { setMatrix(example.input); setInputValue(JSON.stringify(example.input)); reset() }}>{example.label}</button>)}
+            </div>
             <textarea
               className="mr-input"
               value={inputValue}
@@ -380,4 +387,3 @@ function MaximalRectangleVisualizer() {
 }
 
 export default MaximalRectangleVisualizer
-

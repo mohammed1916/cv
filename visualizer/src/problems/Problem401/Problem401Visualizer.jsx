@@ -10,6 +10,8 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
+import { createPortal } from 'react-dom'
 
 const PATTERNS = ['done', 'error', 'hour_bits', 'init', 'match_found']
 
@@ -175,15 +177,6 @@ export default function Problem401Visualizer() {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <ManualInputPanel
-        fields={[{"key":"n","label":"n","type":"number"}]}
-        values={{ n: nInput }}
-        onChange={(k, v) => { if (k === 'n') setNInput(v); handleReset() }}
-        examples={EXAMPLES}
-        applyExample={applyExample}
-        inputError={inputError}
-      />
-
         <div style={{ display: 'flex', gap: 4 }}>
           {hourBits.split('').map((bit, idx) => (
             <div
@@ -216,47 +209,14 @@ export default function Problem401Visualizer() {
     )
   }
 
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: '12px' }}>
-      <div style={{ display: 'flex', gap: 16, flex: 1 }}>
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <div style={{ display: 'flex', gap: 12, backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px' }}>
-            <div style={{ width: '120px' }}>
-              <div style={{ color: '#627794', fontSize: '13px', marginBottom: '6px' }}>LEDs Count (n)</div>
-              <input
-                value={nInput}
-                onChange={(e) => { setNInput(e.target.value); handleReset() }}
-                placeholder="1"
-                type="number"
-                min="0"
-                max="11"
-                style={{
-                  width: '100%', padding: '8px', backgroundColor: 'var(--code-bg)', color: 'var(--text)',
-                  border: '1px solid var(--border)', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
-                }}
-              />
-            </div>
-          </div>
-
-          {inputError && (
-            <div style={{ color: '#ea0c0c', fontSize: '12px' }}>{inputError}</div>
-          )}
-
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {EXAMPLES.map((ex) => (
-              <button
-                key={ex.label}
-                onClick={() => applyExample(ex)}
-                style={{
-                  padding: '6px 12px', backgroundColor: 'var(--border)', color: 'var(--text)',
-                  border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '12px'
-                }}
-              >
-                {ex.label}
-              </button>
-            ))}
-          </div>
-
+  const panelConfigs = useMemo(() => [
+    { id: 'input', title: 'Input', dockMode: 'split-top' },
+    { id: 'visualization', title: 'Visualization' },
+    { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
+  ], [])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const inputPanel = <ManualInputPanel fields={[{"key":"n","label":"n","type":"number"}]} values={{ n: nInput }} onChange={(key, value) => { if (key === 'n') setNInput(value); handleReset() }} examples={EXAMPLES} applyExample={applyExample} inputError={inputError} />
+  const visualizationPanel = <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: '12px' }}>
           {step?.currentH !== undefined && step?.currentM !== undefined && (
             <div style={{ backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px' }}>
               <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>
@@ -310,9 +270,8 @@ export default function Problem401Visualizer() {
               </div>
             )}
           </div>
-        </div>
-
-        <div style={{ flex: 1 }}>
+  </div>
+  const codePanel = <div style={{ height: '100%', padding: '12px' }}>
                     <div style={{ position: "relative" }}>
             <CodeTracePanel
               step={step}
@@ -331,9 +290,6 @@ export default function Problem401Visualizer() {
               />
             )}
           </div>
-        </div>
-      </div>
-
       <div style={{
         backgroundColor: step?.phase === 'done' ? '#10b98166' : step?.error ? '#ef444466' : 'var(--surface2)',
         padding: '12px', borderRadius: '6px', color: step?.phase === 'done' ? '#86efac' : step?.error ? '#fca5a5' : 'var(--border)',
@@ -341,8 +297,16 @@ export default function Problem401Visualizer() {
       }}>
         {step?.message ?? 'Press Play or Step to begin.'}
       </div>
+  </div>
 
-      <div>
+  return (
+    <>
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={setPanelDivs} />
+      {panelDivs && <>
+        {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+        {panelDivs.visualization && createPortal(visualizationPanel, panelDivs.visualization)}
+        {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+      </>}
         <FloatingPanel title="Playback Controls">
         {showPatternOverlay && (
           <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
@@ -365,7 +329,6 @@ export default function Problem401Visualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      </div>
-    </div>
+    </>
   )
 }

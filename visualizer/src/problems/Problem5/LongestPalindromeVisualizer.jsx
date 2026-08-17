@@ -10,6 +10,8 @@ import { getExamples } from '../../config/examplesRegistry'
 import './LongestPalindromeVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
+import { createPortal } from 'react-dom'
 
 const LPAL_PATTERNS = ['init', 'loop', 'odd_init', 'odd_check', 'odd_match', 'odd_update', 'odd_expand', 'odd_break', 'even_init', 'even_check', 'even_match', 'even_update', 'even_expand', 'even_break']
 
@@ -211,47 +213,27 @@ export default function LongestPalindromeVisualizer() {
     handleReset()
   }, [handleReset])
 
-  return (
-    <div className="lpal-shell">
-      <ManualInputPanel
+  const panelConfigs = useMemo(() => [
+    { id: 'input', title: 'Input', dockMode: 'split-top' },
+    { id: 'visualization', title: 'Visualization' },
+    { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
+  ], [])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const inputPanel = <ManualInputPanel
         fields={[{"key":"s","label":"s","type":"string"}]}
         values={{ s: sInput }}
         onChange={(k, v) => { if (k === 's') setSInput(v); handleReset() }}
         examples={EXAMPLES}
         applyExample={applyExample}
         inputError={inputError}
-      />
-
-      <div className="lpal-top">
+  />
+  const visualizationPanel = <div className="lpal-shell"><div className="lpal-top">
         <div className="lpal-panel" style={{ flex: 1.5 }}>
           <div className="lpal-panel-head">
             String Expansion
             {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
           </div>
           <div className="lpal-panel-body">
-            <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
-              {EXAMPLES.map((ex) => (
-                <button
-                  key={ex.label}
-                  onClick={() => applyExample(ex)}
-                  className="lpal-example-btn"
-                >
-                  {ex.label}
-                </button>
-              ))}
-            </div>
-
-            <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center' }}>
-              <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>s=</span>
-              <input
-                value={sInput}
-                onChange={(e) => { setSInput(e.target.value); handleReset() }}
-                placeholder="babad"
-                className="lpal-input"
-                style={{ flex: 1, margin: 0 }}
-              />
-            </div>
-
             <div className="lpal-mode-indicator">
               {step?.mode === 'odd' && <span className="lpal-badge odd">ODD LENGTH CENTER</span>}
               {step?.mode === 'even' && <span className="lpal-badge even">EVEN LENGTH CENTER</span>}
@@ -317,9 +299,8 @@ export default function LongestPalindromeVisualizer() {
 
           </div>
         </div>
-      </div>
-
-      <div className="lpal-middle">
+  </div></div>
+  const codePanel = <><div className="lpal-middle">
         <div style={{ position: 'relative' }}>
           <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
 
@@ -333,10 +314,17 @@ export default function LongestPalindromeVisualizer() {
           )}
         </div>
       </div>
-
       <div className={`lpal-status \${step?.phase === 'done' ? 'success' : step?.phase === 'odd_update' || step?.phase === 'even_update' ? 'update' : ''}`}>
         {step?.message ?? 'Press Play or Step to begin.'}
-      </div>
+      </div></>
+  return (
+    <>
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={setPanelDivs} />
+      {panelDivs && <>
+        {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+        {panelDivs.visualization && createPortal(visualizationPanel, panelDivs.visualization)}
+        {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+      </>}
 
       <FloatingPanel title="Playback Controls">
         {showPatternOverlay && (
@@ -360,6 +348,6 @@ export default function LongestPalindromeVisualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-    </div>
+    </>
   )
 }

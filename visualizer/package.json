@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
+    "audit:visualizers": "node scripts/audit-visualizer-contract.mjs",
     "preview": "vite preview",
     "refresh:leetcode": "node scripts/fetch-leetcode-catalog.mjs",
     "refresh:descriptions": "node scripts/fetch-problem-descriptions.mjs"

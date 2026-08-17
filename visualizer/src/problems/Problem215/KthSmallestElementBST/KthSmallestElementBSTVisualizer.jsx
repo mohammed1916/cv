@@ -8,6 +8,7 @@ import PatternOverlay from "../../../components/PatternOverlay"
 import { usePlaybackState } from "../../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../../hooks/usePatternOverlay"
+import ManualInputPanel from '../../../components/shared/ManualInputPanel'
 import "./KthSmallestElementBSTVisualizer.css"
 import { createPortal } from 'react-dom'
 const SOLUTION_CODE = [
@@ -225,8 +226,9 @@ function VisualizationPanel({ step, root }) {
 }
 
 export default function KthSmallestElementBSTVisualizer() {
-  const [treeArr] = useState([3, 1, 4, null, 2])
-  const [k] = useState(1)
+  const EXAMPLES = [{ label: 'First smallest', input: { tree: [3, 1, 4, null, 2], k: 1 } }, { label: 'Third smallest', input: { tree: [5, 3, 6, 2, 4, null, null, 1], k: 3 } }]
+  const [inputText, setInputText] = useState(JSON.stringify(EXAMPLES[0].input))
+  const { treeArr, k, inputError } = useMemo(() => { try { const value = JSON.parse(inputText), tree = value.tree, rank = Number(value.k); if (!Array.isArray(tree) || !tree.length || tree[0] == null || !Number.isInteger(rank) || rank < 1 || rank > tree.filter(value => value != null).length) throw new Error('Use {"tree": level-order array, "k": valid positive rank}.'); return { treeArr: tree, k: rank, inputError: '' } } catch (error) { return { treeArr: EXAMPLES[0].input.tree, k: 1, inputError: error.message } } }, [inputText])
   const root = useMemo(() => buildBST(treeArr), [treeArr])
   const steps = useMemo(() => generateSteps(treeArr, k).map((s) => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [treeArr, k])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
@@ -235,8 +237,9 @@ export default function KthSmallestElementBSTVisualizer() {
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const panelConfigs = useMemo(() => [
-    { id: 'code', title: "Code" },
-    { id: 'viz', title: "🌳 In-order Traversal", dockMode: 'split-right' },
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: "🌳 In-order Traversal", dockMode: 'split-bottom' },
+    { id: 'code', title: "Code", dockMode: 'split-right' },
   ], [])
   const panelContents = useMemo(() => ({
     code: (<CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />),
@@ -251,12 +254,13 @@ export default function KthSmallestElementBSTVisualizer() {
         <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
         {panelDivs && (
           <>
+            {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'treeRank', label: 'Tree and k (JSON)', type: 'string' }]} values={{ treeRank: inputText }} onChange={(_, value) => { setInputText(value); handleReset() }} examples={EXAMPLES} activeLabel={null} applyExample={(example) => { setInputText(JSON.stringify(example.input)); handleReset() }} inputError={inputError} />, panelDivs.input)}
             {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
             {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
           </>
         )}
       </>
-      <FloatingPanel title="Controls">
+      <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -279,4 +283,3 @@ export default function KthSmallestElementBSTVisualizer() {
     </div>
   )
 }
-

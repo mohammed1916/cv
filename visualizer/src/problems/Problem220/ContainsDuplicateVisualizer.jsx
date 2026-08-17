@@ -27,6 +27,13 @@ const SOLUTION_CODE = [
   { line: 7, text: "    return False" },
 ]
 
+const EXAMPLES = [
+  { label: 'Duplicate early', input: [1, 2, 3, 1] },
+  { label: 'No duplicates', input: [1, 2, 3, 4] },
+  { label: 'All same', input: [7, 7, 7] },
+  { label: 'Empty array', input: [] },
+]
+
 function generateSteps(nums) {
   const steps = []
   steps.push({
@@ -209,13 +216,13 @@ function VisualizationPanel({ step }) {
 }
 
 export default function ContainsDuplicateVisualizer() {
-  const [numsInput, setNumsInput] = useState("[1,2,3,1]");
+  const [numsInput, setNumsInput] = useState(JSON.stringify(EXAMPLES[0].input));
   const { nums, inputError } = useMemo(() => {
     try {
-      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums) || !parsedNums.every(Number.isFinite)) throw new Error('Enter a JSON array of numbers.');
       return { nums: parsedNums, inputError: '' };
     } catch (e) {
-      return { nums: [1,2,3,1], inputError: e.message };
+      return { nums: EXAMPLES[0].input, inputError: e.message };
     }
   }, [numsInput]);
   const steps = useMemo(() => generateSteps(nums).map((s) => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [nums])
@@ -225,8 +232,8 @@ export default function ContainsDuplicateVisualizer() {
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const panelConfigs = useMemo(() => [
-    { id: 'code', title: "Code" },
-    { id: 'viz', title: "🔍 Hash Set", dockMode: 'split-right' },
+    { id: 'viz', title: "🔍 Hash Set" },
+    { id: 'code', title: "Code", dockMode: 'split-right' },
   ], [])
   const panelContents = useMemo(() => ({
     code: (<CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />),
@@ -241,7 +248,9 @@ export default function ContainsDuplicateVisualizer() {
           fields={[{"key":"nums","label":"nums","type":"array"}]}
           values={{ nums: numsInput }}
           onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
-          showExamples={false}
+          examples={EXAMPLES}
+          activeLabel={null}
+          applyExample={(example) => { setNumsInput(JSON.stringify(example.input)); handleReset() }}
           inputError={inputError}
         />
       
@@ -254,7 +263,7 @@ export default function ContainsDuplicateVisualizer() {
           </>
         )}
       </>
-      <FloatingPanel title="Controls">
+      <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -277,4 +286,3 @@ export default function ContainsDuplicateVisualizer() {
     </div>
   )
 }
-

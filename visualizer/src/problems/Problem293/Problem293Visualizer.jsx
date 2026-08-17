@@ -83,16 +83,6 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                             <div className="problem293-visualizer-states">{(step.state.output || []).map(state => <span key={state}>{state}</span>)}</div>
                         </motion.div>
                     </div>
-                    <PlaybackControls
-                        currentStep={currentStep}
-                        totalSteps={steps.length}
-                        onNext={() => setCurrentStep(c => c + 1)}
-                        onPrev={() => setCurrentStep(c => c - 1)}
-                        onPlayToggle={() => setIsPlaying(!isPlaying)}
-                        isPlaying={isPlaying}
-                        canNext={canNext}
-                        canPrev={canPrev}
-                    />
                 </div>
 </>),
       bottom: (<CodeTracePanel
@@ -113,6 +103,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
               {panelDivs.bottom && createPortal(panelContents.bottom, panelDivs.bottom)}
             </>
           )}
+          {createPortal(<FloatingPanel title="Playback Controls"><PlaybackControls onReset={() => setCurrentStep(0)} onNext={() => setCurrentStep((current) => Math.min(steps.length - 1, current + 1))} onPrev={() => setCurrentStep((current) => Math.max(0, current - 1))} onPlayToggle={() => setIsPlaying(!isPlaying)} isPlaying={isPlaying} canNext={canNext} canPrev={canPrev} /></FloatingPanel>, document.body)}
         </>
     )
 }

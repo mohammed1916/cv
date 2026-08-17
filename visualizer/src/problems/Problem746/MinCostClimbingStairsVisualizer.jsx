@@ -9,6 +9,8 @@ import { getExamples } from '../../config/examplesRegistry'
 import './MinCostClimbingStairsVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
+import { createPortal } from 'react-dom'
 
 const SOLUTION_CODE = [
     { line: 1, text: 'def minCostClimbingStairs(cost):' },
@@ -107,21 +109,22 @@ function generateSteps(cost) {
 }
 
 export default function MinCostClimbingStairsVisualizer() {
-    const [input, setInput] = useState({"label":"[10,15,20]","input":[10,15,20]});
-  const [costInput, setCostInput] = useState("");
+  const [costInput, setCostInput] = useState('[10,15,20]');
   const { cost, inputError } = useMemo(() => {
     try {
-      const parsedCost = costInput;
-      return { cost: parsedCost, inputError: '' };
+      const parsedCost = JSON.parse(costInput);
+      if (!Array.isArray(parsedCost) || parsedCost.length < 2 || parsedCost.some((value) => !Number.isFinite(Number(value)))) throw new Error('Enter a JSON array with at least two numeric costs.');
+      const normalizedCost = parsedCost.map(Number);
+      return { cost: normalizedCost, inputError: '' };
     } catch (e) {
-      return { cost: "", inputError: e.message };
+      return { cost: [10, 15, 20], inputError: e.message };
     }
   }, [costInput]);    const steps = useMemo(() => generateSteps(cost), [cost])
     const { currentStep, isPlaying, setCurrentStep, setIsPlaying } = usePlaybackState(steps.length)
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
     const handleExample = useCallback((ex) => {
-        setInput(ex.input)
+        setCostInput(JSON.stringify(ex.input))
         setCurrentStep(0)
     }, [setCurrentStep])
 
@@ -129,31 +132,22 @@ export default function MinCostClimbingStairsVisualizer() {
 
     const step = steps[currentStep]
 
-    return (
-        <div className="mcs-shell">
-        <ManualInputPanel
+    const panelConfigs = useMemo(() => [
+      { id: 'input', title: 'Input', dockMode: 'split-top' },
+      { id: 'visualization', title: 'Visualization' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
+    ], [])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const inputPanel = <ManualInputPanel
           fields={[{"key":"cost","label":"cost","type":"string"}]}
           values={{ cost: costInput }}
           onChange={(k, v) => { if (k === 'cost') setCostInput(v) }}
           examples={EXAMPLES}
           applyExample={handleExample}
           inputError={inputError}
-        />
-      
+    />
+    const visualizationPanel = <div className="mcs-shell">
             <div className="mcs-top">
-                <div className="mcs-panel mcs-panel-input">
-                    <div className="mcs-head">Input</div>
-                    <div className="mcs-body">
-                        <div className="mcs-examples">
-                            {EXAMPLES.map((ex) => (
-                                <button key={ex.label} className="mcs-chip" onClick={() => handleExample(ex)}>
-                                    {ex.label}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-
                 <div className="mcs-panel mcs-panel-stats">
                     <div className="mcs-head">Info</div>
                     <div className="mcs-body">
@@ -211,12 +205,16 @@ export default function MinCostClimbingStairsVisualizer() {
                 </div>
             </div>
 
-            <CodeTracePanel code={SOLUTION_CODE} activeLine={step.activeLine} onActiveLineDomChange={setActiveLineDom} />
-
-            <div className="mcs-panel">
-                <div className="mcs-head">Status</div>
-                <div className="mcs-status">{step.message}</div>
-            </div>
+    </div>
+    const codePanel = <><div className="mcs-panel"><div className="mcs-head">Status</div><div className="mcs-status">{step.message}</div></div><CodeTracePanel code={SOLUTION_CODE} activeLine={step.activeLine} onActiveLineDomChange={setActiveLineDom} /></>
+    return (
+        <>
+          <LuminoDockPanel panels={panelConfigs} onPanelReady={setPanelDivs} />
+          {panelDivs && <>
+            {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+            {panelDivs.visualization && createPortal(visualizationPanel, panelDivs.visualization)}
+            {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          </>}
 
             <FloatingPanel title="Playback Controls">
         <PlaybackControls
@@ -233,6 +231,6 @@ export default function MinCostClimbingStairsVisualizer() {
       </FloatingPanel>
 
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
-        </div>
+        </>
     )
 }

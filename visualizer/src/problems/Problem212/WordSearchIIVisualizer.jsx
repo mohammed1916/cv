@@ -41,6 +41,13 @@ const SOLUTION_CODE = [
   { line: 21, text: "    board[i][j] = char" },
 ]
 
+const EXAMPLES = [
+  { label: 'Classic matches', board: [["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]], words: ["oath","pea","eat","rain"] },
+  { label: 'Single cell', board: [["a"]], words: ["a", "b"] },
+  { label: 'No matches', board: [["a","b"],["c","d"]], words: ["ef", "gh"] },
+  { label: 'Shared prefix', board: [["a","b"],["a","a"]], words: ["aba", "aaa", "ab"] },
+]
+
 function buildTrie(words) {
   const root = { children: {}, word: null }
   for (const word of words) {
@@ -266,13 +273,13 @@ function VisualizationPanel({ step }) {
 }
 
 export default function WordSearchIIVisualizer() {
-  const [boardInput, setBoardInput] = useState('[["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]]')
-  const [wordsInput, setWordsInput] = useState('["oath","pea","eat","rain"]')
+  const [boardInput, setBoardInput] = useState(JSON.stringify(EXAMPLES[0].board))
+  const [wordsInput, setWordsInput] = useState(JSON.stringify(EXAMPLES[0].words))
 
   const { board, words, inputError } = useMemo(() => {
     const fallback = {
-      board: [["o", "a", "a", "n"], ["e", "t", "a", "e"], ["i", "h", "k", "r"], ["i", "f", "l", "v"]],
-      words: ["oath", "pea", "eat", "rain"],
+      board: EXAMPLES[0].board,
+      words: EXAMPLES[0].words,
     }
     try {
       const parsedBoard = JSON.parse(boardInput)
@@ -306,31 +313,14 @@ export default function WordSearchIIVisualizer() {
     <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />
   )
 
-  const vizPanel = (
-    <>
-      <ManualInputPanel
-        fields={[
-          { key: 'board', label: 'board', type: 'array' },
-          { key: 'words', label: 'words', type: 'array' },
-        ]}
-        values={{ board: boardInput, words: wordsInput }}
-        onChange={(k, v) => {
-          if (k === 'board') setBoardInput(v)
-          else if (k === 'words') setWordsInput(v)
-          handleReset()
-        }}
-        inputError={inputError}
-        showExamples={false}
-      />
-      <VisualizationPanel step={step} />
-    </>
-  )
+  const vizPanel = <VisualizationPanel step={step} />
 
   const [panelDivs, setPanelDivs] = useState(null)
   const panelConfigs = useMemo(
     () => [
-      { id: "code", title: "Code" },
-      { id: "viz", title: "🔤 Grid Search", dockMode: "split-right" },
+      { id: 'input', title: 'Input' },
+      { id: "viz", title: "🔤 Grid Search", dockMode: "split-bottom" },
+      { id: "code", title: "Code", dockMode: "split-right" },
     ],
     []
   )
@@ -341,12 +331,13 @@ export default function WordSearchIIVisualizer() {
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
         <>
+          {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'board', label: 'Board (JSON)', type: 'string' }, { key: 'words', label: 'Words (JSON)', type: 'string' }]} values={{ board: boardInput, words: wordsInput }} onChange={(key, value) => { if (key === 'board') setBoardInput(value); if (key === 'words') setWordsInput(value); handleReset() }} examples={EXAMPLES} activeLabel={null} applyExample={(example) => { setBoardInput(JSON.stringify(example.board)); setWordsInput(JSON.stringify(example.words)); handleReset() }} inputError={inputError} />, panelDivs.input)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
         </>
       )}
       {createPortal(
-        <FloatingPanel title="Controls">
+        <FloatingPanel title="Playback Controls">
           <PlaybackControls
             isPlaying={isPlaying}
             isDone={isDone}
@@ -371,4 +362,3 @@ export default function WordSearchIIVisualizer() {
     </div>
   )
 }
-

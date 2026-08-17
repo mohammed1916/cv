@@ -10,6 +10,8 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
+import { createPortal } from 'react-dom'
 
 const PATTERNS = ['count', 'done', 'init', 'invalid', 'recurse', 'sub_invalid', 'sub_valid', 'valid']
 
@@ -183,67 +185,21 @@ export default function Problem395Visualizer() {
     onStepJump: setStepIndex,
   })
 
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: '12px' }}>
-      <ManualInputPanel
+  const panelConfigs = useMemo(() => [
+    { id: 'input', title: 'Input', dockMode: 'split-top' },
+    { id: 'visualization', title: 'Visualization' },
+    { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
+  ], [])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const inputPanel = <ManualInputPanel
         fields={[{"key":"s","label":"s","type":"string"},{"key":"k","label":"k","type":"number"}]}
         values={{ s: sInput, k: kInput }}
         onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 'k') setKInput(v); handleReset() }}
         examples={EXAMPLES}
         applyExample={applyExample}
         inputError={inputError}
-      />
-
-      <div style={{ display: 'flex', gap: 16, flex: 1 }}>
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <div style={{ display: 'flex', gap: 12, backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px' }}>
-            <div style={{ flex: 1 }}>
-              <div style={{ color: '#627794', fontSize: '13px', marginBottom: '6px' }}>String (s)</div>
-              <input
-                value={sInput}
-                onChange={(e) => { setSInput(e.target.value); handleReset() }}
-                placeholder="aaab"
-                style={{
-                  width: '100%', padding: '8px', backgroundColor: 'var(--code-bg)', color: 'var(--text)',
-                  border: '1px solid var(--border)', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
-                }}
-              />
-            </div>
-            <div style={{ width: '80px' }}>
-              <div style={{ color: '#627794', fontSize: '13px', marginBottom: '6px' }}>Min Count (k)</div>
-              <input
-                value={kInput}
-                onChange={(e) => { setKInput(e.target.value); handleReset() }}
-                placeholder="3"
-                type="number"
-                min="1"
-                style={{
-                  width: '100%', padding: '8px', backgroundColor: 'var(--code-bg)', color: 'var(--text)',
-                  border: '1px solid var(--border)', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
-                }}
-              />
-            </div>
-          </div>
-
-          {inputError && (
-            <div style={{ color: '#ea0c0c', fontSize: '12px' }}>{inputError}</div>
-          )}
-
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {EXAMPLES.map((ex) => (
-              <button
-                key={ex.label}
-                onClick={() => applyExample(ex)}
-                style={{
-                  padding: '6px 12px', backgroundColor: 'var(--border)', color: 'var(--text)',
-                  border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '12px'
-                }}
-              >
-                {ex.label}
-              </button>
-            ))}
-          </div>
-
+  />
+  const visualizationPanel = <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: '12px' }}>
           <div style={{ backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px' }}>
             <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>String: {s}</div>
             <div style={{ display: 'flex', gap: '2px', flexWrap: 'wrap' }}>
@@ -312,9 +268,8 @@ export default function Problem395Visualizer() {
               </div>
             </div>
           )}
-        </div>
-
-        <div style={{ flex: 1 }}>
+  </div>
+  const codePanel = <div style={{ height: '100%', padding: '12px' }}>
                     <div style={{ position: "relative" }}>
             <CodeTracePanel
               step={step}
@@ -333,9 +288,6 @@ export default function Problem395Visualizer() {
               />
             )}
           </div>
-        </div>
-      </div>
-
       <div style={{
         backgroundColor: step?.isValid === true ? '#10b98166' : step?.isValid === false ? '#ef444466' : 'var(--surface2)',
         padding: '12px', borderRadius: '6px', color: step?.isValid === true ? '#86efac' : step?.isValid === false ? '#fca5a5' : 'var(--border)',
@@ -343,8 +295,16 @@ export default function Problem395Visualizer() {
       }}>
         {step?.message ?? 'Press Play or Step to begin.'}
       </div>
+  </div>
 
-      <div>
+  return (
+    <>
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={setPanelDivs} />
+      {panelDivs && <>
+        {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+        {panelDivs.visualization && createPortal(visualizationPanel, panelDivs.visualization)}
+        {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+      </>}
         <FloatingPanel title="Playback Controls">
         {showPatternOverlay && (
           <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
@@ -367,7 +327,6 @@ export default function Problem395Visualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      </div>
-    </div>
+    </>
   )
 }

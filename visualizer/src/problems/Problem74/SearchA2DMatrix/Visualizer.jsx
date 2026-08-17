@@ -9,6 +9,7 @@ import { usePlaybackState } from "../../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../../config/examplesRegistry'
+import ManualInputPanel from '../../../components/shared/ManualInputPanel'
 import "./Visualizer.css";
 import { createPortal } from 'react-dom'
 const SOLUTION_CODE = [
@@ -63,8 +64,8 @@ const EXAMPLES = getExamples('search-a-2d-matrix');
 
 export default function SearchA2DMatrixVisualizer() {
     const [sel, setSel] = useState(0);
-
-    const { matrix, target } = EXAMPLES[sel];
+    const [inputText, setInputText] = useState(JSON.stringify(EXAMPLES[0] ?? { matrix: [[1, 3], [5, 7]], target: 3 }));
+    const { matrix, target, inputError } = useMemo(() => { try { const value = JSON.parse(inputText); if (!Array.isArray(value.matrix) || !value.matrix.length || !value.matrix.every(row => Array.isArray(row) && row.length === value.matrix[0]?.length && row.every(Number.isFinite)) || !Number.isFinite(Number(value.target))) throw new Error('Use {"matrix": rectangular number matrix, "target": number}.'); return { matrix: value.matrix, target: Number(value.target), inputError: '' } } catch (error) { return { matrix: [[1, 3], [5, 7]], target: 3, inputError: error.message } } }, [inputText]);
     const steps = useMemo(() => generateSteps(matrix, target), [matrix, target]);
     const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
@@ -73,14 +74,15 @@ export default function SearchA2DMatrixVisualizer() {
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
     const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
 
-    const applyExample = useCallback((i) => { setSel(i); handleReset(); }, [handleReset]);
+    const applyExample = useCallback((i) => { setSel(i); setInputText(JSON.stringify(EXAMPLES[i])); handleReset(); }, [handleReset]);
 
     const cols = matrix[0].length;
     const lo = step?.lo ?? 0, hi = step?.hi ?? (matrix.length * cols - 1), mid = step?.mid ?? -1;
 
     const panelConfigs = useMemo(() => [
-      { id: 'code', title: 'Code' },
-      { id: 'viz', title: '🔍 Binary Search', dockMode: 'split-right' },
+      { id: 'input', title: 'Input' },
+      { id: 'viz', title: '🔍 Binary Search', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
     ], [])
     const panelContents = useMemo(() => ({
       code: (<CodeTracePanel
@@ -154,6 +156,7 @@ export default function SearchA2DMatrixVisualizer() {
               <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
               {panelDivs && (
                 <>
+                  {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'search', label: 'Matrix and target (JSON)', type: 'string' }]} values={{ search: inputText }} onChange={(_, value) => { setInputText(value); handleReset() }} examples={EXAMPLES} activeLabel={null} applyExample={(example) => { setInputText(JSON.stringify(example)); handleReset() }} inputError={inputError} />, panelDivs.input)}
                   {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
                   {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
                 </>
@@ -182,4 +185,3 @@ export default function SearchA2DMatrixVisualizer() {
         </div>
     );
 }
-

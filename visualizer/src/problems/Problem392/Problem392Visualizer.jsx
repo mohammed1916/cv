@@ -10,6 +10,8 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
+import { createPortal } from 'react-dom'
 
 const PATTERNS = ['done', 'found', 'increment', 'init', 'loop', 'match', 'no_match']
 
@@ -157,65 +159,21 @@ export default function Problem392Visualizer() {
     onStepJump: setStepIndex,
   })
 
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: '12px' }}>
-      <ManualInputPanel
+  const panelConfigs = useMemo(() => [
+    { id: 'input', title: 'Input', dockMode: 'split-top' },
+    { id: 'visualization', title: 'Visualization' },
+    { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
+  ], [])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const inputPanel = <ManualInputPanel
         fields={[{"key":"s","label":"s","type":"string"},{"key":"t","label":"t","type":"string"}]}
         values={{ s: sInput, t: tInput }}
         onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 't') setTInput(v); handleReset() }}
         examples={EXAMPLES}
         applyExample={applyExample}
         inputError={inputError}
-      />
-
-      <div style={{ display: 'flex', gap: 16, flex: 1 }}>
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <div style={{ display: 'flex', gap: 12, backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px' }}>
-            <div style={{ flex: 1 }}>
-              <div style={{ color: '#627794', fontSize: '13px', marginBottom: '6px' }}>Subsequence (s)</div>
-              <input
-                value={sInput}
-                onChange={(e) => { setSInput(e.target.value); handleReset() }}
-                placeholder="abc"
-                style={{
-                  width: '100%', padding: '8px', backgroundColor: 'var(--code-bg)', color: 'var(--text)',
-                  border: '1px solid var(--border)', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
-                }}
-              />
-            </div>
-            <div style={{ flex: 1 }}>
-              <div style={{ color: '#627794', fontSize: '13px', marginBottom: '6px' }}>Text (t)</div>
-              <input
-                value={tInput}
-                onChange={(e) => { setTInput(e.target.value); handleReset() }}
-                placeholder="ahbgdc"
-                style={{
-                  width: '100%', padding: '8px', backgroundColor: 'var(--code-bg)', color: 'var(--text)',
-                  border: '1px solid var(--border)', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'
-                }}
-              />
-            </div>
-          </div>
-
-          {inputError && (
-            <div style={{ color: '#ea0c0c', fontSize: '12px' }}>{inputError}</div>
-          )}
-
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {EXAMPLES.map((ex) => (
-              <button
-                key={ex.label}
-                onClick={() => applyExample(ex)}
-                style={{
-                  padding: '6px 12px', backgroundColor: 'var(--border)', color: 'var(--text)',
-                  border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '12px'
-                }}
-              >
-                {ex.label}
-              </button>
-            ))}
-          </div>
-
+  />
+  const visualizationPanel = <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: '12px' }}>
           <div style={{ backgroundColor: 'var(--surface2)', padding: '12px', borderRadius: '8px' }}>
             <div style={{ color: '#627794', fontSize: '13px', marginBottom: '8px' }}>Subsequence: {s}</div>
             <div style={{ display: 'flex', gap: '2px', flexWrap: 'wrap' }}>
@@ -276,9 +234,8 @@ export default function Problem392Visualizer() {
               </div>
             </div>
           )}
-        </div>
-
-        <div style={{ flex: 1 }}>
+  </div>
+  const codePanel = <div style={{ height: '100%', padding: '12px' }}>
                     <div style={{ position: "relative" }}>
             <CodeTracePanel
               step={step}
@@ -297,9 +254,6 @@ export default function Problem392Visualizer() {
               />
             )}
           </div>
-        </div>
-      </div>
-
       <div style={{
         backgroundColor: step?.isSubsequence === true ? '#10b98166' : step?.isSubsequence === false ? '#ef444466' : 'var(--surface2)',
         padding: '12px', borderRadius: '6px', color: step?.isSubsequence === true ? '#86efac' : step?.isSubsequence === false ? '#fca5a5' : 'var(--border)',
@@ -307,8 +261,16 @@ export default function Problem392Visualizer() {
       }}>
         {step?.message ?? 'Press Play or Step to begin.'}
       </div>
+  </div>
 
-      <div>
+  return (
+    <>
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={setPanelDivs} />
+      {panelDivs && <>
+        {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+        {panelDivs.visualization && createPortal(visualizationPanel, panelDivs.visualization)}
+        {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+      </>}
         <FloatingPanel title="Playback Controls">
         {showPatternOverlay && (
           <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
@@ -331,7 +293,6 @@ export default function Problem392Visualizer() {
           showPatternOverlayToggle
         />
       </FloatingPanel>
-      </div>
-    </div>
+    </>
   )
 }

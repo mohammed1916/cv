@@ -9,8 +9,10 @@ import { getExamples } from '../../config/examplesRegistry'
 import "./MissingNumberVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { createPortal } from 'react-dom'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -67,9 +69,13 @@ export default function MissingNumberVisualizer() {
     const full = Array.from({ length: n + 1 }, (_, i) => i); // 0..n
     const numSet = new Set(nums);
 
-    return (
-        <div className="mn-shell">
-        <ManualInputPanel
+    const panelConfigs = useMemo(() => [
+      { id: 'input', title: 'Input', dockMode: 'split-top' },
+      { id: 'visualization', title: 'Visualization' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
+    ], [])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const inputPanel = <ManualInputPanel
           fields={[{"key":"nums","label":"nums","type":"array"}]}
           values={{ nums: numsInput }}
           onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
@@ -77,14 +83,8 @@ export default function MissingNumberVisualizer() {
           activeLabel={ex?.label}
           applyExample={applyEx}
           inputError={inputError}
-        />
-      
-            <div className="mn-examples">
-                {EXAMPLES.map(e => (
-                    <button key={e.label} className={`mn-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>{e.label}</button>
-                ))}
-            </div>
-
+    />
+    const visualizationPanel = <div className="mn-shell">
             {/* Full range 0..n */}
             <div className="mn-panel">
                 <div className="mn-panel-label">Full range 0..{n} (expected)</div>
@@ -141,8 +141,19 @@ export default function MissingNumberVisualizer() {
                 </div>
             </div>
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-            <div className="mn-status">{step?.message ?? "Press Play to begin."}</div>
+    </div>
+    const codePanel = <>
+      <div className="mn-status">{step?.message ?? "Press Play to begin."}</div>
+      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+    </>
+    return (
+        <>
+          <LuminoDockPanel panels={panelConfigs} onPanelReady={setPanelDivs} />
+          {panelDivs && <>
+            {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+            {panelDivs.visualization && createPortal(visualizationPanel, panelDivs.visualization)}
+            {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          </>}
             <FloatingPanel title="Playback Controls">
         <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
@@ -156,6 +167,6 @@ export default function MissingNumberVisualizer() {
             />
       </FloatingPanel>
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
-        </div>
+        </>
     );
 }

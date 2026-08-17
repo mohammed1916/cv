@@ -10,6 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './SetMatrixZeroesVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -116,8 +117,7 @@ function generateSteps(initial) {
 
 const EXAMPLES = getExamples('set-matrix-zeroes')
 
-function VisualizationPanel({ EXAMPLES, applyExample, selected, handleReset, step }) {
-    const initial = EXAMPLES[selected]?.matrix ?? [[]]
+function VisualizationPanel({ EXAMPLES, applyExample, selected, initial, step }) {
     const matrix = step?.matrix ?? initial
     const cols = matrix[0]?.length ?? 0
     const rows = step?.rows ?? new Set()
@@ -198,10 +198,17 @@ const LINE_PATTERN_MAP = {}
 
 export default function SetMatrixZeroesVisualizer() {
     const [selected, setSelected] = useState(0)
+    const [inputText, setInputText] = useState(JSON.stringify(EXAMPLES[0]?.matrix ?? [[1, 1], [1, 0]]))
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-    const initial = EXAMPLES[selected]?.matrix ?? [[]]
+    const { initial, inputError } = useMemo(() => {
+      try {
+        const matrix = JSON.parse(inputText)
+        if (!Array.isArray(matrix) || !matrix.length || !matrix.every(row => Array.isArray(row) && row.length === matrix[0]?.length && row.every(Number.isFinite))) throw new Error('Enter a non-empty rectangular JSON number matrix.')
+        return { initial: matrix, inputError: '' }
+      } catch (error) { return { initial: EXAMPLES[0]?.matrix ?? [[1, 1], [1, 0]], inputError: error.message } }
+    }, [inputText])
     const steps = useMemo(() => generateSteps(initial), [initial])
     const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length)
@@ -210,6 +217,7 @@ export default function SetMatrixZeroesVisualizer() {
     const applyExample = useCallback(
         (idx) => {
             setSelected(idx)
+            setInputText(JSON.stringify(EXAMPLES[idx]?.matrix ?? [[]]))
             handleReset()
         },
         [handleReset]
@@ -220,7 +228,7 @@ export default function SetMatrixZeroesVisualizer() {
             EXAMPLES={EXAMPLES}
             applyExample={applyExample}
             selected={selected}
-            handleReset={handleReset}
+            initial={initial}
             step={step}
         />
     )
@@ -247,7 +255,8 @@ export default function SetMatrixZeroesVisualizer() {
     const [panelDivs, setPanelDivs] = useState(null)
     const panelConfigs = useMemo(
         () => [
-            { id: 'viz', title: 'Visualization' },
+            { id: 'input', title: 'Input' },
+            { id: 'viz', title: 'Visualization', dockMode: 'split-bottom' },
             { id: 'code', title: 'Code', dockMode: 'split-right' },
         ],
         []
@@ -259,6 +268,7 @@ export default function SetMatrixZeroesVisualizer() {
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
                 <>
+                    {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'matrix', label: 'Matrix (JSON)', type: 'array' }]} values={{ matrix: inputText }} onChange={(_, value) => { setInputText(value); handleReset() }} examples={EXAMPLES} activeLabel={null} applyExample={(example) => applyExample(EXAMPLES.indexOf(example))} inputError={inputError} />, panelDivs.input)}
                     {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
                 </>

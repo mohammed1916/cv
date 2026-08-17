@@ -8,6 +8,7 @@ import PatternOverlay from "../../../components/PatternOverlay"
 import { usePlaybackState } from "../../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../../hooks/usePatternOverlay"
+import ManualInputPanel from '../../../components/shared/ManualInputPanel'
 import "./InvertBinaryTreeVisualizer.css"
 import { createPortal } from 'react-dom'
 const SOLUTION_CODE = [
@@ -199,7 +200,9 @@ function VisualizationPanel({ step, originalRoot, invertedRoot }) {
 }
 
 export default function InvertBinaryTreeVisualizer() {
-  const [treeArr] = useState([4, 2, 7, 1, 3, 6, 9])
+  const EXAMPLES = [{ label: 'Balanced tree', input: [4, 2, 7, 1, 3, 6, 9] }, { label: 'Single node', input: [1] }, { label: 'Left chain', input: [1, 2, null, 3] }]
+  const [inputText, setInputText] = useState(JSON.stringify(EXAMPLES[0].input))
+  const { treeArr, inputError } = useMemo(() => { try { const values = JSON.parse(inputText); if (!Array.isArray(values) || !values.length || values[0] == null || values.some(value => value != null && !Number.isFinite(Number(value)))) throw new Error('Enter a non-empty level-order JSON tree array using null for missing nodes.'); return { treeArr: values, inputError: '' } } catch (error) { return { treeArr: EXAMPLES[0].input, inputError: error.message } } }, [inputText])
   const originalRoot = useMemo(() => buildTree(treeArr), [treeArr])
   const invertedRoot = useMemo(() => {
     const copy = buildTree(treeArr)
@@ -220,8 +223,9 @@ export default function InvertBinaryTreeVisualizer() {
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const panelConfigs = useMemo(() => [
-    { id: 'code', title: "Code" },
-    { id: 'viz', title: "🌳 Tree Mirror", dockMode: 'split-right' },
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: "🌳 Tree Mirror", dockMode: 'split-bottom' },
+    { id: 'code', title: "Code", dockMode: 'split-right' },
   ], [])
   const panelContents = useMemo(() => ({
     code: (<CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />),
@@ -236,12 +240,13 @@ export default function InvertBinaryTreeVisualizer() {
         <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
         {panelDivs && (
           <>
+            {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'tree', label: 'Level-order tree (JSON)', type: 'array' }]} values={{ tree: inputText }} onChange={(_, value) => { setInputText(value); handleReset() }} examples={EXAMPLES} activeLabel={null} applyExample={(example) => { setInputText(JSON.stringify(example.input)); handleReset() }} inputError={inputError} />, panelDivs.input)}
             {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
             {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
           </>
         )}
       </>
-      <FloatingPanel title="Controls">
+      <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -264,4 +269,3 @@ export default function InvertBinaryTreeVisualizer() {
     </div>
   )
 }
-

@@ -474,8 +474,9 @@ export default function ErectFenceVisualizer() {
   )
 
   const panelConfigs = useMemo(() => [
-    { id: 'code', title: 'Code' },
-    { id: 'viz', title: '⬠ Convex Hull', dockMode: 'split-right' },
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: '⬠ Convex Hull', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
   ], [])
   const panelContents = useMemo(() => ({
     code: (<div style={{ position: 'relative' }}>
@@ -530,23 +531,33 @@ export default function ErectFenceVisualizer() {
 
   return (
     <div className="problem-shell">
-      <ManualInputPanel
-        fields={[{"key":"points","label":"points","type":"array"}]}
-        values={{ points: pointsInput }}
-        onChange={(k, v) => { if (k === 'points') setPointsInput(v); handleReset() }}
-        examples={examples}
-        applyExample={applyExample}
-      />
-
-      <>
-        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
-        {panelDivs && (
-          <>
-            {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
-            {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
-          </>
-        )}
-      </>
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.input && createPortal(<ManualInputPanel
+            fields={[{ key: 'points', label: 'Points (JSON)', type: 'array' }]}
+            values={{ points: pointsInput }}
+            onChange={(_, value) => { setPointsInput(value); handleReset() }}
+            examples={examples}
+            applyExample={applyExample}
+          />, panelDivs.input)}
+          {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+          {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+        </>
+      )}
+      {createPortal(<FloatingPanel title="Playback Controls"><PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+      /></FloatingPanel>, document.body)}
     </div>
   )
 }

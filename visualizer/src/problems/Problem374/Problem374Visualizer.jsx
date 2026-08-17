@@ -15,6 +15,7 @@ import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 import { createPortal } from 'react-dom'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const SOLUTION_CODE = getSolutionCode('guess-number-higher-or-lower')
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -22,6 +23,12 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = ['adjust_left', 'adjust_right', 'calc_guess', 'call_guess', 'check_condition', 'done', 'equal', 'higher', 'init', 'lower']
 
 const EXAMPLES = getExamples('guess-number-higher-or-lower')
+const FALLBACK_EXAMPLES = [
+  { label: 'Middle target', input: { n: 10, pick: 6 } },
+  { label: 'Lower boundary', input: { n: 10, pick: 1 } },
+  { label: 'Upper boundary', input: { n: 10, pick: 10 } },
+  { label: 'Single number', input: { n: 1, pick: 1 } },
+]
 
 function generateSteps(n, pick) {
   const steps = []
@@ -391,7 +398,15 @@ function VisualizationPanel({ n, pick, step, applyEx }) {
 }
 
 export default function Problem374Visualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0] || { n: 10, pick: 6 })
+  const examples = useMemo(() => EXAMPLES.length ? EXAMPLES.map(example => example.n ? { ...example, input: { n: example.n, pick: example.pick } } : example) : FALLBACK_EXAMPLES, [])
+  const [inputText, setInputText] = useState(JSON.stringify(examples[0]?.input || { n: 10, pick: 6 }))
+  const { ex, inputError } = useMemo(() => {
+    try {
+      const value = JSON.parse(inputText), n = Number(value.n), pick = Number(value.pick)
+      if (!Number.isInteger(n) || !Number.isInteger(pick) || n < 1 || pick < 1 || pick > n) throw new Error('Use {"n": positive integer, "pick": integer from 1 to n}.')
+      return { ex: { n, pick }, inputError: '' }
+    } catch (error) { return { ex: { n: 10, pick: 6 }, inputError: error.message } }
+  }, [inputText])
 
   const steps = useMemo(
     () =>
@@ -407,7 +422,7 @@ export default function Problem374Visualizer() {
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset])
+  const applyEx = useCallback((e) => { setInputText(JSON.stringify(e.input || { n: e.n, pick: e.pick })); handleReset(); }, [handleReset])
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -418,8 +433,9 @@ export default function Problem374Visualizer() {
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const panelConfigs = useMemo(() => [
-    { id: 'code', title: 'Code' },
-    { id: 'viz', title: '🎯 Binary Search Guessing', dockMode: 'split-right' },
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: '🎯 Binary Search Guessing', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
   ], [])
   const panelContents = useMemo(() => ({
     code: (<div style={{ position: 'relative' }}>
@@ -455,6 +471,7 @@ export default function Problem374Visualizer() {
         <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
         {panelDivs && (
           <>
+            {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'guess', label: 'Search input (JSON)', type: 'string' }]} values={{ guess: inputText }} onChange={(_, value) => { setInputText(value); handleReset() }} examples={examples} activeLabel={null} applyExample={applyEx} inputError={inputError} />, panelDivs.input)}
             {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
             {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
           </>

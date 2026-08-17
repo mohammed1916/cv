@@ -11,6 +11,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -32,94 +33,37 @@ const SOLUTION_CODE = [
   { line: 13, text: '        return node.val' },
 ]
 
-function generateSteps() {
+const EXAMPLES = [
+  { label: 'Balanced BST', input: [3, 1, 6, null, 2, 4, 7] },
+  { label: 'Single node', input: [1] },
+  { label: 'Right chain', input: [1, null, 2, null, null, null, 3] },
+]
+
+function generateSteps(treeValues) {
   const steps = []
-  const treeValues = [3, 1, 6, null, 2, 4, 7]
-  // In-order traversal: 1, 2, 3, 4, 6, 7
-
-  steps.push({
-    activeLine: 3,
-    stack: [3],
-    message: 'Initialize stack. Push all left nodes from root.',
-  })
-
-  steps.push({
-    activeLine: 7,
-    stack: [3, 1],
-    visited: [],
-    message: 'Push left child (1).',
-  })
-
-  steps.push({
-    activeLine: 7,
-    stack: [3, 1, 2],
-    visited: [],
-    message: 'Continue left from 1 (already at leaf).',
-  })
-
-  steps.push({
-    activeLine: 10,
-    stack: [3, 1],
-    visited: [1],
-    message: 'next(): Pop 1 (leftmost). No right child.',
-  })
-
-  steps.push({
-    activeLine: 10,
-    stack: [3],
-    visited: [1, 2],
-    message: 'next(): Pop 2. No right child.',
-  })
-
-  steps.push({
-    activeLine: 10,
-    stack: [],
-    visited: [1, 2, 3],
-    message: 'next(): Pop 3. Right exists (6), push its left path.',
-  })
-
-  steps.push({
-    activeLine: 7,
-    stack: [6, 4],
-    visited: [1, 2, 3],
-    message: 'Push left from 6: [6, 4] on stack.',
-  })
-
-  steps.push({
-    activeLine: 10,
-    stack: [6],
-    visited: [1, 2, 3, 4],
-    message: 'next(): Pop 4. No right child.',
-  })
-
-  steps.push({
-    activeLine: 10,
-    stack: [],
-    visited: [1, 2, 3, 4, 6],
-    message: 'next(): Pop 6. Right exists (7), push left from 7.',
-  })
-
-  steps.push({
-    activeLine: 7,
-    stack: [7],
-    visited: [1, 2, 3, 4, 6],
-    message: 'Push left from 7: [7] on stack.',
-  })
-
-  steps.push({
-    activeLine: 10,
-    stack: [],
-    visited: [1, 2, 3, 4, 6, 7],
-    message: 'next(): Pop 7. No children. Done!',
-  })
-
+  if (!Array.isArray(treeValues) || treeValues[0] == null) return [{ activeLine: 3, stack: [], visited: [], message: 'Empty tree: the iterator has no values.' }]
+  const stack = [], visited = []
+  const snapshot = () => stack.map(index => treeValues[index])
+  const pushLeft = (start) => { let index = start; while (index < treeValues.length && treeValues[index] != null) { stack.push(index); steps.push({ activeLine: 7, stack: snapshot(), visited: [...visited], message: `Push ${treeValues[index]} while following its left child.` }); index = index * 2 + 1 } }
+  steps.push({ activeLine: 3, stack: [], visited: [], message: 'Initialize the iterator stack, then push the root’s left spine.' })
+  pushLeft(0)
+  while (stack.length) {
+    const index = stack.pop(), value = treeValues[index]
+    visited.push(value)
+    steps.push({ activeLine: 10, stack: snapshot(), visited: [...visited], message: `next() pops ${value}, the next in-order value.` })
+    const right = index * 2 + 2
+    if (right < treeValues.length && treeValues[right] != null) { steps.push({ activeLine: 11, stack: snapshot(), visited: [...visited], message: `${value} has right child ${treeValues[right]}; push that subtree’s left spine.` }); pushLeft(right) }
+  }
+  steps.push({ activeLine: 13, stack: [], visited: [...visited], message: `Traversal complete: [${visited.join(', ')}].` })
   return steps
 }
 
 export default function BSTIteratorVisualizer() {
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  const steps = useMemo(() => generateSteps(), [])
+  const [inputText, setInputText] = useState(JSON.stringify(EXAMPLES[0].input))
+  const { treeValues, inputError } = useMemo(() => { try { const value = JSON.parse(inputText); if (!Array.isArray(value)) throw new Error('Enter a JSON level-order array.'); return { treeValues: value, inputError: '' } } catch (error) { return { treeValues: EXAMPLES[0].input, inputError: error.message } } }, [inputText])
+  const steps = useMemo(() => generateSteps(treeValues), [treeValues])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
@@ -234,9 +178,9 @@ export default function BSTIteratorVisualizer() {
   const [panelDivs, setPanelDivs] = useState(null)
   const panelConfigs = useMemo(
     () => [
-      { id: 'primary', title: '🌳 Stack State', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
-      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+      { id: 'input', title: 'Input' },
+      { id: 'primary', title: '🌳 Stack State', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
     ],
     []
   )
@@ -248,8 +192,8 @@ export default function BSTIteratorVisualizer() {
       {panelDivs && (
         <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'tree', label: 'BST level-order JSON', type: 'array' }]} values={{ tree: inputText }} onChange={(_, value) => { setInputText(value); handleReset() }} examples={EXAMPLES} activeLabel={null} applyExample={(example) => { setInputText(JSON.stringify(example.input)); handleReset() }} inputError={inputError} />, panelDivs.input)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
-          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
         </>
       )}
       {createPortal(

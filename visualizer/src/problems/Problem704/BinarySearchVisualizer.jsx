@@ -10,6 +10,8 @@ import { getExamples } from '../../config/examplesRegistry'
 import './BinarySearchVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
+import { createPortal } from 'react-dom'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -159,54 +161,27 @@ export default function BinarySearchVisualizer() {
     onStepJump: setStepIndex,
   })
 
-  return (
-    <div className="bs-shell">
-      <ManualInputPanel
+  const panelConfigs = useMemo(() => [
+    { id: 'input', title: 'Input', dockMode: 'split-top' },
+    { id: 'visualization', title: 'Visualization' },
+    { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
+  ], [])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const inputPanel = <ManualInputPanel
         fields={[{"key":"nums","label":"nums","type":"array"},{"key":"target","label":"target","type":"number"}]}
         values={{ nums: numsInput, target: targetInput }}
         onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'target') setTargetInput(v); handleReset() }}
         examples={EXAMPLES}
         applyExample={applyExample}
         inputError={inputError}
-      />
-
-      <div className="bs-top">
+  />
+  const visualizationPanel = <div className="bs-shell"><div className="bs-top">
         <div className="bs-panel" style={{ flex: 1 }}>
           <div className="bs-panel-head">
             Array State & Search Space
             {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
           </div>
           <div className="bs-panel-body">
-            <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
-              {EXAMPLES.map((ex) => (
-                <button
-                  key={ex.label}
-                  onClick={() => applyExample(ex)}
-                  className="bs-example-btn"
-                >
-                  {ex.label}
-                </button>
-              ))}
-            </div>
-
-            <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center' }}>
-              <input
-                value={numsInput}
-                onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-                placeholder="[-1, 0, 3, 5, 9, 12]"
-                className="bs-input"
-                style={{ flex: 1, margin: 0 }}
-              />
-              <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>target=</span>
-              <input
-                value={targetInput}
-                onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
-                placeholder="9"
-                className="bs-input"
-                style={{ width: '60px', margin: 0, textAlign: 'center' }}
-              />
-            </div>
-
             <div className="bs-pointers-legend">
               <div className="bs-legend-item left"><div className="bs-legend-swatch" /> Left</div>
               <div className="bs-legend-item mid"><div className="bs-legend-swatch" /> Mid</div>
@@ -257,9 +232,8 @@ export default function BinarySearchVisualizer() {
 
           </div>
         </div>
-      </div>
-
-      <div className="bs-middle">
+  </div></div>
+  const codePanel = <><div className="bs-middle">
         <CodeTracePanel
           step={step}
           codeLines={SOLUTION_CODE}
@@ -268,10 +242,17 @@ export default function BinarySearchVisualizer() {
           onActiveLineDomChange={setActiveLineDom}
         />
       </div>
-
       <div className={`bs-status \${step?.phase === 'found' ? 'success' : step?.phase === 'done' ? 'fail' : ''}`}>
         {step?.message ?? 'Press Play or Step to begin.'}
-      </div>
+      </div></>
+  return (
+    <>
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={setPanelDivs} />
+      {panelDivs && <>
+        {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+        {panelDivs.visualization && createPortal(visualizationPanel, panelDivs.visualization)}
+        {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+      </>}
 
       <FloatingPanel title="Playback Controls">
         <PlaybackControls
@@ -294,6 +275,6 @@ export default function BinarySearchVisualizer() {
       </FloatingPanel>
 
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
-    </div>
+    </>
   )
 }

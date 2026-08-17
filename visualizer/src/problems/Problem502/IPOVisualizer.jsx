@@ -11,6 +11,8 @@ import { getExamples } from '../../config/examplesRegistry'
 import "./IPOVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
+import { createPortal } from 'react-dom'
 
 const PATTERNS = {
   'init': { icon: '◯', label: 'Initialize', color: '#048196' },
@@ -122,9 +124,13 @@ export default function IPOVisualizer() {
     const projects = profits.map((p, i) => ({ profit: p, capital: capital[i] }))
         .sort((a, b) => a.capital - b.capital);
 
-    return (
-        <div className="ipo-shell">
-        <ManualInputPanel
+    const panelConfigs = useMemo(() => [
+      { id: 'input', title: 'Input', dockMode: 'split-top' },
+      { id: 'visualization', title: 'Visualization' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
+    ], [])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const inputPanel = <ManualInputPanel
           fields={[{"key":"k","label":"k","type":"number"},{"key":"w","label":"w","type":"number"},{"key":"profits","label":"profits","type":"array"},{"key":"capital","label":"capital","type":"array"}]}
           values={{ k: kInput, w: wInput, profits: profitsInput, capital: capitalInput }}
           onChange={(k, v) => { if (k === 'k') setKInput(v); if (k === 'w') setWInput(v); if (k === 'profits') setProfitsInput(v); if (k === 'capital') setCapitalInput(v); handleReset() }}
@@ -132,16 +138,8 @@ export default function IPOVisualizer() {
           activeLabel={ex?.label}
           applyExample={applyEx}
           inputError={inputError}
-        />
-      
-            <div className="ipo-examples">
-                {EXAMPLES.map(e => (
-                    <button key={e.label} className={`ipo-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>
-                        {e.label}
-                    </button>
-                ))}
-            </div>
-
+    />
+    const visualizationPanel = <div className="ipo-shell">
             <div className="ipo-row">
                 <div className="ipo-panel ipo-info">
                     <div className="ipo-panel-label">Capital (w)</div>
@@ -190,8 +188,16 @@ export default function IPOVisualizer() {
 
             {step?.done && <div className="ipo-result">✓ Final capital = {w}</div>}
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-            <div className="ipo-status">{step?.message ?? "Press Play to begin."}</div>
+    </div>
+    const codePanel = <><div className="ipo-status">{step?.message ?? "Press Play to begin."}</div><CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} /></>
+    return (
+        <>
+          <LuminoDockPanel panels={panelConfigs} onPanelReady={setPanelDivs} />
+          {panelDivs && <>
+            {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+            {panelDivs.visualization && createPortal(visualizationPanel, panelDivs.visualization)}
+            {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          </>}
             <FloatingPanel title="Playback Controls">
         {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
         <PlaybackControls
@@ -207,7 +213,6 @@ export default function IPOVisualizer() {
       </FloatingPanel>
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
       {showPatternOverlay && (<CodePatternAnnotations linePatterns={LINE_PATTERN_MAP} currentPhase={step?.phase} activeLineDom={activeLineDom} activeLine={step?.activeLine} />)}
-        </div>
+        </>
     );
 }
-

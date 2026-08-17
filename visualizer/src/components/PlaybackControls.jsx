@@ -16,10 +16,16 @@ export default function PlaybackControls({
   onReset,
   onPrev,
   onPlayToggle,
+  onTogglePlayback,
+  onStepChange,
   onNext,
   resetDisabled,
   prevDisabled,
   nextDisabled,
+  canPrev,
+  canNext,
+  activeStep,
+  totalSteps,
   isPlaying,
   isDone,
   resetLabel = 'Reset',
@@ -97,6 +103,17 @@ export default function PlaybackControls({
   const ghostClasses = [buttonClassName || 'pc-btn', ghostButtonClassName || 'pc-btn-ghost'].filter(Boolean).join(' ')
   const playClasses = [buttonClassName || 'pc-btn', playButtonClassName || 'pc-btn-play'].filter(Boolean).join(' ')
   const resolvedPlayLabel = isPlaying ? pauseLabel : isDone ? replayLabel : playLabel
+  const resolvedPrevDisabled = prevDisabled ?? (canPrev === undefined
+    ? (Number.isInteger(activeStep) && Number.isInteger(totalSteps) ? activeStep <= 0 : undefined)
+    : !canPrev)
+  const resolvedNextDisabled = nextDisabled ?? (canNext === undefined
+    ? (Number.isInteger(activeStep) && Number.isInteger(totalSteps) ? activeStep >= totalSteps - 1 : undefined)
+    : !canNext)
+  const resolvedPrev = onPrev ?? (onStepChange && Number.isInteger(activeStep)
+    ? () => onStepChange(Math.max(0, activeStep - 1)) : undefined)
+  const resolvedNext = onNext ?? (onStepChange && Number.isInteger(activeStep)
+    ? () => onStepChange(Number.isInteger(totalSteps) ? Math.min(totalSteps - 1, activeStep + 1) : activeStep + 1) : undefined)
+  const resolvedPlayToggle = onPlayToggle ?? onTogglePlayback
 
   return (
     <div className={resolvedRootClass} style={{ padding: '8px' }}>
@@ -105,9 +122,9 @@ export default function PlaybackControls({
         <button type="button" className={resetClasses} onClick={onReset} disabled={resetDisabled} title={resetTitle}>
           {renderResetContent ? renderResetContent() : resetLabel}
         </button>
-        <button type="button" className={ghostClasses} onClick={onPrev} disabled={prevDisabled}>{prevLabel}</button>
-        <button type="button" className={playClasses} onClick={onPlayToggle}>{resolvedPlayLabel}</button>
-        <button type="button" className={ghostClasses} onClick={onNext} disabled={nextDisabled}>{nextLabel}</button>
+        <button type="button" className={ghostClasses} onClick={resolvedPrev} disabled={resolvedPrevDisabled}>{prevLabel}</button>
+        <button type="button" className={playClasses} onClick={resolvedPlayToggle}>{resolvedPlayLabel}</button>
+        <button type="button" className={ghostClasses} onClick={resolvedNext} disabled={resolvedNextDisabled}>{nextLabel}</button>
       </ButtonGroup>
 
       {middleSlot}

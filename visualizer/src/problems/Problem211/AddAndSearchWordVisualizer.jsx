@@ -44,6 +44,13 @@ const SOLUTION_CODE = [
   { line: 24, text: "        return dfs(0, self.root)" },
 ]
 
+const EXAMPLES = [
+  { label: 'Wildcard match', word: '.ad', isAdd: 'false' },
+  { label: 'Exact match', word: 'bad', isAdd: 'false' },
+  { label: 'Missing word', word: 'pad', isAdd: 'false' },
+  { label: 'Add word', word: 'sad', isAdd: 'true' },
+]
+
 function buildWordTrie(words) {
   const root = { children: {}, isWord: false, val: "ROOT" }
   for (const word of words) {
@@ -57,7 +64,7 @@ function buildWordTrie(words) {
   return root
 }
 
-function generateSteps(word, isAdd, trie) {
+function generateSteps(word, isAdd, trie, addedWords) {
   const steps = []
   const action = isAdd ? "Add" : "Search"
   steps.push({
@@ -69,6 +76,7 @@ function generateSteps(word, isAdd, trie) {
   })
 
   if (isAdd) {
+    const found = addedWords.some((candidate) => candidate.length === word.length && [...word].every((char, index) => char === '.' || char === candidate[index]))
     steps.push({
       activeLine: 7,
       word,
@@ -187,8 +195,8 @@ function generateSteps(word, isAdd, trie) {
       word,
       pathChars,
       done: true,
-      result: true,
-      message: `Found matching word`,
+      result: found,
+      message: found ? 'Found matching word' : 'No matching word exists',
       relatedLines: [16],
     })
   }
@@ -278,9 +286,9 @@ function VisualizationPanel({ step, trie }) {
       )}
 
       {step.result !== undefined && (
-        <motion.div style={{ padding: 12, backgroundColor: "#dcfce7", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 16, fontWeight: 700, color: "#0c865d" }}>
-            {step.action === "Add" ? "Added ✓" : "Found ✓"}
+        <motion.div style={{ padding: 12, backgroundColor: step.result ? "#dcfce7" : "#fee2e2", borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <div style={{ fontSize: 16, fontWeight: 700, color: step.result ? "#0c865d" : "#b91c1c" }}>
+            {step.action === "Add" ? "Added ✓" : step.result ? "Found ✓" : "Not found"}
           </div>
         </motion.div>
       )}
@@ -296,19 +304,19 @@ function VisualizationPanel({ step, trie }) {
 
 export default function AddAndSearchWordVisualizer() {
   const [addedWords, setAddedWords] = useState(["bad", "dad", "mad"])
-  const [searchWordInput, setSearchWordInput] = useState("pad");
-  const [isAddInput, setIsAddInput] = useState("false");
+  const [searchWordInput, setSearchWordInput] = useState(EXAMPLES[0].word);
+  const [isAddInput, setIsAddInput] = useState(EXAMPLES[0].isAdd);
   const { isAdd, searchWord, inputError } = useMemo(() => {
     try {
-      const parsedIsAdd = isAddInput;
-      const parsedSearchWord = searchWordInput;
+      const parsedIsAdd = isAddInput === 'true'; if (!['true', 'false'].includes(isAddInput)) throw new Error('isAdd must be true or false.');
+      const parsedSearchWord = searchWordInput.trim().toLowerCase(); if (!/^[a-z.]+$/.test(parsedSearchWord)) throw new Error('Use lowercase letters and . only.');
       return { isAdd: parsedIsAdd, searchWord: parsedSearchWord, inputError: '' };
     } catch (e) {
-      return { isAdd: false, searchWord: "pad", inputError: e.message };
+      return { isAdd: false, searchWord: EXAMPLES[0].word, inputError: e.message };
     }
   }, [isAddInput, searchWordInput]);
-  const trie = useMemo(() => buildWordTrie(addedWords), [addedWords])
-  const steps = useMemo(() => generateSteps(searchWord, isAdd, trie).map((s) => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [searchWord, isAdd, trie])
+  const trie = useMemo(() => buildWordTrie(isAdd ? [...addedWords, searchWord] : addedWords), [addedWords, isAdd, searchWord])
+  const steps = useMemo(() => generateSteps(searchWord, isAdd, trie, addedWords).map((s) => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [searchWord, isAdd, trie, addedWords])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
@@ -318,24 +326,14 @@ export default function AddAndSearchWordVisualizer() {
     <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />
   )
 
-  const vizPanel = (
-    <>
-      <ManualInputPanel
-        fields={[{"key":"searchWord","label":"searchWord","type":"string"},{"key":"isAdd","label":"isAdd","type":"string"}]}
-        values={{ searchWord: searchWordInput, isAdd: isAddInput }}
-        onChange={(k, v) => { if (k === 'searchWord') setSearchWordInput(v); if (k === 'isAdd') setIsAddInput(v); handleReset() }}
-        showExamples={false}
-        inputError={inputError}
-      />
-    <VisualizationPanel step={step} trie={trie} />
-  
-    </>)
+  const vizPanel = <VisualizationPanel step={step} trie={trie} />
 
   const [panelDivs, setPanelDivs] = useState(null)
   const panelConfigs = useMemo(
     () => [
-      { id: "code", title: "Code" },
-      { id: "viz", title: "🔍 Wildcard Search", dockMode: "split-right" },
+      { id: 'input', title: 'Input' },
+      { id: "viz", title: "🔍 Wildcard Search", dockMode: "split-bottom" },
+      { id: "code", title: "Code", dockMode: "split-right" },
     ],
     []
   )
@@ -346,12 +344,13 @@ export default function AddAndSearchWordVisualizer() {
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
         <>
+          {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'searchWord', label: 'Word / wildcard', type: 'string' }, { key: 'isAdd', label: 'isAdd: true | false', type: 'string' }]} values={{ searchWord: searchWordInput, isAdd: isAddInput }} onChange={(key, value) => { if (key === 'searchWord') setSearchWordInput(value); if (key === 'isAdd') setIsAddInput(value); handleReset() }} examples={EXAMPLES} activeLabel={null} applyExample={(example) => { setSearchWordInput(example.word); setIsAddInput(example.isAdd); handleReset() }} inputError={inputError} />, panelDivs.input)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
         </>
       )}
       {createPortal(
-        <FloatingPanel title="Controls">
+        <FloatingPanel title="Playback Controls">
           <PlaybackControls
             isPlaying={isPlaying}
             isDone={isDone}
@@ -376,4 +375,3 @@ export default function AddAndSearchWordVisualizer() {
     </div>
   )
 }
-

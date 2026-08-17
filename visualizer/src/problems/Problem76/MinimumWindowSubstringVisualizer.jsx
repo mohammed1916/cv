@@ -234,6 +234,7 @@ export default function MinimumWindowSubstringVisualizer() {
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
       <VisualizerPlaybackSection
+        floatingPlayback
         step={step}
         codeLines={SOLUTION_CODE}
         statusClassName="mws-status"

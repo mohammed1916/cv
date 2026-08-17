@@ -30,6 +30,13 @@ const SOLUTION_CODE = [
   { line: 10, text: "    return False" },
 ]
 
+const EXAMPLES = [
+  { label: 'Outside window', nums: [1, 2, 3, 1, 2, 3], k: 2, t: 0 },
+  { label: 'Exact nearby duplicate', nums: [1, 0, 1, 1], k: 1, t: 0 },
+  { label: 'Within value range', nums: [1, 5, 9, 1, 5, 9], k: 2, t: 3 },
+  { label: 'Negative t', nums: [1, 2], k: 1, t: -1 },
+]
+
 function generateSteps(nums, k, t) {
   const steps = []
   steps.push({
@@ -257,17 +264,17 @@ function VisualizationPanel({ step }) {
 }
 
 export default function ContainsDuplicateIIIVisualizer() {
-  const [numsInput, setNumsInput] = useState("[1,2,3,1,2,3]");
-  const [kInput, setKInput] = useState(2);
-  const [tInput, setTInput] = useState(0);
+  const [numsInput, setNumsInput] = useState(JSON.stringify(EXAMPLES[0].nums));
+  const [kInput, setKInput] = useState(EXAMPLES[0].k);
+  const [tInput, setTInput] = useState(EXAMPLES[0].t);
   const { nums, k, t, inputError } = useMemo(() => {
     try {
-      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
-      const parsedK = Number(kInput); if (isNaN(parsedK)) throw new Error('k must be a number');
-      const parsedT = Number(tInput); if (isNaN(parsedT)) throw new Error('t must be a number');
+      const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums) || !parsedNums.every(Number.isFinite)) throw new Error('nums must be a JSON array of numbers');
+      const parsedK = Number(kInput); if (!Number.isInteger(parsedK) || parsedK < 0) throw new Error('k must be a non-negative integer');
+      const parsedT = Number(tInput); if (!Number.isFinite(parsedT)) throw new Error('t must be a number');
       return { nums: parsedNums, k: parsedK, t: parsedT, inputError: '' };
     } catch (e) {
-      return { nums: [1,2,3,1,2,3], k: 2, t: 0, inputError: e.message };
+      return { nums: EXAMPLES[0].nums, k: EXAMPLES[0].k, t: EXAMPLES[0].t, inputError: e.message };
     }
   }, [numsInput, kInput, tInput]);
   const steps = useMemo(() => generateSteps(nums, k, t).map((s) => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [nums, k, t])
@@ -277,8 +284,8 @@ export default function ContainsDuplicateIIIVisualizer() {
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const panelConfigs = useMemo(() => [
-    { id: 'code', title: "Code" },
-    { id: 'viz', title: "📊 Value Range", dockMode: 'split-right' },
+    { id: 'viz', title: "📊 Value Range" },
+    { id: 'code', title: "Code", dockMode: 'split-right' },
   ], [])
   const panelContents = useMemo(() => ({
     code: (<CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />),
@@ -293,7 +300,9 @@ export default function ContainsDuplicateIIIVisualizer() {
           fields={[{"key":"nums","label":"nums","type":"string"},{"key":"k","label":"k","type":"string"},{"key":"t","label":"t","type":"string"}]}
           values={{ nums: numsInput, k: kInput, t: tInput }}
           onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'k') setKInput(v); if (k === 't') setTInput(v); handleReset() }}
-          showExamples={false}
+          examples={EXAMPLES}
+          activeLabel={null}
+          applyExample={(example) => { setNumsInput(JSON.stringify(example.nums)); setKInput(example.k); setTInput(example.t); handleReset() }}
           inputError={inputError}
         />
       
@@ -306,7 +315,7 @@ export default function ContainsDuplicateIIIVisualizer() {
           </>
         )}
       </>
-      <FloatingPanel title="Controls">
+      <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -329,4 +338,3 @@ export default function ContainsDuplicateIIIVisualizer() {
     </div>
   )
 }
-

@@ -11,7 +11,16 @@ import { useAutoScroll } from "../../hooks/useAutoScroll"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import "./Visualizer.css"
+
+const EXAMPLES = [
+  { label: 'Mixed duplicates', input: [1, 2, 3, 3, 4, 4, 5] },
+  { label: 'Leading run', input: [1, 1, 1, 2, 3] },
+  { label: 'Trailing run', input: [1, 2, 2, 2] },
+  { label: 'No duplicates', input: [1, 2, 3] },
+  { label: 'Empty list', input: [] },
+]
 const SOLUTION_CODE = [
   { line: 1, text: "class Solution:" },
   { line: 2, text: "    def deleteDuplicates(self, head: ListNode) -> ListNode:" },
@@ -227,23 +236,8 @@ function generateSteps(list) {
 function RemoveDuplicatesFromListViz({
   step,
   list,
-  inputStr,
-  setInputStr,
-  handleReset,
   inputError,
 }) {
-  const handleExampleClick = useCallback((exList) => {
-    setInputStr(JSON.stringify(exList))
-    handleReset()
-  }, [setInputStr, handleReset])
-
-  const examples = [
-    { label: "1→2→3→3→4→4→5", list: [1, 2, 3, 3, 4, 4, 5] },
-    { label: "1→1→1→2→3", list: [1, 1, 1, 2, 3] },
-    { label: "1→2→2→2", list: [1, 2, 2, 2] },
-    { label: "1→2→3", list: [1, 2, 3] },
-  ]
-
   return (
     <section className="rdl-panel main">
       <header className="rdl-head">
@@ -251,25 +245,6 @@ function RemoveDuplicatesFromListViz({
         {inputError && <span className="rdl-error">{inputError}</span>}
       </header>
       <div className="rdl-body">
-        <div className="rdl-examples">
-          {examples.map((ex) => (
-            <button key={ex.label} className="rdl-chip" onClick={() => handleExampleClick(ex.list)}>
-              {ex.label}
-            </button>
-          ))}
-        </div>
-        <div className="rdl-input-row">
-          <input
-            className="rdl-input"
-            value={inputStr}
-            onChange={(e) => {
-              setInputStr(e.target.value)
-              handleReset()
-            }}
-            placeholder="[1,2,3,3,4,4,5]"
-          />
-        </div>
-
         <div className="rdl-list-section">
           <div className="rdl-section-label">Original List</div>
           <div className="rdl-canvas">
@@ -456,9 +431,6 @@ export default function RemoveDuplicatesFromListVisualizer() {
       <RemoveDuplicatesFromListViz
         step={step}
         list={list}
-        inputStr={inputStr}
-        setInputStr={setInputStr}
-        handleReset={handleReset}
         inputError={inputError}
       />
       <RemoveDuplicatesFromListState step={step} list={list} />
@@ -525,8 +497,9 @@ export default function RemoveDuplicatesFromListVisualizer() {
   const [panelDivs, setPanelDivs] = useState(null)
   const panelConfigs = useMemo(
     () => [
-      { id: "primary", title: "Visualization", dockMode: "split-right" },
-      { id: "code", title: "Code", dockMode: "split-bottom" },
+      { id: 'input', title: 'Input' },
+      { id: "primary", title: "Visualization", dockMode: "split-bottom" },
+      { id: "code", title: "Code", dockMode: "split-right" },
       { id: "status", title: "Status", dockMode: "split-bottom", ratio: 0.08 },
     ],
     []
@@ -540,6 +513,15 @@ export default function RemoveDuplicatesFromListVisualizer() {
       {panelDivs && (
         <>
           {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
+          {panelDivs.input && createPortal(<ManualInputPanel
+            fields={[{ key: 'list', label: 'Sorted list (JSON)', type: 'string' }]}
+            values={{ list: inputStr }}
+            onChange={(_, value) => { setInputStr(value); handleReset() }}
+            examples={EXAMPLES}
+            activeLabel={null}
+            applyExample={(example) => { setInputStr(JSON.stringify(example.input)); handleReset() }}
+            inputError={inputError}
+          />, panelDivs.input)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
         </>
@@ -551,5 +533,4 @@ export default function RemoveDuplicatesFromListVisualizer() {
     </div>
   )
 }
-
 

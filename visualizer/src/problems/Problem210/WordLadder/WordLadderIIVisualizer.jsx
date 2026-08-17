@@ -8,6 +8,7 @@ import PatternOverlay from "../../../components/PatternOverlay"
 import { usePlaybackState } from "../../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../../hooks/usePatternOverlay"
+import ManualInputPanel from '../../../components/shared/ManualInputPanel'
 import "./WordLadderIIVisualizer.css"
 import { createPortal } from 'react-dom'
 const SOLUTION_CODE = [
@@ -94,17 +95,18 @@ function VisualizationPanel({ step }) {
 }
 
 export default function WordLadderIIVisualizer() {
-  const [beginWord] = useState("hit")
-  const [endWord] = useState("cog")
-  const [wordList] = useState(["hot", "dot", "dog", "lot", "log", "cog"])
+  const EXAMPLES = [{ label: 'Two shortest paths', input: { beginWord: 'hit', endWord: 'cog', wordList: ['hot', 'dot', 'dog', 'lot', 'log', 'cog'] } }, { label: 'No path', input: { beginWord: 'hit', endWord: 'cog', wordList: ['hot', 'dot', 'dog', 'lot', 'log'] } }]
+  const [inputText, setInputText] = useState(JSON.stringify(EXAMPLES[0].input))
+  const { beginWord, endWord, wordList, inputError } = useMemo(() => { try { const value = JSON.parse(inputText); if (typeof value.beginWord !== 'string' || typeof value.endWord !== 'string' || !value.beginWord.length || value.beginWord.length !== value.endWord.length || !Array.isArray(value.wordList) || value.wordList.some(word => typeof word !== 'string' || word.length !== value.beginWord.length)) throw new Error('Use same-length beginWord/endWord strings and a same-length wordList.'); return { ...value, inputError: '' } } catch (error) { return { ...EXAMPLES[0].input, inputError: error.message } } }, [inputText])
   const steps = useMemo(() => generateSteps(beginWord, endWord, wordList).map(s => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [beginWord, endWord, wordList])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
   const panelConfigs = useMemo(() => [
-    { id: 'code', title: "Code" },
-    { id: 'viz', title: "Word Ladder Paths", dockMode: 'split-right' },
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: "Word Ladder Paths", dockMode: 'split-bottom' },
+    { id: 'code', title: "Code", dockMode: 'split-right' },
   ], [])
   const panelContents = useMemo(() => ({
     code: (<CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />),
@@ -118,15 +120,15 @@ export default function WordLadderIIVisualizer() {
         <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
         {panelDivs && (
           <>
+            {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'ladder', label: 'Word ladder paths (JSON)', type: 'string' }]} values={{ ladder: inputText }} onChange={(_, value) => { setInputText(value); handleReset() }} examples={EXAMPLES} activeLabel={null} applyExample={(example) => { setInputText(JSON.stringify(example.input)); handleReset() }} inputError={inputError} />, panelDivs.input)}
             {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
             {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
           </>
         )}
       </>
-      <FloatingPanel title="Controls"><PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={(e) => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Pattern" showPatternOverlayToggle />
+      <FloatingPanel title="Playback Controls"><PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={(e) => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Pattern" showPatternOverlayToggle />
       </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>
   )
 }
-

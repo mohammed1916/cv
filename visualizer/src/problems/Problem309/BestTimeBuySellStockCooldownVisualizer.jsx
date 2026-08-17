@@ -11,6 +11,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './BestTimeBuySellStockCooldownVisualizer.css'
 
 const PATTERNS = ['init', 'process', 'done']
@@ -94,9 +95,10 @@ const EXAMPLES = [
 
 export default function BestTimeBuySellStockCooldownVisualizer() {
   const [exIdx, setExIdx] = useState(1)
+  const [inputText, setInputText] = useState(JSON.stringify(EXAMPLES[1].prices))
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  const ex = EXAMPLES[exIdx]
+  const { ex, inputError } = useMemo(() => { try { const prices = JSON.parse(inputText); if (!Array.isArray(prices) || prices.some(price => !Number.isFinite(Number(price)) || Number(price) < 0)) throw new Error('Enter a JSON array of non-negative prices.'); return { ex: { prices: prices.map(Number) }, inputError: '' } } catch (error) { return { ex: EXAMPLES[1], inputError: error.message } } }, [inputText])
   const steps = useMemo(
     () => generateSteps(ex.prices).map((current) => ({
       ...current,
@@ -111,6 +113,7 @@ export default function BestTimeBuySellStockCooldownVisualizer() {
 
   const applyExample = useCallback((idx) => {
     setExIdx(idx)
+    setInputText(JSON.stringify(EXAMPLES[idx].prices))
     handleReset()
   }, [handleReset])
 
@@ -237,8 +240,9 @@ export default function BestTimeBuySellStockCooldownVisualizer() {
   const [panelDivs, setPanelDivs] = useState(null)
   const panelConfigs = useMemo(
     () => [
-      { id: 'code', title: 'Code' },
-      { id: 'viz', title: '📈 DP State', dockMode: 'split-right' },
+      { id: 'input', title: 'Input' },
+      { id: 'viz', title: '📈 DP State', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
     ],
     []
   )
@@ -249,6 +253,7 @@ export default function BestTimeBuySellStockCooldownVisualizer() {
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
         <>
+          {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'prices', label: 'Prices (JSON)', type: 'array' }]} values={{ prices: inputText }} onChange={(_, value) => { setInputText(value); handleReset() }} examples={EXAMPLES.map(example => ({ ...example, input: example.prices }))} activeLabel={null} applyExample={(example) => { setInputText(JSON.stringify(example.input)); handleReset() }} inputError={inputError} />, panelDivs.input)}
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
         </>

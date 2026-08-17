@@ -9,8 +9,10 @@ import { getExamples } from '../../config/examplesRegistry'
 import "./FirstBadVersionVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
+import { createPortal } from 'react-dom'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
@@ -134,9 +136,13 @@ export default function FirstBadVersionVisualizer() {
 
   const versions = Array.from({ length: n }, (_, i) => i + 1);
 
-  return (
-    <div className="fbv-shell">
-        <ManualInputPanel
+  const panelConfigs = useMemo(() => [
+    { id: 'input', title: 'Input', dockMode: 'split-top' },
+    { id: 'visualization', title: 'Visualization' },
+    { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
+  ], [])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const inputPanel = <ManualInputPanel
           fields={[{"key":"n","label":"n","type":"number"},{"key":"bad","label":"bad","type":"number"}]}
           values={{ n: nInput, bad: badInput }}
           onChange={(k, v) => { if (k === 'n') setNInput(v); if (k === 'bad') setBadInput(v); handleReset() }}
@@ -144,21 +150,8 @@ export default function FirstBadVersionVisualizer() {
           activeLabel={ex?.label}
           applyExample={applyEx}
           inputError={inputError}
-        />
-      
-      {/* Example selector */}
-      <div className="fbv-examples">
-        {EXAMPLES.map((e) => (
-          <button
-            key={e.label}
-            className={`fbv-chip ${ex.label === e.label ? "active" : ""}`}
-            onClick={() => applyEx(e)}
-          >
-            {e.label}
-          </button>
-        ))}
-      </div>
-
+  />
+  const visualizationPanel = <div className="fbv-shell">
       {/* Versions row */}
       <div className="fbv-panel">
         <div className="fbv-panel-label">Versions (1 … {n})</div>
@@ -240,8 +233,19 @@ export default function FirstBadVersionVisualizer() {
         </motion.div>
       )}
 
-      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-      <div className="fbv-status">{step?.message ?? "Press Play or Step to begin."}</div>
+  </div>
+  const codePanel = <>
+    <div className="fbv-status">{step?.message ?? "Press Play or Step to begin."}</div>
+    <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+  </>
+  return (
+    <>
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={setPanelDivs} />
+      {panelDivs && <>
+        {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+        {panelDivs.visualization && createPortal(visualizationPanel, panelDivs.visualization)}
+        {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+      </>}
       <FloatingPanel title="Playback Controls">
         <PlaybackControls
         isPlaying={isPlaying}
@@ -262,6 +266,6 @@ export default function FirstBadVersionVisualizer() {
       />
       </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
-    </div>
+    </>
   );
 }

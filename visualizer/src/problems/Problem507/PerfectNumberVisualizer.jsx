@@ -38,6 +38,13 @@ const LINE_PATTERN_MAP = {
 
 }
 
+const EXAMPLES = [
+  { label: '6 · smallest perfect', n: 6 },
+  { label: '28 · perfect', n: 28 },
+  { label: '1 · edge case', n: 1 },
+  { label: '12 · not perfect', n: 12 },
+]
+
 function generateSteps(n) {
   const steps = []
 
@@ -85,12 +92,6 @@ function generateSteps(n) {
 }
 
 function VisualizationPanel({ n, step, applyEx }) {
-  const examples = [
-    { label: '6 (perfect)', n: 6 },
-    { label: '28 (perfect)', n: 28 },
-    { label: '10 (not perfect)', n: 10 },
-  ]
-
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
       <div style={{ padding: 12, backgroundColor: '#d1fae5', borderRadius: 6, borderLeft: '4px solid #10b981' }}>
@@ -102,7 +103,7 @@ function VisualizationPanel({ n, step, applyEx }) {
       <div>
         <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {examples.map(e => (
+          {EXAMPLES.map(e => (
             <button
               key={e.label}
               onClick={() => applyEx(e)}
@@ -307,4 +308,3 @@ export default function PerfectNumberVisualizer() {
     </div>
   )
 }
-

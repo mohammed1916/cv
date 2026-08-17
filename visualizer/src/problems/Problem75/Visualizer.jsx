@@ -9,6 +9,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../config/examplesRegistry'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import "./Visualizer.css";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 import { createPortal } from 'react-dom'
@@ -275,14 +276,15 @@ const LINE_PATTERN_MAP = {}
 
 export default function SortColorsVisualizer() {
     const [sel, setSel] = useState(0);
+    const [inputText, setInputText] = useState(JSON.stringify(EXAMPLES[0]?.nums ?? EXAMPLES[0]?.input ?? [2, 0, 2, 1, 1, 0]));
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
-    const initial = EXAMPLES[sel].nums;
+    const { initial, inputError } = useMemo(() => { try { const nums = JSON.parse(inputText); if (!Array.isArray(nums) || nums.some(value => ![0, 1, 2].includes(Number(value)))) throw new Error('Enter a JSON array containing only 0, 1, and 2.'); return { initial: nums.map(Number), inputError: '' } } catch (error) { return { initial: [2, 0, 2, 1, 1, 0], inputError: error.message } } }, [inputText]);
     const steps = useMemo(() => generateSteps(initial), [initial]);
     const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : steps[0];
-    const applyExample = useCallback((i) => { setSel(i); handleReset(); }, [handleReset]);
+    const applyExample = useCallback((i) => { setSel(i); setInputText(JSON.stringify(EXAMPLES[i]?.nums ?? EXAMPLES[i]?.input)); handleReset(); }, [handleReset]);
     const connectivity = useCodeVisualConnectivity({
       steps,
       stepIndex,
@@ -292,8 +294,9 @@ export default function SortColorsVisualizer() {
     const nums = step?.nums ?? initial;
 
     const panelConfigs = useMemo(() => [
-      { id: 'code', title: 'Code' },
-      { id: 'viz', title: '?? Three Lanes', dockMode: 'split-right' },
+      { id: 'input', title: 'Input' },
+      { id: 'viz', title: '?? Three Lanes', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
     ], [])
     const panelContents = useMemo(() => ({
       code: (<div style={{ position: "relative" }}>
@@ -328,6 +331,7 @@ export default function SortColorsVisualizer() {
           <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
           {panelDivs && (
             <>
+              {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'colors', label: 'Colors (JSON)', type: 'array' }]} values={{ colors: inputText }} onChange={(_, value) => { setInputText(value); handleReset() }} examples={EXAMPLES} activeLabel={null} applyExample={(example) => applyExample(EXAMPLES.indexOf(example))} inputError={inputError} />, panelDivs.input)}
               {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
               {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
             </>

@@ -8,6 +8,9 @@ import { usePatternOverlay } from '../../../hooks/usePatternOverlay'
 import { getExamples } from '../../../config/examplesRegistry'
 import './NonOverlappingIntervalsVisualizer.css'
 import FloatingPanel from '../../../components/shared/FloatingPanel'
+import ManualInputPanel from '../../../components/shared/ManualInputPanel'
+import LuminoDockPanel from '../../../components/LuminoDockPanel'
+import { createPortal } from 'react-dom'
 
 const SOLUTION_CODE = [
     { line: 1, text: 'def eraseOverlapIntervals(intervals):' },
@@ -128,8 +131,14 @@ export default function NonOverlappingIntervalsVisualizer() {
     const ROW_H = 32
     const CANVAS_H = Math.max(120, sorted.length * ROW_H + 60)
 
-    return (
-        <div className="noi-shell">
+    const panelConfigs = useMemo(() => [
+      { id: 'input', title: 'Input', dockMode: 'split-top' },
+      { id: 'visualization', title: 'Visualization' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
+    ], [])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const inputPanel = <ManualInputPanel fields={[{ key: 'intervals', label: 'intervals', type: 'array' }]} values={{ intervals: input }} onChange={(key, value) => { if (key === 'intervals') setInput(value); handleReset() }} examples={EXAMPLES} applyExample={applyExample} inputError={inputError} />
+    const visualizationPanel = <div className="noi-shell">
             <div className="noi-top">
                 <section className="noi-panel main">
                     <header className="noi-head">
@@ -137,13 +146,6 @@ export default function NonOverlappingIntervalsVisualizer() {
                         {inputError && <span className="noi-error">{inputError}</span>}
                     </header>
                     <div className="noi-body">
-                        <div className="noi-examples">
-                            {EXAMPLES.map((ex) => (
-                                <button key={ex.label} className="noi-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                            ))}
-                        </div>
-                        <input className="noi-input" value={input} onChange={(e) => { setInput(e.target.value); handleReset() }} />
-
                         {/* Timeline */}
                         <div className="noi-timeline-wrap">
                             <svg width={TIMELINE_W} height={CANVAS_H}>
@@ -210,8 +212,19 @@ export default function NonOverlappingIntervalsVisualizer() {
                 </section>
             </div>
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-            <div className="noi-status">{step?.message || 'Press Play to begin.'}</div>
+    </div>
+    const codePanel = <>
+      <div className="noi-status">{step?.message || 'Press Play to begin.'}</div>
+      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+    </>
+    return (
+        <>
+          <LuminoDockPanel panels={panelConfigs} onPanelReady={setPanelDivs} />
+          {panelDivs && <>
+            {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+            {panelDivs.visualization && createPortal(visualizationPanel, panelDivs.visualization)}
+            {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          </>}
             <FloatingPanel title="Playback Controls">
         <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
@@ -225,6 +238,6 @@ export default function NonOverlappingIntervalsVisualizer() {
             />
       </FloatingPanel>
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
-        </div>
+        </>
     )
 }

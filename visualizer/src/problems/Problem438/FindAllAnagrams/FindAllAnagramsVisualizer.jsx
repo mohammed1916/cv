@@ -9,6 +9,7 @@ import { usePlaybackState } from "../../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../../hooks/useCodeVisualConnectivity";
 import { getExamples } from '../../../config/examplesRegistry'
+import ManualInputPanel from '../../../components/shared/ManualInputPanel'
 import "./FindAllAnagramsVisualizer.css";
 import { createPortal } from 'react-dom'
 const SOLUTION_CODE_INLINE = [
@@ -82,12 +83,13 @@ function generateSteps(s, p) {
 const ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 
 export default function FindAllAnagramsVisualizer() {
-    const [ex, setEx] = useState(EXAMPLES[0]);
+    const [inputText, setInputText] = useState(JSON.stringify(EXAMPLES[0] || { s: 'cbaebabacd', p: 'abc' }));
+    const { ex, inputError } = useMemo(() => { try { const value = JSON.parse(inputText); if (typeof value.s !== 'string' || typeof value.p !== 'string' || !value.p.length) throw new Error('Use {"s": string, "p": non-empty string}.'); return { ex: { s: value.s, p: value.p }, inputError: '' } } catch (error) { return { ex: { s: 'cbaebabacd', p: 'abc' }, inputError: error.message } } }, [inputText]);
     const steps = useMemo(() => { try { return generateSteps(ex.s, ex.p); } catch { return []; } }, [ex]);
     const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+    const applyEx = useCallback((e) => { setInputText(JSON.stringify(e)); handleReset(); }, [handleReset]);
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
     const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
 
@@ -95,8 +97,9 @@ export default function FindAllAnagramsVisualizer() {
     const relevantChars = step ? [...new Set([...Object.keys(step.need), ...Object.keys(step.have)])] : [];
 
     const panelConfigs = useMemo(() => [
-      { id: 'code', title: 'Code' },
-      { id: 'viz', title: '🔍 Anagrams', dockMode: 'split-right' },
+      { id: 'input', title: 'Input' },
+      { id: 'viz', title: '🔍 Anagrams', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
     ], [])
     const panelContents = useMemo(() => ({
       code: (<CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />),
@@ -152,6 +155,7 @@ export default function FindAllAnagramsVisualizer() {
               <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
               {panelDivs && (
                 <>
+                  {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'anagram', label: 's and p (JSON)', type: 'string' }]} values={{ anagram: inputText }} onChange={(_, value) => { setInputText(value); handleReset() }} examples={EXAMPLES} activeLabel={null} applyExample={applyEx} inputError={inputError} />, panelDivs.input)}
                   {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
                   {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
                 </>
@@ -164,4 +168,3 @@ export default function FindAllAnagramsVisualizer() {
         </div>
     );
 }
-

@@ -42,6 +42,11 @@ const LINE_PATTERN_MAP = {
   12: 'done',
 }
 
+const EXAMPLES = [
+  ...getExamples('swap-nodes-in-pairs'),
+  { label: 'Empty list', values: [] },
+]
+
 function generateSteps(values) {
     const steps = []
 
@@ -157,36 +162,12 @@ export default function SwapNodesInPairsVisualizer() {
     const primaryPanel = (
     <>
 
-      <ManualInputPanel
-        fields={[{"key":"val","label":"val","type":"array"}]}
-        values={{ val: valInput }}
-        onChange={(k, v) => { if (k === 'val') setValInput(v); handleReset() }}
-        showExamples={false}
-        inputError={inputError}
-      />
-
         <div className="snip-panel main">
             <header className="snip-head">
                 <span>Linked List · Pair Swaps</span>
                 {inputError && <span className="snip-error">{inputError}</span>}
             </header>
             <div className="snip-body">
-                <div className="snip-examples">
-                    {getExamples('swap-nodes-in-pairs').map((ex) => (
-                        <button key={ex.label} className="snip-chip" onClick={() => { setValInput(JSON.stringify(ex.values)); handleReset(); }}>
-                            {ex.label}
-                        </button>
-                    ))}
-                </div>
-                <div className="snip-input-row">
-                    <input
-                        className="snip-input"
-                        value={valInput}
-                        onChange={(e) => { setValInput(e.target.value); handleReset() }}
-                        placeholder="[1,2,3,4,5]"
-                    />
-                </div>
-
                 {/* Linked list visualization */}
                 <div className="snip-canvas">
                     <div className="snip-nodes">
@@ -341,9 +322,10 @@ export default function SwapNodesInPairsVisualizer() {
     const [panelDivs, setPanelDivs] = useState(null)
     const panelConfigs = useMemo(
         () => [
-            { id: 'primary', title: 'Linked List · Pair Swaps', dockMode: 'split-right' },
-            { id: 'state', title: 'Swap State', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'input', title: 'Input' },
+            { id: 'primary', title: 'Linked List · Pair Swaps', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
+            { id: 'state', title: 'Swap State', dockMode: 'split-bottom' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []
@@ -355,6 +337,15 @@ export default function SwapNodesInPairsVisualizer() {
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
               <>
+                    {panelDivs.input && createPortal(<ManualInputPanel
+                      fields={[{ key: 'values', label: 'List values (JSON)', type: 'string' }]}
+                      values={{ values: valInput }}
+                      onChange={(_, value) => { setValInput(value); handleReset() }}
+                      examples={EXAMPLES}
+                      activeLabel={null}
+                      applyExample={(example) => { setValInput(JSON.stringify(example.values)); handleReset() }}
+                      inputError={inputError}
+                    />, panelDivs.input)}
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.state && createPortal(statePanel, panelDivs.state)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}

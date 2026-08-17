@@ -8,6 +8,7 @@ import PatternOverlay from "../../../components/PatternOverlay"
 import { usePlaybackState } from "../../../hooks/usePlaybackState"
 import { useCodeVisualConnectivity } from "../../../hooks/useCodeVisualConnectivity"
 import { usePatternOverlay } from "../../../hooks/usePatternOverlay"
+import ManualInputPanel from '../../../components/shared/ManualInputPanel'
 import "./HouseRobberIIIVisualizer.css"
 import { createPortal } from 'react-dom'
 const SOLUTION_CODE = [
@@ -220,7 +221,9 @@ function VisualizationPanel({ step, root }) {
 }
 
 export default function HouseRobberIIIVisualizer() {
-  const [treeArr] = useState([3, 2, 3, null, 3, null, 1])
+  const EXAMPLES = [{ label: 'Standard', input: [3, 2, 3, null, 3, null, 1] }, { label: 'Alternating levels', input: [3, 4, 5, 1, 3, null, 1] }, { label: 'Single house', input: [7] }]
+  const [inputText, setInputText] = useState(JSON.stringify(EXAMPLES[0].input))
+  const { treeArr, inputError } = useMemo(() => { try { const tree = JSON.parse(inputText); if (!Array.isArray(tree) || !tree.length || tree[0] == null || tree.some(value => value != null && (!Number.isFinite(Number(value)) || Number(value) < 0))) throw new Error('Enter a non-empty level-order JSON tree of non-negative values.'); return { treeArr: tree, inputError: '' } } catch (error) { return { treeArr: EXAMPLES[0].input, inputError: error.message } } }, [inputText])
   const root = useMemo(() => buildTree(treeArr), [treeArr])
   const steps = useMemo(() => generateSteps(treeArr).map((s) => ({ ...s, relatedLines: s.relatedLines ?? [s.activeLine] })), [treeArr])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
@@ -229,8 +232,9 @@ export default function HouseRobberIIIVisualizer() {
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const panelConfigs = useMemo(() => [
-    { id: 'code', title: "Code" },
-    { id: 'viz', title: "🏠 Tree DP", dockMode: 'split-right' },
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: "🏠 Tree DP", dockMode: 'split-bottom' },
+    { id: 'code', title: "Code", dockMode: 'split-right' },
   ], [])
   const panelContents = useMemo(() => ({
     code: (<CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} onActiveLineDomChange={setActiveLineDom} />),
@@ -245,12 +249,13 @@ export default function HouseRobberIIIVisualizer() {
         <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
         {panelDivs && (
           <>
+            {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'tree', label: 'House tree (JSON)', type: 'array' }]} values={{ tree: inputText }} onChange={(_, value) => { setInputText(value); handleReset() }} examples={EXAMPLES} activeLabel={null} applyExample={(example) => { setInputText(JSON.stringify(example.input)); handleReset() }} inputError={inputError} />, panelDivs.input)}
             {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
             {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
           </>
         )}
       </>
-      <FloatingPanel title="Controls">
+      <FloatingPanel title="Playback Controls">
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -273,4 +278,3 @@ export default function HouseRobberIIIVisualizer() {
     </div>
   )
 }
-

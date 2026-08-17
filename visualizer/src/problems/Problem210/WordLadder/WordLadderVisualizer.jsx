@@ -8,6 +8,7 @@ import { usePatternOverlay } from "../../../hooks/usePatternOverlay";
 import { getExamples } from '../../config/examplesRegistry'
 import "./WordLadderVisualizer.css";
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import ManualInputPanel from '../../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: "def ladderLength(beginWord, endWord, wordList):" },
@@ -84,18 +85,20 @@ function generateSteps(beginWord, endWord, wordList) {
 }
 
 export default function WordLadderVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [inputText, setInputText] = useState(JSON.stringify(EXAMPLES[0]));
+  const { ex, inputError } = useMemo(() => { try { const value = JSON.parse(inputText), { beginWord, endWord, wordList } = value; if (typeof beginWord !== 'string' || typeof endWord !== 'string' || !beginWord.length || beginWord.length !== endWord.length || !Array.isArray(wordList) || wordList.some(word => typeof word !== 'string' || word.length !== beginWord.length)) throw new Error('Use same-length beginWord/endWord strings and a same-length wordList.'); return { ex: { beginWord, endWord, wordList }, inputError: '' } } catch (error) { return { ex: EXAMPLES[0], inputError: error.message } } }, [inputText]);
   const steps = useMemo(() => generateSteps(ex.beginWord, ex.endWord, ex.wordList), [ex]);
   const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => { setInputText(JSON.stringify(e)); handleReset(); }, [handleReset]);
 
   const allWords = [ex.beginWord, ...ex.wordList];
 
   return (
     <div className="wl-shell">
+      <ManualInputPanel fields={[{ key: 'ladder', label: 'Word ladder (JSON)', type: 'string' }]} values={{ ladder: inputText }} onChange={(_, value) => { setInputText(value); handleReset() }} examples={EXAMPLES} activeLabel={null} applyExample={applyEx} inputError={inputError} />
       <div className="wl-examples">
         {EXAMPLES.map((e) => (
           <button key={e.label} className={`wl-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>{e.label}</button>

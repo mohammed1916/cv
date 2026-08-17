@@ -8,6 +8,7 @@ import PatternOverlay from '../../../components/PatternOverlay'
 import { usePlaybackState } from '../../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../../hooks/useCodeVisualConnectivity'
+import ManualInputPanel from '../../../components/shared/ManualInputPanel'
 import './SumOfTwoIntegers.css'
 import { createPortal } from 'react-dom'
 const SOLUTION_CODE = [
@@ -133,9 +134,10 @@ const EXAMPLES = [
 
 export default function SumOfTwoIntegersVisualizer() {
   const [exIdx, setExIdx] = useState(0)
+  const [inputText, setInputText] = useState(JSON.stringify({ a: EXAMPLES[0].a, b: EXAMPLES[0].b }))
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
-  const ex = EXAMPLES[exIdx]
+  const { ex, inputError } = useMemo(() => { try { const value = JSON.parse(inputText), a = Number(value.a), b = Number(value.b); if (!Number.isInteger(a) || !Number.isInteger(b) || a < -2147483648 || a > 2147483647 || b < -2147483648 || b > 2147483647) throw new Error('Use 32-bit signed integer values for a and b.'); return { ex: { a, b }, inputError: '' } } catch (error) { return { ex: EXAMPLES[0], inputError: error.message } } }, [inputText])
   const steps = useMemo(() => generateSteps(ex.a, ex.b), [ex])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
@@ -144,6 +146,7 @@ export default function SumOfTwoIntegersVisualizer() {
 
   const applyExample = useCallback((idx) => {
     setExIdx(idx)
+    setInputText(JSON.stringify({ a: EXAMPLES[idx].a, b: EXAMPLES[idx].b }))
     handleReset()
   }, [handleReset])
 
@@ -156,8 +159,9 @@ export default function SumOfTwoIntegersVisualizer() {
   }
 
   const panelConfigs = useMemo(() => [
-    { id: 'code', title: 'Code' },
-    { id: 'viz', title: '🔢 Bitwise Computation', dockMode: 'split-right' },
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: '🔢 Bitwise Computation', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
   ], [])
   const panelContents = useMemo(() => ({
     code: (<CodeTracePanel
@@ -266,8 +270,9 @@ export default function SumOfTwoIntegersVisualizer() {
       <>
         <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
         {panelDivs && (
-          <>
-            {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+        <>
+          {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'sum', label: 'a and b (JSON)', type: 'string' }]} values={{ sum: inputText }} onChange={(_, value) => { setInputText(value); handleReset() }} examples={EXAMPLES.map(example => ({ ...example, input: { a: example.a, b: example.b } }))} activeLabel={null} applyExample={(example) => { setInputText(JSON.stringify(example.input)); handleReset() }} inputError={inputError} />, panelDivs.input)}
+          {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
             {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
           </>
         )}
@@ -295,4 +300,3 @@ export default function SumOfTwoIntegersVisualizer() {
     </div>
   )
 }
-

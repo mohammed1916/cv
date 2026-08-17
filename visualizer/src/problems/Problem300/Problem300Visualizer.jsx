@@ -4,6 +4,8 @@ import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
+import FloatingPanel from '../../components/shared/FloatingPanel'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
@@ -30,14 +32,20 @@ function generateSteps(input) {
 
 export default function Problem300Visualizer() {
     const examples = useMemo(() => getExamplesOr('300', []), [])
-    const [currentStep, setCurrentStep] = useState(0)
+    const [inputInput, setInputInput] = useState(JSON.stringify(examples[0]?.input ?? []))
+    const { input, inputError } = useMemo(() => {
+        try {
+            const parsed = JSON.parse(inputInput)
+            if (!Array.isArray(parsed)) throw new Error('Enter a JSON array of numbers.')
+            return { input: parsed, inputError: '' }
+        } catch (error) {
+            return { input: examples[0]?.input ?? [], inputError: error.message }
+        }
+    }, [inputInput, examples])
 
-    const example = examples[0] || { input: [], output: [] }
-    const steps = useMemo(() => generateSteps(example.input), [example])
-    const step = steps[currentStep] || steps[0]
-
-    const { isPlaying, setIsPlaying, canNext, canPrev } = usePlaybackState(steps, currentStep, setCurrentStep)
-    const { pattern, togglePattern } = usePatternOverlay(false)
+    const steps = useMemo(() => generateSteps(input), [input])
+    const { stepIndex, isPlaying, speed, setSpeed, stepForward, stepBack, togglePlay, handleReset, isDone } = usePlaybackState(steps.length)
+    const step = steps[Math.max(0, stepIndex)] || steps[0]
 
     // Step 3: Extract panels into consts
     const primaryPanel = (
@@ -56,29 +64,23 @@ export default function Problem300Visualizer() {
         </div>
     )
 
+    const inputPanel = (
+        <ManualInputPanel
+            fields={[{ key: 'nums', label: 'Numbers (JSON)', type: 'string' }]}
+            values={{ nums: inputInput }}
+            onChange={(_, value) => { setInputInput(value); handleReset() }}
+            examples={examples}
+            activeLabel={null}
+            applyExample={(example) => { setInputInput(JSON.stringify(example.input)); handleReset() }}
+            inputError={inputError}
+        />
+    )
+
     const codePanel = (
         <div style={{ position: 'relative', height: '100%' }}>
             <CodeTracePanel
-                code={SOLUTION_CODE}
-                activeLine={step.activeLine}
-                onTogglePattern={togglePattern}
-                patternActive={pattern}
-                disableResizer
-            />
-        </div>
-    )
-
-    const statusPanel = (
-        <div className="problem300-visualizer-status">
-            <PlaybackControls
-                currentStep={currentStep}
-                totalSteps={steps.length}
-                onNext={() => setCurrentStep(c => c + 1)}
-                onPrev={() => setCurrentStep(c => c - 1)}
-                onPlayToggle={() => setIsPlaying(!isPlaying)}
-                isPlaying={isPlaying}
-                canNext={canNext}
-                canPrev={canPrev}
+                codeLines={SOLUTION_CODE}
+                step={step}
             />
         </div>
     )
@@ -87,9 +89,9 @@ export default function Problem300Visualizer() {
     const [panelDivs, setPanelDivs] = useState(null)
     const panelConfigs = useMemo(
         () => [
-            { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
-            { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
-            { id: 'status', title: 'Playback', dockMode: 'split-bottom', ratio: 0.08 },
+            { id: 'input', title: 'Input' },
+            { id: 'primary', title: 'Visualization', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
         ],
         []
     )
@@ -101,11 +103,24 @@ export default function Problem300Visualizer() {
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
                 <>
+                    {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
                     {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
                     {panelDivs.code && createPortal(codePanel, panelDivs.code)}
-                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
                 </>
             )}
+            {createPortal(<FloatingPanel title="Playback Controls"><PlaybackControls
+                onReset={handleReset}
+                onNext={stepForward}
+                onPrev={stepBack}
+                onPlayToggle={togglePlay}
+                isPlaying={isPlaying}
+                isDone={isDone}
+                prevDisabled={stepIndex < 0}
+                nextDisabled={isDone}
+                resetDisabled={stepIndex < 0}
+                speed={speed}
+                onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+              /></FloatingPanel>, document.body)}
         </div>
     )
 }
