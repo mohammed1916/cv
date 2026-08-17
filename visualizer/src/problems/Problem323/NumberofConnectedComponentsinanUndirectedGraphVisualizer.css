@@ -91,6 +91,24 @@
   color: var(--text-main);
 }
 
+.numberof-connected-componentsinan-undirected-graph-state {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.numberof-connected-componentsinan-undirected-graph-state span {
+  padding: 7px 9px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface2);
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.numberof-connected-componentsinan-undirected-graph-state b,
+.numberof-connected-componentsinan-undirected-graph-state code { color: var(--text); }
+
 .numberof-connected-componentsinan-undirected-graph-example-btn {
   padding: 8px 12px;
   border: 1px solid var(--border);

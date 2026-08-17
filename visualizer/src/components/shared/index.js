@@ -15,3 +15,4 @@ export { ControlsBar }     from './ControlsBar'
 export { ProgressBand }    from './ProgressBand'
 // Pan/zoom shell for SVG diagrams (graphs, trees) inside dock panels.
 export { default as SvgViewport } from './SvgViewport'
+export { StackLane, BitmaskLane, DPTable, GraphFrontierLane } from './AlgorithmStatePrimitives'
