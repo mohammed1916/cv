@@ -11,59 +11,47 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './MovingAveragefromDataStreamVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import PointerRail from '../../components/shared/PointerRail'
 import { createPortal } from 'react-dom'
 
-const MOVING_AVERAGE_PATTERNS = ['init', 'process']
+const MOVING_AVERAGE_PATTERNS = ['init', 'enqueue', 'evict', 'done']
 
 const LINE_PATTERN_MAP = {
-  1: 'init',
-  3: 'process',
-  5: 'process',
+  3: 'init', 5: 'enqueue', 6: 'evict', 8: 'done',
 }
 
 const SOLUTION_CODE = [
-  { line: 1, text: '# Solution for Moving Average from Data Stream' },
-  { line: 2, text: '# Implement step-by-step visualization' },
-  { line: 3, text: 'def solve(input):' },
-  { line: 4, text: '    # Algorithm here' },
-  { line: 5, text: '    return result' },
+  { line: 1, text: 'class MovingAverage:' },
+  { line: 2, text: '    def __init__(self, size: int):' },
+  { line: 3, text: '        self.size, self.q, self.total = size, deque(), 0' },
+  { line: 4, text: '    def next(self, val: int) -> float:' },
+  { line: 5, text: '        self.q.append(val); self.total += val' },
+  { line: 6, text: '        if len(self.q) > self.size: self.total -= self.q.popleft()' },
+  { line: 7, text: '        return self.total / len(self.q)' },
 ]
 
-function generateSteps(input) {
-  const steps = []
-
-  steps.push({
-    phase: 'init',
-    activeLine: 1,
-    relatedLines: [1],
-    message: 'Initialize algorithm'
+function generateSteps({ size, stream }) {
+  const steps = [{ phase: 'init', activeLine: 3, size, stream, queue: [], total: 0, message: `Create an empty queue with window size ${size}.` }]
+  const queue = []; let total = 0
+  stream.forEach((value, index) => {
+    queue.push(value); total += value
+    steps.push({ phase: 'enqueue', activeLine: 5, size, stream, streamIndex: index, queue: [...queue], total, average: total / queue.length, message: `Append ${value}; running sum is ${total}.` })
+    if (queue.length > size) { const removed = queue.shift(); total -= removed; steps.push({ phase: 'evict', activeLine: 6, size, stream, streamIndex: index, queue: [...queue], removed, total, average: total / queue.length, message: `Window exceeded ${size}; remove ${removed}.` }) }
+    steps.push({ phase: 'enqueue', activeLine: 7, size, stream, streamIndex: index, queue: [...queue], total, average: total / queue.length, message: `Average = ${total} / ${queue.length} = ${(total / queue.length).toFixed(2)}.` })
   })
-
-  steps.push({
-    phase: 'process',
-    activeLine: 3,
-    relatedLines: [3],
-    message: 'Processing input...'
-  })
-
-  steps.push({
-    phase: 'done',
-    activeLine: 5,
-    relatedLines: [5],
-    message: 'Algorithm complete'
-  })
-
+  steps.push({ phase: 'done', activeLine: 7, size, stream, queue: [...queue], total, average: total / queue.length, message: 'Stream complete.' })
   return steps
 }
 
-const EXAMPLES = getExamplesOr('moving-average-data-stream', [])
+const EXAMPLES = getExamplesOr('moving-average-data-stream', [{ label: 'Classic window', size: 3, stream: [1, 10, 3, 5] }, { label: 'Size two', size: 2, stream: [4, 2, 8, 6] }])
 
 export default function MovingAveragefromDataStreamVisualizer() {
-  const [inputValue, setInputValue] = useState(EXAMPLES.length > 0 ? JSON.stringify(EXAMPLES[0]) : '{}')
+  const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))
 
   const { input, inputError } = useMemo(() => {
     try {
       const data = JSON.parse(inputValue)
+      if (!Number.isInteger(data.size) || data.size < 1 || !Array.isArray(data.stream) || !data.stream.every(Number.isFinite)) throw new Error('Use { "size": 3, "stream": [1, 10, 3, 5] }.')
       return { input: data, inputError: '' }
     } catch (e) {
       return { input: null, inputError: e.message }
@@ -101,18 +89,13 @@ export default function MovingAveragefromDataStreamVisualizer() {
     if (!input) return <div className="moving-averagefrom-data-stream-error">{inputError}</div>
 
     return (
-      <motion.div
-        className="moving-averagefrom-data-stream-viz"
-        key={stepIndex}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
-      >
+      <div className="moving-averagefrom-data-stream-viz">
         <div className="moving-averagefrom-data-stream-step-info">
           <h3>{step?.message}</h3>
         </div>
-      </motion.div>
+        <PointerRail title="Incoming stream" values={input.stream} pointers={step?.streamIndex === undefined ? [] : [{ id: 'next', label: 'next', index: step.streamIndex, tone: 'primary' }]} />
+        <PointerRail title="Sliding window queue" values={step?.queue || []} pointers={step?.queue?.length ? [{ id: 'front', label: 'front', index: 0, tone: 'warning' }] : []} note={`sum ${step?.total ?? 0} · average ${(step?.average ?? 0).toFixed(2)}`} />
+      </div>
     )
   }
 

@@ -75,6 +75,7 @@
   gap: 16px;
   width: 100%;
 }
+.shortest-distance-grid { display:grid; gap:6px; }.shortest-distance-grid b { min-height:42px; display:grid; place-items:center; border:1px solid var(--border); border-radius:6px; background:var(--surface-1); }.shortest-distance-grid b.cell-1 { background:color-mix(in srgb,var(--warning,#f59e0b) 30%,var(--surface-2)); }.shortest-distance-grid b.cell-2 { background:var(--surface-3); color:var(--text-muted); }.shortest-distance-grid b.active { border-color:var(--primary); }
 
 .shortest-distancefrom-all-buildings-step-info {
   padding: 16px;

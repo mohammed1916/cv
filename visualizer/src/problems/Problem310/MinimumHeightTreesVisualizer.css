@@ -75,6 +75,8 @@
   gap: 16px;
   width: 100%;
 }
+.minimum-height-trees-degrees { display:flex; flex-wrap:wrap; gap:7px; }
+.minimum-height-trees-degrees span { padding:6px 9px; border:1px solid var(--border); border-radius:7px; background:var(--surface-1); }
 
 .minimum-height-trees-step-info {
   padding: 16px;

@@ -75,6 +75,12 @@
   gap: 16px;
   width: 100%;
 }
+.numberof-islands-i-i-grid { display:grid; gap:7px; }
+.numberof-islands-i-i-grid b { min-height:38px; display:grid; place-items:center; border:1px solid var(--border); border-radius:7px; font-size:10px; transition:background .2s ease, border-color .2s ease; }
+.numberof-islands-i-i-grid b.water { background:var(--surface-1); color:var(--text-muted); }
+.numberof-islands-i-i-grid b.land { background:color-mix(in srgb,var(--primary) 25%,var(--surface-2)); color:var(--text-main); }
+.numberof-islands-i-i-grid b.active { border-color:var(--primary); box-shadow:0 0 0 2px color-mix(in srgb,var(--primary) 25%,transparent); }
+.numberof-islands-i-i-grid b.neighbor { border-color:var(--warning,#f59e0b); }
 
 .numberof-islands-i-i-step-info {
   padding: 16px;

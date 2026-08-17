@@ -1,196 +1,29 @@
-﻿import { useState, useCallback, useMemo } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useMemo, useCallback } from 'react'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
-
 import LuminoDockPanel from '../../components/LuminoDockPanel'
+import { StackLane } from '../../components/shared'
+import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
-import './RemoveDuplicateLettersVisualizer.css'
-import FloatingPanel from '../../components/shared/FloatingPanel'
-import CodePatternAnnotations from '../../components/CodePatternAnnotations'
-import PatternLegend from '../../components/PatternLegend'
 import { createPortal } from 'react-dom'
+import './RemoveDuplicateLettersVisualizer.css'
 
-const PATTERNS = ['done', 'init', 'process']
-const LINE_PATTERN_MAP = {
-  1: 'init',
-  3: 'process',
-  5: 'done'
+const CODE = [{ line: 1, text: 'def removeDuplicateLetters(s):' }, { line: 2, text: '    last = {c: i for i, c in enumerate(s)}' }, { line: 3, text: '    stack, used = [], set()' }, { line: 4, text: '    for i, char in enumerate(s):' }, { line: 5, text: '        if char in used: continue' }, { line: 6, text: '        while stack and char < stack[-1] and i < last[stack[-1]]:' }, { line: 7, text: '            used.remove(stack.pop())' }, { line: 8, text: '        stack.append(char); used.add(char)' }, { line: 9, text: '    return "".join(stack)' }]
+function makeSteps({ s }) {
+  const last = Object.fromEntries([...s].map((char, index) => [char, index])); const stack = []; const used = new Set(); const steps = [{ activeLine: 2, phase: 'init', message: 'Record the final occurrence of every letter.', stack: [], used: [], index: null, last }]
+  for (let index = 0; index < s.length; index += 1) { const char = s[index]; if (used.has(char)) { steps.push({ activeLine: 5, phase: 'process', message: `${char} is already represented; skip this duplicate.`, stack: [...stack], used: [...used], index, last }); continue }
+    while (stack.length && char < stack.at(-1) && index < last[stack.at(-1)]) { const removed = stack.pop(); used.delete(removed); steps.push({ activeLine: 7, phase: 'process', message: `${char} is smaller and ${removed} appears again later, so pop ${removed}.`, stack: [...stack], used: [...used], index, last, dropped: [removed] }) }
+    stack.push(char); used.add(char); steps.push({ activeLine: 8, phase: 'process', message: `Push ${char}; it is the best available next letter.`, stack: [...stack], used: [...used], index, last }) }
+  steps.push({ activeLine: 9, phase: 'done', message: `Result: ${stack.join('')}.`, stack: [...stack], used: [...used], index: null, last }); return steps
 }
-
-
-const SOLUTION_CODE = [
-  { line: 1, text: '# Solution for Remove Duplicate Letters' },
-  { line: 2, text: '# Implement step-by-step visualization' },
-  { line: 3, text: 'def solve(input):' },
-  { line: 4, text: '    # Algorithm here' },
-  { line: 5, text: '    return result' },
-]
-
-function generateSteps(input) {
-  const steps = []
-
-  steps.push({
-    phase: 'init',
-    activeLine: 1,
-    relatedLines: [1],
-    message: 'Initialize algorithm'
-  })
-
-  steps.push({
-    phase: 'process',
-    activeLine: 3,
-    relatedLines: [3],
-    message: 'Processing input...'
-  })
-
-  steps.push({
-    phase: 'done',
-    activeLine: 5,
-    relatedLines: [5],
-    message: 'Algorithm complete'
-  })
-
-  return steps
-}
-
-const EXAMPLES = getExamplesOr('remove-duplicate-letters', [])
-
+const EXAMPLES = getExamplesOr('remove-duplicate-letters', [{ label: 'bcabc', s: 'bcabc' }, { label: 'cbacdcbc', s: 'cbacdcbc' }])
+function parse(raw) { try { const data = JSON.parse(raw); if (typeof data.s !== 'string' || !/^[a-z]+$/.test(data.s)) throw new Error('Use { "s": "lowercase letters" }.'); return { input: data, inputError: '' } } catch (error) { return { input: null, inputError: error.message } } }
 export default function RemoveDuplicateLettersVisualizer() {
-  const [inputValue, setInputValue] = useState(EXAMPLES.length > 0 ? JSON.stringify(EXAMPLES[0]) : '{}')
-
-  const { input, inputError } = useMemo(() => {
-    try {
-      const data = JSON.parse(inputValue)
-      return { input: data, inputError: '' }
-    } catch (e) {
-      return { input: null, inputError: e.message }
-    }
-  }, [inputValue])
-
-  const steps = useMemo(() => {
-    return input ? generateSteps(input) : []
-  }, [input])
-
-  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
-
-  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
-
-  const step = stepIndex >= 0 ? steps[stepIndex] : null
-
-  const applyExample = useCallback((ex) => {
-    setInputValue(JSON.stringify(ex))
-    handleReset()
-  }, [handleReset])
-
-  const connectivity = useCodeVisualConnectivity({
-    steps,
-    stepIndex,
-    onStepJump: setStepIndex,
-  })
-
-  const renderVisualization = () => {
-    if (!input) return <div className="remove-duplicate-letters-error">{inputError}</div>
-
-    return (
-      <motion.div
-        className="remove-duplicate-letters-viz"
-        key={stepIndex}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        <div className="remove-duplicate-letters-step-info">
-          <h3>{step?.message ?? 'Press Play or Step to begin.'}</h3>
-        </div>
-      </motion.div>
-    )
-  }
-
-  const panelConfigs = useMemo(() => [
-    { id: 'left', title: "Input" },
-    { id: 'right', title: "Visualization", dockMode: 'split-right' },
-  ], [])
-  const panelContents = {
-    left: (<div className="remove-duplicate-letters-panel remove-duplicate-letters-panel-input">
-            <div className="remove-duplicate-letters-panel-head">Input</div>
-            <div className="remove-duplicate-letters-panel-body">
-              <textarea
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                className="remove-duplicate-letters-textarea"
-                placeholder="Enter input..."
-              />
-            </div>
-          </div>),
-    right: (<div className="remove-duplicate-letters-panel remove-duplicate-letters-panel-viz">
-            <div className="remove-duplicate-letters-panel-head">Visualization</div>
-            <div className="remove-duplicate-letters-panel-body">
-              <AnimatePresence mode="wait">
-                {renderVisualization()}
-              </AnimatePresence>
-            </div>
-          </div>),
-  }
-  const [panelDivs, setPanelDivs] = useState(null)
-  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
-  return (
-    <div className="remove-duplicate-letters-shell">
-      <>
-        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
-        {panelDivs && (
-          <>
-            {panelDivs.left && createPortal(panelContents.left, panelDivs.left)}
-            {panelDivs.right && createPortal(panelContents.right, panelDivs.right)}
-          </>
-        )}
-      </>
-
-      <div style={{ position: 'relative' }}>
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-        />
-
-        {showPatternOverlay && (
-          <CodePatternAnnotations
-            linePatterns={LINE_PATTERN_MAP}
-            currentPhase={step?.phase}
-            activeLineDom={activeLineDom}
-            activeLine={step?.activeLine}
-          />
-        )}
-      </div>
-
-      <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
-    </div>
-  )
+  const [raw, setRaw] = useState(JSON.stringify(EXAMPLES[0])); const { input, inputError } = useMemo(() => parse(raw), [raw]); const steps = useMemo(() => input ? makeSteps(input).map((step) => ({ ...step, relatedLines: [step.activeLine] })) : [], [input])
+  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length); const step = stepIndex >= 0 ? steps[stepIndex] : null; const links = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex }); const apply = useCallback((example) => { setRaw(JSON.stringify(example)); handleReset() }, [handleReset]); const [divs, setDivs] = useState(null)
+  const panels = useMemo(() => [{ id: 'input', title: 'Input' }, { id: 'code', title: 'Python code', dockMode: 'split-bottom' }, { id: 'viz', title: 'Monotonic stack', dockMode: 'split-right' }, { id: 'state', title: 'Letter positions', dockMode: 'split-bottom' }], [])
+  const contents = { input: <div className="remove-duplicate-letters-panel"><div className="remove-duplicate-letters-panel-body"><textarea className="remove-duplicate-letters-textarea" value={raw} onChange={(event) => setRaw(event.target.value)} /></div></div>, code: <CodeTracePanel step={step} codeLines={CODE} highlightedLines={links.highlightedLines} onLineSelect={links.handleLineSelect} />, viz: !input ? <div className="remove-duplicate-letters-error">{inputError}</div> : <div className="remove-duplicate-letters-panel"><div className="remove-duplicate-letters-panel-body"><div className="remove-duplicate-letters-step-info"><h3>{step?.message || 'Press play to start.'}</h3></div><div className="remove-duplicate-letters-letters">{[...input.s].map((char, index) => <b className={index === step?.index ? 'active' : ''} key={`${char}-${index}`}>{char}</b>)}</div><StackLane title="Lexicographic stack" items={step?.stack || []} dropped={step?.dropped || []} note={`used: {${(step?.used || []).join(', ')}}`} /></div></div>, state: <div className="remove-duplicate-letters-panel"><div className="remove-duplicate-letters-panel-body"><div className="remove-duplicate-letters-last-map">{Object.entries(step?.last || {}).map(([char, index]) => <span key={char}>{char} → {index}</span>)}</div>{EXAMPLES.map((example, index) => <button className="remove-duplicate-letters-example-btn" key={index} onClick={() => apply(example)}>{example.label || example.s}</button>)}</div></div> }
+  return <div className="remove-duplicate-letters-shell"><LuminoDockPanel panels={panels} onPanelReady={setDivs} />{divs && Object.entries(contents).map(([id, content]) => divs[id] && createPortal(content, divs[id]))}<FloatingPanel title="Playback Controls"><PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={(event) => setSpeed(Number(event.target.value))} /></FloatingPanel></div>
 }

@@ -76,6 +76,11 @@
   width: 100%;
 }
 
+.remove-duplicate-letters-letters { display: flex; flex-wrap: wrap; gap: 7px; }
+.remove-duplicate-letters-letters b, .remove-duplicate-letters-last-map span { padding: 7px 10px; border: 1px solid var(--border); border-radius: 7px; background: var(--surface-1); color: var(--text-main); }
+.remove-duplicate-letters-letters b.active { border-color: var(--primary); color: var(--primary); }
+.remove-duplicate-letters-last-map { display: flex; flex-wrap: wrap; gap: 7px; }
+
 .remove-duplicate-letters-step-info {
   padding: 16px;
   background: linear-gradient(135deg, #f43f5e20, #f43f5e10);

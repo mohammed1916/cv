@@ -10,61 +10,44 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './IntersectionofTwoArraysVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import PointerRail from '../../components/shared/PointerRail'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { createPortal } from 'react-dom'
 
-const PATTERNS = ['done', 'init', 'process']
+const PATTERNS = ['init', 'scan', 'done']
 const LINE_PATTERN_MAP = {
-  1: 'init',
-  3: 'process',
-  5: 'done'
+  3: 'init', 5: 'scan', 8: 'done'
 }
 
 
 const SOLUTION_CODE = [
-  { line: 1, text: '# Solution for Intersection of Two Arrays' },
-  { line: 2, text: '# Implement step-by-step visualization' },
-  { line: 3, text: 'def solve(input):' },
-  { line: 4, text: '    # Algorithm here' },
-  { line: 5, text: '    return result' },
+  { line: 1, text: 'class Solution:' },
+  { line: 2, text: '    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:' },
+  { line: 3, text: '        seen, result = set(nums1), set()' },
+  { line: 4, text: '        for value in nums2:' },
+  { line: 5, text: '            if value in seen:' },
+  { line: 6, text: '                result.add(value)' },
+  { line: 7, text: '        return list(result)' },
 ]
 
-function generateSteps(input) {
-  const steps = []
-
-  steps.push({
-    phase: 'init',
-    activeLine: 1,
-    relatedLines: [1],
-    message: 'Initialize algorithm'
-  })
-
-  steps.push({
-    phase: 'process',
-    activeLine: 3,
-    relatedLines: [3],
-    message: 'Processing input...'
-  })
-
-  steps.push({
-    phase: 'done',
-    activeLine: 5,
-    relatedLines: [5],
-    message: 'Algorithm complete'
-  })
-
+function generateSteps({ nums1, nums2 }) {
+  const seen = new Set(nums1); const result = new Set()
+  const steps = [{ phase: 'init', activeLine: 3, nums1, nums2, seen: [...seen], result: [], message: 'Store every value from nums1 in a hash set.' }]
+  nums2.forEach((value, index) => { const match = seen.has(value); if (match) result.add(value); steps.push({ phase: 'scan', activeLine: match ? 6 : 5, nums1, nums2, index, seen: [...seen], result: [...result], value, match, message: match ? `${value} is in the set; add it to the intersection.` : `${value} is absent from nums1.` }) })
+  steps.push({ phase: 'done', activeLine: 7, nums1, nums2, seen: [...seen], result: [...result], message: `Unique intersection: [${[...result].join(', ')}].` })
   return steps
 }
 
-const EXAMPLES = getExamplesOr('intersection-of-two-arrays', [])
+const EXAMPLES = getExamplesOr('intersection-of-two-arrays', [{ label: 'Classic', nums1: [1, 2, 2, 1], nums2: [2, 2] }, { label: 'Two matches', nums1: [4, 9, 5], nums2: [9, 4, 9, 8, 4] }])
 
 export default function IntersectionofTwoArraysVisualizer() {
-  const [inputValue, setInputValue] = useState(EXAMPLES.length > 0 ? JSON.stringify(EXAMPLES[0]) : '{}')
+  const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))
 
   const { input, inputError } = useMemo(() => {
     try {
       const data = JSON.parse(inputValue)
+      if (!Array.isArray(data.nums1) || !Array.isArray(data.nums2) || ![...data.nums1, ...data.nums2].every(Number.isFinite)) throw new Error('Use { "nums1": [1,2], "nums2": [2,3] }.')
       return { input: data, inputError: '' }
     } catch (e) {
       return { input: null, inputError: e.message }
@@ -102,18 +85,11 @@ export default function IntersectionofTwoArraysVisualizer() {
     if (!input) return <div className="intersectionof-two-arrays-error">{inputError}</div>
 
     return (
-      <motion.div
-        className="intersectionof-two-arrays-viz"
-        key={stepIndex}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
-      >
+      <div className="intersectionof-two-arrays-viz">
         <div className="intersectionof-two-arrays-step-info">
           <h3>{step?.message}</h3>
-        </div>
-      </motion.div>
+        </div><PointerRail title="Scan nums2" values={input.nums2} pointers={step?.index === undefined ? [] : [{ id: 'i', label: 'i', index: step.index, tone: step.match ? 'success' : 'warning' }]} /><div className="intersectionof-two-arrays-result">set(nums1): {'{' + (step?.seen || []).join(', ') + '}'} · intersection: [{' + (step?.result || []).join(', ') + '}]</div>
+      </div>
     )
   }
 

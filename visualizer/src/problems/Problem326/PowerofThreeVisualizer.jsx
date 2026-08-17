@@ -13,54 +13,39 @@ import './PowerofThreeVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { createPortal } from 'react-dom'
 
-const PATTERNS = ['done', 'init', 'process']
+const PATTERNS = ['init', 'divide', 'done']
 const LINE_PATTERN_MAP = {
-  1: 'init',
-  3: 'process',
-  5: 'done'
+  3: 'init', 5: 'divide', 7: 'done'
 }
 
 
 const SOLUTION_CODE = [
-  { line: 1, text: '# Solution for Power of Three' },
-  { line: 2, text: '# Implement step-by-step visualization' },
-  { line: 3, text: 'def solve(input):' },
-  { line: 4, text: '    # Algorithm here' },
-  { line: 5, text: '    return result' },
+  { line: 1, text: 'class Solution:' },
+  { line: 2, text: '    def isPowerOfThree(self, n: int) -> bool:' },
+  { line: 3, text: '        if n <= 0: return False' },
+  { line: 4, text: '        while n % 3 == 0:' },
+  { line: 5, text: '            n //= 3' },
+  { line: 6, text: '        return n == 1' },
 ]
 
-function generateSteps(input) {
-  const steps = []
-
-  steps.push({
-    phase: 'init',
-    activeLine: 1,
-    message: 'Initialize algorithm'
-  })
-
-  steps.push({
-    phase: 'process',
-    activeLine: 3,
-    message: 'Processing input...'
-  })
-
-  steps.push({
-    phase: 'done',
-    activeLine: 5,
-    message: 'Algorithm complete'
-  })
-
+function generateSteps({ n }) {
+  if (n <= 0) return [{ phase: 'done', activeLine: 3, values: [n], result: false, message: 'Non-positive values cannot be powers of three.' }]
+  const steps = [{ phase: 'init', activeLine: 3, values: [n], current: n, message: `Start with n = ${n}.` }]
+  let current = n
+  while (current % 3 === 0) { const next = current / 3; steps.push({ phase: 'divide', activeLine: 5, values: [n, current, next], current: next, message: `${current} ÷ 3 = ${next}.` }); current = next }
+  steps.push({ phase: 'done', activeLine: 6, values: [n, current], current, result: current === 1, message: current === 1 ? 'Reached 1: this is a power of three.' : `${current} is not divisible by 3: this is not a power of three.` })
   return steps
 }
 
-const EXAMPLES = getExamplesOr('power-of-three', [])
+const EXAMPLES = getExamplesOr('power-of-three', [{ label: '27 = 3³', n: 27 }, { label: '45 is not', n: 45 }, { label: '1 = 3⁰', n: 1 }])
 
 export default function PowerofThreeVisualizer() {
-  const [inputValue, setInputValue] = useState(EXAMPLES.length > 0 ? JSON.stringify(EXAMPLES[0]) : '{}')
+  const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))
 
   const { input, inputError } = useMemo(() => {
     try {
       const data = JSON.parse(inputValue)
+      if (!Number.isInteger(data.n)) throw new Error('Use { "n": 27 }.')
       return { input: data, inputError: '' }
     } catch (e) {
       return { input: null, inputError: e.message }
@@ -101,18 +86,11 @@ export default function PowerofThreeVisualizer() {
     const currentStepData = step || {}
 
     return (
-      <motion.div
-        className="powerof-three-viz"
-        key={stepIndex}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
-      >
+      <div className="powerof-three-viz">
         <div className="powerof-three-step-info">
           <h3>{currentStepData.message}</h3>
-        </div>
-      </motion.div>
+        </div><div className="powerof-three-chain">{(currentStepData.values || []).map((value, index) => <span key={`${value}-${index}`}>{value}{index < currentStepData.values.length - 1 && ' ÷ 3 → '}</span>)}</div>
+      </div>
     )
   }
 

@@ -11,56 +11,43 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './RangeSumQuery-ImmutableVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import PointerRail from '../../components/shared/PointerRail'
 import { createPortal } from 'react-dom'
 
-const PATTERNS = ['init', 'process', 'done']
+const PATTERNS = ['init', 'build', 'query', 'done']
 
 const LINE_PATTERN_MAP = {
-  1: 'init',
-  3: 'process',
-  5: 'done'
+  3: 'init', 5: 'build', 7: 'query', 8: 'done'
 }
 
 const SOLUTION_CODE = [
-  { line: 1, text: '# Solution for Range Sum Query - Immutable' },
-  { line: 2, text: '# Implement step-by-step visualization' },
-  { line: 3, text: 'def solve(input):' },
-  { line: 4, text: '    # Algorithm here' },
-  { line: 5, text: '    return result' },
+  { line: 1, text: 'class NumArray:' },
+  { line: 2, text: '    def __init__(self, nums: List[int]):' },
+  { line: 3, text: '        self.prefix = [0]' },
+  { line: 4, text: '        for value in nums:' },
+  { line: 5, text: '            self.prefix.append(self.prefix[-1] + value)' },
+  { line: 6, text: '    def sumRange(self, left: int, right: int) -> int:' },
+  { line: 7, text: '        return self.prefix[right + 1] - self.prefix[left]' },
 ]
 
-function generateSteps(input) {
-  const steps = []
-
-  steps.push({
-    phase: 'init',
-    activeLine: 1,
-    message: 'Initialize algorithm'
-  })
-
-  steps.push({
-    phase: 'process',
-    activeLine: 3,
-    message: 'Processing input...'
-  })
-
-  steps.push({
-    phase: 'done',
-    activeLine: 5,
-    message: 'Algorithm complete'
-  })
-
+function generateSteps({ nums, left, right }) {
+  const prefix = [0]; const steps = [{ phase: 'init', activeLine: 3, nums, prefix: [...prefix], left, right, message: 'Prefix[0] is zero: no values are included yet.' }]
+  nums.forEach((value, index) => { prefix.push(prefix.at(-1) + value); steps.push({ phase: 'build', activeLine: 5, nums, prefix: [...prefix], index, left, right, message: `prefix[${index + 1}] = ${prefix[index]} + ${value} = ${prefix[index + 1]}.` }) })
+  const result = prefix[right + 1] - prefix[left]
+  steps.push({ phase: 'query', activeLine: 7, nums, prefix, left, right, result, message: `Subtract prefix[${left}] from prefix[${right + 1}] to get ${result}.` })
+  steps.push({ phase: 'done', activeLine: 7, nums, prefix, left, right, result, message: `Range sum nums[${left}..${right}] = ${result}.` })
   return steps
 }
 
-const EXAMPLES = getExamplesOr('range-sum-query-immutable', [])
+const EXAMPLES = getExamplesOr('range-sum-query-immutable', [{ label: 'Classic query', nums: [-2, 0, 3, -5, 2, -1], left: 0, right: 2 }, { label: 'Middle range', nums: [-2, 0, 3, -5, 2, -1], left: 2, right: 5 }])
 
 export default function RangeSumQueryImmutableVisualizer() {
-  const [inputValue, setInputValue] = useState(EXAMPLES.length > 0 ? JSON.stringify(EXAMPLES[0]) : '{}')
+  const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))
 
   const { input, inputError } = useMemo(() => {
     try {
       const data = JSON.parse(inputValue)
+      if (!Array.isArray(data.nums) || !data.nums.every(Number.isFinite) || !Number.isInteger(data.left) || !Number.isInteger(data.right) || data.left < 0 || data.right < data.left || data.right >= data.nums.length) throw new Error('Use { "nums": [-2,0,3], "left": 0, "right": 2 }.')
       return { input: data, inputError: '' }
     } catch (e) {
       return { input: null, inputError: e.message }
@@ -104,18 +91,11 @@ export default function RangeSumQueryImmutableVisualizer() {
     const currentStepData = step || {}
 
     return (
-      <motion.div
-        className="range-sum-query--immutable-viz"
-        key={stepIndex}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
-      >
+      <div className="range-sum-query--immutable-viz">
         <div className="range-sum-query--immutable-step-info">
           <h3>{currentStepData.message}</h3>
-        </div>
-      </motion.div>
+        </div><PointerRail title="Input range" values={input.nums} range={{ start: step?.left ?? input.left, end: step?.right ?? input.right }} pointers={step?.index === undefined ? [{ id: 'L', label: 'L', index: input.left, tone: 'primary' }, { id: 'R', label: 'R', index: input.right, tone: 'warning' }] : [{ id: 'build', label: 'build', index: step.index, tone: 'primary' }]} /><PointerRail title="Prefix sums" values={step?.prefix || [0]} pointers={step?.result === undefined ? [] : [{ id: 'left', label: `prefix[L]=${step.prefix[step.left]}`, index: step.left, tone: 'warning' }, { id: 'right', label: `prefix[R+1]=${step.prefix[step.right + 1]}`, index: step.right + 1, tone: 'primary' }]} note={step?.result === undefined ? 'Build once, then answer every query in O(1).' : `answer ${step.result}`} />
+      </div>
     )
   }
 

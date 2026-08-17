@@ -139,6 +139,10 @@
   flex: 0.65;
 }
 
+.design-tic-board { display:grid; gap:8px; max-width:420px; }
+.design-tic-board b { min-height:56px; display:grid; place-items:center; border:1px solid var(--border); border-radius:8px; background:var(--surface-1); font-size:26px; }
+.design-tic-board b.p1 { color:var(--primary); }.design-tic-board b.p2 { color:var(--warning,#f59e0b); }.design-tic-board b.active { border-color:var(--primary); }
+
 @media (max-width: 1024px) {
   .design-tic--tac--toe-middle {
     height: 200px;

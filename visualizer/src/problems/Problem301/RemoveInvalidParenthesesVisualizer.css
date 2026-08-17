@@ -75,6 +75,7 @@
   gap: 16px;
   width: 100%;
 }
+.remove-invalid-level { display:flex; flex-wrap:wrap; gap:8px; }.remove-invalid-level span { padding:8px 10px; border:1px solid var(--border); background:var(--surface-1); border-radius:7px; overflow-wrap:anywhere; }
 
 .remove-invalid-parentheses-step-info {
   padding: 16px;

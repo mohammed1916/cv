@@ -75,6 +75,8 @@
   gap: 16px;
   width: 100%;
 }
+.additive-number-parts { display:flex; flex-wrap:wrap; gap:8px; }
+.additive-number-parts b { padding:8px 11px; border:1px solid var(--primary); border-radius:8px; background:color-mix(in srgb,var(--primary) 15%,var(--surface-2)); }
 
 .additive-number-step-info {
   padding: 16px;

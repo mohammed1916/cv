@@ -11,56 +11,49 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './OddEvenLinkedListVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import PointerRail from '../../components/shared/PointerRail'
 import { createPortal } from 'react-dom'
 
-const PATTERNS = ['done', 'init', 'process']
+const PATTERNS = ['init', 'rewire', 'done']
 const LINE_PATTERN_MAP = {
-  1: 'init',
-  3: 'process',
-  5: 'done'
+  3: 'init', 6: 'rewire', 9: 'done'
 }
 
 
 const SOLUTION_CODE = [
-  { line: 1, text: '# Solution for Odd Even Linked List' },
-  { line: 2, text: '# Implement step-by-step visualization' },
-  { line: 3, text: 'def solve(input):' },
-  { line: 4, text: '    # Algorithm here' },
-  { line: 5, text: '    return result' },
+  { line: 1, text: 'class Solution:' },
+  { line: 2, text: '    def oddEvenList(self, head: Optional[ListNode]) -> Optional[ListNode]:' },
+  { line: 3, text: '        if not head or not head.next: return head' },
+  { line: 4, text: '        odd, even, even_head = head, head.next, head.next' },
+  { line: 5, text: '        while even and even.next:' },
+  { line: 6, text: '            odd.next = even.next; odd = odd.next' },
+  { line: 7, text: '            even.next = odd.next; even = even.next' },
+  { line: 8, text: '        odd.next = even_head' },
+  { line: 9, text: '        return head' },
 ]
 
-function generateSteps(input) {
-  const steps = []
-
-  steps.push({
-    phase: 'init',
-    activeLine: 1,
-    message: 'Initialize algorithm'
-  })
-
-  steps.push({
-    phase: 'process',
-    activeLine: 3,
-    message: 'Processing input...'
-  })
-
-  steps.push({
-    phase: 'done',
-    activeLine: 5,
-    message: 'Algorithm complete'
-  })
-
+function generateSteps({ values }) {
+  const steps = [{ phase: 'init', activeLine: 4, values, odd: 0, even: 1, message: 'Keep the first even node so the odd chain can be connected at the end.' }]
+  let odd = 0; let even = 1
+  while (even < values.length && even + 1 < values.length) {
+    odd += 2
+    steps.push({ phase: 'rewire', activeLine: 6, values, odd, even, message: `Link odd node ${odd - 2} to the next odd node ${odd}.` })
+    even += 2
+    steps.push({ phase: 'rewire', activeLine: 7, values, odd, even: even < values.length ? even : null, message: `Advance the even pointer to ${even < values.length ? even : 'the end'}.` })
+  }
+  steps.push({ phase: 'done', activeLine: 9, values, odd, even: null, result: [...values.filter((_, i) => i % 2 === 0), ...values.filter((_, i) => i % 2 === 1)], message: 'Append the saved even chain after the odd chain.' })
   return steps
 }
 
-const EXAMPLES = getExamplesOr('odd-even-linked-list', [])
+const EXAMPLES = getExamplesOr('odd-even-linked-list', [{ label: '1 → 2 → 3 → 4 → 5', values: [1, 2, 3, 4, 5] }, { label: 'Even length', values: [2, 1, 3, 5, 6, 4, 7] }])
 
 export default function OddEvenLinkedListVisualizer() {
-  const [inputValue, setInputValue] = useState(EXAMPLES.length > 0 ? JSON.stringify(EXAMPLES[0]) : '{}')
+  const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))
 
   const { input, inputError } = useMemo(() => {
     try {
       const data = JSON.parse(inputValue)
+      if (!Array.isArray(data.values) || !data.values.every(Number.isFinite)) throw new Error('Use { "values": [1, 2, 3, 4, 5] }.')
       return { input: data, inputError: '' }
     } catch (e) {
       return { input: null, inputError: e.message }
@@ -101,18 +94,10 @@ export default function OddEvenLinkedListVisualizer() {
     const currentStepData = step || {}
 
     return (
-      <motion.div
-        className="odd-even-linked-list-viz"
-        key={stepIndex}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        <div className="odd-even-linked-list-step-info">
-          <h3>{currentStepData.message}</h3>
-        </div>
-      </motion.div>
+      <div className="odd-even-linked-list-viz">
+        <div className="odd-even-linked-list-step-info"><h3>{currentStepData.message}</h3></div>
+        <PointerRail title="Linked-list rewiring pointers" values={currentStepData.values || []} pointers={[{ id: 'odd', label: 'odd', index: currentStepData.odd, tone: 'primary' }, ...(currentStepData.even === null ? [] : [{ id: 'even', label: 'even', index: currentStepData.even, tone: 'warning' }])]} note={currentStepData.result ? `result: ${currentStepData.result.join(' → ')}` : 'Odd and even pointers advance by two nodes.'} />
+      </div>
     )
   }
 

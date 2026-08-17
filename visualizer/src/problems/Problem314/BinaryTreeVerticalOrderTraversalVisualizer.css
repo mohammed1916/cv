@@ -75,6 +75,8 @@
   gap: 16px;
   width: 100%;
 }
+.binary-tree-vertical-order-traversal-columns { display:flex; flex-wrap:wrap; gap:8px; }
+.binary-tree-vertical-order-traversal-columns span { padding:7px 9px; border:1px solid var(--border); border-radius:7px; background:var(--surface-1); }
 
 .binary-tree-vertical-order-traversal-step-info {
   padding: 16px;

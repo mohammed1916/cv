@@ -75,6 +75,8 @@
   gap: 16px;
   width: 100%;
 }
+.smallest-rectangle-grid { display:grid; gap:5px; }
+.smallest-rectangle-grid b { height:38px; display:grid; place-items:center; border:1px solid var(--border); background:var(--surface-1); color:var(--text-muted); }.smallest-rectangle-grid b.black { background:var(--text-main); color:var(--surface-1); }.smallest-rectangle-grid b.inside { outline:2px solid var(--primary); outline-offset:1px; }
 
 .smallest-rectangle-enclosing-black-pixels-step-info {
   padding: 16px;
