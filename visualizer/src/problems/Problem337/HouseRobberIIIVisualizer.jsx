@@ -229,94 +229,94 @@ export default function HouseRobberIIIVisualizer() {
           )}
           {panelDivs.viz && createPortal(
             <AnimatePresence mode="wait">
-            <motion.div
-              key={stepIndex}
-              className="house-robber-i-i-i-viz"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-            >
-              <div className="house-robber-i-i-i-step-info">
-                <h3>{step?.message || 'Press play (or Next) to trace the tree DP.'}</h3>
-              </div>
+              <motion.div
+                key={stepIndex}
+                className="house-robber-i-i-i-viz"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+              >
+                <div className="house-robber-i-i-i-step-info">
+                  <h3>{step?.message || 'Press play (or Next) to trace the tree DP.'}</h3>
+                </div>
 
-              <div className="house-robber-i-i-i-legend">
-                <span className="house-robber-i-i-i-legend-item">
-                  <span className="house-robber-i-i-i-dot current" /> current node
-                </span>
-                <span className="house-robber-i-i-i-legend-item">
-                  <span className="house-robber-i-i-i-dot robbed" /> robbed
-                </span>
-                <span className="house-robber-i-i-i-legend-item">
-                  <span className="house-robber-i-i-i-badge-chip rob">rob</span> = take node + skip children
-                </span>
-                <span className="house-robber-i-i-i-legend-item">
-                  <span className="house-robber-i-i-i-badge-chip skip">skip</span> = best of each child
-                </span>
-              </div>
+                <div className="house-robber-i-i-i-legend">
+                  <span className="house-robber-i-i-i-legend-item">
+                    <span className="house-robber-i-i-i-dot current" /> current node
+                  </span>
+                  <span className="house-robber-i-i-i-legend-item">
+                    <span className="house-robber-i-i-i-dot robbed" /> robbed
+                  </span>
+                  <span className="house-robber-i-i-i-legend-item">
+                    <span className="house-robber-i-i-i-badge-chip rob">rob</span> = take node + skip children
+                  </span>
+                  <span className="house-robber-i-i-i-legend-item">
+                    <span className="house-robber-i-i-i-badge-chip skip">skip</span> = best of each child
+                  </span>
+                </div>
 
-              <div className="house-robber-i-i-i-canvas-wrap">
-                {layout.nodes.length === 0 ? (
-                  <div className="house-robber-i-i-i-empty">Empty tree — answer is 0.</div>
-                ) : (
-                  <div
-                    className="house-robber-i-i-i-canvas"
-                    style={{ width: CANVAS_WIDTH, height: layout.canvasHeight }}
-                  >
-                    <TreeSVG
-                      edges={layout.edges}
-                      positions={layout.positions}
-                      canvasWidth={CANVAS_WIDTH}
-                      canvasHeight={layout.canvasHeight}
-                    />
-                    {layout.nodes.map((node) => {
-                      const pos = layout.positions.get(node.id)
-                      if (!pos) return null
-                      const entry = step?.dp?.[node.id]
-                      const isCurrent = step?.currentId === node.id
-                      const isRobbed = step?.robbedIds?.includes(node.id)
-                      const cls = [
-                        'house-robber-i-i-i-node',
-                        isCurrent ? 'current' : '',
-                        isRobbed ? 'robbed' : '',
-                      ].filter(Boolean).join(' ')
-                      return (
-                        <div
-                          key={node.id}
-                          className="house-robber-i-i-i-node-wrap"
-                          style={{ left: pos.x, top: pos.y - 24 }}
-                        >
-                          <div className={cls}>{node.val}</div>
-                          {entry && (
-                            <div className={`house-robber-i-i-i-node-badges${isCurrent ? ' active' : ''}`}>
-                              <span className="house-robber-i-i-i-badge rob">rob {entry.rob}</span>
-                              <span className="house-robber-i-i-i-badge skip">skip {entry.skip}</span>
-                            </div>
-                          )}
-                        </div>
-                      )
-                    })}
+                <div className="house-robber-i-i-i-canvas-wrap">
+                  {layout.nodes.length === 0 ? (
+                    <div className="house-robber-i-i-i-empty">Empty tree — answer is 0.</div>
+                  ) : (
+                    <div
+                      className="house-robber-i-i-i-canvas"
+                      style={{ width: CANVAS_WIDTH, height: layout.canvasHeight }}
+                    >
+                      <TreeSVG
+                        edges={layout.edges}
+                        positions={layout.positions}
+                        canvasWidth={CANVAS_WIDTH}
+                        canvasHeight={layout.canvasHeight}
+                      />
+                      {layout.nodes.map((node) => {
+                        const pos = layout.positions.get(node.id)
+                        if (!pos) return null
+                        const entry = step?.dp?.[node.id]
+                        const isCurrent = step?.currentId === node.id
+                        const isRobbed = step?.robbedIds?.includes(node.id)
+                        const cls = [
+                          'house-robber-i-i-i-node',
+                          isCurrent ? 'current' : '',
+                          isRobbed ? 'robbed' : '',
+                        ].filter(Boolean).join(' ')
+                        return (
+                          <div
+                            key={node.id}
+                            className="house-robber-i-i-i-node-wrap"
+                            style={{ left: pos.x, top: pos.y - 24 }}
+                          >
+                            <div className={cls}>{node.val}</div>
+                            {entry && (
+                              <div className={`house-robber-i-i-i-node-badges${isCurrent ? ' active' : ''}`}>
+                                <span className="house-robber-i-i-i-badge rob">rob {entry.rob}</span>
+                                <span className="house-robber-i-i-i-badge skip">skip {entry.skip}</span>
+                              </div>
+                            )}
+                          </div>
+                        )
+                      })}
+                    </div>
+                  )}
+                </div>
+
+                {step?.answer != null && (
+                  <div className="house-robber-i-i-i-answer">
+                    Maximum money robbed: <strong>{step.answer}</strong>
                   </div>
                 )}
-              </div>
-
-              {step?.answer != null && (
-                <div className="house-robber-i-i-i-answer">
-                  Maximum money robbed: <strong>{step.answer}</strong>
-                </div>
-              )}
-            </motion.div>
+              </motion.div>
             </AnimatePresence>,
             panelDivs.viz,
           )}
           {panelDivs.code && createPortal(
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-          />,
+            <CodeTracePanel
+              step={step}
+              codeLines={SOLUTION_CODE}
+              highlightedLines={connectivity.highlightedLines}
+              onLineSelect={connectivity.handleLineSelect}
+            />,
             panelDivs.code,
           )}
         </>

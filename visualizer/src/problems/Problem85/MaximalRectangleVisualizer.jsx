@@ -29,9 +29,9 @@ const SOLUTION_CODE = [
 ]
 
 const EXAMPLES = [
-  { label: 'Mixed rectangle', input: [['1','0','1'], ['1','0','1'], ['1','1','1']] },
-  { label: 'All zeroes', input: [['0','0'], ['0','0']] },
-  { label: 'All ones', input: [['1','1','1'], ['1','1','1']] },
+  { label: 'Mixed rectangle', input: [['1', '0', '1'], ['1', '0', '1'], ['1', '1', '1']] },
+  { label: 'All zeroes', input: [['0', '0'], ['0', '0']] },
+  { label: 'All ones', input: [['1', '1', '1'], ['1', '1', '1']] },
   { label: 'Single cell', input: [['1']] },
 ]
 
@@ -248,15 +248,15 @@ function MaximalRectangleVisualizer() {
     <div className="mr-shell">
       <div className="mr-top">
         <div className="mr-panel mr-code-panel">
-                    <div style={{ position: "relative" }}>
+          <div style={{ position: "relative" }}>
             <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            highlightedLines={highlightLines}
-            onLineSelect={connectivity.handleLineSelect}
-            title="Solution Code"
-            onActiveLineDomChange={setActiveLineDom}
-          />
+              step={step}
+              codeLines={SOLUTION_CODE}
+              highlightedLines={highlightLines}
+              onLineSelect={connectivity.handleLineSelect}
+              title="Solution Code"
+              onActiveLineDomChange={setActiveLineDom}
+            />
 
             {showPatternOverlay && (
               <CodePatternAnnotations
@@ -388,27 +388,27 @@ function MaximalRectangleVisualizer() {
 
       <div className="mr-bottom">
         <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={MAXIMALRECTANGLE_PATTERNS} />
-        )}
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={reset}
-          prevDisabled={activeStepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={activeStepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
+          {showPatternOverlay && (
+            <PatternLegend currentPhase={step?.phase} usedPatterns={MAXIMALRECTANGLE_PATTERNS} />
+          )}
+          <PlaybackControls
+            isPlaying={isPlaying}
+            isDone={isDone}
+            speed={speed}
+            onPlayToggle={togglePlay}
+            onPrev={stepBack}
+            onNext={stepForward}
+            onReset={reset}
+            prevDisabled={activeStepIndex < 0}
+            nextDisabled={isDone}
+            resetDisabled={activeStepIndex < 0}
+            onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+            showPatternOverlay={showPatternOverlay}
+            onShowPatternOverlayChange={setShowPatternOverlay}
+            patternOverlayLabel="Show pattern overlay"
+            showPatternOverlayToggle
+          />
+        </FloatingPanel>
       </div>
     </div>
   )

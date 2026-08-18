@@ -288,102 +288,102 @@ export default function FlattenNestedListIteratorVisualizer() {
           )}
           {panelDivs.viz && createPortal(
             <AnimatePresence mode="wait">
-            <motion.div
-              key={stepIndex}
-              className="flatten-nested-list-iterator-viz"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-            >
-              <div className="flatten-nested-list-iterator-step-info">
-                {actionMeta && (
-                  <span
-                    className="flatten-nested-list-iterator-action-badge"
-                    style={{ background: `${actionMeta.color}22`, color: actionMeta.color, borderColor: actionMeta.color }}
-                  >
-                    {actionMeta.label}
-                  </span>
-                )}
-                <h3>{step?.message || 'Press play or step to begin flattening the nested list.'}</h3>
-              </div>
-
-              {!parsed ? (
-                <div className="flatten-nested-list-iterator-note">
-                  Enter a valid nested list of integers to visualize the iterator.
+              <motion.div
+                key={stepIndex}
+                className="flatten-nested-list-iterator-viz"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+              >
+                <div className="flatten-nested-list-iterator-step-info">
+                  {actionMeta && (
+                    <span
+                      className="flatten-nested-list-iterator-action-badge"
+                      style={{ background: `${actionMeta.color}22`, color: actionMeta.color, borderColor: actionMeta.color }}
+                    >
+                      {actionMeta.label}
+                    </span>
+                  )}
+                  <h3>{step?.message || 'Press play or step to begin flattening the nested list.'}</h3>
                 </div>
-              ) : (
-                <>
-                  <div className="flatten-nested-list-iterator-columns">
+
+                {!parsed ? (
+                  <div className="flatten-nested-list-iterator-note">
+                    Enter a valid nested list of integers to visualize the iterator.
+                  </div>
+                ) : (
+                  <>
+                    <div className="flatten-nested-list-iterator-columns">
+                      <div className="flatten-nested-list-iterator-section">
+                        <div className="flatten-nested-list-iterator-section-title">
+                          Stack <span className="flatten-nested-list-iterator-hint">(top highlighted)</span>
+                        </div>
+                        <div className="flatten-nested-list-iterator-stack-col">
+                          {displayStack.length === 0 ? (
+                            <div className="flatten-nested-list-iterator-stack-empty">empty</div>
+                          ) : (
+                            displayStack.map((item, i) => {
+                              const isTop = i === 0
+                              const cls = [
+                                'flatten-nested-list-iterator-stack-item',
+                                item.isInteger ? 'int' : 'list',
+                                isTop ? 'top' : '',
+                              ].filter(Boolean).join(' ')
+                              return (
+                                <div key={item.id} className={cls}>
+                                  {isTop && <span className="flatten-nested-list-iterator-top-label">top</span>}
+                                  <span className="flatten-nested-list-iterator-stack-val">{item.display}</span>
+                                </div>
+                              )
+                            })
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="flatten-nested-list-iterator-section">
+                        <div className="flatten-nested-list-iterator-section-title">Nested structure</div>
+                        <div className="flatten-nested-list-iterator-nested-tree">
+                          {renderNode(parsed, 'root')}
+                        </div>
+                      </div>
+                    </div>
+
                     <div className="flatten-nested-list-iterator-section">
                       <div className="flatten-nested-list-iterator-section-title">
-                        Stack <span className="flatten-nested-list-iterator-hint">(top highlighted)</span>
+                        Flattened output <span className="flatten-nested-list-iterator-hint">({output.length})</span>
                       </div>
-                      <div className="flatten-nested-list-iterator-stack-col">
-                        {displayStack.length === 0 ? (
-                          <div className="flatten-nested-list-iterator-stack-empty">empty</div>
+                      <div className="flatten-nested-list-iterator-output-row">
+                        {output.length === 0 ? (
+                          <div className="flatten-nested-list-iterator-output-empty">nothing emitted yet</div>
                         ) : (
-                          displayStack.map((item, i) => {
-                            const isTop = i === 0
-                            const cls = [
-                              'flatten-nested-list-iterator-stack-item',
-                              item.isInteger ? 'int' : 'list',
-                              isTop ? 'top' : '',
-                            ].filter(Boolean).join(' ')
+                          output.map((val, i) => {
+                            const isNewest = step?.action === 'emit' && i === step.emittedIndex
                             return (
-                              <div key={item.id} className={cls}>
-                                {isTop && <span className="flatten-nested-list-iterator-top-label">top</span>}
-                                <span className="flatten-nested-list-iterator-stack-val">{item.display}</span>
-                              </div>
+                              <span
+                                key={i}
+                                className={`flatten-nested-list-iterator-output-chip${isNewest ? ' newest' : ''}`}
+                              >
+                                {val}
+                              </span>
                             )
                           })
                         )}
                       </div>
                     </div>
-
-                    <div className="flatten-nested-list-iterator-section">
-                      <div className="flatten-nested-list-iterator-section-title">Nested structure</div>
-                      <div className="flatten-nested-list-iterator-nested-tree">
-                        {renderNode(parsed, 'root')}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flatten-nested-list-iterator-section">
-                    <div className="flatten-nested-list-iterator-section-title">
-                      Flattened output <span className="flatten-nested-list-iterator-hint">({output.length})</span>
-                    </div>
-                    <div className="flatten-nested-list-iterator-output-row">
-                      {output.length === 0 ? (
-                        <div className="flatten-nested-list-iterator-output-empty">nothing emitted yet</div>
-                      ) : (
-                        output.map((val, i) => {
-                          const isNewest = step?.action === 'emit' && i === step.emittedIndex
-                          return (
-                            <span
-                              key={i}
-                              className={`flatten-nested-list-iterator-output-chip${isNewest ? ' newest' : ''}`}
-                            >
-                              {val}
-                            </span>
-                          )
-                        })
-                      )}
-                    </div>
-                  </div>
-                </>
-              )}
-            </motion.div>
+                  </>
+                )}
+              </motion.div>
             </AnimatePresence>,
             panelDivs.viz,
           )}
           {panelDivs.code && createPortal(
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-          />,
+            <CodeTracePanel
+              step={step}
+              codeLines={SOLUTION_CODE}
+              highlightedLines={connectivity.highlightedLines}
+              onLineSelect={connectivity.handleLineSelect}
+            />,
             panelDivs.code,
           )}
         </>

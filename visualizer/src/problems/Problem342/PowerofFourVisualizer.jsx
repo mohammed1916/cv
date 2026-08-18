@@ -328,111 +328,111 @@ export default function PowerofFourVisualizer() {
           )}
           {panelDivs.viz && createPortal(
             <div className="powerof-four-viz">
-            <div className="powerof-four-step-info">
-              <h3>{step?.message || 'Press play or step to test whether n is a power of four.'}</h3>
-            </div>
+              <div className="powerof-four-step-info">
+                <h3>{step?.message || 'Press play or step to test whether n is a power of four.'}</h3>
+              </div>
 
-            {view && (
-              <>
-                {/* Binary representation of n */}
-                <div>
-                  <div style={{ color: COLORS.muted, fontSize: 12, marginBottom: 6, fontFamily: 'monospace' }}>
-                    n = {view.n} &nbsp;→&nbsp; {bits}-bit binary
+              {view && (
+                <>
+                  {/* Binary representation of n */}
+                  <div>
+                    <div style={{ color: COLORS.muted, fontSize: 12, marginBottom: 6, fontFamily: 'monospace' }}>
+                      n = {view.n} &nbsp;→&nbsp; {bits}-bit binary
+                    </div>
+                    <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+                      {binStr.split('').map((ch, i) => {
+                        const posFromLsb = bits - 1 - i
+                        return (
+                          <BitCell
+                            key={i}
+                            char={ch}
+                            isSet={i === setBitIndex}
+                            isEvenPos={posFromLsb % 2 === 0}
+                            highlight={highlightBit === i}
+                          />
+                        )
+                      })}
+                    </div>
                   </div>
-                  <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-                    {binStr.split('').map((ch, i) => {
-                      const posFromLsb = bits - 1 - i
-                      return (
-                        <BitCell
-                          key={i}
-                          char={ch}
-                          isSet={i === setBitIndex}
-                          isEvenPos={posFromLsb % 2 === 0}
-                          highlight={highlightBit === i}
-                        />
-                      )
-                    })}
+
+                  {/* Even-index mask 0x55555555 */}
+                  <AnimatePresence>
+                    {showMask && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.25 }}
+                      >
+                        <div style={{ color: COLORS.muted, fontSize: 12, margin: '4px 0 6px', fontFamily: 'monospace' }}>
+                          mask 0x55555555 &nbsp;→&nbsp; keeps even-index bits
+                        </div>
+                        <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+                          {maskStr.split('').map((ch, i) => {
+                            const posFromLsb = bits - 1 - i
+                            return (
+                              <BitCell
+                                key={i}
+                                char={ch}
+                                isSet={false}
+                                isEvenPos={posFromLsb % 2 === 0}
+                                highlight={highlightBit === i}
+                                dim={highlightBit !== null && highlightBit !== i}
+                              />
+                            )
+                          })}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  {/* Legend */}
+                  <div style={{ display: 'flex', gap: 16, fontSize: 11, color: COLORS.muted, flexWrap: 'wrap' }}>
+                    <span><b style={{ color: COLORS.setBit }}>E</b> = even index (power-of-four bits live here)</span>
+                    <span><b>o</b> = odd index</span>
                   </div>
-                </div>
 
-                {/* Even-index mask 0x55555555 */}
-                <AnimatePresence>
-                  {showMask && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.25 }}
-                    >
-                      <div style={{ color: COLORS.muted, fontSize: 12, margin: '4px 0 6px', fontFamily: 'monospace' }}>
-                        mask 0x55555555 &nbsp;→&nbsp; keeps even-index bits
-                      </div>
-                      <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-                        {maskStr.split('').map((ch, i) => {
-                          const posFromLsb = bits - 1 - i
-                          return (
-                            <BitCell
-                              key={i}
-                              char={ch}
-                              isSet={false}
-                              isEvenPos={posFromLsb % 2 === 0}
-                              highlight={highlightBit === i}
-                              dim={highlightBit !== null && highlightBit !== i}
-                            />
-                          )
-                        })}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                  {/* Checks */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                    <CheckRow label="1.  n > 0" status={step?.checkPositive} />
+                    <CheckRow label="2.  power of two:  n & (n-1) == 0" status={step?.checkPot} />
+                    <CheckRow label="3.  even-index bit:  n & 0x55555555 != 0" status={step?.checkEven} />
+                  </div>
 
-                {/* Legend */}
-                <div style={{ display: 'flex', gap: 16, fontSize: 11, color: COLORS.muted, flexWrap: 'wrap' }}>
-                  <span><b style={{ color: COLORS.setBit }}>E</b> = even index (power-of-four bits live here)</span>
-                  <span><b>o</b> = odd index</span>
-                </div>
-
-                {/* Checks */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                  <CheckRow label="1.  n > 0" status={step?.checkPositive} />
-                  <CheckRow label="2.  power of two:  n & (n-1) == 0" status={step?.checkPot} />
-                  <CheckRow label="3.  even-index bit:  n & 0x55555555 != 0" status={step?.checkEven} />
-                </div>
-
-                {/* Final verdict */}
-                <AnimatePresence>
-                  {result !== null && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ type: 'spring', stiffness: 300, damping: 18 }}
-                      style={{
-                        padding: '12px 16px',
-                        borderRadius: 10,
-                        fontWeight: 800,
-                        fontSize: 16,
-                        textAlign: 'center',
-                        color: 'var(--code-bg)',
-                        background: result ? COLORS.pass : COLORS.fail,
-                      }}
-                    >
-                      {result ? `TRUE — ${view.n} is a power of four` : `FALSE — ${view.n} is not a power of four`}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </>
-            )}
+                  {/* Final verdict */}
+                  <AnimatePresence>
+                    {result !== null && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ type: 'spring', stiffness: 300, damping: 18 }}
+                        style={{
+                          padding: '12px 16px',
+                          borderRadius: 10,
+                          fontWeight: 800,
+                          fontSize: 16,
+                          textAlign: 'center',
+                          color: 'var(--code-bg)',
+                          background: result ? COLORS.pass : COLORS.fail,
+                        }}
+                      >
+                        {result ? `TRUE — ${view.n} is a power of four` : `FALSE — ${view.n} is not a power of four`}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </>
+              )}
             </div>,
             panelDivs.viz,
           )}
           {panelDivs.code && createPortal(
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-          />,
+            <CodeTracePanel
+              step={step}
+              codeLines={SOLUTION_CODE}
+              highlightedLines={connectivity.highlightedLines}
+              onLineSelect={connectivity.handleLineSelect}
+            />,
             panelDivs.code,
           )}
         </>

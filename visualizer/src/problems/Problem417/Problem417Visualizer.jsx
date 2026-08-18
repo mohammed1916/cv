@@ -143,9 +143,9 @@ function generateSteps(heights) {
   for (let c = 0; c < n; c++) {
     addStep({
       phase: 'pacific_dfs',
-        activeLine: 22,
+      activeLine: 22,
       message: `Starting DFS from top border: (0,${c}), height=${heights[0][c]}`,
-        currentCell: [0, c],
+      currentCell: [0, c],
     })
     explore(0, c, pacificVisited, pacific, 'pacific_dfs', 0)
   }
@@ -174,9 +174,9 @@ function generateSteps(heights) {
   for (let c = 0; c < n; c++) {
     addStep({
       phase: 'atlantic_dfs',
-        activeLine: 28,
+      activeLine: 28,
       message: `Starting DFS from bottom border: (${m - 1},${c}), height=${heights[m - 1][c]}`,
-        currentCell: [m - 1, c],
+      currentCell: [m - 1, c],
     })
     explore(m - 1, c, atlanticVisited, atlantic, 'atlantic_dfs', 0)
   }
@@ -269,48 +269,48 @@ function Problem417Visualizer() {
   const visualizationPanel = (
     <div className="paw-shell">
       <div className="paw-panel paw-visualization">
-          <div className="paw-panel-head">Grid Visualization</div>
-          <div className="paw-panel-body">
-            <div
-              className="paw-grid"
-              style={{
-                gridTemplateColumns: `repeat(${n}, ${cellSize}px)`,
-                gap: '4px',
-              }}
-            >
-              <AnimatePresence mode="popLayout">
-                {heights.map((row, r) =>
-                  row.map((val, c) => (
-                    <motion.div
-                      key={`${r}-${c}`}
-                      className="paw-cell"
-                      style={{
-                        backgroundColor: getCellColor(r, c),
-                        width: cellSize,
-                        height: cellSize,
-                      }}
-                      initial={{ opacity: 0.3 }}
-                      animate={{
-                        opacity:
-                          activeStep?.currentCell?.[0] === r &&
-                            activeStep?.currentCell?.[1] === c
-                            ? 1
-                            : 0.8,
-                        scale:
-                          activeStep?.currentCell?.[0] === r &&
-                            activeStep?.currentCell?.[1] === c
-                            ? 1.1
-                            : 1,
-                      }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <div className="paw-cell-value">{val}</div>
-                    </motion.div>
-                  ))
-                )}
-              </AnimatePresence>
-            </div>
+        <div className="paw-panel-head">Grid Visualization</div>
+        <div className="paw-panel-body">
+          <div
+            className="paw-grid"
+            style={{
+              gridTemplateColumns: `repeat(${n}, ${cellSize}px)`,
+              gap: '4px',
+            }}
+          >
+            <AnimatePresence mode="popLayout">
+              {heights.map((row, r) =>
+                row.map((val, c) => (
+                  <motion.div
+                    key={`${r}-${c}`}
+                    className="paw-cell"
+                    style={{
+                      backgroundColor: getCellColor(r, c),
+                      width: cellSize,
+                      height: cellSize,
+                    }}
+                    initial={{ opacity: 0.3 }}
+                    animate={{
+                      opacity:
+                        activeStep?.currentCell?.[0] === r &&
+                          activeStep?.currentCell?.[1] === c
+                          ? 1
+                          : 0.8,
+                      scale:
+                        activeStep?.currentCell?.[0] === r &&
+                          activeStep?.currentCell?.[1] === c
+                          ? 1.1
+                          : 1,
+                    }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <div className="paw-cell-value">{val}</div>
+                  </motion.div>
+                ))
+              )}
+            </AnimatePresence>
           </div>
+        </div>
       </div>
 
       <div className="paw-middle">

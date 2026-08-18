@@ -329,29 +329,29 @@ export default function PalindromePairsVisualizer() {
           )}
           {panelDivs.viz && createPortal(
             <AnimatePresence mode="wait">
-            <motion.div
-              key={stepIndex}
-              className="palindrome-pairs-viz"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="palindrome-pairs-step-info">
-                <h3>{step?.message || 'Press play (or Next) to trace the split-and-lookup algorithm.'}</h3>
-              </div>
-              <VizBody step={step} words={vizWords} />
-            </motion.div>
+              <motion.div
+                key={stepIndex}
+                className="palindrome-pairs-viz"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="palindrome-pairs-step-info">
+                  <h3>{step?.message || 'Press play (or Next) to trace the split-and-lookup algorithm.'}</h3>
+                </div>
+                <VizBody step={step} words={vizWords} />
+              </motion.div>
             </AnimatePresence>,
             panelDivs.viz,
           )}
           {panelDivs.code && createPortal(
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-          />,
+            <CodeTracePanel
+              step={step}
+              codeLines={SOLUTION_CODE}
+              highlightedLines={connectivity.highlightedLines}
+              onLineSelect={connectivity.handleLineSelect}
+            />,
             panelDivs.code,
           )}
         </>
