@@ -1,5 +1,7 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -7,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './VerifyPreorderSerializationofaBinaryTreeVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'def isValidSerialization(preorder):' },
@@ -174,6 +177,17 @@ const EXAMPLES = REGISTRY_EXAMPLES.length > 0 ? REGISTRY_EXAMPLES : FALLBACK_EXA
 
 const MAX_SLOT_BOXES = 16
 
+function VisualizationPanel({ stepIndex, step, tokens, activeIndex, slotCount, shownSlots, validity, tokenStyle }) {
+  return <div className="verify-preorder-serializationofa-binary-tree-panel-body" style={{ height: '100%', overflow: 'auto' }}><AnimatePresence mode="wait"><motion.div key={stepIndex} className="verify-preorder-serializationofa-binary-tree-viz" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}>
+    <div className="verify-preorder-serializationofa-binary-tree-step-info"><h3>{step?.message || 'Press play (or Next) to trace the slots algorithm.'}</h3></div>
+    {tokens.length === 0 ? <div style={{ color: C.muted, fontSize: 13 }}>Provide a valid preorder string to visualize.</div> : <>
+      <div><div style={{ color: C.muted, fontSize: 12, fontWeight: 600, marginBottom: 8, textTransform: 'uppercase', letterSpacing: 0.5 }}>Token sequence</div><div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>{tokens.map((token, index) => <motion.div key={index} style={tokenStyle(index)} animate={{ scale: index === activeIndex ? 1.1 : 1 }} transition={{ duration: 0.2 }}>{token}</motion.div>)}</div></div>
+      <div><div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 8 }}><span style={{ color: C.muted, fontSize: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>Open slots</span><span style={{ color: slotCount < 0 ? C.invalid : C.accent, fontSize: 22, fontWeight: 800, fontFamily: 'monospace' }}>slots = {slotCount}</span></div><div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, minHeight: 34, alignItems: 'center' }}>{shownSlots === 0 ? <span style={{ color: slotCount < 0 ? C.invalid : C.dim, fontSize: 13, fontFamily: 'monospace' }}>{slotCount < 0 ? '(negative - no slot to fill!)' : '(no open slots)'}</span> : Array.from({ length: shownSlots }).map((_, index) => <motion.div key={index} initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.2, delay: index * 0.03 }} style={{ width: 26, height: 26, borderRadius: 6, border: `2px dashed ${C.accent}`, background: 'rgba(56,189,248,0.12)' }} />)}{slotCount > MAX_SLOT_BOXES && <span style={{ color: C.muted, fontSize: 13, fontFamily: 'monospace' }}>+{slotCount - MAX_SLOT_BOXES} more</span>}</div></div>
+      {validity !== null && <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }} style={{ padding: '14px 18px', borderRadius: 10, fontSize: 18, fontWeight: 800, letterSpacing: 0.5, color: validity ? C.valid : C.invalid, background: validity ? 'rgba(34,197,94,0.12)' : 'rgba(248,113,113,0.12)', border: `2px solid ${validity ? C.valid : C.invalid}` }}>{validity ? 'VALID preorder serialization' : 'INVALID preorder serialization'}</motion.div>}
+    </>}
+  </motion.div></AnimatePresence></div>
+}
+
 export default function VerifyPreorderSerializationofaBinaryTreeVisualizer() {
   const [inputValue, setInputValue] = useState(exampleToString(EXAMPLES[0]) || '9,3,4,#,#,1,#,#,2,#,6,#,#')
 
@@ -228,170 +242,25 @@ export default function VerifyPreorderSerializationofaBinaryTreeVisualizer() {
     }
   }
 
+  const applyExample = useCallback((example) => { setInputValue(exampleToString(example)); handleReset() }, [handleReset])
+  const panelConfigs = useMemo(() => [
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: 'Preorder Slots', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
+  ], [])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
   return (
     <div className="verify-preorder-serializationofa-binary-tree-shell">
-      <div className="verify-preorder-serializationofa-binary-tree-panel">
-        <div className="verify-preorder-serializationofa-binary-tree-panel-head">Preorder Input</div>
-        <div className="verify-preorder-serializationofa-binary-tree-panel-body">
-          <textarea
-            value={inputValue}
-            onChange={(e) => { setInputValue(e.target.value); handleReset() }}
-            className="verify-preorder-serializationofa-binary-tree-textarea"
-            placeholder="e.g. 9,3,4,#,#,1,#,#,2,#,6,#,#"
-            spellCheck={false}
-          />
-          {inputError && <div className="verify-preorder-serializationofa-binary-tree-error">{inputError}</div>}
-        </div>
-      </div>
-
-      <div className="verify-preorder-serializationofa-binary-tree-panel">
-        <div className="verify-preorder-serializationofa-binary-tree-panel-head">Visualization — Slots Method</div>
-        <div className="verify-preorder-serializationofa-binary-tree-panel-body">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={stepIndex}
-              className="verify-preorder-serializationofa-binary-tree-viz"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-            >
-              <div className="verify-preorder-serializationofa-binary-tree-step-info">
-                <h3>{step?.message || 'Press play (or Next) to trace the slots algorithm.'}</h3>
-              </div>
-
-              {vizTokens.length === 0 ? (
-                <div style={{ color: C.muted, fontSize: 13 }}>
-                  Provide a valid preorder string to visualize.
-                </div>
-              ) : (
-                <>
-                  {/* Token sequence */}
-                  <div>
-                    <div style={{ color: C.muted, fontSize: 12, fontWeight: 600, marginBottom: 8, textTransform: 'uppercase', letterSpacing: 0.5 }}>
-                      Token sequence
-                    </div>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                      {vizTokens.map((t, i) => (
-                        <motion.div
-                          key={i}
-                          style={tokenStyle(i)}
-                          animate={{ scale: i === activeIndex ? 1.1 : 1 }}
-                          transition={{ duration: 0.2 }}
-                        >
-                          {t}
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Slots counter */}
-                  <div>
-                    <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 8 }}>
-                      <span style={{ color: C.muted, fontSize: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>
-                        Open slots
-                      </span>
-                      <span style={{ color: slotCount < 0 ? C.invalid : C.accent, fontSize: 22, fontWeight: 800, fontFamily: 'monospace' }}>
-                        slots = {slotCount}
-                      </span>
-                    </div>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, minHeight: 34, alignItems: 'center' }}>
-                      {shownSlots === 0 ? (
-                        <span style={{ color: slotCount < 0 ? C.invalid : C.dim, fontSize: 13, fontFamily: 'monospace' }}>
-                          {slotCount < 0 ? '(negative — no slot to fill!)' : '(no open slots)'}
-                        </span>
-                      ) : (
-                        Array.from({ length: shownSlots }).map((_, i) => (
-                          <motion.div
-                            key={i}
-                            initial={{ scale: 0, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            transition={{ duration: 0.2, delay: i * 0.03 }}
-                            style={{
-                              width: 26,
-                              height: 26,
-                              borderRadius: 6,
-                              border: `2px dashed ${C.accent}`,
-                              background: 'rgba(56,189,248,0.12)',
-                            }}
-                          />
-                        ))
-                      )}
-                      {slotCount > MAX_SLOT_BOXES && (
-                        <span style={{ color: C.muted, fontSize: 13, fontFamily: 'monospace' }}>
-                          +{slotCount - MAX_SLOT_BOXES} more
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Verdict */}
-                  {validity !== null && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.25 }}
-                      style={{
-                        padding: '14px 18px',
-                        borderRadius: 10,
-                        fontSize: 18,
-                        fontWeight: 800,
-                        letterSpacing: 0.5,
-                        color: validity ? C.valid : C.invalid,
-                        background: validity ? 'rgba(34,197,94,0.12)' : 'rgba(248,113,113,0.12)',
-                        border: `2px solid ${validity ? C.valid : C.invalid}`,
-                      }}
-                    >
-                      {validity ? '✓ VALID preorder serialization' : '✗ INVALID preorder serialization'}
-                    </motion.div>
-                  )}
-                </>
-              )}
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </div>
-
-      <div className="verify-preorder-serializationofa-binary-tree-panel">
-        <div className="verify-preorder-serializationofa-binary-tree-panel-head">Code</div>
-        <div className="verify-preorder-serializationofa-binary-tree-panel-body">
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-          />
-        </div>
-      </div>
-
-      {EXAMPLES.length > 0 && (
-        <div className="verify-preorder-serializationofa-binary-tree-examples">
-          {EXAMPLES.map((example, i) => (
-            <button
-              key={i}
-              className="verify-preorder-serializationofa-binary-tree-example-btn"
-              onClick={() => { setInputValue(exampleToString(example)); handleReset() }}
-            >
-              {example.label || `Example ${i + 1}`}
-            </button>
-          ))}
-        </div>
-      )}
-
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && <>
+        {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'preorder', label: 'Preorder tokens', type: 'string' }]} values={{ preorder: inputValue }} onChange={(_, value) => { setInputValue(value); handleReset() }} examples={EXAMPLES} applyExample={applyExample} inputError={inputError} />, panelDivs.input)}
+        {panelDivs.viz && createPortal(<VisualizationPanel stepIndex={stepIndex} step={step} tokens={vizTokens} activeIndex={activeIndex} slotCount={slotCount} shownSlots={shownSlots} validity={validity} tokenStyle={tokenStyle} />, panelDivs.viz)}
+        {panelDivs.code && createPortal(<CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} />, panelDivs.code)}
+      </>}
       <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-        />
+        <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={(event) => setSpeed(Number(event.target.value))} />
       </FloatingPanel>
     </div>
   )

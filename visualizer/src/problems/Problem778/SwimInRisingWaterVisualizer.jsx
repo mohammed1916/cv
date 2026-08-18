@@ -192,6 +192,7 @@ function SwimInRisingWaterVisualizer() {
 
   const [grid, setGrid] = useState(defaultGrid)
   const [inputValue, setInputValue] = useState(JSON.stringify(defaultGrid))
+  const [inputError, setInputError] = useState('')
 
   const steps = useMemo(() => generateSteps(grid), [grid])
   const { stepIndex, isPlaying, speed, setSpeed, togglePlay, handleReset: reset, stepForward, stepBack, isDone, setStepIndex } = usePlaybackState(steps.length)
@@ -207,15 +208,24 @@ function SwimInRisingWaterVisualizer() {
       const parsed = JSON.parse(inputValue)
       if (!Array.isArray(parsed) || !parsed.length || !parsed.every(row => Array.isArray(row) && row.length === parsed.length && row.every(Number.isFinite))) throw new Error('Enter a square JSON grid of numbers.')
       setGrid(parsed)
+      setInputError('')
       reset()
     } catch (e) {
-      alert('Invalid JSON input')
+      setInputError(e.message || 'Enter a valid square JSON grid of numbers.')
     }
   }, [inputValue, reset])
 
   const handleReset = useCallback(() => {
     setGrid(defaultGrid)
     setInputValue(JSON.stringify(defaultGrid))
+    setInputError('')
+    reset()
+  }, [reset])
+
+  const applyExample = useCallback((example) => {
+    setGrid(example.input)
+    setInputValue(JSON.stringify(example.input))
+    setInputError('')
     reset()
   }, [reset])
 
@@ -347,14 +357,15 @@ function SwimInRisingWaterVisualizer() {
           <div className="srw-panel-head">Input</div>
           <div className="srw-panel-body">
             <div className="srw-examples">
-              {EXAMPLES.map((example) => <button key={example.label} className="srw-button" onClick={() => { setGrid(example.input); setInputValue(JSON.stringify(example.input)); reset() }}>{example.label}</button>)}
+              {EXAMPLES.map((example) => <button key={example.label} className="srw-button" onClick={() => applyExample(example)}>{example.label}</button>)}
             </div>
             <textarea
               className="srw-input"
               value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
+              onChange={(e) => { setInputValue(e.target.value); setInputError('') }}
               rows={3}
             />
+            {inputError && <div className="srw-input-error">{inputError}</div>}
             <button className="srw-button" onClick={handleRun}>
               Run
             </button>

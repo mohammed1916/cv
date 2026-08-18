@@ -1,5 +1,7 @@
 ﻿import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
@@ -91,6 +93,35 @@ function generateSteps(s) {
 
 const EXAMPLES = getExamples('palindromic-substrings')
 
+function VisualizationPanel({ s, step, getCharClass, found, applyExample }) {
+    const cellSize = 48
+    return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, height: '100%', overflow: 'auto', padding: 16 }}>
+            <section className="ps-panel main">
+                <header className="ps-head"><span>Expand around center</span></header>
+                <div className="ps-body">
+                    <div className="ps-examples">{EXAMPLES.map((example) => <button key={example.label} className="ps-chip" onClick={() => applyExample(example)}>{example.label}</button>)}</div>
+                    <div className="ps-chars">{s.split('').map((character, index) => <motion.div key={index} className={`ps-char ${getCharClass(index)}`} animate={{ scale: step?.activeL <= index && index <= step?.activeR && step?.activeL !== -1 ? 1.1 : 1 }} transition={{ type: 'spring', stiffness: 350, damping: 22 }}><span className="ps-char-val">{character}</span><span className="ps-char-idx">{index}</span></motion.div>)}</div>
+                    <div className="ps-pointers" style={{ width: s.length * (cellSize + 6) }}>{s.split('').map((_, index) => <div key={index} className="ps-ptr-slot">{step?.activeL === index && <span className="ps-ptr l-ptr">L</span>}{step?.activeR === index && <span className="ps-ptr r-ptr">R</span>}{step?.center === index && step?.activeL !== index && step?.activeR !== index && <span className="ps-ptr c-ptr">C</span>}</div>)}</div>
+                    <div className="ps-sub-head">Found palindromes ({found.length})</div>
+                    <div className="ps-found-list">{found.slice(-8).map(([left, right], index) => <span key={`${left}-${right}-${index}`} className="ps-found-chip">{s.slice(left, right + 1)}</span>)}{found.length > 8 && <span className="ps-found-chip more">+{found.length - 8}</span>}</div>
+                </div>
+            </section>
+            <section className="ps-panel side">
+                <header className="ps-head"><span>State</span></header>
+                <div className="ps-body">
+                    <div className="ps-metric"><span className="ps-label">center</span><strong className="ps-val">{step?.center >= 0 ? `${step.center}${step.isEven ? '/' + (step.center + 1) : ''}` : '-'}</strong></div>
+                    <div className="ps-metric"><span className="ps-label">L</span><strong className="ps-val l-color">{step?.activeL >= 0 ? step.activeL : '-'}</strong></div>
+                    <div className="ps-metric"><span className="ps-label">R</span><strong className="ps-val r-color">{step?.activeR >= 0 ? step.activeR : '-'}</strong></div>
+                    <div className="ps-metric"><span className="ps-label">count</span><strong className="ps-val accent">{step?.count ?? 0}</strong></div>
+                    <div className={`ps-result ${step?.phase === 'done' ? 'done' : ''}`}>{step?.phase === 'done' ? `Count = ${step.count}` : 'Expanding...'}</div>
+                </div>
+            </section>
+            <div className="ps-status">{step?.message || 'Press Play to begin.'}</div>
+        </div>
+    )
+}
+
 export default function PalindromicSubstringsVisualizer() {
     const [sInput, setSInput] = useState('abc')
 
@@ -106,8 +137,6 @@ export default function PalindromicSubstringsVisualizer() {
         handleReset()
     }, [handleReset])
 
-    const CELL = 48
-
     // Color each character based on role
     const getCharClass = (i) => {
         if (!step) return ''
@@ -120,87 +149,22 @@ export default function PalindromicSubstringsVisualizer() {
     // All found palindrome ranges for overlay
     const found = step?.found ?? []
 
+    const panelConfigs = useMemo(() => [
+        { id: 'input', title: 'Input' },
+        { id: 'viz', title: 'Palindromic Substrings', dockMode: 'split-bottom' },
+        { id: 'code', title: 'Code', dockMode: 'split-right' },
+    ], [])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
     return (
         <div className="ps-shell">
-      <ManualInputPanel
-        fields={[{"key":"s","label":"s","type":"string"}]}
-        values={{ s: sInput }}
-        onChange={(k, v) => { if (k === 's') setSInput(v); handleReset() }}
-        examples={EXAMPLES}
-        applyExample={applyExample}
-      />
-
-            <div className="ps-top">
-                <section className="ps-panel main">
-                    <header className="ps-head"><span>Expand around center</span></header>
-                    <div className="ps-body">
-                        <div className="ps-examples">
-                            {EXAMPLES.map((ex) => (
-                                <button key={ex.label} className="ps-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                            ))}
-                        </div>
-                        <input className="ps-input" value={sInput} maxLength={12} onChange={(e) => { setSInput(e.target.value); handleReset() }} placeholder="Enter string (max 12)" />
-
-                        {/* Character cells */}
-                        <div className="ps-chars">
-                            {s.split('').map((c, i) => (
-                                <motion.div
-                                    key={i}
-                                    className={`ps-char ${getCharClass(i)}`}
-                                    animate={step?.activeL <= i && i <= step?.activeR && step?.activeL !== -1 ? { scale: 1.1 } : { scale: 1 }}
-                                    transition={{ type: 'spring', stiffness: 350, damping: 22 }}
-                                >
-                                    <span className="ps-char-val">{c}</span>
-                                    <span className="ps-char-idx">{i}</span>
-                                </motion.div>
-                            ))}
-                        </div>
-
-                        {/* L / R pointer row */}
-                        <div className="ps-pointers" style={{ width: s.length * (CELL + 6) }}>
-                            {s.split('').map((_, i) => {
-                                const isL = step?.activeL === i
-                                const isR = step?.activeR === i
-                                const isCenter = step?.center === i
-                                return (
-                                    <div key={i} className="ps-ptr-slot">
-                                        {isL && <span className="ps-ptr l-ptr">L</span>}
-                                        {isR && <span className="ps-ptr r-ptr">R</span>}
-                                        {isCenter && !isL && !isR && <span className="ps-ptr c-ptr">C</span>}
-                                    </div>
-                                )
-                            })}
-                        </div>
-
-                        {/* Recent palindromes */}
-                        <div className="ps-sub-head">Found palindromes ({found.length})</div>
-                        <div className="ps-found-list">
-                            {found.slice(-8).map(([l, r], i) => (
-                                <span key={`${l}-${r}-${i}`} className="ps-found-chip">
-                                    {s.slice(l, r + 1)}
-                                </span>
-                            ))}
-                            {found.length > 8 && <span className="ps-found-chip more">+{found.length - 8}</span>}
-                        </div>
-                    </div>
-                </section>
-
-                <section className="ps-panel side">
-                    <header className="ps-head"><span>State</span></header>
-                    <div className="ps-body">
-                        <div className="ps-metric"><span className="ps-label">center</span><strong className="ps-val">{step?.center >= 0 ? `${step.center}${step.isEven ? '/' + (step.center + 1) : ''}` : '—'}</strong></div>
-                        <div className="ps-metric"><span className="ps-label">L</span><strong className="ps-val l-color">{step?.activeL >= 0 ? step.activeL : '—'}</strong></div>
-                        <div className="ps-metric"><span className="ps-label">R</span><strong className="ps-val r-color">{step?.activeR >= 0 ? step.activeR : '—'}</strong></div>
-                        <div className="ps-metric"><span className="ps-label">count</span><strong className="ps-val accent">{step?.count ?? 0}</strong></div>
-                        <div className={`ps-result ${step?.phase === 'done' ? 'done' : ''}`}>
-                            {step?.phase === 'done' ? `Count = ${step.count}` : 'Expanding…'}
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-            <div className="ps-status">{step?.message || 'Press Play to begin.'}</div>
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && <>
+                {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 's', label: 'String', type: 'string' }]} values={{ s: sInput }} onChange={(key, value) => { if (key === 's') setSInput(value); handleReset() }} examples={EXAMPLES} applyExample={applyExample} />, panelDivs.input)}
+                {panelDivs.viz && createPortal(<VisualizationPanel s={s} step={step} getCharClass={getCharClass} found={found} applyExample={applyExample} />, panelDivs.viz)}
+                {panelDivs.code && createPortal(<CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />, panelDivs.code)}
+            </>}
             <FloatingPanel title="Playback Controls">
         <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}

@@ -1,5 +1,7 @@
 ﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -14,9 +16,9 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const PATTERNS = ['buckets', 'count', 'done']
 const LINE_PATTERN_MAP = {
-  2: 'count',
-  5: 'buckets',
-  10: 'done'
+    2: 'count',
+    5: 'buckets',
+    10: 'done'
 }
 
 
@@ -128,13 +130,13 @@ export default function TopKFrequentVisualizer() {
 
     return (
         <div className="tkf-shell">
-      <ManualInputPanel
-        fields={[{"key":"nums","label":"nums","type":"string"},{"key":"k","label":"k","type":"string"}]}
-        values={{ nums: numsInput, k: kInput }}
-        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'k') setKInput(v); handleReset() }}
-        examples={EXAMPLES}
-        applyExample={applyExample}
-      />
+            <ManualInputPanel
+                fields={[{ "key": "nums", "label": "nums", "type": "string" }, { "key": "k", "label": "k", "type": "string" }]}
+                values={{ nums: numsInput, k: kInput }}
+                onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'k') setKInput(v); handleReset() }}
+                examples={EXAMPLES}
+                applyExample={applyExample}
+            />
 
             <div className="tkf-controls-row">
                 <div className="tkf-examples">

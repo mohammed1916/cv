@@ -1,5 +1,7 @@
 ﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
@@ -9,17 +11,19 @@ import { getExamples } from '../../config/examplesRegistry'
 import "./SerializeDeserializeVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+import PatternLegend from '../../components/PatternLegend'
 
 const SOLUTION_CODE = [
-  { line: 1,  text: "def serialize(root):" },
-  { line: 2,  text: "    res = []" },
-  { line: 3,  text: "    def dfs(node):" },
-  { line: 4,  text: "        if not node:" },
-  { line: 5,  text: "            res.append('N'); return" },
-  { line: 6,  text: "        res.append(str(node.val))" },
-  { line: 7,  text: "        dfs(node.left); dfs(node.right)" },
-  { line: 8,  text: "    dfs(root); return ','.join(res)" },
-  { line: 9,  text: "def deserialize(data):" },
+  { line: 1, text: "def serialize(root):" },
+  { line: 2, text: "    res = []" },
+  { line: 3, text: "    def dfs(node):" },
+  { line: 4, text: "        if not node:" },
+  { line: 5, text: "            res.append('N'); return" },
+  { line: 6, text: "        res.append(str(node.val))" },
+  { line: 7, text: "        dfs(node.left); dfs(node.right)" },
+  { line: 8, text: "    dfs(root); return ','.join(res)" },
+  { line: 9, text: "def deserialize(data):" },
   { line: 10, text: "    vals = data.split(',')" },
   { line: 11, text: "    i = 0" },
   { line: 12, text: "    def dfs():" },
@@ -30,6 +34,10 @@ const SOLUTION_CODE = [
   { line: 17, text: "        return node" },
   { line: 18, text: "    return dfs()" },
 ];
+
+// ─── Pattern annotations ───────────────────────────────────────────────────
+const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
+const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 
 const EXAMPLES = getExamples('serialize-deserialize');
 
@@ -119,45 +127,13 @@ function buildLayout(treeArr) {
   return nodes;
 }
 
-export default function SerializeDeserializeVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0]);
-  const [treeInput, setTreeInput] = useState("[1,2,3,null,null,4,5]");
-  const { tree, inputError } = useMemo(() => {
-    try {
-      const parsedTree = JSON.parse(treeInput); if (!Array.isArray(parsedTree)) throw new Error('tree must be an array');
-      return { tree: parsedTree, inputError: '' };
-    } catch (e) {
-      return { tree: "[1,2,3,null,null,4,5]", inputError: e.message };
-    }
-  }, [treeInput]);
-  const steps = useMemo(() => serializeSteps(tree), [tree]);
-  const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
-    usePlaybackState(steps.length);
-  const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); setTreeInput(JSON.stringify(e.tree)); handleReset(); }, [handleReset]);
-  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
-
-  const layout = useMemo(() => buildLayout(tree), [tree]);
-  const serialized = step?.serialized ?? [];
-  const phase = step?.phase ?? "init";
-  const highlightIdx = step?.highlightIdx ?? -1;
-  const ptr = step?.ptr ?? 0;
-
+// ─── Visualization Panel Component ────────────────────────────────────────
+function VisualizationPanel({ layout, step, serialized, phase, highlightIdx, ptr, EXAMPLES, applyEx, ex, treeInput, setTreeInput, handleReset, inputError }) {
   return (
-    <div className="sd-shell">
-        <ManualInputPanel
-          fields={[{"key":"tree","label":"tree","type":"array"}]}
-          values={{ tree: treeInput }}
-          onChange={(k, v) => { if (k === 'tree') setTreeInput(v); handleReset() }}
-          examples={EXAMPLES}
-          activeLabel={ex?.label}
-          applyExample={applyEx}
-          inputError={inputError}
-        />
-      
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
       <div className="sd-examples">
         {EXAMPLES.map(e => (
-          <button key={e.label} className={`sd-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>
+          <button key={e.label} className={`sd-chip ${ex?.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>
             {e.label}
           </button>
         ))}
@@ -239,19 +215,115 @@ export default function SerializeDeserializeVisualizer() {
 
       {step?.done && <div className="sd-result">✓ Serialize → Deserialize complete!</div>}
 
-      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
       <div className="sd-status">{step?.message ?? "Press Play to begin."}</div>
+    </div>
+  );
+}
+
+export default function SerializeDeserializeVisualizer() {
+  const [ex, setEx] = useState(EXAMPLES[0]);
+  const [treeInput, setTreeInput] = useState("[1,2,3,null,null,4,5]");
+  const { tree, inputError } = useMemo(() => {
+    try {
+      const parsedTree = JSON.parse(treeInput); if (!Array.isArray(parsedTree)) throw new Error('tree must be an array');
+      return { tree: parsedTree, inputError: '' };
+    } catch (e) {
+      return { tree: "[1,2,3,null,null,4,5]", inputError: e.message };
+    }
+  }, [treeInput]);
+  const steps = useMemo(() => serializeSteps(tree), [tree]);
+  const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
+    usePlaybackState(steps.length);
+  const step = stepIndex >= 0 ? steps[stepIndex] : null;
+  const applyEx = useCallback((e) => { setEx(e); setTreeInput(JSON.stringify(e.tree)); handleReset(); }, [handleReset]);
+  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
+
+  const layout = useMemo(() => buildLayout(tree), [tree]);
+  const serialized = step?.serialized ?? [];
+  const phase = step?.phase ?? "init";
+  const highlightIdx = step?.highlightIdx ?? -1;
+  const ptr = step?.ptr ?? 0;
+
+  const panelConfigs = useMemo(() => [
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: '🌳 Serialize & Deserialize Binary Tree', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
+  ], [])
+
+  const panelContents = useMemo(() => ({
+    code: (
+      <div style={{ position: 'relative' }}>
+        <CodeTracePanel
+          step={step}
+          codeLines={SOLUTION_CODE}
+          onActiveLineDomChange={setActiveLineDom}
+        />
+        {step && (
+          <CodePatternAnnotations
+            linePatterns={LINE_PATTERN_MAP}
+            currentPhase={step.phase}
+            activeLineDom={activeLineDom}
+            activeLine={step.activeLine}
+          />
+        )}
+      </div>
+    ),
+    viz: (
+      <VisualizationPanel
+        layout={layout}
+        step={step}
+        serialized={serialized}
+        phase={phase}
+        highlightIdx={highlightIdx}
+        ptr={ptr}
+        EXAMPLES={EXAMPLES}
+        applyEx={applyEx}
+        ex={ex}
+        treeInput={treeInput}
+        setTreeInput={setTreeInput}
+        handleReset={handleReset}
+        inputError={inputError}
+      />
+    ),
+  }), [step, layout, serialized, phase, highlightIdx, ptr, applyEx, ex, treeInput, handleReset, inputError, activeLineDom])
+
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  return (
+    <div className="sd-shell">
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.input && createPortal(
+              <ManualInputPanel
+                fields={[{ key: 'tree', label: 'tree', type: 'array' }]}
+                values={{ tree: treeInput }}
+                onChange={(k, v) => { if (k === 'tree') setTreeInput(v); handleReset() }}
+                examples={EXAMPLES}
+                activeLabel={ex?.label}
+                applyExample={applyEx}
+                inputError={inputError}
+              />,
+              panelDivs.input
+            )}
+            {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+            {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+          </>
+        )}
+      </>
       <FloatingPanel title="Playback Controls">
         <PlaybackControls
-        isPlaying={isPlaying} isDone={isDone} speed={speed}
-        onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-        prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
-        onSpeedChange={e => setSpeed(Number(e.target.value))}
-        showPatternOverlay={showPatternOverlay}
-        onShowPatternOverlayChange={setShowPatternOverlay}
-        patternOverlayLabel="Show pattern overlay"
-        showPatternOverlayToggle
-      />
+          isPlaying={isPlaying} isDone={isDone} speed={speed}
+          onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
+          prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
+          onSpeedChange={e => setSpeed(Number(e.target.value))}
+          showPatternOverlay={showPatternOverlay}
+          onShowPatternOverlayChange={setShowPatternOverlay}
+          patternOverlayLabel="Show pattern overlay"
+          showPatternOverlayToggle
+        />
       </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>

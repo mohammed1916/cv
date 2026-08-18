@@ -1,5 +1,7 @@
 ﻿import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 
@@ -41,6 +43,64 @@ const SOLUTION_CODE_INLINE = [
     { line: 11, text: '        return self.diameter' },
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
+
+function VisualizationPanel({ step, positions, edges, allNodes, inputError, applyExample }) {
+    return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, height: '100%', overflow: 'auto', padding: 16 }}>
+            <section className="dbt-panel main">
+                <header className="dbt-head">
+                    <span>Post-order DFS (depth tracking)</span>
+                    {inputError && <span className="dbt-error">{inputError}</span>}
+                </header>
+                <div className="dbt-body">
+                    <div className="dbt-examples">
+                        {EXAMPLES.map((example) => (
+                            <button key={example.label} className="dbt-chip" onClick={() => applyExample(example)}>{example.label}</button>
+                        ))}
+                    </div>
+                    <div className="dbt-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
+                        <svg style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }} width={CANVAS_W} height={CANVAS_H}>
+                            {edges.map(({ fromId, toId }) => {
+                                const from = positions.get(fromId)
+                                const to = positions.get(toId)
+                                if (!from || !to) return null
+                                return <line key={`${fromId}-${toId}`} x1={from.x} y1={from.y} x2={to.x} y2={to.y} stroke="var(--code-line)" strokeWidth={1.5} />
+                            })}
+                        </svg>
+                        {allNodes.map((node) => {
+                            const pos = positions.get(node.id)
+                            if (!pos) return null
+                            const isActive = step?.activeId === node.id
+                            const depthValue = step?.depthMap?.get(node.id)
+                            return (
+                                <motion.div key={node.id} className={`dbt-node ${isActive ? 'active' : ''} ${depthValue !== undefined ? 'done' : ''}`} style={{ left: pos.x - NODE_R, top: pos.y - NODE_R }} animate={{ scale: isActive ? 1.2 : 1 }} transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
+                                    {node.val}
+                                    {depthValue !== undefined && <span className="dbt-badge">{depthValue}</span>}
+                                </motion.div>
+                            )
+                        })}
+                    </div>
+                </div>
+            </section>
+            <section className="dbt-panel side">
+                <header className="dbt-head"><span>Diameter</span></header>
+                <div className="dbt-body">
+                    <div className="dbt-diameter-display">
+                        <span className="dbt-label">Current diameter</span>
+                        <motion.div className="dbt-diameter-val" key={step?.diameter} initial={{ scale: 0.7 }} animate={{ scale: 1 }}>{step?.diameter ?? 0}</motion.div>
+                    </div>
+                    <div className="dbt-depth-list">
+                        <span className="dbt-label">Depths computed</span>
+                        {allNodes.filter((node) => step?.depthMap?.has(node.id)).map((node) => <div key={node.id} className="dbt-depth-row"><span>node {node.val}</span><span className="dbt-depth-val">depth={step.depthMap.get(node.id)}</span></div>)}
+                        {!allNodes.some((node) => step?.depthMap?.has(node.id)) && <span className="dbt-empty">none yet</span>}
+                    </div>
+                    <div className={`dbt-result ${step?.phase === 'done' ? 'ok' : ''}`}>{step?.phase === 'done' ? `Diameter = ${step.diameter}` : 'Computing...'}</div>
+                </div>
+            </section>
+            <div className={`dbt-status ${step?.phase === 'done' ? 'ok' : ''}`}>{step?.message || 'Press Play to begin.'}</div>
+        </div>
+    )
+}
 
 function generateSteps(arr) {
     const root = buildTree(arr)
@@ -141,125 +201,29 @@ export default function DiameterBinaryTreeVisualizer() {
     const edges = step?.edges ?? []
     const allNodes = step?.allNodes ?? []
 
+    const panelConfigs = useMemo(() => [
+        { id: 'input', title: 'Input' },
+        { id: 'viz', title: 'Diameter of Binary Tree', dockMode: 'split-bottom' },
+        { id: 'code', title: 'Code', dockMode: 'split-right' },
+    ], [])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+    const codePanel = (
+        <div style={{ position: 'relative' }}>
+            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+            {showPatternOverlay && <CodePatternAnnotations linePatterns={LINE_PATTERN_MAP} currentPhase={step?.phase} activeLineDom={activeLineDom} activeLine={step?.activeLine} />}
+        </div>
+    )
+
     return (
         <div className="dbt-shell">
-      <ManualInputPanel
-        fields={[{"key":"arr","label":"arr","type":"string"}]}
-        values={{ arr: arrInput }}
-        onChange={(k, v) => { if (k === 'arr') setArrInput(v); handleReset() }}
-        examples={EXAMPLES}
-        applyExample={applyExample}
-        inputError={inputError}
-      />
-
-            <div className="dbt-top">
-                <section className="dbt-panel main">
-                    <header className="dbt-head">
-                        <span>Post-order DFS (depth tracking)</span>
-                        {inputError && <span className="dbt-error">{inputError}</span>}
-                    </header>
-                    <div className="dbt-body">
-                        <div className="dbt-examples">
-                            {EXAMPLES.map((ex) => (
-                                <button key={ex.label} className="dbt-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                            ))}
-                        </div>
-                        <input className="dbt-input" value={arrInput} onChange={(e) => { setArrInput(e.target.value); handleReset() }} />
-                        <div className="dbt-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
-                            <svg style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }} width={CANVAS_W} height={CANVAS_H}>
-                                {edges.map(({ fromId, toId }) => {
-                                    const from = positions.get(fromId)
-                                    const to = positions.get(toId)
-                                    if (!from || !to) return null
-                                    return <line key={`${fromId}-${toId}`} x1={from.x} y1={from.y} x2={to.x} y2={to.y} stroke="var(--code-line)" strokeWidth={1.5} />
-                                })}
-                            </svg>
-                            {allNodes.map((node) => {
-                                const pos = positions.get(node.id)
-                                if (!pos) return null
-                                const isActive = step?.activeId === node.id
-                                const depthVal = step?.depthMap?.get(node.id)
-                                return (
-                                    <motion.div
-                                        key={node.id}
-                                        className={`dbt-node ${isActive ? 'active' : ''} ${depthVal !== undefined ? 'done' : ''}`}
-                                        style={{ left: pos.x - NODE_R, top: pos.y - NODE_R }}
-                                        animate={isActive ? { scale: 1.2 } : { scale: 1 }}
-                                        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                                    >
-                                        {node.val}
-                                        {depthVal !== undefined && <span className="dbt-badge">{depthVal}</span>}
-                                    </motion.div>
-                                )
-                            })}
-                        </div>
-                    </div>
-                </section>
-
-                <section className="dbt-panel side">
-                    <header className="dbt-head"><span>Diameter</span></header>
-                    <div className="dbt-body">
-                        <div className="dbt-diameter-display">
-                            <span className="dbt-label">Current diameter</span>
-                            <motion.div
-                                className="dbt-diameter-val"
-                                key={step?.diameter}
-                                initial={{ scale: 0.7 }}
-                                animate={{ scale: 1 }}
-                            >
-                                {step?.diameter ?? 0}
-                            </motion.div>
-                        </div>
-                        <div className="dbt-depth-list">
-                            <span className="dbt-label">Depths computed</span>
-                            {allNodes.filter((n) => step?.depthMap?.has(n.id)).map((n) => (
-                                <div key={n.id} className="dbt-depth-row">
-                                    <span>node {n.val}</span>
-                                    <span className="dbt-depth-val">depth={step.depthMap.get(n.id)}</span>
-                                </div>
-                            ))}
-                            {!(allNodes.some((n) => step?.depthMap?.has(n.id))) && <span className="dbt-empty">none yet</span>}
-                        </div>
-                        <div className={`dbt-result ${step?.phase === 'done' ? 'ok' : ''}`}>
-                            {step?.phase === 'done' ? `Diameter = ${step.diameter}` : 'Computing…'}
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <div style={{ position: 'relative' }}>
-
-
-              <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-
-
-
-              {showPatternOverlay && (
-
-
-                <CodePatternAnnotations
-
-
-                  linePatterns={LINE_PATTERN_MAP}
-
-
-                  currentPhase={step?.phase}
-
-
-                  activeLineDom={activeLineDom}
-
-
-                  activeLine={step?.activeLine}
-
-
-                />
-
-
-              )}
-
-
-            </div>
-            <div className={`dbt-status ${step?.phase === 'done' ? 'ok' : ''}`}>{step?.message || 'Press Play to begin.'}</div>
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && <>
+                {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'arr', label: 'Level-order tree', type: 'string' }]} values={{ arr: arrInput }} onChange={(key, value) => { if (key === 'arr') setArrInput(value); handleReset() }} examples={EXAMPLES} applyExample={applyExample} inputError={inputError} />, panelDivs.input)}
+                {panelDivs.viz && createPortal(<VisualizationPanel step={step} positions={positions} edges={edges} allNodes={allNodes} inputError={inputError} applyExample={applyExample} />, panelDivs.viz)}
+                {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+            </>}
             <FloatingPanel title="Playback Controls">
         {showPatternOverlay && (
           <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />

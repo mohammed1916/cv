@@ -1,5 +1,7 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -8,6 +10,10 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './IntegerBreakVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+
+const LINE_PATTERN_MAP = {}
+const PATTERNS = []
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },
@@ -203,196 +209,88 @@ export default function IntegerBreakVisualizer() {
 
   const dpArr = step?.dp ?? makeInitialDp(n)
 
+  const panelConfigs = useMemo(() => [
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: '💰 DP Table Visualization', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
+  ], [])
+
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  const vizPanel = (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%', overflow: 'auto' }}>
+      <AnimatePresence mode="wait">
+        <motion.div key={stepIndex} className="integer-break-viz" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
+          <div className="integer-break-step-info">
+            <h3>{step?.message || 'Press Play or Step to begin filling the dp table.'}</h3>
+          </div>
+          {step && step.i != null && step.phase !== 'done' && (
+            <div style={{ padding: 14, borderRadius: 8, background: COLORS.surface, border: `1px solid ${COLORS.border}`, color: COLORS.text, display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <div style={{ fontSize: 13 }}>Computing <strong style={{ color: COLORS.current }}>dp[{step.i}]</strong></div>
+              {step.j != null ? (
+                <>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', fontFamily: 'monospace' }}>
+                    <span style={{ padding: '4px 10px', borderRadius: 6, border: `2px solid ${COLORS.operand}`, color: COLORS.operand }}>{step.j}</span>
+                    <span style={{ color: COLORS.dim }}>+</span>
+                    <span style={{ padding: '4px 10px', borderRadius: 6, border: `2px solid ${COLORS.operand}`, color: COLORS.operand }}>{step.i - step.j}</span>
+                    <span style={{ color: COLORS.dim }}>=</span>
+                    <span style={{ padding: '4px 10px', borderRadius: 6, border: `2px solid ${COLORS.current}`, color: COLORS.current }}>{step.i}</span>
+                  </div>
+                  <div style={{ fontFamily: 'monospace', fontSize: 13 }}>candidate = {step.factorA} × {step.factorB} = <strong style={{ color: COLORS.text }}>{step.candidate}</strong></div>
+                  <div style={{ fontFamily: 'monospace', fontSize: 13 }}>best dp[{step.i}] = <strong style={{ color: step.improved && step.phase === 'update' ? COLORS.filled : COLORS.text }}>{step.best}</strong>{step.phase === 'update' && step.improved && <span style={{ color: COLORS.filled, marginLeft: 8 }}>updated ↑</span>}</div>
+                </>
+              ) : (
+                <div style={{ fontSize: 13, color: COLORS.dim }}>Trying all splits j = 1 … {step.i - 1}</div>
+              )}
+            </div>
+          )}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+            <div style={{ fontSize: 12, color: COLORS.dim }}>dp[] array</div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+              {dpArr.map((val, idx) => (
+                <div key={idx} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+                  <div style={cellStyle(idx, val, step)}>{val}</div>
+                  <span style={{ fontSize: 11, color: COLORS.dim, fontFamily: 'monospace' }}>{idx}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', fontSize: 11, color: COLORS.dim }}>
+            <span><span style={{ color: COLORS.current }}>■</span> current dp[i]</span>
+            <span><span style={{ color: COLORS.operand }}>■</span> split operands</span>
+            <span><span style={{ color: COLORS.filled }}>■</span> filled</span>
+          </div>
+          <AnimatePresence>
+            {step?.phase === 'done' && (
+              <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} style={{ padding: 14, borderRadius: 8, background: '#22c55e22', border: `2px solid ${COLORS.filled}`, color: COLORS.filled, fontWeight: 700, fontSize: 15 }}>
+                Answer: maximum product for n = {n} is {step.answer}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  )
+
+  const codePanel = <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} />
+
   return (
     <div className="integer-break-shell">
-        <ManualInputPanel
-          fields={[{"key":"n","label":"n","type":"string"}]}
-          values={{ n: nInput }}
-          onChange={(k, v) => { if (k === 'n') setNInput(v); handleReset() }}
-          showExamples={false}
-          inputError={inputError}
-        />
-      <div className="integer-break-panel">
-        <div className="integer-break-panel-head">Input — Integer Break (n)</div>
-        <div className="integer-break-panel-body">
-          <label style={{ fontSize: 12, color: COLORS.dim }}>n (2 … {MAX_N})</label>
-          <input
-            type="number"
-            value={nInput}
-            onChange={(e) => { setNInput(e.target.value); handleReset() }}
-            className="integer-break-textarea"
-            style={{ flex: 'none', height: 40 }}
-            placeholder="Enter n, e.g. 10"
-          />
-          {inputError && <div className="integer-break-error">{inputError}</div>}
-          <div style={{ fontSize: 12, color: COLORS.dim }}>
-            Effective n = <strong style={{ color: COLORS.text }}>{n}</strong>. Break n into a sum of
-            at least two positive integers and maximize their product.
-          </div>
-        </div>
-      </div>
-
-      <div className="integer-break-panel">
-        <div className="integer-break-panel-head">Visualization — dp[i] = max(dp[i], max(j, dp[j]) × max(i−j, dp[i−j]))</div>
-        <div className="integer-break-panel-body">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={stepIndex}
-              className="integer-break-viz"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <div className="integer-break-step-info">
-                <h3>{step?.message || 'Press Play or Step to begin filling the dp table.'}</h3>
-              </div>
-
-              {/* Current computation card */}
-              {step && step.i != null && step.phase !== 'done' && (
-                <div style={{
-                  padding: 14,
-                  borderRadius: 8,
-                  background: COLORS.surface,
-                  border: `1px solid ${COLORS.border}`,
-                  color: COLORS.text,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 10,
-                }}>
-                  <div style={{ fontSize: 13 }}>
-                    Computing <strong style={{ color: COLORS.current }}>dp[{step.i}]</strong>
-                  </div>
-
-                  {step.j != null ? (
-                    <>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', fontFamily: 'monospace' }}>
-                        <span style={{
-                          padding: '4px 10px', borderRadius: 6,
-                          border: `2px solid ${COLORS.operand}`, color: COLORS.operand,
-                        }}>{step.j}</span>
-                        <span style={{ color: COLORS.dim }}>+</span>
-                        <span style={{
-                          padding: '4px 10px', borderRadius: 6,
-                          border: `2px solid ${COLORS.operand}`, color: COLORS.operand,
-                        }}>{step.i - step.j}</span>
-                        <span style={{ color: COLORS.dim }}>=</span>
-                        <span style={{
-                          padding: '4px 10px', borderRadius: 6,
-                          border: `2px solid ${COLORS.current}`, color: COLORS.current,
-                        }}>{step.i}</span>
-                      </div>
-                      <div style={{ fontFamily: 'monospace', fontSize: 13 }}>
-                        candidate = {step.factorA} × {step.factorB} ={' '}
-                        <strong style={{ color: COLORS.text }}>{step.candidate}</strong>
-                      </div>
-                      <div style={{ fontFamily: 'monospace', fontSize: 13 }}>
-                        best dp[{step.i}] ={' '}
-                        <strong style={{ color: step.improved && step.phase === 'update' ? COLORS.filled : COLORS.text }}>
-                          {step.best}
-                        </strong>
-                        {step.phase === 'update' && step.improved && (
-                          <span style={{ color: COLORS.filled, marginLeft: 8 }}>updated ↑</span>
-                        )}
-                      </div>
-                    </>
-                  ) : (
-                    <div style={{ fontSize: 13, color: COLORS.dim }}>
-                      Trying all splits j = 1 … {step.i - 1}
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* dp array */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                <div style={{ fontSize: 12, color: COLORS.dim }}>dp[] array</div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                  {dpArr.map((val, idx) => (
-                    <div key={idx} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
-                      <div style={cellStyle(idx, val, step)}>{val}</div>
-                      <span style={{ fontSize: 11, color: COLORS.dim, fontFamily: 'monospace' }}>{idx}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Legend */}
-              <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', fontSize: 11, color: COLORS.dim }}>
-                <span><span style={{ color: COLORS.current }}>■</span> current dp[i]</span>
-                <span><span style={{ color: COLORS.operand }}>■</span> split operands</span>
-                <span><span style={{ color: COLORS.filled }}>■</span> filled</span>
-              </div>
-
-              {/* Answer */}
-              <AnimatePresence>
-                {step?.phase === 'done' && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    style={{
-                      padding: 14,
-                      borderRadius: 8,
-                      background: '#22c55e22',
-                      border: `2px solid ${COLORS.filled}`,
-                      color: COLORS.filled,
-                      fontWeight: 700,
-                      fontSize: 15,
-                    }}
-                  >
-                    Answer: maximum product for n = {n} is {step.answer}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </div>
-
-      <div className="integer-break-panel">
-        <div className="integer-break-panel-head">Code</div>
-        <div className="integer-break-panel-body">
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-          />
-        </div>
-      </div>
-
-      {EXAMPLES.length > 0 && (
-        <div className="integer-break-examples">
-          {EXAMPLES.map((example, i) => {
-            const exN = example.n ?? example.inputs?.n
-            return (
-              <button
-                key={i}
-                className={`integer-break-example-btn${exN === n ? ' active' : ''}`}
-                onClick={() => { setNInput(String(exN)); handleReset() }}
-              >
-                {example.label || `Example ${i + 1}`}
-              </button>
-            )
-          })}
-        </div>
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.input && createPortal(<ManualInputPanel fields={[{ "key": "n", "label": "n", "type": "string" }]} values={{ n: nInput }} onChange={(k, v) => { if (k === 'n') setNInput(v); handleReset() }} examples={EXAMPLES} applyExample={(ex) => { setNInput(String(ex.n ?? 10)); handleReset() }} inputError={inputError} />, panelDivs.input)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+        </>
       )}
-
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-        />
-      </FloatingPanel>
+      {createPortal(
+        <FloatingPanel title="Playback Controls">
+          <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={(e) => setSpeed(Number(e.target.value))} />
+        </FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

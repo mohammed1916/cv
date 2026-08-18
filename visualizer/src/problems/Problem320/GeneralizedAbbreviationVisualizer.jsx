@@ -1,5 +1,7 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -7,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamples } from '../../config/examplesRegistry'
 import './GeneralizedAbbreviationVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'def generate_abbreviations(word):' },
@@ -188,6 +191,19 @@ function CharBox({ ch, state, isCurrent }) {
   )
 }
 
+function VisualizationPanel({ stepIndex, step, chars, previewAbbrev, results }) {
+  return (
+    <div className="generalized-abbreviation-panel-body" style={{ height: '100%', overflow: 'auto' }}>
+      <AnimatePresence mode="wait"><motion.div key={stepIndex} className="generalized-abbreviation-viz" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}>
+        <div className="generalized-abbreviation-step-info"><h3>{step?.message || 'Press play to trace the backtracking'}</h3></div>
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'flex-start' }}>{chars.map((character) => <CharBox key={character.idx} ch={character.ch} state={character.state} isCurrent={character.isCurrent} />)}</div>
+        {step && step.phase !== 'done' && <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: 12, borderRadius: 8, background: 'rgba(167,139,250,0.10)', border: '1px solid rgba(167,139,250,0.35)', flexWrap: 'wrap' }}><span style={{ fontSize: 12, color: '#627794' }}>Building</span><span style={{ fontFamily: 'monospace', fontSize: 22, fontWeight: 700, color: '#5577a4' }}>{previewAbbrev}</span><span style={{ marginLeft: 'auto', display: 'flex', gap: 16, fontSize: 12, color: '#627794' }}><span>index <b style={{ color: '#5577a4' }}>{step.index}</b></span><span>count <b style={{ color: step.count > 0 ? '#a78bfa' : 'var(--text)' }}>{step.count}</b></span></span></div>}
+        <div><div style={{ fontSize: 12, color: '#627794', marginBottom: 8 }}>Completed abbreviations ({results.length})</div><div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>{results.length === 0 && <span style={{ fontSize: 12, color: 'var(--text-muted)', fontStyle: 'italic' }}>none yet</span>}{results.map((result, index) => { const isNewest = index === step?.highlightResult; return <motion.span key={`${result}-${index}`} initial={isNewest ? { scale: 0.6, opacity: 0 } : false} animate={{ scale: 1, opacity: 1 }} transition={{ type: 'spring', stiffness: 320, damping: 22 }} style={{ padding: '6px 10px', borderRadius: 6, fontFamily: 'monospace', fontSize: 14, fontWeight: isNewest ? 700 : 500, color: isNewest ? '#0b1120' : 'var(--text)', background: isNewest ? '#22c55e' : 'rgba(148,163,184,0.12)', border: `1px solid ${isNewest ? '#22c55e' : 'rgba(148,163,184,0.25)'}` }}>{result === '' ? 'empty' : result}</motion.span> })}</div></div>
+      </motion.div></AnimatePresence>
+    </div>
+  )
+}
+
 export default function GeneralizedAbbreviationVisualizer() {
   const [inputValue, setInputValue] = useState('word')
 
@@ -216,148 +232,23 @@ export default function GeneralizedAbbreviationVisualizer() {
     step && step.phase !== 'done'
       ? `${step.partial}${step.count > 0 ? step.count : ''}` || '(empty so far)'
       : ''
+  const applyExample = useCallback((example) => { setInputValue(example.word || example.inputs?.word || example.label?.replace(/"/g, '') || ''); handleReset() }, [handleReset])
+  const panelConfigs = useMemo(() => [
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: 'Generalized Abbreviation', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
+  ], [])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
     <div className="generalized-abbreviation-shell">
-      <div className="generalized-abbreviation-panel">
-        <div className="generalized-abbreviation-panel-head">Input — word</div>
-        <div className="generalized-abbreviation-panel-body">
-          <input
-            type="text"
-            value={inputValue}
-            onChange={(e) => { setInputValue(e.target.value); handleReset() }}
-            className="generalized-abbreviation-textarea"
-            style={{ flex: '0 0 auto' }}
-            placeholder="Enter a short word (e.g. word)"
-          />
-          {inputError && (
-            <div
-              className="generalized-abbreviation-error"
-              style={isFatal ? undefined : { background: '#a78bfa20', border: '1px solid #a78bfa', color: '#a78bfa' }}
-            >
-              {inputError}
-            </div>
-          )}
-          <div style={{ fontSize: 12, color: '#627794', lineHeight: 1.5 }}>
-            Each character is either <span style={{ color: '#178740', fontWeight: 600 }}>kept</span> or{' '}
-            <span style={{ color: '#7e56f8', fontWeight: 600 }}>abbreviated</span> (counted). Backtracking explores
-            every combination, producing 2<sup>n</sup> abbreviations.
-          </div>
-        </div>
-      </div>
-
-      <div className="generalized-abbreviation-panel">
-        <div className="generalized-abbreviation-panel-head">Visualization</div>
-        <div className="generalized-abbreviation-panel-body">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={stepIndex}
-              className="generalized-abbreviation-viz"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-            >
-              <div className="generalized-abbreviation-step-info">
-                <h3>{step?.message || 'Press play to trace the backtracking'}</h3>
-              </div>
-
-              {/* Word with per-char decisions */}
-              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'flex-start' }}>
-                {chars.map((c) => (
-                  <CharBox key={c.idx} ch={c.ch} state={c.state} isCurrent={c.isCurrent} />
-                ))}
-              </div>
-
-              {/* Partial abbreviation being built */}
-              {step && step.phase !== 'done' && (
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 12,
-                    padding: 12,
-                    borderRadius: 8,
-                    background: 'rgba(167,139,250,0.10)',
-                    border: '1px solid rgba(167,139,250,0.35)',
-                    flexWrap: 'wrap',
-                  }}
-                >
-                  <span style={{ fontSize: 12, color: '#627794' }}>Building</span>
-                  <span style={{ fontFamily: 'monospace', fontSize: 22, fontWeight: 700, color: '#5577a4' }}>
-                    {previewAbbrev}
-                  </span>
-                  <span style={{ marginLeft: 'auto', display: 'flex', gap: 16, fontSize: 12, color: '#627794' }}>
-                    <span>index <b style={{ color: '#5577a4' }}>{step.index}</b></span>
-                    <span>count <b style={{ color: step.count > 0 ? '#a78bfa' : 'var(--text)' }}>{step.count}</b></span>
-                  </span>
-                </div>
-              )}
-
-              {/* Growing list of results */}
-              <div>
-                <div style={{ fontSize: 12, color: '#627794', marginBottom: 8 }}>
-                  Completed abbreviations ({results.length})
-                </div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                  {results.length === 0 && (
-                    <span style={{ fontSize: 12, color: 'var(--text-muted)', fontStyle: 'italic' }}>none yet</span>
-                  )}
-                  {results.map((r, i) => {
-                    const isNewest = i === step?.highlightResult
-                    return (
-                      <motion.span
-                        key={`${r}-${i}`}
-                        initial={isNewest ? { scale: 0.6, opacity: 0 } : false}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ type: 'spring', stiffness: 320, damping: 22 }}
-                        style={{
-                          padding: '6px 10px',
-                          borderRadius: 6,
-                          fontFamily: 'monospace',
-                          fontSize: 14,
-                          fontWeight: isNewest ? 700 : 500,
-                          color: isNewest ? '#0b1120' : 'var(--text)',
-                          background: isNewest ? '#22c55e' : 'rgba(148,163,184,0.12)',
-                          border: `1px solid ${isNewest ? '#22c55e' : 'rgba(148,163,184,0.25)'}`,
-                        }}
-                      >
-                        {r === '' ? '∅' : r}
-                      </motion.span>
-                    )
-                  })}
-                </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </div>
-
-      <div className="generalized-abbreviation-panel">
-        <div className="generalized-abbreviation-panel-head">Code</div>
-        <div className="generalized-abbreviation-panel-body">
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-          />
-        </div>
-      </div>
-
-      {EXAMPLES.length > 0 && (
-        <div className="generalized-abbreviation-examples">
-          {EXAMPLES.map((example, i) => (
-            <button
-              key={i}
-              className="generalized-abbreviation-example-btn"
-              onClick={() => { setInputValue(example.word || example.label || ''); handleReset() }}
-            >
-              {example.label || `Example ${i + 1}`}
-            </button>
-          ))}
-        </div>
-      )}
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && <>
+        {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'word', label: 'Word (max 6 chars)', type: 'string' }]} values={{ word: inputValue }} onChange={(_, value) => { setInputValue(value); handleReset() }} examples={EXAMPLES} applyExample={applyExample} inputError={inputError} />, panelDivs.input)}
+        {panelDivs.viz && createPortal(<VisualizationPanel stepIndex={stepIndex} step={step} chars={chars} previewAbbrev={previewAbbrev} results={results} />, panelDivs.viz)}
+        {panelDivs.code && createPortal(<CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} />, panelDivs.code)}
+      </>}
 
       <FloatingPanel title="Playback Controls">
         <PlaybackControls

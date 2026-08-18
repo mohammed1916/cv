@@ -1,5 +1,7 @@
 ﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import CodePatternAnnotations from "../../components/CodePatternAnnotations";
@@ -12,16 +14,17 @@ import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
 const SUBSTRINGCONCATENATION_PATTERNS = ['done', 'found', 'init', 'overflow', 'window']
+const PATTERNS = SUBSTRINGCONCATENATION_PATTERNS
 
 // Map which code line corresponds to which pattern
 const LINE_PATTERN_MAP = {
-  4: 'init',
-  7: 'window',
-  10: 'found',
-  11: 'found',
-  12: 'overflow',
-  13: 'found',
-  14: 'done',
+    4: 'init',
+    7: 'window',
+    10: 'found',
+    11: 'found',
+    12: 'overflow',
+    13: 'found',
+    14: 'done',
 }
 
 const SOLUTION_CODE = [
@@ -87,50 +90,12 @@ function generateSteps(s, words) {
     return steps;
 }
 
-export default function SubstringConcatenationVisualizer() {
-    const [ex, setEx] = useState(EXAMPLES[0]);
-  const [sInput, setSInput] = useState("barfoothefoobarman");
-  const [wordsInput, setWordsInput] = useState("[\"foo\",\"bar\"]");
-  const { s, words, inputError } = useMemo(() => {
-    try {
-      const parsedS = sInput;
-      const parsedWords = JSON.parse(wordsInput); if (!Array.isArray(parsedWords)) throw new Error('words must be an array');
-      return { s: parsedS, words: parsedWords, inputError: '' };
-    } catch (e) {
-      return { s: "barfoothefoobarman", words: "[\"foo\",\"bar\"]", inputError: e.message };
-    }
-  }, [sInput, wordsInput]);
-    const steps = useMemo(() => generateSteps(s, words), [s, words]);
-    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
-        usePlaybackState(steps.length);
-    const step = stepIndex >= 0 ? steps[stepIndex] : null;
-    const applyEx = useCallback((e) => { setEx(e); setSInput(String(e.s)); setWordsInput(JSON.stringify(e.words)); handleReset(); }, [handleReset]);;
-    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
-
-    const wlen = words[0].length;
-    const window = step?.window ?? null;
-    const wordStart = step?.wordStart ?? -1;
-    const wordEnd = step?.wordEnd ?? -1;
-    const seen = step?.seen ?? {};
-    const result = step?.result ?? [];
-    const phase = step?.phase ?? "init";
-    const freq = useMemo(() => { const f = {}; for (const w of words) f[w] = (f[w] || 0) + 1; return f; }, [words]);
-
+function VisualizationPanel({ wlen, window, wordStart, wordEnd, seen, result, phase, freq, step, words, s, activeExample, applyExample }) {
     return (
-        <div className="sc-shell">
-        <ManualInputPanel
-          fields={[{"key":"s","label":"s","type":"string"},{"key":"words","label":"words","type":"array"}]}
-          values={{ s: sInput, words: wordsInput }}
-          onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 'words') setWordsInput(v); handleReset() }}
-          examples={EXAMPLES}
-          activeLabel={ex?.label}
-          applyExample={applyEx}
-          inputError={inputError}
-        />
-      
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%', overflow: 'auto' }}>
             <div className="sc-examples">
                 {EXAMPLES.map(e => (
-                    <button key={e.label} className={`sc-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>
+                    <button key={e.label} className={`sc-chip ${activeExample?.label === e.label ? "active" : ""}`} onClick={() => applyExample(e)}>
                         {e.label}
                     </button>
                 ))}
@@ -211,35 +176,91 @@ export default function SubstringConcatenationVisualizer() {
             </div>
 
             {step?.done && <div className="sc-result">✓ Indices: [{result.join(", ")}]</div>}
+        </div>
+    )
+}
 
-            <div style={{ position: 'relative' }}>
-              <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+export default function SubstringConcatenationVisualizer() {
+    const [ex, setEx] = useState(EXAMPLES[0]);
+    const [sInput, setSInput] = useState("barfoothefoobarman");
+    const [wordsInput, setWordsInput] = useState("[\"foo\",\"bar\"]");
+    const { s, words, inputError } = useMemo(() => {
+        try {
+            const parsedS = sInput;
+            const parsedWords = JSON.parse(wordsInput); if (!Array.isArray(parsedWords)) throw new Error('words must be an array');
+            return { s: parsedS, words: parsedWords, inputError: '' };
+        } catch (e) {
+            return { s: "barfoothefoobarman", words: "[\"foo\",\"bar\"]", inputError: e.message };
+        }
+    }, [sInput, wordsInput]);
+    const steps = useMemo(() => generateSteps(s, words), [s, words]);
+    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length);
+    const step = stepIndex >= 0 ? steps[stepIndex] : null;
+    const applyEx = useCallback((e) => { setEx(e); setSInput(String(e.s)); setWordsInput(JSON.stringify(e.words)); handleReset(); }, [handleReset]);
+    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
-              {showPatternOverlay && (
+    const wlen = words[0]?.length || 1;
+    const window = step?.window ?? null;
+    const wordStart = step?.wordStart ?? -1;
+    const wordEnd = step?.wordEnd ?? -1;
+    const seen = step?.seen ?? {};
+    const result = step?.result ?? [];
+    const phase = step?.phase ?? "init";
+    const freq = useMemo(() => { const f = {}; for (const w of words) f[w] = (f[w] || 0) + 1; return f; }, [words]);
+
+    const panelConfigs = useMemo(() => [
+        { id: 'input', title: 'Input' },
+        { id: 'viz', title: '📍 Substring Concatenation', dockMode: 'split-bottom' },
+        { id: 'code', title: 'Code', dockMode: 'split-right' },
+    ], [])
+
+    const [panelDivs, setPanelDivs] = useState(null)
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+    const codePanel = (
+        <div style={{ position: 'relative' }}>
+            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+            {showPatternOverlay && (
                 <CodePatternAnnotations
-                  linePatterns={LINE_PATTERN_MAP}
-                  currentPhase={step?.phase}
-                  activeLineDom={activeLineDom}
-                  activeLine={step?.activeLine}
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
                 />
-              )}
-            </div>
-            <div className="sc-status">{step?.message ?? "Press Play to begin."}</div>
-            <FloatingPanel title="Playback Controls">
-              {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={SUBSTRINGCONCATENATION_PATTERNS} />
-              )}
-        <PlaybackControls
-                isPlaying={isPlaying} isDone={isDone} speed={speed}
-                onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-                prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
-                onSpeedChange={e => setSpeed(Number(e.target.value))}
-                showPatternOverlay={showPatternOverlay}
-                onShowPatternOverlayChange={setShowPatternOverlay}
-                patternOverlayLabel="Show pattern overlay"
-                showPatternOverlayToggle
-            />
-      </FloatingPanel>
+            )}
+        </div>
+    )
+
+    const vizPanel = <VisualizationPanel wlen={wlen} window={window} wordStart={wordStart} wordEnd={wordEnd} seen={seen} result={result} phase={phase} freq={freq} step={step} words={words} s={s} activeExample={ex} applyExample={applyEx} />
+
+    return (
+        <div className="sc-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.input && createPortal(<ManualInputPanel fields={[{ "key": "s", "label": "s", "type": "string" }, { "key": "words", "label": "words", "type": "array" }]} values={{ s: sInput, words: wordsInput }} onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 'words') setWordsInput(v); handleReset() }} examples={EXAMPLES} activeLabel={ex?.label} applyExample={applyEx} inputError={inputError} />, panelDivs.input)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                    {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+                </>
+            )}
+            {createPortal(
+                <FloatingPanel title="Playback Controls">
+                    {showPatternOverlay && (
+                        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+                    )}
+                    <PlaybackControls
+                        isPlaying={isPlaying} isDone={isDone} speed={speed}
+                        onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
+                        prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
+                        onSpeedChange={e => setSpeed(Number(e.target.value))}
+                        showPatternOverlay={showPatternOverlay}
+                        onShowPatternOverlayChange={setShowPatternOverlay}
+                        patternOverlayLabel="Show pattern overlay"
+                        showPatternOverlayToggle
+                    />
+                </FloatingPanel>,
+                document.body
+            )}
         </div>
     );
 }

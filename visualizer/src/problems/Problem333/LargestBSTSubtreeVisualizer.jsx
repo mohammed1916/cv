@@ -1,5 +1,7 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -8,6 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { getExamples } from '../../config/examplesRegistry'
 import { buildTree, buildEdges, collectNodes, computeLayout, parseTreeInput } from '../../components/treeUtils'
 import './LargestBSTSubtreeVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'from math import inf' },
@@ -195,6 +198,18 @@ function TreeView({ tree, layout, step }) {
   )
 }
 
+function VisualizationPanel({ best, stepIndex, step, tree, layout }) {
+  return (
+    <div className="largest-b-s-t-subtree-panel-body" style={{ height: '100%', overflow: 'auto' }}>
+      <div className="largest-b-s-t-subtree-readout">
+        <div className="largest-b-s-t-subtree-stat"><span className="largest-b-s-t-subtree-stat-label">Largest BST size</span><span className="largest-b-s-t-subtree-stat-value">{best}</span></div>
+        <div className="largest-b-s-t-subtree-legend"><span><i className="largest-b-s-t-subtree-dot valid" /> valid BST</span><span><i className="largest-b-s-t-subtree-dot invalid" /> not a BST</span><span><i className="largest-b-s-t-subtree-dot current" /> current node</span></div>
+      </div>
+      <AnimatePresence mode="wait"><motion.div key={stepIndex} className="largest-b-s-t-subtree-viz" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}><div className="largest-b-s-t-subtree-step-info"><h3>{step?.message || 'Press play (or Next) to run the postorder DFS.'}</h3></div><TreeView tree={tree} layout={layout} step={step} /></motion.div></AnimatePresence>
+    </div>
+  )
+}
+
 export default function LargestBSTSubtreeVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0].inputs || EXAMPLES[0]))
 
@@ -244,79 +259,23 @@ export default function LargestBSTSubtreeVisualizer() {
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
   const best = step ? step.best : 0
+  const applyExample = useCallback((example) => { setInputValue(JSON.stringify(example.inputs || example)); handleReset() }, [handleReset])
+  const panelConfigs = useMemo(() => [
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: 'Largest BST Subtree', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
+  ], [])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
     <div className="largest-b-s-t-subtree-shell">
-      <div className="largest-b-s-t-subtree-panel">
-        <div className="largest-b-s-t-subtree-panel-head">Input (level-order array, nulls allowed)</div>
-        <div className="largest-b-s-t-subtree-panel-body">
-          <textarea
-            value={inputValue}
-            onChange={(e) => { setInputValue(e.target.value); handleReset() }}
-            className="largest-b-s-t-subtree-textarea"
-            placeholder="e.g. [10,5,15,1,8,null,7]"
-          />
-          {parsed.error && <div className="largest-b-s-t-subtree-error">{parsed.error}</div>}
-        </div>
-      </div>
-
-      <div className="largest-b-s-t-subtree-panel">
-        <div className="largest-b-s-t-subtree-panel-head">Visualization</div>
-        <div className="largest-b-s-t-subtree-panel-body">
-          <div className="largest-b-s-t-subtree-readout">
-            <div className="largest-b-s-t-subtree-stat">
-              <span className="largest-b-s-t-subtree-stat-label">Largest BST size</span>
-              <span className="largest-b-s-t-subtree-stat-value">{best}</span>
-            </div>
-            <div className="largest-b-s-t-subtree-legend">
-              <span><i className="largest-b-s-t-subtree-dot valid" /> valid BST</span>
-              <span><i className="largest-b-s-t-subtree-dot invalid" /> not a BST</span>
-              <span><i className="largest-b-s-t-subtree-dot current" /> current node</span>
-            </div>
-          </div>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={stepIndex}
-              className="largest-b-s-t-subtree-viz"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-            >
-              <div className="largest-b-s-t-subtree-step-info">
-                <h3>{step?.message || 'Press play (or Next) to run the postorder DFS.'}</h3>
-              </div>
-              <TreeView tree={tree} layout={layout} step={step} />
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </div>
-
-      <div className="largest-b-s-t-subtree-panel">
-        <div className="largest-b-s-t-subtree-panel-head">Code</div>
-        <div className="largest-b-s-t-subtree-panel-body">
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-          />
-        </div>
-      </div>
-
-      {EXAMPLES.length > 0 && (
-        <div className="largest-b-s-t-subtree-examples">
-          {EXAMPLES.map((example, i) => (
-            <button
-              key={i}
-              className="largest-b-s-t-subtree-example-btn"
-              onClick={() => { setInputValue(JSON.stringify(example.inputs || example)); handleReset() }}
-            >
-              {example.label || `Example ${i + 1}`}
-            </button>
-          ))}
-        </div>
-      )}
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && <>
+        {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'tree', label: 'Level-order tree', type: 'string' }]} values={{ tree: inputValue }} onChange={(_, value) => { setInputValue(value); handleReset() }} examples={EXAMPLES} applyExample={applyExample} inputError={parsed.error} />, panelDivs.input)}
+        {panelDivs.viz && createPortal(<VisualizationPanel best={best} stepIndex={stepIndex} step={step} tree={tree} layout={layout} />, panelDivs.viz)}
+        {panelDivs.code && createPortal(<CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} />, panelDivs.code)}
+      </>}
 
       <FloatingPanel title="Playback Controls">
         <PlaybackControls

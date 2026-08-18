@@ -1,5 +1,7 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -8,6 +10,10 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './LongestSubstringwithAtMostKDistinctCharactersVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
+import CodePatternAnnotations from '../../components/CodePatternAnnotations'
+
+const LINE_PATTERN_MAP = {}
+const PATTERNS = []
 
 const SOLUTION_CODE = [
   { line: 1, text: 'def length_of_longest_substring_k_distinct(s, k):' },
@@ -148,13 +154,94 @@ const EXAMPLES =
   REGISTRY_EXAMPLES.length > 0
     ? REGISTRY_EXAMPLES
     : [
-        { label: 'eceba, k=2', s: 'eceba', k: 2 },
-        { label: 'aa, k=1', s: 'aa', k: 1 },
-        { label: 'abcadcacacaca, k=3', s: 'abcadcacacaca', k: 3 },
-        { label: 'k=0 edge', s: 'abc', k: 0 },
-      ]
+      { label: 'eceba, k=2', s: 'eceba', k: 2 },
+      { label: 'aa, k=1', s: 'aa', k: 1 },
+      { label: 'abcadcacacaca, k=3', s: 'abcadcacacaca', k: 3 },
+      { label: 'k=0 edge', s: 'abc', k: 0 },
+    ]
 
 const COL = { text: 'var(--text)', muted: 'var(--text-muted)', window: '#38bdf8', best: '#22c55e', over: '#ef4444' }
+
+function VisualizationPanel({ step, s, k, inputError, handleReset }) {
+  const view = step ?? {
+    left: 0, right: -1, counts: {}, distinct: 0, window: '', bestLen: 0, bestL: -1, bestR: -1, bestWindow: '',
+  }
+  const chars = s.split('')
+  const overLimit = view.distinct > k && k > 0
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%', overflow: 'auto' }}>
+      <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'flex-end' }}>
+        <label style={{ display: 'flex', flexDirection: 'column', gap: 4, flex: 1, minWidth: 160 }}>
+          <span style={{ fontSize: 12, color: COL.muted }}>String s</span>
+          <input readOnly value={s} className="longest-substringwith-at-most-k-distinct-characters-textarea" style={{ flex: 'none', minHeight: 0, height: 36 }} />
+        </label>
+        <label style={{ display: 'flex', flexDirection: 'column', gap: 4, width: 90 }}>
+          <span style={{ fontSize: 12, color: COL.muted }}>k</span>
+          <input readOnly value={k} className="longest-substringwith-at-most-k-distinct-characters-textarea" style={{ flex: 'none', minHeight: 0, height: 36 }} />
+        </label>
+      </div>
+
+      <AnimatePresence mode="wait">
+        <motion.div key={step ? step.activeLine : -1} className="longest-substringwith-at-most-k-distinct-characters-viz" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
+          <div className="longest-substringwith-at-most-k-distinct-characters-step-info">
+            <h3>{step?.message || 'Press play to begin'}</h3>
+          </div>
+
+          {!inputError && (
+            <>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                {chars.length === 0 && <span style={{ color: COL.muted, fontStyle: 'italic' }}>(empty string)</span>}
+                {chars.map((ch, i) => {
+                  const inWindow = i >= view.left && i <= view.right
+                  const isLeft = i === view.left && view.right >= view.left
+                  const isRight = i === view.right
+                  const inBest = view.bestR >= view.bestL && i >= view.bestL && i <= view.bestR
+                  const border = inBest ? `2px solid ${COL.best}` : inWindow ? `2px solid ${COL.window}` : '1px solid var(--border)'
+                  const marker = isLeft && isRight ? 'L,R' : isLeft ? 'L' : isRight ? 'R' : ''
+                  return (
+                    <div key={`${ch}-${i}`} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+                      <div style={{ height: 16, fontSize: 11, fontWeight: 700, color: '#a36907' }}>{marker}</div>
+                      <div style={{ width: 34, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 8, border, background: inWindow ? `${COL.window}22` : 'var(--surface2)', color: COL.text, fontFamily: 'monospace', fontSize: 18, fontWeight: 600 }}>{ch}</div>
+                      <div style={{ fontSize: 10, color: COL.muted }}>{i}</div>
+                    </div>
+                  )
+                })}
+              </div>
+
+              <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', color: COL.text, fontSize: 13 }}>
+                <span>left = <strong>{view.left}</strong></span>
+                <span>right = <strong>{view.right}</strong></span>
+                <span>window = <strong style={{ color: COL.window }}>"{view.window}"</strong></span>
+              </div>
+
+              <div>
+                <div style={{ fontSize: 12, color: COL.muted, marginBottom: 6 }}>
+                  count map — distinct = <strong style={{ color: overLimit ? COL.over : COL.text }}>{view.distinct}</strong> / k = {k}
+                  {overLimit && <span style={{ color: COL.over }}> (over limit, shrinking)</span>}
+                </div>
+                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                  {Object.keys(view.counts).length === 0 && <span style={{ color: COL.muted, fontStyle: 'italic' }}>empty</span>}
+                  {Object.entries(view.counts).map(([ch, c]) => (
+                    <div key={ch} style={{ display: 'flex', gap: 6, alignItems: 'center', padding: '4px 10px', borderRadius: 6, border: `1px solid ${overLimit ? COL.over : 'var(--border)'}`, background: 'var(--surface2)', color: COL.text, fontFamily: 'monospace', fontSize: 13 }}>
+                      <span>'{ch}'</span>
+                      <strong style={{ color: COL.window }}>{c}</strong>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div style={{ padding: '10px 14px', borderRadius: 8, border: `1px solid ${COL.best}`, background: `${COL.best}18`, color: COL.text, fontSize: 13 }}>
+                best length = <strong style={{ color: COL.best }}>{view.bestLen}</strong>
+                {view.bestWindow ? <> — window <strong style={{ color: COL.best }}>"{view.bestWindow}"</strong> [{view.bestL}, {view.bestR}]</> : <> — no window yet</>}
+              </div>
+            </>
+          )}
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  )
+}
 
 export default function LongestSubstringwithAtMostKDistinctCharactersVisualizer() {
   const [sInput, setSInput] = useState('eceba')
@@ -171,228 +258,38 @@ export default function LongestSubstringwithAtMostKDistinctCharactersVisualizer(
   const k = inputError ? 0 : Number.parseInt(kInput, 10)
 
   const steps = useMemo(() => (inputError ? [] : generateSteps(s, k)), [s, k, inputError])
-  const {
-    stepIndex, setStepIndex, stepForward, stepBack, togglePlay,
-    handleReset, isPlaying, speed, setSpeed, isDone,
-  } = usePlaybackState(steps.length)
+  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
 
-  const view = step ?? {
-    left: 0, right: -1, counts: {}, distinct: 0, window: '', bestLen: 0, bestL: -1, bestR: -1, bestWindow: '',
-  }
-  const chars = s.split('')
-  const overLimit = view.distinct > k && k > 0
+  const panelConfigs = useMemo(() => [
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: '🪟 Sliding Window', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
+  ], [])
+
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+  const codePanel = <CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} />
+  const vizPanel = <VisualizationPanel step={step} s={s} k={k} inputError={inputError} handleReset={handleReset} />
 
   return (
     <div className="longest-substringwith-at-most-k-distinct-characters-shell">
-        <ManualInputPanel
-          fields={[{"key":"s","label":"s","type":"string"},{"key":"k","label":"k","type":"string"}]}
-          values={{ s: sInput, k: kInput }}
-          onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 'k') setKInput(v); handleReset() }}
-          showExamples={false}
-          inputError={inputError}
-        />
-      <div className="longest-substringwith-at-most-k-distinct-characters-panel">
-        <div className="longest-substringwith-at-most-k-distinct-characters-panel-head">Input</div>
-        <div className="longest-substringwith-at-most-k-distinct-characters-panel-body">
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'flex-end' }}>
-            <label style={{ display: 'flex', flexDirection: 'column', gap: 4, flex: 1, minWidth: 160 }}>
-              <span style={{ fontSize: 12, color: COL.muted }}>String s</span>
-              <input
-                value={sInput}
-                onChange={(e) => { setSInput(e.target.value); handleReset() }}
-                className="longest-substringwith-at-most-k-distinct-characters-textarea"
-                style={{ flex: 'none', minHeight: 0, height: 36 }}
-                placeholder="e.g. eceba"
-              />
-            </label>
-            <label style={{ display: 'flex', flexDirection: 'column', gap: 4, width: 90 }}>
-              <span style={{ fontSize: 12, color: COL.muted }}>k</span>
-              <input
-                value={kInput}
-                onChange={(e) => { setKInput(e.target.value); handleReset() }}
-                className="longest-substringwith-at-most-k-distinct-characters-textarea"
-                style={{ flex: 'none', minHeight: 0, height: 36 }}
-                placeholder="2"
-              />
-            </label>
-          </div>
-          {inputError && <div className="longest-substringwith-at-most-k-distinct-characters-error">{inputError}</div>}
-        </div>
-      </div>
-
-      <div className="longest-substringwith-at-most-k-distinct-characters-panel">
-        <div className="longest-substringwith-at-most-k-distinct-characters-panel-head">Visualization</div>
-        <div className="longest-substringwith-at-most-k-distinct-characters-panel-body">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={stepIndex}
-              className="longest-substringwith-at-most-k-distinct-characters-viz"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="longest-substringwith-at-most-k-distinct-characters-step-info">
-                <h3>{step?.message || 'Press play to begin'}</h3>
-              </div>
-
-              {!inputError && (
-                <>
-                  {/* String boxes with window shading + pointers */}
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                    {chars.length === 0 && (
-                      <span style={{ color: COL.muted, fontStyle: 'italic' }}>(empty string)</span>
-                    )}
-                    {chars.map((ch, i) => {
-                      const inWindow = i >= view.left && i <= view.right
-                      const isLeft = i === view.left && view.right >= view.left
-                      const isRight = i === view.right
-                      const inBest = view.bestR >= view.bestL && i >= view.bestL && i <= view.bestR
-                      const border = inBest
-                        ? `2px solid ${COL.best}`
-                        : inWindow
-                          ? `2px solid ${COL.window}`
-                          : '1px solid var(--border)'
-                      const marker = isLeft && isRight ? 'L,R' : isLeft ? 'L' : isRight ? 'R' : ''
-                      return (
-                        <div key={`${ch}-${i}`} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-                          <div style={{ height: 16, fontSize: 11, fontWeight: 700, color: '#a36907' }}>{marker}</div>
-                          <div
-                            style={{
-                              width: 34,
-                              height: 40,
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              borderRadius: 8,
-                              border,
-                              background: inWindow ? `${COL.window}22` : 'var(--surface2)',
-                              color: COL.text,
-                              fontFamily: 'monospace',
-                              fontSize: 18,
-                              fontWeight: 600,
-                            }}
-                          >
-                            {ch}
-                          </div>
-                          <div style={{ fontSize: 10, color: COL.muted }}>{i}</div>
-                        </div>
-                      )
-                    })}
-                  </div>
-
-                  {/* Metrics */}
-                  <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', color: COL.text, fontSize: 13 }}>
-                    <span>left = <strong>{view.left}</strong></span>
-                    <span>right = <strong>{view.right}</strong></span>
-                    <span>window = <strong style={{ color: COL.window }}>"{view.window}"</strong></span>
-                  </div>
-
-                  {/* Char -> count map */}
-                  <div>
-                    <div style={{ fontSize: 12, color: COL.muted, marginBottom: 6 }}>
-                      count map — distinct = <strong style={{ color: overLimit ? COL.over : COL.text }}>{view.distinct}</strong> / k = {k}
-                      {overLimit && <span style={{ color: COL.over }}> (over limit, shrinking)</span>}
-                    </div>
-                    <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                      {Object.keys(view.counts).length === 0 && (
-                        <span style={{ color: COL.muted, fontStyle: 'italic' }}>empty</span>
-                      )}
-                      {Object.entries(view.counts).map(([ch, c]) => (
-                        <div
-                          key={ch}
-                          style={{
-                            display: 'flex',
-                            gap: 6,
-                            alignItems: 'center',
-                            padding: '4px 10px',
-                            borderRadius: 6,
-                            border: `1px solid ${overLimit ? COL.over : 'var(--border)'}`,
-                            background: 'var(--surface2)',
-                            color: COL.text,
-                            fontFamily: 'monospace',
-                            fontSize: 13,
-                          }}
-                        >
-                          <span>'{ch}'</span>
-                          <strong style={{ color: COL.window }}>{c}</strong>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Best window */}
-                  <div
-                    style={{
-                      padding: '10px 14px',
-                      borderRadius: 8,
-                      border: `1px solid ${COL.best}`,
-                      background: `${COL.best}18`,
-                      color: COL.text,
-                      fontSize: 13,
-                    }}
-                  >
-                    best length = <strong style={{ color: COL.best }}>{view.bestLen}</strong>
-                    {view.bestWindow ? (
-                      <> — window <strong style={{ color: COL.best }}>"{view.bestWindow}"</strong> [{view.bestL}, {view.bestR}]</>
-                    ) : (
-                      <> — no window yet</>
-                    )}
-                  </div>
-                </>
-              )}
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </div>
-
-      <div className="longest-substringwith-at-most-k-distinct-characters-panel">
-        <div className="longest-substringwith-at-most-k-distinct-characters-panel-head">Code</div>
-        <div className="longest-substringwith-at-most-k-distinct-characters-panel-body">
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-          />
-        </div>
-      </div>
-
-      {EXAMPLES.length > 0 && (
-        <div className="longest-substringwith-at-most-k-distinct-characters-examples">
-          {EXAMPLES.map((example, i) => (
-            <button
-              key={i}
-              className="longest-substringwith-at-most-k-distinct-characters-example-btn"
-              onClick={() => {
-                setSInput(String(example.s ?? ''))
-                setKInput(String(example.k ?? 0))
-                handleReset()
-              }}
-            >
-              {example.label || `Example ${i + 1}`}
-            </button>
-          ))}
-        </div>
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.input && createPortal(<ManualInputPanel fields={[{ "key": "s", "label": "s", "type": "string" }, { "key": "k", "label": "k", "type": "string" }]} values={{ s: sInput, k: kInput }} onChange={(k, v) => { if (k === 's') setSInput(v); if (k === 'k') setKInput(v); handleReset() }} examples={EXAMPLES} applyExample={(ex) => { setSInput(String(ex.s ?? '')); setKInput(String(ex.k ?? 0)); handleReset() }} inputError={inputError} />, panelDivs.input)}
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+          {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+        </>
       )}
-
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-        />
-      </FloatingPanel>
+      {createPortal(
+        <FloatingPanel title="Playback Controls">
+          <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={(e) => setSpeed(Number(e.target.value))} />
+        </FloatingPanel>,
+        document.body
+      )}
     </div>
   )
 }

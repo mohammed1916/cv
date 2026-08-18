@@ -1,5 +1,7 @@
 ﻿import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
@@ -182,6 +184,36 @@ function generateSteps(gridInput) {
 
 const EXAMPLES = getExamples('rotting-oranges')
 
+function VisualizationPanel({ grid, step, inputError, applyExample }) {
+  const activeGrid = step?.grid || grid
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, height: '100%', overflow: 'auto', padding: 16 }}>
+      <section className="rot-panel grid">
+        <header className="rot-head"><span>Grid BFS Simulation</span>{inputError && <span className="rot-error">{inputError}</span>}</header>
+        <div className="rot-body">
+          <div className="rot-examples">{EXAMPLES.map((example) => <button key={example.label} className="rot-chip" onClick={() => applyExample(example)}>{example.label}</button>)}</div>
+          <div className="rot-grid" style={{ gridTemplateColumns: `repeat(${activeGrid[0]?.length || 1}, minmax(0, 1fr))` }}>
+            {activeGrid.flatMap((row, rowIndex) => row.map((cell, columnIndex) => {
+              const current = step?.current?.[0] === rowIndex && step?.current?.[1] === columnIndex
+              const neighbor = step?.neighbor?.[0] === rowIndex && step?.neighbor?.[1] === columnIndex
+              return <motion.div key={`${rowIndex}-${columnIndex}`} className={`rot-cell v${cell} ${current ? 'current' : ''} ${neighbor ? 'neighbor' : ''}`} animate={{ scale: current ? [1, 1.08, 1] : 1 }}><span>{cell}</span><small>{rowIndex},{columnIndex}</small></motion.div>
+            }))}
+          </div>
+        </div>
+      </section>
+      <section className="rot-panel side">
+        <header className="rot-head"><span>Frontier State</span></header>
+        <div className="rot-body">
+          <div className="rot-metrics"><div><span>minute</span><strong>{step?.minutes ?? 0}</strong></div><div><span>fresh</span><strong>{step?.fresh ?? 0}</strong></div><div><span>frontier</span><strong>{step?.queue?.length ?? 0}</strong></div></div>
+          <div><div className="rot-label">Queue (next cells)</div><div className="rot-queue"><AnimatePresence>{(step?.queue || []).map(([rowIndex, columnIndex], index) => <motion.span key={`${rowIndex}-${columnIndex}-${index}`} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>({rowIndex},{columnIndex})</motion.span>)}</AnimatePresence></div></div>
+          <div className={`rot-result ${step?.phase === 'done' ? (step?.ok ? 'ok' : 'bad') : ''}`}>{step?.phase === 'done' ? (step.ok ? `Return ${step.minutes}` : 'Return -1') : 'BFS wave in progress'}</div>
+        </div>
+      </section>
+      <div className={`rot-status ${step?.phase === 'done' ? (step?.ok ? 'ok' : 'bad') : ''}`}>{step?.message || 'Press Play to begin.'}</div>
+    </div>
+  )
+}
+
 export default function RottingOrangesVisualizer() {
   const [gridInput, setGridInput] = useState('[[2,1,1],[1,1,0],[0,1,1]]')
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
@@ -203,90 +235,22 @@ export default function RottingOrangesVisualizer() {
     handleReset()
   }, [handleReset])
 
+  const panelConfigs = useMemo(() => [
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: 'Rotting Oranges BFS', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
+  ], [])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
   return (
     <div className="rot-shell">
-      <ManualInputPanel
-        fields={[{"key":"grid","label":"grid","type":"string"}]}
-        values={{ grid: gridInput }}
-        onChange={(k, v) => { if (k === 'grid') setGridInput(v); handleReset() }}
-        examples={EXAMPLES}
-        applyExample={applyExample}
-        inputError={inputError}
-      />
-
-      <div className="rot-top">
-        <section className="rot-panel grid">
-          <header className="rot-head">
-            <span>Grid BFS Simulation</span>
-            {inputError && <span className="rot-error">{inputError}</span>}
-          </header>
-          <div className="rot-body">
-            <div className="rot-examples">
-              {EXAMPLES.map((ex) => (
-                <button key={ex.label} className="rot-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-              ))}
-            </div>
-            <input
-              className="rot-input"
-              value={gridInput}
-              onChange={(e) => { setGridInput(e.target.value); handleReset() }}
-              placeholder="[[2,1,1],[1,1,0],[0,1,1]]"
-            />
-            <div className="rot-grid" style={{ gridTemplateColumns: `repeat(${step?.grid?.[0]?.length || grid[0].length}, minmax(0, 1fr))` }}>
-              {(step?.grid || grid).flatMap((row, r) => row.map((cell, c) => {
-                const current = step?.current?.[0] === r && step?.current?.[1] === c
-                const neighbor = step?.neighbor?.[0] === r && step?.neighbor?.[1] === c
-                return (
-                  <motion.div
-                    key={`${r}-${c}`}
-                    className={`rot-cell v${cell} ${current ? 'current' : ''} ${neighbor ? 'neighbor' : ''}`}
-                    animate={current ? { scale: [1, 1.08, 1] } : { scale: 1 }}
-                  >
-                    <span>{cell}</span>
-                    <small>{r},{c}</small>
-                  </motion.div>
-                )
-              }))}
-            </div>
-          </div>
-        </section>
-
-        <section className="rot-panel side">
-          <header className="rot-head"><span>Frontier State</span></header>
-          <div className="rot-body">
-            <div className="rot-metrics">
-              <div><span>minute</span><strong>{step?.minutes ?? 0}</strong></div>
-              <div><span>fresh</span><strong>{step?.fresh ?? 0}</strong></div>
-              <div><span>frontier</span><strong>{step?.queue?.length ?? 0}</strong></div>
-            </div>
-            <div>
-              <div className="rot-label">Queue (next cells)</div>
-              <div className="rot-queue">
-                <AnimatePresence>
-                  {(step?.queue || []).map(([r, c], idx) => (
-                    <motion.span
-                      key={`${r}-${c}-${idx}`}
-                      initial={{ opacity: 0, y: 6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0 }}
-                    >
-                      ({r},{c})
-                    </motion.span>
-                  ))}
-                </AnimatePresence>
-              </div>
-            </div>
-            <div className={`rot-result ${step?.phase === 'done' ? (step?.ok ? 'ok' : 'bad') : ''}`}>
-              {step?.phase === 'done' ? (step.ok ? `Return ${step.minutes}` : 'Return -1') : 'BFS wave in progress'}
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-      <div className={`rot-status ${step?.phase === 'done' ? (step?.ok ? 'ok' : 'bad') : ''}`}>
-        {step?.message || 'Press Play to begin.'}
-      </div>
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && <>
+        {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'grid', label: 'Grid', type: 'string' }]} values={{ grid: gridInput }} onChange={(key, value) => { if (key === 'grid') setGridInput(value); handleReset() }} examples={EXAMPLES} applyExample={applyExample} inputError={inputError} />, panelDivs.input)}
+        {panelDivs.viz && createPortal(<VisualizationPanel grid={grid} step={step} inputError={inputError} applyExample={applyExample} />, panelDivs.viz)}
+        {panelDivs.code && createPortal(<CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />, panelDivs.code)}
+      </>}
       <FloatingPanel title="Playback Controls">
         <PlaybackControls
         isPlaying={isPlaying}

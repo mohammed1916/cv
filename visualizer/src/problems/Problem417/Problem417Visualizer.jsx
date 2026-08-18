@@ -226,6 +226,7 @@ function Problem417Visualizer() {
 
   const [heights, setHeights] = useState(defaultHeights)
   const [inputValue, setInputValue] = useState(JSON.stringify(defaultHeights))
+  const [inputError, setInputError] = useState('')
 
   const steps = useMemo(() => generateSteps(heights).map((current) => ({
       ...current,
@@ -243,17 +244,24 @@ function Problem417Visualizer() {
       const parsed = JSON.parse(inputValue)
       if (!Array.isArray(parsed) || !parsed.length || !parsed.every(row => Array.isArray(row) && row.length === parsed[0].length && row.every(Number.isFinite))) throw new Error('Enter a non-empty rectangular JSON matrix of numbers.')
       setHeights(parsed)
+      setInputError('')
       reset()
     } catch (e) {
-      // Keep the current runnable grid in place; the inline input error below
-      // tells the learner exactly why it was not applied.
-      setInputValue((value) => value)
+      setInputError(e.message || 'Enter a valid non-empty rectangular JSON matrix of numbers.')
     }
   }, [inputValue, reset])
 
   const handleReset = useCallback(() => {
     setHeights(defaultHeights)
     setInputValue(JSON.stringify(defaultHeights))
+    setInputError('')
+    reset()
+  }, [reset])
+
+  const applyExample = useCallback((example) => {
+    setHeights(example.input)
+    setInputValue(JSON.stringify(example.input))
+    setInputError('')
     reset()
   }, [reset])
 
@@ -365,12 +373,16 @@ function Problem417Visualizer() {
         <div className="paw-panel paw-controls">
           <div className="paw-panel-head">Input</div>
           <div className="paw-panel-body">
+            <div className="paw-examples">
+              {EXAMPLES.map((example) => <button key={example.label} className="paw-button paw-button-secondary" onClick={() => applyExample(example)}>{example.label}</button>)}
+            </div>
             <textarea
               className="paw-input"
               value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
+              onChange={(e) => { setInputValue(e.target.value); setInputError('') }}
               rows={3}
             />
+            {inputError && <div className="paw-input-error">{inputError}</div>}
             <button className="paw-button" onClick={handleRun}>
               Run
             </button>

@@ -1,5 +1,7 @@
 ﻿import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
@@ -125,6 +127,27 @@ function TreeViz({ root, checkingId, matchId, foundId, label, accent }) {
     )
 }
 
+function VisualizationPanel({ root, sub, step, matchId, rootError, subError, applyExample }) {
+    return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, height: '100%', overflow: 'auto', padding: 16 }}>
+            <div className="sot-controls-row">
+                <div className="sot-examples">
+                    {EXAMPLES.map((example) => <button key={example.label} className="sot-chip" onClick={() => applyExample(example)}>{example.label}</button>)}
+                </div>
+                {(rootError || subError) && <span className="sot-error">{rootError || subError}</span>}
+            </div>
+            <div className="sot-trees-row">
+                <TreeViz root={root} checkingId={step?.checkingId} matchId={matchId} foundId={matchId} label="Root" accent="#89b4fa" />
+                <div className="sot-vs">vs</div>
+                <TreeViz root={sub} checkingId={null} matchId={null} foundId={null} label="SubRoot" accent="#a6e3a1" />
+            </div>
+            {step?.result === true && <div className="sot-result match">Subtree found.</div>}
+            {step?.phase === 'done' && step?.result === false && <div className="sot-result no-match">Not a subtree.</div>}
+            <div className="sot-status">{step?.message || 'Press Play to begin.'}</div>
+        </div>
+    )
+}
+
 export default function SubtreeVisualizer() {
     const [rootInput, setRootInput] = useState('[3,4,5,1,2]')
     const [subInput, setSubInput] = useState('[4,1,2]')
@@ -148,40 +171,22 @@ export default function SubtreeVisualizer() {
 
     const matchId = step?.result === true ? step?.checkingId : null
 
+    const panelConfigs = useMemo(() => [
+        { id: 'input', title: 'Input' },
+        { id: 'viz', title: 'Subtree Comparison', dockMode: 'split-bottom' },
+        { id: 'code', title: 'Code', dockMode: 'split-right' },
+    ], [])
+    const [panelDivs, setPanelDivs] = useState(null)
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
     return (
         <div className="sot-shell">
-      <ManualInputPanel
-        fields={[{"key":"root","label":"root","type":"string"},{"key":"sub","label":"sub","type":"string"}]}
-        values={{ root: rootInput, sub: subInput }}
-        onChange={(k, v) => { if (k === 'root') setRootInput(v); if (k === 'sub') setSubInput(v); handleReset() }}
-        examples={EXAMPLES}
-        applyExample={applyExample}
-      />
-
-            <div className="sot-controls-row">
-                <div className="sot-examples">
-                    {EXAMPLES.map((ex) => (
-                        <button key={ex.label} className="sot-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                    ))}
-                </div>
-                <div className="sot-inputs">
-                    <label>Root tree: <input className="sot-input" value={rootInput} onChange={(e) => { setRootInput(e.target.value); handleReset() }} /></label>
-                    <label>Sub tree: <input className="sot-input" value={subInput} onChange={(e) => { setSubInput(e.target.value); handleReset() }} /></label>
-                </div>
-                {(rootErr || subErr) && <span className="sot-error">{rootErr || subErr}</span>}
-            </div>
-
-            <div className="sot-trees-row">
-                <TreeViz root={root} checkingId={step?.checkingId} matchId={matchId} foundId={matchId} label="Root" accent="#89b4fa" />
-                <div className="sot-vs">vs</div>
-                <TreeViz root={sub} checkingId={null} matchId={null} foundId={null} label="SubRoot" accent="#a6e3a1" />
-            </div>
-
-            {step?.result === true && <div className="sot-result match">✓ Subtree found!</div>}
-            {step?.phase === 'done' && step?.result === false && <div className="sot-result no-match">✗ Not a subtree</div>}
-
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-            <div className="sot-status">{step?.message || 'Press Play to begin.'}</div>
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && <>
+                {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'root', label: 'Root tree', type: 'string' }, { key: 'sub', label: 'Subtree', type: 'string' }]} values={{ root: rootInput, sub: subInput }} onChange={(key, value) => { if (key === 'root') setRootInput(value); if (key === 'sub') setSubInput(value); handleReset() }} examples={EXAMPLES} applyExample={applyExample} inputError={rootErr || subErr} />, panelDivs.input)}
+                {panelDivs.viz && createPortal(<VisualizationPanel root={root} sub={sub} step={step} matchId={matchId} rootError={rootErr} subError={subErr} applyExample={applyExample} />, panelDivs.viz)}
+                {panelDivs.code && createPortal(<CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />, panelDivs.code)}
+            </>}
             <FloatingPanel title="Playback Controls">
         <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}

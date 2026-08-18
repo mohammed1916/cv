@@ -1,5 +1,7 @@
 ﻿import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
@@ -47,6 +49,77 @@ function nodePos(count, width = 400, height = 260) {
     out[i] = { x: cX + r * Math.cos(a), y: cY + r * Math.sin(a) }
   }
   return out
+}
+
+// ─── Visualization Panel Component ────────────────────────────────────────
+function VisualizationPanel({ numCourses, step, positions, edges, EXAMPLES, applyExample, inputError }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
+      <section className="cs2-panel graph" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+        <header className="cs2-head">
+          <span>Graph & Topological Flow</span>
+          {inputError && <span className="cs2-error">{inputError}</span>}
+        </header>
+        <div className="cs2-body" style={{ flex: 1 }}>
+          <div className="cs2-examples">
+            {EXAMPLES.map((ex) => (
+              <button key={ex.label} className="cs2-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
+            ))}
+          </div>
+          <div className="cs2-canvas" style={{ flex: 1 }}>
+            <GraphCanvas3D
+              nodes={Array.from({ length: numCourses }, (_, i) => ({
+                id: i,
+                label: String(i),
+                x: positions[i]?.x ?? 200,
+                y: positions[i]?.y ?? 130,
+              }))}
+              edges={edges.map(([u, v]) => ({ fromId: u, toId: v }))}
+              visitedSet={new Set(step?.order ?? [])}
+              activeNode={step?.node ?? null}
+              activeNeighbor={step?.nxt ?? null}
+              cloneEdgeSet={new Set()}
+              width={400}
+              height={260}
+              isClone={false}
+              nodeRadius={16}
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="cs2-panel side" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+        <header className="cs2-head"><span>Queue / Order</span></header>
+        <div className="cs2-body" style={{ flex: 1 }}>
+          <div>
+            <div className="cs2-label">Queue</div>
+            <div className="cs2-list">
+              <AnimatePresence>
+                {(step?.queue || []).map((v) => (
+                  <motion.span key={`q-${v}`} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+                    {v}
+                  </motion.span>
+                ))}
+              </AnimatePresence>
+            </div>
+          </div>
+          <div>
+            <div className="cs2-label">Topological Order</div>
+            <div className="cs2-list order">
+              {(step?.order || []).map((v, idx) => <span key={`o-${v}-${idx}`}>{v}</span>)}
+            </div>
+          </div>
+          <div className={`cs2-result ${step?.phase === 'done' ? (step?.ok ? 'ok' : 'bad') : ''}`}>
+            {step?.phase === 'done' ? (step.ok ? `Return [${step.order.join(', ')}]` : 'Return []') : 'Running Kahn BFS'}
+          </div>
+        </div>
+      </section>
+
+      <div className={`cs2-status ${step?.phase === 'done' ? (step?.ok ? 'ok' : 'bad') : ''}`} style={{ padding: '8px 0' }}>
+        {step?.message || 'Press Play to start.'}
+      </div>
+    </div>
+  )
 }
 
 function generateSteps(numCourses, prerequisites) {
@@ -148,103 +221,93 @@ export default function CourseScheduleIIVisualizer() {
     handleReset()
   }, [handleReset])
 
-  return (
-    <div className="cs2-shell">
-      <ManualInputPanel
-        fields={[{"key":"num","label":"num","type":"number"},{"key":"pre","label":"pre","type":"array"}]}
-        values={{ num: numInput, pre: preInput }}
-        onChange={(k, v) => { if (k === 'num') setNumInput(v); if (k === 'pre') setPreInput(v); handleReset() }}
-        examples={EXAMPLES}
+  const panelConfigs = useMemo(() => [
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: '📊 Course Schedule - Topological Sort', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
+  ], [])
+
+  const panelContents = useMemo(() => ({
+    code: (
+      <div style={{ position: 'relative' }}>
+        <CodeTracePanel
+          step={step}
+          codeLines={SOLUTION_CODE}
+          onActiveLineDomChange={setActiveLineDom}
+        />
+        {step && (
+          <CodePatternAnnotations
+            linePatterns={LINE_PATTERN_MAP}
+            currentPhase={step.phase}
+            activeLineDom={activeLineDom}
+            activeLine={step.activeLine}
+          />
+        )}
+      </div>
+    ),
+    viz: (
+      <VisualizationPanel
+        numCourses={numCourses}
+        step={step}
+        positions={positions}
+        edges={edges}
+        EXAMPLES={EXAMPLES}
         applyExample={applyExample}
         inputError={inputError}
       />
+    ),
+  }), [step, positions, edges, numCourses, inputError, applyExample, activeLineDom])
 
-      <div className="cs2-top">
-        <section className="cs2-panel graph">
-          <header className="cs2-head">
-            <span>Graph & Topological Flow</span>
-            {inputError && <span className="cs2-error">{inputError}</span>}
-          </header>
-          <div className="cs2-body">
-            <div className="cs2-examples">
-              {EXAMPLES.map((ex) => (
-                <button key={ex.label} className="cs2-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-              ))}
-            </div>
-            <div className="cs2-inputs">
-              <input className="cs2-input small" value={numInput} onChange={(e) => { setNumInput(e.target.value); handleReset() }} />
-              <input className="cs2-input" value={preInput} onChange={(e) => { setPreInput(e.target.value); handleReset() }} />
-            </div>
-            <div className="cs2-canvas">
-              <GraphCanvas3D
-                nodes={useMemo(() => Array.from({ length: numCourses }, (_, i) => ({
-                  id: i,
-                  label: String(i),
-                  x: positions[i]?.x ?? 200,
-                  y: positions[i]?.y ?? 130,
-                })), [numCourses, positions])}
-                edges={useMemo(() => edges.map(([u, v]) => ({ fromId: u, toId: v })), [edges])}
-                visitedSet={useMemo(() => new Set(step?.order ?? []), [step?.order])}
-                activeNode={step?.node ?? null}
-                activeNeighbor={step?.nxt ?? null}
-                cloneEdgeSet={new Set()}
-                width={400}
-                height={260}
-                isClone={false}
-                nodeRadius={16}
-              />
-            </div>
-          </div>
-        </section>
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
-        <section className="cs2-panel side">
-          <header className="cs2-head"><span>Queue / Order</span></header>
-          <div className="cs2-body">
-            <div>
-              <div className="cs2-label">Queue</div>
-              <div className="cs2-list">
-                <AnimatePresence>
-                  {(step?.queue || []).map((v) => (
-                    <motion.span key={`q-${v}`} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
-                      {v}
-                    </motion.span>
-                  ))}
-                </AnimatePresence>
-              </div>
-            </div>
-            <div>
-              <div className="cs2-label">Topological Order</div>
-              <div className="cs2-list order">
-                {(step?.order || []).map((v, idx) => <span key={`o-${v}-${idx}`}>{v}</span>)}
-              </div>
-            </div>
-            <div className={`cs2-result ${step?.phase === 'done' ? (step?.ok ? 'ok' : 'bad') : ''}`}>
-              {step?.phase === 'done' ? (step.ok ? `Return [${step.order.join(', ')}]` : 'Return []') : 'Running Kahn BFS'}
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
-      <div className={`cs2-status ${step?.phase === 'done' ? (step?.ok ? 'ok' : 'bad') : ''}`}>{step?.message || 'Press Play to start.'}</div>
+  return (
+    <div className="cs2-shell">
+      <>
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        {panelDivs && (
+          <>
+            {panelDivs.input && createPortal(
+              <ManualInputPanel
+                fields={[
+                  { key: 'num', label: 'numCourses', type: 'number' },
+                  { key: 'pre', label: 'prerequisites', type: 'array' }
+                ]}
+                values={{ num: numInput, pre: preInput }}
+                onChange={(k, v) => {
+                  if (k === 'num') setNumInput(v)
+                  if (k === 'pre') setPreInput(v)
+                  handleReset()
+                }}
+                examples={EXAMPLES}
+                applyExample={applyExample}
+                inputError={inputError}
+              />,
+              panelDivs.input
+            )}
+            {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+            {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+          </>
+        )}
+      </>
       <FloatingPanel title="Playback Controls">
         <PlaybackControls
-        isPlaying={isPlaying}
-        isDone={isDone}
-        speed={speed}
-        onPlayToggle={togglePlay}
-        onPrev={stepBack}
-        onNext={stepForward}
-        onReset={handleReset}
-        prevDisabled={stepIndex < 0}
-        nextDisabled={isDone}
-        resetDisabled={stepIndex < 0}
-        onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-        showPatternOverlay={showPatternOverlay}
-        onShowPatternOverlayChange={setShowPatternOverlay}
-        patternOverlayLabel="Show pattern overlay"
-        showPatternOverlayToggle
-      />
+          isPlaying={isPlaying}
+          isDone={isDone}
+          speed={speed}
+          onPlayToggle={togglePlay}
+          onPrev={stepBack}
+          onNext={stepForward}
+          onReset={handleReset}
+          prevDisabled={stepIndex < 0}
+          nextDisabled={isDone}
+          resetDisabled={stepIndex < 0}
+          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+          showPatternOverlay={showPatternOverlay}
+          onShowPatternOverlayChange={setShowPatternOverlay}
+          patternOverlayLabel="Show pattern overlay"
+          showPatternOverlayToggle
+        />
       </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>

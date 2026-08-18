@@ -1,5 +1,7 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -7,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './IncreasingTripletSubsequenceVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const COLOR_TEXT = 'var(--text)'
 const COLOR_FIRST = '#38bdf8'
@@ -179,6 +182,15 @@ function parseInput(raw) {
   }
 }
 
+function VisualizationPanel({ step, stepIndex, nums, first, second, firstIndex, secondIndex, currentIndex, found }) {
+  return <div className="increasing-triplet-subsequence-panel-body" style={{ height: '100%', overflow: 'auto' }}><div className="increasing-triplet-subsequence-viz">
+    <div className="increasing-triplet-subsequence-step-info"><h3>{step?.message || 'Press play (or Next) to trace the greedy scan.'}</h3></div>
+    <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}><div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 14px', borderRadius: 8, background: `${COLOR_FIRST}1a`, border: `1px solid ${COLOR_FIRST}` }}><span style={{ color: COLOR_FIRST, fontWeight: 700, fontSize: 12, letterSpacing: 0.5 }}>first</span><span style={{ color: COLOR_TEXT, fontFamily: 'monospace', fontSize: 16, fontWeight: 700 }}>{fmt(first)}</span></div><div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 14px', borderRadius: 8, background: `${COLOR_SECOND}1a`, border: `1px solid ${COLOR_SECOND}` }}><span style={{ color: COLOR_SECOND, fontWeight: 700, fontSize: 12, letterSpacing: 0.5 }}>second</span><span style={{ color: COLOR_TEXT, fontFamily: 'monospace', fontSize: 16, fontWeight: 700 }}>{fmt(second)}</span></div></div>
+    {nums.length === 0 ? <div style={{ color: '#627794', fontSize: 13 }}>Provide a non-empty array to visualize.</div> : <AnimatePresence mode="wait"><motion.div key={stepIndex} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>{nums.map((value, index) => { const isCurrent = index === currentIndex; const isFirst = index === firstIndex; const isSecond = index === secondIndex; const isFoundBox = isCurrent && found === true; const borderColor = isFoundBox ? COLOR_FOUND : isFirst ? COLOR_FIRST : isSecond ? COLOR_SECOND : isCurrent ? COLOR_TEXT : 'transparent'; return <div key={index} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}><div style={{ height: 16, display: 'flex', gap: 4, fontSize: 10, fontWeight: 700 }}>{isFirst && <span style={{ color: COLOR_FIRST }}>first</span>}{isSecond && <span style={{ color: COLOR_SECOND }}>second</span>}</div><div style={{ width: 46, height: 46, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 8, border: `2px solid ${borderColor}`, background: isFoundBox ? `${COLOR_FOUND}26` : isFirst ? `${COLOR_FIRST}1f` : isSecond ? `${COLOR_SECOND}1f` : isCurrent ? 'rgba(226,232,240,0.12)' : 'rgba(148,163,184,0.08)', color: COLOR_TEXT, fontFamily: 'monospace', fontSize: 16, fontWeight: 700, boxShadow: isCurrent ? `0 0 0 3px ${borderColor}44` : 'none' }}>{value}</div><div style={{ fontSize: 10, color: 'var(--text-muted)', fontFamily: 'monospace' }}>{index}</div></div> })}</motion.div></AnimatePresence>}
+    {found !== null && <div style={{ padding: '12px 16px', borderRadius: 8, fontWeight: 700, fontSize: 14, background: found ? `${COLOR_FOUND}1f` : `${COLOR_MISS}1f`, border: `1px solid ${found ? COLOR_FOUND : COLOR_MISS}`, color: found ? COLOR_FOUND : COLOR_MISS }}>{found ? 'TRUE - an increasing triplet exists.' : 'FALSE - no increasing triplet subsequence exists.'}</div>}
+  </div></div>
+}
+
 export default function IncreasingTripletSubsequenceVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify([2, 1, 5, 0, 4, 6]))
 
@@ -198,170 +210,23 @@ export default function IncreasingTripletSubsequenceVisualizer() {
   const secondIdx = step ? step.secondIdx : -1
   const currentIndex = step ? step.currentIndex : -1
   const found = step ? step.found : null
+  const applyExample = useCallback((example) => { setInputValue(JSON.stringify(example.inputs || example)); handleReset() }, [handleReset])
+  const panelConfigs = useMemo(() => [
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: 'Increasing Triplet', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
+  ], [])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
     <div className="increasing-triplet-subsequence-shell">
-      <div className="increasing-triplet-subsequence-panel">
-        <div className="increasing-triplet-subsequence-panel-head">Input (nums as JSON array)</div>
-        <div className="increasing-triplet-subsequence-panel-body">
-          <textarea
-            value={inputValue}
-            onChange={(e) => { setInputValue(e.target.value); handleReset() }}
-            className="increasing-triplet-subsequence-textarea"
-            placeholder="e.g. [2,1,5,0,4,6]"
-            spellCheck={false}
-          />
-          {inputError && <div className="increasing-triplet-subsequence-error">{inputError}</div>}
-        </div>
-      </div>
-
-      <div className="increasing-triplet-subsequence-panel">
-        <div className="increasing-triplet-subsequence-panel-head">Visualization</div>
-        <div className="increasing-triplet-subsequence-panel-body">
-          <div className="increasing-triplet-subsequence-viz">
-            <div className="increasing-triplet-subsequence-step-info">
-              <h3>{step?.message || 'Press play (or Next) to trace the greedy scan.'}</h3>
-            </div>
-
-            {/* State chips: current first / second values */}
-            <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-              <div
-                style={{
-                  display: 'flex', alignItems: 'center', gap: 8,
-                  padding: '8px 14px', borderRadius: 8,
-                  background: `${COLOR_FIRST}1a`, border: `1px solid ${COLOR_FIRST}`,
-                }}
-              >
-                <span style={{ color: COLOR_FIRST, fontWeight: 700, fontSize: 12, letterSpacing: 0.5 }}>first</span>
-                <span style={{ color: COLOR_TEXT, fontFamily: 'monospace', fontSize: 16, fontWeight: 700 }}>{fmt(first)}</span>
-              </div>
-              <div
-                style={{
-                  display: 'flex', alignItems: 'center', gap: 8,
-                  padding: '8px 14px', borderRadius: 8,
-                  background: `${COLOR_SECOND}1a`, border: `1px solid ${COLOR_SECOND}`,
-                }}
-              >
-                <span style={{ color: COLOR_SECOND, fontWeight: 700, fontSize: 12, letterSpacing: 0.5 }}>second</span>
-                <span style={{ color: COLOR_TEXT, fontFamily: 'monospace', fontSize: 16, fontWeight: 700 }}>{fmt(second)}</span>
-              </div>
-            </div>
-
-            {/* Array of boxes */}
-            {nums.length === 0 ? (
-              <div style={{ color: '#627794', fontSize: 13 }}>Provide a non-empty array to visualize.</div>
-            ) : (
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={stepIndex}
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                  style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}
-                >
-                  {nums.map((val, i) => {
-                    const isCurrent = i === currentIndex
-                    const isFirst = i === firstIdx
-                    const isSecond = i === secondIdx
-                    const isFoundBox = isCurrent && found === true
-
-                    let borderColor = 'transparent'
-                    if (isFoundBox) borderColor = COLOR_FOUND
-                    else if (isFirst) borderColor = COLOR_FIRST
-                    else if (isSecond) borderColor = COLOR_SECOND
-                    else if (isCurrent) borderColor = COLOR_TEXT
-
-                    return (
-                      <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
-                        {/* pointer markers above box */}
-                        <div style={{ height: 16, display: 'flex', gap: 4, fontSize: 10, fontWeight: 700 }}>
-                          {isFirst && <span style={{ color: COLOR_FIRST }}>first</span>}
-                          {isSecond && <span style={{ color: COLOR_SECOND }}>second</span>}
-                        </div>
-                        <div
-                          style={{
-                            width: 46,
-                            height: 46,
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            borderRadius: 8,
-                            border: `2px solid ${borderColor}`,
-                            background: isFoundBox
-                              ? `${COLOR_FOUND}26`
-                              : isFirst
-                                ? `${COLOR_FIRST}1f`
-                                : isSecond
-                                  ? `${COLOR_SECOND}1f`
-                                  : isCurrent
-                                    ? 'rgba(226,232,240,0.12)'
-                                    : 'rgba(148,163,184,0.08)',
-                            color: COLOR_TEXT,
-                            fontFamily: 'monospace',
-                            fontSize: 16,
-                            fontWeight: 700,
-                            boxShadow: isCurrent ? `0 0 0 3px ${borderColor}44` : 'none',
-                            transition: 'all 0.2s ease',
-                          }}
-                        >
-                          {val}
-                        </div>
-                        <div style={{ fontSize: 10, color: 'var(--text-muted)', fontFamily: 'monospace' }}>{i}</div>
-                      </div>
-                    )
-                  })}
-                </motion.div>
-              </AnimatePresence>
-            )}
-
-            {/* Verdict */}
-            {found !== null && (
-              <div
-                style={{
-                  padding: '12px 16px',
-                  borderRadius: 8,
-                  fontWeight: 700,
-                  fontSize: 14,
-                  background: found ? `${COLOR_FOUND}1f` : `${COLOR_MISS}1f`,
-                  border: `1px solid ${found ? COLOR_FOUND : COLOR_MISS}`,
-                  color: found ? COLOR_FOUND : COLOR_MISS,
-                }}
-              >
-                {found
-                  ? 'TRUE — an increasing triplet i < j < k with nums[i] < nums[j] < nums[k] exists.'
-                  : 'FALSE — no increasing triplet subsequence exists.'}
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      <div className="increasing-triplet-subsequence-panel">
-        <div className="increasing-triplet-subsequence-panel-head">Code</div>
-        <div className="increasing-triplet-subsequence-panel-body">
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-          />
-        </div>
-      </div>
-
-      {EXAMPLES.length > 0 && (
-        <div className="increasing-triplet-subsequence-examples">
-          {EXAMPLES.map((example, i) => (
-            <button
-              key={i}
-              className="increasing-triplet-subsequence-example-btn"
-              onClick={() => { setInputValue(JSON.stringify(example.inputs || example)); handleReset() }}
-            >
-              {example.label || `Example ${i + 1}`}
-            </button>
-          ))}
-        </div>
-      )}
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && <>
+        {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'nums', label: 'Numbers', type: 'array' }]} values={{ nums: inputValue }} onChange={(_, value) => { setInputValue(value); handleReset() }} examples={EXAMPLES} applyExample={applyExample} inputError={inputError} />, panelDivs.input)}
+        {panelDivs.viz && createPortal(<VisualizationPanel step={step} stepIndex={stepIndex} nums={nums} first={first} second={second} firstIndex={firstIdx} secondIndex={secondIdx} currentIndex={currentIndex} found={found} />, panelDivs.viz)}
+        {panelDivs.code && createPortal(<CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} />, panelDivs.code)}
+      </>}
 
       <FloatingPanel title="Playback Controls">
         <PlaybackControls

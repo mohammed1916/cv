@@ -1,5 +1,7 @@
 ﻿import { useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
@@ -213,41 +215,10 @@ function HeapList({ label, values, isMax, accent, isActiveSide, activeValue }) {
     );
 }
 
-export default function FindMedianVisualizer() {
-    const [numsInput, setNumsInput] = useState("[1,2,3]");
-    const [heapView, setHeapView] = useState("tree"); // "tree" | "list"
-    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
-
-    const { nums, inputErr } = useMemo(() => {
-        try {
-            const p = JSON.parse(numsInput);
-            if (!Array.isArray(p)) throw new Error("Must be array");
-            return { nums: p.map(Number).slice(0, 12), inputErr: "" };
-        } catch (e) {
-            return { nums: [1, 2, 3], inputErr: e.message };
-        }
-    }, [numsInput]);
-
-    const steps = useMemo(() => generateSteps(nums), [nums]);
-    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
-        usePlaybackState(steps.length);
-    const step = stepIndex >= 0 ? steps[stepIndex] : null;
-
-    const applyExample = useCallback(
-        (ex) => { setNumsInput(JSON.stringify(ex.nums)); handleReset(); },
-        [handleReset]
-    );
-
+// ─── Visualization Panel Component ────────────────────────────────────────
+function VisualizationPanel({ step, heapView, setHeapView, EXAMPLES, applyExample, numsInput, setNumsInput, handleReset, inputErr }) {
     return (
-        <div className="fm-shell">
-      <ManualInputPanel
-        fields={[{"key":"nums","label":"nums","type":"array"}]}
-        values={{ nums: numsInput }}
-        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
-        examples={EXAMPLES}
-        applyExample={applyExample}
-      />
-
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
             <div className="fm-controls-row">
                 <div className="fm-examples">
                     {EXAMPLES.map((ex) => (
@@ -315,20 +286,112 @@ export default function FindMedianVisualizer() {
                 )}
             </div>
 
-            <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
             <div className="fm-status">{step?.message ?? "Press Play to begin."}</div>
-            <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-                isPlaying={isPlaying} isDone={isDone} speed={speed}
-                onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-                prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
-                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                showPatternOverlay={showPatternOverlay}
-                onShowPatternOverlayChange={setShowPatternOverlay}
-                patternOverlayLabel="Show pattern overlay"
-                showPatternOverlayToggle
+        </div>
+    );
+}
+
+export default function FindMedianVisualizer() {
+    const [numsInput, setNumsInput] = useState("[1,2,3]");
+    const [heapView, setHeapView] = useState("tree"); // "tree" | "list"
+    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
+
+    const { nums, inputErr } = useMemo(() => {
+        try {
+            const p = JSON.parse(numsInput);
+            if (!Array.isArray(p)) throw new Error("Must be array");
+            return { nums: p.map(Number).slice(0, 12), inputErr: "" };
+        } catch (e) {
+            return { nums: [1, 2, 3], inputErr: e.message };
+        }
+    }, [numsInput]);
+
+    const steps = useMemo(() => generateSteps(nums), [nums]);
+    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
+        usePlaybackState(steps.length);
+    const step = stepIndex >= 0 ? steps[stepIndex] : null;
+
+    const applyExample = useCallback(
+        (ex) => { setNumsInput(JSON.stringify(ex.nums)); handleReset(); },
+        [handleReset]
+    );
+
+    const panelConfigs = useMemo(() => [
+        { id: 'input', title: 'Input' },
+        { id: 'viz', title: '📊 Find Median Data Stream', dockMode: 'split-bottom' },
+        { id: 'code', title: 'Code', dockMode: 'split-right' },
+    ], [])
+
+    const panelContents = useMemo(() => ({
+        code: (
+            <div style={{ position: 'relative' }}>
+                <CodeTracePanel
+                    step={step}
+                    codeLines={SOLUTION_CODE}
+                    onActiveLineDomChange={setActiveLineDom}
+                />
+                {step && (
+                    <CodePatternAnnotations
+                        linePatterns={LINE_PATTERN_MAP}
+                        currentPhase={step.phase}
+                        activeLineDom={activeLineDom}
+                        activeLine={step.activeLine}
+                    />
+                )}
+            </div>
+        ),
+        viz: (
+            <VisualizationPanel
+                step={step}
+                heapView={heapView}
+                setHeapView={setHeapView}
+                EXAMPLES={EXAMPLES}
+                applyExample={applyExample}
+                numsInput={numsInput}
+                setNumsInput={setNumsInput}
+                handleReset={handleReset}
+                inputErr={inputErr}
             />
-      </FloatingPanel>
+        ),
+    }), [step, heapView, applyExample, numsInput, handleReset, inputErr, activeLineDom])
+
+    const [panelDivs, setPanelDivs] = useState(null)
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+
+    return (
+        <div className="fm-shell">
+            <>
+                <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+                {panelDivs && (
+                    <>
+                        {panelDivs.input && createPortal(
+                            <ManualInputPanel
+                                fields={[{ key: 'nums', label: 'nums', type: 'array' }]}
+                                values={{ nums: numsInput }}
+                                onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
+                                examples={EXAMPLES}
+                                applyExample={applyExample}
+                                inputError={inputErr}
+                            />,
+                            panelDivs.input
+                        )}
+                        {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
+                        {panelDivs.viz && createPortal(panelContents.viz, panelDivs.viz)}
+                    </>
+                )}
+            </>
+            <FloatingPanel title="Playback Controls">
+                <PlaybackControls
+                    isPlaying={isPlaying} isDone={isDone} speed={speed}
+                    onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
+                    prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
+                    onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+                    showPatternOverlay={showPatternOverlay}
+                    onShowPatternOverlayChange={setShowPatternOverlay}
+                    patternOverlayLabel="Show pattern overlay"
+                    showPatternOverlayToggle
+                />
+            </FloatingPanel>
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </div>
     );

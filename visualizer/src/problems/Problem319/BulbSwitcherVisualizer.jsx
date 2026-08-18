@@ -1,5 +1,7 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -7,6 +9,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamplesOr } from '../../config/examplesRegistry'
 import './BulbSwitcherVisualizer.css'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 const SOLUTION_CODE = [
   { line: 1, text: 'def bulbSwitcher(n):' },
@@ -109,6 +112,39 @@ function generateSteps(n) {
 
 const EXAMPLES = getExamplesOr('bulb-switcher', [])
 const DEFAULT_N = 10
+const INPUT_EXAMPLES = EXAMPLES.length > 0 ? EXAMPLES : [
+  { label: 'No bulbs', n: 0 },
+  { label: 'Perfect square', n: 9 },
+  { label: 'Between squares', n: 10 },
+  { label: 'Larger range', n: 36 },
+]
+
+function exampleN(example) {
+  return String(example.n ?? example.inputs?.n ?? example.inputs ?? example)
+}
+
+function VisualizationPanel({ stepIndex, step, view, bulbs, squareSet, truncated }) {
+  return (
+    <div className="bulb-switcher-panel-body" style={{ height: '100%', overflow: 'auto' }}>
+      <AnimatePresence mode="wait">
+        <motion.div key={stepIndex} className="bulb-switcher-viz" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}>
+          <div className="bulb-switcher-step-info"><h3>{step?.message || 'Press play (or step forward) to begin.'}</h3></div>
+          {view && <>
+            <div className="bulb-switcher-readout">
+              <div className="bulb-switcher-stat"><span className="bulb-switcher-stat-label">i</span><span className="bulb-switcher-stat-value">{view.i ?? '-'}</span></div>
+              <div className="bulb-switcher-stat"><span className="bulb-switcher-stat-label">i * i</span><span className="bulb-switcher-stat-value">{view.iSquared ?? '-'}</span></div>
+              <div className="bulb-switcher-stat"><span className="bulb-switcher-stat-label">n</span><span className="bulb-switcher-stat-value">{view.n}</span></div>
+              <div className="bulb-switcher-stat bulb-switcher-stat-ans"><span className="bulb-switcher-stat-label">ans (ON)</span><span className="bulb-switcher-stat-value">{view.ans}</span></div>
+            </div>
+            <div className="bulb-switcher-bulbs">{bulbs.map((number) => { const isOn = squareSet.has(number); const isTesting = view.testing === number; return <motion.div key={number} className={`bulb-switcher-bulb${isOn ? ' is-on' : ''}${isTesting ? ' is-testing' : ''}`} animate={{ scale: isTesting ? 1.12 : 1 }} transition={{ type: 'spring', stiffness: 320, damping: 22 }}><span className="bulb-switcher-bulb-glyph" aria-hidden="true">{isOn ? '●' : '○'}</span><span className="bulb-switcher-bulb-num">{number}</span></motion.div> })}</div>
+            {truncated && <div className="bulb-switcher-hint">Showing bulbs 1..{MAX_DISPLAY} of {view.n}. The algorithm still computes the full answer ({view.ans}).</div>}
+            <div className="bulb-switcher-legend"><span className="bulb-switcher-legend-item"><span className="bulb-switcher-swatch is-on" /> ON (perfect square)</span><span className="bulb-switcher-legend-item"><span className="bulb-switcher-swatch" /> OFF</span><span className="bulb-switcher-legend-item"><span className="bulb-switcher-swatch is-testing" /> current i*i</span></div>
+          </>}
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  )
+}
 
 export default function BulbSwitcherVisualizer() {
   const [inputValue, setInputValue] = useState(String(DEFAULT_N))
@@ -149,150 +185,23 @@ export default function BulbSwitcherVisualizer() {
     [displayN],
   )
   const truncated = view ? view.n > MAX_DISPLAY : false
+  const applyExample = useCallback((example) => { setInputValue(exampleN(example)); handleReset() }, [handleReset])
+  const panelConfigs = useMemo(() => [
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: 'Bulb Switcher', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
+  ], [])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
     <div className="bulb-switcher-shell">
-      <div className="bulb-switcher-panel">
-        <div className="bulb-switcher-panel-head">Input</div>
-        <div className="bulb-switcher-panel-body">
-          <label className="bulb-switcher-input-label" htmlFor="bulb-switcher-n">
-            Number of bulbs (n)
-          </label>
-          <input
-            id="bulb-switcher-n"
-            type="number"
-            min="0"
-            value={inputValue}
-            onChange={(e) => { setInputValue(e.target.value); handleReset() }}
-            className="bulb-switcher-input"
-            placeholder="Enter n..."
-          />
-          {inputError && <div className="bulb-switcher-error">{inputError}</div>}
-          <div className="bulb-switcher-hint">
-            Each round i toggles every i-th bulb. A bulb ends ON only if its
-            number is a perfect square (odd divisor count), so the answer is
-            floor(sqrt(n)).
-          </div>
-        </div>
-      </div>
-
-      <div className="bulb-switcher-panel">
-        <div className="bulb-switcher-panel-head">Visualization</div>
-        <div className="bulb-switcher-panel-body">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={stepIndex}
-              className="bulb-switcher-viz"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-            >
-              <div className="bulb-switcher-step-info">
-                <h3>{step?.message || 'Press play (or step forward) to begin.'}</h3>
-              </div>
-
-              {view && (
-                <>
-                  <div className="bulb-switcher-readout">
-                    <div className="bulb-switcher-stat">
-                      <span className="bulb-switcher-stat-label">i</span>
-                      <span className="bulb-switcher-stat-value">
-                        {view.i ?? '-'}
-                      </span>
-                    </div>
-                    <div className="bulb-switcher-stat">
-                      <span className="bulb-switcher-stat-label">i * i</span>
-                      <span className="bulb-switcher-stat-value">
-                        {view.iSquared ?? '-'}
-                      </span>
-                    </div>
-                    <div className="bulb-switcher-stat">
-                      <span className="bulb-switcher-stat-label">n</span>
-                      <span className="bulb-switcher-stat-value">{view.n}</span>
-                    </div>
-                    <div className="bulb-switcher-stat bulb-switcher-stat-ans">
-                      <span className="bulb-switcher-stat-label">ans (ON)</span>
-                      <span className="bulb-switcher-stat-value">{view.ans}</span>
-                    </div>
-                  </div>
-
-                  <div className="bulb-switcher-bulbs">
-                    {bulbs.map((num) => {
-                      const isOn = squareSet.has(num)
-                      const isTesting = view.testing === num
-                      return (
-                        <motion.div
-                          key={num}
-                          className={
-                            'bulb-switcher-bulb'
-                            + (isOn ? ' is-on' : '')
-                            + (isTesting ? ' is-testing' : '')
-                          }
-                          animate={{
-                            scale: isTesting ? 1.12 : 1,
-                          }}
-                          transition={{ type: 'spring', stiffness: 320, damping: 22 }}
-                        >
-                          <span className="bulb-switcher-bulb-glyph" aria-hidden="true">
-                            {isOn ? '●' : '○'}
-                          </span>
-                          <span className="bulb-switcher-bulb-num">{num}</span>
-                        </motion.div>
-                      )
-                    })}
-                  </div>
-
-                  {truncated && (
-                    <div className="bulb-switcher-hint">
-                      Showing bulbs 1..{MAX_DISPLAY} of {view.n}. The algorithm
-                      still computes the full answer ({view.ans}).
-                    </div>
-                  )}
-
-                  <div className="bulb-switcher-legend">
-                    <span className="bulb-switcher-legend-item">
-                      <span className="bulb-switcher-swatch is-on" /> ON (perfect square)
-                    </span>
-                    <span className="bulb-switcher-legend-item">
-                      <span className="bulb-switcher-swatch" /> OFF
-                    </span>
-                    <span className="bulb-switcher-legend-item">
-                      <span className="bulb-switcher-swatch is-testing" /> current i*i
-                    </span>
-                  </div>
-                </>
-              )}
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </div>
-
-      <div className="bulb-switcher-panel">
-        <div className="bulb-switcher-panel-head">Code</div>
-        <div className="bulb-switcher-panel-body">
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-          />
-        </div>
-      </div>
-
-      {EXAMPLES.length > 0 && (
-        <div className="bulb-switcher-examples">
-          {EXAMPLES.map((example, i) => (
-            <button
-              key={i}
-              className="bulb-switcher-example-btn"
-              onClick={() => { setInputValue(JSON.stringify(example.inputs || example)); handleReset() }}
-            >
-              {example.label || `Example ${i + 1}`}
-            </button>
-          ))}
-        </div>
-      )}
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && <>
+        {panelDivs.input && createPortal(<ManualInputPanel fields={[{ key: 'n', label: 'Number of bulbs', type: 'number' }]} values={{ n: inputValue }} onChange={(_, value) => { setInputValue(value); handleReset() }} examples={INPUT_EXAMPLES} applyExample={applyExample} inputError={inputError} />, panelDivs.input)}
+        {panelDivs.viz && createPortal(<VisualizationPanel stepIndex={stepIndex} step={step} view={view} bulbs={bulbs} squareSet={squareSet} truncated={truncated} />, panelDivs.viz)}
+        {panelDivs.code && createPortal(<CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} />, panelDivs.code)}
+      </>}
 
       <FloatingPanel title="Playback Controls">
         <PlaybackControls
