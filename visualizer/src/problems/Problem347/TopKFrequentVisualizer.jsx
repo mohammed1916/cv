@@ -93,8 +93,15 @@ function generateSteps(nums, k) {
 const EXAMPLES = getExamples('top-kfrequent');
 
 function parseNums(str) {
-    try { const p = JSON.parse(str); if (!Array.isArray(p)) throw new Error(); return { nums: p.map(Number), err: "" }; }
-    catch { return { nums: [], err: "Invalid" }; }
+    try {
+        const nums = JSON.parse(str);
+        if (!Array.isArray(nums) || nums.length === 0 || !nums.every(Number.isFinite)) {
+            throw new Error('Enter a non-empty JSON array of finite numbers.');
+        }
+        return { nums, err: "" };
+    } catch (error) {
+        return { nums: [], err: error.message || 'Enter a valid JSON array of finite numbers.' };
+    }
 }
 
 export default function TopKFrequentVisualizer() {
@@ -102,15 +109,21 @@ export default function TopKFrequentVisualizer() {
     const [kInput, setKInput] = useState("2");
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
-    const { nums, err } = useMemo(() => parseNums(numsInput), [numsInput]);
-    const k = useMemo(() => Math.max(1, parseInt(kInput, 10) || 1), [kInput]);
+    const { nums, err: numsError } = useMemo(() => parseNums(numsInput), [numsInput]);
+    const { k, err: kError } = useMemo(() => {
+        const parsed = Number(kInput);
+        if (!Number.isInteger(parsed) || parsed < 1) return { k: 0, err: 'k must be a positive integer.' };
+        if (nums.length && parsed > new Set(nums).size) return { k: 0, err: 'k cannot exceed the number of distinct values.' };
+        return { k: parsed, err: '' };
+    }, [kInput, nums]);
+    const inputError = numsError || kError;
 
     const steps = useMemo(() => {
-        return nums.length ? generateSteps(nums, k).map((current) => ({
+        return !inputError && nums.length ? generateSteps(nums, k).map((current) => ({
             ...current,
             relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
         })) : []
-    }, [nums, k]);
+    }, [inputError, nums, k]);
     const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
@@ -127,32 +140,47 @@ export default function TopKFrequentVisualizer() {
     });
 
     const buckets = step?.buckets ?? [];
+    const [panelDivs, setPanelDivs] = useState(null);
+    const panelConfigs = useMemo(() => [
+        { id: 'input', title: 'Input' },
+        { id: 'viz', title: 'Top K Frequencies', dockMode: 'split-bottom' },
+        { id: 'code', title: 'Code', dockMode: 'split-right' },
+    ], []);
+    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
 
-    return (
-        <div className="tkf-shell">
-            <ManualInputPanel
-                fields={[{ "key": "nums", "label": "nums", "type": "string" }, { "key": "k", "label": "k", "type": "string" }]}
-                values={{ nums: numsInput, k: kInput }}
-                onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'k') setKInput(v); handleReset() }}
-                examples={EXAMPLES}
-                applyExample={applyExample}
+    const inputPanel = (
+        <ManualInputPanel
+            fields={[{ key: 'nums', label: 'Numbers (JSON)', type: 'string' }, { key: 'k', label: 'k', type: 'string' }]}
+            values={{ nums: numsInput, k: kInput }}
+            onChange={(key, value) => { if (key === 'nums') setNumsInput(value); if (key === 'k') setKInput(value); handleReset(); }}
+            examples={EXAMPLES}
+            applyExample={applyExample}
+            inputError={inputError}
+        />
+    );
+
+    const codePanel = (
+        <div style={{ position: 'relative' }}>
+            <CodeTracePanel
+                step={step}
+                codeLines={SOLUTION_CODE}
+                highlightedLines={connectivity.highlightedLines}
+                onLineSelect={connectivity.handleLineSelect}
+                onActiveLineDomChange={setActiveLineDom}
             />
+            {showPatternOverlay && (
+                <CodePatternAnnotations
+                    linePatterns={LINE_PATTERN_MAP}
+                    currentPhase={step?.phase}
+                    activeLineDom={activeLineDom}
+                    activeLine={step?.activeLine}
+                />
+            )}
+        </div>
+    );
 
-            <div className="tkf-controls-row">
-                <div className="tkf-examples">
-                    {EXAMPLES.map((ex) => (
-                        <button key={ex.label} className="tkf-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                    ))}
-                </div>
-                <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                    <input className="tkf-input" value={numsInput} onChange={(e) => { setNumsInput(e.target.value); handleReset(); }} />
-                    <label className="tkf-k-label">k=<input className="tkf-k-input" type="number" min={1} value={kInput}
-                        onChange={(e) => { setKInput(e.target.value); handleReset(); }} /></label>
-                    {err && <span className="tkf-error">{err}</span>}
-                </div>
-            </div>
-
-            {/* Count map */}
+    const visualizationPanel = (
+        <div className="tkf-shell">
             <div className="tkf-panel">
                 <div className="tkf-panel-label">Frequency count</div>
                 <div className="tkf-count-row">
@@ -165,7 +193,6 @@ export default function TopKFrequentVisualizer() {
                 </div>
             </div>
 
-            {/* Bucket array */}
             {buckets.length > 0 && (
                 <div className="tkf-panel">
                     <div className="tkf-panel-label">Bucket (index = frequency)</div>
@@ -193,7 +220,6 @@ export default function TopKFrequentVisualizer() {
                 </div>
             )}
 
-            {/* Result */}
             {(step?.res?.length ?? 0) > 0 && (
                 <div className="tkf-panel">
                     <div className="tkf-panel-label">Result (top {k} frequent)</div>
@@ -211,27 +237,21 @@ export default function TopKFrequentVisualizer() {
                 </div>
             )}
 
-            <div style={{ position: 'relative' }}>
-                <CodeTracePanel
-                    step={step}
-                    codeLines={SOLUTION_CODE}
-                    highlightedLines={connectivity.highlightedLines}
-                    onLineSelect={connectivity.handleLineSelect}
-                    onActiveLineDomChange={setActiveLineDom}
-                />
-
-                {showPatternOverlay && (
-                    <CodePatternAnnotations
-                        linePatterns={LINE_PATTERN_MAP}
-                        currentPhase={step?.phase}
-                        activeLineDom={activeLineDom}
-                        activeLine={step?.activeLine}
-                    />
-                )}
-            </div>
-
             <div className="tkf-status">{step?.message ?? "Press Play to begin."}</div>
+        </div>
+    );
 
+    return (
+        <div className="problem-shell">
+            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+            {panelDivs && (
+                <>
+                    {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+                    {panelDivs.viz && createPortal(visualizationPanel, panelDivs.viz)}
+                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+                </>
+            )}
+            {createPortal(
             <FloatingPanel title="Playback Controls">
                 {showPatternOverlay && (
                     <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
@@ -246,7 +266,9 @@ export default function TopKFrequentVisualizer() {
                     patternOverlayLabel="Show pattern overlay"
                     showPatternOverlayToggle
                 />
-            </FloatingPanel>
+            </FloatingPanel>,
+            document.body,
+            )}
         </div>
     );
 }

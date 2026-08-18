@@ -48,6 +48,22 @@
   overflow: hidden;
 }
 
+.paw-input-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+}
+
+.paw-input-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.paw-input-actions .paw-button {
+  margin-top: 0;
+}
+
 .paw-code-panel {
   flex: 1;
   min-width: 0;

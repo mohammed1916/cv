@@ -54,6 +54,7 @@ function generateSteps(matrix) {
       currentRow: -1,
       heights: [],
       maxArea: 0,
+      stack: [],
       activeLine: 3,
       message: 'Empty matrix.',
     })
@@ -68,6 +69,7 @@ function generateSteps(matrix) {
     currentRow: -1,
     heights: new Array(n).fill(0),
     maxArea: 0,
+    stack: [],
     activeLine: 5,
     message: `Matrix ${m}x${n}. Initialize heights=[0]*${n}`,
   })
@@ -81,6 +83,7 @@ function generateSteps(matrix) {
       currentRow: row,
       heights: [...heights],
       maxArea,
+      stack: [],
       activeLine: 8,
       message: `Process row ${row}: [${matrix[row].map(x => x).join(',')}]`,
     })
@@ -97,6 +100,7 @@ function generateSteps(matrix) {
         currentRow: row,
         heights: [...heights],
         maxArea,
+        stack: [],
         activeLine: matrix[row][i] === '1' || matrix[row][i] === 1 ? 11 : 13,
         message: `Col ${i}: matrix[${row}][${i}]=${matrix[row][i]}, heights[${i}]=${heights[i]}`,
       })
@@ -118,6 +122,8 @@ function generateSteps(matrix) {
           heights: [...heights],
           maxArea,
           currentArea: area,
+          currentHistIdx: popIdx,
+          stack: [...stack],
           activeLine: 15,
           message: `Pop[${popIdx}]: h=${h}, width=${width}, area=${area}`,
         })
@@ -126,6 +132,16 @@ function generateSteps(matrix) {
       }
 
       stack.push(i)
+      steps.push({
+        phase: 'stack_push',
+        currentRow: row,
+        heights: [...heights],
+        maxArea,
+        currentHistIdx: i,
+        stack: [...stack],
+        activeLine: 15,
+        message: `Push histogram column ${i} onto the increasing stack: [${stack.join(', ')}].`,
+      })
     }
 
     while (stack.length > 0) {
@@ -140,6 +156,8 @@ function generateSteps(matrix) {
         heights: [...heights],
         maxArea,
         currentArea: area,
+        currentHistIdx: popIdx,
+        stack: [...stack],
         activeLine: 15,
         message: `Final pop[${popIdx}]: h=${h}, width=${width}, area=${area}`,
       })
@@ -154,6 +172,7 @@ function generateSteps(matrix) {
       currentRow: row,
       heights: [...heights],
       maxArea,
+      stack: [],
       activeLine: 15,
       message: `Row ${row} complete. Max area so far: ${maxArea}`,
     })
@@ -164,6 +183,7 @@ function generateSteps(matrix) {
     currentRow: m,
     heights: [...heights],
     maxArea,
+    stack: [],
     activeLine: 15,
     message: `Complete. Maximum rectangle: ${maxArea}`,
   })
@@ -176,6 +196,7 @@ function MaximalRectangleVisualizer() {
 
   const [matrix, setMatrix] = useState(defaultMatrix)
   const [inputValue, setInputValue] = useState(JSON.stringify(defaultMatrix))
+  const [inputError, setInputError] = useState('')
 
   const steps = useMemo(() => generateSteps(matrix), [matrix])
   const {
@@ -194,15 +215,17 @@ function MaximalRectangleVisualizer() {
       const parsed = JSON.parse(inputValue)
       if (!Array.isArray(parsed) || !parsed.length || !parsed.every(row => Array.isArray(row) && row.length === parsed[0].length && row.every(value => value === '0' || value === '1' || value === 0 || value === 1))) throw new Error('Enter a non-empty rectangular JSON matrix containing only 0 or 1.')
       setMatrix(parsed)
+      setInputError('')
       reset()
     } catch (e) {
-      alert('Invalid JSON input')
+      setInputError(e.message || 'Enter a valid JSON matrix.')
     }
   }, [inputValue, reset])
 
   const handleReset = useCallback(() => {
     setMatrix(defaultMatrix)
     setInputValue(JSON.stringify(defaultMatrix))
+    setInputError('')
     reset()
   }, [reset])
 
@@ -326,6 +349,10 @@ function MaximalRectangleVisualizer() {
                 <div className="mr-state-value">{activeStep?.currentArea}</div>
               </div>
             )}
+            <div className="mr-state-item">
+              <div className="mr-state-label">Monotonic Stack:</div>
+              <div className="mr-state-value">[{activeStep?.stack?.join(', ') || ''}]</div>
+            </div>
           </div>
         </div>
 
@@ -340,14 +367,15 @@ function MaximalRectangleVisualizer() {
           <div className="mr-panel-head">Input</div>
           <div className="mr-panel-body">
             <div className="mr-examples">
-              {EXAMPLES.map((example) => <button key={example.label} className="mr-button" onClick={() => { setMatrix(example.input); setInputValue(JSON.stringify(example.input)); reset() }}>{example.label}</button>)}
+              {EXAMPLES.map((example) => <button key={example.label} className="mr-button" onClick={() => { setMatrix(example.input); setInputValue(JSON.stringify(example.input)); setInputError(''); reset() }}>{example.label}</button>)}
             </div>
             <textarea
               className="mr-input"
               value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
+              onChange={(e) => { setInputValue(e.target.value); setInputError('') }}
               rows={3}
             />
+            {inputError && <div className="mr-input-error">{inputError}</div>}
             <button className="mr-button" onClick={handleRun}>
               Run
             </button>

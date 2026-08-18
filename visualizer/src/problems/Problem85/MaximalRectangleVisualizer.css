@@ -180,6 +180,12 @@
   resize: none;
 }
 
+.mr-input-error {
+  color: #f38ba8;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
 .mr-input:focus {
   outline: none;
   border-color: var(--mr-green);

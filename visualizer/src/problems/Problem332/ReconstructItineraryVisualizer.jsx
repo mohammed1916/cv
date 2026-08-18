@@ -1,7 +1,10 @@
-import { useState, useMemo } from 'react'
+import { useState, useCallback, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
@@ -265,249 +268,252 @@ export default function ReconstructItineraryVisualizer() {
 
   const displayItinerary = step ? [...(step.route || [])].reverse() : []
   const showSorted = step && Array.isArray(step.sortedTickets)
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(() => [
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: 'Reconstruct Itinerary', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
+  ], [])
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+  const applyExample = useCallback((example) => {
+    setInputValue(JSON.stringify(example.tickets || example.inputs || example))
+    handleReset()
+  }, [handleReset])
 
-  return (
-    <div className="reconstruct-itinerary-shell">
-      <div className="reconstruct-itinerary-panel">
-        <div className="reconstruct-itinerary-panel-head">Tickets (JSON list of [from, to] pairs)</div>
-        <div className="reconstruct-itinerary-panel-body">
-          <textarea
-            value={inputValue}
-            onChange={(e) => { setInputValue(e.target.value); handleReset() }}
-            className="reconstruct-itinerary-textarea"
-            placeholder='[["JFK","SFO"],["SFO","ATL"]]'
-          />
-          {inputError && <div className="reconstruct-itinerary-error">{inputError}</div>}
-        </div>
-      </div>
+  const inputPanel = (
+    <ManualInputPanel
+      fields={[{
+        key: 'tickets',
+        label: 'Tickets (JSON list of [from, to] pairs)',
+        type: 'string',
+        placeholder: '[["JFK","SFO"],["SFO","ATL"]]',
+      }]}
+      values={{ tickets: inputValue }}
+      onChange={(_, value) => { setInputValue(value); handleReset() }}
+      examples={EXAMPLES}
+      applyExample={applyExample}
+      inputError={inputError}
+    />
+  )
 
-      <div className="reconstruct-itinerary-panel">
-        <div className="reconstruct-itinerary-panel-head">Visualization</div>
-        <div className="reconstruct-itinerary-panel-body">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={stepIndex}
-              className="reconstruct-itinerary-viz"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
+  const visualizationPanel = (
+    <div className="reconstruct-itinerary-panel-body">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={stepIndex}
+          className="reconstruct-itinerary-viz"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div
+            className="reconstruct-itinerary-step-info"
+            style={{
+              borderLeftColor: step?.done ? GREEN : ACCENT,
+              background: step?.done
+                ? 'linear-gradient(135deg, #22c55e20, #22c55e10)'
+                : 'linear-gradient(135deg, #38bdf820, #38bdf810)',
+            }}
+          >
+            <h3>
+              {step?.message
+                || (inputError
+                  ? 'Fix the tickets input to run the algorithm.'
+                  : 'Press Play (or step forward) to run Hierholzer\'s algorithm from JFK.')}
+            </h3>
+          </div>
+
+          {showSorted && (
+            <div>
+              <div style={labelStyle}>Sorted tickets</div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                {step.sortedTickets.map(([from, to], i) => {
+                  const hot = step.edge && step.edge.from === from && step.edge.to === to
+                  return (
+                    <span
+                      key={`${from}-${to}-${i}`}
+                      style={{
+                        ...chipBase,
+                        borderColor: hot ? ACCENT : 'var(--border)',
+                        background: hot ? '#38bdf822' : 'var(--surface2)',
+                        color: hot ? ACCENT : TEXT,
+                      }}
+                    >
+                      {from}&rarr;{to}
+                    </span>
+                  )
+                })}
+              </div>
+            </div>
+          )}
+
+          <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
+            <div style={{ flex: '1 1 280px', minWidth: 0 }}>
+              <div style={labelStyle}>Adjacency map — remaining tickets</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                {allAirports.length === 0 && <span style={{ color: MUTED }}>—</span>}
+                {allAirports.map((ap) => {
+                  const dests = (step?.graph && step.graph[ap]) || []
+                  const isCurrent = step?.current === ap
+                  return (
+                    <div
+                      key={ap}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 8,
+                        padding: '8px 10px',
+                        borderRadius: 8,
+                        border: `1px solid ${isCurrent ? ACCENT : 'var(--surface2)'}`,
+                        background: isCurrent ? '#38bdf814' : 'transparent',
+                      }}
+                    >
+                      <span
+                        style={{
+                          ...chipBase,
+                          minWidth: 44,
+                          borderColor: isCurrent ? ACCENT : 'var(--text-muted)',
+                          background: isCurrent ? ACCENT : 'var(--code-bg)',
+                          color: isCurrent ? '#0b1120' : TEXT,
+                        }}
+                      >
+                        {ap}
+                      </span>
+                      <span style={{ color: MUTED }}>&rarr;</span>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                        {dests.length === 0 ? (
+                          <span style={{ color: MUTED, fontSize: 13, fontStyle: 'italic' }}>none</span>
+                        ) : (
+                          dests.map((d, i) => {
+                            const used = step?.edge && step.edge.from === ap && step.edge.to === d && i === 0
+                            return (
+                              <span
+                                key={`${ap}-${d}-${i}`}
+                                style={{
+                                  ...chipBase,
+                                  borderColor: used ? GREEN : 'var(--border)',
+                                  background: used ? '#22c55e22' : 'var(--surface2)',
+                                  color: used ? GREEN : TEXT,
+                                }}
+                              >
+                                {d}
+                              </span>
+                            )
+                          })
+                        )}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+
+            <div style={{ flex: '0 0 150px' }}>
+              <div style={labelStyle}>DFS stack</div>
               <div
-                className="reconstruct-itinerary-step-info"
                 style={{
-                  borderLeftColor: step?.done ? GREEN : ACCENT,
-                  background: step?.done
-                    ? 'linear-gradient(135deg, #22c55e20, #22c55e10)'
-                    : 'linear-gradient(135deg, #38bdf820, #38bdf810)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 6,
+                  padding: 8,
+                  borderRadius: 8,
+                  border: '1px solid var(--surface2)',
+                  minHeight: 60,
                 }}
               >
-                <h3>
-                  {step?.message
-                    || (inputError
-                      ? 'Fix the tickets input to run the algorithm.'
-                      : 'Press Play (or step forward) to run Hierholzer\'s algorithm from JFK.')}
-                </h3>
+                {(!step || !step.stack || step.stack.length === 0) && (
+                  <span style={{ color: MUTED, fontSize: 13, fontStyle: 'italic' }}>empty</span>
+                )}
+                {step && step.stack && step.stack.slice().reverse().map((ap, idx) => {
+                  const isTop = idx === 0
+                  return (
+                    <div
+                      key={`${ap}-${idx}`}
+                      style={{
+                        ...chipBase,
+                        justifyContent: 'space-between',
+                        borderColor: isTop ? ACCENT : 'var(--border)',
+                        background: isTop ? '#38bdf822' : 'var(--surface2)',
+                        color: isTop ? ACCENT : TEXT,
+                      }}
+                    >
+                      <span>{ap}</span>
+                      {isTop && <span style={{ fontSize: 10, fontWeight: 700 }}>TOP</span>}
+                    </div>
+                  )
+                })}
               </div>
+            </div>
+          </div>
 
-              {showSorted && (
-                <div>
-                  <div style={labelStyle}>Sorted tickets</div>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                    {step.sortedTickets.map(([from, to], i) => {
-                      const hot = step.edge && step.edge.from === from && step.edge.to === to
-                      return (
-                        <span
-                          key={`${from}-${to}-${i}`}
-                          style={{
-                            ...chipBase,
-                            borderColor: hot ? ACCENT : 'var(--border)',
-                            background: hot ? '#38bdf822' : 'var(--surface2)',
-                            color: hot ? ACCENT : TEXT,
-                          }}
-                        >
-                          {from}&rarr;{to}
-                        </span>
-                      )
-                    })}
-                  </div>
-                </div>
+          <div>
+            <div style={labelStyle}>
+              Itinerary {step?.done ? '(final)' : '(built from the end as we backtrack)'}
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 6 }}>
+              {displayItinerary.length === 0 ? (
+                <span style={{ color: MUTED, fontSize: 13 }}>—</span>
+              ) : (
+                displayItinerary.map((ap, i) => (
+                  <span key={`itin-${ap}-${i}`} style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                    {i > 0 && <span style={{ color: step?.done ? GREEN : ACCENT }}>&rarr;</span>}
+                    <span
+                      style={{
+                        ...chipBase,
+                        borderColor: step?.done ? GREEN : ACCENT,
+                        background: step?.done ? '#22c55e22' : '#38bdf818',
+                        color: step?.done ? GREEN : TEXT,
+                      }}
+                    >
+                      {ap}
+                    </span>
+                  </span>
+                ))
               )}
+            </div>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  )
 
-              <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
-                <div style={{ flex: '1 1 280px', minWidth: 0 }}>
-                  <div style={labelStyle}>Adjacency map — remaining tickets</div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                    {allAirports.length === 0 && <span style={{ color: MUTED }}>—</span>}
-                    {allAirports.map((ap) => {
-                      const dests = (step?.graph && step.graph[ap]) || []
-                      const isCurrent = step?.current === ap
-                      return (
-                        <div
-                          key={ap}
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: 8,
-                            padding: '8px 10px',
-                            borderRadius: 8,
-                            border: `1px solid ${isCurrent ? ACCENT : 'var(--surface2)'}`,
-                            background: isCurrent ? '#38bdf814' : 'transparent',
-                          }}
-                        >
-                          <span
-                            style={{
-                              ...chipBase,
-                              minWidth: 44,
-                              borderColor: isCurrent ? ACCENT : 'var(--text-muted)',
-                              background: isCurrent ? ACCENT : 'var(--code-bg)',
-                              color: isCurrent ? '#0b1120' : TEXT,
-                            }}
-                          >
-                            {ap}
-                          </span>
-                          <span style={{ color: MUTED }}>&rarr;</span>
-                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                            {dests.length === 0 ? (
-                              <span style={{ color: MUTED, fontSize: 13, fontStyle: 'italic' }}>none</span>
-                            ) : (
-                              dests.map((d, i) => {
-                                const used = step?.edge && step.edge.from === ap && step.edge.to === d && i === 0
-                                return (
-                                  <span
-                                    key={`${ap}-${d}-${i}`}
-                                    style={{
-                                      ...chipBase,
-                                      borderColor: used ? GREEN : 'var(--border)',
-                                      background: used ? '#22c55e22' : 'var(--surface2)',
-                                      color: used ? GREEN : TEXT,
-                                    }}
-                                  >
-                                    {d}
-                                  </span>
-                                )
-                              })
-                            )}
-                          </div>
-                        </div>
-                      )
-                    })}
-                  </div>
-                </div>
-
-                <div style={{ flex: '0 0 150px' }}>
-                  <div style={labelStyle}>DFS stack</div>
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: 6,
-                      padding: 8,
-                      borderRadius: 8,
-                      border: '1px solid var(--surface2)',
-                      minHeight: 60,
-                    }}
-                  >
-                    {(!step || !step.stack || step.stack.length === 0) && (
-                      <span style={{ color: MUTED, fontSize: 13, fontStyle: 'italic' }}>empty</span>
-                    )}
-                    {step && step.stack && step.stack.slice().reverse().map((ap, idx) => {
-                      const isTop = idx === 0
-                      return (
-                        <div
-                          key={`${ap}-${idx}`}
-                          style={{
-                            ...chipBase,
-                            justifyContent: 'space-between',
-                            borderColor: isTop ? ACCENT : 'var(--border)',
-                            background: isTop ? '#38bdf822' : 'var(--surface2)',
-                            color: isTop ? ACCENT : TEXT,
-                          }}
-                        >
-                          <span>{ap}</span>
-                          {isTop && <span style={{ fontSize: 10, fontWeight: 700 }}>TOP</span>}
-                        </div>
-                      )
-                    })}
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <div style={labelStyle}>
-                  Itinerary {step?.done ? '(final)' : '(built from the end as we backtrack)'}
-                </div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 6 }}>
-                  {displayItinerary.length === 0 ? (
-                    <span style={{ color: MUTED, fontSize: 13 }}>—</span>
-                  ) : (
-                    displayItinerary.map((ap, i) => (
-                      <span key={`itin-${ap}-${i}`} style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-                        {i > 0 && <span style={{ color: step?.done ? GREEN : ACCENT }}>&rarr;</span>}
-                        <span
-                          style={{
-                            ...chipBase,
-                            borderColor: step?.done ? GREEN : ACCENT,
-                            background: step?.done ? '#22c55e22' : '#38bdf818',
-                            color: step?.done ? GREEN : TEXT,
-                          }}
-                        >
-                          {ap}
-                        </span>
-                      </span>
-                    ))
-                  )}
-                </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </div>
-
-      <div className="reconstruct-itinerary-panel">
-        <div className="reconstruct-itinerary-panel-head">Code</div>
-        <div className="reconstruct-itinerary-panel-body">
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-          />
-        </div>
-      </div>
-
-      {EXAMPLES.length > 0 && (
-        <div className="reconstruct-itinerary-examples">
-          {EXAMPLES.map((example, i) => (
-            <button
-              key={i}
-              className="reconstruct-itinerary-example-btn"
-              onClick={() => {
-                setInputValue(JSON.stringify(example.tickets || example.inputs || example))
-                handleReset()
-              }}
-            >
-              {example.label || `Example ${i + 1}`}
-            </button>
-          ))}
-        </div>
+  return (
+    <div className="problem-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+          {panelDivs.viz && createPortal(visualizationPanel, panelDivs.viz)}
+          {panelDivs.code && createPortal(
+            <CodeTracePanel
+              step={step}
+              codeLines={SOLUTION_CODE}
+              highlightedLines={connectivity.highlightedLines}
+              onLineSelect={connectivity.handleLineSelect}
+            />,
+            panelDivs.code,
+          )}
+        </>
       )}
-
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-        />
-      </FloatingPanel>
+      {createPortal(
+        <FloatingPanel title="Playback Controls">
+          <PlaybackControls
+            isPlaying={isPlaying}
+            isDone={isDone}
+            speed={speed}
+            onPlayToggle={togglePlay}
+            onPrev={stepBack}
+            onNext={stepForward}
+            onReset={handleReset}
+            prevDisabled={stepIndex < 0}
+            nextDisabled={isDone}
+            resetDisabled={stepIndex < 0}
+            onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+          />
+        </FloatingPanel>,
+        document.body,
+      )}
     </div>
   )
 }

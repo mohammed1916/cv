@@ -1,8 +1,11 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamplesOr } from '../../config/examplesRegistry'
@@ -254,27 +257,37 @@ export default function FlattenNestedListIteratorVisualizer() {
   const displayStack = step ? [...step.stack].reverse() : []
   const output = step ? step.output : []
   const actionMeta = step ? ACTION_META[step.action] || { label: '', color: '#627794' } : null
+  const applyExample = useCallback((example) => {
+    setInputValue(JSON.stringify(example.inputs || example))
+    handleReset()
+  }, [handleReset])
+  const panelConfigs = useMemo(() => [
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: 'Visualization', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
+  ], [])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
     <div className="flatten-nested-list-iterator-shell">
-      <div className="flatten-nested-list-iterator-panel">
-        <div className="flatten-nested-list-iterator-panel-head">Input (nested list as JSON)</div>
-        <div className="flatten-nested-list-iterator-panel-body">
-          <textarea
-            value={inputValue}
-            onChange={(e) => { setInputValue(e.target.value); handleReset() }}
-            className="flatten-nested-list-iterator-textarea"
-            placeholder="e.g. [[1,1],2,[1,1]]"
-            spellCheck={false}
-          />
-          {inputError && <div className="flatten-nested-list-iterator-error">{inputError}</div>}
-        </div>
-      </div>
-
-      <div className="flatten-nested-list-iterator-panel">
-        <div className="flatten-nested-list-iterator-panel-head">Visualization</div>
-        <div className="flatten-nested-list-iterator-panel-body">
-          <AnimatePresence mode="wait">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.input && createPortal(
+            <ManualInputPanel
+              fields={[{ key: 'nestedList', label: 'Nested list (JSON)', type: 'array', placeholder: '[[1,1],2,[1,1]]' }]}
+              values={{ nestedList: inputValue }}
+              onChange={(key, value) => { if (key === 'nestedList') { setInputValue(value); handleReset() } }}
+              examples={EXAMPLES}
+              activeLabel={EXAMPLES.find((example) => JSON.stringify(example.inputs || example) === inputValue)?.label}
+              applyExample={applyExample}
+              inputError={inputError}
+            />,
+            panelDivs.input,
+          )}
+          {panelDivs.viz && createPortal(
+            <AnimatePresence mode="wait">
             <motion.div
               key={stepIndex}
               className="flatten-nested-list-iterator-viz"
@@ -361,51 +374,38 @@ export default function FlattenNestedListIteratorVisualizer() {
                 </>
               )}
             </motion.div>
-          </AnimatePresence>
-        </div>
-      </div>
-
-      <div className="flatten-nested-list-iterator-panel">
-        <div className="flatten-nested-list-iterator-panel-head">Code</div>
-        <div className="flatten-nested-list-iterator-panel-body">
+            </AnimatePresence>,
+            panelDivs.viz,
+          )}
+          {panelDivs.code && createPortal(
           <CodeTracePanel
             step={step}
             codeLines={SOLUTION_CODE}
             highlightedLines={connectivity.highlightedLines}
             onLineSelect={connectivity.handleLineSelect}
-          />
-        </div>
-      </div>
-
-      {EXAMPLES.length > 0 && (
-        <div className="flatten-nested-list-iterator-examples">
-          {EXAMPLES.map((example, i) => (
-            <button
-              key={i}
-              className="flatten-nested-list-iterator-example-btn"
-              onClick={() => { setInputValue(JSON.stringify(example.inputs || example)); handleReset() }}
-            >
-              {example.label || `Example ${i + 1}`}
-            </button>
-          ))}
-        </div>
+          />,
+            panelDivs.code,
+          )}
+        </>
       )}
-
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-        />
-      </FloatingPanel>
+      {createPortal(
+        <FloatingPanel title="Playback Controls">
+          <PlaybackControls
+            isPlaying={isPlaying}
+            isDone={isDone}
+            speed={speed}
+            onPlayToggle={togglePlay}
+            onPrev={stepBack}
+            onNext={stepForward}
+            onReset={handleReset}
+            prevDisabled={stepIndex < 0}
+            nextDisabled={isDone}
+            resetDisabled={stepIndex < 0}
+            onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+          />
+        </FloatingPanel>,
+        document.body,
+      )}
     </div>
   )
 }

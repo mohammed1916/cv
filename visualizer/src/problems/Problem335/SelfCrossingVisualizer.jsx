@@ -1,7 +1,10 @@
-import { useState, useMemo } from 'react'
+import { useState, useCallback, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
@@ -52,119 +55,125 @@ function computeBounds(pts) {
   let minX = Infinity
   let maxX = -Infinity
   let minY = Infinity
+
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(() => [
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: 'Self Crossing', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
+  ], [])
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+  const applyExample = useCallback((example) => {
+    setInputValue(JSON.stringify(exampleToArray(example)))
+    handleReset()
+  }, [handleReset])
+
+  const inputPanel = (
+    <ManualInputPanel
+      fields={[{
+        key: 'distances',
+        label: 'Distances (JSON array)',
+        type: 'string',
+        placeholder: '[2,1,1,2]',
+      }]}
+      values={{ distances: inputValue }}
+      onChange={(_, value) => { setInputValue(value); handleReset() }}
+      examples={EXAMPLES}
+      applyExample={applyExample}
+      inputError={inputError}
+    />
+  )
+
+  const visualizationPanel = (
+    <div className="self-crossing-panel-body">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={stepIndex}
+          className="self-crossing-viz"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div className={`self-crossing-step-info kind-${statusKind}`}>
+            <h3>{step?.message || 'Press play to walk the path and check for self-crossings.'}</h3>
+          </div>
+
+          <div className="self-crossing-legend">
+            <span className="self-crossing-chip">
+              Segment {moveIndex >= 0 ? moveIndex : '—'}
+              {cells.length > 0 ? ` / ${cells.length - 1}` : ''}
+            </span>
+            <span className="self-crossing-chip">
+              Direction: {moveIndex >= 0 ? DIR_NAMES[moveIndex % 4] : '—'}
+            </span>
+            <span className={`self-crossing-chip status-${statusKind}`}>{statusLabel}</span>
+          </div>
+
+          {cells.length > 0 && (
+            <div className="self-crossing-array">
+              {cells.map((d, idx) => (
+                <div
+                  key={idx}
+                  className={`self-crossing-cell${idx === moveIndex ? ' current' : ''}${refSet.includes(idx) && idx !== moveIndex ? ' ref' : ''}`}
+                >
+                  <span className="self-crossing-cell-i">{idx}</span>
+                  <span className="self-crossing-cell-v">{d}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div className="self-crossing-stage">
+            <PathCanvas
+              points={canvasPoints}
+              bounds={canvasBounds}
+              moveIndex={moveIndex}
+              crossingPoint={step?.crossingPoint || null}
+              crossingDetected={!!step?.crossingDetected}
+            />
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  )
   let maxY = -Infinity
   for (const p of pts) {
-    if (p.x < minX) minX = p.x
-    if (p.x > maxX) maxX = p.x
-    if (p.y < minY) minY = p.y
-    if (p.y > maxY) maxY = p.y
-  }
-  if (!Number.isFinite(minX)) return { minX: -1, maxX: 1, minY: -1, maxY: 1 }
-  return { minX, maxX, minY, maxY }
-}
-
-// Intersection point of two axis-aligned segments a-b and c-d, or null.
-function segIntersect(a, b, c, d) {
-  const r = { x: b.x - a.x, y: b.y - a.y }
-  const s = { x: d.x - c.x, y: d.y - c.y }
-  const qp = { x: c.x - a.x, y: c.y - a.y }
-  const denom = r.x * s.y - r.y * s.x
-  if (denom === 0) {
-    // Parallel — only meaningful when collinear and overlapping.
-    if (qp.x * r.y - qp.y * r.x !== 0) return null
-    if (a.x === b.x && a.x === c.x) {
-      const lo = Math.max(Math.min(a.y, b.y), Math.min(c.y, d.y))
-      const hi = Math.min(Math.max(a.y, b.y), Math.max(c.y, d.y))
-      return lo <= hi ? { x: a.x, y: (lo + hi) / 2 } : null
-    }
-    if (a.y === b.y && a.y === c.y) {
-      const lo = Math.max(Math.min(a.x, b.x), Math.min(c.x, d.x))
-      const hi = Math.min(Math.max(a.x, b.x), Math.max(c.x, d.x))
-      return lo <= hi ? { x: (lo + hi) / 2, y: a.y } : null
-    }
-    return null
-  }
-  const t = (qp.x * s.y - qp.y * s.x) / denom
-  const u = (qp.x * r.y - qp.y * r.x) / denom
-  if (t >= 0 && t <= 1 && u >= 0 && u <= 1) {
-    return { x: a.x + t * r.x, y: a.y + t * r.y }
-  }
-  return null
-}
-
-// Find where segment i (points[i] -> points[i+1]) meets an earlier, non-adjacent segment.
-function findCrossingPoint(points, i) {
-  const a = points[i]
-  const b = points[i + 1]
-  for (let j = 0; j <= i - 2; j++) {
-    const hit = segIntersect(a, b, points[j], points[j + 1])
-    if (hit) return hit
-  }
-  return null
-}
-
-function generateSteps(distances) {
-  const x = distances
-  const n = x.length
-  const full = computePoints(x)
-  const bounds = computeBounds(full)
-  const steps = []
-
-  let crossed = false
-  let crossCase = null
-  let crossPoint = null
-
-  const snap = (upto, extra) => ({
-    distances: x,
-    points: full.slice(0, upto).map((p) => ({ x: p.x, y: p.y })),
-    bounds,
-    crossingDetected: crossed,
-    crossingCase: crossCase,
-    crossingPoint: crossPoint ? { ...crossPoint } : null,
-    moveIndex: -1,
-    refIndices: [],
-    ...extra,
-  })
-
-  steps.push({
-    phase: 'init',
-    activeLine: 1,
-    relatedLines: [1, 2],
-    message: `Start at the origin (0, 0). The path has ${n} move(s); we head North, West, South, East and turn counter-clockwise after each.`,
-    ...snap(1),
-  })
-
-  for (let i = 0; i < n && !crossed; i++) {
-    const p = full[i + 1]
-    steps.push({
-      phase: 'move',
-      activeLine: 3,
-      relatedLines: [3],
-      message: `Move ${i}: go ${DIR_NAMES[i % 4]} for x[${i}] = ${x[i]} unit(s), reaching (${p.x}, ${p.y}).`,
-      ...snap(i + 2, { moveIndex: i, refIndices: [i] }),
-    })
-
-    if (i < 3) {
-      steps.push({
-        phase: 'note',
-        activeLine: 3,
-        relatedLines: [2, 3],
-        message: `Only ${i + 1} segment(s) drawn — a self-crossing needs at least 4 segments, so no check yet.`,
-        ...snap(i + 2, { moveIndex: i, refIndices: [i] }),
-      })
-      continue
-    }
-
-    // Case 1: current line crosses the line three steps back.
-    const c1 = x[i] >= x[i - 2] && x[i - 1] <= x[i - 3]
-    steps.push({
-      phase: 'check',
-      activeLine: 5,
-      relatedLines: [4, 5],
-      message: `Case 1: x[${i}]=${x[i]} >= x[${i - 2}]=${x[i - 2]} (${x[i] >= x[i - 2]}) and x[${i - 1}]=${x[i - 1]} <= x[${i - 3}]=${x[i - 3]} (${x[i - 1] <= x[i - 3]}) -> ${c1}.`,
-      ...snap(i + 2, { moveIndex: i, refIndices: [i, i - 1, i - 2, i - 3] }),
-    })
-    if (c1) {
+    <div className="problem-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+          {panelDivs.viz && createPortal(visualizationPanel, panelDivs.viz)}
+          {panelDivs.code && createPortal(
+            <CodeTracePanel
+              step={step}
+              codeLines={SOLUTION_CODE}
+              highlightedLines={connectivity.highlightedLines}
+              onLineSelect={connectivity.handleLineSelect}
+            />,
+            panelDivs.code,
+          )}
+        </>
+      )}
+      {createPortal(
+        <FloatingPanel title="Playback Controls">
+          <PlaybackControls
+            isPlaying={isPlaying}
+            isDone={isDone}
+            speed={speed}
+            onPlayToggle={togglePlay}
+            onPrev={stepBack}
+            onNext={stepForward}
+            onReset={handleReset}
+            prevDisabled={stepIndex < 0}
+            nextDisabled={isDone}
+            resetDisabled={stepIndex < 0}
+            onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+          />
+        </FloatingPanel>,
+        document.body,
+      )}
       crossed = true
       crossCase = 1
       crossPoint = findCrossingPoint(full, i)

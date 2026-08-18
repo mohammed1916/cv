@@ -48,6 +48,22 @@
   overflow: hidden;
 }
 
+.srw-input-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+}
+
+.srw-input-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.srw-input-actions .srw-button {
+  margin-top: 0;
+}
+
 .srw-code-panel {
   flex: 1;
   min-width: 0;

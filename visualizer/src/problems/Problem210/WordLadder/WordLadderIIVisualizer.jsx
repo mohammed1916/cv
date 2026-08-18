@@ -28,20 +28,21 @@ const SOLUTION_CODE = [
 
 function generateSteps(beginWord, endWord, wordList) {
   const steps = []
+  const words = [...new Set([...wordList, beginWord])]
   steps.push({ activeLine: 1, beginWord, endWord, message: `Find shortest paths from "${beginWord}" to "${endWord}"`, relatedLines: [1] })
   steps.push({ activeLine: 2, message: "Build word transformation graph", relatedLines: [2, 3, 4, 5, 6] })
   const oneCharDiff = (w1, w2) => w1.split("").filter((c, i) => c !== w2[i]).length === 1
   const neighbors = {}
-  wordList.forEach(w => { neighbors[w] = [] })
-  wordList.forEach(w1 => {
-    wordList.forEach(w2 => {
+  words.forEach(w => { neighbors[w] = [] })
+  words.forEach(w1 => {
+    words.forEach(w2 => {
       if (w1 !== w2 && oneCharDiff(w1, w2)) neighbors[w1].push(w2)
     })
   })
   steps.push({ activeLine: 6, neighbors: { ...neighbors }, message: "Graph edges: words differ by 1 char", relatedLines: [6] })
   steps.push({ activeLine: 7, message: "Initialize distances with BFS", relatedLines: [7, 8, 9] })
   const dist = {}
-  wordList.forEach(w => { dist[w] = Infinity })
+  words.forEach(w => { dist[w] = Infinity })
   dist[beginWord] = 0
   const queue = [beginWord]
   let qIdx = 0
@@ -58,21 +59,21 @@ function generateSteps(beginWord, endWord, wordList) {
   }
   steps.push({ activeLine: 11, dist: { ...dist }, message: "Start backtracking from endWord", relatedLines: [11] })
   const result = []
-  function dfs(word, path, depth = 0) {
-    if (depth > 10) return
+  function dfs(word, path) {
     if (word === beginWord) {
-      result.push([beginWord, ...path.reverse()])
-      steps.push({ activeLine: 11, path: [beginWord, ...path.reverse()], message: `Found path: ${[beginWord, ...path.reverse()].join(" -> ")}`, relatedLines: [11] })
+      const foundPath = [...path]
+      result.push(foundPath)
+      steps.push({ activeLine: 11, path: foundPath, result: result.map((found) => [...found]), message: `Found path: ${foundPath.join(" -> ")}`, relatedLines: [11] })
       return
     }
     for (const prev of neighbors[word] || []) {
       if (dist[prev] === dist[word] - 1) {
         steps.push({ activeLine: 11, current: word, prev, dist: { ...dist }, message: `Backtrack: "${word}" <- "${prev}"`, relatedLines: [11] })
-        dfs(prev, [...path, word], depth + 1)
+        dfs(prev, [prev, ...path])
       }
     }
   }
-  dfs(endWord, [])
+  if (dist[endWord] !== Infinity) dfs(endWord, [endWord])
   steps.push({ activeLine: 12, result, done: true, message: `Found ${result.length} path(s)`, relatedLines: [12] })
   return steps
 }

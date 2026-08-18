@@ -1,8 +1,11 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { getExamplesOr } from '../../config/examplesRegistry'
@@ -195,26 +198,37 @@ export default function HouseRobberIIIVisualizer() {
   } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
+  const applyExample = useCallback((example) => {
+    setInputValue(JSON.stringify(example.inputs || example))
+    handleReset()
+  }, [handleReset])
+  const panelConfigs = useMemo(() => [
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: 'Visualization', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
+  ], [])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
     <div className="house-robber-i-i-i-shell">
-      <div className="house-robber-i-i-i-panel">
-        <div className="house-robber-i-i-i-panel-head">Input — binary tree (level-order, nulls allowed)</div>
-        <div className="house-robber-i-i-i-panel-body">
-          <textarea
-            value={inputValue}
-            onChange={(e) => { setInputValue(e.target.value); handleReset() }}
-            className="house-robber-i-i-i-textarea"
-            placeholder="e.g. [3,2,3,null,3,null,1]"
-          />
-          {inputError && <div className="house-robber-i-i-i-error">{inputError}</div>}
-        </div>
-      </div>
-
-      <div className="house-robber-i-i-i-panel">
-        <div className="house-robber-i-i-i-panel-head">Visualization</div>
-        <div className="house-robber-i-i-i-panel-body">
-          <AnimatePresence mode="wait">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.input && createPortal(
+            <ManualInputPanel
+              fields={[{ key: 'tree', label: 'Binary tree (level-order JSON)', type: 'array', placeholder: '[3,2,3,null,3,null,1]' }]}
+              values={{ tree: inputValue }}
+              onChange={(key, value) => { if (key === 'tree') { setInputValue(value); handleReset() } }}
+              examples={EXAMPLES}
+              activeLabel={EXAMPLES.find((example) => JSON.stringify(example.inputs || example) === inputValue)?.label}
+              applyExample={applyExample}
+              inputError={inputError}
+            />,
+            panelDivs.input,
+          )}
+          {panelDivs.viz && createPortal(
+            <AnimatePresence mode="wait">
             <motion.div
               key={stepIndex}
               className="house-robber-i-i-i-viz"
@@ -293,54 +307,38 @@ export default function HouseRobberIIIVisualizer() {
                 </div>
               )}
             </motion.div>
-          </AnimatePresence>
-        </div>
-      </div>
-
-      <div className="house-robber-i-i-i-panel">
-        <div className="house-robber-i-i-i-panel-head">Code</div>
-        <div className="house-robber-i-i-i-panel-body">
+            </AnimatePresence>,
+            panelDivs.viz,
+          )}
+          {panelDivs.code && createPortal(
           <CodeTracePanel
             step={step}
             codeLines={SOLUTION_CODE}
             highlightedLines={connectivity.highlightedLines}
             onLineSelect={connectivity.handleLineSelect}
-          />
-        </div>
-      </div>
-
-      {EXAMPLES.length > 0 && (
-        <div className="house-robber-i-i-i-examples">
-          {EXAMPLES.map((example, i) => {
-            const value = JSON.stringify(example.inputs || example)
-            return (
-              <button
-                key={i}
-                className={`house-robber-i-i-i-example-btn${inputValue === value ? ' active' : ''}`}
-                onClick={() => { setInputValue(value); handleReset() }}
-              >
-                {example.label || `Example ${i + 1}`}
-              </button>
-            )
-          })}
-        </div>
+          />,
+            panelDivs.code,
+          )}
+        </>
       )}
-
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-        />
-      </FloatingPanel>
+      {createPortal(
+        <FloatingPanel title="Playback Controls">
+          <PlaybackControls
+            isPlaying={isPlaying}
+            isDone={isDone}
+            speed={speed}
+            onPlayToggle={togglePlay}
+            onPrev={stepBack}
+            onNext={stepForward}
+            onReset={handleReset}
+            prevDisabled={stepIndex < 0}
+            nextDisabled={isDone}
+            resetDisabled={stepIndex < 0}
+            onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+          />
+        </FloatingPanel>,
+        document.body,
+      )}
     </div>
   )
 }

@@ -1,15 +1,16 @@
 ﻿import { useState, useCallback, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import './Problem417Visualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
-import CodePatternAnnotations from '../../components/CodePatternAnnotations'
-import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
 
 // Pattern annotations
@@ -84,29 +85,38 @@ function generateSteps(heights) {
     message: `Grid: ${m}x${n}. Initialize pacific and atlantic sets.`,
   })
 
-  // Simulate DFS from Pacific
   const pacific = new Set()
-  const visited = new Set()
+  const atlantic = new Set()
 
-  function simulateDfs(r, c, fromSet, prevH, isPhase1, cellsToAdd = []) {
-    if (r < 0 || r >= m || c < 0 || c >= n) return
-    if (visited.has(`${r},${c}`)) return
-    if (heights[r][c] < prevH) return
-
-    visited.add(`${r},${c}`)
-    fromSet.add(`${r},${c}`)
-    cellsToAdd.push([r, c])
-
-    // Record step for this cell
+  const addStep = ({ phase, activeLine, message, currentCell, result = [] }) => {
     steps.push({
-      phase: isPhase1 ? 'pacific_dfs' : 'atlantic_dfs',
+      phase,
       pacific: new Set(pacific),
-      atlantic: new Set(fromSet),
-      result: [],
-      activeLine: isPhase1 ? 12 : 12,
-      message: `DFS from ${isPhase1 ? 'Pacific' : 'Atlantic'}: visiting (${r},${c}), height=${heights[r][c]}`,
+      atlantic: new Set(atlantic),
+      result,
+      activeLine,
+      message,
+      currentCell,
+    })
+  }
+
+  const explore = (r, c, visited, ocean, phase, previousHeight) => {
+    if (r < 0 || r >= m || c < 0 || c >= n || visited.has(`${r},${c}`)) return
+    if (heights[r][c] < previousHeight) return
+
+    const cellKey = `${r},${c}`
+    visited.add(cellKey)
+    ocean.add(cellKey)
+    addStep({
+      phase,
+      activeLine: 12,
+      message: `Visit (${r},${c}) at height ${heights[r][c]}; water can flow back to this ocean.`,
       currentCell: [r, c],
     })
+
+    for (const [dr, dc, activeLine] of [[1, 0, 13], [-1, 0, 14], [0, 1, 15], [0, -1, 16]]) {
+      explore(r + dr, c + dc, visited, ocean, phase, heights[r][c])
+    }
   }
 
   // Phase 1: DFS from Pacific borders
@@ -119,42 +129,25 @@ function generateSteps(heights) {
     message: 'Phase 1: DFS from Pacific (top and left borders)',
   })
 
-  visited.clear()
-  // Top and left borders
+  const pacificVisited = new Set()
   for (let r = 0; r < m; r++) {
-    visited.add(`${r},0`)
-    pacific.add(`${r},0`)
-    steps.push({
+    addStep({
       phase: 'pacific_dfs',
-      pacific: new Set(pacific),
-      atlantic: new Set(),
-      result: [],
       activeLine: 20,
       message: `Starting DFS from left border: (${r},0), height=${heights[r][0]}`,
       currentCell: [r, 0],
     })
+    explore(r, 0, pacificVisited, pacific, 'pacific_dfs', 0)
   }
 
   for (let c = 0; c < n; c++) {
-    if (!visited.has(`0,${c}`)) {
-      visited.add(`0,${c}`)
-      pacific.add(`0,${c}`)
-      steps.push({
-        phase: 'pacific_dfs',
-        pacific: new Set(pacific),
-        atlantic: new Set(),
-        result: [],
+    addStep({
+      phase: 'pacific_dfs',
         activeLine: 22,
-        message: `Starting DFS from top border: (0,${c}), height=${heights[0][c]}`,
+      message: `Starting DFS from top border: (0,${c}), height=${heights[0][c]}`,
         currentCell: [0, c],
-      })
-    }
-  }
-
-  // Simulate spreading from borders (simplified for visualization)
-  const pacificVisited = new Set()
-  for (const cell of pacific) {
-    pacificVisited.add(cell)
+    })
+    explore(0, c, pacificVisited, pacific, 'pacific_dfs', 0)
   }
 
   // Phase 2: DFS from Atlantic borders
@@ -167,38 +160,25 @@ function generateSteps(heights) {
     message: 'Phase 2: DFS from Atlantic (bottom and right borders)',
   })
 
-  const atlantic = new Set()
   const atlanticVisited = new Set()
-
-  // Bottom and right borders
   for (let r = 0; r < m; r++) {
-    atlanticVisited.add(`${r},${n - 1}`)
-    atlantic.add(`${r},${n - 1}`)
-    steps.push({
+    addStep({
       phase: 'atlantic_dfs',
-      pacific: new Set(pacific),
-      atlantic: new Set(atlantic),
-      result: [],
       activeLine: 26,
       message: `Starting DFS from right border: (${r},${n - 1}), height=${heights[r][n - 1]}`,
       currentCell: [r, n - 1],
     })
+    explore(r, n - 1, atlanticVisited, atlantic, 'atlantic_dfs', 0)
   }
 
   for (let c = 0; c < n; c++) {
-    if (!atlanticVisited.has(`${m - 1},${c}`)) {
-      atlanticVisited.add(`${m - 1},${c}`)
-      atlantic.add(`${m - 1},${c}`)
-      steps.push({
-        phase: 'atlantic_dfs',
-        pacific: new Set(pacific),
-        atlantic: new Set(atlantic),
-        result: [],
+    addStep({
+      phase: 'atlantic_dfs',
         activeLine: 28,
-        message: `Starting DFS from bottom border: (${m - 1},${c}), height=${heights[m - 1][c]}`,
+      message: `Starting DFS from bottom border: (${m - 1},${c}), height=${heights[m - 1][c]}`,
         currentCell: [m - 1, c],
-      })
-    }
+    })
+    explore(m - 1, c, atlanticVisited, atlantic, 'atlantic_dfs', 0)
   }
 
   // Find intersection (cells reachable from both)
@@ -209,13 +189,11 @@ function generateSteps(heights) {
     }
   }
 
-  steps.push({
+  addStep({
     phase: 'result',
-    pacific: new Set(pacific),
-    atlantic: new Set(atlantic),
-    result: result,
     activeLine: 30,
     message: `Result: ${result.length} cells reachable from both Pacific and Atlantic`,
+    result,
   })
 
   return steps
@@ -268,6 +246,13 @@ function Problem417Visualizer() {
   const m = heights.length
   const n = heights[0]?.length || 0
   const cellSize = Math.min(320 / n, 240 / m, 50)
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(() => [
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: 'Pacific Atlantic Flow', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
+  ], [])
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   const getCellColor = (r, c) => {
     const cellKey = `${r},${c}`
@@ -281,20 +266,9 @@ function Problem417Visualizer() {
     return 'var(--code-line)' // Catppuccin Surface 2
   }
 
-  return (
+  const visualizationPanel = (
     <div className="paw-shell">
-      <div className="paw-top">
-        <div className="paw-panel paw-code-panel">
-          <CodeTracePanel
-            codeLines={SOLUTION_CODE}
-            step={activeStep}
-            highlightedLines={connectivity.highlightedLines}
-            title="Solution Code"
-            onActiveLineDomChange={setActiveLineDom}
-          />
-        </div>
-
-        <div className="paw-panel paw-visualization">
+      <div className="paw-panel paw-visualization">
           <div className="paw-panel-head">Grid Visualization</div>
           <div className="paw-panel-body">
             <div
@@ -337,7 +311,6 @@ function Problem417Visualizer() {
               </AnimatePresence>
             </div>
           </div>
-        </div>
       </div>
 
       <div className="paw-middle">
@@ -370,30 +343,51 @@ function Problem417Visualizer() {
           </div>
         </div>
 
-        <div className="paw-panel paw-controls">
-          <div className="paw-panel-head">Input</div>
-          <div className="paw-panel-body">
-            <div className="paw-examples">
-              {EXAMPLES.map((example) => <button key={example.label} className="paw-button paw-button-secondary" onClick={() => applyExample(example)}>{example.label}</button>)}
-            </div>
-            <textarea
-              className="paw-input"
-              value={inputValue}
-              onChange={(e) => { setInputValue(e.target.value); setInputError('') }}
-              rows={3}
-            />
-            {inputError && <div className="paw-input-error">{inputError}</div>}
-            <button className="paw-button" onClick={handleRun}>
-              Run
-            </button>
-            <button className="paw-button paw-button-secondary" onClick={handleReset}>
-              Reset
-            </button>
-          </div>
-        </div>
       </div>
+    </div>
+  )
 
-      <div className="paw-bottom">
+  const inputPanel = (
+    <div className="paw-input-panel">
+      <ManualInputPanel
+        fields={[{ key: 'heights', label: 'Heights matrix (JSON)', type: 'string' }]}
+        values={{ heights: inputValue }}
+        onChange={(_, value) => { setInputValue(value); setInputError('') }}
+        examples={EXAMPLES}
+        applyExample={applyExample}
+        inputError={inputError}
+      />
+      <div className="paw-input-actions">
+        <button type="button" className="paw-button" onClick={handleRun}>Run</button>
+        <button type="button" className="paw-button paw-button-secondary" onClick={handleReset}>Reset</button>
+      </div>
+    </div>
+  )
+
+  return (
+    <div className="problem-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.input && createPortal(
+            inputPanel,
+            panelDivs.input,
+          )}
+          {panelDivs.viz && createPortal(visualizationPanel, panelDivs.viz)}
+          {panelDivs.code && createPortal(
+            <CodeTracePanel
+              codeLines={SOLUTION_CODE}
+              step={activeStep}
+              highlightedLines={connectivity.highlightedLines}
+              onLineSelect={connectivity.handleLineSelect}
+              title="Solution Code"
+              onActiveLineDomChange={setActiveLineDom}
+            />,
+            panelDivs.code,
+          )}
+        </>
+      )}
+      {createPortal(
         <FloatingPanel title="Playback Controls">
           <PlaybackControls
             isPlaying={isPlaying}
@@ -413,7 +407,8 @@ function Problem417Visualizer() {
             showPatternOverlayToggle
           />
         </FloatingPanel>
-      </div>
+        , document.body,
+      )}
 
       {showPatternOverlay && activeStep && <PatternOverlay step={activeStep} activeLineDom={activeLineDom} />}
     </div>

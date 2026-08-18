@@ -195,6 +195,11 @@ const FALLBACK_EXAMPLES = [
 ]
 const EXAMPLES = REGISTRY_EXAMPLES.length > 0 ? REGISTRY_EXAMPLES : FALLBACK_EXAMPLES
 
+function isNestedNumberList(value) {
+  return Array.isArray(value)
+    && value.every((item) => Number.isFinite(item) || isNestedNumberList(item))
+}
+
 export default function NestedListWeightSumVisualizer() {
   const [inputValue, setInputValue] = useState(
     EXAMPLES.length > 0 ? JSON.stringify(EXAMPLES[0].inputs || EXAMPLES[0]) : '[[1,1],2,[1,1]]',
@@ -203,7 +208,7 @@ export default function NestedListWeightSumVisualizer() {
   const parsed = useMemo(() => {
     try {
       const v = JSON.parse(inputValue)
-      return Array.isArray(v) ? v : null
+      return isNestedNumberList(v) ? v : null
     } catch {
       return null
     }
@@ -212,7 +217,7 @@ export default function NestedListWeightSumVisualizer() {
   const inputError = useMemo(() => {
     try {
       const v = JSON.parse(inputValue)
-      if (!Array.isArray(v)) return 'Input must be a nested list array, e.g. [[1,1],2,[1,1]]'
+      if (!isNestedNumberList(v)) return 'Input must be a nested list of finite numbers, e.g. [[1,1],2,[1,1]]'
       return ''
     } catch (e) {
       return e.message

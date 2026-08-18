@@ -1,8 +1,11 @@
 ﻿import { useState, useCallback, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
+import LuminoDockPanel from '../../components/LuminoDockPanel'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -231,6 +234,13 @@ function SwimInRisingWaterVisualizer() {
 
   const n = grid.length
   const cellSize = Math.min(320 / n, 240 / n, 60)
+  const [panelDivs, setPanelDivs] = useState(null)
+  const panelConfigs = useMemo(() => [
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: 'Swim in Rising Water', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
+  ], [])
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   const getCellColor = (r, c) => {
     const cellKey = `${r},${c}`
@@ -250,19 +260,9 @@ function SwimInRisingWaterVisualizer() {
     return 'var(--code-line)'
   }
 
-  return (
+  const visualizationPanel = (
     <div className="srw-shell">
       <div className="srw-top">
-        <div className="srw-panel srw-code-panel">
-          <CodeTracePanel
-            codeLines={SOLUTION_CODE}
-            step={activeStep}
-            highlightedLines={connectivity.highlightedLines}
-            title="Solution Code"
-            onActiveLineDomChange={setActiveLineDom}
-          />
-        </div>
-
         <div className="srw-panel srw-visualization">
           <div className="srw-panel-head">Grid Visualization (t = {activeStep?.mid ?? '?'})</div>
           <div className="srw-panel-body">
@@ -353,30 +353,48 @@ function SwimInRisingWaterVisualizer() {
           </div>
         </div>
 
-        <div className="srw-panel srw-controls">
-          <div className="srw-panel-head">Input</div>
-          <div className="srw-panel-body">
-            <div className="srw-examples">
-              {EXAMPLES.map((example) => <button key={example.label} className="srw-button" onClick={() => applyExample(example)}>{example.label}</button>)}
-            </div>
-            <textarea
-              className="srw-input"
-              value={inputValue}
-              onChange={(e) => { setInputValue(e.target.value); setInputError('') }}
-              rows={3}
-            />
-            {inputError && <div className="srw-input-error">{inputError}</div>}
-            <button className="srw-button" onClick={handleRun}>
-              Run
-            </button>
-            <button className="srw-button srw-button-secondary" onClick={handleReset}>
-              Reset
-            </button>
-          </div>
-        </div>
       </div>
+    </div>
+  )
 
-      <div className="srw-bottom">
+  const inputPanel = (
+    <div className="srw-input-panel">
+      <ManualInputPanel
+        fields={[{ key: 'grid', label: 'Square grid (JSON)', type: 'string' }]}
+        values={{ grid: inputValue }}
+        onChange={(_, value) => { setInputValue(value); setInputError('') }}
+        examples={EXAMPLES}
+        applyExample={applyExample}
+        inputError={inputError}
+      />
+      <div className="srw-input-actions">
+        <button type="button" className="srw-button" onClick={handleRun}>Run</button>
+        <button type="button" className="srw-button srw-button-secondary" onClick={handleReset}>Reset</button>
+      </div>
+    </div>
+  )
+
+  return (
+    <div className="problem-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      {panelDivs && (
+        <>
+          {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+          {panelDivs.viz && createPortal(visualizationPanel, panelDivs.viz)}
+          {panelDivs.code && createPortal(
+            <CodeTracePanel
+              codeLines={SOLUTION_CODE}
+              step={activeStep}
+              highlightedLines={connectivity.highlightedLines}
+              onLineSelect={connectivity.handleLineSelect}
+              title="Solution Code"
+              onActiveLineDomChange={setActiveLineDom}
+            />,
+            panelDivs.code,
+          )}
+        </>
+      )}
+      {createPortal(
         <FloatingPanel title="Playback Controls">
           <PlaybackControls
             isPlaying={isPlaying}
@@ -395,8 +413,9 @@ function SwimInRisingWaterVisualizer() {
             patternOverlayLabel="Show pattern overlay"
             showPatternOverlayToggle
           />
-        </FloatingPanel>
-      </div>
+        </FloatingPanel>,
+        document.body,
+      )}
 
       {showPatternOverlay && activeStep && <PatternOverlay step={activeStep} activeLineDom={activeLineDom} />}
     </div>
