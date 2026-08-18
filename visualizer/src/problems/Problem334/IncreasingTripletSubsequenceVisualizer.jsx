@@ -155,12 +155,12 @@ const EXAMPLES =
   REGISTERED_EXAMPLES.length > 0
     ? REGISTERED_EXAMPLES
     : [
-        { label: 'Triplet exists', inputs: [2, 1, 5, 0, 4, 6] },
-        { label: 'Strictly increasing', inputs: [1, 2, 3, 4, 5] },
-        { label: 'Decreasing (none)', inputs: [5, 4, 3, 2, 1] },
-        { label: 'Tricky reset', inputs: [20, 100, 10, 12, 5, 13] },
-        { label: 'Duplicates only', inputs: [2, 2, 2, 2] },
-      ]
+      { label: 'Triplet exists', inputs: [2, 1, 5, 0, 4, 6] },
+      { label: 'Strictly increasing', inputs: [1, 2, 3, 4, 5] },
+      { label: 'Decreasing (none)', inputs: [5, 4, 3, 2, 1] },
+      { label: 'Tricky reset', inputs: [20, 100, 10, 12, 5, 13] },
+      { label: 'Duplicates only', inputs: [2, 2, 2, 2] },
+    ]
 
 function parseInput(raw) {
   try {

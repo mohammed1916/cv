@@ -17,11 +17,11 @@ import PatternLegend from '../../components/PatternLegend'
 
 const PATTERNS = ['call', 'done', 'return', 'right']
 const LINE_PATTERN_MAP = {
-  5: 'done',
-  6: 'call',
-  7: 'right',
-  9: 'return',
-  11: 'done'
+    5: 'done',
+    6: 'call',
+    7: 'right',
+    9: 'return',
+    11: 'done'
 }
 
 
@@ -225,21 +225,21 @@ export default function DiameterBinaryTreeVisualizer() {
                 {panelDivs.code && createPortal(codePanel, panelDivs.code)}
             </>}
             <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
-        <PlaybackControls
-                isPlaying={isPlaying} isDone={isDone} speed={speed}
-                onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-                prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
-                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                showPatternOverlay={showPatternOverlay}
-                onShowPatternOverlayChange={setShowPatternOverlay}
-                patternOverlayLabel="Show pattern overlay"
-                showPatternOverlayToggle
-            />
-      </FloatingPanel>
-            
+                {showPatternOverlay && (
+                    <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+                )}
+                <PlaybackControls
+                    isPlaying={isPlaying} isDone={isDone} speed={speed}
+                    onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
+                    prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0}
+                    onSpeedChange={(e) => setSpeed(Number(e.target.value))}
+                    showPatternOverlay={showPatternOverlay}
+                    onShowPatternOverlayChange={setShowPatternOverlay}
+                    patternOverlayLabel="Show pattern overlay"
+                    showPatternOverlayToggle
+                />
+            </FloatingPanel>
+
         </div>
     )
 }

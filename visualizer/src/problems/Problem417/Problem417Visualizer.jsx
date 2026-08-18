@@ -52,9 +52,9 @@ const SOLUTION_CODE = [
 ]
 
 const EXAMPLES = [
-  { label: 'Classic 5 × 5', input: [[1,2,2,3,5],[3,2,3,4,4],[2,4,5,3,1],[6,7,1,4,5],[5,1,1,2,4]] },
+  { label: 'Classic 5 × 5', input: [[1, 2, 2, 3, 5], [3, 2, 3, 4, 4], [2, 4, 5, 3, 1], [6, 7, 1, 4, 5], [5, 1, 1, 2, 4]] },
   { label: 'Single cell', input: [[7]] },
-  { label: 'Flat grid', input: [[1,1,1],[1,1,1],[1,1,1]] },
+  { label: 'Flat grid', input: [[1, 1, 1], [1, 1, 1], [1, 1, 1]] },
 ]
 
 function generateSteps(heights) {
@@ -229,9 +229,9 @@ function Problem417Visualizer() {
   const [inputError, setInputError] = useState('')
 
   const steps = useMemo(() => generateSteps(heights).map((current) => ({
-      ...current,
-      relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
-    })), [heights])
+    ...current,
+    relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
+  })), [heights])
   const { stepIndex, isPlaying, speed, setSpeed, togglePlay, handleReset: reset, stepForward, stepBack, isDone, setStepIndex } = usePlaybackState(steps.length)
 
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
@@ -319,12 +319,12 @@ function Problem417Visualizer() {
                       animate={{
                         opacity:
                           activeStep?.currentCell?.[0] === r &&
-                          activeStep?.currentCell?.[1] === c
+                            activeStep?.currentCell?.[1] === c
                             ? 1
                             : 0.8,
                         scale:
                           activeStep?.currentCell?.[0] === r &&
-                          activeStep?.currentCell?.[1] === c
+                            activeStep?.currentCell?.[1] === c
                             ? 1.1
                             : 1,
                       }}
@@ -395,24 +395,24 @@ function Problem417Visualizer() {
 
       <div className="paw-bottom">
         <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onSpeedChange={(event) => setSpeed(Number(event.target.value))}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={reset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
-        />
-      </FloatingPanel>
+          <PlaybackControls
+            isPlaying={isPlaying}
+            isDone={isDone}
+            speed={speed}
+            onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+            onPlayToggle={togglePlay}
+            onPrev={stepBack}
+            onNext={stepForward}
+            onReset={reset}
+            prevDisabled={stepIndex < 0}
+            nextDisabled={isDone}
+            resetDisabled={stepIndex < 0}
+            showPatternOverlay={showPatternOverlay}
+            onShowPatternOverlayChange={setShowPatternOverlay}
+            patternOverlayLabel="Show pattern overlay"
+            showPatternOverlayToggle
+          />
+        </FloatingPanel>
       </div>
 
       {showPatternOverlay && activeStep && <PatternOverlay step={activeStep} activeLineDom={activeLineDom} />}
