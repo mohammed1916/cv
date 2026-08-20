@@ -389,189 +389,216 @@ export default function ChatDrawer() {
       style={floatingMode ? { position: 'relative', width: '100%', height: '100%', cursor: 'default' } : { position: 'relative', width: '100%', height: '100%' }}
     >
       <div className="chat-content-scale" style={{ '--chat-content-scale': contentScale / 100 }}>
-      {/* Header */}
-      <div
-        className="chat-header"
-        onMouseDown={floatingMode ? startDrag : undefined}
-        onTouchStart={floatingMode ? startDrag : undefined}
-        style={floatingMode ? { cursor: 'move' } : {}}
-      >
+        {/* Header */}
+        <div
+          className="chat-header"
+          onMouseDown={floatingMode ? startDrag : undefined}
+          onTouchStart={floatingMode ? startDrag : undefined}
+          style={floatingMode ? { cursor: 'move' } : {}}
+        >
           <div className="chat-header-left">
-          <span className="chat-header-icon">AI</span>
-          <div>
-            <div className="chat-header-title">Algorithm Assistant <span className="chat-shortcut" title="Open or close chat with Alt+C">Alt+C</span></div>
-            <form className="chat-model-controls" data-chat-ignore onSubmit={(event) => event.preventDefault()}>
-              <label>Provider
-                <select value={providerConfig.provider} onChange={(e) => { const provider = e.target.value; const model = provider === 'gemini' ? 'gemini-2.5-flash' : provider === 'ollama-cloud' ? 'gpt-oss:120b' : 'gemma4:e2b'; const next = { provider, model }; setProviderConfig(next); localStorage.setItem('chat.provider.v1', JSON.stringify(next)) }}>
-                  <option value="ollama-local">Ollama Local</option><option value="ollama-cloud">Ollama Cloud</option><option value="gemini">Gemini</option>
-                </select>
-              </label>
-              <label>Model
-                <input value={providerConfig.model || ''} onChange={(e) => { const next = { ...providerConfig, model: e.target.value }; setProviderConfig(next); localStorage.setItem('chat.provider.v1', JSON.stringify(next)) }} placeholder="Model name" />
-              </label>
-              {providerConfig.provider === 'ollama-cloud' && (
-                <label className="chat-cloud-key">Ollama API key
-                  <input
-                    type="password"
-                    value={ollamaApiKey}
-                    onChange={(e) => {
-                      const nextKey = e.target.value;
-                      setOllamaApiKey(nextKey);
-                      try {
-                        if (nextKey) window.sessionStorage.setItem('chat.ollama-api-key', nextKey);
-                        else window.sessionStorage.removeItem('chat.ollama-api-key');
-                      } catch (err) { void err }
-                    }}
-                    placeholder="ollama.com API key"
-                    autoComplete="off"
-                  />
+            <span className="chat-header-icon">AI</span>
+            <div>
+              <div className="chat-header-title">Algorithm Assistant <span className="chat-shortcut" title="Open or close chat with Alt+C">Alt+C</span></div>
+              <form className="chat-model-controls" data-chat-ignore onSubmit={(event) => event.preventDefault()}>
+                <label>Provider
+                  <select value={providerConfig.provider} onChange={(e) => { const provider = e.target.value; const model = provider === 'gemini' ? 'gemini-2.5-flash' : provider === 'ollama-cloud' ? 'gpt-oss:120b' : 'gemma4:e2b'; const next = { provider, model }; setProviderConfig(next); localStorage.setItem('chat.provider.v1', JSON.stringify(next)) }}>
+                    <option value="ollama-local">Ollama Local</option><option value="ollama-cloud">Ollama Cloud</option><option value="gemini">Gemini</option>
+                  </select>
                 </label>
+                <label>Model
+                  <input value={providerConfig.model || ''} onChange={(e) => { const next = { ...providerConfig, model: e.target.value }; setProviderConfig(next); localStorage.setItem('chat.provider.v1', JSON.stringify(next)) }} placeholder="Model name" />
+                </label>
+                {providerConfig.provider === 'ollama-cloud' && (
+                  <label className="chat-cloud-key">Ollama API key
+                    <input
+                      type="password"
+                      value={ollamaApiKey}
+                      onChange={(e) => {
+                        const nextKey = e.target.value;
+                        setOllamaApiKey(nextKey);
+                        try {
+                          if (nextKey) window.sessionStorage.setItem('chat.ollama-api-key', nextKey);
+                          else window.sessionStorage.removeItem('chat.ollama-api-key');
+                        } catch (err) { void err }
+                      }}
+                      placeholder="ollama.com API key"
+                      autoComplete="off"
+                    />
+                  </label>
+                )}
+                {providerConfig.provider === 'gemini' && (
+                  <label className="chat-cloud-key">Gemini API key
+                    <input
+                      type="password"
+                      value={geminiApiKey}
+                      onChange={(e) => {
+                        const nextKey = e.target.value;
+                        setGeminiApiKey(nextKey);
+                        try {
+                          if (nextKey) window.sessionStorage.setItem('chat.gemini-api-key', nextKey);
+                          else window.sessionStorage.removeItem('chat.gemini-api-key');
+                        } catch (err) { void err }
+                      }}
+                      placeholder="Google AI API key"
+                      autoComplete="off"
+                    />
+                  </label>
+                )}
+              </form>
+              {providerConfig.provider === 'ollama-cloud' && (
+                <p className="chat-cloud-key-note">Kept only for this browser session; sent to the chat proxy and Ollama Cloud for your request, never saved by this app.</p>
               )}
               {providerConfig.provider === 'gemini' && (
-                <label className="chat-cloud-key">Gemini API key
-                  <input
-                    type="password"
-                    value={geminiApiKey}
-                    onChange={(e) => {
-                      const nextKey = e.target.value;
-                      setGeminiApiKey(nextKey);
-                      try {
-                        if (nextKey) window.sessionStorage.setItem('chat.gemini-api-key', nextKey);
-                        else window.sessionStorage.removeItem('chat.gemini-api-key');
-                      } catch (err) { void err }
-                    }}
-                    placeholder="Google AI API key"
-                    autoComplete="off"
-                  />
-                </label>
+                <p className="chat-cloud-key-note">Kept only for this browser session; sent to the chat proxy and Google for your request, never saved by this app.</p>
               )}
-            </form>
-            {providerConfig.provider === 'ollama-cloud' && (
-              <p className="chat-cloud-key-note">Kept only for this browser session; sent to the chat proxy and Ollama Cloud for your request, never saved by this app.</p>
-            )}
-            {providerConfig.provider === 'gemini' && (
-              <p className="chat-cloud-key-note">Kept only for this browser session; sent to the chat proxy and Google for your request, never saved by this app.</p>
-            )}
+            </div>
           </div>
-        </div>
-        <div className="chat-header-actions">
-          <button
-            className="chat-history-toggle"
-            onClick={() => setHistoryOpen((v) => !v)}
-            title="Toggle chat history"
-          >
-            <Icon name="history" />
-          </button>
-          <button
-            className="chat-new-toggle"
-            onClick={() => {
-              newChat();
-              setHistoryOpen(false);
-            }}
-            title="Start new chat"
-          >
-            <Icon name="plus" />
-          </button>
-          <button
-            className={`chat-float-toggle ${floatingMode ? 'active' : ''}`}
-            onClick={() => toggleFloatingMode()}
-            title="Toggle floating chat"
-          >
-            <Icon name="float" />
-          </button>
-          <button
-            className={`chat-select-toggle ${selectMode ? 'active' : ''}`}
-            onClick={handleToggleSelectMode}
-            aria-pressed={selectMode}
-            title="Toggle Select Mode (hover to highlight, click to attach)"
-          >
-            <Icon name="select" />
-            {selectMode && <span className="chat-select-hint">Select mode ON</span>}
-          </button>
-          <div className="visually-hidden" aria-live="polite">{selectAnnouncement}</div>
-          {/* Attach current step button */}
-          <button
-            className="chat-attach-step-btn"
-            onClick={handleAttachStep}
-            disabled={!currentStep}
-            title={currentStep ? `Attach current step from ${problemTitle || "visualizer"}` : "No active visualizer step"}
-          >
-            <Icon name="pin" />
-          </button>
-          <button className="chat-clear-btn" onClick={clearMessages} title="Clear chat">
-            <Icon name="clear" />
-          </button>
-          <button className="chat-close-btn" onClick={closeChat} title="Close chat">
-            <Icon name="close" />
-          </button>
-        </div>
-      </div>
+          <div className="chat-header-actions">
+            <button
+              className="chat-history-toggle"
+              onClick={() => setHistoryOpen((v) => !v)}
+              title="Toggle chat history"
+            >
+              <Icon name="history" />
+            </button>
 
-      {selectMode && <div className="chat-selection-banner">Selection mode: click any visual element to add it as context.</div>}
-
-      {historyOpen && (
-        <div className="chat-history-panel">
-          {conversations.map((c) => (
-            <div
-              key={c.id}
-              className={`chat-history-item ${c.id === activeConversationId ? 'active' : ''}`}
+            <button
+              className="chat-new-toggle"
               onClick={() => {
-                switchChat(c.id);
+                newChat();
                 setHistoryOpen(false);
               }}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
+              title="Start new chat"
+            >
+              <Icon name="plus" />
+            </button>
+
+            <button
+              className={`chat-select-toggle ${selectMode ? "active" : ""}`}
+              onClick={handleToggleSelectMode}
+              aria-pressed={selectMode}
+              title="Toggle Select Mode (hover to highlight, click to attach)"
+            >
+              <Icon name="select" />
+              {selectMode && (
+                <span className="chat-select-hint">
+                  Select mode ON
+                </span>
+              )}
+            </button>
+
+            <div
+              className="visually-hidden"
+              aria-live="polite"
+            >
+              {selectAnnouncement}
+            </div>
+
+            <button
+              className="chat-attach-step-btn"
+              onClick={handleAttachStep}
+              disabled={!currentStep}
+              title={
+                currentStep
+                  ? `Attach current step from ${problemTitle || "visualizer"}`
+                  : "No active visualizer step"
+              }
+            >
+              <Icon name="pin" />
+            </button>
+
+            <button
+              className="chat-clear-btn"
+              onClick={clearMessages}
+              title="Clear chat"
+            >
+              <Icon name="clear" />
+            </button>
+
+            <button
+              className={`chat-float-toggle ${floatingMode ? "active" : ""}`}
+              onClick={() => toggleFloatingMode()}
+              title="Toggle floating chat"
+            >
+              <Icon name="float" />
+            </button>
+
+            <button
+              className="chat-close-btn"
+              onClick={closeChat}
+              title="Close chat"
+            >
+              <Icon name="close" />
+            </button>
+          </div>
+        </div>
+
+        {selectMode && <div className="chat-selection-banner">Selection mode: click any visual element to add it as context.</div>}
+
+        {historyOpen && (
+          <div className="chat-history-panel">
+            {conversations.map((c) => (
+              <div
+                key={c.id}
+                className={`chat-history-item ${c.id === activeConversationId ? 'active' : ''}`}
+                onClick={() => {
                   switchChat(c.id);
                   setHistoryOpen(false);
-                }
-              }}
-            >
-              <div className="chat-history-main">
-                <div className="chat-history-title">{c.title || 'New Chat'}</div>
-                <div className="chat-history-meta">{(c.messages || []).length} msgs</div>
-              </div>
-              <button
-                className="chat-history-delete"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  deleteChat(c.id);
                 }}
-                title="Delete chat"
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    switchChat(c.id);
+                    setHistoryOpen(false);
+                  }
+                }}
               >
-                ✕
-              </button>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* Message list */}
-      <div className="chat-messages">
-        {messages.length === 0 && (
-          <div className="chat-empty">
-            <div className="chat-empty-icon">AI</div>
-            <p>Ask {selectedModel} via {selectedProviderLabel} anything about the algorithm you&apos;re visualizing.</p>
-            <p className="chat-empty-hint">
-              Use <strong>Attach step</strong> to share the current timestep, or select any visual element to attach it.
-            </p>
+                <div className="chat-history-main">
+                  <div className="chat-history-title">{c.title || 'New Chat'}</div>
+                  <div className="chat-history-meta">{(c.messages || []).length} msgs</div>
+                </div>
+                <button
+                  className="chat-history-delete"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    deleteChat(c.id);
+                  }}
+                  title="Delete chat"
+                >
+                  ✕
+                </button>
+              </div>
+            ))}
           </div>
         )}
-        {messages.map((msg) => (
-          <ChatMessage key={msg.id} message={msg} />
-        ))}
-        <div ref={messagesEndRef} />
-      </div>
 
-      {/* Input */}
-      <ChatInput
-        onSend={handleSend}
-        attachedContext={attachedContext}
-        onClearContext={clearContext}
-        disabled={isStreaming}
-      />
+        {/* Message list */}
+        <div className="chat-messages">
+          {messages.length === 0 && (
+            <div className="chat-empty">
+              <div className="chat-empty-icon">AI</div>
+              <p>Ask {selectedModel} via {selectedProviderLabel} anything about the algorithm you&apos;re visualizing.</p>
+              <p className="chat-empty-hint">
+                Use <strong>Attach step</strong> to share the current timestep, or select any visual element to attach it.
+              </p>
+            </div>
+          )}
+          {messages.map((msg) => (
+            <ChatMessage key={msg.id} message={msg} />
+          ))}
+          <div ref={messagesEndRef} />
+        </div>
+
+        {/* Input */}
+        <ChatInput
+          onSend={handleSend}
+          attachedContext={attachedContext}
+          onClearContext={clearContext}
+          disabled={isStreaming}
+        />
       </div>
       <PanelScaleControl
         value={contentScale}

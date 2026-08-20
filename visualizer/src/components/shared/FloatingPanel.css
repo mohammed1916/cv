@@ -3,37 +3,65 @@
   top: 0;
   left: 0;
   z-index: 1900;
+
   min-width: 220px;
   min-height: 92px;
-  max-width: min(92vw, 520px);
+
+  /*
+   * Important:
+   * Do NOT use max-width: min(92vw, 520px)
+   * because it prevents React resizing past 520px.
+   */
+  max-width: none;
+  max-height: none;
+
   border-radius: 16px;
   border: 1px solid var(--border);
+
   background: var(--surface);
-  box-shadow: 0 16px 40px var(--primary-glow);
+
+  box-shadow:
+    0 16px 40px var(--primary-glow);
+
   backdrop-filter: blur(10px);
+
   overflow: hidden;
-  animation: floating-panel-in 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  animation:
+    floating-panel-in 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes floating-panel-in {
   from {
     opacity: 0;
-    transform: translateY(16px) scale(0.96);
+
+    transform:
+      translateY(16px) scale(0.96);
   }
+
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+
+    transform:
+      translateY(0) scale(1);
   }
 }
 
 .floating-panel-handle {
   display: flex;
   align-items: center;
+
   gap: 10px;
+
   padding: 8px 12px;
-  border-bottom: 1px solid var(--border);
+
+  border-bottom:
+    1px solid var(--border);
+
   background: var(--surface2);
+
   cursor: grab;
+
   user-select: none;
   touch-action: none;
 }
@@ -48,43 +76,67 @@
 
 .floating-panel-grip {
   color: var(--text-dim);
+
   letter-spacing: 0.12em;
+
   font-size: 0.86rem;
 }
 
 .floating-panel-title {
   flex: 1;
+
   font-size: 0.78rem;
   font-weight: 700;
+
   color: var(--text);
+
   text-transform: uppercase;
+
   letter-spacing: 0.08em;
+
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .floating-panel-pin {
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
+
   border-radius: 999px;
+
   background: var(--surface2);
+
   color: var(--text-muted);
-  padding: 0.2rem 0.4rem;
+
+  padding:
+    0.2rem 0.4rem;
+
   font-size: 0.75rem;
+
   cursor: pointer;
-  transition: all 0.2s ease;
+
+  transition:
+    all 0.2s ease;
 }
 
 .floating-panel-pin:hover {
   color: var(--text);
+
   border-color: var(--primary);
+
   background: var(--surface3);
 }
 
 .floating-panel.pinned .floating-panel-pin {
-  background: var(--primary-glow);
-  border-color: var(--primary);
-  color: rgba(56, 189, 248, 0.8);
+  background:
+    var(--primary-glow);
+
+  border-color:
+    var(--primary);
+
+  color:
+    rgba(56, 189, 248, 0.8);
 }
 
 .floating-panel.pinned .floating-panel-handle {
@@ -92,60 +144,125 @@
 }
 
 .floating-panel-collapse {
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
+
   border-radius: 999px;
-  background: var(--surface2);
-  color: var(--text-muted);
-  padding: 0.2rem 0.55rem;
+
+  background:
+    var(--surface2);
+
+  color:
+    var(--text-muted);
+
+  padding:
+    0.2rem 0.55rem;
+
   font-size: 0.66rem;
+
   cursor: pointer;
 }
 
 .floating-panel-collapse:hover {
   color: var(--text);
-  border-color: var(--primary);
+
+  border-color:
+    var(--primary);
 }
 
 .floating-panel-body {
   padding: 10px;
-  height: calc(100% - 68px);
+
+  height:
+    calc(100% - 68px);
+
   overflow: auto;
 }
 
 .floating-panel:not(.has-size-control) .floating-panel-body {
-  height: calc(100% - 42px);
+  height:
+    calc(100% - 42px);
 }
 
 .floating-panel.has-size-control .floating-panel-body {
   padding-bottom: 4px;
+  padding-right: 36px;
 }
 
-/* This is deliberately independent from the corner resize grip: it scales the
-   learning controls themselves (text, icons, toggles, and pattern guide) while
-   preserving the panel's physical width and height. */
-.floating-panel.has-size-control .floating-panel-body > * {
-  zoom: var(--playback-ui-scale, 1);
+.floating-panel.has-size-control .floating-panel-body>* {
+  zoom:
+    var(--playback-ui-scale,
+      1);
 }
 
+.floating-panel-scale-area {
+  padding-right: 36px;
+}
+
+/*
+ * Bottom-right diagonal resize control.
+ */
 .floating-panel-resizer {
   position: absolute;
-  right: 3px;
-  bottom: 3px;
-  width: 20px;
-  height: 20px;
+
+  right: 0;
+  bottom: 0;
+
+  z-index: 20;
+
+  width: 26px;
+  height: 26px;
+
   cursor: nwse-resize;
+
   touch-action: none;
-  background: linear-gradient(135deg, transparent 45%, var(--text-dim) 46% 52%, transparent 53% 62%, var(--text-dim) 63% 69%, transparent 70%);
-  opacity: 0.75;
+  user-select: none;
+
+  background: #14b8a6;
+
+  border-top-left-radius: 8px;
+
+  transition:
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+/*
+ * White diagonal resize lines.
+ */
+.floating-panel-resizer::after {
+  content: "➘";
+
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1;
+
+  pointer-events: none;
 }
 
 .floating-panel-resizer:hover {
-  opacity: 1;
-  filter: drop-shadow(0 0 4px var(--primary-glow));
+  background: #2dd4bf;
+
+  box-shadow:
+    0 0 10px var(--primary-glow);
+}
+
+.floating-panel-resizer:active {
+  background: #0f766e;
 }
 
 body.resizing-playback,
 body.resizing-playback * {
   user-select: none !important;
-  cursor: nwse-resize !important;
+
+  cursor:
+    nwse-resize !important;
 }
