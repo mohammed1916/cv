@@ -19,6 +19,10 @@ import { ChatDrawer } from "./components/Chatbot";
 import "./App.css";
 import { TRACKS } from "./data/implementedProblems";
 
+const RuntimePlayground = React.lazy(
+  () => import("./playground/RuntimePlayground"),
+);
+
 /* ── Auto-discovery ──────────────────────────────────────────────────── */
 
 // Metadata lives in a lightweight meta.js (eagerly bundled), while the heavy
@@ -428,6 +432,7 @@ function HomePage({
   track,
   onTrackChange,
   onSelect,
+  onOpenPlayground,
   layoutWidth,
   onLayoutChange,
   enableTransitions,
@@ -593,6 +598,15 @@ function HomePage({
               Codeforces Track
             </button>
           </div>
+
+          <button
+            type="button"
+            className="playground-launch-btn"
+            onClick={onOpenPlayground}
+          >
+            <span aria-hidden="true">{`{ }`}</span>
+            Create Visualizer
+          </button>
 
           <LayoutControls layoutWidth={layoutWidth} onChange={onLayoutChange} />
         </div>
@@ -774,10 +788,24 @@ function HomePage({
 /* ── Root App ────────────────────────────────────────────────────────── */
 export default function App() {
   const [active, setActive] = useState(null);
+  const [showPlayground, setShowPlayground] = useState(() => {
+    try {
+      return window.location.hash === "#playground";
+    } catch {
+      return false;
+    }
+  });
   const [track, setTrack] = useState(TRACKS.LEETCODE);
   const [layoutWidth, setLayoutWidth] = useState("full");
   const [navigationTransitionsEnabled, setNavigationTransitionsEnabled] =
-    useState(true);
+    useState(() => {
+      try {
+        const stored = window.localStorage.getItem("cpviz.navigationTransitions");
+        return stored === null ? true : stored !== "0";
+      } catch {
+        return true;
+      }
+    });
   // null until the fetch settles, so ProblemInfoPanel can tell "still loading"
   // apart from "loaded, but this problem has no description" — the latter hides
   // the toggle entirely.
@@ -792,17 +820,6 @@ export default function App() {
 
   useEffect(() => {
     try {
-      const stored = window.localStorage.getItem("cpviz.navigationTransitions");
-      if (stored !== null) {
-        setNavigationTransitionsEnabled(stored !== "0");
-      }
-    } catch (error) {
-      void error;
-    }
-  }, []);
-
-  useEffect(() => {
-    try {
       window.localStorage.setItem(
         "cpviz.navigationTransitions",
         navigationTransitionsEnabled ? "1" : "0",
@@ -813,24 +830,40 @@ export default function App() {
   }, [navigationTransitionsEnabled]);
 
   useEffect(() => {
-    if (active) {
-      window.history.pushState({ slug: active.slug }, "", `#${active.slug}`);
-    } else {
-      window.history.pushState({}, "", window.location.pathname);
-    }
-  }, [active]);
-
-  useEffect(() => {
-    const onPop = () => setActive(null);
+    const onPop = () => {
+      setActive(null);
+      setShowPlayground(window.location.hash === "#playground");
+    };
     window.addEventListener("popstate", onPop);
     return () => window.removeEventListener("popstate", onPop);
   }, []);
 
-  const goBack = () => setActive(null);
+  const goBack = () => {
+    window.history.pushState({}, "", window.location.pathname);
+    setActive(null);
+    setShowPlayground(false);
+  };
+
+  const openPlayground = () => {
+    window.history.pushState({ view: "playground" }, "", "#playground");
+    setActive(null);
+    setShowPlayground(true);
+  };
+
+  const selectProblem = (problem) => {
+    window.history.pushState(
+      { slug: problem.slug },
+      "",
+      `#${problem.slug}`,
+    );
+    setShowPlayground(false);
+    setActive(problem);
+  };
 
   const handleTrackChange = (nextTrack) => {
     setTrack(nextTrack);
     setActive(null);
+    setShowPlayground(false);
   };
 
   const utilityControls = (
@@ -843,7 +876,22 @@ export default function App() {
     </>
   );
 
-  const pageContent = active ? (
+  const pageContent = showPlayground ? (
+    <Suspense
+      key="runtime-playground-boundary"
+      fallback={
+        <div className="playground-loading">Loading Visualizer Playground…</div>
+      }
+    >
+      <RuntimePlayground
+        key="runtime-playground"
+        onBack={goBack}
+        utilityControls={utilityControls}
+        layoutWidth={layoutWidth}
+        onLayoutChange={setLayoutWidth}
+      />
+    </Suspense>
+  ) : active ? (
     <ProblemPage
       key={active.id}
       problem={active}
@@ -859,7 +907,8 @@ export default function App() {
       key={`home-${track}`}
       track={track}
       onTrackChange={handleTrackChange}
-      onSelect={setActive}
+      onSelect={selectProblem}
+      onOpenPlayground={openPlayground}
       layoutWidth={layoutWidth}
       onLayoutChange={setLayoutWidth}
       enableTransitions={navigationTransitionsEnabled}
@@ -871,7 +920,9 @@ export default function App() {
       <ZoomProvider>
       <ZoomControls />
       <div className={`app layout-${layoutWidth}`}>
-        {!active && <div className="app-toolbar">{utilityControls}</div>}
+        {!active && !showPlayground && (
+          <div className="app-toolbar">{utilityControls}</div>
+        )}
         {/* A flex column (not overflow:auto) so children get a definite height to
             resolve `height: 100%` against — an auto-overflow box lets children
             grow and scroll instead of constraining them, which left every
@@ -882,7 +933,7 @@ export default function App() {
           style={{
             flex: '1 1 0',
             minHeight: 0,
-            marginTop: active ? '0' : '60px',
+            marginTop: active || showPlayground ? '0' : '60px',
             display: 'flex',
             flexDirection: 'column',
           }}
