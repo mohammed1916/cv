@@ -55,7 +55,8 @@
 
 .runtime-playground__back,
 .runtime-playground__button,
-.runtime-playground__layout button {
+.runtime-playground__layout button,
+.runtime-playground__mode-switch button {
   border: 1px solid var(--border);
   border-radius: 9px;
   background: var(--ui-control-bg, var(--surface3));
@@ -78,20 +79,23 @@
 
 .runtime-playground__back:hover,
 .runtime-playground__button:hover,
-.runtime-playground__layout button:hover {
+.runtime-playground__layout button:hover,
+.runtime-playground__mode-switch button:hover {
   border-color: var(--primary);
   background: var(--ui-control-hover-bg, var(--primary-glow));
 }
 
 .runtime-playground__back:active,
 .runtime-playground__button:active,
-.runtime-playground__layout button:active {
+.runtime-playground__layout button:active,
+.runtime-playground__mode-switch button:active {
   transform: translateY(1px);
 }
 
 .runtime-playground__back:focus-visible,
 .runtime-playground__button:focus-visible,
 .runtime-playground__layout button:focus-visible,
+.runtime-playground__mode-switch button:focus-visible,
 .runtime-playground__scrubber input:focus-visible,
 .runtime-playground__playback .pc-btn:focus-visible,
 .runtime-playground__playback .pc-speed-input:focus-visible {
@@ -145,6 +149,30 @@
   border-color: var(--primary);
   background: var(--primary);
   color: white;
+}
+
+.runtime-playground__mode-switch {
+  padding: 3px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--surface);
+  display: inline-flex;
+  gap: 2px;
+}
+
+.runtime-playground__mode-switch button {
+  min-height: 25px;
+  padding: 0 7px;
+  border-color: transparent;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.67rem;
+}
+
+.runtime-playground__mode-switch button.is-active {
+  border-color: color-mix(in srgb, var(--primary) 55%, var(--border));
+  background: var(--primary-glow);
+  color: var(--primary);
 }
 
 .runtime-playground__utilities {
@@ -224,6 +252,12 @@
   color: var(--error);
 }
 
+.runtime-playground__button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+  transform: none;
+}
+
 .runtime-playground__editor-body,
 .runtime-code-editor {
   flex: 1 1 0;
@@ -249,6 +283,268 @@
   color: var(--code-dim);
   font-family: monospace;
   font-size: 0.8rem;
+}
+
+.runtime-code-editor__active-line {
+  background: color-mix(in srgb, var(--primary) 13%, transparent);
+  box-shadow: inset 3px 0 0 var(--primary);
+}
+
+.runtime-code-editor__active-line-gutter {
+  border-left: 3px solid var(--primary);
+}
+
+.runtime-playground__trace-config {
+  flex: 0 0 auto;
+  max-height: 280px;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  background: var(--surface2);
+  display: flex;
+  flex-direction: column;
+}
+
+.runtime-playground__trace-tabs {
+  flex: 0 0 auto;
+  padding: 6px 9px 0;
+  display: flex;
+  gap: 5px;
+}
+
+.runtime-playground__trace-tabs button {
+  min-height: 27px;
+  padding: 0 9px;
+  border: 1px solid transparent;
+  border-radius: 8px 8px 0 0;
+  background: transparent;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 0.7rem;
+  font-weight: 750;
+}
+
+.runtime-playground__trace-tabs button:hover,
+.runtime-playground__trace-tabs button.is-active {
+  border-color: var(--border);
+  background: var(--surface);
+  color: var(--primary);
+}
+
+.runtime-playground__trace-tabs button:focus-visible,
+.runtime-playground__trace-pane > input:focus-visible,
+.runtime-playground__trace-pane textarea:focus-visible,
+.runtime-playground__binding input:focus-visible,
+.runtime-playground__binding select:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+.runtime-playground__trace-tabs span {
+  margin-left: 4px;
+  color: var(--text-dim);
+  font-family: monospace;
+  font-size: 0.62rem;
+}
+
+.runtime-playground__trace-pane {
+  min-height: 0;
+  padding: 8px 10px 10px;
+  overflow: auto;
+}
+
+.runtime-playground__trace-pane > label {
+  margin-bottom: 6px;
+  color: var(--text);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.72rem;
+  font-weight: 750;
+}
+
+.runtime-playground__trace-fields {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.72fr) minmax(0, 1.6fr);
+  align-items: center;
+  gap: 8px 12px;
+}
+
+.runtime-playground__trace-fields > label {
+  margin: 0;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.runtime-playground__trace-pane label small,
+.runtime-playground__binding small {
+  color: var(--text-muted);
+  font-size: 0.62rem;
+  font-weight: 550;
+}
+
+.runtime-playground__trace-pane > input,
+.runtime-playground__trace-pane textarea {
+  width: 100%;
+  padding: 8px 9px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--code-bg);
+  color: var(--code-text);
+  font: 0.7rem/1.45 monospace;
+}
+
+.runtime-playground__trace-pane > input {
+  min-height: 34px;
+}
+
+.runtime-playground__trace-pane textarea {
+  min-height: 78px;
+  resize: vertical;
+}
+
+.runtime-playground__trace-pane > input:disabled,
+.runtime-playground__trace-pane textarea:disabled {
+  cursor: wait;
+  opacity: 0.58;
+}
+
+.runtime-playground__trace-error,
+.runtime-playground__trace-empty {
+  margin: 6px 0 0;
+  color: var(--error);
+  font-size: 0.68rem;
+}
+
+.runtime-playground__trace-fields > .runtime-playground__trace-error {
+  grid-column: 2;
+  margin-top: -3px;
+}
+
+.runtime-playground__trace-empty {
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.runtime-playground__bindings {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.runtime-playground__trace-ai {
+  margin-bottom: 2px;
+  padding: 7px 8px;
+  border: 1px solid color-mix(in srgb, var(--primary) 30%, var(--border));
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--primary) 7%, var(--surface));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.runtime-playground__trace-ai > span {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.runtime-playground__trace-ai strong {
+  color: var(--text);
+  font-size: 0.7rem;
+}
+
+.runtime-playground__trace-ai small {
+  color: var(--text-muted);
+  font-size: 0.61rem;
+}
+
+.runtime-playground__trace-ai button {
+  flex: 0 0 auto;
+  min-height: 29px;
+  padding: 0 10px;
+  border: 1px solid color-mix(in srgb, var(--primary) 48%, var(--border));
+  border-radius: 7px;
+  background: var(--primary);
+  color: var(--primary-contrast, white);
+  font: inherit;
+  font-size: 0.66rem;
+  font-weight: 750;
+}
+
+.runtime-playground__trace-ai button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.runtime-playground__trace-ai-feedback {
+  margin: 0 2px 2px;
+  color: var(--text-muted);
+  font-size: 0.64rem;
+}
+
+.runtime-playground__trace-ai-feedback--success {
+  color: var(--success);
+}
+
+.runtime-playground__trace-ai-feedback--error {
+  color: var(--error);
+}
+
+.runtime-playground__binding {
+  display: grid;
+  grid-template-columns: minmax(125px, 0.7fr) minmax(0, 2fr);
+  align-items: center;
+  gap: 7px;
+}
+
+.runtime-playground__binding-toggle {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.runtime-playground__binding-toggle > span {
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.runtime-playground__binding code {
+  overflow: hidden;
+  color: var(--text);
+  font-size: 0.7rem;
+  text-overflow: ellipsis;
+}
+
+.runtime-playground__binding-controls {
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.runtime-playground__binding select {
+  min-width: 98px;
+  max-width: 170px;
+  flex: 1 1 98px;
+  min-height: 27px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.66rem;
+}
+
+.runtime-playground__binding select:disabled {
+  opacity: 0.48;
 }
 
 .runtime-playground__editor-foot {
@@ -311,6 +607,11 @@
 .runtime-playground__status--error > span {
   background: var(--error);
   box-shadow: 0 0 0 3px var(--error-glow);
+}
+
+.runtime-playground__status--warning > span {
+  background: var(--warning);
+  box-shadow: 0 0 0 3px var(--warning-glow);
 }
 
 .runtime-playground__canvas {
@@ -382,11 +683,14 @@
   min-height: 0;
   padding: 11px;
   background: var(--surface2);
-  display: flex;
+  overflow: auto;
+  display: grid;
   align-items: stretch;
+  gap: 7px;
 }
 
 .runtime-playground__error,
+.runtime-playground__warning,
 .runtime-playground__timeline-message {
   width: 100%;
   min-width: 0;
@@ -398,6 +702,16 @@
   gap: 5px;
   font-size: 0.74rem;
   line-height: 1.4;
+}
+
+.runtime-playground__warning {
+  border: 1px solid color-mix(in srgb, #d99a20 55%, var(--border));
+  background: color-mix(in srgb, #d99a20 10%, var(--surface));
+  color: color-mix(in srgb, #d99a20 75%, var(--text));
+}
+
+.runtime-playground__warning span {
+  color: var(--text-muted);
 }
 
 .runtime-playground__error {
@@ -498,6 +812,23 @@
 
   .runtime-playground__editor-foot span:nth-child(2) {
     display: none;
+  }
+
+  .runtime-playground__trace-config {
+    max-height: 320px;
+  }
+
+  .runtime-playground__trace-fields,
+  .runtime-playground__binding {
+    grid-template-columns: 1fr;
+  }
+
+  .runtime-playground__trace-fields > .runtime-playground__trace-error {
+    grid-column: 1;
+  }
+
+  .runtime-playground__binding-controls {
+    justify-content: flex-start;
   }
 
   .runtime-playground__playback .pc,

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Editor from "@monaco-editor/react";
 
 const VIZ_API_TYPES = `
@@ -107,15 +107,106 @@ function getEditorTheme() {
   return document.documentElement.dataset.theme === "dark" ? "vs-dark" : "vs";
 }
 
-export default function RuntimeCodeEditor({ value, onChange, onRun, isBusy }) {
+export default function RuntimeCodeEditor({
+  value,
+  onChange,
+  onRun,
+  isBusy,
+  language = "javascript",
+  activeLine = null,
+}) {
   const [theme, setTheme] = useState(getEditorTheme);
   const runRef = useRef(onRun);
+  const editorRef = useRef(null);
+  const monacoRef = useRef(null);
+  const activeLineDecorationsRef = useRef(null);
   const extraLibRef = useRef(null);
   const restoreJavaScriptDefaultsRef = useRef(null);
 
   useEffect(() => {
     runRef.current = onRun;
   }, [onRun]);
+
+  const applyActiveLine = useCallback((requestedLine = activeLine) => {
+    const editor = editorRef.current;
+    const monaco = monacoRef.current;
+    const model = editor?.getModel();
+    if (!editor || !monaco || !model) return;
+
+    if (!activeLineDecorationsRef.current) {
+      activeLineDecorationsRef.current = editor.createDecorationsCollection();
+    }
+
+    const line = Number(requestedLine);
+    if (!Number.isInteger(line) || line < 1 || line > model.getLineCount()) {
+      activeLineDecorationsRef.current.clear();
+      return;
+    }
+
+    activeLineDecorationsRef.current.set([
+      {
+        range: new monaco.Range(line, 1, line, 1),
+        options: {
+          isWholeLine: true,
+          className: "runtime-code-editor__active-line",
+          linesDecorationsClassName: "runtime-code-editor__active-line-gutter",
+        },
+      },
+    ]);
+    editor.revealLineInCenterIfOutsideViewport(line);
+  }, [activeLine]);
+
+  const configureLanguage = useCallback(() => {
+    const editor = editorRef.current;
+    const monaco = monacoRef.current;
+    if (!editor || !monaco) return;
+
+    restoreJavaScriptDefaultsRef.current?.();
+    restoreJavaScriptDefaultsRef.current = null;
+    extraLibRef.current?.dispose();
+    extraLibRef.current = null;
+
+    editor.updateOptions({
+      ariaLabel: `${language === "python" ? "Python trace" : "JavaScript visualization"} source editor`,
+    });
+    editor.getModel()?.updateOptions({
+      insertSpaces: true,
+      tabSize: language === "python" ? 4 : 2,
+    });
+
+    if (language !== "javascript") return;
+    const javascriptDefaults = monaco.languages.typescript?.javascriptDefaults;
+    if (!javascriptDefaults) return;
+
+    const previousDiagnostics = javascriptDefaults.getDiagnosticsOptions();
+    const previousCompilerOptions = javascriptDefaults.getCompilerOptions();
+    javascriptDefaults.setDiagnosticsOptions({
+      ...previousDiagnostics,
+      noSemanticValidation: false,
+      noSyntaxValidation: false,
+    });
+    javascriptDefaults.setCompilerOptions({
+      ...previousCompilerOptions,
+      allowJs: true,
+      checkJs: true,
+    });
+    extraLibRef.current = javascriptDefaults.addExtraLib(
+      VIZ_API_TYPES,
+      "file:///visualizer-playground-viz-api.d.ts",
+    );
+    restoreJavaScriptDefaultsRef.current = () => {
+      javascriptDefaults.setDiagnosticsOptions(previousDiagnostics);
+      javascriptDefaults.setCompilerOptions(previousCompilerOptions);
+    };
+  }, [language]);
+
+  useEffect(() => {
+    applyActiveLine();
+  }, [applyActiveLine, language]);
+
+  useEffect(() => {
+    configureLanguage();
+  }, [configureLanguage]);
 
   useEffect(() => {
     if (typeof MutationObserver === "undefined") return undefined;
@@ -130,6 +221,7 @@ export default function RuntimeCodeEditor({ value, onChange, onRun, isBusy }) {
 
   useEffect(
     () => () => {
+      activeLineDecorationsRef.current?.clear();
       extraLibRef.current?.dispose();
       restoreJavaScriptDefaultsRef.current?.();
     },
@@ -140,8 +232,12 @@ export default function RuntimeCodeEditor({ value, onChange, onRun, isBusy }) {
     <div className="runtime-code-editor" aria-busy={isBusy}>
       <Editor
         height="100%"
-        language="javascript"
-        path="visualizer-playground.js"
+        language={language}
+        path={
+          language === "python"
+            ? "visualizer-python-trace.py"
+            : "visualizer-playground.js"
+        }
         theme={theme}
         value={value}
         onChange={(nextValue) => onChange(nextValue ?? "")}
@@ -163,38 +259,12 @@ export default function RuntimeCodeEditor({ value, onChange, onRun, isBusy }) {
           wordWrap: "on",
         }}
         onMount={(editor, monaco) => {
-          restoreJavaScriptDefaultsRef.current?.();
-          extraLibRef.current?.dispose();
-          const javascriptDefaults =
-            monaco.languages.typescript?.javascriptDefaults;
-          if (javascriptDefaults) {
-            const previousDiagnostics =
-              javascriptDefaults.getDiagnosticsOptions();
-            const previousCompilerOptions =
-              javascriptDefaults.getCompilerOptions();
-
-            javascriptDefaults.setDiagnosticsOptions({
-              ...previousDiagnostics,
-              noSemanticValidation: false,
-              noSyntaxValidation: false,
-            });
-            javascriptDefaults.setCompilerOptions({
-              ...previousCompilerOptions,
-              allowJs: true,
-              checkJs: true,
-            });
-            extraLibRef.current = javascriptDefaults.addExtraLib(
-              VIZ_API_TYPES,
-              "file:///visualizer-playground-viz-api.d.ts",
-            );
-            restoreJavaScriptDefaultsRef.current = () => {
-              javascriptDefaults.setDiagnosticsOptions(previousDiagnostics);
-              javascriptDefaults.setCompilerOptions(previousCompilerOptions);
-            };
-          }
-          editor.updateOptions({
-            ariaLabel: "JavaScript visualization source editor",
-          });
+          editorRef.current = editor;
+          monacoRef.current = monaco;
+          activeLineDecorationsRef.current =
+            editor.createDecorationsCollection();
+          configureLanguage();
+          applyActiveLine(activeLine);
           editor.addCommand(
             monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter,
             () => runRef.current?.(),

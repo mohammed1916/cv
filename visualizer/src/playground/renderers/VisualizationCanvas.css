@@ -320,6 +320,397 @@
   justify-content: flex-start;
 }
 
+/* Numeric sequence views */
+.playground-chart-viewport {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+
+.playground-chart-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.playground-sequence-fallback {
+  display: grid;
+  gap: 8px;
+}
+
+.playground-sequence-fallback > small {
+  color: var(--warning);
+  font-size: 0.7rem;
+  text-align: center;
+}
+
+.playground-bars {
+  --playground-zero: 100%;
+  position: relative;
+  display: grid;
+  grid-template-columns: 66px minmax(0, 1fr);
+  min-height: 285px;
+  padding: 12px 16px 8px 8px;
+}
+
+.playground-chart-axis-y {
+  position: relative;
+  height: 222px;
+  margin-top: 30px;
+  color: var(--text-dim);
+  font: 600 0.6rem/1 'Fira Code', 'Cascadia Code', Consolas, monospace;
+  text-align: right;
+}
+
+.playground-chart-axis-y::after {
+  position: absolute;
+  top: 0;
+  right: -9px;
+  bottom: 0;
+  width: 1px;
+  background: var(--border);
+  content: '';
+}
+
+.playground-chart-axis-y span {
+  position: absolute;
+  right: 2px;
+  transform: translateY(-50%);
+}
+
+.playground-chart-axis-y span:first-child { top: 0; }
+.playground-chart-axis-y span:last-child { top: 100%; }
+
+.playground-bars-track {
+  display: flex;
+  min-width: 100%;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.playground-bar-column {
+  display: grid;
+  min-width: 48px;
+  flex: 1 0 48px;
+  grid-template-rows: 30px 222px 19px;
+  gap: 3px;
+}
+
+.playground-bar-column .playground-pointer-slot {
+  min-height: 30px;
+  overflow: visible;
+}
+
+.playground-bar-plot {
+  position: relative;
+  min-width: 32px;
+  border-bottom: 1px solid var(--border);
+  background-image: linear-gradient(to bottom, var(--overlay-weak) 1px, transparent 1px);
+  background-size: 100% 25%;
+}
+
+.playground-bar-plot::after {
+  position: absolute;
+  z-index: 1;
+  top: var(--playground-zero);
+  right: -4px;
+  left: -4px;
+  height: 1px;
+  background: var(--text-dim);
+  content: '';
+}
+
+.playground-bar-fill {
+  position: absolute;
+  z-index: 2;
+  top: var(--playground-bar-top);
+  left: 14%;
+  width: 72%;
+  height: max(2px, var(--playground-bar-height));
+  min-height: 2px;
+  border: 1px solid var(--primary);
+  border-radius: 5px 5px 2px 2px;
+  background: color-mix(in srgb, var(--primary) 70%, var(--surface));
+  box-shadow: 0 4px 12px var(--primary-glow);
+  transition: top 180ms ease, height 180ms ease, background 140ms ease;
+}
+
+.playground-bar-fill.is-negative-value {
+  border-radius: 2px 2px 5px 5px;
+}
+
+.playground-bar-fill.is-clipped {
+  border-top-style: dashed;
+  border-bottom-style: dashed;
+}
+
+.playground-bar-value {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  max-width: 58px;
+  padding: 1px 3px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  color: var(--text);
+  font: 650 0.58rem/1.25 'Fira Code', 'Cascadia Code', Consolas, monospace;
+  text-overflow: ellipsis;
+  transform: translate(-50%, calc(-100% - 3px));
+  white-space: nowrap;
+}
+
+.playground-bar-fill.is-negative-value .playground-bar-value {
+  top: auto;
+  bottom: 0;
+  transform: translate(-50%, calc(100% + 3px));
+}
+
+.playground-chart-index {
+  display: grid;
+  place-items: center;
+  color: var(--text-dim);
+  font: 600 0.6rem/1 'Fira Code', 'Cascadia Code', Consolas, monospace;
+}
+
+.playground-line-chart {
+  display: block;
+  width: 100%;
+  height: 270px;
+  background: var(--surface);
+}
+
+.playground-line-grid line {
+  stroke: var(--border);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.playground-line-grid .playground-line-zero {
+  stroke: var(--text-dim);
+  stroke-width: 1.25;
+}
+
+.playground-line-axis-labels text,
+.playground-line-index,
+.playground-line-value,
+.playground-line-pointer text {
+  font-family: 'Fira Code', 'Cascadia Code', Consolas, monospace;
+}
+
+.playground-line-axis-labels text {
+  fill: var(--text-dim);
+  font-size: 9px;
+  text-anchor: end;
+}
+
+.playground-line-segment {
+  stroke: var(--primary);
+  stroke-width: 2.25;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.playground-line-point {
+  fill: var(--surface);
+  stroke: var(--primary);
+  stroke-width: 2.5;
+  vector-effect: non-scaling-stroke;
+  transition: r 140ms ease, fill 140ms ease, stroke 140ms ease;
+}
+
+.playground-line-point:focus-visible {
+  outline: none;
+  fill: var(--primary-glow);
+  stroke-width: 4;
+}
+
+.playground-line-value {
+  fill: var(--text);
+  font-size: 9px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.playground-line-index {
+  fill: var(--text-dim);
+  font-size: 9px;
+  font-weight: 600;
+  text-anchor: middle;
+}
+
+.playground-line-pointer line {
+  stroke: var(--primary);
+  stroke-dasharray: 2 2;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.playground-line-pointer rect {
+  fill: var(--primary-glow);
+  stroke: var(--primary);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.playground-line-pointer text {
+  fill: var(--text);
+  font-size: 8px;
+  font-weight: 750;
+  text-anchor: middle;
+}
+
+.playground-pointer.is-visited,
+.playground-pointer.is-success {
+  border-color: var(--success);
+  background: var(--success-glow);
+  color: var(--success);
+}
+
+.playground-line-pointer.is-visited rect,
+.playground-line-pointer.is-success rect {
+  fill: var(--success-glow);
+  stroke: var(--success);
+}
+
+.playground-line-pointer.is-visited line,
+.playground-line-pointer.is-success line {
+  stroke: var(--success);
+}
+
+.playground-pointer.is-related,
+.playground-pointer.is-compared {
+  border-color: var(--warning);
+  background: var(--warning-glow);
+  color: var(--warning);
+}
+
+.playground-line-pointer.is-related rect,
+.playground-line-pointer.is-compared rect {
+  fill: var(--warning-glow);
+  stroke: var(--warning);
+}
+
+.playground-line-pointer.is-related line,
+.playground-line-pointer.is-compared line {
+  stroke: var(--warning);
+}
+
+.playground-pointer.is-error {
+  border-color: var(--error);
+  background: var(--error-glow);
+  color: var(--error);
+}
+
+.playground-line-pointer.is-error rect {
+  fill: var(--error-glow);
+  stroke: var(--error);
+}
+
+.playground-line-pointer.is-error line {
+  stroke: var(--error);
+}
+
+.playground-bar-fill.is-active,
+.playground-bar-fill.is-current {
+  border-color: var(--primary-l);
+  background: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-glow), 0 5px 14px var(--primary-glow);
+}
+
+.playground-bar-fill.is-visited,
+.playground-bar-fill.is-success,
+.playground-bar-fill.is-sorted {
+  border-color: var(--success);
+  background: color-mix(in srgb, var(--success) 72%, var(--surface));
+  box-shadow: 0 4px 12px var(--success-glow);
+}
+
+.playground-bar-fill.is-related,
+.playground-bar-fill.is-compared {
+  border-color: var(--warning);
+  background: color-mix(in srgb, var(--warning) 72%, var(--surface));
+  box-shadow: 0 4px 12px var(--warning-glow);
+}
+
+.playground-bar-fill.is-error,
+.playground-bar-fill.is-removed {
+  border-color: var(--error);
+  background: color-mix(in srgb, var(--error) 72%, var(--surface));
+  box-shadow: 0 4px 12px var(--error-glow);
+}
+
+.playground-bar-fill.is-disabled {
+  opacity: 0.42;
+}
+
+.playground-line-point.is-active,
+.playground-line-point.is-current {
+  r: 7px;
+  fill: var(--primary-glow);
+  stroke: var(--primary);
+  stroke-width: 4;
+}
+
+.playground-line-segment.is-active,
+.playground-line-segment.is-current {
+  stroke: var(--primary-l);
+  stroke-width: 4;
+}
+
+.playground-line-point.is-visited,
+.playground-line-point.is-success,
+.playground-line-point.is-sorted {
+  fill: var(--success-glow);
+  stroke: var(--success);
+}
+
+.playground-line-segment.is-visited,
+.playground-line-segment.is-success,
+.playground-line-segment.is-sorted {
+  stroke: var(--success);
+  stroke-width: 3;
+}
+
+.playground-line-point.is-related,
+.playground-line-point.is-compared {
+  fill: var(--warning-glow);
+  stroke: var(--warning);
+}
+
+.playground-line-segment.is-related,
+.playground-line-segment.is-compared {
+  stroke: var(--warning);
+  stroke-width: 3;
+}
+
+.playground-line-point.is-error,
+.playground-line-point.is-removed {
+  fill: var(--error-glow);
+  stroke: var(--error);
+}
+
+.playground-line-segment.is-error,
+.playground-line-segment.is-removed {
+  stroke: var(--error);
+  stroke-dasharray: 6 4;
+}
+
+.playground-line-point.is-disabled,
+.playground-line-segment.is-disabled {
+  opacity: 0.42;
+}
+
 /* Grids and DP tables */
 .playground-grid-viewport {
   max-width: 100%;
@@ -603,4 +994,11 @@
   .playground-visual-header { align-items: flex-start; }
   .playground-visual-badges span:first-child:not(:last-child) { display: none; }
   .playground-visual-body { padding: 9px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .playground-bar-fill,
+  .playground-line-point {
+    transition: none;
+  }
 }

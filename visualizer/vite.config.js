@@ -49,6 +49,7 @@ export default defineConfig(({ mode }) => {
   plugins: [react(), chatApiPlugin(env)],
   optimizeDeps: {
     include: ['@monaco-editor/react', 'monaco-editor'],
+    exclude: ['pyodide'],
   },
   server: {
     // Pin the dev server and HMR client to IPv4. On this machine Vite was
@@ -56,10 +57,10 @@ export default defineConfig(({ mode }) => {
     // so the page loaded through a fallback but its HMR WebSocket could not.
     host: '127.0.0.1',
     port: 3010,
+    strictPort: true,
     hmr: {
       host: '127.0.0.1',
       protocol: 'ws',
-      clientPort: 3010,
     },
   },
   build: {
