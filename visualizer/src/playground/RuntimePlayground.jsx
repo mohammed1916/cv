@@ -220,10 +220,15 @@ export default function RuntimePlayground({
     : executionError?.source === source
       ? { message: executionError.message, kind: "Runtime" }
       : null;
-  const showingLastGood = Boolean(currentError && lastGoodRun);
+  const declarationCount = containerCount(declarationState.scene);
+  const showingDeclarations = !hasCurrentRun && declarationCount > 0;
+  const showingLastGood = Boolean(
+    currentError && lastGoodRun && !showingDeclarations,
+  );
 
   const displayScene = currentFrame?.scene
     ?? (hasCurrentRun ? lastGoodRun.scene : null)
+    ?? (showingDeclarations ? declarationState.scene : null)
     ?? (showingLastGood ? lastGoodRun.scene : null)
     ?? declarationState.scene
     ?? lastGoodRun?.scene
@@ -284,6 +289,8 @@ export default function RuntimePlayground({
 
   const previewStatus = isRunning
     ? "Running"
+    : showingDeclarations && currentError
+      ? "Declarations only"
     : showingLastGood
       ? "Last good preview"
       : currentError

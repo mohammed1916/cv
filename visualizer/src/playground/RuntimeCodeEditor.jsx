@@ -111,6 +111,7 @@ export default function RuntimeCodeEditor({ value, onChange, onRun, isBusy }) {
   const [theme, setTheme] = useState(getEditorTheme);
   const runRef = useRef(onRun);
   const extraLibRef = useRef(null);
+  const restoreJavaScriptDefaultsRef = useRef(null);
 
   useEffect(() => {
     runRef.current = onRun;
@@ -127,7 +128,13 @@ export default function RuntimeCodeEditor({ value, onChange, onRun, isBusy }) {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => () => extraLibRef.current?.dispose(), []);
+  useEffect(
+    () => () => {
+      extraLibRef.current?.dispose();
+      restoreJavaScriptDefaultsRef.current?.();
+    },
+    [],
+  );
 
   return (
     <div className="runtime-code-editor" aria-busy={isBusy}>
@@ -156,12 +163,35 @@ export default function RuntimeCodeEditor({ value, onChange, onRun, isBusy }) {
           wordWrap: "on",
         }}
         onMount={(editor, monaco) => {
+          restoreJavaScriptDefaultsRef.current?.();
           extraLibRef.current?.dispose();
-          extraLibRef.current =
-            monaco.languages.typescript?.javascriptDefaults?.addExtraLib(
+          const javascriptDefaults =
+            monaco.languages.typescript?.javascriptDefaults;
+          if (javascriptDefaults) {
+            const previousDiagnostics =
+              javascriptDefaults.getDiagnosticsOptions();
+            const previousCompilerOptions =
+              javascriptDefaults.getCompilerOptions();
+
+            javascriptDefaults.setDiagnosticsOptions({
+              ...previousDiagnostics,
+              noSemanticValidation: false,
+              noSyntaxValidation: false,
+            });
+            javascriptDefaults.setCompilerOptions({
+              ...previousCompilerOptions,
+              allowJs: true,
+              checkJs: true,
+            });
+            extraLibRef.current = javascriptDefaults.addExtraLib(
               VIZ_API_TYPES,
               "file:///visualizer-playground-viz-api.d.ts",
-            ) ?? null;
+            );
+            restoreJavaScriptDefaultsRef.current = () => {
+              javascriptDefaults.setDiagnosticsOptions(previousDiagnostics);
+              javascriptDefaults.setCompilerOptions(previousCompilerOptions);
+            };
+          }
           editor.updateOptions({
             ariaLabel: "JavaScript visualization source editor",
           });
