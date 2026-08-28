@@ -28,6 +28,29 @@ function runTrace(source, input, maxFrames = 200) {
   return trace
 }
 
+function runTraceError(source, input, maxFrames = 200) {
+  const traceGlobals = {
+    __trace_max_frames: maxFrames,
+    __trace_source: source,
+    __trace_input_json: JSON.stringify(input),
+    __trace_entry_json: 'null',
+  }
+  const wrapper = [
+    'import json, sys',
+    'scope = json.loads(sys.argv[1])',
+    'exec(sys.stdin.read(), scope, scope)',
+    'print(scope["__trace_result_json"])',
+  ].join('\n')
+  const result = spawnSync('python', ['-c', wrapper, JSON.stringify(traceGlobals)], {
+    input: PYTHON_TRACER_SOURCE,
+    encoding: 'utf8',
+  })
+  assert.equal(result.status, 0, result.stderr)
+  const trace = JSON.parse(result.stdout)
+  assert.ok(trace.error)
+  return trace.error
+}
+
 function container(frame, bindingName) {
   return frame.scene.containers.find((candidate) => candidate.bindingName === bindingName)
 }
@@ -99,6 +122,50 @@ def solve(value):
 `, null)
   assert.equal(trace.result, true)
   assert.equal(trace.traceFrames.at(-1).locals.$return, true)
+})
+
+test('entry argument mismatches point users to the Inputs tab', () => {
+  const error = runTraceError(`
+def isMatch(s, p):
+    return s == p
+`, { prices: [7, 1, 5] })
+  assert.match(error.message, /Input JSON does not match entry isMatch/)
+  assert.match(error.message, /Inputs tab/)
+})
+
+test('regular-expression matching produces a playable DP grid', () => {
+  const trace = runTrace(`
+def isMatch(s, p):
+    m, n = len(s), len(p)
+    dp = [[False] * (n + 1) for _ in range(m + 1)]
+    dp[0][0] = True
+    for j in range(1, n + 1):
+        if p[j - 1] == '*':
+            dp[0][j] = dp[0][j - 2]
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if p[j - 1] != '*':
+                matches = p[j - 1] == '.' or s[i - 1] == p[j - 1]
+                if matches:
+                    dp[i][j] = dp[i - 1][j - 1]
+            else:
+                dp[i][j] = dp[i][j - 2]
+                prev_matches = p[j - 2] == '.' or s[i - 1] == p[j - 2]
+                if prev_matches and dp[i - 1][j]:
+                    dp[i][j] = True
+    return dp[m][n]
+`, { s: 'aa', p: 'a*' })
+  const compiled = compilePythonTrace(trace)
+  const dpVariable = trace.variables.find((variable) => variable.name === 'dp')
+  const dpFrames = compiled.frames
+    .map((frame) => container(frame, 'dp'))
+    .filter(Boolean)
+
+  assert.equal(dpVariable.suggestedKind, 'grid')
+  assert.ok(dpFrames.length > 1)
+  assert.equal(dpFrames.at(-1).rows, 3)
+  assert.equal(dpFrames.at(-1).columns, 3)
+  assert.equal(container(compiled.frames.at(-1), '$return').value, true)
 })
 
 test('duplicate-value and enumerate(start) loop pointers use actual positions', () => {

@@ -400,6 +400,14 @@ def _run_trace():
     callable_entry, entry = _resolve_entry(namespace, tree, _entry_request)
     args, kwargs = _prepare_arguments(callable_entry, _input)
 
+    try:
+        inspect.signature(callable_entry).bind(*args, **kwargs)
+    except TypeError as error:
+        raise ValueError(
+            "Input JSON does not match entry " + entry["displayName"] + ": "
+            + str(error) + ". Update Method arguments in the Inputs tab."
+        ) from error
+
     trace_frames = []
     catalog = {}
     previous_by_frame = {}

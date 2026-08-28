@@ -1,11 +1,15 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import PlaybackControls from "../components/PlaybackControls";
+import LuminoDockPanel from "../components/LuminoDockPanel";
 import { usePlaybackState } from "../hooks/usePlaybackState";
 import {
   DEFAULT_PLAYGROUND_CODE,
   buildDeclarationPreview,
   runVisualizationSource,
 } from "./runtime";
+import { inferPythonInput } from "./runtime/inferPythonInput";
+import { normalizePastedPythonSource } from "./runtime/normalizePythonSource";
 import {
   DEFAULT_PYTHON_CODE,
   DEFAULT_PYTHON_INPUT,
@@ -26,6 +30,7 @@ const PYTHON_ENTRY_STORAGE_KEY = "cpviz.runtime-playground.python-entry.v1";
 const PYTHON_BINDINGS_STORAGE_KEY = "cpviz.runtime-playground.python-bindings.v2";
 const MODE_STORAGE_KEY = "cpviz.runtime-playground.mode.v1";
 const AUTO_RUN_DELAY_MS = 600;
+const PYTHON_AUTO_RUN_DELAY_MS = 900;
 const MAX_SOURCE_LENGTH = 50_000;
 const RUN_LIMITS = Object.freeze({
   timeoutMs: 1_500,
@@ -36,6 +41,11 @@ const PYTHON_RUN_LIMITS = Object.freeze({
   timeoutMs: 45_000,
   maxFrames: 240,
 });
+const PLAYGROUND_DOCK_PANELS = Object.freeze([
+  { id: "editor", title: "Code & Inputs" },
+  { id: "preview", title: "Live Preview", dockMode: "split-right" },
+  { id: "timeline", title: "Playback & Diagnostics", dockMode: "split-bottom" },
+]);
 
 function readStoredText(key, fallback) {
   try {
@@ -200,13 +210,23 @@ export default function RuntimePlayground({
     readStoredText(SOURCE_STORAGE_KEY, DEFAULT_PLAYGROUND_CODE)
   ));
   const [pythonSource, setPythonSource] = useState(() => (
-    readStoredText(PYTHON_SOURCE_STORAGE_KEY, DEFAULT_PYTHON_CODE)
+    normalizePastedPythonSource(
+      readStoredText(PYTHON_SOURCE_STORAGE_KEY, DEFAULT_PYTHON_CODE),
+    )
   ));
   const [pythonInputSource, setPythonInputSource] = useState(() => (
-    readStoredText(
+    (() => {
+      const storedInput = readStoredText(
       PYTHON_INPUT_STORAGE_KEY,
       JSON.stringify(DEFAULT_PYTHON_INPUT, null, 2),
-    )
+      );
+      const parsedInput = parsePythonInput(storedInput);
+      if (parsedInput.error) return storedInput;
+      const inferred = inferPythonInput(pythonSource, parsedInput.value);
+      return inferred.changed
+        ? JSON.stringify(inferred.value, null, 2)
+        : storedInput;
+    })()
   ));
   const [pythonEntry, setPythonEntry] = useState(() => (
     readStoredText(PYTHON_ENTRY_STORAGE_KEY, "")
@@ -233,6 +253,7 @@ export default function RuntimePlayground({
     phase: "idle",
     message: "",
   });
+  const [panelDivs, setPanelDivs] = useState(null);
   const requestVersionRef = useRef(0);
   const suggestionVersionRef = useRef(0);
   const debounceRef = useRef(null);
@@ -432,11 +453,27 @@ export default function RuntimePlayground({
         setPythonSource(nextSource);
         setPythonVariables([]);
         setPythonVariablesStale(true);
+        if (!pythonInputState.error) {
+          const inferred = inferPythonInput(
+            nextSource,
+            pythonInputState.value,
+            pythonEntry,
+          );
+          if (inferred.changed) {
+            setPythonInputSource(JSON.stringify(inferred.value, null, 2));
+          }
+        }
       } else {
         setScriptSource(nextSource);
       }
     },
-    [cancelExecution, isPython],
+    [
+      cancelExecution,
+      isPython,
+      pythonEntry,
+      pythonInputState.error,
+      pythonInputState.value,
+    ],
   );
 
   const updatePythonInput = useCallback(
@@ -495,14 +532,18 @@ export default function RuntimePlayground({
 
   useEffect(() => {
     window.clearTimeout(debounceRef.current);
-    if (isPython || !source.trim() || declarationState.error) return undefined;
+    if (
+      !source.trim()
+      || declarationState.error
+      || (isPython && pythonInputState.error)
+    ) return undefined;
 
     debounceRef.current = window.setTimeout(() => {
       executeSource(source);
-    }, AUTO_RUN_DELAY_MS);
+    }, isPython ? PYTHON_AUTO_RUN_DELAY_MS : AUTO_RUN_DELAY_MS);
 
     return () => window.clearTimeout(debounceRef.current);
-  }, [declarationState.error, executeSource, isPython, source]);
+  }, [declarationState.error, executeSource, isPython, pythonInputState.error, source]);
 
   useEffect(
     () => () => {
@@ -749,7 +790,7 @@ export default function RuntimePlayground({
         ? "Ready to play the generated timeline."
         : phase === "waiting"
           ? isPython
-            ? "Run the Python solution to discover variables and build its trace."
+            ? "Python changed. The isolated auto-run starts after you pause typing."
             : "Updating the live preview..."
           : phase === "stopped"
             ? "Execution stopped. Edit the code or press Play to run it again."
@@ -805,6 +846,11 @@ export default function RuntimePlayground({
       </header>
 
       <main className="runtime-playground__workspace">
+        <LuminoDockPanel
+          panels={PLAYGROUND_DOCK_PANELS}
+          onPanelReady={setPanelDivs}
+        />
+        {panelDivs?.editor && createPortal(
         <section className="runtime-playground__panel runtime-playground__editor-panel">
           <div className="runtime-playground__panel-header">
             <div>
@@ -885,12 +931,16 @@ export default function RuntimePlayground({
             />
           )}
           <div className="runtime-playground__editor-foot">
-            <span>{isPython ? "Python · isolated Worker" : "JavaScript · viz API"}</span>
+            <span>{isPython ? "Python · isolated Worker · auto-run" : "JavaScript · viz API"}</span>
             <span><kbd>Ctrl</kbd> + <kbd>Enter</kbd> to run and play</span>
             <span>{source.length.toLocaleString()} / {MAX_SOURCE_LENGTH.toLocaleString()}</span>
           </div>
-        </section>
+        </section>,
+        panelDivs.editor,
+        "runtime-playground-editor",
+        )}
 
+        {panelDivs?.preview && createPortal(
         <section className="runtime-playground__panel runtime-playground__preview-panel">
           <div className="runtime-playground__panel-header">
             <div>
@@ -916,8 +966,12 @@ export default function RuntimePlayground({
               }
             />
           </div>
-        </section>
+        </section>,
+        panelDivs.preview,
+        "runtime-playground-preview",
+        )}
 
+        {panelDivs?.timeline && createPortal(
         <section className="runtime-playground__panel runtime-playground__timeline-panel">
           <div className="runtime-playground__playback">
             <PlaybackControls
@@ -995,7 +1049,10 @@ export default function RuntimePlayground({
               </>
             )}
           </div>
-        </section>
+        </section>,
+        panelDivs.timeline,
+        "runtime-playground-timeline",
+        )}
       </main>
     </div>
   );

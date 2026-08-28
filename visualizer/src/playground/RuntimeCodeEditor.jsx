@@ -1,5 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Editor from "@monaco-editor/react";
+import {
+  normalizePastedPythonSource,
+  normalizePythonSource,
+} from "./runtime/normalizePythonSource";
 
 const VIZ_API_TYPES = `
 type VizState = string | null;
@@ -121,11 +125,17 @@ export default function RuntimeCodeEditor({
   const monacoRef = useRef(null);
   const activeLineDecorationsRef = useRef(null);
   const extraLibRef = useRef(null);
+  const pasteListenerRef = useRef(null);
+  const languageRef = useRef(language);
   const restoreJavaScriptDefaultsRef = useRef(null);
 
   useEffect(() => {
     runRef.current = onRun;
   }, [onRun]);
+
+  useEffect(() => {
+    languageRef.current = language;
+  }, [language]);
 
   const applyActiveLine = useCallback((requestedLine = activeLine) => {
     const editor = editorRef.current;
@@ -222,6 +232,7 @@ export default function RuntimeCodeEditor({
   useEffect(
     () => () => {
       activeLineDecorationsRef.current?.clear();
+      pasteListenerRef.current?.dispose();
       extraLibRef.current?.dispose();
       restoreJavaScriptDefaultsRef.current?.();
     },
@@ -240,7 +251,10 @@ export default function RuntimeCodeEditor({
         }
         theme={theme}
         value={value}
-        onChange={(nextValue) => onChange(nextValue ?? "")}
+        onChange={(nextValue) => {
+          const source = nextValue ?? "";
+          onChange(language === "python" ? normalizePythonSource(source) : source);
+        }}
         loading={<div className="runtime-code-editor__loading">Loading editor...</div>}
         options={{
           automaticLayout: true,
@@ -263,6 +277,14 @@ export default function RuntimeCodeEditor({
           monacoRef.current = monaco;
           activeLineDecorationsRef.current =
             editor.createDecorationsCollection();
+          pasteListenerRef.current?.dispose();
+          pasteListenerRef.current = editor.onDidPaste(() => {
+            if (languageRef.current !== "python") return;
+            const model = editor.getModel();
+            const current = model?.getValue() ?? "";
+            const repaired = normalizePastedPythonSource(current);
+            if (model && repaired !== current) model.setValue(repaired);
+          });
           configureLanguage();
           applyActiveLine(activeLine);
           editor.addCommand(
