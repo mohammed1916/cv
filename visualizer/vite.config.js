@@ -23,7 +23,7 @@ function chatApiPlugin(env) {
             if (provider === 'gemini' && !googleApiKey) throw new Error('GEMINI_API_KEY is not configured')
             const payload = provider === 'gemini'
               ? { contents: messages.filter(m => m.role !== 'system').map(m => ({ role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.text || '' }] })), systemInstruction: { parts: [{ text: messages.find(m => m.role === 'system')?.text || '' }] } }
-              : { model: model || env.OLLAMA_MODEL || 'gemma4:e2b', messages: messages.map(m => ({ role: m.role, content: m.text || '' })), stream: true }
+              : { model: model || env.OLLAMA_MODEL || 'gemma2:2b', messages: messages.map(m => ({ role: m.role, content: m.text || '' })), stream: true }
             const cloudApiKey = ollamaApiKey || env.OLLAMA_API_KEY || env.OLLAMA_CLOUD_API_KEY
             if (provider === 'ollama-cloud' && !cloudApiKey) throw new Error('OLLAMA_API_KEY is not configured')
             const upstream = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', ...(provider === 'ollama-cloud' ? { Authorization: `Bearer ${cloudApiKey}` } : {}) }, body: JSON.stringify(payload) })

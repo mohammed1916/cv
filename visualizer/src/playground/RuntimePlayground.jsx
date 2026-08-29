@@ -19,6 +19,7 @@ import {
 } from "./runtime/python";
 import { suggestPythonBindings } from "./ai/suggestPythonBindings";
 import VisualizationCanvas from "./renderers/VisualizationCanvas";
+import PlaygroundAIProviderControls from "./PlaygroundAIProviderControls";
 import PythonTraceControls from "./PythonTraceControls";
 import RuntimeCodeEditor from "./RuntimeCodeEditor";
 import "./RuntimePlayground.css";
@@ -42,8 +43,9 @@ const PYTHON_RUN_LIMITS = Object.freeze({
   maxFrames: 240,
 });
 const PLAYGROUND_DOCK_PANELS = Object.freeze([
-  { id: "editor", title: "Code & Inputs" },
+  { id: "editor", title: "Code" },
   { id: "preview", title: "Live Preview", dockMode: "split-right" },
+  { id: "configuration", title: "Python Trace Configuration", dockMode: "split-bottom" },
   { id: "timeline", title: "Playback & Diagnostics", dockMode: "split-bottom" },
 ]);
 
@@ -913,23 +915,6 @@ export default function RuntimePlayground({
               activeLine={activeSourceLine}
             />
           </div>
-          {isPython && (
-            <PythonTraceControls
-              entryValue={pythonEntry}
-              onEntryChange={updatePythonEntry}
-              inputValue={pythonInputSource}
-              onInputChange={updatePythonInput}
-              inputError={pythonInputState.error}
-              variables={pythonVariables}
-              variablesStale={pythonVariablesStale}
-              bindings={pythonBindings}
-              onBindingsChange={updatePythonBindings}
-              onSuggestVisuals={suggestVisualBindings}
-              isSuggestingVisuals={aiVisualState.phase === "running"}
-              aiFeedback={aiVisualState}
-              disabled={isRunning}
-            />
-          )}
           <div className="runtime-playground__editor-foot">
             <span>{isPython ? "Python · isolated Worker · auto-run" : "JavaScript · viz API"}</span>
             <span><kbd>Ctrl</kbd> + <kbd>Enter</kbd> to run and play</span>
@@ -969,6 +954,36 @@ export default function RuntimePlayground({
         </section>,
         panelDivs.preview,
         "runtime-playground-preview",
+        )}
+
+        {panelDivs?.configuration && createPortal(
+        <section className="runtime-playground__panel runtime-playground__configuration-panel">
+          <PlaygroundAIProviderControls />
+          {isPython ? (
+            <PythonTraceControls
+              entryValue={pythonEntry}
+              onEntryChange={updatePythonEntry}
+              inputValue={pythonInputSource}
+              onInputChange={updatePythonInput}
+              inputError={pythonInputState.error}
+              variables={pythonVariables}
+              variablesStale={pythonVariablesStale}
+              bindings={pythonBindings}
+              onBindingsChange={updatePythonBindings}
+              onSuggestVisuals={suggestVisualBindings}
+                isSuggestingVisuals={aiVisualState.phase === "running"}
+                aiFeedback={aiVisualState}
+                traceError={currentError}
+                disabled={isRunning}
+            />
+          ) : (
+            <div className="runtime-playground__configuration-empty">
+              Switch the Code panel to Python to configure traced inputs and visuals.
+            </div>
+          )}
+        </section>,
+        panelDivs.configuration,
+        "runtime-playground-configuration",
         )}
 
         {panelDivs?.timeline && createPortal(

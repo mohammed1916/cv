@@ -1,7 +1,13 @@
 import { useEffect, useRef, useCallback, useState } from "react";
 import { useChatContext } from "../../context/ChatContext";
 import { useVisualizationContext } from "../../context/VisualizationContext";
-import { streamProviderChat, getChatProvider } from "../../services/chatProviders";
+import {
+  defaultChatModel,
+  getChatProvider,
+  setChatProvider,
+  streamProviderChat,
+  subscribeChatProvider,
+} from "../../services/chatProviders";
 import ChatMessage from "./ChatMessage";
 import ChatInput from "./ChatInput";
 import ResizablePanel from "../ResizablePanel";
@@ -85,12 +91,14 @@ export default function ChatDrawer() {
     try { return window.sessionStorage.getItem('chat.gemini-api-key') || ''; } catch (err) { void err }
     return '';
   });
-  const selectedModel = providerConfig.model || (providerConfig.provider === 'gemini' ? 'gemini-2.5-flash' : providerConfig.provider === 'ollama-cloud' ? 'gpt-oss:120b' : 'gemma4:e2b');
+  const selectedModel = providerConfig.model || defaultChatModel(providerConfig.provider);
   const selectedProviderLabel = providerConfig.provider === 'gemini'
     ? 'Gemini'
     : providerConfig.provider === 'ollama-cloud'
       ? 'Ollama Cloud'
       : 'Ollama Local';
+
+  useEffect(() => subscribeChatProvider(setProviderConfig), []);
 
   const handleToggleSelectMode = useCallback(() => {
     const newMode = !selectMode;
@@ -402,12 +410,12 @@ export default function ChatDrawer() {
               <div className="chat-header-title">Algorithm Assistant <span className="chat-shortcut" title="Open or close chat with Alt+C">Alt+C</span></div>
               <form className="chat-model-controls" data-chat-ignore onSubmit={(event) => event.preventDefault()}>
                 <label>Provider
-                  <select value={providerConfig.provider} onChange={(e) => { const provider = e.target.value; const model = provider === 'gemini' ? 'gemini-2.5-flash' : provider === 'ollama-cloud' ? 'gpt-oss:120b' : 'gemma4:e2b'; const next = { provider, model }; setProviderConfig(next); localStorage.setItem('chat.provider.v1', JSON.stringify(next)) }}>
+                  <select value={providerConfig.provider} onChange={(e) => { const provider = e.target.value; const next = setChatProvider({ provider, model: defaultChatModel(provider) }); setProviderConfig(next) }}>
                     <option value="ollama-local">Ollama Local</option><option value="ollama-cloud">Ollama Cloud</option><option value="gemini">Gemini</option>
                   </select>
                 </label>
                 <label>Model
-                  <input value={providerConfig.model || ''} onChange={(e) => { const next = { ...providerConfig, model: e.target.value }; setProviderConfig(next); localStorage.setItem('chat.provider.v1', JSON.stringify(next)) }} placeholder="Model name" />
+                  <input value={providerConfig.model || ''} onChange={(e) => { const next = setChatProvider({ ...providerConfig, model: e.target.value }); setProviderConfig(next) }} placeholder="Model name" />
                 </label>
                 {providerConfig.provider === 'ollama-cloud' && (
                   <label className="chat-cloud-key">Ollama API key
