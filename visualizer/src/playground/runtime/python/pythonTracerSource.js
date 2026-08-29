@@ -340,6 +340,19 @@ def _resolve_entry(namespace, tree, requested):
     }
 
 
+class _DefaultListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
+class _DefaultTreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
 def _prepare_arguments(callable_entry, value):
     signature = inspect.signature(callable_entry)
     parameters = [
@@ -362,8 +375,35 @@ def _prepare_arguments(callable_entry, value):
             )
         return args, kwargs
 
+    def linked_list(items):
+        dummy = _DefaultListNode(0)
+        tail = dummy
+        for item in items:
+            tail.next = _DefaultListNode(item)
+            tail = tail.next
+        return dummy.next
+
+    def coerce(parameter, item):
+        name = parameter.name.lower()
+        annotation = str(parameter.annotation).lower()
+        expects_nodes = "listnode" in annotation or "node" in name or name in ("lists", "heads")
+        if not expects_nodes:
+            return item
+        if name in ("lists", "heads") and isinstance(item, list):
+            return [
+                linked_list(sequence) if isinstance(sequence, list) else sequence
+                for sequence in item
+            ]
+        if isinstance(item, list):
+            return linked_list(item)
+        return item
+
     if isinstance(value, dict):
-        return [], value
+        by_name = {parameter.name: parameter for parameter in parameters}
+        return [], {
+            name: coerce(by_name[name], item) if name in by_name else item
+            for name, item in value.items()
+        }
 
     if isinstance(value, list):
         if len(parameters) == 1:
@@ -380,7 +420,11 @@ def _prepare_arguments(callable_entry, value):
 
 
 def _build_namespace():
-    namespace = {"__name__": "__main__"}
+    namespace = {
+        "__name__": "__main__",
+        "ListNode": _DefaultListNode,
+        "TreeNode": _DefaultTreeNode,
+    }
     conveniences = """
 from typing import List, Optional, Dict, Set, Tuple, Deque, DefaultDict, Iterable, Iterator
 from collections import Counter, defaultdict, deque

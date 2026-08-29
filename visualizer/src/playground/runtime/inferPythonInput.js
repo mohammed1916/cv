@@ -83,6 +83,10 @@ function sampleValue(parameter, allNames) {
   if (/prices?/.test(name)) return [7, 1, 5, 3, 6, 4];
   if (/matrix|grid|board/.test(name)) return [[1, 2], [3, 4]];
   if (/edges?|graph/.test(name)) return [[0, 1], [1, 2]];
+  if (/^(lists|heads)$/.test(name) || /list\s*\[\s*(?:optional\s*\[\s*)?listnode/i.test(annotation)) {
+    return [[1, 4, 5], [1, 3, 4], [2, 6]];
+  }
+  if (/head|linked/.test(name) || /listnode/i.test(annotation)) return [1, 2, 3];
   if (/nums?|values?|array|arr|list/.test(name) || /list|tuple|deque|set/.test(annotation)) {
     return [2, 7, 11, 15];
   }

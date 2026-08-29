@@ -240,6 +240,29 @@ class Solution:
   assert.ok(pointerNames.has('r'))
 })
 
+test('linked-list JSON inputs are converted to ListNode chains', () => {
+  const trace = runTrace(`
+class Solution:
+    def mergeKLists(self, lists):
+        heap = []
+        for i, head in enumerate(lists):
+            if head: heappush(heap, (head.val, i, head))
+        dummy = ListNode(0)
+        tail = dummy
+        while heap:
+            val, i, node = heappop(heap)
+            tail.next = node
+            tail = tail.next
+            if node.next: heappush(heap, (node.next.val, i, node.next))
+        return dummy.next
+`, { lists: [[1, 4, 5], [1, 3, 4], [2, 6]] })
+
+  const returned = trace.traceFrames.at(-1).locals.$return
+  assert.equal(returned.__class__, '_DefaultListNode')
+  assert.equal(returned.val, 1)
+  assert.equal(returned.next.val, 1)
+})
+
 test('different executed lines survive unchanged locals and truncation preserves final state', () => {
   const source = `
 class Solution:

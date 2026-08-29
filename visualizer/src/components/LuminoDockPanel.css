@@ -24,6 +24,8 @@
 
 /* ── Each panel gets a visible border so its bounds are clear ── */
 .lumino-panel-widget {
+  min-width: 180px;
+  min-height: 96px;
   border: 1px solid var(--lm-panel-border);
   border-radius: 8px;
   background: var(--surface, var(--surface));
