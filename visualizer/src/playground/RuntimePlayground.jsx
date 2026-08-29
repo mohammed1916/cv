@@ -108,13 +108,20 @@ function mergePythonBindings(defaults, previous, variables) {
     (Array.isArray(variables) ? variables : []).map((variable) => String(variable.name)),
   );
   const merged = Object.fromEntries(
-    Object.entries(defaults).map(([name, binding]) => [
-      name,
-      {
+    Object.entries(defaults).map(([name, binding]) => {
+      const saved = validNames.has(name) ? previous?.[name] : null;
+      const preserveSavedRole = saved?.roleExplicit === true;
+      return [name, {
         ...binding,
-        ...(validNames.has(name) ? previous?.[name] : null),
-      },
-    ]),
+        ...saved,
+        ...(!preserveSavedRole && binding.role === "pointer" ? {
+          role: binding.role,
+          target: binding.target,
+          pointerMode: binding.pointerMode,
+          indexOffset: binding.indexOffset,
+        } : null),
+      }];
+    }),
   );
   return normalizePythonBindings(merged, variables);
 }

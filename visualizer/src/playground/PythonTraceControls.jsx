@@ -83,7 +83,11 @@ export default function PythonTraceControls({
   const updateBinding = (variable, patch) => {
     const name = String(variable.name);
     const current = bindings[name] ?? {};
-    const next = { ...current, ...patch };
+    const next = {
+      ...current,
+      ...patch,
+      ...(Object.hasOwn(patch, "role") ? { roleExplicit: true } : null),
+    };
     const kind = effectiveKind(variable, next);
 
     if (kind !== "scalar") {
