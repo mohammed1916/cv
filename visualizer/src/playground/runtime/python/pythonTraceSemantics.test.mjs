@@ -202,6 +202,44 @@ class Solution:
   assert.deepEqual([...new Set(indexIndices)], [0, 1])
 })
 
+test('variables used as sequence subscripts become index pointers', () => {
+  const trace = runTrace(`
+class Solution:
+    def threeSumClosest(self, nums, target):
+        nums.sort()
+        closest = nums[0] + nums[1] + nums[2]
+        for i in range(len(nums) - 2):
+            l, r = i + 1, len(nums) - 1
+            while l < r:
+                current = nums[i] + nums[l] + nums[r]
+                if current < target:
+                    l += 1
+                else:
+                    r -= 1
+        return closest
+`, { nums: [-1, 2, 1, -4], target: 1 })
+  const defaults = createDefaultPythonBindings(trace)
+  assert.deepEqual(
+    [defaults.i, defaults.l, defaults.r].map((binding) => ({
+      role: binding.role,
+      target: binding.target,
+      pointerMode: binding.pointerMode,
+    })),
+    Array.from({ length: 3 }, () => ({
+      role: 'pointer',
+      target: 'nums',
+      pointerMode: 'index',
+    })),
+  )
+
+  const compiled = compilePythonTrace(trace, defaults)
+  const pointerNames = new Set(compiled.frames.flatMap((frame) => (
+    container(frame, 'nums')?.pointers?.map((pointer) => pointer.name) ?? []
+  )))
+  assert.ok(pointerNames.has('l'))
+  assert.ok(pointerNames.has('r'))
+})
+
 test('different executed lines survive unchanged locals and truncation preserves final state', () => {
   const source = `
 class Solution:

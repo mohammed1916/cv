@@ -229,10 +229,10 @@
   max-width: 68px;
   align-items: center;
   padding: 2px 5px;
-  border: 1px solid var(--primary);
+  border: 1px solid var(--playground-pointer-color, var(--primary));
   border-radius: 999px;
-  background: var(--primary-glow);
-  color: var(--primary-d);
+  background: color-mix(in srgb, var(--playground-pointer-color, var(--primary)) 14%, var(--surface));
+  color: var(--playground-pointer-color, var(--primary-d));
   font: 700 0.58rem/1.25 'Fira Code', 'Cascadia Code', Consolas, monospace;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -245,7 +245,7 @@
   left: calc(50% - 3px);
   width: 0;
   height: 0;
-  border-top: 4px solid var(--primary);
+  border-top: 4px solid var(--playground-pointer-color, var(--primary));
   border-right: 3px solid transparent;
   border-left: 3px solid transparent;
   content: '';

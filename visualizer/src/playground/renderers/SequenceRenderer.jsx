@@ -9,6 +9,26 @@ import {
 
 const LINE_HEIGHT = 270
 const LINE_PADDING = Object.freeze({ top: 42, right: 28, bottom: 42, left: 58 })
+const POINTER_COLORS = Object.freeze([
+  '#7c3aed',
+  '#0891b2',
+  '#e11d48',
+  '#16a34a',
+  '#d97706',
+  '#2563eb',
+  '#c026d3',
+  '#0f766e',
+])
+
+function pointerColor(pointer) {
+  const text = String(pointer.id ?? pointer.label ?? '')
+  let hash = 2166136261
+  for (let index = 0; index < text.length; index += 1) {
+    hash ^= text.charCodeAt(index)
+    hash = Math.imul(hash, 16777619)
+  }
+  return POINTER_COLORS[(hash >>> 0) % POINTER_COLORS.length]
+}
 
 function normalizeItems(items) {
   return toArray(items).map((item, index) => {
@@ -154,6 +174,7 @@ function PointerLabels({ pointers, ariaHidden = false }) {
           className={`playground-pointer ${stateClass(pointer.state)}`}
           key={String(pointer.id)}
           title={`Points to index ${pointer.index}`}
+          style={{ '--playground-pointer-color': pointerColor(pointer) }}
         >
           {shortValue(pointer.label, 14)}
         </span>

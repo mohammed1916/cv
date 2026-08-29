@@ -241,6 +241,13 @@ class _LoopCollector(ast.NodeVisitor):
             self._add(name, "value", target, getattr(node, "lineno", None))
         self.generic_visit(node)
 
+    def visit_Subscript(self, node):
+        target = _expression_name(node.value)
+        index_node = node.slice
+        if isinstance(index_node, ast.Name):
+            self._add(index_node.id, "index", target, getattr(node, "lineno", None))
+        self.generic_visit(node)
+
 
 def _public_definitions(tree):
     solution = None
