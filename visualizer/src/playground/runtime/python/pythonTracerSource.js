@@ -135,7 +135,18 @@ def _safe(value, depth=0, seen=None):
 
 
 def _suggested_kind(name, runtime_type, value):
+    if "listnode" in str(runtime_type).lower():
+        return "graph"
     if runtime_type == "list":
+        if value and all(
+            item is None or (
+                isinstance(item, dict)
+                and "listnode" in str(item.get("__class__", "")).lower()
+                and "next" in item
+            )
+            for item in value
+        ):
+            return "graph"
         is_grid = bool(value) and all(isinstance(row, (list, tuple)) for row in value)
         if is_grid:
             return "grid"

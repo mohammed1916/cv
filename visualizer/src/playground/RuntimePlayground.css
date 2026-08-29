@@ -851,6 +851,34 @@
   color: var(--error);
 }
 
+.runtime-playground__ai-fix-review {
+  display: grid;
+  gap: 7px;
+  padding: 9px;
+  border: 1px solid color-mix(in srgb, var(--primary) 45%, var(--border));
+  border-radius: 8px;
+  background: var(--surface);
+  font-size: 0.7rem;
+}
+
+.runtime-playground__ai-fix-review p,
+.runtime-playground__ai-fix-review ul { margin: 0; }
+
+.runtime-playground__ai-diff {
+  display: grid;
+  max-height: 210px;
+  overflow: auto;
+  border-radius: 6px;
+  background: var(--code-bg);
+}
+
+.runtime-playground__ai-diff code { padding: 2px 7px; white-space: pre-wrap; }
+.runtime-playground__ai-diff code.is-add { background: color-mix(in srgb, var(--success) 18%, transparent); color: var(--success); }
+.runtime-playground__ai-diff code.is-delete { background: color-mix(in srgb, var(--error) 16%, transparent); color: var(--error); }
+.runtime-playground__ai-diff code b { display: inline-block; width: 16px; }
+
+.runtime-playground__ai-fix-actions { display: flex; justify-content: flex-end; gap: 7px; }
+
 .runtime-playground__error span {
   overflow: auto;
   color: var(--text);

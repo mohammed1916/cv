@@ -25,9 +25,12 @@ export function createDefaultPythonBindings(variables = [], loopBindings = []) {
       : (sequenceNames.length === 1 ? sequenceNames[0] : null)
     const pointerMode = normalizePointerMode(loop?.loopRole ?? loop?.role)
     const isLoopPointer = kind === 'scalar' && pointerMode && target
+    const isTransientListNode = kind === 'graph'
+      && /listnode/i.test(String(variable?.types ?? variable?.runtimeType ?? ''))
+      && !['$return', 'root'].includes(name)
 
     bindings[name] = {
-      enabled: index < MAX_DEFAULT_BINDINGS || name === '$return',
+      enabled: !isTransientListNode && (index < MAX_DEFAULT_BINDINGS || name === '$return'),
       // A null kind means "Auto". Keep inference live across later runs until
       // the user explicitly chooses a visual kind in the controls.
       kind: null,
@@ -301,11 +304,27 @@ function createSequenceContainer(binding, id, value, previous, runtimeType, chan
     view: binding.view,
     items: limitedValues.map((item, index) => ({
       id: `${id}-item-${index}`,
-      value: cloneJsonValue(item),
+      value: compactRuntimeValue(item),
       state: changed && !sameJsonValue(item, previousValues[index]) ? 'changed' : null,
     })),
     pointers: [],
   }
+}
+
+function compactRuntimeValue(value, depth = 0) {
+  if (isLinkedListNode(value)) return `ListNode(${String(value.val)})`
+  if (depth >= 3) return cloneJsonValue(value)
+  if (Array.isArray(value)) {
+    return value.map((item) => compactRuntimeValue(item, depth + 1))
+  }
+  if (isPlainObject(value)) {
+    return Object.fromEntries(
+      Object.entries(value)
+        .filter(([key]) => key !== '__class__')
+        .map(([key, item]) => [key, compactRuntimeValue(item, depth + 1)]),
+    )
+  }
+  return cloneJsonValue(value)
 }
 
 function createGridContainer(binding, id, value, previous, changed) {
@@ -426,6 +445,9 @@ function createNodeLinkContainer(binding, id, value, previous, changed) {
 }
 
 function buildGraphData(value, id, binding) {
+  if (isLinkedListNode(value) || (Array.isArray(value) && value.some(isLinkedListNode))) {
+    return buildLinkedListData(value, id)
+  }
   const structuredDirected = isPlainObject(value) && typeof value.directed === 'boolean'
     ? value.directed
     : binding.directed
@@ -482,6 +504,35 @@ function buildGraphData(value, id, binding) {
   }
 
   return graph.finish()
+}
+
+function buildLinkedListData(value, id) {
+  const heads = Array.isArray(value) ? value : [value]
+  const nodes = []
+  const edges = []
+  heads.forEach((head, chainIndex) => {
+    let current = head
+    let position = 0
+    while (isLinkedListNode(current) && nodes.length < RUNTIME_LIMITS.maxNodes) {
+      const nodeId = `${id}-list-${chainIndex}-${position}`
+      nodes.push({
+        id: nodeId,
+        label: cloneJsonValue(current.val),
+        value: cloneJsonValue(current.val),
+      })
+      if (position > 0 && edges.length < RUNTIME_LIMITS.maxEdges) {
+        edges.push({
+          id: `${id}-list-edge-${chainIndex}-${position - 1}`,
+          from: `${id}-list-${chainIndex}-${position - 1}`,
+          to: nodeId,
+          directed: true,
+        })
+      }
+      current = current.next
+      position += 1
+    }
+  })
+  return { nodes, edges, directed: true, layout: heads.length > 1 ? 'tree' : 'linear' }
 }
 
 function buildTreeData(value, id, binding) {
@@ -673,6 +724,14 @@ function isTreeNodeObject(value) {
     || Object.prototype.hasOwnProperty.call(value, 'right')
     || Array.isArray(value.children)
   ) && !isUnavailableNode(value)
+}
+
+function isLinkedListNode(value) {
+  return isPlainObject(value)
+    && Object.prototype.hasOwnProperty.call(value, 'val')
+    && Object.prototype.hasOwnProperty.call(value, 'next')
+    && (/listnode/i.test(String(value.__class__ || '')) || !Object.hasOwn(value, 'left'))
+    && !isUnavailableNode(value)
 }
 
 function isUnavailableNode(value) {

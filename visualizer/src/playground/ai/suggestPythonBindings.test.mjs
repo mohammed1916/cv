@@ -8,6 +8,7 @@ import {
   suggestPythonBindings,
   suggestPythonInputs,
 } from "./suggestPythonBindings.js";
+import { lineDiff, suggestPythonFix } from "./suggestPythonFix.js";
 
 const variables = [
   { name: "prices", suggestedKind: "sequence" },
@@ -102,4 +103,43 @@ test("AI input prompt asks for signature-shaped JSON rather than Python code", (
   });
   assert.match(messages[0].text, /multiple named parameters/i);
   assert.match(messages[1].text, /def solve\(nums, target\)/);
+});
+
+test("AI fixes stay as proposals and expose red-green line changes", async () => {
+  const proposal = await suggestPythonFix(
+    { source: "def solve(x):\n    return x.val", inputSource: "{\"x\":1}", error: { message: "no val" } },
+    {
+      config: { provider: "ollama-local", model: "gemma2:2b" },
+      stream: async function* stream() {
+        yield JSON.stringify({
+          source: "def solve(x):\n    return x",
+          inputs: { x: 1 },
+          summary: "Use the integer directly.",
+          changes: ["Removed invalid attribute access."],
+        });
+      },
+    },
+  );
+  assert.equal(proposal.source, "def solve(x):\n    return x");
+  assert.ok(lineDiff("a\nb", "a\nc").some((line) => line.type === "delete" && line.text === "b"));
+  assert.ok(lineDiff("a\nb", "a\nc").some((line) => line.type === "add" && line.text === "c"));
+});
+
+test("a contradictory no-op node fix becomes a concrete input-shape proposal", async () => {
+  const source = "class Solution:\n    def mergeKLists(self, lists):\n        return lists[0].val";
+  const proposal = await suggestPythonFix(
+    {
+      source,
+      inputSource: '{"lists":[1,4,5]}',
+      error: { message: "'int' object has no attribute 'val'" },
+    },
+    {
+      config: { provider: "ollama-local", model: "gemma2:2b" },
+      stream: async function* stream() {
+        yield JSON.stringify({ source, inputs: { lists: [1, 4, 5] }, summary: "Add ListNode." });
+      },
+    },
+  );
+  assert.deepEqual(JSON.parse(proposal.inputSource), { lists: [[1], [4], [5]] });
+  assert.match(proposal.summary, /plain integers/i);
 });

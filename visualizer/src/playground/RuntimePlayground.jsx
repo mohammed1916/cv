@@ -25,6 +25,8 @@ import VisualizationCanvas from "./renderers/VisualizationCanvas";
 import PlaygroundAIProviderControls from "./PlaygroundAIProviderControls";
 import PythonTraceControls from "./PythonTraceControls";
 import RuntimeCodeEditor from "./RuntimeCodeEditor";
+import AIFixReview from "./AIFixReview";
+import { suggestPythonFix } from "./ai/suggestPythonFix";
 import "./RuntimePlayground.css";
 
 const SOURCE_STORAGE_KEY = "cpviz.runtime-playground.source.v1";
@@ -265,6 +267,7 @@ export default function RuntimePlayground({
     phase: "idle",
     message: "",
   });
+  const [aiFixState, setAiFixState] = useState({ phase: "idle", proposal: null, message: "" });
   const [panelDivs, setPanelDivs] = useState(null);
   const requestVersionRef = useRef(0);
   const suggestionVersionRef = useRef(0);
@@ -800,6 +803,35 @@ export default function RuntimePlayground({
     updatePythonBindings,
   ]);
 
+  const currentErrorMessage = currentError?.message ?? "";
+  const requestAiFix = useCallback(async () => {
+    if (!isPython || !currentErrorMessage || aiFixState.phase === "running") return;
+    setAiFixState({ phase: "running", proposal: null, message: "Asking the selected AI provider for a minimal repair..." });
+    try {
+      const proposal = await suggestPythonFix({
+        source: pythonSource,
+        inputSource: pythonInputSource,
+        entry: pythonEntry,
+        error: { message: currentErrorMessage },
+      });
+      setAiFixState({ phase: "review", proposal, message: "" });
+    } catch (error) {
+      setAiFixState({ phase: "error", proposal: null, message: errorMessage(error) });
+    }
+  }, [aiFixState.phase, currentErrorMessage, isPython, pythonEntry, pythonInputSource, pythonSource]);
+
+  const acceptAiFix = useCallback(() => {
+    const proposal = aiFixState.proposal;
+    if (!proposal) return;
+    cancelExecution("waiting");
+    setExecutionError(null);
+    setPythonSource(proposal.source);
+    setPythonInputSource(proposal.inputSource);
+    setPythonVariables([]);
+    setPythonVariablesStale(true);
+    setAiFixState({ phase: "idle", proposal: null, message: "" });
+  }, [aiFixState.proposal, cancelExecution]);
+
   const previewStatus = isRunning
     ? "Running"
     : showingDeclarations && currentError
@@ -1076,10 +1108,27 @@ export default function RuntimePlayground({
 
           <div className="runtime-playground__diagnostics" aria-live="polite">
             {currentError ? (
-              <div className="runtime-playground__error" role="alert">
-                <strong>{currentError.kind} error</strong>
-                <span>{currentError.message}</span>
-              </div>
+              <>
+                <div className="runtime-playground__error" role="alert">
+                  <strong>{currentError.kind} error</strong>
+                  <span>{currentError.message}</span>
+                  {isPython && aiFixState.phase !== "review" && (
+                    <button type="button" onClick={requestAiFix} disabled={aiFixState.phase === "running"}>
+                      {aiFixState.phase === "running" ? "Preparing fix..." : "Fix with AI"}
+                    </button>
+                  )}
+                  {aiFixState.message && <small>{aiFixState.message}</small>}
+                </div>
+                {aiFixState.phase === "review" && aiFixState.proposal && (
+                  <AIFixReview
+                    proposal={aiFixState.proposal}
+                    beforeSource={pythonSource}
+                    beforeInput={pythonInputSource}
+                    onAccept={acceptAiFix}
+                    onReject={() => setAiFixState({ phase: "idle", proposal: null, message: "" })}
+                  />
+                )}
+              </>
             ) : (
               <>
                 {traceWasTruncated && (
