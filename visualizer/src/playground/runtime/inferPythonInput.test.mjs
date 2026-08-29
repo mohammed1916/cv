@@ -1,7 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-import { inferPythonInput } from "./inferPythonInput.js";
+import {
+  inferPythonInput,
+  normalizePythonInputForEntry,
+} from "./inferPythonInput.js";
 
 test("regex matcher receives useful deterministic string and pattern inputs", () => {
   const result = inferPythonInput("def isMatch(s, p):\n    return True", {});
@@ -26,4 +29,15 @@ class Solution:
         return False
 `, { prices: [1] });
   assert.deepEqual(result.value, { nums: [2, 7, 11, 15], target: 9 });
+});
+
+test("AI inputs are constrained to the selected entry signature", () => {
+  const normalized = normalizePythonInputForEntry(
+    "class Solution:\n    def lengthOfLongestSubstring(self, s: str) -> int:\n        return 0",
+    { s: "abcabcbb", p: "a" },
+    "Solution.lengthOfLongestSubstring",
+  );
+
+  assert.deepEqual(normalized.value, { s: "abcabcbb" });
+  assert.deepEqual(normalized.removed, ["p"]);
 });

@@ -17,7 +17,10 @@ import {
   createDefaultPythonBindings,
   runPythonTrace,
 } from "./runtime/python";
-import { suggestPythonBindings } from "./ai/suggestPythonBindings";
+import {
+  suggestPythonBindings,
+  suggestPythonInputs,
+} from "./ai/suggestPythonBindings";
 import VisualizationCanvas from "./renderers/VisualizationCanvas";
 import PlaygroundAIProviderControls from "./PlaygroundAIProviderControls";
 import PythonTraceControls from "./PythonTraceControls";
@@ -712,20 +715,42 @@ export default function RuntimePlayground({
   );
 
   const suggestVisualBindings = useCallback(async () => {
-    if (
-      !isPython
-      || !hasCurrentRun
-      || !lastGoodRun?.traceResult
-      || pythonVariables.length === 0
-    ) return;
+    if (!isPython || !pythonSource.trim()) return;
 
     const suggestionVersion = ++suggestionVersionRef.current;
+    const needsTrace = !hasCurrentRun
+      || !lastGoodRun?.traceResult
+      || pythonVariables.length === 0
+      || pythonVariablesStale;
     setAiVisualState({
       phase: "running",
-      message: "Asking the selected AI provider for a visual layout...",
+      message: needsTrace
+        ? "Asking the selected AI provider for runnable example inputs..."
+        : "Asking the selected AI provider for a visual layout...",
     });
 
     try {
+      if (needsTrace) {
+        const suggestion = await suggestPythonInputs({
+          source: pythonSource,
+          inputSource: pythonInputSource,
+          entry: pythonEntry,
+        });
+        if (suggestionVersion !== suggestionVersionRef.current) return;
+        setPythonInputSource(suggestion.inputSource);
+        setExecutionError(null);
+        setPythonVariables([]);
+        setPythonVariablesStale(true);
+        setPhase("waiting");
+        setAiVisualState({
+          phase: "success",
+          message: `${suggestion.provider}: ${suggestion.summary}${suggestion.removedInputs.length > 0
+            ? ` Removed unsupported argument${suggestion.removedInputs.length === 1 ? "" : "s"}: ${suggestion.removedInputs.join(", ")}.`
+            : ""} Running the trace...`,
+        });
+        return;
+      }
+
       const suggestion = await suggestPythonBindings({
         source: pythonSource,
         inputSource: pythonInputSource,
@@ -764,6 +789,7 @@ export default function RuntimePlayground({
     pythonInputSource,
     pythonSource,
     pythonVariables,
+    pythonVariablesStale,
     updatePythonBindings,
   ]);
 

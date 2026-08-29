@@ -129,3 +129,38 @@ export function inferPythonInput(source, currentInput, requestedEntry = "") {
     entry: definition.name,
   };
 }
+
+export function normalizePythonInputForEntry(source, candidateInput, requestedEntry = "") {
+  const definition = entryDefinition(source, requestedEntry);
+  if (!definition) return { value: candidateInput, removed: [], added: [] };
+
+  const parameters = splitParameters(definition.parametersSource)
+    .map(parameterDescriptor)
+    .filter(Boolean);
+  if (parameters.length === 0) {
+    return {
+      value: {},
+      removed: isPlainObject(candidateInput) ? Object.keys(candidateInput) : [],
+      added: [],
+      entry: definition.name,
+    };
+  }
+
+  const allowedNames = new Set(parameters.map((parameter) => parameter.name));
+  const parameterNames = new Set(parameters.map((parameter) => parameter.name.toLowerCase()));
+  const candidate = isPlainObject(candidateInput) ? candidateInput : {};
+  const value = Object.fromEntries(
+    Object.entries(candidate).filter(([name]) => allowedNames.has(name)),
+  );
+  const removed = Object.keys(candidate).filter((name) => !allowedNames.has(name));
+  const added = [];
+
+  parameters.forEach((parameter) => {
+    if (parameter.required && !Object.hasOwn(value, parameter.name)) {
+      value[parameter.name] = sampleValue(parameter, parameterNames);
+      added.push(parameter.name);
+    }
+  });
+
+  return { value, removed, added, entry: definition.name, parameters };
+}

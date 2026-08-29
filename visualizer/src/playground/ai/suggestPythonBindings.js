@@ -2,6 +2,7 @@ import {
   getChatProvider,
   streamProviderChat,
 } from "../../services/chatProviders.js";
+import { normalizePythonInputForEntry } from "../runtime/inferPythonInput.js";
 
 const ALLOWED_KINDS = new Set([
   "auto",
@@ -224,4 +225,69 @@ export async function suggestPythonBindings(options, dependencies = {}) {
     options.traceResult?.variables,
   );
   return { ...suggestion, provider: providerLabel(config) };
+}
+
+export function createInputSuggestionMessages({ source, entry, inputSource }) {
+  return [
+    {
+      role: "system",
+      text: `Generate one small, valid example input for a Python competitive-programming function. Return only one JSON object and no markdown.
+
+The response schema is:
+{"inputs":<JSON value passed to the entry function>,"summary":"short explanation"}
+
+Rules:
+- Inspect the function signature and algorithm to choose meaningful values.
+- For multiple named parameters, inputs must be an object keyed by parameter name.
+- Exercise the main algorithm path while keeping collections small enough to visualize.
+- Use only JSON values. Do not emit Python literals, code, comments, or extra fields.`,
+    },
+    {
+      role: "user",
+      text: `Generate trace inputs for this Python code.
+
+Requested entry: ${entry || "auto-detected"}
+Current inputs, which may be incomplete or invalid:
+${String(inputSource || "null").slice(0, 8_000)}
+
+Python source:
+${String(source || "").slice(0, 35_000)}`,
+    },
+  ];
+}
+
+export async function suggestPythonInputs(options, dependencies = {}) {
+  const config = dependencies.config ?? selectedProviderConfig();
+  const stream = dependencies.stream ?? streamProviderChat;
+  let responseText = "";
+
+  for await (const delta of stream(createInputSuggestionMessages(options), config)) {
+    responseText += delta;
+    if (responseText.length > MAX_RESPONSE_LENGTH) {
+      throw new Error("The AI input response exceeded the safe size limit.");
+    }
+  }
+
+  const parsed = parseSuggestionJson(responseText);
+  if (!Object.hasOwn(parsed, "inputs")) {
+    throw new Error("The AI response is missing its inputs value.");
+  }
+  const normalized = normalizePythonInputForEntry(
+    options.source,
+    parsed.inputs,
+    options.entry,
+  );
+  const inputSource = JSON.stringify(normalized.value, null, 2);
+  if (inputSource === undefined) {
+    throw new Error("The AI returned inputs that cannot be represented as JSON.");
+  }
+  return {
+    inputSource,
+    summary: typeof parsed.summary === "string"
+      ? parsed.summary.trim().slice(0, 240)
+      : "Generated example inputs. Python will run automatically.",
+    provider: providerLabel(config),
+    removedInputs: normalized.removed,
+    addedInputs: normalized.added,
+  };
 }

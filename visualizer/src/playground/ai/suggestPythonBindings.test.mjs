@@ -2,9 +2,11 @@ import test from "node:test";
 import assert from "node:assert/strict";
 
 import {
+  createInputSuggestionMessages,
   createVisualSuggestionMessages,
   parseVisualSuggestion,
   suggestPythonBindings,
+  suggestPythonInputs,
 } from "./suggestPythonBindings.js";
 
 const variables = [
@@ -69,4 +71,35 @@ test("visual suggestion prompt requires a constrained binding-only response", ()
   });
   assert.match(messages[0].text, /Never invent variables/);
   assert.match(messages[0].text, /Return only one JSON object/);
+});
+
+test("AI input suggestions return JSON arguments for an untraced function", async () => {
+  const result = await suggestPythonInputs(
+    {
+      source: "def isMatch(s, p):\n    return True",
+      entry: "isMatch",
+      inputSource: "{}",
+    },
+    {
+      config: { provider: "ollama-local", model: "gemma2:2b" },
+      stream: async function* stream() {
+        yield '{"inputs":{"s":"aa","p":"a*"},';
+        yield '"summary":"Exercises repeated matching."}';
+      },
+    },
+  );
+
+  assert.deepEqual(JSON.parse(result.inputSource), { s: "aa", p: "a*" });
+  assert.match(result.summary, /repeated matching/i);
+  assert.equal(result.provider, "Ollama Local");
+});
+
+test("AI input prompt asks for signature-shaped JSON rather than Python code", () => {
+  const messages = createInputSuggestionMessages({
+    source: "def solve(nums, target): pass",
+    entry: "solve",
+    inputSource: "{}",
+  });
+  assert.match(messages[0].text, /multiple named parameters/i);
+  assert.match(messages[1].text, /def solve\(nums, target\)/);
 });

@@ -78,15 +78,7 @@ export default function PythonTraceControls({
   ).length;
   const suggestionBlockedReason = disabled
     ? "Python is tracing now. Suggestions unlock when the run finishes."
-    : inputError
-      ? "Fix the Inputs JSON before requesting visual suggestions."
-      : traceError
-        ? "The latest Python run failed. Fix its error, then run Python again."
-        : variablesStale
-          ? "Source or inputs changed. Wait for auto-run or press Run Python."
-          : variables.length === 0
-            ? "Run Python successfully once so the AI has real variables to configure."
-            : "";
+    : "";
 
   const updateBinding = (variable, patch) => {
     const name = String(variable.name);
@@ -197,7 +189,7 @@ export default function PythonTraceControls({
           <button
             type="button"
             onClick={onSuggestVisuals}
-            disabled={disabled || isSuggestingVisuals || variables.length === 0 || variablesStale}
+            disabled={disabled || isSuggestingVisuals}
             aria-describedby={suggestionBlockedReason ? "runtime-playground-ai-suggestion-reason" : undefined}
             title={suggestionBlockedReason || "Suggest a visual layout with the selected AI provider"}
           >
@@ -205,8 +197,8 @@ export default function PythonTraceControls({
               ? "Suggesting..."
               : disabled
                 ? "Tracing..."
-                : variables.length === 0 || variablesStale
-                  ? "Run trace first"
+                : variables.length === 0 || variablesStale || inputError || traceError
+                  ? "AI generate inputs"
                   : "Suggest visuals"}
           </button>
           </div>
