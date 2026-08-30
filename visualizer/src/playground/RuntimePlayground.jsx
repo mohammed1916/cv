@@ -724,11 +724,11 @@ export default function RuntimePlayground({
     ],
   );
 
-  const suggestVisualBindings = useCallback(async () => {
+  const suggestVisualBindings = useCallback(async ({ forceInputs = false, instruction = "" } = {}) => {
     if (!isPython || !pythonSource.trim()) return;
 
     const suggestionVersion = ++suggestionVersionRef.current;
-    const needsTrace = !hasCurrentRun
+    const needsTrace = forceInputs || !hasCurrentRun
       || !lastGoodRun?.traceResult
       || pythonVariables.length === 0
       || pythonVariablesStale;
@@ -745,6 +745,7 @@ export default function RuntimePlayground({
           source: pythonSource,
           inputSource: pythonInputSource,
           entry: pythonEntry,
+          instruction,
         });
         if (suggestionVersion !== suggestionVersionRef.current) return;
         setPythonInputSource(suggestion.inputSource);
@@ -819,6 +820,23 @@ export default function RuntimePlayground({
       setAiFixState({ phase: "error", proposal: null, message: errorMessage(error) });
     }
   }, [aiFixState.phase, currentErrorMessage, isPython, pythonEntry, pythonInputSource, pythonSource]);
+
+  const requestAiWorkspaceChange = useCallback(async (instruction) => {
+    if (!isPython || !instruction.trim() || aiFixState.phase === "running") return;
+    setAiFixState({ phase: "running", proposal: null, message: "Preparing a code and input proposal..." });
+    try {
+      const proposal = await suggestPythonFix({
+        source: pythonSource,
+        inputSource: pythonInputSource,
+        entry: pythonEntry,
+        instruction,
+        error: { message: "No runtime error; follow the user's requested workspace change." },
+      });
+      setAiFixState({ phase: "review", proposal, message: "" });
+    } catch (error) {
+      setAiFixState({ phase: "error", proposal: null, message: errorMessage(error) });
+    }
+  }, [aiFixState.phase, isPython, pythonEntry, pythonInputSource, pythonSource]);
 
   const acceptAiFix = useCallback(() => {
     const proposal = aiFixState.proposal;
@@ -1036,6 +1054,8 @@ export default function RuntimePlayground({
               bindings={pythonBindings}
               onBindingsChange={updatePythonBindings}
               onSuggestVisuals={suggestVisualBindings}
+              onGenerateInputs={(instruction) => suggestVisualBindings({ forceInputs: true, instruction })}
+              onProposeWorkspace={requestAiWorkspaceChange}
                 isSuggestingVisuals={aiVisualState.phase === "running"}
                 aiFeedback={aiVisualState}
                 traceError={currentError}
@@ -1107,6 +1127,21 @@ export default function RuntimePlayground({
           </div>
 
           <div className="runtime-playground__diagnostics" aria-live="polite">
+            {aiFixState.phase === "review" && aiFixState.proposal && (
+              <AIFixReview
+                proposal={aiFixState.proposal}
+                beforeSource={pythonSource}
+                beforeInput={pythonInputSource}
+                onAccept={acceptAiFix}
+                onReject={() => setAiFixState({ phase: "idle", proposal: null, message: "" })}
+              />
+            )}
+            {!currentError && aiFixState.message && (
+              <div className="runtime-playground__timeline-message" role="status">
+                <span className="runtime-playground__operation">AI</span>
+                <span>{aiFixState.message}</span>
+              </div>
+            )}
             {currentError ? (
               <>
                 <div className="runtime-playground__error" role="alert">
@@ -1119,15 +1154,6 @@ export default function RuntimePlayground({
                   )}
                   {aiFixState.message && <small>{aiFixState.message}</small>}
                 </div>
-                {aiFixState.phase === "review" && aiFixState.proposal && (
-                  <AIFixReview
-                    proposal={aiFixState.proposal}
-                    beforeSource={pythonSource}
-                    beforeInput={pythonInputSource}
-                    onAccept={acceptAiFix}
-                    onReject={() => setAiFixState({ phase: "idle", proposal: null, message: "" })}
-                  />
-                )}
               </>
             ) : (
               <>

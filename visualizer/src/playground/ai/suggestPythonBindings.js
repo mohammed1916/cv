@@ -227,7 +227,7 @@ export async function suggestPythonBindings(options, dependencies = {}) {
   return { ...suggestion, provider: providerLabel(config) };
 }
 
-export function createInputSuggestionMessages({ source, entry, inputSource }) {
+export function createInputSuggestionMessages({ source, entry, inputSource, instruction }) {
   return [
     {
       role: "system",
@@ -249,6 +249,9 @@ Rules:
 Requested entry: ${entry || "auto-detected"}
 Current inputs, which may be incomplete or invalid:
 ${String(inputSource || "null").slice(0, 8_000)}
+
+User request for this test case:
+${String(instruction || "Choose a small representative case.").slice(0, 4_000)}
 
 Python source:
 ${String(source || "").slice(0, 35_000)}`,

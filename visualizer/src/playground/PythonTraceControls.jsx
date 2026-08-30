@@ -56,12 +56,15 @@ export default function PythonTraceControls({
   bindings = {},
   onBindingsChange,
   onSuggestVisuals,
+  onGenerateInputs,
+  onProposeWorkspace,
   isSuggestingVisuals = false,
   aiFeedback,
   traceError,
   disabled = false,
 }) {
   const [tab, setTab] = useState("inputs");
+  const [aiInputPrompt, setAiInputPrompt] = useState("");
   const sequenceVariables = useMemo(
     () => variables.filter((variable) => {
       const binding = bindings[String(variable.name)] ?? {};
@@ -177,6 +180,36 @@ export default function PythonTraceControls({
               {inputError}
             </p>
           )}
+          <div className="runtime-playground__input-ai">
+            <label htmlFor="runtime-playground-python-input-prompt">
+              Ask AI for inputs
+              <small>Describe the case, constraints, or behavior you want to visualize</small>
+            </label>
+            <textarea
+              id="runtime-playground-python-input-prompt"
+              value={aiInputPrompt}
+              onChange={(event) => setAiInputPrompt(event.target.value)}
+              placeholder="Example: Three sorted linked lists with duplicates and negative values"
+              spellCheck={false}
+              disabled={disabled || isSuggestingVisuals}
+            />
+            <div className="runtime-playground__input-ai-actions">
+              <button
+                type="button"
+                onClick={() => onGenerateInputs?.(aiInputPrompt)}
+                disabled={disabled || isSuggestingVisuals}
+              >
+                {isSuggestingVisuals ? "Generating..." : "Generate input JSON"}
+              </button>
+              <button
+                type="button"
+                onClick={() => onProposeWorkspace?.(aiInputPrompt)}
+                disabled={disabled || isSuggestingVisuals || !aiInputPrompt.trim()}
+              >
+                Propose code + inputs
+              </button>
+            </div>
+          </div>
         </div>
       ) : (
         <div
@@ -192,7 +225,7 @@ export default function PythonTraceControls({
             </span>
           <button
             type="button"
-            onClick={onSuggestVisuals}
+            onClick={() => onSuggestVisuals?.()}
             disabled={disabled || isSuggestingVisuals}
             aria-describedby={suggestionBlockedReason ? "runtime-playground-ai-suggestion-reason" : undefined}
             title={suggestionBlockedReason || "Suggest a visual layout with the selected AI provider"}

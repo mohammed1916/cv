@@ -100,9 +100,11 @@ test("AI input prompt asks for signature-shaped JSON rather than Python code", (
     source: "def solve(nums, target): pass",
     entry: "solve",
     inputSource: "{}",
+    instruction: "Use negative numbers and duplicate values.",
   });
   assert.match(messages[0].text, /multiple named parameters/i);
   assert.match(messages[1].text, /def solve\(nums, target\)/);
+  assert.match(messages[1].text, /negative numbers and duplicate values/i);
 });
 
 test("AI fixes stay as proposals and expose red-green line changes", async () => {

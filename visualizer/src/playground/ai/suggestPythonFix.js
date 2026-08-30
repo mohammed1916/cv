@@ -60,13 +60,13 @@ function nodeInputFallback({ source, inputSource, error }) {
   return null
 }
 
-export async function suggestPythonFix({ source, inputSource, entry, error }, dependencies = {}) {
+export async function suggestPythonFix({ source, inputSource, entry, error, instruction }, dependencies = {}) {
   const config = dependencies.config ?? providerConfig()
   const stream = dependencies.stream ?? streamProviderChat
   const messages = [
     {
       role: 'system',
-      text: `Propose a minimal repair for Python visualization code. Return only JSON, no markdown.
+      text: `Propose a minimal repair or user-requested workspace change for Python visualization code. Return only JSON, no markdown.
 Schema: {"source":"complete repaired Python source","inputs":<complete JSON input value>,"summary":"what failed and why","changes":["short change description"]}
 Preserve the algorithm. You may repair input shape, add conventional ListNode or TreeNode definitions when genuinely required, or make a minimal source correction. Never omit unchanged source.`,
     },
@@ -74,6 +74,7 @@ Preserve the algorithm. You may repair input shape, add conventional ListNode or
       role: 'user',
       text: `Entry: ${entry || 'auto-detected'}
 Runtime error: ${error?.message || error || 'Unknown error'}
+User-requested change: ${instruction || 'Repair the reported runtime error.'}
 Current inputs:
 ${String(inputSource || 'null').slice(0, 8000)}
 Current source:
