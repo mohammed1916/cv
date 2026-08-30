@@ -55,134 +55,125 @@ function computeBounds(pts) {
   let minX = Infinity
   let maxX = -Infinity
   let minY = Infinity
-
-  const [panelDivs, setPanelDivs] = useState(null)
-  const panelConfigs = useMemo(() => [
-    { id: 'input', title: 'Input' },
-    { id: 'viz', title: 'Self Crossing', dockMode: 'split-bottom' },
-    { id: 'code', title: 'Code', dockMode: 'split-right' },
-  ], [])
-  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
-  const applyExample = useCallback((example) => {
-    setInputValue(JSON.stringify(exampleToArray(example)))
-    handleReset()
-  }, [handleReset])
-
-  const inputPanel = (
-    <ManualInputPanel
-      fields={[{
-        key: 'distances',
-        label: 'Distances (JSON array)',
-        type: 'string',
-        placeholder: '[2,1,1,2]',
-      }]}
-      values={{ distances: inputValue }}
-      onChange={(_, value) => { setInputValue(value); handleReset() }}
-      examples={EXAMPLES}
-      applyExample={applyExample}
-      inputError={inputError}
-    />
-  )
-
-  const visualizationPanel = (
-    <div className="self-crossing-panel-body">
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={stepIndex}
-          className="self-crossing-viz"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <div className={`self-crossing-step-info kind-${statusKind}`}>
-            <h3>{step?.message || 'Press play to walk the path and check for self-crossings.'}</h3>
-          </div>
-
-          <div className="self-crossing-legend">
-            <span className="self-crossing-chip">
-              Segment {moveIndex >= 0 ? moveIndex : '—'}
-              {cells.length > 0 ? ` / ${cells.length - 1}` : ''}
-            </span>
-            <span className="self-crossing-chip">
-              Direction: {moveIndex >= 0 ? DIR_NAMES[moveIndex % 4] : '—'}
-            </span>
-            <span className={`self-crossing-chip status-${statusKind}`}>{statusLabel}</span>
-          </div>
-
-          {cells.length > 0 && (
-            <div className="self-crossing-array">
-              {cells.map((d, idx) => (
-                <div
-                  key={idx}
-                  className={`self-crossing-cell${idx === moveIndex ? ' current' : ''}${refSet.includes(idx) && idx !== moveIndex ? ' ref' : ''}`}
-                >
-                  <span className="self-crossing-cell-i">{idx}</span>
-                  <span className="self-crossing-cell-v">{d}</span>
-                </div>
-              ))}
-            </div>
-          )}
-
-          <div className="self-crossing-stage">
-            <PathCanvas
-              points={canvasPoints}
-              bounds={canvasBounds}
-              moveIndex={moveIndex}
-              crossingPoint={step?.crossingPoint || null}
-              crossingDetected={!!step?.crossingDetected}
-            />
-          </div>
-        </motion.div>
-      </AnimatePresence>
-    </div>
-  )
   let maxY = -Infinity
   for (const p of pts) {
-    <div className="problem-shell">
-      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
-      {panelDivs && (
-        <>
-          {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
-          {panelDivs.viz && createPortal(visualizationPanel, panelDivs.viz)}
-          {panelDivs.code && createPortal(
-            <CodeTracePanel
-              step={step}
-              codeLines={SOLUTION_CODE}
-              highlightedLines={connectivity.highlightedLines}
-              onLineSelect={connectivity.handleLineSelect}
-            />,
-            panelDivs.code,
-          )}
-        </>
-      )}
-      {createPortal(
-        <FloatingPanel title="Playback Controls">
-          <PlaybackControls
-            isPlaying={isPlaying}
-            isDone={isDone}
-            speed={speed}
-            onPlayToggle={togglePlay}
-            onPrev={stepBack}
-            onNext={stepForward}
-            onReset={handleReset}
-            prevDisabled={stepIndex < 0}
-            nextDisabled={isDone}
-            resetDisabled={stepIndex < 0}
-            onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          />
-        </FloatingPanel>,
-        document.body,
-      )}
+    if (p.x < minX) minX = p.x
+    if (p.x > maxX) maxX = p.x
+    if (p.y < minY) minY = p.y
+    if (p.y > maxY) maxY = p.y
+  }
+  if (!Number.isFinite(minX)) {
+    minX = -1
+    maxX = 1
+    minY = -1
+    maxY = 1
+  }
+  return { minX, maxX, minY, maxY }
+}
+
+function findCrossingPoint(pts, i) {
+  const a1 = pts[i]
+  const a2 = pts[i + 1]
+  const isAVertical = a1.x === a2.x
+
+  for (const prev of [i - 3, i - 4, i - 5]) {
+    if (prev < 0) continue
+    const b1 = pts[prev]
+    const b2 = pts[prev + 1]
+    const isBVertical = b1.x === b2.x
+    if (isAVertical !== isBVertical) {
+      const ix = isAVertical ? a1.x : b1.x
+      const iy = isAVertical ? b1.y : a1.y
+      const minAx = Math.min(a1.x, a2.x)
+      const maxAx = Math.max(a1.x, a2.x)
+      const minAy = Math.min(a1.y, a2.y)
+      const maxAy = Math.max(a1.y, a2.y)
+      const minBx = Math.min(b1.x, b2.x)
+      const maxBx = Math.max(b1.x, b2.x)
+      const minBy = Math.min(b1.y, b2.y)
+      const maxBy = Math.max(b1.y, b2.y)
+      if (
+        ix >= minAx && ix <= maxAx && ix >= minBx && ix <= maxBx &&
+        iy >= minAy && iy <= maxAy && iy >= minBy && iy <= maxBy
+      ) {
+        return { x: ix, y: iy }
+      }
+    } else if (isAVertical && a1.x === b1.x) {
+      const overlapY = Math.max(Math.min(a1.y, a2.y), Math.min(b1.y, b2.y))
+      return { x: a1.x, y: overlapY }
+    } else if (!isAVertical && a1.y === b1.y) {
+      const overlapX = Math.max(Math.min(a1.x, a2.x), Math.min(b1.x, b2.x))
+      return { x: overlapX, y: a1.y }
+    }
+  }
+  return pts[i + 1] || pts[i] || { x: 0, y: 0 }
+}
+
+function generateSteps(x) {
+  const n = x.length
+  const full = computePoints(x)
+  const snap = (count, extra = {}) => {
+    const slice = full.slice(0, count)
+    return {
+      points: slice,
+      bounds: computeBounds(slice),
+      distances: x,
+      ...extra,
+    }
+  }
+
+  const steps = []
+  steps.push({
+    phase: 'init',
+    activeLine: 1,
+    relatedLines: [1, 2],
+    message: `Starting path with ${n} distance segment(s). Check for self-crossing.`,
+    ...snap(1, { moveIndex: -1 }),
+  })
+
+  let crossed = false
+
+  for (let i = 0; i < n; i++) {
+    const dName = DIR_NAMES[i % 4]
+    steps.push({
+      phase: 'move',
+      activeLine: 3,
+      relatedLines: [3],
+      message: `Move ${i}: travel ${x[i]} unit(s) ${dName}.`,
+      ...snap(i + 2, { moveIndex: i, refIndices: [i] }),
+    })
+
+    if (i < 3) {
+      continue
+    }
+
+    // Case 1: current line crosses the line three steps back.
+    const c1 = x[i] >= x[i - 2] && x[i - 1] <= x[i - 3]
+    steps.push({
+      phase: 'check',
+      activeLine: 5,
+      relatedLines: [4, 5],
+      message: `Case 1: x[${i}]=${x[i]} >= x[${i - 2}]=${x[i - 2]} (${x[i] >= x[i - 2]}) and x[${i - 1}]=${x[i - 1]} <= x[${i - 3}]=${x[i - 3]} (${x[i - 1] <= x[i - 3]}) -> ${c1}.`,
+      ...snap(i + 2, { moveIndex: i, refIndices: [i, i - 1, i - 2, i - 3] }),
+    })
+    if (c1) {
       crossed = true
-      crossCase = 1
-      crossPoint = findCrossingPoint(full, i)
+      const crossPoint = findCrossingPoint(full, i)
       steps.push({
         phase: 'crossing',
+        crossingDetected: true,
+        crossingCase: 1,
+        crossingPoint: crossPoint,
         activeLine: 6,
         relatedLines: [5, 6],
         message: `Self-crossing detected by Case 1 at move ${i}. Return True.`,
-        ...snap(i + 2, { moveIndex: i, refIndices: [i, i - 1, i - 2, i - 3] }),
+        ...snap(i + 2, {
+          moveIndex: i,
+          refIndices: [i, i - 1, i - 2, i - 3],
+          crossingDetected: true,
+          crossingCase: 1,
+          crossingPoint: crossPoint,
+        }),
       })
       break
     }
@@ -199,14 +190,22 @@ function computeBounds(pts) {
       })
       if (c2) {
         crossed = true
-        crossCase = 2
-        crossPoint = findCrossingPoint(full, i)
+        const crossPoint = findCrossingPoint(full, i)
         steps.push({
           phase: 'crossing',
+          crossingDetected: true,
+          crossingCase: 2,
+          crossingPoint: crossPoint,
           activeLine: 10,
           relatedLines: [8, 9, 10],
           message: `Self-crossing detected by Case 2 at move ${i}. Return True.`,
-          ...snap(i + 2, { moveIndex: i, refIndices: [i, i - 1, i - 2, i - 3, i - 4] }),
+          ...snap(i + 2, {
+            moveIndex: i,
+            refIndices: [i, i - 1, i - 2, i - 3, i - 4],
+            crossingDetected: true,
+            crossingCase: 2,
+            crossingPoint: crossPoint,
+          }),
         })
         break
       }
@@ -228,14 +227,22 @@ function computeBounds(pts) {
       })
       if (c3) {
         crossed = true
-        crossCase = 3
-        crossPoint = findCrossingPoint(full, i)
+        const crossPoint = findCrossingPoint(full, i)
         steps.push({
           phase: 'crossing',
+          crossingDetected: true,
+          crossingCase: 3,
+          crossingPoint: crossPoint,
           activeLine: 16,
           relatedLines: [12, 13, 14, 15, 16],
           message: `Self-crossing detected by Case 3 at move ${i}. Return True.`,
-          ...snap(i + 2, { moveIndex: i, refIndices: [i, i - 1, i - 2, i - 3, i - 4, i - 5] }),
+          ...snap(i + 2, {
+            moveIndex: i,
+            refIndices: [i, i - 1, i - 2, i - 3, i - 4, i - 5],
+            crossingDetected: true,
+            crossingCase: 3,
+            crossingPoint: crossPoint,
+          }),
         })
         break
       }
@@ -406,118 +413,79 @@ export default function SelfCrossingVisualizer() {
     statusKind = 'scan'
   }
 
+  const panelConfigs = useMemo(() => [
+    { id: 'input', title: 'Input' },
+    { id: 'viz', title: 'Self Crossing', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
+  ], [])
+  const [panelDivs, setPanelDivs] = useState(null)
+  const applyExample = useCallback((example) => {
+    setInputValue(JSON.stringify(exampleToArray(example)))
+    handleReset()
+  }, [handleReset])
+
+  const inputPanel = (
+    <ManualInputPanel
+      fields={[{
+        key: 'distances',
+        label: 'Distances (JSON array)',
+        type: 'string',
+        placeholder: '[2,1,1,2]',
+      }]}
+      values={{ distances: inputValue }}
+      onChange={(_, value) => { setInputValue(value); handleReset() }}
+      examples={EXAMPLES}
+      applyExample={applyExample}
+      inputError={inputError}
+    />
+  )
+
+  const visualizationPanel = (
+    <div className="self-crossing-panel-body">
+      <AnimatePresence mode="wait">
+        <motion.div key={stepIndex} className="self-crossing-viz" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
+          <div className={`self-crossing-step-info kind-${statusKind}`}>
+            <h3>{step?.message || 'Press play to walk the path and check for self-crossings.'}</h3>
+          </div>
+          <div className="self-crossing-legend">
+            <span className="self-crossing-chip">Segment {moveIndex >= 0 ? moveIndex : '—'}{cells.length > 0 ? ` / ${cells.length - 1}` : ''}</span>
+            <span className="self-crossing-chip">Direction: {moveIndex >= 0 ? DIR_NAMES[moveIndex % 4] : '—'}</span>
+            <span className={`self-crossing-chip status-${statusKind}`}>{statusLabel}</span>
+          </div>
+          {cells.length > 0 && (
+            <div className="self-crossing-array">
+              {cells.map((d, idx) => (
+                <div key={idx} className={`self-crossing-cell${idx === moveIndex ? ' current' : ''}${refSet.includes(idx) && idx !== moveIndex ? ' ref' : ''}`}>
+                  <span className="self-crossing-cell-i">{idx}</span>
+                  <span className="self-crossing-cell-v">{d}</span>
+                </div>
+              ))}
+            </div>
+          )}
+          <div className="self-crossing-stage">
+            <PathCanvas points={canvasPoints} bounds={canvasBounds} moveIndex={moveIndex} crossingPoint={step?.crossingPoint || null} crossingDetected={!!step?.crossingDetected} />
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  )
+
   return (
     <div className="self-crossing-shell">
-      <div className="self-crossing-panel">
-        <div className="self-crossing-panel-head">Input — distances[]</div>
-        <div className="self-crossing-panel-body">
-          <textarea
-            value={inputValue}
-            onChange={(e) => { setInputValue(e.target.value); handleReset() }}
-            className="self-crossing-textarea"
-            placeholder="Enter a JSON array, e.g. [2,1,1,2]"
-            spellCheck={false}
-          />
-          {inputError && <div className="self-crossing-error">{inputError}</div>}
-        </div>
-      </div>
-
-      <div className="self-crossing-panel">
-        <div className="self-crossing-panel-head">Visualization</div>
-        <div className="self-crossing-panel-body">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={stepIndex}
-              className="self-crossing-viz"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className={`self-crossing-step-info kind-${statusKind}`}>
-                <h3>{step?.message || 'Press play to walk the path and check for self-crossings.'}</h3>
-              </div>
-
-              <div className="self-crossing-legend">
-                <span className="self-crossing-chip">
-                  Segment {moveIndex >= 0 ? moveIndex : '—'}
-                  {cells.length > 0 ? ` / ${cells.length - 1}` : ''}
-                </span>
-                <span className="self-crossing-chip">
-                  Direction: {moveIndex >= 0 ? DIR_NAMES[moveIndex % 4] : '—'}
-                </span>
-                <span className={`self-crossing-chip status-${statusKind}`}>{statusLabel}</span>
-              </div>
-
-              {cells.length > 0 && (
-                <div className="self-crossing-array">
-                  {cells.map((d, idx) => (
-                    <div
-                      key={idx}
-                      className={`self-crossing-cell${idx === moveIndex ? ' current' : ''}${refSet.includes(idx) && idx !== moveIndex ? ' ref' : ''}`}
-                    >
-                      <span className="self-crossing-cell-i">{idx}</span>
-                      <span className="self-crossing-cell-v">{d}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              <div className="self-crossing-stage">
-                <PathCanvas
-                  points={canvasPoints}
-                  bounds={canvasBounds}
-                  moveIndex={moveIndex}
-                  crossingPoint={step?.crossingPoint || null}
-                  crossingDetected={!!step?.crossingDetected}
-                />
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </div>
-
-      <div className="self-crossing-panel">
-        <div className="self-crossing-panel-head">Code</div>
-        <div className="self-crossing-panel-body">
-          <CodeTracePanel
-            step={step}
-            codeLines={SOLUTION_CODE}
-            highlightedLines={connectivity.highlightedLines}
-            onLineSelect={connectivity.handleLineSelect}
-          />
-        </div>
-      </div>
-
-      {EXAMPLES.length > 0 && (
-        <div className="self-crossing-examples">
-          {EXAMPLES.map((example, i) => (
-            <button
-              key={i}
-              className="self-crossing-example-btn"
-              onClick={() => { setInputValue(JSON.stringify(exampleToArray(example))); handleReset() }}
-            >
-              {example.label || `Example ${i + 1}`}
-            </button>
-          ))}
-        </div>
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={setPanelDivs} />
+      {panelDivs && (
+        <>
+          {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+          {panelDivs.viz && createPortal(visualizationPanel, panelDivs.viz)}
+          {panelDivs.code && createPortal(<CodeTracePanel step={step} codeLines={SOLUTION_CODE} highlightedLines={connectivity.highlightedLines} onLineSelect={connectivity.handleLineSelect} />, panelDivs.code)}
+        </>
       )}
-
-      <FloatingPanel title="Playback Controls">
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex < 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex < 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-        />
-      </FloatingPanel>
+      {createPortal(
+        <FloatingPanel title="Playback Controls">
+          <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={(e) => setSpeed(Number(e.target.value))} />
+        </FloatingPanel>,
+        document.body,
+      )}
     </div>
   )
 }
