@@ -17,6 +17,7 @@ export default function LuminoDockPanel({ panels, onPanelReady }) {
   // Layout snapshot taken the first time a panel is minimized, so restore can
   // return split fractions to their pre-collapse values.
   const savedSizesRef = useRef({})
+  const collapseTimersRef = useRef({})
   // Points at applyCollapse so the per-widget minimize button (created in the
   // PanelWidget constructor) can invoke it once defined below.
   const collapseCallbackRef = useRef(null)
@@ -77,6 +78,7 @@ export default function LuminoDockPanel({ panels, onPanelReady }) {
         minBtn.addEventListener('click', (e) => {
           e.stopPropagation()
           this._collapsed = !this._collapsed
+          this.node.classList.toggle('is-collapsed', this._collapsed)
           setMinButtonState(this._collapsed)
           collapseCallbackRef.current?.(id, this._collapsed)
         })
@@ -209,8 +211,25 @@ export default function LuminoDockPanel({ panels, onPanelReady }) {
       const contentDiv = contentDivsRef.current[id]
       if (!widget || !contentDiv) return
 
-      // Toggle body visibility (leaves the ~36px tab strip visible)
-      contentDiv.style.display = collapsed ? 'none' : 'flex'
+      // Let the content fade and slide before hiding it; restoring reverses
+      // the same motion while Lumino reallocates the panel's space.
+      window.clearTimeout(collapseTimersRef.current[id])
+      if (collapsed) {
+        contentDiv.classList.remove('is-opening')
+        contentDiv.classList.add('is-closing')
+        contentDiv.setAttribute('aria-hidden', 'true')
+        collapseTimersRef.current[id] = window.setTimeout(() => {
+          contentDiv.style.display = 'none'
+          contentDiv.classList.remove('is-closing')
+        }, 180)
+      } else {
+        contentDiv.style.display = 'flex'
+        contentDiv.setAttribute('aria-hidden', 'false')
+        contentDiv.classList.add('is-opening')
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => contentDiv.classList.remove('is-opening'))
+        })
+      }
 
       const config = dock.saveLayout()
       const hit = findWidgetSplit(config.main, widget)
@@ -253,6 +272,7 @@ export default function LuminoDockPanel({ panels, onPanelReady }) {
       cancelAnimationFrame(raf)
       resizeObserver.disconnect()
       window.removeEventListener('resize', fit)
+      Object.values(collapseTimersRef.current).forEach(window.clearTimeout)
       try {
         box.dispose()
       } catch (e) {

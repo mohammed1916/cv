@@ -30,6 +30,7 @@ function storeSessionValue(key, value) {
 
 export default function PlaygroundAIProviderControls() {
   const [config, setConfig] = useState(getChatProvider);
+  const [isExpanded, setIsExpanded] = useState(true);
   const [ollamaApiKey, setOllamaApiKey] = useState(() => (
     readSessionValue("chat.ollama-api-key")
   ));
@@ -73,14 +74,27 @@ export default function PlaygroundAIProviderControls() {
 
   return (
     <section className="runtime-playground__ai-provider" aria-label="AI visual provider">
-      <div className="runtime-playground__ai-provider-heading">
+      <button
+        type="button"
+        className="runtime-playground__ai-provider-heading"
+        aria-expanded={isExpanded}
+        aria-controls="runtime-playground-ai-provider-settings"
+        onClick={() => setIsExpanded((expanded) => !expanded)}
+      >
         <span>
           <strong>AI visual provider</strong>
           <small>Used by Suggest visuals; deterministic tracing does not require AI.</small>
         </span>
         <code>{selected.label}</code>
-      </div>
+        <span className="runtime-playground__ai-provider-chevron" aria-hidden="true">⌄</span>
+      </button>
 
+      <div
+        id="runtime-playground-ai-provider-settings"
+        className={`runtime-playground__ai-provider-content${isExpanded ? " is-expanded" : ""}`}
+        aria-hidden={!isExpanded}
+      >
+      <div className="runtime-playground__ai-provider-content-inner">
       <div className="runtime-playground__ai-provider-fields">
         <label htmlFor="runtime-playground-ai-provider">
           Provider
@@ -164,6 +178,8 @@ export default function PlaygroundAIProviderControls() {
               : "Checking http://127.0.0.1:11434 for installed models..."
           : "Keys are kept in session storage and sent only through the existing chat proxy."}
       </p>
+      </div>
+      </div>
     </section>
   );
 }

@@ -217,7 +217,7 @@ export default function RuntimePlayground({
   onLayoutChange,
 }) {
   const [mode, setMode] = useState(() => {
-    const stored = readStoredText(MODE_STORAGE_KEY, "script");
+    const stored = readStoredText(MODE_STORAGE_KEY, "python");
     return stored === "python" ? "python" : "script";
   });
   const [scriptSource, setScriptSource] = useState(() => (

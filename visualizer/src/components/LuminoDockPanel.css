@@ -31,6 +31,23 @@
   background: var(--surface, var(--surface));
 }
 
+.lumino-panel-widget > [data-panel-id] {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.lumino-panel-widget > [data-panel-id].is-closing {
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+}
+
+.lumino-panel-widget > [data-panel-id].is-opening {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
 /* Status is deliberately dense: the message is visible without taking space
    away from the code trace or the animation. */
 .lumino-inline-status {
@@ -90,6 +107,18 @@
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
+  transition: transform 180ms ease;
+}
+
+.lumino-panel-widget.is-collapsed .lumino-panel-minbtn svg {
+  transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lumino-panel-widget > [data-panel-id],
+  .lumino-panel-minbtn svg {
+    transition: none;
+  }
 }
 
 /* ── Resize handles: always visible, high-contrast ── */
