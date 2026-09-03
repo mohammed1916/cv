@@ -5,7 +5,7 @@ export default function AIFixReview({ proposal, beforeSource, beforeInput, onAcc
   const inputDiff = lineDiff(beforeInput, proposal.inputSource).filter((line) => line.type !== 'same')
   return (
     <div className="runtime-playground__ai-fix-review">
-      <strong>AI fix awaiting review</strong>
+      <strong>{proposal.reviewTitle ?? 'AI fix awaiting review'}</strong>
       <p>{proposal.summary}</p>
       {proposal.changes.length > 0 && <ul>{proposal.changes.map((change) => <li key={change}>{change}</li>)}</ul>}
       <div className="runtime-playground__ai-diff" aria-label="Proposed changes">

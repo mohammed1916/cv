@@ -27,6 +27,13 @@ import PythonTraceControls from "./PythonTraceControls";
 import RuntimeCodeEditor from "./RuntimeCodeEditor";
 import AIFixReview from "./AIFixReview";
 import { suggestPythonFix } from "./ai/suggestPythonFix";
+import {
+  PLAYGROUND_WEBMCP_TOOL_COUNT,
+  createPlaygroundWebMCPTools,
+  getDocumentModelContext,
+  sameWorkspaceProposal,
+  summarizeScene,
+} from "./webmcp/playgroundWebMCP";
 import "./RuntimePlayground.css";
 
 const SOURCE_STORAGE_KEY = "cpviz.runtime-playground.source.v1";
@@ -78,6 +85,20 @@ function errorMessage(error) {
   if (error instanceof Error) return error.message;
   if (typeof error === "string") return error;
   return "The visualization could not be executed.";
+}
+
+function waitForVisibleUpdate() {
+  return new Promise((resolve) => {
+    let settled = false;
+    const finish = () => {
+      if (settled) return;
+      settled = true;
+      window.clearTimeout(fallback);
+      resolve();
+    };
+    const fallback = window.setTimeout(finish, 250);
+    window.requestAnimationFrame(() => window.requestAnimationFrame(finish));
+  });
 }
 
 function containerCount(scene) {
@@ -268,11 +289,47 @@ export default function RuntimePlayground({
     message: "",
   });
   const [aiFixState, setAiFixState] = useState({ phase: "idle", proposal: null, message: "" });
+  const [webMcpState, setWebMcpState] = useState({
+    phase: "checking",
+    message: "Checking for browser agent support...",
+    lastAction: null,
+  });
   const [panelDivs, setPanelDivs] = useState(null);
   const requestVersionRef = useRef(0);
   const suggestionVersionRef = useRef(0);
   const debounceRef = useRef(null);
   const abortControllerRef = useRef(null);
+  const webMcpApiRef = useRef(null);
+
+  const invokeWebMcpTool = useCallback(async (tool, input, signal) => {
+    const handler = webMcpApiRef.current?.[tool];
+    if (typeof handler !== "function") {
+      throw new Error(`The ${tool} tool is not available in the current workspace.`);
+    }
+    if (signal?.aborted) throw new DOMException("The WebMCP tool call was cancelled.", "AbortError");
+    setWebMcpState((previous) => ({
+      ...previous,
+      lastAction: { tool, phase: "running", message: `Agent is using ${tool.replaceAll("_", " ")}...` },
+    }));
+    try {
+      const result = await handler(input, signal);
+      setWebMcpState((previous) => ({
+        ...previous,
+        lastAction: {
+          tool,
+          phase: "success",
+          message: result?.activity ?? `${tool.replaceAll("_", " ")} completed.`,
+        },
+      }));
+      return result;
+    } catch (error) {
+      setWebMcpState((previous) => ({
+        ...previous,
+        lastAction: { tool, phase: "error", message: errorMessage(error) },
+      }));
+      throw error;
+    }
+  }, []);
 
   useEffect(() => {
     pythonBindingsRef.current = pythonBindings;
@@ -334,7 +391,7 @@ export default function RuntimePlayground({
         setPhase("idle");
         setExecutionError(null);
         handleReset();
-        return;
+        return { ok: false, status: "idle", message: "There is no source code to run." };
       }
 
       if (isPython && pythonInputState.error) {
@@ -347,7 +404,7 @@ export default function RuntimePlayground({
           message: pythonInputState.error,
         });
         setPhase("error");
-        return;
+        return { ok: false, status: "error", code: "INVALID_INPUT", message: pythonInputState.error };
       }
 
       if (runSource.length > MAX_SOURCE_LENGTH) {
@@ -360,7 +417,12 @@ export default function RuntimePlayground({
           message: `Source is limited to ${MAX_SOURCE_LENGTH.toLocaleString()} characters.`,
         });
         setPhase("error");
-        return;
+        return {
+          ok: false,
+          status: "error",
+          code: "SOURCE_LIMIT",
+          message: `Source is limited to ${MAX_SOURCE_LENGTH.toLocaleString()} characters.`,
+        };
       }
 
       const requestVersion = ++requestVersionRef.current;
@@ -386,7 +448,9 @@ export default function RuntimePlayground({
               ...RUN_LIMITS,
               signal: abortController.signal,
             });
-        if (requestVersion !== requestVersionRef.current) return;
+        if (requestVersion !== requestVersionRef.current) {
+          return { ok: false, status: "superseded", message: "A newer run replaced this one." };
+        }
 
         let normalized;
         let traceResult = null;
@@ -427,8 +491,19 @@ export default function RuntimePlayground({
           setStepIndex(0);
           setIsPlaying(normalized.frames.length > 1);
         }
+        return {
+          ok: true,
+          status: "ready",
+          mode,
+          frameCount: normalized.frames.length,
+          containerCount: containerCount(normalized.scene),
+          truncated: Boolean(result?.truncated || result?.metadata?.truncated),
+          message: normalized.frames.at(-1)?.message ?? "Visualization completed successfully.",
+        };
       } catch (error) {
-        if (requestVersion !== requestVersionRef.current) return;
+        if (requestVersion !== requestVersionRef.current) {
+          return { ok: false, status: "superseded", message: "A newer run replaced this one." };
+        }
         abortControllerRef.current = null;
         setIsRunning(false);
         setPhase("error");
@@ -441,6 +516,13 @@ export default function RuntimePlayground({
           code: error?.code,
           line: error?.line,
         });
+        return {
+          ok: false,
+          status: "error",
+          code: error?.code ?? "RUNTIME_ERROR",
+          line: error?.line ?? null,
+          message: errorMessage(error),
+        };
       }
     },
     [
@@ -884,6 +966,295 @@ export default function RuntimePlayground({
               : "Declare a structure with the viz API to begin.");
   const activeSourceLine = currentFrame?.source?.line ?? currentError?.line ?? null;
 
+  webMcpApiRef.current = {
+    get_workspace: async ({ detail = "summary", offset = 0, limit = 3000 } = {}) => {
+      const safeOffset = Math.max(0, Math.floor(Number(offset) || 0));
+      const safeLimit = Math.min(6000, Math.max(200, Math.floor(Number(limit) || 3000)));
+      if (detail === "source" || detail === "inputs") {
+        if (detail === "inputs" && !isPython) {
+          throw new Error("Python inputs are available only while the workspace is in Python mode.");
+        }
+        const text = detail === "source" ? source : pythonInputSource;
+        const end = Math.min(text.length, safeOffset + safeLimit);
+        return {
+          ok: true,
+          detail,
+          mode,
+          offset: safeOffset,
+          totalLength: text.length,
+          chunk: text.slice(safeOffset, end),
+          nextOffset: end < text.length ? end : null,
+          activity: `Agent inspected a ${detail} chunk without changing the workspace.`,
+        };
+      }
+
+      const variables = pythonVariables.slice(0, 24).map((variable) => ({
+        name: String(variable.name),
+        type: variable.type ?? null,
+        category: variable.category ?? null,
+        suggestedKind: variable.suggestedKind ?? null,
+        loopRole: variable.loopRole ?? null,
+      }));
+      const bindings = Object.fromEntries(
+        Object.entries(pythonBindings).slice(0, 24),
+      );
+      return {
+        ok: true,
+        mode,
+        run: {
+          phase,
+          isRunning,
+          hasCurrentRun,
+          error: currentError
+            ? {
+                kind: currentError.kind,
+                line: currentError.line ?? null,
+                message: String(currentError.message).slice(0, 600),
+              }
+            : null,
+        },
+        timeline: {
+          frame: stepIndex >= 0 ? stepIndex + 1 : null,
+          frameCount: currentFrames.length,
+          isPlaying,
+          speedMs: speed,
+          operation: currentFrame?.operation ?? null,
+        },
+        source: { length: source.length },
+        python: isPython
+          ? {
+              entry: pythonEntry || null,
+              inputLength: pythonInputSource.length,
+              inputValid: !pythonInputState.error,
+              variables,
+              variableCount: pythonVariables.length,
+              variablesTruncated: pythonVariables.length > variables.length,
+              bindings,
+              bindingsTruncated: Object.keys(pythonBindings).length > Object.keys(bindings).length,
+            }
+          : null,
+        pendingReview: aiFixState.phase === "review"
+          ? { summary: aiFixState.proposal?.summary ?? "A workspace proposal is awaiting review." }
+          : null,
+        activity: "Agent inspected the workspace without changing it.",
+      };
+    },
+    run: async ({ play = false } = {}, signal) => {
+      const handleAbort = () => stopRun();
+      signal?.addEventListener("abort", handleAbort, { once: true });
+      try {
+        const result = await executeSource(source, { play: Boolean(play) });
+        await waitForVisibleUpdate();
+        return {
+          ...result,
+          activity: result.ok
+            ? `Agent ran the accepted workspace and generated ${result.frameCount} frame${result.frameCount === 1 ? "" : "s"}.`
+            : `Agent run finished with ${result.status}.`,
+        };
+      } finally {
+        signal?.removeEventListener("abort", handleAbort);
+      }
+    },
+    get_frame: async () => ({
+      ok: true,
+      frame: stepIndex >= 0 ? stepIndex + 1 : null,
+      frameCount: currentFrames.length,
+      isPlaying,
+      operation: currentFrame?.operation ?? null,
+      message: String(currentFrame?.message ?? statusMessage).slice(0, 600),
+      source: currentFrame?.source ?? (activeSourceLine ? { line: activeSourceLine } : null),
+      scene: summarizeScene(displayScene),
+      activity: "Agent inspected the visible frame without changing playback.",
+    }),
+    control_playback: async ({ action, frame, speed_ms: speedMs } = {}) => {
+      const total = currentFrames.length;
+      let nextIndex = stepIndex;
+      let nextPlaying;
+      if (speedMs != null) {
+        setSpeed(Math.min(1400, Math.max(100, Math.floor(Number(speedMs)))));
+      }
+      if (action === "pause") {
+        nextPlaying = false;
+        setIsPlaying(false);
+      } else {
+        if (total === 0) throw new Error("Run the visualization before controlling playback.");
+        if (action === "play") {
+          nextIndex = stepIndex < 0 || stepIndex >= total - 1 ? 0 : stepIndex;
+          nextPlaying = total > 1;
+        } else if (action === "next") {
+          nextIndex = Math.min(total - 1, Math.max(-1, stepIndex) + 1);
+          nextPlaying = false;
+        } else if (action === "previous") {
+          nextIndex = Math.max(0, stepIndex - 1);
+          nextPlaying = false;
+        } else if (action === "rewind") {
+          nextIndex = 0;
+          nextPlaying = false;
+        } else if (action === "jump") {
+          if (!Number.isInteger(frame)) throw new Error("The jump action requires an integer frame number.");
+          nextIndex = Math.min(total - 1, Math.max(0, frame - 1));
+          nextPlaying = false;
+        } else {
+          throw new Error("Unknown playback action.");
+        }
+        setStepIndex(nextIndex);
+        setIsPlaying(nextPlaying);
+      }
+      await waitForVisibleUpdate();
+      return {
+        ok: true,
+        action,
+        frame: nextIndex >= 0 ? nextIndex + 1 : null,
+        frameCount: total,
+        isPlaying: nextPlaying,
+        speedMs: speedMs == null ? speed : Math.min(1400, Math.max(100, Math.floor(Number(speedMs)))),
+        activity: {
+          play: "Agent started playback.",
+          pause: "Agent paused playback.",
+          next: `Agent advanced to frame ${nextIndex + 1}.`,
+          previous: `Agent moved back to frame ${nextIndex + 1}.`,
+          rewind: "Agent rewound playback to frame 1.",
+          jump: `Agent opened frame ${nextIndex + 1}.`,
+        }[action],
+      };
+    },
+    configure_visuals: async ({ bindings: patches } = {}) => {
+      if (!isPython) throw new Error("Visual mappings can be configured only in Python mode.");
+      if (!hasCurrentRun || pythonVariablesStale || pythonVariables.length === 0) {
+        throw new Error("Run Python successfully before configuring discovered variables.");
+      }
+      if (!Array.isArray(patches) || patches.length === 0) {
+        throw new Error("At least one visual binding is required.");
+      }
+      const variableNames = new Set(pythonVariables.map((variable) => String(variable.name)));
+      const nextBindings = { ...pythonBindingsRef.current };
+      const applied = [];
+      const ignored = [];
+      patches.forEach((patch) => {
+        const name = String(patch?.name ?? "");
+        if (!variableNames.has(name)) {
+          ignored.push(name || "(missing name)");
+          return;
+        }
+        const next = { ...(nextBindings[name] ?? {}) };
+        if (Object.hasOwn(patch, "enabled")) next.enabled = Boolean(patch.enabled);
+        if (Object.hasOwn(patch, "kind")) next.kind = patch.kind === "auto" ? null : patch.kind;
+        if (Object.hasOwn(patch, "view")) next.view = patch.view;
+        if (Object.hasOwn(patch, "role")) {
+          next.role = patch.role;
+          next.roleExplicit = true;
+        }
+        if (Object.hasOwn(patch, "target")) next.target = patch.target;
+        if (Object.hasOwn(patch, "pointer_mode")) next.pointerMode = patch.pointer_mode;
+        if (Object.hasOwn(patch, "index_offset")) next.indexOffset = patch.index_offset;
+        nextBindings[name] = next;
+        applied.push(name);
+      });
+      if (applied.length === 0) throw new Error("None of the requested variable names exist in the current trace.");
+      updatePythonBindings(nextBindings);
+      await waitForVisibleUpdate();
+      return {
+        ok: true,
+        applied,
+        ignored,
+        bindings: Object.fromEntries(applied.map((name) => [name, pythonBindingsRef.current[name]])),
+        activity: `Agent configured ${applied.length} visual mapping${applied.length === 1 ? "" : "s"}.`,
+      };
+    },
+    propose_python_workspace: async ({ source: proposedSource, inputs, summary, changes = [] } = {}) => {
+      if (!isPython) throw new Error("Switch the workspace to Python mode before proposing Python changes.");
+      if (aiFixState.phase === "review") {
+        throw new Error("A workspace proposal is already awaiting human review.");
+      }
+      if (typeof proposedSource !== "string" || !proposedSource.trim()) {
+        throw new Error("A complete non-empty Python source is required.");
+      }
+      if (proposedSource.length > MAX_SOURCE_LENGTH) {
+        throw new Error(`Source is limited to ${MAX_SOURCE_LENGTH.toLocaleString()} characters.`);
+      }
+      const proposedInputSource = JSON.stringify(inputs, null, 2);
+      if (typeof proposedInputSource !== "string" || proposedInputSource.length > MAX_SOURCE_LENGTH) {
+        throw new Error(`Serialized inputs are limited to ${MAX_SOURCE_LENGTH.toLocaleString()} characters.`);
+      }
+      if (typeof summary !== "string" || !summary.trim()) {
+        throw new Error("Explain why the proposed workspace change helps the user.");
+      }
+      if (sameWorkspaceProposal(pythonSource, pythonInputSource, proposedSource, inputs)) {
+        throw new Error("The proposal does not change the current source or inputs.");
+      }
+      const safeChanges = Array.isArray(changes)
+        ? changes.map(String).filter(Boolean).slice(0, 12)
+        : [];
+      setAiFixState({
+        phase: "review",
+        message: "",
+        proposal: {
+          source: proposedSource,
+          inputSource: proposedInputSource,
+          summary: summary.trim().slice(0, 600),
+          changes: safeChanges,
+          reviewTitle: "Agent change awaiting review",
+        },
+      });
+      await waitForVisibleUpdate();
+      return {
+        ok: true,
+        status: "pending_user_review",
+        changedSource: proposedSource.trim() !== pythonSource.trim(),
+        changedInputs: proposedInputSource.trim() !== pythonInputSource.trim(),
+        activity: "Agent staged a code/input proposal. Accept or reject it in Playback & Diagnostics.",
+      };
+    },
+  };
+
+  useEffect(() => {
+    if (!getDocumentModelContext()) {
+      setWebMcpState({
+        phase: "unavailable",
+        message: "Open this page in ChatGPT's in-app browser or enable Chrome's WebMCP testing flag.",
+        lastAction: null,
+      });
+      return undefined;
+    }
+
+    const lifecycle = new AbortController();
+    let active = true;
+    setWebMcpState({
+      phase: "registering",
+      message: "Registering structured tools for browser agents...",
+      lastAction: null,
+    });
+    const tools = createPlaygroundWebMCPTools(invokeWebMcpTool);
+    Promise.all(tools.map((tool) => (
+      document.modelContext.registerTool(tool, { signal: lifecycle.signal })
+    )))
+      .then(() => {
+        if (!active) return;
+        setWebMcpState({
+          phase: "ready",
+          message: `${PLAYGROUND_WEBMCP_TOOL_COUNT} browser-agent tools are ready.`,
+          lastAction: null,
+        });
+      })
+      .catch((error) => {
+        if (!active || lifecycle.signal.aborted) return;
+        setWebMcpState({ phase: "error", message: errorMessage(error), lastAction: null });
+      });
+
+    return () => {
+      active = false;
+      lifecycle.abort();
+    };
+  }, [invokeWebMcpTool]);
+
+  const webMcpStatusLabel = webMcpState.phase === "ready"
+    ? `Agent-ready · ${PLAYGROUND_WEBMCP_TOOL_COUNT} tools`
+    : webMcpState.phase === "registering" || webMcpState.phase === "checking"
+      ? "Connecting agent tools"
+      : webMcpState.phase === "error"
+        ? "Agent tools error"
+        : "WebMCP preview unavailable";
+
   return (
     <div
       className={`runtime-playground runtime-playground--${layoutWidth}`}
@@ -909,6 +1280,15 @@ export default function RuntimePlayground({
         </div>
 
         <div className="runtime-playground__header-actions">
+          <div
+            className={`runtime-playground__webmcp-status is-${webMcpState.phase}`}
+            role="status"
+            title={webMcpState.message}
+          >
+            <span aria-hidden="true" />
+            <strong>WebMCP</strong>
+            <small>{webMcpStatusLabel}</small>
+          </div>
           {onLayoutChange && (
             <div className="runtime-playground__layout" aria-label="Workspace width">
               {["normal", "wide", "full"].map((width) => (
@@ -1127,6 +1507,12 @@ export default function RuntimePlayground({
           </div>
 
           <div className="runtime-playground__diagnostics" aria-live="polite">
+            {webMcpState.lastAction && (
+              <div className={`runtime-playground__webmcp-activity is-${webMcpState.lastAction.phase}`}>
+                <span className="runtime-playground__operation">WebMCP</span>
+                <span>{webMcpState.lastAction.message}</span>
+              </div>
+            )}
             {aiFixState.phase === "review" && aiFixState.proposal && (
               <AIFixReview
                 proposal={aiFixState.proposal}
