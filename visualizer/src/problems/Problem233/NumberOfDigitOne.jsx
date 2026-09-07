@@ -90,18 +90,18 @@ export default function NumberOfDigitOne() {
     { id: 'right', title: "Details", dockMode: 'split-right' },
   ], [])
   const panelContents = {
-    left: (<div className="number-of-digit-one-panel">
-            <div className="number-of-digit-one-panel-head">
+    left: (<div className="vis-panel number-of-digit-one-panel">
+            <div className="vis-panel-head number-of-digit-one-panel-head">
               Input
               {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
             </div>
-            <div className="number-of-digit-one-panel-body">
+            <div className="vis-panel-body number-of-digit-one-panel-body">
               <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
                 {EXAMPLES.map((ex) => (
                   <button
                     key={ex.label}
                     onClick={() => applyExample(ex)}
-                    className="number-of-digit-one-example-btn"
+                    className="vis-example-btn number-of-digit-one-example-btn"
                   >
                     {ex.label}
                   </button>
@@ -136,9 +136,9 @@ export default function NumberOfDigitOne() {
               </div>
             </div>
           </div>),
-    right: (<div className="number-of-digit-one-panel">
-            <div className="number-of-digit-one-panel-head">Details</div>
-            <div className="number-of-digit-one-panel-body">
+    right: (<div className="vis-panel number-of-digit-one-panel">
+            <div className="vis-panel-head number-of-digit-one-panel-head">Details</div>
+            <div className="vis-panel-body number-of-digit-one-panel-body">
               <div className="number-of-digit-one-info">
                 <h3>Problem 233</h3>
                 <p><strong>Story:</strong> Digit 1 Census - count all ones by analyzing patterns in each digit position</p>

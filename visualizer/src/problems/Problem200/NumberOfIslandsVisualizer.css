@@ -50,29 +50,8 @@
   flex-shrink: 0;
 }
 
-.noi-panel-body {
-  padding: 16px;
-  flex: 1;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-}
 
-.noi-example-btn {
-  padding: 4px 12px;
-  border-radius: 99px;
-  font-size: 12px;
-  cursor: pointer;
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  color: var(--text-muted);
-  transition: all 0.2s ease;
-}
 
-.noi-example-btn:hover {
-  background: var(--border);
-  color: var(--surface);
-}
 
 .noi-input-textarea {
   width: 100%;

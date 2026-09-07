@@ -90,18 +90,18 @@ export default function ImplementQueueUsingStacks() {
     { id: 'right', title: "Details", dockMode: 'split-right' },
   ], [])
   const panelContents = {
-    left: (<div className="implement-queue-using-stacks-panel">
-            <div className="implement-queue-using-stacks-panel-head">
+    left: (<div className="vis-panel implement-queue-using-stacks-panel">
+            <div className="vis-panel-head implement-queue-using-stacks-panel-head">
               Input
               {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
             </div>
-            <div className="implement-queue-using-stacks-panel-body">
+            <div className="vis-panel-body implement-queue-using-stacks-panel-body">
               <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
                 {EXAMPLES.map((ex) => (
                   <button
                     key={ex.label}
                     onClick={() => applyExample(ex)}
-                    className="implement-queue-using-stacks-example-btn"
+                    className="vis-example-btn implement-queue-using-stacks-example-btn"
                   >
                     {ex.label}
                   </button>
@@ -136,9 +136,9 @@ export default function ImplementQueueUsingStacks() {
               </div>
             </div>
           </div>),
-    right: (<div className="implement-queue-using-stacks-panel">
-            <div className="implement-queue-using-stacks-panel-head">Details</div>
-            <div className="implement-queue-using-stacks-panel-body">
+    right: (<div className="vis-panel implement-queue-using-stacks-panel">
+            <div className="vis-panel-head implement-queue-using-stacks-panel-head">Details</div>
+            <div className="vis-panel-body implement-queue-using-stacks-panel-body">
               <div className="implement-queue-using-stacks-info">
                 <h3>Problem 232</h3>
                 <p><strong>Story:</strong> Stack Flip Choreography - watch stacks flip and reverse to create queue ordering</p>

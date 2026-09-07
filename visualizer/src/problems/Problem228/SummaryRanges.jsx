@@ -90,18 +90,18 @@ export default function SummaryRanges() {
     { id: 'right', title: "Details", dockMode: 'split-right' },
   ], [])
   const panelContents = {
-    left: (<div className="summary-ranges-panel">
-            <div className="summary-ranges-panel-head">
+    left: (<div className="vis-panel summary-ranges-panel">
+            <div className="vis-panel-head summary-ranges-panel-head">
               Input
               {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
             </div>
-            <div className="summary-ranges-panel-body">
+            <div className="vis-panel-body summary-ranges-panel-body">
               <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
                 {EXAMPLES.map((ex) => (
                   <button
                     key={ex.label}
                     onClick={() => applyExample(ex)}
-                    className="summary-ranges-example-btn"
+                    className="vis-example-btn summary-ranges-example-btn"
                   >
                     {ex.label}
                   </button>
@@ -136,9 +136,9 @@ export default function SummaryRanges() {
               </div>
             </div>
           </div>),
-    right: (<div className="summary-ranges-panel">
-            <div className="summary-ranges-panel-head">Details</div>
-            <div className="summary-ranges-panel-body">
+    right: (<div className="vis-panel summary-ranges-panel">
+            <div className="vis-panel-head summary-ranges-panel-head">Details</div>
+            <div className="vis-panel-body summary-ranges-panel-body">
               <div className="summary-ranges-info">
                 <h3>Problem 228</h3>
                 <p><strong>Story:</strong> Number Grouping Parade - consecutive numbers march together into formation ranges</p>

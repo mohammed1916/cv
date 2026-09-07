@@ -90,18 +90,18 @@ export default function BitwiseAndOfNumbersRange() {
     { id: 'right', title: "Details", dockMode: 'split-right' },
   ], [])
   const panelContents = {
-    left: (<div className="bitwise-and-of-numbers-range-panel">
-            <div className="bitwise-and-of-numbers-range-panel-head">
+    left: (<div className="vis-panel bitwise-and-of-numbers-range-panel">
+            <div className="vis-panel-head bitwise-and-of-numbers-range-panel-head">
               Input
               {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
             </div>
-            <div className="bitwise-and-of-numbers-range-panel-body">
+            <div className="vis-panel-body bitwise-and-of-numbers-range-panel-body">
               <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
                 {EXAMPLES.map((ex) => (
                   <button
                     key={ex.label}
                     onClick={() => applyExample(ex)}
-                    className="bitwise-and-of-numbers-range-example-btn"
+                    className="vis-example-btn bitwise-and-of-numbers-range-example-btn"
                   >
                     {ex.label}
                   </button>
@@ -136,9 +136,9 @@ export default function BitwiseAndOfNumbersRange() {
               </div>
             </div>
           </div>),
-    right: (<div className="bitwise-and-of-numbers-range-panel">
-            <div className="bitwise-and-of-numbers-range-panel-head">Details</div>
-            <div className="bitwise-and-of-numbers-range-panel-body">
+    right: (<div className="vis-panel bitwise-and-of-numbers-range-panel">
+            <div className="vis-panel-head bitwise-and-of-numbers-range-panel-head">Details</div>
+            <div className="vis-panel-body bitwise-and-of-numbers-range-panel-body">
               <div className="bitwise-and-of-numbers-range-info">
                 <h3>Problem 201</h3>
                 <p><strong>Story:</strong> Bit Pattern Convergence - watch numbers align their bit patterns toward a common core</p>

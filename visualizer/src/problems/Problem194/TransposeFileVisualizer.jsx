@@ -94,9 +94,9 @@ export default function TransposeFileVisualizer() {
     { id: 'right', title: "Step Details", dockMode: 'split-right' },
   ], [])
   const panelContents = {
-    left: (<div className="transpose_file-panel">
-            <div className="transpose_file-panel-head">Input & State</div>
-            <div className="transpose_file-panel-body">
+    left: (<div className="vis-panel transpose_file-panel">
+            <div className="vis-panel-head transpose_file-panel-head">Input & State</div>
+            <div className="vis-panel-body transpose_file-panel-body">
               <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
                 {EXAMPLES?.map((ex) => (
                   <button
@@ -124,9 +124,9 @@ export default function TransposeFileVisualizer() {
               </div>
             </div>
           </div>),
-    right: (<div className="transpose_file-panel">
-            <div className="transpose_file-panel-head">Step Details</div>
-            <div className="transpose_file-panel-body">
+    right: (<div className="vis-panel transpose_file-panel">
+            <div className="vis-panel-head transpose_file-panel-head">Step Details</div>
+            <div className="vis-panel-body transpose_file-panel-body">
               {step && <div className="transpose_file-details">{/* Details */}</div>}
             </div>
           </div>),

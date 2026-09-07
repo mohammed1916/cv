@@ -1,22 +1,4 @@
-﻿.rnn-shell {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 480px;
-  gap: 0;
-  overflow: hidden;
-}
 
-.rnn-panel {
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  overflow: hidden;
-}
 
 .rnn-panel.main {
   flex: 1;
@@ -59,21 +41,7 @@
   flex-wrap: wrap;
 }
 
-.rnn-chip {
-  padding: 4px 12px;
-  border-radius: 99px;
-  font-size: 12px;
-  cursor: pointer;
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  color: var(--text-muted);
-  transition: all 0.2s ease;
-}
 
-.rnn-chip:hover {
-  background: var(--border);
-  color: var(--surface);
-}
 
 .rnn-input-row {
   display: flex;

@@ -90,18 +90,18 @@ export default function ShortestWordDistanceIi() {
     { id: 'right', title: "Details", dockMode: 'split-right' },
   ], [])
   const panelContents = {
-    left: (<div className="shortest-word-distance-ii-panel">
-            <div className="shortest-word-distance-ii-panel-head">
+    left: (<div className="vis-panel shortest-word-distance-ii-panel">
+            <div className="vis-panel-head shortest-word-distance-ii-panel-head">
               Input
               {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
             </div>
-            <div className="shortest-word-distance-ii-panel-body">
+            <div className="vis-panel-body shortest-word-distance-ii-panel-body">
               <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
                 {EXAMPLES.map((ex) => (
                   <button
                     key={ex.label}
                     onClick={() => applyExample(ex)}
-                    className="shortest-word-distance-ii-example-btn"
+                    className="vis-example-btn shortest-word-distance-ii-example-btn"
                   >
                     {ex.label}
                   </button>
@@ -136,9 +136,9 @@ export default function ShortestWordDistanceIi() {
               </div>
             </div>
           </div>),
-    right: (<div className="shortest-word-distance-ii-panel">
-            <div className="shortest-word-distance-ii-panel-head">Details</div>
-            <div className="shortest-word-distance-ii-panel-body">
+    right: (<div className="vis-panel shortest-word-distance-ii-panel">
+            <div className="vis-panel-head shortest-word-distance-ii-panel-head">Details</div>
+            <div className="vis-panel-body shortest-word-distance-ii-panel-body">
               <div className="shortest-word-distance-ii-info">
                 <h3>Problem 244</h3>
                 <p><strong>Story:</strong> Word Index Cache Dance - precomputed positions enable lightning-fast lookups</p>

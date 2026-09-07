@@ -90,9 +90,9 @@ export default function RisingTemperatureVisualizer() {
     { id: 'right', title: "Step Details", dockMode: 'split-right' },
   ], [])
   const panelContents = {
-    left: (<div className="rising_temperature-panel">
-            <div className="rising_temperature-panel-head">Input & State</div>
-            <div className="rising_temperature-panel-body">
+    left: (<div className="vis-panel rising_temperature-panel">
+            <div className="vis-panel-head rising_temperature-panel-head">Input & State</div>
+            <div className="vis-panel-body rising_temperature-panel-body">
               <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
                 {EXAMPLES?.map((ex) => (
                   <button
@@ -120,9 +120,9 @@ export default function RisingTemperatureVisualizer() {
               </div>
             </div>
           </div>),
-    right: (<div className="rising_temperature-panel">
-            <div className="rising_temperature-panel-head">Step Details</div>
-            <div className="rising_temperature-panel-body">
+    right: (<div className="vis-panel rising_temperature-panel">
+            <div className="vis-panel-head rising_temperature-panel-head">Step Details</div>
+            <div className="vis-panel-body rising_temperature-panel-body">
               {step && <div className="rising_temperature-details">{/* Details */}</div>}
             </div>
           </div>),
