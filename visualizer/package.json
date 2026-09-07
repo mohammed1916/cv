@@ -12,6 +12,7 @@
     "test:providers": "node --test src/services/chatProviders.test.mjs",
     "audit:visualizers": "node scripts/audit-visualizer-contract.mjs",
     "audit:css": "node scripts/audit-css-duplication.mjs",
+    "test:recent-visualizers": "node --test src/problems/recentVisualizers.test.mjs",
     "check:css-migration": "node scripts/check-css-migration.mjs",
     "preview": "vite preview",
     "refresh:leetcode": "node scripts/fetch-leetcode-catalog.mjs",
