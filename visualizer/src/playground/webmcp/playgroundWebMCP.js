@@ -111,7 +111,7 @@ const TOOL_DEFINITIONS = Object.freeze([
           enabled: { type: "boolean" },
           kind: {
             type: "string",
-            enum: ["auto", "sequence", "grid", "associative", "graph", "tree", "scalar"],
+            enum: ["auto", "sequence", "grid", "associative", "graph", "tree", "heap", "scalar"],
           },
           view: { type: "string", enum: ["cells", "bars", "line"] },
           role: { type: "string", enum: ["value", "pointer"] },

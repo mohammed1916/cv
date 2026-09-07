@@ -7,8 +7,10 @@ const KIND_OPTIONS = [
   { value: "associative", label: "Associative" },
   { value: "graph", label: "Graph" },
   { value: "tree", label: "Tree" },
+  { value: "heap", label: "Heap" },
   { value: "scalar", label: "Scalar" },
 ];
+const AI_INPUT_PROMPT_MAX_LENGTH = 4_000;
 
 const SEQUENCE_VIEWS = [
   { value: "cells", label: "Cells" },
@@ -28,6 +30,10 @@ function inferredKind(variable) {
     ?? variable?.type
     ?? "scalar",
   ).toLowerCase();
+  const name = String(variable?.name ?? "").toLowerCase();
+  if (kind === "heap" || name === "heap" || name.endsWith("heap") || name.includes("priority_queue")) {
+    return "heap";
+  }
   if (["array", "list", "tuple", "deque", "string", "sequence"].includes(kind)) {
     return "sequence";
   }
@@ -189,6 +195,7 @@ export default function PythonTraceControls({
               id="runtime-playground-python-input-prompt"
               value={aiInputPrompt}
               onChange={(event) => setAiInputPrompt(event.target.value)}
+              maxLength={AI_INPUT_PROMPT_MAX_LENGTH}
               placeholder="Example: Three sorted linked lists with duplicates and negative values"
               spellCheck={false}
               disabled={disabled || isSuggestingVisuals}

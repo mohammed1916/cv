@@ -156,6 +156,10 @@ function inferredPythonKind(variable) {
     ?? variable?.type
     ?? "scalar",
   ).toLowerCase();
+  const name = String(variable?.name ?? "").toLowerCase();
+  if (kind === "heap" || name === "heap" || name.endsWith("heap") || name.includes("priority_queue")) {
+    return "heap";
+  }
   if (["array", "list", "tuple", "deque", "string", "sequence"].includes(kind)) {
     return "sequence";
   }
@@ -871,7 +875,7 @@ export default function RuntimePlayground({
       if (suggestionVersion !== suggestionVersionRef.current) return;
       setAiVisualState({
         phase: "error",
-        message: `${errorMessage(error)} Check the AI provider in the assistant settings.`,
+        message: `${errorMessage(error)} Check the AI visual provider settings.`,
       });
     }
   }, [
