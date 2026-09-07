@@ -19,6 +19,7 @@ export function getChatProvider() {
         provider,
         model: stored.model || defaultChatModel(provider),
         localBaseUrl: stored.localBaseUrl || DEFAULT_LOCAL_OLLAMA_URL,
+        contextTokens: stored.contextTokens || 8192,
       }
     }
   } catch {
@@ -28,6 +29,7 @@ export function getChatProvider() {
     provider: fallbackProvider,
     model: defaultChatModel(fallbackProvider),
     localBaseUrl: DEFAULT_LOCAL_OLLAMA_URL,
+    contextTokens: 8192,
   }
 }
 
@@ -36,6 +38,7 @@ export function setChatProvider(value) {
     provider: value?.provider || 'ollama-local',
     model: value?.model || defaultChatModel(value?.provider),
     localBaseUrl: value?.localBaseUrl || DEFAULT_LOCAL_OLLAMA_URL,
+    contextTokens: Math.max(4096, Math.min(131072, Number(value?.contextTokens) || 8192)),
   }
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
@@ -78,7 +81,7 @@ export function canUseLocalOllama() {
 function assertSmallRequest(body) {
   const serialized = JSON.stringify(body)
   if (serialized.length > MAX_CHAT_REQUEST_CHARS) {
-    throw new Error('That AI request is too large. Shorten the code, current input JSON, or request text before asking for generated inputs.')
+    throw new Error('This AI conversation is too large for the transport limit. No partial result was applied.')
   }
   return serialized
 }
@@ -92,6 +95,7 @@ async function* streamLocalOllama(messages, config) {
   const body = {
     model: config.model || defaultChatModel('ollama-local'),
     stream: true,
+    ...(config.contextTokens ? { options: { num_ctx: config.contextTokens } } : {}),
     messages: messages.map((message) => ({
       role: message.role,
       content: message.text,
@@ -100,6 +104,7 @@ async function* streamLocalOllama(messages, config) {
   let response
   try {
     response = await fetch(`${baseUrl}/api/chat`, {
+      signal: config.signal,
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: assertSmallRequest(body),
@@ -152,6 +157,7 @@ async function* streamHostedProxy(messages, config) {
     messages,
   }
   const response = await fetch('/api/chat', {
+    signal: config.signal,
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: assertSmallRequest(body),

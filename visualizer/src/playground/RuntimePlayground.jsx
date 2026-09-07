@@ -814,6 +814,9 @@ export default function RuntimePlayground({
     if (!isPython || !pythonSource.trim()) return;
 
     const suggestionVersion = ++suggestionVersionRef.current;
+    const onProgress = (message) => {
+      if (suggestionVersion === suggestionVersionRef.current) setAiVisualState({ phase: "running", message });
+    };
     const needsTrace = forceInputs || !hasCurrentRun
       || !lastGoodRun?.traceResult
       || pythonVariables.length === 0
@@ -828,27 +831,27 @@ export default function RuntimePlayground({
     try {
       if (needsTrace) {
         const suggestion = await suggestPythonInputs({
+          onProgress,
           source: pythonSource,
           inputSource: pythonInputSource,
           entry: pythonEntry,
           instruction,
         });
         if (suggestionVersion !== suggestionVersionRef.current) return;
-        setPythonInputSource(suggestion.inputSource);
-        setExecutionError(null);
-        setPythonVariables([]);
-        setPythonVariablesStale(true);
-        setPhase("waiting");
+        setAiFixState({
+          phase: "review",
+          proposal: { source: pythonSource, inputSource: suggestion.inputSource, summary: suggestion.summary, changes: ["Generated example inputs for review."] },
+          message: "",
+        });
         setAiVisualState({
           phase: "success",
-          message: `${suggestion.provider}: ${suggestion.summary}${suggestion.removedInputs.length > 0
-            ? ` Removed unsupported argument${suggestion.removedInputs.length === 1 ? "" : "s"}: ${suggestion.removedInputs.join(", ")}.`
-            : ""} Running the trace...`,
+          message: "Example inputs are ready for review. Accept and run to apply them.",
         });
         return;
       }
 
       const suggestion = await suggestPythonBindings({
+        onProgress,
         source: pythonSource,
         inputSource: pythonInputSource,
         entry: pythonEntry,
@@ -900,6 +903,7 @@ export default function RuntimePlayground({
         inputSource: pythonInputSource,
         entry: pythonEntry,
         error: { message: currentErrorMessage },
+        onProgress: (message) => setAiFixState({ phase: "running", proposal: null, message }),
       });
       setAiFixState({ phase: "review", proposal, message: "" });
     } catch (error) {
@@ -917,6 +921,7 @@ export default function RuntimePlayground({
         entry: pythonEntry,
         instruction,
         error: { message: "No runtime error; follow the user's requested workspace change." },
+        onProgress: (message) => setAiFixState({ phase: "running", proposal: null, message }),
       });
       setAiFixState({ phase: "review", proposal, message: "" });
     } catch (error) {

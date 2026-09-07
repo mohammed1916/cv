@@ -119,6 +119,16 @@ export default function PlaygroundAIProviderControls() {
       >
       <div className="runtime-playground__ai-provider-content-inner">
       <div className="runtime-playground__ai-provider-fields">
+        <label htmlFor="runtime-playground-ai-context">
+          Context budget
+          <select id="runtime-playground-ai-context" value={config.contextTokens || 8192}
+            onChange={(event) => updateConfig({ ...config, contextTokens: Number(event.target.value) })}>
+            {[4096, 8192, 16384, 32768, 65536].map((size) => (
+              <option key={size} value={size}>{size.toLocaleString()} tokens</option>
+            ))}
+          </select>
+          <small>Choose a size your model supports. Larger local contexts need more memory.</small>
+        </label>
         <label htmlFor="runtime-playground-ai-provider">
           Provider
           <select

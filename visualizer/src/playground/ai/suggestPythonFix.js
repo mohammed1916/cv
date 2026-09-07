@@ -1,3 +1,4 @@
+import { createWorkspaceContext, runWorkspaceAgent } from './workspaceContext.js'
 import { getChatProvider, streamProviderChat } from '../../services/chatProviders.js'
 
 function providerConfig() {
@@ -60,7 +61,8 @@ function nodeInputFallback({ source, inputSource, error }) {
   return null
 }
 
-export async function suggestPythonFix({ source, inputSource, entry, error, instruction }, dependencies = {}) {
+export async function suggestPythonFix(options, dependencies = {}) {
+  const { source, inputSource, entry, error, instruction } = options
   const config = dependencies.config ?? providerConfig()
   const stream = dependencies.stream ?? streamProviderChat
   const messages = [
@@ -72,17 +74,10 @@ Preserve the algorithm. You may repair input shape, add conventional ListNode or
     },
     {
       role: 'user',
-      text: `Entry: ${entry || 'auto-detected'}
-Runtime error: ${error?.message || error || 'Unknown error'}
-User-requested change: ${instruction || 'Repair the reported runtime error.'}
-Current inputs:
-${String(inputSource || 'null').slice(0, 8000)}
-Current source:
-${String(source || '').slice(0, 40000)}`,
+      text: createWorkspaceContext({ source, inputSource, entry, error, instruction }).overview,
     },
   ]
-  let response = ''
-  for await (const delta of stream(messages, config)) response += delta
+  const response = await runWorkspaceAgent(messages, options, { ...dependencies, stream, config })
   const parsed = parseJson(response)
   if (typeof parsed.source !== 'string' || !parsed.source.trim()) {
     throw new Error('The AI fix is missing the complete repaired source.')

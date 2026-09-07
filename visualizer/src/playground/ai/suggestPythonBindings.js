@@ -1,3 +1,4 @@
+import { createWorkspaceContext, runWorkspaceAgent } from "./workspaceContext.js";
 import {
   getChatProvider,
   streamProviderChat,
@@ -17,10 +18,6 @@ const ALLOWED_KINDS = new Set([
 const ALLOWED_VIEWS = new Set(["cells", "bars", "line"]);
 const ALLOWED_ROLES = new Set(["value", "pointer"]);
 const ALLOWED_POINTER_MODES = new Set(["index", "value"]);
-const MAX_RESPONSE_LENGTH = 60_000;
-const MAX_INPUT_CONTEXT_LENGTH = 8_000;
-const MAX_INSTRUCTION_LENGTH = 4_000;
-const MAX_SOURCE_CONTEXT_LENGTH = 35_000;
 
 function isPlainObject(value) {
   return Boolean(value && typeof value === "object" && !Array.isArray(value));
@@ -45,46 +42,6 @@ function providerLabel(config) {
   return "Ollama Local";
 }
 
-function clipForPrompt(value, maxLength, label) {
-  const text = String(value || "");
-  if (text.length <= maxLength) return text;
-  return `${text.slice(0, maxLength)}\n\n[${label} truncated: ${text.length - maxLength} more characters omitted.]`;
-}
-
-function latestSamples(traceResult, variables) {
-  const samples = new Map();
-  const names = new Set(variables.map((variable) => String(variable.name)));
-  const frames = Array.isArray(traceResult?.traceFrames)
-    ? traceResult.traceFrames
-    : [];
-
-  for (let index = frames.length - 1; index >= 0 && samples.size < names.size; index -= 1) {
-    const locals = isPlainObject(frames[index]?.locals) ? frames[index].locals : {};
-    Object.entries(locals).forEach(([name, value]) => {
-      if (names.has(name) && !samples.has(name)) samples.set(name, value);
-    });
-  }
-  return samples;
-}
-
-function buildTraceSummary(traceResult) {
-  const variables = (Array.isArray(traceResult?.variables) ? traceResult.variables : [])
-    .filter((variable) => variable?.name != null)
-    .slice(0, 40);
-  const samples = latestSamples(traceResult, variables);
-
-  return variables.map((variable) => ({
-    name: String(variable.name),
-    runtimeType: variable.runtimeType ?? variable.type ?? null,
-    suggestedKind: variable.suggestedKind ?? null,
-    loopRole: variable.loopRole ?? null,
-    targetHint: variable.targetHint ?? null,
-    sample: samples.has(String(variable.name))
-      ? samples.get(String(variable.name))
-      : "[not available in final trace frame]",
-  }));
-}
-
 export function createVisualSuggestionMessages({
   source,
   inputSource,
@@ -92,14 +49,14 @@ export function createVisualSuggestionMessages({
   traceResult,
   bindings,
 }) {
-  const traceSummary = buildTraceSummary(traceResult);
+  const context = createWorkspaceContext({ source, inputSource, entry, traceResult, bindings });
   return [
     {
       role: "system",
       text: `You select visuals for a deterministic competitive-programming trace. Return only one JSON object and no markdown. Never invent variables or values.
 
 The response schema is:
-{"bindings":{"variableName":{"enabled":true,"kind":"auto|sequence|grid|associative|graph|tree|scalar","view":"cells|bars|line","role":"value|pointer","target":"sequenceVariable","pointerMode":"index|value"}},"summary":"short explanation"}
+{"bindings":{"variableName":{"enabled":true,"kind":"auto|sequence|grid|associative|graph|tree|heap|scalar","view":"cells|bars|line","role":"value|pointer","target":"sequenceVariable","pointerMode":"index|value"}},"summary":"short explanation"}
 
 Rules:
 - Include every supplied variable and set enabled false for noisy implementation details.
@@ -112,20 +69,7 @@ Rules:
     },
     {
       role: "user",
-      text: `Choose a clear visual layout for this completed Python trace.
-
-Entry: ${entry || traceResult?.entry?.displayName || "auto-detected"}
-Inputs JSON:
-${clipForPrompt(inputSource || "null", MAX_INPUT_CONTEXT_LENGTH, "inputs")}
-
-Python source:
-${clipForPrompt(source || "", MAX_SOURCE_CONTEXT_LENGTH, "source")}
-
-Traced variable catalog and latest samples:
-${JSON.stringify(traceSummary)}
-
-Current bindings (these are hints, not requirements):
-${JSON.stringify(bindings || {})}`,
+      text: context.overview,
     },
   ];
 }
@@ -221,14 +165,7 @@ export async function suggestPythonBindings(options, dependencies = {}) {
   const config = dependencies.config ?? selectedProviderConfig();
   const stream = dependencies.stream ?? streamProviderChat;
   const messages = createVisualSuggestionMessages(options);
-  let responseText = "";
-
-  for await (const delta of stream(messages, config)) {
-    responseText += delta;
-    if (responseText.length > MAX_RESPONSE_LENGTH) {
-      throw new Error("The AI visual response exceeded the safe size limit.");
-    }
-  }
+  const responseText = await runWorkspaceAgent(messages, options, { ...dependencies, stream, config });
 
   const suggestion = parseVisualSuggestion(
     responseText,
@@ -254,17 +191,7 @@ Rules:
     },
     {
       role: "user",
-      text: `Generate trace inputs for this Python code.
-
-Requested entry: ${entry || "auto-detected"}
-Current inputs, which may be incomplete or invalid:
-${clipForPrompt(inputSource || "null", MAX_INPUT_CONTEXT_LENGTH, "inputs")}
-
-User request for this test case:
-${clipForPrompt(instruction || "Choose a small representative case.", MAX_INSTRUCTION_LENGTH, "request")}
-
-Python source:
-${clipForPrompt(source || "", MAX_SOURCE_CONTEXT_LENGTH, "source")}`,
+      text: createWorkspaceContext({ source, entry, inputSource, instruction }).overview,
     },
   ];
 }
@@ -272,14 +199,7 @@ ${clipForPrompt(source || "", MAX_SOURCE_CONTEXT_LENGTH, "source")}`,
 export async function suggestPythonInputs(options, dependencies = {}) {
   const config = dependencies.config ?? selectedProviderConfig();
   const stream = dependencies.stream ?? streamProviderChat;
-  let responseText = "";
-
-  for await (const delta of stream(createInputSuggestionMessages(options), config)) {
-    responseText += delta;
-    if (responseText.length > MAX_RESPONSE_LENGTH) {
-      throw new Error("The AI input response exceeded the safe size limit.");
-    }
-  }
+  const responseText = await runWorkspaceAgent(createInputSuggestionMessages(options), options, { ...dependencies, stream, config });
 
   const parsed = parseSuggestionJson(responseText);
   if (!Object.hasOwn(parsed, "inputs")) {
