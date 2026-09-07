@@ -198,18 +198,18 @@ export default function ContainerWithMostWaterVisualizer() {
         inputError={inputError}
       />
 
-    <div className="cw-panel">
-      <div className="cw-panel-head">
+    <div className="vis-panel cw-panel">
+      <div className="vis-panel-head cw-panel-head">
         Input Array (Heights)
         {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
       </div>
-      <div className="cw-panel-body">
+      <div className="vis-panel-body cw-panel-body">
         <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
           {EXAMPLES.map((ex) => (
             <button
               key={ex.label}
               onClick={() => applyExample(ex)}
-              className="cw-example-btn"
+              className="vis-example-btn cw-example-btn"
             >
               {ex.label}
             </button>
@@ -293,9 +293,9 @@ export default function ContainerWithMostWaterVisualizer() {
   )
 
   const statePanel = (
-    <div className="cw-panel">
-      <div className="cw-panel-head">Variables</div>
-      <div className="cw-panel-body">
+    <div className="vis-panel cw-panel">
+      <div className="vis-panel-head cw-panel-head">Variables</div>
+      <div className="vis-panel-body cw-panel-body">
         <div className="cw-vars">
           <div className="cw-var-row">
             <span className="cw-var-name">left</span>
@@ -372,7 +372,7 @@ export default function ContainerWithMostWaterVisualizer() {
 
   // Replace return with portals (Step 5)
   return (
-    <div className="container-water-shell">
+    <div className="vis-shell container-water-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
         <>

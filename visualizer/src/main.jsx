@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
+import './components/shared/VisualizerChrome.css'
 import App from './App.jsx'
 import { ChatProvider } from './context/ChatContext'
 import { VisualizationProvider } from './context/VisualizationContext'
