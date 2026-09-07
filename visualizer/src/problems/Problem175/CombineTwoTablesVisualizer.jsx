@@ -90,9 +90,9 @@ export default function CombineTwoTablesVisualizer() {
 
   // Step 3: Extract panel consts
   const primaryPanel = (
-    <div className="combine_two_tables-panel">
-      <div className="combine_two_tables-panel-head">Input & State</div>
-      <div className="combine_two_tables-panel-body">
+    <div className="vis-panel combine_two_tables-panel">
+      <div className="vis-panel-head combine_two_tables-panel-head">Input & State</div>
+      <div className="vis-panel-body combine_two_tables-panel-body">
         <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
           {EXAMPLES?.map((ex) => (
             <button
@@ -123,9 +123,9 @@ export default function CombineTwoTablesVisualizer() {
   )
 
   const statePanel = (
-    <div className="combine_two_tables-panel">
-      <div className="combine_two_tables-panel-head">Step Details</div>
-      <div className="combine_two_tables-panel-body">
+    <div className="vis-panel combine_two_tables-panel">
+      <div className="vis-panel-head combine_two_tables-panel-head">Step Details</div>
+      <div className="vis-panel-body combine_two_tables-panel-body">
         {step && <div className="combine_two_tables-details">{/* Details */}</div>}
       </div>
     </div>

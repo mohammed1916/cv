@@ -91,9 +91,9 @@ export default function ConsecutiveNumbersVisualizer() {
     { id: 'right', title: "Step Details", dockMode: 'split-right' },
   ], [])
   const panelContents = {
-    left: (<div className="consecutive_numbers-panel">
-            <div className="consecutive_numbers-panel-head">Input & State</div>
-            <div className="consecutive_numbers-panel-body">
+    left: (<div className="vis-panel consecutive_numbers-panel">
+            <div className="vis-panel-head consecutive_numbers-panel-head">Input & State</div>
+            <div className="vis-panel-body consecutive_numbers-panel-body">
               <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
                 {EXAMPLES?.map((ex) => (
                   <button
@@ -121,9 +121,9 @@ export default function ConsecutiveNumbersVisualizer() {
               </div>
             </div>
           </div>),
-    right: (<div className="consecutive_numbers-panel">
-            <div className="consecutive_numbers-panel-head">Step Details</div>
-            <div className="consecutive_numbers-panel-body">
+    right: (<div className="vis-panel consecutive_numbers-panel">
+            <div className="vis-panel-head consecutive_numbers-panel-head">Step Details</div>
+            <div className="vis-panel-body consecutive_numbers-panel-body">
               {step && <div className="consecutive_numbers-details">{/* Details */}</div>}
             </div>
           </div>),

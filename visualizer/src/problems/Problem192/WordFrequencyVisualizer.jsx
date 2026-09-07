@@ -92,9 +92,9 @@ export default function WordFrequencyVisualizer() {
     { id: 'right', title: "Step Details", dockMode: 'split-right' },
   ], [])
   const panelContents = {
-    left: (<div className="word_frequency-panel">
-            <div className="word_frequency-panel-head">Input & State</div>
-            <div className="word_frequency-panel-body">
+    left: (<div className="vis-panel word_frequency-panel">
+            <div className="vis-panel-head word_frequency-panel-head">Input & State</div>
+            <div className="vis-panel-body word_frequency-panel-body">
               <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
                 {EXAMPLES?.map((ex) => (
                   <button
@@ -122,9 +122,9 @@ export default function WordFrequencyVisualizer() {
               </div>
             </div>
           </div>),
-    right: (<div className="word_frequency-panel">
-            <div className="word_frequency-panel-head">Step Details</div>
-            <div className="word_frequency-panel-body">
+    right: (<div className="vis-panel word_frequency-panel">
+            <div className="vis-panel-head word_frequency-panel-head">Step Details</div>
+            <div className="vis-panel-body word_frequency-panel-body">
               {step && <div className="word_frequency-details">{/* Details */}</div>}
             </div>
           </div>),

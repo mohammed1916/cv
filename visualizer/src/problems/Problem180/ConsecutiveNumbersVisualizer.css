@@ -6,35 +6,8 @@
   overflow: hidden;
 }
 
-.consecutive_numbers-panel {
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  overflow: hidden;
-}
 
-.consecutive_numbers-panel-head {
-  padding: 12px 16px;
-  background: var(--surface-3);
-  border-bottom: 1px solid var(--border);
-  font-weight: 600;
-  font-size: 13px;
-  color: var(--text-main);
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
 
-.consecutive_numbers-panel-body {
-  padding: 16px;
-  flex: 1;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-}
 
 .consecutive_numbers-status {
   padding: 12px 16px;

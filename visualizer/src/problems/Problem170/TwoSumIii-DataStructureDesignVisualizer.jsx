@@ -96,9 +96,9 @@ export default function TwoSumIiiDataStructureDesignVisualizer() {
 
   // Step 3: Extract panel consts
   const primaryPanel = (
-    <div className="two_sum_iii-_data_structure_design-panel">
-      <div className="two_sum_iii-_data_structure_design-panel-head">Input & State</div>
-      <div className="two_sum_iii-_data_structure_design-panel-body">
+    <div className="vis-panel two_sum_iii-_data_structure_design-panel">
+      <div className="vis-panel-head two_sum_iii-_data_structure_design-panel-head">Input & State</div>
+      <div className="vis-panel-body two_sum_iii-_data_structure_design-panel-body">
         <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
           {EXAMPLES?.map((ex) => (
             <button
@@ -129,9 +129,9 @@ export default function TwoSumIiiDataStructureDesignVisualizer() {
   )
 
   const statePanel = (
-    <div className="two_sum_iii-_data_structure_design-panel">
-      <div className="two_sum_iii-_data_structure_design-panel-head">Step Details</div>
-      <div className="two_sum_iii-_data_structure_design-panel-body">
+    <div className="vis-panel two_sum_iii-_data_structure_design-panel">
+      <div className="vis-panel-head two_sum_iii-_data_structure_design-panel-head">Step Details</div>
+      <div className="vis-panel-body two_sum_iii-_data_structure_design-panel-body">
         {step && <div className="two_sum_iii-_data_structure_design-details">{/* Details */}</div>}
       </div>
     </div>
@@ -195,7 +195,7 @@ export default function TwoSumIiiDataStructureDesignVisualizer() {
 
   // Step 5: Replace return with portals
   return (
-    <div className="two_sum_iii-_data_structure_design-shell">
+    <div className="vis-shell two_sum_iii-_data_structure_design-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
         <>

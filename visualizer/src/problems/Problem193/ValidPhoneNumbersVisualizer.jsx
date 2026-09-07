@@ -90,9 +90,9 @@ export default function ValidPhoneNumbersVisualizer() {
     { id: 'right', title: "Step Details", dockMode: 'split-right' },
   ], [])
   const panelContents = {
-    left: (<div className="valid_phone_numbers-panel">
-            <div className="valid_phone_numbers-panel-head">Input & State</div>
-            <div className="valid_phone_numbers-panel-body">
+    left: (<div className="vis-panel valid_phone_numbers-panel">
+            <div className="vis-panel-head valid_phone_numbers-panel-head">Input & State</div>
+            <div className="vis-panel-body valid_phone_numbers-panel-body">
               <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
                 {EXAMPLES?.map((ex) => (
                   <button
@@ -120,9 +120,9 @@ export default function ValidPhoneNumbersVisualizer() {
               </div>
             </div>
           </div>),
-    right: (<div className="valid_phone_numbers-panel">
-            <div className="valid_phone_numbers-panel-head">Step Details</div>
-            <div className="valid_phone_numbers-panel-body">
+    right: (<div className="vis-panel valid_phone_numbers-panel">
+            <div className="vis-panel-head valid_phone_numbers-panel-head">Step Details</div>
+            <div className="vis-panel-body valid_phone_numbers-panel-body">
               {step && <div className="valid_phone_numbers-details">{/* Details */}</div>}
             </div>
           </div>),

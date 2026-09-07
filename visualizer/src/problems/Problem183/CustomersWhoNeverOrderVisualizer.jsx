@@ -90,9 +90,9 @@ export default function CustomersWhoNeverOrderVisualizer() {
     { id: 'right', title: "Step Details", dockMode: 'split-right' },
   ], [])
   const panelContents = {
-    left: (<div className="customers_who_never_order-panel">
-            <div className="customers_who_never_order-panel-head">Input & State</div>
-            <div className="customers_who_never_order-panel-body">
+    left: (<div className="vis-panel customers_who_never_order-panel">
+            <div className="vis-panel-head customers_who_never_order-panel-head">Input & State</div>
+            <div className="vis-panel-body customers_who_never_order-panel-body">
               <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
                 {EXAMPLES?.map((ex) => (
                   <button
@@ -120,9 +120,9 @@ export default function CustomersWhoNeverOrderVisualizer() {
               </div>
             </div>
           </div>),
-    right: (<div className="customers_who_never_order-panel">
-            <div className="customers_who_never_order-panel-head">Step Details</div>
-            <div className="customers_who_never_order-panel-body">
+    right: (<div className="vis-panel customers_who_never_order-panel">
+            <div className="vis-panel-head customers_who_never_order-panel-head">Step Details</div>
+            <div className="vis-panel-body customers_who_never_order-panel-body">
               {step && <div className="customers_who_never_order-details">{/* Details */}</div>}
             </div>
           </div>),

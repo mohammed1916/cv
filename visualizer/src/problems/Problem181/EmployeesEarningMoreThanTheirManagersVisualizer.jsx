@@ -90,9 +90,9 @@ export default function EmployeesEarningMoreThanTheirManagersVisualizer() {
     { id: 'right', title: "Step Details", dockMode: 'split-right' },
   ], [])
   const panelContents = {
-    left: (<div className="employees_earning_more_than_their_managers-panel">
-            <div className="employees_earning_more_than_their_managers-panel-head">Input & State</div>
-            <div className="employees_earning_more_than_their_managers-panel-body">
+    left: (<div className="vis-panel employees_earning_more_than_their_managers-panel">
+            <div className="vis-panel-head employees_earning_more_than_their_managers-panel-head">Input & State</div>
+            <div className="vis-panel-body employees_earning_more_than_their_managers-panel-body">
               <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
                 {EXAMPLES?.map((ex) => (
                   <button
@@ -120,9 +120,9 @@ export default function EmployeesEarningMoreThanTheirManagersVisualizer() {
               </div>
             </div>
           </div>),
-    right: (<div className="employees_earning_more_than_their_managers-panel">
-            <div className="employees_earning_more_than_their_managers-panel-head">Step Details</div>
-            <div className="employees_earning_more_than_their_managers-panel-body">
+    right: (<div className="vis-panel employees_earning_more_than_their_managers-panel">
+            <div className="vis-panel-head employees_earning_more_than_their_managers-panel-head">Step Details</div>
+            <div className="vis-panel-body employees_earning_more_than_their_managers-panel-body">
               {step && <div className="employees_earning_more_than_their_managers-details">{/* Details */}</div>}
             </div>
           </div>),

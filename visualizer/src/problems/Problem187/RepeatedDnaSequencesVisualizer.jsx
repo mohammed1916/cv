@@ -93,9 +93,9 @@ export default function RepeatedDnaSequencesVisualizer() {
     { id: 'right', title: "Step Details", dockMode: 'split-right' },
   ], [])
   const panelContents = {
-    left: (<div className="repeated_dna_sequences-panel">
-            <div className="repeated_dna_sequences-panel-head">Input & State</div>
-            <div className="repeated_dna_sequences-panel-body">
+    left: (<div className="vis-panel repeated_dna_sequences-panel">
+            <div className="vis-panel-head repeated_dna_sequences-panel-head">Input & State</div>
+            <div className="vis-panel-body repeated_dna_sequences-panel-body">
               <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
                 {EXAMPLES?.map((ex) => (
                   <button
@@ -123,9 +123,9 @@ export default function RepeatedDnaSequencesVisualizer() {
               </div>
             </div>
           </div>),
-    right: (<div className="repeated_dna_sequences-panel">
-            <div className="repeated_dna_sequences-panel-head">Step Details</div>
-            <div className="repeated_dna_sequences-panel-body">
+    right: (<div className="vis-panel repeated_dna_sequences-panel">
+            <div className="vis-panel-head repeated_dna_sequences-panel-head">Step Details</div>
+            <div className="vis-panel-body repeated_dna_sequences-panel-body">
               {step && <div className="repeated_dna_sequences-details">{/* Details */}</div>}
             </div>
           </div>),

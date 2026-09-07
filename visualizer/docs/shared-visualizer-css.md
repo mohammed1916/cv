@@ -11,3 +11,9 @@ Keep algorithm-specific geometry, visual states, animations, and Lumino's dock C
 Run `npm run audit:css` to identify further repeated declaration blocks, or append `-- --json` for structured output. The audit preserves declaration order and separates enclosing media/container/layer contexts. It identifies candidates, not automatically removable rules; selector specificity, import order, inheritance, and dynamic states still need review.
 
 For the first migration, Chrome computed-style comparisons of shell, panel, header, body, and button fixtures matched the original styles at 180, 360, 600, and 900 pixels in light and dark themes (24 comparisons). These fixtures do not replace exercising the full interactive visualizers, hover/focus states, or Lumino drag operations when migrating additional families.
+
+## Second migration batch
+
+Problems 156, 168, 169, 170, 172, 175–187, 192, and 193 now reuse the same chrome. This removes 65 exact duplicate rules (12,691 CSS bytes with line endings normalized), without adding another shared stylesheet. Only top-level, single-class rules with identical ordered declarations and statically identifiable JSX consumers were migrated. Local classes and nonmatching declarations remain intact.
+
+Validation: 320 Chrome computed-style fixture comparisons (20 visualizers × 2 themes × 4 widths × normal/hover states) matched the previous revision. The widths were 180, 360, 600, and 900 pixels. Removing the added shared classes from each JSX file reproduces its original source exactly. The production build passed and lint comparison found no new findings; the migrated files have 166 pre-existing lint errors. Full interactive drag/playback testing was not part of this batch.
