@@ -60,7 +60,8 @@ test("suggestion requests use bounded trace context and the injected provider", 
 
   assert.equal(result.provider, "Ollama Local");
   assert.equal(result.bindings.profit.kind, "scalar");
-  assert.match(receivedMessages[1].text, /"sample":\[7,1,5\]/);
+  assert.match(receivedMessages[1].text, /Recorded frames: 1/);
+  assert.match(receivedMessages[0].text, /frame\(index/);
 });
 
 test("visual suggestion prompt requires a constrained binding-only response", () => {

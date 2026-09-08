@@ -179,6 +179,61 @@
   flex: 0 0 auto;
 }
 
+.runtime-playground__webmcp-status {
+  min-height: 34px;
+  padding: 4px 9px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface2);
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  column-gap: 6px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.runtime-playground__webmcp-status > span {
+  grid-row: 1 / span 2;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-dim);
+}
+
+.runtime-playground__webmcp-status strong {
+  color: var(--text);
+  font-size: 0.68rem;
+  line-height: 1;
+}
+
+.runtime-playground__webmcp-status small {
+  font-size: 0.58rem;
+  line-height: 1.1;
+}
+
+.runtime-playground__webmcp-status.is-ready {
+  border-color: color-mix(in srgb, var(--success) 42%, var(--border));
+  background: color-mix(in srgb, var(--success) 8%, var(--surface));
+}
+
+.runtime-playground__webmcp-status.is-ready > span {
+  background: var(--success);
+  box-shadow: 0 0 0 3px var(--success-glow);
+}
+
+.runtime-playground__webmcp-status.is-registering > span,
+.runtime-playground__webmcp-status.is-checking > span {
+  background: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+  animation: runtime-playground-pulse 1s ease-in-out infinite alternate;
+}
+
+.runtime-playground__webmcp-status.is-error > span {
+  background: var(--error);
+  box-shadow: 0 0 0 3px var(--error-glow);
+}
+
 .runtime-playground__workspace {
   position: relative;
   flex: 1 1 0;
@@ -449,9 +504,99 @@
 }
 
 .runtime-playground__configuration-panel .runtime-playground__trace-config {
-  flex: 1 1 auto;
+  flex: 0 0 auto;
   max-height: none;
   border-top: 0;
+}
+
+.runtime-playground__configuration-panel {
+  overflow: auto;
+}
+
+.runtime-playground__configuration-panel .runtime-playground__trace-pane {
+  overflow: visible;
+}
+
+.runtime-playground__ai-provider-heading {
+  flex-wrap: wrap;
+}
+
+.runtime-playground__ai-provider-toggle {
+  flex: 0 0 auto;
+  min-height: 26px;
+  padding: 3px 7px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text);
+  background: var(--surface2);
+  font-size: 0.61rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.runtime-playground__ollama-guide {
+  margin-top: 8px;
+  border: 1px solid color-mix(in srgb, var(--primary) 24%, var(--border));
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--primary-glow) 60%, transparent);
+  color: var(--text-muted);
+  font-size: 0.62rem;
+  line-height: 1.45;
+}
+
+.runtime-playground__ollama-guide summary {
+  padding: 7px 9px;
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 800;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.runtime-playground__ollama-guide summary::-webkit-details-marker {
+  display: none;
+}
+
+.runtime-playground__ollama-guide summary span {
+  color: var(--primary);
+  font-size: 0.75rem;
+}
+
+.runtime-playground__ollama-guide > div {
+  padding: 0 9px 9px;
+}
+
+.runtime-playground__ollama-guide p {
+  margin: 0 0 7px;
+}
+
+.runtime-playground__ollama-guide ol {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+}
+
+.runtime-playground__ollama-guide li {
+  padding-left: 2px;
+}
+
+.runtime-playground__ollama-guide code {
+  display: block;
+  margin-top: 3px;
+  padding: 5px 6px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--code-bg);
+  color: var(--code-text);
+  font: 0.61rem/1.35 monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 .runtime-playground__configuration-empty {
@@ -892,7 +1037,8 @@
 
 .runtime-playground__error,
 .runtime-playground__warning,
-.runtime-playground__timeline-message {
+.runtime-playground__timeline-message,
+.runtime-playground__webmcp-activity {
   width: 100%;
   min-width: 0;
   padding: 10px 12px;
@@ -962,6 +1108,16 @@
   color: var(--text-muted);
 }
 
+.runtime-playground__webmcp-activity {
+  border: 1px solid color-mix(in srgb, var(--primary) 38%, var(--border));
+  background: color-mix(in srgb, var(--primary) 7%, var(--surface));
+  color: var(--text-muted);
+}
+
+.runtime-playground__webmcp-activity.is-error {
+  border-color: color-mix(in srgb, var(--error) 45%, var(--border));
+}
+
 .runtime-playground__operation {
   width: fit-content;
   max-width: 100%;
@@ -1008,6 +1164,10 @@
   .runtime-playground__header-actions {
     width: 100%;
     justify-content: space-between;
+  }
+
+  .runtime-playground__webmcp-status small {
+    display: none;
   }
 
   .runtime-playground__title-group h1,
@@ -1072,7 +1232,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .runtime-playground__status > span {
+  .runtime-playground__status > span,
+  .runtime-playground__webmcp-status > span {
     animation: none;
   }
 

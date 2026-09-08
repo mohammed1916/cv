@@ -88,9 +88,9 @@ export default function FactorialTrailingZeroesVisualizer() {
 
   // Extract panels for Lumino layout
   const primaryPanel = (
-    <div className="factorial_trailing_zeroes-panel">
-      <div className="factorial_trailing_zeroes-panel-head">Input & State</div>
-      <div className="factorial_trailing_zeroes-panel-body">
+    <div className="vis-panel factorial_trailing_zeroes-panel">
+      <div className="vis-panel-head factorial_trailing_zeroes-panel-head">Input & State</div>
+      <div className="vis-panel-body factorial_trailing_zeroes-panel-body">
         <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
           {EXAMPLES?.map((ex) => (
             <button
@@ -121,9 +121,9 @@ export default function FactorialTrailingZeroesVisualizer() {
   )
 
   const statePanel = (
-    <div className="factorial_trailing_zeroes-panel">
-      <div className="factorial_trailing_zeroes-panel-head">Step Details</div>
-      <div className="factorial_trailing_zeroes-panel-body">
+    <div className="vis-panel factorial_trailing_zeroes-panel">
+      <div className="vis-panel-head factorial_trailing_zeroes-panel-head">Step Details</div>
+      <div className="vis-panel-body factorial_trailing_zeroes-panel-body">
         {step && <div className="factorial_trailing_zeroes-details">{/* Details */}</div>}
       </div>
     </div>
@@ -186,7 +186,7 @@ export default function FactorialTrailingZeroesVisualizer() {
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
-    <div className="factorial_trailing_zeroes-shell">
+    <div className="vis-shell factorial_trailing_zeroes-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
         <>

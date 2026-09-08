@@ -276,8 +276,8 @@ export default function MergeTwoSortedListsVisualizer() {
         inputError={inputError}
       />
 
-    <div className="mtsl-panel">
-      <div className="mtsl-panel-head">
+    <div className="vis-panel mtsl-panel">
+      <div className="vis-panel-head mtsl-panel-head">
         Linked Lists
         {inputError && (
           <span style={{ color: "#ea0c0c", marginLeft: 8 }}>
@@ -285,7 +285,7 @@ export default function MergeTwoSortedListsVisualizer() {
           </span>
         )}
       </div>
-      <div className="mtsl-panel-body">
+      <div className="vis-panel-body mtsl-panel-body">
         <div
           style={{
             display: "flex",
@@ -298,7 +298,7 @@ export default function MergeTwoSortedListsVisualizer() {
             <button
               key={ex.label}
               onClick={() => applyExample(ex)}
-              className="mtsl-example-btn"
+              className="vis-example-btn mtsl-example-btn"
             >
               {ex.label}
             </button>
@@ -594,7 +594,7 @@ export default function MergeTwoSortedListsVisualizer() {
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
 
   return (
-    <div className="mtsl-shell">
+    <div className="vis-shell mtsl-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
         <>

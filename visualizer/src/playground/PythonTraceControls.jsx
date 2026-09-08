@@ -7,6 +7,7 @@ const KIND_OPTIONS = [
   { value: "associative", label: "Associative" },
   { value: "graph", label: "Graph" },
   { value: "tree", label: "Tree" },
+  { value: "heap", label: "Heap" },
   { value: "scalar", label: "Scalar" },
 ];
 
@@ -28,6 +29,10 @@ function inferredKind(variable) {
     ?? variable?.type
     ?? "scalar",
   ).toLowerCase();
+  const name = String(variable?.name ?? "").toLowerCase();
+  if (kind === "heap" || name === "heap" || name.endsWith("heap") || name.includes("priority_queue")) {
+    return "heap";
+  }
   if (["array", "list", "tuple", "deque", "string", "sequence"].includes(kind)) {
     return "sequence";
   }

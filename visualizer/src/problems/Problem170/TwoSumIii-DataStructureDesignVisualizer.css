@@ -1,42 +1,6 @@
-.two_sum_iii-_data_structure_design-shell {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 480px;
-  gap: 0;
-  overflow: hidden;
-}
 
-.two_sum_iii-_data_structure_design-panel {
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  overflow: hidden;
-}
 
-.two_sum_iii-_data_structure_design-panel-head {
-  padding: 12px 16px;
-  background: var(--surface-3);
-  border-bottom: 1px solid var(--border);
-  font-weight: 600;
-  font-size: 13px;
-  color: var(--text-main);
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
 
-.two_sum_iii-_data_structure_design-panel-body {
-  padding: 16px;
-  flex: 1;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-}
 
 .two_sum_iii-_data_structure_design-status {
   padding: 12px 16px;

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import {
+  canUseLocalOllama,
+  DEFAULT_LOCAL_OLLAMA_URL,
   getChatProvider,
   setChatProvider,
   subscribeChatProvider,
@@ -28,9 +30,13 @@ function storeSessionValue(key, value) {
   }
 }
 
+function isHostedPage() {
+  return !canUseLocalOllama();
+}
+
 export default function PlaygroundAIProviderControls() {
   const [config, setConfig] = useState(getChatProvider);
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [ollamaApiKey, setOllamaApiKey] = useState(() => (
     readSessionValue("chat.ollama-api-key")
   ));
@@ -38,19 +44,26 @@ export default function PlaygroundAIProviderControls() {
     readSessionValue("chat.gemini-api-key")
   ));
   const [localModels, setLocalModels] = useState([]);
-  const [localStatus, setLocalStatus] = useState("checking");
+  const [checkVersion, setCheckVersion] = useState(0);
+  const [localStatus, setLocalStatus] = useState(() => (
+    canUseLocalOllama() ? "checking" : "manual"
+  ));
 
   useEffect(() => subscribeChatProvider(setConfig), []);
 
   useEffect(() => {
     if (config.provider !== "ollama-local") return undefined;
     const controller = new AbortController();
-    fetch("http://127.0.0.1:11434/api/tags", { signal: controller.signal })
+    let active = true;
+    const timeout = window.setTimeout(() => controller.abort(), 2500);
+    const baseUrl = String(config.localBaseUrl || DEFAULT_LOCAL_OLLAMA_URL).trim().replace(/\/+$/, "");
+    fetch(`${baseUrl}/api/tags`, { signal: controller.signal })
       .then((response) => {
         if (!response.ok) throw new Error(`Ollama returned ${response.status}`);
         return response.json();
       })
       .then((result) => {
+        if (!active) return;
         const names = (Array.isArray(result?.models) ? result.models : [])
           .map((model) => String(model?.name || "").trim())
           .filter(Boolean);
@@ -58,12 +71,16 @@ export default function PlaygroundAIProviderControls() {
         setLocalStatus("ready");
       })
       .catch((error) => {
-        if (error?.name === "AbortError") return;
+        if (!active || (error?.name === "AbortError" && controller.signal.reason === "unmount")) return;
         setLocalModels([]);
         setLocalStatus("unavailable");
-      });
-    return () => controller.abort();
-  }, [config.provider]);
+      }).finally(() => window.clearTimeout(timeout));
+    return () => {
+      active = false;
+      window.clearTimeout(timeout);
+      controller.abort("unmount");
+    };
+  }, [config.provider, config.localBaseUrl, checkVersion]);
 
   const updateConfig = (nextConfig) => {
     setConfig(nextConfig);
@@ -71,6 +88,9 @@ export default function PlaygroundAIProviderControls() {
   };
   const selected = PROVIDERS.find((provider) => provider.value === config.provider)
     ?? PROVIDERS[0];
+  const isHosted = isHostedPage();
+  const appOrigin = typeof window === "undefined" ? "" : window.location.origin;
+  const effectiveLocalStatus = localStatus;
 
   return (
     <section className="runtime-playground__ai-provider" aria-label="AI visual provider">
@@ -86,7 +106,10 @@ export default function PlaygroundAIProviderControls() {
           <small>Used by Suggest visuals; deterministic tracing does not require AI.</small>
         </span>
         <code>{selected.label}</code>
-        <span className="runtime-playground__ai-provider-chevron" aria-hidden="true">⌄</span>
+        <span className="runtime-playground__ai-provider-toggle">
+          {isExpanded ? "Hide settings" : "Show settings"}
+          <span className="runtime-playground__ai-provider-chevron" aria-hidden="true">⌄</span>
+        </span>
       </button>
 
       <div
@@ -96,6 +119,16 @@ export default function PlaygroundAIProviderControls() {
       >
       <div className="runtime-playground__ai-provider-content-inner">
       <div className="runtime-playground__ai-provider-fields">
+        <label htmlFor="runtime-playground-ai-context">
+          Context budget
+          <select id="runtime-playground-ai-context" value={config.contextTokens || 8192}
+            onChange={(event) => updateConfig({ ...config, contextTokens: Number(event.target.value) })}>
+            {[4096, 8192, 16384, 32768, 65536].map((size) => (
+              <option key={size} value={size}>{size.toLocaleString()} tokens</option>
+            ))}
+          </select>
+          <small>Choose a size your model supports. Larger local contexts need more memory.</small>
+        </label>
         <label htmlFor="runtime-playground-ai-provider">
           Provider
           <select
@@ -104,8 +137,14 @@ export default function PlaygroundAIProviderControls() {
             onChange={(event) => {
               const provider = PROVIDERS.find((item) => item.value === event.target.value)
                 ?? PROVIDERS[0];
-              if (provider.value === "ollama-local") setLocalStatus("checking");
-              updateConfig({ provider: provider.value, model: provider.model });
+              if (provider.value === "ollama-local") {
+                setLocalStatus("checking");
+              }
+              updateConfig({
+                ...config,
+                provider: provider.value,
+                model: provider.model,
+              });
             }}
           >
             {PROVIDERS.map((provider) => (
@@ -135,6 +174,24 @@ export default function PlaygroundAIProviderControls() {
             </datalist>
           )}
         </label>
+
+        {config.provider === "ollama-local" && (
+          <label htmlFor="runtime-playground-ollama-local-url">
+            Local endpoint
+            <input
+              id="runtime-playground-ollama-local-url"
+              type="url"
+              value={config.localBaseUrl || DEFAULT_LOCAL_OLLAMA_URL}
+              onChange={(event) => updateConfig({
+                ...config,
+                localBaseUrl: event.target.value,
+              })}
+              placeholder={DEFAULT_LOCAL_OLLAMA_URL}
+              autoComplete="off"
+              spellCheck={false}
+            />
+          </label>
+        )}
 
         {config.provider === "ollama-cloud" && (
           <label htmlFor="runtime-playground-ollama-key">
@@ -171,13 +228,57 @@ export default function PlaygroundAIProviderControls() {
 
       <p>
         {config.provider === "ollama-local"
-          ? localStatus === "ready"
+          ? effectiveLocalStatus === "ready"
             ? <><strong className="runtime-playground__ollama-ready">Ollama detected.</strong><span> {localModels.length} installed model{localModels.length === 1 ? "" : "s"}; </span><code>{config.model || selected.model}</code><span>{localModels.includes(config.model || selected.model) ? " is available." : " is not installed yet."}</span></>
-            : localStatus === "unavailable"
-              ? <><strong className="runtime-playground__ollama-unavailable">Ollama not detected.</strong><span> Run </span><code>ollama run {config.model || selected.model}</code><span>, then reopen this panel.</span></>
-              : "Checking http://127.0.0.1:11434 for installed models..."
-          : "Keys are kept in session storage and sent only through the existing chat proxy."}
+            : effectiveLocalStatus === "manual"
+              ? "To use Local Ollama from this hosted page, run the setup commands below, restart Ollama, then try again."
+            : effectiveLocalStatus === "unavailable"
+              ? <><strong className="runtime-playground__ollama-unavailable">Could not connect to Ollama.</strong><span> Follow the setup below, then check again.</span></>
+              : "Checking for Ollama on this computer..."
+          : "Enter your API key for this session, or use the provider configured by the site owner."}
       </p>
+
+      {config.provider === "ollama-local" && (
+        <button type="button" className="runtime-playground__ai-provider-toggle" onClick={() => {
+          setLocalStatus("checking");
+          setCheckVersion((version) => version + 1);
+        }}>Check connection / refresh models</button>
+      )}
+      {config.provider === "ollama-local" && (
+        <details className="runtime-playground__ollama-guide">
+          <summary>
+            <span aria-hidden="true">ⓘ</span>
+            Local Ollama setup
+          </summary>
+          <div>
+            <p>
+              To use Local Ollama from this {isHosted ? "hosted page" : "computer"}, install Ollama, pull a model, and keep Ollama running.
+            </p>
+            <ol>
+              <li>
+                Install Ollama, then open PowerShell and pull your selected model:
+                <code>ollama pull {config.model || selected.model}</code>
+              </li>
+              {isHosted && (
+                <li>
+                  Allow this hosted site in Ollama:
+                  <code>setx OLLAMA_ORIGINS "{appOrigin}"</code>
+                  <code>$env:OLLAMA_ORIGINS="{appOrigin}"</code>
+                </li>
+              )}
+              <li>
+                Fully quit Ollama (including its tray icon), then start it in this terminal:
+                <code>ollama serve</code>
+              </li>
+            </ol>
+            {isHosted && (
+              <p>
+                Keep this terminal open, then click Check connection / refresh models above.
+              </p>
+            )}
+          </div>
+        </details>
+      )}
       </div>
       </div>
     </section>

@@ -90,9 +90,9 @@ export default function TenthLineVisualizer() {
     { id: 'right', title: "Step Details", dockMode: 'split-right' },
   ], [])
   const panelContents = {
-    left: (<div className="tenth_line-panel">
-            <div className="tenth_line-panel-head">Input & State</div>
-            <div className="tenth_line-panel-body">
+    left: (<div className="vis-panel tenth_line-panel">
+            <div className="vis-panel-head tenth_line-panel-head">Input & State</div>
+            <div className="vis-panel-body tenth_line-panel-body">
               <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
                 {EXAMPLES?.map((ex) => (
                   <button
@@ -120,9 +120,9 @@ export default function TenthLineVisualizer() {
               </div>
             </div>
           </div>),
-    right: (<div className="tenth_line-panel">
-            <div className="tenth_line-panel-head">Step Details</div>
-            <div className="tenth_line-panel-body">
+    right: (<div className="vis-panel tenth_line-panel">
+            <div className="vis-panel-head tenth_line-panel-head">Step Details</div>
+            <div className="vis-panel-body tenth_line-panel-body">
               {step && <div className="tenth_line-details">{/* Details */}</div>}
             </div>
           </div>),

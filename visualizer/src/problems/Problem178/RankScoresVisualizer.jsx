@@ -90,9 +90,9 @@ export default function RankScoresVisualizer() {
     { id: 'right', title: "Step Details", dockMode: 'split-right' },
   ], [])
   const panelContents = {
-    left: (<div className="rank_scores-panel">
-            <div className="rank_scores-panel-head">Input & State</div>
-            <div className="rank_scores-panel-body">
+    left: (<div className="vis-panel rank_scores-panel">
+            <div className="vis-panel-head rank_scores-panel-head">Input & State</div>
+            <div className="vis-panel-body rank_scores-panel-body">
               <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
                 {EXAMPLES?.map((ex) => (
                   <button
@@ -120,9 +120,9 @@ export default function RankScoresVisualizer() {
               </div>
             </div>
           </div>),
-    right: (<div className="rank_scores-panel">
-            <div className="rank_scores-panel-head">Step Details</div>
-            <div className="rank_scores-panel-body">
+    right: (<div className="vis-panel rank_scores-panel">
+            <div className="vis-panel-head rank_scores-panel-head">Step Details</div>
+            <div className="vis-panel-body rank_scores-panel-body">
               {step && <div className="rank_scores-details">{/* Details */}</div>}
             </div>
           </div>),

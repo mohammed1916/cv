@@ -230,7 +230,7 @@ function RemoveNthNodeViz({
   }, [setInputStr, handleReset])
 
   return (
-    <section className="rnn-panel main">
+    <section className="vis-panel rnn-panel main">
       <header className="rnn-head">
         <span>Remove Nth Node from End</span>
         {inputError && <span className="rnn-error">{inputError}</span>}
@@ -238,7 +238,7 @@ function RemoveNthNodeViz({
       <div className="rnn-body">
         <div className="rnn-examples">
           {EXAMPLES.map((ex) => (
-            <button key={ex.label} className="rnn-chip" onClick={() => handleExampleClick(ex)}>
+            <button key={ex.label} className="vis-example-btn rnn-chip" onClick={() => handleExampleClick(ex)}>
               {ex.label}
             </button>
           ))}
@@ -348,7 +348,7 @@ function RemoveNthNodeViz({
 
 function RemoveNthNodeState({ step }) {
   return (
-    <section className="rnn-panel side">
+    <section className="vis-panel rnn-panel side">
       <header className="rnn-head"><span>State</span></header>
       <div className="rnn-body">
         <div className="rnn-state-row">
@@ -430,7 +430,7 @@ export default function RemoveNthNodeVisualizer() {
   )
 
   const primaryPanel = (
-    <div className="rnn-panel main">
+    <div className="vis-panel rnn-panel main">
       <RemoveNthNodeViz
         step={step}
         list={list}
@@ -445,7 +445,7 @@ export default function RemoveNthNodeVisualizer() {
   )
 
   const statePanel = (
-    <div className="rnn-panel side">
+    <div className="vis-panel rnn-panel side">
       <RemoveNthNodeState step={step} />
     </div>
   )
@@ -498,7 +498,7 @@ export default function RemoveNthNodeVisualizer() {
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
-    <div className="rnn-shell">
+    <div className="vis-shell rnn-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
         <>

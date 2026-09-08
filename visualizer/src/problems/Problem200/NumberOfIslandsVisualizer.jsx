@@ -200,7 +200,7 @@ export default function NumberOfIslandsVisualizer() {
   const cols = grid[0]?.length || 0
 
   const gridPanel = (
-        <div className="noi-panel-body">
+        <div className="vis-panel-body noi-panel-body">
             <ManualInputPanel
               fields={[{"key":"grid","label":"grid","type":"string"}]}
               values={{ grid: gridInput }}
@@ -214,7 +214,7 @@ export default function NumberOfIslandsVisualizer() {
               <button
                 key={ex.label}
                 onClick={() => applyExample(ex)}
-                className="noi-example-btn"
+                className="vis-example-btn noi-example-btn"
               >
                 {ex.label}
               </button>
@@ -281,7 +281,7 @@ export default function NumberOfIslandsVisualizer() {
   )
 
   const statePanel = (
-        <div className="noi-panel-body">
+        <div className="vis-panel-body noi-panel-body">
           <div className="noi-stats-container">
             <div className="noi-stat-box">
               <span className="noi-stat-label">Islands Found</span>

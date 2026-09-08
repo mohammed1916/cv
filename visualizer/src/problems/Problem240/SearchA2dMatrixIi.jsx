@@ -90,18 +90,18 @@ export default function SearchA2dMatrixIi() {
     { id: 'right', title: "Details", dockMode: 'split-right' },
   ], [])
   const panelContents = {
-    left: (<div className="search-a-2d-matrix-ii-panel">
-            <div className="search-a-2d-matrix-ii-panel-head">
+    left: (<div className="vis-panel search-a-2d-matrix-ii-panel">
+            <div className="vis-panel-head search-a-2d-matrix-ii-panel-head">
               Input
               {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
             </div>
-            <div className="search-a-2d-matrix-ii-panel-body">
+            <div className="vis-panel-body search-a-2d-matrix-ii-panel-body">
               <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
                 {EXAMPLES.map((ex) => (
                   <button
                     key={ex.label}
                     onClick={() => applyExample(ex)}
-                    className="search-a-2d-matrix-ii-example-btn"
+                    className="vis-example-btn search-a-2d-matrix-ii-example-btn"
                   >
                     {ex.label}
                   </button>
@@ -136,9 +136,9 @@ export default function SearchA2dMatrixIi() {
               </div>
             </div>
           </div>),
-    right: (<div className="search-a-2d-matrix-ii-panel">
-            <div className="search-a-2d-matrix-ii-panel-head">Details</div>
-            <div className="search-a-2d-matrix-ii-panel-body">
+    right: (<div className="vis-panel search-a-2d-matrix-ii-panel">
+            <div className="vis-panel-head search-a-2d-matrix-ii-panel-head">Details</div>
+            <div className="vis-panel-body search-a-2d-matrix-ii-panel-body">
               <div className="search-a-2d-matrix-ii-info">
                 <h3>Problem 240</h3>
                 <p><strong>Story:</strong> Matrix Navigation Quest - zigzag through matrix by eliminating rows/columns</p>

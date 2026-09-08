@@ -90,18 +90,18 @@ export default function DeleteNodeInALinkedList() {
     { id: 'right', title: "Details", dockMode: 'split-right' },
   ], [])
   const panelContents = {
-    left: (<div className="delete-node-in-a-linked-list-panel">
-            <div className="delete-node-in-a-linked-list-panel-head">
+    left: (<div className="vis-panel delete-node-in-a-linked-list-panel">
+            <div className="vis-panel-head delete-node-in-a-linked-list-panel-head">
               Input
               {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
             </div>
-            <div className="delete-node-in-a-linked-list-panel-body">
+            <div className="vis-panel-body delete-node-in-a-linked-list-panel-body">
               <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
                 {EXAMPLES.map((ex) => (
                   <button
                     key={ex.label}
                     onClick={() => applyExample(ex)}
-                    className="delete-node-in-a-linked-list-example-btn"
+                    className="vis-example-btn delete-node-in-a-linked-list-example-btn"
                   >
                     {ex.label}
                   </button>
@@ -136,9 +136,9 @@ export default function DeleteNodeInALinkedList() {
               </div>
             </div>
           </div>),
-    right: (<div className="delete-node-in-a-linked-list-panel">
-            <div className="delete-node-in-a-linked-list-panel-head">Details</div>
-            <div className="delete-node-in-a-linked-list-panel-body">
+    right: (<div className="vis-panel delete-node-in-a-linked-list-panel">
+            <div className="vis-panel-head delete-node-in-a-linked-list-panel-head">Details</div>
+            <div className="vis-panel-body delete-node-in-a-linked-list-panel-body">
               <div className="delete-node-in-a-linked-list-info">
                 <h3>Problem 237</h3>
                 <p><strong>Story:</strong> Node Teleportation Trick - copy next node value and skip over it</p>

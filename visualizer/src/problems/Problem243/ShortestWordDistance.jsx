@@ -90,18 +90,18 @@ export default function ShortestWordDistance() {
     { id: 'right', title: "Details", dockMode: 'split-right' },
   ], [])
   const panelContents = {
-    left: (<div className="shortest-word-distance-panel">
-            <div className="shortest-word-distance-panel-head">
+    left: (<div className="vis-panel shortest-word-distance-panel">
+            <div className="vis-panel-head shortest-word-distance-panel-head">
               Input
               {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
             </div>
-            <div className="shortest-word-distance-panel-body">
+            <div className="vis-panel-body shortest-word-distance-panel-body">
               <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
                 {EXAMPLES.map((ex) => (
                   <button
                     key={ex.label}
                     onClick={() => applyExample(ex)}
-                    className="shortest-word-distance-example-btn"
+                    className="vis-example-btn shortest-word-distance-example-btn"
                   >
                     {ex.label}
                   </button>
@@ -136,9 +136,9 @@ export default function ShortestWordDistance() {
               </div>
             </div>
           </div>),
-    right: (<div className="shortest-word-distance-panel">
-            <div className="shortest-word-distance-panel-head">Details</div>
-            <div className="shortest-word-distance-panel-body">
+    right: (<div className="vis-panel shortest-word-distance-panel">
+            <div className="vis-panel-head shortest-word-distance-panel-head">Details</div>
+            <div className="vis-panel-body shortest-word-distance-panel-body">
               <div className="shortest-word-distance-info">
                 <h3>Problem 243</h3>
                 <p><strong>Story:</strong> Word Distance Radar - distance shrinks as you find closer word pairs</p>

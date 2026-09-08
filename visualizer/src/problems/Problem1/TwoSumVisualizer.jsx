@@ -148,7 +148,7 @@ export default function TwoSumVisualizer() {
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const arrayPanel = (
-    <div className="twosum-panel">
+    <div className="vis-panel twosum-panel">
         <ManualInputPanel
           fields={[{"key":"nums","label":"nums","type":"string"},{"key":"target","label":"target","type":"string"}]}
           values={{ nums: numsInput, target: targetInput }}
@@ -157,17 +157,17 @@ export default function TwoSumVisualizer() {
           applyExample={applyExample}
           inputError={inputError}
         />
-      <div className="twosum-panel-head">
+      <div className="vis-panel-head twosum-panel-head">
         Array & Target
         {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
       </div>
-      <div className="twosum-panel-body">
+      <div className="vis-panel-body twosum-panel-body">
         <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
           {EXAMPLES.map((ex) => (
             <button
               key={ex.label}
               onClick={() => applyExample(ex)}
-              className="twosum-example-btn"
+              className="vis-example-btn twosum-example-btn"
             >
               {ex.label}
             </button>
@@ -241,9 +241,9 @@ export default function TwoSumVisualizer() {
   )
 
   const hashMapPanel = (
-    <div className="twosum-panel">
-      <div className="twosum-panel-head">Hash Map (prevMap)</div>
-      <div className="twosum-panel-body">
+    <div className="vis-panel twosum-panel">
+      <div className="vis-panel-head twosum-panel-head">Hash Map (prevMap)</div>
+      <div className="vis-panel-body twosum-panel-body">
         <div className="twosum-map-container">
           <div className="twosum-map-headers">
             <span>Key (Value)</span>
@@ -349,7 +349,7 @@ export default function TwoSumVisualizer() {
   }, [])
 
   return (
-    <div className="twosum-shell">
+    <div className="vis-shell twosum-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
         <>

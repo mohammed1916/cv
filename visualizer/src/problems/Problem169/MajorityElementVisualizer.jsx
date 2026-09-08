@@ -89,9 +89,9 @@ export default function MajorityElementVisualizer() {
 
   // ─── Step 3: Extract panels into consts ────────────────────────────────────
   const primaryPanel = (
-    <div className="majority_element-panel">
-      <div className="majority_element-panel-head">Input & State</div>
-      <div className="majority_element-panel-body">
+    <div className="vis-panel majority_element-panel">
+      <div className="vis-panel-head majority_element-panel-head">Input & State</div>
+      <div className="vis-panel-body majority_element-panel-body">
         <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
           {EXAMPLES?.map((ex) => (
             <button
@@ -122,9 +122,9 @@ export default function MajorityElementVisualizer() {
   )
 
   const statePanel = (
-    <div className="majority_element-panel">
-      <div className="majority_element-panel-head">Step Details</div>
-      <div className="majority_element-panel-body">
+    <div className="vis-panel majority_element-panel">
+      <div className="vis-panel-head majority_element-panel-head">Step Details</div>
+      <div className="vis-panel-body majority_element-panel-body">
         {step && <div className="majority_element-details">{/* Details */}</div>}
       </div>
     </div>
@@ -188,7 +188,7 @@ export default function MajorityElementVisualizer() {
 
   // ─── Step 5: Replace return with portals ───────────────────────────────────
   return (
-    <div className="majority_element-shell">
+    <div className="vis-shell majority_element-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
         <>

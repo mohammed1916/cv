@@ -1,0 +1,57 @@
+/* Shared problem-panel chrome. Keep algorithm geometry and states local.
+   A single class preserves the specificity of the former problem selectors. */
+.vis-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: var(--vis-shell-min-height, 480px);
+  gap: 0;
+  overflow: hidden;
+}
+
+.vis-panel {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--vis-panel-radius, 12px);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.vis-panel-head {
+  padding: var(--vis-panel-head-padding, 12px 16px);
+  background: var(--surface-3);
+  border-bottom: 1px solid var(--border);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.vis-panel-body {
+  padding: var(--vis-panel-body-padding, 16px);
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.vis-example-btn {
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-size: 12px;
+  cursor: pointer;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+
+.vis-example-btn:hover {
+  background: var(--border);
+  color: var(--surface);
+}

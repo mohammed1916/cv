@@ -90,18 +90,18 @@ export default function ValidParentheses() {
     { id: 'right', title: "Details", dockMode: 'split-right' },
   ], [])
   const panelContents = {
-    left: (<div className="valid-parentheses-panel">
-            <div className="valid-parentheses-panel-head">
+    left: (<div className="vis-panel valid-parentheses-panel">
+            <div className="vis-panel-head valid-parentheses-panel-head">
               Input
               {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
             </div>
-            <div className="valid-parentheses-panel-body">
+            <div className="vis-panel-body valid-parentheses-panel-body">
               <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
                 {EXAMPLES.map((ex) => (
                   <button
                     key={ex.label}
                     onClick={() => applyExample(ex)}
-                    className="valid-parentheses-example-btn"
+                    className="vis-example-btn valid-parentheses-example-btn"
                   >
                     {ex.label}
                   </button>
@@ -136,9 +136,9 @@ export default function ValidParentheses() {
               </div>
             </div>
           </div>),
-    right: (<div className="valid-parentheses-panel">
-            <div className="valid-parentheses-panel-head">Details</div>
-            <div className="valid-parentheses-panel-body">
+    right: (<div className="vis-panel valid-parentheses-panel">
+            <div className="vis-panel-head valid-parentheses-panel-head">Details</div>
+            <div className="vis-panel-body valid-parentheses-panel-body">
               <div className="valid-parentheses-info">
                 <h3>Problem 20</h3>
                 <p><strong>Story:</strong> Bracket Dance - matching pairs light up and dance together</p>

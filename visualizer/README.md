@@ -1,4 +1,44 @@
-# React + Vite
+# Competitive Programming Visualizer
+
+An interactive React visualizer for algorithms and data structures. The isolated **Visualizer Playground** accepts ordinary Python or `viz` JavaScript, runs it in a bounded worker, and turns runtime state into a navigable visual timeline.
+
+## WebMCP agent collaboration
+
+The Playground exposes six native [WebMCP](https://webmachinelearning.github.io/webmcp/) tools through `document.modelContext.registerTool(...)`. A browser agent can understand and operate the live application through structured actions instead of guessing at buttons or editor coordinates:
+
+| Tool | What the person and agent can do together |
+|---|---|
+| `visualizer_get_workspace` | Inspect run state, discovered variables, mappings, and bounded source/input chunks. |
+| `visualizer_run` | Run only the code and inputs the person has accepted in the isolated worker. |
+| `visualizer_get_frame` | Read the current operation and a compact semantic snapshot of visible structures. |
+| `visualizer_control_playback` | Play, pause, step, rewind, jump to a frame, or change timeline speed. |
+| `visualizer_configure_visuals` | Map traced variables to arrays, grids, graphs, trees, scalars, and pointer highlights. |
+| `visualizer_propose_python` | Stage complete code/input changes as a red/green diff; nothing changes until the person accepts. |
+
+This creates a review-gated workflow: the agent can diagnose and propose, while the person keeps control over code and inputs. Read-only results containing user code or runtime values are marked as untrusted content, outputs are bounded, tool inputs use strict JSON Schemas, and registrations are removed automatically when the Playground unmounts.
+
+Open the deployed app at `/#playground`. WebMCP works in ChatGPT's supported in-app browser or in a compatible Chrome build with WebMCP testing enabled. In other browsers, the ordinary human interface continues to work and the header reports that the WebMCP preview is unavailable.
+
+### Local development
+
+```bash
+npm install
+npm run dev
+```
+
+Then open `http://127.0.0.1:3010/#playground`.
+
+### Verification
+
+```bash
+npm run test:webmcp
+npm run test:playground-python
+npx eslint src/playground/RuntimePlayground.jsx src/playground/AIFixReview.jsx src/playground/webmcp/playgroundWebMCP.js src/playground/webmcp/playgroundWebMCP.test.mjs
+```
+
+The WebMCP unit tests verify tool metadata, dispatch, cancellation, abort-controlled registration, bounded scene summaries, and semantic no-op rejection. Native discovery and invocation should also be exercised in ChatGPT's in-app browser or a WebMCP-enabled Chrome before deployment.
+
+## Vite development notes
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 

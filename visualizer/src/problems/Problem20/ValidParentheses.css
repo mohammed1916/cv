@@ -11,51 +11,10 @@
   min-height: 0;
 }
 
-.valid-parentheses-panel {
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  overflow: hidden;
-}
 
-.valid-parentheses-panel-head {
-  padding: 12px 16px;
-  background: var(--surface-3);
-  border-bottom: 1px solid var(--border);
-  font-weight: 600;
-  font-size: 13px;
-  color: var(--text-main);
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
 
-.valid-parentheses-panel-body {
-  padding: 16px;
-  flex: 1;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-}
 
-.valid-parentheses-example-btn {
-  padding: 4px 12px;
-  border-radius: 99px;
-  font-size: 12px;
-  cursor: pointer;
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  color: var(--text-muted);
-  transition: all 0.2s ease;
-}
 
-.valid-parentheses-example-btn:hover {
-  background: var(--border);
-  color: var(--surface);
-}
 
 .valid-parentheses-input {
   padding: 8px 12px;

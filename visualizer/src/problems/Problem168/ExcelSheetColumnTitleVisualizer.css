@@ -1,42 +1,6 @@
-.excel_sheet_column_title-shell {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 480px;
-  gap: 0;
-  overflow: hidden;
-}
 
-.excel_sheet_column_title-panel {
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  overflow: hidden;
-}
 
-.excel_sheet_column_title-panel-head {
-  padding: 12px 16px;
-  background: var(--surface-3);
-  border-bottom: 1px solid var(--border);
-  font-weight: 600;
-  font-size: 13px;
-  color: var(--text-main);
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
 
-.excel_sheet_column_title-panel-body {
-  padding: 16px;
-  flex: 1;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-}
 
 .excel_sheet_column_title-status {
   padding: 12px 16px;

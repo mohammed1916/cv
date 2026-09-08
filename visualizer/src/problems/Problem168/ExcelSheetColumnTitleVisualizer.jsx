@@ -89,9 +89,9 @@ export default function ExcelSheetColumnTitleVisualizer() {
 
   // ─── Panel extraction ───────────────────────────────────────────────────
   const primaryPanel = (
-    <div className="excel_sheet_column_title-panel">
-      <div className="excel_sheet_column_title-panel-head">Input & State</div>
-      <div className="excel_sheet_column_title-panel-body">
+    <div className="vis-panel excel_sheet_column_title-panel">
+      <div className="vis-panel-head excel_sheet_column_title-panel-head">Input & State</div>
+      <div className="vis-panel-body excel_sheet_column_title-panel-body">
         <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
           {EXAMPLES?.map((ex) => (
             <button
@@ -122,9 +122,9 @@ export default function ExcelSheetColumnTitleVisualizer() {
   )
 
   const statePanel = (
-    <div className="excel_sheet_column_title-panel">
-      <div className="excel_sheet_column_title-panel-head">Step Details</div>
-      <div className="excel_sheet_column_title-panel-body">
+    <div className="vis-panel excel_sheet_column_title-panel">
+      <div className="vis-panel-head excel_sheet_column_title-panel-head">Step Details</div>
+      <div className="vis-panel-body excel_sheet_column_title-panel-body">
         {step && <div className="excel_sheet_column_title-details">{/* Details */}</div>}
       </div>
     </div>
@@ -187,7 +187,7 @@ export default function ExcelSheetColumnTitleVisualizer() {
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
-    <div className="excel_sheet_column_title-shell">
+    <div className="vis-shell excel_sheet_column_title-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
         <>

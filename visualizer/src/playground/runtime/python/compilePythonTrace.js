@@ -249,6 +249,7 @@ function normalizeBindings(bindings, variables) {
       variableId: typeof variable.id === 'string' && variable.id ? variable.id : null,
       label: sanitizeLabel(config.label, name),
       enabled: config.enabled !== false,
+      explicitKind: Boolean(requestedKind && requestedKind !== 'auto'),
       kind,
       view: String(config.view || defaultView(kind)),
       role,
@@ -262,7 +263,17 @@ function normalizeBindings(bindings, variables) {
 }
 
 function createContainer({ binding, id, value, previous, runtimeType, changed }) {
-  if (binding.kind === 'graph' || binding.kind === 'tree') {
+  if (binding.name === '$return' && !binding.explicitKind && isLinkedListNode(value)) {
+    return createSequenceContainer(
+      { ...binding, view: binding.view || 'cells' },
+      id,
+      linkedListToArray(value),
+      isLinkedListNode(previous) ? linkedListToArray(previous) : previous,
+      'list',
+      changed,
+    )
+  }
+  if (binding.kind === 'graph' || binding.kind === 'tree' || binding.kind === 'heap') {
     return createNodeLinkContainer(binding, id, value, previous, changed)
   }
   if (binding.kind === 'grid') {
@@ -397,7 +408,11 @@ function createAssociativeContainer(binding, id, value, previous, runtimeType, c
 }
 
 function createNodeLinkContainer(binding, id, value, previous, changed) {
-  const build = binding.kind === 'tree' ? buildTreeData : buildGraphData
+  const build = binding.kind === 'tree'
+    ? buildTreeData
+    : binding.kind === 'heap'
+      ? buildHeapData
+      : buildGraphData
   const current = build(value, id, binding)
   const previousData = previous === undefined ? { nodes: [], edges: [] } : build(previous, id, binding)
   const previousNodes = new Map(previousData.nodes.map((node) => [String(node.id), stableKey({
@@ -418,8 +433,8 @@ function createNodeLinkContainer(binding, id, value, previous, changed) {
     type: binding.kind,
     bindingName: binding.name,
     view: binding.view,
-    directed: binding.directed ?? current.directed ?? binding.kind === 'tree',
-    layout: binding.layout || current.layout || (binding.kind === 'tree' ? 'tree' : 'circle'),
+    directed: binding.directed ?? current.directed ?? ['tree', 'heap'].includes(binding.kind),
+    layout: binding.layout || current.layout || (['tree', 'heap'].includes(binding.kind) ? 'tree' : 'circle'),
     nodes: current.nodes.slice(0, RUNTIME_LIMITS.maxNodes).map((node) => ({
       ...node,
       state: node.state ?? (
@@ -442,6 +457,32 @@ function createNodeLinkContainer(binding, id, value, previous, changed) {
       ),
     })),
   }
+}
+
+function buildHeapData(value, id) {
+  const values = Array.isArray(value)
+    ? value
+    : isPlainObject(value) && Array.isArray(value.items)
+      ? value.items
+      : []
+  const nodes = values.slice(0, RUNTIME_LIMITS.maxNodes).map((item, index) => ({
+    id: `${id}-heap-${index}`,
+    label: compactRuntimeValue(item),
+    value: compactRuntimeValue(item),
+    index,
+  }))
+  const edges = []
+  for (let index = 1; index < nodes.length && edges.length < RUNTIME_LIMITS.maxEdges; index += 1) {
+    const parent = Math.floor((index - 1) / 2)
+    if (!nodes[parent]) continue
+    edges.push({
+      id: `${id}-heap-edge-${parent}-${index}`,
+      from: nodes[parent].id,
+      to: nodes[index].id,
+      directed: true,
+    })
+  }
+  return { nodes, edges, directed: true, layout: 'tree' }
 }
 
 function buildGraphData(value, id, binding) {
@@ -533,6 +574,22 @@ function buildLinkedListData(value, id) {
     }
   })
   return { nodes, edges, directed: true, layout: heads.length > 1 ? 'tree' : 'linear' }
+}
+
+function linkedListToArray(head) {
+  const values = []
+  const seen = new Set()
+  let current = head
+  while (isLinkedListNode(current) && values.length < RUNTIME_LIMITS.maxSequenceItems) {
+    if (seen.has(current)) break
+    seen.add(current)
+    values.push(cloneJsonValue(current.val))
+    current = current.next
+  }
+  if (current !== null && current !== undefined) {
+    values.push(typeof current === 'string' ? current : '[Truncated or circular]')
+  }
+  return values
 }
 
 function buildTreeData(value, id, binding) {
@@ -782,6 +839,7 @@ function normalizeBindingKind(value) {
   if (['map', 'dict', 'set', 'counter', 'associative'].includes(kind)) return 'associative'
   if (['graph', 'network', 'node-link'].includes(kind)) return 'graph'
   if (['tree', 'binary-tree', 'bst'].includes(kind)) return 'tree'
+  if (['heap', 'priority-queue', 'priorityqueue'].includes(kind)) return 'heap'
   return 'scalar'
 }
 
@@ -789,7 +847,7 @@ function defaultView(kind) {
   if (kind === 'sequence') return 'cells'
   if (kind === 'grid') return 'table'
   if (kind === 'graph') return 'circle'
-  if (kind === 'tree') return 'tree'
+  if (kind === 'tree' || kind === 'heap') return 'tree'
   return 'auto'
 }
 

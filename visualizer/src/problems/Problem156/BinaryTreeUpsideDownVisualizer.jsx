@@ -92,9 +92,9 @@ export default function BinaryTreeUpsideDownVisualizer() {
 
   // Extract panel constants
   const primaryPanel = (
-    <div className="binary_tree_upside_down-panel">
-      <div className="binary_tree_upside_down-panel-head">Input & State</div>
-      <div className="binary_tree_upside_down-panel-body">
+    <div className="vis-panel binary_tree_upside_down-panel">
+      <div className="vis-panel-head binary_tree_upside_down-panel-head">Input & State</div>
+      <div className="vis-panel-body binary_tree_upside_down-panel-body">
         <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
           {EXAMPLES?.map((ex) => (
             <button
@@ -125,9 +125,9 @@ export default function BinaryTreeUpsideDownVisualizer() {
   )
 
   const statePanel = (
-    <div className="binary_tree_upside_down-panel">
-      <div className="binary_tree_upside_down-panel-head">Step Details</div>
-      <div className="binary_tree_upside_down-panel-body">
+    <div className="vis-panel binary_tree_upside_down-panel">
+      <div className="vis-panel-head binary_tree_upside_down-panel-head">Step Details</div>
+      <div className="vis-panel-body binary_tree_upside_down-panel-body">
         {step && <div className="binary_tree_upside_down-details">{/* Details */}</div>}
       </div>
     </div>
@@ -190,7 +190,7 @@ export default function BinaryTreeUpsideDownVisualizer() {
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
-    <div className="binary_tree_upside_down-shell">
+    <div className="vis-shell binary_tree_upside_down-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
         <>

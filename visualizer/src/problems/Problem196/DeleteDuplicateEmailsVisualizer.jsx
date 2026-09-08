@@ -90,9 +90,9 @@ export default function DeleteDuplicateEmailsVisualizer() {
     { id: 'right', title: "Step Details", dockMode: 'split-right' },
   ], [])
   const panelContents = {
-    left: (<div className="delete_duplicate_emails-panel">
-            <div className="delete_duplicate_emails-panel-head">Input & State</div>
-            <div className="delete_duplicate_emails-panel-body">
+    left: (<div className="vis-panel delete_duplicate_emails-panel">
+            <div className="vis-panel-head delete_duplicate_emails-panel-head">Input & State</div>
+            <div className="vis-panel-body delete_duplicate_emails-panel-body">
               <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
                 {EXAMPLES?.map((ex) => (
                   <button
@@ -120,9 +120,9 @@ export default function DeleteDuplicateEmailsVisualizer() {
               </div>
             </div>
           </div>),
-    right: (<div className="delete_duplicate_emails-panel">
-            <div className="delete_duplicate_emails-panel-head">Step Details</div>
-            <div className="delete_duplicate_emails-panel-body">
+    right: (<div className="vis-panel delete_duplicate_emails-panel">
+            <div className="vis-panel-head delete_duplicate_emails-panel-head">Step Details</div>
+            <div className="vis-panel-body delete_duplicate_emails-panel-body">
               {step && <div className="delete_duplicate_emails-details">{/* Details */}</div>}
             </div>
           </div>),

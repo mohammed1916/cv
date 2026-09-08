@@ -90,9 +90,9 @@ export default function LargestNumberVisualizer() {
     { id: 'right', title: "Step Details", dockMode: 'split-right' },
   ], [])
   const panelContents = {
-    left: (<div className="largest_number-panel">
-            <div className="largest_number-panel-head">Input & State</div>
-            <div className="largest_number-panel-body">
+    left: (<div className="vis-panel largest_number-panel">
+            <div className="vis-panel-head largest_number-panel-head">Input & State</div>
+            <div className="vis-panel-body largest_number-panel-body">
               <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
                 {EXAMPLES?.map((ex) => (
                   <button
@@ -120,9 +120,9 @@ export default function LargestNumberVisualizer() {
               </div>
             </div>
           </div>),
-    right: (<div className="largest_number-panel">
-            <div className="largest_number-panel-head">Step Details</div>
-            <div className="largest_number-panel-body">
+    right: (<div className="vis-panel largest_number-panel">
+            <div className="vis-panel-head largest_number-panel-head">Step Details</div>
+            <div className="vis-panel-body largest_number-panel-body">
               {step && <div className="largest_number-details">{/* Details */}</div>}
             </div>
           </div>),

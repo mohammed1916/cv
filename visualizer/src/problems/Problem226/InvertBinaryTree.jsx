@@ -90,18 +90,18 @@ export default function InvertBinaryTree() {
     { id: 'right', title: "Details", dockMode: 'split-right' },
   ], [])
   const panelContents = {
-    left: (<div className="invert-binary-tree-panel">
-            <div className="invert-binary-tree-panel-head">
+    left: (<div className="vis-panel invert-binary-tree-panel">
+            <div className="vis-panel-head invert-binary-tree-panel-head">
               Input
               {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
             </div>
-            <div className="invert-binary-tree-panel-body">
+            <div className="vis-panel-body invert-binary-tree-panel-body">
               <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
                 {EXAMPLES.map((ex) => (
                   <button
                     key={ex.label}
                     onClick={() => applyExample(ex)}
-                    className="invert-binary-tree-example-btn"
+                    className="vis-example-btn invert-binary-tree-example-btn"
                   >
                     {ex.label}
                   </button>
@@ -136,9 +136,9 @@ export default function InvertBinaryTree() {
               </div>
             </div>
           </div>),
-    right: (<div className="invert-binary-tree-panel">
-            <div className="invert-binary-tree-panel-head">Details</div>
-            <div className="invert-binary-tree-panel-body">
+    right: (<div className="vis-panel invert-binary-tree-panel">
+            <div className="vis-panel-head invert-binary-tree-panel-head">Details</div>
+            <div className="vis-panel-body invert-binary-tree-panel-body">
               <div className="invert-binary-tree-info">
                 <h3>Problem 226</h3>
                 <p><strong>Story:</strong> Tree Mirror Reflection - watch nodes flip and swap in a graceful recursion dance</p>

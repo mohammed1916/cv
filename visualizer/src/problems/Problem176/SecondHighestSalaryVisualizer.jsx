@@ -89,9 +89,9 @@ export default function SecondHighestSalaryVisualizer() {
 
   // Extract panels into consts
   const primaryPanel = (
-    <div className="second_highest_salary-panel">
-      <div className="second_highest_salary-panel-head">Input & State</div>
-      <div className="second_highest_salary-panel-body">
+    <div className="vis-panel second_highest_salary-panel">
+      <div className="vis-panel-head second_highest_salary-panel-head">Input & State</div>
+      <div className="vis-panel-body second_highest_salary-panel-body">
         <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
           {EXAMPLES?.map((ex) => (
             <button
@@ -122,9 +122,9 @@ export default function SecondHighestSalaryVisualizer() {
   )
 
   const statePanel = (
-    <div className="second_highest_salary-panel">
-      <div className="second_highest_salary-panel-head">Step Details</div>
-      <div className="second_highest_salary-panel-body">
+    <div className="vis-panel second_highest_salary-panel">
+      <div className="vis-panel-head second_highest_salary-panel-head">Step Details</div>
+      <div className="vis-panel-body second_highest_salary-panel-body">
         {step && <div className="second_highest_salary-details">{/* Details */}</div>}
       </div>
     </div>

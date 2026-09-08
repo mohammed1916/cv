@@ -92,9 +92,9 @@ export default function NthHighestSalaryVisualizer() {
 
   // Step 3: Extract panel components
   const primaryPanel = (
-    <div className="nth_highest_salary-panel">
-      <div className="nth_highest_salary-panel-head">Input & State</div>
-      <div className="nth_highest_salary-panel-body">
+    <div className="vis-panel nth_highest_salary-panel">
+      <div className="vis-panel-head nth_highest_salary-panel-head">Input & State</div>
+      <div className="vis-panel-body nth_highest_salary-panel-body">
         <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
           {EXAMPLES?.map((ex) => (
             <button
@@ -125,9 +125,9 @@ export default function NthHighestSalaryVisualizer() {
   )
 
   const statePanel = (
-    <div className="nth_highest_salary-panel">
-      <div className="nth_highest_salary-panel-head">Step Details</div>
-      <div className="nth_highest_salary-panel-body">
+    <div className="vis-panel nth_highest_salary-panel">
+      <div className="vis-panel-head nth_highest_salary-panel-head">Step Details</div>
+      <div className="vis-panel-body nth_highest_salary-panel-body">
         {step && <div className="nth_highest_salary-details">{/* Details */}</div>}
       </div>
     </div>

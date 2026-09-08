@@ -270,10 +270,81 @@ class Solution:
   assert.equal(listsContainer.category, 'node-link')
   assert.ok(listsContainer.nodes.every((item) => typeof item.label === 'number'))
   assert.ok(listsContainer.edges.length > 0)
+  const returnContainer = compiled.frames.map((frame) => container(frame, '$return')).find((item) => item?.items?.length)
+  assert.equal(returnContainer.category, 'sequence')
+  assert.deepEqual(
+    returnContainer.items.map((item) => item.value),
+    [1, 1, 2, 3, 4, 4, 5, 6],
+  )
   const heapContainers = compiled.frames.map((frame) => container(frame, 'heap')).filter(Boolean)
-  const heapText = JSON.stringify(heapContainers.flatMap((item) => item.items))
+  assert.ok(heapContainers.some(item => item.type === 'heap' && item.nodes.length > 0))
+  const heapText = JSON.stringify(heapContainers.flatMap((item) => item.nodes))
   assert.doesNotMatch(heapText, /__class__/)
   assert.match(heapText, /ListNode\(/)
+})
+
+test('long returned chains preserve duplicates and allow an explicit node view', () => {
+  const values = Array.from({ length: 60 }, (_, index) => Math.floor(index / 2))
+  const trace = runTrace(`
+class Solution:
+    def solve(self, head: ListNode):
+        return head
+`, { head: values })
+  const defaults = createDefaultPythonBindings(trace)
+  const compiled = compilePythonTrace(trace, defaults)
+  assert.deepEqual(container(compiled.frames.at(-1), '$return').items.map(item => item.value), values)
+  const graph = compilePythonTrace(trace, {
+    ...defaults, '$return': { ...defaults.$return, kind: 'graph' },
+  })
+  const nodes = container(graph.frames.at(-1), '$return')
+  assert.deepEqual(nodes.nodes.map(node => node.value), values)
+  assert.equal(nodes.edges.length, values.length - 1)
+})
+
+test('circular returned chains visibly mark their boundary', () => {
+  const trace = runTrace(`
+class Solution:
+    def solve(self):
+        head = ListNode(1)
+        head.next = ListNode(1)
+        head.next.next = head
+        return head
+`, {})
+  const compiled = compilePythonTrace(trace, createDefaultPythonBindings(trace))
+  assert.deepEqual(container(compiled.frames.at(-1), '$return').items.map(item => item.value), [1, 1, '[Circular]'])
+})
+
+test('explicit heap bindings compile Python lists into tree-shaped node links', () => {
+  const trace = runTrace(`
+class Solution:
+    def solve(self, values):
+        heap = []
+        for value in values:
+            heappush(heap, value)
+        return heap[0]
+`, { values: [5, 1, 7, 3] })
+  const defaults = createDefaultPythonBindings(trace)
+  const compiled = compilePythonTrace(trace, {
+    ...defaults,
+    heap: {
+      ...defaults.heap,
+      kind: 'heap',
+      view: 'tree',
+    },
+  })
+  const heapContainer = compiled.frames.map((frame) => container(frame, 'heap')).find((item) => item?.nodes?.length >= 4)
+
+  assert.equal(heapContainer.category, 'node-link')
+  assert.equal(heapContainer.type, 'heap')
+  assert.equal(heapContainer.layout, 'tree')
+  assert.equal(heapContainer.directed, true)
+  assert.deepEqual(heapContainer.edges.map((edge) => (
+    [edge.from.split('-heap-').at(-1), edge.to.split('-heap-').at(-1)]
+  )), [
+    ['0', '1'],
+    ['0', '2'],
+    ['1', '3'],
+  ])
 })
 
 test('different executed lines survive unchanged locals and truncation preserves final state', () => {

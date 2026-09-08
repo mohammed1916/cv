@@ -11,6 +11,8 @@ export default function FloatingPanel({
   title = "Panel",
   children,
   defaultPosition = null,
+  defaultSize = { width: 460, height: 148 },
+  storageKey = "floating-playback-size",
 }) {
   const panelRef = useRef(null);
   const dragState = useRef(null);
@@ -24,7 +26,7 @@ export default function FloatingPanel({
   const [size, setSize] = useState(() => {
     try {
       const stored = JSON.parse(
-        window.localStorage.getItem("floating-playback-size"),
+        window.localStorage.getItem(storageKey),
       );
 
       if (
@@ -37,10 +39,7 @@ export default function FloatingPanel({
       // Ignore invalid persisted values.
     }
 
-    return {
-      width: 460,
-      height: 148,
-    };
+    return defaultSize;
   });
 
   useLayoutEffect(() => {
@@ -73,13 +72,13 @@ export default function FloatingPanel({
   useLayoutEffect(() => {
     try {
       window.localStorage.setItem(
-        "floating-playback-size",
+        storageKey,
         JSON.stringify(size),
       );
     } catch {
       // Storage can be unavailable.
     }
-  }, [size]);
+  }, [size, storageKey]);
 
   const clampToViewport = (point) => {
     const node = panelRef.current;

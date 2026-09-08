@@ -234,13 +234,13 @@ export default function LRUCacheVisualizer() {
 
   // Extract panels
   const inputPanel = (
-    <div className="lru-panel-body">
+    <div className="vis-panel-body lru-panel-body">
       <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
         {EXAMPLES.map((ex) => (
           <button
             key={ex.label}
             onClick={() => applyExample(ex)}
-            className="lru-example-btn"
+            className="vis-example-btn lru-example-btn"
           >
             {ex.label}
           </button>
@@ -301,7 +301,7 @@ export default function LRUCacheVisualizer() {
         inputError={inputError}
       />
 
-    <div className="lru-panel-body lru-visuals">
+    <div className="vis-panel-body lru-panel-body lru-visuals">
       {/* Linked List visualization */}
       <div className="lru-list-container">
         <span className="lru-section-title">
@@ -440,7 +440,7 @@ export default function LRUCacheVisualizer() {
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   return (
-    <div className="lru-shell">
+    <div className="vis-shell lru-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
         <>

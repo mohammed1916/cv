@@ -80,6 +80,32 @@ def _runtime_type(value):
     return type(value).__name__
 
 
+def _is_list_node_like(value):
+    if value is None or isinstance(value, (bool, int, float, str, bytes)):
+        return False
+    return hasattr(value, "val") and hasattr(value, "next")
+
+
+def _safe_list_node(value, seen=None):
+    if seen is None:
+        seen = set()
+    identity = id(value)
+    if identity in seen:
+        return "[Circular]"
+    seen.add(identity)
+    output = {"__class__": type(value).__name__}
+    try:
+        output["val"] = _safe(getattr(value, "val", None), 0, seen)
+        next_node = getattr(value, "next", None)
+        if _is_list_node_like(next_node):
+            output["next"] = _safe_list_node(next_node, seen) if len(seen) < _MAX_ITEMS else "[Max items]"
+        else:
+            output["next"] = _safe(next_node, 0, seen)
+        return output
+    finally:
+        seen.discard(identity)
+
+
 def _safe(value, depth=0, seen=None):
     if value is None or isinstance(value, (bool, int)):
         return value
@@ -100,6 +126,8 @@ def _safe(value, depth=0, seen=None):
 
     if seen is None:
         seen = set()
+    if _is_list_node_like(value):
+        return _safe_list_node(value, seen)
     identity = id(value)
     if identity in seen:
         return "[Circular]"
@@ -138,6 +166,9 @@ def _suggested_kind(name, runtime_type, value):
     if "listnode" in str(runtime_type).lower():
         return "graph"
     if runtime_type == "list":
+        lowered_name = str(name).lower()
+        if lowered_name.endswith("heap") or "priority_queue" in lowered_name:
+            return "heap"
         if value and all(
             item is None or (
                 isinstance(item, dict)

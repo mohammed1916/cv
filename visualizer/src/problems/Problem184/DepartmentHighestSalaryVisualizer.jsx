@@ -97,9 +97,9 @@ export default function DepartmentHighestSalaryVisualizer() {
     { id: 'right', title: "Step Details", dockMode: 'split-right' },
   ], [])
   const panelContents = {
-    left: (<div className="department_highest_salary-panel">
-            <div className="department_highest_salary-panel-head">Input & State</div>
-            <div className="department_highest_salary-panel-body">
+    left: (<div className="vis-panel department_highest_salary-panel">
+            <div className="vis-panel-head department_highest_salary-panel-head">Input & State</div>
+            <div className="vis-panel-body department_highest_salary-panel-body">
               <div style={{ display: "flex", gap: 6, marginBottom: 16, flexWrap: "wrap" }}>
                 {EXAMPLES?.map((ex) => (
                   <button
@@ -127,9 +127,9 @@ export default function DepartmentHighestSalaryVisualizer() {
               </div>
             </div>
           </div>),
-    right: (<div className="department_highest_salary-panel">
-            <div className="department_highest_salary-panel-head">Step Details</div>
-            <div className="department_highest_salary-panel-body">
+    right: (<div className="vis-panel department_highest_salary-panel">
+            <div className="vis-panel-head department_highest_salary-panel-head">Step Details</div>
+            <div className="vis-panel-body department_highest_salary-panel-body">
               {step && <div className="department_highest_salary-details">{/* Details */}</div>}
             </div>
           </div>),
