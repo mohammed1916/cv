@@ -26,6 +26,7 @@
     "@lumino/messaging": "^2.0.5",
     "@lumino/widgets": "^2.9.0",
     "@monaco-editor/react": "^4.7.0",
+    "@vercel/analytics": "^2.0.1",
     "ai": "^7.0.66",
     "framer-motion": "^12.38.0",
     "html2canvas": "^1.4.1",
