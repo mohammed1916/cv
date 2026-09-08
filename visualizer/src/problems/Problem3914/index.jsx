@@ -3,6 +3,12 @@ import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, valueAtStep, code } from './algorithm'
 
 const definition = {
+  phases: [
+    { id: 'start', label: 'Input', description: 'Initialize total cost.' },
+    { id: 'compare', label: 'Compare / drop', description: 'Measure the positive drop at the current boundary.' },
+    { id: 'apply', label: 'Apply / skip', description: 'Pay for the suffix increment, or skip a zero drop.' },
+    { id: 'done', label: 'Complete', description: 'Return the minimum total cost.' },
+  ],
   parse: parseInput, build: buildTrace, code, inputLabel: 'Array nums (JSON)',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-array-non-decreasing/',
   complexity: 'The solver uses O(n) time and O(1) extra space. This visualization stores O(n) events and cumulative offsets, not a full array copy per step.',

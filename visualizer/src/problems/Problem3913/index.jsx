@@ -3,6 +3,13 @@ import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code } from './algorithm'
 
 const definition = {
+  phases: [
+    { id: 'start', label: 'Input', description: 'Initialize vowel counts and fixed consonant slots.' },
+    { id: 'count', label: 'Scan / count', description: 'Scan each character and count vowels.' },
+    { id: 'rank', label: 'Rank', description: 'Sort groups by frequency, then first occurrence.' },
+    { id: 'write', label: 'Place', description: 'Write ranked vowels into the original vowel slots.' },
+    { id: 'done', label: 'Complete', description: 'Return the rearranged string.' },
+  ],
   parse: parseInput, build: buildTrace, code, inputLabel: 'String s (JSON)',
   url: 'https://leetcode.com/problems/sort-vowels-by-frequency/',
   complexity: 'O(n) time and O(n) space. Only five vowel kinds need ranking. Every execution step is retained; long sequences are paged.',

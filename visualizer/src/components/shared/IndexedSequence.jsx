@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 // A window into the full collection, never a truncated replacement for it.
-export default function IndexedSequence({ label, length, valueAt, active = -1, roleAt = () => '' }) {
+export default function IndexedSequence({ label, length, valueAt, active = -1, roleAt = () => '', indexOffset = 0 }) {
   const [selectedPage, setSelectedPage] = useState(null)
   const pageSize = 32
   const lastPage = Math.max(0, Math.ceil(length / pageSize) - 1)
@@ -14,7 +14,7 @@ export default function IndexedSequence({ label, length, valueAt, active = -1, r
       const index = start + offset
       const role = roleAt(index)
       return <div key={index} className={`algorithm-sequence__cell ${index === active ? 'is-active' : ''}`} data-role={role}>
-        <small>[{index}]</small><strong>{valueAt(index)}</strong><span>{index === active ? 'current' : role || '\u00a0'}</span>
+        <small>[{index + indexOffset}]</small><strong>{valueAt(index)}</strong><span>{index === active ? 'current' : role || '\u00a0'}</span>
       </div>
     })}</div>
     {length > pageSize && <nav aria-label={`${label} pages`}>

@@ -12,7 +12,7 @@
     "test:providers": "node --test src/services/chatProviders.test.mjs",
     "audit:visualizers": "node scripts/audit-visualizer-contract.mjs",
     "audit:css": "node scripts/audit-css-duplication.mjs",
-    "test:recent-visualizers": "node --test src/problems/recentVisualizers.test.mjs",
+    "test:recent-visualizers": "node --test src/problems/recentVisualizers.test.mjs src/problems/Problem3915/algorithm.test.mjs src/problems/Problem3894/algorithm.test.mjs src/problems/Problem3895/algorithm.test.mjs src/problems/Problem3896/algorithm.test.mjs src/problems/Problem3899/algorithm.test.mjs src/problems/Problem3905/algorithm.test.mjs src/problems/Problem3908/algorithm.test.mjs src/problems/Problem3909/algorithm.test.mjs src/problems/Problem3910/algorithm.test.mjs src/problems/families/stableIndex/algorithm.test.mjs",
     "check:css-migration": "node scripts/check-css-migration.mjs",
     "preview": "vite preview",
     "refresh:leetcode": "node scripts/fetch-leetcode-catalog.mjs",
