@@ -88,7 +88,27 @@ export default function IntersectionofTwoArraysVisualizer() {
       <div className="intersectionof-two-arrays-viz">
         <div className="intersectionof-two-arrays-step-info">
           <h3>{step?.message}</h3>
-        </div><PointerRail title="Scan nums2" values={input.nums2} pointers={step?.index === undefined ? [] : [{ id: 'i', label: 'i', index: step.index, tone: step.match ? 'success' : 'warning' }]} /><div className="intersectionof-two-arrays-result">set(nums1): {'{' + (step?.seen || []).join(', ') + '}'} · intersection: [{' + (step?.result || []).join(', ') + '}]</div>
+        </div>
+        <PointerRail
+          title="Scan nums2"
+          values={input.nums2}
+          pointers={
+            step?.index === undefined
+              ? []
+              : [
+                {
+                  id: 'i',
+                  label: 'i',
+                  index: step.index,
+                  tone: step.match ? 'success' : 'warning',
+                },
+              ]
+          }
+        />
+        <div className="intersectionof-two-arrays-result">
+          set(nums1): {'{' + (step?.seen || []).join(', ') + '}'} · intersection:{' '}
+          {'[' + (step?.result || []).join(', ') + ']'}
+        </div>
       </div>
     )
   }
@@ -99,24 +119,24 @@ export default function IntersectionofTwoArraysVisualizer() {
   ], [])
   const panelContents = {
     left: (<div className="intersectionof-two-arrays-panel intersectionof-two-arrays-panel-input">
-            <div className="intersectionof-two-arrays-panel-head">Input</div>
-            <div className="intersectionof-two-arrays-panel-body">
-              <textarea
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                className="intersectionof-two-arrays-textarea"
-                placeholder="Enter input..."
-              />
-            </div>
-          </div>),
+      <div className="intersectionof-two-arrays-panel-head">Input</div>
+      <div className="intersectionof-two-arrays-panel-body">
+        <textarea
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          className="intersectionof-two-arrays-textarea"
+          placeholder="Enter input..."
+        />
+      </div>
+    </div>),
     right: (<div className="intersectionof-two-arrays-panel intersectionof-two-arrays-panel-viz">
-            <div className="intersectionof-two-arrays-panel-head">Visualization</div>
-            <div className="intersectionof-two-arrays-panel-body">
-              <AnimatePresence mode="wait">
-                {renderVisualization()}
-              </AnimatePresence>
-            </div>
-          </div>),
+      <div className="intersectionof-two-arrays-panel-head">Visualization</div>
+      <div className="intersectionof-two-arrays-panel-body">
+        <AnimatePresence mode="wait">
+          {renderVisualization()}
+        </AnimatePresence>
+      </div>
+    </div>),
   }
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])

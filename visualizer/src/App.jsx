@@ -869,6 +869,7 @@ export default function App() {
 
   const utilityControls = (
     <>
+      <a href="/privacy.html" style={{ color: "var(--text-muted)", fontSize: 13 }}>Privacy</a>
       <ThemeToggle />
       <SettingsMenu
         navigationTransitionsEnabled={navigationTransitionsEnabled}

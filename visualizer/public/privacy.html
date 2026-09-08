@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="How CP Visualizer handles analytics, browser storage, and optional AI features." />
+    <title>Privacy Policy | CP Visualizer</title>
+    <style>
+      :root { color-scheme: light dark; font-family: system-ui, sans-serif; line-height: 1.65; letter-spacing: 0; }
+      body { margin: 0; background: #fafafa; color: #202124; }
+      main { max-width: 720px; margin: auto; padding: 32px 24px 64px; overflow-wrap: anywhere; }
+      nav { padding-bottom: 24px; border-bottom: 1px solid #d4d4d4; }
+      a { color: #1759a6; text-underline-offset: 3px; }
+      a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+      h1 { font-size: 32px; line-height: 1.2; margin-bottom: 8px; }
+      h2 { font-size: 20px; line-height: 1.3; margin-top: 32px; }
+      .updated { color: #595959; font-size: 14px; }
+      @media (prefers-color-scheme: dark) {
+        body { background: #171717; color: #ededed; }
+        a { color: #93c5fd; }
+        nav { border-color: #525252; }
+        .updated { color: #bdbdbd; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <nav aria-label="Site"><a href="/">CP Visualizer</a></nav>
+      <h1>Privacy Policy</h1>
+      <p class="updated">Last updated: September 8, 2026</p>
+      <p>This notice explains how CP Visualizer handles information when you browse problems, use the playground, or request AI assistance.</p>
+
+      <h2>Visitor analytics</h2>
+      <p>We use Vercel Web Analytics to understand site traffic and improve the site. It collects page-view information such as the page URL, referring site, time, approximate location, browser, operating system, and device type. The app does not send chat messages or playground source code as analytics events.</p>
+      <p>Vercel Web Analytics does not use cookies. It derives a temporary visitor identifier from incoming requests, discards visitor sessions after 24 hours, and provides aggregate statistics. That session lifetime is not a promise that all analytics statistics are deleted after 24 hours. See <a href="https://vercel.com/docs/analytics/privacy-policy">Vercel's analytics privacy documentation</a> for details.</p>
+
+      <h2>Browser storage</h2>
+      <p>The app uses local storage to remember preferences, AI provider settings, chat history, and playground code and inputs. This data remains in your browser until you delete it or clear this site's data. API keys entered in the playground's provider controls are stored in session storage, which normally lasts for the browser tab's session.</p>
+      <p>You can remove saved data using your browser's site-data settings. This also resets preferences and removes locally saved work. Close other open tabs of this site first so they do not save their current state again. These storage features support the app; they are not advertising cookies.</p>
+
+      <h2>Optional AI features</h2>
+      <p>When you request AI assistance, your messages and relevant context, which may include conversation history, problem details, visualization state, source code, inputs, or errors, are sent to the selected provider. Hosted Ollama and Google Gemini requests pass through the site's API. A key you supply for that request also passes through the API to authenticate with the provider. Local Ollama requests go directly to the configured Ollama server.</p>
+      <p>Provider processing and retention depend on the provider and account settings. See <a href="https://ollama.com/privacy">Ollama's privacy policy</a> and <a href="https://policies.google.com/privacy">Google's privacy policy</a>. Avoid including sensitive personal information or secrets in prompts or code submitted for AI assistance. Clearing browser history does not delete information already sent to a provider.</p>
+
+      <h2>Hosting and external resources</h2>
+      <p>Hosting and API infrastructure process network requests to deliver and protect the service. Those requests include technical information such as IP addresses and request metadata and may appear in operational logs. Some editor and Python runtime resources are loaded from external content delivery networks, which also receive the network information needed to serve them. Their retention practices are separate from locally saved app data.</p>
+
+      <h2>Your choices and questions</h2>
+      <p>You can use the visualizers without requesting AI assistance and clear locally saved data through your browser. Browser privacy tools may also block analytics requests.</p>
+      <p>For privacy questions or requests, contact the maintainer through the <a href="https://github.com/mohammed1916/cv">project's GitHub repository</a>. Do not include private information in a public issue. Depending on your location and the information involved, you may have rights to access, correct, or delete personal information or object to its processing.</p>
+      <p>We will update this page when the site's data practices change.</p>
+    </main>
+  </body>
+</html>
