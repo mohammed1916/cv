@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:firebase": "vite build --mode firebase",
     "lint": "eslint .",
     "test:playground-python": "node --test src/playground/runtime/python/pythonTraceSemantics.test.mjs src/playground/runtime/normalizePythonSource.test.mjs src/playground/runtime/inferPythonInput.test.mjs src/playground/ai/suggestPythonBindings.test.mjs src/playground/ai/workspaceContext.test.mjs",
     "test:webmcp": "node --test src/playground/webmcp/playgroundWebMCP.test.mjs",

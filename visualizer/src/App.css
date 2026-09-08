@@ -113,6 +113,24 @@ body.chat-select-mode * { cursor: crosshair !important; }
   margin-bottom: 0.7rem;
 }
 
+.settings-about {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.settings-about h2 {
+  font-size: 14px;
+  margin: 0 0 8px;
+  color: var(--text);
+}
+
+.settings-about p { margin: 4px 0 8px; }
+.settings-about a { color: var(--primary-l); }
+
 .settings-toggle {
   display: flex;
   align-items: flex-start;

@@ -302,6 +302,13 @@ function SettingsMenu({
             <small>Animate page switches and problem card entrances.</small>
           </span>
         </label>
+        <section className="settings-about" aria-labelledby="settings-about-title">
+          <h2 id="settings-about-title">About</h2>
+          <strong>CP Visualizer</strong>
+          <p>By Teem Treat</p>
+          <p>&copy; {new Date().getFullYear()} <a href="https://teemtreat.com">teemtreat.com</a></p>
+          <a href="/privacy.html">Privacy Policy</a>
+        </section>
       </div>
     </details>
   );
@@ -869,7 +876,6 @@ export default function App() {
 
   const utilityControls = (
     <>
-      <a href="/privacy.html" style={{ color: "var(--text-muted)", fontSize: 13 }}>Privacy</a>
       <ThemeToggle />
       <SettingsMenu
         navigationTransitionsEnabled={navigationTransitionsEnabled}
@@ -922,7 +928,7 @@ export default function App() {
       <ZoomProvider>
       <ZoomControls />
       <div className={`app layout-${layoutWidth}`}>
-        <Analytics />
+        {import.meta.env.VITE_ENABLE_VERCEL_ANALYTICS !== "false" && <Analytics />}
         {!active && !showPlayground && (
           <div className="app-toolbar">{utilityControls}</div>
         )}

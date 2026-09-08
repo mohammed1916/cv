@@ -1,7 +1,8 @@
 {
   "hosting": {
-    "site": "visualizecode",
+    "site": "teemtreat-visualizer",
     "public": "dist",
+    "predeploy": ["npm run build:firebase"],
     "ignore": [
       "firebase.json",
       "**/.*",
