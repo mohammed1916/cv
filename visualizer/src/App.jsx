@@ -6,6 +6,7 @@ import React, {
   Suspense,
 } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Analytics } from "@vercel/analytics/react";
 
 import ProblemScaffold from "./components/panels/ProblemScaffold";
 import ProblemInfoPanel from "./components/ProblemInfoPanel";
@@ -920,6 +921,7 @@ export default function App() {
       <ZoomProvider>
       <ZoomControls />
       <div className={`app layout-${layoutWidth}`}>
+        <Analytics />
         {!active && !showPlayground && (
           <div className="app-toolbar">{utilityControls}</div>
         )}
