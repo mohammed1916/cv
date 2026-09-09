@@ -16,7 +16,9 @@ import ThemeToggle from "./components/ThemeToggle";
 import { ThemeProvider } from "./context/ThemeContext";
 import { useVisualizationContext } from "./context/VisualizationContext";
 import { useChatContext } from "./context/ChatContext";
-import { ChatDrawer } from "./components/Chatbot";
+import "./components/Chatbot/chatbot.css";
+
+const ChatDrawer = React.lazy(() => import("./components/Chatbot/ChatDrawer"));
 import "./App.css";
 import { TRACKS } from "./data/implementedProblems";
 
@@ -403,6 +405,9 @@ function ProblemPage({
 
 function ChatAssistant() {
   const { openChat, closeChat, isOpen, selectMode, toggleSelectMode, attachContext } = useChatContext();
+  const [chatLoaded, setChatLoaded] = useState(false);
+  // Keep the drawer mounted after first use to preserve drafts and active streams.
+  if (isOpen && !chatLoaded) setChatLoaded(true);
 
   useEffect(() => {
     if (!selectMode) return undefined;
@@ -432,7 +437,7 @@ function ChatAssistant() {
     {!isOpen && <button type="button" className={`chat-launcher ${selectMode ? 'selecting' : ''}`} onClick={selectMode ? () => { toggleSelectMode(); document.body.classList.remove('chat-select-mode'); closeChat(); } : openChat} title={selectMode ? 'Exit selection and close chat' : 'Open algorithm assistant'}>
       {selectMode ? 'Select element…' : 'Ask AI'}
     </button>}
-    <ChatDrawer />
+    {chatLoaded && <Suspense fallback={<div role="status">Loading assistant…</div>}><ChatDrawer /></Suspense>}
   </>;
 }
 
@@ -820,11 +825,12 @@ export default function App() {
   const [problemDescriptions, setProblemDescriptions] = useState(null);
 
   useEffect(() => {
+    if (!active || problemDescriptions !== null) return;
     fetch("/data/problemDescriptions.json")
       .then((res) => res.json())
       .then((data) => setProblemDescriptions(data))
       .catch(() => setProblemDescriptions({}));
-  }, []);
+  }, [active, problemDescriptions]);
 
   useEffect(() => {
     try {
