@@ -1,7 +1,7 @@
 /**
  * Fetches problem descriptions from LeetCode's GraphQL API for ALL
  * free (non-paid) problems in the catalog and saves them to
- * public/data/problemDescriptions.json
+ * public/data/descriptions/<slug>.json
  *
  * Usage: node scripts/fetch-problem-descriptions.mjs
  * Supports resuming — already-cached slugs are skipped.
@@ -42,27 +42,24 @@ function sleep(ms) {
 
 async function main() {
     const catalogPath = path.resolve(process.cwd(), 'public/data/leetcodeCatalog.json')
-    const outputPath = path.resolve(process.cwd(), 'public/data/problemDescriptions.json')
+    const outputPath = path.resolve(process.cwd(), 'public/data/descriptions')
+    await fs.mkdir(outputPath, { recursive: true })
 
     const catalogRaw = await fs.readFile(catalogPath, 'utf-8')
     const catalog = JSON.parse(catalogRaw)
 
-    // Load existing output to allow resuming interrupted runs
-    let existing = {}
-    try {
-        const raw = await fs.readFile(outputPath, 'utf-8')
-        existing = JSON.parse(raw)
-    } catch {
-        // fresh start
-    }
+    // Each successful fetch is its own checkpoint, so interrupted runs resume.
+    const existing = new Set((await fs.readdir(outputPath))
+        .filter((name) => name.endsWith('.json'))
+        .map((name) => name.slice(0, -5)))
 
     // All free (non-paid) problems from catalog, sorted by number
     const toFetch = catalog.problems
-        .filter((p) => !p.paidOnly && !existing[p.slug])
+        .filter((p) => !p.paidOnly && !existing.has(p.slug))
         .sort((a, b) => Number(a.number) - Number(b.number))
 
     const totalFree = catalog.problems.filter((p) => !p.paidOnly).length
-    console.log(`Fetching ${toFetch.length} problems (${Object.keys(existing).length}/${totalFree} free problems already cached)…`)
+    console.log(`Fetching ${toFetch.length} problems (${existing.size}/${totalFree} free problems already cached)…`)
 
     let fetched = 0
     for (const problem of toFetch) {
@@ -70,10 +67,12 @@ async function main() {
         try {
             const data = await fetchDescription(slug)
             if (data) {
-                existing[slug] = {
+                const description = {
                     content: data.content ?? '',
                     exampleTestcases: data.exampleTestcases ?? '',
                 }
+                if (!/^[a-z0-9-]+$/.test(slug)) throw new Error('Invalid problem slug')
+                await fs.writeFile(path.join(outputPath, `${slug}.json`), JSON.stringify(description) + '\n')
                 fetched++
                 console.log(`  [OK] #${num} ${slug}`)
             } else {
@@ -86,14 +85,8 @@ async function main() {
         // Polite delay to avoid rate limiting
         await sleep(400)
 
-        // Write checkpoint every 20 problems
-        if (fetched % 20 === 0) {
-            await fs.writeFile(outputPath, JSON.stringify(existing, null, 2) + '\n')
-            console.log(`  [SAVED] checkpoint at ${fetched} fetched`)
-        }
     }
 
-    await fs.writeFile(outputPath, JSON.stringify(existing, null, 2) + '\n')
     console.log(`\nDone. ${fetched} new descriptions saved to ${outputPath}`)
 }
 

@@ -1,20 +1,8 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useProblemDescription } from "../hooks/useProblemDescription";
 import { isPremiumProblem } from "../data/premiumProblems";
 import "./ProblemInfoPanel.css";
-
-/** Strips HTML tags to plain text for copy/accessibility purposes */
-function htmlToPlainText(html) {
-    return html
-        .replace(/<[^>]+>/g, " ")
-        .replace(/&lt;/g, "<")
-        .replace(/&gt;/g, ">")
-        .replace(/&amp;/g, "&")
-        .replace(/&nbsp;/g, " ")
-        .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)))
-        .replace(/\s{2,}/g, " ")
-        .trim();
-}
 
 /**
  * Sanitizes LeetCode HTML to only allow safe tags before rendering.
@@ -30,16 +18,16 @@ function sanitizeHtml(html) {
         .replace(/javascript:/gi, "");
 }
 
-export default function ProblemInfoPanel({ slug, number, descriptions }) {
+export default function ProblemInfoPanel({ slug, number }) {
     const [open, setOpen] = useState(false);
 
-    const info = descriptions?.[slug];
-    const hasContent = info?.content;
     const premium = isPremiumProblem(number);
+    const { description: info, status, retry } = useProblemDescription(premium ? null : slug);
+    const hasContent = info?.content;
 
     // Nothing to reveal and nothing to explain: not premium, just absent from
     // the dataset. Hide the toggle rather than open onto an apology.
-    if (descriptions && !hasContent && !premium) return null;
+    if (status === 'missing' && !premium) return null;
 
     return (
         <>
@@ -75,8 +63,13 @@ export default function ProblemInfoPanel({ slug, number, descriptions }) {
                         transition={{ duration: 0.22, ease: "easeInOut" }}
                     >
                         <div className="problem-info-inner">
-                            {!descriptions ? (
-                                <p className="problem-info-loading">Loading problem descriptions…</p>
+                            {status === "loading" ? (
+                                <p className="problem-info-loading">Loading problem description…</p>
+                            ) : status === "error" ? (
+                                <div role="alert">
+                                    <p>Could not load this problem description.</p>
+                                    <button type="button" onClick={retry}>Retry</button>
+                                </div>
                             ) : !hasContent ? (
                                 <p className="problem-info-premium">
                                     <strong>LeetCode Premium problem.</strong> The description is
@@ -85,7 +78,6 @@ export default function ProblemInfoPanel({ slug, number, descriptions }) {
                                 </p>
                             ) : (
                                 <div
-                                    // eslint-disable-next-line react/no-danger
                                     dangerouslySetInnerHTML={{ __html: sanitizeHtml(info.content) }}
                                 />
                             )}
@@ -95,11 +87,4 @@ export default function ProblemInfoPanel({ slug, number, descriptions }) {
             </AnimatePresence>
         </>
     );
-}
-
-/** Returns the plain-text version of a problem's description for use in prompts */
-export function getProblemDescriptionText(slug, descriptions) {
-    const info = descriptions?.[slug];
-    if (!info?.content) return null;
-    return htmlToPlainText(info.content);
 }

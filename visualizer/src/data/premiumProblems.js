@@ -1,7 +1,7 @@
 /**
  * LeetCode Premium (subscriber-only) problem numbers.
  *
- * Their descriptions are not in public/data/problemDescriptions.json and never
+ * Their descriptions are not in public/data/descriptions/ and never
  * will be — the scraper can only reach public problems. ProblemInfoPanel uses
  * this to show an explicit "Premium problem" note instead of a vague
  * "Description not available", which otherwise reads like a bug.

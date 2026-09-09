@@ -322,7 +322,6 @@ function ProblemPage({
   layoutWidth,
   onLayoutChange,
   enableTransitions,
-  problemDescriptions,
   utilityControls,
 }) {
   const Component = problem.component;
@@ -380,7 +379,6 @@ function ProblemPage({
       <ProblemInfoPanel
         slug={problem.slug}
         number={problem.number}
-        descriptions={problemDescriptions}
       />
       <div className="problem-content">
         <ErrorBoundary key={problem.id}>
@@ -819,19 +817,6 @@ export default function App() {
         return true;
       }
     });
-  // null until the fetch settles, so ProblemInfoPanel can tell "still loading"
-  // apart from "loaded, but this problem has no description" — the latter hides
-  // the toggle entirely.
-  const [problemDescriptions, setProblemDescriptions] = useState(null);
-
-  useEffect(() => {
-    if (!active || problemDescriptions !== null) return;
-    fetch("/data/problemDescriptions.json")
-      .then((res) => res.json())
-      .then((data) => setProblemDescriptions(data))
-      .catch(() => setProblemDescriptions({}));
-  }, [active, problemDescriptions]);
-
   useEffect(() => {
     try {
       window.localStorage.setItem(
@@ -913,7 +898,6 @@ export default function App() {
       layoutWidth={layoutWidth}
       onLayoutChange={setLayoutWidth}
       enableTransitions={navigationTransitionsEnabled}
-      problemDescriptions={problemDescriptions}
       utilityControls={utilityControls}
     />
   ) : (
