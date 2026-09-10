@@ -21,6 +21,9 @@ import "./components/Chatbot/chatbot.css";
 const ChatDrawer = React.lazy(() => import("./components/Chatbot/ChatDrawer"));
 import "./App.css";
 import { TRACKS } from "./data/implementedProblems";
+import { useAccess } from './access/useAccess';
+import { isFreeProblem, accessLabel } from './access/policy';
+import { AccessDialog, Plans, Tutorial, PlaygroundGate } from './access/AccessUI';
 
 const RuntimePlayground = React.lazy(
   () => import("./playground/RuntimePlayground"),
@@ -440,6 +443,7 @@ function ChatAssistant() {
 }
 
 function HomePage({
+  pro,
   track,
   onTrackChange,
   onSelect,
@@ -735,6 +739,7 @@ function HomePage({
                 >
                   {p.difficulty}
                 </span>
+                <span className="card-access-label">{accessLabel(p, pro)}</span>
                 <span className="card-num">#{p.number}</span>
               </div>
               <h2 className="card-title">{p.title}</h2>
@@ -763,6 +768,7 @@ function HomePage({
                 >
                   {p.difficulty}
                 </span>
+                <span className="card-access-label">{accessLabel(p, pro)}</span>
                 <span className="card-num">#{p.number}</span>
               </div>
               <h2 className="card-title">{p.title}</h2>
@@ -798,7 +804,10 @@ function HomePage({
 
 /* ── Root App ────────────────────────────────────────────────────────── */
 export default function App() {
-  const [active, setActive] = useState(null);
+  const access = useAccess();
+  const [dialog, setDialog] = useState(null);
+  const [lockedTitle, setLockedTitle] = useState('');
+  const [active, setActive] = useState(() => ALL_PROBLEMS.find(p => `#${p.slug}` === window.location.hash) || null);
   const [showPlayground, setShowPlayground] = useState(() => {
     try {
       return window.location.hash === "#playground";
@@ -830,11 +839,12 @@ export default function App() {
 
   useEffect(() => {
     const onPop = () => {
-      setActive(null);
+      setActive(ALL_PROBLEMS.find(p => `#${p.slug}` === window.location.hash) || null);
       setShowPlayground(window.location.hash === "#playground");
     };
     window.addEventListener("popstate", onPop);
-    return () => window.removeEventListener("popstate", onPop);
+    window.addEventListener("hashchange", onPop);
+    return () => { window.removeEventListener("popstate", onPop); window.removeEventListener("hashchange", onPop); };
   }, []);
 
   const goBack = () => {
@@ -850,6 +860,9 @@ export default function App() {
   };
 
   const selectProblem = (problem) => {
+    if (!isFreeProblem(problem) && !access.pro) {
+      setLockedTitle(problem.title); setDialog('plans'); return;
+    }
     window.history.pushState(
       { slug: problem.slug },
       "",
@@ -867,6 +880,9 @@ export default function App() {
 
   const utilityControls = (
     <>
+      <button className="access-toolbar-btn" onClick={() => setDialog('tutorial')}>Tutorial</button>
+      <button className="access-toolbar-btn pro" onClick={() => { setLockedTitle(''); setDialog('plans'); }}>{access.pro ? 'Pro account' : 'Get Pro · ₹199'}</button>
+      <button className="access-toolbar-btn" disabled={access.busy} onClick={() => setDialog('account')}>{access.user ? (access.user.displayName?.split(' ')[0] || 'Account') : 'Sign in'}</button>
       <ThemeToggle />
       <SettingsMenu
         navigationTransitionsEnabled={navigationTransitionsEnabled}
@@ -876,6 +892,9 @@ export default function App() {
   );
 
   const pageContent = showPlayground ? (
+    <div key="playground-page" style={{display:'flex',flexDirection:'column',height:'100%',minHeight:0}}>
+    <div className="access-actions"><button className="access-toolbar-btn" onClick={goBack}>← Problems</button>{utilityControls}</div>
+    <PlaygroundGate key={access.user?.uid || 'guest'} access={access} onPlans={() => setDialog('plans')}>
     <Suspense
       key="runtime-playground-boundary"
       fallback={
@@ -885,11 +904,13 @@ export default function App() {
       <RuntimePlayground
         key="runtime-playground"
         onBack={goBack}
-        utilityControls={utilityControls}
         layoutWidth={layoutWidth}
         onLayoutChange={setLayoutWidth}
       />
     </Suspense>
+    </PlaygroundGate></div>
+  ) : active && !isFreeProblem(active) && !access.pro ? (
+    <div key="locked-problem" className="access-gate"><h2>{active.title} · Pro</h2><p>Sign in with a Pro account to open this visualizer.</p><button onClick={goBack}>Back to problems</button><button onClick={() => setDialog('plans')}>View plans</button></div>
   ) : active ? (
     <ProblemPage
       key={active.id}
@@ -903,6 +924,7 @@ export default function App() {
   ) : (
     <HomePage
       key={`home-${track}`}
+      pro={access.pro}
       track={track}
       onTrackChange={handleTrackChange}
       onSelect={selectProblem}
@@ -943,6 +965,12 @@ export default function App() {
             pageContent
           )}
         </div>
+        {dialog && <AccessDialog title={dialog === 'tutorial' ? 'Learn with the visualizer' : dialog === 'account' ? 'Your Teem Treat account' : 'Unlock Teem Treat Pro'} onClose={() => setDialog(null)}>
+          {dialog === 'tutorial' ? <Tutorial problems={ALL_PROBLEMS} onProblem={(p) => { setDialog(null); selectProblem(p); }} onPlayground={() => { setDialog(null); openPlayground(); }} /> : dialog === 'account' ? <>
+            {access.user ? <><p>{access.user.displayName} · {access.user.email}</p><p>{access.pro ? `Pro active until ${new Date(access.account.expiresAt).toLocaleDateString()}` : 'Free account'}</p><button onClick={access.logout}>Sign out</button><button onClick={access.refresh}>Refresh access</button></> : <><p>Use Google to keep your daily playground allowance and Pro access linked to your account.</p><button className="access-primary" disabled={access.busy} onClick={access.login}>Continue with Google</button></>}
+            <p role="alert">{access.error}</p>
+          </> : <Plans access={access} reason={lockedTitle ? `${lockedTitle} is included in Pro. Unlock it and every other implemented visualizer.` : ''} />}
+        </AccessDialog>}
         <ChatAssistant />
       </div>
       </ZoomProvider>

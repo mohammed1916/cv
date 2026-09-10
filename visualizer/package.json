@@ -17,7 +17,8 @@
     "check:css-migration": "node scripts/check-css-migration.mjs",
     "preview": "vite preview",
     "refresh:leetcode": "node scripts/fetch-leetcode-catalog.mjs",
-    "refresh:descriptions": "node scripts/fetch-problem-descriptions.mjs"
+    "refresh:descriptions": "node scripts/fetch-problem-descriptions.mjs",
+    "test:access": "node --test functions/*.test.js"
   },
   "dependencies": {
     "@ai-sdk/react": "^4.0.69",
@@ -29,6 +30,7 @@
     "@monaco-editor/react": "^4.7.0",
     "@vercel/analytics": "^2.0.1",
     "ai": "^7.0.66",
+    "firebase": "^12.19.0",
     "framer-motion": "^12.38.0",
     "html2canvas": "^1.4.1",
     "katex": "^0.16.8",

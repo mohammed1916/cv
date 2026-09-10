@@ -56,3 +56,7 @@ Razorpay references:
 - Webhooks: https://razorpay.com/docs/webhooks/
 
 No Razorpay account, checkout, subscriptions, billing linkage, or paid-access system was created during the Hosting setup.
+
+## September 10 access implementation
+
+Local tutorial, Free/Pro locks, Google sign-in integration, callable usage tracking and Razorpay payment handlers now exist. They are not deployed; purchases remain disabled. See [PRO_ACCESS.md](PRO_ACCESS.md) for pricing, setup, limitations and launch checks.

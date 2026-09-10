@@ -45,5 +45,19 @@
         ]
       }
     ]
+  },
+  "functions": {
+    "source": "functions",
+    "runtime": "nodejs22",
+    "ignore": [
+      "node_modules",
+      ".git",
+      "**/._*",
+      "*.test.js",
+      "firebase-debug.log"
+    ]
+  },
+  "firestore": {
+    "rules": "firestore.rules"
   }
 }
