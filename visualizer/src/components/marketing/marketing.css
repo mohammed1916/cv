@@ -1,0 +1,57 @@
+.marketing-nav.app-toolbar { position: relative; inset: auto; display: flex; justify-content: space-between; flex-wrap: wrap; padding: 18px 28px; gap: 14px; border-bottom: 1px solid var(--border); background: var(--surface); pointer-events: auto; flex-shrink: 0; }
+.marketing-brand { display: flex; align-items: center; gap: 10px; color: var(--text); font-size: 14px; font-weight: 800; letter-spacing: .1em; text-decoration: none; }
+.marketing-brand > span { color: var(--primary); font-size: 28px; }
+.marketing-brand small { color: var(--text-muted); font-size: 9px; padding-left: 10px; border-left: 1px solid var(--border); }
+.marketing-nav-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.marketing-nav .access-toolbar-btn { padding: 10px 14px; border-color: transparent; font-size: 13px; background: transparent; }
+.marketing-nav .access-toolbar-btn:hover { background: var(--surface2); }
+.marketing-nav .access-toolbar-btn.pro { background: var(--primary); color: var(--primary-contrast, white); border-radius: 8px; }
+.welcome-hero { width: 100%; display: grid; grid-template-columns: 1.1fr 1fr; gap: 32px 48px; padding: 64px 24px 32px; color: var(--text); border-bottom: 1px solid var(--border); margin-bottom: 28px; }
+.welcome-eyebrow { font: 11px monospace; letter-spacing: .14em; color: var(--text-muted); }
+.welcome-copy h1 { font-size: clamp(44px, 5.5vw, 82px); line-height: 1.04; letter-spacing: -.055em; font-weight: 750; margin: 24px 0; }
+.welcome-copy h1 em { color: var(--primary); font-style: normal; }
+.welcome-copy > p { font-size: 17px; line-height: 1.7; max-width: 470px; color: var(--text-muted); }
+.welcome-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 26px 0; }
+.welcome-hero button { border: 1px solid var(--border); color: var(--text); background: var(--surface2); border-radius: 8px; padding: 12px 18px; font: inherit; font-size: 13px; cursor: pointer; transition: transform .2s, background .2s; }
+.welcome-hero button:hover { transform: translateY(-2px); background: var(--surface3, var(--surface)); }
+.welcome-hero button:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
+.welcome-hero .welcome-primary { background: var(--primary); color: var(--primary-contrast, white); border-color: var(--primary); font-weight: 700; }
+.welcome-meta { font-size: 11px; color: var(--text-muted); line-height: 1.8; }
+.welcome-meta span { margin: 0 8px; }
+.welcome-visual { align-self: center; min-width: 0; border: 1px solid var(--border); border-radius: 18px; background: var(--surface); box-shadow: 0 24px 80px color-mix(in srgb, var(--primary) 12%, transparent); overflow: hidden; animation: hero-arrive .8s ease-out both; }
+.welcome-demo-head { padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); font: 9px monospace; letter-spacing: .07em; color: var(--text-muted); }
+.welcome-demo-head button { padding: 4px 8px; font-size: 10px; }
+.welcome-demo-head i { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #6edba4; margin-right: 6px; }
+.welcome-visual svg { width: 100%; display: block; }
+.hero-node rect { fill: var(--surface2); stroke: var(--border); }
+.hero-node text { fill: var(--text); font: 27px monospace; }
+.hero-node .hero-index { fill: var(--text-muted); font-size: 11px; }
+.hero-match rect { stroke: #9e85ff; animation: hero-glow 4s ease-in-out infinite; }
+.hero-flow { animation: hero-flow 3s linear infinite; }
+.hero-result { fill: var(--text); font: 19px monospace; }
+.welcome-code { padding: 18px; border-top: 1px solid var(--border); font: 11px/2 monospace; color: var(--text-muted); }
+.welcome-code span { color: var(--text-muted); margin-right: 14px; opacity: .6; }
+.welcome-code strong { color: var(--primary); }
+.welcome-start { grid-column: 1 / -1; display: flex; align-items: center; gap: 18px; padding: 20px 24px; border: 1px solid color-mix(in srgb, var(--primary) 45%, var(--border)); background: color-mix(in srgb, var(--primary) 7%, var(--surface)); border-radius: 12px; }
+.welcome-start > div { flex: 1; }
+.welcome-start strong { font-size: 15px; }
+.welcome-start p { color: var(--text-muted); font-size: 13px; margin: 6px 0 0; }
+.welcome-features { grid-column: 1 / -1; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font: 12px monospace; color: var(--text-muted); }
+.welcome-features strong { color: var(--text); font-weight: 500; }
+.welcome-features button { border: 0; background: none; padding: 0; font: inherit; }
+.is-paused .hero-flow, .is-paused .hero-match rect { animation-play-state: paused; }
+.webmcp-copy { display: flex; gap: 12px; flex-wrap: wrap; }
+.webmcp-copy input { flex: 1; min-width: 200px; padding: 12px; background: var(--surface2); color: var(--text); border: 1px solid var(--border); border-radius: 8px; font: 13px monospace; }
+.playground-dialog li { margin-block: 12px; }
+.playground-dialog a { color: var(--primary); }
+.playground-dialog select { padding: 10px; background: var(--surface2); color: var(--text); border: 1px solid var(--border); border-radius: 8px; }
+@keyframes hero-flow { to { stroke-dashoffset: -52; } }
+@keyframes hero-glow { 50% { fill: color-mix(in srgb, var(--primary) 22%, var(--surface2)); } }
+@keyframes hero-arrive { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@media(max-width: 850px) { .welcome-hero { grid-template-columns: 1fr; padding: 32px 8px; } .welcome-visual { max-width: 600px; width: 100%; } .welcome-start { flex-wrap: wrap; } .marketing-nav.app-toolbar { padding: 12px 16px; } .marketing-nav-actions { gap: 3px; } }
+@media(prefers-reduced-motion: reduce) { .welcome-visual, .hero-flow, .hero-match rect { animation: none; } .welcome-hero button { transition: none; } }
+
+.marketing-view { position: relative; font-size: 13px; color: var(--text-muted); }
+.marketing-view summary { cursor: pointer; padding: 10px; }
+.marketing-view .zoom-controls-panel { position: absolute; top: 44px !important; left: 0 !important; right: auto; transform: none; }
+.marketing-view .zoom-controls-handle { display: none; }

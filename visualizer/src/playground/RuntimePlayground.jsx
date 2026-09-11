@@ -1,3 +1,4 @@
+import WebMCPHelp from "./WebMCPHelp";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import PlaybackControls from "../components/PlaybackControls";
@@ -1289,6 +1290,7 @@ export default function RuntimePlayground({
         </div>
 
         <div className="runtime-playground__header-actions">
+          <WebMCPHelp />
           <div
             className={`runtime-playground__webmcp-status is-${webMcpState.phase}`}
             role="status"

@@ -1,3 +1,4 @@
+import WelcomeHero from "./components/marketing/WelcomeHero";
 import React, {
   useEffect,
   useMemo,
@@ -445,6 +446,7 @@ function ChatAssistant() {
 }
 
 function HomePage({
+  onTutorial,
   pro,
   track,
   onTrackChange,
@@ -461,6 +463,17 @@ function HomePage({
   const [status, setStatus] = useState("Implemented");
   const [activeTag, setActiveTag] = useState("All");
   const [visibleCount, setVisibleCount] = useState(60);
+
+  // Keep the scroll container mounted while resetting track-specific filters.
+  const changeTrack = (nextTrack) => {
+    if (nextTrack === track) return;
+    setSearch("");
+    setDifficulty("All");
+    setStatus("Implemented");
+    setActiveTag("All");
+    setVisibleCount(60);
+    onTrackChange(nextTrack);
+  };
 
   const isLeetCodeTrack = track === TRACKS.LEETCODE;
   const isCodeforcesTrack = track === TRACKS.CODEFORCES;
@@ -548,6 +561,7 @@ function HomePage({
 
   return (
     <Shell className="home-page" {...shellProps}>
+      <WelcomeHero onTutorial={onTutorial} onPlayground={onOpenPlayground} onStart={() => onSelect(ALL_PROBLEMS.find(p => String(p.number) === '1' && !p.tags.includes('Codeforces')))} />
       <header className="home-header">
         <div className="home-header-row">
           <Brand
@@ -564,7 +578,7 @@ function HomePage({
           >
             <div className="brand-icon">⟨/⟩</div>
             <div>
-              <h1>CP Visualizer</h1>
+              <h2>Explore the problem library</h2>
               <p>
                 {isLeetCodeTrack
                   ? "LeetCode and interview patterns"
@@ -586,31 +600,31 @@ function HomePage({
           >
             <button
               className={`track-btn ${track === TRACKS.BLIND75 ? "active" : ""}`}
-              onClick={() => onTrackChange(TRACKS.BLIND75)}
+              onClick={() => changeTrack(TRACKS.BLIND75)}
             >
               Blind 75
             </button>
             <button
               className={`track-btn ${track === TRACKS.NEETCODE150 ? "active" : ""}`}
-              onClick={() => onTrackChange(TRACKS.NEETCODE150)}
+              onClick={() => changeTrack(TRACKS.NEETCODE150)}
             >
               NeetCode 150
             </button>
             <button
               className={`track-btn ${track === TRACKS.LEETCODE ? "active" : ""}`}
-              onClick={() => onTrackChange(TRACKS.LEETCODE)}
+              onClick={() => changeTrack(TRACKS.LEETCODE)}
             >
               LeetCode Track
             </button>
             <button
               className={`track-btn ${track === TRACKS.BASICS ? "active" : ""}`}
-              onClick={() => onTrackChange(TRACKS.BASICS)}
+              onClick={() => changeTrack(TRACKS.BASICS)}
             >
               Basics Track
             </button>
             <button
               className={`track-btn ${track === TRACKS.CODEFORCES ? "active" : ""}`}
-              onClick={() => onTrackChange(TRACKS.CODEFORCES)}
+              onClick={() => changeTrack(TRACKS.CODEFORCES)}
             >
               Codeforces Track
             </button>
@@ -925,7 +939,8 @@ export default function App() {
     />
   ) : (
     <HomePage
-      key={`home-${track}`}
+      key="home"
+      onTutorial={() => setDialog("tutorial")}
       pro={access.pro}
       track={track}
       onTrackChange={handleTrackChange}
@@ -940,11 +955,11 @@ export default function App() {
   return (
     <ThemeProvider>
       <ZoomProvider>
-      <ZoomControls />
+      {(active || showPlayground) && <ZoomControls />}
       <div className={`app layout-${layoutWidth}`}>
         {import.meta.env.VITE_ENABLE_VERCEL_ANALYTICS !== "false" && <Analytics />}
         {!active && !showPlayground && (
-          <div className="app-toolbar">{utilityControls}</div>
+          <nav className="app-toolbar marketing-nav" aria-label="Main navigation"><a className="marketing-brand" href="#" aria-label="Teem Treat home"><span>⌘</span> TEEM TREAT <small>VISUALIZER</small></a><div className="marketing-nav-actions"><details className="marketing-view"><summary>View</summary><ZoomControls /></details><button className="access-toolbar-btn" onClick={openPlayground}>Playground ↗</button>{utilityControls}</div></nav>
         )}
         {/* A flex column (not overflow:auto) so children get a definite height to
             resolve `height: 100%` against — an auto-overflow box lets children
@@ -956,7 +971,7 @@ export default function App() {
           style={{
             flex: '1 1 0',
             minHeight: 0,
-            marginTop: active || showPlayground ? '0' : '60px',
+            marginTop: '0',
             display: 'flex',
             flexDirection: 'column',
           }}
