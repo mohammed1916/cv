@@ -86,3 +86,13 @@ test('duplicate refunds revoke once and preserve another purchased period', asyn
   await webhook('refund.processed', payload);
   assert.equal(records.get('accounts/owner').expiresAt, remaining);
 });
+
+test('unrelated merchant payments are acknowledged without granting Pro', async () => {
+  reset();
+  payment.order_id = 'order_unrelated';
+  await webhook('payment.captured', { payment: { entity: payment } });
+  assert.equal(records.has('accounts/owner'), false);
+  payment.order_id = null;
+  await webhook('payment.captured', { payment: { entity: payment } });
+  assert.equal(records.has('accounts/owner'), false);
+});

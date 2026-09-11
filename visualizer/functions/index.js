@@ -67,10 +67,16 @@ export const createProOrder = onCall(paymentOptions, async request => {
 // Used by both verified checkout and signed webhooks. Duplicate deliveries do
 // not extend a plan twice. Payment metadata never determines a trusted price.
 async function activate(payment, expectedUid) {
-  if (!/^order_[a-zA-Z0-9]+$/.test(payment.order_id || '')) throw new HttpsError('invalid-argument', 'Invalid order.');
+  if (!/^order_[a-zA-Z0-9]+$/.test(payment.order_id || '')) {
+    if (!expectedUid) return { ignored: true };
+    throw new HttpsError('invalid-argument', 'Invalid order.');
+  }
   const orderRef = db.doc(`orders/${payment.order_id}`);
   return db.runTransaction(async tx => {
     const order = (await tx.get(orderRef)).data();
+    // The merchant may also receive payments through Razorpay.me or links.
+    // Acknowledge those events without retrying or granting product access.
+    if (!order && !expectedUid) return { ignored: true };
     if (!order || (expectedUid && order.uid !== expectedUid)) throw new HttpsError('permission-denied', 'Order does not belong to this account.');
     if (payment.status !== 'captured' || payment.currency !== 'INR' || payment.amount !== order.amount || payment.amount_refunded > 0) throw new HttpsError('failed-precondition', 'Payment has not been captured or was refunded.');
     if (order.status === 'refunded') throw new HttpsError('failed-precondition', 'Payment was refunded.');

@@ -30,6 +30,8 @@ export function useAccess() {
     try { await googleSignIn(); }
     catch (err) {
       if (err.code !== 'auth/popup-closed-by-user') setError(
+        err.code === 'auth/configuration-not-found' ? 'Sign-in is unavailable because Firebase Authentication has not been configured yet.' :
+        err.code === 'auth/unauthorized-domain' ? 'Sign-in is not enabled for this website address. Please contact the site owner.' :
         err.code === 'auth/operation-not-allowed' ? 'Google sign-in is being enabled. Please try again later.' :
         err.code === 'auth/popup-blocked' ? 'Allow the sign-in popup, then try again.' :
         'Google sign-in could not complete. Please try again.');

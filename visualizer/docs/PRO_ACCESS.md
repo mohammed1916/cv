@@ -1,6 +1,6 @@
 # Teem Treat Pro access
 
-Implemented locally on September 10, 2026. Not deployed or accepting payments.
+Access UI and payment backend implemented locally on September 10, 2026. Google Authentication configured in Firebase on September 11. Account and payment functions deployed on September 11; live checkout is enabled after the Razorpay webhook was saved and verified.
 
 ## Product decision
 
@@ -14,9 +14,13 @@ Implemented locally on September 10, 2026. Not deployed or accepting payments.
 
 The existing Teem Treat Google flow is in `../../teemavenue_web/src/app/account/page.tsx` (relative to the visualizer checkout). The visualizer uses its own Firebase project, not the sweets site's accounts, secrets, or paid status.
 
-Read-only Firebase inspection found no registered web apps in `teemtreat-visualizer`. Its Hosting reserved configuration supplies the public project/API configuration used in `src/access/firebase.js`. Google provider activation has not been verified. The code is wired, but a real sign-in has not been tested.
+September 11: registered web app `1:209065055325:web:b29889d959eb39a48ca9b4` using Firebase CLI Auth provisioning. Google provider is enabled, with display name CP Visualizer by Teem Treat and support contact greenelitesolutions@gmail.com. Authorized domains are teemtreat-visualizer.firebaseapp.com, teemtreat-visualizer.web.app, visualizer.teemtreat.com, localhost, and 127.0.0.1. Verified the project config endpoint succeeds and a Google OAuth URL can be created for http://127.0.0.1:3010/. A complete interactive Google login has not been tested.
 
-`VITE_ACCESS_BACKEND_ENABLED` and `VITE_CHECKOUT_ENABLED` are off by default. Until backend setup, free visualizers and tutorial work; the playground explains that account access is being set up. Do not publish this change expecting playground usage or paid checkout to work without the following setup.
+Auth provider settings are checked into `firebase.json`; deploy only those with `firebase deploy --only auth --project teemtreat-visualizer`. Firebase automatically includes its own auth-handler redirect, so do not repeat that default URL in authorizedRedirectUris.
+
+Razorpay dashboard was visibly logged in to the Visualizer by Teem Treat account, with website setup at 1/3 and live mode indicated. The initial browser setup was blocked by automation. On September 11, after the user upgraded to Blaze, the CLI confirmed billingEnabled=true; Firestore was created in asia-south1 and all five Node 22 functions were deployed successfully. Razorpay website approval and automatic capture were verified in the dashboard. Webhook TajM0RTQQY7RxO is saved and enabled at https://asia-south1-teemtreat-visualizer.cloudfunctions.net/paymentWebhook. Razorpay confirms a secret was supplied; the user selected 51 events, including payment.captured and refund.processed. The backend ignores unsupported events.
+
+`VITE_ACCESS_BACKEND_ENABLED=true` is now set for Firebase builds and local development. `VITE_CHECKOUT_ENABLED=true` is set for Firebase builds and local development. The server-owned config/billing document has enabled=true. The source defaults still fail closed when deployment flags are missing.
 
 ## Backend setup
 
@@ -58,3 +62,16 @@ References: [Firebase Google sign-in](https://firebase.google.com/docs/auth/web/
 Latest local checks: production Firebase build passed; targeted ESLint and whitespace checks passed; 10 tests passed, including the actual payment handlers with mocked Firestore/Razorpay boundaries. Real backend transactions, Google OAuth, Razorpay Test Mode and visual browser QA remain unverified. No browser was available in the session.
 
 Dependency check: the new backend uses current Firebase Admin/Functions releases. `npm audit` still reports two moderate transitive findings (`gaxios` / `uuid`); `npm audit fix` did not resolve them. Review the upstream dependency update before launch. Local tests ran on Node 24; deployed functions target Node 22, so verify in that runtime during integration testing.
+
+## September 11 backend deployment verification
+
+- All five functions report ACTIVE in asia-south1.
+- accountStatus, playgroundLease, createProOrder and verifyProPayment reject unauthenticated calls with HTTP 401.
+- paymentWebhook accepts a correctly signed setup.validation event (HTTP 200) and rejects an invalid signature (HTTP 401). No real payment was made.
+- Unauthenticated Firestore reads return HTTP 403; deny-all browser rules are released.
+- The live Razorpay key pair was validated with a read-only Orders API request and stored as RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET in Secret Manager. RAZORPAY_WEBHOOK_SECRET was generated separately and stored there; no secret values are recorded in this document.
+- All 11 tests pass on Node 22, including duplicate callbacks/refunds and unrelated merchant payments.
+- Artifact Registry cleanup retains function build images for seven days.
+- Use an installed Node 22+ runtime for Firebase CLI deployment. The standalone Firebase binary bundles Node 20.18.2 and failed local function discovery with ERR_REQUIRE_ESM; running its JavaScript CLI with the installed Node runtime resolved that error.
+
+September 11 live checkout verification: Google sign-in completed on the production custom domain; the server created an unpaid monthly order for 19900 paise. No payment was submitted by the agent. Native pricing dialogs now yield the browser top layer to Razorpay checkout and reopen on checkout dismissal or completion.

@@ -59,5 +59,16 @@
   },
   "firestore": {
     "rules": "firestore.rules"
+  },
+  "auth": {
+    "providers": {
+      "googleSignIn": {
+        "oAuthBrandDisplayName": "CP Visualizer by Teem Treat",
+        "supportEmail": "greenelitesolutions@gmail.com",
+        "authorizedRedirectUris": [
+          "https://visualizer.teemtreat.com/__/auth/handler"
+        ]
+      }
+    }
   }
 }

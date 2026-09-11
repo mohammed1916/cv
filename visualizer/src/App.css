@@ -38,6 +38,11 @@
   pointer-events: none;
 }
 
+/* Toolbar controls must opt back into clicks through the overlay. */
+.app-toolbar > button {
+  pointer-events: auto;
+}
+
 .chat-launcher {
   position: fixed;
   right: 1rem;

@@ -32,8 +32,11 @@ function loadCheckout() {
 export function Plans({ access, reason }) {
   const [pending, setPending] = useState(false);
   const [message, setMessage] = useState('');
-  async function purchase(plan) {
+  async function purchase(plan, dialog) {
     if (!access.user) { await access.login(); return; }
+    const restoreDialog = () => {
+      if (dialog?.isConnected && !dialog.open) dialog.showModal();
+    };
     setPending(true); setMessage('');
     try {
       await loadCheckout();
@@ -42,18 +45,21 @@ export function Plans({ access, reason }) {
         key: order.key, order_id: order.id, amount: order.amount, currency: 'INR',
         name: 'Teem Treat · CP Visualizer', description: `Pro · ${PLANS[plan].label}`,
         prefill: { email: access.user.email || '' },
-        modal: { ondismiss: () => setPending(false) },
+        modal: { ondismiss: () => { setPending(false); restoreDialog(); } },
         handler: async (payment) => {
           try {
             await accessCall('verifyProPayment', payment);
             await access.refresh(); setMessage('Payment verified. Your Pro access is ready.');
           } catch { setMessage('We could not confirm access yet. Use Refresh access below; do not pay again.'); }
-          finally { setPending(false); }
+          finally { setPending(false); restoreDialog(); }
         },
       });
       checkout.on('payment.failed', () => { setPending(false); setMessage('Payment failed. No Pro access was activated.'); });
+      // Native dialogs sit above Razorpay's body-mounted iframe and make it
+      // inert. Yield the top layer until checkout completes or is dismissed.
+      dialog?.close();
       checkout.open();
-    } catch (err) { setMessage(err.message || 'Checkout could not start. Please retry.'); setPending(false); }
+    } catch (err) { setMessage(err.message || 'Checkout could not start. Please retry.'); setPending(false); restoreDialog(); }
   }
   return <>
     <p>{reason || 'Learn the foundations free. Go further with Pro.'}</p>
@@ -64,7 +70,7 @@ export function Plans({ access, reason }) {
       </section>
       <section className="plan-card plan-pro"><span className="access-eyebrow">TEEM TREAT PRO</span><h3>Every problem. More practice.</h3>
         <ul><li>All implemented problem visualizers unlocked</li><li>Unlimited code playground time</li><li>Future problem visualizers included during your plan</li></ul>
-        {Object.entries(PLANS).map(([key, plan]) => <button className="access-primary" key={key} disabled={pending || !checkoutEnabled || access.pro} onClick={() => purchase(key)}>
+        {Object.entries(PLANS).map(([key, plan]) => <button className="access-primary" key={key} disabled={pending || !checkoutEnabled || access.pro} onClick={(event) => purchase(key, event.currentTarget.closest('dialog'))}>
           {access.pro ? 'Pro active' : `${plan.display} / ${plan.label}`}{key === 'annual' && !access.pro ? ' · Save ₹889 vs 12 monthly purchases' : ''}
         </button>)}
         <small>One-time payment. No automatic renewal. Catalog-only entries are coming soon. AI provider limits remain separate.</small>
