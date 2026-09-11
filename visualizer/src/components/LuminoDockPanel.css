@@ -69,10 +69,10 @@
 
 /* ── Per-panel minimize/restore button (top-right corner) ── */
 .lumino-panel-minbtn {
-  position: absolute;
-  top: 4px;
-  right: 6px;
-  z-index: 5;
+  position: relative;
+  align-self: flex-end;
+  flex: 0 0 26px;
+  margin: 3px 6px;
   width: 26px;
   height: 26px;
   display: flex;

@@ -1,5 +1,7 @@
 import { useMemo, useState } from "react";
 
+import PlaygroundDialog from "./PlaygroundDialog";
+
 const KIND_OPTIONS = [
   { value: "auto", label: "Auto" },
   { value: "sequence", label: "Sequence" },
@@ -68,6 +70,7 @@ export default function PythonTraceControls({
   traceError,
   disabled = false,
 }) {
+  const [inputAssistantOpen, setInputAssistantOpen] = useState(false);
   const [tab, setTab] = useState("inputs");
   const [aiInputPrompt, setAiInputPrompt] = useState("");
   const sequenceVariables = useMemo(
@@ -185,9 +188,14 @@ export default function PythonTraceControls({
               {inputError}
             </p>
           )}
+          <div className="runtime-playground__input-assistant-launch">
+            <div><strong>Need a test case?</strong><p>Describe a scenario and let AI prepare inputs, or propose code and inputs together.</p></div>
+            <button type="button" onClick={() => setInputAssistantOpen(true)}>Create inputs with AI</button>
+          </div>
+          {inputAssistantOpen && <PlaygroundDialog title="Create a test case" onClose={() => setInputAssistantOpen(false)}>
           <div className="runtime-playground__input-ai">
             <label htmlFor="runtime-playground-python-input-prompt">
-              Ask AI for inputs
+              What would you like to test?
               <small>Describe the case, constraints, or behavior you want to visualize</small>
             </label>
             <textarea
@@ -204,17 +212,23 @@ export default function PythonTraceControls({
                 onClick={() => onGenerateInputs?.(aiInputPrompt)}
                 disabled={disabled || isSuggestingVisuals}
               >
-                {isSuggestingVisuals ? "Generating..." : "Generate input JSON"}
+                {isSuggestingVisuals ? "Generating..." : "Generate inputs"}
               </button>
               <button
                 type="button"
                 onClick={() => onProposeWorkspace?.(aiInputPrompt)}
                 disabled={disabled || isSuggestingVisuals || !aiInputPrompt.trim()}
               >
-                Propose code + inputs
+                Propose code & inputs
               </button>
             </div>
+            {aiFeedback?.message && <p role={aiFeedback.phase === 'error' ? 'alert' : 'status'}>{aiFeedback.message}</p>}
+            <label htmlFor="ai-generated-input-preview">Current inputs · editable</label>
+            <textarea id="ai-generated-input-preview" value={inputValue} onChange={event => onInputChange?.(event.target.value)} disabled={disabled || isSuggestingVisuals} spellCheck={false} />
+            {inputError && <p role="alert">{inputError}</p>}
+            <button type="button" onClick={() => setInputAssistantOpen(false)}>Done · return to workspace</button>
           </div>
+          </PlaygroundDialog>}
         </div>
       ) : (
         <div

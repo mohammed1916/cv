@@ -1243,3 +1243,24 @@
     transition: none;
   }
 }
+
+/* Keep AI writing and review outside the compact timeline/configuration panes. */
+.playground-dialog { position: fixed; inset: 0; margin: auto; width: min(1000px, 94vw); max-width: 94vw; max-height: 90dvh; padding: 0; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); color: var(--text); box-shadow: 0 24px 80px #0008; }
+.playground-dialog::backdrop { background: #0009; }
+.playground-dialog > header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 24px; border-bottom: 1px solid var(--border); }
+.playground-dialog h2 { margin: 0; font-size: 1.15rem; }
+.playground-dialog__body { padding: 24px; overflow: auto; max-height: calc(90dvh - 85px); }
+.playground-dialog button, .runtime-playground__input-assistant-launch button, .runtime-playground__ai-fix-actions button, .runtime-playground__error button { min-height: 40px; padding: 9px 16px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface2); color: var(--text); font: inherit; font-size: 14px; cursor: pointer; }
+.playground-dialog button:disabled { opacity: .5; cursor: not-allowed; }
+.playground-dialog button:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+.playground-dialog .runtime-playground__input-ai { display: grid; gap: 16px; }
+.playground-dialog label { display: grid; gap: 6px; font-size: 15px; font-weight: 600; }
+.playground-dialog small { color: var(--text-muted); font-size: 13px; font-weight: 400; }
+.playground-dialog textarea { width: 100%; min-height: 160px; resize: vertical; padding: 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--code-bg); color: var(--text); font: 14px/1.6 monospace; }
+.playground-dialog .runtime-playground__input-ai-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.playground-dialog .runtime-playground__input-ai-actions button:first-child, .playground-dialog .runtime-playground__button--primary { background: var(--primary); color: var(--primary-contrast, white); }
+.playground-dialog .runtime-playground__ai-fix-review { border: 0; padding: 0; font-size: 14px; line-height: 1.6; gap: 18px; }
+.playground-dialog .runtime-playground__ai-diff { min-height: 240px; max-height: 48dvh; font-size: 14px; }
+.runtime-playground__input-assistant-launch { display: grid; gap: 12px; padding: 16px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface2); }
+.runtime-playground__input-assistant-launch p { color: var(--text-muted); margin: 6px 0 0; font-size: 13px; line-height: 1.5; }
+.runtime-playground__input-assistant-launch button { justify-self: start; }
