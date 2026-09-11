@@ -1,9 +1,11 @@
 import {
   useLayoutEffect,
+  useEffect,
   useRef,
   useState,
 } from "react";
 
+import { createPortal } from "react-dom";
 import "./FloatingPanel.css";
 import PanelScaleControl from "./PanelScaleControl";
 
@@ -11,10 +13,33 @@ export default function FloatingPanel({
   title = "Panel",
   children,
   defaultPosition = null,
-  defaultSize = { width: 460, height: 148 },
+  defaultSize = { width: 560, height: 260 },
   storageKey = "floating-playback-size",
 }) {
   const panelRef = useRef(null);
+  const [host] = useState(() => document.createElement('div'));
+  const [docked, setDocked] = useState(false);
+  const [canDock, setCanDock] = useState(false);
+  const undockRef = useRef(null);
+  useLayoutEffect(() => {
+    document.body.appendChild(host);
+    const frame = requestAnimationFrame(() => setCanDock(Boolean(document.querySelector('.lumino-dock-container'))));
+    return () => { cancelAnimationFrame(frame); undockRef.current?.(); host.remove(); document.body.classList.remove('dragging-floating-panel'); };
+  }, [host]);
+  const dockPanel = (side = 'bottom', workspace = document.querySelector('.lumino-dock-container')) => {
+    if (!workspace) return;
+    workspace.dispatchEvent(new CustomEvent('cpviz-dock-panel', { detail: {
+      host, title, side, done: (undock) => { undockRef.current = undock; setDocked(true); setCollapsed(false); },
+    } }));
+  };
+  const floatPanel = () => {
+    undockRef.current?.(); undockRef.current = null; setDocked(false);
+  };
+  useEffect(() => {
+    const stop = () => document.body.classList.remove('dragging-floating-panel');
+    window.addEventListener('pointerup', stop);
+    return () => window.removeEventListener('pointerup', stop);
+  }, []);
   const dragState = useRef(null);
   const resizeState = useRef(null);
 
@@ -103,7 +128,7 @@ export default function FloatingPanel({
 
   const handlePointerDown = (event) => {
     if (
-      isPinned ||
+      docked || isPinned ||
       event.target.closest("button") ||
       event.target.closest(".floating-panel-resizer")
     ) {
@@ -118,6 +143,7 @@ export default function FloatingPanel({
 
     const rect = node.getBoundingClientRect();
 
+    document.body.classList.add("dragging-floating-panel");
     dragState.current = {
       offsetX: event.clientX - rect.left,
       offsetY: event.clientY - rect.top,
@@ -150,6 +176,14 @@ export default function FloatingPanel({
       return;
     }
 
+    if (event.type !== 'pointercancel') {
+      const target = [...document.querySelectorAll('[data-dock-side]')].find(node => {
+        const rect = node.getBoundingClientRect();
+        return event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom;
+      });
+      if (target) dockPanel(target.dataset.dockSide, target.closest('.lumino-dock-container'));
+    }
+    document.body.classList.remove('dragging-floating-panel');
     dragState.current = null;
 
     if (
@@ -271,11 +305,12 @@ export default function FloatingPanel({
   const isPlaybackPanel =
     title === "Playback Controls";
 
-  return (
+  return createPortal(
     <div
       ref={panelRef}
       className={[
         "floating-panel",
+        docked ? "is-docked" : "",
         collapsed ? "collapsed" : "",
         isPinned ? "pinned" : "",
         isPlaybackPanel
@@ -320,6 +355,7 @@ export default function FloatingPanel({
           {title}
         </span>
 
+        {canDock && <button type="button" className="floating-panel-pin" onClick={() => docked ? floatPanel() : dockPanel()} title={docked ? 'Float panel over workspace' : 'Dock panel below workspace'}>{docked ? 'Float' : 'Dock'}</button>}
         <button
           type="button"
           className="floating-panel-pin"
@@ -375,7 +411,7 @@ export default function FloatingPanel({
           </div>
         )}
 
-      {!collapsed && (
+      {!collapsed && !docked && (
         <div
           className="floating-panel-resizer"
           role="separator"
@@ -387,6 +423,6 @@ export default function FloatingPanel({
           onPointerCancel={stopResize}
         />
       )}
-    </div>
+    </div>, host
   );
 }

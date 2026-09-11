@@ -144,6 +144,30 @@ export default function LuminoDockPanel({ panels, onPanelReady }) {
       previousWidget = widget
     })
 
+    // Floating panels keep a stable React portal host while Lumino owns placement.
+    const floatingWidgets = new Map()
+    const mountFloating = (event) => {
+      const { host, title, side, done } = event.detail
+      if (!container.contains(event.target)) return
+      const widget = new Widget({ node: host })
+      widget.title.label = title
+      widget.title.closable = false
+      widget.addClass('lumino-floating-host')
+      floatingWidgets.set(host, widget)
+      dock.addWidget(widget, { mode: `split-${side || 'bottom'}` })
+      done(() => {
+        widget.parent = null
+        document.body.appendChild(host)
+        floatingWidgets.delete(host)
+        widget.dispose()
+        // dispose removes the host; restore it for the still-mounted portal.
+        host.removeAttribute('style')
+        host.className = ''
+        document.body.appendChild(host)
+      })
+    }
+    container.addEventListener('cpviz-dock-panel', mountFloating)
+
     // Use BoxPanel to manage dock sizing
     const box = new BoxPanel({ direction: 'top-to-bottom', spacing: 0 })
     box.id = 'lumino-box'
@@ -160,7 +184,7 @@ export default function LuminoDockPanel({ panels, onPanelReady }) {
       // positions its widgets in layout pixels, so feeding it scaled values
       // would shrink or overflow the dock at any zoom level other than 100%.
       const w = Math.max(0, container.clientWidth)
-      const h = Math.max(0, container.clientHeight)
+      const h = Math.max(0, container.clientHeight - 22)
       if (w === 0 || h === 0) return
       box.node.style.position = 'absolute'
       box.node.style.top = '0'
@@ -269,17 +293,27 @@ export default function LuminoDockPanel({ panels, onPanelReady }) {
     onPanelReadyRef.current?.(contentDivsRef.current, { applyCollapse })
 
     return () => {
+      container.removeEventListener('cpviz-dock-panel', mountFloating)
+      floatingWidgets.forEach((widget, host) => {
+        widget.parent = null
+        document.body.appendChild(host)
+      })
       cancelAnimationFrame(raf)
       resizeObserver.disconnect()
       window.removeEventListener('resize', fit)
       Object.values(collapseTimersRef.current).forEach(window.clearTimeout)
       try {
         box.dispose()
-      } catch (e) {
+      } catch {
         // Already disposed
       }
     }
   }, [panels.length])
 
-  return <div ref={containerRef} className="lumino-dock-container" />
+  return <div ref={containerRef} className="lumino-dock-container">
+    <div className="workspace-dock-hint">Drag tabs to split or group panels · Drag playback to a highlighted edge to dock</div>
+    <div className="workspace-drop-targets" aria-hidden="true">
+      {['left', 'right', 'bottom'].map(side => <div key={side} data-dock-side={side} className={`workspace-drop-target ${side}`}>Dock {side}</div>)}
+    </div>
+  </div>
 }

@@ -276,3 +276,12 @@
 .lumino-panel-widget ::-webkit-scrollbar-thumb:hover {
   background: var(--text-muted, var(--text-muted));
 }
+
+.workspace-dock-hint { position: absolute; z-index: 5; bottom: 0; left: 0; right: 0; padding: 4px 10px; background: var(--surface); color: var(--text-muted); font-size: 11px; pointer-events: none; }
+.workspace-drop-targets { display: none; position: absolute; inset: 36px 8px 24px; z-index: 2001; pointer-events: none; }
+.dragging-floating-panel .workspace-drop-targets { display: block; }
+.workspace-drop-target { position: absolute; display: grid; place-items: center; border: 2px dashed var(--accent, #a78bfa); border-radius: 10px; background: color-mix(in srgb, var(--surface) 85%, #8b5cf6); color: var(--text); font-size: 14px; font-weight: 700; }
+.workspace-drop-target.left { left: 0; top: 0; bottom: 84px; width: 100px; }
+.workspace-drop-target.right { right: 0; top: 0; bottom: 84px; width: 100px; }
+.workspace-drop-target.bottom { left: 0; right: 0; bottom: 0; height: 76px; }
+.lumino-floating-host { min-width: 240px; min-height: 160px; overflow: hidden; }

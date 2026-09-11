@@ -311,6 +311,8 @@ function SettingsMenu({
           <h2 id="settings-about-title">About</h2>
           <strong>CP Visualizer</strong>
           <p>By Teem Treat</p>
+          <p>Explore algorithms step by step with interactive inputs, code traces, and a workspace you can arrange. Start with a free Easy problem, then practice your own code in the playground.</p>
+          <p>Use Help &amp; tutorial for a quick start and panel docking instructions.</p>
           <p>&copy; {new Date().getFullYear()} <a href="https://teemtreat.com">teemtreat.com</a></p>
           <a href="/privacy.html">Privacy Policy</a>
         </section>
@@ -880,7 +882,7 @@ export default function App() {
 
   const utilityControls = (
     <>
-      <button className="access-toolbar-btn" onClick={() => setDialog('tutorial')}>Tutorial</button>
+      <button className="access-toolbar-btn" onClick={() => setDialog('tutorial')}>Help & tutorial</button>
       <button className="access-toolbar-btn pro" onClick={() => { setLockedTitle(''); setDialog('plans'); }}>{access.pro ? 'Pro account' : 'Get Pro · ₹199'}</button>
       <button className="access-toolbar-btn" disabled={access.busy} onClick={() => setDialog('account')}>{access.user ? (access.user.displayName?.split(' ')[0] || 'Account') : 'Sign in'}</button>
       <ThemeToggle />
