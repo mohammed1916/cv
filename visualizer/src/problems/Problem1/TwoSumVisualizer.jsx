@@ -312,9 +312,6 @@ export default function TwoSumVisualizer() {
 
   const playbackPanel = (
     <div ref={tourPlaybackRef} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={TWOSUM_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -332,6 +329,9 @@ export default function TwoSumVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={TWOSUM_PATTERNS} />
+      )}
     </div>
   )
 
