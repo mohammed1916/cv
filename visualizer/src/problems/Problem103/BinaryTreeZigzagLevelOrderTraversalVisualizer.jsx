@@ -1,75 +1,74 @@
-import { useState, useMemo, useCallback } from 'react'
-import { createPortal } from 'react-dom'
-import { motion } from 'framer-motion'
-import FloatingPanel from '../../components/shared/FloatingPanel'
-import CodeTracePanel from '../../components/CodeTracePanel'
-import PlaybackControls from '../../components/PlaybackControls'
-import { usePlaybackState } from '../../hooks/usePlaybackState'
-import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
-import './BinaryTreeZigzagLevelOrderTraversalVisualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
-import CodePatternAnnotations from '../../components/CodePatternAnnotations'
-import PatternLegend from '../../components/PatternLegend'
-import LuminoDockPanel from '../../components/LuminoDockPanel'
-
+import { useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
+import { motion } from "framer-motion";
+import FloatingPanel from "../../components/shared/FloatingPanel";
+import CodeTracePanel from "../../components/CodeTracePanel";
+import PlaybackControls from "../../components/PlaybackControls";
+import { usePlaybackState } from "../../hooks/usePlaybackState";
+import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
+import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamplesOr } from "../../config/examplesRegistry";
+import "./BinaryTreeZigzagLevelOrderTraversalVisualizer.css";
+import ManualInputPanel from "../../components/shared/ManualInputPanel";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
-const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
-const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = getExamplesOr('binary-tree-zigzag-level-order-traversal', [
-  { label: 'Example 1', root: [3, 9, 20, null, null, 15, 7] },
-  { label: 'Example 2', root: [1] },
-  { label: 'Example 3', root: [] },
-])
+const LINE_PATTERN_MAP = {}; // Auto-generated: maps line numbers to phase names
+const PATTERNS = []; // Auto-generated: list of phase names used in this visualizer
+const EXAMPLES = getExamplesOr("binary-tree-zigzag-level-order-traversal", [
+  { label: "Example 1", root: [3, 9, 20, null, null, 15, 7] },
+  { label: "Example 2", root: [1] },
+  { label: "Example 3", root: [] },
+]);
 
 const SOLUTION_CODE_INLINE = [
-  { line: 1, text: 'def zigzagLevelOrder(root):' },
-  { line: 2, text: '    if not root: return []' },
-  { line: 3, text: '    result = []' },
-  { line: 4, text: '    queue = deque([root])' },
-  { line: 5, text: '    leftToRight = True' },
-  { line: 6, text: '    while queue:' },
-  { line: 7, text: '        levelSize = len(queue)' },
-  { line: 8, text: '        level = []' },
-  { line: 9, text: '        for i in range(levelSize):' },
-  { line: 10, text: '            node = queue.popleft()' },
-  { line: 11, text: '            level.append(node.val)' },
-  { line: 12, text: '            if node.left: queue.append(node.left)' },
-  { line: 13, text: '            if node.right: queue.append(node.right)' },
-  { line: 14, text: '        if not leftToRight: level.reverse()' },
-  { line: 15, text: '        result.append(level)' },
-  { line: 16, text: '        leftToRight = not leftToRight' },
-  { line: 17, text: '    return result' },
-]
+  { line: 1, text: "def zigzagLevelOrder(root):" },
+  { line: 2, text: "    if not root: return []" },
+  { line: 3, text: "    result = []" },
+  { line: 4, text: "    queue = deque([root])" },
+  { line: 5, text: "    leftToRight = True" },
+  { line: 6, text: "    while queue:" },
+  { line: 7, text: "        levelSize = len(queue)" },
+  { line: 8, text: "        level = []" },
+  { line: 9, text: "        for i in range(levelSize):" },
+  { line: 10, text: "            node = queue.popleft()" },
+  { line: 11, text: "            level.append(node.val)" },
+  { line: 12, text: "            if node.left: queue.append(node.left)" },
+  { line: 13, text: "            if node.right: queue.append(node.right)" },
+  { line: 14, text: "        if not leftToRight: level.reverse()" },
+  { line: 15, text: "        result.append(level)" },
+  { line: 16, text: "        leftToRight = not leftToRight" },
+  { line: 17, text: "    return result" },
+];
 
-const SOLUTION_CODE = SOLUTION_CODE_INLINE
+const SOLUTION_CODE = SOLUTION_CODE_INLINE;
 
 function buildTree(arr) {
-  if (!arr || arr.length === 0) return null
-  const root = { val: arr[0], left: null, right: null, idx: 0 }
-  const queue = [root]
-  let i = 1
+  if (!arr || arr.length === 0) return null;
+  const root = { val: arr[0], left: null, right: null, idx: 0 };
+  const queue = [root];
+  let i = 1;
   while (queue.length > 0 && i < arr.length) {
-    const node = queue.shift()
+    const node = queue.shift();
     if (arr[i] !== null) {
-      node.left = { val: arr[i], left: null, right: null, idx: i }
-      queue.push(node.left)
+      node.left = { val: arr[i], left: null, right: null, idx: i };
+      queue.push(node.left);
     }
-    i++
+    i++;
     if (i < arr.length && arr[i] !== null) {
-      node.right = { val: arr[i], left: null, right: null, idx: i }
-      queue.push(node.right)
+      node.right = { val: arr[i], left: null, right: null, idx: i };
+      queue.push(node.right);
     }
-    i++
+    i++;
   }
-  return root
+  return root;
 }
 
 function generateSteps(root) {
-  const steps = []
-  const tree = buildTree(root)
+  const steps = [];
+  const tree = buildTree(root);
   if (!tree) {
     steps.push({
       activeLine: 2,
@@ -78,10 +77,10 @@ function generateSteps(root) {
       level: [],
       leftToRight: true,
       levelNum: 0,
-      message: 'Empty tree',
+      message: "Empty tree",
       relatedLines: [2],
-    })
-    return steps
+    });
+    return steps;
   }
 
   steps.push({
@@ -91,18 +90,18 @@ function generateSteps(root) {
     level: [],
     leftToRight: true,
     levelNum: 0,
-    message: 'Initialize queue with root',
+    message: "Initialize queue with root",
     relatedLines: [1],
-  })
+  });
 
-  const result = []
-  const queue = [tree]
-  let leftToRight = true
-  let levelNum = 0
+  const result = [];
+  const queue = [tree];
+  let leftToRight = true;
+  let levelNum = 0;
 
   while (queue.length > 0) {
-    const levelSize = queue.length
-    const level = []
+    const levelSize = queue.length;
+    const level = [];
 
     steps.push({
       activeLine: 7,
@@ -111,13 +110,13 @@ function generateSteps(root) {
       level: [],
       leftToRight,
       levelNum,
-      message: `Process level ${levelNum} (${levelSize} nodes, direction: ${leftToRight ? 'L→R' : 'R→L'})`,
+      message: `Process level ${levelNum} (${levelSize} nodes, direction: ${leftToRight ? "L→R" : "R→L"})`,
       relatedLines: [7],
-    })
+    });
 
     for (let i = 0; i < levelSize; i++) {
-      const node = queue.shift()
-      level.push(node.val)
+      const node = queue.shift();
+      level.push(node.val);
 
       steps.push({
         activeLine: 10,
@@ -129,13 +128,13 @@ function generateSteps(root) {
         currentNode: node.val,
         message: `Add node ${node.val} to level`,
         relatedLines: [10],
-      })
+      });
 
-      if (node.left) queue.push(node.left)
-      if (node.right) queue.push(node.right)
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
     }
 
-    const finalLevel = leftToRight ? [...level] : [...level].reverse()
+    const finalLevel = leftToRight ? [...level] : [...level].reverse();
 
     steps.push({
       activeLine: 14,
@@ -144,13 +143,13 @@ function generateSteps(root) {
       level: finalLevel,
       leftToRight,
       levelNum,
-      message: `Level ${levelNum} complete: [${finalLevel.join(', ')}]${!leftToRight ? ' (reversed)' : ''}`,
+      message: `Level ${levelNum} complete: [${finalLevel.join(", ")}]${!leftToRight ? " (reversed)" : ""}`,
       relatedLines: [14, 15],
-    })
+    });
 
-    result.push(finalLevel)
-    leftToRight = !leftToRight
-    levelNum++
+    result.push(finalLevel);
+    leftToRight = !leftToRight;
+    levelNum++;
   }
 
   steps.push({
@@ -163,35 +162,55 @@ function generateSteps(root) {
     done: true,
     message: `Traversal complete: ${JSON.stringify(result)}`,
     relatedLines: [17],
-  })
+  });
 
-  return steps
+  return steps;
 }
 
 function VisualizationPanel({ step, applyEx }) {
-  if (!step) return <div style={{ padding: 16, color: '#627794' }}>Press play to start</div>
+  if (!step)
+    return (
+      <div style={{ padding: 16, color: "#627794" }}>Press play to start</div>
+    );
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, borderLeft: '4px solid #10b981' }}>
-        <div style={{ fontSize: 12, color: '#065f46', fontStyle: 'italic' }}>
-          Traverse tree level-by-level, alternating direction: left→right, right→left, left→right...
+    <div
+      style={{ display: "flex", flexDirection: "column", gap: 16, padding: 16 }}
+    >
+      <div
+        style={{
+          padding: 12,
+          backgroundColor: "#f0fdf4",
+          borderRadius: 6,
+          borderLeft: "4px solid #10b981",
+        }}
+      >
+        <div style={{ fontSize: 12, color: "#065f46", fontStyle: "italic" }}>
+          Traverse tree level-by-level, alternating direction: left→right,
+          right→left, left→right...
         </div>
       </div>
 
-      <div style={{ padding: 12, backgroundColor: '#dbeafe', borderRadius: 6 }}>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>
-          Level {step.levelNum} {step.leftToRight ? '(L→R)' : '(R→L)'}
+      <div style={{ padding: 12, backgroundColor: "#dbeafe", borderRadius: 6 }}>
+        <div
+          style={{
+            fontSize: 12,
+            fontWeight: 600,
+            color: "#0c4a6e",
+            marginBottom: 8,
+          }}
+        >
+          Level {step.levelNum} {step.leftToRight ? "(L→R)" : "(R→L)"}
         </div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+        <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
           {step.level.map((val, idx) => (
             <motion.div
               key={idx}
               style={{
-                padding: '6px 12px',
-                backgroundColor: '#bfdbfe',
+                padding: "6px 12px",
+                backgroundColor: "#bfdbfe",
                 borderRadius: 4,
-                border: '1px solid #0c4a6e',
+                border: "1px solid #0c4a6e",
                 fontSize: 12,
                 fontWeight: 600,
               }}
@@ -205,14 +224,23 @@ function VisualizationPanel({ step, applyEx }) {
 
       {step.result && step.result.length > 0 && (
         <motion.div
-          style={{ padding: 12, backgroundColor: '#f3e8ff', borderRadius: 6 }}
+          style={{ padding: 12, backgroundColor: "#f3e8ff", borderRadius: 6 }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#5b21b6', marginBottom: 8 }}>
+          <div
+            style={{
+              fontSize: 12,
+              fontWeight: 600,
+              color: "#5b21b6",
+              marginBottom: 8,
+            }}
+          >
             Result So Far
           </div>
-          <div style={{ fontSize: 11, color: '#6b21b6', fontFamily: 'monospace' }}>
+          <div
+            style={{ fontSize: 11, color: "#6b21b6", fontFamily: "monospace" }}
+          >
             {JSON.stringify(step.result)}
           </div>
         </motion.div>
@@ -220,7 +248,13 @@ function VisualizationPanel({ step, applyEx }) {
 
       {step.message && (
         <motion.div
-          style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, fontSize: 12, color: '#92400e' }}
+          style={{
+            padding: 12,
+            backgroundColor: "#fef3c7",
+            borderRadius: 6,
+            fontSize: 12,
+            color: "#92400e",
+          }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
@@ -228,54 +262,91 @@ function VisualizationPanel({ step, applyEx }) {
         </motion.div>
       )}
     </div>
-  )
+  );
 }
 
 export default function BinaryTreeZigzagLevelOrderTraversalVisualizer() {
-  const [input, setInput] = useState({"label":"Example 1","root":[3,9,20,null,null,15,7]});
+  const [input, setInput] = useState({
+    label: "Example 1",
+    root: [3, 9, 20, null, null, 15, 7],
+  });
   const [rootInput, setRootInput] = useState("[3,9,20,null,null,15,7]");
   const { root, inputError } = useMemo(() => {
     try {
-      const parsedRoot = JSON.parse(rootInput); if (!Array.isArray(parsedRoot)) throw new Error('root must be an array');
-      return { root: parsedRoot, inputError: '' };
+      const parsedRoot = JSON.parse(rootInput);
+      if (!Array.isArray(parsedRoot)) throw new Error("root must be an array");
+      return { root: parsedRoot, inputError: "" };
     } catch (e) {
-      return { root: [3,9,20,null,null,15,7], inputError: e.message };
+      return { root: [3, 9, 20, null, null, 15, 7], inputError: e.message };
     }
-  }, [rootInput]);  const steps = useMemo(() => generateSteps(root).map((s) => ({
-    ...s,
-    relatedLines: s.relatedLines ?? (s.activeLine ? [s.activeLine] : []),
-  })), [root])
+  }, [rootInput]);
+  const steps = useMemo(
+    () =>
+      generateSteps(root).map((s) => ({
+        ...s,
+        relatedLines: s.relatedLines ?? (s.activeLine ? [s.activeLine] : []),
+      })),
+    [root],
+  );
 
-  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
-    usePlaybackState(steps.length)
+  const {
+    stepIndex,
+    setStepIndex,
+    stepForward,
+    stepBack,
+    togglePlay,
+    handleReset,
+    isPlaying,
+    speed,
+    setSpeed,
+    isDone,
+  } = usePlaybackState(steps.length);
 
-  const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setRootInput(JSON.stringify(e.root)); handleReset(); }, [handleReset]);
-  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
-  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+  const step = stepIndex >= 0 ? steps[stepIndex] : null;
+  const applyEx = useCallback(
+    (e) => {
+      setRootInput(JSON.stringify(e.root));
+      handleReset();
+    },
+    [handleReset],
+  );
+  const connectivity = useCodeVisualConnectivity({
+    steps,
+    stepIndex,
+    onStepJump: setStepIndex,
+  });
+  const {
+    showPatternOverlay,
+    setShowPatternOverlay,
+    activeLineDom,
+    setActiveLineDom,
+  } = usePatternOverlay();
 
   // Extract panels into consts
   const primaryPanel = (
     <>
       <ManualInputPanel
-        fields={[{"key":"root","label":"root","type":"array"}]}
+        fields={[{ key: "root", label: "root", type: "array" }]}
         values={{ root: rootInput }}
-        onChange={(k, v) => { if (k === 'root') setRootInput(v); handleReset() }}
+        onChange={(k, v) => {
+          if (k === "root") setRootInput(v);
+          handleReset();
+        }}
         examples={EXAMPLES}
         applyExample={applyEx}
         inputError={inputError}
       />
-    <div className="bzlt-panel">
-      <div className="bzlt-panel-head">Zigzag Traversal</div>
-      <div className="bzlt-panel-body">
-        <VisualizationPanel step={step} applyEx={applyEx} />
+      <div className="bzlt-panel">
+        <div className="bzlt-panel-head">Zigzag Traversal</div>
+        <div className="bzlt-panel-body">
+          <VisualizationPanel step={step} applyEx={applyEx} />
+        </div>
       </div>
-    </div>
-  
-    </>)
+    </>
+  );
 
   const codePanel = (
-    <div style={{ position: 'relative', height: '100%' }}>
+    <div style={{ position: "relative", height: "100%" }}>
       <CodeTracePanel
         step={step}
         codeLines={SOLUTION_CODE}
@@ -293,19 +364,16 @@ export default function BinaryTreeZigzagLevelOrderTraversalVisualizer() {
         />
       )}
     </div>
-  )
+  );
 
   const statusPanel = (
     <div className="bzlt-status">
-      {step?.message ?? 'Press Play or Step to begin.'}
+      {step?.message ?? "Press Play or Step to begin."}
     </div>
-  )
+  );
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -323,20 +391,23 @@ export default function BinaryTreeZigzagLevelOrderTraversalVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+      )}
     </>
-  )
+  );
 
   // Add state + config
-  const [panelDivs, setPanelDivs] = useState(null)
+  const [panelDivs, setPanelDivs] = useState(null);
   const panelConfigs = useMemo(
     () => [
-      { id: 'primary', title: 'Zigzag Traversal', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
-      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+      { id: "primary", title: "Zigzag Traversal", dockMode: "split-right" },
+      { id: "code", title: "Code", dockMode: "split-bottom" },
+      { id: "status", title: "Status", dockMode: "split-bottom", ratio: 0.08 },
     ],
-    []
-  )
-  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+    [],
+  );
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
 
   return (
     <div className="bzlt-shell">
@@ -349,9 +420,11 @@ export default function BinaryTreeZigzagLevelOrderTraversalVisualizer() {
         </>
       )}
       {createPortal(
-        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
-        document.body
+        <FloatingPanel title="Playback Controls">
+          {playbackPanel}
+        </FloatingPanel>,
+        document.body,
       )}
     </div>
-  )
+  );
 }
