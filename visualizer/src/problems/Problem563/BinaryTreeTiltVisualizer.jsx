@@ -457,7 +457,6 @@ export default function BinaryTreeTiltVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -475,6 +474,7 @@ export default function BinaryTreeTiltVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
       </FloatingPanel>
     </div>
   )

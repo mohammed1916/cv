@@ -370,9 +370,6 @@ export default function MultiplyStringsVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.state?.phase} usedPatterns={MULTIPLYSTRINGS_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -390,6 +387,9 @@ export default function MultiplyStringsVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.state?.phase} usedPatterns={MULTIPLYSTRINGS_PATTERNS} />
+      )}
     </>
   )
 

@@ -402,7 +402,6 @@ export default function ZigzagConversionVisualizer() {
       )}
       {createPortal(
         <FloatingPanel title="Playback Controls">
-          {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
           <PlaybackControls
             isPlaying={isPlaying}
             isDone={isDone}
@@ -420,6 +419,7 @@ export default function ZigzagConversionVisualizer() {
             patternOverlayLabel="Show pattern overlay"
             showPatternOverlayToggle
           />
+          {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
         </FloatingPanel>,
         document.body
       )}

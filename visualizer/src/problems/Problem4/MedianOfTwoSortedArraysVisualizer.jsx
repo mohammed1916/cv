@@ -986,9 +986,6 @@ export default function MedianOfTwoSortedArraysVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={MEDIAN_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -1006,6 +1003,9 @@ export default function MedianOfTwoSortedArraysVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={MEDIAN_PATTERNS} />
+      )}
     </>
   );
 

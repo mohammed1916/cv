@@ -464,7 +464,6 @@ export default function MaxDistanceVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -482,6 +481,7 @@ export default function MaxDistanceVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
       </FloatingPanel>
     </div>
   )

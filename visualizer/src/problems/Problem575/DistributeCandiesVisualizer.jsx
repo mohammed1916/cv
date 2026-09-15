@@ -419,7 +419,6 @@ export default function DistributeCandiesVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -437,6 +436,7 @@ export default function DistributeCandiesVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
       </FloatingPanel>
     </div>
   )

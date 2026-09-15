@@ -595,7 +595,6 @@ export default function QuadTreeVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -613,6 +612,7 @@ export default function QuadTreeVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
       </FloatingPanel>
     </div>
   )

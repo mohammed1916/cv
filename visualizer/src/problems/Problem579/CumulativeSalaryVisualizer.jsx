@@ -454,9 +454,6 @@ export default function CumulativeSalaryVisualizer() {
       </div>
 
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={CUMULATIVE_PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -474,6 +471,9 @@ export default function CumulativeSalaryVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={CUMULATIVE_PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

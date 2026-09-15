@@ -261,9 +261,6 @@ export default function ValidSudokuVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={VALIDSUDOKU_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying}
                 isDone={isDone}
@@ -281,6 +278,9 @@ export default function ValidSudokuVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={VALIDSUDOKU_PATTERNS} />
+            )}
         </>
     );
 

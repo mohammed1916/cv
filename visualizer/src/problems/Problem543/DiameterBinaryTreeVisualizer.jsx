@@ -225,9 +225,6 @@ export default function DiameterBinaryTreeVisualizer() {
                 {panelDivs.code && createPortal(codePanel, panelDivs.code)}
             </>}
             <FloatingPanel title="Playback Controls">
-                {showPatternOverlay && (
-                    <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-                )}
                 <PlaybackControls
                     isPlaying={isPlaying} isDone={isDone} speed={speed}
                     onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -238,6 +235,9 @@ export default function DiameterBinaryTreeVisualizer() {
                     patternOverlayLabel="Show pattern overlay"
                     showPatternOverlayToggle
                 />
+                {showPatternOverlay && (
+                    <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+                )}
             </FloatingPanel>
 
         </div>

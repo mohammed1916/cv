@@ -486,9 +486,6 @@ export default function BTLongestConsecutiveIIVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -506,6 +503,9 @@ export default function BTLongestConsecutiveIIVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+      )}
     </>
   )
 

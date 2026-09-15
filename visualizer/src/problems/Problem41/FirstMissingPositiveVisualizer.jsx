@@ -199,9 +199,6 @@ export default function FirstMissingPositiveVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={FIRSTMISSINGPOSITIVE_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying}
                 isDone={isDone}
@@ -219,6 +216,9 @@ export default function FirstMissingPositiveVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={FIRSTMISSINGPOSITIVE_PATTERNS} />
+            )}
         </>
     );
 

@@ -194,9 +194,6 @@ export default function EditDistanceVisualizer() {
 
   const statusPanel = (
     <div className="ed-status-panel">
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={EDITDISTANCE_PATTERNS} />
-      )}
       <PlaybackControls
         onReset={handleReset}
         onPrev={stepBack}
@@ -219,6 +216,9 @@ export default function EditDistanceVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={EDITDISTANCE_PATTERNS} />
+      )}
     </div>
   );
 

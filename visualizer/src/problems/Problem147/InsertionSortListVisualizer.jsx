@@ -361,7 +361,6 @@ export default function InsertionSortListVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && <PatternLegend />}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -379,6 +378,7 @@ export default function InsertionSortListVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && <PatternLegend />}
     </>
   )
 

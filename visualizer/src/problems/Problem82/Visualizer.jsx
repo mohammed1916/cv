@@ -467,9 +467,6 @@ export default function RemoveDuplicatesFromListVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -490,6 +487,9 @@ export default function RemoveDuplicatesFromListVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={_PATTERNS} />
+      )}
     </>
   )
 

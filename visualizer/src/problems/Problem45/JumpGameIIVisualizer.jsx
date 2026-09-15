@@ -206,9 +206,6 @@ export default function JumpGameIIVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={JUMPGAMEII_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -230,6 +227,9 @@ export default function JumpGameIIVisualizer() {
         autoScrollLabel="Auto-scroll code"
         showAutoScroll
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={JUMPGAMEII_PATTERNS} />
+      )}
     </>
   );
 

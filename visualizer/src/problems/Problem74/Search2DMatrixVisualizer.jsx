@@ -194,9 +194,6 @@ export default function Search2DMatrixVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={SEARCH2DMATRIX_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying}
                 isDone={isDone}
@@ -214,6 +211,9 @@ export default function Search2DMatrixVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={SEARCH2DMATRIX_PATTERNS} />
+            )}
         </>
     )
 

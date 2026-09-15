@@ -388,9 +388,6 @@ export default function IntegerToRomanVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.activeLine ? LINE_PATTERN_MAP[step.activeLine] : undefined} usedPatterns={I2R_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -408,6 +405,9 @@ export default function IntegerToRomanVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.activeLine ? LINE_PATTERN_MAP[step.activeLine] : undefined} usedPatterns={I2R_PATTERNS} />
+      )}
     </>
   )
 

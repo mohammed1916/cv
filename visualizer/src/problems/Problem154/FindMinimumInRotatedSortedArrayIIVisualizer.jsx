@@ -328,7 +328,6 @@ export default function FindMinimumInRotatedSortedArrayIIVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -346,6 +345,7 @@ export default function FindMinimumInRotatedSortedArrayIIVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
     </>
   )
 

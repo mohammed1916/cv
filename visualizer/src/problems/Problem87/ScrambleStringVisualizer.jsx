@@ -610,9 +610,6 @@ export default function ScrambleStringVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={SCRAMBLESTRING_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -630,6 +627,9 @@ export default function ScrambleStringVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={SCRAMBLESTRING_PATTERNS} />
+      )}
     </>
   )
 

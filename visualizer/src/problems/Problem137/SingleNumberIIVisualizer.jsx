@@ -284,7 +284,6 @@ export default function SingleNumberIIVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -302,6 +301,7 @@ export default function SingleNumberIIVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
     </>
   )
 

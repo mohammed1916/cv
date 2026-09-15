@@ -347,9 +347,6 @@ export default function RandomFlipMatrixVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -367,6 +364,9 @@ export default function RandomFlipMatrixVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
       
     </div>

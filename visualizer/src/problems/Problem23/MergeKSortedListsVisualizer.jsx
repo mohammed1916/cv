@@ -200,9 +200,6 @@ export default function MergeKSortedListsVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={MERGEKSORTEDLISTS_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -225,6 +222,9 @@ export default function MergeKSortedListsVisualizer() {
         autoScrollLabel="Auto-scroll code"
         showAutoScroll
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={MERGEKSORTEDLISTS_PATTERNS} />
+      )}
     </>
   )
 

@@ -435,9 +435,6 @@ export default function UniquePathsIIVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={UNIQUEPATHSII_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward}
@@ -450,6 +447,9 @@ export default function UniquePathsIIVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={UNIQUEPATHSII_PATTERNS} />
+            )}
         </>
     )
 

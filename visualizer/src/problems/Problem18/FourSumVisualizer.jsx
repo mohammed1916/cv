@@ -341,9 +341,6 @@ export default function FourSumVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={FOURSUM_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying}
                 isDone={isDone}
@@ -361,6 +358,9 @@ export default function FourSumVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={FOURSUM_PATTERNS} />
+            )}
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </>
     )

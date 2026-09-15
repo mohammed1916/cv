@@ -359,9 +359,6 @@ export default function SortColorsVisualizer() {
 
     const playbackPanel = (
       <>
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={SORTCOLORS_PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -379,6 +376,9 @@ export default function SortColorsVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={SORTCOLORS_PATTERNS} />
+        )}
       </>
     );
 

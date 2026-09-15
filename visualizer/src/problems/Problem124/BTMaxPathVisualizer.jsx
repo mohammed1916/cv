@@ -199,9 +199,6 @@ export default function BTMaxPathVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-            )}
             <PlaybackControls
                 onReset={handleReset}
                 onPrev={stepBack}
@@ -224,6 +221,9 @@ export default function BTMaxPathVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+            )}
         </>
     )
 

@@ -170,9 +170,6 @@ export default function LargestRectangleInHistogramVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={LARGESTRECTANGLEINHISTOGRAM_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -190,6 +187,9 @@ export default function LargestRectangleInHistogramVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={LARGESTRECTANGLEINHISTOGRAM_PATTERNS} />
+      )}
     </>
   )
 

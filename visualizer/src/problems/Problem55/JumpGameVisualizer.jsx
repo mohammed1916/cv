@@ -240,9 +240,6 @@ export default function JumpGameVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={JUMPGAME_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying}
                 isDone={isDone}
@@ -260,6 +257,9 @@ export default function JumpGameVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={JUMPGAME_PATTERNS} />
+            )}
         </>
     )
 

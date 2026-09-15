@@ -337,9 +337,6 @@ export default function AddTwoNumbersVisualizer({ problem }) {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={ATN_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -357,6 +354,9 @@ export default function AddTwoNumbersVisualizer({ problem }) {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={ATN_PATTERNS} />
+      )}
     </>
   )
 

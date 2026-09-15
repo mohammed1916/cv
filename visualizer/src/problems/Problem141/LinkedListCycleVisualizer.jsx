@@ -438,7 +438,6 @@ export default function LinkedListCycleVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 isPlaying={isPlaying}
                 isDone={isDone}
@@ -461,6 +460,7 @@ export default function LinkedListCycleVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && <PatternLegend />}
         </>
     )
 

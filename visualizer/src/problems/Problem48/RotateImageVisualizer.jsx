@@ -153,9 +153,6 @@ export default function RotateImageVisualizer() {
     );
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={ROTATE_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -166,6 +163,9 @@ export default function RotateImageVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={ROTATE_PATTERNS} />
+            )}
         </>
     );
 

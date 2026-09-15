@@ -339,7 +339,6 @@ export default function CountAndSayVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -357,6 +356,7 @@ export default function CountAndSayVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
     </>
   )
 

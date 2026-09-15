@@ -330,9 +330,6 @@ export default function FindFirstOccurrenceVisualizer({ problem }) {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={FINDFIRSTOCCURRENCE_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -350,6 +347,9 @@ export default function FindFirstOccurrenceVisualizer({ problem }) {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={FINDFIRSTOCCURRENCE_PATTERNS} />
+      )}
     </>
   )
 

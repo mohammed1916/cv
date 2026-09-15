@@ -458,9 +458,6 @@ export default function RemoveNthNodeVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={REMOVENTHNODE_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -481,6 +478,9 @@ export default function RemoveNthNodeVisualizer() {
         patternOverlayLabel="Pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={REMOVENTHNODE_PATTERNS} />
+      )}
     </>
   )
 

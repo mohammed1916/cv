@@ -467,9 +467,6 @@ export default function Problem383Visualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -487,6 +484,9 @@ export default function Problem383Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

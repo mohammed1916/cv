@@ -253,9 +253,6 @@ export default function TopKFrequentVisualizer() {
             )}
             {createPortal(
                 <FloatingPanel title="Playback Controls">
-                    {showPatternOverlay && (
-                        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-                    )}
                     <PlaybackControls
                         isPlaying={isPlaying} isDone={isDone} speed={speed}
                         onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -266,6 +263,9 @@ export default function TopKFrequentVisualizer() {
                         patternOverlayLabel="Show pattern overlay"
                         showPatternOverlayToggle
                     />
+                    {showPatternOverlay && (
+                        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+                    )}
                 </FloatingPanel>,
                 document.body,
             )}

@@ -228,9 +228,6 @@ export default function WildcardMatchingVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={WILDCARDMATCHING_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying} isDone={isDone} speed={speed}
         onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -241,6 +238,9 @@ export default function WildcardMatchingVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={WILDCARDMATCHING_PATTERNS} />
+      )}
     </>
   )
 

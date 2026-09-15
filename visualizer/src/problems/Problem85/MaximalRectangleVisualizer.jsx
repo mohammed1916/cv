@@ -388,9 +388,6 @@ function MaximalRectangleVisualizer() {
 
       <div className="mr-bottom">
         <FloatingPanel title="Playback Controls">
-          {showPatternOverlay && (
-            <PatternLegend currentPhase={step?.phase} usedPatterns={MAXIMALRECTANGLE_PATTERNS} />
-          )}
           <PlaybackControls
             isPlaying={isPlaying}
             isDone={isDone}
@@ -408,6 +405,9 @@ function MaximalRectangleVisualizer() {
             patternOverlayLabel="Show pattern overlay"
             showPatternOverlayToggle
           />
+          {showPatternOverlay && (
+            <PatternLegend currentPhase={step?.phase} usedPatterns={MAXIMALRECTANGLE_PATTERNS} />
+          )}
         </FloatingPanel>
       </div>
     </div>

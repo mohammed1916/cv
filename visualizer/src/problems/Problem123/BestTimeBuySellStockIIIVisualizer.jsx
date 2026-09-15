@@ -181,7 +181,6 @@ export default function BestTimeBuySellStockIIIVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 isPlaying={isPlaying}
                 isDone={isDone}
@@ -199,6 +198,7 @@ export default function BestTimeBuySellStockIIIVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && <PatternLegend />}
         </>
     )
 

@@ -279,7 +279,6 @@ export default function WordBreakVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward}
@@ -294,6 +293,7 @@ export default function WordBreakVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && <PatternLegend />}
         </>
     )
 

@@ -201,9 +201,6 @@ export default function GenerateParenthesesVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={GENERATEPARENTHESES_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -218,6 +215,9 @@ export default function GenerateParenthesesVisualizer() {
                 autoScrollLabel="Auto-scroll code"
                 showAutoScroll
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={GENERATEPARENTHESES_PATTERNS} />
+            )}
         </>
     );
 

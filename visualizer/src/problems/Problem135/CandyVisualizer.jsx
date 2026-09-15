@@ -187,7 +187,6 @@ export default function CandyVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -205,6 +204,7 @@ export default function CandyVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
     </>
   );
 

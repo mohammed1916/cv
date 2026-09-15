@@ -192,9 +192,6 @@ export default function LengthOfLastWordVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={LENGTHOFLASTWORD_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -212,6 +209,9 @@ export default function LengthOfLastWordVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={LENGTHOFLASTWORD_PATTERNS} />
+      )}
     </>
   );
 

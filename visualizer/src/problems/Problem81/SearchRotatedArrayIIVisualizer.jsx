@@ -359,9 +359,6 @@ export default function SearchRotatedArrayIIVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={SEARCHROTATEDARRAYII_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward}
@@ -373,6 +370,9 @@ export default function SearchRotatedArrayIIVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={SEARCHROTATEDARRAYII_PATTERNS} />
+            )}
         </>
     )
 

@@ -417,9 +417,6 @@ export default function WordSearchVisualizer() {
       )}
       {createPortal(
         <FloatingPanel title="Playback Controls">
-          {showPatternOverlay && (
-            <PatternLegend currentPhase={step?.phase} usedPatterns={_PATTERNS} />
-          )}
           <PlaybackControls
             isPlaying={isPlaying}
             isDone={isDone}
@@ -440,6 +437,9 @@ export default function WordSearchVisualizer() {
             patternOverlayLabel="Show pattern overlay"
             showPatternOverlayToggle
           />
+          {showPatternOverlay && (
+            <PatternLegend currentPhase={step?.phase} usedPatterns={_PATTERNS} />
+          )}
         </FloatingPanel>,
         document.body
       )}

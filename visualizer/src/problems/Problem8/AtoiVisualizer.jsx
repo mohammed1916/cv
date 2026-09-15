@@ -387,9 +387,6 @@ export default function AtoiVisualizer() {
 
   const playbackPanel = (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', padding: '1rem', overflow: 'auto' }}>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={currentStep?.phase} usedPatterns={ATOI_PATTERNS} />
-      )}
       <PlaybackControls
         className="atoi-controls"
         buttonClassName="atoi-btn"
@@ -414,6 +411,9 @@ export default function AtoiVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={currentStep?.phase} usedPatterns={ATOI_PATTERNS} />
+      )}
     </div>
   )
 

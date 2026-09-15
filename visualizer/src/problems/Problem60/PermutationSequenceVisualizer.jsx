@@ -359,9 +359,6 @@ export default function PermutationSequenceVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={PERMUTATIONSEQUENCE_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying}
                 isDone={isDone}
@@ -382,6 +379,9 @@ export default function PermutationSequenceVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={PERMUTATIONSEQUENCE_PATTERNS} />
+            )}
         </>
     )
 

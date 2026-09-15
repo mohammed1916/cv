@@ -327,9 +327,6 @@ export default function LongestPalindromeVisualizer() {
       </>}
 
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={LPAL_PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -347,6 +344,9 @@ export default function LongestPalindromeVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={LPAL_PATTERNS} />
+        )}
       </FloatingPanel>
     </>
   )

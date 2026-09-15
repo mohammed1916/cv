@@ -157,7 +157,6 @@ export default function DistinctSubsequencesVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && <PatternLegend />}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -175,6 +174,7 @@ export default function DistinctSubsequencesVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && <PatternLegend />}
     </>
   );
 

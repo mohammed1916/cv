@@ -325,7 +325,6 @@ export default function ReverseStringIIVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -343,6 +342,7 @@ export default function ReverseStringIIVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
       </FloatingPanel>
     </div>
   )

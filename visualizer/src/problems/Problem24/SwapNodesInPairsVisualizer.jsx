@@ -292,9 +292,6 @@ export default function SwapNodesInPairsVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={SWAPNODESINPAIRS_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying}
                 isDone={isDone}
@@ -315,6 +312,9 @@ export default function SwapNodesInPairsVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={SWAPNODESINPAIRS_PATTERNS} />
+            )}
         </>
     )
 

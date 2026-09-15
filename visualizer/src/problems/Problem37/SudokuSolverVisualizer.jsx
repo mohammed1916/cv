@@ -283,9 +283,6 @@ export default function SudokuSolverVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={SUDOKUSOLVER_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying} isDone={isDone} speed={speed}
         onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -296,6 +293,9 @@ export default function SudokuSolverVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={SUDOKUSOLVER_PATTERNS} />
+      )}
     </>
   );
 

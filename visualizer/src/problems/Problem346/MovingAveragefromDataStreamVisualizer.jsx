@@ -188,9 +188,6 @@ export default function MovingAveragefromDataStreamVisualizer() {
       </div>
 
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={MOVING_AVERAGE_PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -208,6 +205,9 @@ export default function MovingAveragefromDataStreamVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={MOVING_AVERAGE_PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

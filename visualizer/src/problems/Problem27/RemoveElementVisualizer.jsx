@@ -183,9 +183,6 @@ export default function RemoveElementVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={REMOVEELEMENT_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -203,6 +200,9 @@ export default function RemoveElementVisualizer() {
         patternOverlayLabel="Pattern"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={REMOVEELEMENT_PATTERNS} />
+      )}
     </>
   )
 

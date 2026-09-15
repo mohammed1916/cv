@@ -281,7 +281,6 @@ export default function FlattenBinaryTreeVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying} isDone={isDone} speed={speed}
         onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -292,6 +291,7 @@ export default function FlattenBinaryTreeVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
     </>
   )
 

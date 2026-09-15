@@ -167,7 +167,6 @@ export default function EvalRPNVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 isPlaying={isPlaying}
                 isDone={isDone}
@@ -185,6 +184,7 @@ export default function EvalRPNVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && <PatternLegend />}
         </>
     );
 

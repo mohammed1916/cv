@@ -265,9 +265,6 @@ export default function ReverseKGroupVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={REVERSEKGROUP_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying}
                 isDone={isDone}
@@ -285,6 +282,9 @@ export default function ReverseKGroupVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={REVERSEKGROUP_PATTERNS} />
+            )}
         </>
     )
 

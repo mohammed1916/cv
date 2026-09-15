@@ -190,7 +190,6 @@ export default function PalindromePartitioningVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 onReset={handleReset}
                 onPrev={stepBack}
@@ -213,6 +212,7 @@ export default function PalindromePartitioningVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && <PatternLegend />}
         </>
     );
 

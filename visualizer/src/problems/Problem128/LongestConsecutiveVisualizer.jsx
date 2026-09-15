@@ -257,7 +257,6 @@ export default function LongestConsecutiveVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 onReset={handleReset}
                 onPrev={stepBack}
@@ -280,6 +279,7 @@ export default function LongestConsecutiveVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && <PatternLegend />}
         </>
     )
 

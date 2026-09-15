@@ -256,9 +256,6 @@ export default function PlusOneVisualizer() {
     )
     const playbackPanel = (
       <>
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PLUSONE_PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -276,6 +273,9 @@ export default function PlusOneVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PLUSONE_PATTERNS} />
+        )}
       </>
     )
 

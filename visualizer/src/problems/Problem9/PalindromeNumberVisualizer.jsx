@@ -628,9 +628,6 @@ export default function PalindromeNumberVisualizer() {
 
       {createPortal(
         <FloatingPanel title="Playback Controls">
-          {showPatternOverlay && (
-            <PatternLegend currentPhase={step?.phase} usedPatterns={PN_PATTERNS} />
-          )}
           <PlaybackControls
             isPlaying={isPlaying}
             isDone={isDone}
@@ -648,6 +645,9 @@ export default function PalindromeNumberVisualizer() {
             patternOverlayLabel="Show pattern overlay"
             showPatternOverlayToggle
           />
+          {showPatternOverlay && (
+            <PatternLegend currentPhase={step?.phase} usedPatterns={PN_PATTERNS} />
+          )}
         </FloatingPanel>,
         document.body
       )}

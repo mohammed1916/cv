@@ -323,9 +323,6 @@ export default function ThreeSumClosestVisualizer() {
 
     const playbackPanel = (
       <>
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={THREESUMCLOSEST_PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -343,6 +340,9 @@ export default function ThreeSumClosestVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={THREESUMCLOSEST_PATTERNS} />
+        )}
       </>
     )
 

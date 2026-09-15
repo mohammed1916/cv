@@ -291,9 +291,6 @@ export default function GroupAnagramsVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={GROUPANAGRAMS_PATTERNS} />
-            )}
             <PlaybackControls
                 onReset={handleReset}
                 onPrev={stepBack}
@@ -316,6 +313,9 @@ export default function GroupAnagramsVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={GROUPANAGRAMS_PATTERNS} />
+            )}
         </>
     )
 

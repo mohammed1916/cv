@@ -369,9 +369,6 @@ export default function SpiralMatrixVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={SPIRALMATRIX_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -389,6 +386,9 @@ export default function SpiralMatrixVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={SPIRALMATRIX_PATTERNS} />
+      )}
     </>
   )
 

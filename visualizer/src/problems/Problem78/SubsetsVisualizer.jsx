@@ -227,9 +227,6 @@ export default function SubsetsVisualizer() {
     )
     const playbackPanel = (
         <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={SUBSETS_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -243,6 +240,9 @@ export default function SubsetsVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={SUBSETS_PATTERNS} />
+            )}
         </>
     )
 

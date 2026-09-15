@@ -271,9 +271,6 @@ export default function NQueensIIVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={NQUEENSII_PATTERNS} />
-      )}
       <PlaybackControls
         onReset={handleReset}
         onPrev={stepBack}
@@ -296,6 +293,9 @@ export default function NQueensIIVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={NQUEENSII_PATTERNS} />
+      )}
     </>
   );
 

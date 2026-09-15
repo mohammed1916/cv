@@ -340,9 +340,6 @@ export default function MinimumPathSumVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={MINIMUMPATHSUM_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -363,6 +360,9 @@ export default function MinimumPathSumVisualizer() {
         onAutoScrollChange={setAutoScrollCode}
         showAutoScroll
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={MINIMUMPATHSUM_PATTERNS} />
+      )}
     </>
   )
 

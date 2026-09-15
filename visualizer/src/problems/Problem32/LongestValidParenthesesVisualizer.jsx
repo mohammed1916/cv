@@ -402,9 +402,6 @@ export default function LongestValidParenthesesVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={LONGESTVALIDPARENTHESES_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -426,6 +423,9 @@ export default function LongestValidParenthesesVisualizer() {
         autoScrollLabel="Auto-scroll code"
         showAutoScroll
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={LONGESTVALIDPARENTHESES_PATTERNS} />
+      )}
     </>
   );
 

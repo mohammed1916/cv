@@ -445,9 +445,6 @@ export default function FindFirstLastPositionVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={FINDFIRSTLASTPOSITION_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -465,6 +462,9 @@ export default function FindFirstLastPositionVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={FINDFIRSTLASTPOSITION_PATTERNS} />
+      )}
     </>
   )
 

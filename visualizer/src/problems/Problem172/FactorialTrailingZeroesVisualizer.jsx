@@ -151,7 +151,6 @@ export default function FactorialTrailingZeroesVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && <PatternLegend />}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -169,6 +168,7 @@ export default function FactorialTrailingZeroesVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && <PatternLegend />}
     </>
   )
 

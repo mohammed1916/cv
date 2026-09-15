@@ -152,7 +152,6 @@ export default function MajorityElementVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && <PatternLegend />}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -170,6 +169,7 @@ export default function MajorityElementVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && <PatternLegend />}
     </>
   )
 

@@ -141,9 +141,6 @@ export default function ExcelSheetColumnNumberVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.activeLine} usedPatterns={PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -161,6 +158,9 @@ export default function ExcelSheetColumnNumberVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.activeLine} usedPatterns={PATTERNS} />
+      )}
     </>
   )
 

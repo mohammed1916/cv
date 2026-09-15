@@ -321,9 +321,6 @@ handleReset() }}
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={MERGEINTERVALS_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -341,6 +338,9 @@ handleReset() }}
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={MERGEINTERVALS_PATTERNS} />
+      )}
     </>
   )
 

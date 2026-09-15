@@ -306,7 +306,6 @@ export default function PascalsTriangleVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && <PatternLegend />}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -324,6 +323,7 @@ export default function PascalsTriangleVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && <PatternLegend />}
     </>
   )
 

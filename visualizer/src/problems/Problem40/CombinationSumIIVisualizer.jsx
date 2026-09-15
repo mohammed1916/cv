@@ -433,9 +433,6 @@ export default function CombinationSumIIVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={COMBINATIONSUMII_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -453,6 +450,9 @@ export default function CombinationSumIIVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={COMBINATIONSUMII_PATTERNS} />
+      )}
     </>
   )
 

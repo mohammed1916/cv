@@ -303,9 +303,6 @@ export default function MaximumSubarrayVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={MAXIMUMSUBARRAY_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -323,6 +320,9 @@ export default function MaximumSubarrayVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={MAXIMUMSUBARRAY_PATTERNS} />
+      )}
     </>
   )
 

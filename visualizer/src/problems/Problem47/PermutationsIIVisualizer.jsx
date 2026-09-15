@@ -407,7 +407,6 @@ export default function PermutationsIIVisualizer() {
       )}
       {createPortal(
         <FloatingPanel title="Playback Controls">
-          {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
           <PlaybackControls
             isPlaying={isPlaying}
             isDone={isDone}
@@ -425,6 +424,7 @@ export default function PermutationsIIVisualizer() {
             patternOverlayLabel="Show pattern overlay"
             showPatternOverlayToggle
           />
+          {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
         </FloatingPanel>,
         document.body
       )}

@@ -207,7 +207,6 @@ export default function ValidPalindromeVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 isPlaying={isPlaying}
                 isDone={isDone}
@@ -225,6 +224,7 @@ export default function ValidPalindromeVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && <PatternLegend />}
         </>
     );
 

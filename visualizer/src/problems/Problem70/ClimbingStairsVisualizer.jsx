@@ -389,9 +389,6 @@ export default function ClimbingStairsVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={CLIMBINGSTAIRS_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -412,6 +409,9 @@ export default function ClimbingStairsVisualizer() {
         onAutoScrollChange={setAutoScrollCode}
         showAutoScroll
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={CLIMBINGSTAIRS_PATTERNS} />
+      )}
       {vizFeatures.length > 0 && (
         <VisualizationControls features={vizFeatures} onToggle={toggleVizFeature} />
       )}

@@ -481,9 +481,6 @@ export default function ThreeSumVisualizer() {
 
   const playbackPanel = (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={THREESUM_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -501,6 +498,9 @@ export default function ThreeSumVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={THREESUM_PATTERNS} />
+      )}
     </div>
   )
 

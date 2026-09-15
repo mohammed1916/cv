@@ -327,7 +327,6 @@ export default function ReadNCharactersGivenRead4Visualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && <PatternLegend {...{}} />}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -345,6 +344,7 @@ export default function ReadNCharactersGivenRead4Visualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && <PatternLegend {...{}} />}
     </>
   )
 

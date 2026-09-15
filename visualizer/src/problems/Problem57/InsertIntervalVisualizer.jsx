@@ -236,9 +236,6 @@ export default function InsertIntervalVisualizer() {
 
     const playbackPanel = (
       <>
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={INSERTINTERVAL_PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying} isDone={isDone} speed={speed}
           onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -250,6 +247,9 @@ export default function InsertIntervalVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={INSERTINTERVAL_PATTERNS} />
+        )}
       </>
     );
 

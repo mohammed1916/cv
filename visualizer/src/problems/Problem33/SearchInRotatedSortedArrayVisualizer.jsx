@@ -327,9 +327,6 @@ export default function SearchInRotatedSortedArrayVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={SEARCHINROTATEDSORTEDARRAY_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward}
@@ -341,6 +338,9 @@ export default function SearchInRotatedSortedArrayVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={SEARCHINROTATEDSORTEDARRAY_PATTERNS} />
+            )}
         </>
     )
 

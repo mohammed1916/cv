@@ -559,9 +559,6 @@ export default function MergeTwoSortedListsVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={MERGETWOSORTEDLISTS_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -579,6 +576,9 @@ export default function MergeTwoSortedListsVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={MERGETWOSORTEDLISTS_PATTERNS} />
+      )}
     </>
   );
 

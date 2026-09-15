@@ -401,7 +401,6 @@ export default function LRUCacheVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && <PatternLegend />}
       <PlaybackControls
         onReset={handleReset}
         onPrev={stepBack}
@@ -424,6 +423,7 @@ export default function LRUCacheVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && <PatternLegend />}
     </>
   )
 

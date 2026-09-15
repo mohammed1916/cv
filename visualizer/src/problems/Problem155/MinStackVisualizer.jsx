@@ -347,9 +347,6 @@ export default function MinStackVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend patterns={PATTERNS} />
-      )}
       <PlaybackControls
         onReset={handleReset}
         onPrev={stepBack}
@@ -372,6 +369,9 @@ export default function MinStackVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend patterns={PATTERNS} />
+      )}
     </>
   );
 

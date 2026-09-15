@@ -181,9 +181,6 @@ export default function RangeSumQueryImmutableVisualizer() {
 
       <div className="range-sum-query--immutable-bottom">
         <FloatingPanel title="Playback Controls">
-          {showPatternOverlay && (
-            <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-          )}
           <PlaybackControls
             isPlaying={isPlaying}
             isDone={isDone}
@@ -201,6 +198,9 @@ export default function RangeSumQueryImmutableVisualizer() {
             patternOverlayLabel="Show pattern overlay"
             showPatternOverlayToggle
           />
+          {showPatternOverlay && (
+            <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+          )}
         </FloatingPanel>
       </div>
     </div>

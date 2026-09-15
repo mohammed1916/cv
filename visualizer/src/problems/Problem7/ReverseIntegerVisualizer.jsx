@@ -327,9 +327,6 @@ export default function ReverseIntegerVisualizer() {
 
   const playbackPanel = (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={REVIN_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -347,6 +344,9 @@ export default function ReverseIntegerVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={REVIN_PATTERNS} />
+      )}
     </div>
   )
 

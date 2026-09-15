@@ -257,7 +257,6 @@ export default function CloneGraphVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 onReset={handleReset}
                 onPrev={stepBack}
@@ -280,6 +279,7 @@ export default function CloneGraphVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && <PatternLegend />}
         </>
     );
 

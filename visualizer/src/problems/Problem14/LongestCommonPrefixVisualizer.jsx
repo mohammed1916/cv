@@ -414,9 +414,6 @@ export default function LongestCommonPrefixVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={LCP_PATTERNS} />
-      )}
       <PlaybackControls
         onReset={handleReset}
         onPrev={stepBack}
@@ -439,6 +436,9 @@ export default function LongestCommonPrefixVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={LCP_PATTERNS} />
+      )}
     </>
   )
 

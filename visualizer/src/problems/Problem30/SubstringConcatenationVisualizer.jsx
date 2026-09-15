@@ -245,9 +245,6 @@ export default function SubstringConcatenationVisualizer() {
             )}
             {createPortal(
                 <FloatingPanel title="Playback Controls">
-                    {showPatternOverlay && (
-                        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-                    )}
                     <PlaybackControls
                         isPlaying={isPlaying} isDone={isDone} speed={speed}
                         onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -258,6 +255,9 @@ export default function SubstringConcatenationVisualizer() {
                         patternOverlayLabel="Show pattern overlay"
                         showPatternOverlayToggle
                     />
+                    {showPatternOverlay && (
+                        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+                    )}
                 </FloatingPanel>,
                 document.body
             )}

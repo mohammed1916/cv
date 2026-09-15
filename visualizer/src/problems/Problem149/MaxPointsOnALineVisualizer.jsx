@@ -273,7 +273,6 @@ export default function MaxPointsOnALineVisualizer() {
     )
     const playbackPanel = (
       <>
-            {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -286,6 +285,7 @@ export default function MaxPointsOnALineVisualizer() {
                 onShowPatternOverlayChange={setShowPatternOverlay}
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
         </>
     )
 

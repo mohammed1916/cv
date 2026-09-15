@@ -341,9 +341,6 @@ export default function CoinChange2Visualizer() {
       )}
       {createPortal(
         <FloatingPanel title="Playback Controls">
-          {showPatternOverlay && (
-            <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-          )}
           <PlaybackControls
             isPlaying={isPlaying}
             isDone={isDone}
@@ -361,6 +358,9 @@ export default function CoinChange2Visualizer() {
             patternOverlayLabel="Show pattern overlay"
             showPatternOverlayToggle
           />
+          {showPatternOverlay && (
+            <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+          )}
         </FloatingPanel>,
         document.body
       )}

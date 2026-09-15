@@ -476,9 +476,6 @@ export default function RestoreIPAddressesVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={RESTOREIPADDRESSES_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -496,6 +493,9 @@ export default function RestoreIPAddressesVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={RESTOREIPADDRESSES_PATTERNS} />
+      )}
     </>
   )
 

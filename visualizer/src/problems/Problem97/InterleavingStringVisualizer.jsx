@@ -234,7 +234,6 @@ export default function InterleavingStringVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 onReset={handleReset}
                 onPrev={stepBack}
@@ -257,6 +256,7 @@ export default function InterleavingStringVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && <PatternLegend />}
         </>
     );
 

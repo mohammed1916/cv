@@ -313,9 +313,6 @@ export default function TrappingRainWaterVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={TRAPPINGRAINWATER_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -333,6 +330,9 @@ export default function TrappingRainWaterVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={TRAPPINGRAINWATER_PATTERNS} />
+      )}
     </>
   )
 

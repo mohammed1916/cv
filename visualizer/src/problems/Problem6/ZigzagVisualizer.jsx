@@ -458,9 +458,6 @@ export default function ZigzagVisualizer() {
       </div>
 
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={currentStep?.phase} usedPatterns={ZIGZAG_PATTERNS} />
-        )}
         <PlaybackControls
           buttonClassName="zv-btn"
           ghostButtonClassName="zv-btn-ghost"
@@ -484,6 +481,9 @@ export default function ZigzagVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={currentStep?.phase} usedPatterns={ZIGZAG_PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

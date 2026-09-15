@@ -329,9 +329,6 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={LSWRC_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -349,6 +346,9 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={LSWRC_PATTERNS} />
+      )}
     </>
   )
 

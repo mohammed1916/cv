@@ -311,9 +311,6 @@ export default function PathSumVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend patterns={PATTERNS} linePatternMap={LINE_PATTERN_MAP} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -331,6 +328,9 @@ export default function PathSumVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend patterns={PATTERNS} linePatternMap={LINE_PATTERN_MAP} />
+      )}
     </>
   )
 

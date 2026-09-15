@@ -127,9 +127,6 @@ export default function PowXNVisualizer() {
   // Panel 4: Playback controls (floating)
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={POW_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -147,6 +144,9 @@ export default function PowXNVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={POW_PATTERNS} />
+      )}
     </>
   )
 

@@ -229,7 +229,6 @@ export default function FindMinRotatedVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward}
@@ -241,6 +240,7 @@ export default function FindMinRotatedVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
         </>
     )
 
