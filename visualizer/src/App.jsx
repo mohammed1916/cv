@@ -22,9 +22,14 @@ import "./components/Chatbot/chatbot.css";
 const ChatDrawer = React.lazy(() => import("./components/Chatbot/ChatDrawer"));
 import "./App.css";
 import { TRACKS } from "./data/implementedProblems";
-import { useAccess } from './access/useAccess';
-import { isFreeProblem, accessLabel } from './access/policy';
-import { AccessDialog, Plans, Tutorial, PlaygroundGate } from './access/AccessUI';
+import { useAccess } from "./access/useAccess";
+import { isFreeProblem, accessLabel } from "./access/policy";
+import {
+  AccessDialog,
+  Plans,
+  Tutorial,
+  PlaygroundGate,
+} from "./access/AccessUI";
 
 const RuntimePlayground = React.lazy(
   () => import("./playground/RuntimePlayground"),
@@ -57,9 +62,7 @@ const ALL_PROBLEMS = Object.entries(metaModules)
   })
   .filter(Boolean);
 
-const IMPLEMENTED_BY_NUMBER = new Map(
-  ALL_PROBLEMS.map((p) => [p.number, p]),
-);
+const IMPLEMENTED_BY_NUMBER = new Map(ALL_PROBLEMS.map((p) => [p.number, p]));
 
 const BASICS_PROBLEMS = ALL_PROBLEMS.filter((p) =>
   (p.tags || []).includes("Basics"),
@@ -73,91 +76,239 @@ const CODEFORCES_PROBLEMS = ALL_PROBLEMS.filter((p) =>
 // are fixed external lists (Blind 75 / NeetCode 150), not something to
 // remember to tag on every new problem.
 const BLIND75_NUMBERS = [
-  "1", "121", "217", "238", "53", "152", "153", "33", "15", "11", "371",
-  "191", "338", "268", "190", "70", "322", "300", "1143", "139", "39",
-  "198", "213", "91", "62", "55", "133", "207", "417", "200", "128",
-  "269", "261", "323", "57", "56", "435", "252", "253", "206", "141",
-  "21", "23", "19", "143", "73", "54", "48", "79", "3", "424", "76",
-  "242", "49", "20", "125", "5", "647", "271", "104", "100", "226",
-  "124", "102", "297", "572", "105", "98", "230", "235", "208", "211",
-  "212", "347", "295",
+  "1",
+  "121",
+  "217",
+  "238",
+  "53",
+  "152",
+  "153",
+  "33",
+  "15",
+  "11",
+  "371",
+  "191",
+  "338",
+  "268",
+  "190",
+  "70",
+  "322",
+  "300",
+  "1143",
+  "139",
+  "39",
+  "198",
+  "213",
+  "91",
+  "62",
+  "55",
+  "133",
+  "207",
+  "417",
+  "200",
+  "128",
+  "269",
+  "261",
+  "323",
+  "57",
+  "56",
+  "435",
+  "252",
+  "253",
+  "206",
+  "141",
+  "21",
+  "23",
+  "19",
+  "143",
+  "73",
+  "54",
+  "48",
+  "79",
+  "3",
+  "424",
+  "76",
+  "242",
+  "49",
+  "20",
+  "125",
+  "5",
+  "647",
+  "271",
+  "104",
+  "100",
+  "226",
+  "124",
+  "102",
+  "297",
+  "572",
+  "105",
+  "98",
+  "230",
+  "235",
+  "208",
+  "211",
+  "212",
+  "347",
+  "295",
 ];
 
 const NEETCODE150_ENTRIES = [
-  ["217", "Contains Duplicate"], ["242", "Valid Anagram"], ["1", "Two Sum"],
-  ["49", "Group Anagrams"], ["347", "Top K Frequent Elements"],
-  ["271", "Encode and Decode Strings"], ["238", "Product of Array Except Self"],
-  ["36", "Valid Sudoku"], ["128", "Longest Consecutive Sequence"],
-  ["125", "Valid Palindrome"], ["167", "Two Sum II - Input Array Is Sorted"],
-  ["15", "3Sum"], ["11", "Container With Most Water"], ["42", "Trapping Rain Water"],
+  ["217", "Contains Duplicate"],
+  ["242", "Valid Anagram"],
+  ["1", "Two Sum"],
+  ["49", "Group Anagrams"],
+  ["347", "Top K Frequent Elements"],
+  ["271", "Encode and Decode Strings"],
+  ["238", "Product of Array Except Self"],
+  ["36", "Valid Sudoku"],
+  ["128", "Longest Consecutive Sequence"],
+  ["125", "Valid Palindrome"],
+  ["167", "Two Sum II - Input Array Is Sorted"],
+  ["15", "3Sum"],
+  ["11", "Container With Most Water"],
+  ["42", "Trapping Rain Water"],
   ["121", "Best Time to Buy and Sell Stock"],
   ["3", "Longest Substring Without Repeating Characters"],
-  ["424", "Longest Repeating Character Replacement"], ["567", "Permutation in String"],
-  ["76", "Minimum Window Substring"], ["239", "Sliding Window Maximum"],
-  ["20", "Valid Parentheses"], ["155", "Min Stack"],
-  ["150", "Evaluate Reverse Polish Notation"], ["739", "Daily Temperatures"],
-  ["853", "Car Fleet"], ["84", "Largest Rectangle in Histogram"],
-  ["704", "Binary Search"], ["74", "Search a 2D Matrix"], ["875", "Koko Eating Bananas"],
-  ["153", "Find Minimum in Rotated Sorted Array"], ["33", "Search in Rotated Sorted Array"],
-  ["981", "Time Based Key-Value Store"], ["4", "Median of Two Sorted Arrays"],
-  ["206", "Reverse Linked List"], ["21", "Merge Two Sorted Lists"],
-  ["141", "Linked List Cycle"], ["143", "Reorder List"],
-  ["19", "Remove Nth Node From End of List"], ["138", "Copy List with Random Pointer"],
-  ["2", "Add Two Numbers"], ["287", "Find the Duplicate Number"], ["146", "LRU Cache"],
-  ["23", "Merge k Sorted Lists"], ["25", "Reverse Nodes in k-Group"],
-  ["226", "Invert Binary Tree"], ["104", "Maximum Depth of Binary Tree"],
-  ["543", "Diameter of Binary Tree"], ["110", "Balanced Binary Tree"],
-  ["100", "Same Tree"], ["572", "Subtree of Another Tree"],
+  ["424", "Longest Repeating Character Replacement"],
+  ["567", "Permutation in String"],
+  ["76", "Minimum Window Substring"],
+  ["239", "Sliding Window Maximum"],
+  ["20", "Valid Parentheses"],
+  ["155", "Min Stack"],
+  ["150", "Evaluate Reverse Polish Notation"],
+  ["739", "Daily Temperatures"],
+  ["853", "Car Fleet"],
+  ["84", "Largest Rectangle in Histogram"],
+  ["704", "Binary Search"],
+  ["74", "Search a 2D Matrix"],
+  ["875", "Koko Eating Bananas"],
+  ["153", "Find Minimum in Rotated Sorted Array"],
+  ["33", "Search in Rotated Sorted Array"],
+  ["981", "Time Based Key-Value Store"],
+  ["4", "Median of Two Sorted Arrays"],
+  ["206", "Reverse Linked List"],
+  ["21", "Merge Two Sorted Lists"],
+  ["141", "Linked List Cycle"],
+  ["143", "Reorder List"],
+  ["19", "Remove Nth Node From End of List"],
+  ["138", "Copy List with Random Pointer"],
+  ["2", "Add Two Numbers"],
+  ["287", "Find the Duplicate Number"],
+  ["146", "LRU Cache"],
+  ["23", "Merge k Sorted Lists"],
+  ["25", "Reverse Nodes in k-Group"],
+  ["226", "Invert Binary Tree"],
+  ["104", "Maximum Depth of Binary Tree"],
+  ["543", "Diameter of Binary Tree"],
+  ["110", "Balanced Binary Tree"],
+  ["100", "Same Tree"],
+  ["572", "Subtree of Another Tree"],
   ["235", "Lowest Common Ancestor of a Binary Search Tree"],
-  ["102", "Binary Tree Level Order Traversal"], ["199", "Binary Tree Right Side View"],
-  ["1448", "Count Good Nodes in Binary Tree"], ["98", "Validate Binary Search Tree"],
+  ["102", "Binary Tree Level Order Traversal"],
+  ["199", "Binary Tree Right Side View"],
+  ["1448", "Count Good Nodes in Binary Tree"],
+  ["98", "Validate Binary Search Tree"],
   ["230", "Kth Smallest Element in a BST"],
   ["105", "Construct Binary Tree from Preorder and Inorder Traversal"],
-  ["124", "Binary Tree Maximum Path Sum"], ["297", "Serialize and Deserialize Binary Tree"],
-  ["703", "Kth Largest Element in a Stream"], ["1046", "Last Stone Weight"],
-  ["973", "K Closest Points to Origin"], ["215", "Kth Largest Element in an Array"],
-  ["621", "Task Scheduler"], ["355", "Design Twitter"],
-  ["295", "Find Median from Data Stream"], ["78", "Subsets"], ["39", "Combination Sum"],
-  ["40", "Combination Sum II"], ["46", "Permutations"], ["90", "Subsets II"],
-  ["22", "Generate Parentheses"], ["79", "Word Search"], ["131", "Palindrome Partitioning"],
-  ["17", "Letter Combinations of a Phone Number"], ["51", "N-Queens"],
+  ["124", "Binary Tree Maximum Path Sum"],
+  ["297", "Serialize and Deserialize Binary Tree"],
+  ["703", "Kth Largest Element in a Stream"],
+  ["1046", "Last Stone Weight"],
+  ["973", "K Closest Points to Origin"],
+  ["215", "Kth Largest Element in an Array"],
+  ["621", "Task Scheduler"],
+  ["355", "Design Twitter"],
+  ["295", "Find Median from Data Stream"],
+  ["78", "Subsets"],
+  ["39", "Combination Sum"],
+  ["40", "Combination Sum II"],
+  ["46", "Permutations"],
+  ["90", "Subsets II"],
+  ["22", "Generate Parentheses"],
+  ["79", "Word Search"],
+  ["131", "Palindrome Partitioning"],
+  ["17", "Letter Combinations of a Phone Number"],
+  ["51", "N-Queens"],
   ["208", "Implement Trie (Prefix Tree)"],
-  ["211", "Design Add and Search Words Data Structure"], ["212", "Word Search II"],
-  ["200", "Number of Islands"], ["695", "Max Area of Island"], ["133", "Clone Graph"],
-  ["286", "Walls and Gates"], ["994", "Rotting Oranges"],
-  ["417", "Pacific Atlantic Water Flow"], ["130", "Surrounded Regions"],
-  ["207", "Course Schedule"], ["210", "Course Schedule II"], ["261", "Graph Valid Tree"],
+  ["211", "Design Add and Search Words Data Structure"],
+  ["212", "Word Search II"],
+  ["200", "Number of Islands"],
+  ["695", "Max Area of Island"],
+  ["133", "Clone Graph"],
+  ["286", "Walls and Gates"],
+  ["994", "Rotting Oranges"],
+  ["417", "Pacific Atlantic Water Flow"],
+  ["130", "Surrounded Regions"],
+  ["207", "Course Schedule"],
+  ["210", "Course Schedule II"],
+  ["261", "Graph Valid Tree"],
   ["323", "Number of Connected Components in an Undirected Graph"],
-  ["684", "Redundant Connection"], ["127", "Word Ladder"], ["743", "Network Delay Time"],
-  ["332", "Reconstruct Itinerary"], ["1584", "Min Cost to Connect All Points"],
-  ["778", "Swim in Rising Water"], ["269", "Alien Dictionary"],
-  ["787", "Cheapest Flights Within K Stops"], ["70", "Climbing Stairs"],
-  ["746", "Min Cost Climbing Stairs"], ["198", "House Robber"], ["213", "House Robber II"],
-  ["5", "Longest Palindromic Substring"], ["647", "Palindromic Substrings"],
-  ["91", "Decode Ways"], ["322", "Coin Change"], ["152", "Maximum Product Subarray"],
-  ["139", "Word Break"], ["300", "Longest Increasing Subsequence"],
-  ["416", "Partition Equal Subset Sum"], ["62", "Unique Paths"],
+  ["684", "Redundant Connection"],
+  ["127", "Word Ladder"],
+  ["743", "Network Delay Time"],
+  ["332", "Reconstruct Itinerary"],
+  ["1584", "Min Cost to Connect All Points"],
+  ["778", "Swim in Rising Water"],
+  ["269", "Alien Dictionary"],
+  ["787", "Cheapest Flights Within K Stops"],
+  ["70", "Climbing Stairs"],
+  ["746", "Min Cost Climbing Stairs"],
+  ["198", "House Robber"],
+  ["213", "House Robber II"],
+  ["5", "Longest Palindromic Substring"],
+  ["647", "Palindromic Substrings"],
+  ["91", "Decode Ways"],
+  ["322", "Coin Change"],
+  ["152", "Maximum Product Subarray"],
+  ["139", "Word Break"],
+  ["300", "Longest Increasing Subsequence"],
+  ["416", "Partition Equal Subset Sum"],
+  ["62", "Unique Paths"],
   ["1143", "Longest Common Subsequence"],
-  ["309", "Best Time to Buy and Sell Stock with Cooldown"], ["518", "Coin Change II"],
-  ["494", "Target Sum"], ["97", "Interleaving String"],
-  ["329", "Longest Increasing Path in a Matrix"], ["115", "Distinct Subsequences"],
-  ["72", "Edit Distance"], ["312", "Burst Balloons"], ["10", "Regular Expression Matching"],
-  ["53", "Maximum Subarray"], ["55", "Jump Game"], ["45", "Jump Game II"],
-  ["134", "Gas Station"], ["846", "Hand of Straights"],
-  ["1899", "Merge Triplets to Form Target Triplet"], ["763", "Partition Labels"],
-  ["678", "Valid Parenthesis String"], ["57", "Insert Interval"], ["56", "Merge Intervals"],
-  ["435", "Non-overlapping Intervals"], ["252", "Meeting Rooms"], ["253", "Meeting Rooms II"],
-  ["1851", "Minimum Interval to Include Each Query"], ["48", "Rotate Image"],
-  ["54", "Spiral Matrix"], ["73", "Set Matrix Zeroes"], ["202", "Happy Number"],
-  ["66", "Plus One"], ["50", "Pow(x, n)"], ["43", "Multiply Strings"],
-  ["2013", "Detect Squares"], ["136", "Single Number"], ["191", "Number of 1 Bits"],
-  ["338", "Counting Bits"], ["190", "Reverse Bits"], ["268", "Missing Number"],
-  ["371", "Sum of Two Integers"], ["7", "Reverse Integer"],
+  ["309", "Best Time to Buy and Sell Stock with Cooldown"],
+  ["518", "Coin Change II"],
+  ["494", "Target Sum"],
+  ["97", "Interleaving String"],
+  ["329", "Longest Increasing Path in a Matrix"],
+  ["115", "Distinct Subsequences"],
+  ["72", "Edit Distance"],
+  ["312", "Burst Balloons"],
+  ["10", "Regular Expression Matching"],
+  ["53", "Maximum Subarray"],
+  ["55", "Jump Game"],
+  ["45", "Jump Game II"],
+  ["134", "Gas Station"],
+  ["846", "Hand of Straights"],
+  ["1899", "Merge Triplets to Form Target Triplet"],
+  ["763", "Partition Labels"],
+  ["678", "Valid Parenthesis String"],
+  ["57", "Insert Interval"],
+  ["56", "Merge Intervals"],
+  ["435", "Non-overlapping Intervals"],
+  ["252", "Meeting Rooms"],
+  ["253", "Meeting Rooms II"],
+  ["1851", "Minimum Interval to Include Each Query"],
+  ["48", "Rotate Image"],
+  ["54", "Spiral Matrix"],
+  ["73", "Set Matrix Zeroes"],
+  ["202", "Happy Number"],
+  ["66", "Plus One"],
+  ["50", "Pow(x, n)"],
+  ["43", "Multiply Strings"],
+  ["2013", "Detect Squares"],
+  ["136", "Single Number"],
+  ["191", "Number of 1 Bits"],
+  ["338", "Counting Bits"],
+  ["190", "Reverse Bits"],
+  ["268", "Missing Number"],
+  ["371", "Sum of Two Integers"],
+  ["7", "Reverse Integer"],
 ];
 
-const BLIND75_PROBLEMS = BLIND75_NUMBERS
-  .map((num) => IMPLEMENTED_BY_NUMBER.get(num))
-  .filter(Boolean);
+const BLIND75_PROBLEMS = BLIND75_NUMBERS.map((num) =>
+  IMPLEMENTED_BY_NUMBER.get(num),
+).filter(Boolean);
 
 const NEETCODE150_PROBLEMS = NEETCODE150_ENTRIES.map(([number, title]) => {
   const implemented = IMPLEMENTED_BY_NUMBER.get(number);
@@ -166,7 +317,10 @@ const NEETCODE150_PROBLEMS = NEETCODE150_ENTRIES.map(([number, title]) => {
     id: `neetcode150-${number}`,
     number,
     title,
-    slug: title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""),
+    slug: title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, ""),
     description:
       "Part of NeetCode 150. Visualizer not yet implemented in this app.",
     difficulty: "Medium",
@@ -308,13 +462,26 @@ function SettingsMenu({
             <small>Animate page switches and problem card entrances.</small>
           </span>
         </label>
-        <section className="settings-about" aria-labelledby="settings-about-title">
+        <section
+          className="settings-about"
+          aria-labelledby="settings-about-title"
+        >
           <h2 id="settings-about-title">About</h2>
           <strong>CP Visualizer</strong>
           <p>By Teem Treat</p>
-          <p>Explore algorithms step by step with interactive inputs, code traces, and a workspace you can arrange. Start with a free Easy problem, then practice your own code in the playground.</p>
-          <p>Use Help &amp; tutorial for a quick start and panel docking instructions.</p>
-          <p>&copy; {new Date().getFullYear()} <a href="https://teemtreat.com">teemtreat.com</a></p>
+          <p>
+            Explore algorithms step by step with interactive inputs, code
+            traces, and a workspace you can arrange. Start with a free Easy
+            problem, then practice your own code in the playground.
+          </p>
+          <p>
+            Use Help &amp; tutorial for a quick start and panel docking
+            instructions.
+          </p>
+          <p>
+            &copy; {new Date().getFullYear()}{" "}
+            <a href="https://teemtreat.com">teemtreat.com</a>
+          </p>
           <a href="/privacy.html">Privacy Policy</a>
         </section>
       </div>
@@ -335,19 +502,19 @@ function ProblemPage({
   useEffect(() => {
     publishStep(null, problem.title);
     publishDescription(problem.description || null);
-    return () => publishStep(null, '');
+    return () => publishStep(null, "");
   }, [problem.title, problem.description, publishStep, publishDescription]);
   const Shell = enableTransitions ? motion.div : "div";
   const shellProps = enableTransitions
     ? {
-      initial: { opacity: 0, x: 14 },
-      animate: { opacity: 1, x: 0 },
-      exit: { opacity: 0, x: -14 },
-      // Stiffer spring and a shorter slide: AnimatePresence runs this on every
-      // problem navigation, where the old 50px/320-stiffness travel was slow
-      // enough to feel like the page was still loading.
-      transition: { type: "spring", stiffness: 520, damping: 38 },
-    }
+        initial: { opacity: 0, x: 14 },
+        animate: { opacity: 1, x: 0 },
+        exit: { opacity: 0, x: -14 },
+        // Stiffer spring and a shorter slide: AnimatePresence runs this on every
+        // problem navigation, where the old 50px/320-stiffness travel was slow
+        // enough to feel like the page was still loading.
+        transition: { type: "spring", stiffness: 520, damping: 38 },
+      }
     : {};
   return (
     <Shell className="problem-page" {...shellProps}>
@@ -382,10 +549,7 @@ function ProblemPage({
         />
         <div className="problem-utilities">{utilityControls}</div>
       </header>
-      <ProblemInfoPanel
-        slug={problem.slug}
-        number={problem.number}
-      />
+      <ProblemInfoPanel slug={problem.slug} number={problem.number} />
       <div className="problem-content">
         <ErrorBoundary key={problem.id}>
           {Component ? (
@@ -408,7 +572,14 @@ function ProblemPage({
 }
 
 function ChatAssistant() {
-  const { openChat, closeChat, isOpen, selectMode, toggleSelectMode, attachContext } = useChatContext();
+  const {
+    openChat,
+    closeChat,
+    isOpen,
+    selectMode,
+    toggleSelectMode,
+    attachContext,
+  } = useChatContext();
   const [chatLoaded, setChatLoaded] = useState(false);
   // Keep the drawer mounted after first use to preserve drafts and active streams.
   if (isOpen && !chatLoaded) setChatLoaded(true);
@@ -416,33 +587,71 @@ function ChatAssistant() {
   useEffect(() => {
     if (!selectMode) return undefined;
     const onSelect = (event) => {
-      if (event.target.closest('[data-chat-ignore], button, input, textarea, select, a')) return;
+      if (
+        event.target.closest(
+          "[data-chat-ignore], button, input, textarea, select, a",
+        )
+      )
+        return;
       const element = event.target;
-      if (!element || element.closest('.chat-drawer, .chat-launcher')) return;
+      if (!element || element.closest(".chat-drawer, .chat-launcher")) return;
       event.preventDefault();
       event.stopPropagation();
-      const text = (element.innerText || element.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 1200);
-      const label = element.getAttribute('aria-label') || element.dataset.chatLabel || element.className || element.tagName;
+      const text = (element.innerText || element.textContent || "")
+        .trim()
+        .replace(/\s+/g, " ")
+        .slice(0, 1200);
+      const label =
+        element.getAttribute("aria-label") ||
+        element.dataset.chatLabel ||
+        element.className ||
+        element.tagName;
       attachContext(`Selected: ${String(label).slice(0, 120)}`, {
         tag: element.tagName.toLowerCase(),
         text,
         id: element.id || undefined,
-        classes: typeof element.className === 'string' ? element.className : undefined,
+        classes:
+          typeof element.className === "string" ? element.className : undefined,
       });
       toggleSelectMode();
-      document.body.classList.remove('chat-select-mode');
+      document.body.classList.remove("chat-select-mode");
       openChat();
     };
-    document.addEventListener('click', onSelect, true);
-    return () => document.removeEventListener('click', onSelect, true);
+    document.addEventListener("click", onSelect, true);
+    return () => document.removeEventListener("click", onSelect, true);
   }, [selectMode, attachContext, toggleSelectMode, openChat]);
 
-  return <>
-    {!isOpen && <button type="button" className={`chat-launcher ${selectMode ? 'selecting' : ''}`} onClick={selectMode ? () => { toggleSelectMode(); document.body.classList.remove('chat-select-mode'); closeChat(); } : openChat} title={selectMode ? 'Exit selection and close chat' : 'Open algorithm assistant'}>
-      {selectMode ? 'Select element…' : 'Ask AI'}
-    </button>}
-    {chatLoaded && <Suspense fallback={<div role="status">Loading assistant…</div>}><ChatDrawer /></Suspense>}
-  </>;
+  return (
+    <>
+      {!isOpen && (
+        <button
+          type="button"
+          className={`chat-launcher ${selectMode ? "selecting" : ""}`}
+          onClick={
+            selectMode
+              ? () => {
+                  toggleSelectMode();
+                  document.body.classList.remove("chat-select-mode");
+                  closeChat();
+                }
+              : openChat
+          }
+          title={
+            selectMode
+              ? "Exit selection and close chat"
+              : "Open algorithm assistant"
+          }
+        >
+          {selectMode ? "Select element…" : "Ask AI"}
+        </button>
+      )}
+      {chatLoaded && (
+        <Suspense fallback={<div role="status">Loading assistant…</div>}>
+          <ChatDrawer />
+        </Suspense>
+      )}
+    </>
+  );
 }
 
 function HomePage({
@@ -549,31 +758,41 @@ function HomePage({
   const Shell = enableTransitions ? motion.div : "div";
   const shellProps = enableTransitions
     ? {
-      initial: { opacity: 0 },
-      animate: { opacity: 1 },
-      exit: { opacity: 0 },
-      // Explicit short fade — the default (~0.3s) stacked in front of the card
-      // stagger and made the list feel like it was loading slowly.
-      transition: { duration: 0.14 },
-    }
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        exit: { opacity: 0 },
+        // Explicit short fade — the default (~0.3s) stacked in front of the card
+        // stagger and made the list feel like it was loading slowly.
+        transition: { duration: 0.14 },
+      }
     : {};
   const Brand = enableTransitions ? motion.div : "div";
 
   return (
     <Shell className="home-page" {...shellProps}>
-      <WelcomeHero onTutorial={onTutorial} onPlayground={onOpenPlayground} onStart={() => onSelect(ALL_PROBLEMS.find(p => String(p.number) === '1' && !p.tags.includes('Codeforces')))} />
+      <WelcomeHero
+        onTutorial={onTutorial}
+        onPlayground={onOpenPlayground}
+        onStart={() =>
+          onSelect(
+            ALL_PROBLEMS.find(
+              (p) => String(p.number) === "1" && !p.tags.includes("Codeforces"),
+            ),
+          )
+        }
+      />
       <header className="home-header">
         <div className="home-header-row">
           <Brand
             className="brand"
             {...(enableTransitions
               ? {
-                initial: { y: -18, opacity: 0 },
-                animate: { y: 0, opacity: 1 },
-                // No delay: the brand is above the fold, so holding it back just
-                // reads as lag.
-                transition: { type: "spring", stiffness: 460, damping: 30 },
-              }
+                  initial: { y: -18, opacity: 0 },
+                  animate: { y: 0, opacity: 1 },
+                  // No delay: the brand is above the fold, so holding it back just
+                  // reads as lag.
+                  transition: { type: "spring", stiffness: 460, damping: 30 },
+                }
               : {})}
           >
             <div className="brand-icon">⟨/⟩</div>
@@ -822,8 +1041,11 @@ function HomePage({
 export default function App() {
   const access = useAccess();
   const [dialog, setDialog] = useState(null);
-  const [lockedTitle, setLockedTitle] = useState('');
-  const [active, setActive] = useState(() => ALL_PROBLEMS.find(p => `#${p.slug}` === window.location.hash) || null);
+  const [lockedTitle, setLockedTitle] = useState("");
+  const [active, setActive] = useState(
+    () =>
+      ALL_PROBLEMS.find((p) => `#${p.slug}` === window.location.hash) || null,
+  );
   const [showPlayground, setShowPlayground] = useState(() => {
     try {
       return window.location.hash === "#playground";
@@ -836,7 +1058,9 @@ export default function App() {
   const [navigationTransitionsEnabled, setNavigationTransitionsEnabled] =
     useState(() => {
       try {
-        const stored = window.localStorage.getItem("cpviz.navigationTransitions");
+        const stored = window.localStorage.getItem(
+          "cpviz.navigationTransitions",
+        );
         return stored === null ? true : stored !== "0";
       } catch {
         return true;
@@ -855,12 +1079,17 @@ export default function App() {
 
   useEffect(() => {
     const onPop = () => {
-      setActive(ALL_PROBLEMS.find(p => `#${p.slug}` === window.location.hash) || null);
+      setActive(
+        ALL_PROBLEMS.find((p) => `#${p.slug}` === window.location.hash) || null,
+      );
       setShowPlayground(window.location.hash === "#playground");
     };
     window.addEventListener("popstate", onPop);
     window.addEventListener("hashchange", onPop);
-    return () => { window.removeEventListener("popstate", onPop); window.removeEventListener("hashchange", onPop); };
+    return () => {
+      window.removeEventListener("popstate", onPop);
+      window.removeEventListener("hashchange", onPop);
+    };
   }, []);
 
   const goBack = () => {
@@ -877,13 +1106,11 @@ export default function App() {
 
   const selectProblem = (problem) => {
     if (!isFreeProblem(problem) && !access.pro) {
-      setLockedTitle(problem.title); setDialog('plans'); return;
+      setLockedTitle(problem.title);
+      setDialog("plans");
+      return;
     }
-    window.history.pushState(
-      { slug: problem.slug },
-      "",
-      `#${problem.slug}`,
-    );
+    window.history.pushState({ slug: problem.slug }, "", `#${problem.slug}`);
     setShowPlayground(false);
     setActive(problem);
   };
@@ -896,9 +1123,30 @@ export default function App() {
 
   const utilityControls = (
     <>
-      <button className="access-toolbar-btn" onClick={() => setDialog('tutorial')}>Help & tutorial</button>
-      <button className="access-toolbar-btn pro" onClick={() => { setLockedTitle(''); setDialog('plans'); }}>{access.pro ? 'Pro account' : 'Get Pro · ₹199'}</button>
-      <button className="access-toolbar-btn" disabled={access.busy} onClick={() => setDialog('account')}>{access.user ? (access.user.displayName?.split(' ')[0] || 'Account') : 'Sign in'}</button>
+      <button
+        className="access-toolbar-btn"
+        onClick={() => setDialog("tutorial")}
+      >
+        Help & tutorial
+      </button>
+      <button
+        className="access-toolbar-btn pro"
+        onClick={() => {
+          setLockedTitle("");
+          setDialog("plans");
+        }}
+      >
+        {access.pro ? "Pro account" : "Get Pro · ₹199"}
+      </button>
+      <button
+        className="access-toolbar-btn"
+        disabled={access.busy}
+        onClick={() => setDialog("account")}
+      >
+        {access.user
+          ? access.user.displayName?.split(" ")[0] || "Account"
+          : "Sign in"}
+      </button>
       <ThemeToggle />
       <SettingsMenu
         navigationTransitionsEnabled={navigationTransitionsEnabled}
@@ -908,25 +1156,50 @@ export default function App() {
   );
 
   const pageContent = showPlayground ? (
-    <div key="playground-page" style={{display:'flex',flexDirection:'column',height:'100%',minHeight:0}}>
-    <div className="access-actions"><button className="access-toolbar-btn" onClick={goBack}>← Problems</button>{utilityControls}</div>
-    <PlaygroundGate key={access.user?.uid || 'guest'} access={access} onPlans={() => setDialog('plans')}>
-    <Suspense
-      key="runtime-playground-boundary"
-      fallback={
-        <div className="playground-loading">Loading Visualizer Playground…</div>
-      }
+    <div
+      key="playground-page"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        minHeight: 0,
+      }}
     >
-      <RuntimePlayground
-        key="runtime-playground"
-        onBack={goBack}
-        layoutWidth={layoutWidth}
-        onLayoutChange={setLayoutWidth}
-      />
-    </Suspense>
-    </PlaygroundGate></div>
+      <div className="access-actions">
+        <button className="access-toolbar-btn" onClick={goBack}>
+          ← Problems
+        </button>
+        {utilityControls}
+      </div>
+      <PlaygroundGate
+        key={access.user?.uid || "guest"}
+        access={access}
+        onPlans={() => setDialog("plans")}
+      >
+        <Suspense
+          key="runtime-playground-boundary"
+          fallback={
+            <div className="playground-loading">
+              Loading Visualizer Playground…
+            </div>
+          }
+        >
+          <RuntimePlayground
+            key="runtime-playground"
+            onBack={goBack}
+            layoutWidth={layoutWidth}
+            onLayoutChange={setLayoutWidth}
+          />
+        </Suspense>
+      </PlaygroundGate>
+    </div>
   ) : active && !isFreeProblem(active) && !access.pro ? (
-    <div key="locked-problem" className="access-gate"><h2>{active.title} · Pro</h2><p>Sign in with a Pro account to open this visualizer.</p><button onClick={goBack}>Back to problems</button><button onClick={() => setDialog('plans')}>View plans</button></div>
+    <div key="locked-problem" className="access-gate">
+      <h2>{active.title} · Pro</h2>
+      <p>Sign in with a Pro account to open this visualizer.</p>
+      <button onClick={goBack}>Back to problems</button>
+      <button onClick={() => setDialog("plans")}>View plans</button>
+    </div>
   ) : active ? (
     <ProblemPage
       key={active.id}
@@ -955,41 +1228,125 @@ export default function App() {
   return (
     <ThemeProvider>
       <ZoomProvider>
-      {(active || showPlayground) && <ZoomControls />}
-      <div className={`app layout-${layoutWidth}`}>
-        {import.meta.env.VITE_ENABLE_VERCEL_ANALYTICS !== "false" && <Analytics />}
-        {!active && !showPlayground && (
-          <nav className="app-toolbar marketing-nav" aria-label="Main navigation"><a className="marketing-brand" href="#" aria-label="Teem Treat home"><span>⌘</span> TEEM TREAT <small>VISUALIZER</small></a><div className="marketing-nav-actions"><details className="marketing-view"><summary>View</summary><ZoomControls /></details><button className="access-toolbar-btn" onClick={openPlayground}>Playground ↗</button>{utilityControls}</div></nav>
-        )}
-        {/* A flex column (not overflow:auto) so children get a definite height to
+        {(active || showPlayground) && <ZoomControls />}
+        <div className={`app layout-${layoutWidth}`}>
+          {import.meta.env.VITE_ENABLE_VERCEL_ANALYTICS !== "false" && (
+            <Analytics />
+          )}
+          {!active && !showPlayground && (
+            <nav
+              className="app-toolbar marketing-nav"
+              aria-label="Main navigation"
+            >
+              <a
+                className="marketing-brand"
+                href="#"
+                aria-label="Teem Treat home"
+              >
+                <span>⌘</span> TEEM TREAT <small>VISUALIZER</small>
+              </a>
+              <div className="marketing-nav-actions">
+                <details className="marketing-view">
+                  <summary>View</summary>
+                  <ZoomControls />
+                </details>
+                <button className="access-toolbar-btn" onClick={openPlayground}>
+                  Playground ↗
+                </button>
+                {utilityControls}
+              </div>
+            </nav>
+          )}
+          {/* A flex column (not overflow:auto) so children get a definite height to
             resolve `height: 100%` against — an auto-overflow box lets children
             grow and scroll instead of constraining them, which left every
             visualizer shell unable to fill. Pages that need to scroll (home,
             .problem-content) own their own overflow. */}
-        <div
-          id="zoom-content-wrapper"
-          style={{
-            flex: '1 1 0',
-            minHeight: 0,
-            marginTop: '0',
-            display: 'flex',
-            flexDirection: 'column',
-          }}
-        >
-          {navigationTransitionsEnabled ? (
-            <AnimatePresence mode="wait">{pageContent}</AnimatePresence>
-          ) : (
-            pageContent
+          <div
+            id="zoom-content-wrapper"
+            style={{
+              flex: "1 1 0",
+              minHeight: 0,
+              marginTop: "0",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            {navigationTransitionsEnabled ? (
+              <AnimatePresence mode="wait">{pageContent}</AnimatePresence>
+            ) : (
+              pageContent
+            )}
+          </div>
+          {dialog && (
+            <AccessDialog
+              title={
+                dialog === "tutorial"
+                  ? "Learn with the visualizer"
+                  : dialog === "account"
+                    ? "Your Teem Treat account"
+                    : "Unlock Teem Treat Pro"
+              }
+              onClose={() => setDialog(null)}
+            >
+              {dialog === "tutorial" ? (
+                <Tutorial
+                  problems={ALL_PROBLEMS}
+                  onProblem={(p) => {
+                    setDialog(null);
+                    selectProblem(p);
+                  }}
+                  onPlayground={() => {
+                    setDialog(null);
+                    openPlayground();
+                  }}
+                />
+              ) : dialog === "account" ? (
+                <>
+                  {access.user ? (
+                    <>
+                      <p>
+                        {access.user.displayName} · {access.user.email}
+                      </p>
+                      <p>
+                        {access.pro
+                          ? `Pro active until ${new Date(access.account.expiresAt).toLocaleDateString()}`
+                          : "Free account"}
+                      </p>
+                      <button onClick={access.logout}>Sign out</button>
+                      <button onClick={access.refresh}>Refresh access</button>
+                    </>
+                  ) : (
+                    <>
+                      <p>
+                        Use Google to keep your daily playground allowance and
+                        Pro access linked to your account.
+                      </p>
+                      <button
+                        className="access-primary"
+                        disabled={access.busy}
+                        onClick={access.login}
+                      >
+                        Continue with Google
+                      </button>
+                    </>
+                  )}
+                  <p role="alert">{access.error}</p>
+                </>
+              ) : (
+                <Plans
+                  access={access}
+                  reason={
+                    lockedTitle
+                      ? `${lockedTitle} is included in Pro. Unlock it and every other implemented visualizer.`
+                      : ""
+                  }
+                />
+              )}
+            </AccessDialog>
           )}
+          <ChatAssistant />
         </div>
-        {dialog && <AccessDialog title={dialog === 'tutorial' ? 'Learn with the visualizer' : dialog === 'account' ? 'Your Teem Treat account' : 'Unlock Teem Treat Pro'} onClose={() => setDialog(null)}>
-          {dialog === 'tutorial' ? <Tutorial problems={ALL_PROBLEMS} onProblem={(p) => { setDialog(null); selectProblem(p); }} onPlayground={() => { setDialog(null); openPlayground(); }} /> : dialog === 'account' ? <>
-            {access.user ? <><p>{access.user.displayName} · {access.user.email}</p><p>{access.pro ? `Pro active until ${new Date(access.account.expiresAt).toLocaleDateString()}` : 'Free account'}</p><button onClick={access.logout}>Sign out</button><button onClick={access.refresh}>Refresh access</button></> : <><p>Use Google to keep your daily playground allowance and Pro access linked to your account.</p><button className="access-primary" disabled={access.busy} onClick={access.login}>Continue with Google</button></>}
-            <p role="alert">{access.error}</p>
-          </> : <Plans access={access} reason={lockedTitle ? `${lockedTitle} is included in Pro. Unlock it and every other implemented visualizer.` : ''} />}
-        </AccessDialog>}
-        <ChatAssistant />
-      </div>
       </ZoomProvider>
     </ThemeProvider>
   );

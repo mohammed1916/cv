@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './TutorialDemo.css';
+import TwoSumPreviewCells from '../components/shared/TwoSumPreviewCells';
 import { motion, useReducedMotion } from 'framer-motion';
 
 const demos = [
@@ -79,16 +80,13 @@ export default function TutorialDemo({ lesson, cinematic = false }) {
       </> : <>
         <g transform={docked ? 'translate(248 0)' : undefined}>
           <Box x={24} y={64} width={344} height={146}><text x="40" y="88">Array &amp; Target · 9</text>
-            {[2, 7, 11, 15].map((value, index) => <g key={value}>
-              <rect x={53 + index * 73} y="116" width="57" height="48" rx="8" fill={found && index < 2 ? '#166534' : index === (progressed ? 1 : 0) ? '#4338ca' : '#263449'} stroke="#94a3b8" />
-              <text x={81 + index * 73} y="146" textAnchor="middle" fontSize="20">{value}</text><text x={81 + index * 73} y="181" textAnchor="middle" fontSize="11">index {index}</text>
-            </g>)}
-            <text x="40" y="201" fontSize="12">{found ? 'Found: indices [0, 1]' : progressed ? 'Seen: 2 → index 0 · need 2' : 'Scan the array from left to right'}</text>
+            <TwoSumPreviewCells x={53} y={118} size={42} activeIndex={progressed ? 1 : 0} found={found} />
+            <text x="40" y="205" fontSize="12">{found ? 'Found: indices [0, 1]' : progressed ? 'Seen: 2 → index 0 · need 2' : 'Scan the array from left to right'}</text>
           </Box>
         </g>
         <g transform={docked ? 'translate(-368 0)' : undefined}>
           <Box x={392} y={64} width={224} height={146}><text x="406" y="88">⠿ Code trace</text>
-            <rect x="400" y={progressed ? 144 : 113} width="208" height="25" rx="4" fill="#312e81" />
+            <rect x="400" y={found ? 174 : progressed ? 144 : 113} width="208" height="25" rx="4" fill="#312e81" />
             <text x="409" y="131" fontSize="12">need = target − value</text><text x="409" y="161" fontSize="12">if need in seen:</text><text x="421" y="190" fontSize="12">return [seen[need], i]</text>
           </Box>
         </g>

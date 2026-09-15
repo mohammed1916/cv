@@ -1,11 +1,22 @@
 import { useState } from 'react';
 import './marketing.css';
+import { useEffect } from 'react';
+import { useReducedMotion } from 'framer-motion';
+import TwoSumPreviewCells from '../shared/TwoSumPreviewCells';
 
 export default function WelcomeHero({ onTutorial, onPlayground, onStart }) {
   const [dismissed, setDismissed] = useState(() => {
     try { return localStorage.getItem('cpviz.welcome.v1') === 'dismissed'; } catch { return false; }
   });
   const [paused, setPaused] = useState(false);
+  const [phase, setPhase] = useState(0);
+  const reducedMotion = useReducedMotion();
+  useEffect(() => {
+    if (paused || reducedMotion) return;
+    const timer = setInterval(() => setPhase(value => (value + 1) % 3), 2400);
+    return () => clearInterval(timer);
+  }, [paused, reducedMotion]);
+  const previewPhase = reducedMotion ? 2 : phase;
   function dismiss() { setDismissed(true); try { localStorage.setItem('cpviz.welcome.v1', 'dismissed'); } catch { /* Optional preference */ } }
   return <section className="welcome-hero" aria-labelledby="welcome-title">
     <div className="welcome-copy">
@@ -17,12 +28,13 @@ export default function WelcomeHero({ onTutorial, onPlayground, onStart }) {
     </div>
     <div className={`welcome-visual ${paused ? 'is-paused' : ''}`}>
       <div className="welcome-demo-head"><span><i /> TWO SUM / EXECUTION PREVIEW</span><button onClick={() => setPaused(!paused)} aria-label={paused ? 'Play preview animation' : 'Pause preview animation'}>{paused ? 'Play' : 'Pause'}</button></div>
-      <svg viewBox="0 0 520 280" role="img" aria-label="Two Sum: two plus seven equals nine. Store two, then find its complement seven.">
+      <svg viewBox="0 0 520 280" role="img" aria-label="Two Sum: store 2 at index 0. At index 1, value 7 needs complement 2. Return indices 0 and 1.">
         <defs><pattern id="hero-grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M 24 0 L 0 0 0 24" fill="none" stroke="currentColor" opacity=".08" /></pattern></defs>
         <rect width="520" height="280" fill="url(#hero-grid)" />
-        <path className="hero-flow" d="M85 130 V200 Q85 220 110 220 H235 Q260 220 260 195 V130" fill="none" stroke="#9e85ff" strokeWidth="2" strokeDasharray="6 7" />
-        {[2,7,11,15].map((n,i) => <g key={n} className={i < 2 ? 'hero-node hero-match' : 'hero-node'} style={{animationDelay:`${i * .4}s`}}><rect x={50+i*112} y="65" width="84" height="84" rx="14" /><text x={92+i*112} y="116" textAnchor="middle">{n}</text><text className="hero-index" x={92+i*112} y="47" textAnchor="middle">0{i}</text></g>)}
-        <text x="302" y="220" className="hero-result">2 + 7 = 9</text>
+        <text x="50" y="33" className="hero-index" fill="currentColor" fontSize="12">nums = [2, 7, 11, 15] · target = 9</text>
+        <TwoSumPreviewCells x={50} y={76} spacing={112} size={64} activeIndex={previewPhase === 0 ? 0 : 1} found={previewPhase === 2} />
+        <text x="50" y="216" className="hero-result">{previewPhase === 0 ? '9 − 2 = 7 · not seen yet' : previewPhase === 1 ? '9 − 7 = 2 · seen at index 0' : '2 + 7 = 9 → return [0, 1]'}</text>
+        <text x="50" y="248" fill="currentColor" fontSize="13">{previewPhase === 0 ? 'Store 2 → index 0, then continue.' : previewPhase === 1 ? 'The hash map remembers 2 → index 0.' : 'match = earlier index · i = current index'}</text>
       </svg>
       <div className="welcome-code"><span>01</span> complement = target − current<br /><span>02</span> <strong>if</strong> complement in seen: <strong>return</strong> answer</div>
     </div>
