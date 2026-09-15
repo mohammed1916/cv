@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { accessCall, backendEnabled, checkoutEnabled } from './firebase';
 import { PLANS } from './policy';
 import './access.css';
+import TutorialDemo from './TutorialDemo';
 
 export function AccessDialog({ title, onClose, children }) {
   const ref = useRef(null);
@@ -95,7 +96,7 @@ export function Tutorial({ onProblem, onPlayground, problems }) {
   const twoSum = problems.find(p => String(p.number) === '1' && !p.tags.includes('Codeforces'));
   return <div className="tutorial-content"><span className="access-eyebrow">QUICK START · {step + 1} / {lessons.length}</span>
     <progress value={step + 1} max={lessons.length} aria-label="Tutorial progress" />
-    <div className="workspace-demo" aria-label="Example workspace: visualization on the left, code on the right, playback docked below"><div>Array &amp; Target</div><div>Code trace</div><div className="demo-playback">↔ Playback · drag to dock</div></div>
+    <TutorialDemo key={step} lesson={step} />
     <h3>{lessons[step][0]}</h3><p>{lessons[step][1]}</p>
     <div className="access-actions"><button disabled={step === 0} onClick={() => setStep(step - 1)}>Previous</button>
       {step < lessons.length - 1 ? <button className="access-primary" onClick={() => setStep(step + 1)}>Next</button> : <button className="access-primary" onClick={onPlayground}>Open playground</button>}
