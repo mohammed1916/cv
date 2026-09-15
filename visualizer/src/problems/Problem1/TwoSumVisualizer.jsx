@@ -13,6 +13,8 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './TwoSumVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
+import { useRef } from 'react'
+import TwoSumTour from './TwoSumTour'
 
 const TWOSUM_PATTERNS = ['init', 'loop', 'calc_diff', 'check_map', 'found', 'add_map']
 
@@ -103,6 +105,7 @@ function generateSteps(nums, target) {
 const EXAMPLES = getExamples('two-sum')
 
 export default function TwoSumVisualizer() {
+  const tourPlaybackRef = useRef(null)
   const [numsInput, setNumsInput] = useState('[2, 7, 11, 15]')
   const [targetInput, setTargetInput] = useState('9')
 
@@ -308,7 +311,7 @@ export default function TwoSumVisualizer() {
   )
 
   const playbackPanel = (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+    <div ref={tourPlaybackRef} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={TWOSUM_PATTERNS} />
       )}
@@ -350,7 +353,10 @@ export default function TwoSumVisualizer() {
 
   return (
     <div className="vis-shell twosum-shell">
-      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      <TwoSumTour panels={panelDivs} playbackRef={tourPlaybackRef} />
+      <div className="two-sum-tour-workspace">
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      </div>
       {panelDivs && (
         <>
           {panelDivs.array && createPortal(arrayPanel, panelDivs.array)}

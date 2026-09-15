@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './TutorialDemo.css';
+import { motion, useReducedMotion } from 'framer-motion';
 
 const demos = [
   [
@@ -38,7 +39,8 @@ function Box({ x, y, width, height, children, active = false }) {
   return <g><rect x={x} y={y} width={width} height={height} rx="8" fill={active ? '#312e81' : '#172033'} stroke={active ? '#a5b4fc' : '#475569'} />{children}</g>;
 }
 
-export default function TutorialDemo({ lesson }) {
+export default function TutorialDemo({ lesson, cinematic = false }) {
+  const reducedMotion = useReducedMotion();
   const [frame, setFrame] = useState(0);
   const [playing, setPlaying] = useState(() => !window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   useEffect(() => {
@@ -57,7 +59,9 @@ export default function TutorialDemo({ lesson }) {
       <button type="button" onClick={() => setFrame(value => (value + 1) % 4)}>Next frame</button>
       <button type="button" onClick={() => setFrame(0)}>Replay</button>
     </div></div>
-    <svg viewBox="0 0 640 290" fontSize="14" role="img" aria-label={caption}>
+    <motion.svg initial={false} animate={{ viewBox: cinematic && !reducedMotion && frame < 2
+      ? lesson === 2 ? '330 45 300 160' : lesson === 1 ? '20 175 430 115' : '20 50 370 200'
+      : '0 0 640 290' }} transition={{ duration: reducedMotion ? 0 : 0.9, ease: 'easeInOut' }} viewBox="0 0 640 290" fontSize="14" role="img" aria-label={caption}>
       <rect width="640" height="290" rx="12" fill="#0b1220" />
       <text x="24" y="30" fill="#cbd5e1" fontSize="14">{lesson === 4 ? 'Code Playground · Python' : 'Two Sum · example workspace'}</text>
       {lesson === 0 && frame < 2 ? <>
@@ -100,7 +104,7 @@ export default function TutorialDemo({ lesson }) {
         {click && <circle key={`${lesson}-${frame}`} className="tutorial-demo-click" r="17" fill="#c7d2fe33" stroke="#c7d2fe" strokeWidth="2" />}
         <path d="M0 0 L0 24 L6 18 L12 30 L17 27 L11 16 L21 16 Z" fill="white" stroke="#0f172a" strokeWidth="2" />
       </g>
-    </svg>
+    </motion.svg>
     <figcaption>{caption}</figcaption>
   </figure>;
 }
