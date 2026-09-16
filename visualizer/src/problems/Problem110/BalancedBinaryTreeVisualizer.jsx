@@ -3,30 +3,28 @@ import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import {
-  buildTree,
   computeLayout,
   collectNodes,
   buildEdges,
-  parseTreeInput,
 } from "../../components/treeUtils";
 import { getExamples } from "../../config/examplesRegistry";
 import "./BalancedBinaryTreeVisualizer.css";
+import { parseBalancedTree, traceBalance } from "./algorithm";
 import ManualInputPanel from "../../components/shared/ManualInputPanel";
 import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
-const LINE_PATTERN_MAP = {}; // Auto-generated: maps line numbers to phase names
-const PATTERNS = []; // Auto-generated: list of phase names used in this visualizer
+const LINE_PATTERN_MAP = { 4: 'visit', 5: 'return', 6: 'visit', 7: 'return', 8: 'compare', 9: 'return', 10: 'done' };
+const PATTERNS = ['visit', 'compare', 'return', 'done'];
 const CANVAS_W = 520;
-const CANVAS_H = 320;
+
 const NODE_R = 22;
 
 const SOLUTION_CODE = [
@@ -42,129 +40,21 @@ const SOLUTION_CODE = [
   { line: 10, text: "    return height(root) != -1" },
 ];
 
-function generateSteps(arr) {
-  const root = buildTree(arr);
+function generateSteps(root) {
   const positions = computeLayout(root, CANVAS_W, 80);
   const edges = buildEdges(root);
   const allNodes = collectNodes(root);
-  const steps = [];
-
-  if (!root) {
-    return [
-      {
-        phase: "done",
-        activeLine: 3,
-        activeId: -1,
-        heights: new Map(),
-        unbalancedIds: new Set(),
-        result: true,
-        positions,
-        edges,
-        allNodes,
-        message: "Empty tree → balanced",
-      },
-    ];
-  }
-
-  const heights = new Map();
-  const unbalancedIds = new Set();
-
-  function dfs(node) {
-    if (!node) return 0;
-
-    steps.push({
-      phase: "recurse-left",
-      activeLine: 4,
-      activeId: node.id,
-      heights: new Map(heights),
-      unbalancedIds: new Set(unbalancedIds),
-      result: null,
-      positions,
-      edges,
-      allNodes,
-      message: `Node ${node.val}: recurse left subtree`,
-    });
-
-    const lh = dfs(node.left);
-
-    steps.push({
-      phase: "recurse-right",
-      activeLine: 6,
-      activeId: node.id,
-      heights: new Map(heights),
-      unbalancedIds: new Set(unbalancedIds),
-      result: null,
-      positions,
-      edges,
-      allNodes,
-      message: `Node ${node.val}: lh=${lh === -1 ? "-1(unbalanced)" : lh}, recurse right subtree`,
-    });
-
-    const rh = dfs(node.right);
-
-    const lhStr = lh === -1 ? "-1" : lh;
-    const rhStr = rh === -1 ? "-1" : rh;
-
-    if (lh === -1 || rh === -1 || Math.abs(lh - rh) > 1) {
-      unbalancedIds.add(node.id);
-      steps.push({
-        phase: "unbalanced",
-        activeLine: 8,
-        activeId: node.id,
-        heights: new Map(heights),
-        unbalancedIds: new Set(unbalancedIds),
-        result: false,
-        positions,
-        edges,
-        allNodes,
-        message: `Node ${node.val}: |lh(${lhStr}) - rh(${rhStr})| > 1 → UNBALANCED, return -1`,
-      });
-      return -1;
-    }
-
-    const h = Math.max(lh, rh) + 1;
-    heights.set(node.id, h);
-    steps.push({
-      phase: "balanced",
-      activeLine: 9,
-      activeId: node.id,
-      heights: new Map(heights),
-      unbalancedIds: new Set(unbalancedIds),
-      result: null,
-      positions,
-      edges,
-      allNodes,
-      message: `Node ${node.val}: balanced, height = max(${lhStr},${rhStr})+1 = ${h}`,
-    });
-    return h;
-  }
-
-  const finalH = dfs(root);
-  const result = finalH !== -1;
-
-  steps.push({
-    phase: "done",
-    activeLine: 10,
-    activeId: -1,
-    heights: new Map(heights),
-    unbalancedIds: new Set(unbalancedIds),
-    result,
-    positions,
-    edges,
-    allNodes,
-    message: `Result: ${result ? "✓ Balanced" : "✗ Not Balanced"}`,
-  });
-
-  return steps;
+  return traceBalance(root).map(frame => ({ ...frame, positions, edges, allNodes }));
 }
 
 const EXAMPLES = getExamples("balanced-binary-tree");
 
 // TreeVisualizationPanel: renders the tree canvas with states
 function TreeVisualizationPanel({ step, positions, edges, allNodes }) {
+  const canvasHeight = Math.max(320, ...[...positions.values()].map(p => p.y + 55));
   return (
     <div className="bbt-viz-panel">
-      <div className="bbt-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
+      <div className="bbt-canvas" style={{ width: CANVAS_W, height: canvasHeight }}>
         <svg
           style={{
             position: "absolute",
@@ -173,7 +63,7 @@ function TreeVisualizationPanel({ step, positions, edges, allNodes }) {
             pointerEvents: "none",
           }}
           width={CANVAS_W}
-          height={CANVAS_H}
+          height={canvasHeight}
         >
           {edges.map(({ fromId, toId }) => {
             const from = positions.get(fromId);
@@ -231,6 +121,17 @@ function TreeVisualizationPanel({ step, positions, edges, allNodes }) {
 function StatePanel({ step, allNodes }) {
   return (
     <div className="bbt-state-panel">
+      <h3>Height balance checkpoint</h3>
+      <p>Every node must have child heights differing by at most one.</p>
+      {step?.left != null && <div className="bbt-height-comparison" aria-label="Child heights">
+        {['left', 'right'].map(side => <div key={side}>
+          <span>{side} subtree</span>
+          <strong>{step[side] === -1 ? 'Failed' : step[side] ?? 'Not visited'}</strong>
+          {step[side] >= 0 && step[side] != null && <meter min="0" max={Math.max(1, step.left, step.right ?? 0)} value={step[side]} aria-label={`${side} height`} />}
+        </div>)}
+        <p>{step.phase === 'propagate' ? 'Propagate failure; no new comparison.' : step.difference != null ? `Difference ${step.difference} / allowed 1` : 'Waiting for the right height.'}</p>
+      </div>}
+      {step?.firstFailure != null && <p>First failing node: {allNodes.find(n => n.id === step.firstFailure)?.val} (node #{step.firstFailure})</p>}
       <div className="bbt-metric">
         <span className="bbt-label">Active node</span>
         <strong className="bbt-val">
@@ -266,44 +167,18 @@ function StatePanel({ step, allNodes }) {
   );
 }
 
-// InputPanel: for adjusting tree input
-function InputPanel({ arrInput, setArrInput, applyExample, inputError }) {
-  return (
-    <div className="bbt-input-panel">
-      <div className="bbt-examples">
-        {EXAMPLES.map((ex) => (
-          <button
-            key={ex.label}
-            className="bbt-chip"
-            onClick={() => applyExample(ex)}
-          >
-            {ex.label}
-          </button>
-        ))}
-      </div>
-      <input
-        className="bbt-input"
-        value={arrInput}
-        onChange={(e) => setArrInput(e.target.value)}
-        placeholder="[3,9,20,null,null,15,7]"
-      />
-      {inputError && <span className="bbt-error">{inputError}</span>}
-    </div>
-  );
-}
-
 export default function BalancedBinaryTreeVisualizer() {
   const [arrInput, setArrInput] = useState("[3,9,20,null,null,15,7]");
 
   const { arr, inputError } = useMemo(() => {
     try {
-      return { arr: parseTreeInput(arrInput), inputError: "" };
+      return { arr: parseBalancedTree(arrInput), inputError: "" };
     } catch (e) {
-      return { arr: [3, 9, 20, null, null, 15, 7], inputError: e.message };
+      return { arr: null, inputError: e.message };
     }
   }, [arrInput]);
 
-  const steps = useMemo(() => generateSteps(arr), [arr]);
+  const steps = useMemo(() => inputError ? [] : generateSteps(arr), [arr, inputError]);
   const {
     stepIndex,
     stepForward,
@@ -332,24 +207,14 @@ export default function BalancedBinaryTreeVisualizer() {
     [handleReset],
   );
 
-  const positions = step?.positions ?? new Map();
-  const edges = step?.edges ?? [];
-  const allNodes = step?.allNodes ?? [];
+  const positions = (step ?? steps[0])?.positions ?? new Map();
+  const edges = (step ?? steps[0])?.edges ?? [];
+  const allNodes = (step ?? steps[0])?.allNodes ?? [];
 
   // Step 2: Extract panels into consts
   const primaryPanel = (
     <>
-      <ManualInputPanel
-        fields={[{ key: "arr", label: "arr", type: "string" }]}
-        values={{ arr: arrInput }}
-        onChange={(k, v) => {
-          if (k === "arr") setArrInput(v);
-          handleReset();
-        }}
-        examples={EXAMPLES}
-        applyExample={applyExample}
-        inputError={inputError}
-      />
+
 
       <div className="bbt-panel">
         <TreeVisualizationPanel
@@ -370,9 +235,14 @@ export default function BalancedBinaryTreeVisualizer() {
 
   const inputPanel = (
     <div className="bbt-panel">
-      <InputPanel
-        arrInput={arrInput}
-        setArrInput={setArrInput}
+      <ManualInputPanel
+        fields={[{ key: "arr", label: "arr", type: "string" }]}
+        values={{ arr: arrInput }}
+        onChange={(k, v) => {
+          if (k === "arr") setArrInput(v);
+          handleReset();
+        }}
+        examples={EXAMPLES}
         applyExample={applyExample}
         inputError={inputError}
       />

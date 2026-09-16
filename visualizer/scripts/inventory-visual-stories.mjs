@@ -5,6 +5,9 @@ import { parse } from '@babel/parser';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const problems = path.join(root, 'src/problems');
+const progressPath = path.join(root, 'docs/visual-story-progress.json');
+const progress = fs.existsSync(progressPath) ? JSON.parse(fs.readFileSync(progressPath, 'utf8')).entries : [];
+const reviews = new Map(progress.map(entry => [entry.folder, entry]));
 const relative = file => path.relative(root, file).replaceAll('\\', '/');
 const cache = new Map();
 function inspect(file) {
@@ -45,7 +48,8 @@ for (const entry of fs.readdirSync(problems, { withFileTypes: true }).filter(ent
   const ownSource = ownFiles.filter(file => !file.endsWith('.css')).map(file => inspect(file).source).join('\n');
   const source = reachable.filter(file => !file.endsWith('.css')).map(file => inspect(file).source).join('\n');
   entries.push({ number: meta.number, title: meta.title, folder: entry.name,
-    review: ['Problem111', 'Problem112'].includes(entry.name) ? 'story-pilot' : 'not-reviewed',
+    review: reviews.get(entry.name)?.story ?? 'pending-review',
+    playground: reviews.get(entry.name)?.playground ?? 'not-assessed',
     files: ownFiles.map(relative),
     css: reachable.filter(file => file.endsWith('.css')).map(relative),
     signals: { localSVG: /<svg\b/.test(ownSource), treeView: /TreeCanvas|TreeVisualizer/.test(source),
@@ -65,4 +69,7 @@ const report = {
 };
 fs.mkdirSync(path.join(root, 'docs'), { recursive: true });
 fs.writeFileSync(path.join(root, 'docs/visual-story-inventory.json'), JSON.stringify(report, null, 2) + '\n');
+const known = new Set(progress.map(entry => entry.folder));
+const additions = entries.filter(entry => !known.has(entry.folder)).map(({ number, folder, title }) => ({ number, folder, title, story: 'pending-review', playground: 'not-assessed' }));
+if (additions.length) fs.writeFileSync(progressPath, JSON.stringify({ note: 'Explicit review ledger. Inventory flags do not certify visual quality. Verified evidence is recorded in visual-story-plan.md.', entries: [...progress, ...additions] }, null, 2) + '\n');
 console.log(`Inventoried ${entries.length} registered entries and ${cssFiles.length} CSS files. See docs/visual-story-inventory.json.`);

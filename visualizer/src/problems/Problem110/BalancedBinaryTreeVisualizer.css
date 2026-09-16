@@ -7,54 +7,6 @@
     overflow: auto;
 }
 
-.bbt-error {
-    color: #e51851;
-    font-size: 11px;
-}
-
-/* Shared panel content styles */
-.bbt-input-panel,
-.bbt-viz-panel,
-.bbt-state-panel {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding: 14px;
-    height: 100%;
-    overflow: auto;
-}
-
-.bbt-examples {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-.bbt-chip {
-    background: var(--code-line);
-    color: var(--code-text);
-    border: none;
-    border-radius: 6px;
-    padding: 4px 10px;
-    font-size: 12px;
-    cursor: pointer;
-}
-
-.bbt-chip:hover {
-    background: var(--code-line);
-}
-
-.bbt-input {
-    background: var(--code-surface);
-    color: var(--code-text);
-    border: 1px solid var(--code-line);
-    border-radius: 6px;
-    padding: 6px 10px;
-    font-size: 13px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
 .bbt-canvas {
     position: relative;
     overflow: hidden;
@@ -204,6 +156,8 @@
     min-height: 36px;
 }
 
-.bbt-viz-panel .bbt-canvas {
-    flex: 1;
-}
+.bbt-viz-panel, .bbt-state-panel { display: flex; flex-direction: column; gap: 12px; }
+.bbt-state-panel h3, .bbt-state-panel p { margin: 0; }
+.bbt-height-comparison { display: grid; gap: 12px; padding: 12px; border: 1px solid var(--border); border-radius: 8px; }
+.bbt-height-comparison > div { display: grid; grid-template-columns: 1fr auto; gap: 6px; }
+.bbt-height-comparison meter { grid-column: 1 / -1; width: 100%; }
