@@ -1,17 +1,13 @@
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
-import {
-  computeLayout,
-  collectNodes,
-  buildEdges,
-} from "../../components/treeUtils";
+import { binaryTreeLayout } from "../../components/shared/binaryTreeLayout";
 import { getExamples } from "../../config/examplesRegistry";
 import "./BalancedBinaryTreeVisualizer.css";
 import { parseBalancedTree, traceBalance } from "./algorithm";
@@ -23,7 +19,7 @@ import LuminoDockPanel from "../../components/LuminoDockPanel";
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = { 4: 'visit', 5: 'return', 6: 'visit', 7: 'return', 8: 'compare', 9: 'return', 10: 'done' };
 const PATTERNS = ['visit', 'compare', 'return', 'done'];
-const CANVAS_W = 520;
+
 
 const NODE_R = 22;
 
@@ -41,9 +37,7 @@ const SOLUTION_CODE = [
 ];
 
 function generateSteps(root) {
-  const positions = computeLayout(root, CANVAS_W, 80);
-  const edges = buildEdges(root);
-  const allNodes = collectNodes(root);
+  const { positions, edges, nodes: allNodes } = binaryTreeLayout(root);
   return traceBalance(root).map(frame => ({ ...frame, positions, edges, allNodes }));
 }
 
@@ -51,10 +45,13 @@ const EXAMPLES = getExamples("balanced-binary-tree");
 
 // TreeVisualizationPanel: renders the tree canvas with states
 function TreeVisualizationPanel({ step, positions, edges, allNodes }) {
+  const reduceMotion = useReducedMotion();
+  const canvasWidth = Math.max(320, ...[...positions.values()].map(p => p.x + 48));
   const canvasHeight = Math.max(320, ...[...positions.values()].map(p => p.y + 55));
   return (
     <div className="bbt-viz-panel">
-      <div className="bbt-canvas" style={{ width: CANVAS_W, height: canvasHeight }}>
+      <div className="bbt-tree-scroll" tabIndex={0} aria-label="Tree diagram; scroll to explore">
+      <div className="bbt-canvas" style={{ width: canvasWidth, height: canvasHeight }}>
         <svg
           style={{
             position: "absolute",
@@ -62,7 +59,7 @@ function TreeVisualizationPanel({ step, positions, edges, allNodes }) {
             left: 0,
             pointerEvents: "none",
           }}
-          width={CANVAS_W}
+          width={canvasWidth}
           height={canvasHeight}
         >
           {edges.map(({ fromId, toId }) => {
@@ -99,8 +96,8 @@ function TreeVisualizationPanel({ step, positions, edges, allNodes }) {
             >
               <motion.div
                 className={`bbt-node ${isActive ? "active" : ""} ${isUnbal ? "unbalanced" : h != null ? "balanced" : ""}`}
-                animate={isActive ? { scale: 1.2 } : { scale: 1 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                animate={isActive && !reduceMotion ? { scale: 1.2 } : { scale: 1 }}
+                transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 300, damping: 20 }}
               >
                 {node.val}
               </motion.div>
@@ -109,6 +106,7 @@ function TreeVisualizationPanel({ step, positions, edges, allNodes }) {
             </motion.div>
           );
         })}
+      </div>
       </div>
       <div className="bbt-status">
         {step?.message || "Press Play to begin."}

@@ -2,7 +2,7 @@
   "note": "Static import inventory, not a visual-quality certification. Dynamic imports and runtime-selected renderers require manual review. CSS byte counts are source bytes, not transferred bytes.",
   "registeredEntries": 613,
   "cssFiles": 700,
-  "cssSourceBytes": 1867052,
+  "cssSourceBytes": 1867213,
   "entries": [
     {
       "number": "CF-F",

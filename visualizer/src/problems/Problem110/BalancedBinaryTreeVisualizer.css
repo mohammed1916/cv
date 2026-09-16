@@ -157,6 +157,8 @@
 }
 
 .bbt-viz-panel, .bbt-state-panel { display: flex; flex-direction: column; gap: 12px; }
+.bbt-tree-scroll { max-width: 100%; overflow: auto; flex: 0 0 auto; }
+.bbt-tree-scroll:focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; }
 .bbt-state-panel h3, .bbt-state-panel p { margin: 0; }
 .bbt-height-comparison { display: grid; gap: 12px; padding: 12px; border: 1px solid var(--border); border-radius: 8px; }
 .bbt-height-comparison > div { display: grid; grid-template-columns: 1fr auto; gap: 6px; }

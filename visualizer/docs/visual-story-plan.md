@@ -192,13 +192,27 @@ with expected count 1,836,311,903, using real CPython execution.
   Focused lint passes. Desktop browser checks verify editable input, docking,
   final unbalanced result, first-failure identity, canvas height and no page
   errors. Production build passes with the existing chunk advisory.
-- Still pending before full story verification: dense/deep tree layout,
-  reduced-motion handling, mobile and both-theme interaction checks, complete
-  route-transfer measurements, and a playground adapter. This entry remains
+- Follow-up: added the reusable iterative binaryTreeLayout helper with spaced
+  inorder columns. Tests cover dense 127-node and deep 10,000-node layouts
+  (layout only, not full-trace performance). Keyboard-focusable tree scrolling
+  and reduced-motion handling are implemented. Six tests, focused lint and
+  production build pass. Desktop dark-theme interaction and 390px light-theme
+  rendering with reduced motion pass without page errors; the narrow diagram
+  scrolls within its dock panel.
+- Still pending before full story verification: complete both-theme playback
+  checks, route-transfer measurements, full-trace scalability, and a playground
+  adapter. This entry remains
   in progress; launch support is not inferred from its new trace.
-- Problem110 CSS decreased from 3,602 to 3,166 normalized source bytes;
+- At the first checkpoint, Problem110 CSS decreased from 3,602 to 3,166 normalized source bytes;
   gzip of that file decreased from 882 to 840 bytes. These measurements cover
   the local stylesheet only, not whole-app transfer size.
+
+### Next tree story: Sorted List to BST (109)
+
+Review started. The current trace shows array slices and midpoint selection.
+Preserve original list indices across recursive intervals, connect selected
+midpoints to their parents in the growing tree, and explain subtree balance.
+Reuse the layout helper where compatible; keep construction state local.
 
 ### Acceptance checklist
 
