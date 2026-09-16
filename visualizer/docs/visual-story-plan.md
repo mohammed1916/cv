@@ -214,7 +214,61 @@ Preserve original list indices across recursive intervals, connect selected
 midpoints to their parents in the growing tree, and explain subtree balance.
 Reuse the layout helper where compatible; keep construction state local.
 
-### Acceptance checklist
+### Continuing batch: 109, 11, 100, 101
+
+- 109 now constructs a real linked BST from midpoint intervals. Stable input
+  indices distinguish duplicates; each created node shows its subtree height
+  only after returning. Invalid/unsorted inputs do not animate fallback data.
+  Tests check inorder identity and balance for every size 0 through 200.
+- 11 retains the winning wall pair, renders a geometric water cross-section,
+  and explains the shorter-wall elimination rule. Exhaustive tests over 4,096
+  arrays verify both the best area and the final highlighted pair.
+- 100 preserves side-by-side trees while sharing sparse level-order parsing
+  and iterative layout. Its story distinguishes structural and value failures.
+- 101 depicts mirror partners, removes duplicated geometry, fixes Python
+  source grouping/entry return, and short-circuits after an outer-pair failure.
+- Shared StoryPanel supplies framing and typography; SvgViewport supplies
+  pan/zoom; binaryTreeLayout supplies positions; levelOrderTree supplies sparse
+  input semantics. Existing controls and docking remain. Duplicate inputs and
+  obsolete drawing CSS were removed. Problem-specific decisions remain local.
+- Algorithm suites and focused lint pass. Isolated browser checks pass for
+  BST duplicate identities/final tree/invalid input, water's winning area 49,
+  sparse same-tree equality, and asymmetric mirror failure. Problem109's normal
+  Pro gate is unchanged; isolated checks do not certify authenticated routing.
+  Production build passes with the existing large main-chunk advisory.
+- These entries remain implemented-pending-full-review: mobile/theme checks,
+  transfer measurements, broad input performance and playground adapters are
+  tracked separately. Source-CSS savings are not whole-app download savings.
+
+### Per-problem release checklist
+
+### Traversal and construction batch: 102, 103, 104, 107, 108
+
+- 102 now preserves the full FIFO queue between visits and enqueue operations.
+  The level boundary is frozen explicitly; pending nodes are never omitted.
+- 103 reuses that trace, reverses only alternate output rows, and saves each
+  row after reversal. Its scene keeps tree traversal separate from output order.
+- 104 carries a deepest-route witness upward with returned child depths,
+  highlights that path at completion, and retains keyboard node-to-code links.
+- 107 reverses the level list only at the final return; node order within rows
+  remains unchanged. 102/107 share TraversalTreePanel; 103/104 share TreeDiagram.
+- 108/109 share SortedTreeStory and its CSS. Array construction uses direct
+  indices; linked-list construction first copies the list. Array input is
+  validated instead of silently sorted; the displayed code uses half-open
+  intervals matching the trace. Both keep original indices and subtree heights.
+- `npm run test:visual-stories` runs 32 passing tests across the current tree
+  and water stories. Focused lint and production build pass. Isolated desktop
+  browser checks confirm the 102/103/104 final results, with narrow-viewport
+  captures also taken. Full route access, all-theme interactions, performance
+  limits and playground adapters remain separate review items.
+- Initial local-CSS measurements for the prior batch (source/gzip bytes):
+  109 182/154 to 738/346 before moving its story styles into shared CSS;
+  11 2214/751 to 943/376; 100 7770/1451 to 6199/1232;
+  101 7443/1357 to 3970/912. These are checkpoint measurements, not compressed
+  route-transfer savings. Shared files and richer diagrams must be included
+  when comparing total delivered size.
+
+### Release checklist
 
 - Validate trace decisions against the actual algorithm, including no-solution
   inputs, duplicates, negative values where legal, and boundary cases.

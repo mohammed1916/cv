@@ -1,6 +1,9 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import StoryPanel from "../../components/shared/StoryPanel";
+import { generateSteps } from "./algorithm";
+import { parseLevelOrderTree } from "../../components/shared/levelOrderTree";
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import CodePatternAnnotations from "../../components/CodePatternAnnotations";
@@ -13,8 +16,8 @@ import ManualInputPanel from "../../components/shared/ManualInputPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
 
-const CANVAS_W = 340;
-const CANVAS_H = 280;
+
+
 const NODE_R = 22;
 
 // ─── Python solution ──────────────────────────────────────────────────────────
@@ -27,8 +30,8 @@ const SOLUTION_CODE = [
   { line: 6, text: "            return False" },
   { line: 7, text: "        if p.val != q.val:" },
   { line: 8, text: "            return False" },
-  { line: 9, text: "        left  = isSameTree(p.left,  q.left)" },
-  { line: 10, text: "        right = isSameTree(p.right, q.right)" },
+  { line: 9, text: "        left  = self.isSameTree(p.left,  q.left)" },
+  { line: 10, text: "        right = self.isSameTree(p.right, q.right)" },
   { line: 11, text: "        return left and right" },
 ];
 
@@ -50,183 +53,6 @@ const LINE_PATTERN_MAP = {
 const EXAMPLES = getExamples("same-tree");
 
 // ─── Tree utilities ───────────────────────────────────────────────────────────
-function buildLinkedTree(arr, prefix = "p") {
-  if (!arr || !arr.length || arr[0] == null) return null;
-  const nodes = arr.map((val, i) =>
-    val == null ? null : { id: `${prefix}-${i}`, val, left: null, right: null },
-  );
-  for (let i = 0; i < nodes.length; i++) {
-    if (!nodes[i]) continue;
-    const li = 2 * i + 1,
-      ri = 2 * i + 2;
-    if (li < nodes.length) nodes[i].left = nodes[li];
-    if (ri < nodes.length) nodes[i].right = nodes[ri];
-  }
-  return nodes[0];
-}
-
-function computePositions(node, depth, left, right, out = new Map()) {
-  if (!node) return out;
-  const x = (left + right) / 2;
-  const y = depth * 72 + 38;
-  out.set(node.id, { x, y });
-  computePositions(node.left, depth + 1, left, x, out);
-  computePositions(node.right, depth + 1, x, right, out);
-  return out;
-}
-
-function buildEdges(node, edges = []) {
-  if (!node) return edges;
-  if (node.left) {
-    edges.push({ fromId: node.id, toId: node.left.id });
-    buildEdges(node.left, edges);
-  }
-  if (node.right) {
-    edges.push({ fromId: node.id, toId: node.right.id });
-    buildEdges(node.right, edges);
-  }
-  return edges;
-}
-
-function collectNodes(root) {
-  const r = [];
-  if (!root) return r;
-  const q = [root];
-  while (q.length) {
-    const n = q.shift();
-    r.push(n);
-    if (n.left) q.push(n.left);
-    if (n.right) q.push(n.right);
-  }
-  return r;
-}
-
-function treeSnapshot(root, canvasW) {
-  const positions = computePositions(root, 0, 0, canvasW);
-  const edges = buildEdges(root);
-  const nodes = collectNodes(root);
-  return { positions, edges, nodes };
-}
-
-// ─── Step generator ───────────────────────────────────────────────────────────
-function generateSteps(pArr, qArr) {
-  const pRoot = buildLinkedTree(pArr, "p");
-  const qRoot = buildLinkedTree(qArr, "q");
-
-  const pSnap = treeSnapshot(pRoot, CANVAS_W);
-  const qSnap = treeSnapshot(qRoot, CANVAS_W);
-
-  const steps = [];
-
-  // Tracks node state: 'match' | 'mismatch' | 'null-match' | 'null-mismatch'
-  const nodeStates = {}; // id -> 'match'|'mismatch'
-
-  function push(activeLine, activePId, activeQId, message, finalResult = null) {
-    steps.push({
-      activeLine,
-      activePId,
-      activeQId,
-      nodeStates: { ...nodeStates },
-      pPositions: pSnap.positions,
-      pEdges: pSnap.edges,
-      pNodes: pSnap.nodes,
-      qPositions: qSnap.positions,
-      qEdges: qSnap.edges,
-      qNodes: qSnap.nodes,
-      message,
-      finalResult,
-    });
-  }
-
-  push(2, null, null, "Call isSameTree(p, q). Begin recursive DFS.");
-
-  // Returns boolean
-  function dfs(p, q) {
-    const pId = p ? p.id : null;
-    const qId = q ? q.id : null;
-
-    // Both null
-    push(
-      3,
-      pId,
-      qId,
-      `Check: p=${p ? p.val : "null"}, q=${q ? q.val : "null"} — both null?`,
-    );
-    if (!p && !q) {
-      push(4, pId, qId, "Both nodes are null → return True (base case)");
-      return true;
-    }
-
-    // One null
-    push(5, pId, qId, `One of p/q is null — structural mismatch?`);
-    if (!p || !q) {
-      if (pId) nodeStates[pId] = "mismatch";
-      if (qId) nodeStates[qId] = "mismatch";
-      push(
-        6,
-        pId,
-        qId,
-        `One node is null, other is ${p ? p.val : q.val} → return False`,
-      );
-      return false;
-    }
-
-    // Value check
-    push(7, pId, qId, `Compare values: p.val=${p.val} vs q.val=${q.val}`);
-    if (p.val !== q.val) {
-      nodeStates[pId] = "mismatch";
-      nodeStates[qId] = "mismatch";
-      push(8, pId, qId, `p.val (${p.val}) ≠ q.val (${q.val}) → return False`);
-      return false;
-    }
-
-    // Values match — mark tentatively; will confirm after children
-    nodeStates[pId] = "match";
-    nodeStates[qId] = "match";
-    push(
-      9,
-      pId,
-      qId,
-      `Values match (${p.val}=${q.val}) — recurse into left subtrees`,
-    );
-
-    const leftOk = dfs(p.left, q.left);
-
-    push(
-      10,
-      pId,
-      qId,
-      `Left subtrees ${leftOk ? "match" : "differ"} — recurse into right subtrees`,
-    );
-
-    const rightOk = dfs(p.right, q.right);
-
-    if (!leftOk || !rightOk) {
-      nodeStates[pId] = "mismatch";
-      nodeStates[qId] = "mismatch";
-    }
-
-    const result = leftOk && rightOk;
-    push(11, pId, qId, `Return ${result} for node ${p.val}`);
-    return result;
-  }
-
-  const result = dfs(pRoot, qRoot);
-
-  push(
-    result ? 11 : 8,
-    null,
-    null,
-    result
-      ? "Trees are identical! isSameTree returns True."
-      : "Trees differ. isSameTree returns False.",
-    result,
-  );
-
-  return steps;
-}
-
-// ─── Tree canvas ──────────────────────────────────────────────────────────────
 function TreeCanvas({
   positions,
   edges,
@@ -237,10 +63,13 @@ function TreeCanvas({
   label,
   prefix,
 }) {
+  const reduceMotion = useReducedMotion();
+  const width = Math.max(320, ...[...positions.values()].map(p => p.x + 48));
+  const height = Math.max(240, ...[...positions.values()].map(p => p.y + 48));
   return (
-    <div className="st-tree-wrap">
+    <div className="st-tree-wrap" tabIndex={0} aria-label={`${label} tree; scroll to explore`}>
       <div className="st-tree-label">{label}</div>
-      <div className="st-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
+      <div className="st-canvas" style={{ width, height }}>
         <svg
           style={{
             position: "absolute",
@@ -248,8 +77,8 @@ function TreeCanvas({
             left: 0,
             pointerEvents: "none",
           }}
-          width={CANVAS_W}
-          height={CANVAS_H}
+          width={width}
+          height={height}
         >
           {edges.map(({ fromId, toId }) => {
             const from = positions.get(fromId);
@@ -286,9 +115,9 @@ function TreeCanvas({
               animate={{
                 left: pos.x - NODE_R,
                 top: pos.y - NODE_R,
-                scale: isActive ? 1.18 : 1,
+                scale: isActive && !reduceMotion ? 1.18 : 1,
               }}
-              transition={{ type: "spring", stiffness: 220, damping: 22 }}
+              transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 220, damping: 22 }}
               style={{ left: pos.x - NODE_R, top: pos.y - NODE_R }}
             >
               {node.val}
@@ -306,7 +135,7 @@ export default function SameTreeVisualizer() {
   const [selected, setSelected] = useState(0);
   const [pInput, setPInput] = useState(JSON.stringify(EXAMPLES[0].p));
   const [qInput, setQInput] = useState(JSON.stringify(EXAMPLES[0].q));
-  const [inputError, setInputError] = useState("");
+
   const {
     showPatternOverlay,
     setShowPatternOverlay,
@@ -314,25 +143,12 @@ export default function SameTreeVisualizer() {
     setActiveLineDom,
   } = usePatternOverlay();
 
-  function parseArr(str) {
-    const parsed = JSON.parse(str);
-    if (!Array.isArray(parsed)) throw new Error("Expected array");
-    return parsed.map((v) => (v === null ? null : Number(v)));
-  }
-
-  const { pArr, qArr } = useMemo(() => {
+  const { steps, inputError } = useMemo(() => {
     try {
-      const pArr = parseArr(pInput);
-      const qArr = parseArr(qInput);
-      setInputError("");
-      return { pArr, qArr };
-    } catch {
-      setInputError("Invalid input — using last valid");
-      return { pArr: EXAMPLES[selected].p, qArr: EXAMPLES[selected].q };
-    }
-  }, [pInput, qInput, selected]);
-
-  const steps = useMemo(() => generateSteps(pArr, qArr), [pArr, qArr]);
+      parseLevelOrderTree(pInput); parseLevelOrderTree(qInput);
+      return { steps: generateSteps(JSON.parse(pInput), JSON.parse(qInput)), inputError: '' };
+    } catch (error) { return { steps: [], inputError: error.message }; }
+  }, [pInput, qInput]);
 
   const {
     stepIndex,
@@ -387,51 +203,12 @@ export default function SameTreeVisualizer() {
           {inputError && <span className="st-error">{inputError}</span>}
         </header>
         <div className="st-body">
-          {/* Example chips */}
-          <div className="st-examples">
-            {EXAMPLES.map((ex, i) => (
-              <button
-                key={ex.label}
-                className={`st-chip${selected === i ? " selected" : ""}`}
-                onClick={() => applyExample(i)}
-              >
-                {ex.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Input row */}
-          <div className="st-inputs">
-            <div className="st-input-group">
-              <label className="st-input-label">Tree p</label>
-              <input
-                className="st-input"
-                value={pInput}
-                onChange={(e) => {
-                  setPInput(e.target.value);
-                  handleReset();
-                }}
-              />
-            </div>
-            <div className="st-input-group">
-              <label className="st-input-label">Tree q</label>
-              <input
-                className="st-input"
-                value={qInput}
-                onChange={(e) => {
-                  setQInput(e.target.value);
-                  handleReset();
-                }}
-              />
-            </div>
-          </div>
-
           {/* Side-by-side trees */}
           <div className="st-trees">
             <TreeCanvas
-              positions={step?.pPositions ?? new Map()}
-              edges={step?.pEdges ?? []}
-              nodes={step?.pNodes ?? []}
+              positions={(step ?? steps[0])?.pPositions ?? new Map()}
+              edges={(step ?? steps[0])?.pEdges ?? []}
+              nodes={(step ?? steps[0])?.pNodes ?? []}
               activePId={step?.activePId}
               activeQId={step?.activeQId}
               nodeStates={step?.nodeStates}
@@ -453,9 +230,9 @@ export default function SameTreeVisualizer() {
               )}
             </div>
             <TreeCanvas
-              positions={step?.qPositions ?? new Map()}
-              edges={step?.qEdges ?? []}
-              nodes={step?.qNodes ?? []}
+              positions={(step ?? steps[0])?.qPositions ?? new Map()}
+              edges={(step ?? steps[0])?.qEdges ?? []}
+              nodes={(step ?? steps[0])?.qNodes ?? []}
               activePId={step?.activePId}
               activeQId={step?.activeQId}
               nodeStates={step?.nodeStates}
@@ -474,6 +251,10 @@ export default function SameTreeVisualizer() {
         <span>State</span>
       </header>
       <div className="st-body">
+        <StoryPanel title="Match positions, then values" description={step?.message ?? 'Trees must have the same shape and the same value at every corresponding position.'}>
+          {step && <p>Current pair: p = {step.pNodes.find(n => n.id === step.activePId)?.val ?? 'missing'}; q = {step.qNodes.find(n => n.id === step.activeQId)?.val ?? 'missing'}.</p>}
+          <p>{step?.activeLine === 6 ? 'Structure differs: exactly one corresponding child exists.' : step?.activeLine === 8 ? 'Values differ at the same position.' : 'A matching value is provisional until both child comparisons return true.'}</p>
+        </StoryPanel>
         <div className="st-legend">
           <div className="st-legend-item">
             <div className="st-dot active" />
@@ -604,7 +385,7 @@ export default function SameTreeVisualizer() {
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
 
   return (
-    <div className="st-shell">
+    <div className="vis-shell st-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
         <>

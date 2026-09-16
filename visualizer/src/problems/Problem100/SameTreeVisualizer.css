@@ -1,13 +1,5 @@
 /* ── Shell ──────────────────────────────────────────────────────────────────── */
-.st-shell {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    min-height: 480px;
-    gap: 0;
-    overflow: hidden;
-}
+
 
 /* ── Panels ─────────────────────────────────────────────────────────────────── */
 .st-panel {
@@ -52,71 +44,6 @@
 }
 
 /* ── Example chips ──────────────────────────────────────────────────────────── */
-.st-examples {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-.st-chip {
-    background: var(--code-line);
-    color: var(--code-text);
-    border: 1px solid transparent;
-    border-radius: 6px;
-    padding: 4px 10px;
-    font-size: 12px;
-    cursor: pointer;
-    transition: background 0.15s, border-color 0.15s;
-}
-
-.st-chip:hover {
-    background: var(--code-line);
-}
-
-.st-chip.selected {
-    border-color: #89b4fa;
-    color: #1a6df5;
-}
-
-/* ── Inputs ─────────────────────────────────────────────────────────────────── */
-.st-inputs {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.st-input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    flex: 1;
-    min-width: 140px;
-}
-
-.st-input-label {
-    font-size: 11px;
-    color: var(--code-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-}
-
-.st-input {
-    background: var(--code-surface);
-    color: var(--code-text);
-    border: 1px solid var(--code-line);
-    border-radius: 6px;
-    padding: 6px 10px;
-    font-size: 13px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.st-input:focus {
-    outline: none;
-    border-color: #89b4fa;
-}
-
-/* ── Side-by-side trees ─────────────────────────────────────────────────────── */
 .st-trees {
     display: flex;
     gap: 8px;
@@ -340,3 +267,5 @@
     color: #e51851;
     border-color: #f38ba8;
 }
+
+.st-tree-wrap { max-width: 100%; overflow: auto; align-items: flex-start; }

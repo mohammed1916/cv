@@ -1,0 +1,15 @@
+import React from 'react';
+import {createRoot} from 'react-dom/client';
+import Level from './src/problems/Problem102/BinaryTreeLevelOrderVisualizer.jsx';
+import Zigzag from './src/problems/Problem103/BinaryTreeZigzagLevelOrderTraversalVisualizer.jsx';
+import Max from './src/problems/Problem104/MaxDepthBinaryTreeVisualizer.jsx';
+import ArrayTree from './src/problems/Problem108/ConvertSortedArrayToBinarySearchTreeVisualizer.jsx';
+import Bottom from './src/problems/Problem107/BinaryTreeLevelOrderTraversalIIVisualizer.jsx';
+import Tree from './src/problems/Problem109/ConvertSortedListToBinarySearchTreeVisualizer.jsx';
+import Water from './src/problems/Problem11/ContainerWithMostWaterVisualizer.jsx';
+import Same from './src/problems/Problem100/SameTreeVisualizer.jsx';
+import Mirror from './src/problems/Problem101/SymmetricTreeVisualizer.jsx';
+import './src/index.css';
+import './src/components/shared/VisualizerChrome.css';
+const Component=location.search.includes('array')?ArrayTree:location.search.includes('bottom')?Bottom:location.search.includes('max')?Max:location.search.includes('zigzag')?Zigzag:location.search.includes('level')?Level:location.search.includes('water')?Water:location.search.includes('same')?Same:location.search.includes('mirror')?Mirror:Tree;
+createRoot(document.getElementById('root')).render(<div style={{height:'100vh',display:'flex'}}><Component/></div>);

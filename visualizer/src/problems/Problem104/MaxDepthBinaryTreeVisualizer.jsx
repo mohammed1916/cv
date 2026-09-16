@@ -1,26 +1,21 @@
 ﻿import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
-import { motion } from 'framer-motion'
+import { generateSteps } from './algorithm'
+import TreeDiagram from '../../components/shared/TreeDiagram'
+import StoryPanel from '../../components/shared/StoryPanel'
 import VisualizerPlaybackSection from '../../components/VisualizerPlaybackSection'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { useParsedInput } from '../../hooks/useParsedInput'
 import { useApplyExample } from '../../hooks/useApplyExample'
 import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
-import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput, TreeSVG } from '../../components/treeUtils'
 import { getExamples } from '../../config/examplesRegistry'
 import './MaxDepthBinaryTreeVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
-import FloatingPanel from '../../components/shared/FloatingPanel'
-import CodePatternAnnotations from '../../components/CodePatternAnnotations'
-import PatternLegend from '../../components/PatternLegend'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
-const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
-const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 const SOLUTION_CODE = [
   { line: 1, text: 'def maxDepth(root):' },
   { line: 2, text: '    if not root:' },
@@ -29,70 +24,6 @@ const SOLUTION_CODE = [
   { line: 5, text: '    right = maxDepth(root.right)' },
   { line: 6, text: '    return 1 + max(left, right)' },
 ]
-const CANVAS_W = 500
-const CANVAS_H = 320
-const NODE_R = 22
-
-function generateSteps(arr) {
-    const steps = []
-    const root = buildTree(arr)
-    const positions = computeLayout(root, CANVAS_W, 80)
-    const edges = buildEdges(root)
-
-    const returnValues = new Map() // nodeId -> depth returned
-
-    function dfs(node, callStack) {
-        if (!node) return 0
-
-        steps.push({
-            phase: 'call', activeLine: 4,
-            activeId: node.id,
-            callStack: [...callStack, node.val],
-            returnValues: new Map(returnValues),
-            message: `Call maxDepth(${node.val}) — explore left subtree`,
-        })
-
-        const leftDepth = dfs(node.left, [...callStack, node.val])
-
-        steps.push({
-            phase: 'right', activeLine: 5,
-            activeId: node.id,
-            callStack: [...callStack, node.val],
-            returnValues: new Map(returnValues),
-            message: `Back at ${node.val}: leftDepth=${leftDepth} — explore right subtree`,
-        })
-
-        const rightDepth = dfs(node.right, [...callStack, node.val])
-
-        const depth = 1 + Math.max(leftDepth, rightDepth)
-        returnValues.set(node.id, depth)
-
-        steps.push({
-            phase: 'return', activeLine: 6,
-            activeId: node.id,
-            callStack: [...callStack, node.val],
-            returnValues: new Map(returnValues),
-            message: `Return from ${node.val}: 1 + max(${leftDepth}, ${rightDepth}) = ${depth}`,
-        })
-
-        return depth
-    }
-
-    if (root) {
-        const total = dfs(root, [])
-        steps.push({
-            phase: 'done', activeLine: 6,
-            activeId: -1,
-            callStack: [],
-            returnValues: new Map(returnValues),
-            message: `Maximum depth = ${total}`,
-        })
-    } else {
-        steps.push({ phase: 'done', activeLine: 3, activeId: -1, callStack: [], returnValues: new Map(), message: 'Empty tree → depth = 0' })
-    }
-
-    return { steps, positions, edges, nodes: collectNodes(root) }
-}
 
 const EXAMPLES = getExamples('max-depth-binary-tree')
 
@@ -115,23 +46,12 @@ export default function MaxDepthBinaryTreeVisualizer() {
 
     const [arrInput, setArrInput] = useState('[3,9,20,null,null,15,7]')
 
-    const { value: arr, error: inputError } = useParsedInput(
-        arrInput,
-        parseTreeInput,
-        [3, 9, 20, null, null, 15, 7],
-    )
-
-    const { steps, positions, edges, nodes } = useMemo(() => {
-        const generated = generateSteps(arr)
-        return {
-            ...generated,
-            steps: generated.steps.map((current) => ({
-                ...current,
-                snippetId: snippetIdForPhase(current.phase),
-                relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
-            })),
-        }
-    }, [arr])
+    const { steps, positions, edges, nodes, inputError } = useMemo(() => {
+        try {
+            const generated = generateSteps(arrInput);
+            return { ...generated, inputError: '', steps: generated.steps.map(s => ({...s, snippetId: snippetIdForPhase(s.phase), relatedLines: [s.activeLine]})) };
+        } catch(error) { return { steps: [], positions: new Map(), edges: [], nodes: [], inputError: error.message }; }
+    }, [arrInput]);
     const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
     const step = stepIndex >= 0 ? steps[stepIndex] : null
 
@@ -149,11 +69,6 @@ export default function MaxDepthBinaryTreeVisualizer() {
     // Use modular visualization features system
     const vizFeatureDefs = getVisualizationFeatures('max-depth-binary-tree')
     const { items: vizFeatures, toggle: toggleVizFeature } = useVisualizationFeatures(vizFeatureDefs)
-
-    const handleArrInputChange = useCallback((e) => {
-        setArrInput(e.target.value)
-        handleReset()
-    }, [handleReset])
 
     const primaryPanel = (
     <>
@@ -173,43 +88,14 @@ export default function MaxDepthBinaryTreeVisualizer() {
                 {inputError && <span className="mdbt-error">{inputError}</span>}
             </header>
             <div className="mdbt-body">
-                <div className="mdbt-examples">
-                    {EXAMPLES.map((ex) => (
-                        <button key={ex.label} className="mdbt-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                    ))}
-                </div>
-                <input className="mdbt-input" value={arrInput} onChange={handleArrInputChange} />
-                <div className="mdbt-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
-                    <TreeSVG edges={edges} positions={positions} canvasWidth={CANVAS_W} canvasHeight={CANVAS_H} />
-                    {nodes.map((node) => {
-                        const pos = positions.get(node.id)
-                        if (!pos) return null
-                        const isActive = step?.activeId === node.id
-                        const retVal = step?.returnValues?.get(node.id)
-                        return (
-                            <motion.div
-                                key={node.id}
-                                className={`mdbt-node ${isActive ? 'active' : ''} ${retVal !== undefined ? 'returned' : ''}`}
-                                style={{ left: pos.x - NODE_R, top: pos.y - NODE_R }}
-                                animate={isActive ? { scale: 1.2 } : { scale: 1 }}
-                                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                                onClick={() =>
-                                    connectivity.setVisualFocus({
-                                        lines: [4, 5, 6],
-                                        reason: `Tree node ${node.val} selected in DFS preview.`,
-                                        targetType: 'node',
-                                        targetId: String(node.id),
-                                    })
-                                }
-                                role="button"
-                                tabIndex={0}
-                            >
-                                {node.val}
-                                {retVal !== undefined && <span className="mdbt-badge">{retVal}</span>}
-                            </motion.div>
-                        )
-                    })}
-                </div>
+                {!inputError && <StoryPanel title="Carry the deepest route upward" description={step?.message ?? 'Each node returns one plus the deeper of its two children.'}>
+                    <TreeDiagram positions={positions} edges={edges} nodes={nodes}
+                        activeIds={new Set(step?.path ?? (step?.activeId >= 0 ? [step.activeId] : []))}
+                        labelForNode={node => step?.returnValues?.has(node.id) ? `depth ${step.returnValues.get(node.id)}` : 'not returned'}
+                        onNodeSelect={node => connectivity.setVisualFocus({lines:[4,5,6],reason:`Node ${node.val} selected.`,targetType:'node',targetId:String(node.id)})} />
+                    {step?.left != null && step?.right != null && <p>Left depth {step.left}; right depth {step.right}. Add one for the current node.</p>}
+                    {step?.phase === 'done' && <p>Highlighted route contains {step.total} nodes. Equal-depth ties choose the left route.</p>}
+                </StoryPanel>}
             </div>
         </div>
     
@@ -289,7 +175,7 @@ export default function MaxDepthBinaryTreeVisualizer() {
     const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
     return (
-        <div className="mdbt-shell">
+        <div className="vis-shell mdbt-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
               <>

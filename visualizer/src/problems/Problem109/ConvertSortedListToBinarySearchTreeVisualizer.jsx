@@ -1,6 +1,7 @@
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
-import { motion } from "framer-motion";
+import { parseSortedList, buildSortedListStory } from "./algorithm";
+import ListToTreeStory from "./ListToTreeStory";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -16,8 +17,8 @@ import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
-const LINE_PATTERN_MAP = {}; // Auto-generated: maps line numbers to phase names
-const PATTERNS = []; // Auto-generated: list of phase names used in this visualizer
+const LINE_PATTERN_MAP = { 3: "return", 4: "compare", 5: "update", 6: "visit", 7: "visit", 8: "return", 12: "visit", 14: "done" };
+const PATTERNS = ["visit", "compare", "update", "return", "done"];
 const EXAMPLES = getExamplesOr("convert-sorted-list-to-binary-search-tree", [
   { label: "Example 1", list: [1, 2, 3, 4, 5, 6] },
   { label: "Example 2", list: [-10, -3, 0, 5, 9] },
@@ -43,303 +44,19 @@ const SOLUTION_CODE_INLINE = [
 
 const SOLUTION_CODE = SOLUTION_CODE_INLINE;
 
-function generateSteps(list) {
-  const steps = [];
-
-  if (!list || list.length === 0) {
-    steps.push({
-      activeLine: 3,
-      list: [],
-      nodes: [],
-      message: "Empty list → return None",
-      relatedLines: [3],
-    });
-    return steps;
-  }
-
-  steps.push({
-    activeLine: 1,
-    list,
-    nodes: [],
-    message: `Convert list ${JSON.stringify(list)} to balanced BST`,
-    relatedLines: [1],
-  });
-
-  steps.push({
-    activeLine: 9,
-    list,
-    nodes: [...list],
-    message: "Extract list values into array",
-    relatedLines: [9, 10, 11, 12, 13],
-  });
-
-  const buildTree = (nodes, depth = 0) => {
-    if (!nodes || nodes.length === 0) return null;
-
-    const mid = Math.floor(nodes.length / 2);
-    const val = nodes[mid];
-
-    steps.push({
-      activeLine: 4,
-      list,
-      nodes,
-      mid,
-      midVal: val,
-      depth,
-      message: `Mid index: ${mid}, value: ${val} (from ${nodes.length} elements)`,
-      relatedLines: [4, 5],
-    });
-
-    const left = nodes.slice(0, mid);
-    const right = nodes.slice(mid + 1);
-
-    if (left.length > 0) {
-      steps.push({
-        activeLine: 6,
-        list,
-        nodes,
-        mid,
-        midVal: val,
-        left,
-        depth,
-        message: `Left subtree: [${left.join(", ")}]`,
-        relatedLines: [6],
-      });
-      buildTree(left, depth + 1);
-    }
-
-    if (right.length > 0) {
-      steps.push({
-        activeLine: 7,
-        list,
-        nodes,
-        mid,
-        midVal: val,
-        right,
-        depth,
-        message: `Right subtree: [${right.join(", ")}]`,
-        relatedLines: [7],
-      });
-      buildTree(right, depth + 1);
-    }
-
-    return { val, left: null, right: null };
-  };
-
-  buildTree(list);
-
-  steps.push({
-    activeLine: 14,
-    list,
-    nodes: list,
-    done: true,
-    message: "Balanced BST construction complete",
-    relatedLines: [14],
-  });
-
-  return steps;
-}
-
-function VisualizationPanel({
-  step,
-  listInput,
-  setListInput,
-  inputError,
-  EXAMPLES,
-  applyExample,
-  handleReset,
-}) {
-  if (!step)
-    return <div style={{ padding: 16, color: "#627794" }}>Press play</div>;
-
-  return (
-    <div
-      style={{ display: "flex", flexDirection: "column", gap: 16, padding: 16 }}
-    >
-      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-        <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-          {EXAMPLES.map((ex) => (
-            <button
-              key={ex.label}
-              onClick={() => applyExample(ex)}
-              style={{
-                padding: "6px 12px",
-                fontSize: 12,
-                borderRadius: 4,
-                border: "1px solid var(--border)",
-                backgroundColor: "var(--surface2)",
-                cursor: "pointer",
-                fontWeight: 500,
-              }}
-            >
-              {ex.label}
-            </button>
-          ))}
-        </div>
-        <input
-          value={listInput}
-          onChange={(e) => {
-            setListInput(e.target.value);
-            handleReset();
-          }}
-          placeholder="[1, 2, 3, 4, 5, 6]"
-          style={{
-            padding: "8px 12px",
-            fontSize: 12,
-            borderRadius: 4,
-            border: "1px solid var(--border)",
-            fontFamily: "monospace",
-            width: "100%",
-            boxSizing: "border-box",
-          }}
-        />
-        {inputError && (
-          <div style={{ fontSize: 11, color: "#dc2626" }}>{inputError}</div>
-        )}
-      </div>
-
-      <div
-        style={{
-          padding: 12,
-          backgroundColor: "#f3e8ff",
-          borderRadius: 6,
-          borderLeft: "4px solid #8b5cf6",
-        }}
-      >
-        <div style={{ fontSize: 12, color: "#5b21b6", fontStyle: "italic" }}>
-          Use middle element as root to balance the tree recursively.
-        </div>
-      </div>
-
-      {step.list && step.list.length > 0 && (
-        <motion.div
-          style={{ padding: 12, backgroundColor: "#e0e7ff", borderRadius: 6 }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-        >
-          <div
-            style={{
-              fontSize: 12,
-              fontWeight: 600,
-              color: "#3730a3",
-              marginBottom: 8,
-            }}
-          >
-            Sorted List
-          </div>
-          <div
-            style={{
-              display: "flex",
-              gap: 4,
-              flexWrap: "wrap",
-              fontFamily: "monospace",
-              fontSize: 11,
-            }}
-          >
-            {step.list.map((val, idx) => (
-              <motion.span
-                key={idx}
-                style={{
-                  padding: "4px 8px",
-                  borderRadius: 3,
-                  backgroundColor: step.midVal === val ? "#c7d2fe" : "#e0e7ff",
-                  border:
-                    step.midVal === val
-                      ? "2px solid #4f46e5"
-                      : "1px solid var(--border)",
-                  fontWeight: step.midVal === val ? 700 : 500,
-                }}
-                animate={{ scale: step.midVal === val ? 1.15 : 1 }}
-              >
-                {val}
-              </motion.span>
-            ))}
-          </div>
-        </motion.div>
-      )}
-
-      {(step.left || step.right) && (
-        <motion.div
-          style={{ padding: 12, backgroundColor: "#dbeafe", borderRadius: 6 }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-        >
-          <div
-            style={{
-              fontSize: 12,
-              fontWeight: 600,
-              color: "#0c4a6e",
-              marginBottom: 8,
-            }}
-          >
-            Subtrees
-          </div>
-          <div style={{ display: "flex", gap: 8 }}>
-            {step.left && (
-              <div style={{ flex: 1 }}>
-                <div
-                  style={{ fontSize: 11, color: "#0c4a6e", marginBottom: 4 }}
-                >
-                  Left: [{step.left.join(", ")}]
-                </div>
-              </div>
-            )}
-            {step.right && (
-              <div style={{ flex: 1 }}>
-                <div
-                  style={{ fontSize: 11, color: "#0c4a6e", marginBottom: 4 }}
-                >
-                  Right: [{step.right.join(", ")}]
-                </div>
-              </div>
-            )}
-          </div>
-        </motion.div>
-      )}
-
-      {step.message && (
-        <motion.div
-          style={{
-            padding: 12,
-            backgroundColor: "#fef3c7",
-            borderRadius: 6,
-            fontSize: 12,
-            color: "#92400e",
-          }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-        >
-          {step.message}
-        </motion.div>
-      )}
-    </div>
-  );
-}
-
 export default function ConvertSortedListToBinarySearchTreeVisualizer() {
   const [listInput, setListInput] = useState("[1, 2, 3, 4, 5, 6]");
 
   const { list, inputError } = useMemo(() => {
     try {
-      const parsed = JSON.parse(listInput);
-      if (!Array.isArray(parsed)) throw new Error("Input must be an array");
-      const nums = parsed.map((v) => (typeof v === "number" ? v : Number(v)));
-      if (nums.some(isNaN)) throw new Error("All elements must be numbers");
-      if (nums.length > 20) throw new Error("Max 20 elements for clarity");
-      return { list: nums, inputError: "" };
+      return { list: parseSortedList(listInput), inputError: "" };
     } catch (e) {
-      return { list: [1, 2, 3, 4, 5, 6], inputError: e.message };
+      return { list: [], inputError: e.message };
     }
   }, [listInput]);
 
-  const steps = useMemo(
-    () =>
-      generateSteps(list).map((s) => ({
-        ...s,
-        relatedLines: s.relatedLines ?? (s.activeLine ? [s.activeLine] : []),
-      })),
-    [list],
-  );
+  const story = useMemo(() => buildSortedListStory(list), [list]);
+  const steps = inputError ? [] : story.frames;
 
   const {
     stepIndex,
@@ -387,9 +104,9 @@ export default function ConvertSortedListToBinarySearchTreeVisualizer() {
       />
       {showPatternOverlay && (
         <CodePatternAnnotations
-          step={step}
-          linePatternMap={LINE_PATTERN_MAP}
-          patterns={PATTERNS}
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLine={step?.activeLine}
           activeLineDom={activeLineDom}
         />
       )}
@@ -410,15 +127,7 @@ export default function ConvertSortedListToBinarySearchTreeVisualizer() {
         inputError={inputError}
       />
 
-      <VisualizationPanel
-        step={step}
-        listInput={listInput}
-        setListInput={setListInput}
-        inputError={inputError}
-        EXAMPLES={EXAMPLES}
-        applyExample={applyExample}
-        handleReset={handleReset}
-      />
+      {!inputError && <ListToTreeStory story={story} values={list} stepIndex={stepIndex} />}
     </>
   );
 
@@ -449,7 +158,7 @@ export default function ConvertSortedListToBinarySearchTreeVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
-      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
+      {showPatternOverlay && <PatternLegend usedPatterns={PATTERNS} currentPhase={step?.phase} />}
     </>
   );
 

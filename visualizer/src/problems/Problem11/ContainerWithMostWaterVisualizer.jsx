@@ -1,6 +1,7 @@
 import { useState, useCallback, useMemo } from "react";
 import { createPortal } from "react-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { generateSteps } from "./algorithm";
+import WaterContainerStory from "./WaterContainerStory";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import CodePatternAnnotations from "../../components/CodePatternAnnotations";
@@ -49,98 +50,6 @@ const SOLUTION_CODE = [
   { line: 12, text: "        return max_area" },
 ];
 
-function generateSteps(height) {
-  const steps = [];
-  let left = 0;
-  let right = height.length - 1;
-  let maxArea = 0;
-
-  steps.push({
-    phase: "init",
-    left,
-    right,
-    maxArea,
-    currentArea: null,
-    activeLine: 3,
-    message: "Initialize left and right pointers at the ends of the array.",
-  });
-
-  while (left < right) {
-    const w = right - left;
-    const h = Math.min(height[left], height[right]);
-    const area = w * h;
-
-    steps.push({
-      phase: "compute",
-      left,
-      right,
-      maxArea,
-      currentArea: area,
-      activeLine: 6,
-      message: `Calculate area: width=${w}, height=min(${height[left]}, ${height[right]})=${h}. Area=${area}.`,
-    });
-
-    if (area > maxArea) {
-      maxArea = area;
-      steps.push({
-        phase: "update",
-        left,
-        right,
-        maxArea,
-        currentArea: area,
-        activeLine: 7,
-        message: `New max area found! Update max_area to ${maxArea}.`,
-      });
-    } else {
-      steps.push({
-        phase: "skip",
-        left,
-        right,
-        maxArea,
-        currentArea: area,
-        activeLine: 7,
-        message: `Area ${area} is not greater than max_area ${maxArea}.`,
-      });
-    }
-
-    if (height[left] < height[right]) {
-      steps.push({
-        phase: "move",
-        left,
-        right,
-        maxArea,
-        currentArea: null,
-        activeLine: 9,
-        message: `height[left] < height[right] (${height[left]} < ${height[right]}). Move left pointer inwards to find a taller line.`,
-      });
-      left++;
-    } else {
-      steps.push({
-        phase: "move",
-        left,
-        right,
-        maxArea,
-        currentArea: null,
-        activeLine: 11,
-        message: `height[left] >= height[right] (${height[left]} >= ${height[right]}). Move right pointer inwards to find a taller line.`,
-      });
-      right--;
-    }
-  }
-
-  steps.push({
-    phase: "done",
-    left,
-    right,
-    maxArea,
-    currentArea: null,
-    activeLine: 12,
-    message: `Pointers met. Maximum area is ${maxArea}.`,
-  });
-
-  return steps;
-}
-
 const EXAMPLES = getExamples("container-with-most-water");
 
 export default function ContainerWithMostWaterVisualizer() {
@@ -155,13 +64,13 @@ export default function ContainerWithMostWaterVisualizer() {
   const { height, inputError } = useMemo(() => {
     try {
       const h = JSON.parse(heightInput);
-      if (!Array.isArray(h) || h.some((x) => typeof x !== "number" || x < 0))
+      if (!Array.isArray(h) || h.some((x) => !Number.isSafeInteger(x) || x < 0 || x > 10000))
         throw new Error();
       if (h.length < 2) throw new Error("Array must have at least 2 elements");
       return { height: h, inputError: "" };
     } catch {
       return {
-        height: [1, 8, 6, 2, 5, 4, 8, 3, 7],
+        height: [],
         inputError: "Invalid input array",
       };
     }
@@ -169,13 +78,13 @@ export default function ContainerWithMostWaterVisualizer() {
 
   const steps = useMemo(
     () =>
-      generateSteps(height).map((current) => ({
+      (inputError ? [] : generateSteps(height)).map((current) => ({
         ...current,
         relatedLines:
           current.relatedLines ??
           (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [height],
+    [height, inputError],
   );
 
   const {
@@ -207,10 +116,6 @@ export default function ContainerWithMostWaterVisualizer() {
     onStepJump: setStepIndex,
   });
 
-  const maxHeightValue = useMemo(() => {
-    return Math.max(...height, 1);
-  }, [height]);
-
   // Extract panels into consts (Step 3)
   const primaryPanel = (
     <>
@@ -236,35 +141,6 @@ export default function ContainerWithMostWaterVisualizer() {
           )}
         </div>
         <div className="vis-panel-body cw-panel-body">
-          <div
-            style={{
-              display: "flex",
-              gap: 6,
-              marginBottom: 12,
-              flexWrap: "wrap",
-            }}
-          >
-            {EXAMPLES.map((ex) => (
-              <button
-                key={ex.label}
-                onClick={() => applyExample(ex)}
-                className="vis-example-btn cw-example-btn"
-              >
-                {ex.label}
-              </button>
-            ))}
-          </div>
-
-          <input
-            value={heightInput}
-            onChange={(e) => {
-              setHeightInput(e.target.value);
-              handleReset();
-            }}
-            placeholder="[1,8,6,2,5,4,8,3,7]"
-            className="cw-input"
-          />
-
           <PointerRail
             title="Two-pointer lane"
             values={height}
@@ -294,40 +170,7 @@ export default function ContainerWithMostWaterVisualizer() {
             }
           />
 
-          <div className="cw-chart-container">
-            {step &&
-              step.left !== null &&
-              step.right !== null &&
-              step.phase !== "done" && (
-                <div
-                  className="cw-water-fill"
-                  style={{
-                    left: `calc(${(step.left / Math.max(height.length - 1, 1)) * 100}% + 12px)`,
-                    right: `calc(${100 - (step.right / Math.max(height.length - 1, 1)) * 100}% - 12px)`,
-                    height: `${(Math.min(height[step.left], height[step.right]) / maxHeightValue) * 100}%`,
-                  }}
-                />
-              )}
-            {height.map((h, i) => {
-              const isLeft = step?.left === i;
-              const isRight = step?.right === i;
-              const isActive = isLeft || isRight;
-
-              return (
-                <div key={i} className="cw-bar-wrapper">
-                  <div className="cw-bar-value">{h}</div>
-                  <motion.div
-                    className={`cw-bar ${isActive ? "active" : ""}`}
-                    style={{ height: `${(h / maxHeightValue) * 100}%` }}
-                    layout
-                  />
-                  <div className="cw-pointer-label">
-                    {isLeft ? "L" : isRight ? "R" : ""}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          {!inputError && <WaterContainerStory heights={height} step={step} />}
         </div>
       </div>
     </>

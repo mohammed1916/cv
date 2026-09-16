@@ -1,22 +1,15 @@
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
-import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import {
-  buildTree,
-  computeLayout,
-  collectNodes,
-  buildEdges,
-  parseTreeInput,
-} from "../../components/treeUtils";
-import { TreeCanvas3D } from "../../components/viz3d";
+import { generateSteps } from "./algorithm";
+import StoryPanel from "../../components/shared/StoryPanel";
+import VisualizationPanel from "../../components/shared/TraversalTreePanel";
 import { getExamples } from "../../config/examplesRegistry";
 import "./BinaryTreeLevelOrderVisualizer.css";
 import ManualInputPanel from "../../components/shared/ManualInputPanel";
@@ -24,11 +17,8 @@ import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
-const LINE_PATTERN_MAP = {}; // Auto-generated: maps line numbers to phase names
-const PATTERNS = []; // Auto-generated: list of phase names used in this visualizer
-const CANVAS_W = 520;
-const CANVAS_H = 320;
-const NODE_R = 22;
+const LINE_PATTERN_MAP = { 4: "init", 7: "loop", 8: "visit", 9: "update", 10: "update", 11: "update", 12: "update", 13: "done" };
+const PATTERNS = ["init", "loop", "visit", "update", "done"];
 
 const SOLUTION_CODE = [
   { line: 1, text: "class Solution:" },
@@ -46,187 +36,15 @@ const SOLUTION_CODE = [
   { line: 13, text: "        return res" },
 ];
 
-function generateSteps(arr) {
-  const root = buildTree(arr);
-  const positions = computeLayout(root, CANVAS_W, 80);
-  const edges = buildEdges(root);
-  const allNodes = collectNodes(root);
-  const steps = [];
-
-  if (!root) {
-    return [
-      {
-        phase: "done",
-        activeLine: 3,
-        activeIds: new Set(),
-        visitedIds: new Set(),
-        queueIds: new Set(),
-        levels: [],
-        positions,
-        edges,
-        allNodes,
-        message: "Empty tree → return []",
-      },
-    ];
-  }
-
-  const visitedIds = new Set();
-  const levels = [];
-
-  steps.push({
-    phase: "init",
-    activeLine: 4,
-    activeIds: new Set(),
-    visitedIds: new Set(visitedIds),
-    queueIds: new Set([root.id]),
-    levels: [...levels],
-    positions,
-    edges,
-    allNodes,
-    message: "Init queue with root.",
-  });
-
-  let queue = [root];
-
-  while (queue.length) {
-    const levelSize = queue.length;
-    const levelVals = [];
-    const levelIds = queue.map((n) => n.id);
-
-    steps.push({
-      phase: "level-start",
-      activeLine: 6,
-      activeIds: new Set(levelIds),
-      visitedIds: new Set(visitedIds),
-      queueIds: new Set(queue.map((n) => n.id)),
-      levels: [...levels],
-      positions,
-      edges,
-      allNodes,
-      message: `Start new level with ${levelSize} node(s): [${queue.map((n) => n.val).join(", ")}]`,
-    });
-
-    const nextQueue = [];
-
-    for (let i = 0; i < levelSize; i++) {
-      const node = queue[i];
-      visitedIds.add(node.id);
-      levelVals.push(node.val);
-
-      if (node.left) nextQueue.push(node.left);
-      if (node.right) nextQueue.push(node.right);
-
-      steps.push({
-        phase: "visit",
-        activeLine: 9,
-        activeIds: new Set([node.id]),
-        visitedIds: new Set(visitedIds),
-        queueIds: new Set(nextQueue.map((n) => n.id)),
-        levels: [...levels],
-        positions,
-        edges,
-        allNodes,
-        message: `Visit node ${node.val}. Add value to current level.`,
-      });
-    }
-
-    levels.push([...levelVals]);
-
-    steps.push({
-      phase: "level-done",
-      activeLine: 12,
-      activeIds: new Set(),
-      visitedIds: new Set(visitedIds),
-      queueIds: new Set(nextQueue.map((n) => n.id)),
-      levels: [...levels],
-      positions,
-      edges,
-      allNodes,
-      message: `Level complete: [${levelVals.join(", ")}]. Result so far: ${JSON.stringify(levels)}`,
-    });
-
-    queue = nextQueue;
-  }
-
-  steps.push({
-    phase: "done",
-    activeLine: 13,
-    activeIds: new Set(),
-    visitedIds: new Set(visitedIds),
-    queueIds: new Set(),
-    levels: [...levels],
-    positions,
-    edges,
-    allNodes,
-    message: `BFS complete. Result: ${JSON.stringify(levels)}`,
-  });
-
-  return steps;
-}
-
 const EXAMPLES = getExamples("binary-tree-level-order");
-
-function VisualizationPanel({
-  EXAMPLES,
-  arrInput,
-  setArrInput,
-  positions,
-  edges,
-  allNodes,
-  step,
-  applyExample,
-  handleReset,
-  CANVAS_W,
-  CANVAS_H,
-  NODE_R,
-}) {
-  return (
-    <div className="btlo-viz-panel">
-      <div className="btlo-examples">
-        {EXAMPLES.map((ex) => (
-          <button
-            key={ex.label}
-            className="btlo-chip"
-            onClick={() => applyExample(ex)}
-          >
-            {ex.label}
-          </button>
-        ))}
-      </div>
-      <input
-        className="btlo-input"
-        value={arrInput}
-        onChange={(e) => {
-          setArrInput(e.target.value);
-          handleReset();
-        }}
-      />
-      <div
-        className="btlo-canvas"
-        style={{ width: CANVAS_W, height: CANVAS_H }}
-      >
-        <TreeCanvas3D
-          positions={positions}
-          edges={edges}
-          allNodes={allNodes}
-          activeIds={step?.activeIds ?? new Set()}
-          visitedIds={step?.visitedIds ?? new Set()}
-          queueIds={step?.queueIds ?? new Set()}
-          canvasWidth={CANVAS_W}
-          canvasHeight={CANVAS_H}
-          nodeRadius={NODE_R}
-        />
-      </div>
-    </div>
-  );
-}
 
 function ResultPanel({ step, inputError, LEVEL_COLORS }) {
   return (
     <div className="btlo-result-panel">
-      <div className="btlo-queue-label">
-        Queue: [{[...(step?.queueIds ?? [])].join(", ")}]
-      </div>
+      <StoryPanel title="Queue: front to back" description="Finish the frozen current-level count before processing the next level.">
+        <p>{(step?.queue ?? []).map(n => `${n.val} (#${n.id})`).join(' -> ') || 'Queue empty'}</p>
+        <p>Current level: [{(step?.currentLevel ?? []).join(', ')}] | {step?.remaining ?? 0} nodes left to finish.</p>
+      </StoryPanel>
       <div className="btlo-levels">
         {(step?.levels ?? []).map((level, i) => (
           <div
@@ -262,25 +80,18 @@ export default function BinaryTreeLevelOrderVisualizer() {
     setActiveLineDom,
   } = usePatternOverlay();
 
-  const { arr, inputError } = useMemo(() => {
-    try {
-      return { arr: parseTreeInput(arrInput), inputError: "" };
-    } catch (e) {
-      return {
-        arr: [3, 9, 20, null, null, 15, 7],
-        inputError: e.message || "Invalid input",
-      };
-    }
+  const { steps, inputError } = useMemo(() => {
+    try { return { steps: generateSteps(arrInput), inputError: '' }; }
+    catch (error) { return { steps: [], inputError: error.message }; }
   }, [arrInput]);
 
-  const steps = useMemo(() => generateSteps(arr), [arr]);
   const {
     stepIndex,
     stepForward,
     stepBack,
     togglePlay,
     handleReset,
-    isPlaying,
+      isPlaying,
     speed,
     setSpeed,
     isDone,
@@ -295,9 +106,9 @@ export default function BinaryTreeLevelOrderVisualizer() {
     [handleReset],
   );
 
-  const positions = step?.positions ?? new Map();
-  const edges = step?.edges ?? [];
-  const allNodes = step?.allNodes ?? [];
+  const positions = (step ?? steps[0])?.positions ?? new Map();
+  const edges = (step ?? steps[0])?.edges ?? [];
+  const allNodes = (step ?? steps[0])?.allNodes ?? [];
 
   // Color level bands
   const LEVEL_COLORS = [
@@ -335,9 +146,6 @@ export default function BinaryTreeLevelOrderVisualizer() {
           step={step}
           applyExample={applyExample}
           handleReset={handleReset}
-          CANVAS_W={CANVAS_W}
-          CANVAS_H={CANVAS_H}
-          NODE_R={NODE_R}
         />
       </div>
     </>
@@ -428,7 +236,7 @@ export default function BinaryTreeLevelOrderVisualizer() {
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
 
   return (
-    <div className="btlo-shell">
+    <div className="vis-shell btlo-shell">
       <div className="btlo-header">
         <h2>Binary Tree Level Order Traversal</h2>
       </div>
