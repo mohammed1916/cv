@@ -68,14 +68,14 @@
       "number": "105",
       "folder": "Problem105",
       "title": "Construct Binary Tree from Preorder and Inorder Traversal",
-      "story": "pending-review",
+      "story": "implemented-pending-full-review",
       "playground": "not-assessed"
     },
     {
       "number": "106",
       "folder": "Problem106",
       "title": "Construct Binary Tree from Inorder and Postorder Traversal",
-      "story": "pending-review",
+      "story": "implemented-pending-full-review",
       "playground": "not-assessed"
     },
     {
@@ -131,14 +131,14 @@
       "number": "113",
       "folder": "Problem113",
       "title": "Path Sum II",
-      "story": "pending-review",
+      "story": "implemented-pending-full-review",
       "playground": "not-assessed"
     },
     {
       "number": "114",
       "folder": "Problem114",
       "title": "Flatten Binary Tree to Linked List",
-      "story": "pending-review",
+      "story": "implemented-pending-full-review",
       "playground": "not-assessed"
     },
     {
@@ -152,35 +152,35 @@
       "number": "115",
       "folder": "Problem115",
       "title": "Distinct Subsequences",
-      "story": "pending-review",
+      "story": "implemented-pending-full-review",
       "playground": "not-assessed"
     },
     {
       "number": "116",
       "folder": "Problem116",
       "title": "Populating Next Right Pointers in Each Node",
-      "story": "pending-review",
+      "story": "implemented-pending-full-review",
       "playground": "not-assessed"
     },
     {
       "number": "117",
       "folder": "Problem117",
       "title": "Populating Next Right Pointers in Each Node II",
-      "story": "pending-review",
+      "story": "implemented-pending-full-review",
       "playground": "not-assessed"
     },
     {
       "number": "118",
       "folder": "Problem118",
       "title": "Pascal's Triangle",
-      "story": "pending-review",
+      "story": "implemented-pending-full-review",
       "playground": "not-assessed"
     },
     {
       "number": "119",
       "folder": "Problem119",
       "title": "Pascal's Triangle II",
-      "story": "pending-review",
+      "story": "implemented-pending-full-review",
       "playground": "not-assessed"
     },
     {

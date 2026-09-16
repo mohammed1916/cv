@@ -1,3 +1,5 @@
 .story-panel { display: grid; gap: 12px; padding: 16px; min-width: 0; color: var(--text); }
 .story-panel h3, .story-panel p { margin: 0; }
 .story-panel p { font-size: 13px; line-height: 1.6; }
+.story-panel .svg-viewport-canvas { flex: none; height: 300px; }
+.story-panel .svg-viewport-svg { height: 100%; }

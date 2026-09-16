@@ -240,8 +240,6 @@ Reuse the layout helper where compatible; keep construction state local.
   transfer measurements, broad input performance and playground adapters are
   tracked separately. Source-CSS savings are not whole-app download savings.
 
-### Per-problem release checklist
-
 ### Traversal and construction batch: 102, 103, 104, 107, 108
 
 - 102 now preserves the full FIFO queue between visits and enqueue operations.
@@ -280,3 +278,63 @@ Reuse the layout helper where compatible; keep construction state local.
   add local CSS even while repeated UI rules are removed; report both honestly.
 - Record which entries were reviewed. Never treat a passing build or shared
   component usage as proof of meaningful visualization.
+
+### Reconstruction, path collection, rewiring and subsequences: 105, 106, 113, 114, 115
+
+- 105/106 share a reconstruction scene and validated interval model. Preorder
+  takes the root first; postorder takes it last. Stable inorder indices show
+  subtree boundaries and creation/return timing. Conflicting traversal pairs
+  are rejected. Isolated desktop browser checks reach the correct five-node trees.
+- 113 preserves saved leaf routes through backtracking and highlights the working
+  path. Fixed a trace bug that omitted the current node from the running sum.
+  Tests cover both standard matching routes, internal-node rejection, negative
+  values, sparse inputs and empty trees.
+- 114 uses standard level-order input and shows each of the three pointer writes
+  separately. Stable positions expose the temporary shared child at line 11;
+  explicit L/R labels distinguish edges. Tests prove all identities stay reachable
+  and the final right chain equals original preorder with every left link null.
+- 115 replaces a mutable shared DP snapshot (which revealed future values) with
+  compact write-time metadata. Separate skip, compare and use frames explain why
+  counts add. A shared RecurrenceGrid follows the active dependency window instead
+  of silently clipping the table after eight rows. BigInt counts remain exact;
+  inputs are bounded at 64 characters per string. Tests include exhaustive small
+  subsequence counts, historical cell values, and a count beyond safe JS integers.
+- New stories retain Lumino layouts and floating playback. These entries are
+  implemented-pending-full-review; full access-route, theme, performance and
+  playground-adapter review remains pending. The last production build through
+  problem 113 passed with main chunk 520.21 kB (131.50 kB gzip); the warning remains.
+
+### Next-pointer stories: 116 and 117
+
+- Both now draw actual directed next links, with stable node IDs and explicit null
+  endings. Previously the views mainly listed level values. Shared scene/workspace
+  code replaces duplicated JSX and removes both unused local CSS files.
+- 116 follows existing parent links to connect siblings and bridge adjacent parents.
+  Validation enforces two children per internal node and equal leaf depth.
+- 117 uses a dummy head and tail to stitch real children across sparse gaps, without
+  a BFS queue. The displayed code and trace distinguish these two algorithms.
+- Tests verify final links by independent depth grouping, duplicate identities,
+  sparse gaps, empty trees, and perfect-tree validation. Desktop browser checks
+  finish both examples and verify four/three directed links respectively.
+- Browser checks for 113/114/115 also passed after the shared SVG canvas was bounded
+  to 300px and the recurrence table began scrolling its active cell into view.
+  Desktop and narrow-viewport screenshots were captured. This is a focused check,
+  not completion of the full accessibility/theme/route review.
+
+### Pascal stories completed; paused at user request
+
+- 118 builds the triangle row by row, marks the two parents for each addition,
+  and keeps future rows out of earlier frames. Input range: 1-30 rows.
+- 119 demonstrates an in-place right-to-left update, with an explicitly labeled
+  prior-row snapshot for explanation. Input range: row index 0-33. Row 0 is now
+  accepted correctly instead of being replaced by a truthy default of 3.
+- Both share PascalStory/CSS and AlgorithmStoryWorkspace with the next-pointer
+  family. The shell preserves editable inputs, examples, code-line selection,
+  pattern legends, Lumino panels and floating/docked playback. Problem definitions
+  own their code, validation, trace and scene; the shell does not infer semantics.
+- Focused lint passed. All 44 visual-story tests passed. Browser checks confirmed
+  the final Pascal row [1,4,6,4,1] for both examples and rechecked 116/117 after the
+  shell extraction. Production build passed; the main-chunk size warning remains.
+- Stopped after 118/119 as requested. Problem 120 was inspected but not edited.
+  Remaining entries retain their ledger status; these implemented stories still
+  require the full release checklist and separate playground adapters.

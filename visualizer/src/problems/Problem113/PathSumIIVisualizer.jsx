@@ -1,6 +1,8 @@
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
-import { motion } from 'framer-motion'
+import { generateSteps } from './algorithm'
+import StoryPanel from '../../components/shared/StoryPanel'
+import TreeDiagram from '../../components/shared/TreeDiagram'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -10,18 +12,14 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
 import './PathSumIIVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
-const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
-const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const CANVAS_W = 520
-const CANVAS_H = 320
-const NODE_R = 22
+const LINE_PATTERN_MAP = { 2: 'init', 5: 'visit', 6: 'check', 7: 'compare', 8: 'found', 10: 'visit', 11: 'visit', 12: 'backtrack', 13: 'done' }
+const PATTERNS = ['init','visit','check','compare','found','backtrack','done']
 
 const SOLUTION_CODE = [
     { line: 1, text: 'def pathSum(root, targetSum):' },
@@ -39,183 +37,15 @@ const SOLUTION_CODE = [
     { line: 13, text: '    dfs(root, [], targetSum); return result' },
 ]
 
-function generateSteps(arr, targetSum) {
-    const root = buildTree(arr)
-    const positions = computeLayout(root, CANVAS_W, 80)
-    const edges = buildEdges(root)
-    const allNodes = collectNodes(root)
-    const steps = []
-
-    if (!root) {
-        return [{
-            phase: 'done', activeLine: 13, activeId: -1, pathStack: [], completedPaths: [],
-            onPathNode: new Set(), positions, edges, allNodes, currentSum: 0, targetSum,
-            message: 'Empty tree → return []'
-        }]
-    }
-
-    const completedPaths = []
-    const onPathNode = new Set()
-
-    steps.push({
-        phase: 'init', activeLine: 2, activeId: -1, pathStack: [], completedPaths: [],
-        onPathNode: new Set(), positions, edges, allNodes, currentSum: 0, targetSum,
-        message: `Initialize result list. Target sum: ${targetSum}. Start DFS.`
-    })
-
-    function dfs(node, path, remainingSum) {
-        if (!node) {
-            steps.push({
-                phase: 'null', activeLine: 4, activeId: -1,
-                pathStack: [...path], completedPaths: [...completedPaths], onPathNode: new Set(onPathNode),
-                positions, edges, allNodes, currentSum: targetSum - remainingSum, targetSum,
-                message: 'Null node detected. Return from DFS.'
-            })
-            return
-        }
-
-        path.push(node.val)
-        onPathNode.add(node.id)
-        const currentSum = targetSum - remainingSum
-
-        steps.push({
-            phase: 'visit', activeLine: 5, activeId: node.id,
-            pathStack: [...path], completedPaths: [...completedPaths], onPathNode: new Set(onPathNode),
-            positions, edges, allNodes, currentSum, targetSum,
-            message: `Visit node ${node.val}. Current path: [${path.join(', ')}]. Sum so far: ${currentSum}`
-        })
-
-        const isLeaf = !node.left && !node.right
-        if (isLeaf) {
-            steps.push({
-                phase: 'leaf', activeLine: 6, activeId: node.id,
-                pathStack: [...path], completedPaths: [...completedPaths], onPathNode: new Set(onPathNode),
-                positions, edges, allNodes, currentSum, targetSum,
-                message: `Leaf node! Current path sum: ${currentSum}. Target: ${targetSum}`
-            })
-
-            if (currentSum === targetSum) {
-                completedPaths.push([...path])
-                steps.push({
-                    phase: 'match', activeLine: 8, activeId: node.id,
-                    pathStack: [...path], completedPaths: [...completedPaths], onPathNode: new Set(onPathNode),
-                    positions, edges, allNodes, currentSum, targetSum,
-                    message: `Sum matches! Save path: [${path.join(', ')}]. Total: ${completedPaths.length}`
-                })
-            } else {
-                steps.push({
-                    phase: 'no-match', activeLine: 7, activeId: node.id,
-                    pathStack: [...path], completedPaths: [...completedPaths], onPathNode: new Set(onPathNode),
-                    positions, edges, allNodes, currentSum, targetSum,
-                    message: `Sum doesn't match. ${currentSum} != ${targetSum}`
-                })
-            }
-        } else {
-            steps.push({
-                phase: 'branch', activeLine: 9, activeId: node.id,
-                pathStack: [...path], completedPaths: [...completedPaths], onPathNode: new Set(onPathNode),
-                positions, edges, allNodes, currentSum, targetSum,
-                message: `Internal node. Continue DFS to children. Remaining: ${remainingSum - node.val}`
-            })
-
-            if (node.left) {
-                dfs(node.left, path, remainingSum - node.val)
-            } else {
-                steps.push({
-                    phase: 'no-left', activeLine: 10, activeId: node.id,
-                    pathStack: [...path], completedPaths: [...completedPaths], onPathNode: new Set(onPathNode),
-                    positions, edges, allNodes, currentSum, targetSum,
-                    message: `No left child. Skip.`
-                })
-            }
-
-            if (node.right) {
-                dfs(node.right, path, remainingSum - node.val)
-            } else {
-                steps.push({
-                    phase: 'no-right', activeLine: 11, activeId: node.id,
-                    pathStack: [...path], completedPaths: [...completedPaths], onPathNode: new Set(onPathNode),
-                    positions, edges, allNodes, currentSum, targetSum,
-                    message: `No right child. Skip.`
-                })
-            }
-        }
-
-        onPathNode.delete(node.id)
-        path.pop()
-
-        steps.push({
-            phase: 'backtrack', activeLine: 12, activeId: node.id,
-            pathStack: [...path], completedPaths: [...completedPaths], onPathNode: new Set(onPathNode),
-            positions, edges, allNodes, currentSum: targetSum - remainingSum, targetSum,
-            message: `Backtrack from node ${node.val}. Path: [${path.join(', ')}]`
-        })
-    }
-
-    dfs(root, [], targetSum)
-
-    steps.push({
-        phase: 'done', activeLine: 13, activeId: -1,
-        pathStack: [], completedPaths: [...completedPaths], onPathNode: new Set(),
-        positions, edges, allNodes, currentSum: 0, targetSum,
-        message: completedPaths.length > 0
-            ? `Found ${completedPaths.length} path(s): ${JSON.stringify(completedPaths)}`
-            : 'No paths found that sum to target.'
-    })
-
-    return steps
-}
-
 // Examples registry will be loaded by the visualizer if needed
 // getExamples('path-sum-ii') can be called within a component for example buttons
 
 function TreeVisualizationPanel({ step, positions, edges, allNodes }) {
-    return (
-        <div className="psi-viz-panel">
-            <div className="psi-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
-                <svg style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }} width={CANVAS_W} height={CANVAS_H}>
-                    {edges.map(({ fromId, toId }) => {
-                        const from = positions.get(fromId)
-                        const to = positions.get(toId)
-                        if (!from || !to) return null
-                        const isOnPath = step?.onPathNode?.has(fromId) && step?.onPathNode?.has(toId)
-                        return (
-                            <line
-                                key={`${fromId}-${toId}`}
-                                x1={from.x}
-                                y1={from.y}
-                                x2={to.x}
-                                y2={to.y}
-                                stroke={isOnPath ? '#f38ba8' : 'var(--code-line)'}
-                                strokeWidth={isOnPath ? 2.5 : 1.5}
-                            />
-                        )
-                    })}
-                </svg>
-                {allNodes.map((node) => {
-                    const pos = positions.get(node.id)
-                    if (!pos) return null
-                    const isActive = step?.activeId === node.id
-                    const isOnPath = step?.onPathNode?.has(node.id)
-                    return (
-                        <motion.div
-                            key={node.id}
-                            style={{ position: 'absolute', left: pos.x - NODE_R, top: pos.y - NODE_R }}
-                        >
-                            <motion.div
-                                className={`psi-node ${isActive ? 'active' : ''} ${isOnPath ? 'on-path' : ''}`}
-                                animate={isActive ? { scale: 1.2 } : { scale: 1 }}
-                                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                            >
-                                {node.val}
-                            </motion.div>
-                        </motion.div>
-                    )
-                })}
-            </div>
-            <div className="psi-status">{step?.message || 'Press Play to begin.'}</div>
-        </div>
-    )
+    return <StoryPanel title="Collect every matching leaf route" description={step?.message ?? 'Grow a path, test the leaf, save a copy when it matches, then backtrack.'}>
+        <p>Path total: {step?.currentSum ?? 0}. A matching total at an internal node is not a complete route.</p>
+        <TreeDiagram positions={positions} edges={edges} nodes={allNodes} activeIds={step?.onPathNode ?? new Set()} labelForNode={n=>n.id===step?.activeId?'Current':step?.onPathNode?.has(n.id)?'On route':!n.left&&!n.right?'Leaf':''}/>
+        <p>Saved paths remain intact when the working path pops its last node.</p>
+    </StoryPanel>;
 }
 
 function StatePanel({ step }) {
@@ -247,40 +77,30 @@ function StatePanel({ step }) {
                         : <span className="psi-empty">none yet</span>}
                 </div>
             </div>
-            <div className="psi-legend">
-                <div className="psi-legend-item"><div className="psi-dot active" />Active node</div>
-                <div className="psi-legend-item"><div className="psi-dot on-path" />On path</div>
-            </div>
+
         </div>
     )
 }
 
 export default function PathSumIIVisualizer() {
-    const [arrInput, setArrInput] = useState('[5,4,8,11,null,13,4,7,2,null,1]')
+    const [arrInput, setArrInput] = useState('[5,4,8,11,null,13,4,7,2,null,null,5,1]')
     const [targetInput, setTargetInput] = useState('22')
 
-    const { arr, targetSum, inputError } = useMemo(() => {
-        const fallback = { arr: [5, 4, 8, 11, null, 13, 4, 7, 2, null, 1], targetSum: 22 }
+    const { steps, inputError } = useMemo(() => {
         try {
-            const parsedArr = parseTreeInput(arrInput)
-            if (!Array.isArray(parsedArr)) throw new Error('Tree must be an array, e.g. [5,4,8,null,1]')
-            const parsedTarget = parseInt(targetInput, 10)
-            if (isNaN(parsedTarget)) throw new Error('targetSum must be a number')
-            return { arr: parsedArr, targetSum: parsedTarget, inputError: '' }
-        } catch (e) {
-            return { ...fallback, inputError: e.message }
-        }
-    }, [arrInput, targetInput])
-
-    const steps = useMemo(() => generateSteps(arr, targetSum), [arr, targetSum])
+            const target=Number(targetInput);
+            if(!targetInput.trim() || !Number.isSafeInteger(target))throw new Error('Target must be an integer.');
+            return { steps: generateSteps(arrInput, target), inputError: '' };
+        } catch(error) { return { steps: [], inputError: error.message }; }
+    }, [arrInput,targetInput]);
     const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
     const step = stepIndex >= 0 ? steps[stepIndex] : null
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
 
-    const positions = step?.positions ?? new Map()
-    const edges = step?.edges ?? []
-    const allNodes = step?.allNodes ?? []
+    const positions = (step ?? steps[0])?.positions ?? new Map()
+    const edges = (step ?? steps[0])?.edges ?? []
+    const allNodes = (step ?? steps[0])?.allNodes ?? []
 
     const connectivity = useCodeVisualConnectivity({
         steps,
@@ -391,7 +211,7 @@ export default function PathSumIIVisualizer() {
 
     // Step 4: Replace return with portals
     return (
-        <div className="psi-shell">
+        <div className="vis-shell psi-shell">
             <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
             {panelDivs && (
               <>

@@ -1,9 +1,11 @@
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
-import { motion } from "framer-motion";
+import { reconstructTreeStory } from "../../components/shared/reconstructTreeStory";
+import ReconstructionStory from "../../components/shared/ReconstructionStory";
+import StoryPanel from "../../components/shared/StoryPanel";
+import PatternOverlay from "../../components/PatternOverlay";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
@@ -16,8 +18,8 @@ import PatternLegend from "../../components/PatternLegend";
 import ManualInputPanel from "../../components/shared/ManualInputPanel";
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
-const LINE_PATTERN_MAP = {}; // Auto-generated: maps line numbers to phase names
-const PATTERNS = []; // Auto-generated: list of phase names used in this visualizer
+const LINE_PATTERN_MAP = { 3: "visit", 4: "compare", 5: "update", 6: "visit", 8: "visit", 10: "return" };
+const PATTERNS = ["visit", "compare", "update", "return"];
 const SOLUTION_CODE = [
   { line: 1, text: "def buildTree(preorder, inorder):" },
   { line: 2, text: "    if not preorder: return None" },
@@ -31,155 +33,17 @@ const SOLUTION_CODE = [
   { line: 10, text: "    return root" },
 ];
 
-let nodeIdCounter = 0;
-
-function generateSteps(preArr, inArr) {
-  nodeIdCounter = 0;
-  const steps = [];
-  const builtNodes = []; // {id, val, x, y, parentId}
-
-  // Layout: we'll assign positions in a simple way post-build
-  function build(pre, ino, depth, parentId) {
-    if (pre.length === 0) return null;
-
-    const rootVal = pre[0];
-    const mid = ino.indexOf(rootVal);
-    const id = nodeIdCounter++;
-
-    steps.push({
-      phase: "pick_root",
-      activeLine: 3,
-      preSlice: [...pre],
-      inoSlice: [...ino],
-      mid,
-      rootVal,
-      depth,
-      id,
-      parentId,
-      builtNodes: builtNodes.map((n) => ({ ...n })),
-      message: `preorder[0]=${rootVal} is the root; it splits inorder at index ${mid}`,
-    });
-
-    builtNodes.push({ id, val: rootVal, parentId, depth });
-
-    steps.push({
-      phase: "create",
-      activeLine: 5,
-      preSlice: [...pre],
-      inoSlice: [...ino],
-      mid,
-      rootVal,
-      depth,
-      id,
-      parentId,
-      builtNodes: builtNodes.map((n) => ({ ...n })),
-      message: `Create node(${rootVal}). Left inorder: [${ino.slice(0, mid).join(",")}], Right: [${ino.slice(mid + 1).join(",")}]`,
-    });
-
-    const left = build(pre.slice(1, mid + 1), ino.slice(0, mid), depth + 1, id);
-    const right = build(pre.slice(mid + 1), ino.slice(mid + 1), depth + 1, id);
-
-    return { id, val: rootVal, left, right, depth };
-  }
-
-  steps.push({
-    phase: "init",
-    activeLine: 1,
-    preSlice: [...preArr],
-    inoSlice: [...inArr],
-    builtNodes: [],
-    message: "Start building tree",
-  });
-  const tree = build(preArr, inArr, 0, null);
-  steps.push({
-    phase: "done",
-    activeLine: 10,
-    preSlice: [],
-    inoSlice: [],
-    builtNodes: builtNodes.map((n) => ({ ...n })),
-    tree,
-    message: "Tree construction complete!",
-  });
-  return { steps, finalTree: tree };
-}
-
-function layoutTree(root) {
-  if (!root) return new Map();
-  const map = new Map();
-  let order = 0;
-  const levelCounts = {};
-
-  function countDepth(node, depth) {
-    if (!node) return;
-    levelCounts[depth] = (levelCounts[depth] || 0) + 1;
-    countDepth(node.left, depth + 1);
-    countDepth(node.right, depth + 1);
-  }
-  countDepth(root, 0);
-
-  const W = 400,
-    LH = 68;
-  const levelX = {};
-  function assign(node, depth) {
-    if (!node) return;
-    assign(node.left, depth + 1);
-    levelX[depth] = (levelX[depth] || 0) + 1;
-    const cnt = levelCounts[depth];
-    const x = (levelX[depth] / (cnt + 1)) * W;
-    map.set(node.id, { x, y: depth * LH + 32 });
-    assign(node.right, depth + 1);
-  }
-  assign(root, 0);
-  return map;
-}
-
-function collectEdges(root) {
-  const edges = [];
-  function dfs(node) {
-    if (!node) return;
-    if (node.left) {
-      edges.push({ from: node.id, to: node.left.id });
-      dfs(node.left);
-    }
-    if (node.right) {
-      edges.push({ from: node.id, to: node.right.id });
-      dfs(node.right);
-    }
-  }
-  dfs(root);
-  return edges;
-}
-
 const EXAMPLES = getExamples("construct-binary-tree");
-
-function parseArr(str) {
-  try {
-    const p = JSON.parse(str);
-    if (!Array.isArray(p)) throw new Error();
-    return { arr: p.map(Number), err: "" };
-  } catch (e) {
-    return { arr: [], err: "Invalid JSON array" };
-  }
-}
 
 export default function ConstructBTVisualizer() {
   const [preInput, setPreInput] = useState("[3,9,20,15,7]");
   const [inoInput, setInoInput] = useState("[9,3,15,20,7]");
 
-  const { arr: preArr, err: preErr } = useMemo(
-    () => parseArr(preInput),
-    [preInput],
-  );
-  const { arr: inoArr, err: inoErr } = useMemo(
-    () => parseArr(inoInput),
-    [inoInput],
-  );
-
-  const { steps, finalTree } = useMemo(() => {
-    if (preArr.length !== inoArr.length || preArr.length === 0)
-      return { steps: [], finalTree: null };
-    return generateSteps(preArr, inoArr);
-  }, [preArr, inoArr]);
+  const { story, inputError } = useMemo(() => {
+    try { return { story: reconstructTreeStory(inoInput, preInput), inputError: '' }; }
+    catch(error) { return { story: null, inputError: error.message }; }
+  }, [preInput, inoInput]);
+  const steps=story?.frames ?? [];
 
   const {
     stepIndex,
@@ -210,19 +74,6 @@ export default function ConstructBTVisualizer() {
     [handleReset],
   );
 
-  // Build final tree layout for visualization
-  const treeLayout = useMemo(
-    () => (finalTree ? layoutTree(finalTree) : new Map()),
-    [finalTree],
-  );
-  const allEdges = useMemo(
-    () => (finalTree ? collectEdges(finalTree) : []),
-    [finalTree],
-  );
-
-  const builtSet = new Set((step?.builtNodes ?? []).map((n) => n.id));
-  const activeId = step?.phase === "create" ? step?.id : null;
-
   // Extract panel consts for Lumino DockPanel
   const inputPanel = (
     <div className="ctpi-panel-body">
@@ -239,134 +90,17 @@ export default function ConstructBTVisualizer() {
         }}
         examples={EXAMPLES}
         applyExample={applyExample}
+        inputError={inputError}
       />
-      <div className="ctpi-examples">
-        {EXAMPLES.map((ex) => (
-          <button
-            key={ex.label}
-            className="ctpi-chip"
-            onClick={() => applyExample(ex)}
-          >
-            {ex.label}
-          </button>
-        ))}
-      </div>
-      <label className="ctpi-field">
-        <span>Preorder</span>
-        <input
-          className="ctpi-input"
-          value={preInput}
-          onChange={(e) => {
-            setPreInput(e.target.value);
-            handleReset();
-          }}
-        />
-      </label>
-      <label className="ctpi-field">
-        <span>Inorder</span>
-        <input
-          className="ctpi-input"
-          value={inoInput}
-          onChange={(e) => {
-            setInoInput(e.target.value);
-            handleReset();
-          }}
-        />
-      </label>
-      {(preErr || inoErr) && (
-        <div className="ctpi-error">{preErr || inoErr}</div>
-      )}
+
     </div>
   );
 
-  const arraysPanel = (
-    <div className="ctpi-panel-body">
-      <div className="ctpi-arrays-row">
-        <div className="ctpi-arr-panel">
-          <div className="ctpi-arr-label">Current preorder slice</div>
-          <div className="ctpi-arr-cells">
-            {(step?.preSlice ?? []).map((v, i) => (
-              <div
-                key={i}
-                className={`ctpi-cell ${i === 0 && step?.phase !== "init" ? "root" : ""}`}
-              >
-                {v}
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="ctpi-arr-panel">
-          <div className="ctpi-arr-label">Current inorder slice</div>
-          <div className="ctpi-arr-cells">
-            {(step?.inoSlice ?? []).map((v, i) => (
-              <div
-                key={i}
-                className={`ctpi-cell ${i === step?.mid ? "mid" : i < (step?.mid ?? -1) ? "left-part" : "right-part"}`}
-              >
-                {v}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-      <div className="ctpi-status">
-        {step?.message || "Press Play to begin."}
-      </div>
-    </div>
-  );
-
-  const treePanel = finalTree ? (
-    <div className="ctpi-tree-panel">
-      <div
-        className="ctpi-tree-canvas"
-        style={{ position: "relative", width: 400, height: 320 }}
-      >
-        <svg
-          style={{ position: "absolute", inset: 0, overflow: "visible" }}
-          width={400}
-          height={320}
-        >
-          {allEdges.map((e) => {
-            const p = treeLayout.get(e.from),
-              c = treeLayout.get(e.to);
-            if (!p || !c || !builtSet.has(e.from) || !builtSet.has(e.to))
-              return null;
-            return (
-              <line
-                key={`${e.from}-${e.to}`}
-                x1={p.x}
-                y1={p.y}
-                x2={c.x}
-                y2={c.y}
-                stroke="var(--code-line)"
-                strokeWidth={2}
-              />
-            );
-          })}
-        </svg>
-        {(step?.builtNodes ?? []).map((nd) => {
-          const pos = treeLayout.get(nd.id);
-          if (!pos) return null;
-          return (
-            <motion.div
-              key={nd.id}
-              className={`ctpi-node ${nd.id === activeId ? "active" : ""}`}
-              style={{ left: pos.x - 22, top: pos.y - 22 }}
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ type: "spring", stiffness: 400, damping: 22 }}
-            >
-              {nd.val}
-            </motion.div>
-          );
-        })}
-      </div>
-    </div>
-  ) : (
-    <div style={{ padding: "16px", textAlign: "center", color: "#6773a1" }}>
-      Tree visualization will appear when you start playback.
-    </div>
-  );
+  const arraysPanel = story ? <ReconstructionStory story={story} stepIndex={stepIndex} /> : null;
+  const treePanel = <StoryPanel title="Construction proof" description="Each root splits the inorder interval into disjoint left and right subtrees.">
+    <p>{story?.nodes.filter(n=>n.createdAt<=stepIndex).length ?? 0}/{story?.nodes.length ?? 0} nodes created.</p>
+    <p>{step?.phase==='done'?'Both input traversals are reproduced by the completed tree.':'A subtree is complete only after both child intervals return.'}</p>
+  </StoryPanel>;
 
   const codePanel = (
     <div style={{ position: "relative", height: "100%" }}>
@@ -378,11 +112,7 @@ export default function ConstructBTVisualizer() {
         disableResizer
       />
       {showPatternOverlay && (
-        <CodePatternAnnotations
-          step={step}
-          linePatternMap={LINE_PATTERN_MAP}
-          patterns={PATTERNS}
-        />
+        <CodePatternAnnotations linePatterns={LINE_PATTERN_MAP} currentPhase={step?.phase} activeLine={step?.activeLine} activeLineDom={activeLineDom} />
       )}
     </div>
   );
@@ -411,7 +141,7 @@ export default function ConstructBTVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
-      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
+      {showPatternOverlay && <PatternLegend usedPatterns={PATTERNS} currentPhase={step?.phase} />}
     </div>
   );
 
@@ -430,7 +160,7 @@ export default function ConstructBTVisualizer() {
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
 
   return (
-    <div className="ctpi-shell">
+    <div className="vis-shell ctpi-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
         <>

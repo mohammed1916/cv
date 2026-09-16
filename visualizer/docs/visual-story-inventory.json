@@ -2,7 +2,7 @@
   "note": "Static import inventory, not a visual-quality certification. Dynamic imports and runtime-selected renderers require manual review. CSS byte counts are source bytes, not transferred bytes.",
   "registeredEntries": 613,
   "cssFiles": 700,
-  "cssSourceBytes": 1867213,
+  "cssSourceBytes": 1837945,
   "entries": [
     {
       "number": "CF-F",
@@ -198,14 +198,16 @@
       "number": "100",
       "title": "Same Tree",
       "folder": "Problem100",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem100/index.jsx",
         "src/problems/Problem100/SameTreeVisualizer.jsx",
+        "src/problems/Problem100/algorithm.js",
         "src/problems/Problem100/SameTreeVisualizer.css"
       ],
       "css": [
+        "src/components/shared/StoryPanel.css",
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
@@ -232,18 +234,21 @@
       "number": "101",
       "title": "Symmetric Tree",
       "folder": "Problem101",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem101/index.jsx",
         "src/problems/Problem101/SymmetricTreeVisualizer.jsx",
+        "src/problems/Problem101/algorithm.js",
+        "src/problems/Problem101/MirrorTreeStory.jsx",
         "src/problems/Problem101/SymmetricTreeVisualizer.css"
       ],
       "css": [
+        "src/components/shared/SvgViewport.css",
+        "src/components/shared/StoryPanel.css",
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
         "src/components/shared/FloatingPanel.css",
         "src/components/shared/PanelScaleControl.css",
         "src/problems/Problem101/SymmetricTreeVisualizer.css",
@@ -253,13 +258,13 @@
         "src/components/LuminoDockPanel.css"
       ],
       "signals": {
-        "localSVG": true,
+        "localSVG": false,
         "treeView": true,
         "sharedWorkspace": false,
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -267,21 +272,22 @@
       "number": "102",
       "title": "Binary Tree Level Order Traversal",
       "folder": "Problem102",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem102/index.jsx",
         "src/problems/Problem102/BinaryTreeLevelOrderVisualizer.jsx",
+        "src/problems/Problem102/algorithm.js",
         "src/problems/Problem102/BinaryTreeLevelOrderVisualizer.css"
       ],
       "css": [
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
         "src/components/shared/FloatingPanel.css",
         "src/components/shared/PanelScaleControl.css",
         "src/components/LuminoDockPanel.css",
+        "src/components/shared/StoryPanel.css",
         "src/components/viz3d/Stack3D.css",
         "src/components/viz3d/Queue3D.css",
         "src/components/viz3d/TreeCanvas3D.css",
@@ -298,7 +304,7 @@
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -306,14 +312,18 @@
       "number": "103",
       "title": "Binary Tree Zigzag Level Order Traversal",
       "folder": "Problem103",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem103/index.jsx",
         "src/problems/Problem103/BinaryTreeZigzagLevelOrderTraversalVisualizer.jsx",
+        "src/problems/Problem103/algorithm.js",
+        "src/problems/Problem103/ZigzagStory.jsx",
         "src/problems/Problem103/BinaryTreeZigzagLevelOrderTraversalVisualizer.css"
       ],
       "css": [
+        "src/components/shared/StoryPanel.css",
+        "src/components/shared/SvgViewport.css",
         "src/components/shared/FloatingPanel.css",
         "src/components/shared/PanelScaleControl.css",
         "src/components/CodeTracePanel.css",
@@ -332,7 +342,7 @@
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -340,14 +350,17 @@
       "number": "104",
       "title": "Maximum Depth of Binary Tree",
       "folder": "Problem104",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem104/index.jsx",
         "src/problems/Problem104/MaxDepthBinaryTreeVisualizer.jsx",
+        "src/problems/Problem104/algorithm.js",
         "src/problems/Problem104/MaxDepthBinaryTreeVisualizer.css"
       ],
       "css": [
+        "src/components/shared/SvgViewport.css",
+        "src/components/shared/StoryPanel.css",
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
@@ -358,8 +371,6 @@
         "src/components/shared/PanelScaleControl.css",
         "src/problems/Problem104/MaxDepthBinaryTreeVisualizer.css",
         "src/components/shared/ManualInputPanel.css",
-        "src/components/CodePatternAnnotations.css",
-        "src/components/PatternLegend.css",
         "src/components/LuminoDockPanel.css"
       ],
       "signals": {
@@ -369,7 +380,7 @@
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -377,7 +388,7 @@
       "number": "105",
       "title": "Construct Binary Tree from Preorder and Inorder Traversal",
       "folder": "Problem105",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem105/index.jsx",
@@ -385,10 +396,13 @@
         "src/problems/Problem105/ConstructBTVisualizer.css"
       ],
       "css": [
+        "src/components/shared/StoryPanel.css",
+        "src/components/shared/SvgViewport.css",
+        "src/components/shared/SortedTreeStory.css",
+        "src/components/PatternOverlay.css",
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
         "src/components/LuminoDockPanel.css",
         "src/components/shared/FloatingPanel.css",
         "src/components/shared/PanelScaleControl.css",
@@ -398,13 +412,13 @@
         "src/components/shared/ManualInputPanel.css"
       ],
       "signals": {
-        "localSVG": true,
+        "localSVG": false,
         "treeView": false,
         "sharedWorkspace": false,
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -412,7 +426,7 @@
       "number": "106",
       "title": "Construct Binary Tree from Inorder and Postorder Traversal",
       "folder": "Problem106",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem106/index.jsx",
@@ -420,13 +434,15 @@
         "src/problems/Problem106/ConstructBinaryTreeFromInorderAndPostorderTraversalVisualizer.css"
       ],
       "css": [
+        "src/components/shared/StoryPanel.css",
+        "src/components/shared/SvgViewport.css",
+        "src/components/shared/SortedTreeStory.css",
         "src/components/LuminoDockPanel.css",
         "src/components/shared/FloatingPanel.css",
         "src/components/shared/PanelScaleControl.css",
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
         "src/problems/Problem106/ConstructBinaryTreeFromInorderAndPostorderTraversalVisualizer.css",
         "src/components/shared/ManualInputPanel.css",
         "src/components/CodePatternAnnotations.css",
@@ -439,7 +455,7 @@
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -447,21 +463,22 @@
       "number": "107",
       "title": "Binary Tree Level Order Traversal II",
       "folder": "Problem107",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem107/index.jsx",
         "src/problems/Problem107/BinaryTreeLevelOrderTraversalIIVisualizer.jsx",
+        "src/problems/Problem107/algorithm.js",
         "src/problems/Problem107/BinaryTreeLevelOrderTraversalII.css"
       ],
       "css": [
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
         "src/components/LuminoDockPanel.css",
         "src/components/shared/FloatingPanel.css",
         "src/components/shared/PanelScaleControl.css",
+        "src/components/shared/StoryPanel.css",
         "src/components/viz3d/Stack3D.css",
         "src/components/viz3d/Queue3D.css",
         "src/components/viz3d/TreeCanvas3D.css",
@@ -478,7 +495,7 @@
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -486,18 +503,21 @@
       "number": "108",
       "title": "Convert Sorted Array to Binary Search Tree",
       "folder": "Problem108",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem108/index.jsx",
         "src/problems/Problem108/ConvertSortedArrayToBinarySearchTreeVisualizer.jsx",
+        "src/problems/Problem108/algorithm.js",
         "src/problems/Problem108/ConvertSortedArrayToBinarySearchTreeVisualizer.css"
       ],
       "css": [
+        "src/components/shared/SortedTreeStory.css",
+        "src/components/shared/SvgViewport.css",
+        "src/components/shared/StoryPanel.css",
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
         "src/components/shared/FloatingPanel.css",
         "src/components/shared/PanelScaleControl.css",
         "src/problems/Problem108/ConvertSortedArrayToBinarySearchTreeVisualizer.css",
@@ -507,13 +527,13 @@
         "src/components/LuminoDockPanel.css"
       ],
       "signals": {
-        "localSVG": true,
+        "localSVG": false,
         "treeView": true,
         "sharedWorkspace": false,
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -521,14 +541,19 @@
       "number": "109",
       "title": "Convert Sorted List to Binary Search Tree",
       "folder": "Problem109",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem109/index.jsx",
         "src/problems/Problem109/ConvertSortedListToBinarySearchTreeVisualizer.jsx",
+        "src/problems/Problem109/algorithm.js",
+        "src/problems/Problem109/ListToTreeStory.jsx",
         "src/problems/Problem109/ConvertSortedListToBinarySearchTreeVisualizer.css"
       ],
       "css": [
+        "src/components/shared/SortedTreeStory.css",
+        "src/components/shared/SvgViewport.css",
+        "src/components/shared/StoryPanel.css",
         "src/components/LuminoDockPanel.css",
         "src/components/shared/FloatingPanel.css",
         "src/components/shared/PanelScaleControl.css",
@@ -548,7 +573,7 @@
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -556,14 +581,18 @@
       "number": "11",
       "title": "Container With Most Water",
       "folder": "Problem11",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem11/index.jsx",
         "src/problems/Problem11/ContainerWithMostWaterVisualizer.jsx",
+        "src/problems/Problem11/algorithm.js",
+        "src/problems/Problem11/WaterContainerStory.jsx",
         "src/problems/Problem11/ContainerWithMostWaterVisualizer.css"
       ],
       "css": [
+        "src/components/shared/SvgViewport.css",
+        "src/components/shared/StoryPanel.css",
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
@@ -698,14 +727,17 @@
       "number": "113",
       "title": "Path Sum II",
       "folder": "Problem113",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem113/index.jsx",
         "src/problems/Problem113/PathSumIIVisualizer.jsx",
+        "src/problems/Problem113/algorithm.js",
         "src/problems/Problem113/PathSumIIVisualizer.css"
       ],
       "css": [
+        "src/components/shared/StoryPanel.css",
+        "src/components/shared/SvgViewport.css",
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
@@ -718,13 +750,13 @@
         "src/components/PatternLegend.css"
       ],
       "signals": {
-        "localSVG": true,
+        "localSVG": false,
         "treeView": false,
         "sharedWorkspace": false,
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -732,18 +764,21 @@
       "number": "114",
       "title": "Flatten Binary Tree to Linked List",
       "folder": "Problem114",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem114/index.jsx",
         "src/problems/Problem114/FlattenBinaryTreeVisualizer.jsx",
+        "src/problems/Problem114/algorithm.js",
+        "src/problems/Problem114/FlattenStory.jsx",
         "src/problems/Problem114/FlattenBinaryTreeVisualizer.css"
       ],
       "css": [
+        "src/components/shared/StoryPanel.css",
+        "src/components/shared/SvgViewport.css",
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
         "src/problems/Problem114/FlattenBinaryTreeVisualizer.css",
         "src/components/shared/ManualInputPanel.css",
         "src/components/shared/FloatingPanel.css",
@@ -753,13 +788,13 @@
         "src/components/LuminoDockPanel.css"
       ],
       "signals": {
-        "localSVG": true,
+        "localSVG": false,
         "treeView": true,
         "sharedWorkspace": false,
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -799,21 +834,24 @@
       "number": "115",
       "title": "Distinct Subsequences",
       "folder": "Problem115",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem115/index.jsx",
         "src/problems/Problem115/DistinctSubsequencesVisualizer.jsx",
+        "src/problems/Problem115/algorithm.js",
+        "src/problems/Problem115/SubsequenceStory.jsx",
         "src/problems/Problem115/DistinctSubsequencesVisualizer.css"
       ],
       "css": [
         "src/components/LuminoDockPanel.css",
         "src/components/shared/FloatingPanel.css",
         "src/components/shared/PanelScaleControl.css",
+        "src/components/shared/StoryPanel.css",
+        "src/components/shared/RecurrenceGrid.css",
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
         "src/problems/Problem115/DistinctSubsequencesVisualizer.css",
         "src/components/shared/ManualInputPanel.css",
         "src/components/CodePatternAnnotations.css",
@@ -826,7 +864,7 @@
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -834,25 +872,24 @@
       "number": "116",
       "title": "Populating Next Right Pointers in Each Node",
       "folder": "Problem116",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem116/index.jsx",
-        "src/problems/Problem116/PopulatingNextRightPointersVisualizer.jsx",
-        "src/problems/Problem116/PopulatingNextRightPointersVisualizer.css"
+        "src/problems/Problem116/PopulatingNextRightPointersVisualizer.jsx"
       ],
       "css": [
-        "src/components/shared/FloatingPanel.css",
-        "src/components/shared/PanelScaleControl.css",
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
-        "src/components/LuminoDockPanel.css",
-        "src/problems/Problem116/PopulatingNextRightPointersVisualizer.css",
         "src/components/shared/ManualInputPanel.css",
+        "src/components/shared/FloatingPanel.css",
+        "src/components/shared/PanelScaleControl.css",
         "src/components/CodePatternAnnotations.css",
-        "src/components/PatternLegend.css"
+        "src/components/PatternLegend.css",
+        "src/components/LuminoDockPanel.css",
+        "src/components/shared/StoryPanel.css",
+        "src/components/shared/SvgViewport.css"
       ],
       "signals": {
         "localSVG": false,
@@ -861,7 +898,7 @@
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -869,25 +906,24 @@
       "number": "117",
       "title": "Populating Next Right Pointers in Each Node II",
       "folder": "Problem117",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem117/index.jsx",
-        "src/problems/Problem117/PopulatingNextRightPointersIIVisualizer.jsx",
-        "src/problems/Problem117/PopulatingNextRightPointersIIVisualizer.css"
+        "src/problems/Problem117/PopulatingNextRightPointersIIVisualizer.jsx"
       ],
       "css": [
-        "src/components/LuminoDockPanel.css",
-        "src/components/shared/FloatingPanel.css",
-        "src/components/shared/PanelScaleControl.css",
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
-        "src/problems/Problem117/PopulatingNextRightPointersIIVisualizer.css",
         "src/components/shared/ManualInputPanel.css",
+        "src/components/shared/FloatingPanel.css",
+        "src/components/shared/PanelScaleControl.css",
         "src/components/CodePatternAnnotations.css",
-        "src/components/PatternLegend.css"
+        "src/components/PatternLegend.css",
+        "src/components/LuminoDockPanel.css",
+        "src/components/shared/StoryPanel.css",
+        "src/components/shared/SvgViewport.css"
       ],
       "signals": {
         "localSVG": false,
@@ -896,7 +932,7 @@
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -904,60 +940,24 @@
       "number": "118",
       "title": "Pascal's Triangle",
       "folder": "Problem118",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem118/index.jsx",
-        "src/problems/Problem118/PascalsTriangleVisualizer.jsx",
-        "src/problems/Problem118/PascalsTriangleVisualizer.css"
+        "src/problems/Problem118/PascalsTriangleVisualizer.jsx"
       ],
       "css": [
-        "src/components/LuminoDockPanel.css",
-        "src/components/shared/FloatingPanel.css",
-        "src/components/shared/PanelScaleControl.css",
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
-        "src/problems/Problem118/PascalsTriangleVisualizer.css",
         "src/components/shared/ManualInputPanel.css",
-        "src/components/CodePatternAnnotations.css",
-        "src/components/PatternLegend.css"
-      ],
-      "signals": {
-        "localSVG": true,
-        "treeView": false,
-        "sharedWorkspace": false,
-        "playback": true,
-        "floating": true,
-        "lumino": true,
-        "emptyPatternDefinition": true
-      },
-      "parseErrors": []
-    },
-    {
-      "number": "119",
-      "title": "Pascal's Triangle II",
-      "folder": "Problem119",
-      "review": "pending-review",
-      "playground": "not-assessed",
-      "files": [
-        "src/problems/Problem119/index.jsx",
-        "src/problems/Problem119/PascalsTriangleIIVisualizer.jsx",
-        "src/problems/Problem119/PascalsTriangleII.css"
-      ],
-      "css": [
-        "src/components/LuminoDockPanel.css",
         "src/components/shared/FloatingPanel.css",
         "src/components/shared/PanelScaleControl.css",
-        "src/components/CodeTracePanel.css",
-        "src/components/shared/PointerStateBand.css",
-        "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
-        "src/problems/Problem119/PascalsTriangleII.css",
         "src/components/CodePatternAnnotations.css",
         "src/components/PatternLegend.css",
-        "src/components/shared/ManualInputPanel.css"
+        "src/components/LuminoDockPanel.css",
+        "src/components/shared/StoryPanel.css",
+        "src/components/shared/PascalStory.css"
       ],
       "signals": {
         "localSVG": false,
@@ -966,7 +966,41 @@
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
+      },
+      "parseErrors": []
+    },
+    {
+      "number": "119",
+      "title": "Pascal's Triangle II",
+      "folder": "Problem119",
+      "review": "implemented-pending-full-review",
+      "playground": "not-assessed",
+      "files": [
+        "src/problems/Problem119/index.jsx",
+        "src/problems/Problem119/PascalsTriangleIIVisualizer.jsx"
+      ],
+      "css": [
+        "src/components/CodeTracePanel.css",
+        "src/components/shared/PointerStateBand.css",
+        "src/components/PlaybackControls.css",
+        "src/components/shared/ManualInputPanel.css",
+        "src/components/shared/FloatingPanel.css",
+        "src/components/shared/PanelScaleControl.css",
+        "src/components/CodePatternAnnotations.css",
+        "src/components/PatternLegend.css",
+        "src/components/LuminoDockPanel.css",
+        "src/components/shared/StoryPanel.css",
+        "src/components/shared/PascalStory.css"
+      ],
+      "signals": {
+        "localSVG": false,
+        "treeView": false,
+        "sharedWorkspace": false,
+        "playback": true,
+        "floating": true,
+        "lumino": true,
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },

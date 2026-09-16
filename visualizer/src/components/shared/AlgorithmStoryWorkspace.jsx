@@ -1,66 +1,42 @@
 ﻿import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom'
-import { buildFlattenStory } from './algorithm';
-import FlattenStory from './FlattenStory';
-import CodeTracePanel from "../../components/CodeTracePanel";
-import PlaybackControls from "../../components/PlaybackControls";
+import CodeTracePanel from "../CodeTracePanel";
+import PlaybackControls from "../PlaybackControls";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import "./FlattenBinaryTreeVisualizer.css";
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
-import FloatingPanel from '../../components/shared/FloatingPanel'
-import CodePatternAnnotations from '../../components/CodePatternAnnotations'
-import PatternLegend from '../../components/PatternLegend'
-import LuminoDockPanel from '../../components/LuminoDockPanel'
+import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity';
+import ManualInputPanel from './ManualInputPanel'
+import FloatingPanel from './FloatingPanel'
+import CodePatternAnnotations from '../CodePatternAnnotations'
+import PatternLegend from '../PatternLegend'
+import LuminoDockPanel from '../LuminoDockPanel'
 
 
-// ─── Pattern annotations ───────────────────────────────────────────────────
-const LINE_PATTERN_MAP = { 2: 'init', 4: 'check', 6: 'visit', 7: 'visit', 9: 'update', 11: 'update', 12: 'update', 13: 'visit' }
-const PATTERNS = ['init', 'check', 'visit', 'update', 'done']
-const SOLUTION_CODE = [
-  { line: 1, text: "def flatten(root):" },
-  { line: 2, text: "    cur = root" },
-  { line: 3, text: "    while cur:" },
-  { line: 4, text: "        if cur.left:" },
-  { line: 5, text: "            # find rightmost of left subtree" },
-  { line: 6, text: "            pre = cur.left" },
-  { line: 7, text: "            while pre.right: pre = pre.right" },
-  { line: 8, text: "            # rewire: pre.right = cur.right" },
-  { line: 9, text: "            pre.right = cur.right" },
-  { line: 10, text: "            # cur.right = cur.left; cur.left = None" },
-  { line: 11, text: "            cur.right = cur.left" },
-  { line: 12, text: "            cur.left = None" },
-  { line: 13, text: "        cur = cur.right" },
-];
-
-const EXAMPLES = [
-  {label: 'Two branches', arr: [1,2,5,3,4,null,6]},
-  {label: 'Sparse tree', arr: [1,null,2,3]},
-  {label: 'Empty', arr: []},
-];
-
-export default function FlattenBinaryTreeVisualizer() {
-  const [arrInput, setArrInput] = useState('[1,2,5,3,4,null,6]');
+// The shell owns inputs, docking and playback; each definition owns its algorithm and scene.
+export default function AlgorithmStoryWorkspace({ definition }) {
+  const {code:SOLUTION_CODE,linePatterns:LINE_PATTERN_MAP,patterns:PATTERNS,examples:EXAMPLES}=definition;
+  const [arrInput, setArrInput] = useState(definition.initialInput);
   const {story,inputError} = useMemo(()=>{
-    try {return {story:buildFlattenStory(arrInput),inputError:''};}
+    try {return {story:definition.build(arrInput),inputError:''};}
     catch(error){return {story:null,inputError:error.message};}
-  },[arrInput]);
+  },[arrInput,definition]);
   const steps = story?.frames ?? [];
-  const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
+  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
+  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const applyExample = useCallback((ex) => {
-    setArrInput(JSON.stringify(ex.arr))
+    setArrInput(ex.input)
     handleReset()
   }, [handleReset])
 
   const primaryPanel = <>
-    <ManualInputPanel fields={[{key:'arr',label:'Level-order tree',type:'array'}]}
+    <ManualInputPanel fields={[{key:'arr',label:definition.inputLabel,type:definition.inputType ?? 'string'}]}
       values={{arr:arrInput}} onChange={(key,value)=>{setArrInput(value);handleReset();}}
       examples={EXAMPLES} applyExample={applyExample} inputError={inputError}/>
-    {story && <FlattenStory story={story} stepIndex={stepIndex}/>}
+    {story && definition.renderStory({story,step:story.frames[Math.max(0,stepIndex)],stepIndex})}
   </>;
 
   const codePanel = (
@@ -68,6 +44,8 @@ export default function FlattenBinaryTreeVisualizer() {
       <CodeTracePanel
         step={step}
         codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
         onActiveLineDomChange={setActiveLineDom}
         disableResizer
       />
@@ -76,7 +54,7 @@ export default function FlattenBinaryTreeVisualizer() {
   )
 
   const statusPanel = (
-    <div className="fbt-status">{step?.message ?? "Press Play to begin."}</div>
+    <div className="story-panel">{step?.message ?? "Press Play to begin."}</div>
   )
 
   const playbackPanel = (
@@ -99,17 +77,17 @@ export default function FlattenBinaryTreeVisualizer() {
   const [panelDivs, setPanelDivs] = useState(null)
   const panelConfigs = useMemo(
     () => [
-      { id: 'primary', title: 'Tree & Linked List', dockMode: 'split-right' },
+      { id: 'primary', title: definition.title, dockMode: 'split-right' },
       { id: 'code',    title: 'Code', dockMode: 'split-bottom' },
       { id: 'status',  title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
-    []
+    [definition.title]
   )
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 
   // Step 5: Replace return block
   return (
-    <div className="vis-shell fbt-shell">
+    <div className="vis-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
         <>

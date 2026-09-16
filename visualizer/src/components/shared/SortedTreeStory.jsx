@@ -17,7 +17,7 @@ export default function SortedTreeStory({ story, values, stepIndex, sourceKind =
     </div>
     <p>Active interval [{step.lo}, {step.hi}) · {visible.size}/{values.length} tree nodes created. Indices distinguish equal values.</p>
     <SvgViewport width={layout.width} height={layout.height}>
-      <title>Tree construction from the sorted list</title>
+      <title>Tree construction from the sorted {sourceKind}</title>
       {layout.edges.filter(e => visible.has(e.fromId) && visible.has(e.toId)).map(e => {
         const a = layout.positions.get(e.fromId), b = layout.positions.get(e.toId);
         return <line key={e.toId} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke="var(--text-muted)" strokeWidth="2" />;
