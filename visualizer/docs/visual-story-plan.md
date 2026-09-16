@@ -26,7 +26,7 @@ output and browser-loaded CSS; source bytes alone do not predict load savings.
 | Problem | Visual story | Status |
 | --- | --- | --- |
 | 112 Path Sum | Walk a root-to-leaf route; carry a remaining target; reject leaves and backtrack; stop on success | Pilot implemented; 5 algorithm tests and desktop/mobile browser checks passed |
-| 111 Minimum Depth | Contrast complete root-to-leaf routes with missing children; show why a missing child is not a shorter route | Pending detailed review |
+| 111 Minimum Depth | Contrast complete root-to-leaf routes with missing children; show why a missing child is not a shorter route | Implemented; 6 algorithm tests and desktop/mobile browser checks passed |
 | 110 Balanced Binary Tree | Return child heights upward; expose the first excessive height difference and propagate failure | Pending detailed review |
 | 11 Container With Most Water | Show water limited by the shorter wall and the width/height tradeoff when moving a pointer | Existing water view; review before redesign |
 | 109 Sorted List to BST | Relate the ordered list interval to its chosen root and recursively split intervals | Pending detailed review |
@@ -53,6 +53,26 @@ individual story acceptance checklist for each problem.
   focused lint, the production build, example-input interaction, final result,
   non-leaf rejection, and desktop/mobile browser checks passed. The existing
   large JavaScript chunk advisory remains a separate issue.
+
+## Minimum Depth checkpoint
+
+- Depth bands count nodes from the root. A dashed missing-child cue explains
+  why an absent branch cannot win the comparison. Completed leaf routes are
+  listed separately, with a provisional best route and a final winner.
+- Postorder return frames match the displayed recursive solution; code line
+  references no longer point to unrelated branches. Sparse level-order input
+  is parsed locally without changing the legacy tree helper used elsewhere.
+- Invalid inputs show an error instead of running a fallback tree. Duplicate
+  input/example controls and their CSS were removed; shared input, panel,
+  playback, docking, and code components remain in use.
+- Problem111 CSS decreased from 3,978 to 1,865 source bytes (normalized line
+  endings); gzip of that source file decreased from 1,035 to 622 bytes. These
+  are file measurements, not a claim about whole-app transfer savings.
+- Six tests cover 256 exhaustive sparse tree shapes, duplicate values, empty
+  trees, the one-child trap, invalid inputs, and a 5,000-node chain. All 11
+  tests across Minimum Depth and Path Sum pass. Desktop/mobile checks verify
+  the missing-child cue, examples, tie result, empty-tree result, and no
+  browser errors. Focused lint and production build pass.
 
 ## Release checks for each batch
 

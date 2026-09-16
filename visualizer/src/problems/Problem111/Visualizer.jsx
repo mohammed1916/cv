@@ -1,32 +1,24 @@
 import { createPortal } from "react-dom";
 import { useState, useMemo, useCallback } from "react";
-import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import {
-  buildTree,
-  computeLayout,
-  collectNodes,
-  buildEdges,
-  parseTreeInput,
-} from "../../components/treeUtils";
-import { TreeCanvas3D } from "../../components/viz3d";
-import { getExamples } from "../../config/examplesRegistry";
+import { getExamplesOr } from "../../config/examplesRegistry";
 import "./Visualizer.css";
+import { buildMinimumDepth, parseMinimumDepth } from "./algorithm";
+import MinimumDepthStory, { MinimumDepthComparison } from "./MinimumDepthStory";
 import ManualInputPanel from "../../components/shared/ManualInputPanel";
 import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
-const LINE_PATTERN_MAP = {}; // Auto-generated: maps line numbers to phase names
-const PATTERNS = []; // Auto-generated: list of phase names used in this visualizer
+const LINE_PATTERN_MAP = { 1: "init", 4: "done", 6: "visit", 7: "leaf", 9: "missing_child", 10: "return", 11: "missing_child", 12: "return", 14: "compare" };
+const PATTERNS = ["init", "visit", "missing_child", "leaf", "compare", "return", "done"];
 const SOLUTION_CODE = [
   { line: 1, text: "def minDepth(root):" },
   { line: 2, text: "    # base case: empty subtree" },
@@ -46,239 +38,10 @@ const SOLUTION_CODE = [
     text: "    return 1 + min(minDepth(root.left), minDepth(root.right))",
   },
 ];
-const CANVAS_W = 520;
-const CANVAS_H = 320;
-const NODE_R = 22;
-
-function generateSteps(arr) {
-  const root = buildTree(arr);
-  const positions = computeLayout(root, CANVAS_W, 80);
-  const edges = buildEdges(root);
-  const allNodes = collectNodes(root);
-  const steps = [];
-
-  if (!root) {
-    return [
-      {
-        phase: "done",
-        activeLine: 3,
-        activeIds: new Set(),
-        visitedIds: new Set(),
-        currentDepth: 0,
-        minDepth: 0,
-        positions,
-        edges,
-        allNodes,
-        message: "Empty tree → return 0",
-      },
-    ];
-  }
-
-  const visitedIds = new Set();
-  let minDepth = Infinity;
-
-  steps.push({
-    phase: "init",
-    activeLine: 4,
-    activeIds: new Set([root.id]),
-    visitedIds: new Set(),
-    currentDepth: 0,
-    minDepth: Infinity,
-    positions,
-    edges,
-    allNodes,
-    message: "Initialize DFS starting at root with depth 0.",
-  });
-
-  // DFS traversal
-  function dfs(node, depth) {
-    if (!node) return;
-
-    visitedIds.add(node.id);
-
-    steps.push({
-      phase: "visit",
-      activeLine: 6,
-      activeIds: new Set([node.id]),
-      visitedIds: new Set(visitedIds),
-      currentDepth: depth,
-      minDepth,
-      positions,
-      edges,
-      allNodes,
-      message: `Visit node ${node.val} at depth ${depth}.`,
-    });
-
-    // Check if leaf node (no left and no right)
-    const isLeaf = !node.left && !node.right;
-
-    if (isLeaf) {
-      steps.push({
-        phase: "leaf-found",
-        activeLine: 9,
-        activeIds: new Set([node.id]),
-        visitedIds: new Set(visitedIds),
-        currentDepth: depth,
-        minDepth: Math.min(minDepth, depth),
-        positions,
-        edges,
-        allNodes,
-        message: `Leaf node found at depth ${depth}. Update minDepth = ${Math.min(minDepth, depth)}.`,
-      });
-
-      minDepth = Math.min(minDepth, depth);
-      return;
-    }
-
-    // Traverse left subtree
-    if (node.left) {
-      steps.push({
-        phase: "go-left",
-        activeLine: 11,
-        activeIds: new Set([node.id, node.left.id]),
-        visitedIds: new Set(visitedIds),
-        currentDepth: depth,
-        minDepth,
-        positions,
-        edges,
-        allNodes,
-        message: `Traverse left child of node ${node.val}.`,
-      });
-
-      dfs(node.left, depth + 1);
-    }
-
-    // Traverse right subtree
-    if (node.right) {
-      steps.push({
-        phase: "go-right",
-        activeLine: 12,
-        activeIds: new Set([node.id, node.right.id]),
-        visitedIds: new Set(visitedIds),
-        currentDepth: depth,
-        minDepth,
-        positions,
-        edges,
-        allNodes,
-        message: `Traverse right child of node ${node.val}.`,
-      });
-
-      dfs(node.right, depth + 1);
-    }
-  }
-
-  dfs(root, 1);
-
-  steps.push({
-    phase: "done",
-    activeLine: 14,
-    activeIds: new Set(),
-    visitedIds: new Set(visitedIds),
-    currentDepth: 0,
-    minDepth,
-    positions,
-    edges,
-    allNodes,
-    message: `DFS complete. Minimum depth = ${minDepth}`,
-  });
-
-  return steps;
-}
-
-const EXAMPLES = getExamples("minimum-depth-of-binary-tree");
-
-function VisualizationPanel({
-  EXAMPLES,
-  arrInput,
-  setArrInput,
-  positions,
-  edges,
-  allNodes,
-  step,
-  applyExample,
-  handleReset,
-  CANVAS_W,
-  CANVAS_H,
-  NODE_R,
-}) {
-  return (
-    <div className="mdbt-viz-panel">
-      <div className="mdbt-examples">
-        {EXAMPLES.map((ex) => (
-          <button
-            key={ex.label}
-            className="mdbt-chip"
-            onClick={() => applyExample(ex)}
-          >
-            {ex.label}
-          </button>
-        ))}
-      </div>
-      <input
-        className="mdbt-input"
-        value={arrInput}
-        onChange={(e) => {
-          setArrInput(e.target.value);
-          handleReset();
-        }}
-        placeholder="[3,9,20,null,null,15,7]"
-      />
-      <div
-        className="mdbt-canvas"
-        style={{ width: CANVAS_W, height: CANVAS_H }}
-      >
-        <TreeCanvas3D
-          positions={positions}
-          edges={edges}
-          allNodes={allNodes}
-          activeIds={step?.activeIds ?? new Set()}
-          visitedIds={step?.visitedIds ?? new Set()}
-          queueIds={new Set()}
-          canvasWidth={CANVAS_W}
-          canvasHeight={CANVAS_H}
-          nodeRadius={NODE_R}
-        />
-      </div>
-    </div>
-  );
-}
-
-function ResultPanel({ step, inputError }) {
-  return (
-    <div className="mdbt-result-panel">
-      <div className="mdbt-section">
-        <div className="mdbt-section-title">Current Traversal</div>
-        <div className="mdbt-info-box">
-          <span className="mdbt-label">Current Depth:</span>
-          <span className="mdbt-value">{step?.currentDepth ?? 0}</span>
-        </div>
-        <div className="mdbt-info-box">
-          <span className="mdbt-label">Phase:</span>
-          <span className="mdbt-value">{step?.phase ?? "init"}</span>
-        </div>
-      </div>
-
-      <div className="mdbt-section">
-        <div className="mdbt-section-title">Result</div>
-        <div className="mdbt-info-box">
-          <span className="mdbt-label">Minimum Depth:</span>
-          <span
-            className={`mdbt-value ${step?.minDepth === Infinity ? "infinite" : "finite"}`}
-          >
-            {step?.minDepth === Infinity ? "∞" : step?.minDepth}
-          </span>
-        </div>
-        <div className={`mdbt-result ${step?.phase === "done" ? "ok" : ""}`}>
-          {step?.phase === "done"
-            ? `Result: Minimum depth = ${step.minDepth}`
-            : "Running DFS…"}
-        </div>
-      </div>
-
-      {inputError && <div className="mdbt-error-box">{inputError}</div>}
-    </div>
-  );
-}
+const EXAMPLES = [...getExamplesOr("minimum-depth-of-binary-tree", [
+  { label: "Unequal routes", arr: [3,9,20,null,null,15,7] },
+  { label: "Empty tree", arr: [] },
+]), { label: "Missing child trap", arr: [2,null,3,null,4,null,5] }, { label: "Equal routes", arr: [1,1,1] }];
 
 export default function MinimumDepthOfBinaryTreeVisualizer() {
   const [arrInput, setArrInput] = useState("[3,9,20,null,null,15,7]");
@@ -292,18 +55,11 @@ export default function MinimumDepthOfBinaryTreeVisualizer() {
 
   // Load solution code from registry
 
-  const { arr, inputError } = useMemo(() => {
-    try {
-      return { arr: parseTreeInput(arrInput), inputError: "" };
-    } catch (e) {
-      return {
-        arr: [3, 9, 20, null, null, 15, 7],
-        inputError: e.message || "Invalid input",
-      };
-    }
+  const { run, inputError } = useMemo(() => {
+    try { return { run: buildMinimumDepth(parseMinimumDepth(arrInput)), inputError: '' }; }
+    catch (error) { return { run: null, inputError: error.message }; }
   }, [arrInput]);
-
-  const steps = useMemo(() => generateSteps(arr), [arr]);
+  const steps = useMemo(() => run?.frames || [], [run]);
   const {
     stepIndex,
     setStepIndex,
@@ -326,9 +82,6 @@ export default function MinimumDepthOfBinaryTreeVisualizer() {
     [handleReset],
   );
 
-  const positions = step?.positions ?? new Map();
-  const edges = step?.edges ?? [];
-  const allNodes = step?.allNodes ?? [];
 
   const connectivity = useCodeVisualConnectivity({
     steps,
@@ -352,33 +105,14 @@ export default function MinimumDepthOfBinaryTreeVisualizer() {
       />
 
       <div className="mdbt-panel">
-        <div className="mdbt-header">
-          <h2>Minimum Depth of Binary Tree</h2>
-          <p className={`mdbt-message ${step?.phase === "done" ? "ok" : ""}`}>
-            {step?.message || "Press Play to begin."}
-          </p>
-        </div>
-        <VisualizationPanel
-          EXAMPLES={EXAMPLES}
-          arrInput={arrInput}
-          setArrInput={setArrInput}
-          positions={positions}
-          edges={edges}
-          allNodes={allNodes}
-          step={step}
-          applyExample={applyExample}
-          handleReset={handleReset}
-          CANVAS_W={CANVAS_W}
-          CANVAS_H={CANVAS_H}
-          NODE_R={NODE_R}
-        />
+        {run ? <MinimumDepthStory run={run} stepIndex={stepIndex} /> : <p role="alert">Correct the input above to explore the tree.</p>}
       </div>
     </>
   );
 
   const statePanel = (
     <div className="mdbt-panel">
-      <ResultPanel step={step} inputError={inputError} />
+      <MinimumDepthComparison run={run} stepIndex={stepIndex} />
     </div>
   );
 
@@ -394,9 +128,9 @@ export default function MinimumDepthOfBinaryTreeVisualizer() {
       />
       {showPatternOverlay && (
         <CodePatternAnnotations
-          lines={SOLUTION_CODE}
-          linePatternMap={LINE_PATTERN_MAP}
-          patterns={PATTERNS}
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLine={step?.activeLine}
           activeLineDom={activeLineDom}
         />
       )}
@@ -416,7 +150,7 @@ export default function MinimumDepthOfBinaryTreeVisualizer() {
       <PlaybackControls
         onReset={handleReset}
         onPrev={stepBack}
-        onPlayToggle={togglePlay}
+        onPlayToggle={() => { if (run) togglePlay() }}
         onNext={stepForward}
         resetDisabled={steps.length === 0}
         prevDisabled={stepIndex <= 0}
@@ -435,7 +169,7 @@ export default function MinimumDepthOfBinaryTreeVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
-      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
+      {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
     </>
   );
 
@@ -444,7 +178,7 @@ export default function MinimumDepthOfBinaryTreeVisualizer() {
   const panelConfigs = useMemo(
     () => [
       { id: "primary", title: "Tree Visualization", dockMode: "split-right" },
-      { id: "state", title: "Traversal Info", dockMode: "split-right" },
+      { id: "state", title: "Leaf route comparison", dockMode: "split-right" },
       { id: "code", title: "Code Trace", dockMode: "split-bottom" },
       { id: "status", title: "Status", dockMode: "split-bottom", ratio: 0.08 },
     ],

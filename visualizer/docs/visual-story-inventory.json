@@ -2,7 +2,7 @@
   "note": "Static import inventory, not a visual-quality certification. Dynamic imports and runtime-selected renderers require manual review. CSS byte counts are source bytes, not transferred bytes.",
   "registeredEntries": 613,
   "cssFiles": 699,
-  "cssSourceBytes": 1868930,
+  "cssSourceBytes": 1866601,
   "entries": [
     {
       "number": "CF-F",
@@ -610,37 +610,34 @@
       "number": "111",
       "title": "Minimum Depth of Binary Tree",
       "folder": "Problem111",
-      "review": "not-reviewed",
+      "review": "story-pilot",
       "files": [
         "src/problems/Problem111/index.jsx",
         "src/problems/Problem111/Visualizer.jsx",
-        "src/problems/Problem111/Visualizer.css"
+        "src/problems/Problem111/Visualizer.css",
+        "src/problems/Problem111/algorithm.js",
+        "src/problems/Problem111/MinimumDepthStory.jsx"
       ],
       "css": [
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
         "src/components/shared/FloatingPanel.css",
         "src/components/shared/PanelScaleControl.css",
         "src/components/LuminoDockPanel.css",
-        "src/components/viz3d/Stack3D.css",
-        "src/components/viz3d/Queue3D.css",
-        "src/components/viz3d/TreeCanvas3D.css",
-        "src/components/viz3d/GraphCanvas3D.css",
         "src/problems/Problem111/Visualizer.css",
         "src/components/shared/ManualInputPanel.css",
         "src/components/CodePatternAnnotations.css",
         "src/components/PatternLegend.css"
       ],
       "signals": {
-        "localSVG": false,
+        "localSVG": true,
         "treeView": true,
         "sharedWorkspace": false,
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },

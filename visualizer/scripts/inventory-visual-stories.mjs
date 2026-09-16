@@ -45,7 +45,7 @@ for (const entry of fs.readdirSync(problems, { withFileTypes: true }).filter(ent
   const ownSource = ownFiles.filter(file => !file.endsWith('.css')).map(file => inspect(file).source).join('\n');
   const source = reachable.filter(file => !file.endsWith('.css')).map(file => inspect(file).source).join('\n');
   entries.push({ number: meta.number, title: meta.title, folder: entry.name,
-    review: entry.name === 'Problem112' ? 'story-pilot' : 'not-reviewed',
+    review: ['Problem111', 'Problem112'].includes(entry.name) ? 'story-pilot' : 'not-reviewed',
     files: ownFiles.map(relative),
     css: reachable.filter(file => file.endsWith('.css')).map(relative),
     signals: { localSVG: /<svg\b/.test(ownSource), treeView: /TreeCanvas|TreeVisualizer/.test(source),
