@@ -338,3 +338,15 @@ Reuse the layout helper where compatible; keep construction state local.
 - Stopped after 118/119 as requested. Problem 120 was inspected but not edited.
   Remaining entries retain their ledger status; these implemented stories still
   require the full release checklist and separate playground adapters.
+
+### Triangle (120) bottom-up DP story
+
+- 120 computes the minimum path sum bottom-up with child comparisons and full route witness.
+  Strict validation verifies valid integer triangular arrays (row $r$ has length $r+1$, up to 30 rows).
+- Each step highlights the active cell $(i, j)$, compares the adjacent children $(i+1, j)$ and $(i+1, j+1)$
+  in the row below, and visualizes the chosen branch and updated DP array without leaking future updates.
+- Reuses `AlgorithmStoryWorkspace`, `StoryPanel`, and pattern tracking (`init`, `compare`, `update`, `done`),
+  removing bespoke boilerplate and obsolete CSS.
+- 5 algorithm tests cover strict input validation, empty/single-element triangles, standard example paths,
+  negative values, zeros, and ties. All 49 visual-story tests pass. Focused lint passes.
+
