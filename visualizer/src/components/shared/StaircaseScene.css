@@ -1,0 +1,7 @@
+.staircase-scene { max-width: 100%; overflow: auto; border: 1px solid var(--border); border-radius: 8px; padding: 8px; }
+.staircase-scene svg { display: block; margin: auto; }
+.staircase-scene rect { fill: var(--code-bg); stroke: var(--border); }
+.staircase-scene rect.is-known { fill: var(--surface2); }
+.staircase-scene rect.is-current { fill: color-mix(in srgb, #0ea5e9 22%, var(--surface)); stroke: #0ea5e9; stroke-width: 2; }
+.staircase-scene text { fill: var(--text); font: 12px ui-monospace, monospace; }
+.staircase-scene circle { fill: #eab308; }

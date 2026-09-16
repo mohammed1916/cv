@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -18,6 +18,8 @@ import PatternLegend from "../../components/PatternLegend"
 import './ClimbingStairsVisualizer.css'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
+import OpenProblemInPlayground from '../../playground/OpenProblemInPlayground'
+import StaircaseScene from '../../components/shared/StaircaseScene'
 const SOLUTION_CODE = getSolutionCode('climbing-stairs')
 
 const CLIMBINGSTAIRS_PATTERNS = ['add', 'done', 'init', 'loop', 'shift', 'temp']
@@ -187,48 +189,7 @@ function VisualizationPanel({
         <div className="cs-dp-visual-area">
           <div className="cs-dp-stairs-container">
             {/* Draw actual stairs SVG */}
-            <svg width="100%" height="200px" viewBox={`0 0 ${Math.max(300, (n+1) * 40)} 200`}>
-              <g transform="translate(20, 180)">
-                {Array.from({ length: n + 1 }).map((_, idx) => {
-                  const stepWidth = 40
-                  const stepHeight = 150 / n
-                  const x = idx * stepWidth
-                  const y = -idx * stepHeight
-
-                  const isActive = currentStairIndex === idx
-                  const isTarget = idx === n
-                  const isVisited = currentStairIndex >= idx
-
-                  return (
-                    <g key={idx}>
-                      <rect
-                        x={x} y={y}
-                        width={stepWidth} height={180 - y}
-                        fill={isActive ? 'rgba(14, 165, 233, 0.2)' : isVisited ? 'var(--surface2)' : 'var(--code-bg)'}
-                        stroke={isActive ? '#0ea5e9' : 'var(--border)'}
-                        strokeWidth={isActive ? 2 : 1}
-                      />
-                      <text
-                        x={x + stepWidth / 2} y={y - 10}
-                        textAnchor="middle"
-                        fill={isActive ? '#38bdf8' : isVisited ? 'var(--text-muted)' : 'var(--text-muted)'}
-                        fontSize="12"
-                        fontWeight={isActive ? "bold" : "normal"}
-                      >
-                        {idx === 0 ? "Ground" : `Stair ${idx}`}
-                      </text>
-                      {/* Draw a little character */}
-                      {isActive && (
-                        <circle cx={x + stepWidth / 2} cy={y - 30} r="8" fill="#eab308" />
-                      )}
-                      {isTarget && !isActive && (
-                        <text x={x + stepWidth / 2} y={y - 30} textAnchor="middle" fontSize="16">🏁</text>
-                      )}
-                    </g>
-                  )
-                })}
-              </g>
-            </svg>
+            <StaircaseScene n={n} current={currentStairIndex} ways={dpTable} />
           </div>
 
           <div className="cs-dp-array-container">
@@ -302,7 +263,7 @@ export default function ClimbingStairsVisualizer() {
 
   // Use modular visualization features system
   const vizFeatureDefs = getVisualizationFeatures('climbing-stairs')
-  const { items: vizFeatures, toggle: toggleVizFeature, enabledIds: enabledVizIds } = useVisualizationFeatures(vizFeatureDefs)
+  const { items: vizFeatures, toggle: toggleVizFeature } = useVisualizationFeatures(vizFeatureDefs)
 
   const step = stepIndex >= 0 ? steps[stepIndex] : null
 
@@ -336,6 +297,7 @@ export default function ClimbingStairsVisualizer() {
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
       <CodeTracePanel
+        playgroundLaunch={<OpenProblemInPlayground source={SOLUTION_CODE.map(line => line.text).join('\n')} input={{ n }} disabled={Boolean(inputError)} />}
         step={step}
         codeLines={SOLUTION_CODE}
         highlightedLines={connectivity.highlightedLines}

@@ -27,6 +27,7 @@ export default function CodeTracePanel({
   autoScroll = true,
   onActiveLineDomChange,
   disableResizer = false,
+  playgroundLaunch = null,
 }) {
   const resolvedCodeLines = Array.isArray(codeLines)
     ? codeLines
@@ -618,22 +619,22 @@ export default function CodeTracePanel({
           </svg>
           {copied ? "Copied" : "Copy code"}
         </button>
-        <button
+        {playgroundLaunch || <button
           type="button"
           className="ctp-copy-btn"
           onClick={toggleEdit}
           style={{ marginLeft: 8 }}
         >
           {isEditing ? "Close editor" : "Edit code"}
-        </button>
-        <button
+        </button>}
+        {!playgroundLaunch && <button
           type="button"
           className="ctp-copy-btn"
           onClick={toggleEditorPlacement}
           style={{ marginLeft: 8 }}
         >
           Editor: {editorPlacement === "overlay" ? "Modal" : "Below"}
-        </button>
+        </button>}
       </div>
 
       <PointerStateBand step={resolvedStep} />

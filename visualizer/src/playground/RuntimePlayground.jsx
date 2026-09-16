@@ -36,13 +36,17 @@ import {
   summarizeScene,
 } from "./webmcp/playgroundWebMCP";
 import "./RuntimePlayground.css";
+import { readProblemWorkspace, workspaceKeys, staircaseFromTrace } from "./problemWorkspace";
+import StaircaseScene from "../components/shared/StaircaseScene";
 
-const SOURCE_STORAGE_KEY = "cpviz.runtime-playground.source.v1";
-const PYTHON_SOURCE_STORAGE_KEY = "cpviz.runtime-playground.python-source.v1";
-const PYTHON_INPUT_STORAGE_KEY = "cpviz.runtime-playground.python-input.v1";
-const PYTHON_ENTRY_STORAGE_KEY = "cpviz.runtime-playground.python-entry.v1";
-const PYTHON_BINDINGS_STORAGE_KEY = "cpviz.runtime-playground.python-bindings.v2";
-const MODE_STORAGE_KEY = "cpviz.runtime-playground.mode.v1";
+const importedProblem = (() => { try { return readProblemWorkspace(window.localStorage, window.location.search); } catch { return null; } })();
+const savedKeys = workspaceKeys(importedProblem?.id);
+const SOURCE_STORAGE_KEY = savedKeys.source;
+const PYTHON_SOURCE_STORAGE_KEY = savedKeys.pythonSource;
+const PYTHON_INPUT_STORAGE_KEY = savedKeys.input;
+const PYTHON_ENTRY_STORAGE_KEY = savedKeys.entry;
+const PYTHON_BINDINGS_STORAGE_KEY = savedKeys.bindings;
+const MODE_STORAGE_KEY = savedKeys.mode;
 const AUTO_RUN_DELAY_MS = 600;
 const PYTHON_AUTO_RUN_DELAY_MS = 900;
 const MAX_SOURCE_LENGTH = 50_000;
@@ -1257,6 +1261,11 @@ export default function RuntimePlayground({
     };
   }, [invokeWebMcpTool]);
 
+  const staircase = importedProblem && isPython && hasCurrentRun && pythonEntry === importedProblem.entry
+    ? staircaseFromTrace({ source, referenceSource: importedProblem.source, input: pythonInputState.value,
+        traceFrames: lastGoodRun?.traceResult?.traceFrames, index: stepIndex })
+    : { supported: false, reason: 'Run the imported Python solution and select a frame. Changed source or entry points use general execution visuals.' };
+
   const webMcpStatusLabel = webMcpState.phase === "ready"
     ? `Agent-ready · ${PLAYGROUND_WEBMCP_TOOL_COUNT} tools`
     : webMcpState.phase === "registering" || webMcpState.phase === "checking"
@@ -1270,6 +1279,12 @@ export default function RuntimePlayground({
       className={`runtime-playground runtime-playground--${layoutWidth}`}
       data-layout-width={layoutWidth}
     >
+      {importedProblem && <div className="runtime-playground__problem-origin">
+        <strong>{importedProblem.title}: separate workspace</strong>{' '}
+        <a href={window.location.pathname + '#climbing-stairs'}>Back to original visualizer</a>{' | '}
+        <a href={window.location.pathname + '#playground'}>Open my original playground draft</a>{' | '}
+        <a href="https://leetcode.com/problems/climbing-stairs/" target="_blank" rel="noreferrer">Problem statement</a>
+      </div>}
       <header className="runtime-playground__header">
         <div className="runtime-playground__header-main">
           {onBack && (
@@ -1416,6 +1431,10 @@ export default function RuntimePlayground({
             </span>
           </div>
           <div className="runtime-playground__canvas">
+            {importedProblem && <section aria-label="Climbing Stairs visualization mapping">
+              {staircase.supported ? <><StaircaseScene n={staircase.n} current={staircase.current} ways={staircase.dp} /><p>Ways above each stair come from captured Python locals. ? means not computed yet.</p></>
+                : <p role="status">{staircase.reason}</p>}
+            </section>}
             <VisualizationCanvas
               scene={displayScene}
               emptyMessage={

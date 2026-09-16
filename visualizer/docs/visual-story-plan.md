@@ -74,6 +74,35 @@ individual story acceptance checklist for each problem.
   the missing-child cue, examples, tie result, empty-tree result, and no
   browser errors. Focused lint and production build pass.
 
+## Climbing Stairs playground pilot
+
+Catalog story work is paused at the completed Minimum Depth checkpoint.
+Climbing Stairs now replaces its inert Edit code action with Open in Code
+Playground. A confirmation copies the displayed Python solution and current
+input into a separate, persistent workspace; the original playground draft
+is preserved. The existing sign-in and usage limits still apply.
+
+The problem and playground share a staircase component and its CSS. Inside
+the playground, counts come from executed Python trace frames. This first
+adapter supports the exact imported solution, its entry point, and integer
+inputs from 1 to 45. Changed source uses general execution visuals; it does
+not replay the original algorithm as if it were the edited code. Existing
+AI suggestions still require review and acceptance before applying changes.
+
+The pilot includes links back to the problem and the original playground
+draft. Other problems retain their current editing behavior. Future story
+adapters should declare their trace requirements and fallback explicitly.
+
+Validation: four handoff/trace tests, 36 Python playground tests, and six
+WebMCP tests pass. Focused lint has no errors (the existing CodeTracePanel
+hook warning remains). Production build passes; the main JavaScript chunk
+is still above 500 kB. Browser checks cover confirmation, cancellation,
+draft preservation, and the normal sign-in gate.
+Full browser Python execution was not verified: the temporary isolated
+browser test did not complete. The trace adapter was verified against real
+CPython execution, including each intermediate update, rather than mocked
+trace data.
+
 ## Release checks for each batch
 
 - Validate trace decisions against the actual algorithm, including no-solution
