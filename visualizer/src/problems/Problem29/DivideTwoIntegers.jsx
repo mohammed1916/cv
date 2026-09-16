@@ -89,7 +89,7 @@ export default function DivideTwoIntegers() {
   // Step 2: Extract panels into consts
   const primaryPanel = (
     <div className="divide-two-integers-panel">
-      <div className="divide-two-integers-panel-head">
+      <div className="vis-panel-head divide-two-integers-panel-head">
         Input
         {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
       </div>
@@ -138,7 +138,7 @@ export default function DivideTwoIntegers() {
 
   const statePanel = (
     <div className="divide-two-integers-panel">
-      <div className="divide-two-integers-panel-head">Details</div>
+      <div className="vis-panel-head divide-two-integers-panel-head">Details</div>
       <div className="divide-two-integers-panel-body">
         <div className="divide-two-integers-info">
           <h3>Problem 29</h3>

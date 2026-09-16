@@ -1,16 +1,30 @@
 .ps-shell {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 480px;
-  gap: 0;
-  overflow: hidden;
   background: var(--code-bg);
 }
 
+.ps-story { display: grid; gap: 12px; padding: 12px; color: var(--text); }
+.ps-story-summary { --vis-panel-body-padding: 12px; order: 2; }
+.ps-story-summary p { margin: 10px 0; line-height: 1.6; }
+.ps-story-summary small { color: var(--text-muted); line-height: 1.5; }
+.ps-story-metrics { display: flex; flex-wrap: wrap; gap: 12px; font-size: 12px; }
+.ps-story-metrics strong { display: block; font: 700 20px ui-monospace, monospace; color: var(--text); }
+.ps-tree-scroll { overflow: auto; max-height: min(340px, 40dvh); border: 1px solid var(--border); border-radius: 10px; background: var(--code-bg); order: 1; }
+.ps-story > small { order: 4; }
+.ps-tree-scroll svg { display: block; margin: auto; }
+.ps-tree-edge { stroke: var(--border); stroke-width: 2; }
+.ps-tree-edge.on-route { stroke: #0ea5e9; stroke-width: 4; }
+.ps-tree-node circle { fill: var(--surface2); stroke: var(--text-muted); stroke-width: 1.5; }
+.ps-tree-node text, .ps-empty-tree { fill: var(--text); font: 13px ui-monospace, monospace; }
+.ps-tree-node.on-route circle { stroke: #0ea5e9; stroke-width: 3; }
+.ps-tree-node.is-current circle { stroke-width: 5; }
+.ps-tree-node.is-solution circle { fill: color-mix(in srgb, #22c55e 25%, var(--surface)); stroke: #22c55e; }
+.ps-tree-node.is-explored circle { stroke-dasharray: 4 3; }
+.ps-tree-node .ps-node-caption { font-size: 10px; fill: var(--text-muted); }
+.ps-route { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; padding: 10px; border-left: 3px solid #0ea5e9; background: var(--surface2); font: 12px ui-monospace, monospace; line-height: 1.8; overflow-wrap: anywhere; order: 3; }
+
 .ps-panel {
-  height: 100%;
+  flex: 1;
+  min-height: 0;
   overflow: auto;
 }
 

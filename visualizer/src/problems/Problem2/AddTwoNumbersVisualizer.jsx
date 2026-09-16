@@ -164,7 +164,7 @@ export default function AddTwoNumbersVisualizer({ problem }) {
       />
 
     <div className="atn-panel">
-      <div className="atn-panel-head">
+      <div className="vis-panel-head atn-panel-head">
         Linked Lists
         {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
       </div>
@@ -274,7 +274,7 @@ export default function AddTwoNumbersVisualizer({ problem }) {
 
   const statePanel = (
     <div className="atn-panel">
-      <div className="atn-panel-head">State Variables</div>
+      <div className="vis-panel-head atn-panel-head">State Variables</div>
       <div className="atn-panel-body" style={{ gap: 16 }}>
 
         <div className="atn-var-card carry">

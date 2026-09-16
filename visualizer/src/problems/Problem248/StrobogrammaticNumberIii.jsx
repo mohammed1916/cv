@@ -91,7 +91,7 @@ export default function StrobogrammaticNumberIii() {
   ], [])
   const panelContents = {
     left: (<div className="strobogrammatic-number-iii-panel">
-            <div className="strobogrammatic-number-iii-panel-head">
+            <div className="vis-panel-head strobogrammatic-number-iii-panel-head">
               Input
               {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
             </div>
@@ -137,7 +137,7 @@ export default function StrobogrammaticNumberIii() {
             </div>
           </div>),
     right: (<div className="strobogrammatic-number-iii-panel">
-            <div className="strobogrammatic-number-iii-panel-head">Details</div>
+            <div className="vis-panel-head strobogrammatic-number-iii-panel-head">Details</div>
             <div className="strobogrammatic-number-iii-panel-body">
               <div className="strobogrammatic-number-iii-info">
                 <h3>Problem 248</h3>

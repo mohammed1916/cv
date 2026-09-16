@@ -453,7 +453,7 @@ export default function MinimumDepthOfBinaryTreeVisualizer() {
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
 
   return (
-    <div className="mdbt-shell">
+    <div className="vis-shell mdbt-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
         <>

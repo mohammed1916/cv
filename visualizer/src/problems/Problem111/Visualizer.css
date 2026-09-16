@@ -1,14 +1,4 @@
 /* Lumino DockPanel shell */
-.mdbt-shell {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 480px;
-  gap: 0;
-  overflow: hidden;
-}
-
 /* Panel styling */
 .mdbt-panel {
   position: relative;

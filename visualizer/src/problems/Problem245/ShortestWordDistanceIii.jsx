@@ -91,7 +91,7 @@ export default function ShortestWordDistanceIii() {
   ], [])
   const panelContents = {
     left: (<div className="shortest-word-distance-iii-panel">
-            <div className="shortest-word-distance-iii-panel-head">
+            <div className="vis-panel-head shortest-word-distance-iii-panel-head">
               Input
               {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
             </div>
@@ -137,7 +137,7 @@ export default function ShortestWordDistanceIii() {
             </div>
           </div>),
     right: (<div className="shortest-word-distance-iii-panel">
-            <div className="shortest-word-distance-iii-panel-head">Details</div>
+            <div className="vis-panel-head shortest-word-distance-iii-panel-head">Details</div>
             <div className="shortest-word-distance-iii-panel-body">
               <div className="shortest-word-distance-iii-info">
                 <h3>Problem 245</h3>

@@ -449,7 +449,7 @@ export default function BalancedBinaryTreeVisualizer() {
 
   // Step 5: Replace return with portals
   return (
-    <div className="bbt-shell">
+    <div className="vis-shell bbt-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
         <>

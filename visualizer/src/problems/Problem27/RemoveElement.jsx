@@ -91,7 +91,7 @@ export default function RemoveElement() {
   ], [])
   const panelContents = {
     left: (<div className="remove-element-panel">
-            <div className="remove-element-panel-head">
+            <div className="vis-panel-head remove-element-panel-head">
               Input
               {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
             </div>
@@ -137,7 +137,7 @@ export default function RemoveElement() {
             </div>
           </div>),
     right: (<div className="remove-element-panel">
-            <div className="remove-element-panel-head">Details</div>
+            <div className="vis-panel-head remove-element-panel-head">Details</div>
             <div className="remove-element-panel-body">
               <div className="remove-element-info">
                 <h3>Problem 27</h3>

@@ -91,7 +91,7 @@ export default function GroupShiftedStrings() {
   ], [])
   const panelContents = {
     left: (<div className="group-shifted-strings-panel">
-            <div className="group-shifted-strings-panel-head">
+            <div className="vis-panel-head group-shifted-strings-panel-head">
               Input
               {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
             </div>
@@ -137,7 +137,7 @@ export default function GroupShiftedStrings() {
             </div>
           </div>),
     right: (<div className="group-shifted-strings-panel">
-            <div className="group-shifted-strings-panel-head">Details</div>
+            <div className="vis-panel-head group-shifted-strings-panel-head">Details</div>
             <div className="group-shifted-strings-panel-body">
               <div className="group-shifted-strings-info">
                 <h3>Problem 249</h3>

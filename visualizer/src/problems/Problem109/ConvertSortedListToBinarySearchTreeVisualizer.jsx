@@ -465,7 +465,7 @@ export default function ConvertSortedListToBinarySearchTreeVisualizer() {
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
 
   return (
-    <div className="cslbtbst-shell">
+    <div className="vis-shell cslbtbst-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
       {panelDivs && (
         <>

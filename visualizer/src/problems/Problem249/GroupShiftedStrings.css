@@ -21,17 +21,7 @@
   overflow: hidden;
 }
 
-.group-shifted-strings-panel-head {
-  padding: 12px 16px;
-  background: var(--surface-3);
-  border-bottom: 1px solid var(--border);
-  font-weight: 600;
-  font-size: 13px;
-  color: var(--text-main);
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
+
 
 .group-shifted-strings-panel-body {
   padding: 16px;
