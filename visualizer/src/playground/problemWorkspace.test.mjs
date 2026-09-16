@@ -34,7 +34,7 @@ test('unsupported code and invalid inputs cannot drive the staircase', () => {
   assert.equal(staircaseFromTrace({ source, referenceSource: source, input: { n: 5 }, traceFrames: [], index: -1 }).supported, false);
 });
 test('staircase values follow real executed Python frames at each update', () => {
-  for (const [n, expected] of [[1,1], [2,2], [5,8], [10,89]]) {
+  for (const [n, expected] of [[1,1], [2,2], [5,8], [10,89], [45,1836311903]]) {
     const globals = { __trace_source: source, __trace_input_json: JSON.stringify({ n }), __trace_entry_json: JSON.stringify('Solution.climbStairs'), __trace_max_frames: 240 };
     const result = spawnSync('python', ['-c', 'import json,sys\nscope=json.loads(sys.argv[1])\nexec(sys.stdin.read(),scope,scope)\nprint(scope["__trace_result_json"])', JSON.stringify(globals)], { input: PYTHON_TRACER_SOURCE, encoding: 'utf8' });
     assert.equal(result.status, 0, result.stderr);

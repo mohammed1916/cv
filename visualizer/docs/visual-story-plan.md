@@ -98,10 +98,17 @@ WebMCP tests pass. Focused lint has no errors (the existing CodeTracePanel
 hook warning remains). Production build passes; the main JavaScript chunk
 is still above 500 kB. Browser checks cover confirmation, cancellation,
 draft preservation, and the normal sign-in gate.
-Full browser Python execution was not verified: the temporary isolated
-browser test did not complete. The trace adapter was verified against real
-CPython execution, including each intermediate update, rather than mocked
-trace data.
+Follow-up browser verification passed with the real Python worker: selecting
+a frame displays the staircase, seeking to the end produces the expected
+count, seeking backward clears future values, and editing the saved source
+switches to the general-visuals fallback. The earlier timeout came from
+waiting for a staircase before selecting a frame: Run Python prepares the
+timeline; Next or Play starts displaying its frames. These execution checks
+used a temporary isolated component page; the normal app sign-in gate was
+checked separately and remains unchanged. A narrow viewport was also rendered;
+small docked preview panels require scrolling to see the full staircase.
+The four handoff/trace tests now include the maximum supported input, n = 45,
+with expected count 1,836,311,903, using real CPython execution.
 
 ## Release checks for each batch
 
