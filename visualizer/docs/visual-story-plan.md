@@ -1,418 +1,388 @@
-# Problem-specific visual stories and shared UI
+# Visual stories: implementation plan and Claude handoff
 
-## Contract
+Updated: 2026-09-17. Reviewed HEAD: `41108da8`.
+Comparison baseline: `148a3bb2` (HEAD~3 at the time of review).
 
-Each visualizer should explain the problem's objects, the current decision,
-why the next change happens, and why the final answer is valid. A list of
-variables or generic animated cells alone does not establish that contract.
-Climbing Stairs is a useful reference: stairs and one/two-step dependencies
-belong to its explanation, while buttons and panel frames can be shared.
+## Start here
 
-Keep problem geometry and algorithm states local. Reuse workspace chrome,
-inputs, playback, typography, spacing, node/edge primitives where appropriate,
-and theme tokens. Do not force all problems into one renderer or eagerly
-import the full renderer catalog.
+The direction is right: each problem increasingly has its own meaningful visual
+story, and `AlgorithmStoryWorkspace` shares inputs, code, playback and docking.
+The latest batch also introduced repeated scene chrome and unscoped CSS.
+Separate JSX/CSS files improve organization; they do not, by themselves, reduce
+download size or isolate styles.
 
-## Full-catalog rollout (active)
+The next work should consolidate and verify the existing stories before another
+large numbered batch. Start with Problems **125 and 132**: establish their payload
+baseline, isolate their CSS, and share their character comparison card. Preserve
+their different algorithms and visual explanations. Then verify the shared shell
+and continue with small, related families.
 
-Scope: every registered problem, including existing bespoke visualizers and
-shared AlgorithmWorkspace entries. Resume after the Climbing Stairs pilot.
-The refreshed baseline is 613 entries, 700 CSS files and 1,867,533 CSS source
-bytes before this batch. These are inventory counts, not completed stories.
+This document is the current execution plan. The old append-only checkpoints are
+available with `git show 41108da8:visualizer/docs/visual-story-plan.md`; their test
+counts and “next problem” statements describe earlier checkpoints, not current
+instructions. Check the current diff before proceeding if HEAD has moved.
 
-Use `docs/visual-story-progress.json` as the per-problem review ledger. Keep
-story and playground statuses separate. An existing screenshot, SVG, shared
-workspace, or successful build never automatically marks a problem complete.
-Refresh the inventory after each batch; reconcile newly registered entries
-into the ledger. Keep removed entries for history until explicitly reviewed.
+## What the last three commits actually did
 
-### Design and reuse rules
-
-- Write a short story for each problem: objects, decision, consequence,
-  invariant, failure case, and final proof. Choose geometry from that story.
-- Share controls, panel framing, input validation patterns, typography, theme
-  tokens, legends, accessible status treatments, and navigation. Prefer the
-  existing shared components before introducing another version.
-- Share visual primitives when meaning matches: node identity, edges, pointer
-  rails, intervals, dependency links, sequences and scrollable SVG viewports.
-  Keep each problem's composition, annotations, transitions and trace adapter
-  local. Stair dependencies, heap repair and DP subproblems need distinct views.
-- Extract repeated JSX/CSS after reviewing concrete consumers and their
-  cascade. Avoid speculative universal components with many problem switches.
-- Make animations explain a state change. Support seeking, reduced motion,
-  keyboard controls, non-color cues, dark/light themes and narrow dock panels.
-- Load stories and adapters with their problem routes. Avoid eager catalog
-  registries and barrel imports that pull every renderer into the main bundle.
-- Measure source CSS, production gzip, initial-route assets and representative
-  lazy chunks before/after each consolidation. Smaller source files alone do
-  not establish transfer savings. Record justified size increases for richer
-  stories; never hide bundle warnings by raising their limit.
-
-### Delivery sequence
-
-1. Trees: finish 110, then 109; review traversal, construction, comparison and
-   path problems separately while extracting genuinely shared tree primitives.
-2. Arrays and pointers: review 11, Two Sum and sliding-window/interval stories.
-3. Linked structures, stacks, queues and heaps: emphasize identity, links,
-   frontier order, swaps and restoration of invariants.
-4. DP: partition by recurrence geometry (stairs, sequences, grids, intervals,
-   trees, state machines); visualize dependencies and chosen/rejected choices.
-5. Graphs and search: expose frontier, visited state, edges, costs, cycles,
-   backtracking and pruning without inventing unexecuted work.
-6. Remaining strings, tries, greedy, math, bit operations, geometry and special
-   problems: define individual stories before selecting reusable pieces.
-
-Work in reviewable batches with an explicit status for every entry. For each
-problem, complete algorithm fixtures, story implementation, browser checks,
-CSS/JS measurements and playground assessment before marking it verified.
-Do not replace all existing visualizers mechanically.
-
-### Playground contract across the catalog
-
-Generalize launch metadata, entry point and input serialization incrementally.
-Opening a workspace must preserve existing drafts. A custom story needs a
-tested execution-to-story adapter and clear compatibility checks. Unsupported
-or changed code uses truthful general execution visuals and may offer an AI
-proposal; the user reviews and accepts changes. AI must not invent a matching
-animation or silently rewrite code. Keep launch support, renderer support and
-arbitrary-edit support as separate capabilities in the ledger.
-
-## Inventory
-
-Run `node scripts/inventory-visual-stories.mjs` to refresh the per-entry source
-and CSS inventory. Its flags are mechanical signals, not quality scores.
-Run `node scripts/audit-css-duplication.mjs` for exact declaration candidates.
-Review the cascade before consolidating a candidate. Compare compressed build
-output and browser-loaded CSS; source bytes alone do not predict load savings.
-
-## Initial review batch
-
-| Problem | Visual story | Status |
+| Commit, oldest first | Direction | Assessment |
 | --- | --- | --- |
-| 112 Path Sum | Walk a root-to-leaf route; carry a remaining target; reject leaves and backtrack; stop on success | Pilot implemented; 5 algorithm tests and desktop/mobile browser checks passed |
-| 111 Minimum Depth | Contrast complete root-to-leaf routes with missing children; show why a missing child is not a shorter route | Implemented; 6 algorithm tests and desktop/mobile browser checks passed |
-| 110 Balanced Binary Tree | Return child heights upward; expose the first excessive height difference and propagate failure | Trace corrected, height comparison added; full visual acceptance still in progress |
-| 11 Container With Most Water | Show water limited by the shorter wall and the width/height tradeoff when moving a pointer | Existing water view; review before redesign |
-| 109 Sorted List to BST | Relate the ordered list interval to its chosen root and recursively split intervals | Pending detailed review |
+| `fa158fda` | Reconstruction, path/rewiring, subsequence, next-pointer and Pascal stories; introduced `AlgorithmStoryWorkspace` | Strong reuse: common workspace, shared family scenes, extracted traces, less repeated JSX/CSS. |
+| `a093bb80` | Triangle 120 with bottom-up dependencies and a path witness | A compact local story on the shared workspace; sensible boundary. |
+| `41108da8` | Stories for 121–125 and 128–142; multi-field workspace inputs | More problem-specific meaning and algorithm tests, but much more separate chart/card/legend/status CSS and several global-selector collisions. Needs consolidation and browser acceptance. |
 
-These are the proposed first batch, not a claim that the entire catalog is
-complete. Broader batches should group shared UI work, while keeping an
-individual story acceptance checklist for each problem.
+Representative distinctions to preserve:
 
-## First implementation checkpoint
+- 121: running minimum price and the best buy/sell witness.
+- 122: adjacent profitable slopes and accumulated unlimited-trade profit.
+- 123: four transaction states and their transitions.
+- 124/129: maximum path through an apex versus root-to-leaf decimal accumulation.
+- 125/132: inward comparison of a normalized string versus palindrome-center
+  expansion feeding minimum cuts over prefixes.
+- 130/133/134: border escape flood-fill, original-to-clone identity, and circular
+  fuel balance/elimination.
+- 138/141/142: random-link copy identity, cycle detection, and cycle-entry proof.
+- 139/140: reachability of word boundaries versus enumeration of full sentences.
 
-- Path Sum now renders the actual tree with stable node IDs, route edges,
-  remaining target, leaf checks, backtracking, and success short-circuiting.
-  Its examples now update both inputs; invalid input no longer produces a
-  trace from fallback string characters. The code sample has valid grouping
-  around its multiline return expression.
-- Problems 109, 110, 111, and 112 reuse `vis-shell`; their repeated shell
-  declarations were removed. Nine more visualizers reuse `vis-panel-head`,
-  removing 2,402 source bytes of repeated header declarations.
-- The CSS migration comparison passed 208 theme/width/hover combinations
-  across 13 visualizers. Including the new Path Sum geometry styles, the
-  changed CSS files are 1,257 source bytes smaller (normalized line endings).
-  This is not a claim about compressed transfer savings.
-- Five algorithm tests (including 1,152 exhaustive small-tree/target cases),
-  focused lint, the production build, example-input interaction, final result,
-  non-leaf rejection, and desktop/mobile browser checks passed. The existing
-  large JavaScript chunk advisory remains a separate issue.
+These are source-level design findings. This review did not certify the
+appearance or interaction of every scene in a browser.
 
-## Minimum Depth checkpoint
+## Current evidence and its limits
 
-- Depth bands count nodes from the root. A dashed missing-child cue explains
-  why an absent branch cannot win the comparison. Completed leaf routes are
-  listed separately, with a provisional best route and a final winner.
-- Postorder return frames match the displayed recursive solution; code line
-  references no longer point to unrelated branches. Sparse level-order input
-  is parsed locally without changing the legacy tree helper used elsewhere.
-- Invalid inputs show an error instead of running a fallback tree. Duplicate
-  input/example controls and their CSS were removed; shared input, panel,
-  playback, docking, and code components remain in use.
-- Problem111 CSS decreased from 3,978 to 1,865 source bytes (normalized line
-  endings); gzip of that source file decreased from 1,035 to 622 bytes. These
-  are file measurements, not a claim about whole-app transfer savings.
-- Six tests cover 256 exhaustive sparse tree shapes, duplicate values, empty
-  trees, the one-child trap, invalid inputs, and a 5,000-node chain. All 11
-  tests across Minimum Depth and Path Sum pass. Desktop/mobile checks verify
-  the missing-child cue, examples, tie result, empty-tree result, and no
-  browser errors. Focused lint and production build pass.
+### Catalog and validation
 
-## Climbing Stairs playground pilot
+The checked-in progress ledger has **613 entries**: 570 pending review,
+39 implemented pending full review, 1 in progress (110), 2 verified (111/112),
+and 1 pilot verified (70). These are existing recorded statuses, not new approvals.
 
-Catalog story work resumed after verification of this pilot.
-Climbing Stairs now replaces its inert Edit code action with Open in Code
-Playground. A confirmation copies the displayed Python solution and current
-input into a separate, persistent workspace; the original playground draft
-is preserved. The existing sign-in and usage limits still apply.
+Fresh checks during this review:
 
-The problem and playground share a staircase component and its CSS. Inside
-the playground, counts come from executed Python trace frames. This first
-adapter supports the exact imported solution, its entry point, and integer
-inputs from 1 to 45. Changed source uses general execution visuals; it does
-not replay the original algorithm as if it were the edited code. Existing
-AI suggestions still require review and acceptance before applying changes.
+- `npm.cmd run test:visual-stories`: **255 tests passed**, none failed.
+- Production builds of both comparison revisions passed using the same installed
+  dependencies, Node 22.19.0 and Vite 8.0.10, production mode and environment files.
+- HEAD still reports the existing >500 kB chunk warning: main JS is approximately
+  520.39 kB minified / 131.54 kB in Vite's gzip report.
+- `npm.cmd run audit:css`: 721 CSS files and 156 repeated declaration patterns.
+  The worktree has 1,986,273 CSS source bytes; CRLF makes this differ from Git blobs.
+- No new browser acceptance, focused lint or deployed HTTP measurement was run in
+  this documentation review. Earlier checkpoint claims are historical evidence.
 
-The pilot includes links back to the problem and the original playground
-draft. Other problems retain their current editing behavior. Future story
-adapters should declare their trace requirements and fallback explicitly.
+The checked-in inventory is stale: it still says 700 CSS files and omits recent
+story dependencies/statuses. Its script also only recognizes
+`<AlgorithmWorkspace>`, missing `<AlgorithmStoryWorkspace>`. Fix that detector
+before using the refreshed `sharedWorkspace` signal. The inventory is not a
+quality score; dynamic imports need separate analysis.
 
-Validation: four handoff/trace tests, 36 Python playground tests, and six
-WebMCP tests pass. Focused lint has no errors (the existing CodeTracePanel
-hook warning remains). Production build passes; the main JavaScript chunk
-is still above 500 kB. Browser checks cover confirmation, cancellation,
-draft preservation, and the normal sign-in gate.
-Follow-up browser verification passed with the real Python worker: selecting
-a frame displays the staircase, seeking to the end produces the expected
-count, seeking backward clears future values, and editing the saved source
-switches to the general-visuals fallback. The earlier timeout came from
-waiting for a staircase before selecting a frame: Run Python prepares the
-timeline; Next or Play starts displaying its frames. These execution checks
-used a temporary isolated component page; the normal app sign-in gate was
-checked separately and remains unchanged. A narrow viewport was also rendered;
-small docked preview panels require scrolling to see the full staircase.
-The four handoff/trace tests now include the maximum supported input, n = 45,
-with expected count 1,836,311,903, using real CPython execution.
+### Source growth
 
-## Release checks for each batch
+Exact committed `src` blob deltas; tests are excluded from runtime columns:
 
-### Balanced Binary Tree: first resumed batch
+| Commit | CSS bytes | JSX bytes | Runtime JS bytes |
+| --- | ---: | ---: | ---: |
+| `fa158fda` | -13,977 | -58,987 | +20,373 |
+| `a093bb80` | +2,249 | -6,556 | +6,130 |
+| `41108da8` | +148,602 | +92,866 | +240,794 |
+| Total | +136,874 | +27,323 | +267,297 |
 
-- Extracted a tested trace that follows the displayed left/right failure
-  guards. The first local height mismatch and inherited failure are distinct;
-  skipped right subtrees remain unprocessed. Child-height meters explain the
-  allowed difference and the first failing node remains identified.
-- Corrected sparse level-order parsing and reject invalid/orphan values.
-  Removed the duplicate input implementation in favor of ManualInputPanel.
-  The tree is visible before playback; its canvas grows with depth and no
-  longer collapses through a flex override. Pattern labels describe the
-  actual traversal/comparison/return operations.
-- Four tests pass, including independent results over valid small sparse
-  trees, both failure guards, invalid inputs and immutable frame snapshots.
-  Focused lint passes. Desktop browser checks verify editable input, docking,
-  final unbalanced result, first-failure identity, canvas height and no page
-  errors. Production build passes with the existing chunk advisory.
-- Follow-up: added the reusable iterative binaryTreeLayout helper with spaced
-  inorder columns. Tests cover dense 127-node and deep 10,000-node layouts
-  (layout only, not full-trace performance). Keyboard-focusable tree scrolling
-  and reduced-motion handling are implemented. Six tests, focused lint and
-  production build pass. Desktop dark-theme interaction and 390px light-theme
-  rendering with reduced motion pass without page errors; the narrow diagram
-  scrolls within its dock panel.
-- Still pending before full story verification: complete both-theme playback
-  checks, route-transfer measurements, full-trace scalability, and a playground
-  adapter. This entry remains
-  in progress; launch support is not inferred from its new trace.
-- At the first checkpoint, Problem110 CSS decreased from 3,602 to 3,166 normalized source bytes;
-  gzip of that file decreased from 882 to 840 bytes. These measurements cover
-  the local stylesheet only, not whole-app transfer size.
+Runtime source grew by 431,494 bytes. Test source grew separately by 166,129
+bytes. Neither number is a visitor's transfer size.
 
-### Next tree story: Sorted List to BST (109)
+### Production payload comparison
 
-Review started. The current trace shows array slices and midpoint selection.
-Preserve original list indices across recursive intervals, connect selected
-midpoints to their parents in the growing tree, and explain subtree balance.
-Reuse the layout helper where compatible; keep construction state local.
+These are **static JS/CSS gzip estimates in bytes**, not measured HTTP transfers.
+For each build, traverse the Vite manifest's static `imports` recursively, collect
+each emitted JS file and its CSS once, and sum Node `gzipSync` default output per
+file. A cold problem scenario unions the app entry and that problem's dependencies.
+Do not follow every `dynamicImports` entry: that would count the entire catalog.
 
-### Continuing batch: 109, 11, 100, 101
+| Scenario | Baseline 148a3bb2 | HEAD 41108da8 | Change |
+| --- | ---: | ---: | ---: |
+| App entry dependencies | 242,934 | 242,977 | +43 |
+| App + first visit to 120 | 332,837 | 317,663 | -15,174 |
+| App + first visit to 121 | 333,885 | 336,656 | +2,771 |
+| App + first visit to 125 | 333,195 | 321,347 | -11,848 |
+| App + first visit to 132 | 332,651 | 321,508 | -11,143 |
+| App + first visit to 141 | 333,259 | 322,368 | -10,891 |
+| App + first visit to 142 | 333,800 | 338,784 | +4,984 |
+| Additional assets for 132 after visiting 125 | 4,770 | 6,882 | +2,112 |
 
-- 109 now constructs a real linked BST from midpoint intervals. Stable input
-  indices distinguish duplicates; each created node shows its subtree height
-  only after returning. Invalid/unsorted inputs do not animate fallback data.
-  Tests check inorder identity and balance for every size 0 through 200.
-- 11 retains the winning wall pair, renders a geometric water cross-section,
-  and explains the shorter-wall elimination rule. Exhaustive tests over 4,096
-  arrays verify both the best area and the final highlighted pair.
-- 100 preserves side-by-side trees while sharing sparse level-order parsing
-  and iterative layout. Its story distinguishes structural and value failures.
-- 101 depicts mirror partners, removes duplicated geometry, fixes Python
-  source grouping/entry return, and short-circuits after an outer-pair failure.
-- Shared StoryPanel supplies framing and typography; SvgViewport supplies
-  pan/zoom; binaryTreeLayout supplies positions; levelOrderTree supplies sparse
-  input semantics. Existing controls and docking remain. Duplicate inputs and
-  obsolete drawing CSS were removed. Problem-specific decisions remain local.
-- Algorithm suites and focused lint pass. Isolated browser checks pass for
-  BST duplicate identities/final tree/invalid input, water's winning area 49,
-  sparse same-tree equality, and asymmetric mirror failure. Problem109's normal
-  Pro gate is unchanged; isolated checks do not certify authenticated routing.
-  Production build passes with the existing large main-chunk advisory.
-- These entries remain implemented-pending-full-review: mobile/theme checks,
-  transfer measurements, broad input performance and playground adapters are
-  tracked separately. Source-CSS savings are not whole-app download savings.
+All emitted JS/CSS combined grew from 2,732,054 to 2,793,219 gzip bytes.
+That deployment-wide total is not a first-page payload. The results show useful
+cold-route savings on some problems and growth on others; savings are not uniform.
+The warm 125-to-132 estimate assumes same-build assets remain available.
 
-### Traversal and construction batch: 102, 103, 104, 107, 108
+This method excludes HTML, fonts, images, fetched JSON, external editor assets,
+runtime-triggered imports, headers and cache behavior. The app fetches
+`public/data/leetcodeCatalog.json` on the LeetCode track; that file alone is
+985,794 raw bytes / 125,184 gzip bytes in a local compression estimate. A complete
+homepage bandwidth report must include it.
 
-- 102 now preserves the full FIFO queue between visits and enqueue operations.
-  The level boundary is frozen explicitly; pending nodes are never omitted.
-- 103 reuses that trace, reverses only alternate output rows, and saves each
-  row after reversal. Its scene keeps tree traversal separate from output order.
-- 104 carries a deepest-route witness upward with returned child depths,
-  highlights that path at completion, and retains keyboard node-to-code links.
-- 107 reverses the level list only at the final return; node order within rows
-  remains unchanged. 102/107 share TraversalTreePanel; 103/104 share TreeDiagram.
-- 108/109 share SortedTreeStory and its CSS. Array construction uses direct
-  indices; linked-list construction first copies the list. Array input is
-  validated instead of silently sorted; the displayed code uses half-open
-  intervals matching the trace. Both keep original indices and subtree heights.
-- `npm run test:visual-stories` runs 32 passing tests across the current tree
-  and water stories. Focused lint and production build pass. Isolated desktop
-  browser checks confirm the 102/103/104 final results, with narrow-viewport
-  captures also taken. Full route access, all-theme interactions, performance
-  limits and playground adapters remain separate review items.
-- Initial local-CSS measurements for the prior batch (source/gzip bytes):
-  109 182/154 to 738/346 before moving its story styles into shared CSS;
-  11 2214/751 to 943/376; 100 7770/1451 to 6199/1232;
-  101 7443/1357 to 3970/912. These are checkpoint measurements, not compressed
-  route-transfer savings. Shared files and richer diagrams must be included
-  when comparing total delivered size.
+Build outputs used for this local review were placed in ignored
+`.__story-review-*` paths. The table above is the durable evidence; future work
+must regenerate measurements for its own baseline and candidate.
 
-### Release checklist
+## Architecture to keep
 
-- Validate trace decisions against the actual algorithm, including no-solution
-  inputs, duplicates, negative values where legal, and boundary cases.
-- Match code highlighting to the depicted decision; do not display generic
-  pattern labels when the trace does not implement those phases.
-- Check input examples, seeking, reset, playback, floating/docking, light/dark
-  themes, and narrow panel widths.
-- Compare before/after CSS and JavaScript sizes. A richer visualization may
-  add local CSS even while repeated UI rules are removed; report both honestly.
-- Record which entries were reviewed. Never treat a passing build or shared
-  component usage as proof of meaningful visualization.
+Each story must explain the objects, current decision, consequence, invariant,
+failure case and final proof. Different colors, titles or generic value cards are
+insufficient. Distinct UI means distinct explanation and composition; related
+problems can correctly share the same underlying objects.
 
-### Reconstruction, path collection, rewiring and subsequences: 105, 106, 113, 114, 115
+| Layer | Responsibility | Location / examples |
+| --- | --- | --- |
+| Workspace | Inputs, validation presentation, code connection, Lumino panels, playback and floating controls | Existing `AlgorithmStoryWorkspace.jsx` |
+| UI primitives | Panel framing, metrics, legends, comparison cards, status treatments, spacing and themes | Small shared JSX components with one owning stylesheet |
+| Semantic primitives | Node identity, edges, pointer tracks, price coordinates, interval/dependency geometry | Existing `PointerRail`, `SvgViewport`, `binaryTreeLayout`, `RecurrenceGrid`; extend only where meanings match |
+| Problem story | Arrangement, annotations, decisions, transitions and proof | Local `ProblemNNN/*Story.jsx` and scoped CSS |
+| Algorithm / trace | Parsing, executed operations, immutable history, final result and witnesses | Local `algorithm.js`, or an established family module when semantics actually match |
 
-- 105/106 share a reconstruction scene and validated interval model. Preorder
-  takes the root first; postorder takes it last. Stable inorder indices show
-  subtree boundaries and creation/return timing. Conflicting traversal pairs
-  are rejected. Isolated desktop browser checks reach the correct five-node trees.
-- 113 preserves saved leaf routes through backtracking and highlights the working
-  path. Fixed a trace bug that omitted the current node from the running sum.
-  Tests cover both standard matching routes, internal-node rejection, negative
-  values, sparse inputs and empty trees.
-- 114 uses standard level-order input and shows each of the three pointer writes
-  separately. Stable positions expose the temporary shared child at line 11;
-  explicit L/R labels distinguish edges. Tests prove all identities stay reachable
-  and the final right chain equals original preorder with every left link null.
-- 115 replaces a mutable shared DP snapshot (which revealed future values) with
-  compact write-time metadata. Separate skip, compare and use frames explain why
-  counts add. A shared RecurrenceGrid follows the active dependency window instead
-  of silently clipping the table after eight rows. BigInt counts remain exact;
-  inputs are bounded at 64 characters per string. Tests include exhaustive small
-  subsequence counts, historical cell values, and a count beyond safe JS integers.
-- New stories retain Lumino layouts and floating playback. These entries are
-  implemented-pending-full-review; full access-route, theme, performance and
-  playground-adapter review remains pending. The last production build through
-  problem 113 passed with main chunk 520.21 kB (131.50 kB gzip); the warning remains.
+Use direct imports of small components. Keep scene modules under their lazy
+problem entry. `src/App.jsx` already eagerly imports metadata and lazily imports
+problem `index.jsx` files; preserve this boundary. Vite supports async CSS splitting
+and CSS Modules directly; no new styling framework is needed.
+[Reference: Vite features](https://vite.dev/guide/features#css-code-splitting).
 
-### Next-pointer stories: 116 and 117
+Extract a component after comparing at least two real consumers and identifying
+shared meaning. Prefer children/slots or small explicit props for local overlays.
+Do not create a universal renderer with problem-number switches, a global story
+barrel, or a giant eagerly imported stylesheet. Tiny helpers can remain local when
+sharing increases coupling or the measured cost.
 
-- Both now draw actual directed next links, with stable node IDs and explicit null
-  endings. Previously the views mainly listed level values. Shared scene/workspace
-  code replaces duplicated JSX and removes both unused local CSS files.
-- 116 follows existing parent links to connect siblings and bridge adjacent parents.
-  Validation enforces two children per internal node and equal leaf depth.
-- 117 uses a dummy head and tail to stitch real children across sparse gaps, without
-  a BFS queue. The displayed code and trace distinguish these two algorithms.
-- Tests verify final links by independent depth grouping, duplicate identities,
-  sparse gaps, empty trees, and perfect-tree validation. Desktop browser checks
-  finish both examples and verify four/three directed links respectively.
-- Browser checks for 113/114/115 also passed after the shared SVG canvas was bounded
-  to 300px and the recurrence table began scrolling its active cell into view.
-  Desktop and narrow-viewport screenshots were captured. This is a focused check,
-  not completion of the full accessibility/theme/route review.
+Reuse existing controls and useful scenes. Avoid rewriting unrelated visualizers
+to make their file structure uniform. Keep controls stable across problems while
+making the explanatory scene specific.
 
-### Pascal stories completed; paused at user request
+## CSS ownership: first correctness fix
 
-- 118 builds the triangle row by row, marks the two parents for each addition,
-  and keeps future rows out of earlier frames. Input range: 1-30 rows.
-- 119 demonstrates an in-place right-to-left update, with an explicitly labeled
-  prior-row snapshot for explanation. Input range: row index 0-33. Row 0 is now
-  accepted correctly instead of being replaced by a truthy default of 3.
-- Both share PascalStory/CSS and AlgorithmStoryWorkspace with the next-pointer
-  family. The shell preserves editable inputs, examples, code-line selection,
-  pattern legends, Lumino panels and floating/docked playback. Problem definitions
-  own their code, validation, trace and scene; the shell does not infer semantics.
-- Focused lint passed. All 44 visual-story tests passed. Browser checks confirmed
-  the final Pascal row [1,4,6,4,1] for both examples and rechecked 116/117 after the
-  shell extraction. Production build passed; the main-chunk size warning remains.
-- Stopped after 118/119 as requested. Problem 120 was inspected but not edited.
-  Remaining entries retain their ledger status; these implemented stories still
-  require the full release checklist and separate playground adapters.
+Plain `.css` files imported from JSX still have global selectors. Existing
+collisions include:
 
-### Triangle (120) bottom-up DP story
+| Consumers | Conflicting selectors |
+| --- | --- |
+| 125 `PalindromeStory.css` and 132 `MinCutStory.css` | `.badge-match`, `.comparison-index`, `.comparison-char`, `.operator-badge` |
+| 121 `StockStory.css` and 123 `StockStory3.css` | `.stock-story__explanation` |
+| 131 `PartitionStory.css` and 141 `CycleStory.css` | `.metric-value` |
+| 128 `ConsecutiveStory.css` and 138 `CopyRandomStory.css` | `.metric-val` |
+| 125, 131 and 138 | `.legend-item` |
 
-- 120 computes the minimum path sum bottom-up with child comparisons and full route witness.
-  Strict validation verifies valid integer triangular arrays (row $r$ has length $r+1$, up to 30 rows).
-- Each step highlights the active cell $(i, j)$, compares the adjacent children $(i+1, j)$ and $(i+1, j+1)$
-  in the row below, and visualizes the chosen branch and updated DP array without leaking future updates.
-- Reuses `AlgorithmStoryWorkspace`, `StoryPanel`, and pattern tracking (`init`, `compare`, `update`, `done`),
-  removing bespoke boilerplate and obsolete CSS.
-- 5 algorithm tests cover strict input validation, empty/single-element triangles, standard example paths,
-  negative values, zeros, and ties. All 49 visual-story tests pass. Focused lint passes.
+For example, 125 gives `.badge-match` a tinted background and green text; 132
+gives it a solid green background and dark text. These definitions create a
+navigation-order styling risk. Confirm the visible effect in the browser.
 
-### Stock trading trilogy, tree path sum, and palindrome: 121, 122, 123, 124, 125
+For touched scene files, use CSS Modules or fully scope every local selector
+beneath a unique scene root. Prefer Modules for newly extracted components.
+A root class alone does not scope bare descendants elsewhere in the stylesheet.
+Shared component styles must have one owner; scene geometry stays local. Audit
+keyframe names, state selectors and portal-rendered content as well.
 
-- 121 (Best Time to Buy and Sell Stock): Traces running `minPrice`, calculates prospective profit at each step,
-  and highlights optimal buy and sell day transaction arcs over an interactive price bar chart.
-- 122 (Best Time to Buy and Sell Stock II): Accumulates greedy valley-to-peak upward slopes, visualizes positive
-  price jumps on adjacent days, and shows a running profit accumulation meter.
-- 123 (Best Time to Buy and Sell Stock III): Traces the 4-state DP transition machine ($b_1, s_1, b_2, s_2$)
-  explaining the financial invariant at each day with an SVG price curve and DP state cards.
-- 124 (Binary Tree Maximum Path Sum): Post-order DFS computing subtree gains returned upward vs. full turnaround
-  apex paths, rendering tree nodes via `binaryTreeLayout` and highlighting the optimal path witness.
-- 125 (Valid Palindrome): Two-pointer inward sweep on normalized alphanumeric strings, featuring a character comparison
-  hero card with green match / red mismatch indicators, PointerRail tracks, and raw-to-clean position mapping.
-- All 5 problems adopt `AlgorithmStoryWorkspace`, standard `StoryPanel`, and strict validation, removing obsolete CSS.
-- 52 comprehensive unit tests across these 5 problems (101 total visual story tests) pass. Focused lint and build pass.
+Use existing theme tokens consistently. Add container-based layout adaptation
+where panel width determines the layout; a desktop window can contain a narrow
+Lumino panel. Check light/dark contrast, non-color state cues and reduced motion.
+For example, 141 has an infinite collision pulse needing reduced-motion review.
 
-### Grid flood-fill and palindrome partition family: 130, 131, 132
+## Ordered work queue
 
-- 130 (Surrounded Regions): Border 'O' scan with DFS flood-fill escape ('E') marking, followed by full grid sweep
-  capturing enclosed 'O' -> 'X' and restoring 'E' -> 'O'. Interactive grid highlights perimeter escape routes.
-- 131 (Palindrome Partitioning): Backtracking cut generator evaluating candidate substrings against forward/reverse
-  symmetry, recording candidate branches, valid cuts, and building a dynamic partition gallery.
-- 132 (Palindrome Partitioning II): Center-expansion on odd and even palindrome axes, updating 1D DP minimum cut array
-  values across string prefixes with expanding wing annotations.
-- All 3 problems adopt `AlgorithmStoryWorkspace`, standard `StoryPanel`, and strict validation.
-- 31 unit tests across 130, 131, 132 (132 total visual story tests) pass. Focused lint and build pass.
+### Batch A: establish repeatable evidence
 
-### Tree path sum accumulation: 129
+1. Recheck HEAD and the worktree; preserve unrelated changes.
+2. Add a small production manifest payload reporter using Node built-ins.
+   Record raw, gzip and Brotli estimates, per-scenario unique asset lists and
+   request counts. Distinguish static estimates from browser requests.
+3. Capture homepage, cold 125, cold 132 and warm 125-to-132 baselines.
+   Save the revision, Node/Vite versions, build mode, compression settings and
+   result location. Use the same inputs/configuration for the candidate build.
+4. Fix the inventory's workspace detector, refresh it and reconcile the ledger.
+   The current script writes inventory and may append missing ledger entries;
+   it has no dry-run mode. Do not replace reviewed statuses with defaults.
 
-- 129 (Sum Root to Leaf Numbers): DFS path accumulation carrying `current_sum = current_sum * 10 + node.val` down each branch,
-  detecting leaf nodes, emitting leaf path evaluations, backtracking, and accumulating the global total sum.
-  Visualized with `binaryTreeLayout` / SVG pan-zoom viewport, dynamic node badges for running branch numbers and completed leaf values,
-  and a real-time path accumulator.
-- Adopts `AlgorithmStoryWorkspace`, `StoryPanel`, and strict digit validation (0-9, orphans, format).
-- 14 comprehensive unit tests pass. Focused lint and visual story tests pass.
+Done when the next batch can reproduce its measurements and use current inventory
+without mistaking mechanical flags for acceptance.
 
-### Longest streak and greedy candy distribution: 128, 135
+### Batch B: Problems 125 and 132 only
 
-- 128 (Longest Consecutive Sequence): Hash set O(n) scan identifying sequence roots (`num - 1 not in set`),
-  stepping forward through `curr + 1 in set`, and visualizing active streak exploration against the record champion run.
-- 135 (Candy): Two-pass greedy distribution (left-to-right pass awarding rightward slopes, right-to-left pass awarding
-  leftward slopes with `max()` retention), displaying candy piles/heights, slope arrows, and total candy accumulation.
-- Both adopt `AlgorithmStoryWorkspace`, `StoryPanel`, and strict input parsing.
-- 23 unit tests across 128 and 135 pass. Focused lint and build pass.
+1. Inspect both entire stories, CSS, algorithm fixtures and actual narrow panels.
+2. Isolate their local styles, including shared-looking generic class names.
+3. Extract the repeated character comparison card into one small JSX/CSS owner
+   (proposed name: `CharacterComparison`; check existing components first).
+   Share character/index labels, comparison operator and match/mismatch treatment.
+4. Keep 125's raw-to-clean mapping, inward pointers and mismatch result local.
+   Keep 132's center expansion, prefix DP and minimum-cut proof local.
+5. Verify both routes, both navigation orders and their algorithm results.
+   Compare cold and warm payloads with Batch A before claiming savings.
 
-### Graph BFS cloning and bit manipulation family: 133, 136, 137
+Done when cross-route styles are stable, meanings are preserved and the report
+states exact payload changes. A correctness fix can add bytes; report that
+separately from an optimization. Do not reduce teaching value to hit a number.
 
-- 133 (Clone Graph): Side-by-side original graph vs cloned graph with BFS queue inspection, cloning map
-  table (`original node -> cloned node`), dynamic edge recreation, and cycle handling.
-- 136 (Single Number): Real-time XOR accumulator tracking bit-by-bit cancellation ($a \oplus a = 0$), highlighting
-  matched identical pairs vanishing into 0 mod 2, and crowning the surviving unique number.
-- 137 (Single Number II): Finite state machine on bit frequencies modulo 3 ($00 \to 01 \to 10 \to 00$)
-  tracking `ones` and `twos` bitmasks across positive and negative integers to isolate the singleton.
-- All adopt `AlgorithmStoryWorkspace`, `StoryPanel`, and strict validation, removing legacy styling.
-- 27 unit tests across 133, 136, 137 (196 total visual story tests) pass. Focused lint and build pass.
+### Batch C: shell verification and remaining CSS collisions
 
-### Circular track and deficit balance: 134
+Verify the shared shell with a single-input story and multi-input 134.
+Check examples update every field, invalid input recovery, edits while playing,
+reset, seeking backward, code-line selection, pattern overlay and floating/docking.
+Inspect other known collision pairs in bounded batches:
+121/123, 128/138 and 131/141. Test A-to-B-to-A and the reverse order.
 
-- 134 (Gas Station): Circular track traversal evaluating fuel gain vs travel cost at each station.
-  Features a radial circular circuit with polar-positioned stations, animated car travel marker,
-  live proportional fuel gauge, and deficit detection explaining why previous candidate stations are eliminated.
-- Multi-input support for `gas` and `cost` arrays in `AlgorithmStoryWorkspace`.
-- 8 comprehensive unit tests pass (204 total visual story tests pass). Focused lint and build pass.
+Add a reusable browser check for shell behavior and navigation isolation where
+practical. No committed full story-browser acceptance suite was established by
+this audit. A production build or algorithm unit suite does not replace it.
 
+### Batch D: further reuse and loading work, chosen by measurements
 
+| Candidate | Share | Keep local |
+| --- | --- | --- |
+| Stocks 121–123 | Price coordinates, axes, viewport, common legend/metric framing | Best trade, harvested slopes and four-state DP overlays |
+| Cycles 141/142; assess 138 separately | Compatible node/edge/pointer presentation | Detection, entry proof and random-link copy stages |
+| Word Break 139/140 | Character/boundary and dictionary-match presentation | Boolean reachability versus sentence enumeration |
+| Bits 136/137 | Signed bit-row and label presentation | XOR cancellation versus modulo-three state transitions |
 
+Before extracting, read existing shared implementations and choose one owner.
+Do not add parallel new primitives that duplicate `PointerRail`, tree layouts
+or recurrence grids. Each batch should have one extraction and 2–3 consumers.
 
+For bandwidth beyond scene CSS, investigate measured contributors separately:
+
+- `CodeTracePanel.jsx` statically imports the Monaco React wrapper. Measure the
+  wrapper and actual editor/network loads; consider loading editing UI only when
+  opened while keeping ordinary code display immediate. Suspense alone does not
+  turn a static import into a lazy one.
+- `App.jsx` imports all chatbot CSS while the drawer is lazy. Separate required
+  launcher styling from drawer styling only after checking current consumers.
+- Catalog JSON, examples and solution registries can cost more than small scene
+  styles. Measure which pages load them; consider a compact index and route-local
+  details while preserving search/filter behavior.
+- Inspect the eager access/Firebase dependency chain only if measurements justify
+  it. Access checks and existing gates must remain correct.
+- `firebase.json` already configures immutable caching for hashed assets. Verify
+  served compression/cache headers before proposing hosting changes.
+
+Never combine all story CSS or disable CSS splitting just to reduce file count.
+Compare actual cold and warm costs, including request count and cache reuse.
+Keep the existing Rolldown vendor grouping unless evidence supports a change;
+raising the warning limit does not reduce payload.
+
+### Batch E: resume catalog coverage
+
+Clear acceptance gaps for implemented stories in small semantic families, then
+review pending entries. Use the ledger rather than assuming everything through
+142 is complete; 126/127, for example, were not in the latest story batch.
+
+Continue trees by operation, arrays/pointers, linked structures, DP by recurrence
+geometry, graphs/search, then remaining strings/tries/greedy/math/geometry.
+Inspect existing JSX and CSS before deciding whether a story needs rebuilding.
+A good existing visualization can pass review without replacement.
+
+## Acceptance and bandwidth gates
+
+For each changed problem, record evidence for all applicable items:
+
+- Algorithm output and trace agree with the displayed code. Test boundary,
+  duplicate, empty/no-solution and adversarial inputs where legal; use an
+  independent oracle or invariant instead of mirroring the implementation.
+- Frames preserve history when seeking backward. Identities, links and winning
+  witnesses are stable. No future-state leakage or invented operations.
+- Document supported visualization limits. Test the largest supported full trace,
+  memory and responsiveness; a 10,000-node layout test alone proves neither.
+  Use compact events, paging or checkpoints when repeated snapshots grow too much.
+- Examples, editable input, errors, play/pause, speed, next/previous, reset,
+  code links, pattern overlay and docked/floating playback work.
+- Real route and access-gate behavior, desktop and 320–400px panel widths,
+  both themes, keyboard/focus and reduced motion are checked.
+  An isolated scene page supplements the route check.
+- Changed CSS does not leak across routes; repeat relevant navigation sequences.
+- Report source deltas and production JS/CSS asset estimates separately.
+  Compare app entry, cold affected routes, a warm related route and an unrelated
+  route. Count shared dependencies once per scenario and include shared CSS.
+- For an optimization-only batch, aim for unchanged/lower app-entry cost and a
+  measured reduction in the targeted scenario; explicitly explain any cold-route
+  increase exchanged for warm-route savings. Use actual baselines before setting
+  numeric budgets. Richer story features need an explicit byte-cost explanation.
+- Confirm HTTP `Content-Encoding`, transferred bytes and cache behavior against
+  a production-like server or deployed site before claiming real bandwidth savings.
+  Include JSON/fonts/images/editor resources. Do not sum decoded size as network
+  transfer; zero timing size can also mean cross-origin timing restrictions.
+  [Reference: Resource Timing](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming/transferSize).
+
+The CSS duplication audit finds exact declaration blocks of at least 80 characters
+in at least three files. It misses two-consumer and near-duplicate opportunities.
+Review the cascade before merging candidates. Do not remove CSS merely because a
+text search failed to find dynamically built class names.
+
+## Playground stays a separate capability
+
+Track story quality, launch support, execution-to-story adapter support and
+arbitrary-edit support separately. A story may be verified while its playground
+adapter is unimplemented; record that limitation explicitly.
+
+Preserve the Climbing Stairs pilot: separate persistent workspace, original draft
+preserved, explicit handoff confirmation, real executed trace, exact-source
+compatibility and n = 1–45. Retain links back to the source problem and original
+draft, plus the existing sign-in and usage gates. Changed/unsupported code uses truthful general
+execution visuals. AI changes still wait for acceptance/rejection.
+Do not infer adapter support from the presence of a new `algorithm.js` or story.
+Keep 111/112's recorded verification and 70's pilot status as historical ledger
+evidence unless new checks establish a reason to change them.
+
+## Commands and reproducible records
+
+Run from `C:\Users\abd\d\vid\visualizer`. In this PowerShell environment use
+`npm.cmd` / `npx.cmd`; `npm.ps1` is blocked by the local execution policy.
+
+```powershell
+git status --short
+git log -3 --oneline
+npm.cmd run test:visual-stories
+node scripts/audit-css-duplication.mjs --json
+npm.cmd run build -- --manifest
+npm.cmd run preview -- --host 127.0.0.1 --port 4173
+```
+
+Run focused ESLint on actual changed JS/JSX files with `npx.cmd eslint <files>`.
+After correcting its detector, refresh with
+`node scripts/inventory-visual-stories.mjs` and inspect the resulting JSON diff.
+Use the same production mode for both size builds; if evaluating Firebase
+deployment, use `npm.cmd run build:firebase -- --manifest` for both.
+Vite emits the manifest at `dist/.vite/manifest.json`.
+[Reference: build manifest](https://vite.dev/config/build-options#build-manifest).
+
+Only when the relevant playground contracts change, also run
+`npm.cmd run test:problem-playground`, `npm.cmd run test:playground-python` and
+`npm.cmd run test:webmcp`. Run the checks appropriate to the batch once the final
+code is ready; repeat when a change or failure warrants it.
+
+For every completed batch, record:
+
+```text
+Baseline / candidate revision or working-tree patch:
+Consumers and shared files:
+Story distinctions preserved:
+Algorithm / lint / browser checks and exact outcomes:
+Build mode, payload report path, cold and warm deltas:
+Unverified items and why:
+Ledger changes:
+Next bounded task and exact starting command:
+```
+
+## Resume checkpoint for Claude
+
+- Completed here: last-three-commit review, source and production static-payload
+  comparison, current story tests, CSS duplication audit, and this plan update.
+- Application code and progress statuses were not changed by this review.
+- Next: Batch A, then the 125/132 comparison component and CSS isolation.
+- Known remaining work: browser acceptance, deployed transfer measurements,
+  stale inventory/detector, other CSS collision pairs and verification backlog.
+- Do not restart completed stories solely because an older checkpoint said
+  “next 109” or “120 not edited.”
+
+Work in 1–3-problem batches with one shared owner. If delegating, assign disjoint
+files and let one integrator own shared components, package scripts and ledgers.
+Update this checkpoint after each completed batch and before stopping; include
+partial files and unrun checks if interrupted. Do not launch a large catalog
+rewrite merely to finish before a rate limit. Leave a small reviewable diff and
+an exact next action so another model can continue without reconstructing chat.
+
+Suggested handoff prompt:
+
+> Read docs/visual-story-plan.md and the current git diff. Continue from the
+> resume checkpoint. Preserve problem-specific stories, Lumino layouts and
+> floating playback. Start with reproducible size evidence and the 125/132 CSS
+> isolation/comparison-card batch; measure before claiming bandwidth savings.
+> Update the checkpoint and relevant progress evidence after each bounded batch.
