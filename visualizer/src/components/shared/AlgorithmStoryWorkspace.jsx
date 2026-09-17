@@ -1,4 +1,4 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom'
 import CodeTracePanel from "../CodeTracePanel";
 import PlaybackControls from "../PlaybackControls";
@@ -15,11 +15,24 @@ import LuminoDockPanel from '../LuminoDockPanel'
 // The shell owns inputs, docking and playback; each definition owns its algorithm and scene.
 export default function AlgorithmStoryWorkspace({ definition }) {
   const {code:SOLUTION_CODE,linePatterns:LINE_PATTERN_MAP,patterns:PATTERNS,examples:EXAMPLES}=definition;
-  const [arrInput, setArrInput] = useState(definition.initialInput);
+  const isMultiField = Boolean(definition.fields && definition.fields.length > 0);
+  const [inputValues, setInputValues] = useState(() => {
+    if (isMultiField) {
+      return definition.initialValues || {};
+    }
+    return { arr: definition.initialInput };
+  });
+  const [activeLabel, setActiveLabel] = useState(EXAMPLES?.[0]?.label);
+
   const {story,inputError} = useMemo(()=>{
-    try {return {story:definition.build(arrInput),inputError:''};}
+    try {
+      const storyResult = isMultiField
+        ? definition.build(inputValues)
+        : definition.build(inputValues.arr);
+      return {story: storyResult, inputError:''};
+    }
     catch(error){return {story:null,inputError:error.message};}
-  },[arrInput,definition]);
+  },[inputValues,definition,isMultiField]);
   const steps = story?.frames ?? [];
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length)
@@ -28,14 +41,27 @@ export default function AlgorithmStoryWorkspace({ definition }) {
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const applyExample = useCallback((ex) => {
-    setArrInput(ex.input)
+    setActiveLabel(ex.label);
+    if (isMultiField) {
+      setInputValues(ex.values || ex.input || ex);
+    } else {
+      setInputValues({ arr: ex.input });
+    }
     handleReset()
-  }, [handleReset])
+  }, [handleReset, isMultiField])
+
+  const fields = isMultiField
+    ? definition.fields
+    : [{key:'arr',label:definition.inputLabel,type:definition.inputType ?? 'string'}];
 
   const primaryPanel = <>
-    <ManualInputPanel fields={[{key:'arr',label:definition.inputLabel,type:definition.inputType ?? 'string'}]}
-      values={{arr:arrInput}} onChange={(key,value)=>{setArrInput(value);handleReset();}}
-      examples={EXAMPLES} applyExample={applyExample} inputError={inputError}/>
+    <ManualInputPanel fields={fields}
+      values={inputValues} onChange={(key,value)=>{
+        setActiveLabel('');
+        setInputValues(prev => ({ ...prev, [key]: value }));
+        handleReset();
+      }}
+      examples={EXAMPLES} activeLabel={activeLabel} applyExample={applyExample} inputError={inputError}/>
     {story && definition.renderStory({story,step:story.frames[Math.max(0,stepIndex)],stepIndex})}
   </>;
 

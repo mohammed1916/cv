@@ -1,0 +1,445 @@
+.palindrome-story {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  color: var(--text, #f8fafc);
+}
+
+.palindrome-story__explanation {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-muted, #94a3b8);
+}
+
+/* Comparison Hero Card */
+.palindrome-story__comparison {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 16px 20px;
+  border-radius: 8px;
+  background: var(--surface2, #1e293b);
+  border: 1.5px solid var(--border, #334155);
+  transition: all 0.2s ease;
+}
+
+.palindrome-story__comparison.is-match {
+  border-color: var(--success, #10b981);
+  background: color-mix(in srgb, var(--success, #10b981) 12%, var(--surface2, #1e293b));
+  box-shadow: 0 0 12px color-mix(in srgb, var(--success, #10b981) 25%, transparent);
+}
+
+.palindrome-story__comparison.is-mismatch {
+  border-color: var(--error, #ef4444);
+  background: color-mix(in srgb, var(--error, #ef4444) 14%, var(--surface2, #1e293b));
+  box-shadow: 0 0 12px color-mix(in srgb, var(--error, #ef4444) 25%, transparent);
+}
+
+.palindrome-story__comparison-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 90px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  background: var(--surface, #0f172a);
+  border: 1px solid var(--border, #334155);
+}
+
+.comparison-index {
+  font-size: 11px;
+  font-family: ui-monospace, monospace;
+  font-weight: 700;
+  color: var(--text-muted, #94a3b8);
+}
+
+.comparison-char {
+  font-size: 24px;
+  font-weight: 800;
+  font-family: ui-monospace, monospace;
+  color: var(--text, #f8fafc);
+}
+
+.comparison-tag {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--info, #38bdf8);
+}
+
+.palindrome-story__comparison-card.right .comparison-tag {
+  color: var(--warning, #f59e0b);
+}
+
+.palindrome-story__comparison-operator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.operator-symbol {
+  font-size: 26px;
+  font-weight: 900;
+  font-family: ui-monospace, monospace;
+  color: var(--text, #f8fafc);
+}
+
+.operator-badge {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.badge-match {
+  background: color-mix(in srgb, var(--success, #10b981) 25%, var(--surface, #0f172a));
+  color: var(--success, #10b981);
+  border: 1px solid var(--success, #10b981);
+}
+
+.badge-mismatch {
+  background: color-mix(in srgb, var(--error, #ef4444) 25%, var(--surface, #0f172a));
+  color: var(--error, #ef4444);
+  border: 1px solid var(--error, #ef4444);
+}
+
+/* Result Badge */
+.palindrome-story__result-badge {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border, #334155);
+}
+
+.palindrome-story__result-badge.is-valid {
+  background: color-mix(in srgb, var(--success, #10b981) 15%, var(--surface2, #1e293b));
+  border-color: var(--success, #10b981);
+}
+
+.palindrome-story__result-badge.is-invalid {
+  background: color-mix(in srgb, var(--error, #ef4444) 15%, var(--surface2, #1e293b));
+  border-color: var(--error, #ef4444);
+}
+
+.result-badge__icon {
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.palindrome-story__result-badge.is-valid .result-badge__icon {
+  color: var(--success, #10b981);
+}
+
+.palindrome-story__result-badge.is-invalid .result-badge__icon {
+  color: var(--error, #ef4444);
+}
+
+.result-badge__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.result-badge__title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text, #f8fafc);
+}
+
+.result-badge__desc {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-muted, #94a3b8);
+}
+
+/* PointerRail Container */
+.palindrome-story__rail-container {
+  overflow-x: auto;
+}
+
+/* Character Cells Grid */
+.palindrome-story__cells-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 8px;
+  background: var(--surface2, #1e293b);
+  border: 1px solid var(--border, #334155);
+}
+
+.palindrome-story__cells-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.cells-legend {
+  display: flex;
+  gap: 12px;
+  font-size: 11px;
+  color: var(--text-muted, #94a3b8);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.legend-matched .legend-dot {
+  background: var(--success, #10b981);
+}
+
+.legend-comparing .legend-dot {
+  background: var(--primary, #6366f1);
+}
+
+.legend-mismatch .legend-dot {
+  background: var(--error, #ef4444);
+}
+
+.palindrome-story__cells-track {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 18px 4px 6px 4px;
+}
+
+.palindrome-story__cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+  height: 48px;
+  padding: 4px;
+  border-radius: 6px;
+  background: var(--surface, #0f172a);
+  border: 1.5px solid var(--border, #334155);
+  transition: all 0.15s ease;
+}
+
+.cell-char {
+  font-size: 16px;
+  font-weight: 700;
+  font-family: ui-monospace, monospace;
+  color: var(--text, #f8fafc);
+}
+
+.cell-idx {
+  font-size: 9px;
+  color: var(--text-muted, #94a3b8);
+  font-family: ui-monospace, monospace;
+}
+
+.cell-badges {
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 2px;
+}
+
+.cell-badge {
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.cell-badge.badge-l {
+  background: var(--info, #38bdf8);
+  color: #0f172a;
+}
+
+.cell-badge.badge-r {
+  background: var(--warning, #f59e0b);
+  color: #0f172a;
+}
+
+.palindrome-story__cell.cell-match {
+  border-color: var(--success, #10b981);
+  background: color-mix(in srgb, var(--success, #10b981) 22%, var(--surface, #0f172a));
+  box-shadow: 0 0 8px color-mix(in srgb, var(--success, #10b981) 35%, transparent);
+}
+
+.palindrome-story__cell.cell-mismatch {
+  border-color: var(--error, #ef4444);
+  background: color-mix(in srgb, var(--error, #ef4444) 22%, var(--surface, #0f172a));
+  box-shadow: 0 0 8px color-mix(in srgb, var(--error, #ef4444) 35%, transparent);
+}
+
+.palindrome-story__cell.cell-comparing {
+  border-color: var(--primary, #6366f1);
+  background: color-mix(in srgb, var(--primary, #6366f1) 18%, var(--surface, #0f172a));
+}
+
+.palindrome-story__cell.cell-matched {
+  border-color: color-mix(in srgb, var(--success, #10b981) 45%, var(--border, #334155));
+  background: color-mix(in srgb, var(--success, #10b981) 10%, var(--surface, #0f172a));
+}
+
+.palindrome-story__cell.cell-outside {
+  opacity: 0.45;
+}
+
+/* Step 1 Mapping Inspector */
+.palindrome-story__mapping-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 8px;
+  background: var(--surface2, #1e293b);
+  border: 1px solid var(--border, #334155);
+}
+
+.mapping-section__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.mapping-subtext {
+  margin-left: 8px;
+  color: var(--text-muted, #94a3b8);
+  font-size: 11px;
+}
+
+.mapping-toggle-btn {
+  background: var(--surface, #0f172a);
+  border: 1px solid var(--border, #334155);
+  color: var(--text, #f8fafc);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.mapping-toggle-btn:hover {
+  background: color-mix(in srgb, var(--primary, #6366f1) 15%, var(--surface, #0f172a));
+  border-color: var(--primary, #6366f1);
+}
+
+.palindrome-story__raw-preview {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding: 6px 2px;
+}
+
+.raw-char-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 38px;
+  padding: 2px;
+  border-radius: 4px;
+  font-family: ui-monospace, monospace;
+}
+
+.raw-char-chip.is-kept {
+  background: color-mix(in srgb, var(--primary, #6366f1) 16%, var(--surface, #0f172a));
+  border: 1px solid color-mix(in srgb, var(--primary, #6366f1) 50%, var(--border, #334155));
+  color: var(--text, #f8fafc);
+}
+
+.raw-char-chip.is-filtered {
+  background: var(--surface, #0f172a);
+  border: 1px dashed var(--border, #334155);
+  opacity: 0.45;
+}
+
+.rc-char {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.rc-clean-idx {
+  font-size: 9px;
+  color: var(--text-muted, #94a3b8);
+}
+
+.raw-char-chip.is-kept .rc-clean-idx {
+  color: var(--primary, #6366f1);
+  font-weight: 700;
+}
+
+/* Mapping Table */
+.palindrome-story__mapping-table-wrapper {
+  max-height: 220px;
+  overflow-y: auto;
+  border: 1px solid var(--border, #334155);
+  border-radius: 6px;
+}
+
+.palindrome-story__mapping-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+  text-align: left;
+}
+
+.palindrome-story__mapping-table th,
+.palindrome-story__mapping-table td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border, #334155);
+}
+
+.palindrome-story__mapping-table th {
+  background: var(--surface, #0f172a);
+  color: var(--text-muted, #94a3b8);
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.palindrome-story__mapping-table tr.tr-filtered {
+  opacity: 0.5;
+}
+
+.tag-kept {
+  display: inline-block;
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--success, #10b981) 20%, transparent);
+  color: var(--success, #10b981);
+  font-weight: 600;
+}
+
+.tag-skipped {
+  display: inline-block;
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--text-muted, #94a3b8) 15%, transparent);
+  color: var(--text-muted, #94a3b8);
+}

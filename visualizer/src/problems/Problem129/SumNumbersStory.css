@@ -1,0 +1,416 @@
+/* SumNumbersStory.css - Visual story styles for Problem 129 */
+
+.srln-story-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.srln-empty-notice {
+  color: var(--text-muted, #94a3b8);
+  font-style: italic;
+  padding: 16px 0;
+}
+
+/* ── Metrics Grid ── */
+.srln-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+
+.srln-metric-card {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--surface2, #1e293b);
+  border: 1px solid var(--border, #334155);
+}
+
+.srln-metric-total {
+  background: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+.srln-metric-current {
+  background: rgba(139, 92, 246, 0.08);
+  border-color: rgba(139, 92, 246, 0.35);
+}
+
+.srln-metric-path {
+  grid-column: span 1;
+}
+
+.srln-metric-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted, #94a3b8);
+  font-weight: 600;
+}
+
+.srln-metric-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: #10b981;
+  font-family: monospace;
+}
+
+.srln-value-current {
+  color: #a78bfa;
+}
+
+.srln-metric-sub {
+  font-size: 11px;
+  color: var(--text-muted, #94a3b8);
+  font-family: monospace;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Path Breadcrumbs */
+.srln-path-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  padding-top: 2px;
+}
+
+.srln-crumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.srln-crumb-digit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  background: rgba(139, 92, 246, 0.25);
+  border: 1px solid #8b5cf6;
+  color: #ddd6fe;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.srln-arrow {
+  color: var(--text-muted, #64748b);
+  font-size: 11px;
+}
+
+.srln-crumb-equal {
+  color: var(--text-muted, #64748b);
+  font-size: 12px;
+  margin-left: 2px;
+}
+
+.srln-crumb-result {
+  font-size: 14px;
+  color: #a78bfa;
+  font-family: monospace;
+}
+
+/* ── Phase Tags ── */
+.srln-phase-tag {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.srln-phase-init {
+  background: rgba(148, 163, 184, 0.2);
+  color: var(--text-muted, #94a3b8);
+}
+
+.srln-phase-compute {
+  background: rgba(139, 92, 246, 0.2);
+  color: #a78bfa;
+}
+
+.srln-phase-leaf {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+}
+
+.srln-phase-recurse-left,
+.srln-phase-recurse-right {
+  background: rgba(59, 130, 246, 0.2);
+  color: #60a5fa;
+}
+
+.srln-phase-combine {
+  background: rgba(236, 72, 153, 0.2);
+  color: #f472b6;
+}
+
+.srln-phase-null {
+  background: rgba(100, 116, 139, 0.2);
+  color: #94a3b8;
+}
+
+.srln-phase-done {
+  background: rgba(16, 185, 129, 0.25);
+  color: #34d399;
+}
+
+/* ── SVG Canvas ── */
+.srln-canvas-wrapper {
+  background: var(--surface1, #0f172a);
+  border: 1px solid var(--border, #334155);
+  border-radius: 8px;
+  overflow: hidden;
+  min-height: 280px;
+}
+
+/* ── Tree Edges ── */
+.srln-edge {
+  stroke: var(--border, #475569);
+  stroke-width: 2px;
+  stroke-linecap: round;
+  transition: stroke 0.2s ease, stroke-width 0.2s ease;
+}
+
+.srln-edge-active {
+  stroke: #8b5cf6;
+  stroke-width: 3.5px;
+}
+
+.srln-edge-completed {
+  stroke: rgba(16, 185, 129, 0.6);
+  stroke-width: 2.5px;
+  stroke-dasharray: 4 2;
+}
+
+/* ── Tree Nodes ── */
+.srln-node {
+  cursor: default;
+  transition: transform 0.2s ease;
+}
+
+.srln-node-circle {
+  fill: var(--surface2, #1e293b);
+  stroke: var(--border, #64748b);
+  stroke-width: 2px;
+  transition: all 0.2s ease;
+}
+
+.srln-node-val {
+  fill: var(--text, #f8fafc);
+  font-size: 14px;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.srln-node-id {
+  fill: var(--text-muted, #94a3b8);
+  font-size: 10px;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+/* Node States */
+.srln-node-active .srln-node-circle {
+  stroke: #f59e0b;
+  stroke-width: 3.5px;
+  fill: rgba(245, 158, 11, 0.15);
+  filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.45));
+}
+
+.srln-node-on-path .srln-node-circle {
+  stroke: #8b5cf6;
+  stroke-width: 3px;
+  fill: rgba(139, 92, 246, 0.15);
+}
+
+.srln-node-leaf .srln-node-circle {
+  stroke: #10b981;
+  stroke-width: 3px;
+  fill: rgba(16, 185, 129, 0.2);
+}
+
+/* Leaf Pill */
+.srln-leaf-pill {
+  fill: rgba(16, 185, 129, 0.2);
+  stroke: #10b981;
+  stroke-width: 1px;
+}
+
+.srln-leaf-pill-text {
+  fill: #34d399;
+  font-size: 9.5px;
+  font-weight: 700;
+  font-family: monospace;
+}
+
+/* Active Running Number Pill */
+.srln-active-pill {
+  fill: rgba(245, 158, 11, 0.2);
+  stroke: #f59e0b;
+  stroke-width: 1px;
+}
+
+.srln-active-pill-text {
+  fill: #fbbf24;
+  font-size: 9.5px;
+  font-weight: 700;
+  font-family: monospace;
+}
+
+/* ── Footer Info & Completed Paths ── */
+.srln-footer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.srln-winner-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #10b981;
+  font-size: 13px;
+}
+
+.srln-trophy {
+  font-size: 16px;
+  color: #f59e0b;
+}
+
+.srln-current-calc-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: var(--surface2, #1e293b);
+  border: 1px solid var(--border, #334155);
+  font-size: 12px;
+}
+
+.srln-calc-label {
+  font-weight: 600;
+  color: #a78bfa;
+}
+
+.srln-calc-text {
+  color: var(--text, #f1f5f9);
+}
+
+.srln-completed-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--surface2, #1e293b);
+  border: 1px solid var(--border, #334155);
+}
+
+.srln-completed-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted, #94a3b8);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.srln-running-acc {
+  color: #10b981;
+  text-transform: none;
+}
+
+.srln-running-acc strong {
+  font-size: 13px;
+  font-family: monospace;
+}
+
+.srln-paths-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.srln-path-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  font-size: 12px;
+}
+
+.srln-path-num {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted, #94a3b8);
+}
+
+.srln-path-flow {
+  color: var(--text, #f1f5f9);
+  font-family: monospace;
+}
+
+.srln-path-val {
+  color: #34d399;
+  font-weight: 700;
+  font-family: monospace;
+}
+
+.srln-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-top: 4px;
+  font-size: 11px;
+  color: var(--text-muted, #94a3b8);
+}
+
+.srln-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.srln-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.srln-dot-active {
+  background: #f59e0b;
+}
+
+.srln-dot-path {
+  background: #8b5cf6;
+}
+
+.srln-dot-leaf {
+  background: #10b981;
+}
+
+.srln-dot-completed {
+  background: rgba(16, 185, 129, 0.6);
+  border: 1px dashed #10b981;
+}

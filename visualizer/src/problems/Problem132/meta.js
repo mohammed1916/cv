@@ -4,6 +4,6 @@ export const meta = {
   slug: "palindrome-partitioning-ii",
   difficulty: "Hard",
   tags: ["String", "DP"],
-  description: "DP with a palindrome check table: minCuts[i] = 1 + min over all palindrome suffixes ending at i.",
+  description: "DP with center expansion: expand odd and even palindromes around centers to compute min cuts for all prefixes.",
   accent: "#ef4444",
-}
+};

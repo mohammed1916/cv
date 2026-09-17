@@ -350,3 +350,69 @@ Reuse the layout helper where compatible; keep construction state local.
 - 5 algorithm tests cover strict input validation, empty/single-element triangles, standard example paths,
   negative values, zeros, and ties. All 49 visual-story tests pass. Focused lint passes.
 
+### Stock trading trilogy, tree path sum, and palindrome: 121, 122, 123, 124, 125
+
+- 121 (Best Time to Buy and Sell Stock): Traces running `minPrice`, calculates prospective profit at each step,
+  and highlights optimal buy and sell day transaction arcs over an interactive price bar chart.
+- 122 (Best Time to Buy and Sell Stock II): Accumulates greedy valley-to-peak upward slopes, visualizes positive
+  price jumps on adjacent days, and shows a running profit accumulation meter.
+- 123 (Best Time to Buy and Sell Stock III): Traces the 4-state DP transition machine ($b_1, s_1, b_2, s_2$)
+  explaining the financial invariant at each day with an SVG price curve and DP state cards.
+- 124 (Binary Tree Maximum Path Sum): Post-order DFS computing subtree gains returned upward vs. full turnaround
+  apex paths, rendering tree nodes via `binaryTreeLayout` and highlighting the optimal path witness.
+- 125 (Valid Palindrome): Two-pointer inward sweep on normalized alphanumeric strings, featuring a character comparison
+  hero card with green match / red mismatch indicators, PointerRail tracks, and raw-to-clean position mapping.
+- All 5 problems adopt `AlgorithmStoryWorkspace`, standard `StoryPanel`, and strict validation, removing obsolete CSS.
+- 52 comprehensive unit tests across these 5 problems (101 total visual story tests) pass. Focused lint and build pass.
+
+### Grid flood-fill and palindrome partition family: 130, 131, 132
+
+- 130 (Surrounded Regions): Border 'O' scan with DFS flood-fill escape ('E') marking, followed by full grid sweep
+  capturing enclosed 'O' -> 'X' and restoring 'E' -> 'O'. Interactive grid highlights perimeter escape routes.
+- 131 (Palindrome Partitioning): Backtracking cut generator evaluating candidate substrings against forward/reverse
+  symmetry, recording candidate branches, valid cuts, and building a dynamic partition gallery.
+- 132 (Palindrome Partitioning II): Center-expansion on odd and even palindrome axes, updating 1D DP minimum cut array
+  values across string prefixes with expanding wing annotations.
+- All 3 problems adopt `AlgorithmStoryWorkspace`, standard `StoryPanel`, and strict validation.
+- 31 unit tests across 130, 131, 132 (132 total visual story tests) pass. Focused lint and build pass.
+
+### Tree path sum accumulation: 129
+
+- 129 (Sum Root to Leaf Numbers): DFS path accumulation carrying `current_sum = current_sum * 10 + node.val` down each branch,
+  detecting leaf nodes, emitting leaf path evaluations, backtracking, and accumulating the global total sum.
+  Visualized with `binaryTreeLayout` / SVG pan-zoom viewport, dynamic node badges for running branch numbers and completed leaf values,
+  and a real-time path accumulator.
+- Adopts `AlgorithmStoryWorkspace`, `StoryPanel`, and strict digit validation (0-9, orphans, format).
+- 14 comprehensive unit tests pass. Focused lint and visual story tests pass.
+
+### Longest streak and greedy candy distribution: 128, 135
+
+- 128 (Longest Consecutive Sequence): Hash set O(n) scan identifying sequence roots (`num - 1 not in set`),
+  stepping forward through `curr + 1 in set`, and visualizing active streak exploration against the record champion run.
+- 135 (Candy): Two-pass greedy distribution (left-to-right pass awarding rightward slopes, right-to-left pass awarding
+  leftward slopes with `max()` retention), displaying candy piles/heights, slope arrows, and total candy accumulation.
+- Both adopt `AlgorithmStoryWorkspace`, `StoryPanel`, and strict input parsing.
+- 23 unit tests across 128 and 135 pass. Focused lint and build pass.
+
+### Graph BFS cloning and bit manipulation family: 133, 136, 137
+
+- 133 (Clone Graph): Side-by-side original graph vs cloned graph with BFS queue inspection, cloning map
+  table (`original node -> cloned node`), dynamic edge recreation, and cycle handling.
+- 136 (Single Number): Real-time XOR accumulator tracking bit-by-bit cancellation ($a \oplus a = 0$), highlighting
+  matched identical pairs vanishing into 0 mod 2, and crowning the surviving unique number.
+- 137 (Single Number II): Finite state machine on bit frequencies modulo 3 ($00 \to 01 \to 10 \to 00$)
+  tracking `ones` and `twos` bitmasks across positive and negative integers to isolate the singleton.
+- All adopt `AlgorithmStoryWorkspace`, `StoryPanel`, and strict validation, removing legacy styling.
+- 27 unit tests across 133, 136, 137 (196 total visual story tests) pass. Focused lint and build pass.
+
+### Circular track and deficit balance: 134
+
+- 134 (Gas Station): Circular track traversal evaluating fuel gain vs travel cost at each station.
+  Features a radial circular circuit with polar-positioned stations, animated car travel marker,
+  live proportional fuel gauge, and deficit detection explaining why previous candidate stations are eliminated.
+- Multi-input support for `gas` and `cost` arrays in `AlgorithmStoryWorkspace`.
+- 8 comprehensive unit tests pass (204 total visual story tests pass). Focused lint and build pass.
+
+
+
+

@@ -1,0 +1,405 @@
+.cycle-story {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  background: var(--surface, #0f172a);
+  color: var(--text, #f8fafc);
+  font-family: inherit;
+}
+
+.cycle-story__empty-msg {
+  color: var(--text-muted, #94a3b8);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.cycle-story__explanation {
+  margin: 0;
+  padding: 12px 16px;
+  background: var(--surface2, #1e293b);
+  border-left: 4px solid var(--primary, #3b82f6);
+  border-radius: 6px;
+  color: var(--text, #f8fafc);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ── Metrics and Floyd Pointer Status Bar ── */
+.cycle-story__metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+}
+
+.cycle-story__metric-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  background: var(--surface2, #1e293b);
+  border: 1px solid var(--border, #334155);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.cycle-story__metric-card.active {
+  border-color: var(--border-bright, #475569);
+}
+
+.slow-card.active {
+  border-color: rgba(34, 197, 94, 0.4);
+  background: rgba(34, 197, 94, 0.05);
+}
+
+.fast-card.active {
+  border-color: rgba(56, 189, 248, 0.4);
+  background: rgba(56, 189, 248, 0.05);
+}
+
+.gap-card.collision {
+  border-color: var(--error, #ef4444);
+  background: rgba(239, 68, 68, 0.1);
+  animation: pulse-collision 1.5s infinite;
+}
+
+@keyframes pulse-collision {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(239, 68, 68, 0);
+  }
+}
+
+.metric-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted, #94a3b8);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metric-speed {
+  margin-left: auto;
+  font-size: 10px;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--surface3, #334155);
+  color: var(--text, #f8fafc);
+}
+
+.metric-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text, #f8fafc);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.metric-val-tag {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-dim, #64748b);
+  background: var(--surface3, #334155);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.metric-unit {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted, #94a3b8);
+}
+
+.metric-null {
+  color: var(--text-dim, #64748b);
+  font-style: italic;
+  font-size: 13px;
+}
+
+.collision-text {
+  color: var(--error, #ef4444);
+  font-size: 13px;
+}
+
+.metric-sub {
+  font-size: 11px;
+  color: var(--text-muted, #94a3b8);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.metric-phase-badge {
+  font-family: monospace;
+  font-size: 11px;
+  padding: 1px 4px;
+  border-radius: 3px;
+  background: var(--surface3, #334155);
+  color: var(--primary, #38bdf8);
+}
+
+/* ── Linked List Visual Diagram ── */
+.cycle-story__diagram-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--surface2, #1e293b);
+  border: 1px solid var(--border, #334155);
+  border-radius: 10px;
+  padding: 14px;
+  overflow: hidden;
+}
+
+.cycle-story__diagram-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.diagram-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text, #f8fafc);
+}
+
+.cycle-badge {
+  font-size: 11px;
+  font-weight: 600;
+  color: #c084fc;
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.acyclic-badge {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted, #94a3b8);
+  background: var(--surface3, #334155);
+  border: 1px solid var(--border, #475569);
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.cycle-story__empty-chain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 28px;
+  font-size: 18px;
+  font-family: monospace;
+  color: var(--text-muted, #94a3b8);
+}
+
+.empty-head {
+  font-weight: 700;
+  color: var(--primary, #38bdf8);
+}
+
+.empty-arrow {
+  color: var(--text-dim, #64748b);
+}
+
+.empty-null {
+  font-style: italic;
+  color: var(--text-dim, #64748b);
+  border: 1px dashed var(--border, #475569);
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.cycle-story__svg-viewport {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 10px 0;
+}
+
+.cycle-story__svg {
+  display: block;
+  width: 100%;
+  min-width: 540px;
+  height: auto;
+}
+
+/* ── SVG Node Styling ── */
+.cycle-story__node-circle {
+  fill: var(--surface3, #334155);
+  stroke: var(--border, #475569);
+  stroke-width: 2.5;
+  transition: all 0.25s ease;
+}
+
+.cycle-story__node-circle.is-slow {
+  stroke: var(--success, #22c55e);
+  fill: rgba(34, 197, 94, 0.15);
+}
+
+.cycle-story__node-circle.is-fast {
+  stroke: var(--info, #38bdf8);
+  fill: rgba(56, 189, 248, 0.15);
+}
+
+.cycle-story__node-circle.is-both {
+  stroke: var(--warning, #f59e0b);
+  fill: rgba(245, 158, 11, 0.2);
+}
+
+.cycle-story__node-circle.is-meeting {
+  stroke: var(--error, #ef4444);
+  fill: rgba(239, 68, 68, 0.25);
+  filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.6));
+}
+
+.cycle-story__node-circle.is-cycle-entry {
+  stroke: #a855f7;
+}
+
+.cycle-story__node-val {
+  font-size: 15px;
+  font-weight: 700;
+  font-family: monospace;
+  fill: var(--text, #f8fafc);
+  pointer-events: none;
+}
+
+.cycle-story__node-idx {
+  font-size: 10px;
+  font-family: monospace;
+  fill: var(--text-dim, #64748b);
+  pointer-events: none;
+}
+
+.cycle-story__head-badge {
+  font-size: 9px;
+  font-weight: 700;
+  fill: var(--primary, #38bdf8);
+}
+
+.cycle-story__pos-badge {
+  font-size: 9px;
+  font-weight: 700;
+  fill: #c084fc;
+}
+
+.cycle-entry-halo {
+  animation: rotate-halo 4s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes rotate-halo {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 24;
+  }
+}
+
+.meeting-pulse-halo {
+  animation: halo-pulse 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes halo-pulse {
+  from {
+    opacity: 0.4;
+    stroke-width: 2;
+  }
+  to {
+    opacity: 1;
+    stroke-width: 5;
+  }
+}
+
+/* ── Floyd's Insight Card ── */
+.cycle-story__proof-card {
+  padding: 12px 16px;
+  background: var(--surface2, #1e293b);
+  border: 1px solid var(--border, #334155);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.proof-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.proof-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text, #f8fafc);
+}
+
+.proof-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.proof-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-muted, #94a3b8);
+  line-height: 1.5;
+}
+
+.proof-item strong {
+  color: var(--text, #f8fafc);
+  font-size: 12px;
+}
+
+/* ── Result Status Banner ── */
+.cycle-story__result {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 8px;
+  margin-top: 4px;
+}
+
+.cycle-story__result.is-cycle {
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  color: var(--success, #22c55e);
+}
+
+.cycle-story__result.is-no-cycle {
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: var(--info, #38bdf8);
+}
+
+.result-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.result-text h4 {
+  margin: 0 0 4px;
+  font-size: 14px;
+  font-weight: 700;
+  color: inherit;
+}
+
+.result-text p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-muted, #94a3b8);
+}

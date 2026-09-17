@@ -1,0 +1,488 @@
+/* SingleNumber2Story.css - Accessible, themed styling for Single Number II visualizer */
+
+.sn2-story {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  color: var(--text);
+}
+
+.sn2-story__intro,
+.sn2-story__explanation {
+  font-size: 0.925rem;
+  line-height: 1.5;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.sn2-section-title {
+  font-size: 0.825rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+/* ── Hero / Status Section ── */
+.sn2-hero {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sn2-hero--done {
+  background: var(--surface);
+  border: 2px solid var(--success);
+  box-shadow: 0 4px 16px var(--success-glow);
+}
+
+.sn2-hero__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sn2-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.sn2-hero--done .sn2-hero__badge {
+  background: var(--success);
+}
+
+.sn2-hero__num {
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.sn2-hero__bin {
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.sn2-hero__val {
+  font-size: 1.35rem;
+  color: var(--success);
+  margin-top: 0.25rem;
+}
+
+.sn2-hero__sub {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-family: monospace;
+}
+
+.sn2-hero__desc {
+  font-size: 0.875rem;
+  color: var(--text);
+  line-height: 1.45;
+  margin-top: 0.25rem;
+}
+
+.sn2-hero__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.6rem;
+}
+
+.sn2-stat-chip {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.sn2-stat-chip--mod {
+  background: var(--surface3);
+}
+
+.sn2-stat-chip__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.sn2-stat-chip__val {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.sn2-stat-chip__bin {
+  font-size: 0.8rem;
+  color: var(--primary);
+  font-family: monospace;
+}
+
+.sn2-stat-chip__hint {
+  font-size: 0.75rem;
+  color: var(--success);
+  font-weight: 600;
+}
+
+/* ── Array Traversal Rail ── */
+.sn2-array-rail {
+  display: flex;
+  flex-direction: column;
+}
+
+.sn2-array-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sn2-array-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.65rem;
+  border-radius: 6px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  min-width: 62px;
+  transition: all 0.2s ease;
+}
+
+.sn2-array-item--pending {
+  opacity: 0.6;
+}
+
+.sn2-array-item--current {
+  background: var(--surface);
+  border: 2px solid var(--primary);
+  box-shadow: 0 0 10px var(--primary-glow);
+  transform: translateY(-2px);
+  opacity: 1;
+}
+
+.sn2-array-item--processed {
+  background: var(--surface3);
+  border-color: var(--success);
+  opacity: 0.9;
+}
+
+.sn2-array-item__idx {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-family: monospace;
+}
+
+.sn2-array-item__val {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.sn2-array-item__bin {
+  font-size: 0.68rem;
+  font-family: monospace;
+  color: var(--text-dim);
+}
+
+.sn2-array-item--current .sn2-array-item__bin {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* ── Modulo 3 FSM Diagram ── */
+.sn2-fsm-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.sn2-fsm-container {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+}
+
+.sn2-fsm-svg {
+  width: 100%;
+  max-width: 540px;
+  height: auto;
+  overflow: visible;
+}
+
+.sn2-svg-label {
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--primary);
+}
+
+.sn2-svg-label--reset {
+  fill: var(--error);
+}
+
+.sn2-node-group {
+  cursor: default;
+}
+
+.sn2-node-circle {
+  fill: var(--surface);
+  stroke: var(--border);
+  stroke-width: 2;
+  transition: stroke 0.2s ease, filter 0.2s ease;
+}
+
+.sn2-node-circle--has-bits {
+  stroke: var(--primary);
+  stroke-width: 3;
+  filter: drop-shadow(0 0 6px var(--primary-glow));
+}
+
+.sn2-node-title {
+  font-size: 18px;
+  font-weight: 800;
+  fill: var(--text);
+  font-family: monospace;
+}
+
+.sn2-node-sub {
+  font-size: 10px;
+  font-weight: 600;
+  fill: var(--text-muted);
+}
+
+.sn2-node-badge {
+  font-size: 10px;
+  font-weight: 700;
+  fill: var(--primary);
+}
+
+/* ── Bit Register Matrix ── */
+.sn2-matrix-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.sn2-matrix-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface2);
+}
+
+.sn2-matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: monospace;
+  font-size: 0.85rem;
+}
+
+.sn2-matrix-label-col {
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  background: var(--surface3);
+  color: var(--text);
+  font-weight: 600;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+
+.sn2-matrix-bit-head {
+  text-align: center;
+  padding: 0.4rem 0.5rem;
+  background: var(--surface3);
+  color: var(--text-muted);
+  font-weight: 700;
+  border-bottom: 1px solid var(--border);
+  min-width: 34px;
+}
+
+.sn2-matrix-cell {
+  text-align: center;
+  padding: 0.45rem 0.5rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+.sn2-matrix-cell--active-num {
+  background: var(--primary-glow);
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.sn2-matrix-cell--ones-1 {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--success);
+  font-weight: 800;
+}
+
+.sn2-matrix-cell--twos-1 {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--warning);
+  font-weight: 800;
+}
+
+.sn2-matrix-cell--state {
+  padding: 0.35rem 0.25rem;
+}
+
+.sn2-state-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.15rem 0.35rem;
+  border-radius: 3px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+.sn2-state-tag--01 {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: var(--success);
+  color: var(--success);
+}
+
+.sn2-state-tag--10 {
+  background: rgba(245, 158, 11, 0.2);
+  border-color: var(--warning);
+  color: var(--warning);
+}
+
+/* ── Transitions Table ── */
+.sn2-transitions-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.sn2-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface2);
+}
+
+.sn2-trans-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.825rem;
+  text-align: left;
+}
+
+.sn2-trans-table th {
+  background: var(--surface3);
+  padding: 0.5rem 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.sn2-trans-table td {
+  padding: 0.45rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+
+.sn2-trans-row--changed {
+  background: var(--surface);
+}
+
+.sn2-trans-row--unchanged {
+  opacity: 0.7;
+}
+
+.sn2-trans-cell--bit {
+  font-family: monospace;
+  font-weight: 700;
+}
+
+.sn2-bit-chip {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 3px;
+  background: var(--surface3);
+  font-family: monospace;
+  font-weight: 700;
+}
+
+.sn2-bit-chip--one {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.sn2-count-trans {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.sn2-count-same {
+  color: var(--text-muted);
+}
+
+.sn2-trans-cell--note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.sn2-trans-row--changed .sn2-trans-cell--note {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ── Notes / Invariants Grid ── */
+.sn2-notes-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.sn2-notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+
+.sn2-note-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.7rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.sn2-note-card__title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--primary);
+  font-family: monospace;
+}
+
+.sn2-note-card__body {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+}

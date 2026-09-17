@@ -1,242 +1,52 @@
-﻿import { useState, useMemo, useCallback } from "react";
-import { createPortal } from 'react-dom';
-import { motion, AnimatePresence } from "framer-motion";
-import LuminoDockPanel from "../../components/LuminoDockPanel";
-import FloatingPanel from "../../components/shared/FloatingPanel";
-import CodeTracePanel from "../../components/CodeTracePanel";
-import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
-import { usePlaybackState } from "../../hooks/usePlaybackState";
-import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { getExamples } from '../../config/examplesRegistry'
+import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
+import CandyStory from "./CandyStory";
+import { CODE, buildCandyStory } from "./algorithm";
+import { getExamplesOr } from "../../config/examplesRegistry";
 import "./CandyVisualizer.css";
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
-import CodePatternAnnotations from '../../components/CodePatternAnnotations'
-import PatternLegend from '../../components/PatternLegend'
 
-// ─── Pattern annotations ───────────────────────────────────────────────────
-const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
-const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const SOLUTION_CODE = [
-  { line: 1,  text: "def candy(ratings):" },
-  { line: 2,  text: "    n = len(ratings)" },
-  { line: 3,  text: "    candies = [1] * n  # each child gets at least 1" },
-  { line: 4,  text: "    # Left pass: left neighbor with lower rating gets fewer" },
-  { line: 5,  text: "    for i in range(1, n):" },
-  { line: 6,  text: "        if ratings[i] > ratings[i-1]:" },
-  { line: 7,  text: "            candies[i] = candies[i-1] + 1" },
-  { line: 8,  text: "    # Right pass: right neighbor with lower rating gets fewer" },
-  { line: 9,  text: "    for i in range(n-2, -1, -1):" },
-  { line: 10, text: "        if ratings[i] > ratings[i+1]:" },
-  { line: 11, text: "            candies[i] = max(candies[i], candies[i+1] + 1)" },
-  { line: 12, text: "    return sum(candies)" },
+const DEFAULT_EXAMPLES = [
+  { label: "Example 1: Valley", input: "[1, 0, 2]" },
+  { label: "Example 2: Plateau", input: "[1, 2, 2]" },
+  { label: "Two Peaks", input: "[1, 3, 2, 2, 1]" },
+  { label: "Steep Valley & Peak", input: "[1, 2, 5, 4, 3, 2, 1]" },
+  { label: "Strictly Decreasing", input: "[5, 4, 3, 2, 1]" },
+  { label: "Strictly Increasing", input: "[1, 2, 3, 4, 5]" },
+  { label: "All Equal Ratings", input: "[3, 3, 3, 3]" },
+  { label: "Single Child", input: "[5]" },
 ];
 
-const EXAMPLES = getExamples('candy');
+const registryExamples = getExamplesOr("candy", []);
+const EXAMPLES =
+  registryExamples.length > 0
+    ? registryExamples.map((ex) => ({
+        label: ex.label,
+        input: JSON.stringify(ex.ratings ?? ex.input ?? ex),
+      }))
+    : DEFAULT_EXAMPLES;
 
-function generateSteps(ratingsIn) {
-  const steps = [];
-  const ratings = [...ratingsIn];
-  const n = ratings.length;
-  let candies = Array(n).fill(1);
-
-  steps.push({ activeLine: 3, ratings, candies: [...candies], i: -1, phase: "init", message: `Init all candies = 1. Ratings: [${ratings.join(", ")}]` });
-
-  // Left pass
-  for (let i = 1; i < n; i++) {
-    steps.push({ activeLine: 6, ratings, candies: [...candies], i, phase: "left", message: `Left pass i=${i}: ratings[${i}]=${ratings[i]} vs ratings[${i-1}]=${ratings[i-1]}` });
-    if (ratings[i] > ratings[i - 1]) {
-      candies[i] = candies[i - 1] + 1;
-      steps.push({ activeLine: 7, ratings, candies: [...candies], i, phase: "left-up", message: `ratings[${i}] > ratings[${i-1}] → candies[${i}] = ${candies[i-1]-1+1}+1 = ${candies[i]}` });
-    }
-  }
-
-  steps.push({ activeLine: 9, ratings, candies: [...candies], i: -1, phase: "right-start", message: `Left pass done. Now right pass (right→left).` });
-
-  // Right pass
-  for (let i = n - 2; i >= 0; i--) {
-    steps.push({ activeLine: 10, ratings, candies: [...candies], i, phase: "right", message: `Right pass i=${i}: ratings[${i}]=${ratings[i]} vs ratings[${i+1}]=${ratings[i+1]}` });
-    if (ratings[i] > ratings[i + 1]) {
-      const prev = candies[i];
-      candies[i] = Math.max(candies[i], candies[i + 1] + 1);
-      steps.push({ activeLine: 11, ratings, candies: [...candies], i, phase: "right-up", message: `ratings[${i}] > ratings[${i+1}] → candies[${i}] = max(${prev}, ${candies[i+1]+1}-1) = ${candies[i]}` });
-    }
-  }
-
-  const total = candies.reduce((a, b) => a + b, 0);
-  steps.push({ activeLine: 12, ratings, candies: [...candies], i: -1, phase: "done", done: true, total, message: `Total candies = ${total}` });
-  return steps;
-}
-
-const MAX_CANDY = 6;
+const definition = {
+  title: "Candy",
+  inputLabel: "Children ratings (JSON array or comma-separated)",
+  inputType: "string",
+  initialInput: "[1, 0, 2]",
+  examples: EXAMPLES,
+  code: CODE.map((text, i) => ({ line: i + 1, text })),
+  linePatterns: {
+    2: "init",
+    3: "init",
+    4: "loop",
+    5: "compare",
+    6: "update",
+    7: "loop",
+    8: "compare",
+    9: "update",
+    10: "done",
+  },
+  patterns: ["init", "loop", "compare", "update", "done"],
+  build: (input) => buildCandyStory(input),
+  renderStory: ({ story, step }) => <CandyStory story={story} step={step} />,
+};
 
 export default function CandyVisualizer() {
-  const [ex, setEx] = useState(EXAMPLES[0]);
-  const [ratingsInput, setRatingsInput] = useState("[1,0,2]");
-  const { ratings: inputRatings, inputError } = useMemo(() => {
-    try {
-      const parsedRatings = JSON.parse(ratingsInput); if (!Array.isArray(parsedRatings)) throw new Error('ratings must be an array');
-      return { ratings: parsedRatings, inputError: '' };
-    } catch (e) {
-      return { ratings: "[1,0,2]", inputError: e.message };
-    }
-  }, [ratingsInput]);
-  const steps = useMemo(() => generateSteps(inputRatings), [inputRatings]);
-  const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
-    usePlaybackState(steps.length);
-  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
-  const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); setRatingsInput(JSON.stringify(e.ratings)); handleReset(); }, [handleReset]);;
-
-  const ratings = step?.ratings ?? inputRatings;
-  const candies = step?.candies ?? Array(ratings.length).fill(1);
-  const activeI = step?.i ?? -1;
-  const phase = step?.phase ?? "init";
-
-  const maxCandy = Math.max(...candies, 1);
-
-  // Step 3: Extract panels into consts
-  const primaryPanel = (
-    <>
-      <ManualInputPanel
-        fields={[{"key":"ratings","label":"ratings","type":"array"}]}
-        values={{ ratings: ratingsInput }}
-        onChange={(k, v) => { if (k === 'ratings') setRatingsInput(v); handleReset() }}
-        examples={EXAMPLES}
-        activeLabel={ex?.label}
-        applyExample={applyEx}
-        inputError={inputError}
-      />
-    <div className="cy-panel">
-      <div className="cy-examples">
-        {EXAMPLES.map(e => (
-          <button key={e.label} className={`cy-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>
-            {e.label}: [{e.ratings.join(", ")}]
-          </button>
-        ))}
-      </div>
-
-      <div className="cy-panel">
-        <div className="cy-panel-label">Candy Bars per Child</div>
-        <div className="cy-chart">
-          {ratings.map((r, idx) => {
-            const c = candies[idx];
-            const isActive = idx === activeI;
-            const isLeft = phase.startsWith("left") && idx === activeI;
-            const isRight = phase.startsWith("right") && idx === activeI;
-            return (
-              <div key={idx} className="cy-col">
-                <div className="cy-bar-wrap">
-                  <motion.div
-                    className={`cy-bar ${isLeft ? "left-active" : ""} ${isRight ? "right-active" : ""} ${step?.done ? "done-bar" : ""}`}
-                    style={{ height: `${Math.max(8, (c / Math.max(maxCandy, 1)) * 80)}px` }}
-                    animate={{ height: `${Math.max(8, (c / Math.max(maxCandy, 1)) * 80)}px` }}
-                    transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                  >
-                    <span className="cy-bar-val">{c}</span>
-                  </motion.div>
-                </div>
-                <div className={`cy-rating ${isActive ? "active-rating" : ""}`}>{r}</div>
-                <div className="cy-idx">{idx}</div>
-                {isActive && <div className={`cy-ptr ${phase.startsWith("left") ? "left-ptr" : "right-ptr"}`}>i</div>}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      <div className="cy-trackers">
-        <div className="cy-tracker">
-          <span className="cy-tracker-label">Phase</span>
-          <span className={`cy-tracker-val cy-phase ${phase.split("-")[0]}`}>{phase.replace("-start", "").replace("-up", " ↑").replace("-", " ")}</span>
-        </div>
-        <div className="cy-tracker">
-          <span className="cy-tracker-label">i</span>
-          <span className="cy-tracker-val">{activeI < 0 ? "—" : activeI}</span>
-        </div>
-        <div className="cy-tracker">
-          <span className="cy-tracker-label">Total so far</span>
-          <motion.span key={candies.reduce((a, b) => a + b, 0)} className="cy-tracker-val cy-total"
-            initial={{ scale: 1.3 }} animate={{ scale: 1 }}>
-            {candies.reduce((a, b) => a + b, 0)}
-          </motion.span>
-        </div>
-      </div>
-
-      {step?.done && <div className="cy-result">✓ Minimum candies = {step.total}</div>}
-    </div>
-  
-    </>);
-
-  const codePanel = (
-    <div style={{ position: 'relative', height: '100%' }}>
-      <CodeTracePanel
-        step={step}
-        codeLines={SOLUTION_CODE}
-        onActiveLineDomChange={setActiveLineDom}
-        disableResizer
-      />
-      {showPatternOverlay && <CodePatternAnnotations patterns={PATTERNS} linePatternMap={LINE_PATTERN_MAP} activeLineDom={activeLineDom} />}
-    </div>
-  );
-
-  const statusPanel = (
-    <div className="cy-status">{step?.message ?? "Press Play to begin."}</div>
-  );
-
-  const playbackPanel = (
-    <>
-      <PlaybackControls
-        isPlaying={isPlaying}
-        isDone={isDone}
-        speed={speed}
-        onPlayToggle={togglePlay}
-        onPrev={stepBack}
-        onNext={stepForward}
-        onReset={handleReset}
-        prevDisabled={stepIndex < 0}
-        nextDisabled={isDone}
-        resetDisabled={stepIndex < 0}
-        onSpeedChange={e => setSpeed(Number(e.target.value))}
-        showPatternOverlay={showPatternOverlay}
-        onShowPatternOverlayChange={setShowPatternOverlay}
-        patternOverlayLabel="Show pattern overlay"
-        showPatternOverlayToggle
-      />
-      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
-    </>
-  );
-
-  // Step 4: Add state + config
-  const [panelDivs, setPanelDivs] = useState(null);
-  const panelConfigs = useMemo(
-    () => [
-      { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
-      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
-    ],
-    []
-  );
-  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
-
-  // Step 5: Replace return block
-  return (
-    <div className="cy-shell">
-      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
-      {panelDivs && (
-        <>
-          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
-          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
-          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
-        </>
-      )}
-      {createPortal(
-        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
-        document.body
-      )}
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
-    </div>
-  );
+  return <AlgorithmStoryWorkspace definition={definition} />;
 }
-

@@ -1,227 +1,47 @@
-﻿import { useState, useMemo, useCallback } from "react";
-import { createPortal } from "react-dom";
-import { motion } from "framer-motion";
-import CodeTracePanel from "../../components/CodeTracePanel";
-import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
-import { usePlaybackState } from "../../hooks/usePlaybackState";
-import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
+import CopyRandomStory from "./CopyRandomStory";
+import {
+  CODE,
+  LINE_PATTERN_MAP,
+  PATTERNS,
+  buildCopyRandomListStory,
+} from "./algorithm";
+import { getExamples } from "../../config/examplesRegistry";
 import "./CopyListRandomVisualizer.css";
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
-import FloatingPanel from '../../components/shared/FloatingPanel'
-import CodePatternAnnotations from '../../components/CodePatternAnnotations'
-import PatternLegend from '../../components/PatternLegend'
-import LuminoDockPanel from '../../components/LuminoDockPanel'
 
-
-// ─── Pattern annotations ───────────────────────────────────────────────────
-const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
-const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const SOLUTION_CODE = [
-    { line: 1, text: "def copyRandomList(head):" },
-    { line: 2, text: "    oldToNew = {None: None}" },
-    { line: 3, text: "    cur = head" },
-    { line: 4, text: "    while cur:  # Pass 1: create nodes" },
-    { line: 5, text: "        oldToNew[cur] = Node(cur.val)" },
-    { line: 6, text: "        cur = cur.next" },
-    { line: 7, text: "    cur = head" },
-    { line: 8, text: "    while cur:  # Pass 2: wire pointers" },
-    { line: 9, text: "        oldToNew[cur].next = oldToNew[cur.next]" },
-    { line: 10, text: "        oldToNew[cur].random = oldToNew[cur.random]" },
-    { line: 11, text: "        cur = cur.next" },
-    { line: 12, text: "    return oldToNew[head]" },
+const registryExamples = getExamples("copy-list-random") || [];
+const EXAMPLES = [
+  ...registryExamples.map((ex) => ({
+    label: `${ex.label}: ${JSON.stringify(
+      ex.nodes.map((n) => [n.val, n.random])
+    )}`,
+    input: JSON.stringify(ex.nodes.map((n) => [n.val, n.random])),
+  })),
+  {
+    label: "Single Self-Loop: [[1, 0]]",
+    input: "[[1, 0]]",
+  },
+  {
+    label: "Empty List: []",
+    input: "[]",
+  },
 ];
 
-function generateSteps(nodes) {
-    // nodes: [{val, random}] where random is index or null
-    const steps = [];
-    const n = nodes.length;
-
-    steps.push({ activeLine: 2, phase: "init", cur: -1, cloned: new Set(), message: "Init map {None: None}." });
-
-    // Pass 1: create clone nodes
-    steps.push({ activeLine: 4, phase: "pass1", cur: 0, cloned: new Set(), message: "Pass 1: create clone nodes." });
-    const cloned = new Set();
-    for (let i = 0; i < n; i++) {
-        cloned.add(i);
-        steps.push({ activeLine: 5, phase: "pass1", cur: i, cloned: new Set(cloned), message: `Clone node ${i} (val=${nodes[i].val})` });
-    }
-
-    // Pass 2: wire pointers
-    steps.push({ activeLine: 7, phase: "pass2", cur: 0, cloned: new Set(cloned), message: "Pass 2: wire next and random pointers." });
-    for (let i = 0; i < n; i++) {
-        const nxtIdx = i + 1 < n ? i + 1 : null;
-        const rndIdx = nodes[i].random;
-        steps.push({
-            activeLine: 9, phase: "pass2", cur: i, cloned: new Set(cloned),
-            wireNext: nxtIdx, wireRandom: rndIdx,
-            message: `Node ${i}: next→${nxtIdx ?? "null"}, random→${rndIdx ?? "null"}`,
-        });
-        steps.push({
-            activeLine: 10, phase: "pass2", cur: i, cloned: new Set(cloned),
-            wireNext: nxtIdx, wireRandom: rndIdx, showWire: true,
-            message: `Wired clone[${i}].next=${nxtIdx ?? "null"}, .random=${rndIdx ?? "null"}`,
-        });
-    }
-
-    steps.push({ activeLine: 12, phase: "done", cur: -1, cloned: new Set(cloned), message: "Done. Return head of cloned list." });
-    return steps;
-}
-
-const EXAMPLES = getExamples('copy-list-random');
+const definition = {
+  title: "Copy List with Random Pointer",
+  inputLabel: "Linked list nodes [[val, random], ...]",
+  inputType: "string",
+  initialInput: "[[7,null],[13,0],[11,4],[10,2],[1,0]]",
+  examples: EXAMPLES,
+  code: CODE.map((text, i) => ({ line: i + 1, text })),
+  linePatterns: LINE_PATTERN_MAP,
+  patterns: PATTERNS,
+  build: (input) => buildCopyRandomListStory(input),
+  renderStory: ({ story, step, stepIndex }) => (
+    <CopyRandomStory story={story} step={step} stepIndex={stepIndex} />
+  ),
+};
 
 export default function CopyListRandomVisualizer() {
-    const [sel, setSel] = useState(0);
-  const [nodesInput, setNodesInput] = useState(JSON.stringify(EXAMPLES[0]?.["nodes"] ?? null));
-  const { nodes, inputError } = useMemo(() => {
-    try {
-      const parsedNodes = JSON.parse(nodesInput); if (!Array.isArray(parsedNodes)) throw new Error('nodes must be an array');
-      return { nodes: parsedNodes, inputError: '' };
-    } catch (e) {
-      return { nodes: EXAMPLES[sel]?.nodes, inputError: e.message };
-    }
-  }, [nodesInput]);;
-
-        const steps = useMemo(() => generateSteps(nodes), [nodes]);
-    const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
-        usePlaybackState(steps.length);
-    const step = stepIndex >= 0 ? steps[stepIndex] : steps[0];
-    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
-
-    const applyExample = useCallback((i) => { setSel(i); setNodesInput(JSON.stringify(EXAMPLES[i].nodes)); handleReset(); }, [handleReset]);
-
-    const cur = step?.cur ?? -1;
-    const cloned = step?.cloned ?? new Set();
-
-    // ─── Panel constants ───────────────────────────────────────────────────
-    const primaryPanel = (
-      <>
-          <ManualInputPanel
-            fields={[{"key":"nodes","label":"nodes","type":"array"}]}
-            values={{ nodes: nodesInput }}
-            onChange={(k, v) => { if (k === 'nodes') setNodesInput(v); handleReset() }}
-            examples={EXAMPLES}
-            activeLabel={EXAMPLES[sel]?.label}
-            applyExample={(e) => applyExample(EXAMPLES.indexOf(e))}
-            inputError={inputError}
-          />
-        <div className="clr-panel" style={{ position: 'relative', height: '100%', overflowY: 'auto' }}>
-            <div className="clr-controls-row">
-                <div className="clr-examples">
-                    {EXAMPLES.map((ex, i) => (
-                        <button key={ex.label} className={`clr-chip ${sel === i ? "active" : ""}`} onClick={() => applyExample(i)}>{ex.label}</button>
-                    ))}
-                </div>
-            </div>
-
-            <div className="clr-panel">
-                <div className="clr-panel-label">Original list</div>
-                <div className="clr-list-col">
-                    <div className="clr-row-label">next →</div>
-                    <div className="clr-nodes-row">
-                        {nodes.map((nd, i) => (
-                            <div key={i} className="clr-node-group">
-                                <motion.div className={`clr-node orig ${i === cur ? "active" : ""}`}
-                                    animate={{ scale: i === cur ? 1.12 : 1 }}
-                                    transition={{ type: "spring", stiffness: 380, damping: 20 }}>
-                                    <span className="clr-node-idx">[{i}]</span>
-                                    <span className="clr-node-val">{nd.val}</span>
-                                    <span className="clr-node-rnd">r→{nd.random ?? "∅"}</span>
-                                </motion.div>
-                                {i < nodes.length - 1 && <span className="clr-arrow">→</span>}
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-
-            {/* Clone list */}
-            {cloned.size > 0 && (
-                <div className="clr-panel">
-                    <div className="clr-panel-label">Clone list</div>
-                    <div className="clr-nodes-row">
-                        {[...cloned].sort((a, b) => a - b).map((i) => {
-                            const nd = nodes[i];
-                            const showWire = step?.showWire && i === cur;
-                            return (
-                                <div key={i} className="clr-node-group">
-                                    <motion.div className={`clr-node clone ${i === cur ? "active" : ""} ${showWire ? "wired" : ""}`}
-                                        initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }}
-                                        transition={{ type: "spring", stiffness: 350, damping: 22 }}>
-                                        <span className="clr-node-idx">[{i}]</span>
-                                        <span className="clr-node-val">{nd.val}</span>
-                                        {showWire && <span className="clr-node-rnd">r→{step.wireRandom ?? "∅"}</span>}
-                                    </motion.div>
-                                    {i < nodes.length - 1 && cloned.has(i + 1) && <span className="clr-arrow clone-arrow">→</span>}
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>
-            )}
-        </div>
-    
-    </>);
-
-    const codePanel = (
-        <div style={{ position: 'relative', height: '100%' }}>
-            <CodeTracePanel
-                step={step}
-                codeLines={SOLUTION_CODE}
-                onActiveLineDomChange={setActiveLineDom}
-                disableResizer
-            />
-            {showPatternOverlay && <CodePatternAnnotations step={step} activeLineDom={activeLineDom} />}
-        </div>
-    );
-
-    const statusPanel = (
-        <div className="clr-status">{step?.message ?? "Press Play to begin."}</div>
-    );
-
-    const playbackPanel = (
-      <>
-            <PlaybackControls
-                isPlaying={isPlaying} isDone={isDone} speed={speed}
-                onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
-                prevDisabled={stepIndex <= 0} nextDisabled={isDone} resetDisabled={stepIndex <= 0}
-                onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-                showPatternOverlay={showPatternOverlay}
-                onShowPatternOverlayChange={setShowPatternOverlay}
-                patternOverlayLabel="Show pattern overlay"
-                showPatternOverlayToggle
-            />
-            {showPatternOverlay && <PatternLegend />}
-        </>
-    );
-
-    // ─── Lumino panel config ───────────────────────────────────────────────
-    const [panelDivs, setPanelDivs] = useState(null);
-    const panelConfigs = useMemo(
-        () => [
-            { id: 'primary', title: 'Copy List Random', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
-            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
-        ],
-        []
-    );
-    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
-
-    return (
-        <div className="clr-shell">
-            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
-            {panelDivs && (
-              <>
-                    {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
-                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
-                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
-                </>
-            )}
-            {createPortal(
-                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
-                document.body
-            )}
-        </div>
-    );
+  return <AlgorithmStoryWorkspace definition={definition} />;
 }

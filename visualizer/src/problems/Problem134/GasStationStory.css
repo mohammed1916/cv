@@ -1,0 +1,391 @@
+/* Problem 134: Gas Station visual story styling */
+
+.gss-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  color: var(--text);
+}
+
+/* ─── Metric Badges Bar ─── */
+.gss-metrics-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+}
+
+.gss-metric-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.gss-metric-card.highlight {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.06);
+}
+
+.gss-metric-card.warning {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.06);
+}
+
+.gss-metric-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.gss-metric-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.gss-metric-sub {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* ─── Fuel Gauge Bar ─── */
+.gss-fuel-gauge {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.gss-fuel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.gss-fuel-track {
+  position: relative;
+  height: 20px;
+  background: var(--surface2, #1e293b);
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.gss-fuel-fill {
+  height: 100%;
+  transition: width 0.3s ease, background-color 0.3s ease;
+  border-radius: 5px;
+}
+
+.gss-fuel-fill.normal {
+  background: linear-gradient(90deg, #3b82f6, #10b981);
+}
+
+.gss-fuel-fill.low {
+  background: linear-gradient(90deg, #f59e0b, #eab308);
+}
+
+.gss-fuel-fill.deficit {
+  background: #ef4444;
+}
+
+.gss-fuel-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+}
+
+/* ─── Circular Track Visualizer ─── */
+.gss-track-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.gss-track-svg {
+  width: 100%;
+  max-width: 440px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  user-select: none;
+}
+
+/* SVG Elements */
+.gss-svg-road-base {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 16;
+  opacity: 0.6;
+}
+
+.gss-svg-road-dash {
+  fill: none;
+  stroke: #f59e0b;
+  stroke-width: 2;
+  stroke-dasharray: 6 6;
+  opacity: 0.8;
+}
+
+.gss-svg-node {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.gss-svg-node:hover {
+  transform: scale(1.08);
+}
+
+.gss-svg-node-bg {
+  stroke-width: 2.5;
+  transition: all 0.25s ease;
+}
+
+.gss-svg-node-bg.default {
+  fill: var(--surface2, #1e293b);
+  stroke: var(--border);
+}
+
+.gss-svg-node-bg.current {
+  fill: #f59e0b;
+  stroke: #fbbf24;
+  filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.8));
+}
+
+.gss-svg-node-bg.candidate {
+  fill: #10b981;
+  stroke: #34d399;
+  filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.7));
+}
+
+.gss-svg-node-bg.deficit {
+  fill: #ef4444;
+  stroke: #f87171;
+  filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.8));
+}
+
+.gss-svg-node-num {
+  font-size: 13px;
+  font-weight: 800;
+  fill: #ffffff;
+  text-anchor: middle;
+  dominant-baseline: central;
+  font-family: inherit;
+}
+
+.gss-svg-node-tag {
+  font-size: 9.5px;
+  font-weight: 700;
+  font-family: monospace;
+  text-anchor: middle;
+}
+
+.gss-svg-car-marker {
+  filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.9));
+  transform-origin: center;
+}
+
+.gss-svg-center-hub {
+  fill: var(--surface);
+  stroke: var(--border);
+  stroke-width: 2;
+}
+
+.gss-svg-hub-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  fill: var(--text-muted);
+  text-anchor: middle;
+}
+
+.gss-svg-hub-val {
+  font-size: 16px;
+  font-weight: 800;
+  fill: var(--text);
+  text-anchor: middle;
+}
+
+.gss-svg-hub-status {
+  font-size: 10px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+/* ─── Deficit Callout Banner ─── */
+.gss-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.gss-callout.deficit {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid #ef4444;
+  color: #ef4444;
+}
+
+.gss-callout.success {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid #10b981;
+  color: #10b981;
+}
+
+.gss-callout.info {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid #3b82f6;
+  color: #3b82f6;
+}
+
+.gss-callout-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.gss-callout-body {
+  flex: 1;
+  color: var(--text);
+}
+
+.gss-callout-title {
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+/* ─── Station Delta Strip ─── */
+.gss-strip-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.gss-strip-header {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.gss-strip-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 8px;
+}
+
+.gss-strip-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 6px;
+  background: var(--surface2, #1e293b);
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  font-size: 11px;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.gss-strip-item.current {
+  border-color: #f59e0b;
+  box-shadow: 0 0 6px rgba(245, 158, 11, 0.5);
+  transform: translateY(-2px);
+}
+
+.gss-strip-item.candidate {
+  border-color: #10b981;
+}
+
+.gss-strip-item.deficit {
+  border-color: #ef4444;
+}
+
+.gss-strip-idx {
+  font-weight: 800;
+  font-size: 12px;
+  color: var(--text);
+}
+
+.gss-strip-gas {
+  color: #10b981;
+  font-weight: 600;
+}
+
+.gss-strip-cost {
+  color: #f43f5e;
+  font-weight: 600;
+}
+
+.gss-strip-net {
+  font-weight: 700;
+  margin-top: 2px;
+  font-size: 12px;
+}
+
+.gss-strip-net.pos {
+  color: #10b981;
+}
+
+.gss-strip-net.neg {
+  color: #ef4444;
+}
+
+.gss-strip-flag {
+  position: absolute;
+  top: -8px;
+  right: -4px;
+  font-size: 10px;
+}
+
+@media (max-width: 600px) {
+  .gss-metrics-bar {
+    grid-template-columns: 1fr 1fr;
+  }
+  .gss-track-svg {
+    max-width: 320px;
+  }
+}
