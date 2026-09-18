@@ -55,7 +55,6 @@ export function buildPalindromeStory(input) {
     }
   }
 
-
   const frames = [];
 
   // Frame 1: Step 1 - filter & lowercase
@@ -71,12 +70,14 @@ export function buildPalindromeStory(input) {
     comparing: null,
     matchedIndices: [],
     result: null,
-    message: cleaned.length === 0
-      ? "Cleaned string is empty (no alphanumeric characters)."
-      : `Cleaned string: "${cleaned}" (${cleaned.length} chars filtered from ${raw.length} raw chars).`,
-    explanation: cleaned.length === 0
-      ? "Filtered out all non-alphanumeric characters. The resulting string is empty."
-      : `Filtered raw input to lowercase alphanumeric characters. Kept ${mapping.length} of ${raw.length} characters.`,
+    message:
+      cleaned.length === 0
+        ? "Cleaned string is empty (no alphanumeric characters)."
+        : `Cleaned string: "${cleaned}" (${cleaned.length} chars filtered from ${raw.length} raw chars).`,
+    explanation:
+      cleaned.length === 0
+        ? "Filtered out all non-alphanumeric characters. The resulting string is empty."
+        : `Filtered raw input to lowercase alphanumeric characters. Kept ${mapping.length} of ${raw.length} characters.`,
     relatedLines: [2],
   });
 
@@ -97,12 +98,14 @@ export function buildPalindromeStory(input) {
     comparing: null,
     matchedIndices: [],
     result: null,
-    message: cleaned.length === 0
-      ? "Initialize pointers: l = 0, r = -1 (empty string)."
-      : `Initialize pointers: l = 0, r = ${r}.`,
-    explanation: cleaned.length === 0
-      ? "The cleaned string is empty. Left pointer l is 0 and right pointer r is -1."
-      : `Set left pointer l to index 0 ('${cleaned[0]}') and right pointer r to index ${r} ('${cleaned[r]}').`,
+    message:
+      cleaned.length === 0
+        ? "Initialize pointers: l = 0, r = -1 (empty string)."
+        : `Initialize pointers: l = 0, r = ${r}.`,
+    explanation:
+      cleaned.length === 0
+        ? "The cleaned string is empty. Left pointer l is 0 and right pointer r is -1."
+        : `Set left pointer l to index 0 ('${cleaned[0]}') and right pointer r to index ${r} ('${cleaned[r]}').`,
     relatedLines: [3],
   });
 
@@ -121,10 +124,11 @@ export function buildPalindromeStory(input) {
       matchedIndices: [],
       result: true,
       message: "Loop condition l < r (0 < -1) is False. Return True.",
-      explanation: "An empty string reads the same forward and backward. Returns True.",
+      explanation:
+        "An empty string reads the same forward and backward. Returns True.",
       relatedLines: [7],
     });
-    return { raw, cleaned, isValid: true, mapping, frames };
+    return { raw, cleaned, isValid: true, mapping, rawChars, frames };
   }
 
   // Handle single character edge case
@@ -145,7 +149,7 @@ export function buildPalindromeStory(input) {
       explanation: `A single character ('${cleaned[0]}') is trivially a palindrome. Returns True.`,
       relatedLines: [7],
     });
-    return { raw, cleaned, isValid: true, mapping, frames };
+    return { raw, cleaned, isValid: true, mapping, rawChars, frames };
   }
 
   const matchedIndices = [];
@@ -178,7 +182,7 @@ export function buildPalindromeStory(input) {
         explanation: `Comparing mirror endpoints: s[${l}] ('${leftChar}') does not match s[${r}] ('${rightChar}'). The string is not a palindrome. Return False.`,
         relatedLines: [4, 5],
       });
-      return { raw, cleaned, isValid: false, mapping, frames };
+      return { raw, cleaned, isValid: false, mapping, rawChars, frames };
     }
 
     // Comparison match frame
@@ -259,6 +263,7 @@ export function buildPalindromeStory(input) {
     cleaned,
     isValid: true,
     mapping,
+    rawChars,
     frames,
   };
 }

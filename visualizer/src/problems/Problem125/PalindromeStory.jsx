@@ -22,7 +22,10 @@ export default function PalindromeStory({ story, step }) {
     );
   }
 
-  const { raw, cleaned } = story;
+  const raw = story.raw ?? "";
+  const cleaned = story.cleaned ?? "";
+  const mapping = story.mapping ?? step.mapping ?? [];
+  const rawChars = story.rawChars ?? step.rawChars ?? [];
   const { l, r, comparing, matchedIndices = [], result } = step;
 
   const getStoryTitle = () => {
@@ -187,7 +190,7 @@ export default function PalindromeStory({ story, step }) {
           <div>
             <strong>Step 1 Normalization: Raw → Clean Mapping</strong>
             <span className="mapping-subtext">
-              ({story.mapping.length} alphanumeric kept of {raw.length} raw
+              ({mapping.length} alphanumeric kept of {raw.length} raw
               characters)
             </span>
           </div>
@@ -208,7 +211,7 @@ export default function PalindromeStory({ story, step }) {
           role="region"
           aria-label="Raw character filter preview"
         >
-          {story.rawChars.map((rc) => (
+          {rawChars.map((rc) => (
             <span
               key={rc.index}
               className={`raw-char-chip ${
@@ -242,7 +245,7 @@ export default function PalindromeStory({ story, step }) {
                 </tr>
               </thead>
               <tbody>
-                {story.rawChars.map((rc) => (
+                {rawChars.map((rc) => (
                   <tr
                     key={rc.index}
                     className={rc.isKept ? "tr-kept" : "tr-filtered"}
@@ -250,7 +253,7 @@ export default function PalindromeStory({ story, step }) {
                     <td>{rc.isKept ? rc.cleanIndex : "—"}</td>
                     <td>
                       {rc.isKept ? (
-                        <code>{story.mapping[rc.cleanIndex]?.cleanChar}</code>
+                        <code>{mapping[rc.cleanIndex]?.cleanChar}</code>
                       ) : (
                         "—"
                       )}
