@@ -59,45 +59,6 @@ export default function PalindromeStory({ story, step }) {
       label="Valid Palindrome visualizer story"
       className="palindrome-story"
     >
-      <p className="palindrome-story__explanation">{step.explanation}</p>
-
-      {/* Comparison Hero Card during compare or mismatch */}
-      {comparing && (
-        <CharacterComparison
-          leftIndexLabel={`s[${comparing.l}]`}
-          leftChar={comparing.leftChar}
-          leftTag="Left Pointer"
-          rightIndexLabel={`s[${comparing.r}]`}
-          rightChar={comparing.rightChar}
-          rightTag="Right Pointer"
-          isMatch={comparing.match}
-          ariaLabel="Current character comparison"
-        />
-      )}
-
-      {/* Result Badge */}
-      {result !== null && (
-        <section
-          className={`palindrome-story__result-badge ${
-            result ? "is-valid" : "is-invalid"
-          }`}
-          role="status"
-          aria-live="polite"
-        >
-          <div className="result-badge__icon">{result ? "✓" : "✗"}</div>
-          <div className="result-badge__info">
-            <strong className="result-badge__title">
-              {result ? "isPalindrome(s) = True" : "isPalindrome(s) = False"}
-            </strong>
-            <p className="result-badge__desc">
-              {result
-                ? `Cleaned string "${cleaned}" is symmetric forward and backward.`
-                : `Mismatch found between left s[${comparing?.l}] ('${comparing?.leftChar}') and right s[${comparing?.r}] ('${comparing?.rightChar}').`}
-            </p>
-          </div>
-        </section>
-      )}
-
       {/* Cleaned String with PointerRail */}
       <section className="palindrome-story__rail-container">
         <PointerRail
@@ -188,7 +149,7 @@ export default function PalindromeStory({ story, step }) {
       <section className="palindrome-story__mapping-section">
         <header className="mapping-section__head">
           <div>
-            <strong>Step 1 Normalization: Raw → Clean Mapping</strong>
+            <strong>View of Step 1 Normalization: Raw → Clean Mapping</strong>
             <span className="mapping-subtext">
               ({mapping.length} alphanumeric kept of {raw.length} raw
               characters)
@@ -278,6 +239,44 @@ export default function PalindromeStory({ story, step }) {
           </div>
         )}
       </section>
+      <p className="palindrome-story__explanation">{step.explanation}</p>
+
+      {/* Comparison Hero Card during compare or mismatch */}
+      {comparing && (
+        <CharacterComparison
+          leftIndexLabel={`s[${comparing.l}]`}
+          leftChar={comparing.leftChar}
+          leftTag="Left Pointer"
+          rightIndexLabel={`s[${comparing.r}]`}
+          rightChar={comparing.rightChar}
+          rightTag="Right Pointer"
+          isMatch={comparing.match}
+          ariaLabel="Current character comparison"
+        />
+      )}
+
+      {/* Result Badge */}
+      {result !== null && (
+        <section
+          className={`palindrome-story__result-badge ${
+            result ? "is-valid" : "is-invalid"
+          }`}
+          role="status"
+          aria-live="polite"
+        >
+          <div className="result-badge__icon">{result ? "✓" : "✗"}</div>
+          <div className="result-badge__info">
+            <strong className="result-badge__title">
+              {result ? "isPalindrome(s) = True" : "isPalindrome(s) = False"}
+            </strong>
+            <p className="result-badge__desc">
+              {result
+                ? `Cleaned string "${cleaned}" is symmetric forward and backward.`
+                : `Mismatch found between left s[${comparing?.l}] ('${comparing?.leftChar}') and right s[${comparing?.r}] ('${comparing?.rightChar}').`}
+            </p>
+          </div>
+        </section>
+      )}
     </StoryPanel>
   );
 }
