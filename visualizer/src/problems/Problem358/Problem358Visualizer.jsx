@@ -514,46 +514,10 @@ function VisualizationPanel({ step, s, k, EXAMPLES, handleExampleClick, sInput, 
       </div>
 
       <div style={{ display: 'flex', gap: 8, flexDirection: 'column' }}>
-        <div>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-            String (s)
-          </label>
-          <input
-            value={sInput}
-            onChange={(e) => { setSInput(e.target.value); handleReset() }}
-            placeholder="e.g., ABABAB"
-            style={{
-              width: '100%',
-              padding: '8px 10px',
-              border: '1px solid var(--border)',
-              borderRadius: 4,
-              fontSize: 12,
-              fontFamily: 'monospace',
-              boxSizing: 'border-box',
-            }}
-          />
-        </div>
+        
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-          <div>
-            <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-              Distance (k)
-            </label>
-            <input
-              type="number"
-              value={kInput}
-              onChange={(e) => { setKInput(Math.max(0, parseInt(e.target.value) || 0)); handleReset() }}
-              min="0"
-              style={{
-                width: '100%',
-                padding: '8px 10px',
-                border: '1px solid var(--border)',
-                borderRadius: 4,
-                fontSize: 12,
-                boxSizing: 'border-box',
-              }}
-            />
-          </div>
+          
           <div style={{ display: 'flex', alignItems: 'flex-end' }}>
             <button
               onClick={handleReset}

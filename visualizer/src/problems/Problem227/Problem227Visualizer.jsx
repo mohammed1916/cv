@@ -214,18 +214,7 @@ export default function Problem227Visualizer() {
     <div className="p227-panel-primary">
       <div className="p227-card">
         <div className="p227-section-label">Input</div>
-        <div className="p227-input-row">
-          <div className="p227-field grow">
-            <label className="p227-input-label" htmlFor="p227-expr">Expression</label>
-            <input
-              id="p227-expr"
-              className={`p227-input mono ${inputError ? 'has-error' : ''}`}
-              value={exprInput}
-              onChange={(e) => { setExprInput(e.target.value); handleReset() }}
-              placeholder="3+2*2"
-            />
-          </div>
-        </div>
+        
         <p className={`p227-hint ${inputError ? 'error' : ''}`}>
           {inputError || 'Evaluate with normal precedence (× and ÷ before + and −), no parentheses. Division truncates toward zero.'}
         </p>

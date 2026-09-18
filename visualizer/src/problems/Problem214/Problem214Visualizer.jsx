@@ -182,18 +182,7 @@ export default function Problem214Visualizer() {
     <div className="p214-panel-primary">
       <div className="p214-card">
         <div className="p214-section-label">Input</div>
-        <div className="p214-input-row">
-          <div className="p214-field grow">
-            <label className="p214-input-label" htmlFor="p214-s">String s</label>
-            <input
-              id="p214-s"
-              className={`p214-input mono ${inputError ? 'has-error' : ''}`}
-              value={sInput}
-              onChange={(e) => { setSInput(e.target.value); handleReset() }}
-              placeholder="aacecaaa"
-            />
-          </div>
-        </div>
+        
         <p className={`p214-hint ${inputError ? 'error' : ''}`}>
           {inputError || 'Prepend the fewest characters in front of s to make it a palindrome.'}
         </p>

@@ -259,7 +259,7 @@ export default function RomanToIntegerVisualizer() {
         <ManualInputPanel
           fields={[{"key":"roman","label":"roman","type":"string"}]}
           values={{ roman: romanInput }}
-          onChange={(k, v) => { if (k === 'roman') setRomanInput(v); handleReset() }}
+          onChange={(k, v) => { if (k === 'roman') setRomanInput(v.toUpperCase()); handleReset() }}
           examples={EXAMPLES}
           applyExample={applyExample}
           inputError={inputError}
@@ -284,17 +284,7 @@ export default function RomanToIntegerVisualizer() {
         ))}
       </div>
 
-      <div style={{ display: 'flex', gap: 12, marginBottom: 16, alignItems: 'center' }}>
-        <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace', fontWeight: 600 }}>Input:</span>
-        <input
-          value={romanInput}
-          onChange={(e) => { setRomanInput(e.target.value.toUpperCase()); handleReset() }}
-          placeholder="MCMXCIV"
-          className="rti-input"
-          style={{ flex: 1, margin: 0 }}
-        />
-        {inputError && <span style={{ color: '#ea0c0c', fontSize: 12 }}>{inputError}</span>}
-      </div>
+      
 
       {step && (
         <>

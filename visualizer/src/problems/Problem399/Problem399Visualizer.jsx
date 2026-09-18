@@ -396,35 +396,7 @@ export default function Problem399Visualizer() {
 
       <div className="p399-card">
         <div className="p399-section-label">Input</div>
-        <div className="p399-field-grid">
-          <div className="p399-field">
-            <label className="p399-input-label" htmlFor="p399-eq">equations</label>
-            <input
-              id="p399-eq"
-              className={`p399-input ${inputError ? 'has-error' : ''}`}
-              value={equationsInput}
-              onChange={(e) => { setEquationsInput(e.target.value); handleReset() }}
-            />
-          </div>
-          <div className="p399-field">
-            <label className="p399-input-label" htmlFor="p399-vals">values</label>
-            <input
-              id="p399-vals"
-              className={`p399-input ${inputError ? 'has-error' : ''}`}
-              value={valuesInput}
-              onChange={(e) => { setValuesInput(e.target.value); handleReset() }}
-            />
-          </div>
-          <div className="p399-field">
-            <label className="p399-input-label" htmlFor="p399-q">queries</label>
-            <input
-              id="p399-q"
-              className={`p399-input ${inputError ? 'has-error' : ''}`}
-              value={queryInput}
-              onChange={(e) => { setQueryInput(e.target.value); handleReset() }}
-            />
-          </div>
-        </div>
+        
         <p className={`p399-hint ${inputError ? 'error' : ''}`} style={{ marginTop: '0.6rem' }}>
           {inputError || 'Each equation a/b = value becomes edges a→b (value) and b→a (1/value).'}
         </p>

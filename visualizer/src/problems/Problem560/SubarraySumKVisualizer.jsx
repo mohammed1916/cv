@@ -165,8 +165,7 @@ export default function SubarraySumKVisualizer() {
                 </div>
                 <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
                     <input className="ssk-input" value={numsInput} onChange={(e) => { setNumsInput(e.target.value); handleReset(); }} />
-                    <label className="ssk-k-label">k=<input className="ssk-k-input" type="number" value={kInput}
-                        onChange={(e) => { setKInput(e.target.value); handleReset(); }} /></label>
+                    
                     {err && <span className="ssk-error">{err}</span>}
                 </div>
             </div>

@@ -153,10 +153,7 @@ export default function MinimumWindowSubstringVisualizer() {
         <div className="mws-examples">
           {EXAMPLES.map((ex) => <button key={ex.label} className="mws-chip" onClick={() => applyExample(ex)}>{ex.label}</button>)}
         </div>
-        <div className="mws-inputs">
-          <input className="mws-input" value={sInput} onChange={handleSInputChange} placeholder="s" />
-          <input className="mws-input small" value={tInput} onChange={handleTInputChange} placeholder="t" />
-        </div>
+        
         <div className="mws-string">
           {s.split('').map((ch, i) => {
             const inWindow = i >= (step?.left ?? 0) && i <= (step?.right ?? -1)

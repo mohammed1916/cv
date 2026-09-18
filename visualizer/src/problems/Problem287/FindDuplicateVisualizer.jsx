@@ -191,17 +191,7 @@ export default function FindDuplicateVisualizer() {
                     <button key={ex.label} className="fd-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
                 ))}
             </div>
-            <label className="fd-input-field">
-                <span>Array input (JSON format)</span>
-                <input
-                    className="fd-input"
-                    value={numsInput}
-                    onChange={(e) => {
-                        setNumsInput(e.target.value)
-                        handleReset()
-                    }}
-                />
-            </label>
+            
             {inputError && <div className="fd-error-box">{inputError}</div>}
         </div>
     )

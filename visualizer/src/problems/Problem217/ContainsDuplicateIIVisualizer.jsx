@@ -338,22 +338,8 @@ export default function ContainsDuplicateIIVisualizer() {
           ))}
         </div>
         <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
-          <label style={{ display: "flex", gap: 6, alignItems: "center", fontSize: 12, color: "var(--text-muted)" }}>
-            nums:
-            <input
-              value={numsInput}
-              onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-              style={{ minWidth: 220, padding: "6px 10px", borderRadius: 6, border: "1px solid var(--border)", fontFamily: "monospace", fontSize: 12 }}
-            />
-          </label>
-          <label style={{ display: "flex", gap: 6, alignItems: "center", fontSize: 12, color: "var(--text-muted)" }}>
-            k:
-            <input
-              value={kInput}
-              onChange={(e) => { setKInput(e.target.value); handleReset() }}
-              style={{ width: 60, padding: "6px 10px", borderRadius: 6, border: "1px solid var(--border)", fontFamily: "monospace", fontSize: 12 }}
-            />
-          </label>
+          
+          
           {inputError && <span style={{ color: "#e91414", fontSize: 12 }}>{inputError}</span>}
         </div>
       </div>

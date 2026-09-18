@@ -232,21 +232,7 @@ function SearchVisualizationPanel({ step, numInput, setNumInput, applyExample, h
                 ))}
             </div>
 
-            <div className="p367-input-row">
-                <label>Find perfect square:</label>
-                <input
-                    className="p367-input"
-                    type="number"
-                    value={numInput}
-                    onChange={(e) => {
-                        setNumInput(e.target.value)
-                        handleReset()
-                    }}
-                    placeholder="Enter number (1-10000)"
-                    min="1"
-                    max="10000"
-                />
-            </div>
+            
 
             {/* Number Line Visualization */}
             <div className="p367-canvas">

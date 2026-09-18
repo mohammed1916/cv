@@ -97,10 +97,7 @@ export default function KthLargestElementVisualizer() {
           inputError={inputError}
         />
       <div className="kl-examples">{EXAMPLES.map((ex) => <button key={ex.label} className="kl-chip" onClick={() => applyExample(ex)}>{ex.label}</button>)}</div>
-      <div className="kl-inputs">
-        <input className="kl-input" value={numsInput} onChange={(e) => { setNumsInput(e.target.value); handleReset() }} placeholder="e.g., [3,2,1,5,6,4]" />
-        <input className="kl-input small" value={kInput} onChange={(e) => { setKInput(e.target.value); handleReset() }} placeholder="k" />
-      </div>
+      
       {inputError && <div className="kl-error">{inputError}</div>}
       <div className="kl-stream">
         {nums.map((v, i) => <motion.div key={`${v}-${i}`} className={`kl-num ${step?.i === i ? 'active' : ''}`} animate={step?.i === i ? { y: -5 } : { y: 0 }}>{v}</motion.div>)}

@@ -173,22 +173,7 @@ export default function CoinChangeVisualizer() {
                     </button>
                 ))}
             </div>
-            <div className="cc-inputs">
-                <label className="cc-input-label">coins</label>
-                <input
-                    className="cc-input"
-                    value={coinsInput}
-                    onChange={(e) => { setCoinsInput(e.target.value); handleReset() }}
-                    placeholder="[1,5,6,9]"
-                />
-                <label className="cc-input-label">amount</label>
-                <input
-                    className="cc-input small"
-                    value={amountInput}
-                    onChange={(e) => { setAmountInput(e.target.value); handleReset() }}
-                    placeholder="11"
-                />
-            </div>
+            
             {inputError && <div className="cc-error-box">{inputError}</div>}
         </div>
     )

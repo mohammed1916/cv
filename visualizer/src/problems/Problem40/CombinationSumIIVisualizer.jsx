@@ -319,23 +319,7 @@ export default function CombinationSumIIVisualizer() {
           ))}
         </div>
 
-        <div style={{ display: 'flex', gap: 12, marginBottom: 16, alignItems: 'center' }}>
-          <input
-            value={candidatesInput}
-            onChange={(e) => { setCandidatesInput(e.target.value); handleReset() }}
-            placeholder="[10, 1, 2, 7, 6, 1, 5]"
-            className="csii-input"
-            style={{ flex: 1, margin: 0 }}
-          />
-          <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>target=</span>
-          <input
-            value={targetInput}
-            onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
-            placeholder="8"
-            className="csii-input"
-            style={{ width: '60px', margin: 0, textAlign: 'center' }}
-          />
-        </div>
+        
 
         <div className="csii-candidates-row">
           <span className="csii-label">Candidates (Sorted):</span>

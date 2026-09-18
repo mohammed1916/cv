@@ -108,10 +108,7 @@ export default function RemoveElementVisualizer() {
             </button>
           ))}
         </div>
-        <div style={{ display: 'flex', gap: 12, marginBottom: 24 }}>
-          <input value={numsInput} onChange={(e) => { setNumsInput(e.target.value); handleReset() }} className="removeel-input" style={{ flex: 1 }} />
-          <input value={valInput} onChange={(e) => { setValInput(e.target.value); handleReset() }} className="removeel-input" style={{ width: '60px' }} />
-        </div>
+        
         <div className="removeel-array-container">
           {nums.map((num, idx) => {
             const isActive = step?.i === idx

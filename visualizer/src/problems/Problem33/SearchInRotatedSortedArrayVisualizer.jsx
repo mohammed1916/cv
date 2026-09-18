@@ -214,25 +214,7 @@ export default function SearchInRotatedSortedArrayVisualizer() {
                             </button>
                         ))}
                     </div>
-                    <div className="sirsa-inputs">
-                        <div className="sirsa-input-group">
-                            <label className="sirsa-label">nums</label>
-                            <input
-                                className="sirsa-input"
-                                value={numsInput}
-                                onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-                            />
-                        </div>
-                        <div className="sirsa-input-group">
-                            <label className="sirsa-label">target</label>
-                            <input
-                                className="sirsa-input narrow"
-                                value={targetInput}
-                                onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
-                                type="number"
-                            />
-                        </div>
-                    </div>
+                    
                 </div>
 
                 {/* Array */}

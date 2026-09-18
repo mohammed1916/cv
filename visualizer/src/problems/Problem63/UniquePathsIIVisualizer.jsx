@@ -216,20 +216,7 @@ function UniquePathsIIVisualization({ m, n, obstacleGrid, step, onApplyExample, 
                             <button key={ex.label} className="upii-chip" onClick={() => onApplyExample(ex)}>{ex.label}</button>
                         ))}
                     </div>
-                    <div className="upii-inputs">
-                        <label className="upii-input-label">
-                            m (rows):
-                            <input className="upii-input-num" type="number" min={1} max={6} value={mInput}
-                                onChange={(e) => { setMInput(Number(e.target.value));
-
- handleReset() }} />
-                        </label>
-                        <label className="upii-input-label">
-                            n (cols):
-                            <input className="upii-input-num" type="number" min={1} max={6} value={nInput}
-                                onChange={(e) => { setNInput(Number(e.target.value)); handleReset() }} />
-                        </label>
-                    </div>
+                    
                 </div>
 
                 {/* Input Grid - for editing obstacles */}

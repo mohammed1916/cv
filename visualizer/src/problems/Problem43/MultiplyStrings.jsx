@@ -207,24 +207,8 @@ export default function MultiplyStringsVisualizer() {
           <div className="ms-panel">
             <div className="ms-panel-head">Input</div>
             <div className="ms-panel-body">
-              <div className="ms-field">
-                <span>num1 (multiplicand)</span>
-                <input
-                  className="ms-input"
-                  value={num1Input}
-                  onChange={(e) => setNum1Input(e.target.value)}
-                  placeholder="e.g., 123"
-                />
-              </div>
-              <div className="ms-field">
-                <span>num2 (multiplier)</span>
-                <input
-                  className="ms-input"
-                  value={num2Input}
-                  onChange={(e) => setNum2Input(e.target.value)}
-                  placeholder="e.g., 456"
-                />
-              </div>
+              
+              
               {inputError && <div className="ms-error">{inputError}</div>}
               <div className="ms-examples">
                 {EXAMPLES.map((ex) => (

@@ -229,13 +229,7 @@ export default function LCABSTVisualizer() {
                     <button key={ex.label} className="lca-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
                 ))}
             </div>
-            <div className="lca-inputs">
-                <input className="lca-input wide" value={arrInput} onChange={(e) => { setArrInput(e.target.value); handleReset() }} placeholder="tree array" />
-                <div className="lca-pq">
-                    <label>p=<input className="lca-input small" value={pInput} onChange={(e) => { setPInput(e.target.value); handleReset() }} /></label>
-                    <label>q=<input className="lca-input small" value={qInput} onChange={(e) => { setQInput(e.target.value); handleReset() }} /></label>
-                </div>
-            </div>
+            
             {inputError && <span className="lca-error">{inputError}</span>}
         </div>
     )

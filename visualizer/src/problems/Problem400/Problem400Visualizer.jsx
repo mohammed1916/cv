@@ -261,20 +261,7 @@ export default function Problem400Visualizer() {
     <div className="p400-panel-primary">
       <div className="p400-card">
         <div className="p400-section-label">Input</div>
-        <div className="p400-input-row">
-          <div className="p400-field">
-            <label className="p400-input-label" htmlFor="p400-n">Position (n)</label>
-            <input
-              id="p400-n"
-              className={`p400-input mono ${inputError ? 'has-error' : ''}`}
-              value={nInput}
-              onChange={(e) => { setNInput(e.target.value); handleReset() }}
-              placeholder="3"
-              type="number"
-              min="1"
-            />
-          </div>
-        </div>
+        
         <p className={`p400-hint ${inputError ? 'error' : ''}`}>
           {inputError || 'Digits are concatenated as 1,2,…,9,10,11,… — find the nth one.'}
         </p>

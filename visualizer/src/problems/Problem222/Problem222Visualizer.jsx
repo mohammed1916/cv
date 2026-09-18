@@ -247,21 +247,7 @@ export default function Problem222Visualizer() {
     <div className="p222-panel-primary">
       <div className="p222-card">
         <div className="p222-section-label">Input</div>
-        <div className="p222-input-row">
-          <div className="p222-field">
-            <label className="p222-input-label" htmlFor="p222-n">Node count</label>
-            <input
-              id="p222-n"
-              className={`p222-input mono ${inputError ? 'has-error' : ''}`}
-              value={nInput}
-              onChange={(e) => { setNInput(e.target.value); handleReset() }}
-              placeholder="6"
-              type="number"
-              min="0"
-              max="31"
-            />
-          </div>
-        </div>
+        
         <p className={`p222-hint ${inputError ? 'error' : ''}`}>
           {inputError || 'A complete tree of this many nodes is built; the algorithm counts them in O(log²n).'}
         </p>

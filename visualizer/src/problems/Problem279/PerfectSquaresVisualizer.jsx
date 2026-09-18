@@ -155,15 +155,7 @@ export default function PerfectSquaresVisualizer() {
                             </button>
                         ))}
                     </div>
-                    <div className="ps-inputs">
-                        <label className="ps-input-label">n</label>
-                        <input
-                            className="ps-input"
-                            value={nInput}
-                            onChange={(e) => { setNInput(e.target.value); handleReset() }}
-                            placeholder="7"
-                        />
-                    </div>
+                    
                     {inputError && <div className="ps-error-box">{inputError}</div>}
                 </div>),
       state: (<div className="ps-panel-body">

@@ -176,19 +176,7 @@ function InputPanel({ strsInput, setStrsInput, handleReset, applyExample, inputE
       </div>
 
       <div className="lcp-input-section">
-        <label htmlFor="strs-input" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ fontFamily: 'monospace', fontSize: 13, color: 'var(--text-muted)', minWidth: 60 }}>strs =</span>
-          <input
-            id="strs-input"
-            value={strsInput}
-            onChange={(e) => {
-              setStrsInput(e.target.value)
-              handleReset()
-            }}
-            placeholder='["flower", "flow", "flight"]'
-            className="lcp-input"
-          />
-        </label>
+        
         {inputError && (
           <div style={{ color: '#ea0c0c', fontSize: 12, marginTop: 8 }}>
             {inputError}

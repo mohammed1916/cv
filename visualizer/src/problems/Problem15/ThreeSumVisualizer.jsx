@@ -321,28 +321,7 @@ export default function ThreeSumVisualizer() {
       </div>
 
       <div style={{ display: 'flex', gap: 8, flexDirection: 'column' }}>
-        <div>
-          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Input Array</div>
-          <input
-            style={{
-              width: '100%',
-              padding: '8px 12px',
-              borderRadius: 4,
-              border: '1px solid var(--border)',
-              fontFamily: 'monospace',
-              fontSize: 12,
-              backgroundColor: 'var(--code-bg)',
-              color: 'var(--text)',
-            }}
-            value={numsInput}
-            onChange={(e) => {
-              setNumsInput(e.target.value)
-              handleReset()
-            }}
-            placeholder="[-1,0,1,2,-1,-4]"
-          />
-          {inputError && <div style={{ color: 'var(--error)', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
-        </div>
+        
 
         <div>
           <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Sorted Array · Pointers</div>

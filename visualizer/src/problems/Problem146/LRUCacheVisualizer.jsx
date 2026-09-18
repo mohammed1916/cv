@@ -684,33 +684,7 @@ export default function LRUCacheVisualizer() {
         ))}
       </div>
 
-      <div className="lru-input-group">
-        <label className="lru-input-field">
-          <span className="lru-input-label">commands</span>
-
-          <input
-            value={commandsInput}
-            onChange={(event) => {
-              setCommandsInput(event.target.value);
-              handleReset();
-            }}
-            className="lru-input"
-          />
-        </label>
-
-        <label className="lru-input-field">
-          <span className="lru-input-label">args</span>
-
-          <input
-            value={argsInput}
-            onChange={(event) => {
-              setArgsInput(event.target.value);
-              handleReset();
-            }}
-            className="lru-input"
-          />
-        </label>
-      </div>
+      
 
       {inputError && <div className="lru-input-error">{inputError}</div>}
 

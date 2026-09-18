@@ -157,11 +157,7 @@ export default function LCABinaryTreeVisualizer() {
                             <button key={ex.label} className="lcabt-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
                         ))}
                     </div>
-                    <div className="lcabt-inputs">
-                        <label>Tree <input className="lcabt-input wide" value={arrInput} onChange={(e) => { setArrInput(e.target.value); handleReset() }} /></label>
-                        <label>p <input className="lcabt-input narrow" value={pInput} onChange={(e) => { setPInput(e.target.value); handleReset() }} /></label>
-                        <label>q <input className="lcabt-input narrow" value={qInput} onChange={(e) => { setQInput(e.target.value); handleReset() }} /></label>
-                    </div>
+                    
                     <div className="lcabt-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
                         <svg style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }} width={CANVAS_W} height={CANVAS_H}>
                             {edges.map(({ fromId, toId }) => {

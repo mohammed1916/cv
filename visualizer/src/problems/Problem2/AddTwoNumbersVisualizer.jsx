@@ -181,24 +181,7 @@ export default function AddTwoNumbersVisualizer({ problem }) {
           ))}
         </div>
 
-        <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center' }}>
-          <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>l1=</span>
-          <input
-            value={l1Input}
-            onChange={(e) => { setL1Input(e.target.value); handleReset() }}
-            placeholder="[2, 4, 3]"
-            className="atn-input"
-            style={{ flex: 1, margin: 0 }}
-          />
-          <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>l2=</span>
-          <input
-            value={l2Input}
-            onChange={(e) => { setL2Input(e.target.value); handleReset() }}
-            placeholder="[5, 6, 4]"
-            className="atn-input"
-            style={{ flex: 1, margin: 0 }}
-          />
-        </div>
+        
 
         <div className="atn-lists-container">
           {/* L1 */}

@@ -233,20 +233,7 @@ export default function FourSumVisualizer() {
                         </button>
                     ))}
                 </div>
-                <div className="fs4-input-row">
-                    <input
-                        className="fs4-input"
-                        value={numsInput}
-                        onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-                        placeholder="[1,0,-1,0,-2,2]"
-                    />
-                    <input
-                        className="fs4-input target"
-                        value={targetInput}
-                        onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
-                        placeholder="0"
-                    />
-                </div>
+                
 
                 <div className="fs4-array">
                     {sorted.map((val, idx) => {

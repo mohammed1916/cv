@@ -336,25 +336,7 @@ function VisualizationPanel({ step, s, EXAMPLES, handleExampleClick, sInput, set
         </div>
       </div>
 
-      <div>
-        <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-          String Input
-        </label>
-        <input
-          value={sInput}
-          onChange={(e) => { setSInput(e.target.value); handleReset() }}
-          placeholder="e.g., abab"
-          style={{
-            width: '100%',
-            padding: '8px 10px',
-            border: '1px solid var(--border)',
-            borderRadius: 4,
-            fontSize: 12,
-            fontFamily: 'monospace',
-            boxSizing: 'border-box',
-          }}
-        />
-      </div>
+      
 
       <button
         onClick={handleReset}

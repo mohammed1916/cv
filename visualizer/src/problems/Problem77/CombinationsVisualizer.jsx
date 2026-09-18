@@ -113,34 +113,7 @@ function VisualizationPanel({ EXAMPLES, applyExample, nInput, setNInput, kInput,
                             ))}
                         </div>
 
-                        <div style={{ display: 'flex', gap: 12, marginBottom: 16, alignItems: 'center' }}>
-                            <div style={{ flex: 1 }}>
-                                <label style={{ display: 'block', fontSize: 12, color: 'var(--text-muted)', marginBottom: 4 }}>n</label>
-                                <input
-                                    className="comb-input"
-                                    value={nInput}
-                                    onChange={(e) => { setNInput(e.target.value);
-
- handleReset() }}
-                                    placeholder="4"
-                                    type="number"
-                                    min="1"
-                                    max="20"
-                                />
-                            </div>
-                            <div style={{ flex: 1 }}>
-                                <label style={{ display: 'block', fontSize: 12, color: 'var(--text-muted)', marginBottom: 4 }}>k</label>
-                                <input
-                                    className="comb-input"
-                                    value={kInput}
-                                    onChange={(e) => { setKInput(e.target.value); handleReset() }}
-                                    placeholder="2"
-                                    type="number"
-                                    min="1"
-                                    max="20"
-                                />
-                            </div>
-                        </div>
+                        
 
                         <div className="comb-section-label">Available numbers</div>
                         <div className="comb-nums-row">

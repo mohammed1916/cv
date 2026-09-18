@@ -192,20 +192,7 @@ export default function ThreeSumClosestVisualizer() {
               </button>
             ))}
           </div>
-          <div className="tsc3-input-row">
-            <input
-              className="tsc3-input"
-              value={numsInput}
-              onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-              placeholder="[-1,2,1,-4]"
-            />
-            <input
-              className="tsc3-input target"
-              value={targetInput}
-              onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
-              placeholder="1"
-            />
-          </div>
+          
 
           <div className="tsc3-array">
             {sorted.map((val, idx) => {

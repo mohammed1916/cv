@@ -313,45 +313,9 @@ function VisualizationPanel({ step, list1, list2, EXAMPLES, handleExampleClick, 
       </div>
 
       <div style={{ display: 'flex', gap: 8, flexDirection: 'column' }}>
-        <div>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-            List 1 (comma-separated)
-          </label>
-          <input
-            value={list1Input}
-            onChange={(e) => { setList1Input(e.target.value); handleReset() }}
-            placeholder="e.g., 7,2,4,3"
-            style={{
-              width: '100%',
-              padding: '8px 10px',
-              border: '1px solid var(--border)',
-              borderRadius: 4,
-              fontSize: 12,
-              fontFamily: 'monospace',
-              boxSizing: 'border-box',
-            }}
-          />
-        </div>
+        
 
-        <div>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-            List 2 (comma-separated)
-          </label>
-          <input
-            value={list2Input}
-            onChange={(e) => { setList2Input(e.target.value); handleReset() }}
-            placeholder="e.g., 5,6,4"
-            style={{
-              width: '100%',
-              padding: '8px 10px',
-              border: '1px solid var(--border)',
-              borderRadius: 4,
-              fontSize: 12,
-              fontFamily: 'monospace',
-              boxSizing: 'border-box',
-            }}
-          />
-        </div>
+        
 
         <button
           onClick={handleReset}

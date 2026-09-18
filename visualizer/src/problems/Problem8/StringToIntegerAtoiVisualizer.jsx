@@ -240,16 +240,7 @@ export default function StringToIntegerAtoiVisualizer() {
               ))}
             </div>
 
-            <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center' }}>
-              <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>s=</span>
-              <input
-                value={sInput}
-                onChange={(e) => { setSInput(e.target.value); handleReset() }}
-                placeholder="   -42"
-                className="atoi-input"
-                style={{ flex: 1, margin: 0, fontFamily: 'monospace' }}
-              />
-            </div>
+            
 
             {step?.phase === 'init' && (
               <div className="atoi-lstrip-alert">

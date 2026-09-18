@@ -229,24 +229,7 @@ function VisualizationPanel({ EXAMPLES, applyExample, selected, handleReset, ste
               </button>
             ))}
           </div>
-          <div className="ws-inputs">
-            <input
-              className="ws-input"
-              value={boardInput}
-              onChange={(e) => {
-                setBoardInput(e.target.value)
-                handleReset()
-              }}
-            />
-            <input
-              className="ws-input small"
-              value={wordInput}
-              onChange={(e) => {
-                setWordInput(e.target.value.toUpperCase())
-                handleReset()
-              }}
-            />
-          </div>
+          
           <div
             className="ws-grid"
             style={{ gridTemplateColumns: `repeat(${(step?.board || board)[0].length}, minmax(0, 1fr))` }}

@@ -238,25 +238,7 @@ export default function SearchRotatedArrayIIVisualizer() {
                             </button>
                         ))}
                     </div>
-                    <div className="sra2-inputs">
-                        <div className="sra2-input-group">
-                            <label className="sra2-label">nums</label>
-                            <input
-                                className="sra2-input"
-                                value={numsInput}
-                                onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-                            />
-                        </div>
-                        <div className="sra2-input-group">
-                            <label className="sra2-label">target</label>
-                            <input
-                                className="sra2-input narrow"
-                                value={targetInput}
-                                onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
-                                type="number"
-                            />
-                        </div>
-                    </div>
+                    
                 </div>
 
                 {/* Array */}

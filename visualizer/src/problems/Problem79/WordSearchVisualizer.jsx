@@ -249,10 +249,7 @@ export default function WordSearchVisualizer() {
         <div className="ws-examples">
           {EXAMPLES.map((ex) => <button key={ex.label} className="ws-chip" onClick={() => applyExample(ex)}>{ex.label}</button>)}
         </div>
-        <div className="ws-inputs">
-          <input className="ws-input" value={boardInput} onChange={(e) => { setBoardInput(e.target.value); handleReset() }} />
-          <input className="ws-input small" value={wordInput} onChange={(e) => { setWordInput(e.target.value.toUpperCase()); handleReset() }} />
-        </div>
+        
         <div className="ws-grid" style={{ gridTemplateColumns: `repeat(${(step?.board || board)[0].length}, minmax(0, 1fr))` }}>
           {(step?.board || board).flatMap((row, r) => row.map((cell, c) => {
             const current = step?.current?.[0] === r && step?.current?.[1] === c

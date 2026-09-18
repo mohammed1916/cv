@@ -185,12 +185,7 @@ export default function GuessNumberVisualizer() {
                                     value={nInput}
                                     onChange={e => { setNInput(e.target.value); handleReset() }} />
                             </div>
-                            <div className="gn-input-group">
-                                <label className="gn-label">secret pick</label>
-                                <input className="gn-input narrow" type="number" min="1"
-                                    value={pickInput}
-                                    onChange={e => { setPickInput(e.target.value); handleReset() }} />
-                            </div>
+                            
                         </div>
                     </div>
 

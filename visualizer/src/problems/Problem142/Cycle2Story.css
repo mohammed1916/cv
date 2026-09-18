@@ -195,30 +195,6 @@
 }
 
 /* SVG Linked List Layout */
-.c2s-svg-container {
-  width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 220px;
-  background: var(--surface, #0f172a);
-  border: 1px solid var(--border, #1e293b);
-  border-radius: 8px;
-  padding: 16px 8px;
-  box-sizing: border-box;
-}
-
-.c2s-svg {
-  display: block;
-  overflow: visible;
-  max-width: 100%;
-}
-
-.c2s-node-group {
-  transition: transform 0.2s ease;
-}
 
 .c2s-pulse-ring {
   animation: c2s-ring-pulse 2.5s infinite ease-in-out;
@@ -228,10 +204,6 @@
   0% { r: 28px; opacity: 0.8; }
   50% { r: 33px; opacity: 0.3; }
   100% { r: 28px; opacity: 0.8; }
-}
-
-.c2s-tag-rect {
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 /* Pointer Telemetry Dashboard */

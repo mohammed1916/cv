@@ -297,24 +297,7 @@ export default function IntegerToRomanVisualizer() {
         ))}
       </div>
 
-      <div style={{ display: 'flex', gap: 12, marginBottom: 16, alignItems: 'center' }}>
-        <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>num=</span>
-        <input
-          type="number"
-          value={numInput}
-          onChange={(e) => { setNumInput(parseInt(e.target.value, 10) || ''); handleReset() }}
-          min="1"
-          max="3999"
-          style={{
-            flex: 1,
-            padding: '8px 12px',
-            borderRadius: 4,
-            border: '1px solid var(--border)',
-            fontFamily: 'monospace',
-            fontSize: 13,
-          }}
-        />
-      </div>
+      
 
       {inputError && (
         <div style={{ padding: 12, backgroundColor: '#fee2e2', color: '#991b1b', borderRadius: 6, fontSize: 12 }}>

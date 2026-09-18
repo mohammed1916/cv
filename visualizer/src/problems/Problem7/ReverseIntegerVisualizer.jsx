@@ -198,16 +198,7 @@ export default function ReverseIntegerVisualizer() {
           ))}
         </div>
 
-        <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center' }}>
-          <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>x=</span>
-          <input
-            value={xInput}
-            onChange={(e) => { setXInput(e.target.value); handleReset() }}
-            placeholder="123"
-            className="revin-input"
-            style={{ flex: 1, margin: 0 }}
-          />
-        </div>
+        
 
         <div className="revin-math-container">
             <div className="revin-math-box x-box">

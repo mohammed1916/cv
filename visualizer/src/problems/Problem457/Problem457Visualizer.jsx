@@ -314,25 +314,7 @@ function VisualizationPanel({ step, nums, EXAMPLES, handleExampleClick, numsInpu
         </div>
       </div>
 
-      <div>
-        <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-          Array (comma-separated)
-        </label>
-        <input
-          value={numsInput}
-          onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-          placeholder="e.g., 2,-1,1,2,2"
-          style={{
-            width: '100%',
-            padding: '8px 10px',
-            border: '1px solid var(--border)',
-            borderRadius: 4,
-            fontSize: 12,
-            fontFamily: 'monospace',
-            boxSizing: 'border-box',
-          }}
-        />
-      </div>
+      
 
       <button
         onClick={handleReset}

@@ -161,17 +161,7 @@ export default function HouseRobberIIVisualizer() {
                     <button key={ex.label} className="hr2-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
                 ))}
             </div>
-            <label className="hr2-field">
-                <span>nums array</span>
-                <input
-                    className="hr2-input"
-                    value={numsInput}
-                    onChange={(e) => {
-                        setNumsInput(e.target.value)
-                        handleReset()
-                    }}
-                />
-            </label>
+            
             {inputError && <div className="hr2-error">{inputError}</div>}
             <div className="hr2-output-wrap">
                 <div className="hr2-output-label">Input parsed</div>

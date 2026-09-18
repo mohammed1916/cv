@@ -107,133 +107,9 @@
   text-transform: uppercase;
 }
 
-.sl-svg-scroll {
-  width: 100%;
-
-  overflow-x: auto;
-  overflow-y: hidden;
-}
-
-.sl-svg {
-  display: block;
-
-  min-width: 100%;
-}
-
-.sl-link {
-  stroke: var(--text-muted);
-
-  stroke-width: 2;
-}
-
-.sl-arrow-head {
-  fill: var(--text-muted);
-}
-
-.sl-svg-node {
-  stroke-width: 2;
-}
-
-.sl-svg-node.main {
-  fill: var(--surface2);
-  stroke: #89b4fa;
-}
-
-.sl-svg-node.left {
-  fill: rgba(59, 130, 246, 0.1);
-  stroke: #3b82f6;
-}
-
-.sl-svg-node.right {
-  fill: rgba(168, 85, 247, 0.1);
-  stroke: #a855f7;
-}
-
-.sl-svg-node.merged {
-  fill: rgba(34, 197, 94, 0.1);
-  stroke: #22c55e;
-}
-
-.sl-svg-node.active {
-  stroke-width: 3;
-}
-
-.sl-node-divider {
-  stroke: var(--border);
-
-  stroke-width: 1;
-}
-
-.sl-node-value {
-  fill: var(--text);
-
-  font-size: 14px;
-  font-weight: 700;
-  font-family: monospace;
-}
-
-.sl-next-label {
-  fill: var(--text-muted);
-
-  font-size: 7px;
-  font-family: monospace;
-}
-
-.sl-null {
-  fill: var(--text-muted);
-
-  font-size: 10px;
-  font-family: monospace;
-
-  dominant-baseline: middle;
-}
-
 /* ────────────────────────────────────────────────────────────────────────
    Pointer labels
    ──────────────────────────────────────────────────────────────────────── */
-
-.sl-pointer-label {
-  stroke-width: 1;
-}
-
-.sl-pointer-label.left {
-  fill: rgba(59, 130, 246, 0.18);
-  stroke: #3b82f6;
-}
-
-.sl-pointer-label.right {
-  fill: rgba(168, 85, 247, 0.18);
-  stroke: #a855f7;
-}
-
-.sl-pointer-label.merged {
-  fill: rgba(34, 197, 94, 0.18);
-  stroke: #22c55e;
-}
-
-.sl-pointer-text {
-  fill: var(--text);
-
-  font-size: 9px;
-  font-weight: 700;
-  font-family: monospace;
-}
-
-.sl-pointer-line {
-  stroke-width: 1.5;
-}
-
-.sl-pointer-line.left {
-  stroke: #3b82f6;
-}
-
-.sl-pointer-line.right {
-  stroke: #a855f7;
-}
-
-.sl-pointer-line.merged {
-  stroke: #22c55e;
-}
 
 /* ────────────────────────────────────────────────────────────────────────
    Split halves
@@ -287,15 +163,6 @@
 
   font-size: 13px;
   font-family: monospace;
-}
-
-.sl-empty {
-  padding: 18px 6px;
-
-  color: var(--text-muted);
-
-  font-size: 11px;
-  font-style: italic;
 }
 
 .sl-ready {

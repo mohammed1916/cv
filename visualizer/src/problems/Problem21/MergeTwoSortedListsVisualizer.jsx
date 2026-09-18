@@ -305,63 +305,7 @@ export default function MergeTwoSortedListsVisualizer() {
           ))}
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            gap: 12,
-            marginBottom: 24,
-            alignItems: "center",
-          }}
-        >
-          <span
-            style={{
-              color: "#e90d33",
-              fontSize: 13,
-              fontFamily: "monospace",
-              fontWeight: "bold",
-            }}
-          >
-            list1=
-          </span>
-          <input
-            value={l1Input}
-            onChange={(e) => {
-              setL1Input(e.target.value);
-              handleReset();
-            }}
-            placeholder="[1, 2, 4]"
-            className="mtsl-input"
-            style={{
-              flex: 1,
-              margin: 0,
-              borderColor: "rgba(244, 63, 94, 0.3)",
-            }}
-          />
-          <span
-            style={{
-              color: "#0b7db0",
-              fontSize: 13,
-              fontFamily: "monospace",
-              fontWeight: "bold",
-            }}
-          >
-            list2=
-          </span>
-          <input
-            value={l2Input}
-            onChange={(e) => {
-              setL2Input(e.target.value);
-              handleReset();
-            }}
-            placeholder="[1, 3, 4]"
-            className="mtsl-input"
-            style={{
-              flex: 1,
-              margin: 0,
-              borderColor: "rgba(14, 165, 233, 0.3)",
-            }}
-          />
-        </div>
+        
 
         <div className="mtsl-lists-container">
           {/* List 1 */}

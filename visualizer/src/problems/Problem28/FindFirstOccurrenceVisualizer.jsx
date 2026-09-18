@@ -201,28 +201,7 @@ export default function FindFirstOccurrenceVisualizer({ problem }) {
           ))}
         </div>
 
-        <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center', flexDirection: 'column', alignItems: 'flex-start' }}>
-          <div style={{ display: 'flex', gap: 12, alignItems: 'center', width: '100%' }}>
-            <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace', minWidth: 70 }}>haystack:</span>
-            <input
-              value={haystackInput}
-              onChange={(e) => { setHaystackInput(e.target.value); handleReset() }}
-              placeholder='"sadbutsad"'
-              className="ffo-input"
-              style={{ flex: 1, margin: 0 }}
-            />
-          </div>
-          <div style={{ display: 'flex', gap: 12, alignItems: 'center', width: '100%' }}>
-            <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace', minWidth: 70 }}>needle:</span>
-            <input
-              value={needleInput}
-              onChange={(e) => { setNeedleInput(e.target.value); handleReset() }}
-              placeholder='"sad"'
-              className="ffo-input"
-              style={{ flex: 1, margin: 0 }}
-            />
-          </div>
-        </div>
+        
 
         <div className="ffo-haystack-container">
           <div className="ffo-label">Haystack:</div>

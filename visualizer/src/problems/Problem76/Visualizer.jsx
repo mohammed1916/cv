@@ -168,32 +168,7 @@ function SlidingWindowViz({ step, s, EXAMPLES, sInput, setSInput, tInput, setTIn
         ))}
       </div>
 
-      <div style={{ display: 'flex', gap: 8, flexDirection: 'column' }}>
-        <input
-          value={sInput}
-          onChange={(e) => { setSInput(e.target.value); handleReset() }}
-          placeholder="Enter string s"
-          style={{
-            padding: '8px 10px',
-            border: '1px solid var(--border)',
-            borderRadius: 4,
-            fontSize: 12,
-            fontFamily: 'monospace',
-          }}
-        />
-        <input
-          value={tInput}
-          onChange={(e) => { setTInput(e.target.value); handleReset() }}
-          placeholder="Enter string t"
-          style={{
-            padding: '8px 10px',
-            border: '1px solid var(--border)',
-            borderRadius: 4,
-            fontSize: 12,
-            fontFamily: 'monospace',
-          }}
-        />
-      </div>
+      
 
       <div style={{ flex: 1, overflow: 'auto', minHeight: 200 }}>
         <div style={{ display: 'flex', gap: 4, padding: 8, flexWrap: 'wrap', alignContent: 'flex-start' }}>

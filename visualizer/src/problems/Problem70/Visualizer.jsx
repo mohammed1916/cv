@@ -155,19 +155,7 @@ function VisualizationPanel({
           ))}
         </div>
 
-        <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center' }}>
-          <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>n =</span>
-          <input
-            type="number"
-            value={nInput}
-            onChange={(e) => { setNInput(e.target.value); handleReset() }}
-            placeholder="5"
-            className="cs-dp-input"
-            style={{ width: '80px', margin: 0, textAlign: 'center' }}
-            min="1"
-            max="45"
-          />
-        </div>
+        
 
         <div className="cs-dp-visual-area">
           <div className="cs-dp-stairs-container">

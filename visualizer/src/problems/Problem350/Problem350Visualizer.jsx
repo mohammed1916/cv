@@ -448,45 +448,9 @@ function VisualizationPanel({ step, nums1, nums2, EXAMPLES, handleExampleClick, 
       </div>
 
       <div style={{ display: 'flex', gap: 8, flexDirection: 'column' }}>
-        <div>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-            nums1 (comma-separated)
-          </label>
-          <input
-            value={nums1Input}
-            onChange={(e) => { setNums1Input(e.target.value); handleReset() }}
-            placeholder="e.g., 1,2,2,1"
-            style={{
-              width: '100%',
-              padding: '8px 10px',
-              border: '1px solid var(--border)',
-              borderRadius: 4,
-              fontSize: 12,
-              fontFamily: 'monospace',
-              boxSizing: 'border-box',
-            }}
-          />
-        </div>
+        
 
-        <div>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-            nums2 (comma-separated)
-          </label>
-          <input
-            value={nums2Input}
-            onChange={(e) => { setNums2Input(e.target.value); handleReset() }}
-            placeholder="e.g., 2,2"
-            style={{
-              width: '100%',
-              padding: '8px 10px',
-              border: '1px solid var(--border)',
-              borderRadius: 4,
-              fontSize: 12,
-              fontFamily: 'monospace',
-              boxSizing: 'border-box',
-            }}
-          />
-        </div>
+        
 
         <button
           onClick={handleReset}

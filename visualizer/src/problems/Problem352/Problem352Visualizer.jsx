@@ -422,19 +422,7 @@ export default function DesignSnakeGameVisualizer() {
             </button>
           ))}
         </div>
-        <div className="dsg-input-row">
-          <span className="dsg-input-prefix">moves =</span>
-          <input
-            className="dsg-input"
-            value={movementsInput}
-            onChange={(e) => {
-              setMovementsInput(e.target.value)
-              handleReset()
-            }}
-            placeholder="RRDDR"
-            maxLength={50}
-          />
-        </div>
+        
         {inputError && <span className="dsg-error-pill">{inputError}</span>}
         <div className="dsg-note-box">
           <div className="dsg-note-title">How it works</div>

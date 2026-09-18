@@ -1,4 +1,5 @@
-﻿import { createPortal } from "react-dom";
+import LinkedListGraph from "../../components/shared/LinkedListGraph";
+import { createPortal } from "react-dom";
 import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 
@@ -396,148 +397,14 @@ function generateSteps(initial) {
   return steps;
 }
 
-function GraphRow({
-  title,
-  nodes,
-  tone = "main",
-  pointerIndex = null,
-  pointerLabel = "",
-  emptyText = "empty",
-}) {
-  if (!nodes || nodes.length === 0) {
-    return (
-      <div className="sl-graph-section">
-        {title && <div className="sl-graph-title">{title}</div>}
-        <div className="sl-empty">{emptyText}</div>
-      </div>
-    );
-  }
-
-  const nodeWidth = 66;
-  const nodeHeight = 44;
-  const gap = 44;
-  const startX = 24;
-  const y = 62;
-
-  const width = Math.max(320, startX + nodes.length * (nodeWidth + gap) + 80);
-
-  return (
-    <div className="sl-graph-section">
-      {title && <div className="sl-graph-title">{title}</div>}
-
-      <div className="sl-svg-scroll">
-        <svg width={width} height="145" className="sl-svg">
-          <defs>
-            <marker
-              id={`sl-arrow-${tone}`}
-              markerWidth="9"
-              markerHeight="9"
-              refX="8"
-              refY="4"
-              orient="auto"
-            >
-              <path d="M0,0 L0,8 L8,4 z" className="sl-arrow-head" />
-            </marker>
-          </defs>
-
-          {nodes.map((node, index) => {
-            const x = startX + index * (nodeWidth + gap);
-            const isPointer = pointerIndex === index;
-
-            return (
-              <g key={node.id}>
-                {index < nodes.length - 1 && (
-                  <line
-                    x1={x + nodeWidth}
-                    y1={y + nodeHeight / 2}
-                    x2={x + nodeWidth + gap - 10}
-                    y2={y + nodeHeight / 2}
-                    className="sl-link"
-                    markerEnd={`url(#sl-arrow-${tone})`}
-                  />
-                )}
-
-                {isPointer && pointerLabel && (
-                  <>
-                    <rect
-                      x={x + nodeWidth / 2 - 24}
-                      y="8"
-                      width="48"
-                      height="20"
-                      rx="5"
-                      className={`sl-pointer-label ${tone}`}
-                    />
-
-                    <text
-                      x={x + nodeWidth / 2}
-                      y="22"
-                      textAnchor="middle"
-                      className="sl-pointer-text"
-                    >
-                      {pointerLabel}
-                    </text>
-
-                    <line
-                      x1={x + nodeWidth / 2}
-                      y1="28"
-                      x2={x + nodeWidth / 2}
-                      y2={y - 6}
-                      className={`sl-pointer-line ${tone}`}
-                    />
-                  </>
-                )}
-
-                <motion.rect
-                  x={x}
-                  y={y}
-                  width={nodeWidth}
-                  height={nodeHeight}
-                  rx="8"
-                  className={`sl-svg-node ${tone} ${isPointer ? "active" : ""}`}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                />
-
-                <line
-                  x1={x + 45}
-                  y1={y}
-                  x2={x + 45}
-                  y2={y + nodeHeight}
-                  className="sl-node-divider"
-                />
-
-                <text
-                  x={x + 22}
-                  y={y + 28}
-                  textAnchor="middle"
-                  className="sl-node-value"
-                >
-                  {node.val}
-                </text>
-
-                <text
-                  x={x + 55}
-                  y={y + 27}
-                  textAnchor="middle"
-                  className="sl-next-label"
-                >
-                  next
-                </text>
-              </g>
-            );
-          })}
-
-          <text
-            x={startX + (nodes.length - 1) * (nodeWidth + gap) + nodeWidth + 28}
-            y={y + 28}
-            className="sl-null"
-          >
-            null
-          </text>
-        </svg>
-      </div>
-    </div>
-  );
+function GraphRow({ title, nodes = [], tone = "main", pointerIndex = null, pointerLabel = "", emptyText = "empty" }) {
+  const active = nodes[pointerIndex];
+  return <div className="sl-graph-section">
+    {title && <div className="sl-graph-title">{title}</div>}
+    <LinkedListGraph nodes={nodes} tone={tone} label={title || "Linked list"} emptyText={emptyText}
+      highlightedIds={active ? [active.id] : []}
+      pointers={pointerLabel ? [{ label: pointerLabel, nodeId: active?.id ?? null }] : []} />
+  </div>;
 }
 
 function SortListVisualization({ step }) {

@@ -11,6 +11,13 @@ import CodePatternAnnotations from "../CodePatternAnnotations";
 import PatternLegend from "../PatternLegend";
 import LuminoDockPanel from "../LuminoDockPanel";
 
+function fieldValues(definition, example) {
+  const source = example?.values ?? example?.input ?? example ?? {};
+  return Object.fromEntries(definition.fields.map(field => [field.key,
+    source[field.key] ?? definition.initialValues?.[field.key] ?? field.defaultValue ?? '',
+  ]));
+}
+
 // The shell owns inputs, docking and playback; each definition owns its algorithm and scene.
 export default function AlgorithmStoryWorkspace({ definition }) {
   const {
@@ -24,7 +31,7 @@ export default function AlgorithmStoryWorkspace({ definition }) {
   );
   const [inputValues, setInputValues] = useState(() => {
     if (isMultiField) {
-      return definition.initialValues || {};
+      return fieldValues(definition, definition.initialValues ?? EXAMPLES?.[0]);
     }
     return { arr: definition.initialInput };
   });
@@ -70,13 +77,13 @@ export default function AlgorithmStoryWorkspace({ definition }) {
     (ex) => {
       setActiveLabel(ex.label);
       if (isMultiField) {
-        setInputValues(ex.values || ex.input || ex);
+        setInputValues(fieldValues(definition, ex));
       } else {
         setInputValues({ arr: ex.input });
       }
       handleReset();
     },
-    [handleReset, isMultiField],
+    [handleReset, isMultiField, definition],
   );
 
   const fields = isMultiField

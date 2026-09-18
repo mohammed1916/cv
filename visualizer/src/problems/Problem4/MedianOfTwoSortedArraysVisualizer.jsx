@@ -731,33 +731,7 @@ export default function MedianOfTwoSortedArraysVisualizer() {
             ))}
           </div>
 
-          <div className="median-input-grid">
-            <div className="median-input-group">
-              <span className="median-input-prefix">nums1 =</span>
-              <input
-                className="median-input"
-                value={nums1Input}
-                onChange={(event) => {
-                  setNums1Input(event.target.value);
-                  handleReset();
-                }}
-                placeholder="[1, 3]"
-              />
-            </div>
-
-            <div className="median-input-group">
-              <span className="median-input-prefix">nums2 =</span>
-              <input
-                className="median-input"
-                value={nums2Input}
-                onChange={(event) => {
-                  setNums2Input(event.target.value);
-                  handleReset();
-                }}
-                placeholder="[2]"
-              />
-            </div>
-          </div>
+          
 
           <div className="median-note-box">
             <div className="median-note-title">How the search is set up</div>

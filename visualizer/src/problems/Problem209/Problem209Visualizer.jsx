@@ -181,28 +181,7 @@ export default function Problem209Visualizer() {
     <div className="p209-panel-primary">
       <div className="p209-card">
         <div className="p209-section-label">Input</div>
-        <div className="p209-input-row">
-          <div className="p209-field">
-            <label className="p209-input-label" htmlFor="p209-target">Target</label>
-            <input
-              id="p209-target"
-              className={`p209-input mono short ${inputError ? 'has-error' : ''}`}
-              value={targetInput}
-              onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
-              placeholder="7"
-            />
-          </div>
-          <div className="p209-field grow">
-            <label className="p209-input-label" htmlFor="p209-nums">Numbers</label>
-            <input
-              id="p209-nums"
-              className={`p209-input mono ${inputError ? 'has-error' : ''}`}
-              value={numsInput}
-              onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-              placeholder="2,3,1,2,4,3"
-            />
-          </div>
-        </div>
+        
         <p className={`p209-hint ${inputError ? 'error' : ''}`}>
           {inputError || 'Find the shortest contiguous subarray whose sum is at least target.'}
         </p>

@@ -138,14 +138,7 @@ function ReverseLinkedListViz({ step, values, nodes, arrows, EXAMPLES, valInput,
                         </button>
                     ))}
                 </div>
-                <div className="rll-input-row">
-                    <input
-                        className="rll-input"
-                        value={valInput}
-                        onChange={(e) => { setValInput(e.target.value); handleReset() }}
-                        placeholder="[1,2,3,4,5]"
-                    />
-                </div>
+                
 
                 {/* Node row */}
                 <div className="rll-canvas">

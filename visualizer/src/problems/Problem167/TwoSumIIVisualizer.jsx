@@ -155,18 +155,7 @@ export default function TwoSumIIVisualizer() {
                             <button key={ex.label} className="ts2-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
                         ))}
                     </div>
-                    <div className="ts2-inputs">
-                        <div className="ts2-input-group">
-                            <label className="ts2-label">numbers (sorted)</label>
-                            <input className="ts2-input" value={numsInput}
-                                onChange={e => { setNumsInput(e.target.value); handleReset() }} />
-                        </div>
-                        <div className="ts2-input-group">
-                            <label className="ts2-label">target</label>
-                            <input className="ts2-input narrow" type="number" value={targetInput}
-                                onChange={e => { setTargetInput(e.target.value); handleReset() }} />
-                        </div>
-                    </div>
+                    
                 </div>
 
                 {/* Array */}

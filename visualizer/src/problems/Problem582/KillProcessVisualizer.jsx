@@ -383,33 +383,11 @@ export default function KillProcessVisualizer() {
               ))}
             </div>
 
-            <div>
-              <label style={{ color: '#6773a1', fontSize: '11px', fontWeight: 600 }}>pid (process IDs):</label>
-              <input className="kp-input" value={pidInput} onChange={(e) => {
-                setPidInput(e.target.value)
-                handleReset()
-              }} />
-            </div>
+            
 
-            <div>
-              <label style={{ color: '#6773a1', fontSize: '11px', fontWeight: 600 }}>ppid (parent IDs):</label>
-              <input className="kp-input" value={ppidInput} onChange={(e) => {
-                setPpidInput(e.target.value)
-                handleReset()
-              }} />
-            </div>
+            
 
-            <div className="kp-control-group">
-              <label>Kill Process:</label>
-              <input
-                type="number"
-                value={killInput}
-                onChange={(e) => {
-                  setKillInput(e.target.value)
-                  handleReset()
-                }}
-              />
-            </div>
+            
 
             <div className="kp-canvas">
               <ProcessTreeVisualization

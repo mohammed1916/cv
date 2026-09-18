@@ -336,47 +336,7 @@ function VisualizationPanel({ step, maxChoosable, desiredTotal, EXAMPLES, handle
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-        <div>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-            Max Choosable Integer
-          </label>
-          <input
-            value={maxChoosableInput}
-            onChange={(e) => { setMaxChoosableInput(e.target.value); handleReset() }}
-            placeholder="e.g., 10"
-            style={{
-              width: '100%',
-              padding: '8px 10px',
-              border: '1px solid var(--border)',
-              borderRadius: 4,
-              fontSize: 12,
-              fontFamily: 'monospace',
-              boxSizing: 'border-box',
-            }}
-          />
-        </div>
-
-        <div>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-            Desired Total
-          </label>
-          <input
-            value={desiredTotalInput}
-            onChange={(e) => { setDesiredTotalInput(e.target.value); handleReset() }}
-            placeholder="e.g., 40"
-            style={{
-              width: '100%',
-              padding: '8px 10px',
-              border: '1px solid var(--border)',
-              borderRadius: 4,
-              fontSize: 12,
-              fontFamily: 'monospace',
-              boxSizing: 'border-box',
-            }}
-          />
-        </div>
-      </div>
+      
 
       <button
         onClick={handleReset}

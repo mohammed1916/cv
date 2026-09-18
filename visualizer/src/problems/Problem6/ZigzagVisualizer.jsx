@@ -372,19 +372,7 @@ export default function ZigzagVisualizer() {
               maxLength={28}
             />
           </div>
-          <div className="zv-field-group zv-field-rows">
-            <label className="zv-input-label">Rows</label>
-            <input
-              className={`zv-input ${rowError ? 'has-error' : ''}`}
-              value={rowCountInput}
-              onChange={(event) => {
-                setRowCountInput(event.target.value.replace(/[^0-9]/g, ''))
-                if (attemptedSubmit) setAttemptedSubmit(false)
-              }}
-              onKeyDown={(event) => event.key === 'Enter' && handleVisualize()}
-              inputMode="numeric"
-            />
-          </div>
+          
           <button className="zv-btn zv-btn-primary" onClick={handleVisualize}>Visualize</button>
         </div>
         <div className="zv-support-row">

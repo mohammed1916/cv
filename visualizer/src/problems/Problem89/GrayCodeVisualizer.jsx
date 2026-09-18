@@ -131,7 +131,7 @@ export default function GrayCodeVisualizer() {
                 {EXAMPLES && EXAMPLES.length > 0 && EXAMPLES.map(ex => <button key={ex.label} onClick={() => applyExample(ex)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: 'var(--surface2)' }}>
                     {ex.label}
                 </button>)}
-                <label style={{ marginLeft: 'auto', display: 'flex', gap: 6, alignItems: 'center', fontSize: 12 }}>n = <input type="number" min="0" max="8" value={nInput} onChange={e => { setNInput(e.target.value); handleReset() }} style={{ width: 50, padding: '4px 8px', borderRadius: 4, border: '1px solid var(--border)' }} /></label>
+                
             </div>
             {inputError && <div style={{ color: '#991b1b', fontSize: 11 }}>{inputError}</div>}
 

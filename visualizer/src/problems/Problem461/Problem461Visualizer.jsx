@@ -334,47 +334,7 @@ function VisualizationPanel({ step, x, y, EXAMPLES, handleExampleClick, xInput, 
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-        <div>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-            x
-          </label>
-          <input
-            value={xInput}
-            onChange={(e) => { setXInput(e.target.value); handleReset() }}
-            placeholder="e.g., 1"
-            style={{
-              width: '100%',
-              padding: '8px 10px',
-              border: '1px solid var(--border)',
-              borderRadius: 4,
-              fontSize: 12,
-              fontFamily: 'monospace',
-              boxSizing: 'border-box',
-            }}
-          />
-        </div>
-
-        <div>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-            y
-          </label>
-          <input
-            value={yInput}
-            onChange={(e) => { setYInput(e.target.value); handleReset() }}
-            placeholder="e.g., 4"
-            style={{
-              width: '100%',
-              padding: '8px 10px',
-              border: '1px solid var(--border)',
-              borderRadius: 4,
-              fontSize: 12,
-              fontFamily: 'monospace',
-              boxSizing: 'border-box',
-            }}
-          />
-        </div>
-      </div>
+      
 
       <button
         onClick={handleReset}

@@ -144,24 +144,7 @@ export default function LongestRepeatingVisualizer() {
                 ))}
             </div>
 
-            <div style={{ display: "flex", gap: 10, alignItems: "center", marginTop: 12 }}>
-                <input
-                    className="lr-input"
-                    value={sInput}
-                    onChange={(e) => { setSInput(e.target.value); handleReset(); }}
-                    placeholder="String"
-                />
-                <label className="lr-k-label">
-                    k=
-                    <input
-                        className="lr-k-input"
-                        type="number"
-                        min={0}
-                        value={kInput}
-                        onChange={(e) => { setKInput(e.target.value); handleReset(); }}
-                    />
-                </label>
-            </div>
+            
         </div>
     );
 

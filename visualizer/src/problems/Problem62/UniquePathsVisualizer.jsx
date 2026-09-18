@@ -88,20 +88,7 @@ function UniquePathsVisualization({ m, n, step, onApplyExample, mInput, nInput, 
                             <button key={ex.label} className="up-chip" onClick={() => onApplyExample(ex)}>{ex.label}</button>
                         ))}
                     </div>
-                    <div className="up-inputs">
-                        <label className="up-input-label">
-                            m (rows):
-                            <input className="up-input-num" type="number" min={1} max={7} value={mInput}
-                                onChange={(e) => { setMInput(Number(e.target.value));
-
- handleReset() }} />
-                        </label>
-                        <label className="up-input-label">
-                            n (cols):
-                            <input className="up-input-num" type="number" min={1} max={8} value={nInput}
-                                onChange={(e) => { setNInput(Number(e.target.value)); handleReset() }} />
-                        </label>
-                    </div>
+                    
                 </div>
 
                 {/* Grid */}

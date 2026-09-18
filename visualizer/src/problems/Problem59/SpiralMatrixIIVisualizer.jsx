@@ -279,20 +279,7 @@ export default function SpiralMatrixIIVisualizer() {
           ))}
         </div>
 
-        <div style={{ marginBottom: 12 }}>
-          <label style={{ fontSize: 13, color: '#627794', display: 'block', marginBottom: 6 }}>
-            n (matrix size):
-          </label>
-          <input
-            value={nInput}
-            onChange={(e) => { setNInput(e.target.value); handleReset() }}
-            placeholder="3"
-            className="smi-input"
-            type="number"
-            min="1"
-            max="20"
-          />
-        </div>
+        
 
         <div className="smi-matrix-container">
           <div
