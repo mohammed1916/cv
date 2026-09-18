@@ -1,219 +1,891 @@
-﻿import { createPortal } from 'react-dom'
-import LuminoDockPanel from '../../components/LuminoDockPanel'
-import FloatingPanel from "../../components/shared/FloatingPanel"
-import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
+﻿import { createPortal } from "react-dom";
 import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
+
+import LuminoDockPanel from "../../components/LuminoDockPanel";
+import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
-import PatternOverlay from "../../components/PatternOverlay";
+import ManualInputPanel from "../../components/shared/ManualInputPanel";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
+
+import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
-import "./SortListVisualizer.css";
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
-import CodePatternAnnotations from '../../components/CodePatternAnnotations'
-import PatternLegend from '../../components/PatternLegend'
 
-// ─── Pattern annotations ───────────────────────────────────────────────────
-const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
-const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
+import { getExamples } from "../../config/examplesRegistry";
+
+import "./SortListVisualizer.css";
+
+const LINE_PATTERN_MAP = {};
+const PATTERNS = [];
+
 const SOLUTION_CODE = [
-    { line: 1, text: "def sortList(head):" },
-    { line: 2, text: "    if not head or not head.next: return head" },
-    { line: 3, text: "    # Find middle" },
-    { line: 4, text: "    slow, fast = head, head.next" },
-    { line: 5, text: "    while fast and fast.next:" },
-    { line: 6, text: "        slow = slow.next; fast = fast.next.next" },
-    { line: 7, text: "    mid = slow.next; slow.next = None" },
-    { line: 8, text: "    left = sortList(head)" },
-    { line: 9, text: "    right = sortList(mid)" },
-    { line: 10, text: "    # Merge sorted halves" },
-    { line: 11, text: "    dummy = ListNode(0); cur = dummy" },
-    { line: 12, text: "    while left and right:" },
-    { line: 13, text: "        if left.val <= right.val:" },
-    { line: 14, text: "            cur.next = left; left = left.next" },
-    { line: 15, text: "        else:" },
-    { line: 16, text: "            cur.next = right; right = right.next" },
-    { line: 17, text: "        cur = cur.next" },
-    { line: 18, text: "    cur.next = left or right" },
-    { line: 19, text: "    return dummy.next" },
+  { line: 1, text: "def sortList(head):" },
+  {
+    line: 2,
+    text: "    if not head or not head.next: return head",
+  },
+  { line: 3, text: "    # Find middle" },
+  {
+    line: 4,
+    text: "    slow, fast = head, head.next",
+  },
+  {
+    line: 5,
+    text: "    while fast and fast.next:",
+  },
+  {
+    line: 6,
+    text: "        slow = slow.next; fast = fast.next.next",
+  },
+  {
+    line: 7,
+    text: "    mid = slow.next; slow.next = None",
+  },
+  {
+    line: 8,
+    text: "    left = sortList(head)",
+  },
+  {
+    line: 9,
+    text: "    right = sortList(mid)",
+  },
+  {
+    line: 10,
+    text: "    # Merge sorted halves",
+  },
+  {
+    line: 11,
+    text: "    dummy = ListNode(0); cur = dummy",
+  },
+  {
+    line: 12,
+    text: "    while left and right:",
+  },
+  {
+    line: 13,
+    text: "        if left.val <= right.val:",
+  },
+  {
+    line: 14,
+    text: "            cur.next = left; left = left.next",
+  },
+  {
+    line: 15,
+    text: "        else:",
+  },
+  {
+    line: 16,
+    text: "            cur.next = right; right = right.next",
+  },
+  {
+    line: 17,
+    text: "        cur = cur.next",
+  },
+  {
+    line: 18,
+    text: "    cur.next = left or right",
+  },
+  {
+    line: 19,
+    text: "    return dummy.next",
+  },
 ];
 
-// Simulate merge sort steps iteratively for visualization
-function generateSteps(initial) {
-    const steps = [];
+const EXAMPLES = getExamples("sort-list");
 
-    function snap(activeLine, arr, leftArr, rightArr, mergedArr, message) {
-        steps.push({ activeLine, arr: [...arr], left: leftArr ? [...leftArr] : null, right: rightArr ? [...rightArr] : null, merged: mergedArr ? [...mergedArr] : null, message });
-    }
-
-    function mergeSort(arr) {
-        if (arr.length <= 1) return arr;
-
-        const mid = Math.floor(arr.length / 2);
-        const leftHalf = arr.slice(0, mid);
-        const rightHalf = arr.slice(mid);
-
-        snap(7, arr, leftHalf, rightHalf, null, `Split [${arr.join("→")}] → [${leftHalf.join(",")}] | [${rightHalf.join(",")}]`);
-
-        const left = mergeSort(leftHalf);
-        const right = mergeSort(rightHalf);
-
-        // Merge
-        const merged = [];
-        let l = 0, r = 0;
-        snap(11, arr, [...left], [...right], [], `Merge [${left.join(",")}] and [${right.join(",")}]`);
-        while (l < left.length && r < right.length) {
-            if (left[l] <= right[r]) {
-                merged.push(left[l]);
-                snap(14, arr, left.slice(l + 1), right.slice(r), [...merged], `Take ${left[l]} from left`);
-                l++;
-            } else {
-                merged.push(right[r]);
-                snap(16, arr, left.slice(l), right.slice(r + 1), [...merged], `Take ${right[r]} from right`);
-                r++;
-            }
-        }
-        while (l < left.length) { merged.push(left[l++]); }
-        while (r < right.length) { merged.push(right[r++]); }
-        snap(18, arr, [], [], [...merged], `Merged: [${merged.join("→")}]`);
-        return merged;
-    }
-
-    snap(1, initial, null, null, null, `Sort linked list: [${initial.join("→")}]`);
-    const result = mergeSort([...initial]);
-    snap(19, result, null, null, null, `Done! Sorted: [${result.join("→")}]`);
-    return steps;
+function makeNodes(values, prefix = "n") {
+  return values.map((value, index) => ({
+    id: `${prefix}-${index}-${value}`,
+    val: value,
+  }));
 }
 
-const EXAMPLES = getExamples('sort-list');
+function cloneNodes(nodes) {
+  return nodes.map((node) => ({ ...node }));
+}
+
+function values(nodes) {
+  return nodes.map((node) => node.val);
+}
+
+function generateSteps(initial) {
+  const steps = [];
+  let frameId = 0;
+
+  function pushStep({
+    activeLine,
+    phase,
+    message,
+    current = [],
+    left = [],
+    right = [],
+    merged = [],
+    leftIndex = null,
+    rightIndex = null,
+    curIndex = null,
+    depth = 0,
+    done = false,
+  }) {
+    steps.push({
+      id: frameId++,
+      activeLine,
+      relatedLines: [activeLine],
+      phase,
+      message,
+      current: cloneNodes(current),
+      left: cloneNodes(left),
+      right: cloneNodes(right),
+      merged: cloneNodes(merged),
+      leftIndex,
+      rightIndex,
+      curIndex,
+      depth,
+      done,
+    });
+  }
+
+  function mergeSort(nodes, depth = 0) {
+    if (nodes.length <= 1) {
+      pushStep({
+        activeLine: 2,
+        phase: "base",
+        current: nodes,
+        depth,
+        message:
+          nodes.length === 1
+            ? `Base case: node ${nodes[0].val} is already sorted.`
+            : "Base case: empty list.",
+      });
+
+      return cloneNodes(nodes);
+    }
+
+    pushStep({
+      activeLine: 4,
+      phase: "find-middle",
+      current: nodes,
+      depth,
+      message: `Find the middle of [${values(nodes).join(" → ")}].`,
+    });
+
+    const mid = Math.floor(nodes.length / 2);
+
+    const leftHalf = cloneNodes(nodes.slice(0, mid));
+    const rightHalf = cloneNodes(nodes.slice(mid));
+
+    pushStep({
+      activeLine: 7,
+      phase: "split",
+      current: nodes,
+      left: leftHalf,
+      right: rightHalf,
+      depth,
+      message: `Split into [${values(leftHalf).join(
+        " → ",
+      )}] and [${values(rightHalf).join(" → ")}].`,
+    });
+
+    pushStep({
+      activeLine: 8,
+      phase: "recurse-left",
+      current: nodes,
+      left: leftHalf,
+      right: rightHalf,
+      depth,
+      message: "Recursively sort the left half.",
+    });
+
+    const sortedLeft = mergeSort(leftHalf, depth + 1);
+
+    pushStep({
+      activeLine: 9,
+      phase: "recurse-right",
+      current: nodes,
+      left: sortedLeft,
+      right: rightHalf,
+      depth,
+      message: "Recursively sort the right half.",
+    });
+
+    const sortedRight = mergeSort(rightHalf, depth + 1);
+
+    const merged = [];
+    let l = 0;
+    let r = 0;
+
+    pushStep({
+      activeLine: 11,
+      phase: "merge-init",
+      current: nodes,
+      left: sortedLeft,
+      right: sortedRight,
+      merged,
+      leftIndex: 0,
+      rightIndex: 0,
+      curIndex: -1,
+      depth,
+      message: `Create dummy and begin merging [${values(sortedLeft).join(
+        " → ",
+      )}] with [${values(sortedRight).join(" → ")}].`,
+    });
+
+    while (l < sortedLeft.length && r < sortedRight.length) {
+      pushStep({
+        activeLine: 12,
+        phase: "compare",
+        current: nodes,
+        left: sortedLeft.slice(l),
+        right: sortedRight.slice(r),
+        merged,
+        leftIndex: 0,
+        rightIndex: 0,
+        curIndex: merged.length - 1,
+        depth,
+        message: `Compare left=${sortedLeft[l].val} and right=${sortedRight[r].val}.`,
+      });
+
+      if (sortedLeft[l].val <= sortedRight[r].val) {
+        const picked = sortedLeft[l];
+
+        pushStep({
+          activeLine: 13,
+          phase: "choose-left",
+          current: nodes,
+          left: sortedLeft.slice(l),
+          right: sortedRight.slice(r),
+          merged,
+          leftIndex: 0,
+          rightIndex: 0,
+          curIndex: merged.length - 1,
+          depth,
+          message: `${picked.val} <= ${sortedRight[r].val}, so take the left node.`,
+        });
+
+        merged.push({ ...picked });
+        l += 1;
+
+        pushStep({
+          activeLine: 14,
+          phase: "append-left",
+          current: nodes,
+          left: sortedLeft.slice(l),
+          right: sortedRight.slice(r),
+          merged,
+          leftIndex: l < sortedLeft.length ? 0 : null,
+          rightIndex: r < sortedRight.length ? 0 : null,
+          curIndex: merged.length - 1,
+          depth,
+          message: `Append ${picked.val} to the merged list.`,
+        });
+      } else {
+        const picked = sortedRight[r];
+
+        pushStep({
+          activeLine: 15,
+          phase: "choose-right",
+          current: nodes,
+          left: sortedLeft.slice(l),
+          right: sortedRight.slice(r),
+          merged,
+          leftIndex: 0,
+          rightIndex: 0,
+          curIndex: merged.length - 1,
+          depth,
+          message: `${sortedLeft[l].val} > ${picked.val}, so take the right node.`,
+        });
+
+        merged.push({ ...picked });
+        r += 1;
+
+        pushStep({
+          activeLine: 16,
+          phase: "append-right",
+          current: nodes,
+          left: sortedLeft.slice(l),
+          right: sortedRight.slice(r),
+          merged,
+          leftIndex: l < sortedLeft.length ? 0 : null,
+          rightIndex: r < sortedRight.length ? 0 : null,
+          curIndex: merged.length - 1,
+          depth,
+          message: `Append ${picked.val} to the merged list.`,
+        });
+      }
+
+      pushStep({
+        activeLine: 17,
+        phase: "advance-cur",
+        current: nodes,
+        left: sortedLeft.slice(l),
+        right: sortedRight.slice(r),
+        merged,
+        leftIndex: l < sortedLeft.length ? 0 : null,
+        rightIndex: r < sortedRight.length ? 0 : null,
+        curIndex: merged.length - 1,
+        depth,
+        message: "Move cur to the newly appended node.",
+      });
+    }
+
+    const remainingLeft = sortedLeft.slice(l);
+    const remainingRight = sortedRight.slice(r);
+
+    merged.push(
+      ...remainingLeft.map((node) => ({ ...node })),
+      ...remainingRight.map((node) => ({ ...node })),
+    );
+
+    pushStep({
+      activeLine: 18,
+      phase: "append-rest",
+      current: nodes,
+      left: [],
+      right: [],
+      merged,
+      curIndex: merged.length - 1,
+      depth,
+      message:
+        remainingLeft.length > 0
+          ? `Attach the remaining left nodes: ${values(remainingLeft).join(
+              " → ",
+            )}.`
+          : remainingRight.length > 0
+            ? `Attach the remaining right nodes: ${values(remainingRight).join(
+                " → ",
+              )}.`
+            : "Both halves are exhausted.",
+    });
+
+    pushStep({
+      activeLine: 19,
+      phase: "return-merged",
+      current: merged,
+      merged,
+      curIndex: merged.length - 1,
+      depth,
+      message: `Return merged list [${values(merged).join(" → ")}].`,
+    });
+
+    return cloneNodes(merged);
+  }
+
+  const initialNodes = makeNodes(initial, "root");
+
+  pushStep({
+    activeLine: 1,
+    phase: "start",
+    current: initialNodes,
+    message: `Sort linked list [${initial.join(" → ")}].`,
+  });
+
+  const result = mergeSort(initialNodes);
+
+  pushStep({
+    activeLine: 19,
+    phase: "done",
+    current: result,
+    merged: result,
+    curIndex: result.length - 1,
+    done: true,
+    message: `Sorted list: [${values(result).join(" → ")}].`,
+  });
+
+  return steps;
+}
+
+function GraphRow({
+  title,
+  nodes,
+  tone = "main",
+  pointerIndex = null,
+  pointerLabel = "",
+  emptyText = "empty",
+}) {
+  if (!nodes || nodes.length === 0) {
+    return (
+      <div className="sl-graph-section">
+        {title && <div className="sl-graph-title">{title}</div>}
+        <div className="sl-empty">{emptyText}</div>
+      </div>
+    );
+  }
+
+  const nodeWidth = 66;
+  const nodeHeight = 44;
+  const gap = 44;
+  const startX = 24;
+  const y = 62;
+
+  const width = Math.max(320, startX + nodes.length * (nodeWidth + gap) + 80);
+
+  return (
+    <div className="sl-graph-section">
+      {title && <div className="sl-graph-title">{title}</div>}
+
+      <div className="sl-svg-scroll">
+        <svg width={width} height="145" className="sl-svg">
+          <defs>
+            <marker
+              id={`sl-arrow-${tone}`}
+              markerWidth="9"
+              markerHeight="9"
+              refX="8"
+              refY="4"
+              orient="auto"
+            >
+              <path d="M0,0 L0,8 L8,4 z" className="sl-arrow-head" />
+            </marker>
+          </defs>
+
+          {nodes.map((node, index) => {
+            const x = startX + index * (nodeWidth + gap);
+            const isPointer = pointerIndex === index;
+
+            return (
+              <g key={node.id}>
+                {index < nodes.length - 1 && (
+                  <line
+                    x1={x + nodeWidth}
+                    y1={y + nodeHeight / 2}
+                    x2={x + nodeWidth + gap - 10}
+                    y2={y + nodeHeight / 2}
+                    className="sl-link"
+                    markerEnd={`url(#sl-arrow-${tone})`}
+                  />
+                )}
+
+                {isPointer && pointerLabel && (
+                  <>
+                    <rect
+                      x={x + nodeWidth / 2 - 24}
+                      y="8"
+                      width="48"
+                      height="20"
+                      rx="5"
+                      className={`sl-pointer-label ${tone}`}
+                    />
+
+                    <text
+                      x={x + nodeWidth / 2}
+                      y="22"
+                      textAnchor="middle"
+                      className="sl-pointer-text"
+                    >
+                      {pointerLabel}
+                    </text>
+
+                    <line
+                      x1={x + nodeWidth / 2}
+                      y1="28"
+                      x2={x + nodeWidth / 2}
+                      y2={y - 6}
+                      className={`sl-pointer-line ${tone}`}
+                    />
+                  </>
+                )}
+
+                <motion.rect
+                  x={x}
+                  y={y}
+                  width={nodeWidth}
+                  height={nodeHeight}
+                  rx="8"
+                  className={`sl-svg-node ${tone} ${isPointer ? "active" : ""}`}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                />
+
+                <line
+                  x1={x + 45}
+                  y1={y}
+                  x2={x + 45}
+                  y2={y + nodeHeight}
+                  className="sl-node-divider"
+                />
+
+                <text
+                  x={x + 22}
+                  y={y + 28}
+                  textAnchor="middle"
+                  className="sl-node-value"
+                >
+                  {node.val}
+                </text>
+
+                <text
+                  x={x + 55}
+                  y={y + 27}
+                  textAnchor="middle"
+                  className="sl-next-label"
+                >
+                  next
+                </text>
+              </g>
+            );
+          })}
+
+          <text
+            x={startX + (nodes.length - 1) * (nodeWidth + gap) + nodeWidth + 28}
+            y={y + 28}
+            className="sl-null"
+          >
+            null
+          </text>
+        </svg>
+      </div>
+    </div>
+  );
+}
+
+function SortListVisualization({ step }) {
+  if (!step) {
+    return <div className="sl-ready">Press Play or Next to begin.</div>;
+  }
+
+  const phaseLabel = {
+    start: "START",
+    base: "BASE CASE",
+    "find-middle": "FIND MIDDLE",
+    split: "SPLIT",
+    "recurse-left": "RECURSE LEFT",
+    "recurse-right": "RECURSE RIGHT",
+    "merge-init": "MERGE",
+    compare: "COMPARE",
+    "choose-left": "TAKE LEFT",
+    "append-left": "APPEND LEFT",
+    "choose-right": "TAKE RIGHT",
+    "append-right": "APPEND RIGHT",
+    "advance-cur": "ADVANCE CUR",
+    "append-rest": "APPEND REST",
+    "return-merged": "RETURN MERGED",
+    done: "DONE",
+  }[step.phase];
+
+  const showSplit = step.left?.length > 0 || step.right?.length > 0;
+
+  const showMerged = step.merged?.length > 0;
+
+  return (
+    <div className="sl-visualization">
+      <div className="sl-topbar">
+        <div>
+          <div className="sl-phase-label">{phaseLabel || step.phase}</div>
+
+          <div className="sl-phase-description">Depth: {step.depth ?? 0}</div>
+        </div>
+
+        <div className="sl-line-pill">Line {step.activeLine}</div>
+      </div>
+
+      <div className="sl-graph-card">
+        <GraphRow title="Current Sublist" nodes={step.current} tone="main" />
+      </div>
+
+      {showSplit && (
+        <div className="sl-halves-grid">
+          <div className="sl-graph-card">
+            <GraphRow
+              title="Left"
+              nodes={step.left}
+              tone="left"
+              pointerIndex={step.leftIndex}
+              pointerLabel={step.leftIndex !== null ? "left" : ""}
+            />
+          </div>
+
+          <div className="sl-graph-card">
+            <GraphRow
+              title="Right"
+              nodes={step.right}
+              tone="right"
+              pointerIndex={step.rightIndex}
+              pointerLabel={step.rightIndex !== null ? "right" : ""}
+            />
+          </div>
+        </div>
+      )}
+
+      {showMerged && (
+        <div className="sl-graph-card merged">
+          <GraphRow
+            title="Merged List"
+            nodes={step.merged}
+            tone="merged"
+            pointerIndex={step.curIndex}
+            pointerLabel={step.curIndex !== null ? "cur" : ""}
+          />
+        </div>
+      )}
+
+      <div className="sl-telemetry-grid">
+        <div className="sl-telemetry-card">
+          <span className="sl-telemetry-label">Left pointer</span>
+
+          <strong>
+            {step.leftIndex !== null && step.left?.[step.leftIndex]
+              ? step.left[step.leftIndex].val
+              : "—"}
+          </strong>
+        </div>
+
+        <div className="sl-telemetry-card">
+          <span className="sl-telemetry-label">Right pointer</span>
+
+          <strong>
+            {step.rightIndex !== null && step.right?.[step.rightIndex]
+              ? step.right[step.rightIndex].val
+              : "—"}
+          </strong>
+        </div>
+
+        <div className="sl-telemetry-card">
+          <span className="sl-telemetry-label">Merged size</span>
+
+          <strong>{step.merged?.length ?? 0}</strong>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function SortListVisualizer() {
-    const [sel, setSel] = useState(0);
-  const [initialInput, setInitialInput] = useState(JSON.stringify(EXAMPLES[0]?.["arr"] ?? null));
-  const { initial, inputError } = useMemo(() => {
+  const defaultArray = EXAMPLES?.[0]?.arr ?? [4, 2, 1, 3];
+
+  const [arrInput, setArrInput] = useState(JSON.stringify(defaultArray));
+
+  const [activeLabel, setActiveLabel] = useState(EXAMPLES?.[0]?.label ?? "");
+
+  const { arr, inputError } = useMemo(() => {
     try {
-      const parsedInitial = JSON.parse(initialInput); if (!Array.isArray(parsedInitial)) throw new Error('initial must be an array');
-      return { initial: parsedInitial, inputError: '' };
-    } catch (e) {
-      return { initial: EXAMPLES[sel]?.arr, inputError: e.message };
+      const parsed = JSON.parse(arrInput);
+
+      if (!Array.isArray(parsed)) {
+        throw new Error("arr must be an array.");
+      }
+
+      const numeric = parsed.map(Number);
+
+      if (numeric.some((value) => !Number.isFinite(value))) {
+        throw new Error("arr must contain only numbers.");
+      }
+
+      return {
+        arr: numeric,
+        inputError: "",
+      };
+    } catch (error) {
+      return {
+        arr: defaultArray,
+        inputError: error.message || "Enter an array like [4, 2, 1, 3].",
+      };
     }
-  }, [initialInput]);;
-    const [panelDivs, setPanelDivs] = useState(null);
+  }, [arrInput, defaultArray]);
 
-        const steps = useMemo(() => generateSteps(initial), [initial]);
-    const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
-        usePlaybackState(steps.length);
-    const step = stepIndex >= 0 ? steps[stepIndex] : steps[0];
-    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
-    const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
+  const steps = useMemo(() => generateSteps(arr), [arr]);
 
-    const applyExample = useCallback((i) => { setSel(i); setInitialInput(JSON.stringify(EXAMPLES[i].arr)); handleReset(); }, [handleReset]);
+  const {
+    stepIndex,
+    setStepIndex,
+    stepForward,
+    stepBack,
+    togglePlay,
+    handleReset,
+    isPlaying,
+    speed,
+    setSpeed,
+    isDone,
+  } = usePlaybackState(steps.length);
 
-    // Extract panels as consts (step 3)
-    const codePanel = (
-        <div style={{ position: 'relative', height: '100%' }}>
-            <CodeTracePanel
-                step={step}
-                codeLines={SOLUTION_CODE}
-                highlightedLines={connectivity.highlightedLines}
-                onLineSelect={connectivity.handleLineSelect}
-                onActiveLineDomChange={setActiveLineDom}
-                disableResizer
-            />
-            {showPatternOverlay && <CodePatternAnnotations />}
-        </div>
-    );
+  const step = stepIndex >= 0 ? steps[stepIndex] : null;
 
-    const vizPanel = (
-      <>
-          <ManualInputPanel
-            fields={[{"key":"initial","label":"initial","type":"string"}]}
-            values={{ initial: initialInput }}
-            onChange={(k, v) => { if (k === 'initial') setInitialInput(v); handleReset() }}
-            examples={EXAMPLES}
-            activeLabel={EXAMPLES[sel]?.label}
-            applyExample={(e) => applyExample(EXAMPLES.indexOf(e))}
-            inputError={inputError}
-          />
-        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
-            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                {EXAMPLES.map((ex, i) => <button key={ex.label} onClick={() => applyExample(i)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: sel === i ? '#dbeafe' : 'var(--surface2)' }}>{ex.label}</button>)}
-            </div>
-            <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 11 }}>
-                <div style={{ fontWeight: 600, marginBottom: 4 }}>Array</div>
-                <LinkedListRow vals={step?.arr ?? initial} color="main" />
-            </div>
-            {step?.left && <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 11 }}>
-                <div style={{ fontWeight: 600, marginBottom: 4 }}>Merge</div>
-                <LinkedListRow vals={step.left} color="left" /> ↔ <LinkedListRow vals={step.right} color="right" />
-                {step?.merged && <div style={{ marginTop: 8 }}><LinkedListRow vals={step.merged} color="merged" /></div>}
-            </div>}
-        </div>
-    
-    </>);
+  const {
+    showPatternOverlay,
+    setShowPatternOverlay,
+    activeLineDom,
+    setActiveLineDom,
+  } = usePatternOverlay();
 
-    const statusPanel = (
-        <div className="sl-status">
-            {step?.message || 'Ready'}
-        </div>
-    );
+  const connectivity = useCodeVisualConnectivity({
+    steps,
+    stepIndex,
+    onStepJump: setStepIndex,
+  });
 
-    const playbackPanel = (
-      <>
-            <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex <= 0} nextDisabled={isDone} resetDisabled={stepIndex <= 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
-            {showPatternOverlay && <PatternLegend />}
+  const applyExample = useCallback(
+    (example) => {
+      setActiveLabel(example.label);
+
+      setArrInput(JSON.stringify(example.arr ?? []));
+
+      handleReset();
+    },
+    [handleReset],
+  );
+
+  const codePanel = (
+    <div
+      style={{
+        position: "relative",
+        height: "100%",
+      }}
+    >
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
+
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLine={step?.activeLine}
+          activeLineDom={activeLineDom}
+        />
+      )}
+    </div>
+  );
+
+  const vizPanel = (
+    <>
+      <ManualInputPanel
+        fields={[
+          {
+            key: "arr",
+            label: "head",
+            type: "array",
+          },
+        ]}
+        values={{
+          arr: arrInput,
+        }}
+        onChange={(key, value) => {
+          if (key === "arr") {
+            setArrInput(value);
+            setActiveLabel("");
+          }
+
+          handleReset();
+        }}
+        examples={EXAMPLES}
+        activeLabel={activeLabel}
+        applyExample={applyExample}
+        inputError={inputError}
+      />
+
+      <SortListVisualization step={step} />
+    </>
+  );
+
+  const statusPanel = (
+    <div
+      className={[
+        "sl-status",
+        step?.phase === "done"
+          ? "success"
+          : step?.phase?.includes("merge")
+            ? "merge"
+            : "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
+      <div className="sl-status-main">
+        <span className="sl-status-phase">
+          {step?.phase ? step.phase.replaceAll("-", " ") : "ready"}
+        </span>
+
+        <span className="sl-status-message">
+          {step?.message || "Press Play or Next to begin merge sort."}
+        </span>
+      </div>
+
+      {step && <span className="sl-status-line">line {step.activeLine}</span>}
+    </div>
+  );
+
+  const playbackPanel = (
+    <>
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+
+      {showPatternOverlay && (
+        <PatternLegend usedPatterns={PATTERNS} currentPhase={step?.phase} />
+      )}
+    </>
+  );
+
+  const [panelDivs, setPanelDivs] = useState(null);
+
+  const panelConfigs = useMemo(
+    () => [
+      {
+        id: "viz",
+        title: "🔀 Sort List",
+        dockMode: "split-right",
+        ratio: 0.6,
+      },
+      {
+        id: "code",
+        title: "Code",
+        dockMode: "split-right",
+        ratio: 0.4,
+      },
+      {
+        id: "status",
+        title: "Status",
+        dockMode: "split-bottom",
+        ratio: 0.08,
+      },
+    ],
+    [],
+  );
+
+  const handlePanelReady = useCallback((divs) => {
+    setPanelDivs(divs);
+  }, []);
+
+  return (
+    <div className="sl-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+
+      {panelDivs && (
+        <>
+          {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
         </>
-    );
+      )}
 
-    // Config for Lumino panels (step 4)
-    const panelConfigs = useMemo(
-        () => [
-            { id: 'code', title: 'Code', dockMode: 'split-right' },
-            { id: 'viz', title: '🔀 Merge Sort', dockMode: 'split-right' },
-            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
-        ],
-        []
-    );
-
-    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
-
-    // Lumino return (step 5)
-    return (
-        <div className="sl-shell">
-            <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
-            {panelDivs && (
-              <>
-                    {panelDivs.code && createPortal(codePanel, panelDivs.code)}
-                    {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
-                    {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
-                </>
-            )}
-            {createPortal(
-                <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
-                document.body
-            )}
-            {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
-        </div>
-    );
+      {createPortal(
+        <FloatingPanel title="Playback Controls">
+          {playbackPanel}
+        </FloatingPanel>,
+        document.body,
+      )}
+    </div>
+  );
 }
-
-function LinkedListRow({ vals, color }) {
-    if (!vals || vals.length === 0) return <span className="sl-empty">empty</span>;
-    return (
-        <div className="sl-list-row">
-            {vals.map((v, i) => (
-                <div key={i} className="sl-node-wrap">
-                    <motion.div className={`sl-node ${color}`}
-                        initial={{ opacity: 0, scale: 0.7 }} animate={{ opacity: 1, scale: 1 }}
-                        transition={{ type: "spring", stiffness: 350, damping: 22 }}>
-                        {v}
-                    </motion.div>
-                    {i < vals.length - 1 && <span className="sl-arrow">→</span>}
-                </div>
-            ))}
-        </div>
-    );
-}
-
