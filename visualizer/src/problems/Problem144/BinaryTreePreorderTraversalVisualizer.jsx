@@ -1,117 +1,108 @@
-import { useState, useMemo, useCallback } from 'react'
-import { createPortal } from 'react-dom'
-import { motion } from 'framer-motion'
-import LuminoDockPanel from '../../components/LuminoDockPanel'
-import FloatingPanel from '../../components/shared/FloatingPanel'
-import CodeTracePanel from '../../components/CodeTracePanel'
-import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
-import { usePlaybackState } from '../../hooks/usePlaybackState'
-import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
-import './BinaryTreePreorderTraversalVisualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
-import CodePatternAnnotations from '../../components/CodePatternAnnotations'
-import PatternLegend from '../../components/PatternLegend'
-
+import { useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
+import { motion } from "framer-motion";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
+import FloatingPanel from "../../components/shared/FloatingPanel";
+import CodeTracePanel from "../../components/CodeTracePanel";
+import PlaybackControls from "../../components/PlaybackControls";
+import PatternOverlay from "../../components/PatternOverlay";
+import { usePlaybackState } from "../../hooks/usePlaybackState";
+import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
+import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamplesOr } from "../../config/examplesRegistry";
+import "./BinaryTreePreorderTraversalVisualizer.css";
+import ManualInputPanel from "../../components/shared/ManualInputPanel";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
 
 // ─── Pattern annotations ───────────────────────────────────────────────────
-const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
-const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = getExamplesOr('binary-tree-preorder-traversal', [
-  { label: 'Example 1', root: [1, 2, 3] },
-  { label: 'Example 2', root: [] },
-])
+const LINE_PATTERN_MAP = {}; // Auto-generated: maps line numbers to phase names
+const PATTERNS = []; // Auto-generated: list of phase names used in this visualizer
+const EXAMPLES = getExamplesOr("binary-tree-preorder-traversal", [
+  { label: "Example 1", root: [1, 2, 3] },
+  { label: "Example 2", root: [] },
+]);
 
 const SOLUTION_CODE_INLINE = [
-  { line: 1, text: 'def preorderTraversal(root):' },
-  { line: 2, text: '    if not root: return []' },
-  { line: 3, text: '    result = []' },
-  { line: 4, text: '    stack = [root]' },
-  { line: 5, text: '    while stack:' },
-  { line: 6, text: '        node = stack.pop()' },
-  { line: 7, text: '        result.append(node.val)' },
-  { line: 8, text: '        if node.right: stack.append(node.right)' },
-  { line: 9, text: '        if node.left: stack.append(node.left)' },
-  { line: 10, text: '    return result' },
-]
+  { line: 1, text: "def preorderTraversal(root):" },
+  { line: 2, text: "    if not root: return []" },
+  { line: 3, text: "    result = []" },
+  { line: 4, text: "    stack = [root]" },
+  { line: 5, text: "    while stack:" },
+  { line: 6, text: "        node = stack.pop()" },
+  { line: 7, text: "        result.append(node.val)" },
+  { line: 8, text: "        if node.right: stack.append(node.right)" },
+  { line: 9, text: "        if node.left: stack.append(node.left)" },
+  { line: 10, text: "    return result" },
+];
 
-const SOLUTION_CODE = SOLUTION_CODE_INLINE
+const SOLUTION_CODE = SOLUTION_CODE_INLINE;
 
 function buildTree(arr) {
-  if (!arr || arr.length === 0) return null
-  if (!arr || arr.length === 0 || arr[0] === null || arr[0] === undefined) return null
-  const root = { val: arr[0], left: null, right: null, id: 0 }
-  const q = [root]
-  let nodeId = 1
-  let i = 1
+  if (!arr || arr.length === 0 || arr[0] === null || arr[0] === undefined)
+    return null;
+  const root = { val: arr[0], left: null, right: null, id: 0 };
+  const q = [root];
+  let nodeId = 1;
+  let i = 1;
   while (q.length && i < arr.length) {
-    const node = q.shift()
-    if (arr[i] !== null) {
-      node.left = { val: arr[i], left: null, right: null, id: nodeId++ }
-      q.push(node.left)
-    if (!node) continue
+    const node = q.shift();
+    if (!node) continue;
 
     if (i < arr.length) {
-      const leftVal = arr[i]
+      const leftVal = arr[i];
       if (leftVal !== null && leftVal !== undefined) {
-        node.left = { val: leftVal, left: null, right: null, id: nodeId++ }
-        q.push(node.left)
+        node.left = { val: leftVal, left: null, right: null, id: nodeId++ };
+        q.push(node.left);
       }
-      i++
+      i++;
     }
-    i++
-    if (i < arr.length && arr[i] !== null) {
-      node.right = { val: arr[i], left: null, right: null, id: nodeId++ }
-      q.push(node.right)
 
     if (i < arr.length) {
-      const rightVal = arr[i]
+      const rightVal = arr[i];
       if (rightVal !== null && rightVal !== undefined) {
-        node.right = { val: rightVal, left: null, right: null, id: nodeId++ }
-        q.push(node.right)
+        node.right = { val: rightVal, left: null, right: null, id: nodeId++ };
+        q.push(node.right);
       }
-      i++
+      i++;
     }
-    i++
   }
-  return root
+  return root;
 }
 
 function generateSteps(arr) {
-  const steps = []
-  const root = buildTree(arr)
+  const steps = [];
+  const root = buildTree(arr);
 
   if (!root) {
     steps.push({
       activeLine: 2,
-      message: 'Empty tree',
+      message: "Empty tree",
       relatedLines: [2],
-    })
-    return steps
+    });
+    return steps;
   }
 
   steps.push({
     activeLine: 1,
-    message: 'Preorder traversal: root → left → right',
+    message: "Preorder traversal: root → left → right",
     relatedLines: [1],
-  })
+  });
 
   steps.push({
     activeLine: 3,
     result: [],
     stack: [root],
-    message: 'Initialize result and stack with root',
+    message: "Initialize result and stack with root",
     relatedLines: [3, 4],
-  })
+  });
 
-  const result = []
-  const stack = [root]
-  const processedIds = new Set()
+  const result = [];
+  const stack = [root];
+  const processedIds = new Set();
 
   while (stack.length > 0) {
-    const node = stack.pop()
+    const node = stack.pop();
 
     steps.push({
       activeLine: 6,
@@ -120,10 +111,10 @@ function generateSteps(arr) {
       result: [...result],
       message: `Pop: ${node.val}`,
       relatedLines: [6],
-    })
+    });
 
-    result.push(node.val)
-    processedIds.add(node.id)
+    result.push(node.val);
+    processedIds.add(node.id);
 
     steps.push({
       activeLine: 7,
@@ -133,10 +124,10 @@ function generateSteps(arr) {
       processedIds: Array.from(processedIds),
       message: `Add ${node.val} to result`,
       relatedLines: [7],
-    })
+    });
 
     if (node.right) {
-      stack.push(node.right)
+      stack.push(node.right);
 
       steps.push({
         activeLine: 8,
@@ -145,11 +136,11 @@ function generateSteps(arr) {
         result: [...result],
         message: `Push right child: ${node.right.val}`,
         relatedLines: [8],
-      })
+      });
     }
 
     if (node.left) {
-      stack.push(node.left)
+      stack.push(node.left);
 
       steps.push({
         activeLine: 9,
@@ -158,7 +149,7 @@ function generateSteps(arr) {
         result: [...result],
         message: `Push left child: ${node.left.val}`,
         relatedLines: [9],
-      })
+      });
     }
   }
 
@@ -166,72 +157,100 @@ function generateSteps(arr) {
     activeLine: 10,
     result,
     done: true,
-    message: `Complete! Preorder: ${result.join(' → ')}`,
+    message: `Complete! Preorder: ${result.join(" → ")}`,
     relatedLines: [10],
-  })
+  });
 
-  return steps
+  return steps;
 }
 
 function TreeVisualization({ root, currentNode, processedIds }) {
-  if (!root) return null
+  if (!root) return null;
 
-  const width = 400
-  const height = 300
-
-  function getAllNodes(node, nodes = [], x = 200, y = 30, offset = 80) {
   function getAllNodes(node, nodes = [], x = 0, y = 40, offset = 80) {
-    if (!node) return nodes
-    nodes.push({ ...node, x, y })
-    if (node.left) getAllNodes(node.left, nodes, x - offset, y + 60, offset / 2)
-    if (node.right) getAllNodes(node.right, nodes, x + offset, y + 60, offset / 2)
-    if (node.left) getAllNodes(node.left, nodes, x - offset, y + 65, Math.max(32, offset * 0.55))
-    if (node.right) getAllNodes(node.right, nodes, x + offset, y + 65, Math.max(32, offset * 0.55))
-    return nodes
+    if (!node) return nodes;
+    nodes.push({ ...node, x, y });
+    if (node.left)
+      getAllNodes(
+        node.left,
+        nodes,
+        x - offset,
+        y + 65,
+        Math.max(32, offset * 0.55),
+      );
+    if (node.right)
+      getAllNodes(
+        node.right,
+        nodes,
+        x + offset,
+        y + 65,
+        Math.max(32, offset * 0.55),
+      );
+    return nodes;
   }
 
-  const nodes = getAllNodes(root)
-  const rawNodes = getAllNodes(root)
-  const minX = Math.min(...rawNodes.map(n => n.x))
-  const maxX = Math.max(...rawNodes.map(n => n.x))
-  const maxY = Math.max(...rawNodes.map(n => n.y))
+  const rawNodes = getAllNodes(root);
+  const minX = Math.min(...rawNodes.map((n) => n.x));
+  const maxX = Math.max(...rawNodes.map((n) => n.x));
+  const maxY = Math.max(...rawNodes.map((n) => n.y));
 
-  const width = Math.max(400, maxX - minX + 140)
-  const height = Math.max(260, maxY + 70)
-  const shiftX = (width - (maxX - minX)) / 2 - minX
+  const width = Math.max(400, maxX - minX + 140);
+  const height = Math.max(260, maxY + 70);
+  const shiftX = (width - (maxX - minX)) / 2 - minX;
 
-  const nodes = rawNodes.map(n => ({ ...n, x: n.x + shiftX }))
-  const edges = []
+  const nodes = rawNodes.map((n) => ({ ...n, x: n.x + shiftX }));
+  const edges = [];
 
   function addEdges(node) {
-    if (!node) return
-    const nodeData = nodes.find(n => n.id === node.id)
-    if (!nodeData) return
+    if (!node) return;
+    const nodeData = nodes.find((n) => n.id === node.id);
+    if (!nodeData) return;
     if (node.left) {
-      const leftData = nodes.find(n => n.id === node.left.id)
-      edges.push({ x1: nodeData.x, y1: nodeData.y, x2: leftData.x, y2: leftData.y })
+      const leftData = nodes.find((n) => n.id === node.left.id);
       if (leftData) {
-        edges.push({ x1: nodeData.x, y1: nodeData.y, x2: leftData.x, y2: leftData.y })
+        edges.push({
+          x1: nodeData.x,
+          y1: nodeData.y,
+          x2: leftData.x,
+          y2: leftData.y,
+        });
       }
-      addEdges(node.left)
+      addEdges(node.left);
     }
     if (node.right) {
-      const rightData = nodes.find(n => n.id === node.right.id)
-      edges.push({ x1: nodeData.x, y1: nodeData.y, x2: rightData.x, y2: rightData.y })
+      const rightData = nodes.find((n) => n.id === node.right.id);
       if (rightData) {
-        edges.push({ x1: nodeData.x, y1: nodeData.y, x2: rightData.x, y2: rightData.y })
+        edges.push({
+          x1: nodeData.x,
+          y1: nodeData.y,
+          x2: rightData.x,
+          y2: rightData.y,
+        });
       }
-      addEdges(node.right)
+      addEdges(node.right);
     }
   }
 
-  addEdges(root)
+  addEdges(root);
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <svg width={width} height={height} style={{ border: '1px solid var(--border)' }}>
-    <div style={{ display: 'flex', justifyContent: 'center', overflowX: 'auto', padding: '8px 0' }}>
-      <svg width={width} height={height} style={{ border: '1px solid var(--border)', borderRadius: 8, background: 'var(--surface)' }}>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        overflowX: "auto",
+        padding: "8px 0",
+      }}
+    >
+      <svg
+        width={width}
+        height={height}
+        style={{
+          border: "1px solid var(--border)",
+          borderRadius: 8,
+          background: "var(--surface)",
+        }}
+      >
         {/* Edges */}
         {edges.map((edge, idx) => (
           <line
@@ -240,9 +259,6 @@ function TreeVisualization({ root, currentNode, processedIds }) {
             y1={edge.y1}
             x2={edge.x2}
             y2={edge.y2}
-            stroke="var(--text-muted)"
-            strokeWidth={2}
-            markerEnd="url(#arrowhead)"
             stroke="var(--text-muted, #94a3b8)"
             strokeWidth={3}
             strokeLinecap="round"
@@ -251,20 +267,29 @@ function TreeVisualization({ root, currentNode, processedIds }) {
 
         {/* Nodes */}
         {nodes.map((node) => {
-          const isCurrent = currentNode && currentNode.id === node.id
-          const isProcessed = processedIds && processedIds.includes(node.id)
+          const isCurrent = currentNode && currentNode.id === node.id;
+          const isProcessed = processedIds && processedIds.includes(node.id);
 
           return (
             <g key={node.id}>
               <motion.circle
                 cx={node.x}
                 cy={node.y}
-                r={24}
-                fill={isCurrent ? '#fbbf24' : isProcessed ? '#86efac' : 'var(--text)'}
-                stroke={isCurrent ? '#f59e0b' : isProcessed ? '#22c55e' : 'var(--text-muted)'}
                 r={22}
-                fill={isCurrent ? '#fbbf24' : isProcessed ? '#22c55e' : 'var(--surface2, #334155)'}
-                stroke={isCurrent ? '#f59e0b' : isProcessed ? '#16a34a' : 'var(--border, #64748b)'}
+                fill={
+                  isCurrent
+                    ? "#fbbf24"
+                    : isProcessed
+                      ? "#22c55e"
+                      : "var(--surface2, #334155)"
+                }
+                stroke={
+                  isCurrent
+                    ? "#f59e0b"
+                    : isProcessed
+                      ? "#16a34a"
+                      : "var(--border, #64748b)"
+                }
                 strokeWidth={isCurrent ? 3 : 2}
                 animate={{ scale: isCurrent ? 1.15 : 1 }}
               />
@@ -272,46 +297,42 @@ function TreeVisualization({ root, currentNode, processedIds }) {
                 x={node.x}
                 y={node.y}
                 textAnchor="middle"
-                dy="0.3em"
-                fontSize={14}
-                fontWeight={600}
-                fill={isCurrent || isProcessed ? 'var(--text-on-light)' : 'var(--text-inverse)'}
                 dy="0.35em"
                 fontSize={13}
                 fontWeight={700}
-                fill={isCurrent || isProcessed ? '#0f172a' : 'var(--text, #f8fafc)'}
+                fill={
+                  isCurrent || isProcessed ? "#0f172a" : "var(--text, #f8fafc)"
+                }
               >
                 {node.val}
               </text>
             </g>
-          )
+          );
         })}
-
-        <defs>
-          <marker
-            id="arrowhead"
-            markerWidth="10"
-            markerHeight="10"
-            refX="9"
-            refY="3"
-            orient="auto"
-          >
-            <polygon points="0 0, 10 3, 0 6" fill="var(--text-muted)" />
-          </marker>
-        </defs>
       </svg>
     </div>
-  )
+  );
 }
 
 function VisualizationPanel({ step, root }) {
-  if (!step) return <div style={{ padding: 16, color: '#627794' }}>Press play</div>
+  if (!step)
+    return <div style={{ padding: 16, color: "#627794" }}>Press play</div>;
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ padding: 12, backgroundColor: '#d1fae5', borderRadius: 6, borderLeft: '4px solid #10b981' }}>
-        <div style={{ fontSize: 12, color: '#065f46', fontStyle: 'italic' }}>
-          Iterative preorder: stack-based traversal, process root before children.
+    <div
+      style={{ display: "flex", flexDirection: "column", gap: 16, padding: 16 }}
+    >
+      <div
+        style={{
+          padding: 12,
+          backgroundColor: "#d1fae5",
+          borderRadius: 6,
+          borderLeft: "4px solid #10b981",
+        }}
+      >
+        <div style={{ fontSize: 12, color: "#065f46", fontStyle: "italic" }}>
+          Iterative preorder: stack-based traversal, process root before
+          children.
         </div>
       </div>
 
@@ -322,21 +343,32 @@ function VisualizationPanel({ step, root }) {
       />
 
       {step.stack && step.stack.length > 0 && (
-        <motion.div style={{ padding: 12, backgroundColor: '#dbeafe', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>
+        <motion.div
+          style={{ padding: 12, backgroundColor: "#dbeafe", borderRadius: 6 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          <div
+            style={{
+              fontSize: 12,
+              fontWeight: 600,
+              color: "#0c4a6e",
+              marginBottom: 8,
+            }}
+          >
             Stack (top to bottom)
           </div>
-          <div style={{ display: 'flex', gap: 6 }}>
+          <div style={{ display: "flex", gap: 6 }}>
             {step.stack.map((node, idx) => (
               <div
                 key={idx}
                 style={{
-                  padding: '4px 8px',
-                  backgroundColor: '#a5b4fc',
+                  padding: "4px 8px",
+                  backgroundColor: "#a5b4fc",
                   borderRadius: 3,
                   fontSize: 11,
                   fontWeight: 600,
-                  color: '#1e1b4b',
+                  color: "#1e1b4b",
                 }}
               >
                 {node.val}
@@ -347,28 +379,51 @@ function VisualizationPanel({ step, root }) {
       )}
 
       {step.result && step.result.length > 0 && (
-        <motion.div style={{ padding: 12, backgroundColor: '#dcfce7', borderRadius: 6 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#065f46', marginBottom: 8 }}>
+        <motion.div
+          style={{ padding: 12, backgroundColor: "#dcfce7", borderRadius: 6 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          <div
+            style={{
+              fontSize: 12,
+              fontWeight: 600,
+              color: "#065f46",
+              marginBottom: 8,
+            }}
+          >
             Result
           </div>
-          <div style={{ fontSize: 12, color: '#065f46', fontFamily: 'monospace' }}>
-            {step.result.join(' → ')}
+          <div
+            style={{ fontSize: 12, color: "#065f46", fontFamily: "monospace" }}
+          >
+            {step.result.join(" → ")}
           </div>
         </motion.div>
       )}
 
       {step.message && (
-        <motion.div style={{ padding: 12, backgroundColor: '#fef3c7', borderRadius: 6, fontSize: 12, color: '#92400e' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div
+          style={{
+            padding: 12,
+            backgroundColor: "#fef3c7",
+            borderRadius: 6,
+            fontSize: 12,
+            color: "#92400e",
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
           {step.message}
         </motion.div>
       )}
     </div>
-  )
+  );
 }
 
 const parseTreeInput = (raw) => {
   if (Array.isArray(raw)) return raw;
-  if (!raw || typeof raw !== 'string') return [];
+  if (!raw || typeof raw !== "string") return [];
   const trimmed = raw.trim();
   if (!trimmed) return [];
   try {
@@ -380,57 +435,74 @@ const parseTreeInput = (raw) => {
     /* ignore and parse fallback */
   }
   return trimmed
-    .replace(/^[\s[]+|[\s\]]+$/g, '')
-    .split(',')
-    .map(s => {
+    .replace(/^[\s[]+|[\s\]]+$/g, "")
+    .split(",")
+    .map((s) => {
       const item = s.trim();
-      if (item === 'null' || item === '') return null;
+      if (item === "null" || item === "") return null;
       const num = Number(item);
       return isNaN(num) ? item : num;
     });
 };
 
 export default function BinaryTreePreorderTraversalVisualizer() {
-  const [input, setInput] = useState({"label":"Example 1","root":[1,2,3]});
-  const [arrInput, setArrInput] = useState("");
   const initialData = EXAMPLES[0]?.arr ?? EXAMPLES[0]?.root ?? [1, null, 2, 3];
   const [arrInput, setArrInput] = useState(JSON.stringify(initialData));
   const { arr, inputError } = useMemo(() => {
     try {
-      const parsedArr = arrInput;
       const parsedArr = parseTreeInput(arrInput);
-      return { arr: parsedArr, inputError: '' };
+      return { arr: parsedArr, inputError: "" };
     } catch (e) {
-      return { arr: "", inputError: e.message };
       return { arr: [], inputError: e.message };
     }
-  }, [arrInput]);  const root = useMemo(() => buildTree(input), [arr])
   }, [arrInput]);
 
-  const root = useMemo(() => buildTree(arr), [arr])
+  const root = useMemo(() => buildTree(arr), [arr]);
   const steps = useMemo(
     () =>
       generateSteps(arr).map((s) => ({
         ...s,
         relatedLines: s.relatedLines ?? (s.activeLine ? [s.activeLine] : []),
       })),
-    [arr]
-  )
+    [arr],
+  );
 
-  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
-  const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const applyEx = useCallback((e) => { setArrInput(String(e.arr)); handleReset(); }, [handleReset]);
-  const applyEx = useCallback((e) => {
-    const data = e.arr ?? e.root ?? [];
-    setArrInput(JSON.stringify(data));
-    handleReset();
-  }, [handleReset]);
-  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
-  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+  const {
+    stepIndex,
+    setStepIndex,
+    stepForward,
+    stepBack,
+    togglePlay,
+    handleReset,
+    isPlaying,
+    speed,
+    setSpeed,
+    isDone,
+  } = usePlaybackState(steps.length);
+  const step = stepIndex >= 0 ? steps[stepIndex] : null;
+  const applyEx = useCallback(
+    (e) => {
+      const data = e.arr ?? e.root ?? [];
+      setArrInput(JSON.stringify(data));
+      handleReset();
+    },
+    [handleReset],
+  );
+  const connectivity = useCodeVisualConnectivity({
+    steps,
+    stepIndex,
+    onStepJump: setStepIndex,
+  });
+  const {
+    showPatternOverlay,
+    setShowPatternOverlay,
+    activeLineDom,
+    setActiveLineDom,
+  } = usePatternOverlay();
 
   // Extract panels for Lumino
   const codePanel = (
-    <div style={{ position: 'relative', height: '100%' }}>
+    <div style={{ position: "relative", height: "100%" }}>
       <CodeTracePanel
         step={step}
         codeLines={SOLUTION_CODE}
@@ -439,35 +511,45 @@ export default function BinaryTreePreorderTraversalVisualizer() {
         onActiveLineDomChange={setActiveLineDom}
         disableResizer
       />
-      {showPatternOverlay && <CodePatternAnnotations step={step} activeLineDom={activeLineDom} patterns={PATTERNS} linePatternMap={LINE_PATTERN_MAP} />}
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          step={step}
+          activeLineDom={activeLineDom}
+          patterns={PATTERNS}
+          linePatternMap={LINE_PATTERN_MAP}
+        />
+      )}
     </div>
-  )
+  );
 
   const primaryPanel = (
     <>
       <ManualInputPanel
-        fields={[{"key":"arr","label":"arr","type":"string"}]}
+        fields={[{ key: "arr", label: "arr", type: "string" }]}
         values={{ arr: arrInput }}
-        onChange={(k, v) => { if (k === 'arr') setArrInput(v); handleReset() }}
+        onChange={(k, v) => {
+          if (k === "arr") setArrInput(v);
+          handleReset();
+        }}
         examples={EXAMPLES}
         applyExample={applyEx}
         inputError={inputError}
       />
-    <div className="btpt-panel">
-      <VisualizationPanel step={step} root={root} />
-    </div>
-  
-    </>)
+      <div className="btpt-panel">
+        <VisualizationPanel step={step} root={root} />
+      </div>
+    </>
+  );
 
   const statusPanel = (
     <div className="btpt-status">
       {step?.message && (
-        <div style={{ padding: 8, fontSize: 12, color: '#627794' }}>
+        <div style={{ padding: 8, fontSize: 12, color: "#627794" }}>
           {step.message}
         </div>
       )}
     </div>
-  )
+  );
 
   const playbackPanel = (
     <>
@@ -490,18 +572,22 @@ export default function BinaryTreePreorderTraversalVisualizer() {
       />
       {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
     </>
-  )
+  );
 
-  const [panelDivs, setPanelDivs] = useState(null)
+  const [panelDivs, setPanelDivs] = useState(null);
   const panelConfigs = useMemo(
     () => [
-      { id: 'primary', title: '🌳 Preorder Traversal', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
-      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+      {
+        id: "primary",
+        title: "🌳 Preorder Traversal",
+        dockMode: "split-right",
+      },
+      { id: "code", title: "Code", dockMode: "split-bottom" },
+      { id: "status", title: "Status", dockMode: "split-bottom", ratio: 0.08 },
     ],
-    []
-  )
-  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+    [],
+  );
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
 
   return (
     <div className="btpt-shell">
@@ -514,10 +600,14 @@ export default function BinaryTreePreorderTraversalVisualizer() {
         </>
       )}
       {createPortal(
-        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
-        document.body
+        <FloatingPanel title="Playback Controls">
+          {playbackPanel}
+        </FloatingPanel>,
+        document.body,
       )}
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      {showPatternOverlay && step && (
+        <PatternOverlay step={step} activeLineDom={activeLineDom} />
+      )}
     </div>
-  )
+  );
 }
