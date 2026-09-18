@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import zlib from "node:zlib";
+import { execSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -17,11 +18,24 @@ if (!fs.existsSync(manifestPath)) {
 
 const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
 
-// Helper to compute size, gzip and brotli
+// Get git revision safely
+let gitRevision = "unknown";
+try {
+  gitRevision = execSync("git rev-parse HEAD", {
+    cwd: root,
+    stdio: ["ignore", "pipe", "ignore"],
+  })
+    .toString()
+    .trim();
+} catch {}
+
+// Helper to compute size, gzip and brotli with strict missing-file failure
 function getFileSizes(relPath) {
   const fullPath = path.join(distDir, relPath);
   if (!fs.existsSync(fullPath)) {
-    return { raw: 0, gzip: 0, brotli: 0 };
+    throw new Error(
+      `Asset referenced in manifest does not exist in dist: ${relPath}`,
+    );
   }
   const buf = fs.readFileSync(fullPath);
   return {
@@ -106,8 +120,9 @@ function measureScenario(name, problemNums = []) {
   for (const num of problemNums) {
     const pKey = findProblemKey(num);
     if (!pKey) {
-      console.warn(`Problem ${num} not found in manifest.`);
-      continue;
+      throw new Error(
+        `Problem ${num} entry (src/problems/Problem${problemNum}/index.jsx) not found in manifest.`,
+      );
     }
     const pDeps = resolveStaticDependencies(pKey, new Set());
     for (const f of pDeps.jsFiles) scenarioAssets.add(f);
@@ -127,10 +142,8 @@ function measureScenario(name, problemNums = []) {
 
 // Scenarios:
 // 1. App entry alone
-// 2. Cold 125
-// 3. Cold 132
-// 4. Cold 141
-// 5. Warm 125 -> 132 (assets loaded after 125 already cached)
+// 2. Cold 120, 121, 125, 132, 141, 142
+// 3. Warm 125 -> 132 (assets loaded after 125 already cached)
 const baseApp = {
   scenario: "App entry dependencies",
   assetCount: appSummary.count,
@@ -164,8 +177,17 @@ const warmDelta125to132 = {
 };
 
 const report = {
-  generatedAt: new Date().toISOString(),
-  manifestPath: path.relative(root, manifestPath).replaceAll("\\", "/"),
+  metadata: {
+    gitRevision,
+    nodeVersion: process.version,
+    buildMode: "production",
+    compression: {
+      gzip: "zlib.gzipSync level 9",
+      brotli: "zlib.brotliCompressSync default (quality 11)",
+    },
+    generatedAt: new Date().toISOString(),
+    manifestPath: path.relative(root, manifestPath).replaceAll("\\", "/"),
+  },
   scenarios: [
     baseApp,
     cold120,
@@ -178,10 +200,14 @@ const report = {
   ],
 };
 
+const outPath = path.join(root, "docs", "production-payload-report.json");
+fs.writeFileSync(outPath, JSON.stringify(report, null, 2) + "\n");
+
 if (process.argv.includes("--json")) {
   console.log(JSON.stringify(report, null, 2));
 } else {
   console.log("=== Production Manifest Payload Report ===");
+  console.log(`Git Revision: ${gitRevision} | Node: ${process.version}`);
   console.table(
     report.scenarios.map((s) => ({
       Scenario: s.scenario,
@@ -191,8 +217,5 @@ if (process.argv.includes("--json")) {
       "Brotli (B)": s.brotli.toLocaleString(),
     })),
   );
+  console.log(`Saved report to docs/production-payload-report.json`);
 }
-
-const outPath = path.join(root, "docs", "production-payload-report.json");
-fs.writeFileSync(outPath, JSON.stringify(report, null, 2) + "\n");
-console.log(`Saved report to docs/production-payload-report.json`);

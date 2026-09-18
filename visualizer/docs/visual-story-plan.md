@@ -361,12 +361,14 @@ Ledger changes:
 Next bounded task and exact starting command:
 ```
 
-## Batch A & B Completion Record
+## Batch A & B Record (Pending Verification)
 
 ```text
 Baseline / candidate revision or working-tree patch:
-  Baseline: HEAD (f2509626)
+  Baseline: HEAD (c1fc6be2)
   Candidate: Working-tree patch implementing Batch A & Batch B
+Status:
+  Pending verification (CSS isolation, payload reporter, and shared CharacterComparison integrated; awaits complete browser acceptance testing).
 Consumers and shared files:
   - Extracted shared component: src/components/shared/CharacterComparison.jsx & CharacterComparison.css
   - Refactored consumers: src/problems/Problem125/PalindromeStory.jsx, src/problems/Problem132/MinCutStory.jsx
@@ -377,35 +379,38 @@ Story distinctions preserved:
   - Problem 132: Center expansion (odd & even), palindrome radius wings, prefix min-cut DP progression dp[r].
 Algorithm / lint / browser checks and exact outcomes:
   - npm.cmd run test:visual-stories: 255 tests passed (10 suites, 0 failures, 0 skips).
+  - npx.cmd eslint src/components/shared/CharacterComparison.jsx: Clean (0 errors, 0 warnings).
   - Production build (npm.cmd run build -- --manifest): Successful.
-  - node scripts/inventory-visual-stories.mjs: 613 registered entries, sharedWorkspace detector updated to recognize AlgorithmStoryWorkspace.
+  - node scripts/inventory-visual-stories.mjs: 613 registered entries, 722 CSS files, sharedWorkspace detector updated to recognize AlgorithmStoryWorkspace and CharacterComparison.css.
 Build mode, payload report path, cold and warm deltas:
   - Build mode: production (Vite 8.0.10, Node 22.19.0)
   - Report path: docs/production-payload-report.json
-  - Cold 125: 320,026 gzip B (isolated CSS + shared CharacterComparison module)
-  - Cold 132: 320,217 gzip B (isolated CSS + shared CharacterComparison module)
-  - Warm 125 -> 132 additional assets: 25,705 raw B / 6,592 gzip B / 5,740 brotli B (down from 28,210 raw / 6,869 gzip / 5,979 brotli baseline: saved ~277 gzip bytes on warm load).
+  - Cold 125: 319,971 gzip B / 264,527 brotli B (isolated CSS + shared CharacterComparison module)
+  - Cold 132: 320,163 gzip B / 264,673 brotli B (isolated CSS + shared CharacterComparison module)
+  - Warm 125 -> 132 additional assets: 25,708 raw B / 6,593 gzip B / 5,739 brotli B.
 Unverified items and why:
-  - Browser interactive rendering for every responsive width (tested via headless builds & unit test suite).
+  - Browser interactive rendering for every responsive width across physical browsers (pending verification).
 Ledger changes:
-  - docs/visual-story-inventory.json refreshed with corrected AlgorithmStoryWorkspace signal.
+  - docs/visual-story-inventory.json refreshed with 722 CSS files and corrected AlgorithmStoryWorkspace signal.
 Next bounded task and exact starting command:
-  - Batch C: Inspect and isolate CSS collision pairs (121/123 StockStory, 131/141, 128/138) and verify multi-input workspace shell (134 Gas Station).
+  - Batch C: CSS collision isolation and shell verification across 121/123, 131/141, 128/138, and 134 Gas Station.
   - Starting command: git status --short
 ```
 
-## Batch C Completion Record
+## Batch C Record (Pending Verification)
 
 ```text
 Baseline / candidate revision or working-tree patch:
   Baseline: Patch after Batch B
-  Candidate: Working-tree patch implementing Batch C (CSS collision fixes across 121/123, 131/141, 128/138, 131/138, plus reduced motion in 141)
+  Candidate: Working-tree patch addressing Batch C scope and review gap fixes (CSS isolation across 121/123, 131/141, 128/138, 131/138, and SVG/DOM reduced motion in 141)
+Status:
+  Pending verification (CSS isolation and reduced motion additions implemented; awaits browser acceptance verification).
 Consumers and shared files:
   - Problem 123: Scoped .stock-story3* styles in src/problems/Problem123/StockStory3.css & StockStory3.jsx to avoid colliding with 121's .stock-story*
   - Problem 131 & 141: Scoped .partition-story__metric-value and .cycle-story__metric-value to eliminate cross-route collision on .metric-value
-  - Problem 128 & 138: Scoped .consecutive-story__metric-val and .copy-random-story__metric-val to eliminate cross-route collision on .metric-val
+  - Problem 128 & 138: Scoped .consecutive-story__metric-val vs .copy-random-story__metric-val, and .chain-node__idx / .chain-node__val / .chain-node__tag vs .node-idx / .node-val / .node-tag to prevent font size and layout bleed across routes
   - Problem 131 & 138: Scoped .cuts-legend__item and .canvas-legend__item to eliminate cross-route collision on .legend-item
-  - Problem 141: Added @media (prefers-reduced-motion: reduce) rule for .gap-card.collision pulse animation
+  - Problem 141: Added @media (prefers-reduced-motion: reduce) rules covering card pulse (.gap-card.collision) and SVG halo animations (.cycle-entry-halo, .meeting-pulse-halo)
 Story distinctions preserved:
   - Problem 121: Running minimum price, single transaction best trade arc, day-by-day SVG price chart.
   - Problem 123: 4-variable DP transition machine (b1, s1, b2, s2), price timeline SVG, evolution matrix.
@@ -413,29 +418,30 @@ Story distinctions preserved:
   - Problem 131: DFS palindrome partition tree, candidate symmetry check, cut markers.
   - Problem 134: Multi-input workspace shell validation with gas & cost arrays, deficit reset candidate search.
   - Problem 138: 3-phase O(1) space list interleave, random link redirection, decoupling.
-  - Problem 141: Tortoise & Hare cycle detection, relative distance delta gauge, collision pulse.
+  - Problem 141: Tortoise & Hare cycle detection, relative distance delta gauge, collision pulse, SVG meeting/entry halos.
 Algorithm / lint / browser checks and exact outcomes:
   - npm.cmd run test:visual-stories: 255 tests passed (10 suites, 0 failures, 0 skips).
+  - npx.cmd eslint src/problems/Problem128/ConsecutiveStory.jsx src/problems/Problem141/CycleStory.jsx: Clean (0 errors, 0 warnings).
   - Production build (npm.cmd run build -- --manifest): Successful.
 Build mode, payload report path, cold and warm deltas:
   - Build mode: production (Vite 8.0.10, Node 22.19.0)
   - Report path: docs/production-payload-report.json
 Unverified items and why:
-  - Live cross-page navigation tests in a physical browser (verified through Vite production build and Node unit test suite).
+  - Live cross-page navigation tests in a physical browser (marked as pending verification).
 Ledger changes:
   - None required for progress ledger (entries already tracked).
 Next bounded task and exact starting command:
-  - Batch D: Word Break 139/140 dictionary/boundary primitives or Problem 143+ continuation pipeline.
+  - Browser verification of Batches B & C before proceeding to Batch D / Problem 143+.
   - Starting command: git status --short
 ```
 
-## Resume checkpoint for Claude
+## Resume Checkpoint
 
 - Completed here:
-  - Batch A: Created `scripts/measure-production-payload.mjs` generating `docs/production-payload-report.json`, fixed `scripts/inventory-visual-stories.mjs` detector for `<AlgorithmStoryWorkspace>`, refreshed `docs/visual-story-inventory.json`.
-  - Batch B: Extracted `src/components/shared/CharacterComparison.jsx` and `CharacterComparison.css`, integrated into `Problem125/PalindromeStory.jsx` and `Problem132/MinCutStory.jsx`, removed global conflicting classes (`.comparison-char`, `.comparison-index`, `.operator-badge`, `.badge-match`, `.badge-mismatch`, `.legend-item`), verified 255 tests passing, measured production payload delta.
-  - Batch C: Resolved CSS collision pairs across 121/123 (`.stock-story` vs `.stock-story3`), 131/141 (`.metric-value`), 128/138 (`.metric-val`), and 131/138 (`.legend-item`). Added `prefers-reduced-motion` to 141's collision pulse. Verified multi-input workspace shell in Problem 134. Confirmed production build and 255 tests green.
-- Next: Batch D (Word Break 139/140 presentation consolidation or proceeding to Problem 143+ implementation pipeline).
+  - Batch A: Created and refined `scripts/measure-production-payload.mjs` (strictly validating missing assets, providing pure JSON output with `--json`, capturing Git revision, Node version, and compression metadata) generating `docs/production-payload-report.json`, fixed `scripts/inventory-visual-stories.mjs` detector for `<AlgorithmStoryWorkspace>`, refreshed `docs/visual-story-inventory.json` (722 CSS files).
+  - Batch B: Extracted `src/components/shared/CharacterComparison.jsx` and `CharacterComparison.css`, cleaned unused React imports, integrated into `Problem125/PalindromeStory.jsx` and `Problem132/MinCutStory.jsx`, removed global conflicting classes (`.comparison-char`, `.comparison-index`, `.operator-badge`, `.badge-match`, `.badge-mismatch`, `.legend-item`), verified 255 tests passing, measured production payload delta. Status: Pending Verification.
+  - Batch C: Resolved CSS collision pairs across 121/123 (`.stock-story` vs `.stock-story3`), 131/141 (`.metric-value`), 128/138 (`.metric-val` and `.chain-node__*` vs `.node-*`), and 131/138 (`.legend-item`). Added `prefers-reduced-motion` to 141's card collision pulse as well as SVG `.cycle-entry-halo` and `.meeting-pulse-halo` animations. Verified multi-input workspace shell in Problem 134. Confirmed production build, clean ESLint, and 255 tests green. Status: Pending Verification.
+- Status: Batches B and C remain recorded as **Pending Verification** until complete browser acceptance testing is performed. Do not begin Problem 143+ until verification is finalized.
 - Known remaining work: browser acceptance suite, verification backlog.
 
 Work in 1–3-problem batches with one shared owner. If delegating, assign disjoint
@@ -448,6 +454,5 @@ an exact next action so another model can continue without reconstructing chat.
 Suggested handoff prompt:
 
 > Read docs/visual-story-plan.md and the current git diff. Continue from the
-> resume checkpoint. Preserve problem-specific stories, Lumino layouts and
-> floating playback. Proceed to Batch D or the next problem pipeline.
+> resume checkpoint. Verify Batches B and C browser acceptance before proceeding to Batch D or next problems.
 > Update the checkpoint and relevant progress evidence after each bounded batch.

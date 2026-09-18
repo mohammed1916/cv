@@ -226,9 +226,9 @@ export default function ConsecutiveStory({ story, step }) {
                     role="listitem"
                     aria-label={`Sequence element ${val}, index ${idx + 1}`}
                   >
-                    <span className="node-idx">#{idx + 1}</span>
-                    <span className="node-val">{val}</span>
-                    {isTip && <span className="node-tag">curr</span>}
+                    <span className="chain-node__idx">#{idx + 1}</span>
+                    <span className="chain-node__val">{val}</span>
+                    {isTip && <span className="chain-node__tag">curr</span>}
                   </div>
                   {idx < currentSequence.length - 1 && (
                     <div className="chain-link" aria-hidden="true">
@@ -249,9 +249,9 @@ export default function ConsecutiveStory({ story, step }) {
                   role="listitem"
                   aria-label={`Next probe ${nextMissing} not in set`}
                 >
-                  <span className="node-idx">probe</span>
-                  <span className="node-val">{nextMissing}</span>
-                  <span className="node-tag">✗ Not in set</span>
+                  <span className="chain-node__idx">probe</span>
+                  <span className="chain-node__val">{nextMissing}</span>
+                  <span className="chain-node__tag">✗ Not in set</span>
                 </div>
               </div>
             )}

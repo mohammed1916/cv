@@ -1,8 +1,8 @@
 {
   "note": "Static import inventory, not a visual-quality certification. Dynamic imports and runtime-selected renderers require manual review. CSS byte counts are source bytes, not transferred bytes.",
   "registeredEntries": 613,
-  "cssFiles": 721,
-  "cssSourceBytes": 1986273,
+  "cssFiles": 722,
+  "cssSourceBytes": 1985311,
   "entries": [
     {
       "number": "CF-F",
@@ -1259,6 +1259,7 @@
         "src/components/LuminoDockPanel.css",
         "src/components/shared/StoryPanel.css",
         "src/components/shared/PointerRail.css",
+        "src/components/shared/CharacterComparison.css",
         "src/problems/Problem125/PalindromeStory.css",
         "src/problems/Problem125/ValidPalindromeVisualizer.css"
       ],
@@ -1557,6 +1558,7 @@
         "src/components/PatternLegend.css",
         "src/components/LuminoDockPanel.css",
         "src/components/shared/StoryPanel.css",
+        "src/components/shared/CharacterComparison.css",
         "src/problems/Problem132/MinCutStory.css",
         "src/problems/Problem132/PalindromePartitioningIIVisualizer.css"
       ],

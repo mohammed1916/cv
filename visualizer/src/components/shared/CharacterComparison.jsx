@@ -1,4 +1,3 @@
-import React from "react";
 import "./CharacterComparison.css";
 
 export default function CharacterComparison({

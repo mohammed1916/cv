@@ -314,26 +314,26 @@
   opacity: 0.85;
 }
 
-.node-idx {
+.chain-node__idx {
   font-size: 9px;
   color: var(--text-muted, #94a3b8);
 }
 
-.node-val {
+.chain-node__val {
   font-size: 15px;
   font-weight: 700;
   font-family: var(--font-mono, monospace);
   color: var(--text, #f8fafc);
 }
 
-.node-tag {
+.chain-node__tag {
   font-size: 8px;
   font-weight: 700;
   text-transform: uppercase;
   color: var(--primary, #818cf8);
 }
 
-.is-missing .node-tag {
+.chain-node.is-missing .chain-node__tag {
   color: var(--error, #ef4444);
 }
 

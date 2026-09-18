@@ -303,6 +303,17 @@
   transform-origin: center;
 }
 
+.meeting-pulse-halo {
+  animation: halo-pulse 1.2s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cycle-entry-halo,
+  .meeting-pulse-halo {
+    animation: none;
+  }
+}
+
 @keyframes rotate-halo {
   from {
     stroke-dashoffset: 0;
@@ -310,10 +321,6 @@
   to {
     stroke-dashoffset: 24;
   }
-}
-
-.meeting-pulse-halo {
-  animation: halo-pulse 1.2s ease-in-out infinite alternate;
 }
 
 @keyframes halo-pulse {
