@@ -551,7 +551,12 @@ function ProblemPage({
         />
         <div className="problem-utilities">{utilityControls}</div>
       </header>
-      <ProblemNavigation problem={problem} problems={ALL_PROBLEMS} pro={pro} onSelect={onSelect} />
+      <ProblemNavigation
+        problem={problem}
+        problems={ALL_PROBLEMS}
+        pro={pro}
+        onSelect={onSelect}
+      />
       <div className="problem-content">
         <ErrorBoundary key={problem.id}>
           {Component ? (
@@ -1138,7 +1143,11 @@ export default function App() {
           setDialog("plans");
         }}
       >
-        {access.pro ? "Pro account" : "Get Pro · ₹199"}
+        {access.debugPro
+          ? "Pro · DEV"
+          : access.pro
+            ? "Pro account"
+            : "Get Pro · ₹199"}
       </button>
       <button
         className="access-toolbar-btn"
@@ -1313,9 +1322,15 @@ export default function App() {
                         {access.user.displayName} · {access.user.email}
                       </p>
                       <p>
-                        {access.pro
-                          ? `Pro active until ${new Date(access.account.expiresAt).toLocaleDateString()}`
-                          : "Free account"}
+                        {access.debugPro
+                          ? "Pro enabled locally for development"
+                          : access.pro && access.account?.expiresAt
+                            ? `Pro active until ${new Date(
+                                access.account.expiresAt,
+                              ).toLocaleDateString()}`
+                            : access.pro
+                              ? "Pro account"
+                              : "Free account"}
                       </p>
                       <button onClick={access.logout}>Sign out</button>
                       <button onClick={access.refresh}>Refresh access</button>
