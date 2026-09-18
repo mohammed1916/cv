@@ -266,27 +266,6 @@ export default function MaxAreaOfIslandVisualizer() {
                 applyExample={applyExample}
                 inputError={inputError}
               />
-            <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
-              {EXAMPLES.map((ex) => (
-                <button
-                  key={ex.label}
-                  onClick={() => applyExample(ex)}
-                  className="maoi-example-btn"
-                >
-                  {ex.label}
-                </button>
-              ))}
-            </div>
-
-            {inputError && <div style={{ color: '#ea0c0c', marginBottom: 12, fontSize: 13 }}>{inputError}</div>}
-
-            <textarea
-              className="maoi-input-textarea"
-              value={gridInput}
-              onChange={(e) => { setGridInput(e.target.value); handleReset() }}
-              rows={5}
-              spellCheck={false}
-            />
 
             <div className="maoi-grid-container">
               <div

@@ -148,10 +148,6 @@ export default function HouseRobberVisualizer({ problem }) {
             {inputError && <span className="hr-error">{inputError}</span>}
           </header>
           <div className="hr-body">
-            <div className="hr-examples">
-              {EXAMPLES.map((ex) => <button key={ex.label} className="hr-chip" onClick={() => applyExample(ex)}>{ex.label}</button>)}
-            </div>
-            <input className="hr-input" value={numsInput} onChange={handleNumsInputChange} />
             <AnimatedIterationList
               items={nums}
               styleName="dp-house"

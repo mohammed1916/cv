@@ -356,34 +356,6 @@ export default function ZigzagVisualizer() {
         applyExample={applyExample}
         inputError={inputError}
       />
-      <div className="zv-card zv-input-card">
-        <div className="zv-input-row">
-          <div className="zv-field-group zv-field-string">
-            <label className="zv-input-label">String</label>
-            <input
-              className={`zv-input mono ${inputError ? 'has-error' : ''}`}
-              value={inputValue}
-              onChange={(event) => {
-                setInputValue(event.target.value)
-                if (attemptedSubmit) setAttemptedSubmit(false)
-              }}
-              onKeyDown={(event) => event.key === 'Enter' && handleVisualize()}
-              placeholder="PAYPALISHIRING"
-              maxLength={28}
-            />
-          </div>
-          
-          <button className="zv-btn zv-btn-primary" onClick={handleVisualize}>Visualize</button>
-        </div>
-        <div className="zv-support-row">
-          <p className={`zv-hint ${inputError || rowError ? 'error' : ''}`}>
-            {inputError || rowError || 'Try the canonical PAYPALISHIRING example or a short string to inspect each bounce.'}
-          </p>
-          <div className="zv-meta-row">
-            <span className="zv-pill mono">len {sanitizedInput.length}</span>
-            <span className="zv-pill mono">rows {rowCountInput || 0}</span>
-          </div>
-        </div>
         <div className="zv-example-grid">
           {EXAMPLES.map((example) => (
             <button

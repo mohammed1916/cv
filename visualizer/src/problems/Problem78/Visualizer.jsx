@@ -83,6 +83,7 @@ function generateSteps(nums) {
 const EXAMPLES = getExamples('subsets')
 
 function VisualizationPanel({ EXAMPLES, applyExample, numsInput, setNumsInput, nums, inputError, handleReset, step }) {
+function VisualizationPanel({ nums, inputError, step }) {
     return (
         <div className="subsets-viz-panel">
             <div className="subsets-top">
@@ -92,12 +93,6 @@ function VisualizationPanel({ EXAMPLES, applyExample, numsInput, setNumsInput, n
                         {inputError && <span className="subsets-error">{inputError}</span>}
                     </header>
                     <div className="subsets-body">
-                        <div className="subsets-examples">
-                            {EXAMPLES.map((ex) => (
-                                <button key={ex.label} className="subsets-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                            ))}
-                        </div>
-                        <input className="subsets-input" value={numsInput} onChange={(e) => { setNumsInput(e.target.value); handleReset() }} />
 
                         <div className="subsets-section-label">Current path</div>
                         <div className="subsets-path-row">
@@ -186,6 +181,7 @@ export default function SubsetsVisualizer() {
             inputError={inputError}
           />
           <VisualizationPanel EXAMPLES={EXAMPLES} applyExample={applyExample} numsInput={numsInput} setNumsInput={setNumsInput} nums={nums} inputError={inputError} handleReset={handleReset} step={step} />
+          <VisualizationPanel nums={nums} inputError={inputError} step={step} />
         </>
     )
 

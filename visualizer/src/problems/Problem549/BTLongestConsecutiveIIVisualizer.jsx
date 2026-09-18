@@ -338,30 +338,6 @@ export default function BTLongestConsecutiveIIVisualizer() {
       />
 
     <div className="p549-panel-primary">
-      <div className="p549-card">
-        <div className="p549-section-label">Input (level order)</div>
-        <input
-          id="p549-tree"
-          className={`p549-input mono ${inputError ? 'has-error' : ''}`}
-          value={treeInput}
-          onChange={(e) => { setTreeInput(e.target.value); handleReset() }}
-          placeholder="2,1,3"
-        />
-        <p className={`p549-hint ${inputError ? 'error' : ''}`}>
-          {inputError || 'Use null for missing children. A path may go child → parent → child.'}
-        </p>
-        <div className="p549-example-row">
-          {EXAMPLES.map((ex) => (
-            <button
-              type="button"
-              key={ex.label}
-              className={`p549-example-btn ${treeInput === ex.tree ? 'active' : ''}`}
-              onClick={() => applyExample(ex)}
-            >
-              {ex.label}
-            </button>
-          ))}
-        </div>
       </div>
 
       <div className="p549-card">

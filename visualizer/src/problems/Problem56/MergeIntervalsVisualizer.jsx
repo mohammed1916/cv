@@ -200,25 +200,6 @@ export default function MergeIntervalsVisualizer() {
         {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
       </div>
       <div className="mi-panel-body">
-        <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
-          {EXAMPLES.map((ex) => (
-            <button
-              key={ex.label}
-              onClick={() => applyExample(ex)}
-              className="mi-example-btn"
-            >
-              {ex.label}
-            </button>
-          ))}
-        </div>
-
-        <input
-          value={intervalsInput}
-          onChange={(e) => { setIntervalsInput(e.target.value);
-handleReset() }}
-          placeholder="[[1,3],[2,6],[8,10],[15,18]]"
-          className="mi-input"
-        />
 
         <div className="mi-canvas">
           <div className="mi-axis">

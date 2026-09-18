@@ -100,53 +100,14 @@ const TaskScheduler = () => {
   return (
     <div className="ts-container">
         <ManualInputPanel
-          fields={[{"key":"custom","label":"custom","type":"string"}]}
-          values={{ custom: customInput }}
-          onChange={(k, v) => { if (k === 'custom') setCustomInput(v) }}
+          fields={[{"key":"custom","label":"Tasks","type":"string"},{"key":"n","label":"Cooldown (n)","type":"number"}]}
+          values={{ custom: customInput, n }}
+          onChange={(k, v) => { if (k === 'custom') setCustomInput(v); if (k === 'n') setN(Math.max(0, parseInt(v) || 0)) }}
           showExamples={false}
         />
       <div className="ts-header">
         <h1>Task Scheduler (LC 621)</h1>
         <p className="ts-subtitle">Find minimum time needed to complete all tasks</p>
-      </div>
-
-      <div className="ts-controls">
-        <div className="ts-control-group">
-          <label>Tasks (comma-separated or letters):</label>
-          <input
-            type="text"
-            value={customInput}
-            onChange={(e) => setCustomInput(e.target.value)}
-            placeholder="e.g., A,A,A,B,B,B or AAABBB"
-          />
-          <button onClick={handleCustomSubmit} className="ts-btn ts-btn-primary">
-            Set Tasks
-          </button>
-        </div>
-
-        <div className="ts-control-group">
-          <label>Cooldown Period (n):</label>
-          <input
-            type="number"
-            value={n}
-            onChange={(e) => setN(Math.max(0, parseInt(e.target.value) || 0))}
-            min="0"
-            max="26"
-          />
-        </div>
-
-        <div className="ts-control-group">
-          <button onClick={handleLoadExample} className="ts-btn ts-btn-secondary">
-            Load Example
-          </button>
-          <button
-            onClick={startAnimation}
-            disabled={animationState === 'running'}
-            className="ts-btn ts-btn-accent"
-          >
-            {animationState === 'running' ? 'Animating...' : 'Visualize'}
-          </button>
-        </div>
       </div>
 
       <div className="ts-content">

@@ -172,14 +172,14 @@ function VisualizationPanel({ step, s, k, inputError, handleReset }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%', overflow: 'auto' }}>
       <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'flex-end' }}>
-        <label style={{ display: 'flex', flexDirection: 'column', gap: 4, flex: 1, minWidth: 160 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 4, flex: 1, minWidth: 160 }}>
           <span style={{ fontSize: 12, color: COL.muted }}>String s</span>
-          <input readOnly value={s} className="longest-substringwith-at-most-k-distinct-characters-textarea" style={{ flex: 'none', minHeight: 0, height: 36 }} />
-        </label>
-        <label style={{ display: 'flex', flexDirection: 'column', gap: 4, width: 90 }}>
+          <div className="longest-substringwith-at-most-k-distinct-characters-textarea" style={{ flex: 'none', minHeight: 0, height: 36, display: 'flex', alignItems: 'center' }}>{s}</div>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 4, width: 90 }}>
           <span style={{ fontSize: 12, color: COL.muted }}>k</span>
-          <input readOnly value={k} className="longest-substringwith-at-most-k-distinct-characters-textarea" style={{ flex: 'none', minHeight: 0, height: 36 }} />
-        </label>
+          <div className="longest-substringwith-at-most-k-distinct-characters-textarea" style={{ flex: 'none', minHeight: 0, height: 36, display: 'flex', alignItems: 'center' }}>{k}</div>
+        </div>
       </div>
 
       <AnimatePresence mode="wait">

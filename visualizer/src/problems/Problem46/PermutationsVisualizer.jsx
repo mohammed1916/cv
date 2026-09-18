@@ -108,14 +108,6 @@ function VisualizationPanel({ EXAMPLES, applyExample, numsInput, setNumsInput, n
                         {inputError && <span className="perm-error">{inputError}</span>}
                     </header>
                     <div className="perm-body">
-                        <div className="perm-examples">
-                            {EXAMPLES.map((ex) => (
-                                <button key={ex.label} className="perm-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                            ))}
-                        </div>
-                        <input className="perm-input" value={numsInput} onChange={(e) => { setNumsInput(e.target.value);
-
- handleReset() }} />
 
                         <div className="perm-section-label">Current path</div>
                         <div className="perm-path-row">

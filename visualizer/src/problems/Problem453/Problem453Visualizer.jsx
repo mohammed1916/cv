@@ -239,62 +239,6 @@ function VisualizationPanel({ step, nums, EXAMPLES, handleExampleClick, numsInpu
         <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Examples
         </div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {EXAMPLES.map((ex) => (
-            <button
-              key={ex.label}
-              onClick={() => handleExampleClick(ex)}
-              style={{
-                padding: '6px 12px',
-                borderRadius: 4,
-                border: '1px solid var(--border)',
-                backgroundColor: 'var(--surface2)',
-                cursor: 'pointer',
-                fontSize: 12,
-                fontWeight: 500,
-              }}
-            >
-              {ex.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div>
-        <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-          Array (comma-separated)
-        </label>
-        <div style={{ display: 'flex', gap: 8 }}>
-          <input
-            value={numsInput}
-            onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-            placeholder="e.g., 1,0,0,8,6"
-            style={{
-              flex: 1,
-              padding: '8px 10px',
-              border: '1px solid var(--border)',
-              borderRadius: 4,
-              fontSize: 12,
-              fontFamily: 'monospace',
-              boxSizing: 'border-box',
-            }}
-          />
-          <button
-            onClick={handleReset}
-            style={{
-              padding: '8px 10px',
-              backgroundColor: 'var(--primary-glow)',
-              color: 'var(--text)',
-              border: '1px solid var(--primary)',
-              borderRadius: 4,
-              fontSize: 12,
-              fontWeight: 600,
-              cursor: 'pointer',
-            }}
-          >
-            Reset
-          </button>
-        </div>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 12, flex: 1 }}>

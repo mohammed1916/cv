@@ -168,22 +168,6 @@ export default function DecodeWaysVisualizer() {
             <header className="dw-head"><span>Decode Ways · 1D DP</span></header>
             <div className="dw-body">
                 <div className="dw-top-row">
-                    <div className="dw-examples">
-                        {EXAMPLES.map((ex) => (
-                            <button key={ex.label} className="dw-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                        ))}
-                    </div>
-                    <div className="dw-input-group">
-                        {inputError && <span className="dw-error">{inputError}</span>}
-                        <input
-                            className="dw-input"
-                            value={sInput}
-                            onChange={(e) => { setSInput(e.target.value);
-
- handleReset() }}
-                            placeholder="226"
-                        />
-                    </div>
                 </div>
 
                 {/* String display */}

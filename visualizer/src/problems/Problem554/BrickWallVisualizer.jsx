@@ -190,30 +190,6 @@ function VisualizationPanel({ step, applyExample, examples, wall }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
-      {examples?.length > 0 && (
-        <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {examples.map((ex, i) => (
-              <button
-                key={i}
-                onClick={() => applyExample(ex)}
-                style={{
-                  padding: '6px 12px',
-                  borderRadius: 4,
-                  border: '1px solid var(--text-muted)',
-                  cursor: 'pointer',
-                  fontSize: 11,
-                  backgroundColor: 'var(--surface2)',
-                  color: 'var(--text)',
-                }}
-              >
-                {ex.label || `Example ${i + 1}`}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
 
       {/* Brick Wall Visualization */}
       {wall && wall.length > 0 && (
@@ -466,32 +442,7 @@ export default function BrickWallVisualizer() {
               />
             )}
           </div>),
-    viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
-            <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Wall (JSON)</div>
-              <textarea
-                value={wallInput}
-                onChange={(e) => {
-                  setWallInput(e.target.value)
-                  handleReset()
-                }}
-                style={{
-                  width: '100%',
-                  height: 100,
-                  padding: '8px',
-                  borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
-                  backgroundColor: 'var(--surface2)',
-                  color: 'var(--text)',
-                  fontFamily: 'monospace',
-                  fontSize: 12,
-                  resize: 'vertical',
-                }}
-              />
-              {inputError && <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
-            </div>
-            <VisualizationPanel step={step} applyExample={applyExample} examples={examples} wall={wall} />
-          </div>),
+    viz: (<VisualizationPanel step={step} applyExample={applyExample} examples={examples} wall={wall} />),
   }), [step, connectivity, setActiveLineDom, wallInput, inputError, examples, applyExample, handleReset, showPatternOverlay, activeLineDom, wall])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])

@@ -127,18 +127,7 @@ export default function MaxProductSubarrayVisualizer() {
 
         <div className="mps-panel">
             <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
-                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                    {EXAMPLES.map(ex => (
-                        <button key={ex.label} onClick={() => applyExample(ex)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: 'var(--surface2)' }}>
-                            {ex.label}
-                        </button>
-                    ))}
-                </div>
 
-                <div>
-                    <input style={{ width: '100%', padding: '8px', borderRadius: 4, border: inputError ? '2px solid #ef4444' : '1px solid var(--border)', fontSize: 12, fontFamily: 'monospace' }} value={numsInput} onChange={e => { setNumsInput(e.target.value); handleReset() }} />
-                    {inputError && <div style={{ color: '#991b1b', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
-                </div>
 
                 <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>Array</div>
                 <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', alignItems: 'center' }}>

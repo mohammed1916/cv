@@ -289,33 +289,6 @@ export default function CumulativeSalaryVisualizer() {
                 ))}
               </div>
 
-              <div className="cumulative-salary-input-group">
-                <div style={{ width: '100%' }}>
-                  <div className="cumulative-salary-label">Employee Records (JSON):</div>
-                  <textarea
-                    value={employeesInput}
-                    onChange={(e) => {
-                      setEmployeesInput(e.target.value)
-                      handleReset()
-                    }}
-                    placeholder='[{"id": 1, "month": 1, "salary": 5000}]'
-                    className="cumulative-salary-input"
-                    style={{
-                      width: '100%',
-                      height: '140px',
-                      fontFamily: 'monospace',
-                      fontSize: '12px',
-                      marginTop: '4px',
-                    }}
-                  />
-                  {inputError && (
-                    <div style={{ color: '#ea0c0c', fontSize: '12px', marginTop: '6px' }}>
-                      {inputError}
-                    </div>
-                  )}
-                </div>
-              </div>
-
               <div className="cumulative-salary-summary">
                 <div className="cumulative-salary-summary-item">
                   <div className="cumulative-salary-summary-label">Employees</div>

@@ -239,25 +239,6 @@ export default function SpiralMatrixVisualizer() {
         {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
       </div>
       <div className="sm-panel-body">
-        <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
-          {EXAMPLES.map((ex) => (
-            <button
-              key={ex.label}
-              onClick={() => applyExample(ex)}
-              className="sm-example-btn"
-            >
-              {ex.label}
-            </button>
-          ))}
-        </div>
-
-        <input
-          value={matrixInput}
-          onChange={(e) => { setMatrixInput(e.target.value);
- handleReset() }}
-          placeholder="[[1,2,3],[4,5,6],[7,8,9]]"
-          className="sm-input"
-        />
 
         <div className="sm-matrix-container">
             <div

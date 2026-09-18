@@ -119,9 +119,6 @@ export default function Problem394Visualizer() {
                         </div>
                     </div>
 
-                    <input style={{ padding: '8px', borderRadius: 4, border: '1px solid var(--border)', fontSize: 12, fontFamily: 'monospace' }} value={sInput}
-                        onChange={(e) => { setSInput(e.target.value); handleReset(); }} placeholder="encoded string" />
-
                     <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 4 }}>Input</div>
                     <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', minHeight: 40 }}>
                         {sInput.split("").map((ch, i) => {

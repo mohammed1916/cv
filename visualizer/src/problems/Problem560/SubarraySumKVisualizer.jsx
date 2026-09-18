@@ -158,16 +158,6 @@ export default function SubarraySumKVisualizer() {
       />
 
             <div className="ssk-controls-row">
-                <div className="ssk-examples">
-                    {EXAMPLES.map((ex) => (
-                        <button key={ex.label} className="ssk-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                    ))}
-                </div>
-                <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                    <input className="ssk-input" value={numsInput} onChange={(e) => { setNumsInput(e.target.value); handleReset(); }} />
-                    
-                    {err && <span className="ssk-error">{err}</span>}
-                </div>
             </div>
 
             <>

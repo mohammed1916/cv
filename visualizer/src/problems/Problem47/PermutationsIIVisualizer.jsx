@@ -182,26 +182,6 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {examples?.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {examples.map((ex, i) => (
-              <button
-                key={i}
-                onClick={() => applyExample(ex)}
-                style={{
-                  padding: '6px 12px',
-                  borderRadius: 4,
-                  border: '1px solid var(--text-muted)',
-                  cursor: 'pointer',
-                  fontSize: 11,
-                  backgroundColor: 'var(--surface2)',
-                  color: 'var(--text)',
-                }}
-              >
-                {ex.label || `Example ${i + 1}`}
-              </button>
-            ))}
-          </div>
         </div>
       )}
 
@@ -346,30 +326,6 @@ export default function PermutationsIIVisualizer() {
           applyExample={applyExample}
           inputError={inputError}
         />
-      <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Input Array</div>
-        <textarea
-          value={numsInput}
-          onChange={(e) => {
-            setNumsInput(e.target.value)
-            handleReset()
-          }}
-          style={{
-            width: '100%',
-            height: 60,
-            padding: '8px',
-            borderRadius: 4,
-            border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
-            backgroundColor: 'var(--surface2)',
-            color: 'var(--text)',
-            fontFamily: 'monospace',
-            fontSize: 12,
-            resize: 'vertical',
-          }}
-          placeholder="[1,1,2]"
-        />
-        {inputError && (
-          <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>
         )}
       </div>
       <VisualizationPanel nums={nums} step={step} applyExample={applyExample} examples={examples} />

@@ -156,9 +156,9 @@ export default function GuessNumberVisualizer() {
     return (
         <div className="gn-shell">
               <ManualInputPanel
-                fields={[{"key":"pick","label":"pick","type":"string"}]}
-                values={{ pick: pickInput }}
-                onChange={(k, v) => { if (k === 'pick') setPickInput(v); handleReset() }}
+                fields={[{"key":"n","label":"n","type":"string"},{"key":"pick","label":"pick","type":"string"}]}
+                values={{ n: nInput, pick: pickInput }}
+                onChange={(k, v) => { if (k === 'n') setNInput(v); if (k === 'pick') setPickInput(v); handleReset() }}
                 examples={EXAMPLES}
                 applyExample={applyExample}
                 inputError={inputError}
@@ -169,24 +169,6 @@ export default function GuessNumberVisualizer() {
                     {inputError && <span className="gn-error">{inputError}</span>}
                 </header>
                 <div className="gn-body">
-                    {/* ── Controls ── */}
-                    <div className="gn-top-row">
-                        <div className="gn-examples">
-                            {EXAMPLES.map(ex => (
-                                <button key={ex.label} className="gn-chip" onClick={() => applyExample(ex)}>
-                                    {ex.label}
-                                </button>
-                            ))}
-                        </div>
-                        <div className="gn-inputs">
-                            <div className="gn-input-group">
-                                <label className="gn-label">n (range 1..n)</label>
-                                <input className="gn-input narrow" type="number" min="1" max="200"
-                                    value={nInput}
-                                    onChange={e => { setNInput(e.target.value); handleReset() }} />
-                            </div>
-                            
-                        </div>
                     </div>
 
                     {/* ── State Variables ── */}

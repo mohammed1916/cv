@@ -224,17 +224,6 @@ function StatePanel({ step, allNodes }) {
 function InputPanel({ arrInput, setArrInput, applyExample, inputError }) {
     return (
         <div className="btp-input-panel">
-            <div className="btp-examples">
-                {EXAMPLES.map((ex) => (
-                    <button key={ex.label} className="btp-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                ))}
-            </div>
-            <input
-                className="btp-input"
-                value={arrInput}
-                onChange={(e) => setArrInput(e.target.value)}
-                placeholder="[1,2,3]"
-            />
             {inputError && <span className="btp-error">{inputError}</span>}
         </div>
     )

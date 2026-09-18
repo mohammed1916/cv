@@ -183,26 +183,6 @@ export default function TrappingRainWaterVisualizer() {
         {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
       </div>
       <div className="tw-panel-body">
-        <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
-          {EXAMPLES.map((ex) => (
-            <button
-              key={ex.label}
-              onClick={() => applyExample(ex)}
-              className="tw-example-btn"
-            >
-              {ex.label}
-            </button>
-          ))}
-        </div>
-
-        <input
-          value={heightInput}
-          onChange={(e) => { setHeightInput(e.target.value);
-
- handleReset() }}
-          placeholder="[0,1,0,2,1,0,1,3,2,1,2,1]"
-          className="tw-input"
-        />
 
         <div className="tw-chart-container">
           {height.map((h, i) => {

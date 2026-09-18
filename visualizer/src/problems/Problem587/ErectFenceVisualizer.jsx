@@ -325,30 +325,6 @@ function VisualizationCanvas({ points, hull, step, width = 400, height = 400 }) 
 function VisualizationPanel({ points, hull, step, applyExample, examples }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
-      {examples?.length > 0 && (
-        <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {examples.map((ex, i) => (
-              <button
-                key={i}
-                onClick={() => applyExample(ex)}
-                style={{
-                  padding: '6px 12px',
-                  borderRadius: 4,
-                  border: '1px solid var(--text-muted)',
-                  cursor: 'pointer',
-                  fontSize: 11,
-                  backgroundColor: 'var(--surface2)',
-                  color: 'var(--text)',
-                }}
-              >
-                {ex.label || `Example ${i + 1}`}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
 
       <div className="fence-canvas">
         <VisualizationCanvas points={points} hull={hull} step={step} width={400} height={400} />
@@ -496,35 +472,7 @@ export default function ErectFenceVisualizer() {
               />
             )}
           </div>),
-    viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
-            <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
-              <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>
-                Points (GeoJSON format)
-              </div>
-              <textarea
-                value={pointsInput}
-                onChange={(e) => {
-                  setPointsInput(e.target.value)
-                  handleReset()
-                }}
-                placeholder='[[1,1],[2,2],[2,0]]'
-                style={{
-                  width: '100%',
-                  minHeight: 80,
-                  padding: '8px',
-                  borderRadius: 4,
-                  border: '1px solid var(--text-muted)',
-                  backgroundColor: 'var(--code-bg)',
-                  color: 'var(--text)',
-                  fontFamily: 'monospace',
-                  fontSize: 11,
-                  resize: 'vertical',
-                }}
-              />
-            </div>
-
-            <VisualizationPanel points={points} hull={step?.hull || []} step={step} applyExample={applyExample} examples={examples} />
-          </div>),
+    viz: (<VisualizationPanel points={points} hull={step?.hull || []} step={step} applyExample={applyExample} examples={examples} />),
   }), [step, connectivity, showPatternOverlay, activeLineDom, pointsInput, points, examples, applyExample, handleReset])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])

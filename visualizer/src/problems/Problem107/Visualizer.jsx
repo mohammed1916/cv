@@ -138,12 +138,7 @@ function VisualizationPanel({
 }) {
     return (
         <div className="btlo2-viz-panel">
-            <div className="btlo2-examples">
-                {EXAMPLES.map((ex) => (
-                    <button key={ex.label} className="btlo2-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                ))}
-            </div>
-            <input className="btlo2-input" value={arrInput} onChange={(e) => { setArrInput(e.target.value); handleReset() }} />
+
             <div className="btlo2-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
                 <TreeCanvas3D
                     positions={positions}

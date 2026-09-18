@@ -105,27 +105,6 @@ export default function SumOfTwoIntegers() {
           showExamples={false}
         />
       <h1 className="sti-title">LC 371: Sum of Two Integers</h1>
-
-      <div className="sti-input-section">
-        <div className="sti-input-group">
-          <input
-            type="number"
-            placeholder="a (e.g., 5)"
-            value={customAInput}
-            onChange={(e) => setCustomAInput(e.target.value)}
-            className="sti-input"
-          />
-          <input
-            type="number"
-            placeholder="b (e.g., 7)"
-            value={customBInput}
-            onChange={(e) => setCustomBInput(e.target.value)}
-            className="sti-input"
-          />
-          <button onClick={handleApplyInputs} className="sti-btn">
-            Apply
-          </button>
-        </div>
       </div>
 
       <div className="sti-controls">

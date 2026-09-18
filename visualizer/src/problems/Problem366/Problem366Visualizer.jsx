@@ -244,26 +244,6 @@ const EXAMPLES = getExamplesOr('find-leaves-of-binary-tree', [
 function TreeVisualizationPanel({ step, positions, edges, allNodes, EXAMPLES, arrInput, setArrInput, applyExample, handleReset }) {
     return (
         <div className="p366-viz-panel">
-            <div className="p366-examples">
-                {EXAMPLES.map((ex) => (
-                    <button
-                        key={ex.label}
-                        className="p366-chip"
-                        onClick={() => applyExample(ex)}
-                    >
-                        {ex.label}
-                    </button>
-                ))}
-            </div>
-            <input
-                className="p366-input"
-                value={arrInput}
-                onChange={(e) => {
-                    setArrInput(e.target.value)
-                    handleReset()
-                }}
-                placeholder="Enter tree array..."
-            />
             <div className="p366-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
                 <svg style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }} width={CANVAS_W} height={CANVAS_H}>
                     {edges.map(({ fromId, toId }) => {

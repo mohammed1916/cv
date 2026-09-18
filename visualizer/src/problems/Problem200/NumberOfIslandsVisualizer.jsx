@@ -223,14 +223,6 @@ export default function NumberOfIslandsVisualizer() {
 
           {inputError && <div style={{ color: '#ea0c0c', marginBottom: 12, fontSize: 13 }}>{inputError}</div>}
 
-          <textarea
-            className="noi-input-textarea"
-            value={gridInput}
-            onChange={(e) => { setGridInput(e.target.value); handleReset() }}
-            rows={5}
-            spellCheck={false}
-          />
-
           <div className="noi-grid-container">
             <div
               className="noi-grid"

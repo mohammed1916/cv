@@ -174,12 +174,6 @@ export default function ValidateBSTVisualizer() {
                 {inputError && <span className="vbst-error">{inputError}</span>}
             </header>
             <div className="vbst-body">
-                <div className="vbst-examples">
-                    {EXAMPLES.map((ex) => (
-                        <button key={ex.label} className="vbst-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                    ))}
-                </div>
-                <input className="vbst-input" value={arrInput} onChange={(e) => { setArrInput(e.target.value); handleReset() }} />
                 <div className="vbst-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
                     <svg style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }} width={CANVAS_W} height={CANVAS_H}>
                         {edges.map(({ fromId, toId }) => {

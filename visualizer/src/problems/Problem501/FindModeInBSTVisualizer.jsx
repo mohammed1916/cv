@@ -165,30 +165,6 @@ function generateSteps(treeArray) {
 function VisualizationPanel({ step, applyExample, examples }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
-      {examples?.length > 0 && (
-        <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {examples.map((ex, i) => (
-              <button
-                key={i}
-                onClick={() => applyExample(ex)}
-                style={{
-                  padding: '6px 12px',
-                  borderRadius: 4,
-                  border: '1px solid var(--text-muted)',
-                  cursor: 'pointer',
-                  fontSize: 11,
-                  backgroundColor: 'var(--surface2)',
-                  color: 'var(--text)',
-                }}
-              >
-                {ex.label || `Example ${i + 1}`}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
 
       {step?.count && (
         <div>
@@ -316,35 +292,7 @@ export default function FindModeInBSTVisualizer() {
               />
             )}
           </div>),
-    viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
-            <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Tree (level-order, nulls allowed)</div>
-              <textarea
-                value={treeInput}
-                onChange={(e) => {
-                  setTreeInput(e.target.value)
-                  handleReset()
-                }}
-                style={{
-                  width: '100%',
-                  height: 60,
-                  padding: '8px',
-                  borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
-                  backgroundColor: 'var(--surface2)',
-                  color: 'var(--text)',
-                  fontFamily: 'monospace',
-                  fontSize: 12,
-                  resize: 'vertical',
-                }}
-                placeholder='[1,null,2,2]'
-              />
-              {inputError && (
-                <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>
-              )}
-            </div>
-            <VisualizationPanel treeArray={tree} step={step} applyExample={applyExample} examples={examples} />
-          </div>),
+    viz: (<VisualizationPanel treeArray={tree} step={step} applyExample={applyExample} examples={examples} />),
   }), [step, connectivity, setActiveLineDom, treeInput, tree, inputError, examples, applyExample, handleReset, showPatternOverlay, activeLineDom])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])

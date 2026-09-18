@@ -293,33 +293,6 @@ export default function StudentAttendanceRecordIIVisualizer() {
       />
 
     <div className="p552-panel-primary">
-      <div className="p552-card">
-        <div className="p552-section-label">Input</div>
-        <label className="p552-input-label" htmlFor="p552-n">Record length (n)</label>
-        <input
-          id="p552-n"
-          className={`p552-input mono ${inputError ? 'has-error' : ''}`}
-          value={nInput}
-          onChange={(e) => { setNInput(e.target.value); handleReset() }}
-          placeholder="2"
-          type="number"
-          min="1"
-        />
-        <p className={`p552-hint ${inputError ? 'error' : ''}`}>
-          {inputError || 'Rewardable: at most one A in total, and never three L in a row.'}
-        </p>
-        <div className="p552-example-row">
-          {EXAMPLES.map((ex) => (
-            <button
-              type="button"
-              key={ex.label}
-              className={`p552-example-btn ${nInput === ex.n ? 'active' : ''}`}
-              onClick={() => applyExample(ex)}
-            >
-              {ex.label} (n={ex.n})
-            </button>
-          ))}
-        </div>
       </div>
 
       <div className="p552-card">

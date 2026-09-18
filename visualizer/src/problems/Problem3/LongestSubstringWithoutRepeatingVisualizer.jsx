@@ -179,14 +179,6 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
           ))}
         </div>
 
-        <input
-          value={strInput}
-          onChange={handleStrInputChange}
-          placeholder="abcabcbb"
-          className="lswrc-input"
-          maxLength={24}
-        />
-
         <div className="lswrc-string-container">
           {s.split('').map((char, i) => {
             const isLeft = step?.left === i

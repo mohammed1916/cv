@@ -183,30 +183,6 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
-      {examples?.length > 0 && (
-        <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {examples.map((ex, i) => (
-              <button
-                key={i}
-                onClick={() => applyExample(ex)}
-                style={{
-                  padding: '6px 12px',
-                  borderRadius: 4,
-                  border: '1px solid var(--text-muted)',
-                  cursor: 'pointer',
-                  fontSize: 11,
-                  backgroundColor: 'var(--surface2)',
-                  color: 'var(--text)',
-                }}
-              >
-                {ex.label || `Example ${i + 1}`}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
 
       {['load_questions', 'load_answers', 'join_data'].includes(step.phase) && (
         <div>
@@ -386,52 +362,7 @@ export default function HighestAnswerRateVisualizer() {
                 />
               )}
             </CodeTracePanel>),
-    right: (<VisualizationPanel step={step} applyExample={applyExample} examples={examples} />),
-    bottom: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, overflow: 'auto' }}>
-            <div>
-              <label style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', display: 'block', marginBottom: 6 }}>
-                Questions (JSON)
-              </label>
-              <textarea
-                value={questionsInput}
-                onChange={(e) => setQuestionsInput(e.target.value)}
-                style={{
-                  width: '100%',
-                  padding: 8,
-                  borderRadius: 4,
-                  border: '1px solid var(--text-muted)',
-                  backgroundColor: 'var(--code-bg)',
-                  color: 'var(--text)',
-                  fontFamily: 'monospace',
-                  fontSize: 11,
-                  minHeight: 60,
-                  resize: 'vertical',
-                }}
-              />
-            </div>
-            <div>
-              <label style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', display: 'block', marginBottom: 6 }}>
-                Answer Submissions (JSON)
-              </label>
-              <textarea
-                value={answersInput}
-                onChange={(e) => setAnswersInput(e.target.value)}
-                style={{
-                  width: '100%',
-                  padding: 8,
-                  borderRadius: 4,
-                  border: '1px solid var(--text-muted)',
-                  backgroundColor: 'var(--code-bg)',
-                  color: 'var(--text)',
-                  fontFamily: 'monospace',
-                  fontSize: 11,
-                  minHeight: 60,
-                  resize: 'vertical',
-                }}
-              />
-            </div>
-            {inputError && <div style={{ color: '#e91414', fontSize: 11, fontWeight: 600 }}>Error: {inputError}</div>}
-          </div>),
+    right: (<VisualizationPanel step={step} applyExample={applyExample} examples={examples} />),bottom: null,
   }
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])

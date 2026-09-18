@@ -89,19 +89,6 @@ export default function BestTimeBuySellStockCooldown() {
         />
       <h1 className="cooldown-title">LC 309: Best Time to Buy and Sell Stock with Cooldown</h1>
 
-      <div className="cooldown-input-section">
-        <input
-          type="text"
-          placeholder="e.g., 1,2,3,0,2"
-          value={customInput}
-          onChange={handleInputChange}
-          className="cooldown-input"
-        />
-        <button onClick={handleApplyInput} className="cooldown-btn">
-          Apply
-        </button>
-      </div>
-
       <div className="cooldown-controls">
         <button
           onClick={() => setIsAnimating(!isAnimating)}

@@ -130,19 +130,6 @@ export default function LongestIncreasingSubsequenceVisualizer() {
     const VisualizationContent = () => (
         <div className="lis-body">
             <div className="lis-top-row">
-                <div className="lis-examples">
-                    {EXAMPLES.map((ex) => (
-                        <button key={ex.label} className="lis-chip" onClick={() => applyExample(ex)}>
-                            {ex.label}
-                        </button>
-                    ))}
-                </div>
-                <input
-                    className="lis-input"
-                    value={numsInput}
-                    onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-                    placeholder="[10,9,2,5,3,7,101,18]"
-                />
             </div>
 
             {/* Array + dp rows */}

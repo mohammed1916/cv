@@ -352,30 +352,6 @@ export default function SplitArrayEqualSumVisualizer() {
       />
 
     <div className="p548-panel-primary">
-      <div className="p548-card">
-        <div className="p548-section-label">Input</div>
-        <input
-          id="p548-nums"
-          className={`p548-input mono ${inputError ? 'has-error' : ''}`}
-          value={numsInput}
-          onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-          placeholder="1,2,1,2,1,2,1"
-        />
-        <p className={`p548-hint ${inputError ? 'error' : ''}`}>
-          {inputError || 'Find cuts i < j < k so the four remaining parts have equal sums (n ≥ 7 required).'}
-        </p>
-        <div className="p548-example-row">
-          {EXAMPLES.map((ex) => (
-            <button
-              type="button"
-              key={ex.label}
-              className={`p548-example-btn ${numsInput === ex.nums ? 'active' : ''}`}
-              onClick={() => applyExample(ex)}
-            >
-              {ex.label}
-            </button>
-          ))}
-        </div>
       </div>
 
       <div className="p548-card">

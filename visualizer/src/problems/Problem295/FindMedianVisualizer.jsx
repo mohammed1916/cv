@@ -220,16 +220,6 @@ function VisualizationPanel({ step, heapView, setHeapView, EXAMPLES, applyExampl
     return (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
             <div className="fm-controls-row">
-                <div className="fm-examples">
-                    {EXAMPLES.map((ex) => (
-                        <button key={ex.label} className="fm-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                    ))}
-                </div>
-                <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-                    <input className="fm-input" value={numsInput}
-                        onChange={(e) => { setNumsInput(e.target.value); handleReset(); }} />
-                    {inputErr && <span className="fm-error">{inputErr}</span>}
-                </div>
                 <div className="fm-view-toggle">
                     <button
                         className={`fm-view-btn ${heapView === "tree" ? "active" : ""}`}

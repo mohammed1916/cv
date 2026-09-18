@@ -117,20 +117,6 @@ export default function PerfectSquares() {
         />
       <h1 className="psq-title">LC 279: Perfect Squares</h1>
 
-      <div className="psq-input-section">
-        <input
-          type="number"
-          placeholder="Enter n (e.g., 13)"
-          value={customInput}
-          onChange={handleInputChange}
-          className="psq-input"
-          min="1"
-        />
-        <button onClick={handleApplyInput} className="psq-btn">
-          Apply
-        </button>
-      </div>
-
       <div className="psq-controls">
         <button
           onClick={() => setIsAnimating(!isAnimating)}

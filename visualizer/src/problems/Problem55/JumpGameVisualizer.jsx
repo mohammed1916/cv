@@ -148,21 +148,6 @@ export default function JumpGameVisualizer() {
             </header>
             <div className="jg-body">
                 <div className="jg-top-row">
-                    <div className="jg-examples">
-                        {EXAMPLES.map((ex) => (
-                            <button key={ex.label} className="jg-chip" onClick={() => applyExample(ex)}>
-                                {ex.label}
-                            </button>
-                        ))}
-                    </div>
-                    <input
-                        className="jg-input"
-                        value={numsInput}
-                        onChange={(e) => { setNumsInput(e.target.value);
-
- handleReset() }}
-                        placeholder="[2,3,1,1,4]"
-                    />
                 </div>
 
                 {/* maxReach indicator */}

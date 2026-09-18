@@ -1,3 +1,4 @@
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { useCallback, useMemo, useState } from 'react'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -9,7 +10,6 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { getExamples } from '../../config/examplesRegistry'
 import './MatrixIterationBasicsVisualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
 
 const MODE_META = {
@@ -275,23 +275,6 @@ export default function MatrixIterationBasicsVisualizer({ problem }) {
                 <input style={{ width: 68 }} value={constVal} onChange={(e) => setConstVal(Number(e.target.value))} />
               </div>
             )}
-          </div>
-
-          <div className="mib-size-row">
-            <span>n =</span>
-            <input
-              value={sizeInput}
-              onChange={(event) => {
-                setSizeInput(event.target.value)
-                handleReset()
-              }}
-              className="mib-size-input"
-            />
-            {EXAMPLES.map((n) => (
-              <button key={n} className="mib-size-preset" onClick={() => applySize(n)}>
-                {n}x{n}
-              </button>
-            ))}
           </div>
 
           {error && <p className="mib-error">{error}</p>}

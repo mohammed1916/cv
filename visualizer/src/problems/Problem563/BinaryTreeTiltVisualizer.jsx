@@ -193,30 +193,6 @@ function generateSteps(arr) {
 function VisualizationPanel({ step, positions, nodes, applyExample, examples }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
-      {examples?.length > 0 && (
-        <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {examples.map((ex, i) => (
-              <button
-                key={i}
-                onClick={() => applyExample(ex)}
-                style={{
-                  padding: '6px 12px',
-                  borderRadius: 4,
-                  border: '1px solid var(--text-muted)',
-                  cursor: 'pointer',
-                  fontSize: 11,
-                  backgroundColor: 'var(--surface2)',
-                  color: 'var(--text)',
-                }}
-              >
-                {ex.label || `Example ${i + 1}`}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
 
       {step?.activeId !== undefined && step?.nodeData?.has(step.activeId) && (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
@@ -346,93 +322,7 @@ export default function BinaryTreeTiltVisualizer() {
               />
             )}
           </div>),
-    viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
-            <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Tree Input (Array)</div>
-              <textarea
-                value={arrInput}
-                onChange={(e) => {
-                  setArrInput(e.target.value)
-                  handleReset()
-                }}
-                style={{
-                  width: '100%',
-                  height: 60,
-                  padding: '8px',
-                  borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
-                  backgroundColor: 'var(--surface2)',
-                  color: 'var(--text)',
-                  fontFamily: 'monospace',
-                  fontSize: 11,
-                  resize: 'vertical',
-                }}
-              />
-              {inputError && <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
-            </div>
-
-            <div style={{ position: 'relative', width: CANVAS_W, height: CANVAS_H, margin: '0 auto', backgroundColor: 'var(--code-bg)', borderRadius: 6, border: '1px solid var(--surface2)' }}>
-              <TreeSVG edges={edges} positions={positions} canvasWidth={CANVAS_W} canvasHeight={CANVAS_H} />
-              {nodes.map((node) => {
-                const pos = positions.get(node.id)
-                if (!pos) return null
-                const isActive = step?.activeId === node.id
-                const nodeInfo = step?.nodeData?.get(node.id)
-                return (
-                  <motion.div
-                    key={node.id}
-                    style={{
-                      position: 'absolute',
-                      left: pos.x - NODE_R,
-                      top: pos.y - NODE_R,
-                      width: NODE_R * 2,
-                      height: NODE_R * 2,
-                      borderRadius: '50%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontWeight: 700,
-                      fontSize: 13,
-                      cursor: 'pointer',
-                      userSelect: 'none',
-                      backgroundColor: isActive ? '#a78bfa' : nodeInfo ? '#6366f1' : 'var(--surface2)',
-                      color: isActive || nodeInfo ? '#000' : 'var(--text)',
-                      border: isActive ? '3px solid #a78bfa' : '2px solid var(--text-muted)',
-                      boxShadow: isActive ? '0 0 12px rgba(167, 139, 250, 0.5)' : 'none',
-                    }}
-                    animate={{
-                      scale: isActive ? 1.3 : 1,
-                    }}
-                    transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                  >
-                    {node.val}
-                    {nodeInfo && (
-                      <div
-                        style={{
-                          position: 'absolute',
-                          top: -28,
-                          left: '50%',
-                          transform: 'translateX(-50%)',
-                          fontSize: 10,
-                          fontWeight: 600,
-                          color: '#a78bfa',
-                          backgroundColor: 'var(--code-bg)',
-                          padding: '2px 6px',
-                          borderRadius: 3,
-                          border: '1px solid #a78bfa',
-                          whiteSpace: 'nowrap',
-                        }}
-                      >
-                        tilt: {nodeInfo.tilt}
-                      </div>
-                    )}
-                  </motion.div>
-                )
-              })}
-            </div>
-
-            <VisualizationPanel step={step} positions={positions} nodes={nodes} applyExample={applyExample} examples={examples} />
-          </div>),
+    viz: (<VisualizationPanel step={step} positions={positions} nodes={nodes} applyExample={applyExample} examples={examples} />),
   }), [step, connectivity, setActiveLineDom, arrInput, inputError, examples, applyExample, handleReset, showPatternOverlay, activeLineDom, positions, nodes, edges])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])

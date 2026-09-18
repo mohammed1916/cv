@@ -127,14 +127,6 @@ export default function SubsetsVisualizer() {
                 {inputError && <span className="sub-error">{inputError}</span>}
             </header>
             <div className="sub-body">
-                <div className="sub-examples">
-                    {EXAMPLES.map((ex) => (
-                        <button key={ex.label} className="sub-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                    ))}
-                </div>
-                <input className="sub-input" value={numsInput} onChange={(e) => { setNumsInput(e.target.value);
-
- handleReset() }} />
 
                 {/* Current path */}
                 <div className="sub-section-label">Current path</div>
