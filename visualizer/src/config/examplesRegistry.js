@@ -2649,6 +2649,24 @@ export const EXAMPLES_REGISTRY = {
       arr: [1],
     },
   ],
+  "binary-tree-postorder-traversal": [
+    {
+      label: "LeetCode",
+      arr: [1, null, 2, 3],
+    },
+    {
+      label: "Full Tree",
+      arr: [1, 2, 3, 4, 5, 6, 7],
+    },
+    {
+      label: "Left Skewed",
+      arr: [1, 2, null, 3, null, null, null, 4],
+    },
+    {
+      label: "Single",
+      arr: [1],
+    },
+  ],
   "russian-doll-envelopes": [
     {
       label: "Simple nesting",
