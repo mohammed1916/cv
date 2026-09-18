@@ -41,6 +41,7 @@ const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
 function buildTree(arr) {
   if (!arr || arr.length === 0) return null
+  if (!arr || arr.length === 0 || arr[0] === null || arr[0] === undefined) return null
   const root = { val: arr[0], left: null, right: null, id: 0 }
   const q = [root]
   let nodeId = 1
@@ -50,11 +51,28 @@ function buildTree(arr) {
     if (arr[i] !== null) {
       node.left = { val: arr[i], left: null, right: null, id: nodeId++ }
       q.push(node.left)
+    if (!node) continue
+
+    if (i < arr.length) {
+      const leftVal = arr[i]
+      if (leftVal !== null && leftVal !== undefined) {
+        node.left = { val: leftVal, left: null, right: null, id: nodeId++ }
+        q.push(node.left)
+      }
+      i++
     }
     i++
     if (i < arr.length && arr[i] !== null) {
       node.right = { val: arr[i], left: null, right: null, id: nodeId++ }
       q.push(node.right)
+
+    if (i < arr.length) {
+      const rightVal = arr[i]
+      if (rightVal !== null && rightVal !== undefined) {
+        node.right = { val: rightVal, left: null, right: null, id: nodeId++ }
+        q.push(node.right)
+      }
+      i++
     }
     i++
   }
@@ -162,27 +180,47 @@ function TreeVisualization({ root, currentNode, processedIds }) {
   const height = 300
 
   function getAllNodes(node, nodes = [], x = 200, y = 30, offset = 80) {
+  function getAllNodes(node, nodes = [], x = 0, y = 40, offset = 80) {
     if (!node) return nodes
     nodes.push({ ...node, x, y })
     if (node.left) getAllNodes(node.left, nodes, x - offset, y + 60, offset / 2)
     if (node.right) getAllNodes(node.right, nodes, x + offset, y + 60, offset / 2)
+    if (node.left) getAllNodes(node.left, nodes, x - offset, y + 65, Math.max(32, offset * 0.55))
+    if (node.right) getAllNodes(node.right, nodes, x + offset, y + 65, Math.max(32, offset * 0.55))
     return nodes
   }
 
   const nodes = getAllNodes(root)
+  const rawNodes = getAllNodes(root)
+  const minX = Math.min(...rawNodes.map(n => n.x))
+  const maxX = Math.max(...rawNodes.map(n => n.x))
+  const maxY = Math.max(...rawNodes.map(n => n.y))
+
+  const width = Math.max(400, maxX - minX + 140)
+  const height = Math.max(260, maxY + 70)
+  const shiftX = (width - (maxX - minX)) / 2 - minX
+
+  const nodes = rawNodes.map(n => ({ ...n, x: n.x + shiftX }))
   const edges = []
 
   function addEdges(node) {
     if (!node) return
     const nodeData = nodes.find(n => n.id === node.id)
+    if (!nodeData) return
     if (node.left) {
       const leftData = nodes.find(n => n.id === node.left.id)
       edges.push({ x1: nodeData.x, y1: nodeData.y, x2: leftData.x, y2: leftData.y })
+      if (leftData) {
+        edges.push({ x1: nodeData.x, y1: nodeData.y, x2: leftData.x, y2: leftData.y })
+      }
       addEdges(node.left)
     }
     if (node.right) {
       const rightData = nodes.find(n => n.id === node.right.id)
       edges.push({ x1: nodeData.x, y1: nodeData.y, x2: rightData.x, y2: rightData.y })
+      if (rightData) {
+        edges.push({ x1: nodeData.x, y1: nodeData.y, x2: rightData.x, y2: rightData.y })
+      }
       addEdges(node.right)
     }
   }
@@ -192,6 +230,8 @@ function TreeVisualization({ root, currentNode, processedIds }) {
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
       <svg width={width} height={height} style={{ border: '1px solid var(--border)' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', overflowX: 'auto', padding: '8px 0' }}>
+      <svg width={width} height={height} style={{ border: '1px solid var(--border)', borderRadius: 8, background: 'var(--surface)' }}>
         {/* Edges */}
         {edges.map((edge, idx) => (
           <line
@@ -203,6 +243,9 @@ function TreeVisualization({ root, currentNode, processedIds }) {
             stroke="var(--text-muted)"
             strokeWidth={2}
             markerEnd="url(#arrowhead)"
+            stroke="var(--text-muted, #94a3b8)"
+            strokeWidth={3}
+            strokeLinecap="round"
           />
         ))}
 
@@ -219,6 +262,9 @@ function TreeVisualization({ root, currentNode, processedIds }) {
                 r={24}
                 fill={isCurrent ? '#fbbf24' : isProcessed ? '#86efac' : 'var(--text)'}
                 stroke={isCurrent ? '#f59e0b' : isProcessed ? '#22c55e' : 'var(--text-muted)'}
+                r={22}
+                fill={isCurrent ? '#fbbf24' : isProcessed ? '#22c55e' : 'var(--surface2, #334155)'}
+                stroke={isCurrent ? '#f59e0b' : isProcessed ? '#16a34a' : 'var(--border, #64748b)'}
                 strokeWidth={isCurrent ? 3 : 2}
                 animate={{ scale: isCurrent ? 1.15 : 1 }}
               />
@@ -230,6 +276,10 @@ function TreeVisualization({ root, currentNode, processedIds }) {
                 fontSize={14}
                 fontWeight={600}
                 fill={isCurrent || isProcessed ? 'var(--text-on-light)' : 'var(--text-inverse)'}
+                dy="0.35em"
+                fontSize={13}
+                fontWeight={700}
+                fill={isCurrent || isProcessed ? '#0f172a' : 'var(--text, #f8fafc)'}
               >
                 {node.val}
               </text>
@@ -316,17 +366,48 @@ function VisualizationPanel({ step, root }) {
   )
 }
 
+const parseTreeInput = (raw) => {
+  if (Array.isArray(raw)) return raw;
+  if (!raw || typeof raw !== 'string') return [];
+  const trimmed = raw.trim();
+  if (!trimmed) return [];
+  try {
+    const parsed = JSON.parse(trimmed);
+    if (Array.isArray(parsed)) return parsed;
+    if (parsed && Array.isArray(parsed.arr)) return parsed.arr;
+    if (parsed && Array.isArray(parsed.root)) return parsed.root;
+  } catch {
+    /* ignore and parse fallback */
+  }
+  return trimmed
+    .replace(/^[\s[]+|[\s\]]+$/g, '')
+    .split(',')
+    .map(s => {
+      const item = s.trim();
+      if (item === 'null' || item === '') return null;
+      const num = Number(item);
+      return isNaN(num) ? item : num;
+    });
+};
+
 export default function BinaryTreePreorderTraversalVisualizer() {
   const [input, setInput] = useState({"label":"Example 1","root":[1,2,3]});
   const [arrInput, setArrInput] = useState("");
+  const initialData = EXAMPLES[0]?.arr ?? EXAMPLES[0]?.root ?? [1, null, 2, 3];
+  const [arrInput, setArrInput] = useState(JSON.stringify(initialData));
   const { arr, inputError } = useMemo(() => {
     try {
       const parsedArr = arrInput;
+      const parsedArr = parseTreeInput(arrInput);
       return { arr: parsedArr, inputError: '' };
     } catch (e) {
       return { arr: "", inputError: e.message };
+      return { arr: [], inputError: e.message };
     }
   }, [arrInput]);  const root = useMemo(() => buildTree(input), [arr])
+  }, [arrInput]);
+
+  const root = useMemo(() => buildTree(arr), [arr])
   const steps = useMemo(
     () =>
       generateSteps(arr).map((s) => ({
@@ -339,6 +420,11 @@ export default function BinaryTreePreorderTraversalVisualizer() {
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const applyEx = useCallback((e) => { setArrInput(String(e.arr)); handleReset(); }, [handleReset]);
+  const applyEx = useCallback((e) => {
+    const data = e.arr ?? e.root ?? [];
+    setArrInput(JSON.stringify(data));
+    handleReset();
+  }, [handleReset]);
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
