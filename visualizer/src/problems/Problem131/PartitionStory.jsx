@@ -10,8 +10,9 @@ export default function PartitionStory({ story, step }) {
         label="Palindrome Partitioning visualizer story"
       >
         <p className="partition-story__explanation">
-          Given a string s, partition s such that every substring of the partition is a palindrome.
-          Backtrack through all candidate substring cuts, validate palindromes, and collect all complete partitions.
+          Given a string s, partition s such that every substring of the
+          partition is a palindrome. Backtrack through all candidate substring
+          cuts, validate palindromes, and collect all complete partitions.
         </p>
       </StoryPanel>
     );
@@ -57,8 +58,11 @@ export default function PartitionStory({ story, step }) {
     }
   };
 
-  const reversedCandidate = candidate ? candidate.split("").reverse().join("") : "";
-  const remainingSuffix = start !== null && start !== undefined ? s.slice(start) : "";
+  const reversedCandidate = candidate
+    ? candidate.split("").reverse().join("")
+    : "";
+  const remainingSuffix =
+    start !== null && start !== undefined ? s.slice(start) : "";
 
   return (
     <StoryPanel
@@ -70,22 +74,31 @@ export default function PartitionStory({ story, step }) {
       <p className="partition-story__explanation">{explanation}</p>
 
       {/* Quick Metrics Bar */}
-      <section className="partition-story__metrics" aria-label="Exploration metrics">
+      <section
+        className="partition-story__metrics"
+        aria-label="Exploration metrics"
+      >
         <div className="metric-chip">
           <span className="metric-label">String Length</span>
-          <span className="metric-value">|s| = {s.length}</span>
+          <span className="partition-story__metric-value">
+            |s| = {s.length}
+          </span>
         </div>
         <div className="metric-chip">
           <span className="metric-label">Depth</span>
-          <span className="metric-value">Level {depth}</span>
+          <span className="partition-story__metric-value">Level {depth}</span>
         </div>
         <div className="metric-chip">
           <span className="metric-label">Candidates Tested</span>
-          <span className="metric-value">{candidateCount}</span>
+          <span className="partition-story__metric-value">
+            {candidateCount}
+          </span>
         </div>
         <div className="metric-chip highlight">
           <span className="metric-label">Solutions</span>
-          <span className="metric-value">{partitions.length}</span>
+          <span className="partition-story__metric-value">
+            {partitions.length}
+          </span>
         </div>
         <div className={`phase-badge phase-${phase}`} role="status">
           {phase.toUpperCase()}
@@ -93,7 +106,10 @@ export default function PartitionStory({ story, step }) {
       </section>
 
       {/* String Partition Cuts Board */}
-      <section className="partition-story__cuts-section" aria-label="String cuts board">
+      <section
+        className="partition-story__cuts-section"
+        aria-label="String cuts board"
+      >
         <header className="section-header">
           <h4>String &amp; Cut Placements</h4>
           <span className="section-hint">
@@ -113,7 +129,9 @@ export default function PartitionStory({ story, step }) {
               charStatusClass = "status-committed";
             } else if (isCandidate) {
               if (phase === "validate" || phase === "branch") {
-                charStatusClass = isPalindrome ? "status-valid" : "status-invalid";
+                charStatusClass = isPalindrome
+                  ? "status-valid"
+                  : "status-invalid";
               } else {
                 charStatusClass = "status-candidate";
               }
@@ -138,8 +156,8 @@ export default function PartitionStory({ story, step }) {
                       isCutHere
                         ? "is-committed-cut"
                         : isCandidateCutHere
-                        ? "is-candidate-cut"
-                        : "is-empty-cut"
+                          ? "is-candidate-cut"
+                          : "is-empty-cut"
                     }`}
                     title={`Cut position ${idx + 1}`}
                   >
@@ -155,19 +173,21 @@ export default function PartitionStory({ story, step }) {
 
         {/* Pointer legend */}
         <div className="cuts-legend">
-          <div className="legend-item">
+          <div className="cuts-legend__item">
             <span className="legend-dot dot-committed" />
             <span>Committed Prefix</span>
           </div>
-          <div className="legend-item">
+          <div className="cuts-legend__item">
             <span className="legend-dot dot-candidate" />
-            <span>Candidate s[{start ?? 0}:{end ?? start ?? 0}]</span>
+            <span>
+              Candidate s[{start ?? 0}:{end ?? start ?? 0}]
+            </span>
           </div>
-          <div className="legend-item">
+          <div className="cuts-legend__item">
             <span className="legend-dot dot-unexplored" />
             <span>Remaining Suffix</span>
           </div>
-          <div className="legend-item">
+          <div className="cuts-legend__item">
             <span className="legend-scissor">✂</span>
             <span>Committed Cut</span>
           </div>
@@ -181,29 +201,32 @@ export default function PartitionStory({ story, step }) {
             isPalindrome === true
               ? "is-match"
               : isPalindrome === false
-              ? "is-mismatch"
-              : "is-checking"
+                ? "is-mismatch"
+                : "is-checking"
           }`}
           aria-label="Candidate substring inspection"
         >
           <header className="inspection-header">
             <span className="inspection-title">
-              Candidate Substring: <code>s[{start}:{end}]</code>
+              Candidate Substring:{" "}
+              <code>
+                s[{start}:{end}]
+              </code>
             </span>
             <span
               className={`verdict-badge ${
                 isPalindrome === true
                   ? "badge-success"
                   : isPalindrome === false
-                  ? "badge-error"
-                  : "badge-info"
+                    ? "badge-error"
+                    : "badge-info"
               }`}
             >
               {isPalindrome === true
                 ? "PALINDROME ✓"
                 : isPalindrome === false
-                ? "NOT PALINDROME ✗"
-                : "INSPECTING..."}
+                  ? "NOT PALINDROME ✗"
+                  : "INSPECTING..."}
             </span>
           </header>
 
@@ -221,7 +244,11 @@ export default function PartitionStory({ story, step }) {
 
             <div className="sub-operator">
               <span className="operator-symbol">
-                {isPalindrome === true ? "==" : isPalindrome === false ? "≠" : "≟"}
+                {isPalindrome === true
+                  ? "=="
+                  : isPalindrome === false
+                    ? "≠"
+                    : "≟"}
               </span>
             </div>
 
@@ -240,17 +267,20 @@ export default function PartitionStory({ story, step }) {
           <footer className="inspection-footer">
             {isPalindrome === true && (
               <span className="footer-note success">
-                Valid prefix. Recurse on remaining suffix: &quot;{s.slice(end)}&quot;.
+                Valid prefix. Recurse on remaining suffix: &quot;{s.slice(end)}
+                &quot;.
               </span>
             )}
             {isPalindrome === false && (
               <span className="footer-note error">
-                Symmetry test failed (&quot;{candidate}&quot; != &quot;{reversedCandidate}&quot;). Cut pruned.
+                Symmetry test failed (&quot;{candidate}&quot; != &quot;
+                {reversedCandidate}&quot;). Cut pruned.
               </span>
             )}
             {isPalindrome === null && (
               <span className="footer-note info">
-                Evaluating substring symmetry between start index {start} and end index {end}.
+                Evaluating substring symmetry between start index {start} and
+                end index {end}.
               </span>
             )}
           </footer>
@@ -258,11 +288,15 @@ export default function PartitionStory({ story, step }) {
       )}
 
       {/* Current Backtracking Path */}
-      <section className="partition-story__path-section" aria-label="Current partition path">
+      <section
+        className="partition-story__path-section"
+        aria-label="Current partition path"
+      >
         <header className="section-header">
           <h4>Current Partition Path</h4>
           <span className="section-hint">
-            Remaining suffix: <code>&quot;{remainingSuffix || "∅ (none)"}&quot;</code>
+            Remaining suffix:{" "}
+            <code>&quot;{remainingSuffix || "∅ (none)"}&quot;</code>
           </span>
         </header>
 
@@ -291,9 +325,7 @@ export default function PartitionStory({ story, step }) {
         aria-label="Completed palindrome partitions"
       >
         <header className="section-header">
-          <h4>
-            Valid Palindrome Partitions ({partitions.length})
-          </h4>
+          <h4>Valid Palindrome Partitions ({partitions.length})</h4>
           <span className="section-hint">
             All collected partitions where every substring is a palindrome
           </span>
@@ -302,7 +334,10 @@ export default function PartitionStory({ story, step }) {
         {partitions.length === 0 ? (
           <div className="no-solutions-card">
             <span className="no-solutions-icon">⏳</span>
-            <span>No full partitions discovered yet. Backtracking is actively searching...</span>
+            <span>
+              No full partitions discovered yet. Backtracking is actively
+              searching...
+            </span>
           </div>
         ) : (
           <div className="solutions-list" role="list">
@@ -321,7 +356,10 @@ export default function PartitionStory({ story, step }) {
                   </div>
                   <div className="solution-parts">
                     {part.map((segment, sIdx) => (
-                      <span key={`seg-${pIdx}-${sIdx}`} className="solution-segment">
+                      <span
+                        key={`seg-${pIdx}-${sIdx}`}
+                        className="solution-segment"
+                      >
                         &quot;{segment}&quot;
                       </span>
                     ))}

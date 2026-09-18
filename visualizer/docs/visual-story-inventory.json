@@ -1,8 +1,8 @@
 {
   "note": "Static import inventory, not a visual-quality certification. Dynamic imports and runtime-selected renderers require manual review. CSS byte counts are source bytes, not transferred bytes.",
   "registeredEntries": 613,
-  "cssFiles": 700,
-  "cssSourceBytes": 1837945,
+  "cssFiles": 721,
+  "cssSourceBytes": 1986273,
   "entries": [
     {
       "number": "CF-F",
@@ -894,7 +894,7 @@
       "signals": {
         "localSVG": false,
         "treeView": false,
-        "sharedWorkspace": false,
+        "sharedWorkspace": true,
         "playback": true,
         "floating": true,
         "lumino": true,
@@ -928,7 +928,7 @@
       "signals": {
         "localSVG": false,
         "treeView": false,
-        "sharedWorkspace": false,
+        "sharedWorkspace": true,
         "playback": true,
         "floating": true,
         "lumino": true,
@@ -962,7 +962,7 @@
       "signals": {
         "localSVG": false,
         "treeView": false,
-        "sharedWorkspace": false,
+        "sharedWorkspace": true,
         "playback": true,
         "floating": true,
         "lumino": true,
@@ -996,7 +996,7 @@
       "signals": {
         "localSVG": false,
         "treeView": false,
-        "sharedWorkspace": false,
+        "sharedWorkspace": true,
         "playback": true,
         "floating": true,
         "lumino": true,
@@ -1042,34 +1042,36 @@
       "number": "120",
       "title": "Triangle",
       "folder": "Problem120",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem120/index.jsx",
         "src/problems/Problem120/TriangleVisualizer.jsx",
-        "src/problems/Problem120/TriangleVisualizer.css"
+        "src/problems/Problem120/TriangleStory.jsx",
+        "src/problems/Problem120/TriangleStory.css",
+        "src/problems/Problem120/algorithm.js"
       ],
       "css": [
-        "src/components/LuminoDockPanel.css",
-        "src/components/shared/FloatingPanel.css",
-        "src/components/shared/PanelScaleControl.css",
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
-        "src/problems/Problem120/TriangleVisualizer.css",
         "src/components/shared/ManualInputPanel.css",
+        "src/components/shared/FloatingPanel.css",
+        "src/components/shared/PanelScaleControl.css",
         "src/components/CodePatternAnnotations.css",
-        "src/components/PatternLegend.css"
+        "src/components/PatternLegend.css",
+        "src/components/LuminoDockPanel.css",
+        "src/components/shared/StoryPanel.css",
+        "src/problems/Problem120/TriangleStory.css"
       ],
       "signals": {
         "localSVG": false,
         "treeView": false,
-        "sharedWorkspace": false,
+        "sharedWorkspace": true,
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -1077,34 +1079,39 @@
       "number": "121",
       "title": "Best Time to Buy and Sell Stock",
       "folder": "Problem121",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem121/index.jsx",
         "src/problems/Problem121/BestTimeBuySellStockVisualizer.jsx",
+        "src/problems/Problem121/StockStory.jsx",
+        "src/problems/Problem121/StockStory.css",
+        "src/problems/Problem121/algorithm.js",
         "src/problems/Problem121/BestTimeBuySellStockVisualizer.css"
       ],
       "css": [
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
-        "src/problems/Problem121/BestTimeBuySellStockVisualizer.css",
         "src/components/shared/ManualInputPanel.css",
         "src/components/shared/FloatingPanel.css",
         "src/components/shared/PanelScaleControl.css",
         "src/components/CodePatternAnnotations.css",
         "src/components/PatternLegend.css",
-        "src/components/LuminoDockPanel.css"
+        "src/components/LuminoDockPanel.css",
+        "src/components/shared/StoryPanel.css",
+        "src/components/shared/SvgViewport.css",
+        "src/problems/Problem121/StockStory.css",
+        "src/problems/Problem121/BestTimeBuySellStockVisualizer.css"
       ],
       "signals": {
         "localSVG": false,
         "treeView": false,
-        "sharedWorkspace": false,
+        "sharedWorkspace": true,
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -1112,34 +1119,38 @@
       "number": "122",
       "title": "Best Time to Buy and Sell Stock II",
       "folder": "Problem122",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem122/index.jsx",
         "src/problems/Problem122/BestTimeToBuyAndSellStockIIVisualizer.jsx",
+        "src/problems/Problem122/StockStory2.jsx",
+        "src/problems/Problem122/StockStory2.css",
+        "src/problems/Problem122/algorithm.js",
         "src/problems/Problem122/BestTimeToBuyAndSellStockIIVisualizer.css"
       ],
       "css": [
-        "src/components/LuminoDockPanel.css",
-        "src/components/shared/FloatingPanel.css",
-        "src/components/shared/PanelScaleControl.css",
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
-        "src/problems/Problem122/BestTimeToBuyAndSellStockIIVisualizer.css",
         "src/components/shared/ManualInputPanel.css",
+        "src/components/shared/FloatingPanel.css",
+        "src/components/shared/PanelScaleControl.css",
         "src/components/CodePatternAnnotations.css",
-        "src/components/PatternLegend.css"
+        "src/components/PatternLegend.css",
+        "src/components/LuminoDockPanel.css",
+        "src/components/shared/StoryPanel.css",
+        "src/problems/Problem122/StockStory2.css",
+        "src/problems/Problem122/BestTimeToBuyAndSellStockIIVisualizer.css"
       ],
       "signals": {
-        "localSVG": false,
+        "localSVG": true,
         "treeView": false,
-        "sharedWorkspace": false,
+        "sharedWorkspace": true,
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -1147,34 +1158,38 @@
       "number": "123",
       "title": "Best Time to Buy and Sell Stock III",
       "folder": "Problem123",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem123/index.jsx",
         "src/problems/Problem123/BestTimeBuySellStockIIIVisualizer.jsx",
+        "src/problems/Problem123/StockStory3.jsx",
+        "src/problems/Problem123/StockStory3.css",
+        "src/problems/Problem123/algorithm.js",
         "src/problems/Problem123/BestTimeBuySellStockIIIVisualizer.css"
       ],
       "css": [
-        "src/components/LuminoDockPanel.css",
-        "src/components/shared/FloatingPanel.css",
-        "src/components/shared/PanelScaleControl.css",
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
-        "src/problems/Problem123/BestTimeBuySellStockIIIVisualizer.css",
         "src/components/shared/ManualInputPanel.css",
+        "src/components/shared/FloatingPanel.css",
+        "src/components/shared/PanelScaleControl.css",
         "src/components/CodePatternAnnotations.css",
-        "src/components/PatternLegend.css"
+        "src/components/PatternLegend.css",
+        "src/components/LuminoDockPanel.css",
+        "src/components/shared/StoryPanel.css",
+        "src/problems/Problem123/StockStory3.css",
+        "src/problems/Problem123/BestTimeBuySellStockIIIVisualizer.css"
       ],
       "signals": {
         "localSVG": true,
         "treeView": false,
-        "sharedWorkspace": false,
+        "sharedWorkspace": true,
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -1182,37 +1197,39 @@
       "number": "124",
       "title": "Binary Tree Maximum Path Sum",
       "folder": "Problem124",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem124/index.jsx",
         "src/problems/Problem124/BTMaxPathVisualizer.jsx",
+        "src/problems/Problem124/MaxPathStory.jsx",
+        "src/problems/Problem124/MaxPathStory.css",
+        "src/problems/Problem124/algorithm.js",
         "src/problems/Problem124/BTMaxPathVisualizer.css"
       ],
       "css": [
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
+        "src/components/shared/ManualInputPanel.css",
         "src/components/shared/FloatingPanel.css",
         "src/components/shared/PanelScaleControl.css",
-        "src/components/LuminoDockPanel.css",
-        "src/components/viz3d/Stack3D.css",
-        "src/components/viz3d/Queue3D.css",
-        "src/components/viz3d/TreeCanvas3D.css",
-        "src/components/viz3d/GraphCanvas3D.css",
-        "src/problems/Problem124/BTMaxPathVisualizer.css",
-        "src/components/shared/ManualInputPanel.css",
         "src/components/CodePatternAnnotations.css",
-        "src/components/PatternLegend.css"
+        "src/components/PatternLegend.css",
+        "src/components/LuminoDockPanel.css",
+        "src/components/shared/StoryPanel.css",
+        "src/components/shared/SvgViewport.css",
+        "src/problems/Problem124/MaxPathStory.css",
+        "src/problems/Problem124/BTMaxPathVisualizer.css"
       ],
       "signals": {
         "localSVG": false,
-        "treeView": true,
-        "sharedWorkspace": false,
+        "treeView": false,
+        "sharedWorkspace": true,
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -1220,34 +1237,39 @@
       "number": "125",
       "title": "Valid Palindrome",
       "folder": "Problem125",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem125/index.jsx",
         "src/problems/Problem125/ValidPalindromeVisualizer.jsx",
+        "src/problems/Problem125/PalindromeStory.jsx",
+        "src/problems/Problem125/PalindromeStory.css",
+        "src/problems/Problem125/algorithm.js",
         "src/problems/Problem125/ValidPalindromeVisualizer.css"
       ],
       "css": [
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
-        "src/problems/Problem125/ValidPalindromeVisualizer.css",
+        "src/components/shared/ManualInputPanel.css",
         "src/components/shared/FloatingPanel.css",
         "src/components/shared/PanelScaleControl.css",
         "src/components/CodePatternAnnotations.css",
         "src/components/PatternLegend.css",
         "src/components/LuminoDockPanel.css",
-        "src/components/shared/PointerRail.css"
+        "src/components/shared/StoryPanel.css",
+        "src/components/shared/PointerRail.css",
+        "src/problems/Problem125/PalindromeStory.css",
+        "src/problems/Problem125/ValidPalindromeVisualizer.css"
       ],
       "signals": {
         "localSVG": false,
         "treeView": false,
-        "sharedWorkspace": false,
+        "sharedWorkspace": true,
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -1289,33 +1311,38 @@
       "number": "128",
       "title": "Longest Consecutive Sequence",
       "folder": "Problem128",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem128/index.jsx",
         "src/problems/Problem128/LongestConsecutiveVisualizer.jsx",
+        "src/problems/Problem128/ConsecutiveStory.jsx",
+        "src/problems/Problem128/ConsecutiveStory.css",
+        "src/problems/Problem128/algorithm.js",
         "src/problems/Problem128/LongestConsecutiveVisualizer.css"
       ],
       "css": [
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
-        "src/components/LuminoDockPanel.css",
+        "src/components/shared/ManualInputPanel.css",
         "src/components/shared/FloatingPanel.css",
         "src/components/shared/PanelScaleControl.css",
-        "src/problems/Problem128/LongestConsecutiveVisualizer.css",
         "src/components/CodePatternAnnotations.css",
-        "src/components/PatternLegend.css"
+        "src/components/PatternLegend.css",
+        "src/components/LuminoDockPanel.css",
+        "src/components/shared/StoryPanel.css",
+        "src/problems/Problem128/ConsecutiveStory.css",
+        "src/problems/Problem128/LongestConsecutiveVisualizer.css"
       ],
       "signals": {
         "localSVG": false,
         "treeView": false,
-        "sharedWorkspace": false,
+        "sharedWorkspace": true,
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -1323,34 +1350,39 @@
       "number": "129",
       "title": "Sum Root to Leaf Numbers",
       "folder": "Problem129",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem129/index.jsx",
         "src/problems/Problem129/SumRootToLeafNumbersVisualizer.jsx",
+        "src/problems/Problem129/SumNumbersStory.jsx",
+        "src/problems/Problem129/SumNumbersStory.css",
+        "src/problems/Problem129/algorithm.js",
         "src/problems/Problem129/SumRootToLeafNumbersVisualizer.css"
       ],
       "css": [
-        "src/components/LuminoDockPanel.css",
-        "src/components/shared/FloatingPanel.css",
-        "src/components/shared/PanelScaleControl.css",
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
-        "src/problems/Problem129/SumRootToLeafNumbersVisualizer.css",
         "src/components/shared/ManualInputPanel.css",
+        "src/components/shared/FloatingPanel.css",
+        "src/components/shared/PanelScaleControl.css",
         "src/components/CodePatternAnnotations.css",
-        "src/components/PatternLegend.css"
+        "src/components/PatternLegend.css",
+        "src/components/LuminoDockPanel.css",
+        "src/components/shared/StoryPanel.css",
+        "src/components/shared/SvgViewport.css",
+        "src/problems/Problem129/SumNumbersStory.css",
+        "src/problems/Problem129/SumRootToLeafNumbersVisualizer.css"
       ],
       "signals": {
         "localSVG": false,
         "treeView": false,
-        "sharedWorkspace": false,
+        "sharedWorkspace": true,
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -1392,34 +1424,38 @@
       "number": "130",
       "title": "Surrounded Regions",
       "folder": "Problem130",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem130/index.jsx",
         "src/problems/Problem130/SurroundedRegionsVisualizer.jsx",
+        "src/problems/Problem130/SurroundedStory.jsx",
+        "src/problems/Problem130/SurroundedStory.css",
+        "src/problems/Problem130/algorithm.js",
         "src/problems/Problem130/SurroundedRegionsVisualizer.css"
       ],
       "css": [
-        "src/components/LuminoDockPanel.css",
-        "src/components/shared/FloatingPanel.css",
-        "src/components/shared/PanelScaleControl.css",
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
-        "src/problems/Problem130/SurroundedRegionsVisualizer.css",
         "src/components/shared/ManualInputPanel.css",
+        "src/components/shared/FloatingPanel.css",
+        "src/components/shared/PanelScaleControl.css",
         "src/components/CodePatternAnnotations.css",
-        "src/components/PatternLegend.css"
+        "src/components/PatternLegend.css",
+        "src/components/LuminoDockPanel.css",
+        "src/components/shared/StoryPanel.css",
+        "src/problems/Problem130/SurroundedStory.css",
+        "src/problems/Problem130/SurroundedRegionsVisualizer.css"
       ],
       "signals": {
         "localSVG": false,
         "treeView": false,
-        "sharedWorkspace": false,
+        "sharedWorkspace": true,
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -1461,29 +1497,34 @@
       "number": "131",
       "title": "Palindrome Partitioning",
       "folder": "Problem131",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem131/index.jsx",
         "src/problems/Problem131/PalindromePartitioningVisualizer.jsx",
+        "src/problems/Problem131/PartitionStory.jsx",
+        "src/problems/Problem131/PartitionStory.css",
+        "src/problems/Problem131/algorithm.js",
         "src/problems/Problem131/PalindromePartitioningVisualizer.css"
       ],
       "css": [
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/LuminoDockPanel.css",
+        "src/components/shared/ManualInputPanel.css",
         "src/components/shared/FloatingPanel.css",
         "src/components/shared/PanelScaleControl.css",
-        "src/problems/Problem131/PalindromePartitioningVisualizer.css",
-        "src/components/shared/ManualInputPanel.css",
         "src/components/CodePatternAnnotations.css",
-        "src/components/PatternLegend.css"
+        "src/components/PatternLegend.css",
+        "src/components/LuminoDockPanel.css",
+        "src/components/shared/StoryPanel.css",
+        "src/problems/Problem131/PartitionStory.css",
+        "src/problems/Problem131/PalindromePartitioningVisualizer.css"
       ],
       "signals": {
         "localSVG": false,
         "treeView": false,
-        "sharedWorkspace": false,
+        "sharedWorkspace": true,
         "playback": true,
         "floating": true,
         "lumino": true,
@@ -1495,34 +1536,38 @@
       "number": "132",
       "title": "Palindrome Partitioning II",
       "folder": "Problem132",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem132/index.jsx",
         "src/problems/Problem132/PalindromePartitioningIIVisualizer.jsx",
+        "src/problems/Problem132/MinCutStory.jsx",
+        "src/problems/Problem132/MinCutStory.css",
+        "src/problems/Problem132/algorithm.js",
         "src/problems/Problem132/PalindromePartitioningIIVisualizer.css"
       ],
       "css": [
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
-        "src/problems/Problem132/PalindromePartitioningIIVisualizer.css",
         "src/components/shared/ManualInputPanel.css",
         "src/components/shared/FloatingPanel.css",
         "src/components/shared/PanelScaleControl.css",
         "src/components/CodePatternAnnotations.css",
         "src/components/PatternLegend.css",
-        "src/components/LuminoDockPanel.css"
+        "src/components/LuminoDockPanel.css",
+        "src/components/shared/StoryPanel.css",
+        "src/problems/Problem132/MinCutStory.css",
+        "src/problems/Problem132/PalindromePartitioningIIVisualizer.css"
       ],
       "signals": {
         "localSVG": false,
         "treeView": false,
-        "sharedWorkspace": false,
+        "sharedWorkspace": true,
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -1530,38 +1575,38 @@
       "number": "133",
       "title": "Clone Graph",
       "folder": "Problem133",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem133/index.jsx",
         "src/problems/Problem133/CloneGraphVisualizer.jsx",
+        "src/problems/Problem133/CloneGraphStory.jsx",
+        "src/problems/Problem133/CloneGraphStory.css",
+        "src/problems/Problem133/algorithm.js",
         "src/problems/Problem133/CloneGraphVisualizer.css"
       ],
       "css": [
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
-        "src/components/LuminoDockPanel.css",
+        "src/components/shared/ManualInputPanel.css",
         "src/components/shared/FloatingPanel.css",
         "src/components/shared/PanelScaleControl.css",
-        "src/components/shared/ManualInputPanel.css",
-        "src/components/viz3d/Stack3D.css",
-        "src/components/viz3d/Queue3D.css",
-        "src/components/viz3d/TreeCanvas3D.css",
-        "src/components/viz3d/GraphCanvas3D.css",
-        "src/problems/Problem133/CloneGraphVisualizer.css",
         "src/components/CodePatternAnnotations.css",
-        "src/components/PatternLegend.css"
+        "src/components/PatternLegend.css",
+        "src/components/LuminoDockPanel.css",
+        "src/components/shared/StoryPanel.css",
+        "src/problems/Problem133/CloneGraphStory.css",
+        "src/problems/Problem133/CloneGraphVisualizer.css"
       ],
       "signals": {
-        "localSVG": false,
-        "treeView": true,
-        "sharedWorkspace": false,
+        "localSVG": true,
+        "treeView": false,
+        "sharedWorkspace": true,
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -1569,34 +1614,38 @@
       "number": "134",
       "title": "Gas Station",
       "folder": "Problem134",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem134/index.jsx",
         "src/problems/Problem134/GasStationVisualizer.jsx",
+        "src/problems/Problem134/GasStationStory.jsx",
+        "src/problems/Problem134/GasStationStory.css",
+        "src/problems/Problem134/algorithm.js",
         "src/problems/Problem134/GasStationVisualizer.css"
       ],
       "css": [
-        "src/components/LuminoDockPanel.css",
-        "src/components/shared/FloatingPanel.css",
-        "src/components/shared/PanelScaleControl.css",
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
-        "src/problems/Problem134/GasStationVisualizer.css",
         "src/components/shared/ManualInputPanel.css",
+        "src/components/shared/FloatingPanel.css",
+        "src/components/shared/PanelScaleControl.css",
         "src/components/CodePatternAnnotations.css",
-        "src/components/PatternLegend.css"
+        "src/components/PatternLegend.css",
+        "src/components/LuminoDockPanel.css",
+        "src/components/shared/StoryPanel.css",
+        "src/problems/Problem134/GasStationStory.css",
+        "src/problems/Problem134/GasStationVisualizer.css"
       ],
       "signals": {
-        "localSVG": false,
+        "localSVG": true,
         "treeView": false,
-        "sharedWorkspace": false,
+        "sharedWorkspace": true,
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -1604,34 +1653,39 @@
       "number": "135",
       "title": "Candy",
       "folder": "Problem135",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem135/index.jsx",
         "src/problems/Problem135/CandyVisualizer.jsx",
+        "src/problems/Problem135/CandyStory.jsx",
+        "src/problems/Problem135/CandyStory.css",
+        "src/problems/Problem135/algorithm.js",
         "src/problems/Problem135/CandyVisualizer.css"
       ],
       "css": [
-        "src/components/LuminoDockPanel.css",
-        "src/components/shared/FloatingPanel.css",
-        "src/components/shared/PanelScaleControl.css",
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
-        "src/problems/Problem135/CandyVisualizer.css",
         "src/components/shared/ManualInputPanel.css",
+        "src/components/shared/FloatingPanel.css",
+        "src/components/shared/PanelScaleControl.css",
         "src/components/CodePatternAnnotations.css",
-        "src/components/PatternLegend.css"
+        "src/components/PatternLegend.css",
+        "src/components/LuminoDockPanel.css",
+        "src/components/shared/StoryPanel.css",
+        "src/components/shared/SvgViewport.css",
+        "src/problems/Problem135/CandyStory.css",
+        "src/problems/Problem135/CandyVisualizer.css"
       ],
       "signals": {
         "localSVG": false,
         "treeView": false,
-        "sharedWorkspace": false,
+        "sharedWorkspace": true,
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -1639,34 +1693,38 @@
       "number": "136",
       "title": "Single Number",
       "folder": "Problem136",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem136/index.jsx",
         "src/problems/Problem136/SingleNumberVisualizer.jsx",
+        "src/problems/Problem136/SingleNumberStory.jsx",
+        "src/problems/Problem136/SingleNumberStory.css",
+        "src/problems/Problem136/algorithm.js",
         "src/problems/Problem136/SingleNumberVisualizer.css"
       ],
       "css": [
-        "src/components/LuminoDockPanel.css",
-        "src/components/shared/FloatingPanel.css",
-        "src/components/shared/PanelScaleControl.css",
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
-        "src/problems/Problem136/SingleNumberVisualizer.css",
         "src/components/shared/ManualInputPanel.css",
+        "src/components/shared/FloatingPanel.css",
+        "src/components/shared/PanelScaleControl.css",
         "src/components/CodePatternAnnotations.css",
-        "src/components/PatternLegend.css"
+        "src/components/PatternLegend.css",
+        "src/components/LuminoDockPanel.css",
+        "src/components/shared/StoryPanel.css",
+        "src/problems/Problem136/SingleNumberStory.css",
+        "src/problems/Problem136/SingleNumberVisualizer.css"
       ],
       "signals": {
         "localSVG": false,
         "treeView": false,
-        "sharedWorkspace": false,
+        "sharedWorkspace": true,
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -1674,34 +1732,38 @@
       "number": "137",
       "title": "Single Number II",
       "folder": "Problem137",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem137/index.jsx",
         "src/problems/Problem137/SingleNumberIIVisualizer.jsx",
+        "src/problems/Problem137/SingleNumber2Story.jsx",
+        "src/problems/Problem137/algorithm.js",
+        "src/problems/Problem137/SingleNumber2Story.css",
         "src/problems/Problem137/SingleNumberIIVisualizer.css"
       ],
       "css": [
-        "src/components/LuminoDockPanel.css",
-        "src/components/shared/FloatingPanel.css",
-        "src/components/shared/PanelScaleControl.css",
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
-        "src/problems/Problem137/SingleNumberIIVisualizer.css",
         "src/components/shared/ManualInputPanel.css",
+        "src/components/shared/FloatingPanel.css",
+        "src/components/shared/PanelScaleControl.css",
         "src/components/CodePatternAnnotations.css",
-        "src/components/PatternLegend.css"
+        "src/components/PatternLegend.css",
+        "src/components/LuminoDockPanel.css",
+        "src/components/shared/StoryPanel.css",
+        "src/problems/Problem137/SingleNumber2Story.css",
+        "src/problems/Problem137/SingleNumberIIVisualizer.css"
       ],
       "signals": {
-        "localSVG": false,
+        "localSVG": true,
         "treeView": false,
-        "sharedWorkspace": false,
+        "sharedWorkspace": true,
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -1709,34 +1771,38 @@
       "number": "138",
       "title": "Copy List with Random Pointer",
       "folder": "Problem138",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem138/index.jsx",
         "src/problems/Problem138/CopyListRandomVisualizer.jsx",
+        "src/problems/Problem138/CopyRandomStory.jsx",
+        "src/problems/Problem138/CopyRandomStory.css",
+        "src/problems/Problem138/algorithm.js",
         "src/problems/Problem138/CopyListRandomVisualizer.css"
       ],
       "css": [
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
-        "src/problems/Problem138/CopyListRandomVisualizer.css",
         "src/components/shared/ManualInputPanel.css",
         "src/components/shared/FloatingPanel.css",
         "src/components/shared/PanelScaleControl.css",
         "src/components/CodePatternAnnotations.css",
         "src/components/PatternLegend.css",
-        "src/components/LuminoDockPanel.css"
+        "src/components/LuminoDockPanel.css",
+        "src/components/shared/StoryPanel.css",
+        "src/problems/Problem138/CopyRandomStory.css",
+        "src/problems/Problem138/CopyListRandomVisualizer.css"
       ],
       "signals": {
-        "localSVG": false,
+        "localSVG": true,
         "treeView": false,
-        "sharedWorkspace": false,
+        "sharedWorkspace": true,
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -1744,34 +1810,38 @@
       "number": "139",
       "title": "Word Break",
       "folder": "Problem139",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem139/index.jsx",
         "src/problems/Problem139/WordBreakVisualizer.jsx",
+        "src/problems/Problem139/WordBreakStory.jsx",
+        "src/problems/Problem139/WordBreakStory.css",
+        "src/problems/Problem139/algorithm.js",
         "src/problems/Problem139/WordBreakVisualizer.css"
       ],
       "css": [
-        "src/components/LuminoDockPanel.css",
-        "src/components/shared/FloatingPanel.css",
-        "src/components/shared/PanelScaleControl.css",
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
-        "src/problems/Problem139/WordBreakVisualizer.css",
         "src/components/shared/ManualInputPanel.css",
+        "src/components/shared/FloatingPanel.css",
+        "src/components/shared/PanelScaleControl.css",
         "src/components/CodePatternAnnotations.css",
-        "src/components/PatternLegend.css"
+        "src/components/PatternLegend.css",
+        "src/components/LuminoDockPanel.css",
+        "src/components/shared/StoryPanel.css",
+        "src/problems/Problem139/WordBreakStory.css",
+        "src/problems/Problem139/WordBreakVisualizer.css"
       ],
       "signals": {
         "localSVG": false,
         "treeView": false,
-        "sharedWorkspace": false,
+        "sharedWorkspace": true,
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -1814,34 +1884,38 @@
       "number": "140",
       "title": "Word Break II",
       "folder": "Problem140",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem140/index.jsx",
         "src/problems/Problem140/WordBreakIIVisualizer.jsx",
+        "src/problems/Problem140/WordBreak2Story.jsx",
+        "src/problems/Problem140/WordBreak2Story.css",
+        "src/problems/Problem140/algorithm.js",
         "src/problems/Problem140/WordBreakIIVisualizer.css"
       ],
       "css": [
-        "src/components/LuminoDockPanel.css",
-        "src/components/shared/FloatingPanel.css",
-        "src/components/shared/PanelScaleControl.css",
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
-        "src/problems/Problem140/WordBreakIIVisualizer.css",
         "src/components/shared/ManualInputPanel.css",
+        "src/components/shared/FloatingPanel.css",
+        "src/components/shared/PanelScaleControl.css",
         "src/components/CodePatternAnnotations.css",
-        "src/components/PatternLegend.css"
+        "src/components/PatternLegend.css",
+        "src/components/LuminoDockPanel.css",
+        "src/components/shared/StoryPanel.css",
+        "src/problems/Problem140/WordBreak2Story.css",
+        "src/problems/Problem140/WordBreakIIVisualizer.css"
       ],
       "signals": {
         "localSVG": false,
         "treeView": false,
-        "sharedWorkspace": false,
+        "sharedWorkspace": true,
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -1849,34 +1923,38 @@
       "number": "141",
       "title": "Linked List Cycle",
       "folder": "Problem141",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem141/index.jsx",
         "src/problems/Problem141/LinkedListCycleVisualizer.jsx",
+        "src/problems/Problem141/CycleStory.jsx",
+        "src/problems/Problem141/CycleStory.css",
+        "src/problems/Problem141/algorithm.js",
         "src/problems/Problem141/LinkedListCycleVisualizer.css"
       ],
       "css": [
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
+        "src/components/shared/ManualInputPanel.css",
         "src/components/shared/FloatingPanel.css",
         "src/components/shared/PanelScaleControl.css",
-        "src/components/LuminoDockPanel.css",
-        "src/problems/Problem141/LinkedListCycleVisualizer.css",
-        "src/components/shared/ManualInputPanel.css",
         "src/components/CodePatternAnnotations.css",
-        "src/components/PatternLegend.css"
+        "src/components/PatternLegend.css",
+        "src/components/LuminoDockPanel.css",
+        "src/components/shared/StoryPanel.css",
+        "src/problems/Problem141/CycleStory.css",
+        "src/problems/Problem141/LinkedListCycleVisualizer.css"
       ],
       "signals": {
-        "localSVG": false,
+        "localSVG": true,
         "treeView": false,
-        "sharedWorkspace": false,
+        "sharedWorkspace": true,
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },
@@ -1884,34 +1962,38 @@
       "number": "142",
       "title": "Linked List Cycle II",
       "folder": "Problem142",
-      "review": "pending-review",
+      "review": "implemented-pending-full-review",
       "playground": "not-assessed",
       "files": [
         "src/problems/Problem142/index.jsx",
         "src/problems/Problem142/LinkedListCycleIIVisualizer.jsx",
+        "src/problems/Problem142/Cycle2Story.jsx",
+        "src/problems/Problem142/Cycle2Story.css",
+        "src/problems/Problem142/algorithm.js",
         "src/problems/Problem142/LinkedListCycleIIVisualizer.css"
       ],
       "css": [
-        "src/components/LuminoDockPanel.css",
-        "src/components/shared/FloatingPanel.css",
-        "src/components/shared/PanelScaleControl.css",
         "src/components/CodeTracePanel.css",
         "src/components/shared/PointerStateBand.css",
         "src/components/PlaybackControls.css",
-        "src/components/PatternOverlay.css",
-        "src/problems/Problem142/LinkedListCycleIIVisualizer.css",
         "src/components/shared/ManualInputPanel.css",
+        "src/components/shared/FloatingPanel.css",
+        "src/components/shared/PanelScaleControl.css",
         "src/components/CodePatternAnnotations.css",
-        "src/components/PatternLegend.css"
+        "src/components/PatternLegend.css",
+        "src/components/LuminoDockPanel.css",
+        "src/components/shared/StoryPanel.css",
+        "src/problems/Problem142/Cycle2Story.css",
+        "src/problems/Problem142/LinkedListCycleIIVisualizer.css"
       ],
       "signals": {
         "localSVG": true,
         "treeView": false,
-        "sharedWorkspace": false,
+        "sharedWorkspace": true,
         "playback": true,
         "floating": true,
         "lumino": true,
-        "emptyPatternDefinition": true
+        "emptyPatternDefinition": false
       },
       "parseErrors": []
     },

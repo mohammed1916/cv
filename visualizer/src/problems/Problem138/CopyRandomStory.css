@@ -137,7 +137,7 @@
   font-weight: 600;
 }
 
-.metric-val {
+.copy-random-story__metric-val {
   font-size: 0.95rem;
   font-weight: 700;
   font-family: var(--font-mono, monospace);
@@ -148,7 +148,7 @@
 }
 
 .val-curr {
-  color: #f59e0b;
+  color: #38bdf8;
 }
 
 .val-copy {
@@ -164,26 +164,27 @@
 }
 
 .val-badge {
-  color: #38bdf8;
+  display: inline-block;
+  font-size: 0.8rem;
+  color: #a78bfa;
 }
 
 .metric-sub {
   font-size: 0.72rem;
   color: var(--text-muted, #94a3b8);
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
-/* ── Canvas & SVG Viewport ───────────────────────────────────────────────── */
+/* ── Interactive Linked List Canvas ──────────────────────────────────────── */
 .copy-random-story__canvas-wrap {
   position: relative;
   background: var(--surface1, #0f172a);
   border: 1px solid var(--border, #334155);
-  border-radius: 12px;
-  padding: 12px;
+  border-radius: 10px;
+  padding: 14px;
   overflow-x: auto;
-  overflow-y: hidden;
 }
 
 .canvas-legend {
@@ -199,7 +200,7 @@
   color: var(--text-muted, #94a3b8);
 }
 
-.legend-item {
+.canvas-legend__item {
   display: inline-flex;
   align-items: center;
   gap: 6px;

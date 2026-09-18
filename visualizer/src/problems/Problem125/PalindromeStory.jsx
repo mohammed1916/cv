@@ -1,6 +1,7 @@
 import { useState } from "react";
 import StoryPanel from "../../components/shared/StoryPanel";
 import PointerRail from "../../components/shared/PointerRail";
+import CharacterComparison from "../../components/shared/CharacterComparison";
 import "./PalindromeStory.css";
 
 export default function PalindromeStory({ story, step }) {
@@ -13,8 +14,9 @@ export default function PalindromeStory({ story, step }) {
         description="Press Play to begin tracing."
       >
         <p>
-          Convert uppercase letters to lowercase, strip non-alphanumeric characters,
-          and use two pointers from opposite ends to check if the string reads symmetrically.
+          Convert uppercase letters to lowercase, strip non-alphanumeric
+          characters, and use two pointers from opposite ends to check if the
+          string reads symmetrically.
         </p>
       </StoryPanel>
     );
@@ -40,7 +42,9 @@ export default function PalindromeStory({ story, step }) {
       return `Advancing Pointers: l → ${l}, r → ${r}`;
     }
     if (step.phase === "done") {
-      return result ? "Palindrome Verified! Result: True" : "Mismatch Detected! Result: False";
+      return result
+        ? "Palindrome Verified! Result: True"
+        : "Mismatch Detected! Result: False";
     }
     return "Valid Palindrome Trace";
   };
@@ -56,35 +60,16 @@ export default function PalindromeStory({ story, step }) {
 
       {/* Comparison Hero Card during compare or mismatch */}
       {comparing && (
-        <section
-          className={`palindrome-story__comparison ${
-            comparing.match ? "is-match" : "is-mismatch"
-          }`}
-          aria-label="Current character comparison"
-        >
-          <div className="palindrome-story__comparison-card left">
-            <span className="comparison-index">s[{comparing.l}]</span>
-            <span className="comparison-char">'{comparing.leftChar}'</span>
-            <span className="comparison-tag">Left Pointer</span>
-          </div>
-
-          <div className="palindrome-story__comparison-operator">
-            <span className="operator-symbol">{comparing.match ? "==" : "≠"}</span>
-            <span
-              className={`operator-badge ${
-                comparing.match ? "badge-match" : "badge-mismatch"
-              }`}
-            >
-              {comparing.match ? "MATCH ✓" : "MISMATCH ✗"}
-            </span>
-          </div>
-
-          <div className="palindrome-story__comparison-card right">
-            <span className="comparison-index">s[{comparing.r}]</span>
-            <span className="comparison-char">'{comparing.rightChar}'</span>
-            <span className="comparison-tag">Right Pointer</span>
-          </div>
-        </section>
+        <CharacterComparison
+          leftIndexLabel={`s[${comparing.l}]`}
+          leftChar={comparing.leftChar}
+          leftTag="Left Pointer"
+          rightIndexLabel={`s[${comparing.r}]`}
+          rightChar={comparing.rightChar}
+          rightTag="Right Pointer"
+          isMatch={comparing.match}
+          ariaLabel="Current character comparison"
+        />
       )}
 
       {/* Result Badge */}
@@ -128,10 +113,10 @@ export default function PalindromeStory({ story, step }) {
             result === false
               ? `Mismatch at s[${comparing?.l}] and s[${comparing?.r}]. Loop halts.`
               : result === true
-              ? "All character pairs matched; pointers crossed."
-              : comparing?.match
-              ? "Characters match. Move both pointers inward."
-              : "Compare character at L with character at R."
+                ? "All character pairs matched; pointers crossed."
+                : comparing?.match
+                  ? "Characters match. Move both pointers inward."
+                  : "Compare character at L with character at R."
           }
         />
       </section>
@@ -144,15 +129,15 @@ export default function PalindromeStory({ story, step }) {
         >
           <div className="palindrome-story__cells-header">
             <strong>Character Cells & Status Highlights</strong>
-            <div className="cells-legend">
-              <span className="legend-item legend-matched">
-                <span className="legend-dot" /> Matched
+            <div className="palindrome-story__cells-legend">
+              <span className="palindrome-story__legend-item palindrome-story__legend-matched">
+                <span className="palindrome-story__legend-dot" /> Matched
               </span>
-              <span className="legend-item legend-comparing">
-                <span className="legend-dot" /> Comparing
+              <span className="palindrome-story__legend-item palindrome-story__legend-comparing">
+                <span className="palindrome-story__legend-dot" /> Comparing
               </span>
-              <span className="legend-item legend-mismatch">
-                <span className="legend-dot" /> Mismatch
+              <span className="palindrome-story__legend-item palindrome-story__legend-mismatch">
+                <span className="palindrome-story__legend-dot" /> Mismatch
               </span>
             </div>
           </div>
@@ -202,7 +187,8 @@ export default function PalindromeStory({ story, step }) {
           <div>
             <strong>Step 1 Normalization: Raw → Clean Mapping</strong>
             <span className="mapping-subtext">
-              ({story.mapping.length} alphanumeric kept of {raw.length} raw characters)
+              ({story.mapping.length} alphanumeric kept of {raw.length} raw
+              characters)
             </span>
           </div>
           <button
@@ -216,7 +202,12 @@ export default function PalindromeStory({ story, step }) {
         </header>
 
         {/* Compact raw preview */}
-        <div className="palindrome-story__raw-preview" tabIndex={0} role="region" aria-label="Raw character filter preview">
+        <div
+          className="palindrome-story__raw-preview"
+          tabIndex={0}
+          role="region"
+          aria-label="Raw character filter preview"
+        >
           {story.rawChars.map((rc) => (
             <span
               key={rc.index}
@@ -272,7 +263,9 @@ export default function PalindromeStory({ story, step }) {
                       {rc.isKept ? (
                         <span className="tag-kept">Kept (Lowercased)</span>
                       ) : (
-                        <span className="tag-skipped">Filtered (Non-alnum)</span>
+                        <span className="tag-skipped">
+                          Filtered (Non-alnum)
+                        </span>
                       )}
                     </td>
                   </tr>

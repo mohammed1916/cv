@@ -122,30 +122,30 @@ export default function StockStory3({ story, step }) {
       description={message}
       label="Best Time to Buy and Sell Stock III Story Panel"
     >
-      <div className="stock-story">
+      <div className="stock-story3">
         {/* Explanation text */}
-        <p className="stock-story__explanation">{explanation}</p>
+        <p className="stock-story3__explanation">{explanation}</p>
 
         {/* Comparison Callout when evaluating a variable */}
         {comparison && (
           <div
-            className="stock-story__calc-banner"
+            className="stock-story3__calc-banner"
             data-updated={comparison.updated ? "true" : "false"}
             role="status"
             aria-live="polite"
           >
-            <div className="stock-story__calc-header">
-              <span className="stock-story__calc-badge">
+            <div className="stock-story3__calc-header">
+              <span className="stock-story3__calc-badge">
                 {comparison.updated ? "State Updated" : "Kept Previous State"}
               </span>
-              <span className="stock-story__calc-label">
+              <span className="stock-story3__calc-label">
                 Evaluating <strong>{comparison.target}</strong> ({comparison.label})
               </span>
             </div>
-            <div className="stock-story__calc-math">
-              <span className="stock-story__formula">{comparison.formula}</span>
-              <span className="stock-story__calc-arrow">&rarr;</span>
-              <strong className="stock-story__calc-result">
+            <div className="stock-story3__calc-math">
+              <span className="stock-story3__formula">{comparison.formula}</span>
+              <span className="stock-story3__calc-arrow">&rarr;</span>
+              <strong className="stock-story3__calc-result">
                 {fmtMoney(comparison.resultVal)}
               </strong>
             </div>
@@ -154,7 +154,7 @@ export default function StockStory3({ story, step }) {
 
         {/* 4 State Cards */}
         <div
-          className="stock-story__cards"
+          className="stock-story3__cards"
           role="region"
           aria-label="4 DP State Cards: b1, s1, b2, s2"
         >
@@ -174,34 +174,34 @@ export default function StockStory3({ story, step }) {
             return (
               <div
                 key={cfg.key}
-                className={`stock-story__card ${cfg.colorClass}`}
+                className={`stock-story3__card ${cfg.colorClass}`}
                 data-active={isActive ? "true" : "false"}
                 data-updated={isUpdated ? "true" : "false"}
               >
-                <div className="stock-story__card-top">
-                  <span className="stock-story__card-var">{cfg.label}</span>
-                  <span className="stock-story__card-title">{cfg.title}</span>
+                <div className="stock-story3__card-top">
+                  <span className="stock-story3__card-var">{cfg.label}</span>
+                  <span className="stock-story3__card-title">{cfg.title}</span>
                 </div>
 
-                <div className="stock-story__card-value">
+                <div className="stock-story3__card-value">
                   {fmtMoney(currentVal)}
                 </div>
 
-                <div className="stock-story__card-formula">
+                <div className="stock-story3__card-formula">
                   <code>{cfg.formula}</code>
                 </div>
 
-                <div className="stock-story__card-meta">
+                <div className="stock-story3__card-meta">
                   {isActive ? (
                     <span
-                      className={`stock-story__card-tag ${
+                      className={`stock-story3__card-tag ${
                         isUpdated ? "tag-updated" : "tag-kept"
                       }`}
                     >
                       {isUpdated ? "Updated" : "Unchanged"} (Prev: {fmtMoney(prevVal)})
                     </span>
                   ) : (
-                    <span className="stock-story__card-desc">{cfg.desc}</span>
+                    <span className="stock-story3__card-desc">{cfg.desc}</span>
                   )}
                 </div>
               </div>
@@ -212,19 +212,19 @@ export default function StockStory3({ story, step }) {
         {/* Price Timeline SVG */}
         {prices.length > 0 && (
           <div
-            className="stock-story__timeline-container"
+            className="stock-story3__timeline-container"
             role="region"
             aria-label="Stock Price Timeline"
           >
-            <div className="stock-story__timeline-header">
-              <span className="stock-story__timeline-title">Price Timeline</span>
-              <span className="stock-story__timeline-info">
+            <div className="stock-story3__timeline-header">
+              <span className="stock-story3__timeline-title">Price Timeline</span>
+              <span className="stock-story3__timeline-info">
                 {prices.length} trading days &bull; Max price: ${maxPrice}
               </span>
             </div>
 
             <svg
-              className="stock-story__timeline-svg"
+              className="stock-story3__timeline-svg"
               viewBox={`0 0 ${svgWidth} ${svgHeight}`}
               preserveAspectRatio="xMidYMid meet"
               role="img"
@@ -273,7 +273,7 @@ export default function StockStory3({ story, step }) {
                 const isPast = pt.idx < dayIndex || phase === "done";
 
                 return (
-                  <g key={pt.idx} className="stock-story__point-group">
+                  <g key={pt.idx} className="stock-story3__point-group">
                     {/* Active Halo */}
                     {isCurrent && (
                       <circle
@@ -307,7 +307,7 @@ export default function StockStory3({ story, step }) {
                       x={pt.x}
                       y={pt.y - 8}
                       textAnchor="middle"
-                      className={`stock-story__svg-label ${
+                      className={`stock-story3__svg-label ${
                         isCurrent ? "svg-label-active" : ""
                       }`}
                     >
@@ -319,7 +319,7 @@ export default function StockStory3({ story, step }) {
                       x={pt.x}
                       y={svgHeight - 4}
                       textAnchor="middle"
-                      className={`stock-story__svg-sublabel ${
+                      className={`stock-story3__svg-sublabel ${
                         isCurrent ? "svg-sublabel-active" : ""
                       }`}
                     >
@@ -334,16 +334,16 @@ export default function StockStory3({ story, step }) {
 
         {/* DP Evolution History Table */}
         {prices.length > 0 && (
-          <div className="stock-story__table-container">
-            <div className="stock-story__table-header">
-              <span className="stock-story__table-title">DP Evolution Matrix</span>
-              <span className="stock-story__table-sub">
+          <div className="stock-story3__table-container">
+            <div className="stock-story3__table-header">
+              <span className="stock-story3__table-title">DP Evolution Matrix</span>
+              <span className="stock-story3__table-sub">
                 Step-by-step state snapshot after each day
               </span>
             </div>
 
-            <div className="stock-story__table-scroll">
-              <table className="stock-story__table">
+            <div className="stock-story3__table-scroll">
+              <table className="stock-story3__table">
                 <thead>
                   <tr>
                     <th>Day</th>
@@ -368,7 +368,7 @@ export default function StockStory3({ story, step }) {
                     return (
                       <tr
                         key={idx}
-                        className={`stock-story__row ${
+                        className={`stock-story3__row ${
                           isCurrentDay ? "row-active" : ""
                         } ${isEvaluated ? "row-evaluated" : "row-pending"}`}
                       >
@@ -417,16 +417,16 @@ export default function StockStory3({ story, step }) {
         {/* Final Conclusion Banner */}
         {phase === "done" && (
           <div
-            className="stock-story__done-card"
+            className="stock-story3__done-card"
             role="region"
             aria-label="Result summary"
           >
-            <div className="stock-story__done-icon">&#10003;</div>
-            <div className="stock-story__done-text">
-              <div className="stock-story__done-title">
+            <div className="stock-story3__done-icon">&#10003;</div>
+            <div className="stock-story3__done-text">
+              <div className="stock-story3__done-title">
                 Optimal Profit: ${story.maxProfit}
               </div>
-              <div className="stock-story__done-desc">
+              <div className="stock-story3__done-desc">
                 By maintaining at most 2 non-overlapping transactions, the
                 algorithm tracks the global maximum net profit in <code>O(n)</code>{" "}
                 time and <code>O(1)</code> space.

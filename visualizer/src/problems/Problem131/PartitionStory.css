@@ -45,7 +45,7 @@
   color: var(--text-muted, #94a3b8);
 }
 
-.metric-value {
+.partition-story__metric-value {
   font-weight: 800;
   font-family: ui-monospace, monospace;
   font-size: 13px;
@@ -259,7 +259,7 @@
   color: var(--text-muted, #94a3b8);
 }
 
-.legend-item {
+.cuts-legend__item {
   display: flex;
   align-items: center;
   gap: 6px;

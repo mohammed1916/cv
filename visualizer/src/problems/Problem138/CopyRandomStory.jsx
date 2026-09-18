@@ -63,8 +63,8 @@ export default function CopyRandomStory({ story, step }) {
             phase === "interleave"
               ? "active"
               : ["random", "decouple", "done"].includes(phase)
-              ? "done"
-              : ""
+                ? "done"
+                : ""
           }`}
         >
           <span className="phase-num">1</span>
@@ -83,8 +83,8 @@ export default function CopyRandomStory({ story, step }) {
             phase === "random"
               ? "active"
               : ["decouple", "done"].includes(phase)
-              ? "done"
-              : ""
+                ? "done"
+                : ""
           }`}
         >
           <span className="phase-num">2</span>
@@ -120,39 +120,43 @@ export default function CopyRandomStory({ story, step }) {
         <div className="metric-card">
           <span className="metric-label">curr pointer</span>
           <span
-            className={`metric-val ${curr !== null ? "val-curr" : "val-muted"}`}
+            className={`copy-random-story__metric-val ${curr !== null ? "val-curr" : "val-muted"}`}
           >
-            {curr !== null ? `Node ${curr} (val: ${originalNodes[curr].val})` : "null"}
+            {curr !== null
+              ? `Node ${curr} (val: ${originalNodes[curr].val})`
+              : "null"}
           </span>
           <span className="metric-sub">
             {phase === "interleave"
               ? "Interleaving clone node"
               : phase === "random"
-              ? "Inspecting random reference"
-              : phase === "decouple"
-              ? "Restoring next links"
-              : "Finished traversal"}
+                ? "Inspecting random reference"
+                : phase === "decouple"
+                  ? "Restoring next links"
+                  : "Finished traversal"}
           </span>
         </div>
 
         <div className="metric-card">
           <span className="metric-label">copy pointer</span>
           <span
-            className={`metric-val ${copy !== null ? "val-copy" : "val-muted"}`}
+            className={`copy-random-story__metric-val ${copy !== null ? "val-copy" : "val-muted"}`}
           >
             {copy !== null
               ? `Clone ${copy}′ (val: ${originalNodes[copy].val})`
               : "—"}
           </span>
           <span className="metric-sub">
-            {copy !== null ? `Operating on clone ${copy}′` : "Awaiting assignment"}
+            {copy !== null
+              ? `Operating on clone ${copy}′`
+              : "Awaiting assignment"}
           </span>
         </div>
 
         <div className="metric-card">
           <span className="metric-label">copy_head</span>
           <span
-            className={`metric-val ${
+            className={`copy-random-story__metric-val ${
               copyHead !== null ? "val-head" : "val-muted"
             }`}
           >
@@ -163,7 +167,9 @@ export default function CopyRandomStory({ story, step }) {
 
         <div className="metric-card">
           <span className="metric-label">Space Complexity</span>
-          <span className="metric-val val-badge">O(1) Auxiliary</span>
+          <span className="copy-random-story__metric-val val-badge">
+            O(1) Auxiliary
+          </span>
           <span className="metric-sub">No hash map required</span>
         </div>
       </div>
@@ -183,19 +189,19 @@ export default function CopyRandomStory({ story, step }) {
           aria-label="Linked list nodes and pointers visualizer"
         >
           <div className="canvas-legend">
-            <span className="legend-item legend-orig">
+            <span className="canvas-legend__item legend-orig">
               <span className="legend-swatch swatch-orig" />
               Original Nodes (Row 1)
             </span>
-            <span className="legend-item legend-clone">
+            <span className="canvas-legend__item legend-clone">
               <span className="legend-swatch swatch-clone" />
               Cloned Nodes (Row 2)
             </span>
-            <span className="legend-item legend-rnd-orig">
+            <span className="canvas-legend__item legend-rnd-orig">
               <span className="legend-line line-orig" />
               Orig Random Arc (Top)
             </span>
-            <span className="legend-item legend-rnd-clone">
+            <span className="canvas-legend__item legend-rnd-clone">
               <span className="legend-line line-clone" />
               Clone Random Arc (Bottom)
             </span>
@@ -426,7 +432,9 @@ export default function CopyRandomStory({ story, step }) {
                         isHl ? "link-hl" : ""
                       }`}
                       markerEnd={
-                        isHl ? "url(#arrow-highlight)" : "url(#arrow-clone-next)"
+                        isHl
+                          ? "url(#arrow-highlight)"
+                          : "url(#arrow-clone-next)"
                       }
                     />
                     <text
@@ -472,11 +480,7 @@ export default function CopyRandomStory({ story, step }) {
                       y2={yOrig}
                       className="link-null-line"
                     />
-                    <text
-                      x={fromX + 64}
-                      y={yOrig + 4}
-                      className="null-text"
-                    >
+                    <text x={fromX + 64} y={yOrig + 4} className="null-text">
                       null
                     </text>
                   </g>
@@ -535,7 +539,9 @@ export default function CopyRandomStory({ story, step }) {
                         isHl ? "link-hl" : ""
                       }`}
                       markerEnd={
-                        isHl ? "url(#arrow-highlight)" : "url(#arrow-clone-next)"
+                        isHl
+                          ? "url(#arrow-highlight)"
+                          : "url(#arrow-clone-next)"
                       }
                     />
                   </g>
@@ -553,11 +559,7 @@ export default function CopyRandomStory({ story, step }) {
                       y2={yClone}
                       className="link-null-line"
                     />
-                    <text
-                      x={fromX + 64}
-                      y={yClone + 4}
-                      className="null-text"
-                    >
+                    <text x={fromX + 64} y={yClone + 4} className="null-text">
                       null
                     </text>
                   </g>

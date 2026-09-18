@@ -13,102 +13,7 @@
   color: var(--text-muted, #94a3b8);
 }
 
-/* Comparison Hero Card */
-.palindrome-story__comparison {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  padding: 16px 20px;
-  border-radius: 8px;
-  background: var(--surface2, #1e293b);
-  border: 1.5px solid var(--border, #334155);
-  transition: all 0.2s ease;
-}
-
-.palindrome-story__comparison.is-match {
-  border-color: var(--success, #10b981);
-  background: color-mix(in srgb, var(--success, #10b981) 12%, var(--surface2, #1e293b));
-  box-shadow: 0 0 12px color-mix(in srgb, var(--success, #10b981) 25%, transparent);
-}
-
-.palindrome-story__comparison.is-mismatch {
-  border-color: var(--error, #ef4444);
-  background: color-mix(in srgb, var(--error, #ef4444) 14%, var(--surface2, #1e293b));
-  box-shadow: 0 0 12px color-mix(in srgb, var(--error, #ef4444) 25%, transparent);
-}
-
-.palindrome-story__comparison-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  min-width: 90px;
-  padding: 10px 14px;
-  border-radius: 6px;
-  background: var(--surface, #0f172a);
-  border: 1px solid var(--border, #334155);
-}
-
-.comparison-index {
-  font-size: 11px;
-  font-family: ui-monospace, monospace;
-  font-weight: 700;
-  color: var(--text-muted, #94a3b8);
-}
-
-.comparison-char {
-  font-size: 24px;
-  font-weight: 800;
-  font-family: ui-monospace, monospace;
-  color: var(--text, #f8fafc);
-}
-
-.comparison-tag {
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--info, #38bdf8);
-}
-
-.palindrome-story__comparison-card.right .comparison-tag {
-  color: var(--warning, #f59e0b);
-}
-
-.palindrome-story__comparison-operator {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-}
-
-.operator-symbol {
-  font-size: 26px;
-  font-weight: 900;
-  font-family: ui-monospace, monospace;
-  color: var(--text, #f8fafc);
-}
-
-.operator-badge {
-  padding: 3px 8px;
-  border-radius: 4px;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-}
-
-.badge-match {
-  background: color-mix(in srgb, var(--success, #10b981) 25%, var(--surface, #0f172a));
-  color: var(--success, #10b981);
-  border: 1px solid var(--success, #10b981);
-}
-
-.badge-mismatch {
-  background: color-mix(in srgb, var(--error, #ef4444) 25%, var(--surface, #0f172a));
-  color: var(--error, #ef4444);
-  border: 1px solid var(--error, #ef4444);
-}
+/* Result Badge */
 
 /* Result Badge */
 .palindrome-story__result-badge {
@@ -187,34 +92,34 @@
   font-size: 12px;
 }
 
-.cells-legend {
+.palindrome-story__cells-legend {
   display: flex;
   gap: 12px;
   font-size: 11px;
   color: var(--text-muted, #94a3b8);
 }
 
-.legend-item {
+.palindrome-story__legend-item {
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
-.legend-dot {
+.palindrome-story__legend-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
 }
 
-.legend-matched .legend-dot {
+.palindrome-story__legend-matched .palindrome-story__legend-dot {
   background: var(--success, #10b981);
 }
 
-.legend-comparing .legend-dot {
+.palindrome-story__legend-comparing .palindrome-story__legend-dot {
   background: var(--primary, #6366f1);
 }
 
-.legend-mismatch .legend-dot {
+.palindrome-story__legend-mismatch .palindrome-story__legend-dot {
   background: var(--error, #ef4444);
 }
 

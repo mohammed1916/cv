@@ -63,6 +63,12 @@
   animation: pulse-collision 1.5s infinite;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .gap-card.collision {
+    animation: none;
+  }
+}
+
 @keyframes pulse-collision {
   0%, 100% {
     box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
@@ -92,7 +98,7 @@
   color: var(--text, #f8fafc);
 }
 
-.metric-value {
+.cycle-story__metric-value {
   font-size: 15px;
   font-weight: 700;
   color: var(--text, #f8fafc);

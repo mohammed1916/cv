@@ -10,8 +10,9 @@ export default function CycleStory({ story, step }) {
         label="Linked List Cycle visualizer story"
       >
         <p className="cycle-story__empty-msg">
-          Use two pointers moving at different speeds (slow = 1 step, fast = 2 steps).
-          If a cycle exists, the fast pointer is guaranteed to lap and meet the slow pointer.
+          Use two pointers moving at different speeds (slow = 1 step, fast = 2
+          steps). If a cycle exists, the fast pointer is guaranteed to lap and
+          meet the slow pointer.
         </p>
       </StoryPanel>
     );
@@ -74,10 +75,16 @@ export default function CycleStory({ story, step }) {
 
   // SVG Geometry for linked list diagram
   const nodeRadius = 24;
-  const nodeSpacing = Math.max(76, Math.min(108, Math.floor(660 / Math.max(n + (hasCycle ? 0 : 1), 2))));
+  const nodeSpacing = Math.max(
+    76,
+    Math.min(108, Math.floor(660 / Math.max(n + (hasCycle ? 0 : 1), 2))),
+  );
   const startX = 54;
   const cy = 80;
-  const svgWidth = Math.max(560, startX * 2 + (n + (hasCycle ? 0 : 1)) * nodeSpacing);
+  const svgWidth = Math.max(
+    560,
+    startX * 2 + (n + (hasCycle ? 0 : 1)) * nodeSpacing,
+  );
   const svgHeight = hasCycle ? 200 : 155;
 
   const isCollision =
@@ -95,15 +102,21 @@ export default function CycleStory({ story, step }) {
       <p className="cycle-story__explanation">{explanation}</p>
 
       {/* Metrics and Floyd Pointer Status Bar */}
-      <div className="cycle-story__metrics" role="region" aria-label="Floyd pointer status">
+      <div
+        className="cycle-story__metrics"
+        role="region"
+        aria-label="Floyd pointer status"
+      >
         {/* Slow / Tortoise Card */}
-        <div className={`cycle-story__metric-card slow-card ${slow !== null ? "active" : ""}`}>
+        <div
+          className={`cycle-story__metric-card slow-card ${slow !== null ? "active" : ""}`}
+        >
           <div className="metric-header">
             <span className="metric-icon">🐢</span>
             <span className="metric-label">Slow (Tortoise)</span>
             <span className="metric-speed">Speed: +1</span>
           </div>
-          <div className="metric-value">
+          <div className="cycle-story__metric-value">
             {slow !== null ? (
               <>
                 <strong>Node {slow}</strong>
@@ -123,13 +136,15 @@ export default function CycleStory({ story, step }) {
         </div>
 
         {/* Fast / Hare Card */}
-        <div className={`cycle-story__metric-card fast-card ${fast !== null ? "active" : ""}`}>
+        <div
+          className={`cycle-story__metric-card fast-card ${fast !== null ? "active" : ""}`}
+        >
           <div className="metric-header">
             <span className="metric-icon">🐇</span>
             <span className="metric-label">Fast (Hare)</span>
             <span className="metric-speed">Speed: +2</span>
           </div>
-          <div className="metric-value">
+          <div className="cycle-story__metric-value">
             {fast !== null ? (
               <>
                 <strong>Node {fast}</strong>
@@ -158,10 +173,12 @@ export default function CycleStory({ story, step }) {
             <span className="metric-icon">📏</span>
             <span className="metric-label">Chase Gap (Δ)</span>
             <span className="metric-speed">
-              {hasCycle && slow >= pos && fast >= pos ? "-1 / round" : "Relative"}
+              {hasCycle && slow >= pos && fast >= pos
+                ? "-1 / round"
+                : "Relative"}
             </span>
           </div>
-          <div className="metric-value">
+          <div className="cycle-story__metric-value">
             {isCollision ? (
               <strong className="collision-text">0 (COLLISION! 🎉)</strong>
             ) : gap !== null ? (
@@ -191,7 +208,7 @@ export default function CycleStory({ story, step }) {
             <span className="metric-label">Iteration</span>
             <span className="metric-speed">Line {activeLine}</span>
           </div>
-          <div className="metric-value">
+          <div className="cycle-story__metric-value">
             <strong>Round {stepCount}</strong>
           </div>
           <div className="metric-sub">
@@ -201,7 +218,11 @@ export default function CycleStory({ story, step }) {
       </div>
 
       {/* Linked List Visual Diagram */}
-      <div className="cycle-story__diagram-container" role="region" aria-label="Linked list track">
+      <div
+        className="cycle-story__diagram-container"
+        role="region"
+        aria-label="Linked list track"
+      >
         <div className="cycle-story__diagram-header">
           <span className="diagram-title">Linked List Topology</span>
           {hasCycle ? (
@@ -209,7 +230,9 @@ export default function CycleStory({ story, step }) {
               ⟳ Cycle Detected Structure: Node {n - 1} → Node {pos}
             </span>
           ) : (
-            <span className="acyclic-badge">Linear Chain (Terminates at null)</span>
+            <span className="acyclic-badge">
+              Linear Chain (Terminates at null)
+            </span>
           )}
         </div>
 
@@ -237,7 +260,10 @@ export default function CycleStory({ story, step }) {
                   markerHeight="6"
                   orient="auto-start-reverse"
                 >
-                  <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--text-dim, #64748b)" />
+                  <path
+                    d="M 0 1.5 L 8 5 L 0 8.5 z"
+                    fill="var(--text-dim, #64748b)"
+                  />
                 </marker>
 
                 {/* Cycle return arrow marker */}
@@ -541,24 +567,32 @@ export default function CycleStory({ story, step }) {
       </div>
 
       {/* Floyd's Algorithm Mathematical Insight Card */}
-      <div className="cycle-story__proof-card" role="region" aria-label="Floyd algorithm properties">
+      <div
+        className="cycle-story__proof-card"
+        role="region"
+        aria-label="Floyd algorithm properties"
+      >
         <div className="proof-header">
           <span className="proof-icon">💡</span>
-          <span className="proof-title">Why Floyd's Tortoise &amp; Hare Works</span>
+          <span className="proof-title">
+            Why Floyd's Tortoise &amp; Hare Works
+          </span>
         </div>
         <div className="proof-grid">
           <div className="proof-item">
             <strong>Time Complexity: O(N)</strong>
             <span>
-              Tortoise takes at most N steps before meeting or reaching null. Inside a cycle
-              of length C, Hare gains 1 step per round, closing any gap in &lt; C iterations.
+              Tortoise takes at most N steps before meeting or reaching null.
+              Inside a cycle of length C, Hare gains 1 step per round, closing
+              any gap in &lt; C iterations.
             </span>
           </div>
           <div className="proof-item">
             <strong>Space Complexity: O(1)</strong>
             <span>
-              Requires only two pointer variables (slow &amp; fast). Unlike Hash Sets that require
-              O(N) memory to record visited references, Floyd uses zero auxiliary memory.
+              Requires only two pointer variables (slow &amp; fast). Unlike Hash
+              Sets that require O(N) memory to record visited references, Floyd
+              uses zero auxiliary memory.
             </span>
           </div>
         </div>
@@ -573,7 +607,11 @@ export default function CycleStory({ story, step }) {
         >
           <div className="result-icon">{result ? "🎉" : "✓"}</div>
           <div className="result-text">
-            <h4>{result ? "Cycle Detected — Return True" : "No Cycle Detected — Return False"}</h4>
+            <h4>
+              {result
+                ? "Cycle Detected — Return True"
+                : "No Cycle Detected — Return False"}
+            </h4>
             <p>
               {result
                 ? `Collision confirmed at Node ${meetingNode} (value: ${nodes[meetingNode]?.val}) after ${stepCount} iterations.`

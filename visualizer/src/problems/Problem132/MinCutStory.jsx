@@ -1,4 +1,5 @@
 import StoryPanel from "../../components/shared/StoryPanel";
+import CharacterComparison from "../../components/shared/CharacterComparison";
 import "./MinCutStory.css";
 
 export default function MinCutStory({ story, step }) {
@@ -70,7 +71,10 @@ export default function MinCutStory({ story, step }) {
       <p className="mincut-story__explanation">{step.explanation}</p>
 
       {/* Telemetry Bar */}
-      <section className="mincut-story__telemetry" aria-label="Algorithm state summary">
+      <section
+        className="mincut-story__telemetry"
+        aria-label="Algorithm state summary"
+      >
         <div className="telemetry-item">
           <span className="telemetry-label">Center (mid)</span>
           <span className="telemetry-val">
@@ -80,7 +84,11 @@ export default function MinCutStory({ story, step }) {
         <div className="telemetry-item">
           <span className="telemetry-label">Type</span>
           <span className="telemetry-val">
-            {expansionType ? (expansionType === "odd" ? "Odd (2k+1)" : "Even (2k)") : "—"}
+            {expansionType
+              ? expansionType === "odd"
+                ? "Odd (2k+1)"
+                : "Even (2k)"
+              : "—"}
           </span>
         </div>
         <div className="telemetry-item">
@@ -91,47 +99,29 @@ export default function MinCutStory({ story, step }) {
         </div>
         <div className="telemetry-item">
           <span className="telemetry-label">Best Min Cuts</span>
-          <span className="telemetry-val highlight">
-            {dp[n - 1] ?? "—"}
-          </span>
+          <span className="telemetry-val highlight">{dp[n - 1] ?? "—"}</span>
         </div>
       </section>
 
       {/* Comparison Hero Card during check */}
       {comparing && (
-        <section
-          className={`mincut-story__comparison ${
-            comparing.match ? "is-match" : "is-mismatch"
-          }`}
-          aria-label="Character comparison"
-        >
-          <div className="comparison-card left">
-            <span className="comparison-index">s[{comparing.l}]</span>
-            <span className="comparison-char">&apos;{comparing.leftChar}&apos;</span>
-            <span className="comparison-tag">Left Wing (l)</span>
-          </div>
-
-          <div className="comparison-operator">
-            <span className="operator-symbol">{comparing.match ? "==" : "≠"}</span>
-            <span
-              className={`operator-badge ${
-                comparing.match ? "badge-match" : "badge-mismatch"
-              }`}
-            >
-              {comparing.match ? "PALINDROME MATCH ✓" : "MISMATCH ✗"}
-            </span>
-          </div>
-
-          <div className="comparison-card right">
-            <span className="comparison-index">s[{comparing.r}]</span>
-            <span className="comparison-char">&apos;{comparing.rightChar}&apos;</span>
-            <span className="comparison-tag">Right Wing (r)</span>
-          </div>
-        </section>
+        <CharacterComparison
+          leftIndexLabel={`s[${comparing.l}]`}
+          leftChar={comparing.leftChar}
+          leftTag="Left Wing (l)"
+          rightIndexLabel={`s[${comparing.r}]`}
+          rightChar={comparing.rightChar}
+          rightTag="Right Wing (r)"
+          isMatch={comparing.match}
+          ariaLabel="Character comparison"
+        />
       )}
 
       {/* String & Wings Track */}
-      <section className="mincut-story__track-card" aria-label="String characters and wings">
+      <section
+        className="mincut-story__track-card"
+        aria-label="String characters and wings"
+      >
         <header className="track-card__header">
           <span className="track-card__title">String & Expansion Wings</span>
           {expansionType && (
@@ -152,8 +142,7 @@ export default function MinCutStory({ story, step }) {
               palindromeSpan &&
               idx >= palindromeSpan[0] &&
               idx <= palindromeSpan[1];
-            const inWindow =
-              l !== null && r !== null && idx >= l && idx <= r;
+            const inWindow = l !== null && r !== null && idx >= l && idx <= r;
 
             let cellState = "";
             if (inSpan) cellState = "is-palindrome";
@@ -179,7 +168,10 @@ export default function MinCutStory({ story, step }) {
 
                 {/* Even center seam indicator between mid and mid+1 */}
                 {expansionType === "even" && idx === mid && idx < n - 1 && (
-                  <div className="even-seam" title={`Center seam between ${mid} and ${mid + 1}`}>
+                  <div
+                    className="even-seam"
+                    title={`Center seam between ${mid} and ${mid + 1}`}
+                  >
                     <span className="even-seam-line" />
                     <span className="even-seam-dot" />
                     <span className="even-seam-label">center</span>
@@ -199,14 +191,17 @@ export default function MinCutStory({ story, step }) {
         >
           <div className="dp-hero__header">
             <span className="dp-hero__title">
-              DP Transition for prefix <code>s[0..{r}]</code> (&quot;{s.slice(0, r + 1)}&quot;)
+              DP Transition for prefix <code>s[0..{r}]</code> (&quot;
+              {s.slice(0, r + 1)}&quot;)
             </span>
-            <span className={`dp-hero__badge ${improved ? "badge-improved" : "badge-retained"}`}>
+            <span
+              className={`dp-hero__badge ${improved ? "badge-improved" : "badge-retained"}`}
+            >
               {l === 0
                 ? "Whole Prefix Palindrome"
                 : improved
-                ? `Cuts reduced: ${prevValue} → ${dp[r]} ↓`
-                : `Cuts retained: ${dp[r]}`}
+                  ? `Cuts reduced: ${prevValue} → ${dp[r]} ↓`
+                  : `Cuts retained: ${dp[r]}`}
             </span>
           </div>
 
@@ -215,19 +210,22 @@ export default function MinCutStory({ story, step }) {
               <div className="equation-block">
                 <span className="equation-math">dp[{r}] = 0</span>
                 <span className="equation-note">
-                  Subarray <code>s[0..{r}]</code> is a standalone palindrome. No cuts required.
+                  Subarray <code>s[0..{r}]</code> is a standalone palindrome. No
+                  cuts required.
                 </span>
               </div>
             ) : (
               <div className="equation-block">
                 <div className="equation-math">
-                  dp[{r}] = min(dp[{r}], dp[{l - 1}] + 1) = min({prevValue}, {dp[l - 1]} + 1) ={" "}
-                  <strong>{dp[r]}</strong>
+                  dp[{r}] = min(dp[{r}], dp[{l - 1}] + 1) = min({prevValue},{" "}
+                  {dp[l - 1]} + 1) = <strong>{dp[r]}</strong>
                 </div>
                 <div className="equation-segments">
                   <div className="segment-card prefix">
                     <span className="segment-sub">s[0..{l - 1}]</span>
-                    <span className="segment-str">&quot;{s.slice(0, l)}&quot;</span>
+                    <span className="segment-str">
+                      &quot;{s.slice(0, l)}&quot;
+                    </span>
                     <span className="segment-cuts">{dp[l - 1]} cuts</span>
                   </div>
                   <div className="segment-cut">
@@ -235,8 +233,12 @@ export default function MinCutStory({ story, step }) {
                     <span className="cut-label">+1 cut</span>
                   </div>
                   <div className="segment-card suffix">
-                    <span className="segment-sub">s[{l}..{r}]</span>
-                    <span className="segment-str">&quot;{s.slice(l, r + 1)}&quot;</span>
+                    <span className="segment-sub">
+                      s[{l}..{r}]
+                    </span>
+                    <span className="segment-str">
+                      &quot;{s.slice(l, r + 1)}&quot;
+                    </span>
                     <span className="segment-cuts">palindrome</span>
                   </div>
                 </div>
@@ -247,13 +249,17 @@ export default function MinCutStory({ story, step }) {
       )}
 
       {/* DP Array Table */}
-      <section className="mincut-story__dp-section" aria-label="DP minimum cuts table">
+      <section
+        className="mincut-story__dp-section"
+        aria-label="DP minimum cuts table"
+      >
         <header className="dp-section__header">
           <span className="dp-section__title">
             DP Array: Minimum cuts for prefix <code>s[0..i]</code>
           </span>
           <span className="dp-section__hint">
-            Formula: <code>dp[r] = 0 if l == 0 else min(dp[r], dp[l - 1] + 1)</code>
+            Formula:{" "}
+            <code>dp[r] = 0 if l == 0 else min(dp[r], dp[l - 1] + 1)</code>
           </span>
         </header>
 
@@ -280,9 +286,7 @@ export default function MinCutStory({ story, step }) {
 
                 <div className="dp-cell-card__val">
                   <span className="val-number">{val}</span>
-                  <span className="val-unit">
-                    {val === 1 ? "cut" : "cuts"}
-                  </span>
+                  <span className="val-unit">{val === 1 ? "cut" : "cuts"}</span>
                 </div>
 
                 <div className="dp-cell-card__partition">
@@ -303,7 +307,10 @@ export default function MinCutStory({ story, step }) {
 
       {/* Done Banner */}
       {phase === "done" && (
-        <section className="mincut-story__done-card" aria-label="Final optimal partition">
+        <section
+          className="mincut-story__done-card"
+          aria-label="Final optimal partition"
+        >
           <div className="done-card__icon">✓</div>
           <div className="done-card__body">
             <h4 className="done-card__title">
@@ -325,7 +332,8 @@ export default function MinCutStory({ story, step }) {
               ))}
             </div>
             <p className="done-card__note">
-              Every substring in the partition above is verified to be a palindrome.
+              Every substring in the partition above is verified to be a
+              palindrome.
             </p>
           </div>
         </section>

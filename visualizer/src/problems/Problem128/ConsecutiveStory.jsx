@@ -14,7 +14,8 @@ export default function ConsecutiveStory({ story, step }) {
         label="Longest Consecutive Sequence story"
       >
         <p>
-          Find the length of the longest consecutive elements sequence in an unsorted array in O(n) time using a hash set.
+          Find the length of the longest consecutive elements sequence in an
+          unsorted array in O(n) time using a hash set.
         </p>
       </StoryPanel>
     );
@@ -85,15 +86,15 @@ export default function ConsecutiveStory({ story, step }) {
       >
         <div className="consecutive-story__metric-card">
           <span className="metric-label">Set Elements</span>
-          <span className="metric-val">{story.uniqueSet.length}</span>
-          <span className="metric-sub">
-            {story.nums.length} input values
+          <span className="consecutive-story__metric-val">
+            {story.uniqueSet.length}
           </span>
+          <span className="metric-sub">{story.nums.length} input values</span>
         </div>
 
         <div className="consecutive-story__metric-card">
           <span className="metric-label">Inspected Element</span>
-          <span className="metric-val">
+          <span className="consecutive-story__metric-val">
             {num != null ? num : "—"}
           </span>
           <span
@@ -101,21 +102,23 @@ export default function ConsecutiveStory({ story, step }) {
               hasLeftNeighbor === true
                 ? "sub-skip"
                 : hasLeftNeighbor === false
-                ? "sub-start"
-                : ""
+                  ? "sub-start"
+                  : ""
             }`}
           >
             {hasLeftNeighbor === true
               ? `${leftNeighbor} in set (Skip)`
               : hasLeftNeighbor === false
-              ? `${leftNeighbor} not in set (Start!)`
-              : "Awaiting scan"}
+                ? `${leftNeighbor} not in set (Start!)`
+                : "Awaiting scan"}
           </span>
         </div>
 
         <div className="consecutive-story__metric-card">
           <span className="metric-label">Current Streak</span>
-          <span className={`metric-val ${streak > 0 ? "val-streak" : ""}`}>
+          <span
+            className={`consecutive-story__metric-val ${streak > 0 ? "val-streak" : ""}`}
+          >
             {streak}
           </span>
           <span className="metric-sub">
@@ -131,7 +134,9 @@ export default function ConsecutiveStory({ story, step }) {
           }`}
         >
           <span className="metric-label">Record Longest</span>
-          <span className="metric-val val-record">{longest}</span>
+          <span className="consecutive-story__metric-val val-record">
+            {longest}
+          </span>
           <span className="metric-sub">
             {bestSequence.length > 0
               ? `Best: [${bestSequence[0]}..${bestSequence[bestSequence.length - 1]}]`
@@ -150,7 +155,9 @@ export default function ConsecutiveStory({ story, step }) {
         >
           <div className="inspector-header">
             <span className="inspector-badge">
-              {hasLeftNeighbor ? "PREDECESSOR FOUND — SKIP" : "NO PREDECESSOR — SEQUENCE START"}
+              {hasLeftNeighbor
+                ? "PREDECESSOR FOUND — SKIP"
+                : "NO PREDECESSOR — SEQUENCE START"}
             </span>
             <span className="inspector-hint">
               {hasLeftNeighbor
@@ -265,7 +272,8 @@ export default function ConsecutiveStory({ story, step }) {
             </span>
           </div>
           <span className="set-subtitle">
-            Values displayed in numerical order to visualize consecutive clustering
+            Values displayed in numerical order to visualize consecutive
+            clustering
           </span>
         </div>
 
@@ -344,9 +352,7 @@ export default function ConsecutiveStory({ story, step }) {
                   : "Best Sequence So Far"}
               </span>
             </div>
-            <span className="champion-streak-pill">
-              Length {longest}
-            </span>
+            <span className="champion-streak-pill">Length {longest}</span>
           </div>
 
           <div className="champion-vals" role="list">
@@ -368,12 +374,14 @@ export default function ConsecutiveStory({ story, step }) {
 
       {/* Complexity & Insight Banner */}
       <div className="consecutive-story__insight" role="note">
-        <span className="insight-icon" aria-hidden="true">💡</span>
+        <span className="insight-icon" aria-hidden="true">
+          💡
+        </span>
         <div className="insight-content">
           <strong>Why O(n) Time?</strong> By only expanding sequences where{" "}
-          <code>num - 1 not in num_set</code>, each consecutive chain is explored
-          once from its true beginning. Every number is inspected as an outer
-          candidate once, and visited inside the while-loop at most once.
+          <code>num - 1 not in num_set</code>, each consecutive chain is
+          explored once from its true beginning. Every number is inspected as an
+          outer candidate once, and visited inside the while-loop at most once.
         </div>
       </div>
     </StoryPanel>
