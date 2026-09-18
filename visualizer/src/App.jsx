@@ -10,7 +10,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Analytics } from "@vercel/analytics/react";
 
 import ProblemScaffold from "./components/panels/ProblemScaffold";
-import ProblemInfoPanel from "./components/ProblemInfoPanel";
+import ProblemNavigation from "./components/ProblemNavigation";
 import ZoomControls from "./components/ZoomControls";
 import { ZoomProvider } from "./context/ZoomContext";
 import ThemeToggle from "./components/ThemeToggle";
@@ -491,6 +491,8 @@ function SettingsMenu({
 
 function ProblemPage({
   problem,
+  onSelect,
+  pro,
   onBack,
   layoutWidth,
   onLayoutChange,
@@ -549,7 +551,7 @@ function ProblemPage({
         />
         <div className="problem-utilities">{utilityControls}</div>
       </header>
-      <ProblemInfoPanel slug={problem.slug} number={problem.number} />
+      <ProblemNavigation problem={problem} problems={ALL_PROBLEMS} pro={pro} onSelect={onSelect} />
       <div className="problem-content">
         <ErrorBoundary key={problem.id}>
           {Component ? (
@@ -1204,6 +1206,8 @@ export default function App() {
     <ProblemPage
       key={active.id}
       problem={active}
+      onSelect={selectProblem}
+      pro={access.pro}
       onBack={goBack}
       layoutWidth={layoutWidth}
       onLayoutChange={setLayoutWidth}

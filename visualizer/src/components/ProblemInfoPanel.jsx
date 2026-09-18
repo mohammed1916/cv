@@ -18,7 +18,7 @@ function sanitizeHtml(html) {
         .replace(/javascript:/gi, "");
 }
 
-export default function ProblemInfoPanel({ slug, number }) {
+export default function ProblemInfoPanel({ slug, number, before, after }) {
     const [open, setOpen] = useState(false);
 
     const premium = isPremiumProblem(number);
@@ -27,15 +27,18 @@ export default function ProblemInfoPanel({ slug, number }) {
 
     // Nothing to reveal and nothing to explain: not premium, just absent from
     // the dataset. Hide the toggle rather than open onto an apology.
-    if (status === 'missing' && !premium) return null;
+    const available = status !== 'missing' || premium;
 
     return (
         <>
             {/* Toggle bar */}
             <div className="problem-info-bar">
-                <button
+                {before}
+                {available && <button
                     className={`problem-info-toggle${open ? " open" : ""}`}
                     onClick={() => setOpen((v) => !v)}
+                    aria-expanded={open}
+                    aria-controls="problem-description"
                     title={open ? "Hide problem description" : "Show problem description"}
                 >
                     {/* book icon */}
@@ -48,13 +51,15 @@ export default function ProblemInfoPanel({ slug, number }) {
                     <svg className="chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                         <path d="M6 9l6 6 6-6" />
                     </svg>
-                </button>
+                </button>}
+                {after}
             </div>
 
             {/* Expandable panel */}
             <AnimatePresence initial={false}>
-                {open && (
+                {open && available && (
                     <motion.div
+                        id="problem-description"
                         className="problem-info-panel"
                         key="info-panel"
                         initial={{ height: 0, opacity: 0 }}

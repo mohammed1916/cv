@@ -1,0 +1,56 @@
+.problem-info-bar {
+  padding: 8px 16px;
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+.problem-info-toggle,
+.problem-nav-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface2);
+  color: var(--text);
+  box-shadow: 0 3px 12px var(--primary-glow);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.problem-info-toggle { padding: 8px 14px; }
+.problem-nav-button { min-width: 38px; font-size: 24px; }
+.problem-nav-arrows { display: flex; gap: 4px; margin-left: 4px; }
+.problem-nav-button:hover:not(:disabled) { background: var(--surface3); border-color: var(--primary); }
+.problem-nav-button:disabled { opacity: .35; cursor: default; box-shadow: none; }
+.problem-info-toggle:focus-visible,
+.problem-nav-button:focus-visible,
+.problem-list-content nav button:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+.problem-list-dialog {
+  position: fixed;
+  inset: 0 auto 0 0;
+  margin: 0;
+  padding: 0;
+  width: min(360px, 90vw);
+  height: 100dvh;
+  max-height: 100dvh;
+  max-width: 100vw;
+  border: 0;
+  border-right: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 12px 0 40px #0004;
+}
+.problem-list-dialog::backdrop { background: #0007; }
+.problem-list-content { display: flex; flex-direction: column; height: 100%; }
+.problem-list-content header { display: flex; align-items: center; justify-content: space-between; padding: 16px; border-bottom: 1px solid var(--border); gap: 12px; }
+.problem-list-content h2 { font-size: 16px; margin: 0; }
+.problem-list-content nav { overflow-y: auto; padding: 8px; flex: 1; }
+.problem-list-content nav button { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; border: 1px solid transparent; border-radius: 8px; padding: 12px; background: transparent; color: var(--text); cursor: pointer; font: inherit; font-size: 14px; }
+.problem-list-content nav button:hover { background: var(--surface2); }
+.problem-list-content nav button[aria-current] { background: var(--surface2); border-color: var(--primary); font-weight: 700; }
+.problem-list-content small { margin-left: auto; white-space: nowrap; color: var(--text-muted); font-size: 11px; }
+@media (max-width: 480px) { .problem-info-bar { padding: 8px; } }
