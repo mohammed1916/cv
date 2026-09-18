@@ -97,7 +97,7 @@ function BinaryVisualization({ nums, binaries, bitPos }) {
       <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
         {binaries.map((bin, i) => (
           <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 10 }}>
-            <div style={{ fontWeight: 600, color: 'var(--surface2)', minWidth: 40 }}>{nums[i]}</div>
+            <div style={{ fontWeight: 600, color: 'var(--text-on-light)', minWidth: 40 }}>{nums[i]}</div>
             <div style={{ fontFamily: 'monospace', display: 'flex', gap: 1 }}>
               {bin.split('').map((bit, j) => (
                 <div
@@ -136,7 +136,7 @@ function VisualizationPanel({ nums, step, applyEx }) {
       )}
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -165,7 +165,7 @@ function VisualizationPanel({ nums, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Input Numbers</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Input Numbers</div>
         <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', padding: 10, backgroundColor: '#f9fafb', borderRadius: 6, border: '1px solid var(--border)' }}>
           {nums.map((num, i) => (
             <motion.div

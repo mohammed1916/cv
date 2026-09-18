@@ -101,7 +101,7 @@ export default function EvalRPNVisualizer() {
     const vizPanel = (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
             <div>
-                <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+                <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
                 <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                     {EXAMPLES.map(ex => (
                         <button key={ex.label} onClick={() => applyExample(ex)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: 'var(--surface2)' }}>
@@ -114,7 +114,7 @@ export default function EvalRPNVisualizer() {
             <input style={{ padding: '8px', borderRadius: 4, border: '1px solid var(--border)', fontSize: 12, fontFamily: 'monospace' }} value={input} onChange={(e) => { setInput(e.target.value); handleReset(); }} placeholder='["2","1","+","3","*"]' />
             {err && <div style={{ padding: 8, backgroundColor: '#fee2e2', color: '#991b1b', borderRadius: 4, fontSize: 12 }}>{err}</div>}
 
-            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 4 }}>Tokens</div>
+            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 4 }}>Tokens</div>
             <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', minHeight: 40 }}>
                 {tokens.map((t, i) => {
                     const isOp = ['+', '-', '*', '/'].includes(t);
@@ -132,7 +132,7 @@ export default function EvalRPNVisualizer() {
                 })}
             </div>
 
-            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 4 }}>Stack</div>
+            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 4 }}>Stack</div>
             <div style={{ display: 'flex', gap: 6, alignItems: 'flex-end', minHeight: 60, paddingBottom: 8, borderBottom: '1px solid var(--text)' }}>
                 <AnimatePresence mode="popLayout">
                     {(step?.stack ?? []).map((v, i) => (
@@ -140,7 +140,7 @@ export default function EvalRPNVisualizer() {
                             padding: '8px 12px',
                             backgroundColor: i === (step?.stack?.length ?? 0) - 1 ? '#dbeafe' : '#f3f4f6',
                             border: i === (step?.stack?.length ?? 0) - 1 ? '2px solid #0ea5e9' : '1px solid var(--border)',
-                            borderRadius: 4, fontSize: 14, fontWeight: 'bold', color: 'var(--surface2)'
+                            borderRadius: 4, fontSize: 14, fontWeight: 'bold', color: 'var(--text-on-light)'
                         }}>
                             {v}
                         </motion.div>

@@ -88,7 +88,7 @@ function VisualizationPanel({ houses, heaters, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -110,7 +110,7 @@ function VisualizationPanel({ houses, heaters, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Number Line</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Number Line</div>
         <svg width="100%" height="80" style={{ border: '1px solid var(--border)', borderRadius: 4 }}>
           <line x1="20" y1="40" x2="380" y2="40" stroke="var(--border)" strokeWidth="2" />
           {Math.min(...[...houses, ...heaters]) >= 0 && Math.max(...[...houses, ...heaters]) <= 50 && (

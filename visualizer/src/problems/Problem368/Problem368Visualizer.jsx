@@ -401,7 +401,7 @@ export default function Problem368Visualizer() {
             <>
               {/* Status message */}
               <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 11 }}>
-                <div style={{ fontWeight: 600, marginBottom: 6, color: 'var(--surface2)' }}>{step.message}</div>
+                <div style={{ fontWeight: 600, marginBottom: 6, color: 'var(--text)' }}>{step.message}</div>
               </div>
 
               {/* Array and DP state */}
@@ -420,7 +420,7 @@ export default function Problem368Visualizer() {
                           borderRadius: 4,
                           border: isCurrent || isHighlighted ? '2px solid #0ea5e9' : '1px solid var(--border)',
                           backgroundColor: isCurrent ? '#fef08a' : isHighlighted ? '#0ea5e9' : 'var(--surface2)',
-                          color: isHighlighted ? '#fff' : 'var(--surface2)',
+                          color: isHighlighted ? '#fff' : (isCurrent ? 'var(--text-on-light)' : 'var(--text)'),
                           fontSize: 11,
                           fontWeight: 600,
                           textAlign: 'center',

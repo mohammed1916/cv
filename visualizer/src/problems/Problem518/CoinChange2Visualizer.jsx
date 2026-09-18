@@ -125,7 +125,7 @@ function VisualizationPanel({ amount, coins, step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -148,7 +148,7 @@ function VisualizationPanel({ amount, coins, step, applyEx }) {
 
       {/* Coins */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Coins: {coins.join(', ')}</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Coins: {coins.join(', ')}</div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {coins.map((coin, idx) => {
             const isActive = step && idx === step.coinIdx
@@ -177,7 +177,7 @@ function VisualizationPanel({ amount, coins, step, applyEx }) {
 
       {/* DP Array */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>DP Array</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>DP Array</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', overflowX: 'auto', paddingBottom: 8 }}>
           {step?.dp?.map((val, idx) => {
             const isActive = step && idx === step.amountIdx && step.amountIdx !== -1

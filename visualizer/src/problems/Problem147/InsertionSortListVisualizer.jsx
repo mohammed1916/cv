@@ -204,7 +204,7 @@ function ListVisualization({ values }) {
                 dy="0.3em"
                 fontSize={14}
                 fontWeight={600}
-                fill="var(--code-bg)"
+                fill="var(--text-inverse)"
               >
                 {val}
               </text>

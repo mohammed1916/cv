@@ -285,7 +285,7 @@ function FrequencyHistogram({ step }) {
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
         Character Frequency
       </header>
 
@@ -300,7 +300,7 @@ function FrequencyHistogram({ step }) {
               transition={{ duration: 0.2 }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12 }}>
-                <span style={{ fontWeight: 600, color: 'var(--surface2)' }}>{ch}</span>
+                <span style={{ fontWeight: 600, color: 'var(--text)' }}>{ch}</span>
                 <span style={{ color: 'var(--text-muted)' }}>{freq}</span>
               </div>
               <motion.div
@@ -345,7 +345,7 @@ function QueueAndCooldown({ step }) {
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16, borderLeft: '1px solid var(--text)' }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
         Queue & Cooldown
       </header>
 
@@ -421,7 +421,7 @@ function ResultBuilder({ step, k }) {
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
         Result: {result.length} chars
       </header>
 
@@ -452,7 +452,7 @@ function ResultBuilder({ step, k }) {
                   borderRadius: 6,
                   fontSize: 13,
                   fontWeight: 700,
-                  color: 'var(--surface2)',
+                  color: 'var(--text-on-light)',
                   position: 'relative',
                 }}
               >
@@ -488,7 +488,7 @@ function VisualizationPanel({ step, s, k, EXAMPLES, handleExampleClick, sInput, 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Examples
         </div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>

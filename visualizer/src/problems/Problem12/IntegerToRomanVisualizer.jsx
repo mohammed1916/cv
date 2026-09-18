@@ -364,7 +364,7 @@ export default function IntegerToRomanVisualizer() {
                       fontSize: 11,
                       fontFamily: 'monospace',
                       fontWeight: 600,
-                      color: isActive ? '#fff' : isProcessed ? '#166534' : 'var(--surface2)',
+                      color: isActive ? '#fff' : isProcessed ? '#166534' : 'var(--text)',
                       cursor: 'default',
                     }}
                   >

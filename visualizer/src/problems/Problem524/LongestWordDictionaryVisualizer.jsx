@@ -132,7 +132,7 @@ function VisualizationPanel({ s, dictionary, step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -155,7 +155,7 @@ function VisualizationPanel({ s, dictionary, step, applyEx }) {
 
       {/* String */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>String: {s}</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>String: {s}</div>
         <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
           {s.split('').map((char, idx) => (
             <div
@@ -178,7 +178,7 @@ function VisualizationPanel({ s, dictionary, step, applyEx }) {
 
       {/* Dictionary */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Dictionary</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Dictionary</div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', maxHeight: 150, overflowY: 'auto' }}>
           {(step?.dictionary ?? dictionary)?.map((word, idx) => {
             const isActive = step && idx === step.wordIdx && !step.done

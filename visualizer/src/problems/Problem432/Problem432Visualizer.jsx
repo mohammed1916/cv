@@ -106,7 +106,7 @@ function VisualizationPanel({ step, applyEx }) {
       )}
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -136,7 +136,7 @@ function VisualizationPanel({ step, applyEx }) {
 
       {step?.array && step.array.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Array (Values)</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Array (Values)</div>
           <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
             {step.array.map((val, i) => (
               <motion.div
@@ -168,7 +168,7 @@ function VisualizationPanel({ step, applyEx }) {
 
       {step?.map && step.map.size > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Map (val → idx)</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Map (val → idx)</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
             {Array.from(step.map.entries()).slice(0, 5).map(([val, idx], i) => (
               <div

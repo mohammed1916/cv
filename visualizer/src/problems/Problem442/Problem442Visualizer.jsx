@@ -115,7 +115,7 @@ function generateSteps(nums) {
 function ArrayVisualization({ nums, current, seen, duplicates }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Array</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Array</div>
       <div style={{
         padding: 12,
         backgroundColor: 'var(--surface2)',
@@ -173,7 +173,7 @@ function ArrayVisualization({ nums, current, seen, duplicates }) {
 function SeenMapVisualization({ seen }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Seen Map</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Seen Map</div>
       <div style={{
         padding: 12,
         backgroundColor: 'var(--surface2)',
@@ -213,7 +213,7 @@ function SeenMapVisualization({ seen }) {
 function DuplicatesVisualization({ duplicates }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Duplicates Found</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Duplicates Found</div>
       <div style={{
         padding: 12,
         backgroundColor: '#fee2e2',
@@ -255,7 +255,7 @@ function VisualizationPanel({ step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button

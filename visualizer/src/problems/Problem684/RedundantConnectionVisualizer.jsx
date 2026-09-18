@@ -153,26 +153,26 @@ export default function RedundantConnectionVisualizer() {
         {inputError && <div style={{ color: '#991b1b', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
       </div>
 
-      <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>Edges</div>
+      <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>Edges</div>
       <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
         {edges.map(([u, v], i) => (
           <motion.div key={`${u}-${v}-${i}`} animate={{ scale: step?.edge?.[0] === u && step?.edge?.[1] === v ? 1.2 : 1 }} style={{
             padding: '8px 12px', borderRadius: 4,
             backgroundColor: step?.edge?.[0] === u && step?.edge?.[1] === v ? '#fbbf24' : '#f3f4f6',
             border: step?.edge?.[0] === u && step?.edge?.[1] === v ? '2px solid #f59e0b' : '1px solid var(--border)',
-            fontSize: 12, fontWeight: 'bold', color: 'var(--surface2)'
+            fontSize: 12, fontWeight: 'bold', color: 'var(--text-on-light)'
           }}>
             [{u}, {v}]
           </motion.div>
         ))}
       </div>
 
-      <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>Node State</div>
+      <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>Node State</div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(80px, 1fr))', gap: 6 }}>
         {nodes.map(n => (
           <div key={n} style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4, border: '1px solid var(--text)', textAlign: 'center' }}>
             <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>Node {n}</div>
-            <div style={{ fontSize: 12, fontWeight: 'bold', color: 'var(--surface2)' }}>p:{step?.parent?.[n] ?? n}</div>
+            <div style={{ fontSize: 12, fontWeight: 'bold', color: 'var(--text)' }}>p:{step?.parent?.[n] ?? n}</div>
             <div style={{ fontSize: 12, fontWeight: 'bold', color: '#0b7db0' }}>r:{step?.rank?.[n] ?? 1}</div>
           </div>
         ))}

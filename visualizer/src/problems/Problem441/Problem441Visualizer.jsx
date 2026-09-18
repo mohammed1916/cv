@@ -102,7 +102,7 @@ function StaircaseVisualization({ stairs, n, used }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Staircase</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Staircase</div>
       <div style={{
         padding: 16,
         backgroundColor: 'var(--surface2)',
@@ -172,7 +172,7 @@ function CoinsVisualization({ n, used, remaining, stairs }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Coins</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Coins</div>
       <div style={{
         padding: 12,
         backgroundColor: 'var(--surface2)',
@@ -214,7 +214,7 @@ function CoinsVisualization({ n, used, remaining, stairs }) {
 function StatsVisualization({ stairs, used, remaining, n }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Statistics</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Statistics</div>
       <div style={{
         display: 'grid',
         gridTemplateColumns: '1fr 1fr',
@@ -263,7 +263,7 @@ function VisualizationPanel({ step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button

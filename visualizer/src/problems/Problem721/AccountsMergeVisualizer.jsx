@@ -208,7 +208,7 @@ export default function AccountsMergeVisualizer() {
                           borderRadius: 4,
                           border: isHighlighted ? '2px solid #0ea5e9' : '1px solid var(--border)',
                           backgroundColor: isHighlighted ? '#0ea5e9' : isRoot ? '#dcfce7' : 'var(--surface2)',
-                          color: isHighlighted ? '#fff' : 'var(--surface2)',
+                          color: isHighlighted ? '#fff' : (isRoot ? 'var(--text-on-light)' : 'var(--text)'),
                           fontSize: 11,
                           fontWeight: 600,
                         }}

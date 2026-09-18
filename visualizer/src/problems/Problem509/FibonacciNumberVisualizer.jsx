@@ -152,7 +152,7 @@ function VisualizationPanel({ n, step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -175,7 +175,7 @@ function VisualizationPanel({ n, step, applyEx }) {
 
       {/* DP Table */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           DP Array: F[0..{step?.n || n}]
         </div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', overflowX: 'auto', paddingBottom: 8 }}>
@@ -210,7 +210,7 @@ function VisualizationPanel({ n, step, applyEx }) {
 
       {/* Computation Steps */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Building Sequence</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Building Sequence</div>
         <div style={{
           padding: 12,
           backgroundColor: '#faf5ff',

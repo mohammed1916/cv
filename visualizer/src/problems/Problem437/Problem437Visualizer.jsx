@@ -204,7 +204,7 @@ function TreeVisualization({ tree, currentNode }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Tree Structure</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Tree Structure</div>
       <svg
         style={{
           width: '100%',
@@ -224,7 +224,7 @@ function TreeVisualization({ tree, currentNode }) {
 function PathsVisualization({ paths, count, target }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Found Paths (Sum = {target})</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Found Paths (Sum = {target})</div>
       <div style={{
         padding: 12,
         backgroundColor: 'var(--surface2)',
@@ -277,7 +277,7 @@ function VisualizationPanel({ step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button

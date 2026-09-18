@@ -89,7 +89,7 @@
     border-radius: 6px;
     font-size: 12px;
     font-weight: 600;
-    color: var(--code-bg);
+    color: var(--text-on-light);
     cursor: pointer;
     transition: all 200ms;
     white-space: nowrap;

@@ -112,7 +112,7 @@ function QueueVisualization({ people, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Queue State</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Queue State</div>
 
       {/* Current queue */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -145,7 +145,7 @@ function QueueVisualization({ people, step }) {
                     borderRadius: 4,
                     fontWeight: 600,
                     fontSize: 13,
-                    color: 'var(--surface2)',
+                    color: 'var(--text)',
                     border: '1px solid var(--border)',
                     minWidth: 50,
                     textAlign: 'center',
@@ -158,7 +158,7 @@ function QueueVisualization({ people, step }) {
                     borderRadius: 4,
                     fontWeight: 600,
                     fontSize: 13,
-                    color: 'var(--surface2)',
+                    color: 'var(--text)',
                     border: '1px solid var(--border)',
                     minWidth: 50,
                     textAlign: 'center',
@@ -285,7 +285,7 @@ export default function Problem406Visualizer() {
       </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button

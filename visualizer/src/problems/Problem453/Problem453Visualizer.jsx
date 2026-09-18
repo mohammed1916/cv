@@ -147,7 +147,7 @@ function snippetIdForPhase(phase) {
 function ArrayDisplay({ nums, minVal, currentIdx, currentNum, diff }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
         Array Elements
       </header>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', minHeight: 80, alignContent: 'flex-start' }}>
@@ -200,7 +200,7 @@ function ArrayDisplay({ nums, minVal, currentIdx, currentNum, diff }) {
 function MoveCounter({ moves, minVal }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
         Total Moves
       </header>
       <div style={{
@@ -236,7 +236,7 @@ function VisualizationPanel({ step, nums, EXAMPLES, handleExampleClick, numsInpu
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Examples
         </div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>

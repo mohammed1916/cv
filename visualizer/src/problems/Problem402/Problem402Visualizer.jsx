@@ -315,7 +315,7 @@ export default function Problem402Visualizer() {
                     animate={{ scale: 1 }}
                     style={{
                       width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      backgroundColor: '#06b6d4', color: 'var(--surface2)', borderRadius: '6px',
+                      backgroundColor: '#06b6d4', color: 'var(--text-on-light)', borderRadius: '6px',
                       fontSize: '13px', fontWeight: 'bold'
                     }}
                   >

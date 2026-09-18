@@ -91,7 +91,7 @@ function RopeFlipVisualization({ arr, step, ex }) {
 
       {/* Current state */}
       <div style={{ padding: 12, backgroundColor: 'var(--surface)', borderRadius: 6, border: '2px solid #0ea5e9' }}>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Reversed String</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Reversed String</div>
         <div style={{ fontSize: 24, fontFamily: 'monospace', fontWeight: 'bold', color: '#0b7db0', letterSpacing: 4 }}>
           {arr.join("")}
         </div>
@@ -122,7 +122,7 @@ function VisualizationPanel({ arr, step, ex, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button

@@ -62,7 +62,7 @@
   border-radius: 8px;
   border: 1px solid var(--border);
   background: var(--code-bg);
-  color: var(--surface);
+  color: var(--text);
   font-family: monospace;
   padding: 8px 10px;
 }
@@ -151,7 +151,7 @@
   display: grid;
   place-items: center;
   background: var(--surface2);
-  color: var(--surface);
+  color: var(--text);
   font-family: monospace;
 }
 

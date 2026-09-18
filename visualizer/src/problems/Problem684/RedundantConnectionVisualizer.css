@@ -8,7 +8,7 @@
 .rc-body { padding: 12px; display: grid; gap: 10px; }
 .rc-examples { display: flex; gap: 6px; flex-wrap: wrap; }
 .rc-chip { border: 1px solid var(--border); border-radius: 999px; background: rgba(30,41,59,.8); color: var(--border); padding: 4px 10px; cursor: pointer; }
-.rc-input { border: 1px solid var(--border); border-radius: 8px; background: var(--code-bg); color: var(--surface); font-family: monospace; padding: 8px 10px; }
+.rc-input { border: 1px solid var(--border); border-radius: 8px; background: var(--code-bg); color: var(--text); font-family: monospace; padding: 8px 10px; }
 .rc-edges { display: flex; gap: 6px; flex-wrap: wrap; }
 .rc-edge { border: 1px solid var(--border); border-radius: 8px; background: rgba(30,41,59,.75); color: var(--text); font-family: monospace; padding: 6px 8px; }
 .rc-edge.active { border-color: rgba(56,189,248,.65); background: rgba(56,189,248,.14); }

@@ -283,7 +283,7 @@ function MatrixGrid({ matrix, title, highlight = null, extractHighlight = null }
                   fontWeight: 600,
                   fontFamily: 'monospace',
                   backgroundColor: isHighlighted ? '#38bdf8' : isExtracted ? '#fbbf24' : 'var(--surface2)',
-                  color: isHighlighted ? 'var(--code-bg)' : isExtracted ? 'var(--code-bg)' : 'var(--text)',
+                  color: isHighlighted ? 'var(--text-on-light)' : isExtracted ? 'var(--text-on-light)' : 'var(--text)',
                   border: isHighlighted || isExtracted ? '2px solid #38bdf8' : '1px solid var(--text-muted)',
                 }}
                 animate={{
@@ -336,7 +336,7 @@ function FlattenedArray({ flat, highlightIndex = null }) {
                 fontWeight: 600,
                 fontFamily: 'monospace',
                 backgroundColor: isHighlighted ? '#38bdf8' : 'var(--surface2)',
-                color: isHighlighted ? 'var(--code-bg)' : 'var(--text)',
+                color: isHighlighted ? 'var(--text-on-light)' : 'var(--text)',
                 border: isHighlighted ? '2px solid #38bdf8' : '1px solid var(--text-muted)',
               }}
               animate={{

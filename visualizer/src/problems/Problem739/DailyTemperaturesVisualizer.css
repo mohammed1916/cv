@@ -118,14 +118,14 @@
 .dt-chip:hover {
   border-color: var(--text-muted);
   background: rgba(30, 41, 59, 1);
-  color: var(--surface2);
+  color: var(--text-on-dark);
 }
 
 .dt-input {
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--code-bg);
-  color: var(--surface);
+  color: var(--text);
   font-family: monospace;
   padding: 8px 10px;
   font-size: 13px;

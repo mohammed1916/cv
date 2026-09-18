@@ -173,7 +173,7 @@ function NodeRow({ nodes, currentId, accent, emptyLabel }) {
                 borderRadius: 8,
                 fontSize: 15,
                 fontWeight: 700,
-                color: isCurrent ? 'var(--code-bg)' : 'var(--text)',
+                color: isCurrent ? 'var(--text-on-light)' : 'var(--text)',
                 background: isCurrent ? '#fde047' : accent,
                 border: isCurrent ? '3px solid #f59e0b' : `2px solid ${accent}`,
                 boxShadow: isCurrent ? '0 0 12px rgba(253,224,71,0.6)' : 'none',

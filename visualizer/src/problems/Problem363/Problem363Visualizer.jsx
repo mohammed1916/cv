@@ -285,12 +285,12 @@ export default function Problem363Visualizer() {
                   {e.label}
                 </button>
               ))}
-              <span style={{ marginLeft: 'auto', fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>K = {K}</span>
+              <span style={{ marginLeft: 'auto', fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>K = {K}</span>
             </div>
 
             {/* Matrix Display */}
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Matrix</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Matrix</div>
               <div style={{ display: 'grid', gridTemplateColumns: `repeat(${cols}, minmax(60px, 1fr))`, gap: 4 }}>
                 {matrix.map((row, i) =>
                   row.map((val, j) => {
@@ -320,7 +320,7 @@ export default function Problem363Visualizer() {
                           borderRadius: 4,
                           fontSize: 13,
                           fontWeight: 700,
-                          color: 'var(--surface2)',
+                          color: (isCurrentCol ? 'var(--text-on-light)' : (isInRange ? 'var(--text-on-light)' : 'var(--text)')),
                         }}
                       >
       

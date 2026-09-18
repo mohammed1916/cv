@@ -132,7 +132,7 @@ function HexConversionVisualization({ num, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Number: {num}</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Number: {num}</div>
 
       {/* Binary representation */}
       <div>
@@ -213,7 +213,7 @@ function HexConversionVisualization({ num, step }) {
               }}
             >
               <div style={{ color: 'var(--text-muted)', fontSize: 9 }}>{i}</div>
-              <div style={{ fontFamily: 'monospace', fontWeight: 'bold', color: 'var(--surface2)' }}>{HEX_CHARS[i]}</div>
+              <div style={{ fontFamily: 'monospace', fontWeight: 'bold', color: (step?.digit === HEX_CHARS[i] ? 'var(--text-on-light)' : 'var(--text)') }}>{HEX_CHARS[i]}</div>
             </div>
           ))}
         </div>
@@ -221,7 +221,7 @@ function HexConversionVisualization({ num, step }) {
 
       {/* Result */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Hexadecimal Result</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Hexadecimal Result</div>
         <div style={{
           padding: 16,
           backgroundColor: '#dbeafe',
@@ -305,7 +305,7 @@ export default function Problem405Visualizer() {
       </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button

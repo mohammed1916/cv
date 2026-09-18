@@ -211,7 +211,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
                         : isMax
                           ? '#f97316'
                           : 'var(--border)',
-                    color: isSelected || isMin || isMax ? 'var(--code-bg)' : 'var(--text)',
+                    color: isSelected || isMin || isMax ? (isSelected ? 'var(--text-on-light)' : (isMin ? 'var(--text-on-light)' : (isMax ? 'var(--text-on-light)' : 'var(--text)'))) : 'var(--text)',
                     fontFamily: 'monospace',
                     fontWeight: 700,
                     fontSize: 12,

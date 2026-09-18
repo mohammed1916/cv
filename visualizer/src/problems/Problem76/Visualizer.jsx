@@ -144,7 +144,7 @@ function SlidingWindowViz({ step, s, EXAMPLES, sInput, setSInput, tInput, setTIn
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
         Sliding Window
       </header>
 
@@ -262,7 +262,7 @@ function SlidingWindowViz({ step, s, EXAMPLES, sInput, setSInput, tInput, setTIn
 function FrequencyState({ step }) {
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16, borderLeft: '1px solid var(--text)' }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
         Frequency State
       </header>
 
@@ -270,17 +270,17 @@ function FrequencyState({ step }) {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 8 }}>
           <div style={{ padding: 10, backgroundColor: 'var(--surface2)', borderRadius: 4 }}>
             <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>formed</div>
-            <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--surface2)' }}>{step?.formed ?? 0}</div>
+            <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>{step?.formed ?? 0}</div>
           </div>
           <div style={{ padding: 10, backgroundColor: 'var(--surface2)', borderRadius: 4 }}>
             <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>required</div>
-            <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--surface2)' }}>{step?.required ?? 0}</div>
+            <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>{step?.required ?? 0}</div>
           </div>
         </div>
 
         <div style={{ padding: 10, backgroundColor: 'var(--surface2)', borderRadius: 4 }}>
           <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>best window</div>
-          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', fontFamily: 'monospace' }}>
+          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', fontFamily: 'monospace' }}>
             {step?.best?.value ?? 'None'}
           </div>
         </div>
@@ -311,7 +311,7 @@ function FrequencyState({ step }) {
                 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
               >
-                <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--surface2)' }}>
+                <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-on-light)' }}>
                   {ch}
                 </div>
                 <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 2 }}>

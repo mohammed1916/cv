@@ -231,7 +231,7 @@ export default function Problem377Visualizer() {
                           sum === step.currentIdx ? '#fff' :
                           sum === 0 ? '#065f46' :
                           step.highlighted?.includes(sum) ? '#1e40af' :
-                          'var(--surface2)',
+                          'var(--text)',
                         fontSize: 11,
                         fontWeight: 600,
                         textAlign: 'center',

@@ -200,7 +200,7 @@ function GridVisualization({ step }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+        <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
           Grid Visualization
         </header>
         <div style={{
@@ -229,7 +229,7 @@ function GridVisualization({ step }) {
                     borderRadius: 4,
                     fontSize: 12,
                     fontWeight: 600,
-                    color: isCurrent && isLand ? '#713f12' : isLand ? 'var(--surface)' : '#1e40af',
+                    color: isCurrent && isLand ? '#713f12' : isLand ? 'var(--text-on-light)' : '#1e40af',
                   }}
                 >
                   {isLand ? '█' : '▪'}
@@ -267,7 +267,7 @@ function VisualizationPanel({ step, EXAMPLES, handleExampleClick, gridInput, set
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Examples
         </div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>

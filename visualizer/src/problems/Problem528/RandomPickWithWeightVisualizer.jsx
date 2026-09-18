@@ -154,7 +154,7 @@ function VisualizationPanel({ w, step }) {
 
       {/* Weights */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Weights</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Weights</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {w.map((weight, idx) => {
             const isProcessing = step?.idx === idx
@@ -186,7 +186,7 @@ function VisualizationPanel({ w, step }) {
 
       {/* Prefix Sum Array */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Prefix Sum Array</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Prefix Sum Array</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', overflowX: 'auto', paddingBottom: 8 }}>
           {step?.prefix?.map((val, idx) => {
             const isCurrent = step?.idx === idx

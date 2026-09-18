@@ -194,7 +194,7 @@ function ArrayVisualization({ nums, left, right, mid }) {
               border: isLeft || isRight ? '3px solid #ef4444' : isMid ? '2px solid #f59e0b' : '1px solid var(--border)',
               fontSize: 12,
               fontWeight: 600,
-              color: 'var(--code-bg)',
+              color: (isMid ? 'var(--text-on-light)' : (isInRange ? 'var(--text-on-light)' : 'var(--text-inverse)')),
             }}
             animate={{ scale: isMid ? 1.15 : 1 }}
           >

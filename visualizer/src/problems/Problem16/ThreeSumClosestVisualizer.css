@@ -1,4 +1,5 @@
 .tsc3-shell {
+  --tsc3-fixed: #92400e;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -6,8 +7,12 @@
   min-height: 480px;
   gap: 0;
   overflow: hidden;
-  background: #fff;
+  background: var(--surface);
   font-family: system-ui, -apple-system, sans-serif;
+}
+
+:root[data-theme="dark"] .tsc3-shell {
+  --tsc3-fixed: #fbbf24;
 }
 
 .tsc3-panel {
@@ -28,12 +33,12 @@
   border-bottom: 1px solid var(--border);
   font-weight: 600;
   font-size: 13px;
-  color: var(--surface2);
+  color: var(--text);
   flex-shrink: 0;
 }
 
 .tsc3-error {
-  color: #dc2626;
+  color: var(--error);
   font-weight: 400;
   font-size: 11px;
 }
@@ -57,7 +62,7 @@
   padding: 6px 12px;
   border: 1px solid var(--border);
   border-radius: 4px;
-  background: #fff;
+  background: var(--surface);
   font-size: 12px;
   cursor: pointer;
   transition: all 0.2s;
@@ -65,7 +70,7 @@
 }
 
 .tsc3-chip:hover {
-  background: var(--primary-glow);
+  background: color-mix(in srgb, var(--primary) 8%, var(--surface));
   color: var(--text);
   border-color: var(--primary);
 }
@@ -80,6 +85,8 @@
   padding: 8px;
   border: 1px solid var(--border);
   border-radius: 4px;
+  background: var(--code-bg);
+  color: var(--text);
   font-size: 12px;
   font-family: 'Monaco', 'Courier New', monospace;
 }
@@ -109,35 +116,35 @@
   width: 50px;
   height: 50px;
   border-radius: 6px;
-  background: #f3f4f6;
+  background: var(--surface2);
   border: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
   font-size: 14px;
-  color: #607086;
+  color: var(--text);
   transition: all 0.2s;
   position: relative;
   z-index: 1;
 }
 
 .tsc3-cell.i {
-  background: #fef08a;
-  border-color: #eab308;
-  color: #854d0e;
+  background: color-mix(in srgb, var(--tsc3-fixed) 8%, var(--surface));
+  border-color: var(--tsc3-fixed);
+  color: var(--tsc3-fixed);
 }
 
 .tsc3-cell.left {
-  background: #fecaca;
-  border-color: #fca5a5;
-  color: #7f1d1d;
+  background: color-mix(in srgb, var(--error) 8%, var(--surface));
+  border-color: var(--error);
+  color: var(--error);
 }
 
 .tsc3-cell.right {
-  background: #a7f3d0;
-  border-color: #6ee7b7;
-  color: #064e3b;
+  background: color-mix(in srgb, var(--success) 8%, var(--surface));
+  border-color: var(--success);
+  color: var(--success);
 }
 
 .tsc3-cell.active {
@@ -150,7 +157,7 @@
   left: 50%;
   transform: translateX(-50%);
   font-size: 10px;
-  color: #627794;
+  color: var(--text-muted);
   font-weight: 500;
 }
 
@@ -174,18 +181,18 @@
 }
 
 .tsc3-ptr-i {
-  background: #eab308;
-  color: #6d3f0c;
+  background: color-mix(in srgb, var(--tsc3-fixed) 8%, var(--surface));
+  color: var(--tsc3-fixed);
 }
 
 .tsc3-ptr-l {
-  background: var(--error-glow);
+  background: color-mix(in srgb, var(--error) 8%, var(--surface));
   color: var(--text);
   border: 1px solid var(--error);
 }
 
 .tsc3-ptr-r {
-  background: var(--success-glow);
+  background: color-mix(in srgb, var(--success) 8%, var(--surface));
   color: var(--text);
   border: 1px solid var(--success);
 }
@@ -195,7 +202,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 8px;
   padding: 10px;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--text);
   border-radius: 4px;
   margin-top: 12px;
@@ -213,12 +220,12 @@
 .tsc3-sum-val {
   font-size: 18px;
   font-weight: bold;
-  color: #0b7db0;
+  color: var(--info);
 }
 
 .tsc3-sum-diff {
   font-size: 12px;
-  color: #617086;
+  color: var(--text-muted);
   padding: 4px 6px;
   background: var(--surface2);
   border-radius: 3px;
@@ -226,8 +233,8 @@
 }
 
 .tsc3-sum-diff.updated {
-  background: #fef08a;
-  color: #854d0e;
+  background: color-mix(in srgb, var(--tsc3-fixed) 8%, var(--surface));
+  color: var(--tsc3-fixed);
   font-weight: bold;
 }
 
@@ -240,18 +247,18 @@
 }
 
 .tsc3-sum-verdict.match {
-  background: #dcfce7;
-  color: #15803d;
+  background: color-mix(in srgb, var(--success) 8%, var(--surface));
+  color: var(--success);
 }
 
 .tsc3-sum-verdict.less {
-  background: #dbeafe;
-  color: #1e40af;
+  background: color-mix(in srgb, var(--info) 8%, var(--surface));
+  color: var(--info);
 }
 
 .tsc3-sum-verdict.greater {
-  background: #fee2e2;
-  color: #991b1b;
+  background: color-mix(in srgb, var(--error) 8%, var(--surface));
+  color: var(--error);
 }
 
 .tsc3-closest-display {
@@ -259,7 +266,7 @@
   flex-direction: column;
   gap: 6px;
   padding: 10px;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--text);
   border-radius: 4px;
 }
@@ -275,7 +282,7 @@
 .tsc3-closest-value {
   font-size: 20px;
   font-weight: bold;
-  color: #0b7db0;
+  color: var(--info);
 }
 
 .tsc3-result-box {
@@ -283,15 +290,15 @@
   flex-direction: column;
   gap: 8px;
   padding: 12px;
-  background: linear-gradient(135deg, #dcfce7 0%, #dbeafe 100%);
-  border: 2px solid #86efac;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--success) 8%, var(--surface)) 0%, color-mix(in srgb, var(--info) 8%, var(--surface)) 100%);
+  border: 2px solid var(--success);
   border-radius: 6px;
   margin-top: 8px;
 }
 
 .tsc3-result-label {
   font-size: 11px;
-  color: #15803d;
+  color: var(--text);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -300,7 +307,7 @@
 .tsc3-result-value {
   font-size: 24px;
   font-weight: bold;
-  color: #15803d;
+  color: var(--text);
 }
 
 .tsc3-status {
@@ -317,14 +324,14 @@
 }
 
 .tsc3-status.highlight {
-  background: #fef08a;
-  color: #854d0e;
+  background: color-mix(in srgb, var(--tsc3-fixed) 8%, var(--surface));
+  color: var(--tsc3-fixed);
   font-weight: 600;
 }
 
 .tsc3-status.done {
-  background: #dcfce7;
-  color: #15803d;
+  background: color-mix(in srgb, var(--success) 8%, var(--surface));
+  color: var(--success);
   font-weight: 600;
 }
 

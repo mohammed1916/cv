@@ -129,7 +129,7 @@ function GeneSequenceVisualization({ gene, highlight }) {
             justifyContent: 'center',
             fontSize: 12,
             fontWeight: 600,
-            color: highlight && highlight === idx ? '#0c4a6e' : bases.includes(base) ? 'var(--surface2)' : 'var(--text-muted)',
+            color: highlight && highlight === idx ? '#0c4a6e' : bases.includes(base) ? 'var(--text-on-light)' : 'var(--text-muted)',
           }}
           animate={{
             scale: highlight && highlight === idx ? 1.15 : 1,
@@ -152,7 +152,7 @@ function VisualizationPanel({ step, applyEx }) {
       )}
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button

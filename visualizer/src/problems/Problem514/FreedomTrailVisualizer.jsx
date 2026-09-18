@@ -175,7 +175,7 @@ function VisualizationPanel({ ring, key, step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -198,7 +198,7 @@ function VisualizationPanel({ ring, key, step, applyEx }) {
 
       {/* Ring Visualization */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Ring: {ring}</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Ring: {ring}</div>
         <svg width="100%" height="250" viewBox="0 0 250 250" style={{ border: '1px solid #e5e7eb', borderRadius: 6 }}>
           <circle cx="125" cy="125" r="80" fill="none" stroke="var(--border)" strokeWidth="2" />
           {ring.split('').map((char, idx) => {
@@ -242,7 +242,7 @@ function VisualizationPanel({ ring, key, step, applyEx }) {
 
       {/* Key Progress */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Spelling Progress
         </div>
         <div style={{ display: 'flex', gap: 8 }}>

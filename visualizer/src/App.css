@@ -60,7 +60,7 @@
   box-shadow: 0 8px 24px var(--primary-glow);
 }
 
-.chat-launcher.selecting { background: var(--warning); color: var(--code-bg); }
+.chat-launcher.selecting { background: var(--warning); color: var(--text-inverse); }
 
 body.chat-select-mode * { cursor: crosshair !important; }
 

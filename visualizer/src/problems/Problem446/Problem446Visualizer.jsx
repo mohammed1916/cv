@@ -137,7 +137,7 @@ function snippetIdForPhase(phase) {
 function DPArray({ nums, dp, currentIdx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
         DP Array (subsequence counts)
       </header>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', minHeight: 60, alignContent: 'flex-start' }}>
@@ -176,7 +176,7 @@ function DPArray({ nums, dp, currentIdx }) {
 function InputArray({ nums, currentIdx, diff1, diff2 }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
         Input Array
       </header>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', minHeight: 60, alignContent: 'flex-start' }}>
@@ -222,7 +222,7 @@ function VisualizationPanel({ step, nums, EXAMPLES, handleExampleClick, numsInpu
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Examples
         </div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>

@@ -194,7 +194,7 @@ export default function LongestValidParenthesesVisualizer() {
     <div className="lvp-panel">
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
         <div>
-          <div style={{ fontSize: 13, fontWeight: 600, color: "var(--surface2)", marginBottom: 8 }}>
+          <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text)", marginBottom: 8 }}>
             Examples
           </div>
           <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
@@ -210,7 +210,7 @@ export default function LongestValidParenthesesVisualizer() {
                   fontSize: 12,
                   backgroundColor: input === ex.s ? "#e0f2fe" : "var(--surface2)",
                   fontWeight: input === ex.s ? 600 : 400,
-                  color: "var(--surface2)",
+                  color: (input === ex.s ? 'var(--text-on-light)' : 'var(--text)'),
                 }}
               >
                 {ex.label}
@@ -220,7 +220,7 @@ export default function LongestValidParenthesesVisualizer() {
         </div>
 
         <div>
-          <label style={{ fontSize: 13, fontWeight: 600, color: "var(--surface2)", display: "block", marginBottom: 8 }}>
+          <label style={{ fontSize: 13, fontWeight: 600, color: "var(--text)", display: "block", marginBottom: 8 }}>
             String
           </label>
           <input
@@ -250,7 +250,7 @@ export default function LongestValidParenthesesVisualizer() {
     <div className="lvp-panel">
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
         <div>
-          <div style={{ fontSize: 13, fontWeight: 600, color: "var(--surface2)", marginBottom: 8 }}>
+          <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text)", marginBottom: 8 }}>
             String: {step?.charIdx >= 0 ? `Index ${step.charIdx}` : ""}
           </div>
           <div style={{ display: "flex", gap: 3, flexWrap: "wrap", minHeight: 40, padding: 8, backgroundColor: "var(--surface)", borderRadius: 4 }}>
@@ -275,7 +275,7 @@ export default function LongestValidParenthesesVisualizer() {
                   fontSize: 14,
                   fontWeight: "bold",
                   borderRadius: 4,
-                  color: "var(--surface2)",
+                  color: "var(--text)",
                   border: i === charIdx ? "2px solid #d97706" : "none",
                 }}
               >
@@ -287,7 +287,7 @@ export default function LongestValidParenthesesVisualizer() {
 
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: "var(--surface2)", marginBottom: 8 }}>
+            <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text)", marginBottom: 8 }}>
               Stack (top→bottom)
             </div>
             <div
@@ -315,7 +315,7 @@ export default function LongestValidParenthesesVisualizer() {
                       borderRadius: 4,
                       fontSize: 13,
                       fontWeight: "bold",
-                      color: "var(--surface2)",
+                      color: "var(--text-on-light)",
                     }}
                   >
                     {val}
@@ -326,7 +326,7 @@ export default function LongestValidParenthesesVisualizer() {
           </div>
 
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: "var(--surface2)", marginBottom: 8 }}>
+            <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text)", marginBottom: 8 }}>
               Max Length
             </div>
             <div
@@ -448,7 +448,7 @@ export default function LongestValidParenthesesVisualizer() {
       <section className="lvp-hero">
         <div className="lvp-hero-copy">
           <span className="lvp-kicker">Longest Valid Parentheses</span>
-          <h2 style={{ marginTop: 8, marginBottom: 12, fontSize: 28, fontWeight: 700, color: "var(--surface2)" }}>
+          <h2 style={{ marginTop: 8, marginBottom: 12, fontSize: 28, fontWeight: 700, color: "var(--text)" }}>
             Find the longest valid parentheses substring
           </h2>
           <p style={{ fontSize: 14, color: "var(--text-muted)", lineHeight: 1.6 }}>

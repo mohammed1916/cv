@@ -105,7 +105,7 @@ function VisualizationPanel({ m, n, flips, step }) {
 
       {/* Matrix */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Matrix ({m}x{n})
         </div>
         <div style={{

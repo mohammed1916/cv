@@ -1,4 +1,6 @@
 .ts3-shell {
+    --ts3-fixed: #92400e;
+    --ts3-right: #9a3412;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -6,6 +8,11 @@
     min-height: 480px;
     gap: 0;
     overflow: hidden;
+}
+
+:root[data-theme="dark"] .ts3-shell {
+    --ts3-fixed: #fbbf24;
+    --ts3-right: #fdba74;
 }
 
 .ts3-panel {
@@ -31,7 +38,7 @@
 }
 
 .ts3-error {
-    color: #ea0c0c;
+    color: var(--error);
     font-size: 12px;
     font-weight: 400;
 }
@@ -54,7 +61,7 @@
 .ts3-chip {
     border: 1px solid var(--border);
     color: var(--text-muted);
-    background: rgba(30, 41, 59, 0.8);
+    background: var(--surface);
     border-radius: 999px;
     padding: 4px 12px;
     font-size: 12px;
@@ -63,7 +70,7 @@
 }
 
 .ts3-chip:hover {
-    background: var(--border);
+    background: var(--surface3);
     color: var(--text);
     border-color: var(--text-muted);
 }
@@ -123,26 +130,26 @@
 }
 
 .ts3-cell.fix {
-    border-color: var(--warning);
-    background: rgba(251, 191, 36, 0.12);
-    color: var(--warning);
+    border-color: var(--ts3-fixed);
+    background: color-mix(in srgb, var(--ts3-fixed) 8%, var(--surface));
+    color: var(--ts3-fixed);
 }
 
 .ts3-cell.left {
     border-color: var(--info);
-    background: rgba(56, 189, 248, 0.12);
+    background: color-mix(in srgb, var(--info) 8%, var(--surface));
     color: var(--info);
 }
 
 .ts3-cell.right {
-    border-color: #f97316;
-    background: rgba(249, 115, 22, 0.12);
-    color: #f97316;
+    border-color: var(--ts3-right);
+    background: color-mix(in srgb, var(--ts3-right) 8%, var(--surface));
+    color: var(--ts3-right);
 }
 
 .ts3-cell.found {
     border-color: var(--success);
-    background: rgba(34, 197, 94, 0.15);
+    background: color-mix(in srgb, var(--success) 8%, var(--surface));
     color: var(--success);
     box-shadow: 0 0 12px var(--success-glow);
 }
@@ -168,18 +175,18 @@
 }
 
 .ts3-ptr-i {
-    background: rgba(251, 191, 36, 0.2);
-    color: var(--warning);
+    background: color-mix(in srgb, var(--ts3-fixed) 8%, var(--surface));
+    color: var(--ts3-fixed);
 }
 
 .ts3-ptr-l {
-    background: rgba(56, 189, 248, 0.2);
+    background: color-mix(in srgb, var(--info) 8%, var(--surface));
     color: var(--info);
 }
 
 .ts3-ptr-r {
-    background: rgba(249, 115, 22, 0.2);
-    color: #f97316;
+    background: color-mix(in srgb, var(--ts3-right) 8%, var(--surface));
+    color: var(--ts3-right);
 }
 
 /* ── Sum box ── */
@@ -213,25 +220,25 @@
 }
 
 .ts3-sum-verdict.zero {
-    background: rgba(34, 197, 94, 0.18);
+    background: color-mix(in srgb, var(--success) 8%, var(--surface));
     color: var(--success);
 }
 
 .ts3-sum-verdict.neg {
-    background: rgba(56, 189, 248, 0.15);
+    background: color-mix(in srgb, var(--info) 8%, var(--surface));
     color: var(--info);
 }
 
 .ts3-sum-verdict.pos {
-    background: rgba(249, 115, 22, 0.15);
-    color: #f97316;
+    background: color-mix(in srgb, var(--ts3-right) 8%, var(--surface));
+    color: var(--ts3-right);
 }
 
 /* ── Triplets ── */
 .ts3-triplet {
     padding: 8px 12px;
-    background: rgba(34, 197, 94, 0.1);
-    border: 1px solid rgba(34, 197, 94, 0.3);
+    background: color-mix(in srgb, var(--success) 8%, var(--surface));
+    border: 1px solid var(--success);
     border-radius: 8px;
     color: var(--success);
     font-size: 14px;

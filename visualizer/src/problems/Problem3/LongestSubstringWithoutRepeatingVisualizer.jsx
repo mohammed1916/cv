@@ -314,7 +314,7 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
           </div>
           <div className="lswrc-var-row" style={{ borderColor: '#8b5cf6' }}>
             <span className="lswrc-var-name">max_len</span>
-            <span className="lswrc-var-val highlight" style={{ color: '#7e56f8' }}>{step?.maxLen ?? '–'}</span>
+            <span className="lswrc-var-val highlight" style={{ color: 'var(--primary)' }}>{step?.maxLen ?? '–'}</span>
           </div>
         </div>
       </div>

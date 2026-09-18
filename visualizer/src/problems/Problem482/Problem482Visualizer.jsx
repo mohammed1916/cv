@@ -118,7 +118,7 @@ function VisualizationPanel({ s, k, step, applyEx }) {
       )}
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -163,7 +163,7 @@ function VisualizationPanel({ s, k, step, applyEx }) {
 
       {step?.cleaned && step.cleaned.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>After Cleaning</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>After Cleaning</div>
           <div style={{ display: 'flex', gap: 3, flexWrap: 'wrap', padding: 10, backgroundColor: '#f9fafb', borderRadius: 6, border: '1px solid var(--border)' }}>
             {step.cleaned.map((ch, i) => (
               <motion.div
@@ -192,7 +192,7 @@ function VisualizationPanel({ s, k, step, applyEx }) {
 
       {step?.groups && step.groups.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Groups Formed</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Groups Formed</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
             {step.groups.map((grp, i) => (
               <motion.div

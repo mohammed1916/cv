@@ -113,7 +113,7 @@ export default function PermutationInStringVisualizer() {
             inputError={inputError}
           />
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
-            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>s1: <strong>{s1}</strong> | s2: <strong>{s2}</strong></div>
+            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>s1: <strong>{s1}</strong> | s2: <strong>{s2}</strong></div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                 {EXAMPLES.map(e => (
                     <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: 'var(--surface2)' }}>
@@ -121,7 +121,7 @@ export default function PermutationInStringVisualizer() {
                     </button>
                 ))}
             </div>
-            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginTop: 8 }}>Window</div>
+            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginTop: 8 }}>Window</div>
             <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
                 {s2.split("").map((ch, i) => {
                     const inWin = step && i >= step.winStart && i <= step.winEnd;
@@ -131,7 +131,7 @@ export default function PermutationInStringVisualizer() {
                             width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center',
                             backgroundColor: isMatch ? '#86efac' : inWin ? '#fbbf24' : '#f3f4f6',
                             border: inWin ? '2px solid #0ea5e9' : '1px solid var(--border)',
-                            borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: 'var(--surface2)'
+                            borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: 'var(--text-on-light)'
                         }}>
                             {ch}
                         </motion.div>

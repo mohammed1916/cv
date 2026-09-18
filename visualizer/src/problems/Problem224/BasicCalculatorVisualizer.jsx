@@ -119,7 +119,7 @@ export default function BasicCalculatorVisualizer() {
         />),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map(e => (
                 <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: 'var(--surface2)' }}>
@@ -129,13 +129,13 @@ export default function BasicCalculatorVisualizer() {
             </div>
           </div>
 
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 4 }}>Expression</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 4 }}>Expression</div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, minHeight: 40, padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
             {chars.map((ch, i) => (
               <motion.span key={i} animate={{ scale: i === charIdx ? 1.4 : 1 }} style={{
                 fontSize: 14, fontWeight: 'bold', padding: '4px 8px',
                 backgroundColor: i === charIdx ? '#fbbf24' : /\d/.test(ch) ? '#dbeafe' : ch === '(' || ch === ')' ? '#fee2e2' : '#f3f4f6',
-                borderRadius: 4, color: 'var(--surface2)'
+                borderRadius: 4, color: 'var(--text-on-light)'
               }}>
                 {ch}
               </motion.span>
@@ -144,7 +144,7 @@ export default function BasicCalculatorVisualizer() {
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 6 }}>Stack (top→bottom)</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 6 }}>Stack (top→bottom)</div>
               <div style={{ display: 'flex', flexDirection: 'column-reverse', gap: 4, minHeight: 60, padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
                 <AnimatePresence>
                   {stack.map((v, i) => (
@@ -161,7 +161,7 @@ export default function BasicCalculatorVisualizer() {
             </div>
 
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 6 }}>State</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 6 }}>State</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6, padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12 }}>
                   <span style={{ color: 'var(--text-muted)' }}>result</span>
@@ -169,7 +169,7 @@ export default function BasicCalculatorVisualizer() {
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12 }}>
                   <span style={{ color: 'var(--text-muted)' }}>num</span>
-                  <span style={{ fontWeight: 'bold', color: 'var(--surface2)' }}>{num}</span>
+                  <span style={{ fontWeight: 'bold', color: 'var(--text)' }}>{num}</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12 }}>
                   <span style={{ color: 'var(--text-muted)' }}>sign</span>

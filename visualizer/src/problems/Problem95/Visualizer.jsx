@@ -291,7 +291,7 @@ function TreeCell({ tree, index, highlight }) {
                 dominantBaseline="central"
                 fontSize={12}
                 fontWeight={700}
-                fill="var(--surface)"
+                fill="var(--text-on-light)"
               >
                 {nd.val}
               </text>

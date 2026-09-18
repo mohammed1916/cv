@@ -155,7 +155,7 @@ function VisualizationPanel({ step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -178,7 +178,7 @@ function VisualizationPanel({ step, applyEx }) {
 
       {/* URL Mapping */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>URL Mappings</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>URL Mappings</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {step?.urlToCode && Array.from(step.urlToCode.entries()).map(([originalUrl, code]) => (
             <motion.div

@@ -136,7 +136,7 @@ const EXAMPLES = getExamplesOr('largest-rectangle-in-histogram', [
 function HistogramVisualization({ step, heights, inputError, input, setInput, handleReset, applyExample }) {
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
         Histogram Visualization
         {inputError && <span style={{ marginLeft: 8, color: '#e91414', fontSize: 12 }}>{inputError}</span>}
       </header>
@@ -213,7 +213,7 @@ function HistogramVisualization({ step, heights, inputError, input, setInput, ha
 function StackState({ step, heights }) {
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 16, padding: 16, borderLeft: '1px solid var(--text)' }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
         Stack & State
       </header>
 
@@ -260,14 +260,14 @@ function StackState({ step, heights }) {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
           <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 4 }}>
             <div style={{ fontSize: 11, fontWeight: 500, color: 'var(--text-muted)', marginBottom: 6 }}>Current Index</div>
-            <div style={{ fontSize: 14, fontFamily: 'monospace', fontWeight: 600, color: 'var(--surface2)' }}>
+            <div style={{ fontSize: 14, fontFamily: 'monospace', fontWeight: 600, color: 'var(--text)' }}>
               {step?.i >= 0 ? step.i : '-'}
             </div>
           </div>
 
           <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 4 }}>
             <div style={{ fontSize: 11, fontWeight: 500, color: 'var(--text-muted)', marginBottom: 6 }}>Current Height</div>
-            <div style={{ fontSize: 14, fontFamily: 'monospace', fontWeight: 600, color: 'var(--surface2)' }}>
+            <div style={{ fontSize: 14, fontFamily: 'monospace', fontWeight: 600, color: 'var(--text)' }}>
               {step?.h >= 0 ? step.h : '-'}
             </div>
           </div>

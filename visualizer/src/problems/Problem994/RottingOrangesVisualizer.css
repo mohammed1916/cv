@@ -56,7 +56,7 @@
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--code-bg);
-  color: var(--surface);
+  color: var(--text);
   font-family: monospace;
   padding: 8px 10px;
 }

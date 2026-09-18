@@ -95,14 +95,14 @@ function VisualizationPanel({ nums, k, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: 'var(--surface2)' }}>{e.label}</button>)}
         </div>
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Input Array (k={k})</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Input Array (k={k})</div>
         <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6 }}>
           {nums.map((num, idx) => {
             const inWindow = step && idx >= (step.windowStart || 0) && idx < (step.windowEnd || 0)
@@ -132,7 +132,7 @@ function VisualizationPanel({ nums, k, step, applyEx }) {
 
       {step?.window && step.window.length > 0 && (
         <div>
-          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
             Current Window {step.sorted ? '(sorted)' : ''}
           </div>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>

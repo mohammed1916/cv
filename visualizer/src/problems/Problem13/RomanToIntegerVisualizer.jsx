@@ -276,7 +276,7 @@ export default function RomanToIntegerVisualizer() {
               cursor: 'pointer',
               fontSize: 12,
               backgroundColor: romanInput === (e.s || '') ? '#dbeafe' : 'var(--surface2)',
-              color: romanInput === (e.s || '') ? '#1e40af' : 'var(--surface2)',
+              color: romanInput === (e.s || '') ? '#1e40af' : 'var(--text)',
             }}
           >
             {e.label}
@@ -299,7 +299,7 @@ export default function RomanToIntegerVisualizer() {
       {step && (
         <>
           <div style={{ padding: 12, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 12, border: '1px solid var(--text)' }}>
-            <div style={{ fontWeight: 600, marginBottom: 8, color: 'var(--surface2)' }}>{step.message}</div>
+            <div style={{ fontWeight: 600, marginBottom: 8, color: 'var(--text)' }}>{step.message}</div>
           </div>
 
           {/* String visualization */}
@@ -314,7 +314,7 @@ export default function RomanToIntegerVisualizer() {
                   animate={{
                     scale: step.index === i ? 1.2 : 1,
                     backgroundColor: step.index === i ? '#3b82f6' : 'var(--surface)',
-                    color: step.index === i ? 'var(--surface)' : 'var(--surface2)',
+                    color: step.index === i ? 'var(--text-on-light)' : 'var(--text)',
                   }}
                   style={{
                     padding: '8px 12px',
@@ -345,7 +345,7 @@ export default function RomanToIntegerVisualizer() {
                     padding: '12px 16px',
                     borderRadius: 6,
                     backgroundColor: '#3b82f6',
-                    color: 'var(--surface)',
+                    color: 'var(--text-on-light)',
                     fontFamily: 'monospace',
                     fontSize: 16,
                     fontWeight: 700,

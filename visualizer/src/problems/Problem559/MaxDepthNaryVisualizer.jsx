@@ -442,7 +442,7 @@ function TreeVisualization({ root, nodeMap, step, canvasWidth = 400, canvasHeigh
         return (
           <g key={`node-${node.id}`}>
             <circle cx={pos.x} cy={pos.y} r="20" fill={fill} stroke={stroke} strokeWidth={strokeWidth} />
-            <text x={pos.x} y={pos.y + 5} textAnchor="middle" fontSize="14" fontWeight="700" fill="var(--surface)">
+            <text x={pos.x} y={pos.y + 5} textAnchor="middle" fontSize="14" fontWeight="700" fill={isActive || isProcessing || returnDepth !== undefined ? 'var(--text-on-light)' : 'var(--text)'}>
               {node.val}
             </text>
             {returnDepth !== undefined && (

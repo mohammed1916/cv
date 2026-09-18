@@ -269,7 +269,7 @@ function VisualizationPanel({ step }) {
               x={p.x} y={p.y + 5}
               textAnchor="middle"
               fontSize={14} fontWeight={700}
-              fill={p.id === currentId || visitedIds.has(p.id) ? 'var(--code-bg)' : 'var(--text)'}
+              fill={p.id === currentId || visitedIds.has(p.id) || stackIds.has(p.id) ? 'var(--text-on-light)' : 'var(--text)'}
             >
               {p.val}
             </text>
@@ -450,7 +450,7 @@ export default function Problem94Visualizer() {
               padding: '6px 12px', borderRadius: 6, cursor: 'pointer',
               border: e.label === ex.label ? '2px solid #059669' : '1px solid var(--border)',
               background: e.label === ex.label ? '#d1fae5' : 'var(--surface)',
-              color: 'var(--code-bg)', fontSize: 12, fontWeight: 600,
+              color: (e.label === ex.label ? 'var(--text-on-light)' : 'var(--text)'), fontSize: 12, fontWeight: 600,
             }}
           >
             {e.label} [{e.tree.map((v) => (v == null ? 'null' : v)).join(',')}]

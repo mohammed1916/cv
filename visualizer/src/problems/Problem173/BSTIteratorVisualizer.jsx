@@ -109,7 +109,7 @@ export default function BSTIteratorVisualizer() {
                       borderRadius: 3,
                       fontSize: 11,
                       fontWeight: 'bold',
-                      color: i === step.stack.length - 1 ? '#fff' : 'var(--surface2)',
+                      color: i === step.stack.length - 1 ? '#fff' : 'var(--text-on-light)',
                     }}
                   >
                     {val}

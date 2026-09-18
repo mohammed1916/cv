@@ -169,7 +169,7 @@ function SuperPowerVisualization({ base, exponents, step }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
       {/* Exponent digits breakdown */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Exponent Digits</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Exponent Digits</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
           {expDigits.map((digit, idx) => {
             const isCurrent = idx === step?.currentIdx && step && !step.done
@@ -212,7 +212,7 @@ function SuperPowerVisualization({ base, exponents, step }) {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Base Power Calculation</div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Base Power Calculation</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, marginBottom: 8 }}>
             <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#dbeafe', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#1e40af' }}>Base</div>
@@ -277,7 +277,7 @@ function SuperPowerVisualization({ base, exponents, step }) {
 
       {/* Final result */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Result</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Result</div>
         <motion.div
           style={{
             padding: 16,

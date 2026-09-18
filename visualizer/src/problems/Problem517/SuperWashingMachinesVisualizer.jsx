@@ -113,7 +113,7 @@ function VisualizationPanel({ machines, step }) {
 
       {/* Machines */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Washing Machines (Target: {step?.target ?? Math.floor((step?.total || 0) / machines.length)})
         </div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>

@@ -289,7 +289,7 @@ function GridVisualization({ grid, currentRegion, highlightRegions = [] }) {
               alignItems: 'center',
               justifyContent: 'center',
               fontSize: cellSize > 30 ? 12 : 10,
-              color: val === 1 ? 'var(--surface2)' : 'var(--surface2)',
+              color: val === 1 ? 'var(--text)' : 'var(--text)',
               fontWeight: 'bold',
             }}
           >

@@ -148,7 +148,7 @@ function VisualizationPanel({ s, step, inputPanel }) {
 
       {/* String */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>String: {s}</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>String: {s}</div>
         <div style={{ display: 'flex', gap: 4 }}>
           {s.split('').map((char, idx) => {
             const isInRange = step && idx >= step.i && idx <= step.j
@@ -176,7 +176,7 @@ function VisualizationPanel({ s, step, inputPanel }) {
 
       {/* DP Table */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>DP Table</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>DP Table</div>
         <div style={{ overflowX: 'auto' }}>
           <table style={{ borderCollapse: 'collapse', fontSize: 11, minWidth: 300 }}>
             <tbody>

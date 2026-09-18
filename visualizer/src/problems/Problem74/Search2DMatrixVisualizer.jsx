@@ -115,10 +115,10 @@ export default function Search2DMatrixVisualizer() {
                         {ex.label}
                     </button>
                 ))}
-                <span style={{ fontSize: 12, fontWeight: 'bold', color: 'var(--surface2)', marginLeft: 'auto' }}>target = {target}</span>
+                <span style={{ fontSize: 12, fontWeight: 'bold', color: 'var(--text)', marginLeft: 'auto' }}>target = {target}</span>
             </div>
 
-            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>Matrix</div>
+            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>Matrix</div>
             <div style={{ display: 'grid', gridTemplateColumns: `repeat(${cols}, minmax(50px, 1fr))`, gap: 4 }}>
                 {matrix.map((row, i) =>
                     row.map((val, j) => {
@@ -131,7 +131,7 @@ export default function Search2DMatrixVisualizer() {
                                 padding: '8px 4px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
                                 backgroundColor: isFound ? '#dcfce7' : isMid ? '#fbbf24' : inRange ? '#dbeafe' : '#f3f4f6',
                                 border: isMid ? '2px solid #f59e0b' : inRange ? '1px solid #0ea5e9' : '1px solid var(--border)',
-                                borderRadius: 4, fontSize: 11, fontWeight: 'bold', color: 'var(--surface2)'
+                                borderRadius: 4, fontSize: 11, fontWeight: 'bold', color: 'var(--text-on-light)'
                             }}>
                                 <span>{val}</span>
                                 <span style={{ fontSize: 9, color: 'var(--text-muted)' }}>[{flat}]</span>
@@ -144,7 +144,7 @@ export default function Search2DMatrixVisualizer() {
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6 }}>
                 <div>
                     <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>lo</div>
-                    <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--surface2)' }}>{lo}</div>
+                    <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--text)' }}>{lo}</div>
                 </div>
                 <div>
                     <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>mid</div>
@@ -152,7 +152,7 @@ export default function Search2DMatrixVisualizer() {
                 </div>
                 <div>
                     <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>hi</div>
-                    <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--surface2)' }}>{hi}</div>
+                    <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--text)' }}>{hi}</div>
                 </div>
             </div>
 

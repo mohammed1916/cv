@@ -302,7 +302,7 @@ function VisualizationPanel({ EXAMPLES, applyExample, selected, handleReset, ste
                           rx="4"
                           filter="url(#shadow)"
                           animate={{
-                            opacity: idx === step?.currentIdx ? 0.9 : 0.6,
+                            opacity: 0.9,
                           }}
                           transition={{ duration: 0.2 }}
                         />
@@ -312,7 +312,9 @@ function VisualizationPanel({ EXAMPLES, applyExample, selected, handleReset, ste
                           textAnchor="middle"
                           dominantBaseline="middle"
                           className="rde-envelope-label"
-                          fill="var(--code-bg)"
+                          fill={step?.phase === 'sort_start' || step?.phase === 'sort_done' || idx === step?.currentIdx || step?.nestingChain?.includes(idx)
+                            ? 'var(--text-on-light)'
+                            : 'var(--text-on-dark)'}
                           fontWeight="bold"
                           fontSize="12"
                         >

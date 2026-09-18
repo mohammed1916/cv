@@ -120,7 +120,7 @@ function VisualizationPanel({ word, step }) {
 
       {/* Word Display */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Word: {word}</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Word: {word}</div>
         <div style={{ display: 'flex', gap: 8 }}>
           {word.split('').map((char, idx) => {
             const isUpper = char === char.toUpperCase()

@@ -308,7 +308,7 @@ export default function Problem355Visualizer() {
                   cursor: 'pointer',
                   fontSize: 12,
                   backgroundColor: exIdx === i ? '#1da1f2' : 'var(--surface2)',
-                  color: exIdx === i ? '#fff' : 'var(--surface2)',
+                  color: exIdx === i ? '#fff' : 'var(--text)',
                   fontWeight: exIdx === i ? 600 : 400,
                 }}
               >

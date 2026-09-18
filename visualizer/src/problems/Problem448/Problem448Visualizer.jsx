@@ -143,7 +143,7 @@ function snippetIdForPhase(phase) {
 function InputArray({ nums, currentNum }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
         Input Array
       </header>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', minHeight: 80, alignContent: 'flex-start' }}>
@@ -180,7 +180,7 @@ function SeenSet({ seen, currentNum }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
         Seen Set ({arr.length} elements)
       </header>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', minHeight: 80, alignContent: 'flex-start' }}>
@@ -218,7 +218,7 @@ function SeenSet({ seen, currentNum }) {
 function ResultBuilder({ result }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
         Missing Numbers ({result.length} found)
       </header>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', minHeight: 80, alignContent: 'flex-start' }}>
@@ -259,7 +259,7 @@ function VisualizationPanel({ step, nums, EXAMPLES, handleExampleClick, numsInpu
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Examples
         </div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>

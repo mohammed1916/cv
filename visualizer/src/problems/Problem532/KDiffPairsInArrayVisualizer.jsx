@@ -173,7 +173,7 @@ function VisualizationPanel({ nums, k, step }) {
 
       {/* Frequency Map */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Number Frequencies</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Number Frequencies</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {step?.count && Array.from(step.count.entries()).map(([num, freq]) => {
             const isCurrent = step?.num === num

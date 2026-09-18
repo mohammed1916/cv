@@ -213,7 +213,7 @@ function snippetIdForPhase(phase) {
 function StackView({ stack, label, style = {} }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8, ...style }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
         {label}
       </header>
       <div style={{ display: 'flex', flexDirection: 'column-reverse', gap: 6, minHeight: 80, justifyContent: 'flex-end' }}>
@@ -250,7 +250,7 @@ function StackView({ stack, label, style = {} }) {
 function ResultList({ result }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
         Result: [{result.length} digits]
       </header>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', minHeight: 60, alignContent: 'flex-start' }}>
@@ -288,7 +288,7 @@ function VisualizationPanel({ step, list1, list2, EXAMPLES, handleExampleClick, 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Examples
         </div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>

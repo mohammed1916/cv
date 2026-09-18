@@ -142,7 +142,7 @@
 .binary-item-label {
   font-size: 12px;
   font-weight: 600;
-  color: var(--surface2);
+  color: var(--text);
 }
 
 .binary-item-value {
@@ -152,12 +152,13 @@
   border: 2px solid var(--border);
   font-family: 'Menlo', 'Monaco', monospace;
   font-size: 12px;
-  color: var(--surface2);
+  color: var(--text);
 }
 
 .binary-item-value.highlight {
   background-color: #dbeafe;
   border-color: #0284c7;
+  color: var(--text-on-light);
 }
 
 /* Results panel */
@@ -190,7 +191,7 @@
 .examples-label {
   font-size: 13px;
   font-weight: 600;
-  color: var(--surface2);
+  color: var(--text);
   margin-bottom: 8px;
 }
 
@@ -215,6 +216,7 @@
 .example-button:hover {
   border-color: var(--text-muted);
   background-color: var(--text);
+  color: var(--text-inverse);
 }
 
 .example-button:active {

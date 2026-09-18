@@ -162,7 +162,7 @@ function GuessVisualization({ n, pick, step }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
       {/* Range display */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 12 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 12 }}>
           Search Space
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12 }}>
@@ -227,7 +227,7 @@ function GuessVisualization({ n, pick, step }) {
 
       {/* Number range visualization */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 12 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 12 }}>
           Number Range [1, {n}]
         </div>
         <div style={{
@@ -314,7 +314,7 @@ function GuessVisualization({ n, pick, step }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 4 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-on-light)', marginBottom: 4 }}>
             Oracle Response
           </div>
           <div style={{
@@ -368,7 +368,7 @@ function VisualizationPanel({ n, pick, step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button

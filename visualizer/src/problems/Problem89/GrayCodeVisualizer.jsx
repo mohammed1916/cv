@@ -164,7 +164,7 @@ export default function GrayCodeVisualizer() {
                 </div>
             )}
 
-            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>Result Sequence</div>
+            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>Result Sequence</div>
             <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', flex: 1, overflow: 'auto', alignItems: 'flex-start' }}>
                 <AnimatePresence mode="popLayout">
                     {(step?.result ?? []).map((val, idx) => {
@@ -223,7 +223,7 @@ export default function GrayCodeVisualizer() {
     )
 
     const statusPanel = (
-        <div className="gc-status" style={{ padding: 8, fontSize: 12, color: 'var(--surface2)', backgroundColor: 'var(--surface)', borderTop: '1px solid var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+        <div className="gc-status" style={{ padding: 8, fontSize: 12, color: 'var(--text)', backgroundColor: 'var(--surface)', borderTop: '1px solid var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
             {step?.message || 'Ready'}
         </div>
     )

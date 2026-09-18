@@ -140,7 +140,7 @@ export default function MaxProductSubarrayVisualizer() {
                     {inputError && <div style={{ color: '#991b1b', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
                 </div>
 
-                <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>Array</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>Array</div>
                 <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', alignItems: 'center' }}>
                     {nums.map((val, i) => {
                         const isActive = step?.i === i
@@ -151,7 +151,7 @@ export default function MaxProductSubarrayVisualizer() {
                                 border: isActive ? '2px solid #f59e0b' : '1px solid var(--border)', borderRadius: 4
                             }}>
                                 <span style={{ fontSize: 10, color: 'var(--text-muted)' }}>{i}</span>
-                                <span style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--surface2)' }}>{val}</span>
+                                <span style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--text-on-light)' }}>{val}</span>
                             </motion.div>
                         )
                     })}

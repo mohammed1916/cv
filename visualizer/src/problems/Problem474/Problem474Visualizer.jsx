@@ -100,7 +100,7 @@ function DPTableView({ dp, m, n, updateRow, updateCol }) {
                       textAlign: 'center',
                       fontWeight: 600,
                       backgroundColor: isUpdated ? '#fef08a' : i === 0 || j === 0 ? '#e0f2fe' : 'var(--surface)',
-                      color: isUpdated ? '#92400e' : 'var(--surface2)',
+                      color: isUpdated ? '#92400e' : (i === 0 || j === 0 ? 'var(--text-on-light)' : 'var(--text)'),
                       minWidth: 35,
                     }}
                   >
@@ -127,7 +127,7 @@ function VisualizationPanel({ strs, m, n, step, applyEx }) {
       )}
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -184,7 +184,7 @@ function VisualizationPanel({ strs, m, n, step, applyEx }) {
 
       {step?.dp && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>DP Table (2D)</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>DP Table (2D)</div>
           <DPTableView dp={step.dp} m={m} n={n} updateRow={step.updateRow} updateCol={step.updateCol} />
         </div>
       )}

@@ -179,6 +179,35 @@ where panel width determines the layout; a desktop window can contain a narrow
 Lumino panel. Check light/dark contrast, non-color state cues and reduced motion.
 For example, 141 has an infinite collision pulse needing reduced-motion review.
 
+## Theme contrast correction (2026-09-18)
+
+Fixed a separate catalog-wide foreground-role defect: many cells and labels used
+`--surface2`, `--surface` or `--code-bg` as their text color, sometimes matching
+their background exactly. The correction changes foregrounds by context rather
+than changing the global surface palette:
+
+- Use `--text` on themed surfaces, `--text-on-light` / `--text-on-dark` on fixed
+  pale/dark fills, and `--text-inverse` for intentionally inverted themed fills.
+  Keep shape fills and text fills separate, including inside SVG.
+- Restored missing `--surface-1/2/3`, `--text-main` and `--text-primary` aliases.
+- Reconnected 3Sum's rendered cells to its state CSS and corrected highlighted
+  text in 3Sum, 3Sum Closest, 4Sum and Longest Substring Without Repeating Characters.
+- Added `npm.cmd run check:foreground-tokens`: 2,904 CSS/JS/JSX files pass the
+  foreground-role check. Two unused legacy files with existing syntax errors are
+  explicitly excluded; this is not a claim of complete rendered contrast coverage.
+- Browser checks pass for 3Sum, Roman to Integer, Length of Last Word, Plus One,
+  Longest Substring and Remove Element in both themes. 3Sum includes ordinary,
+  pointer, match and result states, reset, and a 390px viewport. Its sampled text
+  contrast remains above 4.5:1; both expected triplets are preserved.
+- Production build and 255 story tests pass. Comparing all 194 changed JSX files
+  against the prior revision found no new lint messages; existing lint errors and
+  the >500 kB main-chunk warning remain. The inventory is refreshed; story and
+  playground verification statuses are unchanged.
+
+Future edits must choose a text role from the actual background and run the new
+check alongside both theme-token checks. Do not replace foregrounds and background
+fills through a single color-to-token lookup.
+
 ## Ordered work queue
 
 ### Batch A: establish repeatable evidence

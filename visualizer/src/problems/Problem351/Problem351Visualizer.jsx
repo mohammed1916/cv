@@ -229,12 +229,12 @@ export default function Problem351Visualizer() {
           {step && (
             <>
               <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 11 }}>
-                <div style={{ fontWeight: 600, marginBottom: 6, color: 'var(--surface2)' }}>Step Message</div>
+                <div style={{ fontWeight: 600, marginBottom: 6, color: 'var(--text)' }}>Step Message</div>
                 <div style={{ color: 'var(--text-muted)', fontSize: 12, lineHeight: 1.5 }}>{step.message}</div>
               </div>
 
               <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6 }}>
-                <div style={{ fontWeight: 600, marginBottom: 8, color: 'var(--surface2)', fontSize: 11 }}>Input Stream</div>
+                <div style={{ fontWeight: 600, marginBottom: 8, color: 'var(--text)', fontSize: 11 }}>Input Stream</div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
                   {nums.map((num, i) => (
                     <motion.div
@@ -249,7 +249,7 @@ export default function Problem351Visualizer() {
                         border: '1px solid var(--border)',
                         fontSize: 12,
                         fontWeight: 600,
-                        color: 'var(--surface2)',
+                        color: 'var(--text)',
                       }}
                     >
                       {num}
@@ -294,10 +294,10 @@ export default function Problem351Visualizer() {
               </div>
 
               <div style={{ padding: 8, backgroundColor: '#f3f4f6', borderRadius: 6 }}>
-                <div style={{ fontWeight: 600, marginBottom: 6, color: 'var(--surface2)', fontSize: 11 }}>Summary</div>
+                <div style={{ fontWeight: 600, marginBottom: 6, color: 'var(--text-on-light)', fontSize: 11 }}>Summary</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>Intervals:</span>
-                  <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+                  <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-on-light)' }}>
                     {formatIntervals(step.intervals)}
                   </span>
                 </div>

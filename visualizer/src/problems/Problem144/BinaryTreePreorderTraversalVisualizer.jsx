@@ -229,7 +229,7 @@ function TreeVisualization({ root, currentNode, processedIds }) {
                 dy="0.3em"
                 fontSize={14}
                 fontWeight={600}
-                fill="var(--code-bg)"
+                fill={isCurrent || isProcessed ? 'var(--text-on-light)' : 'var(--text-inverse)'}
               >
                 {node.val}
               </text>

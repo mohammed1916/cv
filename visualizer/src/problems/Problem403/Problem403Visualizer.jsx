@@ -160,7 +160,7 @@ function StoneVisualization({ stones, step, selectedStones }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Stone Layout</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Stone Layout</div>
 
       <div style={{ position: 'relative', height: 60, backgroundColor: 'var(--surface2)', borderRadius: 8, overflow: 'hidden', border: '2px solid var(--border)' }}>
         <div style={{ position: 'absolute', width: '100%', height: '100%', display: 'flex', alignItems: 'flex-end' }}>
@@ -308,7 +308,7 @@ export default function Problem403Visualizer() {
       </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button

@@ -118,7 +118,7 @@ function VisualizationPanel({ x, y, step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -183,7 +183,7 @@ function VisualizationPanel({ x, y, step, applyEx }) {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 12 }}>Bit-by-Bit Comparison</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 12 }}>Bit-by-Bit Comparison</div>
         <div style={{ display: 'flex', gap: 2, justifyContent: 'flex-end' }}>
           {xBinary.split('').map((bit, idx) => {
             const yBit = yBinary[idx]

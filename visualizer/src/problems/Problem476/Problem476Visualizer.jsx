@@ -96,7 +96,7 @@ function VisualizationPanel({ num, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -118,7 +118,7 @@ function VisualizationPanel({ num, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Number</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Number</div>
         <div style={{
           padding: 12,
           backgroundColor: 'var(--surface2)',
@@ -132,7 +132,7 @@ function VisualizationPanel({ num, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Bits</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Bits</div>
         <div style={{ display: 'flex', gap: 4, justifyContent: 'center' }}>
           {binary.split('').map((bit, idx) => (
             <motion.div

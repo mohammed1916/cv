@@ -100,7 +100,7 @@ export default function PowXNVisualizer() {
     <div className="powxn-panel">
       <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
         <div>
-          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {EXAMPLES.map(e => (
               <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: 'var(--surface2)' }}>
@@ -109,7 +109,7 @@ export default function PowXNVisualizer() {
             ))}
           </div>
         </div>
-        <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--surface2)' }}>
+        <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>
           {x}^{n} = {Math.pow(x, n).toFixed(6)}
         </div>
       </div>

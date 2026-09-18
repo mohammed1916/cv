@@ -143,7 +143,7 @@ function VisualizationPanel({ step }) {
 
       {/* Inorder Sequence */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Inorder Sequence</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Inorder Sequence</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {step?.inorderSequence?.map((val, idx) => {
             const isLast = idx === step.inorderSequence.length - 1

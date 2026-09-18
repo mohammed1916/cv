@@ -200,7 +200,7 @@ function snippetIdForPhase(phase) {
 function TreeDisplay({ treeValues, currentVal, key }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
         Tree Structure ({treeValues.filter(v => v !== null && v !== undefined).length} nodes)
       </header>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', minHeight: 80, alignContent: 'flex-start' }}>
@@ -240,7 +240,7 @@ function TreeDisplay({ treeValues, currentVal, key }) {
 function SearchStatus({ step }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
         Search Status
       </header>
       <div style={{
@@ -274,7 +274,7 @@ function VisualizationPanel({ step, treeValues, EXAMPLES, handleExampleClick, tr
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Examples
         </div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>

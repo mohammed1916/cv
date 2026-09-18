@@ -323,7 +323,7 @@ function StringVisualization({ s1, s2, step }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
       {/* Input strings */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Input Strings</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Input Strings</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           {/* String s1 */}
           <div>
@@ -387,7 +387,7 @@ function StringVisualization({ s1, s2, step }) {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Current Check</div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Current Check</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
             <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#dbeafe', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#1e40af' }}>s1</div>
@@ -417,7 +417,7 @@ function StringVisualization({ s1, s2, step }) {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Split Attempt</div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-on-light)', marginBottom: 8 }}>Split Attempt</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
             <div>
               <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>No Swap</div>
@@ -475,7 +475,7 @@ function VisualizationPanel({ s1, s2, step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button

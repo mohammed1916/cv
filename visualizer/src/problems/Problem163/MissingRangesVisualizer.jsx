@@ -254,7 +254,7 @@ function NumberLine({ nums, lower, upper, currentIdx, gap, finalGap }) {
                   : 'none',
               fontSize: 11,
               fontWeight: 600,
-              color: 'var(--code-bg)',
+              color: (isGap || isFinalGap ? 'var(--text-on-light)' : (isNum ? 'var(--text-on-light)' : (isInRange ? 'var(--text-inverse)' : 'var(--text-on-light)'))),
               fontFamily: 'monospace',
             }}
             animate={{ scale: isGap || isFinalGap ? 1.1 : 1 }}

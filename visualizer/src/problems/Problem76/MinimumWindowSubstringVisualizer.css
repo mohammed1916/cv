@@ -13,7 +13,7 @@
 .mws-examples { display: flex; flex-wrap: wrap; gap: 6px; }
 .mws-chip { border-radius: 999px; border: 1px solid var(--border); background: rgba(30,41,59,.8); color: var(--border); padding: 4px 10px; cursor: pointer; }
 .mws-inputs { display: flex; gap: 8px; }
-.mws-input { border: 1px solid var(--border); border-radius: 8px; background: var(--code-bg); color: var(--surface); padding: 8px 10px; width: 100%; font-family: monospace; }
+.mws-input { border: 1px solid var(--border); border-radius: 8px; background: var(--code-bg); color: var(--text); padding: 8px 10px; width: 100%; font-family: monospace; }
 .mws-input.small { max-width: 120px; }
 .mws-string { display: flex; flex-wrap: wrap; gap: 6px; }
 .mws-char { min-width: 36px; border: 1px solid var(--border); border-radius: 8px; background: rgba(30,41,59,.7); display: grid; place-items: center; padding: 6px 4px; position: relative; }

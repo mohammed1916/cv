@@ -413,7 +413,7 @@ export default function PowerofFourVisualizer() {
                           fontWeight: 800,
                           fontSize: 16,
                           textAlign: 'center',
-                          color: 'var(--code-bg)',
+                          color: 'var(--text-on-light)',
                           background: result ? COLORS.pass : COLORS.fail,
                         }}
                       >

@@ -148,7 +148,7 @@ export default function ReorderListVisualizer() {
             <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, display: 'flex', gap: 2, flexWrap: 'wrap' }}>
                 {displayList.map((v, i) => (
                     <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                        <motion.div animate={{ scale: i === slow || i === fast ? 1.15 : 1 }} style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#dbeafe', border: '1px solid #0ea5e9', borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: 'var(--surface2)' }}>{v}</motion.div>
+                        <motion.div animate={{ scale: i === slow || i === fast ? 1.15 : 1 }} style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#dbeafe', border: '1px solid #0ea5e9', borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: 'var(--text-on-light)' }}>{v}</motion.div>
                         {i < displayList.length - 1 && <span style={{ color: '#5a779b' }}>→</span>}
                     </div>
                 ))}

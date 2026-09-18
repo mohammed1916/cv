@@ -265,7 +265,7 @@ export default function NumberOfProvincesVisualizer() {
                           borderRadius: 4,
                           border: isHighlighted ? '2px solid #0ea5e9' : '1px solid var(--border)',
                           backgroundColor: isHighlighted ? '#0ea5e9' : isRoot ? '#dcfce7' : 'var(--surface2)',
-                          color: isHighlighted ? '#fff' : 'var(--surface2)',
+                          color: isHighlighted ? '#fff' : (isRoot ? 'var(--text-on-light)' : 'var(--text)'),
                           fontSize: 11,
                           fontWeight: 600,
                         }}
@@ -298,7 +298,7 @@ export default function NumberOfProvincesVisualizer() {
                               borderRadius: 4,
                               border: isHighlighted ? '2px solid #ef4444' : '1px solid var(--border)',
                               backgroundColor: isHighlighted ? '#ef4444' : isCellConnected ? '#dcfce7' : '#f5f5f5',
-                              color: isHighlighted ? '#fff' : 'var(--surface2)',
+                              color: isHighlighted ? '#fff' : 'var(--text-on-light)',
                               fontSize: 12,
                               fontWeight: 600,
                             }}

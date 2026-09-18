@@ -175,7 +175,7 @@ function BinaryVisualization({ a, b, step }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
       {/* Input strings */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Input Strings</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Input Strings</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           {/* String a */}
           <div>
@@ -251,7 +251,7 @@ function BinaryVisualization({ a, b, step }) {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Current Bit Addition</div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Current Bit Addition</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 8, marginBottom: 8 }}>
             <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#dbeafe', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#1e40af' }}>a[i]</div>
@@ -280,7 +280,7 @@ function BinaryVisualization({ a, b, step }) {
 
       {/* Result */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Result</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Result</div>
         <div style={{
           padding: 16,
           backgroundColor: '#ecfdf5',
@@ -316,7 +316,7 @@ function VisualizationPanel({ a, b, step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button

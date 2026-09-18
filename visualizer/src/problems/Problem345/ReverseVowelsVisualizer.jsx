@@ -353,7 +353,7 @@ export default function ReverseVowelsVisualizer() {
               fontSize: 12,
               fontWeight: 600,
               backgroundColor: ex.label === e.label ? '#eff6ff' : 'var(--surface2)',
-              color: 'var(--surface2)',
+              color: (ex.label === e.label ? 'var(--text-on-light)' : 'var(--text)'),
             }}
           >
             {e.label}: "{e.s}"

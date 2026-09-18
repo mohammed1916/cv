@@ -216,7 +216,7 @@ function StringVisualization({ s, left, right }) {
               border: idx === left || idx === right ? '3px solid #4f46e5' : '1px solid var(--border)',
               fontSize: 13,
               fontWeight: 600,
-              color: 'var(--code-bg)',
+              color: (inWindow ? 'var(--text-on-light)' : 'var(--text-inverse)'),
               fontFamily: 'monospace',
             }}
             animate={{ scale: inWindow ? 1.1 : 1 }}

@@ -137,7 +137,7 @@ function VisualizationPanel({ step }) {
 
       {/* Strings */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Strings</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Strings</div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {step?.strs?.map((str, idx) => {
             const isActive = step && idx === step.currentIdx && !step.done

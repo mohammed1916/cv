@@ -178,7 +178,7 @@ export default function BestTimeBuySellStockCooldownVisualizer() {
                     border: '1px solid #0ea5e9',
                     borderRadius: 4,
                     fontWeight: 'bold',
-                    color: i === step.i ? '#fff' : 'var(--surface2)',
+                    color: i === step.i ? '#fff' : 'var(--text-on-light)',
                   }}
                 >
                   {price}

@@ -93,7 +93,7 @@
 .sp-power-title {
     font-size: 13px;
     font-weight: 700;
-    color: var(--surface2);
+    color: var(--text);
     margin-bottom: 8px;
 }
 
@@ -139,7 +139,7 @@
 .sp-power-value {
     font-size: 16px;
     font-weight: 700;
-    color: var(--surface2);
+    color: var(--text);
 }
 
 .sp-modulo-box {
@@ -225,4 +225,10 @@
     font-size: 13px;
     color: 'var(--border)';
     line-height: 1.6;
+}
+
+.sp-power-cell.base .sp-power-value,
+.sp-power-cell.digit .sp-power-value,
+.sp-power-cell.result .sp-power-value {
+    color: var(--text-on-light);
 }

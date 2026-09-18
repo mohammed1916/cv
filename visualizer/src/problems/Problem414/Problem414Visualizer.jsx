@@ -144,7 +144,7 @@ function ThirdMaxVisualization({ nums, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Third Maximum Number</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Third Maximum Number</div>
 
       {/* Input array */}
       <div>
@@ -312,7 +312,7 @@ export default function Problem414Visualizer() {
         />),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button

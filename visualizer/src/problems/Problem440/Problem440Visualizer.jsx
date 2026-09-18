@@ -143,7 +143,7 @@ function NumberSequenceVisualization({ n, current, k }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
         Numbers 1 to {n} (showing first {numsToShow})
       </div>
       <div style={{
@@ -216,7 +216,7 @@ function LexicographicalTreeVisualization({ n, current }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Path in Lexicographical Tree</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Path in Lexicographical Tree</div>
       <div style={{
         padding: 12,
         backgroundColor: 'var(--surface2)',
@@ -259,7 +259,7 @@ function LexicographicalTreeVisualization({ n, current }) {
 function StatsVisualization({ k, current, result }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Statistics</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Statistics</div>
       <div style={{
         display: 'grid',
         gridTemplateColumns: '1fr 1fr',
@@ -303,7 +303,7 @@ function VisualizationPanel({ step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button

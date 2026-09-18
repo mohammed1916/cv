@@ -176,7 +176,7 @@ function SplitArrayVisualization({ nums, m, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Binary Search for Min Max Sum</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Binary Search for Min Max Sum</div>
 
       {/* Array visualization */}
       <div>
@@ -196,7 +196,7 @@ function SplitArrayVisualization({ nums, m, step }) {
                 paddingBottom: 4,
                 fontSize: 11,
                 fontWeight: 'bold',
-                color: 'var(--surface)',
+                color: 'var(--text-on-light)',
               }}
             >
               {num}
@@ -399,7 +399,7 @@ export default function Problem410Visualizer() {
       </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button

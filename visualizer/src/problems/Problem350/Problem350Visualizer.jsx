@@ -209,7 +209,7 @@ function FrequencyMap({ step }) {
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
         Frequency Map (from nums1)
       </header>
 
@@ -228,7 +228,7 @@ function FrequencyMap({ step }) {
               transition={{ duration: 0.2 }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12 }}>
-                <span style={{ fontWeight: 600, color: 'var(--surface2)', fontFamily: 'monospace' }}>
+                <span style={{ fontWeight: 600, color: 'var(--text)', fontFamily: 'monospace' }}>
                   {key}
                 </span>
                 <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>
@@ -276,7 +276,7 @@ function InputArrays({ step }) {
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16, borderLeft: '1px solid var(--text)' }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
         Input Arrays
       </header>
 
@@ -363,7 +363,7 @@ function ResultBuilder({ step }) {
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
         Result: [{result.length} element{result.length !== 1 ? 's' : ''}]
       </header>
 
@@ -422,7 +422,7 @@ function VisualizationPanel({ step, nums1, nums2, EXAMPLES, handleExampleClick, 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Examples
         </div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>

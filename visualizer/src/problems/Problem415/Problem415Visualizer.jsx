@@ -123,16 +123,16 @@ function AddStringsVisualization({ num1, num2, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>String Addition</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>String Addition</div>
 
       {/* Input numbers */}
       <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid var(--border)' }}>
         <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Inputs</div>
         <div style={{ display: 'flex', gap: 16, fontSize: 13, fontFamily: 'monospace' }}>
-          <div style={{ color: 'var(--surface2)' }}>
+          <div style={{ color: 'var(--text)' }}>
             <span style={{ fontWeight: 600, color: 'var(--text-muted)' }}>num1:</span> {num1}
           </div>
-          <div style={{ color: 'var(--surface2)' }}>
+          <div style={{ color: 'var(--text)' }}>
             <span style={{ fontWeight: 600, color: 'var(--text-muted)' }}>num2:</span> {num2}
           </div>
         </div>
@@ -309,7 +309,7 @@ export default function Problem415Visualizer() {
         />),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button

@@ -48,6 +48,11 @@
   --text-muted:   #45526b;
   --text-dim:     #5c6b85;
 
+  /* Text on fixed fills must stay readable when the surrounding theme changes. */
+  --text-on-light: #090e1b;
+  --text-on-dark:  #f1f5f9;
+  --text-inverse:  var(--surface);
+
   /* Semantic component roles.  These preserve a consistent accessible base
      for reusable controls while problem visualizers remain free to define
      their own instructional/state colours. */
@@ -61,6 +66,11 @@
   /* Compatibility aliases used by older problem panels. */
   --accent:       var(--primary);
   --text-secondary: var(--text-muted);
+  --text-primary: var(--text);
+  --text-main:    var(--text);
+  --surface-1:    var(--surface);
+  --surface-2:    var(--surface2);
+  --surface-3:    var(--surface3);
 
   /* Code surface — Catppuccin Latte. The visualizers already use Catppuccin
      Mocha (#1e1e2e, #cdd6f4, #a6e3a1 …), so Latte is its official light twin

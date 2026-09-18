@@ -166,12 +166,12 @@ function FizzBuzzVisualization({ n, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>FizzBuzz Sequence</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>FizzBuzz Sequence</div>
 
       {/* Parameter */}
       <div style={{ padding: 10, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid var(--border)' }}>
         <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)' }}>
-          n = <span style={{ fontFamily: 'monospace', color: 'var(--surface2)' }}>{n}</span>
+          n = <span style={{ fontFamily: 'monospace', color: 'var(--text)' }}>{n}</span>
         </div>
       </div>
 
@@ -360,7 +360,7 @@ export default function Problem412Visualizer() {
         />),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button

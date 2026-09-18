@@ -244,7 +244,7 @@ export default function Problem397Visualizer() {
           {step && (
             <>
               {/* Message */}
-              <div style={{ padding: 10, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 12, fontWeight: 500, color: 'var(--surface2)' }}>
+              <div style={{ padding: 10, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 12, fontWeight: 500, color: 'var(--text)' }}>
                 {step.message}
               </div>
 

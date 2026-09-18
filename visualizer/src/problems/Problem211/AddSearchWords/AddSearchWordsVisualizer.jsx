@@ -167,7 +167,7 @@ function renderTrieNode(node, x, y, isRoot = false) {
                 dy="0.3em"
                 fontSize="11"
                 fontWeight="600"
-                fill="var(--code-bg)"
+                fill="var(--text-on-light)"
             >
                 {isRoot ? '∅' : ''}
             </text>

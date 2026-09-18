@@ -139,7 +139,7 @@ function generateSteps(chars) {
 function OriginalStringVisualization({ chars, readIdx, current }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Original String</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Original String</div>
       <div style={{
         padding: 12,
         backgroundColor: 'var(--surface2)',
@@ -196,7 +196,7 @@ function OriginalStringVisualization({ chars, readIdx, current }) {
 function CompressedStringVisualization({ result }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Compressed Result</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Compressed Result</div>
       <div style={{
         padding: 12,
         backgroundColor: '#ecfdf5',
@@ -243,7 +243,7 @@ function StatsVisualization({ chars, result, write }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Statistics</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Statistics</div>
       <div style={{
         display: 'grid',
         gridTemplateColumns: '1fr 1fr',
@@ -292,7 +292,7 @@ function VisualizationPanel({ step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button

@@ -39,7 +39,7 @@
 .mip-chip-active {
   background: var(--primary);
   border-color: var(--primary);
-  color: var(--surface);
+  color: var(--text-inverse);
 }
 
 .mip-fields {

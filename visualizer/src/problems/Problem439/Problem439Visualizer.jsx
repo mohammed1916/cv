@@ -159,7 +159,7 @@ function generateSteps(expression) {
 function ExpressionVisualization({ expression, pos }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Expression</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Expression</div>
       <div style={{
         padding: 12,
         backgroundColor: 'var(--surface2)',
@@ -167,7 +167,7 @@ function ExpressionVisualization({ expression, pos }) {
         border: '2px solid var(--border)',
         minHeight: 80,
       }}>
-        <div style={{ fontSize: 13, fontFamily: 'monospace', fontWeight: 600, color: 'var(--surface2)', marginBottom: 12 }}>
+        <div style={{ fontSize: 13, fontFamily: 'monospace', fontWeight: 600, color: 'var(--text)', marginBottom: 12 }}>
           {expression}
         </div>
         <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
@@ -205,7 +205,7 @@ function ExpressionVisualization({ expression, pos }) {
 function StackVisualization({ stack }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Processing Stack</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Processing Stack</div>
       <div style={{
         padding: 12,
         backgroundColor: 'var(--surface2)',
@@ -248,7 +248,7 @@ function StackVisualization({ stack }) {
 function ResultVisualization({ result }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Result</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Result</div>
       <div style={{
         padding: 12,
         backgroundColor: '#ecfdf5',
@@ -273,7 +273,7 @@ function VisualizationPanel({ step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button

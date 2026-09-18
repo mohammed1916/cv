@@ -165,7 +165,7 @@ function VisualizationPanel({ n, step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -188,7 +188,7 @@ function VisualizationPanel({ n, step, applyEx }) {
 
       {/* Current Arrangement */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Current Arrangement (Position {step?.pos || 0}/{n})
         </div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -234,7 +234,7 @@ function VisualizationPanel({ n, step, applyEx }) {
 
       {/* Available Numbers */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Available Numbers</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Available Numbers</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {Array.from({ length: n }, (_, i) => i + 1).map(num => {
             const isAvailable = step && (step.available & (1 << num)) > 0
@@ -253,7 +253,7 @@ function VisualizationPanel({ n, step, applyEx }) {
                   textAlign: 'center',
                   backgroundColor: isCandidate ? '#fecaca' : isAvailable ? 'var(--surface2)' : 'var(--surface)',
                   borderColor: isCandidate ? '#f87171' : isAvailable ? 'var(--border)' : 'var(--text)',
-                  color: isCandidate ? '#7f1d1d' : isAvailable ? 'var(--surface2)' : 'var(--text-muted)',
+                  color: isCandidate ? '#7f1d1d' : isAvailable ? 'var(--text)' : 'var(--text-muted)',
                   opacity: isAvailable ? 1 : 0.5
                 }}
                 animate={{ scale: isCandidate ? 1.2 : 1 }}

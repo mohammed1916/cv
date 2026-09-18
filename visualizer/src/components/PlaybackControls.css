@@ -45,7 +45,7 @@
 .pc-btn-play {
   background: linear-gradient(180deg, var(--primary-d), var(--primary-d));
   border-color: var(--primary);
-  color: var(--surface3);
+  color: var(--text-inverse);
 }
 
 .pc-btn-play:hover:not(:disabled) {

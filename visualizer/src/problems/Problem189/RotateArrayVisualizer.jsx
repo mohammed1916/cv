@@ -121,7 +121,7 @@ function VisualizationPanel({ nums, step, n, k, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -144,7 +144,7 @@ function VisualizationPanel({ nums, step, n, k, applyEx }) {
 
       <CarouselVisualization nums={nums} step={step} n={n} k={k} />
 
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Array State</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Array State</div>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {nums.map((val, idx) => (
           <div

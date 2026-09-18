@@ -121,7 +121,7 @@ function VisualizationPanel({ s, step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -144,7 +144,7 @@ function VisualizationPanel({ s, step, applyEx }) {
 
       {/* Input String */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Input String</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Input String</div>
         <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, fontFamily: 'monospace', fontSize: 12, wordBreak: 'break-all' }}>
           {s}
         </div>
@@ -152,7 +152,7 @@ function VisualizationPanel({ s, step, applyEx }) {
 
       {/* Parse Progress */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Parse Position</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Parse Position</div>
         <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
           {s.split('').map((char, idx) => (
             <div

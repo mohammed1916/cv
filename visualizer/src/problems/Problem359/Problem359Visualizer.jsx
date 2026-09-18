@@ -252,7 +252,7 @@ function RequestTimeline({ step, requests }) {
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
         Request Timeline
       </header>
 
@@ -306,7 +306,7 @@ function RequestTimeline({ step, requests }) {
                       fontFamily: 'monospace',
                       fontWeight: 600,
                       fontSize: 13,
-                      color: 'var(--surface2)',
+                      color: 'var(--text)',
                     }}
                     animate={{ scale: isActive ? 1.1 : 1 }}
                   >
@@ -342,7 +342,7 @@ function LogMapState({ step }) {
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16, borderLeft: '1px solid var(--text)' }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
         Message Map (message → last_print_time)
       </header>
 
@@ -376,7 +376,7 @@ function LogMapState({ step }) {
                     fontSize: 12,
                   }}
                 >
-                  <span style={{ fontWeight: 600, color: 'var(--surface2)' }}>"{msg}"</span>
+                  <span style={{ fontWeight: 600, color: (isExpired && step.timestamp !== null ? 'var(--text-on-light)' : 'var(--text)') }}>"{msg}"</span>
 
                   <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                     <span style={{ color: 'var(--text-muted)' }}>last: {lastTime}</span>
@@ -423,7 +423,7 @@ function DecisionFlow({ step }) {
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
         Decision Flow
       </header>
 
@@ -512,7 +512,7 @@ function OutputLog({ step }) {
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16, borderLeft: '1px solid var(--text)' }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
         Printed Output ({(step.printedMessages || []).length})
       </header>
 

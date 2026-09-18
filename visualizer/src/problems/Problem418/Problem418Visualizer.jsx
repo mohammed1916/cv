@@ -164,21 +164,21 @@ function ScreenFittingVisualization({ sentence, rows, cols, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Sentence Screen Fitting</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Sentence Screen Fitting</div>
 
       {/* Parameters */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
         <div style={{ padding: 10, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid var(--border)' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)' }}>Rows</div>
-          <div style={{ fontSize: 16, fontWeight: 'bold', color: 'var(--surface2)' }}>{rows}</div>
+          <div style={{ fontSize: 16, fontWeight: 'bold', color: 'var(--text)' }}>{rows}</div>
         </div>
         <div style={{ padding: 10, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid var(--border)' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)' }}>Cols</div>
-          <div style={{ fontSize: 16, fontWeight: 'bold', color: 'var(--surface2)' }}>{cols}</div>
+          <div style={{ fontSize: 16, fontWeight: 'bold', color: 'var(--text)' }}>{cols}</div>
         </div>
         <div style={{ padding: 10, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid var(--border)' }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)' }}>Words</div>
-          <div style={{ fontSize: 16, fontWeight: 'bold', color: 'var(--surface2)' }}>{sentence.length}</div>
+          <div style={{ fontSize: 16, fontWeight: 'bold', color: 'var(--text)' }}>{sentence.length}</div>
         </div>
       </div>
 
@@ -259,7 +259,7 @@ function ScreenFittingVisualization({ sentence, rows, cols, step }) {
                 border: `2px solid ${step?.currentLine === idx ? '#6366f1' : 'var(--border)'}`,
                 fontSize: 12,
                 fontFamily: 'monospace',
-                color: 'var(--surface2)',
+                color: (step?.currentLine === idx ? 'var(--text-on-light)' : 'var(--text)'),
                 minHeight: 24,
               }}
             >
@@ -337,7 +337,7 @@ export default function Problem418Visualizer() {
         />),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button

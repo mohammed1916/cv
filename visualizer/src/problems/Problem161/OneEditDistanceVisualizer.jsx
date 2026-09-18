@@ -203,7 +203,7 @@ function StringComparison({ s1, s2, highlightIdx, mismatchPos }) {
                   border: isMismatch ? '2px solid #ef4444' : isHighlight ? '2px solid #f59e0b' : '1px solid var(--border)',
                   fontSize: 12,
                   fontWeight: 600,
-                  color: 'var(--code-bg)',
+                  color: (isMismatch ? 'var(--text-on-light)' : (isHighlight ? 'var(--text-on-light)' : 'var(--text-inverse)')),
                   fontFamily: 'monospace',
                 }}
                 animate={{ scale: isHighlight ? 1.15 : 1 }}
@@ -238,7 +238,7 @@ function StringComparison({ s1, s2, highlightIdx, mismatchPos }) {
                   border: isMismatch ? '2px solid #ef4444' : isHighlight ? '2px solid #f59e0b' : '1px solid var(--border)',
                   fontSize: 12,
                   fontWeight: 600,
-                  color: 'var(--code-bg)',
+                  color: (isMismatch ? 'var(--text-on-light)' : (isHighlight ? 'var(--text-on-light)' : 'var(--text-inverse)')),
                   fontFamily: 'monospace',
                 }}
                 animate={{ scale: isHighlight ? 1.15 : 1 }}

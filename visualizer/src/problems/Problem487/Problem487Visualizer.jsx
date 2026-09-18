@@ -135,7 +135,7 @@ function VisualizationPanel({ nums, step, applyEx, k }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Binary Array</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Binary Array</div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {nums.map((bit, idx) => {
             const inWindow = step && idx >= step.left && idx <= step.right

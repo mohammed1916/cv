@@ -172,7 +172,7 @@ function BalloonVisualization({ points, currentIdx, lastPos }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
         Balloons (sorted by end)
       </header>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
@@ -227,7 +227,7 @@ function BalloonVisualization({ points, currentIdx, lastPos }) {
 function ArrowCount({ arrows, lastPos }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
         Arrow Count
       </header>
       <div style={{
@@ -271,7 +271,7 @@ function VisualizationPanel({ step, points, EXAMPLES, handleExampleClick, points
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Examples
         </div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>

@@ -209,7 +209,7 @@
 .chat-history-delete:hover {
   border-color: var(--border);
   background: var(--surface2);
-  color: var(--surface);
+  color: var(--text);
 }
 
 .chat-attach-step-btn {
@@ -253,7 +253,7 @@
 .chat-clear-btn:hover,
 .chat-close-btn:hover {
   background: var(--surface2);
-  color: var(--surface2);
+  color: var(--text);
   border-color: var(--border);
 }
 

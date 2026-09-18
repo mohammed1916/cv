@@ -230,7 +230,7 @@ function SumMapDisplay({ sumMap }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
         Pair Sum Map ({entries.length} entries)
       </header>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 4, maxHeight: 200, overflowY: 'auto' }}>
@@ -267,7 +267,7 @@ function VisualizationPanel({ step, nums1, nums2, nums3, nums4, EXAMPLES, handle
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Examples
         </div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -352,7 +352,7 @@ function VisualizationPanel({ step, nums1, nums2, nums3, nums4, EXAMPLES, handle
         <SumMapDisplay sumMap={step?.sumMap || {}} />
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+          <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
             Count of Quadruples
           </header>
           <div style={{

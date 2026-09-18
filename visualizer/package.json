@@ -16,6 +16,7 @@
     "audit:css": "node scripts/audit-css-duplication.mjs",
     "test:recent-visualizers": "node --test src/problems/recentVisualizers.test.mjs src/problems/Problem3915/algorithm.test.mjs src/problems/Problem3894/algorithm.test.mjs src/problems/Problem3895/algorithm.test.mjs src/problems/Problem3896/algorithm.test.mjs src/problems/Problem3899/algorithm.test.mjs src/problems/Problem3905/algorithm.test.mjs src/problems/Problem3908/algorithm.test.mjs src/problems/Problem3909/algorithm.test.mjs src/problems/Problem3910/algorithm.test.mjs src/problems/families/stableIndex/algorithm.test.mjs",
     "check:css-migration": "node scripts/check-css-migration.mjs",
+    "check:foreground-tokens": "node scripts/check-foreground-tokens.mjs",
     "preview": "vite preview",
     "refresh:leetcode": "node scripts/fetch-leetcode-catalog.mjs",
     "refresh:descriptions": "node scripts/fetch-problem-descriptions.mjs",

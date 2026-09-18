@@ -286,7 +286,7 @@ function KthSmallestMatrixVisualizer() {
                                         dy="0.3em"
                                         fontSize="14"
                                         fontWeight="700"
-                                        fill={isCountedCell || isResult ? 'var(--code-bg)' : 'var(--code-text)'}
+                                        fill={isCountedCell || isResult || isHighlighted ? 'var(--text-on-light)' : 'var(--code-text)'}
                                     >
                                         {val}
                                     </text>

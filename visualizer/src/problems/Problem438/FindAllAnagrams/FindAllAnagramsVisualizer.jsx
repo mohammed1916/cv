@@ -107,7 +107,7 @@ export default function FindAllAnagramsVisualizer() {
                 <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                     {EXAMPLES.map(e => <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : 'var(--surface2)' }}>{e.label}</button>)}
                 </div>
-                <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--surface2)' }}>s = "{ex.s}" | p = "{ex.p}"</div>
+                <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text)' }}>s = "{ex.s}" | p = "{ex.p}"</div>
                 <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
                     {ex.s.split("").map((ch, i) => {
                         const inWin = step && i >= step.winStart && i <= step.winEnd;
@@ -117,7 +117,7 @@ export default function FindAllAnagramsVisualizer() {
                             <motion.div key={i} animate={{ scale: inWin ? 1.12 : 1 }} style={{
                                 width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center',
                                 backgroundColor: isResult ? '#dcfce7' : inWin ? (isMatch ? '#86efac' : '#fbbf24') : '#f3f4f6',
-                                border: inWin ? '2px solid #0ea5e9' : '1px solid var(--border)', borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: 'var(--surface2)'
+                                border: inWin ? '2px solid #0ea5e9' : '1px solid var(--border)', borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: 'var(--text-on-light)'
                             }}>
                                 {ch}
                             </motion.div>

@@ -119,7 +119,7 @@ function VisualizationPanel({ step, applyEx }) {
       )}
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -149,7 +149,7 @@ function VisualizationPanel({ step, applyEx }) {
 
       {step?.flatList && step.flatList.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Flattened So Far</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Flattened So Far</div>
           <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
             {step.flatList.map((val, i) => (
               <NodeDisplay key={i} val={val} isCurrent={step.current === val && !step.inChild} isChild={step.inChild && step.flatList.indexOf(val) > 2} />

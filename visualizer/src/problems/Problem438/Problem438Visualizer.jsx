@@ -90,7 +90,7 @@ function generateSteps(s, p) {
 function StringVisualization({ s, windowStart, windowEnd }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>String with Window</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>String with Window</div>
       <div style={{
         padding: 12,
         backgroundColor: 'var(--surface2)',
@@ -144,7 +144,7 @@ function StringVisualization({ s, windowStart, windowEnd }) {
 function PatternVisualization({ p }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Pattern to Find</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Pattern to Find</div>
       <div style={{
         padding: 12,
         backgroundColor: '#f3e8ff',
@@ -181,7 +181,7 @@ function PatternVisualization({ p }) {
 function ResultsVisualization({ s, result }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Anagram Start Indices</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Anagram Start Indices</div>
       <div style={{
         padding: 12,
         backgroundColor: '#ecfdf5',
@@ -229,7 +229,7 @@ function VisualizationPanel({ step, applyEx, s, p, windowStart, windowEnd, resul
       )}
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button

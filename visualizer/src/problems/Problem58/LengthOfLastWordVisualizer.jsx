@@ -140,7 +140,7 @@ export default function LengthOfLastWordVisualizer() {
         ))}
       </div>
 
-      <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>Characters</div>
+      <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>Characters</div>
       <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap', alignItems: 'flex-end' }}>
         {chars.map((ch, idx) => {
           const isActive = idx === i;
@@ -152,7 +152,7 @@ export default function LengthOfLastWordVisualizer() {
                 width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center',
                 backgroundColor: isDoneHighlight ? '#dcfce7' : isActive ? '#fbbf24' : '#f3f4f6',
                 border: isActive ? '2px solid #f59e0b' : isDoneHighlight ? '2px solid #86efac' : '1px solid var(--border)',
-                borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: 'var(--surface2)'
+                borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: 'var(--text-on-light)'
               }}>
                 {isSpace ? '·' : ch}
               </motion.div>
@@ -165,7 +165,7 @@ export default function LengthOfLastWordVisualizer() {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6 }}>
         <div>
           <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>i</div>
-          <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--surface2)' }}>{i < 0 ? '-1' : i}</div>
+          <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--text)' }}>{i < 0 ? '-1' : i}</div>
         </div>
         <div>
           <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>length</div>
@@ -175,7 +175,7 @@ export default function LengthOfLastWordVisualizer() {
         </div>
         <div>
           <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>phase</div>
-          <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--surface2)' }}>{phase}</div>
+          <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--text)' }}>{phase}</div>
         </div>
       </div>
 

@@ -51,7 +51,7 @@
 
 .sip-example-btn:hover {
   background: var(--border);
-  color: var(--surface);
+  color: var(--text);
 }
 
 .sip-input {
@@ -59,7 +59,7 @@
   border-radius: 8px;
   border: 1px solid var(--border);
   background: var(--code-bg);
-  color: var(--surface);
+  color: var(--text);
   font-family: monospace;
   font-size: 14px;
 }
@@ -139,7 +139,7 @@
   background: var(--surface2);
   border: 2px solid var(--border);
   border-radius: 8px;
-  color: var(--surface);
+  color: var(--text);
   font-size: 16px;
   font-weight: 600;
   font-family: monospace;

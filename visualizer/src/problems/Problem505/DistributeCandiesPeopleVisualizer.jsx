@@ -134,7 +134,7 @@ function VisualizationPanel({ n, k, step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES_LIST.map(e => (
             <button
@@ -157,7 +157,7 @@ function VisualizationPanel({ n, k, step, applyEx }) {
 
       {/* People Distribution */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           People Candies Distribution (Total: {n} candies)
         </div>
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>

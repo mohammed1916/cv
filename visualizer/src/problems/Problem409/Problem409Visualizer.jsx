@@ -152,7 +152,7 @@ function PalindromeVisualization({ s, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Palindrome Construction</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Palindrome Construction</div>
 
       {/* Input string */}
       <div>
@@ -203,7 +203,7 @@ function PalindromeVisualization({ s, step }) {
                 }}
                 animate={{ scale: isCurrent ? 1.05 : 1 }}
               >
-                <div style={{ fontSize: 14, fontFamily: 'monospace', fontWeight: 'bold', color: 'var(--surface2)' }}>
+                <div style={{ fontSize: 14, fontFamily: 'monospace', fontWeight: 'bold', color: (isCurrent ? 'var(--text-on-light)' : 'var(--text)') }}>
                   {char}
                 </div>
                 <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 4 }}>
@@ -339,7 +339,7 @@ export default function Problem409Visualizer() {
       </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button

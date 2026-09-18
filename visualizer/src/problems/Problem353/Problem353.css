@@ -155,6 +155,7 @@
 .example-button:hover {
   background: var(--text);
   border-color: var(--text-muted);
+  color: var(--text-inverse);
 }
 
 .example-button.active {

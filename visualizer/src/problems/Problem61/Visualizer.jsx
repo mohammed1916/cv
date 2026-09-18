@@ -451,7 +451,7 @@ function VisualizationPanel({ step }) {
                     justifyContent: 'center',
                     fontSize: 15,
                     fontWeight: 700,
-                    color: 'var(--surface2)',
+                    color: 'var(--text-on-light)',
                   }}
                 >
                   {node.val}

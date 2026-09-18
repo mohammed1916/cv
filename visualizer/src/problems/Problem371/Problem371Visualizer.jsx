@@ -194,7 +194,7 @@ function generateSteps(a, b) {
 function BinaryRepresentation({ label, number, binary, highlight = false }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+      <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
         {label}
       </div>
       <div style={{
@@ -204,7 +204,7 @@ function BinaryRepresentation({ label, number, binary, highlight = false }) {
         border: `2px solid ${highlight ? '#0284c7' : 'var(--border)'}`,
         fontFamily: 'monospace',
         fontSize: 12,
-        color: 'var(--surface2)'
+        color: (highlight ? 'var(--text-on-light)' : 'var(--text)')
       }}>
         {number}
       </div>
@@ -262,7 +262,7 @@ function VisualizationPanel({ a, b, step, applyEx }) {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button

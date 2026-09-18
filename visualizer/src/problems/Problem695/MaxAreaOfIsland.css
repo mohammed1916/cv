@@ -27,7 +27,7 @@
 
 .maoi-example-btn:hover {
   background: var(--border);
-  color: var(--surface);
+  color: var(--text);
 }
 
 .maoi-input-textarea {
@@ -36,7 +36,7 @@
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 12px;
-  color: var(--surface);
+  color: var(--text);
   font-family: monospace;
   font-size: 13px;
   resize: none;

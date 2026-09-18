@@ -6,7 +6,7 @@
 .hr-body { padding: 12px; display: grid; gap: 10px; }
 .hr-examples { display: flex; flex-wrap: wrap; gap: 6px; }
 .hr-chip { border-radius: 999px; border: 1px solid var(--border); background: rgba(30,41,59,.8); color: var(--border); padding: 4px 10px; cursor: pointer; }
-.hr-input { border: 1px solid var(--border); border-radius: 8px; background: var(--code-bg); color: var(--surface); font-family: monospace; padding: 8px 10px; }
+.hr-input { border: 1px solid var(--border); border-radius: 8px; background: var(--code-bg); color: var(--text); font-family: monospace; padding: 8px 10px; }
 .hr-street { display: flex; gap: 8px; flex-wrap: wrap; }
 .hr-house { min-width: 52px; border: 1px solid var(--border); border-radius: 10px; background: rgba(30,41,59,.7); display: grid; place-items: center; padding: 8px 6px; }
 .hr-house.active { border-color: rgba(56,189,248,.7); background: rgba(56,189,248,.16); }

@@ -68,7 +68,7 @@
     background: rgba(15, 23, 42, 0.6);
     border: 1px solid var(--border);
     border-radius: 6px;
-    color: var(--surface);
+    color: var(--text-on-dark);
     font-family: monospace;
     font-size: 13px;
     transition:
@@ -280,7 +280,7 @@
 .dsg-status-badge {
     padding: 8px 12px;
     border-radius: 6px;
-    color: var(--surface);
+    color: var(--text);
     font-weight: 600;
     font-size: 13px;
     background: rgba(59, 130, 246, 0.15);

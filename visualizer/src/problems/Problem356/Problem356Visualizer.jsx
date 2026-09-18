@@ -427,7 +427,7 @@ export default function Problem356Visualizer() {
                           y={sy - 12}
                           textAnchor="middle"
                           fontSize="10"
-                          fill={isInvalid ? '#ef4444' : 'var(--surface2)'}
+                          fill={isInvalid ? 'var(--error)' : 'var(--text)'}
                           fontWeight="600"
                         >
                           ({x}, {y})

@@ -33,7 +33,7 @@
   border: 1px solid var(--border-color, var(--text));
   border-radius: 4px;
   background-color: var(--bg-secondary, var(--surface));
-  color: var(--text-primary, var(--code-bg));
+  color: var(--text-primary, var(--text));
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
@@ -43,11 +43,12 @@
 .nqii-chip:hover {
   background-color: var(--text);
   border-color: var(--border);
+  color: var(--text-inverse);
 }
 
 .nqii-chip.active {
   background-color: #3b82f6;
-  color: var(--surface);
+  color: var(--text-on-light);
   border-color: #3b82f6;
 }
 
@@ -62,7 +63,7 @@
 .nqii-panel-label {
   font-weight: 600;
   font-size: 14px;
-  color: var(--text-primary, var(--code-bg));
+  color: var(--text-primary, var(--text));
 }
 
 .nqii-board {
@@ -91,12 +92,12 @@
 
 .nqii-cell.light {
   background-color: var(--surface);
-  color: var(--code-bg);
+  color: var(--text);
 }
 
 .nqii-cell.dark {
   background-color: var(--text);
-  color: var(--code-bg);
+  color: var(--text-inverse);
 }
 
 .nqii-cell.queen {
@@ -180,7 +181,7 @@
 .nqii-tracker-val {
   font-size: 18px;
   font-weight: 700;
-  color: var(--text-primary, var(--code-bg));
+  color: var(--text-primary, var(--text));
   font-family: 'Monaco', 'Menlo', monospace;
 }
 
@@ -323,7 +324,7 @@
 
   :root[data-theme="dark"] .nqii-chip.active {
     background-color: #0ea5e9;
-    color: var(--surface);
+    color: var(--text-on-light);
     border-color: #0ea5e9;
   }
 

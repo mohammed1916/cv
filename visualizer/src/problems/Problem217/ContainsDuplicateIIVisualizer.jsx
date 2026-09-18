@@ -330,7 +330,7 @@ export default function ContainsDuplicateIIVisualizer() {
               onClick={() => applyExample(ex)}
               style={{
                 padding: "6px 12px", borderRadius: 6, border: "1px solid var(--border)",
-                background: "var(--surface2)", color: "var(--surface2)", fontSize: 12, cursor: "pointer",
+                background: "var(--surface2)", color: "var(--text)", fontSize: 12, cursor: "pointer",
               }}
             >
               {ex.label}

@@ -63,7 +63,7 @@
 
 .zigzag-example-btn:hover {
   background: var(--border);
-  color: var(--surface);
+  color: var(--text);
 }
 
 .zigzag-input {
@@ -71,7 +71,7 @@
   border-radius: 8px;
   border: 1px solid var(--border);
   background: var(--code-bg);
-  color: var(--surface);
+  color: var(--text);
   font-family: monospace;
   font-size: 14px;
 }
@@ -101,7 +101,7 @@
   background: var(--surface2);
   border: 1px solid var(--text-muted);
   border-radius: 4px;
-  color: var(--surface);
+  color: var(--text);
   font-size: 16px;
   font-weight: bold;
   font-family: monospace;
@@ -196,7 +196,7 @@
   background: var(--surface2);
   border: 1px solid var(--text-muted);
   border-radius: 4px;
-  color: var(--surface);
+  color: var(--text);
   font-size: 18px;
   font-weight: bold;
   font-family: monospace;
