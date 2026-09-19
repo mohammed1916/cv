@@ -1,18 +1,18 @@
-import { useState, useCallback, useMemo } from 'react'
-import DockableWorkspace from './components/shared/DockableWorkspace'
-import FloatingPanel from './components/shared/FloatingPanel'
-import CodeTracePanel from './components/CodeTracePanel'
-import PlaybackControls from './components/PlaybackControls'
-import PatternOverlay from './components/PatternOverlay'
-import VisualizationControls from './components/VisualizationControls'
-import { usePlaybackState } from './hooks/usePlaybackState'
-import { useCodeVisualConnectivity } from './hooks/useCodeVisualConnectivity'
-import { usePatternOverlay } from './hooks/usePatternOverlay'
-import { useAutoScroll } from './hooks/useAutoScroll'
-import { useVisualizationFeatures } from './hooks/useVisualizationFeatures'
-import { useSolutionCode } from './hooks/useSolutionCode'
-import { getVisualizationFeatures } from './config/visualizationRegistry'
-import { getExamples } from './config/examplesRegistry'
+import { useState, useCallback, useMemo } from "react";
+import DockableWorkspace from "./components/shared/DockableWorkspace";
+import FloatingPanel from "./components/shared/FloatingPanel";
+import CodeTracePanel from "./components/CodeTracePanel";
+import PlaybackControls from "./components/PlaybackControls";
+import PatternOverlay from "./components/PatternOverlay";
+import VisualizationControls from "./components/VisualizationControls";
+import { usePlaybackState } from "./hooks/usePlaybackState";
+import { useCodeVisualConnectivity } from "./hooks/useCodeVisualConnectivity";
+import { usePatternOverlay } from "./hooks/usePatternOverlay";
+import { useAutoScroll } from "./hooks/useAutoScroll";
+import { useVisualizationFeatures } from "./hooks/useVisualizationFeatures";
+import { useSolutionCode } from "./hooks/useSolutionCode";
+import { getVisualizationFeatures } from "./config/visualizationRegistry";
+import { getExamples } from "./config/examplesRegistry";
 
 /**
  * Generic Visualizer Component Template
@@ -85,15 +85,15 @@ import { getExamples } from './config/examplesRegistry'
  * }
  */
 function generateSteps(input) {
-  const steps = []
+  const steps = [];
 
   // Initialize algorithm
   steps.push({
     activeLine: 1,
     relatedLines: [1],
-    message: 'Algorithm initialization',
+    message: "Algorithm initialization",
     // Add custom fields for your algorithm state here
-  })
+  });
 
   // Add intermediate steps for your algorithm here
   // Example:
@@ -110,10 +110,10 @@ function generateSteps(input) {
   steps.push({
     activeLine: null,
     relatedLines: [],
-    message: 'Algorithm complete',
-  })
+    message: "Algorithm complete",
+  });
 
-  return steps
+  return steps;
 }
 
 /**
@@ -150,30 +150,44 @@ function generateSteps(input) {
  */
 function VariablesPanel({ step }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', padding: 16 }}>
-      <div style={{ fontSize: 14, fontWeight: 'bold', marginBottom: 16, color: '#f1f5f9' }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        padding: 16,
+      }}
+    >
+      <div
+        style={{
+          fontSize: 14,
+          fontWeight: "bold",
+          marginBottom: 16,
+          color: "#f1f5f9",
+        }}
+      >
         Variables
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         {/* Replace this with custom variable cards for your algorithm */}
         {step && (
           <div
             style={{
               padding: 12,
-              border: '1px solid #334155',
+              border: "1px solid #334155",
               borderRadius: 6,
-              backgroundColor: '#1e293b',
-              color: '#cbd5e1',
+              backgroundColor: "#1e293b",
+              color: "#cbd5e1",
               fontSize: 12,
             }}
           >
             <div style={{ marginBottom: 4 }}>Step: {step.message}</div>
-            <div>Active Line: {step.activeLine ?? 'N/A'}</div>
+            <div>Active Line: {step.activeLine ?? "N/A"}</div>
           </div>
         )}
       </div>
     </div>
-  )
+  );
 }
 
 /**
@@ -258,25 +272,46 @@ function VisualizationPanel({
   examples,
 }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', padding: 16 }}>
-      <div style={{ fontSize: 14, fontWeight: 'bold', marginBottom: 16, color: '#f1f5f9' }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        padding: 16,
+      }}
+    >
+      <div
+        style={{
+          fontSize: 14,
+          fontWeight: "bold",
+          marginBottom: 16,
+          color: "#f1f5f9",
+        }}
+      >
         Visualization
       </div>
 
       {/* Example buttons - automatically generated from examplesRegistry */}
       {examples.length > 0 && (
-        <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
+        <div
+          style={{
+            display: "flex",
+            gap: 6,
+            marginBottom: 16,
+            flexWrap: "wrap",
+          }}
+        >
           {examples.map((ex) => (
             <button
               key={ex.label}
               onClick={() => applyExample(ex)}
               style={{
-                padding: '6px 12px',
-                backgroundColor: '#334155',
-                color: '#cbd5e1',
-                border: '1px solid #475569',
+                padding: "6px 12px",
+                backgroundColor: "#334155",
+                color: "#cbd5e1",
+                border: "1px solid #475569",
                 borderRadius: 4,
-                cursor: 'pointer',
+                cursor: "pointer",
                 fontSize: 12,
               }}
             >
@@ -287,22 +322,29 @@ function VisualizationPanel({
       )}
 
       {/* Input control */}
-      <div style={{ display: 'flex', gap: 8, marginBottom: 16, alignItems: 'center' }}>
-        <label style={{ color: '#94a3b8', fontSize: 12 }}>Input:</label>
+      <div
+        style={{
+          display: "flex",
+          gap: 8,
+          marginBottom: 16,
+          alignItems: "center",
+        }}
+      >
+        <label style={{ color: "#94a3b8", fontSize: 12 }}>Input:</label>
         <input
           type="text"
           value={input}
           onChange={(e) => {
-            setInput(e.target.value)
-            handleReset()
+            setInput(e.target.value);
+            handleReset();
           }}
           placeholder="Enter input"
           style={{
             flex: 1,
-            padding: '6px 8px',
-            backgroundColor: '#0f172a',
-            color: '#f1f5f9',
-            border: '1px solid #334155',
+            padding: "6px 8px",
+            backgroundColor: "#0f172a",
+            color: "#f1f5f9",
+            border: "1px solid #334155",
             borderRadius: 4,
             fontSize: 12,
           }}
@@ -313,30 +355,32 @@ function VisualizationPanel({
       <div
         style={{
           flex: 1,
-          border: '1px dashed #334155',
+          border: "1px dashed #334155",
           borderRadius: 6,
           padding: 16,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: '#64748b',
-          backgroundColor: '#0f172a',
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: "#64748b",
+          backgroundColor: "#0f172a",
         }}
       >
-        <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: 14, marginBottom: 8 }}>Visualization Area</div>
+        <div style={{ textAlign: "center" }}>
+          <div style={{ fontSize: 14, marginBottom: 8 }}>
+            Visualization Area
+          </div>
           <div style={{ fontSize: 12, marginBottom: 8 }}>
             Replace this with your custom visualization component
           </div>
           {step && (
-            <div style={{ marginTop: 8, fontSize: 12, color: '#94a3b8' }}>
+            <div style={{ marginTop: 8, fontSize: 12, color: "#94a3b8" }}>
               {step.message}
             </div>
           )}
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 /**
@@ -369,12 +413,12 @@ function VisualizationPanel({
  */
 export default function Visualizer({ problem }) {
   // Configuration - update these for your problem
-  const problemSlug = 'your-problem-slug' // TODO: Replace with your problem slug
-  const [input, setInput] = useState('') // TODO: Initialize with appropriate default
+  const problemSlug = "your-problem-slug"; // TODO: Replace with your problem slug
+  const [input, setInput] = useState(""); // TODO: Initialize with appropriate default
 
   // Load solution code and examples from registries
-  const SOLUTION_CODE = useSolutionCode(problemSlug)
-  const EXAMPLES = useMemo(() => getExamples(problemSlug), [])
+  const SOLUTION_CODE = useSolutionCode(problemSlug);
+  const EXAMPLES = useMemo(() => getExamples(problemSlug), []);
 
   // Generate execution steps from input
   const steps = useMemo(
@@ -382,10 +426,12 @@ export default function Visualizer({ problem }) {
       generateSteps(input).map((current) => ({
         ...current,
         // Ensure relatedLines is always an array
-        relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
+        relatedLines:
+          current.relatedLines ??
+          (current.activeLine != null ? [current.activeLine] : []),
       })),
     [input],
-  )
+  );
 
   // Playback state management
   const {
@@ -399,42 +445,51 @@ export default function Visualizer({ problem }) {
     speed,
     setSpeed,
     isDone,
-  } = usePlaybackState(steps.length)
+  } = usePlaybackState(steps.length);
 
   // Pattern overlay and code-visual connectivity hooks
-  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } =
-    usePatternOverlay()
-  const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
+  const {
+    showPatternOverlay,
+    setShowPatternOverlay,
+    activeLineDom,
+    setActiveLineDom,
+  } = usePatternOverlay();
+  const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
 
   // Visualization features (conditional visualizations)
-  const vizFeatureDefs = useMemo(() => getVisualizationFeatures(problemSlug), [])
-  const { items: vizFeatures, toggle: toggleVizFeature } = useVisualizationFeatures(vizFeatureDefs)
+  const vizFeatureDefs = useMemo(
+    () => getVisualizationFeatures(problemSlug),
+    [],
+  );
+  const { items: vizFeatures, toggle: toggleVizFeature } =
+    useVisualizationFeatures(vizFeatureDefs);
 
   // Current step
-  const step = stepIndex >= 0 && stepIndex < steps.length ? steps[stepIndex] : null
+  const step =
+    stepIndex >= 0 && stepIndex < steps.length ? steps[stepIndex] : null;
 
   // Code-visual connectivity: clicking code lines jumps to relevant steps
   const connectivity = useCodeVisualConnectivity({
     steps,
     stepIndex,
     onStepJump: setStepIndex,
-  })
+  });
 
   // Apply example input
   const applyExample = useCallback(
     (ex) => {
-      setInput(ex.input ?? JSON.stringify(ex))
-      handleReset()
+      setInput(ex.input ?? JSON.stringify(ex));
+      handleReset();
     },
     [handleReset],
-  )
+  );
 
   // Define dockable panels layout
   const dockPanels = useMemo(
     () => [
       {
-        id: 'code',
-        title: 'Code',
+        id: "code",
+        title: "Code",
         content: (
           <CodeTracePanel
             step={step}
@@ -447,8 +502,8 @@ export default function Visualizer({ problem }) {
         ),
       },
       {
-        id: 'viz',
-        title: 'Visualization',
+        id: "viz",
+        title: "Visualization",
         content: (
           <VisualizationPanel
             input={input}
@@ -461,8 +516,8 @@ export default function Visualizer({ problem }) {
         ),
       },
       {
-        id: 'vars',
-        title: 'Variables',
+        id: "vars",
+        title: "Variables",
         content: <VariablesPanel step={step} />,
       },
     ],
@@ -479,13 +534,13 @@ export default function Visualizer({ problem }) {
       EXAMPLES,
       setActiveLineDom,
     ],
-  )
+  );
 
   return (
     <div className="problem-shell">
       <DockableWorkspace
         panels={dockPanels}
-        initialLayout={{ rows: [['code', 'viz'], ['vars']], minimized: [] }}
+        initialLayout={{ rows: [["code", "viz"], ["vars"]], minimized: [] }}
       />
       <FloatingPanel title="Playback Controls">
         <PlaybackControls
@@ -509,10 +564,15 @@ export default function Visualizer({ problem }) {
           showAutoScroll
         />
         {vizFeatures.length > 0 && (
-          <VisualizationControls features={vizFeatures} onToggle={toggleVizFeature} />
+          <VisualizationControls
+            features={vizFeatures}
+            onToggle={toggleVizFeature}
+          />
         )}
       </FloatingPanel>
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      {showPatternOverlay && step && (
+        <PatternOverlay step={step} activeLineDom={activeLineDom} />
+      )}
     </div>
-  )
+  );
 }

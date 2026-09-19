@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import './SumOfTwoIntegers.css';
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
+import React, { useState, useEffect, useCallback } from "react";
+import "./SumOfTwoIntegers.css";
+import ManualInputPanel from "../../components/shared/ManualInputPanel";
 
 export default function SumOfTwoIntegers() {
   const [a, setA] = useState(5);
   const [b, setB] = useState(7);
-  const [customAInput, setCustomAInput] = useState('');
-  const [customBInput, setCustomBInput] = useState('');
+  const [customAInput, setCustomAInput] = useState("");
+  const [customBInput, setCustomBInput] = useState("");
   const [currentStep, setCurrentStep] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [speed, setSpeed] = useState(1500);
@@ -24,7 +24,7 @@ export default function SumOfTwoIntegers() {
       b: currB,
       xor: null,
       carry: null,
-      description: 'Initial values',
+      description: "Initial values",
     });
 
     while (currB !== 0) {
@@ -79,9 +79,9 @@ export default function SumOfTwoIntegers() {
 
   const intToBinary = (num, bits = 32) => {
     if (num < 0) {
-      return (~(-num - 1)).toString(2).padStart(bits, '1');
+      return (~(-num - 1)).toString(2).padStart(bits, "1");
     }
-    return num.toString(2).padStart(bits, '0');
+    return num.toString(2).padStart(bits, "0");
   };
 
   const getCurrentStep = () => {
@@ -99,9 +99,15 @@ export default function SumOfTwoIntegers() {
   return (
     <div className="sti-container">
       <ManualInputPanel
-        fields={[{"key":"customA","label":"customA","type":"string"},{"key":"customB","label":"customB","type":"string"}]}
+        fields={[
+          { key: "customA", label: "customA", type: "string" },
+          { key: "customB", label: "customB", type: "string" },
+        ]}
         values={{ customA: customAInput, customB: customBInput }}
-        onChange={(k, v) => { if (k === 'customA') setCustomAInput(v); if (k === 'customB') setCustomBInput(v) }}
+        onChange={(k, v) => {
+          if (k === "customA") setCustomAInput(v);
+          if (k === "customB") setCustomBInput(v);
+        }}
         showExamples={false}
       />
       <h1 className="sti-title">LC 371: Sum of Two Integers</h1>
@@ -111,7 +117,7 @@ export default function SumOfTwoIntegers() {
           onClick={() => setIsAnimating(!isAnimating)}
           className="sti-btn"
         >
-          {isAnimating ? 'Pause' : 'Play'}
+          {isAnimating ? "Pause" : "Play"}
         </button>
         <button
           onClick={() => {
@@ -139,10 +145,14 @@ export default function SumOfTwoIntegers() {
       <div className="sti-result-box">
         <div className="sti-result-row">
           <span className="sti-result-label">Sum:</span>
-          <span className="sti-result-value">{a} + {b} = {result}</span>
+          <span className="sti-result-value">
+            {a} + {b} = {result}
+          </span>
         </div>
         <div className="sti-result-row">
-          <span className="sti-result-label">Step {currentStep + 1} of {steps.length}</span>
+          <span className="sti-result-label">
+            Step {currentStep + 1} of {steps.length}
+          </span>
         </div>
       </div>
 
@@ -156,11 +166,13 @@ export default function SumOfTwoIntegers() {
         <div className="sti-grid-section">
           <div className="sti-grid-label">a (XOR)</div>
           <div className="sti-binary-grid">
-            {formatBinary(curr.a).split('').map((bit, i) => (
-              <div key={i} className="sti-bit sti-bit-xor">
-                {bit}
-              </div>
-            ))}
+            {formatBinary(curr.a)
+              .split("")
+              .map((bit, i) => (
+                <div key={i} className="sti-bit sti-bit-xor">
+                  {bit}
+                </div>
+              ))}
           </div>
           <div className="sti-value">{curr.a}</div>
         </div>
@@ -173,11 +185,13 @@ export default function SumOfTwoIntegers() {
         <div className="sti-grid-section">
           <div className="sti-grid-label">b (Carry)</div>
           <div className="sti-binary-grid">
-            {formatBinary(curr.b).split('').map((bit, i) => (
-              <div key={i} className="sti-bit sti-bit-carry">
-                {bit}
-              </div>
-            ))}
+            {formatBinary(curr.b)
+              .split("")
+              .map((bit, i) => (
+                <div key={i} className="sti-bit sti-bit-carry">
+                  {bit}
+                </div>
+              ))}
           </div>
           <div className="sti-value">{curr.b}</div>
         </div>
@@ -188,14 +202,22 @@ export default function SumOfTwoIntegers() {
           <div className="sti-operation-box">
             <div className="sti-op-title">XOR Operation</div>
             <div className="sti-op-detail">
-              <code>{formatBinary(steps[currentStep - 1]?.a || a)} ^ {formatBinary(steps[currentStep - 1]?.b || b)} = {formatBinary(curr.xor)}</code>
+              <code>
+                {formatBinary(steps[currentStep - 1]?.a || a)} ^{" "}
+                {formatBinary(steps[currentStep - 1]?.b || b)} ={" "}
+                {formatBinary(curr.xor)}
+              </code>
             </div>
           </div>
 
           <div className="sti-operation-box">
             <div className="sti-op-title">Carry Operation</div>
             <div className="sti-op-detail">
-              <code>({formatBinary(steps[currentStep - 1]?.a || a)} & {formatBinary(steps[currentStep - 1]?.b || b)}) &lt;&lt; 1 = {formatBinary(curr.carry)}</code>
+              <code>
+                ({formatBinary(steps[currentStep - 1]?.a || a)} &{" "}
+                {formatBinary(steps[currentStep - 1]?.b || b)}) &lt;&lt; 1 ={" "}
+                {formatBinary(curr.carry)}
+              </code>
             </div>
           </div>
         </div>
@@ -207,8 +229,8 @@ export default function SumOfTwoIntegers() {
           {steps.map((s, i) => (
             <div
               key={i}
-              className={`sti-timeline-item ${i === currentStep ? 'sti-timeline-active' : ''} ${
-                i < currentStep ? 'sti-timeline-completed' : ''
+              className={`sti-timeline-item ${i === currentStep ? "sti-timeline-active" : ""} ${
+                i < currentStep ? "sti-timeline-completed" : ""
               }`}
               onClick={() => {
                 setCurrentStep(i);
@@ -227,27 +249,49 @@ export default function SumOfTwoIntegers() {
       <div className="sti-algorithm-info">
         <h3>Algorithm (Bit Manipulation):</h3>
         <div className="sti-algorithm-content">
-          <p><strong>Key Idea:</strong> Use XOR for sum without carry, AND for carry.</p>
+          <p>
+            <strong>Key Idea:</strong> Use XOR for sum without carry, AND for
+            carry.
+          </p>
           <div className="sti-code-block">
             <code>
-              while (b !== 0) {'{'}
+              while (b !== 0) {"{"}
               <br />
-              &nbsp;&nbsp;a = a ^ b&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// sum without carry
+              &nbsp;&nbsp;a = a ^
+              b&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//
+              sum without carry
               <br />
-              &nbsp;&nbsp;b = (a & b) &lt;&lt; 1&nbsp;&nbsp;&nbsp;// carry shifted left
+              &nbsp;&nbsp;b = (a & b) &lt;&lt; 1&nbsp;&nbsp;&nbsp;// carry
+              shifted left
               <br />
-              {'}'}<br />
+              {"}"}
+              <br />
               return a
             </code>
           </div>
           <ul>
-            <li><strong>XOR (^):</strong> Gives sum of bits without carry</li>
-            <li><strong>AND (&):</strong> Identifies positions where carry is needed</li>
-            <li><strong>Left Shift (&lt;&lt; 1):</strong> Moves carry to next bit position</li>
-            <li><strong>Repeat:</strong> Until no carry (b = 0)</li>
+            <li>
+              <strong>XOR (^):</strong> Gives sum of bits without carry
+            </li>
+            <li>
+              <strong>AND (&):</strong> Identifies positions where carry is
+              needed
+            </li>
+            <li>
+              <strong>Left Shift (&lt;&lt; 1):</strong> Moves carry to next bit
+              position
+            </li>
+            <li>
+              <strong>Repeat:</strong> Until no carry (b = 0)
+            </li>
           </ul>
-          <p><strong>Time Complexity:</strong> O(log(max(a, b))) for number of bits</p>
-          <p><strong>Space Complexity:</strong> O(1)</p>
+          <p>
+            <strong>Time Complexity:</strong> O(log(max(a, b))) for number of
+            bits
+          </p>
+          <p>
+            <strong>Space Complexity:</strong> O(1)
+          </p>
         </div>
       </div>
     </div>

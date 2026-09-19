@@ -1,230 +1,308 @@
-import { useState, useMemo, useCallback } from 'react'
-import { createPortal } from 'react-dom'
-import { motion, AnimatePresence } from 'framer-motion'
-import LuminoDockPanel from '../../components/LuminoDockPanel'
-import FloatingPanel from '../../components/shared/FloatingPanel'
-import CodeTracePanel from '../../components/CodeTracePanel'
-import PlaybackControls from '../../components/PlaybackControls'
-import CodePatternAnnotations from '../../components/CodePatternAnnotations'
-import PatternLegend from '../../components/PatternLegend'
-import { usePlaybackState } from '../../hooks/usePlaybackState'
-import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
-import './PermutationsIIVisualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
+import { useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
+import FloatingPanel from "../../components/shared/FloatingPanel";
+import CodeTracePanel from "../../components/CodeTracePanel";
+import PlaybackControls from "../../components/PlaybackControls";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
+import { usePlaybackState } from "../../hooks/usePlaybackState";
+import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
+import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamplesOr } from "../../config/examplesRegistry";
+import "./PermutationsIIVisualizer.css";
+import ManualInputPanel from "../../components/shared/ManualInputPanel";
 
 const SOLUTION_CODE = [
-  { line: 1, text: 'class Solution:' },
-  { line: 2, text: '    def permuteUnique(self, nums: List[int]) -> List[List[int]]:' },
-  { line: 3, text: '        nums.sort()' },
-  { line: 4, text: '        result = []' },
-  { line: 5, text: '        used = [False] * len(nums)' },
-  { line: 6, text: '        ' },
-  { line: 7, text: '        def backtrack(current):' },
-  { line: 8, text: '            if len(current) == len(nums):' },
-  { line: 9, text: '                result.append(current[:])' },
-  { line: 10, text: '                return' },
-  { line: 11, text: '            ' },
-  { line: 12, text: '            for i in range(len(nums)):' },
-  { line: 13, text: '                if used[i] or (i > 0 and nums[i]==nums[i-1] and not used[i-1]):' },
-  { line: 14, text: '                    continue' },
-  { line: 15, text: '                current.append(nums[i])' },
-  { line: 16, text: '                used[i] = True' },
-  { line: 17, text: '                backtrack(current)' },
-  { line: 18, text: '                current.pop()' },
-  { line: 19, text: '                used[i] = False' },
-  { line: 20, text: '        backtrack([])' },
-  { line: 21, text: '        return result' },
-]
+  { line: 1, text: "class Solution:" },
+  {
+    line: 2,
+    text: "    def permuteUnique(self, nums: List[int]) -> List[List[int]]:",
+  },
+  { line: 3, text: "        nums.sort()" },
+  { line: 4, text: "        result = []" },
+  { line: 5, text: "        used = [False] * len(nums)" },
+  { line: 6, text: "        " },
+  { line: 7, text: "        def backtrack(current):" },
+  { line: 8, text: "            if len(current) == len(nums):" },
+  { line: 9, text: "                result.append(current[:])" },
+  { line: 10, text: "                return" },
+  { line: 11, text: "            " },
+  { line: 12, text: "            for i in range(len(nums)):" },
+  {
+    line: 13,
+    text: "                if used[i] or (i > 0 and nums[i]==nums[i-1] and not used[i-1]):",
+  },
+  { line: 14, text: "                    continue" },
+  { line: 15, text: "                current.append(nums[i])" },
+  { line: 16, text: "                used[i] = True" },
+  { line: 17, text: "                backtrack(current)" },
+  { line: 18, text: "                current.pop()" },
+  { line: 19, text: "                used[i] = False" },
+  { line: 20, text: "        backtrack([])" },
+  { line: 21, text: "        return result" },
+];
 
-const PATTERNS = ['init', 'backtrack', 'skip', 'add', 'result', 'done']
+const PATTERNS = ["init", "backtrack", "skip", "add", "result", "done"];
 const LINE_PATTERN_MAP = {
-  3: 'init',
-  7: 'backtrack',
-  13: 'skip',
-  15: 'add',
-  9: 'result',
-  21: 'done',
-}
+  3: "init",
+  7: "backtrack",
+  13: "skip",
+  15: "add",
+  9: "result",
+  21: "done",
+};
 
 function generateSteps(numsInput) {
-  const steps = []
+  const steps = [];
 
-  if (!Array.isArray(numsInput) || numsInput.length === 0 || numsInput.length > 8) {
+  if (
+    !Array.isArray(numsInput) ||
+    numsInput.length === 0 ||
+    numsInput.length > 8
+  ) {
     steps.push({
-      phase: 'done',
+      phase: "done",
       activeLine: 21,
       relatedLines: [21],
-      message: 'Invalid input (must be 1-8 elements).',
+      message: "Invalid input (must be 1-8 elements).",
       done: true,
-    })
-    return steps
+    });
+    return steps;
   }
 
-  const nums = [...numsInput].sort((a, b) => a - b)
+  const nums = [...numsInput].sort((a, b) => a - b);
 
   steps.push({
-    phase: 'init',
+    phase: "init",
     activeLine: 3,
     relatedLines: [3, 4, 5],
-    message: `Sorted: [${nums.join(', ')}]`,
+    message: `Sorted: [${nums.join(", ")}]`,
     nums,
     result: [],
     currentPath: [],
     used: Array(nums.length).fill(false),
-  })
+  });
 
-  const result = []
-  const used = Array(nums.length).fill(false)
+  const result = [];
+  const used = Array(nums.length).fill(false);
 
   function generateBacktrackSteps(current, depth) {
     if (current.length === nums.length) {
-      result.push([...current])
+      result.push([...current]);
       steps.push({
-        phase: 'result',
+        phase: "result",
         activeLine: 9,
         relatedLines: [8, 9],
-        message: `Found permutation: [${current.join(', ')}]`,
+        message: `Found permutation: [${current.join(", ")}]`,
         nums,
-        result: result.map(r => [...r]),
+        result: result.map((r) => [...r]),
         currentPath: current,
         used: [...used],
         depth,
-      })
-      return
+      });
+      return;
     }
 
     steps.push({
-      phase: 'backtrack',
+      phase: "backtrack",
       activeLine: 12,
       relatedLines: [12],
       message: `Backtrack: trying to add element at position ${current.length}`,
       nums,
-      result: result.map(r => [...r]),
+      result: result.map((r) => [...r]),
       currentPath: current,
       used: [...used],
       depth,
-    })
+    });
 
     for (let i = 0; i < nums.length; i++) {
       if (used[i]) {
         steps.push({
-          phase: 'skip',
+          phase: "skip",
           activeLine: 13,
           relatedLines: [13],
           message: `Skip nums[${i}]=${nums[i]} (already used)`,
           nums,
-          result: result.map(r => [...r]),
+          result: result.map((r) => [...r]),
           currentPath: current,
           used: [...used],
           depth,
           skippedIdx: i,
-        })
-        continue
+        });
+        continue;
       }
 
       if (i > 0 && nums[i] === nums[i - 1] && !used[i - 1]) {
         steps.push({
-          phase: 'skip',
+          phase: "skip",
           activeLine: 13,
           relatedLines: [13],
           message: `Skip nums[${i}]=${nums[i]} (duplicate of unused nums[${i - 1}])`,
           nums,
-          result: result.map(r => [...r]),
+          result: result.map((r) => [...r]),
           currentPath: current,
           used: [...used],
           depth,
           skippedIdx: i,
-        })
-        continue
+        });
+        continue;
       }
 
-      current.push(nums[i])
-      used[i] = true
+      current.push(nums[i]);
+      used[i] = true;
 
       steps.push({
-        phase: 'add',
+        phase: "add",
         activeLine: 15,
         relatedLines: [15, 16],
-        message: `Add nums[${i}]=${nums[i]} → current=[${current.join(', ')}]`,
+        message: `Add nums[${i}]=${nums[i]} → current=[${current.join(", ")}]`,
         nums,
-        result: result.map(r => [...r]),
+        result: result.map((r) => [...r]),
         currentPath: [...current],
         used: [...used],
         depth,
         addedIdx: i,
-      })
+      });
 
-      generateBacktrackSteps(current, depth + 1)
+      generateBacktrackSteps(current, depth + 1);
 
-      current.pop()
-      used[i] = false
+      current.pop();
+      used[i] = false;
     }
   }
 
-  generateBacktrackSteps([], 0)
+  generateBacktrackSteps([], 0);
 
   steps.push({
-    phase: 'done',
+    phase: "done",
     activeLine: 21,
     relatedLines: [21],
     message: `Generated ${result.length} unique permutations`,
-    result: result.map(r => [...r]),
+    result: result.map((r) => [...r]),
     done: true,
-  })
+  });
 
-  return steps
+  return steps;
 }
 
 function VisualizationPanel({ nums, step, applyExample, examples }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
-      {examples?.length > 0 && (
-        <div>
-        </div>
-      )}
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 16,
+        padding: 16,
+        height: "100%",
+        overflow: "auto",
+      }}
+    >
+      {examples?.length > 0 && <div></div>}
 
-      <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
-        <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Input</div>
-        <div style={{ fontSize: 13, color: '#5577a4', fontFamily: 'monospace', fontWeight: 600 }}>
-          [{nums.join(', ')}]
+      <div
+        style={{
+          padding: 12,
+          backgroundColor: "var(--surface2)",
+          borderRadius: 6,
+          border: "1px solid var(--text-muted)",
+        }}
+      >
+        <div
+          style={{
+            fontSize: 11,
+            fontWeight: 600,
+            color: "var(--text-muted)",
+            marginBottom: 6,
+          }}
+        >
+          Input
+        </div>
+        <div
+          style={{
+            fontSize: 13,
+            color: "#5577a4",
+            fontFamily: "monospace",
+            fontWeight: 600,
+          }}
+        >
+          [{nums.join(", ")}]
         </div>
       </div>
 
       {step?.currentPath !== undefined && (
-        <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #a78bfa' }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#7e56f8', marginBottom: 6 }}>Current Path</div>
-          <div style={{ fontSize: 13, color: '#5577a4', fontFamily: 'monospace', fontWeight: 600 }}>
-            [{step.currentPath.join(', ')}] ({step.currentPath.length}/{nums.length})
+        <div
+          style={{
+            padding: 12,
+            backgroundColor: "var(--surface2)",
+            borderRadius: 6,
+            border: "2px solid #a78bfa",
+          }}
+        >
+          <div
+            style={{
+              fontSize: 11,
+              fontWeight: 600,
+              color: "#7e56f8",
+              marginBottom: 6,
+            }}
+          >
+            Current Path
+          </div>
+          <div
+            style={{
+              fontSize: 13,
+              color: "#5577a4",
+              fontFamily: "monospace",
+              fontWeight: 600,
+            }}
+          >
+            [{step.currentPath.join(", ")}] ({step.currentPath.length}/
+            {nums.length})
           </div>
         </div>
       )}
 
       {step?.result && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>
+          <div
+            style={{
+              fontSize: 12,
+              fontWeight: 600,
+              color: "#5577a4",
+              marginBottom: 8,
+            }}
+          >
             Permutations Found ({step.result.length})
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 4, maxHeight: 150, overflowY: 'auto' }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 4,
+              maxHeight: 150,
+              overflowY: "auto",
+            }}
+          >
             <AnimatePresence mode="popLayout">
               {step.result.slice(-5).map((perm, idx) => (
                 <motion.div
                   key={`perm-${step.result.length}-${idx}`}
                   style={{
-                    padding: '8px 10px',
+                    padding: "8px 10px",
                     borderRadius: 4,
-                    border: '1px solid var(--text-muted)',
-                    backgroundColor: 'var(--border)',
-                    fontFamily: 'monospace',
+                    border: "1px solid var(--text-muted)",
+                    backgroundColor: "var(--border)",
+                    fontFamily: "monospace",
                     fontSize: 12,
-                    color: '#22c55e',
+                    color: "#22c55e",
                   }}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0 }}
                 >
-                  [{perm.join(', ')}]
+                  [{perm.join(", ")}]
                 </motion.div>
               ))}
             </AnimatePresence>
@@ -236,38 +314,49 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
         <motion.div
           style={{
             padding: 16,
-            backgroundColor: 'var(--surface2)',
+            backgroundColor: "var(--surface2)",
             borderRadius: 6,
-            border: '2px solid #22c55e',
-            textAlign: 'center',
+            border: "2px solid #22c55e",
+            textAlign: "center",
           }}
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 8 }}>Total Permutations</div>
-          <div style={{ fontSize: 24, fontWeight: 'bold', color: '#178740' }}>{step.result.length}</div>
+          <div
+            style={{
+              fontSize: 12,
+              fontWeight: 600,
+              color: "var(--text-muted)",
+              marginBottom: 8,
+            }}
+          >
+            Total Permutations
+          </div>
+          <div style={{ fontSize: 24, fontWeight: "bold", color: "#178740" }}>
+            {step.result.length}
+          </div>
         </motion.div>
       )}
     </div>
-  )
+  );
 }
 
 export default function PermutationsIIVisualizer() {
-  const examples = useMemo(() => getExamplesOr('permutations-ii', []), [])
-  const [numsInput, setNumsInput] = useState('[1,1,2]')
+  const examples = useMemo(() => getExamplesOr("permutations-ii", []), []);
+  const [numsInput, setNumsInput] = useState("[1,1,2]");
 
   const { nums, inputError } = useMemo(() => {
     try {
-      const n = JSON.parse(numsInput)
-      if (!Array.isArray(n)) throw new Error('Input must be array')
-      return { nums: n, inputError: '' }
+      const n = JSON.parse(numsInput);
+      if (!Array.isArray(n)) throw new Error("Input must be array");
+      return { nums: n, inputError: "" };
     } catch (e) {
-      return { nums: [], inputError: e.message }
+      return { nums: [], inputError: e.message };
     }
-  }, [numsInput])
+  }, [numsInput]);
 
-  const steps = useMemo(() => generateSteps(nums), [nums])
+  const steps = useMemo(() => generateSteps(nums), [nums]);
 
   const {
     stepIndex,
@@ -280,23 +369,32 @@ export default function PermutationsIIVisualizer() {
     speed,
     setSpeed,
     isDone,
-  } = usePlaybackState(steps.length)
+  } = usePlaybackState(steps.length);
 
-  const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
-  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+  const step = stepIndex >= 0 ? steps[stepIndex] : null;
+  const connectivity = useCodeVisualConnectivity({
+    steps,
+    stepIndex,
+    onStepJump: setStepIndex,
+  });
+  const {
+    showPatternOverlay,
+    setShowPatternOverlay,
+    activeLineDom,
+    setActiveLineDom,
+  } = usePatternOverlay();
 
   const applyExample = useCallback(
     (ex) => {
-      setNumsInput(JSON.stringify(ex.nums || ex))
-      handleReset()
+      setNumsInput(JSON.stringify(ex.nums || ex));
+      handleReset();
     },
-    [handleReset]
-  )
+    [handleReset],
+  );
 
   // Step 2: Extract panels into consts
   const codePanel = (
-    <div style={{ position: 'relative', height: '100%' }}>
+    <div style={{ position: "relative", height: "100%" }}>
       <CodeTracePanel
         step={step}
         codeLines={SOLUTION_CODE}
@@ -314,39 +412,58 @@ export default function PermutationsIIVisualizer() {
         />
       )}
     </div>
-  )
+  );
 
   const vizPanel = (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 12, overflow: 'auto' }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        gap: 12,
+        padding: 12,
+        overflow: "auto",
+      }}
+    >
       <ManualInputPanel
-        fields={[{"key":"nums","label":"nums","type":"array"}]}
+        fields={[{ key: "nums", label: "nums", type: "array" }]}
         values={{ nums: numsInput }}
-        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
+        onChange={(k, v) => {
+          if (k === "nums") setNumsInput(v);
+          handleReset();
+        }}
         examples={examples}
         applyExample={applyExample}
         inputError={inputError}
       />
-      <VisualizationPanel nums={nums} step={step} applyExample={applyExample} examples={examples} />
+      <VisualizationPanel
+        nums={nums}
+        step={step}
+        applyExample={applyExample}
+        examples={examples}
+      />
     </div>
-  )
+  );
 
   const statusPanel = (
-    <div style={{ fontSize: 13, color: 'var(--text-muted)', padding: '8px 12px' }}>
+    <div
+      style={{ fontSize: 13, color: "var(--text-muted)", padding: "8px 12px" }}
+    >
       Step {stepIndex + 1} / {steps.length}
     </div>
-  )
+  );
 
   // Step 3: Add panelConfigs with Lumino layout
-  const [panelDivs, setPanelDivs] = useState(null)
+  const [panelDivs, setPanelDivs] = useState(null);
   const panelConfigs = useMemo(
     () => [
-      { id: 'code', title: 'Code', dockMode: 'split-right' },
-      { id: 'viz', title: '🔀 Permutations II', dockMode: 'split-right' },
-      { id: 'status', title: 'Status', dockMode: 'split-right', ratio: 0.08 },
+      { id: "code", title: "Code", dockMode: "split-right" },
+      { id: "viz", title: "🔀 Permutations II", dockMode: "split-right" },
+      { id: "status", title: "Status", dockMode: "split-right", ratio: 0.08 },
     ],
-    []
-  )
-  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+    [],
+  );
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
 
   // Step 4: Replace return with portals
   return (
@@ -378,10 +495,12 @@ export default function PermutationsIIVisualizer() {
             patternOverlayLabel="Show pattern overlay"
             showPatternOverlayToggle
           />
-          {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
+          {showPatternOverlay && (
+            <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+          )}
         </FloatingPanel>,
-        document.body
+        document.body,
       )}
     </div>
-  )
+  );
 }

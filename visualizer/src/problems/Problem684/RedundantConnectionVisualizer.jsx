@@ -1,59 +1,70 @@
-import { useState, useMemo, useCallback } from 'react'
-import { createPortal } from 'react-dom'
-import { motion } from 'framer-motion'
-import LuminoDockPanel from '../../components/LuminoDockPanel'
-import FloatingPanel from '../../components/shared/FloatingPanel'
-import CodeTracePanel from '../../components/CodeTracePanel'
-import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
-import { usePlaybackState } from '../../hooks/usePlaybackState'
-import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
-import './RedundantConnectionVisualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
+import { useState, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
+import { motion } from "framer-motion";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
+import FloatingPanel from "../../components/shared/FloatingPanel";
+import CodeTracePanel from "../../components/CodeTracePanel";
+import PlaybackControls from "../../components/PlaybackControls";
+import PatternOverlay from "../../components/PatternOverlay";
+import { usePlaybackState } from "../../hooks/usePlaybackState";
+import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
+import { getExamples } from "../../config/examplesRegistry";
+import "./RedundantConnectionVisualizer.css";
+import ManualInputPanel from "../../components/shared/ManualInputPanel";
 
 const SOLUTION_CODE = [
-  { line: 1, text: 'class Solution:' },
-  { line: 2, text: '    def findRedundantConnection(self, edges):' },
-  { line: 3, text: '        parent = [i for i in range(len(edges)+1)]' },
-  { line: 4, text: '        rank = [1] * (len(edges)+1)' },
-  { line: 5, text: '        def find(x):' },
-  { line: 6, text: '            while x != parent[x]: x = parent[x]' },
-  { line: 7, text: '            return x' },
-  { line: 8, text: '        def union(a, b):' },
-  { line: 9, text: '            ra, rb = find(a), find(b)' },
-  { line: 10, text: '            if ra == rb: return False' },
-  { line: 11, text: '            if rank[ra] < rank[rb]: parent[ra] = rb' },
-  { line: 12, text: '            elif rank[ra] > rank[rb]: parent[rb] = ra' },
-  { line: 13, text: '            else: parent[rb] = ra; rank[ra] += 1' },
-  { line: 14, text: '            return True' },
-  { line: 15, text: '        for u, v in edges:' },
-  { line: 16, text: '            if not union(u, v): return [u, v]' },
-]
+  { line: 1, text: "class Solution:" },
+  { line: 2, text: "    def findRedundantConnection(self, edges):" },
+  { line: 3, text: "        parent = [i for i in range(len(edges)+1)]" },
+  { line: 4, text: "        rank = [1] * (len(edges)+1)" },
+  { line: 5, text: "        def find(x):" },
+  { line: 6, text: "            while x != parent[x]: x = parent[x]" },
+  { line: 7, text: "            return x" },
+  { line: 8, text: "        def union(a, b):" },
+  { line: 9, text: "            ra, rb = find(a), find(b)" },
+  { line: 10, text: "            if ra == rb: return False" },
+  { line: 11, text: "            if rank[ra] < rank[rb]: parent[ra] = rb" },
+  { line: 12, text: "            elif rank[ra] > rank[rb]: parent[rb] = ra" },
+  { line: 13, text: "            else: parent[rb] = ra; rank[ra] += 1" },
+  { line: 14, text: "            return True" },
+  { line: 15, text: "        for u, v in edges:" },
+  { line: 16, text: "            if not union(u, v): return [u, v]" },
+];
 
 function parseEdges(input) {
-  const parsed = JSON.parse(input)
-  if (!Array.isArray(parsed)) throw new Error('edges must be 2D array')
-  return parsed.map((e) => [Number(e[0]), Number(e[1])])
+  const parsed = JSON.parse(input);
+  if (!Array.isArray(parsed)) throw new Error("edges must be 2D array");
+  return parsed.map((e) => [Number(e[0]), Number(e[1])]);
 }
 
 function generateSteps(edges) {
-  const n = edges.length
-  const parent = Array.from({ length: n + 1 }, (_, i) => i)
-  const rank = Array(n + 1).fill(1)
-  const steps = [{ phase: 'init', activeLine: 4, edge: null, parent: [...parent], rank: [...rank], roots: [], redundant: null, message: 'Initialize parent and rank arrays.' }]
+  const n = edges.length;
+  const parent = Array.from({ length: n + 1 }, (_, i) => i);
+  const rank = Array(n + 1).fill(1);
+  const steps = [
+    {
+      phase: "init",
+      activeLine: 4,
+      edge: null,
+      parent: [...parent],
+      rank: [...rank],
+      roots: [],
+      redundant: null,
+      message: "Initialize parent and rank arrays.",
+    },
+  ];
 
   const find = (x) => {
-    while (x !== parent[x]) x = parent[x]
-    return x
-  }
+    while (x !== parent[x]) x = parent[x];
+    return x;
+  };
 
   for (const [u, v] of edges) {
-    const ru = find(u)
-    const rv = find(v)
+    const ru = find(u);
+    const rv = find(v);
     steps.push({
-      phase: 'check',
+      phase: "check",
       activeLine: 10,
       edge: [u, v],
       parent: [...parent],
@@ -61,10 +72,10 @@ function generateSteps(edges) {
       roots: [ru, rv],
       redundant: null,
       message: `Edge [${u}, ${v}]: roots are ${ru} and ${rv}.`,
-    })
+    });
     if (ru === rv) {
       steps.push({
-        phase: 'done',
+        phase: "done",
         activeLine: 16,
         edge: [u, v],
         parent: [...parent],
@@ -72,17 +83,17 @@ function generateSteps(edges) {
         roots: [ru, rv],
         redundant: [u, v],
         message: `Cycle found. Redundant edge is [${u}, ${v}].`,
-      })
-      return steps
+      });
+      return steps;
     }
-    if (rank[ru] < rank[rv]) parent[ru] = rv
-    else if (rank[ru] > rank[rv]) parent[rv] = ru
+    if (rank[ru] < rank[rv]) parent[ru] = rv;
+    else if (rank[ru] > rank[rv]) parent[rv] = ru;
     else {
-      parent[rv] = ru
-      rank[ru] += 1
+      parent[rv] = ru;
+      rank[ru] += 1;
     }
     steps.push({
-      phase: 'union',
+      phase: "union",
       activeLine: 14,
       edge: [u, v],
       parent: [...parent],
@@ -90,33 +101,75 @@ function generateSteps(edges) {
       roots: [ru, rv],
       redundant: null,
       message: `Union ${u} and ${v}.`,
-    })
+    });
   }
 
-  steps.push({ phase: 'done', activeLine: 16, edge: null, parent: [...parent], rank: [...rank], roots: [], redundant: null, message: 'No redundant edge found.' })
-  return steps
+  steps.push({
+    phase: "done",
+    activeLine: 16,
+    edge: null,
+    parent: [...parent],
+    rank: [...rank],
+    roots: [],
+    redundant: null,
+    message: "No redundant edge found.",
+  });
+  return steps;
 }
 
-const EXAMPLES = getExamples('redundant-connection')
+const EXAMPLES = getExamples("redundant-connection");
 
 export default function RedundantConnectionVisualizer() {
-  const [edgesInput, setEdgesInput] = useState('[[1,2],[1,3],[2,3]]')
+  const [edgesInput, setEdgesInput] = useState("[[1,2],[1,3],[2,3]]");
   const { edges, inputError } = useMemo(() => {
     try {
-      return { edges: parseEdges(edgesInput), inputError: '' }
+      return { edges: parseEdges(edgesInput), inputError: "" };
     } catch (e) {
-      return { edges: [[1, 2], [1, 3], [2, 3]], inputError: e.message || 'Invalid input' }
+      return {
+        edges: [
+          [1, 2],
+          [1, 3],
+          [2, 3],
+        ],
+        inputError: e.message || "Invalid input",
+      };
     }
-  }, [edgesInput])
+  }, [edgesInput]);
 
-  const steps = useMemo(() => generateSteps(edges), [edges])
-  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
-  const step = stepIndex >= 0 ? steps[stepIndex] : null
-  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
-  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
+  const steps = useMemo(() => generateSteps(edges), [edges]);
+  const {
+    stepIndex,
+    setStepIndex,
+    stepForward,
+    stepBack,
+    togglePlay,
+    handleReset,
+    isPlaying,
+    speed,
+    setSpeed,
+    isDone,
+  } = usePlaybackState(steps.length);
+  const step = stepIndex >= 0 ? steps[stepIndex] : null;
+  const {
+    showPatternOverlay,
+    setShowPatternOverlay,
+    activeLineDom,
+    setActiveLineDom,
+  } = usePatternOverlay();
+  const connectivity = useCodeVisualConnectivity({
+    steps,
+    stepIndex,
+    onStepJump: setStepIndex,
+  });
 
-  const applyExample = useCallback((ex) => { setEdgesInput(JSON.stringify(ex.edges)); handleReset() }, [handleReset])
-  const nodes = useMemo(() => Array.from(new Set(edges.flat())), [edges])
+  const applyExample = useCallback(
+    (ex) => {
+      setEdgesInput(JSON.stringify(ex.edges));
+      handleReset();
+    },
+    [handleReset],
+  );
+  const nodes = useMemo(() => Array.from(new Set(edges.flat())), [edges]);
 
   const codePanel = (
     <CodeTracePanel
@@ -126,58 +179,131 @@ export default function RedundantConnectionVisualizer() {
       onLineSelect={connectivity.handleLineSelect}
       onActiveLineDomChange={setActiveLineDom}
     />
-  )
+  );
 
   const vizPanel = (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        gap: 12,
+        padding: 16,
+        overflow: "auto",
+      }}
+    >
       <ManualInputPanel
-        fields={[{"key":"edges","label":"edges","type":"string"}]}
+        fields={[{ key: "edges", label: "edges", type: "string" }]}
         values={{ edges: edgesInput }}
-        onChange={(k, v) => { if (k === 'edges') setEdgesInput(v); handleReset() }}
+        onChange={(k, v) => {
+          if (k === "edges") setEdgesInput(v);
+          handleReset();
+        }}
         examples={EXAMPLES}
         applyExample={applyExample}
         inputError={inputError}
       />
 
-      <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>Edges</div>
-      <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+      <div style={{ fontSize: 12, fontWeight: 600, color: "var(--text)" }}>
+        Edges
+      </div>
+      <div style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
         {edges.map(([u, v], i) => (
-          <motion.div key={`${u}-${v}-${i}`} animate={{ scale: step?.edge?.[0] === u && step?.edge?.[1] === v ? 1.2 : 1 }} style={{
-            padding: '8px 12px', borderRadius: 4,
-            backgroundColor: step?.edge?.[0] === u && step?.edge?.[1] === v ? '#fbbf24' : '#f3f4f6',
-            border: step?.edge?.[0] === u && step?.edge?.[1] === v ? '2px solid #f59e0b' : '1px solid var(--border)',
-            fontSize: 12, fontWeight: 'bold', color: 'var(--text-on-light)'
-          }}>
+          <motion.div
+            key={`${u}-${v}-${i}`}
+            animate={{
+              scale: step?.edge?.[0] === u && step?.edge?.[1] === v ? 1.2 : 1,
+            }}
+            style={{
+              padding: "8px 12px",
+              borderRadius: 4,
+              backgroundColor:
+                step?.edge?.[0] === u && step?.edge?.[1] === v
+                  ? "#fbbf24"
+                  : "#f3f4f6",
+              border:
+                step?.edge?.[0] === u && step?.edge?.[1] === v
+                  ? "2px solid #f59e0b"
+                  : "1px solid var(--border)",
+              fontSize: 12,
+              fontWeight: "bold",
+              color: "var(--text-on-light)",
+            }}
+          >
             [{u}, {v}]
           </motion.div>
         ))}
       </div>
 
-      <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>Node State</div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(80px, 1fr))', gap: 6 }}>
-        {nodes.map(n => (
-          <div key={n} style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4, border: '1px solid var(--text)', textAlign: 'center' }}>
-            <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>Node {n}</div>
-            <div style={{ fontSize: 12, fontWeight: 'bold', color: 'var(--text)' }}>p:{step?.parent?.[n] ?? n}</div>
-            <div style={{ fontSize: 12, fontWeight: 'bold', color: '#0b7db0' }}>r:{step?.rank?.[n] ?? 1}</div>
+      <div style={{ fontSize: 12, fontWeight: 600, color: "var(--text)" }}>
+        Node State
+      </div>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(80px, 1fr))",
+          gap: 6,
+        }}
+      >
+        {nodes.map((n) => (
+          <div
+            key={n}
+            style={{
+              padding: 8,
+              backgroundColor: "var(--surface)",
+              borderRadius: 4,
+              border: "1px solid var(--text)",
+              textAlign: "center",
+            }}
+          >
+            <div
+              style={{
+                fontSize: 11,
+                color: "var(--text-muted)",
+                marginBottom: 4,
+              }}
+            >
+              Node {n}
+            </div>
+            <div
+              style={{ fontSize: 12, fontWeight: "bold", color: "var(--text)" }}
+            >
+              p:{step?.parent?.[n] ?? n}
+            </div>
+            <div style={{ fontSize: 12, fontWeight: "bold", color: "#0b7db0" }}>
+              r:{step?.rank?.[n] ?? 1}
+            </div>
           </div>
         ))}
       </div>
 
       {step?.redundant && (
-        <div style={{ padding: 12, backgroundColor: '#fee2e2', borderRadius: 6, border: '2px solid #fecaca', textAlign: 'center', fontWeight: 600, color: '#991b1b' }}>
+        <div
+          style={{
+            padding: 12,
+            backgroundColor: "#fee2e2",
+            borderRadius: 6,
+            border: "2px solid #fecaca",
+            textAlign: "center",
+            fontWeight: 600,
+            color: "#991b1b",
+          }}
+        >
           ⚠️ Redundant edge: [{step.redundant[0]}, {step.redundant[1]}]
         </div>
       )}
     </div>
-  )
+  );
 
-  const [panelDivs, setPanelDivs] = useState(null)
-  const panelConfigs = useMemo(() => [
-    { id: 'code', title: 'Code' },
-    { id: 'viz', title: '🔗 Union-Find', dockMode: 'split-right' },
-  ], [])
-  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+  const [panelDivs, setPanelDivs] = useState(null);
+  const panelConfigs = useMemo(
+    () => [
+      { id: "code", title: "Code" },
+      { id: "viz", title: "🔗 Union-Find", dockMode: "split-right" },
+    ],
+    [],
+  );
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
 
   return (
     <div className="problem-shell">
@@ -201,16 +327,18 @@ export default function RedundantConnectionVisualizer() {
             prevDisabled={stepIndex < 0}
             nextDisabled={isDone}
             resetDisabled={stepIndex < 0}
-            onSpeedChange={e => setSpeed(Number(e.target.value))}
+            onSpeedChange={(e) => setSpeed(Number(e.target.value))}
             showPatternOverlay={showPatternOverlay}
             onShowPatternOverlayChange={setShowPatternOverlay}
             patternOverlayLabel="Show pattern overlay"
             showPatternOverlayToggle
           />
         </FloatingPanel>,
-        document.body
+        document.body,
       )}
-      {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
+      {showPatternOverlay && step && (
+        <PatternOverlay step={step} activeLineDom={activeLineDom} />
+      )}
     </div>
-  )
+  );
 }
