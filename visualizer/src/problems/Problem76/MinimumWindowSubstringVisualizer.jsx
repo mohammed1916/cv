@@ -281,7 +281,7 @@ export default function MinimumWindowSubstringVisualizer() {
     () => [
       { id: 'primary', title: 'Sliding Window', dockMode: 'split-right' },
       { id: 'state', title: 'Frequency State', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

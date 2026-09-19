@@ -286,7 +286,7 @@ export default function ValidateBSTVisualizer() {
         () => [
             { id: 'primary', title: 'DFS with (lo, hi) bounds', dockMode: 'split-right' },
             { id: 'state', title: 'Bounds', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

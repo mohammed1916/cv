@@ -128,7 +128,7 @@ export default function KthLargestElementVisualizer() {
   const panelConfigs = useMemo(() => [
     { id: 'input', title: 'Input & Heap Evolution' },
     { id: 'heap', title: 'Min-Heap State', dockMode: 'split-right' },
-    { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
   ], [])
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

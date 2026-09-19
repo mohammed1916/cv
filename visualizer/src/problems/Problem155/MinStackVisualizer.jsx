@@ -381,7 +381,7 @@ export default function MinStackVisualizer() {
     () => [
       { id: "primary", title: "Operation Builder", dockMode: "split-right" },
       { id: "viz", title: "Stack Visualization", dockMode: "split-right" },
-      { id: "code", title: "Code Trace", dockMode: "split-bottom" },
+      { id: "code", title: "Code Trace", dockMode: "split-right" },
       { id: "status", title: "Status", dockMode: "split-bottom", ratio: 0.08 },
     ],
     []

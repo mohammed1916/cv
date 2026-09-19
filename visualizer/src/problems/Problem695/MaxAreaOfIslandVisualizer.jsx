@@ -390,7 +390,7 @@ export default function MaxAreaOfIslandVisualizer() {
     () => [
       { id: 'grid', title: 'Grid View & Input' },
       { id: 'state', title: 'State & Info', dockMode: 'split-right' },
-      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
     ],
     []
   )

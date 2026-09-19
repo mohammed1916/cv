@@ -266,7 +266,7 @@ export default function InterleavingStringVisualizer() {
         () => [
             { id: 'input', title: 'Input Examples', dockMode: 'split-right' },
             { id: 'dp', title: 'DP Table Visualization', dockMode: 'split-right' },
-            { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
             { id: 'status', title: 'Result', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

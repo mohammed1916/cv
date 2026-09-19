@@ -740,7 +740,7 @@ export default function RegularExpressionMatchingVisualizer() {
       {
         id: "code",
         title: "Code",
-        dockMode: "split-bottom",
+        dockMode: "split-right",
       },
       {
         id: "status",

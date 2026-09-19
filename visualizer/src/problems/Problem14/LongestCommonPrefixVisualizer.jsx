@@ -435,7 +435,7 @@ export default function LongestCommonPrefixVisualizer() {
       { id: 'input', title: 'Input & Format', dockMode: 'split-right' },
       { id: 'strings-viz', title: 'Strings Grid', dockMode: 'split-right' },
       { id: 'prefix-viz', title: 'Common Prefix', dockMode: 'split-right' },
-      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

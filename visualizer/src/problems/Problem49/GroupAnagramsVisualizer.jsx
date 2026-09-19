@@ -323,7 +323,7 @@ export default function GroupAnagramsVisualizer() {
         () => [
             { id: 'input', title: 'Input Playground', dockMode: 'split-right' },
             { id: 'viz', title: 'Hash Map Visualization', dockMode: 'split-right' },
-            { id: 'code', title: 'Solution Code Trace', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Solution Code Trace', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

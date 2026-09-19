@@ -323,7 +323,7 @@ export default function MaximumSubarrayVisualizer() {
     () => [
       { id: 'primary', title: 'Array & Current Subarray', dockMode: 'split-right' },
       { id: 'state', title: 'State Variables', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

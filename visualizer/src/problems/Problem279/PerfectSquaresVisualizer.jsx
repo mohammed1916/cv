@@ -143,7 +143,7 @@ export default function PerfectSquaresVisualizer() {
     const panelConfigs = useMemo(() => [
       { id: 'input', title: 'Input & Examples' },
       { id: 'state', title: 'Current State', dockMode: 'split-right' },
-      { id: 'code', title: 'Solution Trace', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Solution Trace', dockMode: 'split-right' },
       { id: 'visualization', title: 'DP Array Visualization', dockMode: 'split-bottom' },
     ], [])
     const panelContents = useMemo(() => ({

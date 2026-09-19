@@ -155,7 +155,7 @@ export default function ValidParenthesesVisualizer() {
     () => [
       { id: 'primary', title: 'Bracket Dance', dockMode: 'split-right' },
       { id: 'state', title: 'Stack', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

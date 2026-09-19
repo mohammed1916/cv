@@ -246,7 +246,7 @@ export default function BinaryTreeLevelOrderTraversalIIVisualizer() {
     () => [
       { id: "primary", title: "Tree Visualization", dockMode: "split-right" },
       { id: "state", title: "Level Results", dockMode: "split-right" },
-      { id: "code", title: "Code Trace", dockMode: "split-bottom" },
+      { id: "code", title: "Code Trace", dockMode: "split-right" },
       { id: "status", title: "Status", dockMode: "split-bottom", ratio: 0.08 },
     ],
     [],

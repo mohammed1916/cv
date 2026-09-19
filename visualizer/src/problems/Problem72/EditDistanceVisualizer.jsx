@@ -228,7 +228,7 @@ export default function EditDistanceVisualizer() {
     () => [
       { id: 'input', title: 'Input', dockMode: 'split-right' },
       { id: 'table', title: 'DP Table', dockMode: 'split-right' },
-      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

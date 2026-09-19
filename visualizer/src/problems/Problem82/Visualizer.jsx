@@ -500,7 +500,7 @@ export default function RemoveDuplicatesFromListVisualizer() {
       { id: 'input', title: 'Input' },
       { id: "primary", title: "Visualization", dockMode: "split-bottom" },
       { id: "code", title: "Code", dockMode: "split-right" },
-      { id: "status", title: "Status", dockMode: "split-bottom", ratio: 0.08 },
+      { id: "status", title: "Status", dockMode: "split-right", ratio: 0.08 },
     ],
     []
   )

@@ -229,7 +229,7 @@ export default function BinaryTreeLevelOrderTraversalIIVisualizer() {
     const panelConfigs = useMemo(() => [
       { id: 'viz', title: 'Tree Visualization' },
       { id: 'result', title: 'Level Results', dockMode: 'split-right' },
-      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
     ], [])
     const panelContents = useMemo(() => ({
       viz: (<VisualizationPanel

@@ -366,9 +366,7 @@ function VisualizationPanel({
   handleReset,
 }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>}
-      </div>
-
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
       {step?.currentCell && step?.matrix && (
         <div>
           <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Matrix Visualization</div>

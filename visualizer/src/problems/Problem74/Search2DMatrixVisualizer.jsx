@@ -222,7 +222,7 @@ export default function Search2DMatrixVisualizer() {
     const panelConfigs = useMemo(
         () => [
             { id: 'primary', title: '🔍 Binary Search', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

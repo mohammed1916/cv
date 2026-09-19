@@ -238,7 +238,7 @@ export default function NextPermutationVisualizer() {
     () => [
       { id: 'examples', title: 'Examples', dockMode: 'split-right' },
       { id: 'array', title: 'Array Visualization', dockMode: 'split-right' },
-      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

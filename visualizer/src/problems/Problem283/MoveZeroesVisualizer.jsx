@@ -80,7 +80,7 @@ export default function MoveZeroesVisualizer({ problem }) {
     const panelConfigs = useMemo(() => [
       { id: 'input', title: "Input Examples" },
       { id: 'viz', title: "Array Visualization", dockMode: 'split-right' },
-      { id: 'code', title: "Code Trace", dockMode: 'split-bottom' },
+      { id: 'code', title: "Code Trace", dockMode: 'split-right' },
     ], [])
     const panelContents = useMemo(() => ({
       input: (<div className="mz-panel-body">

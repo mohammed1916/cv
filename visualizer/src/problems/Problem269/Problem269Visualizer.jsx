@@ -113,7 +113,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
     const panelConfigs = useMemo(
         () => [
             { id: 'viz', title: 'Visualization' },
-            { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
         ],
         []
     )

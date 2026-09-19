@@ -202,7 +202,7 @@ export default function PathSumIIVisualizer() {
         () => [
             { id: 'primary', title: 'Tree Visualization', dockMode: 'split-right' },
             { id: 'state', title: 'State', dockMode: 'split-right' },
-            { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

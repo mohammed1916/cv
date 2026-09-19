@@ -325,7 +325,7 @@ export default function SwapNodesInPairsVisualizer() {
             { id: 'input', title: 'Input' },
             { id: 'primary', title: 'Linked List · Pair Swaps', dockMode: 'split-bottom' },
             { id: 'code', title: 'Code', dockMode: 'split-right' },
-            { id: 'state', title: 'Swap State', dockMode: 'split-bottom' },
+            { id: 'state', title: 'Swap State', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

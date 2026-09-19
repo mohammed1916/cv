@@ -281,8 +281,7 @@ export default function StudentAttendanceRecordIIVisualizer() {
 
   /* ── Panels ───────────────────────────────────────────────── */
   const primaryPanel = (
-    <>
-
+    <div className="p552-panel-primary">
       <ManualInputPanel
         fields={[{"key":"n","label":"n","type":"number"}]}
         values={{ n: nInput }}
@@ -291,9 +290,6 @@ export default function StudentAttendanceRecordIIVisualizer() {
         applyExample={applyExample}
         inputError={inputError}
       />
-
-    <div className="p552-panel-primary">
-      </div>
 
       <div className="p552-card">
         <div className="p552-section-label">Days Processed</div>
@@ -327,8 +323,7 @@ export default function StudentAttendanceRecordIIVisualizer() {
         </div>
       )}
     </div>
-  
-    </>)
+  )
 
   const statePanel = (
     <div className="p552-panel-state">
@@ -428,7 +423,7 @@ export default function StudentAttendanceRecordIIVisualizer() {
     () => [
       { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
       { id: 'state',   title: 'State',         dockMode: 'split-right' },
-      { id: 'code',    title: 'Code',          dockMode: 'split-bottom' },
+      { id: 'code',    title: 'Code',          dockMode: 'split-right' },
       { id: 'status',  title: 'Status',        dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

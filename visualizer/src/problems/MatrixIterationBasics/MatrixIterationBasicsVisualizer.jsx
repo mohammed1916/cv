@@ -222,7 +222,7 @@ export default function MatrixIterationBasicsVisualizer({ problem }) {
     { id: 'controls', title: 'Pattern Controls' },
     { id: 'matrix', title: 'Matrix View', dockMode: 'split-bottom' },
     { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
-    { id: 'legend', title: 'Legend', dockMode: 'split-bottom' },
+    { id: 'legend', title: 'Legend', dockMode: 'split-right' },
   ], [])
   const panelContents = useMemo(() => ({
     controls: (<div className="mib-panel-body">

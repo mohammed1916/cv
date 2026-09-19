@@ -1,4 +1,4 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../../components/CodeTracePanel'
 import PlaybackControls from '../../../components/PlaybackControls'
@@ -169,8 +169,6 @@ export default function GuessNumberVisualizer() {
                     {inputError && <span className="gn-error">{inputError}</span>}
                 </header>
                 <div className="gn-body">
-                    </div>
-
                     {/* ── State Variables ── */}
                     <div className="gn-vars">
                         {[

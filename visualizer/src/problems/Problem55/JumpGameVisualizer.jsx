@@ -253,7 +253,7 @@ export default function JumpGameVisualizer() {
     const panelConfigs = useMemo(
         () => [
             { id: 'primary', title: 'Jump Game · Greedy Reach Tracking', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

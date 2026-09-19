@@ -432,7 +432,7 @@ export default function Problem94Visualizer() {
   const panelConfigs = useMemo(
     () => [
       { id: 'code', title: 'Code', dockMode: 'split-right' },
-      { id: 'viz', title: '🌳 Inorder Traversal', dockMode: 'split-bottom' },
+      { id: 'viz', title: '🌳 Inorder Traversal', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

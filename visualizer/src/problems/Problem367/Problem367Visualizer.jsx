@@ -484,7 +484,7 @@ export default function Problem367Visualizer() {
     const panelConfigs = useMemo(() => [
       { id: 'viz', title: 'Search Visualization' },
       { id: 'result', title: 'Result Panel', dockMode: 'split-right' },
-      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
     ], [])
     const panelContents = useMemo(() => ({
       viz: (<SearchVisualizationPanel

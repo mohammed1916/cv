@@ -294,7 +294,7 @@ export default function DecodeWaysVisualizer() {
     const panelConfigs = useMemo(
         () => [
             { id: 'primary', title: 'Decode Ways · 1D DP', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

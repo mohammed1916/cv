@@ -347,7 +347,7 @@ export default function NumberOfIslandsVisualizer() {
   const panelConfigs = useMemo(() => [
     { id: 'grid', title: 'Grid View & Input' },
     { id: 'state', title: 'State & Queue', dockMode: 'split-right' },
-    { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
   ], [])
 
   const [panelDivs, setPanelDivs] = useState(null)

@@ -1,4 +1,4 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../../components/shared/FloatingPanel";
@@ -82,7 +82,7 @@ function generateSteps(ops) {
 
 export default function RandomizedCollectionVisualizer() {
     const [inputText, setInputText] = useState(JSON.stringify(EXAMPLES[0] || { ops: [] }));
-    const { ex, inputError } = useMemo(() => { try { const value = JSON.parse(inputText), ops = value.ops; if (!Array.isArray(ops) || ops.some(op => !op || !['insert', 'remove', 'getRandom'].includes(op.type) || (op.type !== 'getRandom' && !Number.isFinite(Number(op.val)))) throw new Error('Use {"ops":[{"type":"insert|remove","val":number}|{"type":"getRandom"}]}.'); return { ex: { ops: ops.map(op => op.type === 'getRandom' ? { type: op.type } : { type: op.type, val: Number(op.val) }) }, inputError: '' } } catch (error) { return { ex: EXAMPLES[0], inputError: error.message } } }, [inputText])
+    const { ex, inputError } = useMemo(() => { try { const value = JSON.parse(inputText), ops = value.ops; if (!Array.isArray(ops) || ops.some(op => !op || !['insert', 'remove', 'getRandom'].includes(op.type) || (op.type !== 'getRandom' && !Number.isFinite(Number(op.val))))) throw new Error('Use {"ops":[{"type":"insert|remove","val":number}|{"type":"getRandom"}]}.'); return { ex: { ops: ops.map(op => op.type === 'getRandom' ? { type: op.type } : { type: op.type, val: Number(op.val) }) }, inputError: '' } } catch (error) { return { ex: EXAMPLES[0], inputError: error.message } } }, [inputText])
     const steps = useMemo(() => generateSteps(ex.ops), [ex]);
     const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);

@@ -325,7 +325,7 @@ export default function TwoSumVisualizer() {
     () => [
       { id: 'array', title: 'Array & Target', dockMode: 'split-right' },
       { id: 'hashmap', title: 'Hash Map', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

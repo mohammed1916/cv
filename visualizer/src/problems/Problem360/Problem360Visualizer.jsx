@@ -464,7 +464,7 @@ export default function Problem360Visualizer() {
   const panelConfigs = useMemo(() => [
     { id: 'code', title: 'Code' },
     { id: 'viz', title: 'Visualization', dockMode: 'split-right' },
-    { id: 'vars', title: 'Variables', dockMode: 'split-bottom' },
+    { id: 'vars', title: 'Variables', dockMode: 'split-right' },
   ], [])
   const panelContents = useMemo(() => ({
     code: (<CodeTracePanel

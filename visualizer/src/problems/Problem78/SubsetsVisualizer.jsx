@@ -244,7 +244,7 @@ export default function SubsetsVisualizer() {
         () => [
             { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
             { id: 'results', title: 'Results', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

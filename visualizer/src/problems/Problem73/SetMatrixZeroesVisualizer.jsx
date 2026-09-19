@@ -220,7 +220,7 @@ export default function SetMatrixZeroesVisualizer() {
     const panelConfigs = useMemo(
         () => [
             { id: 'primary', title: 'Matrix Visualization', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

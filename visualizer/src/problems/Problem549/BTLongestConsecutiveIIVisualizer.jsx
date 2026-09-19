@@ -326,8 +326,7 @@ export default function BTLongestConsecutiveIIVisualizer() {
 
   /* ── Panels ───────────────────────────────────────────────── */
   const primaryPanel = (
-    <>
-
+    <div className="p549-panel-primary">
       <ManualInputPanel
         fields={[{"key":"tree","label":"tree","type":"string"}]}
         values={{ tree: treeInput }}
@@ -336,9 +335,6 @@ export default function BTLongestConsecutiveIIVisualizer() {
         applyExample={applyExample}
         inputError={inputError}
       />
-
-    <div className="p549-panel-primary">
-      </div>
 
       <div className="p549-card">
         <div className="p549-section-label">Tree</div>
@@ -393,8 +389,7 @@ export default function BTLongestConsecutiveIIVisualizer() {
         </div>
       )}
     </div>
-  
-    </>)
+  )
 
   const statePanel = (
     <div className="p549-panel-state">
@@ -489,7 +484,7 @@ export default function BTLongestConsecutiveIIVisualizer() {
     () => [
       { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
       { id: 'state',   title: 'State',         dockMode: 'split-right' },
-      { id: 'code',    title: 'Code',          dockMode: 'split-bottom' },
+      { id: 'code',    title: 'Code',          dockMode: 'split-right' },
       { id: 'status',  title: 'Status',        dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

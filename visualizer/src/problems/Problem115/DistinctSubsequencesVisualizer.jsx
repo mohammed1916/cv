@@ -113,7 +113,7 @@ export default function DistinctSubsequencesVisualizer() {
   const panelConfigs = useMemo(
     () => [
       { id: 'primary', title: '📝 Distinct Subsequences', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

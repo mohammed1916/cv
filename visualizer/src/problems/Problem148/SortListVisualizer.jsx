@@ -722,7 +722,7 @@ export default function SortListVisualizer() {
       {
         id: "status",
         title: "Status",
-        dockMode: "split-bottom",
+        dockMode: "split-right",
         ratio: 0.08,
       },
     ],

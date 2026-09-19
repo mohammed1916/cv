@@ -96,7 +96,7 @@ export default function SuperUglyNumberVisualizer() {
 
   const panelConfigs = useMemo(() => [
     { id: 'input', title: 'Input' },
-    { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
     { id: 'sequence', title: '📈 DP sequence', dockMode: 'split-right' },
     { id: 'candidates', title: 'Prime pointers', dockMode: 'split-bottom' },
   ], [])

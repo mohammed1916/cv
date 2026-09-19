@@ -372,7 +372,6 @@ export default function ZigzagVisualizer() {
             </button>
           ))}
         </div>
-      </div>
       <div className="zv-progress-track">
         <motion.div className="zv-progress-fill" animate={{ width: `${progress}%` }} transition={{ duration: 0.14 }} />
       </div>

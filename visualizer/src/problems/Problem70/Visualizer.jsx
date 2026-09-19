@@ -358,7 +358,7 @@ export default function ClimbingStairsVisualizer() {
   const panelConfigs = useMemo(() => [
     { id: 'code', title: 'Code' },
     { id: 'viz', title: 'Visualization', dockMode: 'split-right' },
-    { id: 'vars', title: 'Variables', dockMode: 'split-bottom' },
+    { id: 'vars', title: 'Variables', dockMode: 'split-right' },
   ], [])
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

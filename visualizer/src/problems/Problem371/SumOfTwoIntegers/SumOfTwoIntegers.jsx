@@ -98,14 +98,13 @@ export default function SumOfTwoIntegers() {
 
   return (
     <div className="sti-container">
-        <ManualInputPanel
-          fields={[{"key":"customA","label":"customA","type":"string"},{"key":"customB","label":"customB","type":"string"}]}
-          values={{ customA: customAInput, customB: customBInput }}
-          onChange={(k, v) => { if (k === 'customA') setCustomAInput(v); if (k === 'customB') setCustomBInput(v) }}
-          showExamples={false}
-        />
+      <ManualInputPanel
+        fields={[{"key":"customA","label":"customA","type":"string"},{"key":"customB","label":"customB","type":"string"}]}
+        values={{ customA: customAInput, customB: customBInput }}
+        onChange={(k, v) => { if (k === 'customA') setCustomAInput(v); if (k === 'customB') setCustomBInput(v) }}
+        showExamples={false}
+      />
       <h1 className="sti-title">LC 371: Sum of Two Integers</h1>
-      </div>
 
       <div className="sti-controls">
         <button

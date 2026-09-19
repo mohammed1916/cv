@@ -259,7 +259,7 @@ export default function BinaryTreePathsVisualizer() {
       { id: 'input', title: 'Input' },
       { id: 'tree', title: 'Tree Visualization', dockMode: 'split-bottom' },
       { id: 'state', title: 'State', dockMode: 'split-right' },
-      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
     ], [])
     const panelContents = useMemo(() => ({
       input: (<InputPanel arrInput={arrInput} setArrInput={setArrInput} applyExample={applyExample} inputError={inputError} />),

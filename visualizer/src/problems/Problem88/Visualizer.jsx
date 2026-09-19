@@ -182,7 +182,7 @@ export default function MergeSortedArrayVisualizer() {
     { id: 'input', title: 'Input' },
     { id: 'viz', title: 'Visualization', dockMode: 'split-bottom' },
     { id: 'code', title: 'Code', dockMode: 'split-right' },
-    { id: 'vars', title: 'Variables', dockMode: 'split-bottom' },
+    { id: 'vars', title: 'Variables', dockMode: 'split-right' },
   ], [])
   const panelContents = useMemo(() => ({
     code: (<div style={{ position: "relative" }}>

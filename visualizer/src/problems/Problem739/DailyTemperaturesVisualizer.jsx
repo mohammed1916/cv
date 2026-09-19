@@ -160,7 +160,7 @@ export default function DailyTemperaturesVisualizer() {
     () => [
       { id: 'input', title: 'Input & Visualization' },
       { id: 'stack', title: 'Stack State', dockMode: 'split-right' },
-      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
     ],
     []
   )

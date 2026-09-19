@@ -543,7 +543,7 @@ export default function Problem399Visualizer() {
     () => [
       { id: 'primary', title: 'Graph',  dockMode: 'split-right' },
       { id: 'state',   title: 'State',  dockMode: 'split-right' },
-      { id: 'code',    title: 'Code',   dockMode: 'split-bottom' },
+      { id: 'code',    title: 'Code',   dockMode: 'split-right' },
       { id: 'status',  title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

@@ -167,7 +167,7 @@ export default function MaxDepthBinaryTreeVisualizer() {
         () => [
             { id: 'primary', title: 'Binary Tree DFS', dockMode: 'split-right' },
             { id: 'state', title: 'Call Stack', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

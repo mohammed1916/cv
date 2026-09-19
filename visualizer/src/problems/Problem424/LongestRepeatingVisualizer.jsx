@@ -181,7 +181,7 @@ export default function LongestRepeatingVisualizer() {
         () => [
             { id: "input", title: "Input Playground" },
             { id: "viz", title: "Visualization", dockMode: "split-right" },
-            { id: "code", title: "Code Trace", dockMode: "split-bottom" },
+            { id: "code", title: "Code Trace", dockMode: "split-right" },
         ],
         []
     );

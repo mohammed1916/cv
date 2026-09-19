@@ -125,7 +125,7 @@ export default function MaximumProductofWordLengthsVisualizer() {
 
   const panelConfigs = useMemo(() => [
     { id: 'input', title: 'Input' },
-    { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
     { id: 'viz', title: '🔤 Bitmask comparison', dockMode: 'split-right' },
   ], [])
   const panelContents = {

@@ -82,7 +82,6 @@ function generateSteps(nums) {
 
 const EXAMPLES = getExamples('subsets')
 
-function VisualizationPanel({ EXAMPLES, applyExample, numsInput, setNumsInput, nums, inputError, handleReset, step }) {
 function VisualizationPanel({ nums, inputError, step }) {
     return (
         <div className="subsets-viz-panel">

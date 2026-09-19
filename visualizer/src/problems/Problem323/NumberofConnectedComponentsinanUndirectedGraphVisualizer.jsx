@@ -112,7 +112,7 @@ export default function NumberofConnectedComponentsinanUndirectedGraphVisualizer
 
   const panelConfigs = useMemo(() => [
     { id: 'input', title: 'Input' },
-    { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
     { id: 'graph', title: '🕸️ DFS graph', dockMode: 'split-right' },
     { id: 'frontier', title: 'DFS frontier', dockMode: 'split-bottom' },
   ], [])

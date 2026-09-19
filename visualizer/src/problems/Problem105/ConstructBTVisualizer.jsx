@@ -152,7 +152,7 @@ export default function ConstructBTVisualizer() {
       { id: "input", title: "Input Playground", dockMode: "split-right" },
       { id: "tree", title: "Tree Visualization", dockMode: "split-right" },
       { id: "arrays", title: "Array Slices", dockMode: "split-bottom" },
-      { id: "code", title: "Code Trace", dockMode: "split-bottom" },
+      { id: "code", title: "Code Trace", dockMode: "split-right" },
       { id: "status", title: "Status", dockMode: "split-bottom", ratio: 0.08 },
     ],
     [],

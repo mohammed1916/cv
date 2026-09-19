@@ -274,7 +274,7 @@ export default function LCABSTVisualizer() {
     const panelConfigs = useMemo(() => [
         { id: 'input', title: 'Input Setup' },
         { id: 'viz', title: 'Tree Visualization', dockMode: 'split-right' },
-        { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+        { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
     ], [])
     const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

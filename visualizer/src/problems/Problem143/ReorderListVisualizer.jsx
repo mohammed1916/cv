@@ -420,7 +420,7 @@ export default function ReorderListVisualizer() {
   const [panelDivs, setPanelDivs] = useState(null);
   const panelConfigs = useMemo(
     () => [
-      { id: "code", title: "Code", dockMode: "split-bottom" },
+      { id: "code", title: "Code", dockMode: "split-right" },
       { id: "primary", title: "🔗 Reorder", dockMode: "split-right" },
       { id: "status", title: "Status", dockMode: "split-bottom", ratio: 0.08 },
     ],

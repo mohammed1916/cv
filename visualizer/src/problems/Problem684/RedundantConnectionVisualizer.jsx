@@ -129,8 +129,7 @@ export default function RedundantConnectionVisualizer() {
   )
 
   const vizPanel = (
-    <>
-
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
       <ManualInputPanel
         fields={[{"key":"edges","label":"edges","type":"string"}]}
         values={{ edges: edgesInput }}
@@ -139,9 +138,6 @@ export default function RedundantConnectionVisualizer() {
         applyExample={applyExample}
         inputError={inputError}
       />
-
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>}
-      </div>
 
       <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>Edges</div>
       <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
@@ -174,8 +170,7 @@ export default function RedundantConnectionVisualizer() {
         </div>
       )}
     </div>
-  
-    </>)
+  )
 
   const [panelDivs, setPanelDivs] = useState(null)
   const panelConfigs = useMemo(() => [

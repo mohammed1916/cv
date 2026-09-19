@@ -242,7 +242,7 @@ function VariablesPanel({ step }) {
  *       </div>
  *
  *       <div style={{ flex: 1, border: '1px dashed #334155', borderRadius: 6, padding: 16 }}>
- *         {/* Render your custom visualization here */}
+ *         Render custom visualization here
  *         <YourCustomVisualization step={step} />
  *       </div>
  *     </div>

@@ -205,7 +205,7 @@ export default function LCSVisualizer() {
     const panelConfigs = useMemo(() => [
         { id: 'table', title: '2-D DP Table' },
         { id: 'cell-info', title: 'Current Cell', dockMode: 'split-right' },
-        { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+        { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
     ], [])
     const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

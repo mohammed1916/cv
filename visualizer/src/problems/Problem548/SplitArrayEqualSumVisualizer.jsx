@@ -340,8 +340,7 @@ export default function SplitArrayEqualSumVisualizer() {
 
   /* ── Panels ───────────────────────────────────────────────── */
   const primaryPanel = (
-    <>
-
+    <div className="p548-panel-primary">
       <ManualInputPanel
         fields={[{"key":"nums","label":"nums","type":"string"}]}
         values={{ nums: numsInput }}
@@ -350,9 +349,6 @@ export default function SplitArrayEqualSumVisualizer() {
         applyExample={applyExample}
         inputError={inputError}
       />
-
-    <div className="p548-panel-primary">
-      </div>
 
       <div className="p548-card">
         <div className="p548-section-label">Array &amp; Cuts</div>
@@ -407,8 +403,7 @@ export default function SplitArrayEqualSumVisualizer() {
         </div>
       )}
     </div>
-  
-    </>)
+  )
 
   const statePanel = (
     <div className="p548-panel-state">
@@ -507,7 +502,7 @@ export default function SplitArrayEqualSumVisualizer() {
     () => [
       { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
       { id: 'state',   title: 'State',         dockMode: 'split-right' },
-      { id: 'code',    title: 'Code',          dockMode: 'split-bottom' },
+      { id: 'code',    title: 'Code',          dockMode: 'split-right' },
       { id: 'status',  title: 'Status',        dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

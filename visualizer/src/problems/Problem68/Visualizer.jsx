@@ -428,7 +428,7 @@ export default function Problem68Visualizer() {
   const panelConfigs = useMemo(
     () => [
       { id: 'code', title: 'Code', dockMode: 'split-right' },
-      { id: 'viz', title: '📐 Text Justification', dockMode: 'split-bottom' },
+      { id: 'viz', title: '📐 Text Justification', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

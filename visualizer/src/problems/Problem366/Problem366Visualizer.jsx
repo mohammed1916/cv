@@ -369,7 +369,7 @@ export default function Problem366Visualizer() {
     const panelConfigs = useMemo(() => [
       { id: 'viz', title: 'Tree Visualization' },
       { id: 'result', title: 'Leaf Collection', dockMode: 'split-right' },
-      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
     ], [])
     const panelContents = useMemo(() => ({
       viz: (<TreeVisualizationPanel

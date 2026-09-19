@@ -300,7 +300,7 @@ export default function YourProblemVisualizer() {
     { id: 'code', title: 'Code' },
     { id: 'viz', title: 'Visualization', dockMode: 'split-right' },
     // Optional: Add variables panel
-    { id: 'vars', title: 'Variables', dockMode: 'split-bottom' },
+    { id: 'vars', title: 'Variables', dockMode: 'split-right' },
   ], [])
 
   const panelContents = useMemo(() => ({

@@ -318,16 +318,14 @@ export default function PermutationsIIVisualizer() {
 
   const vizPanel = (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 12, overflow: 'auto' }}>
-        <ManualInputPanel
-          fields={[{"key":"nums","label":"nums","type":"array"}]}
-          values={{ nums: numsInput }}
-          onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
-          examples={examples}
-          applyExample={applyExample}
-          inputError={inputError}
-        />
-        )}
-      </div>
+      <ManualInputPanel
+        fields={[{"key":"nums","label":"nums","type":"array"}]}
+        values={{ nums: numsInput }}
+        onChange={(k, v) => { if (k === 'nums') setNumsInput(v); handleReset() }}
+        examples={examples}
+        applyExample={applyExample}
+        inputError={inputError}
+      />
       <VisualizationPanel nums={nums} step={step} applyExample={applyExample} examples={examples} />
     </div>
   )
@@ -344,7 +342,7 @@ export default function PermutationsIIVisualizer() {
     () => [
       { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'viz', title: '🔀 Permutations II', dockMode: 'split-right' },
-      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+      { id: 'status', title: 'Status', dockMode: 'split-right', ratio: 0.08 },
     ],
     []
   )

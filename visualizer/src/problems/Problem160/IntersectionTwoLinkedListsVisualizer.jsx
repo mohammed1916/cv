@@ -244,7 +244,7 @@ export default function IntersectionTwoLinkedListsVisualizer() {
   const panelConfigs = useMemo(
     () => [
       { id: 'primary', title: 'Linked Lists', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

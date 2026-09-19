@@ -345,7 +345,7 @@ export default function ReverseIntegerVisualizer() {
     () => [
       { id: 'input', title: 'Pop & Push Digits', dockMode: 'split-right' },
       { id: 'bounds', title: '32-Bit Bounds', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

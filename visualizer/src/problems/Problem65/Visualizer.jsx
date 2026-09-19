@@ -505,7 +505,7 @@ export default function Problem65Visualizer() {
   const panelConfigs = useMemo(
     () => [
       { id: 'primary', title: 'Examples', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'viz', title: '🔢 Valid Number', dockMode: 'split-bottom' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],

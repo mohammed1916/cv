@@ -1136,7 +1136,7 @@ export default function LRUCacheVisualizer() {
       {
         id: "code",
         title: "Code Trace",
-        dockMode: "split-bottom",
+        dockMode: "split-right",
       },
       {
         id: "status",

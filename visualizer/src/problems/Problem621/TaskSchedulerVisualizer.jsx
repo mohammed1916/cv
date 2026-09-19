@@ -359,7 +359,7 @@ export default function TaskSchedulerVisualizer() {
         { id: 'timeline', title: 'Timeline', dockMode: 'split-right' },
         { id: 'freq-viz', title: 'Task Frequency', dockMode: 'split-bottom' },
         { id: 'state-viz', title: 'Algorithm State', dockMode: 'split-bottom' },
-        { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+        { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
     ], [])
     const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

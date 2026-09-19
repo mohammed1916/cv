@@ -239,7 +239,7 @@ export default function HouseRobberIIVisualizer() {
         { id: 'input', title: 'Input Playground' },
         { id: 'state', title: 'DP State Monitor', dockMode: 'split-right' },
         { id: 'viz', title: 'DP Array Visualization', dockMode: 'split-bottom' },
-        { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+        { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
     ], [])
     const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

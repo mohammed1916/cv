@@ -385,7 +385,7 @@ export default function Problem86Visualizer() {
     () => [
       { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'viz', title: '✂️ Partition List', dockMode: 'split-right' },
-      { id: 'status', title: 'Examples', dockMode: 'split-bottom', ratio: 0.08 },
+      { id: 'status', title: 'Examples', dockMode: 'split-right', ratio: 0.08 },
     ],
     []
   )
