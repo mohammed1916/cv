@@ -14,99 +14,8 @@ import { getExamples } from '../../config/examplesRegistry'
 import "./NQueensIIVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
-const NQUEENSII_PATTERNS = ['check', 'done', 'init', 'place', 'remove', 'skip', 'solution']
-
-const LINE_PATTERN_MAP = {
-  7: 'solution',
-  9: 'check',
-  10: 'skip',
-  11: 'place',
-  12: 'place',
-  13: 'remove',
-}
-
-const SOLUTION_CODE = [
-  { line: 1,  text: "def solveNQueens(n):" },
-  { line: 2,  text: "    cols, diag1, diag2 = set(), set(), set()" },
-  { line: 3,  text: "    count = 0" },
-  { line: 4,  text: "    def backtrack(row):" },
-  { line: 5,  text: "        nonlocal count" },
-  { line: 6,  text: "        if row == n:" },
-  { line: 7,  text: "            count += 1; return" },
-  { line: 8,  text: "        for col in range(n):" },
-  { line: 9,  text: "            if col in cols or (row-col) in diag1 or (row+col) in diag2:" },
-  { line: 10, text: "                continue  # under attack" },
-  { line: 11, text: "            place queen; add to cols/diag1/diag2" },
-  { line: 12, text: "            backtrack(row + 1)" },
-  { line: 13, text: "            remove queen; remove from cols/diag1/diag2" },
-  { line: 14, text: "    backtrack(0)" },
-  { line: 15, text: "    return count" },
-];
-
+import { NQUEENSII_PATTERNS, LINE_PATTERN_MAP, SOLUTION_CODE, generateSteps } from './algorithm';
 const EXAMPLES = getExamples('nqueensii');
-
-function generateSteps(n) {
-  const steps = [];
-  const board = Array.from({ length: n }, () => Array(n).fill("."));
-  const cols = new Set(), diag1 = new Set(), diag2 = new Set();
-  let count = 0;
-
-  steps.push({
-    activeLine: 3, boardRef: board.map(r => [...r]),
-    row: 0, col: -1, phase: "init", solutions: 0,
-    message: `Start N-Queens II for n=${n}. Empty board, count=0.`,
-  });
-
-  function backtrack(row) {
-    if (row === n) {
-      count++;
-      steps.push({
-        activeLine: 7, boardRef: board.map(r => [...r]),
-        row, col: -1, phase: "solution", solutions: count,
-        message: `✓ Solution #${count} found! Increment count.`,
-      });
-      return;
-    }
-    for (let col = 0; col < n; col++) {
-      steps.push({
-        activeLine: 9, boardRef: board.map(r => [...r]),
-        row, col, phase: "check", solutions: count,
-        message: `Row ${row}, Col ${col}: check attacks`,
-      });
-      if (cols.has(col) || diag1.has(row - col) || diag2.has(row + col)) {
-        steps.push({
-          activeLine: 10, boardRef: board.map(r => [...r]),
-          row, col, phase: "skip", solutions: count,
-          message: `(${row},${col}) under attack — skip`,
-        });
-        continue;
-      }
-      board[row][col] = "Q";
-      cols.add(col); diag1.add(row - col); diag2.add(row + col);
-      steps.push({
-        activeLine: 11, boardRef: board.map(r => [...r]),
-        row, col, phase: "place", solutions: count,
-        message: `Place Queen at (${row},${col})`,
-      });
-      backtrack(row + 1);
-      board[row][col] = ".";
-      cols.delete(col); diag1.delete(row - col); diag2.delete(row + col);
-      steps.push({
-        activeLine: 13, boardRef: board.map(r => [...r]),
-        row, col, phase: "remove", solutions: count,
-        message: `Backtrack: remove Queen from (${row},${col})`,
-      });
-    }
-  }
-
-  backtrack(0);
-  steps.push({
-    activeLine: 15, boardRef: board.map(r => [...r]),
-    row: -1, col: -1, phase: "done", solutions: count, done: true,
-    message: `Done! Found ${count} solution(s) for ${n}-Queens II.`,
-  });
-  return steps;
-}
 
 function getAttacked(board, n) {
   const attacked = Array.from({ length: n }, () => Array(n).fill(false));
@@ -198,17 +107,17 @@ export default function NQueensIIVisualizer() {
   const [nInput, setNInput] = useState(4);
   const { n, inputError } = useMemo(() => {
     try {
-      const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
+      const parsedN = Number(nInput); if (!Number.isInteger(parsedN) || parsedN < 1 || parsedN > 9) throw new Error('Use an integer n from 1 to 9.');
       return { n: parsedN, inputError: '' };
     } catch (e) {
       return { n: 4, inputError: e.message };
     }
   }, [nInput]);
-  const steps = useMemo(() => generateSteps(n), [n]);
+  const steps = useMemo(() => inputError ? [] : generateSteps(n), [n, inputError]);
   const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
     usePlaybackState(steps.length);
   const step = stepIndex >= 0 ? steps[stepIndex] : null;
-  const applyEx = useCallback((e) => { setEx(e); setNInput(String(e.n)); handleReset(); }, [handleReset]);;
+  const applyEx = useCallback((e) => { setEx(e); setNInput(String(e.n)); handleReset(); }, [handleReset]);
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
 
@@ -230,6 +139,7 @@ export default function NQueensIIVisualizer() {
         applyExample={applyEx}
         inputError={inputError}
       />
+      {steps.truncated && <p role="status">All solutions are counted. Playback shows the first 12,000 events, then the final count; use a smaller n to inspect every event.</p>}
       <BoardPanel
       EXAMPLES={EXAMPLES}
       ex={ex}
@@ -247,7 +157,7 @@ export default function NQueensIIVisualizer() {
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
-      <CodeTracePanel
+      <CodeTracePanel playgroundInput={{ n }} playgroundDisabled={Boolean(inputError)}
         step={step}
         codeLines={SOLUTION_CODE}
         onActiveLineDomChange={setActiveLineDom}

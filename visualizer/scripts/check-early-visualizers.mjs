@@ -36,13 +36,48 @@ try {
   };
   await command('Runtime.enable');
   await command('Emulation.setDeviceMetricsOverride', { width: 1440, height: 1000, deviceScaleFactor: 1, mobile: false });
-  for (const slug of ['integer-to-roman', 'roman-to-integer', 'palindrome-number', 'string-to-integer-atoi', 'n-queens', 'longest-palindromic-substring', 'regular-expression-matching', 'median-of-two-sorted-arrays']) {
+  for (const slug of ['permutations-ii', 'n-queens-ii', 'remove-element', 'divide-two-integers', 'integer-to-roman', 'roman-to-integer', 'palindrome-number', 'string-to-integer-atoi', 'n-queens', 'longest-palindromic-substring', 'regular-expression-matching', 'median-of-two-sorted-arrays']) {
     await command('Page.navigate', { url: 'about:blank' });
     await waitFor(() => evaluate(`location.href === 'about:blank'`));
     await command('Page.navigate', { url: `${base}/#${slug}` });
     await waitFor(() => evaluate(`Boolean(document.querySelector('.ctp-panel'))`));
     assert.equal(await evaluate(`document.body.innerText.includes('Editor:')`), false);
     assert.equal(await evaluate(`document.body.innerText.includes('Edit in Code Playground')`), true);
+    assert.equal(await evaluate(`getComputedStyle(document.querySelector('.ctp-text')).fontVariantLigatures`), 'none');
+    if (['permutations-ii', 'n-queens-ii'].includes(slug)) {
+      for (let index = 0; index < 1000; index++) {
+        const done = await evaluate(`(()=>{const button=[...document.querySelectorAll('button')].find(button=>button.textContent.trim()==='Next'); if(button.disabled) return true; button.click(); return false})()`);
+        if (done) break;
+        await delay(5);
+      }
+      if (slug === 'permutations-ii') {
+        assert.deepEqual(await evaluate(`[...document.querySelectorAll('.permutation-results code')].map(cell=>cell.textContent)`), ['[1, 1, 2]', '[1, 2, 1]', '[2, 1, 1]']);
+      } else {
+        assert.equal(await evaluate(`document.querySelector('.nqii-result')?.textContent.includes('2 solution(s)')`), true);
+        assert.equal(await evaluate(`document.querySelector('.ctp-scroll').textContent.includes('cols.add(col)')`), true);
+        assert.equal(await evaluate(`document.querySelector('.ctp-scroll').textContent.includes('place queen;')`), false);
+      }
+      await mkdir('.tmp', { recursive: true });
+      const screenshot = await command('Page.captureScreenshot', { format: 'png' });
+      await writeFile(`.tmp/${slug}.png`, Buffer.from(screenshot.data, 'base64'));
+    }
+    if (['remove-element', 'divide-two-integers'].includes(slug)) {
+      for (let index = 0; index < 35; index++) {
+        await evaluate(`[...document.querySelectorAll('button')].find(button => button.textContent.trim() === 'Next').click()`);
+        await delay(35);
+      }
+      if (slug === 'remove-element') {
+        assert.deepEqual(await evaluate(`[...document.querySelectorAll('.removeel-cell')].slice(0,2).map(cell=>cell.textContent.trim())`), ['2', '2']);
+        assert.notEqual(await evaluate(`getComputedStyle(document.querySelector('.removeel-panel')).backgroundColor`), 'rgb(255, 255, 255)');
+        assert.equal(await evaluate(`document.querySelector('.ctp-scroll').textContent.includes('!=')`), true);
+      } else {
+        assert.equal(await evaluate(`document.querySelector('.division-stats').innerText.includes('Signed result\\n3')`), true);
+        assert.equal(await evaluate(`document.querySelectorAll('.division-bits [data-set="true"]').length`), 2);
+      }
+      await mkdir('.tmp', { recursive: true });
+      const screenshot = await command('Page.captureScreenshot', { format: 'png' });
+      await writeFile(`.tmp/${slug}.png`, Buffer.from(screenshot.data, 'base64'));
+    }
     if (slug === 'palindrome-number') assert.equal(await evaluate(`Boolean(document.querySelector('.pn-viz-container .mip-input'))`), true);
     if (slug.includes('roman')) {
       assert.equal(await evaluate(`Boolean(document.querySelector('.lookup-map'))`), true);

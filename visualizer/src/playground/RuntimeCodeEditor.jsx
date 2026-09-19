@@ -261,7 +261,7 @@ export default function RuntimeCodeEditor({
           contextmenu: true,
           fontFamily:
             '"Fira Code", "Cascadia Code", Consolas, "Courier New", monospace',
-          fontLigatures: true,
+          fontLigatures: false,
           fontSize: 14,
           lineHeight: 22,
           minimap: { enabled: false },

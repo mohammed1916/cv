@@ -1,222 +1,50 @@
-import { useState, useCallback, useMemo } from 'react'
-import { createPortal } from 'react-dom'
-import { motion, AnimatePresence } from 'framer-motion'
-import CodeTracePanel from '../../components/CodeTracePanel'
-import PlaybackControls from '../../components/PlaybackControls'
-import PatternOverlay from '../../components/PatternOverlay'
-import LuminoDockPanel from '../../components/LuminoDockPanel'
-import FloatingPanel from '../../components/shared/FloatingPanel'
-import { usePlaybackState } from '../../hooks/usePlaybackState'
-import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
-import './DivideTwoIntegers.css'
+﻿import AlgorithmStoryWorkspace from '../../components/shared/AlgorithmStoryWorkspace';
+import { AccumulationLane } from '../../components/shared/LookupAccumulator';
+import { buildDivision, code, linePatterns } from './algorithm';
+import './DivideTwoIntegers.css';
 
-const SOLUTION_CODE = [
-  { line: 1, text: 'def solution(input):' },
-  { line: 2, text: '    # Bit Dance - binary representation performs subtraction through bit shifts' },
-  { line: 3, text: '    pass' },
-]
-
-function generateSteps(input) {
-  const steps = []
-
-  steps.push({
-    phase: 'init',
-    activeLine: 1,
-    message: 'Initialize: Bit Dance - binary representation performs subtraction through bit shifts'
-  })
-
-  for (let i = 0; i < Math.min(5, (input && input.length) || 0); i++) {
-    steps.push({
-      phase: 'processing',
-      index: i,
-      activeLine: 2,
-      message: `Processing step ${i + 1}...`
-    })
-  }
-
-  steps.push({
-    phase: 'complete',
-    activeLine: 3,
-    message: 'Algorithm complete!'
-  })
-
-  return steps
-}
-
-const EXAMPLES = getExamplesOr('divide-two-integers', [])
+const examples = [
+  { label: '10 / 3', values: { dividend: '10', divisor: '3' } },
+  { label: '43 / 5', values: { dividend: '43', divisor: '5' } },
+  { label: '7 / -3', values: { dividend: '7', divisor: '-3' } },
+  { label: 'Smaller dividend', values: { dividend: '2', divisor: '5' } },
+  { label: 'Zero', values: { dividend: '0', divisor: '3' } },
+  { label: 'Overflow', values: { dividend: '-2147483648', divisor: '-1' } },
+];
+const definition = {
+  title: 'Divide by doubling and subtracting', code, linePatterns,
+  patterns: ['init', 'check', 'build', 'subtract', 'add', 'done'],
+  fields: [{ key: 'dividend', label: 'Dividend', type: 'string' }, { key: 'divisor', label: 'Divisor (nonzero)', type: 'string' }],
+  initialValues: examples[0].values, examples, build: buildDivision,
+  renderStory({ story, step }) {
+    const bits = step.quotient.toString(2).padStart(32, '0');
+    return <div className="division-story">
+      <section className="division-card"><h3>{story.input.dividend} ÷ {story.input.divisor}</h3>
+        <div className="division-stats"><div><span>Remaining magnitude</span><strong>{step.remaining}</strong></div><div><span>Quotient magnitude</span><strong>{step.quotient}</strong></div><div><span>Signed result</span><strong>{step.result ?? 'Pending'}</strong></div></div>
+        <p>{step.message}</p>
+      </section>
+      <section className="division-card"><h3>Carve chunks out of |dividend| = {story.total}</h3>
+        <div className="division-tape" aria-label="Subtracted chunks and remaining magnitude">
+          {step.taken.map((item, index) => <div key={index} className="division-taken" style={{ flexGrow: item.chunk }} title={`${item.count} copies: ${item.chunk}`}><span>{item.chunk}</span></div>)}
+          {step.remaining > 0 && <div className="division-remaining" style={{ flexGrow: step.remaining }}><span>{step.remaining}</span></div>}
+          {story.total === 0 && <span>Empty: nothing to divide</span>}
+        </div>
+        <p>Filled segments have been subtracted. The outlined segment remains.</p>
+      </section>
+      {step.chunk > 0 && <section className="division-card"><h3>Find the largest fitting power-of-two chunk</h3>
+        <div className="division-stats"><div><span>chunk</span><strong>{step.chunk}</strong></div><div><span>count</span><strong>{step.count}</strong></div></div>
+        <code>chunk &lt;&lt; 1 = {step.chunk + step.chunk}</code>
+        <div className="division-fit"><i style={{ width: `${Math.min(100, step.chunk / Math.max(1, step.remaining) * 100)}%` }} /></div>
+        <p>{[8, 9, 10, 11].includes(step.activeLine) ? `${step.chunk + step.chunk} <= ${step.remaining}: ${step.chunk + step.chunk <= step.remaining ? 'double again' : 'stop doubling and subtract this chunk'}` : 'Chunk committed; continue with the remaining magnitude.'}</p>
+      </section>}
+      <section className="division-card"><h3>Quotient bits: each accepted count adds a power of two</h3>
+        <div className="division-bits">{[...bits].map((bit, index) => <div key={index} data-set={bit === '1'}><small>{31 - index}</small><strong>{bit}</strong></div>)}</div>
+      </section>
+      <AccumulationLane title="Counts added to the quotient" terms={step.taken.slice(0, step.activeLine === 12 ? -1 : undefined).map(item => ({ label: `chunk ${item.chunk}`, value: item.count }))} result={step.quotient} />
+    </div>;
+  },
+};
 
 export default function DivideTwoIntegers() {
-  const [input, setInput] = useState('[1, 2, 3]')
-  const { inputValue, inputError } = useMemo(() => {
-    try {
-      const val = JSON.parse(input)
-      return { inputValue: val, inputError: '' }
-    } catch (e) {
-      return { inputValue: [1, 2, 3], inputError: e.message || 'Invalid input' }
-    }
-  }, [input])
-
-  const steps = useMemo(
-    () => generateSteps(inputValue).map((current) => ({
-      ...current,
-      relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
-    })),
-    [inputValue],
-  )
-
-  const {
-    stepIndex, setStepIndex, stepForward, stepBack, togglePlay,
-    handleReset, isPlaying, speed, setSpeed, isDone,
-  } = usePlaybackState(steps.length)
-
-  const step = stepIndex >= 0 ? steps[stepIndex] : null
-
-  const applyExample = useCallback((ex) => {
-    setInput(JSON.stringify(ex.input || ex.nums || ex.array || []))
-    handleReset()
-  }, [handleReset])
-
-  const connectivity = useCodeVisualConnectivity({
-    steps,
-    stepIndex,
-    onStepJump: setStepIndex,
-  })
-
-  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
-
-  // Step 2: Extract panels into consts
-  const primaryPanel = (
-    <div className="divide-two-integers-panel">
-      <div className="vis-panel-head divide-two-integers-panel-head">
-        Input
-        {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
-      </div>
-      <div className="divide-two-integers-panel-body">
-        <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
-          {EXAMPLES.map((ex) => (
-            <button
-              key={ex.label}
-              onClick={() => applyExample(ex)}
-              className="divide-two-integers-example-btn"
-            >
-              {ex.label}
-            </button>
-          ))}
-        </div>
-
-        <div style={{ display: 'flex', gap: 12, marginBottom: 24 }}>
-          <input
-            value={input}
-            onChange={(e) => { setInput(e.target.value); handleReset() }}
-            placeholder="[1, 2, 3]"
-            className="divide-two-integers-input"
-            style={{ flex: 1, margin: 0 }}
-          />
-        </div>
-
-        <div className="divide-two-integers-visualization">
-          <div className="divide-two-integers-title">Problem 29</div>
-          <motion.div
-            className="divide-two-integers-content"
-            animate={{ opacity: step ? 1 : 0.5 }}
-            transition={{ duration: 0.3 }}
-          >
-            {step && (
-              <div>
-                <p className="divide-two-integers-story">Bit Dance - binary representation performs subtraction through bit shifts</p>
-                <p className="divide-two-integers-phase">Phase: {step.phase}</p>
-                {step.index !== undefined && <p className="divide-two-integers-index">Step: {step.index + 1}</p>}
-              </div>
-            )}
-          </motion.div>
-        </div>
-      </div>
-    </div>
-  )
-
-  const statePanel = (
-    <div className="divide-two-integers-panel">
-      <div className="vis-panel-head divide-two-integers-panel-head">Details</div>
-      <div className="divide-two-integers-panel-body">
-        <div className="divide-two-integers-info">
-          <h3>Problem 29</h3>
-          <p><strong>Story:</strong> Bit Dance - binary representation performs subtraction through bit shifts</p>
-        </div>
-      </div>
-    </div>
-  )
-
-  const codePanel = (
-    <div style={{ position: 'relative', height: '100%' }}>
-      <CodeTracePanel
-        step={step}
-        codeLines={SOLUTION_CODE}
-        highlightedLines={connectivity.highlightedLines}
-        onLineSelect={connectivity.handleLineSelect}
-        onActiveLineDomChange={setActiveLineDom}
-        disableResizer
-      />
-      {showPatternOverlay && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
-    </div>
-  )
-
-  const statusPanel = (
-    <div className="divide-two-integers-status">
-      {step?.message ?? 'Press Play or Step to begin.'}
-    </div>
-  )
-
-  const playbackPanel = (
-    <PlaybackControls
-      isPlaying={isPlaying}
-      isDone={isDone}
-      speed={speed}
-      onPlayToggle={togglePlay}
-      onPrev={stepBack}
-      onNext={stepForward}
-      onReset={handleReset}
-      prevDisabled={stepIndex < 0}
-      nextDisabled={isDone}
-      resetDisabled={stepIndex < 0}
-      onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-      showPatternOverlay={showPatternOverlay}
-      onShowPatternOverlayChange={setShowPatternOverlay}
-      patternOverlayLabel="Show pattern overlay"
-      showPatternOverlayToggle
-    />
-  )
-
-  // Step 3: Add state + config
-  const [panelDivs, setPanelDivs] = useState(null)
-  const panelConfigs = useMemo(
-    () => [
-      { id: 'primary', title: 'Input', dockMode: 'split-right' },
-      { id: 'state', title: 'Details', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-right' },
-      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
-    ],
-    []
-  )
-  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
-
-  // Step 5: Replace return block with portals
-  return (
-    <div className="divide-two-integers-shell">
-      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
-      {panelDivs && (
-        <>
-          {panelDivs.primary && createPortal(primaryPanel, panelDivs.primary)}
-          {panelDivs.state && createPortal(statePanel, panelDivs.state)}
-          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
-          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
-        </>
-      )}
-      {createPortal(
-        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
-        document.body
-      )}
-    </div>
-  )
+  return <AlgorithmStoryWorkspace definition={definition} />;
 }

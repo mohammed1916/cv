@@ -1,0 +1,16 @@
+.permutation-story { display: grid; gap: 12px; padding: 12px; color: var(--text); min-width: 0; }
+.permutation-card { padding: 14px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); min-width: 0; }
+.permutation-card h3 { font-size: 14px; margin: 0 0 12px; }
+.permutation-card p { font-size: 13px; line-height: 1.5; margin-top: 12px; color: var(--text-muted); }
+.permutation-cells { display: flex; flex-wrap: wrap; gap: 8px; }
+.permutation-cell { display: grid; text-align: center; gap: 8px; padding: 10px; min-width: 72px; border: 2px solid var(--border); border-radius: 8px; background: var(--surface2); }
+.permutation-cell small, .permutation-cell span { font-size: 11px; }
+.permutation-cell strong { font-size: 22px; }
+.permutation-cell.used { background: color-mix(in srgb, var(--primary) 20%, var(--surface)); }
+.permutation-cell.candidate { border-color: var(--primary); }
+.permutation-cell.duplicate-source { border-style: dashed; border-color: var(--warning); }
+.permutation-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 8px; }
+.permutation-results code { padding: 8px; border: 1px solid var(--border); border-radius: 5px; overflow-wrap: anywhere; }
+.permutation-card nav { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.permutation-card nav button { color: var(--text); background: var(--surface2); border: 1px solid var(--border); padding: 6px; border-radius: 5px; }
+.permutation-card nav button:disabled { opacity: .45; }

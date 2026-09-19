@@ -1,135 +1,259 @@
-﻿import { useState, useCallback, useMemo } from 'react'
-import { createPortal } from 'react-dom'
-import { motion, AnimatePresence } from 'framer-motion'
-import CodeTracePanel from '../../components/CodeTracePanel'
-import PlaybackControls from '../../components/PlaybackControls'
-import LuminoDockPanel from '../../components/LuminoDockPanel'
-import { usePlaybackState } from '../../hooks/usePlaybackState'
-import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
-import './RemoveElementVisualizer.css'
-import FloatingPanel from '../../components/shared/FloatingPanel'
-import CodePatternAnnotations from "../../components/CodePatternAnnotations"
-import PatternLegend from "../../components/PatternLegend"
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
+﻿import { useState, useCallback, useMemo } from "react";
+import { createPortal } from "react-dom";
+import { motion } from "framer-motion";
+import CodeTracePanel from "../../components/CodeTracePanel";
+import PlaybackControls from "../../components/PlaybackControls";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
+import { usePlaybackState } from "../../hooks/usePlaybackState";
+import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
+import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from "../../config/examplesRegistry";
+import "./RemoveElementVisualizer.css";
+import FloatingPanel from "../../components/shared/FloatingPanel";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
+import ManualInputPanel from "../../components/shared/ManualInputPanel";
 
 const SOLUTION_CODE = [
-  { line: 1, text: 'class Solution:' },
-  { line: 2, text: '    def removeElement(self, nums: List[int], val: int) -> int:' },
-  { line: 3, text: '        k = 0' },
-  { line: 4, text: '        for i in range(len(nums)):' },
-  { line: 5, text: '            if nums[i] != val:' },
-  { line: 6, text: '                nums[k] = nums[i]' },
-  { line: 7, text: '                k += 1' },
-  { line: 8, text: '        return k' },
-]
+  { line: 1, text: "class Solution:" },
+  {
+    line: 2,
+    text: "    def removeElement(self, nums: List[int], val: int) -> int:",
+  },
+  { line: 3, text: "        k = 0" },
+  { line: 4, text: "        for i in range(len(nums)):" },
+  { line: 5, text: "            if nums[i] != val:" },
+  { line: 6, text: "                nums[k] = nums[i]" },
+  { line: 7, text: "                k += 1" },
+  { line: 8, text: "        return k" },
+];
 
 function generateSteps(nums, val) {
-  const steps = []
-  const arr = [...nums]
-  let k = 0
+  const steps = [];
+  const arr = [...nums];
+  let k = 0;
 
-  steps.push({ phase: 'init', i: -1, k: 0, arr: [...arr], val, activeLine: 3, message: 'Initialize k=0 as pointer for kept elements.' })
+  steps.push({
+    phase: "init",
+    i: -1,
+    k: 0,
+    arr: [...arr],
+    val,
+    activeLine: 3,
+    message: "Initialize k=0 as pointer for kept elements.",
+  });
 
   for (let i = 0; i < arr.length; i++) {
-    steps.push({ phase: 'check', i, k, arr: [...arr], val, activeLine: 4, message: `Check index ${i}: value=${arr[i]}` })
+    steps.push({
+      phase: "check",
+      i,
+      k,
+      arr: [...arr],
+      val,
+      activeLine: 4,
+      message: `Check index ${i}: value=${arr[i]}`,
+    });
 
     if (arr[i] !== val) {
-      steps.push({ phase: 'keep', i, k, arr: [...arr], val, activeLine: 5, message: `${arr[i]} != ${val}, keep it.` })
-      arr[k] = arr[i]
-      steps.push({ phase: 'place', i, k, arr: [...arr], val, activeLine: 6, message: `Place ${arr[i]} at position ${k}.` })
-      k++
-      steps.push({ phase: 'increment', i, k, arr: [...arr], val, activeLine: 7, message: `Increment k to ${k}.` })
+      steps.push({
+        phase: "keep",
+        i,
+        k,
+        arr: [...arr],
+        val,
+        activeLine: 5,
+        message: `${arr[i]} != ${val}, keep it.`,
+      });
+      arr[k] = arr[i];
+      steps.push({
+        phase: "place",
+        i,
+        k,
+        arr: [...arr],
+        val,
+        activeLine: 6,
+        message: `Place ${arr[i]} at position ${k}.`,
+      });
+      k++;
+      steps.push({
+        phase: "increment",
+        i,
+        k,
+        arr: [...arr],
+        val,
+        activeLine: 7,
+        message: `Increment k to ${k}.`,
+      });
     } else {
-      steps.push({ phase: 'skip', i, k, arr: [...arr], val, activeLine: 5, message: `${arr[i]} == ${val}, skip.` })
+      steps.push({
+        phase: "skip",
+        i,
+        k,
+        arr: [...arr],
+        val,
+        activeLine: 5,
+        message: `${arr[i]} == ${val}, skip.`,
+      });
     }
   }
 
-  steps.push({ phase: 'done', i: arr.length, k, arr: [...arr], val, activeLine: 8, message: `Done! k=${k} elements kept.` })
-  return steps
+  steps.push({
+    phase: "done",
+    i: arr.length,
+    k,
+    arr: [...arr],
+    val,
+    activeLine: 8,
+    message: `Done! k=${k} elements kept.`,
+  });
+  return steps;
 }
 
-const EXAMPLES = getExamples('remove-element')
+const EXAMPLES = getExamples("remove-element");
 
-const REMOVEELEMENT_PATTERNS = ['check', 'done', 'increment', 'init', 'keep', 'place', 'skip']
+const REMOVEELEMENT_PATTERNS = [
+  "check",
+  "done",
+  "increment",
+  "init",
+  "keep",
+  "place",
+  "skip",
+];
 
 // Map which code line corresponds to which pattern
 const LINE_PATTERN_MAP = {
-  3: 'init',
-  4: 'check',
-  5: 'keep',
-  6: 'place',
-  7: 'increment',
-  8: 'done',
-}
+  3: "init",
+  4: "check",
+  5: "keep",
+  6: "place",
+  7: "increment",
+  8: "done",
+};
 
 export default function RemoveElementVisualizer() {
-  const [numsInput, setNumsInput] = useState('[3, 2, 2, 3]')
-  const [valInput, setValInput] = useState('3')
+  const [numsInput, setNumsInput] = useState("[3, 2, 2, 3]");
+  const [valInput, setValInput] = useState("3");
 
   const { nums, val } = useMemo(() => {
     try {
-      const n = JSON.parse(numsInput)
-      const v = Number(valInput)
-      return { nums: Array.isArray(n) ? n : [3, 2, 2, 3], val: isNaN(v) ? 3 : v }
+      const n = JSON.parse(numsInput);
+      const v = Number(valInput);
+      return {
+        nums: Array.isArray(n) ? n : [3, 2, 2, 3],
+        val: isNaN(v) ? 3 : v,
+      };
     } catch {
-      return { nums: [3, 2, 2, 3], val: 3 }
+      return { nums: [3, 2, 2, 3], val: 3 };
     }
-  }, [numsInput, valInput])
+  }, [numsInput, valInput]);
 
-  const steps = useMemo(() => generateSteps(nums, val).map((current) => ({
-    ...current, relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
-  })), [nums, val])
+  const steps = useMemo(
+    () =>
+      generateSteps(nums, val).map((current) => ({
+        ...current,
+        relatedLines:
+          current.relatedLines ??
+          (current.activeLine != null ? [current.activeLine] : []),
+      })),
+    [nums, val],
+  );
 
-  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
-  const step = stepIndex >= 0 ? steps[stepIndex] : null
+  const {
+    stepIndex,
+    setStepIndex,
+    stepForward,
+    stepBack,
+    togglePlay,
+    handleReset,
+    isPlaying,
+    speed,
+    setSpeed,
+    isDone,
+  } = usePlaybackState(steps.length);
+  const step = stepIndex >= 0 ? steps[stepIndex] : null;
 
-  const applyExample = useCallback((ex) => { setNumsInput(JSON.stringify(ex.nums)); setValInput(String(ex.val)); handleReset() }, [handleReset])
-  const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
-  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+  const applyExample = useCallback(
+    (ex) => {
+      setNumsInput(JSON.stringify(ex.nums));
+      setValInput(String(ex.val));
+      handleReset();
+    },
+    [handleReset],
+  );
+  const connectivity = useCodeVisualConnectivity({
+    steps,
+    stepIndex,
+    onStepJump: setStepIndex,
+  });
+  const {
+    showPatternOverlay,
+    setShowPatternOverlay,
+    activeLineDom,
+    setActiveLineDom,
+  } = usePatternOverlay();
 
   // Extract panels into consts
   const primaryPanel = (
     <div className="removeel-panel">
-        <ManualInputPanel
-          fields={[{"key":"nums","label":"nums","type":"string"},{"key":"val","label":"val","type":"string"}]}
-          values={{ nums: numsInput, val: valInput }}
-          onChange={(k, v) => { if (k === 'nums') setNumsInput(v); if (k === 'val') setValInput(v); handleReset() }}
-          examples={EXAMPLES}
-          applyExample={applyExample}
-        />
+      <ManualInputPanel
+        fields={[
+          { key: "nums", label: "nums", type: "string" },
+          { key: "val", label: "val", type: "string" },
+        ]}
+        values={{ nums: numsInput, val: valInput }}
+        onChange={(k, v) => {
+          if (k === "nums") setNumsInput(v);
+          if (k === "val") setValInput(v);
+          handleReset();
+        }}
+        examples={EXAMPLES}
+        applyExample={applyExample}
+      />
       <div className="removeel-panel-head">Array Cleanup</div>
       <div className="removeel-panel-body">
-        <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
+        <div
+          style={{
+            display: "flex",
+            gap: 6,
+            marginBottom: 16,
+            flexWrap: "wrap",
+          }}
+        >
           {EXAMPLES.map((ex) => (
-            <button key={ex.label} onClick={() => applyExample(ex)} className="removeel-example-btn">
+            <button
+              key={ex.label}
+              onClick={() => applyExample(ex)}
+              className="removeel-example-btn"
+            >
               {ex.label}
             </button>
           ))}
         </div>
-        
+
         <div className="removeel-array-container">
-          {nums.map((num, idx) => {
-            const isActive = step?.i === idx
-            const isRemoved = idx >= step?.k && step?.phase === 'done'
+          {(step?.arr ?? nums).map((num, idx) => {
+            const isActive = step?.i === idx;
+            const isRemoved = idx >= step?.k && step?.phase === "done";
             return (
               <div key={idx} className="removeel-cell-wrapper">
                 <span className="removeel-index">{idx}</span>
                 <motion.div
-                  className={`removeel-cell ${isActive ? 'active' : ''} ${isRemoved ? 'removed' : ''}`}
+                  className={`removeel-cell ${isActive ? "active" : ""} ${isRemoved ? "removed" : ""}`}
                   animate={isActive ? { scale: 1.2 } : { scale: 1 }}
                 >
                   {num}
                 </motion.div>
               </div>
-            )
+            );
           })}
         </div>
-        {step?.message && <div className="removeel-narrative">{step.message}</div>}
+        {step?.message && (
+          <div className="removeel-narrative">{step.message}</div>
+        )}
       </div>
     </div>
-  )
+  );
 
   const statePanel = (
     <div className="removeel-panel">
@@ -151,11 +275,12 @@ export default function RemoveElementVisualizer() {
         </div>
       </div>
     </div>
-  )
+  );
 
   const codePanel = (
-    <div style={{ position: 'relative', height: '100%' }}>
+    <div style={{ position: "relative", height: "100%" }}>
       <CodeTracePanel
+        playgroundInput={{ nums, val }}
         step={step}
         codeLines={SOLUTION_CODE}
         highlightedLines={connectivity.highlightedLines}
@@ -172,11 +297,11 @@ export default function RemoveElementVisualizer() {
         />
       )}
     </div>
-  )
+  );
 
   const statusPanel = (
-    <div className="removeel-status">{step?.message ?? 'Play!'}</div>
-  )
+    <div className="removeel-status">{step?.message ?? "Play!"}</div>
+  );
 
   const playbackPanel = (
     <>
@@ -198,23 +323,26 @@ export default function RemoveElementVisualizer() {
         showPatternOverlayToggle
       />
       {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={REMOVEELEMENT_PATTERNS} />
+        <PatternLegend
+          currentPhase={step?.phase}
+          usedPatterns={REMOVEELEMENT_PATTERNS}
+        />
       )}
     </>
-  )
+  );
 
   // Lumino DockPanel state and config
-  const [panelDivs, setPanelDivs] = useState(null)
+  const [panelDivs, setPanelDivs] = useState(null);
   const panelConfigs = useMemo(
     () => [
-      { id: 'primary', title: 'Array Cleanup', dockMode: 'split-right' },
-      { id: 'state', title: 'State', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-right' },
-      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+      { id: "primary", title: "Array Cleanup", dockMode: "split-right" },
+      { id: "state", title: "State", dockMode: "split-right" },
+      { id: "code", title: "Code", dockMode: "split-right" },
+      { id: "status", title: "Status", dockMode: "split-bottom", ratio: 0.08 },
     ],
-    []
-  )
-  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+    [],
+  );
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
 
   return (
     <div className="removeel-shell">
@@ -228,9 +356,11 @@ export default function RemoveElementVisualizer() {
         </>
       )}
       {createPortal(
-        <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
-        document.body
+        <FloatingPanel title="Playback Controls">
+          {playbackPanel}
+        </FloatingPanel>,
+        document.body,
       )}
     </div>
-  )
+  );
 }

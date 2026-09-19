@@ -1,3 +1,5 @@
+import { code as permutationsIICode } from "../problems/Problem47/algorithm.js";
+import { SOLUTION_CODE as nQueensIICode } from "../problems/Problem52/algorithm.js";
 export const SOLUTION_CODE_REGISTRY = {
   "game-on-growing-tree": [
     {
@@ -9043,68 +9045,9 @@ export const SOLUTION_CODE_REGISTRY = {
       "text": "            remove queen; remove from cols/diag1/diag2"
     }
   ],
-  "nqueensii": [
-    {
-      "line": 1,
-      "text": "def solveNQueens(n):"
-    },
-    {
-      "line": 2,
-      "text": "    cols, diag1, diag2 = set(), set(), set()"
-    },
-    {
-      "line": 3,
-      "text": "    count = 0"
-    },
-    {
-      "line": 4,
-      "text": "    def backtrack(row):"
-    },
-    {
-      "line": 5,
-      "text": "        nonlocal count"
-    },
-    {
-      "line": 6,
-      "text": "        if row == n:"
-    },
-    {
-      "line": 7,
-      "text": "            count += 1; return"
-    },
-    {
-      "line": 8,
-      "text": "        for col in range(n):"
-    },
-    {
-      "line": 9,
-      "text": "            if col in cols or (row-col) in diag1 or (row+col) in diag2:"
-    },
-    {
-      "line": 10,
-      "text": "                continue  # under attack"
-    },
-    {
-      "line": 11,
-      "text": "            place queen; add to cols/diag1/diag2"
-    },
-    {
-      "line": 12,
-      "text": "            backtrack(row + 1)"
-    },
-    {
-      "line": 13,
-      "text": "            remove queen; remove from cols/diag1/diag2"
-    },
-    {
-      "line": 14,
-      "text": "    backtrack(0)"
-    },
-    {
-      "line": 15,
-      "text": "    return count"
-    }
-  ],
+  "nqueensii": nQueensIICode,
+  "n-queens-ii": nQueensIICode,
+  "permutations-ii": permutationsIICode,
   "nth-digit": [
     {
       "line": 1,
