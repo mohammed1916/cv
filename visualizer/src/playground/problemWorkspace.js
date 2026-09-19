@@ -1,3 +1,4 @@
+import { normalizePythonInputForEntry } from "./runtime/inferPythonInput.js";
 export const PLAYGROUND_KEYS = {
   source: 'cpviz.runtime-playground.source.v1',
   pythonSource: 'cpviz.runtime-playground.python-source.v1',
@@ -15,14 +16,18 @@ export function readProblemWorkspace(storage, search) {
   if (!id || !/^[a-zA-Z0-9-]{1,80}$/.test(id)) return null;
   try {
     const value = JSON.parse(storage.getItem(`${PREFIX}${id}.metadata`));
-    return value?.slug === 'climbing-stairs' && typeof value.source === 'string' ? { ...value, id } : null;
+    return typeof value?.slug === 'string' && /^[a-zA-Z0-9-]+$/.test(value.slug) && typeof value.source === 'string' ? { ...value, id } : null;
   } catch { return null; }
 }
-export function createProblemWorkspace(storage, { source, input }, id) {
+export function createProblemWorkspace(storage, { source, input, slug = "climbing-stairs", title = "Climbing Stairs", entry }, id) {
   if (!/^[a-zA-Z0-9-]{1,80}$/.test(id)) throw new Error('Invalid workspace ID.');
-  if (!source.trim() || !Number.isInteger(input.n) || input.n < 1 || input.n > 45) throw new Error('Use a Climbing Stairs input from 1 to 45.');
+  if (!source.trim()) throw new Error('No solution code to copy.');
+  if (!/^[a-zA-Z0-9-]+$/.test(slug)) throw new Error('Invalid problem slug.');
+  if (slug === 'climbing-stairs' && (!Number.isInteger(input?.n) || input.n < 1 || input.n > 45)) throw new Error('Use a Climbing Stairs input from 1 to 45.');
   const keys = workspaceKeys(id);
-  const metadata = { id, slug: 'climbing-stairs', title: 'Climbing Stairs', source, entry: 'Solution.climbStairs' };
+  const inferred = normalizePythonInputForEntry(source, input ?? {}, entry);
+  input = input ?? inferred.value;
+  const metadata = { id, slug, title, source, entry: entry ?? (slug === 'climbing-stairs' ? 'Solution.climbStairs' : (inferred.entry && /class\s+Solution\b/.test(source) ? `Solution.${inferred.entry}` : inferred.entry ?? '')) };
   const entries = [[keys.pythonSource, source], [keys.input, JSON.stringify(input, null, 2)], [keys.entry, metadata.entry], [keys.mode, 'python'], [`${PREFIX}${id}.metadata`, JSON.stringify(metadata)]];
   if (entries.some(([key]) => storage.getItem(key) !== null)) throw new Error('Workspace already exists. Try opening again.');
   const written = [];

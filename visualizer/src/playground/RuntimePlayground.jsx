@@ -1261,7 +1261,7 @@ export default function RuntimePlayground({
     };
   }, [invokeWebMcpTool]);
 
-  const staircase = importedProblem && isPython && hasCurrentRun && pythonEntry === importedProblem.entry
+  const staircase = importedProblem?.slug === 'climbing-stairs' && isPython && hasCurrentRun && pythonEntry === importedProblem.entry
     ? staircaseFromTrace({ source, referenceSource: importedProblem.source, input: pythonInputState.value,
         traceFrames: lastGoodRun?.traceResult?.traceFrames, index: stepIndex })
     : { supported: false, reason: 'Run the imported Python solution and select a frame. Changed source or entry points use general execution visuals.' };
@@ -1281,9 +1281,9 @@ export default function RuntimePlayground({
     >
       {importedProblem && <div className="runtime-playground__problem-origin">
         <strong>{importedProblem.title}: separate workspace</strong>{' '}
-        <a href={window.location.pathname + '#climbing-stairs'}>Back to original visualizer</a>{' | '}
+        <a href={window.location.pathname + '#' + importedProblem.slug}>Back to original visualizer</a>{' | '}
         <a href={window.location.pathname + '#playground'}>Open my original playground draft</a>{' | '}
-        <a href="https://leetcode.com/problems/climbing-stairs/" target="_blank" rel="noreferrer">Problem statement</a>
+        <a href={`https://leetcode.com/problems/${importedProblem.slug}/`} target="_blank" rel="noreferrer">Problem statement</a>
       </div>}
       <header className="runtime-playground__header">
         <div className="runtime-playground__header-main">
@@ -1431,7 +1431,7 @@ export default function RuntimePlayground({
             </span>
           </div>
           <div className="runtime-playground__canvas">
-            {importedProblem && <section aria-label="Climbing Stairs visualization mapping">
+            {importedProblem?.slug === 'climbing-stairs' && <section aria-label="Climbing Stairs visualization mapping">
               {staircase.supported ? <><StaircaseScene n={staircase.n} current={staircase.current} ways={staircase.dp} /><p>Ways above each stair come from captured Python locals. ? means not computed yet.</p></>
                 : <p role="status">{staircase.reason}</p>}
             </section>}

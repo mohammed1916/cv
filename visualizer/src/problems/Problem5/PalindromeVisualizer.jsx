@@ -833,7 +833,7 @@ export default function PalindromeVisualizer() {
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
-      <CodeTracePanel
+      <CodeTracePanel playgroundInput={{ s: str }} playgroundDisabled={false}
         step={currentStep}
         codeLines={SOLUTION_CODE}
         activeLabelPrefix="Currently executing line"

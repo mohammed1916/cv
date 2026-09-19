@@ -34,16 +34,18 @@ const LINE_PATTERN_MAP = {
 
 const SOLUTION_CODE = [
   { line: 1,  text: "def solveNQueens(n):" },
-  { line: 2,  text: "    cols, diag1, diag2 = set(), set(), set()" },
+  { line: 2,  text: "    cols, diag1, diag2 = set(), set(), set(); solutions = []" },
   { line: 3,  text: "    board = [['.']*n for _ in range(n)]" },
   { line: 4,  text: "    def backtrack(row):" },
-  { line: 5,  text: "        if row == n: solutions.append(board_copy())" },
+  { line: 5,  text: "        if row == n: solutions.append([''.join(r) for r in board]); return" },
   { line: 6,  text: "        for col in range(n):" },
   { line: 7,  text: "            if col in cols or (row-col) in diag1 or (row+col) in diag2:" },
   { line: 8,  text: "                continue  # under attack" },
-  { line: 9,  text: "            place queen; add to cols/diag1/diag2" },
+  { line: 9,  text: "            board[row][col] = 'Q'; cols.add(col); diag1.add(row-col); diag2.add(row+col)" },
   { line: 10, text: "            backtrack(row + 1)" },
-  { line: 11, text: "            remove queen; remove from cols/diag1/diag2" },
+  { line: 11, text: "            board[row][col] = '.'; cols.remove(col); diag1.remove(row-col); diag2.remove(row+col)" },
+  { line: 12, text: "    backtrack(0)" },
+  { line: 13, text: "    return solutions" },
 ];
 
 const EXAMPLES = getExamples('nqueens');
@@ -104,7 +106,7 @@ function generateSteps(n) {
 
   backtrack(0);
   steps.push({
-    activeLine: 1, boardRef: board.map(r => [...r]),
+    activeLine: 13, boardRef: board.map(r => [...r]),
     row: -1, col: -1, phase: "done", solutions: solutions.length, done: true,
     message: `Done! Found ${solutions.length} solution(s) for n=${n}.`,
   });
@@ -280,7 +282,7 @@ export default function NQueensVisualizer() {
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
-      <CodeTracePanel step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} disableResizer />
+      <CodeTracePanel playgroundInput={{ n }} playgroundDisabled={false} step={step} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} autoScroll={autoScrollCode} disableResizer />
       {showPatternOverlay && (
         <CodePatternAnnotations
           linePatterns={LINE_PATTERN_MAP}

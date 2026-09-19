@@ -766,7 +766,7 @@ export default function RegularExpressionMatchingVisualizer() {
         minHeight: 0,
       }}
     >
-      <CodeTracePanel
+      <CodeTracePanel playgroundInput={{ s, p }} playgroundDisabled={Boolean(inputError)}
         step={step}
         codeLines={SOLUTION_CODE}
         highlightedLines={connectivity.highlightedLines}

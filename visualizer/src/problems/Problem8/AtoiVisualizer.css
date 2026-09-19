@@ -320,7 +320,8 @@
   border: 1px solid rgba(255,255,255,0.05);
 }
 
-.atoi-kv-value { color: var(--text); }
+.atoi-kv-value { color: var(--text); overflow-wrap: anywhere; min-width: 0; }
+.atoi-output-text { overflow-wrap: anywhere; }
 
 .atoi-stop-note {
   margin-top: 0.8rem;

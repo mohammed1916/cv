@@ -49,7 +49,7 @@ const SOLUTION_CODE = [
   { line: 10, text: "        while low <= high:" },
   { line: 11, text: "            cut1 = (low + high) // 2" },
   { line: 12, text: "            cut2 = left - cut1" },
-  { line: 13, text: "" },
+  { line: 13, text: "            left1 = nums1[cut1-1] if cut1 else float('-inf'); right1 = nums1[cut1] if cut1 < m else float('inf'); left2 = nums2[cut2-1] if cut2 else float('-inf'); right2 = nums2[cut2] if cut2 < n else float('inf')" },
   { line: 14, text: "            if left1 <= right2 and left2 <= right1:" },
   { line: 15, text: "                if (m + n) % 2 == 0:" },
   {
@@ -939,7 +939,7 @@ export default function MedianOfTwoSortedArraysVisualizer() {
         {step?.message || "Press Play or Step to begin."}
       </div>
       <div className="median-code-panel-body" style={{ position: 'relative', height: '100%' }}>
-        <CodeTracePanel
+        <CodeTracePanel playgroundInput={{ nums1: prepared.nums1, nums2: prepared.nums2 }} playgroundDisabled={Boolean(prepared.inputError)}
           step={step}
           codeLines={SOLUTION_CODE}
           onActiveLineDomChange={setActiveLineDom}

@@ -1,6 +1,6 @@
 ﻿import { useCallback, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -12,218 +12,9 @@ import './AtoiVisualizer.css'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
-const INT_MIN = -(2 ** 31)
-const INT_MAX = 2 ** 31 - 1
-
-const ATOI_PATTERNS = ['whitespace', 'sign', 'digit', 'stop', 'clamp_min', 'clamp_max', 'final']
-
-// Map which code line corresponds to which pattern
-const LINE_PATTERN_MAP = {
-  3: 'whitespace', // i = 0
-  4: 'whitespace', // n = len(s)
-  5: 'whitespace', // while i < n and s[i] == " ":
-  6: 'whitespace', // i += 1
-  8: 'sign',       // sign = 1
-  9: 'sign',       // if i < n and s[i] in "+-":
-  10: 'sign',      // sign = -1 if s[i] == "-" else 1
-  11: 'sign',      // i += 1
-  13: 'digit',     // result = 0
-  14: 'digit',     // while i < n and s[i].isdigit():
-  15: 'digit',     // result = result * 10 + int(s[i])
-  16: 'digit',     // i += 1
-  18: 'stop',      // result *= sign
-  19: 'clamp_min', // if result < -2**31:
-  20: 'clamp_min', // return -2**31
-  21: 'clamp_max', // if result > 2**31 - 1:
-  22: 'clamp_max', // return 2**31 - 1
-  23: 'final',     // return result
-}
-
-const SOLUTION_CODE = [
-  { line: 1, text: 'class Solution(object):' },
-  { line: 2, text: '    def myAtoi(self, s):' },
-  { line: 3, text: '        i = 0' },
-  { line: 4, text: '        n = len(s)' },
-  { line: 5, text: '        while i < n and s[i] == " ":' },
-  { line: 6, text: '            i += 1' },
-  { line: 7, text: '' },
-  { line: 8, text: '        sign = 1' },
-  { line: 9, text: '        if i < n and s[i] in "+-":' },
-  { line: 10, text: '            sign = -1 if s[i] == "-" else 1' },
-  { line: 11, text: '            i += 1' },
-  { line: 12, text: '' },
-  { line: 13, text: '        result = 0' },
-  { line: 14, text: '        while i < n and s[i].isdigit():' },
-  { line: 15, text: '            result = result * 10 + int(s[i])' },
-  { line: 16, text: '            i += 1' },
-  { line: 17, text: '' },
-  { line: 18, text: '        result *= sign' },
-  { line: 19, text: '        if result < -2**31:' },
-  { line: 20, text: '            return -2**31' },
-  { line: 21, text: '        if result > 2**31 - 1:' },
-  { line: 22, text: '            return 2**31 - 1' },
-  { line: 23, text: '        return result' },
-]
-
+import { INT_MIN, INT_MAX, ATOI_PATTERNS, LINE_PATTERN_MAP, SOLUTION_CODE, generateAtoiSteps, isDigit } from './algorithm'
 const EXAMPLES = getExamples('string-to-integer-atoi')
-
 const DEFAULT_INPUT = '   -042'
-
-function isDigit(char) {
-  return char >= '0' && char <= '9'
-}
-
-function clampResult(value) {
-  if (value < INT_MIN) return INT_MIN
-  if (value > INT_MAX) return INT_MAX
-  return value
-}
-
-function getCodeHighlight(step) {
-  if (!step) return { activeLine: 5, relatedLines: [3, 4, 5, 6] }
-
-  if (step.phase === 'whitespace') return { activeLine: 6, relatedLines: [5, 6] }
-  if (step.phase === 'sign') return { activeLine: 10, relatedLines: [8, 9, 10, 11] }
-  if (step.phase === 'digit') return { activeLine: 15, relatedLines: [13, 14, 15, 16] }
-  if (step.phase === 'stop') return { activeLine: 18, relatedLines: [18, 23] }
-  if (step.phase === 'clamp-min') return { activeLine: 20, relatedLines: [18, 19, 20] }
-  if (step.phase === 'clamp-max') return { activeLine: 22, relatedLines: [18, 21, 22] }
-
-  return { activeLine: 23, relatedLines: [18, 23] }
-}
-
-function makeStep(base) {
-  const code = getCodeHighlight(base)
-  return { ...base, activeLine: code.activeLine, relatedLines: code.relatedLines }
-}
-
-function generateAtoiSteps(input) {
-  const steps = []
-  const n = input.length
-  let index = 0
-  let sign = 1
-  let unsignedValue = 0
-  let digits = ''
-
-  while (index < n && input[index] === ' ') {
-    steps.push(makeStep({
-      phase: 'whitespace',
-      index,
-      currentChar: input[index],
-      sign,
-      unsignedValue,
-      digits,
-      result: 0,
-      description: `Ignore whitespace at index ${index}.`,
-      stopReason: null,
-      clamped: null,
-    }))
-    index += 1
-  }
-
-  if (index < n && (input[index] === '+' || input[index] === '-')) {
-    sign = input[index] === '-' ? -1 : 1
-    steps.push(makeStep({
-      phase: 'sign',
-      index,
-      currentChar: input[index],
-      sign,
-      unsignedValue,
-      digits,
-      result: 0,
-      description: `Read '${input[index]}' and set sign to ${sign === -1 ? 'negative' : 'positive'}.`,
-      stopReason: null,
-      clamped: null,
-    }))
-    index += 1
-  }
-
-  while (index < n && isDigit(input[index])) {
-    digits += input[index]
-    unsignedValue = unsignedValue * 10 + Number(input[index])
-    steps.push(makeStep({
-      phase: 'digit',
-      index,
-      currentChar: input[index],
-      sign,
-      unsignedValue,
-      digits,
-      result: unsignedValue * sign,
-      description: `Read digit '${input[index]}' and extend the number to ${unsignedValue}.`,
-      stopReason: null,
-      clamped: null,
-    }))
-    index += 1
-  }
-
-  let signedResult = digits ? unsignedValue * sign : 0
-  let stopReason = null
-
-  if (!digits) {
-    stopReason = index < n ? `Parsing stops at '${input[index]}' because no digits were read.` : 'No digits were found, so the result stays 0.'
-  } else if (index < n) {
-    stopReason = `Parsing stops at '${input[index]}' because it is not a digit.`
-  } else {
-    stopReason = 'Reached the end of the string after reading digits.'
-  }
-
-  steps.push(makeStep({
-    phase: 'stop',
-    index: Math.min(index, Math.max(n - 1, 0)),
-    currentChar: index < n ? input[index] : null,
-    sign,
-    unsignedValue,
-    digits,
-    result: signedResult,
-    description: stopReason,
-    stopReason,
-    clamped: null,
-  }))
-
-  if (signedResult < INT_MIN) {
-    steps.push(makeStep({
-      phase: 'clamp-min',
-      index: Math.min(index, Math.max(n - 1, 0)),
-      currentChar: null,
-      sign,
-      unsignedValue,
-      digits,
-      result: INT_MIN,
-      description: `Value is below ${INT_MIN}, so clamp to INT_MIN.`,
-      stopReason,
-      clamped: 'min',
-    }))
-  } else if (signedResult > INT_MAX) {
-    steps.push(makeStep({
-      phase: 'clamp-max',
-      index: Math.min(index, Math.max(n - 1, 0)),
-      currentChar: null,
-      sign,
-      unsignedValue,
-      digits,
-      result: INT_MAX,
-      description: `Value is above ${INT_MAX}, so clamp to INT_MAX.`,
-      stopReason,
-      clamped: 'max',
-    }))
-  }
-
-  const finalResult = clampResult(signedResult)
-  steps.push(makeStep({
-    phase: 'final',
-    index: Math.min(index, Math.max(n - 1, 0)),
-    currentChar: null,
-    sign,
-    unsignedValue,
-    digits,
-    result: finalResult,
-    description: `Return ${finalResult}.`,
-    stopReason,
-    clamped: finalResult !== signedResult ? (finalResult === INT_MIN ? 'min' : 'max') : null,
-  }))
-
-  return steps
-}
 
 function Scanner({ input, step }) {
   return (
@@ -249,6 +40,7 @@ function Scanner({ input, step }) {
           )
         })
       )}
+      {step?.index === input.length && <div className="atoi-char active"><span className="atoi-char-value">End</span><span className="atoi-char-index">{input.length}</span></div>}
     </div>
   )
 }
@@ -258,7 +50,6 @@ export default function AtoiVisualizer() {
   const [source, setSource] = useState(DEFAULT_INPUT)
   const [steps, setSteps] = useState(() => generateAtoiSteps(DEFAULT_INPUT))
   const [showCode, setShowCode] = useState(true)
-  const [attemptedSubmit, setAttemptedSubmit] = useState(false)
   const [panelDivs, setPanelDivs] = useState(null)
 
   // Pattern overlay hook
@@ -279,22 +70,19 @@ export default function AtoiVisualizer() {
     isDone,
   } = usePlaybackState(steps.length, 520)
 
-  const sanitizedInput = inputValue.slice(0, 60)
-  const hasInput = sanitizedInput.length > 0
-  const inputError = attemptedSubmit && !hasInput ? 'Enter a string to visualize.' : null
+  const sanitizedInput = inputValue.slice(0, 200)
+  const inputError = null
 
   const currentStep = stepIndex >= 0 ? steps[stepIndex] : null
   const progress = steps.length > 0 ? ((stepIndex + 1) / steps.length) * 100 : 0
 
   const handleVisualize = useCallback(() => {
-    setAttemptedSubmit(true)
-    if (!hasInput) return
 
     setSource(sanitizedInput)
     setSteps(generateAtoiSteps(sanitizedInput))
     setStepIndex(-1)
     setIsPlaying(false)
-  }, [hasInput, sanitizedInput])
+  }, [sanitizedInput, setStepIndex, setIsPlaying])
 
   const applyExample = useCallback((example) => {
     setInputValue(example.value)
@@ -302,8 +90,7 @@ export default function AtoiVisualizer() {
     setSteps(generateAtoiSteps(example.value))
     setStepIndex(-1)
     setIsPlaying(false)
-    setAttemptedSubmit(false)
-  }, [])
+  }, [setStepIndex, setIsPlaying])
 
   const panelConfigs = useMemo(() => [
     { id: 'main', title: 'Visualizer', dockMode: 'split-right' },
@@ -351,7 +138,7 @@ export default function AtoiVisualizer() {
 
   const codePanel = (
     <div style={{ position: 'relative' }}>
-      <CodeTracePanel step={currentStep} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
+      <CodeTracePanel playgroundInput={{ s: source }} playgroundDisabled={false} step={currentStep} codeLines={SOLUTION_CODE} onActiveLineDomChange={setActiveLineDom} />
 
       {showPatternOverlay && (
         <CodePatternAnnotations
@@ -428,11 +215,10 @@ export default function AtoiVisualizer() {
               value={inputValue}
               onChange={(event) => {
                 setInputValue(event.target.value)
-                if (attemptedSubmit) setAttemptedSubmit(false)
               }}
               onKeyDown={(event) => event.key === 'Enter' && handleVisualize()}
               placeholder="   -042"
-              maxLength={60}
+              maxLength={200}
             />
           </div>
           <button className="atoi-btn atoi-btn-primary" onClick={handleVisualize}>Visualize</button>

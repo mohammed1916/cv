@@ -6,6 +6,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
@@ -21,7 +22,6 @@ const LINE_PATTERN_MAP = {
   3: 'init',          // return False
   4: 'state',         // rev = 0
   5: 'check',         // while x > rev:
-  6: 'extract',       // rev = rev * 10 + x % 10
   6: 'build',         // rev = rev * 10 + x % 10
   7: 'advance',       // x //= 10
   8: 'compare',       // return x == rev or x == rev // 10
@@ -462,7 +462,7 @@ export default function PalindromeNumberVisualizer() {
 
   const codePanel = (
     <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0 }}>
-      <CodeTracePanel
+      <CodeTracePanel playgroundInput={{ x: num }} playgroundDisabled={Boolean(inputError)}
         step={step}
         codeLines={SOLUTION_CODE}
         highlightedLines={connectivity.highlightedLines}
@@ -484,6 +484,8 @@ export default function PalindromeNumberVisualizer() {
 
   const mainPanel = (
     <div className="pn-viz-container">
+      <ManualInputPanel fields={[{ key: 'x', label: 'Integer x', type: 'string' }]} values={{ x: input }}
+        onChange={(_, value) => { setInput(value); handleReset() }} examples={EXAMPLES} applyExample={applyExample} inputError={inputError} />
       <div className="pn-state-grid">
         <StateCard label="Original" value={step?.orig ?? '—'} accent="primary" />
         <StateCard label="Current rev" value={step?.rev ?? 0} accent="success" />
@@ -552,26 +554,7 @@ export default function PalindromeNumberVisualizer() {
 
   return (
     <div className="pn-shell" style={{ height: 'calc(100vh - 200px)', minHeight: '480px', display: 'flex', flexDirection: 'column' }}>
-      <FloatingPanel title="Input & Examples" className="pn-input-panel">
-        <div className="pn-example-row">
-          {EXAMPLES.map((ex) => (
-            <button key={ex.label} className="pn-example-btn" onClick={() => applyExample(ex)}>
-              {ex.label}
-            </button>
-          ))}
-        </div>
-        <div className="pn-input-row">
-          <span className="pn-input-prefix">x =</span>
-          <input className="pn-input" value={input} onChange={(e) => { setInput(e.target.value); handleReset() }} placeholder="121" inputMode="numeric" />
-        </div>
-        {inputError && <span className="pn-error-pill">{inputError}</span>}
-        <div className="pn-note-box">
-          <div className="pn-note-title">What the algorithm does</div>
-          <div className="pn-note-text">
-            It peels the last digit from <code>x</code>, appends it to <code>rev</code>, and stops when the left side is no longer longer than the reversed side.
-          </div>
-        </div>
-      </FloatingPanel>
+
 
       <FloatingPanel title="Result & Edge Cases" className="pn-result-panel">
         <div className="pn-result-box">

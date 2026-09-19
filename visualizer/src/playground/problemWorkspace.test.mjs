@@ -10,6 +10,16 @@ const storage = () => {
   const data = new Map();
   return { getItem: key => data.get(key) ?? null, setItem: (key, value) => data.set(key, value), removeItem: key => data.delete(key), data };
 };
+test('imports arbitrary problems with real inputs and qualified Python methods', () => {
+  const store = storage();
+  const source = 'class Solution:\n    def myAtoi(self, s):\n        return int(s)';
+  const metadata = createProblemWorkspace(store, { source, input: { s: '42' }, slug: 'string-to-integer-atoi', title: 'Atoi' }, 'atoi');
+  assert.equal(metadata.entry, 'Solution.myAtoi');
+  assert.equal(readProblemWorkspace(store, '?workspace=atoi').slug, 'string-to-integer-atoi');
+  assert.deepEqual(JSON.parse(store.getItem(workspaceKeys('atoi').input)), { s: '42' });
+  createProblemWorkspace(store, { source: 'def isPalindrome(x: int):\n    return True', slug: 'palindrome-number' }, 'sample');
+  assert.deepEqual(JSON.parse(store.getItem(workspaceKeys('sample').input)), { x: 4 });
+});
 test('imports into isolated persistent keys and never replaces the original draft', () => {
   const store = storage();
   store.setItem(workspaceKeys().pythonSource, 'my existing code');

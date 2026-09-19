@@ -35,7 +35,7 @@ export default function AlgorithmStoryWorkspace({ definition }) {
     }
     return { arr: definition.initialInput };
   });
-  const [activeLabel, setActiveLabel] = useState(EXAMPLES?.[0]?.label);
+  const [activeLabel, setActiveLabel] = useState(definition.initialLabel ?? EXAMPLES?.[0]?.label);
 
   const { story, inputError } = useMemo(() => {
     try {
@@ -123,6 +123,8 @@ export default function AlgorithmStoryWorkspace({ definition }) {
   const codePanel = (
     <div style={{ position: "relative", height: "100%" }}>
       <CodeTracePanel
+        playgroundInput={story?.input}
+        playgroundDisabled={Boolean(inputError)}
         step={step}
         codeLines={SOLUTION_CODE}
         highlightedLines={connectivity.highlightedLines}

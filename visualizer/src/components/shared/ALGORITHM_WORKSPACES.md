@@ -1,5 +1,25 @@
 # Adding algorithm visualizers without duplicating the UI
 
+Problems 12 and 13 now use `AlgorithmStoryWorkspace` for input, playback, code,
+and docking. `LookupAccumulator.jsx` supplies `LookupMap` (current and look-ahead
+key/value reads) and `AccumulationLane` (signed contributions with magnitude
+bars). Integer-to-Roman keeps the ordered greedy loop and remainder; Roman-to-
+Integer keeps character look-ahead and subtractive notation. Their independently
+testable `algorithm.js` files drive these views. Run `test:early-visualizers` for
+Python comparisons and all 3,999 Roman round trips; set `PYTHON` if needed.
+
+Existing N-Queens, palindrome DP, and regex matching reuse `GridRayOverlay` and
+`useGridRayOverlay`, retaining their different board/recurrence cells. Median
+partitioning uses `PointerRail`. These views have not all migrated to the shared
+workspace shell.
+
+`CodeTracePanel` now opens an isolated Code Playground workspace instead of a
+non-executing local editor. Pass `playgroundInput` for actual Python arguments
+and `playgroundDisabled` for invalid input; otherwise the dialog clearly labels
+the inputs as suggested samples. `AlgorithmStoryWorkspace` reads these arguments
+from `story.input`. Custom code uses the Playground's runtime views; only the
+supported Climbing Stairs source gets its specialized trace mapping.
+
 Problems 3913 and 3914 are the first examples of this composition pattern.
 Existing problem visualizers and the Playground remain unchanged.
 
