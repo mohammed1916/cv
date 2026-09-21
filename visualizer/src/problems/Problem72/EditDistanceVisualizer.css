@@ -8,29 +8,173 @@
   overflow: hidden;
 }
 
-/* Panel containers */
-.ed-panel { display: flex; flex-direction: column; gap: 12px; padding: 16px; overflow: auto; }
-.ed-status-panel { display: flex; flex-direction: column; gap: 12px; padding: 8px 12px; overflow: auto; }
 
-/* Input panel */
-.ed-input-panel { display: flex; flex-direction: column; gap: 12px; }
-.ed-examples { display: flex; gap: 8px; flex-wrap: wrap; }
-.ed-chip { background: var(--code-line); color: var(--code-text); border: 2px solid var(--code-line); border-radius: 6px; padding: 4px 10px; font-size: 12px; cursor: pointer; transition: all 0.2s ease; }
-.ed-chip.active, .ed-chip:hover { border-color: #89b4fa; color: #89b4fa; background: rgba(137, 180, 250, 0.1); }
-.ed-strings { display: flex; gap: 14px; font-size: 14px; flex-wrap: wrap; align-items: center; }
-.ed-lbl { font-weight: 700; margin-right: 3px; }
-.ed-lbl.w1 { color: #1a6df5; }
-.ed-lbl.w2 { color: #2f8628; }
-.ed-val { font-family: monospace; color: #4f6ed8; }
-.ed-status { padding: 8px 12px; background: var(--code-bg); border: 1px solid var(--code-line); border-radius: 8px; font-size: 13px; color: var(--code-dim); min-height: 36px; }
+/* =========================================================
+   GENERAL PANELS
+   ========================================================= */
 
-/* DP Table visualization */
-.ed-panel-label { font-size: 11px; font-weight: 700; color: var(--code-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
-.ed-table-wrap { overflow-x: auto; }
-.ed-table { border-collapse: collapse; }
-.ed-th { padding: 5px 10px; font-size: 13px; font-weight: 700; color: var(--code-dim); text-align: center; min-width: 36px; }
-.ed-th.w1ch { color: #1a6df5; }
-.ed-th.w2ch { color: #2f8628; }
-.ed-td { padding: 4px 8px; font-size: 14px; font-weight: 700; text-align: center; min-width: 36px; height: 36px; border: 1px solid var(--code-line); border-radius: 3px; color: #4f6ed8; }
-.ed-td.cur { border-color: #f9e2af !important; box-shadow: 0 0 10px #f9e2af66; color: #f9e2af; background: #2a2000 !important; }
-.ed-td.zero { color: var(--code-line); }
+.ed-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  overflow: auto;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   INPUT
+   ========================================================= */
+
+.ed-input-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ed-strings {
+  display: flex;
+  gap: 18px;
+  font-size: 14px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.ed-string-item {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.ed-lbl {
+  font-weight: 700;
+}
+
+.ed-lbl.w1 {
+  color: #1a6df5;
+}
+
+.ed-lbl.w2 {
+  color: #2f8628;
+}
+
+.ed-val {
+  font-family: monospace;
+  color: #4f6ed8;
+}
+
+
+/* =========================================================
+   STATUS / CURRENT OPERATION
+   ========================================================= */
+
+.ed-status {
+  padding: 8px 12px;
+  background: var(--code-bg);
+  border: 1px solid var(--code-line);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--code-dim);
+  min-height: 36px;
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   DP TABLE
+   ========================================================= */
+
+.ed-panel-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--code-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+
+.ed-table-wrap {
+  overflow: auto;
+  max-width: 100%;
+}
+
+.ed-table {
+  border-collapse: collapse;
+}
+
+.ed-th {
+  padding: 5px 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--code-dim);
+  text-align: center;
+  min-width: 36px;
+}
+
+.ed-th.w1ch {
+  color: #1a6df5;
+}
+
+.ed-th.w2ch {
+  color: #2f8628;
+}
+
+.ed-td {
+  padding: 4px 8px;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  min-width: 36px;
+  height: 36px;
+  border: 1px solid var(--code-line);
+  border-radius: 3px;
+  color: #4f6ed8;
+  box-sizing: border-box;
+}
+
+.ed-td.cur {
+  border-color: #f9e2af !important;
+  box-shadow: 0 0 10px #f9e2af66;
+  color: #f9e2af;
+  background: #2a2000 !important;
+}
+
+.ed-td.zero {
+  color: var(--code-line);
+}
+
+
+/* =========================================================
+   EMPTY VISUALIZATION
+   ========================================================= */
+
+.ed-empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 160px;
+
+  padding: 20px;
+
+  border: 1px dashed var(--code-line);
+  border-radius: 8px;
+
+  color: var(--code-dim);
+  font-size: 13px;
+  text-align: center;
+}
+
+
+/* =========================================================
+   FLOATING PLAYBACK PANEL CONTENT
+   ========================================================= */
+
+.ed-floating-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 280px;
+}
