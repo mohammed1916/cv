@@ -38,23 +38,6 @@
   flex-direction: column;
 }
 
-.problem71-button {
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 12px;
-  cursor: pointer;
-  background: #06b6d420;
-  border: 1px solid #06b6d440;
-  color: #06b6d4;
-  transition: all 0.2s ease;
-  font-weight: 500;
-}
-
-.problem71-button:hover {
-  background: #06b6d430;
-  border-color: #06b6d460;
-}
-
 .problem71-visualization {
   display: flex;
   flex-direction: column;
